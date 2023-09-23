@@ -211,7 +211,7 @@ checked:this.props.setEditingCustomer.category==="White" || this.props.setEditin
                       />
                     </div>
                      
-                    <div class=" w-1/3">
+                    {/* <div class=" w-1/3">
                      <div>             
                  <StyledLabel>Requirement Type</StyledLabel>
                  </div>
@@ -230,7 +230,7 @@ checked:this.props.setEditingCustomer.category==="White" || this.props.setEditin
                > 
                Both
                </Checkbox>
-               </div>
+               </div> */}
                  </div>
                 
                  <Spacer/>

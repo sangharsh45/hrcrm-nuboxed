@@ -21,6 +21,7 @@ import CustomerMap from "./CustomerMap"
 const AddCustomerModal = lazy(() => import( "./Child/AddCustomerModal"));
 const CustomerHeader = lazy(() => import("./Child/CustomerHeader"));
 const CustomerTable = lazy(() => import("./Child/CustomerTable/CustomerTable"));
+const CustomerCardList=lazy(() => import("./Child/CustomerTable/CustomerCardList"));
 
 class  Customer extends Component {
   state = { currentData: "",currentUser:"" };
@@ -74,7 +75,7 @@ class  Customer extends Component {
           this.props.viewType === "dashboard" ?
              <CustomerBlueTable/> :
              this.props.viewType === "table" ?
-             <CustomerTable
+             <CustomerCardList
              currentUser={this.state.currentUser} 
              /> :
           this.props.viewType==="map"?
