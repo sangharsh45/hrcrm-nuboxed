@@ -406,7 +406,7 @@ function OpportunityForm(props) {
           <Form className="form-background">
             <div class=" flex justify-between">
               <div
-class=" h-full w-1/2"
+class=" h-full w-[24rem]"
               >
                 <Spacer />
                 <Field
@@ -557,7 +557,7 @@ class=" h-full w-1/2"
                 </div>
               </div>
               <div
-               class=" h-full w-2/5"
+               class=" h-full w-[24rem]"
               >
                 <Listbox value={selected} onChange={setSelected}>
                   {({ open }) => (

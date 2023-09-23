@@ -68,7 +68,7 @@ function General(props) {
                   justifyContent: "space-between",
                 }}
               >
-                <p style={{ minWidth:"-webkit-fill-available"}}>Auto Close Open Requirements (in months)</p>
+                <p style={{ minWidth:"-webkit-fill-available"}}>Auto Close Open Orders (in months)</p>
                 <div>
                 <Field
                     name="timePeriod"

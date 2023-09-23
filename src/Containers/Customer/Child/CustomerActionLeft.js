@@ -1,9 +1,7 @@
 import React, { useEffect } from "react";
 import { FormattedMessage } from "react-intl";
-import TableViewIcon from "@mui/icons-material/TableView";
-import GroupsIcon from "@mui/icons-material/Groups";
-import PermIdentityIcon from "@mui/icons-material/PermIdentity";
-import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
+import GridViewIcon from '@mui/icons-material/GridView';
+import TocIcon from '@mui/icons-material/Toc';
 import LanguageIcon from "@mui/icons-material/Language";
 import { StyledSelect } from "../../../Components/UI/Antd";
 import { Button, Tooltip, Badge } from "antd";
@@ -74,7 +72,7 @@ const CustomerActionLeft = (props) => {
               color: props.viewType === "card" && "#1890ff",
             }}
           >
-            <TableViewIcon />
+            <GridViewIcon />
           </span>
         </Badge>
       </Tooltip>
@@ -91,11 +89,12 @@ const CustomerActionLeft = (props) => {
               color: props.viewType === "table" && "#1890ff",
             }}
           >
-            <GroupsIcon />
+            <TocIcon />
           </span>
         </Badge>
       </Tooltip>
-      <Tooltip
+
+      {/* <Tooltip
         title={<FormattedMessage id="app.white" defaultMessage="White" />}
       >
         <Badge
@@ -137,7 +136,7 @@ const CustomerActionLeft = (props) => {
             <ManageAccountsIcon />
           </span>
         </Badge>
-      </Tooltip>
+      </Tooltip> */}
 
       <Tooltip
         title={<FormattedMessage id="app.mapview" defaultMessage="Map View" />}
@@ -185,12 +184,12 @@ const CustomerActionLeft = (props) => {
           <FormattedMessage id="app.clear" defaultMessage="Clear" />
           {/* Clear */}
         </Button>
-        <div style={{ width: "15%" }}>
+        {/* <div style={{ width: "15%" }}>
           <StyledSelect placeholder="Sort" onChange={(e) => handleChange(e)}>
             <Option value="aToz">A To Z</Option>
             <Option value="zToa">Z To A</Option>
           </StyledSelect>
-        </div>
+        </div> */}
       </div>
     </div>
   );

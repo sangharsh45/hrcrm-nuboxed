@@ -56,8 +56,8 @@ class ContactDetailTab extends Component {
                   />
                     <span class=" ml-1">
                      <FormattedMessage
-                      id="app.requirements"
-                      defaultMessage="Requirements"
+                      id="app.orders"
+                      defaultMessage="Orders"
                     />
                   </span>
                   {activeKey === "1" && (

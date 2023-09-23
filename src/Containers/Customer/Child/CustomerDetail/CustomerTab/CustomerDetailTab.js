@@ -239,7 +239,8 @@ class ContactDetailTab extends Component {
                 <LinkedContact />
               </Suspense>
             </TabPane>
-            <TabPane
+
+            {/* <TabPane
               tab={
                 <>
                   <span>
@@ -249,14 +250,14 @@ class ContactDetailTab extends Component {
                         id="app.recruitPro"
                         defaultMessage="RecruitPro"
                       />
-                      {/* RecruitPro */}
+               
                     </span>
                   </span>
 
                   {activeKey === "3" && (
                     <>
                       <>
-                        <Tooltip //title="Create"
+                        <Tooltip 
                           title={
                             <FormattedMessage
                               id="app.addrequirement"
@@ -264,27 +265,7 @@ class ContactDetailTab extends Component {
                             />
                           }
                         ></Tooltip>
-                        {/* <Tooltip //title="Tag Position"
-                          title={<FormattedMessage
-                            id="app.tagposition"
-                            defaultMessage="Tag Position"
-                          />}
-
-                        >
-                          <Icon
-                            type="link"
-                            onClick={() => {
-                              this.handlepartnerPopoverVisibleChange();
-                              handleTagProfileModal(true);
-                            }}
-                            size="0.875em"
-                            style={{
-                              marginLeft: "-0.31em",
-                              verticalAlign: "center",
-                            }}
-                          />
-                        </Tooltip> */}
-
+                  
                         <Tooltip
                           title={
                             <FormattedMessage
@@ -295,14 +276,14 @@ class ContactDetailTab extends Component {
                         >
                           <span
                             type="area-chart"
-                            // tooltipTitle="Summary"
+                       
                             onClick={() => {
                               this.handleRecriutmentdashboard();
                             }}
                             size="0.875em"
                           >
                             <PieChartIcon 
-                            // icon={solid("chart-pie")}
+                          
                              />
                           </span>
                         </Tooltip>
@@ -330,7 +311,8 @@ class ContactDetailTab extends Component {
                   <RecruitmentTable />
                 </Suspense>
               )}
-            </TabPane>
+            </TabPane> */}
+
             <TabPane
               tab={
                 <>
@@ -459,7 +441,8 @@ class ContactDetailTab extends Component {
                 <LinkedInvoice />
               </Suspense>
             </TabPane>
-            <TabPane
+            
+            {/* <TabPane
               tab={
                 <>
                   <i class="fas fa-print" style={{fontSize:"1.1rem"}}></i>
@@ -474,7 +457,7 @@ class ContactDetailTab extends Component {
               key="8"
             >
               <InitiativeForm />
-            </TabPane>
+            </TabPane> */}
 
             <TabPane
               tab={
@@ -488,35 +471,6 @@ class ContactDetailTab extends Component {
                       />
                     </span>
                   </span>
-                  {/* {activeKey === "10" && (
-                    <>
-                      <Tooltip 
-                        title={
-                          <FormattedMessage
-                            id="app.create"
-                            defaultMessage="Create"
-                          />
-                        }
-                      >
-                        
-                          <PlusOutlined
-                            type="plus"
-                           
-                            tooltiptitle={
-                              <FormattedMessage
-                                id="app.Create"
-                                defaultMessage="Create"
-                              />
-                            }
-                            onClick={() => {
-                              handleCustomerProjectDrawer(true);
-                            }}
-                            size="0.875em"
-                          />
-                    
-                      </Tooltip>
-                    </>
-                  )} */}
                 </>
               }
               key="10"

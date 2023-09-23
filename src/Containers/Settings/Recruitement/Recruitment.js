@@ -44,21 +44,21 @@ function Recruitment(props) {
       ruleId: "4",
       component: <Template />,
     },
-    {
-      rulesName: "Automation",
-      ruleId: "2",
-      component: <RecruitTab />,
-    },
-    {
-      rulesName: "Search",
-      ruleId: "3",
-      component: <SeachTab />,
-    },
-    {
-      rulesName: "Sourcing",
-      ruleId: "5",
-      component: <IndeedForm />,
-    },
+    // {
+    //   rulesName: "Automation",
+    //   ruleId: "2",
+    //   component: <RecruitTab />,
+    // },
+    // {
+    //   rulesName: "Search",
+    //   ruleId: "3",
+    //   component: <SeachTab />,
+    // },
+    // {
+    //   rulesName: "Sourcing",
+    //   ruleId: "5",
+    //   component: <IndeedForm />,
+    // },
     {
       rulesName: "Skills and Certifications",
       ruleId: "6",
@@ -70,11 +70,11 @@ function Recruitment(props) {
       component: <ReportScheduler />,
     },
 
-    {
-      rulesName: "Monetize",
-      ruleId: "9",
-      component: <ThirdPartyAccess />,
-    },
+    // {
+    //   rulesName: "Monetize",
+    //   ruleId: "9",
+    //   component: <ThirdPartyAccess />,
+    // },
    
     {
       rulesName: "Access",
@@ -82,16 +82,16 @@ function Recruitment(props) {
       component: <Access />,
     },
 
-    {
-      rulesName: "Compliance",
-      ruleId: "13",
-      component: <ComplianceForm />,
-    },
-    {
-      rulesName: "Commission",
-      ruleId: "7",
-      component: <Commission/>,
-    },
+    // {
+    //   rulesName: "Compliance",
+    //   ruleId: "13",
+    //   component: <ComplianceForm />,
+    // },
+    // {
+    //   rulesName: "Commission",
+    //   ruleId: "7",
+    //   component: <Commission/>,
+    // },
     {
       rulesName: "General",
       ruleId: "14",
@@ -102,21 +102,21 @@ function Recruitment(props) {
       ruleId: "15",
       component: <NotificationsTab />,
     },
-    {
-      rulesName: "Assessment",
-      ruleId: "16",
-      component: <AssessmentTab />,
-    },
+    // {
+    //   rulesName: "Assessment",
+    //   ruleId: "16",
+    //   component: <AssessmentTab />,
+    // },
     {
       rulesName: "Holidays",
       ruleId: "17",
       component: <SettingsHolidayTab />,
     },
-    {
-      rulesName: "Task",
-      ruleId: "18",
-      component: <ConfigureTab />,
-    },
+    // {
+    //   rulesName: "Task",
+    //   ruleId: "18",
+    //   component: <ConfigureTab />,
+    // },
     {
       rulesName: "Approval",
       ruleId: "19",

@@ -38,9 +38,9 @@ const ContactActionLeft = (props) => {
   } = useSpeechRecognition();
   console.log(transcript);
   useEffect(() => {
-    if (props.viewType === "dashboard") {
+    if (props.viewType === "table") {
       props.getCustomerRecords(props.userId);
-    } else if (props.viewType === "table") {
+    } else if (props.viewType === "dashboard") {
       props.getRecords(props.userId, "partner");
     }
     if (transcript) {
@@ -68,30 +68,11 @@ const ContactActionLeft = (props) => {
         <Badge
           size="small"
           count={
-            (props.viewType === "dashboard" &&
+            (props.viewType === "table" &&
               props.customerRecordData.customerDetails) ||
             0
           }
           overflowCount={5000}
-        >
-          <span
-            class=" mr-2 text-sm cursor-pointer"
-            onClick={() => props.setContactsViewType("dashboard")}
-            style={{
-              color: props.viewType === "dashboard" && "#1890ff",
-            }}
-          >
-            <AccountBalanceIcon />
-          </span>
-        </Badge>
-      </Tooltip>
-      <Tooltip
-        title={<FormattedMessage id="app.vendor" defaultMessage="Vendor" />}
-      >
-        <Badge
-          size="small"
-          count={(props.viewType === "table" && props.recordData.record) || 0}
-          overflowCount={999}
         >
           <span
             class=" mr-2 text-sm cursor-pointer"
@@ -100,10 +81,29 @@ const ContactActionLeft = (props) => {
               color: props.viewType === "table" && "#1890ff",
             }}
           >
-            <HandshakeIcon />
+            <AccountBalanceIcon />
           </span>
         </Badge>
       </Tooltip>
+      {/* <Tooltip
+        title={<FormattedMessage id="app.vendor" defaultMessage="Vendor" />}
+      >
+        <Badge
+          size="small"
+          count={(props.viewType === "dashboard" && props.recordData.record) || 0}
+          overflowCount={999}
+        >
+          <span
+            class=" mr-2 text-sm cursor-pointer"
+            onClick={() => props.setContactsViewType("dashboard")}
+            style={{
+              color: props.viewType === "dashboard" && "#1890ff",
+            }}
+          >
+            <HandshakeIcon />
+          </span>
+        </Badge>
+      </Tooltip> */}
       <div class=" w-72 ml-4">
         <Input
           placeholder="Search by Name, Company"

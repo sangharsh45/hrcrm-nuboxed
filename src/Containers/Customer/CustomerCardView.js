@@ -143,7 +143,7 @@ class CustomerCardView extends Component {
           }
         </GroupView>
 
-        <GroupView
+        {/* <GroupView
           groupTitle="Positions"
           isFetching={fetchingCustomerRequirement}
           noData={!customerRequirement.length}
@@ -188,7 +188,7 @@ class CustomerCardView extends Component {
               </FlexContainer>
             )
           }
-        </GroupView>
+        </GroupView> */}
 
         <GroupView
           groupTitle="ALL"

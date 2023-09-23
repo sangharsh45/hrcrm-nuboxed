@@ -81,7 +81,7 @@ const initialState = {
   addingContactOpportunity: false,
   addingContactOpportunityError: false,
   addContactOpportunityModal: false,
-  viewType: "dashboard",
+  viewType: "table",
 
   fetchingContactsPartner: false,
   fetchingContactsPartnerError: false,

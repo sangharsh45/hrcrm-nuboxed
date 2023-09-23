@@ -7,6 +7,7 @@ const AddContactModal = lazy(() => import("./Child/AddContactModal"));
 const ContactHeader = lazy(() => import("./Child/ContactHeader"));
 const ContactTable = lazy(() => import("./Child/ContactTable/ContactTable"));
 const PartnerTable =lazy(()=>import("./Child/PartnerTable/PartnerTable"));
+const ContactCardList =lazy(()=>import("./Child/ContactTable/ContactCardList"));
 
 class Contact extends Component {
   state = { currentData: undefined,text:undefined ,currentUser:"",currentPartnerUser:""};
@@ -76,15 +77,19 @@ class Contact extends Component {
           handleContactModal={handleContactModal}
         />
         <Suspense fallback={<BundleLoader />}>
-          {this.props.viewType === "table" ?  <PartnerTable
-           currentPartnerUser={this.state.currentPartnerUser}
-           /> :
-            this.props.viewType === "dashboard" ? (
-              <ContactTable
-              currentUser={this.state.currentUser} 
-               />
-              
-            ) : null}
+          {this.props.viewType === "table" ?  
+          //  <ContactTable
+          //  currentUser={this.state.currentUser} 
+          //   />
+          <ContactCardList currentUser={this.state.currentUser} />
+         :
+          //   this.props.viewType === "dashboard" ? (
+             
+          //      <PartnerTable
+          //  currentPartnerUser={this.state.currentPartnerUser}
+          //  /> 
+          //   ) :
+           null}
 
         </Suspense>
       </React.Fragment>

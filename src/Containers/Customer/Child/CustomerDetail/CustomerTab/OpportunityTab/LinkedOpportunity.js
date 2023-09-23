@@ -251,7 +251,16 @@ function OpportunityTable(props) {
         );
       },
     },
-
+{
+title:(
+  <FormattedMessage
+    id="app.status"
+    defaultMessage="Status"
+  />
+),
+dataIndex: "status",
+width: "5%",
+},
 
     {
       //title: "sponsor",

@@ -13,11 +13,11 @@ function WorkFlow(props) {
     <>
       <TabsWrapper>
         <StyledTabs defaultActiveKey="1" type="card">
-          <TabPane tab={`Hiring`} key="1">
+          {/* <TabPane tab={`Hiring`} key="1">
             <div style={{ marginTop: 10 }}>
               <RecruitmentTab />
             </div>
-          </TabPane>
+          </TabPane> */}
           <TabPane tab={`Opportunity`} key="2">
             <div style={{ marginTop: 10 }}>
               <HiringTab />

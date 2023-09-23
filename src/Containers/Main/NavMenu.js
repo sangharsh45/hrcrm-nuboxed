@@ -265,8 +265,20 @@ function NavMenu (props) {
 
 
 <hr />
-        
-
+     {/* {user.leadsAccessInd === true && ( */}
+     <Menu.Item key="/leads" style={{height:"30px"}}>
+              <Link to="/Leads">
+                <GroupsIcon
+            
+                   style={{ fontSize: "large" }}
+                />
+                 <span class="text-white text-sm ml-3">
+               
+                  {translatedMenuItems[13]}
+                </span>
+              </Link>
+            </Menu.Item>
+          {/* )} */}
              {/*Opportunity*/}
              {user.opportunityAccessInd === true && (
             <Menu.Item key="/opportunity" style={{height:"30px"}}>
@@ -346,7 +358,7 @@ function NavMenu (props) {
           {/*Contact*/}
           {/* )}  */}
  {/* Talent */}
- {user.talentAccessInd === true && (
+ {/* {user.talentAccessInd === true && (
             <Menu.Item key="/candidate" style={{height:"30px"}}>
               <Link to="/candidate">
           
@@ -365,7 +377,7 @@ function NavMenu (props) {
                 </span>
               </Link>
             </Menu.Item>
-          )}
+          )} */}
           {/*Talent*/}
           {/*Requirement*/}
           {user.requirementAccessInd === true && (
@@ -410,20 +422,7 @@ function NavMenu (props) {
          
           {/*Customer*/}
 
-          {user.leadsAccessInd === true && (
-            <Menu.Item key="/leads" style={{height:"30px"}}>
-              <Link to="/Leads">
-                <GroupsIcon
-            
-                   style={{ fontSize: "large" }}
-                />
-                 <span class="text-white text-sm ml-3">
-               
-                  {translatedMenuItems[13]}
-                </span>
-              </Link>
-            </Menu.Item>
-          )}
+     
           {/*Publish*/}
           {/* {user.userType !== "USER" && user.department !== "Recruiter" &&user.department !== "Customer"&&
             user.department !== "VENDOR" && (  */}
@@ -451,7 +450,7 @@ function NavMenu (props) {
 
           {/*Publish*/}
           <hr />
-          <Menu.Item key="/project" style={{height:"30px"}}>
+          {/* <Menu.Item key="/project" style={{height:"30px"}}>
               <Link to="/project">
                 <LightbulbIcon
                   style={{ fontSize: "large" }}
@@ -461,10 +460,10 @@ function NavMenu (props) {
                   {translatedMenuItems[15]}
                 </span>
               </Link>
-            </Menu.Item>
+            </Menu.Item> */}
             
           {/* {user.department === "Management" && ( */}
-          <Menu.Item key="/billing" style={{height:"30px"}}>
+          {/* <Menu.Item key="/billing" style={{height:"30px"}}>
             <Link to="/Billing">
               <AccessAlarmIcon
 
@@ -475,10 +474,10 @@ function NavMenu (props) {
                 {translatedMenuItems[16]}
               </span>
             </Link>
-          </Menu.Item>
+          </Menu.Item> */}
           {/* )} */}
 
-          {user.department === "Management" && (
+          {/* {user.department === "Management" && (
             <Menu.Item key="/invoice" style={{height:"30px"}}>
               <Link to="/Invoice">
                 <TextSnippetIcon
@@ -491,11 +490,11 @@ function NavMenu (props) {
                 </span>
               </Link>
             </Menu.Item>
-          )}
+          )} */}
             <hr />
           {/* {user.userType !== "USER" && user.department !== "VENDOR" && user.department !== "Customer" && user.department !== "Recruiter" &&( */}
           {/* VENDOR */}
-          {user.vendorAccessInd === true && (
+          {/* {user.vendorAccessInd === true && (
             <Menu.Item key="/partner" style={{height:"30px"}}>
               <Link to="/partner">
               
@@ -515,7 +514,7 @@ function NavMenu (props) {
                 </span>
               </Link>
             </Menu.Item>
-          )}
+          )} */}
           {/*Vendor*/}
 
      
@@ -527,7 +526,7 @@ function NavMenu (props) {
           <hr />
           {/* Accessment */}
 
-          {user.department === "Management" && (
+          {/* {user.department === "Management" && (
             <Menu.Item key="/accessment" style={{height:"30px"}}>
               <Link to="/Accessment">
                 <ComputerIcon
@@ -540,9 +539,9 @@ function NavMenu (props) {
                 </span>
               </Link>
             </Menu.Item>
-          )}
+          )} */}
 
-          {user.department === "Management" && (
+          {/* {user.department === "Management" && (
             <Menu.Item key="/course" style={{height:"30px"}}>
               <Link to="/Course">
                 <NewspaperIcon
@@ -555,9 +554,9 @@ function NavMenu (props) {
                 </span>
               </Link>
             </Menu.Item>
-          )}
+          )} */}
    {/* Program */}
-          {user.department === "Management" && (
+          {/* {user.department === "Management" && (
             <Menu.Item key="/program" style={{height:"30px"}}>
               <Link to="/Program">
                 <LibraryBooksIcon
@@ -571,7 +570,7 @@ function NavMenu (props) {
                 </span>
               </Link>
             </Menu.Item>
-          )}
+          )} */}
 
           <hr />
 
@@ -610,6 +609,16 @@ function NavMenu (props) {
             }
           >
            */}
+              <Menu.Item key="/report" style={{height:"30px"}}>
+          <Link to="/leave">
+              <i class="fas fa-luggage-cart"></i>
+            <span class="text-white text-sm ml-3"><FormattedMessage
+               id="app.leaves"
+               defaultMessage="Leaves"
+              />
+              </span>
+             </Link> 
+            </Menu.Item>
             {user.userType !== "USER" && user.department !== "VENDOR" && ( 
            <Menu.Item key="/mileage" style={{height:"30px"}}> 
           <Link to="/mileage"> 
@@ -652,16 +661,7 @@ function NavMenu (props) {
              </Link> 
          </Menu.Item>
 
-          <Menu.Item key="/report" style={{height:"30px"}}>
-          <Link to="/leave">
-              <i class="fas fa-luggage-cart"></i>
-            <span class="text-white text-sm ml-3"><FormattedMessage
-               id="app.leaves"
-               defaultMessage="Leaves"
-              />
-              </span>
-             </Link> 
-            </Menu.Item>
+       
 {/* 
            </SubMenu> 
      )}  */}

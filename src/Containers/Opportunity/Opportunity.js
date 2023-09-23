@@ -16,6 +16,11 @@ const OpportunityMap = lazy(() => import("./OpportunityMap"));
 const OpportunityHeader = lazy(() => import("./Child/OpportunityHeader"));
 const AddOpportunityModal = lazy(() => import("./Child/AddOpportunityModal"));
 const OpportunityTable = lazy(() => import("./Child/OpportunityTable/OpportunityTable"));
+const OpportunityCardList = lazy(() => import("./Child/OpportunityTable/OpportunityCardList"));
+const OpportunityCloseCard=lazy(()=>import("./Child/OpportunityTable/OpportunityCloseCard"));
+const OpportunityLostCard=lazy(()=>import("./Child/OpportunityTable/OpportunityLostCard"));
+const OpportunityDeletedCard=lazy(()=>import("./Child/OpportunityTable/OpportunityDeletedCard"));
+
 class Opportunity extends Component {
   state = { currentData: "" };
   handleClear = () => {
@@ -47,13 +52,21 @@ class Opportunity extends Component {
         />
         <Suspense fallback={<BundleLoader />}>
           {this.props.viewType === "table" ?
-          <OpportunityTable /> :
+          // <OpportunityTable /> 
+          <OpportunityCardList/>
+          :
           this.props.viewType === "dashboard" ?
-             <OpportunityDeletedTable/> :
+            //  <OpportunityDeletedTable/> 
+            <OpportunityDeletedCard/>
+             :
              this.props.viewType === "close" ?
-                    <OpportunityCloseTable/> :
+                    // <OpportunityCloseTable/>
+                    <OpportunityCloseCard/>
+                     :
              this.props.viewType === "lost" ?
-                    <OpportunitylostTable/> :
+                    // <OpportunitylostTable/>
+                   <OpportunityLostCard/>
+                    :
                     this.props.viewType === "Map" ?
                     <OpportunityMap/> :
              this.props.viewType === "card" ?

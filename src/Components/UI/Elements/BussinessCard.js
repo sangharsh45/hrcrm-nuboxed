@@ -116,7 +116,7 @@ const BussinessCard = (props) => {
                     fontSize: "1rem",
                   }}
                 >
-                  Positions - {position}
+                  Opportunity - {position}
                 </Button>
               </div>
               <div>

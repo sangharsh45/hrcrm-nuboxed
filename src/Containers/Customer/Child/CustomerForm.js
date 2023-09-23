@@ -337,7 +337,7 @@ function CustomerForm(props) {
                     </div>
                    
                  
-                    <div class=" w-1/3">
+                    {/* <div class=" w-1/3">
                      <div>
                         <StyledLabel>Requirement Type</StyledLabel>
                         </div>
@@ -349,14 +349,14 @@ function CustomerForm(props) {
                           unCheckedChildren="Blue collar"
                         />
                     
-                    </div>
-                    <div>
+                    </div> */}
+                    {/* <div>
                       <Checkbox
                         checked={checked}
                         onChange={() => handleChange()}
                       >Both
                       </Checkbox>
-                    </div>
+                    </div> */}
                   </div>
 
                  
@@ -506,27 +506,6 @@ function CustomerForm(props) {
                         inlineLabel
                       />
                     </div>
-                  </div>
-                  <Spacer/>
-                  <div class=" flex justify-between">
-                    <div class=" w-2/5">
-                      <Field
-                        name="gst"
-                        type="text"
-                        // label="VAT Number"
-                        label={
-                          <FormattedMessage
-                            id="app.gst"
-                            defaultMessage="GST"
-                          />
-                        }
-                        isColumn
-                        width={"100%"}
-                        component={InputComponent}
-                        inlineLabel
-                      />
-                    </div>
-                  
                   </div>
                   <Spacer/>
                   <div style={{ width: "100%",backgroundImage: "linear-gradient(-90deg, #00162994, #94b3e4)" }}>
