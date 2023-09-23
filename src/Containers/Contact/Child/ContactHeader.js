@@ -1,0 +1,49 @@
+import React, { Component,lazy } from "react";
+import { ActionHeader } from "../../../Components/Utils";
+const ContactActionLeft = lazy(()=>import("./ContactActionLeft"));
+const ContactActionRight = lazy(() =>import("./ContactActionRight"));
+class ContactHeader extends Component {
+  render() {
+    const {
+      handleContactModal,
+      viewType,
+      setContactsViewType,
+      currentData,
+      handleButtonClick,
+      visibility,
+      handleSecondFilterChange,
+      currentSecondData,
+    } = this.props;
+    return (
+      <div>
+        <ActionHeader
+          leftComponent={
+            <ContactActionLeft
+              currentData={this.props.currentData}
+              handleChange={this.props.handleChange}
+              text={this.props.text}
+              handleClear={this.props.handleClear}
+              setCurrentData={this.props.setCurrentData}
+              viewType={viewType}
+              setContactsViewType={setContactsViewType}
+              currentPartnerData={this.props.currentPartnerData}
+              handlePartnerClear={this.props.handlePartnerClear}
+              setCurrentPartnerData={this.props.setCurrentPartnerData}
+            />
+          }
+          rightComponent={
+            <ContactActionRight handleContactModal={handleContactModal} 
+            viewType={viewType}
+            currentUser={this.props.currentUser} 
+            handleDropChange={this.props.handleDropChange}
+            currentPartnerUser={this.props.currentPartnerUser}
+            handlePartnerDropChange={this.props.handlePartnerDropChange}
+            />
+          }
+        />
+      </div>
+    );
+  }
+}
+
+export default ContactHeader;

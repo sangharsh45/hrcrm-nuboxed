@@ -1,0 +1,271 @@
+import * as types from "./RoleActionTypes";
+import axios from "axios";
+import dayjs from "dayjs";
+import { base_url } from "../../../../Config/Auth";
+import { message } from "antd";
+
+export const getRoles = (orgId) => (dispatch) => {
+    dispatch({
+      type: types.GET_ROLES_REQUEST,
+    });
+    axios
+      .get(`${base_url}/roleType/${orgId}`, {
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+        },
+      })
+      .then((res) => {
+        console.log(res);
+        dispatch({
+          type: types.GET_ROLES_SUCCESS,
+          payload: res.data,
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+        dispatch({
+          type: types.GET_ROLES_FAILURE,
+          payload: err,
+        });
+      });
+  };
+
+  export const addRoles = (roleType,cb) => (dispatch,getState) => {
+    const orgId = getState().auth.userDetails.organizationId;
+    dispatch({
+      type: types.ADD_ROLES_REQUEST,
+    });
+    axios
+      .post(`${base_url}/roleType`, roleType, 
+      {
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+        },
+      })
+      .then((res) => {
+        message.success("Role has been added successfully!");
+        dispatch(getRoles(orgId));
+        console.log(res);
+        dispatch({
+          type: types.ADD_ROLES_SUCCESS,
+          payload: { 
+            ...roleType, 
+            // leadDocumentId: res.data 
+            // userId: res.data ,
+            // orgId:res.data 
+          },
+        });
+        cb();
+      })
+      .catch((err) => {
+        console.log(err);
+        dispatch({
+          type: types.ADD_ROLES_FAILURE,
+        });
+        cb();
+      });
+  };
+
+
+  export const updateRoles = (roleTypeId, roleType,departmentName,departmentId, cb) => (dispatch) => {
+    // console.log(leadDocumentsId, DocumentsName);
+    dispatch({
+      type: types.UPDATE_ROLES_REQUEST,
+    });
+    axios
+      .put(
+        `${base_url}/roleType`,
+        { roleType, roleTypeId,departmentName,departmentId,editInd:"true"
+        },
+        {
+          headers: {
+            Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+          },
+        }
+      )
+      .then((res) => {
+        message.success("Role has been updated successfully!");
+        console.log(res);
+        dispatch({
+          type: types.UPDATE_ROLES_SUCCESS,
+          payload: res.data,
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+        dispatch({
+          type: types.UPDATE_ROLES_FAILURE,
+        });
+      });
+  };
+  export const searchRoleName = (name) => (dispatch) => {
+    dispatch({
+      type: types.GET_ROLE_SEARCH_REQUEST,
+    });
+    axios
+      .get(`${base_url}/roleType/search/${name}`, {
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+        },
+      })
+      .then((res) => {
+        message.success(res.data.message);
+        dispatch({
+          type: types.GET_ROLE_SEARCH_SUCCESS,
+          payload: res.data,
+        });
+      }
+      )
+      .catch((err) => {
+        dispatch({
+          type: types.GET_ROLE_SEARCH_FAILURE,
+          payload: err,
+        });
+      });
+  };
+  export const removeRole = (roleTypeId, cb) => (dispatch) => {    
+    dispatch({
+        type: types.REMOVE_ROLE_REQUEST,
+    });
+    axios
+        .delete(`${base_url}/roleType/${roleTypeId}`,{
+          headers: {
+            Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+          },
+        })
+        .then((res) => {
+          message.success("Role has been deleted successfully!");
+            console.log(res);
+            dispatch({
+                type: types.REMOVE_ROLE_SUCCESS,
+                payload: roleTypeId,
+            });
+        })
+        .catch((err) => {
+            console.log(err);
+            dispatch({
+                type: types.REMOVE_ROLE_FAILURE,
+            });
+        });
+};
+
+export const getTalentRoles = (orgId) => (dispatch) => {
+  dispatch({
+    type: types.GET_TALENT_ROLES_REQUEST,
+  });
+  axios
+    .get(`${base_url}/roleTypeExternal/${orgId}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.GET_TALENT_ROLES_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.GET_TALENT_ROLES_FAILURE,
+        payload: err,
+      });
+    });
+};
+
+export const addTalentRoles = (roleType,cb) => (dispatch) => {
+  // console.log(departments);
+  dispatch({
+    type: types.ADD_TALENT_ROLES_REQUEST,
+  });
+  axios
+    .post(`${base_url}/roleTypeExternal`, roleType, 
+    {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.ADD_TALENT_ROLES_SUCCESS,
+        payload: { 
+          ...roleType, 
+          // leadDocumentId: res.data 
+          // userId: res.data ,
+          // orgId:res.data 
+        },
+      });
+      cb();
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.ADD_TALENT_ROLES_FAILURE,
+      });
+      cb();
+    });
+};
+
+
+export const updateTalentRoles = (roleTypeExternalId, roleType,departmentName,departmentId, cb) => (dispatch) => {
+  // console.log(leadDocumentsId, DocumentsName);
+  dispatch({
+    type: types.UPDATE_TALENT_ROLES_REQUEST,
+  });
+  axios
+    .put(
+      `${base_url}/roleTypeExternal`,
+      { roleType, roleTypeExternalId,editInd:"true"
+      },
+      {
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+        },
+      }
+    )
+    .then((res) => {
+      message.success("Role has been updated successfully!");
+      console.log(res);
+      dispatch({
+        type: types.UPDATE_TALENT_ROLES_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.UPDATE_TALENT_ROLES_FAILURE,
+      });
+    });
+};
+
+
+export const removeTalentRole = (roleTypeExternalId, cb) => (dispatch) => {    
+  dispatch({
+      type: types.REMOVE_TALENT_ROLE_REQUEST,
+  });
+  axios
+      .delete(`${base_url}/roleTypeExternal/${roleTypeExternalId}`,{
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+        },
+      })
+      .then((res) => {
+        message.success("Role has been deleted successfully!");
+          console.log(res);
+          dispatch({
+              type: types.REMOVE_TALENT_ROLE_SUCCESS,
+              payload: roleTypeExternalId,
+          });
+      })
+      .catch((err) => {
+          console.log(err);
+          dispatch({
+              type: types.REMOVE_TALENT_ROLE_FAILURE,
+          });
+      });
+};
+

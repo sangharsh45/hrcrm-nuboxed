@@ -1,0 +1,287 @@
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import { FormattedMessage } from "react-intl";
+import { message, Icon } from "antd";
+import { Link, withRouter } from "react-router-dom";
+import { Formik, Form, Field } from "formik";
+import * as Yup from "yup";
+import {
+  ArrowRightOutlined, CheckCircleOutlined, EyeInvisibleOutlined, EyeOutlined,
+} from "@ant-design/icons";
+import { Spacer } from "../../Components/UI/Elements";
+import { AuthContainer, FormContainer, FormWrapper, Input } from "./styled";
+import { ValidationError, Title, SubTitle } from "../../Components/UI/Elements";
+import { FlexContainer } from "../../Components/UI/Layout";
+import Button from "antd/lib/button";
+import { changePassword, generateOtpByEmail, validateOtp } from "./AuthAction";
+import { tick } from "../../Assets/Images/Logo.png";
+import { InputComponent } from "../../Components/Forms/Formik/InputComponent";
+
+/**
+ * yup validation scheme for set Password
+ */
+const ChangePasswordSchema = Yup.object().shape({
+  password: Yup.string()
+    .required("Required")
+    .min(8, "password should be min 8 character ")
+    .max(50, "password should be max 50 character !"),
+  confirmPassword: Yup.string()
+    .required("Enter password")
+    .oneOf([Yup.ref("password")], "Passwords do not match"),
+});
+class ChangePassword extends Component {
+  state = {
+    type: "password",
+    type1: "password",
+    show1: Boolean(),
+    show2: Boolean(),
+    show: Boolean(),
+  };
+  handleClick = () =>
+    this.setState(({ type, prevState }) => ({
+      type: type === "text" ? "password" : "text",
+      show: !this.state.show,
+    }));
+  handleClick1 = () =>
+    this.setState(({ type1, prevState }) => ({
+      type1: type1 === "text" ? "password" : "text",
+      show1: !this.state.show1,
+    }));
+  InputComponent = ({ field, form: { touched, errors }, ...props }) => (
+    <div>
+      <Input {...field} {...props} />
+      {touched[field.name] && errors[field.name] && (
+        <ValidationError>{errors[field.name]}</ValidationError>
+      )}
+    </div>
+  );
+  componentDidMount() {
+    console.log("inside cDM login");
+  }
+  callback = () => {
+    message.success("You have successfully changed your password");
+    this.props.history.push("/");
+  };
+  render() {
+    return (
+      <>
+        <FlexContainer>
+          <AuthContainer
+            style={{
+              backgroundColor: "#E3E8EE",
+              flexDirection: "column",
+              width: "100%",
+            }}
+          >
+            <FormWrapper>
+              <Title>Change Password</Title>
+              <SubTitle>Its a good idea to use a strong password.</SubTitle>
+              <Spacer />
+              <Formik
+                initialValues={{
+                  password: "",
+                  confirmPassword: "",
+
+                }}
+                validationSchema={ChangePasswordSchema}
+                onSubmit={(values) => {
+                  console.log(values);
+                  this.props.changePassword(
+                    {
+                      password: values.password,
+                      emailId: this.props.emailId,
+                    },
+                    this.callback
+                  );
+                }}
+              >
+                {({ errors, touched, values, isSubmitting }) => (
+                  <Form style={{ width: "25vw" }}>
+                    <div className="set_password">
+                      <div style={{ width: "89%" }}>
+                        <Field
+                          name="password"
+                          type={this.state.type}
+                          placeholder=" New password"
+                          component={this.InputComponent}
+                          style={{ border: "1px solid lightgrey", boxShadow: "rgb(220 216 216) 2px 2px 2px" }}
+                        />
+                      </div>
+                      {this.state.show ? (
+                        <EyeOutlined
+                          type="eye"
+                          onClick={this.handleClick}
+                          style={{ marginLeft: "-1.25em", marginTop: "1.25em" }}
+                          size="24"
+                        />
+                      ) : (
+                        <EyeInvisibleOutlined
+                          type="eye-invisible"
+                          onClick={this.handleClick}
+                          size="24"
+                          style={{ marginLeft: "-1.25em", marginTop: "1.25em" }}
+                        />
+                      )}
+                    </div>
+                    <Spacer />
+
+                    <div className="set_password">
+                      <FlexContainer justifyContent="space-between">
+                        <div style={{ width: "80%" }}>
+                          <Field
+                            name="confirmPassword"
+                            type={this.state.type1}
+                            placeholder="Confirm new password"
+                            component={this.InputComponent}
+                            style={{ border: "1px solid lightgrey", boxShadow: "rgb(220 216 216) 2px 2px 2px" }}
+
+                          />
+                        </div>
+                        {this.state.show1 ? (
+                          <EyeOutlined
+                            type="eye"
+                            onClick={this.handleClick1}
+                            style={{
+                              marginLeft: "-1.25em",
+                              marginTop: "1.25em",
+                            }}
+                          // style={{ size: 24 }}
+                          />
+                        ) : (
+                          <EyeInvisibleOutlined
+                            type="eye-invisible"
+                            onClick={this.handleClick1}
+                            style={{
+                              marginLeft: "-7.25em",
+                              marginTop: "1em",
+                            }}
+                          // style={{ size: 24 }}
+                          />
+                        )}
+                        <div >
+                          <Button
+                            type="primary"
+                            onClick={() => {
+                              this.props.generateOtpByEmail({
+                                emailId: this.props.emailId
+                              })
+                              // this.handleOtpField()
+                            }}
+                            style={{ marginLeft: "-6.25em", marginTop: "0.4em" }}
+
+                          >
+                            <ArrowRightOutlined />
+                          </Button>
+                        </div>
+                      </FlexContainer>
+                      {values.password.length &&
+                        values.password === values.confirmPassword ? (
+                        <CheckCircleOutlined
+                          type="check-circle"
+                          theme="twoTone"
+                          twoToneColor="#52c41a"
+                          size={80}
+                          style={{
+                            marginLeft: "1.25em",
+                            marginTop: "0.875em",
+                            fontSize: "1.5625em",
+                          }}
+                        />
+                      ) : null}
+                    </div>
+
+                    {/* <Spacer /> */}
+                    {/* <div >
+                      <Button
+                        type="primary"
+                        onClick={() => {
+                          this.props.generateOtpByEmail({
+                            emailId: this.props.emailId
+                          })
+                          // this.handleOtpField()
+                        }}
+                        style={{ marginLeft: "85%" }}
+
+                      >
+                        <ArrowRightOutlined />
+                      </Button>
+                    </div> */}
+
+                    
+
+                    <div>
+                    <Spacer />
+                      <FlexContainer justifyContent="space-between">
+                        <div>
+                          {/* <div style={{ display: "flex", justifyContent: "space-between" }}>
+                      <div style={{ width: "30%", padding: "2px", marginTop: "8px" }}> */}
+                          <Field
+                            name="otp"
+                            placeholder="Enter OTP"
+                            // value={values.password}
+                            component={InputComponent}
+                          // style={{ border: "1px solid lightgrey", height: "30px", boxShadow: "rgb(220 216 216) 2px 2px 2px" }}
+
+                          />
+                        </div>
+                        <div  style={{ marginRight: "12.25em"}}>
+
+                          <Button
+                            type="primary"
+                            onClick={() => {
+                              this.props.validateOtp({
+                                otp: values.otp,
+                                emailId: this.props.emailId
+                              })
+                            }}
+                          >
+                            Validate
+                          </Button>
+                        </div>
+                      </FlexContainer>
+                    </div>
+
+
+                    <Button
+                      type="primary"
+                      htmlType="submit"
+                      Loading={this.props.changingPassword}
+                      style={{ width: "90%", height: "2.5em" }}
+                    // onClick={() => this.props.login('prabeen.strange@gmail.com', 'chicharito14')}
+                    >
+                      {/* Save Password */}
+                      <FormattedMessage
+                        id="app.savepassword"
+                        defaultMessage="Save Password"
+                      />
+                    </Button>
+                  </Form>
+                )}
+              </Formik>
+              <br />
+              {/* <Link to='/register' style={{ textAlign: 'center' }}>Doesn't have an account? Register</Link> */}
+            </FormWrapper>
+          </AuthContainer>
+        </FlexContainer>
+      </>
+    );
+  }
+}
+const mapStateToProps = ({ auth }) => ({
+  changingPassword: auth.changingPassword,
+  changingPasswordError: auth.changingPasswordError,
+  emailId: auth.userDetails.emailId,
+});
+const mapDispatchToProps = (dispatch) =>
+  bindActionCreators(
+    {
+      changePassword,
+      generateOtpByEmail,
+      validateOtp
+    },
+    dispatch
+  );
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(ChangePassword)
+);

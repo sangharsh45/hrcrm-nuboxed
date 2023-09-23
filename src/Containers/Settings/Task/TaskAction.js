@@ -1,0 +1,145 @@
+import * as types from "./TaskActionTypes";
+import axios from "axios";
+import dayjs from "dayjs";
+import { base_url } from "../../../Config/Auth";
+import { message } from "antd";
+
+export const getTasks = () => (dispatch) => {
+  dispatch({
+    type: types.GET_TASK_REQUEST,
+  });
+  axios
+    .get(`${base_url}/taskType`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.GET_TASK_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.GET_TASK_FAILURE,
+        payload: err,
+      });
+    });
+};
+
+export const addTasks = (task, cb) => (dispatch) => {
+  console.log(task);
+  dispatch({
+    type: types.ADD_TASK_REQUEST,
+  });
+  axios
+    .post(`${base_url}/taskType`, task, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      message.success("Task has been added successfully!");
+      dispatch(getTasks());
+      console.log(res);
+      dispatch({
+        type: types.ADD_TASK_SUCCESS,
+        payload: { ...task },
+      });
+      cb();
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.ADD_TASK_FAILURE,
+      });
+    });
+};
+
+export const updateTasks = (taskTypeId, taskType, cb) => (
+  dispatch
+) => {
+  dispatch({
+    type: types.UPDATE_TASK_REQUEST,
+  });
+  axios
+    .put(
+      `${base_url}/taskType`,
+      { taskType, taskTypeId ,editInd:"true" 
+    },
+      {
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+        },
+      }
+    )
+    .then((res) => {
+      message.success("Task has been updated successfully!");
+      console.log(res);
+      dispatch({
+        type: types.UPDATE_TASK_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.UPDATE_TASK_FAILURE,
+      });
+    });
+};
+export const searchTaskName = (name) => (dispatch) => {
+  dispatch({
+    type: types.GET_TASK_SEARCH_REQUEST,
+  });
+  axios
+    .get(`${base_url}/taskType/${name}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      message.success(res.data.message);
+      dispatch({
+        type: types.GET_TASK_SEARCH_SUCCESS,
+        payload: res.data,
+      });
+    }
+    )
+    .catch((err) => {
+      dispatch({
+        type: types.GET_TASK_SEARCH_FAILURE,
+        payload: err,
+      });
+    });
+}; 
+export const removeTask = ( taskTypeId) => (dispatch) => {
+  // console.log(typeId);
+  dispatch({
+    type: types.REMOVE_TASK_REQUEST,
+  });
+  axios
+    .delete(`${base_url}/taskType/${taskTypeId}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      message.success("Task has been deleted successfully!");
+      console.log(res);
+      dispatch({
+        type: types.REMOVE_TASK_SUCCESS,
+        payload:taskTypeId,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.REMOVE_TASK_FAILURE,
+      });
+    });
+};

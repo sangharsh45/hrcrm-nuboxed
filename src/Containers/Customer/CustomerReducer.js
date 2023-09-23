@@ -1,0 +1,1471 @@
+import * as types from "./CustomerActionTypes";
+import dayjs from "dayjs";
+const initialState = {
+  viewType: "card",
+  addCustomerModal: false,
+
+  addingCustomer: false,
+  addingCustomerError: false,
+
+
+  addDrawerCustomerEmailModal:false,
+
+  customerProjectModal:false,
+ 
+
+  addingAttendence: false,
+  addingAttendenceError: false,
+
+  fetchingCustomerProject:false,
+  fetchingCustomerProjectError:false,
+  customerProject:[],
+
+  addingCustomerContact: false,
+  addingCustomerContactError: false,
+  addCustomerContactModal: false,
+
+  fetchinglatestCustomer:false,
+  fetchinglatestCustomerError:false,
+  latestCustomer:[],
+
+  fetchingAllCustomerByPosition:false,
+  fetchingAllCustomerByPosition:false,
+
+  fetchingCustomerRequirement:false,
+  fetchingCustomerRequirementError:false,
+  customerRequirement:[],
+
+  fetchingCustomers: false,
+  fetchingCustomersError: false,
+  customerByUserId: [],
+  startDate: dayjs().toISOString(),
+  endDate: dayjs().toISOString(),
+  dateTodoRangeList: [
+
+    // {
+    //   id: 8,
+    //   type: "All",
+    //   value: "All",
+    //   starter: true,
+    //   isSelected: true,
+    //   startDate: dayjs()
+    //     .toISOString(),
+    //   endDate: dayjs().toISOString(),
+    // },
+    {
+      id: 1,
+      type: "Today",
+      value: "Today",
+      starter: true,
+      isSelected: true,
+      startDate: dayjs()
+        // .subtract(1, "days")
+        .toISOString(),
+      endDate: dayjs().toISOString(),
+    },
+    {
+      id: 2,
+      type: "Yesterday",
+      value: "Yesterday",
+      starter: false,
+      isSelected: false,
+      endDate: dayjs()
+        .subtract(1, "days")
+
+        .toISOString(),
+      startDate: dayjs().toISOString(),
+    },
+    // {
+    //   id: 3,
+    //   type: "Last7days",
+    //   value: "Last 7 days",
+    //   starter: false,
+    //   isSelected: false,
+    //   endDate: dayjs()
+    //   .subtract(7, "days")
+
+    //   .toISOString(),
+    // startDate: dayjs().toISOString(),
+    //   // startDate: dayjs()
+    //   //   .subtract(7, "days")
+
+    //   //   .toISOString(),
+    //   // endDate: dayjs().toISOString(),
+    // },
+
+    // {
+    //   id: 4,
+    //   type: "Last30days",
+    //   value: "Last 30 days",
+    //   starter: false,
+    //   isSelected: false,
+    //   endDate: dayjs()
+    //   .subtract(30, "days")
+
+    //   .toISOString(),
+    // startDate: dayjs().toISOString(),
+    //   // startDate: dayjs()
+    //   //   .subtract(30, "days")
+
+    //   //   .toISOString(),
+    //   // endDate: dayjs().toISOString(),
+    // },
+    // {
+    //   id: 5,
+    //   type: "Thismonth",
+    //   value: "This month",
+    //   starter: false,
+    //   isSelected: false,
+    //   endDate: dayjs()
+    //   .startOf("week").toISOString(),
+    // startDate: dayjs().toISOString(),
+      
+    // },
+    // {
+    //   id: 6,
+    //   type: "Lastmonth",
+    //   value: "Last month",
+    //   starter: false,
+    //   isSelected: false,
+    //   startDate: dayjs().startOf("month").toISOString(),
+    //   endDate: dayjs().toISOString(),
+    // },
+    // {
+    //   id: 8,
+    //   type: "DateRange",
+    //   value: "Date Range",
+    //   starter: false,
+    //   isSelected: false,
+    //   startDate: dayjs().startOf("year").toISOString,
+    //   endDate: dayjs().endOf("year").toISOString(),
+    // },
+  ],
+
+  clearbit: {},
+
+  fetchingAllCustomers: false,
+  fetchingAllCustomersError: false,
+  allcustomersByUserId: [],
+
+  fetchingCustomerById: false,
+  fetchingCustomerByIdError: false,
+  customerById: [],
+
+  fetchingCustomerDetailsById: false,
+  fetchingCustomerDetailsByIdError: false,
+  customer: {},
+
+  documentUploadModal: false,
+
+  addingDocumentByCustomerId: false,
+  addingDocumentByCustomerIdError: false,
+
+  fetchingDocumentsByCustomerId: false,
+  fetchingDocumentsByCustomerIdError: false,
+  documentsByCustomerId: [],
+
+  deleteDocument: false,
+  deleteDocumentError: false,
+
+  addCustomerSpeechModal: false,
+  addDrawerCustomerModal: false,
+  customerDrawerProps: {},
+
+  updateDrawerCustomerModal: false,
+  updateCustomerDrawerProps: {},
+
+  fetchingNotesListByCustomerId: false,
+  fetchingNotesListByCustomerIdError: false,
+  notesListByCustomerId: [],
+
+  updateCustomerModal: false,
+
+  updateCustomerInitiativeModal:false,
+
+  setEditingCustomer: {},
+
+  setEditingCustomerCard:{},
+
+  updateCustomerById: false,
+  updateCustomerByIdError: false,
+
+  updateCustomerInitiatives: false,
+  updateCustomerInitiativesError: false,
+
+  fetchingCustomerOpportunity: false,
+  fetchingCustomerOpportunityError: false,
+  opportunityByCustomerId: [],
+
+  fetchingCustomerContact: false,
+  fetchingCustomerContactError: false,
+  contactByCustomerId: [],
+
+  fetchingCustomerRecruit:false,
+  fetchingCustomerRecruitError:false,
+  customerRecruit:[],
+
+  fetchingAllCustomerByCloser:false,
+  fetchingAllCustomerByCloserError:false,
+
+  fetchingCommercialsByCustomer: false,
+  fetchingCommercialsByCustomerError: false,
+  commercialsByCustomerId: [],
+
+  linkedProjectTask:false,
+  linkedProjectTaskError:false,
+  linkedcustomerProjectTask:[],
+
+  addingCommercials: false,
+  addingCommercialsError: false,
+
+  addingCustomerOpportunity: false,
+  addingCustomerOpportunityError: false,
+  addingCustomerOpportunityModal: false,
+
+  addingInvoice: false,
+  addingInvoiceError: false,
+
+  fetchingInvoiceByCustomer: false,
+  fetchingInvoiceByCustomerError: false,
+  invoiceByCustomerId: [],
+
+  fetchingCustomerCloser:false,
+  fetchingCustomerCloserError:false,
+  customerCloser:[],
+
+  //search
+  fetchingCustomerInputSearchData: false,
+  fetchingCustomerInputSearchDataError: false,
+  inputData: [],
+
+  addingNotesByCustomerId: false,
+  addingNotesByCustomerIdError: false,
+
+ 
+
+  //SHARE Contact Permission of customer
+  addSharingCustomer: false,
+  addSharingCustomerError: false,
+
+  fetchingPermissionsListCustomer: false,
+  fetchingPermissionsListCustomerError: false,
+  permissionsDataListCustomer: [],
+
+  fetchingRecordsByUserId: false,
+  fetchingRecordsByUserIdError: false,
+  recordData: {},
+
+  addingInitiativeByCustomerId:false,
+  addingInitiativeByCustomerIdError:false,
+
+  addingInitiatives: false,
+  addingInitiativesError: false,
+  
+
+  fetchingInitiativeByCustomerId: false,
+  fetchingInitiativeByCustomerIdError: false,
+  topicsByCustomerId: [],
+
+  deleteInitiativeData: false,
+  deleteInitiativeDataError: false,
+
+  fetchingInitiatives: false,
+  fetchingInitiativesError: false,
+  initiatives:[],
+
+  addRecruitModal: false,
+
+  addFileRecruitModal: false,
+
+  addTagProfileModal: false,
+
+  linkingRecruitToCustomer: false,
+  linkingRecruitToCustomerError: false,
+
+  fetchingCustomersData:false,
+  fetchingCustomersDataError:false,
+  customerData:[],
+
+  fetchingRecruitToCustomer: false,
+  fetchingRecruitToCustomerError: false,
+  recruitByCustomerId: [],
+
+  linkingProfileToCustomer: false,
+  linkingProfileToCustomerError: false,
+  profileRecruit: [],
+
+  fetchingAllCustomerByAlphabet:false,
+  fetchingAllCustomerByAlphabetError:false,
+
+  fetchingCustomersList:false,
+  fetchingCustomersListError:false,
+  customerByList:[],
+
+ 
+
+  addingRecruitmentProfile: false,
+  addingRecruitmentProfileError: false,
+
+  updateCustomerContactById: false,
+  updateCustomerContactByIdError: false,
+
+
+  fetchingCustomerPagination:false,
+  fetchingCustomerPaginationError:false,
+
+  currentRecruitmentData: {},
+  addSponsorModal: false,
+
+  updatingCustomerOpportunity: false,
+  updatingCustomerOpportunityError: false,
+  addCustomerOpportunityModal: false,
+
+  addCustomerProjectDrawer:false,
+  customeropportunityByUserId: [],
+  addUpdateCustomerOpportunityModal: false,
+  setEditingCustomerOpportunity: {},
+  setEditingCustomerInitiative:{},
+
+  setEditingCustomerContact:{},
+  addUpdateCustomerContactModal:false,
+
+  puttingCustContcToggle: false,
+  puttingCustContcToggleError: false,
+
+  fetchingCustomersCategory: false,
+  fetchingCustomersCategoryError: false,
+  customerByCategory: [],
+
+  fetchingCustomerKeySkill: false,
+  fetchingCustomerKeySkillError: false,
+  customerKeySkill: {},
+
+  fetchingCategoryRecords: false,
+  fetchingCategoryRecordsError: false,
+  recordCategoryData: "",
+  recordCategoryDataBlue: "",
+
+  updatingCustomerOwenership: false,
+  updatingCustomerOwenershipError: false
+
+
+};
+
+export const customerReducer = (state = initialState, action) => {
+  switch (action.type) {
+    /**
+     * handle Customer form modal
+     */
+    case types.HANDLE_CUSTOMER_MODAL:
+      return { ...state, addCustomerModal: action.payload };
+
+      case types.EMPTY_CUSTOMER_TABLE:
+        return { ...state, customerByUserId:[] };
+    case types.HANDLE_CUSTOMER_CONTACT_MODAL:
+      return { ...state, addCustomerContactModal: action.payload };
+
+    case types.ADD_CUSTOMER_REQUEST:
+      return { ...state, addingCustomer: true };
+    case types.ADD_CUSTOMER_SUCCESS:
+      return { ...state, 
+        addingCustomer: false, 
+        addCustomerModal: false ,
+        customerByUserId:[action.payload,...state.customerByUserId]
+        // customerByUserId: state.customerByUserId.map((item) => {
+        //   if (item.customerId === action.payload.customerId) {
+        //     return action.payload;
+        //   } else {
+        //     return item;
+        //   }
+        // }),
+      };
+    case types.ADD_CUSTOMER_FAILURE:
+      return { ...state, addingCustomer: false, addCustomerModal: false };
+
+    case types.GET_CUSTOMERS_REQUEST:
+      return { ...state, fetchingCustomers: true };
+    case types.GET_CUSTOMERS_SUCCESS:
+      return {
+        ...state,
+        fetchingCustomers: false,
+        // customerByUserId: action.payload,
+
+        customerByUserId: [
+          ...state.customerByUserId,
+          ...action.payload],
+      
+      };
+    case types.GET_CUSTOMERS_FAILURE:
+      return {
+        ...state,
+        fetchingCustomers: false,
+        fetchingCustomersError: true,
+      };
+
+    case types.GET_CUSTOMER_BY_ID_REQUEST:
+      return { ...state, fetchingCustomerById: true };
+    case types.GET_CUSTOMER_BY_ID_SUCCESS:
+      return {
+        ...state,
+        fetchingCustomerById: false,
+        customerById: action.payload,
+      };
+    case types.GET_CUSTOMER_BY_ID_FAILURE:
+      return {
+        ...state,
+        fetchingCustomerById: false,
+        fetchingCustomerByIdError: true,
+      };
+
+    //Customer Details
+    case types.GET_CUSTOMER_DETAILS_BY_ID_REQUEST:
+      return { ...state, fetchingCustomerDetailsById: true };
+    case types.GET_CUSTOMER_DETAILS_BY_ID_SUCCESS:
+      return {
+        ...state,
+        fetchingCustomerDetailsById: false,
+        customer: action.payload,
+      };
+    case types.GET_CUSTOMER_DETAILS_BY_ID_FAILURE:
+      return {
+        ...state,
+        fetchingCustomerDetailsById: false,
+        fetchingCustomerDetailsByIdError: true,
+      };
+
+    case types.HANDLE_DOCUMENT_UPLOAD_MODAL:
+      return { ...state, documentUploadModal: action.payload };
+    case types.HANDLE_INVOICE_MODAL:
+      return { ...state, invoiceModal: action.payload };
+    case types.DELETE_DOCUMENT_REQUEST:
+      return { ...state, deleteDocument: true };
+    case types.DELETE_DOCUMENT_SUCCESS:
+      return {
+        ...state,
+        deleteTask: false,
+        documentsByCustomerId: state.documentsByCustomerId.filter(
+          (item) => item.documentId !== action.payload
+        ),
+      };
+    case types.DELETE_DOCUMENT_FAILURE:
+      return { ...state, deleteDocument: false, deleteDocumentError: false };
+
+    /**
+     * Customer Notes
+     */
+
+    case types.GET_NOTES_LIST_BY_CUSTOMER_ID_REQUEST:
+      return { ...state, fetchingNotesListByCustomerId: true };
+    case types.GET_NOTES_LIST_BY_CUSTOMER_ID_SUCCESS:
+      return {
+        ...state,
+        fetchingNotesListByCustomerId: false,
+        notesListByCustomerId: action.payload,
+      };
+    case types.GET_NOTES_LIST_BY_CUSTOMER_ID_FAILURE:
+      return {
+        ...state,
+        fetchingNotesListByCustomerId: false,
+        fetchingNotesListByCustomerIdError: true,
+      };
+
+    case types.HANDLE_UPDATE_CUSTOMER_MODAL:
+      return { ...state, updateCustomerModal: action.payload };
+
+      case types.HANDLE_UPDATE_CUSTOMER_INITIATIVE_MODAL:
+      return { ...state, updateCustomerInitiativeModal: action.payload };
+
+    case types.SET_CUSTOMER_EDIT:
+      return { ...state, setEditingCustomer: action.payload };
+
+
+      case types.SET_CUSTOMER_CARD_EDIT:
+        return { ...state, setEditingCustomerCard: action.payload };
+  
+
+      case types.CHANGE_SELECTED_TODO_TIME_INTERVAL_REPORT:
+        return {
+          ...state,
+          dateTodoRangeList: newDateRange(state.dateTodoRangeList, action.payload),
+         // isCustomSelected: false,
+          startDate: action.payload.startDate,
+          endDate: action.payload.endDate,
+          type: action.payload.type
+        };
+
+    case types.UPDATE_CUSTOMER_BY_ID_REQUEST:
+      return { ...state, updateCustomerById: true };
+    case types.UPDATE_CUSTOMER_BY_ID_SUCCESS:
+      return {
+        ...state,
+        updateCustomerById: false,
+        updateCustomerModal: false,
+        customerByUserId: state.customerByUserId.map((item) => {
+          if (item.customerId === action.payload.customerId) {
+            return action.payload;
+          } else {
+            return item;
+          }
+        }),
+      };
+    case types.UPDATE_CUSTOMER_BY_ID_FAILURE:
+      return {
+        ...state,
+        updateCustomerById: false,
+        updateCustomerByIdError: true,
+      };
+
+    /*add/link customer document */
+    case types.ADD_CUSTOMER_DOCUMENT_REQUEST:
+      return {
+        ...state,
+        addingDocumentByCustomerId: true,
+        addingDocumentByCustomerIdError: false,
+      };
+    case types.ADD_CUSTOMER_DOCUMENT_SUCCESS:
+      return {
+        ...state,
+        addingDocumentByCustomerId: false,
+        addingDocumentByCustomerIdError: false,
+      };
+    case types.ADD_CUSTOMER_DOCUMENT_FAILURE:
+      return {
+        ...state,
+        addingDocumentByCustomerId: false,
+        addingDocumentByCustomerIdError: true,
+      };
+
+    /*get list of documents of an Customer */
+    case types.GET_CUSTOMER_DOCUMENTS_REQUEST:
+      return {
+        ...state,
+        fetchingDocumentsByCustomerId: true,
+        fetchingDocumentsByCustomerIdError: false,
+      };
+    case types.GET_CUSTOMER_DOCUMENTS_SUCCESS:
+      return {
+        ...state,
+        fetchingDocumentsByCustomerId: false,
+        fetchingDocumentsByCustomerIdError: false,
+        documentsByCustomerId: action.payload,
+      };
+    case types.GET_CUSTOMER_DOCUMENTS_FAILURE:
+      return {
+        ...state,
+        fetchingDocumentsByCustomerId: false,
+        fetchingDocumentsByCustomerIdError: true,
+      };
+
+    /* Get customer opportunity  */
+    case types.GET_CUSTOMER_OPPORTUNITY_REQUEST:
+      return { ...state, fetchingCustomerOpportunity: true };
+    case types.GET_CUSTOMER_OPPORTUNITY_SUCCESS:
+      return {
+        ...state,
+        fetchingCustomerOpportunity: false,
+        opportunityByCustomerId: action.payload,
+      };
+    case types.GET_CUSTOMER_OPPORTUNITY_FAILURE:
+      return {
+        ...state,
+        fetchingCustomerOpportunity: false,
+        fetchingCustomerOpportunityError: true,
+      };
+
+    /* Get a opportunity  */
+    case types.GET_CUSTOMER_CONTACT_REQUEST:
+      return { ...state, fetchingCustomerContact: true };
+    case types.GET_CUSTOMER_CONTACT_SUCCESS:
+      return {
+        ...state,
+        fetchingCustomerContact: false,
+        contactByCustomerId: action.payload,
+      };
+    case types.GET_CUSTOMER_CONTACT_FAILURE:
+      return {
+        ...state,
+        fetchingCustomerContact: false,
+        fetchingCustomerContactError: true,
+      };
+
+    //add contact
+    case types.ADD_CUSTOMER_CONTACT_REQUEST:
+      return { ...state, addingCustomerContact: true };
+    case types.ADD_CUSTOMER_CONTACT_SUCCESS:
+      return {
+        ...state,
+        addingCustomerContact: false,
+        addCustomerContactModal: false,
+        contactByCustomerId:[action.payload,...state.contactByCustomerId]
+      };
+    case types.ADD_CUSTOMER_CONTACT_FAILURE:
+      return {
+        ...state,
+        addingCustomerContactError: false,
+        addCustomerContactModal: false,
+      };
+
+    /* handle Customer Opportunity form modal */
+    case types.HANDLE_CUSTOMER_OPPORTUNITY_MODAL:
+      return { ...state, addCustomerOpportunityModal: action.payload };
+
+      case types.HANDLE_CUSTOMER_PROJECT_DRAWER:
+        return { ...state, addCustomerProjectDrawer: action.payload };
+  
+
+    case types.HANDLE_CUSTOMER_REACT_SPEECH_MODAL:
+      return { ...state, addCustomerSpeechModal: action.payload };
+
+    case types.HANDLE_UPDATE_CUSTOMER_OPPORTUNITY_MODAL:
+      return { ...state, addUpdateCustomerOpportunityModal: action.payload };
+
+      case types.HANDLE_UPDATE_CUSTOMER_CONTACT_MODAL:
+      return { ...state, addUpdateCustomerContactModal: action.payload };
+
+    /* Add a customer opportunity */
+    case types.ADD_CUSTOMER_OPPORTUNITY_REQUEST:
+      return { ...state, addingCustomerOpportunity: true };
+    case types.ADD_CUSTOMER_OPPORTUNITY_SUCCESS:
+      return {
+        ...state,
+        addingCustomerOpportunity: false,
+        addCustomerOpportunityModal: false,
+        // clearbit: null,
+      };
+    case types.ADD_CUSTOMER_OPPORTUNITY_FAILURE:
+      return {
+        ...state,
+        addingCustomerOpportunity: false,
+        addingCustomerOpportunityError: true,
+        addingCustomerOpportunityModal: false,
+      };
+
+    //SEARCH
+    case types.INPUT_CUSTOMER_SEARCH_DATA_REQUEST:
+      return { ...state, fetchingCustomerInputSearchData: true };
+    case types.INPUT_CUSTOMER_SEARCH_DATA_SUCCESS:
+      return {
+        ...state,
+        fetchingCustomerInputSearchData: false,
+        customerByUserId: action.payload,
+        // serachedData: action.payload,
+      };
+    case types.INPUT_CUSTOMER_SEARCH_DATA_FAILURE:
+      return { ...state, fetchingCustomerInputSearchDataError: true };
+
+      case types.HANDLE_CUSTOMER_PROJECT_MODAL:
+        return { ...state, customerProjectModal: action.payload };
+
+
+    //SHARE Contact Customer Permissiom
+    case types.ADD_SHARE_CUSTOMER_PERMISSION_REQUEST:
+      return { ...state, addSharingCustomer: true };
+
+    case types.ADD_SHARE_CUSTOMER_PERMISSION_SUCCESS:
+      return { ...state, addSharingCustomer: false, customerByUserId: action.payload };
+
+    case types.ADD_SHARE_CUSTOMER_PERMISSION_FAILURE:
+      return {
+        ...state,
+        addSharingCustomer: false,
+        addSharingCustomerError: true,
+      };
+
+
+    case types.GET_PERMISSIONS_LIST_CUSTOMER_REQUEST:
+      return { ...state, fetchingPermissionsListCustomer: true };
+    case types.GET_PERMISSIONS_LIST_CUSTOMER_SUCCESS:
+      return {
+        ...state,
+        fetchingPermissionsListCustomer: false,
+        permissionsDataListCustomer: action.payload,
+      };
+    case types.GET_PERMISSIONS_LIST_CUSTOMER_FAILURE:
+      return {
+        ...state,
+        fetchingPermissionsListCustomer: false,
+        fetchingPermissionsListCustomerError: false,
+      };
+
+    //get All Customers
+    case types.GET_ALL_CUSTOMERS_REQUEST:
+      return { ...state, fetchingAllCustomers: true };
+    case types.GET_ALL_CUSTOMERS_SUCCESS:
+      return {
+        ...state,
+        fetchingAllCustomers: false,
+        customerByUserId: action.payload,
+      };
+    case types.GET_ALL_CUSTOMERS_FAILURE:
+      return {
+        ...state,
+        fetchingAllCustomers: false,
+        fetchingAllCustomersError: true,
+      };
+
+    case types.GET_RECORDS_REQUEST:
+      return { ...state, fetchingRecordsByUserId: true };
+    case types.GET_RECORDS_SUCCESS:
+      return {
+        ...state,
+        fetchingRecordsByUserId: false,
+        recordData: action.payload,
+      };
+    case types.GET_RECORDS_FAILURE:
+      return {
+        ...state,
+        fetchingRecordsByUserId: false,
+        fetchingRecordsByUserIdError: true,
+      };
+
+    // Add Recruit Modal
+    case types.HANDLE_RECRUIT_MODAL:
+      return { ...state, addRecruitModal: action.payload };
+
+    // Add Profile Modal
+    case types.HANDLE_TAGPROFILE_MODAL:
+      return { ...state, addTagProfileModal: action.payload };
+
+
+
+    //add recruit
+    case types.LINK_RECRUIT_TO_CUSTOMER_REQUEST:
+      return {
+        ...state,
+        linkingRecruitToCustomer: true,
+      };
+    case types.LINK_RECRUIT_TO_CUSTOMER_SUCCESS:
+      return {
+        ...state,
+        linkingRecruitToCustomer: false,
+
+        addRecruitModal: false,
+      };
+    case types.LINK_RECRUIT_TO_CUSTOMER_FAILURE:
+      return {
+        ...state,
+        linkingRecruitToCustomer: false,
+        linkingRecruitToCustomerError: true,
+      };
+
+    //get recruit
+    case types.GET_RECRUIT_TO_CUSTOMER_REQUEST:
+      return {
+        ...state,
+        fetchingRecruitToCustomer: true,
+      };
+    case types.GET_RECRUIT_TO_CUSTOMER_SUCCESS:
+      return {
+        ...state,
+        fetchingRecruitToCustomer: false,
+        recruitByCustomerId: action.payload,
+      };
+    case types.GET_RECRUIT_TO_CUSTOMER_FAILURE:
+      return {
+        ...state,
+        fetchingRecruitToCustomer: false,
+        fetchingRecruitToCustomerError: true,
+      };
+
+
+    case types.LINK_PROFILE_TO_CUSTOMER_REQUEST:
+      return {
+        ...state,
+        linkingProfileToCustomer: true,
+      };
+
+    case types.LINK_PROFILE_TO_CUSTOMER_SUCCESS:
+      return {
+        ...state,
+        linkingProfileToCustomer: false,
+        profileRecruit: action.payload,
+      };
+
+    case types.LINK_PROFILE_TO_CUSTOMER_FAILURE:
+      return {
+        ...state,
+        linkingProfileToCustomer: false,
+        linkingProfileToCustomerError: true,
+      };
+
+    case types.ADD_RECRUITMENT_PROFILE_REQUEST:
+      return {
+        ...state,
+        addingRecruitmentProfile: true,
+      };
+    case types.ADD_RECRUITMENT_PROFILE_SUCCESS:
+      return {
+        ...state,
+        addingRecruitmentProfile: false,
+        addTagProfileModal: false,
+      };
+    case types.ADD_RECRUITMENT_PROFILE_FAILURE:
+      return {
+        ...state,
+        addingRecruitmentProfile: false,
+        addingRecruitmentProfileError: true,
+      };
+
+
+      
+    
+
+    case types.SET_CURRENT_RECRUITMENT_DATA:
+      return { ...state, currentRecruitmentData: action.payload };
+
+    case types.HANDLE_SELECT_SPONSOR_MODAL:
+      return { ...state, addSponsorModal: action.payload };
+
+    case types.UPDATE_CUSTOMER_OPPORTUNITY_REQUEST:
+      return { ...state, updatingCustomerOpportunity: true };
+    case types.UPDATE_CUSTOMER_OPPORTUNITY_SUCCESS:
+      return {
+        ...state,
+        updatingCustomerOpportunity: false,
+        // addCustomerOpportunityModal: false,
+        addUpdateCustomerOpportunityModal: false,
+        opportunityByCustomerId: state.opportunityByCustomerId.map((item) => {
+          if (item.opportunityId === action.payload.opportunityId) {
+            return action.payload;
+          } else {
+            return item;
+          }
+        }),
+      };
+
+    case types.UPDATE_CUSTOMER_OPPORTUNITY_FAILURE:
+      return {
+        ...state,
+        updatingCustomerOpportunity: true,
+        updatingCustomerOpportunityError: false,
+        // addCustomerOpportunityModal: false,
+      };
+
+    case types.SET_EDIT_CUSTOMER_OPPORTUNITY:
+      return { ...state, setEditingCustomerOpportunity: action.payload };
+      case types.SET_EDIT_CUSTOMER_INITIATIVE:
+        return { ...state, setEditingCustomerInitiative: action.payload };
+
+
+      case types.SET_EDIT_CUSTOMER_CONTACT:
+      return { ...state, setEditingCustomerContact: action.payload };
+    // Add File Recruit Modal
+    case types.HANDLE_FILE_RECRUIT_MODAL:
+      return { ...state, addFileRecruitModal: action.payload };
+
+    case types.ADD_ATTENDENCE_REQUEST:
+      return { ...state, addingAttendence: true };
+    case types.ADD_ATTENDENCE_SUCCESS:
+      return { ...state, addingAttendence: false, };
+    case types.ADD_ATTENDENCE_FAILURE:
+      return { ...state, addingAttendence: false, };
+
+    case types.PUT_CUSTO_CONTACT_TOGGLE_REQUEST:
+      return {
+        ...state,
+        puttingCustContcToggle: true,
+      };
+    case types.PUT_CUSTO_CONTACT_TOGGLE_SUCCESS:
+      return {
+        ...state,
+        puttingCustContcToggle: false,
+        contactByCustomerId: state.contactByCustomerId.map((item) => {
+          if (item.customerId === action.payload.customerId) {
+            return { ...item, instockInd: action.payload.instockInd }
+          }
+          else {
+            return item
+          }
+
+        })
+      };
+    case types.PUT_CUSTO_CONTACT_TOGGLE_FAILURE:
+      return {
+        ...state,
+        puttingCustContcToggle: false,
+        puttingCustContcToggleError: true,
+      };
+
+    case types.SET_CUSTOMER_VIEW_TYPE:
+      return { ...state, viewType: action.payload };
+
+    case types.GET_CUSTOMERS_BY_CATEGORY_REQUEST:
+      return { ...state, fetchingCustomersCategory: true };
+    case types.GET_CUSTOMERS_BY_CATEGORY_SUCCESS:
+      return {
+        ...state,
+        fetchingCustomersCategory: false,
+        customerByCategory: action.payload,
+      };
+    case types.GET_CUSTOMERS_BY_CATEGORY_FAILURE:
+      return {
+        ...state,
+        fetchingCustomersCategory: false,
+        fetchingCustomersCategoryError: true,
+      };
+
+    case types.GET_CATEGORY_RECORDS_REQUEST:
+      return { ...state, fetchingCategoryRecords: true };
+    case types.GET_CATEGORY_RECORDS_SUCCESS:
+      return {
+        ...state,
+        fetchingCategoryRecords: false,
+        recordCategoryData: action.payload,
+      };
+    case types.GET_CATEGORY_RECORDS_BLUE_SUCCESS:
+      return {
+        ...state,
+        fetchingCategoryRecords: false,
+        recordCategoryDataBlue: action.payload,
+      };
+    case types.GET_CATEGORY_RECORDS_FAILURE:
+      return {
+        ...state,
+        fetchingCategoryRecords: false,
+        fetchingCategoryRecordsError: true,
+      };
+
+    //ADD COMMERCIALS
+
+    case types.ADD_COMMERCIALS_BY_CUSTOMER_ID_REQUEST:
+      return {
+        ...state,
+        addingCommercials: true,
+      };
+    case types.ADD_COMMERCIALS_BY_CUSTOMER_ID_SUCCESS:
+      return {
+        ...state,
+        addingCommercials: false,
+      };
+    case types.ADD_COMMERCIALS_BY_CUSTOMER_ID_FAILURE:
+      return {
+        ...state,
+        addingCommercials: false,
+        addingCommercialsError: true,
+      };
+    // GET CUSTOMER COMMERCIALS DETAILS
+    case types.GET_COMMERCIALS_BY_CUSTOMER_ID_REQUEST:
+      return {
+        ...state,
+        fetchingCommercialsByCustomer: true
+      };
+    case types.GET_COMMERCIALS_BY_CUSTOMER_ID_SUCCESS:
+      return {
+        ...state,
+        fetchingCommercialsByCustomer: false,
+        commercialsByCustomerId: action.payload,
+      };
+    case types.GET_COMMERCIALS_BY_CUSTOMER_ID_FAILURE:
+      return {
+        ...state,
+        fetchingCommercialsByCustomer: false,
+        fetchingCommercialsByCustomerError: true,
+      };
+
+
+    //ADD INVOICE
+
+    case types.ADD_INVOICE_BY_CUSTOMER_ID_REQUEST:
+      return {
+        ...state,
+        addingInvoice: true,
+      };
+    case types.ADD_INVOICE_BY_CUSTOMER_ID_SUCCESS:
+      return {
+        ...state,
+        addingInvoice: false,
+      };
+    case types.ADD_INVOICE_BY_CUSTOMER_ID_FAILURE:
+      return {
+        ...state,
+        addingInvoice: false,
+        addingInvoiceError: true,
+      };
+    // GET INVOICE DETAILS
+    case types.GET_INVOICE_BY_CUSTOMER_ID_REQUEST:
+      return {
+        ...state,
+        fetchingInvoiceByCustomer: true
+      };
+    case types.GET_INVOICE_BY_CUSTOMER_ID_SUCCESS:
+      return {
+        ...state,
+        fetchingInvoiceByCustomer: false,
+        invoiceByCustomerId: action.payload,
+      };
+    case types.GET_INVOICE_BY_CUSTOMER_ID_FAILURE:
+      return {
+        ...state,
+        fetchingInvoiceByCustomer: false,
+        fetchingInvoiceByCustomerError: true,
+      };
+
+    case types.UPDATE_CUSTOMER_OWNERSHIP_REQUEST:
+      return { ...state, updatingCustomerOwenership: true };
+    case types.UPDATE_CUSTOMER_OWNERSHIP_SUCCESS:
+      return {
+        ...state,
+        updatingCustomerOwenership: false,
+        // updateCandidateEmploymentModal: false,
+        employmentDetails: state.employmentDetails.map((employment, i) => {
+          if (employment.id === action.payload.id) {
+            return action.payload;
+          } else {
+            return employment;
+          }
+        }),
+      };
+    case types.UPDATE_CUSTOMER_OWNERSHIP_SUCCESS:
+      return {
+        ...state,
+        updatingCustomerOwenership: false,
+        updatingCustomerOwenershipError: true,
+      };
+
+    case types.ADD_CUSTOMER_NOTES_REQUEST:
+      return {
+        ...state,
+        addingNotesByCustomerId: true,
+      };
+    case types.ADD_CUSTOMER_NOTES_SUCCESS:
+      return {
+        ...state,
+        addingNotesByCustomerId: false,
+        addingNotesByCustomerId: false,
+        addCustomerSpeechModal: false,
+      };
+    case types.ADD_CUSTOMER_NOTES_FAILURE:
+      return {
+        ...state,
+        addingNotesByCustomerId: false,
+        addingNotesByContactIdError: true,
+      };
+    case types.HANDLE_CUSTOMER_DRAWER_MODAL:
+      return { ...state, 
+        // addDrawerCustomerModal: action.payload 
+        addDrawerCustomerModal: action.payload.isVisible,
+        customerDrawerProps: action.payload.props,
+      };
+
+      case types.HANDLE_UPDATE_CUSTOMER_DRAWER_MODAL:
+        return { ...state, 
+          // addDrawerCustomerModal: action.payload 
+          updateDrawerCustomerModal: action.payload.isVisible,
+          updateCustomerDrawerProps: action.payload.props,
+        };
+  
+
+    case types.GET_CUSTOMER_KEY_SKILL_REQUEST:
+      return {
+        ...state,
+        fetchingCustomerKeySkill: true,
+        fetchingCustomerKeySkillError: false,
+      };
+    case types.GET_CUSTOMER_KEY_SKILL_SUCCESS:
+      return {
+        ...state,
+        fetchingCustomerKeySkill: false,
+        //fetchingCustomerKeySkillError: false,
+        customerKeySkill: action.payload,
+      };
+    case types.GET_CUSTOMER_KEY_SKILL_FAILURE:
+      return {
+        ...state,
+        fetchingCustomerKeySkill: false,
+        fetchingCustomerKeySkillError: true,
+      };
+
+    case types.SET_CLEARBIT_DATA:
+      return { ...state, clearbit: action.payload };
+
+      case types.UPDATE_CUSTOMER_CONTACT_BY_ID_REQUEST:
+        return { ...state, updateCustomerContactById: true };
+      case types.UPDATE_CUSTOMER_CONTACT_BY_ID_SUCCESS:
+        return {
+          ...state,
+          updateCustomerContactById: false,
+          addUpdateCustomerContactModal: false,
+          contactByCustomerId: state.contactByCustomerId.map((item) => {
+            if (item.contactId === action.payload.contactId) {
+              return action.payload;
+            } else {
+              return item;
+            }
+          }),
+        };
+
+
+        case types.GET_CUSTOMERS_DATA_REQUEST:
+          return { ...state, fetchingCustomersData: true };
+        case types.GET_CUSTOMERS_DATA_SUCCESS:
+          return {
+            ...state,
+            fetchingCustomersData: false,
+             customerData: action.payload,
+    
+           
+          
+          };
+        case types.GET_CUSTOMERS_DATA_FAILURE:
+          return {
+            ...state,
+            fetchingCustomersData: false,
+            fetchingCustomersDataError: true,
+          };
+      case types.UPDATE_CUSTOMER_CONTACT_BY_ID_FAILURE:
+        return {
+          ...state,
+          updateCustomerContactById: false,
+          updateCustomerContactByIdError: true,
+        };
+        case types.ADD_INITIATIVE_BY_CUSTOMER_ID_REQUEST:
+          return { ...state, addingInitiativeByCustomerId: true };
+        case types.ADD_INITIATIVE_BY_CUSTOMER_ID_SUCCESS:
+          // console.clear()
+          // console.log(action.payload)
+          return {
+            ...state,
+            addingInitiativeByCustomerId: false,
+           // topicsByCustomerId: [...state.topicsByCustomerId, action.payload],
+          };
+        case types.ADD_INITIATIVE_BY_CUSTOMER_ID_FAILURE:
+          return {
+            ...state,
+            addingInitiativeByCustomerId: false,
+            addingInitiativeByCustomerIdError: true,
+          };
+          
+          case types.GET_INITIATIVE_BY_CUSTOMER_ID_REQUEST:
+            return { ...state, fetchingInitiativeByCustomerId: true };
+          case types.GET_INITIATIVE_BY_CUSTOMER_ID_SUCCESS:
+            return {
+              ...state,
+              fetchingInitiativeByCustomerId: false,
+              topicsByCustomerId: action.payload,
+            };
+          case types.GET_INITIATIVE_BY_CUSTOMER_ID_FAILURE:
+            return {
+              ...state,
+              fetchingInitiativeByCustomerId: false,
+              fetchingInitiativeByCustomerIdError: true,
+            };
+
+            case types.DELETE_TOPIC_BY_CUSTOMER_ID_REQUEST:
+              return { ...state, deletingTopicByCustomerId: true };
+            case types.DELETE_TOPIC_BY_CUSTOMER_ID_SUCCESS:
+              return { ...state, deletingTopicByCustomerId: false };
+            case types.DELETE_TOPIC_BY_CUSTOMER_ID_FAILURE:
+              return {
+                ...state,
+                deletingTopicByCustomerId: false,
+                deletingTopicByCustomerIdError: true,
+              };
+
+
+              case types.GET_CUSTOMER_PROJECT_REQUEST:
+                return { ...state, fetchingCustomerProject: true }
+              case types.GET_CUSTOMER_PROJECT_SUCCESS:
+                return {
+                  ...state,
+                  fetchingCustomerProject: false,
+                   customerProject: action.payload,
+          
+                 
+                
+                };
+              case types.GET_CUSTOMER_PROJECT_FAILURE:
+                return {
+                  ...state,
+                  fetchingCustomerProject: false,
+                  fetchingCustomerProjectError: true,
+                };
+
+
+               //get recruit
+    case types.GET_CUSTOMER_RECRUIT_REQUEST:
+      return {
+        ...state,
+        fetchingCustomerRecruit: true,
+      };
+    case types.GET_CUSTOMER_RECRUIT_SUCCESS:
+      return {
+        ...state,
+        fetchingCustomerRecruit: false,
+        customerRecruit: action.payload,
+      };
+    case types.GET_CUSTOMER_RECRUIT_FAILURE:
+      return {
+        ...state,
+        fetchingCustomerRecruit: false,
+        fetchingCustomerRecruitError: true,
+      };
+
+
+      case types.GET_LATEST_CUSTOMER_REQUEST:
+        return { ...state, fetchinglatestCustomer: true };
+      case types.GET_LATEST_CUSTOMER_SUCCESS:
+        return {
+          ...state,
+          fetchinglatestCustomer: false,
+          latestCustomer: action.payload,
+        };
+        case types.GET_LATEST_CUSTOMER_FAILURE:
+          return {
+            ...state,
+            fetchinglatestCustomer: false,
+            fetchinglatestCustomerError: true,
+          };
+
+          case types.GET_CUSTOMER_REQUIREMENT_REQUEST:
+            return {
+              ...state,
+              fetchingCustomerRequirement: true,
+            };
+          case types.GET_CUSTOMER_REQUIREMENT_SUCCESS:
+            return {
+              ...state,
+              fetchingCustomerRequirement: false,
+              customerRequirement: action.payload,
+            };
+          case types.GET_CUSTOMER_REQUIREMENT_FAILURE:
+            return {
+              ...state,
+              fetchingCustomerRequirement: false,
+              fetchingCustomerRequirementError: true,
+            };
+
+
+            
+          case types.GET_CUSTOMER_CLOSER_REQUEST:
+            return {
+              ...state,
+              fetchingCustomerCloser: true,
+            };
+          case types.GET_CUSTOMER_CLOSER_SUCCESS:
+            return {
+              ...state,
+              fetchingCustomerCloser: false,
+              customerCloser: action.payload,
+            };
+          case types.GET_CUSTOMER_CLOSER_FAILURE:
+            return {
+              ...state,
+              fetchingCustomerCloser: false,
+              fetchingCustomerCloserError: true,
+            };
+
+            case types.UPDATE_CUSTOMER_INITIATIVE_REQUEST:
+              return { ...state, updateCustomerInitiatives: true };
+            case types.UPDATE_CUSTOMER_INITIATIVE_SUCCESS:
+              return {
+                ...state,
+                updateCustomerInitiatives: false,
+                updateCustomerInitiativeModal: false,
+                initiatives: state.initiatives.map((item) => {
+                  if (item.initiativeDetailsId === action.payload.initiativeDetailsId) {
+                    return action.payload;
+                  } else {
+                    return item;
+                  }
+                }),
+              };
+            case types.UPDATE_CUSTOMER_INITIATIVE_FAILURE:
+              return {
+                ...state,
+                updateCustomerInitiatives: false,
+                updateCustomerInitiativesError: true,
+              };
+
+
+            case types.GET_ALL_CUSTOMER_BY_ALPHABET_REQUEST:
+              return { ...state, fetchingAllCustomerByAlphabet: true };
+            case types.GET_ALL_CUSTOMER_BY_ALPHABET_SUCCESS:
+              return {
+                ...state,
+                fetchingAllCustomerByAlphabet: false,
+                latestCustomer: [...action.payload],
+              };
+            case types.GET_ALL_CUSTOMER_BY_ALPHABET_FAILURE:
+              return {
+                ...state,
+                fetchingAllCustomerByAlphabet: false,
+                fetchingAllCustomerByAlphabetError: true,
+              };
+
+
+              case types.GET_ALL_CUSTOMER_BY_POSITION_REQUEST:
+                return { ...state, fetchingAllCustomerByPosition: true };
+              case types.GET_ALL_CUSTOMER_BY_POSITION_SUCCESS:
+                return {
+                  ...state,
+                  fetchingAllCustomerByPosition: false,
+                  customerRequirement: [...action.payload],
+                };
+              case types.GET_ALL_CUSTOMER_BY_POSITION_FAILURE:
+                return {
+                  ...state,
+                  fetchingAllCustomerByPosition: false,
+                  fetchingAllCustomerByPositionError: true,
+                };
+
+                case types.GET_ALL_CUSTOMER_BY_CLOSER_REQUEST:
+                  return { ...state, fetchingAllCustomerByCloser: true };
+                case types.GET_ALL_CUSTOMER_BY_CLOSER_SUCCESS:
+                  return {
+                    ...state,
+                    fetchingAllCustomerByCloser: false,
+                    customerCloser: [...action.payload],
+                  };
+                case types.GET_ALL_CUSTOMER_BY_CLOSER_FAILURE:
+                  return {
+                    ...state,
+                    fetchingAllCustomerByCloser: false,
+                    fetchingAllCustomerByCloserError: true,
+                  };
+
+
+                  case types.HANDLE_CUSTOMER_EMAIL_DRAWER_MODAL:
+                    return { ...state, addDrawerCustomerEmailModal: action.payload };
+
+
+                    case types.ADD_INITIATIVES_REQUEST:
+                      return { ...state, addingInitiatives: true };
+                    case types.ADD_INITIATIVES_SUCCESS:
+                      return {
+                        ...state,
+                        addingInitiatives: false,
+                      };
+                    case types.ADD_INITIATIVES_FAILURE:
+                      return {
+                        ...state,
+                        addingInitiatives: false,
+                        addingInitiativesError: true,
+                      };
+
+
+                      case types.GET_INITIATIVES_REQUEST:
+                        return { ...state, fetchingInitiatives: true };
+                      case types.GET_INITIATIVES_SUCCESS:
+                        return {
+                          ...state,
+                          fetchingInitiatives: false,
+                          initiatives: action.payload,
+                        };
+                      case types.GET_INITIATIVES_FAILURE:
+                        return {
+                          ...state,
+                          fetchingInitiatives: false,
+                          fetchingInitiativesError: true,
+                        };
+
+                        case types.DELETE_INITIATIVE_DATA_REQUEST:
+                          return { ...state, deleteInitiativeData: true };
+                        case types.DELETE_INITIATIVE_DATA_SUCCESS:
+                          return {
+                            ...state,
+                            deleteInitiativeData: false,
+                            // initiatives:action.payload,
+                            
+                            initiatives: state.initiatives.filter(
+                             // console.log("item",item),
+                              (item) => item.initiativeDetailsId !== action.payload,
+                             
+                            ),
+                          };
+                        case types.DELETE_INITIATIVE_DATA_FAILURE:
+                          return { ...state, 
+                            deleteInitiativeData: false,
+                            deleteInitiativeDataError: true };
+
+
+
+                            case types.GET_CUSTOMER_PAGINATION_REQUEST:
+                              return { ...state, fetchingCustomerPagination: true };
+                            case types.GET_CUSTOMER_PAGINATION_SUCCESS:
+                              return {
+                                ...state,
+                                fetchingCustomerPagination: false,
+                                // partnerPagination: [
+                                //   ...state.partnerPagination,
+                                //   ...action.payload],
+                                customerByUserId:action.payload,
+                              };
+                            case types.GET_CUSTOMER_PAGINATION_FAILURE:
+                              return {
+                                ...state,
+                                fetchingCustomerPagination: false,
+                                fetchingCustomerPaginationError: true,
+                              };
+
+
+                              case types.GET_CUSTOMERS_LIST_REQUEST:
+                                return { ...state, fetchingCustomersList: true };
+                              case types.GET_CUSTOMERS_LIST_SUCCESS:
+                                return {
+                                  ...state,
+                                  fetchingCustomersList: false,
+                                   customerByList: action.payload,
+                          
+                                 
+                                
+                                };
+                              case types.GET_CUSTOMERS_LIST_FAILURE:
+                                return {
+                                  ...state,
+                                  fetchingCustomersList: false,
+                                  fetchingCustomersListError: true,
+                                };
+
+
+
+
+
+                                case types.LINKED_PROJECT_TASK_REQUEST:
+                                  return { ...state, linkedProjectTask: true }
+                                case types.LINKED_PROJECT_TASK_SUCCESS:
+                                  return {
+                                    ...state,
+                                    linkedProjectTask: false,
+                                     linkedcustomerProjectTask: action.payload,
+                            
+                                   
+                                  
+                                  };
+                                case types.LINKED_PROJECT_TASK_FAILURE:
+                                  return {
+                                    ...state,
+                                    linkedProjectTask: false,
+                                    linkedProjectTaskError: true,
+                                  };
+                  
+                      
+
+    default:
+      return state;
+  }
+};
+
+
+const newDateRange = (dateRange, newDate) =>
+  dateRange.map((range) => {
+    console.log(newDate);
+    if (range.id === newDate.id) {
+      return { ...range, isSelected: true };
+    } else {
+      return { ...range, isSelected: false };
+    }
+  });
+
+
+
+
+
+
+
+
+
+
+
+
+
+

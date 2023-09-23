@@ -1,0 +1,27 @@
+import React, { Component } from "react";
+import {
+  Title,
+  SubTitle,
+  MultiAvatar,
+} from "../../../../../../../../Components/UI/Elements";
+
+ import CandidateCatagory from "./CandidateCatagory";
+class CandidateCatagoryView extends Component {
+  render() {
+    const { candidate, toggleViewType, notAdd } = this.props;
+    console.log(candidate);
+    return (
+      <>
+        {/* <Title
+          fontSize="0.8125em"
+          style={{ fontWeight: 600, marginBottom: "0.2rem" }}
+        >
+          Category {" "}
+        </Title> */}
+         <CandidateCatagory candidate={candidate} /> 
+      </>
+    );
+  }
+}
+
+export default CandidateCatagoryView;

@@ -1,0 +1,212 @@
+import React, { Component, lazy, Suspense } from "react";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import { Button, message, Tooltip, Popover, Icon } from "antd";
+import { FormattedMessage } from "react-intl";
+import ListAltIcon from '@mui/icons-material/ListAlt';
+import { StyledModal, StyledTabs } from "../../../Components/UI/Antd";
+//import CloudIcon from '@mui/icons-material/Cloud';
+import {
+  FlexContainer,
+  TabsWrapper,
+} from "../../../Components/UI/Layout";
+//import AdsClickIcon from '@mui/icons-material/AdsClick';
+//import ActionNotification from "../Dashboard/ActionNotification"
+//import HighlightAltIcon from '@mui/icons-material/HighlightAlt';
+import TipsAndUpdatesIcon from '@mui/icons-material/TipsAndUpdates';
+
+// import { getTimeLineDataByOpportunityId } from "../../../OpportunityAction";
+//import { ActionIcon } from "../../Components/Utils";
+//import { AddPopover } from "../../Components/Common";
+
+// import { handleLinkPartnerModal } from "../../../../Partner/PartnerAction";
+import { BundleLoader } from "../../../Components/Placeholder";
+
+//import { Breadcrumb, Alert } from "antd";
+import DnsIcon from '@mui/icons-material/Dns';
+//import DashboardTodo from "./Child/DashboardTodo";
+import OpportunityRequirementBoard from "./OpportunityRequirementBoard";
+import Details from "./Details";
+
+
+const TabPane = StyledTabs.TabPane;
+function handleRefreshPage() {
+  window.location.reload();
+}
+class DashboardDetails extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      activeKey: "1",
+      contactPopover: false,
+      partnerPopover: false,
+      quotProPopover: false,
+      deliveryProPopover: false,
+      breadCumb: false,
+      candidateRequirement:"",
+      visibleModal: false,
+      recriutmentdashboard: false,
+      currentTabName: "",
+      currentTabId: "",
+      customField: [],
+      ganttChart: false,
+      costId: "",
+    };
+  }
+
+  handleContactPopoverVisibleChange = () =>
+    this.setState({ contactPopover: !this.state.contactPopover });
+  handlepartnerPopoverVisibleChange = () =>
+    this.setState({ partnerPopover: !this.state.partnerPopover });
+  handleTabChange = (key) => {
+    this.setState({ activeKey: key });
+    // if (key === "1") {
+    //   this.props.getQuotation(this.props.opportunity.opportunityId);
+    // }
+  };
+  render() {
+    const { activeKey } = this.state;
+    return (
+      <>
+        {/* <OpportunityStatsCard opportunity={opportunity} /> */}
+        <TabsWrapper>
+          <StyledTabs
+            defaultActiveKey="1"
+            onChange={this.handleTabChange}
+            forceRender={true}
+          >
+
+              <TabPane
+              tab={
+                <>
+
+
+                
+          
+                            <ListAltIcon  />
+                    <span style={{ marginLeft: "0.25em" }}>Kanban</span>
+                  
+                  {activeKey === "1" && (
+                    <>
+                      {/* <ActionIcon
+                        type="plus"
+                        tooltipTitle="Add"
+                        handleIconClick={() => handleCandidateBankModal(true)}
+                        size="1em"
+                        style={{ marginLeft: 10, verticalAlign: "center" }}
+                      /> */}
+                    </>
+                  )}
+                </>
+              }
+              key="1"
+            >
+                <Suspense fallback={<BundleLoader />}>
+        
+                <OpportunityRequirementBoard
+                  candidateRequirement={this.props.candidateRequirement}
+                  item={this.props.item}
+                  />{" "}
+        </Suspense>
+            </TabPane>
+            <TabPane
+              tab={
+                <>
+
+                 <DnsIcon/>
+   
+                    <span style={{ marginLeft: "0.25em" }}>Details</span>
+                  
+                  {activeKey === "2" && (
+                    <>
+                      {/* <ActionIcon
+                        type="plus"
+                        tooltipTitle="Add"
+                        handleIconClick={() => handleCandidateBankModal(true)}
+                        size="1em"
+                        style={{ marginLeft: 10, verticalAlign: "center" }}
+                      /> */}
+                    </>
+                  )}
+                </>
+              }
+              key="2"
+            >
+              <Suspense fallback={"Loading ..."}>
+                {" "}
+               
+            <Details
+             candidateRequirement={this.props.candidateRequirement}
+           detail={this.props.detail}
+           item={this.props.item}
+            />                   
+    
+              </Suspense>
+            </TabPane>
+
+            {/* <TabPane
+              tab={
+                <>
+                 
+               
+                 <FontAwesomeIcon icon={solid('bullseye')} />
+                    <span style={{ marginLeft: "0.25em" }}>Pareto</span>
+                  
+                  {activeKey === "3" && (
+                    <>
+                    
+                    </>
+                  )}
+                </>
+              }
+              key="3"
+            >
+              <Suspense fallback={"Loading ..."}>
+                {" "}
+                <Example/>
+         
+              </Suspense>
+            </TabPane> */}
+
+           
+           
+
+          
+           
+           
+
+            
+            {/* )} */}
+          </StyledTabs>
+        </TabsWrapper>
+        <Suspense fallback={null}>
+                  </Suspense>
+      </>
+    );
+  }
+}
+const mapStateToProps = ({
+  auth,
+  contact,
+  account,
+  opportunity,
+  call,
+  event,
+  task,
+  partner,
+  customeField,
+}) => ({
+ 
+});
+const mapDispatchToProps = (dispatch) =>
+  bindActionCreators(
+    {
+  
+    },
+    dispatch
+  );
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(DashboardDetails);

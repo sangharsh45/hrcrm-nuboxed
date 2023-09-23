@@ -1,0 +1,41 @@
+import React, { lazy, Suspense, Component } from "react";
+import { StyledDrawer, StyledTabs } from "../../../Components/UI/Antd";
+import { FormattedMessage } from "react-intl";
+const EducationDocumentForm = lazy(() => import("../../Profile/Child/ProfileTabs/ProfileBoost/Education/EducationDocumentForm"));
+const EmployeeForm = lazy(() => import("../Child/EmployeeForm"));
+const TabPane = StyledTabs.TabPane;
+
+class AddEmployeeModal extends Component {
+  render() {
+    const { addEmployeeModal, handleEmployeeModal, ...formProps } = this.props;
+    return (
+      <>
+        <StyledDrawer
+          title={<FormattedMessage
+            id="app.newjoinee"
+            defaultMessage="New Joinee"
+          />}
+
+          width="55%"
+          visible={addEmployeeModal}
+          destroyOnClose
+          maskClosable={false}
+          maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}
+          style={{marginTop:"5rem"}}
+          onClose={() => handleEmployeeModal(false)}
+          footer={null}
+        >
+          {/* <StyledTabs defaultActiveKey="1"> */}
+            {/* <TabPane tab={`Employee`} key="1"> */}
+              <div style={{ marginTop: 20 }}>
+                <EmployeeForm />
+              </div>
+            {/* </TabPane> */}
+          {/* </StyledTabs> */}
+        </StyledDrawer>
+      </>
+    );
+  }
+}
+
+export default AddEmployeeModal;

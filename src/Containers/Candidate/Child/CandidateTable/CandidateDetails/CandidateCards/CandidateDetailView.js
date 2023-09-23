@@ -1,0 +1,99 @@
+import React, { Component } from "react";
+import { FlexContainer } from "../../../../../../Components/UI/Layout";
+import { SubTitle } from "../../../../../../Components/UI/Elements";
+import { FormattedMessage } from "react-intl";
+import dayjs from "dayjs";
+import moment from "moment";
+import { Tooltip } from "antd";
+
+class CandidateDetailView extends Component {
+  render() {
+    console.log(this.props.candidate);
+    const {
+      candidate: { tag_with_company, mobileNumber, department, designation
+        ,dateOfBirth,availableDate,emailId ,idNumber,gender,nationality,linkedin,idProof},
+    } = this.props;
+    return (
+      <>     
+      <CandidateItemRow //label="Mobile Number" 
+          label={<FormattedMessage
+            id="app.availability"
+            defaultMessage="Availability"
+          />}
+
+          value={this.props.candidate.availableDate === null ? "No Data" :
+          <>
+          
+          {moment(availableDate).format("ll")}
+          </>
+          }
+           />
+  
+        <CandidateItemRow //label="Company" 
+          label={<FormattedMessage
+            id="app.company"
+            defaultMessage="Company"
+          />}
+          value={tag_with_company } />
+       
+            {/* <CandidateItemRow //label="Mobile Number" 
+          label={<FormattedMessage
+            id="app.department"
+            defaultMessage="Department"
+          />}
+          value={department} /> */}
+           <CandidateItemRow //label="Mobile Number" 
+          label={<FormattedMessage
+            id="app.designation"
+            defaultMessage="Designation"
+          />}
+          value={designation
+          } />
+           
+           <CandidateItemRow //label="Mobile Number" 
+          label={<FormattedMessage
+            id="app.identification"
+            defaultMessage="Identification"
+          />}
+         
+          value={`${idProof || ""} ${idNumber || ""}`}/>
+
+          
+           {/* <CandidateItemRow //label="Mobile Number" 
+          label={<FormattedMessage
+            id="app.dateOfBirth"
+            defaultMessage="Date of Birth"
+          />}
+           value={dateOfBirth} /> */}
+            <CandidateItemRow //label="Mobile Number" 
+          label={<FormattedMessage
+            id="app.gender"
+            defaultMessage="Gender"
+          />}
+           value={gender} />
+            
+
+           
+           
+      </>
+    );
+  }
+}
+export default CandidateDetailView;
+
+const CandidateItemRow = ({ label, value }) => {
+  return (
+    <FlexContainer
+      alignItems="center"
+      flexWrap="nowrap"
+      style={{ margin: "0.4rem" }}
+    >
+      <SubTitle style={{ color: "#444", fontWeight: 600 }}>{label}</SubTitle>
+      <SubTitle style={{ marginLeft: "-1.875em" ,overflow:"hidden",textOverflow:"ellipsis"}}>
+        <Tooltip title={value}>
+        {value}
+        </Tooltip>
+        </SubTitle>
+    </FlexContainer>
+  );
+};
