@@ -648,7 +648,8 @@ export const customerReducer = (state = initialState, action) => {
         ...state,
         fetchingCustomerInputSearchData: false,
         customerByUserId: action.payload,
-        // serachedData: action.payload,
+        latestCustomer:action.payload,
+        customerCloser: action.payload,
       };
     case types.INPUT_CUSTOMER_SEARCH_DATA_FAILURE:
       return { ...state, fetchingCustomerInputSearchDataError: true };

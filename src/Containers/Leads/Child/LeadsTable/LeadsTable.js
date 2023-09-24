@@ -186,8 +186,18 @@ const LeadsTable = (props) => {
       },
     },
     {
-      //title: "Name",
       title: <FormattedMessage id="app.name" defaultMessage="Name" />,
+      dataIndex: "",
+      width:"10%",
+    },
+    {
+      title: <FormattedMessage id="app.phome" defaultMessage="Phone #" />,
+      dataIndex: "phone",
+      width:"10%",
+    },
+    {
+      //title: "Name",
+      title: <FormattedMessage id="app.company" defaultMessage="Company" />,
       dataIndex: "name",
       ...getColumnSearchProps("name"),
       width: "19%",
@@ -236,75 +246,7 @@ const LeadsTable = (props) => {
         );
       },
     },
-    {
-      //title: "URL",
-      title: "",
-      dataIndex: "category",
-      width: "3%",
-      render: (name, item, i) => {
-        //debugger;
-        return (
-          <div>
-            {item.category === "Blue" && (
-              <Tooltip title={item.category}>
-                <div
-                  style={{
-                    borderRadius: "45%",
-                    height: "1.1875em",
-                    width: "1.1875em",
-                    backgroundColor: "blue",
-                  }}
-                ></div>
-              </Tooltip>
-            )}
-            {item.category === "White" && (
-              <Tooltip title={item.category}>
-                <div
-                  style={{
-                    borderRadius: "45%",
-                    height: "1.1875em",
-                    width: "1.1875em",
-                    backgroundColor: "bisque",
-                  }}
-                ></div>
-              </Tooltip>
-            )}
-            {item.category === "Both" && (
-              <Tooltip title={item.category}>
-                <div
-                  style={{
-                    borderRadius: "45%",
-                    height: "1.1875em",
-                    width: "1.1875em",
-                    backgroundColor: "grey",
-                  }}
-                ></div>
-              </Tooltip>
-            )}
-            {item.category === null && (
-              <Tooltip title={item.category}>
-                <div
-                  style={{
-                    borderRadius: "45%",
-                    height: "1.1875em",
-                    width: "1.1875em",
-                    backgroundColor: "grey",
-                  }}
-                ></div>
-              </Tooltip>
-            )}
-          </div>
-        );
-      },
-      filters: [
-        { text: "Blue", value: "Blue" },
-        { text: "White", value: "White" },
-        { text: "Both", value: "Both" },
-      ],
-      onFilter: (value, record) => {
-        return record.category === value;
-      },
-    },
+    
 
     {
       //title: "Group",
@@ -317,12 +259,6 @@ const LeadsTable = (props) => {
         return record.sector === value;
       },
     },
-    {
-      title: "Skills",
-      width: "15%",
-    },
-
-  
     {
       //title: "Email",
       title: <FormattedMessage id="app.country" defaultMessage="Country" />,
@@ -395,8 +331,8 @@ const LeadsTable = (props) => {
     {
       title: (
         <FormattedMessage
-          id="app.convertToCustomer"
-          defaultMessage="Convert To Customer"
+          id="app.qualified"
+          defaultMessage="Qualified"
         />
       ),
 

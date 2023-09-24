@@ -10,7 +10,11 @@ const PartnerTable =lazy(()=>import("./Child/PartnerTable/PartnerTable"));
 const ContactCardList =lazy(()=>import("./Child/ContactTable/ContactCardList"));
 
 class Contact extends Component {
-  state = { currentData: undefined,text:undefined ,currentUser:"",currentPartnerUser:""};
+  state = { currentData: undefined,text:undefined ,currentUser:"",currentPartnerUser:"",
+  //  filteredData:this.props.contactByUserId,
+  // selectedDesignation:'',
+};
+  
   handleClear = () => {
     this.setState({ currentData: undefined });
     this.props.emptyContact()
@@ -45,7 +49,22 @@ class Contact extends Component {
    
   };
 
+   handlePreferenceChange = (event) => {
+    const deprt = event.target.value;
+    this.setState(deprt);
+    if (deprt === '') {
+      this.setState(this.props.contactByUserId);
+    } else {
+      const filteredDepart = this.props.contactByUserId.filter((cont) => cont.department === deprt);
+      this.setState(filteredDepart);
+    }
+  };
+  // componentDidMount(){
+  //   this.props.getContactListByUserId(this.state.currentUser?this.state.currentUser:this.props.userId,0);
+  // }
   render() {
+//     console.log(this.props.contactByUserId)
+// console.log(this.state.filteredData)
     const {
       addContactModal,
       handleContactModal,
@@ -101,6 +120,7 @@ const mapStateToProps = ({ contact, account, auth }) => ({
   userId: auth.userDetails.userId,
   addContactModal: contact.addContactModal,
   viewType: contact.viewType,
+  contactByUserId: contact.contactByUserId,
 });
 
 const mapDispatchToProps = (dispatch) =>

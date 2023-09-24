@@ -68,7 +68,7 @@ class ContactActionRight extends React.Component {
           Import
         </Button>
         )}
-        {this.props.viewType === "dashboard" ? (
+        {this.props.viewType === "table" ? (
         <Tooltip placement="left" title="Create">
           <Button 
            type="primary"

@@ -779,7 +779,11 @@ export const setLeadsViewType = (viewType) => (dispatch) => {
     dispatch({
       type: types.INPUT_LEADS_SEARCH_DATA_REQUEST,
     });
-    axios.get(`${base_url}/leads/search/${name}`)
+    axios.get(`${base_url}/leads/search/${name}`,{
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+        },
+      })
     .then((res)=>{
       dispatch({
         type:types.INPUT_LEADS_SEARCH_DATA_SUCCESS,
