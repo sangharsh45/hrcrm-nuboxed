@@ -3,17 +3,18 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import AddLeadsModal from "./Child/AddLeadsModal";
 import LeadsHeader from "./Child/LeadsHeader";
+import { BundleLoader } from "../../Components/Placeholder";
 import LeadsTable from "./Child/LeadsTable/LeadsTable";
 import {getLeads} from "../Leads/LeadsAction"
- import { setLeadsViewType, handleLeadsModal, getEmployeelist } from "./LeadsAction";
-
+import { setLeadsViewType, handleLeadsModal, getEmployeelist } from "./LeadsAction";
+const LeadsCardList = lazy(()=>import("./Child/LeadsTable/LeadsCardList"));
 
 class Leads extends Component {
 
   state = { currentData: "" };
   handleClear = () => {
     this.setState({ currentData: "" });
-    this.props.getLeads(this.props.leadsId);
+    this.props.getLeads(this.props.userId);
   };
   handleChange = (e) => {
     this.setState({ currentData: e.target.value })
@@ -45,15 +46,20 @@ class Leads extends Component {
           handleLeadsModal={handleLeadsModal}
         />
        
-        <LeadsTable/> 
+        {/* <LeadsTable/>  */}
+        <Suspense fallback={<BundleLoader />}>
+        <LeadsCardList/>
+        </Suspense>
+ 
       </React.Fragment>
     );
   }
 }
 
-const mapStateToProps = ({ leads }) => ({
+const mapStateToProps = ({ leads,auth }) => ({
     addLeadsModal:leads.addLeadsModal,
    viewType: leads.viewType,
+   userId: auth.userDetails.userId,
 
 });
 const mapDispatchToProps = (dispatch) =>

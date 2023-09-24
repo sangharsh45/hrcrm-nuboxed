@@ -47,44 +47,9 @@ function onChange(pagination, filters, sorter) {
 
 function CustomerCardList(props) {
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [visibleselect, setvisibleselect] = useState(false);
-  const [selectedValue, setselectedValue] = useState("");
 
-  function handleTransferClick() {
-    setvisibleselect(true);
-  }
 
-  function handleSelected(value) {
-    setselectedValue(value);
-    console.log(value);
-  }
-  function handleSend() {
-    let data = {
-      customerIds: selectedRowKeys,
-    };
-    setselectedValue(props.updateOwnercustomerById(selectedValue, data));
-    console.log(selectedValue, selectedRowKeys);
-  }
-  const start = () => {
-    setLoading(true); // ajax request after empty completing
-
-    setTimeout(() => {
-      setSelectedRowKeys([]);
-      setLoading(false);
-    }, 1000);
-  };
-
-  const onSelectChange = (newSelectedRowKeys) => {
-    console.log("selectedRowKeys changed: ", selectedRowKeys);
-    setSelectedRowKeys(newSelectedRowKeys);
-  };
-
-  const rowSelection = {
-    selectedRowKeys,
-    onChange: onSelectChange,
-  };
-  const hasSelected = selectedRowKeys.length > 0;
+ 
   const [page, setPage] = useState(0);
   useEffect(() => {
     window.addEventListener('error', e => {

@@ -14,6 +14,7 @@ import {
   addLeads,
   setClearbitData
 } from "../../Leads/LeadsAction";
+import Upload from "../../../Components/Forms/Formik/Upload";
 import { TextareaComponent } from "../../../Components/Forms/Formik/TextareaComponent";
 import { InputComponent } from "../../../Components/Forms/Formik/InputComponent";
 import { SelectComponent } from "../../../Components/Forms/Formik/SelectComponent";
@@ -156,36 +157,86 @@ class LeadsForm extends Component {
                       </a>
                     ) : null}
                   </div> 
-                  <Spacer />
                   <StyledLabel>
-                  <Field
-                    isRequired
-                    name="name"
-                    type="text"
-                    label={
-                      <FormattedMessage id="app.name" defaultMessage="Name" />
-                    }
-                    isColumn
-                    width={"100%"}
-                    setClearbitData={this.props.setClearbitData}
-                    component={ClearbitImage}
-                    accounts={accounts}
-                    inlineLabel
-                  />
-                  </StyledLabel>
-                  <StyledLabel>
-                  <Field
-                    name="url"
-                    type="text"
-                    label={<FormattedMessage id="app." defaultMessage="URL" />}
-                    isColumn
-                    width={"100%"}
-                    component={InputComponent}
-                    inlineLabel
-                  />
-                  </StyledLabel>
-                  <Spacer />
-                  <StyledLabel>
+                  <div class=" flex  flex-nowrap">
+                    <FastField name="imageId" component={Upload} />
+                    <div>
+                      <div class=" flex justify-between">
+                        <div class=" w-2/5">
+                          <FastField
+                            name="salutation"
+                            type="text"
+                            label={
+                              <FormattedMessage
+                                id="app.salutation"
+                                defaultMessage="Salutation"
+                              />
+                            }
+                            options={["Mr.", "Ms.", "None"]}
+                            component={SelectComponent}
+                            inlineLabel
+                            className="field"
+                            isColumn
+                          />
+                        </div>
+                        <div class=" w-1/2">
+                          <FastField
+                            isRequired
+                            name="firstName"
+                            // label="First Name"
+                            label={
+                              <FormattedMessage
+                                id="app.firstName"
+                                defaultMessage="First Name"
+                              />
+                            }
+                            type="text"
+                            width={"100%"}
+                            isColumn
+                            component={InputComponent}
+                            inlineLabel
+                          />
+                        </div>
+                      </div>                  
+                      <div class=" flex justify-between">
+                        <div class=" w-2/5">
+                          <FastField
+                            name="middleName"
+                            //label="Middle Name"
+                            label={
+                              <FormattedMessage
+                                id="app.middleName"
+                                defaultMessage="Middle"
+                              />
+                            }
+                            type="text"
+                            width={"100%"}
+                            isColumn
+                            component={InputComponent}
+                            inlineLabel
+                          />
+                        </div>
+                        <div class=" w-1/2">
+                          <FastField
+                            name="lastName"
+                            //label="Last Name"
+                            label={
+                              <FormattedMessage
+                                id="app.lastName"
+                                defaultMessage="Last Name"
+                              />
+                            }
+                            type="text"
+                            width={"100%"}
+                            isColumn
+                            component={InputComponent}
+                            inlineLabel
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
                   <Field
                     name="email"
                     type="text"
@@ -232,6 +283,35 @@ class LeadsForm extends Component {
                       </StyledLabel>
                     </div>
                   </div>
+                  <Spacer />
+                  <StyledLabel>
+                  <Field
+                    isRequired
+                    name="name"
+                    type="text"
+                    label={
+                      <FormattedMessage id="app.company" defaultMessage="Company" />
+                    }
+                    isColumn
+                    width={"100%"}
+                    setClearbitData={this.props.setClearbitData}
+                    component={ClearbitImage}
+                    accounts={accounts}
+                    inlineLabel
+                  />
+                  </StyledLabel>
+                  <StyledLabel>
+                  <Field
+                    name="url"
+                    type="text"
+                    label={<FormattedMessage id="app." defaultMessage="URL" />}
+                    isColumn
+                    width={"100%"}
+                    component={InputComponent}
+                    inlineLabel
+                  />
+                  </StyledLabel>
+                         
                   <Spacer />
                   <div class=" flex justify-between">
                     <div class=" w-1/2">
@@ -293,7 +373,7 @@ class LeadsForm extends Component {
                     
                     </div>
                   
-                    <div class=" w-1/3">
+                    {/* <div class=" w-1/3">
                     <div>   
                         <StyledLabel>Requirement Type</StyledLabel>
                         </div>
@@ -313,7 +393,7 @@ class LeadsForm extends Component {
                       >Both
                       </Checkbox>
                     </div>
-                
+                 */}
                     </div>
                   <Spacer />
                  

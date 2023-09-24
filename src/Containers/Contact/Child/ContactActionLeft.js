@@ -38,9 +38,9 @@ const ContactActionLeft = (props) => {
   } = useSpeechRecognition();
   console.log(transcript);
   useEffect(() => {
-    if (props.viewType === "table") {
+    if (props.viewType === "dashboard") {
       props.getCustomerRecords(props.userId);
-    } else if (props.viewType === "dashboard") {
+    } else if (props.viewType === "table") {
       props.getRecords(props.userId, "partner");
     }
     if (transcript) {

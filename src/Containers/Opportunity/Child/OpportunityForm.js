@@ -562,11 +562,17 @@ class=" h-full w-[24rem]"
                 <Listbox value={selected} onChange={setSelected}>
                   {({ open }) => (
                     <>
-                      <Listbox.Label className="block text-sm font-medium text-gray-700">
+                      <Listbox.Label className="block text-sm font-semibold text-gray-700">
                         Assigned to
                       </Listbox.Label>
                       <div className="relative mt-1">
                         <Listbox.Button className="relative w-full leading-4 cursor-default rounded-md border border-gray-300 bg-white py-2 pl-3 pr-10 text-left shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm: text-sm">
+                        {/* <span >
+                        <input
+                        className="text-black-500 font-semibold"
+                        value={props.fullName}
+                        />
+                        </span> */}
                           <span className="flex items-center">
                             <img
                               src={selected.avatar}
@@ -843,6 +849,7 @@ const mapStateToProps = ({ auth, opportunity, contact, customer }) => ({
   workflow: opportunity.workflow,
   customerData: customer.customerData,
   contactData: contact.contactData,
+  fullName: auth.userDetails.fullName
   // opportunitySkills:opportunity.opportunitySkills
 });
 

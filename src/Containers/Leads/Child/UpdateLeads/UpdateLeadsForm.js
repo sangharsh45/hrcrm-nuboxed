@@ -20,6 +20,7 @@ import { InputComponent } from "../../../../Components/Forms/Formik/InputCompone
 import { SelectComponent } from "../../../../Components/Forms/Formik/SelectComponent";
 import ProgressiveImage from "../../../../Components/Utils/ProgressiveImage";
 import ClearbitImage from "../../../../Components/Forms/Autocomplete/ClearbitImage";
+import Upload from "../../../../Components/Forms/Formik/Upload";
 // yup validation scheme for creating a account
 const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
 const UpdateLeadsSchema = Yup.object().shape({
@@ -131,39 +132,85 @@ class UpdateLeadsForm extends Component {
               <div class=" flex justify-between overflow-scroll ">
                 <div class=" h-full w-1/2"   >
                     <Spacer/>
+                    <div class=" flex  flex-nowrap">
+                    <FastField name="imageId" component={Upload} />
+                    <div>
+                      <div class=" flex justify-between">
+                        <div class=" w-2/5">
+                          <FastField
+                            name="salutation"
+                            type="text"
+                            label={
+                              <FormattedMessage
+                                id="app.salutation"
+                                defaultMessage="Salutation"
+                              />
+                            }
+                            options={["Mr.", "Ms.", "None"]}
+                            component={SelectComponent}
+                            inlineLabel
+                            className="field"
+                            isColumn
+                          />
+                        </div>
+                        <div class=" w-1/2">
+                          <FastField
+                            isRequired
+                            name="firstName"
+                            // label="First Name"
+                            label={
+                              <FormattedMessage
+                                id="app.firstName"
+                                defaultMessage="First Name"
+                              />
+                            }
+                            type="text"
+                            width={"100%"}
+                            isColumn
+                            component={InputComponent}
+                            inlineLabel
+                          />
+                        </div>
+                      </div>                  
+                      <div class=" flex justify-between">
+                        <div class=" w-2/5">
+                          <FastField
+                            name="middleName"
+                            //label="Middle Name"
+                            label={
+                              <FormattedMessage
+                                id="app.middleName"
+                                defaultMessage="Middle"
+                              />
+                            }
+                            type="text"
+                            width={"100%"}
+                            isColumn
+                            component={InputComponent}
+                            inlineLabel
+                          />
+                        </div>
+                        <div class=" w-1/2">
+                          <FastField
+                            name="lastName"
+                            //label="Last Name"
+                            label={
+                              <FormattedMessage
+                                id="app.lastName"
+                                defaultMessage="Last Name"
+                              />
+                            }
+                            type="text"
+                            width={"100%"}
+                            isColumn
+                            component={InputComponent}
+                            inlineLabel
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                     <StyledLabel>
-                  <Field
-                    isRequired
-                    name="name"
-                    type="text"
-                    //label="Name"
-                    label={
-                      <FormattedMessage id="app.name" defaultMessage="Name" />
-                    }
-                    isColumn
-                    width={"100%"}
-                    component={InputComponent}
-                    accounts={accounts}
-                    inlineLabel
-                    />
-                    </StyledLabel>
-                    <StyledLabel>
-                  <Field
-                    name="url"
-                    type="text"
-                    // label="URL"
-                    label={
-                      <FormattedMessage id="app.url" defaultMessage="URL" />
-                    }
-                    isColumn
-                    width={"100%"}
-                    component={InputComponent}
-                    inlineLabel
-                    />
-                    </StyledLabel>
-                  <Spacer />
-                  <Spacer />
-                  <StyledLabel>
                   <Field
                     name="email"
                     type="text"                   
@@ -211,6 +258,39 @@ class UpdateLeadsForm extends Component {
                          </div>
                   </div>
                   <Spacer/>
+                    <StyledLabel>
+                  <Field
+                    isRequired
+                    name="name"
+                    type="text"
+                    //label="Name"
+                    label={
+                      <FormattedMessage id="app.company" defaultMessage="Company" />
+                    }
+                    isColumn
+                    width={"100%"}
+                    component={InputComponent}
+                    accounts={accounts}
+                    inlineLabel
+                    />
+                    </StyledLabel>
+                    <StyledLabel>
+                  <Field
+                    name="url"
+                    type="text"
+                    // label="URL"
+                    label={
+                      <FormattedMessage id="app.url" defaultMessage="URL" />
+                    }
+                    isColumn
+                    width={"100%"}
+                    component={InputComponent}
+                    inlineLabel
+                    />
+                    </StyledLabel>
+                  <Spacer />
+                  
+                 
                   <div class=" flex justify-between">
                     <div class=" w-1/2">
                     <StyledLabel>
@@ -268,7 +348,7 @@ class UpdateLeadsForm extends Component {
                         component={SearchSelect}
                       />
                     </div>
-                    <div class=" w-1/3">
+                    {/* <div class=" w-1/3">
                     <div>               
                  <StyledLabel>Requirement Type</StyledLabel>
                  </div>
@@ -287,7 +367,7 @@ class UpdateLeadsForm extends Component {
                > 
                Both
                </Checkbox>
-               </div>
+               </div> */}
                 </div>
                  </div>
                  <div class=" h-3/4 w-5/12 "   >

@@ -12,11 +12,11 @@ import SearchIcon from '@mui/icons-material/Search';
 import LockOpenIcon from '@mui/icons-material/LockOpen';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { Tooltip, Input, Button, Select, Menu, Dropdown, Progress } from "antd";
-import Highlighter from 'react-highlight-words';
+import { FlexContainer, MainWrapper, ResponsiveCard } from "../../../../Components/UI/Layout";
 import { CurrencySymbol,Link } from "../../../../Components/Common";
 import { CheckCircleTwoTone, StopTwoTone } from "@ant-design/icons";
 import { StyledTable, StyledPopconfirm } from "../../../../Components/UI/Antd";
-import { MultiAvatar, MultiAvatar2, SubTitle } from "../../../../Components/UI/Elements";
+import { MultiAvatar, MultiAvatar2, SubTitle,Title } from "../../../../Components/UI/Elements";
 import {
   getOpportunityListByUserId,
   getRecruiterList,
@@ -98,16 +98,12 @@ function OpportunityCardList(props) {
   
 
   const {
-    fetchingOpportunity,
     user,
-    opportunityId,
-    fetchingOpportunityError,
     opportunityByUserId,
-    recruiterList,
     handleUpdateOpportunityModal,
     updateOpportunityModal,
     deleteOpportunityData,
-     fetchingAllOpportunities,
+    history
   } = props;
 
 
@@ -127,8 +123,9 @@ function OpportunityCardList(props) {
                 }
                 height={400}
             >
-       <CardWrapper>      
-              {opportunityByUserId.map((item) => {
+
+    <CardWrapper>
+    {opportunityByUserId.map((item) => {
                  
                  var findProbability = item.probability;
                    item.stageList.forEach((element) => {
@@ -136,255 +133,203 @@ function OpportunityCardList(props) {
                        findProbability = element.probability;}
                     });
                  return (
-                    <CardElement>
-
-                      <div class="flex items-center justify-between ">
-                      <h4>Name</h4>
-                        <Header>
-                        <Link
-          toUrl={`opportunity/${item.opportunityId}`}
-          title={`${item.opportunityName}`}>
-         {item.opportunityName}
-         </Link>
-                        </Header> 
-                       
-               
-            
-                          
-            
-          </div>                  
-                 
-                     
-           
-                        <div class="flex  justify-between">
-                            <h3>Customer</h3>
-                            <h4>{item.customer}</h4>
-                        </div>
-                        <div class="flex justify-between">
-                            <div>
-                    <h4>Sponsor</h4> 
-                    </div>
-                    <div>
-                    <SubTitle>
-            {item.contactName === null ? "None" :
-              <MultiAvatar2
-                primaryTitle={item.contactName}
-                imageId={item.imageId}
-                 imageURL={item.imageURL}
-                imgWidth={"1.8em"}
-                imgHeight={"1.8em"}
-              />
-            }
-            </SubTitle>
-            </div>
-                    </div>
-                    <div class="flex justify-between">
-                    <h4>Start Date</h4> 
-            <h4>{moment(item.startDate).format("ll")}</h4>
-                    </div>
-                    <div class="flex justify-between">
-                    <h4>Proposal Amount</h4> 
-            <h4><span>
-            <CurrencySymbol currencyType={item.currency} />
-            &nbsp;
-            {item.proposalAmount}
-          </span></h4>
-                    </div>
-                    <div class="flex justify-between">
-                    <h4>Stages</h4> 
-            <h4><span>
-            <Dropdown
-          overlay={
-            <div>
-              <Menu mode="horizontal">
-                <Menu.Item
-                  style={{
-                    paddingLeft: 5,
-                    paddingRight: 5,
-                    backgroundColor: "#F5F5F5",
-                  }}
-                >
-                  <OpportunitySelectStages
-                    rec={item}
-                    oppStage={item.oppStage}
-                    // recruitOwner={item.recruitOwner}
-                    // candidateName={item.candidateName}
-                    // approveInd={item.approveInd}
-                    // rejectInd={item.rejectInd}
-                    stageClick={(opportunityStagesId) => {
-                      props.LinkStageOpportunity(
-                        {
-                          opportunityId: item.opportunityId,
-                          //oppStage: item.oppStage,
-                          opportunityStagesId:opportunityStagesId
-                          // recruitmentProcessId: item.recruitmentProcessId,
-                          // recruitmentId: item.recruitmentId,
-                          // profileId: item.profileId,
-                        },
-                       
-                      );
-                    }}
-                  />{" "}
-                </Menu.Item>
-              </Menu>
-            </div>
-          }
-          trigger={["click"]}
+      <CardElement>
+        <FlexContainer
+          alignItems="center"
+          flexWrap="no-wrap"
+          style={{ height: "2.81em" }}
         >
-          <Tooltip title={item.oppStage}>
-            {" "}
-            <Progress
-              type="circle"
-              style={{ cursor: "pointer",color:"red" }}
-              percent={findProbability}
-              //disable={true}
-              width={30}
-               strokeColor={"#005075"}
-             
-            />
-             {/* )}  */}
-          </Tooltip>
-        </Dropdown>
-          </span></h4>
-                    </div>  
-                    <div class="flex justify-between">
-                    {item.approveInd&&item.opportunityOwner ? (
-              <>
-                <Tooltip //title={"Offer rolled out"}
-                  title={<FormattedMessage
-                    id="app.Own"
-                    defaultMessage="Own"
-                  />}
-
-                >
-                  <CheckCircleTwoTone
-                    type="check-circle"
-                    theme="twoTone"
-                    twoToneColor="#24D8A7"
-                    style={{fontSize:"0.8rem" 
-                    // cursor:
-                    // props.recruitOwner ===props.fullName
-                     
-                    // ? "not-allowed"
-                    // : "pointer",
-                   }}
-                  />
-                </Tooltip>
-              </>
-            ) : item.rejectInd&&item.opportunityOwner ? (
-              <>
-                <Tooltip title={"Lost"}>
-                  {" "}
-                  <StopTwoTone
-                    type="stop"
-                    theme="twoTone"
-                    twoToneColor="red"         
-                    style={{ fontSize:"0.8rem" , marginLeft: "0.875em" }}
-                  />
-                </Tooltip>
-              </>
-            ) : (
-              <>
-                <Tooltip //title={"Offer"}
-                  title={<FormattedMessage
-                    id="app.Own"
-                    defaultMessage="Won"
-                  />}
-
-                >
-                  <CheckCircleTwoTone
-                    type="check-circle"
-                    theme="twoTone"
-                    twoToneColor="#24D8A7"
-                    size={140}
-                    style={{ fontSize:"0.8rem" 
-                    // cursor:
-                    // item.opportunityOwner !=props.fullName
-                     
-                    // ? "not-allowed"
-                    //   : "pointer",
-                   }}
-                    onClick={() =>                                        
-                      props.StatusRecruit(
-                        item.opportunityId,
-                      
-                        {
-                         wonInd:true
-                        },
-
-                       
-                      )
-                      
-                    }
-                  />
-                </Tooltip>
-
-                &nbsp; &nbsp;
-                <Tooltip //title={"Drop"}
-                  title={<FormattedMessage
-                    id="app.drop"
-                    defaultMessage="Lost"
-                  />}
-
-                >
-                  <StopTwoTone
-                    type="stop"
-                    theme="twoTone"
-                    twoToneColor="red"
-                    size={140}
-                    style={{fontSize:"0.8rem" 
-                    // cursor:
-                    // item.opportunityOwner !=props.fullName
-                     
-                    // ? "not-allowed"
-                    //   : "pointer",
-                   }}
-                   onClick={() => 
-                  props.lostStatusRecruit(
-                    item.opportunityId,
-                        {
-                         lostInd:true
-                        },
-                      )
-                    }
-                  />
-                </Tooltip>
-              </>
-            )}</div>
-
-<div class="flex  justify-between" >
-    <h4>
-    Sales Rep
-    </h4>
-    <span>
-            <MultiAvatar2
-              primaryTitle={item.assignedTo}
-              // imageId={item.ownerImageId}
-              //  imageURL={item.imageURL}
-              imgWidth={"1.8em"}
-              imgHeight={"1.8em"}
-            />
-            </span>
-</div>
-<div class="flex  justify-between" >
-    <h4>
-    Owner
-    </h4>
-    <Tooltip title={item.ownerName}>
-          <span>
+          <FlexContainer style={{ flexBasis: "15%", marginRight: "0.2rem" }}>
             <MultiAvatar
-              primaryTitle={item.ownerName}
-              imageId={item.ownerImageId}
-               imageURL={item.imageURL}
-              imgWidth={"2.1em"}
-              imgHeight={"2.1em"}
+              primaryTitle={item.opportunityName}
+              imageId={item.imageId}
+              // imageURL={imageURL}
+              imgHeight={40}
+              imgWidth={40}
             />
-            </span>
-           </Tooltip>
+          </FlexContainer>
+          &nbsp;
+          <FlexContainer
+            flexDirection="column"
+            style={{ flexBasis: "83%", overflow: "hidden" }}
+          >
+            <div style={{ color: "#337df4", cursor: "pointer", fontSize: "1em" }}>
+          <Link
+toUrl={`opportunity/${item.opportunityId}`}
+title={`${item.opportunityName}`}>
+{item.opportunityName}
+</Link>
+          </div> 
+            
+
+            {item.customer && (
+              <SubTitle
+                overflow="hidden"
+                textOverflow="ellipsis"
+                style={{
+                  cursor: "pointer",
+                  fontSize: "0.9375em",
+                  display: "flex",
+                  alignItems: "center",
+                }}
+                // onClick={handleSecondaryTitleClick || null}
+              >
+                {item.customer || ""}
+              </SubTitle>
+            )}
+          </FlexContainer>
+        </FlexContainer>
+        <div className="flex justify-around">
+          <div>
+          <SubTitle
+            style={{
+              fontWeight: 500,
+              fontSize: "0.9375em",
+              marginTop: "-0.37em",
+              marginBottom: "-0.18em",
+            }}
+          >
+            
+            &nbsp;&nbsp;
+            {<CurrencySymbol currencyType={item.currency} />}
+            &nbsp;{  item.proposalAmount || ""}
+          </SubTitle>
+          </div>
+        <div>
+        <SubTitle>
+{item.contactName === null ? "None" :
+<MultiAvatar2
+  primaryTitle={item.contactName}
+  imageId={item.imageId}
+   imageURL={item.imageURL}
+  imgWidth={"1.8em"}
+  imgHeight={"1.8em"}
+/>
+}
+</SubTitle>
+        </div>
+<div>
+<span>
+<Dropdown
+overlay={
+<div>
+<Menu mode="horizontal">
+  <Menu.Item
+    style={{
+      paddingLeft: 5,
+      paddingRight: 5,
+      backgroundColor: "#F5F5F5",
+    }}
+  >
+    <OpportunitySelectStages
+      rec={item}
+      oppStage={item.oppStage}
+      // recruitOwner={item.recruitOwner}
+      // candidateName={item.candidateName}
+      // approveInd={item.approveInd}
+      // rejectInd={item.rejectInd}
+      stageClick={(opportunityStagesId) => {
+        props.LinkStageOpportunity(
+          {
+            opportunityId: item.opportunityId,
+            //oppStage: item.oppStage,
+            opportunityStagesId:opportunityStagesId
+            // recruitmentProcessId: item.recruitmentProcessId,
+            // recruitmentId: item.recruitmentId,
+            // profileId: item.profileId,
+          },
+         
+        );
+      }}
+    />{" "}
+  </Menu.Item>
+</Menu>
 </div>
-                    <div class="flex  justify-between" >
-                           <div>
-                           <Tooltip title='Click to Close'>
+}
+trigger={["click"]}
+>
+<Tooltip title={item.oppStage}>
+{" "}
+<Progress
+type="circle"
+style={{ cursor: "pointer",color:"red" }}
+percent={findProbability}
+//disable={true}
+width={30}
+ strokeColor={"#005075"}
+
+/>
+  
+</Tooltip>
+</Dropdown>
+</span>
+</div>
+<div>
+<span>
+<MultiAvatar2
+primaryTitle={item.assignedTo}
+imgWidth={"1.8em"}
+imgHeight={"1.8em"}
+/>
+</span>
+  </div>
+        </div>
+        <FlexContainer
+          style={{
+            width: "100%",
+            paddingLeft: "0.5rem",
+            justifyContent: "space-evenly",
+            marginTop: "-0.62em",
+            marginBottom: "0.31em",
+          }}
+        >
+
+          <Tooltip
+          placement="right"
+          title={
+            <FormattedMessage
+              id="app.edit"
+              defaultMessage="Edit"
+            />
+          }
+        >
+            {user.opportunityUpdateInd ===true && (
+              
+            <span
+              style={{ cursor: "pointer", color: "blue" }}
+              onClick={() => {
+                props.setEditOpportunity(item);
+                handleUpdateOpportunityModal(true);
+                handleSetCurrentOpportunityId(item);
+              }}
+            >
+                 <BorderColorIcon  style={{fontSize:"0.8rem" }}/>
+              </span>
+           )}
+          </Tooltip>
+         
+            <>
+              <div>
+               
+               
+                <StyledPopconfirm
+            title="Do you want to delete?"
+            onConfirm={() => deleteOpportunityData(item.opportunityId)}
+          >
+           
+             {user.opportunityDeleteInd ===true && (
+            <DeleteIcon
+            type="delete" style={{ cursor: "pointer", color: "red",fontSize:"0.8rem"  }} />
+             )}
+          </StyledPopconfirm>
+
+              </div>
+            </>
+    
+
+          <div style={{ marginTop: "4%" }}>
+           
+          <Tooltip title='Click to Close'>
          
          <span
           onClick={() => {
@@ -426,51 +371,119 @@ function OpportunityCardList(props) {
               <MonitorHeartIcon style={{fontSize:"0.8rem"  ,color: "#df9697"}}/>
                )}
             </span>
-                           </div>
-                           <div>
-                           <Tooltip
-          title={
-            <FormattedMessage
-              id="app.edit"
-              defaultMessage="Edit"
-            />
-          }
+          </div>
+        </FlexContainer>
+        <FlexContainer
+          style={{ width: "100%", paddingLeft: "0.5em", marginTop: "-0.18em" }}
         >
-            {user.opportunityUpdateInd ===true && (
-              
-            <span
-              style={{ cursor: "pointer", color: "blue" }}
-              onClick={() => {
-                props.setEditOpportunity(item);
-                handleUpdateOpportunityModal(true);
-                handleSetCurrentOpportunityId(item);
-              }}
+          
+            <FlexContainer
+              style={{}}
+              // justifyContent={bottomBarComponent ? "space-between" : "flex-end"}
+              alignSelf="flex-end"
+              alignItems="center"
             >
-                 <BorderColorIcon  style={{fontSize:"0.8rem" }}/>
-              </span>
-           )}
-          </Tooltip>
-          &nbsp;
-          <StyledPopconfirm
-            title="Do you want to delete?"
-            onConfirm={() => deleteOpportunityData(item.opportunityId)}
-          >
-             {/* {user.userType !== "USER" && user.department !== "Recruiter" && (  */}
-             {user.opportunityDeleteInd ===true && (
-            <DeleteIcon
-            type="delete" style={{ cursor: "pointer", color: "red",fontSize:"0.8rem"  }} />
-             )}
-          </StyledPopconfirm>
-                           </div>
-              </div>           
-                      
-                       
-                        
-                    </CardElement>
-                 )  
-            })}
-              </CardWrapper>
+              <h4>{moment(item.startDate).format("ll")}</h4>
+              <div>
+              {item.approveInd&&item.opportunityOwner ? (
+<>
+  <Tooltip 
+    title={<FormattedMessage
+      id="app.Own"
+      defaultMessage="Own"
+    />}
 
+  >
+    <CheckCircleTwoTone
+      type="check-circle"
+      theme="twoTone"
+      twoToneColor="#24D8A7"
+      style={{fontSize:"0.8rem" 
+     }}
+    />
+  </Tooltip>
+</>
+) : item.rejectInd&&item.opportunityOwner ? (
+<>
+  <Tooltip title={"Lost"}>
+    {" "}
+    <StopTwoTone
+      type="stop"
+      theme="twoTone"
+      twoToneColor="red"         
+      style={{ fontSize:"0.8rem" , marginLeft: "0.875em" }}
+    />
+  </Tooltip>
+</>
+) : (
+<>
+  <Tooltip 
+    title={<FormattedMessage
+      id="app.Own"
+      defaultMessage="Won"
+    />}
+
+  >
+    <CheckCircleTwoTone
+      type="check-circle"
+      theme="twoTone"
+      twoToneColor="#24D8A7"
+      size={140}
+      style={{ fontSize:"0.8rem" 
+     
+     }}
+      onClick={() =>                                        
+        props.StatusRecruit(
+          item.opportunityId,
+        
+          {
+           wonInd:true
+          },
+
+         
+        )
+        
+      }
+    />
+  </Tooltip>
+
+  &nbsp; &nbsp;
+  <Tooltip 
+    title={<FormattedMessage
+      id="app.drop"
+      defaultMessage="Lost"
+    />}
+
+  >
+    <StopTwoTone
+      type="stop"
+      theme="twoTone"
+      twoToneColor="red"
+      size={140}
+      style={{fontSize:"0.8rem" 
+      
+     }}
+     onClick={() => 
+    props.lostStatusRecruit(
+      item.opportunityId,
+          {
+           lostInd:true
+          },
+        )
+      }
+    />
+  </Tooltip>
+</>
+)}
+
+              </div>
+            </FlexContainer>
+   
+           
+        </FlexContainer>
+      </CardElement>
+                 );})}
+    </CardWrapper>
 
       </InfiniteScroll>
       
@@ -605,7 +618,7 @@ border-radius: 0.75rem;
     border: 3px solid #EEEEEE;
     background-color: rgb(255,255,255);
     box-shadow: 0 0.25em 0.62em #aaa;
-    height: 17rem;
+    height: 8rem;
     color: rgb(68,68,68);
     margin: 1em;
     padding: 0.2rem;
@@ -617,3 +630,330 @@ border-radius: 0.75rem;
     
   }
 `
+{/* <CardWrapper>      
+{opportunityByUserId.map((item) => {
+   
+   var findProbability = item.probability;
+     item.stageList.forEach((element) => {
+       if (element.oppStage === item.oppStage) {
+         findProbability = element.probability;}
+      });
+   return (
+      <CardElement>
+
+        <div class="flex items-center justify-between ">
+        <h4>Name</h4>
+          <Header>
+          <Link
+toUrl={`opportunity/${item.opportunityId}`}
+title={`${item.opportunityName}`}>
+{item.opportunityName}
+</Link>
+          </Header> 
+         
+ 
+
+            
+
+</div>                  
+   
+       
+
+          <div class="flex  justify-between">
+              <h3>Customer</h3>
+              <h4>{item.customer}</h4>
+          </div>
+          <div class="flex justify-between">
+              <div>
+      <h4>Sponsor</h4> 
+      </div>
+      <div>
+      <SubTitle>
+{item.contactName === null ? "None" :
+<MultiAvatar2
+  primaryTitle={item.contactName}
+  imageId={item.imageId}
+   imageURL={item.imageURL}
+  imgWidth={"1.8em"}
+  imgHeight={"1.8em"}
+/>
+}
+</SubTitle>
+</div>
+      </div>
+      <div class="flex justify-between">
+      <h4>Start Date</h4> 
+<h4>{moment(item.startDate).format("ll")}</h4>
+      </div>
+      <div class="flex justify-between">
+      <h4>Proposal Amount</h4> 
+<h4><span>
+<CurrencySymbol currencyType={item.currency} />
+&nbsp;
+{item.proposalAmount}
+</span></h4>
+      </div>
+      <div class="flex justify-between">
+      <h4>Stages</h4> 
+<h4><span>
+<Dropdown
+overlay={
+<div>
+<Menu mode="horizontal">
+  <Menu.Item
+    style={{
+      paddingLeft: 5,
+      paddingRight: 5,
+      backgroundColor: "#F5F5F5",
+    }}
+  >
+    <OpportunitySelectStages
+      rec={item}
+      oppStage={item.oppStage}
+      // recruitOwner={item.recruitOwner}
+      // candidateName={item.candidateName}
+      // approveInd={item.approveInd}
+      // rejectInd={item.rejectInd}
+      stageClick={(opportunityStagesId) => {
+        props.LinkStageOpportunity(
+          {
+            opportunityId: item.opportunityId,
+            //oppStage: item.oppStage,
+            opportunityStagesId:opportunityStagesId
+            // recruitmentProcessId: item.recruitmentProcessId,
+            // recruitmentId: item.recruitmentId,
+            // profileId: item.profileId,
+          },
+         
+        );
+      }}
+    />{" "}
+  </Menu.Item>
+</Menu>
+</div>
+}
+trigger={["click"]}
+>
+<Tooltip title={item.oppStage}>
+{" "}
+<Progress
+type="circle"
+style={{ cursor: "pointer",color:"red" }}
+percent={findProbability}
+//disable={true}
+width={30}
+ strokeColor={"#005075"}
+
+/>
+)}  
+</Tooltip>
+</Dropdown>
+</span></h4>
+      </div>  
+      <div class="flex justify-between">
+      {item.approveInd&&item.opportunityOwner ? (
+<>
+  <Tooltip 
+    title={<FormattedMessage
+      id="app.Own"
+      defaultMessage="Own"
+    />}
+
+  >
+    <CheckCircleTwoTone
+      type="check-circle"
+      theme="twoTone"
+      twoToneColor="#24D8A7"
+      style={{fontSize:"0.8rem" 
+     }}
+    />
+  </Tooltip>
+</>
+) : item.rejectInd&&item.opportunityOwner ? (
+<>
+  <Tooltip title={"Lost"}>
+    {" "}
+    <StopTwoTone
+      type="stop"
+      theme="twoTone"
+      twoToneColor="red"         
+      style={{ fontSize:"0.8rem" , marginLeft: "0.875em" }}
+    />
+  </Tooltip>
+</>
+) : (
+<>
+  <Tooltip 
+    title={<FormattedMessage
+      id="app.Own"
+      defaultMessage="Won"
+    />}
+
+  >
+    <CheckCircleTwoTone
+      type="check-circle"
+      theme="twoTone"
+      twoToneColor="#24D8A7"
+      size={140}
+      style={{ fontSize:"0.8rem" 
+     
+     }}
+      onClick={() =>                                        
+        props.StatusRecruit(
+          item.opportunityId,
+        
+          {
+           wonInd:true
+          },
+
+         
+        )
+        
+      }
+    />
+  </Tooltip>
+
+  &nbsp; &nbsp;
+  <Tooltip 
+    title={<FormattedMessage
+      id="app.drop"
+      defaultMessage="Lost"
+    />}
+
+  >
+    <StopTwoTone
+      type="stop"
+      theme="twoTone"
+      twoToneColor="red"
+      size={140}
+      style={{fontSize:"0.8rem" 
+      
+     }}
+     onClick={() => 
+    props.lostStatusRecruit(
+      item.opportunityId,
+          {
+           lostInd:true
+          },
+        )
+      }
+    />
+  </Tooltip>
+</>
+)}</div>
+
+<div class="flex  justify-between" >
+<h4>
+Sales Rep
+</h4>
+<span>
+<MultiAvatar2
+primaryTitle={item.assignedTo}
+imgWidth={"1.8em"}
+imgHeight={"1.8em"}
+/>
+</span>
+</div>
+<div class="flex  justify-between" >
+<h4>
+Owner
+</h4>
+<Tooltip title={item.ownerName}>
+<span>
+<MultiAvatar
+primaryTitle={item.ownerName}
+imageId={item.ownerImageId}
+ imageURL={item.imageURL}
+imgWidth={"2.1em"}
+imgHeight={"2.1em"}
+/>
+</span>
+</Tooltip>
+</div>
+      <div class="flex  justify-between" >
+             <div>
+             <Tooltip title='Click to Close'>
+
+<span
+onClick={() => {
+props.LinkClosedOpportunity(
+item.opportunityId,
+{
+ closeInd:true,
+}        
+);         
+}}         
+style={{            
+fontSize: "0.9em",
+cursor: "pointer",
+}}
+>
+<LockOpenIcon  style={{fontSize:"0.8rem" }}/>
+</span>
+</Tooltip> 
+&nbsp;
+<span
+
+style={{ cursor: "pointer" }}
+onClick={() => {
+props.getAllRecruitmentByOppId(item.opportunityId );
+            props.getAllRecruitmentPositionByOppId(item.opportunityId );
+          props.getAllRecruitmentAvgTimeByOppId(item.opportunityId );
+          props.getAllRecruitmentPositionFilledByOppId(item.opportunityId );
+          props.getAllRecruitmentDetailsByOppId(item.opportunityId)
+          props.handleOpportunityDrawerModal(true);
+          props.getOpportunitySKill(item.oppInnitiative)
+          props.getOpportunityInitiativeSKillDetails(item.opportunityId)
+          props.getOpportunityForecast(item.opportunityId)
+          handleSetCurrentOpportunityId(item);
+        
+          handleSetCurrentItem(item);
+}}
+>{user.pulseAccessInd ===true && ( 
+<MonitorHeartIcon style={{fontSize:"0.8rem"  ,color: "#df9697"}}/>
+ )}
+</span>
+             </div>
+             <div>
+             <Tooltip
+title={
+<FormattedMessage
+id="app.edit"
+defaultMessage="Edit"
+/>
+}
+>
+{user.opportunityUpdateInd ===true && (
+
+<span
+style={{ cursor: "pointer", color: "blue" }}
+onClick={() => {
+  props.setEditOpportunity(item);
+  handleUpdateOpportunityModal(true);
+  handleSetCurrentOpportunityId(item);
+}}
+>
+   <BorderColorIcon  style={{fontSize:"0.8rem" }}/>
+</span>
+)}
+</Tooltip>
+&nbsp;
+<StyledPopconfirm
+title="Do you want to delete?"
+onConfirm={() => deleteOpportunityData(item.opportunityId)}
+>
+
+{user.opportunityDeleteInd ===true && (
+<DeleteIcon
+type="delete" style={{ cursor: "pointer", color: "red",fontSize:"0.8rem"  }} />
+)}
+</StyledPopconfirm>
+             </div>
+</div>           
+        
+         
+          
+      </CardElement>
+   )  
+})}
+</CardWrapper> */}

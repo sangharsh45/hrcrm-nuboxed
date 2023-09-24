@@ -11,12 +11,14 @@ import {
     getCustomerListByUserId,
     setCustomerViewType,
     getCustomerPagination,
-    emptyCustomer
+    emptyCustomer,
+    getLatestCustomer,
+    getCustomerCloser,
     
   } from "./CustomerAction";
 import CustomerCardView from "./CustomerCardView";
 import CustomerMap from "./CustomerMap"
-
+import moment from "moment";
   
 const AddCustomerModal = lazy(() => import( "./Child/AddCustomerModal"));
 const CustomerHeader = lazy(() => import("./Child/CustomerHeader"));
@@ -26,9 +28,17 @@ const CustomerCardList=lazy(() => import("./Child/CustomerTable/CustomerCardList
 class  Customer extends Component {
   state = { currentData: "",currentUser:"" };
   handleClear = () => {
+    const startDate = moment()
+      .startOf("month")
+      .toISOString();
+    const endDate = moment()
+      .endOf("month")
+      .toISOString();
     this.setState({ currentData: "" });
     this.props.emptyCustomer();
     this.props.getCustomerListByUserId(this.state.currentUser?this.state.currentUser:this.props.userId,0);
+    this.props.getLatestCustomer(this.props.userId);
+    this.props.getCustomerCloser(this.props.userId, startDate, endDate);
   };
   setCurrentData = (value) => {
     this.setState({ currentData: value });
@@ -104,6 +114,7 @@ const mapStateToProps = ({ customer, auth }) => ({
   userId: auth.userDetails.userId,
   addCustomerModal: customer.addCustomerModal,
   viewType: customer.viewType,
+
 });
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
@@ -112,7 +123,9 @@ const mapDispatchToProps = (dispatch) =>
       getCustomerListByUserId,
       setCustomerViewType,
       getCustomerPagination,
-      emptyCustomer
+      emptyCustomer,
+      getLatestCustomer,
+      getCustomerCloser
     },
     dispatch
   );
