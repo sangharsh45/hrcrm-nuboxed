@@ -4,9 +4,9 @@ import { bindActionCreators } from "redux";
 import { Button, Tooltip,Switch } from "antd";
 import { FormattedMessage } from "react-intl";
 import { getlocation } from "../../Event/Child/Location/LocationAction";
-import { getCountry } from "../../Settings/Category/Country/CountryAction";
+import {getCountries} from "../../Auth/AuthAction"
 import { Formik, Form, Field,FieldArray, FastField } from "formik";
-import { Spacer, StyledLabel } from "../../../Components/UI/Elements";
+import { HeaderLabel, Spacer, StyledLabel } from "../../../Components/UI/Elements";
 import { InputComponent } from "../../../Components/Forms/Formik/InputComponent";
 import { SelectComponent } from "../../../Components/Forms/Formik/SelectComponent";
 import SearchSelect from "../../../Components/Forms/Formik/SearchSelect";
@@ -74,17 +74,17 @@ class EmployeeForm extends Component {
   }
 
   componentDidMount() {
-    const { getCountry ,getRoles,getlocation} = this.props;
+    const { getCountries ,getRoles,getlocation} = this.props;
     console.log();
     getRoles(this.props.organizationId);
-    getCountry(getCountry);
+    getCountries(getCountries);
     getlocation(this.props.orgId);
 }
   render() {
-    const countryNameOption = this.props.country.map((item) => {
+    const countryNameOption = this.props.countries.map((item) => {
       return {
           label: `${item.country_name || ""}`,
-          value: item.country_name,
+          value: item.country_id,
       };
   });
   const locationNameOption = this.props.showLocation.map((item) => {
@@ -95,7 +95,7 @@ class EmployeeForm extends Component {
 });
   
 
-  const dialCodeNameOption = this.props.country.map((item) => {
+  const dialCodeNameOption = this.props.countries.map((item) => {
     return {
         label: `${item.country_dial_code || ""}`,
         value: item.country_dial_code,
@@ -440,6 +440,13 @@ class EmployeeForm extends Component {
                     </div>
                  
                   </div>
+                  <div style={{ width: "100%",backgroundImage: "linear-gradient(-90deg, #00162994, #94b3e4)" }}>
+                      <div>
+                  <HeaderLabel style={{color:"white"}}>
+                  Address for  Correspondence</HeaderLabel>
+                  </div>
+                    </div>
+             
                   {/* <Spacer /> */}
                   <FieldArray
                     name="address"
@@ -459,7 +466,10 @@ class EmployeeForm extends Component {
                 <div class=" h-3/4 w-5/12 "
                 
                 >
-                                 <Field
+
+<div class=" flex justify-between" >
+                      <div class=" w-w48">
+                      <Field
   isRequired  // This makes the field mandatory
   name="departmentId"
   label={<FormattedMessage
@@ -473,6 +483,24 @@ class EmployeeForm extends Component {
   isColumn
   inlineLabel
 />
+                    </div>
+                    <div class="w-w47.5">
+                    <FastField
+                    name="label"
+                    type="level"
+                    label={<FormattedMessage
+                      id="app.level"
+                      defaultMessage="Level"
+                    />}
+                    options={["L1", "L2", "L3"]}
+                    component={SelectComponent}
+                    inlineLabel
+                    className="field"
+                    isColumn
+                    />
+                    </div>
+                  </div>
+
 <Field
                     name="roleType"
                     label={<FormattedMessage
@@ -553,6 +581,8 @@ class EmployeeForm extends Component {
                     </div>
                   </div>
 
+
+
                   {/* <Field
                     name="designationTypeId"
                     label={<FormattedMessage
@@ -586,19 +616,7 @@ class EmployeeForm extends Component {
                     disabled={!values.departmentId}
                     inlineLabel
                    />
-                  <FastField
-                    name="label"
-                    type="level"
-                    label={<FormattedMessage
-                      id="app.level"
-                      defaultMessage="Level"
-                    />}
-                    options={["L1", "L2", "L3"]}
-                    component={SelectComponent}
-                    inlineLabel
-                    className="field"
-                    isColumn
-                    />
+              
                   {/* <Field
                     name="workplace"
                     label={<FormattedMessage
@@ -700,7 +718,7 @@ const mapStateToProps = ({ auth,role,countrys,location, employee,designations,de
   roles: role.roles,
   organizationId: auth.userDetails.organizationId,
   orgId: auth.userDetails.organizationId,
-  country: countrys.country,
+  countries: auth.countries,
   showLocation:location.showLocation,
   addingEmployee: employee.addingEmployee,
   departmentId:departments.departmentId,
@@ -709,7 +727,7 @@ const mapStateToProps = ({ auth,role,countrys,location, employee,designations,de
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators({
      addEmployee,
-     getCountry,
+     getCountries,
      getDesignations,
       getDepartments,
       getRoles,
