@@ -18,6 +18,7 @@ import Documents from "../Documents/Documents"
 import Education from "../Educations/Education"
 import Expense from "../Expense/Expense";
 import IdProofs from "../Id Proof/IdProofs";
+import Country from "./Country/Country";
 const TabPane = StyledTabs.TabPane;
 
 class OthersTab extends Component {
@@ -98,6 +99,19 @@ class OthersTab extends Component {
               >
                 <Suspense>
                   <Expense />
+                </Suspense>
+              </TabPane>
+              <TabPane
+                tab={
+                  <>
+                  <i class="fas fa-tasks"></i>
+                    <span style={{ marginLeft: "0.25em" }}>Country</span>
+                  </>
+                }
+                key="5"
+              >
+                <Suspense>
+                  <Country />
                 </Suspense>
               </TabPane>
             </StyledTabs>

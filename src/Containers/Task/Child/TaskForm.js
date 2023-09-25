@@ -134,7 +134,7 @@ class TaskForm extends Component {
         })
         .map((option) => ({
           label: option.candidateName || "",
-          value: option.candidateId,
+          value: option.included,
         }));
     console.log(candidateOptions);
 
@@ -225,7 +225,7 @@ class TaskForm extends Component {
     const candidateOption = this.props.candidateTaskList.map((item) => {
       return {
         label: item.fullName,
-        value: item.candidateId,
+        value: item.included,
       };
     });
 
@@ -251,7 +251,7 @@ class TaskForm extends Component {
                   assignedDate: assignedDate || dayjs(),
                   customerId: "",
                   projectName: "",
-                  candidateId: [],
+                  included: [],
                   taskChecklistId: "",
                   taskDescription: "",
                   timeZone: timeZone,
@@ -952,7 +952,7 @@ class TaskForm extends Component {
                   <Spacer />
                   {values.taskTypeId === "TSK52434477391272022" && (
                     <Field
-                      name="candidateId"
+                      name="included"
                       //type="text"
                       label="Team"
                       mode
@@ -970,17 +970,17 @@ class TaskForm extends Component {
                             )
                           : []
                       }
-                      value={values.candidateId}
+                      value={values.included}
                     />
                   )}
                   {values.taskTypeId !== "TSK52434477391272022" && (
                     <Field
-                      name="candidateId"
+                      name="included"
                       //type="text"
                       label="Team"
                       mode
                       component={SelectComponent}
-                      value={values.candidateId}
+                      value={values.included}
                       options={
                         Array.isArray(candidateOption) ? candidateOption : []
                       }
