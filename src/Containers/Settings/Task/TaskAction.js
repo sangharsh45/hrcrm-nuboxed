@@ -143,3 +143,32 @@ export const removeTask = ( taskTypeId) => (dispatch) => {
       });
     });
 };
+
+export const linkTaskWorkflowToggle = ( data,countryId,cb) => (dispatch, getState) => {
+  //console.log(permissions, userId);
+  const orgId = getState().auth.userDetails.organizationId;
+  dispatch({
+    type: types.LINK_TASK_WORKFLOW_TOGGLE_REQUEST,
+  });
+  axios
+  .put(`${base_url}/taskType/activeTaskCheckList`, data, {
+    headers: {
+      Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+    },
+  })
+
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.LINK_TASK_WORKFLOW_TOGGLE_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.LINK_TASK_WORKFLOW_TOGGLE_FAILURE,
+        payload: err,
+      });
+    })
+};

@@ -724,13 +724,13 @@ export const getCallsListByUserId = (userId) => (dispatch) => {
 /**
  * get task list by userId
  */
-export const getTasksListByUserId = (employeeId) => (dispatch) => {
+export const getTasksListByUserId = (employeeId,pageNo) => (dispatch) => {
   console.log(employeeId);
   dispatch({
     type: types.GET_TASKS_LIST_BY_USER_ID_REQUEST,
   });
   axios
-    .get(`${base_url}/task/employee/${employeeId}`, {
+    .get(`${base_url}/task/employee/${employeeId}/${pageNo}`, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },

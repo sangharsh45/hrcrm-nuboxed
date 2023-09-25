@@ -20,6 +20,9 @@ const initialState = {
     updatingTasks: false,
     updatingTasksError: false,
 
+    addingTaskWorkflowToggle: false,
+    addingTaskWorkflowToggleError: false,
+
    
 };
 
@@ -108,6 +111,28 @@ case types.GET_TASK_REQUEST:
             removingTasks: false,
             removingTasksError: true,
           };
+
+
+          case types.LINK_TASK_WORKFLOW_TOGGLE_REQUEST:
+            return { ...state, addingTaskWorkflowToggle: true };
+          case types.LINK_TASK_WORKFLOW_TOGGLE_SUCCESS:
+            return {
+              ...state,
+              addingTaskWorkflowToggle: false,
+              tasks: state.tasks.map((item) => {
+                if (item.taskTypeId === action.payload.taskTypeId) {
+                  return action.payload;
+                } else {
+                  return item;
+                }
+              }),
+            };
+          case types.LINK_TASK_WORKFLOW_TOGGLE_FAILURE:
+            return {
+              ...state,
+              addingTaskWorkflowToggle: false,
+              addingTaskWorkflowToggleError: true,
+            };
 
     default:
         return state;

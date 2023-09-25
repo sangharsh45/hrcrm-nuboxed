@@ -42,6 +42,8 @@ const ButtonGroup = Button.Group;
 const TaskTable = (props) => {
   const [data, setData] = useState("");
   const [data1, setData1] = useState("");
+  const [currentNameId, setCurrentNameId] = useState("");
+
   const [currentprocessName, setCurrentprocessName] = useState("");
   const tab = document.querySelector('.ant-layout-sider-children');
   const tableHeight = tab && tab.offsetHeight * 0.75;
@@ -72,6 +74,10 @@ const TaskTable = (props) => {
   const handleNotesClick = (data1) => {
     setData1(data1);
   };
+  function handleSetTaskNameId(item) {
+    setCurrentNameId(item);
+  }
+  
 
   const getColumnSearchProps = (dataIndex) => ({
     filterDropdown: ({
@@ -538,7 +544,7 @@ return (
               <NoteAltIcon
                 onClick={() => {
                   handleTaskNotesDrawerModal(true);
-                  this.handleNotesClick(item);
+                  this.handleSetTaskNameId(item);
                 }}
                 style={{ color: "green", cursor: "pointer", fontSize: "0.8rem" }}
               />
@@ -656,6 +662,8 @@ return (
                   
     
   ];
+  console.log("currentNameId", currentNameId);
+
 
   return (
     <>
@@ -698,11 +706,14 @@ return (
           addDrawerTaskProjectModal={props.addDrawerTaskProjectModal}
           data={data}
         />
-        <AddTaskNotesDrawerModal
-          handleTaskNotesDrawerModal={props.handleTaskNotesDrawerModal}
-          addDrawerTaskNotesModal={props.addDrawerTaskNotesModal}
-          data1={data1}
-        />
+<AddTaskNotesDrawerModal
+  handleTaskNotesDrawerModal={props.handleTaskNotesDrawerModal}
+  addDrawerTaskNotesModal={props.addDrawerTaskNotesModal}
+  currentNameId={currentNameId}
+  // taskName={currentprocessName.taskName} // Pass taskName as a prop
+
+/>
+
 
       {/* AddTaskProjectDrawerModal and AddTaskNotesDrawerModal components go here */}
     </>
