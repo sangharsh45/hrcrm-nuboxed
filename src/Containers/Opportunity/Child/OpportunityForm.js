@@ -40,12 +40,12 @@ import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/20/solid";
  * yup validation scheme for creating a opportunity
  */
 
-const OpportunitySchema = Yup.object().shape({
-  opportunityName: Yup.string().required("Input needed!"),
-  oppWorkflow: Yup.string().required("Input needed!"),
-  currency: Yup.string().required("Input needed!"),
-  oppStage: Yup.string().required("Input needed!"),
-});
+// const OpportunitySchema = Yup.object().shape({
+//   opportunityName: Yup.string().required("Input needed!"),
+//   oppWorkflow: Yup.string().required("Input needed!"),
+//   currency: Yup.string().required("Input needed!"),
+//   oppStage: Yup.string().required("Input needed!"),
+// });
 function OpportunityForm(props) {
   useEffect(() => {
     props.getRecruiterName();
@@ -112,7 +112,10 @@ function OpportunityForm(props) {
       avatar: "",
     },
   ];
-  const [selected, setSelected] = useState(people[3]);
+  
+  const [defaultOption, setDefaultOption] = useState(props.fullName);
+  const [selected, setSelected] = useState(defaultOption);
+
 
   function getAreaOptions(filterOptionKey, filterOptionValue) {
     const contactOptions =
@@ -285,6 +288,8 @@ function OpportunityForm(props) {
     name,
   } = props;
   console.log(customerId);
+  console.log("slll",selected)
+  const selectedOption = props.sales.find((item) => item.fullName === selected);
   return (
     <>
       <Formik
@@ -304,9 +309,9 @@ function OpportunityForm(props) {
           contactId: undefined,
           oppInnitiative: "",
           oppStage: "",
-          salesUserIds: props.user.employeeId || "",
+          salesUserIds: selectedOption ? selectedOption.employeeId:props.userId,
         }}
-        validationSchema={OpportunitySchema}
+        // validationSchema={OpportunitySchema}
         onSubmit={(values, { resetForm }) => {
           console.log(values);
           console.log(values);
@@ -387,6 +392,7 @@ function OpportunityForm(props) {
               startDate: `${newStartDate}T20:00:00Z`,
               endDate: `${newEndDate}T20:00:00Z`,
               description: transcript ? transcript : text,
+              salesUserIds: selectedOption ? selectedOption.employeeId:props.userId,
             },
             props.userId,
             props.customerId,
@@ -556,7 +562,7 @@ class=" h-full w-[24rem]"
                   </div>
                 </div>
               </div>
-              <div
+              {/* <div
                class=" h-full w-[24rem]"
               >
                 <Listbox value={selected} onChange={setSelected}>
@@ -567,12 +573,7 @@ class=" h-full w-[24rem]"
                       </Listbox.Label>
                       <div className="relative mt-1">
                         <Listbox.Button className="relative w-full leading-4 cursor-default rounded-md border border-gray-300 bg-white py-2 pl-3 pr-10 text-left shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm: text-sm">
-                        {/* <span >
-                        <input
-                        className="text-black-500 font-semibold"
-                        value={props.fullName}
-                        />
-                        </span> */}
+               
                           <span className="flex items-center">
                             <img
                               src={selected.avatar}
@@ -808,7 +809,84 @@ class=" h-full w-[24rem]"
                     </StyledLabel>
                   </div>
                 </div>
-              </div>
+              </div> */}
+          <div className="h-full w-[24rem]">
+      <Listbox value={selected} onChange={setSelected}>
+        {({ open }) => (
+          <>
+            <Listbox.Label className="block text-sm font-semibold text-gray-700">
+              Assigned to
+            </Listbox.Label>
+            <div className="relative mt-1">
+              <Listbox.Button className="relative w-full leading-4 cursor-default rounded-md border border-gray-300 bg-white py-2 pl-3 pr-10 text-left shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm">
+                {selected}
+              </Listbox.Button>
+              {open && (
+                <Listbox.Options
+                  static
+                  className="absolute z-10 mt-1 max-h-56 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
+                >
+                  {props.sales.map((item) => (
+                    <Listbox.Option
+                      key={item.employeeId}
+                      className={({ active }) =>
+                        `relative cursor-default select-none py-2 pl-3 pr-9 ${
+                          active ? "text-white bg-indigo-600" : "text-gray-900"
+                        }`
+                      }
+                      value={item.fullName}
+                    >
+                      {({ selected, active }) => (
+                        <>
+                          <div className="flex items-center">
+                            <span
+                              className={`ml-3 block truncate ${
+                                selected ? "font-semibold" : "font-normal"
+                              }`}
+                            >
+                              {item.fullName}
+                            </span>
+                          </div>
+                          {selected && (
+                            <span
+                              className={`absolute inset-y-0 right-0 flex items-center pr-4 ${
+                                active ? "text-white" : "text-indigo-600"
+                              }`}
+                            >
+                              
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                className="h-5 w-5"
+                                viewBox="0 0 20 20"
+                                fill="currentColor"
+                                aria-hidden="true"
+                              >
+                                <path
+                                  fillRule="evenodd"
+                                  d="M6.293 9.293a1 1 0 011.414 0L10 11.586l2.293-2.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z"
+                                  clipRule="evenodd"
+                                />
+                              </svg>
+                            </span>
+                          )}
+                        </>
+                      )}
+                    </Listbox.Option>
+                  ))}
+                </Listbox.Options>
+              )}
+            </div>
+          </>
+        )}
+      </Listbox>
+
+      {/* <button
+        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4"
+        onClick={handleButtonClick}
+      >
+        Log ID
+      </button> */}
+    </div>
             </div>
             <Spacer />
             <div class=" flex justify-end">

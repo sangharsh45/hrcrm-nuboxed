@@ -29,6 +29,10 @@ class ContactHeader extends Component {
               currentPartnerData={this.props.currentPartnerData}
               handlePartnerClear={this.props.handlePartnerClear}
               setCurrentPartnerData={this.props.setCurrentPartnerData}
+              // selectedChoice={this.props.selectedChoice}
+              // handleChoiceChange={this.props.handleChoiceChange}
+              selectedCountry={this.props.selectedCountry}
+              handleCountryChange={this.props.handleCountryChange}
             />
           }
           rightComponent={
