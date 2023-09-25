@@ -157,10 +157,10 @@ function CustomerCardList(props) {
 
                                    
                                         <Tooltip>
-                                            <h4 class=" text-base text-cardBody font-poppins">
+                                            <h4 class=" text-[0.875rem] text-cardBody font-poppins">
                                             Name
                                             </h4>
-                                            <h4 class=" text-base text-blue-500 text-cardBody font-poppins cursor-pointer">
+                                            <h4 class=" text-[0.75rem] text-blue-500 text-cardBody font-poppins cursor-pointer">
                                                 
          <Link
           toUrl={`customer/${item.customerId}`}
@@ -185,16 +185,16 @@ function CustomerCardList(props) {
 
                                 <div className=" flex font-medium flex-col  w-52 ">
                            
-                                    <h4 class=" text-base text-cardBody font-poppins"> Sector </h4>
-                                    <h4 class=" text-base text-cardBody font-poppins">   
+                                    <h4 class=" text-[0.875rem] text-cardBody font-poppins"> Sector </h4>
+                                    <h4 class=" text-[0.75rem] text-cardBody font-poppins">   
                                     {item.sector}
                                     </h4>
                                 </div>
                                 <div className=" flex font-medium flex-col w-36 ">
                                   
 
-                                    <h4 class=" text-base text-cardBody font-poppins">Country</h4>
-                                    <h4 class=" text-base text-cardBody font-poppins">
+                                    <h4 class=" text-[0.875rem] text-cardBody font-poppins">Country</h4>
+                                    <h4 class=" text-[0.75rem] text-cardBody font-poppins">
                                     {/* <ReactCountryFlag countryCode="NL" svg /> */}
                                     {/* <ReactCountryFlag
                           countryCode={item.country}
@@ -211,16 +211,16 @@ function CustomerCardList(props) {
                                 </div>
                              
                                 <div className=" flex font-medium flex-col w-32 ">
-                                    <h4 class=" text-base text-cardBody font-poppins"># Opportunity</h4>
+                                    <h4 class=" text-[0.875rem] text-cardBody font-poppins"># Opportunity</h4>
 
-                                    <div class=" text-base text-cardBody font-poppins">
+                                    <div class=" text-[0.75rem] text-cardBody font-poppins">
 
                                     </div>
                                 </div>
                                 <div className=" flex font-medium flex-col w-32 ">
-                                    <h4 class=" text-base text-cardBody font-poppins">Assigned to</h4>
+                                    <h4 class=" text-[0.875rem] text-cardBody font-poppins">Assigned to</h4>
 
-                                    <div class=" text-base text-cardBody font-poppins">
+                                    <div class=" text-[0.75rem] text-cardBody font-poppins">
                                     
                                     <span>
               {item.assignedTo === null ? (
@@ -238,7 +238,7 @@ function CustomerCardList(props) {
                                 </div>
                                 <div className=" flex font-medium flex-col w-20 ">
                        
-                       <h4 class=" text-base text-cardBody font-poppins">Owner</h4>
+                       <h4 class=" text-[0.875rem] text-cardBody font-poppins">Owner</h4>
 
                        <span>
               <MultiAvatar

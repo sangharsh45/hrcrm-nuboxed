@@ -53,7 +53,7 @@
 .login_password{
   display: flex;
   flex-direction: row;
-  width: 85%;
+  width: 100%;
 }
 .randome_text2 {
   line-height: 1.1;
