@@ -66,80 +66,12 @@ const CallSchema = Yup.object().shape({
 });
 function CallForm(props) {
 
-  const people = [
-    {
-      id: 1,
-      name: 'Wade Cooper',
-      avatar:""
-        
-    },
-    {
-      id: 2,
-      name: 'Arlene Mccoy',
-      avatar:
-      'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-    },
-    {
-      id: 3,
-      name: 'Devon Webb',
-      avatar:
-        "",
-    },
-    {
-      id: 4,
-      name: 'Tom Cook',
-      avatar:
-       "",
-    },
-    {
-      id: 5,
-      name: 'Tanya Fox',
-      avatar:
-      'https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-    },
-    {
-      id: 6,
-      name: 'Hellen Schmidt',
-      avatar:
-      'https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-    },
-    {
-      id: 7,
-      name: 'Caroline Schultz',
-      avatar:
-       "",
-    },
-    {
-      id: 8,
-      name: 'Mason Heaney',
-      avatar:
-        "",
-    },
-    {
-      id: 9,
-      name: 'Claudie Smitham',
-      avatar:
-        "",
-    },
-    {
-      id: 10,
-      name: 'Emil Schaefer',
-      avatar:
-       "",
-    },
-  ]
-  const [selected1, setSelected1] = useState(people[3])
+
+  
   const[category,setCategory] =useState(props.selectedCall ? props.selectedCall.callCategory : "New")
-  const[selected,setSelected] =useState(props.selectedCall
-         ? props.selectedCall.callCategory
-           : "New",)
-  const[Type,setType] =useState(props.selectedCall
-           ? props.selectedCall.callType
-           : "Inbound",)
   const[reminder,setReminder] =useState(true)
   console.log("category",category);
-  console.log("selected",selected);
-  console.log("Type",Type);
+  const[Type,setType]=useState(props.selectedCall?props.selectedCall.callType:"Inbound",)
 
   function handleCategoryChange (data)  {
     debugger;
@@ -170,7 +102,9 @@ function CallForm(props) {
   }, []);
 
   
- 
+  const [defaultOption, setDefaultOption] = useState(props.fullName);
+  const [selected, setSelected] = useState(defaultOption);
+
     const {
       handleCallNotesModal
 
@@ -225,8 +159,9 @@ function CallForm(props) {
     if (props.selectedCall) {
       var data = props.selectedCall.callCategory === "New" ? false : true;
     }
-    console.log("cdc", props.candidateId)
-    return (
+   const selectedOption = props.sales.find((item) => item.fullName === selected);
+   console.log("bn",selectedOption,selected)
+   return (
       <>
         <Formik
           // enableReinitialize
@@ -253,7 +188,7 @@ function CallForm(props) {
                 callDescription: "",
 
                 included: [],
-                assignedTo: userId ? userId : "",
+                assignedTo: selectedOption ? selectedOption.employeeId:props.userId,
                 contactId: "",
                 candidateId: "",
               }
@@ -355,6 +290,7 @@ function CallForm(props) {
                   endDate: `${newEndDate}T${newEndTime}`,
                   startTime: 0,
                   endTime: 0,
+                  assignedTo: selectedOption ? selectedOption.employeeId:props.userId,
                 },
                 () => handleCallback(resetForm)
               )
@@ -666,74 +602,74 @@ function CallForm(props) {
                   )}
                 </div>
                 <div class=" h-full w-2/5"   >
-                  <Listbox value={selected1} onChange={setSelected1}>
-      {({ open }) => (
-        <>
-          <Listbox.Label className="block text-sm font-bold text-gray-700">Assigned to</Listbox.Label>
-          <div className="relative mt-1">
-            <Listbox.Button className="relative w-full leading-4 cursor-default rounded-md border border-gray-300 bg-white py-2 pl-3 pr-10 text-left shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm: text-sm">
-          
-              <span className="flex items-center">
-                <img src={selected1.avatar} alt="" className="h-2 w-2 flex-shrink-0 rounded-full" />
-                <span className="ml-3 block truncate">{selected1.fullName}</span>
-              </span>
-             
-
-              <span className="pointer-events-none absolute inset-y-0 right-0 ml-3 flex items-center pr-2">
-                <ChevronUpDownIcon className="h-5 w-5 text-gray-400" aria-hidden="true" />
-              </span>
-            </Listbox.Button>
-
-            <Transition
-              show={open}
-              as={Fragment}
-              leave="transition ease-in duration-100"
-              leaveFrom="opacity-100"
-              leaveTo="opacity-0"
-            >
-              <Listbox.Options className="absolute z-10 mt-1 max-h-56 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
-                {props.sales.map((person) => (
-                  <Listbox.Option
-                    key={person.id}
-                    className={({ active }) =>
-                      classNames(
-                        active ? 'text-white bg-indigo-600' : 'text-gray-900',
-                        'relative cursor-default select-none py-2 pl-3 pr-9'
-                      )
-                    }
-                    value={person}
-                  >
-                    {({ selected1, active }) => (
-                      <>
-                        <div className="flex items-center">
-                          <img src={person.avatar} alt="" className="h-6 w-6 flex-shrink-0 rounded-full" />
-                          <span
-                            className={classNames(selected1 ? 'font-semibold' : 'font-normal', 'ml-3 block truncate')}
-                          >
-                            {person.fullName}
-                          </span>
-                        </div>
-
-                        {selected1 ? (
-                          <span
-                            className={classNames(
-                              active ? 'text-white' : 'text-indigo-600',
-                              'absolute inset-y-0 right-0 flex items-center pr-4'
-                            )}
-                          >
-                            <CheckIcon className="h-5 w-5" aria-hidden="true" />
-                          </span>
-                        ) : null}
-                      </>
-                    )}
-                  </Listbox.Option>
-                ))}
-              </Listbox.Options>
-            </Transition>
-          </div>
-        </>
-      )}
-    </Listbox>
+                <Listbox value={selected} onChange={setSelected}>
+        {({ open }) => (
+          <>
+            <Listbox.Label className="block text-sm font-semibold text-gray-700">
+              Assigned to
+            </Listbox.Label>
+            <div className="relative mt-1">
+              <Listbox.Button className="relative w-full leading-4 cursor-default rounded-md border border-gray-300 bg-white py-2 pl-3 pr-10 text-left shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm">
+                {selected}
+              </Listbox.Button>
+              {open && (
+                <Listbox.Options
+                  static
+                  className="absolute z-10 mt-1 max-h-56 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
+                >
+                  {props.sales.map((item) => (
+                    <Listbox.Option
+                      key={item.employeeId}
+                      className={({ active }) =>
+                        `relative cursor-default select-none py-2 pl-3 pr-9 ${
+                          active ? "text-white bg-indigo-600" : "text-gray-900"
+                        }`
+                      }
+                      value={item.fullName}
+                    >
+                      {({ selected, active }) => (
+                        <>
+                          <div className="flex items-center">
+                            <span
+                              className={`ml-3 block truncate ${
+                                selected ? "font-semibold" : "font-normal"
+                              }`}
+                            >
+                              {item.fullName}
+                            </span>
+                          </div>
+                          {selected && (
+                            <span
+                              className={`absolute inset-y-0 right-0 flex items-center pr-4 ${
+                                active ? "text-white" : "text-indigo-600"
+                              }`}
+                            >
+                              
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                className="h-5 w-5"
+                                viewBox="0 0 20 20"
+                                fill="currentColor"
+                                aria-hidden="true"
+                              >
+                                <path
+                                  fillRule="evenodd"
+                                  d="M6.293 9.293a1 1 0 011.414 0L10 11.586l2.293-2.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z"
+                                  clipRule="evenodd"
+                                />
+                              </svg>
+                            </span>
+                          )}
+                        </>
+                      )}
+                    </Listbox.Option>
+                  ))}
+                </Listbox.Options>
+              )}
+            </div>
+          </>
+        )}
+      </Listbox>
                       <Spacer />
                   <Field
                     name="included"
@@ -917,7 +853,7 @@ const mapStateToProps = ({ auth, call, employee, opportunity, candidate }) => ({
   employees: employee.employees,
   filteredContact: candidate.filteredContact,
   addNotesSpeechModal: call.addNotesSpeechModal,
-  // candidateId: candidate.candidate.candidateId,
+  fullName: auth.userDetails.fullName
   // candidateByuserId:candidate.candidateByuserId
 });
 
