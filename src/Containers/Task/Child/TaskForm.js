@@ -441,6 +441,102 @@ class TaskForm extends Component {
                         options={Array.isArray(TaskOption) ? TaskOption : []}
                       />
                     </div>
+                  
+                    {values.taskTypeId === "TSK52434477391272022" && (
+                      <div class=" w-1/2">
+                          <Spacer />
+                      <StyledLabel>Task CheckList</StyledLabel>
+                          <Field
+                            name="taskChecklistId"
+                            // selectType="contactListFilter"
+                            isColumnWithoutNoCreate
+                            isRequired
+                            placeolder="Select type"
+                            // label={
+                            //   <FormattedMessage
+                            //     id="app.taskList"
+                            //     defaultMessage="Task CheckList"
+                            //   />
+                            // }
+                            // component={SearchSelect}
+                            component={SelectComponent}
+                            options={
+                              Array.isArray(TaskOptions) ? TaskOptions : []
+                            }
+                            value={values.taskChecklistId}
+                            isColumn
+                            inlineLabel
+                          />
+                     
+                      </div>
+                    )}
+
+<div class=" w-1/2" >
+                    <Spacer />
+                      <StyledLabel>Task Stages</StyledLabel>
+                    <Field
+                    name="taskStages"
+                    // label={<FormattedMessage
+                    //   id="app.taskStages"
+                    //   defaultMessage="Task Stages"
+                    // />}
+                    isColumnWithoutNoCreate
+                    // component={SelectComponent}
+                    // options={
+                    //   Array.isArray(
+                    //     this.getStagesOptions(
+                    //       "taskTypeId",
+                    //       values.taskTypeId
+                    //     )
+                    //   )
+                    //     ? this.getStagesOptions(
+                    //         "taskTypeId",
+                    //         values.taskTypeId
+                    //       )
+                    //     : []
+                    // }
+                    // value={values.taskStages}
+                    // filterOption={{
+                    //   filterType: "taskTypeId",
+                    //   filterValue: values.taskTypeId,
+                    // }}
+                    disabled={!values.taskTypeId}
+                    isColumn
+                    margintop={"0"}
+                    inlineLabel
+                    style={{ flexBasis: "80%" }}
+                    // value={values.roleTypeId}
+                    // width={"100%"}
+                    // isColumn
+                    // selectType="roleType"
+                     />
+                      {/* <div class=" w-w48">
+                      <Field
+  isRequired  // This makes the field mandatory
+  name="taskWorkflow"
+  label={<FormattedMessage
+    id="app.taskWorkflow"
+    defaultMessage="Task Workflow"
+  />}
+  isColumnWithoutNoCreate
+  component={SelectComponent}
+  // value={values.departmentId}
+  options={
+    Array.isArray(workflowNameOption)
+      ? workflowNameOption
+      : []
+  }
+  isColumn
+  inlineLabel
+/>
+                    </div> */}
+                    <div>
+                      
+
+                    </div>
+                  
+                  </div>
+                 
                     <div style={{ width: "24%" }}>
                       <Spacer style={{ marginTop: "1.25em" }} />
                       <StyledLabel>
@@ -643,35 +739,7 @@ class TaskForm extends Component {
                   </div>
                   <Spacer />
 
-                  <div class=" flex justify-between">
-                    {values.taskTypeId === "TSK52434477391272022" && (
-                      <div class=" w-1/2">
-                        <StyledLabel>
-                          <Field
-                            name="taskChecklistId"
-                            // selectType="contactListFilter"
-                            isColumnWithoutNoCreate
-                            isRequired
-                            placeolder="Select type"
-                            label={
-                              <FormattedMessage
-                                id="app.taskList"
-                                defaultMessage="Task CheckList"
-                              />
-                            }
-                            // component={SearchSelect}
-                            component={SelectComponent}
-                            options={
-                              Array.isArray(TaskOptions) ? TaskOptions : []
-                            }
-                            value={values.taskChecklistId}
-                            isColumn
-                            inlineLabel
-                          />
-                        </StyledLabel>
-                      </div>
-                    )}
-                  </div>
+               
                   <div class=" flex justify-between">
                     <div class=" w-1/2">
                       <Field
