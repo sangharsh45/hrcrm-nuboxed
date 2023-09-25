@@ -11,8 +11,8 @@ import Button from "antd/lib/button";
 import { login, generateOtpByEmail, validateOtp } from "./AuthAction";
 import { EyeInvisibleOutlined, EyeOutlined,
 } from "@ant-design/icons";
-   import FWLogo from "../../Assets/Images/Logo_new.png";
-   import FWLogo1 from "../../Assets/Images/background2.jpg";
+   import FWLogo from "../../Assets/Images/Unboxed.jpeg";
+   import FWLogo1 from "../../Assets/Images/unboxcover.jpeg";
 import { InputComponent } from "../../Components/Forms/Formik/InputComponent";
 
 /**
