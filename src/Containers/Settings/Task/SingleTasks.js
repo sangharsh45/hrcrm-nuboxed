@@ -9,6 +9,7 @@ import { FormattedMessage } from "react-intl";
 import { TextInput } from "../../../Components/UI/Elements";
 import { ActionIcon } from "../../../Components/Utils";
 import ViewEditCard from "../../../Components/UI/Elements/ViewEditCard";
+import TaskConnetToggle from "./TaskConnetToggle";
 
 class SingleTasks extends Component {
   constructor(props) {
@@ -40,6 +41,14 @@ class SingleTasks extends Component {
               <FlexContainer justifyContent="space-between">
                 <TaskName style={{ flexBasis: "85%" }}>{taskType}</TaskName>
                 <div>
+                <div class=" w-2/6">
+                    <TaskConnetToggle
+                  // editInd={editInd}
+                  //     mandatoryInd={mandatoryInd}
+                  //     country_name={country_name}
+                  //     country_id={country_id}
+                    />  
+                    </div>
                   {this.props.task.editInd ? (
                     <BorderColorIcon
                    

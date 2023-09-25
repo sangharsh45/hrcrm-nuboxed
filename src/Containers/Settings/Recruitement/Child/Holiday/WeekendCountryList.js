@@ -57,7 +57,10 @@ class WeekendCountryList extends PureComponent {
                                         <Suspense fallback={"Loading..."}>
                                           
                            <div style={{ marginTop: 10 }}>
-                            <Weekend country_name={this.state.departmentData.country_name}/>
+                            <Weekend country_name={this.state.departmentData.country_name}
+                            country_id={this.state.departmentData.country_id}
+                            
+                            />
                         </div>
                                         </Suspense>
                                     )}

@@ -101,11 +101,7 @@ function Recruitment(props) {
       ruleId: "17",
       component: <SettingsHolidayTab />,
     },
-    {
-      rulesName: "Task",
-      ruleId: "18",
-      component: <ConfigureTab/>,
-    },
+
     {
       rulesName: "Approval",
       ruleId: "19",

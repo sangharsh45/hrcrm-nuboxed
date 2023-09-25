@@ -805,7 +805,7 @@ const AccessForm = (props) => {
 
                 </div> */}
                <div >
-                  <h1>Customer</h1>
+                  <h1>Account</h1>
                   <Checkbox indeterminate={indeterminateCustomer} onChange={onCheckAllCustomerChange} checked={checkAllCustomer}>
                     Check all
                   </Checkbox>

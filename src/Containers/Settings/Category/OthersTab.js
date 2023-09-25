@@ -1,18 +1,12 @@
 import React, { Component, lazy, Suspense } from "react";
 import { bindActionCreators } from "redux";
-import { FormattedMessage } from "react-intl";
 import { StyledTabs } from "../../../Components/UI/Antd";
 import { TabsWrapper } from "../../../Components/UI/Layout";
-import { MainWrapper, FlexContainer } from "../../../Components/UI/Layout";
+import {  FlexContainer } from "../../../Components/UI/Layout";
 import { connect } from "react-redux";
-import { Menu, Icon, Popover } from "antd";
+import LanguageIcon from '@mui/icons-material/Language';
 import ReceiptIcon from '@mui/icons-material/Receipt';
 import RememberMeIcon from '@mui/icons-material/RememberMe';
-import {
-  DatabaseOutlined,
-  EyeInvisibleOutlined,
-  
-} from '@ant-design/icons';
 import InsertDriveFileIcon from '@mui/icons-material/InsertDriveFile';
 import Documents from "../Documents/Documents"
 import Education from "../Educations/Education"
@@ -104,7 +98,7 @@ class OthersTab extends Component {
               <TabPane
                 tab={
                   <>
-                  <i class="fas fa-tasks"></i>
+                 <LanguageIcon/>
                     <span style={{ marginLeft: "0.25em" }}>Country</span>
                   </>
                 }
