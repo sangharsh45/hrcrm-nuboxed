@@ -16,6 +16,7 @@ const initialState = {
   rejectApprove: false,
   rejectApproveError: false,
 
+  addTaskDetailModal:false,
 
   updateProjectTaskModal:false,
 
@@ -769,7 +770,8 @@ export const TaskReducer = (state = initialState, action) => {
                   fetchingApproveTaskTableError: true,
                 };
 
-
+                case types.HANDLE_TASK_OPEN_MODAL:
+                  return { ...state, addTaskDetailModal: action.payload };
 
 
         default:

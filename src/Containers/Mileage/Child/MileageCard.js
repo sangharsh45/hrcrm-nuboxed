@@ -275,7 +275,7 @@ const CardWrapper = styled.div`
 `
 const CardElement = styled.div`
  
-border-radius: 0.75rem;
+border-radius: 0.35rem;
     border: 3px solid #EEEEEE;
     background-color: rgb(255,255,255);
     box-shadow: 0 0.25em 0.62em #aaa;

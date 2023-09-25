@@ -12,6 +12,7 @@ import { login, generateOtpByEmail, validateOtp } from "./AuthAction";
 import { EyeInvisibleOutlined, EyeOutlined,
 } from "@ant-design/icons";
    import FWLogo from "../../Assets/Images/Logo_new.png";
+   import FWLogo1 from "../../Assets/Images/background2.jpg";
 import { InputComponent } from "../../Components/Forms/Formik/InputComponent";
 
 /**
@@ -81,8 +82,8 @@ class Login extends Component {
     console.log(this.props);
     return (
       <>
-        <FlexContainer>
-          <AuthContainer
+       <div class="flex justify-between p-2">
+          <div class="min-h-screen flex justify-center w-1/2 items-center"
             style={{
               backgroundColor: "#F5F5F5",
               flexDirection: "column",
@@ -211,8 +212,20 @@ class Login extends Component {
             </FormWrapper>
             <Spacer />
 
-            <div
-              className="footer1"
+           
+          </div>
+          <div class="w-1/2 flex justify-center items-center">
+          <img
+              className="big-logo"
+              src={FWLogo1}
+              style={{ }}
+              alt="Tekorero logo"
+            />
+          </div>
+         
+          </div>
+          <div
+              className="footer1 w-wk items-center"
               style={{
                 textAlign: "center",
                 position: "absolute",
@@ -222,8 +235,6 @@ class Login extends Component {
               © {new Date().getFullYear()}, {` `} tekorero.com, All rights
               reserved.
             </div>
-          </AuthContainer>
-        </FlexContainer>
       </>
     );
   }

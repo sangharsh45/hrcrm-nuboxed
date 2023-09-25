@@ -503,11 +503,14 @@ function UpdateTaskForm(props) {
                             <Button
                               type="primary"
                               shape="circle"
-                              icon={<ExclamationCircleOutlined />}
+                             // icon={<ExclamationCircleOutlined />}
                               onClick={() => handleButtonClick("High")}
                               style={{
                                 backgroundColor:
                                   priority === "High" ? "red" : "white",
+                                  borderRadius: "50%", // Set the borderRadius to 50% for a circular shape
+                                  width: "31px", // Adjust the width as needed
+                                  height: "31px"
                               }}
                             />
                           </Tooltip>
@@ -515,11 +518,14 @@ function UpdateTaskForm(props) {
                             <Button
                               type="primary"
                               shape="circle"
-                              icon={<ExclamationCircleOutlined />}
+                              //icon={<ExclamationCircleOutlined />}
                               onClick={() => handleButtonClick("Medium")}
                               style={{
                                 backgroundColor:
                                   priority === "Medium" ? "Orange" : "white",
+                                  borderRadius: "50%", // Set the borderRadius to 50% for a circular shape
+                                      width: "31px", // Adjust the width as needed
+                                      height: "31px",
                               }}
                             />
                           </Tooltip>
@@ -532,6 +538,9 @@ function UpdateTaskForm(props) {
                               style={{
                                 backgroundColor:
                                   priority === "Low" ? "teal" : "white",
+                                  borderRadius: "50%", // Set the borderRadius to 50% for a circular shape
+                                  width: "31px", // Adjust the width as needed
+                                  height: "31px"
                               }}
                             ></Button>
                           </Tooltip>

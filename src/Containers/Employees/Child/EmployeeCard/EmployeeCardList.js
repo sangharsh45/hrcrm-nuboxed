@@ -71,7 +71,7 @@ function handleSetCurrentCandidateId(candidateId) {
       
             <>
             
-      <OnlyWrapCard style={{height:"70vh"}}>
+      <OnlyWrapCard style={{height:"81vh"}}>
         {/* <InfiniteScroll
                     dataLength={props.tableRequirement.length}
                 next={handleLoadMore}

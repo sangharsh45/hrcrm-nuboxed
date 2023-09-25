@@ -27,6 +27,7 @@ import {
   setEditTask,
   handleTaskNotesDrawerModal,
   handleTaskProjectDrawerModal,
+  handleTaskopenModal
 } from "../TaskAction";
 import Highlighter from "react-highlight-words";
 import Box from "@mui/material/Box";
@@ -34,12 +35,14 @@ import { DataGrid } from "@mui/x-data-grid";
 import { MultiAvatar } from "../../../Components/UI/Elements";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
 import AddTaskNotesDrawerModal from "./AddTaskNotesDrawerModal";
+import OpenTaskModal from "./OpenTaskModal";
 const UpdateTaskModal = lazy(() => import("./UpdateTaskModal"));
 const ButtonGroup = Button.Group;
 
 const TaskTable = (props) => {
   const [data, setData] = useState("");
   const [data1, setData1] = useState("");
+  const [currentprocessName, setCurrentprocessName] = useState("");
   const tab = document.querySelector('.ant-layout-sider-children');
   const tableHeight = tab && tab.offsetHeight * 0.75;
 
@@ -58,7 +61,10 @@ const TaskTable = (props) => {
       // props.getProviderCustomerData(props.provider.serviceId, page);
     }, 100);
   };
-
+  function handleSetCurrentProcessName(item) {
+    setCurrentprocessName(item);
+     console.log(item);
+   }
   const handleIconClick = (data) => {
     setData(data);
   };
@@ -248,6 +254,32 @@ const TaskTable = (props) => {
     
    dataIndex: "taskName",
       width: "7%",
+      render: (name, item, i) => { 
+              
+        return (
+         
+             <>
+             <span   
+                onClick={() => {
+                  props.handleTaskopenModal(true);               
+                  handleSetCurrentProcessName(item)
+                  // this.props.setCurrentOpportunityRecruitMentData(item);
+                }}
+                style={{
+                  cursor: "pointer",
+                  color: "#042E8A",
+                }}          
+               >
+
+                 {`${item.taskName} `} &nbsp;
+
+
+               </span>
+
+             </>
+          
+        );
+      },
     },
 
     {
@@ -655,6 +687,11 @@ return (
           updateTaskModal={updateTaskModal}
           handleUpdateTaskModal={handleUpdateTaskModal}
         />
+        <OpenTaskModal
+          addTaskDetailModal={props.addTaskDetailModal}
+          handleTaskopenModal={props.handleTaskopenModal}
+          item={currentprocessName}
+        />
 
         <AddTaskProjectDrawerModal
           handleTaskProjectDrawerModal={props.handleTaskProjectDrawerModal}
@@ -673,6 +710,7 @@ return (
 };
   const mapStateToProps = ({ auth, task, opportunity }) => ({
     userDetails: auth.userDetails,
+    addTaskDetailModal:task.addTaskDetailModal,
     addDrawerTaskNotesModal: task.addDrawerTaskNotesModal,
     userId: auth.userDetails.userId,
     employeeId: auth.userDetails.employeeId,
@@ -696,6 +734,7 @@ return (
         rejectTaskByTaskId,
         setEditTask,
         handleUpdateTaskModal,
+        handleTaskopenModal
       },
       dispatch
     );

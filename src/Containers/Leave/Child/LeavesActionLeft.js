@@ -5,6 +5,7 @@ import { withRouter } from "react-router-dom";
 import TocIcon from '@mui/icons-material/Toc';
 import { Button, Input, Tooltip, Badge } from "antd";
 import { FormattedMessage } from "react-intl";
+import GridViewIcon from '@mui/icons-material/GridView';
 import TableViewIcon from "@mui/icons-material/TableView";
 import GroupsIcon from "@mui/icons-material/Groups";
 import CategoryIcon from '@mui/icons-material/Category';
@@ -29,7 +30,7 @@ const LeavesActionLeft = (props) => {
               color: props.viewType === "tile" && "#1890ff",
             }}
           >
-            <TableViewIcon />
+            <GridViewIcon />
           </span>
       
       </Tooltip>
