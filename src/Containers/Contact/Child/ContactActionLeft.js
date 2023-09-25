@@ -50,16 +50,35 @@ const ContactActionLeft = (props) => {
   }, [props.userId, props.viewType, props.name, transcript]);
   console.log(props.customerRecordData);
   const { user } = props;
-  const menu = (
-    <Menu>
-      <Menu.Item>
-        <Radio.Group>
-          <Radio value={"Role"}>Role</Radio>
-          <Radio value={"Cost"}>Cost</Radio>
-        </Radio.Group>
-      </Menu.Item>
-    </Menu>
-  );
+  
+  const data2 = [
+    // {
+    //   workpreference: "All",
+    // },
+    {
+      workpreference: "Management",
+    },
+    {
+      workpreference: "hiring",
+    },
+    {
+      workpreference: "Customer",
+    },
+  ];
+  const countryNameOption = [
+    // {
+    //   workpreference: "All",
+    // },
+    {
+      department: "Management",
+    },
+    {
+      department: "Project",
+    },
+    {
+      department: "engineerings",
+    },
+  ];
   return (
     <div class=" flex  items-center">
       <Tooltip
@@ -133,6 +152,16 @@ const ContactActionLeft = (props) => {
         <FormattedMessage id="app.clear" defaultMessage="Clear" />
         {/* Clear */}
       </Button>
+
+      <select value={props.selectedCountry} onChange={props.handleCountryChange} style={{width:"8rem"}}>
+        <option value="" disabled>Department</option>
+        <option value="">All</option>
+        {countryNameOption.map((countryOption, index) => (
+          <option key={index} value={countryOption.department}>
+            {countryOption.department}
+          </option>
+        ))}
+      </select>
     </div>
   );
 };

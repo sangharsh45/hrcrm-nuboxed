@@ -95,8 +95,9 @@ function ContactCardList(props) {
   const {
     user,
     fetchingContacts,
-    fetchingContactsError,
+    newFiltersdata,
     contactByUserId,
+    filterData,
     handleUpdateContactModal,
     handleContactReactSpeechModal,
     addContactSpeechModal,
@@ -120,7 +121,7 @@ function ContactCardList(props) {
         height={600}
       >
           <OnlyWrapCard>
-      {contactByUserId.map((item) => { 
+      {filterData.map((item) => { 
         
          const currentdate = moment().format("DD/MM/YYYY");
          const date = moment(item.creationDate).format("DD/MM/YYYY");
