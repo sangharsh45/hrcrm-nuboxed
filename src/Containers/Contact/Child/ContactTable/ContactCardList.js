@@ -165,10 +165,10 @@ function ContactCardList(props) {
           &nbsp;
           <div>
                                         <Tooltip>
-                                            <h4 class=" text-base text-cardBody font-poppins">
+                                            <div class="text-[0.875rem] text-cardBody font-poppins">
                                             Name
-                                            </h4>
-                                            <h4 class=" text-base text-blue-500 text-cardBody font-poppins cursor-pointer">
+                                            </div>
+                                            <div class="text-[0.75rem] text-blue-500 text-cardBody font-poppins cursor-pointer">
                                                 
          <Link
           toUrl={`contact/${item.contactId}`}
@@ -185,7 +185,7 @@ function ContactCardList(props) {
           </span>
         ) : null}
        
-                                            </h4>
+                                            </div>
 
                                         </Tooltip>
                                         </div>
@@ -193,41 +193,40 @@ function ContactCardList(props) {
                                 </div>
 
                                 <div className=" flex font-medium flex-col  w-52 ">
-                           
-                                    <h4 class=" text-base text-cardBody font-poppins"> Company </h4>
-                                    <h4 class=" text-base text-cardBody font-poppins">   
+                                    <div class=" text-[0.875rem] text-cardBody font-[0.875rem] font-poppins"> Company </div>
+                                    <div class=" text-[0.75rem] text-cardBody font-poppins">   
                                     {item.tagWithCompany}
-                                    </h4>
+                                    </div>
                                 </div>
                                 <div className=" flex font-medium flex-col w-36 ">
-                                    <h4 class=" text-base text-cardBody font-poppins">Designation</h4>
-                                    <h4 class=" text-base text-cardBody font-poppins">
+                                    <div class=" text-[0.875rem] text-cardBody font-poppins">Designation</div>
+                                    <div class="text-[0.75rem] text-cardBody font-poppins">
                                          {item.designation}
-                                    </h4>
+                                    </div>
                                 </div>
                                 <div className=" flex font-medium flex-col w-36 ">
-                                  <h4 class=" text-base text-cardBody font-poppins">Department</h4>
-                                  <h4 class=" text-base text-cardBody font-poppins">
+                                  <div class="text-[0.875rem] text-cardBody font-poppins">Department</div>
+                                  <div class="text-[0.75rem] text-cardBody font-poppins">
                                        {item.department}
-                                  </h4>
+                                  </div>
                               </div>
                                 <div className=" flex font-medium flex-col w-32 ">
-                                    <h4 class=" text-base text-cardBody font-poppins"># Opportunity</h4>
+                                    <div class=" text-[0.875rem] text-cardBody font-poppins"># Opportunity</div>
 
-                                    <div class=" text-base text-cardBody font-poppins">
-
-                                    </div>
-                                </div>
-                                <div className=" flex font-medium flex-col w-32 ">
-                                    <h4 class=" text-base text-cardBody font-poppins">Portal Acess</h4>
-
-                                    <div class=" text-base text-cardBody font-poppins">
+                                    <div class=" text-[0.75rem] text-cardBody font-poppins">
 
                                     </div>
                                 </div>
-                                <div className=" flex font-medium flex-col w-20 ">
+                                <div className="flex font-medium flex-col w-32 ">
+                                    <div class="text-[0.875rem] text-cardBody font-poppins">Portal Acess</div>
+
+                                    <div class="text-[0.75rem] text-cardBody font-poppins">
+
+                                    </div>
+                                </div>
+                                <div className="flex font-medium flex-col w-20 ">
                        
-                       <h4 class=" text-base text-cardBody font-poppins">Owner</h4>
+                       <div class=" text-base text-cardBody font-poppins">Owner</div>
 
                    
               <Tooltip title={item.ownerName}>

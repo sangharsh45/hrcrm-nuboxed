@@ -130,10 +130,10 @@ const LeadsCardList = (props) => {
                                    &nbsp;
                                         <div>
                                         <Tooltip>
-                                            <h4 class=" text-base text-cardBody font-poppins">
+                                            <h4 class=" text-[0.875rem] text-cardBody font-poppins">
                                             Name
                                             </h4>
-                                            <h4 class="text-base text-blue-500 text-cardBody font-poppins cursor-pointer">
+                                            <h4 class="text-[0.75rem] text-blue-500 text-cardBody font-poppins cursor-pointer">
                                                 
          {/* <Link
            toUrl={`leads/${item.leadsId}`}
@@ -157,14 +157,14 @@ const LeadsCardList = (props) => {
                                         </div>
                                 </div>
                                 <div className=" flex font-medium flex-col  w-52 ">
-                           <h4 class=" text-base text-cardBody font-poppins"> Phone # </h4>
-                           <h4 class=" text-base text-cardBody font-poppins">   
+                           <h4 class=" text-[0.875rem] text-cardBody font-poppins"> Phone # </h4>
+                           <h4 class=" text-[0.75rem] text-cardBody font-poppins">   
                            {/* {item.phone} */}
                            </h4>
                        </div>
                        <div className=" flex font-medium flex-col  w-52 ">
-                           <h4 class=" text-base text-cardBody font-poppins"> Company </h4>
-                           <h4 class=" text-base text-cardBody font-poppins">   
+                           <h4 class=" text-[0.875rem] text-cardBody font-poppins"> Company </h4>
+                           <h4 class=" text-[0.75rem] text-cardBody font-poppins">   
                            <Link
            toUrl={`leads/${item.leadsId}`}
           title={`${item.name}`}
@@ -173,16 +173,16 @@ const LeadsCardList = (props) => {
                        </div>
                                 <div className=" flex font-medium flex-col  w-52 ">
                            
-                                    <h4 class=" text-base text-cardBody font-poppins"> Sector </h4>
-                                    <h4 class=" text-base text-cardBody font-poppins">   
+                                    <h4 class=" text-[0.875rem] text-cardBody font-poppins"> Sector </h4>
+                                    <h4 class=" text-[0.75rem] text-cardBody font-poppins">   
                                     {item.sector}
                                     </h4>
                                 </div>
                                 <div className=" flex font-medium flex-col w-36 ">
                                   
 
-                                    <h4 class=" text-base text-cardBody font-poppins">Country</h4>
-                                    <h4 class=" text-base text-cardBody font-poppins">
+                                    <h4 class=" text-[0.875rem] text-cardBody font-poppins">Country</h4>
+                                    <h4 class=" text-[0.75rem] text-cardBody font-poppins">
                                     {/* <ReactCountryFlag countryCode="NL" svg /> */}
                                     {/* <ReactCountryFlag
                           countryCode={item.country}
@@ -199,9 +199,9 @@ const LeadsCardList = (props) => {
                                 </div>
     
                                 <div className=" flex font-medium flex-col w-32 ">
-                                    <h4 class=" text-base text-cardBody font-poppins">Assigned to</h4>
+                                    <h4 class=" text-[0.875rem] text-cardBody font-poppins">Assigned to</h4>
 
-                                    <div class=" text-base text-cardBody font-poppins">
+                                    <div class=" text-[0.75rem] text-cardBody font-poppins">
                                     
                                     <span>
               {item.assignedTo === null ? (
@@ -219,7 +219,7 @@ const LeadsCardList = (props) => {
                                 </div>
                                 <div className=" flex font-medium flex-col w-20 ">
                        
-                       <h4 class=" text-base text-cardBody font-poppins">Owner</h4>
+                       <h4 class=" text-[0.875rem] text-cardBody font-poppins">Owner</h4>
 
                        <span>
               <MultiAvatar
@@ -232,9 +232,9 @@ const LeadsCardList = (props) => {
             </span>
                    </div>
                    <div className=" flex font-medium flex-col w-32 ">
-                                    <h4 class=" text-base text-cardBody font-poppins">Qualified</h4>
+                                    <h4 class=" text-[0.875rem] text-cardBody font-poppins">Qualified</h4>
 
-                                    <div class=" text-base text-cardBody font-poppins">
+                                    <div class=" text-[0.75rem] text-cardBody font-poppins">
                 {/* qual */}
                                     </div>
                                 </div>
