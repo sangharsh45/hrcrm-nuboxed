@@ -151,7 +151,7 @@ export const handleUpdateExpenseModal = (modalProps) => (dispatch) => {
 export const updateExpense = (data, expenseId) => (dispatch) => {
   dispatch({ type: types.UPDATE_EXPENSE_REQUEST });
   axios
-    .put(`${base_url}/expense`,{data}, {
+    .put(`${base_url}/expense`,data, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },
