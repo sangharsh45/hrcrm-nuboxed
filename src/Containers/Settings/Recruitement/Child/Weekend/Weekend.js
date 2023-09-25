@@ -8,6 +8,7 @@ import { StyledLabel,Spacer } from "../../../../../Components/UI/Elements";
  import { addingWeekendAccess,
   getWeekendAccess, 
 } from "../../../SettingsAction";
+import moment from "moment";
 
 function Weekend(props) {
     useEffect(() => {
@@ -25,6 +26,7 @@ function Weekend(props) {
       props.addingWeekendAccess({
          ...props.weekendAccess,
         orgId: props.orgId,
+        country:props.country_id,
         sundayInd: sundayInd ? false : true,
       }, props.country_name);
       setSundayInd(sundayInd ? false : true);
@@ -33,6 +35,7 @@ function Weekend(props) {
       props.addingWeekendAccess({
         ...props.weekendAccess,
         orgId: props.orgId,
+        country:props.country_id,
         sundayInd: sundayInd ? false : true,
       }, props.country_name);
       setSundayInd(sundayInd ? false : true);
@@ -59,6 +62,7 @@ function Weekend(props) {
       props.addingWeekendAccess({
          ...props.weekendAccess,
         orgId: props.orgId,
+        country:props.country_id,
         tuesdayInd: tuesdayInd ? false : true,
       }, props.country_name);
       setTuesdayInd(tuesdayInd ? false : true);
@@ -67,6 +71,7 @@ function Weekend(props) {
       props.addingWeekendAccess({
         ...props.weekendAccess,
         orgId: props.orgId,
+        country:props.country_id,
         tuesdayInd: tuesdayInd ? false : true,
       }, props.country_name);
       setTuesdayInd(tuesdayInd ? false : true);
@@ -93,6 +98,7 @@ function Weekend(props) {
       props.addingWeekendAccess({
          ...props.weekendAccess,
         orgId: props.orgId,
+        country:props.country_id,
         mondayInd: mondayInd ? false : true,
       }, props.country_name);
       setMondayInd(mondayInd ? false : true);
@@ -101,6 +107,7 @@ function Weekend(props) {
       props.addingWeekendAccess({
         ...props.weekendAccess,
         orgId: props.orgId,
+        country:props.country_id,
         mondayInd: mondayInd ? false : true,
       }, props.country_name);
       setMondayInd(mondayInd ? false : true);
@@ -127,6 +134,7 @@ function Weekend(props) {
       props.addingWeekendAccess({
          ...props.weekendAccess,
         orgId: props.orgId,
+        country:props.country_id,
         wednesdayInd: wednesdayInd ? false : true,
       }, props.country_name);
       setWednesdayInd(wednesdayInd ? false : true);
@@ -135,6 +143,7 @@ function Weekend(props) {
       props.addingWeekendAccess({
         ...props.weekendAccess,
         orgId: props.orgId,
+        country:props.country_id,
         wednesdayInd: wednesdayInd ? false : true,
       }, props.country_name);
       setWednesdayInd(wednesdayInd ? false : true);
@@ -161,6 +170,7 @@ function Weekend(props) {
       props.addingWeekendAccess({
          ...props.weekendAccess,
         orgId: props.orgId,
+        country:props.country_id,
         thursdayInd: thursdayInd ? false : true,
       }, props.country_name);
       setThursdayInd(thursdayInd ? false : true);
@@ -169,6 +179,7 @@ function Weekend(props) {
       props.addingWeekendAccess({
         ...props.weekendAccess,
         orgId: props.orgId,
+        country:props.country_id,
         thursdayInd: thursdayInd ? false : true,
       }, props.country_name);
       setThursdayInd(thursdayInd ? false : true);
@@ -195,6 +206,7 @@ function Weekend(props) {
       props.addingWeekendAccess({
          ...props.weekendAccess,
         orgId: props.orgId,
+        country:props.country_id,
         fridayInd: fridayInd ? false : true,
       }, props.country_name);
       setFridayInd(fridayInd ? false : true);
@@ -203,6 +215,7 @@ function Weekend(props) {
       props.addingWeekendAccess({
         ...props.weekendAccess,
         orgId: props.orgId,
+        country:props.country_id,
         fridayInd: fridayInd ? false : true,
       }, props.country_name);
       setFridayInd(fridayInd ? false : true);
@@ -229,6 +242,7 @@ function Weekend(props) {
       props.addingWeekendAccess({
          ...props.weekendAccess,
         orgId: props.orgId,
+        country:props.country_id,
         saturdayInd: saturdayInd ? false : true,
       }, props.country_name);
       setSaturdayInd(saturdayInd ? false : true);
@@ -237,6 +251,7 @@ function Weekend(props) {
       props.addingWeekendAccess({
         ...props.weekendAccess,
         orgId: props.orgId,
+        country:props.country_id,
         saturdayInd: saturdayInd ? false : true,
       }, props.country_name);
       setSaturdayInd(saturdayInd ? false : true);
@@ -400,6 +415,7 @@ function Weekend(props) {
           </Popconfirm>
         </div>
       </FlexContainer> 
+      <h4>Updated on {moment(props.weekendAccess.updationDate).format("ll")} by {props.weekendAccess.updatedBy}</h4> 
     </MainWrapper>
   );
 }

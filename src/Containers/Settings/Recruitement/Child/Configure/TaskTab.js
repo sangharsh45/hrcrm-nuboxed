@@ -238,7 +238,7 @@ class TaskTab extends Component {
           <MainWrapper>
             <h1>
               {/* Workflow */}
-              <FormattedMessage id="app.task" defaultMessage="Task" />
+              <FormattedMessage id="app.workFlow" defaultMessage="WorkFlow" />
             </h1>
 
             <FlexContainer>
