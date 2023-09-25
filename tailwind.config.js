@@ -23,6 +23,10 @@ module.exports = {
 'xxs':'0.62rem',
 'xm':'0.875rem'
             },
+            colors: {
+              "clr": "tomato",
+      
+            },
             fontFamily: {
               'poppins': ['Poppins'],
             },

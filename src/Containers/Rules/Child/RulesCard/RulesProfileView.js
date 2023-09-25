@@ -12,17 +12,7 @@ function RulesProfileView(props) {
   console.log(RuleID);
   return (
     <>
-      <h1
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          textAlign: "center",
-          fontSize: "1.25em",
-          color: "#40A9FF",
-        }}
-      >
-        Rules
-      </h1>
+ 
 
       {props.rule.map((item) => {
         return (

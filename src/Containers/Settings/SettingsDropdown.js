@@ -69,7 +69,7 @@ const SettingsMenu = ({ history, pathName, recruitmentInd }) => (
       {/* Organization */}
           </a>
         </StyledMenuItem>
-        <StyledMenuItem key="0">
+        {/* <StyledMenuItem key="0">
           <a
             href="#"
             style={{
@@ -78,12 +78,12 @@ const SettingsMenu = ({ history, pathName, recruitmentInd }) => (
             onClick={() => history.push("/rules")}
           >
             <FormattedMessage
-              id="app.rulesengine"
-              defaultMessage="Rules Engine"
+              id="app.rules"
+              defaultMessage="Rules"
             />
       
           </a>
-        </StyledMenuItem>
+        </StyledMenuItem> */}
 
         {/* <StyledMenuItem key="1">
           <a
@@ -127,8 +127,8 @@ const SettingsMenu = ({ history, pathName, recruitmentInd }) => (
             onClick={() => history.push("/recruite")}
           >
             <FormattedMessage
-              id="app.recruitpro"
-              defaultMessage="RecruitPro"
+              id="app.configure"
+              defaultMessage="Configure"
             />
       {/* RecruitPro */}
           </a>

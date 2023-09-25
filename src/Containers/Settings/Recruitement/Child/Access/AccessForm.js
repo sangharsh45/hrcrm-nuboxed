@@ -12,7 +12,8 @@ import { getDepartmentAccess, addDepartmentAccess } from "../../../SettingsActio
 
 const CheckboxGroup = Checkbox.Group;
 const plainOptions = ['Access', 'Create', 'Update', 'Delete','Full List'];
-const defaultCheckedList = ['Apple', 'Orange'];
+ const defaultCheckedList=['Full List'];
+// const defaultCheckedList = ['Apple', 'Orange'];
 
 const AccessForm = (props) => {
 
@@ -38,6 +39,16 @@ const AccessForm = (props) => {
     setCheckedCourseList(props.departmentAcces.course)
     setCheckedTestList(props.departmentAcces.hours)
     setCheckedLocationList(props.departmentAcces.location)
+    setCheckedMileageList(props.departmentAcces.mileage)
+    setCheckedExpenseList(props.departmentAcces.expense)
+    setCheckedLeavesList(props.departmentAcces.leaves)
+    setCheckedUserList(props.departmentAcces.user)
+    setCheckedOrderList(props.departmentAcces.order)
+    setCheckedMaterialsList(props.departmentAcces.materials)
+    setCheckedSupplierList(props.departmentAcces.supplier)
+    setCheckedInventoryList(props.departmentAcces.inventory)
+    setCheckedRefurbishList(props.departmentAcces.refurbish)
+    
   }, [props.departmentAcces.vendor,
   props.departmentAcces.customer,
   props.departmentAcces.opportunity,
@@ -54,7 +65,17 @@ const AccessForm = (props) => {
   props.departmentAcces.test,
   props.departmentAcces.course,
   props.departmentAcces.hours,
-  props.departmentAcces.location
+  props.departmentAcces.location,
+  props.departmentAcces.mileage,
+  props.departmentAcces.expense,
+  props.departmentAcces.leaves,
+  props.departmentAcces.user,
+  props.departmentAcces.order,
+  props.departmentAcces.materials,
+  props.departmentAcces.supplier,
+  props.departmentAcces.inventory,
+  props.departmentAcces.refurbish,
+  
 ])
   //Vendor
   const [checkedVendorList, setCheckedVendorList] = useState(props.departmentAcces.vendor);
@@ -369,6 +390,172 @@ const AccessForm = (props) => {
                     setCheckAllLocation(e.target.checked);
                   };
 
+                       // Mileage
+
+                       const [checkedMileageList, setCheckedMileageList] = useState(props.departmentAcces.mileage              );
+                       const [indeterminateMileage, setIndeterminateMileage] = useState(true);
+                       const [checkAllMileage, setCheckAllMileage] = useState(false);
+                     
+                       const onMileageChange = (list) => {
+                         setCheckedMileageList(list);
+                         setIndeterminateMileage(!!list.length && list.length < plainOptions.length);
+                         setCheckAllMileage(list.length === plainOptions.length);
+                       };
+                     
+                       const onCheckAllMileageChange = (e) => {
+                         setCheckedMileageList(e.target.checked ? plainOptions : []);
+                         setIndeterminateMileage(false);
+                         setCheckAllMileage(e.target.checked);
+                       };
+
+                           // Expense
+
+                           const [checkedExpenseList, setCheckedExpenseList] = useState(props.departmentAcces.expense              );
+                           const [indeterminateExpense, setIndeterminateExpense] = useState(true);
+                           const [checkAllExpense, setCheckAllExpense] = useState(false);
+                         
+                           const onExpenseChange = (list) => {
+                             setCheckedExpenseList(list);
+                             setIndeterminateExpense(!!list.length && list.length < plainOptions.length);
+                             setCheckAllExpense(list.length === plainOptions.length);
+                           };
+                         
+                           const onCheckAllExpenseChange = (e) => {
+                             setCheckedExpenseList(e.target.checked ? plainOptions : []);
+                             setIndeterminateExpense(false);
+                             setCheckAllExpense(e.target.checked);
+                           };
+
+                                // Leaves
+
+                                const [checkedLeavesList, setCheckedLeavesList] = useState(props.departmentAcces.leaves              );
+                                const [indeterminateLeaves, setIndeterminateLeaves] = useState(true);
+                                const [checkAllLeaves, setCheckAllLeaves] = useState(false);
+                              
+                                const onLeavesChange = (list) => {
+                                  setCheckedLeavesList(list);
+                                  setIndeterminateLeaves(!!list.length && list.length < plainOptions.length);
+                                  setCheckAllLeaves(list.length === plainOptions.length);
+                                };
+                              
+                                const onCheckAllLeavesChange = (e) => {
+                                  setCheckedLeavesList(e.target.checked ? plainOptions : []);
+                                  setIndeterminateLeaves(false);
+                                  setCheckAllLeaves(e.target.checked);
+                                };
+
+
+                                    // User
+
+                                    const [checkedUserList, setCheckedUserList] = useState(props.departmentAcces.user              );
+                                    const [indeterminateUser, setIndeterminateUser] = useState(true);
+                                    const [checkAllUser, setCheckAllUser] = useState(false);
+                                  
+                                    const onUserChange = (list) => {
+                                      setCheckedUserList(list);
+                                      setIndeterminateUser(!!list.length && list.length < plainOptions.length);
+                                      setCheckAllUser(list.length === plainOptions.length);
+                                    };
+                                  
+                                    const onCheckAllUserChange = (e) => {
+                                      setCheckedUserList(e.target.checked ? plainOptions : []);
+                                      setIndeterminateUser(false);
+                                      setCheckAllUser(e.target.checked);
+                                    };
+
+                                           // Order
+
+                                           const [checkedOrderList, setCheckedOrderList] = useState(props.departmentAcces.order              );
+                                           const [indeterminateOrder, setIndeterminateOrder] = useState(true);
+                                           const [checkAllOrder, setCheckAllOrder] = useState(false);
+                                         
+                                           const onOrderChange = (list) => {
+                                             setCheckedOrderList(list);
+                                             setIndeterminateOrder(!!list.length && list.length < plainOptions.length);
+                                             setCheckAllOrder(list.length === plainOptions.length);
+                                           };
+                                         
+                                           const onCheckAllOrderChange = (e) => {
+                                             setCheckedOrderList(e.target.checked ? plainOptions : []);
+                                             setIndeterminateOrder(false);
+                                             setCheckAllOrder(e.target.checked);
+                                           };
+
+                                               // Materials
+
+                                               const [checkedMaterialsList, setCheckedMaterialsList] = useState(props.departmentAcces.materials              );
+                                               const [indeterminateMaterials, setIndeterminateMaterials] = useState(true);
+                                               const [checkAllMaterials, setCheckAllMaterials] = useState(false);
+                                             
+                                               const onMaterialsChange = (list) => {
+                                                 setCheckedMaterialsList(list);
+                                                 setIndeterminateMaterials(!!list.length && list.length < plainOptions.length);
+                                                 setCheckAllMaterials(list.length === plainOptions.length);
+                                               };
+                                             
+                                               const onCheckAllMaterialsChange = (e) => {
+                                                 setCheckedMaterialsList(e.target.checked ? plainOptions : []);
+                                                 setIndeterminateMaterials(false);
+                                                 setCheckAllMaterials(e.target.checked);
+                                               };
+
+
+                                                         // Supplier
+
+                                                         const [checkedSupplierList, setCheckedSupplierList] = useState(props.departmentAcces.supplier              );
+                                                         const [indeterminateSupplier, setIndeterminateSupplier] = useState(true);
+                                                         const [checkAllSupplier, setCheckAllSupplier] = useState(false);
+                                                       
+                                                         const onSupplierChange = (list) => {
+                                                           setCheckedSupplierList(list);
+                                                           setIndeterminateSupplier(!!list.length && list.length < plainOptions.length);
+                                                           setCheckAllSupplier(list.length === plainOptions.length);
+                                                         };
+                                                       
+                                                         const onCheckAllSupplierChange = (e) => {
+                                                           setCheckedSupplierList(e.target.checked ? plainOptions : []);
+                                                           setIndeterminateSupplier(false);
+                                                           setCheckAllSupplier(e.target.checked);
+                                                         };
+
+                                                               // Inventory
+
+                                                               const [checkedInventoryList, setCheckedInventoryList] = useState(props.departmentAcces.inventory              );
+                                                               const [indeterminateInventory, setIndeterminateInventory] = useState(true);
+                                                               const [checkAllInventory, setCheckAllInventory] = useState(false);
+                                                             
+                                                               const onInventoryChange = (list) => {
+                                                                 setCheckedInventoryList(list);
+                                                                 setIndeterminateInventory(!!list.length && list.length < plainOptions.length);
+                                                                 setCheckAllInventory(list.length === plainOptions.length);
+                                                               };
+                                                             
+                                                               const onCheckAllInventoryChange = (e) => {
+                                                                 setCheckedInventoryList(e.target.checked ? plainOptions : []);
+                                                                 setIndeterminateInventory(false);
+                                                                 setCheckAllInventory(e.target.checked);
+                                                               };
+
+         // Refurbish
+
+         const [checkedRefurbishList, setCheckedRefurbishList] = useState(props.departmentAcces.refurbish              );
+         const [indeterminateRefurbish, setIndeterminateRefurbish] = useState(true);
+         const [checkAllRefurbish, setCheckAllRefurbish] = useState(false);
+       
+         const onRefurbishChange = (list) => {
+           setCheckedRefurbishList(list);
+           setIndeterminateRefurbish(!!list.length && list.length < plainOptions.length);
+           setCheckAllRefurbish(list.length === plainOptions.length);
+         };
+       
+         const onCheckAllRefurbishChange = (e) => {
+           setCheckedRefurbishList(e.target.checked ? plainOptions : []);
+           setIndeterminateRefurbish(false);
+           setCheckAllRefurbish(e.target.checked);
+         };
+
+
+
   function handleUpdateAccess() {
     let data = {
       vendor: checkedVendorList || [],
@@ -388,6 +575,16 @@ const AccessForm = (props) => {
       course:checkedCourseList || [],
       hours:checkedHoursList || [],
       location:checkedLocationList || [],
+      mileage:checkedMileageList || [],
+      expense:checkedExpenseList || [],
+      leaves:checkedLeavesList || [],
+      user:checkedUserList || [],
+      order:checkedOrderList || [],
+      materials:checkedMaterialsList || [],
+      supplier:checkedSupplierList || [],
+      inventory:checkedInventoryList || [],
+      refurbish:checkedRefurbishList || [],
+      
       departmentId: props.departmentId,
       roleTypeId:props.roleTypeId,
 
@@ -405,10 +602,83 @@ const AccessForm = (props) => {
             <BundleLoader />
           ) : (
             <TabsWrapper style={{overflow: "auto"}}>
-
-              {/* Vendor */}
+<h1 class=" text-clr font-bold">HR</h1>
+<Spacer />
               <FlexContainer justifyContent="space-around">
+            
+              <div >
+                <h1>Users</h1>
+                <Checkbox indeterminate={indeterminateUser} onChange={onCheckAllUserChange} checked={checkAllUser}>
+                  Check all
+                </Checkbox>
+                <Divider />
+                <CheckboxGroup options={plainOptions} value={checkedUserList} onChange={onUserChange} />
+
+              </div>
+                {/* <Spacer />
                 <div >
+                  <h1>Leads</h1>
+                  <Checkbox indeterminate={indeterminateLeads} onChange={onCheckAllLeadsChange} checked={checkAllLeads}>
+                    Check all
+                  </Checkbox>
+                  <Divider />
+                  <CheckboxGroup options={plainOptions} value={checkedLeadsList} onChange={onLeadsChange} />
+
+                </div> */}
+                  <Spacer />
+                <div >
+                  <h1>Locations</h1>
+                  <Checkbox indeterminate={indeterminateLocation} onChange={onCheckAllLocationChange} checked={checkAllLocation}>
+                    Check all
+                  </Checkbox>
+                  <Divider />
+                  <CheckboxGroup options={plainOptions} value={checkedLocationList} onChange={onLocationChange} />
+
+                </div>
+                </FlexContainer>
+              {/* Vendor */}
+              <Spacer />
+              <FlexContainer justifyContent="space-around">
+              
+              {/* Contact */}
+              <div >
+                <h1>Mileage</h1>
+                <Checkbox indeterminate={indeterminateMileage} onChange={onCheckAllMileageChange} checked={checkAllMileage}>
+                  Check all
+                </Checkbox>
+                <Divider />
+                <CheckboxGroup options={defaultCheckedList} value={checkedMileageList} onChange={onMileageChange} />
+
+              </div>
+              <Spacer />
+              <div >
+                <h1>Expense</h1>
+                <Checkbox indeterminate={indeterminateExpense} onChange={onCheckAllExpenseChange} checked={checkAllExpense}>
+                  Check all
+                </Checkbox>
+                <Divider />
+                <CheckboxGroup options={defaultCheckedList} value={checkedExpenseList} onChange={onExpenseChange} />
+
+              </div>
+              <Spacer />
+              <div >
+                <h1>Leaves</h1>
+                <Checkbox indeterminate={indeterminateLeaves} onChange={onCheckAllLeavesChange} checked={checkAllLeaves}>
+                  Check all
+                </Checkbox>
+                <Divider />
+                <CheckboxGroup options={defaultCheckedList} value={checkedLeavesList} onChange={onLeavesChange} />
+
+              </div>
+            </FlexContainer>
+            <Spacer />
+         
+     
+           
+            <h1 class=" text-clr font-bold">CRM</h1>
+            <Spacer />
+              <FlexContainer justifyContent="space-around">
+                {/* <div >
                   <h1>Vendor</h1>
                   <Checkbox indeterminate={indeterminateVendor} onChange={onCheckAllVendorChange} checked={checkAllVendor}>
                     Check all
@@ -417,10 +687,11 @@ const AccessForm = (props) => {
                   <CheckboxGroup options={plainOptions} value={checkedVendorList} onChange={onVendorChange} />
                 </div>
                 <Spacer 
-                // style={{marginTop:"6.2em"}}
-                />
+               
+                /> */}
+             
 
-                {/* Customer */}
+              
                 <div >
                   <h1>Customer</h1>
                   <Checkbox indeterminate={indeterminateCustomer} onChange={onCheckAllCustomerChange} checked={checkAllCustomer}>
@@ -429,12 +700,23 @@ const AccessForm = (props) => {
                   <Divider />
                   <CheckboxGroup options={plainOptions} value={checkedCustomerList} onChange={onCustomerChange} />
                 </div>
+                    {/* Contact */}
+                    <div >
+                  <h1>Contact</h1>
+                  <Checkbox indeterminate={indeterminateContact} onChange={onCheckAllContactChange} checked={checkAllContact}>
+                    Check all
+                  </Checkbox>
+                  <Divider />
+                  <CheckboxGroup options={plainOptions} value={checkedContactList} onChange={onContactChange} />
+
+                </div>
+                <Spacer />
               </FlexContainer>
               <Spacer />
 
               {/* Opportunity */}
               <FlexContainer justifyContent="space-around">
-                <div >
+              <div >
                   <h1>Opportunity</h1>
                   <Checkbox indeterminate={indeterminateOpportunity} onChange={onCheckAllOpportunityChange} checked={checkAllOpportunity}>
                     Check all
@@ -444,21 +726,30 @@ const AccessForm = (props) => {
 
                 </div>
                 <Spacer />
-                {/* Contact */}
                 <div >
-                  <h1>Contact</h1>
-                  <Checkbox indeterminate={indeterminateContact} onChange={onCheckAllContactChange} checked={checkAllContact}>
+                  <h1>Leads</h1>
+                  <Checkbox indeterminate={indeterminateLeads} onChange={onCheckAllLeadsChange} checked={checkAllLeads}>
                     Check all
                   </Checkbox>
                   <Divider />
-                  <CheckboxGroup options={plainOptions} value={checkedContactList} onChange={onContactChange} />
+                  <CheckboxGroup options={plainOptions} value={checkedLeadsList} onChange={onLeadsChange} />
 
                 </div>
+            
+                {/* <div >
+                  <h1>Pulse</h1>
+                  <Checkbox indeterminate={indeterminatePulse} onChange={onCheckAllPulseChange} checked={checkAllPulse}>
+                    Check all
+                  </Checkbox>
+                  <Divider />
+                  <CheckboxGroup options={plainOptions} value={checkedPulseList} onChange={onPulseChange} />
+
+                </div> */}
               </FlexContainer>
               <Spacer />
 
               {/* Talent */}
-              <FlexContainer justifyContent="space-around">
+              {/* <FlexContainer justifyContent="space-around">
                 <div >
                   <h1>Talent</h1>
                   <Checkbox indeterminate={indeterminateTalent} onChange={onCheckAllTalentChange} checked={checkAllTalent}>
@@ -487,10 +778,10 @@ const AccessForm = (props) => {
                   />
 
                 </div>
-              </FlexContainer>
+              </FlexContainer> */}
               <Spacer />
               <FlexContainer justifyContent="space-around">
-                <div >
+                {/* <div >
                   <h1>Post</h1>
                   <Checkbox indeterminate={indeterminatePublish} onChange={onCheckAllPublishChange} checked={checkAllPublish}>
                     Check all
@@ -498,22 +789,13 @@ const AccessForm = (props) => {
                   <Divider />
                   <CheckboxGroup options={plainOptions} value={checkedPublishList} onChange={onPublishChange} />
 
-                </div>
-                <Spacer />
-                <div >
-                  <h1>Pulse</h1>
-                  <Checkbox indeterminate={indeterminatePulse} onChange={onCheckAllPulseChange} checked={checkAllPulse}>
-                    Check all
-                  </Checkbox>
-                  <Divider />
-                  <CheckboxGroup options={plainOptions} value={checkedPulseList} onChange={onPulseChange} />
-
-                </div>
+                </div> */}
+             
                 </FlexContainer>
-
+<h1 class=" text-clr font-bold">ERP</h1>
                 <Spacer />
               <FlexContainer justifyContent="space-around">
-                <div >
+                {/* <div >
                   <h1>Assessment</h1>
                   <Checkbox indeterminate={indeterminateAccessment} onChange={onCheckAllAccessmentChange} checked={checkAllAccessment}>
                     Check all
@@ -521,21 +803,76 @@ const AccessForm = (props) => {
                   <Divider />
                   <CheckboxGroup options={plainOptions} value={checkedAccessmentList} onChange={onAccessmentChange} />
 
-                </div>
-                <Spacer />
-                <div >
-                  <h1>Leads</h1>
-                  <Checkbox indeterminate={indeterminateLeads} onChange={onCheckAllLeadsChange} checked={checkAllLeads}>
+                </div> */}
+               <div >
+                  <h1>Customer</h1>
+                  <Checkbox indeterminate={indeterminateCustomer} onChange={onCheckAllCustomerChange} checked={checkAllCustomer}>
                     Check all
                   </Checkbox>
                   <Divider />
-                  <CheckboxGroup options={plainOptions} value={checkedLeadsList} onChange={onLeadsChange} />
+                  <CheckboxGroup options={plainOptions} value={checkedCustomerList} onChange={onCustomerChange} />
+                </div>
+                <Spacer />
+             
+                <div >
+                  <h1>Order</h1>
+                  <Checkbox indeterminate={indeterminateOrder} onChange={onCheckAllOrderChange} checked={checkAllOrder}>
+                    Check all
+                  </Checkbox>
+                  <Divider />
+                  <CheckboxGroup options={plainOptions} value={checkedOrderList} onChange={onOrderChange} />
 
                 </div>
                 </FlexContainer>
                 <Spacer />
-
                 <FlexContainer justifyContent="space-around">
+         
+               <div >
+                  <h1>Materials</h1>
+                  <Checkbox indeterminate={indeterminateMaterials} onChange={onCheckAllMaterialsChange} checked={checkAllMaterials}>
+                    Check all
+                  </Checkbox>
+                  <Divider />
+                  <CheckboxGroup options={plainOptions} value={checkedMaterialsList} onChange={onMaterialsChange} />
+                </div>
+                <Spacer />
+             
+                <div >
+                  <h1>Supplier</h1>
+                  <Checkbox indeterminate={indeterminateSupplier} onChange={onCheckAllSupplierChange} checked={checkAllSupplier}>
+                    Check all
+                  </Checkbox>
+                  <Divider />
+                  <CheckboxGroup options={plainOptions} value={checkedSupplierList} onChange={onSupplierChange} />
+
+                </div>
+                </FlexContainer>
+                <Spacer />
+                <FlexContainer justifyContent="space-around">
+         
+         <div >
+            <h1>Inventory</h1>
+            <Checkbox indeterminate={indeterminateInventory} onChange={onCheckAllInventoryChange} checked={checkAllInventory}>
+              Check all
+            </Checkbox>
+            <Divider />
+            <CheckboxGroup options={plainOptions} value={checkedInventoryList} onChange={onInventoryChange} />
+          </div>
+          <Spacer />
+       
+          <div >
+            <h1>Refurbish</h1>
+            <Checkbox indeterminate={indeterminateRefurbish} onChange={onCheckAllRefurbishChange} checked={checkAllRefurbish}>
+              Check all
+            </Checkbox>
+            <Divider />
+            <CheckboxGroup options={plainOptions} value={checkedRefurbishList} onChange={onRefurbishChange} />
+
+          </div>
+          </FlexContainer>
+          <Spacer />
+
+                {/* <FlexContainer justifyContent="space-around">
                 <div >
                   <h1>Task</h1>
                   <Checkbox indeterminate={indeterminateTask} onChange={onCheckAllTaskChange} checked={checkAllTask}>
@@ -556,9 +893,9 @@ const AccessForm = (props) => {
 
                 </div>
                 </FlexContainer>
-                <Spacer />
+                <Spacer /> */}
                 
-                <FlexContainer justifyContent="space-around">
+                {/* <FlexContainer justifyContent="space-around">
                 <div >
                   <h1>Program</h1>
                   <Checkbox indeterminate={indeterminateProgram} onChange={onCheckAllProgramChange} checked={checkAllProgram}>
@@ -579,9 +916,9 @@ const AccessForm = (props) => {
 
                 </div>
                 </FlexContainer>
-                <Spacer />
+                <Spacer /> */}
 
-                <FlexContainer justifyContent="space-around">
+                {/* <FlexContainer justifyContent="space-around">
                 <div >
                   <h1>Course</h1>
                   <Checkbox indeterminate={indeterminateCourse} onChange={onCheckAllCourseChange} checked={checkAllCourse}>
@@ -601,9 +938,9 @@ const AccessForm = (props) => {
                   <CheckboxGroup options={plainOptions} value={checkedHoursList} onChange={onHoursChange} />
 
                 </div>
-                </FlexContainer>
+                </FlexContainer> */}
                 <FlexContainer justifyContent="space-around">
-                <div >
+                {/* <div >
                   <h1>Project</h1>
                   <Checkbox indeterminate={indeterminateCourse} onChange={onCheckAllCourseChange} checked={checkAllCourse}>
                     Check all
@@ -611,16 +948,8 @@ const AccessForm = (props) => {
                   <Divider />
                   <CheckboxGroup options={plainOptions} value={checkedCourseList} onChange={onCourseChange} />
 
-                </div>
-                <div >
-                  <h1>Location</h1>
-                  <Checkbox indeterminate={indeterminateLocation} onChange={onCheckAllLocationChange} checked={checkAllLocation}>
-                    Check all
-                  </Checkbox>
-                  <Divider />
-                  <CheckboxGroup options={plainOptions} value={checkedLocationList} onChange={onLocationChange} />
-
-                </div>
+                </div> */}
+             
             
                 </FlexContainer>
                 <Spacer />
