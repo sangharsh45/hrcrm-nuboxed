@@ -1132,3 +1132,10 @@ export const getAprrovalTaskTable = (employeeId,pageNo) => (dispatch) => {
    });
    
 };
+
+export const handleTaskopenModal = (modalProps) => (dispatch) => {
+  dispatch({
+    type: types.HANDLE_TASK_OPEN_MODAL,
+    payload: modalProps,
+  });
+};

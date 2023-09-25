@@ -409,8 +409,7 @@ class TaskForm extends Component {
                 style={{
                   display: "flex",
                   justifyContent: "space-between",
-                  height: "70vh",
-                  overflow: "scroll",
+                  height: "70vh",                
                   paddingRight: "0.6em",
                 }}
               >
@@ -991,7 +990,7 @@ class TaskForm extends Component {
                     name="taskDescription"
                     //label="Notes"
                     label={
-                      <FormattedMessage id="app.notes" defaultMessage="Notes" />
+                      <FormattedMessage id="app.description" defaultMessage="Description" />
                     }
                     width={"21.875em"}
                     isColumn
