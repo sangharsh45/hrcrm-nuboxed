@@ -305,23 +305,23 @@ function EmployeeTable(props) {
     //     );
     //   }
     // },
-    {
-      title: "Type",
-      width: "7%",
+    // {
+    //   title: "Type",
+    //   width: "7%",
       
 
-      render: (name, item, i) => {
-        return (
-          <>
+    //   render: (name, item, i) => {
+    //     return (
+    //       <>
         
-            <EmployeeType
-            type={item.type}
-              employeeId={item.employeeId}
-            />
-          </>
-        );
-      },
-    },
+    //         <EmployeeType
+    //         type={item.type}
+    //           employeeId={item.employeeId}
+    //         />
+    //       </>
+    //     );
+    //   },
+    // },
     {
       title: "Suspend",
       width: "5%",
