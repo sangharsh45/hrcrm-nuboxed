@@ -232,6 +232,7 @@ class SettingsSingleHoliday extends Component {
                   </Button>
                   </FlexContainer>
                 </FlexContainer>
+                 
               )
           }
         </ViewEditCard>

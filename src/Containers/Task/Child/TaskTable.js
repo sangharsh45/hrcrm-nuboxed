@@ -602,32 +602,32 @@ return (
                 },
 
 
-                {
+                // {
                      
-                  title: "",
-                  // dataIndex: "submittedBy",
-                      width: 2,
-                      render: (name, item, i) => { 
-                        // console.log("cell",cellValues)
+                //   title: "",
+                //   // dataIndex: "submittedBy",
+                //       width: 2,
+                //       render: (name, item, i) => { 
+                //         // console.log("cell",cellValues)
                       
-                        return (
-                          <Tooltip title="Pulse">
-                            <MonitorHeartIcon
-                              type="edit"
-                              style={{
-                                cursor: "pointer",
-                                color: "#df9697",
-                                fontSize: "0.8rem",
-                              }}
-                              onClick={() => {
-                                handleTaskProjectDrawerModal(true);
-                                this.handleIconClick(item);
-                              }}
-                            />
-                          </Tooltip>
-                        );
-                      },
-                    },
+                //         return (
+                //           <Tooltip title="Pulse">
+                //             <MonitorHeartIcon
+                //               type="edit"
+                //               style={{
+                //                 cursor: "pointer",
+                //                 color: "#df9697",
+                //                 fontSize: "0.8rem",
+                //               }}
+                //               onClick={() => {
+                //                 handleTaskProjectDrawerModal(true);
+                //                 this.handleIconClick(item);
+                //               }}
+                //             />
+                //           </Tooltip>
+                //         );
+                //       },
+                //     },
 
 
 
