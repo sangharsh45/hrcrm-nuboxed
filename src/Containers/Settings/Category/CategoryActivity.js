@@ -89,19 +89,7 @@ class CategoryActivity extends Component {
                 </Suspense>
               </TabPane> */}
 
-              <TabPane
-                tab={
-                  <>
-                  <i class="fas fa-tasks"></i>
-                    <span style={{ marginLeft: "0.25em" }}>Country</span>
-                  </>
-                }
-                key="5"
-              >
-                <Suspense>
-                  <Country />
-                </Suspense>
-              </TabPane>
+          
             </StyledTabs>
           </TabsWrapper>
           </div>
