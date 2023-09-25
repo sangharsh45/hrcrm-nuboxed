@@ -53,6 +53,7 @@ class LeadsTab extends PureComponent {
                                         <Suspense fallback={"Loading..."}>
                                             <LeadsForm 
                                     countryId={this.state.departmentData.country_id}
+                                    
                                                 />
                                             {/* <AccessForm 
                                             departmentId={this.state.departmentData.departmentId} 

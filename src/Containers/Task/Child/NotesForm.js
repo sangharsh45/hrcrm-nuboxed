@@ -16,7 +16,7 @@ class NotesForm extends Component {
 
   render() {
     const { fetchingNotesListByTaskId, notesListByTaskId } = this.props;
-
+console.log(this.props.data1.taskId);
     return (
       <>
         <div style={{ backgroundColor: "#dcdcdc", height: "14.375em" }}>

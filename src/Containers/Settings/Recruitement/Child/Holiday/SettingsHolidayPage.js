@@ -288,10 +288,12 @@ handleYearChange = (date) => {
                       </div>
                     )}
                   </FlexContainer>
+
                 )} 
             </MainWrapper>
           </div>
         </FlexContainer>
+        <h4>Updated on {moment(this.props.holidays && this.props.holidays.length && this.props.holidays[0].updationDate).format("ll")} by {this.props.holidays && this.props.holidays.length && this.props.holidays[0].updatedBy}</h4>
       </>
     );
   }

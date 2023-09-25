@@ -39,9 +39,12 @@ class SingleTasks extends Component {
           {({ viewType }, toggleViewType) =>
             viewType === "view" ? (
               <FlexContainer justifyContent="space-between">
-                <TaskName style={{ flexBasis: "85%" }}>{taskType}</TaskName>
+                   <div class=" flex w-1/2">
+                <TaskName style={{ flexBasis: "45%" }}>{taskType}</TaskName>
                 <div>
-                <div class=" w-2/6">
+                  </div>
+                </div>
+                <div style={{width:"35%"}}>
                     <TaskConnetToggle
                   // editInd={editInd}
                   //     mandatoryInd={mandatoryInd}
@@ -49,6 +52,7 @@ class SingleTasks extends Component {
                   //     country_id={country_id}
                     />  
                     </div>
+                    <div>
                   {this.props.task.editInd ? (
                     <BorderColorIcon
                    

@@ -37,6 +37,7 @@ class EmployeeForm extends Component {
     this.state = {
       active: false,
       checked: true,
+      typeInd:false,
       workType: "employee",
     };
   }
@@ -51,6 +52,9 @@ class EmployeeForm extends Component {
   };
   handleJobType = (checked) => {
     this.setState({ active: checked });
+  };
+  handleType = (checked) => {
+    this.setState({ typeInd: checked });
   };
 
   getRoleOptions(filterOptionKey, filterOptionValue) {
@@ -84,13 +88,13 @@ class EmployeeForm extends Component {
     const countryNameOption = this.props.countries.map((item) => {
       return {
           label: `${item.country_name || ""}`,
-          value: item.country_id,
+          value: item.country_name,
       };
   });
   const locationNameOption = this.props.showLocation.map((item) => {
     return {
         label: `${item.locationName || ""}`,
-        value: item.locationName,
+        value: item.locationDetailsId,
     };
 });
   
@@ -136,10 +140,12 @@ class EmployeeForm extends Component {
             countryDialCode: "",
             countryDialCode1: "",
             phoneNo: "",
+            location:"",
             dateOfJoining:dayjs(),
             dob:dayjs(),
             mobileNo: "",
             country: "",
+            workplace:"",
             designationTypeId:"",
             departmentId:"",
             roleType:"",
@@ -147,6 +153,7 @@ class EmployeeForm extends Component {
             label: "",
             workplace: "",
             job_type: this.state.active ? "Full Time" : "Part Time",
+            type: this.state.typeInd ? "true" : "false",
             employee_type: this.state.workType,
             // job_type: this.state.active,
             reportingManager: this.props.userDetails.userId
@@ -173,6 +180,7 @@ class EmployeeForm extends Component {
             this.props.addEmployee({
               ...values,
               job_type: this.state.active ? "Full Time" : "Part Time",
+              type: this.state.typeInd ? "true" : "false",
               // job_type: this.state.active,
               employee_type: this.state.workType,
             });
@@ -541,7 +549,7 @@ class EmployeeForm extends Component {
                       <div class=" w-w48">
                       <Field
                         isRequired
-                        name="country"
+                        name="workplace"
                         isColumnWithoutNoCreate
                         label={<FormattedMessage
                           id="app.workPlace"
@@ -627,6 +635,7 @@ class EmployeeForm extends Component {
                     isColumn
                     component={InputComponent}
                      /> */}
+                         <div class=" flex justify-between" >
                   <div>
                     <StyledLabel>
                       <FormattedMessage
@@ -658,6 +667,23 @@ class EmployeeForm extends Component {
                         onClick={() => this.glassButtoClick("Part Time")}
                       />
                     </ButtonGroup> */}
+                  </div>
+                  <Spacer />
+                  <div>
+                    <StyledLabel>
+                      <FormattedMessage
+                        id="app.category"
+                        defaultMessage="Category"
+                      />
+                    </StyledLabel>
+                    <Switch
+                          checked={this.state.typeInd}
+                          onChange={this.handleType}
+                          checkedChildren="External"
+                          unCheckedChildren="Internal"
+                        />
+               
+                  </div>
                   </div>
                   <Spacer />
                   <div>

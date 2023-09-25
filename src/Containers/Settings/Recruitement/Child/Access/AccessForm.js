@@ -48,6 +48,7 @@ const AccessForm = (props) => {
     setCheckedSupplierList(props.departmentAcces.supplier)
     setCheckedInventoryList(props.departmentAcces.inventory)
     setCheckedRefurbishList(props.departmentAcces.refurbish)
+    setCheckedAccountList(props.departmentAcces.account)
     
   }, [props.departmentAcces.vendor,
   props.departmentAcces.customer,
@@ -75,6 +76,7 @@ const AccessForm = (props) => {
   props.departmentAcces.supplier,
   props.departmentAcces.inventory,
   props.departmentAcces.refurbish,
+  props.departmentAcces.account,
   
 ])
   //Vendor
@@ -555,6 +557,25 @@ const AccessForm = (props) => {
          };
 
 
+            // Account
+
+            const [checkedAccountList, setCheckedAccountList] = useState(props.departmentAcces.account              );
+            const [indeterminateAccount, setIndeterminateAccount] = useState(true);
+            const [checkAllAccount, setCheckAllAccount] = useState(false);
+          
+            const onAccountChange = (list) => {
+              setCheckedAccountList(list);
+              setIndeterminateAccount(!!list.length && list.length < plainOptions.length);
+              setCheckAllAccount(list.length === plainOptions.length);
+            };
+          
+            const onCheckAllAccountChange = (e) => {
+              setCheckedAccountList(e.target.checked ? plainOptions : []);
+              setIndeterminateAccount(false);
+              setCheckAllAccount(e.target.checked);
+            };
+
+
 
   function handleUpdateAccess() {
     let data = {
@@ -584,6 +605,7 @@ const AccessForm = (props) => {
       supplier:checkedSupplierList || [],
       inventory:checkedInventoryList || [],
       refurbish:checkedRefurbishList || [],
+      account:checkedAccountList || [],
       
       departmentId: props.departmentId,
       roleTypeId:props.roleTypeId,
@@ -806,11 +828,11 @@ const AccessForm = (props) => {
                 </div> */}
                <div >
                   <h1>Account</h1>
-                  <Checkbox indeterminate={indeterminateCustomer} onChange={onCheckAllCustomerChange} checked={checkAllCustomer}>
+                  <Checkbox indeterminate={indeterminateAccount} onChange={onCheckAllAccountChange} checked={checkAllAccount}>
                     Check all
                   </Checkbox>
                   <Divider />
-                  <CheckboxGroup options={plainOptions} value={checkedCustomerList} onChange={onCustomerChange} />
+                  <CheckboxGroup options={plainOptions} value={checkedAccountList} onChange={onAccountChange} />
                 </div>
                 <Spacer />
              
