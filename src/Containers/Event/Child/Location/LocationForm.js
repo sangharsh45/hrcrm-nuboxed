@@ -259,8 +259,8 @@ class LocationForm extends Component {
                   </FlexContainer> */}
                   <StyledLabel style={{ fontWeight: "bold" }}>Functions</StyledLabel>
                   <FlexContainer>
-                    <div style={{ width: "47%" }}>
-                      <div style={{ fontWeight: "bold" }}>Production &nbsp;<i class="fas fa-cogs"></i></div>
+                    <div style={{ width: "47%" }} class="mt-2">
+                      <div class="font-bold text-xs">Production &nbsp;<i class="fas fa-cogs"></i></div>
                       <div>
                         <Switch
                           style={{ width: "6.25em" }}
@@ -271,8 +271,8 @@ class LocationForm extends Component {
                         />
                       </div>
                     </div>
-                    <div style={{ width: "47%" }}>
-                      <div style={{ fontWeight: "bold" }}>Inventory &nbsp;<i class="fas fa-warehouse"></i></div>
+                    <div style={{ width: "47%" }} class="mt-2">
+                      <div class="font-bold text-xs">Inventory &nbsp;<i class="fas fa-warehouse"></i></div>
                       {/* inventory auto on when production on. if user wants to close inventory then ask what is inventory location */}
                       <div>
                         <Switch
@@ -286,8 +286,8 @@ class LocationForm extends Component {
                     </div>
                   </FlexContainer>
                   <FlexContainer>
-                    <div style={{ width: "47%" }}>
-                      <div style={{ fontWeight: "bold" }}>Billing &nbsp;<i class="far fa-money-bill-alt"></i></div>
+                    <div style={{ width: "47%" }} class="mt-2">
+                      <div class="font-bold text-xs">Billing &nbsp;<i class="far fa-money-bill-alt"></i></div>
                       <div>
                         <Switch
                           style={{ width: "6.25em" }}
@@ -298,8 +298,8 @@ class LocationForm extends Component {
                         />
                       </div>
                     </div>
-                    <div style={{ width: "47%" }}>
-                      <div style={{ fontWeight: "bold" }}>Corporate &nbsp;<i class="fas fa-building"></i></div>
+                    <div style={{ width: "47%" }} class="mt-2">
+                      <div class="font-bold text-xs">Corporate &nbsp;<i class="fas fa-building"></i></div>
                       <div>
                         <Switch
                           style={{ width: "6.25em" }}
@@ -312,8 +312,8 @@ class LocationForm extends Component {
                     </div>
                   </FlexContainer>
                   <FlexContainer>
-                    <div style={{ width: "47%" }}>
-                      <div style={{ fontWeight: "bold" }}>Project &nbsp;<i class="fas fa-project-diagram"></i></div>
+                    <div style={{ width: "47%" }} class="mt-2">
+                      <div class="font-bold text-xs">Project &nbsp;<i class="fas fa-project-diagram"></i></div>
                       <div>
                         <Switch
                           style={{ width: "6.25em" }}
@@ -324,8 +324,8 @@ class LocationForm extends Component {
                         />
                       </div>
                     </div>
-                    <div style={{ width: "47%" }}>
-                      <div style={{ fontWeight: "bold" }}>Retail &nbsp;<i class="fas fa-money-check"></i></div>
+                    <div style={{ width: "47%" }} class="mt-2">
+                      <div class="font-bold text-xs">Retail &nbsp;<i class="fas fa-money-check"></i></div>
                       <div>
                         <Switch
                           style={{ width: "6.25em" }}
