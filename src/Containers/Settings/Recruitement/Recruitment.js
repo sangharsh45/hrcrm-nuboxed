@@ -1,4 +1,4 @@
-import React, { lazy, Suspense, useState, useEffect, useMemo } from "react";
+import React, { lazy, Suspense, useState, } from "react";
 import { FlexContainer } from "../../../Components/UI/Layout";
 import RecruitmentActionRight from "./RecruitmentActionRight";
 import {
@@ -8,27 +8,15 @@ import {
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import Template from "../../Template/Template"
-import RecruitTab from "../../Rules/Child/RulesTab/RecruitPro/RecruitTab";
-import SeachTab from "./Child/RecruitmentTab/SearchTab";
-import IndeedForm from "./Child/Indeed/IndeedTab";
-import Library from "../Library/Library";
-import Commission from "./Child/Commission/Commission";
 import ReportScheduler from "./Child/ReportScheduler/ReportScheduler";
-import ThirdPartyAccess from "./Child/ThirdPartyAccess/ThirdPartyAccess";
 import Access from "./Child/Access/Access";
-import ComplianceForm from "./Child/Compliance/ComplianceForm";
 import General from "./Child/General/General";
-import NotificationForm from "../../Template/child/TemplateTab/Template/NotificationForm";
  import WorkFlow from "./Child/RecruitmentTab/WorkFlowTab";
-import AssessmentTab from "./Child/Assessment/AssessmentTab";
-import Certification from "./Child/Certification/Certification";
 import SkillsTab from "../Library/SkillsTab";
-import Notifications from "./Child/General/Notifications";
 import NotificationsTab from "./Child/Notification/NotificationsTab";
-import HolidayTab from "../../Holiday/HolidayTab";
-import ConfigureTab from "./Child/Configure/ConfigureTab";
 import ApprovalTab from "./Child/Approval/ApprovalTab";
 import SettingsHolidayTab from "./Child/Holiday/SettingsHolidayTab";
+import Rules from "../../Rules/Rules";
 
 const RecruitmentActionLeft = lazy(() => import("./RecruitmentActionLeft"));
 
@@ -121,6 +109,11 @@ function Recruitment(props) {
       rulesName: "Approval",
       ruleId: "19",
       component: <ApprovalTab />,
+    },
+    {
+      rulesName: "Rules",
+      ruleId: "20",
+      component: <Rules />,
     },
  
      ];
