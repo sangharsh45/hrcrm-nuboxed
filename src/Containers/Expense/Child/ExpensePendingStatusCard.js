@@ -52,7 +52,7 @@ function ExpensePendingStatusCard(props) {
                 className="absolute left-0 top-0 bottom-0 w-3  rounded-l-md -mt-1 -mb-1 -ml-2 "
 
               ></span>
-              <span class="font-semibold text-base text-cardBody-heading font-poppins"> Pending </span>
+              <span class="font-semibold text-sm text-cardBody-heading font-poppins"> Pending </span>
             </span>
           </div>    
               {pendingExpenses.map((item) => {
@@ -63,14 +63,14 @@ function ExpensePendingStatusCard(props) {
                           borderBottom: "3px dotted #515050"
                       }}>
                          
-                      <div className=" flex font-medium flex-col w-72 ">
+                      <div className=" flex font-medium flex-col w-72 mb-1 ">
 
                          
                               <Tooltip >
-                                  <h4 class=" text-base text-cardBody font-poppins">
+                                  <h4 class=" text-sm text-cardBody font-poppins">
                                   Voucher ID
                                   </h4>
-                                  <h4 class=" text-base text-blue-500 text-cardBody font-poppins cursor-pointer">
+                                  <h4 class=" text-sm text-blue-500 text-cardBody font-poppins cursor-pointer">
 <div onClick={() => { handleExpand(item.voucherId);
                 handleSetParticularRowData(item);
                 props.handleExpenseVoucherIdDrawer(true);}}>
@@ -79,30 +79,10 @@ function ExpensePendingStatusCard(props) {
          </h4>
 
 </Tooltip>
+<div className=" flex font-medium flex-col w-max ">
+                                    <h4 class=" text-sm text-cardBody font-poppins"></h4>
 
-</div>
-<div className=" flex font-medium flex-col  w-52 ">
-                           
-                           <h4 class=" text-base text-cardBody font-poppins"> Voucher Date </h4>
-                           <h4 class=" text-base text-cardBody font-poppins">
-                               
-                           
-                           {dayjs(item.voucherDate).format("MMM Do YY")}
-
-                           </h4>
-                       </div>
-                       <div className=" flex font-medium flex-col w-32 ">
-                                  
-
-                                  <h4 class=" text-base text-cardBody font-poppins">Amount</h4>
-                                  <h4 class=" text-base text-cardBody font-poppins">
-                                      € {item.amount}
-                                  </h4>
-                              </div>
-                              <div className=" flex font-medium flex-col w-[12rem] ">
-                                    <h4 class=" text-base text-cardBody font-poppins"></h4>
-
-                                    <div class=" text-base text-cardBody font-poppins">
+                                    <div class=" text-sm text-cardBody font-poppins">
          
             
               
@@ -120,6 +100,27 @@ function ExpensePendingStatusCard(props) {
                     </div></div>
                                     </div>
                                     </div>
+</div>
+
+<div className=" flex font-medium flex-col  w-52 ">
+                           
+                           <h4 class=" text-sm text-cardBody font-poppins"> Voucher Date </h4>
+                           <h4 class=" text-sm text-cardBody font-poppins">
+                               
+                           
+                           {dayjs(item.voucherDate).format("MMM Do YY")}
+
+                           </h4>
+                       </div>
+                       <div className=" flex font-medium flex-col w-32 ">
+                                  
+
+                                  <h4 class=" text-sm text-cardBody font-poppins">Amount</h4>
+                                  <h4 class=" text-sm text-cardBody font-poppins">
+                                      € {item.amount}
+                                  </h4>
+                              </div>
+                             
                         </div>
 
                         </div>

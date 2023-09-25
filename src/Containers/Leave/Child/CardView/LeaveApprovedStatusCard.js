@@ -1,14 +1,9 @@
 import React, { Component, useEffect, useState, useMemo, lazy } from "react";
-import { MultiAvatar2 } from "../../../../Components/UI/Elements";
-import { FlexContainer, OnlyWrapCard } from "../../../../Components/UI/Layout";
-import { Button, Tooltip } from "antd";
+import {  OnlyWrapCard } from "../../../../Components/UI/Layout";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Select } from "antd";
-import styled from "styled-components";
-import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import moment from "moment";
-import BorderColorIcon from "@mui/icons-material/BorderColor";
 import { BundleLoader } from "../../../../Components/Placeholder";
 import {
   getLeaveListRangeByUserId,
@@ -57,7 +52,7 @@ function LeaveApprovedStatusCard(props) {
                     }}
                   >
                     <div class=" flex flex-row justify-evenly w-wk">
-                      <div className=" flex font-medium flex-col w-44 ">
+                      <div className=" flex font-medium flex-col w-44 mb-1 ">
                         <div class=" text-sm text-cardBody font-medium font-poppins">
                           Start Date
                         </div>
@@ -65,6 +60,15 @@ function LeaveApprovedStatusCard(props) {
                         <div class=" font-normal text-sm text-cardBody font-poppins">
                           {` ${moment.utc(item.startDate).format("ll")}`}
                         </div>
+                        <div className=" flex font-medium flex-col w-40">
+                        <div class=" text-sm text-cardBody font-medium font-poppins">
+                          Reason
+                        </div>
+
+                        <div class=" font-normal text-sm text-cardBody font-poppins">
+                          {item.reason}
+                        </div>
+                      </div>
                       </div>
 
                       <div className=" flex font-medium flex-col w-40">
@@ -77,27 +81,7 @@ function LeaveApprovedStatusCard(props) {
                         </div>
 
                         {/* </Tooltip>   */}
-                      </div>
-                      <div className=" flex font-medium flex-col w-40">
-                        <div class=" text-sm text-cardBody font-medium font-poppins">
-                          Cover
-                        </div>
-
-                        <div class=" font-normal text-sm text-cardBody font-poppins">
-                          {item.coverDetails}
-                        </div>
-                      </div>
-                      <div className=" flex font-medium flex-col w-40">
-                        <div class=" text-sm text-cardBody font-medium font-poppins">
-                          Reason
-                        </div>
-
-                        <div class=" font-normal text-sm text-cardBody font-poppins">
-                          {item.reason}
-                        </div>
-                      </div>
-
-                      <div className=" flex font-medium flex-col w-48 ">
+                        <div className=" flex font-medium flex-col w-max ">
                         <div class=" text-base text-cardBody font-poppins">
                           {item.status === "Approved" && (
                             <div
@@ -114,6 +98,19 @@ function LeaveApprovedStatusCard(props) {
                           )}
                         </div>
                       </div>
+                      </div>
+                      <div className=" flex font-medium flex-col w-40">
+                        <div class=" text-sm text-cardBody font-medium font-poppins">
+                          Cover
+                        </div>
+
+                        <div class=" font-normal text-sm text-cardBody font-poppins">
+                          {item.coverDetails}
+                        </div>
+                      </div>
+                    
+
+                     
                     </div>
                   </div>
                 </div>

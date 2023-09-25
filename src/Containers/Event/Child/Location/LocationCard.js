@@ -15,7 +15,7 @@ const LocationCard = (props) => {
      return (
   <CardElement>
      <div class=" flex flex-row justify-evenly w-wk">
-     <div className=" flex font-medium flex-col  ">
+     <div className=" flex font-medium flex-col w-40  ">
 
 <div class=" text-sm text-cardBody font-medium font-poppins">
 Name
@@ -27,18 +27,18 @@ Name
 {/* </Tooltip>   */}
 </div>         
  
-<div className=" flex font-medium flex-col  ">
+<div className=" flex font-medium flex-col w-40  ">
 
 <div class=" text-sm text-cardBody font-medium font-poppins">
 Country
 </div>
 
 <div class=" font-normal text-sm text-cardBody font-poppins">
-  {item.locationName}
+  {item.country}
 </div>
 {/* </Tooltip>   */}
 </div> 
-<div className=" flex font-medium flex-col  ">
+<div className=" flex font-medium flex-col w-40  ">
 
 <div class=" text-sm text-cardBody font-medium font-poppins">
 Address
@@ -92,7 +92,7 @@ border-radius: 0.75rem;
     border: 3px solid #EEEEEE;
     background-color: rgb(255,255,255);
     box-shadow: 0 0.25em 0.62em #aaa;
-    height: 7rem;
+    height: 4rem;
     color: rgb(68,68,68);
     margin: 1em;
     padding: 0.2rem;
