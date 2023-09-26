@@ -24,7 +24,7 @@ import {
   getCandidateTaskFilterList,
   deleteTask,
 } from "../TaskAction";
-import { getTaskForRecruit } from "../../Settings/SettingsAction";
+import { getTaskForRecruit,getTaskForStages } from "../../Settings/SettingsAction";
 import { handleChooserModal } from "../../Planner/PlannerAction";
 import { StyledLabel } from "../../../Components/UI/Elements";
 import { TextareaComponent } from "../../../Components/Forms/Formik/TextareaComponent";
@@ -140,8 +140,10 @@ class TaskForm extends Component {
 
     return candidateOptions;
   };
+
   componentDidMount() {
     this.props.getEmployeelist();
+    this.props.getTaskForStages();
     this.props.getTaskForRecruit(this.props.orgId);
     this.props.getCustomerTask(this.props.orgId);
     this.props.getProjectTaskList(this.props.orgId);
@@ -216,6 +218,12 @@ class TaskForm extends Component {
     });
 
     const TaskOptions = this.props.recruitTask.map((item) => {
+      return {
+        label: `${item.taskChecklistName}`,
+        value: item.taskChecklistId,
+      };
+    });
+    const TaskStageOptions = this.props.stagesTask.map((item) => {
       return {
         label: `${item.taskChecklistName}`,
         value: item.taskChecklistId,
@@ -470,72 +478,34 @@ class TaskForm extends Component {
                      
                       </div>
                     )}
-
-<div class=" w-1/2" >
-                    <Spacer />
+                      <div class=" w-1/2">
+                          <Spacer />
                       <StyledLabel>Task Stages</StyledLabel>
-                    <Field
-                    name="taskStages"
-                    // label={<FormattedMessage
-                    //   id="app.taskStages"
-                    //   defaultMessage="Task Stages"
-                    // />}
-                    isColumnWithoutNoCreate
-                    // component={SelectComponent}
-                    // options={
-                    //   Array.isArray(
-                    //     this.getStagesOptions(
-                    //       "taskTypeId",
-                    //       values.taskTypeId
-                    //     )
-                    //   )
-                    //     ? this.getStagesOptions(
-                    //         "taskTypeId",
-                    //         values.taskTypeId
-                    //       )
-                    //     : []
-                    // }
-                    // value={values.taskStages}
-                    // filterOption={{
-                    //   filterType: "taskTypeId",
-                    //   filterValue: values.taskTypeId,
-                    // }}
-                    disabled={!values.taskTypeId}
-                    isColumn
-                    margintop={"0"}
-                    inlineLabel
-                    style={{ flexBasis: "80%" }}
-                    // value={values.roleTypeId}
-                    // width={"100%"}
-                    // isColumn
-                    // selectType="roleType"
-                     />
-                      {/* <div class=" w-w48">
-                      <Field
-  isRequired  // This makes the field mandatory
-  name="taskWorkflow"
-  label={<FormattedMessage
-    id="app.taskWorkflow"
-    defaultMessage="Task Workflow"
-  />}
-  isColumnWithoutNoCreate
-  component={SelectComponent}
-  // value={values.departmentId}
-  options={
-    Array.isArray(workflowNameOption)
-      ? workflowNameOption
-      : []
-  }
-  isColumn
-  inlineLabel
-/>
-                    </div> */}
-                    <div>
-                      
+                          <Field
+                            name="taskChecklistId"
+                            // selectType="contactListFilter"
+                            isColumnWithoutNoCreate
+                            isRequired
+                            placeolder="Select type"
+                            // label={
+                            //   <FormattedMessage
+                            //     id="app.taskList"
+                            //     defaultMessage="Task CheckList"
+                            //   />
+                            // }
+                            // component={SearchSelect}
+                            component={SelectComponent}
+                            options={
+                              Array.isArray(TaskStageOptions) ? TaskStageOptions : []
+                            }
+                            value={values.taskChecklistId}
+                            isColumn
+                            inlineLabel
+                          />
+                     
+                      </div>
 
-                    </div>
-                  
-                  </div>
+
                  
                     <div style={{ width: "24%" }}>
                       <Spacer style={{ marginTop: "1.25em" }} />
@@ -1176,6 +1146,7 @@ const mapStateToProps = ({
   projectTaskList: task.projectTaskList,
   candidateTaskList: task.candidateTaskList,
   user: auth.userDetails,
+  stagesTask:settings.stagesTask,
   updatingTask: task.updatingTask,
   units: unit.units,
   recruitTask: settings.recruitTask,
@@ -1204,6 +1175,7 @@ const mapDispatchToProps = (dispatch) =>
       getEmployeelist,
       getProjectTaskList,
       getUnits,
+      getTaskForStages,
       // getOppoStages,
       // setClearbitCandidateData,
     },
