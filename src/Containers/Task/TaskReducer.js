@@ -28,8 +28,15 @@ const initialState = {
   fetchingCandidateTaskListError:false,
   candidateTaskList:[],
 
+  addSharingTask: false,
+  addSharingTaskError: false,
+
   approvedTask: false,
   approvedTaskError: false,
+
+  fetchingPermissionsListTask: false,
+  fetchingPermissionsListTaskError: false,
+  permissionsDataListTask:[],
 
 
   addDrawerTaskProjectModal:false,
@@ -772,6 +779,36 @@ export const TaskReducer = (state = initialState, action) => {
 
                 case types.HANDLE_TASK_OPEN_MODAL:
                   return { ...state, addTaskDetailModal: action.payload };
+
+
+
+                  case types.GET_PERMISSIONS_LIST_TASK_REQUEST:
+                    return { ...state, fetchingPermissionsListTask: true };
+                  case types.GET_PERMISSIONS_LIST_TASK_SUCCESS:
+                    return {
+                      ...state,
+                      fetchingPermissionsListTask: false,
+                      permissionsDataListTask: action.payload,
+                    };
+                  case types.GET_PERMISSIONS_LIST_TASK_FAILURE:
+                    return {
+                      ...state,
+                      fetchingPermissionsListTask: false,
+                      fetchingPermissionsListTaskError: false,
+                    };
+                    case types.ADD_SHARE_TASK_PERMISSION_REQUEST:
+                      return { ...state, addSharingTask: true };
+                
+                    case types.ADD_SHARE_TASK_PERMISSION_SUCCESS:
+                      return { ...state, addSharingTask: false, taskListRangeByUserId: action.payload };
+                
+                    case types.ADD_SHARE_TASK_PERMISSION_FAILURE:
+                      return {
+                        ...state,
+                        addSharingTask: false,
+                        addSharingTaskError: true,
+                      };
+
 
 
         default:

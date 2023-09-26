@@ -11,20 +11,20 @@ import SingleNote from "./SingleNote";
 
 class NotesForm extends Component {
   componentDidMount() {
-    this.props.getNotesListByTaskId(this.props.taskData.taskId);
+    this.props.getNotesListByTaskId(this.props.currentNameId.taskId);
   }
 
   render() {
     const { fetchingNotesListByTaskId, notesListByTaskId } = this.props;
-// console.log(this.props.taskData.taskId);
+// console.log(this.props.currentNameId.taskId);
     return (
       <>
         <div style={{ backgroundColor: "#dcdcdc", height: "14.375em" }}>
           <NoteFile
             type={"task"}
-            taskId={this.props.taskData.taskId}
+            taskId={this.props.currentNameId.taskId}
             callback={() =>
-              this.props.getNotesListByTaskId(this.props.taskData.taskId)
+              this.props.getNotesListByTaskId(this.props.currentNameId.taskId)
             }
           />
         </div>

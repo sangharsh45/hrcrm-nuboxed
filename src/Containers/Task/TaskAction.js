@@ -1139,3 +1139,66 @@ export const handleTaskopenModal = (modalProps) => (dispatch) => {
     payload: modalProps,
   });
 };
+
+export const getPermissionsListTask = () => (dispath) => {
+  dispath({ type: types.GET_PERMISSIONS_LIST_TASK_REQUEST });
+  axios
+    .get(`${base_url}/permission/type?type=${"task"}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      dispath({
+        type: types.GET_PERMISSIONS_LIST_TASK_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      dispath({
+        type: types.GET_PERMISSIONS_LIST_TASK_FAILURE,
+        payload: err,
+      });
+    });
+};
+
+
+export const shareTaskPermission = (data, userId, a) => (
+  dispatch,
+  getState
+) => {
+  // const { userId } = getState("auth").auth.userDetails;
+  dispatch({
+    type: types.ADD_SHARE_TASK_PERMISSION_REQUEST,
+  });
+
+  axios
+    .post(`${base_url}/permission/details`, data, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      if (a === "All") {
+        // dispatch(getAllCustomerListByUserId());
+        // dispatch(getRecords(userId));
+      } else {
+        // dispatch(getCustomerListByUserId(userId));
+        // dispatch(getRecords(userId));
+      }
+      dispatch({
+        type: types.ADD_SHARE_TASK_PERMISSION_SUCCESS,
+        payload: res.data,
+      });
+      // cb && cb("success");
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.ADD_SHARE_TASK_PERMISSION_FAILURE,
+        payload: err,
+      });
+      // cb && cb("failure");
+    });
+};

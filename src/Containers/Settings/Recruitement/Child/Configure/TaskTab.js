@@ -6,6 +6,8 @@ import { bindActionCreators } from "redux";
 import AssignmentIcon from "@mui/icons-material/Assignment";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { Button, message, Popconfirm } from "antd";
+import { DatePicker } from "antd";
+import dayjs from "dayjs";
 import styled from "styled-components";
 import {
   MainWrapper,
@@ -47,7 +49,9 @@ class TaskTab extends Component {
       probability: null,
       days: null,
       rowData: "",
-      stageValue: null,
+      startDate:"",
+      endDate:"",
+      // probability: null,
       setCurrentRowData: "",
       visible: false,
       isViewAll: false,
@@ -68,6 +72,14 @@ class TaskTab extends Component {
   }
   handleTabChange = (key) => {
     this.setState({ activeKey: key });
+  };
+  onChangeDatePicker = (startDate, dateString) => {
+    console.log(startDate, dateString);
+    this.setState({ startDate: dayjs(dateString) });
+  };
+  onChangeEndDatePicker = (endDate, dateString) => {
+    console.log(endDate, dateString);
+    this.setState({ endDate: dayjs(dateString) });
   };
 
   handleEdit = () => {
@@ -182,8 +194,10 @@ class TaskTab extends Component {
     const { addTaskStage } = this.props;
     const {
       taskChecklistStageName,
+      // probability,
       probability,
-      stageValue,
+      startDate,
+      endDate,
       addingStage,
       isTextInputOpen,
       responsible,
@@ -205,9 +219,11 @@ class TaskTab extends Component {
     console.log(this.props.handleRecruitmentDrawerModal);
     let stage = {
       taskChecklistStageName,
-      probability,
+      // probability,
       days,
-      stageValue,
+      startDate: dayjs(this.state.startDate).toISOString(),
+      endDate: dayjs(this.state.endDate).toISOString(),
+      probability,
       responsible,
       taskChecklistId: Id,
       organizationId: this.props.organizationId,
@@ -227,9 +243,11 @@ class TaskTab extends Component {
     }
     this.setState({
       taskChecklistStageName: "",
-      probability: "",
+      // probability: "",
       days: "",
-      stageValue:"",
+      probability:"",
+      startDate:"",
+      endDate:"",
       responsible: "",
       isTextInputOpen: false,
     });
@@ -365,6 +383,9 @@ class TaskTab extends Component {
                 stageValue1={this.state.taskChecklistStageName}
                 newStageName="taskChecklistStageName"
                 newDays="days"
+                newProbability="probability"
+               newStartDate="startDate"
+               newEndDate="endDate"
                 //newResponsible="responsible"
                 handleUpdateStage={this.handleUpdateStage}
                 handleStageType={this.handleStageType}
@@ -396,13 +417,31 @@ class TaskTab extends Component {
                   />
                 <TextInput
                   type="number"
-                  // placeholder="Weightage"
-                  name="stageValue"
-                  value={this.state.stageValue}
+                  placeholder="Stage Progress in %"
+                  name="probability"
+                  value={this.state.probability}
                   onChange={this.handleChange}
-                  width={"12%"}
+                  width={"20%"}
                 />
-                &nbsp; &nbsp;
+                     <TextInput
+                  type="number"
+                  placeholder="Days"
+                  name="days"
+                  value={this.state.days}
+                  onChange={this.handleChange}
+                  width={"20%"}
+                />
+               <div>
+                  <DatePicker 
+                  placeholder="Start Date"
+                  onChange={this.onChangeDatePicker} />
+                  </div>
+                  <div>
+                  <DatePicker 
+                  placeholder="End Date"
+                  onChange={this.onChangeEndDatePicker} />
+                  </div>
+              
                 </FlexContainer>
                 <div>
                   <Button

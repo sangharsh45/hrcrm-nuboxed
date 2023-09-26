@@ -25,11 +25,11 @@ class AddTaskNotesDrawerModal extends Component {
           maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}
           onClose={() => this.props.handleTaskNotesDrawerModal(false)}
         >
-          {/* <Suspense fallback={<BundleLoader />}>
-            <NotesForm data1={this.props.data1} 
-            taskId={this.props.taskData.taskId} 
+          <Suspense fallback={<BundleLoader />}>
+            <NotesForm currentNameId={this.props.currentNameId} 
+            taskId={this.props.currentNameId.taskId} 
             />
-          </Suspense> */}
+          </Suspense>
         </StyledDrawer>
       </div>
     );
