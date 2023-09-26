@@ -118,6 +118,14 @@ export const expenseReducer = (state = initialState, action) => {
                   return item;
                 }
               }),
+              // Expenses: state.Expenses.map((item) => {
+              //   if (item.amount === action.payload.amount) {
+              //     return action.payload;
+              //   } else {
+              //     return item;
+              //   }
+              // }),
+              // Expenses: action.payload
             };
           case types.UPDATE_EXPENSE_FAILURE:
             return {
