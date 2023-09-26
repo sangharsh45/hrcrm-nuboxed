@@ -285,12 +285,12 @@ export const setSubSelectedReportType = (type) => (dispatch) =>
       
   };
 
-  export const getDashBoardClosureRatio = (organisationId,endDate,startDate) => (dispatch) => {
+  export const getDashBoardClosureRatio = (userId,endDate,startDate) => (dispatch) => {
     dispatch({
       type: types.GET_DASHBOARD_CLOSURE_RATIO_REQUEST,
     });
     axios
-      .get(`${base_url}/recruitment/org/closer/${organisationId}?endDate=${endDate}&startDate=${startDate}`, {
+      .get(`${base_url}/attendance/getWorkingHour/${userId}?endDate=${endDate}&startDate=${startDate}`, {
         headers: {
           Authorization: "Bearer " + sessionStorage.getItem("token") || "",
         },
@@ -363,6 +363,58 @@ export const setSubSelectedReportType = (type) => (dispatch) =>
         });
       });
   };
+
+  export const getTodosCount = (userId, startDate, endDate) => (dispatch) => {
+    dispatch({ type: types.GET_TODOS_COUNT_REQUEST });
+   
+    axios
+      .get(`${base_url}/todoCount/${userId}?endDate=${endDate}&startDate=${startDate}`, {
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+        },
+      })
+      .then((res) => {
+        // console.log(res)
+        dispatch({
+          type: types.GET_TODOS_COUNT_SUCCESS,
+          payload: res.data,
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+        dispatch({
+          type: types.GET_TODOS_COUNT_FAILURE,
+          payload: err,
+        });
+      });
+  };
+
+  export const getavgHour = (userId, startDate, endDate) => (dispatch) => {
+    dispatch({ type: types.GET_AVG_HOUR_REQUEST });
+   
+    axios
+      .get(`${base_url}/attendance/avarageHour/${userId}?endDate=${endDate}&startDate=${startDate}`, {
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+        },
+      })
+      .then((res) => {
+        // console.log(res)
+        dispatch({
+          type: types.GET_AVG_HOUR__SUCCESS,
+          payload: res.data,
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+        dispatch({
+          type: types.GET_AVG_HOUR__FAILURE,
+          payload: err,
+        });
+      });
+  };
+
+
 
   export const getDashboardFunnelRecord = (orgId) => (dispatch) => {
     dispatch({
@@ -939,6 +991,31 @@ export const setSubSelectedReportType = (type) => (dispatch) =>
         console.log(err);
         dispatch({
           type: types.GET_UPCOMING_EVENTS_FAILURE,
+          payload: err,
+        });
+      });
+  };
+
+  export const getTasklist = (userId) => (dispatch) => {
+    dispatch({ type: types.GET_TASK_REQUEST });
+   
+    axios
+      .get(`${base_url}/task/count/opentask/${userId}`, {
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+        },
+      })
+      .then((res) => {
+        // console.log(res)
+        dispatch({
+          type: types.GET_TASK_SUCCESS,
+          payload: res.data,
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+        dispatch({
+          type: types.GET_TASK_FAILURE,
           payload: err,
         });
       });

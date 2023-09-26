@@ -10,7 +10,7 @@ class DashboardHeader extends Component {
       zIndex: "998"}}>
         <ActionHeader
            leftComponent={<DashboardActionLeft />}
-          rightComponent={<DashboardActionRight />}
+          // rightComponent={<DashboardActionRight />}
         />
       </div>
     );

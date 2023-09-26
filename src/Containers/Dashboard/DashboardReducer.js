@@ -34,6 +34,15 @@ const initialState = {
   fetchingTodosError: false,
   todos: [],
 
+  fetchingTodosCount: false,
+  fetchingTodosCountError: false,
+  todosCount:{},
+
+  fetchingAvgHour: false,
+  fetchingAvgHourError: false, 
+  avgHour:{},
+
+
     fetchingdashBoardCommissionTable: false,
     fetchingdashBoardCommissionTableError: false,
     tableDashBoardCommission:[],
@@ -86,6 +95,10 @@ const initialState = {
     fetchingActionNotificationsError:false,
     actionNotifications:[],
 
+    fetchingTask: false,
+    fetchingTaskError: false ,
+    taskCount:{},
+
 
     addingActionNotifications:false,
     addingActionNotificationsError:false,
@@ -113,7 +126,7 @@ const initialState = {
 
 
 
-    viewType: "ME",
+    viewType: "test",
 
   isCustomSelected: false,
   startDate: dayjs().toISOString(),
@@ -453,6 +466,35 @@ export const dashboardReducer = (state = initialState, action) => {
       };
     case types.GET_TODOS_FAILURE:
       return { ...state, fetchingTodos: false, fetchingTodosError: true };
+
+
+      case types.GET_TODOS_COUNT_REQUEST:
+        return { ...state, fetchingTodosCount: true, fetchingTodosCountError: false };
+      case types.GET_TODOS_COUNT_SUCCESS:
+        return {
+          ...state,
+          fetchingTodosCount: false,
+          fetchingTodosCountError: false,
+          todosCount: action.payload,
+        };
+      case types.GET_TODOS_COUNT_FAILURE:
+        return { ...state, fetchingTodosCount: false,
+                         fetchingTodosCountError: true };
+
+
+                         case types.GET_AVG_HOUR_REQUEST:
+                          return { ...state, fetchingAvgHour: true, fetchingAvgHourError: false };
+                        case types.GET_AVG_HOUR__SUCCESS:
+                          return {
+                            ...state,
+                            fetchingAvgHour: false,
+                            fetchingAvgHourError: false,
+                            avgHour: action.payload,
+                          };
+                        case types.GET_AVG_HOUR__FAILURE:
+                          return { ...state, fetchingAvgHour: false,
+                                             fetchingAvgHourError: true };
+
 
 
       case types.GET_DASHBOARD_FUNNEL_REQUEST:
@@ -800,6 +842,25 @@ export const dashboardReducer = (state = initialState, action) => {
                                                     case types.GET_UPCOMING_EVENTS_FAILURE:
                                                       return { ...state, fetchingUpcomingEvents: false, fetchingUpcomingEventsError: true };
                                                 
+
+
+                                                      case types.GET_TASK_REQUEST:
+                                                        return { ...state, fetchingTask: true,
+                                                          fetchingTaskError: false };
+                                                      case types.GET_TASK_SUCCESS:
+                                                        return {
+                                                          ...state,
+                                                          fetchingTask: false,
+                                                          fetchingTaskError: false,
+                                                          taskCount: action.payload,
+                                                        };
+                                                      case types.GET_TASK_FAILURE:
+                                                        return { ...state,
+                                                          fetchingTask: false,
+                                                          fetchingTaskError: true };
+
+
+
 
     default:
         return state;

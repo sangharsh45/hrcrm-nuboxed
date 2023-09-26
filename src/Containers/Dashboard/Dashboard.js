@@ -463,7 +463,7 @@ class Dashboard extends Component {
             ) : (
               <StackedClosureChart/>
           )}
-                 <div style={{ width: "38%" }}>
+                 {/* <div style={{ width: "38%" }}>
        <MainWrapper
         style={{height:"16em"}}
        >
@@ -477,14 +477,14 @@ class Dashboard extends Component {
               <FunnelChart/>
           )}
        </MainWrapper>
-       </div>
+       </div> */}
             </FlexContainer>
                 
         
         
-        <DashboardDetailsTab
+        {/* <DashboardDetailsTab
         viewType={viewType}
-        />
+        /> */}
           
          
         
@@ -494,9 +494,9 @@ class Dashboard extends Component {
      <div style={{ width: "47%" }}>
           <FlexContainer flexDirection="column" style={{ display: "block" }}>
       
-      <DashboardCustomerTab
+      {/* <DashboardCustomerTab
       viewType={viewType}
-      />
+      /> */}
       
        <FlexContainer justifyContent="space-between" >
        <TodoDashboardTab

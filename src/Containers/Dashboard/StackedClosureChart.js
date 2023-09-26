@@ -72,16 +72,16 @@ import { MainWrapper } from "../../Components/UI/Elements";
   };
   }
   componentDidMount() {
-    const { getDashBoardClosureRatio, organisationId, startDate, endDate } = this.props;
-    getDashBoardClosureRatio(organisationId,  startDate, endDate);
+    const { getDashBoardClosureRatio, userId, startDate, endDate } = this.props;
+    getDashBoardClosureRatio(userId,  startDate, endDate);
   }
   componentWillReceiveProps(nextProps) {
     if (
       this.props.startDate !== nextProps.startDate ||
       this.props.endDate !== nextProps.endDate
     ) {
-      const { getDashBoardClosureRatio, organisationId, startDate, endDate } = nextProps;
-      getDashBoardClosureRatio(organisationId, startDate, endDate);
+      const { getDashBoardClosureRatio, userId, startDate, endDate } = nextProps;
+      getDashBoardClosureRatio(userId, startDate, endDate);
     }
   }
 
@@ -97,12 +97,12 @@ import { MainWrapper } from "../../Components/UI/Elements";
   return (
     <>
     <MainWrapper
-    style={{height:"16em",width:"60%"}}
+    style={{height:"16em",width:"-webkit-fill-available"}}
     >
       {/* Recruitment Performance */}
       <FlexContainer justifyContent="space-between">
       {/* <div style={{ width: "47%" }}> */}
-      <span>Performance</span>
+      <span>Hours</span>
       {/* </div> */}
       {/* <div style={{ width: "47%" }}> */}
     <TimeInterval
@@ -143,6 +143,7 @@ const mapStateToProps = ({ dashboard,auth,opportunity }) => ({
   startDate: opportunity.startDate,
   dashBoardClosureRatio:dashboard.dashBoardClosureRatio,
   organisationId:auth.userDetails.organizationId,
+  userId: auth.userDetails.userId,
   dateClosureRangeList:opportunity.dateClosureRangeList
 });
 const mapDispatchToProps = (dispatch) =>
