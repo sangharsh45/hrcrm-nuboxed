@@ -667,7 +667,8 @@ function NavMenu (props) {
      )}  */}
         <hr/>
                   {/* Employees */}
-                  {user.department === "Management" && (
+                  {user.department === "Management" && user.userAccessInd === true && (
+                  
             <Menu.Item key="/employees" style={{height:"30px"}}>
               <Link to="/Employees">
                 <GroupsIcon
@@ -687,6 +688,7 @@ function NavMenu (props) {
               </Link>
             </Menu.Item>
           )}
+           { user.locationAccessInd === true && (
          
           <Menu.Item key="/location" style={{height:"30px"}}>
            <Link to="/location">
@@ -700,6 +702,7 @@ function NavMenu (props) {
               </span>
             </Link> 
            </Menu.Item>
+           )}
         </Menu>
       </div>
     );

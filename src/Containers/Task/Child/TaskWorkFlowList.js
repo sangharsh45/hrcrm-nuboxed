@@ -3,26 +3,32 @@ import { connect } from "react-redux";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
 import { FormattedMessage } from "react-intl";
 import { bindActionCreators } from "redux";
+import AssignmentIcon from "@mui/icons-material/Assignment";
+import DeleteIcon from "@mui/icons-material/Delete";
+import { Button, message, Popconfirm } from "antd";
+import { DatePicker } from "antd";
 import dayjs from "dayjs";
 import styled from "styled-components";
 import {
   MainWrapper,
   Spacer,
   TextInput,
-} from "../../../../../Components/UI/Elements";
+} from "../../../Components/UI/Elements";
 import {
   getTaskForRecruit,
-  getTaskStagesForRecruit
-} from "../../../SettingsAction";
-import { FlexContainer } from "../../../../../Components/UI/Layout";
-import { StyledTabs } from "../../../../../Components/UI/Antd";
-import { Select } from "../../../../../Components/UI/Elements";
-import { elipsize } from "../../../../../Helpers/Function/Functions";
-import TaskWorkFlowTab from "./TaskWorkFlowTab";
+  getTaskWorkflowStagesForRecruit,
+} from "../../Settings/SettingsAction";
+import { FlexContainer } from "../../../Components/UI/Layout";
+import { StyledTabs } from "../../../Components/UI/Antd";
+import { Select } from "../../../Components/UI/Elements";
+import { elipsize } from "../../../Helpers/Function/Functions";
+// import AddRecruitmentDrawerModal from "../RecruitmentTab/AddRecruitmentDrawerModal";
+
+import SingleTaskWorkflowList from "./SingleTaskWorkflowList";
 const { Option } = Select;
 
 const TabPane = StyledTabs.TabPane;
-class TaskTab extends Component {
+class TaskWorkflowList extends Component {
   constructor(props) {
     super(props);
     this.formRef = null;
@@ -32,7 +38,6 @@ class TaskTab extends Component {
       // viewAll:false,
       // setIsViewAll:false,
       change: true,
-      subTable:false,
       isTextInputOpen: false,
       addingStage: false,
       taskChecklistStageName: "",
@@ -46,7 +51,6 @@ class TaskTab extends Component {
       visible: false,
       isViewAll: false,
       currentProcess: [],
-      taskTypeId:"",
       currentStageId: "",
       currentStage: [],
       currentStageName: "",
@@ -60,6 +64,7 @@ class TaskTab extends Component {
 
   componentDidMount() {
     this.props.getTaskForRecruit();
+    this.props.getTaskWorkflowStagesForRecruit(this.props.item.taskId)
   }
   handleTabChange = (key) => {
     this.setState({ activeKey: key });
@@ -86,7 +91,6 @@ class TaskTab extends Component {
   handleProcessClick = (item, i) => {
     this.setState({
       currentProcess: item,
-      subTable: !this.state.subTable,
     });
     this.props.getTaskStagesForRecruit(item.taskChecklistId);
   };
@@ -129,16 +133,57 @@ class TaskTab extends Component {
       alert("error");
     }
   };
+    handleEditProcessName = () => {
+      const { updateTaskNameForRecruit } = this.props;
+
+      const {
+        taskChecklistName,
+
+        currentProcess,
+      } = this.state;
+      const Id = currentProcess.taskChecklistId;
+      let process = { taskChecklistName, taskChecklistId: Id };
+      updateTaskNameForRecruit(process, this.handleCallBack1);
+      this.setState({
+        isProcessTextInputOpen: false,
+      });
+    };
 
 
+  //   handleStagePublishClick = (taskChecklistStagelinkId, publishInd) => {
+  //     const { recruitTaskStages } = this.props;
+  //     const data = {
+  //       taskChecklistStagelinkId,
+  //       publishInd: publishInd ? false : true,
+  //     };
+  //     console.log(publishInd);
+  //     this.props.LinkStagePublish(data, this.handleCallBack);
+  //   };
+  handleCallBack = (status) => {
+    if (status === "Success") {
+      const {
+        currentProcess: { taskChecklistId },
+      } = this.state;
 
+      this.props.getTaskStagesForRecruit(taskChecklistId);
+    } else {
+      alert("error");
+    }
+  };
+
+  handleStageType = (value) => this.setState({ responsible: value });
+
+ 
   render() {
     console.log("process", this.state.currentProcess.taskChecklistName);
     return (
       <>
         <StageWrapper>
           <MainWrapper>
-          
+            <h1>
+              {/* Workflow */}
+              <FormattedMessage id="app.workFlow" defaultMessage="WorkFlow" />
+            </h1>
 
             <FlexContainer>
               <StyledTabs
@@ -161,16 +206,35 @@ class TaskTab extends Component {
                 })}
               </StyledTabs>
 
+            
             </FlexContainer>
-            {this.state.subTable && (
-             <TaskWorkFlowTab
-             taskTypeId={this.state.currentProcess.taskTypeId}
-         />
-         )}
+
+            {this.props.recruitTaskWorkflowStages.map((recruitTaskWorkflowStages, i) => (
+              <SingleTaskWorkflowList
+                key={i}
+                stageValue1={this.state.taskChecklistStageName}
+                newStageName="taskChecklistStageName"
+                newDays="days"
+                newProbability="probability"
+               newStartDate="startDate"
+               newEndDate="endDate"
+                //newResponsible="responsible"
+                handleUpdateStage={this.handleUpdateStage}
+                handleStageType={this.handleStageType}
+                // taskChecklistId={this.state.currentProcess.taskChecklistId}
+                recruitTaskWorkflowStages={recruitTaskWorkflowStages}
+                organization={this.props.organization}
+               
+                className="scrollbar"
+                id="style-3"
+              />
+            ))}
+
+          
           </MainWrapper>
         </StageWrapper>
 
-    
+
       </>
     );
   }
@@ -178,7 +242,7 @@ class TaskTab extends Component {
 
 const mapStateToProps = ({ settings, auth, document }) => ({
   recruitTask: settings.recruitTask,
-  recruitTaskStages: settings.recruitTaskStages,
+  recruitTaskWorkflowStages: settings.recruitTaskWorkflowStages,
   organization:
     auth.userDetails &&
     auth.userDetails.metaData &&
@@ -189,14 +253,15 @@ const mapStateToProps = ({ settings, auth, document }) => ({
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
+    
       getTaskForRecruit,
-      getTaskStagesForRecruit
-
+      getTaskWorkflowStagesForRecruit
+    
     },
     dispatch
   );
 
-export default connect(mapStateToProps, mapDispatchToProps)(TaskTab);
+export default connect(mapStateToProps, mapDispatchToProps)(TaskWorkflowList);
 const StageWrapper = styled.div`
   width: 100%;
   height: auto;

@@ -8,12 +8,13 @@ const Option =StyledSelect;
 function TaskSharedForm(props) {
   const [page, setPage] = useState(0);
   useEffect(() => {
-    setPage(page + 1);
-    props.getTaskListRangeByUserId(props.employeeId,page);
+    // setPage(page + 1);
+    props.getPermissionsListTask();
   }, []);
 
   function handleChange(userId) {
-    props.getTaskListRangeByUserId(props.employeeId,0);
+     setPage(page + 1);
+    props.getTaskListRangeByUserId(props.employeeId,page);
   }
 
   const permissionListForAll = props.permissionsDataListTask.map((item) => {

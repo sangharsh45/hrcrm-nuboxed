@@ -1,0 +1,209 @@
+import React, { Component } from "react";
+import styled from "styled-components";
+import { FormattedMessage } from "react-intl";
+import BorderColorIcon from "@mui/icons-material/BorderColor";
+import { Button, Tooltip, Popconfirm, } from "antd";
+import { FlexContainer } from "../../../Components/UI/Layout";
+import {
+  TextInput,
+  Select,
+} from "../../../Components/UI/Elements";
+import { elipsize } from "../../../Helpers/Function/Functions";
+import { ViewEditCard } from "../../../Components/UI/Elements";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import DeleteIcon from "@mui/icons-material/Delete";
+import { StyledPopconfirm } from "../../../Components/UI/Antd";
+import moment from "moment";
+const { Option } = Select;
+
+class SingleTaskWorkflowList extends Component {
+  constructor(props) {
+    super(props);
+    this.formRef = null;
+    this.state = {
+      color: "red",
+      // currentStage: [],
+      fields: {},
+      responsible: "",
+      publish: false,
+    };
+  }
+
+  handleChange = ({ target: { name, value } }) => {
+    debugger;
+    this.setState({
+      fields: {
+        ...this.state.fields,
+        [name]: value,
+      },
+    });
+  };
+
+  handleStageType = (value) => this.setState({ responsible: value });
+
+  render() {
+    console.log(this.state.fields);
+    const { recruitTaskWorkflowStages } = this.props;
+    console.log(recruitTaskWorkflowStages.taskChecklistStagelinkId);
+
+    const {
+        recruitTaskWorkflowStages:
+       { name,
+         taskChecklistStagelinkId,
+         probability,
+         days,
+         startDate,
+         endDate
+        },
+      linkedStages,
+      organization,
+      newStageName,
+      newProbability,
+      newDays,
+
+      stageValue1,
+      handleChange,
+      updatingStages,
+      handleUpdateStage,
+      color,
+      key,
+      currentStage,
+    } = this.props;
+    console.log(taskChecklistStagelinkId, "----------", linkedStages);
+    console.log(color);
+    console.log(currentStage);
+
+    // const disabled = false;
+    const disableDelete =
+      linkedStages && linkedStages.includes(taskChecklistStagelinkId);
+    return (
+      <StageWrapper>
+        <ViewEditCard>
+          {({ viewType }, toggleViewType) =>
+            viewType === "view" ? (
+              <FlexContainer
+                justifyContent="start"
+                alignItems="center"
+                // onClick={() => handleStageClick(taskChecklistStagelinkId, taskChecklistStageName)}
+                style={{
+                  backgroundColor:
+                    taskChecklistStagelinkId === currentStage &&
+                    "rgb(161, 185, 185)",
+                }}
+              >
+                <StageName style={{ flexBasis: "25%", textAlign: "left" }}>
+                  {elipsize(name, 23)}
+                </StageName>
+                <StageName>
+                  {probability}
+                </StageName>
+                <StageName>
+                  {days}
+                </StageName>
+                <StageName>
+                  {`${ moment(startDate).format("DD/MM/YYYY")}`}
+                </StageName>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <StageName>
+                {`${ moment(endDate).format("DD/MM/YYYY")}`}
+                </StageName>
+                <div class=" flex justify-between ml-margin65 w-4">
+                  <>
+                    <Tooltip title="Edit">
+                      <BorderColorIcon
+                        style={{ fontSize: "0.8rem" }}
+                        tooltipTitle="Edit"
+                        onClick={toggleViewType}
+                      />
+                    </Tooltip>
+                  </>
+
+                  <>
+                    <Popconfirm
+                      title="Do you want to delete?"
+                      okText="Yes"
+                      cancelText="No"
+                    //   onConfirm={() =>
+                    //     deleteTaskStagesData(taskChecklistStagelinkId)
+                    //   }
+                    >
+                      <DeleteIcon
+                        type="delete"
+                        style={{ cursor: "pointer", color: "red" ,fontSize: "0.8rem"}}
+                      />
+                    </Popconfirm>
+                  </>
+                </div>
+              </FlexContainer>
+            ) : (
+              <FlexContainer justifyContent="center">
+                <TextInput
+                  name={newStageName}
+                  // value={stageValue1 || taskChecklistStageName}
+                  // defaultValue={taskChecklistStageName}
+                  onChange={this.handleChange}
+                  // disabled={disabled}
+                  width={"25%"}
+                />
+
+                <Button
+                  type="primary"
+                  htmlType="submit"
+                  // disabled={disabled}
+                  loading={updatingStages}
+                  onClick={() =>
+                    handleUpdateStage(
+                      // this.props.taskChecklistStagelinkId,
+                      this.props.taskChecklistStagelinkId,
+                      this.state.fields.taskChecklistStageName,
+                      toggleViewType()
+                    )
+                  }
+                >
+                  {/* Save */}
+                  <FormattedMessage id="app.save" defaultMessage="Save" />
+                </Button>
+
+                <Button type="primary" ghost onClick={() => toggleViewType()}>
+                  {/* Cancel */}
+                  <FormattedMessage id="app.cancel" defaultMessage="Cancel" />
+                </Button>
+              </FlexContainer>
+            )
+          }
+        </ViewEditCard>
+      </StageWrapper>
+    );
+  }
+}
+const mapStateToProps = ({ settings, auth }) => ({});
+
+const mapDispatchToProps = (dispatch) =>
+  bindActionCreators(
+    {
+    //   deleteTaskStagesData,
+    },
+    dispatch
+  );
+
+export default connect(mapStateToProps, mapDispatchToProps)(SingleTaskWorkflowList);
+// export default SingleRecruitStages;
+
+const StageWrapper = styled.div`
+  width: 100%;
+  height: auto;
+  cursor: pointer;
+`;
+const StageName = styled.h3`
+  color: ${(props) => props.theme.color || "teal"};
+  font-weight: 400;
+  // margin-bottom: 0;
+  margin: 0;
+`;
+const StageValue = styled.h3`
+  color: ${(props) => props.theme.color || "teal"};
+  font-size: 1 rem;
+  font-weight: 400;
+  margin: 0;
+`;

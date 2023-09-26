@@ -29,6 +29,10 @@ const initialState = {
   fetchingTaskForRecruitError: false,
   recruitTask:[],
 
+  fetchingTaskForWorkflow: false,
+  fetchingTaskForWorkflowError: false,
+  recruitWorkflowTask:[],
+
   fetchingTaskForStages: false,
   fetchingTaskForStagesError: false,
   stagesTask:[],
@@ -115,6 +119,10 @@ const initialState = {
   fetchingProcessStages: false,
   fetchingProcessStagesError: false,
   ProcessStages: [],
+
+  fetchingWorkflowTaskStagesForRecruit: false,
+  fetchingWorkflowTaskStagesForRecruitError: false,
+  recruitTaskWorkflowStages:[],
 
   updateProcessName: false,
   updateProcessNameError: false,
@@ -2458,6 +2466,49 @@ export const settingsReducer = (state = initialState, action) => {
                                 fetchingTaskForStages: false,
                                 fetchingTaskForStagesError: true,
                               };
+
+
+                              case types.GET_WORKFLOW_TASK_STAGES_FOR_RECRUIT_REQUEST:
+                                return {
+                                  ...state,
+                                  fetchingWorkflowTaskStagesForRecruit: true,
+                                  fetchingWorkflowTaskStagesForRecruitError: false,
+                                };
+                              case types.GET_WORKFLOW_TASK_STAGES_FOR_RECRUIT_SUCCESS:
+                                return {
+                                  ...state,
+                                  fetchingWorkflowTaskStagesForRecruit: false,
+                                  fetchingWorkflowTaskStagesForRecruitError: false,
+                                  recruitTaskWorkflowStages: action.payload,
+                                };
+                              case types.GET_WORKFLOW_TASK_STAGES_FOR_RECRUIT_FAILURE:
+                                return {
+                                  ...state,
+                                  fetchingWorkflowTaskStagesForRecruit: false,
+                                  fetchingWorkflowTaskStagesForRecruitError: true,
+                                };
+
+
+                                case types.GET_TASK_FOR_WORKFLOW_REQUEST:
+                                  return {
+                                    ...state,
+                                    fetchingTaskForWorkflow: true,
+                                    fetchingTaskForWorkflowError: false,
+                                  };
+                                case types.GET_TASK_FOR_WORKFLOW_SUCCESS:
+                                  return {
+                                    ...state,
+                                    fetchingTaskForWorkflow: false,
+                                    fetchingTaskForWorkflowError: false,
+                                    recruitWorkflowTask: action.payload,
+                                    
+                                  };
+                                case types.GET_TASK_FOR_WORKFLOW_FAILURE:
+                                  return {
+                                    ...state,
+                                    fetchingTaskForWorkflow: false,
+                                    fetchingTaskForWorkflowError: true,
+                                  };
                     
 
 

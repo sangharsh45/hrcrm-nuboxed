@@ -154,7 +154,7 @@ export const addTaskForRecruiter = (data, orgId, cb) => (
     })
     .then((res) => {
       console.log(res);
-       dispatch(getTaskForRecruit(orgId));
+       dispatch(getTaskForRecruit());
       dispatch({
         type: types.ADD_TASK_FOR_RECRUIT_SUCCESS,
         payload: res.data,
@@ -177,7 +177,7 @@ export const getTaskForRecruit = (organizationId) => (dispatch) => {
     type: types.GET_TASK_FOR_RECRUIT_REQUEST,
   });
   axios
-    .get(`${base_url}/category/task/checklist/all/${organizationId}`, {
+    .get(`${base_url}/taskType/taskcheckList`, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },
@@ -3344,7 +3344,7 @@ export const getDepartmentRoleData = (departmentId,page) => (dispatch) => {
     });
 };
 
-export const getTaskForStages = (organizationId) => (dispatch) => {
+export const getTaskForStages = (orgId) => (dispatch) => {
   // debugger;
   dispatch({
     type: types.GET_TASK_FOR_STAGES_REQUEST,
@@ -3366,6 +3366,63 @@ export const getTaskForStages = (organizationId) => (dispatch) => {
       console.log(err);
       dispatch({
         type: types.GET_TASK_FOR_STAGES_FAILURE,
+        payload: err,
+      });
+    });
+};
+
+
+export const getTaskWorkflowStagesForRecruit = (taskId) => (
+  dispatch
+) => {
+  dispatch({
+    type: types.GET_WORKFLOW_TASK_STAGES_FOR_RECRUIT_REQUEST,
+  });
+  axios
+    .get(`${base_url}/task/teamList/${taskId}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.GET_WORKFLOW_TASK_STAGES_FOR_RECRUIT_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.GET_WORKFLOW_TASK_STAGES_FOR_RECRUIT_FAILURE,
+        payload: err,
+      });
+    });
+};
+
+
+export const getTaskForWorkflow = (organizationId) => (dispatch) => {
+  // debugger;
+  dispatch({
+    type: types.GET_TASK_FOR_WORKFLOW_REQUEST,
+  });
+  axios
+    .get(`${base_url}/`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log("print when new task added................", res);
+      dispatch({
+        type: types.GET_TASK_FOR_WORKFLOW_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.GET_TASK_FOR_WORKFLOW_FAILURE,
         payload: err,
       });
     });
