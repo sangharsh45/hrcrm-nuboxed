@@ -12,6 +12,8 @@ import Upload from "../../../Components/Forms/Formik/Upload";
 const { Option } = Select;
 
 function ExpenseForm(props) {
+  const [name, setName] = useState('');
+ 
   const [row, setRows] = useState([
     {
       expenseDate: "",
@@ -24,6 +26,7 @@ function ExpenseForm(props) {
       expenseTypeId:props.expenseTypeId,
       id: 1, 
       imageId:"",
+      voucherName:"",
     },
   ]);
   const [id, setId] = useState(1);
@@ -141,6 +144,18 @@ function ExpenseForm(props) {
       });
     });
   }
+  function handleImageUpload(imageId, rowId) {
+    setRows((value) => {
+      return value.map((data) => {
+        if (data.id === rowId) {
+          return { ...data, imageId: imageId };
+        } else {
+          return data;
+        }
+      });
+    });
+  }
+  
   function handleChangeAmount(e) {
     e.persist();
     setRows((v) => {
@@ -169,12 +184,49 @@ function ExpenseForm(props) {
         amount: "",
         id: id + 1,
         imageId:"",
+        voucherName:name
       },
     ]);
   }
   function handleDelete(row) {
     setRows((v) => v.filter((d) => d.id !== row.id));
   }
+
+  // const handleNmae = (e) => {
+  //   setName(e.target.value);
+  // };
+  const handleNmae = (e) => {
+    const newName = e.target.value;
+  
+    setName(newName);
+  
+    // Update voucherName in the 0th index of 'row'
+    setRows((v) => {
+      return v.map((d, index) => {
+        if (index === 0) {
+          return { ...d, voucherName: newName };
+        } else {
+          return d;
+        }
+      });
+    });
+  };
+  
+
+  // const handleNmae = (e) => {
+  //   setName(e.target.value);
+  
+  //   // Update voucherName in the 0th index of 'row'
+  //   setRows((v) => {
+  //     return v.map((d, index) => {
+  //       if (index === 0) {
+  //         return { ...d, voucherName: e.target.value };
+  //       } else {
+  //         return d;
+  //       }
+  //     });
+  //   });
+  // };
 
   function handleCallBack(status) {
     if (status === "Success") {
@@ -193,7 +245,8 @@ function ExpenseForm(props) {
           !item.expenseType &&
           !item.clientName &&
           !item.particular &&
-          !item.amount
+          !item.amount&&
+          name
         ) {
           alert("All Fields Required");
         } 
@@ -207,9 +260,24 @@ function ExpenseForm(props) {
     }
   }
   const { addingExpense } = props;
+  console.log(name)
   return (
     <div>
+      <div>
+      Name
+      </div>
+         <input
+                  style={{ width: "17%",border:"2px solid black" }}
+                  value={name}
+                  onChange={handleNmae}
+                  // name={`${item.id}attribute`}
+                  // value={`${item.clientName}`}
+                  // onChange={handleChangeattribute}
+                />
       <table>
+      
+             
+            
         <th>Date</th>
         <th>Cost Code</th>
 
@@ -258,7 +326,7 @@ function ExpenseForm(props) {
                   <Option value="Others">Others</Option> */}
                    {props.expenses.map((item) => {
                     return (
-                      <Option value={item.expenseType} >
+                      <Option value={item.expenseTypeId} >
                         {item.expenseType}
                       </Option>
                     );
@@ -301,7 +369,10 @@ function ExpenseForm(props) {
                 </Select>
               </td>
               <td>
-                <Upload value={`${item.imageId}`}/>
+                <Upload 
+                // value={`${item.imageId}`}
+                handleImageUpload={(imageId) => handleImageUpload(imageId, item.id)}
+                />
               
               </td>
               {row.length > 1 && (

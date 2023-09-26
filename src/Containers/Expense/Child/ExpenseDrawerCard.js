@@ -237,7 +237,8 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Tooltip, Icon, Button, Input,DatePicker } from "antd";
 import { FormattedMessage } from "react-intl";
-import { getExpenseByVoucherId, handleDocumentUploadModal,updateExpense, setEditExpense, handleUpdateExpenseModal, deleteExpenseDrawer } from "../ExpenseAction";
+import { getExpenseByVoucherId, handleDocumentUploadModal,updateExpense, setEditExpense, handleUpdateExpenseModal, deleteExpenseDrawer, } from "../ExpenseAction";
+import { getExpenses } from "../../Settings/Expense/ExpenseAction";
 import DownloadIcon from '@mui/icons-material/Download';
 import dayjs from "dayjs";
 import { FlexContainer, OnlyWrapCard } from '../../../Components/UI/Layout'
@@ -258,6 +259,7 @@ function ExpenseDrawerCard(props) {
   useEffect(() => {
     const { voucherId } = props;
     props.getExpenseByVoucherId(voucherId);
+    props.getExpenses();
   }, [props.voucherId]);
   useEffect(() => {
    
@@ -287,19 +289,21 @@ function ExpenseDrawerCard(props) {
     newEditStates[index] = false;
     setEditStates(newEditStates);
     // console.log(newData[index].clientName)
-    // let result={
-    //   clientName:newData[index].clientName,
-    //   distances:newData[index].distances,
-    //   fromLocation:newData[index].fromLocation,
-    //   mileageId:newData[index].mileageId,
-    //   organizationId:newData[index].organizationId,
-    //   remark:newData[index].remark,
-    //   toLocation:newData[index].toLocation,
-    //   unit:newData[index].unit,
-    //   userId:newData[index].userId,
-    //   mileageDate:`${newData[index].mileageDate}T20:00:00Z`
-    // }
-     props.updateExpense(newData[index])
+    let result={
+      clientName:newData[index].clientName,
+     
+      expenseType:newData[index].expenseType,
+    
+      organizationId:newData[index].organizationId,
+      // remark:newData[index].remark,
+    amount:newData[index].amount,
+    expenseId:newData[index].expenseId,
+    particular:newData[index].particular,
+  
+      userId:newData[index].userId,
+      expenseDate:`${newData[index].expenseDate}T20:00:00Z`
+    }
+     props.updateExpense(result)
   };
 
   const {
@@ -347,12 +351,23 @@ function ExpenseDrawerCard(props) {
                          
                          <h4 class=" text-sm text-cardBody font-poppins"> Type </h4>
                          {editStates[index] ? (
-            <input
-              type="text"
-              value={item.expenseType}
-              onChange={(e) => handleInputChange(index, 'expenseType', e.target.value)}
-              style={{border:"2px solid black"}}
-            />
+            // <input
+            //   type="text"
+            //   value={item.expenseType}
+            //   onChange={(e) => handleInputChange(index, 'expenseType', e.target.value)}
+            //   style={{border:"2px solid black"}}
+            // />
+            <select
+  className="input-field"
+  value={item.expenseType}
+  onChange={(e) => handleInputChange(index, 'expenseType', e.target.value)}
+>
+  {props.expenses.map(item => (
+    <option key={item.expenseTypeId} value={item.expenseTypeId}>
+      {item.expenseType}
+    </option>
+  ))}
+</select>
           ) : (
                          <h4 class=" text-sm text-cardBody font-poppins">
                              {item.expenseType}
@@ -364,9 +379,9 @@ function ExpenseDrawerCard(props) {
                                   <h4 class=" text-sm text-cardBody font-poppins">Date </h4>
                                   {editStates[index] ? (
   <DatePicker
-    value={dayjs(item.voucherDate)} 
+    value={dayjs(item.expenseDate)} 
     onChange={(date, dateString) =>
-      handleInputChange(index, "voucherDate", dateString)
+      handleInputChange(index, "expenseDate", dateString)
     }
     style={{ border: "2px solid black" }}
   />
@@ -374,7 +389,7 @@ function ExpenseDrawerCard(props) {
                                   <h4 class=" text-sm text-cardBody font-poppins">
                                       
                                   
-                                  {dayjs(item.voucherDate).format("MMM Do YY")}
+                                  {dayjs(item.expenseDate).format("MMM Do YY")}
 
                                   </h4>
                                   )}
@@ -527,11 +542,12 @@ function ExpenseDrawerCard(props) {
   );
 }
 
-const mapStateToProps = ({ expense }) => ({
+const mapStateToProps = ({ expense,expenses }) => ({
   fetchingExpenseByVoucherIdError: expense.fetchingExpenseByVoucherIdError,
   expVoucherId: expense.expVoucherId,
   documentUploadModal: expense.documentUploadModal,
   updateExpenseModal: expense.updateExpenseModal,
+  expenses: expenses.expenses,
 });
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({
@@ -539,6 +555,7 @@ const mapDispatchToProps = (dispatch) => bindActionCreators({
   deleteExpenseDrawer,
   setEditExpense,
   updateExpense,
+  getExpenses,
   handleUpdateExpenseModal,
   handleDocumentUploadModal,
 }, dispatch);

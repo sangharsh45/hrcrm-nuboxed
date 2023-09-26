@@ -1,12 +1,13 @@
 import React from "react";
-import { Icon, message } from "antd";
-import { StyledUpload, StyledModal } from "../../UI/Antd";
+import { Icon, message,Upload } from "antd";
+import {  StyledModal } from "../../UI/Antd";
+
 import { base_url } from "../../../Config/Auth";
 import axios from "axios";
-import { PlusOutlined } from "@ant-design/icons";
+import { PlusOutlined, UploadOutlined } from "@ant-design/icons";
 const token = sessionStorage.getItem("token");
 
-class Upload extends React.Component {
+class Upload1 extends React.Component {
   state = {
     previewVisible: false,
     previewImage: "",
@@ -45,6 +46,7 @@ class Upload extends React.Component {
         ////debugger;
         console.log(res);
         onSuccess();
+        this.props.handleImageUpload(res.data)
         this.props.form.setFieldValue(this.props.field.name, res.data);
         this.setState({ previewVisible: false, previewImage: "" });
       })
@@ -75,14 +77,14 @@ class Upload extends React.Component {
   render() {
     const { previewVisible, previewImage, fileList } = this.state;
     const uploadButton = (
-      <div>
-        <PlusOutlined type="plus" />
+      <div style={{display:"flex"}}>
+        <UploadOutlined />
         <div className="ant-upload-text">Upload</div>
       </div>
     );
     return (
       <div className="clearfix">
-        <StyledUpload
+        <Upload
           accept=".jpeg,.png,.jpg"
           beforeUpload={this.beforeUpload}
           customRequest={this.handleImageUpload}
@@ -93,7 +95,7 @@ class Upload extends React.Component {
           onChange={this.handleChange}
         >
           {fileList.length >= 1 ? null : uploadButton}
-        </StyledUpload>
+        </Upload>
         <StyledModal
           visible={previewVisible}
           footer={null}
@@ -106,4 +108,4 @@ class Upload extends React.Component {
   }
 }
 
-export default Upload;
+export default Upload1;
