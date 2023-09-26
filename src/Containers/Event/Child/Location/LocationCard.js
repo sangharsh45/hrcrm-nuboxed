@@ -34,7 +34,7 @@ Country
 </div>
 
 <div class=" font-normal text-sm text-cardBody font-poppins">
-  {item.country}
+  {item.country_name}
 </div>
 {/* </Tooltip>   */}
 </div> 

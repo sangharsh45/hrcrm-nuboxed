@@ -38,6 +38,9 @@ class EmployeeForm extends Component {
       active: false,
       checked: true,
       typeInd:false,
+      selectedCountry: '',
+      locations: [],
+      selectedLocation: "",
       workType: "employee",
     };
   }
@@ -55,6 +58,15 @@ class EmployeeForm extends Component {
   };
   handleType = (checked) => {
     this.setState({ typeInd: checked });
+  };
+  handleCountryChange = (event) => {
+    const selectedCountry = event.target.value;
+    const filteredLocations = this.props.showLocation.filter((item) => item.country_name === selectedCountry);
+    this.setState({ selectedCountry, locations: filteredLocations });
+  };
+  handleLocationChange = (event) => {
+    const selectedLocation = event.target.value;
+    this.setState({ selectedLocation });
   };
 
   getRoleOptions(filterOptionKey, filterOptionValue) {
@@ -76,6 +88,18 @@ class EmployeeForm extends Component {
 
     return roleOptions;
   }
+  getLocationNameOption(filterOptionKey, filterOptionValue) {
+    const locationOptions = this.props.showLocation
+      .filter(option => option.country_id === filterOptionValue && option.probability !== 0)
+      .map(option => ({
+        label: option.locationName || "",
+        value: option.locationDetailsId,
+      }));
+  
+    return locationOptions;
+  }
+  
+  
 
   componentDidMount() {
     const { getCountries ,getRoles,getlocation} = this.props;
@@ -85,18 +109,19 @@ class EmployeeForm extends Component {
     getlocation(this.props.orgId);
 }
   render() {
+    console.log(this.state.selectedLocation);
     const countryNameOption = this.props.countries.map((item) => {
       return {
           label: `${item.country_name || ""}`,
           value: item.country_name,
       };
   });
-  const locationNameOption = this.props.showLocation.map((item) => {
-    return {
-        label: `${item.locationName || ""}`,
-        value: item.locationDetailsId,
-    };
-});
+//   const locationNameOption = this.props.showLocation.map((item) => {
+//     return {
+//         label: `${item.locationName || ""}`,
+//         value: item.locationDetailsId,
+//     };
+// });
   
 
   const dialCodeNameOption = this.props.countries.map((item) => {
@@ -121,7 +146,8 @@ class EmployeeForm extends Component {
             countryDialCode: "",
             countryDialCode1: "",
             phoneNo: "",
-            location:"",
+            location:this.state.selectedLocation,
+            workplace:this.state.selectedCountry,
             dateOfJoining:dayjs(),
             dob:dayjs(),
             mobileNo: "",
@@ -160,6 +186,8 @@ class EmployeeForm extends Component {
             // console.log({ ...values, job_type: this.state.active });
             this.props.addEmployee({
               ...values,
+              location:this.state.selectedLocation,
+              workplace:this.state.selectedCountry,
               job_type: this.state.active ? "Full Time" : "Part Time",
               type: this.state.typeInd ? "true" : "false",
               // job_type: this.state.active,
@@ -526,9 +554,18 @@ class EmployeeForm extends Component {
                     // isColumn
                     // selectType="roleType"
                      />
+                         <Spacer/>
                       <div class=" flex justify-between" >
                       <div class=" w-w48">
-                      <Field
+                      <select onChange={this.handleCountryChange}>
+          <option value="">Select Work Place</option>
+          {this.props.countries.map((item, index) => (
+            <option key={index} value={item.country_name}>
+              {item.country_name}
+            </option>
+          ))}
+        </select>
+                      {/* <Field
                         isRequired
                         name="workplace"
                         isColumnWithoutNoCreate
@@ -545,10 +582,43 @@ class EmployeeForm extends Component {
                         }
                         component={SelectComponent}
                         inlineLabel
-                      />
+                      /> */}
                     </div>
                     <div class="w-w47.5">
-                    <Field
+                    <select
+                      onChange={this.handleLocationChange}
+                    >
+          <option value="">Select location</option>
+          {this.state.locations.map((item, index) => (
+            <option key={index}
+            // disabled={!values.country_name}
+             value={item.locationDetailsId}>
+              {item.locationName}
+            </option>
+          ))}
+        </select>
+                    {/* <Field
+  name="location"
+  label={<FormattedMessage id="app.location" defaultMessage="Location" />}
+  isColumnWithoutNoCreate
+  component={SelectComponent}
+  options={
+    this.getLocationNameOption("country_id", values.country_id) || []
+  }
+  value={values.location}
+  filterOption={{
+    filterType: "country_id",
+    filterValue: values.country_id,
+  }}
+  disabled={!values.country_id}
+  isColumn
+  margintop={"0"}
+  inlineLabel
+  style={{ flexBasis: "80%" }}
+/> */}
+
+
+                    {/* <Field
                         isRequired
                         name="location"
                         isColumnWithoutNoCreate
@@ -559,14 +629,14 @@ class EmployeeForm extends Component {
                         isColumn
                         // placeholder='+31'
                         options={
-                          Array.isArray(locationNameOption)
-                            ? locationNameOption
+                          Array.isArray(getLocationNameOption)
+                            ? getLocationNameOption
                             : []
                         }
                        
                         component={SelectComponent}
                         inlineLabel
-                      />
+                      /> */}
                     </div>
                   </div>
 
@@ -585,7 +655,7 @@ class EmployeeForm extends Component {
                     isColumn
                     selectType="designationType"
                      /> */}
-                     
+                     <Spacer/>
                 
                      <Field
                     name="reportingManager"
@@ -616,7 +686,7 @@ class EmployeeForm extends Component {
                     isColumn
                     component={InputComponent}
                      /> */}
-                         <div class=" flex justify-between" >
+                         <div class=" flex " >
                   <div>
                     <StyledLabel>
                       <FormattedMessage
@@ -649,7 +719,7 @@ class EmployeeForm extends Component {
                       />
                     </ButtonGroup> */}
                   </div>
-                  <Spacer />
+          &nbsp;&nbsp;&nbsp;&nbsp;
                   <div>
                     <StyledLabel>
                       <FormattedMessage

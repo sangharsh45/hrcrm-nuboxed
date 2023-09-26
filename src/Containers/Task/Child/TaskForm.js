@@ -24,7 +24,9 @@ import {
   getCandidateTaskFilterList,
   deleteTask,
 } from "../TaskAction";
-import { getTaskForRecruit,getTaskForStages } from "../../Settings/SettingsAction";
+import { getTaskForRecruit,
+  getTaskForStages
+ } from "../../Settings/SettingsAction";
 import { handleChooserModal } from "../../Planner/PlannerAction";
 import { StyledLabel } from "../../../Components/UI/Elements";
 import { TextareaComponent } from "../../../Components/Forms/Formik/TextareaComponent";
@@ -143,7 +145,7 @@ class TaskForm extends Component {
 
   componentDidMount() {
     this.props.getEmployeelist();
-    this.props.getTaskForStages();
+      this.props.getTaskForStages();
     this.props.getTaskForRecruit(this.props.orgId);
     this.props.getCustomerTask(this.props.orgId);
     this.props.getProjectTaskList(this.props.orgId);
@@ -219,8 +221,8 @@ class TaskForm extends Component {
 
     const TaskOptions = this.props.recruitTask.map((item) => {
       return {
-        label: `${item.taskChecklistName}`,
-        value: item.taskChecklistId,
+        // label: `${item.taskChecklistName}`,
+        // value: item.taskChecklistId,
       };
     });
     const TaskStageOptions = this.props.stagesTask.map((item) => {
@@ -1175,7 +1177,7 @@ const mapDispatchToProps = (dispatch) =>
       getEmployeelist,
       getProjectTaskList,
       getUnits,
-      getTaskForStages,
+        getTaskForStages,
       // getOppoStages,
       // setClearbitCandidateData,
     },
