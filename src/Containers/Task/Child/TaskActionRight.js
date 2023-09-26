@@ -4,6 +4,7 @@ import { bindActionCreators } from "redux";
 import Button from "antd/lib/button";
 import { Tooltip } from "antd";
 import { handleTaskModal, getTaskListRangeByUserId } from "../TaskAction";
+import TaskSharedForm from "./TaskSharedForm";
 
 const TaskActionRight = (props) => {
   function handleTaskRefresh() {
@@ -16,6 +17,7 @@ const TaskActionRight = (props) => {
   }
   return (
     <div class=" flex items-center" >
+         <TaskSharedForm/>
        {props.viewType === "approve" ? "":
       <Tooltip placement="left" title="Create">
         <Button

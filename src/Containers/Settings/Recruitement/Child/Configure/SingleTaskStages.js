@@ -15,6 +15,7 @@ import { deleteTaskStagesData } from "../../../../Settings/SettingsAction";
 import { bindActionCreators } from "redux";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { StyledPopconfirm } from "../../../../../Components/UI/Antd";
+import moment from "moment";
 const { Option } = Select;
 
 class SingleTaskStages extends Component {
@@ -50,7 +51,11 @@ class SingleTaskStages extends Component {
     const {
       recruitTaskStages:
        { taskChecklistStageName,
-         taskChecklistStagelinkId 
+         taskChecklistStagelinkId,
+         probability,
+         days,
+         startDate,
+         endDate
         },
       linkedStages,
       organization,
@@ -91,6 +96,19 @@ class SingleTaskStages extends Component {
               >
                 <StageName style={{ flexBasis: "25%", textAlign: "left" }}>
                   {elipsize(taskChecklistStageName, 23)}
+                </StageName>
+                <StageName>
+                  {probability}
+                </StageName>
+                <StageName>
+                  {days}
+                </StageName>
+                <StageName>
+                  {`${ moment(startDate).format("DD/MM/YYYY")}`}
+                </StageName>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <StageName>
+                {`${ moment(endDate).format("DD/MM/YYYY")}`}
                 </StageName>
                 <div class=" flex justify-between ml-margin65 w-4">
                   <>

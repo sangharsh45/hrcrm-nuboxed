@@ -544,7 +544,7 @@ return (
               <NoteAltIcon
                 onClick={() => {
                   handleTaskNotesDrawerModal(true);
-                  this.handleSetTaskNameId(item);
+                  handleSetTaskNameId(item);
                 }}
                 style={{ color: "green", cursor: "pointer", fontSize: "0.8rem" }}
               />
@@ -707,6 +707,7 @@ return (
           data={data}
         />
 <AddTaskNotesDrawerModal
+handleSetTaskNameId={handleSetTaskNameId}
   handleTaskNotesDrawerModal={props.handleTaskNotesDrawerModal}
   addDrawerTaskNotesModal={props.addDrawerTaskNotesModal}
   currentNameId={currentNameId}

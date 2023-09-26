@@ -4,12 +4,12 @@ import LightbulbIcon from '@mui/icons-material/Lightbulb';
 import { FormattedMessage } from "react-intl";
 import DeleteIcon from '@mui/icons-material/Delete';
 import ApprovalIcon from '@mui/icons-material/Approval';
-
+import LeaderboardIcon from '@mui/icons-material/Leaderboard';
 const TaskActionLeft = props => {
   return (
     <div class=" flex items-center" >
       <Tooltip
-        title={<FormattedMessage id="app.myTask" defaultMessage="My Task" />}
+        title={<FormattedMessage id="app.myTasks" defaultMessage="My Tasks" />}
       >
         <span class=" mr-2 cursor-pointer text-xs"
           onClick={() => props.setTaskViewType("table")}
@@ -18,6 +18,19 @@ const TaskActionLeft = props => {
   
           }}
         > <LightbulbIcon  />
+        
+        </span>
+      </Tooltip>
+      <Tooltip
+        title={<FormattedMessage id="app.mytaskView" defaultMessage="My Tasks- Gantt View" />}
+      >
+        <span class=" mr-2 cursor-pointer text-xs"
+          onClick={() => props.setTaskViewType("gantt")}
+          style={{
+            color: props.viewType === "gantt" && "#1890ff",
+  
+          }}
+        > <LeaderboardIcon  />
         
         </span>
       </Tooltip>
