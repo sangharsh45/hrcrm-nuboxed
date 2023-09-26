@@ -107,26 +107,7 @@ class EmployeeForm extends Component {
 });
 
 
-    // const countryNameOption = this.props.country
-    // .sort((a, b) => {
-    //   const libraryNameA = a.name && a.name.toLowerCase();
-    //   const libraryNameB = b.name && b.name.toLowerCase();
-    //   if (libraryNameA < libraryNameB) {
-    //     return -1;
-    //   }
-    //   if (libraryNameA > libraryNameB) {
-    //     return 1;
-    //   }
-    
-    //   // names must be equal
-    //   return 0;
-    // })
-    // .map((item) => {
-    //   return {
-    //     label: `${item.country_name || ""}`,
-    //     value: item.country_name    ,
-    //   };
-    // });
+  
     const { addEmployee, addingEmployee } = this.props;
     const { clearbit } = this.props;
     return (

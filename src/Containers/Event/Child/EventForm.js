@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, useState, useMemo, useEffect } from "react";
 import { connect } from "react-redux";
 import { FormattedMessage } from "react-intl";
 import { bindActionCreators } from "redux";
@@ -26,6 +26,9 @@ import { getEmployeelist } from "../../Employees/EmployeeAction";
 import { getEvents } from "../../Settings/Event/EventAction";
 import CandidateClearbit from "../../../Components/Forms/Autocomplete/CandidateClearbit";
 import { setClearbitCandidateData } from "../../Candidate/CandidateAction";
+import { Listbox, Transition } from '@headlessui/react'
+import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid';
+
 // yup validation scheme for creating a opportunity
 const EventSchema = Yup.object().shape({
   eventTypeId: Yup.string().required("Select event type"),
@@ -39,32 +42,27 @@ const EventSchema = Yup.object().shape({
   startDate: Yup.string().nullable().required("Input required !"),
 });
 
-class EventForm extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      reminder: true,
-    };
-  }
-  handleCallback = () => {
-    const { handleChooserModal, handleEventModal, callback } = this.props;
+function EventForm (props) {
+
+      const [reminder,setRemider] = useState(true);
+      const [defaultOption, setDefaultOption] = useState(props.fullName);
+      const [selected, setSelected] = useState(defaultOption);
+
+ function handleCallback  () {
+    const { handleChooserModal, handleEventModal, callback }= props;
     handleChooserModal(false);
     handleEventModal(false);
     callback && callback();
   };
-  handleReminderChange = (checked) => {
-    this.setState({
-      reminder: checked,
-    });
+ const handleReminderChange = (checked) => {
+  setRemider(checked);
   };
-  componentDidMount() {
-    this.props.getEmployeelist();
-    this.props.getEvents();
-  }
+  useEffect(()=> {
+   props.getEmployeelist();
+   props.getEvents();
+  },[])
   
-
-  render() {
-    const employeesData = this.props.employees.map((item) => {
+    const employeesData =props.employees.map((item) => {
       return {
         label: `${item.fullName}`,
         // label: `${item.salutation || ""} ${item.firstName ||
@@ -72,7 +70,9 @@ class EventForm extends Component {
         value: item.employeeId,
       };
     });
-    const {
+const selectedOption = props.employees.find((item) => item.fullName === selected);
+   
+const {
       user: { userId, firstName, fullName, middleName, lastName, timeZone },
       isEditing,
       prefillEvent,
@@ -93,8 +93,7 @@ class EventForm extends Component {
       defaultOpportunities,
       creatorId,
       employeeId,
-    } = this.props;
-    console.log(defaultAccounts);
+    } = props;
     return (
       <>
         <Formik
@@ -115,7 +114,7 @@ class EventForm extends Component {
                   startTime: startDate || null,
                   endDate: endDate || null,
                   endTime: endDate || null,
-                  assignedTo: userId ? userId : "",
+                  assignedTo: selectedOption ? selectedOption.employeeId:userId,
                   note: "",
                   eventStatus: "",
                   allDayInd: true,
@@ -214,8 +213,9 @@ class EventForm extends Component {
                     endDate: `${newEndDate}T${newEndTime}`,
                     startTime: 0,
                     endTime: 0,
+                    assignedTo: selectedOption ? selectedOption.employeeId:userId,
                   },
-                  this.handleCallback
+                  handleCallback
                 )
               : addEvent(
                   {
@@ -225,9 +225,10 @@ class EventForm extends Component {
                     endDate: `${newEndDate}T${newEndTime}`,
                     startTime: 0,
                     endTime: 0,
-                    remindInd: this.state.reminder ? true : false,
+                    remindInd: reminder ? true : false,
+                    assignedTo: selectedOption ? selectedOption.employeeId:userId,
                   },
-                  this.handleCallback
+                  handleCallback
                 );
             !isEditing && resetForm();
           }}
@@ -397,28 +398,8 @@ class EventForm extends Component {
                   />
                   <Spacer />
                   <Spacer />
-                  {this.props.partnerLogin === "Yes" &&
-                  this.props.department === "Partner" ? (
-                    <Field
-                      type="text"
-                      name="assignedTo"
-                      isColumnWithoutNoCreate
-                      // label="Assigned to"
-                      label={
-                        <FormattedMessage
-                          id="app.assignedto"
-                          defaultMessage="Assigned to"
-                        />
-                      }
-                      isColumn
-                      width={"100%"}
-                      disabled
-                      value={this.props.creatorName}
-                      component={InputComponent}
-                      inlineLabel
-                    />
-                  ) : (
-                    <Field
+                  
+                    {/* <Field
                       name="employeesId"
                       isColumnWithoutNoCreate
                       selectType="employee"
@@ -439,8 +420,75 @@ class EventForm extends Component {
                         value: employeeId,
                       }}
                       inlineLabel
-                    />
-                  )}
+                    /> */}
+                 <Listbox value={selected} onChange={setSelected}>
+        {({ open }) => (
+          <>
+            <Listbox.Label className="block text-sm font-semibold text-gray-700">
+              Assigned to
+            </Listbox.Label>
+            <div className="relative mt-1">
+              <Listbox.Button className="relative w-full leading-4 cursor-default rounded-md border border-gray-300 bg-white py-2 pl-3 pr-10 text-left shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm">
+                {selected}
+              </Listbox.Button>
+              {open && (
+                <Listbox.Options
+                  static
+                  className="absolute z-10 mt-1 max-h-56 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
+                >
+                  {props.employees.map((item) => (
+                    <Listbox.Option
+                      key={item.employeeId}
+                      className={({ active }) =>
+                        `relative cursor-default select-none py-2 pl-3 pr-9 ${
+                          active ? "text-white bg-indigo-600" : "text-gray-900"
+                        }`
+                      }
+                      value={item.fullName}
+                    >
+                      {({ selected, active }) => (
+                        <>
+                          <div className="flex items-center">
+                            <span
+                              className={`ml-3 block truncate ${
+                                selected ? "font-semibold" : "font-normal"
+                              }`}
+                            >
+                              {item.fullName}
+                            </span>
+                          </div>
+                          {selected && (
+                            <span
+                              className={`absolute inset-y-0 right-0 flex items-center pr-4 ${
+                                active ? "text-white" : "text-indigo-600"
+                              }`}
+                            >
+                              
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                className="h-5 w-5"
+                                viewBox="0 0 20 20"
+                                fill="currentColor"
+                                aria-hidden="true"
+                              >
+                                <path
+                                  fillRule="evenodd"
+                                  d="M6.293 9.293a1 1 0 011.414 0L10 11.586l2.293-2.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z"
+                                  clipRule="evenodd"
+                                />
+                              </svg>
+                            </span>
+                          )}
+                        </>
+                      )}
+                    </Listbox.Option>
+                  ))}
+                </Listbox.Options>
+              )}
+            </div>
+          </>
+        )}
+      </Listbox>
                        <Spacer />
                   <Field
                     name="included"
@@ -471,7 +519,7 @@ class EventForm extends Component {
                     placeholder="Start typing to search..."
                     isColumnWithoutNoCreate
                     setClearbitCandidateData={
-                      this.props.setClearbitCandidateData
+                      props.setClearbitCandidateData
                     }
                     component={CandidateClearbit}
                     inlineLabel
@@ -527,8 +575,8 @@ class EventForm extends Component {
                         </div>
                         <div>
                           <Switch
-                            onChange={this.handleReminderChange}
-                            checked={this.state.reminder}
+                            onChange={handleReminderChange}
+                            checked={reminder}
                             checkedChildren="Yes"
                             unCheckedChildren="No"
                           />
@@ -536,7 +584,7 @@ class EventForm extends Component {
                       </div>
                     </div>
                     <div class=" w-1/3 font-bold">
-                      {this.state.reminder ? (
+                      {reminder ? (
                         <div>
                           <Field
                             // isRequired
@@ -601,7 +649,6 @@ class EventForm extends Component {
         </Formik>
       </>
     );
-  }
 }
 const mapStateToProps = ({ auth, event, employee, events, candidate }) => ({
   addingEvent: event.addingEvent,
@@ -611,6 +658,7 @@ const mapStateToProps = ({ auth, event, employee, events, candidate }) => ({
   employees: employee.employees,
   events: events.events,
   candidateId: candidate.clearbitCandidate.candidateId,
+  fullName: auth.userDetails.fullName
 });
 
 const mapDispatchToProps = (dispatch) =>

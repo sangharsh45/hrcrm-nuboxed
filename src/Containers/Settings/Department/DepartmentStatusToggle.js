@@ -6,7 +6,7 @@ import { linkDepartmentDocumentToggle } from "../Department/DepartmentAction";
 
 function DepartmentStatusToggle(props) {
   const [toggle, setToggle] = React.useState(props.mandetoryInd);
-console.log("abc",props.mandetoryInd);
+console.log("mndtry",props.mandetoryInd);
   function handleToggleCollection(item) {
     if (props.mandetoryInd) {
       props.linkDepartmentDocumentToggle({

@@ -9,21 +9,21 @@ function CRMStatusToggle(props) {
   //   props.getDepartments();
   //   // props.getRequirementsDuration(props.orgId);
   // }, []);
-  const { crmInd } = props.departments;
-  const [crm, setCrm] = React.useState(crmInd);
-// console.log("abc",props.crmInd);
+  // const { crmInd } = props.departments;
+  const [crm, setCrm] = React.useState(props.crmInd);
+console.log("crrm",props.crmInd);
   function handleCrmToggleCollection(item) {
-    if (crmInd) {
+    if (props.crmInd) {
       props.linkCrmToggle({
         // ...props.departments,
         departmentName: props.departmentName,
         departmentId: props.departmentId,
         // editInd:false,
-        crmInd: crmInd ? false : true,
+        crmInd: props.crmInd ? false : true,
       },
       props.departmentId,
       );
-      setCrm(crmInd ? false : true);
+      // setCrm(props.crmInd ? false : true);
 
     } else {
       props.linkCrmToggle({
@@ -31,16 +31,16 @@ function CRMStatusToggle(props) {
         departmentName: props.departmentName,
         departmentId: props.departmentId,
         // editInd:false,
-        crmInd: crmInd ? false : true,
+        crmInd: props.crmInd ? false : true,
       },
       props.departmentId,
       );
-      setCrm(crmInd ? false : true);
+      // setCrm(props.crmInd ? false : true);
     }
   }
 
   function handleCrmCancel() {
-    if (crmInd) {
+    if (props.crmInd) {
       setCrm(true);
     } else {
       setCrm(false);

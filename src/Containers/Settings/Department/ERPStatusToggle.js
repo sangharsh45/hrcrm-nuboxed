@@ -6,7 +6,7 @@ import { bindActionCreators } from "redux";
 
 function ERPStatusToggle(props) {
   const [erp, setErp] = React.useState(props.erpInd);
-console.log("abc",props.erpInd);
+console.log("errp",props.erpInd);
   function handleErpToggleCollection(item) {
     if (props.erpInd) {
       props.linkErpToggle({
