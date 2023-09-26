@@ -22,7 +22,7 @@ class SingleTasks extends Component {
   }
   render() {
     const {
-      task: { taskType, taskTypeId },
+      task: { taskType, taskTypeId,taskCheckListInd },
       handleChange,
       name,
       value,
@@ -46,10 +46,9 @@ class SingleTasks extends Component {
                 </div>
                 <div style={{width:"35%"}}>
                     <TaskConnetToggle
-                  // editInd={editInd}
-                  //     mandatoryInd={mandatoryInd}
-                  //     country_name={country_name}
-                  //     country_id={country_id}
+                  taskCheckListInd={taskCheckListInd}
+                      taskType={taskType}
+                      taskTypeId={taskTypeId}
                     />  
                     </div>
                     <div>

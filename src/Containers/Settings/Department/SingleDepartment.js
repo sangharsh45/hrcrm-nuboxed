@@ -31,7 +31,7 @@ class SingleDepartment extends Component {
     this.setState({ sectorId: value });
   render() {
     const {
-       department: { departmentName, departmentId,sectorId,mandetoryInd,sectorName },
+       department: { departmentName, departmentId,sectorId,mandetoryInd,sectorName,crmInd,erpInd },
       handleChange,
       name,
       value,
@@ -70,7 +70,7 @@ class SingleDepartment extends Component {
                     <div style={{width:"20%"}}>
                     
                     <ERPStatusToggle
-                      mandetoryInd={mandetoryInd}
+                      erpInd={erpInd}
                       departmentName={departmentName}
                       departmentId={departmentId}
                     />  
@@ -78,7 +78,7 @@ class SingleDepartment extends Component {
                     <h1>CRM</h1>
                     <div style={{width:"20%"}}>
                     <CRMStatusToggle
-                      mandetoryInd={mandetoryInd}
+                      crmInd={crmInd}
                       departmentName={departmentName}
                       departmentId={departmentId}
                     />  

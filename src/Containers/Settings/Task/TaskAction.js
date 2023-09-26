@@ -144,9 +144,7 @@ export const removeTask = ( taskTypeId) => (dispatch) => {
     });
 };
 
-export const linkTaskWorkflowToggle = ( data,countryId,cb) => (dispatch, getState) => {
-  //console.log(permissions, userId);
-  const orgId = getState().auth.userDetails.organizationId;
+export const linkTaskWorkflowToggle = ( data,cb) => (dispatch) => {
   dispatch({
     type: types.LINK_TASK_WORKFLOW_TOGGLE_REQUEST,
   });

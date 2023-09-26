@@ -5,33 +5,33 @@ import { bindActionCreators } from "redux";
  import { linkTaskWorkflowToggle } from "../Task/TaskAction";
 
 function TaskConnetToggle(props) {
-  const[data,setData]=useState(props.country)
-  // useEffect(()=>{
-  //   setData(props.country)
-  // },[props.country])
-  const [toggle, setToggle] = React.useState(props.mandatoryInd);
-  console.log(props.mandatoryInd)
+
+  const [toggle, setToggle] = React.useState(props.taskCheckListInd);
+  console.log("taskCheckListInd",props.taskCheckListInd)
 
   function handleToggleCollection(item) {
-    if (props.mandatoryInd) {
+    if (props.taskCheckListInd) {
       props.linkTaskWorkflowToggle({
-        country_id: props.country_id,
-        mandatoryInd: props.mandatoryInd ? false : true,
-         
-      });
-      setToggle( props.mandatoryInd ? false : true);
- 
+        taskType: props.taskType,
+        taskTypeId: props.taskTypeId,
+        taskCheckListInd: props.taskCheckListInd ? false : true,
+      },
+      props.taskTypeId,
+      );
+
     } else {
       props.linkTaskWorkflowToggle({
-        country_id: props.country_id,
-        mandatoryInd: props.mandatoryInd ? false : true,
-      });
-      setToggle( props.mandatoryInd ? false : true);
+        taskType: props.taskType,
+        taskTypeId: props.taskTypeId,
+        taskCheckListInd: props.taskCheckListInd ? false : true,
+      },
+      props.taskTypeId,
+      );
     }
   }
 
   function handleCancel() {
-    if (props.mandatoryInd) {
+    if (props.taskCheckListInd) {
       setToggle(true);
     } else {
       setToggle(false);
@@ -49,8 +49,7 @@ function TaskConnetToggle(props) {
         >
           <Switch
             className="toggle-clr"
-            checked={props.mandatoryInd || toggle}
-            // disabled={props.status}
+            checked={props.taskCheckListInd || toggle}
             isLoading={true}
             style={{width: "9em"}}
             checkedChildren="Connect with workflow"

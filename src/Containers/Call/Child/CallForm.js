@@ -159,7 +159,7 @@ function CallForm(props) {
     if (props.selectedCall) {
       var data = props.selectedCall.callCategory === "New" ? false : true;
     }
-   const selectedOption = props.sales.find((item) => item.fullName === selected);
+   const selectedOption = props.employees.find((item) => item.fullName === selected);
    console.log("bn",selectedOption,selected)
    return (
       <>
@@ -188,7 +188,7 @@ function CallForm(props) {
                 callDescription: "",
 
                 included: [],
-                assignedTo: selectedOption ? selectedOption.employeeId:props.userId,
+                assignedTo: selectedOption ? selectedOption.employeeId:userId,
                 contactId: "",
                 candidateId: "",
               }
@@ -277,6 +277,7 @@ function CallForm(props) {
 
               startTime: 0,
               endTime: 0,
+              assignedTo: selectedOption ? selectedOption.employeeId:userId,
             };
             isEditing
               ? updateCall(
@@ -290,7 +291,7 @@ function CallForm(props) {
                   endDate: `${newEndDate}T${newEndTime}`,
                   startTime: 0,
                   endTime: 0,
-                  assignedTo: selectedOption ? selectedOption.employeeId:props.userId,
+                  assignedTo: selectedOption ? selectedOption.employeeId:userId,
                 },
                 () => handleCallback(resetForm)
               )
@@ -617,7 +618,7 @@ function CallForm(props) {
                   static
                   className="absolute z-10 mt-1 max-h-56 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
                 >
-                  {props.sales.map((item) => (
+                  {props.employees.map((item) => (
                     <Listbox.Option
                       key={item.employeeId}
                       className={({ active }) =>

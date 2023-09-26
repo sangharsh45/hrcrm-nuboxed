@@ -170,9 +170,7 @@ export const searchDepartmentName = (name) => (dispatch) => {
 }; 
 
 
-export const linkDepartmentDocumentToggle = ( data,departmentId,cb) => (dispatch, getState) => {
-  //console.log(permissions, userId);
-  const orgId = getState().auth.userDetails.organizationId;
+export const linkDepartmentDocumentToggle = ( data,departmentId,cb) => (dispatch) => {
   dispatch({
     type: types.LINK_DEPARTMENT_DOCUMENT_TOGGLE_REQUEST,
   });
@@ -230,9 +228,7 @@ export const linkCrmToggle = ( data,departmentId,cb) => (dispatch, getState) => 
     })
 };
 
-export const linkErpToggle = ( data,departmentId,cb) => (dispatch, getState) => {
-  //console.log(permissions, userId);
-  const orgId = getState().auth.userDetails.organizationId;
+export const linkErpToggle = ( data,departmentId,cb) => (dispatch) => {
   dispatch({
     type: types.LINK_ERP_TOGGLE_REQUEST,
   });
