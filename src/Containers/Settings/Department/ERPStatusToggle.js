@@ -5,14 +5,15 @@ import { bindActionCreators } from "redux";
  import { linkErpToggle } from "../Department/DepartmentAction";
 
 function ERPStatusToggle(props) {
-  const [toggle, setToggle] = React.useState(props.erpInd);
+  const [erp, setErp] = React.useState(props.erpInd);
 console.log("abc",props.erpInd);
-  function handleToggleCollection(item) {
+  function handleErpToggleCollection(item) {
     if (props.erpInd) {
       props.linkErpToggle({
+        ...props.notifications,
         departmentName: props.departmentName,
         departmentId: props.departmentId,
-        editInd:false,
+        // editInd:false,
         erpInd: props.erpInd ? false : true,
       },
       props.departmentId,
@@ -22,7 +23,7 @@ console.log("abc",props.erpInd);
       props.linkErpToggle({
         departmentName: props.departmentName,
         departmentId: props.departmentId,
-        editInd:false,
+        // editInd:false,
         erpInd: props.erpInd ? false : true,
       },
       props.departmentId,
@@ -30,11 +31,11 @@ console.log("abc",props.erpInd);
     }
   }
 
-  function handleCancel() {
+  function handleErpCancel() {
     if (props.erpInd) {
-      setToggle(true);
+      setErp(true);
     } else {
-      setToggle(false);
+      setErp(false);
     }
   }
   return (
@@ -42,14 +43,15 @@ console.log("abc",props.erpInd);
       
         <Popconfirm
           title="Confirm status change?"
-          onConfirm={() => handleToggleCollection()}
-          onCancel={handleCancel}
+          onConfirm={() => handleErpToggleCollection()}
+          onCancel={handleErpCancel}
           okText="Yes"
           cancelText="No"
         >
+       
           <Switch
             className="toggle-clr"
-            checked={props.erpInd || toggle}
+            checked={props.erpInd || erp}
             // disabled={props.status}
             isLoading={true}
             style={{width: "9em"}}

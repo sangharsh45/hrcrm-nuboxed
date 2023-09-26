@@ -1,40 +1,49 @@
-import React, { Component } from "react";
+import React, { useEffect,Component } from "react";
 import { Switch, Checkbox, Popconfirm, message, Select } from "antd";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
- import { linkCrmToggle } from "../Department/DepartmentAction";
+ import { linkCrmToggle,getDepartments } from "../Department/DepartmentAction";
 
 function CRMStatusToggle(props) {
-  const [toggle, setToggle] = React.useState(props.crmInd);
-console.log("abc",props.crmInd);
-  function handleToggleCollection(item) {
-    if (props.crmInd) {
+  // useEffect(() => {
+  //   props.getDepartments();
+  //   // props.getRequirementsDuration(props.orgId);
+  // }, []);
+  const { crmInd } = props.departments;
+  const [crm, setCrm] = React.useState(crmInd);
+// console.log("abc",props.crmInd);
+  function handleCrmToggleCollection(item) {
+    if (crmInd) {
       props.linkCrmToggle({
+        // ...props.departments,
         departmentName: props.departmentName,
         departmentId: props.departmentId,
-        editInd:false,
-        crmInd: props.crmInd ? false : true,
+        // editInd:false,
+        crmInd: crmInd ? false : true,
       },
       props.departmentId,
       );
+      setCrm(crmInd ? false : true);
 
     } else {
       props.linkCrmToggle({
+        // ...props.departments,
         departmentName: props.departmentName,
         departmentId: props.departmentId,
-        editInd:false,
-        crmInd: props.crmInd ? false : true,
+        // editInd:false,
+        crmInd: crmInd ? false : true,
       },
       props.departmentId,
       );
+      setCrm(crmInd ? false : true);
     }
   }
 
-  function handleCancel() {
-    if (props.crmInd) {
-      setToggle(true);
+  function handleCrmCancel() {
+    if (crmInd) {
+      setCrm(true);
     } else {
-      setToggle(false);
+      setCrm(false);
     }
   }
   return (
@@ -42,14 +51,14 @@ console.log("abc",props.crmInd);
       
         <Popconfirm
           title="Confirm status change?"
-          onConfirm={() => handleToggleCollection()}
-          onCancel={handleCancel}
+          onConfirm={() => handleCrmToggleCollection()}
+          onCancel={handleCrmCancel}
           okText="Yes"
           cancelText="No"
         >
           <Switch
             className="toggle-clr"
-            checked={props.crmInd || toggle}
+            checked={props.crmInd || crm}
             // disabled={props.status}
             isLoading={true}
             style={{width: "9em"}}
@@ -62,14 +71,15 @@ console.log("abc",props.crmInd);
   );
 }
 
-const mapStateToProps = ({ auth, candidate }) => ({
-  // userId: auth.userDetails.userId,
+const mapStateToProps = ({ auth, departments }) => ({
+  departments: departments.departments,
 });
 
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
         linkCrmToggle,
+        getDepartments
     },
     dispatch
   );

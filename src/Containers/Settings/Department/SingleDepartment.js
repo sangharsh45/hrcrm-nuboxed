@@ -55,7 +55,7 @@ class SingleDepartment extends Component {
                 <DepartmentName >
                   {departmentName}
                 </DepartmentName>
-                <DepartmentName style={{ flexBasis: "22%" }}>
+                <DepartmentName >
                   {sectorName}
                 </DepartmentName>
                 {/* </div> */}
@@ -66,13 +66,16 @@ class SingleDepartment extends Component {
                       departmentId={departmentId}
                     />  
                     </div>
+                    <h1>ERP</h1>
                     <div style={{width:"20%"}}>
+                    
                     <ERPStatusToggle
                       mandetoryInd={mandetoryInd}
                       departmentName={departmentName}
                       departmentId={departmentId}
                     />  
                     </div>
+                    <h1>CRM</h1>
                     <div style={{width:"20%"}}>
                     <CRMStatusToggle
                       mandetoryInd={mandetoryInd}
