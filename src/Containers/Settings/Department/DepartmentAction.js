@@ -215,7 +215,7 @@ export const linkCrmToggle = ( data,departmentId,cb) => (dispatch, getState) => 
 
     .then((res) => {
       console.log(res);
-      // dispatch(getThirdPartyAccess(orgId))
+      // dispatch(getDepartments())
       dispatch({
         type: types.LINK_CRM_TOGGLE_SUCCESS,
         payload: res.data,
