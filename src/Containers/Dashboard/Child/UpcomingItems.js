@@ -46,7 +46,7 @@ class UpcomingItems extends Component {
               
             
               <SubTitle style={{ fontSize: 12, marginLeft: "1.56em" }}>
-                 {`${upComing.userName}  ${upComing.eventType} on  ${moment(upComing.date).format("ll")} `}
+                 {`${upComing.eventType} ${upComing.userName}   on  ${moment(upComing.date).format("ll")} `}
                
                  </SubTitle>
             </FlexContainer>

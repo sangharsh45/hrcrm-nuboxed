@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { JumpStartBox, Spacer } from "../../../../Components/UI/Elements";
 import { FlexContainer } from "../../../../Components/UI/Layout";
-import {getDateWiseList,getSalesDateWiseList} from "../../DashboardAction";
+import {getDateWiseList,getSalesDateWiseList,getTasklist,getavgHour} from "../../DashboardAction";
 
 class DashboardJumpStart extends React.Component{
   constructor() {
@@ -20,6 +20,7 @@ class DashboardJumpStart extends React.Component{
     date: date,
   };
 }
+
 componentDidMount() {
    if(this.props.role==="USER"&&this.props.user.department==="Recruiter"){
   const { getDateWiseList, recruiterId, startDate, endDate } = this.props;
@@ -28,6 +29,9 @@ componentDidMount() {
     const { getSalesDateWiseList, orgId, startDate, endDate } = this.props;
     getSalesDateWiseList(orgId,  startDate, endDate);
    }
+   this.props.getTasklist(this.props.userId)
+   const { getavgHour, userId, startDate, endDate } = this.props;
+   getavgHour(userId, startDate, endDate);
 }
 componentWillReceiveProps(nextProps) {
   if (
@@ -56,7 +60,7 @@ render() {
         
           <JumpStartBox
             noProgress
-            title="Requirements"
+            title="Leave Balance"
             // bgColor="#da5432"
             //bgColor="linear-gradient(270deg, #3066BE 0%, #005075 100%);"
             value={
@@ -73,7 +77,7 @@ render() {
        
           <JumpStartBox
             noProgress
-            title="Positions "
+            title="AV hours this month  "
             value={
               this.props.user.department === "Recruiter"
               ?this.props.showDatelist.openPosition
@@ -95,20 +99,21 @@ render() {
           /> */}
           <JumpStartBox
             noProgress
-            title="Selected"
+            title="Open Tasks"
             //bgColor="linear-gradient(270deg, #3066BE 0%, #005075 100%);"
             // value={this.props.showDatelist.selectted}
             value={
-              this.props.user.department === "Recruiter"
-              ?this.props.showDatelist.selectted
-              :this.props.showSalesDatelist.selectted
+              // this.props.user.department === "Recruiter"
+              // ?this.props.showDatelist.selectted
+              // :this.props.showSalesDatelist.selectted
+              this.props.taskCount.totalTask
             }
-            // isLoading={this.props.fetchingDatewiseReport}
-            isLoading={
-              this.props.user.department === "Recruiter"
-              ?this.props.fetchingDatewiseReport
-              :this.props.fetchingSalesDatewiseReport
-            }
+             isLoading={this.props.fetchingTask}
+            // isLoading={
+            //   this.props.user.department === "Recruiter"
+            //   ?this.props.fetchingDatewiseReport
+            //   :this.props.fetchingSalesDatewiseReport
+            // }
             
           />
           <JumpStartBox
@@ -193,13 +198,18 @@ const mapStateToProps = ({ dashboard,auth }) => ({
   fetchingDatewiseReport:dashboard.fetchingDatewiseReport,
   fetchingDatewiseReportError:dashboard.fetchingDatewiseReportError,
   recruiterId:auth.userDetails.userId,
+  fetchingTask:dashboard.fetchingTask,
+  userId: auth.userDetails.employeeId,
   endDate: dashboard.endDate,
   startDate: dashboard.startDate,
+  taskCount:dashboard.taskCount,
 });
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({
   getDateWiseList,
-  getSalesDateWiseList
+  getSalesDateWiseList,
+  getTasklist,
+  getavgHour
 }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(DashboardJumpStart);
