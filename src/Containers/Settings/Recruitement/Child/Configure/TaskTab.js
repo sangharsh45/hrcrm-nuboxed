@@ -47,6 +47,7 @@ class TaskTab extends Component {
       probability: null,
       days: null,
       rowData: "",
+      stageValue: null,
       setCurrentRowData: "",
       visible: false,
       isViewAll: false,
@@ -182,6 +183,7 @@ class TaskTab extends Component {
     const {
       taskChecklistStageName,
       probability,
+      stageValue,
       addingStage,
       isTextInputOpen,
       responsible,
@@ -205,6 +207,7 @@ class TaskTab extends Component {
       taskChecklistStageName,
       probability,
       days,
+      stageValue,
       responsible,
       taskChecklistId: Id,
       organizationId: this.props.organizationId,
@@ -226,6 +229,7 @@ class TaskTab extends Component {
       taskChecklistStageName: "",
       probability: "",
       days: "",
+      stageValue:"",
       responsible: "",
       isTextInputOpen: false,
     });
@@ -390,6 +394,15 @@ class TaskTab extends Component {
                     onChange={this.handleChange}
                     width={"20%"}
                   />
+                <TextInput
+                  type="number"
+                  // placeholder="Weightage"
+                  name="stageValue"
+                  value={this.state.stageValue}
+                  onChange={this.handleChange}
+                  width={"12%"}
+                />
+                &nbsp; &nbsp;
                 </FlexContainer>
                 <div>
                   <Button

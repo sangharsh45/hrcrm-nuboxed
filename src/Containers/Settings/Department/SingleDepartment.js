@@ -11,6 +11,8 @@ import ViewEditCard from "../../../Components/UI/Elements/ViewEditCard";
 import { Select } from "../../../Components/UI/Elements";
 import { EditOutlined } from "@ant-design/icons";
 import DepartmentStatusToggle from "./DepartmentStatusToggle";
+import ERPStatusToggle from "./ERPStatusToggle";
+import CRMStatusToggle from "./CRMStatusToggle";
 const { Option } = Select;
 
 class SingleDepartment extends Component {
@@ -49,16 +51,30 @@ class SingleDepartment extends Component {
           {({ viewType }, toggleViewType) =>
             viewType === "view" ? (
               <FlexContainer justifyContent="space-between">
-                <div class=" flex w-1/2">
-                <DepartmentName style={{ flexBasis: "45%" }}>
+                {/* <div class=" flex w-1/2"> */}
+                <DepartmentName >
                   {departmentName}
                 </DepartmentName>
-                <DepartmentName style={{ flexBasis: "42%" }}>
+                <DepartmentName style={{ flexBasis: "22%" }}>
                   {sectorName}
                 </DepartmentName>
-                </div>
-                <div style={{width:"35%"}}>
+                {/* </div> */}
+                <div style={{width:"20%"}}>
                     <DepartmentStatusToggle
+                      mandetoryInd={mandetoryInd}
+                      departmentName={departmentName}
+                      departmentId={departmentId}
+                    />  
+                    </div>
+                    <div style={{width:"20%"}}>
+                    <ERPStatusToggle
+                      mandetoryInd={mandetoryInd}
+                      departmentName={departmentName}
+                      departmentId={departmentId}
+                    />  
+                    </div>
+                    <div style={{width:"20%"}}>
+                    <CRMStatusToggle
                       mandetoryInd={mandetoryInd}
                       departmentName={departmentName}
                       departmentId={departmentId}

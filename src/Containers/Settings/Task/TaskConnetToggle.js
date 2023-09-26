@@ -2,54 +2,54 @@ import React, { useEffect,useState } from "react";
 import { Switch, Popconfirm, } from "antd";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-// import { linkCountryToggle } from "../Country/CountryAction";
+ import { linkTaskWorkflowToggle } from "../Task/TaskAction";
 
 function TaskConnetToggle(props) {
   const[data,setData]=useState(props.country)
-  useEffect(()=>{
-    setData(props.country)
-  },[props.country])
+  // useEffect(()=>{
+  //   setData(props.country)
+  // },[props.country])
   const [toggle, setToggle] = React.useState(props.mandatoryInd);
   console.log(props.mandatoryInd)
 
-//   function handleToggleCollection(item) {
-//     if (props.mandatoryInd) {
-//       props.linkCountryToggle({
-//         country_id: props.country_id,
-//         mandatoryInd: props.mandatoryInd ? false : true,
+  function handleToggleCollection(item) {
+    if (props.mandatoryInd) {
+      props.linkTaskWorkflowToggle({
+        country_id: props.country_id,
+        mandatoryInd: props.mandatoryInd ? false : true,
          
-//       },props.country_id);
-//       setToggle( props.mandatoryInd ? false : true);
+      });
+      setToggle( props.mandatoryInd ? false : true);
  
-//     } else {
-//       props.linkCountryToggle({
-//         country_id: props.country_id,
-//         mandatoryInd: props.mandatoryInd ? false : true,
-//       },props.country_id);
-//       setToggle( props.mandatoryInd ? false : true);
-//     }
-//   }
+    } else {
+      props.linkTaskWorkflowToggle({
+        country_id: props.country_id,
+        mandatoryInd: props.mandatoryInd ? false : true,
+      });
+      setToggle( props.mandatoryInd ? false : true);
+    }
+  }
 
-//   function handleCancel() {
-//     if (props.mandatoryInd) {
-//       setToggle(true);
-//     } else {
-//       setToggle(false);
-//     }
-//   }
+  function handleCancel() {
+    if (props.mandatoryInd) {
+      setToggle(true);
+    } else {
+      setToggle(false);
+    }
+  }
   return (
     <>
       
         <Popconfirm
           title="Confirm status change?"
-        //   onConfirm={() => handleToggleCollection()}
-        //   onCancel={handleCancel}
+          onConfirm={() => handleToggleCollection()}
+          onCancel={handleCancel}
           okText="Yes"
           cancelText="No"
         >
           <Switch
             className="toggle-clr"
-            // checked={props.mandatoryInd || toggle}
+            checked={props.mandatoryInd || toggle}
             // disabled={props.status}
             isLoading={true}
             style={{width: "9em"}}
@@ -62,16 +62,16 @@ function TaskConnetToggle(props) {
   );
 }
 
-const mapStateToProps = ({ auth, countrys }) => ({
+const mapStateToProps = ({ auth, tasks }) => ({
   userId: auth.userDetails.userId,
   orgId: auth.userDetails.organizationId,
-  country:countrys.country,
+  tasks: tasks.tasks,
 });
 
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
-        // linkCountryToggle,
+         linkTaskWorkflowToggle,
     },
     dispatch
   );

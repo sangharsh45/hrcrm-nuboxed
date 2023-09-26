@@ -20,6 +20,12 @@ const initialState = {
     updatingDepartments: false,
     updatingDepartmentsError: false,
 
+    addingCrmToggle: false,
+    addingCrmToggleError: false,
+
+    addingErpToggle: false,
+    addingErpToggleError: false,
+
 
     addingDepartmentDocumentToggle: false,
               addingDepartmentDocumentToggleError: false,
@@ -125,6 +131,49 @@ export const departmentsReducer = (state = initialState, action) => {
               addingDepartmentDocumentToggle: false,
               addingDepartmentDocumentToggleError: true,
             };
+
+
+            case types.LINK_CRM_TOGGLE_REQUEST:
+              return { ...state, addingCrmToggle: true };
+            case types.LINK_CRM_TOGGLE_SUCCESS:
+              return {
+                ...state,
+                addingCrmToggle: false,
+                departments: state.departments.map((item) => {
+                  if (item.departmentId === action.payload.departmentId) {
+                    return action.payload;
+                  } else {
+                    return item;
+                  }
+                }),
+              };
+            case types.LINK_CRM_TOGGLE_FAILURE:
+              return {
+                ...state,
+                addingCrmToggle: false,
+                addingCrmToggleError: true,
+              };
+
+              case types.LINK_ERP_TOGGLE_REQUEST:
+                return { ...state, addingErpToggle: true };
+              case types.LINK_ERP_TOGGLE_SUCCESS:
+                return {
+                  ...state,
+                  addingErpToggle: false,
+                  departments: state.departments.map((item) => {
+                    if (item.departmentId === action.payload.departmentId) {
+                      return action.payload;
+                    } else {
+                      return item;
+                    }
+                  }),
+                };
+              case types.LINK_ERP_TOGGLE_FAILURE:
+                return {
+                  ...state,
+                  addingErpToggle: false,
+                  addingErpToggleError: true,
+                };
     
 
         default:

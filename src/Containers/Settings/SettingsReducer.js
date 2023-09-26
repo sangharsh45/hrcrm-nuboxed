@@ -29,6 +29,10 @@ const initialState = {
   fetchingTaskForRecruitError: false,
   recruitTask:[],
 
+  fetchingTaskForStages: false,
+  fetchingTaskForStagesError: false,
+  stagesTask:[],
+
   linkingProcessPublish: false,
   linkingProcessPublishError: false,
   processPublish: [],
@@ -2433,6 +2437,28 @@ export const settingsReducer = (state = initialState, action) => {
                               fetchingDepartmentRoleData: false,
                               fetchingDepartmentRoleDataError: true,
                             };
+
+                            case types.GET_TASK_FOR_RECRUIT_REQUEST:
+                              return {
+                                ...state,
+                                fetchingTaskForStages: true,
+                                fetchingTaskForStagesError: false,
+                              };
+                            case types.GET_TASK_FOR_STAGES_SUCCESS:
+                              return {
+                                ...state,
+                                fetchingTaskForStages: false,
+                                fetchingTaskForStagesError: false,
+                                stagesTask: action.payload,
+                                
+                              };
+                            case types.GET_TASK_FOR_STAGES_FAILURE:
+                              return {
+                                ...state,
+                                fetchingTaskForStages: false,
+                                fetchingTaskForStagesError: true,
+                              };
+                    
 
 
     default:

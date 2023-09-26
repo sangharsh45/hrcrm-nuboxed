@@ -80,7 +80,7 @@ export class PlannerCalendar extends Component {
     getCallsListByUserId(userId);
     getEventsListByUserId(userId);
     getLeavesByUserId(userId);
-    getTasksListByUserId(userId);
+    getTasksListByUserId(userId,0);
     getHoliday();
   }
 

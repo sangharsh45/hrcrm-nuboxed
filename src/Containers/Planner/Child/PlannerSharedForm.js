@@ -38,7 +38,7 @@ function PlannerSharedForm(props) {
   function handleChange(userId) {
     props.getCallsListByUserId(userId);
     props.getEventsListByUserId(userId);
-    props.getTasksListByUserId(userId);
+    props.getTasksListByUserId(userId,0);
   }
   // console.log(props.shareUsers);
   const findLoginData=props.permissionsDataList.find((element)=>{

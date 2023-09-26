@@ -3344,6 +3344,33 @@ export const getDepartmentRoleData = (departmentId,page) => (dispatch) => {
     });
 };
 
+export const getTaskForStages = (organizationId) => (dispatch) => {
+  // debugger;
+  dispatch({
+    type: types.GET_TASK_FOR_STAGES_REQUEST,
+  });
+  axios
+    .get(`${base_url}/taskType/taskcheckList`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log("print when new task added................", res);
+      dispatch({
+        type: types.GET_TASK_FOR_STAGES_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.GET_TASK_FOR_STAGES_FAILURE,
+        payload: err,
+      });
+    });
+};
+
 
 
 
