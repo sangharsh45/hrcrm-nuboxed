@@ -116,7 +116,12 @@ const initialState = {
   addingLeadsSkill: false,
   addingLeadsSkillError: false,
 
+  fetchingLeadsPermissionsList: false,
+  fetchingLeadsPermissionsListError: false,
+  leadspermissionsDataList:[],
 
+  addSharingLeads: false,
+  addSharingLeadsError: false,
 };
 export const leadsReducer = (state = initialState, action) => {
     switch (action.type) {
@@ -585,6 +590,33 @@ case types.HANDLE_LEADS_MODAL:
     case types.INPUT_LEADS_SEARCH_DATA_FAILURE:
       return { ...state, fetchingLeadsInputSearchDataError: true };
 
+      case types.GET_LEADS_PERMISSIONS_LIST_REQUEST:
+        return { ...state, fetchingLeadsPermissionsList: true };
+      case types.GET_LEADS_PERMISSIONS_LIST_SUCCESS:
+        return {
+          ...state,
+          fetchingLeadsPermissionsList: false,
+          leadspermissionsDataList: action.payload,
+        };
+      case types.GET_LEADS_PERMISSIONS_LIST_FAILURE:
+        return {
+          ...state,
+          fetchingLeadsPermissionsList: false,
+          fetchingLeadsPermissionsListError: true,
+        };
+
+        case types.ADD_SHARE_LEADS_PERMISSION_REQUEST:
+          return { ...state, addSharingLeads: true };
+    
+        case types.ADD_SHARE_LEADS_PERMISSION_SUCCESS:
+          return { ...state, addSharingLeads: false, leadsAllData: action.payload };
+    
+        case types.ADD_SHARE_LEADS_PERMISSION_FAILURE:
+          return {
+            ...state,
+            addSharingLeads: false,
+            addSharingLeadsError: true,
+          };
 default:
 return state;
 }

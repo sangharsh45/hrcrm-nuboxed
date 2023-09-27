@@ -14,7 +14,7 @@ import {
   addLeads,
   setClearbitData
 } from "../../Leads/LeadsAction";
-import Upload from "../../../Components/Forms/Formik/Upload";
+import PostImageUpld from "../../../Components/Forms/Formik/PostImageUpld";
 import { TextareaComponent } from "../../../Components/Forms/Formik/TextareaComponent";
 import { InputComponent } from "../../../Components/Forms/Formik/InputComponent";
 import { SelectComponent } from "../../../Components/Forms/Formik/SelectComponent";
@@ -78,7 +78,7 @@ class LeadsForm extends Component {
           // enableReinitialize
           initialValues={{
             partnerName: "",
-            name: "",
+            companyName: "",
             url: "",
             sectorId: "",
             email: "",
@@ -90,6 +90,12 @@ class LeadsForm extends Component {
             businessRegistration: "",
             assignedTo: userId ? userId : "",
             department: "",
+            salutation:"",
+            firstName:"",
+            middleName:"",
+            lastName:"",
+            proposalValue:"",
+            opportunityName:"",
             address: [
               {
                 address1: "",
@@ -159,7 +165,7 @@ class LeadsForm extends Component {
                   </div> 
                   <StyledLabel>
                   <div class=" flex  flex-nowrap">
-                    <FastField name="imageId" component={Upload} />
+                    <FastField name="imageId" component={PostImageUpld} />
                     <div>
                       <div class=" flex justify-between">
                         <div class=" w-2/5">
@@ -287,7 +293,7 @@ class LeadsForm extends Component {
                   <StyledLabel>
                   <Field
                     isRequired
-                    name="name"
+                    name="companyName"
                     type="text"
                     label={
                       <FormattedMessage id="app.company" defaultMessage="Company" />
@@ -396,7 +402,43 @@ class LeadsForm extends Component {
                  */}
                     </div>
                   <Spacer />
-                 
+
+                  <div class=" w-1/2">
+                    <StyledLabel>
+                      <Field
+                        name="proposalValue"
+                        type="text"
+                        label={
+                          <FormattedMessage
+                            id="app.proposalValue"
+                            defaultMessage="Proposal Value"
+                          />
+                        }
+                        isColumn
+                        width={"100%"}
+                        component={InputComponent}
+                        inlineLabel
+                      />
+                      </StyledLabel>
+                    </div>
+                    <div class=" w-1/2">
+                    <StyledLabel>
+                      <Field
+                        name="opportunityName"
+                        type="text"
+                        label={
+                          <FormattedMessage
+                            id="app.opportunityName"
+                            defaultMessage="Opportunity Namwe"
+                          />
+                        }
+                        isColumn
+                        width={"100%"}
+                        component={InputComponent}
+                        inlineLabel
+                      />
+                      </StyledLabel>
+                    </div>
                 </div>
                 <div class=" h-3/4 w-5/12 "  
                 >

@@ -743,7 +743,7 @@ export const inputCustomerDataSearch = (name) => (dispatch) => {
         payload: err,
       });
     });
-};
+}; 
 
 //CONTACT PERMISSION SHARE Of Partner
 export const shareCustomerPermission = (data, userId, a) => (

@@ -11,7 +11,7 @@ const LeadsCardList = lazy(()=>import("./Child/LeadsTable/LeadsCardList"));
 
 class Leads extends Component {
 
-  state = { currentData: "" };
+  state = { currentData: "",currentUser:"" };
   handleClear = () => {
     this.setState({ currentData: "" });
     this.props.getLeads(this.props.userId);
@@ -23,6 +23,11 @@ class Leads extends Component {
   setCurrentData = (value) => {
     this.setState({ currentData: value });
   };
+  handleDropChange=(value)=>{
+    this.setState({ currentUser: value });
+      this.props.getLeads(value );
+
+  };
   render() {
     const {
       addLeadsModal,
@@ -33,6 +38,8 @@ class Leads extends Component {
     return (
       <React.Fragment>
         <LeadsHeader
+        handleDropChange={this.handleDropChange}
+        currentUser={this.state.currentUser}
             handleLeadsModal={handleLeadsModal}
         setLeadsViewType={setLeadsViewType}
           viewType={viewType}

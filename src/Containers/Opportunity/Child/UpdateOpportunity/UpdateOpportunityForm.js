@@ -25,7 +25,7 @@ const UpdateOpportunitySchema = Yup.object().shape({
   // endDate: Yup.date().required("Closure date needed!"),
   // proposalAmount: Yup.number()
   //   .typeError("Value must be a number")
-  //   .required("Value needed! "),
+  customerId:Yup.string().required("Input needed!"),
   currency: Yup.string().required("Currency needed!"),
   startDate: Yup.string().required("Input needed!"),
   endDate: Yup.string().required("Input needed!"),

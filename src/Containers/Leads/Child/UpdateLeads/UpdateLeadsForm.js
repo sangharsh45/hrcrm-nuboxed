@@ -78,7 +78,7 @@ class UpdateLeadsForm extends Component {
         <Formik
           // enableReinitialize
           initialValues={{
-            name: this.props.setEditingLeads.name || "",
+            companyName: this.props.setEditingLeads.companyName || "",
             url: this.props.setEditingLeads.url || "",
             sectorId: this.props.setEditingLeads.sectorId  ,
             vatNo:this.props.setEditingLeads.vatNo  ,
@@ -89,9 +89,12 @@ class UpdateLeadsForm extends Component {
               this.props.user.countryDialCode,
             phoneNumber: this.props.setEditingLeads.phoneNumber || "",
             userId: this.props.userId,
-            // country:"",
             notes: this.props.setEditingLeads.notes || "",
-            category:this.state.checked?"Both": this.state.whiteblue ? "White" : "Blue",
+            salutation:this.props.setEditingLeads.salutation || "",
+            firstName:this.props.setEditingLeads.firstName || "",
+            middleName:this.props.setEditingLeads.middleName || "",
+            lastName:this.props.setEditingLeads.lastName || "",
+
             address: [
               {
                 addressId: this.props.setEditingLeads.address.length ? this.props.setEditingLeads.address[0].addressId : "",
@@ -103,7 +106,7 @@ class UpdateLeadsForm extends Component {
                 postalCode:  this.props.setEditingLeads.address.length ? this.props.setEditingLeads.address[0].postalCode : "",             
               },
             ],
-            category: this.state.whiteblue ?"White" : "Blue"||"Both",
+            
           }}
           validationSchema={UpdateLeadsSchema}
           onSubmit={(values, { resetForm }) => {
@@ -112,7 +115,7 @@ class UpdateLeadsForm extends Component {
               {
                 ...values,
                 leadsId: this.props.leadsId,
-                category:this.state.checked?"Both": this.state.whiteblue ? "White" : "Blue",
+                
               },
               this.props.leadsId,
               () => this.handleReset(resetForm)

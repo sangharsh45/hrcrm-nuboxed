@@ -226,7 +226,7 @@ function ContactCardList(props) {
                                 </div>
                                 <div className="flex font-medium flex-col w-20 ">
                        
-                       <div class=" text-base text-cardBody font-poppins">Owner</div>
+                       <div class="text-[0.875rem] text-cardBody font-poppins">Owner</div>
 
                    
               <Tooltip title={item.ownerName}>
@@ -235,8 +235,8 @@ function ContactCardList(props) {
                 primaryTitle={item.ownerName}
                 imageId={item.ownerImageId}
                 imageURL={item.imageURL}
-                imgWidth={"2.1em"}
-                imgHeight={"2.1em"}
+                imgWidth={"1.8rem"}
+                imgHeight={"1.8rem"}
               />
             </SubTitle>
           </Tooltip>

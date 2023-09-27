@@ -5,9 +5,6 @@ import { base_url } from "../../Config/Auth";
 import { asses_url } from "../../Config/Auth";
 import { message } from "antd";
 
-
-
-
 export const setLeadsViewType = (viewType) => (dispatch) => {
     dispatch({
       type: types.SET_LEADS_VIEW_TYPE,
@@ -796,5 +793,68 @@ export const setLeadsViewType = (viewType) => (dispatch) => {
     payload:err,
       });
     });
-      };
+  };
   
+  export const getLeadsPermissionsList = () => (dispath) => {
+    dispath({ type: types.GET_LEADS_PERMISSIONS_LIST_REQUEST });
+    axios
+      .get(`${base_url}/permission/type?type=${"leads"}`, 
+      // {
+      //   headers: {
+      //     Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      //   },
+      // }
+      )
+      .then((res) => {
+        dispath({
+          type: types.GET_LEADS_PERMISSIONS_LIST_SUCCESS,
+          payload: res.data,
+        });
+      })
+      .catch((err) => {
+        dispath({
+          type: types.GET_LEADS_PERMISSIONS_LIST_FAILURE,
+          payload: err,
+        });
+      });
+  };
+  export const shareLeadsPermission = (data, userId,a) => (
+    dispatch,
+    getState
+  ) => {
+    // const { userId } = getState("auth").auth.userDetails;
+    dispatch({
+      type: types.ADD_SHARE_LEADS_PERMISSION_REQUEST,
+    });
+  
+    axios
+      .post(`${base_url}/permission/details`, data, {
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+        },
+      })
+      .then((res) => {
+        console.log(res);
+        if (a === "All") {
+          // dispatch(getAllOpportunityListByUserId());
+          // dispatch(getRecords(userId));
+          // dispatch(getAllRecords(userId));
+        } else {
+        dispatch(getLeads(userId));
+        // dispatch(getRecords(userId));
+        }
+        dispatch({
+          type: types.ADD_SHARE_LEADS_PERMISSION_SUCCESS,
+          payload: res.data,
+        });
+        // cb && cb("success");
+      })
+      .catch((err) => {
+        console.log(err);
+        dispatch({
+          type: types.ADD_SHARE_LEADS_PERMISSION_FAILURE,
+          payload: err,
+        });
+        // cb && cb("failure");
+      });
+  };
