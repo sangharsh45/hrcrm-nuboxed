@@ -814,4 +814,7 @@ h1{
       color: #40A9FF;
       font-family: "Poppins";
 }
-
+.ant-checkbox+span {
+  
+  font-size: 0.75rem;
+}
