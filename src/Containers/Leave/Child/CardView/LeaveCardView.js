@@ -72,7 +72,7 @@ function LeaveCardView (props) {
                         <div >
                         <div className=" flex font-medium flex-col  ">
 
-<div class=" text-sm text-cardBody font-medium font-poppins">
+<div class=" text-xs text-cardBody font-medium font-poppins">
   {/* Delivery Date */}
 Start Date: {item.startDate === null ? "No Transaction" :
     <span>
@@ -88,7 +88,7 @@ Start Date: {item.startDate === null ? "No Transaction" :
                  
                       
                         <div >
-                        <div class=" text-sm text-cardBody font-medium font-poppins">
+                        <div class=" text-xs text-cardBody font-medium font-poppins">
   {/* Delivery Date */}
 End Date: {item.endDate === null ? "No Transaction" :
     <span>
@@ -99,7 +99,7 @@ End Date: {item.endDate === null ? "No Transaction" :
 </div>
           </div>
           <div >
-                        <div class=" text-sm text-cardBody font-medium font-poppins">
+                        <div class=" text-xs text-cardBody font-medium font-poppins">
 
   Cover:    {item.coverDetails}
  
@@ -109,7 +109,7 @@ End Date: {item.endDate === null ? "No Transaction" :
           </div>
 
           {/* <div >
-                        <div class=" text-sm text-cardBody font-medium font-poppins">
+                        <div class=" text-xs text-cardBody font-medium font-poppins">
 
                         Reason:    {item.reason}
  

@@ -52,17 +52,17 @@ function ExpenseCard2(props) {
                       style={{
                           borderBottom: "3px dotted #515050"
                       }}>
-                          <h4 class=" text-base text-cardBody font-poppins">
+                          <h4 class=" text-xs text-cardBody font-poppins">
                                  Name
                                   </h4> 
                       <div className=" flex font-medium flex-col w-72 ">
 
                          
                               <Tooltip >
-                                  <h4 class=" text-base text-cardBody font-poppins">
+                                  <h4 class=" text-xs text-cardBody font-poppins">
                                   Voucher ID
                                   </h4>
-                                  <h4 class=" text-base text-blue-500 text-cardBody font-poppins cursor-pointer">
+                                  <h4 class=" text-xs text-blue-500 text-cardBody font-poppins cursor-pointer">
 <div onClick={() => { handleExpand(item.voucherId);
                 handleSetParticularRowData(item);
                 props.handleExpenseVoucherIdDrawer(true);}}>
@@ -75,8 +75,8 @@ function ExpenseCard2(props) {
 </div>
 <div className=" flex font-medium flex-col  w-52 ">
                            
-                           <h4 class=" text-base text-cardBody font-poppins"> Voucher Date </h4>
-                           <h4 class=" text-base text-cardBody font-poppins">
+                           <h4 class=" text-xs text-cardBody font-poppins"> Voucher Date </h4>
+                           <h4 class=" text-xs text-cardBody font-poppins">
                                
                            
                            {dayjs(item.voucherDate).format("MMM Do YY")}
@@ -86,15 +86,15 @@ function ExpenseCard2(props) {
                        <div className=" flex font-medium flex-col w-32 ">
                                   
 
-                                  <h4 class=" text-base text-cardBody font-poppins">Amount</h4>
-                                  <h4 class=" text-base text-cardBody font-poppins">
+                                  <h4 class=" text-xs text-cardBody font-poppins">Amount</h4>
+                                  <h4 class=" text-xs text-cardBody font-poppins">
                                       € {item.amount}
                                   </h4>
                               </div>
                               <div className=" flex font-medium flex-col w-[12rem] ">
-                                    <h4 class=" text-base text-cardBody font-poppins">Status</h4>
+                                    <h4 class=" text-xs text-cardBody font-poppins">Status</h4>
 
-                                    <div class=" text-base text-cardBody font-poppins">
+                                    <div class=" text-xs text-cardBody font-poppins">
                                     {item.status === "Approved" && (
                  <div
                  style={{

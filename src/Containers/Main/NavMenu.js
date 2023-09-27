@@ -89,7 +89,7 @@ function NavMenu (props) {
           {/* dashboard */}
           {user.userType !== "USER" && user.department !== "Vendor" && user.department !== "Customer" && (
 
-            <Menu.Item key="/dashboard" style={{height:"30px"}}>
+            <Menu.Item key="/dashboard" style={{height:"30px",paddingLeft:"1rem"}}>
               <Link to="/dashboard">
                 <DashboardIcon 
 
@@ -124,7 +124,7 @@ function NavMenu (props) {
           </Menu.Item> */}
           {/* {user.userType !== "USER" && user.department !== "VENDOR" && ( */}
           {/*planner*/}
-          <Menu.Item key="/planner" style={{height:"30px"}}>
+          <Menu.Item key="/planner" style={{height:"30px",paddingLeft:"1rem"}}>
             <Link to="/planner">
               {/* <Icon type="calendar" style={{ color: "white" }} /> */}
               <CalendarMonthIcon
@@ -179,7 +179,7 @@ function NavMenu (props) {
                   </span>
                 }
               > */}
-          <Menu.Item key="/call" style={{height:"30px"}}>
+          <Menu.Item key="/call" style={{height:"30px",paddingLeft:"1rem"}}>
             <Link to="/call">
               {/* <Icon style={{ color: "white" }} type="phone" /> */}
               <VolumeUpIcon
@@ -198,7 +198,7 @@ function NavMenu (props) {
               ></Badge>
             </Link>
           </Menu.Item>
-          <Menu.Item key="task" style={{height:"30px"}}>
+          <Menu.Item key="task" style={{height:"30px",paddingLeft:"1rem"}}>
             <Link to="/Task">
               {/* <Icon type="file-done" /> */}
               <FactCheckIcon
@@ -216,7 +216,7 @@ function NavMenu (props) {
               ></Badge>
             </Link>
           </Menu.Item>
-          <Menu.Item key="event" style={{height:"30px"}}>
+          <Menu.Item key="event" style={{height:"30px",paddingLeft:"1rem"}}>
             <Link to="/Event">
               {/* <Icon type="schedule" /> */}
               <EventAvailableIcon
@@ -248,7 +248,7 @@ function NavMenu (props) {
 
           {/*Activity*/}
           {/*Reports*/}
-          <Menu.Item key="/reports" style={{height:"30px"}}>
+          <Menu.Item key="/reports" style={{height:"30px",paddingLeft:"1rem"}}>
             <Link to="/reports">
               <PictureAsPdfIcon
                style={{ fontSize: "large" }}
@@ -266,7 +266,7 @@ function NavMenu (props) {
 
 <hr />
      {/* {user.leadsAccessInd === true && ( */}
-     <Menu.Item key="/leads" style={{height:"30px"}}>
+     <Menu.Item key="/leads" style={{height:"30px",paddingLeft:"1rem"}}>
               <Link to="/Leads">
                 <GroupsIcon
             
@@ -281,7 +281,7 @@ function NavMenu (props) {
           {/* )} */}
              {/*Opportunity*/}
              {user.opportunityAccessInd === true && (
-            <Menu.Item key="/opportunity" style={{height:"30px"}}>
+            <Menu.Item key="/opportunity" style={{height:"30px",paddingLeft:"1rem"}}>
               <Link to="/opportunity">
            
                 <LightbulbIcon
@@ -302,7 +302,7 @@ function NavMenu (props) {
 
              {/* Contact */}
              {user.contactAccessInd === true && (
-            <Menu.Item key="/contact" style={{height:"30px"}}>
+            <Menu.Item key="/contact" style={{height:"30px",paddingLeft:"1rem"}}>
               <Link to="/contact">
              
                 <ContactsIcon
@@ -318,7 +318,7 @@ function NavMenu (props) {
 
            {/* Customer */}
            {user.customerAccessInd === true && (
-            <Menu.Item key="/customer" style={{height:"30px"}}>
+            <Menu.Item key="/customer" style={{height:"30px",paddingLeft:"1rem"}}>
               <Link to="/customer">
             
                 <ApartmentIcon
@@ -381,7 +381,7 @@ function NavMenu (props) {
           {/*Talent*/}
           {/*Requirement*/}
           {user.requirementAccessInd === true && (
-            <Menu.Item key="/requirement" style={{height:"30px"}}>
+            <Menu.Item key="/requirement" style={{height:"30px",paddingLeft:"1rem"}}>
               <Link to="/requirement">
              
                 <RecentActorsIcon 
@@ -401,7 +401,7 @@ function NavMenu (props) {
           )}
           {/*Demand*/}
           {user.userType === "USER" && user.department === "Customer" && (
-            <Menu.Item key="/demand" style={{height:"30px"}}>
+            <Menu.Item key="/demand" style={{height:"30px",paddingLeft:"1rem"}}>
               <Link to="/demand">
                 <ContactsIcon 
                 
@@ -427,7 +427,7 @@ function NavMenu (props) {
           {/* {user.userType !== "USER" && user.department !== "Recruiter" &&user.department !== "Customer"&&
             user.department !== "VENDOR" && (  */}
           {user.publishAccessInd === true && (
-            <Menu.Item key="/publish" style={{height:"30px"}}>
+            <Menu.Item key="/publish" style={{height:"30px",paddingLeft:"1rem"}}>
               <Link to="/publish">
             
                 <CellTowerIcon
@@ -609,7 +609,7 @@ function NavMenu (props) {
             }
           >
            */}
-              <Menu.Item key="/report" style={{height:"30px"}}>
+              <Menu.Item key="/report" style={{height:"30px",paddingLeft:"1rem"}}>
           <Link to="/leave">
               <i class="fas fa-luggage-cart"></i>
             <span class="text-white text-sm ml-1"><FormattedMessage
@@ -633,7 +633,7 @@ function NavMenu (props) {
           </Menu.Item>
              )}
 
-           <Menu.Item key="/expense" style={{height:"30px"}}>
+           <Menu.Item key="/expense" style={{height:"30px",paddingLeft:"1rem"}}>
            <Link to="/expense">
             <ReceiptIcon
            style={{ fontSize: "large" }}
@@ -648,7 +648,7 @@ function NavMenu (props) {
 
        
 
-           <Menu.Item key="/holiday" style={{height:"30px"}}> 
+           <Menu.Item key="/holiday" style={{height:"30px",paddingLeft:"1rem"}}> 
             <Link to="/holiday"> 
            
              <i class="fas fa-holly-berry"></i>
@@ -669,7 +669,7 @@ function NavMenu (props) {
                   {/* Employees */}
                   {user.department === "Management" && user.userAccessInd === true && (
                   
-            <Menu.Item key="/employees" style={{height:"30px"}}>
+            <Menu.Item key="/employees" style={{height:"30px",paddingLeft:"1rem"}}>
               <Link to="/Employees">
                 <GroupsIcon
 
@@ -690,7 +690,7 @@ function NavMenu (props) {
           )}
            { user.locationAccessInd === true && (
          
-          <Menu.Item key="/location" style={{height:"30px"}}>
+          <Menu.Item key="/location" style={{height:"30px",paddingLeft:"1rem"}}>
            <Link to="/location">
             <ReceiptIcon
            style={{ fontSize: "large" }}

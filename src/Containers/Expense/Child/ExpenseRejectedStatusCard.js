@@ -45,14 +45,14 @@ function ExpenseRejectedStatusCard(props) {
 
     return (
       <>
-         <OnlyWrapCard width="25rem">  
+         <OnlyWrapCard width="25rem" className="h-[32rem]">  
          <div className="p-0.5 inline-flex items-center rounded-md w-max ml-1">
             <span className="pl-2 pr-4 relative">
               <span
                 className="absolute left-0 top-0 bottom-0 w-3  rounded-l-md -mt-1 -mb-1 -ml-2 "
 
               ></span>
-              <span class="font-semibold text-sm text-cardBody-heading font-poppins"> Rejected </span>
+              <span class="font-semibold text-xs text-cardBody-heading font-poppins"> Rejected </span>
             </span>
           </div>    
               {rejectedExpenses.map((item) => {
@@ -67,10 +67,10 @@ function ExpenseRejectedStatusCard(props) {
 
                          
                               <Tooltip >
-                                  <h4 class=" text-sm text-cardBody font-poppins">
+                                  <h4 class=" text-xs text-cardBody font-poppins">
                                   Voucher ID
                                   </h4>
-                                  <h4 class=" text-sm text-blue-500 text-cardBody font-poppins cursor-pointer">
+                                  <h4 class=" text-xs text-blue-500 text-cardBody font-poppins cursor-pointer">
 <div onClick={() => { handleExpand(item.voucherId);
                 handleSetParticularRowData(item);
                 props.handleExpenseVoucherIdDrawer(true);}}>
@@ -80,9 +80,9 @@ function ExpenseRejectedStatusCard(props) {
 
 </Tooltip>
 <div className=" flex font-medium flex-col w-[12rem] ">
-                                    <h4 class=" text-sm text-cardBody font-poppins"></h4>
+                                    <h4 class=" text-xs text-cardBody font-poppins"></h4>
 
-                                    <div class=" text-sm text-cardBody font-poppins">
+                                    <div class=" text-xs text-cardBody font-poppins">
          
             
               
@@ -102,8 +102,8 @@ function ExpenseRejectedStatusCard(props) {
 </div>
 <div className=" flex font-medium flex-col  w-52 ">
                            
-                           <h4 class=" text-sm text-cardBody font-poppins"> Voucher Date </h4>
-                           <h4 class=" text-sm text-cardBody font-poppins">
+                           <h4 class=" text-xs text-cardBody font-poppins"> Voucher Date </h4>
+                           <h4 class=" text-xs text-cardBody font-poppins">
                                
                            
                            {dayjs(item.voucherDate).format("MMM Do YY")}
@@ -113,8 +113,8 @@ function ExpenseRejectedStatusCard(props) {
                        <div className=" flex font-medium flex-col w-32 ml-2 ">
                                   
 
-                                  <h4 class=" text-sm text-cardBody font-poppins">Amount</h4>
-                                  <h4 class=" text-sm text-cardBody font-poppins">
+                                  <h4 class=" text-xs text-cardBody font-poppins">Amount</h4>
+                                  <h4 class=" text-xs text-cardBody font-poppins">
                                       € {item.amount}
                                   </h4>
                               </div>

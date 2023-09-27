@@ -210,14 +210,14 @@ function CustomerCardList(props) {
                                     </h4>
                                 </div>
                              
-                                <div className=" flex font-medium flex-col w-32 ">
+                                <div className=" flex font-medium flex-col w-36 ">
                                     <h4 class=" text-[0.875rem] text-cardBody font-poppins"># Opportunity</h4>
 
                                     <div class=" text-[0.75rem] text-cardBody font-poppins">
 
                                     </div>
                                 </div>
-                                <div className=" flex font-medium flex-col w-32 ">
+                                <div className=" flex font-medium flex-col w-24 ">
                                     <h4 class=" text-[0.875rem] text-cardBody font-poppins">Assigned to</h4>
 
                                     <div class=" text-[0.75rem] text-cardBody font-poppins">

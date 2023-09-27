@@ -52,7 +52,7 @@ function ExpensePendingStatusCard(props) {
                 className="absolute left-0 top-0 bottom-0 w-3  rounded-l-md -mt-1 -mb-1 -ml-2 "
 
               ></span>
-              <span class="font-semibold text-sm text-cardBody-heading font-poppins"> Pending </span>
+              <span class="font-semibold text-xs text-cardBody-heading font-poppins"> Pending </span>
             </span>
           </div>    
               {pendingExpenses.map((item) => {
@@ -67,10 +67,10 @@ function ExpensePendingStatusCard(props) {
 
                          
                               <Tooltip >
-                                  <h4 class=" text-sm text-cardBody font-poppins">
+                                  <h4 class=" text-xs text-cardBody font-poppins">
                                   Voucher ID
                                   </h4>
-                                  <h4 class=" text-sm text-blue-500 text-cardBody font-poppins cursor-pointer">
+                                  <h4 class=" text-xs text-blue-500 text-cardBody font-poppins cursor-pointer">
 <div onClick={() => { handleExpand(item.voucherId);
                 handleSetParticularRowData(item);
                 props.handleExpenseVoucherIdDrawer(true);}}>
@@ -80,9 +80,9 @@ function ExpensePendingStatusCard(props) {
 
 </Tooltip>
 <div className=" flex font-medium flex-col w-max ">
-                                    <h4 class=" text-sm text-cardBody font-poppins"></h4>
+                                    <h4 class=" text-xs text-cardBody font-poppins"></h4>
 
-                                    <div class=" text-sm text-cardBody font-poppins">
+                                    <div class=" text-xs text-cardBody font-poppins">
          
             
               
@@ -104,8 +104,8 @@ function ExpensePendingStatusCard(props) {
 
 <div className=" flex font-medium flex-col  w-52 ">
                            
-                           <h4 class=" text-sm text-cardBody font-poppins"> Voucher Date </h4>
-                           <h4 class=" text-sm text-cardBody font-poppins">
+                           <h4 class=" text-xs text-cardBody font-poppins"> Voucher Date </h4>
+                           <h4 class=" text-xs text-cardBody font-poppins">
                                
                            
                            {dayjs(item.voucherDate).format("MMM Do YY")}
@@ -115,8 +115,8 @@ function ExpensePendingStatusCard(props) {
                        <div className=" flex font-medium flex-col w-32 ">
                                   
 
-                                  <h4 class=" text-sm text-cardBody font-poppins">Amount</h4>
-                                  <h4 class=" text-sm text-cardBody font-poppins">
+                                  <h4 class=" text-xs text-cardBody font-poppins">Amount</h4>
+                                  <h4 class=" text-xs text-cardBody font-poppins">
                                       € {item.amount}
                                   </h4>
                               </div>

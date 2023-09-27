@@ -269,7 +269,7 @@ border-radius: 0.35rem;
     box-shadow: 0 0.25em 0.62em #aaa;
     height: 7rem;
     color: rgb(68,68,68);
-    margin: 1em;
+    margin: 1rem;
     padding: 0.2rem;
     width: 20vw;
     display: flex;
