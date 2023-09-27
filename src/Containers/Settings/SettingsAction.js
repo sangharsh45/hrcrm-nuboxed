@@ -139,7 +139,7 @@ export const LinkProcessPublish = (data, cb,) => (dispatch) => {
 };
 
 
-export const addTaskForRecruiter = (data, taskId, cb) => (
+export const addTaskForRecruiter = (data, taskTypeId, cb) => (
   dispatch
 ) => {
   dispatch({
@@ -147,14 +147,14 @@ export const addTaskForRecruiter = (data, taskId, cb) => (
   });
 
   axios
-    .post(`${base_url}/task/subTask`, data, {
+    .post(`${base_url}/category/task/checklist/save`, data, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },
     })
     .then((res) => {
       console.log(res);
-       dispatch(getTaskForWorkflow(taskId));
+       dispatch(getTaskForWorkflow(taskTypeId));
       dispatch({
         type: types.ADD_TASK_FOR_RECRUIT_SUCCESS,
         payload: res.data,
@@ -3402,13 +3402,13 @@ export const getTaskWorkflowStagesForRecruit = (taskId) => (
 };
 
 
-export const getTaskForWorkflow = (taskId) => (dispatch) => {
+export const getTaskForWorkflow = (taskTypeId) => (dispatch) => {
   // debugger;
   dispatch({
     type: types.GET_TASK_FOR_WORKFLOW_REQUEST,
   });
   axios
-    .get(`${base_url}/task/subTask/${taskId}`, {
+    .get(`${base_url}/category/task/allChecklist/${taskTypeId}`, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },

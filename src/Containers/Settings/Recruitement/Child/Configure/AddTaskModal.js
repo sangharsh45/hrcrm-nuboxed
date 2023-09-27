@@ -29,7 +29,7 @@ const AddTaskModal = (props) => {
         footer={null}
       >
         <Suspense fallback={<BundleLoader />}>
-          <RecruitTaskForm {...formProps} />
+          <RecruitTaskForm taskTypeId={props.taskTypeId} {...formProps} />
         </Suspense>
       </StyledModal>
     </>

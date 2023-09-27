@@ -20,12 +20,14 @@ import {
   handleTaskModal,
   getCustomerTask,
   getProjectTaskList,
+
   getCandidateTaskList,
   getCandidateTaskFilterList,
   deleteTask,
 } from "../TaskAction";
 import { getTaskForRecruit,
-  getTaskForStages
+  getTaskForStages,
+  getTaskForWorkflow,
  } from "../../Settings/SettingsAction";
 import { handleChooserModal } from "../../Planner/PlannerAction";
 import { StyledLabel } from "../../../Components/UI/Elements";
@@ -122,6 +124,29 @@ class TaskForm extends Component {
     return newData;
   };
 
+  handleCheckListOptions = (filterOptionKey, filterOptionValue) => {
+    const listOptions =
+      this.props.recruitWorkflowTask.length &&
+      this.props.recruitWorkflowTask
+        .filter((option) => {
+          if (
+            option.taskTypeId === filterOptionValue &&
+            option.probability !== 0
+          ) {
+            return option;
+          }
+        })
+        .map((option) => ({
+          label: option.taskChecklistName || "",
+          value: option.taskType,
+        }));
+    console.log(listOptions);
+
+    return listOptions;
+  };
+  
+
+
   handlecandidateOptions = (filterOptionKey, filterOptionValue) => {
     const candidateOptions =
       this.props.candidateFilterTaskList.length &&
@@ -142,6 +167,7 @@ class TaskForm extends Component {
 
     return candidateOptions;
   };
+  
 
   componentDidMount() {
     this.props.getEmployeelist();
@@ -149,6 +175,7 @@ class TaskForm extends Component {
     this.props.getTaskForRecruit(this.props.orgId);
     this.props.getCustomerTask(this.props.orgId);
     this.props.getProjectTaskList(this.props.orgId);
+    this.props.getTaskForWorkflow(this.props.taskTypeId);
     this.props.getTasks();
     this.props.getUnits(this.props.orgId);
     this.props.getCandidateTaskList(this.props.orgId);
@@ -219,15 +246,15 @@ class TaskForm extends Component {
       };
     });
 
-    const TaskOptions = this.props.recruitTask.map((item) => {
+    const TaskOptions = this.props.recruitWorkflowTask.map((item) => {
       return {
-        // label: `${item.taskChecklistName}`,
-        // value: item.taskChecklistId,
+        label: `${item.taskChecklistName}`,
+        value: item.taskChecklistId,
       };
     });
     const TaskStageOptions = this.props.stagesTask.map((item) => {
       return {
-        label: `${item.taskChecklistName}`,
+        label: `${item.taskType}`,
         value: item.taskChecklistId,
       };
     });
@@ -239,12 +266,12 @@ class TaskForm extends Component {
       };
     });
 
-    // const TaskOption = this.props.tasks.map((item) => {
-    //   return {
-    //     label: item.taskType,
-    //     value: item.taskTypeId,
-    //   };
-    // });
+    const TaskOption = this.props.tasks.map((item) => {
+      return {
+        label: item.taskType,
+        value: item.taskTypeId,
+      };
+    });
 
     return (
       <>
@@ -443,20 +470,61 @@ class TaskForm extends Component {
                     <div class=" w-1/2">
                       <Spacer />
                       <StyledLabel>Type</StyledLabel>
-
                       <Field
+                    name="taskTypeId"
+                    // selectType="customerList"
+                    isColumnWithoutNoCreate
+                 
+                    //component={SearchSelect}
+                    component={SelectComponent}
+                    // options={
+                    //   Array.isArray(TaskOption)
+                    //     ? TaskOption
+                    //     : []
+                    // }
+                    options={Array.isArray(TaskOption) ? TaskOption : []}
+                    isColumn
+                    margintop={"0"}
+                    value={values.taskTypeId}
+                    inlineLabel
+                  />
+                      {/* <Field
                         name="taskTypeId"
-                        // component={SelectComponent}
+                         component={SelectComponent}
                         value={values.taskTypeId}
-                        // options={Array.isArray(TaskOption) ? TaskOption : []}
-                      />
+                        options={Array.isArray(TaskOption) ? TaskOption : []}
+                      /> */}
                     </div>
                   
-                    {values.taskTypeId === "TSK52434477391272022" && (
+                    {values.taskTypeId === "TSK42340139329302023" && (
                       <div class=" w-1/2">
                           <Spacer />
                       <StyledLabel>Task CheckList</StyledLabel>
-                          <Field
+
+                      <Field
+                    name="taskType"
+                    // selectType="contactListFilter"
+                    isColumnWithoutNoCreate
+                 
+                    // component={SearchSelect}
+                    component={SelectComponent}
+                    options={
+                      Array.isArray(
+                        this.handleCheckListOptions("taskTypeId", values.taskTypeId)
+                      )
+                        ? this.handleCheckListOptions("taskTypeId", values.taskTypeId)
+                        : []
+                    }
+                    value={values.taskType}
+                    filterOption={{
+                      filterType: "taskTypeId",
+                      filterValue: values.taskTypeId,
+                    }}
+                    disabled={!values.taskTypeId}
+                    isColumn
+                    inlineLabel
+                  />
+                          {/* <Field
                             name="taskChecklistId"
                             // selectType="contactListFilter"
                             isColumnWithoutNoCreate
@@ -476,7 +544,7 @@ class TaskForm extends Component {
                             value={values.taskChecklistId}
                             isColumn
                             inlineLabel
-                          />
+                          /> */}
                      
                       </div>
                     )}
@@ -1144,6 +1212,7 @@ const mapStateToProps = ({
   candidate,
 }) => ({
   addingTask: task.addingTask,
+  recruitWorkflowTask: settings.recruitWorkflowTask,
   orgId: auth.userDetails.organizationId,
   projectTaskList: task.projectTaskList,
   candidateTaskList: task.candidateTaskList,
@@ -1176,6 +1245,7 @@ const mapDispatchToProps = (dispatch) =>
       deleteTask,
       getEmployeelist,
       getProjectTaskList,
+      getTaskForWorkflow,
       getUnits,
         getTaskForStages,
       // getOppoStages,

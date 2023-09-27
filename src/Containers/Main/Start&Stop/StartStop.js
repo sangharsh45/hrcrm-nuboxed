@@ -1,25 +1,30 @@
 import { Button, Popconfirm } from "antd";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { addAttendence } from "../../Customer/CustomerAction";
+import { addAttendence,
+  getAttendanceList
+ } from "../../Customer/CustomerAction";
 
 function StartStop(props) {
+  useEffect(() => {
+    props.getAttendanceList(props.userId);
+ }, []);
   const [state, setState] = useState(false);
 
   const toggle = () => {
     if (state) {
-      // If the current state is true, it means we're stopping attendance
+
       let data = {
         userId: props.userId,
-        startInd: false, // Set startInd to false when stopping attendance
+        startInd: false, 
       };
       props.addAttendence(data);
     } else {
-      // If the current state is false, it means we're starting attendance
+
       let data = {
         userId: props.userId,
-        startInd: true, // Set startInd to true when starting attendance
+        startInd: true, 
       };
       props.addAttendence(data);
     }
@@ -50,12 +55,14 @@ function StartStop(props) {
 
 const mapStateToProps = ({ customer, auth }) => ({
   userId: auth.userDetails.userId,
+  attendanceByList:customer.attendanceByList,
 });
 
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
       addAttendence,
+       getAttendanceList
     },
     dispatch
   );

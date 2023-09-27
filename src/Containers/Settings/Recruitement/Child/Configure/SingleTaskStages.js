@@ -60,8 +60,8 @@ class SingleTaskStages extends Component {
       linkedStages,
       organization,
       newStageName,
-      newProbability,
       newDays,
+      newProbability,
       deleteTaskStagesData,
       stageValue1,
       handleChange,
@@ -94,22 +94,23 @@ class SingleTaskStages extends Component {
                     "rgb(161, 185, 185)",
                 }}
               >
-                <StageName style={{ flexBasis: "25%", textAlign: "left" }}>
+                <StageName style={{ flexBasis: "25%", }}>
                   {elipsize(taskChecklistStageName, 23)}
                 </StageName>
                 <StageName>
                   {probability}
                 </StageName>
+                &nbsp; &nbsp; &nbsp;
                 <StageName>
                   {days}
                 </StageName>
-                <StageName>
+                {/* <StageName>
                   {`${ moment(startDate).format("DD/MM/YYYY")}`}
                 </StageName>
                 &nbsp;&nbsp;&nbsp;&nbsp;
                 <StageName>
                 {`${ moment(endDate).format("DD/MM/YYYY")}`}
-                </StageName>
+                </StageName> */}
                 <div class=" flex justify-between ml-margin65 w-4">
                   <>
                     <Tooltip title="Edit">

@@ -18,6 +18,7 @@ import ApprovalTab from "./Child/Approval/ApprovalTab";
 import SettingsHolidayTab from "./Child/Holiday/SettingsHolidayTab";
 import Rules from "../../Rules/Rules";
 import ConfigureTab from "./Child/Configure/ConfigureTab";
+import LeadsTab from "../../Rules/Child/RulesTab/LeadsTab";
 
 const RecruitmentActionLeft = lazy(() => import("./RecruitmentActionLeft"));
 
@@ -110,7 +111,7 @@ function Recruitment(props) {
     {
       rulesName: "Rules",
       ruleId: "20",
-      component: <Rules />,
+      component: <LeadsTab />,
     },
  
      ];
