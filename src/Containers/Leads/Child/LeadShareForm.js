@@ -1,30 +1,30 @@
 import React, { useState, useEffect, useMemo } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { getOpportunityPermissionsList,shareOpportunityPermission,getRecords } from "../OpportunityAction";
+import { getLeadsPermissionsList,shareLeadsPermission } from "../LeadsAction";
 import { StyledSelect } from "../../../Components/UI/Antd";
 
 const Option =StyledSelect;
 
-function OpportunityShareForm(props) {
+function LeadShareForm(props) {
   useEffect(() => {
-    props.getOpportunityPermissionsList();
+    props.getLeadsPermissionsList();
   }, []);
-  const permissionListForAll = props.permissionsDataList.map((item) => {
+  const permissionListForAll = props.leadspermissionsDataList.map((item) => {
     return item.userId;
   });
   function handleChange(value){
     if(value === "all"){
-    props.shareOpportunityPermission(
+    props.shareLeadsPermission(
       {
-        type: "opportunity",
+        type: "leads",
         user: permissionListForAll,
       },
       value,
       "All"
     );
     }else{
-      props.shareOpportunityPermission(
+      props.shareLeadsPermission(
         {
           type: "candidate",
           user: [value],
@@ -35,7 +35,7 @@ function OpportunityShareForm(props) {
     }
   }
   // console.log(props.shareUsers);
-  const findLoginData=props.permissionsDataList.find((element)=>{
+  const findLoginData=props.leadspermissionsDataList.find((element)=>{
            if(element.userId === props.userId){
                 return element.userName
           }
@@ -52,7 +52,7 @@ function OpportunityShareForm(props) {
         onChange={(e) => handleChange(e)}
       >
         <Option value={"all"}>{"All"} </Option>
-        {props.permissionsDataList.map((item) => {
+        {props.leadspermissionsDataList.map((item) => {
           return <Option value={item.userId}>{item.userName} </Option>;
         })}
       </StyledSelect>
@@ -61,21 +61,20 @@ function OpportunityShareForm(props) {
   );
 }
 
-const mapStateToProps = ({ opportunity,auth }) => ({
-  addSharingOpportunity: opportunity.addSharingOpportunity,
+const mapStateToProps = ({ leads,auth }) => ({
+  addSharingLeads: leads.addSharingLeads,
   userId:auth.userDetails.userId,
-  permissionsDataList: opportunity.permissionsDataList,
+  leadspermissionsDataList: leads.leadspermissionsDataList,
 });
 
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
-      shareOpportunityPermission,
-      getOpportunityPermissionsList,
-      getRecords,
+        shareLeadsPermission,
+      getLeadsPermissionsList,
     },
     dispatch
   );
 
-export default connect(mapStateToProps, mapDispatchToProps)(OpportunityShareForm);
+export default connect(mapStateToProps, mapDispatchToProps)(LeadShareForm);
 

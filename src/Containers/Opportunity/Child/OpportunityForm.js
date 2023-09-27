@@ -45,6 +45,7 @@ const OpportunitySchema = Yup.object().shape({
   oppWorkflow: Yup.string().required("Input needed!"),
   currency: Yup.string().required("Input needed!"),
   oppStage: Yup.string().required("Input needed!"),
+  customerId:Yup.string().required("Input needed!"),
 });
 function OpportunityForm(props) {
   useEffect(() => {

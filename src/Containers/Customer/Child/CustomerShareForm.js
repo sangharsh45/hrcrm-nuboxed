@@ -44,7 +44,8 @@ console.log("findLoginData",findLoginData&& findLoginData.userName);
   return (
     <>
      <StyledSelect
-        defaultValue={props.fullName}
+        // defaultValue={props.fullName}
+        defaultValue={"Select User"}
         style={{ width: "auto",margin:"auto",paddingRight:"5px"}}
         placeholder="Select to View"
         onChange={(e) =>  props.handleDropChange(e)}

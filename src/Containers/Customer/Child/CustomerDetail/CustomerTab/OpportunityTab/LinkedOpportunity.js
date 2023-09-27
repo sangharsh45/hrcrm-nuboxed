@@ -143,24 +143,24 @@ function OpportunityTable(props) {
       title: "",
       width: "2%",
     },
-    {
-      title: "",
-      dataIndex: "imageId",
-      width: "3%",
-      render: (name, item, i) => {
-        return (
-          <SubTitle>
-            <MultiAvatar
-              primaryTitle={item.accountName}
-              imageId={item.imageId}
-              imageURL={item.imageURL}
-              imgWidth={"1.8em"}
-              imgHeight={"1.8em"}
-            />
-          </SubTitle>
-        );
-      },
-    },
+    // {
+    //   title: "",
+    //   dataIndex: "imageId",
+    //   width: "3%",
+    //   render: (name, item, i) => {
+    //     return (
+    //       <SubTitle>
+    //         <MultiAvatar
+    //           primaryTitle={item.accountName}
+    //           imageId={item.imageId}
+    //           imageURL={item.imageURL}
+    //           imgWidth={"1.8em"}
+    //           imgHeight={"1.8em"}
+    //         />
+    //       </SubTitle>
+    //     );
+    //   },
+    // },
     {
       title: "",
       width: "1%",
@@ -259,7 +259,7 @@ title:(
   />
 ),
 dataIndex: "status",
-width: "5%",
+width: "7%",
 },
 
     {

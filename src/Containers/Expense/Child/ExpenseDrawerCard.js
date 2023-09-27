@@ -334,7 +334,7 @@ function ExpenseDrawerCard(props) {
                                           <h4 class=" text-sm text-cardBody font-poppins">
                                            ID
                                           </h4>
-                                          <h4 class=" text-sm text-blue-500 text-cardBody font-poppins cursor-pointer">
+                                          <h4 class=" text-xs text-blue-500 text-cardBody font-poppins cursor-pointer">
                                               
                                           {/* <div onClick={() => { this.handleExpand(item.voucherId) 
               this.props.handleMileageVoucherIdDrwer(true)}}>
@@ -369,7 +369,7 @@ function ExpenseDrawerCard(props) {
   ))}
 </select>
           ) : (
-                         <h4 class=" text-sm text-cardBody font-poppins">
+                         <h4 class=" text-xs text-cardBody font-poppins">
                              {item.expenseType}
                          </h4>
                            )}
@@ -386,7 +386,7 @@ function ExpenseDrawerCard(props) {
     style={{ border: "2px solid black" }}
   />
 ) : (
-                                  <h4 class=" text-sm text-cardBody font-poppins">
+                                  <h4 class=" text-xs text-cardBody font-poppins">
                                       
                                   
                                   {dayjs(item.expenseDate).format("MMM Do YY")}
@@ -404,7 +404,7 @@ function ExpenseDrawerCard(props) {
               style={{border:"2px solid black"}}
             />
           ) : (
-                         <h4 class=" text-sm text-cardBody font-poppins">
+                         <h4 class=" text-xs text-cardBody font-poppins">
                              {item.clientName}
                          </h4>
           )}
@@ -422,7 +422,7 @@ function ExpenseDrawerCard(props) {
             />
           ) : (
         
-                                  <h4 class=" text-sm text-cardBody font-poppins">
+                                  <h4 class=" text-xs text-cardBody font-poppins">
                                        {item.particular}
                                   </h4>
           )}
@@ -444,7 +444,7 @@ function ExpenseDrawerCard(props) {
           ) : (
                                                                
           
-                                <h4 class=" text-sm text-cardBody font-poppins">
+                                <h4 class=" text-xs text-cardBody font-poppins">
                                     € {item.amount}
                                 </h4>
           )}

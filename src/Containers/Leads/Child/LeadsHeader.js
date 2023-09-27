@@ -1,6 +1,6 @@
 import React, { Component,lazy} from "react";
 import { ActionHeader } from "../../../Components/Utils";
-import LeadsActionRight from "./LeadsActionRight";
+const LeadsActionRight=lazy(()=> import("./LeadsActionRight"));
 const LeadsActionLeft=lazy(()=> import("./LeadsActionLeft"));
 
 class LeadsHeader extends Component {
@@ -29,7 +29,8 @@ class LeadsHeader extends Component {
           rightComponent={
             <LeadsActionRight
             viewType={viewType}
-
+            currentUser={this.props.currentUser} 
+            handleDropChange={this.props.handleDropChange}
             handleLeadsModal={handleLeadsModal} />
           }
         />

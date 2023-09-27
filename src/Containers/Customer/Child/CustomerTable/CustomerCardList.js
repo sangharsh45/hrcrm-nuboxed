@@ -10,7 +10,7 @@ import moment from "moment";
 import { OnlyWrapCard } from '../../../../Components/UI/Layout'
 import { getCountries } from "../../../Auth/AuthAction";
 import InfiniteScroll from "react-infinite-scroll-component";
-import { Tooltip, Select } from "antd";
+import { Tooltip, Select,Button } from "antd";
 
 import {
   MultiAvatar,
@@ -195,18 +195,16 @@ function CustomerCardList(props) {
 
                                     <h4 class=" text-[0.875rem] text-cardBody font-poppins">Country</h4>
                                     <h4 class=" text-[0.75rem] text-cardBody font-poppins">
-                                    {/* <ReactCountryFlag countryCode="NL" svg /> */}
-                                    {/* <ReactCountryFlag
-                          countryCode={item.country}
+                                    <ReactCountryFlag
+                          countryCode={item.countryAlpha2Code}
                           svg
                           style={{
                             width: '1em',
                             height: '1em',
                           }}
-                          title={item.country}
-                        /> */}
+                        />
                         &nbsp;
-                       {item.country}
+                       {item.address && item.address.length && item.address[0].country}
                                     </h4>
                                 </div>
                              
@@ -228,8 +226,8 @@ function CustomerCardList(props) {
               ) : (
                 <MultiAvatar2
                   primaryTitle={item.assignedTo}
-                  imgWidth={"1.8em"}
-                  imgHeight={"1.8em"}
+                  imgWidth={"1.8rem"}
+                  imgHeight={"1.8rem"}
                 />
               )}
             </span>
@@ -245,10 +243,18 @@ function CustomerCardList(props) {
                 primaryTitle={item.ownerName}
                 imageId={item.ownerImageId}
                 imageURL={item.imageURL}
-                imgWidth={"2.1em"}
-                imgHeight={"2.1em"}
+                imgWidth={"1.8rem"}
+                imgHeight={"1.8rem"}
               />
             </span>
+                   </div>
+                   <div className=" flex font-medium flex-col w-24">
+                       
+                       <h4 class=" text-[0.875rem] text-cardBody font-poppins"></h4>
+
+                       <Button type="primary">
+                     <span class="w-20 ext-[0.75rem]" >Convert to Account</span>
+                        </Button>
                    </div>
                                 <div class="flex flex-col w-[3%]">
                     <div class="rounded-full bg-white w-5 h-5 cursor-pointer">

@@ -673,15 +673,16 @@ const AccessForm = (props) => {
           {props.fetchingDepartmentAccess ? (
             <BundleLoader />
           ) : (
-            <TabsWrapper style={{overflow: "auto"}}>
+            <TabsWrapper style={{}}>
+             
 <h1 class=" text-clr font-bold">HR</h1>
 <Spacer />
               <FlexContainer justifyContent="space-around">
             
               <div >
-                <h1>Users</h1>
+                <h1 class="text-sm">Users</h1>
                 <Checkbox indeterminate={indeterminateUser} onChange={onCheckAllUserChange} checked={checkAllUser}>
-                  Check all
+                 <label class="text-xs"> Check all</label>
                 </Checkbox>
                 <Divider />
                 <CheckboxGroup options={plainOptions} value={checkedUserList} onChange={onUserChange} />
@@ -699,9 +700,9 @@ const AccessForm = (props) => {
                 </div> */}
                   <Spacer />
                 <div >
-                  <h1>Locations</h1>
+                  <h1 class="text-sm">Locations</h1>
                   <Checkbox indeterminate={indeterminateLocation} onChange={onCheckAllLocationChange} checked={checkAllLocation}>
-                    Check all
+                  <label class="text-xs"> Check all</label>
                   </Checkbox>
                   <Divider />
                   <CheckboxGroup options={plainOptions} value={checkedLocationList} onChange={onLocationChange} />
@@ -713,9 +714,9 @@ const AccessForm = (props) => {
               <FlexContainer justifyContent="space-around">
             
             <div >
-              <h1>Dashboard</h1>
+              <h1 class="text-sm">Dashboard</h1>
               <Checkbox indeterminate={indeterminateDashboard} onChange={onCheckAllDashboardChange} checked={checkAllDashboard}>
-                Check all
+              <label class="text-xs"> Check all</label>
               </Checkbox>
               <Divider />
               <CheckboxGroup options={dashboardCheckedList} value={checkedDashboardList} onChange={onDashboardChange} />
@@ -724,9 +725,9 @@ const AccessForm = (props) => {
             
                 <Spacer />
               <div >
-                <h1>Settings</h1>
+                <h1 class="text-sm">Settings</h1>
                 <Checkbox indeterminate={indeterminateSettings} onChange={onCheckAllSettingsChange} checked={checkAllSettings}>
-                  Check all
+                <label class="text-xs">  Check all</label>
                 </Checkbox>
                 <Divider />
                 <CheckboxGroup options={settingsCheckedList} value={checkedSettingsList} onChange={onSettingsChange} />
@@ -739,9 +740,9 @@ const AccessForm = (props) => {
               
               {/* Contact */}
               <div >
-                <h1>Mileage</h1>
+                <h1 class="text-sm">Mileage</h1>
                 <Checkbox indeterminate={indeterminateMileage} onChange={onCheckAllMileageChange} checked={checkAllMileage}>
-                  Check all
+                <label class="text-xs">  Check all</label>
                 </Checkbox>
                 <Divider />
                 <CheckboxGroup options={defaultCheckedList} value={checkedMileageList} onChange={onMileageChange} />
@@ -749,9 +750,9 @@ const AccessForm = (props) => {
               </div>
               <Spacer />
               <div >
-                <h1>Expense</h1>
+                <h1 class="text-sm">Expense</h1>
                 <Checkbox indeterminate={indeterminateExpense} onChange={onCheckAllExpenseChange} checked={checkAllExpense}>
-                  Check all
+                <label class="text-xs">  Check all</label>
                 </Checkbox>
                 <Divider />
                 <CheckboxGroup options={defaultCheckedList} value={checkedExpenseList} onChange={onExpenseChange} />
@@ -759,9 +760,9 @@ const AccessForm = (props) => {
               </div>
               <Spacer />
               <div >
-                <h1>Leaves</h1>
+                <h1 class="text-sm">Leaves</h1>
                 <Checkbox indeterminate={indeterminateLeaves} onChange={onCheckAllLeavesChange} checked={checkAllLeaves}>
-                  Check all
+                <label class="text-xs">Check all</label>
                 </Checkbox>
                 <Divider />
                 <CheckboxGroup options={defaultCheckedList} value={checkedLeavesList} onChange={onLeavesChange} />
@@ -769,9 +770,9 @@ const AccessForm = (props) => {
               </div>
               <Spacer />
               <div >
-                <h1>Tasks</h1>
+                <h1 class="text-sm">Tasks</h1>
                 <Checkbox indeterminate={indeterminateTasks} onChange={onCheckAllTasksChange} checked={checkAllTasks}>
-                  Check all
+                <label class="text-xs">Check all</label>
                 </Checkbox>
                 <Divider />
                 <CheckboxGroup options={defaultCheckedList} value={checkedTasksList} onChange={onTasksChange} />
@@ -801,18 +802,18 @@ const AccessForm = (props) => {
 
               
                 <div >
-                  <h1>Customer</h1>
+                  <h1 class="text-sm">Customer</h1>
                   <Checkbox indeterminate={indeterminateCustomer} onChange={onCheckAllCustomerChange} checked={checkAllCustomer}>
-                    Check all
+                  <label class="text-xs">  Check all  </label>
                   </Checkbox>
                   <Divider />
                   <CheckboxGroup options={plainOptions} value={checkedCustomerList} onChange={onCustomerChange} />
                 </div>
                     {/* Contact */}
                     <div >
-                  <h1>Contact</h1>
+                  <h1 class="text-sm">Contact</h1>
                   <Checkbox indeterminate={indeterminateContact} onChange={onCheckAllContactChange} checked={checkAllContact}>
-                    Check all
+                  <label class="text-xs"> Check all</label>
                   </Checkbox>
                   <Divider />
                   <CheckboxGroup options={plainOptions} value={checkedContactList} onChange={onContactChange} />
@@ -825,9 +826,9 @@ const AccessForm = (props) => {
               {/* Opportunity */}
               <FlexContainer justifyContent="space-around">
               <div >
-                  <h1>Opportunity</h1>
+                  <h1 class="text-sm">Opportunity</h1>
                   <Checkbox indeterminate={indeterminateOpportunity} onChange={onCheckAllOpportunityChange} checked={checkAllOpportunity}>
-                    Check all
+                  <label class="text-xs">  Check all </label>
                   </Checkbox>
                   <Divider />
                   <CheckboxGroup options={plainOptions} value={checkedOpportunityList} onChange={onOpportunityChange} />
@@ -835,9 +836,9 @@ const AccessForm = (props) => {
                 </div>
                 <Spacer />
                 <div >
-                  <h1>Leads</h1>
+                  <h1 class="text-sm">Leads</h1>
                   <Checkbox indeterminate={indeterminateLeads} onChange={onCheckAllLeadsChange} checked={checkAllLeads}>
-                    Check all
+                  <label class="text-xs">  Check all </label>
                   </Checkbox>
                   <Divider />
                   <CheckboxGroup options={plainOptions} value={checkedLeadsList} onChange={onLeadsChange} />
@@ -900,6 +901,7 @@ const AccessForm = (props) => {
                 </div> */}
              
                 </FlexContainer>
+                
 <h1 class=" text-clr font-bold">ERP</h1>
                 <Spacer />
               <FlexContainer justifyContent="space-around">
@@ -913,9 +915,9 @@ const AccessForm = (props) => {
 
                 </div> */}
                <div >
-                  <h1>Account</h1>
+                  <h1 class="text-sm">Account</h1>
                   <Checkbox indeterminate={indeterminateAccount} onChange={onCheckAllAccountChange} checked={checkAllAccount}>
-                    Check all
+                  <label class="text-xs">   Check all</label>
                   </Checkbox>
                   <Divider />
                   <CheckboxGroup options={plainOptions} value={checkedAccountList} onChange={onAccountChange} />
@@ -923,9 +925,9 @@ const AccessForm = (props) => {
                 <Spacer />
              
                 <div >
-                  <h1>Order</h1>
+                  <h1 class="text-sm">Order</h1>
                   <Checkbox indeterminate={indeterminateOrder} onChange={onCheckAllOrderChange} checked={checkAllOrder}>
-                    Check all
+                  <label class="text-xs">  Check all</label>
                   </Checkbox>
                   <Divider />
                   <CheckboxGroup options={plainOptions} value={checkedOrderList} onChange={onOrderChange} />
@@ -936,9 +938,9 @@ const AccessForm = (props) => {
                 <FlexContainer justifyContent="space-around">
          
                <div >
-                  <h1>Materials</h1>
+                  <h1 class="text-sm">Materials</h1>
                   <Checkbox indeterminate={indeterminateMaterials} onChange={onCheckAllMaterialsChange} checked={checkAllMaterials}>
-                    Check all
+                  <label class="text-xs">   Check all </label>
                   </Checkbox>
                   <Divider />
                   <CheckboxGroup options={plainOptions} value={checkedMaterialsList} onChange={onMaterialsChange} />
@@ -946,9 +948,9 @@ const AccessForm = (props) => {
                 <Spacer />
              
                 <div >
-                  <h1>Supplier</h1>
+                  <h1 class="text-sm">Supplier</h1>
                   <Checkbox indeterminate={indeterminateSupplier} onChange={onCheckAllSupplierChange} checked={checkAllSupplier}>
-                    Check all
+                  <label class="text-xs">  Check all </label>
                   </Checkbox>
                   <Divider />
                   <CheckboxGroup options={plainOptions} value={checkedSupplierList} onChange={onSupplierChange} />
@@ -959,9 +961,9 @@ const AccessForm = (props) => {
                 <FlexContainer justifyContent="space-around">
          
          <div >
-            <h1>Inventory</h1>
+            <h1 class="text-sm">Inventory</h1>
             <Checkbox indeterminate={indeterminateInventory} onChange={onCheckAllInventoryChange} checked={checkAllInventory}>
-              Check all
+            <label class="text-xs"> Check all </label>
             </Checkbox>
             <Divider />
             <CheckboxGroup options={plainOptions} value={checkedInventoryList} onChange={onInventoryChange} />
@@ -969,9 +971,9 @@ const AccessForm = (props) => {
           <Spacer />
        
           <div >
-            <h1>Refurbish</h1>
+            <h1 class="text-sm">Refurbish</h1>
             <Checkbox indeterminate={indeterminateRefurbish} onChange={onCheckAllRefurbishChange} checked={checkAllRefurbish}>
-              Check all
+            <label class="text-xs"> Check all </label>
             </Checkbox>
             <Divider />
             <CheckboxGroup options={plainOptions} value={checkedRefurbishList} onChange={onRefurbishChange} />

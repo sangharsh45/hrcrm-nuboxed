@@ -46,9 +46,9 @@ class SingleTasks extends Component {
                 </div>
                 <div style={{width:"35%"}}>
                     <TaskConnetToggle
+                        taskType={taskType}
+                        taskTypeId={taskTypeId}
                   taskCheckListInd={taskCheckListInd}
-                      taskType={taskType}
-                      taskTypeId={taskTypeId}
                     />  
                     </div>
                     <div>

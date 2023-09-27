@@ -392,6 +392,7 @@ import DashboardCustomerTab from "./DashboardCustomerTab";
 import StackedClosureChartAll from "./StackedClosureChartAll";
 import FunnelChartAll from "./FunnelChartAll";
 import DashBoardJumpStartDesign from "./Child/JumpStart/DashBoardJumpStartDesign";
+import TaskDashboardTab from "./TaskDashboardTab";
 
 class Dashboard extends Component {
   state = { visible: false };
@@ -452,7 +453,17 @@ class Dashboard extends Component {
             ) : (
               <DashboardJumpstart />
           )}
-           
+             <div style={{ width: "-webkit-fill-available" }}>
+          <FlexContainer flexDirection="column" style={{ display: "block" }}>
+       <FlexContainer justifyContent="space-between" >
+       <TaskDashboardTab
+      viewType={viewType}
+      />
+      
+      </FlexContainer>
+      
+    </FlexContainer>
+    </div>
        <FlexContainer justifyContent="space-between" >
       
                 

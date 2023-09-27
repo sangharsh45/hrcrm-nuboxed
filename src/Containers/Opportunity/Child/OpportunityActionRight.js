@@ -25,7 +25,7 @@ class OpportunityActionRight extends React.Component {
     } = this.props;
     return (
       <div class=" flex items-center">
-         {user.employee_type === "contractor" && user.candiContShareInd === true || user.employee_type === "employee" && user.candiEmpShareInd === true &&(
+         {user.employee_type === "contractor" && user.candiContShareInd === true || user.employee_type === "employee" && user.candiEmpShareInd === true && user.opportunityFullListInd===true &&(
       <OpportunityShareForm/>
          )}
         <Button

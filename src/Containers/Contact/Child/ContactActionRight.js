@@ -27,7 +27,7 @@ class ContactActionRight extends React.Component {
     return (
       <div class=" flex  items-center">
         
-        {this.props.viewType === "table"&&user.employee_type !=="external" ? (
+        {this.props.viewType === "table" && user.contactFullListInd===true && user.employee_type !=="external" ? (
           
           <ContactSharePartnerForm 
           currentPartnerUser={this.props.currentPartnerUser}
@@ -36,21 +36,13 @@ class ContactActionRight extends React.Component {
         
         ) : null}
        
-        {this.props.viewType === "dashboard"&&user.employee_type !=="external" ? (
+        {this.props.viewType === "dashboard"&& user.contactFullListInd===true && user.employee_type !=="external" ? (
           <ContactShareCustomerForm 
           handleDropChange={this.props.handleDropChange}
           currentUser={this.props.currentUser} 
           />
         ) : null}
-        {/* <Button
-          type="primary"
-          default
-          href={`${base_url}/excel/export/user/contact/${userId}`}
-        >
-          Export
-        </Button> */}
        { role == "ADMIN" && (
-        
         <Tooltip placement="left" title="XL">
         <a
         href={`${base_url}/excel/export/user/contact/${userId}`}>

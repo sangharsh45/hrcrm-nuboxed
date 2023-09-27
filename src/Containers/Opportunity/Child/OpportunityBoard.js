@@ -15,6 +15,7 @@ import {
     getProcessStagesForOpportunity
  
 } from "../../Settings/SettingsAction";
+import {getAllOpportunityListByUserId} from "../OpportunityAction"
 //import { getAccounts } from "../../../Account/AccountAction";
 //import { getOpportunityRelatedData } from "../../../Dashboard/DashboardAction";
 //import { opportunitySelector } from "../../OpportunitySelector";
@@ -153,6 +154,7 @@ function OpportunityBoard(props) {
     //debugger;
     // if (!processData) return;
     props.getProcessForOpportunity(props.orgId);
+     props.getAllOpportunityListByUserId(props.userId)
   }, []);
 
   useEffect(() => {
@@ -342,12 +344,12 @@ function OpportunityBoard(props) {
   function dragUpdate() {
     setIsDragging(false);
   }
-  useEffect(() => {
-    if (!userId) return;
-    props.getProcess();
-    props.getOpportunities(userId);
-    props.getAccounts(userId);
-  }, [userId]);
+//   useEffect(() => {
+//     if (!userId) return;
+//     props.getProcess();
+//     props.getOpportunities(userId);
+//     props.getAccounts(userId);
+//   }, [userId]);
 
   function handleProcessClick(item) {
     setCurrentProcess(item);
@@ -490,7 +492,7 @@ const mapStateToProps = ({
 //   fetchingOpportunities: opportunity.fetchingOpportunities,
 //   startDate: dashboard.startDate,
 //   endDate: dashboard.endDate,
-//   userId: auth.userDetails.userId,
+   userId: auth.userDetails.userId,
 //   process: settings.Process,
 //   tradeCurrency: auth.userDetails.tradeCurrency,
 //   opportunities: opportunitySelector(opportunity, account),
@@ -504,7 +506,8 @@ const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
         getProcessForOpportunity,
-        getProcessStagesForOpportunity
+        getProcessStagesForOpportunity,
+        getAllOpportunityListByUserId
     //   updateOpportunityStage,
     //   getOpportunityRelatedData,
     //   getOpportunities,

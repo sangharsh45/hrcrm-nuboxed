@@ -95,7 +95,7 @@ class NoteForm extends Component {
           initialValues={{
             notes: "",
             customerId: customerId ? customerId : "",
-            // type: type ? type : "",
+            userId:userId ? userId:"",
           }}
           onSubmit={(values, { resetForm }) => {
             console.log(
@@ -175,7 +175,7 @@ class NoteForm extends Component {
 const mapStateToProps = ({ auth, team, customer }) => ({
   user: auth.userDetails,
   fetchingNotesListByCustomerId: customer.fetchingNotesListByCustomerId,
-
+  userId: auth.userDetails.userId,
   //   team: team.user,
 });
 
