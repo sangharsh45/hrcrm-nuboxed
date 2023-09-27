@@ -851,12 +851,12 @@ export const getOpportunityPermissionsList = () => (dispath) => {
       });
     });
 };
-export const getAllOpportunityListByUserId = () => (dispatch) => {
+export const getAllOpportunityListByUserId = (userId) => (dispatch) => {
   dispatch({
     type: types.GET_ALL_OPPORTUNITIES_REQUEST,
   });
   axios
-    .get(`${base_url}/opportunities/all-opportunities`, {
+    .get(`${base_url}/opportunityList/${userId}`, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },
@@ -876,6 +876,10 @@ export const getAllOpportunityListByUserId = () => (dispatch) => {
       });
     });
 };
+
+
+
+
 
 //Opportunity PERMISSION SHARE
 export const shareOpportunityPermission = (data, userId,a) => (

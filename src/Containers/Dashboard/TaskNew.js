@@ -23,7 +23,7 @@ import SingleTasks from "../Settings/Task/SingleTasks";
 //   sectorName: Yup.string().required("Input needed !"),
 // });
 
-class Task extends Component {
+class TaskNew extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -107,32 +107,16 @@ class Task extends Component {
   //     });
   // };
   componentDidMount() {
-    const { getTasks } = this.props;
-    console.log();
-    getTasks();
+   
+    this.props.getTasks();
     // this.getLinkedSources();
   }
   render() {
-    const {
-      fetchingTasks,
-      fetchingTasksError,
-      tasks,
-      addingTasks,
-      updatingTasks,
-    } = this.props;
-    const {
-      isTextInputOpen,
-      type,
-      taskType,
-      singleTask,
-      linkedTasks,
-    } = this.state;
-    if (fetchingTasks) return <p>Loading ...</p>;
-    if (fetchingTasksError) return <p>We are unable to load data</p>;
+   console.log("Task1",this.props.tasks)
     return (
       <>
-       
-        {tasks.map((item) => {
+    
+        {this.props.tasks.length&&this.props.tasks.map((item) => {
              return (
         <div class=" flex w-1/2">
                 <div >{item.taskType}</div>
@@ -175,4 +159,15 @@ const mapDispatchToProps = (dispatch) =>
     },
     dispatch
   );
-export default connect(mapStateToProps, mapDispatchToProps)(Task);
+export default connect(mapStateToProps, mapDispatchToProps)(TaskNew);
+
+
+// import React from 'react'
+
+// function TaskNew() {
+//   return (
+//     <div>TaskNew</div>
+//   )
+// }
+
+// export default TaskNew

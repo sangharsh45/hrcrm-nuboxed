@@ -127,9 +127,9 @@ import { MainWrapper } from "../../Components/UI/Elements";
       <YAxis />
       <Tooltip />
       <Legend className="recharts-default-legend"/>
-      <Bar dataKey="OpenRequirements" stackId="a" fill="rgb(0, 192, 239, 0.4)" />
-      <Bar dataKey="Selected" stackId="a" fill="#ff715885" />
-      <Bar dataKey="Onboarded" stackId="a" fill="orange" /> 
+      <Bar dataKey="hours" stackId="a" fill="rgb(0, 192, 239, 0.4)" />
+      {/* <Bar dataKey="Selected" stackId="a" fill="#ff715885" />
+      <Bar dataKey="Onboarded" stackId="a" fill="orange" />  */}
     </BarChart>
     </MainWrapper>
     </>
@@ -159,4 +159,30 @@ const mapDispatchToProps = (dispatch) =>
   );
 
 export default connect(mapStateToProps, mapDispatchToProps)(StackedClosureChart);
+
+
+// import React from 'react';
+// import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
+// const data = [
+//   { name: 'Hour 1', hoursWorked: 4 },
+//   { name: 'Hour 2', hoursWorked: 7 },
+//   { name: 'Hour 3', hoursWorked: 9 },
+//   { name: 'Hour 4', hoursWorked: 4 },
+//   { name: 'Hour 5', hoursWorked: 6 },
+// ];
+// const StackedBarChart = ({  }) => {
+//   return (
+//     <BarChart width={600} height={400} data={data}>
+//       <CartesianGrid strokeDasharray="3 3" />
+//       <XAxis dataKey="name" />
+//       <YAxis />
+//       <Tooltip />
+//       <Legend />
+//       <Bar dataKey="hoursWorked" stackId="a" fill="#8884d8" />
+//     </BarChart>
+//   );
+// };
+
+// export default StackedBarChart;
+
 
