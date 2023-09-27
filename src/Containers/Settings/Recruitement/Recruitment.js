@@ -17,12 +17,9 @@ import NotificationsTab from "./Child/Notification/NotificationsTab";
 import ApprovalTab from "./Child/Approval/ApprovalTab";
 import SettingsHolidayTab from "./Child/Holiday/SettingsHolidayTab";
 import Rules from "../../Rules/Rules";
-<<<<<<< HEAD
 import ConfigureTab from "./Child/Configure/ConfigureTab";
 import LeadsTab from "../../Rules/Child/RulesTab/LeadsTab";
-=======
 import LeadsConfigTab from "../LeadsConfig/LeadsConfigTab";
->>>>>>> 07851cbdbe8b0a5b72784c1e4b992921f02343a6
 
 const RecruitmentActionLeft = lazy(() => import("./RecruitmentActionLeft"));
 
