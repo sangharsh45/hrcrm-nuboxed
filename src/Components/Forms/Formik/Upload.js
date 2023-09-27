@@ -88,7 +88,7 @@ class Upload1 extends React.Component {
           accept=".jpeg,.png,.jpg"
           beforeUpload={this.beforeUpload}
           customRequest={this.handleImageUpload}
-          listType="picture-card"
+          // listType="picture-card"
           fileList={fileList}
           onPreview={this.handlePreview}
 
@@ -96,13 +96,13 @@ class Upload1 extends React.Component {
         >
           {fileList.length >= 1 ? null : uploadButton}
         </Upload>
-        <StyledModal
+        {/* <StyledModal
           visible={previewVisible}
           footer={null}
           onCancel={this.handleCancel}
         >
           <img alt="example" style={{ width: "100%" }} src={previewImage} />
-        </StyledModal>
+        </StyledModal> */}
       </div>
     );
   }
