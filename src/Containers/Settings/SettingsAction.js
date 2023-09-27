@@ -139,7 +139,7 @@ export const LinkProcessPublish = (data, cb,) => (dispatch) => {
 };
 
 
-export const addTaskForRecruiter = (data, orgId, cb) => (
+export const addTaskForRecruiter = (data, taskId, cb) => (
   dispatch
 ) => {
   dispatch({
@@ -154,7 +154,7 @@ export const addTaskForRecruiter = (data, orgId, cb) => (
     })
     .then((res) => {
       console.log(res);
-       dispatch(getTaskForWorkflow());
+       dispatch(getTaskForWorkflow(taskId));
       dispatch({
         type: types.ADD_TASK_FOR_RECRUIT_SUCCESS,
         payload: res.data,
@@ -1100,7 +1100,7 @@ export const getMileageDetails = (orgId) => (dispatch) => {
 };
 
 export const updateMileage = (data,orgId) => (dispatch, getState) => {
-  const orgId = getState().auth.userDetails.orgId;
+  // const orgId = getState().auth.userDetails.orgId;
   dispatch({ type: types.UPDATE_MILEAGE_REQUEST });
 
   axios
@@ -1111,7 +1111,7 @@ export const updateMileage = (data,orgId) => (dispatch, getState) => {
     })
     .then((res) => {
       console.log(res);
-      // dispatch(getMileageDetails(orgId));
+      dispatch(getMileageDetails(orgId));
       dispatch({
         type: types.UPDATE_MILEAGE_SUCCESS,
         payload: res.data,
@@ -3402,13 +3402,13 @@ export const getTaskWorkflowStagesForRecruit = (taskId) => (
 };
 
 
-export const getTaskForWorkflow = (organizationId) => (dispatch) => {
+export const getTaskForWorkflow = (taskId) => (dispatch) => {
   // debugger;
   dispatch({
     type: types.GET_TASK_FOR_WORKFLOW_REQUEST,
   });
   axios
-    .get(`${base_url}/`, {
+    .get(`${base_url}/task/subTask/${taskId}`, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },

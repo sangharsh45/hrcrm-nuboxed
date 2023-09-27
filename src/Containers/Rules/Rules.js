@@ -49,7 +49,7 @@ class Rules extends Component {
                 <LeadsTab />
               </Suspense>
             </TabPane>
-            <TabPane
+            {/* <TabPane
               tab={
                 <>
                   <span>
@@ -65,7 +65,7 @@ class Rules extends Component {
                 {" "}
                 <MileageTab />
               </Suspense>
-            </TabPane>
+            </TabPane> */}
            
           </StyledTabs>
         </TabsWrapper>

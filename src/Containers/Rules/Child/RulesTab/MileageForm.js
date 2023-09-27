@@ -19,9 +19,20 @@ import { StyledTabs } from "../../../../Components/UI/Antd";
 import moment from "moment";
 const TabPane = StyledTabs.TabPane;
 function MileageForm(props) {
+
+  if (props.countries.length === props.mileageData.length) {
+    for (let i = 0; i < props.countries.length; i++) {
+      
+      props.countries[i].mileageRate = props.mileageData[i].mileageRate;
+    }
+  } else {
+    console.error("Arrays data and data1 must have the same length for merging.");
+  }
+  
+  console.log(props.countries);
   const [visible, setVisible] = useState(false);
   const [inputValues, setInputValues] = useState(
-    Object.fromEntries(props.countries.map(item => [item.country_id,'0']))
+    Object.fromEntries(props.countries.map(item => [item.country_id,item.mileageRate]))
   );
 
   const handleChange = (checked) => {
@@ -51,7 +62,7 @@ function MileageForm(props) {
           mileageRate: inputValues[item.country_id
           ]
         }));
-        props.updateMileage(countryData);
+        props.updateMileage(countryData,props.orgId);
         
         console.log(countryData);
        

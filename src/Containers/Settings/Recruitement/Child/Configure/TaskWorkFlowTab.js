@@ -19,7 +19,7 @@ import {
   getTaskForWorkflow,
    updateTaskStageForRecruit,
   addTaskStageForRecruit,
-  getTaskStagesForRecruit,
+  //  getTaskStagesForRecruit,
   deleteTaskData,
   updateTaskNameForRecruit
 } from "../../../SettingsAction";
@@ -68,7 +68,7 @@ class TaskWorkflowTab extends Component {
   }
 
   componentDidMount() {
-    this.props.getTaskForWorkflow();
+    this.props.getTaskForWorkflow(this.props.taskId);
   }
   handleTabChange = (key) => {
     this.setState({ activeKey: key });
@@ -96,7 +96,7 @@ class TaskWorkflowTab extends Component {
     this.setState({
       currentProcess: item,
     });
-    this.props.getTaskStagesForRecruit(item.taskChecklistId);
+    // this.props.getTaskStagesForRecruit(item.taskChecklistId);
   };
 
   //   handleModalClick = () => {
@@ -131,7 +131,7 @@ class TaskWorkflowTab extends Component {
     this.setState({ [name]: value });
   handleCallBack1 = (status, data) => {
     if (status === "Success") {
-       this.props.getTaskForWorkflow();
+       this.props.getTaskForWorkflow(this.props.taskId);
       this.setState({ currentProcess: data });
     } else {
       alert("error");
@@ -182,7 +182,7 @@ class TaskWorkflowTab extends Component {
         currentProcess: { taskChecklistId },
       } = this.state;
 
-      this.props.getTaskStagesForRecruit(taskChecklistId);
+      // this.props.getTaskStagesForRecruit(taskChecklistId);
     } else {
       alert("error");
     }
@@ -503,7 +503,7 @@ const mapDispatchToProps = (dispatch) =>
       getTaskForWorkflow,
        updateTaskStageForRecruit,
       addTaskStageForRecruit,
-      getTaskStagesForRecruit,
+      // getTaskStagesForRecruit,
       deleteTaskData,
        updateTaskNameForRecruit
     },

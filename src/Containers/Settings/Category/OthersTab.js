@@ -33,7 +33,7 @@ class OthersTab extends Component {
     return (
       <>
         <FlexContainer flexWrap="nowrap">
-        <div style= {{width:"46%"}}>
+        <div style= {{width:"70%"}}>
           <TabsWrapper>
             <StyledTabs defaultActiveKey="0" onChange={this.handleTabChange}>
              

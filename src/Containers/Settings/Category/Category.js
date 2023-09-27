@@ -6,7 +6,7 @@ import { TabsWrapper } from "../../../Components/UI/Layout";
 import { MainWrapper, FlexContainer } from "../../../Components/UI/Layout";
 import { connect } from "react-redux";
 import AccessibilityIcon from '@mui/icons-material/Accessibility';
-import Sector from "../Sectors/Sectors";
+
 import { FileOutlined } from "@ant-design/icons";
 import Designation from "../Designation/Designation";
 import Department from "../Department/Department";
@@ -39,7 +39,7 @@ class Category extends Component {
           <div style={{ width: "70%" }}>
             <TabsWrapper>
               <StyledTabs defaultActiveKey="0" onChange={this.handleTabChange}>
-                <TabPane
+                {/* <TabPane
                   tab={
                     <>
                     <FactoryIcon  />
@@ -53,7 +53,7 @@ class Category extends Component {
                   <Suspense>
                     <Sector />
                   </Suspense>
-                </TabPane>
+                </TabPane> */}
                <TabPane
                   tab={
                     <>
@@ -93,7 +93,7 @@ class Category extends Component {
                       // icon={solid("user-tie")}
                        />
 
-                    <span style={{ marginLeft: "0.25em" }}>Role (Talent)</span>
+                    <span style={{ marginLeft: "0.25em" }}>Role (External)</span>
                   </>
                 }
                 key="6"

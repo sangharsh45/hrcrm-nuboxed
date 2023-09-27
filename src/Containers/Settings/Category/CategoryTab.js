@@ -1,6 +1,5 @@
 import React, { lazy, Suspense, useState, useEffect, useMemo } from "react";
 import { bindActionCreators } from "redux";
-import { FormattedMessage } from "react-intl";
 import { StyledTabs } from "../../../Components/UI/Antd";
 import { TabsWrapper } from "../../../Components/UI/Layout";
 import { MainWrapper, FlexContainer } from "../../../Components/UI/Layout";
@@ -10,7 +9,9 @@ import Category from "./Category";
 import CategoryActionLeft from "./CategoryActionLeft";
 import CategoryActionRight from "./CategoryActionRight";
 import OthersTab from "./OthersTab";
+import Sector from "../Sectors/Sectors";
 import AssessmentTab from "./Assessment/AssessmentTab";
+import CustomerSectorTab from "./CustomerSectorTab";
 const TabPane = StyledTabs.TabPane;
 
 function CategoryTab (props) {
@@ -18,7 +19,7 @@ function CategoryTab (props) {
         const name = [
 
           {
-            rulesName: "Sector",
+            rulesName: "Role",
             ruleId: "1",
             component:<Category/>,
           },
@@ -28,15 +29,20 @@ function CategoryTab (props) {
               component:   <CategoryActivity/>,
             },
             {
-              rulesName: "Others",
+              rulesName: "Corporate",
               ruleId: "3",
               component: <OthersTab />,
             },
             {
-              rulesName: "Assessment",
+              rulesName: "Customer",
               ruleId: "4",
-              component:<AssessmentTab/>,
+              component:<CustomerSectorTab />,
             },
+            // {
+            //   rulesName: "Assessment",
+            //   ruleId: "4",
+            //   component:<AssessmentTab/>,
+            // },
 
           ];
           const [rules, setRules] = useState(name);
