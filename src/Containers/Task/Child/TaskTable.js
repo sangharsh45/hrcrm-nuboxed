@@ -196,10 +196,7 @@ const TaskTable = (props) => {
       title: "",
       width: "2%",
     },
-    {
-      title: "",
-      width: "2%",
-    },
+ 
 
     {
       title: "",
@@ -245,6 +242,10 @@ const TaskTable = (props) => {
                   </div>
                 );
       },
+    },
+    {
+      title: "",
+      width: "2%",
     },
     {
       title: "Type",
