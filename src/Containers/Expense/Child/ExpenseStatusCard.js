@@ -21,13 +21,13 @@ function ExpenseStatusCard(props) {
     return (
       <>
        <div className="flex justify-arround">
-        <div className="w-[28rem]">
+        <div className="w-[26rem]">
           <ExpensePendingStatusCard/>
         </div>
-        <div className="w-[28rem]">
+        <div className="w-[26rem]">
           <ExpenseApprovedStatusCard/>
         </div>
-        <div className="w-[28rem]">
+        <div className="w-[26rem]">
           <ExpenseRejectedStatusCard/>
         </div>
        </div>
