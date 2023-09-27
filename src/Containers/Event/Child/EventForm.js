@@ -567,7 +567,7 @@ const {
                     inlineLabel
                   />
                   <Spacer />
-                  <div class=" flex justify-between">
+                  {/* <div class=" flex justify-between">
                     <div class=" w-1/2 font-bold">
                       <div class=" flex justify-between">
                         <div>
@@ -606,7 +606,7 @@ const {
                         </div>
                       ) : null}
                     </div>
-                  </div>
+                  </div> */}
                 </div>
               </div>
               <Spacer />

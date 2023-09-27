@@ -683,13 +683,30 @@ function CallTable(props) {
               <p>Subject</p><p> {item.callPurpose}</p>
               </div>
               <div class="flex  flex-col w-16">
-              <p>Contact</p><p> {item.contactName}</p>
+              <p>Contact</p>
+              <MultiAvatar2
+                    primaryTitle={item.contactName}
+                    // imageId={item.ownerImageId}
+                    imageURL={item.imageURL}
+                    imgWidth={"1.8em"}
+                    imgHeight={"1.8em"}
+                  />
+              
+              {/* <p> {item.contactName}</p> */}
               </div>
               <div class="flex  flex-col w-48">
-              <p>Date</p><p> {moment(item.startDate).format("LLL")}</p>
+              <p>Date</p><p> {moment(item.startDate).format("llll")}</p>
               </div>
               <div class="flex  flex-col w-16">
-              <p>Team </p><p>{item.candidateName}</p>
+              <p>Team </p>
+              <MultiAvatar2
+                    primaryTitle={item.candidateName}
+                    //imageId={item.ownerImageId}
+                    imageURL={item.imageURL}
+                    imgWidth={"1.8em"}
+                    imgHeight={"1.8em"}
+                  />
+             
               </div>
               <div class="flex  flex-col w-16">
               <p>Included</p>
@@ -719,17 +736,31 @@ function CallTable(props) {
               <p>Rating</p><p> {item.rating > 0 ? item.rating : "Not Rated"}</p>
               </div>
               <div class="flex  flex-col w-24">
-              <p>Assigned To</p><p> {item.assignedTo || "Unassigned"}</p>
+              <p>Assigned To</p>
+              <MultiAvatar2
+                    primaryTitle={item.assignedTo}
+                   // imageId={item.ownerImageId}
+                    imageURL={item.imageURL}
+                    imgWidth={"1.8em"}
+                    imgHeight={"1.8em"}
+                  />
+              {/* <p> {item.assignedTo || "Unassigned"}</p> */}
               </div>
               <div class="flex  flex-col w-16">
-              <p>Owner</p><p> {item.owner || "Unknown"}</p>
+              <p>Owner</p>
+              <MultiAvatar2
+                    primaryTitle={item.woner}
+                    //imageId={item.ownerImageId}
+                    imageURL={item.imageURL}
+                    imgWidth={"1.8em"}
+                    imgHeight={"1.8em"}
+                  />
+              {/* <p> {item.woner || "Unknown"}</p> */}
               </div>
-              <Button
-                type="danger"
+              <DeleteIcon  type="delete" style={{ cursor: "pointer",color:"red",fontSize:"1rem" }} 
                 onClick={() => deleteCall(item.callId, employeeId)}
-              >
-                Delete
-              </Button>
+              />
+              
             </div>
           ))}
         </OnlyWrapCard>

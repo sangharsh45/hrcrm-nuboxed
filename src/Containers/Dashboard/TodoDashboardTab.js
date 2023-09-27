@@ -61,12 +61,12 @@ class TodoDashboardTab extends Component {
               tab={
                 <>
                   <ListAltIcon style={{fontSize:"1.1rem"}}/>
-                  {/* <Badge
-                count={props.opportunityRecord.Event}
+                  <Badge
+                count={this.props.todosCount.todo}
                 overflowCount={999}
-              >  */}
+              > 
                <span class=" ml-1">ToDo</span>
-               {/* </Badge> */}
+               </Badge>
 
                   {activeKey === "1" && (
                     <>

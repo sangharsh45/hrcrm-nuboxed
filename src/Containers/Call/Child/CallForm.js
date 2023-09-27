@@ -753,7 +753,7 @@ function CallForm(props) {
                   </div>
                  
                   <Spacer  />
-                  <div class=" flex justify-between" >
+                  {/* <div class=" flex justify-between" >
                     <div 
                     class=" w-1/2 font-bold">
                     <div class=" flex justify-between" >
@@ -793,7 +793,7 @@ function CallForm(props) {
                         </div>
                       ) : null}
                     </div>
-                  </div>
+                  </div> */}
                 </div>
               </div>
               <Spacer  />

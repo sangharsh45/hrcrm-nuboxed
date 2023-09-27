@@ -1,16 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { FormattedMessage } from "react-intl";
-import { StyledTable } from "../../../Components/UI/Antd";
-import { Icon, Tooltip } from "antd";
-import { getExpenseById,handleExpenseVoucherIdDrawer,getPendingExpense } from "../ExpenseAction";
-import { BundleLoader } from "../../../Components/Placeholder";
+import {  Tooltip } from "antd";
+import { getExpenseById,handleExpenseVoucherIdDrawer,getPendingExpense,deleteExpense } from "../ExpenseAction";
+import { DeleteOutlined, } from "@ant-design/icons";
 import { OnlyWrapCard } from '../../../Components/UI/Layout'
-import styled from 'styled-components';
 import dayjs from "dayjs";
-import { CurrencySymbol } from "../../../Components/Common";
-import APIFailed from "../../../Helpers/ErrorBoundary/APIFailed";
 import ExpenseVoucherIdDrawer from "./ExpenseVoucherIdDrawer";
 import Expense from "../Expense";
 
@@ -120,9 +115,18 @@ function ExpensePendingStatusCard(props) {
                                       € {item.amount}
                                   </h4>
                               </div>
-                             
+                              <Tooltip title="Delete">
+              <DeleteOutlined
+                type="delete"
+                style={{ cursor: "pointer" }}
+                onClick={() => {
+                props.deleteExpense(item.voucherId);
+                  
+                }}
+              />
+            </Tooltip>
                         </div>
-
+              
                         </div>
                     )
                 })}
@@ -153,7 +157,8 @@ const mapDispatchToProps = (dispatch) =>
     {
       getExpenseById,
       handleExpenseVoucherIdDrawer,
-      getPendingExpense
+      getPendingExpense,
+      deleteExpense
     },
     dispatch
   );
