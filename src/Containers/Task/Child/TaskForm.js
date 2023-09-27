@@ -239,12 +239,12 @@ class TaskForm extends Component {
       };
     });
 
-    const TaskOption = this.props.tasks.map((item) => {
-      return {
-        label: item.taskType,
-        value: item.taskTypeId,
-      };
-    });
+    // const TaskOption = this.props.tasks.map((item) => {
+    //   return {
+    //     label: item.taskType,
+    //     value: item.taskTypeId,
+    //   };
+    // });
 
     return (
       <>
@@ -446,9 +446,9 @@ class TaskForm extends Component {
 
                       <Field
                         name="taskTypeId"
-                        component={SelectComponent}
+                        // component={SelectComponent}
                         value={values.taskTypeId}
-                        options={Array.isArray(TaskOption) ? TaskOption : []}
+                        // options={Array.isArray(TaskOption) ? TaskOption : []}
                       />
                     </div>
                   

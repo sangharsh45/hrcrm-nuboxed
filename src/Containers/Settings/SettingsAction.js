@@ -147,7 +147,7 @@ export const addTaskForRecruiter = (data, orgId, cb) => (
   });
 
   axios
-    .post(`${base_url}/category/task/checklist/save`, data, {
+    .post(`${base_url}/task/subTask`, data, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },
