@@ -11,6 +11,8 @@ import {
   setOpportunityViewType,
 } from "./OpportunityAction";
 
+import OpportunityBoard from "./Child/OpportunityBoard"
+
 const OpportunityCardView = lazy(() => import("./OpportunityCardView"));
 const OpportunityMap = lazy(() => import("./OpportunityMap"));
 const OpportunityHeader = lazy(() => import("./Child/OpportunityHeader"));
@@ -71,6 +73,8 @@ class Opportunity extends Component {
                     <OpportunityMap/> :
              this.props.viewType === "card" ?
              <OpportunityCardView/> :
+             this.props.viewType === "stage" ?
+             <OpportunityBoard/>:
             null}
         </Suspense>
       </React.Fragment>

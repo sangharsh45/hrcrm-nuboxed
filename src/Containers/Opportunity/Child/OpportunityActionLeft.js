@@ -15,7 +15,7 @@ import {
   getcloseRecords,
   getlostRecords,
 } from "../OpportunityAction";
-import { StopTwoTone } from "@ant-design/icons";
+import { StopTwoTone, TableOutlined } from "@ant-design/icons";
 import { Input } from "antd";
 
 const Option = StyledSelect.Option;
@@ -148,6 +148,27 @@ const OpportunityActionLeft = (props) => {
           </span>
         </Badge>
       </Tooltip>
+
+
+      <Tooltip
+          title={
+            <FormattedMessage id="app.stageview" defaultMessage="Stage View" />
+          }
+        >
+          {/*<TableOutlined*/}
+          <span
+            style={{
+              fontSize: "1.56em",
+              marginRight: "0.3rem",
+              color: props.viewType === "stage" && "#1890ff",
+            }}
+            // iconType="table"
+            tooltipTitle="Stage View"
+            onClick={() => props.setOpportunityViewType("stage")}
+          >
+           <TableOutlined/>
+          </span>
+        </Tooltip>
 
       {/* <Tooltip
         title={
