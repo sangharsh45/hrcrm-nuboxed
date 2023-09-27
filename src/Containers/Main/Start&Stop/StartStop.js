@@ -1,60 +1,67 @@
-
 import { Button, Popconfirm } from "antd";
-import React, { useEffect,useState } from "react";
+import React, { useState } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import {addAttendence} from "../../Customer/CustomerAction"
+import { addAttendence } from "../../Customer/CustomerAction";
 
 function StartStop(props) {
+  const [state, setState] = useState(false);
 
-    const [state,setState]=useState(false);
-    
-    const toggle =() => {
-        setState(!state);
-        let data = {
-          userId:props.userId
-         
-        }
-        props.addAttendence(data)
+  const toggle = () => {
+    if (state) {
+      // If the current state is true, it means we're stopping attendance
+      let data = {
+        userId: props.userId,
+        startInd: false, // Set startInd to false when stopping attendance
+      };
+      props.addAttendence(data);
+    } else {
+      // If the current state is false, it means we're starting attendance
+      let data = {
+        userId: props.userId,
+        startInd: true, // Set startInd to true when starting attendance
+      };
+      props.addAttendence(data);
     }
-    
+
+    setState(!state);
+  };
 
   return (
     <div>
       <Popconfirm
-      title="Are you sure you want to start/stop?"
-      onConfirm={toggle}
-      okText="Yes"
-      cancelText="No"
-    >
-      
-      <Button type="primary" htmlType="submit"
-          style={{backgroundColor:state ?"#ff7158bf" :"#77dd77"}}
-         >
-        {state ? "Stop" : "Start"}
-      </Button>
-    </Popconfirm>
-    
+        title="Are you sure you want to start/stop?"
+        onConfirm={toggle}
+        onCancel={toggle} // Add onCancel handler to handle the cancel action
+        okText="Yes"
+        cancelText="No"
+      >
+        <Button
+          type="primary"
+          htmlType="submit"
+          style={{ backgroundColor: state ? "#ff7158bf" : "#77dd77" }}
+        >
+          {state ? "Stop" : "Start"}
+        </Button>
+      </Popconfirm>
     </div>
   );
 }
-const mapStateToProps = ({ customer,auth }) => ({
-  userId:auth.userDetails.userId
- 
+
+const mapStateToProps = ({ customer, auth }) => ({
+  userId: auth.userDetails.userId,
 });
+
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
-      addAttendence
-      
+      addAttendence,
     },
     dispatch
   );
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(StartStop); 
+export default connect(mapStateToProps, mapDispatchToProps)(StartStop);
+
 
 // import React from 'react';
 // import ReactDOM from 'react-dom';

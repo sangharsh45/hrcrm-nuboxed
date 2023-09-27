@@ -154,7 +154,7 @@ export const addTaskForRecruiter = (data, orgId, cb) => (
     })
     .then((res) => {
       console.log(res);
-       dispatch(getTaskForRecruit());
+       dispatch(getTaskForWorkflow());
       dispatch({
         type: types.ADD_TASK_FOR_RECRUIT_SUCCESS,
         payload: res.data,
@@ -938,11 +938,12 @@ export const addLeaves = (data,countryId) => (dispatch) => {
     .then((res) => {
       console.log(res);
       dispatch(getLeavesDetails(countryId));
+      message.success("Data has been Updated successfully!");
       dispatch({
         type: types.ADD_LEAVES_SUCCESS,
         payload: res.data,
       });
-      // cb && cb("Success");
+  
     })
     .catch((err) => {
       console.log(err);
@@ -1098,7 +1099,7 @@ export const getMileageDetails = (orgId) => (dispatch) => {
     });
 };
 
-export const updateMileage = (data) => (dispatch, getState) => {
+export const updateMileage = (data,orgId) => (dispatch, getState) => {
   const orgId = getState().auth.userDetails.orgId;
   dispatch({ type: types.UPDATE_MILEAGE_REQUEST });
 
@@ -1110,7 +1111,7 @@ export const updateMileage = (data) => (dispatch, getState) => {
     })
     .then((res) => {
       console.log(res);
-      dispatch(getMileageDetails(orgId));
+      // dispatch(getMileageDetails(orgId));
       dispatch({
         type: types.UPDATE_MILEAGE_SUCCESS,
         payload: res.data,

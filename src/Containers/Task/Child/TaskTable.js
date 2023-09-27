@@ -196,6 +196,10 @@ const TaskTable = (props) => {
       title: "",
       width: "2%",
     },
+    {
+      title: "",
+      width: "2%",
+    },
 
     {
       title: "",
