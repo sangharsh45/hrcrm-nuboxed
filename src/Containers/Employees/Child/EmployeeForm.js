@@ -557,7 +557,9 @@ class EmployeeForm extends Component {
                          <Spacer/>
                       <div class=" flex justify-between" >
                       <div class=" w-w48">
-                      <select onChange={this.handleCountryChange}>
+                      <select 
+                        style={{ border: "0.06em solid #aaa" }}
+                      onChange={this.handleCountryChange}>
           <option value="">Select Work Place</option>
           {this.props.countries.map((item, index) => (
             <option key={index} value={item.country_name}>
@@ -584,8 +586,10 @@ class EmployeeForm extends Component {
                         inlineLabel
                       /> */}
                     </div>
+             
                     <div class="w-w47.5">
                     <select
+                 style={{ border: "0.06em solid #aaa" }}
                       onChange={this.handleLocationChange}
                     >
           <option value="">Select location</option>
