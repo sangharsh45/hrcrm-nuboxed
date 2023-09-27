@@ -211,6 +211,7 @@ class Todo extends Component {
    
       }}
       > */}
+      <div style={{ height: "50vh", overflow: "auto" }}>
 
         <TimeInterval
           times={this.props.dateTodoRangeList}
@@ -262,7 +263,7 @@ class Todo extends Component {
 
                       >
 
-                        <Rate
+                        {/* <Rate
                           allowHalf
                           style={{ color: "orange" }}
                           tooltips={desc}
@@ -272,7 +273,7 @@ class Todo extends Component {
                           value={`${todo.rating} `}
                           title={text}
 
-                        />
+                        /> */}
                       </Button>
                     </FlexContainer>
                   </Popconfirm>
@@ -288,7 +289,7 @@ class Todo extends Component {
         </FlexContainer>
 
 
-
+</div>
         {/* </MainWrapper> */}
       </>
     );
