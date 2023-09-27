@@ -329,7 +329,7 @@ function EventTable (props) {
           <FormattedMessage id="app.assignedTo" defaultMessage="Assigned To" />
         ),
         dataIndex: "assignedToName",
-        width: "9%",
+        width: "10%",
         filters: assignToTypeOption,
         onFilter: (value, record) => {
           return record.assignedTo === value;
