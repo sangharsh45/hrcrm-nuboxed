@@ -15,6 +15,7 @@ import { Tooltip, Input, Button, Select, Menu, Dropdown, Progress } from "antd";
 import { FlexContainer, MainWrapper, ResponsiveCard } from "../../../../Components/UI/Layout";
 import { CurrencySymbol,Link } from "../../../../Components/Common";
 import { CheckCircleTwoTone, StopTwoTone } from "@ant-design/icons";
+import { BundleLoader } from "../../../../Components/Placeholder";
 import { StyledTable, StyledPopconfirm } from "../../../../Components/UI/Antd";
 import { MultiAvatar, MultiAvatar2, SubTitle,Title } from "../../../../Components/UI/Elements";
 import {
@@ -103,9 +104,12 @@ function OpportunityCardList(props) {
     handleUpdateOpportunityModal,
     updateOpportunityModal,
     deleteOpportunityData,
-    history
+    history,
+    fetchingOpportunity
   } = props;
-
+  if (fetchingOpportunity) {
+    return <BundleLoader />;
+  }
 
   return (
     <>
@@ -144,8 +148,8 @@ function OpportunityCardList(props) {
               primaryTitle={item.opportunityName}
               imageId={item.imageId}
               // imageURL={imageURL}
-              imgHeight={40}
-              imgWidth={40}
+              imgWidth={"1.8rem"}
+                imgHeight={"1.8rem"}
             />
           </FlexContainer>
           &nbsp;
@@ -195,18 +199,9 @@ title={`${item.opportunityName}`}>
             &nbsp;{  item.proposalAmount || ""}
           </SubTitle>
           </div>
-        <div>
-        <SubTitle>
-{item.contactName === null ? "None" :
-<MultiAvatar2
-  primaryTitle={item.contactName}
-  imageId={item.imageId}
-   imageURL={item.imageURL}
-  imgWidth={"1.8em"}
-  imgHeight={"1.8em"}
-/>
-}
-</SubTitle>
+        <div>   
+{item.Customer}
+
         </div>
 <div>
 <span>
@@ -327,7 +322,7 @@ imgHeight={"1.8em"}
             </>
     
 
-          <div style={{ marginTop: "4%" }}>
+          {/* <div style={{ marginTop: "4%" }}>
            
           <Tooltip title='Click to Close'>
          
@@ -371,7 +366,7 @@ imgHeight={"1.8em"}
               <MonitorHeartIcon style={{fontSize:"0.8rem"  ,color: "#df9697"}}/>
                )}
             </span>
-          </div>
+          </div> */}
         </FlexContainer>
         <FlexContainer
           style={{ width: "100%", paddingLeft: "0.5em", marginTop: "-0.18em" }}
@@ -383,7 +378,7 @@ imgHeight={"1.8em"}
               alignSelf="flex-end"
               alignItems="center"
             >
-              <h4>{moment(item.startDate).format("ll")}</h4>
+              {/* <h4>{moment(item.startDate).format("ll")}</h4> */}
               <div>
               {item.approveInd&&item.opportunityOwner ? (
 <>
@@ -614,17 +609,17 @@ const CardWrapper = styled.div`
 `
 const CardElement = styled.div`
  
-border-radius: 0.75rem;
-    border: 3px solid #EEEEEE;
-    background-color: rgb(255,255,255);
-    box-shadow: 0 0.25em 0.62em #aaa;
-    height: 8rem;
-    color: rgb(68,68,68);
-    margin: 1em;
-    padding: 0.2rem;
-    width: 20vw;
-    display: flex;
-    flex-direction: column;
+border-radius: 0.35rem;
+border: 3px solid #EEEEEE;
+background-color: rgb(255,255,255);
+box-shadow: 0 0.25em 0.62em #aaa;
+height: 7rem;
+color: rgb(68,68,68);
+margin: 1em;
+padding: 0.2rem;
+width: 20vw;
+display: flex;
+flex-direction: column;
   @media only screen and (max-width: 600px) {
     width: 100%;
     

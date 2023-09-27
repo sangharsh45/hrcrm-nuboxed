@@ -48,7 +48,7 @@ function TaskConnetToggle(props) {
           cancelText="No"
         >
           <Switch
-            className="toggle-clr"
+            // className="toggle-clr"
             checked={props.taskCheckListInd || toggle}
             isLoading={true}
             style={{width: "9em"}}

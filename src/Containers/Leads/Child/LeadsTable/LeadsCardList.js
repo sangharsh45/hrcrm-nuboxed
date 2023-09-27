@@ -33,6 +33,8 @@ import AddLeadsEmailDrawerModal from "../UpdateLeads/AddLeadsEmailDrawerModal";
 import { BundleLoader } from "../../../../Components/Placeholder";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
 
+const ButtonGroup = Button.Group;
+
 const LeadsCardList = (props) => {
 
   useEffect(() => {
@@ -77,6 +79,7 @@ const LeadsCardList = (props) => {
   }, [props.sales]);
 
   const { fetchingLeads,leadsAllData } = props;
+
   if (fetchingLeads) {
     return <BundleLoader />;
   }
@@ -133,8 +136,8 @@ const LeadsCardList = (props) => {
                                             <h4 class=" text-[0.875rem] text-cardBody font-poppins">
                                             Name
                                             </h4>
-                                            <h4 class="text-[0.75rem] text-blue-500 text-cardBody font-poppins cursor-pointer">
-                                                
+                                            <h4 class="text-[0.75rem] text-cardBody font-poppins cursor-pointer">
+                                           {item.name}     
          {/* <Link
            toUrl={`leads/${item.leadsId}`}
           title={`${item.name}`}
@@ -167,7 +170,7 @@ const LeadsCardList = (props) => {
                            <h4 class=" text-[0.75rem] text-cardBody font-poppins">   
                            <Link
            toUrl={`leads/${item.leadsId}`}
-          title={`${item.name}`}
+          title={`${item.companyName}`}
         >{item.name}</Link>
                            </h4>
                        </div>
@@ -226,8 +229,8 @@ const LeadsCardList = (props) => {
                 primaryTitle={item.ownerName}
                 imageId={item.ownerImageId}
                 imageURL={item.imageURL}
-                imgWidth={"2.1em"}
-                imgHeight={"2.1em"}
+                imgWidth={"1.8rem"}
+                imgHeight={"1.8rem"}
               />
             </span>
                    </div>
@@ -324,6 +327,71 @@ const LeadsCardList = (props) => {
         
             </div>
                       </div>    
+                      <div class="flex flex-col w-[2%]">
+
+                 <div>
+                 <ButtonGroup>
+                 <RoleButton
+                  type="Warm"
+                  iconType="	fas fa-burn"
+                  // tooltip="Warm"
+                  tooltip={<FormattedMessage
+                    id="app.warm"
+                    defaultMessage="Warm"
+                  />}
+                  // role={item.leadCategory}
+                  // onClick={() =>
+                  //   props.setContactTypeForLead(item.leadsId, {
+                  //     leadsId: item.leadsId,
+                  //     leadCategory: "Warm",
+                  //   })
+                  // }
+                />
+               </ButtonGroup>
+            </div>    
+                
+                
+                      <div>
+                      <ButtonGroup>
+                <RoleButton
+                  type="Hot"
+                  iconType="fas fa-mug-hot"
+                  // tooltip="Hot"
+                  tooltip={<FormattedMessage
+                    id="app.hot"
+                    defaultMessage="Hot"
+                  />}
+                  // role={item.leadCategory}
+                  // onClick={() =>
+                  //   props.setContactTypeForLead(item.leadsId, {
+                  //     leadsId: item.leadsId,
+                  //     leadCategory: "Hot",
+                  //   })
+                  // }
+                />
+                </ButtonGroup>
+          </div>
+                      <div>
+            <ButtonGroup>
+            <RoleButton
+                  type="Cold"
+                  iconType="far fa-snowflake"
+                  // tooltip="Cold"
+                  tooltip={<FormattedMessage
+                    id="app.cold"
+                    defaultMessage="Cold"
+                  />}
+                  role={item.leadCategory}
+                  // onClick={() =>
+                  //   props.setContactTypeForLead(item.leadsId, {
+                  //     leadsId: item.leadsId,
+                  //     leadCategory: "Cold",
+                  //   })
+                  // }
+                />
+              </ButtonGroup>
+            </div>
+                      </div>  
                             </div>
                         </div>
 
@@ -355,6 +423,7 @@ const mapStateToProps = ({ auth, leads, sector }) => ({
   sectors: sector.sectors,
   updateLeadsModal: leads.updateLeadsModal,
   addDrawerLeadsEmailModal: leads.addDrawerLeadsEmailModal,
+  fetchingLeads:leads.fetchingLeads
 });
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
@@ -372,3 +441,27 @@ const mapDispatchToProps = (dispatch) =>
   );
 
 export default connect(mapStateToProps, mapDispatchToProps)(LeadsCardList);
+function RoleButton({ type, iconType, tooltip, role, size, onClick }) {
+  console.log(role);
+  console.log(type);
+  if (role === type) {
+    size = "1.37em";
+  } else {
+    size = "1em";
+  }
+  return (
+    <Tooltip title={tooltip}>
+      <Button
+        style={{
+          padding: "0.37em",
+          borderColor: "transparent",
+          color: role === type ? "#1890ff" : "grey",
+        }}
+        ghost={role !== type}
+        onClick={onClick}
+      >
+        <i className={`${iconType}`} style={{ fontSize: "1.25em" }}></i>
+      </Button>
+    </Tooltip>
+  );
+}

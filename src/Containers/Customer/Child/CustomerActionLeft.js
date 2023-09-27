@@ -93,52 +93,7 @@ const CustomerActionLeft = (props) => {
           </span>
         </Badge>
       </Tooltip>
-
       {/* <Tooltip
-        title={<FormattedMessage id="app.white" defaultMessage="White" />}
-      >
-        <Badge
-          size="small"
-          count={
-            (props.viewType === "list" && props.recordCategoryData.customer) ||
-            0
-          }
-          overflowCount={999}
-        >
-          <span
-            class=" mr-2 text-sm cursor-pointer"
-            onClick={() => props.setCustomerViewType("list")}
-            style={{
-              color: props.viewType === "list" && "#1890ff",
-            }}
-          >
-            <PermIdentityIcon />
-          </span>
-        </Badge>
-      </Tooltip>
-      <Tooltip title={<FormattedMessage id="app.blue" defaultMessage="Blue" />}>
-        <Badge
-          size="small"
-          count={
-            (props.viewType === "dashboard" &&
-              props.recordCategoryDataBlue.customer) ||
-            0
-          }
-          overflowCount={999}
-        >
-          <span
-            class=" mr-2 text-sm cursor-pointer"
-            onClick={() => props.setCustomerViewType("dashboard")}
-            style={{
-              color: props.viewType === "dashboard" && "#1890ff",
-            }}
-          >
-            <ManageAccountsIcon />
-          </span>
-        </Badge>
-      </Tooltip> */}
-
-      <Tooltip
         title={<FormattedMessage id="app.mapview" defaultMessage="Map View" />}
       >
         <Badge
@@ -155,7 +110,7 @@ const CustomerActionLeft = (props) => {
             <LanguageIcon />
           </span>
         </Badge>
-      </Tooltip>
+      </Tooltip> */}
       <div class=" flex items-center justify-between"
       >
         <div class=" w-72">

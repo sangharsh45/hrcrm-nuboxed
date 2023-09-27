@@ -7,6 +7,7 @@ import { AudioOutlined } from '@ant-design/icons';
 import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
 import { Button, Input, Tooltip } from "antd";
 import { FormattedMessage } from "react-intl";
+import TocIcon from '@mui/icons-material/Toc';
 import {inputLeadsDataSearch} from "../LeadsAction";
 const { Search } = Input;
 
@@ -29,14 +30,14 @@ const LeadsActionLeft = (props) => {
     <div class=" flex  items-center">
 
 <Tooltip
-        title= "Table View"
+        title= "Card View"
       >
         <span   class=" mr-2 text-sm cursor-pointer"
           style={{
            color: props.viewType === "table" && "#1890ff",
           }}
         >
-        <TableViewIcon  />
+        <TocIcon/>
         </span>
       </Tooltip>
       

@@ -4,9 +4,6 @@ import { message } from "antd";
 import { base_url } from "../../Config/Auth";
 import { getTasksListByUserId } from "../Auth/AuthAction";
 
-
-
-
 export const setTaskViewType = (viewType) => (dispatch) => {
   dispatch({
     type: types.SET_TASK_VIEW_TYPE,
@@ -1202,3 +1199,25 @@ export const shareTaskPermission = (data, userId, a) => (
       // cb && cb("failure");
     });
 };
+
+export const getGrantTask = (employeeId) => (dispath) => {
+  dispath({ type: types.GET_GRANTT_TASK_REQUEST });
+  axios
+    .get(`${base_url}/task/employee/${employeeId} `, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      dispath({
+        type: types.GET_GRANTT_TASK_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      dispath({
+        type: types.GET_GRANTT_TASK_FAILURE,
+        payload: err,
+      });
+    });
+} 

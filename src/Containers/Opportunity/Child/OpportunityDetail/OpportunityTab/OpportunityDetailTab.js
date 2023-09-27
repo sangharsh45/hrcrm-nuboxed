@@ -122,44 +122,19 @@ class OpportunityDetailTab extends Component {
     const { activeKey } = this.state;
     const {
       user: {
-        metaData: { productStatus },
+        metaData: {  },
       },
       opportunity: { opportunityId, opportunityName, accountId },
       user,
       fetchingOpportunityDetailsById,
-      partnerLogin,
-      department,
       addContactModal,
       handleContactModal,
-      getTimeLineDataByOpportunityId,
-      addCallModal,
       linkContactsCheckToOpportunity,
-      getProductsByOpportunityId,
-      productsByOpportunityId,
-      handleLinkPartnerModal,
-      addLinkPartnerModal,
-      handleCallModal,
-      addEventModal,
-      handleEventModal,
-      addTaskModal,
-      handleTaskModal,
       getContactListByOpportunityId,
-      getEventsListByOpportunityId,
-      getCallsListByOpportunityId,
-      getTasksListByOpportunityId,
       handleLinkContactModal,
       linkContactsToOpportunity,
       handleDocumentUploadModal,
-      handleLinkConfigureModal,
-      addLinkConfigureModal,
-      handleTagProfileModal,
-      addTagProfileModal,
-      linkDeliveryModal,
       handleReactSpeechModal,
-      linkServiceModal,
-      handleLinkServiceModal,
-      handleLinkDeliveryModal,
-      subscriptionType,
       opportunity,
       addSpeechModal,
       documentUploadModal,
@@ -176,186 +151,22 @@ return  <BundleLoader />
             onChange={this.handleTabChange}
             forceRender={true}
           >
-            <TabPane
-              tab={
-                <>
-                  <span onClick={this.handleRecruitClick}>
-                  <TransferWithinAStationIcon 
-                  style={{fontSize:"1.1rem"}}
-                   />
-                    <span style={{ marginLeft: '0.25em' }}>RecruitPro</span>
-                  </span>
-                  {activeKey === "1" && (
-                    <>
-
-                      <>
-                     
-                        <Tooltip title="Add Requirement">
-                        {user.userType !== "USER" && user.department !== "Recruiter" && ( 
-                          <PlusOutlined
-                            type="plus"
-                            tooltipTitle="Add Requirement"
-                            onClick={() =>
-                              this.props.handleRecruitModal(true)
-                            }
-                            size="0.875em"
-                            style={{
-                              marginLeft: "0.125em",
-                              verticalAlign: "center",
-                            }}
-                          />
-                        )}
-                          </Tooltip>
-                        
-                        {/* <Tooltip //title="Tag Position"
-                          title={<FormattedMessage
-                            id="app.tagposition"
-                            defaultMessage="Tag Position"
-                          />}
-
-                        >
-                           {user.userType !== "USER" && user.department !== "Recruiter" && ( 
-                          <Icon
-                            type="link"
-                            onClick={() => {
-                              this.handlepartnerPopoverVisibleChange();
-                              handleTagProfileModal(true);
-                            }}
-                            size="0.875em"
-                            style={{
-                              marginLeft: "-5px",
-                              verticalAlign: "center",
-                            }}
-                          />
-                           )}
-                        </Tooltip> */}
-
-                        <Tooltip title="Summary">
-                      <span
-                       style={{marginLeft:"-4px"}}
-                          type="area-chart"
-                          // tooltipTitle="Summary"
-                          onClick={() => {
-                            this.handleRecriutmentdashboard();
-                          }}
-                          size="0.875em"                         
-                          >
-                          {/* <i class="fas fa-chart-line"></i> */}
-                          {/* <i class="fas-solid fa-chart-pie"></i> */}
-                          <PieChartIcon  style={{fontSize:"1.1rem"}} />
-                          </span>
-                        </Tooltip>
-
-                        <Tooltip title="Close">
-                         <span
-                     
-                      style={{marginLeft:"4px"}}
-                          type="area-chart"
-                          // tooltipTitle="Summary"
-                          onClick={() => {
-                            this.handleClosedPopoverVisibleChange();
-                          }}
-                          size="0.8em"                         
-                          >
-                             <LockIcon style={{fontSize:"1.1rem"}} />
-                            
-                          
-                          </span>
-                      
-                        </Tooltip>
-
-                        <Tooltip title="Close">
-                         <span
-                     
-                      style={{marginLeft:"4px"}}
-                          type="area-chart"
-                          // tooltipTitle="Summary"
-                          // onClick={() => {
-                          //   this.handleClosedPopoverVisibleChange();
-                          // }}
-                          size="0.8em"                         
-                          >
-                            <DeleteIcon  style={{fontSize:"1.1rem"}}
-                            onClick={() => {
-                            this.handledeletedPopoverVisibleChange();
-                          }}
-                            />
-                            
-                          
-                          </span>
-                      
-                        </Tooltip>
-                      
-                       
-                      </>
-                  
-                    </>
-                  )}
-                </>
-              }
-              key="1"
-            >
-               
-              {this.state.recriutmentdashboard ? (
-                <Suspense fallback={"Loading ..."}>
-                  {" "}
-                  <RecruitProJumpstart />
-                  <SummaryTable />
-                </Suspense>
-              ) :this.state.closedPopover ? 
-              (
-                <Suspense fallback={"Loading ..."}>
-                <RecruitmentClosedTable  opportunityId={opportunityId}/>
-                </Suspense>
-              ):this.state.deletePopover ? 
-                 
-                (
-                  <Suspense fallback={"Loading ..."}>
-                  <RecruitmentDeletedTable  opportunityId={opportunityId}/>
-                  </Suspense>
-                ):(
-                  <Suspense fallback={"Loading ..."}>
-                    {" "}
-                    <RecruitmentTable  opportunityId={opportunityId}/>
-                  </Suspense>
-                  
-                )}
-                  
-            </TabPane>
              <TabPane
               tab={
                 <>
                   <span>
-                    {/* <Icon type="user" /> */}
                     <ContactsIcon   style={{fontSize:"1.1rem"}}/>
                     <span style={{ marginLeft: '0.25em' }}>
                       <FormattedMessage
                         id="app.contacts"
                         defaultMessage="Contacts"
                       />
-                      {/* Contacts */}
                     </span>
                   </span>
                 
                   {activeKey === "2" && (
                     <>
-                      {/* {this.props.partnerLogin === "Yes" &&
-                        this.props.department === "Partner" ? null : ( */}
-                      {/* <Tooltip title="Tag Existing">
-
-                        <ActionIcon
-                          type="link"
-                          tooltipTitle="Tag Existing"
-                          // onClick={() => {
-                          //   this.handleContactPopoverVisibleChange();
-                          //   handleLinkContactModal(true);
-                          // }}
-                          size="0.875em"
-                          style={{ marginLeft: "0.25em", verticalAlign: "center" }}
-                        />
-                      </Tooltip> */}
-                      {/* )} */}
-                      <Tooltip //title="Create"
+                      <Tooltip 
                         title={<FormattedMessage
                           id="app.create"
                           defaultMessage="Create"
@@ -375,7 +186,7 @@ return  <BundleLoader />
                          )}
                          
                       </Tooltip>
-                      <Tooltip //title="Tag Position"
+                      <Tooltip 
                           title={<FormattedMessage
                             id="app.tagexisting"
                             defaultMessage="Tag Existing"
@@ -403,7 +214,7 @@ return  <BundleLoader />
             >
               <Suspense fallback={"Loading ..."}>
                 {" "}
-                <LinkedContact />
+                <LinkedContact/>
               </Suspense>
             </TabPane>
             <TabPane
@@ -415,16 +226,10 @@ return  <BundleLoader />
                         id="app.documents"
                         defaultMessage="Documents"
                       />
-                      {/* Documents */}
-
-                    
-
                   </span>
                   {activeKey === "3" && (
                     <>
-
-
-                      <Tooltip //title="Upload Document"
+                      <Tooltip 
                         title={<FormattedMessage
                           id="app.uploaddocument"
                           defaultMessage="Upload Document"
@@ -432,7 +237,6 @@ return  <BundleLoader />
                       >
                         <PlusOutlined
                           type="plus"
-                          //tooltipTitle="Upload Document"
                           tooltiptitle={<FormattedMessage
                             id="app.uploaddocument"
                             defaultMessage="Upload Document"
@@ -481,38 +285,14 @@ return  <BundleLoader />
                   </>
                     )}
                   </span>
-                  
-                  {/* <Tooltip title="Add">
-                        {user.userType !== "USER" && user.department !== "Notes" && ( 
-                          <Icon
-                            type="plus"
-                            tooltipTitle="Add"
-                            onClick={() =>
-                              this.props.handleRecruitModal(true)
-                            }
-                            size="0.875em"
-                            style={{
-                              marginLeft: "0.125em",
-                              verticalAlign: "center",
-                            }}
-                          />
-                        )}
-                          </Tooltip>
-                   */}
                 </>
               }
-              key="4"
-            >
+              key="4">
               <Suspense fallback={"Loading ..."}>
                 {" "}
                 <LinkedNotes />
               </Suspense>
             </TabPane>
-
-           
-
-            
-            {/* )} */}
           </StyledTabs>
         </TabsWrapper>
         <Suspense fallback={null}>

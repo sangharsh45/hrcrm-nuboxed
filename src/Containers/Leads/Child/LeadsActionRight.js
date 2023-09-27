@@ -4,7 +4,7 @@ import { bindActionCreators } from "redux";
 import { withRouter } from "react-router-dom";
 import { Button } from "antd";
 import { StyledSelect } from "../../../Components/UI/Antd";
-
+const LeadShareForm=lazy(()=> import("../Child/LeadShareForm"));
 const Option = StyledSelect.Option;
 
 class LeadsActionRight extends React.Component {
@@ -22,6 +22,12 @@ class LeadsActionRight extends React.Component {
     return (
       <>
         <div class=" flex  items-center">
+          {/* {user.customerFullListInd === true &&(  */}
+        {/* <LeadShareForm
+      handleDropChange={this.props.handleDropChange}
+      currentUser={this.props.currentUser} 
+      /> */}
+      {/* )} */}
           <Button type="primary" ghost onClick={() => handleLeadsModal(true)}>
             Add
           </Button>

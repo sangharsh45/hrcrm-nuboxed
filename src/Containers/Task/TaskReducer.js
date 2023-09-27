@@ -138,6 +138,9 @@ const initialState = {
   updateTaskModal:false,
 
   taskById:[],
+  fetchingGrantTask: false,
+  fetchingGrantTaskError:false,
+  grantTask:[],
 };
 export const TaskReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -809,7 +812,21 @@ export const TaskReducer = (state = initialState, action) => {
                         addSharingTaskError: true,
                       };
 
-
+                      case types.GET_GRANTT_TASK_REQUEST:
+                        return { ...state, fetchingGrantTask: true };
+                      case types.GET_GRANTT_TASK_SUCCESS:
+                        return {
+                          ...state,
+                          fetchingGrantTask: false,
+                           grantTask: action.payload,
+                        };
+                      case types.GET_GRANTT_TASK_FAILURE:
+                        return {
+                          ...state,
+                          fetchingGrantTask: false,
+                          fetchingGrantTaskError: true,
+                        };
+                
 
         default:
       return state;

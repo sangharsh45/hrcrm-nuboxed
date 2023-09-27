@@ -120,7 +120,6 @@ class ContactDetailTab extends Component {
       handleCustomerReactSpeechModal,
       addCustomerSpeechModal,
       handleCustomerContactModal,
-      // ComhandleCustomermercialsModal,
       addCustomerContactModal,
       handleCustomerOpportunityModal,
       handleCustomerProjectDrawer,
@@ -128,7 +127,6 @@ class ContactDetailTab extends Component {
       addCustomerProjectDrawer,
       getContactListByCustomerId,
       getOpportunityListByCustomerId,
-      handleTagProfileModal,
       addInvoiceModal,
       handleInvoiceModal,
     } = this.props;
@@ -243,79 +241,6 @@ class ContactDetailTab extends Component {
             {/* <TabPane
               tab={
                 <>
-                  <span>
-                    <TransferWithinAStationIcon style={{fontSize:"1.1rem"}}/>
-                    <span class=" ml-1">
-                    <FormattedMessage
-                        id="app.recruitPro"
-                        defaultMessage="RecruitPro"
-                      />
-               
-                    </span>
-                  </span>
-
-                  {activeKey === "3" && (
-                    <>
-                      <>
-                        <Tooltip 
-                          title={
-                            <FormattedMessage
-                              id="app.addrequirement"
-                              defaultMessage="Add Requirement"
-                            />
-                          }
-                        ></Tooltip>
-                  
-                        <Tooltip
-                          title={
-                            <FormattedMessage
-                              id="app.summary"
-                              defaultMessage="Summary"
-                            />
-                          }
-                        >
-                          <span
-                            type="area-chart"
-                       
-                            onClick={() => {
-                              this.handleRecriutmentdashboard();
-                            }}
-                            size="0.875em"
-                          >
-                            <PieChartIcon 
-                          
-                             />
-                          </span>
-                        </Tooltip>
-                      </>
-                    </>
-                  )}
-                </>
-              }
-              key="3"
-            >
-              {this.state.recriutmentdashboard ? (
-                <Suspense fallback={"Loading ..."}>
-                  {" "}
-                  <RecruitProJumpstart />
-                  <SummaryTable />
-                </Suspense>
-              ) : this.state.file ? (
-                <Suspense fallback={"Loading ..."}>
-                  {" "}
-                  <RecruitmentFileTable />
-                </Suspense>
-              ) : (
-                <Suspense fallback={"Loading ..."}>
-                  {" "}
-                  <RecruitmentTable />
-                </Suspense>
-              )}
-            </TabPane> */}
-
-            <TabPane
-              tab={
-                <>
                   <MonetizationOnIcon 
                  style={{fontSize:"1.1rem"}}
                   />
@@ -325,7 +250,7 @@ class ContactDetailTab extends Component {
               key="9"
             >
               <CommercialsForm />
-            </TabPane>
+            </TabPane> */}
 
             <TabPane
               tab={
@@ -441,45 +366,7 @@ class ContactDetailTab extends Component {
                 <LinkedInvoice />
               </Suspense>
             </TabPane>
-            
-            {/* <TabPane
-              tab={
-                <>
-                  <i class="fas fa-print" style={{fontSize:"1.1rem"}}></i>
-                  <span class=" ml-1">
-                    <FormattedMessage
-                      id="app.initiatives"
-                      defaultMessage="Initiatives"
-                    />
-                  </span>
-                </>
-              }
-              key="8"
-            >
-              <InitiativeForm />
-            </TabPane> */}
-
-            <TabPane
-              tab={
-                <>
-                  <span>
-                    <i class="far fa-lightbulb" style={{fontSize:"1.1rem"}}></i>
-                    <span class=" ml-1">
-                      <FormattedMessage
-                        id="app.project"
-                        defaultMessage="Project"
-                      />
-                    </span>
-                  </span>
-                </>
-              }
-              key="10"
-            >
-              <Suspense fallback={"Loading ..."}>
-                {" "}
-                <LinkedProject />
-              </Suspense>
-            </TabPane>
+           
           </StyledTabs>
         </TabsWrapper>
         <Suspense fallback={null}>
