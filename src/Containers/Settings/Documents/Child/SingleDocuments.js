@@ -36,14 +36,15 @@ class SingleDocuments extends Component {
           {({ viewType }, toggleViewType) =>
             viewType === "view" ? (
               <div>
-                <FlexContainer justifyContent="space-evenly">
-                  <div style={{width:"50%"}}>
+                <FlexContainer >
+                  <div style={{width:"12rem"}}>
                   <DocumentName style={{ flexBasis: "90%" }}>
                     {documentTypeName}
                   </DocumentName>
                   </div>
                   {/* <FlexContainer style={{justifyContent:"flex-end",marginTop:"-31px"}} > */}
-                  <div style={{width:"35%"}}>
+                  <div class="flex justify-between w-[29rem]">
+                  <div >
                     <DocumentStatusToggle
                   editInd={editInd}
                       mandatoryInd={mandatoryInd}
@@ -76,6 +77,7 @@ class SingleDocuments extends Component {
                     />
                   </Tooltip>  
                       ) }                
+                  </div>
                   </div>
                 </FlexContainer>
                 {/* </FlexContainer> */}

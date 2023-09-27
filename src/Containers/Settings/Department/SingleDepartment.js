@@ -50,14 +50,20 @@ class SingleDepartment extends Component {
         <ViewEditCard>
           {({ viewType }, toggleViewType) =>
             viewType === "view" ? (
+              <div class="flex" >
+                <div class="w-11/12 flex-row">
               <FlexContainer justifyContent="space-between">
                 {/* <div class=" flex w-1/2"> */}
+               <div class="w-20">
                 <DepartmentName >
                   {departmentName}
                 </DepartmentName>
+                </div>
+                <div class="w-20">
                 <DepartmentName >
                   {sectorName}
                 </DepartmentName>
+                </div>
                 {/* </div> */}
                 <div style={{width:"20%"}}>
                     <DepartmentStatusToggle
@@ -83,7 +89,10 @@ class SingleDepartment extends Component {
                       departmentId={departmentId}
                     />  
                     </div>
-                <div>
+                
+              </FlexContainer>
+              </div>
+              <div>
                 
                   {this.props.department.mandetoryInd !== true &&(
                   <BorderColorIcon 
@@ -113,7 +122,8 @@ class SingleDepartment extends Component {
                  )}
                  
                 </div> 
-              </FlexContainer>
+              </div>
+              
             ) : (
                 <FlexContainer>
                   <TextInput
