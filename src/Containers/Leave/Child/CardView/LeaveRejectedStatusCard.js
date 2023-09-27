@@ -66,7 +66,7 @@ function LeaveRejectedStatusCard(props) {
                   >
                     <div class=" flex flex-row justify-evenly w-wk">
                       <div className=" flex font-medium flex-col w-44 mb-1">
-                        <div class=" text-xs text-cardBody font-medium font-poppins">
+                        <div class=" text-sm text-cardBody font-medium font-poppins">
                           Start Date
                         </div>
 
@@ -74,7 +74,7 @@ function LeaveRejectedStatusCard(props) {
                           {` ${moment.utc(item.startDate).format("ll")}`}
                         </div>
                         <div className=" flex font-medium flex-col w-40">
-                        <div class=" text-xs text-cardBody font-medium font-poppins">
+                        <div class=" text-sm text-cardBody font-medium font-poppins">
                           Reason
                         </div>
 
@@ -85,7 +85,7 @@ function LeaveRejectedStatusCard(props) {
                       </div>
 
                       <div className=" flex font-medium flex-col w-40">
-                        <div class=" text-xs text-cardBody font-medium font-poppins">
+                        <div class=" text-sm text-cardBody font-medium font-poppins">
                           End Date
                         </div>
 
@@ -112,7 +112,7 @@ function LeaveRejectedStatusCard(props) {
                         {/* </Tooltip>   */}
                       </div>
                       <div className=" flex font-medium flex-col w-40">
-                        <div class=" text-xs text-cardBody font-medium font-poppins">
+                        <div class=" text-sm text-cardBody font-medium font-poppins">
                           Cover
                         </div>
 

@@ -47,7 +47,7 @@ function ExpensePendingStatusCard(props) {
                 className="absolute left-0 top-0 bottom-0 w-3  rounded-l-md -mt-1 -mb-1 -ml-2 "
 
               ></span>
-              <span class="font-semibold text-xs text-cardBody-heading font-poppins"> Pending </span>
+              <span class="font-semibold text-sm text-cardBody-heading font-poppins"> Pending </span>
             </span>
           </div>    
               {pendingExpenses.map((item) => {
@@ -62,7 +62,7 @@ function ExpensePendingStatusCard(props) {
 
                          
                               <Tooltip >
-                                  <h4 class=" text-xs text-cardBody font-poppins">
+                                  <h4 class=" text-sm text-cardBody font-poppins">
                                   Voucher ID
                                   </h4>
                                   <h4 class=" text-xs text-blue-500 text-cardBody font-poppins cursor-pointer">
@@ -88,7 +88,7 @@ function ExpensePendingStatusCard(props) {
                     textAlign: "center",
                     margin: "2px",
                     borderRadius: "0.62em",
-                    width:"12rem"
+                    width:"10rem"
                   }}
                 >
                   <div className="text-[#e1d16c]">Waiting for approval
@@ -99,7 +99,7 @@ function ExpensePendingStatusCard(props) {
 
 <div className=" flex font-medium flex-col  w-52 ">
                            
-                           <h4 class=" text-xs text-cardBody font-poppins"> Voucher Date </h4>
+                           <h4 class=" text-sm text-cardBody font-poppins"> Voucher Date </h4>
                            <h4 class=" text-xs text-cardBody font-poppins">
                                
                            
@@ -110,7 +110,7 @@ function ExpensePendingStatusCard(props) {
                        <div className=" flex font-medium flex-col w-32 ">
                                   
 
-                                  <h4 class=" text-xs text-cardBody font-poppins">Amount</h4>
+                                  <h4 class=" text-sm text-cardBody font-poppins">Amount</h4>
                                   <h4 class=" text-xs text-cardBody font-poppins">
                                       € {item.amount}
                                   </h4>

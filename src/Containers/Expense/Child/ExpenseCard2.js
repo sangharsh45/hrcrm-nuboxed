@@ -52,14 +52,14 @@ function ExpenseCard2(props) {
                       style={{
                           borderBottom: "3px dotted #515050"
                       }}>
-                          <h4 class=" text-xs text-cardBody font-poppins">
+                          <h4 class=" text-sm text-cardBody font-poppins">
                                  Name
                                   </h4> 
                       <div className=" flex font-medium flex-col w-72 ">
 
                          
                               <Tooltip >
-                                  <h4 class=" text-xs text-cardBody font-poppins">
+                                  <h4 class=" text-sm text-cardBody font-poppins">
                                   Voucher ID
                                   </h4>
                                   <h4 class=" text-xs text-blue-500 text-cardBody font-poppins cursor-pointer">
@@ -75,7 +75,7 @@ function ExpenseCard2(props) {
 </div>
 <div className=" flex font-medium flex-col  w-52 ">
                            
-                           <h4 class=" text-xs text-cardBody font-poppins"> Voucher Date </h4>
+                           <h4 class=" text-sm text-cardBody font-poppins"> Voucher Date </h4>
                            <h4 class=" text-xs text-cardBody font-poppins">
                                
                            
@@ -86,13 +86,13 @@ function ExpenseCard2(props) {
                        <div className=" flex font-medium flex-col w-32 ">
                                   
 
-                                  <h4 class=" text-xs text-cardBody font-poppins">Amount</h4>
+                                  <h4 class=" text-sm text-cardBody font-poppins">Amount</h4>
                                   <h4 class=" text-xs text-cardBody font-poppins">
                                       € {item.amount}
                                   </h4>
                               </div>
                               <div className=" flex font-medium flex-col w-[12rem] ">
-                                    <h4 class=" text-xs text-cardBody font-poppins">Status</h4>
+                                    <h4 class=" text-sm text-cardBody font-poppins">Status</h4>
 
                                     <div class=" text-xs text-cardBody font-poppins">
                                     {item.status === "Approved" && (
@@ -129,7 +129,7 @@ function ExpenseCard2(props) {
                     textAlign: "center",
                     margin: "2px",
                     borderRadius: "0.62em",
-                    width:"12rem"
+                    width:"11rem"
                   }}
                 >
                  <div className="text-[#e1d16c]"> Waiting for approval</div>

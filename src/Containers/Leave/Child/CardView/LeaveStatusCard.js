@@ -43,13 +43,13 @@ function LeaveStatusCard(props) {
   return (
     <>
       <div className="flex justify-arround">
-        <div className="w-[28rem]">
+        <div className="w-[26rem]">
           <LeavePendingStatusCard />
         </div>
-        <div className="w-[28rem]">
+        <div className="w-[26rem]">
           <LeaveApprovedStatusCard />
         </div>
-        <div className="w-[28rem]">
+        <div className="w-[26rem]">
           <LeaveRejectedStatusCard />
         </div>
       </div>

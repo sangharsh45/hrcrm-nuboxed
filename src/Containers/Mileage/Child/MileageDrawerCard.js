@@ -49,10 +49,10 @@
 
                                    
                                       
-//                                             <h4 class=" text-base text-cardBody font-poppins">
+//                                             <h4 class=" text-xs text-cardBody font-poppins">
 //                                             ID 
 //                                             </h4>
-//                                             <h4 class=" text-base text-blue-500 text-cardBody font-poppins cursor-pointer">
+//                                             <h4 class=" text-xs text-blue-500 text-cardBody font-poppins cursor-pointer">
                                                 
 //                                             {/* <div onClick={() => { this.handleExpand(item.voucherId) 
 //                 this.props.handleMileageVoucherIdDrwer(true)}}>
@@ -69,15 +69,15 @@
 //                                 </div>
 //                                 <div className=" flex font-medium flex-col  w-32 ">
                            
-//                            <h4 class=" text-base text-cardBody font-poppins"> Attributed To </h4>
-//                            <h4 class=" text-base text-cardBody font-poppins">
+//                            <h4 class=" text-xs text-cardBody font-poppins"> Attributed To </h4>
+//                            <h4 class=" text-xs text-cardBody font-poppins">
 //                                {item.clientName}
 //                            </h4>
 //                        </div>
 //                                 <div className=" flex font-medium flex-col  w-32 ">
                            
-//                                     <h4 class=" text-base text-cardBody font-poppins">Date </h4>
-//                                     <h4 class=" text-base text-cardBody font-poppins">
+//                                     <h4 class=" text-xs text-cardBody font-poppins">Date </h4>
+//                                     <h4 class=" text-xs text-cardBody font-poppins">
                                         
                                     
 //                                     {dayjs(item.mileageDate).format("MMM Do YY")}
@@ -86,29 +86,29 @@
 //                                 </div>
 //                                 <div className=" flex font-medium flex-col w-32 ">
                                   
-//                                     <h4 class=" text-base text-cardBody font-poppins">From</h4>
-//                                     <h4 class=" text-base text-cardBody font-poppins">
+//                                     <h4 class=" text-xs text-cardBody font-poppins">From</h4>
+//                                     <h4 class=" text-xs text-cardBody font-poppins">
 //                                          {item.fromLocation}
 //                                     </h4>
 //                                 </div>
 //                                 <div className=" flex font-medium flex-col w-32 ">
                                   
-//                                   <h4 class=" text-base text-cardBody font-poppins">To</h4>
-//                                   <h4 class=" text-base text-cardBody font-poppins">
+//                                   <h4 class=" text-xs text-cardBody font-poppins">To</h4>
+//                                   <h4 class=" text-xs text-cardBody font-poppins">
 //                                        {item.toLocation}
 //                                   </h4>
 //                               </div>
 //                               <div className=" flex font-medium flex-col w-32 ">
                                   
-//                                   <h4 class=" text-base text-cardBody font-poppins">Distance</h4>
-//                                   <h4 class=" text-base text-cardBody font-poppins">
+//                                   <h4 class=" text-xs text-cardBody font-poppins">Distance</h4>
+//                                   <h4 class=" text-xs text-cardBody font-poppins">
 //                                        {item.distances}
 //                                   </h4>
 //                               </div>
 //                               <div className=" flex font-medium flex-col w-32 ">
                                 
-//                                 <h4 class=" text-base text-cardBody font-poppins">Remarks</h4>
-//                                 <h4 class=" text-base text-cardBody font-poppins">
+//                                 <h4 class=" text-xs text-cardBody font-poppins">Remarks</h4>
+//                                 <h4 class=" text-xs text-cardBody font-poppins">
 //                                      {item.remark}
 //                                 </h4>
 //                             </div>
@@ -321,15 +321,15 @@
 //                   style={{ borderBottom: "3px dotted #515050" }}
 //                 >
 //                   <div className="flex font-medium flex-col w-10">
-//                     <h4 className="text-base text-cardBody font-poppins">ID</h4>
-//                     <h4 className="text-base text-blue-500 text-cardBody font-poppins cursor-pointer">
+//                     <h4 className="text-xs text-cardBody font-poppins">ID</h4>
+//                     <h4 className="text-xs text-blue-500 text-cardBody font-poppins cursor-pointer">
 //                       <Tooltip title={item.mileageId}>
 //                         <QuestionMarkIcon />
 //                       </Tooltip>
 //                     </h4>
 //                   </div>
 //                   <div className="flex font-medium flex-col w-32">
-//                     <h4 className="text-base text-cardBody font-poppins">
+//                     <h4 className="text-xs text-cardBody font-poppins">
 //                       Attributed To
 //                     </h4>
 //                     {isEditing ? (
@@ -342,19 +342,19 @@
 //                       />
 //                     ) : (
                      
-//                       <h4 className="text-base text-cardBody font-poppins">
+//                       <h4 className="text-xs text-cardBody font-poppins">
 //                         {item.clientName}
 //                       </h4>
 //                     )}
 //                   </div>
 //                   {/* <div className="flex font-medium flex-col w-32">
-//                     <h4 className="text-base text-cardBody font-poppins">Date</h4>
-//                     <h4 className="text-base text-cardBody font-poppins">
+//                     <h4 className="text-xs text-cardBody font-poppins">Date</h4>
+//                     <h4 className="text-xs text-cardBody font-poppins">
 //                       {dayjs(item.mileageDate).format("MMM Do YY")}
 //                     </h4>
 //                   </div> */}
 //  <div className="flex font-medium flex-col w-32">
-//                     <h4 className="text-base text-cardBody font-poppins">Date</h4>
+//                     <h4 className="text-xs text-cardBody font-poppins">Date</h4>
 //                     {isEditing ? (
                      
 //                       <DatePicker
@@ -369,7 +369,7 @@
 //                       />
 //                     ) : (
                  
-//                       <h4 className="text-base text-cardBody font-poppins">
+//                       <h4 className="text-xs text-cardBody font-poppins">
 //                         {dayjs(item.mileageDate).format("MMM Do YY")}
 //                       </h4>
 //                     )}
@@ -384,7 +384,7 @@
 //                   {/* ... Other fields ... */}
 //                   <div className=" flex font-medium flex-col w-32 ">
                                   
-//                                   <h4 class=" text-base text-cardBody font-poppins">From</h4>
+//                                   <h4 class=" text-xs text-cardBody font-poppins">From</h4>
 //                                   {isEditing ? (
                     
 //                     <Input
@@ -394,7 +394,7 @@
 //                       }
 //                     />
 //                   ) : (
-//                                   <h4 class=" text-base text-cardBody font-poppins">
+//                                   <h4 class=" text-xs text-cardBody font-poppins">
 //                                        {item.fromLocation}
 //                                   </h4>
                                       
@@ -402,7 +402,7 @@
 //                               </div>
 //                               <div className=" flex font-medium flex-col w-32 ">
                                 
-//                                 <h4 class=" text-base text-cardBody font-poppins">To</h4>
+//                                 <h4 class=" text-xs text-cardBody font-poppins">To</h4>
 //                                 {isEditing ? (
                     
 //                     <Input
@@ -412,14 +412,14 @@
 //                       }
 //                     />
 //                   ) : (
-//                                 <h4 class=" text-base text-cardBody font-poppins">
+//                                 <h4 class=" text-xs text-cardBody font-poppins">
 //                                      {item.toLocation}
 //                                 </h4>
 //                                    )}
 //                             </div>
 //                             <div className=" flex font-medium flex-col w-32 ">
                                   
-//                                   <h4 class=" text-base text-cardBody font-poppins">Distance</h4>
+//                                   <h4 class=" text-xs text-cardBody font-poppins">Distance</h4>
 //                                   {isEditing ? (
                     
 //                     <Input
@@ -429,13 +429,13 @@
 //                       }
 //                     />
 //                   ) : (
-//                                   <h4 class=" text-base text-cardBody font-poppins">
+//                                   <h4 class=" text-xs text-cardBody font-poppins">
 //                                        {item.distances}
 //                                   </h4>
 //                                     )}
 //                               </div>
 //                   <div className="flex font-medium flex-col w-32">
-//                     <h4 className="text-base text-cardBody font-poppins">Remarks</h4>
+//                     <h4 className="text-xs text-cardBody font-poppins">Remarks</h4>
 //                     {isEditing ? (
                      
 //                       <Input
@@ -446,7 +446,7 @@
 //                       />
 //                     ) : (
                      
-//                       <h4 className="text-base text-cardBody font-poppins">
+//                       <h4 className="text-xs text-cardBody font-poppins">
 //                         {item.remark}
 //                       </h4>
 //                     )}
@@ -522,6 +522,7 @@ import { bindActionCreators } from "redux";
 import { Tooltip, Button, Input, DatePicker } from "antd";
 import moment from "moment";
 import dayjs from "dayjs";
+import { DeleteOutlined,EditOutlined } from "@ant-design/icons";
 import { FlexContainer, OnlyWrapCard } from '../../../Components/UI/Layout';
 import QuestionMarkIcon from "@mui/icons-material/QuestionMark";
 import {
@@ -606,15 +607,15 @@ function MileageDrawerCard(props) {
                 style={{ borderBottom: "3px dotted #515050" }}
               >
                 <div className="flex font-medium flex-col w-10">
-                  <h4 className="text-base text-cardBody font-poppins">ID</h4>
-                  <h4 className="text-base text-blue-500 text-cardBody font-poppins cursor-pointer">
+                  <h4 className="text-sm text-cardBody font-poppins">ID</h4>
+                  <h4 className="text-xs text-blue-500 text-cardBody font-poppins cursor-pointer">
                     <Tooltip title={item.mileageId}>
                       <QuestionMarkIcon />
                     </Tooltip>
                   </h4>
                 </div>
                 <div className="flex font-medium flex-col w-32">
-                  <h4 className="text-base text-cardBody font-poppins">
+                  <h4 className="text-sm text-cardBody font-poppins">
                     Attributed To
                   </h4>
                   {editStates[index] ? (
@@ -625,13 +626,13 @@ function MileageDrawerCard(props) {
                 style={{border:"2px solid black"}}
               />
             ) : (
-                  <h4 className="text-base text-cardBody font-poppins">
+                  <h4 className="text-xs text-cardBody font-poppins">
                     {item.clientName}
                   </h4>
             )}
                 </div>
                 <div className="flex font-medium flex-col w-32">
-                  <h4 className="text-base text-cardBody font-poppins">Date</h4>
+                  <h4 className="text-sm text-cardBody font-poppins">Date</h4>
                   {editStates[index] ? (
   <DatePicker
     value={dayjs(item.mileageDate)} 
@@ -641,13 +642,13 @@ function MileageDrawerCard(props) {
     style={{ border: "2px solid black" }}
   />
 ) : (
-  <h4 className="text-base text-cardBody font-poppins">
+  <h4 className="text-xs text-cardBody font-poppins">
     {dayjs(item.mileageDate).format("MMM Do YY")}
   </h4>
 )}
                 </div>
                 <div className=" flex font-medium flex-col w-32 ">
-                  <h4 className="text-base text-cardBody font-poppins">
+                  <h4 className="text-sm text-cardBody font-poppins">
                     From
                   </h4>
                   {editStates[index] ? (
@@ -658,13 +659,13 @@ function MileageDrawerCard(props) {
                 onChange={(e) => handleInputChange(index, 'fromLocation', e.target.value)}
               />
             ) : (
-                  <h4 className="text-base text-cardBody font-poppins">
+                  <h4 className="text-xs text-cardBody font-poppins">
                     {item.fromLocation}
                   </h4>
             )}
                 </div>
                 <div className=" flex font-medium flex-col w-32 ">
-                  <h4 className="text-base text-cardBody font-poppins">To</h4>
+                  <h4 className="text-sm text-cardBody font-poppins">To</h4>
                   {editStates[index] ? (
               <input
                 type="text"
@@ -673,13 +674,13 @@ function MileageDrawerCard(props) {
                 onChange={(e) => handleInputChange(index, 'toLocation', e.target.value)}
               />
             ) : (
-                  <h4 className="text-base text-cardBody font-poppins">
+                  <h4 className="text-xs text-cardBody font-poppins">
                     {item.toLocation}
                   </h4>
             )}
                 </div>
                 <div className=" flex font-medium flex-col w-32 ">
-                  <h4 className="text-base text-cardBody font-poppins">
+                  <h4 className="text-sm text-cardBody font-poppins">
                     Distance
                   </h4>
                   {editStates[index] ? (
@@ -690,13 +691,13 @@ function MileageDrawerCard(props) {
                 onChange={(e) => handleInputChange(index, 'distances', e.target.value)}
               />
             ) : (
-                  <h4 className="text-base text-cardBody font-poppins">
+                  <h4 className="text-xs text-cardBody font-poppins">
                     {item.distances}
                   </h4>
             )}
                 </div>
                 <div className="flex font-medium flex-col w-32">
-                  <h4 className="text-base text-cardBody font-poppins">
+                  <h4 className="text-sm text-cardBody font-poppins">
                     Remarks
                   </h4>
                   {editStates[index] ? (
@@ -707,17 +708,17 @@ function MileageDrawerCard(props) {
                 onChange={(e) => handleInputChange(index, 'remark', e.target.value)}
               />
             ) : (
-                  <h4 className="text-base text-cardBody font-poppins">
+                  <h4 className="text-xs text-cardBody font-poppins">
                     {item.remark}
                   </h4>
             )}
                 </div>
 
                 <div className="flex font-medium flex-col w-32">
-                  {/* <h4 className="text-base text-cardBody font-poppins">
+                  {/* <h4 className="text-xs text-cardBody font-poppins">
                     Remarks
                   </h4> */}
-                  <h4 className="text-base text-cardBody font-poppins">
+                  <h4 className="text-xs text-cardBody font-poppins">
                   <button onClick={() => toggleEdit(index)}>
             {editStates[index] ? 'Cancel' : 'Edit'}
           </button>
@@ -726,6 +727,18 @@ function MileageDrawerCard(props) {
           )}
                   </h4>
                 </div>
+                {item.status === "Pending" ? (
+            <Tooltip title="Delete">
+              <DeleteOutlined
+                type="delete"
+                style={{ cursor: "pointer",display:"flex",alignItems:"flex-start" }}
+                 onClick={() => {
+                this.props.deleteMileage(item.mileageId);
+                  
+                 }}
+               />
+             </Tooltip>
+             ):null}
                 {/* <div className="flex flex-col w-[4%]">
                   {item.status === "Pending" ? (
                     <div>
