@@ -16,7 +16,7 @@ import { FlexContainer } from "../../../../../Components/UI/Layout";
 class RecruitTaskForm extends Component {
   handleCallback = (status) => {
     if (status === "success") {
-      return getTaskForWorkflow(this.props.taskId);
+      return getTaskForWorkflow(this.props.taskTypeId);
     } else {
       return null;
     }
@@ -28,12 +28,13 @@ class RecruitTaskForm extends Component {
         <Formik
           initialValues={{
             taskChecklistName: "",
+            taskTypeId:this.props.taskTypeId,
             organizationId:this.props.organizationId
           }}
           onSubmit={(values) => {
             addTaskForRecruiter(
               values,
-              this.props.organizationId,
+              this.props.taskTypeId,
               () => this.handleCallback
             );
           }}
@@ -51,7 +52,7 @@ class RecruitTaskForm extends Component {
                   component={InputComponent}
                   isColumn
                   width={"100%"}
-                  placeholder={"Enter Task name "}
+                  placeholder={"Enter Workflow name "}
                   style={{ flexBasis: "80%", marginTop: "0.25em" }}
                 />
                 <Spacer />

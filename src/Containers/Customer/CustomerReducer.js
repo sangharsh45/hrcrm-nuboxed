@@ -301,6 +301,10 @@ const initialState = {
   fetchingCustomersListError:false,
   customerByList:[],
 
+  fetchingAttendanceList: false,
+  fetchingAttendanceListError: false,
+  attendanceByList:[],
+
  
 
   addingRecruitmentProfile: false,
@@ -1438,6 +1442,25 @@ export const customerReducer = (state = initialState, action) => {
                                     linkedProjectTask: false,
                                     linkedProjectTaskError: true,
                                   };
+
+
+                                  case types.GET_ATTENDANCE_LIST_REQUEST:
+                                    return { ...state, fetchingAttendanceList: true };
+                                  case types.GET_ATTENDANCE_LIST_SUCCESS:
+                                    return {
+                                      ...state,
+                                      fetchingAttendanceList: false,
+                                       attendanceByList: action.payload,
+                              
+                                     
+                                    
+                                    };
+                                  case types.GET_ATTENDANCE_LIST_FAILURE:
+                                    return {
+                                      ...state,
+                                      fetchingAttendanceList: false,
+                                      fetchingAttendanceListError: true,
+                                    };
                   
                       
 

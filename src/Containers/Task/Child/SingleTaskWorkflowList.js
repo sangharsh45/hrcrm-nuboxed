@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import styled from "styled-components";
 import { FormattedMessage } from "react-intl";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
-import { Button, Tooltip, Popconfirm, } from "antd";
+import { Button, Tooltip, Popconfirm, DatePicker, } from "antd";
 import { FlexContainer } from "../../../Components/UI/Layout";
 import {
   TextInput,
@@ -15,6 +15,7 @@ import { bindActionCreators } from "redux";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { StyledPopconfirm } from "../../../Components/UI/Antd";
 import moment from "moment";
+import dayjs from "dayjs";
 const { Option } = Select;
 
 class SingleTaskWorkflowList extends Component {
@@ -26,6 +27,8 @@ class SingleTaskWorkflowList extends Component {
       // currentStage: [],
       fields: {},
       responsible: "",
+      startDate:"",
+      endDate:"",
       publish: false,
     };
   }
@@ -38,6 +41,14 @@ class SingleTaskWorkflowList extends Component {
         [name]: value,
       },
     });
+  };
+  onChangeDatePicker = (startDate, dateString) => {
+    console.log(startDate, dateString);
+    this.setState({ startDate: dayjs(dateString) });
+  };
+  onChangeEndDatePicker = (endDate, dateString) => {
+    console.log(endDate, dateString);
+    this.setState({ endDate: dayjs(dateString) });
   };
 
   handleStageType = (value) => this.setState({ responsible: value });
@@ -86,11 +97,11 @@ class SingleTaskWorkflowList extends Component {
                 justifyContent="start"
                 alignItems="center"
                 // onClick={() => handleStageClick(taskChecklistStagelinkId, taskChecklistStageName)}
-                style={{
-                  backgroundColor:
-                    taskChecklistStagelinkId === currentStage &&
-                    "rgb(161, 185, 185)",
-                }}
+                // style={{
+                //   backgroundColor:
+                //     taskChecklistStagelinkId === currentStage &&
+                //     "rgb(161, 185, 185)",
+                // }}
               >
                 <StageName style={{ flexBasis: "25%", textAlign: "left" }}>
                   {elipsize(name, 23)}
@@ -101,13 +112,23 @@ class SingleTaskWorkflowList extends Component {
                 <StageName>
                   {days}
                 </StageName>
-                <StageName>
+                 <div>
+                  <DatePicker 
+                  placeholder="Start Date"
+                  onChange={this.onChangeDatePicker} />
+                  </div>
+                  <div>
+                  <DatePicker 
+                  placeholder="End Date"
+                  onChange={this.onChangeEndDatePicker} />
+                  </div> 
+               {/* <StageName>
                   {`${ moment(startDate).format("DD/MM/YYYY")}`}
                 </StageName>
                 &nbsp;&nbsp;&nbsp;&nbsp;
                 <StageName>
                 {`${ moment(endDate).format("DD/MM/YYYY")}`}
-                </StageName>
+                </StageName> */}
                 <div class=" flex justify-between ml-margin65 w-4">
                   <>
                     <Tooltip title="Edit">
@@ -119,21 +140,7 @@ class SingleTaskWorkflowList extends Component {
                     </Tooltip>
                   </>
 
-                  <>
-                    <Popconfirm
-                      title="Do you want to delete?"
-                      okText="Yes"
-                      cancelText="No"
-                    //   onConfirm={() =>
-                    //     deleteTaskStagesData(taskChecklistStagelinkId)
-                    //   }
-                    >
-                      <DeleteIcon
-                        type="delete"
-                        style={{ cursor: "pointer", color: "red" ,fontSize: "0.8rem"}}
-                      />
-                    </Popconfirm>
-                  </>
+                
                 </div>
               </FlexContainer>
             ) : (

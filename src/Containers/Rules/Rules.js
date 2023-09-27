@@ -26,12 +26,7 @@ class Rules extends Component {
       <>
         <TabsWrapper>
           <StyledTabs defaultActiveKey="1" onChange={this.handleTabChange}>
-            {/* <TabPane
-                            tab={<><span><Icon type="form" />Boost</span>
-                            </>}
-                            key="1">
-                            <Suspense fallback={'Loading ...'}> <OrganizationBoost /></Suspense>
-                        </TabPane> */}
+     
             <TabPane
               tab={
                 <>

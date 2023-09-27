@@ -82,6 +82,8 @@ function OpportunityForm(props) {
     return contactOptions;
   }
 
+
+
   function getInitiativeOptions(filterOptionKey, filterOptionValue) {
     const initiativeOptions =
       props.initiatives.length &&
