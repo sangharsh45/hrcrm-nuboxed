@@ -45,6 +45,7 @@ function LeadsForm(props) {
 country:props.countryId,
           maximumLeaves: props.leaveData.maximumLeaves || "",
           carryForward: props.leaveData.carryForward || "",
+          mileageRate:props.leaveData.mileageRate || "",
 
           maximumCarryForward: props.leaveData.maximumCarryForward || "",
           // organizationId: props.organizationId,
@@ -122,6 +123,23 @@ country:props.countryId,
                 // }}
                 />
                 <Spacer />
+                <Field
+                  isRequired
+                  name="mileageRate"
+                  // label="Max leaves (in days)"
+                  label={<FormattedMessage
+                    id="app.mileageRate"
+                    defaultMessage="Mileage Rate"
+                  />}
+                  width={"10%"}
+                  component={InputComponent}
+                  inlineLabel
+                // style={{
+                //   flexBasis: "80%",
+                //   marginTop: "0.25em",
+                //   height: "2.0625em",
+                // }}
+                />
 
                 {/* <FlexContainer justifyContent="space-between">
                   <div style={{ width: "50%", marginTop: "0.625em" }}>

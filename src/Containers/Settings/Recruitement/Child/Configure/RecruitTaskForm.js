@@ -16,7 +16,7 @@ import { FlexContainer } from "../../../../../Components/UI/Layout";
 class RecruitTaskForm extends Component {
   handleCallback = (status) => {
     if (status === "success") {
-      return getTaskForWorkflow(this.props.organizationId);
+      return getTaskForWorkflow(this.props.taskId);
     } else {
       return null;
     }

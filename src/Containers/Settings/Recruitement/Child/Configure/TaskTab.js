@@ -12,7 +12,7 @@ import {
 } from "../../../../../Components/UI/Elements";
 import {
   getTaskForRecruit,
-  getTaskStagesForRecruit
+  // getTaskStagesForRecruit
 } from "../../../SettingsAction";
 import { FlexContainer } from "../../../../../Components/UI/Layout";
 import { StyledTabs } from "../../../../../Components/UI/Antd";
@@ -88,7 +88,7 @@ class TaskTab extends Component {
       currentProcess: item,
       subTable: !this.state.subTable,
     });
-    this.props.getTaskStagesForRecruit(item.taskChecklistId);
+    // this.props.getTaskStagesForRecruit(item.taskChecklistId);
   };
 
   //   handleModalClick = () => {
@@ -190,7 +190,7 @@ const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
       getTaskForRecruit,
-      getTaskStagesForRecruit
+      // getTaskStagesForRecruit
 
     },
     dispatch
