@@ -57,10 +57,10 @@ class Leave extends Component {
             <LeaveCardView
             viewType={viewType}
             />  :
-           this.props.viewType === "table" ?
-               <LeaveTable 
-               viewType={viewType}
-               />:
+          //  this.props.viewType === "table" ?
+          //      <LeaveTable 
+          //      viewType={viewType}
+          //      />:
                this.props.viewType === "card" ?
                <LeaveCardList
                viewType={viewType}

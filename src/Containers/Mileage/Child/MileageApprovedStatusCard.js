@@ -65,7 +65,7 @@ class MileageApprovedStatusCard extends React.Component {
 
                                    
                                         <Tooltip >
-                                            <h4 class=" text-xs text-cardBody font-poppins">
+                                            <h4 class=" text-sm text-cardBody font-poppins">
                                             Voucher ID
                                             </h4>
                                             <h4 class=" text-xs text-blue-500 text-cardBody font-poppins cursor-pointer">
@@ -101,7 +101,7 @@ class MileageApprovedStatusCard extends React.Component {
 
                                 <div className=" flex font-medium flex-col  w-52 ml-1 ">
                            
-                                    <h4 class=" text-xs text-cardBody font-poppins"> Voucher Date </h4>
+                                    <h4 class=" text-sm text-cardBody font-poppins"> Voucher Date </h4>
                                     <h4 class=" text-xs text-cardBody font-poppins">
                                         
                                     
@@ -112,7 +112,7 @@ class MileageApprovedStatusCard extends React.Component {
                                 <div className=" flex font-medium flex-col w-36 ">
                                   
 
-                                    <h4 class=" text-xs text-cardBody font-poppins">Amount</h4>
+                                    <h4 class=" text-sm text-cardBody font-poppins">Amount</h4>
                                     <h4 class=" text-xs text-cardBody font-poppins">
                                         € {item.amount}
                                     </h4>

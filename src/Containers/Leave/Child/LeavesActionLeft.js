@@ -35,7 +35,7 @@ const LeavesActionLeft = (props) => {
       
       </Tooltip>
 
-      <Tooltip
+      {/* <Tooltip
         title={<FormattedMessage id="app.tableView" defaultMessage="Table View" />}
       >  <span
             class=" mr-2 text-sm cursor-pointer"
@@ -47,7 +47,7 @@ const LeavesActionLeft = (props) => {
               <GroupsIcon />
           </span>
       
-      </Tooltip>
+      </Tooltip> */}
       <Tooltip
         title={<FormattedMessage id="app.cardView" defaultMessage="Card View" />}
       >  <span

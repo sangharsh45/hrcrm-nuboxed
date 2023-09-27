@@ -86,7 +86,7 @@ function LeaveCardList (props) {
                   <div class=" flex flex-row justify-evenly w-wk">
                     <div className=" flex font-medium flex-col w-44 ">
 
-                    <div class=" text-xs text-cardBody font-medium font-poppins">
+                    <div class=" text-sm text-cardBody font-medium font-poppins">
          
                     Start Date
          
@@ -101,7 +101,7 @@ function LeaveCardList (props) {
                   
                     <div className=" flex font-medium flex-col w-40">
 
-                      <div class=" text-xs text-cardBody font-medium font-poppins">
+                      <div class=" text-sm text-cardBody font-medium font-poppins">
                       End Date
                       </div>
 
@@ -115,7 +115,7 @@ function LeaveCardList (props) {
                     <div className=" flex font-medium flex-col w-40">
              
 
-                        <div class=" text-xs text-cardBody font-medium font-poppins">
+                        <div class=" text-sm text-cardBody font-medium font-poppins">
                         Cover
                         </div>
 
@@ -127,7 +127,7 @@ function LeaveCardList (props) {
                     <div className=" flex font-medium flex-col w-40">
                     
 
-                        <div class=" text-xs text-cardBody font-medium font-poppins">
+                        <div class=" text-sm text-cardBody font-medium font-poppins">
                         Reason
                         </div>
 
@@ -138,7 +138,7 @@ function LeaveCardList (props) {
                     </div>
  
      <div className=" flex font-medium flex-col w-48 ">
-                                    <h4 class=" text-xs text-cardBody font-poppins">Status</h4>
+                                    <h4 class=" text-sm text-cardBody font-poppins">Status</h4>
 
                                     <div class=" text-base text-cardBody font-poppins">
                                     {item.status === "Approved" && (
@@ -175,10 +175,10 @@ function LeaveCardList (props) {
                     textAlign: "center",
                     margin: "2px",
                     borderRadius: "0.62em",
-                    width:"12rem"
+                    width:"11rem"
                   }}
                 >
-                 <div className="text-[#e1d16c]"> Waiting for approval</div>
+                 <div className="text-[#e1d16c] text-sm"> Waiting for approval</div>
                   </div>
               )}
                                     </div>
