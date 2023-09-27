@@ -1048,6 +1048,8 @@ export const settingsReducer = (state = initialState, action) => {
         ...state,
         updatingMileage: false,
         updatingMileageError: false,
+        mileageData:[action.payload,...state.mileageData]
+        
       };
     case types.UPDATE_MILEAGE_FAILURE:
       return {

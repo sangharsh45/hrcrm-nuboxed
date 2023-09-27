@@ -9,14 +9,14 @@ import { Spacer } from "../../../../../Components/UI/Elements";
 import { InputComponent } from "../../../../../Components/Forms/Formik/InputComponent";
 import {
   addTaskForRecruiter,
-  getTaskForRecruit,
+  getTaskForWorkflow,
 } from "../../../SettingsAction";
 import { FlexContainer } from "../../../../../Components/UI/Layout";
 
 class RecruitTaskForm extends Component {
   handleCallback = (status) => {
     if (status === "success") {
-      return getTaskForRecruit(this.props.organizationId);
+      return getTaskForWorkflow(this.props.organizationId);
     } else {
       return null;
     }
@@ -87,7 +87,7 @@ const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
       addTaskForRecruiter,
-      getTaskForRecruit,
+      getTaskForWorkflow,
     },
     dispatch
   );

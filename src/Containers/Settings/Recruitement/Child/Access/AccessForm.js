@@ -13,6 +13,8 @@ import { getDepartmentAccess, addDepartmentAccess } from "../../../SettingsActio
 const CheckboxGroup = Checkbox.Group;
 const plainOptions = ['Access', 'Create', 'Update', 'Delete','Full List'];
  const defaultCheckedList=['Full List'];
+ const dashboardCheckedList=['Access','Full List'];
+ const settingsCheckedList=['Access'];
 // const defaultCheckedList = ['Apple', 'Orange'];
 
 const AccessForm = (props) => {
@@ -32,7 +34,7 @@ const AccessForm = (props) => {
     setCheckedPulseList(props.departmentAcces.pulse)
     setCheckedAccessmentList(props.departmentAcces.assessment)
     setCheckedLeadsList(props.departmentAcces.leads)
-    setCheckedTaskList(props.departmentAcces.task)
+    // setCheckedTaskList(props.departmentAcces.task)
     setCheckedCustomerCommercialsList(props.departmentAcces.comercial)
     setCheckedProgramList(props.departmentAcces.program)
     setCheckedTestList(props.departmentAcces.test)
@@ -51,6 +53,7 @@ const AccessForm = (props) => {
     setCheckedAccountList(props.departmentAcces.account)
     setCheckedDashboardList(props.departmentAcces.dashboard)
     setCheckedSettingsList(props.departmentAcces.settings)
+    setCheckedTasksList(props.departmentAcces.task)
     
   }, [props.departmentAcces.vendor,
   props.departmentAcces.customer,
@@ -62,7 +65,7 @@ const AccessForm = (props) => {
   props.departmentAcces.talent,
   props.departmentAcces.assessment,
   props.departmentAcces.leads,
-  props.departmentAcces.task,
+  // props.departmentAcces.task,
   props.departmentAcces.comercial,
   props.departmentAcces.program,
   props.departmentAcces.test,
@@ -81,6 +84,7 @@ const AccessForm = (props) => {
   props.departmentAcces.account,
   props.departmentAcces.dashboard,
   props.departmentAcces.settings,
+  props.departmentAcces.task,
   
 ])
   //Vendor
@@ -260,23 +264,7 @@ const AccessForm = (props) => {
    };
 
 
-     // Task
-
-     const [checkedTaskList, setCheckedTaskList] = useState(props.departmentAcces.task);
-     const [indeterminateTask, setIndeterminateTask] = useState(true);
-     const [checkAllTask, setCheckAllTask] = useState(false);
    
-     const onTaskChange = (list) => {
-       setCheckedTaskList(list);
-       setIndeterminateTask(!!list.length && list.length < plainOptions.length);
-       setCheckAllTask(list.length === plainOptions.length);
-     };
-   
-     const onCheckAllTaskChange = (e) => {
-       setCheckedTaskList(e.target.checked ? plainOptions : []);
-       setIndeterminateTask(false);
-       setCheckAllTask(e.target.checked);
-     };
 
 
      // Customer Commercials
@@ -616,6 +604,24 @@ const AccessForm = (props) => {
                            setCheckAllSettings(e.target.checked);
                          };
 
+                                // Tasks
+
+                                const [checkedTasksList, setCheckedTasksList] = useState(props.departmentAcces.task);
+                                const [indeterminateTasks, setIndeterminateTasks] = useState(true);
+                                const [checkAllTasks, setCheckAllTasks] = useState(false);
+                              
+                                const onTasksChange = (list) => {
+                                  setCheckedTasksList(list);
+                                  setIndeterminateTasks(!!list.length && list.length < plainOptions.length);
+                                  setCheckAllTasks(list.length === plainOptions.length);
+                                };
+                              
+                                const onCheckAllTasksChange = (e) => {
+                                  setCheckedTasksList(e.target.checked ? plainOptions : []);
+                                  setIndeterminateTasks(false);
+                                  setCheckAllTasks(e.target.checked);
+                                };
+
 
 
   function handleUpdateAccess() {
@@ -631,7 +637,7 @@ const AccessForm = (props) => {
       assessment:checkedAccessmentList || [],
       leads:checkedLeadsList || [],
       comercial:checkedCustomerCommercialsList || [],
-      task:checkedTaskList || [],
+      // task:checkedTaskList || [],
       program:checkedProgramList || [],
       test:checkedTestList || [],
       course:checkedCourseList || [],
@@ -649,6 +655,7 @@ const AccessForm = (props) => {
       account:checkedAccountList || [],
       dashboard:checkedDashboardList || [],
       settings:checkedSettingsList || [],
+      task:checkedTasksList || [],
       
       departmentId: props.departmentId,
       roleTypeId:props.roleTypeId,
@@ -711,7 +718,7 @@ const AccessForm = (props) => {
                 Check all
               </Checkbox>
               <Divider />
-              <CheckboxGroup options={plainOptions} value={checkedDashboardList} onChange={onDashboardChange} />
+              <CheckboxGroup options={dashboardCheckedList} value={checkedDashboardList} onChange={onDashboardChange} />
 
             </div>
             
@@ -722,7 +729,7 @@ const AccessForm = (props) => {
                   Check all
                 </Checkbox>
                 <Divider />
-                <CheckboxGroup options={plainOptions} value={checkedSettingsList} onChange={onSettingsChange} />
+                <CheckboxGroup options={settingsCheckedList} value={checkedSettingsList} onChange={onSettingsChange} />
 
               </div>
               </FlexContainer>
@@ -760,6 +767,17 @@ const AccessForm = (props) => {
                 <CheckboxGroup options={defaultCheckedList} value={checkedLeavesList} onChange={onLeavesChange} />
 
               </div>
+              <Spacer />
+              <div >
+                <h1>Tasks</h1>
+                <Checkbox indeterminate={indeterminateTasks} onChange={onCheckAllTasksChange} checked={checkAllTasks}>
+                  Check all
+                </Checkbox>
+                <Divider />
+                <CheckboxGroup options={defaultCheckedList} value={checkedTasksList} onChange={onTasksChange} />
+
+              </div>
+              <Spacer />
             </FlexContainer>
             <Spacer />
          

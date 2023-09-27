@@ -10,7 +10,6 @@ import { StyledTabs } from "../../../../../Components/UI/Antd";
 import { TabsWrapper } from "../../../../../Components/UI/Layout";
 import {getCountries} from "../../../../Auth/AuthAction"
 import Weekend from "../Weekend/Weekend";
-import SettingsHoliday from "./SettingsHoliday";
 
 const TabPane = StyledTabs.TabPane;
 class WeekendCountryList extends PureComponent {
