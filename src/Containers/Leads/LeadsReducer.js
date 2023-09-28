@@ -122,6 +122,9 @@ const initialState = {
 
   addSharingLeads: false,
   addSharingLeadsError: false,
+
+  updateTypeLeads: false,
+  updateTypeLeadsError:false,
 };
 export const leadsReducer = (state = initialState, action) => {
     switch (action.type) {
@@ -617,6 +620,23 @@ case types.HANDLE_LEADS_MODAL:
             addSharingLeads: false,
             addSharingLeadsError: true,
           };
+          case types.UPDATE_TYPE_FOR_LEAD_REQUEST:
+            return { ...state,updateTypeLeads: true };
+          case types.UPDATE_TYPE_FOR_LEAD_SUCCESS:
+            return {
+              ...state,
+              updateTypeLeads: false,
+                 leadsAllData: state.leadsAllData.map((item) => {
+                if (item.leadsId === action.payload.leadsId) {
+                  return action.payload;
+                } else {
+                  return item;
+                }
+              }),
+            };
+          case types.UPDATE_TYPE_FOR_LEAD_FAILURE:
+            return { ...state, updateTypeLeads: false,updateTypeLeadsError:true, };
+
 default:
 return state;
 }
