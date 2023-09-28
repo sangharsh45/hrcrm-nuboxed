@@ -113,7 +113,7 @@ const BussinessCard = (props) => {
                 <Button
                   style={{
                     borderColor: "transparent",
-                    fontSize: "1rem",
+                    fontSize: "0.875rem",
                   }}
                 >
                   Opportunity - {position}
@@ -130,7 +130,17 @@ const BussinessCard = (props) => {
                   <BorderColorIcon style={{ fontSize: "1rem" }} /> {/* )} */}
                 </Button>
               </div>
+              
             </div>
+            <div>
+                <Button
+                type="primary"
+                  
+                  // onClick={handleEdit}
+                >
+                  Convert to Account
+                </Button>
+              </div>
           </CardElement>
         </CardWrapper>
       </ResponsiveCard>
@@ -199,7 +209,7 @@ const CardWrapper = styled.div`
   }
 `;
 const CardElement = styled.div`
-  border-radius: 0.75rem;
+  border-radius: 0.35rem;
   border: 3px solid #eeeeee;
   background-color: rgb(255, 255, 255);
   box-shadow: 0 0.25em 0.62em #aaa;

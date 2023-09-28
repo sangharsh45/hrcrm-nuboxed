@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component,useState,useEffect } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Button, Tooltip, Switch } from "antd";
@@ -39,87 +39,75 @@ import Upload from "../../../Components/Forms/Formik/Upload";
 import DragableUpload from "../../../Components/Forms/Formik/DragableUpload";
 import { Select } from "antd";
 import moment from "moment";
+import { Listbox, Transition } from '@headlessui/react';
+
 const { Option } = Select;
 
-class TaskForm extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      selectedTaskType:"",
-      selectedWorkflow:"",
-      workflow:[],
-      active: this.props.selectedTask
-        ? this.props.selectedTask.taskStatus
-        : "To Start",
-      priority: this.props.selectedTask
-        ? this.props.selectedTask.priority
-        : "High",
-      complexity: this.props.selectedTask
-        ? this.props.selectedTask.complexity
-        : "Easy",
-      Type: this.props.selectedTask
-        ? this.props.selectedTask.taskType
-        : "Email",
-      selectedType: this.props.selectedTask
-        ? this.props.selectedTask.taskType
-        : "Email",
-      reminder: true,
-    };
-  }
-
-  handleDropChange = (value) => {
-    this.setState({ currentType: value });
+function TaskForm (props) {
+  const[selectedTaskType,setselectedTaskType]=useState("")
+const[selectedWorkflow,setselectedWorkflow]=useState("");
+const[workflow,setworkflow]=useState([]);
+const[active,setactive]=useState(props.selectedTask ? props.selectedTask.taskStatus
+  : "To Start");
+const [priority,setpriority]=useState(props.selectedTask
+  ? props.selectedTask.priority
+  : "High");
+  const[complexity,setcomplexity]=useState(props.selectedTask
+    ? props.selectedTask.complexity
+    : "Easy");
+  const[Type,setType]=useState(props.selectedTask
+    ? props.selectedTask.taskType
+    : "Email",);
+  const[selectedType,setselectedType]=useState(props.selectedTask
+    ? props.selectedTask.taskType
+    : "Email");
+  const[reminder,setreminder]=useState(true);
+    
+ function handleTypeChange(data){
+  setType(data);
+  setselectedType(data);
+  };
+ const glassButtoClick = (type) => {
+    setactive(type);
   };
 
-  handleTypeChange = (data) => {
-    debugger;
-    this.setState({ Type: data });
-    this.setState({ selectedType: data });
-  };
-  glassButtoClick = (type) => {
-    this.setState({ active: type });
-    // alert(this.state.active)
+ const handleReminderChange = (checked) => {
+  setreminder(checked);
   };
 
-  handleReminderChange = (checked) => {
-    this.setState({
-      reminder: checked,
-    });
-  };
-  handleTaskTypeChange = (event) => {
+ const handleTaskTypeChange = (event) => {
     const selectedTaskType = event.target.value;
-     const filteredWorkflow = this.props.recruitWorkflowTask.filter((item) => item.taskTypeId === selectedTaskType);
-    this.setState({ selectedTaskType,workflow: filteredWorkflow });
-    console.log(this.state.selectedTaskType)
-     this.props.getTaskForWorkflow(selectedTaskType);
+     const filteredWorkflow = props.recruitWorkflowTask.filter((item) => item.taskTypeId === selectedTaskType);
+     const workflow=filteredWorkflow
+     setselectedTaskType(selectedTaskType,workflow);
+    console.log(selectedTaskType)
+    props.getTaskForWorkflow(selectedTaskType);
   };
 
-  handleWorkflowChange = (event) => {
+  const handleWorkflowChange = (event) => {
     const selectedWorkflow = event.target.value;
-    this.setState({ selectedWorkflow });
+    setselectedWorkflow(selectedWorkflow);
   };
 
-  handleCallback = () => {
-    const { handleChooserModal, handleTaskModal, callback } = this.props;
+ function handleCallback() {
+    const { handleChooserModal, handleTaskModal, callback }= props;
     handleChooserModal(false);
     handleTaskModal(false);
     callback && callback();
   };
 
-  handleButtonClick = (type) => {
-    this.setState({ priority: type });
-    // alert(this.state.priority)
+ const handleButtonClick = (type) => {
+  setpriority(type);
   };
 
-  handleComplexityClick = (type) => {
-    this.setState({ complexity: type });
-    // alert(this.state.priority)
+  const handleComplexityClick = (type) => {
+    setcomplexity(type);
   };
 
-  handleprojectOptions = (filterOptionKey, filterOptionValue) => {
+ const handleprojectOptions = (filterOptionKey, filterOptionValue) => {
     const projectOptions =
-      this.props.projectTaskList.length &&
-      this.props.projectTaskList.filter((option) => {
+      props.projectTaskList.length &&
+      props.projectTaskList.filter((option) => {
         if (
           option.customerId === filterOptionValue &&
           option.probability !== 0
@@ -160,10 +148,10 @@ class TaskForm extends Component {
   //   return listOptions;
   // };
 
-  taskStageOptions = (filterOptionKey, filterOptionValue) => {
+  function taskStageOptions(filterOptionKey, filterOptionValue) {
     const listOptions =
-      this.props.recruitTaskStages.length &&
-      this.props.recruitTaskStages
+      props.recruitTaskStages.length &&
+      props.recruitTaskStages
         .filter((option) => {
           if (
             option.taskTypeId === filterOptionValue &&
@@ -183,10 +171,10 @@ class TaskForm extends Component {
   
 
 
-  handlecandidateOptions = (filterOptionKey, filterOptionValue) => {
+  const handlecandidateOptions = (filterOptionKey, filterOptionValue) => {
     const candidateOptions =
-      this.props.candidateFilterTaskList.length &&
-      this.props.candidateFilterTaskList
+      props.candidateFilterTaskList.length &&
+      props.candidateFilterTaskList
         .filter((option) => {
           if (
             option.customerId === filterOptionValue &&
@@ -206,24 +194,21 @@ class TaskForm extends Component {
 
   
 
-  componentDidMount() {
-    this.props.getEmployeelist();
-      this.props.getTaskForStages();
-    this.props.getTaskForRecruit(this.props.orgId);
-    this.props.getCustomerTask(this.props.orgId);
-    this.props.getProjectTaskList(this.props.orgId);
-    // this.props.getTaskForWorkflow(this.state.selectedTaskType);
-    this.props.getTasks();
-    this.props.getUnits(this.props.orgId);
-    this.props.getCandidateTaskList(this.props.orgId);
-    this.props.getCandidateTaskFilterList(this.props.orgId);
-  }
-  render() {
-    console.log(this.state.selectedWorkflow)
-    console.log(this.state.selectedTaskType)
-    console.log("type", this.state.currentType);
+  useEffect(()=> {
+    props.getEmployeelist();
+      props.getTaskForStages();
+    props.getTaskForRecruit(props.orgId);
+    props.getCustomerTask(props.orgId);
+    props.getProjectTaskList(props.orgId);
+    props.getTasks();
+    props.getUnits(props.orgId);
+    props.getCandidateTaskList(props.orgId);
+    props.getCandidateTaskFilterList(props.orgId);
+  },[]);
 
-    const customerData = this.props.customerTaskList
+    console.log(selectedWorkflow)
+    console.log(selectedTaskType)
+    const customerData = props.customerTaskList
       .sort((a, b) => {
         const customerNameA = a.name && a.name.toLowerCase();
         const customerNameB = b.name && b.name.toLowerCase();
@@ -267,18 +252,17 @@ class TaskForm extends Component {
       startTime,
       endTime,
       defaultOpportunities,
-      // oppoStages,
       employeeId,
       taskTypeId,
-    } = this.props;
-    const employeesData = this.props.employees.map((item) => {
+    } = props;
+    const employeesData = props.employees.map((item) => {
       return {
         label: `${item.fullName}`,
         value: item.employeeId,
       };
     });
 
-    const unitData = this.props.units.map((item) => {
+    const unitData = props.units.map((item) => {
       return {
         label: `${item.unitName}`,
         value: item.unitId,
@@ -291,27 +275,12 @@ class TaskForm extends Component {
     //     value: item.taskChecklistId,
     //   };
     // });
-    const TaskStageOptions = this.props.stagesTask.map((item) => {
-      return {
-        label: `${item.taskType}`,
-        value: item.taskChecklistId,
-      };
-    });
 
-    const candidateOption = this.props.candidateTaskList.map((item) => {
-      return {
-        label: item.fullName,
-        value: item.employeeId,
-      };
-    });
 
-    const TaskOption = this.props.tasks.map((item) => {
-      return {
-        label: item.taskType,
-        value: item.taskTypeId,
-      };
-    });
-
+    const [defaultOption, setDefaultOption] = useState(props.fullName);
+    const [selected, setSelected] = useState(defaultOption);
+    const selectedOption = props.employees.find((item) => item.fullName === selected);
+   
     return (
       <>
         <Formik
@@ -320,11 +289,11 @@ class TaskForm extends Component {
             isEditing
               ? prefillTask
               : {
-                  // taskType: this.state.currentType,
+                  // taskType: state.currentType,
                   taskTypeId: "",
                   taskName: "",
-                  taskTypeId:this.state.selectedTaskType,
-                  taskChecklistId:this.state.selectedWorkflow,
+                  taskTypeId:selectedTaskType,
+                  taskChecklistId:selectedWorkflow,
                   fullName: "",
                   assignedDate: assignedDate || dayjs(),
                   customerId: "",
@@ -337,14 +306,14 @@ class TaskForm extends Component {
                   startDate: startDate || dayjs(),
                   endDate: endDate || null,
                   endDate: dayjs(),
-                  taskStatus: this.state.active,
+                  taskStatus: active,
 
-                  priority: this.state.priority,
-                  complexity: this.state.complexity,
+                  priority: priority,
+                  complexity: complexity,
                   unit: "",
 
                   department: "",
-                  remindInd: this.state.reminder ? true : false,
+                  remindInd: reminder ? true : false,
                   remindTime: "",
                   level: "",
                   repeatInd: false,
@@ -352,13 +321,9 @@ class TaskForm extends Component {
                   ownerIds: [],
                   startTime: startDate || null,
                   endTime: endDate || null,
-                  // employeesId: [],
-
-                
                   value: "",
-
-                  assignedTo: "",
-                  //  taskTypeId: "",
+                  assignedTo: selectedOption ? selectedOption.employeeId:userId,
+                
                 }
           }
           // validationSchema={TaskSchema}
@@ -444,34 +409,36 @@ class TaskForm extends Component {
                   {
                     ...values,
                    
-                    // taskType: this.state.currentType,
+                   
                     // taskTypeId: "",
-                    taskStatus: this.state.active,
-                    priority: this.state.priority,
-                    complexity: this.state.complexity,
+                    taskStatus: active,
+                    priority: priority,
+                    complexity: complexity,
 
                     startDate: `${newStartDate}T${newStartTime}`,
                     endDate: `${newEndDate}T${newEndTime}`,
                     startTime: 0,
                     endTime: 0,
+                    assignedTo: selectedOption ? selectedOption.employeeId:userId,
                   },
-                  this.handleCallback
+                handleCallback
                 )
               : addTask(
                   {
                     ...values,
-                    taskTypeId:this.state.selectedTaskType,
-                    taskChecklistId:this.state.selectedWorkflow,
-                    taskStatus: this.state.active,
-                    priority: this.state.priority,
-                    complexity: this.state.complexity,
+                    taskTypeId:selectedTaskType,
+                    taskChecklistId:selectedWorkflow,
+                    taskStatus: active,
+                    priority: priority,
+                    complexity: complexity,
                     ownerIds: userId === userId ? [userId] : [],
                     startDate: `${newStartDate}T20:00:00Z`,
                     endDate: `${newEndDate}T20:00:00Z`,
                     startTime: 0,
                     endTime: 0,
+                    assignedTo: selectedOption ? selectedOption.employeeId:userId,
                   },
-                  this.handleCallback
+                  handleCallback
                 );
             !isEditing && resetForm();
           }}
@@ -516,10 +483,10 @@ class TaskForm extends Component {
                       <StyledLabel>Type</StyledLabel>
                       <select 
                         style={{ border: "0.06em solid #aaa" }}
-                       onChange={this.handleTaskTypeChange}
+                       onChange={handleTaskTypeChange}
                       >
           <option value="">Select</option>
-          {this.props.tasks.map((item, index) => (
+          {props.tasks.map((item, index) => (
             <option key={index} value={item.taskTypeId}>
               {item.taskType}
             </option>
@@ -558,10 +525,10 @@ class TaskForm extends Component {
                           <StyledLabel>Workflow</StyledLabel>
                           <select
                  style={{ border: "0.06em solid #aaa" }}
-                      onChange={this.handleWorkflowChange}
+                      onChange={handleWorkflowChange}
                     >
           <option value="">select</option>
-          {this.state.workflow.map((item, index) => (
+          {workflow.map((item, index) => (
             <option key={index}
             // disabled
             // disabled={!values.country_name}
@@ -673,8 +640,8 @@ class TaskForm extends Component {
                                 defaultMessage="To Start"
                               />
                             }
-                            status={this.state.active}
-                            onClick={() => this.glassButtoClick("To Start")}
+                            status={active}
+                            onClick={() => glassButtoClick("To Start")}
                           />
 
                           <StatusIcon
@@ -687,8 +654,8 @@ class TaskForm extends Component {
                                 defaultMessage="In Progress"
                               />
                             }
-                            status={this.state.active}
-                            onClick={() => this.glassButtoClick("In Progress")}
+                            status={active}
+                            onClick={() => glassButtoClick("In Progress")}
                           />
 
                           <StatusIcon
@@ -701,8 +668,8 @@ class TaskForm extends Component {
                                 defaultMessage="Completed"
                               />
                             }
-                            status={this.state.active}
-                            onClick={() => this.glassButtoClick("Completed")}
+                            status={active}
+                            onClick={() => glassButtoClick("Completed")}
                             //  status={item.taskStatus}
                             //  onClick={() =>
                             //    patchTask(item.taskId, { ...item, taskStatus: "Completed" })
@@ -730,10 +697,10 @@ class TaskForm extends Component {
                                 type="primary"
                                 // shape="circle"
                                 // icon={<ExclamationCircleOutlined />}
-                                onClick={() => this.handleButtonClick("High")}
+                                onClick={() => handleButtonClick("High")}
                                 style={{
                                   backgroundColor:
-                                    this.state.priority === "High"
+                                    priority === "High"
                                       ? "red"
                                       : "white",
                                       borderRadius: "50%", // Set the borderRadius to 50% for a circular shape
@@ -748,10 +715,10 @@ class TaskForm extends Component {
                                 type="primary"
                                 // shape="circle"
                                 // icon={<ExclamationCircleOutlined />}
-                                onClick={() => this.handleButtonClick("Medium")}
+                                onClick={() => handleButtonClick("Medium")}
                                 style={{
                                   backgroundColor:
-                                    this.state.priority === "Medium"
+                                    priority === "Medium"
                                       ? "Orange"
                                       : "white",
                                       borderRadius: "50%", // Set the borderRadius to 50% for a circular shape
@@ -766,10 +733,10 @@ class TaskForm extends Component {
                                 type="primary"
                                 // shape="circle"
                                 // icon={<ExclamationCircleOutlined />}
-                                onClick={() => this.handleButtonClick("Low")}
+                                onClick={() => handleButtonClick("Low")}
                                 style={{
                                   backgroundColor:
-                                    this.state.priority === "Low"
+                                    priority === "Low"
                                       ? "teal"
                                       : "white",
                                       borderRadius: "50%", // Set the borderRadius to 50% for a circular shape
@@ -942,12 +909,12 @@ class TaskForm extends Component {
                           component={SelectComponent}
                           options={
                             Array.isArray(
-                              this.handleprojectOptions(
+                              handleprojectOptions(
                                 "customerId",
                                 values.customerId
                               )
                             )
-                              ? this.handleprojectOptions(
+                              ? handleprojectOptions(
                                   "customerId",
                                   values.customerId
                                 )
@@ -1014,11 +981,11 @@ class TaskForm extends Component {
                                   shape="circle"
                                   icon={<ExclamationCircleOutlined />}
                                   onClick={() =>
-                                    this.handleComplexityClick("Easy")
+                                    handleComplexityClick("Easy")
                                   }
                                   style={{
                                     backgroundColor:
-                                      this.state.complexity === "Easy"
+                                      complexity === "Easy"
                                         ? "green"
                                         : "white",
                                   }}
@@ -1031,11 +998,11 @@ class TaskForm extends Component {
                                   shape="circle"
                                   icon={<ExclamationCircleOutlined />}
                                   onClick={() =>
-                                    this.handleComplexityClick("Medium")
+                                    handleComplexityClick("Medium")
                                   }
                                   style={{
                                     backgroundColor:
-                                      this.state.complexity === "Medium"
+                                      complexity === "Medium"
                                         ? "Orange"
                                         : "white",
                                   }}
@@ -1048,11 +1015,11 @@ class TaskForm extends Component {
                                   shape="circle"
                                   icon={<ExclamationCircleOutlined />}
                                   onClick={() =>
-                                    this.handleComplexityClick("Hard")
+                                    handleComplexityClick("Hard")
                                   }
                                   style={{
                                     backgroundColor:
-                                      this.state.complexity === "Hard"
+                                      complexity === "Hard"
                                         ? "red"
                                         : "white",
                                   }}
@@ -1108,7 +1075,7 @@ class TaskForm extends Component {
                 </div>
                 <div class=" h-full w-2/5">
                   <Spacer />
-                  <Field
+                  {/* <Field
                     name="assignedTo"
                     selectType="employee"
                     isColumnWithoutNoCreate
@@ -1128,7 +1095,75 @@ class TaskForm extends Component {
                       // value: employeeId,
                     }}
                     inlineLabel
-                  />
+                  /> */}
+                                   <Listbox value={selected} onChange={setSelected}>
+        {({ open }) => (
+          <>
+            <Listbox.Label className="block text-sm font-semibold text-gray-700">
+              Assigned to
+            </Listbox.Label>
+            <div className="relative mt-1">
+              <Listbox.Button className="relative w-full leading-4 cursor-default rounded-md border border-gray-300 bg-white py-2 pl-3 pr-10 text-left shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm">
+                {selected}
+              </Listbox.Button>
+              {open && (
+                <Listbox.Options
+                  static
+                  className="absolute z-10 mt-1 max-h-56 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
+                >
+                  {props.employees.map((item) => (
+                    <Listbox.Option
+                      key={item.employeeId}
+                      className={({ active }) =>
+                        `relative cursor-default select-none py-2 pl-3 pr-9 ${
+                          active ? "text-white bg-indigo-600" : "text-gray-900"
+                        }`
+                      }
+                      value={item.fullName}
+                    >
+                      {({ selected, active }) => (
+                        <>
+                          <div className="flex items-center">
+                            <span
+                              className={`ml-3 block truncate ${
+                                selected ? "font-semibold" : "font-normal"
+                              }`}
+                            >
+                              {item.fullName}
+                            </span>
+                          </div>
+                          {selected && (
+                            <span
+                              className={`absolute inset-y-0 right-0 flex items-center pr-4 ${
+                                active ? "text-white" : "text-indigo-600"
+                              }`}
+                            >
+                              
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                className="h-5 w-5"
+                                viewBox="0 0 20 20"
+                                fill="currentColor"
+                                aria-hidden="true"
+                              >
+                                <path
+                                  fillRule="evenodd"
+                                  d="M6.293 9.293a1 1 0 011.414 0L10 11.586l2.293-2.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z"
+                                  clipRule="evenodd"
+                                />
+                              </svg>
+                            </span>
+                          )}
+                        </>
+                      )}
+                    </Listbox.Option>
+                  ))}
+                </Listbox.Options>
+              )}
+            </div>
+          </>
+        )}
+      </Listbox>
                   <Spacer />
                   {/* {values.taskTypeId === "TSK52434477391272022" && (
                     <Field
@@ -1202,8 +1237,8 @@ class TaskForm extends Component {
                           <div>
                             {/* <FlexContainer justifyContent="space-between"> */}
                             <Switch
-                              onChange={this.handleReminderChange}
-                              checked={this.state.reminder}
+                              onChange={handleReminderChange}
+                              checked={reminder}
                               checkedChildren="Yes"
                               unCheckedChildren="No"
                             />
@@ -1213,7 +1248,7 @@ class TaskForm extends Component {
                     )}
                     {values.taskTypeId === "TSK52434477391272022" && (
                       <div class=" w-1/3 font-bold">
-                        {this.state.reminder ? (
+                        {reminder ? (
                           <div>
                             <Field
                               // isRequired
@@ -1285,7 +1320,6 @@ class TaskForm extends Component {
         </Formik>
       </>
     );
-  }
 }
 
 const mapStateToProps = ({
@@ -1309,12 +1343,11 @@ const mapStateToProps = ({
   recruitTask: settings.recruitTask,
   deletingTask: task.deleteTask,
   recruitTaskStages:settings.recruitTaskStages,
-  // oppoStages: settings.oppoStages,
   employees: employee.employees,
   tasks: tasks.tasks,
-  // candidateId: candidate.clearbitCandidate.candidateId,
   customerTaskList: task.customerTaskList,
   candidateFilterTaskList: task.candidateFilterTaskList,
+  fullName: auth.userDetails.fullName
 });
 
 const mapDispatchToProps = (dispatch) =>

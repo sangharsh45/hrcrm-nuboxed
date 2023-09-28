@@ -858,21 +858,17 @@ export const setLeadsViewType = (viewType) => (dispatch) => {
         // cb && cb("failure");
       });
   };
-  export const updateTypeForLead = (leadsId,data,type) => (dispatch) => {
-    console.log(leadsId, type);
-  
-    dispatch({
-      type: types.UPDATE_TYPE_FOR_LEAD_REQUEST,
-    });
+  export const updateTypeForLead = (data,leadsId,type) => (dispatch) => {
+    dispatch({ type: types.UPDATE_TYPE_FOR_LEAD_REQUEST });
     axios
-      .put(`${base_url}/leads/type/update/${leadsId}/${type}`, data, {
-        headers: {
-          Authorization: "Bearer " + sessionStorage.getItem("token") || "",
-        },
-      })
+      .put(
+        `${base_url}/leads/type/update/${leadsId}/${type}`,data,
+        {
+          headers: {
+            Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+          },
+        })
       .then((res) => {
-        console.log(res);
-        // dispatch(getApproachingLeads());
         dispatch({
           type: types.UPDATE_TYPE_FOR_LEAD_SUCCESS,
           payload: res.data,
@@ -881,6 +877,7 @@ export const setLeadsViewType = (viewType) => (dispatch) => {
       .catch((err) => {
         dispatch({
           type: types.UPDATE_TYPE_FOR_LEAD_FAILURE,
+          payload:err
         });
       });
   };
