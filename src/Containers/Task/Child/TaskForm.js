@@ -45,6 +45,9 @@ class TaskForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      selectedTaskType:"",
+      selectedWorkflow:"",
+      workflow:[],
       active: this.props.selectedTask
         ? this.props.selectedTask.taskStatus
         : "To Start",
@@ -82,6 +85,18 @@ class TaskForm extends Component {
     this.setState({
       reminder: checked,
     });
+  };
+  handleTypeChange = (event) => {
+    const selectedTaskType = event.target.value;
+     const filteredWorkflow = this.props.recruitWorkflowTask.filter((item) => item.taskTypeId === selectedTaskType);
+    this.setState({ selectedTaskType,workflow: filteredWorkflow });
+    console.log(this.state.selectedTaskType)
+     this.props.getTaskForWorkflow(selectedTaskType);
+  };
+
+  handleWorkflowChange = (event) => {
+    const selectedWorkflow = event.target.value;
+    this.setState({ selectedWorkflow });
   };
 
   handleCallback = () => {
@@ -144,6 +159,27 @@ class TaskForm extends Component {
 
     return listOptions;
   };
+
+  taskStageOptions = (filterOptionKey, filterOptionValue) => {
+    const listOptions =
+      this.props.recruitTaskStages.length &&
+      this.props.recruitTaskStages
+        .filter((option) => {
+          if (
+            option.taskTypeId === filterOptionValue &&
+            option.probability !== 0
+          ) {
+            return option;
+          }
+        })
+        .map((option) => ({
+          label: option.taskChecklistStageName || "",
+          value: option.taskChecklistId,
+        }));
+    console.log(listOptions);
+
+    return listOptions;
+  };
   
 
 
@@ -175,13 +211,15 @@ class TaskForm extends Component {
     this.props.getTaskForRecruit(this.props.orgId);
     this.props.getCustomerTask(this.props.orgId);
     this.props.getProjectTaskList(this.props.orgId);
-    this.props.getTaskForWorkflow(this.props.taskTypeId);
+    // this.props.getTaskForWorkflow(this.state.selectedTaskType);
     this.props.getTasks();
     this.props.getUnits(this.props.orgId);
     this.props.getCandidateTaskList(this.props.orgId);
     this.props.getCandidateTaskFilterList(this.props.orgId);
   }
   render() {
+    console.log(this.state.selectedWorkflow)
+    console.log(this.state.selectedTaskType)
     console.log("type", this.state.currentType);
 
     const customerData = this.props.customerTaskList
@@ -284,6 +322,8 @@ class TaskForm extends Component {
                   // taskType: this.state.currentType,
                   taskTypeId: "",
                   taskName: "",
+                  taskTypeId:this.state.selectedTaskType,
+                  taskChecklistId:this.state.selectedWorkflow,
                   fullName: "",
                   assignedDate: assignedDate || dayjs(),
                   customerId: "",
@@ -402,6 +442,7 @@ class TaskForm extends Component {
                   prefillTask.taskId,
                   {
                     ...values,
+                   
                     // taskType: this.state.currentType,
                     // taskTypeId: "",
                     taskStatus: this.state.active,
@@ -418,6 +459,8 @@ class TaskForm extends Component {
               : addTask(
                   {
                     ...values,
+                    taskTypeId:this.state.selectedTaskType,
+                    taskChecklistId:this.state.selectedWorkflow,
                     taskStatus: this.state.active,
                     priority: this.state.priority,
                     complexity: this.state.complexity,
@@ -469,7 +512,18 @@ class TaskForm extends Component {
                   <div class=" flex justify-between">
                     <div class=" w-1/2">
                       <Spacer />
-                      <StyledLabel>Type</StyledLabel>
+                      <select 
+                        style={{ border: "0.06em solid #aaa" }}
+                       onChange={this.handleTypeChange}
+                      >
+          <option value="">Select Type</option>
+          {this.props.tasks.map((item, index) => (
+            <option key={index} value={item.taskTypeId}>
+              {item.taskType}
+            </option>
+          ))}
+        </select>
+                      {/* <StyledLabel>Type</StyledLabel>
                       <Field
                     name="taskTypeId"
                     // selectType="customerList"
@@ -487,7 +541,7 @@ class TaskForm extends Component {
                     margintop={"0"}
                     value={values.taskTypeId}
                     inlineLabel
-                  />
+                  /> */}
                       {/* <Field
                         name="taskTypeId"
                          component={SelectComponent}
@@ -496,10 +550,24 @@ class TaskForm extends Component {
                       /> */}
                     </div>
                   
-                    {values.taskTypeId === "TSK42340139329302023" && (
+                    {/* {values.taskTypeId === "TSK42340139329302023" && ( */}
                       <div class=" w-1/2">
                           <Spacer />
-                      <StyledLabel>Task CheckList</StyledLabel>
+                          <select
+                 style={{ border: "0.06em solid #aaa" }}
+                      onChange={this.handleWorkflowChange}
+                    >
+          <option value="">Workflow</option>
+          {this.state.workflow.map((item, index) => (
+            <option key={index}
+            // disabled
+            // disabled={!values.country_name}
+             value={item.taskChecklistId}>
+              {item.taskChecklistName}
+            </option>
+          ))}
+        </select>
+                      {/* <StyledLabel> Workflow</StyledLabel>
 
                       <Field
                     name="taskType"
@@ -523,7 +591,7 @@ class TaskForm extends Component {
                     disabled={!values.taskTypeId}
                     isColumn
                     inlineLabel
-                  />
+                  /> */}
                           {/* <Field
                             name="taskChecklistId"
                             // selectType="contactListFilter"
@@ -547,33 +615,35 @@ class TaskForm extends Component {
                           /> */}
                      
                       </div>
-                    )}
-                      <div class=" w-1/2">
+                    {/* )} */}
+                      {/* <div class=" w-1/2">
                           <Spacer />
                       <StyledLabel>Task Stages</StyledLabel>
-                          <Field
-                            name="taskChecklistId"
-                            // selectType="contactListFilter"
-                            isColumnWithoutNoCreate
-                            isRequired
-                            placeolder="Select type"
-                            // label={
-                            //   <FormattedMessage
-                            //     id="app.taskList"
-                            //     defaultMessage="Task CheckList"
-                            //   />
-                            // }
-                            // component={SearchSelect}
-                            component={SelectComponent}
-                            options={
-                              Array.isArray(TaskStageOptions) ? TaskStageOptions : []
-                            }
-                            value={values.taskChecklistId}
-                            isColumn
-                            inlineLabel
-                          />
+                      <Field
+                    name="taskChecklistId"
+                 
+                    isColumnWithoutNoCreate
+                
+                    component={SelectComponent}
+                    options={
+                      Array.isArray(
+                        this.taskStageOptions("taskTypeId", values.taskTypeId)
+                      )
+                        ? this.taskStageOptions("taskTypeId", values.customerId)
+                        : []
+                    }
+                     value={values.taskChecklistId}
+                    filterOption={{
+                      filterType: "taskTypeId",
+                      filterValue: values.taskTypeId,
+                    }}
+                    disabled={!values.taskTypeId}
+                    isColumn
+                    inlineLabel
+                  />
+                    
                      
-                      </div>
+                      </div> */}
 
 
                  
@@ -1222,6 +1292,7 @@ const mapStateToProps = ({
   units: unit.units,
   recruitTask: settings.recruitTask,
   deletingTask: task.deleteTask,
+  recruitTaskStages:settings.recruitTaskStages,
   // oppoStages: settings.oppoStages,
   employees: employee.employees,
   tasks: tasks.tasks,

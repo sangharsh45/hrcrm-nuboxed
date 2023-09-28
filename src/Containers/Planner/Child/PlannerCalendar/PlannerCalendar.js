@@ -33,7 +33,9 @@ import { handleLeavesModal } from "../../../Leave/LeavesAction";
 import { handleEventModal } from "../../../Event/EventAction";
 import { handleCallModal } from "../../../Call/CallAction";
 import { handleTaskModal } from "../../../Task/TaskAction";
-import { getHoliday } from "../../../Holiday/HolidayAction";
+import { 
+  // getHoliday
+  getPlannerHoliday } from "../../../Holiday/HolidayAction";
 import { handleProjectModal } from "../../../Project/ProjectAction";
 // import { LeavesReducer } from "../../../Leave/LeavesReducer";
 export class PlannerCalendar extends Component {
@@ -74,14 +76,16 @@ export class PlannerCalendar extends Component {
       getEventsListByUserId,
       getTasksListByUserId,
       getLeavesByUserId,
-      getHoliday,
+      getPlannerHoliday,
+      // getHoliday,
       userDetails: { userId },
     } = this.props;
     getCallsListByUserId(userId);
     getEventsListByUserId(userId);
     getLeavesByUserId(userId);
     getTasksListByUserId(userId,0);
-    getHoliday();
+    // getHoliday();
+    getPlannerHoliday(userId);
   }
 
   onSelectEvent = (e) => {
@@ -117,6 +121,7 @@ export class PlannerCalendar extends Component {
       tasks,
       leaves,
       holidays,
+      plannerHolidays,
       projects,
       addCallModal,
       addEventModal,
@@ -137,7 +142,7 @@ export class PlannerCalendar extends Component {
           eventPropGetter={this.eventStyleGetter}
           onSelectSlot={setPlannerDate}
           onSelectEvent={this.onSelectEvent}
-          events={[...calls, ...events, ...tasks, ...leaves, ...holidays]}
+          events={[...calls, ...events, ...tasks, ...leaves, ...plannerHolidays]}
         />
         <FormChooserModal />
         <AddEventModal
@@ -220,15 +225,18 @@ const mapStateToProps = ({ auth, leave, call, event, task, holiday, project }) =
   fetchingLeavesByUserId: auth.fetchingLeavesByUserId,
   fetchingLeavesByUserIdError: auth.fetchingLeavesByUserIdError,
   leavesListByUserId: auth.leavesListByUserId,
+  plannerHolidays: holidaySelector(holiday),
+  // plannerHolidays:holiday.plannerHolidays,
   calls: callSelector(auth),
   events: eventSelector(auth),
   tasks: taskSelector(auth),
   leaves: leaveSelector(auth),
-  holidays: holidaySelector(holiday),
+  // holidays: holidaySelector(holiday),
   // projects: projectSelector(auth),
   addCallModal: call.addCallModal,
   addEventModal: event.addEventModal,
   addTaskModal: task.addTaskModal,
+  userId:auth.userDetails.userId,
   addLeavesModal: leave.addLeavesModal,
   addProjectModal: project.addProjectModal,
 });
@@ -247,7 +255,8 @@ const mapDispatchToProps = (dispatch) =>
       handleTaskModal,
       handleLeavesModal,
       handleProjectModal,
-      getHoliday,
+      // getHoliday,
+      getPlannerHoliday
     },
     dispatch
   );

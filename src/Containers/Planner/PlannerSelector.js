@@ -7,11 +7,11 @@ const taskList = (auth) => auth.tasksListByUserId;
 const leaveList = (auth) => auth.leavesListByUserId;
 const projectList = (auth) => auth.projectsListByUserId;
 
-const holidayList = (holiday) => holiday.holidays;
+const holidayList = (holiday) => holiday.plannerHolidays;
 
-export const holidaySelector = createSelector([holidayList], (holidays) => {
+export const holidaySelector = createSelector([holidayList], (plannerHolidays) => {
   console.log("inside holidays selector");
-  return holidays.map((holiday) => {
+  return plannerHolidays.map((holiday) => {
     var d = new Date();
     console.log(`local sysytem date ${d}`);
     var holidaysDate = moment(holiday.date);

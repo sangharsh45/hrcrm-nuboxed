@@ -3380,7 +3380,7 @@ export const getTaskWorkflowStagesForRecruit = (taskId) => (
     type: types.GET_WORKFLOW_TASK_STAGES_FOR_RECRUIT_REQUEST,
   });
   axios
-    .get(`${base_url}/task/teamList/${taskId}`, {
+    .get(`${base_url}/task/subTask/${taskId}`, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },

@@ -54,7 +54,7 @@ console.log("errp",props.erpInd);
             checked={props.erpInd || erp}
             // disabled={props.status}
             isLoading={true}
-            style={{width: "9em"}}
+            style={{width: "4rem"}}
             checkedChildren="Yes"
             unCheckedChildren="No"
           />

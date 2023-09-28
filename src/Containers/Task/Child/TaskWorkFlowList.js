@@ -15,7 +15,7 @@ import {
   TextInput,
 } from "../../../Components/UI/Elements";
 import {
-  getTaskForRecruit,
+  // getTaskForWorkflow,
   getTaskWorkflowStagesForRecruit,
 } from "../../Settings/SettingsAction";
 import { FlexContainer } from "../../../Components/UI/Layout";
@@ -63,7 +63,7 @@ class TaskWorkflowList extends Component {
   }
 
   componentDidMount() {
-    this.props.getTaskForRecruit();
+    // this.props.getTaskForWorkflow(this.props.item.taskTypeId);
     this.props.getTaskWorkflowStagesForRecruit(this.props.item.taskId)
   }
   handleTabChange = (key) => {
@@ -192,13 +192,13 @@ class TaskWorkflowList extends Component {
                 onChange={this.handleTabChange}
                 type="card"
               >
-                {this.props.recruitTask.map((item, i) => {
+                {this.props.recruitTaskWorkflowStages.map((item, i) => {
                   return (
                     <TabPane
                       key={i}
                       tab={
                         <span onClick={() => this.handleProcessClick(item)}>
-                          {elipsize(item.taskType, 15)}
+                          {elipsize(item.taskChecklistName, 15)}
                         </span>
                       }
                     ></TabPane>
@@ -247,6 +247,7 @@ const mapStateToProps = ({ settings, auth, document }) => ({
     auth.userDetails &&
     auth.userDetails.metaData &&
     auth.userDetails.metaData.organization,
+    recruitWorkflowTask:settings.recruitWorkflowTask,
   organizationId: auth.userDetails && auth.userDetails.organizationId,
 });
 
@@ -254,8 +255,8 @@ const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
     
-      getTaskForRecruit,
-      getTaskWorkflowStagesForRecruit
+      // getTaskForWorkflow,
+       getTaskWorkflowStagesForRecruit
     
     },
     dispatch
