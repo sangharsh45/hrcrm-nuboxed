@@ -162,7 +162,7 @@ const LeadsCardList = (props) => {
                                 <div className=" flex font-medium flex-col  w-52 ">
                            <h4 class=" text-[0.875rem] text-cardBody font-poppins"> Phone # </h4>
                            <h4 class=" text-[0.75rem] text-cardBody font-poppins">   
-                           {/* {item.phone} */}
+                           {`${item.countryDialCode} ${item.phoneNumber}`}
                            </h4>
                        </div>
                        <div className=" flex font-medium flex-col  w-52 ">
@@ -197,7 +197,7 @@ const LeadsCardList = (props) => {
                           title={item.country}
                         /> */}
                         &nbsp;
-                       {item.country}
+                        {item.address && item.address.length && item.address[0].country}
                                     </h4>
                                 </div>
     
