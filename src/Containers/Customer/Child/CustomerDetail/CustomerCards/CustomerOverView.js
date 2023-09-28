@@ -21,7 +21,7 @@ class CustomerOverView extends Component {
                 imageURL={customer.imageURL}
               />
             </div>
-            <div class=" flex flex-col w-4/6">
+            <div class=" flex flex-col w-wk">
               <Title
                 overflow="hidden"
                 textOverflow="ellipsis"

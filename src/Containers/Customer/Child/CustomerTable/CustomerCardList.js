@@ -36,6 +36,7 @@ import { getAllCustomerEmployeelist } from "../../../Employees/EmployeeAction";
 import APIFailed from "../../../../Helpers/ErrorBoundary/APIFailed";
 import AddCustomerEmailDrawerModal from "../UpdateCustomer/AddCustomerEmailDrawerModal";
 import ReactCountryFlag from 'react-country-flag';
+import { BundleLoader } from "../../../../Components/Placeholder";
 
 const UpdateCustomerModal = lazy(() =>
   import("../UpdateCustomer/UpdateCustomerModal")
@@ -108,10 +109,10 @@ function CustomerCardList(props) {
   } = props;
   console.log("ee");
  
-  if (fetchingCustomersError) {
-    return <APIFailed />;
+  if (fetchingCustomers) {
+    return <BundleLoader />;
   }
- 
+
   return (
     <>
   <InfiniteScroll
@@ -248,12 +249,12 @@ function CustomerCardList(props) {
               />
             </span>
                    </div>
-                   <div className=" flex font-medium flex-col w-24">
+                   <div className=" flex font-medium flex-col">
                        
                        <h4 class=" text-[0.875rem] text-cardBody font-poppins"></h4>
 
                        <Button type="primary">
-                     <span class="w-20 ext-[0.75rem]" >Convert to Account</span>
+                     <span class="text-[0.75rem]" >Convert to Account</span>
                         </Button>
                    </div>
                                 <div class="flex flex-col w-[3%]">

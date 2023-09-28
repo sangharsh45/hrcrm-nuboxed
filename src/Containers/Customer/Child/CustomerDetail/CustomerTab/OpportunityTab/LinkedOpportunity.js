@@ -20,9 +20,6 @@ import { getOpportunityListByCustomerId,handleUpdateCustomerOpportunityModal,
 import { Tooltip,Button,Input } from "antd";
 const AddCustomerUpdateOpportunityModal =lazy(()=>import("./AddCustomerUpdateOpportunityModal")); 
 
-function onChange(pagination, filters, sorter) {
-  console.log("params", pagination, filters, sorter);
-}
 
 function OpportunityTable(props) {
   useEffect(() => {
