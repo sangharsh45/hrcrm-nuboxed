@@ -3227,6 +3227,8 @@ export const deleteTaskStagesData = (taskChecklistStagelinkId,orgId) => (dispatc
 export const updateTaskStageForRecruit = (
   taskChecklistStagelinkId,
   taskChecklistStageName,
+  probability,
+  days,
   cb
 ) => (dispatch) => {
   console.log(taskChecklistStagelinkId);
@@ -3236,7 +3238,7 @@ export const updateTaskStageForRecruit = (
   axios
     .put(
       `${base_url}/category/task/checklist/stage/update`,
-      { taskChecklistStagelinkId, taskChecklistStageName, },
+      { taskChecklistStagelinkId, taskChecklistStageName, probability,days},
       {
         headers: {
           Authorization: "Bearer " + sessionStorage.getItem("token") || "",

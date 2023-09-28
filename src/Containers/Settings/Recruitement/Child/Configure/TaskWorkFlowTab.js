@@ -152,7 +152,7 @@ class TaskWorkflowTab extends Component {
         isProcessTextInputOpen: false,
       });
     };
-    handleUpdateStage = (taskChecklistStagelinkId, taskChecklistStageName ) => {
+    handleUpdateStage = (taskChecklistStagelinkId, taskChecklistStageName,probability,days ) => {
       //debugger;
       const { recruitTaskStages } = this.props;
       let exist =
@@ -163,7 +163,7 @@ class TaskWorkflowTab extends Component {
           "Stage with same name already exists as part of this workflow"
         );
       } else {
-        this.props.updateTaskStageForRecruit(taskChecklistStagelinkId, taskChecklistStageName,);
+        this.props.updateTaskStageForRecruit(taskChecklistStagelinkId, taskChecklistStageName,probability,days);
       }
     };
 

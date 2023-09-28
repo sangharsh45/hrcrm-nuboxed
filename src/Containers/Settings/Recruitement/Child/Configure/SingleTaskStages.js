@@ -149,6 +149,22 @@ class SingleTaskStages extends Component {
                   // disabled={disabled}
                   width={"25%"}
                 />
+                    <TextInput
+                  name={newProbability}
+                  // value={stageValue1 || taskChecklistStageName}
+                  defaultValue={probability}
+                  onChange={this.handleChange}
+                  // disabled={disabled}
+                  width={"25%"}
+                />
+                    <TextInput
+                  name={newDays}
+                  // value={stageValue1 || taskChecklistStageName}
+                  defaultValue={days}
+                  onChange={this.handleChange}
+                  // disabled={disabled}
+                  width={"25%"}
+                />
 
                 <Button
                   type="primary"
@@ -160,6 +176,8 @@ class SingleTaskStages extends Component {
                       // this.props.taskChecklistStagelinkId,
                       this.props.taskChecklistStagelinkId,
                       this.state.fields.taskChecklistStageName,
+                      this.state.fields.probability,
+                      this.state.fields.days,
                       toggleViewType()
                     )
                   }

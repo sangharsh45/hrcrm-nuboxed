@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import styled from "styled-components";
 import { FormattedMessage } from "react-intl";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
-import { Button, Tooltip, Popconfirm, DatePicker, } from "antd";
+import { Button, Tooltip, Popconfirm, DatePicker, Avatar, } from "antd";
 import { FlexContainer } from "../../../Components/UI/Layout";
 import {
   TextInput,
@@ -61,6 +61,7 @@ class SingleTaskWorkflowList extends Component {
     const {
         recruitTaskWorkflowStages:
        { name,
+        included,
         taskChecklistStageName,
          taskChecklistStagelinkId,
          probability,
@@ -123,27 +124,32 @@ class SingleTaskWorkflowList extends Component {
                   placeholder="End Date"
                   onChange={this.onChangeEndDatePicker} />
                   </div> 
-                  {/* <div>
-                  <span>
-            <Avatar.Group
-              maxCount={2}
-              maxStyle={{ color: "#f56a00", backgroundColor: "#fde3cf" }}
-            >
-              {item.candidates &&
-                item.candidates.map((candidate, i) => {
-                  const data1 = candidate.candidateName.slice(0, 2);
-                  console.log("datas", data1);
-                  return (
-                    <Tooltip title={candidate.candidateName}>
-                      <Avatar style={{ backgroundColor: "#94b3e4" }}>
-                        {data1}
-                      </Avatar>
-                    </Tooltip>
-                  );
-                })}
+                {/* <div>
+                <>
+                <Avatar.Group
+                   maxCount={3}
+                  maxStyle={{ color: "#f56a00", backgroundColor: "#fde3cf" }}
+                >
+                {included &&
+                  included.map((candidate, i) => {
+                     const data1 = candidate.fullName
+                     .slice(0,2)
+                     .split("")[0]
+                     .toUpperCase();
+                   console.log("datas", data1);
+                    return (
+                      <Avatar style={{ backgroundColor: "#f56a00" }}>
+                      {data1}
+                    
+                    </Avatar>
+                     
+
+                   
+                    );
+                  })}
             </Avatar.Group>
-          </span>
-                  </div> */}
+            </>
+                  </div>  */}
                {/* <StageName>
                   {`${ moment(startDate).format("DD/MM/YYYY")}`}
                 </StageName>

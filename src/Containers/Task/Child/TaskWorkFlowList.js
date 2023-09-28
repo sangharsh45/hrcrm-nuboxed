@@ -192,18 +192,18 @@ class TaskWorkflowList extends Component {
                 onChange={this.handleTabChange}
                 type="card"
               >
-                {this.props.recruitTaskWorkflowStages.map((item, i) => {
+                {/* {this.props.recruitTaskWorkflowStages.map((item, i) => { */}
                   return (
                     <TabPane
-                      key={i}
+                      // key={i}
                       tab={
-                        <span onClick={() => this.handleProcessClick(item)}>
-                          {elipsize(item.taskChecklistName, 15)}
+                        <span onClick={() => this.handleProcessClick()}>
+                          {elipsize(this.props.item.taskChecklistName, 15)}
                         </span>
                       }
                     ></TabPane>
                   );
-                })}
+                {/* })} */}
               </StyledTabs>
 
             

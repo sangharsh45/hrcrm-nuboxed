@@ -4,7 +4,6 @@ import { bindActionCreators } from "redux";
 import { addHoliday, getHoliday, updateHoliday,deleteHoliday } from "../HolidayAction";
 import { StyledTabs } from "../../../Components/UI/Antd";
 import { MainWrapper, FlexContainer } from "../../../Components/UI/Layout";
-import { TextInput } from "../../../Components/UI/Elements";
 import dayjs from "dayjs";
 import moment from "moment";
 import SingleHoliday2 from "./SingleHoliday2"; 
@@ -27,7 +26,7 @@ class HolidayPage extends React.Component {
   componentDidMount() {
     const currentYear = new Date().getFullYear();
     // const country=this.props.address && this.props.address.length && this.props.address[0].country
-    this.props.getHoliday(this.props.country,currentYear);
+    this.props.getHoliday(this.props.workplace,currentYear);
   }
   handleChangeHolidayTime = (checked) => {
     this.setState({
@@ -90,7 +89,7 @@ class HolidayPage extends React.Component {
      
       console.log('Selected Year:', selectedYear);
       this.setState({ selectedYear });
-      this.props.getHoliday(this.props.country,selectedYear);
+      this.props.getHoliday(this.props.workplace,selectedYear);
     }
    
   };
@@ -111,7 +110,7 @@ class HolidayPage extends React.Component {
     const currentYear = moment().format('YYYY');
    
     const { selectedYear } = this.state;
-    console.log(this.props.country)
+    console.log(this.props.workplace)
   
     const { isTextInputOpen } = this.state;
     const {
@@ -280,7 +279,8 @@ const mapStateToProps = ({ holiday, auth }) => ({
   userType: auth.userDetails,
   deleteHoliday:holiday.deleteHoliday,
   address:auth.userDetails.address,
-  country:auth.userDetails.address && auth.userDetails.address.length && auth.userDetails.address[0].country,
+  workplace:auth.userDetails.workplace,
+  // country:auth.userDetails.address && auth.userDetails.address.length && auth.userDetails.address[0].country,
   deleteHolidayError:holiday.deleteHolidayError,
   role: auth.userDetails.role,
 
