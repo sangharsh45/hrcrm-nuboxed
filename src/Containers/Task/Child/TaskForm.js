@@ -86,7 +86,7 @@ class TaskForm extends Component {
       reminder: checked,
     });
   };
-  handleTypeChange = (event) => {
+  handleTaskTypeChange = (event) => {
     const selectedTaskType = event.target.value;
      const filteredWorkflow = this.props.recruitWorkflowTask.filter((item) => item.taskTypeId === selectedTaskType);
     this.setState({ selectedTaskType,workflow: filteredWorkflow });
@@ -139,26 +139,26 @@ class TaskForm extends Component {
     return newData;
   };
 
-  handleCheckListOptions = (filterOptionKey, filterOptionValue) => {
-    const listOptions =
-      this.props.recruitWorkflowTask.length &&
-      this.props.recruitWorkflowTask
-        .filter((option) => {
-          if (
-            option.taskTypeId === filterOptionValue &&
-            option.probability !== 0
-          ) {
-            return option;
-          }
-        })
-        .map((option) => ({
-          label: option.taskChecklistName || "",
-          value: option.taskType,
-        }));
-    console.log(listOptions);
+  // handleCheckListOptions = (filterOptionKey, filterOptionValue) => {
+  //   const listOptions =
+  //     this.props.recruitWorkflowTask.length &&
+  //     this.props.recruitWorkflowTask
+  //       .filter((option) => {
+  //         if (
+  //           option.taskTypeId === filterOptionValue &&
+  //           option.probability !== 0
+  //         ) {
+  //           return option;
+  //         }
+  //       })
+  //       .map((option) => ({
+  //         label: option.taskChecklistName || "",
+  //         value: option.taskType,
+  //       }));
+  //   console.log(listOptions);
 
-    return listOptions;
-  };
+  //   return listOptions;
+  // };
 
   taskStageOptions = (filterOptionKey, filterOptionValue) => {
     const listOptions =
@@ -203,6 +203,7 @@ class TaskForm extends Component {
 
     return candidateOptions;
   };
+
   
 
   componentDidMount() {
@@ -284,12 +285,12 @@ class TaskForm extends Component {
       };
     });
 
-    const TaskOptions = this.props.recruitWorkflowTask.map((item) => {
-      return {
-        label: `${item.taskChecklistName}`,
-        value: item.taskChecklistId,
-      };
-    });
+    // const TaskOptions = this.props.recruitWorkflowTask.map((item) => {
+    //   return {
+    //     label: `${item.taskChecklistName}`,
+    //     value: item.taskChecklistId,
+    //   };
+    // });
     const TaskStageOptions = this.props.stagesTask.map((item) => {
       return {
         label: `${item.taskType}`,
@@ -300,7 +301,7 @@ class TaskForm extends Component {
     const candidateOption = this.props.candidateTaskList.map((item) => {
       return {
         label: item.fullName,
-        value: item.included,
+        value: item.employeeId,
       };
     });
 
@@ -353,7 +354,7 @@ class TaskForm extends Component {
                   endTime: endDate || null,
                   // employeesId: [],
 
-                  included: [],
+                
                   value: "",
 
                   assignedTo: "",
@@ -512,11 +513,12 @@ class TaskForm extends Component {
                   <div class=" flex justify-between">
                     <div class=" w-1/2">
                       <Spacer />
+                      <StyledLabel>Type</StyledLabel>
                       <select 
                         style={{ border: "0.06em solid #aaa" }}
-                       onChange={this.handleTypeChange}
+                       onChange={this.handleTaskTypeChange}
                       >
-          <option value="">Select Type</option>
+          <option value="">Select</option>
           {this.props.tasks.map((item, index) => (
             <option key={index} value={item.taskTypeId}>
               {item.taskType}
@@ -553,11 +555,12 @@ class TaskForm extends Component {
                     {/* {values.taskTypeId === "TSK42340139329302023" && ( */}
                       <div class=" w-1/2">
                           <Spacer />
+                          <StyledLabel>Workflow</StyledLabel>
                           <select
                  style={{ border: "0.06em solid #aaa" }}
                       onChange={this.handleWorkflowChange}
                     >
-          <option value="">Workflow</option>
+          <option value="">select</option>
           {this.state.workflow.map((item, index) => (
             <option key={index}
             // disabled
@@ -1119,21 +1122,22 @@ class TaskForm extends Component {
                     component={SearchSelect}
                     isColumn
                     value={values.assignedTo}
-                    // defaultValue={{
-                    //   label: `${firstName || ""} ${middleName ||
-                    //     ""} ${lastName || ""}`,
-                    //   value: employeeId,
-                    // }}
+                    defaultValue={{
+                      label: `${firstName || ""} ${middleName ||
+                        ""} ${lastName || ""}`,
+                      // value: employeeId,
+                    }}
                     inlineLabel
                   />
                   <Spacer />
-                  {values.taskTypeId === "TSK52434477391272022" && (
+                  {/* {values.taskTypeId === "TSK52434477391272022" && (
                     <Field
                       name="included"
                       //type="text"
                       label="Team"
                       mode
                       component={SelectComponent}
+                        //  options={Array.isArray(employeesData) ? employeesData : []}
                       options={
                         Array.isArray(
                           this.handlecandidateOptions(
@@ -1148,21 +1152,33 @@ class TaskForm extends Component {
                           : []
                       }
                       value={values.included}
+                      defaultValue={{
+                        label: `${candidateName || ""} `,
+                        value: employeeId,
+                      }}
                     />
-                  )}
-                  {values.taskTypeId !== "TSK52434477391272022" && (
-                    <Field
-                      name="included"
-                      //type="text"
-                      label="Team"
-                      mode
-                      component={SelectComponent}
-                      value={values.included}
-                      options={
-                        Array.isArray(candidateOption) ? candidateOption : []
-                      }
-                    />
-                  )}
+                  )} */}
+                  {/* {values.taskTypeId !== "TSK52434477391272022" && ( */}
+                  <Field
+                    name="included"
+                    // label="Include"
+                    label={
+                      <FormattedMessage
+                        id="app.team"
+                        defaultMessage="Team"
+                      />
+                    }
+                    mode
+                    placeholder="Select"
+                    component={SelectComponent}
+                    options={Array.isArray(employeesData) ? employeesData : []}
+                    value={values.included}
+                    defaultValue={{
+                      label: `${fullName || ""} `,
+                      value: employeeId,
+                    }}
+                  />
+              
                   <Spacer />
                   <Field
                     name="taskDescription"

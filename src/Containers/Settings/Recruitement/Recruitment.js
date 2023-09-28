@@ -53,17 +53,17 @@ function Recruitment(props) {
       ruleId: "21",
       component: <LeadsConfigTab/>,
     },
-    {
-      rulesName: "Notification",
-      ruleId: "15",
-      component: <NotificationsTab />,
-    },
+    // {
+    //   rulesName: "Notification",
+    //   ruleId: "15",
+    //   component: <NotificationsTab />,
+    // },
     
-    {
-      rulesName: "Report Scheduler",
-      ruleId: "8",
-      component: <ReportScheduler />,
-    },
+    // {
+    //   rulesName: "Report Scheduler",
+    //   ruleId: "8",
+    //   component: <ReportScheduler />,
+    // },
     {
       rulesName: "Rules",
       ruleId: "20",
@@ -74,11 +74,11 @@ function Recruitment(props) {
       ruleId: "6",
       component: <SkillsTab/>,
     },
-    {
-      rulesName: "Template",
-      ruleId: "4",
-      component: <Template />,
-    },
+    // {
+    //   rulesName: "Template",
+    //   ruleId: "4",
+    //   component: <Template />,
+    // },
     {
       rulesName: "Workflow",
       ruleId: "1",

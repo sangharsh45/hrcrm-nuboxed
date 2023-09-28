@@ -97,11 +97,11 @@ class SingleTaskStages extends Component {
                 <StageName style={{ flexBasis: "25%", }}>
                   {elipsize(taskChecklistStageName, 23)}
                 </StageName>
-                <StageName>
-                  {probability}
-                </StageName>
-                &nbsp; &nbsp; &nbsp;
-                <StageName>
+                <StageName style={{ flexBasis: probability > 0 && probability < 100 ? `${probability}%` : "15%" }}>
+  {probability > 0 && probability < 100 ? `${probability}%` : 'Invalid Probability'}
+</StageName>
+           
+                <StageName  style={{ flexBasis: "15%"}}>
                   {days}
                 </StageName>
                 {/* <StageName>

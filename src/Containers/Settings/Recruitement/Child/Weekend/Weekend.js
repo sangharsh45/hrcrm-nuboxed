@@ -565,7 +565,7 @@ function Weekend(props) {
   };
 
   const renderSwitch = (day) => (
-    <FlexContainer style={{ width: "52%", justifyContent: "space-between" }}>
+    <FlexContainer style={{ width: "52%", justifyContent: "space-between",marginTop:"1rem" }}>
       <p>{day.charAt(0).toUpperCase() + day.slice(1)}</p>
       <div>
         <Popconfirm
