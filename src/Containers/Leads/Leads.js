@@ -6,7 +6,7 @@ import LeadsHeader from "./Child/LeadsHeader";
 import { BundleLoader } from "../../Components/Placeholder";
 import LeadsTable from "./Child/LeadsTable/LeadsTable";
 import {getLeads} from "../Leads/LeadsAction"
-import { setLeadsViewType, handleLeadsModal, getEmployeelist } from "./LeadsAction";
+import { setLeadsViewType, handleLeadsModal, getEmployeelist, } from "./LeadsAction";
 const LeadsCardList = lazy(()=>import("./Child/LeadsTable/LeadsCardList"));
 
 class Leads extends Component {

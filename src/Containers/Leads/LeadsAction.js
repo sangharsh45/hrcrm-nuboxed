@@ -858,3 +858,29 @@ export const setLeadsViewType = (viewType) => (dispatch) => {
         // cb && cb("failure");
       });
   };
+  export const updateTypeForLead = (leadsId,data,type) => (dispatch) => {
+    console.log(leadsId, type);
+  
+    dispatch({
+      type: types.UPDATE_TYPE_FOR_LEAD_REQUEST,
+    });
+    axios
+      .put(`${base_url}/leads/type/update/${leadsId}/${type}`, data, {
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+        },
+      })
+      .then((res) => {
+        console.log(res);
+        // dispatch(getApproachingLeads());
+        dispatch({
+          type: types.UPDATE_TYPE_FOR_LEAD_SUCCESS,
+          payload: res.data,
+        });
+      })
+      .catch((err) => {
+        dispatch({
+          type: types.UPDATE_TYPE_FOR_LEAD_FAILURE,
+        });
+      });
+  };

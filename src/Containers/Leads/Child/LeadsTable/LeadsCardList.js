@@ -21,6 +21,7 @@ import {
   handleUpdateLeadsModal,
   handleLeadsEmailDrawerModal,
   getLeadDetailsById,
+  updateTypeForLead,
 } from "../../../Leads/LeadsAction";
 import { MailOutlined, SearchOutlined } from "@ant-design/icons";
 import { Button, Tooltip, Input } from "antd";
@@ -47,43 +48,12 @@ const LeadsCardList = (props) => {
 
   function handleSetCurrentLeadsId(item) {
     setCurrentLeadsId(item);
-    console.log(item);
   }
-  const { deleteLeadsData, handleUpdateLeadsModal, updateLeadsModal } = props;
-
-  const sectorsNameOption = props.sectors.map((item) => {
-    return {
-      text: item.sectorName,
-      value: item.sectorName,
-    };
-  });
-
-  const CountryTypeOption = props.countries.map((item) => {
-    return {
-      text: item.countryAlpha3Code || "",
-      value: item.countryAlpha3Code,
-    };
-  });
-
-  const ownerlistType = useMemo(() => {
-    if (!props.sales) return [];
-    return (
-      props.sales.length &&
-      props.sales.map((sales) => {
-        return {
-          text: sales.fullName || "",
-          value: sales.fullName,
-        };
-      })
-    );
-  }, [props.sales]);
-
-  const { fetchingLeads,leadsAllData } = props;
+  const { deleteLeadsData, handleUpdateLeadsModal, updateLeadsModal,fetchingLeads,leadsAllData  } = props;
 
   if (fetchingLeads) {
     return <BundleLoader />;
   }
-
 
   return (
     <>
@@ -212,13 +182,11 @@ const LeadsCardList = (props) => {
    id="app.warm"
    defaultMessage="Warm"
  />}
- // role={item.leadCategory}
- // onClick={() =>
- //   props.setContactTypeForLead(item.leadsId, {
- //     leadsId: item.leadsId,
- //     leadCategory: "Warm",
- //   })
- // }
+ role={item.type}
+ onClick={() =>
+ 
+   props.updateTypeForLead(item.leadsId,)
+ }
 />
 </ButtonGroup>
 </div>    
@@ -234,13 +202,11 @@ const LeadsCardList = (props) => {
    id="app.hot"
    defaultMessage="Hot"
  />}
- // role={item.leadCategory}
- // onClick={() =>
- //   props.setContactTypeForLead(item.leadsId, {
- //     leadsId: item.leadsId,
- //     leadCategory: "Hot",
- //   })
- // }
+ role={item.type}
+ onClick={() =>
+
+   props.updateTypeForLead(item.leadsId,"Hot")
+ }
 />
 </ButtonGroup>
 </div>
@@ -254,13 +220,13 @@ const LeadsCardList = (props) => {
    id="app.cold"
    defaultMessage="Cold"
  />}
- role={item.leadCategory}
- // onClick={() =>
- //   props.setContactTypeForLead(item.leadsId, {
- //     leadsId: item.leadsId,
- //     leadCategory: "Cold",
- //   })
- // }
+ role={item.type}
+ onClick={() =>
+   props.updateTypeForLead(item.leadsId, {
+     leadsId: item.leadsId,
+     type: "Cold",
+   })
+ }
 />
 </ButtonGroup>
 </div>
@@ -436,6 +402,7 @@ const mapDispatchToProps = (dispatch) =>
       handleLeadsEmailDrawerModal,
       getLeadDetailsById,
       getCountries,
+      updateTypeForLead,
     },
     dispatch
   );
