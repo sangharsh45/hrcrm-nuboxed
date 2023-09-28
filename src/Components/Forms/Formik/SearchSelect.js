@@ -8,44 +8,16 @@ import {
 import { StyledCreatable, StyledLabel } from "../../UI/Elements";
 import { FlexContainer } from "../../UI/Layout";
 import { functions, get, uniqBy } from "lodash";
-// import AddUserModal from "../../../Containers/Team/Child/AddUserModal";
 import ValidationError from "../../UI/Elements/ValidationError";
 import {
   getContactListByUserId,
-  //   handleContactModal,
 } from "../../../Containers/Contact/ContactAction";
 import { getContactListByCustomerId, getAllCustomerListByUserId } from "../../../Containers/Customer/CustomerAction";
 import { getAllCandidateListByUserId } from "../../../Containers/Candidate/CandidateAction";
-// import {
-//   getAccounts,
-//   handleAccountModal,
-// } from "../../../Containers/Account/AccountAction";
-// import { getLeadsAccounts } from "../../../Containers/Leads/LeadsAction";
 import { getAllUsersByOrganizationId } from "../../../Containers/Call/CallAction";
-// import {
-//   getCountries,
-//   getSources,
-//   getStages,
-//   getOpportunities,
-//   handleOpportunityModal,
-// } from "../../../Containers/Opportunity/OpportunityAction";
-
 import { getCountries, getCurrency } from "../../../Containers/Auth/AuthAction";
-// import { getProducts } from "../../../Containers/Product/ProductAction";
-// import {
-//   getDeliveryUser,
-//   getDepartment,
-//   getOnlySalesUser,
-// } from "../../../Containers/Team/TeamAction";
 import { getTimeZone } from "../../../Containers/Auth/AuthAction";
 import { callReducer } from "../../../Containers/Call/CallReducer";
-// import {
-//   getProcess,
-//   getProcessStages,
-//   getAllProcessStages,
-//   getDepartments, 
-//   getLevels,
-// } from "../../../Containers/Settings/SettingsAction";
 import { getDocuments } from "../../../Containers/Settings/Documents/DocumentsAction";
 import { getSectors } from "../../../Containers/Settings/Sectors/SectorsAction";
 import { getCustomerListByUserId } from "../../../Containers/Customer/CustomerAction";
@@ -63,7 +35,6 @@ import { getEducations } from "../../../Containers/Settings/Educations/Education
 import { getRoles } from "../../../Containers/Settings/Category/Role/RoleAction"
 class SearchSelect extends Component {
   componentDidMount() {
-    // const id = "PRIN8195435358122020" = this.props;
     const {
       opportunityId,
       processId,
