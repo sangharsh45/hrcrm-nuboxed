@@ -12,10 +12,12 @@ import { SmileOutlined, MehOutlined } from '@ant-design/icons';
 import { MainWrapper, FlexContainer } from "../../../Components/UI/Layout";
 import {
     getProcessForOpportunity,
-    getProcessStagesForOpportunity
+    getProcessStagesForOpportunity,
+  
+
  
 } from "../../Settings/SettingsAction";
-import {getAllOpportunityListByUserId} from "../OpportunityAction"
+import {getAllOpportunityListByUserId,updateOpportunitydragstage} from "../OpportunityAction"
 //import { getAccounts } from "../../../Account/AccountAction";
 //import { getOpportunityRelatedData } from "../../../Dashboard/DashboardAction";
 //import { opportunitySelector } from "../../OpportunitySelector";
@@ -315,6 +317,7 @@ function OpportunityBoard(props) {
 
     const { draggableId, destination, source } = result;
     console.log(destination);
+    console.log("drag",draggableId);
     // did not move anywhere - can bail early
     if (
       source.droppableId === destination.droppableId &&
@@ -324,18 +327,22 @@ function OpportunityBoard(props) {
     }
 
     const {
-      updateOpportunityStage,
+      updateOpportunitydragstage,
       getOpportunityRelatedData,
       userId,
       startDate,
       endDate,
     } = props;
-    // updateOpportunityStage(
-    //   source.droppableId,
-    //   destination.droppableId,
-    //   draggableId,
-    //   handleCallback
-    // );
+    let data={
+      opportunityStagesId:destination.droppableId,
+      opportunityId:result.draggableId,
+    }
+    updateOpportunitydragstage(data,
+      source.droppableId,
+      destination.droppableId,
+      draggableId,
+      //handleCallback
+    );
   }
 
   function dragStart() {
@@ -508,7 +515,8 @@ const mapDispatchToProps = (dispatch) =>
     {
         getProcessForOpportunity,
         getProcessStagesForOpportunity,
-        getAllOpportunityListByUserId
+        getAllOpportunityListByUserId,
+        updateOpportunitydragstage
     //   updateOpportunityStage,
     //   getOpportunityRelatedData,
     //   getOpportunities,

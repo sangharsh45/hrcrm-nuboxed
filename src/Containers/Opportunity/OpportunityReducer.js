@@ -363,6 +363,8 @@ const initialState = {
   updatingOpportunityOwenership:false,
   updatingOpportunityOwenershipError:false,
 
+  updatingDragStage:false,
+
   addCandidateDateModal:false,
 
   fetchingAllRecruitmentAvgTimeByOppId: false,
@@ -478,6 +480,19 @@ const updatedOpportunity = (item, newProps) => {
     if (opp.profileId === newProps.opportunityId) {
       console.log("inside opp");
       opp.stageId = newProps.destinationStageId;
+    }
+    return opp;
+  });
+};
+
+
+const updatedDragOpportunity = (item, newProps) => {
+  return item.map((opp, index) => {
+    console.log("Author7",opp);
+    console.log("Author8",newProps);
+    if (opp.opportunityId === newProps.opportunityId) {
+      console.log("inside opp");
+      opp.opportunityStagesId = newProps.opportunityStagesId;
     }
     return opp;
   });
@@ -2232,7 +2247,25 @@ case types.REINSTATE_TOGGLE_FOR_OPPORTUNITY_FAILURE:
                                                                         ...state,
                                                                         deleteLostOpportunity: false,
                                                                         deleteLostOpportunityError: true,
-                                                                      };    
+                                                                      };  
+
+
+                                                                                              case types.UPDATE_OPPORTUNITY_DRAG_STAGE_REQUEST:
+                                                return {
+                                                  ...state,
+                                                  updatingDragStage: true,
+                                                
+                                                  // candidateRequirement: action.payload,
+                                                };
+                                              case types.UPDATE_OPPORTUNITY_DRAG_STAGE_SUCCESS:
+                                                return { ...state, 
+                                                  updatingDragStage: false ,
+                                                  opportunityByUserId: updatedDragOpportunity(state.opportunityByUserId, action.payload),
+                                                 // candidateRequirement: [action.payload]
+
+                                                };
+                                              case types.UPDATE_OPPORTUNITY_DRAG_STAGE_FAILURE:
+                                                return { ...state };  
 
                                                                       
                                                                       case types.GET_OPPORTUNITY_INITIATIVES_SKILLS_DETAILS_REQUEST:
@@ -2320,5 +2353,8 @@ case types.REINSTATE_TOGGLE_FOR_OPPORTUNITY_FAILURE:
                                                   return { ...range, isSelected: false };
                                               }
                                           });
+
+
+                                         
 
                                                              

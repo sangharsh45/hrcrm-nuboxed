@@ -2893,3 +2893,60 @@ export const updateRequirementStage = (
       cb && cb("failure");
     });
 };
+
+
+export const updateOpportunitydragstage = (
+  data,
+    
+  sourceStageId,
+  destinationStageId,
+  opportunityId,
+  cb
+) => (dispatch) => {
+  console.log(sourceStageId, destinationStageId, opportunityId);
+  if (destinationStageId === "won") {
+    message.success("stage is won");
+  }
+  if (destinationStageId === "loss") {
+    message.error("stage is loss");
+  }
+  dispatch({
+    type: types.UPDATE_OPPORTUNITY_DRAG_STAGE_REQUEST,
+    payload: {
+      sourceStageId,
+      destinationStageId,
+      opportunityId,
+    },
+  });
+  axios
+    .put(
+      `${base_url}/opportunity/update/stage`,data, {
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+        },
+      }
+    )
+    .then((res) => {
+      console.log(res);
+      // if (res.data.stageName === "Won") {
+      //   message.error("Won");
+      // } else {
+      //   message.error("Loss");
+      // }
+
+      dispatch({
+        type: types.UPDATE_OPPORTUNITY_DRAG_STAGE_SUCCESS,
+        payload: res.data,
+      });
+      cb && cb(res.data);
+    })
+    .catch((err) => {
+      console.log(err);
+
+      dispatch({
+        type: types.UPDATE_OPPORTUNITY_DRAG_STAGE_FAILURE,
+        payload: err,
+      });
+      cb && cb("failure");
+    });
+};
