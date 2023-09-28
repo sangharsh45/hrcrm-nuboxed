@@ -95,9 +95,9 @@ const initialState = {
     fetchingActionNotificationsError:false,
     actionNotifications:[],
 
-    fetchingTask: false,
-    fetchingTaskError: false ,
-    taskCount:{},
+    fetchingTaskper: false,
+    fetchingTaskperError: false ,
+    taskperCount:{},
 
 
     addingActionNotifications:false,
@@ -844,20 +844,20 @@ export const dashboardReducer = (state = initialState, action) => {
                                                 
 
 
-                                                      case types.GET_TASK_REQUEST:
-                                                        return { ...state, fetchingTask: true,
-                                                          fetchingTaskError: false };
-                                                      case types.GET_TASK_SUCCESS:
+                                                      case types.GET_TASK_PER_REQUEST:
+                                                        return { ...state, fetchingTaskper: true,
+                                                          fetchingTaskperError: false };
+                                                      case types.GET_TASK_PER_SUCCESS:
                                                         return {
                                                           ...state,
-                                                          fetchingTask: false,
-                                                          fetchingTaskError: false,
-                                                          taskCount: action.payload,
+                                                          fetchingTaskper: false,
+                                                          fetchingTaskperError: false,
+                                                          taskperCount: action.payload,
                                                         };
-                                                      case types.GET_TASK_FAILURE:
+                                                      case types.GET_TASK_PER_FAILURE:
                                                         return { ...state,
-                                                          fetchingTask: false,
-                                                          fetchingTaskError: true };
+                                                          fetchingTaskper: false,
+                                                          fetchingTaskperError: true };
 
 
 

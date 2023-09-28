@@ -100,8 +100,11 @@ const LeadsCardList = (props) => {
             />
           </SubTitle>
 </div>
-                                   &nbsp;
-                                        <div>
+                                   <div class="w-[4%]">
+
+                                   </div>
+
+                                        <div >
                                         <Tooltip>
                                             <h4 class=" text-[0.875rem] text-cardBody font-poppins">
                                             Name
@@ -270,6 +273,13 @@ const LeadsCardList = (props) => {
                                     <div class=" text-[0.75rem] text-cardBody font-poppins">
                 {/* qual */}
                                     </div>
+                                    <div>
+<StatusCustomerToggle
+            type={props.convertInd ? "primary" : "danger"}
+            leadsId={item.leadsId}
+            convertInd={item.convertInd}
+          />
+</div>
                                 </div>
                                 <div class="flex flex-col w-[5%]">
                     <div class="rounded-full bg-white w-5 h-5 cursor-pointer">
@@ -305,13 +315,7 @@ const LeadsCardList = (props) => {
                         </div>
                         <div>
             
-<div>
-<StatusCustomerToggle
-            type={props.convertInd ? "primary" : "danger"}
-            leadsId={item.leadsId}
-            convertInd={item.convertInd}
-          />
-</div>
+
                     </div>
                     </div>
                     <div class="flex flex-col w-[2%]">

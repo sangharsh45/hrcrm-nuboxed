@@ -997,7 +997,7 @@ export const setSubSelectedReportType = (type) => (dispatch) =>
   };
 
   export const getTasklist = (userId) => (dispatch) => {
-    dispatch({ type: types.GET_TASK_REQUEST });
+    dispatch({ type: types.GET_TASK_PER_REQUEST });
    
     axios
       .get(`${base_url}/task/count/opentask/${userId}`, {
@@ -1008,14 +1008,14 @@ export const setSubSelectedReportType = (type) => (dispatch) =>
       .then((res) => {
         // console.log(res)
         dispatch({
-          type: types.GET_TASK_SUCCESS,
+          type: types.GET_TASK_PER_SUCCESS,
           payload: res.data,
         });
       })
       .catch((err) => {
         console.log(err);
         dispatch({
-          type: types.GET_TASK_FAILURE,
+          type: types.GET_TASK_PER_FAILURE,
           payload: err,
         });
       });

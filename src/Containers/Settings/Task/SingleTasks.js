@@ -44,12 +44,16 @@ class SingleTasks extends Component {
                 <div>
                   </div>
                 </div>
-                <div style={{width:"35%"}}>
-                    <TaskConnetToggle
+                <div class="flex" style={{width:"35%"}}>
+                  <div class="ml-2 w-20">Workflow</div>
+                 
+                  <div class="ml-4 w-20">
+                    <TaskConnetToggle 
                         taskType={taskType}
                         taskTypeId={taskTypeId}
                   taskCheckListInd={taskCheckListInd}
                     />  
+                    </div>
                     </div>
                     <div>
                   {this.props.task.editInd ? (

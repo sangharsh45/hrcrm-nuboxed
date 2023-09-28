@@ -1,6 +1,7 @@
 import React, {useEffect} from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
+import moment from "moment";
 import { JumpStartBox, Spacer } from "../../../../Components/UI/Elements";
 import { FlexContainer } from "../../../../Components/UI/Layout";
 import {getDateWiseList,getSalesDateWiseList,getTasklist,getavgHour} from "../../DashboardAction";
@@ -8,6 +9,8 @@ import {getDateWiseList,getSalesDateWiseList,getTasklist,getavgHour} from "../..
 class DashboardJumpStart extends React.Component{
   constructor() {
     super();
+    const startDate = moment().startOf("month"); 
+    const endDate = moment();
     var today = new Date(),
     date =
       today.getFullYear() +
@@ -18,20 +21,25 @@ class DashboardJumpStart extends React.Component{
 
   this.state = {
     date: date,
+    startDate,
+    endDate
   };
 }
 
 componentDidMount() {
-   if(this.props.role==="USER"&&this.props.user.department==="Recruiter"){
-  const { getDateWiseList, recruiterId, startDate, endDate } = this.props;
+  
+   if (this.props.role==="USER"&&this.props.user.department==="Recruiter"){
+    const startDate = `${this.state.startDate.format("YYYY-MM-DD")}T20:00:00Z`
+    const endDate = `${this.state.endDate.format("YYYY-MM-DD")}T20:00:00Z`
+  const { getDateWiseList, recruiterId,   } = this.props;
   getDateWiseList(recruiterId,  startDate, endDate);
    }else{
-    const { getSalesDateWiseList, orgId, startDate, endDate } = this.props;
+    const startDate = `${this.state.startDate.format("YYYY-MM-DD")}T20:00:00Z`
+    const endDate = `${this.state.endDate.format("YYYY-MM-DD")}T20:00:00Z`
+    const { getSalesDateWiseList, orgId } = this.props;
     getSalesDateWiseList(orgId,  startDate, endDate);
    }
-   this.props.getTasklist(this.props.userId)
-   const { getavgHour, userId, startDate, endDate } = this.props;
-   getavgHour(userId, startDate, endDate);
+   
 }
 componentWillReceiveProps(nextProps) {
   if (
@@ -48,14 +56,26 @@ componentWillReceiveProps(nextProps) {
         
   }
 }
-
+componentDidMount() {
+  const startDate = `${this.state.startDate.format("YYYY-MM-DD")}T20:00:00Z`
+  const endDate = `${this.state.endDate.format("YYYY-MM-DD")}T20:00:00Z`
+  this.props.getTasklist(this.props.userId)
+   this.props.getavgHour(this.props.userId, startDate, endDate);
+  console.log(`Start Date: ${this.state.startDate.format("ll")}`);
+  console.log(`End Date: ${this.state.endDate.format("ll")}`);
+}
 //   useEffect(() => { 
 //    props.getDateWiseList(props.recruiterId,props.startDate, props.endDate);
 // }, [props.startDate, props.endDate, props.type]);
   
 render() {
   const { showDatelist, fetchingDatewiseReport } = this.props;
-  console.log( this.props.taskCount.totalTask)
+  console.log( this.props.taskperCount)
+   const startDate = `${this.state.startDate.format("YYYY-MM-DD")}T20:00:00Z`
+  //   const endDate = new Date(this.state.endDate);
+
+  console.log(startDate)
+  console.log(this.state.endDate.format("YYYY MM DD"))
   return(
       <FlexContainer flexDirection="row" style={{ width: "100%"}}>
         <FlexContainer style={{ width: "100%"}}>
@@ -110,9 +130,9 @@ render() {
               // this.props.user.department === "Recruiter"
               // ?this.props.showDatelist.selectted
               // :this.props.showSalesDatelist.selectted
-              this.props.taskCount.totalTask
+              this.props.taskperCount.totalTask
             }
-             isLoading={this.props.fetchingTask}
+             isLoading={this.props.fetchingTaskper}
             // isLoading={
             //   this.props.user.department === "Recruiter"
             //   ?this.props.fetchingDatewiseReport
@@ -122,7 +142,7 @@ render() {
           />
           <JumpStartBox
             noProgress
-            title="On Boarded"
+            title="Joining Date"
            // bgColor="linear-gradient(270deg, #3066BE 0%, #005075 100%);"
             
             // value={this.props.showDatelist.onboarded}
@@ -202,11 +222,11 @@ const mapStateToProps = ({ dashboard,auth }) => ({
   fetchingDatewiseReport:dashboard.fetchingDatewiseReport,
   fetchingDatewiseReportError:dashboard.fetchingDatewiseReportError,
   recruiterId:auth.userDetails.userId,
-  fetchingTask:dashboard.fetchingTask,
+  fetchingTaskper:dashboard.fetchingTaskper,
   userId: auth.userDetails.employeeId,
-  endDate: dashboard.endDate,
-  startDate: dashboard.startDate,
-  taskCount:dashboard.taskCount,
+  // endDate: dashboard.endDate,
+  // startDate: dashboard.startDate,
+  taskperCount:dashboard.taskperCount,
   avgHour:dashboard.avgHour,
   fetchingAvgHour:dashboard.fetchingAvgHour
 });

@@ -256,7 +256,8 @@ import {
   Spacer,
 } from "../../Components/UI/Elements";
 import { FlexContainer } from "../../Components/UI/Layout";
-import FWLogo from "../../Assets/Images/logo_22.png";
+import FWLogo from "../../Assets/Images/Unboxed.jpeg";
+import FWLogo1 from "../../Assets/Images/unboxcover.jpeg";
 import { setPassword } from "./AuthAction";
 import RandomImageScreen from "./RandomImageScreen";
 /**
@@ -319,7 +320,7 @@ class SetPassword extends Component {
   render() {
     return (
       <>
-        <FlexContainer>
+        <div class="flex justify-between ">
           <AuthContainer
             style={{ backgroundColor: "#F5F5F5", flexDirection: "column" }}
           >
@@ -370,7 +371,7 @@ class SetPassword extends Component {
                         <EyeOutlined
                           // type="eye"
                           onClick={this.handleClick}
-                          style={{ marginLeft: "-1.25em", marginTop: "1.25em" }}
+                          style={{ marginLeft: "-1.25em",  }}
                           size="24"
                         />
                       ) : (
@@ -378,7 +379,7 @@ class SetPassword extends Component {
                           // type="eye-invisible"
                           onClick={this.handleClick}
                           size="24"
-                          style={{ marginLeft: "-1.25em", marginTop: "1.25em" }}
+                          style={{ marginLeft: "-1.25em",  }}
                         />
                       )}
                     </div>
@@ -404,7 +405,7 @@ class SetPassword extends Component {
                           onClick={this.handleClick1}
                           style={{
                             marginLeft: "-1.25em",
-                            marginTop: "1.25em",
+                            
                           }}
                         // style={{ size: 24 }}
                         />
@@ -414,7 +415,7 @@ class SetPassword extends Component {
                           onClick={this.handleClick1}
                           style={{
                             marginLeft: "-1.25em",
-                            marginTop: "1.25em",
+                           
                           }}
                         // style={{ size: 24 }}
                         />
@@ -452,13 +453,23 @@ class SetPassword extends Component {
                 )}
               </Formik>
             </FormWrapper>
-            <div
-              className="footer1"
+        
+         
+          </AuthContainer>
+          <div class="w-1/2 flex justify-center items-center">
+          <img
+              className="big-logo"
+              src={FWLogo1}
+              style={{ }}
+              alt="Tekorero logo"
+            />
+          </div>
+          {/* <RandomImageScreen /> */}
+        </div>
+        <div
+              className="footer1 w-wk items-center"
               style={{
                 textAlign: "center",
-                fontSize: "12x",
-                // fontFamily: "SFS, Arial, sans-serif",
-                fontFamily: "Poppins",
                 position: "absolute",
                 bottom: 0,
               }}
@@ -466,9 +477,6 @@ class SetPassword extends Component {
               © {new Date().getFullYear()}, {` `} tekorero.com, All rights
               reserved.
             </div>
-          </AuthContainer>
-          <RandomImageScreen />
-        </FlexContainer>
       </>
     );
   }
