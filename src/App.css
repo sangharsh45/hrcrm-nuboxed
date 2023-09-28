@@ -550,7 +550,8 @@ box-shadow: 0em 0.25em 0.625em -0.25em #aaa;
 padding: 0.3rem 1rem;
 }
  .ant-switch{ 
-  background-color: #24d8a7;
+  background-color: grey;
+  /* background: #09bc8b; */
 }
 .ant-time-picker-input{
   width:10rem;

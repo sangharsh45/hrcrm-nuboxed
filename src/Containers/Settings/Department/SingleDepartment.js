@@ -54,16 +54,16 @@ class SingleDepartment extends Component {
                 <div class="w-11/12 flex-row">
               <FlexContainer justifyContent="space-between">
                 {/* <div class=" flex w-1/2"> */}
-               <div class="w-20">
+               <div class=" w-28">
                 <DepartmentName >
                   {departmentName}
                 </DepartmentName>
                 </div>
-                <div class="w-20">
+                {/* <div class="w-20">
                 <DepartmentName >
                   {sectorName}
                 </DepartmentName>
-                </div>
+                </div> */}
                 {/* </div> */}
                 <div style={{width:"20%"}}>
                     <DepartmentStatusToggle

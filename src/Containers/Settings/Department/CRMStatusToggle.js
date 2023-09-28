@@ -61,7 +61,7 @@ console.log("crrm",props.crmInd);
             checked={props.crmInd || crm}
             // disabled={props.status}
             isLoading={true}
-            style={{width: "9em"}}
+            style={{width: "4rem"}}
             checkedChildren="Yes"
             unCheckedChildren="No"
           />

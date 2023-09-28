@@ -61,6 +61,7 @@ class SingleTaskWorkflowList extends Component {
     const {
         recruitTaskWorkflowStages:
        { name,
+        taskChecklistStageName,
          taskChecklistStagelinkId,
          probability,
          days,
@@ -103,13 +104,13 @@ class SingleTaskWorkflowList extends Component {
                 //     "rgb(161, 185, 185)",
                 // }}
               >
-                <StageName style={{ flexBasis: "25%", textAlign: "left" }}>
-                  {elipsize(name, 23)}
+                <StageName style={{ flexBasis: "20%", textAlign: "left" }}>
+                  {elipsize(taskChecklistStageName, 23)}
                 </StageName>
-                <StageName>
+                <StageName style={{ flexBasis: "15%" }}>
                   {probability}
                 </StageName>
-                <StageName>
+                <StageName style={{ flexBasis: "15%" }}>
                   {days}
                 </StageName>
                  <div>
@@ -122,6 +123,27 @@ class SingleTaskWorkflowList extends Component {
                   placeholder="End Date"
                   onChange={this.onChangeEndDatePicker} />
                   </div> 
+                  {/* <div>
+                  <span>
+            <Avatar.Group
+              maxCount={2}
+              maxStyle={{ color: "#f56a00", backgroundColor: "#fde3cf" }}
+            >
+              {item.candidates &&
+                item.candidates.map((candidate, i) => {
+                  const data1 = candidate.candidateName.slice(0, 2);
+                  console.log("datas", data1);
+                  return (
+                    <Tooltip title={candidate.candidateName}>
+                      <Avatar style={{ backgroundColor: "#94b3e4" }}>
+                        {data1}
+                      </Avatar>
+                    </Tooltip>
+                  );
+                })}
+            </Avatar.Group>
+          </span>
+                  </div> */}
                {/* <StageName>
                   {`${ moment(startDate).format("DD/MM/YYYY")}`}
                 </StageName>
@@ -129,7 +151,7 @@ class SingleTaskWorkflowList extends Component {
                 <StageName>
                 {`${ moment(endDate).format("DD/MM/YYYY")}`}
                 </StageName> */}
-                <div class=" flex justify-between ml-margin65 w-4">
+                {/* <div class=" flex justify-between ml-margin65 w-4">
                   <>
                     <Tooltip title="Edit">
                       <BorderColorIcon
@@ -141,7 +163,7 @@ class SingleTaskWorkflowList extends Component {
                   </>
 
                 
-                </div>
+                </div> */}
               </FlexContainer>
             ) : (
               <FlexContainer justifyContent="center">
