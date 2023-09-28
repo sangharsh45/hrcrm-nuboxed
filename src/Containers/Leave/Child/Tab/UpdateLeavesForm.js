@@ -2,11 +2,11 @@ import React, { Component } from "react";
 import { FormattedMessage } from "react-intl";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { Button, Icon, Radio } from "antd";
+import { Button,Switch } from "antd";
 import { Formik, Form, Field, FieldArray } from "formik";
 import * as Yup from "yup";
 import dayjs from "dayjs";
-import { Spacer } from "../../../../Components/UI/Elements";
+import { Spacer,StyledLabel } from "../../../../Components/UI/Elements";
 import { TextareaComponent } from "../../../../Components/Forms/Formik/TextareaComponent";
 // import SearchSelect from "../../../../Components/Forms/Formik/SearchSelect";
 import { InputComponent } from "../../../../Components/Forms/Formik/InputComponent";
@@ -69,6 +69,8 @@ class UpdateLeaveForm extends Component {
       Holiday: false,
       Travel: false,
       Project: false,
+      firstCase:true,
+      isAccepted:true
     };
   }
   handleProject = (checked) => {
@@ -80,6 +82,12 @@ class UpdateLeaveForm extends Component {
   handleHoliday = (checked) => {
     this.setState({ Holiday: checked });
   };
+  radioClick = (checked) => {
+    this.setState({ isAccepted: checked });
+  };
+  firstClick= (checked)=>{
+    this.setState({firstCase:checked});
+  }
   handleTravel = (checked) => {
     this.setState({ Travel: checked });
   };
@@ -206,7 +214,7 @@ class UpdateLeaveForm extends Component {
 
                       <Spacer />
                     </div>
-
+                    {this.state.isAccepted?(
                     <div style={{ width: "47%" }}>
                       <Field
                         isRequired
@@ -242,9 +250,40 @@ class UpdateLeaveForm extends Component {
                         }}
                       />
                     </div>
+                     ):(
+                      <div class=" flex items-center h-16 flex-row-reverse"
+                        style={{
+                          width: "25%",
+                          fontWeight: "bold",
+                        }}
+                      >
+                        
+                        <Switch
+                           onChange={this.firstClick}
+                          checked={this.state.firstCase}
+                          checkedChildren="1st hlf"
+                          unCheckedChildren="2nd hlf"
+                        />
+                        
+                      </div>
+                    )}
                   </FlexContainer>
                   <Spacer />
-
+  <div
+                      style={{
+                        width: "25%",
+                        fontWeight: "bold",
+                      }}
+                    >
+                      <StyledLabel> Half Day</StyledLabel>
+                      <Switch
+                         onChange={this.radioClick}
+                        checked={this.state.isAccepted}
+                        checkedChildren="No"
+                        unCheckedChildren="Yes"
+                      />
+                      
+                    </div>
                   <Field
                     name="coverDetails"
                     //label="Cover"

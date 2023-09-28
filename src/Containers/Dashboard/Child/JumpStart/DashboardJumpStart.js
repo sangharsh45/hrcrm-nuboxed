@@ -45,6 +45,7 @@ componentWillReceiveProps(nextProps) {
           const { getSalesDateWiseList, orgId, startDate, endDate } = nextProps;
           getSalesDateWiseList(orgId, startDate, endDate);
         }
+        
   }
 }
 
@@ -54,6 +55,7 @@ componentWillReceiveProps(nextProps) {
   
 render() {
   const { showDatelist, fetchingDatewiseReport } = this.props;
+  console.log( this.props.taskCount.totalTask)
   return(
       <FlexContainer flexDirection="row" style={{ width: "100%"}}>
         <FlexContainer style={{ width: "100%"}}>
@@ -79,15 +81,17 @@ render() {
             noProgress
             title="AV hours this month  "
             value={
-              this.props.user.department === "Recruiter"
-              ?this.props.showDatelist.openPosition
-              :this.props.showSalesDatelist.openPosition
+              // this.props.user.department === "Recruiter"
+              // ?this.props.showDatelist.openPosition
+              // :this.props.showSalesDatelist.openPosition
+              this.props.avgHour.hours
             }
-            isLoading={
-              this.props.user.department === "Recruiter"
-              ?this.props.fetchingDatewiseReport
-              :this.props.fetchingSalesDatewiseReport
-            }
+            isLoading={this.props.fetchingAvgHour} 
+            // isLoading={
+            //   this.props.user.department === "Recruiter"
+            //   ?this.props.fetchingDatewiseReport
+            //   :this.props.fetchingSalesDatewiseReport
+            // }
             //bgColor="linear-gradient(270deg, #3066BE 0%, #005075 100%);"
           />
           {/* <JumpStartBox
@@ -203,6 +207,8 @@ const mapStateToProps = ({ dashboard,auth }) => ({
   endDate: dashboard.endDate,
   startDate: dashboard.startDate,
   taskCount:dashboard.taskCount,
+  avgHour:dashboard.avgHour,
+  fetchingAvgHour:dashboard.fetchingAvgHour
 });
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({

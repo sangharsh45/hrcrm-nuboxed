@@ -200,7 +200,71 @@ const LeadsCardList = (props) => {
                         {item.address && item.address.length && item.address[0].country}
                                     </h4>
                                 </div>
-    
+                                <div class="flex flex-row w-[9%]">
+
+<div>
+<ButtonGroup>
+<RoleButton
+ type="Warm"
+ iconType="	fas fa-burn"
+ // tooltip="Warm"
+ tooltip={<FormattedMessage
+   id="app.warm"
+   defaultMessage="Warm"
+ />}
+ // role={item.leadCategory}
+ // onClick={() =>
+ //   props.setContactTypeForLead(item.leadsId, {
+ //     leadsId: item.leadsId,
+ //     leadCategory: "Warm",
+ //   })
+ // }
+/>
+</ButtonGroup>
+</div>    
+
+
+     <div>
+     <ButtonGroup>
+<RoleButton
+ type="Hot"
+ iconType="fas fa-mug-hot"
+ // tooltip="Hot"
+ tooltip={<FormattedMessage
+   id="app.hot"
+   defaultMessage="Hot"
+ />}
+ // role={item.leadCategory}
+ // onClick={() =>
+ //   props.setContactTypeForLead(item.leadsId, {
+ //     leadsId: item.leadsId,
+ //     leadCategory: "Hot",
+ //   })
+ // }
+/>
+</ButtonGroup>
+</div>
+     <div>
+<ButtonGroup>
+<RoleButton
+ type="Cold"
+ iconType="far fa-snowflake"
+ // tooltip="Cold"
+ tooltip={<FormattedMessage
+   id="app.cold"
+   defaultMessage="Cold"
+ />}
+ role={item.leadCategory}
+ // onClick={() =>
+ //   props.setContactTypeForLead(item.leadsId, {
+ //     leadsId: item.leadsId,
+ //     leadCategory: "Cold",
+ //   })
+ // }
+/>
+</ButtonGroup>
+</div>
+     </div>  
                                 <div className=" flex font-medium flex-col w-32 ">
                                     <h4 class=" text-[0.875rem] text-cardBody font-poppins">Assigned to</h4>
 
@@ -327,71 +391,7 @@ const LeadsCardList = (props) => {
         
             </div>
                       </div>    
-                      <div class="flex flex-col w-[2%]">
-
-                 <div>
-                 <ButtonGroup>
-                 <RoleButton
-                  type="Warm"
-                  iconType="	fas fa-burn"
-                  // tooltip="Warm"
-                  tooltip={<FormattedMessage
-                    id="app.warm"
-                    defaultMessage="Warm"
-                  />}
-                  // role={item.leadCategory}
-                  // onClick={() =>
-                  //   props.setContactTypeForLead(item.leadsId, {
-                  //     leadsId: item.leadsId,
-                  //     leadCategory: "Warm",
-                  //   })
-                  // }
-                />
-               </ButtonGroup>
-            </div>    
-                
-                
-                      <div>
-                      <ButtonGroup>
-                <RoleButton
-                  type="Hot"
-                  iconType="fas fa-mug-hot"
-                  // tooltip="Hot"
-                  tooltip={<FormattedMessage
-                    id="app.hot"
-                    defaultMessage="Hot"
-                  />}
-                  // role={item.leadCategory}
-                  // onClick={() =>
-                  //   props.setContactTypeForLead(item.leadsId, {
-                  //     leadsId: item.leadsId,
-                  //     leadCategory: "Hot",
-                  //   })
-                  // }
-                />
-                </ButtonGroup>
-          </div>
-                      <div>
-            <ButtonGroup>
-            <RoleButton
-                  type="Cold"
-                  iconType="far fa-snowflake"
-                  // tooltip="Cold"
-                  tooltip={<FormattedMessage
-                    id="app.cold"
-                    defaultMessage="Cold"
-                  />}
-                  role={item.leadCategory}
-                  // onClick={() =>
-                  //   props.setContactTypeForLead(item.leadsId, {
-                  //     leadsId: item.leadsId,
-                  //     leadCategory: "Cold",
-                  //   })
-                  // }
-                />
-              </ButtonGroup>
-            </div>
-                      </div>  
+                     
                             </div>
                         </div>
 

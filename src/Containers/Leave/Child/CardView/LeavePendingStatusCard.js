@@ -96,7 +96,7 @@ function LeavePendingStatusCard(props) {
                         </div>
                       </div>
 
-                      <div className=" flex font-medium flex-col w-16">
+                      <div className=" flex font-medium flex-col w-24">
                         <div class=" text-sm text-cardBody font-medium font-poppins">
                           End Date
                         </div>

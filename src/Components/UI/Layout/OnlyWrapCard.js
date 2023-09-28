@@ -8,7 +8,7 @@ const OnlyWrapCard = styled.div`
     background: #FFFFFF;
     color: ${props => props.theme.color};
     margin: 1.2rem;
-    padding: 1.3rem;
+    padding: 0.5rem;
     width: 100%;
     width: -moz-available;          /* WebKit-based browsers will ignore this. */
     width: -webkit-fill-available;  /* Mozilla-based browsers will ignore this. */

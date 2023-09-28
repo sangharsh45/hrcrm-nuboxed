@@ -620,7 +620,7 @@ function NavMenu (props) {
              </Link> 
             </Menu.Item>
             {user.userType !== "USER" && user.department !== "VENDOR" && ( 
-           <Menu.Item key="/mileage" style={{height:"30px"}}> 
+           <Menu.Item key="/mileage" style={{height:"30px",paddingLeft:"1rem"}}> 
           <Link to="/mileage"> 
               
               <i class="fas fa-tachometer-alt"></i>

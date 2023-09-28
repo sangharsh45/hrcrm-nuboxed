@@ -245,7 +245,7 @@ console.log(this.state.firstCase)
                  </div>
                  
                   ):(
-                    <div
+                    <div class=" flex items-center h-16 flex-row-reverse"
                       style={{
                         width: "25%",
                         fontWeight: "bold",
@@ -255,8 +255,8 @@ console.log(this.state.firstCase)
                       <Switch
                          onChange={this.firstClick}
                         checked={this.state.firstCase}
-                        checkedChildren="1st"
-                        unCheckedChildren="2nd"
+                        checkedChildren="1st hlf"
+                        unCheckedChildren="2nd hlf"
                       />
                       
                     </div>

@@ -669,11 +669,11 @@ const AccessForm = (props) => {
     <>
 
       {/* <Form className="form-background"> */}
-      <div style={{ display: "flex", justifyContent: "space-between", height: "80vh", overflow: "scroll", paddingRight: "0.6em" }}>
+      <div style={{ display: "flex", justifyContent: "space-between", height: "80vh", overflowY: "scroll", paddingRight: "0.6em" }}>
           {props.fetchingDepartmentAccess ? (
             <BundleLoader />
           ) : (
-            <TabsWrapper style={{}}>
+            <TabsWrapper style={{height:"42rem"}}>
              
 <h1 class=" text-clr font-bold">HR</h1>
 <Spacer />
@@ -713,7 +713,14 @@ const AccessForm = (props) => {
               <Spacer />
               <FlexContainer justifyContent="space-around">
             
-            <div >
+         
+              </FlexContainer>
+            {/* Vendor */}
+            <Spacer />
+              <FlexContainer justifyContent="space-around">
+              
+              {/* Contact */}
+              <div >
               <h1 class="text-sm">Dashboard</h1>
               <Checkbox indeterminate={indeterminateDashboard} onChange={onCheckAllDashboardChange} checked={checkAllDashboard}>
               <label class="text-xs"> Check all</label>
@@ -723,7 +730,7 @@ const AccessForm = (props) => {
 
             </div>
             
-                <Spacer />
+               
               <div >
                 <h1 class="text-sm">Settings</h1>
                 <Checkbox indeterminate={indeterminateSettings} onChange={onCheckAllSettingsChange} checked={checkAllSettings}>
@@ -733,12 +740,6 @@ const AccessForm = (props) => {
                 <CheckboxGroup options={settingsCheckedList} value={checkedSettingsList} onChange={onSettingsChange} />
 
               </div>
-              </FlexContainer>
-            {/* Vendor */}
-            <Spacer />
-              <FlexContainer justifyContent="space-around">
-              
-              {/* Contact */}
               <div >
                 <h1 class="text-sm">Mileage</h1>
                 <Checkbox indeterminate={indeterminateMileage} onChange={onCheckAllMileageChange} checked={checkAllMileage}>
@@ -1062,9 +1063,9 @@ const AccessForm = (props) => {
              
             
                 </FlexContainer>
-                <Spacer />
-              <h4>Updated on {dayjs(props.departmentAcces.lastUpdatedOn).format("ll")} by {props.departmentAcces.name}</h4>
-
+               
+              <h4 class="mt-2">Updated on {dayjs(props.departmentAcces.lastUpdatedOn).format("ll")} by {props.departmentAcces.name}</h4>
+              
               <FlexContainer justifyContent="flex-end" >
                 <Button
                   type="primary"
