@@ -198,7 +198,7 @@ class TaskWorkflowList extends Component {
                       // key={i}
                       tab={
                         <span onClick={() => this.handleProcessClick()}>
-                          {elipsize(this.props.item.taskChecklistName, 15)}
+                          {elipsize(this.props.item.taskChecklist, 15)}
                         </span>
                       }
                     ></TabPane>

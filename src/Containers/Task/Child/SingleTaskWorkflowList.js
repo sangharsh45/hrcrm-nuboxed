@@ -109,22 +109,24 @@ class SingleTaskWorkflowList extends Component {
                   {elipsize(taskChecklistStageName, 23)}
                 </StageName>
                 <StageName style={{ flexBasis: "15%" }}>
-                  {probability}
+                  {probability}%
                 </StageName>
                 <StageName style={{ flexBasis: "15%" }}>
                   {days}
                 </StageName>
-                 <div>
+                 <div    style={{ flexBasis: "15%" }}>
                   <DatePicker 
+               
                   placeholder="Start Date"
                   onChange={this.onChangeDatePicker} />
                   </div>
-                  <div>
+                  <div   style={{ flexBasis: "15%" }}>
                   <DatePicker 
                   placeholder="End Date"
+                
                   onChange={this.onChangeEndDatePicker} />
                   </div> 
-                {/* <div>
+                <div style={{ flexBasis: "15%" }}>
                 <>
                 <Avatar.Group
                    maxCount={3}
@@ -132,7 +134,7 @@ class SingleTaskWorkflowList extends Component {
                 >
                 {included &&
                   included.map((candidate, i) => {
-                     const data1 = candidate.fullName
+                     const data1 = candidate.firstName
                      .slice(0,2)
                      .split("")[0]
                      .toUpperCase();
@@ -149,7 +151,7 @@ class SingleTaskWorkflowList extends Component {
                   })}
             </Avatar.Group>
             </>
-                  </div>  */}
+                  </div> 
                {/* <StageName>
                   {`${ moment(startDate).format("DD/MM/YYYY")}`}
                 </StageName>
