@@ -381,23 +381,30 @@ render: (name, item, i) => {
 
 return (
           <span>
-            <Avatar.Group
-              maxCount={2}
-              maxStyle={{ color: "#f56a00", backgroundColor: "#fde3cf" }}
-            >
-              {item.candidates &&
-                item.candidates.map((candidate, i) => {
-                  const data1 = candidate.candidateName.slice(0, 2);
-                  console.log("datas", data1);
-                  return (
-                    <Tooltip title={candidate.candidateName}>
-                      <Avatar style={{ backgroundColor: "#94b3e4" }}>
-                        {data1}
-                      </Avatar>
-                    </Tooltip>
-                  );
-                })}
-            </Avatar.Group>
+          <Avatar.Group
+  maxCount={2}
+  maxStyle={{ color: "#f56a00", backgroundColor: "#fde3cf" }}
+>
+  {item.owner &&
+    item.owner.map((candidate, i) => {
+      // Check if candidate exists and has a fullName property
+      if (candidate && candidate.fullName) {
+        const data1 = candidate.fullName.slice(0, 2);
+        console.log("datas", data1);
+        return (
+          <Tooltip title={candidate.fullName} key={i}>
+            <Avatar style={{ backgroundColor: "#94b3e4" }}>
+              {data1}
+            </Avatar>
+          </Tooltip>
+        );
+      } else {
+        // Handle the case where candidate.fullName is null or undefined
+        return null; // Or display some default content
+      }
+    })}
+</Avatar.Group>
+
           </span>
         );
 },
