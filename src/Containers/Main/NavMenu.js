@@ -96,7 +96,7 @@ function NavMenu (props) {
                    style={{ fontSize: "large" }}
                 />
                
-                <span class="text-white text-sm ml-1">
+                <span class="text-white text-ls ml-1">
                   {/* <FormattedMessage
                     id="app.recruitproboard"
                     defaultMessage="RecruitProBoard"
@@ -131,7 +131,7 @@ function NavMenu (props) {
                 style={{ fontSize: "large" }}
               />
             
-             <span class="text-white text-sm ml-1">
+             <span class="text-white text-ls ml-1">
                 {/* <FormattedMessage id="app.planner" defaultMessage="Planner" /> */}
                 {/* Planner */}
                 {translatedMenuItems[1]}
@@ -186,7 +186,7 @@ function NavMenu (props) {
                 // icon={solid("phone-volume")}
                  style={{ fontSize: "large" }}
               />
-            <span class="text-white text-sm ml-1">
+            <span class="text-white text-ls ml-1">
                 {/* <FormattedMessage id="app.calls" defaultMessage="Calls" /> */}
                 {/* Calls */}
                 {translatedMenuItems[2]}
@@ -204,7 +204,7 @@ function NavMenu (props) {
               <FactCheckIcon
                style={{ fontSize: "large" }}
               />
-               <span class="text-white text-sm ml-1">
+               <span class="text-white text-ls ml-1">
                 {/* <FormattedMessage id="app.tasks" defaultMessage="Tasks" /> */}
                 {/* Task */}
                 {translatedMenuItems[3]}
@@ -222,7 +222,7 @@ function NavMenu (props) {
               <EventAvailableIcon
                 style={{ fontSize: "large" }}
               />
-                  <span class="text-white text-sm ml-1">
+                  <span class="text-white text-ls ml-1">
                 {/* <FormattedMessage
                   id="app.events"
                   defaultMessage="Events"
@@ -253,7 +253,7 @@ function NavMenu (props) {
               <PictureAsPdfIcon
                style={{ fontSize: "large" }}
               />
-             <span class="text-white text-sm ml-1">
+             <span class="text-white text-ls ml-1">
                 {/* <FormattedMessage id="app.reports" defaultMessage="Reports" /> */}
                 {/* Reports */}
                 {translatedMenuItems[5]}
@@ -272,7 +272,7 @@ function NavMenu (props) {
             
                    style={{ fontSize: "large" }}
                 />
-                 <span class="text-white text-sm ml-1">
+                 <span class="text-white text-ls ml-1">
                
                   {translatedMenuItems[13]}
                 </span>
@@ -287,7 +287,7 @@ function NavMenu (props) {
                 <LightbulbIcon
                   style={{ fontSize: "large" }}
                 />
-                <span class="text-white text-sm ml-1">
+                <span class="text-white text-ls ml-1">
                  
                   {translatedMenuItems[7]}
                   &nbsp;&nbsp;&nbsp;
@@ -308,7 +308,7 @@ function NavMenu (props) {
                 <ContactsIcon
                    style={{ fontSize: "large" }}
                 />
-                   <span class="text-white text-sm ml-1">
+                   <span class="text-white text-ls ml-1">
                 
                   {translatedMenuItems[8]}
                 </span>
@@ -325,7 +325,7 @@ function NavMenu (props) {
 
                    style={{ fontSize: "large" }}
                 />
-                <span class="text-white text-sm ml-1">
+                <span class="text-white text-ls ml-1">
            
                   {translatedMenuItems[9]}
                   &nbsp;&nbsp;&nbsp;
@@ -366,7 +366,7 @@ function NavMenu (props) {
             
                   style={{ fontSize: "large" }}
                 />
-                <span class="text-white text-sm ml-3">
+                <span class="text-white text-ls ml-3">
               
                   {translatedMenuItems[10]}
                   &nbsp;&nbsp;&nbsp;
@@ -387,7 +387,7 @@ function NavMenu (props) {
                 <RecentActorsIcon 
                   style={{ fontSize: "large" }}/>
               
-               <span class="text-white text-sm ml-1">
+               <span class="text-white text-ls ml-1">
           
                   {translatedMenuItems[11]}
                   &nbsp;&nbsp;
@@ -407,7 +407,7 @@ function NavMenu (props) {
                 
                    style={{ fontSize: "large" }}/>
              
-              <span class="text-white text-sm ml-1">
+              <span class="text-white text-ls ml-1">
              
                   {translatedMenuItems[12]}
                   &nbsp;&nbsp;&nbsp;&nbsp;
@@ -434,7 +434,7 @@ function NavMenu (props) {
 
                    style={{ fontSize: "large" }}
                 />
-               <span class="text-white text-sm ml-1">
+               <span class="text-white text-ls ml-1">
                
                   {translatedMenuItems[14]}
                   &nbsp;&nbsp;&nbsp;
@@ -455,7 +455,7 @@ function NavMenu (props) {
                 <LightbulbIcon
                   style={{ fontSize: "large" }}
                 />
-                <span class="text-white text-sm ml-3">
+                <span class="text-white text-ls ml-3">
                 
                   {translatedMenuItems[15]}
                 </span>
@@ -469,7 +469,7 @@ function NavMenu (props) {
 
                  style={{ fontSize: "large" }}
               />
-             <span class="text-white text-sm ml-3">
+             <span class="text-white text-ls ml-3">
             
                 {translatedMenuItems[16]}
               </span>
@@ -484,7 +484,7 @@ function NavMenu (props) {
 
                     style={{ fontSize: "large" }}
                 />
-               <span class="text-white text-sm ml-3">
+               <span class="text-white text-ls ml-3">
                 
                   {translatedMenuItems[17]}
                 </span>
@@ -502,7 +502,7 @@ function NavMenu (props) {
              
                  style={{ fontSize: "large" }}
                 />
-                <span class="text-white text-sm ml-3">
+                <span class="text-white text-ls ml-3">
            
                   {translatedMenuItems[18]}
              
@@ -533,7 +533,7 @@ function NavMenu (props) {
 
                     style={{ fontSize: "large" }}
                 />
-                 <span class="text-white text-sm ml-3">
+                 <span class="text-white text-ls ml-3">
             
                   {translatedMenuItems[19]}
                 </span>
@@ -548,7 +548,7 @@ function NavMenu (props) {
 
                   style={{ fontSize: "large" }}
                 />
-               <span class="text-white text-sm ml-3">
+               <span class="text-white text-ls ml-3">
                
                   {translatedMenuItems[20]}
                 </span>
@@ -563,7 +563,7 @@ function NavMenu (props) {
 
                    style={{ fontSize: "large" }}
                 />
-                <span class="text-white text-sm ml-3">
+                <span class="text-white text-ls ml-3">
               
                
                   {translatedMenuItems[21]}
@@ -612,7 +612,7 @@ function NavMenu (props) {
               <Menu.Item key="/report" style={{height:"30px",paddingLeft:"1rem"}}>
           <Link to="/leave">
               <i class="fas fa-luggage-cart"></i>
-            <span class="text-white text-sm ml-1"><FormattedMessage
+            <span class="text-white text-ls ml-1"><FormattedMessage
                id="app.leaves"
                defaultMessage="Leaves"
               />
@@ -624,7 +624,7 @@ function NavMenu (props) {
           <Link to="/mileage"> 
               
               <i class="fas fa-tachometer-alt"></i>
-               <span class="text-white text-sm ml-1"><FormattedMessage 
+               <span class="text-white text-ls ml-1"><FormattedMessage 
               id="app.mileage"
                 defaultMessage="Mileage"
               />
@@ -638,7 +638,7 @@ function NavMenu (props) {
             <ReceiptIcon
            style={{ fontSize: "large" }}
              />
-             <span class="text-white text-sm ml-1"><FormattedMessage 
+             <span class="text-white text-ls ml-1"><FormattedMessage 
                id="app.expense"
               defaultMessage="Expense"
           />
@@ -652,7 +652,7 @@ function NavMenu (props) {
             <Link to="/holiday"> 
            
              <i class="fas fa-holly-berry"></i>
-            <span class="text-white text-sm ml-1"><FormattedMessage 
+            <span class="text-white text-ls ml-1"><FormattedMessage 
               id="app.holiday"
                 defaultMessage="Holiday"
               />
@@ -675,7 +675,7 @@ function NavMenu (props) {
 
                  style={{ fontSize: "large" }}
                 />
-                <span class="text-white text-sm ml-1">
+                <span class="text-white text-ls ml-1">
                   {/* <FormattedMessage id="app.users" defaultMessage="Users" /> */}
                   {/* Users */}
                   {translatedMenuItems[6]}
@@ -695,7 +695,7 @@ function NavMenu (props) {
             <ReceiptIcon
            style={{ fontSize: "large" }}
              />
-             <span class="text-white text-sm ml-1"><FormattedMessage 
+             <span class="text-white text-ls ml-1"><FormattedMessage 
                id="app.location"
               defaultMessage="Location"
           />

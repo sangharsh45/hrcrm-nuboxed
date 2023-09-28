@@ -52,8 +52,8 @@ function TaskConnetToggle(props) {
             checked={props.taskCheckListInd || toggle}
             isLoading={true}
             style={{width: "9em"}}
-            checkedChildren="Workflow Enabled"
-            unCheckedChildren="Enabled Workflow"
+            checkedChildren="Enabled"
+            unCheckedChildren="Disabled"
           />
         </Popconfirm>
       
