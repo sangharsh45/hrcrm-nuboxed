@@ -25,15 +25,64 @@ const RecruitmentActionLeft = lazy(() => import("./RecruitmentActionLeft"));
 
 function Recruitment(props) {
   const name = [
+
     {
-      rulesName: "Workflow",
-      ruleId: "1",
-       component: <WorkFlow/>,
+      rulesName: "Access",
+      ruleId: "12",
+      component: <Access />,
+    },
+    {
+      rulesName: "Approval",
+      ruleId: "19",
+      component: <ApprovalTab />,
+    },
+
+    
+    {
+      rulesName: "General",
+      ruleId: "14",
+      component: <General/>,
+    },
+    {
+      rulesName: "Holidays",
+      ruleId: "17",
+      component: <SettingsHolidayTab />,
+    },
+    {
+      rulesName: "Leads",
+      ruleId: "21",
+      component: <LeadsConfigTab/>,
+    },
+    {
+      rulesName: "Notification",
+      ruleId: "15",
+      component: <NotificationsTab />,
+    },
+    
+    {
+      rulesName: "Report Scheduler",
+      ruleId: "8",
+      component: <ReportScheduler />,
+    },
+    {
+      rulesName: "Rules",
+      ruleId: "20",
+      component: <LeadsTab />,
+    },
+    {
+      rulesName: "Skills and Certifications",
+      ruleId: "6",
+      component: <SkillsTab/>,
     },
     {
       rulesName: "Template",
       ruleId: "4",
       component: <Template />,
+    },
+    {
+      rulesName: "Workflow",
+      ruleId: "1",
+       component: <WorkFlow/>,
     },
     // {
     //   rulesName: "Automation",
@@ -50,16 +99,8 @@ function Recruitment(props) {
     //   ruleId: "5",
     //   component: <IndeedForm />,
     // },
-    {
-      rulesName: "Skills and Certifications",
-      ruleId: "6",
-      component: <SkillsTab/>,
-    },
-    {
-      rulesName: "Report Scheduler",
-      ruleId: "8",
-      component: <ReportScheduler />,
-    },
+    
+    
 
     // {
     //   rulesName: "Monetize",
@@ -67,11 +108,7 @@ function Recruitment(props) {
     //   component: <ThirdPartyAccess />,
     // },
    
-    {
-      rulesName: "Access",
-      ruleId: "12",
-      component: <Access />,
-    },
+    
 
     // {
     //   rulesName: "Compliance",
@@ -83,42 +120,18 @@ function Recruitment(props) {
     //   ruleId: "7",
     //   component: <Commission/>,
     // },
-    {
-      rulesName: "General",
-      ruleId: "14",
-      component: <General/>,
-    },
-    {
-      rulesName: "Notification",
-      ruleId: "15",
-      component: <NotificationsTab />,
-    },
+    
+    
     // {
     //   rulesName: "Assessment",
     //   ruleId: "16",
     //   component: <AssessmentTab />,
     // },
-    {
-      rulesName: "Holidays",
-      ruleId: "17",
-      component: <SettingsHolidayTab />,
-    },
+    
 
-    {
-      rulesName: "Approval",
-      ruleId: "19",
-      component: <ApprovalTab />,
-    },
-    {
-      rulesName: "Rules",
-      ruleId: "20",
-      component: <LeadsTab />,
-    },
-    {
-      rulesName: "Leads",
-      ruleId: "21",
-      component: <LeadsConfigTab/>,
-    },
+    
+   
+    
  
      ];
   const [rules, setRules] = useState(name);

@@ -242,7 +242,7 @@ class Library extends Component {
               </>
             )}
           </MainWrapper>
-          <MainWrapper>
+          {/* <MainWrapper>
             <FlexContainer
               style={{
                 border: "0.0625em solid #eee",
@@ -255,14 +255,12 @@ class Library extends Component {
       Getting a new business off the ground is a lot of hard work.
       Here are five ideas you can use to find your first customers.
     </p>
-              {/* <p style={{ color: "#035b9b", fontSize: "1rem" }}>
-              Here is the list of skills that you will be able to attribute to your talent pool.
-              </p> */}
+             
               <p style={{ color: "#035b9b", fontSize: "1rem" }}>
               Korero allows you to edit and update the skills as per your requirements.
               </p>
             </FlexContainer>
-          </MainWrapper>
+          </MainWrapper> */}
         </FlexContainer>
         <h4>Updated on {moment(this.props.librarys && this.props.librarys.length && this.props.librarys[0].updationDate).format("ll")} by {this.props.librarys && this.props.librarys.length && this.props.librarys[0].updatedName}</h4>
       </>

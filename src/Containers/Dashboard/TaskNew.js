@@ -115,7 +115,7 @@ class TaskNew extends Component {
    console.log("Task1",this.props.tasks)
     return (
       <>
-    
+    <div class="h-60">
         {this.props.tasks.length&&this.props.tasks.map((item) => {
              return (
         <div class=" flex w-1/2">
@@ -126,7 +126,7 @@ class TaskNew extends Component {
            
         })}
           
-        
+          </div>
         
       </>
     );

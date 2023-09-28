@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import ListAltIcon from "@mui/icons-material/ListAlt";
 import {  StyledTabs } from "../../Components/UI/Antd";
-import { TabsWrapper } from "../../Components/UI/Layout";
+
 import ActionNotification from "../Dashboard/ActionNotification";
 import UpcomingIcon from '@mui/icons-material/Upcoming';
 import TipsAndUpdatesIcon from "@mui/icons-material/TipsAndUpdates";
@@ -13,6 +13,7 @@ import UpcomingEvents from "./Child/UpcomingEvents";
 import { Badge } from "antd";
 import Task from "../Settings/Task/Task";
 import TaskNew from "./TaskNew";
+import TabsWrapper1 from "../../Components/UI/Layout/TabsWrapper1";
 
 const TabPane = StyledTabs.TabPane;
 function handleRefreshPage() {
@@ -53,7 +54,7 @@ class TaskDashboardTab extends Component {
     const { activeKey } = this.state;
     return (
       <>
-        <TabsWrapper>
+        <TabsWrapper1>
           <StyledTabs
             defaultActiveKey="1"
             onChange={this.handleTabChange}
@@ -103,7 +104,7 @@ class TaskDashboardTab extends Component {
      
           
           </StyledTabs>
-        </TabsWrapper>
+        </TabsWrapper1>
         <Suspense fallback={null}></Suspense>
       </>
     );

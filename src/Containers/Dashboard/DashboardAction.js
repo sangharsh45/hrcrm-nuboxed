@@ -393,7 +393,7 @@ export const setSubSelectedReportType = (type) => (dispatch) =>
     dispatch({ type: types.GET_AVG_HOUR_REQUEST });
    
     axios
-      .get(`${base_url}/attendance/avarageHour/${userId}?endDate=${endDate}&startDate=${startDate}`, {
+      .get(`${base_url}/attendance/getAverageHour/${userId}?endDate=${endDate}&startDate=${startDate}`, {
         headers: {
           Authorization: "Bearer " + sessionStorage.getItem("token") || "",
         },
