@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { withRouter } from "react-router-dom";
 import styled from "styled-components";
-import StageColumns from "./StageColumns";
+import StageColumns1 from "./StageColumns1";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import { StyledTabs, StyledModal } from "../../../Components/UI/Antd";
 import { SmileOutlined, MehOutlined } from '@ant-design/icons';
@@ -445,22 +445,22 @@ function OpportunityBoard(props) {
                                       className="scrollbar"
                                       id="style-3"
                                     >
-                                      {/* {opportunities
+                                      {props.opportunityByUserId
                                         .filter(
                                           (opp, index) =>
-                                            opp.stageId === stage.stageId
+                                            opp.opportunityStagesId === stage.opportunityStagesId
                                         )
                                         .map((opp, index) => {
                                           return (
-                                            <StageColumns
+                                            <StageColumns1
                                               key={index}
                                               opportunity={opp}
                                               index={index}
                                               history={props.history}
                                             />
                                           );
-                                        })} */}
-                                        <h1>Hello World</h1>
+                                        })}
+                                        {/* <h1>Hello World</h1> */}
                                     </StageColumn>
                                   </Spin>
                                 </div>
@@ -493,6 +493,7 @@ const mapStateToProps = ({
 //   startDate: dashboard.startDate,
 //   endDate: dashboard.endDate,
    userId: auth.userDetails.userId,
+   opportunityByUserId:opportunity.opportunityByUserId,
 //   process: settings.Process,
 //   tradeCurrency: auth.userDetails.tradeCurrency,
 //   opportunities: opportunitySelector(opportunity, account),
