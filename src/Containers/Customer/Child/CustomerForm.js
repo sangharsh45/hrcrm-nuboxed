@@ -147,7 +147,7 @@ function CustomerForm(props) {
                   display: "flex",
                   justifyContent: "space-between",
                   height: "70vh",
-                  overflow: "scroll",
+                  overflowX: "hidden",
                   paddingRight: "0.6em",
                 }} >
                 <div class=" h-full w-1/2"   >

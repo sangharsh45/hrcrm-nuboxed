@@ -117,7 +117,7 @@ function UpdateLeadsForm (props) {
             ...rest
           }) => (
             <Form className="form-background">
-              <div class=" flex justify-between overflow-scroll ">
+              <div class=" flex justify-between h-[27rem] overflow-x-hidden">
                 <div class=" h-full w-1/2"   >
                     <Spacer/>
                     <div class=" flex  flex-nowrap">

@@ -1,4 +1,4 @@
-import React, { Component, Suspense, lazy } from 'react';
+import React, { Suspense, lazy } from 'react';
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { BundleLoader, GridLoader } from "../../Components/Placeholder";
@@ -6,11 +6,11 @@ import AddEventModal from './Child/AddEventModal'
 import EventHeader from "./Child/EventHeader";
 import { handleEventModal } from "./EventAction";
 const EventTable = lazy(() => import('./Child/EventTable/EventTable'))
+const EventCardList = lazy(() => import('./Child/EventTable/EventCardList'))
 
-class Event extends Component {
+function Event (props) {
 
-    render() {
-        const { addEventModal, handleEventModal } = this.props;
+        const { addEventModal, handleEventModal } = props;
         return (
             <React.Fragment>
                 <EventHeader
@@ -19,11 +19,12 @@ class Event extends Component {
                     addEventModal={addEventModal}
                     handleEventModal={handleEventModal} />
                 <Suspense fallback={<BundleLoader />}>
-                    <EventTable />
+                    {/* <EventTable />
+                     */}
+                     <EventCardList/>
                 </Suspense>
             </React.Fragment>
         )
-    }
 }
 
 const mapStateToProps = ({ event }) => ({
