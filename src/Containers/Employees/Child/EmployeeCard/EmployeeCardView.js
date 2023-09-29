@@ -122,7 +122,7 @@ function handleSetCurrentEmployeeId(employeeId,) {
           
                       </div> 
                    
-                       <div class=" font-normal text-xs text-cardBody font-poppins"><VolumeUpIcon style={{fontSize:"0.75rem"}}/> {`${item.countryDialCode} ${item.mobileNo}`}</div>
+                       <div class=" font-normal text-xs text-cardBody font-poppins mt-2 "><VolumeUpIcon style={{fontSize:"0.75rem"}}/> {`${item.countryDialCode} ${item.mobileNo}`}</div>
           <div class=" font-normal text-xs text-cardBody font-poppins "><DraftsIcon style={{fontSize:"0.75rem"}} /> {item.emailId}</div>
           <div class=" font-normal text-xs text-cardBody font-poppins ">
           <span
@@ -271,7 +271,7 @@ border-radius: 0.35rem;
     color: rgb(68,68,68);
     margin: 1rem;
     padding: 0.2rem;
-    width: 20vw;
+    width: 19vw;
     display: flex;
     flex-direction: column;
   @media only screen and (max-width: 600px) {

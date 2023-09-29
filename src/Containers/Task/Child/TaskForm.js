@@ -44,8 +44,10 @@ import { Listbox, Transition } from '@headlessui/react';
 const { Option } = Select;
 
 function TaskForm (props) {
-  const[selectedTaskType,setselectedTaskType]=useState("")
-const[selectedWorkflow,setselectedWorkflow]=useState("");
+  const [selectedTaskType, setSelectedTaskType] = useState('');
+  const [selectedWorkflow, setSelectedWorkflow] = useState("");
+//   const[selectedTaskType,setselectedTaskType]=useState("")
+// const[selectedWorkflow,setselectedWorkflow]=useState("");
 const[workflow,setworkflow]=useState([]);
 const[active,setactive]=useState(props.selectedTask ? props.selectedTask.taskStatus
   : "To Start");
@@ -75,19 +77,29 @@ const [priority,setpriority]=useState(props.selectedTask
   setreminder(checked);
   };
 
- const handleTaskTypeChange = (event) => {
+  
+  const handleTaskTypeChange = (event) => {
     const selectedTaskType = event.target.value;
-     const filteredWorkflow = props.recruitWorkflowTask.filter((item) => item.taskTypeId === selectedTaskType);
-     const workflow=filteredWorkflow
-     setselectedTaskType(selectedTaskType,workflow);
-    console.log(selectedTaskType)
+    // const filteredWorkflow = props.recruitWorkflowTask.filter((item) => item.taskTypeId === selectedTaskType);
+    setSelectedTaskType(selectedTaskType);
+     setSelectedWorkflow("");
     props.getTaskForWorkflow(selectedTaskType);
   };
 
+//  const handleTaskTypeChange = (event) => {
+//     const selectedTaskType = event.target.value;
+//      const filteredWorkflow = props.recruitWorkflowTask.filter((item) => item.taskTypeId === selectedTaskType);
+//      const workflow=filteredWorkflow
+//      setselectedTaskType(selectedTaskType,workflow);
+//     console.log(selectedTaskType)
+//     props.getTaskForWorkflow(selectedTaskType);
+//   };
+
   const handleWorkflowChange = (event) => {
     const selectedWorkflow = event.target.value;
-    setselectedWorkflow(selectedWorkflow);
+    setSelectedWorkflow(selectedWorkflow);
   };
+  const filteredWorkflow = props.recruitWorkflowTask.filter((item) => item.taskTypeId === selectedTaskType);
 
  function handleCallback() {
     const { handleChooserModal, handleTaskModal, callback }= props;
@@ -280,7 +292,8 @@ const [priority,setpriority]=useState(props.selectedTask
     const [defaultOption, setDefaultOption] = useState(props.fullName);
     const [selected, setSelected] = useState(defaultOption);
     const selectedOption = props.employees.find((item) => item.fullName === selected);
-   
+   console.log("workflow",selectedWorkflow);
+   console.log("recruitWorkflowTask",props.recruitWorkflowTask);
     return (
       <>
         <Formik
@@ -525,10 +538,10 @@ const [priority,setpriority]=useState(props.selectedTask
                           <StyledLabel>Workflow</StyledLabel>
                           <select
                  style={{ border: "0.06em solid #aaa" }}
-                      onChange={handleWorkflowChange}
+                       onChange={handleWorkflowChange}
                     >
           <option value="">select</option>
-          {workflow.map((item, index) => (
+          {filteredWorkflow.map((item, index) => (
             <option key={index}
             // disabled
             // disabled={!values.country_name}
