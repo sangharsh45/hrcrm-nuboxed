@@ -293,32 +293,32 @@ const TaskTable = (props) => {
       },
     },
 
-    {
-      title: "Customer",
+    // {
+    //   title: "Customer",
 
     
-      dataIndex: "customerName",
-      width: 8,
-      render: (name, item, i) => { 
+    //   dataIndex: "customerName",
+    //   width: 8,
+    //   render: (name, item, i) => { 
         
-        return (
-          <span>
-            {item.customerName === null ? (
-              ""
-            ) : (
-            <Tooltip title={item.customerName}>
-              <MultiAvatar
-                primaryTitle={item.customerName}
-                imgWidth={"1.8em"}
-                imgHeight={"1.8em"}
-              />
+    //     return (
+    //       <span>
+    //         {item.customerName === null ? (
+    //           ""
+    //         ) : (
+    //         <Tooltip title={item.customerName}>
+    //           <MultiAvatar
+    //             primaryTitle={item.customerName}
+    //             imgWidth={"1.8em"}
+    //             imgHeight={"1.8em"}
+    //           />
            
-            </Tooltip>
-               )}
-          </span>
-        );
-      },
-    },
+    //         </Tooltip>
+    //            )}
+    //       </span>
+    //     );
+    //   },
+    // },
         {
           title: "Owner",
           dataIndex: "submittedBy",

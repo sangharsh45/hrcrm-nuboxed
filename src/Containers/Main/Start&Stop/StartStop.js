@@ -1,4 +1,57 @@
+// import { Button, Popconfirm } from "antd";
+// import React, { useEffect, useState } from "react";
+// import { connect } from "react-redux";
+// import { bindActionCreators } from "redux";
+// import { addAttendence, getAttendanceList } from "../../Customer/CustomerAction";
 
+// function StartStop(props) {
+//   useEffect(() => {
+//     props.getAttendanceList(props.userId);
+//   }, []);
+
+//   const toggle = () => {
+//     let data = {
+//       userId: props.userId,
+//       startInd: !props.attendanceByList.startInd, 
+//     };
+//     props.addAttendence(data);
+//   };
+
+//   return (
+//     <div>
+//       <Popconfirm
+//         title="Are you sure you want to start/stop?"
+//         onConfirm={toggle}
+//         okText="Yes"
+//         cancelText="No"
+//       >
+//         <Button
+//           type="primary"
+//           htmlType="submit"
+//           style={{ backgroundColor: props.attendanceByList.startInd ? "#77dd77" : "#ff7158bf" }}
+//         >
+//           {props.attendanceByList.startInd ? "Stop" : "Start"}
+//         </Button>
+//       </Popconfirm>
+//     </div>
+//   );
+// }
+
+// const mapStateToProps = ({ customer, auth }) => ({
+//   userId: auth.userDetails.userId,
+//   attendanceByList: customer.attendanceByList,
+// });
+
+// const mapDispatchToProps = (dispatch) =>
+//   bindActionCreators(
+//     {
+//       addAttendence,
+//       getAttendanceList,
+//     },
+//     dispatch
+//   );
+
+// export default connect(mapStateToProps, mapDispatchToProps)(StartStop);
 
 
 
@@ -24,7 +77,10 @@ function StartStop(props) {
   useEffect(() => {
     props.getAttendanceList(props.userId);
  }, []);
-  const [state, setState] = useState(false);
+ useEffect(() => {
+
+}, [props.attendanceByList]);
+  const [state, setState] = useState(props.attendanceByList);
 
   const toggle = () => {
     if (state) {
@@ -58,9 +114,9 @@ function StartStop(props) {
         <Button
           type="primary"
           htmlType="submit"
-          style={{ backgroundColor: state ? "#ff7158bf" : "#77dd77" }}
+          style={{ backgroundColor: state ?"#77dd77"  :"#ff7158bf"  }}
         >
-          {state ? "Stop" : "Start"}
+          {state? "Start"  :"Stop" }
         </Button>
       </Popconfirm>
     </div>
