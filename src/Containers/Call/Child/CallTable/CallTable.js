@@ -698,17 +698,6 @@ function CallTable(props) {
               <p>Date</p><p> {moment(item.startDate).format("llll")}</p>
               </div>
               <div class="flex  flex-col w-16">
-              <p>Team </p>
-              <MultiAvatar2
-                    primaryTitle={item.candidateName}
-                    //imageId={item.ownerImageId}
-                    imageURL={item.imageURL}
-                    imgWidth={"1.8em"}
-                    imgHeight={"1.8em"}
-                  />
-             
-              </div>
-              <div class="flex  flex-col w-16">
               <p>Included</p>
               <div>
                 {item.included &&
@@ -730,6 +719,18 @@ function CallTable(props) {
                   })}
               </div>
               </div>
+              <div class="flex  flex-col w-16">
+              <p>Team </p>
+              <MultiAvatar2
+                    primaryTitle={item.candidateName}
+                    //imageId={item.ownerImageId}
+                    imageURL={item.imageURL}
+                    imgWidth={"1.8em"}
+                    imgHeight={"1.8em"}
+                  />
+             
+              </div>
+             
               <div class="flex  flex-col w-16">
               <p>Completed</p><p> {item.completionInd ? "Yes" : "No"}</p></div>
               <div class="flex  flex-col w-16">

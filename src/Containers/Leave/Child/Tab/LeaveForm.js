@@ -131,7 +131,7 @@ console.log(this.state.firstCase)
                 halfDay: this.state.day,
                 startDate: dayjs(values.startDate).toISOString(),
                 endDate: dayjs(values.endDate).toISOString(),
-                case:this.state.firstCase?"0":"1",
+                halfDayType:this.state.firstCase?"0":"1",
               },
               this.props.userId,
 

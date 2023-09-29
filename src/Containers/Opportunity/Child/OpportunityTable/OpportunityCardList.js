@@ -125,7 +125,7 @@ function OpportunityCardList(props) {
                         <b>Yay! You have seen it all</b>
                     </p>
                 }
-                height={400}
+                height={"80vh"}
             >
 
     <CardWrapper>
