@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component,useState,useEffect } from "react";
 import { connect } from "react-redux";
 import { FormattedMessage } from "react-intl";
 import { bindActionCreators } from "redux";
@@ -7,6 +7,9 @@ import AddressFieldArray from "../../../../Components/Forms/Formik/AddressFieldA
 import { Formik, Form, Field, FieldArray, FastField } from "formik";
 import * as Yup from "yup";
 import { updateCustomer,setEditCustomer } from "../../CustomerAction";
+import { getAllSalesList } from "../../../Opportunity/OpportunityAction";
+import { getAllCustomerEmployeelist } from "../../../Employees/EmployeeAction";
+import { getSectors } from "../../../../Containers/Settings/Sectors/SectorsAction";
 import { HeaderLabel, StyledLabel } from "../../../../Components/UI/Elements";
 import { Spacer } from "../../../../Components/UI/Elements";
 import SearchSelect from "../../../../Components/Forms/Formik/SearchSelect";
@@ -14,6 +17,8 @@ import { FlexContainer } from "../../../../Components/UI/Layout";
 import { TextareaComponent } from "../../../../Components/Forms/Formik/TextareaComponent";
 import { InputComponent } from "../../../../Components/Forms/Formik/InputComponent";
 import { SelectComponent } from "../../../../Components/Forms/Formik/SelectComponent";
+import { Listbox, Transition } from '@headlessui/react'
+
 //yup validation scheme for creating a account
 const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
 const UpdateCustomerSchema = Yup.object().shape({
@@ -22,78 +27,63 @@ const UpdateCustomerSchema = Yup.object().shape({
   phoneNumber: Yup.string().matches(phoneRegExp, 'Phone number is not valid').min(5,"Number is too short").max(10,"Number is too long")
 });
 
-class UpdateCustomerForm extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {   
-      whiteblue: false,
-      checked:false,
-    };
-  }
-componentDidMount () {
-  this.setState({whiteblue:this.props.setEditingCustomer.category==="White"?true : false,
-checked:this.props.setEditingCustomer.category==="White" || this.props.setEditingCustomer.category==="Blue"? false  : true,
-})
-};
-  handleWhiteBlue = (checked) => {
-    this.setState({ whiteblue: checked });
-  };
-  handleReset = (resetForm) => {
+function UpdateCustomerForm (props) {
+  
+  useEffect(() => {
+    props.getAllCustomerEmployeelist();
+    props.getSectors();
+    props.getAllSalesList();
+  }, []);
+
+
+  const handleReset = (resetForm) => {
     resetForm();
   };
-  handleChange = () => {
-    this.setState({
-      checked: !this.state.checked
-    });
-  };
-  render() {
-    console.log("wh",this.state.whiteblue)
+  
     const {
       accounts,
       user,
-      // user: { userId, firstName },
-      isEditing,
-      prefillAccount,
       updateCustomerById,
       updateCustomer,
-    } = this.props;
-    const employeesData = this.props.allCustomerEmployeeList.map((item) => {
+      setEditingCustomer,
+      userId
+    } = props;
+    const employeesData = props.allCustomerEmployeeList.map((item) => {
       return {
         label: `${item.fullName}`,
         value: item.employeeId,
       };
     });
+    const [defaultOption, setDefaultOption] = useState(setEditingCustomer.assignedTo);
+    const [selected, setSelected] = useState(defaultOption);
+    const selectedOption = props.allCustomerEmployeeList.find((item) => item.fullName === selected);
     return (
       <>
         <Formik
           // enableReinitialize
           initialValues={{
-            name: this.props.setEditingCustomer.name || "",
-            url: this.props.setEditingCustomer.url || "",
-            sectorId: this.props.setEditingCustomer.sectorId  ,
-            vatNo:this.props.setEditingCustomer.vatNo  ,
-            email: this.props.setEditingCustomer.email || "",
-            country:this.props.setEditingCustomer.country || "",
-            countryDialCode:
-              this.props.setEditingCustomer.countryDialCode ||
-              this.props.user.countryDialCode,
-            phoneNumber: this.props.setEditingCustomer.phoneNumber || "",
-            userId: this.props.userId,
-            // country:"",
-            notes: this.props.setEditingCustomer.notes || "",
-            category:this.state.checked?"Both": this.state.whiteblue ? "White" : "Blue",
+            name: setEditingCustomer.name || "",
+            url: setEditingCustomer.url || "",
+            sectorId: setEditingCustomer.sectorId  ,
+            vatNo:setEditingCustomer.vatNo  ,
+            email: setEditingCustomer.email || "",
+            country:setEditingCustomer.country || "",
+            countryDialCode: setEditingCustomer.countryDialCode || user.countryDialCode,
+            phoneNumber: setEditingCustomer.phoneNumber || "",
+            userId: userId,
+            assignedTo:selectedOption ? selectedOption.employeeId:props.setEditingCustomer.employeeId,
+            notes: setEditingCustomer.notes || "",
             address: [
               {
-                addressId: this.props.setEditingCustomer.address.length ? this.props.setEditingCustomer.address[0].addressId : "",
-                address1: this.props.setEditingCustomer.address.length ? this.props.setEditingCustomer.address[0].address1 : "",
-                address2:  this.props.setEditingCustomer.address.length ? this.props.setEditingCustomer.address[0].address2 : "",
-                street:  this.props.setEditingCustomer.address.length ? this.props.setEditingCustomer.address[0].street : "",
-                city:  this.props.setEditingCustomer.address.length ? this.props.setEditingCustomer.address[0].city : "",
-                state:  this.props.setEditingCustomer.address.length ? this.props.setEditingCustomer.address[0].state : "",
-                postalCode:  this.props.setEditingCustomer.address.length ? this.props.setEditingCustomer.address[0].postalCode : "",             
+                addressId: setEditingCustomer.address.length ? setEditingCustomer.address[0].addressId : "",
+                address1: setEditingCustomer.address.length ? setEditingCustomer.address[0].address1 : "",
+                address2:  setEditingCustomer.address.length ? setEditingCustomer.address[0].address2 : "",
+                street:  setEditingCustomer.address.length ? setEditingCustomer.address[0].street : "",
+                city:  setEditingCustomer.address.length ? setEditingCustomer.address[0].city : "",
+                state:  setEditingCustomer.address.length ? setEditingCustomer.address[0].state : "",
+                postalCode:  setEditingCustomer.address.length ? setEditingCustomer.address[0].postalCode : "",             
               },
             ],
-            category: this.state.whiteblue ?"White" : "Blue"||"Both",
           }}
           validationSchema={UpdateCustomerSchema}
           onSubmit={(values, { resetForm }) => {
@@ -101,11 +91,11 @@ checked:this.props.setEditingCustomer.category==="White" || this.props.setEditin
             updateCustomer(
               {
                 ...values,
-                customerId: this.props.customerId,
-                category:this.state.checked?"Both": this.state.whiteblue ? "White" : "Blue",
+                customerId: props.customerId,
+                assignedTo:selectedOption ? selectedOption.employeeId:props.setEditingCustomer.employeeId,
               },
-              this.props.customerId,
-              () => this.handleReset(resetForm)
+            props.customerId,
+              () => handleReset(resetForm)
             );
           }}
         >
@@ -210,27 +200,6 @@ checked:this.props.setEditingCustomer.category==="White" || this.props.setEditin
                         component={SearchSelect}
                       />
                     </div>
-                     
-                    {/* <div class=" w-1/3">
-                     <div>             
-                 <StyledLabel>Requirement Type</StyledLabel>
-                 </div>
-                 <Switch                   
-                   checked={this.state.whiteblue}
-                    onChange={this.handleWhiteBlue}
-                   disabled={this.state.checked}
-                   checkedChildren="White collar"
-                   unCheckedChildren="Blue collar"
-                 /> 
-                 </div>
-                 <div >
-                 <Checkbox
-                 checked={this.state.checked}
-                 onChange={() => this.handleChange()}
-               > 
-               Both
-               </Checkbox>
-               </div> */}
                  </div>
                 
                  <Spacer/>
@@ -251,29 +220,74 @@ checked:this.props.setEditingCustomer.category==="White" || this.props.setEditin
                    <Spacer/>
                    <div class=" flex justify-between">
                    <div class=" h-full w-full">
-                    <Field
-                    name="assignedTo"
-                    selectType="employee"
-                    isColumnWithoutNoCreate
-                    // label="Assigned to"
-                    label={
-                      <FormattedMessage
-                        id="app.assignedto"
-                        defaultMessage="Assigned to"
-                      />
-                    }
-                    // component={SearchSelect}
-                    isColumn
-                    // value={values.employeeId}
-                    // defaultValue={{
-                    //   label: `${firstName || ""} ${middleName ||
-                    //     ""} ${lastName || ""}`,
-                    //   value: employeeId,
-                    // }}
-                    component={SelectComponent}
-                    options={Array.isArray(employeesData) ? employeesData : []}
-                    inlineLabel
-                  />
+                   <Listbox value={selected} onChange={setSelected}>
+        {({ open }) => (
+          <>
+            <Listbox.Label className="block font-semibold text-[0.75rem]">
+              Assigned to
+            </Listbox.Label>
+            <div className="relative mt-1">
+              <Listbox.Button className="relative w-full leading-4 cursor-default border border-gray-300 bg-white py-0.5 pl-3 pr-10 text-left shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm">
+                {selected}
+              </Listbox.Button>
+              {open && (
+                <Listbox.Options
+                  static
+                  className="absolute z-10 mt-1 max-h-56 w-full overflow-auto  bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
+                >
+                  {props.allCustomerEmployeeList.map((item) => (
+                    <Listbox.Option
+                      key={item.employeeId}
+                      className={({ active }) =>
+                        `relative cursor-default select-none py-2 pl-3 pr-9 ${
+                          active ? "text-white bg-indigo-600" : "text-gray-900"
+                        }`
+                      }
+                      value={item.fullName}
+                    >
+                      {({ selected, active }) => (
+                        <>
+                          <div className="flex items-center">
+                            <span
+                              className={`ml-3 block truncate ${
+                                selected ? "font-semibold" : "font-normal"
+                              }`}
+                            >
+                              {item.fullName}
+                            </span>
+                          </div>
+                          {selected && (
+                            <span
+                              className={`absolute inset-y-0 right-0 flex items-center pr-4 ${
+                                active ? "text-white" : "text-indigo-600"
+                              }`}
+                            >
+                              
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                className="h-5 w-5"
+                                viewBox="0 0 20 20"
+                                fill="currentColor"
+                                aria-hidden="true"
+                              >
+                                <path
+                                  fillRule="evenodd"
+                                  d="M6.293 9.293a1 1 0 011.414 0L10 11.586l2.293-2.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z"
+                                  clipRule="evenodd"
+                                />
+                              </svg>
+                            </span>
+                          )}
+                        </>
+                      )}
+                    </Listbox.Option>
+                  ))}
+                </Listbox.Options>
+              )}
+            </div>
+          </>
+        )}
+      </Listbox>
                   </div>
                     </div>
                     <Spacer/>
@@ -295,7 +309,7 @@ checked:this.props.setEditingCustomer.category==="White" || this.props.setEditin
                         inlineLabel
                         />
                     </div>
-                    <div class=" w-2/5">
+                    <div class=" w-[10rem]">
                       <Field
                         name="businessRegistration"
                         type="text"
@@ -346,7 +360,7 @@ checked:this.props.setEditingCustomer.category==="White" || this.props.setEditin
                        }
                        component={SearchSelect}
                        defaultValue={{
-                         value: this.props.user.countryName,
+                         value: props.user.countryName,
                        }}
                        value={values.countryName}
                        selectType="country"
@@ -377,7 +391,7 @@ checked:this.props.setEditingCustomer.category==="White" || this.props.setEditin
         </Formik>
       </>
     );
-  }
+
 }
 
 const mapStateToProps = ({ auth, customer,employee }) => ({
@@ -395,7 +409,10 @@ const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
       updateCustomer,
-      setEditCustomer
+      setEditCustomer,
+      getSectors,
+      getAllSalesList,
+      getAllCustomerEmployeelist,
     },
     dispatch
   );

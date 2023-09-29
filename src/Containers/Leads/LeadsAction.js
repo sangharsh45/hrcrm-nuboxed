@@ -858,7 +858,7 @@ export const setLeadsViewType = (viewType) => (dispatch) => {
         // cb && cb("failure");
       });
   };
-  export const updateTypeForLead = (data,leadsId,type) => (dispatch) => {
+  export const updateTypeForLead = (leadsId,type,data) => (dispatch) => {
     dispatch({ type: types.UPDATE_TYPE_FOR_LEAD_REQUEST });
     axios
       .put(
