@@ -610,7 +610,7 @@ function MileageDrawerCard(props) {
                   <h4 className="text-sm text-cardBody font-poppins">ID</h4>
                   <h4 className="text-xs text-blue-500 text-cardBody font-poppins cursor-pointer">
                     <Tooltip title={item.mileageId}>
-                      <QuestionMarkIcon />
+                      <QuestionMarkIcon style={{fontSize:"1.25rem"}} />
                     </Tooltip>
                   </h4>
                 </div>
@@ -714,7 +714,7 @@ function MileageDrawerCard(props) {
             )}
                 </div>
 
-                <div className="flex font-medium flex-col w-32">
+                <div className="flex font-medium flex-col w-32 justify-center">
                   {/* <h4 className="text-xs text-cardBody font-poppins">
                     Remarks
                   </h4> */}

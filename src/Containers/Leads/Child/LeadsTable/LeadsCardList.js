@@ -23,6 +23,7 @@ import {
   getLeadDetailsById,
   updateTypeForLead,
 } from "../../../Leads/LeadsAction";
+import ReactCountryFlag from 'react-country-flag';
 import { MailOutlined, SearchOutlined } from "@ant-design/icons";
 import { Button, Tooltip, Input } from "antd";
 import StatusCustomerToggle from "./StatusCustomerToggle";
@@ -61,6 +62,7 @@ const LeadsCardList = (props) => {
       {leadsAllData.map((item) => { 
          const currentdate = moment().format("DD/MM/YYYY");
          const date = moment(item.creationDate).format("DD/MM/YYYY");
+       
          const diff = Math.abs(
             moment().diff(moment(item.lastRequirementOn), "days")
           );
@@ -87,7 +89,7 @@ const LeadsCardList = (props) => {
                                     borderBottom: "3px dotted #515050"
                                 }}>
                                      
-                                <div className=" flex font-medium flex-col w-52 ">
+                                <div className=" flex font-medium flex-col w-60 ">
                                 <div className="flex"> 
 <div>
 <SubTitle>
@@ -132,7 +134,7 @@ const LeadsCardList = (props) => {
                                         </div>
                                         </div>
                                 </div>
-                                <div className=" flex font-medium flex-col  w-52 ">
+                                <div className=" flex font-medium flex-col  w-44 ">
                            <h4 class=" text-[0.875rem] text-cardBody font-poppins"> Phone # </h4>
                            <h4 class=" text-[0.75rem] text-cardBody font-poppins">   
                            {`${item.countryDialCode} ${item.phoneNumber}`}
@@ -159,8 +161,8 @@ const LeadsCardList = (props) => {
 
                                     <h4 class=" text-[0.875rem] text-cardBody font-poppins">Country</h4>
                                     <h4 class=" text-[0.75rem] text-cardBody font-poppins">
-                                    {/* <ReactCountryFlag countryCode="NL" svg /> */}
-                                    {/* <ReactCountryFlag
+                                    <ReactCountryFlag countryCode="IN" svg />
+                                    <ReactCountryFlag
                           countryCode={item.country}
                           svg
                           style={{
@@ -168,7 +170,7 @@ const LeadsCardList = (props) => {
                             height: '1em',
                           }}
                           title={item.country}
-                        /> */}
+                        />
                         &nbsp;
                         {item.address && item.address.length && item.address[0].country}
                                     </h4>

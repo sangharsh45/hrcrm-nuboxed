@@ -45,6 +45,7 @@ function ExpenseCard(props) {
 
     return (
       <>
+       <div class=" h-h86 overflow-auto overflow-x-auto">
          <CardWrapper>      
               {Expenses.map((item) => {
                  return (
@@ -140,6 +141,7 @@ function ExpenseCard(props) {
                  )  
             })}
               </CardWrapper>
+              </div>
 
         <ExpenseVoucherIdDrawer
         voucherId={voucherId} 

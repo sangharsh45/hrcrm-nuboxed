@@ -57,7 +57,7 @@ function LeaveCardView (props) {
       
             <>
             
-
+<div class=" h-h72 overflow-auto overflow-x-auto">
              
               <CardWrapper>      
               {props.leaveListRangeByUserId.map((item) => {
@@ -212,6 +212,7 @@ style={{ cursor: "pointer" }}></DeleteOutlined>
                  )  
             })}
               </CardWrapper>
+              </div>
               <UpdateLeavesModal
         leaveId={currentLeaveId}
         updateLeaveModal={updateLeaveModal}

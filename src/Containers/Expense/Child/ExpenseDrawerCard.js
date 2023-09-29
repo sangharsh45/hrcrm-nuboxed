@@ -452,7 +452,7 @@ function ExpenseDrawerCard(props) {
                      </div>
                              
 
-                              <div class="flex flex-row items-center w-[8%]">
+                              <div class="flex flex-row items-center w-[10%]">
                                 <div class="flex items-center">
                                 <Tooltip title="Upload Document">
             <UploadOutlined
