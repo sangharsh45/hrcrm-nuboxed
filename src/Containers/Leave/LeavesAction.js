@@ -108,6 +108,13 @@ export const handleUpdateLeaveModal = (modalProps) => (dispatch) => {
       payload: modalProps,
     });
   };
+
+  export const handleStatusLeaveModal = (modalProps) => (dispatch) => {
+    dispatch({
+      type: types.HANDLE_STATUS_LEAVE_MODAL,
+      payload: modalProps,
+    });
+  };
   
   export const setEditLeave = (name) => (dispatch) => {
     dispatch({

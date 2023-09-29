@@ -3,12 +3,17 @@ import React, { lazy } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Tooltip,Button } from "antd";
-import { getMileageByUserId,deleteMileageVoucher,handleMileageVoucherIdDrwer } from "../MileageAction";
+import { getMileageByUserId,
+  deleteMileageVoucher,
+  handleStatusMileageModal,
+  handleMileageVoucherIdDrwer
+ } from "../MileageAction";
 import styled from 'styled-components'
-import { FlexContainer } from '../../../Components/UI/Layout'
+import AssistantIcon from '@mui/icons-material/Assistant';
 import APIFailed from "../../../Helpers/ErrorBoundary/APIFailed";
 import { DeleteOutlined, } from "@ant-design/icons";
 import MileageVoucherIdDrawer from "./MileageVoucherIdDrawer";
+import StatusMileageDrawer from "./StatusMileageDrawer";
 
 
 class MileageCard extends React.Component {
@@ -30,6 +35,8 @@ class MileageCard extends React.Component {
     const {
       MileageDat,
       fetchingMileageByUserId,
+      handleStatusMileageModal,
+     
       fetchingMileageByUserIdError,
     } = this.props;
 
@@ -115,6 +122,23 @@ class MileageCard extends React.Component {
                   <div className="text-[#e1d16c]" > Waiting for approval</div>
                   </div>
               )}
+
+
+<div style={{ cursor: "pointer",padding:"2px"}}
+
+onClick={() => {
+this.props.handleStatusMileageModal(true);
+
+
+}}
+>
+                 <Tooltip  title={"status"}>
+                 <AssistantIcon
+style={{ color: "grey",fontSize:"1.2rem",padding:"2px" }}/>
+   </Tooltip> 
+
+   </div>
+        
                         
                            {item.status === "Pending" && (
             <Tooltip title="Delete">
@@ -153,6 +177,13 @@ class MileageCard extends React.Component {
         mileageVoucherIdDrawer={this.props.mileageVoucherIdDrawer}
         handleMileageVoucherIdDrwer={this.props.handleMileageVoucherIdDrwer}
         />
+
+        
+<StatusMileageDrawer 
+        voucherId={this.state.voucherId}
+        updateStatusMileageModal={this.props.updateStatusMileageModal}
+        handleStatusMileageModal={this.props.handleStatusMileageModal}
+        />
       </>
     );
   }
@@ -160,6 +191,7 @@ class MileageCard extends React.Component {
 const mapStateToProps = ({ auth, mileage }) => ({
   userId: auth.userDetails.userId,
   MileageDat: mileage.MileageDat,
+  updateStatusMileageModal:mileage.updateStatusMileageModal,
   fetchingMileageByUserId: mileage.fetchingMileageByUserId,
   fetchingMileageByUserIdError: mileage.fetchingMileageByUserIdError,
   mileageVoucherIdDrawer:mileage.mileageVoucherIdDrawer,
@@ -169,7 +201,8 @@ const mapDispatchToProps = (dispatch) =>
     {
       getMileageByUserId,
       deleteMileageVoucher,
-      handleMileageVoucherIdDrwer
+      handleMileageVoucherIdDrwer,
+      handleStatusMileageModal
     },
     dispatch
   );

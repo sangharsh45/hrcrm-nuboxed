@@ -11,12 +11,15 @@ import moment from "moment";
 import BorderColorIcon from '@mui/icons-material/BorderColor';
 import { BundleLoader } from "../../../../Components/Placeholder";
 import InfoIcon from '@mui/icons-material/Info';
+import AssistantIcon from '@mui/icons-material/Assistant';
 import { getLeaveListRangeByUserId,
     updateLeaves,
     setEditLeave,
     handleUpdateLeaveModal,
+    handleStatusLeaveModal
     } from "../../LeavesAction";
     import UpdateLeavesModal from "../Tab/UpdateLeavesModal";
+import StatusLeavesModal from "./StatusLeavesModal";
 const { Option } = Select;
 function LeaveCardView (props) {
   const [page, setPage] = useState(0);
@@ -45,6 +48,8 @@ function LeaveCardView (props) {
     fetchingLeaveListRangeByUserIdError,
     handleUpdateLeaveModal,
     updateLeaveModal,
+    updateStatusLeaveModal,
+    handleStatusLeaveModal
     
     // fetchingBankDetails,
     // bank,
@@ -187,6 +192,25 @@ style={{ color: "grey",fontSize:"1.2rem",padding:"2px" }}/>
    : ""}
    </span>
 
+   <span >
+                 
+                 <div style={{ cursor: "pointer",padding:"2px"}}
+// style={{ cursor: "pointer" }}
+onClick={() => {
+handleStatusLeaveModal(true);
+handleSetCurrentLeaveId(item.leaveId);
+
+}}
+>
+                 <Tooltip  title={"status"}>
+                 <AssistantIcon
+style={{ color: "grey",fontSize:"1.2rem",padding:"2px" }}/>
+   </Tooltip> 
+
+   </div>
+ 
+   </span>
+
      <span
      
      >
@@ -219,6 +243,13 @@ style={{ cursor: "pointer" }}></DeleteOutlined>
         handleUpdateLeaveModal={handleUpdateLeaveModal}
         handleSetCurrentLeaveId={handleSetCurrentLeaveId}
         />
+
+<StatusLeavesModal
+        leaveId={currentLeaveId}
+        updateStatusLeaveModal={updateStatusLeaveModal}
+        handleStatusLeaveModal={handleStatusLeaveModal}
+        handleSetCurrentLeaveId={handleSetCurrentLeaveId}
+        />
             </>
       
     
@@ -234,6 +265,7 @@ const mapStateToProps = ({ leave, auth }) => ({
     leaveListRangeByUserId: leave.leaveListRangeByUserId,
     // fetchingBankDetails: profile.fetchingBankDetails,
     updateLeaveModal:leave.updateLeaveModal,
+    updateStatusLeaveModal:leave.updateStatusLeaveModal,
 })
 
 const mapDispatchToProps = (dispatch) =>
@@ -243,6 +275,7 @@ const mapDispatchToProps = (dispatch) =>
         updateLeaves,
         setEditLeave,
         handleUpdateLeaveModal,
+        handleStatusLeaveModal
     },
     dispatch,
   )

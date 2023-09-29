@@ -29,6 +29,8 @@ const initialState = {
 
   documentUploadModal: false,
 
+  updateStatusExpenseModal:false,
+
   addingDocumentByExpenseId: false,
   addingDocumentByExpenseIdError: false,
 
@@ -247,6 +249,10 @@ export const expenseReducer = (state = initialState, action) => {
                 fetchingRejectedExpense: false,
                 fetchingRejectedExpenseError: true,
               };
+
+              case types.HANDLE_STATUS_EXPENSE_MODAL:
+                return { ...state, updateStatusExpenseModal: action.payload };
+    
       default:
   return state;
     }

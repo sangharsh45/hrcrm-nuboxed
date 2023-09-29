@@ -12,9 +12,9 @@
 //   const toggle = () => {
 //     let data = {
 //       userId: props.userId,
-//       startInd: !props.attendanceByList.startInd, 
+//       startInd: props.attendanceByList.startInd === true ? true : false, 
 //     };
-//     props.addAttendence(data);
+//     props.addAttendence(data,props.userId);
 //   };
 
 //   return (
@@ -30,7 +30,7 @@
 //           htmlType="submit"
 //           style={{ backgroundColor: props.attendanceByList.startInd ? "#77dd77" : "#ff7158bf" }}
 //         >
-//           {props.attendanceByList.startInd ? "Stop" : "Start"}
+//           {props.attendanceByList.startInd ? "Start" : "Stop" }
 //         </Button>
 //       </Popconfirm>
 //     </div>
@@ -89,14 +89,14 @@ function StartStop(props) {
         userId: props.userId,
         startInd: false, 
       };
-      props.addAttendence(data);
+      props.addAttendence(data,props.userId);
     } else {
 
       let data = {
         userId: props.userId,
         startInd: true, 
       };
-      props.addAttendence(data);
+      props.addAttendence(data,props.userId);
     }
 
     setState(!state);
@@ -114,9 +114,9 @@ function StartStop(props) {
         <Button
           type="primary"
           htmlType="submit"
-          style={{ backgroundColor: state ?"#77dd77"  :"#ff7158bf"  }}
+          style={{ backgroundColor: state ? "#ff7158bf"  : "#77dd77" }}
         >
-          {state? "Start"  :"Stop" }
+          {state?"Stop"   :"Start" }
         </Button>
       </Popconfirm>
     </div>

@@ -3431,6 +3431,65 @@ export const getTaskForWorkflow = (taskTypeId) => (dispatch) => {
     });
 };
 
+export const addTaskWorkflow = (included, cb) => (dispatch) => {
+  // console.log(sectors);
+  dispatch({
+    type: types.ADD_TASK_WORKFLOW_REQUEST,
+  });
+  axios
+    .post(`${base_url}/task/subTask`, {included}, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      // dispatch(getSectors());
+      message.success("data has been added successfully!");
+      console.log(res);
+      dispatch({
+        type: types.ADD_TASK_WORKFLOW_SUCCESS,
+        payload:res.data,
+      });
+      cb();
+    })
+    .catch((err) => {
+      console.log(err);
+   
+      dispatch({
+        type: types.ADD_TASK_WORKFLOW_FAILURE,
+      });
+      // message.success(res.data.message);
+      cb();
+    });
+};
+
+export const getTaskTeamList = (taskId) => (dispatch) => {
+  dispatch({
+    type: types.GET_TASK_TEAM_LIST_REQUEST,
+  });
+  axios
+  .get(`${base_url}/task/teamList/${taskId}`, {
+    headers: {
+      Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+    },
+  })
+    
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.GET_TASK_TEAM_LIST_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.GET_TASK_TEAM_LIST_FAILURE,
+        payload: err,
+      });
+    });
+};
+
 
 
 

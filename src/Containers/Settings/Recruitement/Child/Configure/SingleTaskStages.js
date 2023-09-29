@@ -102,7 +102,7 @@ class SingleTaskStages extends Component {
 </StageName>
            
                 <StageName  >
-                  {days}
+                  {days}D
                 </StageName>
                 {/* <StageName>
                   {`${ moment(startDate).format("DD/MM/YYYY")}`}
