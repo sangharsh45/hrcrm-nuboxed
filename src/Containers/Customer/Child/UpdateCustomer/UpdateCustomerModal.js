@@ -9,7 +9,6 @@ const UpdateCustomerForm = lazy(() => import("./UpdateCustomerForm"));
 
 const UpdateCustomerModal = (props) => {
   const { updateCustomerModal, handleUpdateCustomerModal, ...formProps } = props;
-  console.log("dn",props.setEditingCustomer.name)
   return (
     <>
       <StyledDrawer

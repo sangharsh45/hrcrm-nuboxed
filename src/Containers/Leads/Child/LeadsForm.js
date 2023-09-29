@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, useEffect,useState } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Button, Switch, Checkbox } from "antd";
@@ -20,6 +20,7 @@ import { InputComponent } from "../../../Components/Forms/Formik/InputComponent"
 import { SelectComponent } from "../../../Components/Forms/Formik/SelectComponent";
 import ProgressiveImage from "../../../Components/Utils/ProgressiveImage";
 import ClearbitImage from "../../../Components/Forms/Autocomplete/ClearbitImage";
+import { Listbox, Transition } from '@headlessui/react'
 // yup validation scheme for creating a account
 const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
 const CustomerSchema = Yup.object().shape({
@@ -28,32 +29,16 @@ const CustomerSchema = Yup.object().shape({
   phoneNumber: Yup.string().matches(phoneRegExp, 'Phone number is not valid').min(5,"Number is too short").max(10,"Number is too long")
 });
 
-class LeadsForm extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      whiteblue: true,
-      checked: true,
-    };
-  }
-
-  handleWhiteBlue = (checked) => {
-    this.setState({ whiteblue: checked });
-  };
-
-  handleReset = (resetForm) => {
+function LeadsForm (props) {
+  
+ const handleReset = (resetForm) => {
     resetForm();
   };
-  handleChange = () => {
-    this.setState({
-      checked: !this.state.checked
-    });
-  };
-  componentDidMount() {
-    this.props.getAllCustomerEmployeelist();
-  }
+ 
+  useEffect(()=> {
+props.getAllCustomerEmployeelist();
+  },[]);
 
-  render() {
     const {
       accounts,
       user,
@@ -65,13 +50,12 @@ class LeadsForm extends Component {
       addLeads,
       clearbit,
       setClearbitData,
-    } = this.props;
-    const employeesData = this.props.allCustomerEmployeeList.map((item) => {
-      return {
-        label: `${item.fullName}`,
-        value: item.employeeId,
-      };
-    });
+    } = props;
+
+    const [defaultOption, setDefaultOption] = useState(props.fullName);
+    const [selected, setSelected] = useState(defaultOption);
+    const selectedOption = props.allCustomerEmployeeList.find((item) => item.fullName === selected);
+
     return (
       <>
         <Formik
@@ -84,11 +68,10 @@ class LeadsForm extends Component {
             email: "",
             phoneNumber: "",
             fullName:"",
-            category: this.state.checked ? "Both" : this.state.whiteblue ? "White" : "Blue",
-            userId: this.props.userId,
+            userId: props.userId,
             notes: "",
             businessRegistration: "",
-            assignedTo: userId ? userId : "",
+            assignedTo: selectedOption ? selectedOption.employeeId:userId,
             department: "",
             salutation:"",
             firstName:"",
@@ -106,7 +89,6 @@ class LeadsForm extends Component {
                 postalCode: "",
               },
             ],
-            category: this.state.whiteblue ? "White" : "Blue" || "Both",
           }}
           // validationSchema={CustomerSchema}
           onSubmit={(values, { resetForm }) => {
@@ -114,10 +96,10 @@ class LeadsForm extends Component {
             addLeads(
               {
                 ...values,
-                category: this.state.checked ? "Both" : this.state.whiteblue ? "White" : "Blue",
+                assignedTo: selectedOption ? selectedOption.employeeId:userId,
               },
-              this.props.userId,
-              () => this.handleReset(resetForm)
+              props.userId,
+              () => handleReset(resetForm)
             );
           }}
         >
@@ -300,7 +282,7 @@ class LeadsForm extends Component {
                     }
                     isColumn
                     width={"100%"}
-                    setClearbitData={this.props.setClearbitData}
+                    setClearbitData={props.setClearbitData}
                     component={ClearbitImage}
                     accounts={accounts}
                     inlineLabel
@@ -378,28 +360,7 @@ class LeadsForm extends Component {
                       />
                     
                     </div>
-                  
-                    {/* <div class=" w-1/3">
-                    <div>   
-                        <StyledLabel>Requirement Type</StyledLabel>
-                        </div>
-                        <Switch
-                          checked={this.state.whiteblue}
-                          onChange={this.handleWhiteBlue}
-                          disabled={this.state.checked}
-                          checkedChildren="White collar"
-                          unCheckedChildren="Blue collar"
-                        />
-                     
-                    </div>
-                    <div>
-                      <Checkbox
-                        checked={this.state.checked}
-                        onChange={() => this.handleChange()}
-                      >Both
-                      </Checkbox>
-                    </div>
-                 */}
+
                     </div>
                   <Spacer />
 
@@ -429,7 +390,7 @@ class LeadsForm extends Component {
                         label={
                           <FormattedMessage
                             id="app.opportunityName"
-                            defaultMessage="Opportunity Namwe"
+                            defaultMessage="Opportunity Name"
                           />
                         }
                         isColumn
@@ -443,27 +404,74 @@ class LeadsForm extends Component {
                 <div class=" h-3/4 w-5/12 "  
                 >
                  <Spacer/>
-                 <div class=" flex justify-between">
-                    <div class=" w-1/2">
-                    <StyledLabel>
-                    <Field
-                    name="assignedTo"
-                    selectType="employee"
-                    isColumnWithoutNoCreate
-                    label={
-                      <FormattedMessage
-                        id="app.assignedto"
-                        defaultMessage="Assigned to"
-                      />
-                    }
-                    isColumn
-                    component={SelectComponent}
-                    options={Array.isArray(employeesData) ? employeesData : []}
-                    inlineLabel
-                  />
-                  </StyledLabel>
-                  </div>
-                    </div>
+               
+                   <Listbox value={selected} onChange={setSelected}>
+      {({ open }) => (
+        <>
+          <Listbox.Label className="block font-semibold text-[0.75rem] mt-[0.6rem]">Assigned to</Listbox.Label>
+          <div className="relative mt-1">
+              <Listbox.Button className="relative w-full leading-4 cursor-default border border-gray-300 bg-white py-0.5 pl-3 pr-10 text-left shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm">
+                {selected}
+              </Listbox.Button>
+              {open && (
+                <Listbox.Options
+                  static
+                  className="absolute z-10 mt-1 max-h-56 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
+                >
+                  {props.allCustomerEmployeeList.map((item) => (
+                    <Listbox.Option
+                      key={item.employeeId}
+                      className={({ active }) =>
+                        `relative cursor-default select-none py-2 pl-3 pr-9 ${
+                          active ? "text-white bg-indigo-600" : "text-gray-900"
+                        }`
+                      }
+                      value={item.fullName}
+                    >
+                      {({ selected, active }) => (
+                        <>
+                          <div className="flex items-center">
+                            <span
+                              className={`ml-3 block truncate ${
+                                selected ? "font-semibold" : "font-normal"
+                              }`}
+                            >
+                              {item.fullName}
+                            </span>
+                          </div>
+                          {selected && (
+                            <span
+                              className={`absolute inset-y-0 right-0 flex items-center pr-4 ${
+                                active ? "text-white" : "text-indigo-600"
+                              }`}
+                            >
+                              
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                className="h-5 w-5"
+                                viewBox="0 0 20 20"
+                                fill="currentColor"
+                                aria-hidden="true"
+                              >
+                                <path
+                                  fillRule="evenodd"
+                                  d="M6.293 9.293a1 1 0 011.414 0L10 11.586l2.293-2.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z"
+                                  clipRule="evenodd"
+                                />
+                              </svg>
+                            </span>
+                          )}
+                        </>
+                      )}
+                    </Listbox.Option>
+                  ))}
+                </Listbox.Options>
+              )}
+            </div>
+        </>
+      )}
+    </Listbox>
+             
                   <Spacer />
                   <StyledLabel>
                   <FieldArray
@@ -507,7 +515,6 @@ class LeadsForm extends Component {
         </Formik>
       </>
     );
-  }
 }
 
 const mapStateToProps = ({ auth, leads,employee }) => ({
@@ -517,6 +524,7 @@ const mapStateToProps = ({ auth, leads,employee }) => ({
   user: auth.userDetails,
   allCustomerEmployeeList:employee.allCustomerEmployeeList,
   userId: auth.userDetails.userId,
+  fullName: auth.userDetails.fullName
 });
 
 const mapDispatchToProps = (dispatch) =>

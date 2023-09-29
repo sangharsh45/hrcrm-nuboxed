@@ -226,12 +226,10 @@ const LeadsCardList = (props) => {
    defaultMessage="Cold"
  />}
  role={item.type}
- onClick={() =>
-   props.updateTypeForLead(item.leadsId, {
-     leadsId: item.leadsId,
-     type: "Cold",
-   })
- }
+ onClick={() => {
+  const typ="Cold"
+   props.updateTypeForLead(item.leadsId,typ)
+ }}
 />
 </ButtonGroup>
 </div>
