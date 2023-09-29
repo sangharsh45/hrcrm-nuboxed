@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { useState,useEffect } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Button } from "antd";
@@ -15,36 +15,33 @@ import dayjs from "dayjs";
 import { getWorkflow, getStages } from "../../OpportunityAction";
 import { getCustomerData } from "../../../Customer/CustomerAction";
 import { getContactData } from "../../../Contact/ContactAction";
+import { Listbox } from "@headlessui/react";
 /**
  * yup validation scheme for creating a opportunity
  */
 
 const UpdateOpportunitySchema = Yup.object().shape({
   opportunityName: Yup.string().required("Please provide Opportunity name"),
-  // startDate: Yup.date().required("Initiation date needed!"),
-  // endDate: Yup.date().required("Closure date needed!"),
-  // proposalAmount: Yup.number()
-  //   .typeError("Value must be a number")
   customerId:Yup.string().required("Input needed!"),
   currency: Yup.string().required("Currency needed!"),
   startDate: Yup.string().required("Input needed!"),
   endDate: Yup.string().required("Input needed!"),
-  salesUserIds: Yup.string().required("Input needed!"),
+  // salesUserIds: Yup.string().required("Input needed!"),
   oppWorkflow: Yup.string().required("Input needed!"),
 });
-class UpdateOpportunityForm extends Component {
-  componentDidMount() {
-    this.props.getAllSalesList();
-    this.props.getCustomerData(this.props.userId);
-    this.props.getContactData(this.props.userId);
-    this.props.getWorkflow(this.props.orgId);
-    this.props.getStages(this.props.orgId);
-  }
+function UpdateOpportunityForm (props) {
+  useEffect(()=> {
+    props.getAllSalesList();
+    props.getCustomerData(props.userId);
+    props.getContactData(props.userId);
+    props.getWorkflow(props.orgId);
+    props.getStages(props.orgId);
+  },[]);
 
-  getStagesOptions(filterOptionKey, filterOptionValue) {
+  function getStagesOptions(filterOptionKey, filterOptionValue) {
     const StagesOptions =
-      this.props.stages.length &&
-      this.props.stages
+      props.stages.length &&
+      props.stages
         .filter((option) => {
           if (
             option.opportunityWorkflowDetailsId === filterOptionValue &&
@@ -61,15 +58,15 @@ class UpdateOpportunityForm extends Component {
 
     return StagesOptions;
   }
-  render() {
-    const salesNameOption = this.props.sales.map((item) => {
+
+    const salesNameOption = props.sales.map((item) => {
       return {
         label: `${item.fullName || ""}`,
         value: item.employeeId,
       };
     });
 
-    const customerNameOption = this.props.customerData
+    const customerNameOption = props.customerData
       .sort((a, b) => {
         const libraryNameA = a.name && a.name.toLowerCase();
         const libraryNameB = b.name && b.name.toLowerCase();
@@ -92,8 +89,8 @@ class UpdateOpportunityForm extends Component {
 
     const getAreaOptions = (filterOptionKey, filterOptionValue) => {
       const contactOptions =
-        this.props.contactData.length &&
-        this.props.contactData
+        props.contactData.length &&
+        props.contactData
           .filter((option) => {
             if (
               option.customerId === filterOptionValue &&
@@ -110,32 +107,35 @@ class UpdateOpportunityForm extends Component {
       return contactOptions;
     };
 
-    const WorkflowOptions = this.props.workflow.map((item) => {
+    const WorkflowOptions = props.workflow.map((item) => {
       return {
         label: `${item.workflowName || ""}`,
         value: item.opportunityWorkflowDetailsId,
       };
     });
     const { updateOpportunityById, updateOpportunity, startDate, endDate } =
-      this.props;
+      props;
 
+      const [defaultOption, setDefaultOption] = useState(props.setEditingOpportunity.assignedTo);
+      const [selected, setSelected] = useState(defaultOption);
+      const selectedOption = props.sales.find((item) => item.fullName === selected);
     return (
       <>
         <Formik
           initialValues={{
             opportunityName:
-              this.props.setEditingOpportunity.opportunityName || "",
+              props.setEditingOpportunity.opportunityName || "",
             startDate:
-              dayjs(this.props.setEditingOpportunity.startDate) || dayjs(),
-            endDate: dayjs(this.props.setEditingOpportunity.endDate) || dayjs(),
+              dayjs(props.setEditingOpportunity.startDate) || dayjs(),
+            endDate: dayjs(props.setEditingOpportunity.endDate) || dayjs(),
             // endDate: endDate || null,
 
             proposalAmount:
-              this.props.setEditingOpportunity.proposalAmount || "",
-            currency: this.props.setEditingOpportunity.currency || "",
-            salesUserIds: this.props.setEditingOpportunity.salesUserIds || [],
-            customerId: this.props.setEditingOpportunity.customerId || "",
-            contactId: this.props.setEditingOpportunity.contactId || "",
+              props.setEditingOpportunity.proposalAmount || "",
+            currency: props.setEditingOpportunity.currency || "",
+            salesUserIds: selectedOption ? selectedOption.employeeId:props.setEditingOpportunity.salesUserIds,
+            customerId: props.setEditingOpportunity.customerId || "",
+            contactId: props.setEditingOpportunity.contactId || "",
           }}
           validationSchema={UpdateOpportunitySchema}
           onSubmit={(values, { resetForm }) => {
@@ -212,18 +212,19 @@ class UpdateOpportunityForm extends Component {
 
             let newEndTime = `${finalEndTime}${timeEndPart}`;
 
-            this.props.updateOpportunity(
+            props.updateOpportunity(
               {
                 ...values,
-                opportunityId: this.props.opportunityId,
-                orgId: this.props.organizationId,
-                // customerId: this.props.customerId,
-                userId: this.props.userId,
+                opportunityId: props.opportunityId,
+                orgId: props.organizationId,
+                // customerId: props.customerId,
+                userId: props.userId,
                 startDate: `${newStartDate}T00:00:00Z`,
                 endDate: `${newEndDate}T00:00:00Z`,
+                salesUserIds: selectedOption ? selectedOption.employeeId:props.setEditingOpportunity.salesUserIds,
               },
-              this.props.opportunityId,
-              () => this.handleReset(resetForm)
+              props.opportunityId,
+              () => props.handleReset(resetForm)
             );
           }}
         >
@@ -346,7 +347,7 @@ class UpdateOpportunityForm extends Component {
                         }
                         isColumn
                         defaultValue={{
-                          value: this.props.user.currency,
+                          value: props.user.currency,
                         }}
                         selectType="currencyName"
                         isRequired
@@ -358,28 +359,72 @@ class UpdateOpportunityForm extends Component {
                   </div>
                 </div>
                 <div class=" h-full w-2/5">
-                  <Spacer />
-                  <StyledLabel>
-                    <Field
-                      isRequired
-                      name="salesUserIds"
-                      // selectType="employee"
-                      isColumnWithoutNoCreate
-                      // label="Assigned to"
-                      label={
-                        <FormattedMessage
-                          id="app.assignedto"
-                          defaultMessage="Assigned to"
-                        />
+                <Listbox value={selected} onChange={setSelected}>
+      {({ open }) => (
+        <>
+          <Listbox.Label className="block font-semibold text-[0.75rem] mt-[0.6rem]">Assigned to</Listbox.Label>
+          <div className="relative mt-1">
+              <Listbox.Button className="relative w-full leading-4 cursor-default border border-gray-300 bg-white py-0.5 pl-3 pr-10 text-left shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm">
+                {selected}
+              </Listbox.Button>
+              {open && (
+                <Listbox.Options
+                  static
+                  className="absolute z-10 mt-1 max-h-56 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
+                >
+                  {props.sales.map((item) => (
+                    <Listbox.Option
+                      key={item.employeeId}
+                      className={({ active }) =>
+                        `relative cursor-default select-none py-2 pl-3 pr-9 ${
+                          active ? "text-white bg-indigo-600" : "text-gray-900"
+                        }`
                       }
-                      component={SelectComponent}
-                      options={
-                        Array.isArray(salesNameOption) ? salesNameOption : []
-                      }
-                      isColumn
-                      inlineLabel
-                    />
-                  </StyledLabel>
+                      value={item.fullName}
+                    >
+                      {({ selected, active }) => (
+                        <>
+                          <div className="flex items-center">
+                            <span
+                              className={`ml-3 block truncate ${
+                                selected ? "font-semibold" : "font-normal"
+                              }`}
+                            >
+                              {item.fullName}
+                            </span>
+                          </div>
+                          {selected && (
+                            <span
+                              className={`absolute inset-y-0 right-0 flex items-center pr-4 ${
+                                active ? "text-white" : "text-indigo-600"
+                              }`}
+                            >
+                              
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                className="h-5 w-5"
+                                viewBox="0 0 20 20"
+                                fill="currentColor"
+                                aria-hidden="true"
+                              >
+                                <path
+                                  fillRule="evenodd"
+                                  d="M6.293 9.293a1 1 0 011.414 0L10 11.586l2.293-2.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z"
+                                  clipRule="evenodd"
+                                />
+                              </svg>
+                            </span>
+                          )}
+                        </>
+                      )}
+                    </Listbox.Option>
+                  ))}
+                </Listbox.Options>
+              )}
+            </div>
+        </>
+      )}
+    </Listbox>
                   <Spacer />
 
                   <Field
@@ -473,12 +518,12 @@ class UpdateOpportunityForm extends Component {
                           component={SelectComponent}
                           options={
                             Array.isArray(
-                              this.getStagesOptions(
+                             getStagesOptions(
                                 "oppWorkflow",
                                 values.oppWorkflow
                               )
                             )
-                              ? this.getStagesOptions(
+                              ? getStagesOptions(
                                   "oppWorkflow",
                                   values.oppWorkflow
                                 )
@@ -516,7 +561,6 @@ class UpdateOpportunityForm extends Component {
         </Formik>
       </>
     );
-  }
 }
 
 const mapStateToProps = ({ auth, opportunity, customer, contact }) => ({

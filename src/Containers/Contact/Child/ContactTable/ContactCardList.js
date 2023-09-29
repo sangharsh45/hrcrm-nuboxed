@@ -36,6 +36,7 @@ import ReactContactSpeechModal from "../ContactDetail/ReactContactSpeechModal";
 import AddContactDrawerModal from "../UpdateContact/AddContactDrawerModal";
 import AddContactEmailDrawerModal from "../UpdateContact/AddContactEmailDrawerModal";
 import BorderColorIcon from '@mui/icons-material/BorderColor';
+import { BundleLoader } from "../../../../Components/Placeholder";
 
 const Option = Select;
 const UpdateContactModal = lazy(() =>
@@ -103,8 +104,10 @@ function ContactCardList(props) {
     addContactSpeechModal,
     updateContactModal,
   } = props;
- 
 
+ if(fetchingContacts){
+  return <BundleLoader/>
+ }
 
   return (
     <>

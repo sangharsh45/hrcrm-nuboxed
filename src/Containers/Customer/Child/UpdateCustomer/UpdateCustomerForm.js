@@ -109,7 +109,7 @@ function UpdateCustomerForm (props) {
             ...rest
           }) => (
             <Form className="form-background">
-              <div class=" flex justify-between overflow-scroll ">
+              <div class=" flex justify-between h-[27rem] overflow-x-hidden">
                 <div class=" w-2/4"
               
                 >
@@ -376,7 +376,7 @@ function UpdateCustomerForm (props) {
                 </div>
               </div>
               <Spacer/>
-              <FlexContainer justifyContent="flex-end">
+              <div class=" flex justify-end">
                 <Button
                   type="primary"
                   htmlType="submit"
@@ -385,7 +385,7 @@ function UpdateCustomerForm (props) {
                   <FormattedMessage id="app.update" defaultMessage="Update" />
                   {/* Update */}
                 </Button>
-              </FlexContainer>
+              </div>
             </Form>
           )}
         </Formik>

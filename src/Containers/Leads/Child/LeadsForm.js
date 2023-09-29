@@ -117,7 +117,7 @@ props.getAllCustomerEmployeelist();
                   display: "flex",
                   justifyContent: "space-between",
                   height: "70vh",
-                  overflow: "scroll",
+                  overflowX: "hidden",
                   paddingRight: "0.6em",
                 }} >
                 <div class=" h-full w-1/2"   >
@@ -320,7 +320,7 @@ props.getAllCustomerEmployeelist();
                       />
                       </StyledLabel>
                     </div>
-                    <div class=" w-2/5">
+                    <div class="">
                     <StyledLabel>
                       <Field
                         name="businessRegistration"
@@ -403,12 +403,10 @@ props.getAllCustomerEmployeelist();
                 </div>
                 <div class=" h-3/4 w-5/12 "  
                 >
-                 <Spacer/>
-               
                    <Listbox value={selected} onChange={setSelected}>
       {({ open }) => (
         <>
-          <Listbox.Label className="block font-semibold text-[0.75rem] mt-[0.6rem]">Assigned to</Listbox.Label>
+          <Listbox.Label className="block font-semibold text-[0.75rem]">Assigned to</Listbox.Label>
           <div className="relative mt-1">
               <Listbox.Button className="relative w-full leading-4 cursor-default border border-gray-300 bg-white py-0.5 pl-3 pr-10 text-left shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm">
                 {selected}

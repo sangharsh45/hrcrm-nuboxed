@@ -1,10 +1,11 @@
 import React from "react";
 import {Tooltip } from "antd";
-import LightbulbIcon from '@mui/icons-material/Lightbulb';
 import { FormattedMessage } from "react-intl";
 import DeleteIcon from '@mui/icons-material/Delete';
 import ApprovalIcon from '@mui/icons-material/Approval';
 import LeaderboardIcon from '@mui/icons-material/Leaderboard';
+import TocIcon from '@mui/icons-material/Toc';
+
 const TaskActionLeft = props => {
   return (
     <div class=" flex items-center" >
@@ -17,7 +18,7 @@ const TaskActionLeft = props => {
             color: props.viewType === "table" && "#1890ff",
   
           }}
-        > <LightbulbIcon  />
+        > <TocIcon  />
         
         </span>
       </Tooltip>
