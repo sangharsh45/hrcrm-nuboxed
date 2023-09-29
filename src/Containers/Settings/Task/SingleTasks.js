@@ -44,7 +44,7 @@ class SingleTasks extends Component {
                 <div>
                   </div>
                 </div>
-                <div class="flex" style={{width:"35%"}}>
+                <div class="flex" style={{width:"42%"}}>
                   <div class="ml-2 w-20">Workflow</div>
                  
                   <div class="ml-4 w-20">
