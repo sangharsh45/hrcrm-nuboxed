@@ -381,3 +381,10 @@ export const getRejectdExpense = (userId,pageNo) => (dispatch) => {
       });
     });
 };
+
+export const handleStatusExpenseModal = (modalProps) => (dispatch) => {
+  dispatch({
+    type: types.HANDLE_STATUS_EXPENSE_MODAL,
+    payload: modalProps,
+  });
+};

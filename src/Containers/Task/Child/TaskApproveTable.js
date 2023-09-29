@@ -40,6 +40,7 @@ const ButtonGroup = Button.Group;
 const TaskApproveTable = (props) => {
   const [data, setData] = useState("");
   const [data1, setData1] = useState("");
+  const [currentNameId, setCurrentNameId] = useState("");
   const tab = document.querySelector('.ant-layout-sider-children');
   const tableHeight = tab && tab.offsetHeight * 0.75;
 
@@ -58,6 +59,10 @@ const TaskApproveTable = (props) => {
       // props.getProviderCustomerData(props.provider.serviceId, page);
     }, 100);
   };
+  function handleSetTaskNameId(item) {
+    setCurrentNameId(item);
+  }
+  
 
   const handleIconClick = (data) => {
     setData(data);
@@ -411,7 +416,7 @@ render: (name, item, i) => {
               <NoteAltIcon
                 onClick={() => {
                   handleTaskNotesDrawerModal(true);
-                  this.handleNotesClick(item);
+                  handleSetTaskNameId(item);
                 }}
                 style={{ color: "green", cursor: "pointer", fontSize: "0.8rem" }}
               />
@@ -487,9 +492,11 @@ render: (name, item, i) => {
           data={data}
         />
         <AddTaskNotesDrawerModal
+        handleSetTaskNameId={handleSetTaskNameId}
           handleTaskNotesDrawerModal={props.handleTaskNotesDrawerModal}
           addDrawerTaskNotesModal={props.addDrawerTaskNotesModal}
-          data1={data1}
+          // data1={data1}
+          currentNameId={currentNameId}
         />
 
       {/* AddTaskProjectDrawerModal and AddTaskNotesDrawerModal components go here */}

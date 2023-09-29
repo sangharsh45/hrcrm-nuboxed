@@ -270,3 +270,10 @@ export const getRejectdMileage = (userId,pageNo) => (dispatch) => {
       });
     });
 };
+
+export const handleStatusMileageModal = (modalProps) => (dispatch) => {
+  dispatch({
+    type: types.HANDLE_STATUS_MILEAGE_MODAL,
+    payload: modalProps,
+  });
+};

@@ -9,7 +9,7 @@ import NotesForm from "./NotesForm";
 
 class AddTaskNotesDrawerModal extends Component {
   render() {
-     console.log("data5", this.props.currentNameId.taskName);
+    //  console.log("data5", this.props.currentNameId.taskName);
 
     return (
       <div>

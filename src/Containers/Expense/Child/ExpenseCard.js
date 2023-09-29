@@ -4,7 +4,11 @@ import { bindActionCreators } from "redux";
 import { FormattedMessage } from "react-intl";
 import { StyledTable } from "../../../Components/UI/Antd";
 import { Icon, Tooltip } from "antd";
-import { getExpenseById,handleExpenseVoucherIdDrawer,deleteExpense } from "../ExpenseAction";
+import AssistantIcon from '@mui/icons-material/Assistant';
+import { getExpenseById,
+  handleExpenseVoucherIdDrawer,
+  handleStatusExpenseModal,
+  deleteExpense } from "../ExpenseAction";
 import { BundleLoader } from "../../../Components/Placeholder";
 import moment from "moment";
 import styled from 'styled-components';
@@ -13,6 +17,7 @@ import { CurrencySymbol } from "../../../Components/Common";
 import APIFailed from "../../../Helpers/ErrorBoundary/APIFailed";
 import { DeleteOutlined, } from "@ant-design/icons";
 import ExpenseVoucherIdDrawer from "./ExpenseVoucherIdDrawer";
+import ExpenseStatusDrawer from "./UpdateExpense/ExpenseStatusDrawer";
 
 function ExpenseCard(props) {
   const [expand, setExpand] = useState(false);
@@ -38,6 +43,8 @@ function ExpenseCard(props) {
       Expenses,
       fetchingExpenseById,
       fetchingExpenseByIdError,
+      handleStatusExpenseModal,
+      updateStatusExpenseModal,
       expenseVoucherIdDrawer,
       handleExpenseVoucherIdDrawer,
     } = props;
@@ -116,6 +123,20 @@ function ExpenseCard(props) {
                 >
                  <div className="text-[#e1d16c]">Waiting for approval</div> </div>
               )}
+
+<div style={{ cursor: "pointer",padding:"2px"}}
+// style={{ cursor: "pointer" }}
+onClick={() => {
+handleStatusExpenseModal(true);
+
+}}
+>
+                 <Tooltip  title={"status"}>
+                 <AssistantIcon
+style={{ color: "grey",fontSize:"1.2rem",padding:"2px" }}/>
+   </Tooltip> 
+
+   </div>
                {item.status === "Pending" && (
         <Tooltip title="Delete">
               <DeleteOutlined
@@ -149,6 +170,12 @@ function ExpenseCard(props) {
         expenseVoucherIdDrawer={expenseVoucherIdDrawer}
         handleExpenseVoucherIdDrawer={handleExpenseVoucherIdDrawer}
         />
+            <ExpenseStatusDrawer
+        // voucherId={voucherId} 
+        // particularRowData={particularRowData}
+        updateStatusExpenseModal={updateStatusExpenseModal}
+        handleStatusExpenseModal={handleStatusExpenseModal}
+        />
       </>
     );
   }
@@ -156,6 +183,7 @@ function ExpenseCard(props) {
 const mapStateToProps = ({ auth, expense }) => ({
   userId: auth.userDetails.userId,
   Expenses: expense.Expenses,
+  updateStatusExpenseModal:expense.updateStatusExpenseModal,
   fetchingExpenseById: expense.fetchingExpenseById,
   fetchingExpenseByIdError: expense.fetchingExpenseByIdError,
   expenseVoucherIdDrawer:expense.expenseVoucherIdDrawer
@@ -165,7 +193,8 @@ const mapDispatchToProps = (dispatch) =>
     {
       getExpenseById,
       handleExpenseVoucherIdDrawer,
-      deleteExpense
+      deleteExpense,
+      handleStatusExpenseModal
     },
     dispatch
   );

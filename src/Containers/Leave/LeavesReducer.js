@@ -17,6 +17,8 @@ const initialState = {
 
     setEditingLeave:{},
     updateLeaveModal:false,
+
+    updateStatusLeaveModal:false,
   
     updatingLeave: false,
     updatingLeaveError: false,
@@ -82,6 +84,9 @@ export const LeavesReducer = (state = initialState, action) => {
         
                 case types.HANDLE_UPDATE_LEAVE_MODAL:
                   return { ...state, updateLeaveModal: action.payload };
+
+                  case types.HANDLE_STATUS_LEAVE_MODAL:
+                    return { ...state, updateStatusLeaveModal: action.payload };
         
                   case types.UPDATE_LEAVE_REQUEST:
                     return { ...state, updatingLeave: true };

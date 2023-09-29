@@ -29,6 +29,8 @@ const initialState = {
   mileageVoucherIdDrawer:false,
   viewType:"card",
 
+  updateStatusMileageModal:false,
+
   fetchingPendingMileage: false,
   fetchingPendingMileageError:false,
   pendingMileages:[],
@@ -173,6 +175,9 @@ export const mileageReducer = (state = initialState, action) => {
                         fetchingRejectedMileage: false,
                         fetchingRejectedMileageError: true,
                       };
+
+                      case types.HANDLE_STATUS_MILEAGE_MODAL:
+                        return { ...state, updateStatusMileageModal: action.payload };
 
 
             }         

@@ -104,6 +104,9 @@ const initialState = {
   updatingProcessTask: false,
   updatingProcessTaskError: false,
 
+  addingTaskWorkflow: false,
+  addingTaskWorkflowError: false,
+
   fetchingDefaultProcess: false,
   fetchingDefaultProcessError: false,
   defaultProcess: [],
@@ -218,6 +221,10 @@ const initialState = {
   fetchingTaskStagesForRecruit: false,
   fetchingTaskStagesForRecruitError: false,
   recruitTaskStages: [],
+
+  fetchingTaskTeamList: false,
+  fetchingTaskTeamListError: false,
+  taskTeamList:[],
   
   enabalingRecruitProAdvance: false,
   enabalingRecruitProAdvanceError: false,
@@ -2511,6 +2518,38 @@ export const settingsReducer = (state = initialState, action) => {
                                     fetchingTaskForWorkflow: false,
                                     fetchingTaskForWorkflowError: true,
                                   };
+
+
+                                  case types.ADD_TASK_WORKFLOW_REQUEST:
+                                    return { ...state, addingTaskWorkflow: true };
+                                  case types.ADD_TASK_WORKFLOW_SUCCESS:
+                                    return {
+                                      ...state,
+                                      addingTaskWorkflow: false,
+                                      // sectors: [...state.sectors, action.payload],
+                                      
+                                    };
+                                  case types.ADD_TASK_WORKFLOW_FAILURE:
+                                    return {
+                                      ...state,
+                                      addingTaskWorkflow: false,
+                                      addingTaskWorkflowError: true,
+                                    };
+
+                                    case types.GET_TASK_TEAM_LIST_REQUEST:
+                                      return { ...state, fetchingTaskTeamList: true };
+                                    case types.GET_TASK_TEAM_LIST_SUCCESS:
+                                      return {
+                                        ...state,
+                                        fetchingTaskTeamList: false,
+                                        taskTeamList: action.payload,
+                                      };
+                                    case types.GET_TASK_TEAM_LIST_FAILURE:
+                                      return {
+                                        ...state,
+                                        fetchingTaskTeamList: false,
+                                        fetchingTaskTeamListError: true,
+                                      };
                     
 
 

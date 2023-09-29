@@ -8,6 +8,7 @@ import {
   TextInput,
   Select,
 } from "../../../Components/UI/Elements";
+import {addTaskWorkflow,getTaskTeamList} from "../../Settings/SettingsAction"
 import { elipsize } from "../../../Helpers/Function/Functions";
 import { ViewEditCard } from "../../../Components/UI/Elements";
 import { connect } from "react-redux";
@@ -42,6 +43,11 @@ class SingleTaskWorkflowList extends Component {
       },
     });
   };
+  handleSave = () => {
+
+    const { addTaskWorkflow } = this.props;
+     addTaskWorkflow();
+  };
   onChangeDatePicker = (startDate, dateString) => {
     console.log(startDate, dateString);
     this.setState({ startDate: dayjs(dateString) });
@@ -52,9 +58,14 @@ class SingleTaskWorkflowList extends Component {
   };
 
   handleStageType = (value) => this.setState({ responsible: value });
-
+  componentDidMount() {
+    const { getTaskTeamList } = this.props;
+    console.log();
+    // getTaskTeamList();
+    // this.getLinkedSources();
+  }
   render() {
-    console.log(this.state.fields);
+
     const { recruitTaskWorkflowStages } = this.props;
     console.log(recruitTaskWorkflowStages.taskChecklistStagelinkId);
 
@@ -83,6 +94,12 @@ class SingleTaskWorkflowList extends Component {
       key,
       currentStage,
     } = this.props;
+    
+
+    const includeData=included && included.map((item)=>{
+      return item.fullName;
+    })
+    console.log("includeData",includeData);
     console.log(taskChecklistStagelinkId, "----------", linkedStages);
     console.log(color);
     console.log(currentStage);
@@ -112,7 +129,7 @@ class SingleTaskWorkflowList extends Component {
                   {probability}%
                 </StageName>
                 <StageName style={{ flexBasis: "15%" }}>
-                  {days}
+                  {days}D
                 </StageName>
                  <div    style={{ flexBasis: "15%" }}>
                   <DatePicker 
@@ -152,26 +169,21 @@ class SingleTaskWorkflowList extends Component {
             </Avatar.Group>
             </>
                   </div> 
-               {/* <StageName>
-                  {`${ moment(startDate).format("DD/MM/YYYY")}`}
-                </StageName>
-                &nbsp;&nbsp;&nbsp;&nbsp;
-                <StageName>
-                {`${ moment(endDate).format("DD/MM/YYYY")}`}
-                </StageName> */}
-                {/* <div class=" flex justify-between ml-margin65 w-4">
-                  <>
-                    <Tooltip title="Edit">
-                      <BorderColorIcon
-                        style={{ fontSize: "0.8rem" }}
-                        tooltipTitle="Edit"
-                        onClick={toggleViewType}
-                      />
-                    </Tooltip>
-                  </>
-
                 
-                </div> */}
+                  <Button type="primary" 
+                onClick={() => {
+                  this.props.addTaskWorkflow(
+                    includeData,
+                    // startDate: dayjs(this.state.startDate).toISOString(),
+                    // endDate: dayjs(this.state.endDate).toISOString(),
+                  
+                  );
+           
+                }}
+                  >
+  Save
+</Button> 
+           
               </FlexContainer>
             ) : (
               <FlexContainer justifyContent="center">
@@ -214,12 +226,15 @@ class SingleTaskWorkflowList extends Component {
     );
   }
 }
-const mapStateToProps = ({ settings, auth }) => ({});
+const mapStateToProps = ({ settings, auth }) => ({
+  taskTeamList:settings.taskTeamList,
+});
 
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
-    //   deleteTaskStagesData,
+      addTaskWorkflow,
+      getTaskTeamList
     },
     dispatch
   );
