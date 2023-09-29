@@ -33,6 +33,8 @@ module.exports = {
             },
             height:{
   'hp':'382px',
+  "h72":"72vh",
+  "h86":"86vh"
             },
             flexGrow: {
               '3': '3'

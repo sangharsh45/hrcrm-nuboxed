@@ -35,7 +35,7 @@ class MileageCard extends React.Component {
 
     return (
       <>
-        
+       <div class=" h-h86 overflow-auto overflow-x-auto">
         <CardWrapper>      
               {MileageDat.map((item) => {
                  return (
@@ -145,7 +145,7 @@ class MileageCard extends React.Component {
             })}
               </CardWrapper>
 
-
+              </div> 
 
 
         <MileageVoucherIdDrawer 

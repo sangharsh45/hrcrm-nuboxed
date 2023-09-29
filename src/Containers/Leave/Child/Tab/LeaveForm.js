@@ -60,11 +60,22 @@ class LeaveForm extends Component {
       Travel: false,
       Project: false,   
       day:"",
-      firstCase:true,
+      firstCase:false,
       isAccepted:true
     };
   }
   
+  handleSwitchChange = (value) => {
+    this.setState({ firstCase: value });
+
+    
+    if (value) {
+      console.log('1'); 
+    } else {
+      console.log('0');
+    }
+  };
+
   handleProject = (checked) => {
     this.setState({ Project: checked });
   };
@@ -103,7 +114,7 @@ console.log(this.state.firstCase)
                 startDate: startDate || dayjs(),
 
                 endDate: endDate || dayjs(),
-                case:this.state.firstCase===true?"0":this.state.firstCase===false&&"1",
+                
                 employeeId: this.props.userId,
                 halfDay: this.state.day,
                 reason: "",
@@ -120,6 +131,7 @@ console.log(this.state.firstCase)
                 halfDay: this.state.day,
                 startDate: dayjs(values.startDate).toISOString(),
                 endDate: dayjs(values.endDate).toISOString(),
+                case:this.state.firstCase?"0":"1",
               },
               this.props.userId,
 
@@ -253,7 +265,7 @@ console.log(this.state.firstCase)
                     >
                       
                       <Switch
-                         onChange={this.firstClick}
+                         onChange={this.handleSwitchChange}
                         checked={this.state.firstCase}
                         checkedChildren="1st hlf"
                         unCheckedChildren="2nd hlf"

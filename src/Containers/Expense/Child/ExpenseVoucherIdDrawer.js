@@ -15,6 +15,7 @@ const ExpenseVoucherIdDrawer = (props) => {
       <StyledDrawer
         title={`Voucher ID: ${props.particularRowData.voucherId}`}
         width="60%"
+        style={{marginTop:"5rem"}}
         visible={expenseVoucherIdDrawer}
         destroyOnClose
         closable

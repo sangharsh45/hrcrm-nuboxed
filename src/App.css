@@ -819,3 +819,8 @@ h1{
   
   font-size: 0.75rem;
 }
+.ant-layout.ant-layout-has-sider {
+  flex-direction: row;
+  overflow: hidden;
+  height: 100vh;
+}

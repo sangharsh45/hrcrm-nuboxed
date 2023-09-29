@@ -624,7 +624,7 @@ function NavMenu (props) {
           <Link to="/mileage"> 
               
               <i class="fas fa-tachometer-alt"></i>
-               <span class="text-white text-ls ml-1"><FormattedMessage 
+               <span class="text-white text-ls ml-[0.3rem]"><FormattedMessage 
               id="app.mileage"
                 defaultMessage="Mileage"
               />

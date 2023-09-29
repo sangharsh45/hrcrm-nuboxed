@@ -267,7 +267,7 @@ function ExpenseForm(props) {
       Name
       </div>
          <input
-                  style={{ width: "17%",border:"2px solid black" }}
+                  style={{ width: "34%",border:"2px solid grey" }}
                   value={name}
                   onChange={handleNmae}
                   // name={`${item.id}attribute`}
@@ -278,14 +278,14 @@ function ExpenseForm(props) {
       
              
             
-        <th>Date</th>
-        <th>Cost Code</th>
+        <th class="font-poppins">Date</th>
+        <th class="font-poppins">Cost Code</th>
 
-        <th>Expense Type</th>
-        <th>More Information</th>
-        <th>Amount</th>
-        <th>Currency</th>
-        <th>Image</th>
+        <th class="font-poppins">Expense Type</th>
+        <th class="font-poppins">More Information</th>
+        <th class="font-poppins">Amount</th>
+        <th class="font-poppins">Currency</th>
+        <th class="font-poppins">Image</th>
         {row.map((item) => {
           return (
             <tr>

@@ -40,7 +40,7 @@ class MileageCard2 extends React.Component {
 
     return (
       <>
-        
+         <div class=" h-h86 overflow-auto overflow-x-auto">
       <OnlyWrapCard>
       {MileageDat.map((item) => { 
                     return (
@@ -197,7 +197,7 @@ class MileageCard2 extends React.Component {
                     )
                 })}
       </OnlyWrapCard>
-
+      </div>
 
 
 
