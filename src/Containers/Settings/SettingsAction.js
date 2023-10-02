@@ -3490,8 +3490,56 @@ export const getTaskTeamList = (taskId) => (dispatch) => {
     });
 };
 
+export const getLeadAging = (orgId) => (dispatch) => {
+  dispatch({
+    type: types.GET_LEAD_AGING_REQUEST,
+  });
 
+  axios
+    .get(`${base_url}/leadsCategory/organisation/${orgId}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.GET_LEAD_AGING_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      dispatch({
+        type: types.GET_LEAD_AGING_FAILURE,
+        payload: err,
+      });
+    });
+};
+export const addLeadsaging = (data) => (dispatch) => {
+  dispatch({
+    type: types.ADD_LEAD_AGING_REQUEST,
+  });
 
+  axios
+    .put(`${base_url}/leadsCategory`, data, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.ADD_LEAD_AGING_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      dispatch({
+        type: types.ADD_LEAD_AGING_FAILURE,
+        payload: err,
+      });
+    });
+};
 
 
 

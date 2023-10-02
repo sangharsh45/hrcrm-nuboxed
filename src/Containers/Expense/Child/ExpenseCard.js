@@ -74,12 +74,16 @@ function ExpenseCard(props) {
                         </Header> 
                         </div>
                         <div class="flex justify-between">
+                            <h3 class="text-sm">Voucher Name</h3>
+                            <h4 class="text-xs">{item.voucherName}</h4>
+                        </div>
+                        <div class="flex justify-between">
                             <h3 class="text-sm">Voucher Date</h3>
                             <h4 class="text-xs">{dayjs(item.voucherDate).format("MMM Do YY")}</h4>
                         </div>
                         <div class="flex justify-between">
-                    <h4 class="text-sm">Amount</h4> 
-                    <h5 class="text-xs">{item.amount}</h5>
+                    <h4 class="text-sm">Total Amount</h4> 
+                    <h5 class="text-xs">{item.totalAmount}</h5>
                     </div>
                         {item.status === "Approved" && (
                  <div
@@ -216,7 +220,7 @@ border-radius: 0.35rem;
     border: 3px solid #EEEEEE;
     background-color: rgb(255,255,255);
     box-shadow: 0 0.25em 0.62em #aaa;
-    height: 7rem;
+    height: 8rem;
     color: rgb(68,68,68);
     margin: 1em;
     padding: 0.2rem;

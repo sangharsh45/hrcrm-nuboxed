@@ -10,51 +10,25 @@ import { SelectComponent } from "../../../Components/Forms/Formik/SelectComponen
 import { FlexContainer } from "../../../Components/UI/Layout";
 import { StyledLabel } from "../../../Components/UI/Elements";
 import { Spacer } from "../../../Components/UI/Elements";
-// import { addLeadsaging, getLeadAging } from "../../RulesAction";
+import { addLeadsaging, getLeadAging } from "../SettingsAction";
 import { StyledTabs } from "../../../Components/UI/Antd";
 
 function LeadsAgingForm(props) {
   useEffect(() => {
-    // props.getLeadAging();
+    props.getLeadAging(props.organizationId);
   }, []);
   return (
     <>
       <Formik
         enableReinitialize
         initialValues={{
-        //   organizationId: props.organizationId,
-        //   coldLeads: {
-        //     category: "Cold",
-        //     days:
-        //       (props.leadAging &&
-        //         props.leadAging.coldLeads &&
-        //         props.leadAging.coldLeads.days) ||
-        //       "",
-        //   },
-        //   hotLeads: {
-        //     category: "Hot",
-        //     days:
-        //       (props.leadAging &&
-        //         props.leadAging.hotLeads &&
-        //         props.leadAging.hotLeads.days) ||
-        //       "",
-        //   },
-        //   warmLeads: {
-        //     category: "Warm",
-        //     days:
-        //       (props.leadAging &&
-        //         props.leadAging.warmLeads &&
-        //         props.leadAging.warmLeads.days) ||
-        //       "",
-        //   },
-        //   otherLeads: {
-        //     category: "Others",
-        //     days:
-        //       (props.leadAging &&
-        //         props.leadAging.otherLeads &&
-        //         props.leadAging.otherLeads.days) ||
-        //       "",
-        //   },
+          orgId: props.organizationId,
+          cold: 0,
+          hot: 0,
+          worm: 0,
+          notDefined: 0,
+          userId: props.userId,
+
         }}
         onSubmit={(values) => {
       
@@ -339,8 +313,8 @@ function LeadsAgingForm(props) {
                       id="app.doyouwishtoproceed?"
                       defaultMessage="Do you wish to proceed?"
                     />}
-                    // onConfirm={() => props.addLeadsaging(values)}
-                    // onCancel={props.getLeadAging}
+                    onConfirm={() => props.addLeadsaging(values)}
+                    onCancel={props.getLeadAging}
                     okText="Ok"
                     // cancelText="Cancel"
                     cancelText={<FormattedMessage
@@ -350,7 +324,7 @@ function LeadsAgingForm(props) {
                   >
                     <Button
                       type="primary"
-                    //   loading={props.addingLeadAging}
+                      loading={props.addingLeadAging}
                       htmlType="submit"
                       style={{
                         marginRight: "-0.43em",
@@ -375,17 +349,18 @@ function LeadsAgingForm(props) {
   );
 }
 
-const mapStateToProps = ({ rule, auth }) => ({
-//   leadAging: rule.leadAging,
-//   addingLeadAging: rule.addingLeadAging,
-//   organizationId: auth.userDetails.organizationId,
-//   addingLeadAging: rule.addingLeadAging,
-//   subscriptionType: auth.userDetails.metaData.organization.subscriptionType,
+const mapStateToProps = ({ settings, auth }) => ({
+  leadAging: settings.leadAging,
+  addingLeadAging: settings.addingLeadAging,
+  organizationId: auth.userDetails.organizationId,
+  addingLeadAging: settings.addingLeadAging,
+  userId:auth.userDetails.userId
+
 });
 
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators({ 
-    // addLeadsaging, getLeadAging 
+    addLeadsaging, getLeadAging 
 }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(LeadsAgingForm);
