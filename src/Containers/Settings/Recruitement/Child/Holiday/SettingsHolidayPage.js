@@ -167,12 +167,12 @@ handleYearChange = (date) => {
                  onChange={this.onChange}
                   picker="year" />
                  </div>
-                 <Spacer/>
+                 {/* <Spacer/>
                  <div>Optional Allowed
                   <input
                   type="number"
                   ></input>
-                 </div>
+                 </div> */}
               {/* <div
                 style={{
                   marginLeft:"326px"

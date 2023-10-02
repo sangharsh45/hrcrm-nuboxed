@@ -174,7 +174,7 @@ class IdProofs extends Component {
                 <br />
                 <br />
                 <TextInput
-                  placeholder="Add More"
+                  placeholder="Add Idproof"
                  name="IdProofType"
                   value={IdProofType}
                   onChange={this.handleChange}

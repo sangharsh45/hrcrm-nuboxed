@@ -199,7 +199,7 @@ class Task extends Component {
                 <br />
                 <br />
                 <TextInput
-                  placeholder="Add More"
+                  placeholder="Add Task"
                   name="taskType"
                   value={taskType}
                   onChange={this.handleChange}

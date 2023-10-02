@@ -198,7 +198,7 @@ class Expense extends Component {
                 <br />
                 <br />
                 <TextInput
-                  placeholder="Add More"
+                  placeholder="Add Expense"
                   name="expenseType"
                  value={expenseType}
                   onChange={this.handleChange}

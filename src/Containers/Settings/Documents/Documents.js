@@ -170,7 +170,7 @@ class Documents extends Component {
                 <br />
                 <br />
                 <TextInput
-                  placeholder="Add More"
+                  placeholder="Add Document"
                   name="documentTypeName"
                   value={documentTypeName}
                   onChange={this.handleChange}

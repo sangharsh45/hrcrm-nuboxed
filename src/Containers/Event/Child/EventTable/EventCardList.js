@@ -128,13 +128,13 @@ if (fetchingEventListRangeByUserId)
                                     {item.eventSubject}
                                     </div>
                                 </div>
-                                <div className=" flex font-medium flex-col w-36 ">
+                                <div className=" flex font-medium flex-col w-40">
                                     <div class=" text-[0.875rem] text-cardBody font-poppins">Start</div>
                                     <div class="text-[0.75rem] text-cardBody font-poppins">
                                     {` ${moment(item.startDate).format("llll")}`}
                                     </div>
                                 </div>
-                                <div className=" flex font-medium flex-col w-36 ">
+                                {/* <div className=" flex font-medium flex-col w-36 ">
                                   <div class="text-[0.875rem] text-cardBody font-poppins">Team</div>
                                   <div class="text-[0.75rem] text-cardBody font-poppins">
                                   <span>
@@ -151,7 +151,7 @@ if (fetchingEventListRangeByUserId)
               )}
                 </span>
                                   </div>
-                              </div>
+                              </div> */}
                                 <div className=" flex font-medium flex-col w-32 ">
                                     <div class=" text-[0.875rem] text-cardBody font-poppins">Include</div>
 

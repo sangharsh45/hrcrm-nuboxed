@@ -22,6 +22,10 @@ const initialState = {
   
     updatingLeave: false,
     updatingLeaveError: false,
+
+    fetchingOpenTaskCount: false,
+    fetchingOpenTaskCountError: true,
+    leaveOpenTaskCount:[],
 };
 
 export const LeavesReducer = (state = initialState, action) => {
@@ -125,6 +129,26 @@ export const LeavesReducer = (state = initialState, action) => {
 
                         case types.SET_LEAVES_VIEW_TYPE:
                           return { ...state, viewType: action.payload };
+
+
+                          case types.GET_OPEN_TASK_COUNT_BY_USERID_REQUEST:
+                            return { ...state, fetchingOpenTaskCount: true };
+                        case types.GET_OPEN_TASK_COUNT_BY_USERID_SUCCESS:
+                            return {
+                                ...state,
+                                fetchingOpenTaskCount: false,
+                                leaveOpenTaskCount: action.payload,
+                            };
+                        case types.GET_OPEN_TASK_COUNT_BY_USERID_FAILURE:
+                            return {
+                                ...state,
+                                fetchingOpenTaskCount: false,
+                                fetchingOpenTaskCountError: true,
+                            };
+
+
     }
+
+    
     return state;
 };

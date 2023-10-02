@@ -500,12 +500,10 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { FormattedMessage } from "react-intl";
 import moment from "moment";
 import DeleteIcon from "@mui/icons-material/Delete";
-import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import { SearchOutlined } from "@ant-design/icons";
-import { Tooltip, Button, Empty, Input, Avatar, Card } from "antd";
+import { Tooltip, Button, Input, Avatar } from "antd";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { OnlyWrapCard } from '../../../../Components/UI/Layout'
 import { getEmployeelist } from "../../../Employees/EmployeeAction";
@@ -516,10 +514,9 @@ import {
   setEditNote,
   getNotesListByCallId,
 } from "../../CallAction";
-import StarBorderIcon from "@mui/icons-material/StarBorder";
 import APIFailed from "../../../../Helpers/ErrorBoundary/APIFailed";
 import Highlighter from "react-highlight-words";
-import { MultiAvatar2, SubTitle } from "../../../../Components/UI/Elements";
+import { MultiAvatar2, } from "../../../../Components/UI/Elements";
 
 function CallTable(props) {
   const [page, setPage] = useState(0);
@@ -675,11 +672,11 @@ function CallTable(props) {
             style={{
                 borderBottom: "3px dotted #515050"
             }}>
-              <div class="flex  flex-col w-16">
+              <div class="flex  flex-col w-12">
               <div >Type</div>
             <div> {item.callType}</div>
             </div>
-            <div class="flex  flex-col w-16">
+            <div class="flex  flex-col w-40">
               <p>Subject</p><p> {item.callPurpose}</p>
               </div>
               <div class="flex  flex-col w-16">
@@ -702,7 +699,7 @@ function CallTable(props) {
               <div>
                 {item.included &&
                   item.included.map((candidate, i) => {
-                    const data1 = candidate.fullName.split("")[0].toUpperCase();
+                    const data1 = candidate.fullName.slice(0, 2).toUpperCase();
                     console.log("datas", data1);
                     return (
                       <Tooltip key={i} title={candidate.fullName}>
@@ -719,7 +716,7 @@ function CallTable(props) {
                   })}
               </div>
               </div>
-              <div class="flex  flex-col w-16">
+              {/* <div class="flex  flex-col w-16">
               <p>Team </p>
               <MultiAvatar2
                     primaryTitle={item.candidateName}
@@ -729,13 +726,13 @@ function CallTable(props) {
                     imgHeight={"1.8em"}
                   />
              
-              </div>
+              </div> */}
              
               <div class="flex  flex-col w-16">
               <p>Completed</p><p> {item.completionInd ? "Yes" : "No"}</p></div>
-              <div class="flex  flex-col w-16">
+              {/* <div class="flex  flex-col w-16">
               <p>Rating</p><p> {item.rating > 0 ? item.rating : "Not Rated"}</p>
-              </div>
+              </div> */}
               <div class="flex  flex-col w-24">
               <p>Assigned To</p>
               <MultiAvatar2

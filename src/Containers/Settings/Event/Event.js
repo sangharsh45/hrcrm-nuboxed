@@ -194,7 +194,7 @@ class Event extends Component {
                 <br />
                 <br />
                 <TextInput
-                  placeholder="Add More"
+                  placeholder="Add Event"
                   name="eventType"
                   value={eventType}
                   onChange={this.handleChange}

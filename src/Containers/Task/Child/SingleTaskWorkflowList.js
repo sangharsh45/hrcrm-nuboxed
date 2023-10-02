@@ -30,6 +30,8 @@ class SingleTaskWorkflowList extends Component {
       responsible: "",
       startDate:"",
       endDate:"",
+      candidate:[],
+      selectedOptions:[],
       publish: false,
     };
   }
@@ -43,6 +45,9 @@ class SingleTaskWorkflowList extends Component {
       },
     });
   };
+  handleChangeValue =(selectedValue)=>{
+    this.setState({selectedOptions:selectedValue})
+  }
   handleSave = () => {
 
     const { addTaskWorkflow } = this.props;
@@ -59,14 +64,17 @@ class SingleTaskWorkflowList extends Component {
 
   handleStageType = (value) => this.setState({ responsible: value });
   componentDidMount() {
-    const { getTaskTeamList } = this.props;
+    const { getTaskTeamList,item } = this.props;
     console.log();
-    // getTaskTeamList();
-    // this.getLinkedSources();
+     getTaskTeamList(item.taskId);
   }
   render() {
-
+    // const startDate= 
+    // const endDate= dayjs(this.state.endDate).toISOString()
+console.log("candidate",this.state.candidate)
+console.log("startDate",this.state.startDate)
     const { recruitTaskWorkflowStages } = this.props;
+    console.log("selectedOptions",this.state.selectedOptions);
     console.log(recruitTaskWorkflowStages.taskChecklistStagelinkId);
 
     const {
@@ -77,8 +85,8 @@ class SingleTaskWorkflowList extends Component {
          taskChecklistStagelinkId,
          probability,
          days,
-         startDate,
-         endDate
+        //  startDate,
+        //  endDate
         },
       linkedStages,
       organization,
@@ -102,7 +110,7 @@ class SingleTaskWorkflowList extends Component {
     console.log("includeData",includeData);
     console.log(taskChecklistStagelinkId, "----------", linkedStages);
     console.log(color);
-    console.log(currentStage);
+   
 
     // const disabled = false;
     const disableDelete =
@@ -115,12 +123,7 @@ class SingleTaskWorkflowList extends Component {
               <FlexContainer
                 justifyContent="start"
                 alignItems="center"
-                // onClick={() => handleStageClick(taskChecklistStagelinkId, taskChecklistStageName)}
-                // style={{
-                //   backgroundColor:
-                //     taskChecklistStagelinkId === currentStage &&
-                //     "rgb(161, 185, 185)",
-                // }}
+          
               >
                 <StageName style={{ flexBasis: "20%", textAlign: "left" }}>
                   {elipsize(taskChecklistStageName, 23)}
@@ -131,58 +134,56 @@ class SingleTaskWorkflowList extends Component {
                 <StageName style={{ flexBasis: "15%" }}>
                   {days}D
                 </StageName>
-                 <div    style={{ flexBasis: "15%" }}>
-                  <DatePicker 
-               
-                  placeholder="Start Date"
-                  onChange={this.onChangeDatePicker} />
-                  </div>
-                  <div   style={{ flexBasis: "15%" }}>
-                  <DatePicker 
-                  placeholder="End Date"
-                
-                  onChange={this.onChangeEndDatePicker} />
-                  </div> 
-                <div style={{ flexBasis: "15%" }}>
-                <>
-                <Avatar.Group
-                   maxCount={3}
-                  maxStyle={{ color: "#f56a00", backgroundColor: "#fde3cf" }}
-                >
-                {included &&
-                  included.map((candidate, i) => {
-                     const data1 = candidate.firstName
-                     .slice(0,2)
-                     .split("")[0]
-                     .toUpperCase();
-                   console.log("datas", data1);
-                    return (
-                      <Avatar style={{ backgroundColor: "#f56a00" }}>
-                      {data1}
-                    
-                    </Avatar>
-                     
+            
+<div class="flex">
+  {/* Start Date */}
+  <div class="flex w-32" style={{ marginRight: "10px" }}>
+    <DatePicker
+      placeholder="Start Date"
+      onChange={this.onChangeDatePicker}
+    />
+  </div>
 
-                   
-                    );
-                  })}
-            </Avatar.Group>
-            </>
-                  </div> 
-                
-                  <Button type="primary" 
-                onClick={() => {
-                  this.props.addTaskWorkflow(
-                    includeData,
-                    // startDate: dayjs(this.state.startDate).toISOString(),
-                    // endDate: dayjs(this.state.endDate).toISOString(),
-                  
-                  );
-           
-                }}
-                  >
-  Save
-</Button> 
+  {/* End Date */}
+  <div class="flex w-32" style={{ marginRight: "10px" }}>
+    <DatePicker
+      placeholder="End Date"
+      onChange={this.onChangeEndDatePicker}
+    />
+  </div>
+
+  {/* Stage */}
+  <div class="flex w-32" style={{ marginRight: "10px" }}>
+    <Select
+      style={{ border: "2px solid black" }}
+      mode="multiple"
+      value={this.state.selectedOptions}
+      options={this.props.taskTeamList.map((option) => ({
+        value: option.employeeId,
+        label: option.name,
+      }))}
+      onChange={this.handleChangeValue}
+    />
+  </div>
+
+  {/* Save Button */}
+  <Button
+    type="primary"
+    onClick={() => {
+      this.props.addTaskWorkflow(
+        this.state.selectedOptions,
+        dayjs(this.state.startDate).toISOString(),
+        dayjs(this.state.endDate).toISOString(),
+        this.props.item.taskId,
+        taskChecklistStagelinkId
+      );
+    }}
+  >
+    Save
+  </Button>
+</div>
+
+
            
               </FlexContainer>
             ) : (

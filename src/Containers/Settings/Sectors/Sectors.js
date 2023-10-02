@@ -193,7 +193,7 @@ class Sectors extends Component {
                 <br />
                 <br />
                 <TextInput
-                  placeholder="Add More"
+                  placeholder="Add Sector"
                   name="sectorName"
                   value={sectorName}
                   onChange={this.handleChange}
