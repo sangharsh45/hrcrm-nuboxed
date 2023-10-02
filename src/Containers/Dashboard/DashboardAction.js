@@ -1020,3 +1020,27 @@ export const setSubSelectedReportType = (type) => (dispatch) =>
         });
       });
   };
+
+  export const getJumpBulblist = (userId) => (dispatch) => {
+    dispatch({ type: types.GET_JUMPSTART_BULB_REQUEST });
+    axios
+      .get(`${base_url}/JMP/BLB/${userId}`, {
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+        },
+      })
+      .then((res) => {
+        // console.log(res)
+        dispatch({
+          type: types.GET_JUMPSTART_BULB_SUCCESS,
+          payload: res.data,
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+        dispatch({
+          type: types.GET_JUMPSTART_BULB_FAILURE,
+          payload: err,
+        });
+      });
+  };

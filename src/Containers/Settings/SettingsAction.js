@@ -3521,7 +3521,7 @@ export const addLeadsaging = (data) => (dispatch) => {
   });
 
   axios
-    .put(`${base_url}/leadsCategory`, data, {
+    .post(`${base_url}/leadsCategory`, data, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },

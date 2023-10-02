@@ -581,8 +581,9 @@ class=" h-full w-[24rem]"
       </Listbox>
 
                 <Spacer />
-
-                <StyledLabel>
+<div class="flex justify-between">
+<div class=" w-2/5">
+               <StyledLabel>
                   <Field
                     name="customerId"
                     // selectType="customerList"
@@ -606,6 +607,25 @@ class=" h-full w-[24rem]"
                     inlineLabel
                   />
                 </StyledLabel>
+            </div>
+                <div class=" w-2/5">
+                          <FastField
+                            name="source"
+                            type="text"
+                            label={
+                              <FormattedMessage
+                                id="app.source"
+                                defaultMessage="Source"
+                              />
+                            }
+                            options={["Na", "Na2", "None"]}
+                            component={SelectComponent}
+                            inlineLabel
+                            className="field"
+                            isColumn
+                          />
+                        </div>
+                        </div>
                 <StyledLabel>
                   <Field
                     name="contactId"

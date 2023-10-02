@@ -17,17 +17,20 @@ function LeadsAgingForm(props) {
   useEffect(() => {
     props.getLeadAging(props.organizationId);
   }, []);
+
+  console.log("legdi",props.leadAging && props.leadAging.length && props.leadAging[0].cold )
   return (
     <>
       <Formik
         enableReinitialize
         initialValues={{
-          orgId: props.organizationId,
-          cold: 0,
-          hot: 0,
-          worm: 0,
-          notDefined: 0,
+          cold:props.leadAging && props.leadAging.length && props.leadAging[0].cold ||"",
+          hot:props.leadAging && props.leadAging.length && props.leadAging[0].hot || "",
+          worm: props.leadAging && props.leadAging.length && props.leadAging[0].worm || "",
+          notDefined:props.leadAging && props.leadAging.length && props.leadAging[0].notDefined || "",
           userId: props.userId,
+          liveInd: true,
+          orgId: props.organizationId,
 
         }}
         onSubmit={(values) => {
@@ -98,7 +101,7 @@ function LeadsAgingForm(props) {
                     >
                       <div style={{ width: "22%" }}>
                         <Field
-                          name="hotLeads.days"
+                          name="hot"
                           // label="To Start"
 
                           isColumn
@@ -150,7 +153,7 @@ function LeadsAgingForm(props) {
                     >
                       <div style={{ width: "22%" }}>
                         <Field
-                          name="warmLeads.days"
+                          name="worm"
                      
                           isColumn
                           width={"100%"}
@@ -223,7 +226,7 @@ function LeadsAgingForm(props) {
                     >
                       <div style={{ width: "20%" }}>
                         <Field
-                          name="coldLeads.days"
+                          name="cold"
                           // label="To Start"
                           isColumn
                           disabled={props.subscriptionType === "FREE"}
@@ -273,7 +276,7 @@ function LeadsAgingForm(props) {
                     >
                       <div style={{ width: "20%" }}>
                         <Field
-                          name="otherLeads.days"
+                          name="notDefined"
                           isColumn
                           width={"100%"}
                           component={InputComponent}

@@ -17,6 +17,7 @@ import { withRouter } from "react-router-dom";
 import { Input,Tag } from "antd";
 import { dashboardReducer } from "../DashboardReducer";
 import { BundleLoader } from "../../../Components/Placeholder";
+import PersonIcon from '@mui/icons-material/Person';
 
 const Option = StyledSelect.Option;
 const { Search } = Input;
@@ -76,21 +77,30 @@ const DashboardActionLeft = (props) => {
                   defaultMessage="Organization"
                 />
               </Tag>
-            
-              {/* <Tooltip
-        title={<FormattedMessage id="app.myTask" defaultMessage="My Task" />}
-      > */}
+
+
         <span class=" mr-2 cursor-pointer text-xs"
           onClick={() => props.setDashboardViewType("test")}
           style={{
             color: props.viewType === "test" && "#1890ff",
   
           }}
+        > <PersonIcon/>
+        
+        </span>
+           
+{user.crmInd===true && (
+
+        <span class=" mr-2 cursor-pointer text-xs"
+          onClick={() => props.setDashboardViewType("bulb")}
+          style={{
+            color: props.viewType === "bulb" && "#1890ff",
+  
+          }}
         > <LightbulbIcon  />
         
         </span>
-      {/* </Tooltip> */}
-           
+)}
             </>
              )}
 
