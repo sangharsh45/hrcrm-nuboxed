@@ -1,8 +1,15 @@
-import React from 'react';
+import React,{useEffect} from 'react';
 import { ClockCircleOutlined } from '@ant-design/icons';
 import { Timeline } from 'antd';
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import {getOpenTaskCountByUserId } from "../../LeavesAction"
 
-const StatusLeavesForm = () => (
+const StatusLeavesForm = (props) => {
+  useEffect(() => {
+    props.getOpenTaskCountByUserId(props.userId);
+   
+  }, []);
   <Timeline
     items={[
       {
@@ -21,6 +28,19 @@ const StatusLeavesForm = () => (
       },
     ]}
   />
-);
+  };
 
-export default StatusLeavesForm;
+const mapStateToProps = ({ leave, auth }) => ({
+  userId: auth.userDetails.userId,
+  leaveFetching:leave.leaveFetching,
+})
+
+const mapDispatchToProps = (dispatch) =>
+bindActionCreators(
+  {
+    getOpenTaskCountByUserId
+  },
+  dispatch,
+)
+
+export default connect(mapStateToProps, mapDispatchToProps)(StatusLeavesForm)

@@ -197,7 +197,7 @@ class Education extends Component {
                 <br />
                 <br />
                 <TextInput
-                  placeholder="Add More"
+                  placeholder="Add Education"
                   name="educationType"
                   value={educationType}
                   onChange={this.handleChange}

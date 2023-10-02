@@ -212,7 +212,7 @@ class Department extends Component {
                 <br />
                 <br />
                   <TextInput
-                    placeholder="Add More"
+                    placeholder="Add Department"
                     name="departmentName"
                     value={departmentName}
                     onChange={this.handleChange}

@@ -3431,13 +3431,13 @@ export const getTaskForWorkflow = (taskTypeId) => (dispatch) => {
     });
 };
 
-export const addTaskWorkflow = (included, cb) => (dispatch) => {
+export const addTaskWorkflow = (included,startDate,endDate,taskId,taskChecklistStagelinkId,cb) => (dispatch) => {
   // console.log(sectors);
   dispatch({
     type: types.ADD_TASK_WORKFLOW_REQUEST,
   });
   axios
-    .post(`${base_url}/task/subTask`, {included}, {
+    .post(`${base_url}/task/subTask`, {included,startDate,endDate,taskId,taskChecklistStagelinkId}, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },

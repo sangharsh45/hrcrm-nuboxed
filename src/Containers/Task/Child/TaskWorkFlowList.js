@@ -218,6 +218,7 @@ class TaskWorkflowList extends Component {
                 newProbability="probability"
                newStartDate="startDate"
                newEndDate="endDate"
+               item={this.props.item}
                 //newResponsible="responsible"
                 handleUpdateStage={this.handleUpdateStage}
                 handleStageType={this.handleStageType}

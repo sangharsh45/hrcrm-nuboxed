@@ -190,7 +190,7 @@ class Designation extends Component {
                 <br />
                 <br />
                 <TextInput
-                  placeholder="Add More"
+                  placeholder="Add Designation"
                   name="designationType"
                   value={designationType}
                   onChange={this.handleChange}

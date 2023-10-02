@@ -149,6 +149,7 @@ const TaskCardList = (props) => {
                         }}
                       ></div>
                     )}
+                    <div class=" w-1"></div>
           <div>
                                         <Tooltip>
                                             <div class="text-[0.875rem] text-cardBody font-poppins">
@@ -209,7 +210,7 @@ const TaskCardList = (props) => {
             )}
                                   </div>
                               </div>
-                                <div className=" flex font-medium flex-col w-32 ">
+                                {/* <div className=" flex font-medium flex-col w-32 ">
                                     <div class=" text-[0.875rem] text-cardBody font-poppins">Team</div>
 
                                     <div class=" text-[0.75rem] text-cardBody font-poppins">
@@ -235,7 +236,7 @@ const TaskCardList = (props) => {
     })}
 </Avatar.Group>
                                     </div>
-                                </div>
+                                </div> */}
                                 <div className="flex font-medium flex-col w-32 ">
                                     <div class="text-[0.875rem] text-cardBody font-poppins">Start</div>
 
