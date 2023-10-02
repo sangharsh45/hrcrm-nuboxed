@@ -356,7 +356,7 @@ function ExpenseForm(props) {
                   onSelect={(value) =>
                     handleCurrencyChange(value, `${item.id}curr`)
                   }
-                  disabled
+
                   defaultValue={props.user.currency}
                 >
                   {props.currencies.map((item) => {

@@ -327,7 +327,7 @@ function ExpenseDrawerCard(props) {
                                   borderBottom: "3px dotted #515050"
                               }}>
                                    
-                              <div className=" flex font-medium flex-col w-20 ">
+                              <div className=" flex font-medium flex-col w-[2rem] ">
 
                                  
                                     
@@ -374,7 +374,7 @@ function ExpenseDrawerCard(props) {
                          </h4>
                            )}
                      </div>
-                              <div className=" flex font-medium flex-col  w-24 ">
+                              <div className=" flex font-medium flex-col w-32 ml-[0.25rem]">
                          
                                   <h4 class=" text-sm text-cardBody font-poppins">Date </h4>
                                   {editStates[index] ? (
@@ -383,7 +383,7 @@ function ExpenseDrawerCard(props) {
     onChange={(date, dateString) =>
       handleInputChange(index, "expenseDate", dateString)
     }
-    style={{ border: "2px solid black" }}
+    style={{ border: "1px solid grey" }}
   />
 ) : (
                                   <h4 class=" text-xs text-cardBody font-poppins">
@@ -395,13 +395,13 @@ function ExpenseDrawerCard(props) {
                                   )}
                               </div>
                               <div className="flex font-medium flex-col w-32">
-                              <h4 class=" text-sm text-cardBody font-poppins w-36"> Attributed To </h4>
+                              <h4 class=" text-sm text-cardBody font-poppins w-36 ml-[0.25rem]"> Cost Code </h4>
                               {editStates[index] ? (
             <input
               type="text"
               value={item.clientName}
               onChange={(e) => handleInputChange(index, 'clientName', e.target.value)}
-              style={{border:"2px solid black"}}
+              style={{ border: "1px solid grey" }}
             />
           ) : (
                          <h4 class=" text-xs text-cardBody font-poppins">
@@ -409,7 +409,7 @@ function ExpenseDrawerCard(props) {
                          </h4>
           )}
           </div>
-                         <div className=" flex font-medium flex-col w-64 ">
+                         <div className=" flex font-medium flex-col w-64 ml-[0.25rem]">
 
                                 
                                   <h4 class=" text-sm text-cardBody font-poppins">Particulars</h4>
@@ -418,7 +418,7 @@ function ExpenseDrawerCard(props) {
               type="text"
               value={item.particular}
               onChange={(e) => handleInputChange(index, 'particular', e.target.value)}
-              style={{border:"2px solid black"}}
+              style={{ border: "1px solid grey" }}
             />
           ) : (
         
@@ -428,9 +428,9 @@ function ExpenseDrawerCard(props) {
           )}
      
                               </div>
-                              <div className=" flex font-medium flex-col w-32 ">
+                              <div className=" flex font-medium flex-col w-32 ml-[0.25rem]">
                                 
-                              <div className=" flex font-medium flex-col w-36 ">
+                              <div className=" flex font-medium flex-col w-20 ">
 
 
                                 <h4 class=" text-sm text-cardBody font-poppins">Amount</h4>
@@ -439,18 +439,37 @@ function ExpenseDrawerCard(props) {
               type="text"
               value={item.amount}
               onChange={(e) => handleInputChange(index, 'amount', e.target.value)}
-              style={{border:"2px solid black"}}
+              style={{ border: "1px solid grey" }}
             />
           ) : (
                                                                
           
                                 <h4 class=" text-xs text-cardBody font-poppins">
-                                    € {item.amount}
+                                    {item.amount}
                                 </h4>
           )}
                             </div> 
+
                      </div>
-                             
+                     <div className=" flex font-medium flex-col w-20 ml-[0.25rem]">
+
+
+<h4 class=" text-sm text-cardBody font-poppins">Curency</h4>
+{editStates[index] ? (
+  <input
+type="text"
+value={item.currency}
+// onChange={(e) => handleInputChange(index, 'amount', e.target.value)}
+style={{ border: "1px solid grey" }}
+/>
+) : (
+                               
+
+<h4 class=" text-xs text-cardBody font-poppins">
+   {item.currency}
+</h4>
+)}
+</div> 
 
                               <div class="flex flex-row items-center w-[10%]">
                                 <div class="flex items-center">
@@ -477,7 +496,7 @@ function ExpenseDrawerCard(props) {
         </a>
           </Tooltip>
                                 </div>
-                  <div class="flex items-center">
+                  <div class="flex items-center ml-[0.25rem]">
                     {/* <EditOutlined
                       //  style={{ color: "blue" ,display:"flex",justifyItems:"center",justifyContent:"center",fontSize:"0.75rem",marginTop:"0.25rem",marginLeft:"0.25rem"}}
                       type="edit"
@@ -491,7 +510,7 @@ function ExpenseDrawerCard(props) {
           {editStates[index] ? 'Cancel' : 'Edit'}
         </button>
         {editStates[index] && (
-          <button onClick={() => handleSave(index)}>Save</button>
+          <button onClick={() => handleSave(index)} className="ml-[0.25rem]">Save</button>
         )}
                       </div>
                       <div >

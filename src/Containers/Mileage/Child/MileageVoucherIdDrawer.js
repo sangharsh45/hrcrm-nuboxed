@@ -1,5 +1,4 @@
 import React, { lazy, Suspense } from "react";
-import { FormattedMessage } from "react-intl";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { StyledDrawer } from "../../../Components/UI/Antd";
@@ -15,7 +14,7 @@ const MileageVoucherIdDrawer = (props) => {
     <>
       <StyledDrawer
         title={`Mileage: ${voucherId}`}
-        width="60%"
+        width="80%"
         style={{marginTop:"5rem"}}
         visible={mileageVoucherIdDrawer}
         destroyOnClose

@@ -421,6 +421,12 @@ const initialState = {
   fetchingProcessForOpportunity: false,
         fetchingProcessForOpportunityError: false,
         opportunityProcess:[],
+
+        fetchingLeadAging: false,
+        fetchingLeadAgingError: false,
+        leadAging: [],
+        addingLeadAging: false,
+        addingLeadAgingError: false,
 };
 export const settingsReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -2550,8 +2556,34 @@ export const settingsReducer = (state = initialState, action) => {
                                         fetchingTaskTeamList: false,
                                         fetchingTaskTeamListError: true,
                                       };
-                    
 
+                                      case types.GET_LEAD_AGING_REQUEST:
+                                        return { ...state, fetchingLeadAging: true };
+                                      case types.GET_LEAD_AGING_SUCCESS:
+                                        return {
+                                          ...state,
+                                          fetchingLeadAging: false,
+                                          leadAging: action.payload,
+                                        };
+                                      case types.GET_LEAD_AGING_FAILURE:
+                                        return {
+                                          ...state,
+                                          fetchingLeadAging: false,
+                                          fetchingLeadAgingError: true,
+                                        };
+  case types.ADD_LEAD_AGING_REQUEST:
+      return { ...state, addingLeadAging: true };
+    case types.ADD_LEAD_AGING_SUCCESS:
+      return {
+        ...state,
+        addingLeadAging: false,
+      };
+    case types.ADD_LEAD_AGING_FAILURE:
+      return {
+        ...state,
+        addingLeadAging: false,
+        addingLeadAgingError: true,
+      };
 
     default:
       return state;
