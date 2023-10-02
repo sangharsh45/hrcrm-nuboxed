@@ -265,7 +265,7 @@ function NavMenu (props) {
 
 
 <hr />
-     {/* {user.leadsAccessInd === true && ( */}
+     {user.leadsAccessInd === true && user.crmInd === true &&(
      <Menu.Item key="/leads" style={{height:"30px",paddingLeft:"1rem"}}>
               <Link to="/Leads">
                 <GroupsIcon
@@ -278,9 +278,9 @@ function NavMenu (props) {
                 </span>
               </Link>
             </Menu.Item>
-          {/* )} */}
+)} 
              {/*Opportunity*/}
-             {user.opportunityAccessInd === true && (
+             {user.opportunityAccessInd === true && user.crmInd === true && (
             <Menu.Item key="/opportunity" style={{height:"30px",paddingLeft:"1rem"}}>
               <Link to="/opportunity">
            
@@ -301,7 +301,7 @@ function NavMenu (props) {
           )}
 
              {/* Contact */}
-             {user.contactAccessInd === true && (
+             {user.contactAccessInd === true && user.crmInd === true && (
             <Menu.Item key="/contact" style={{height:"30px",paddingLeft:"1rem"}}>
               <Link to="/contact">
              
@@ -317,7 +317,7 @@ function NavMenu (props) {
           )}
 
            {/* Customer */}
-           {user.customerAccessInd === true && (
+           {user.customerAccessInd === true && user.crmInd === true &&(
             <Menu.Item key="/customer" style={{height:"30px",paddingLeft:"1rem"}}>
               <Link to="/customer">
             

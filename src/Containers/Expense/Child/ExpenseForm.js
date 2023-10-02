@@ -25,7 +25,7 @@ function ExpenseForm(props) {
       userId: props.userId,
       expenseTypeId:props.expenseTypeId,
       id: 1, 
-      imageId:"",
+      documentId:"",
       voucherName:"",
     },
   ]);
@@ -101,11 +101,11 @@ function ExpenseForm(props) {
       });
     });
   }
-  function handleImageUpload (imageId){
+  function handleImageUpload (documentId){
     setRows((value) => {
       return value.map((data) => {
-        if (`${data.imageId}imageId` === id) {
-          return { ...data, imageId: imageId };
+        if (`${data.documentId}documentId` === id) {
+          return { ...data, documentId: documentId };
         } else {
           return data;
         }
@@ -148,7 +148,7 @@ function ExpenseForm(props) {
     setRows((value) => {
       return value.map((data) => {
         if (data.id === rowId) {
-          return { ...data, imageId: imageId };
+          return { ...data, documentId: imageId };
         } else {
           return data;
         }
@@ -183,7 +183,7 @@ function ExpenseForm(props) {
         expenseType: "",
         amount: "",
         id: id + 1,
-        imageId:"",
+        documentId:"",
         voucherName:name
       },
     ]);
@@ -370,8 +370,7 @@ function ExpenseForm(props) {
               </td>
               <td>
                 <Upload 
-                // value={`${item.imageId}`}
-                handleImageUpload={(imageId) => handleImageUpload(imageId, item.id)}
+               handleImageUpload={(documentId) => handleImageUpload(documentId, item.id)}
                 />
               
               </td>

@@ -126,24 +126,12 @@ const initialState = {
 
 
 
-    viewType: "test",
-
+  viewType: "test",
   isCustomSelected: false,
   startDate: dayjs().toISOString(),
   endDate: dayjs().toISOString(),
 
   dateRangeList: [
-
-    // {
-    //   id: 8,
-    //   type: "All",
-    //   value: "All",
-    //   starter: true,
-    //   isSelected: true,
-    //   startDate: dayjs()
-    //     .toISOString(),
-    //   endDate: dayjs().toISOString(),
-    // },
     {
       id: 1,
       type: "Today",
@@ -151,22 +139,9 @@ const initialState = {
       starter: true,
       isSelected: true,
       startDate: dayjs()
-        // .subtract(1, "days")
         .toISOString(),
       endDate: dayjs().toISOString(),
     },
-    // {
-    //   id: 2,
-    //   type: "Yesterday",
-    //   value: "Yesterday",
-    //   starter: false,
-    //   isSelected: false,
-    //   endDate: dayjs()
-    //     .subtract(1, "days")
-
-    //     .toISOString(),
-    //   startDate: dayjs().toISOString(),
-    // },
     {
       id: 3,
       type: "Last7days",
@@ -178,11 +153,6 @@ const initialState = {
 
       .toISOString(),
     startDate: dayjs().toISOString(),
-      // startDate: dayjs()
-      //   .subtract(7, "days")
-
-      //   .toISOString(),
-      // endDate: dayjs().toISOString(),
     },
 
     {
@@ -193,14 +163,8 @@ const initialState = {
       isSelected: false,
       endDate: dayjs()
       .subtract(30, "days")
-
       .toISOString(),
-    startDate: dayjs().toISOString(),
-      // startDate: dayjs()
-      //   .subtract(30, "days")
-
-      //   .toISOString(),
-      // endDate: dayjs().toISOString(),
+    startDate: dayjs().toISOString(), 
     },
     {
       id: 5,
@@ -222,15 +186,6 @@ const initialState = {
       startDate: dayjs().startOf("month").toISOString(),
       endDate: dayjs().toISOString(),
     },
-    // {
-    //   id: 8,
-    //   type: "DateRange",
-    //   value: "Date Range",
-    //   starter: false,
-    //   isSelected: false,
-    //   startDate: dayjs().startOf("year").toISOString,
-    //   endDate: dayjs().endOf("year").toISOString(),
-    // },
   ],
   type: 'All',
 
@@ -260,6 +215,10 @@ const initialState = {
   fetchingDatewiseReport: false,
   fetchingDatewiseReportError: false,
   dateDashboardReport: [],
+
+  fetchingJumpstartBulb: false,
+  fetchingJumpstartBulbError: false,
+  jumpstartBulbCount: [],
 };
 
 
@@ -842,8 +801,6 @@ export const dashboardReducer = (state = initialState, action) => {
                                                     case types.GET_UPCOMING_EVENTS_FAILURE:
                                                       return { ...state, fetchingUpcomingEvents: false, fetchingUpcomingEventsError: true };
                                                 
-
-
                                                       case types.GET_TASK_PER_REQUEST:
                                                         return { ...state, fetchingTaskper: true,
                                                           fetchingTaskperError: false };
@@ -859,7 +816,21 @@ export const dashboardReducer = (state = initialState, action) => {
                                                           fetchingTaskper: false,
                                                           fetchingTaskperError: true };
 
-
+                                                          case types.GET_JUMPSTART_BULB_REQUEST:
+                                                            return { ...state, fetchingJumpstartBulb: true,
+                                                              fetchingJumpstartBulbError: false };
+                                                          case types.GET_JUMPSTART_BULB_SUCCESS:
+                                                            return {
+                                                              ...state,
+                                                              fetchingJumpstartBulb: false,
+                                                              fetchingJumpstartBulbError: false,
+                                                              jumpstartBulbCount: action.payload,
+                                                            };
+                                                          case types.GET_JUMPSTART_BULB_FAILURE:
+                                                            return { ...state,
+                                                              fetchingJumpstartBulb: false,
+                                                              fetchingJumpstartBulbError: true };
+    
 
 
     default:

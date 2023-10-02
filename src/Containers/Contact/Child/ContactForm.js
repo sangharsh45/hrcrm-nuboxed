@@ -486,7 +486,8 @@ class ContactForm extends Component {
                     </div>
                   </div>
                   <Spacer />
-                  <div class=" w-full">
+                  <div class=" flex justify-between">         
+                  <div class="w-2/5">
                     <FastField
                       name="departmentId"
                       //label="Department"
@@ -503,6 +504,24 @@ class ContactForm extends Component {
                       selectType="departmentName"
                       inlineLabel
                     />
+                  </div>
+                  <div class=" w-2/5">
+                          <FastField
+                            name="source"
+                            type="text"
+                            label={
+                              <FormattedMessage
+                                id="app.source"
+                                defaultMessage="Source"
+                              />
+                            }
+                            options={["Na", "Na2", "None"]}
+                            component={SelectComponent}
+                            inlineLabel
+                            className="field"
+                            isColumn
+                          />
+                        </div>
                   </div>
                   <Spacer />
                   <div style={{ width: "100%",backgroundImage: "linear-gradient(-90deg, #00162994, #94b3e4)" }}>

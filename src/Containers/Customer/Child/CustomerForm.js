@@ -248,7 +248,7 @@ function CustomerForm(props) {
 
                   <Spacer/>
                   <div class=" flex justify-between">
-                  <div class=" w-6/12">
+                  <div class="w-2/5">
                   <FastField                     
                             name="sectorId"
                             label={
@@ -266,28 +266,23 @@ function CustomerForm(props) {
                             }
                           />
                     </div>
-                   
-                 
-                    {/* <div class=" w-1/3">
-                     <div>
-                        <StyledLabel>Requirement Type</StyledLabel>
+                    <div class=" w-2/5">
+                          <FastField
+                            name="source"
+                            type="text"
+                            label={
+                              <FormattedMessage
+                                id="app.source"
+                                defaultMessage="Source"
+                              />
+                            }
+                            options={["Na", "Na2", "None"]}
+                            component={SelectComponent}
+                            inlineLabel
+                            className="field"
+                            isColumn
+                          />
                         </div>
-                        <Switch
-                          checked={whiteblue}
-                          onChange={handleWhiteBlue}
-                          disabled={checked}
-                          checkedChildren="White collar"
-                          unCheckedChildren="Blue collar"
-                        />
-                    
-                    </div> */}
-                    {/* <div>
-                      <Checkbox
-                        checked={checked}
-                        onChange={() => handleChange()}
-                      >Both
-                      </Checkbox>
-                    </div> */}
                   </div>
 
                  

@@ -360,7 +360,23 @@ props.getAllCustomerEmployeelist();
                       />
                     
                     </div>
-
+                    <div class=" w-2/5">
+                          <FastField
+                            name="source"
+                            type="text"
+                            label={
+                              <FormattedMessage
+                                id="app.source"
+                                defaultMessage="Source"
+                              />
+                            }
+                            options={["Na", "Na2", "None"]}
+                            component={SelectComponent}
+                            inlineLabel
+                            className="field"
+                            isColumn
+                          />
+                        </div>
                     </div>
                   <Spacer />
 

@@ -25,8 +25,8 @@ function MileageDrawerCard(props) {
     const { voucherId } = props;
     props.getMileageByVoucherId(voucherId);
   }, []);
-  useEffect(() => {
-   
+  
+  useEffect(() => { 
     setInputValues(props.mileageVoucherId);
   }, [props.mileageVoucherId]);
 
@@ -97,7 +97,7 @@ function MileageDrawerCard(props) {
                 </div>
                 <div className="flex font-medium flex-col w-32 ml-[0.25rem]">
                   <h4 className="text-sm text-cardBody font-poppins">
-                    Attributed To
+                    Cost Code
                   </h4>
                   {editStates[index] ? (
               <input
@@ -212,7 +212,7 @@ function MileageDrawerCard(props) {
             <Tooltip title="Delete">
               <DeleteOutlined
                 type="delete"
-                style={{ cursor: "pointer",display:"flex",alignItems:"flex-start" }}
+                style={{ fontSize:"1rem",cursor: "pointer",display:"flex",alignItems:"flex-start" }}
                  onClick={() => {
                 this.props.deleteMileage(item.mileageId);
                   
