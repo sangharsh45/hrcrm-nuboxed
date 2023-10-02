@@ -134,7 +134,9 @@ export const rolesReducer = (state = initialState, action) => {
               return {
                 ...state,
                 removingTalentRole: false,
-                talentRoles: state.talentRoles.filter((item) => item.roleTypeExternalId !== action.payload),
+                talentRoles: state.talentRoles.filter(
+                  (item) => item.roleTypeExternalId !== action.payload
+              ),
               };
             case types.REMOVE_TALENT_ROLE_FAILURE:
               return {
