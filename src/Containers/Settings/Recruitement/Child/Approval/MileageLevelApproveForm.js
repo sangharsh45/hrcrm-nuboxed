@@ -10,6 +10,8 @@ import {
     addApprove, 
     getApproveData
  } from "../../../SettingsAction";
+import { Field } from "formik";
+import { InputComponent } from "../../../../../Components/Forms/Formik/InputComponent";
 const { Option } = Select;
 function MileageLevelApproveForm(props) {
     useEffect(() => {
@@ -73,6 +75,7 @@ function MileageLevelApproveForm(props) {
                 <div className="InputBox">
                     {rows.map((row, i) => {
                         return (
+                            <div>
                             <div style={{ width: "100%", display: "flex", fontWeight: "bold" }}>
                                 <div style={{ width: "16%" }}>
                                     <p>{`Level ${i + 1}`}</p>
@@ -95,6 +98,26 @@ function MileageLevelApproveForm(props) {
                                     <CloseOutlined onClick={() => handleDelete(row)} />
                                 ) : null}
                             </div>
+                                         
+                                         <div class=" w-full flex font-bold mt-4" > 
+                                         <div style={{ width: "16%" }}>
+                                                 <p>Name</p>
+                                             </div>
+                                             <div style={{ width: "47%" }}>
+                                         <Field
+                               isRequired
+                               name="name"
+                               type="text"
+                               isColumn
+                               width={"100%"}
+                               component={InputComponent}
+                               // accounts={accounts}
+                               inlineLabel
+                             />
+                             </div>
+                             </div>
+                             </div>
+                                      
                         );
                     })}
                     <div class=" justify-end" >

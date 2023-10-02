@@ -10,6 +10,9 @@ import {
     addApprove, 
     getApproveData
  } from "../../../SettingsAction";
+import { InputComponent } from "../../../../../Components/Forms/Formik/InputComponent";
+import { FormattedMessage } from "react-intl";
+import { Field } from "formik";
 const { Option } = Select;
 function LevelApproveForm(props) {
     useEffect(() => {
@@ -73,7 +76,8 @@ function LevelApproveForm(props) {
                 <div className="InputBox">
                     {rows.map((row, i) => {
                         return (
-                            <div style={{ width: "100%", display: "flex", fontWeight: "bold" }}>
+                            <div  >
+                            <div style={{ width: "100%", display: "flex", fontWeight: "bold", }}>
                                 <div style={{ width: "16%" }}>
                                     <p>{`Level ${i + 1}`}</p>
                                 </div>
@@ -94,7 +98,12 @@ function LevelApproveForm(props) {
                                 {rows.length > 1 && (row.id + 1 > row.id) ? (
                                     <CloseOutlined onClick={() => handleDelete(row)} />
                                 ) : null}
+
+
                             </div>
+               
+                            </div>
+                           
                         );
                     })}
                     <div class=" justify-end" >
