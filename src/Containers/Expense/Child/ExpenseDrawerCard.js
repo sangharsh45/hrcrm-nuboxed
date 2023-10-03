@@ -44,6 +44,10 @@ function ExpenseDrawerCard(props) {
     setInputValues(newInputValues);
   };
 
+  const [newimageId, setnewimageId] = useState("");
+  function handleSetImage(imageId) {
+    setnewimageId(imageId);
+  }
   const handleSave = (index) => {
     const newData = [...data];
     newData[index] = { ...inputValues[index] };
@@ -66,7 +70,9 @@ function ExpenseDrawerCard(props) {
     amount:newData[index].amount,
     expenseId:newData[index].expenseId,
     particular:newData[index].particular,
-   documentId:newData[index].documentId,
+    imageId: newimageId !== "" ? newimageId.imageId  : props.setEditingUser.imageId,
+    // documentId:newimageId !== "" ? newData[index].documentId :newimageId.documentId,
+    documentId:newData[index].documentId!==newimageId.documentId ? newimageId.documentId:newData[index].documentId,
       userId:newData[index].userId,
       expenseDate:`${newData[index].expenseDate}T20:00:00Z`
     }
@@ -94,7 +100,28 @@ function ExpenseDrawerCard(props) {
                               style={{
                                   borderBottom: "3px dotted #515050"
                               }}>
-                                   
+                                <div className=" flex font-medium flex-col w-[6rem] ">
+                                {editStates[index] ? (
+  <div>                           
+<EditUpload
+imageId={item.documentId}
+imgWidth={100}
+imgHeight={100}
+getImage={handleSetImage}
+/>
+  <button 
+  // onClick={() => 
+  // deleteHandler(image)}
+  >
+  delete image
+</button>
+</div>  
+):(
+<img src={`${base_url}/image/${item.documentId}`}
+style={{width:"3rem",height:"3rem"}}
+/>
+)}
+</div>   
                               <div className=" flex font-medium flex-col w-[2rem] ">
 
   
