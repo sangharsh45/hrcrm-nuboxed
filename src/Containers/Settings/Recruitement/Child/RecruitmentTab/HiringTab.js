@@ -53,6 +53,7 @@ class HiringTab extends Component {
       // viewAll:false,
       // setIsViewAll:false,
       change: true,
+      isTextOpen:false,
       isTextInputOpen: false,
       addingStage: false,
       stageName: "",
@@ -117,6 +118,10 @@ class HiringTab extends Component {
   toggleInput = () =>
     this.setState((prevState) => ({
       isTextInputOpen: !prevState.isTextInputOpen,
+    }));
+    toggleInput1 = () =>
+    this.setState((prevState) => ({
+      isTextOpen: !prevState.isTextOpen,
     }));
   handleChange = ({ target: { name, value } }) =>
     this.setState({ [name]: value });
@@ -218,7 +223,7 @@ class HiringTab extends Component {
     this.setState({
       categoryName: "",
       subCategoryId:"",
-      isTextInputOpen: false,
+      isTextOpen:false,
       editInd: true,
     });
   };
@@ -309,7 +314,7 @@ class HiringTab extends Component {
                 })}
               </StyledTabs> 
 
-              {this.state.isTextInputOpen ? (
+              {this.state.isTextOpen ? (
               <FlexContainer
                 alignItems="center"
                 style={{ marginLeft: "0.3125em", marginTop: "0.3125em" }}
@@ -340,7 +345,7 @@ class HiringTab extends Component {
                   Save
                 </Button>
                 &nbsp;
-                <Button type="primary" onClick={this.toggleInput}>
+                <Button type="primary" onClick={this.toggleInput1}>
                   Cancel
                
                 </Button>
@@ -354,7 +359,7 @@ class HiringTab extends Component {
 
                     htmlType="button"
                      Loading={addingProcessForOpportunity}
-                    onClick={this.toggleInput}
+                    onClick={this.toggleInput1}
                   >
                     Add
                  
