@@ -7,6 +7,7 @@ import { connect } from "react-redux";
 
 import FactoryIcon from '@mui/icons-material/Factory';
 import Sectors from "../Sectors/Sectors";
+import Source from "./Source/Source";
 
 const TabPane = StyledTabs.TabPane;
 
@@ -60,7 +61,7 @@ class CustomerSectorTab extends Component {
                   key="1"
                 >
                   <Suspense>
-                    {/* <Source /> */}
+                    <Source />
                   </Suspense>
                 </TabPane>
               

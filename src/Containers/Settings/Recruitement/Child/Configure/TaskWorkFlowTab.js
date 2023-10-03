@@ -58,6 +58,7 @@ class TaskWorkflowTab extends Component {
       setCurrentRowData: "",
       visible: false,
       isViewAll: false,
+      isTextOpen:false,
       currentProcess: [],
       currentStageId: "",
       currentStage: [],
@@ -130,6 +131,10 @@ class TaskWorkflowTab extends Component {
   toggleInput = () =>
     this.setState((prevState) => ({
       isTextInputOpen: !prevState.isTextInputOpen,
+    }));
+    toggleInput1 = () =>
+    this.setState((prevState) => ({
+      isTextOpen: !prevState.isTextOpen,
     }));
   handleChange = ({ target: { name, value } }) =>
     this.setState({ [name]: value });
@@ -234,7 +239,7 @@ class TaskWorkflowTab extends Component {
     this.setState({
       categoryName: "",
       subCategoryId:"",
-      isTextInputOpen: false,
+      isTextOpen: false,
       editInd: true,
     });
   };
@@ -333,7 +338,7 @@ class TaskWorkflowTab extends Component {
                 })}
               </StyledTabs>
 
-              {this.state.isTextInputOpen ? (
+              {this.state.isTextOpen ? (
               <FlexContainer
                 alignItems="center"
                 style={{ marginLeft: "0.3125em", marginTop: "0.3125em" }}
@@ -364,7 +369,7 @@ class TaskWorkflowTab extends Component {
                   Save
                 </Button>
                 &nbsp;
-                <Button type="primary" onClick={this.toggleInput}>
+                <Button type="primary" onClick={this.toggleInput1}>
                   Cancel
                
                 </Button>
@@ -378,7 +383,7 @@ class TaskWorkflowTab extends Component {
 
                     htmlType="button"
                      Loading={addingTaskForRecruit}
-                    onClick={this.toggleInput}
+                    onClick={this.toggleInput1}
                   >
                     Add
                  

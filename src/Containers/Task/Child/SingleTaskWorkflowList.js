@@ -120,24 +120,25 @@ console.log("startDate",this.state.startDate)
         <ViewEditCard>
           {({ viewType }, toggleViewType) =>
             viewType === "view" ? (
-              <FlexContainer
-                justifyContent="start"
-                alignItems="center"
+              <div class=" flex justify-between items-center"
+              
           
               >
+                <div class="flex">
                 <StageName style={{ flexBasis: "20%", textAlign: "left" }}>
                   {elipsize(taskChecklistStageName, 23)}
                 </StageName>
-                <StageName style={{ flexBasis: "15%" }}>
+                <StageName style={{ flexBasis: "9%" }}>
                   {probability}%
                 </StageName>
-                <StageName style={{ flexBasis: "15%" }}>
+                <StageName style={{ flexBasis: "9%" }}>
                   {days}D
                 </StageName>
+              
             
-<div class="flex">
+
   {/* Start Date */}
-  <div class="flex w-32" style={{ marginRight: "10px" }}>
+  <div class="flex w-32 mr-3" >
     <DatePicker
       placeholder="Start Date"
       onChange={this.onChangeDatePicker}
@@ -145,7 +146,7 @@ console.log("startDate",this.state.startDate)
   </div>
 
   {/* End Date */}
-  <div class="flex w-32" style={{ marginRight: "10px" }}>
+  <div class="flex w-32 mr-3" >
     <DatePicker
       placeholder="End Date"
       onChange={this.onChangeEndDatePicker}
@@ -153,9 +154,9 @@ console.log("startDate",this.state.startDate)
   </div>
 
   {/* Stage */}
-  <div class="flex w-32" style={{ marginRight: "10px" }}>
+  <div class="flex w-96" >
     <Select
-      style={{ border: "2px solid black" }}
+      style={{ border: "2px solid black", }}
       mode="multiple"
       value={this.state.selectedOptions}
       options={this.props.taskTeamList.map((option) => ({
@@ -165,6 +166,31 @@ console.log("startDate",this.state.startDate)
       onChange={this.handleChangeValue}
     />
   </div>
+  <StageName style={{ flexBasis: "15%" }}>
+                  <Avatar.Group
+  maxCount={2}
+  maxStyle={{ color: "#f56a00", backgroundColor: "#fde3cf" }}
+>
+  {included &&
+    included.map((candidate, i) => {
+      // Check if candidate exists and has a fullName property
+      if (candidate && candidate.fullName) {
+        const data1 = candidate.fullName.slice(0, 2);
+        console.log("datas", data1);
+        return (
+          <Tooltip title={candidate.fullName} key={i}>
+            <Avatar style={{ backgroundColor: "#94b3e4" }}>
+              {data1}
+            </Avatar>
+          </Tooltip>
+        );
+      } else {
+        // Handle the case where candidate.fullName is null or undefined
+        return null; // Or display some default content
+      }
+    })}
+</Avatar.Group>
+                </StageName>
 
   {/* Save Button */}
   <Button
@@ -185,7 +211,7 @@ console.log("startDate",this.state.startDate)
 
 
            
-              </FlexContainer>
+              </div>
             ) : (
               <FlexContainer justifyContent="center">
                 <TextInput
