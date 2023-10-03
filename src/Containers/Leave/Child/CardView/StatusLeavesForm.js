@@ -3,11 +3,11 @@ import { ClockCircleOutlined } from '@ant-design/icons';
 import { Timeline } from 'antd';
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import {getOpenTaskCountByUserId } from "../../LeavesAction"
+import {getApprovedStatusByTaskId } from "../../LeavesAction"
 
 const StatusLeavesForm = (props) => {
   useEffect(() => {
-    props.getOpenTaskCountByUserId(props.userId);
+    props.getApprovedStatusByTaskId(props.taskId);
    
   }, []);
   <Timeline
@@ -32,13 +32,13 @@ const StatusLeavesForm = (props) => {
 
 const mapStateToProps = ({ leave, auth }) => ({
   userId: auth.userDetails.userId,
-  leaveFetching:leave.leaveFetching,
+  approveStatus:leave.approveStatus,
 })
 
 const mapDispatchToProps = (dispatch) =>
 bindActionCreators(
   {
-    getOpenTaskCountByUserId
+    getApprovedStatusByTaskId
   },
   dispatch,
 )

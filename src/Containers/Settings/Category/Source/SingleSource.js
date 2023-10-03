@@ -1,32 +1,32 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 import { Button, Tooltip, Input } from "antd";
-import EditableInput from "../../../Components/Forms/Edit/EditableInput";
-import { FlexContainer } from "../../../Components/UI/Layout";
+import EditableInput from "../../../../Components/Forms/Edit/EditableInput";
+import { FlexContainer } from "../../../../Components/UI/Layout";
 import { FormattedMessage } from "react-intl";
 import DeleteIcon from '@mui/icons-material/Delete';
 import BorderColorIcon from '@mui/icons-material/BorderColor';
-import { TextInput } from "../../../Components/UI/Elements";
+import { TextInput } from "../../../../Components/UI/Elements";
 
-import ViewEditCard from "../../../Components/UI/Elements/ViewEditCard";
+import ViewEditCard from "../../../../Components/UI/Elements/ViewEditCard";
 
 class SingleSource extends Component {
   constructor(props) {
     super(props);
     this.state = {
       type: "",
-      sectorName: "",
+      name: "",
       editInd: true,
     };
   }
   render() {
     const {
-      source: { sectorName, sectorId, EditInd },
+      source: { name, sourceId, EditInd },
       handleChange,
-      name,
+      // name,
       value,
       linkedSectors,
-      updatingSectors,
+      updatingSources,
       handleUpdateSource,
       handleDeleteSector,
     } = this.props;
@@ -40,7 +40,7 @@ class SingleSource extends Component {
             viewType === "view" ? (
               <FlexContainer justifyContent="space-between">
                 <SectorName style={{ flexBasis: "85%" }}>
-                  {sectorName}
+                  {name}
                 </SectorName>
                 <div>
                   {this.props.sector.editInd ? (
@@ -55,7 +55,7 @@ class SingleSource extends Component {
                   &nbsp;
                   <Tooltip title="Delete">
                     <DeleteIcon
-                        onClick={() => handleDeleteSector(sectorId)}
+                        onClick={() => handleDeleteSector(sourceId)}
                       size="14px"
                       style={{
                         verticalAlign: "center",
@@ -79,7 +79,7 @@ class SingleSource extends Component {
                 <TextInput
                   name={name}
                   // value={value || sectorName}
-                  defaultValue={sectorName}
+                  defaultValue={name}
                   onChange={handleChange}
                   style={{ width: "60%" }}
                 />
@@ -89,11 +89,11 @@ class SingleSource extends Component {
                   <Button
                     type="primary"
                     htmlType="submit"
-                    loading={updatingSectors}
+                    loading={updatingSources}
                     disabled={!value}
                     onClick={() => {
                       console.log(value); 
-                      handleUpdateSource(sectorId, value, toggleViewType());
+                      handleUpdateSource(sourceId, value, toggleViewType());
                     }}>
 
                   

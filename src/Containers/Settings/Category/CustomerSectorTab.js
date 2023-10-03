@@ -4,7 +4,7 @@ import { StyledTabs } from "../../../Components/UI/Antd";
 import { TabsWrapper } from "../../../Components/UI/Layout";
 import { MainWrapper, FlexContainer } from "../../../Components/UI/Layout";
 import { connect } from "react-redux";
-
+import SourceIcon from '@mui/icons-material/Source';
 import FactoryIcon from '@mui/icons-material/Factory';
 import Sectors from "../Sectors/Sectors";
 import Source from "./Source/Source";
@@ -52,7 +52,7 @@ class CustomerSectorTab extends Component {
                 <TabPane
                   tab={
                     <>
-                    <FactoryIcon  />
+                    <SourceIcon  />
                       <span style={{ marginLeft: "0.25em" }}>
                      Source
                       </span>

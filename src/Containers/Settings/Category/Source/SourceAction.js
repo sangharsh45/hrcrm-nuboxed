@@ -1,18 +1,18 @@
 import * as types from "./SourceActionTypes";
 import axios from "axios";
 import dayjs from "dayjs";
-import { base_url } from "../../../Config/Auth";
+import { base_url } from "../../../../Config/Auth";
 import { message } from "antd"
 
 /**
  * get all the Sector
  */
- export const getSources = () => (dispatch) => {
+ export const getSources = (orgId) => (dispatch) => {
     dispatch({
       type: types.GET_SOURCE_REQUEST,
     });
     axios
-    .get(`${base_url}/sector`, {
+    .get(`${base_url}/source/${orgId}`, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },
@@ -37,20 +37,20 @@ import { message } from "antd"
   // /**
 //  * add a new sector 
 //  */
-export const addSources = (source, cb) => (dispatch) => {
+export const addSources = (source,orgId, cb) => (dispatch) => {
     console.log(source);
     dispatch({
       type: types.ADD_SOURCE_REQUEST,
     });
     axios
-      .post(`${base_url}/sector`, source, {
+      .post(`${base_url}/source`, source, {
         headers: {
           Authorization: "Bearer " + sessionStorage.getItem("token") || "",
         },
       })
       .then((res) => {
-        dispatch(getSources());
-        message.success("Sector has been added successfully!");
+        dispatch(getSources(orgId));
+        message.success("source has been added successfully!");
         console.log(res);
         dispatch({
           type: types.ADD_SOURCE_SUCCESS,
@@ -102,15 +102,15 @@ export const removeSource = ( sectorId) => (dispatch) => {
   /**
  *update label of sector
  */
-export const updateSource = ( sectorId,sectorName,cb) => (dispatch) => {
+export const updateSource = ( sourceId,name,cb) => (dispatch) => {
     
     dispatch({
       type: types.UPDATE_SOURCE_REQUEST,
     });
     axios
       .put(
-        `${base_url}/sector/update`,
-        { sectorName,sectorId,editInd:true },
+        `${base_url}/source/${sourceId}`,
+        { name,sourceId,editInd:true },
         {
           headers: {
             Authorization: "Bearer " + sessionStorage.getItem("token") || "",
