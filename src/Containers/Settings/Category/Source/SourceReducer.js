@@ -5,7 +5,7 @@ const initialState = {
 
     fetchingSources: false,
     fetchingSourcesError: false,
-    sectors: [],
+    sources: [],
 
     addingSources: false,
     addingSourcesError: false,

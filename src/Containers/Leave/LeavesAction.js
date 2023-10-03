@@ -183,13 +183,13 @@ export const handleUpdateLeaveModal = (modalProps) => (dispatch) => {
     });
   };
 
-  export const getOpenTaskCountByUserId = (userId) => (dispatch) => {
+  export const getApprovedStatusByTaskId = (taskId) => (dispatch) => {
     dispatch({
-        type: types.GET_OPEN_TASK_COUNT_BY_USERID_REQUEST,
+        type: types.GET_APPROVE_STATUS_BY_TASKID_REQUEST,
     });
 
     axios
-        .get(`${base_url}/task/type/count/${userId}`, {
+        .get(`${base_url}/task/approve/status/${taskId}`, {
             headers: {
                 Authorization: "Bearer " + sessionStorage.getItem("token") || "",
             },
@@ -197,14 +197,14 @@ export const handleUpdateLeaveModal = (modalProps) => (dispatch) => {
         .then((res) => {
             console.log(res);
             dispatch({
-                type: types.GET_OPEN_TASK_COUNT_BY_USERID_SUCCESS,
+                type: types.GET_APPROVE_STATUS_BY_TASKID_SUCCESS,
                 payload: res.data,
             });
         })
         .catch((err) => {
             console.log(err);
             dispatch({
-                type: types.GET_OPEN_TASK_COUNT_BY_USERID_FAILURE,
+                type: types.GET_APPROVE_STATUS_BY_TASKID_FAILURE,
                 payload: err,
             });
         });

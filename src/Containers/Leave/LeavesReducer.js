@@ -23,9 +23,9 @@ const initialState = {
     updatingLeave: false,
     updatingLeaveError: false,
 
-    fetchingOpenTaskCount: false,
-    fetchingOpenTaskCountError: true,
-    leaveOpenTaskCount:[],
+    fetchingApproveStatus: false,
+    fetchingApproveStatusError: true,
+    approveStatus:[],
 };
 
 export const LeavesReducer = (state = initialState, action) => {
@@ -131,19 +131,19 @@ export const LeavesReducer = (state = initialState, action) => {
                           return { ...state, viewType: action.payload };
 
 
-                          case types.GET_OPEN_TASK_COUNT_BY_USERID_REQUEST:
-                            return { ...state, fetchingOpenTaskCount: true };
-                        case types.GET_OPEN_TASK_COUNT_BY_USERID_SUCCESS:
+                          case types.GET_APPROVE_STATUS_BY_TASKID_REQUEST:
+                            return { ...state, fetchingApproveStatus: true };
+                        case types.GET_APPROVE_STATUS_BY_TASKID_SUCCESS:
                             return {
                                 ...state,
-                                fetchingOpenTaskCount: false,
-                                leaveOpenTaskCount: action.payload,
+                                fetchingApproveStatus: false,
+                                approveStatus: action.payload,
                             };
-                        case types.GET_OPEN_TASK_COUNT_BY_USERID_FAILURE:
+                        case types.GET_APPROVE_STATUS_BY_TASKID_FAILURE:
                             return {
                                 ...state,
-                                fetchingOpenTaskCount: false,
-                                fetchingOpenTaskCountError: true,
+                                fetchingApproveStatus: false,
+                                fetchingApproveStatusError: true,
                             };
 
 

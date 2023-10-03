@@ -8,15 +8,16 @@ import { MainWrapper, FlexContainer } from "../../../../Components/UI/Layout";
 import { TextInput, Title } from "../../../../Components/UI/Elements";
 // import SingleSectors from "./SingleSector";
 import dayjs from "dayjs";
-// import {
-//   getSectors,
-//   addSectors,
-//   removeSectors,
-//   updateSectors,
-//   searchSectorName,
-// } from "./SectorsAction";
+import {
+  getSources,
+  addSources,
+  // removeSectors,
+  updateSource
+  // searchSectorName,
+} from "./SourceAction";
 import axios from "axios";
-import { base_url } from "../../../../Config/Auth";
+import SingleSource from "./SingleSource";
+// import { base_url } from "../../../../Config/Auth";
 
 class Source extends Component {
   constructor(props) {
@@ -24,17 +25,17 @@ class Source extends Component {
     this.state = {
       linkedSectors: [],
       isTextInputOpen: false,
-      addingSector: false,
-      sectorName: "",
+      addingSources: false,
+      name: "",
       type: "",
-      singleSector: "",
+      singleSource: "",
       editInd: true,
       currentData: "",
     };
   }
   handleClear = () => {
     this.setState({ currentData: "" });
-    this.props.getSectors();
+    this.props.getSources(this.props.orgId);
   };
   setCurrentData = (value) => {
     this.setState({ currentData: value });
@@ -52,22 +53,25 @@ class Source extends Component {
   handleChange = ({ target: { name, value } }) =>
     this.setState({ [name]: value });
     handleAddSource = () => {
-      const { addSectors, sectors } = this.props;
-      const { sectorName, editInd, addingSectors, isTextInputOpen } = this.state;
-      let sector = { sectorName, editInd };
+      const { addSources, sources } = this.props;
+      const { name, editInd, addingSources, isTextInputOpen } = this.state;
+      let source = { name,
+        orgId: this.props.organizationId,
+        userId:this.props.userId,
+         editInd };
     
       let exist =
-        sectors && sectors.some((element) => element.sectorName === sectorName);
+      sources && sources.some((element) => element.name === name);
     
       if (exist) {
         message.error(
-          "Can't create as another sector type exists with the same name!"
+          "Can't create as another source type exists with the same name!"
         );
       } else {
-        addSectors(sector, () => console.log("add sector callback"));
+        addSources(source, () => console.log("add sector callback"));
         this.setState({
-          sectorName: "",
-          singleSector: "",
+          name: "",
+          singleSource: "",
           isTextInputOpen: false,
           editInd: true,
         });
@@ -76,11 +80,11 @@ class Source extends Component {
     
   handleDeleteSector = (sectorId = { sectorId }) => {
     this.props.removeSectors(sectorId);
-    this.setState({ sectorName: "", singleSector: "" });
+    this.setState({ name: "", singleSource: "" });
   };
-  handleUpdateSource = (sectorName, sectorId, editInd, cb) => {
-    this.props.updateSectors(sectorName, sectorId, editInd, cb);
-    this.setState({ sectorName: "", singleSector: "", editInd: true });
+  handleUpdateSource = (name, sourceId, editInd, cb) => {
+    this.props.updateSource(name, sourceId, editInd, cb);
+    this.setState({ name: "", sourceId: "", editInd: true });
   };
   // getLinkedDocuments = () => {
   //   axios
@@ -98,27 +102,27 @@ class Source extends Component {
   //     });
   // };
   componentDidMount() {
-    const { getSectors } = this.props;
+    const { getSources,orgId } = this.props;
     console.log();
-    getSectors();
+    getSources(orgId);
     // this.getLinkedSources();
   }
   render() {
     const {
-      fetchingSectors,
-      fetchingSectorsError,
-      sectors,
-      addingSectors,
-      updatingSectors,
+      fetchingSources,
+      fetchingSourcesError,
+      sources,
+      addingSources,
+      updatingSources,
     } = this.props;
     const {
       isTextInputOpen,
       type,
-      sectorName,
-      singleSector,
+      name,
+      singleSource,
       linkedSectors,
     } = this.state;
-    if (fetchingSectors) return <p>Loading ...</p>;
+    if (fetchingSources) return <p>Loading ...</p>;
     //if (fetchingSectorsError) return <p>We are unable to load data</p>;
     return (
       <>
@@ -145,9 +149,9 @@ class Source extends Component {
               />
               <Button
                 type={this.props.currentData ? "primary" : "danger"}
-                onClick={() => {
-                  this.props.searchSectorName(this.state.currentData);
-                }}
+                // onClick={() => {
+                //   this.props.searchSectorName(this.state.currentData);
+                // }}
               >
                 Submit
               </Button>
@@ -164,16 +168,16 @@ class Source extends Component {
 
             <FlexContainer flexDirection="column">
               {/* <Title style={{ padding: 8 }}>Types Of Documents</Title> */}
-              {/* <MainWrapper style={{ height: "30em", marginTop: "0.625em" }}>
+             <MainWrapper style={{ height: "30em", marginTop: "0.625em" }}>
                 {sources.length &&
                   sources.map((source, i) => (
-                    <SingleSectors
+                    <SingleSource
                       key={i}
-                      value={singleSector}
-                      name="singleSector"
+                      value={singleSource}
+                      name="singleSource"
                       source={source}
                       linkedSectors={linkedSectors}
-                      updatingSectors={updatingSectors}
+                      updatingSources={updatingSources}
                       handleChange={this.handleChange}
                       handleUpdateSource={this.handleUpdateSource}
                       handleDeleteSector={this.handleDeleteSector}
@@ -183,7 +187,7 @@ class Source extends Component {
                       setCurrentData={this.setCurrentData}
                     />
                   ))}
-              </MainWrapper> */}
+              </MainWrapper>
             </FlexContainer>
             {isTextInputOpen ? (
               <FlexContainer
@@ -194,8 +198,8 @@ class Source extends Component {
                 <br />
                 <TextInput
                   placeholder="Add Source"
-                  name="sectorName"
-                  value={sectorName}
+                  name="name"
+                  value={name}
                   onChange={this.handleChange}
                   width="55%"
                   style={{ marginRight: "0.125em" }}
@@ -204,8 +208,8 @@ class Source extends Component {
                 <Button
                   type="primary"
                   htmlType="submit"
-                  disabled={!sectorName}
-                  Loading={addingSectors}
+                  disabled={!name}
+                  Loading={addingSources}
                   onClick={this.handleAddSource}
                   style={{ marginRight: "0.125em" }}
                 >
@@ -226,7 +230,7 @@ class Source extends Component {
                     type="primary"
                     ghost
                     htmlType="button"
-                    Loading={addingSectors}
+                    loading={addingSources}
                     onClick={this.toggleInput}
                   >
                     {/* Add More */}
@@ -249,27 +253,28 @@ class Source extends Component {
   }
 }
 
-const mapStateToProps = ({ sector }) => ({
-//   addingSectors: sector.addingSectors,
-//   addingSectorsError: sector.addingSectorsError,
-//   sectors: sector.sectors,
-
+const mapStateToProps = ({ source,auth }) => ({
+  addingSources: source.addingSources,
+  addingSourcesError: source.addingSourcesError,
+sources: source.sources,
+orgId:auth.userDetails.organizationId,
+userId:auth.userDetails.userId,
 //   removingSectors: sector.removingSectors,
 //   removingSectorsError: sector.removingSectorsError,
-//   fetchingSectors: sector.fetchingSectors,
-//   fetchingSectorsError: sector.fetchingSectorsError,
+fetchingSources: source.fetchingSources,
+fetchingSourcesError: source.fetchingSourcesError,
 
-//   updatingSectors: sector.updatingSectors,
-//   updatingSectorsError: sector.updatingSectorsError,
+updatingSources: source.updatingSources,
+updatingSourcesError: source.updatingSourcesError,
 
 });
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
-    //   getSectors,
-    //   addSectors,
+      getSources,
+      addSources,
     //   removeSectors,
-    //   updateSectors,
+      updateSource,
     //   searchSectorName,
     },
     dispatch
