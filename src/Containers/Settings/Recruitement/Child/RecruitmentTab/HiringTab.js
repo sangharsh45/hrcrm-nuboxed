@@ -11,7 +11,6 @@ import { bindActionCreators } from "redux";
 import {
   handleProcessHiringModal,
   updateProcessNameForOpportunity,
-  getProcessForOpportunity,
   updateStageForOpportunity,
   addProcessStageForOpportunity,
   getProcessStagesForOpportunity,
@@ -27,7 +26,10 @@ import {
   Spacer,
   TextInput,
 } from "../../../../../Components/UI/Elements";
-// import SingleRecruitStages from "./SingleRecruitStages";
+import {
+  addProcessForOpportunity,
+ getProcessForOpportunity,
+} from "../../../SettingsAction";
 import { FlexContainer } from "../../../../../Components/UI/Layout";
 import { StyledPopconfirm, StyledTabs } from "../../../../../Components/UI/Antd";
 import {  Select } from "../../../../../Components/UI/Elements";
@@ -176,6 +178,50 @@ class HiringTab extends Component {
       alert("error");
     }
   };
+  handleCallback = (status) => {
+    if (status === "success") {
+      return getProcessForOpportunity(this.props.orgId);
+    } else {
+      return null;
+    }
+  };
+  handleAddWorkflow = () => {
+    const { addProcessForOpportunity, workflows } = this.props;
+    const {
+      workflowName,
+      isTextInputOpen,
+      orgId,
+    //   categoryId,
+      editInd,
+    } = this.state;
+    let header = {
+      workflowName,
+      orgId: this.props.organizationId,
+    };
+
+    let exist =
+    workflows &&
+    workflows.some(
+        (element) => element.workflowName == workflowName
+      );
+
+    if (exist) {
+      message.error(
+        "Can't create as another departmentName exists with same name!"
+      );
+    } else {
+      addProcessForOpportunity(header,  this.props.orgId, () => 
+      this.handleCallback
+      );
+    }
+
+    this.setState({
+      categoryName: "",
+      subCategoryId:"",
+      isTextInputOpen: false,
+      editInd: true,
+    });
+  };
 
   handleStageType=(value)=>
   this.setState({responsible:value});
@@ -231,6 +277,7 @@ class HiringTab extends Component {
     });
   };
   render() {
+    const { addingProcessForOpportunity, addProcessForOpportunity } = this.props;
     return (
       <>
         <StageWrapper>
@@ -262,14 +309,60 @@ class HiringTab extends Component {
                 })}
               </StyledTabs> 
 
-              <Button
-                style={{ margin: 10 }}
-                ghost
-                 onClick={() => this.props.handleProcessHiringModal(true)}
-                type="primary"
+              {this.state.isTextInputOpen ? (
+              <FlexContainer
+                alignItems="center"
+                style={{ marginLeft: "0.3125em", marginTop: "0.3125em" }}
               >
-                Add
-              </Button>
+                <br />
+                <br />
+              
+                <TextInput
+                  placeholder="Add Workflow"
+                  name="workflowName"
+                //   value={categoryName}
+                  onChange={this.handleChange}
+                  width="40%"
+                  style={{ marginRight: "0.125em" }}
+                />
+        
+              
+         
+                &nbsp;
+                <Button
+                  type="primary"
+                  htmlType="submit"
+                  // disabled={!values.taskChecklistName}
+                  loading={addingProcessForOpportunity}
+                  onClick={this.handleAddWorkflow}
+                >
+                  
+                  Save
+                </Button>
+                &nbsp;
+                <Button type="primary" onClick={this.toggleInput}>
+                  Cancel
+               
+                </Button>
+              </FlexContainer>
+            ) : (
+              <>
+                <br />
+                <FlexContainer justifyContent="flex-end">
+                  <Button
+                    type="primary"
+
+                    htmlType="button"
+                     Loading={addingProcessForOpportunity}
+                    onClick={this.toggleInput}
+                  >
+                    Add
+                 
+                  </Button>
+                </FlexContainer>
+              </>
+            )}
+           
             </FlexContainer>
             <Spacer />
             <FlexContainer
@@ -488,6 +581,8 @@ class HiringTab extends Component {
 
 const mapStateToProps = ({ settings, auth }) => ({
   opportunityProcess: settings.opportunityProcess,
+  addingProcessForOpportunity: settings.addingProcessForOpportunity,
+  addingProcessForOpportunityError: settings.addingProcessForOpportunityError,
   organization:
   auth.userDetails &&
   auth.userDetails.metaData &&
@@ -504,6 +599,7 @@ const mapDispatchToProps = (dispatch) =>
    handleProcessHiringModal,
    updateProcessNameForOpportunity,
    getProcessForOpportunity,
+   addProcessForOpportunity,
    addProcessStageForOpportunity,
    getProcessStagesForOpportunity,
    deleteOpportunityProcessData,
