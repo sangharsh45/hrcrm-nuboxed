@@ -10,13 +10,16 @@ import { DatePicker } from "antd";
 import dayjs from "dayjs";
 import styled from "styled-components";
 import {
+  addTaskForRecruiter,
+  getTaskForWorkflow,
+} from "../../../SettingsAction";
+import {
   MainWrapper,
   Spacer,
   TextInput,
 } from "../../../../../Components/UI/Elements";
 import {
   handleTaskDrawer,
-  getTaskForWorkflow,
    updateTaskStageForRecruit,
   addTaskStageForRecruit,
     getTaskStagesForRecruit,
@@ -81,6 +84,7 @@ class TaskWorkflowTab extends Component {
     console.log(endDate, dateString);
     this.setState({ endDate: dayjs(dateString) });
   };
+
 
   handleEdit = () => {
     this.setState((prevState) => ({
@@ -187,9 +191,53 @@ class TaskWorkflowTab extends Component {
       alert("error");
     }
   };
+  handleCallback = (status) => {
+    if (status === "success") {
+      return getTaskForWorkflow(this.props.taskTypeId);
+    } else {
+      return null;
+    }
+  };
 
   handleStageType = (value) => this.setState({ responsible: value });
+  handleAddWorkflow = () => {
+    const { addTaskForRecruiter, headers } = this.props;
+    const {
+      taskChecklistName,
+      addingSubCategorys,
+      isTextInputOpen,
+    //   categoryId,
+      editInd,
+    } = this.state;
+    let header = {
+      taskChecklistName,
+      taskTypeId:this.props.taskTypeId,
+      orgId: this.props.organizationId,
+    };
 
+    let exist =
+    headers &&
+    headers.some(
+        (element) => element.taskChecklistName == taskChecklistName
+      );
+
+    if (exist) {
+      message.error(
+        "Can't create as another departmentName exists with same name!"
+      );
+    } else {
+      addTaskForRecruiter(header, this.props.taskTypeId, () => 
+      this.handleCallback
+      );
+    }
+
+    this.setState({
+      categoryName: "",
+      subCategoryId:"",
+      isTextInputOpen: false,
+      editInd: true,
+    });
+  };
   handleAddStage = () => {
     const { addTaskStage } = this.props;
     const {
@@ -253,6 +301,7 @@ class TaskWorkflowTab extends Component {
     });
   };
   render() {
+    const { addingTaskForRecruit, addTaskForRecruiter } = this.props;
     console.log("process", this.state.currentProcess.taskChecklistName);
     return (
       <>
@@ -284,14 +333,60 @@ class TaskWorkflowTab extends Component {
                 })}
               </StyledTabs>
 
-              <Button
-                style={{ margin: 10 }}
-                ghost
-                onClick={() => this.props.handleTaskDrawer(true)}
-                type="primary"
+              {this.state.isTextInputOpen ? (
+              <FlexContainer
+                alignItems="center"
+                style={{ marginLeft: "0.3125em", marginTop: "0.3125em" }}
               >
-                Add
-              </Button>
+                <br />
+                <br />
+              
+                <TextInput
+                  placeholder="Add Workflow"
+                  name="taskChecklistName"
+                //   value={categoryName}
+                  onChange={this.handleChange}
+                  width="40%"
+                  style={{ marginRight: "0.125em" }}
+                />
+        
+              
+         
+                &nbsp;
+                <Button
+                  type="primary"
+                  htmlType="submit"
+                  // disabled={!values.taskChecklistName}
+                  loading={addingTaskForRecruit}
+                  onClick={this.handleAddWorkflow}
+                >
+                  
+                  Save
+                </Button>
+                &nbsp;
+                <Button type="primary" onClick={this.toggleInput}>
+                  Cancel
+               
+                </Button>
+              </FlexContainer>
+            ) : (
+              <>
+                <br />
+                <FlexContainer justifyContent="flex-end">
+                  <Button
+                    type="primary"
+
+                    htmlType="button"
+                     Loading={addingTaskForRecruit}
+                    onClick={this.toggleInput}
+                  >
+                    Add
+                 
+                  </Button>
+                </FlexContainer>
+              </>
+            )}
+           
 
               <Spacer />
               <FlexContainer
@@ -489,6 +584,8 @@ class TaskWorkflowTab extends Component {
 const mapStateToProps = ({ settings, auth, document }) => ({
     recruitWorkflowTask: settings.recruitWorkflowTask,
   recruitTaskStages: settings.recruitTaskStages,
+  addingTaskForRecruit: settings.addingTaskForRecruit,
+  addingTaskForRecruitError: settings.addingTaskForRecruitError,
   organization:
     auth.userDetails &&
     auth.userDetails.metaData &&
@@ -501,6 +598,7 @@ const mapDispatchToProps = (dispatch) =>
     {
       handleTaskDrawer,
       getTaskForWorkflow,
+      addTaskForRecruiter,
        updateTaskStageForRecruit,
       addTaskStageForRecruit,
        getTaskStagesForRecruit,
