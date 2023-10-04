@@ -8,6 +8,7 @@ import {
   TextInput,
   Select,
 } from "../../../Components/UI/Elements";
+import { getEmployeelist } from "../../Employees/EmployeeAction";
 import {addTaskWorkflow,getTaskTeamList} from "../../Settings/SettingsAction"
 import { elipsize } from "../../../Helpers/Function/Functions";
 import { ViewEditCard } from "../../../Components/UI/Elements";
@@ -28,8 +29,10 @@ class SingleTaskWorkflowList extends Component {
       // currentStage: [],
       fields: {},
       responsible: "",
-      startDate:"",
+    //   startDate: Array(props.recruitTaskWorkflowStage.length).fill(moment(props.creationDate)),
+    // endDate: Array(props.recruitTaskWorkflowStage.length).fill(moment()),
       endDate:"",
+      startDate:"",
       candidate:[],
       selectedOptions:[],
       publish: false,
@@ -66,19 +69,20 @@ class SingleTaskWorkflowList extends Component {
   componentDidMount() {
     const { getTaskTeamList,item } = this.props;
     console.log();
-     getTaskTeamList(item.taskId);
+    //  getTaskTeamList(item.taskId);
+    this.props.getEmployeelist();
   }
   render() {
     // const startDate= 
     // const endDate= dayjs(this.state.endDate).toISOString()
 console.log("candidate",this.state.candidate)
 console.log("startDate",this.state.startDate)
-    const { recruitTaskWorkflowStages } = this.props;
+    const { recruitTaskWorkflowStage } = this.props;
     console.log("selectedOptions",this.state.selectedOptions);
-    console.log(recruitTaskWorkflowStages.taskChecklistStagelinkId);
+    console.log(recruitTaskWorkflowStage.taskChecklistStageName);
 
     const {
-        recruitTaskWorkflowStages:
+      recruitTaskWorkflowStage:
        { name,
         included,
         taskChecklistStageName,
@@ -140,6 +144,7 @@ console.log("startDate",this.state.startDate)
   {/* Start Date */}
   <div class="flex w-32 mr-3" >
     <DatePicker
+      //  defaultValue={this.state.startDate}
       placeholder="Start Date"
       onChange={this.onChangeDatePicker}
     />
@@ -148,6 +153,7 @@ console.log("startDate",this.state.startDate)
   {/* End Date */}
   <div class="flex w-32 mr-3" >
     <DatePicker
+    // defaultValue={this.state.endDate}
       placeholder="End Date"
       onChange={this.onChangeEndDatePicker}
     />
@@ -159,9 +165,9 @@ console.log("startDate",this.state.startDate)
       style={{ border: "2px solid black", }}
       mode="multiple"
       value={this.state.selectedOptions}
-      options={this.props.taskTeamList.map((option) => ({
+      options={this.props.employees.map((option) => ({
         value: option.employeeId,
-        label: option.name,
+        label: option.fullName,
       }))}
       onChange={this.handleChangeValue}
     />
@@ -173,7 +179,6 @@ console.log("startDate",this.state.startDate)
 >
   {included &&
     included.map((candidate, i) => {
-      // Check if candidate exists and has a fullName property
       if (candidate && candidate.fullName) {
         const data1 = candidate.fullName.slice(0, 2);
         console.log("datas", data1);
@@ -185,8 +190,7 @@ console.log("startDate",this.state.startDate)
           </Tooltip>
         );
       } else {
-        // Handle the case where candidate.fullName is null or undefined
-        return null; // Or display some default content
+        return null; 
       }
     })}
 </Avatar.Group>
@@ -201,7 +205,7 @@ console.log("startDate",this.state.startDate)
         dayjs(this.state.startDate).toISOString(),
         dayjs(this.state.endDate).toISOString(),
         this.props.item.taskId,
-        taskChecklistStagelinkId
+        taskChecklistStagelinkId,
       );
     }}
   >
@@ -253,15 +257,18 @@ console.log("startDate",this.state.startDate)
     );
   }
 }
-const mapStateToProps = ({ settings, auth }) => ({
-  taskTeamList:settings.taskTeamList,
+const mapStateToProps = ({ settings,employee, auth }) => ({
+  employees: employee.employees,
+  recruitTaskWorkflowStages: settings.recruitTaskWorkflowStages,
+  // taskTeamList:settings.taskTeamList,
 });
 
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
       addTaskWorkflow,
-      getTaskTeamList
+      getEmployeelist
+      // getTaskTeamList
     },
     dispatch
   );

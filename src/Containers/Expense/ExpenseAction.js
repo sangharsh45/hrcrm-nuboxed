@@ -388,3 +388,31 @@ export const handleStatusExpenseModal = (modalProps) => (dispatch) => {
     payload: modalProps,
   });
 };
+
+
+export const getExpenseStatusByExpenseId = (voucherId) => (dispatch) => {
+  dispatch({
+      type: types.GET_EXPENSE_STATUS_BY_EXPENSEID_REQUEST,
+  });
+
+  axios
+      .get(`${base_url}/task/expense/status/${voucherId}`, {
+          headers: {
+              Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+          },
+      })
+      .then((res) => {
+          console.log(res);
+          dispatch({
+              type: types.GET_EXPENSE_STATUS_BY_EXPENSEID_SUCCESS,
+              payload: res.data,
+          });
+      })
+      .catch((err) => {
+          console.log(err);
+          dispatch({
+              type: types.GET_EXPENSE_STATUS_BY_EXPENSEID_FAILURE,
+              payload: err,
+          });
+      });
+};

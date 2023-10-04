@@ -28,7 +28,7 @@ class SingleSource extends Component {
       linkedSectors,
       updatingSources,
       handleUpdateSource,
-      handleDeleteSector,
+      handleDeleteSource,
     } = this.props;
     console.log(linkedSectors);
     console.log("name", name);
@@ -43,7 +43,7 @@ class SingleSource extends Component {
                   {name}
                 </SectorName>
                 <div>
-                  {this.props.sector.editInd ? (
+                  {this.props.source.editInd ? (
                     <BorderColorIcon
                    
                       tooltipTitle="Edit"
@@ -55,7 +55,7 @@ class SingleSource extends Component {
                   &nbsp;
                   <Tooltip title="Delete">
                     <DeleteIcon
-                        onClick={() => handleDeleteSector(sourceId)}
+                        onClick={() => handleDeleteSource(sourceId)}
                       size="14px"
                       style={{
                         verticalAlign: "center",

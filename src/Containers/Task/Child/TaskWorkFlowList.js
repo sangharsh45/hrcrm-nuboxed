@@ -197,7 +197,9 @@ class TaskWorkflowList extends Component {
                     <TabPane
                       // key={i}
                       tab={
-                        <span onClick={() => this.handleProcessClick()}>
+                        <span 
+                        // onClick={() => this.handleProcessClick()}
+                        >
                           {elipsize(this.props.item.taskChecklist, 15)}
                         </span>
                       }
@@ -209,7 +211,7 @@ class TaskWorkflowList extends Component {
             
             </FlexContainer>
 
-            {this.props.recruitTaskWorkflowStages.map((recruitTaskWorkflowStages, i) => (
+            {this.props.recruitTaskWorkflowStages.map((recruitTaskWorkflowStage, i) => (
               <SingleTaskWorkflowList
                 key={i}
                 stageValue1={this.state.taskChecklistStageName}
@@ -223,7 +225,7 @@ class TaskWorkflowList extends Component {
                 handleUpdateStage={this.handleUpdateStage}
                 handleStageType={this.handleStageType}
                 // taskChecklistId={this.state.currentProcess.taskChecklistId}
-                recruitTaskWorkflowStages={recruitTaskWorkflowStages}
+                recruitTaskWorkflowStage={recruitTaskWorkflowStage}
                 organization={this.props.organization}
                
                 className="scrollbar"

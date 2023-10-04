@@ -67,7 +67,7 @@ export const sourceReducer = (state = initialState, action) => {
           ...state,
           removingSources: false,
           sources: state.sources.filter(
-            (item) => item.sectorId !== action.payload
+            (item) => item.sourceId !== action.payload
         ), 
         };
       case types.REMOVE_SOURCE_FAILURE:
@@ -87,7 +87,7 @@ export const sourceReducer = (state = initialState, action) => {
           ...state,
           updatingSources: false,
           sources: state.sources.map((sector) =>
-            sector.sectorId === action.payload.sectorId
+            sector.sourceId === action.payload.sourceId
               ? action.payload
               : sector
           ),

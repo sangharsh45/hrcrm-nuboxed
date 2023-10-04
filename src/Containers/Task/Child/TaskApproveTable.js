@@ -334,7 +334,7 @@ const TaskApproveTable = (props) => {
                               
                                   <div class="text-[0.75rem] text-cardBody font-poppins">
                                   <span>
-            {item.taskStatus === "Completed" && !item.approvedInd ? (
+            {item.filterTaskInd === true && item.approvedInd === "Pending" ? (
               <>
                 <div>
                   <Button
@@ -362,7 +362,7 @@ const TaskApproveTable = (props) => {
                   </Button>
                 </div>
               </>
-            ) : (
+            ) :  (
               <>
                 {item.approvedInd === "Approved" ? (
                   <CheckCircleOutlined

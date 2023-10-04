@@ -183,13 +183,13 @@ export const handleUpdateLeaveModal = (modalProps) => (dispatch) => {
     });
   };
 
-  export const getApprovedStatusByTaskId = (taskId) => (dispatch) => {
+  export const getLeaveStatusByLeaveId = (leaveId) => (dispatch) => {
     dispatch({
-        type: types.GET_APPROVE_STATUS_BY_TASKID_REQUEST,
+        type: types.GET_LEAVE_STATUS_BY_LEAVEID_REQUEST,
     });
 
     axios
-        .get(`${base_url}/task/approve/status/${taskId}`, {
+        .get(`${base_url}/task/leave/status/${leaveId}`, {
             headers: {
                 Authorization: "Bearer " + sessionStorage.getItem("token") || "",
             },
@@ -197,14 +197,14 @@ export const handleUpdateLeaveModal = (modalProps) => (dispatch) => {
         .then((res) => {
             console.log(res);
             dispatch({
-                type: types.GET_APPROVE_STATUS_BY_TASKID_SUCCESS,
+                type: types.GET_LEAVE_STATUS_BY_LEAVEID_SUCCESS,
                 payload: res.data,
             });
         })
         .catch((err) => {
             console.log(err);
             dispatch({
-                type: types.GET_APPROVE_STATUS_BY_TASKID_FAILURE,
+                type: types.GET_LEAVE_STATUS_BY_LEAVEID_FAILURE,
                 payload: err,
             });
         });

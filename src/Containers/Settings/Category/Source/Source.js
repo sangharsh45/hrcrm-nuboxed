@@ -6,18 +6,14 @@ import { Button, Divider, message, Input } from "antd";
 import moment from "moment";
 import { MainWrapper, FlexContainer } from "../../../../Components/UI/Layout";
 import { TextInput, Title } from "../../../../Components/UI/Elements";
-// import SingleSectors from "./SingleSector";
-import dayjs from "dayjs";
 import {
   getSources,
   addSources,
-  // removeSectors,
+  removeSource,
   updateSource
   // searchSectorName,
 } from "./SourceAction";
-import axios from "axios";
 import SingleSource from "./SingleSource";
-// import { base_url } from "../../../../Config/Auth";
 
 class Source extends Component {
   constructor(props) {
@@ -56,7 +52,7 @@ class Source extends Component {
       const { addSources, sources } = this.props;
       const { name, editInd, addingSources, isTextInputOpen } = this.state;
       let source = { name,
-        orgId: this.props.organizationId,
+        orgId: this.props.orgId,
         userId:this.props.userId,
          editInd };
     
@@ -68,7 +64,7 @@ class Source extends Component {
           "Can't create as another source type exists with the same name!"
         );
       } else {
-        addSources(source, () => console.log("add sector callback"));
+        addSources(source,this.props.orgId ,() => console.log("add sector callback"));
         this.setState({
           name: "",
           singleSource: "",
@@ -78,8 +74,8 @@ class Source extends Component {
       }
     };
     
-  handleDeleteSector = (sectorId = { sectorId }) => {
-    this.props.removeSectors(sectorId);
+  handleDeleteSource = (sourceId = { sourceId }) => {
+    this.props.removeSource(sourceId);
     this.setState({ name: "", singleSource: "" });
   };
   handleUpdateSource = (name, sourceId, editInd, cb) => {
@@ -180,7 +176,7 @@ class Source extends Component {
                       updatingSources={updatingSources}
                       handleChange={this.handleChange}
                       handleUpdateSource={this.handleUpdateSource}
-                      handleDeleteSector={this.handleDeleteSector}
+                      handleDeleteSource={this.handleDeleteSource}
                       handleClear={this.handleClear}
                       handleSearchChange={this.handleSearchChange}
                       currentData={this.state.currentData}
@@ -247,7 +243,7 @@ class Source extends Component {
       
        
         </FlexContainer>
-        {/* <h4>Updated on {moment(this.props.sectors && this.props.sectors.length && this.props.sectors[0].updationDate).format("ll")} by {this.props.sectors && this.props.sectors.length && this.props.sectors[0].name}</h4> */}
+        <h4>Updated on {moment(this.props.sources && this.props.sources.length && this.props.sources[0].updationDate).format("ll")} by {this.props.sources && this.props.sources.length && this.props.sources[0].updatedBy}</h4>
       </>
     );
   }
@@ -259,8 +255,8 @@ const mapStateToProps = ({ source,auth }) => ({
 sources: source.sources,
 orgId:auth.userDetails.organizationId,
 userId:auth.userDetails.userId,
-//   removingSectors: sector.removingSectors,
-//   removingSectorsError: sector.removingSectorsError,
+removingSources: source.removingSources,
+removingSourcesError: source.removingSourcesError,
 fetchingSources: source.fetchingSources,
 fetchingSourcesError: source.fetchingSourcesError,
 
@@ -273,7 +269,7 @@ const mapDispatchToProps = (dispatch) =>
     {
       getSources,
       addSources,
-    //   removeSectors,
+      removeSource,
       updateSource,
     //   searchSectorName,
     },
