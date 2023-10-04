@@ -12,15 +12,17 @@ import {
  } from "../../../SettingsAction";
 import { Field } from "formik";
 import { InputComponent } from "../../../../../Components/Forms/Formik/InputComponent";
+import { BundleLoader } from "../../../../../Components/Placeholder";
 const { Option } = Select;
 function MileageLevelApproveForm(props) {
     useEffect(() => {
         props.getDepartments();
     }, [])
+   
     const selectedDepartment = props.departments;
-    const [rows, setRows] = useState([
-        { level: "", threshold: "", id: 1 },
-      ]);
+    const [rows, setRows] = useState(props.approvalData.level);
+       
+    // [ { level:"", threshold: "", id: 1 }]
       const [id, setId] = useState(1);
       
       
@@ -28,7 +30,9 @@ function MileageLevelApproveForm(props) {
     // const [id, setId] = useState(1);
     const [level, setLevel] = useState(1);
     const [threshold, setThreshold] = useState(1);
-    
+    // const report=props.approvalData.level && props.approvalData.level.map((item)=>{
+    //   return item.level;
+    // })
 
     // function buttonOnClick() {
     //     const data = {
@@ -101,6 +105,10 @@ function MileageLevelApproveForm(props) {
         setLevel((v) => v - 1);
     }
     console.log(rows);
+    console.log("report",props.approvalData.level)
+    if (!props.approvalData.level) {
+      return <BundleLoader/>; 
+    }
     return (
         <div>
             <div className="MainBox">
@@ -116,8 +124,7 @@ function MileageLevelApproveForm(props) {
           <Select
             name={`level_${row.id}`}
             value={row.level}
-            // value={row.level || selectedDepartment}
-            // defaultValue="hello"
+          
             onChange={(value) => handleChangeValue(value, row.id)}
           >
                <option value="ReportingManager">Reporting Manager</option>
