@@ -70,9 +70,9 @@ function ExpenseDrawerCard(props) {
     amount:newData[index].amount,
     expenseId:newData[index].expenseId,
     particular:newData[index].particular,
-    imageId: newimageId !== "" ? newimageId.imageId  : props.setEditingUser.imageId,
+    // imageId: newimageId !== "" ? newimageId.imageId  : props.setEditingUser.imageId,
     // documentId:newimageId !== "" ? newData[index].documentId :newimageId.documentId,
-    documentId:newData[index].documentId!==newimageId.documentId ? newimageId.documentId:newData[index].documentId,
+    documentId:newimageId.documentId,
       userId:newData[index].userId,
       expenseDate:`${newData[index].expenseDate}T20:00:00Z`
     }
