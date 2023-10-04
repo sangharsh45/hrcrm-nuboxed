@@ -6,14 +6,15 @@ import StatusMileageForm from "./StatusMileageForm";
 
 
 const StatusMileageDrawer = (props) => {
-  const { updateStatusMileageModal, handleStatusMileageModal, ...formProps } = props;
+  const { updateStatusMileageModal, handleStatusMileageModal,voucherId, ...formProps } = props;
+  console.log("voucherId",voucherId);
   return (
     <>
       <StyledDrawer
         //title="Apply for Leaves"
         title={<FormattedMessage
           id="app.applyforleaves"
-          defaultMessage="Status Mileage"
+          defaultMessage="Status "
         />}
         width="30vw"
         visible={updateStatusMileageModal}
@@ -26,7 +27,7 @@ const StatusMileageDrawer = (props) => {
         footer={null}
       >
         <Suspense fallback={<BundleLoader />}>
-          <StatusMileageForm leaveId={props.leaveId} />{" "} 
+          <StatusMileageForm voucherId={voucherId} />{" "} 
         </Suspense>
       </StyledDrawer>
     </>

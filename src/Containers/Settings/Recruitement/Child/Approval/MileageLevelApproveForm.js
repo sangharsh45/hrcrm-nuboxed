@@ -17,6 +17,7 @@ function MileageLevelApproveForm(props) {
     useEffect(() => {
         props.getDepartments();
     }, [])
+    const selectedDepartment = props.departments;
     const [rows, setRows] = useState([
         { level: "", threshold: "", id: 1 },
       ]);
@@ -29,48 +30,41 @@ function MileageLevelApproveForm(props) {
     const [threshold, setThreshold] = useState(1);
     
 
-    function buttonOnClick() {
-        const data = {
-          levelCount: rows.length,
-          approvalIndicator: props.approvalIndicator,
-          approvalType: props.approvalType,
-          subProcessName: "Mileage",
-          userId:props.userId,
-        };
-      
-        rows.forEach((row, i) => {
-          data[`level${i + 1}`] = row.level;
-          // data[`threshold${i + 1}`] = row.threshold;
-        });
-      
-        console.log(data);
-        props.addApprove(data);
-      }
-      
-      
     // function buttonOnClick() {
     //     const data = {
+    //       levels:
     //       levelCount: rows.length,
-    //       levels: rows.map((row, i) => ({ [`level${i + 1}`]: row.level })),
-    //       thresholds: rows.map((row, i) => ({ [`threshold${i + 1}`]: row.threshold })),
     //       approvalIndicator: props.approvalIndicator,
     //       approvalType: props.approvalType,
     //       subProcessName: "Mileage",
+    //       userId:props.userId,
     //     };
+      
+    //     rows.forEach((row, i) => {
+    //       data[`level${i + 1}`] = row.level;
+    //        data[`threshold${i + 1}`] = row.threshold;
+    //     });
       
     //     console.log(data);
     //     props.addApprove(data);
     //   }
       
-    //     approvalIndicator: true
-    // approvalType: "Exception"
-    // designationId: "DDG49470159634152021"
-    // functionId: "FDG18460358639152021"
-    // jobLevel: "3"
-    // processName: "BOQ"
-    // reportingTo: ""
-    // subProcessName: "BOQApprove"
-    // threshold: ""
+      
+    function buttonOnClick() {
+        const data = {
+          levelCount: rows.length,
+          level: rows.map((row, i) => ({ level: row.level,threshold: row.threshold })),
+          // thresholds: rows.map((row, i) => ({ [`threshold${i + 1}`]: row.threshold })),
+          approvalIndicator: props.approvalIndicator,
+          approvalType: props.approvalType,
+          subProcessName: "Mileage",
+        };
+      
+        console.log(data);
+        props.addApprove(data);
+      }
+      
+
     function handleChangeValue(value, id) {
         setRows((prevRows) =>
           prevRows.map((row) => {
@@ -122,15 +116,20 @@ function MileageLevelApproveForm(props) {
           <Select
             name={`level_${row.id}`}
             value={row.level}
+            // value={row.level || selectedDepartment}
+            // defaultValue="hello"
             onChange={(value) => handleChangeValue(value, row.id)}
           >
-            {props.departments.map((a) => {
+               <option value="ReportingManager">Reporting Manager</option>
+                                        <option value="ReportingManager1">Reporting Manager1</option>
+                                        <option value="Management">Management</option>
+            {/* {props.departments.map((a) => {
               return (
                 <Option key={a.departmentId} value={a.departmentId}>
                   {a.departmentName}
                 </Option>
               );
-            })}
+            })} */}
           </Select>
         </div>
      
@@ -189,6 +188,7 @@ const mapStateToProps = ({ settings,auth, departments }) => ({
     departments:departments.departments,
     approvalData: settings.approvalData,
     userId:auth.userDetails.userId,
+    // selectedDepartment: settings.selectedDepartment,
 });
 
 const mapDispatchToProps = (dispatch) =>

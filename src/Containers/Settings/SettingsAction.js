@@ -3432,7 +3432,7 @@ export const getTaskForWorkflow = (taskTypeId) => (dispatch) => {
 };
 
 export const addTaskWorkflow = (included,startDate,endDate,taskId,taskChecklistStagelinkId,cb) => (dispatch) => {
-  // console.log(sectors);
+  console.log(taskId);
   dispatch({
     type: types.ADD_TASK_WORKFLOW_REQUEST,
   });
@@ -3443,7 +3443,7 @@ export const addTaskWorkflow = (included,startDate,endDate,taskId,taskChecklistS
       },
     })
     .then((res) => {
-      // dispatch(getSectors());
+       dispatch(getTaskWorkflowStagesForRecruit(taskId));
       message.success("data has been added successfully!");
       console.log(res);
       dispatch({

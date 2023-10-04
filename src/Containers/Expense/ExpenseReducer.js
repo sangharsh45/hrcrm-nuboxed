@@ -27,6 +27,10 @@ const initialState = {
   deleteExpense: false,
   deleteExpenseError: false,
 
+  fetchingExpenseStatus: false,
+  fetchingExpenseStatusError: false,
+  expenseStatus:[],
+
   documentUploadModal: false,
 
   updateStatusExpenseModal:false,
@@ -252,6 +256,22 @@ export const expenseReducer = (state = initialState, action) => {
 
               case types.HANDLE_STATUS_EXPENSE_MODAL:
                 return { ...state, updateStatusExpenseModal: action.payload };
+
+
+                case types.GET_EXPENSE_STATUS_BY_EXPENSEID_REQUEST:
+                  return { ...state, fetchingExpenseStatus: true };
+              case types.GET_EXPENSE_STATUS_BY_EXPENSEID_SUCCESS:
+                  return {
+                      ...state,
+                      fetchingExpenseStatus: false,
+                      expenseStatus: action.payload,
+                  };
+              case types.GET_EXPENSE_STATUS_BY_EXPENSEID_FAILURE:
+                  return {
+                      ...state,
+                      fetchingExpenseStatus: false,
+                      fetchingExpenseStatusError: true,
+                  };
     
       default:
   return state;

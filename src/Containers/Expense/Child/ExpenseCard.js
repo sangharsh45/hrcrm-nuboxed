@@ -132,6 +132,7 @@ function ExpenseCard(props) {
 // style={{ cursor: "pointer" }}
 onClick={() => {
 handleStatusExpenseModal(true);
+handleExpand(item.voucherId);
 
 }}
 >
@@ -175,8 +176,9 @@ style={{ color: "grey",fontSize:"1.2rem",padding:"2px" }}/>
         handleExpenseVoucherIdDrawer={handleExpenseVoucherIdDrawer}
         />
             <ExpenseStatusDrawer
-        // voucherId={voucherId} 
-        // particularRowData={particularRowData}
+        voucherId={voucherId} 
+        handleExpand={handleExpand}
+        particularRowData={particularRowData}
         updateStatusExpenseModal={updateStatusExpenseModal}
         handleStatusExpenseModal={handleStatusExpenseModal}
         />

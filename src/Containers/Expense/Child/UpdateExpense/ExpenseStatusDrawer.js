@@ -6,14 +6,14 @@ import ExpenseStatusForm from "./ExpenseStatusForm";
 
 
 const ExpenseStatusDrawer = (props) => {
-  const { updateStatusExpenseModal, handleStatusExpenseModal, ...formProps } = props;
+  const { updateStatusExpenseModal, handleStatusExpenseModal,particularRowData,voucherId, ...formProps } = props;
   return (
     <>
       <StyledDrawer
         //title="Apply for Leaves"
         title={<FormattedMessage
           id="app.applyforleaves"
-          defaultMessage="Status Leaves"
+          defaultMessage="Status"
         />}
         width="30vw"
         visible={updateStatusExpenseModal}
@@ -26,7 +26,7 @@ const ExpenseStatusDrawer = (props) => {
         footer={null}
       >
         <Suspense fallback={<BundleLoader />}>
-          <ExpenseStatusForm leaveId={props.leaveId} />{" "} 
+          <ExpenseStatusForm voucherId={voucherId} particularRowData={particularRowData} />{" "} 
         </Suspense>
       </StyledDrawer>
     </>

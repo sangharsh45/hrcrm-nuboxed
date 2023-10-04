@@ -32,6 +32,7 @@ class MileageCard extends React.Component {
     this.props.getMileageByUserId(this.props.userId);
   }
   render() {
+    console.log("voucherId",this.state.voucherId)
     const {
       MileageDat,
       fetchingMileageByUserId,
@@ -128,6 +129,7 @@ class MileageCard extends React.Component {
 
 onClick={() => {
 this.props.handleStatusMileageModal(true);
+this.handleExpand(item.voucherId)
 
 
 }}
@@ -180,7 +182,8 @@ style={{ color: "grey",fontSize:"1.2rem",padding:"2px" }}/>
 
         
 <StatusMileageDrawer 
-        voucherId={this.state.voucherId}
+handleExpand={this.handleExpand}
+         voucherId={this.state.voucherId}
         updateStatusMileageModal={this.props.updateStatusMileageModal}
         handleStatusMileageModal={this.props.handleStatusMileageModal}
         />

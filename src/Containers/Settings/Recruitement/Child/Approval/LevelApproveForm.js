@@ -18,46 +18,68 @@ function LevelApproveForm(props) {
     useEffect(() => {
         props.getDepartments();
     }, [])
-    const [rows, setRows] = useState([{ value: "", id: 1 }]);
-    const [id, setId] = useState(1);
+    const selectedDepartment = props.departments;
+    const [rows, setRows] = useState([
+        { level: "",  id: 1 },
+      ]);
+      const [id, setId] = useState(1);
+      
+      
+    const [row, setRow] = useState([{ value1: "", id: 1 }]);
+    // const [id, setId] = useState(1);
     const [level, setLevel] = useState(1);
+    const [threshold, setThreshold] = useState(1);
 
-
+    // function buttonOnClick() {
+    //     var mapped = rows.map((item, i) => ({ [`level${i + 1}`]: item.value }));
+    //     var data = Object.assign(
+    //         {},
+    //         ...mapped,
+    //         { levelCount: level },
+    //         { approvalIndicator: props.approvalIndicator },
+    //         { approvalType: props.approvalType },
+    //         // { ammendmentInd: props.ammendmentInd },
+    //         // { processName: "BOQ" },
+    //         { subProcessName: "Leave" },
+    //     );
+    //     console.log(data);
+    //      props.addApprove(data);
+    // };
     function buttonOnClick() {
-        var mapped = rows.map((item, i) => ({ [`level${i + 1}`]: item.value }));
-        var data = Object.assign(
-            {},
-            ...mapped,
-            { levelCount: level },
-            { approvalIndicator: props.approvalIndicator },
-            { approvalType: props.approvalType },
-            // { ammendmentInd: props.ammendmentInd },
-            // { processName: "BOQ" },
-            { subProcessName: "Leave" },
-        );
+        const data = {
+          levelCount: rows.length,
+          levels: rows.map((row, i) => ({ level: row.level,})),
+          // thresholds: rows.map((row, i) => ({ [`threshold${i + 1}`]: row.threshold })),
+          approvalIndicator: props.approvalIndicator,
+          approvalType: props.approvalType,
+          subProcessName: "Leave",
+        };
+      
         console.log(data);
-         props.addApprove(data);
-    };
-    //     approvalIndicator: true
-    // approvalType: "Exception"
-    // designationId: "DDG49470159634152021"
-    // functionId: "FDG18460358639152021"
-    // jobLevel: "3"
-    // processName: "BOQ"
-    // reportingTo: ""
-    // subProcessName: "BOQApprove"
-    // threshold: ""
-    function handleChangeValue(value, a) {
-        setRows((v) => {
-            return v.map((d) => {
-                if (`${d.id}_value` === a) {
-                    return { ...d, value: value };
-                } else {
-                    return d;
-                }
-            });
-        });
-    }
+        props.addApprove(data);
+      }
+      function handleChangeValue(value, id) {
+        setRows((prevRows) =>
+          prevRows.map((row) => {
+            if (row.id === id) {
+              return { ...row, level: value };
+            } else {
+              return row;
+            }
+          })
+        );
+      }
+    // function handleChangeValue(value, a) {
+    //     setRows((v) => {
+    //         return v.map((d) => {
+    //             if (`${d.id}_value` === a) {
+    //                 return { ...d, value: value };
+    //             } else {
+    //                 return d;
+    //             }
+    //         });
+    //     });
+    // }
     function handleAddRowClick() {
         setId((v) => v + 1);
         setLevel((v) => v + 1);
@@ -83,16 +105,21 @@ function LevelApproveForm(props) {
                                 </div>
                                 <div style={{ width: "47%" }}>
                                     <Select
-                                        name={`${row.id}_value`}
-                                        value={`${row.value}`}
-                                        onChange={(value) =>
-                                            handleChangeValue(value, `${row.id}_value`)
-                                        }
-                                    // placeholder={`select`}
+                                       name={`level_${row.id}`}
+                                       value={row.level}
+                                        // name={`${row.id}_value`}
+                                        // value={`${row.value}`}
+                                        onChange={(value) => handleChangeValue(value, row.id)}
+                                        // onChange={(value) =>
+                                        //     handleChangeValue(value, `${row.id}_value`)
+                                        // }
                                     >
-                                        {props.departments.map((a) => {
+                                        <option value="ReportingManager">Reporting Manager</option>
+                                        <option value="ReportingManager1">Reporting Manager1</option>
+                                        <option value="Management">Management</option>
+                                        {/* {props.departments.map((a) => {
                                             return <Option value={a.departmentId}>{a.departmentName}</Option>;
-                                        })}
+                                        })} */}
                                     </Select>
                                 </div>
                                 {rows.length > 1 && (row.id + 1 > row.id) ? (

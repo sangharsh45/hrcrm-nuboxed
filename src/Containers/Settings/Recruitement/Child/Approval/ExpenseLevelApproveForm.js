@@ -39,23 +39,36 @@ function ExpenseLevelApproveForm(props) {
     //     console.log(data);
     //      props.addApprove(data);
     // };
+    // function buttonOnClick() {
+    //     const data = {
+    //       levelCount: rows.length,
+    //       approvalIndicator: props.approvalIndicator,
+    //       approvalType: props.approvalType,
+    //       subProcessName: "Expense",
+    //       userId:props.userId,
+    //     };
+      
+    //     rows.forEach((row, i) => {
+    //       data[`level${i + 1}`] = row.level;
+    //       data[`threshold${i + 1}`] = row.threshold;
+    //     });
+      
+    //     console.log(data);
+    //     props.addApprove(data);
+    //   }
     function buttonOnClick() {
-        const data = {
-          levelCount: rows.length,
-          approvalIndicator: props.approvalIndicator,
-          approvalType: props.approvalType,
-          subProcessName: "Mileage",
-          userId:props.userId,
-        };
-      
-        rows.forEach((row, i) => {
-          data[`level${i + 1}`] = row.level;
-          data[`threshold${i + 1}`] = row.threshold;
-        });
-      
-        console.log(data);
-        props.addApprove(data);
-      }
+      const data = {
+        levelCount: rows.length,
+        levels: rows.map((row, i) => ({ level: row.level,threshold: row.threshold })),
+        // thresholds: rows.map((row, i) => ({ [`threshold${i + 1}`]: row.threshold })),
+        approvalIndicator: props.approvalIndicator,
+        approvalType: props.approvalType,
+        subProcessName: "Expense",
+      };
+    
+      console.log(data);
+      props.addApprove(data);
+    }
       function handleChangeValue(value, id) {
         setRows((prevRows) =>
           prevRows.map((row) => {
@@ -109,13 +122,16 @@ function ExpenseLevelApproveForm(props) {
             value={row.level}
             onChange={(value) => handleChangeValue(value, row.id)}
           >
-            {props.departments.map((a) => {
+            <option value="ReportingManager">Reporting Manager</option>
+                                        <option value="ReportingManager1">Reporting Manager1</option>
+                                        <option value="Management">Management</option>
+            {/* {props.departments.map((a) => {
               return (
                 <Option key={a.departmentId} value={a.departmentId}>
                   {a.departmentName}
                 </Option>
-              );
-            })}
+              ); */}
+            {/* })} */}
           </Select>
         </div>
         <div class=" w-24 ml-4">

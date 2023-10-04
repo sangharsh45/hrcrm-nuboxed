@@ -13,7 +13,7 @@ const StatusLeavesModal = (props) => {
         //title="Apply for Leaves"
         title={<FormattedMessage
           id="app.applyforleaves"
-          defaultMessage="Status Leaves"
+          defaultMessage="Status"
         />}
         width="30vw"
         visible={updateStatusLeaveModal}

@@ -23,9 +23,9 @@ const initialState = {
     updatingLeave: false,
     updatingLeaveError: false,
 
-    fetchingApproveStatus: false,
-    fetchingApproveStatusError: true,
-    approveStatus:[],
+    fetchingLeaveStatus: false,
+    fetchingLeaveStatusError: true,
+    leaveStatus:[],
 };
 
 export const LeavesReducer = (state = initialState, action) => {
@@ -131,19 +131,19 @@ export const LeavesReducer = (state = initialState, action) => {
                           return { ...state, viewType: action.payload };
 
 
-                          case types.GET_APPROVE_STATUS_BY_TASKID_REQUEST:
-                            return { ...state, fetchingApproveStatus: true };
-                        case types.GET_APPROVE_STATUS_BY_TASKID_SUCCESS:
+                          case types.GET_LEAVE_STATUS_BY_LEAVEID_REQUEST:
+                            return { ...state, fetchingLeaveStatus: true };
+                        case types.GET_LEAVE_STATUS_BY_LEAVEID_SUCCESS:
                             return {
                                 ...state,
-                                fetchingApproveStatus: false,
-                                approveStatus: action.payload,
+                                fetchingLeaveStatus: false,
+                                leaveStatus: action.payload,
                             };
-                        case types.GET_APPROVE_STATUS_BY_TASKID_FAILURE:
+                        case types.GET_LEAVE_STATUS_BY_LEAVEID_FAILURE:
                             return {
                                 ...state,
-                                fetchingApproveStatus: false,
-                                fetchingApproveStatusError: true,
+                                fetchingLeaveStatus: false,
+                                fetchingLeaveStatusError: true,
                             };
 
 

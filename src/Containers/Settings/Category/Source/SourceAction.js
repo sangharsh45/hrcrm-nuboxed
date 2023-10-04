@@ -72,13 +72,13 @@ export const addSources = (source,orgId, cb) => (dispatch) => {
   /**
  * remove a new sector
  */
-export const removeSource = ( sectorId) => (dispatch) => {
+export const removeSource = ( sourceId) => (dispatch) => {
     // console.log(typeId);
     dispatch({
       type: types.REMOVE_SOURCE_REQUEST,
     });
     axios
-      .delete(`${base_url}/sector/${sectorId}`, {
+      .delete(`${base_url}/source/${sourceId}`, {
         headers: {
           Authorization: "Bearer " + sessionStorage.getItem("token") || "",
         },
@@ -88,7 +88,7 @@ export const removeSource = ( sectorId) => (dispatch) => {
         console.log(res);
         dispatch({
           type: types.REMOVE_SOURCE_SUCCESS,
-          payload:sectorId,
+          payload:sourceId,
         });
       })
       .catch((err) => {

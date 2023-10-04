@@ -97,6 +97,7 @@ class MileageApproveForm extends Component {
                         designationTypeId: this.props.approvalData.designationTypeId || "",
                         jobLevel: this.props.approvalData.jobLevel || 1,
                         // processName: "BOQ",
+                        levelCount:"1",
                         subProcessName: "Mileage",
                         approvalType: this.props.approvalData.approvalType === "Standard" ? true : false,
                         approvalIndicator: this.props.approvalData.approvalIndicator ? true : false,
@@ -219,6 +220,7 @@ class MileageApproveForm extends Component {
                                                             options={Array.isArray(departmentNameOption) ? departmentNameOption : []}
                                                             component={SelectComponent}
                                                             value={values.departmentId}
+                                                            
                                                             placeholder
                                                             isColumn
                                                             inlineLabel
