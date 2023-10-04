@@ -147,7 +147,7 @@ class LeadDetailTab extends Component {
                 <LeadsOpportunity />
               </Suspense>
             </TabPane>
-            <TabPane
+            {/* <TabPane
               tab={
                 <>
                   <span>
@@ -162,7 +162,7 @@ class LeadDetailTab extends Component {
                   {activeKey === "2" && (
                     <>
                       &nbsp;
-                      <Tooltip //title="Create"
+                      <Tooltip 
                         title={
                           <FormattedMessage
                             id="app.create"
@@ -172,7 +172,6 @@ class LeadDetailTab extends Component {
                       >
                         <PlusOutlined
                           type="plus"
-                          //tooltipTitle="Create"
                           tooltiptitle={
                             <FormattedMessage
                               id="app.Create"
@@ -184,7 +183,6 @@ class LeadDetailTab extends Component {
                           }}
                           size="0.875em"
                         />
-                        {/* )} */}
                       </Tooltip>
                     </>
                   )}
@@ -196,7 +194,7 @@ class LeadDetailTab extends Component {
                 {" "}
                 <LeadsContact />
               </Suspense>
-            </TabPane>
+            </TabPane> */}
 
             <TabPane
               tab={
@@ -207,7 +205,6 @@ class LeadDetailTab extends Component {
                       id="app.documents"
                       defaultMessage="Documents"
                     />
-                    {/* Documents */}
                   </span>
                   {activeKey === "3" && (
                     <>
@@ -238,7 +235,7 @@ class LeadDetailTab extends Component {
               </Suspense>
             </TabPane>
 
-            <TabPane
+            {/* <TabPane
               tab={
                 <>
                   <span>
@@ -283,7 +280,8 @@ class LeadDetailTab extends Component {
               key="5"
             >
               <LeadsInitiativeForm lead={this.props.leadsId} />
-            </TabPane>
+            </TabPane> */}
+
           </StyledTabs>
         </TabsWrapper>
         <Suspense fallback={null}>

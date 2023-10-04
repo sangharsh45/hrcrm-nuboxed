@@ -881,3 +881,80 @@ export const setLeadsViewType = (viewType) => (dispatch) => {
         });
       });
   };
+
+  export const getJunkedLeads = (userId) => (dispatch) => {
+    dispatch({
+      type: types.GET_JUNKED_LEADS_REQUEST,
+    });
+    axios
+      .get(`${base_url}/leads/junked/list/${userId}`, {
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+        },
+      })
+      .then((res) => {
+        console.log(res);
+        dispatch({
+          type: types.GET_JUNKED_LEADS_SUCCESS,
+          payload: res.data,
+        });
+      })
+      .catch((err) => {
+        console.log(err.response);
+        dispatch({
+          type: types.GET_JUNKED_LEADS_FAILURE,
+          payload: err,
+        });
+      });
+  };
+  export const getLeadsRecords = (userId) => (dispatch) => {
+    dispatch({
+      type: types.GET_LEADS_RECORDS_REQUEST,
+    });
+    axios
+      .get(`${base_url}/leads/record/count/${userId}`, {
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+        },
+      })
+      .then((res) => {
+        console.log(res);
+        dispatch({
+          type: types.GET_LEADS_RECORDS_SUCCESS,
+          payload: res.data,
+        });
+      })
+      .catch((err) => {
+        console.log(err.response);
+        dispatch({
+          type: types.GET_LEADS_RECORDS_FAILURE,
+          payload: err,
+        });
+      });
+  };
+
+  export const getJunkedLeadsRecords = (userId) => (dispatch) => {
+    dispatch({
+      type: types.GET_JUNKED_LEADS_RECORDS_REQUEST,
+    });
+    axios
+      .get(`${base_url}/leads/junked/count/${userId}`, {
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+        },
+      })
+      .then((res) => {
+        console.log(res);
+        dispatch({
+          type: types.GET_JUNKED_LEADS_RECORDS_SUCCESS,
+          payload: res.data,
+        });
+      })
+      .catch((err) => {
+        console.log(err.response);
+        dispatch({
+          type: types.GET_JUNKED_LEADS_RECORDS_FAILURE,
+          payload: err,
+        });
+      });
+  };

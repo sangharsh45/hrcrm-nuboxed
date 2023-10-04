@@ -8,7 +8,7 @@ import LeadsTable from "./Child/LeadsTable/LeadsTable";
 import {getLeads} from "../Leads/LeadsAction"
 import { setLeadsViewType, handleLeadsModal, getEmployeelist, } from "./LeadsAction";
 const LeadsCardList = lazy(()=>import("./Child/LeadsTable/LeadsCardList"));
-
+const LeadsJunkList=lazy(()=>import ("./Child/LeadsTable/LeadsJunkList"));
 class Leads extends Component {
 
   state = { currentData: "",currentUser:"" };
@@ -55,7 +55,11 @@ class Leads extends Component {
        
         {/* <LeadsTable/>  */}
         <Suspense fallback={<BundleLoader />}>
-        <LeadsCardList/>
+          {viewType==="card" ? (
+ <LeadsCardList/>
+          ):viewType==="list" ? (<LeadsJunkList/>)
+        :null}
+       
         </Suspense>
  
       </React.Fragment>

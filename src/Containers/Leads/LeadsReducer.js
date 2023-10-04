@@ -1,7 +1,7 @@
 import * as types from "./LeadsActionTypes";
 import dayjs from "dayjs"; 
 const initialState = {
-  viewType: "table",
+  viewType: "card",
 
   addLeadsModal:false,
 
@@ -125,6 +125,16 @@ const initialState = {
 
   updateTypeLeads: false,
   updateTypeLeadsError:false,
+
+  fetchingJunkedLeads: false,
+  fetchingJunkedLeadsError: false,
+  junkedLeadsData:[],
+  fetchingLeadsRecords: false,
+  fetchingLeadsRecordsError: false,
+  leadsCountData:[],
+  fetchingJunkedLeadsRecords: false,
+  fetchingJunkedLeadsRecordsError: false,
+  leadsCountJunked:[],
 };
 export const leadsReducer = (state = initialState, action) => {
     switch (action.type) {
@@ -637,6 +647,50 @@ case types.HANDLE_LEADS_MODAL:
           case types.UPDATE_TYPE_FOR_LEAD_FAILURE:
             return { ...state, updateTypeLeads: false,updateTypeLeadsError:true, };
 
+            case types.GET_JUNKED_LEADS_REQUEST:
+              return { ...state, fetchingJunkedLeads: true };
+            case types.GET_JUNKED_LEADS_SUCCESS:
+              return {
+                ...state,
+                fetchingJunkedLeads: false,
+                junkedLeadsData: action.payload,
+              };
+            case types.GET_JUNKED_LEADS_FAILURE:
+              return {
+                ...state,
+                fetchingJunkedLeads: false,
+                fetchingJunkedLeadsError: true,
+              }; 
+
+              case types.GET_LEADS_RECORDS_REQUEST:
+                return { ...state, fetchingLeadsRecords: true };
+              case types.GET_LEADS_RECORDS_SUCCESS:
+                return {
+                  ...state,
+                  fetchingLeadsRecords: false,
+                  leadsCountData: action.payload,
+                };
+              case types.GET_LEADS_RECORDS_FAILURE:
+                return {
+                  ...state,
+                  fetchingLeadsRecords: false,
+                  fetchingLeadsRecordsError: true,
+                };
+
+                case types.GET_JUNKED_LEADS_RECORDS_REQUEST:
+                return { ...state, fetchingJunkedLeadsRecords: true };
+              case types.GET_JUNKED_LEADS_RECORDS_SUCCESS:
+                return {
+                  ...state,
+                  fetchingJunkedLeadsRecords: false,
+                  leadsCountJunked: action.payload,
+                };
+              case types.GET_JUNKED_LEADS_RECORDS_FAILURE:
+                return {
+                  ...state,
+                  fetchingJunkedLeadsRecords: false,
+                  fetchingJunkedLeadsRecordsError: true,
+                };
 default:
 return state;
 }
