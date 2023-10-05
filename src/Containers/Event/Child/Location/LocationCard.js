@@ -60,7 +60,6 @@ Production
 <div class=" font-normal text-sm text-cardBody font-poppins">
   <Switch className="toggle-clr"
                         checked={item.productionInd}
-                        // disabled={props.status}
                         isLoading={true}
                         checkedChildren="Yes"
                         unCheckedChildren="No"
@@ -76,7 +75,6 @@ Inventory
 <div class=" font-normal text-sm text-cardBody font-poppins">
 <Switch className="toggle-clr"
                         checked={item.inventoryInd}
-                        // disabled={props.status}
                         isLoading={true}
                         checkedChildren="Yes"
                         unCheckedChildren="No"
@@ -91,7 +89,6 @@ Billing
 <div class=" font-normal text-sm text-cardBody font-poppins">
   <Switch className="toggle-clr"
                         checked={item.billingInd}
-                        // disabled={props.status}
                         isLoading={true}
                         checkedChildren="Yes"
                         unCheckedChildren="No"
@@ -106,7 +103,6 @@ Corporate
 <div class=" font-normal text-sm text-cardBody font-poppins">
   <Switch className="toggle-clr"
                         checked={item.corporateInd}
-                        // disabled={props.status}
                         isLoading={true}
                         checkedChildren="Yes"
                         unCheckedChildren="No"
@@ -121,7 +117,6 @@ Project
 <div class=" font-normal text-sm text-cardBody font-poppins">
   <Switch className="toggle-clr"
                         checked={item.projectInd}
-                        // disabled={props.status}
                         isLoading={true}
                         checkedChildren="Yes"
                         unCheckedChildren="No"
@@ -136,7 +131,6 @@ Retail
 <div class=" font-normal text-sm text-cardBody font-poppins">
   <Switch className="toggle-clr"
                         checked={item.retailInd}
-                        // disabled={props.status}
                         isLoading={true}
                         checkedChildren="Yes"
                         unCheckedChildren="No"
