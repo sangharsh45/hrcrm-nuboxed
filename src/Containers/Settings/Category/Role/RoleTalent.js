@@ -56,7 +56,7 @@ class RoleTalent extends Component {
 
     if (exist) {
       message.error(
-        "Can't create as another roleType exists with same name!"
+        "Can't create as same Role exists!"
       );
     } else {
         addTalentRoles(role, () => console.log("add role callback"));
