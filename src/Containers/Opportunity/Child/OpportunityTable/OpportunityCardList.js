@@ -164,9 +164,11 @@ title={`${item.opportunityName}`}>
 {item.opportunityName}
 </Link>
           </div> 
-            
-
-            {item.customer && (
+          </FlexContainer>
+        </FlexContainer>
+        <div className="flex justify-around">
+          <div>
+          {item.customer && (
               <SubTitle
                 overflow="hidden"
                 textOverflow="ellipsis"
@@ -181,15 +183,13 @@ title={`${item.opportunityName}`}>
                 {item.customer || ""}
               </SubTitle>
             )}
-          </FlexContainer>
-        </FlexContainer>
-        <div className="flex justify-around">
+          </div>
           <div>
           <SubTitle
             style={{
               fontWeight: 500,
               fontSize: "0.9375em",
-              marginTop: "-0.37em",
+              // marginTop: "-0.37em",
               marginBottom: "-0.18em",
             }}
           >
@@ -199,10 +199,8 @@ title={`${item.opportunityName}`}>
             &nbsp;{  item.proposalAmount || ""}
           </SubTitle>
           </div>
-        <div>   
-{item.Customer}
-
-        </div>
+          </div>
+          <div className="flex justify-around">      
 <div>
 <span>
 <Dropdown
@@ -259,7 +257,6 @@ width={30}
 </Dropdown>
 </span>
 </div>
-<div>
 <span>
 <MultiAvatar2
 primaryTitle={item.assignedTo}
@@ -267,107 +264,8 @@ imgWidth={"1.8em"}
 imgHeight={"1.8em"}
 />
 </span>
-  </div>
         </div>
-        <FlexContainer
-          style={{
-            width: "100%",
-            paddingLeft: "0.5rem",
-            justifyContent: "space-evenly",
-            marginTop: "-0.62em",
-            marginBottom: "0.31em",
-          }}
-        >
-
-          <Tooltip
-          placement="right"
-          title={
-            <FormattedMessage
-              id="app.edit"
-              defaultMessage="Edit"
-            />
-          }
-        >
-            {user.opportunityUpdateInd ===true && (
-              
-            <span
-              style={{ cursor: "pointer", color: "blue" }}
-              onClick={() => {
-                props.setEditOpportunity(item);
-                handleUpdateOpportunityModal(true);
-                handleSetCurrentOpportunityId(item);
-              }}
-            >
-                 <BorderColorIcon  style={{fontSize:"0.8rem" }}/>
-              </span>
-           )}
-          </Tooltip>
-         
-            <>
-              <div>
-               
-               
-                <StyledPopconfirm
-            title="Do you want to delete?"
-            onConfirm={() => deleteOpportunityData(item.opportunityId)}
-          >
-           
-             {user.opportunityDeleteInd ===true && (
-            <DeleteIcon
-            type="delete" style={{ cursor: "pointer", color: "red",fontSize:"0.8rem"  }} />
-             )}
-          </StyledPopconfirm>
-
-              </div>
-            </>
     
-
-          {/* <div style={{ marginTop: "4%" }}>
-           
-          <Tooltip title='Click to Close'>
-         
-         <span
-          onClick={() => {
-           props.LinkClosedOpportunity(
-             item.opportunityId,
-             {
-               closeInd:true,
-             }
-             //props.handleCallback           
-           );         
-         }}         
-           style={{            
-             fontSize: "0.9em",
-             cursor: "pointer",
-           }}
-         >
-           <LockOpenIcon  style={{fontSize:"0.8rem" }}/>
-            </span>
-     </Tooltip> 
-     &nbsp;
-     <span
-         
-            style={{ cursor: "pointer" }}
-            onClick={() => {
-             props.getAllRecruitmentByOppId(item.opportunityId );
-                          props.getAllRecruitmentPositionByOppId(item.opportunityId );
-                        props.getAllRecruitmentAvgTimeByOppId(item.opportunityId );
-                        props.getAllRecruitmentPositionFilledByOppId(item.opportunityId );
-                        props.getAllRecruitmentDetailsByOppId(item.opportunityId)
-                        props.handleOpportunityDrawerModal(true);
-                        props.getOpportunitySKill(item.oppInnitiative)
-                        props.getOpportunityInitiativeSKillDetails(item.opportunityId)
-                        props.getOpportunityForecast(item.opportunityId)
-                        handleSetCurrentOpportunityId(item);
-                        // handleSetOpportunityId(item.opportunityId)
-                        handleSetCurrentItem(item);
-            }}
-            >{user.pulseAccessInd ===true && ( 
-              <MonitorHeartIcon style={{fontSize:"0.8rem"  ,color: "#df9697"}}/>
-               )}
-            </span>
-          </div> */}
-        </FlexContainer>
         <FlexContainer
           style={{ width: "100%", paddingLeft: "0.5em", marginTop: "-0.18em" }}
         >
@@ -470,8 +368,43 @@ imgHeight={"1.8em"}
   </Tooltip>
 </>
 )}
+</div>
+{/* <div>
+<Tooltip
+          placement="right"
+          title={
+            <FormattedMessage
+              id="app.edit"
+              defaultMessage="Edit"
+            />
+          }
+        >
+            {user.opportunityUpdateInd ===true && (
+              
+            <span
+              style={{ cursor: "pointer", color: "blue" }}
+              onClick={() => {
+                props.setEditOpportunity(item);
+                handleUpdateOpportunityModal(true);
+                handleSetCurrentOpportunityId(item);
+              }}
+            >
+                 <BorderColorIcon  style={{fontSize:"0.8rem" }}/>
+              </span>
+           )}
+          </Tooltip>
+          <StyledPopconfirm
+            title="Do you want to delete?"
+            onConfirm={() => deleteOpportunityData(item.opportunityId)}
+          >
+           
+             {user.opportunityDeleteInd ===true && (
+            <DeleteIcon
+            type="delete" style={{ cursor: "pointer", color: "red",fontSize:"0.8rem"  }} />
+             )}
+          </StyledPopconfirm>
 
-              </div>
+              </div> */}
             </FlexContainer>
    
            
