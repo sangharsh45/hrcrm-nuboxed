@@ -61,13 +61,13 @@ class Designation extends Component {
     designations &&
     designations.some((element) => element.designationType == designationType);
 
-    if (exist) {
-      message.error(
-        "Can't create as another designation type exists with same name!"
-      );
-    } else {
+    // if (exist) {
+    //   message.error(
+    //     "Can't create as another designation type exists with same name!"
+    //   );
+    // } else {
       addDesignations(designation, () => console.log("add designation callback"));
-    }
+    // }
 
     this.setState({
       designationType: "",
