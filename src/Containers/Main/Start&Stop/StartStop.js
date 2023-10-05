@@ -72,53 +72,89 @@ import { bindActionCreators } from "redux";
 import { addAttendence,
   getAttendanceList
  } from "../../Customer/CustomerAction";
+ import { BundleLoader } from "../../../Components/Placeholder";
 
 function StartStop(props) {
+
+
+
+
+const [isLoading, setIsLoading] = useState(true)
+
+ const [startInd, setStartInd] = useState(props.attendanceByList.startInd);
+
+  const handleClick = () => {
+    if (startInd) {
+      setStartInd(startInd);
+      let data={
+        userId: props.userId,
+        startInd:false,
+      }
+      props.addAttendence(data,props.userId);
+      console.log('startInd=false');
+    } else {
+      setStartInd(startInd);
+      let data={
+        userId: props.userId,
+        startInd:true,
+      }
+      props.addAttendence(data,props.userId);
+      console.log('startInd=true');
+    }
+  };
   useEffect(() => {
     props.getAttendanceList(props.userId);
- }, []);
- useEffect(() => {
-
-}, [props.attendanceByList]);
-  const [state, setState] = useState(props.attendanceByList);
-
-  const toggle = () => {
-    if (state) {
-
-      let data = {
-        userId: props.userId,
-        startInd: false, 
-      };
-      props.addAttendence(data,props.userId);
-    } else {
-
-      let data = {
-        userId: props.userId,
-        startInd: true, 
-      };
-      props.addAttendence(data,props.userId);
+ }, [props.userId]);
+  useEffect(() => {
+    
+    if (props.attendanceByList.startInd) {
+      setStartInd(props.attendanceByList.startInd);
+      setIsLoading(false);
     }
+  }, [props.attendanceByList.startInd]);
+//  useEffect(() => {
 
-    setState(!state);
-  };
+// }, [props.attendanceByList]);
+//   const [state, setState] = useState(props.attendanceByList);
 
+
+
+  // const toggle = () => {
+  //   if (state) {
+
+  //     let data = {
+  //       userId: props.userId,
+  //       startInd: false, 
+  //     };
+  //     props.addAttendence(data,props.userId);
+  //   } else {
+
+  //     let data = {
+  //       userId: props.userId,
+  //       startInd: true, 
+  //     };
+  //     props.addAttendence(data,props.userId);
+  //   }
+
+  //   setState(!state);
+  // };
+  // if (isLoading) {
+  //   return <BundleLoader/>;
+  // }
+  console.log("startInd",startInd)
   return (
     <div>
-      <Popconfirm
+      {/* <Popconfirm
         title="Are you sure you want to start/stop?"
         onConfirm={toggle}
         onCancel={toggle} // Add onCancel handler to handle the cancel action
         okText="Yes"
         cancelText="No"
-      >
-        <Button
-          type="primary"
-          htmlType="submit"
-          style={{ backgroundColor: state ? "#ff7158bf"  : "#77dd77" }}
-        >
-          {state?"Stop"   :"Start" }
-        </Button>
-      </Popconfirm>
+      > */}
+       <button onClick={handleClick}>
+        {startInd ? 'Stop' : 'Start'}
+      </button>
+      {/* </Popconfirm> */}
     </div>
   );
 }

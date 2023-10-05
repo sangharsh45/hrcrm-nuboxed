@@ -82,9 +82,9 @@ class Department extends Component {
   
     let exist = roles && roles.some((element) => element.roleType == roleType);
   
-    if (exist) {
-      message.error("Can't create as same Role exists!");
-    } else {
+    // if (exist) {
+    //   message.error("Can't create as same Role exists!");
+    // } else {
       addRoles(role, () => console.log("add role callback"));
       this.setState({
         roleType: "",
@@ -95,7 +95,7 @@ class Department extends Component {
         editInd: true,
         error: "", // Clear the error message when successfully adding a role
       });
-    }
+    // }
   };
   
 
@@ -164,6 +164,7 @@ class Department extends Component {
     // getRoles();
   }
   render() {
+    console.log("departmentId",this.state.departmentId)
     const {
       fetchingRoles,
       fetchingRolesError,
@@ -238,6 +239,7 @@ class Department extends Component {
                       handleChange={this.handleChange}
                       handleUpdateRole={this.handleUpdateRole}
                       departments={this.props.departments}
+                      departmentId={this.state.departmentId}
                       handleDepartment={this.handleDepartment}
                       handleClear={this.handleClear}
                       handleSearchChange={this.handleSearchChange}
