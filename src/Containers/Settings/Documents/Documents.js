@@ -4,6 +4,7 @@ import { bindActionCreators } from "redux";
 import { FormattedMessage } from "react-intl";
 import moment from "moment";
 import { Button, Divider, message,Input } from "antd";
+import { BundleLoader } from "../../../Components/Placeholder";
 import { MainWrapper, FlexContainer } from "../../../Components/UI/Layout";
 import { TextInput, Title } from "../../../Components/UI/Elements";
 import SingleDocuments from "./Child/SingleDocuments";
@@ -59,13 +60,13 @@ class Documents extends Component {
       documents &&
       documents.some((element) => element.documentTypeName == documentTypeName);
 
-    if (exist) {
-      message.error(
-        "Can't create as another documentTypeName exists with same name!"
-      );
-    } else {
+    // if (exist) {
+    //   message.error(
+    //     "Can't create as another documentTypeName exists with same name!"
+    //   );
+    // } else {
       addDocuments(document, () => console.log("add document callback"));
-    }
+    // }
 
     this.setState({
       documentTypeName: "",
@@ -101,7 +102,7 @@ class Documents extends Component {
       singleDocument,
       linkedDocuments,
     } = this.state;
-    if (fetchingDocuments) return <p>Loading ...</p>;
+    if (fetchingDocuments) return <BundleLoader/>;
     if (fetchingDocumentsError) return <p>Error ...</p>;
     return (
       <>

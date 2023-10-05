@@ -48,7 +48,10 @@ export const addDesignations = (designation, cb) => (dispatch) => {
         },
       })
       .then((res) => {
-        message.success("Designation has been added successfully!");
+        {res.data.message?  
+          message.success(res.data.message):
+         message.success("Designation has been added successfully!");
+        }
         dispatch(getDesignations());
         console.log(res);
         dispatch({

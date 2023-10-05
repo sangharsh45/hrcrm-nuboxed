@@ -4,6 +4,7 @@ import { bindActionCreators } from "redux";
 import { FormattedMessage } from "react-intl";
 import { Button, Divider, message, Input } from "antd";
 import moment from "moment";
+import { BundleLoader } from "../../../../Components/Placeholder";
 import { MainWrapper, FlexContainer } from "../../../../Components/UI/Layout";
 import { TextInput, Title } from "../../../../Components/UI/Elements";
 import {
@@ -59,11 +60,11 @@ class Source extends Component {
       let exist =
       sources && sources.some((element) => element.name === name);
     
-      if (exist) {
-        message.error(
-          "Can't create as another source type exists with the same name!"
-        );
-      } else {
+      // if (exist) {
+      //   message.error(
+      //     "Can't create as another source type exists with the same name!"
+      //   );
+      // } else {
         addSources(source,this.props.orgId ,() => console.log("add sector callback"));
         this.setState({
           name: "",
@@ -71,7 +72,7 @@ class Source extends Component {
           isTextInputOpen: false,
           editInd: true,
         });
-      }
+      // }
     };
     
   handleDeleteSource = (sourceId = { sourceId }) => {
@@ -118,7 +119,7 @@ class Source extends Component {
       singleSource,
       linkedSectors,
     } = this.state;
-    if (fetchingSources) return <p>Loading ...</p>;
+    if (fetchingSources) return <BundleLoader/>;
     //if (fetchingSectorsError) return <p>We are unable to load data</p>;
     return (
       <>

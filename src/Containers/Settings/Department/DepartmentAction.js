@@ -48,7 +48,10 @@ export const addDepartments = (departments, cb) => (dispatch) => {
       },
     })
     .then((res) => {
+      {res.data.message?  
+        message.success(res.data.message):
       message.success("Department has been added successfully!");
+      }
       dispatch(getDepartments());
       console.log(res);
       dispatch({

@@ -6,6 +6,7 @@ import { Button, Divider, message,Input } from "antd";
 import { MainWrapper, FlexContainer } from "../../../Components/UI/Layout";
 import { TextInput, Title } from "../../../Components/UI/Elements";
 import SingleIdProof from "./SingleIdProof";
+import { BundleLoader } from "../../../Components/Placeholder";
 import {
   getIdProofs,
   addIdProofs,
@@ -57,13 +58,13 @@ class IdProofs extends Component {
     idProofs &&
     idProofs.some((element) => element.IdProofType == IdProofType);
 
-    if (exist) {
-      message.error(
-        "Can't create as another idProof type exists with same name!"
-      );
-    } else {
+    // if (exist) {
+    //   message.error(
+    //     "Can't create as another idProof type exists with same name!"
+    //   );
+    // } else {
       addIdProofs(idProof, () => console.log("add idProof callback"));
-    }
+    // }
 
     this.setState({
       IdProofType: "",
@@ -100,7 +101,7 @@ class IdProofs extends Component {
       singleIdProof,
       linkedIdProofs,
     } = this.state;
-    // if (fetchingIdProofs) return <p>Loading ...</p>;
+     if (fetchingIdProofs) return <BundleLoader/>;
     // if (fetchingIdProofsError) return <p>We are unable to load data</p>;
     return (
       <>

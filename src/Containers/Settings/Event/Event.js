@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { FormattedMessage } from "react-intl";
 import { bindActionCreators } from "redux";
 import { Button, Divider, message,Input } from "antd";
+import { BundleLoader } from "../../../Components/Placeholder";
 import { MainWrapper, FlexContainer } from "../../../Components/UI/Layout";
 import { TextInput, Title } from "../../../Components/UI/Elements";
 import SingleEvent from "./SingleEvent";
@@ -46,13 +47,13 @@ class Event extends Component {
     events &&
     events.some((element) => element.eventType == eventType);
 
-    if (exist) {
-      message.error(
-        "Can't create as another event type exists with same name!"
-      );
-    } else {
+    // if (exist) {
+    //   message.error(
+    //     "Can't create as another event type exists with same name!"
+    //   );
+    // } else {
       addEvents(event, () => console.log("add event callback"));
-    }
+    // }
 
     this.setState({
         eventType: "",
@@ -118,7 +119,7 @@ class Event extends Component {
       singleEvent,
       linkedEvents,
     } = this.state;
-    if (fetchingEvents) return <p>Loading ...</p>;
+    if (fetchingEvents) return <BundleLoader/>;
     if (fetchingEventsError) return <p>Error ...</p>;
     return (
       <>

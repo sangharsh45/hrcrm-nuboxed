@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { FormattedMessage } from "react-intl";
 import { Button, Divider, message,Input } from "antd";
+import { BundleLoader } from "../../../Components/Placeholder";
 import { MainWrapper, FlexContainer } from "../../../Components/UI/Layout";
 import { TextInput, Title } from "../../../Components/UI/Elements";
 import SingleDesignation from "./Child/SingleDesignation";
@@ -118,7 +119,7 @@ class Designation extends Component {
       singleDesignation,
       linkedDesignations,
     } = this.state;
-    if (fetchingDesignations) return <p>Loading ...</p>;
+    if (fetchingDesignations) return <BundleLoader/>;
     if (fetchingDesignationsError) return <p>We are unable to load data</p>;
     return (
       <>

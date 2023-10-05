@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { FormattedMessage } from "react-intl";
 import { Button, Divider, message ,Input} from "antd";
+import { BundleLoader } from "../../../Components/Placeholder";
 import { MainWrapper, FlexContainer } from "../../../Components/UI/Layout";
 import { TextInput, Title } from "../../../Components/UI/Elements";
 import SingleTasks from "./SingleTasks";
@@ -69,13 +70,13 @@ class Task extends Component {
     tasks &&
     tasks.some((element) => element.taskType == taskType);
 
-    if (exist) {
-      message.error(
-        "Can't create as another task type exists with same name!"
-      );
-    } else {
+    // if (exist) {
+    //   message.error(
+    //     "Can't create as another task type exists with same name!"
+    //   );
+    // } else {
       addTasks(task, () => console.log("add task callback"));
-    }
+    // }
 
     this.setState({
       taskType: "",
@@ -128,7 +129,7 @@ class Task extends Component {
       singleTask,
       linkedTasks,
     } = this.state;
-    if (fetchingTasks) return <p>Loading ...</p>;
+    if (fetchingTasks) return <BundleLoader/>;
     if (fetchingTasksError) return <p>We are unable to load data</p>;
     return (
       <>
