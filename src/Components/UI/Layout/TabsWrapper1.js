@@ -10,7 +10,7 @@ color: ${props => props.theme.color};
 margin: 0.3rem;
 width:98%; 
 padding: 0.3rem;
-height:17rem;
+height:13rem;
 /* overflow: auto; */
 `;
 export default TabsWrapper1;
