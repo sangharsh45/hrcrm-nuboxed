@@ -219,6 +219,12 @@ const initialState = {
   fetchingJumpstartBulb: false,
   fetchingJumpstartBulbError: false,
   jumpstartBulbCount: [],
+  fetchingJumpstartBulb2: false,
+  fetchingJumpstartBulb2Error: false,
+  jumpstartBulb2Count: [],
+  fetchingJumpstartBulb3: false,
+  fetchingJumpstartBulb3Error: false,
+  jumpstartBulb3Count: [],
 
   dateRangeList: [
     {
@@ -913,8 +919,34 @@ export const dashboardReducer = (state = initialState, action) => {
                                                               fetchingJumpstartBulb: false,
                                                               fetchingJumpstartBulbError: true };
     
-
-
+                                                              case types.GET_JUMPSTART_BULB2_REQUEST:
+                                                                return { ...state, fetchingJumpstartBulb2: true,
+                                                                  fetchingJumpstartBulb2Error: false };
+                                                              case types.GET_JUMPSTART_BULB2_SUCCESS:
+                                                                return {
+                                                                  ...state,
+                                                                  fetchingJumpstartBulb2: false,
+                                                                  fetchingJumpstartBulb2Error: false,
+                                                                  jumpstartBulb2Count: action.payload,
+                                                                };
+                                                              case types.GET_JUMPSTART_BULB2_FAILURE:
+                                                                return { ...state,
+                                                                  fetchingJumpstartBulb2: false,
+                                                                  fetchingJumpstartBulb2Error: true };
+  case types.GET_JUMPSTART_BULB3_REQUEST:
+                                                                return { ...state, fetchingJumpstartBulb3: true,
+                                                                  fetchingJumpstartBulb3Error: false };
+                                                              case types.GET_JUMPSTART_BULB3_SUCCESS:
+                                                                return {
+                                                                  ...state,
+                                                                  fetchingJumpstartBulb3: false,
+                                                                  fetchingJumpstartBulb3Error: false,
+                                                                  jumpstartBulb3Count: action.payload,
+                                                                };
+                                                              case types.GET_JUMPSTART_BULB3_FAILURE:
+                                                                return { ...state,
+                                                                  fetchingJumpstartBulb3: false,
+                                                                  fetchingJumpstartBulb3Error: true };
     default:
         return state;
     }
