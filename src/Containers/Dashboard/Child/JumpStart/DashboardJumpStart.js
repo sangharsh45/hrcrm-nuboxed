@@ -69,6 +69,7 @@ componentDidMount() {
 // }, [props.startDate, props.endDate, props.type]);
   
 render() {
+  const formattedDate = moment(this.props.dateOfJoining).format('YYYY-MM-DD'); // Format the date as per your requirement
   const { showDatelist, fetchingDatewiseReport } = this.props;
   console.log( this.props.taskperCount)
    const startDate = `${this.state.startDate.format("YYYY-MM-DD")}T20:00:00Z`
@@ -144,13 +145,15 @@ render() {
             noProgress
             title="Joining Date"
            // bgColor="linear-gradient(270deg, #3066BE 0%, #005075 100%);"
-            
+           value={formattedDate}
             // value={this.props.showDatelist.onboarded}
-            value={
-              this.props.user.department === "Recruiter"
-              ?this.props.showDatelist.onboarded
-              :this.props.showSalesDatelist.onboarded
-            }
+            // value={
+            //   this.props.dateOfJoining
+
+            //   // this.props.user.department === "Recruiter"
+            //   // ?this.props.showDatelist.onboarded
+            //   // :this.props.showSalesDatelist.onboarded
+            // }
             
             // isLoading={this.props.fetchingDatewiseReport}
             isLoading={
@@ -224,6 +227,7 @@ const mapStateToProps = ({ dashboard,auth }) => ({
   recruiterId:auth.userDetails.userId,
   fetchingTaskper:dashboard.fetchingTaskper,
   userId: auth.userDetails.employeeId,
+  dateOfJoining: auth.userDetails && auth.userDetails.dateOfJoining,
   // endDate: dashboard.endDate,
   // startDate: dashboard.startDate,
   taskperCount:dashboard.taskperCount,

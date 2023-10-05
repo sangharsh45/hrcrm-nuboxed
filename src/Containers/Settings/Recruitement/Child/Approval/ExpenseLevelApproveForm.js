@@ -1,27 +1,33 @@
 import React, { useEffect, useState } from "react";
 import { Button, Select } from "antd";
-// import "antd/dist/antd.css";
 import { CloseOutlined } from "@ant-design/icons";
 import { getDepartments } from "../../../Department/DepartmentAction";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-// import { FlexContainer } from "../../../../../Components/UI/Elements";
 import { 
     addApprove, 
     getApproveData
  } from "../../../SettingsAction";
-import { Field } from "formik";
-import { InputComponent } from "../../../../../Components/Forms/Formik/InputComponent";
+import { BundleLoader } from "../../../../../Components/Placeholder";
 const { Option } = Select;
 function ExpenseLevelApproveForm(props) {
     useEffect(() => {
         props.getDepartments();
     }, [])
-    const [rows, setRows] = useState([
-        { level: "", threshold: "", id: 1 },
-      ]);
+    // const [rows, setRows] = useState([
+    //     { level: "", threshold: "", id: 1 },
+    //   ]);
+    const [rows, setRows] = useState(props.approvalData.level || []);
+    const [isLoading, setIsLoading] = useState(true)
       const [id, setId] = useState(1);
     const [level, setLevel] = useState(1);
+    useEffect(() => {
+      // Once approvalData.level is available, set rows and update isLoading
+      if (props.approvalData.level) {
+        setRows(props.approvalData.level);
+        setIsLoading(false);
+      }
+    }, [props.approvalData.level]);
 
 
     // function buttonOnClick() {
@@ -59,7 +65,7 @@ function ExpenseLevelApproveForm(props) {
     function buttonOnClick() {
       const data = {
         levelCount: rows.length,
-        levels: rows.map((row, i) => ({ level: row.level,threshold: row.threshold })),
+        level: rows.map((row, i) => ({ level: row.level,threshold: row.threshold })),
         // thresholds: rows.map((row, i) => ({ [`threshold${i + 1}`]: row.threshold })),
         approvalIndicator: props.approvalIndicator,
         approvalType: props.approvalType,
@@ -69,111 +75,99 @@ function ExpenseLevelApproveForm(props) {
       console.log(data);
       props.addApprove(data);
     }
-      function handleChangeValue(value, id) {
-        setRows((prevRows) =>
-          prevRows.map((row) => {
-            if (row.id === id) {
-              return { ...row, level: value };
-            } else {
-              return row;
-            }
-          })
-        );
-      }
+ 
+    function handleChangeValue(value, index) {
+      setRows((prevRows) =>
+        prevRows.map((row, i) => {
+          if (i === index) {
+            return { ...row, level: value };
+          }
+          return row;
+        })
+      );
+    }
       
-      function handleChangeValue1(value, id) {
-        setRows((prevRows) =>
-          prevRows.map((row) => {
-            if (row.id === id) {
-              return { ...row, threshold: value };
-            } else {
-              return row;
-            }
-          })
-        );
-      }
+    function handleChangeValue1(value, index) {
+      setRows((prevRows) =>
+        prevRows.map((row, i) => {
+          if (i === index) {
+            return { ...row, threshold: value };
+          }
+          return row;
+        })
+      );
+    }
       
     function handleAddRowClick() {
-        setId((v) => v + 1);
-        setLevel((v) => v + 1);
-        setRows((v) => [...v, { value: "", id: id + 1 }]);
-
+      const newRow = { level: "", threshold: "" };
+      setRows((prevRows) => [...prevRows, newRow]);
     }
 
-    function handleDelete(row) {
-        setRows((v) => v.filter((d) => d.id !== row.id));
-        setLevel((v) => v - 1);
+    function handleDelete(index) {
+      setRows((prevRows) =>
+        prevRows.filter((_, i) => i !== index)
+      );
+    }
+    if (isLoading) {
+      return <BundleLoader />;
     }
     console.log(rows);
     return (
         <div>
             <div className="MainBox">
                 <div className="InputBox">
-                {rows.map((row, i) => {
-  return (
-    <div key={row.id}>
-           <div className="w-full flex font-bold mt-4">
-           <div class=" w-20">
-          <p>{`Level ${i + 1}`}</p>
-        </div>
-        <div style={{ width: "47%" }}>
-          <Select
-            name={`level_${row.id}`}
-            value={row.level}
-            onChange={(value) => handleChangeValue(value, row.id)}
-          >
-            <option value="ReportingManager">Reporting Manager</option>
-                                        <option value="ReportingManager1">Reporting Manager1</option>
-                                        <option value="Management">Management</option>
-            {/* {props.departments.map((a) => {
-              return (
-                <Option key={a.departmentId} value={a.departmentId}>
-                  {a.departmentName}
-                </Option>
-              ); */}
-            {/* })} */}
-          </Select>
-        </div>
-        <div class=" w-24 ml-4">
-          <p>Threshold </p>
-        </div>
-        <div style={{ width: "47%" }}>
-          <input
-            style={{ border: "2px solid black" }}
-            type="number"
-            value={row.threshold}
-            onChange={(e) => handleChangeValue1(e.target.value, row.id)}
-          />
-        </div>
-        {rows.length > 1 ? (
-          <CloseOutlined onClick={() => handleDelete(row)} />
-        ) : null}
-      </div>
-
-  
-    </div>
-  );
-})}
-                    <div class=" flex justify-end" >
+                {rows.map((row, index) => (
+            <div key={index}>
+              <div className="w-full flex font-bold mt-4">
+                <div className="w-20">
+                  <p>{`Level ${index + 1}`}</p>
+                </div>
+                <div style={{ width: "47%" }}>
+                  <Select
+                    name={`level_${index}`}
+                    value={row.level}
+                    onChange={(value) => handleChangeValue(value, index)}
+                  >
+                                      <option value="ReportingManager">Reporting Manager</option>
+                    <option value="ReportingManager+1">Reporting Manager +1</option>
+                    <option value="Management">Management</option>
+                  </Select>
+                </div>
+                <div className="w-24 ml-4">
+                  <p>Threshold</p>
+                </div>
+                <div style={{ width: "47%" }}>
+                  <input
+                    style={{ border: "2px solid black" }}
+                    type="number"
+                    value={row.threshold}
+                    onChange={(e) =>
+                      handleChangeValue1(e.target.value, index)
+                    }
+                  />
+                </div>
+                {rows.length > 1 ? (
+                  <CloseOutlined onClick={() => handleDelete(index)} />
+                ) : null}
+              </div>
+            </div>
+          ))}            <div class="flex justify-end" >
                         <div className="button">
                             <Button type="primary" onClick={handleAddRowClick}>
                                 Add Level
                             </Button>
                         </div>
                     </div>
-                    <div class=" justify-end" 
-                        style={{ marginLeft: "104%", marginTop: "52px" }}>
+                    <div class="flex justify-end mt-4" >
+                    <div className="button">
                         <Button
                             type="primary"
-                            style={{
-                                marginRight: "-230px",
-                                marginTop: "52px",
-                                marginBottom: "5px",
-                            }}
+                         
                             onClick={() => buttonOnClick()}
                         >
                             Submit
                         </Button>
+                        </div>
                     </div>
                 </div>
             </div>

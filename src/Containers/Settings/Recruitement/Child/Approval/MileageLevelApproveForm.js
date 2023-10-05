@@ -287,6 +287,7 @@ function MileageLevelApproveForm(props) {
                     onChange={(value) => handleChangeValue(value, index)}
                   >
                     <option value="ReportingManager">Reporting Manager</option>
+                    <option value="ReportingManager+1">Reporting Manager +1</option>
                     <option value="Management">Management</option>
                   </Select>
                 </div>
@@ -316,18 +317,15 @@ function MileageLevelApproveForm(props) {
               </Button>
             </div>
           </div>
-          <div style={{ marginLeft: "104%", marginTop: "52px" }}>
+          <div class="flex justify-end mt-4" >
+                    <div className="button">
             <Button
-              type="primary"
-              style={{
-                marginRight: "-230px",
-                marginTop: "52px",
-                marginBottom: "5px",
-              }}
+                    type="primary"
               onClick={() => buttonOnClick()}
             >
               Submit
             </Button>
+            </div>
           </div>
         </div>
       </div>

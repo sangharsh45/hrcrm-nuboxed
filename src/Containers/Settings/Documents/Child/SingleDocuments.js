@@ -37,13 +37,13 @@ class SingleDocuments extends Component {
             viewType === "view" ? (
               <div>
                 <FlexContainer >
-                  <div style={{width:"12rem"}}>
+                  <div class=" w-60">
                   <DocumentName style={{ flexBasis: "90%" }}>
                     {documentTypeName}
                   </DocumentName>
                   </div>
                   {/* <FlexContainer style={{justifyContent:"flex-end",marginTop:"-31px"}} > */}
-                  <div class="flex justify-between w-[29rem]">
+                  <div class="flex justify-between w-96">
                   <div >
                     <DocumentStatusToggle
                   editInd={editInd}

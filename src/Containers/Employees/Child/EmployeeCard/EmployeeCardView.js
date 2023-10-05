@@ -69,7 +69,7 @@ function handleSetCurrentEmployeeId(employeeId,) {
       
             <>
             
-
+            <div class=" h-h86 overflow-auto overflow-x-auto">
              
               <CardWrapper>      
               {props.employees.map((item) => {
@@ -192,6 +192,7 @@ function handleSetCurrentEmployeeId(employeeId,) {
                  )  
             })}
               </CardWrapper>
+              </div>
               <EmployeeDrawerForAdmin
       employeeId={currentEmployeeId}
         handleEmployeeDrawerForAdmin={handleEmployeeDrawerForAdmin}

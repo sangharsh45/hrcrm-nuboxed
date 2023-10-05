@@ -39,12 +39,12 @@ class SingleTasks extends Component {
           {({ viewType }, toggleViewType) =>
             viewType === "view" ? (
               <FlexContainer justifyContent="space-between">
-                   <div class=" flex w-1/2">
+                   <div class=" flex w-2/5">
                 <TaskName style={{ flexBasis: "45%" }}>{taskType}</TaskName>
                 <div>
                   </div>
                 </div>
-                <div class="flex" style={{width:"42%"}}>
+                <div class="flex w-60">
                   <div class="ml-2 w-20">Workflow</div>
                  
                   <div class="ml-4 w-20">

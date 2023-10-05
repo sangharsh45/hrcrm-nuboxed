@@ -22,6 +22,8 @@ class SingleRole extends Component {
       editInd: true,
     };
   }
+  handleDepartment = (value) =>
+  this.setState({ departmentId: value });
   render() {
     const {
       role: { roleType, roleTypeId, departmentName, departmentId },
@@ -84,7 +86,7 @@ class SingleRole extends Component {
                   defaultValue={departmentName}
                   style={{ width: "30%" }}
                   placeholder="Select Department"
-                  onChange={handleDepartment}
+                  onChange={this.handleDepartment}
                 >
                   {this.props.departments.map((item) => {
                     return (

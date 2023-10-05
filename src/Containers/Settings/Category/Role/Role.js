@@ -83,7 +83,7 @@ class Department extends Component {
     let exist = roles && roles.some((element) => element.roleType == roleType);
   
     if (exist) {
-      message.error("Can't create as another roleType exists with the same name!");
+      message.error("Can't create as same Role exists!");
     } else {
       addRoles(role, () => console.log("add role callback"));
       this.setState({
