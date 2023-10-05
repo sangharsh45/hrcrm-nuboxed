@@ -1,5 +1,5 @@
-import React, { useEffect, useState, useMemo } from "react";
-import { StyledPopconfirm, StyledTable } from "../../../../Components/UI/Antd";
+import React, { useEffect, useState} from "react";
+import { StyledPopconfirm} from "../../../../Components/UI/Antd";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import moment from "moment";
@@ -10,7 +10,6 @@ import "jspdf-autotable";
 import { OnlyWrapCard } from '../../../../Components/UI/Layout'
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
-import Highlighter from "react-highlight-words";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { getCountries } from "../../../Auth/AuthAction";
 import { Link } from "../../../../Components/Common";
@@ -22,18 +21,18 @@ import {
   handleLeadsEmailDrawerModal,
   getLeadDetailsById,
   updateTypeForLead,
+  handleCETmodal,
 } from "../../../Leads/LeadsAction";
 import ReactCountryFlag from 'react-country-flag';
-import { MailOutlined, SearchOutlined } from "@ant-design/icons";
-import { Button, Tooltip, Input } from "antd";
+import AssignmentLateIcon from '@mui/icons-material/AssignmentLate';
+import { Button, Tooltip } from "antd";
 import StatusCustomerToggle from "./StatusCustomerToggle";
 import { FormattedMessage } from "react-intl";
-import styled from "styled-components";
-import LeadsDetailView from "./LeadsDetailView";
 import UpdateLeadsModal from "../UpdateLeads/UpdateLeadsModal";
 import AddLeadsEmailDrawerModal from "../UpdateLeads/AddLeadsEmailDrawerModal";
 import { BundleLoader } from "../../../../Components/Placeholder";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
+import OpenCETmodal from "./OpenCETmodal";
 
 const ButtonGroup = Button.Group;
 
@@ -233,6 +232,12 @@ const LeadsCardList = (props) => {
 />
 </ButtonGroup>
 </div>
+<div>
+<AssignmentLateIcon
+style={{fontSize: "0.1.25rem"}}
+onClick={()=>{props.handleCETmodal(true)}}
+/>
+</div>
      </div>  
                                 <div className=" flex font-medium flex-col w-32 ">
                                     <h4 class=" text-[0.875rem] text-cardBody font-poppins">Assigned to</h4>
@@ -381,6 +386,10 @@ const LeadsCardList = (props) => {
         addDrawerLeadsEmailModal={props.addDrawerLeadsEmailModal}
         handleLeadsEmailDrawerModal={props.handleLeadsEmailDrawerModal}
       />
+      <OpenCETmodal 
+      openCETmodal={props.openCETmodal}
+      handleCETmodal={props.handleCETmodal}
+      />
     </>
   );
 };
@@ -393,7 +402,8 @@ const mapStateToProps = ({ auth, leads, sector }) => ({
   sectors: sector.sectors,
   updateLeadsModal: leads.updateLeadsModal,
   addDrawerLeadsEmailModal: leads.addDrawerLeadsEmailModal,
-  fetchingLeads:leads.fetchingLeads
+  fetchingLeads:leads.fetchingLeads,
+  openCETmodal:leads.openCETmodal,
 });
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
@@ -407,6 +417,7 @@ const mapDispatchToProps = (dispatch) =>
       getLeadDetailsById,
       getCountries,
       updateTypeForLead,
+      handleCETmodal
     },
     dispatch
   );

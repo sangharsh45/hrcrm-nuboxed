@@ -652,6 +652,7 @@ function NavMenu (props) {
             <Link to="/holiday"> 
            
              <i class="fas fa-holly-berry"></i>
+             &nbsp;
             <span class="text-white text-ls ml-1"><FormattedMessage 
               id="app.holiday"
                 defaultMessage="Holiday"
@@ -667,7 +668,7 @@ function NavMenu (props) {
      )}  */}
         <hr/>
                   {/* Employees */}
-                  {user.department === "Management" && user.userAccessInd === true && (
+                  {user.userAccessInd === true && (
                   
             <Menu.Item key="/employees" style={{height:"30px",paddingLeft:"1rem"}}>
               <Link to="/Employees">

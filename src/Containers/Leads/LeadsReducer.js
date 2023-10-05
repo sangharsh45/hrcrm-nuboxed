@@ -135,6 +135,9 @@ const initialState = {
   fetchingJunkedLeadsRecords: false,
   fetchingJunkedLeadsRecordsError: false,
   leadsCountJunked:[],
+
+  openCETmodal:false,
+  
 };
 export const leadsReducer = (state = initialState, action) => {
     switch (action.type) {
@@ -691,6 +694,32 @@ case types.HANDLE_LEADS_MODAL:
                   fetchingJunkedLeadsRecords: false,
                   fetchingJunkedLeadsRecordsError: true,
                 };
+
+                case types.REINSTATE_JUNKED_LEADS_REQUEST:
+                  return { ...state, reInstateJunkedLeads: true };
+                case types.REINSTATE_JUNKED_LEADS_SUCCESS:
+                  return {
+                    ...state,
+                    reInstateJunkedLeads: false,
+                    junkedLeadsData:action.payload,
+                    // junkedLeadsData: state.junkedLeadsData.map((item) => {
+                    //   if (item.leadsId === action.payload.leadsId) {
+                    //     return action.payload;
+                    //   } else {
+                    //     return item;
+                    //   }
+                    // }),
+                  };
+                case types.REINSTATE_JUNKED_LEADS_FAILURE:
+                  return {
+                    ...state,
+                    reInstateJunkedLeads: false,
+                    reInstateJunkedLeadsError: true,
+                  }; 
+                         
+                  case types.HANDLE_CET_MODAL:
+                    return { ...state, openCETmodal: action.payload };
+
 default:
 return state;
 }

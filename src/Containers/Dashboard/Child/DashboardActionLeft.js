@@ -38,7 +38,7 @@ const DashboardActionLeft = (props) => {
             
             
             
-              <Tag
+              {/* <Tag
                 color={viewType === "ME" ? "#FFA500" : "orange"}
                 style={{
                   cursor: "pointer",                  
@@ -56,11 +56,11 @@ const DashboardActionLeft = (props) => {
                   defaultMessage="My View"
                 />
                 
-              </Tag>
+              </Tag> */}
            
              
              
-            
+            {user.dashboardFullListInd===true && (
               <Tag
                 color={viewType === "ALL" ? "#FFA500" : "orange"}
                 style={{
@@ -77,8 +77,8 @@ const DashboardActionLeft = (props) => {
                   defaultMessage="Organization"
                 />
               </Tag>
-
-
+            )}
+            
         <span class=" mr-2 cursor-pointer text-xs"
           onClick={() => props.setDashboardViewType("test")}
           style={{

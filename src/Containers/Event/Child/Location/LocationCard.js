@@ -2,7 +2,8 @@ import React, { useEffect } from 'react'
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { getlocation } from "./LocationAction";
-import styled from 'styled-components'
+import styled from 'styled-components';
+import {Switch}from "antd";
 
 const LocationCard = (props) => {
   useEffect(() => {
@@ -36,7 +37,6 @@ Country
 <div class=" font-normal text-sm text-cardBody font-poppins">
   {item.country_name}
 </div>
-{/* </Tooltip>   */}
 </div> 
 <div className=" flex font-medium flex-col w-40  ">
 
@@ -51,9 +51,100 @@ Address
               `${(item.address && item.address[0].state) || ""}`}
           </span>
 </div>
-{/* </Tooltip>   */}
 </div> 
- 
+<div className=" flex font-medium flex-col w-24  ">
+<div class=" text-sm text-cardBody font-medium font-poppins">
+Production
+</div>
+
+<div class=" font-normal text-sm text-cardBody font-poppins">
+  <Switch className="toggle-clr"
+                        checked={item.productionInd}
+                        // disabled={props.status}
+                        isLoading={true}
+                        checkedChildren="Yes"
+                        unCheckedChildren="No"
+                     
+                    />
+</div>
+</div> 
+<div className=" flex font-medium flex-col w-24  ">
+<div class=" text-sm text-cardBody font-medium font-poppins">
+Inventory
+</div>
+
+<div class=" font-normal text-sm text-cardBody font-poppins">
+<Switch className="toggle-clr"
+                        checked={item.inventoryInd}
+                        // disabled={props.status}
+                        isLoading={true}
+                        checkedChildren="Yes"
+                        unCheckedChildren="No"
+                     
+                    />
+</div>
+</div> 
+<div className=" flex font-medium flex-col w-24  ">
+<div class=" text-sm text-cardBody font-medium font-poppins">
+Billing
+</div>
+<div class=" font-normal text-sm text-cardBody font-poppins">
+  <Switch className="toggle-clr"
+                        checked={item.billingInd}
+                        // disabled={props.status}
+                        isLoading={true}
+                        checkedChildren="Yes"
+                        unCheckedChildren="No"
+                     
+                    />
+</div>
+</div> 
+<div className=" flex font-medium flex-col w-24  ">
+<div class=" text-sm text-cardBody font-medium font-poppins">
+Corporate
+</div>
+<div class=" font-normal text-sm text-cardBody font-poppins">
+  <Switch className="toggle-clr"
+                        checked={item.corporateInd}
+                        // disabled={props.status}
+                        isLoading={true}
+                        checkedChildren="Yes"
+                        unCheckedChildren="No"
+                     
+                    />
+</div>
+</div> 
+<div className=" flex font-medium flex-col w-24  ">
+<div class=" text-sm text-cardBody font-medium font-poppins">
+Project
+</div>
+<div class=" font-normal text-sm text-cardBody font-poppins">
+  <Switch className="toggle-clr"
+                        checked={item.projectInd}
+                        // disabled={props.status}
+                        isLoading={true}
+                        checkedChildren="Yes"
+                        unCheckedChildren="No"
+                     
+                    />
+</div>
+</div> 
+<div className=" flex font-medium flex-col w-24  ">
+<div class=" text-sm text-cardBody font-medium font-poppins">
+Retail
+</div>
+<div class=" font-normal text-sm text-cardBody font-poppins">
+  <Switch className="toggle-clr"
+                        checked={item.retailInd}
+                        // disabled={props.status}
+                        isLoading={true}
+                        checkedChildren="Yes"
+                        unCheckedChildren="No"
+                     
+                    />
+</div>
+</div> 
+
  </div>
   </CardElement>
      )

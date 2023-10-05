@@ -958,3 +958,34 @@ export const setLeadsViewType = (viewType) => (dispatch) => {
         });
       });
   };
+  
+  export const reInstateJunkLeads = (leadsId,data) => (dispatch) => {
+    dispatch({ type: types.REINSTATE_JUNKED_LEADS_REQUEST });
+    axios
+      .put(`${base_url}/leads/reinstate/${leadsId}`, data, {
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+        },
+      })
+      .then((res) => {
+        console.log(res);
+        dispatch({
+          type: types.REINSTATE_JUNKED_LEADS_SUCCESS,
+          payload: res.data,
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+        dispatch({
+          type: types.REINSTATE_JUNKED_LEADS_FAILURE,
+          payload: err,
+        });
+      });
+  };
+
+  export const handleCETmodal= (modalProps) => (dispatch) => {
+    dispatch({
+      type: types.HANDLE_CET_MODAL,
+      payload: modalProps,
+    });
+  }

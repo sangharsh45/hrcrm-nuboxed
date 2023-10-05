@@ -2,7 +2,7 @@ import * as types from "./CallActionTypes";
 import axios from "axios";
 import { message } from "antd";
 import { base_url } from "../../Config/Auth";
-import { getCallsListByUserId } from "../Auth/AuthAction";
+
 /**
  * handle call modal opening and close
  */
