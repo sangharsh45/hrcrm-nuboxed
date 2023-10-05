@@ -21,6 +21,24 @@ class SourceChart extends Component {
         content: <SourceMainChart />,
         key: "1"
       },
+      {
+        // title: "Source", 
+        title: <FormattedMessage
+          id="app.funnel"
+          defaultMessage="funnel"
+        />,
+        // content: <SourceMainChart />,
+        key: "2"
+      },
+      {
+        // title: "Source", 
+        title: <FormattedMessage
+          id="app.stages"
+          defaultMessage="Stages"
+        />,
+        // content: <SourceMainChart />,
+        key: "3"
+      },
      
     ];
     this.state = {
