@@ -1021,10 +1021,10 @@ export const setSubSelectedReportType = (type) => (dispatch) =>
       });
   };
 
-  export const getJumpBulblist = (userId) => (dispatch) => {
+  export const getJumpBulblist = (userId,startDate, endDate) => (dispatch) => {
     dispatch({ type: types.GET_JUMPSTART_BULB_REQUEST });
     axios
-      .get(`${base_url}/leads/qualified-leads/count/${userId}`, {
+      .get(`${base_url}/leads/qualified-leads/count/${userId}?endDate=${endDate}&startDate=${startDate}`, {
         headers: {
           Authorization: "Bearer " + sessionStorage.getItem("token") || "",
         },
@@ -1040,6 +1040,52 @@ export const setSubSelectedReportType = (type) => (dispatch) =>
         console.log(err);
         dispatch({
           type: types.GET_JUMPSTART_BULB_FAILURE,
+          payload: err,
+        });
+      });
+  };
+  export const getJumpBulblist2 = (userId,startDate, endDate) => (dispatch) => {
+    dispatch({ type: types.GET_JUMPSTART_BULB2_REQUEST });
+    axios
+      .get(`${base_url}/leads/createded-leads/count/${userId}?endDate=${endDate}&startDate=${startDate}`, {
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+        },
+      })
+      .then((res) => {
+        // console.log(res)
+        dispatch({
+          type: types.GET_JUMPSTART_BULB2_SUCCESS,
+          payload: res.data,
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+        dispatch({
+          type: types.GET_JUMPSTART_BULB2_FAILURE,
+          payload: err,
+        });
+      });
+  };
+  export const getJumpBulblist3 = (userId,startDate, endDate) => (dispatch) => {
+    dispatch({ type: types.GET_JUMPSTART_BULB3_REQUEST });
+    axios
+      .get(`${base_url}/leads/junked-leads/count/${userId}?endDate=${endDate}&startDate=${startDate}`, {
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+        },
+      })
+      .then((res) => {
+        // console.log(res)
+        dispatch({
+          type: types.GET_JUMPSTART_BULB3_SUCCESS,
+          payload: res.data,
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+        dispatch({
+          type: types.GET_JUMPSTART_BULB3_FAILURE,
           payload: err,
         });
       });

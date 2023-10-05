@@ -5,7 +5,7 @@ import { bindActionCreators } from "redux";
 import moment from "moment";
 import { JumpStartBox, Spacer } from "../../../../Components/UI/Elements";
 import { FlexContainer } from "../../../../Components/UI/Layout";
-import {getDateWiseList,getSalesDateWiseList,getJumpBulblist,getavgHour} from "../../DashboardAction";
+import {getDateWiseList,getSalesDateWiseList,getJumpBulblist,getJumpBulblist2,getJumpBulblist3,getavgHour} from "../../DashboardAction";
 
 class DashboardBulbJumpstart extends React.Component{
   constructor() {
@@ -60,7 +60,9 @@ componentWillReceiveProps(nextProps) {
 componentDidMount() {
   const startDate = `${this.state.startDate.format("YYYY-MM-DD")}T20:00:00Z`
   const endDate = `${this.state.endDate.format("YYYY-MM-DD")}T20:00:00Z`
-  this.props.getJumpBulblist(this.props.userId)
+  this.props.getJumpBulblist(this.props.userId,startDate, endDate)
+  this.props.getJumpBulblist2(this.props.userId,startDate,endDate)
+  this.props.getJumpBulblist3(this.props.userId,startDate,endDate)
    this.props.getavgHour(this.props.userId, startDate, endDate);
 }
   
@@ -75,16 +77,8 @@ render() {
             noProgress
             title="Leads Qualified"
 
-            value={
-              this.props.user.department === "Recruiter"
-              ?this.props.showDatelist.openRequirement
-              :this.props.showSalesDatelist.openRequirement
-            }
-            isLoading={
-              this.props.user.department === "Recruiter"
-              ?this.props.fetchingDatewiseReport
-              :this.props.fetchingSalesDatewiseReport
-            }
+            value={this.props.jumpstartBulbCount.qualifiedLeadsList}
+            isLoading={this.props.user.fetchingJumpstartBulb}
           />
        
           <JumpStartBox
@@ -104,26 +98,19 @@ render() {
             title="Order Generated"
 
             value={
-   
-              this.props.jumpstartBulbCount.totalTask
+   this.props.jumpstartBulb2Count.createdLeadsList
             }
-             isLoading={this.props.fetchingTaskper}
+             isLoading={this.props.fetchingJumpstartBulb2}
             
           />
           <JumpStartBox
             noProgress
             title="Pipeline"
             value={
-              this.props.user.department === "Recruiter"
-              ?this.props.showDatelist.onboarded
-              :this.props.showSalesDatelist.onboarded
+              this.props.jumpstartBulb3Count.junkedLeadsList
             }
             
-            isLoading={
-              this.props.user.department === "Recruiter"
-              ?this.props.fetchingDatewiseReport
-              :this.props.fetchingSalesDatewiseReport
-            }
+            isLoading={this.props.fetchingJumpstartBulb3}
           />
         </FlexContainer>
         <Spacer />
@@ -147,6 +134,11 @@ const mapStateToProps = ({ dashboard,auth }) => ({
   fetchingTaskper:dashboard.fetchingTaskper,
   userId: auth.userDetails.employeeId,
   jumpstartBulbCount:dashboard.jumpstartBulbCount,
+  jumpstartBulb2Count:dashboard.jumpstartBulb2Count,
+  jumpstartBulb3Count:dashboard.jumpstartBulb3Count,
+  fetchingJumpstartBulb:dashboard.fetchingJumpstartBulb,
+  fetchingJumpstartBulb2:dashboard.fetchingJumpstartBulb2,
+  fetchingJumpstartBulb3:dashboard.fetchingJumpstartBulb3,
   avgHour:dashboard.avgHour,
   fetchingAvgHour:dashboard.fetchingAvgHour
 });
@@ -155,7 +147,9 @@ const mapDispatchToProps = (dispatch) => bindActionCreators({
   getDateWiseList,
   getSalesDateWiseList,
   getJumpBulblist,
-  getavgHour
+  getavgHour,
+  getJumpBulblist2,
+  getJumpBulblist3
 }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(DashboardBulbJumpstart);

@@ -21,7 +21,7 @@ const LocationActionLeft = (props) => {
               // cursor: "pointer",
             }}
           >
-            <GridViewIcon style={{fontSize:"1.4rem"}}  />
+            <TocIcon style={{fontSize:"1.4rem"}}  />
           </span>
        
       </Tooltip>
