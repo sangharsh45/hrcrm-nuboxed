@@ -60,24 +60,7 @@ const DashboardActionLeft = (props) => {
            
              
              
-            {user.dashboardFullListInd===true && (
-              <Tag
-                color={viewType === "ALL" ? "#FFA500" : "orange"}
-                style={{
-                  cursor: "pointer",                  
-                  fontWeight: viewType === "ALL" ? "#FFA500" : "orange",
-                  textAlign: "center",
-                  fontFamily:"poppins",
-                  borderColor: "orange",
-                }}
-               onClick={() => setDashboardViewType("ALL")}
-              >
-                <FormattedMessage
-                  id="app.organization"
-                  defaultMessage="Organization"
-                />
-              </Tag>
-            )}
+            
             
         <span class=" mr-2 cursor-pointer text-xs"
           onClick={() => props.setDashboardViewType("test")}
@@ -104,7 +87,24 @@ const DashboardActionLeft = (props) => {
             </>
              )}
 
-            
+{user.dashboardFullListInd===true && (
+              <Tag
+                color={viewType === "ALL" ? "#FFA500" : "orange"}
+                style={{
+                  cursor: "pointer",                  
+                  fontWeight: viewType === "ALL" ? "#FFA500" : "orange",
+                  textAlign: "center",
+                  fontFamily:"poppins",
+                  borderColor: "orange",
+                }}
+               onClick={() => setDashboardViewType("ALL")}
+              >
+                <FormattedMessage
+                  id="app.organization"
+                  defaultMessage="Organization"
+                />
+              </Tag>
+            )}
          
            
     </FlexContainer>

@@ -88,7 +88,7 @@ const LeadsCardList = (props) => {
                                     borderBottom: "3px dotted #515050"
                                 }}>
                                      
-                                <div className=" flex font-medium flex-col w-60 ">
+                                <div className=" flex font-medium flex-col w-60 mb-4 ">
                                 <div className="flex"> 
 <div>
 <SubTitle>
@@ -139,7 +139,7 @@ const LeadsCardList = (props) => {
                            {`${item.countryDialCode} ${item.phoneNumber}`}
                            </h4>
                        </div>
-                       <div className=" flex font-medium flex-col  w-52 ">
+                       <div className=" flex font-medium flex-col  w-40 ">
                            <h4 class=" text-[0.875rem] text-cardBody font-poppins"> Company </h4>
                            <h4 class=" text-[0.75rem] text-cardBody font-poppins">   
                            <Link
@@ -148,6 +148,24 @@ const LeadsCardList = (props) => {
         >{item.name}</Link>
                            </h4>
                        </div>
+                       <div class="rounded-full bg-white  h-5 cursor-pointer w-8">
+                    {item.url !== null ? (
+              <Tooltip title={item.url}>
+                <span
+                  //type="edit"
+                  style={{ cursor: "pointer" }}
+                  onClick={() => {}}
+                >
+                  {" "}
+                  <a href={`item.url`} target="_blank">
+                    <ExploreIcon
+                      style={{ cursor: "pointer", color: "green" ,fontSize: "0.8rem",}}
+                    />
+                  </a>
+                </span>
+              </Tooltip>
+            ) : null}
+                        </div>
                                 <div className=" flex font-medium flex-col  w-52 ">
                            
                                     <h4 class=" text-[0.875rem] text-cardBody font-poppins"> Sector </h4>
@@ -155,7 +173,7 @@ const LeadsCardList = (props) => {
                                     {item.sector}
                                     </h4>
                                 </div>
-                                <div className=" flex font-medium flex-col w-36 ">
+                                <div className=" flex font-medium flex-col w-32 ">
                                   
 
                                     <h4 class=" text-[0.875rem] text-cardBody font-poppins">Country</h4>
@@ -174,7 +192,7 @@ const LeadsCardList = (props) => {
                         {item.address && item.address.length && item.address[0].country}
                                     </h4>
                                 </div>
-                                <div class="flex flex-row w-[9%]">
+                                <div class="flex flex-row w-[11%]">
 
 <div>
 <ButtonGroup>
@@ -234,7 +252,7 @@ const LeadsCardList = (props) => {
 </div>
 <div>
 <AssignmentLateIcon
-style={{fontSize: "0.1.25rem"}}
+style={{fontSize: "1rem"}}
 onClick={()=>{props.handleCETmodal(true)}}
 />
 </div>
@@ -287,24 +305,20 @@ onClick={()=>{props.handleCETmodal(true)}}
 </div>
                                 </div>
                                 <div class="flex flex-col w-[5%]">
-                    <div class="rounded-full bg-white w-5 h-5 cursor-pointer">
-                    {item.url !== null ? (
-              <Tooltip title={item.url}>
-                <span
-                  //type="edit"
-                  style={{ cursor: "pointer" }}
-                  onClick={() => {}}
-                >
-                  {" "}
-                  <a href={`item.url`} target="_blank">
-                    <ExploreIcon
-                      style={{ cursor: "pointer", color: "green" ,fontSize: "0.8rem",}}
-                    />
-                  </a>
-                </span>
-              </Tooltip>
-            ) : null}
-                        </div>
+                                <div>
+            <Tooltip title="Edit">
+              <BorderColorIcon
+                style={{ cursor: "pointer",fontSize: "0.8rem" }}
+                onClick={() => {
+                   props.setEditLeads(item);
+                handleUpdateLeadsModal(true);
+                handleSetCurrentLeadsId(item);
+                  
+                }}
+              />
+            </Tooltip>
+        
+            </div>
                         <div>
                         <StyledPopconfirm
             title="Do you want to delete?"
@@ -351,20 +365,7 @@ onClick={()=>{props.handleCETmodal(true)}}
                 }}
               />
             </Tooltip> </div>
-            <div>
-            <Tooltip title="Edit">
-              <BorderColorIcon
-                style={{ cursor: "pointer",fontSize: "0.8rem" }}
-                onClick={() => {
-                   props.setEditLeads(item);
-                handleUpdateLeadsModal(true);
-                handleSetCurrentLeadsId(item);
-                  
-                }}
-              />
-            </Tooltip>
-        
-            </div>
+           
                       </div>    
                      
                             </div>

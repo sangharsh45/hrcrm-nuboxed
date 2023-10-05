@@ -131,10 +131,11 @@ class TaskNew extends Component {
           <div className="grid grid-cols-5 gap-4">
   {this.props.tasks.length &&
     this.props.tasks.map((item) => {
+      const randomNumber = Math.floor(Math.random() * 100) + 1;
       return (
         <div className="col-span-2 sm:col-span-1">
           <div className="flex">{item.taskType}</div>
-          <div class="text-2xl">1</div>
+          <div class="text-2xl">{randomNumber}</div>
         </div>
       );
     })}
