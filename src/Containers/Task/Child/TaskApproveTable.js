@@ -205,7 +205,7 @@ const TaskApproveTable = (props) => {
             >Load More</Button>
             </FloatButton.Group>
           </div> : null}
-          <OnlyWrapCard>
+          <OnlyWrapCard style={{height:"81vh"}}>
       {approvalTaskTable.map((item) => { 
         
          

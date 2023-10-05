@@ -361,7 +361,9 @@ function ExpenseForm(props) {
                 >
                   {props.currencies.map((item) => {
                     return (
-                      <Option value={item.currencyName} defaultValue={props.user.address[0].country}>
+                      <Option value={item.currencyName} 
+                      // defaultValue={props.user.address[0].country}
+                       >
                         {item.currencyName}
                       </Option>
                     );
