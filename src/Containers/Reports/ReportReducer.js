@@ -16,19 +16,6 @@ const initialState = {
 
     reportViewType: "ME",
     dateRangeList: [
-        // {
-        //   id: 1,
-        //   type: "year",
-        //   value: "FY",
-        //   starter: true,
-        //   isSelected: true,
-        //   startDate: dayjs()
-        //     .startOf("year")
-        //     .toISOString(),
-        //   endDate: dayjs()
-        //     .endOf("year")
-        //     .toISOString(),
-        // },
         {
             id: 1,
             type: "Today",

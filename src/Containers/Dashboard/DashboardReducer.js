@@ -219,6 +219,88 @@ const initialState = {
   fetchingJumpstartBulb: false,
   fetchingJumpstartBulbError: false,
   jumpstartBulbCount: [],
+
+  dateRangeList: [
+    {
+        id: 1,
+        type: "Today",
+        value: "Today",
+        starter: false,
+        isSelected: true,
+        startDate: dayjs()
+            // .subtract(1, "days")
+            .toISOString(),
+        endDate: dayjs().toISOString(),
+    },
+    {
+        id: 2,
+        type: "Yesterday",
+        value: "Yesterday",
+        starter: false,
+        isSelected: false,
+        startDate: dayjs()
+            .subtract(1, "days")
+
+            .toISOString(),
+        endDate: dayjs().toISOString(),
+    },
+    {
+        id: 3,
+        type: "Last7days",
+        value: "Last 7 days",
+        starter: false,
+        isSelected: false,
+        startDate: dayjs()
+            .subtract(7, "days")
+
+            .toISOString(),
+        endDate: dayjs().toISOString(),
+    },
+
+    {
+        id: 4,
+        type: "Last30days",
+        value: "Last 30 days",
+        starter: false,
+        isSelected: false,
+        startDate: dayjs()
+            .subtract(30, "days")
+
+            .toISOString(),
+        endDate: dayjs().toISOString(),
+    },
+    {
+        id: 5,
+        type: "Thismonth",
+        value: "This month",
+        starter: false,
+        isSelected: false,
+        startDate: dayjs().startOf("week").toISOString(),
+        endDate: dayjs().toISOString(),
+    },
+    {
+        id: 6,
+        type: "Lastmonth",
+        value: "Last month",
+        starter: false,
+        isSelected: false,
+        startDate: dayjs().startOf("month").toISOString(),
+        endDate: dayjs().toISOString(),
+    },
+],
+isCustomSelected: false,
+// startDate: dayjs()
+//     .startOf("year")
+//     .toISOString(),
+// endDate: dayjs()
+//     .endOf("year")
+//     .toISOString(),
+
+reportTypes: ["Requirement", "Selected"],
+reportType: ["Requirement", "Selected"],
+selectedReportType: "Select Report",
+
+selectedSubReportType: "Select",
 };
 
 

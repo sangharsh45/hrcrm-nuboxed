@@ -18,7 +18,6 @@ import { bindActionCreators } from "redux";
 import TimeInterval from "../../../Utils/TimeInterval";
 
 
-
 const HeaderActionRight = (props) => {
   const {
 
@@ -26,7 +25,6 @@ const HeaderActionRight = (props) => {
     dateRangeList,
 
   } = props;
-
 
 
   return (
