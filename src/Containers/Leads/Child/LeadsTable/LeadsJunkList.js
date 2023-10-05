@@ -22,11 +22,11 @@ import {
   handleLeadsEmailDrawerModal,
   getLeadDetailsById,
   updateTypeForLead,
+  reInstateJunkLeads
 } from "../../../Leads/LeadsAction";
 import ReactCountryFlag from 'react-country-flag';
 import { MailOutlined, SearchOutlined } from "@ant-design/icons";
 import { Button, Tooltip, Input } from "antd";
-import StatusCustomerToggle from "./StatusCustomerToggle";
 import { FormattedMessage } from "react-intl";
 import styled from "styled-components";
 import LeadsDetailView from "./LeadsDetailView";
@@ -268,17 +268,17 @@ const LeadsJunkList = (props) => {
             </span>
                    </div>
                    <div className=" flex font-medium flex-col w-32 ">
-                                    <h4 class=" text-[0.875rem] text-cardBody font-poppins">Qualified</h4>
+                                    <h4 class=" text-[0.875rem] text-cardBody font-poppins">Reinstate</h4>
 
                                     <div class=" text-[0.75rem] text-cardBody font-poppins">
                 {/* qual */}
                                     </div>
                                     <div>
-<StatusCustomerToggle
-            type={props.convertInd ? "primary" : "danger"}
-            leadsId={item.leadsId}
-            convertInd={item.convertInd}
-          />
+<Button type="primary"
+onClick={()=>{props.reInstateJunkLeads(item.leadsId)}}
+>
+Resinstate
+</Button>
 </div>
                                 </div>
                                 <div class="flex flex-col w-[5%]">
@@ -407,6 +407,7 @@ const mapDispatchToProps = (dispatch) =>
       getLeadDetailsById,
       getCountries,
       updateTypeForLead,
+      reInstateJunkLeads
     },
     dispatch
   );

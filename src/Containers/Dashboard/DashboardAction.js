@@ -1024,7 +1024,7 @@ export const setSubSelectedReportType = (type) => (dispatch) =>
   export const getJumpBulblist = (userId) => (dispatch) => {
     dispatch({ type: types.GET_JUMPSTART_BULB_REQUEST });
     axios
-      .get(`${base_url}/JMP/BLB/${userId}`, {
+      .get(`${base_url}/leads/qualified-leads/count/${userId}`, {
         headers: {
           Authorization: "Bearer " + sessionStorage.getItem("token") || "",
         },
