@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import ListAltIcon from "@mui/icons-material/ListAlt";
 import {  StyledTabs } from "../../Components/UI/Antd";
-
+import EventAvailableIcon from '@mui/icons-material/EventAvailable';
 import ActionNotification from "../Dashboard/ActionNotification";
 import UpcomingIcon from '@mui/icons-material/Upcoming';
 import TipsAndUpdatesIcon from "@mui/icons-material/TipsAndUpdates";
@@ -84,7 +84,7 @@ class TaskDashboardTab extends Component {
             <TabPane
               tab={
                 <>
-                  <TipsAndUpdatesIcon style={{fontSize:"1.1rem"}}/>
+                  <EventAvailableIcon style={{fontSize:"1.1rem"}}/>
 
                   <span class=" ml-1">Events</span>
 

@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { FormattedMessage } from "react-intl";
-import { Button, Divider, message ,Input} from "antd";
+import { Button, Divider, message ,Input, Card} from "antd";
 import { MainWrapper, FlexContainer } from "../../Components/UI/Layout";
 import { TextInput, Title } from "../../Components/UI/Elements";
 
@@ -115,18 +115,30 @@ class TaskNew extends Component {
    console.log("Task1",this.props.tasks)
     return (
       <>
-    <div class="h-60">
+   {/* <div class="flex">
         {this.props.tasks.length&&this.props.tasks.map((item) => {
              return (
-        <div class=" flex w-1/2">
-                <div >{item.taskType}</div>
-                
+        <div class=" flex w-1/2 flex-row">
+          
+                <div class="flex " >{item.taskType}</div>
+              
                 </div>
              )
            
         })}
           
-          </div>
+          </div> */}
+          <div className="grid grid-cols-5 gap-4">
+  {this.props.tasks.length &&
+    this.props.tasks.map((item) => {
+      return (
+        <div className="col-span-2 sm:col-span-1">
+          <div className="flex">{item.taskType}</div>
+          <div class="text-2xl">1</div>
+        </div>
+      );
+    })}
+</div>
         
       </>
     );
