@@ -43,7 +43,10 @@ export const addExpenses = (expense, cb) => (dispatch) => {
       },
     })
     .then((res) => {
+      {res.data.message?  
+        message.success(res.data.message):
       message.success("Expense has been added successfully!");
+      }
       dispatch(getExpenses());
       console.log(res);
       dispatch({

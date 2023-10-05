@@ -13,7 +13,9 @@ import {
   updateRoles,
   searchRoleName,removeRole
 } from "./RoleAction";
+import { BundleLoader } from "../../../../Components/Placeholder";
 import * as Yup from "yup";
+
 import { getDepartments } from "../../Department/DepartmentAction";
 import { Select } from "../../../../Components/UI/Elements";
 const { Option } = Select;
@@ -181,7 +183,7 @@ class Department extends Component {
       linkedRoles,
       // linkedRole,
     } = this.state;
-    if (fetchingRoles) return <p>Loading ...</p>;
+    if (fetchingRoles) return <BundleLoader/>;
     if (fetchingRolesError) return <p>Error ...</p>;
     return (
       <>

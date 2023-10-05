@@ -48,7 +48,10 @@ export const addIdProofs = (idProofs, cb) => (dispatch) => {
         },
       })
       .then((res) => {
+        {res.data.message?  
+          message.success(res.data.message):
         message.success("Identity has been added successfully!");
+        }
         dispatch(getIdProofs());
         console.log(res);
         dispatch({

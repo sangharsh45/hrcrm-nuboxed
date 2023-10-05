@@ -50,7 +50,10 @@ export const addSectors = (sectors, cb) => (dispatch) => {
       })
       .then((res) => {
         dispatch(getSectors());
+        {res.data.message?  
+          message.success(res.data.message):
         message.success("Sector has been added successfully!");
+        }
         console.log(res);
         dispatch({
           type: types.ADD_SECTORS_SUCCESS,

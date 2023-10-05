@@ -44,7 +44,10 @@ export const getRoles = (orgId) => (dispatch) => {
       })
       .then((res) => {
         // message.error(roleType.message)
+        {res.data.message?  
+          message.success(res.data.message):
         message.success("Role has been added successfully!");
+        }
         dispatch(getRoles(orgId));
         console.log(res);
         dispatch({
@@ -195,6 +198,10 @@ export const addTalentRoles = (roleType,cb) => (dispatch) => {
       },
     })
     .then((res) => {
+      {res.data.message?  
+        message.success(res.data.message):
+      message.success("Role has been added successfully!");
+      }
       console.log(res);
       dispatch({
         type: types.ADD_TALENT_ROLES_SUCCESS,

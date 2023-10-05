@@ -5,6 +5,7 @@ import { Button, Divider, message } from "antd";
 import { MainWrapper, FlexContainer } from "../../../../Components/UI/Layout";
 import { TextInput, Title } from "../../../../Components/UI/Elements";
  import SingleRole from "./SingleRole";
+ import { BundleLoader } from "../../../../Components/Placeholder";
 import {
     getTalentRoles,
     addTalentRoles,
@@ -54,13 +55,13 @@ class RoleTalent extends Component {
     roles &&
     roles.some((element) => element.roleType == roleType);
 
-    if (exist) {
-      message.error(
-        "Can't create as same Role exists!"
-      );
-    } else {
+    // if (exist) {
+    //   message.error(
+    //     "Can't create as same Role exists!"
+    //   );
+    // } else {
         addTalentRoles(role, () => console.log("add role callback"));
-    }
+    // }
 
     this.setState({
       roleType: "",
@@ -105,7 +106,7 @@ class RoleTalent extends Component {
       linkedRoles
       // linkedRole,
     } = this.state;
-    if (fetchingTalentRoles) return <p>Loading ...</p>;
+    if (fetchingTalentRoles) return <BundleLoader/>;
     if (fetchingTalentRolesError) return <p>Error ...</p>;
     return (
       <>

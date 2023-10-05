@@ -50,7 +50,10 @@ export const addSources = (source,orgId, cb) => (dispatch) => {
       })
       .then((res) => {
         dispatch(getSources(orgId));
+        {res.data.message?  
+          message.success(res.data.message):
         message.success("source has been added successfully!");
+        }
         console.log(res);
         dispatch({
           type: types.ADD_SOURCE_SUCCESS,

@@ -48,7 +48,10 @@ export const addDocuments = (documents, cb) => (dispatch) => {
         },
       })
       .then((res) => {
+        {res.data.message?  
+          message.success(res.data.message):
         message.success("Document has been added successfully!");
+        }
         dispatch(getDocuments());
         console.log(res);
         dispatch({
