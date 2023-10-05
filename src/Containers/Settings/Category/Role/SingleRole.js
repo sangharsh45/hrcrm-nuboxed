@@ -18,12 +18,12 @@ class SingleRole extends Component {
       type: "",
       roleType: "",
       departmentName: "",
-      departmentId: "",
+      // departmentId: "",
       editInd: true,
     };
   }
-  handleDepartment = (value) =>
-  this.setState({ departmentId: value });
+  // handleDepartment = (value) =>
+  // this.setState({ departmentId: value });
   render() {
     const {
       role: { roleType, roleTypeId, departmentName, departmentId },
@@ -31,6 +31,7 @@ class SingleRole extends Component {
       name,
       value,
       handleDepartment,
+      
       linkedRoles,
       updatingRoles,
       handleUpdateRole,
@@ -86,7 +87,7 @@ class SingleRole extends Component {
                   defaultValue={departmentName}
                   style={{ width: "30%" }}
                   placeholder="Select Department"
-                  onChange={this.handleDepartment}
+                  onChange={handleDepartment}
                 >
                   {this.props.departments.map((item) => {
                     return (
@@ -107,7 +108,7 @@ class SingleRole extends Component {
                       handleUpdateRole(
                         roleTypeId,
                         value,
-                        departmentId,
+                        this.props.departmentId,
                         departmentName,
                         toggleViewType()
                       )
