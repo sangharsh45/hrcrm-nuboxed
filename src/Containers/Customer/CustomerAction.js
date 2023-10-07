@@ -987,7 +987,7 @@ export const setEditCustomerOpportunity = (name) => (dispatch) => {
   });
 };
 
-export const addAttendence = (attendance) => (dispatch) => {
+export const addAttendence = (attendance,userId) => (dispatch) => {
 
 
   // const opportunityId = getState().opportunity.opportunity.opportunityId;
@@ -1003,6 +1003,7 @@ export const addAttendence = (attendance) => (dispatch) => {
       },
     })
     .then((res) => {
+         dispatch(getAttendanceList(userId));
       console.log(res);
 
 
