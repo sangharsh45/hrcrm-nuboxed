@@ -350,8 +350,8 @@ useEffect(() => {
        okText="Yes"
      cancelText="No"
      > */}
-       <Button style={{backgroundColor:!startInd?"red":"green"}} onClick={handleClick}>
-        {!startInd ? "Stop" : "Start"}
+       <Button style={{backgroundColor:!startInd?"green":"red"}} onClick={handleClick}>
+        {!startInd ? "Start" : "Stop"}
       </Button>
       {/* </Popconfirm> */}
     </div>

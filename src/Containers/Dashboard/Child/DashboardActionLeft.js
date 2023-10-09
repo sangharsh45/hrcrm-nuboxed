@@ -18,6 +18,7 @@ import { Input,Tag } from "antd";
 import { dashboardReducer } from "../DashboardReducer";
 import { BundleLoader } from "../../../Components/Placeholder";
 import PersonIcon from '@mui/icons-material/Person';
+import DashboardShareForm from "./DashboardShareForm";
 
 const Option = StyledSelect.Option;
 const { Search } = Input;
@@ -105,7 +106,9 @@ const DashboardActionLeft = (props) => {
                 />
               </Tag>
             )}
-         
+             {viewType==="ALL" && (
+        <DashboardShareForm/>
+        )}
            
     </FlexContainer>
   );

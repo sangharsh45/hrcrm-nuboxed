@@ -12,6 +12,15 @@ import TodoDashboardTab from "../Dashboard/TodoDashboardTab"
 import StackedClosureChartAll from "./StackedClosureChartAll";
 import TaskDashboardTab from "./TaskDashboardTab";
 import SourceChart from "./Child/Chart/SourceChart";
+import DashboardTaskOrganizationJumpstart from "./Child/JumpStart/DashboardTaskOrganizationJumpstart";
+import TaskOrganizationTab from "./TaskOrganizationTab";
+import {setDashboardViewType} from "./DashboardAction";
+import { version } from "cheerio";
+import CustomerLeadsTab from "./CustomerLeadsTab";
+import DashboardCustomerOrgJumpstart from "./Child/JumpStart/DashboardCustomerOrgJumpstart";
+import DashCustomerChartTab from "./DashCustomerChartTab";
+
+
 class Dashboard extends Component {
   state = { visible: false };
 
@@ -41,9 +50,8 @@ class Dashboard extends Component {
   };
   render() {
     const {
-      dashboardType,
       viewType,
-      organization,
+      setDashboardViewType,
       timeZone,
       level,
       highestLevel,
@@ -55,7 +63,10 @@ class Dashboard extends Component {
       <React.Fragment>
    
 
-        <Dashboardheader />
+        <Dashboardheader 
+        viewType={viewType}
+        setDashboardViewType={setDashboardViewType}
+        />
         <Suspense fallback={<BundleLoader />}>
          <div style={{ display: "flex", justifyContent: "space-between",  }}>
            <div style={{ width: "53%" }}>
@@ -63,16 +74,26 @@ class Dashboard extends Component {
            {viewType==="ME"?(
              <DashboardJumpstartAll/> )
              :viewType==="bulb" ? (<DashboardBulbJumpstart/>)
-             : (
+             : viewType==="ALL" || viewType==="taskOrg" ?
+             (<DashboardTaskOrganizationJumpstart/>)
+             : viewType==="custOrg" ?
+             (<DashboardCustomerOrgJumpstart/>)
+             :
+             (
               <DashboardJumpstart />
           )}
              <div style={{ width: "-webkit-fill-available" }}>
           <FlexContainer flexDirection="column" style={{ display: "block" }}>
        <FlexContainer justifyContent="space-between" >
+       {viewType==="ALL"  || viewType==="taskOrg" ?(
+       <TaskOrganizationTab/>)
+       : viewType==="custOrg" ?(
+        <CustomerLeadsTab/>)
+        :
        <TaskDashboardTab
       viewType={viewType}
       />
-      
+       }
       </FlexContainer>
       
     </FlexContainer>
@@ -82,7 +103,8 @@ class Dashboard extends Component {
                  {viewType==="ME"?(
                    <StackedClosureChartAll/>
           
-            ) : (
+            ) : viewType==="custOrg" ? (<DashCustomerChartTab/>)
+            :(
               <StackedClosureChart/>
           )}
                
@@ -120,7 +142,9 @@ const mapStateToProps = ({ dashboard, auth }) => ({
   viewType:dashboard.viewType,
 
 });
-const mapDispatchToProps = (dispatch) => bindActionCreators({}, dispatch);
+const mapDispatchToProps = (dispatch) => bindActionCreators({
+  setDashboardViewType
+}, dispatch);
 export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);
 
 

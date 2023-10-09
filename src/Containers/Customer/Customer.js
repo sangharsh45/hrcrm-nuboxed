@@ -25,7 +25,7 @@ const CustomerHeader = lazy(() => import("./Child/CustomerHeader"));
 const CustomerTable = lazy(() => import("./Child/CustomerTable/CustomerTable"));
 const CustomerCardList=lazy(() => import("./Child/CustomerTable/CustomerCardList"));
 
-class  Customer extends Component {
+class Customer extends Component {
   state = { currentData: "",currentUser:"" };
   handleClear = () => {
     const startDate = moment()
