@@ -1090,3 +1090,98 @@ export const setSubSelectedReportType = (type) => (dispatch) =>
         });
       });
   };
+
+
+export const getDashUserlist = (orgId) => (dispath) => {
+  dispath({ type: types.GET_DASHBOARD_USER_LIST_REQUEST });
+  axios
+    .get(`${base_url}/employee/active/user/drop-down/${orgId}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      dispath({
+        type: types.GET_DASHBOARD_USER_LIST_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      dispath({
+        type: types.GET_DASHBOARD_USER_LIST_FAILURE,
+        payload: err,
+      });
+    });
+};
+
+export const getHotColdWarm = (userId,startDate, endDate) => (
+  dispatch,
+) => {
+  dispatch({
+    type: types.GET_HOT_COLD_WARM_REQUEST,
+  });
+  axios
+    .get(`${base_url}/leads/type/hot-warm-cold/count/date-range/${userId}?endDate=${endDate}&startDate=${startDate}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      dispatch({
+        type: types.GET_HOT_COLD_WARM_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      dispatch({
+        type: types.GET_HOT_COLD_WARM_FAILURE,
+        payload: err,
+      });
+    });
+};
+export const getJumpCustomerlist = (userId,startDate, endDate) => (dispatch) => {
+  dispatch({ type: types.GET_JUMPSTART_CUSTOMER_LIST_REQUEST });
+  axios
+    .get(`${base_url}/opportunity/added/record/count/date-range/${userId}?endDate=${endDate}&startDate=${startDate}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      // console.log(res)
+      dispatch({
+        type: types.GET_JUMPSTART_CUSTOMER_LIST_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.GET_JUMPSTART_CUSTOMER_LIST_FAILURE,
+        payload: err,
+      });
+    });
+};
+export const getJumpCustomerlist2 = (userId,startDate, endDate) => (dispatch) => {
+  dispatch({ type: types.GET_JUMPSTART_CUSTOMER2_LIST_REQUEST });
+  axios
+    .get(`${base_url}/opportunity/Close/record/count/date-range/${userId}?endDate=${endDate}&startDate=${startDate}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      // console.log(res)
+      dispatch({
+        type: types.GET_JUMPSTART_CUSTOMER2_LIST_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.GET_JUMPSTART_CUSTOMER2_LIST_FAILURE,
+        payload: err,
+      });
+    });
+};

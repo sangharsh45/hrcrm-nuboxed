@@ -65,6 +65,8 @@ import { projectsReducer } from "../Containers/Projects/ProjectsReducer";
 import { invoiceReducer } from "../Containers/Invoice/InvoiceReducer";
 import { locationReducer } from "../Containers/Event/Child/Location/LocationReducer";
 import { sourceReducer } from "../Containers/Settings/Category/Source/SourceReducer";
+import {investorReducer} from "../Containers/Investor/InvestorReducer";
+
 const appReducer = combineReducers({
   dashboard: dashboardReducer,
   profile: profileReducer,
@@ -123,6 +125,7 @@ const appReducer = combineReducers({
 projects:projectsReducer,
 invoice:invoiceReducer,
 source:sourceReducer,
+investor:investorReducer,
 });
 
 const rootReducer = (state, action) => {

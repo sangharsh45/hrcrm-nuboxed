@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { ActionHeader } from "../../../Components/Utils";
-  import DashboardActionLeft from "./DashboardActionLeft";
- import DashboardActionRight from "./DashboardActionRight";
+import DashboardActionLeft from "./DashboardActionLeft";
+import DashboardActionRight from "./DashboardActionRight";
 class DashboardHeader extends Component {
   render() {
     return (
@@ -10,7 +10,11 @@ class DashboardHeader extends Component {
       zIndex: "998"}}>
         <ActionHeader
            leftComponent={<DashboardActionLeft />}
-          // rightComponent={<DashboardActionRight />}
+          rightComponent={<DashboardActionRight
+          viewType={this.props.viewType}
+            setDashboardViewType={this.props.setDashboardViewType}
+
+            />}
         />
       </div>
     );
