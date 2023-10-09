@@ -269,14 +269,11 @@ imgHeight={"1.8em"}
         <FlexContainer
           style={{ width: "100%", paddingLeft: "0.5em", marginTop: "-0.18em" }}
         >
-          
             <FlexContainer
               style={{}}
-              // justifyContent={bottomBarComponent ? "space-between" : "flex-end"}
               alignSelf="flex-end"
               alignItems="center"
             >
-              {/* <h4>{moment(item.startDate).format("ll")}</h4> */}
               <div>
               {item.approveInd&&item.opportunityOwner ? (
 <>
@@ -369,7 +366,7 @@ imgHeight={"1.8em"}
 </>
 )}
 </div>
-{/* <div>
+<div>
 <Tooltip
           placement="right"
           title={
@@ -404,7 +401,7 @@ imgHeight={"1.8em"}
              )}
           </StyledPopconfirm>
 
-              </div> */}
+              </div>
             </FlexContainer>
    
            
@@ -427,7 +424,6 @@ imgHeight={"1.8em"}
 opportunityForecast={props.opportunityForecast}
 opportunityInitiativesSkillsDetails={props.opportunityInitiativesSkillsDetails}
  handleSetCurrentOpportunityId={handleSetCurrentOpportunityId}
-//  opportunityName={currentOpportunityId}
  
  fetchingOpportunitySkills={props.fetchingOpportunitySkills}
  item={currentItem}
@@ -439,13 +435,12 @@ allRecruitmentDetailsByOppId={props.allRecruitmentDetailsByOppId}
              allRecruitmentPositionByOppId={props.allRecruitmentPositionByOppId}
                handleOpportunityDrawerModal={props.handleOpportunityDrawerModal}
                addDrawerOpportunityModal={props.addDrawerOpportunityModal}
-             // candidateByUserId={props.candidateByUserId}
       />
     </>
   );
 }
 
-// }
+
 const mapStateToProps = ({ auth, account, opportunity }) => ({
   userId: auth.userDetails.userId,
   user: auth.userDetails,

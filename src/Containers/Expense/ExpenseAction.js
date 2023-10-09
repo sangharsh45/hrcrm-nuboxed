@@ -416,3 +416,6 @@ export const getExpenseStatusByExpenseId = (voucherId) => (dispatch) => {
           });
       });
 };
+export const handlePExpenseVoucherIdDrawer = (modalProps) => (dispatch) => {
+  dispatch({ type: types.HANDLE_PEXPENSE_VOUCHERID_DRAWER, payload: modalProps });
+};

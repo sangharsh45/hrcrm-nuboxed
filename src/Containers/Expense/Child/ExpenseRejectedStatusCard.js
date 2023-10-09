@@ -4,30 +4,29 @@ import { bindActionCreators } from "redux";
 import { FormattedMessage } from "react-intl";
 import { StyledTable } from "../../../Components/UI/Antd";
 import { Icon, Tooltip } from "antd";
-import { getExpenseById,handleExpenseVoucherIdDrawer,getRejectdExpense } from "../ExpenseAction";
+import { getExpenseById,handlePExpenseVoucherIdDrawer,getRejectdExpense } from "../ExpenseAction";
 import { BundleLoader } from "../../../Components/Placeholder";
 import { OnlyWrapCard } from '../../../Components/UI/Layout'
 import styled from 'styled-components';
 import dayjs from "dayjs";
 import { CurrencySymbol } from "../../../Components/Common";
 import APIFailed from "../../../Helpers/ErrorBoundary/APIFailed";
-import ExpenseVoucherIdDrawer from "./ExpenseVoucherIdDrawer";
+import PExpenseVoucherIdDrawer from "./PExpenseVoucherIdDrawer";
 import Expense from "../Expense";
 
 function ExpenseRejectedStatusCard(props) {
   const [expand, setExpand] = useState(false);
-  const [voucherId, setvoucherId] = useState("");
-  const [particularRowData, setParticularRowData] = useState({});
+  const [newvoucherId, setnewvoucherId] = useState("");
+  const [newparticularRowData, setnewParticularRowData] = useState({});
   const [pageNo, setPage] = useState(0);
 
-  function handleSetParticularRowData(item) {
+  function handleSetNewParticularRowData(item) {
     console.log(item);
-    setParticularRowData(item);   
+    setnewParticularRowData(item);   
   }
-
-  function handleExpand(voucherId) {
+  function handleExpand(newvoucherId) {
     setExpand(!expand);    
-    setvoucherId(voucherId);
+    setnewvoucherId(newvoucherId);
   }
 
   useEffect(() => {
@@ -39,7 +38,7 @@ function ExpenseRejectedStatusCard(props) {
  
     const {
       rejectedExpenses,
-      expenseVoucherIdDrawer,
+      pexpenseVoucherIdDrawer,
       handleExpenseVoucherIdDrawer,
     } = props;
 
@@ -72,8 +71,8 @@ function ExpenseRejectedStatusCard(props) {
                                   </h4>
                                   <h4 class=" text-xs text-blue-500 text-cardBody font-poppins cursor-pointer">
 <div onClick={() => { handleExpand(item.voucherId);
-                handleSetParticularRowData(item);
-                props.handleExpenseVoucherIdDrawer(true);}}>
+                handleSetNewParticularRowData(item);
+                props.handlePExpenseVoucherIdDrawer(true);}}>
          {item.voucherId}
          </div>
          </h4>
@@ -126,12 +125,11 @@ function ExpenseRejectedStatusCard(props) {
                 })}
       </OnlyWrapCard>
       
-
-        <ExpenseVoucherIdDrawer
-        voucherId={voucherId} 
-        particularRowData={particularRowData}
-        expenseVoucherIdDrawer={expenseVoucherIdDrawer}
-        handleExpenseVoucherIdDrawer={handleExpenseVoucherIdDrawer}
+      <PExpenseVoucherIdDrawer
+        newvoucherId={newvoucherId} 
+        newparticularRowData={newparticularRowData}
+        pexpenseVoucherIdDrawer={pexpenseVoucherIdDrawer}
+        handlePExpenseVoucherIdDrawer={handlePExpenseVoucherIdDrawer}
         />
       </>
     );
@@ -143,13 +141,14 @@ const mapStateToProps = ({ auth, expense }) => ({
   fetchingExpenseById: expense.fetchingExpenseById,
   fetchingExpenseByIdError: expense.fetchingExpenseByIdError,
   expenseVoucherIdDrawer:expense.expenseVoucherIdDrawer,
-  rejectedExpenses:expense.rejectedExpenses
+  rejectedExpenses:expense.rejectedExpenses,
+  pexpenseVoucherIdDrawer:expense.pexpenseVoucherIdDrawer,
 });
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
       getExpenseById,
-      handleExpenseVoucherIdDrawer,
+      handlePExpenseVoucherIdDrawer,
       getRejectdExpense
     },
     dispatch

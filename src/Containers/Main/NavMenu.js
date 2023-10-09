@@ -337,6 +337,58 @@ function NavMenu (props) {
               </Link>
             </Menu.Item>
           )}
+          <hr />
+          <Menu.Item key="/pitch " style={{height:"30px",paddingLeft:"1rem"}}>
+              <Link to="/pitch">
+                <GroupsIcon
+                   style={{ fontSize: "large" }}
+                />
+                 <span class="text-white text-ls ml-1">
+               
+                  {/* {translatedMenuItems[13]} */}Pitch 
+                </span>
+              </Link>
+            </Menu.Item>
+            <Menu.Item key="/deal " style={{height:"30px",paddingLeft:"1rem"}}>
+              <Link to="/deal">
+              <LightbulbIcon
+                  style={{ fontSize: "large" }}
+                />
+                 <span class="text-white text-ls ml-1">
+               
+                  {/* {translatedMenuItems[13]} */}Deal 
+                </span>
+              </Link>
+            </Menu.Item>
+            <Menu.Item key="/contactInvest" style={{height:"30px",paddingLeft:"1rem"}}>
+              <Link to="/contactInvest">
+              <ContactsIcon
+                   style={{ fontSize: "large" }}
+                />
+                 <span class="text-white text-ls ml-1">
+               
+                  {/* {translatedMenuItems[13]} */}Contact Invest 
+                </span>
+              </Link>
+            </Menu.Item>
+            <Menu.Item key="/investor" style={{height:"30px",paddingLeft:"1rem"}}>
+              <Link to="/investor">
+            
+                <ApartmentIcon
+
+                   style={{ fontSize: "large" }}
+                />
+                <span class="text-white text-ls ml-1">
+           
+                  {/* {translatedMenuItems[9]} */}Investor
+                  &nbsp;&nbsp;&nbsp;
+                  <Badge
+                    count={props.opportunityRecord.CustomerNo}
+                    overflowCount={999}
+                  ></Badge>
+                </span>
+              </Link>
+            </Menu.Item>
           {/* {user.userType !== "USER" && user.department !== "Customer" &&user.department == "VENDOR" && ( */}
          
           <hr />
