@@ -55,6 +55,8 @@ const initialState = {
   fetchingRejectedExpenseError:false,
   rejectedExpenses:[],
 
+  pexpenseVoucherIdDrawer:false
+
 };
 
 export const expenseReducer = (state = initialState, action) => {
@@ -272,7 +274,9 @@ export const expenseReducer = (state = initialState, action) => {
                       fetchingExpenseStatus: false,
                       fetchingExpenseStatusError: true,
                   };
-    
+                 
+                  case types.HANDLE_PEXPENSE_VOUCHERID_DRAWER:
+                    return {...state,pexpenseVoucherIdDrawer:action.payload}
       default:
   return state;
     }

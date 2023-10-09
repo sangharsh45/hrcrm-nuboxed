@@ -143,6 +143,10 @@ const AccountImport = lazy(() => import("../Import/Child/AccountImport"));
 const Requirement = lazy(() => import("../Requirement/Requirement"));
 const Demand = lazy(() => import("../Demand/Demand"));
 const AddContactModal = lazy(() => import("../Contact/Child/AddContactModal"));
+const Pitch=lazy(()=>import("../Pitch/Pitch"));
+const Deal=lazy(()=>import("../Deal/Deal"));
+const ContactInvest=lazy(()=>import("../ContactInvest/ContactInvest"));
+const Investor=lazy(()=>import("../Investor/Investor"));
 // const Users = lazy(() => import("../Users/Users"));
 
 // class MainApp extends React.Component {
@@ -714,9 +718,13 @@ function MainApp(props) {
                         path="/requirement"
                         component={Requirement}
                       />
-
                       <Route exact path="/demand" component={Demand} />
 
+                      <Route exact path="/pitch" component={Pitch}/>
+                      <Route exact path="/deal" component={Deal}/>
+                      <Route exact path="/contactInvest" component={ContactInvest}/>
+                      <Route exact path="/investor" component={Investor}/>
+                      
                       <Route path="**" component={PageNotFound} />
                     </Switch>
                   </Suspense>

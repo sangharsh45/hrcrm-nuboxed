@@ -13,6 +13,7 @@ import AddressFieldArray from "../../../../Components/Forms/Formik/AddressFieldA
 import {
     updateLeads,
     setEditLeads,
+    setClearbitData,
 } from "../../../Leads/LeadsAction";
 import PostImageUpld from "../../../../Components/Forms/Formik/PostImageUpld";
 import { FlexContainer } from "../../../../Components/UI/Layout";
@@ -53,6 +54,7 @@ function UpdateLeadsForm (props) {
       prefillAccount,
       updateLeadsById,
       updateLeads,
+      setClearbitData,
     } = props;
 
     const [defaultOption, setDefaultOption] = useState(props.setEditingLeads.assignedTo);
@@ -249,7 +251,7 @@ function UpdateLeadsForm (props) {
                     <StyledLabel>
                   <Field
                     isRequired
-                    name="name"
+                    name="companyName"
                     type="text"
                     //label="Name"
                     label={
@@ -258,6 +260,8 @@ function UpdateLeadsForm (props) {
                     isColumn
                     width={"100%"}
                     component={InputComponent}
+                    // setClearbitData={props.setClearbitData}
+                    // component={ClearbitImage}
                     accounts={accounts}
                     inlineLabel
                     />
@@ -530,7 +534,8 @@ const mapDispatchToProps = (dispatch) =>
     {
         updateLeads,
         setEditLeads,
-      getAllCustomerEmployeelist
+      getAllCustomerEmployeelist,
+      setClearbitData,
     },
     dispatch
   );

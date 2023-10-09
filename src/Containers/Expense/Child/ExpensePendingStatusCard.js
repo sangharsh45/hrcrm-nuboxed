@@ -1,32 +1,33 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState,lazy } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import {  Tooltip } from "antd";
-import { getExpenseById,handleExpenseVoucherIdDrawer,getPendingExpense,deleteExpense } from "../ExpenseAction";
+import { getExpenseById,handlePExpenseVoucherIdDrawer,getPendingExpense,deleteExpense } from "../ExpenseAction";
 import { DeleteOutlined, } from "@ant-design/icons";
 import { OnlyWrapCard } from '../../../Components/UI/Layout'
 import dayjs from "dayjs";
-import ExpenseVoucherIdDrawer from "./ExpenseVoucherIdDrawer";
 import Expense from "../Expense";
+import { BundleLoader } from "../../../Components/Placeholder";
+
+const PExpenseVoucherIdDrawer =lazy(()=>import("./PExpenseVoucherIdDrawer"));
 
 function ExpensePendingStatusCard(props) {
   const [expand, setExpand] = useState(false);
-  const [voucherId, setvoucherId] = useState("");
-  const [particularRowData, setParticularRowData] = useState({});
+  const [newvoucherId, setnewvoucherId] = useState("");
+  const [newparticularRowData, setnewParticularRowData] = useState({});
   const [pageNo, setPage] = useState(0);
 
-  function handleSetParticularRowData(item) {
+  function handleSetNewParticularRowData(item) {
     console.log(item);
-    setParticularRowData(item);   
+    setnewParticularRowData(item);   
   }
 
-  function handleExpand(voucherId) {
+  function handleExpand(newvoucherId) {
     setExpand(!expand);    
-    setvoucherId(voucherId);
+    setnewvoucherId(newvoucherId);
   }
 
   useEffect(() => {
-    // props.getExpenseById(props.userId);
     setPage(pageNo + 1);
     props.getPendingExpense(props.userId,pageNo);
   }, [props.userId]);
@@ -34,10 +35,13 @@ function ExpensePendingStatusCard(props) {
  
     const {
       pendingExpenses,
-      expenseVoucherIdDrawer,
-      handleExpenseVoucherIdDrawer,
+      pexpenseVoucherIdDrawer,
+      handlePExpenseVoucherIdDrawer,
+      fetchingPendingExpense,
     } = props;
-
+if(fetchingPendingExpense){
+return <BundleLoader/>
+}
     return (
       <>
          <OnlyWrapCard className="h-[32rem]">  
@@ -67,8 +71,8 @@ function ExpensePendingStatusCard(props) {
                                   </h4>
                                   <h4 class=" text-xs text-blue-500 text-cardBody font-poppins cursor-pointer">
 <div onClick={() => { handleExpand(item.voucherId);
-                handleSetParticularRowData(item);
-                props.handleExpenseVoucherIdDrawer(true);}}>
+                handleSetNewParticularRowData(item);
+                props.handlePExpenseVoucherIdDrawer(true);}}>
          {item.voucherId}
          </div>
          </h4>
@@ -133,11 +137,11 @@ function ExpensePendingStatusCard(props) {
       </OnlyWrapCard>
       
 
-        <ExpenseVoucherIdDrawer
-        voucherId={voucherId} 
-        particularRowData={particularRowData}
-        expenseVoucherIdDrawer={expenseVoucherIdDrawer}
-        handleExpenseVoucherIdDrawer={handleExpenseVoucherIdDrawer}
+        <PExpenseVoucherIdDrawer
+        newvoucherId={newvoucherId} 
+        newparticularRowData={newparticularRowData}
+        pexpenseVoucherIdDrawer={pexpenseVoucherIdDrawer}
+        handlePExpenseVoucherIdDrawer={handlePExpenseVoucherIdDrawer}
         />
       </>
     );
@@ -148,15 +152,16 @@ const mapStateToProps = ({ auth, expense }) => ({
   Expenses: expense.Expenses,
   fetchingExpenseById: expense.fetchingExpenseById,
   fetchingExpenseByIdError:expense.fetchingExpenseByIdError,
-  expenseVoucherIdDrawer:expense.expenseVoucherIdDrawer,
+  pexpenseVoucherIdDrawer:expense.pexpenseVoucherIdDrawer,
   pendingExpenses:expense.pendingExpenses,
+  fetchingPendingExpense:expense.fetchingPendingExpense
 
 });
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
       getExpenseById,
-      handleExpenseVoucherIdDrawer,
+      handlePExpenseVoucherIdDrawer,
       getPendingExpense,
       deleteExpense
     },
