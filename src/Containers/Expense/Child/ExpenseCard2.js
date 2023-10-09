@@ -49,17 +49,18 @@ function ExpenseCard2(props) {
               {Expenses.map((item) => {
                  return (
                   <div>
-                  <div className="flex justify-between mt-4"
+                  <div className="flex justify-between mt-4 max-sm:flex-col"
                       style={{
                           borderBottom: "3px dotted #515050"
                       }}>
                           <h4 class=" text-sm text-cardBody font-poppins">
                                  Name
                                   </h4> 
-                      <div className=" flex font-medium flex-col w-72 ">
+                      <div className=" flex font-medium flex-col md:w-72 max-sm:w-full justify-between max-sm:flex-row  ">
 
                          
                               <Tooltip >
+                                <div  class=" flex max-sm:w-full justify-between max-sm:flex-row md:flex-col ">
                                   <h4 class=" text-sm text-cardBody font-poppins">
                                   Voucher ID
                                   </h4>
@@ -70,11 +71,11 @@ function ExpenseCard2(props) {
          {item.voucherId}
          </div>
          </h4>
-
+         </div>
 </Tooltip>
 
 </div>
-<div className=" flex font-medium flex-col  w-52 ">
+<div className=" flex font-medium flex-col  md:w-52 max-sm:w-full justify-between max-sm:flex-row ">
                            
                            <h4 class=" text-sm text-cardBody font-poppins"> Voucher Date </h4>
                            <h4 class=" text-xs text-cardBody font-poppins">
@@ -84,7 +85,7 @@ function ExpenseCard2(props) {
 
                            </h4>
                        </div>
-                       <div className=" flex font-medium flex-col w-32 ">
+                       <div className=" flex font-medium flex-col md:w-32 max-sm:w-full justify-between max-sm:flex-row ">
                                   
 
                                   <h4 class=" text-sm text-cardBody font-poppins">Amount</h4>
@@ -92,7 +93,7 @@ function ExpenseCard2(props) {
                                       € {item.amount}
                                   </h4>
                               </div>
-                              <div className=" flex font-medium flex-col w-[12rem] ">
+                              <div className=" flex font-medium flex-col md:w-[12rem] max-sm:w-full justify-between max-sm:flex-row ">
                                     <h4 class=" text-sm text-cardBody font-poppins">Status</h4>
 
                                     <div class=" text-xs text-cardBody font-poppins">
