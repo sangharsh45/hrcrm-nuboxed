@@ -10,15 +10,16 @@ const LocationCard = (props) => {
    props.getlocation(props.orgId);
     }, [])
   return (
-    <div>
+    <div class="overflow-y-auto max-h-[37rem]">
       <CardWrapper>  
    {props.showLocation.map((item) => {
      return (
   <CardElement>
-     <div class=" flex flex-row justify-evenly w-wk">
-     <div className=" flex font-medium flex-col w-40  ">
+    
+     <div class=" flex flex-row justify-evenly w-wk max-sm:flex-col">
+     <div className=" flex font-medium flex-col md:w-40 max-sm:flex-row w-full max-sm:justify-between ">
 
-<div class=" text-sm text-cardBody font-medium font-poppins">
+<div class=" text-sm text-cardBody font-semibold font-poppins">
 Name
 </div>
 
@@ -28,9 +29,9 @@ Name
 {/* </Tooltip>   */}
 </div>         
  
-<div className=" flex font-medium flex-col w-40  ">
+<div className=" flex font-medium flex-col md:w-40  max-sm:flex-row w-full mt-1 max-sm:justify-between">
 
-<div class=" text-sm text-cardBody font-medium font-poppins">
+<div class=" text-sm text-cardBody font-semibold font-poppins">
 Country
 </div>
 
@@ -38,9 +39,9 @@ Country
   {item.country_name}
 </div>
 </div> 
-<div className=" flex font-medium flex-col w-40  ">
+<div className=" flex font-medium flex-col md:w-40 max-sm:flex-row w-full mt-1 max-sm:justify-between">
 
-<div class=" text-sm text-cardBody font-medium font-poppins">
+<div class=" text-sm text-cardBody font-semibold font-poppins">
 Address
 </div>
 
@@ -52,8 +53,8 @@ Address
           </span>
 </div>
 </div> 
-<div className=" flex font-medium flex-col w-24  ">
-<div class=" text-sm text-cardBody font-medium font-poppins">
+<div className=" flex font-medium flex-col md:w-24 max-sm:flex-row w-full mt-1 max-sm:justify-between">
+<div class=" text-sm text-cardBody font-semibold font-poppins">
 Production
 </div>
 
@@ -67,8 +68,8 @@ Production
                     />
 </div>
 </div> 
-<div className=" flex font-medium flex-col w-24  ">
-<div class=" text-sm text-cardBody font-medium font-poppins">
+<div className=" flex font-medium flex-col md:w-24 max-sm:flex-row w-full mt-1 max-sm:justify-between">
+<div class=" text-sm text-cardBody font-semibold font-poppins">
 Inventory
 </div>
 
@@ -82,8 +83,8 @@ Inventory
                     />
 </div>
 </div> 
-<div className=" flex font-medium flex-col w-24  ">
-<div class=" text-sm text-cardBody font-medium font-poppins">
+<div className=" flex font-medium flex-col md:w-24 max-sm:flex-row w-full mt-1 max-sm:justify-between ">
+<div class=" text-sm text-cardBody font-semibold font-poppins">
 Billing
 </div>
 <div class=" font-normal text-sm text-cardBody font-poppins">
@@ -96,8 +97,8 @@ Billing
                     />
 </div>
 </div> 
-<div className=" flex font-medium flex-col w-24  ">
-<div class=" text-sm text-cardBody font-medium font-poppins">
+<div className=" flex font-medium flex-col md:w-24 max-sm:flex-row w-full mt-1 max-sm:justify-between">
+<div class=" text-sm text-cardBody font-semibold font-poppins">
 Corporate
 </div>
 <div class=" font-normal text-sm text-cardBody font-poppins">
@@ -110,8 +111,8 @@ Corporate
                     />
 </div>
 </div> 
-<div className=" flex font-medium flex-col w-24  ">
-<div class=" text-sm text-cardBody font-medium font-poppins">
+<div className=" flex font-medium flex-col md:w-24 max-sm:flex-row w-full mt-1 max-sm:justify-between">
+<div class=" text-sm text-cardBody font-semibold font-poppins">
 Project
 </div>
 <div class=" font-normal text-sm text-cardBody font-poppins">
@@ -124,8 +125,8 @@ Project
                     />
 </div>
 </div> 
-<div className=" flex font-medium flex-col w-24  ">
-<div class=" text-sm text-cardBody font-medium font-poppins">
+<div className=" flex font-medium flex-col md:w-24 max-sm:flex-row w-full mt-1 max-sm:justify-between">
+<div class=" text-sm text-cardBody font-semibold font-poppins">
 Retail
 </div>
 <div class=" font-normal text-sm text-cardBody font-poppins">
@@ -140,6 +141,7 @@ Retail
 </div> 
 
  </div>
+
   </CardElement>
      )
     })}
@@ -186,6 +188,8 @@ border-radius: 0.75rem;
     flex-direction: column;
   @media only screen and (max-width: 600px) {
     width: 100%;
+    margin: 0.25em;
+     height: 15rem;
     
   }
 `

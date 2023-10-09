@@ -81,6 +81,8 @@ import Invoice from "../Invoice/Invoice";
 import CandidateTotalBilling from "../Projects/Child/ProjectDetailsTab/CandidateTotalBilling";
 import { getSupportedLanguages } from '../Translate/TranslateService';
 import Location from "../Event/Child/Location/Location";
+import MobileNavMenu from "./Mobilemenu";
+import Navmenu2 from "./Navmenu2";
 
 const OpportunityDetail = lazy(() =>
   import("../Opportunity/Child/OpportunityDetail/OpportunityDetail")
@@ -265,6 +267,7 @@ function MainApp(props) {
     <>
       <ThemeProvider theme={props.theme}>
         <LayoutWrapper>
+        <div class="max-sm:hidden">
           <Sider
             trigger={null}
             collapsible
@@ -325,12 +328,14 @@ function MainApp(props) {
               selectedLanguage={selectedLanguage}
             />
           </Sider>
+          </div>
           <LayoutWrapper>
             <NavbarWrapper style={{ padding: 0, height: 50, alignItems: "center", position: "sticky", zIndex: "999",top:" 0.15rem",
   
  
  }}>
               <Header>
+              <div class="md:hidden"><Navmenu2  selectedLanguage={selectedLanguage}/></div>
                 <div
                   style={{
                     height: "100%",
@@ -482,7 +487,8 @@ function MainApp(props) {
                                         </FlexContainer>
                                     </Link> */}
                   {/* <Subscription /> */}
-                  <div
+                 
+                  <div class="max-sm:hidden"
                     style={{
                       backgroundColor: "#ff7158bf",
                       color: "white",
@@ -501,7 +507,7 @@ function MainApp(props) {
                   >
                     {props.department}
                   </div>
-                  <div
+                  <div class="max-sm:hidden"
                     style={{
                       backgroundColor: "#ff7158bf",
                       color: "white",

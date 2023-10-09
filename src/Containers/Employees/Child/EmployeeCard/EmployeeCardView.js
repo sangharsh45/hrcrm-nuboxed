@@ -82,7 +82,7 @@ function handleSetCurrentEmployeeId(employeeId,) {
                    >
                  
                    </Tooltip>
-                                  
+                           <div class="flex flex-row max-sm:justify-start items-center" >     
                    <div >
                           <MultiAvatar2
 
@@ -102,7 +102,7 @@ function handleSetCurrentEmployeeId(employeeId,) {
           />       
                         </Header> 
                         </div>
-                
+                        </div> 
         
                          
                         </CardImage>
@@ -276,7 +276,7 @@ border-radius: 0.35rem;
     display: flex;
     flex-direction: column;
   @media only screen and (max-width: 600px) {
-    width: 100%;
+    width: 22rem;
     
   }
 `
@@ -297,7 +297,6 @@ const CardImage = styled.div`
   @media only screen and (max-width: 600px) {
     width: 100%;
     display:flex;
-    align-items: center;
     flex-direction:column
   }
 `

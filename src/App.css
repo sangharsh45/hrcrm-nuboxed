@@ -822,7 +822,7 @@ h1{
 .ant-layout.ant-layout-has-sider {
   flex-direction: row;
   overflow: hidden;
-  height: 100vh;
+  height: 107vh;
 }
 
 .ant-avatar {
