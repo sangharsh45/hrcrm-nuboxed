@@ -231,6 +231,8 @@ border-radius: 0.35rem;
     flex-direction: column;
   @media only screen and (max-width: 600px) {
     width: 100%;
+    height: 9rem;
+      margin: 0.1em;
     
   }
 `

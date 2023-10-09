@@ -45,15 +45,16 @@ class MileageCard2 extends React.Component {
       {MileageDat.map((item) => { 
                     return (
                         <div>
-                            <div className="flex justify-between mt-4"
+                            <div className="flex justify-between mt-4 max-sm:flex-col"
                                 style={{
                                     borderBottom: "3px dotted #515050"
                                 }}>
                                      
-                                <div className=" flex font-medium flex-col w-72 ">
+                                <div className=" flex font-medium flex-col w-72 max-sm:w-full ">
 
                                    
                                         <Tooltip >
+                                          <div class="flex max-sm:justify-between w-full flex-row md:flex-col">
                                             <h4 class=" text-sm text-cardBody font-poppins">
                                             Voucher ID
                                             </h4>
@@ -64,12 +65,12 @@ class MileageCard2 extends React.Component {
          {item.voucherId}
          </div>
                                             </h4>
-
+                                            </div>
                                         </Tooltip>
                               
                                 </div>
 
-                                <div className=" flex font-medium flex-col  w-52 ">
+                                <div className=" flex font-medium flex-col   md:w-52  max-sm:justify-between w-full max-sm:flex-row  ">
                            
                                     <h4 class=" text-sm text-cardBody font-poppins"> Voucher Date </h4>
                                     <h4 class=" text-xs text-cardBody font-poppins">
@@ -79,7 +80,7 @@ class MileageCard2 extends React.Component {
 
                                     </h4>
                                 </div>
-                                <div className=" flex font-medium flex-col w-36 ">
+                                <div className=" flex font-medium flex-col md:w-36 max-sm:justify-between w-full max-sm:flex-row ">
                                   
 
                                     <h4 class=" text-sm text-cardBody font-poppins">Amount</h4>
@@ -105,7 +106,7 @@ class MileageCard2 extends React.Component {
                                         <u>Nixa</u>
                                     </h4>
                                 </div> */}
-                                <div className=" flex font-medium flex-col w-32 ">
+                                <div className=" flex font-medium flex-col md:w-32 max-sm:justify-between w-full max-sm:flex-row ">
                                     <h4 class=" text-sm text-cardBody font-poppins">Status</h4>
 
                                     <div class=" text-xs text-cardBody font-poppins">

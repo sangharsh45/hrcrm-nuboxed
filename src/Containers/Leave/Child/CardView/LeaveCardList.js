@@ -83,8 +83,8 @@ function LeaveCardList (props) {
                     borderBottom: "3px dotted #515050"
                   }}
                 >
-                  <div class=" flex flex-row justify-evenly w-wk">
-                    <div className=" flex font-medium flex-col w-44 ">
+                  <div class=" flex flex-row justify-evenly w-wk max-sm:flex-col">
+                    <div className=" flex font-medium flex-col md:w-44 max-sm:justify-between w-full max-sm:flex-row ">
 
                     <div class=" text-sm text-cardBody font-medium font-poppins">
          
@@ -99,7 +99,7 @@ function LeaveCardList (props) {
           
                     </div>
                   
-                    <div className=" flex font-medium flex-col w-40">
+                    <div className=" flex font-medium flex-col md:w-40 max-sm:justify-between w-full max-sm:flex-row">
 
                       <div class=" text-sm text-cardBody font-medium font-poppins">
                       End Date
@@ -112,7 +112,7 @@ function LeaveCardList (props) {
           
                       {/* </Tooltip>   */}
                     </div>
-                    <div className=" flex font-medium flex-col w-40">
+                    <div className=" flex font-medium flex-col md:w-40 max-sm:justify-between w-full max-sm:flex-row">
              
 
                         <div class=" text-sm text-cardBody font-medium font-poppins">
@@ -124,7 +124,7 @@ function LeaveCardList (props) {
                         </div>
                      
                     </div>
-                    <div className=" flex font-medium flex-col w-40">
+                    <div className=" flex font-medium flex-col md:w-40 max-sm:justify-between w-full max-sm:flex-row">
                     
 
                         <div class=" text-sm text-cardBody font-medium font-poppins">
@@ -137,7 +137,7 @@ function LeaveCardList (props) {
                    
                     </div>
  
-     <div className=" flex font-medium flex-col w-48 ">
+     <div className=" flex font-medium flex-col md:w-48 max-sm:justify-between w-full max-sm:flex-row ">
                                     <h4 class=" text-sm text-cardBody font-poppins">Status</h4>
 
                                     <div class=" text-base text-cardBody font-poppins">
