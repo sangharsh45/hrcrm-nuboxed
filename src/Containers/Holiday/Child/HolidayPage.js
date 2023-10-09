@@ -125,7 +125,7 @@ class HolidayPage extends React.Component {
     return (
       <>
         <FlexContainer>
-          <div style={{ width: "50%" }}>
+          <div  class="max-sm:w-[24rem] md:w-2/4">
             <MainWrapper>
               <h1
                 style={{

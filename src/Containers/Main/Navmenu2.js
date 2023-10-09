@@ -20,17 +20,20 @@ import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import { Link } from "react-router-dom";
 import VolumeUpIcon from '@mui/icons-material/VolumeUp';
 import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
-import { TeamOutlined } from "@ant-design/icons";
-import AccessAlarmIcon from '@mui/icons-material/AccessAlarm';
-import PortraitIcon from '@mui/icons-material/Portrait';
-import NewspaperIcon from '@mui/icons-material/Newspaper';
-import TextSnippetIcon from '@mui/icons-material/TextSnippet';
-import ComputerIcon from '@mui/icons-material/Computer';
-import LibraryBooksIcon from '@mui/icons-material/LibraryBooks';
+import "./header.css";
+import MenuIcon from '@mui/icons-material/Menu';
+import CloseIcon from '@mui/icons-material/Close';
 const SubMenu = Menu.SubMenu;
 
 function NavMenu (props) {
   const [translatedMenuItems, setTranslatedMenuItems] = useState([]);
+  const [click, setClick] = useState(false);
+  const handleClick = () => setClick(!click);
+  const closeMobileMenu = () => setClick(false);
+  const handleRefresh = () => {
+    // This function will refresh the page
+    window.location.reload();
+  };
   console.log("abv",props.selectedLanguage)
   useEffect(() => {
     const fetchMenuTranslations = async () => {
@@ -76,8 +79,10 @@ function NavMenu (props) {
     console.log("path", path);
     console.log(user.leadsAccessInd)
     return (
+        <div className="header">
+             <ul className={click ? "nav-options active" : "nav-options"}>
       <div style={{ marginLeft: "-1.1875em" }}>
-         
+      <div class="overflow-y-auto max-h-[37rem]">
         <Menu
           defaultSelectedKeys={["/" + path]}
           defaultOpenKeys={[]}
@@ -89,7 +94,7 @@ function NavMenu (props) {
         >
           {/* dashboard */}
           {user.userType !== "USER" && user.department !== "Vendor" && user.department !== "Customer" && (
-
+ <li className="option" onClick={closeMobileMenu}>
             <Menu.Item key="/dashboard" style={{height:"30px",paddingLeft:"1rem"}}>
               <Link to="/dashboard">
                 <DashboardIcon 
@@ -107,6 +112,7 @@ function NavMenu (props) {
                 </span>
               </Link>
             </Menu.Item>
+            </li>
 
           )}
           {/* dashboard */}
@@ -125,7 +131,9 @@ function NavMenu (props) {
           </Menu.Item> */}
           {/* {user.userType !== "USER" && user.department !== "VENDOR" && ( */}
           {/*planner*/}
+          <li className="option" onClick={closeMobileMenu}>
           <Menu.Item key="/planner" style={{height:"30px",paddingLeft:"1rem"}}>
+         
             <Link to="/planner">
               {/* <Icon type="calendar" style={{ color: "white" }} /> */}
               <CalendarMonthIcon
@@ -138,7 +146,9 @@ function NavMenu (props) {
                 {translatedMenuItems[1]}
               </span>
             </Link>
+           
           </Menu.Item>
+          </li>
           {/*planner*/}
           {/* )} */}
           {/* <Menu.Item key="/planner">
@@ -180,6 +190,7 @@ function NavMenu (props) {
                   </span>
                 }
               > */}
+                <li className="option" onClick={closeMobileMenu}>
           <Menu.Item key="/call" style={{height:"30px",paddingLeft:"1rem"}}>
             <Link to="/call">
               {/* <Icon style={{ color: "white" }} type="phone" /> */}
@@ -199,6 +210,8 @@ function NavMenu (props) {
               ></Badge>
             </Link>
           </Menu.Item>
+          </li>
+          <li className="option" onClick={closeMobileMenu}>
           <Menu.Item key="task" style={{height:"30px",paddingLeft:"1rem"}}>
             <Link to="/Task">
               {/* <Icon type="file-done" /> */}
@@ -217,6 +230,8 @@ function NavMenu (props) {
               ></Badge>
             </Link>
           </Menu.Item>
+          </li>
+          <li className="option" onClick={closeMobileMenu}>
           <Menu.Item key="event" style={{height:"30px",paddingLeft:"1rem"}}>
             <Link to="/Event">
               {/* <Icon type="schedule" /> */}
@@ -238,6 +253,7 @@ function NavMenu (props) {
               ></Badge>
             </Link>
           </Menu.Item>
+          </li>
           {/* <Menu.Item key="/mileage">
               <Link to="/mileage">
                 <Icon type="dashboard" style={{ color: "white" }} />
@@ -249,6 +265,7 @@ function NavMenu (props) {
 
           {/*Activity*/}
           {/*Reports*/}
+          <li className="option" onClick={closeMobileMenu}>
           <Menu.Item key="/reports" style={{height:"30px",paddingLeft:"1rem"}}>
             <Link to="/reports">
               <PictureAsPdfIcon
@@ -261,12 +278,14 @@ function NavMenu (props) {
               </span>
             </Link>
           </Menu.Item>
+          </li>
           {/*Reports*/}
 
 
 
 <hr />
      {user.leadsAccessInd === true && user.crmInd === true &&(
+          <li className="option" onClick={closeMobileMenu}>
      <Menu.Item key="/leads" style={{height:"30px",paddingLeft:"1rem"}}>
               <Link to="/Leads">
                 <GroupsIcon
@@ -279,9 +298,11 @@ function NavMenu (props) {
                 </span>
               </Link>
             </Menu.Item>
+            </li>
 )} 
              {/*Opportunity*/}
              {user.opportunityAccessInd === true && user.crmInd === true && (
+                <li className="option" onClick={closeMobileMenu}>
             <Menu.Item key="/opportunity" style={{height:"30px",paddingLeft:"1rem"}}>
               <Link to="/opportunity">
            
@@ -299,10 +320,12 @@ function NavMenu (props) {
                 </span>
               </Link>
             </Menu.Item>
+            </li>
           )}
 
              {/* Contact */}
              {user.contactAccessInd === true && user.crmInd === true && (
+                <li className="option" onClick={closeMobileMenu}>
             <Menu.Item key="/contact" style={{height:"30px",paddingLeft:"1rem"}}>
               <Link to="/contact">
              
@@ -315,10 +338,12 @@ function NavMenu (props) {
                 </span>
               </Link>
             </Menu.Item>
+            </li>
           )}
 
            {/* Customer */}
            {user.customerAccessInd === true && user.crmInd === true &&(
+             <li className="option" onClick={closeMobileMenu}>
             <Menu.Item key="/customer" style={{height:"30px",paddingLeft:"1rem"}}>
               <Link to="/customer">
             
@@ -337,8 +362,10 @@ function NavMenu (props) {
                 </span>
               </Link>
             </Menu.Item>
+            </li>
           )}
           <hr />
+          <li className="option" onClick={closeMobileMenu}>
           <Menu.Item key="/pitch " style={{height:"30px",paddingLeft:"1rem"}}>
               <Link to="/pitch">
                 <GroupsIcon
@@ -350,6 +377,8 @@ function NavMenu (props) {
                 </span>
               </Link>
             </Menu.Item>
+            </li>
+            <li className="option" onClick={closeMobileMenu}>
             <Menu.Item key="/deal " style={{height:"30px",paddingLeft:"1rem"}}>
               <Link to="/deal">
               <LightbulbIcon
@@ -361,6 +390,8 @@ function NavMenu (props) {
                 </span>
               </Link>
             </Menu.Item>
+            </li>
+            <li className="option" onClick={closeMobileMenu}>
             <Menu.Item key="/contactInvest" style={{height:"30px",paddingLeft:"1rem"}}>
               <Link to="/contactInvest">
               <ContactsIcon
@@ -372,6 +403,8 @@ function NavMenu (props) {
                 </span>
               </Link>
             </Menu.Item>
+            </li>
+            <li className="option" onClick={closeMobileMenu}>
             <Menu.Item key="/investor" style={{height:"30px",paddingLeft:"1rem"}}>
               <Link to="/investor">
             
@@ -390,6 +423,7 @@ function NavMenu (props) {
                 </span>
               </Link>
             </Menu.Item>
+            </li>
           {/* {user.userType !== "USER" && user.department !== "Customer" &&user.department == "VENDOR" && ( */}
          
           <hr />
@@ -434,6 +468,7 @@ function NavMenu (props) {
           {/*Talent*/}
           {/*Requirement*/}
           {user.requirementAccessInd === true && (
+             <li className="option" onClick={closeMobileMenu}>
             <Menu.Item key="/requirement" style={{height:"30px",paddingLeft:"1rem"}}>
               <Link to="/requirement">
              
@@ -451,9 +486,11 @@ function NavMenu (props) {
                 </span>
               </Link>
             </Menu.Item>
+            </li>
           )}
           {/*Demand*/}
           {user.userType === "USER" && user.department === "Customer" && (
+            <li className="option" onClick={closeMobileMenu}>
             <Menu.Item key="/demand" style={{height:"30px",paddingLeft:"1rem"}}>
               <Link to="/demand">
                 <ContactsIcon 
@@ -467,6 +504,7 @@ function NavMenu (props) {
                 </span>
               </Link>
             </Menu.Item>
+            </li>
           )}
           {/*Demand*/}
 
@@ -480,6 +518,7 @@ function NavMenu (props) {
           {/* {user.userType !== "USER" && user.department !== "Recruiter" &&user.department !== "Customer"&&
             user.department !== "VENDOR" && (  */}
           {user.publishAccessInd === true && (
+              <li className="option" onClick={closeMobileMenu}>
             <Menu.Item key="/publish" style={{height:"30px",paddingLeft:"1rem"}}>
               <Link to="/publish">
             
@@ -498,6 +537,7 @@ function NavMenu (props) {
                 </span>
               </Link>
             </Menu.Item>
+            </li>
           )}
           {/* )}   */}
 
@@ -662,6 +702,7 @@ function NavMenu (props) {
             }
           >
            */}
+            <li className="option" onClick={closeMobileMenu}>
               <Menu.Item key="/report" style={{height:"30px",paddingLeft:"1rem"}}>
           <Link to="/leave">
               <i class="fas fa-luggage-cart"></i>
@@ -672,7 +713,9 @@ function NavMenu (props) {
               </span>
              </Link> 
             </Menu.Item>
+            </li>
             {user.userType !== "USER" && user.department !== "VENDOR" && ( 
+                  <li className="option" onClick={closeMobileMenu}>
            <Menu.Item key="/mileage" style={{height:"30px",paddingLeft:"1rem"}}> 
           <Link to="/mileage"> 
               
@@ -684,8 +727,9 @@ function NavMenu (props) {
             </span>
             </Link>
           </Menu.Item>
+          </li>
              )}
-
+<li className="option" onClick={closeMobileMenu}>
            <Menu.Item key="/expense" style={{height:"30px",paddingLeft:"1rem"}}>
            <Link to="/expense">
             <ReceiptIcon
@@ -698,9 +742,10 @@ function NavMenu (props) {
               </span>
             </Link> 
            </Menu.Item>
+           </li>
 
        
-
+           <li className="option" onClick={closeMobileMenu}>
            <Menu.Item key="/holiday" style={{height:"30px",paddingLeft:"1rem"}}> 
             <Link to="/holiday"> 
            
@@ -714,6 +759,7 @@ function NavMenu (props) {
               </span>
              </Link> 
          </Menu.Item>
+         </li>
 
        
 {/* 
@@ -722,7 +768,7 @@ function NavMenu (props) {
         <hr/>
                   {/* Employees */}
                   {user.userAccessInd === true && (
-                  
+                <li className="option" onClick={closeMobileMenu}>
             <Menu.Item key="/employees" style={{height:"30px",paddingLeft:"1rem"}}>
               <Link to="/Employees">
                 <GroupsIcon
@@ -741,9 +787,10 @@ function NavMenu (props) {
               ></Badge>
               </Link>
             </Menu.Item>
+            </li>  
           )}
            { user.locationAccessInd === true && (
-         
+         <li className="option" onClick={closeMobileMenu}>
           <Menu.Item key="/location" style={{height:"30px",paddingLeft:"1rem"}}>
            <Link to="/location">
             <ReceiptIcon
@@ -756,9 +803,19 @@ function NavMenu (props) {
               </span>
             </Link> 
            </Menu.Item>
+           </li>
            )}
         </Menu>
-       
+        </div>
+      </div>
+      </ul>
+      <div className="mobile-menu" onClick={handleClick}>
+        {click ? (
+          <CloseIcon className="menu-icon" />
+        ) : (
+          <MenuIcon className="menu-icon" />
+        )}
+      </div>
       </div>
     );
   }

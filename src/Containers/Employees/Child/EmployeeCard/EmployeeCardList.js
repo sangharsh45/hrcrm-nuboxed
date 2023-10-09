@@ -97,10 +97,10 @@ function handleSetCurrentCandidateId(candidateId) {
                     borderBottom: "3px dotted #515050"
                   }}
                 >
-                  <div class=" flex flex-row justify-evenly w-wk">
-                    <div className=" flex font-medium flex-col w-44 ">
+                  <div class=" flex flex-row justify-evenly w-wk max-sm:flex-col">
+                    <div className=" flex font-medium flex-col md:w-44 max-sm:flex-row justify-between w-full">
 
-                    <div class=" text-sm text-cardBody font-medium font-poppins">
+                    <div class=" text-sm text-cardBody font-semibold font-poppins">
          
                     Name
          
@@ -118,9 +118,9 @@ function handleSetCurrentCandidateId(candidateId) {
             </div>
                     </div>
                   
-                    <div className=" flex font-medium flex-col  w-20">
+                    <div className=" flex font-medium flex-col  md:w-20 max-sm:flex-row justify-between w-full mt-1">
 
-                      <div class=" text-sm text-cardBody font-medium font-poppins">
+                      <div class=" text-sm text-cardBody font-semibold font-poppins">
                       Department
                       </div>
 
@@ -129,10 +129,10 @@ function handleSetCurrentCandidateId(candidateId) {
                       </div>
                       {/* </Tooltip>   */}
                     </div>
-                    <div className=" flex font-medium flex-col w-16">
+                    <div className=" flex font-medium flex-col md:w-16 max-sm:flex-row justify-between w-full mt-1">
              
 
-                        <div class=" text-sm text-cardBody font-medium font-poppins">
+                        <div class=" text-sm text-cardBody font-semibold font-poppins">
                         Role
                         </div>
 
@@ -141,10 +141,10 @@ function handleSetCurrentCandidateId(candidateId) {
                         </div>
                      
                     </div>
-                    <div className=" flex font-medium flex-col w-36">
+                    <div className=" flex font-medium flex-col md:w-36 max-sm:flex-row justify-between w-full mt-1">
                     
 
-                        <div class=" text-sm text-cardBody font-medium font-poppins">
+                        <div class=" text-sm text-cardBody font-semibold font-poppins">
                         Mobile #
                         </div>
 
@@ -154,9 +154,9 @@ function handleSetCurrentCandidateId(candidateId) {
                    
                     </div>
 
-                    <div className=" flex font-medium flex-col w-44">
+                    <div className=" flex font-medium flex-col md:w-44 max-sm:flex-row justify-between w-full mt-1">
 
-                      <div class=" text-sm text-cardBody font-medium font-poppins">
+                      <div class=" text-sm text-cardBody font-semibold font-poppins">
                       Email #
                       </div>
 
@@ -167,9 +167,9 @@ function handleSetCurrentCandidateId(candidateId) {
                     </div>
                    <div class="flex">
                 
-                    <div className=" flex font-medium flex-col w-12 ">
+                    <div className=" flex font-medium flex-col md:w-12 max-sm:flex-row justify-between w-full mt-1">
                   
-                      <div class=" text-sm text-cardBody font-medium font-poppins">
+                      <div class=" text-sm text-cardBody font-semibold font-poppins">
                      
                       Type
                       </div>
@@ -185,9 +185,9 @@ function handleSetCurrentCandidateId(candidateId) {
                     </div>
                     <div class="flex">
                 
-                <div className=" flex font-medium flex-col w-12 ">
+                <div className=" flex font-medium flex-col md:w-12 max-sm:flex-row justify-between w-full  mt-1">
               
-                  <div class=" text-sm text-cardBody font-medium font-poppins">
+                  <div class=" text-sm text-cardBody font-semibold font-poppins">
                  
                   Suspend
                   </div>
