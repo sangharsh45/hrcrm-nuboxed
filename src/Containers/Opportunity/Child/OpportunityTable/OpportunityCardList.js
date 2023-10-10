@@ -125,7 +125,7 @@ function OpportunityCardList(props) {
                         <b>Yay! You have seen it all</b>
                     </p>
                 }
-                height={"80vh"}
+                height={"87vh"}
             >
 
     <CardWrapper>
@@ -266,14 +266,10 @@ imgHeight={"1.8em"}
 </span>
         </div>
     
-        <FlexContainer
+        <FlexContainer 
           style={{ width: "100%", paddingLeft: "0.5em", marginTop: "-0.18em" }}
         >
-            <FlexContainer
-              style={{}}
-              alignSelf="flex-end"
-              alignItems="center"
-            >
+            <div class="flex justify-between w-wk">
               <div>
               {item.approveInd&&item.opportunityOwner ? (
 <>
@@ -288,7 +284,7 @@ imgHeight={"1.8em"}
       type="check-circle"
       theme="twoTone"
       twoToneColor="#24D8A7"
-      style={{fontSize:"0.8rem" 
+      style={{fontSize:"1rem" 
      }}
     />
   </Tooltip>
@@ -301,7 +297,7 @@ imgHeight={"1.8em"}
       type="stop"
       theme="twoTone"
       twoToneColor="red"         
-      style={{ fontSize:"0.8rem" , marginLeft: "0.875em" }}
+      style={{ fontSize:"1rem" , marginLeft: "0.875em" }}
     />
   </Tooltip>
 </>
@@ -319,7 +315,7 @@ imgHeight={"1.8em"}
       theme="twoTone"
       twoToneColor="#24D8A7"
       size={140}
-      style={{ fontSize:"0.8rem" 
+      style={{ fontSize:"1rem" 
      
      }}
       onClick={() =>                                        
@@ -350,7 +346,7 @@ imgHeight={"1.8em"}
       theme="twoTone"
       twoToneColor="red"
       size={140}
-      style={{fontSize:"0.8rem" 
+      style={{fontSize:"1rem" 
       
      }}
      onClick={() => 
@@ -386,7 +382,7 @@ imgHeight={"1.8em"}
                 handleSetCurrentOpportunityId(item);
               }}
             >
-                 <BorderColorIcon  style={{fontSize:"0.8rem" }}/>
+                 <BorderColorIcon  style={{fontSize:"1rem" }}/>
               </span>
            )}
           </Tooltip>
@@ -397,15 +393,16 @@ imgHeight={"1.8em"}
            
              {user.opportunityDeleteInd ===true && (
             <DeleteIcon
-            type="delete" style={{ cursor: "pointer", color: "red",fontSize:"0.8rem"  }} />
+            type="delete" style={{ cursor: "pointer", color: "red",fontSize:"1rem"  }} />
              )}
           </StyledPopconfirm>
 
               </div>
-            </FlexContainer>
-   
+            
+              </div>
            
         </FlexContainer>
+       
       </CardElement>
                  );})}
     </CardWrapper>
