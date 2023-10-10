@@ -192,7 +192,7 @@ const TaskCardList = (props) => {
                </span>
                                     </div>
                                 </div>
-                                <div className=" flex font-medium flex-col md:w-32 max-sm:flex-row justify-between w-full ">
+                                <div className=" flex font-medium flex-col mt-1 md:w-32 max-sm:flex-row justify-between w-full ">
                                     <div class=" text-[0.875rem] text-cardBody font-poppins">Owner</div>
                                     <div class="text-[0.75rem] text-cardBody font-poppins">
                                     <MultiAvatar
@@ -202,7 +202,7 @@ const TaskCardList = (props) => {
                 />
                                     </div>
                                 </div>
-                                <div className=" flex font-medium flex-col md:w-32 max-sm:flex-row justify-between w-full">
+                                <div className=" flex font-medium flex-col mt-1 md:w-32 max-sm:flex-row justify-between w-full ">
                                   <div class="text-[0.875rem] text-cardBody font-poppins">Assigned To</div>
                                   <div class="text-[0.75rem] text-cardBody font-poppins">
                                   {item.assignedToName === null ? (
@@ -343,34 +343,38 @@ const TaskCardList = (props) => {
             )}
                     </div>
                     </div>
-                    <div class="flex flex-col w-[2%]">
-       <div>
+                    <div class="flex flex-row justify-between w-[3%]">
+                    <Tooltip title="Notes">
        <NoteAltIcon
                 onClick={() => {
                   handleTaskNotesDrawerModal(true);
                   handleSetTaskNameId(item);
                 }}
-                style={{ color: "green", cursor: "pointer", fontSize: "0.8rem" }}
+                style={{ color: "green", cursor: "pointer", fontSize: "1rem" }}
               />
-       </div>
-<div>    <Tooltip title="Document">
+           </Tooltip>
+  
+   <Tooltip title="Document">
           {props.userId === item.userId && (
                       <DownloadForOfflineIcon
                         // type="edit"
-                        style={{ cursor: "pointer", fontSize: "0.8rem" }}
+                        style={{ cursor: "pointer", fontSize: "1rem" }}
                         onClick={() => {
                           handleSetCurrentProcessName(item)
                           handleDownloadTaskModal(true);
                         }}
                       />
                     )}
-            </Tooltip></div>
+            </Tooltip>
+            </div>
+                    <div class="flex flex-col w-[2%]">
+   
    
           <Tooltip title="Edit">
           {props.userId === item.userId && (
                       <BorderColorIcon
                         type="edit"
-                        style={{ cursor: "pointer", fontSize: "0.8rem" }}
+                        style={{ cursor: "pointer", fontSize: "1rem" }}
                         onClick={() => {
                           props.setEditTask(item);
                           handleUpdateTaskModal(true);
@@ -394,7 +398,7 @@ const TaskCardList = (props) => {
                           >
                             <DeleteIcon
                               type="delete"
-                              style={{ cursor: "pointer",color:"red", fontSize: "0.8rem" }}
+                              style={{ cursor: "pointer",color:"red", fontSize: "1rem" }}
                             />
                           </StyledPopconfirm>
                         )}
