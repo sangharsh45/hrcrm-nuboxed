@@ -96,7 +96,7 @@ function OpportunityLostCard(props) {
             <b>Yay! You have seen it all</b>
           </p>
         }
-        height={400}
+        height={600}
       >
  <CardWrapper>      
               {lostOpportunity.map((item) => {
@@ -414,7 +414,8 @@ padding:4px;
   //font-weight: 700;
   @media only screen and (max-width: 600px) {
     text-overflow: ellipsis;
-
+display: flex;
+    justify-content: flex-end;
 white-space: nowrap;
 overflow: hidden;
 height: 2em;
@@ -451,7 +452,7 @@ border-radius: 0.75rem;
     display: flex;
     flex-direction: column;
   @media only screen and (max-width: 600px) {
-    width: 100%;
+    width: -webkit-fill-available;
     
   }
 `

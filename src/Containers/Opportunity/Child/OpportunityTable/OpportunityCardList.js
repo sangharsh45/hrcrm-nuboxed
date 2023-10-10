@@ -549,7 +549,7 @@ width: 20vw;
 display: flex;
 flex-direction: column;
   @media only screen and (max-width: 600px) {
-    width: 100%;
+    width:-webkit-fill-available;
     
   }
 `

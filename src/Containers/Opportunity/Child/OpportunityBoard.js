@@ -46,6 +46,9 @@ const Container = styled.div`
   position: absolute;
 
   // overflow-x: auto;
+  @media only screen and (max-width: 600px) {
+    flex-direction: column;
+  }
 `;
 
 const StageColumn = styled.div`

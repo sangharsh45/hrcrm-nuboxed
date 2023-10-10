@@ -148,13 +148,13 @@ function ContactCardList(props) {
             item.address[0].postalCode} `;
                     return (
                         <div>
-                            <div className="flex justify-between mt-4"
+                            <div className="flex justify-between mt-4 max-sm:flex-col"
                                 style={{
                                     borderBottom: "3px dotted #515050"
                                 }}>
                                      
-                                <div className=" flex font-medium flex-col w-52 ">
-<div className="flex"> 
+                                <div className=" flex font-medium flex-col md:w-52 max-sm:flex-row w-full justify-between  ">
+<div className="flex max-sm:w-full"> 
 <div>
                                 <SubTitle>
             <MultiAvatar2
@@ -166,8 +166,9 @@ function ContactCardList(props) {
             />
           </SubTitle></div>
           &nbsp;
-          <div>
+          <div class="max-sm:w-full">
                                         <Tooltip>
+                                          <div class=" flex max-sm:w-full justify-between flex-row md:flex-col">
                                             <div class="text-[0.875rem] text-cardBody font-poppins">
                                             Name
                                             </div>
@@ -189,50 +190,51 @@ function ContactCardList(props) {
         ) : null}
        
                                             </div>
-
+                                            </div>
                                         </Tooltip>
                                         </div>
                                         </div>
                                 </div>
 
-                                <div className=" flex font-medium flex-col  w-52 ">
+                                <div className=" flex font-medium flex-col  md:w-52 max-sm:flex-row w-full justify-between ">
                                     <div class=" text-[0.875rem] text-cardBody font-[0.875rem] font-poppins"> Company </div>
                                     <div class=" text-[0.75rem] text-cardBody font-poppins">   
                                     {item.tagWithCompany}
                                     </div>
                                 </div>
-                                <div className=" flex font-medium flex-col w-36 ">
+                                <div className=" flex font-medium flex-col md:w-36 max-sm:flex-row w-full justify-between ">
                                     <div class=" text-[0.875rem] text-cardBody font-poppins">Designation</div>
                                     <div class="text-[0.75rem] text-cardBody font-poppins">
                                          {item.designation}
                                     </div>
                                 </div>
-                                <div className=" flex font-medium flex-col w-36 ">
+                                <div className=" flex font-medium flex-col md:w-36  max-sm:flex-row w-full justify-between">
                                   <div class="text-[0.875rem] text-cardBody font-poppins">Department</div>
                                   <div class="text-[0.75rem] text-cardBody font-poppins">
                                        {item.department}
                                   </div>
                               </div>
-                                <div className=" flex font-medium flex-col w-32 ">
+                                <div className=" flex font-medium flex-col md:w-32 max-sm:flex-row w-full justify-between ">
                                     <div class=" text-[0.875rem] text-cardBody font-poppins"># Opportunity</div>
 
                                     <div class=" text-[0.75rem] text-cardBody font-poppins">
 
                                     </div>
                                 </div>
-                                <div className="flex font-medium flex-col w-32 ">
+                                <div className="flex font-medium flex-col md:w-32 max-sm:flex-row w-full justify-between ">
                                     <div class="text-[0.875rem] text-cardBody font-poppins">Portal Acess</div>
 
                                     <div class="text-[0.75rem] text-cardBody font-poppins">
 
                                     </div>
                                 </div>
-                                <div className="flex font-medium flex-col w-20 ">
+                                <div className="flex font-medium flex-col md:w-20  max-sm:flex-row w-full justify-between">
                        
                        <div class="text-[0.875rem] text-cardBody font-poppins">Owner</div>
 
                    
               <Tooltip title={item.ownerName}>
+                <div class="max-sm:flex justify-end">
             <SubTitle>
               <MultiAvatar
                 primaryTitle={item.ownerName}
@@ -242,10 +244,11 @@ function ContactCardList(props) {
                 imgHeight={"1.8rem"}
               />
             </SubTitle>
+            </div>
           </Tooltip>
 
                    </div>
-                                <div class="flex flex-col w-[3%]">
+                                <div class="flex flex-col md:w-[3%] max-sm:flex-row w-full justify-between items-center">
                     <div class="rounded-full bg-white w-5 h-5 cursor-pointer">
                     <Tooltip title={item.mobileNo} >
             {item.doNotCallInd !== true && (
@@ -270,7 +273,7 @@ function ContactCardList(props) {
             )}
           </Tooltip>
                         </div>
-                        <div>
+                        <div class=" max-sm:flex justify-end max-sm:w-full">
                         <Tooltip title={item.emailId}>
            
             <MailOutlineIcon
@@ -301,7 +304,7 @@ function ContactCardList(props) {
 
                     </div>
                     </div>
-                    <div class="flex flex-col w-[2%]">
+                    <div class="flex flex-col md:w-[2%] max-sm:flex-row w-full justify-between items-center">
                       <div>
                     <Tooltip overlayStyle={{ maxWidth: "300px" }} title={dataLoc}>
             <span
