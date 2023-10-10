@@ -37,8 +37,8 @@ class CustomerCardView extends Component {
     if (userId) {
       // getCustomerListByUserId(userId);
       getLatestCustomer(userId);
-      getCustomerRequirement(userId);
-      getCustomerCloser(userId, startDate, endDate);
+      // getCustomerRequirement(userId);
+      // getCustomerCloser(userId, startDate, endDate);
     }
   }
   handleOnViewMoreTopValue = () => {
@@ -97,7 +97,7 @@ class CustomerCardView extends Component {
       <>
         <br />
         <div class="max-sm:overflow-x-auto h-[34rem]">
-        <GroupView
+        {/* <GroupView
           groupTitle="On-boarded this month"
           isFetching={fetchingCustomerCloser}
           noData={!customerCloser.length}
@@ -142,7 +142,7 @@ class CustomerCardView extends Component {
               </FlexContainer>
             )
           }
-        </GroupView>
+        </GroupView> */}
 
         {/* <GroupView
           groupTitle="Positions"

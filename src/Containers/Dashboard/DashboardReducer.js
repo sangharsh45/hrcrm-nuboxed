@@ -279,6 +279,13 @@ const initialState = {
   fetchingJumpstartCusto2listError: false,
   jumpstrtCUSTO2Count:{},
 
+  fetchingdashCustoLeadsAdded: false,
+  fetchingdashCustoLeadsAddedError: false,
+  dashCustoLeadsAdded:{},
+
+  fetchingJumpstartTasklist: false,
+  fetchingJumpstartTasklistError: false,
+  jumpstartTasklistCount:{},
 };
 
 export const dashboardReducer = (state = initialState, action) => {
@@ -990,6 +997,41 @@ case types.GET_JUMPSTART_CUSTOMER2_LIST_REQUEST:
         return { ...state,
           fetchingJumpstartCusto2list: false,
           fetchingJumpstartCusto2listError: true };
+
+          case types.GET_DASH_CUSTOMER_ADDED_LEADS_REQUEST:
+            return { ...state, fetchingdashCustoLeadsAdded: true };
+          case types.GET_DASH_CUSTOMER_ADDED_LEADS_SUCCESS:
+            return {
+              ...state,
+              fetchingdashCustoLeadsAdded: false,
+              dashCustoLeadsAdded: action.payload,
+            };
+          case types.GET_DASH_CUSTOMER_ADDED_LEADS_FAILURE:
+            return {
+              ...state,
+              fetchingdashCustoLeadsAdded: false,
+              fetchingdashCustoLeadsAddedError: true,
+            };
+
+            case types.GET_JUMPSTART_TASK_LIST_REQUEST:
+              return {
+                ...state,
+                fetchingJumpstartTasklist: true,
+                fetchingJumpstartTasklistError: false,
+              };
+            case types.GET_JUMPSTART_TASK_LIST_SUCCESS:
+              return {
+                ...state,
+                fetchingJumpstartTasklist: false,
+                fetchingJumpstartTasklistError: false,
+                jumpstartTasklistCount: action.payload,
+              };
+            case types.GET_JUMPSTART_TASK_LIST_FAILURE:
+              return {
+                ...state,
+                fetchingJumpstartTasklist: false,
+                fetchingJumpstartTasklistError: true,
+              };
 
     default:
       return state;

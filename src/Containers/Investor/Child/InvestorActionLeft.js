@@ -59,12 +59,12 @@ const InvestorActionLeft = (props) => {
   return (
     <div class=" flex items-center"
     >
-      <Tooltip>
-        {/* <Badge
+      {/* <Tooltip>
+        <Badge
           size="small"
           count={(props.viewType === "card" && props.recordData.customer) || 0}
           overflowCount={999}
-        > */}
+        >
           <span
             class=" mr-2 text-sm cursor-pointer"
             onClick={() => props.setInvestorViewType("card")}
@@ -74,12 +74,13 @@ const InvestorActionLeft = (props) => {
           >
             <GridViewIcon />
           </span>
-        {/* </Badge> */}
-      </Tooltip>
+        </Badge>
+      </Tooltip> */}
+
       <Tooltip title={<FormattedMessage id="app.all" defaultMessage="All" />}>
         <Badge
           size="small"
-        //   count={(props.viewType === "list" && props.recordData.customer) || 0}
+        //count={(props.viewType === "list" && props.recordData.customer) || 0}
           overflowCount={999}
         >
           <span
@@ -137,7 +138,6 @@ const InvestorActionLeft = (props) => {
           }}
         >
           <FormattedMessage id="app.clear" defaultMessage="Clear" />
-          {/* Clear */}
         </Button>
  
       </div>

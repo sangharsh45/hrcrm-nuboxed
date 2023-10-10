@@ -1,82 +1,58 @@
-import React, { Component,useState, useMemo ,useEffect} from "react";
+import React, { useState,useEffect } from "react";
 import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
-import { Button, Switch, Checkbox } from "antd";
-import { getSectors } from "../../../Containers/Settings/Sectors/SectorsAction";
 import { FormattedMessage } from "react-intl";
+import { bindActionCreators } from "redux";
+import { Button} from "antd";
+import AddressFieldArray from "../../../../Components/Forms/Formik/AddressFieldArray";
 import { Formik, Form, Field, FieldArray, FastField } from "formik";
 import * as Yup from "yup";
-import { getAllCustomerEmployeelist } from "../../Employees/EmployeeAction";
-import { HeaderLabel, StyledLabel } from "../../../Components/UI/Elements";
-import { Spacer } from "../../../Components/UI/Elements";
-import SearchSelect from "../../../Components/Forms/Formik/SearchSelect";
-import AddressFieldArray from "../../../Components/Forms/Formik/AddressFieldArray";
-import {
-  addCustomer,
-  setClearbitData
-} from "../CustomerAction";
-import { getAllSalesList } from "../../Opportunity/OpportunityAction"
-import { Listbox, Transition } from '@headlessui/react'
-import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid'
-import { TextareaComponent } from "../../../Components/Forms/Formik/TextareaComponent";
-import { InputComponent } from "../../../Components/Forms/Formik/InputComponent";
-import { SelectComponent } from "../../../Components/Forms/Formik/SelectComponent";
-import ProgressiveImage from "../../../Components/Utils/ProgressiveImage";
-import ClearbitImage from "../../../Components/Forms/Autocomplete/ClearbitImage";
-// yup validation scheme for creating a account
+import { getAllSalesList } from "../../../Opportunity/OpportunityAction";
+import { getAllCustomerEmployeelist } from "../../../Employees/EmployeeAction";
+import { getSectors } from "../../../../Containers/Settings/Sectors/SectorsAction";
+import { HeaderLabel, StyledLabel } from "../../../../Components/UI/Elements";
+import { Spacer } from "../../../../Components/UI/Elements";
+import SearchSelect from "../../../../Components/Forms/Formik/SearchSelect";
+import { TextareaComponent } from "../../../../Components/Forms/Formik/TextareaComponent";
+import { InputComponent } from "../../../../Components/Forms/Formik/InputComponent";
+import { Listbox } from '@headlessui/react'
+import {UpdateInvestor} from "../../InvestorAction";
+
+//yup validation scheme for creating a account
 const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
-const CustomerSchema = Yup.object().shape({
+const UpdateInvestorSchema = Yup.object().shape({
   name: Yup.string().required("Input needed!"),
   email: Yup.string().email("Enter a valid Email"),
   phoneNumber: Yup.string().matches(phoneRegExp, 'Phone number is not valid').min(5,"Number is too short").max(10,"Number is too long")
 });
 
-function CustomerForm(props) {
-
-   const[checked,setChecked]=useState(true);
-  const[whiteblue,setWhiteblue]=useState(true);
-
-  function handleWhiteBlue (checked) {
-    setWhiteblue( checked );
-  };
-
- function handleReset  (resetForm) {
-    resetForm();
-  };
- function handleChange () {
-  setChecked(
- !checked
-    );
-  };
+function UpdateInvestorForm (props) {
+  
   useEffect(() => {
     props.getAllCustomerEmployeelist();
     props.getSectors();
     props.getAllSalesList();
   }, []);
 
+
+  const handleReset = (resetForm) => {
+    resetForm();
+  };
+  
     const {
       accounts,
       user,
-      userId,
-      // user: { userId, firstName },
-      isEditing,
-      prefillAccount,
-      addingCustomer,
-      addCustomer,
-      clearbit,
-      // setClearbitData,
+      updateInvestorById,
+      UpdateInvestor,
+      RowData,
+      userId
     } = props;
-   
-    function classNames(...classes) {
-      return classes.filter(Boolean).join(' ')
-    }
-    const sectorOption = props.sectors.map((item) => {
+    const employeesData = props.allCustomerEmployeeList.map((item) => {
       return {
-        label: item.sectorName || "",
-        value: item.sectorId,
+        label: `${item.fullName}`,
+        value: item.employeeId,
       };
     });
-    const [defaultOption, setDefaultOption] = useState(props.fullName);
+    const [defaultOption, setDefaultOption] = useState(RowData.assignedTo);
     const [selected, setSelected] = useState(defaultOption);
     const selectedOption = props.allCustomerEmployeeList.find((item) => item.fullName === selected);
     return (
@@ -84,50 +60,39 @@ function CustomerForm(props) {
         <Formik
           // enableReinitialize
           initialValues={{
-            // sectorId:"",
-            // sectorName:"",
-            partnerName: "",
-            // sectorDescription:"",
-            name: "",
-            url: "",
-            gst:"",
-            // sector: "",
-            sectorId: "",
-            country: props.user.country,
-            email: "",
-            // sector: props.user.sectorName,
-            countryDialCode: props.user.countryDialCode,
-            phoneNumber: "",
-            fullName:"",
-            category: checked ? "Both" : whiteblue ? "White" : "Blue",
-            userId: props.userId,
-            notes: "",
-            businessRegistration: "",
-            assignedTo: selectedOption ? selectedOption.employeeId:userId,
-            department: "",
+            name: RowData.name || "",
+            url: RowData.url || "",
+            sectorId: RowData.sectorId  ,
+            vatNo:RowData.vatNo  ,
+            email: RowData.email || "",
+            country:RowData.country || "",
+            countryDialCode: RowData.countryDialCode || user.countryDialCode,
+            phoneNumber: RowData.phoneNumber || "",
+            userId: userId,
+            assignedTo:selectedOption ? selectedOption.employeeId:props.RowData.employeeId,
+            notes: RowData.notes || "",
             address: [
               {
-                address1: "",
-                address2: "",
-                street: "",
-                city: "",
-                state: "",
-                postalCode: "",
-                country: props.user.countryName,
+                addressId: RowData.address.length ? RowData.address[0].addressId : "",
+                address1: RowData.address.length ? RowData.address[0].address1 : "",
+                address2:  RowData.address.length ? RowData.address[0].address2 : "",
+                street:  RowData.address.length ? RowData.address[0].street : "",
+                city:  RowData.address.length ? RowData.address[0].city : "",
+                state:  RowData.address.length ? RowData.address[0].state : "",
+                postalCode:  RowData.address.length ? RowData.address[0].postalCode : "",             
               },
             ],
-            category: whiteblue ? "White" : "Blue" || "Both",
           }}
-          // validationSchema={CustomerSchema}
+          validationSchema={UpdateInvestorSchema}
           onSubmit={(values, { resetForm }) => {
             console.log(values);
-            addCustomer(
+            UpdateInvestor(
               {
                 ...values,
-                category: checked ? "Both" : whiteblue ? "White" : "Blue",
-                assignedTo: selectedOption ? selectedOption.employeeId:userId,
+                investorId: RowData.investorId,
+                assignedTo:selectedOption ? selectedOption.employeeId:props.RowData.employeeId,
               },
-              props.userId,
+              RowData.investorId,
               () => handleReset(resetForm)
             );
           }}
@@ -142,69 +107,40 @@ function CustomerForm(props) {
             ...rest
           }) => (
             <Form className="form-background">
-              <div  style={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  height: "70vh",
-                  overflowX: "hidden",
-                  paddingRight: "0.6em",
-                }} >
-                <div class=" h-full w-1/2"   >
-                  <div>
-                    {clearbit && clearbit.hasOwnProperty("logo") && (
-                      <ProgressiveImage
-                        preview={
-                          "http://pluspng.com/img-png/twitter-logo-png-twitter-logo-png-256.png"
-                        }
-                        image={clearbit.logo}
-                        width={140}
-                        height={150}
-                        borderRadius={25}
-                        padding={15}
-
-                      />
-                    )}
-                    {clearbit && clearbit.hasOwnProperty("logo") ? (
-                      <a
-                        href="https://clearbit.com"
-                        target="_blank"
-                        style={{ fontSize: 13, marginLeft: 5 }}
-                      >
-                        Logos provided by Clearbit
-                      </a>
-                    ) : null}
-                  </div>
-                  <Spacer />
+              <div class=" flex justify-between h-[27rem] overflow-x-hidden">
+                <div class=" w-2/4"
+              
+                >
+                    <Spacer/>
+                   <StyledLabel><FormattedMessage id="app.name" defaultMessage="Name" /></StyledLabel>
                   <Field
                     isRequired
                     name="name"
                     type="text"
-                    //label="Name"
-                    label={
-                      <FormattedMessage id="app.name" defaultMessage="Name" />
-                    }
                     isColumn
                     width={"100%"}
-                    setClearbitData={props.setClearbitData}
-                    component={ClearbitImage}
+                    component={InputComponent}
                     accounts={accounts}
                     inlineLabel
-                  />
+                    />
+                   
                   <Field
                     name="url"
                     type="text"
                     // label="URL"
-                    label={<FormattedMessage id="app." defaultMessage="URL" />}
+                    label={
+                      <FormattedMessage id="app.url" defaultMessage="URL" />
+                    }
                     isColumn
                     width={"100%"}
                     component={InputComponent}
                     inlineLabel
-                  />
+                    />
+                  <Spacer />
                   <Spacer />
                   <Field
                     name="email"
-                    type="text"
-                    // label="Email"
+                    type="text"                   
                     label={
                       <FormattedMessage id="app.email" defaultMessage="Email" />
                     }
@@ -212,80 +148,59 @@ function CustomerForm(props) {
                     width={"100%"}
                     component={InputComponent}
                     inlineLabel
-                  />                  
+                    />
                    <div class=" flex justify-between">
-                    <div class=" w-3/12">
+                   <div class=" w-3/12">
                       <FastField
                         name="countryDialCode"
                         selectType="dialCode"
                         isColumnWithoutNoCreate
-                        // label="Phone #"
                         label={
                           <FormattedMessage
-                            id="app.phone"
-                            defaultMessage="Dial Code"
+                            id="app.countryDialCode"
+                            defaultMessage="Dial Code #"
                           />
                         }
                         isColumn
                         component={SearchSelect}
-                        value={values.countryDialCode1}
+                        // value={values.countryDialCode1}
                         inlineLabel
-                      />
+                       />
                     </div>
                     <div class=" w-8/12">
                       <FastField
+                        //isRequired
                         type="text"
                         name="phoneNumber"
-                        label="Phone No"
                         isColumn
                         component={InputComponent}
+                        label="Phone No"
                         inlineLabel
                         width={"100%"}
+                        />                   
+                         </div>
+                  </div>
+                  <Spacer/>
+                  
+                     <div class=" flex justify-between">
+                  <div class=" w-6/12">
+                      <FastField                      
+                        name="sectorId"
+                        isColumnWithoutNoCreate
+                        selectType="sectorName"
+                        label={
+                          <FormattedMessage
+                            id="app.sector"
+                            defaultMessage="Sector"
+                          />
+                        }
+                        isColumn
+                        component={SearchSelect}
                       />
                     </div>
-                  </div>
-
-                  <Spacer/>
-                  <div class=" flex justify-between">
-                  <div class="w-2/5">
-                  <FastField                     
-                            name="sectorId"
-                            label={
-                              <FormattedMessage
-                                id="app.sector"
-                                defaultMessage="Sector"
-                              />
-                            }
-                            isColumn
-                            placeholder="Sector"
-                            component={SelectComponent}
-                            value={values.sectorId}
-                            options={
-                              Array.isArray(sectorOption) ? sectorOption : []
-                            }
-                          />
-                    </div>
-                    <div class=" w-2/5">
-                          <FastField
-                            name="source"
-                            type="text"
-                            label={
-                              <FormattedMessage
-                                id="app.source"
-                                defaultMessage="Source"
-                              />
-                            }
-                            options={["Na", "Na2", "None"]}
-                            component={SelectComponent}
-                            inlineLabel
-                            className="field"
-                            isColumn
-                          />
-                        </div>
-                  </div>
-
-                 
-                  <Spacer />
+                 </div>
+                
+                 <Spacer/>
                   <Field
                     name="notes"
                     // label="Notes"
@@ -295,17 +210,18 @@ function CustomerForm(props) {
                     width={"100%"}
                     isColumn
                     component={TextareaComponent}
-                  />
-                </div>
-                <div class=" h-3/4 w-5/12 "  
+                    />   
+                 </div>
+
+                 <div class=" h-3/4 w-5/12 "
                 >
-                 <Spacer/>
-                 <div class=" flex justify-between">
-                    <div class=" h-full w-full">
-                    <Listbox value={selected} onChange={setSelected}>
+                   <Spacer/>
+                   <div class=" flex justify-between">
+                   <div class=" h-full w-full">
+                   <Listbox value={selected} onChange={setSelected}>
         {({ open }) => (
           <>
-            <Listbox.Label className="block font-semibold text-[0.75rem] mt-[0.6rem]">
+            <Listbox.Label className="block font-semibold text-[0.75rem]">
               Assigned to
             </Listbox.Label>
             <div className="relative mt-1">
@@ -370,49 +286,26 @@ function CustomerForm(props) {
           </>
         )}
       </Listbox>
-                    {/* <Field
-                    name="assignedTo"
-                    selectType="employee"
-                    isColumnWithoutNoCreate
-                    // label="Assigned to"
-                    label={
-                      <FormattedMessage
-                        id="app.assignedto"
-                        defaultMessage="Assigned to"
-                      />
-                    }
-                    // component={SearchSelect}
-                    isColumn
-                    // value={values.employeeId}
-                    // defaultValue={{
-                    //   label: `${firstName || ""} ${middleName ||
-                    //     ""} ${lastName || ""}`,
-                    //   value: employeeId,
-                    // }}
-                    component={SelectComponent}
-                    options={Array.isArray(employeesData) ? employeesData : []}
-                    inlineLabel
-                  /> */}
                   </div>
                     </div>
-                    <Spacer />
+                    <Spacer/>
                     <div class=" flex justify-between">
-                    <div class=" w-2/5">
+                    <div class=" w-1/2">
                       <Field
                         name="vatNo"
-                        type="text"
-                        // label="VAT Number"
+                        type="text" 
                         label={
                           <FormattedMessage
                             id="app.vatNumber"
                             defaultMessage="VAT Number"
                           />
                         }
+                        //isRequired
                         isColumn
                         width={"100%"}
                         component={InputComponent}
                         inlineLabel
-                      />
+                        />
                     </div>
                     <div class=" w-[10rem]">
                       <Field
@@ -430,15 +323,15 @@ function CustomerForm(props) {
                         component={InputComponent}
                         inlineLabel
                       />
+                    </div>                    
                     </div>
-                  </div>
-                  <Spacer/>
+                   <Spacer/>
                   <div style={{ width: "100%",backgroundImage: "linear-gradient(-90deg, #00162994, #94b3e4)" }}>
                       <div>
                   <HeaderLabel style={{color:"white"}} >Corporate Address</HeaderLabel>
                   </div>
                     </div>
-                  <Spacer />
+                  <Spacer /><Spacer />
                   <FieldArray
                     name="address"
                     label="Address"
@@ -449,11 +342,14 @@ function CustomerForm(props) {
                       />
                     )}
                   />
-                   <div class=" flex justify-between">
-                   <div class=" w-1/2">
+        <div class=" flex justify-between">
+                    <div class=" w-1/2">
                      <Field
+                       // name="address[0].country"
                        name="country"
                        isColumnWithoutNoCreate
+                       // label="Country"
+
                        label={
                          <FormattedMessage
                            id="app.country"
@@ -467,24 +363,25 @@ function CustomerForm(props) {
                        value={values.countryName}
                        selectType="country"
                        inlineLabel
+                       // style={{ flexBasis: "80%" }}
                        isColumn
                        width="100%"
                      />
                    </div>
                  </div>
                
+                                     
                 </div>
               </div>
-              <Spacer />
+              <Spacer/>
               <div class=" flex justify-end">
                 <Button
                   type="primary"
                   htmlType="submit"
-                  loading={addingCustomer}
+                  Loading={updateInvestorById}
                 >
-                  <FormattedMessage id="app.create" defaultMessage="Create" />
-                  {/*                     
-                    Create */}
+                  <FormattedMessage id="app.update" defaultMessage="Update" />
+                  {/* Update */}
                 </Button>
               </div>
             </Form>
@@ -492,26 +389,23 @@ function CustomerForm(props) {
         </Formik>
       </>
     );
-  }
 
+}
 
-const mapStateToProps = ({ auth, customer,employee ,opportunity,sector}) => ({
-  addingCustomer: customer.addingCustomer,
-  addingCustomerError: customer.addingCustomerError,
-  clearbit: customer.clearbit,
+const mapStateToProps = ({ auth,investor,customer,employee }) => ({
+  updateInvestorById: investor.updateInvestorById,
+  updateInvestorByIdError: investor.updateInvestorByIdError,
   user: auth.userDetails,
-  sales: opportunity.sales,
-  allCustomerEmployeeList:employee.allCustomerEmployeeList,
   userId: auth.userDetails.userId,
-  sectors: sector.sectors,
-  fullName: auth.userDetails.fullName
+  allCustomerEmployeeList:employee.allCustomerEmployeeList,
+  organizationId: auth.userDetails.organizationId,
+  employees: employee.employees,
 });
 
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
-      addCustomer,
-      setClearbitData,
+      UpdateInvestor,
       getSectors,
       getAllSalesList,
       getAllCustomerEmployeelist,
@@ -519,4 +413,4 @@ const mapDispatchToProps = (dispatch) =>
     dispatch
   );
 
-export default connect(mapStateToProps, mapDispatchToProps)(CustomerForm);
+export default connect(mapStateToProps, mapDispatchToProps)(UpdateInvestorForm);

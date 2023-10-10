@@ -1185,3 +1185,52 @@ export const getJumpCustomerlist2 = (userId,startDate, endDate) => (dispatch) =>
       });
     });
 };
+export const getDashCustomerAddedLeads = (userId,endDate,startDate) => (dispatch) => {
+  dispatch({
+    type: types.GET_DASH_CUSTOMER_ADDED_LEADS_REQUEST,
+  });
+  axios
+    .get(`${base_url}/leads/added/count/date-wise/${userId}?endDate=${endDate}&startDate=${startDate}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.GET_DASH_CUSTOMER_ADDED_LEADS_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err.response);
+      dispatch({
+        type: types.GET_DASH_CUSTOMER_ADDED_LEADS_FAILURE,
+        payload: err,
+      });
+    });
+    
+};
+export const getJumpTasklist = (userId,startDate, endDate) => (dispatch) => {
+  dispatch({ type: types.GET_JUMPSTART_TASK_LIST_REQUEST });
+  axios
+    .get(`${base_url}/task/count/highPriority/${userId}?endDate=${endDate}&startDate=${startDate}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      // console.log(res)
+      dispatch({
+        type: types.GET_JUMPSTART_TASK_LIST_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.GET_JUMPSTART_TASK_LIST_FAILURE,
+        payload: err,
+      });
+    });
+};

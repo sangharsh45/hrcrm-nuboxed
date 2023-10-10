@@ -1,43 +1,55 @@
-import React, { Component, useEffect,useState } from "react";
+import React, { useState,useEffect} from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { Button, Switch, Checkbox } from "antd";
+import { Button } from "antd";
+import { getSectors } from "../../../Containers/Settings/Sectors/SectorsAction";
 import { FormattedMessage } from "react-intl";
 import { Formik, Form, Field, FieldArray, FastField } from "formik";
 import * as Yup from "yup";
 import { getAllCustomerEmployeelist } from "../../Employees/EmployeeAction";
-import { StyledLabel } from "../../../Components/UI/Elements";
+import { HeaderLabel} from "../../../Components/UI/Elements";
 import { Spacer } from "../../../Components/UI/Elements";
 import SearchSelect from "../../../Components/Forms/Formik/SearchSelect";
 import AddressFieldArray from "../../../Components/Forms/Formik/AddressFieldArray";
-import {
-  addLeads,
-  setClearbitData
-} from "../../Leads/LeadsAction";
-import PostImageUpld from "../../../Components/Forms/Formik/PostImageUpld";
+import {AddInvestor} from "../InvestorAction";
+import {setClearbitData} from "../../Customer/CustomerAction";
+import { getAllSalesList } from "../../Opportunity/OpportunityAction"
+import { Listbox} from '@headlessui/react'
 import { TextareaComponent } from "../../../Components/Forms/Formik/TextareaComponent";
 import { InputComponent } from "../../../Components/Forms/Formik/InputComponent";
 import { SelectComponent } from "../../../Components/Forms/Formik/SelectComponent";
 import ProgressiveImage from "../../../Components/Utils/ProgressiveImage";
 import ClearbitImage from "../../../Components/Forms/Autocomplete/ClearbitImage";
-import { Listbox, Transition } from '@headlessui/react'
 // yup validation scheme for creating a account
 const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
-const CustomerSchema = Yup.object().shape({
+const InvestorSchema = Yup.object().shape({
   name: Yup.string().required("Input needed!"),
   email: Yup.string().email("Enter a valid Email"),
   phoneNumber: Yup.string().matches(phoneRegExp, 'Phone number is not valid').min(5,"Number is too short").max(10,"Number is too long")
 });
 
-function LeadsForm (props) {
-  
- const handleReset = (resetForm) => {
+function InvesterForm(props) {
+
+   const[checked,setChecked]=useState(true);
+  const[whiteblue,setWhiteblue]=useState(true);
+
+  function handleWhiteBlue (checked) {
+    setWhiteblue( checked );
+  };
+
+ function handleReset  (resetForm) {
     resetForm();
   };
- 
-  useEffect(()=> {
-props.getAllCustomerEmployeelist();
-  },[]);
+ function handleChange () {
+  setChecked(
+ !checked
+    );
+  };
+  useEffect(() => {
+    props.getAllCustomerEmployeelist();
+    props.getSectors();
+    props.getAllSalesList();
+  }, []);
 
     const {
       accounts,
@@ -46,39 +58,50 @@ props.getAllCustomerEmployeelist();
       // user: { userId, firstName },
       isEditing,
       prefillAccount,
-      addingLeads,
-      addLeads,
+      addingInvestor,
+      AddInvestor,
       clearbit,
-      setClearbitData,
+      // setClearbitData,
     } = props;
-
+   
+    function classNames(...classes) {
+      return classes.filter(Boolean).join(' ')
+    }
+    const sectorOption = props.sectors.map((item) => {
+      return {
+        label: item.sectorName || "",
+        value: item.sectorId,
+      };
+    });
     const [defaultOption, setDefaultOption] = useState(props.fullName);
     const [selected, setSelected] = useState(defaultOption);
     const selectedOption = props.allCustomerEmployeeList.find((item) => item.fullName === selected);
-
     return (
       <>
         <Formik
           // enableReinitialize
           initialValues={{
+            // sectorId:"",
+            // sectorName:"",
             partnerName: "",
-            companyName: "",
+            // sectorDescription:"",
+            name: "",
             url: "",
+            gst:"",
+            // sector: "",
             sectorId: "",
+            country: props.user.country,
             email: "",
+            // sector: props.user.sectorName,
+            countryDialCode: props.user.countryDialCode,
             phoneNumber: "",
             fullName:"",
+            category: checked ? "Both" : whiteblue ? "White" : "Blue",
             userId: props.userId,
             notes: "",
             businessRegistration: "",
             assignedTo: selectedOption ? selectedOption.employeeId:userId,
             department: "",
-            salutation:"",
-            firstName:"",
-            middleName:"",
-            lastName:"",
-            proposalValue:"",
-            opportunityName:"",
             address: [
               {
                 address1: "",
@@ -87,15 +110,18 @@ props.getAllCustomerEmployeelist();
                 city: "",
                 state: "",
                 postalCode: "",
+                country: props.user.countryName,
               },
             ],
+            category: whiteblue ? "White" : "Blue" || "Both",
           }}
-          // validationSchema={CustomerSchema}
+          // validationSchema={InvestorSchema}
           onSubmit={(values, { resetForm }) => {
             console.log(values);
-            addLeads(
+            AddInvestor(
               {
                 ...values,
+                category: checked ? "Both" : whiteblue ? "White" : "Blue",
                 assignedTo: selectedOption ? selectedOption.employeeId:userId,
               },
               props.userId,
@@ -113,7 +139,7 @@ props.getAllCustomerEmployeelist();
             ...rest
           }) => (
             <Form className="form-background">
-             <div  style={{
+              <div  style={{
                   display: "flex",
                   justifyContent: "space-between",
                   height: "70vh",
@@ -121,7 +147,7 @@ props.getAllCustomerEmployeelist();
                   paddingRight: "0.6em",
                 }} >
                 <div class=" h-full w-1/2"   >
-                   <div>
+                  <div>
                     {clearbit && clearbit.hasOwnProperty("logo") && (
                       <ProgressiveImage
                         preview={
@@ -144,90 +170,38 @@ props.getAllCustomerEmployeelist();
                         Logos provided by Clearbit
                       </a>
                     ) : null}
-                  </div> 
-                  <StyledLabel>
-                  <div class=" flex  flex-nowrap">
-                    <FastField name="imageId" component={PostImageUpld} />
-                    <div>
-                      <div class=" flex justify-between">
-                        <div class=" w-2/5">
-                          <FastField
-                            name="salutation"
-                            type="text"
-                            label={
-                              <FormattedMessage
-                                id="app.salutation"
-                                defaultMessage="Salutation"
-                              />
-                            }
-                            options={["Mr.", "Ms.", "None"]}
-                            component={SelectComponent}
-                            inlineLabel
-                            className="field"
-                            isColumn
-                          />
-                        </div>
-                        <div class=" w-1/2">
-                          <FastField
-                            isRequired
-                            name="firstName"
-                            // label="First Name"
-                            label={
-                              <FormattedMessage
-                                id="app.firstName"
-                                defaultMessage="First Name"
-                              />
-                            }
-                            type="text"
-                            width={"100%"}
-                            isColumn
-                            component={InputComponent}
-                            inlineLabel
-                          />
-                        </div>
-                      </div>                  
-                      <div class=" flex justify-between">
-                        <div class=" w-2/5">
-                          <FastField
-                            name="middleName"
-                            //label="Middle Name"
-                            label={
-                              <FormattedMessage
-                                id="app.middleName"
-                                defaultMessage="Middle"
-                              />
-                            }
-                            type="text"
-                            width={"100%"}
-                            isColumn
-                            component={InputComponent}
-                            inlineLabel
-                          />
-                        </div>
-                        <div class=" w-1/2">
-                          <FastField
-                            name="lastName"
-                            //label="Last Name"
-                            label={
-                              <FormattedMessage
-                                id="app.lastName"
-                                defaultMessage="Last Name"
-                              />
-                            }
-                            type="text"
-                            width={"100%"}
-                            isColumn
-                            component={InputComponent}
-                            inlineLabel
-                          />
-                        </div>
-                      </div>
-                    </div>
                   </div>
-
+                  <Spacer />
+                  <Field
+                    isRequired
+                    name="name"
+                    type="text"
+                    //label="Name"
+                    label={
+                      <FormattedMessage id="app.name" defaultMessage="Name" />
+                    }
+                    isColumn
+                    width={"100%"}
+                    setClearbitData={props.setClearbitData}
+                    component={ClearbitImage}
+                    accounts={accounts}
+                    inlineLabel
+                  />
+                  <Field
+                    name="url"
+                    type="text"
+                    // label="URL"
+                    label={<FormattedMessage id="app." defaultMessage="URL" />}
+                    isColumn
+                    width={"100%"}
+                    component={InputComponent}
+                    inlineLabel
+                  />
+                  <Spacer />
                   <Field
                     name="email"
                     type="text"
+                    // label="Email"
                     label={
                       <FormattedMessage id="app.email" defaultMessage="Email" />
                     }
@@ -235,15 +209,14 @@ props.getAllCustomerEmployeelist();
                     width={"100%"}
                     component={InputComponent}
                     inlineLabel
-                  /> 
-                  </StyledLabel>                 
-                  <div class=" flex justify-between">
+                  />                  
+                   <div class=" flex justify-between">
                     <div class=" w-3/12">
-                   
                       <FastField
                         name="countryDialCode"
                         selectType="dialCode"
                         isColumnWithoutNoCreate
+                        // label="Phone #"
                         label={
                           <FormattedMessage
                             id="app.phone"
@@ -255,10 +228,8 @@ props.getAllCustomerEmployeelist();
                         value={values.countryDialCode1}
                         inlineLabel
                       />
-                  
                     </div>
                     <div class=" w-8/12">
-                    <StyledLabel>
                       <FastField
                         type="text"
                         name="phoneNumber"
@@ -268,97 +239,28 @@ props.getAllCustomerEmployeelist();
                         inlineLabel
                         width={"100%"}
                       />
-                      </StyledLabel>
                     </div>
                   </div>
-                  <Spacer />
-                  <StyledLabel>
-                  <Field
-                    isRequired
-                    name="companyName"
-                    type="text"
-                    label={
-                      <FormattedMessage id="app.company" defaultMessage="Company" />
-                    }
-                    isColumn
-                    width={"100%"}
-                    setClearbitData={props.setClearbitData}
-                    component={ClearbitImage}
-                    accounts={accounts}
-                    inlineLabel
-                  />
-                  </StyledLabel>
-                  <StyledLabel>
-                  <Field
-                    name="url"
-                    type="text"
-                    label={<FormattedMessage id="app." defaultMessage="URL" />}
-                    isColumn
-                    width={"100%"}
-                    component={InputComponent}
-                    inlineLabel
-                  />
-                  </StyledLabel>
-                         
-                  <Spacer />
-                  <div class=" flex justify-between">
-                    <div class=" w-1/2">
-                    <StyledLabel>
-                      <Field
-                        name="vatNo"
-                        type="text"
-                        label={
-                          <FormattedMessage
-                            id="app.vatNumber"
-                            defaultMessage="VAT Number"
-                          />
-                        }
-                        isColumn
-                        width={"100%"}
-                        component={InputComponent}
-                        inlineLabel
-                      />
-                      </StyledLabel>
-                    </div>
-                    <div class="">
-                    <StyledLabel>
-                      <Field
-                        name="businessRegistration"
-                        type="text"
-                        // label="URL"
-                        label={
-                          <FormattedMessage
-                            id="app.businessregistration"
-                            defaultMessage=" Business Registration#"
-                          />
-                        }
-                        isColumn
-                        width={"100%"}
-                        component={InputComponent}
-                        inlineLabel
-                      />
-                      </StyledLabel>
-                    </div>
-                  </div>
+
                   <Spacer/>
                   <div class=" flex justify-between">
-                   <div class=" w-1/2">
-               
-                      <FastField
-                        name="sectorId"
-                        isColumnWithoutNoCreate
-                        selectType="sectorName"
-                        label={
-                          <FormattedMessage
-                            id="app.sector"
-                            defaultMessage="Sector"
+                  <div class="w-2/5">
+                  <FastField                     
+                            name="sectorId"
+                            label={
+                              <FormattedMessage
+                                id="app.sector"
+                                defaultMessage="Sector"
+                              />
+                            }
+                            isColumn
+                            placeholder="Sector"
+                            component={SelectComponent}
+                            value={values.sectorId}
+                            options={
+                              Array.isArray(sectorOption) ? sectorOption : []
+                            }
                           />
-                        }
-                        isColumn
-                        component={SearchSelect}
-                        value={values.sectorId}
-                      />
-                    
                     </div>
                     <div class=" w-2/5">
                           <FastField
@@ -377,60 +279,40 @@ props.getAllCustomerEmployeelist();
                             isColumn
                           />
                         </div>
-                    </div>
-                  <Spacer />
+                  </div>
 
-                  {/* <div class=" w-1/2">
-                    <StyledLabel>
-                      <Field
-                        name="proposalValue"
-                        type="text"
-                        label={
-                          <FormattedMessage
-                            id="app.proposalValue"
-                            defaultMessage="Proposal Value"
-                          />
-                        }
-                        isColumn
-                        width={"100%"}
-                        component={InputComponent}
-                        inlineLabel
-                      />
-                      </StyledLabel>
-                    </div>
-                    <div class=" w-1/2">
-                    <StyledLabel>
-                      <Field
-                        name="opportunityName"
-                        type="text"
-                        label={
-                          <FormattedMessage
-                            id="app.opportunityName"
-                            defaultMessage="Opportunity Name"
-                          />
-                        }
-                        isColumn
-                        width={"100%"}
-                        component={InputComponent}
-                        inlineLabel
-                      />
-                      </StyledLabel>
-                    </div> */}
+                 
+                  <Spacer />
+                  <Field
+                    name="notes"
+                    // label="Notes"
+                    label={
+                      <FormattedMessage id="app.notes" defaultMessage="Notes" />
+                    }
+                    width={"100%"}
+                    isColumn
+                    component={TextareaComponent}
+                  />
                 </div>
                 <div class=" h-3/4 w-5/12 "  
                 >
-                   <Listbox value={selected} onChange={setSelected}>
-      {({ open }) => (
-        <>
-          <Listbox.Label className="block font-semibold text-[0.75rem]">Assigned to</Listbox.Label>
-          <div className="relative mt-1">
+                 <Spacer/>
+                 <div class=" flex justify-between">
+                    <div class=" h-full w-full">
+                    <Listbox value={selected} onChange={setSelected}>
+        {({ open }) => (
+          <>
+            <Listbox.Label className="block font-semibold text-[0.75rem] mt-[0.6rem]">
+              Assigned to
+            </Listbox.Label>
+            <div className="relative mt-1">
               <Listbox.Button className="relative w-full leading-4 cursor-default border border-gray-300 bg-white py-0.5 pl-3 pr-10 text-left shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm">
                 {selected}
               </Listbox.Button>
               {open && (
                 <Listbox.Options
                   static
-                  className="absolute z-10 mt-1 max-h-56 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
+                  className="absolute z-10 mt-1 max-h-56 w-full overflow-auto  bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
                 >
                   {props.allCustomerEmployeeList.map((item) => (
                     <Listbox.Option
@@ -482,12 +364,54 @@ props.getAllCustomerEmployeelist();
                 </Listbox.Options>
               )}
             </div>
-        </>
-      )}
-    </Listbox>
-             
+          </>
+        )}
+      </Listbox>
+                  </div>
+                    </div>
+                    <Spacer />
+                    <div class=" flex justify-between">
+                    <div class=" w-2/5">
+                      <Field
+                        name="vatNo"
+                        type="text"
+                        label={
+                          <FormattedMessage
+                            id="app.vatNumber"
+                            defaultMessage="VAT Number"
+                          />
+                        }
+                        isColumn
+                        width={"100%"}
+                        component={InputComponent}
+                        inlineLabel
+                      />
+                    </div>
+                    <div class=" w-[10rem]">
+                      <Field
+                        name="businessRegistration"
+                        type="text"
+                        // label="URL"
+                        label={
+                          <FormattedMessage
+                            id="app.businessregistration"
+                            defaultMessage=" Business Registration#"
+                          />
+                        }
+                        isColumn
+                        width={"100%"}
+                        component={InputComponent}
+                        inlineLabel
+                      />
+                    </div>
+                  </div>
+                  <Spacer/>
+                  <div style={{ width: "100%",backgroundImage: "linear-gradient(-90deg, #00162994, #94b3e4)" }}>
+                      <div>
+                  <HeaderLabel style={{color:"white"}} >Corporate Address</HeaderLabel>
+                  </div>
+                    </div>
                   <Spacer />
-                  <StyledLabel>
                   <FieldArray
                     name="address"
                     label="Address"
@@ -498,18 +422,30 @@ props.getAllCustomerEmployeelist();
                       />
                     )}
                   />
-                  </StyledLabel>
-                  
-                 <Spacer />
-                  <Field
-                    name="notes"
-                    label={
-                      <FormattedMessage id="app.notes" defaultMessage="Notes" />
-                    }
-                    width={"100%"}
-                    isColumn
-                    component={TextareaComponent}
-                  />
+                   <div class=" flex justify-between">
+                   <div class=" w-1/2">
+                     <Field
+                       name="country"
+                       isColumnWithoutNoCreate
+                       label={
+                         <FormattedMessage
+                           id="app.country"
+                           defaultMessage="Country"
+                         />
+                       }
+                       component={SearchSelect}
+                       defaultValue={{
+                         value: props.user.countryName,
+                       }}
+                       value={values.countryName}
+                       selectType="country"
+                       inlineLabel
+                       isColumn
+                       width="100%"
+                     />
+                   </div>
+                 </div>
+               
                 </div>
               </div>
               <Spacer />
@@ -517,7 +453,7 @@ props.getAllCustomerEmployeelist();
                 <Button
                   type="primary"
                   htmlType="submit"
-                  loading={addingLeads}
+                  loading={addingInvestor}
                 >
                   <FormattedMessage id="app.create" defaultMessage="Create" />
                   {/*                     
@@ -529,26 +465,30 @@ props.getAllCustomerEmployeelist();
         </Formik>
       </>
     );
-}
+  }
 
-const mapStateToProps = ({ auth, leads,employee }) => ({
-  addingLeads: leads.addingLeads,
-  addingLeadsError: leads.addingLeadsError,
-   clearbit: leads.clearbit,
+
+const mapStateToProps = ({ auth,investor, customer,employee ,opportunity,sector}) => ({
+  addingInvestor: investor.addingInvestor,
+  clearbit: customer.clearbit,
   user: auth.userDetails,
+  sales: opportunity.sales,
   allCustomerEmployeeList:employee.allCustomerEmployeeList,
   userId: auth.userDetails.userId,
+  sectors: sector.sectors,
   fullName: auth.userDetails.fullName
 });
 
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
-       addLeads,
+        AddInvestor,
       setClearbitData,
-       getAllCustomerEmployeelist,
+      getSectors,
+      getAllSalesList,
+      getAllCustomerEmployeelist,
     },
     dispatch
   );
 
-export default connect(mapStateToProps, mapDispatchToProps)(LeadsForm);
+export default connect(mapStateToProps, mapDispatchToProps)(InvesterForm);

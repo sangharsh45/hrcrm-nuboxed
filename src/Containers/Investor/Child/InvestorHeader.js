@@ -7,12 +7,15 @@ function InvestorHeader (props) {
  
 
     const {
-      handleCustomerModal,
+      handleInvestorModal,
       viewType,
       setInvestorViewType,
       handleChange,
       currentData,
       handleClear,
+      handleCurrentData,
+      currentUser
+
     } =props;
     return (
       <div style={{position: "sticky",
@@ -22,11 +25,12 @@ function InvestorHeader (props) {
           leftComponent={
             <InvestorActionLeft
             viewType={viewType}
-            // handleChange={handleChange}
             setInvestorViewType={setInvestorViewType}
-            //   currentData={currentData}
-            //   handleClear={handleClear}
-            //   setCurrentData={this.props.setCurrentData}
+            currentUser={currentUser}
+            currentData={currentData}
+            handleClear={handleClear}
+            handleChange={handleChange}
+            handleCurrentData={handleCurrentData}
             />
           }
           rightComponent={
@@ -34,7 +38,7 @@ function InvestorHeader (props) {
             viewType={viewType}
             // currentUser={this.props.currentUser} 
             // handleDropChange={this.props.handleDropChange}
-            // handleCustomerModal={handleCustomerModal} 
+            handleInvestorModal={handleInvestorModal}
             />
           }
         />

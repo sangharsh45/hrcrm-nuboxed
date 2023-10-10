@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import ListAltIcon from "@mui/icons-material/ListAlt";
 import {  StyledTabs } from "../../Components/UI/Antd";
-import {getTodosCount} from "./DashboardAction";
 import TabsWrapper1 from "../../Components/UI/Layout/TabsWrapper1";
 import LeadsAddChart from "./LeadsAddChart";
 import ContactsAddChart from "./ContactsAddChart";
@@ -17,29 +16,10 @@ class DashCustomerChartTab extends Component {
     super(props);
     this.state = {
       activeKey: "1",
-      contactPopover: false,
-      partnerPopover: false,
-      quotProPopover: false,
-      deliveryProPopover: false,
-      breadCumb: false,
-      visibleModal: false,
-      recriutmentdashboard: false,
-      currentTabName: "",
-      currentTabId: "",
-      customField: [],
-      ganttChart: false,
-      costId: "",
     };
   }
 
-  componentDidMount() {
-    const { getTodosCount, userId, startDate, endDate } = this.props;
-    getTodosCount(userId, startDate, endDate);
-  }
-  handleContactPopoverVisibleChange = () =>
-    this.setState({ contactPopover: !this.state.contactPopover });
-  handlepartnerPopoverVisibleChange = () =>
-    this.setState({ partnerPopover: !this.state.partnerPopover });
+
   handleTabChange = (key) => {
     this.setState({ activeKey: key });
   };
@@ -102,13 +82,11 @@ class DashCustomerChartTab extends Component {
   }
 }
 const mapStateToProps = ({dashboard,auth}) => ({
-  todosCount:dashboard.todosCount,
-  userId: auth.userDetails.userId,
-  endDate: dashboard.endDate,
-  startDate: dashboard.startDate,
 });
 const mapDispatchToProps = (dispatch) => bindActionCreators(
-  {getTodosCount},
+  {
+
+  },
    dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(DashCustomerChartTab);
