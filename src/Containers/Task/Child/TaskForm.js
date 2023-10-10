@@ -305,6 +305,8 @@ const [priority,setpriority]=useState(props.selectedTask
                   // taskType: state.currentType,
                   taskTypeId: "",
                   taskName: "",
+                  documentId:"",
+                  link:"",
                   taskTypeId:selectedTaskType,
                   taskChecklistId:selectedWorkflow,
                   fullName: "",
@@ -475,6 +477,31 @@ const [priority,setpriority]=useState(props.selectedTask
                 }}
               >
                 <div class=" h-full w-1/2">
+                <div class=" w-4/6">
+                        <Field
+                          name="documentId"
+                          isRequired
+                          component={DragableUpload}
+                        />
+                      </div>
+                      <div>
+                      <Field
+                            type="text"
+                            name="link"
+                            //label="Name"
+                            // value={values.taskName}
+                            label={
+                              <FormattedMessage
+                                id="app.link"
+                                defaultMessage="Link"
+                              />
+                            }
+                            component={InputComponent}
+                            isColumn
+                            width={"100%"}
+                            inlineLabel
+                          />
+                      </div>
                   <div class=" flex justify-between">
                     {values.taskTypeId === "TSK52434477391272022" && (
                       <FastField name="imageId" component={Upload} />
