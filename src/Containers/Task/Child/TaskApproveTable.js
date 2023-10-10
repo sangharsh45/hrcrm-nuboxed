@@ -211,13 +211,13 @@ const TaskApproveTable = (props) => {
          
                     return (
                         <div>
-                            <div className="flex justify-between mt-4"
+                            <div className="flex justify-between mt-4 max-sm:flex-col"
                                 style={{
                                     borderBottom: "3px dotted #515050"
                                 }}>
                                      
-                                <div className=" flex font-medium flex-col w-52 ">
-<div className="flex"> 
+                                <div className=" flex font-medium flex-col md:w-52 max-sm:flex-row w-full justify-between  ">
+<div className="flex max-sm:w-full"> 
 {item.priority === "High" && (
                       <div
                         style={{
@@ -249,8 +249,9 @@ const TaskApproveTable = (props) => {
                       ></div>
                     )}
                     <div class=" w-1"></div>
-          <div>
+          <div class="max-sm:w-full">
                                         <Tooltip>
+                                        <div class=" flex max-sm:justify-between flex-row w-full md:flex-col">
                                             <div class="text-[0.875rem] text-cardBody font-poppins">
                                             Type
                                             </div>
@@ -258,13 +259,13 @@ const TaskApproveTable = (props) => {
                                             {item.taskType}
        
                                             </div>
-
+                                        </div>
                                         </Tooltip>
                                         </div>
                                         </div>
                                 </div>
 
-                                <div className=" flex font-medium flex-col  w-36 ">
+                                <div className=" flex font-medium flex-col  md:w-36 max-sm:flex-row w-full justify-between ">
                                     <div class=" text-[0.875rem] text-cardBody font-[0.875rem] font-poppins"> Name </div>
                                     <div class=" text-[0.75rem] text-cardBody font-poppins">   
                                     <span   
@@ -285,7 +286,7 @@ const TaskApproveTable = (props) => {
                </span>
                                     </div>
                                 </div>
-                                <div className=" flex font-medium flex-col w-32 ">
+                                <div className=" flex font-medium flex-col md:w-32 max-sm:flex-row w-full justify-between ">
                                     <div class=" text-[0.875rem] text-cardBody font-poppins">Customer</div>
                                     <div class="text-[0.75rem] text-cardBody font-poppins">
                                     {item.customerName === null ? (
@@ -299,7 +300,7 @@ const TaskApproveTable = (props) => {
                 )}
                                     </div>
                                 </div>
-                                <div className=" flex font-medium flex-col w-32 ">
+                                <div className=" flex font-medium flex-col md:w-32 max-sm:flex-row w-full justify-between ">
                                     <div class=" text-[0.875rem] text-cardBody font-poppins">Owner</div>
                                     <div class="text-[0.75rem] text-cardBody font-poppins">
                                     <MultiAvatar
@@ -309,7 +310,7 @@ const TaskApproveTable = (props) => {
                 />
                                     </div>
                                 </div>
-                                <div className=" flex font-medium flex-col w-32 ">
+                                <div className=" flex font-medium flex-col md:w-32 max-sm:flex-row w-full justify-between ">
                                   <div class="text-[0.875rem] text-cardBody font-poppins">Assigned To</div>
                                   <div class="text-[0.75rem] text-cardBody font-poppins">
                                   {item.assignedToName === null ? (
@@ -323,14 +324,14 @@ const TaskApproveTable = (props) => {
             )}
                                   </div>
                               </div>
-                              <div className=" flex font-medium flex-col w-32 ">
+                              <div className=" flex font-medium flex-col md:w-32 max-sm:flex-row w-full justify-between ">
                                   <div class="text-[0.875rem] text-cardBody font-poppins">Assigned On</div>
                                   <div class="text-[0.75rem] text-cardBody font-poppins">
                                   <span>{` ${moment(item.assignedOn).format("ll")}`}</span>
                                   </div>
                               </div>
 
-                              <div className=" flex font-medium flex-col w-32 ">
+                              <div className=" flex font-medium flex-col md:w-32 max-sm:flex-row w-full justify-between ">
                               
                                   <div class="text-[0.75rem] text-cardBody font-poppins">
                                   <span>
