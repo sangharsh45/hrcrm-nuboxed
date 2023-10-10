@@ -4,11 +4,16 @@ import { bindActionCreators } from "redux";
 import { BundleLoader, GridLoader } from "../../Components/Placeholder";
 
 
+const ContactInvestHeader = lazy(() => import("./Child/ContactInvestHeader"));
+
 function ContactInvest (props) {
 
 
         return (
             <React.Fragment>
+                <ContactInvestHeader
+                
+                />
                 <h1>Hii ContInv</h1>
             </React.Fragment>
         )

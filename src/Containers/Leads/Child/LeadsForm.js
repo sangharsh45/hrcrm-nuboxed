@@ -120,8 +120,7 @@ props.getAllCustomerEmployeelist();
                   overflowX: "hidden",
                   paddingRight: "0.6em",
                 }} >
-                <div class=" h-full w-1/2"   >
-                   <div>
+                   <div class="">
                     {clearbit && clearbit.hasOwnProperty("logo") && (
                       <ProgressiveImage
                         preview={
@@ -145,15 +144,15 @@ props.getAllCustomerEmployeelist();
                       </a>
                     ) : null}
                   </div> 
-                  <StyledLabel>
+                <div class=" h-full w-1/2"   >
                   <div class=" flex  flex-nowrap">
-                    <FastField name="imageId" component={PostImageUpld} />
+                    <div> <FastField name="imageId" component={PostImageUpld} /></div>
+                   
                     <div>
                       <div class=" flex justify-between">
                         <div class=" w-2/5">
-                          <FastField
+                          <Field
                             name="salutation"
-                            type="text"
                             label={
                               <FormattedMessage
                                 id="app.salutation"
@@ -163,7 +162,6 @@ props.getAllCustomerEmployeelist();
                             options={["Mr.", "Ms.", "None"]}
                             component={SelectComponent}
                             inlineLabel
-                            className="field"
                             isColumn
                           />
                         </div>
@@ -236,7 +234,7 @@ props.getAllCustomerEmployeelist();
                     component={InputComponent}
                     inlineLabel
                   /> 
-                  </StyledLabel>                 
+                               
                   <div class=" flex justify-between">
                     <div class=" w-3/12">
                    

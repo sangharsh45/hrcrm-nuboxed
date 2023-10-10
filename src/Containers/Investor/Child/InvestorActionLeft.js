@@ -59,6 +59,23 @@ const InvestorActionLeft = (props) => {
   return (
     <div class=" flex items-center"
     >
+      <Tooltip title={<FormattedMessage id="app.all" defaultMessage="All" />}>
+        <Badge
+          size="small"
+        //count={(props.viewType === "list" && props.recordData.customer) || 0}
+          overflowCount={999}
+        >
+          <span
+            class=" mr-2 text-sm cursor-pointer"
+            onClick={() => props.setInvestorViewType("list")}
+            style={{
+              color: props.viewType === "list" && "#1890ff",
+            }}
+          >
+            <TocIcon />
+          </span>
+        </Badge>
+      </Tooltip>
       {/* <Tooltip>
         <Badge
           size="small"
@@ -77,23 +94,7 @@ const InvestorActionLeft = (props) => {
         </Badge>
       </Tooltip> */}
 
-      <Tooltip title={<FormattedMessage id="app.all" defaultMessage="All" />}>
-        <Badge
-          size="small"
-        //count={(props.viewType === "list" && props.recordData.customer) || 0}
-          overflowCount={999}
-        >
-          <span
-            class=" mr-2 text-sm cursor-pointer"
-            onClick={() => props.setInvestorViewType("list")}
-            style={{
-              color: props.viewType === "list" && "#1890ff",
-            }}
-          >
-            <TocIcon />
-          </span>
-        </Badge>
-      </Tooltip>
+      
       {/* <Tooltip
         title={<FormattedMessage id="app.mapview" defaultMessage="Map View" />}
       >
