@@ -265,12 +265,16 @@ import { Button, Popconfirm } from "antd";
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
+import {getCountries} from "../../Auth/AuthAction"
+import {getCountry } from "../../../Containers/Settings/Category/Country/CountryAction"
 import { addAttendence, getAttendanceList } from "../../Customer/CustomerAction";
 import { BundleLoader } from "../../../Components/Placeholder";
 
 function StartStop(props) {
   const [isLoading, setIsLoading] = useState(true);
-  const [startInd, setStartInd] = useState(false); // Initialize to your desired initial value
+  const [startInd, setStartInd] = useState(false); 
+const[drop1,setDrop1]=useState(""); 
+const[mandatorCountry,setmandatoryCountry]=useState(""); 
   console.log("Initial startInd:", startInd);
 
   // const handleClick = () => {
@@ -296,6 +300,19 @@ function StartStop(props) {
     };
     props.addAttendence(data, props.userId);
   };
+
+  const handleDrop1=(event)=>{
+    setDrop1(
+    event.target.value
+    )
+  }
+
+  const handleMandatoryCountry=(event)=>{
+    setmandatoryCountry(
+    event.target.value
+    )
+  }
+  console.log(mandatorCountry)
   
 
 
@@ -316,6 +333,10 @@ useEffect(() => {
 }, [props.userId]);
 
 // ...
+useEffect(()=>{
+  props.getCountries()
+  props.getCountry()
+},[])
 
 
   useEffect(() => {
@@ -330,7 +351,7 @@ useEffect(() => {
   }
 
   return (
-    <div>
+    <div style={{display:"flex"}}>
         {/* <Popconfirm
         title="Are you sure you want to start/stop?"
        onConfirm={handleClick}
@@ -350,17 +371,70 @@ useEffect(() => {
        okText="Yes"
      cancelText="No"
      > */}
+     <div>
        <Button style={{backgroundColor:!startInd?"green":"red"}} onClick={handleClick}>
         {!startInd ? "Start" : "Stop"}
       </Button>
+      </div>
       {/* </Popconfirm> */}
+      <div style={{marginLeft:"22px"}}>
+      <select
+      onChange={handleDrop1}
+      disabled={!startInd}
+      style={{border:"2px solid black"}}
+      >
+         <option value="">Select</option>
+        <option value="In Office">In Office</option>
+        <option value="On Travel">On Travel</option>
+        <option value="Remote">Remote</option>
+      </select>
+      
+      </div>
+     {drop1==="On Travel" ?  <div style={{marginLeft:"11px"}}>
+      <select
+       style={{border:"2px solid black"}}
+onChange={handleMandatoryCountry}
+      >
+         <option value="">Select a country</option>
+         <option value="Others">Others</option>
+        {props.countries.map((item)=>{
+          return(
+           
+ <option value={item.country_name}>{item.country_name}</option>
+          )
+        })}
+       
+       
+      </select>
+      </div>:null
+     }
+    
+{mandatorCountry==="Others"? 
+<div style={{marginLeft:"11px"}}>
+      <select
+       style={{border:"2px solid black"}}
+      >
+        {props.country.map((item)=>{
+          return(
+          <option value={item.country_name}>{item.country_name}</option>
+          )
+        })}
+        
+        
+      </select>
+      </div>:null
+}
+     
     </div>
+   
   );
 }
 
-const mapStateToProps = ({ customer, auth }) => ({
+const mapStateToProps = ({ customer, auth,countrys }) => ({
   userId: auth.userDetails.userId,
   attendanceByList: customer.attendanceByList,
+  countries:auth.countries,
+  country: countrys.country,
 });
 
 const mapDispatchToProps = (dispatch) =>
@@ -368,6 +442,8 @@ const mapDispatchToProps = (dispatch) =>
     {
       addAttendence,
       getAttendanceList,
+      getCountries,
+      getCountry
     },
     dispatch
   );
