@@ -477,31 +477,7 @@ const [priority,setpriority]=useState(props.selectedTask
                 }}
               >
                 <div class=" h-full w-1/2">
-                <div class=" w-4/6">
-                        <Field
-                          name="documentId"
-                          isRequired
-                          component={DragableUpload}
-                        />
-                      </div>
-                      <div>
-                      <Field
-                            type="text"
-                            name="link"
-                            //label="Name"
-                            // value={values.taskName}
-                            label={
-                              <FormattedMessage
-                                id="app.link"
-                                defaultMessage="Link"
-                              />
-                            }
-                            component={InputComponent}
-                            isColumn
-                            width={"100%"}
-                            inlineLabel
-                          />
-                      </div>
+              
                   <div class=" flex justify-between">
                     {values.taskTypeId === "TSK52434477391272022" && (
                       <FastField name="imageId" component={Upload} />
@@ -813,7 +789,7 @@ const [priority,setpriority]=useState(props.selectedTask
                     </div>
                   </div>
                   <Spacer />
-                  <div class=" flex justify-between">
+                  {/* <div class=" flex justify-between">
                     <div class=" w-1/2">
                       <Field
                         isRequired
@@ -857,7 +833,7 @@ const [priority,setpriority]=useState(props.selectedTask
                       />
                     </div>
                   </div>
-                  <Spacer />
+                  <Spacer /> */}
 
                
                   <div class=" flex justify-between">
@@ -895,7 +871,7 @@ const [priority,setpriority]=useState(props.selectedTask
                         }}
                       />
                     </div>
-                    <div class=" w-5/12">
+                    {/* <div class=" w-5/12">
                       <Field
                         // isRequired
                         name="endTime"
@@ -915,8 +891,15 @@ const [priority,setpriority]=useState(props.selectedTask
                           width: "100%",
                         }}
                       />
-                    </div>
+                    </div> */}
                   </div>
+                  <div class=" w-full mt-4">
+                        <Field
+                          name="documentId"
+                          isRequired
+                          component={DragableUpload}
+                        />
+                      </div>
 
                   <div class=" flex justify-between">
                     {values.taskTypeId === "TSK52434477391272022" && (
@@ -1255,6 +1238,7 @@ const [priority,setpriority]=useState(props.selectedTask
                   /> */}
               
                   <Spacer />
+               
                   <Field
                     name="taskDescription"
                     //label="Notes"
@@ -1266,6 +1250,27 @@ const [priority,setpriority]=useState(props.selectedTask
                     component={TextareaComponent}
                     inlineLabel
                   />
+                     <div class=" mt-4">
+                      <Field
+                            type="text"
+                            name="link"
+                            //label="Name"
+                            // value={values.taskName}
+                            label={
+                              <FormattedMessage
+                                id="app.link"
+                                defaultMessage="Link"
+                              />
+                            }
+                            component={InputComponent}
+                            isColumn
+                            width={"100%"}
+                            inlineLabel
+                          />
+                      </div>
+                
+                 
+                  
                   <Spacer />
                   <div class=" flex justify-between">
                     {values.taskTypeId === "TSK52434477391272022" && (

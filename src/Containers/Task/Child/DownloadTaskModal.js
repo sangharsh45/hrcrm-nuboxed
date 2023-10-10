@@ -15,7 +15,7 @@ const DownloadTaskModal = (props) => {
       <StyledDrawer
          title={props.item.taskName}
     
-        width="64%"
+        width="50%"
         style={{marginTop:"5rem"}}
         visible={props.downloadTaskModal}
         maskClosable={false}
