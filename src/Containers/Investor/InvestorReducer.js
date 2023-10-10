@@ -2,7 +2,7 @@ import * as types from "./InvestorActionTypes";
 import dayjs from "dayjs";
 
 const initialState = {
-    viewType: "card",
+    viewType: "list",
 
     fetchingInvestors: false,
     fetchingInvestorsError: false,

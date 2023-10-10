@@ -64,12 +64,12 @@ const handleChange = (e) => {
           handleInvestorModal={handleInvestorModal}
           />
  <Suspense fallback={<BundleLoader />}>
- { viewType==="card" ?
-  // <InvestorCardView/> 
-<CustomerCardView/>
-  :
-  viewType === "list" ?
+ {  viewType === "list" ?
           <InvestorCardList/> 
+ 
+//   :viewType==="card" ?
+//  <InvestorCardView/> 
+// <CustomerCardView/>  
           :null}
  </Suspense>
             </React.Fragment>

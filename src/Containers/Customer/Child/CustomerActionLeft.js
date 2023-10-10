@@ -59,7 +59,7 @@ const CustomerActionLeft = (props) => {
   return (
     <div class=" flex items-center"
     >
-      {/* <Tooltip>
+      <Tooltip>
         <Badge
           size="small"
           count={(props.viewType === "card" && props.recordData.customer) || 0}
@@ -75,7 +75,7 @@ const CustomerActionLeft = (props) => {
             <GridViewIcon />
           </span>
         </Badge>
-      </Tooltip> */}
+      </Tooltip>
       <Tooltip title={<FormattedMessage id="app.all" defaultMessage="All" />}>
         <Badge
           size="small"

@@ -28,7 +28,6 @@ import { Listbox, Transition } from '@headlessui/react'
 // yup validation scheme for creating a account
 const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
 const UpdateLeadsSchema = Yup.object().shape({
-  name: Yup.string().required("Input needed!"),
   email: Yup.string().email("Enter a valid Email"),
   phoneNumber: Yup.string().matches(phoneRegExp, 'Phone number is not valid').min(5,"Number is too short").max(10,"Number is too long")
 });
@@ -340,62 +339,7 @@ function UpdateLeadsForm (props) {
                         component={SearchSelect}
                       />
                     </div>
-                    {/* <div class=" w-1/3">
-                    <div>               
-                 <StyledLabel>Requirement Type</StyledLabel>
-                 </div>
-                 <Switch                   
-                   checked={this.state.whiteblue}
-                    onChange={this.handleWhiteBlue}
-                   disabled={this.state.checked}
-                   checkedChildren="White collar"
-                   unCheckedChildren="Blue collar"
-                 /> 
-                 </div>
-                 <div class=" w-1/3">
-                 <Checkbox
-                 checked={this.state.checked}
-                 onChange={() => this.handleChange()}
-               > 
-               Both
-               </Checkbox>
-               </div> */}
-               <div class=" w-1/2">
-                    <StyledLabel>
-                      <Field
-                        name="proposalValue"
-                        type="text"
-                        label={
-                          <FormattedMessage
-                            id="app.proposalValue"
-                            defaultMessage="Proposal Value"
-                          />
-                        }
-                        isColumn
-                        width={"100%"}
-                        component={InputComponent}
-                        inlineLabel
-                      />
-                      </StyledLabel>
-                    </div>
-                    <div class=" w-1/2">
-                    <StyledLabel>
-                      <Field
-                        name="opportunityName"
-                        type="text"
-                        label={
-                          <FormattedMessage
-                            id="app.opportunityName"
-                            defaultMessage="Opportunity Name"
-                          />
-                        }
-                        isColumn
-                        width={"100%"}
-                        component={InputComponent}
-                        inlineLabel
-                      />
-                      </StyledLabel>
-                    </div>
+           
                 </div>
                  </div>
                  <div class=" h-3/4 w-5/12 "   >
