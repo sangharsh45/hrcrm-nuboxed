@@ -668,18 +668,18 @@ function CallTable(props) {
       >
          <OnlyWrapCard>   
           {callListRangeByUserId.map((item) => (
-            <div className="flex justify-between mt-4"
+            <div className="flex justify-between mt-4 max-sm:flex-col"
             style={{
                 borderBottom: "3px dotted #515050"
             }}>
-              <div class="flex  flex-col w-12">
+              <div class="flex  flex-col md:w-12 max-sm:flex-row justify-between w-full">
               <div >Type</div>
             <div> {item.callType}</div>
             </div>
-            <div class="flex  flex-col w-40">
+            <div class="flex  flex-col md:w-40 max-sm:flex-row justify-between w-full">
               <p>Subject</p><p> {item.callPurpose}</p>
               </div>
-              <div class="flex  flex-col w-16">
+              <div class="flex  flex-col md:w-16 max-sm:flex-row justify-between w-full">
               <p>Contact</p>
               <MultiAvatar2
                     primaryTitle={item.contactName}
@@ -691,10 +691,10 @@ function CallTable(props) {
               
               {/* <p> {item.contactName}</p> */}
               </div>
-              <div class="flex  flex-col w-48">
+              <div class="flex  flex-col md:w-48 max-sm:flex-row justify-between w-full">
               <p>Date</p><p> {moment(item.startDate).format("llll")}</p>
               </div>
-              <div class="flex  flex-col w-16">
+              <div class="flex  flex-col md:w-16 max-sm:flex-row justify-between w-full">
               <p>Included</p>
               <div>
                 {item.included &&
@@ -728,12 +728,12 @@ function CallTable(props) {
              
               </div> */}
              
-              <div class="flex  flex-col w-16">
+              <div class="flex  flex-col md:w-16 max-sm:flex-row justify-between w-full">
               <p>Completed</p><p> {item.completionInd ? "Yes" : "No"}</p></div>
               {/* <div class="flex  flex-col w-16">
               <p>Rating</p><p> {item.rating > 0 ? item.rating : "Not Rated"}</p>
               </div> */}
-              <div class="flex  flex-col w-24">
+              <div class="flex  flex-col md:w-24 max-sm:flex-row justify-between w-full">
               <p>Assigned To</p>
               <MultiAvatar2
                     primaryTitle={item.assignedTo}
@@ -744,7 +744,7 @@ function CallTable(props) {
                   />
               {/* <p> {item.assignedTo || "Unassigned"}</p> */}
               </div>
-              <div class="flex  flex-col w-16">
+              <div class="flex  flex-col md:w-16 max-sm:flex-row justify-between w-full mt-1">
               <p>Owner</p>
               <MultiAvatar2
                     primaryTitle={item.woner}
