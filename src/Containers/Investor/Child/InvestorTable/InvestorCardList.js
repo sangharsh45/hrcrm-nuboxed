@@ -20,16 +20,12 @@ import {
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import { Link } from "../../../../Components/Common";
 import {
-  getCustomerListByUserId,
-  handleUpdateCustomerModal,
-  setEditCustomer,
   updateOwnercustomerById,
   handleCustomerDrawerModal,
   getCustomerDetailsById,
   getCustomerKeySkill,
   handleCustomerEmailDrawerModal,
   getCustomerById,
-  emptyCustomer,
 } from "../../../Customer/CustomerAction";
 // import AddCustomerDrawerModal from "../../AddCustomerDrawerModal";
 import { getAllCustomerEmployeelist } from "../../../Employees/EmployeeAction";
@@ -37,21 +33,18 @@ import APIFailed from "../../../../Helpers/ErrorBoundary/APIFailed";
 // import AddCustomerEmailDrawerModal from "../UpdateCustomer/AddCustomerEmailDrawerModal";
 import ReactCountryFlag from 'react-country-flag';
 import { BundleLoader } from "../../../../Components/Placeholder";
-// import {getInvestorsbyId} from "../../InvestorAction";
-// const UpdateCustomerModal = lazy(() =>
-//   import("../UpdateCustomer/UpdateCustomerModal")
-// );
+import {getInvestorsbyId,emptyInvestor,handleUpdateInvestorModal} from "../../InvestorAction";
+const UpdateInvestorModal = lazy(() =>
+  import("../UpdateInvestor/UpdateInvestorModal")
+);
 const Option = Select;
 function onChange(pagination, filters, sorter) {
   console.log("params", pagination, filters, sorter);
 }
 
 function InvestorCardList(props) {
-  const [selectedRowKeys, setSelectedRowKeys] = useState([]);
-
-
- 
   const [page, setPage] = useState(0);
+
   useEffect(() => {
     window.addEventListener('error', e => {
       if (e.message === 'ResizeObserver loop limit exceeded' || e.message === 'Script error.') {
@@ -69,7 +62,7 @@ function InvestorCardList(props) {
         }
       }
     })
-    props.getCustomerListByUserId(props.userId, page);
+    props.getInvestorsbyId(props.userId, page);
     setPage(page + 1);
     props.getSectors();
     props.getCountries();
@@ -77,20 +70,19 @@ function InvestorCardList(props) {
   }, []);
 
   useEffect(() => {
-    return () => props.emptyCustomer();
+    return () => props.emptyInvestor();
   }, []);
 
-  const [currentCustomerId, setCurrentCustomerId] = useState("");
+  const [RowData, setRowData] = useState("");
 
-  function handleSetCurrentCustomerId(customerId) {
-    setCurrentCustomerId(customerId);
-    console.log(customerId);
+  function handleCurrentRowData(datas) {
+    setRowData(datas);
   }
 
   const handleLoadMore = () => {
     setTimeout(() => {
       setPage(page + 1);
-      props.getCustomerListByUserId(
+      props.getInvestorsbyId(
         props.currentUser ? props.currentUser : props.userId,
         page
       );
@@ -98,25 +90,25 @@ function InvestorCardList(props) {
   };
 
   const {
-    fetchingCustomers,
-    customerByUserId,
-    handleUpdateCustomerModal,
-    updateCustomerModal,
-    fetchingCustomersError,
+    fetchingInvestors,
+    investorsbyId,
+    handleUpdateInvestorModal,
+    updateInvestorModal,
+    fetchingInvestorsError,
     fetchingAllCustomers,
     user,
     IconShowhover,
   } = props;
   console.log("ee");
  
-  if (fetchingCustomers) {
+  if (fetchingInvestors) {
     return <BundleLoader />;
   }
 
   return (
     <>
   <InfiniteScroll
-        dataLength={customerByUserId.length}
+        dataLength={investorsbyId.length}
         next={handleLoadMore}
         hasMore={true}
         // loader={<h4 style={{ textAlign: 'center' }}>Loading...</h4>}
@@ -128,7 +120,7 @@ function InvestorCardList(props) {
         height={600}
       >
         <OnlyWrapCard>
-      {customerByUserId.map((item) => { 
+      {investorsbyId.map((item) => { 
          const currentdate = moment().format("DD/MM/YYYY");
          const date = moment(item.creationDate).format("DD/MM/YYYY");
          const diff = Math.abs(
@@ -164,7 +156,7 @@ function InvestorCardList(props) {
                                             <h4 class=" text-[0.75rem] text-blue-500 text-cardBody font-poppins cursor-pointer">
                                                 
          <Link
-          toUrl={`customer/${item.customerId}`}
+          toUrl={`investor/${item.investorId}`}
           title={`${item.name}`}
         >{item.name}</Link>&nbsp;&nbsp;
         {date === currentdate ? (
@@ -332,12 +324,11 @@ function InvestorCardList(props) {
             <Tooltip title="Edit">
               <BorderColorIcon
                 style={{ cursor: "pointer",fontSize: "0.8rem" }}
-                // onClick={() => {
-                //     props.setEditCustomer(item);
-                //     handleUpdateCustomerModal(true);
-                //     handleSetCurrentCustomerId(item.customerId);
+                onClick={() => {
+                    handleUpdateInvestorModal(true);
+                    handleCurrentRowData(item);
                   
-                // }}
+                }}
               />
             </Tooltip>
             )}
@@ -351,18 +342,18 @@ function InvestorCardList(props) {
                 })}
       </OnlyWrapCard>
       </InfiniteScroll>
+
+      <UpdateInvestorModal
+        RowData={RowData}
+        updateInvestorModal={updateInvestorModal}
+        handleUpdateInvestorModal={handleUpdateInvestorModal}
+        handleCurrentRowData={handleCurrentRowData}
+      />
       {/* <AddCustomerDrawerModal
         addDrawerCustomerModal={props.addDrawerCustomerModal}
         handleCustomerDrawerModal={props.handleCustomerDrawerModal}
       />
-
-      <UpdateCustomerModal
-        customerId={currentCustomerId}
-        updateCustomerModal={updateCustomerModal}
-        handleUpdateCustomerModal={handleUpdateCustomerModal}
-        handleSetCurrentCustomerId={handleSetCurrentCustomerId}
-      />
-      <AddCustomerEmailDrawerModal
+          <AddCustomerEmailDrawerModal
         // contactById={props.contactById}
         addDrawerCustomerEmailModal={props.addDrawerCustomerEmailModal}
         handleCustomerEmailDrawerModal={props.handleCustomerEmailDrawerModal}
@@ -377,16 +368,17 @@ const mapStateToProps = ({
   sector,
   opportunity,
   employee,
+  investor
 }) => ({
   userId: auth.userDetails.userId,
-  customerByUserId: customer.customerByUserId,
+  investorsbyId:investor.investorsbyId,
   sales: opportunity.sales,
   recruiterName: opportunity.recruiterName,
   fetchingAllCustomers: customer.fetchingAllCustomers,
   sectors: sector.sectors,
-  fetchingCustomers: customer.fetchingCustomers,
-  fetchingCustomersError: customer.fetchingCustomersError,
-  updateCustomerModal: customer.updateCustomerModal,
+  fetchingInvestors: investor.fetchingInvestors,
+  fetchingInvestorsError: investor.fetchingInvestorsError,
+  updateInvestorModal: investor.updateInvestorModal,
   user: auth.userDetails,
   employees: employee.employees,
   countries: auth.countries,
@@ -396,11 +388,10 @@ const mapStateToProps = ({
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
-      getCustomerListByUserId,
-      handleUpdateCustomerModal,
-      setEditCustomer,
+      getInvestorsbyId,
+      handleUpdateInvestorModal,
       getSectors,
-      emptyCustomer,
+      emptyInvestor,
       updateOwnercustomerById,
       handleCustomerDrawerModal,
       getCustomerDetailsById,

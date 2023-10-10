@@ -13,7 +13,7 @@ function InvestorActionRight (props) {
  
     const {
       userId,
-      handleCustomerModal,
+      handleInvestorModal
     } = props;
     return (
       <div class=" flex  items-center">
@@ -22,7 +22,7 @@ function InvestorActionRight (props) {
         <Tooltip placement="left" title="Create">
           <Button
             type="primary"
-            onClick={() => handleCustomerModal(true)}
+            onClick={() => handleInvestorModal(true)}
           >
             Add
           </Button>

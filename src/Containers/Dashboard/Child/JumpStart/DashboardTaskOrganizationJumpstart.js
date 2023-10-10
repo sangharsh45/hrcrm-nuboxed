@@ -5,7 +5,8 @@ import { bindActionCreators } from "redux";
 import moment from "moment";
 import { JumpStartBox, Spacer } from "../../../../Components/UI/Elements";
 import { FlexContainer } from "../../../../Components/UI/Layout";
-import {getDateWiseList,getSalesDateWiseList,getJumpBulblist,getJumpBulblist2,getJumpBulblist3,getavgHour} from "../../DashboardAction";
+import {getDateWiseList,getSalesDateWiseList,getJumpBulblist,getJumpBulblist2,
+  getJumpBulblist3,getavgHour,getJumpTasklist} from "../../DashboardAction";
 
 class DashboardTaskOrganizationJumpstart extends React.Component{
   constructor() {
@@ -60,10 +61,11 @@ componentWillReceiveProps(nextProps) {
 componentDidMount() {
   const startDate = `${this.state.startDate.format("YYYY-MM-DD")}T20:00:00Z`
   const endDate = `${this.state.endDate.format("YYYY-MM-DD")}T20:00:00Z`
-  // this.props.getJumpBulblist(this.props.userId,startDate, endDate)
-  this.props.getJumpBulblist2(this.props.userId,startDate,endDate)
-  this.props.getJumpBulblist3(this.props.userId,startDate,endDate)
-   this.props.getavgHour(this.props.userId, startDate, endDate);
+  // this.props.getJumpBulblist(this.props.userId,startDate, endDate);
+  // this.props.getJumpBulblist2(this.props.userId,startDate,endDate);
+  // this.props.getJumpBulblist3(this.props.userId,startDate,endDate);
+  this.props.getJumpTasklist(this.props.userId,startDate,endDate);
+  //  this.props.getavgHour(this.props.userId, startDate, endDate);
 }
   
 render() {
@@ -77,18 +79,15 @@ render() {
             noProgress
             title="Open Tasks"
 
-            value={this.props.jumpstartBulbCount.qualifiedLeadsList}
-            isLoading={this.props.user.fetchingJumpstartBulb}
+            // value={this.props.jumpstartBulbCount.qualifiedLeadsList}
+            // isLoading={this.props.user.fetchingJumpstartBulb}
           />
        
           <JumpStartBox
             noProgress
             title="Tasks > Deadline"
-            value={
-  
-              this.props.avgHour.hours
-            }
-            isLoading={this.props.fetchingAvgHour} 
+            // value={}
+            // isLoading={this.props.fetchingAvgHour} 
      
     
           />
@@ -97,20 +96,16 @@ render() {
             noProgress
             title="High Priority Tasks"
 
-            value={
-   this.props.jumpstartBulb2Count.createdLeadsList
-            }
-             isLoading={this.props.fetchingJumpstartBulb2}
+            // value={ this.props.jumpstartTasklistCount.createdLeadsList}
+            //  isLoading={this.props.fetchingJumpstartTasklist}
             
           />
           <JumpStartBox
             noProgress
             title="Status"
-            value={
-              this.props.jumpstartBulb3Count.junkedLeadsList
-            }
+            // value={this.props.jumpstartBulb3Count.junkedLeadsList}
             
-            isLoading={this.props.fetchingJumpstartBulb3}
+            // isLoading={this.props.fetchingJumpstartBulb3}
           />
         </FlexContainer>
         <Spacer />
@@ -140,7 +135,10 @@ const mapStateToProps = ({ dashboard,auth }) => ({
   fetchingJumpstartBulb2:dashboard.fetchingJumpstartBulb2,
   fetchingJumpstartBulb3:dashboard.fetchingJumpstartBulb3,
   avgHour:dashboard.avgHour,
-  fetchingAvgHour:dashboard.fetchingAvgHour
+  fetchingAvgHour:dashboard.fetchingAvgHour,
+  fetchingJumpstartTasklist:dashboard.fetchingJumpstartTasklist,
+  jumpstartTasklistCount:dashboard.jumpstartTasklistCount,
+              
 });
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({
@@ -149,7 +147,8 @@ const mapDispatchToProps = (dispatch) => bindActionCreators({
   getJumpBulblist,
   getavgHour,
   getJumpBulblist2,
-  getJumpBulblist3
+  getJumpBulblist3,
+  getJumpTasklist
 }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(DashboardTaskOrganizationJumpstart);

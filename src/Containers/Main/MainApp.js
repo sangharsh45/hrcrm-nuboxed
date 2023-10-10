@@ -149,6 +149,9 @@ const Pitch=lazy(()=>import("../Pitch/Pitch"));
 const Deal=lazy(()=>import("../Deal/Deal"));
 const ContactInvest=lazy(()=>import("../ContactInvest/ContactInvest"));
 const Investor=lazy(()=>import("../Investor/Investor"));
+const InvestorDetail = lazy(() =>
+  import("../Investor/Child/InvestorDetail/InvestorDetail")
+);
 // const Users = lazy(() => import("../Users/Users"));
 
 // class MainApp extends React.Component {
@@ -730,7 +733,11 @@ function MainApp(props) {
                       <Route exact path="/deal" component={Deal}/>
                       <Route exact path="/contactInvest" component={ContactInvest}/>
                       <Route exact path="/investor" component={Investor}/>
-                      
+                      <Route
+                        exact
+                        path="/investor/:investorId"
+                        component={InvestorDetail}
+                      />
                       <Route path="**" component={PageNotFound} />
                     </Switch>
                   </Suspense>
