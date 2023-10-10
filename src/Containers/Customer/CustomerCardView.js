@@ -96,6 +96,7 @@ class CustomerCardView extends Component {
     return (
       <>
         <br />
+        <div class="max-sm:overflow-x-auto h-[34rem]">
         <GroupView
           groupTitle="On-boarded this month"
           isFetching={fetchingCustomerCloser}
@@ -235,7 +236,7 @@ class CustomerCardView extends Component {
             )
           }
         </GroupView>
-
+        </div>
         <AddCustomerDrawerModal />
         < UpdateCustomerDrawerModal
          

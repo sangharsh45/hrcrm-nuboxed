@@ -113,7 +113,7 @@ const CustomerActionLeft = (props) => {
       </Tooltip> */}
       <div class=" flex items-center justify-between"
       >
-        <div class=" w-72">
+        <div class=" w-72 max-sm:w-32">
           <Input
             placeholder="Search by Name, Sector or Owner"
             width={"100%"}

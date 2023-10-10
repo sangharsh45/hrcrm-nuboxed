@@ -220,6 +220,6 @@ const CardElement = styled.div`
   width: 16vw;
   margin-top: 1.5em;
   @media only screen and (max-width: 600px) {
-    width: 100%;
+    width: -webkit-fill-available;
   }
 `;

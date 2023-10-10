@@ -76,7 +76,7 @@ const LeadsActionLeft = (props) => {
               </Tag>
               </Badge>
 
-      <div class=" w-72">
+      <div class=" w-72 max-sm:w-28">
           <Input
             placeholder="Search by Name, Sector or Owner"
             width={"100%"}

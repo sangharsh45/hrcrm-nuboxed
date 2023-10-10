@@ -123,7 +123,7 @@ const ContactActionLeft = (props) => {
           </span>
         </Badge>
       </Tooltip> */}
-      <div class=" w-72 ml-4">
+      <div class=" w-72 md:ml-4 max-sm:w-16 ml-0">
         <Input
           placeholder="Search by Name, Company"
           class="w-96"
@@ -152,8 +152,8 @@ const ContactActionLeft = (props) => {
         <FormattedMessage id="app.clear" defaultMessage="Clear" />
         {/* Clear */}
       </Button>
-
-      <select value={props.selectedCountry} onChange={props.handleCountryChange} style={{width:"8rem"}}>
+<div class="w-32 max-sm:w-12">
+      <select value={props.selectedCountry} onChange={props.handleCountryChange} >
         <option value="" disabled>Department</option>
         <option value="">All</option>
         {countryNameOption.map((countryOption, index) => (
@@ -162,6 +162,7 @@ const ContactActionLeft = (props) => {
           </option>
         ))}
       </select>
+      </div>
     </div>
   );
 };

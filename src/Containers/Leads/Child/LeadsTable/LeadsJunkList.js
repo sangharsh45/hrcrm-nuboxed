@@ -84,13 +84,13 @@ const LeadsJunkList = (props) => {
                } `;
                     return (
                         <div>
-                            <div className="flex justify-between mt-4"
+                            <div className="flex justify-between mt-4 max-sm:flex-col"
                                 style={{
                                     borderBottom: "3px dotted #515050"
                                 }}>
                                      
-                                <div className=" flex font-medium flex-col w-60 ">
-                                <div className="flex"> 
+                                <div className=" flex font-medium flex-col w-60 max-sm:w-full ">
+                                <div className="flex max-sm:w-full"> 
 <div>
 <SubTitle>
             <MultiAvatar
@@ -106,8 +106,9 @@ const LeadsJunkList = (props) => {
 
                                    </div>
 
-                                        <div >
+                                   <div class="max-sm:w-full" >
                                         <Tooltip>
+                                        <div class="max-sm:w-full justify-between flex md:flex-col">
                                             <h4 class=" text-[0.875rem] text-cardBody font-poppins">
                                             Name
                                             </h4>
@@ -129,18 +130,18 @@ const LeadsJunkList = (props) => {
         ) : null} */}
        
                                             </h4>
-
+</div>
                                         </Tooltip>
                                         </div>
                                         </div>
                                 </div>
-                                <div className=" flex font-medium flex-col  w-44 ">
+                                <div className=" flex font-medium flex-col  md:w-44 max-sm:flex-row w-full justify-between ">
                            <h4 class=" text-[0.875rem] text-cardBody font-poppins"> Phone # </h4>
                            <h4 class=" text-[0.75rem] text-cardBody font-poppins">   
                            {`${item.countryDialCode} ${item.phoneNumber}`}
                            </h4>
                        </div>
-                       <div className=" flex font-medium flex-col  w-52 ">
+                       <div className=" flex font-medium flex-col  md:w-52 max-sm:flex-row w-full justify-between">
                            <h4 class=" text-[0.875rem] text-cardBody font-poppins"> Company </h4>
                            <h4 class=" text-[0.75rem] text-cardBody font-poppins">   
                            <Link
@@ -149,14 +150,14 @@ const LeadsJunkList = (props) => {
         >{item.name}</Link>
                            </h4>
                        </div>
-                                <div className=" flex font-medium flex-col  w-52 ">
+                                <div className=" flex font-medium flex-col  md:w-52 max-sm:flex-row w-full justify-between ">
                            
                                     <h4 class=" text-[0.875rem] text-cardBody font-poppins"> Sector </h4>
                                     <h4 class=" text-[0.75rem] text-cardBody font-poppins">   
                                     {item.sector}
                                     </h4>
                                 </div>
-                                <div className=" flex font-medium flex-col w-36 ">
+                                <div className=" flex font-medium flex-col md:w-36 max-sm:flex-row w-full justify-between">
                                   
 
                                     <h4 class=" text-[0.875rem] text-cardBody font-poppins">Country</h4>
@@ -175,7 +176,7 @@ const LeadsJunkList = (props) => {
                         {item.address && item.address.length && item.address[0].country}
                                     </h4>
                                 </div>
-                                <div class="flex flex-row w-[9%]">
+                                <div class="flex flex-row md:w-[9%] max-sm:flex-row w-full justify-between">
 
 <div>
 <ButtonGroup>
@@ -234,7 +235,7 @@ const LeadsJunkList = (props) => {
 </ButtonGroup>
 </div>
      </div>  
-                                <div className=" flex font-medium flex-col w-32 ">
+                                <div className=" flex font-medium flex-col md:w-32 max-sm:flex-row w-full justify-between ">
                                     <h4 class=" text-[0.875rem] text-cardBody font-poppins">Assigned to</h4>
 
                                     <div class=" text-[0.75rem] text-cardBody font-poppins">
@@ -253,7 +254,7 @@ const LeadsJunkList = (props) => {
              
                                     </div>
                                 </div>
-                                <div className=" flex font-medium flex-col w-20 ">
+                                <div className=" flex font-medium flex-col md:w-20 max-sm:flex-row w-full justify-between ">
                        
                        <h4 class=" text-[0.875rem] text-cardBody font-poppins">Owner</h4>
 
@@ -267,7 +268,7 @@ const LeadsJunkList = (props) => {
               />
             </span>
                    </div>
-                   <div className=" flex font-medium flex-col w-32 ">
+                   <div className=" flex font-medium flex-col md:w-32 max-sm:flex-row w-full justify-between ">
                                     <h4 class=" text-[0.875rem] text-cardBody font-poppins">Reinstate</h4>
 
                                     <div class=" text-[0.75rem] text-cardBody font-poppins">
@@ -281,7 +282,7 @@ Resinstate
 </Button>
 </div>
                                 </div>
-                                <div class="flex flex-col w-[5%]">
+                                <div class="flex flex-col md:w-[5%] max-sm:flex-row w-full justify-between">
                     <div class="rounded-full bg-white w-5 h-5 cursor-pointer">
                     {item.url !== null ? (
               <Tooltip title={item.url}>
@@ -318,7 +319,7 @@ Resinstate
 
                     </div>
                     </div>
-                    <div class="flex flex-col w-[2%]">
+                    <div class="flex flex-col md:w-[2%] max-sm:flex-row w-full justify-between">
                       <div>
                     <Tooltip overlayStyle={{ maxWidth: "300px" }} title={dataLoc}>
             <span
