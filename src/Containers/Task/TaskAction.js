@@ -773,6 +773,13 @@ export const rejectTaskByTaskId = (taskId) => (dispatch, getState) => {
     payload: modalProps,
   });
 };
+export const handleDownloadTaskModal = (modalProps) => (dispatch) => {
+  dispatch({
+    type: types.HANDLE_DOWNLOAD_TASK_MODAL,
+    payload: modalProps,
+  });
+};
+
 export const setEditTask = (name) => (dispatch) => {
   dispatch({
     type: types.SET_TASK_EDIT,

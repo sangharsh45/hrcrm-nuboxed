@@ -137,6 +137,8 @@ const initialState = {
   setEditingTask:{},
   updateTaskModal:false,
 
+  downloadTaskModal:false,
+
   taskById:[],
   fetchingGrantTask: false,
   fetchingGrantTaskError:false,
@@ -654,6 +656,10 @@ export const TaskReducer = (state = initialState, action) => {
     
         case types.HANDLE_UPDATE_TASK_MODAL:
           return { ...state, updateTaskModal: action.payload };
+
+          case types.HANDLE_DOWNLOAD_TASK_MODAL:
+            return { ...state, downloadTaskModal: action.payload };
+  
 
 
           case types.GET_PROJECT_TASK_TABLE_REQUEST:

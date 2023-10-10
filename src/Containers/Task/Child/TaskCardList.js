@@ -9,6 +9,7 @@ import {
   CloseCircleOutlined,
   SearchOutlined,
 } from "@ant-design/icons";
+import DownloadForOfflineIcon from '@mui/icons-material/DownloadForOffline';
 import { OnlyWrapCard } from '../../../Components/UI/Layout';
 import NoteAltIcon from "@mui/icons-material/NoteAlt";
 import MonitorHeartIcon from "@mui/icons-material/MonitorHeart";
@@ -25,6 +26,7 @@ import {
   rejectTaskByTaskId,
   handleUpdateTaskModal,
   setEditTask,
+  handleDownloadTaskModal,
   handleTaskNotesDrawerModal,
   handleTaskProjectDrawerModal,
   handleTaskopenModal
@@ -33,6 +35,7 @@ import { MultiAvatar } from "../../../Components/UI/Elements";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
 import AddTaskNotesDrawerModal from "./AddTaskNotesDrawerModal";
 import OpenTaskModal from "./OpenTaskModal";
+import DownloadTaskModal from "./DownloadTaskModal";
 const UpdateTaskModal = lazy(() => import("./UpdateTaskModal"));
 const ButtonGroup = Button.Group;
 
@@ -76,8 +79,10 @@ const TaskCardList = (props) => {
     approveTaskByTaskId,
     rejectTaskByTaskId,
     handleUpdateTaskModal,
+    handleDownloadTaskModal,
     handleTaskProjectDrawerModal,
     updateTaskModal,
+    downloadTaskModal,
     addDrawerTaskNotesModal,
     handleTaskNotesDrawerModal,
     setEditTask,
@@ -250,59 +255,52 @@ const TaskCardList = (props) => {
                        <div class="text-[0.75rem] text-cardBody font-poppins"> 
                         {`${moment(item.endDate).format("ll")}`}</div>
                    </div>
-                   <div class="flex flex-col w-[10%]">
-                   {item.taskStatus === "Completed" && !item.approvedInd ? (
-              <>
-                <div>
-                  <Button
-                    onClick={() => approveTaskByTaskId(item.taskId)}
-                    style={{ backgroundColor: "teal", color: "white" }}
-                  >
-                    {/* Approve */}
-                    <FormattedMessage
-                      id="app.approve"
-                      defaultMessage="Approve"
-                    />
-                  </Button>
-                  <Button
-                    style={{
-                      backgroundColor: "rgb(233, 79, 79)",
-                      color: "white",
-                    }}
-                    onClick={() => rejectTaskByTaskId(item.taskId)}
-                  >
-                    {/* Reject */}
-                    <FormattedMessage
-                      id="app.reject"
-                      defaultMessage="Reject"
-                    />
-                  </Button>
-                </div>
-              </>
-            ) : (
-              <>
-                {item.approvedInd === "Approved" ? (
-                  <CheckCircleOutlined
-                    type="check-circle"
-                    theme="twoTone"
-                    twoToneColor="#52c41a"
-                    size={140}
-                    style={{ fontSize: "1rem" }}
-                  />
-                ) : item.approvedInd === "Rejected" ? (
-                  <CloseCircleOutlined
-                    type="close-circle"
-                    theme="twoTone"
-                    twoToneColor="red"
-                    size={140}
-                    style={{ fontSize: "1rem" }}
-                  />
-                ) : (
-                  <></>
-                )}
-              </>
-            )}
-                   </div>
+                 <div className="flex flex-col w-[10%]">
+  {item.taskStatus === "Completed" && !item.approvedInd && item.assignedToName !== item.submittedBy ? (
+    <>
+      <div>
+        <Button
+          onClick={() => approveTaskByTaskId(item.taskId)}
+          style={{ backgroundColor: "teal", color: "white" }}
+        >
+          <FormattedMessage id="app.approve" defaultMessage="Approve" />
+        </Button>
+        <Button
+          style={{
+            backgroundColor: "rgb(233, 79, 79)",
+            color: "white",
+          }}
+          onClick={() => rejectTaskByTaskId(item.taskId)}
+        >
+          <FormattedMessage id="app.reject" defaultMessage="Reject" />
+        </Button>
+      </div>
+    </>
+  ) : (
+    <>
+      {item.approvedInd === "Approved" ? (
+        <CheckCircleOutlined
+          type="check-circle"
+          theme="twoTone"
+          twoToneColor="#52c41a"
+          size={140}
+          style={{ fontSize: "1rem" }}
+        />
+      ) : item.approvedInd === "Rejected" ? (
+        <CloseCircleOutlined
+          type="close-circle"
+          theme="twoTone"
+          twoToneColor="red"
+          size={140}
+          style={{ fontSize: "1rem" }}
+        />
+      ) : (
+        <></>
+      )}
+    </>
+  )}
+</div>
+
                                 <div class="flex flex-col w-[3%]">
                     <div class="">
                     <ButtonGroup>
@@ -311,14 +309,18 @@ const TaskCardList = (props) => {
               type="To Start"
               iconType="fa-hourglass-start"
               tooltip="To Start"
-              color="blue"
+              style={{color:"red"}} 
+          
             />
           )}
+
+
           {item.complitionStatus === "In Progress" && (
             <StatusIcon
               type="In Progress"
               iconType="fa-hourglass-half"
               tooltip="In Progress"
+              style={{color:"red"}} 
             />
           )}
           {item.complitionStatus === "completed" && (
@@ -331,6 +333,7 @@ const TaskCardList = (props) => {
         </ButtonGroup>
                         </div>
                         <div>
+                       
                         {item.complitionStatus === "completed" && (
               <TaskStatusToggle
                 completionInd={item.completionInd}
@@ -349,6 +352,19 @@ const TaskCardList = (props) => {
                 style={{ color: "green", cursor: "pointer", fontSize: "0.8rem" }}
               />
        </div>
+<div>    <Tooltip title="Document">
+          {props.userId === item.userId && (
+                      <DownloadForOfflineIcon
+                        // type="edit"
+                        style={{ cursor: "pointer", fontSize: "0.8rem" }}
+                        onClick={() => {
+                          handleSetCurrentProcessName(item)
+                          handleDownloadTaskModal(true);
+                        }}
+                      />
+                    )}
+            </Tooltip></div>
+   
           <Tooltip title="Edit">
           {props.userId === item.userId && (
                       <BorderColorIcon
@@ -396,6 +412,12 @@ const TaskCardList = (props) => {
           updateTaskModal={updateTaskModal}
           handleUpdateTaskModal={handleUpdateTaskModal}
         />
+        <DownloadTaskModal
+          item={currentprocessName}
+          downloadTaskModal={downloadTaskModal}
+          handleDownloadTaskModal={handleDownloadTaskModal}
+        />
+        
         <OpenTaskModal
           addTaskDetailModal={props.addTaskDetailModal}
           handleTaskopenModal={props.handleTaskopenModal}
@@ -429,6 +451,7 @@ handleSetTaskNameId={handleSetTaskNameId}
     employeeId: auth.userDetails.employeeId,
     addDrawerTaskProjectModal: task.addDrawerTaskProjectModal,
     updateTaskModal: task.updateTaskModal,
+    downloadTaskModal:task.downloadTaskModal,
     noOfPages: task.taskListRangeByUserId.length && task.taskListRangeByUserId[0].noOfPages || "",
       fetchingTaskListRangeByUserId: task.fetchingTaskListRangeByUserId,
   fetchingTaskListRangeByUserIdError:task.fetchingTaskListRangeByUserIdError,
@@ -447,6 +470,7 @@ handleSetTaskNameId={handleSetTaskNameId}
         rejectTaskByTaskId,
         setEditTask,
         handleUpdateTaskModal,
+        handleDownloadTaskModal,
         handleTaskopenModal
       },
       dispatch
@@ -469,7 +493,7 @@ handleSetTaskNameId={handleSetTaskNameId}
               style={{
                 padding: "0.375em",
                 borderColor: "transparent",
-                color: type === "Completed" ? "green" : "orange",
+                color: type === "Completed" ? "green" : "red",
               }}
               onClick={onClick}
             >
