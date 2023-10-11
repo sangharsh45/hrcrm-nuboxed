@@ -257,9 +257,9 @@ console.log(this.state.firstCase)
                  </div>
                  
                   ):(
-                    <div class=" flex items-center h-16 flex-row-reverse"
+                    <div class=" flex items-center h-16 flex-row-reverse w-3/12 max-sm:w-wk"
                       style={{
-                        width: "25%",
+                       
                         fontWeight: "bold",
                       }}
                     >
@@ -277,9 +277,9 @@ console.log(this.state.firstCase)
   
   <Spacer />
                     
-                     <div
+                     <div class="w-3/12 max-sm:w-wk"
                       style={{
-                        width: "25%",
+                       
                         fontWeight: "bold",
                       }}
                     >
@@ -295,7 +295,7 @@ console.log(this.state.firstCase)
          
                   </FlexContainer>
                   <Spacer />
-                 
+                 <div class="max-sm:flex flex-col">
                   <Field
                     name="coverDetails"
                     //label="Cover"
@@ -307,6 +307,7 @@ console.log(this.state.firstCase)
                     component={InputComponent}
                     inlineLabel
                   />
+                  </div>
                   <Spacer />
                   <Field
                     isRequired

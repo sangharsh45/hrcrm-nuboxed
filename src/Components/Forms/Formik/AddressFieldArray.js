@@ -96,7 +96,7 @@ class AddressFieldArray extends Component {
                                 inlineLabel
                                 style={{ flexBasis: '80%' }}
                             /> */}                
-                <p
+                <p class="text-xs"
                   style={{
                     fontWeight: "bold",                   
                     fontStyle: "italic",
@@ -104,8 +104,8 @@ class AddressFieldArray extends Component {
                   }}
                 >Address input is only allowed using Location feature</p>
                 
-                <div class="flex justify-between">
-                <div style={{ width: "32%" }}>     
+                <div class="flex justify-between max-sm:flex-col">
+                <div class="w-[32%] max-sm:w-wk">     
                  <Field
                   name={`address.${index}.address1`}
                   label="Address 1"
@@ -115,7 +115,7 @@ class AddressFieldArray extends Component {
                   inlineLabel
                 />  
                 </div>
-                 <div style={{ width: "32%" }}>                        
+                <div class="w-[32%] max-sm:w-wk">                         
                 <Field
                   name={`address.${index}.street`}
                   label="Street"
@@ -125,7 +125,7 @@ class AddressFieldArray extends Component {
                   inlineLabel                 
                 /> 
                 </div> 
-                <div style={{ width: "32%" }}>
+                <div class="w-[32%] max-sm:w-wk"> 
                     <Tooltip title="Use Location feature for easy search ">
                       <Field
                         name={`address.${index}.postalCode`}
@@ -139,8 +139,8 @@ class AddressFieldArray extends Component {
                     </Tooltip>
                   </div>
                   </div>         
-                <div class="flex justify-between" >
-                <div style={{ width: "32%" }}>
+                <div class="flex justify-between max-sm:flex-col" >
+                <div class="w-[32%] max-sm:w-wk"> 
                     <Tooltip title="Use Location feature for easy search ">
                       <Field
                         name={`address.${index}.city`}
@@ -154,7 +154,7 @@ class AddressFieldArray extends Component {
                       />
                     </Tooltip>
                   </div> 
-                  <div style={{ width: "32%" }}>
+                  <div class="w-[32%] max-sm:w-wk"> 
                     <Tooltip title="Use Location feature for easy search ">
                       <Field
                         name={`address.${index}.state`}
@@ -167,7 +167,7 @@ class AddressFieldArray extends Component {
                       />
                     </Tooltip>
                   </div>
-                  <div style={{ width: "32%" }}>
+                  <div class="w-[32%] max-sm:w-wk"> 
                     <Tooltip title="Use Location feature for easy search ">
                       <Field
                         name={`address.${index}.country`}

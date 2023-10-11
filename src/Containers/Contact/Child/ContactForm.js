@@ -208,14 +208,14 @@ class ContactForm extends Component {
             setFieldTouched,
           }) => (
             <Form className="form-background">
-              <div class=" flex justify-between h-[27rem] overflow-x-hidden"
+              <div class=" flex justify-between h-[27rem] overflow-x-hidden max-sm:flex-col"
               >
-                <div class=" h-full w-1/2"
+                <div class=" h-full w-1/2 max-sm:w-wk"
                 >
                   <div class=" flex  flex-nowrap">
                     <FastField name="imageId" component={Upload} />
                     <div>
-                      <div class=" flex justify-between">
+                      <div class=" flex justify-between max-sm:flex-col">
                         <div class=" w-2/5">
                           <FastField
                             name="salutation"
@@ -233,7 +233,7 @@ class ContactForm extends Component {
                             isColumn
                           />
                         </div>
-                        <div class=" w-1/2">
+                        <div class=" w-1/2 max-sm:w-2/5">
                           <FastField
                             isRequired
                             name="firstName"
@@ -312,7 +312,7 @@ class ContactForm extends Component {
                     </div>
                   </div>               
                   <div class=" flex justify-between">
-                    <div class=" w-2/6">
+                    <div class=" w-2/6 max-sm:w-2/5">
                       <FastField
                         name="countryDialCode"
                         isColumnWithoutNoCreate
@@ -334,7 +334,7 @@ class ContactForm extends Component {
                         inlineLabel
                       />
                     </div>
-                    <div class=" w-2/5">
+                    <div class=" w-2/5 max-sm:w-2/4">
                       <FastField
                         type="number"
                         name="mobileNumber"
@@ -351,8 +351,9 @@ class ContactForm extends Component {
                         isColumn
                       />
                     </div>
-                    <div class=" w-1/4 font-bold"
-                    >
+                    
+                  </div>
+                  <div class=" w-1/4 font-bold" >
                       WhatsApp
                       <Switch
                         onChange={this.handleWhatsApp}
@@ -361,7 +362,6 @@ class ContactForm extends Component {
                         unCheckedChildren="Same"
                       />
                     </div>
-                  </div>
                   <div class=" flex justify-between">
                     <div class=" w-2/4">
                       {" "}
@@ -442,9 +442,9 @@ class ContactForm extends Component {
                   />
 
                 </div>
-                <div class=" h-3/4 w-5/12 "
+                <div class=" h-3/4 w-5/12 max-sm:w-wk "
                 >
-                  <div class=" flex  justify-between">
+                  <div class=" flex  justify-between max-sm:mt-20">
                     <div class=" w-1/2">
                       <Field
                         name="customerId"

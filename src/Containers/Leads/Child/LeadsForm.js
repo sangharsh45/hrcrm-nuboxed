@@ -112,14 +112,9 @@ props.getAllCustomerEmployeelist();
             values,
             ...rest
           }) => (
+            <div class="overflow-y-auto h-[34rem] overflow-x-hidden max-sm:h-[30rem]">
             <Form className="form-background">
-             <div  style={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  height: "70vh",
-                  overflowX: "hidden",
-                  paddingRight: "0.6em",
-                }} >
+             <div class="flex justify-between  pr-2 max-sm:flex-col" >
                    <div class="">
                     {clearbit && clearbit.hasOwnProperty("logo") && (
                       <ProgressiveImage
@@ -144,13 +139,13 @@ props.getAllCustomerEmployeelist();
                       </a>
                     ) : null}
                   </div> 
-                <div class=" h-full w-1/2"   >
+                <div class=" h-full w-1/2 max-sm:w-wk"   >
                   <div class=" flex  flex-nowrap">
                     <div> <FastField name="imageId" component={PostImageUpld} /></div>
                    
                     <div>
-                      <div class=" flex justify-between">
-                        <div class=" w-2/5">
+                      <div class=" flex justify-between max-sm:flex-col">
+                        <div class=" w-2/5 max-sm:w-1/2">
                           <Field
                             name="salutation"
                             label={
@@ -165,7 +160,7 @@ props.getAllCustomerEmployeelist();
                             isColumn
                           />
                         </div>
-                        <div class=" w-1/2">
+                        <div class=" w-1/2 ">
                           <FastField
                             isRequired
                             name="firstName"
@@ -184,8 +179,8 @@ props.getAllCustomerEmployeelist();
                           />
                         </div>
                       </div>                  
-                      <div class=" flex justify-between">
-                        <div class=" w-2/5">
+                      <div class=" flex justify-between max-sm:flex-col">
+                        <div class=" w-2/5 max-sm:w-1/2">
                           <FastField
                             name="middleName"
                             //label="Middle Name"
@@ -236,7 +231,7 @@ props.getAllCustomerEmployeelist();
                   /> 
                                
                   <div class=" flex justify-between">
-                    <div class=" w-3/12">
+                    <div class=" w-3/12 max-sm:w-[35%]">
                    
                       <FastField
                         name="countryDialCode"
@@ -299,8 +294,8 @@ props.getAllCustomerEmployeelist();
                   </StyledLabel>
                          
                   <Spacer />
-                  <div class=" flex justify-between">
-                    <div class=" w-1/2">
+                  <div class=" flex justify-between max-sm:flex-col">
+                    <div class=" w-1/2 max-sm:w-wk">
                     <StyledLabel>
                       <Field
                         name="vatNo"
@@ -415,7 +410,7 @@ props.getAllCustomerEmployeelist();
                       </StyledLabel>
                     </div> */}
                 </div>
-                <div class=" h-3/4 w-5/12 "  
+                <div class=" h-3/4 w-5/12 max-sm:w-wk "  
                 >
                    <Listbox value={selected} onChange={setSelected}>
       {({ open }) => (
@@ -523,6 +518,7 @@ props.getAllCustomerEmployeelist();
                 </Button>
               </div>
             </Form>
+            </div>
           )}
         </Formik>
       </>
