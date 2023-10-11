@@ -78,6 +78,9 @@ const initialState = {
   deletingLeadsData: false,
   deletingLeadsDataError: false,
 
+
+  
+
   fetchingLeadsOpportunity: false,
   fetchingLeadsOpportunityError: false,
   opportunityByLeadsId: [],
