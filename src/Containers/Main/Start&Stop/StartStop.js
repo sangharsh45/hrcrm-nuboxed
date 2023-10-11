@@ -307,28 +307,14 @@ const[country,setAllCountry]=useState("");
     setDrop1(
     event.target.value
     )
-    let dropData= event.target.value
-    let data={
-      attendanceId:props.attendanceByList.attendanceId,
-      country:"",
-      location:dropData,
-      other:null,
-    }
-    props.addLocationDetails(data)
+  
   }
 
   const handleMandatoryCountry=(event)=>{
     setmandatoryCountry(
     event.target.value
     )
-    let mandatoryData= event.target.value
-    let data={
-      attendanceId:props.attendanceByList.attendanceId,
-      country:mandatoryData,
-      location:null,
-      other:null,
-    }
-    props.addLocationDetails(data)
+ 
   }
   console.log(mandatorCountry)
 
@@ -336,12 +322,16 @@ const[country,setAllCountry]=useState("");
     setAllCountry(
     event.target.value
     )
-    let allcountryData= event.target.value
+  
+  }
+
+
+  const handleSubmit=()=>{
     let data={
       attendanceId:props.attendanceByList.attendanceId,
-      country:null,
-      location:null,
-      other:allcountryData,
+      country:mandatorCountry?mandatorCountry:null,
+      location:drop1?drop1:null,
+      other:country?country:null,
     }
     props.addLocationDetails(data)
   }
@@ -465,6 +455,10 @@ onChange={handleMandatoryCountry}
       </select>
       </div>:null
 }
+
+<div>
+  <Button onClick={handleSubmit}>Submit</Button>
+</div>
      
     </div>
    
