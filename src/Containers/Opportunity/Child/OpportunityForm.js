@@ -355,11 +355,10 @@ function OpportunityForm(props) {
           values,
           ...rest
         }) => (
+          <div class="overflow-y-auto h-[34rem] overflow-x-hidden max-sm:h-[30rem]">
           <Form className="form-background">
-            <div class=" flex justify-between">
-              <div
-class=" h-full w-[24rem]"
-              >
+            <div class=" flex justify-between max-sm:flex-col">
+              <div class=" h-full w-[24rem] max-sm:w-wk">
                 <Spacer />
                 <Field
                   isRequired
@@ -377,8 +376,8 @@ class=" h-full w-[24rem]"
                   inlineLabel
                 />
                 <Spacer />
-                <div class="flex justify-between">
-                <div class=" w-1/2">
+                <div class="flex justify-between max-sm:flex-col">
+                <div class=" w-1/2 max-sm:w-wk">
                     <Field
                       name="startDate"
                       //label="Start "
@@ -394,7 +393,7 @@ class=" h-full w-[24rem]"
                       inlineLabel
                     />
                   </div>
-                  <div class=" w-2/5">
+                  <div class=" w-2/5 max-sm:w-wk">
                     <Field
                       // isRequired
                       name="endDate"
@@ -424,8 +423,8 @@ class=" h-full w-[24rem]"
                   </div>
                 </div>
                 <Spacer />
-                <div class="flex justify-between">
-                <div class=" w-1/2">
+                <div class="flex justify-between max-sm:flex-col">
+                <div class=" w-1/2 max-sm:w-wk">
                     <Field
                       name="proposalAmount"
                       //label="Proposal Amount"
@@ -441,7 +440,7 @@ class=" h-full w-[24rem]"
                       component={InputComponent}
                     />
                   </div>
-                  <div class=" w-2/5">
+                  <div class=" w-2/5 max-sm:w-wk">
                     <Field
                       name="currency"
                       isColumnWithoutNoCreate
@@ -509,8 +508,7 @@ class=" h-full w-[24rem]"
                 </div>
               </div>
             <div
-               class=" h-full w-[24rem]"
-              >
+               class=" h-full w-[24rem] max-sm:w-wk">
               <Listbox value={selected} onChange={setSelected}>
         {({ open }) => (
           <>
@@ -581,8 +579,8 @@ class=" h-full w-[24rem]"
       </Listbox>
 
                 <Spacer />
-<div class="flex justify-between">
-<div class=" w-2/5">
+<div class="flex justify-between max-sm:flex-col">
+<div class=" w-2/5 max-sm:w-wk">
                <StyledLabel>
                   <Field
                     name="customerId"
@@ -608,7 +606,7 @@ class=" h-full w-[24rem]"
                   />
                 </StyledLabel>
             </div>
-                <div class=" w-2/5">
+                <div class=" w-2/5 max-sm:w-wk">
                           <FastField
                             name="source"
                             type="text"
@@ -687,8 +685,8 @@ class=" h-full w-[24rem]"
                 </StyledLabel>
                 <Spacer />
 
-                <div class="flex justify-between">
-                  <div class=" w-1/2">
+                <div class="flex justify-between max-sm:flex-col">
+                  <div class=" w-1/2 max-sm:w-wk">
                     <StyledLabel>
                       <Field
                         name="oppWorkflow"
@@ -714,7 +712,7 @@ class=" h-full w-[24rem]"
                     </StyledLabel>
                   </div>
                   <Spacer />
-                  <div class=" w-2/5">
+                  <div class=" w-2/5 max-sm:w-wk">
                     <StyledLabel>
                       <Field
                         name="oppStage"
@@ -764,6 +762,7 @@ class=" h-full w-[24rem]"
               </Button>
             </div>
           </Form>
+          </div>
         )}
       </Formik>
     </>
