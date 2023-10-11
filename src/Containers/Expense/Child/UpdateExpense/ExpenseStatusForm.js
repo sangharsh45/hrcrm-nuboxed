@@ -23,7 +23,7 @@ const ExpenseStatusForm = (props) => {
                   {status.approvedStatus === 'Approved' ? (
                   `Approved By ${status.employeeName} on ${moment(status.approvedDate).format('ll')}`
                 ) : status.approvedStatus === 'Pending' ? (
-                  `Pending On ${status.employeeName} level.`
+                  `Pending With ${status.employeeName}.`
                 ) : null}
               </Timeline.Item>
             ))}

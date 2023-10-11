@@ -1,10 +1,10 @@
-import React, { } from "react";
-import { Switch, Popconfirm, } from "antd";
+import React, { useEffect,Component } from "react";
+import { Switch, Checkbox, Popconfirm, message, Select } from "antd";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
- import { linkCrmToggle,getDepartments } from "../Department/DepartmentAction";
+ import { linkImToggle,getDepartments } from "../Department/DepartmentAction";
 
-function CRMStatusToggle(props) {
+function IMStatusToggle(props) {
   // useEffect(() => {
   //   props.getDepartments();
   //   // props.getRequirementsDuration(props.orgId);
@@ -12,9 +12,9 @@ function CRMStatusToggle(props) {
   // const { crmInd } = props.departments;
   const [crm, setCrm] = React.useState(props.crmInd);
 console.log("crrm",props.crmInd);
-  function handleCrmToggleCollection(item) {
+  function handleImToggleCollection(item) {
     if (props.crmInd) {
-      props.linkCrmToggle({
+      props.linkImToggle({
         // ...props.departments,
         departmentName: props.departmentName,
         departmentId: props.departmentId,
@@ -26,7 +26,7 @@ console.log("crrm",props.crmInd);
       // setCrm(props.crmInd ? false : true);
 
     } else {
-      props.linkCrmToggle({
+      props.linkImToggle({
         // ...props.departments,
         departmentName: props.departmentName,
         departmentId: props.departmentId,
@@ -39,7 +39,7 @@ console.log("crrm",props.crmInd);
     }
   }
 
-  function handleCrmCancel() {
+  function handleImCancel() {
     if (props.crmInd) {
       setCrm(true);
     } else {
@@ -51,8 +51,8 @@ console.log("crrm",props.crmInd);
       
         <Popconfirm
           title="Confirm status change?"
-          onConfirm={() => handleCrmToggleCollection()}
-          onCancel={handleCrmCancel}
+          onConfirm={() => handleImToggleCollection()}
+          onCancel={handleImCancel}
           okText="Yes"
           cancelText="No"
         >
@@ -78,7 +78,7 @@ const mapStateToProps = ({ auth, departments }) => ({
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
-        linkCrmToggle,
+        linkImToggle,
         getDepartments
     },
     dispatch
@@ -86,4 +86,4 @@ const mapDispatchToProps = (dispatch) =>
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(CRMStatusToggle);
+)(IMStatusToggle);

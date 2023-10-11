@@ -2,13 +2,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { FormattedMessage } from "react-intl";
-import { Button, Divider, message ,Input, Card} from "antd";
-import { MainWrapper, FlexContainer } from "../../Components/UI/Layout";
-import { TextInput, Title } from "../../Components/UI/Elements";
-
-import moment from "moment";
-// import * as Yup from "yup";
+import {  message } from "antd";
 import {
   getTasks,
   addTasks,
@@ -16,7 +10,7 @@ import {
   updateTasks,
   searchTaskName
 } from "../Settings/Task/TaskAction";
-import SingleTasks from "../Settings/Task/SingleTasks";
+
 
 
 // const SectorsSchema = Yup.object().shape({
@@ -39,7 +33,7 @@ class TaskNew extends Component {
   }
   handleClear = () => {
     this.setState({ currentData: "" });
-    this.props.getTasks();
+    this.props.getTasks(this.props.userId);
   };
   setCurrentData = (value) => {
     this.setState({ currentData: value });
@@ -108,7 +102,7 @@ class TaskNew extends Component {
   // };
   componentDidMount() {
    
-    this.props.getTasks();
+    this.props.getTasks(this.props.userId);
     // this.getLinkedSources();
   }
   render() {
@@ -134,8 +128,8 @@ class TaskNew extends Component {
       const randomNumber = Math.floor(Math.random() * 100) + 1;
       return (
         <div className="col-span-2 sm:col-span-1">
-          <div className="flex">{item.taskType}</div>
-          <div class="text-2xl">{randomNumber}</div>
+          <div className="flex">{item.name}</div>
+          <div class="text-2xl">{item.count}</div>
         </div>
       );
     })}
@@ -146,10 +140,11 @@ class TaskNew extends Component {
   }
 }
 
-const mapStateToProps = ({ tasks }) => ({
+const mapStateToProps = ({ tasks ,auth}) => ({
   addingTasks: tasks.addingTasks,
   addingTasksError: tasks.addingTasksError,
   tasks: tasks.tasks,
+  userId:auth.userDetails.userId,
 
   // removingTasks: tasks.removingTasks,
   // removingTasksError: tasks.removingTasksError,

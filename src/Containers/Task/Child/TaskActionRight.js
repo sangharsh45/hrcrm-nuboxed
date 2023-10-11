@@ -26,7 +26,7 @@ const TaskActionRight = (props) => {
         {user.employee_type === "contractor" && user.candiContShareInd === true || user.employee_type === "employee" && user.candiEmpShareInd === true && user.taskFullListInd === true &&(
          <TaskSharedForm/>
          )} 
-       {props.viewType === "approve" ? "":
+       {props.viewType === "table"  ? 
       <Tooltip placement="left" title="Create">
         <Button
           type="primary"
@@ -36,7 +36,7 @@ const TaskActionRight = (props) => {
           Add
         </Button>
       </Tooltip>
-}
+:null}
     </div>
   );
 };

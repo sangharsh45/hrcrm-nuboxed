@@ -246,6 +246,7 @@ function UpdateTaskForm(props) {
           // isEditing ? prefillTask :
           {
             taskType: props.setEditingTask.taskType || "",
+            link:props.setEditingTask.link || "",
             taskName: props.setEditingTask.taskName || "",
             value: props.setEditingTask.value || "",
             taskDescription: props.setEditingTask.taskDescription || "",
@@ -532,8 +533,8 @@ function UpdateTaskForm(props) {
                           <Tooltip title="Low">
                             <Button
                               type="primary"
-                              shape="circle"
-                              icon={<ExclamationCircleOutlined />}
+                              // shape="circle"
+                              // icon={<ExclamationCircleOutlined />}
                               onClick={() => handleButtonClick("Low")}
                               style={{
                                 backgroundColor:
@@ -570,51 +571,7 @@ function UpdateTaskForm(props) {
                   </div>
                 </div>
                 <Spacer />
-                <div class=" flex justify-between">
-                  <div class=" w-1/2">
-                    <Field
-                      isRequired
-                      name="startDate"
-                      //label="Start "
-                      label={
-                        <FormattedMessage
-                          id="app.startDate"
-                          defaultMessage="Start Date"
-                        />
-                      }
-                      isColumn
-                      component={DatePicker}
-                      value={values.startDate}
-                      inlineLabel
-                      style={{
-                        width: "100%",
-                      }}
-                    />
-                  </div>
-                  <Spacer />
-                  <div class=" w-5/12">
-                    <Field
-                      // isRequired
-                      name="startTime"
-                      // label="Start Time"
-                      label={
-                        <FormattedMessage
-                          id="app.startTime"
-                          defaultMessage="Start Time"
-                        />
-                      }
-                      isColumn
-                      component={TimePicker}
-                      use12Hours
-                      value={values.startTime}
-                      inlineLabel
-                      style={{
-                        width: "100%",
-                      }}
-                    />
-                  </div>
-                </div>
-                <Spacer />
+                
                 <div class=" flex justify-between">
                 {values.taskTypeId === "TSK52434477391272022" && (
                     <div class=" w-1/2">
@@ -677,28 +634,7 @@ function UpdateTaskForm(props) {
                       }}
                     />
                   </div>
-                  <div class=" w-5/12">
-                    <Field
-                      // isRequired
-                      name="endTime"
-                      //label="End Time"
-                      label={
-                        <FormattedMessage
-                          id="app.endTime"
-                          defaultMessage="End Time"
-                        />
-                      }
-                      isColumn
-                      component={TimePicker}
-                      use12Hours
-                      value={values.endTime}
-                      inlineLabel
-                      style={{
-                        width: "100%",
-                        // borderRight: "0.18em solid red",
-                      }}
-                    />
-                  </div>
+               
                 </div>
 
                 <div class=" flex justify-between">
@@ -906,22 +842,9 @@ function UpdateTaskForm(props) {
                   inlineLabel
                 />
                 <Spacer />
-                {values.taskTypeId === "TSK52434477391272022" && (
-                  // <Field
+                {/* {values.taskTypeId === "TSK52434477391272022" && (
+                 
 
-                  //   name="candidateId"
-                  //   //type="text"
-                  //   label="Talent"
-                  //   mode
-                  //   component={SelectComponent}
-                  //   options={
-                  //     Array.isArray(this.handlecandidateOptions("customerId", values.customerId))
-                  //       ? this.handlecandidateOptions("customerId", values.customerId)
-                  //       : []
-                  //   }
-                  //    value={values.candidateId}
-
-                  // />
                   <Select
                   label="Team"
                     name="candidateId"
@@ -955,7 +878,7 @@ function UpdateTaskForm(props) {
                     }
                   />
                 )}
-                <Spacer />
+                <Spacer /> */}
                 <Field
                   name="taskDescription"
                   //label="Notes"
@@ -968,6 +891,24 @@ function UpdateTaskForm(props) {
                   inlineLabel
                 />
                 <Spacer />
+                <div class=" mt-4">
+                      <Field
+                            type="text"
+                            name="link"
+                            //label="Name"
+                            // value={values.taskName}
+                            label={
+                              <FormattedMessage
+                                id="app.link"
+                                defaultMessage="Link"
+                              />
+                            }
+                            component={InputComponent}
+                            isColumn
+                            width={"100%"}
+                            inlineLabel
+                          />
+                      </div>
                 <div class=" flex justify-between">
                   {values.taskTypeId === "TSK52434477391272022" && (
                     <div class=" w-1/2 font-bold">

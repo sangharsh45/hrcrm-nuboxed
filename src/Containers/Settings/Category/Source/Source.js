@@ -81,7 +81,7 @@ class Source extends Component {
   };
   handleUpdateSource = (name, sourceId, editInd, cb) => {
     this.props.updateSource(name, sourceId, editInd, cb);
-    this.setState({ name: "", sourceId: "", editInd: true });
+    this.setState({ name: "", singleSource: "",sourceId:"", editInd: true });
   };
   // getLinkedDocuments = () => {
   //   axios
@@ -171,7 +171,7 @@ class Source extends Component {
                     <SingleSource
                       key={i}
                       value={singleSource}
-                      name="singleSource"
+                      name1="singleSource"
                       source={source}
                       linkedSectors={linkedSectors}
                       updatingSources={updatingSources}

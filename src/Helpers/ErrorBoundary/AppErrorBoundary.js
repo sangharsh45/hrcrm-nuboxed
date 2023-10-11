@@ -1,6 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import { Icon } from "antd";
 import error from "../../Assets/Images/i.png";
 import { Button } from "antd";
 import { Spacer } from "../../Components/UI/Elements";
@@ -84,12 +82,12 @@ class AppErrorBoundary extends React.Component {
               <Spacer />
               <Button
                 type="primary"
-                icon="reload"
+              
                 onClick={() => this.handleRefreshPage()}
               >
                 <FormattedMessage
-                  id="app.retry"
-                  defaultMessage="Retry"
+                  id="app.refresh"
+                  defaultMessage="Refresh"
                 />
                 {/* Retry */}
               </Button>

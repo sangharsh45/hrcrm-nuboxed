@@ -48,6 +48,9 @@ const initialState = {
   statusChecking: false,
   statusCheckingError: false,
 
+  deleteDocumentTask: false, 
+  deleteDocumentTaskError: false,
+
   fetchingTaskListRangeByUserId: false,
   fetchingTaskListRangeByUserIdError: false,
   taskListRangeByUserId: [],
@@ -113,6 +116,10 @@ const initialState = {
   fetchingNotesListByTaskId: false,
   fetchingNotesListByTaskIdError: false,
   notesListByTaskId: [],
+
+  fetchingDocumentsByTaskId: false,
+  fetchingDocumentsByTaskIdError: false,
+  documentsByTaskId: [],
 
   fetchingCustomersTaskList:false,
   fetchingCustomersTaskListError:false,
@@ -537,7 +544,7 @@ export const TaskReducer = (state = initialState, action) => {
       return {
         ...state,
         fetchingTaskById: false,
-        taskListRangeByUserId: state.taskListRangeByUserId.map((task, i) => {
+        approvalTaskTable: state.approvalTaskTable.map((task, i) => {
           if (task.taskId === action.payload.taskId) {
             return action.payload;
           } else {
@@ -719,6 +726,8 @@ export const TaskReducer = (state = initialState, action) => {
             return item;
           }
         }),
+
+        
         // cancelOrder: action.payload,
         // candidateByUserId: action.payload,
         // addTeamTransferModal: false,
@@ -832,6 +841,39 @@ export const TaskReducer = (state = initialState, action) => {
                           fetchingGrantTask: false,
                           fetchingGrantTaskError: true,
                         };
+
+                        case types.GET_TASK_DOCUMENTS_REQUEST:
+                          return {
+                            ...state,
+                            fetchingDocumentsByTaskId: true,
+                            fetchingDocumentsByTaskIdError: false,
+                          };
+                        case types.GET_TASK_DOCUMENTS_SUCCESS:
+                          return {
+                            ...state,
+                            fetchingDocumentsByTaskId: false,
+                            fetchingDocumentsByTaskIdError: false,
+                            documentsByTaskId: action.payload,
+                          };
+                        case types.GET_TASK_DOCUMENTS_FAILURE:
+                          return {
+                            ...state,
+                            fetchingDocumentsByTaskId: false,
+                            fetchingDocumentsByTaskIdError: true,
+                          };
+
+                          case types.DELETE_DOCUMENT_TASK_REQUEST:
+                            return { ...state, deleteDocumentTask: true };
+                          case types.DELETE_DOCUMENT_TASK_SUCCESS:
+                            return {
+                              ...state,
+                              deleteDocumentTask: false,
+                              documentsByTaskId: state.documentsByTaskId.filter(
+                                (item) => item.documentId !== action.payload
+                              ),
+                            };
+                          case types.DELETE_DOCUMENT_TASK_FAILURE:
+                            return { ...state, deleteDocumentTask: false, deleteDocumentTaskError: false };
                 
 
         default:

@@ -7,6 +7,7 @@ import RecruitmentTab from "./RecruitmentTab";
 import HiringTab from "./HiringTab";
 import ConfigureTab from "../Configure/ConfigureTab";
 import TaskTab from "../Configure/TaskTab";
+import DealsTab from "./Deals/DealsTab";
 
 const TabPane = StyledTabs.TabPane;
 
@@ -28,6 +29,11 @@ function WorkFlow(props) {
           <TabPane tab={`Task`} key="3">
             <div style={{ marginTop: 10 }}>
             <TaskTab />
+            </div>
+          </TabPane>
+          <TabPane tab={`Deals`} key="4">
+            <div style={{ marginTop: 10 }}>
+            <DealsTab />
             </div>
           </TabPane>
 

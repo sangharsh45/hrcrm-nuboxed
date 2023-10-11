@@ -2,6 +2,7 @@ import React, { lazy, Suspense } from "react";
 import { FormattedMessage } from "react-intl";
 import { BundleLoader } from "../../../Components/Placeholder";
 import { StyledDrawer } from "../../../Components/UI/Antd";
+import LinkedTaskDocument from "./LinkedTaskDocument";
 import TaskWorkFlowList from "./TaskWorkFlowList";
 
 
@@ -26,7 +27,13 @@ const DownloadTaskModal = (props) => {
         onClose={() => props.handleDownloadTaskModal(false)}
         footer={null}
       >
+       <Suspense fallback={<BundleLoader />}>
+          <LinkedTaskDocument
         
+          item={props.item}
+           />{" "}
+          
+        </Suspense> 
        
       </StyledDrawer>
     </>

@@ -231,6 +231,36 @@ export const linkCrmToggle = ( data,departmentId,cb) => (dispatch, getState) => 
     })
 };
 
+export const linkImToggle = ( data,departmentId,cb) => (dispatch, getState) => {
+  //console.log(permissions, userId);
+  const orgId = getState().auth.userDetails.organizationId;
+  dispatch({
+    type: types.LINK_IM_TOGGLE_REQUEST,
+  });
+  axios
+  .put(`${base_url}/department/crmInd/${departmentId}`, data, {
+    headers: {
+      Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+    },
+  })
+
+    .then((res) => {
+      console.log(res);
+      // dispatch(getDepartments())
+      dispatch({
+        type: types.LINK_IM_TOGGLE_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.LINK_IM_TOGGLE_FAILURE,
+        payload: err,
+      });
+    })
+};
+
 export const linkErpToggle = ( data,departmentId,cb) => (dispatch) => {
   dispatch({
     type: types.LINK_ERP_TOGGLE_REQUEST,

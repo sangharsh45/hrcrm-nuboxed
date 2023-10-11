@@ -1,20 +1,16 @@
 import React, { lazy, Suspense } from "react";
-import { FormattedMessage } from "react-intl";
 import { StyledDrawer } from "../../../../Components/UI/Antd";
 import { BundleLoader } from "../../../../Components/Placeholder";
 import StatusLeavesForm from "./StatusLeavesForm";
 
 
 const StatusLeavesModal = (props) => {
-  const { updateStatusLeaveModal, handleStatusLeaveModal, ...formProps } = props;
+  const { updateStatusLeaveModal, handleStatusLeaveModal,leaveId, ...formProps } = props;
   return (
     <>
       <StyledDrawer
         //title="Apply for Leaves"
-        title={<FormattedMessage
-          id="app.applyforleaves"
-          defaultMessage="Status"
-        />}
+        title={`Status - ${leaveId}`}
         width="30vw"
         visible={updateStatusLeaveModal}
         maskClosable={false}

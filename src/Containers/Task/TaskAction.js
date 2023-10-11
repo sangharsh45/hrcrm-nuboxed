@@ -704,7 +704,8 @@ export const rejectPartner = (taskId, data) => (dispatch) => {
     });
 };
 
-export const approveTaskByTaskId = (taskId) => (dispatch, getState) => {
+export const approveTaskByTaskId = (taskId,employeeId) => (dispatch, getState) => {
+  const { employeeId } = getState("auth").auth.userDetails;
   dispatch({ type: types.APPROVE_TASK_BY_TASK_ID_REQUEST });
   axios
     .post(
@@ -717,7 +718,7 @@ export const approveTaskByTaskId = (taskId) => (dispatch, getState) => {
       }
     )
     .then((res) => {
-      // dispatch(getTasksListByUserId(userId));
+    //  dispatch(getAprrovalTaskTable(employeeId,0));
       console.log(res);
       dispatch({
         type: types.APPROVE_TASK_BY_TASK_ID_SUCCESS,
@@ -983,17 +984,17 @@ export const addProjectTask = (data) => (dispatch) => {
 };
 
 
-export const linkTaskStatus = (data, taskId) => (
+export const linkTaskStatus = (taskId,data ) => (
   dispatch,
   getState
 ) => {
   // debugger;
-  const { employeeId } = getState("auth").auth.userDetails;
   dispatch({
     type: types.LINK_TASK_STATUS_REQUEST,
   });
   axios
-    .put(`${base_url}/task/completionstatus/${taskId}`, data, {
+    .put(`${base_url}/task/completionstatus/${taskId}`, 
+     { ...data }, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },
@@ -1228,3 +1229,56 @@ export const getGrantTask = (employeeId) => (dispath) => {
       });
     });
 } 
+
+
+export const getTaskDocument = (taskId) => (dispatch) => {
+  dispatch({ type: types.GET_TASK_DOCUMENTS_REQUEST });
+  axios
+    .get(`${base_url}/task/document/${taskId}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.GET_TASK_DOCUMENTS_SUCCESS,
+        payload: res.data,
+      });
+      // cb();
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.GET_TASK_DOCUMENTS_FAILURE,
+        payload: err,
+      });
+    });
+};
+
+export const deleteDocumentTask = (documentId, employeeId) => (dispatch, getState) => {
+  console.log("inside deletetask", documentId);
+  dispatch({
+    type: types.DELETE_DOCUMENT_TASK_REQUEST,
+  });
+
+  axios
+    .delete(`${base_url}/task/document/${documentId}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      dispatch({
+        type: types.DELETE_DOCUMENT_TASK_SUCCESS,
+        payload: documentId,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.DELETE_DOCUMENT_TASK_FAILURE,
+        payload: err,
+      });
+    });
+};

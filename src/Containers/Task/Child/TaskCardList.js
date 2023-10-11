@@ -22,6 +22,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import {
   getTaskListRangeByUserId,
   deleteTask,
+  linkTaskStatus,
   approveTaskByTaskId,
   rejectTaskByTaskId,
   handleUpdateTaskModal,
@@ -76,6 +77,8 @@ const TaskCardList = (props) => {
     fetchingTaskListRangeByUserIdError,
     taskListRangeByUserId,
     deleteTask,
+    linkTaskStatus,
+    difference,
     approveTaskByTaskId,
     rejectTaskByTaskId,
     handleUpdateTaskModal,
@@ -86,6 +89,7 @@ const TaskCardList = (props) => {
     addDrawerTaskNotesModal,
     handleTaskNotesDrawerModal,
     setEditTask,
+   
     userDetails: { employeeId },
   } = props;
 
@@ -93,6 +97,8 @@ const TaskCardList = (props) => {
   {
    return <BundleLoader/>
   }
+
+
   return (
     <>
       {page < props.noOfPages ?
@@ -113,8 +119,11 @@ const TaskCardList = (props) => {
           </div> : null}
           <OnlyWrapCard style={{height:"81vh"}}>
       {taskListRangeByUserId.map((item) => { 
-        
-         
+        const currentDate = moment();
+        const endDate = moment(item.endDate);
+        const difference = endDate.diff(currentDate, 'days');
+         console.log("difference",difference)
+         console.log("item",item.taskId)
                     return (
                         <div>
                             <div className="flex justify-between mt-4 max-sm:flex-col"
@@ -243,13 +252,13 @@ const TaskCardList = (props) => {
 </Avatar.Group>
                                     </div>
                                 </div> */}
-                                <div className="flex font-medium flex-col md:w-32 max-sm:flex-row justify-between w-full ">
+                                {/* <div className="flex font-medium flex-col md:w-32 max-sm:flex-row justify-between w-full ">
                                     <div class="text-[0.875rem] text-cardBody font-poppins">Start</div>
 
                                     <div class="text-[0.75rem] text-cardBody font-poppins">
                                      {`${moment(item.startDate).format("ll")}`}
                                     </div>
-                                </div>
+                                </div> */}
                                 <div className="flex font-medium flex-col md:w-20 max-sm:flex-row justify-between w-full ">
                        
                        <div class="text-[0.875rem] text-cardBody font-poppins">End</div>
@@ -261,7 +270,7 @@ const TaskCardList = (props) => {
     <>
       <div>
         <Button
-          onClick={() => approveTaskByTaskId(item.taskId)}
+        onClick={() => approveTaskByTaskId(item.taskId, props.employeeId)}
           style={{ backgroundColor: "teal", color: "white" }}
         >
           <FormattedMessage id="app.approve" defaultMessage="Approve" />
@@ -304,36 +313,57 @@ const TaskCardList = (props) => {
 
                                 <div class="flex flex-col w-[3%]">
                     <div class="">
-                    <ButtonGroup>
-          {item.complitionStatus === "To Start" && (
-            <StatusIcon
-              type="To Start"
-              iconType="fa-hourglass-start"
-              tooltip="To Start"
-              style={{color:"red"}} 
-          
-            />
-          )}
+                    <ButtonGroup >
+          {/* {item.complitionStatus === "To Start" && ( */}
+          <StatusIcon
+  type="To Start"
+  iconType="fa-hourglass-start"
+  tooltip="To Start"
+  status={item.taskStatus}
+  difference={difference} 
+  onClick={() =>
+    linkTaskStatus(item.taskId, {
+      taskStatus: "To Start",
+    })
+  }
+/>
+          {/* )} */}
 
 
-          {item.complitionStatus === "In Progress" && (
+          {/* {item.complitionStatus === "In Progress" && ( */}
             <StatusIcon
               type="In Progress"
               iconType="fa-hourglass-half"
               tooltip="In Progress"
-              style={{color:"red"}} 
+              status={item.taskStatus}
+              difference={difference}
+              onClick={() =>
+                linkTaskStatus(item.taskId, {
+                  //  ...item,
+                   taskStatus: "In Progress",
+                })
+              }
             />
-          )}
-          {item.complitionStatus === "completed" && (
+          {/* )} */}
+          {/* {item.complitionStatus === "completed" && ( */}
             <StatusIcon
               type="Completed"
               iconType="fa-hourglass"
               tooltip="Completed"
+              status={item.taskStatus}
+              difference={difference}
+              onClick={() =>
+                linkTaskStatus(item.taskId, {
+                  //  ...item,
+                   taskStatus: "Completed",
+                })
+              }
             />
-          )}
+          {/* )} */}
         </ButtonGroup>
+        <div></div>
                         </div>
-                        <div>
+                        {/* <div>
                        
                         {item.complitionStatus === "completed" && (
               <TaskStatusToggle
@@ -341,8 +371,9 @@ const TaskCardList = (props) => {
                 taskId={item.taskId}
               />
             )}
+                    </div> */}
                     </div>
-                    </div>
+                    <div class=" ml-2"></div>
                     <div class="flex flex-row justify-between w-[3%]">
                     <Tooltip title="Notes">
        <NoteAltIcon
@@ -470,6 +501,7 @@ handleSetTaskNameId={handleSetTaskNameId}
         getTaskListRangeByUserId,
         handleTaskProjectDrawerModal,
         deleteTask,
+        linkTaskStatus,
         handleTaskNotesDrawerModal,
         approveTaskByTaskId,
         rejectTaskByTaskId,
@@ -482,31 +514,66 @@ handleSetTaskNameId={handleSetTaskNameId}
     );
     export default connect(mapStateToProps, mapDispatchToProps)(TaskCardList);
    
-    function StatusIcon({ type, iconType, tooltip, status, size, onClick, role }) {
-        const start = type;
-        console.log(start);
-        //////debugger;
-        if (status === type) {
-          size = "1.875em";
-        } else {
-          size = "1em";
-        }
-        return (
-          <Tooltip title={tooltip}>
-            <Button
-              ghost={status !== type}
-              style={{
-                padding: "0.375em",
-                borderColor: "transparent",
-                color: type === "Completed" ? "green" : "red",
-              }}
-              onClick={onClick}
-            >
-              <i className={`fas ${iconType}`} style={{ fontSize: "1.375em" }}></i>
-            </Button>
-          </Tooltip>
-        );
-      }
+    // function StatusIcon(props) {
+    //   const { type, iconType, tooltip, status, onClick, difference } = props; // Receive the difference prop
+    //   const start = type;
+    //   let size;
+    
+    //   if (status === type) {
+    //     size = "1.875em";
+    //   } else {
+    //     size = "1em";
+    //   }
+    
+    //   return (
+    //     <Tooltip title={`${tooltip} (${difference} days)`}> {/* Use difference prop in the tooltip */}
+    //       <Button
+    //         ghost={status !== type}
+    //         style={{
+    //           padding: "0.375em",
+    //           borderColor: "transparent",
+    //           color: status === type ? "rgb(251, 133, 0)" : "grey",
+    //         }}
+    //         onClick={onClick}
+    //       >
+    //         <i className={`fas ${iconType}`} style={{ fontSize: "1.375em" }}></i>
+    //       </Button>
+    //     </Tooltip>
+    //   );
+    // }
+    function StatusIcon(props) {
+      const { type, iconType, tooltip, status, onClick, difference } = props;
+    
+      let iconColor = status === type ? "rgb(251, 133, 0)" : "grey";
+      let size = status === type ? "1.875em" : "1em";
+    
+      // Display the difference as a label next to the icon
+      const daysLabel = difference > 0 ? `+${difference} days` : `${difference} days`;
+    
+      return (
+        <Tooltip title={`${tooltip} (${daysLabel})`}>
+          <Button
+            ghost={status !== type}
+            style={{
+              padding: "0.375em",
+              borderColor: "transparent",
+              color: iconColor,
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+            }}
+            onClick={onClick}
+          >
+            <i className={`fas ${iconType}`} style={{ fontSize: "1.375em" }} />
+
+            {status === type && <span style={{ fontSize: "0.75rem",display:"flex" }}>{daysLabel}</span>}
+         
+          </Button>
+        </Tooltip>
+      );
+    }
+    
+    
       function overdue(pendingDays) {
         //debugger;
         if (pendingDays === -1) {

@@ -208,7 +208,7 @@ const TaskApproveTable = (props) => {
           <OnlyWrapCard style={{height:"81vh"}}>
       {approvalTaskTable.map((item) => { 
         
-         
+         console.log("item",item.taskId)
                     return (
                         <div>
                             <div className="flex justify-between mt-4 max-sm:flex-col"
@@ -301,7 +301,7 @@ const TaskApproveTable = (props) => {
                                     </div>
                                 </div>
                                 <div className=" flex font-medium flex-col md:w-32 max-sm:flex-row w-full justify-between ">
-                                    <div class=" text-[0.875rem] text-cardBody font-poppins">Owner</div>
+                                    <div class=" text-[0.875rem] text-cardBody font-poppins">Submitted By</div>
                                     <div class="text-[0.75rem] text-cardBody font-poppins">
                                     <MultiAvatar
                   primaryTitle={item.submittedBy}
@@ -310,7 +310,7 @@ const TaskApproveTable = (props) => {
                 />
                                     </div>
                                 </div>
-                                <div className=" flex font-medium flex-col md:w-32 max-sm:flex-row w-full justify-between ">
+                                {/* <div className=" flex font-medium flex-col md:w-32 max-sm:flex-row w-full justify-between ">
                                   <div class="text-[0.875rem] text-cardBody font-poppins">Assigned To</div>
                                   <div class="text-[0.75rem] text-cardBody font-poppins">
                                   {item.assignedToName === null ? (
@@ -323,7 +323,7 @@ const TaskApproveTable = (props) => {
               />
             )}
                                   </div>
-                              </div>
+                              </div> */}
                               <div className=" flex font-medium flex-col md:w-32 max-sm:flex-row w-full justify-between ">
                                   <div class="text-[0.875rem] text-cardBody font-poppins">Assigned On</div>
                                   <div class="text-[0.75rem] text-cardBody font-poppins">
@@ -335,7 +335,7 @@ const TaskApproveTable = (props) => {
                               
                                   <div class="text-[0.75rem] text-cardBody font-poppins">
                                   <span>
-            {item.filterTaskInd === true && item.approvedInd === "Pending" ? (
+            {item.filterTaskInd === true && item.approvedInd === "Pending"  ? (
               <>
                 <div>
                   <Button
@@ -365,7 +365,7 @@ const TaskApproveTable = (props) => {
               </>
             ) :  (
               <>
-                {item.approvedInd === "Approved" ? (
+                {  item.filterTaskInd === true && item.approvedInd === "Approved" ? (
                   <CheckCircleOutlined
                     type="check-circle"
                     theme="twoTone"
@@ -373,7 +373,7 @@ const TaskApproveTable = (props) => {
                     size={140}
                     style={{ fontSize: "1rem" }}
                   />
-                ) : item.approvedInd === "Rejected" ? (
+                ) : item.filterTaskInd === true && item.approvedInd === "Rejected" ? (
                   <CloseCircleOutlined
                     type="close-circle"
                     theme="twoTone"

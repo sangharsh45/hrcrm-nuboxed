@@ -23,7 +23,7 @@ class SingleSource extends Component {
     const {
       source: { name, sourceId, EditInd },
       handleChange,
-      // name,
+      name1,
       value,
       linkedSectors,
       updatingSources,
@@ -43,7 +43,7 @@ class SingleSource extends Component {
                   {name}
                 </SectorName>
                 <div>
-                  {this.props.source.editInd ? (
+                  {/* {this.props.source.editInd ? ( */}
                     <BorderColorIcon
                    
                       tooltipTitle="Edit"
@@ -51,7 +51,7 @@ class SingleSource extends Component {
                       onClick={toggleViewType}
                       style={{fontSize:"1rem"}}
                     />
-                  ) : null}
+                  {/* ) : null} */}
                   &nbsp;
                   <Tooltip title="Delete">
                     <DeleteIcon
@@ -77,7 +77,7 @@ class SingleSource extends Component {
             ) : (
               <FlexContainer>
                 <TextInput
-                  name={name}
+                  name={name1}
                   // value={value || sectorName}
                   defaultValue={name}
                   onChange={handleChange}
@@ -90,7 +90,7 @@ class SingleSource extends Component {
                     type="primary"
                     htmlType="submit"
                     loading={updatingSources}
-                    disabled={!value}
+                    // disabled={!value}
                     onClick={() => {
                       console.log(value); 
                       handleUpdateSource(sourceId, value, toggleViewType());
