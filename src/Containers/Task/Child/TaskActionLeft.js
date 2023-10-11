@@ -2,6 +2,7 @@ import React from "react";
 import {Tooltip } from "antd";
 import { FormattedMessage } from "react-intl";
 import DeleteIcon from '@mui/icons-material/Delete';
+import FactCheckIcon from '@mui/icons-material/FactCheck';
 import ApprovalIcon from '@mui/icons-material/Approval';
 import LeaderboardIcon from '@mui/icons-material/Leaderboard';
 import TocIcon from '@mui/icons-material/Toc';
@@ -16,7 +17,7 @@ const TaskActionLeft = props => {
           onClick={() => props.setTaskViewType("table")}
           style={{
             color: props.viewType === "table" && "#1890ff",
-  
+            cursor:"pointer"
           }}
         > <TocIcon  />
         
@@ -29,7 +30,7 @@ const TaskActionLeft = props => {
           onClick={() => props.setTaskViewType("gantt")}
           style={{
             color: props.viewType === "gantt" && "#1890ff",
-  
+            cursor:"pointer"
           }}
         > <LeaderboardIcon  />
         
@@ -43,14 +44,15 @@ const TaskActionLeft = props => {
           onClick={() => props.setTaskViewType("approve")}
           style={{
             color: props.viewType === "approve" && "#1890ff",
+            cursor:"pointer"
           }}
         >
-          <ApprovalIcon />
+          <FactCheckIcon />
         </span>
        
       </Tooltip>
 
-      <Tooltip
+      {/* <Tooltip
         title={<FormattedMessage id="app.deletedOpportunity" defaultMessage="Deleted Opportunity" />}
       >  
         
@@ -63,7 +65,7 @@ const TaskActionLeft = props => {
           <DeleteIcon />
         </span>
        
-      </Tooltip>
+      </Tooltip> */}
     
     </div>
   

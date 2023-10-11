@@ -10,11 +10,7 @@ const ExpenseStatusDrawer = (props) => {
   return (
     <>
       <StyledDrawer
-        //title="Apply for Leaves"
-        title={<FormattedMessage
-          id="app.applyforleaves"
-          defaultMessage="Status"
-        />}
+       title={`Status - ${voucherId}`}
         width="30vw"
         visible={updateStatusExpenseModal}
         maskClosable={false}

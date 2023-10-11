@@ -4,12 +4,12 @@ import dayjs from "dayjs";
 import { base_url } from "../../../Config/Auth";
 import { message } from "antd";
 
-export const getTasks = () => (dispatch) => {
+export const getTasks = (userId) => (dispatch) => {
   dispatch({
     type: types.GET_TASK_REQUEST,
   });
   axios
-    .get(`${base_url}/taskType`, {
+    .get(`${base_url}/task/type/count/${userId}`, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },

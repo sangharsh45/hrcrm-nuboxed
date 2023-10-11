@@ -895,6 +895,7 @@ const AccessForm = (props) => {
               <Spacer />
               </div> 
               : null } 
+
            
            
 
@@ -975,6 +976,83 @@ const AccessForm = (props) => {
           <Spacer />
           </div>
           : null }
+
+{/* {props.departmentData.crmInd === true ?  */}
+    <div>     
+            <h1 class=" text-clr font-bold">IM</h1>
+            <Spacer />
+              <FlexContainer justifyContent="space-around">
+                {/* <div >
+                  <h1>Vendor</h1>
+                  <Checkbox indeterminate={indeterminateVendor} onChange={onCheckAllVendorChange} checked={checkAllVendor}>
+                    Check all
+                  </Checkbox>
+                  <Divider />
+                  <CheckboxGroup options={plainOptions} value={checkedVendorList} onChange={onVendorChange} />
+                </div>
+                <Spacer 
+               
+                /> */}
+             
+
+              
+                <div >
+                  <h1 class="text-sm">Customer</h1>
+                  <Checkbox indeterminate={indeterminateCustomer} onChange={onCheckAllCustomerChange} checked={checkAllCustomer}>
+                  <label class="text-xs">  Check all  </label>
+                  </Checkbox>
+                  <Divider />
+                  <CheckboxGroup options={plainOptions} value={checkedCustomerList} onChange={onCustomerChange} />
+                </div>
+                    {/* Contact */}
+                    <div >
+                  <h1 class="text-sm">Contact</h1>
+                  <Checkbox indeterminate={indeterminateContact} onChange={onCheckAllContactChange} checked={checkAllContact}>
+                  <label class="text-xs"> Check all</label>
+                  </Checkbox>
+                  <Divider />
+                  <CheckboxGroup options={plainOptions} value={checkedContactList} onChange={onContactChange} />
+
+                </div>
+                <Spacer />
+              </FlexContainer>
+              <Spacer />
+
+            
+              <FlexContainer justifyContent="space-around">
+              <div >
+                  <h1 class="text-sm">Opportunity</h1>
+                  <Checkbox indeterminate={indeterminateOpportunity} onChange={onCheckAllOpportunityChange} checked={checkAllOpportunity}>
+                  <label class="text-xs">  Check all </label>
+                  </Checkbox>
+                  <Divider />
+                  <CheckboxGroup options={plainOptions} value={checkedOpportunityList} onChange={onOpportunityChange} />
+
+                </div>
+                <Spacer />
+                <div >
+                  <h1 class="text-sm">Leads</h1>
+                  <Checkbox indeterminate={indeterminateLeads} onChange={onCheckAllLeadsChange} checked={checkAllLeads}>
+                  <label class="text-xs">  Check all </label>
+                  </Checkbox>
+                  <Divider />
+                  <CheckboxGroup options={plainOptions} value={checkedLeadsList} onChange={onLeadsChange} />
+
+                </div>
+            
+                {/* <div >
+                  <h1>Pulse</h1>
+                  <Checkbox indeterminate={indeterminatePulse} onChange={onCheckAllPulseChange} checked={checkAllPulse}>
+                    Check all
+                  </Checkbox>
+                  <Divider />
+                  <CheckboxGroup options={plainOptions} value={checkedPulseList} onChange={onPulseChange} />
+
+                </div> */}
+              </FlexContainer>
+              <Spacer />
+              </div> 
+              {/* : null }  */}
                
               <h4 class="mt-2">Updated on {dayjs(props.departmentAcces.lastUpdatedOn).format("ll")} by {props.departmentAcces.name}</h4>
               

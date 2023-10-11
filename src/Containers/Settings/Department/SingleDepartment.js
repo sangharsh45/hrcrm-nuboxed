@@ -13,6 +13,7 @@ import { EditOutlined } from "@ant-design/icons";
 import DepartmentStatusToggle from "./DepartmentStatusToggle";
 import ERPStatusToggle from "./ERPStatusToggle";
 import CRMStatusToggle from "./CRMStatusToggle";
+import IMStatusToggle from "./IMStatusToggle";
 const { Option } = Select;
 
 class SingleDepartment extends Component {
@@ -84,6 +85,14 @@ class SingleDepartment extends Component {
                     <h1>CRM</h1>
                     <div style={{width:"20%"}}>
                     <CRMStatusToggle
+                      crmInd={crmInd}
+                      departmentName={departmentName}
+                      departmentId={departmentId}
+                    />  
+                    </div>
+                    <h1>IM</h1>
+                    <div style={{width:"20%"}}>
+                    <IMStatusToggle
                       crmInd={crmInd}
                       departmentName={departmentName}
                       departmentId={departmentId}
