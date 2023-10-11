@@ -280,9 +280,9 @@ class UpdateLeaveForm extends Component {
                     )}
                   </FlexContainer>
                   <Spacer />
-  <div
+  <div class="w-3/12 max-sm:w-wk"
                       style={{
-                        width: "25%",
+                        
                         fontWeight: "bold",
                       }}
                     >

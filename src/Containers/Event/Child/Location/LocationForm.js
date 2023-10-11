@@ -165,14 +165,10 @@ class LocationForm extends Component {
             values,
             ...rest
           }) => (
+            <div class="overflow-y-auto h-[30rem] overflow-x-hidden">
             <Form class="form-background">
-              <div style={{ display: "flex", justifyContent: "space-between" }}>
-                <div
-                  style={{
-                    height: "100%",
-                    width: "45%",
-                  }}
-                >
+              <div class="flex justify-between max-sm:flex-col">
+                <div class="h-full w-[45%] max-sm:w-wk">
                   <div>
                     <Field
                       name="locationName"
@@ -260,7 +256,7 @@ class LocationForm extends Component {
                   <StyledLabel style={{ fontWeight: "bold" }}>Functions</StyledLabel>
                   <FlexContainer>
                     <div style={{ width: "47%" }} class="mt-2">
-                      <div class="font-bold text-xs">Production &nbsp;<i class="fas fa-cogs"></i></div>
+                      <div class="font-bold text-xs">Production &nbsp;<i class="fas fa-cogs text-base"></i></div>
                       <div>
                         <Switch
                           style={{ width: "6.25em" }}
@@ -272,7 +268,7 @@ class LocationForm extends Component {
                       </div>
                     </div>
                     <div style={{ width: "47%" }} class="mt-2">
-                      <div class="font-bold text-xs">Inventory &nbsp;<i class="fas fa-warehouse"></i></div>
+                      <div class="font-bold text-xs">Inventory &nbsp;<i class="fas fa-warehouse text-base"></i></div>
                       {/* inventory auto on when production on. if user wants to close inventory then ask what is inventory location */}
                       <div>
                         <Switch
@@ -287,7 +283,7 @@ class LocationForm extends Component {
                   </FlexContainer>
                   <FlexContainer>
                     <div style={{ width: "47%" }} class="mt-2">
-                      <div class="font-bold text-xs">Billing &nbsp;<i class="far fa-money-bill-alt"></i></div>
+                      <div class="font-bold text-xs">Billing &nbsp;<i class="far fa-money-bill-alt text-base"></i></div>
                       <div>
                         <Switch
                           style={{ width: "6.25em" }}
@@ -299,7 +295,7 @@ class LocationForm extends Component {
                       </div>
                     </div>
                     <div style={{ width: "47%" }} class="mt-2">
-                      <div class="font-bold text-xs">Corporate &nbsp;<i class="fas fa-building"></i></div>
+                      <div class="font-bold text-xs">Corporate &nbsp;<i class="fas fa-building text-base"></i></div>
                       <div>
                         <Switch
                           style={{ width: "6.25em" }}
@@ -313,7 +309,7 @@ class LocationForm extends Component {
                   </FlexContainer>
                   <FlexContainer>
                     <div style={{ width: "47%" }} class="mt-2">
-                      <div class="font-bold text-xs">Project &nbsp;<i class="fas fa-project-diagram"></i></div>
+                      <div class="font-bold text-xs">Project &nbsp;<i class="fas fa-project-diagram text-base"></i></div>
                       <div>
                         <Switch
                           style={{ width: "6.25em" }}
@@ -325,7 +321,7 @@ class LocationForm extends Component {
                       </div>
                     </div>
                     <div style={{ width: "47%" }} class="mt-2">
-                      <div class="font-bold text-xs">Retail &nbsp;<i class="fas fa-money-check"></i></div>
+                      <div class="font-bold text-xs">Retail &nbsp;<i class="fas fa-money-check text-base"></i></div>
                       <div>
                         <Switch
                           style={{ width: "6.25em" }}
@@ -338,12 +334,7 @@ class LocationForm extends Component {
                     </div>
                   </FlexContainer>
                 </div>
-                <div
-                  style={{
-                    height: "100%",
-                    width: "45%",
-                  }}
-                >
+                <div class="h-full w-[45%] max-sm:w-wk mt-2">
                   <div style={{ width: "100%" }}>
                     <StyledLabel>Time Zone</StyledLabel>
                     <Field
@@ -382,6 +373,7 @@ class LocationForm extends Component {
                 </Button>
               </FlexContainer>
             </Form>
+            </div>
           )}
         </Formik>
       </>

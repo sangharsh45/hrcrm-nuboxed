@@ -100,15 +100,16 @@ if (fetchingEventListRangeByUserId)
       {eventListRangeByUserId.map((item) => { 
                     return (
                         <div>
-                            <div className="flex justify-between mt-4"
+                            <div className="flex justify-between mt-4  max-sm:flex-col"
                                 style={{
                                     borderBottom: "3px dotted #515050"
                                 }}>
                                      
-                                <div className=" flex font-medium flex-col w-52 ">
-<div className="flex"> 
-          <div>
+                                <div className=" flex font-medium flex-col w-52 max-sm:w-full ">
+<div className="flex max-sm:w-full"> 
+          <div class="max-sm:w-full">
                                         <Tooltip>
+                                        <div class=" flex max-sm:justify-between flex-row w-full md:flex-col">
                                             <div class="text-[0.875rem] text-cardBody font-poppins">
                                             Type
                                             </div>
@@ -116,19 +117,19 @@ if (fetchingEventListRangeByUserId)
                                             {item.eventType}
        
                                             </div>
-
+                                               </div>
                                         </Tooltip>
                                         </div>
                                         </div>
                                 </div>
 
-                                <div className=" flex font-medium flex-col  w-52 ">
+                                <div className=" flex font-medium flex-col  md:w-52 max-sm:flex-row justify-between w-full ">
                                     <div class=" text-[0.875rem] text-cardBody font-[0.875rem] font-poppins"> Subject </div>
                                     <div class=" text-[0.75rem] text-cardBody font-poppins">   
                                     {item.eventSubject}
                                     </div>
                                 </div>
-                                <div className=" flex font-medium flex-col w-40">
+                                <div className=" flex font-medium flex-col md:w-40 max-sm:flex-row justify-between w-full">
                                     <div class=" text-[0.875rem] text-cardBody font-poppins">Start</div>
                                     <div class="text-[0.75rem] text-cardBody font-poppins">
                                     {` ${moment(item.startDate).format("llll")}`}
@@ -152,7 +153,7 @@ if (fetchingEventListRangeByUserId)
                 </span>
                                   </div>
                               </div> */}
-                                <div className=" flex font-medium flex-col w-32 ">
+                                <div className=" flex font-medium flex-col md:w-32 max-sm:flex-row justify-between w-full ">
                                     <div class=" text-[0.875rem] text-cardBody font-poppins">Include</div>
 
                                     <div class=" text-[0.75rem] text-cardBody font-poppins">
@@ -180,7 +181,7 @@ if (fetchingEventListRangeByUserId)
             </Avatar.Group>
                                     </div>
                                 </div>
-                                <div className="flex font-medium flex-col w-32 ">
+                                <div className="flex font-medium flex-col md:w-32 max-sm:flex-row justify-between w-full ">
                                     <div class="text-[0.875rem] text-cardBody font-poppins">Assigned To</div>
 
                                     <div class="text-[0.75rem] text-cardBody font-poppins">
@@ -197,11 +198,11 @@ if (fetchingEventListRangeByUserId)
              </Tooltip>
                                     </div>
                                 </div>
-                                <div className="flex font-medium flex-col w-20 ">
+                                <div className="flex font-medium flex-col md:w-20 max-sm:flex-row justify-between w-full ">
                        
                        <div class="text-[0.875rem] text-cardBody font-poppins">Owner</div>
 
-                   
+                   <div class="max-sm:flex justify-end">
               <Tooltip title={item.ownerName}>
             <SubTitle>
               <MultiAvatar2
@@ -213,9 +214,9 @@ if (fetchingEventListRangeByUserId)
               />
             </SubTitle>
           </Tooltip>
-
+          </div>
                    </div>
-                                <div class="flex flex-col w-[3%]">
+                                <div class="flex flex-col md:w-[3%] max-sm:flex-row justify-between w-full">
                     <div class="">
                     {item.rating === 0 ? (<StarBorderIcon
                 style={{ color: "#eeeedd", fontSize: "1.5em" }} />)
@@ -247,7 +248,7 @@ if (fetchingEventListRangeByUserId)
                         </Tooltip>
                     </div>
                     </div>
-                    <div class="flex flex-col w-[2%]">
+                    <div class="flex flex-col md:w-[2%] max-sm:flex-row justify-between w-full">
        
           <Tooltip title="Edit">
               <BorderColorIcon

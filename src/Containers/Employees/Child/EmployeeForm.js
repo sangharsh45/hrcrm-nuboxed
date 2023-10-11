@@ -205,19 +205,11 @@ class EmployeeForm extends Component {
             values,
             ...rest
           }) => (
+            <div class="overflow-y-auto h-[32rem] overflow-x-hidden max-sm:h-[30rem]">
             <Form className="form-background">
-                  <div
-                style={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  height: "70vh",
-                  overflow: "scroll",
-                  paddingRight: "0.6em",
-                }}
-              >
-                <div class=" w-1/2"
-                 
-                ><Spacer />
+                  <div class="flex justify-between  pr-2 max-sm:flex-col">
+                <div class=" w-1/2 max-sm:w-wk">
+                  <Spacer />
                   <div class=" flex flex-nowrap" >
                   <FastField name="imageId" component={Upload} />
                   <div>
@@ -304,7 +296,7 @@ class EmployeeForm extends Component {
                   </div>
                   <div class=" flex justify-between" >
                   
-                    <div class="w-w47.5">
+                    <div class="w-w47.5 max-sm:w-wk">
                       <Field
                         name="currency"
                         isColumnWithoutNoCreate
@@ -323,9 +315,9 @@ class EmployeeForm extends Component {
                       />
                     </div>
                   </div>
-                  <div class="flex justify-between">
-                  <div class=" flex  w-w47.5 justify-between" >
-                    <div class=" w-w47.5">
+                  <div class="flex justify-between max-sm:flex-col">
+                  <div class=" flex  w-w47.5 justify-between max-sm:flex-col max-sm:w-wk " >
+                    <div class=" w-w47.5 max-sm:w-wk ">
                       <Field
                         name="countryDialCode"
                         isColumnWithoutNoCreate
@@ -344,7 +336,7 @@ class EmployeeForm extends Component {
                         inlineLabel
                         />
                         </div>
-                         <div class=" w-w47.5">
+                         <div class=" w-w47.5 max-sm:w-wk">
                       <Field
                         type="text"
                         name="mobileNo"
@@ -359,8 +351,8 @@ class EmployeeForm extends Component {
                     </div>
                    
                   </div>
-                  <div class=" flex  w-w47.5 justify-between" >
-                    <div class="w-w47.5">
+                  <div class=" flex  w-w47.5 justify-between max-sm:flex-col max-sm:w-wk" >
+                    <div class="w-w47.5 max-sm:w-wk">
                       <Field
                         name="countryDialCode1"
                         isColumnWithoutNoCreate
@@ -378,7 +370,7 @@ class EmployeeForm extends Component {
                         inlineLabel
                         />
                     </div>
-                    <div class="w-w47.5">
+                    <div class="w-w47.5 max-sm:w-wk">
                       <Field
                         type="text"
                         name="phoneNo"
@@ -392,8 +384,8 @@ class EmployeeForm extends Component {
                     </div>
                   </div>
                   </div>
-                  <div class=" flex justify-between" >
-                  <div class=" w-w48">
+                  <div class=" flex justify-between max-sm:flex-col" >
+                  <div class=" w-w48 max-sm:w-wk">
                     {/* <StyledLabel><FormattedMessage
                       id="app.dateofjoining"
                       defaultMessage=" Date Of Joining"
@@ -415,7 +407,7 @@ class EmployeeForm extends Component {
                        }}
                     />
                   </div>
-                  <div class=" w-w47.5">
+                  <div class=" w-w47.5 max-sm:w-wk">
                     {/* <StyledLabel><FormattedMessage
                       id="app.dateofbirth"
                       defaultMessage=" Date Of Birth"
@@ -480,12 +472,10 @@ class EmployeeForm extends Component {
  
 
                 </div>
-                <div class=" h-3/4 w-5/12 "
-                
-                >
+                <div class=" h-3/4 w-5/12 max-sm:w-wk ">
 
-<div class=" flex justify-between" >
-                      <div class=" w-w48">
+<div class=" flex justify-between max-sm:flex-col" >
+                      <div class=" w-w48 max-sm:w-wk">
                       <Field
   isRequired  // This makes the field mandatory
   name="departmentId"
@@ -501,7 +491,7 @@ class EmployeeForm extends Component {
   inlineLabel
 />
                     </div>
-                    <div class="w-w47.5">
+                    <div class="w-w47.5 max-sm:w-wk">
                     <FastField
                     name="label"
                     type="level"
@@ -555,8 +545,8 @@ class EmployeeForm extends Component {
                     // selectType="roleType"
                      />
                          <Spacer/>
-                      <div class=" flex justify-between" >
-                      <div class=" w-w48">
+                      <div class=" flex justify-between max-sm:flex-col" >
+                      <div class=" w-w48 max-sm:w-wk">
                       <select 
                         style={{ border: "0.06em solid #aaa" }}
                       onChange={this.handleCountryChange}>
@@ -788,6 +778,7 @@ class EmployeeForm extends Component {
                 </Button>
               </div>
             </Form>
+            </div>
           )}
         </Formik>
       </>

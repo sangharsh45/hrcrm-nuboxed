@@ -10,7 +10,7 @@ const LocationCard = (props) => {
    props.getlocation(props.orgId);
     }, [])
   return (
-    <div class="overflow-y-auto max-h-[37rem]">
+    <div class="overflow-y-auto max-h-[39rem]">
       <CardWrapper>  
    {props.showLocation.map((item) => {
      return (

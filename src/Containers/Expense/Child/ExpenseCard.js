@@ -52,7 +52,7 @@ function ExpenseCard(props) {
 
     return (
       <>
-       <div class=" h-h86 overflow-auto overflow-x-auto">
+       <div class=" h-[87vh] overflow-auto overflow-x-auto">
          <CardWrapper>      
               {Expenses.map((item) => {
                  return (

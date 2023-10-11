@@ -141,15 +141,10 @@ function CustomerForm(props) {
             values,
             ...rest
           }) => (
+            <div class="max-sm:h-[30rem] overflow-y-auto">
             <Form className="form-background">
-              <div  style={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  height: "70vh",
-                  overflowX: "hidden",
-                  paddingRight: "0.6em",
-                }} >
-                <div class=" h-full w-1/2"   >
+              <div class="flex justify-between h-[70vh] overflow-x-hidden pr-2 max-sm:flex-col">
+                <div class=" h-full w-1/2 max-sm:w-wk"   >
                   <div>
                     {clearbit && clearbit.hasOwnProperty("logo") && (
                       <ProgressiveImage
@@ -214,7 +209,7 @@ function CustomerForm(props) {
                     inlineLabel
                   />                  
                    <div class=" flex justify-between">
-                    <div class=" w-3/12">
+                    <div class=" w-3/12 max-sm:w-[30%]">
                       <FastField
                         name="countryDialCode"
                         selectType="dialCode"
@@ -247,7 +242,7 @@ function CustomerForm(props) {
 
                   <Spacer/>
                   <div class=" flex justify-between">
-                  <div class="w-2/5">
+                  <div class="w-2/5 max-sm:w-w47.5">
                   <FastField                     
                             name="sectorId"
                             label={
@@ -265,7 +260,7 @@ function CustomerForm(props) {
                             }
                           />
                     </div>
-                    <div class=" w-2/5">
+                    <div class=" w-2/5 max-sm:w-w47.5">
                           <FastField
                             name="source"
                             type="text"
@@ -297,7 +292,7 @@ function CustomerForm(props) {
                     component={TextareaComponent}
                   />
                 </div>
-                <div class=" h-3/4 w-5/12 "  
+                <div class=" h-3/4 w-5/12 max-sm:w-wk "  
                 >
                  <Spacer/>
                  <div class=" flex justify-between">
@@ -396,8 +391,8 @@ function CustomerForm(props) {
                   </div>
                     </div>
                     <Spacer />
-                    <div class=" flex justify-between">
-                    <div class=" w-2/5">
+                    <div class=" flex justify-between max-sm:flex-col">
+                    <div class=" w-2/5 max-sm:w-wk">
                       <Field
                         name="vatNo"
                         type="text"
@@ -414,7 +409,7 @@ function CustomerForm(props) {
                         inlineLabel
                       />
                     </div>
-                    <div class=" w-[10rem]">
+                    <div class=" w-[10rem] max-sm:w-wk">
                       <Field
                         name="businessRegistration"
                         type="text"
@@ -450,7 +445,7 @@ function CustomerForm(props) {
                     )}
                   />
                    <div class=" flex justify-between">
-                   <div class=" w-1/2">
+                   <div class=" w-1/2 max-sm:w-wk">
                      <Field
                        name="country"
                        isColumnWithoutNoCreate
@@ -488,6 +483,7 @@ function CustomerForm(props) {
                 </Button>
               </div>
             </Form>
+            </div>
           )}
         </Formik>
       </>
