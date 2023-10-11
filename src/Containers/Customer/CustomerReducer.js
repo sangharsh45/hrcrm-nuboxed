@@ -155,6 +155,8 @@ const initialState = {
   fetchingCustomerDetailsByIdError: false,
   customer: {},
 
+  addingLocationDetails:false,
+
   documentUploadModal: false,
 
   addingDocumentByCustomerId: false,
@@ -559,6 +561,14 @@ export const customerReducer = (state = initialState, action) => {
         fetchingDocumentsByCustomerId: false,
         fetchingDocumentsByCustomerIdError: true,
       };
+
+
+      case types.ADD_LOCATION_DETAILS_REQUEST:
+        return { ...state, addingLocationDetails: true };
+      case types.ADD_LOCATION_DETAILS_SUCCESS:
+        return { ...state, addingLocationDetails: false, };
+      case types.ADD_LOCATION_DETAILS_FAILURE:
+        return { ...state, addingLocationDetails: false, };
 
     /* Get customer opportunity  */
     case types.GET_CUSTOMER_OPPORTUNITY_REQUEST:

@@ -267,15 +267,17 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import {getCountries} from "../../Auth/AuthAction"
 import {getCountry } from "../../../Containers/Settings/Category/Country/CountryAction"
-import { addAttendence, getAttendanceList } from "../../Customer/CustomerAction";
+import { addAttendence, getAttendanceList,addLocationDetails } from "../../Customer/CustomerAction";
 import { BundleLoader } from "../../../Components/Placeholder";
 
 function StartStop(props) {
   const [isLoading, setIsLoading] = useState(true);
   const [startInd, setStartInd] = useState(false); 
-const[drop1,setDrop1]=useState(""); 
-const[mandatorCountry,setmandatoryCountry]=useState(""); 
+const[drop1,setDrop1]=useState(props.attendanceByList.location); 
+const[mandatorCountry,setmandatoryCountry]=useState(props.attendanceByList.country); 
+const[country,setAllCountry]=useState(""); 
   console.log("Initial startInd:", startInd);
+  console.log(drop1)
 
   // const handleClick = () => {
   //   if (startInd) {
@@ -305,14 +307,46 @@ const[mandatorCountry,setmandatoryCountry]=useState("");
     setDrop1(
     event.target.value
     )
+    let dropData= event.target.value
+    let data={
+      attendanceId:props.attendanceByList.attendanceId,
+      country:"",
+      location:dropData,
+      other:null,
+    }
+    props.addLocationDetails(data)
   }
 
   const handleMandatoryCountry=(event)=>{
     setmandatoryCountry(
     event.target.value
     )
+    let mandatoryData= event.target.value
+    let data={
+      attendanceId:props.attendanceByList.attendanceId,
+      country:mandatoryData,
+      location:null,
+      other:null,
+    }
+    props.addLocationDetails(data)
   }
   console.log(mandatorCountry)
+
+  const handleAllCountry=(event)=>{
+    setAllCountry(
+    event.target.value
+    )
+    let allcountryData= event.target.value
+    let data={
+      attendanceId:props.attendanceByList.attendanceId,
+      country:null,
+      location:null,
+      other:allcountryData,
+    }
+    props.addLocationDetails(data)
+  }
+
+
   
 
 
@@ -341,8 +375,11 @@ useEffect(()=>{
 
   useEffect(() => {
     
-    if (props.attendanceByList.startInd !== undefined) {
+    if (props.attendanceByList.startInd !== undefined&&props.attendanceByList.location !== undefined&&props.attendanceByList.country !== undefined) {
       setStartInd(props.attendanceByList.startInd);
+      setDrop1(props.attendanceByList.location);
+      setmandatoryCountry(props.attendanceByList.country)
+      // setDrop1(props.attendanceByList.location)
     }
   }, [props.attendanceByList.startInd]);
 
@@ -379,11 +416,12 @@ useEffect(()=>{
       {/* </Popconfirm> */}
       <div style={{marginLeft:"22px"}}>
       <select
+      value={drop1}
       onChange={handleDrop1}
       disabled={!startInd}
       style={{border:"2px solid black"}}
       >
-         <option value="">Select</option>
+         {/* <option value="">Select</option> */}
         <option value="In Office">In Office</option>
         <option value="On Travel">On Travel</option>
         <option value="Remote">Remote</option>
@@ -393,6 +431,7 @@ useEffect(()=>{
      {drop1==="On Travel" ?  <div style={{marginLeft:"11px"}}>
       <select
        style={{border:"2px solid black"}}
+        value={mandatorCountry}
 onChange={handleMandatoryCountry}
       >
          <option value="">Select a country</option>
@@ -413,7 +452,9 @@ onChange={handleMandatoryCountry}
 <div style={{marginLeft:"11px"}}>
       <select
        style={{border:"2px solid black"}}
+       onChange={handleAllCountry}
       >
+          <option value="">Select other country</option>
         {props.country.map((item)=>{
           return(
           <option value={item.country_name}>{item.country_name}</option>
@@ -443,7 +484,8 @@ const mapDispatchToProps = (dispatch) =>
       addAttendence,
       getAttendanceList,
       getCountries,
-      getCountry
+      getCountry,
+      addLocationDetails
     },
     dispatch
   );

@@ -1050,6 +1050,43 @@ export const putCustomerContactToggle = (data, contactId) => (dispatch) => {
 };
 
 
+export const addLocationDetails = (attendance,userId) => (dispatch) => {
+
+
+  // const opportunityId = getState().opportunity.opportunity.opportunityId;
+  // console.log("inside add customer");
+  dispatch({
+    type: types.ADD_LOCATION_DETAILS_REQUEST,
+  });
+
+  axios
+    .put(`${base_url}/attendance/add/location`, attendance, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+         //dispatch(getAttendanceList(userId));
+      console.log(res);
+
+
+      dispatch({
+        type: types.ADD_LOCATION_DETAILS_SUCCESS,
+        payload: res.data,
+      });
+      // cb && cb();
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.ADD_LOCATION_DETAILS_FAILURE,
+        payload: err,
+      });
+      // cb && cb();
+    });
+};
+
+
 export const getCustomerListByCategory = (category) => (dispatch) => {
   dispatch({
     type: types.GET_CUSTOMERS_BY_CATEGORY_REQUEST,

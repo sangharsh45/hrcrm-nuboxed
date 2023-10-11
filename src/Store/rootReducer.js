@@ -4,6 +4,8 @@ import { LOGOUT } from "../Containers/Auth/AuthTypes";
  *  All of application reducers import goes here...
  */
 import { authReducer } from "../Containers/Auth/AuthReducer";
+
+import { pitchReducer } from "../Containers/Pitch/PitchReducer";
 import {messageReducer} from "../Containers/LiveMessages/MessageReducer";
 import { dashboardReducer } from "../Containers/Dashboard/DashboardReducer";
 
@@ -99,6 +101,7 @@ const appReducer = combineReducers({
   opportunity: OpportunityReducer,
   candidate: candidateReducer,
   language: languageReducer,
+  pitch:pitchReducer,
   sector:sectorsReducer,
   education:educationsReducer,
   functions:functionsReducer,
