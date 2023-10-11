@@ -237,9 +237,10 @@ function UpdateOpportunityForm (props) {
             values,
             ...rest
           }) => (
+            <div class="overflow-y-auto h-[34rem] overflow-x-hidden max-sm:h-[30rem]">
             <Form className="form-background">
-              <div class=" flex justify-between">
-                <div class=" h-full w-1/2">
+              <div class=" flex justify-between max-sm:flex-col">
+                <div class=" h-full w-1/2 max-sm:w-wk">
                   <Spacer />
                   <StyledLabel>
                     <Field
@@ -261,8 +262,8 @@ function UpdateOpportunityForm (props) {
                     />
                   </StyledLabel>
                   <Spacer />
-                  <div class="flex justify-between">
-                    <div class=" w-1/2">
+                  <div class="flex justify-between max-sm:flex-col">
+                    <div class=" w-1/2 max-sm:w-wk">
                       <StyledLabel>
                         <Field
                           isRequired
@@ -281,7 +282,7 @@ function UpdateOpportunityForm (props) {
                         />
                       </StyledLabel>
                     </div>
-                    <div class=" w-2/5">
+                    <div class=" w-2/5 max-sm:w-wk">
                       <StyledLabel>
                         <Field
                           isRequired
@@ -315,8 +316,8 @@ function UpdateOpportunityForm (props) {
                     </div>
                   </div>
                   <Spacer />
-                  <div class="flex justify-between">
-                    <div class=" w-1/2">
+                  <div class="flex justify-between max-sm:flex-col">
+                    <div class=" w-1/2 max-sm:w-wk">
                       <StyledLabel>
                         <Field
                           name="proposalAmount"
@@ -334,7 +335,7 @@ function UpdateOpportunityForm (props) {
                         />
                       </StyledLabel>
                     </div>
-                    <div class=" w-2/5">
+                    <div class=" w-2/5 max-sm:w-wk">
                       <Field
                         name="currency"
                         isColumnWithoutNoCreate
@@ -358,7 +359,7 @@ function UpdateOpportunityForm (props) {
                     </div>
                   </div>
                 </div>
-                <div class=" h-full w-2/5">
+                <div class=" h-full w-2/5 max-sm:w-wk">
                 <Listbox value={selected} onChange={setSelected}>
       {({ open }) => (
         <>
@@ -478,8 +479,8 @@ function UpdateOpportunityForm (props) {
                   />
 
                   <Spacer />
-                  <div class="flex justify-between">
-                    <div class=" w-1/2">
+                  <div class="flex justify-between max-sm:flex-col">
+                    <div class=" w-1/2 max-sm:w-wk">
                       <StyledLabel>
                         <Field
                           name="oppWorkflow"
@@ -504,7 +505,7 @@ function UpdateOpportunityForm (props) {
                       </StyledLabel>
                     </div>
                     <Spacer />
-                    <div class=" w-2/5">
+                    <div class=" w-2/5 max-sm:w-wk">
                       <StyledLabel>
                         <Field
                           name="oppStage"
@@ -557,6 +558,7 @@ function UpdateOpportunityForm (props) {
                 </Button>
               </div>
             </Form>
+            </div>
           )}
         </Formik>
       </>
