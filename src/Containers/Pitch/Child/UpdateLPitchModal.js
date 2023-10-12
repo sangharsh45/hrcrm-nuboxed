@@ -10,6 +10,8 @@ const UpdateLPitchModal = (props) => {
   const { updateCustomerModal, handleUpdateCustomerModal, ...formProps } = props;
 //   console.log("dn",props.setEditingLeads.name)
 
+console.log(props.item)
+
   return (
     <>
       <StyledDrawer
@@ -26,7 +28,7 @@ const UpdateLPitchModal = (props) => {
         <Suspense fallback={<BundleLoader />}>
          
           <UpdatePitchForm 
-        //   leadsId={props.item.leadsId} 
+        investorleadsId={props.item.investorLeadsId} 
           />{" "}
         </Suspense>
       </StyledDrawer>

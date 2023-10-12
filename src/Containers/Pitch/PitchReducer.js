@@ -7,22 +7,47 @@ const initialState = {
     fetchingPitchError:false,
     pitchData:[],
 
+    addingDocumentByPitchId:false,
+    addingDocumentByPitchIdError:false,
+
 
     updateTypePitch:false,
     updateTypePitchError:false,
 
 
+    fetchingDocumentsByPitchId:false,
+    fetchingDocumentsByPitchIdError:false,
+    documentsByPitchId:[],
+
+
     updatePitchById:false,
     updatePitchByIdError:false,
 
+
+    fetchingPitchOpportunity:false,
+    fetchingPitchOpportunityError:false,
+    opportunityByPitchId:[],
+
+
+    addingPitchOpportunity:false,
+    addingPitchOpportunityError:false,
+
+    addPitchOpportunityModal:false,
+
     addPitchModal:false,
     updatePitchModal:false,
+    fetchingPitchDetailsById:false,
+    fetchingPitchDetailsByIdError:false,
+    pitch:{},
 
     addingPitch:false,
     addingPitchError:false,
 
     deletingPitchData:false,
   deletingPitchDataError:false,
+
+
+  pitchDocumentUploadModal:false,
 
   setEditingPitch:{},
   };
@@ -35,6 +60,11 @@ export const pitchReducer = (state = initialState, action) => {
 
         case types.HANDLE_PITCH_MODAL:
             return { ...state, addPitchModal: action.payload };
+
+
+
+            case types.HANDLE_PITCH_DOCUMENT_UPLOAD_MODAL:
+              return { ...state, pitchDocumentUploadModal: action.payload };
 
 
 case types.GET_PITCH_REQUEST:
@@ -64,18 +94,41 @@ case types.GET_PITCH_REQUEST:
       case types.ADD_PITCH_SUCCESS:
         return { ...state, 
             addingPitch: false, 
-        //   addLeadsModal: false ,
-          // customerByUserId:[action.payload,...state.customerByUserId]
+            addPitchModal: false ,
+            pitchData:[action.payload,...state.pitchData]
         };
       case types.ADD_PITCH_FAILURE:
         return { ...state, addingPitch: false,  };  
+
+
+
+
+        case types.ADD_PITCH_DOCUMENT_REQUEST:
+            return {
+              ...state,
+              addingDocumentByPitchId: true,
+              addingDocumentByPitchIdError: false,
+            };
+          case types.ADD_PITCH_DOCUMENT_SUCCESS:
+            return {
+              ...state,
+              addingDocumentByPitchId: false,
+              addingDocumentByPitchIdError: false,
+            };
+          case types.ADD_PITCH_DOCUMENT_FAILURE:
+            return {
+              ...state,
+              addingDocumentByPitchId: false,
+              addingDocumentByPitchIdError: true,
+            };
         
         
 
         case types.SET_PITCH_EDIT:
             return { ...state, setEditingPitch: action.payload };
 
-
+            case types.HANDLE_PITCH_OPPORTUNITY_MODAL:
+              return { ...state, addPitchOpportunityModal: action.payload };
 
 
             case types.UPDATE_PITCH_BY_ID_REQUEST:
@@ -84,14 +137,14 @@ case types.GET_PITCH_REQUEST:
                 return {
                   ...state,
                   updatePitchById: false,
-                //   updateLeadsModal: false,
-                //   leadsAllData: state.leadsAllData.map((item) => {
-                //     if (item.leadsId === action.payload.leadsId) {
-                //       return action.payload;
-                //     } else {
-                //       return item;
-                //     }
-                //   }),
+                   updatePitchModal: false,
+                   pitchData: state.pitchData.map((item) => {
+                    if (item.investorleadsId === action.payload.investorleadsId) {
+                      return action.payload;
+                    } else {
+                      return item;
+                    }
+                  }),
                 };
               case types.UPDATE_PITCH_BY_ID_FAILURE:
                 return {
@@ -102,22 +155,99 @@ case types.GET_PITCH_REQUEST:
 
 
 
+
+                case types.GET_PITCH_DETAILS_BY_ID_REQUEST:
+                  return { ...state, fetchingPitchDetailsById: true };
+                case types.GET_PITCH_DETAILS_BY_ID_SUCCESS:
+                  return {
+                    ...state,
+                    fetchingPitchDetailsById: false,
+                    pitch: action.payload,
+                  };
+                case types.GET_PITCH_DETAILS_BY_ID_FAILURE:
+                  return {
+                    ...state,
+                    fetchingPitchDetailsById: false,
+                    fetchingPitchDetailsByIdError: true,
+                  };
+
+
+
+                  case types.GET_PITCH_DOCUMENTS_REQUEST:
+                    return {
+                      ...state,
+                      fetchingDocumentsByPitchId: true,
+                      fetchingDocumentsByPitchIdError: false,
+                    };
+                  case types.GET_PITCH_DOCUMENTS_SUCCESS:
+                    return {
+                      ...state,
+                      fetchingDocumentsByPitchId: false,
+                      fetchingDocumentsByPitchIdError: false,
+                      documentsByPitchId: action.payload,
+                    };
+                  case types.GET_PITCH_DOCUMENTS_FAILURE:
+                    return {
+                      ...state,
+                      fetchingDocumentsByPitchId: false,
+                      fetchingDocumentsByPitchIdError: true,
+                    };
+
+
+
+                  case types.ADD_PITCH_OPPORTUNITY_REQUEST:
+                    return { ...state, addingPitchOpportunity: true };
+                  case types.ADD_PITCH_OPPORTUNITY_SUCCESS:
+                    return {
+                      ...state,
+                      addingPitchOpportunity: false,
+                      addPitchOpportunityModal: false,
+                      // clearbit: null,
+                    };
+                  case types.ADD_PITCH_OPPORTUNITY_FAILURE:
+                    return {
+                      ...state,
+                      addingPitchOpportunity: false,
+                      addingPitchOpportunityError: true,
+                      // addLeadsOpportunityModal: false,
+                    };
+
+
+
                 case types.UPDATE_TYPE_FOR_PITCH_REQUEST:
                     return { ...state,updateTypePitch: true };
                   case types.UPDATE_TYPE_FOR_PITCH_SUCCESS:
                     return {
                       ...state,
                       updateTypePitch: false,
-                    //      leadsAllData: state.leadsAllData.map((item) => {
-                    //     if (item.leadsId === action.payload.leadsId) {
-                    //       return action.payload;
-                    //     } else {
-                    //       return item;
-                    //     }
-                    //   }),
+                      pitchData: state.pitchData.map((item) => {
+                        if (item.investorLeadsId === action.payload.investorLeadsId) {
+                          return action.payload;
+                        } else {
+                          return item;
+                        }
+                      }),
                     };
                   case types.UPDATE_TYPE_FOR_PITCH_FAILURE:
                     return { ...state, updateTypePitch: false,updateTypePitchError:true, };
+
+
+
+
+                    case types.GET_PITCH_OPPORTUNITY_REQUEST:
+                      return { ...state, fetchingPitchOpportunity: true };
+                    case types.GET_PITCH_OPPORTUNITY_SUCCESS:
+                      return {
+                        ...state,
+                        fetchingPitchOpportunity: false,
+                        opportunityByPitchId: action.payload,
+                      };
+                    case types.GET_PITCH_OPPORTUNITY_FAILURE:
+                      return {
+                        ...state,
+                        fetchingPitchOpportunity: false,
+                        fetchingPitchOpportunityError: true,
+                      };
         
 
 

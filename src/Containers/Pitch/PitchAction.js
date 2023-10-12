@@ -37,7 +37,16 @@ export const getPitch = (userId) => (dispatch) => {
   };
 
 
-  export const addPitch = (leads) => (dispatch, getState) => {
+
+  export const handlePitchDocumentUploadModal = (modalProps) => (dispatch) => {
+    dispatch({
+      type: types.HANDLE_PITCH_DOCUMENT_UPLOAD_MODAL,
+      payload: modalProps,
+    });
+  };
+
+
+  export const addPitch = (pitch) => (dispatch, getState) => {
     const userId = getState().auth.userDetails.userId;
   
     // const opportunityId = getState().opportunity.opportunity.opportunityId;
@@ -47,7 +56,7 @@ export const getPitch = (userId) => (dispatch) => {
     });
   
     axios
-      .post(`${base_url}/leads`, leads, {
+      .post(`${base_url}/investorleads`, pitch, {
         headers: {
           Authorization: "Bearer " + sessionStorage.getItem("token") || "",
         },
@@ -157,6 +166,90 @@ export const getPitch = (userId) => (dispatch) => {
   };
 
 
+  export const getPitchDetailsById = (investorLeadsId) => (dispatch) => {
+    dispatch({
+      type: types.GET_PITCH_DETAILS_BY_ID_REQUEST,
+    });
+    axios
+      .get(`${base_url}/investorleads/${investorLeadsId}`, {
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+        },
+      })
+  
+      .then((res) => {
+        console.log(res);
+        dispatch({
+          type: types.GET_PITCH_DETAILS_BY_ID_SUCCESS,
+          payload: res.data,
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+        dispatch({
+          type: types.GET_PITCH_DETAILS_BY_ID_FAILURE,
+          payload: err,
+        });
+      });
+  };
+
+
+
+  export const addPitchDocument = (data, cb) => (dispatch) => {
+    console.log(data);
+    dispatch({ type: types.ADD_PITCH_DOCUMENT_REQUEST });
+    axios
+      .post(`${base_url}/investorLeads/document`, data, {
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+        },
+      })
+      .then((res) => {
+        console.log(res);
+        dispatch({
+          type: types.ADD_PITCH_DOCUMENT_SUCCESS,
+          payload: res.data,
+        });
+        cb();
+      })
+      .catch((err) => {
+        console.log(err);
+        dispatch({
+          type: types.ADD_PITCH_DOCUMENT_FAILURE,
+          payload: err,
+        });
+      });
+  };
+
+
+
+
+  export const getPitchDocument = (investorLeadsId) => (dispatch) => {
+    dispatch({ type: types.GET_PITCH_DOCUMENTS_REQUEST });
+    axios
+      .get(`${base_url}/investorLeads/document/${investorLeadsId}`, {
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+        },
+      })
+      .then((res) => {
+        console.log(res);
+        dispatch({
+          type: types.GET_PITCH_DOCUMENTS_SUCCESS,
+          payload: res.data,
+        });
+        // cb();
+      })
+      .catch((err) => {
+        console.log(err);
+        dispatch({
+          type: types.GET_PITCH_DOCUMENTS_FAILURE,
+          payload: err,
+        });
+      });
+  };
+
+
   export const updateTypeForPitch = (investorleadsId,type,data) => (dispatch) => {
     dispatch({ type: types.UPDATE_TYPE_FOR_PITCH_REQUEST });
     axios
@@ -177,6 +270,84 @@ export const getPitch = (userId) => (dispatch) => {
         dispatch({
           type: types.UPDATE_TYPE_FOR_PITCH_FAILURE,
           payload:err
+        });
+      });
+  };
+
+
+
+  export const addPitchOpportunity = (opportunity,investorleadsId, cb) => (
+    dispatch,
+    getState
+  ) => {
+    // const userId = getState().auth.userDetails.userId;
+    //const customerId = getState().customer.customer.customerId;
+    dispatch({
+      type: types.ADD_PITCH_OPPORTUNITY_REQUEST,
+    });
+    axios
+      .post(`${base_url}/investorLeads/opportunity`, opportunity, {
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+        },
+      })
+      .then((res) => {
+        console.log(res);
+        const startDate = dayjs()
+          .startOf("month")
+          .toISOString();
+        const endDate = dayjs()
+          .endOf("month")
+          .toISOString();
+        dispatch(getOpportunityListByPitchId(investorleadsId));
+        dispatch({
+          type: types.ADD_PITCH_OPPORTUNITY_SUCCESS,
+          payload: res.data,
+        });
+        cb();
+      })
+      .catch((err) => {
+        console.log(err);
+        dispatch({
+          type: types.ADD_PITCH_OPPORTUNITY_FAILURE,
+          payload: err,
+        });
+      });
+  };
+
+
+
+  export const handlePitchOpportunityModal = (modalProps) => (dispatch) => {
+    dispatch({
+      type: types.HANDLE_PITCH_OPPORTUNITY_MODAL,
+      payload: modalProps,
+    });
+  };
+
+
+
+  export const getOpportunityListByPitchId = (investorleadsId) => (dispatch) => {
+    dispatch({
+      type: types.GET_PITCH_OPPORTUNITY_REQUEST,
+    });
+    axios
+      .get(`${base_url}/investorLeads/opportunity/${investorleadsId}`, {
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+        },
+      })
+      .then((res) => {
+        console.log(res);
+        dispatch({
+          type: types.GET_PITCH_OPPORTUNITY_SUCCESS,
+          payload: res.data,
+        });
+      })
+      .catch((err) => {
+        console.log(err.response);
+        dispatch({
+          type: types.GET_PITCH_OPPORTUNITY_FAILURE,
+          payload: err,
         });
       });
   };
