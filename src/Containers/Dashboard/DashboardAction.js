@@ -1139,6 +1139,29 @@ export const getHotColdWarm = (userId,startDate, endDate) => (
       });
     });
 };
+
+
+export const getLeavesGantt = (orgId,endDate,startDate) => (dispath) => {
+  dispath({ type: types.GET_LEAVES_GANTT_REQUEST });
+  axios
+    .get(`${base_url}/leaves/employee/leave-list/date-wise/${orgId}?endDate=${endDate}&startDate=${startDate} `, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      dispath({
+        type: types.GET_LEAVES_GANTT_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      dispath({
+        type: types.GET_LEAVES_GANTT_FAILURE,
+        payload: err,
+      });
+    });
+} 
 export const getJumpCustomerlist = (userId,startDate, endDate) => (dispatch) => {
   dispatch({ type: types.GET_JUMPSTART_CUSTOMER_LIST_REQUEST });
   axios
