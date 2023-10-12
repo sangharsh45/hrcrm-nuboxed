@@ -166,6 +166,40 @@ export const getPitch = (userId) => (dispatch) => {
   };
 
 
+  export const convertPitchStatus = (data, investorLeadsId) => (
+    dispatch,
+    getState
+  ) => {
+    // debugger;
+    const { userId } = getState("auth").auth.userDetails;
+    dispatch({
+      type: types.CONVERT_PITCH_STATUS_REQUEST,
+    });
+    axios
+      .put(`${base_url}/investorLeads/convert/${investorLeadsId}`, data, {
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+        },
+      })
+      .then((res) => {
+         dispatch(getPitch(userId));
+        dispatch({
+          type: types.CONVERT_PITCH_STATUS_SUCCESS,
+          payload: res.data,
+        });
+        // cb && cb("success");
+      })
+      .catch((err) => {
+        console.log(err);
+        dispatch({
+          type: types.CONVERT_PITCH_STATUS_FAILURE,
+          payload: err,
+        });
+        // cb && cb("failuer");
+      });
+  };
+
+
   export const getPitchDetailsById = (investorLeadsId) => (dispatch) => {
     dispatch({
       type: types.GET_PITCH_DETAILS_BY_ID_REQUEST,
