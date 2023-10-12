@@ -47,26 +47,50 @@ function LeavesGanttChart(props){
   
  
  
-    const data1 = props.leavesGantt.map((item) => item.leaveList);
+   // const data1 = props.leavesGantt.map((item) => item.leaveList);
 //   console.log(data1)
 
-//   const tasks = data1.map(item => ({
-//     id: item.leaveId,
-//     name: item.coverDetails,
-//     start: new Date(item.startDate),
-//     end: new Date(item.endDate),
-//   }));
-const tasks = data1.map(item => {
-    const startDate = moment(item.startDate, "YYYY-MM-DDTHH:mm:ss").toDate();
-    const endDate = moment(item.endDate, "YYYY-MM-DDTHH:mm:ss").toDate();
-  
-    return {
-      id: item.leaveId,
-      name: item.coverDetails,
-      start: startDate,
-      end: endDate,
-    };
-  });
+  // const tasks = data1.map(item => ({
+  //   id: item.leaveId,
+  //   name: item.coverDetails,
+  //   start: new Date(item.startDate),
+  //   end: new Date(item.endDate),
+  // }));
+
+  const tasks = [];
+
+props.leavesGantt.forEach((item) => {
+  if (item.leaveList.length > 0) {
+    const leaveList = item.leaveList;
+    leaveList.forEach((leave) => {
+      const leaveId = leave.leaveId;
+      const cover=leave.coverDetails;
+      // const startDate = moment(leave.startDate).toDate();
+      // const endDate = moment(leave.endDate).toDate();
+
+      const task = {
+        id: leaveId,
+         name: `${item.employeeName}`,
+        // name: cover,
+        // start: startDate,
+        // end: endDate,
+           start: new Date(leave.startDate),
+    end: new Date(leave.endDate),
+      };
+
+      tasks.push(task);
+    });
+  }
+});
+
+
+
+
+
+
+
+
+
   if (props.fetchingLeavesGantt) {
     return <BundleLoader />;
   }
