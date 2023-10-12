@@ -123,7 +123,7 @@ const PitchCardList = (props) => {
                                             Name
                                             </h4>
                                             <h4 class="text-[0.75rem] text-cardBody font-poppins cursor-pointer">
-                                           {item.name}     
+                                           {item.firstName}     
          {/* <Link
            toUrl={`leads/${item.leadsId}`}
           title={`${item.name}`}
@@ -155,9 +155,9 @@ const PitchCardList = (props) => {
                            <h4 class=" text-[0.875rem] text-cardBody font-poppins"> Company </h4>
                            <h4 class=" text-[0.75rem] text-cardBody font-poppins">   
                            <Link
-        //    toUrl={`leads/${item.leadsId}`}
-        //   title={`${item.companyName}`}
-        >{item.name}</Link>
+           toUrl={`pitch/${item.investorLeadsId}`}
+          title={`${item.companyName}`}
+        >{item.companyName}</Link>
                            </h4>
                        </div>
                        <div class="rounded-full bg-white  h-5 cursor-pointer w-8">
@@ -219,7 +219,7 @@ const PitchCardList = (props) => {
  role={item.type}
  onClick={() =>{
  const typ="Warm"
-   props.updateTypeForPitch(item.investorleadsId,typ)
+   props.updateTypeForPitch(item.investorLeadsId,typ)
  }}
 />
 </ButtonGroup>
@@ -239,7 +239,7 @@ const PitchCardList = (props) => {
  role={item.type}
  onClick={() =>{
   const typ="Hot"
-   props.updateTypeForPitch(item.investorleadsId,typ)
+   props.updateTypeForPitch(item.investorLeadsId,typ)
  }}
 />
 </ButtonGroup>
@@ -257,7 +257,7 @@ const PitchCardList = (props) => {
  role={item.type}
  onClick={() => {
   const typ="Cold"
-   props.updateTypeForPitch(item.investorleadsId,typ)
+   props.updateTypeForPitch(item.investorLeadsId,typ)
  }}
 />
 </ButtonGroup>
@@ -389,7 +389,7 @@ style={{fontSize: "1rem"}}
                 })}
       </OnlyWrapCard>
       <UpdateLPitchModal
-        // item={currentLeadsId}
+        item={currentLeadsId}
         updatePitchModal={props.updatePitchModal}
         // updateLeadsModal={updateLeadsModal}
         handleUpdatePitchModal={props.handleUpdatePitchModal}

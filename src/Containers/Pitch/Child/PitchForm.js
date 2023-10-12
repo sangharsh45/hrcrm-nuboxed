@@ -95,7 +95,7 @@ props.getAllCustomerEmployeelist();
           // validationSchema={CustomerSchema}
           onSubmit={(values, { resetForm }) => {
             console.log(values);
-            addPitch(
+            props.addPitch(
               {
                 ...values,
                 assignedTo: selectedOption ? selectedOption.employeeId:userId,
