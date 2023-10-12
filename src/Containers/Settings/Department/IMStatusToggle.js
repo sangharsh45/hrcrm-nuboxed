@@ -10,16 +10,16 @@ function IMStatusToggle(props) {
   //   // props.getRequirementsDuration(props.orgId);
   // }, []);
   // const { crmInd } = props.departments;
-  const [crm, setCrm] = React.useState(props.crmInd);
-console.log("crrm",props.crmInd);
+  const [crm, setCrm] = React.useState(props.imInd);
+console.log("crrm",props.imInd);
   function handleImToggleCollection(item) {
-    if (props.crmInd) {
+    if (props.imInd) {
       props.linkImToggle({
         // ...props.departments,
         departmentName: props.departmentName,
         departmentId: props.departmentId,
         // editInd:false,
-        crmInd: props.crmInd ? false : true,
+        imInd: props.imInd ? false : true,
       },
       props.departmentId,
       );
@@ -31,7 +31,7 @@ console.log("crrm",props.crmInd);
         departmentName: props.departmentName,
         departmentId: props.departmentId,
         // editInd:false,
-        crmInd: props.crmInd ? false : true,
+        imInd: props.imInd ? false : true,
       },
       props.departmentId,
       );
@@ -40,7 +40,7 @@ console.log("crrm",props.crmInd);
   }
 
   function handleImCancel() {
-    if (props.crmInd) {
+    if (props.imInd) {
       setCrm(true);
     } else {
       setCrm(false);
@@ -58,7 +58,7 @@ console.log("crrm",props.crmInd);
         >
           <Switch
             className="toggle-clr"
-            checked={props.crmInd || crm}
+            checked={props.imInd || crm}
             // disabled={props.status}
             isLoading={true}
             style={{width: "4rem"}}
