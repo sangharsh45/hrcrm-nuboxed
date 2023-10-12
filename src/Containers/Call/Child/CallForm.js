@@ -308,11 +308,12 @@ function CallForm(props) {
             values,
             ...rest
           }) => (
+            <div class="overflow-y-auto h-[34rem] overflow-x-hidden max-sm:h-[30rem]">
             <Form className="form-background">
-              <div class=" flex justify-between">
-              <div class=" h-full w-1/2"   >
-              <div class=" flex justify-between w-full">
-                    <div class=" w-2/6">
+              <div class=" flex justify-between max-sm:flex-col">
+              <div class=" h-full w-1/2 max-sm:w-wk"   >
+              <div class=" flex justify-between w-full max-sm:flex-col">
+                    <div class=" w-2/6 max-sm:w-wk">
                       <Spacer/>
                       <StyledLabel>
                         {/* Type */}
@@ -437,7 +438,7 @@ function CallForm(props) {
                     </div>
                   </div>
                   <Spacer/>
-                  <div class=" flex justify-between items-end " >
+                  <div class=" flex justify-between items-end max-sm:flex-col " >
                     <div class=" self-start">
                       <StyledLabel>
                       Mode
@@ -451,7 +452,7 @@ function CallForm(props) {
                         unCheckedChildren="Video"
                       />
                     </div>
-                    <div class=" w-1/3 self-baseline">
+                    <div class=" w-1/3 self-baseline max-sm:w-wk">
                       <FastField
                         name="modeType"
                         label="Channel"
@@ -466,7 +467,7 @@ function CallForm(props) {
                         inlineLabel
                       />
                     </div>
-                    <div class=" w-2/5">
+                    <div class=" w-2/5 max-sm:w-wk">
                       <FastField
                         type="text"
                         name="modeLink"
@@ -509,8 +510,8 @@ function CallForm(props) {
                     inlineLabel
                   />
                   <Spacer />
-                  <div class=" flex justify-between">
-                    <div class=" w-1/2">
+                  <div class=" flex justify-between max-sm:flex-col">
+                    <div class=" w-1/2 max-sm:w-wk">
                       <Field
                         name="startTime"
                         // label="Start Time"
@@ -531,7 +532,7 @@ function CallForm(props) {
                         }}
                       />
                     </div>
-                    <div class=" w-2/5">
+                    <div class=" w-2/5 max-sm:w-wk">
                       <Field
                         name="endTime"
                         // label="End Time"
@@ -602,7 +603,7 @@ function CallForm(props) {
                     </span>
                   )}
                 </div>
-                <div class=" h-full w-2/5"   >
+                <div class=" h-full w-2/5 max-sm:w-wk"   >
                 <Listbox value={selected} onChange={setSelected}>
         {({ open }) => (
           <>
@@ -838,6 +839,7 @@ function CallForm(props) {
                 </Button>
               </div>
             </Form>
+            </div>
           )}
         </Formik>
       </>
@@ -869,7 +871,7 @@ const mapDispatchToProps = (dispatch) =>
       deleteCall,
       getEmployeelist,
       getFilteredEmailContact,
-      setClearbitCandidateData,
+      setClearbitCandidateData, 
       handleCallNotesModal,
     },
     dispatch
