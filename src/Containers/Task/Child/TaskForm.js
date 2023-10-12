@@ -467,24 +467,19 @@ const [priority,setpriority]=useState(props.selectedTask
             values,
             ...rest
           }) => (
+            <div class="overflow-y-auto h-[34rem] overflow-x-hidden max-sm:h-[30rem]">
             <Form className="form-background">
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  height: "70vh",                
-                  paddingRight: "0.6em",
-                }}
-              >
-                <div class=" h-full w-1/2">
+              <div class="flex justify-between pr-2 max-sm:flex-col">
+               
+                <div class=" h-full w-1/2 max-sm:w-wk">
               
-                  <div class=" flex justify-between">
+                  <div class=" flex justify-between ">
                     {values.taskTypeId === "TSK52434477391272022" && (
                       <FastField name="imageId" component={Upload} />
                     )}
 
                     {values.taskTypeId === "TSK52434477391272022" && (
-                      <div class=" w-4/6">
+                      <div class=" w-4/6 max-sm:w-wk">
                         <Field
                           name="documentId"
                           isRequired
@@ -493,8 +488,8 @@ const [priority,setpriority]=useState(props.selectedTask
                       </div>
                     )}
                   </div>
-                  <div class=" flex justify-between">
-                    <div class=" w-1/2">
+                  <div class=" flex justify-between max-sm:flex-col">
+                    <div class=" w-1/2 max-sm:w-wk ">
                       <Spacer />
                       <StyledLabel>Type</StyledLabel>
                       <select 
@@ -536,7 +531,7 @@ const [priority,setpriority]=useState(props.selectedTask
                     </div>
                   
                     {/* {values.taskTypeId === "TSK42340139329302023" && ( */}
-                      <div class=" w-1/2">
+                      <div class=" w-1/2 max-sm:w-wk">
                           <Spacer />
                           <StyledLabel>Workflow</StyledLabel>
                           <select
@@ -696,8 +691,8 @@ const [priority,setpriority]=useState(props.selectedTask
                     </div>
                   </div>
                   <Spacer />
-                  <div class=" flex justify-between w-full">
-                    <div class=" w-1/2">
+                  <div class=" flex justify-between w-full max-sm:flex-col">
+                    <div class=" w-1/2 max-sm:w-wk">
                       <div class=" flex justify-between w-full">
                         <div class=" w-full">
                           <StyledLabel>
@@ -765,7 +760,7 @@ const [priority,setpriority]=useState(props.selectedTask
                         </div>
                       </div>
                     </div>
-                    <div class=" w-5/12">
+                    <div class=" w-5/12 max-sm:w-wk">
                       <div class=" flex justify-between w-full">
                         <div class=" w-full">
                           <Field
@@ -837,7 +832,7 @@ const [priority,setpriority]=useState(props.selectedTask
 
                
                   <div class=" flex justify-between">
-                    <div class=" w-1/2">
+                    <div class=" w-1/2 max-sm:w-wk">
                       <Field
                         isRequired
                         name="endDate"
@@ -1096,7 +1091,7 @@ const [priority,setpriority]=useState(props.selectedTask
                     )} */}
                   </div>
                 </div>
-                <div class=" h-full w-2/5">
+                <div class=" h-full w-2/5 max-sm:w-wk">
                   <Spacer />
                   {/* <Field
                     name="assignedTo"
@@ -1361,6 +1356,7 @@ const [priority,setpriority]=useState(props.selectedTask
                 </Button>
               </div>
             </Form>
+            </div>
           )}
         </Formik>
       </>

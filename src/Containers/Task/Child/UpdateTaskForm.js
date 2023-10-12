@@ -391,24 +391,17 @@ function UpdateTaskForm(props) {
           values,
           ...rest
         }) => (
+          <div class="overflow-y-auto h-[34rem] overflow-x-hidden max-sm:h-[30rem]">
           <Form className="form-background">
-             <div
-                style={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  height: "70vh",
-                  overflow: "scroll",
-                  paddingRight: "0.6em",
-                }}
-              >
-              <div class=" h-full w-1/2">
+          <div class="flex justify-between pr-2 max-sm:flex-col">
+              <div class=" h-full w-1/2  max-sm:w-wk">
                 <div class=" flex justify-between">
                   {values.taskTypeId === "TSK52434477391272022" && (
                     <FastField name="imageId" component={Upload} />
                   )}
 
                   {values.taskTypeId === "TSK52434477391272022" && (
-                    <div class=" w-4/6">
+                    <div class=" w-4/6  max-sm:w-wk">
                       <Field
                         name="documentId"
                         isRequired
@@ -417,8 +410,8 @@ function UpdateTaskForm(props) {
                     </div>
                   )}
                 </div>
-                <div class=" flex justify-between">
-                  <div class=" w-1/2">
+                <div class=" flex justify-between  max-sm:flex-col">
+                  <div class=" w-1/2 max-sm:w-wk">
                     <Spacer />
                     <StyledLabel>Type</StyledLabel>
                     <Field
@@ -489,8 +482,8 @@ function UpdateTaskForm(props) {
                   </div>
                 </div>
                 <Spacer />
-                <div class=" flex justify-between w-full">
-                  <div class=" w-1/2">
+                <div class=" flex justify-between w-full max-sm:flex-col">
+                  <div class=" w-1/2 max-sm:w-wk">
                     <div class=" flex justify-between w-full">
                       <div class=" w-full">
                         <StyledLabel>
@@ -550,7 +543,7 @@ function UpdateTaskForm(props) {
                       </div>
                     </div>
                   </div>
-                  <div class=" w-5/12">
+                  <div class=" w-5/12 max-sm:w-wk">
                     <div class=" flex justify-between w-full">
                       <div class=" w-full">
                         <Field
@@ -575,7 +568,7 @@ function UpdateTaskForm(props) {
                 
                 <div class=" flex justify-between">
                 {values.taskTypeId === "TSK52434477391272022" && (
-                    <div class=" w-1/2">
+                    <div class=" w-1/2 max-sm:w-wk">
                    <StyledLabel>
                   <Field
                    name="taskChecklistId"
@@ -601,7 +594,7 @@ function UpdateTaskForm(props) {
                 )}
                  </div>
                 <div class=" flex justify-between">
-                  <div class=" w-1/2">
+                  <div class=" w-1/2 max-sm:w-wk">
                     <Field
                       isRequired
                       name="endDate"
@@ -785,7 +778,7 @@ function UpdateTaskForm(props) {
                       )}
                     </div>
                   </div>
-                  <div class=" w-2/5">
+                  <div class=" w-2/5 max-sm:w-wk">
                     <div class=" flex justify-between w-full">
                       {values.taskTypeId === "TSK52434477391272022" && (
                       <div class=" w-full">
@@ -827,7 +820,7 @@ function UpdateTaskForm(props) {
                   )} */}
                 </div>
               </div>
-              <div class=" h-full w-2/5">
+              <div class=" h-full w-2/5 max-sm:w-wk">
                 <Spacer />
                 <Field
                   name="assignedTo"
@@ -1005,6 +998,7 @@ function UpdateTaskForm(props) {
               </Button>
             </div>
           </Form>
+          </div>
         )}
       </Formik>
     </>
