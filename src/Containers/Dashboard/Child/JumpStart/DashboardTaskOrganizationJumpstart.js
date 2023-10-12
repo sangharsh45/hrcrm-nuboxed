@@ -86,7 +86,7 @@ render() {
           <JumpStartBox
             noProgress
             title="Tasks > Deadline"
-            // value={ this.props.jumpstartTask2listCount.no}
+            value={ this.props.jumpstartTask2listCount.no}
             isLoading={this.props.fetchingJumpstartTask2list}
      
     
