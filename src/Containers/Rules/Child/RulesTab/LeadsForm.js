@@ -71,10 +71,10 @@ country:props.countryId,
                   isRequired
                   name="maximumLeaves"
                   // label="Max leaves (in days)"
-                  label={<FormattedMessage
+                  label={<div class="w-60"><FormattedMessage
                     id="app.maximumLeaves"
                     defaultMessage="Max leaves (in days)"
-                  />}
+                  /></div>}
                   width={"10%"}
                   component={InputComponent}
                   inlineLabel
@@ -89,10 +89,10 @@ country:props.countryId,
                   isRequired
                   name="carryForward"
                   //label="Carry Forward(%)"
-                  label={<FormattedMessage
+                  label={<div class="w-60"><FormattedMessage
                     id="app.carryForward"
                     defaultMessage="Carry Forward(%)"
-                  />}
+                  /></div>}
                   inlineLabel
                   width={"10%"}
                   component={InputComponent}
@@ -108,10 +108,10 @@ country:props.countryId,
                   isRequired
                   name="maximumCarryForward"
                   //label="Max Carry Forward(%)"
-                  label={<FormattedMessage
+                  label={<div class="w-60"><FormattedMessage
                     id="app.maximumCarryForward"
                     defaultMessage="Leaves Capped at times Annual Leave"
-                  />}
+                  /></div>}
                   inlineLabel
                   width={"10%"}
                   component={InputComponent}
@@ -127,10 +127,10 @@ country:props.countryId,
                   isRequired
                   name="mileageRate"
                   // label="Max leaves (in days)"
-                  label={<FormattedMessage
+                  label={<div class="w-60"><FormattedMessage
                     id="app.mileageRate"
                     defaultMessage="Mileage Rate"
-                  />}
+                  /></div>}
                   width={"10%"}
                   component={InputComponent}
                   inlineLabel

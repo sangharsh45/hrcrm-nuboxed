@@ -253,9 +253,10 @@ function UpdateEventForm (props) {
             values,
             ...rest
           }) => (
+            <div class="overflow-y-auto h-[34rem] overflow-x-hidden max-sm:h-[30rem]">
             <Form className="form-background">
-          <div class=" flex justify-between">
-              <div class=" h-full w-1/2"   >
+          <div class=" flex justify-between max-sm:flex-col">
+              <div class=" h-full w-1/2 max-sm:w-wk"   >
                   <Field
                     isRequired
                     name="eventTypeId"
@@ -464,7 +465,7 @@ function UpdateEventForm (props) {
                     </span>
                   )}
                 </div>
-                <div class=" h-full w-2/5"   >
+                <div class=" h-full w-2/5 max-sm:w-wk"   >
               
 
               <Field
@@ -558,7 +559,7 @@ function UpdateEventForm (props) {
                   }}>
                     Set Reminder
                   </StyledLabel>
-                  <div class=" flex justify-between" >
+                  <div class=" flex justify-between max-sm:justify-around" >
 
                     <Switch
                       style={{ width: "60px" }}
@@ -607,6 +608,7 @@ function UpdateEventForm (props) {
                 </Button>
               </div>
             </Form>
+            </div>
           )}
         </Formik>
       </>
