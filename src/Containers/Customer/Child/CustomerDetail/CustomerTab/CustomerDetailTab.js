@@ -62,6 +62,7 @@ const AddTagProfileModal = lazy(() =>
 );
 const AddInvoiceModal = lazy(() => import("./Invoice/AddInvoiceModal"));
 const LinkedInvoice = lazy(() => import("./Invoice/LinkedInvoice"));
+
 const TabPane = StyledTabs.TabPane;
 function handleRefreshPage() {
   window.location.reload();

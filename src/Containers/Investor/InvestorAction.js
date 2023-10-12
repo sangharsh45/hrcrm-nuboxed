@@ -156,3 +156,102 @@ export const getInvestorDetailsById = (investorId) => (dispatch) => {
         });
       });
   };
+  export const getInvestorDocument = (investorId) => (dispatch) => {
+    dispatch({ type: types.GET_INVESTOR_DOCUMENTS_REQUEST });
+    axios
+      .get(`${base_url}/investor/document/${investorId}`, {
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+        },
+      })
+      .then((res) => {
+        console.log(res);
+        dispatch({
+          type: types.GET_INVESTOR_DOCUMENTS_SUCCESS,
+          payload: res.data,
+        });
+        // cb();
+      })
+      .catch((err) => {
+        console.log(err);
+        dispatch({
+          type: types.GET_INVESTOR_DOCUMENTS_FAILURE,
+          payload: err,
+        });
+      });
+  };
+  export const getNotesListByInvestorId = (investorId) => (dispatch) => {
+    dispatch({
+      type: types.GET_NOTES_LIST_BY_INVESTOR_ID_REQUEST,
+    });
+    axios
+      .get(`${base_url}/customer/note/${investorId}`, {
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+        },
+      })
+      .then((res) => {
+        console.log(res);
+        dispatch({
+          type: types.GET_NOTES_LIST_BY_INVESTOR_ID_SUCCESS,
+          payload: res.data,
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+        dispatch({
+          type: types.GET_NOTES_LIST_BY_INVESTOR_ID_FAILURE,
+          payload: err,
+        });
+      });
+  };
+  export const addNote = (note, cb) => (dispatch) => {
+    dispatch({ type: types.ADD_INVESTOR_NOTES_REQUEST });
+    axios
+      .post(`${base_url}/investor/notes`, note, {
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+        },
+      })
+      .then((res) => {
+        dispatch({
+          type: types.ADD_INVESTOR_NOTES_SUCCESS,
+          payload: res.note,
+        });
+        console.log(res);
+        cb && cb();
+      })
+      .catch((err) => {
+        dispatch({
+          type: types.ADD_INVESTOR_NOTES_FAILURE,
+          payload: err,
+        });
+        console.log(err);
+        cb && cb();
+      });
+  };
+  
+  export const getInvoiceListByInvestorId = (investorId) => (dispatch) => {
+    dispatch({ type: types.GET_INVESTOR_INVOICE_REQUEST });
+    axios
+      .get(`${base_url}/investor/invoice/${investorId}`, {
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+        },
+      })
+      .then((res) => {
+        console.log(res);
+        dispatch({
+          type: types.GET_INVESTOR_INVOICE_SUCCESS,
+          payload: res.data,
+        });
+        // cb();
+      })
+      .catch((err) => {
+        console.log(err);
+        dispatch({
+          type: types.GET_INVESTOR_INVOICE_FAILURE,
+          payload: err,
+        });
+      });
+  };
