@@ -25,6 +25,7 @@ import { OnlyWrapCard } from '../../../Components/UI/Layout'
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import DeleteIcon from "@mui/icons-material/Delete";
+import StatusPitchToggle from "../Child/StatusPitchToggle"
 // import { getCountries } from "../../../Auth/AuthAction";
 import { Link } from "../../../Components/Common";
 import {
@@ -309,11 +310,11 @@ style={{fontSize: "1rem"}}
                 {/* qual */}
                                     </div>
                                     <div>
-{/* <StatusCustomerToggle
-            // type={props.convertInd ? "primary" : "danger"}
-            // leadsId={item.leadsId}
-            // convertInd={item.convertInd}
-          /> */}
+<StatusPitchToggle
+            type={props.convertInd ? "primary" : "danger"}
+            investorLeadsId={item.investorLeadsId}
+            convertInd={item.convertInd}
+          />
 </div>
                                 </div>
                                 {/* <div class="flex max-sm:flex-row w-full justify-between md:flex-col"> */}

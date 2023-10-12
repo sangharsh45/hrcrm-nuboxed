@@ -10,6 +10,9 @@ const initialState = {
     addingDocumentByPitchId:false,
     addingDocumentByPitchIdError:false,
 
+    linkingPitchStatus:false,
+    linkingPitchStatusError:false,
+
 
     updateTypePitch:false,
     updateTypePitchError:false,
@@ -152,6 +155,23 @@ case types.GET_PITCH_REQUEST:
                   updatePitchById: false,
                   updatePitchByIdError: true,
                 };
+
+
+
+                case types.CONVERT_PITCH_STATUS_REQUEST:
+                  return { ...state, linkingPitchStatus: true };
+                case types.CONVERT_PITCH_STATUS_SUCCESS:
+                  return {
+                    ...state,
+                    linkingPitchStatus: false,
+                   
+                  };
+                case types.CONVERT_PITCH_STATUS_FAILURE:
+                  return {
+                    ...state,
+                    linkingPitchStatus: false,
+                    linkingPitchStatusError: true,
+                  };
 
 
 
