@@ -10,7 +10,7 @@ function IMStatusToggle(props) {
   //   // props.getRequirementsDuration(props.orgId);
   // }, []);
   // const { crmInd } = props.departments;
-  const [crm, setCrm] = React.useState(props.imInd);
+  const [im, setIm] = React.useState(props.imInd);
 console.log("crrm",props.imInd);
   function handleImToggleCollection(item) {
     if (props.imInd) {
@@ -41,9 +41,9 @@ console.log("crrm",props.imInd);
 
   function handleImCancel() {
     if (props.imInd) {
-      setCrm(true);
+      setIm(true);
     } else {
-      setCrm(false);
+      setIm(false);
     }
   }
   return (
@@ -58,7 +58,7 @@ console.log("crrm",props.imInd);
         >
           <Switch
             className="toggle-clr"
-            checked={props.imInd || crm}
+            checked={props.imInd || im}
             // disabled={props.status}
             isLoading={true}
             style={{width: "4rem"}}
