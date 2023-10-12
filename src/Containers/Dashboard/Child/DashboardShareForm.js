@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useMemo } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { getDashUserlist,getJumpBulblist } from "../DashboardAction";
+import { getDashUserlist,getJumpBulblist,getTasklist,getJumpTasklist } from "../DashboardAction";
 import { StyledSelect } from "../../../Components/UI/Antd";
 import moment from "moment";
 const Option =StyledSelect;
@@ -33,6 +33,8 @@ function DashboardShareForm(props) {
     const endDate = `${endDateend.format("YYYY-MM-DD")}T20:00:00Z`
     setselectedUser(usr)
     props.getJumpBulblist(usr,startDate,endDate)
+  props.getTasklist(usr)
+   props.getJumpTasklist(usr,startDate,endDate)
   }
 console.log("usrrr",selectedUser)
 //   const permissionListForAll = props.dashboardUserlist.map((item) => {
@@ -93,7 +95,9 @@ const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
       getDashUserlist,
-      getJumpBulblist
+      getJumpBulblist,
+      getTasklist,
+      getJumpTasklist
     },
     dispatch
   );

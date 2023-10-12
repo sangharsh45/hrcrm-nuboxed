@@ -22,7 +22,7 @@ class ContactInvestActionRight extends React.Component {
       users,
       user,
       role,
-      handleContactModal,
+        handleContactInvestModal
     } = this.props;
     return (
       <div class=" flex  items-center">
@@ -64,7 +64,7 @@ class ContactInvestActionRight extends React.Component {
         <Tooltip placement="left" title="Create">
           <Button 
            type="primary"
-        //    ghost onClick={() => handleContactModal(true)}
+           ghost onClick={() => handleContactInvestModal(true)}
         >
             Add
           </Button>

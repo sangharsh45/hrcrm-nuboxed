@@ -59,13 +59,13 @@ const BussinessCard = (props) => {
           style={{ height: "2.5em" }}
         >
           <FlexContainer style={{ flexBasis: "20%", margin: "0.3rem" }}>
-            {/* <MultiAvatar
+            <MultiAvatar
               primaryTitle={primaryTitle}
             //   imageId={imageId}
             //   imageURL={imageURL}
               imgHeight={"1.56em"}
               imgWidth={"1.56em"}
-            /> */}
+            />
           </FlexContainer>
           <FlexContainer
             flexDirection="column"
@@ -76,7 +76,7 @@ const BussinessCard = (props) => {
               overflow="hidden"
               textOverflow="ellipsis"
               style={{ color: "#337df4", cursor: "pointer" }}
-              //onClick={handleClick}
+              onClick={handleClick}
             >
               {primaryTitle || ""}
             </Title>
@@ -84,9 +84,9 @@ const BussinessCard = (props) => {
               {/* <UserOutlined theme="filled" /> */}
               {/* <i class="far fa-address-book"></i> */}
               &nbsp;&nbsp;
-              {/* {currencyType && <CurrencySymbol currencyType={currencyType} />}
+              {currencyType && <CurrencySymbol currencyType={currencyType} />}
               &nbsp;
-              {secondaryTitle || ""} */}
+              {secondaryTitle || ""} 
             </SubTitle>
           </FlexContainer>
           <FlexContainer

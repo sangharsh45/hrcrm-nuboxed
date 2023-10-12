@@ -54,9 +54,9 @@ import { MainWrapper } from "../../Components/UI/Elements";
     
   // }, []);
   render() {
-    const dataCU=this.props.dashCustoLeadsAdded
-    console.log("dataCOstLe",dataCU)
-    const data=this.props.dashBoardClosureRatio
+    const data=this.props.dashCustoLeadsAdded
+    console.log("dataCOstLe",data)
+    const datar=this.props.dashBoardClosureRatio
   return (
     <>
     <MainWrapper
@@ -77,7 +77,7 @@ import { MainWrapper } from "../../Components/UI/Elements";
     <BarChart
       width={350}
       height={200}
-      data={dataCU}
+      data={data}
       margin={{
         top: 10,
         right: 20,
@@ -86,11 +86,11 @@ import { MainWrapper } from "../../Components/UI/Elements";
       }}
     >
       <CartesianGrid strokeDasharray="3 3" />
-      <XAxis dataKey="Number" />
+      <XAxis dataKey="number" />
       <YAxis />
       <Tooltip />
       <Legend className="recharts-default-legend"/>
-      <Bar dataKey="Number" stackId="a" fill="rgb(0, 192, 239, 0.4)" />
+      <Bar dataKey="number" stackId="a" fill="rgb(0, 192, 239, 0.4)" />
       {/* <Bar dataKey="Selected" stackId="a" fill="#ff715885" />
       <Bar dataKey="Onboarded" stackId="a" fill="orange" />  */}
     </BarChart>

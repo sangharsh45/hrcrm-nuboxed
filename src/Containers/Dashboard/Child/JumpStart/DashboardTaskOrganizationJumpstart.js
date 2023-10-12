@@ -6,7 +6,7 @@ import moment from "moment";
 import { JumpStartBox, Spacer } from "../../../../Components/UI/Elements";
 import { FlexContainer } from "../../../../Components/UI/Layout";
 import {getDateWiseList,getSalesDateWiseList,getJumpBulblist,getJumpBulblist2,
-  getJumpBulblist3,getavgHour,getJumpTasklist} from "../../DashboardAction";
+  getJumpBulblist3,getavgHour,getJumpTasklist,getTasklist} from "../../DashboardAction";
 
 class DashboardTaskOrganizationJumpstart extends React.Component{
   constructor() {
@@ -63,7 +63,7 @@ componentDidMount() {
   const endDate = `${this.state.endDate.format("YYYY-MM-DD")}T20:00:00Z`
   // this.props.getJumpBulblist(this.props.userId,startDate, endDate);
   // this.props.getJumpBulblist2(this.props.userId,startDate,endDate);
-  // this.props.getJumpBulblist3(this.props.userId,startDate,endDate);
+  this.props.getTasklist(this.props.userId);
   this.props.getJumpTasklist(this.props.userId,startDate,endDate);
   //  this.props.getavgHour(this.props.userId, startDate, endDate);
 }
@@ -79,8 +79,8 @@ render() {
             noProgress
             title="Open Tasks"
 
-            // value={this.props.jumpstartBulbCount.qualifiedLeadsList}
-            // isLoading={this.props.user.fetchingJumpstartBulb}
+            value={this.props.taskperCount.totalTask}
+            isLoading={this.props.fetchingTaskper}
           />
        
           <JumpStartBox
@@ -95,10 +95,8 @@ render() {
           <JumpStartBox
             noProgress
             title="High Priority Tasks"
-
-            // value={ this.props.jumpstartTasklistCount.createdLeadsList}
-            //  isLoading={this.props.fetchingJumpstartTasklist}
-            
+            value={ this.props.jumpstartTasklistCount.no}
+            isLoading={this.props.fetchingJumpstartTasklist}
           />
           <JumpStartBox
             noProgress
@@ -138,6 +136,7 @@ const mapStateToProps = ({ dashboard,auth }) => ({
   fetchingAvgHour:dashboard.fetchingAvgHour,
   fetchingJumpstartTasklist:dashboard.fetchingJumpstartTasklist,
   jumpstartTasklistCount:dashboard.jumpstartTasklistCount,
+  taskperCount:dashboard.taskperCount,
               
 });
 
@@ -148,7 +147,8 @@ const mapDispatchToProps = (dispatch) => bindActionCreators({
   getavgHour,
   getJumpBulblist2,
   getJumpBulblist3,
-  getJumpTasklist
+  getJumpTasklist,
+  getTasklist
 }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(DashboardTaskOrganizationJumpstart);
