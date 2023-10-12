@@ -7,7 +7,6 @@ import dayjs from "dayjs";
 import LightbulbIcon from '@mui/icons-material/Lightbulb';
 import { FormattedMessage } from "react-intl";
 import {
- 
   setDashboardViewType,
 } from "../DashboardAction";
 import { Button, Icon, Tooltip,Badge } from "antd";

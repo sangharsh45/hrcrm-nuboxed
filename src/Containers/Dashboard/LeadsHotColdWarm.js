@@ -36,24 +36,17 @@ function LeadsHotColdWarm (props) {
       <>
    
           <div className="grid grid-cols-5 gap-4">
-  {/* {props.tasks.length &&
-    props.tasks.map((item) => {
-      const randomNumber = Math.floor(Math.random() * 100) + 1; */}
-      {/* return ( */}
         <div className="col-span-2 sm:col-span-1">
           <div className="flex">Hot</div>
-          <div class="text-2xl">1</div>
-</div>
+          <div class="text-2xl">{showHotColdWarm.hotList}</div></div>
           <div className="col-span-2 sm:col-span-1">
           <div className="flex">Cold</div>
-          <div class="text-2xl">2</div>
+          <div class="text-2xl">{showHotColdWarm.coldList}</div>
           </div>
           <div className="col-span-2 sm:col-span-1">
           <div className="flex">Warm</div>
-          <div class="text-2xl">3</div>
+          <div class="text-2xl">{showHotColdWarm.warmList}</div>
         </div>
-      {/* ); */}
-    {/* })} */}
 </div>
         
       </>

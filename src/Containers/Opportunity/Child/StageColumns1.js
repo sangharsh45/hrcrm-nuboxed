@@ -51,28 +51,28 @@ class StageColumns1 extends Component {
   
             <OpportunityGroupCard
               isDragging={snapshot.isDragging}
-            //   imageURL={
-            //     opportunity.metaData &&
-            //     opportunity.metaData.account &&
-            //     opportunity.metaData.account.imageURL
-            //   }
-            //   imageId={
-            //     opportunity.metaData &&
-            //     opportunity.metaData.account &&
-            //     opportunity.metaData.account.imageId
-            //   }
+              // imageURL={
+              //   opportunity.metaData &&
+              //   opportunity.metaData.account &&
+              //   opportunity.metaData.account.imageURL
+              // }
+              // imageId={
+              //   opportunity.metaData &&
+              //   opportunity.metaData.account &&
+              //   opportunity.metaData.account.imageId
+              // }
               primaryTitle={`${opportunity.opportunityName || ""}`}
-            //   secondaryTitle={`${opportunity.proposalAmount} ` || ` 0.00 `}
-            //   currencyType={opportunity.currency}
+              secondaryTitle={`${opportunity.proposalAmount} `}
+              currencyType={opportunity.currency}
             //   subtitle1={opportunity.description || "-"}
             //   subtitle2={opportunity.phoneNo || "-"}
               // handlePreview={() => this.props.handleContactDrawer(opportunity, true)}
-            //   handleClick={() =>
-            //     history.push({
-            //       pathname: `opportunity/${opportunity.opportunityId}`,
-            //       state: { opportunityDetail: opportunity },
-            //     })
-            //   }
+              handleClick={() =>
+                history.push({
+                  pathname: `opportunity/${opportunity.opportunityId}`,
+                  state: { opportunityDetail: opportunity },
+                })
+              }
             />
             </div>
             )}
