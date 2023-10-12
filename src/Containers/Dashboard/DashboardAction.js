@@ -1235,6 +1235,36 @@ export const getJumpTasklist = (userId,startDate, endDate) => (dispatch) => {
     });
 };
 
+
+
+
+export const getDashCustomerAddedContacts = (userId,endDate,startDate) => (dispatch) => {
+  dispatch({
+    type: types.GET_DASH_CUSTOMER_ADDED_CONTACTS_REQUEST,
+  });
+  axios
+    .get(`${base_url}/contact/added/count/date-wise/${userId}?endDate=${endDate}&startDate=${startDate}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.GET_DASH_CUSTOMER_ADDED_CONTACTS_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+    
+      dispatch({
+        type: types.GET_DASH_CUSTOMER_ADDED_CONTACTS_FAILURE,
+        payload: err,
+      });
+    });
+};
+
 export const getDashboardTasks = (userId) => (dispatch) => {
   dispatch({
     type: types.GET_DASHBOARD_TASK_REQUEST,

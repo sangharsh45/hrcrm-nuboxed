@@ -228,8 +228,6 @@ const mapStateToProps = ({ dashboard,auth }) => ({
   fetchingTaskper:dashboard.fetchingTaskper,
   userId: auth.userDetails.employeeId,
   dateOfJoining: auth.userDetails && auth.userDetails.dateOfJoining,
-  // endDate: dashboard.endDate,
-  // startDate: dashboard.startDate,
   taskperCount:dashboard.taskperCount,
   avgHour:dashboard.avgHour,
   fetchingAvgHour:dashboard.fetchingAvgHour

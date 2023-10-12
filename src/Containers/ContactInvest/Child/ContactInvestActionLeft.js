@@ -68,9 +68,9 @@ const ContactInvestActionLeft = (props) => {
         >
           <span
             class=" mr-2 text-sm cursor-pointer"
-            // onClick={() => props.setContactsViewType("table")}
+            onClick={() => props.setContactInvetViewType("card")}
             style={{
-              color: props.viewType === "table" && "#1890ff",
+              color: props.viewType === "card" && "#1890ff",
             }}
           >
             <AccountBalanceIcon />

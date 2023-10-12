@@ -13,19 +13,10 @@ import { MainWrapper, FlexContainer } from "../../../Components/UI/Layout";
 import {
     getProcessForOpportunity,
     getProcessStagesForOpportunity,
-  
-
- 
 } from "../../Settings/SettingsAction";
 import {getAllOpportunityListByUserId,updateOpportunitydragstage} from "../OpportunityAction"
-//import { getAccounts } from "../../../Account/AccountAction";
-//import { getOpportunityRelatedData } from "../../../Dashboard/DashboardAction";
-//import { opportunitySelector } from "../../OpportunitySelector";
-//import { getProcess, getProcessStages } from "../../../Settings/SettingsAction";
-//import image from "../../../../../src/Assets/Images/postbox.jpg";
 import { Spin, message, notification, Button } from "antd";
 import { BundleLoader } from "../../../Components/Placeholder";
-//import AddReason from "./AddReason";
 import { CurrencySymbol } from "../../../Components/Common";
 import { wrap } from "lodash";
 const TabPane = StyledTabs.TabPane;
@@ -408,7 +399,7 @@ function OpportunityBoard(props) {
           <BundleLoader />
         ) : ( */}
           
-            <FlexContainer flexWrap="no-wrap">
+            <FlexContainer flexWrap="no-wrap" style={{ justifyContent:"center"}}>
               <DragDropContext
                  onDragEnd={onDragEnd}
                 type="stage"

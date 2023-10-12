@@ -6,7 +6,8 @@ const ContactInvestActionRight = lazy(() =>import("./ContactInvestActionRight"))
 class ContactInvestHeader extends Component {
   render() {
     const {
-      handleContactModal,
+      addContactInvestModal,
+      handleContactInvestModal,
       viewType,
       setContactsViewType,
       currentData,
@@ -25,8 +26,8 @@ class ContactInvestHeader extends Component {
             //   text={this.props.text}
             //   handleClear={this.props.handleClear}
             //   setCurrentData={this.props.setCurrentData}
-            //   viewType={viewType}
-            //   setContactsViewType={setContactsViewType}
+              viewType={viewType}
+              setContactsViewType={setContactsViewType}
             //   currentPartnerData={this.props.currentPartnerData}
             //   handlePartnerClear={this.props.handlePartnerClear}
             //   setCurrentPartnerData={this.props.setCurrentPartnerData}
@@ -38,7 +39,8 @@ class ContactInvestHeader extends Component {
           }
           rightComponent={
             <ContactInvestActionRight 
-            // handleContactModal={handleContactModal} 
+            addContactInvestModal={addContactInvestModal}
+            handleContactInvestModal={handleContactInvestModal}
             // viewType={viewType}
             // currentUser={this.props.currentUser} 
             // handleDropChange={this.props.handleDropChange}

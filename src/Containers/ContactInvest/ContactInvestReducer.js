@@ -1,13 +1,79 @@
 import * as types from "./ContactInvestActionType";
 import moment from "moment";
 const initialState = {
+    viewType:"card",
+
+    addingContactInvest: false, 
+    addContactInvestModal: false,
+
+    fetchingContactsInvest: false,
+    fetchingContactsInvestError: false,
+    contactiNVESTbyId:[],
+
+    updateContactInvestModal:false,
+    updateContactInvestById: false,
 
 };
 
 export const contactInvestReducer = (state = initialState, action) => {
   switch (action.type) {
 
-  
+    case types.SET_CONTACT_INVEST_VIEW_TYPE:
+        return { ...state, viewType: action.payload };
+
+    case types.HANDLE_CONTACT_INVEST_MODAL:
+        return { ...state, addContactInvestModal: action.payload };
+        
+    case types.ADD_CONTACT_INVEST_REQUEST:
+      return { ...state, addingContactInvest: true };
+    case types.ADD_CONTACT_INVEST_SUCCESS:
+      return { ...state, addingContactInvest: false, 
+        addingContactInvest: false,
+        addContactInvestModal:false,
+        contactiNVESTbyId:[action.payload,...state.contactiNVESTbyId]
+       };
+    case types.ADD_CONTACT_INVEST_FAILURE:
+      return { ...state, addingContactInvest: false, addContactInvestModal: false };
+
+      case types.GET_CONTACTS_INVEST_REQUEST:
+        return { ...state, fetchingContactsInvest: true };
+      case types.GET_CONTACTS_INVEST_SUCCESS:
+        return {
+          ...state,
+          fetchingContactsInvest: false,
+          contactiNVESTbyId: [
+            ...state.contactiNVESTbyId,
+            ...action.payload],
+        };
+      case types.GET_CONTACTS_INVEST_FAILURE:
+        return { ...state, fetchingContactsInvest: false, fetchingContactsInvestError: true };
+
+        case types.EMPTY_CONTACT_INVEST_LIST:
+            return { ...state, contactiNVESTbyId:[] };
+    
+            case types.HANDLE_UPDATE_CONTACT_INVEST_MODAL:
+            return {...state, updateContactInvestModal: action.payload}
+
+    case types.UPDATE_CONTACT_INVEST_REQUEST:
+      return { ...state, updateContactInvestById: true };
+    case types.UPDATE_CONTACT_INVEST_SUCCESS:
+      return {
+        ...state,
+        updateContactInvestById: false,
+        updateContactInvestModal: false,
+        contactiNVESTbyId: state.contactiNVESTbyId.map((item) => {
+          if (item.contactId === action.payload.contactId) {
+            return action.payload;
+          } else {
+            return item;
+          }}),};
+    case types.UPDATE_CONTACT_INVEST_FAILURE:
+      return {
+        ...state,
+        updateContactInvestById: false,
+        updateContactInvestByIdError: true,
+      };
+
   default:
       return state;
   }

@@ -4,7 +4,7 @@ import { bindActionCreators } from "redux";
 import { FlexContainer } from "../../Components/UI/Layout";
 import TimeInterval from "../../Utils/TimeInterval";
 import {setSelectedClosureTimeIntervalReport} from "../Opportunity/OpportunityAction";
-import {getDashBoardClosureRatio} from "../Dashboard/DashboardAction";
+import {getDashCustomerAddedContacts} from "../Dashboard/DashboardAction";
 import {
   BarChart,
   Bar,
@@ -33,16 +33,16 @@ import { MainWrapper } from "../../Components/UI/Elements";
   };
   }
   componentDidMount() {
-    const { getDashBoardClosureRatio, userId, startDate, endDate } = this.props;
-    getDashBoardClosureRatio(userId,  startDate, endDate);
+    const { getDashCustomerAddedContacts, userId, startDate, endDate } = this.props;
+    getDashCustomerAddedContacts(userId,  startDate, endDate);
   }
   componentWillReceiveProps(nextProps) {
     if (
       this.props.startDate !== nextProps.startDate ||
       this.props.endDate !== nextProps.endDate
     ) {
-      const { getDashBoardClosureRatio, userId, startDate, endDate } = nextProps;
-      getDashBoardClosureRatio(userId, startDate, endDate);
+      const { getDashCustomerAddedContacts, userId, startDate, endDate } = nextProps;
+      getDashCustomerAddedContacts(userId, startDate, endDate);
     }
   }
 
@@ -53,7 +53,7 @@ import { MainWrapper } from "../../Components/UI/Elements";
     
   // }, []);
   render() {
-    const data=this.props.dashBoardClosureRatio
+    const data=this.props.dashCustoContactsAdded
     console.log("data",data)
   return (
     <>
@@ -84,11 +84,11 @@ import { MainWrapper } from "../../Components/UI/Elements";
       }}
     >
       <CartesianGrid strokeDasharray="3 3" />
-      <XAxis dataKey="name" />
+      <XAxis dataKey="Number" />
       <YAxis />
       <Tooltip />
       <Legend className="recharts-default-legend"/>
-      <Bar dataKey="hours" stackId="a" fill="rgb(0, 192, 239, 0.4)" />
+      <Bar dataKey="Number" stackId="a" fill="rgb(0, 192, 239, 0.4)" />
       {/* <Bar dataKey="Selected" stackId="a" fill="#ff715885" />
       <Bar dataKey="Onboarded" stackId="a" fill="orange" />  */}
     </BarChart>
@@ -98,7 +98,7 @@ import { MainWrapper } from "../../Components/UI/Elements";
 }
  }
 const mapStateToProps = ({ dashboard,auth,opportunity }) => ({
-//   dashBoardCustomerChart:dashboard.dashBoardCustomerChart,
+  dashCustoContactsAdded:dashboard.dashCustoContactsAdded,
   userId: auth.userDetails.userId,
   endDate: opportunity.endDate,
   startDate: opportunity.startDate,
@@ -110,7 +110,7 @@ const mapStateToProps = ({ dashboard,auth,opportunity }) => ({
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
-        getDashBoardClosureRatio,
+      getDashCustomerAddedContacts,
         setSelectedClosureTimeIntervalReport
       
 
