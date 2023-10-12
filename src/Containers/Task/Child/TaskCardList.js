@@ -386,7 +386,7 @@ const TaskCardList = (props) => {
            </Tooltip>
   
    <Tooltip title="Document">
-          {props.userId === item.userId && (
+          {/* {props.userId === item.userId && ( */}
                       <DownloadForOfflineIcon
                         // type="edit"
                         style={{ cursor: "pointer", fontSize: "1rem" }}
@@ -395,7 +395,7 @@ const TaskCardList = (props) => {
                           handleDownloadTaskModal(true);
                         }}
                       />
-                    )}
+                    {/* )} */}
             </Tooltip>
             </div>
                     <div class="flex flex-col w-[2%]">
