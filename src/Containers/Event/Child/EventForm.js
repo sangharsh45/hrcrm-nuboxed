@@ -242,9 +242,10 @@ const {
             values,
             ...rest
           }) => (
+            <div class="overflow-y-auto h-[34rem] overflow-x-hidden max-sm:h-[30rem]">
             <Form className="form-background">
-              <div class=" flex justify-between">
-                <div class=" h-full w-1/2">
+              <div class=" flex justify-between max-sm:flex-col">
+                <div class=" h-full w-1/2 max-sm:w-wk">
                   <Spacer />
                   <Field
                     isRequired
@@ -542,7 +543,7 @@ const {
                     </span>
                   )}
                 </div>
-                <div class=" h-full w-2/5">
+                <div class=" h-full w-2/5 max-sm:w-wk ">
                   <Spacer />
                   <FieldArray
                     name="address"
@@ -645,6 +646,7 @@ const {
                 </Button>
               </div>
             </Form>
+            </div>
           )}
         </Formik>
       </>

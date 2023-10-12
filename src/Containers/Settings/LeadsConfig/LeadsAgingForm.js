@@ -74,11 +74,11 @@ function LeadsAgingForm(props) {
                 </StyledLabel>
                 <Spacer />
 
-                <div className="flex justify-arround">
+                <div className="flex ">
                   <div class="flex justify-evenly">
                     <div
                       style={{
-                        marginTop: "1.87em",
+                      
                         width: "24%",
                         display: "flex",
                       }}
@@ -133,7 +133,7 @@ function LeadsAgingForm(props) {
                   >
                     <div
                       style={{
-                        marginTop: "1.87em",
+                     
                         width: "24%",
                         display: "flex",
                       }}
@@ -149,7 +149,7 @@ function LeadsAgingForm(props) {
 
                     <FlexContainer
                       justifyContent="space-between"
-                      style={{ width: "30%" }}
+                      
                     >
                       <div style={{ width: "22%" }}>
                         <Field
@@ -202,7 +202,7 @@ function LeadsAgingForm(props) {
                   <FlexContainer justifyContent="space-between">
                     <div
                       style={{
-                        marginTop: "1.87em",
+                       
                         width: "24%",
                         display: "flex",
                       }}
@@ -263,7 +263,7 @@ function LeadsAgingForm(props) {
                   >
                     <div
                       style={{
-                        marginTop: "1.87em",
+                       
                         width: "24%",
                         display: "flex",
                       }}
