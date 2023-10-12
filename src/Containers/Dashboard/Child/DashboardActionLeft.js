@@ -100,8 +100,8 @@ const DashboardActionLeft = (props) => {
                onClick={() => setDashboardViewType("ALL")}
               >
                 <FormattedMessage
-                  id="app.organization"
-                  defaultMessage="Organization"
+                  id="app.enterprise"
+                  defaultMessage="Enterprise"
                 />
               </Tag>
             )}

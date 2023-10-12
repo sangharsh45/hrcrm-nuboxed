@@ -2,27 +2,30 @@ import React, { Component, lazy, Suspense } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { FormattedMessage } from "react-intl";
-import {  Tooltip } from "antd";
+import { Tooltip } from "antd";
 import NoteAltIcon from "@mui/icons-material/NoteAlt";
-import MicIcon from '@mui/icons-material/Mic';
+import MicIcon from "@mui/icons-material/Mic";
 import { PlusOutlined } from "@ant-design/icons";
-import InsertDriveFileIcon from '@mui/icons-material/InsertDriveFile';
-import ReactContactSpeechModal from "../ReactContactSpeechModal"
+import InsertDriveFileIcon from "@mui/icons-material/InsertDriveFile";
+// import ReactContactSpeechModal from "../ReactContactSpeechModal"
 import { StyledTabs } from "../../../../../Components/UI/Antd";
 import { TabsWrapper } from "../../../../../Components/UI/Layout";
-import { handleDocumentUploadModal } from "../../../ContactAction";
-import LinkedDocuments from "./Document/LinkedDocuments";
-import AddDocumentModal from "./Document/AddDocumentModal";
-import LinkedContactNotes from "./LinkedContactNotes";
-import OpportunityTable from "./Opportunity/LinkedOpportunity";
-import WorkIcon from '@mui/icons-material/Work';
-import { handleContactOpportunityModal,handleContactReactSpeechModal } from "../../../ContactAction";
-import AddContactOpportunityModal from "../../../Child/ContactDetail/ContactTab/Opportunity/AddContactOpportunityModal";
-import { getOpportunityListByContactId } from "../../../ContactAction";
+// import AddDocumentModal from "./Document/AddDocumentModal";
+// import OpportunityTable from "./Opportunity/LinkedOpportunity";
+import WorkIcon from "@mui/icons-material/Work";
+// import AddContactOpportunityModal from "../../../Child/ContactDetail/ContactTab/Opportunity/AddContactOpportunityModal";
+import {
+  handleContactOpportunityModal,
+  handleContactReactSpeechModal,
+  getOpportunityListByContactId,
+  handleDocumentUploadModal,
+} from "../../../../Contact/ContactAction";
+import LinkedContactInvestNotes from "./ContactInvestNotes/LinkedContactInvestNotes";
+import LinkedContactInvestDocuments from "./ContactInvestDocument/LinkedContactInvestDocuments";
 
 const TabPane = StyledTabs.TabPane;
 
-class ContactDetailTab extends Component {
+class ContactInvestDetailTab extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -34,7 +37,7 @@ class ContactDetailTab extends Component {
   render() {
     const { activeKey } = this.state;
     const {
-      contact: { contactId, firstName, middleName, lastName },
+      contactInVestDetail: { contactId, firstName, middleName, lastName },
       handleDocumentUploadModal,
       documentUploadModal,
       handleContactOpportunityModal,
@@ -48,7 +51,7 @@ class ContactDetailTab extends Component {
       <>
         <TabsWrapper>
           <StyledTabs defaultActiveKey="1" onChange={this.handleTabChange}>
-          {/* <TabPane
+            {/* <TabPane
               tab={
                 <>
                  
@@ -73,51 +76,41 @@ class ContactDetailTab extends Component {
                 <OpportunityTable />
               </Suspense>
             </TabPane> */}
-            
-             <TabPane
+
+            <TabPane
               tab={
                 <>
                   <span>
-                    <NoteAltIcon style={{fontSize:"1.1rem"}}/>
+                    <NoteAltIcon style={{ fontSize: "1.1rem" }} />
                     &nbsp;
-                    <FormattedMessage
-                      id="app.notes"
-                      defaultMessage="Notes"
-                    />
+                    <FormattedMessage id="app.notes" defaultMessage="Notes" />
                     &nbsp;
                     {activeKey === "2" && (
                       <>
-                      
                         <Tooltip title="Voice to Text">
-                      <span                       
-                    onClick={()=>handleContactReactSpeechModal(true)}
-                   >
-                  <MicIcon
-                  style={{fontSize:"1.1rem"}}
-                   />
-                  
-                  </span>
-                  </Tooltip>
-                  </>
+                          <span
+                            onClick={() => handleContactReactSpeechModal(true)}
+                          >
+                            <MicIcon style={{ fontSize: "1.1rem" }} />
+                          </span>
+                        </Tooltip>
+                      </>
                     )}
                   </span>
-                  
-                 
                 </>
               }
               key="2"
             >
               <Suspense fallback={"Loading ..."}>
                 {" "}
-                <LinkedContactNotes />
+                <LinkedContactInvestNotes />
               </Suspense>
             </TabPane>
             <TabPane
               tab={
                 <>
-                 <InsertDriveFileIcon style={{fontSize:"1.1rem"}}/>
-                    <span class=" ml-1">
-                   
+                  <InsertDriveFileIcon style={{ fontSize: "1.1rem" }} />
+                  <span class=" ml-1">
                     <FormattedMessage
                       id="app.documents"
                       defaultMessage="Documents"
@@ -129,13 +122,18 @@ class ContactDetailTab extends Component {
                       <PlusOutlined
                         type="plus"
                         // tooltipTitle="Upload Document"
-                        tooltiptitle={<FormattedMessage
-                          id="app.uploaddocument"
-                          defaultMessage="Upload Document"
-                        />}
+                        tooltiptitle={
+                          <FormattedMessage
+                            id="app.uploaddocument"
+                            defaultMessage="Upload Document"
+                          />
+                        }
                         onClick={() => handleDocumentUploadModal(true)}
                         size="14px"
-                        style={{ marginLeft: "0.25em", verticalAlign: "center" }}
+                        style={{
+                          marginLeft: "0.25em",
+                          verticalAlign: "center",
+                        }}
                       />
                     </>
                   )}
@@ -145,13 +143,13 @@ class ContactDetailTab extends Component {
             >
               <Suspense fallback={"Loading ..."}>
                 {" "}
-                <LinkedDocuments />
+                <LinkedContactInvestDocuments />
               </Suspense>
             </TabPane>
           </StyledTabs>
         </TabsWrapper>
         <Suspense fallback={"Loading..."}>
-          <AddDocumentModal
+          {/* <AddDocumentModal
             documentUploadModal={documentUploadModal}
             handleDocumentUploadModal={handleDocumentUploadModal}
           />
@@ -172,16 +170,16 @@ class ContactDetailTab extends Component {
            contactId={ contactId }
           handleContactReactSpeechModal={handleContactReactSpeechModal}
           addContactSpeechModal={addContactSpeechModal}
-          />
+          /> */}
         </Suspense>
       </>
     );
   }
 }
 const mapStateToProps = ({ contact }) => ({
-  addContactSpeechModal:contact.addContactSpeechModal,
-  documentUploadModal: contact.documentUploadModal,
-  addContactOpportunityModal: contact.addContactOpportunityModal,
+  //   addContactSpeechModal:contact.addContactSpeechModal,
+  //   documentUploadModal: contact.documentUploadModal,
+  //   addContactOpportunityModal: contact.addContactOpportunityModal,
 });
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
@@ -189,9 +187,12 @@ const mapDispatchToProps = (dispatch) =>
       handleDocumentUploadModal,
       handleContactOpportunityModal,
       getOpportunityListByContactId,
-      handleContactReactSpeechModal
+      handleContactReactSpeechModal,
     },
     dispatch
   );
 
-export default connect(mapStateToProps, mapDispatchToProps)(ContactDetailTab);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ContactInvestDetailTab);

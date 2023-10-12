@@ -19,10 +19,17 @@ import { version } from "cheerio";
 import CustomerLeadsTab from "./CustomerLeadsTab";
 import DashboardCustomerOrgJumpstart from "./Child/JumpStart/DashboardCustomerOrgJumpstart";
 import DashCustomerChartTab from "./DashCustomerChartTab";
+import DashboardInvestorsOrgJumpstart from "./Child/JumpStart/DashboardInvestorsOrgJumpstart";
+import InvestorsPitchTab from "./InvestorsPitchTab";
+import DashInvestorsChartTab from "./DashInvestorsChartTab";
 
 
 class Dashboard extends Component {
-  state = { visible: false };
+  state = { visible: false,activeButton:null };
+
+   handleButtonClick=(buttonName)=>{
+    this.setState({activeButton:buttonName});
+  }
 
   showModal = () => {
     this.setState({
@@ -66,6 +73,8 @@ class Dashboard extends Component {
         <Dashboardheader 
         viewType={viewType}
         setDashboardViewType={setDashboardViewType}
+        handleButtonClick={this.handleButtonClick}
+        activeButton={this.state.activeButton}
         />
         <Suspense fallback={<BundleLoader />}>
          <div style={{ display: "flex", justifyContent: "space-between",  }}>
@@ -74,10 +83,13 @@ class Dashboard extends Component {
            {viewType==="ME"?(
              <DashboardJumpstartAll/> )
              :viewType==="bulb" ? (<DashboardBulbJumpstart/>)
-             : viewType==="ALL" || viewType==="taskOrg" ?
+             : 
+               this.state.activeButton==="Tasks" ?
              (<DashboardTaskOrganizationJumpstart/>)
-             : viewType==="custOrg" ?
+             : this.state.activeButton==="Customer" ?
              (<DashboardCustomerOrgJumpstart/>)
+             :this.state.activeButton==="Investors" ?
+             (<DashboardInvestorsOrgJumpstart/>)
              :
              (
               <DashboardJumpstart />
@@ -85,10 +97,12 @@ class Dashboard extends Component {
              <div style={{ width: "-webkit-fill-available" }}>
           <FlexContainer flexDirection="column" style={{ display: "block" }}>
        <FlexContainer justifyContent="space-between" >
-       {viewType==="ALL"  || viewType==="taskOrg" ?(
+       {this.state.activeButton==="Tasks" ?(
        <TaskOrganizationTab/>)
-       : viewType==="custOrg" ?(
+       : this.state.activeButton==="Customer" ?(
         <CustomerLeadsTab/>)
+        :this.state.activeButton==="Investors" ?(
+          <InvestorsPitchTab/>)
         :
        <TaskDashboardTab
       viewType={viewType}
@@ -103,7 +117,10 @@ class Dashboard extends Component {
                  {viewType==="ME"?(
                    <StackedClosureChartAll/>
           
-            ) : viewType==="custOrg" ? (<DashCustomerChartTab/>)
+            ) : this.state.activeButton==="Customer" ? (<DashCustomerChartTab/>)
+            
+            :this.state.activeButton==="Investors" ?
+             (<DashInvestorsChartTab/>)
             :(
               <StackedClosureChart/>
           )}

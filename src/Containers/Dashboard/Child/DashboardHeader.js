@@ -13,7 +13,8 @@ class DashboardHeader extends Component {
           rightComponent={<DashboardActionRight
           viewType={this.props.viewType}
             setDashboardViewType={this.props.setDashboardViewType}
-
+            handleButtonClick={this.props.handleButtonClick}
+            activeButton={this.props.activeButton}
             />}
         />
       </div>

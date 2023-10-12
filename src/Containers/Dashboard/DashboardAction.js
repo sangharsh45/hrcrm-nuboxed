@@ -1260,3 +1260,26 @@ export const getDashCustomerAddedContacts = (userId,endDate,startDate) => (dispa
     });
     
 };
+export const getJumpTask2list = (userId,startDate, endDate) => (dispatch) => {
+  dispatch({ type: types.GET_JUMPSTART_TASK_2_LIST_REQUEST });
+  axios
+    .get(`${base_url}/task/count/deadlineTask/${userId}?endDate=${endDate}&startDate=${startDate}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      // console.log(res)
+      dispatch({
+        type: types.GET_JUMPSTART_TASK_2_LIST_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.GET_JUMPSTART_TASK_2_LIST_FAILURE,
+        payload: err,
+      });
+    });
+};

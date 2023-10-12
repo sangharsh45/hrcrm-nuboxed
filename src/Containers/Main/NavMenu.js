@@ -4,10 +4,13 @@ import { bindActionCreators } from "redux";
 import { Menu, Icon, Popover, Badge } from "antd";
 import { FormattedMessage } from "react-intl";
 import { translateText, getSupportedLanguages } from '../Translate/TranslateService';
-import TimeToLeaveIcon from '@mui/icons-material/TimeToLeave';
+import CurrencyExchangeIcon from '@mui/icons-material/CurrencyExchange';
+import PermContactCalendarIcon from '@mui/icons-material/PermContactCalendar'; 
 import HandshakeIcon from '@mui/icons-material/Handshake';
+import FilePresentIcon from '@mui/icons-material/FilePresent'
 import CellTowerIcon from '@mui/icons-material/CellTower';
 import DashboardIcon from '@mui/icons-material/Dashboard';
+import LocationCityIcon from '@mui/icons-material/LocationCity'; 
 import LightbulbIcon from '@mui/icons-material/Lightbulb';
 import EventAvailableIcon from '@mui/icons-material/EventAvailable';
 import RecentActorsIcon from '@mui/icons-material/RecentActors';
@@ -341,7 +344,7 @@ function NavMenu (props) {
           <hr />
           <Menu.Item key="/pitch " style={{height:"30px",paddingLeft:"1rem"}}>
               <Link to="/pitch">
-                <GroupsIcon
+                <FilePresentIcon
                    style={{ fontSize: "large" }}
                 />
                  <span class="text-white text-ls ml-1">
@@ -352,18 +355,18 @@ function NavMenu (props) {
             </Menu.Item>
             <Menu.Item key="/deal " style={{height:"30px",paddingLeft:"1rem"}}>
               <Link to="/deal">
-              <LightbulbIcon
+              <CurrencyExchangeIcon
                   style={{ fontSize: "large" }}
                 />
                  <span class="text-white text-ls ml-1">
                
-                  {/* {translatedMenuItems[13]} */}Deal 
+                  {/* {translatedMenuItems[13]} */}Deals 
                 </span>
               </Link>
             </Menu.Item>
             <Menu.Item key="/contactInvest" style={{height:"30px",paddingLeft:"1rem"}}>
               <Link to="/contactInvest">
-              <ContactsIcon
+              <PermContactCalendarIcon
                    style={{ fontSize: "large" }}
                 />
                  <span class="text-white text-ls ml-1">
@@ -375,7 +378,7 @@ function NavMenu (props) {
             <Menu.Item key="/investor" style={{height:"30px",paddingLeft:"1rem"}}>
               <Link to="/investor">
             
-                <ApartmentIcon
+                <LocationCityIcon
 
                    style={{ fontSize: "large" }}
                 />
