@@ -131,3 +131,28 @@ export const getInvestorDetailsById = (investorId) => (dispatch) => {
       });
   };
   
+  export const getContactListByInvestorId = (investorId) => (dispatch) => {
+    dispatch({
+      type: types.GET_INVESTOR_CONTACT_REQUEST,
+    });
+    axios
+      .get(`${base_url}/investor/contacts/${investorId}`, {
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+        },
+      })
+      .then((res) => {
+        console.log(res);
+        dispatch({
+          type: types.GET_INVESTOR_CONTACT_SUCCESS,
+          payload: res.data,
+        });
+      })
+      .catch((err) => {
+        console.log(err.response);
+        dispatch({
+          type: types.GET_INVESTOR_CONTACT_FAILURE,
+          payload: err,
+        });
+      });
+  };

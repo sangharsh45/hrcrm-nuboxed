@@ -266,6 +266,7 @@ const TaskCardList = (props) => {
                         {`${moment(item.endDate).format("ll")}`}</div>
                    </div>
                    <div class="flex flex-col md:w-[10%] max-sm:flex-row justify-between w-full">
+                    <div>
   {item.taskStatus === "Completed" && !item.approvedInd && item.assignedToName !== item.submittedBy ? (
     <>
       <div>
@@ -309,6 +310,7 @@ const TaskCardList = (props) => {
       )}
     </>
   )}
+  </div>
 </div>
 
                                 <div class="flex flex-col w-[3%]">
@@ -374,7 +376,7 @@ const TaskCardList = (props) => {
                     </div> */}
                     </div>
                     <div class=" ml-2"></div>
-                    <div class="flex flex-row justify-between w-[3%]">
+                    <div class="flex flex-row justify-between w-[3%] max-sm:mt-4">
                     <Tooltip title="Notes">
        <NoteAltIcon
                 onClick={() => {
