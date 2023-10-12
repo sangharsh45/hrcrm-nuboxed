@@ -15,20 +15,21 @@ import InsertDriveFileIcon from '@mui/icons-material/InsertDriveFile';
 import MicIcon from '@mui/icons-material/Mic';
 import PieChartIcon from '@mui/icons-material/PieChart';
 import ContactsIcon from '@mui/icons-material/Contacts';
-import {
-  handleDocumentUploadModal,
-  getContactListByCustomerId,
-  getOpportunityListByCustomerId,
-  handleCustomerOpportunityModal,
-  handleCustomerProjectDrawer,
-  handleCustomerContactModal,
-  //handleCustomerCommercialsModal,
-  handleRecruitModal,
-  handlefileRecruitModal,
-  handleTagProfileModal,
-  handleInvoiceModal,
-  handleCustomerReactSpeechModal,
-} from "../../../../Customer/CustomerAction";
+// import {
+//   handleDocumentUploadModal,
+//   getOpportunityListByCustomerId,
+//   handleCustomerOpportunityModal,
+//   handleCustomerProjectDrawer,
+//   handleCustomerContactModal,
+//   //handleCustomerCommercialsModal,
+//   handleRecruitModal,
+//   handlefileRecruitModal,
+//   handleTagProfileModal,
+//   handleInvoiceModal,
+//   handleCustomerReactSpeechModal,
+// } from "../../../../Customer/CustomerAction";
+import {getContactListByInvestorId} from "../../../InvestorAction";
+const InvestorLinkedContact =lazy(()=>import("./InvestorContact/InvestorLinkedContact"));
 
 const TabPane = StyledTabs.TabPane;
 
@@ -36,7 +37,7 @@ function handleRefreshPage() {
   window.location.reload();
 }
 
-class ContactDetailTab extends Component {
+class InvestorDetailTab extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -67,7 +68,8 @@ class ContactDetailTab extends Component {
   };
 
   componentDidMount() {
-    this.props.getContactListByCustomerId(this.props.customer.customerId);
+    this.props.
+getContactListByInvestorId(this.props.investorDetails.investorId);
   }
 
   componentWillUnmount() {
@@ -84,7 +86,7 @@ class ContactDetailTab extends Component {
   render() {
     const { activeKey } = this.state;
     const {
-      customer: { customerId, name },
+      investorDetails: { customerId, name },
       handleDocumentUploadModal,
       documentUploadModal,
       handleCustomerReactSpeechModal,
@@ -95,7 +97,8 @@ class ContactDetailTab extends Component {
       handleCustomerProjectDrawer,
       addCustomerOpportunityModal,
       addCustomerProjectDrawer,
-      getContactListByCustomerId,
+      
+getContactListByInvestorId,
       getOpportunityListByCustomerId,
       addInvoiceModal,
       handleInvoiceModal,
@@ -105,7 +108,7 @@ class ContactDetailTab extends Component {
       <>
         <TabsWrapper>
           <StyledTabs defaultActiveKey="1" onChange={this.handleTabChange}>
-            <TabPane
+            {/* <TabPane
               tab={
                 <>
                   <span>
@@ -152,16 +155,16 @@ class ContactDetailTab extends Component {
             >
               <Suspense fallback={"Loading ..."}>
                 {" "}
-                {/* <LinkedOpportunity /> */}
+                <LinkedOpportunity />
               </Suspense>
-            </TabPane>
+            </TabPane> */}
+
             <TabPane
               tab={
                 <>
                   <span>
  <ContactsIcon style={{fontSize:"1.1rem"}}/>
                     <span class=" ml-1">
-                      {/* Contacts */}
                       <FormattedMessage
                         id="app.contacts"
                         defaultMessage="Contacts"
@@ -170,8 +173,7 @@ class ContactDetailTab extends Component {
                   </span>
                   {activeKey === "2" && (
                     <>
-               
-                      <Tooltip //title="Create"
+                      <Tooltip 
                         title={
                           <FormattedMessage
                             id="app.create"
@@ -190,7 +192,7 @@ class ContactDetailTab extends Component {
                               />
                             }
                             onClick={() => {
-                              handleCustomerContactModal(true);
+                              // handleCustomerContactModal(true);
                             }}
                             size="0.875em"
                           />
@@ -204,7 +206,7 @@ class ContactDetailTab extends Component {
             >
               <Suspense fallback={"Loading ..."}>
                 {" "}
-                {/* <LinkedContact /> */}
+                <InvestorLinkedContact investorDetails={this.props.investorDetails}/>
               </Suspense>
             </TabPane>
 
@@ -360,7 +362,8 @@ class ContactDetailTab extends Component {
             addCustomerContactModal={addCustomerContactModal}
             defaultCustomers={[{ label: name, value: customerId }]}
             customerId={{ value: customerId }}
-            callback={() => getContactListByCustomerId(customerId)}
+            callback={() => 
+// getContactListByInvestorId(customerId)}
           />
           <AddInvoiceModal
             addInvoiceModal={addInvoiceModal}
@@ -387,38 +390,40 @@ class ContactDetailTab extends Component {
     );
   }
 }
-const mapStateToProps = ({ auth, customer, contact, opportunity }) => ({
-  documentUploadModal: customer.documentUploadModal,
-  addCustomerContactModal: customer.addCustomerContactModal,
-  addCustomerOpportunityModal: customer.addCustomerOpportunityModal,
-  customerId: customer.customer.customerId,
+const mapStateToProps = ({ auth, customer,investor, contact, opportunity }) => ({
+  // documentUploadModal: customer.documentUploadModal,
+  // addCustomerContactModal: customer.addCustomerContactModal,
+  // addCustomerOpportunityModal: customer.addCustomerOpportunityModal,
+  // customerId: customer.customer.customerId,
   user: auth.userDetails,
-  addCustomerProjectDrawer:customer.addCustomerProjectDrawer,
+  // addCustomerProjectDrawer:customer.addCustomerProjectDrawer,
   userId: auth.userDetails.userId,
-  addCustomerSpeechModal: customer.addCustomerSpeechModal,
-  customer: customer.customer,
-  addRecruitModal: customer.addRecruitModal,
-  addFileRecruitModal: customer.addFileRecruitModal,
-  addTagProfileModal: customer.addTagProfileModal,
-  addInvoiceModal: customer.addInvoiceModal,
+  // addCustomerSpeechModal: customer.addCustomerSpeechModal,
+  // customer: customer.customer,
+  // addRecruitModal: customer.addRecruitModal,
+  // addFileRecruitModal: customer.addFileRecruitModal,
+  // addTagProfileModal: customer.addTagProfileModal,
+  // addInvoiceModal: customer.addInvoiceModal,
+contactsbyInvestorId:investor.contactsbyInvestorId,
 });
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
-      handleDocumentUploadModal,
-      handleCustomerContactModal,
-      handleCustomerOpportunityModal,
-      getContactListByCustomerId,
-      getOpportunityListByCustomerId,
-      handleRecruitModal,
-      handlefileRecruitModal,
-      handleTagProfileModal,
-      handleInvoiceModal,
-      handleCustomerProjectDrawer,
-      handleCustomerReactSpeechModal,
+      // handleDocumentUploadModal,
+      // handleCustomerContactModal,
+      // handleCustomerOpportunityModal,
+      // 
+getContactListByInvestorId,
+      // getOpportunityListByCustomerId,
+      // handleRecruitModal,
+      // handlefileRecruitModal,
+      // handleTagProfileModal,
+      // handleInvoiceModal,
+      // handleCustomerProjectDrawer,
+      // handleCustomerReactSpeechModal,
       //handleCustomerCommercialsModal,
     },
     dispatch
   );
 
-export default connect(mapStateToProps, mapDispatchToProps)(ContactDetailTab);
+export default connect(mapStateToProps, mapDispatchToProps)(InvestorDetailTab);

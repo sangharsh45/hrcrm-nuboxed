@@ -17,7 +17,11 @@ const initialState = {
 
     fetchingInvestorDetailsById: false,
     fetchingInvestorDetailsByIdError: false,
-    investorDetails:{}
+    investorDetails:{},
+
+    fetchingsInvestorContact: false,
+   fetchingsInvestorContactError:false,
+   contactsbyInvestorId:[],
 };
 export const investorReducer = (state = initialState, action) => {
     switch (action.type) {
@@ -95,6 +99,21 @@ case types.SET_INVESTOR_VIEW_TYPE:
           fetchingInvestorDetailsByIdError: true,
         };
 
+        case types.GET_INVESTOR_CONTACT_REQUEST:
+          return { ...state, fetchingsInvestorContact: true };
+        case types.GET_INVESTOR_CONTACT_SUCCESS:
+          return {
+            ...state,
+            fetchingsInvestorContact: false,
+            contactsbyInvestorId: action.payload,
+          };
+        case types.GET_INVESTOR_CONTACT_FAILURE:
+          return {
+            ...state,
+            fetchingsInvestorContact: false,
+            fetchingsInvestorContactError: true,
+          };     
+           
     default:
       return state;
   }
