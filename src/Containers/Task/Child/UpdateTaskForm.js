@@ -247,6 +247,7 @@ function UpdateTaskForm(props) {
           {
             taskType: props.setEditingTask.taskType || "",
             link:props.setEditingTask.link || "",
+            documentId:"",
             taskName: props.setEditingTask.taskName || "",
             value: props.setEditingTask.value || "",
             taskDescription: props.setEditingTask.taskDescription || "",
@@ -636,6 +637,13 @@ function UpdateTaskForm(props) {
                   </div>
                
                 </div>
+                <div class=" w-full mt-4">
+                        <Field
+                          name="documentId"
+                          isRequired
+                          component={DragableUpload}
+                        />
+                      </div>
 
                 <div class=" flex justify-between">
                   {values.taskTypeId === "TSK52434477391272022" && (

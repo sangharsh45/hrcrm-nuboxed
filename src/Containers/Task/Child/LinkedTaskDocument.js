@@ -61,18 +61,25 @@ const LinkedTaskDocument = (props) => {
                                     <span         
                >
 
-                 {`${item.taskName} `} &nbsp;
+                 {`${item.documentName} `} &nbsp;
 
 
                </span>
                                     </div>
                                 </div>
                                 <div className=" flex font-medium flex-col md:w-32 max-sm:flex-row w-full justify-between ">
-                                  <div class="text-[0.875rem] text-cardBody font-poppins">Type</div>
+                                  <div class="text-[0.875rem] text-cardBody font-poppins">Creation Date</div>
                                   <div class="text-[0.75rem] text-cardBody font-poppins">
-                                  <span>{` ${moment(item.assignedOn).format("ll")}`}</span>
+                                  <span>{` ${moment(item.creationDate).format("ll")}`}</span>
                                   </div>
                               </div>
+                              <div className=" flex font-medium flex-col md:w-32 max-sm:flex-row w-full justify-between ">
+                                  <div class="text-[0.875rem] text-cardBody font-poppins">Uploaded By</div>
+                                  <div class="text-[0.75rem] text-cardBody font-poppins">
+                                  <span>{` ${item.uploadedBy}`}</span>
+                                  </div>
+                              </div>
+                            
                               <div>
            
      
@@ -84,7 +91,7 @@ const LinkedTaskDocument = (props) => {
                                defaultMessage="Do you wish to delete?"
                              />
                            }
-                           onConfirm={() => deleteDocumentTask(props.item.taskId)}
+                           onConfirm={() => deleteDocumentTask(item.documentId)}
                          >
                            <DeleteIcon
                              type="delete"

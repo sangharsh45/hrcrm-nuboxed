@@ -1234,3 +1234,31 @@ export const getJumpTasklist = (userId,startDate, endDate) => (dispatch) => {
       });
     });
 };
+
+export const getDashboardTasks = (userId) => (dispatch) => {
+  dispatch({
+    type: types.GET_DASHBOARD_TASK_REQUEST,
+  });
+  axios
+    .get(`${base_url}/task/type/count/${userId}`, {
+     
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.GET_DASHBOARD_TASK_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.GET_DASHBOARD_TASK_FAILURE,
+        payload: err,
+      });
+    });
+};
