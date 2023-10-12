@@ -33,7 +33,7 @@ class TaskOrganizationNew extends Component {
   }
   handleClear = () => {
     this.setState({ currentData: "" });
-    this.props.getTasks();
+    this.props.getTasks(this.props.userId);
   };
   setCurrentData = (value) => {
     this.setState({ currentData: value });
@@ -102,7 +102,7 @@ class TaskOrganizationNew extends Component {
   // };
   componentDidMount() {
    
-    this.props.getTasks();
+    this.props.getTasks(this.props.userId);
     // this.getLinkedSources();
   }
   render() {
@@ -140,13 +140,11 @@ class TaskOrganizationNew extends Component {
   }
 }
 
-const mapStateToProps = ({ tasks }) => ({
+const mapStateToProps = ({ tasks,auth }) => ({
   addingTasks: tasks.addingTasks,
   addingTasksError: tasks.addingTasksError,
   tasks: tasks.tasks,
-
-  // removingTasks: tasks.removingTasks,
-  // removingTasksError: tasks.removingTasksError,
+  userId:auth.userDetails.userId,
   
   fetchingTasks:tasks.fetchingTasks,
   fetchingTasksError: tasks.fetchingTasksError,

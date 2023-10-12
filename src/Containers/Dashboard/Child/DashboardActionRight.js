@@ -17,24 +17,25 @@ import TimeInterval from "../../../Utils/TimeInterval";
 
 const HeaderActionRight = (props) => {
   const {
-
     setSelectedTimeIntervalReport,
     dateRangeList,
     viewType,
     setDashboardViewType,
+    handleButtonClick,
+    activeButton,
     user,
   } = props;
 
-  console.log("vww",viewType)
   return (
     <>
       <FlexContainer alignItems="center" >
         
         {viewType==="ALL"  && (
         <span 
-        onClick={() =>  setDashboardViewType("taskOrg")} 
+        onClick={() => handleButtonClick("Tasks")} 
         style={{
-          color:viewType === "taskOrg" && "#1890ff",
+          color:activeButton === "Tasks" && "#1890ff",
+          cursor:"pointer"
         }}
         >
           Tasks
@@ -42,22 +43,39 @@ const HeaderActionRight = (props) => {
         )}
         &nbsp;
         {viewType==="ALL" && (
-        <span onClick={() => setDashboardViewType("custOrg")}>
+        <span 
+        onClick={() => handleButtonClick("Customer")} 
+        style={{
+          color:activeButton === "Customer" && "#1890ff",
+          cursor:"pointer"
+        }}
+        >
+
           
            Customer
         </span>
         )}
         &nbsp;
         {viewType==="ALL" && (
-        <span onClick={() => setDashboardViewType("invOrg")}>
-          
+        <span 
+        onClick={() => handleButtonClick("Investors")} 
+        style={{
+          color:activeButton === "Investors" && "#1890ff",
+          cursor:"pointer"
+        }}
+        >     
            Investors
-     
         </span>
         )}
     &nbsp;
     {viewType==="ALL" && (
-        <span onClick={() => setDashboardViewType("accOrg")}>
+        <span 
+        onClick={() => handleButtonClick("Accounts")} 
+        style={{
+          color:activeButton === "Accounts" && "#1890ff",
+          cursor:"pointer"
+        }}
+        >
           Accounts
         </span>
         )}

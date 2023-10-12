@@ -102,3 +102,29 @@ export const updateContactInvest=(data,contactId)=>(dispatch)=>{
       });
     });
 }
+
+export const getContactInvestByContactId = (contactId) => (dispatch) => {
+  dispatch({
+    type: types.GET_CONTACT_INVEST_BY_CONTACT_ID_REQUEST,
+  });
+  axios
+    .get(`${base_url}/contact/${contactId}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.GET_CONTACT_INVEST_BY_CONTACT_ID_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.GET_CONTACT_INVEST_BY_CONTACT_ID_FAILURE,
+        payload: err,
+      });
+    });
+};

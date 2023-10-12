@@ -150,42 +150,9 @@ const Pitch=lazy(()=>import("../Pitch/Pitch"));
 const Deal=lazy(()=>import("../Deal/Deal"));
 const ContactInvest=lazy(()=>import("../ContactInvest/ContactInvest"));
 const Investor=lazy(()=>import("../Investor/Investor"));
-const InvestorDetail = lazy(() =>
-  import("../Investor/Child/InvestorDetail/InvestorDetail")
-);
-// const Users = lazy(() => import("../Users/Users"));
+const InvestorDetail = lazy(() =>import("../Investor/Child/InvestorDetail/InvestorDetail"));
+const ContactInvestDetail = lazy(() =>import("../ContactInvest/Child/ContactInvestDetail/ContactInvestDetail"));
 
-// class MainApp extends React.Component {
-//   constructor(props) {
-//     super(props);
-//     this.state = {
-//       collapsed: false,
-//       theme: "light",
-//     };
-//   }
-
-//   toggle = () => {
-//     this.setState({
-//       collapsed: !this.state.collapsed,
-//     });
-//   };
-//   toggleTheme = (value) => {
-//     this.setState({
-//       theme: value ? "light" : "light",
-//     });
-//   };
-// componentDidMount = () => {
-//   const { user, getPresentNotifications } = this.props;
-//   if (user && user.userId) {
-//     getPresentNotifications(user.userId);
-//   }
-// };
-// componentWillReceiveProps(nextProps) {
-//   const { user, getPresentNotifications } = nextProps;
-//   if (user.userId !== this.props.user.userId) {
-//     getPresentNotifications(user.userId);
-//   }
-// }
 function MainApp(props) {
   const [visible, setVisible] = useState(false);
   const [confirmLoading, setConfirmLoading] = useState(false);
@@ -196,7 +163,6 @@ function MainApp(props) {
 
   useEffect(() => {
     props.getOpportunityRecord(props.userId);
-    // props.getRequirementRecord();
   }, []);
 
  
@@ -740,11 +706,9 @@ function MainApp(props) {
                       <Route exact path="/deal" component={Deal}/>
                       <Route exact path="/contactInvest" component={ContactInvest}/>
                       <Route exact path="/investor" component={Investor}/>
-                      <Route
-                        exact
-                        path="/investor/:investorId"
-                        component={InvestorDetail}
-                      />
+                      <Route exact path="/investor/:investorId"  component={InvestorDetail} />
+                      <Route exact path="/contactinvest/:contactId"  component={ContactInvestDetail} />
+                      
                       <Route path="**" component={PageNotFound} />
                     </Switch>
                   </Suspense>

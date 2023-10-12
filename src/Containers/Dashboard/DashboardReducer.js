@@ -294,6 +294,10 @@ const initialState = {
   fetchingdashCustoContactsAdded: false,
   fetchingdashCustoContactsAddedError: false,
   dashCustoContactsAdded:[],
+
+  fetchingJumpstartTask2list: false,
+  fetchingJumpstartTask2listError: false,
+  jumpstartTask2listCount:{},
 };
 
 export const dashboardReducer = (state = initialState, action) => {
@@ -1070,6 +1074,29 @@ case types.GET_JUMPSTART_CUSTOMER2_LIST_REQUEST:
                   fetchingdashCustoContactsAdded: false,
                   fetchingdashCustoContactsAddedError: true,
                 };
+
+                case types.GET_JUMPSTART_TASK_2_LIST_REQUEST:
+                  return {
+                    ...state,
+                    fetchingJumpstartTask2list: true,
+                    fetchingJumpstartTask2listError: false,
+                  };
+                case types.GET_JUMPSTART_TASK_2_LIST_SUCCESS:
+                  return {
+                    ...state,
+                    fetchingJumpstartTask2list: false,
+                    fetchingJumpstartTask2listError: false,
+                    jumpstartTask2listCount: action.payload,
+                  };
+                case types.GET_JUMPSTART_TASK_2_LIST_FAILURE:
+                  return {
+                    ...state,
+                    fetchingJumpstartTask2list: false,
+                    fetchingJumpstartTask2listError: true,
+                  };
+
+
+
     default:
       return state;
   }

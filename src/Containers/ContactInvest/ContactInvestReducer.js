@@ -13,6 +13,9 @@ const initialState = {
     updateContactInvestModal:false,
     updateContactInvestById: false,
 
+    fetchingContactInvestByContactId: false,
+   fetchingContactInvestByContactIdError: false,
+   contactInVestDetail:{},
 };
 
 export const contactInvestReducer = (state = initialState, action) => {
@@ -74,11 +77,26 @@ export const contactInvestReducer = (state = initialState, action) => {
         updateContactInvestByIdError: true,
       };
 
-  default:
+      case types.GET_CONTACT_INVEST_BY_CONTACT_ID_REQUEST:
+        return { ...state, fetchingContactInvestByContactId: true };
+      case types.GET_CONTACT_INVEST_BY_CONTACT_ID_SUCCESS:
+        return {
+          ...state,
+          fetchingContactInvestByContactId: false,
+          contactInVestDetail: action.payload,
+        };
+      case types.GET_CONTACT_INVEST_BY_CONTACT_ID_FAILURE:
+        return {
+          ...state,
+          fetchingContactInvestByContactId: false,
+          fetchingContactInvestByContactIdError: true,
+        }; 
+  
+  
+  
+      default:
       return state;
   }
-
-
 };
 
 const newDateRange = (dateRange, newDate) =>

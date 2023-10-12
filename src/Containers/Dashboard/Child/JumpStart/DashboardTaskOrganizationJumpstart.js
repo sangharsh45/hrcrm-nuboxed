@@ -6,7 +6,7 @@ import moment from "moment";
 import { JumpStartBox, Spacer } from "../../../../Components/UI/Elements";
 import { FlexContainer } from "../../../../Components/UI/Layout";
 import {getDateWiseList,getSalesDateWiseList,getJumpBulblist,getJumpBulblist2,
-  getJumpBulblist3,getavgHour,getJumpTasklist,getTasklist} from "../../DashboardAction";
+  getJumpBulblist3,getavgHour,getJumpTasklist,getTasklist,getJumpTask2list} from "../../DashboardAction";
 
 class DashboardTaskOrganizationJumpstart extends React.Component{
   constructor() {
@@ -65,7 +65,7 @@ componentDidMount() {
   // this.props.getJumpBulblist2(this.props.userId,startDate,endDate);
   this.props.getTasklist(this.props.userId);
   this.props.getJumpTasklist(this.props.userId,startDate,endDate);
-  //  this.props.getavgHour(this.props.userId, startDate, endDate);
+   this.props.getJumpTask2list(this.props.userId, startDate, endDate);
 }
   
 render() {
@@ -86,8 +86,8 @@ render() {
           <JumpStartBox
             noProgress
             title="Tasks > Deadline"
-            // value={}
-            // isLoading={this.props.fetchingAvgHour} 
+            // value={ this.props.jumpstartTask2listCount.no}
+            isLoading={this.props.fetchingJumpstartTask2list}
      
     
           />
@@ -132,11 +132,11 @@ const mapStateToProps = ({ dashboard,auth }) => ({
   fetchingJumpstartBulb:dashboard.fetchingJumpstartBulb,
   fetchingJumpstartBulb2:dashboard.fetchingJumpstartBulb2,
   fetchingJumpstartBulb3:dashboard.fetchingJumpstartBulb3,
-  avgHour:dashboard.avgHour,
-  fetchingAvgHour:dashboard.fetchingAvgHour,
   fetchingJumpstartTasklist:dashboard.fetchingJumpstartTasklist,
   jumpstartTasklistCount:dashboard.jumpstartTasklistCount,
   taskperCount:dashboard.taskperCount,
+  fetchingJumpstartTask2list:dashboard.fetchingJumpstartTask2list,
+  jumpstartTask2listCount:dashboard.jumpstartTask2listCount,
               
 });
 
@@ -148,7 +148,8 @@ const mapDispatchToProps = (dispatch) => bindActionCreators({
   getJumpBulblist2,
   getJumpBulblist3,
   getJumpTasklist,
-  getTasklist
+  getTasklist,
+  getJumpTask2list
 }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(DashboardTaskOrganizationJumpstart);
