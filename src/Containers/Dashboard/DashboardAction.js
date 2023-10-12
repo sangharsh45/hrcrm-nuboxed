@@ -1234,6 +1234,10 @@ export const getJumpTasklist = (userId,startDate, endDate) => (dispatch) => {
       });
     });
 };
+
+
+
+
 export const getDashCustomerAddedContacts = (userId,endDate,startDate) => (dispatch) => {
   dispatch({
     type: types.GET_DASH_CUSTOMER_ADDED_CONTACTS_REQUEST,
@@ -1252,11 +1256,39 @@ export const getDashCustomerAddedContacts = (userId,endDate,startDate) => (dispa
       });
     })
     .catch((err) => {
-      console.log(err.response);
+      console.log(err);
+    
       dispatch({
         type: types.GET_DASH_CUSTOMER_ADDED_CONTACTS_FAILURE,
         payload: err,
       });
     });
-    
+};
+
+export const getDashboardTasks = (userId) => (dispatch) => {
+  dispatch({
+    type: types.GET_DASHBOARD_TASK_REQUEST,
+  });
+  axios
+    .get(`${base_url}/task/type/count/${userId}`, {
+     
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.GET_DASHBOARD_TASK_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.GET_DASHBOARD_TASK_FAILURE,
+        payload: err,
+      });
+    });
 };

@@ -7,6 +7,10 @@ const initialState = {
   fetchingSkillsCloudError: false,
   skillsCloud: [],
 
+  fetchingDashboardTasks: false,
+  fetchingDashboardTasksError: false,
+  dashboardTasks:[],
+
   fetchingdashboardTable: false,
   fetchingdashboardTableError: false,
   tableDashboard: [],
@@ -1036,6 +1040,22 @@ case types.GET_JUMPSTART_CUSTOMER2_LIST_REQUEST:
                 fetchingJumpstartTasklist: false,
                 fetchingJumpstartTasklistError: true,
               };
+
+              case types.GET_DASHBOARD_TASK_REQUEST:
+    return { ...state, fetchingDashboardTasks: true };
+  case types.GET_DASHBOARD_TASK_SUCCESS:
+    return {
+      ...state,
+      fetchingDashboardTasks: false,
+      dashboardTasks: action.payload,
+    };
+  case types.GET_DASHBOARD_TASK_FAILURE:
+    return {
+      ...state,
+      fetchingDashboardTasks: false,
+      fetchingDashboardTasksError: true,
+    };
+
               case types.GET_DASH_CUSTOMER_ADDED_CONTACTS_REQUEST:
                 return { ...state, fetchingdashCustoContactsAdded: true };
               case types.GET_DASH_CUSTOMER_ADDED_CONTACTS_SUCCESS:
