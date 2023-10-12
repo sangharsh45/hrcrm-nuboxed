@@ -58,6 +58,8 @@ const AccessForm = (props) => {
     setCheckedJunkList(props.departmentAcces.junk)
     setCheckedInvestorList(props.departmentAcces.investor)
     setCheckedInvestorContactList(props.departmentAcces.investorContact)
+    setCheckedDealList(props.departmentAcces.deal)
+    setCheckedPitchList(props.departmentAcces.pitch)
     
   }, [props.departmentAcces.vendor,
   props.departmentAcces.customer,
@@ -92,6 +94,8 @@ const AccessForm = (props) => {
   props.departmentAcces.junk,
   props.departmentAcces.investor,
   props.departmentAcces.investorContact,
+  props.departmentAcces.deal,
+  props.departmentAcces.pitch,
   
 ])
   //Vendor
@@ -685,6 +689,41 @@ const AccessForm = (props) => {
   };
 
 
+    //Deal
+  const [checkedDealList, setCheckedDealList] = useState(props.departmentAcces.deal);
+  const [indeterminateDeal, setIndeterminateDeal] = useState(true);
+  const [checkAllDeal, setCheckAllDeal] = useState(false);
+
+  const onDealChange = (list) => {
+    setCheckedDealList(list);
+    setIndeterminateDeal(!!list.length && list.length < plainOptions.length);
+    setCheckAllDeal(list.length === plainOptions.length);
+  };
+
+  const onCheckAllDealChange = (e) => {
+    setCheckedDealList(e.target.checked ? plainOptions : []);
+    setIndeterminateDeal(false);
+    setCheckAllDeal(e.target.checked);
+  };
+
+  //Pitch
+  const [checkedPitchList, setCheckedPitchList] = useState(props.departmentAcces.pitch);
+  const [indeterminatePitch, setIndeterminatePitch] = useState(true);
+  const [checkAllPitch, setCheckAllPitch] = useState(false);
+
+  const onPitchChange = (list) => {
+    setCheckedPitchList(list);
+    setIndeterminatePitch(!!list.length && list.length < plainOptions.length);
+    setCheckAllPitch(list.length === plainOptions.length);
+  };
+
+  const onCheckAllPitchChange = (e) => {
+    setCheckedPitchList(e.target.checked ? plainOptions : []);
+    setIndeterminatePitch(false);
+    setCheckAllPitch(e.target.checked);
+  };
+
+
 
   function handleUpdateAccess() {
     let data = {
@@ -721,6 +760,8 @@ const AccessForm = (props) => {
       junk:checkedJunkList || [],
       investor:checkedInvestorList || [],
       investorContact:checkedInvestorContactList || [],
+      deal:checkedDealList || [],
+      pitch:checkedPitchList || [],
       
       departmentId: props.departmentId,
       roleTypeId:props.roleTypeId,
@@ -1019,7 +1060,7 @@ const AccessForm = (props) => {
           </div>
           : null }
 
-{/* {props.departmentData.crmInd === true ?  */}
+{props.departmentData.imInd === true ? 
     <div>     
             <h1 class=" text-clr font-bold">IM</h1>
             <Spacer />
@@ -1053,21 +1094,21 @@ const AccessForm = (props) => {
               <FlexContainer justifyContent="space-around">
               <div >
                   <h1 class="text-sm">Deal</h1>
-                  <Checkbox indeterminate={indeterminateOpportunity} onChange={onCheckAllOpportunityChange} checked={checkAllOpportunity}>
+                  <Checkbox indeterminate={indeterminateDeal} onChange={onCheckAllDealChange} checked={checkAllDeal}>
                   <label class="text-xs">  Check all </label>
                   </Checkbox>
                   <Divider />
-                  <CheckboxGroup options={plainOptions} value={checkedOpportunityList} onChange={onOpportunityChange} />
+                  <CheckboxGroup options={plainOptions} value={checkedDealList} onChange={onDealChange} />
 
                 </div>
                 <Spacer />
                 <div >
                   <h1 class="text-sm">Pitch</h1>
-                  <Checkbox indeterminate={indeterminateLeads} onChange={onCheckAllLeadsChange} checked={checkAllLeads}>
+                  <Checkbox indeterminate={indeterminatePitch} onChange={onCheckAllPitchChange} checked={checkAllPitch}>
                   <label class="text-xs">  Check all </label>
                   </Checkbox>
                   <Divider />
-                  <CheckboxGroup options={plainOptions} value={checkedLeadsList} onChange={onLeadsChange} />
+                  <CheckboxGroup options={plainOptions} value={checkedPitchList} onChange={onPitchChange} />
 
                 </div>
             
@@ -1083,7 +1124,7 @@ const AccessForm = (props) => {
               </FlexContainer>
               <Spacer />
               </div> 
-              {/* : null }  */}
+             : null } 
                
               <h4 class="mt-2">Updated on {dayjs(props.departmentAcces.lastUpdatedOn).format("ll")} by {props.departmentAcces.name}</h4>
               

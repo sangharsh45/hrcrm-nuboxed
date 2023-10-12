@@ -3,20 +3,17 @@ import styled from "styled-components";
 import { FormattedMessage } from "react-intl";
 import DeleteIcon from '@mui/icons-material/Delete';
 import BorderColorIcon from '@mui/icons-material/BorderColor';
-import {deleteOpportunityStagesData} from "../../../../Settings/SettingsAction";
+// import {deleteOpportunityStagesData} from "../../../../Settings/SettingsAction";
 import { Button, Tooltip,Switch, Divider, Popconfirm } from "antd";
-import { FlexContainer } from "../../../../../Components/UI/Layout";
+import { FlexContainer } from "../../../../../../Components/UI/Layout";
 import { Formik, Form, Field,FastField } from "formik";
-import { TextInput, Spacer, Select } from "../../../../../Components/UI/Elements";
-import { ActionIcon } from "../../../../../Components/Utils";
-import { elipsize } from "../../../../../Helpers/Function/Functions";
-import { ViewEditCard } from "../../../../../Components/UI/Elements";
-import { EditOutlined } from "@ant-design/icons";
-import AddApprovalModal from "./AddApprovalModal";
-import {handleApprovalModal,} from "../../../SettingsAction";
+import { TextInput, Spacer, Select } from "../../../../../../Components/UI/Elements";
+import { ActionIcon } from "../../../../../../Components/Utils";
+import { elipsize } from "../../../../../../Helpers/Function/Functions";
+import { ViewEditCard } from "../../../../../../Components/UI/Elements";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { StyledPopconfirm } from "../../../../../Components/UI/Antd";
+import { StyledPopconfirm } from "../../../../../../Components/UI/Antd";
 const { Option } = Select;
 
 class SingleDealsStages extends Component {
@@ -49,11 +46,11 @@ class SingleDealsStages extends Component {
 
   render() {
     console.log(this.state.fields);
-    const { opportunityProcessStages } = this.props;
-    console.log(opportunityProcessStages);
+    const { dealsProcessStages } = this.props;
+    console.log(dealsProcessStages);
 
     const {
-        opportunityProcessStages: {
+      dealsProcessStages: {
         stageName,
         opportunityStagesId,
         deleteOpportunityStagesData,
@@ -132,7 +129,7 @@ class SingleDealsStages extends Component {
               title="Do you want to delete?"
               okText="Yes"
               cancelText="No"
-               onConfirm={() => deleteOpportunityStagesData(opportunityStagesId)}
+              //  onConfirm={() => deleteOpportunityStagesData(opportunityStagesId)}
             >
                {/* {user.opportunityDeleteInd ===true && ( */}
                {probability !== 0 && probability !== 100 && (
@@ -142,7 +139,7 @@ class SingleDealsStages extends Component {
                {/* )} */}
             </Popconfirm>
                     </>
-                   <Tooltip title="Approval" >
+                   {/* <Tooltip title="Approval" >
                     <span
                     onClick={(item) => 
                      {
@@ -159,10 +156,10 @@ class SingleDealsStages extends Component {
                    )}
                    </span>
                    </Tooltip>
-                   &nbsp; 
-                   <span>
+                   &nbsp;  */}
+                   {/* <span>
                        
-                     {opportunityProcessStages.probability === 0 || opportunityProcessStages.probability === 100 ? null :
+                     {dealsProcessStages.probability === 0 || dealsProcessStages.probability === 100 ? null :
                 
                 <Button
                      onClick={() =>
@@ -177,7 +174,7 @@ class SingleDealsStages extends Component {
                              
                              </Button> 
                              }
-                   </span>
+                   </span> */}
 
                   
 
@@ -266,11 +263,6 @@ class SingleDealsStages extends Component {
               </FlexContainer>
             )
           }
-
-            {/* <AddApprovalModal
-        handleApprovalModal={this.props.handleApprovalModal}
-        addRecruitmentApprovalModal={this.props.addRecruitmentApprovalModal}
-        /> */}
         </ViewEditCard>  
 
          
@@ -294,8 +286,8 @@ const mapStateToProps = ({ settings, auth }) => ({
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
-      handleApprovalModal,
-      deleteOpportunityStagesData,
+    
+      // deleteOpportunityStagesData,
       
      
     },

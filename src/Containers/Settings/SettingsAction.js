@@ -3541,6 +3541,119 @@ export const addLeadsaging = (data) => (dispatch) => {
     });
 };
 
+export const addProcessForDeals = (data, orgId, cb) => (
+  dispatch
+) => {
+  dispatch({
+    type: types.ADD_PROCESS_FOR_DEALS_REQUEST,
+  });
+
+  axios
+    .post(`${base_url}/workflow/investorOpportunityWorkflow`, data, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+       dispatch(getProcessForDeals(orgId));
+      dispatch({
+        type: types.ADD_PROCESS_FOR_DEALS_SUCCESS,
+        payload: res.data,
+      });
+      cb && cb("success");
+    })
+    .catch((err) => {
+      dispatch({
+        type: types.ADD_PROCESS_FOR_DEALS_FAILURE,
+        payload: err,
+      });
+      cb && cb("failure");
+    });
+};
+
+export const getProcessForDeals = (orgId) => (dispatch) => {
+  debugger;
+  dispatch({
+    type: types.GET_PROCESS_FOR_DEALS_REQUEST,
+  });
+  axios
+    .get(`${base_url}/workflow/investorOpportunityWorkflow/${orgId}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log("print when new process added................", res);
+      dispatch({
+        type: types.GET_PROCESS_FOR_DEALS_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.GET_PROCESS_FOR_DEALS_FAILURE,
+        payload: err,
+      });
+    });
+};
+
+
+export const addProcessStageForDeals = (stage, cb) => (dispatch) => {
+  dispatch({ type: types.ADD_PROCESS_STAGE_FOR_DEALS_REQUEST });
+
+  axios
+    .post(`${base_url}/investorOpportunityWorkflow/opportunityStages`, stage, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.ADD_PROCESS_STAGE_FOR_DEALS_SUCCESS,
+        payload: { ...stage, stageId: res.data },
+      });
+      cb && cb("Success");
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.ADD_PROCESS_STAGE_FOR_DEALS_FAILURE,
+      });
+      cb && cb("Failure");
+    });
+};
+
+
+export const getProcessStagesForDeals = (investorOppWorkflowId) => (
+  dispatch
+) => {
+  dispatch({
+    type: types.GET_PROCESS_STAGES_FOR_DEALS_REQUEST,
+  });
+  axios
+    .get(`${base_url}/investorOpportunityWorkflow/opportunityStages/${investorOppWorkflowId}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.GET_PROCESS_STAGES_FOR_DEALS_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.GET_PROCESS_STAGES_FOR_DEALS_FAILURE,
+        payload: err,
+      });
+    });
+};
 
 
 
