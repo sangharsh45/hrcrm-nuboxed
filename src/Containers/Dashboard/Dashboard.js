@@ -21,6 +21,7 @@ import DashboardCustomerOrgJumpstart from "./Child/JumpStart/DashboardCustomerOr
 import DashCustomerChartTab from "./DashCustomerChartTab";
 import DashboardInvestorsOrgJumpstart from "./Child/JumpStart/DashboardInvestorsOrgJumpstart";
 import InvestorsPitchTab from "./InvestorsPitchTab";
+import GantChartTab from "./Child/GantChartTab"
 import DashInvestorsChartTab from "./DashInvestorsChartTab";
 
 
@@ -140,7 +141,9 @@ class Dashboard extends Component {
              :viewType==="bulb" ? (<SourceChart/>)
              :null
             }
-       
+             {this.state.activeButton==="Tasks"&&
+       <GantChartTab/>
+             }
    
       </FlexContainer>
       
