@@ -82,7 +82,7 @@ function NavMenu (props) {
         <div className="header">
              <ul className={click ? "nav-options active" : "nav-options"}>
       <div style={{ marginLeft: "-1.1875em" }}>
-      <div class="overflow-y-auto max-h-[37rem]">
+      <div class="overflow-y-auto max-h-[41rem]">
         <Menu
           defaultSelectedKeys={["/" + path]}
           defaultOpenKeys={[]}
