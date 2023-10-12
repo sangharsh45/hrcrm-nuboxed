@@ -30,6 +30,9 @@ import ContactsIcon from '@mui/icons-material/Contacts';
 // } from "../../../../Customer/CustomerAction";
 import {getContactListByInvestorId} from "../../../InvestorAction";
 const InvestorLinkedContact =lazy(()=>import("./InvestorContact/InvestorLinkedContact"));
+const InvestorLinkedDocuments =lazy(()=>import("./InvestorDoc/InvestorLinkedDocuments"));
+const InvestorLinkedNotes=lazy(()=>import ("./InvestorNote/InvestorLinkedNotes"));
+const InvestorLinkedInvoice=lazy(()=>import("./InvestorInvoice/InvestorLinkedInvoice"));
 
 const TabPane = StyledTabs.TabPane;
 
@@ -263,7 +266,7 @@ getContactListByInvestorId,
             >
               <Suspense fallback={"Loading ..."}>
                 {" "}
-                {/* <LinkedDocuments /> */}
+                <InvestorLinkedDocuments investorDetails={this.props.investorDetails}/>
               </Suspense>
             </TabPane>
             <TabPane
@@ -294,7 +297,7 @@ getContactListByInvestorId,
             >
               <Suspense fallback={"Loading ..."}>
                 {" "}
-                {/* <LinkedNotes /> */}
+                <InvestorLinkedNotes investorDetails={this.props.investorDetails} />
               </Suspense>
             </TabPane>
             <TabPane
@@ -335,7 +338,7 @@ getContactListByInvestorId,
             >
               <Suspense fallback={"Loading ..."}>
                 {" "}
-                {/* <LinkedInvoice /> */}
+                <InvestorLinkedInvoice investorDetails={this.props.investorDetails}/>
               </Suspense>
             </TabPane>
            
