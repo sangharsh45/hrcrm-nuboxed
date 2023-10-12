@@ -9,7 +9,8 @@ export const getTasks = (userId) => (dispatch) => {
     type: types.GET_TASK_REQUEST,
   });
   axios
-    .get(`${base_url}/task/type/count/${userId}`, {
+    .get(`${base_url}/taskType`, {
+     
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },

@@ -4,12 +4,9 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import {  message } from "antd";
 import {
-  getTasks,
-  addTasks,
-  removeTask,
-  updateTasks,
-  searchTaskName
-} from "../Settings/Task/TaskAction";
+  getDashboardTasks,
+ 
+} from "../Dashboard/DashboardAction";
 
 
 
@@ -33,7 +30,7 @@ class TaskNew extends Component {
   }
   handleClear = () => {
     this.setState({ currentData: "" });
-    this.props.getTasks(this.props.userId);
+    this.props.getDashboardTasks(this.props.userId);
   };
   setCurrentData = (value) => {
     this.setState({ currentData: value });
@@ -102,7 +99,7 @@ class TaskNew extends Component {
   // };
   componentDidMount() {
    
-    this.props.getTasks(this.props.userId);
+    this.props.getDashboardTasks(this.props.userId);
     // this.getLinkedSources();
   }
   render() {
@@ -123,8 +120,8 @@ class TaskNew extends Component {
           
           </div> */}
           <div className="grid grid-cols-5 gap-4">
-  {this.props.tasks.length &&
-    this.props.tasks.map((item) => {
+  {this.props.dashboardTasks.length &&
+    this.props.dashboardTasks.map((item) => {
       const randomNumber = Math.floor(Math.random() * 100) + 1;
       return (
         <div className="col-span-2 sm:col-span-1">
@@ -140,17 +137,17 @@ class TaskNew extends Component {
   }
 }
 
-const mapStateToProps = ({ tasks ,auth}) => ({
+const mapStateToProps = ({ tasks ,dashboard,auth}) => ({
   addingTasks: tasks.addingTasks,
   addingTasksError: tasks.addingTasksError,
-  tasks: tasks.tasks,
+  dashboardTasks: dashboard.dashboardTasks,
   userId:auth.userDetails.userId,
 
   // removingTasks: tasks.removingTasks,
   // removingTasksError: tasks.removingTasksError,
   
-  fetchingTasks:tasks.fetchingTasks,
-  fetchingTasksError: tasks.fetchingTasksError,
+  fetchingDashboardTasks:dashboard.fetchingDashboardTasks,
+  fetchingDashboardTasksError: dashboard.fetchingDashboardTasksError,
 
   updatingTasks: tasks.updatingTasks,
   updatingTasksError: tasks.updatingTasksError,
@@ -159,11 +156,8 @@ const mapStateToProps = ({ tasks ,auth}) => ({
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
-      getTasks,
-      addTasks,
-      removeTask,
-      updateTasks,
-      searchTaskName
+      getDashboardTasks,
+    
     },
     dispatch
   );

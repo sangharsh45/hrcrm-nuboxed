@@ -56,6 +56,8 @@ const AccessForm = (props) => {
     setCheckedSettingsList(props.departmentAcces.settings)
     setCheckedTasksList(props.departmentAcces.task)
     setCheckedJunkList(props.departmentAcces.junk)
+    setCheckedInvestorList(props.departmentAcces.investor)
+    setCheckedInvestorContactList(props.departmentAcces.investorContact)
     
   }, [props.departmentAcces.vendor,
   props.departmentAcces.customer,
@@ -88,6 +90,8 @@ const AccessForm = (props) => {
   props.departmentAcces.settings,
   props.departmentAcces.task,
   props.departmentAcces.junk,
+  props.departmentAcces.investor,
+  props.departmentAcces.investorContact,
   
 ])
   //Vendor
@@ -644,6 +648,42 @@ const AccessForm = (props) => {
                                        setCheckAllJunk(e.target.checked);
                                      };
 
+                                            // Investor
+                                            const [checkedInvestorList, setCheckedInvestorList] = useState(props.departmentAcces.investor);
+                                            const [indeterminateInvestor, setIndeterminateInvestor] = useState(true);
+                                            const [checkAllInvestor, setCheckAllInvestor] = useState(false);
+                                          
+                                            const onInvestorChange = (list) => {
+                                              setCheckedInvestorList(list);
+                                              setIndeterminateInvestor(!!list.length && list.length < plainOptions.length);
+                                              setCheckAllInvestor(list.length === plainOptions.length);
+                                            };
+                                          
+                                            const onCheckAllInvestorChange = (e) => {
+                                              setCheckedInvestorList(e.target.checked ? plainOptions : []);
+                                              setIndeterminateInvestor(false);
+                                              setCheckAllInvestor(e.target.checked);
+                                            };
+
+
+                                              //Investor Contact
+
+  const [checkedInvestorContactList, setCheckedInvestorContactList] = useState(props.departmentAcces.investorContact);
+  const [indeterminateInvestorContact, setIndeterminateInvestorContact] = useState(true);
+  const [checkAllInvestorContact, setCheckAllInvestorContact] = useState(false);
+
+  const onInvestorContactChange = (list) => {
+    setCheckedInvestorContactList(list);
+    setIndeterminateInvestorContact(!!list.length && list.length < plainOptions.length);
+    setCheckAllInvestorContact(list.length === plainOptions.length);
+  };
+
+  const onCheckAllInvestorContactChange = (e) => {
+    setCheckedInvestorContactList(e.target.checked ? plainOptions : []);
+    setIndeterminateInvestorContact(false);
+    setCheckAllInvestorContact(e.target.checked);
+  };
+
 
 
   function handleUpdateAccess() {
@@ -679,6 +719,8 @@ const AccessForm = (props) => {
       settings:checkedSettingsList || [],
       task:checkedTasksList || [],
       junk:checkedJunkList || [],
+      investor:checkedInvestorList || [],
+      investorContact:checkedInvestorContactList || [],
       
       departmentId: props.departmentId,
       roleTypeId:props.roleTypeId,
@@ -982,36 +1024,25 @@ const AccessForm = (props) => {
             <h1 class=" text-clr font-bold">IM</h1>
             <Spacer />
               <FlexContainer justifyContent="space-around">
-                {/* <div >
-                  <h1>Vendor</h1>
-                  <Checkbox indeterminate={indeterminateVendor} onChange={onCheckAllVendorChange} checked={checkAllVendor}>
-                    Check all
-                  </Checkbox>
-                  <Divider />
-                  <CheckboxGroup options={plainOptions} value={checkedVendorList} onChange={onVendorChange} />
-                </div>
-                <Spacer 
-               
-                /> */}
-             
+          
 
               
                 <div >
-                  <h1 class="text-sm">Customer</h1>
-                  <Checkbox indeterminate={indeterminateCustomer} onChange={onCheckAllCustomerChange} checked={checkAllCustomer}>
+                  <h1 class="text-sm">Investor</h1>
+                  <Checkbox indeterminate={indeterminateInvestor} onChange={onCheckAllInvestorChange} checked={checkAllInvestor}>
                   <label class="text-xs">  Check all  </label>
                   </Checkbox>
                   <Divider />
-                  <CheckboxGroup options={plainOptions} value={checkedCustomerList} onChange={onCustomerChange} />
+                  <CheckboxGroup options={plainOptions} value={checkedInvestorList} onChange={onInvestorChange} />
                 </div>
                     {/* Contact */}
                     <div >
-                  <h1 class="text-sm">Contact</h1>
-                  <Checkbox indeterminate={indeterminateContact} onChange={onCheckAllContactChange} checked={checkAllContact}>
+                  <h1 class="text-sm">Investor Contact</h1>
+                  <Checkbox indeterminate={indeterminateInvestorContact} onChange={onCheckAllInvestorContactChange} checked={checkAllInvestorContact}>
                   <label class="text-xs"> Check all</label>
                   </Checkbox>
                   <Divider />
-                  <CheckboxGroup options={plainOptions} value={checkedContactList} onChange={onContactChange} />
+                  <CheckboxGroup options={plainOptions} value={checkedInvestorContactList} onChange={onInvestorContactChange} />
 
                 </div>
                 <Spacer />
@@ -1021,7 +1052,7 @@ const AccessForm = (props) => {
             
               <FlexContainer justifyContent="space-around">
               <div >
-                  <h1 class="text-sm">Opportunity</h1>
+                  <h1 class="text-sm">Deal</h1>
                   <Checkbox indeterminate={indeterminateOpportunity} onChange={onCheckAllOpportunityChange} checked={checkAllOpportunity}>
                   <label class="text-xs">  Check all </label>
                   </Checkbox>
@@ -1031,7 +1062,7 @@ const AccessForm = (props) => {
                 </div>
                 <Spacer />
                 <div >
-                  <h1 class="text-sm">Leads</h1>
+                  <h1 class="text-sm">Pitch</h1>
                   <Checkbox indeterminate={indeterminateLeads} onChange={onCheckAllLeadsChange} checked={checkAllLeads}>
                   <label class="text-xs">  Check all </label>
                   </Checkbox>

@@ -97,13 +97,13 @@ function UpdatePitchForm (props) {
         //   validationSchema={UpdateLeadsSchema}
           onSubmit={(values, { resetForm }) => {
             console.log(values);
-            updatePitch(
+            props.updatePitch(
               {
                 ...values,
-                // leadsId: props.leadsId,
+                investorleadsId: props.investorleadsId,
                 assignedTo:selectedOption ? selectedOption.employeeId:props.setEditingPitch.employeeId,
               },
-            //   props.leadsId,
+              props.investorleadsId,
               () => handleReset(resetForm)
             );
           }}

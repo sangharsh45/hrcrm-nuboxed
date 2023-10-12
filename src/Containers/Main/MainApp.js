@@ -82,6 +82,7 @@ import CandidateTotalBilling from "../Projects/Child/ProjectDetailsTab/Candidate
 import { getSupportedLanguages } from '../Translate/TranslateService';
 import Location from "../Event/Child/Location/Location";
 import MobileNavMenu from "./Mobilemenu";
+import PitchDetails from "../Pitch/Child/PitchDetails/PitchDetails"
 import Navmenu2 from "./Navmenu2";
 
 const OpportunityDetail = lazy(() =>
@@ -666,6 +667,12 @@ function MainApp(props) {
                         exact
                         path="/contact/:contactId"
                         component={ContactDetail}
+                      />
+
+<Route
+                        exact
+                        path="/pitch/:investorLeadsId"
+                        component={PitchDetails}
                       />
                       <Route
                         exact
