@@ -133,6 +133,10 @@ const initialState = {
   fetchingProcessTaskError: false,
   processTask: [],
 
+  fetchingProcessForDeals: false,
+  fetchingProcessForDealsError: false,
+  dealsProcess: [],
+
 
   updateRequirement: false,
   updateRequirementError: false,
@@ -184,6 +188,9 @@ const initialState = {
 
   addingLeaves: false,
   addingLeavesError: false,
+
+  addingProcessForDeals: false,
+  addingProcessForDealsError: false,
 
   fetchingThirdPartyMonetize: false,
   fetchingThirdPartyMonetizeError: false,
@@ -251,6 +258,10 @@ const initialState = {
   fetchingMonster: false,
   fetchingMonsterError: false,
   monster: {},
+
+  fetchingProcessStagesForDeals: false,
+  fetchingProcessStagesForDealsError: false,
+  dealsProcessStages: [],
 
   fetchingRemoteAccess: false,
   fetchingRemoteAccessError: false,
@@ -2584,6 +2595,86 @@ export const settingsReducer = (state = initialState, action) => {
         addingLeadAging: false,
         addingLeadAgingError: true,
       };
+
+      case types.ADD_PROCESS_FOR_DEALS_REQUEST:
+        return {
+          ...state,
+          addingProcessForDeals: true,
+          addingProcessForDealsError: false,
+        };
+      case types.ADD_PROCESS_FOR_DEALS_SUCCESS:
+        return {
+          ...state,
+          addingProcessForDeals: false,
+          addingProcessForDealsError: false,
+          // addProcessHiringModal: false,
+        };
+      case types.ADD_PROCESS_FOR_DEALS_FAILURE:
+        return {
+          ...state,
+          addingProcessForDeals: false,
+          addingProcessForDealsError: true,
+          // addProcessHiringModal: false,
+        };
+
+
+        case types.GET_PROCESS_FOR_DEALS_REQUEST:
+          return {
+            ...state,
+            fetchingProcessForDeals: true,
+            fetchingProcessForDealsError: false,
+          };
+        case types.GET_PROCESS_FOR_DEALS_SUCCESS:
+          return {
+            ...state,
+            fetchingProcessForDeals: false,
+            fetchingProcessForDealsError: false,
+            dealsProcess: action.payload,
+          };
+        case types.GET_PROCESS_FOR_DEALS_FAILURE:
+          return {
+            ...state,
+            fetchingProcessForDeals: false,
+            fetchingProcessForDealsError: true,
+          };
+
+
+          case types.ADD_PROCESS_STAGE_FOR_DEALS_REQUEST:
+            return { ...state, addingProcessStagesForDeals: true };
+          case types.ADD_PROCESS_STAGE_FOR_DEALS_SUCCESS:
+            return {
+              ...state,
+              addingProcessStagesForDeals: false,
+              dealsProcessStages: [...state.dealsProcessStages, action.payload],
+            };
+          case types.ADD_PROCESS_STAGE_FOR_DEALS_FAILURE:
+            return {
+              ...state,
+              addingProcessStagesForDeals: false,
+              addingProcessStagesForDeals: true,
+            };
+
+            case types.GET_PROCESS_STAGES_FOR_DEALS_REQUEST:
+              return {
+                ...state,
+                fetchingProcessStagesForDeals: true,
+                fetchingProcessStagesForDealsError: false,
+              };
+            case types.GET_PROCESS_STAGES_FOR_DEALS_SUCCESS:
+              return {
+                ...state,
+                fetchingProcessStagesForDeals: false,
+                fetchingProcessStagesForDealsError: false,
+                dealsProcessStages: action.payload,
+              };
+            case types.GET_PROCESS_STAGES_FOR_DEALS_FAILURE:
+              return {
+                ...state,
+                fetchingProcessStagesForDeals: false,
+                fetchingProcessStagesForDealsError: true,
+              };
+
+
 
     default:
       return state;

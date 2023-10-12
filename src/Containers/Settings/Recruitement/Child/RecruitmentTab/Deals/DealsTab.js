@@ -14,11 +14,16 @@ import {
   Spacer,
   TextInput,
 } from "../../../../../../Components/UI/Elements";
-
+import {addProcessForDeals,
+  getProcessForDeals,
+  addProcessStageForDeals,
+  getProcessStagesForDeals
+ } from "../../../../SettingsAction"
 import { FlexContainer } from "../../../../../../Components/UI/Layout";
 import { StyledPopconfirm, StyledTabs } from "../../../../../../Components/UI/Antd";
 import {  Select } from "../../../../../../Components/UI/Elements";
 import { elipsize } from "../../../../../../Helpers/Function/Functions";
+import SingleDealsStages from "./SingleDealsStages";
 const { Option } = Select;
 
 const TabPane = StyledTabs.TabPane;
@@ -53,7 +58,7 @@ class DealsTab extends Component {
   }
 
   componentDidMount() {
-    //  this.props.getProcessForOpportunity(this.props.orgId);
+      this.props.getProcessForDeals(this.props.orgId);
   }
   handleTabChange = (key) => {
     this.setState({ activeKey: key });
@@ -72,7 +77,7 @@ class DealsTab extends Component {
     this.setState({
       currentProcess: item,
     });
-    //  this.props.getProcessStagesForOpportunity(item.opportunityWorkflowDetailsId);
+      this.props.getProcessStagesForDeals(item.investorOppWorkflowId);
   };
 
 
@@ -91,7 +96,7 @@ class DealsTab extends Component {
     this.setState({ [name]: value });
   handleCallBack1 = (status, data) => {
     if (status === "Success") {
-    //   this.props.getProcessForOpportunity(this.props.orgId);
+       this.props.getProcessForDeals(this.props.orgId);
       this.setState({ currentProcess: data });
     } else {
       alert("error");
@@ -118,23 +123,23 @@ class DealsTab extends Component {
   handleCallBack = (status) => {
     if (status === "Success") {
       const {
-        currentProcess: { opportunityWorkflowDetailsId },
+        currentProcess: { investorOppWorkflowId },
       } = this.state;
 
-    //   this.props.getProcessStagesForOpportunity(opportunityWorkflowDetailsId);
+       this.props.getProcessStagesForDeals(investorOppWorkflowId);
     } else {
       alert("error");
     }
   };
   handleCallback = (status) => {
     if (status === "success") {
-    //   return getProcessForOpportunity(this.props.orgId);
+       return getProcessForDeals(this.props.orgId);
     } else {
       return null;
     }
   };
   handleAddWorkflow = () => {
-    const { addProcessForOpportunity, workflows } = this.props;
+    const { addProcessForDeals, workflows } = this.props;
     const {
       workflowName,
       isTextInputOpen,
@@ -158,9 +163,9 @@ class DealsTab extends Component {
         "Can't create as another departmentName exists with same name!"
       );
     } else {
-    //   addProcessForOpportunity(header,  this.props.orgId, () => 
-    //   this.handleCallback
-    //   );
+      addProcessForDeals(header,  this.props.orgId, () => 
+      this.handleCallback
+      );
     }
 
     this.setState({
@@ -187,12 +192,12 @@ class DealsTab extends Component {
       currentStage,
     } = this.state;
 
-    const { opportunityProcessStages } = this.props;
+    const { dealsProcessStages } = this.props;
     let exist =
-    opportunityProcessStages &&
-    opportunityProcessStages.some((element) => element.stageName == stageName);
+    dealsProcessStages &&
+    dealsProcessStages.some((element) => element.stageName == stageName);
 
-    const Id = currentProcess.opportunityWorkflowDetailsId;
+    const Id = currentProcess.investorOppWorkflowId;
     console.log(Id);
     console.log(currentProcess);
     let stage = {
@@ -202,19 +207,19 @@ class DealsTab extends Component {
       responsible,
       // oppworkFlowId: Id,
       orgId: this.props.orgId,
-      opportunityWorkflowDetailsId: Id,
+      investorOppWorkflowId: Id,
     };
     if (exist) {
       debugger;
       message.error("Can not create as another stage exists with same name !");
     } else {
       // message.success("probability add");
-    //   this.props.addProcessStageForOpportunity(
-    //     stage,
-    //     this.handleCallBack,
-    //     this.props.orgId,
-    //     this.props.oppworkFlowId
-    //   );
+      this.props.addProcessStageForDeals(
+        stage,
+        this.handleCallBack,
+        this.props.orgId,
+        this.props.oppworkFlowId
+      );
       // this.props.getProcessStagesForRecruit(this.props.recruitmentProcessId);
     }
     this.setState({
@@ -225,7 +230,7 @@ class DealsTab extends Component {
     });
   };
   render() {
-    const { addingProcessForOpportunity, addProcessForOpportunity } = this.props;
+    const { addingProcessForDeals, addProcessForDeals } = this.props;
     return (
       <>
         <StageWrapper>
@@ -243,7 +248,7 @@ class DealsTab extends Component {
                 onChange={this.handleTabChange}
                 type="card"
               >
-                {/* {this.props.opportunityProcess.map((item, i) => {
+                {this.props.dealsProcess.map((item, i) => {
                   return (
                     <TabPane
                       key={i}
@@ -254,7 +259,7 @@ class DealsTab extends Component {
                       }
                     ></TabPane>
                   );
-                })} */}
+                })}
               </StyledTabs> 
 
               {this.state.isTextOpen ? (
@@ -281,7 +286,7 @@ class DealsTab extends Component {
                   type="primary"
                   htmlType="submit"
                   // disabled={!values.taskChecklistName}
-                  loading={addingProcessForOpportunity}
+                  loading={addingProcessForDeals}
                   onClick={this.handleAddWorkflow}
                 >
                   
@@ -301,7 +306,7 @@ class DealsTab extends Component {
                     type="primary"
 
                     htmlType="button"
-                     Loading={addingProcessForOpportunity}
+                     Loading={addingProcessForDeals}
                     onClick={this.toggleInput1}
                   >
                     Add
@@ -414,7 +419,7 @@ class DealsTab extends Component {
               )}
             </FlexContainer>
 
-           {/* {this.props.opportunityProcessStages.map((opportunityProcessStages, i) => (
+            {this.props.dealsProcessStages.map((dealsProcessStages, i) => (
               <SingleDealsStages
                 key={i}
                 stageValue1={this.state.stageName}
@@ -424,17 +429,17 @@ class DealsTab extends Component {
                 opportunityWorkflowDetailsId={
                   this.state.currentProcess.opportunityWorkflowDetailsId
                 }
-                opportunityProcessStages={opportunityProcessStages}
+                dealsProcessStages={dealsProcessStages}
                 organization={this.props.organization}
                 handleApproveIconClick={this.handleApproveIconClick}
                 handleUpdateStage={this.handleUpdateStage}
                 handleStageType={this.handleStageType}
                 handleStagePublishClick={this.handleStagePublishClick}
-                opportunityStagesId={opportunityProcessStages.opportunityStagesId}
+                opportunityStagesId={dealsProcessStages.opportunityStagesId}
                 className="scrollbar"
                 id="style-3"
               />
-            ))}  */}
+            ))}  
 
             <Spacer />
             {this.state.isTextInputOpen ? (
@@ -528,23 +533,26 @@ class DealsTab extends Component {
 }
 
 const mapStateToProps = ({ settings, auth }) => ({
-//   opportunityProcess: settings.opportunityProcess,
-//   addingProcessForOpportunity: settings.addingProcessForOpportunity,
-//   addingProcessForOpportunityError: settings.addingProcessForOpportunityError,
-//   organization:
-//   auth.userDetails &&
-//   auth.userDetails.metaData &&
-//   auth.userDetails.metaData.organization,
+  addingProcessForDeals:settings.addingProcessForDeals,
+  addingProcessForDealsError:settings.addingProcessForDealsError,
+   dealsProcess: settings.dealsProcess,
+  organization:
+  auth.userDetails &&
+  auth.userDetails.metaData &&
+  auth.userDetails.metaData.organization,
 //   opportunityStagesPublish: settings.opportunityStagesPublish,
 //   opportunityProcessPublish: settings.opportunityProcessPublish,
-//   opportunityProcessStages: settings.opportunityProcessStages,
-//   orgId: auth.userDetails && auth.userDetails.organizationId,
+   dealsProcessStages: settings.dealsProcessStages,
+  orgId: auth.userDetails && auth.userDetails.organizationId,
 });
 
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
- 
+      addProcessForDeals,
+      getProcessForDeals,
+      addProcessStageForDeals,
+      getProcessStagesForDeals
    
     },
     dispatch
