@@ -123,6 +123,9 @@ const initialState = {
   fetchingProcessStagesError: false,
   ProcessStages: [],
 
+  updateProcessNameForDeals: false,
+  updateProcessNameForDealsError: false,
+
   fetchingWorkflowTaskStagesForRecruit: false,
   fetchingWorkflowTaskStagesForRecruitError: false,
   recruitTaskWorkflowStages:[],
@@ -132,6 +135,9 @@ const initialState = {
   fetchingProcessTask: false,
   fetchingProcessTaskError: false,
   processTask: [],
+
+  deletingDealsStagesData: false,
+   deletingDealsStagesDataError: false,
 
   fetchingProcessForDeals: false,
   fetchingProcessForDealsError: false,
@@ -196,6 +202,9 @@ const initialState = {
   fetchingThirdPartyMonetizeError: false,
   thirdPartyMonetize: [],
 
+  deleteDealsProcessData: false,
+   deleteDealsProcessDataError: false,
+
   fetchingComplianceGdpr: false,
   fetchingComplianceGdprError: false,
   gdprCompliance: [],
@@ -208,6 +217,10 @@ const initialState = {
   fetchingNotificationsError: false,
   notifications:[],
 
+  linkingDealsProcessPublish: false,
+  linkingDealsProcessPublishError: false,
+  dealsProcessPublish: [],
+
   fetchingLeaveDetails: false,
   fetchingOrganizationLeadsError: false,
   leaveData: [],
@@ -218,6 +231,10 @@ const initialState = {
   fetchingSignatureInd: false,
   fetchingSignatureIndError: false,
   signatureInd: {},
+
+  linkingDealsStagesPublish: false,
+  linkingDealsStagesPublishError: false,
+  dealsStagesPublish:[],
 
   addingTaskForRecruit: false,
   addingTaskForRecruitError: false,
@@ -2673,6 +2690,126 @@ export const settingsReducer = (state = initialState, action) => {
                 fetchingProcessStagesForDeals: false,
                 fetchingProcessStagesForDealsError: true,
               };
+
+              case types.LINK_DEALS_PROCESS_PUBLISH_REQUEST:
+                return {
+                  ...state,
+                  linkingDealsProcessPublish: true,
+                };
+              case types.LINK_DEALS_PROCESS_PUBLISH_SUCCESS:
+                return {
+                  ...state,
+                  linkingDealsProcessPublish: false,
+                  dealsProcessPublish: state.dealsProcessPublish.map((item) => {
+                    if (
+                      item.investorOppWorkflowId === action.payload.investorOppWorkflowId
+                    ) {
+                      return action.payload;
+                    } else {
+                      return item;
+                    }
+                  }),
+                };
+              case types.LINK_DEALS_PROCESS_PUBLISH_FAILURE:
+                return {
+                  ...state,
+                  linkingDealsProcessPublish: false,
+                  linkingDealsProcessPublishError: true,
+                };
+
+
+                case types.LINK_DEALS_STAGES_PUBLISH_REQUEST:
+                  return {
+                    ...state,
+                    linkingDealsStagesPublish: true,
+                  };
+                case types.LINK_DEALS_STAGES_PUBLISH_SUCCESS:
+                  return {
+                    ...state,
+                    linkingDealsStagesPublish: false,
+                    dealsStagesPublish: state.dealsStagesPublish.map((item) => {
+                      if (item.investorOppStagesId === action.payload.investorOppStagesId) {
+                        return action.payload;
+                      } else {
+                        return item;
+                      }
+                    }),
+                  };
+                case types.LINK_DEALS_STAGES_PUBLISH_FAILURE:
+                  return {
+                    ...state,
+                    linkingDealsStagesPublish: false,
+                    linkingDealsStagesPublishError: true,
+                  };
+
+
+                  case types.DELETE_DEALS_PROCESS_DATA_REQUEST:
+                    return { ...state, deleteDealsProcessData: true };
+                  case types.DELETE_DEALS_PROCESS_DATA_SUCCESS:
+                    return {
+                      ...state,
+                      deleteDealsProcessData: false,
+                      dealsProcess: state.dealsProcess.filter(
+                        (item) => item.investorOppWorkflowId !== action.payload
+                      ),
+                    };
+                  case types.DELETE_DEALS_PROCESS_DATA_FAILURE:
+                    return { ...state, deleteDealsProcessData: false, deleteDealsProcessDataError: false };
+
+
+                    case types.DELETE_DEALS_STAGES_DATA_REQUEST:
+                      return { ...state, deletingDealsStagesData: true };
+                    case types.DELETE_DEALS_STAGES_DATA_SUCCESS:
+                      return {
+                        ...state,
+                        deletingDealsStagesData: false,
+                        dealsProcessStages: state.dealsProcessStages.filter(
+                          (item) => item.investorOppStagesId !== action.payload
+                        ),
+                      };
+                    case types.DELETE_DEALS_STAGES_DATA_FAILURE:
+                      return { ...state, deletingDealsStagesData: false, deletingDealsStagesDataError: false };
+
+
+                      case types.UPDATE_PROCESS_NAME_FOR_DEALS_REQUEST:
+                        return { ...state, updateProcessNameForDeals: true };
+                      case types.UPDATE_PROCESS_NAME_FOR_DEALS_SUCCESS:
+                        // return { ...state, updatingStages: false, states: [...state.states, action.payload] };
+                        return {
+                          ...state,
+                          updateProcessNameForDeals: false,
+                        
+                          dealsProcess: state.dealsProcess.map((state) =>
+                          state.investorOppWorkflowId === action.payload.investorOppWorkflowId
+                            ? action.payload
+                            : state
+                        ),
+                        };
+                      case types.UPDATE_PROCESS_NAME_FOR_DEALS_FAILURE:
+                        return {
+                          ...state,
+                          updateProcessNameForDeals: false,
+                          updateProcessNameForDealsError: true,
+                        };
+            
+                        case types.UPDATE_STAGE_FOR_DEALS_REQUEST:
+                          return { ...state, updatingStagesForDeals: true };
+                        case types.UPDATE_STAGE_FOR_DEALS_SUCCESS:
+                          // return { ...state, updatingStages: false, states: [...state.states, action.payload] };
+                          return {
+                            ...state,
+                            updatingStagesForDeals: false,
+                            dealsProcessStages: state.dealsProcessStages.map((state) =>
+                              state.investorOppStagesId === action.payload.investorOppStagesId ? action.payload : state
+                            ),
+                          };
+                        case types.UPDATE_STAGE_FOR_DEALS_FAILURE:
+                          return {
+                            ...state,
+                            updatingStagesForDeals: false,
+                            updatingStagesForDealsError: true,
+                          };
+          
 
 
 
