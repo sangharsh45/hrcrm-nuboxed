@@ -70,6 +70,7 @@
     "react-draft-wysiwyg": "^1.13.2",
     "react-draggable-tabs": "^1.0.8",
     "react-fontawesome": "^1.7.1",
+    "react-funnel-chart": "^0.1.8",
     "react-highlight-words": "^0.17.0",
     "react-icons": "^4.7.1",
     "react-infinite-scroll-component": "^6.1.0",
