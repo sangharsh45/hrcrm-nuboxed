@@ -370,12 +370,6 @@ export const addOpportunity = (opportunity, cb) => (dispatch, getState) => {
 
 /*get all the opportunity of the user */
 export const getOpportunityListByUserId = (userId,page) => (dispatch) => {
-  // let api_url = "";
-  // if (userId) {
-  //   api_url = `/sort/all/contacts/user/${userId}`;
-  // } else {
-  //   api_url = `/contacts`;
-  // }
   dispatch({
     type: types.GET_OPPORTUNITY_REQUEST,
   });
