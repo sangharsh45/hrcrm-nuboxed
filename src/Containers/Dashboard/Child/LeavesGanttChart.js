@@ -57,6 +57,16 @@ function LeavesGanttChart(props){
   //   end: new Date(item.endDate),
   // }));
 
+  const customHeaderGenerator = (columnType) => {
+    if (columnType === 'start') {
+      return ''; // Hide the "From" column
+    } else if (columnType === 'end') {
+      return ''; // Hide the "To" column
+    }
+    // Return null or undefined for other columns
+    return null;
+  };
+
   const tasks = [];
 
 props.leavesGantt.forEach((item) => {
@@ -70,7 +80,7 @@ props.leavesGantt.forEach((item) => {
 
       const task = {
         id: leaveId,
-         name: `${item.employeeName}`,
+         name: `${item.employeeName}-${leave.coverDetails}`,
         // name: cover,
         // start: startDate,
         // end: endDate,
@@ -108,12 +118,14 @@ props.leavesGantt.forEach((item) => {
       {props.leavesGantt.length?
       <Gantt
         tasks={tasks}
-        viewMode={view}
+        // viewMode={view}
+        viewMode={ViewMode.Day}
         listCellWidth={isChecked ? "155px" : ""}
-        columnWidth={columnWidth}
+        columnWidth={50}
         barBackgroundColor="blue"
         rowHeight={40}
         fontSize={12}
+       
       />
       :null}
     </div>
