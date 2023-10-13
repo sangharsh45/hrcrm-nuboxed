@@ -17,7 +17,12 @@ import {
 import {addProcessForDeals,
   getProcessForDeals,
   addProcessStageForDeals,
-  getProcessStagesForDeals
+  getProcessStagesForDeals,
+  LinkDealsProcessPublish,
+  LinkDealsStagePublish,
+  deleteDealsProcessData,
+  updateProcessNameForDeals,
+  updateStageForDeals
  } from "../../../../SettingsAction"
 import { FlexContainer } from "../../../../../../Components/UI/Layout";
 import { StyledPopconfirm, StyledTabs } from "../../../../../../Components/UI/Antd";
@@ -81,7 +86,18 @@ class DealsTab extends Component {
   };
 
 
+  handlePublishClick = () => {
+    const { currentProcess, publish } = this.state;
+    console.log(currentProcess);
 
+    const Id = currentProcess.investorOppWorkflowId;
+    let data = {
+      investorOppWorkflowId: Id,
+      publishInd: currentProcess.publishInd ? false : true,
+    };
+
+    this.props.LinkDealsProcessPublish(data, this.handleCallBack1);
+  };
 
 
   toggleInput = () =>
@@ -102,23 +118,46 @@ class DealsTab extends Component {
       alert("error");
     }
   };
-//   handleEditProcessName = () => {
-//     const { updateProcessNameForOpportunity } = this.props;
+  handleEditProcessName = () => {
+    const { updateProcessNameForDeals } = this.props;
 
-//     const {
-//       workflowName,
+    const {
+      workflowName,
 
-//       currentProcess,
-//     } = this.state;
-//     const Id = currentProcess.opportunityWorkflowDetailsId;
-//     let process = { workflowName, opportunityWorkflowDetailsId: Id };
-//     updateProcessNameForOpportunity(process,Id,this.handleCallBack1 );
-//     this.setState({
-//       isProcessTextInputOpen: false,
-//     });
-//   };
+      currentProcess,
+    } = this.state;
+    const Id = currentProcess.investorOppWorkflowId;
+    let process = { workflowName, investorOppWorkflowId: Id };
+    updateProcessNameForDeals(process,Id,this.handleCallBack1 );
+    this.setState({
+      isProcessTextInputOpen: false,
+    });
+  };
 
+  handleUpdateStage = (investorOppStagesId, stageName, probability, days) => {
+    //debugger;
+    const { dealsProcessStages } = this.props;
+    let exist =
+    dealsProcessStages &&
+    dealsProcessStages.some((element) => element.stageName == stageName);
+    if (exist) {
+      message.error(
+        "Stage with same name already exists as part of this workflow"
+      );
+    } else {
+      this.props.updateStageForDeals(investorOppStagesId, stageName, probability, days);
+    }
+  };
 
+handleStagePublishClick = (investorOppStagesId, publishInd) => {
+  const { recruitProcessStages } = this.props;
+  const data = {
+    investorOppStagesId,
+    publishInd: publishInd ? false : true,
+  };
+  console.log(publishInd);
+  this.props.LinkDealsStagePublish(data, this.handleCallBack);
+};
 
   handleCallBack = (status) => {
     if (status === "Success") {
@@ -394,7 +433,7 @@ class DealsTab extends Component {
                       title="Do you want to delete?"
                       okText="Yes"
                       cancelText="No"
-                    //    onConfirm={() => this.props.deleteOpportunityProcessData(this.state.currentProcess.opportunityWorkflowDetailsId )}
+                        onConfirm={() => this.props.deleteDealsProcessData(this.state.currentProcess.investorOppWorkflowId )}
                     >
                       <DeleteIcon
                       type="delete" style={{ color: "white" }} />
@@ -426,8 +465,8 @@ class DealsTab extends Component {
                 newStageName="stageName"
                 newProbability="probability"
                 newDays="days"
-                opportunityWorkflowDetailsId={
-                  this.state.currentProcess.opportunityWorkflowDetailsId
+                investorOppWorkflowId={
+                  this.state.currentProcess.investorOppWorkflowId
                 }
                 dealsProcessStages={dealsProcessStages}
                 organization={this.props.organization}
@@ -435,7 +474,7 @@ class DealsTab extends Component {
                 handleUpdateStage={this.handleUpdateStage}
                 handleStageType={this.handleStageType}
                 handleStagePublishClick={this.handleStagePublishClick}
-                opportunityStagesId={dealsProcessStages.opportunityStagesId}
+                investorOppStagesId={dealsProcessStages.investorOppStagesId}
                 className="scrollbar"
                 id="style-3"
               />
@@ -540,8 +579,8 @@ const mapStateToProps = ({ settings, auth }) => ({
   auth.userDetails &&
   auth.userDetails.metaData &&
   auth.userDetails.metaData.organization,
-//   opportunityStagesPublish: settings.opportunityStagesPublish,
-//   opportunityProcessPublish: settings.opportunityProcessPublish,
+  dealsStagesPublish: settings.dealsStagesPublish,
+  dealsProcessPublish: settings.dealsProcessPublish,
    dealsProcessStages: settings.dealsProcessStages,
   orgId: auth.userDetails && auth.userDetails.organizationId,
 });
@@ -552,7 +591,12 @@ const mapDispatchToProps = (dispatch) =>
       addProcessForDeals,
       getProcessForDeals,
       addProcessStageForDeals,
-      getProcessStagesForDeals
+      getProcessStagesForDeals,
+      LinkDealsProcessPublish,
+      LinkDealsStagePublish,
+      deleteDealsProcessData,
+      updateProcessNameForDeals,
+      updateStageForDeals
    
     },
     dispatch

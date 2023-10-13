@@ -3654,7 +3654,186 @@ export const getProcessStagesForDeals = (investorOppWorkflowId) => (
       });
     });
 };
+export const LinkDealsProcessPublish = (data, cb,) => (dispatch) => {
+  dispatch({ type: types.LINK_DEALS_PROCESS_PUBLISH_REQUEST });
 
+  axios
+    .put(`${base_url}/investorOpportunityWorkflow/update/publishInd`, data, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.LINK_DEALS_PROCESS_PUBLISH_SUCCESS,
+        payload: res.data,
+      });
+      cb && cb("Success", res.data);
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.LINK_DEALS_PROCESS_PUBLISH_FAILURE,
+      });
+      cb && cb("Failure");
+    });
+};
+
+export const LinkDealsStagePublish = (data, cb) => (dispatch) => {
+  dispatch({ type: types.LINK_DEALS_STAGES_PUBLISH_REQUEST });
+
+  axios
+    .put(`${base_url}/investorOpportunityWorkflow/opportunityStages/update/publishInd `, data, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.LINK_DEALS_STAGES_PUBLISH_SUCCESS,
+        payload: res.data,
+      });
+      cb && cb("Success", res.data);
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.LINK_DEALS_STAGES_PUBLISH_FAILURE,
+      });
+      cb && cb("Failure");
+    });
+};
+
+
+export const deleteDealsProcessData = (investorOppWorkflowId,orgId) => (dispatch, getState) => {
+  const { userId } = getState("auth").auth.userDetails;
+  // console.log("inside deleteCall", callId);
+  dispatch({
+    type: types.DELETE_DEALS_PROCESS_DATA_REQUEST,
+  });
+  axios
+    .delete(`${base_url}/investorOpportunityWorkflow/${investorOppWorkflowId}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      //  dispatch(getScheduler(orgId));
+      dispatch({
+        type: types.DELETE_DEALS_PROCESS_DATA_SUCCESS,
+        payload: investorOppWorkflowId,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.DELETE_DEALS_PROCESS_DATA_FAILURE,
+        payload: err,
+      });
+    });
+};
+
+export const deleteDealsStagesData = (investorOppStagesId,orgId) => (dispatch, getState) => {
+  const { userId } = getState("auth").auth.userDetails;
+  // console.log("inside deleteCall", callId);
+  dispatch({
+    type: types.DELETE_DEALS_STAGES_DATA_REQUEST,
+  });
+  axios
+    .delete(`${base_url}/investorOpportunityWorkflow/opportunityStages/${investorOppStagesId}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      //  dispatch(getScheduler(orgId));
+      dispatch({
+        type: types.DELETE_DEALS_STAGES_DATA_SUCCESS,
+        payload: investorOppStagesId,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.DELETE_DEALS_STAGES_DATA_FAILURE,
+        payload: err,
+      });
+    });
+};
+
+export const updateProcessNameForDeals = (process,investorOppWorkflowId, cb) => (dispatch) => {
+  debugger;
+  dispatch({ type: types.UPDATE_PROCESS_NAME_FOR_DEALS_REQUEST });
+
+  axios
+    .put(`${base_url}/investorOpportunityWorkflow/${investorOppWorkflowId}`, process, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.UPDATE_PROCESS_NAME_FOR_DEALS_SUCCESS,
+        payload: res.data,
+      });
+      cb && cb("Success", res.data);
+
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.UPDATE_PROCESS_NAME_FOR_DEALS_FAILURE,
+      });
+      cb && cb("Failure");
+    });
+};
+
+export const updateStageForDeals = (
+  investorOppStagesId,
+  responsible,
+  stageName,
+  
+  probability,
+  days,
+  cb
+) => (dispatch) => {
+  console.log(stageName, probability);
+  dispatch({
+    type: types.UPDATE_STAGE_FOR_DEALS_REQUEST,
+  });
+  axios
+    .put(
+      `${base_url}/investorOpportunityWorkflow/opportunityStages/${investorOppStagesId}`,
+      { investorOppStagesId,responsible, stageName, probability, days },
+      {
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+        },
+      }
+    )
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.UPDATE_STAGE_FOR_DEALS_SUCCESS,
+        payload: res.data,
+      });
+      cb && cb("success");
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.UPDATE_STAGE_FOR_DEALS_FAILURE,
+      });
+      cb && cb("error");
+    });
+};
 
 
 

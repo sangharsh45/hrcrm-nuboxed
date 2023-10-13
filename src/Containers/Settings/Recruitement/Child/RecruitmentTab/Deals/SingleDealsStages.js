@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { FormattedMessage } from "react-intl";
 import DeleteIcon from '@mui/icons-material/Delete';
 import BorderColorIcon from '@mui/icons-material/BorderColor';
-// import {deleteOpportunityStagesData} from "../../../../Settings/SettingsAction";
+ import {deleteDealsStagesData} from "../../../../../Settings/SettingsAction";
 import { Button, Tooltip,Switch, Divider, Popconfirm } from "antd";
 import { FlexContainer } from "../../../../../../Components/UI/Layout";
 import { Formik, Form, Field,FastField } from "formik";
@@ -41,19 +41,20 @@ class SingleDealsStages extends Component {
 
   handleStageType=(value)=>
   this.setState({responsible:value});
- 
-  
 
   render() {
+  
+
     console.log(this.state.fields);
     const { dealsProcessStages } = this.props;
+    console.log(dealsProcessStages.investorOppStagesId);
     console.log(dealsProcessStages);
 
     const {
       dealsProcessStages: {
         stageName,
-        opportunityStagesId,
-        deleteOpportunityStagesData,
+        investorOppStagesId,
+      
         responsible,
         probability,
         days,
@@ -74,16 +75,17 @@ class SingleDealsStages extends Component {
       handleStageClick,
       color,
       key,
+      deleteDealsStagesData,
       currentStage,
     } = this.props;
-    console.log(opportunityStagesId, "----------", linkedStages);
+    console.log(investorOppStagesId, "----------", linkedStages);
     console.log(stageName);
     console.log(color);
     console.log(currentStage);
 
     const disabled = probability === 100 || probability === 0 ? true : false;
     // const disabled = false;
-    const disableDelete = linkedStages && linkedStages.includes(opportunityStagesId);
+    const disableDelete = linkedStages && linkedStages.includes(investorOppStagesId);
     return (
       <StageWrapper>
         <ViewEditCard>
@@ -126,18 +128,14 @@ class SingleDealsStages extends Component {
                      &nbsp; &nbsp;
                      <>                 
                      <Popconfirm
-              title="Do you want to delete?"
-              okText="Yes"
-              cancelText="No"
-              //  onConfirm={() => deleteOpportunityStagesData(opportunityStagesId)}
-            >
-               {/* {user.opportunityDeleteInd ===true && ( */}
-               {probability !== 0 && probability !== 100 && (
-              <DeleteIcon
-              type="delete" style={{ cursor: "pointer", color: "red" }} />
-              )}
-               {/* )} */}
-            </Popconfirm>
+  title="Do you want to delete?"
+  okText="Yes"
+  cancelText="No"
+  onConfirm={() => deleteDealsStagesData(investorOppStagesId)}
+>
+  <DeleteIcon type="delete" style={{ cursor: "pointer", color: "red" }} />
+</Popconfirm>
+
                     </>
                    {/* <Tooltip title="Approval" >
                     <span
@@ -157,14 +155,14 @@ class SingleDealsStages extends Component {
                    </span>
                    </Tooltip>
                    &nbsp;  */}
-                   {/* <span>
+                 <span>
                        
                      {dealsProcessStages.probability === 0 || dealsProcessStages.probability === 100 ? null :
                 
                 <Button
                      onClick={() =>
                       handleStagePublishClick(
-                        this.props.opportunityStagesId,
+                        this.props.investorOppStagesId,
                         publishInd
                        
                       )
@@ -174,7 +172,7 @@ class SingleDealsStages extends Component {
                              
                              </Button> 
                              }
-                   </span> */}
+                   </span> 
 
                   
 
@@ -237,7 +235,7 @@ class SingleDealsStages extends Component {
                   loading={updatingStages}                  
                   onClick={() =>
                     handleUpdateStage(
-                      this.props.opportunityStagesId,
+                      this.props.investorOppStagesId,
                       this.state.responsible,
                       this.state.fields.stageName,
                       this.state.fields.probability,
@@ -287,7 +285,7 @@ const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
     
-      // deleteOpportunityStagesData,
+      deleteDealsStagesData,
       
      
     },
