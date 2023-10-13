@@ -498,9 +498,13 @@ function MainApp(props) {
                     {props.roleType}
                   </div>
                   {/* <Subscription /> */}
+                  {user.settingsAccessInd === true ?
                   <IsAuthorized>
+                  
                     <SettingsDropdown />
+                  
                   </IsAuthorized>
+                    : null}
                   {/* <a href="#" style={{ height: 45, marginRight: 20 }}>
                                         <FlexContainer alignItems='center' style={{ height: '100%' }}>
                                             <Badge count={5} >
@@ -819,6 +823,7 @@ const mapStateToProps = ({
   addCallModal: call.addCallModal,
   addEventModal: event.addEventModal,
   addTaskModal: task.addTaskModal,
+  user: auth.userDetails,
 });
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
