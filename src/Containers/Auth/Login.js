@@ -83,7 +83,7 @@ class Login extends Component {
     return (
       <>
        <div class="flex justify-between p-2">
-          <div class="min-h-screen flex justify-center w-1/2 items-center"
+          <div class=" flex justify-center w-1/2 items-center md:min-h-screen max-sm:w-wk h-[80vh] "
             style={{
               backgroundColor: "#F5F5F5",
               flexDirection: "column",
@@ -214,7 +214,7 @@ class Login extends Component {
 
            
           </div>
-          <div class="w-1/2 flex justify-center items-center">
+          <div class="w-1/2 flex justify-center items-center max-sm:hidden">
           <img
               className="big-logo"
               src={FWLogo1}

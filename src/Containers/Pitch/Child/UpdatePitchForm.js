@@ -117,9 +117,10 @@ function UpdatePitchForm (props) {
             values,
             ...rest
           }) => (
+            <div class="overflow-y-auto h-[34rem] overflow-x-hidden max-sm:h-[30rem]">
             <Form className="form-background">
-              <div class=" flex justify-between h-[27rem] overflow-x-hidden">
-                <div class=" h-full w-1/2"   >
+            <div class=" flex justify-between max-sm:flex-col">
+                <div class=" h-full w-1/2 max-sm:w-wk"   >
                     <Spacer/>
                     <div class=" flex  flex-nowrap">
                     <FastField name="imageId" component={PostImageUpld} />
@@ -213,7 +214,7 @@ function UpdatePitchForm (props) {
                     />
                     </StyledLabel>
                     <div class=" flex justify-between">
-                    <div class=" w-3/12">
+                    <div class=" w-3/12 max-sm:w-[32%]">
                   
                       <FastField
                         name="countryDialCode"
@@ -222,7 +223,7 @@ function UpdatePitchForm (props) {
                         label={
                           <FormattedMessage
                             id="app.countryDialCode"
-                            defaultMessage="Dial Code #"
+                            defaultMessage="Dial Code "
                           />
                         }
                         isColumn
@@ -282,8 +283,8 @@ function UpdatePitchForm (props) {
                   <Spacer />
                   
                  
-                  <div class=" flex justify-between">
-                    <div class=" w-1/2">
+                  <div class=" flex justify-between max-sm:flex-col">
+                    <div class=" w-1/2 max-sm:w-wk">
                     <StyledLabel>
                       <Field
                         name="vatNo"
@@ -302,7 +303,7 @@ function UpdatePitchForm (props) {
                         />
                         </StyledLabel>
                     </div>
-                    <div class=" w-2/5">
+                    <div class=" w-2/5 max-sm:w-wk">
                     <StyledLabel>
                       <Field
                         name="businessRegistration"
@@ -324,7 +325,7 @@ function UpdatePitchForm (props) {
                     </div>
                      <Spacer/>
                      <div class=" flex justify-between">
-                   <div class=" w-1/2">
+                   <div class=" w-1/2 max-sm:w-wk">
                       <FastField
                         name="sectorId"
                         isColumnWithoutNoCreate
@@ -342,7 +343,7 @@ function UpdatePitchForm (props) {
            
                 </div>
                  </div>
-                 <div class=" h-3/4 w-5/12 "   >
+                 <div class=" h-3/4 w-5/12 max-sm:w-wk "   >
                    <Spacer/>
                    
                     <div class="">
@@ -454,6 +455,7 @@ function UpdatePitchForm (props) {
                 </Button>
               </div>
             </Form>
+            </div>
           )}
         </Formik>
       </>

@@ -156,7 +156,7 @@ function ContactInvestCardList(props) {
             />
           </SubTitle></div>
           &nbsp;
-          <div class="max-sm:w-full">
+          <div class="max-sm:w-full md:w-40">
                                         <Tooltip>
                                           <div class=" flex max-sm:w-full justify-between flex-row md:flex-col">
                                             <div class="text-[0.875rem] text-cardBody font-poppins">
@@ -185,19 +185,19 @@ function ContactInvestCardList(props) {
                                         </div>
                                         </div>
                                 </div>
-                                <div className="  flex max-sm:w-full  flex-row md:flex-col">
+                                <div className="  flex max-sm:w-full justify-between  flex-row md:flex-col w-52">
                                     <div class=" text-[0.875rem] text-cardBody font-[0.875rem] font-poppins"> Company </div>
                                     <div class=" text-[0.75rem] text-cardBody font-poppins">   
                                     {item.tagWithCompany}
                                     </div>
                                 </div>
-                                <div className=" flex max-sm:w-full  flex-row md:flex-col ">
+                                <div className=" flex max-sm:w-full justify-between  flex-row md:flex-col w-40 ">
                                     <div class=" text-[0.875rem] text-cardBody font-poppins">Designation</div>
                                     <div class="text-[0.75rem] text-cardBody font-poppins">
                                          {item.designation}
                                     </div>
                                 </div>
-                                <div className=" flex max-sm:w-full  flex-row md:flex-col">
+                                <div className=" flex max-sm:w-full justify-between  flex-row md:flex-col w-40">
                                   <div class="text-[0.875rem] text-cardBody font-poppins">Department</div>
                                   <div class="text-[0.75rem] text-cardBody font-poppins">
                                        {item.department}
@@ -210,14 +210,14 @@ function ContactInvestCardList(props) {
 
                                     </div>
                                 </div>
-                                <div className="flex font-medium flex-col md:w-32 max-sm:flex-row w-full ">
+                                <div className="flex font-medium justify-between flex-col md:w-32 max-sm:flex-row w-full ">
                                     <div class="text-[0.875rem] text-cardBody font-poppins">Portal Acess</div>
 
                                     <div class="text-[0.75rem] text-cardBody font-poppins">
 
                                     </div>
                                 </div>
-                                <div className="flex font-medium flex-col md:w-20  max-sm:flex-row w-full justify-between">
+                                <div className="flex font-medium  flex-col md:w-20  max-sm:flex-row w-full justify-between">
                        
                        <div class="text-[0.875rem] text-cardBody font-poppins">Owner</div>
 

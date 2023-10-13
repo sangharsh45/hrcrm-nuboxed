@@ -138,15 +138,10 @@ function InvesterForm(props) {
             values,
             ...rest
           }) => (
+            <div class="overflow-y-auto h-[34rem] overflow-x-hidden max-sm:h-[30rem]">
             <Form className="form-background">
-              <div  style={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  height: "70vh",
-                  overflowX: "hidden",
-                  paddingRight: "0.6em",
-                }} >
-                <div class=" h-full w-1/2"   >
+            <div class=" flex justify-between max-sm:flex-col">
+                <div class=" h-full w-1/2 max-sm:w-wk"   >
                   <div>
                     {clearbit && clearbit.hasOwnProperty("logo") && (
                       <ProgressiveImage
@@ -211,7 +206,7 @@ function InvesterForm(props) {
                     inlineLabel
                   />                  
                    <div class=" flex justify-between">
-                    <div class=" w-3/12">
+                    <div class=" w-3/12 max-sm:w-[30%]">
                       <FastField
                         name="countryDialCode"
                         selectType="dialCode"
@@ -294,7 +289,7 @@ function InvesterForm(props) {
                     component={TextareaComponent}
                   />
                 </div>
-                <div class=" h-3/4 w-5/12 "  
+                <div class=" h-3/4 w-5/12 max-sm:w-wk "  
                 >
                  <Spacer/>
                  <div class=" flex justify-between">
@@ -370,8 +365,8 @@ function InvesterForm(props) {
                   </div>
                     </div>
                     <Spacer />
-                    <div class=" flex justify-between">
-                    <div class=" w-2/5">
+                    <div class=" flex justify-between max-sm:flex-col">
+                    <div class=" w-2/5 max-sm:w-wk">
                       <Field
                         name="vatNo"
                         type="text"
@@ -387,7 +382,7 @@ function InvesterForm(props) {
                         inlineLabel
                       />
                     </div>
-                    <div class=" w-[10rem]">
+                    <div class=" w-[10rem] max-sm:w-wk">
                       <Field
                         name="businessRegistration"
                         type="text"
@@ -423,7 +418,7 @@ function InvesterForm(props) {
                     )}
                   />
                    <div class=" flex justify-between">
-                   <div class=" w-1/2">
+                   <div class=" w-1/2 max-sm:w-wk">
                      <Field
                        name="country"
                        isColumnWithoutNoCreate
@@ -461,6 +456,7 @@ function InvesterForm(props) {
                 </Button>
               </div>
             </Form>
+            </div>
           )}
         </Formik>
       </>

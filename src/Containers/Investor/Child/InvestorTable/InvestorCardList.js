@@ -141,15 +141,16 @@ function InvestorCardList(props) {
            } `;
                     return (
                         <div>
-                            <div className="flex justify-between mt-4"
+                            <div className="flex justify-between mt-4 max-sm:flex-col"
                                 style={{
                                     borderBottom: "3px dotted #515050"
                                 }}>
                                      
-                                <div className=" flex font-medium flex-col w-52 ">
+                                <div className=" flex font-medium flex-col md:w-52 max-sm:flex-row w-full ">
 
                                    
                                         <Tooltip>
+                                        <div class=" flex max-sm:w-full justify-between flex-row md:flex-col">
                                             <h4 class=" text-[0.875rem] text-cardBody font-poppins">
                                             Name
                                             </h4>
@@ -171,19 +172,19 @@ function InvestorCardList(props) {
         ) : null}
        
                                             </h4>
-
+</div>
                                         </Tooltip>
                               
                                 </div>
 
-                                <div className=" flex font-medium flex-col  w-52 ">
+                                <div className=" flex font-medium flex-col  md:w-52 max-sm:flex-row w-full justify-between ">
                            
                                     <h4 class=" text-[0.875rem] text-cardBody font-poppins"> Sector </h4>
                                     <h4 class=" text-[0.75rem] text-cardBody font-poppins">   
                                     {item.sector}
                                     </h4>
                                 </div>
-                                <div className=" flex font-medium flex-col w-36 ">
+                                <div className=" flex font-medium flex-col md:w-36 max-sm:flex-row w-full justify-between ">
                                   
 
                                     <h4 class=" text-[0.875rem] text-cardBody font-poppins">Country</h4>
@@ -201,14 +202,14 @@ function InvestorCardList(props) {
                                     </h4>
                                 </div>
                              
-                                <div className=" flex font-medium flex-col w-36 ">
+                                <div className=" flex font-medium flex-col md:w-36 max-sm:flex-row w-full justify-between ">
                                     <h4 class=" text-[0.875rem] text-cardBody font-poppins"># Opportunity</h4>
 
                                     <div class=" text-[0.75rem] text-cardBody font-poppins">
 
                                     </div>
                                 </div>
-                                <div className=" flex font-medium flex-col w-24 ">
+                                <div className=" flex font-medium flex-col md:w-24 max-sm:flex-row w-full justify-between ">
                                     <h4 class=" text-[0.875rem] text-cardBody font-poppins">Assigned to</h4>
 
                                     <div class=" text-[0.75rem] text-cardBody font-poppins">
@@ -227,7 +228,7 @@ function InvestorCardList(props) {
              
                                     </div>
                                 </div>
-                                <div className=" flex font-medium flex-col w-20 ">
+                                <div className=" flex font-medium flex-col md:w-20 max-sm:flex-row w-full justify-between ">
                        
                        <h4 class=" text-[0.875rem] text-cardBody font-poppins">Owner</h4>
 
@@ -241,7 +242,7 @@ function InvestorCardList(props) {
               />
             </span>
                    </div>
-                   <div className=" flex font-medium flex-col">
+                   <div className=" flex font-medium flex-col max-sm:flex-row  ">
                        
                        <h4 class=" text-[0.875rem] text-cardBody font-poppins"></h4>
 
