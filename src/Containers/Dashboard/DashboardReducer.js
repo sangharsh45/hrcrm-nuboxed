@@ -108,6 +108,12 @@ const initialState = {
   fetchingallDashBoardFunnelError: false,
   alldashboardFunnel: [],
 
+
+  fetchingLeavesGantt:false,
+  fetchingLeavesGanttError:false,
+
+  leavesGantt:[],
+
   // updatingReqStage:false,
   fetchingDetails: false,
   fetchingDetailsError: false,
@@ -581,6 +587,23 @@ export const dashboardReducer = (state = initialState, action) => {
         fetchingSalesDatewiseReportError: true,
         selectedReportType: "dashboard",
       };
+
+
+      case types.GET_LEAVES_GANTT_REQUEST:
+        return { ...state, fetchingLeavesGantt: true };
+      case types.GET_LEAVES_GANTT_SUCCESS:
+        return {
+          ...state,
+          fetchingLeavesGantt: false,
+           leavesGantt: action.payload,
+        };
+      case types.GET_LEAVES_GANTT_FAILURE:
+        return {
+          ...state,
+          fetchingLeavesGantt: false,
+          fetchingLeavesGanttError: true,
+        };
+
 
     case types.UPDATE_TODO_CALL_BY_ID_REQUEST:
       return { ...state, updatingTodoCall: true };
