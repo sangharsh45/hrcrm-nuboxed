@@ -50,6 +50,8 @@ const initialState = {
   deletingTopicsByUserIdError: false,
   topicsByUserId: [],
 
+  updateOrganizationModal:false,
+
   fetchingCallsListByUserId: false,
   fetchingCallsListByUserIdError: false,
   callsListByUserId: [],
@@ -65,6 +67,9 @@ const initialState = {
   fetchingTasksListByUserId: false,
   fetchingTasksListByUserIdError: false,
   tasksListByUserId: [],
+
+
+  addingOrganizationDocument:false,
 
   addingOrgSignature: false,
   addingOrgSignatureError: false,
@@ -425,6 +430,10 @@ export const authReducer = (state = initialState, action) => {
     /**
      * topic of intrest of an user
      */
+
+
+    case types.HANDLE_UPDATE_ORGANIZATION_MODAL:
+      return { ...state, updateOrganizationModal: action.payload };
     case types.GET_TOPICS_BY_USER_ID_REQUEST:
       return { ...state, fetchingTopicsByUserId: true };
     case types.GET_TOPICS_BY_USER_ID_SUCCESS:
@@ -641,6 +650,21 @@ export const authReducer = (state = initialState, action) => {
         generatingOtpByEmail: false,
         generatingOtpByEmailError: true
       };
+
+
+
+      case types.ADD_ORGANIZATION_DOCUMENT_REQUEST:
+        return { ...state, addingOrganizationDocument: true };
+      case types.ADD_ORGANIZATION_DOCUMENT_SUCCESS:
+        return { ...state, 
+          addingOrganizationDocument: false, 
+          updateOrganizationModal: false ,
+        
+        };
+      case types.ADD_ORGANIZATION_DOCUMENT_FAILURE:
+        return { ...state, addingOrganizationDocument: false, 
+          // addCustomerModal: false 
+        };
 
     case types.VALIDATE_OTP_BY_EMAIL_REQUEST:
       return { ...state, validatingOtpByEmail: true };

@@ -5,6 +5,7 @@ import AddCustomerModal from "../Customer/Child/AddCustomerModal";
 import { handleCustomerModal } from "../Customer/CustomerAction";
 import { handleTaskModal } from "../Task/TaskAction";
 import AddTaskModal from "../Task/Child/AddTaskModal";
+import UploadOrganization from "./UploadOrganization"
 import {
   handleCandidateResumeModal,
 } from "../Candidate/CandidateAction";
@@ -533,6 +534,7 @@ function MainApp(props) {
                       </FlexContainer>
                     </Tooltip>
                   </Link> */}
+                   <UploadOrganization />
                   <ProfileDropdown />
                   {/* <Theme /> */}
                 </div>

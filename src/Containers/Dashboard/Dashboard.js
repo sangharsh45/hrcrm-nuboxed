@@ -23,6 +23,7 @@ import DashboardInvestorsOrgJumpstart from "./Child/JumpStart/DashboardInvestors
 import InvestorsPitchTab from "./InvestorsPitchTab";
 import GantChartTab from "./Child/GantChartTab"
 import DashInvestorsChartTab from "./DashInvestorsChartTab";
+import FunnelTab from "./Child/FunnelTab";
 
 
 class Dashboard extends Component {
@@ -143,6 +144,10 @@ class Dashboard extends Component {
             }
              {this.state.activeButton==="Tasks"&&
        <GantChartTab/>
+             }
+
+{this.state.activeButton==="Customer"&&
+       <FunnelTab/>
              }
    
       </FlexContainer>

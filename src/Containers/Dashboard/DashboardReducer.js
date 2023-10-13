@@ -7,6 +7,11 @@ const initialState = {
   fetchingSkillsCloudError: false,
   skillsCloud: [],
 
+  fetchingThisMonthTaskGantt:false,
+  fetchingThisMonthTaskGanttError:false,
+
+  thisMonthTaskGant:[],
+
   fetchingDashboardTasks: false,
   fetchingDashboardTasksError: false,
   dashboardTasks:[],
@@ -93,6 +98,11 @@ const initialState = {
   fetchingActionNotifications: false,
   fetchingActionNotificationsError: false,
   actionNotifications: [],
+
+
+  fetchingTaskDashboardGantt:false,
+  fetchingTaskDashboardGanttError:false,
+  tasksdashboardGantt:[],
 
   fetchingTaskper: false,
   fetchingTaskperError: false,
@@ -589,6 +599,22 @@ export const dashboardReducer = (state = initialState, action) => {
       };
 
 
+      case types.GET_THIS_MONTH_TASK_GANTT_REQUEST:
+        return { ...state, fetchingThisMonthTaskGantt: true };
+      case types.GET_THIS_MONTH_TASK_GANTT_SUCCESS:
+        return {
+          ...state,
+          fetchingThisMonthTaskGantt: false,
+           thisMonthTaskGant: action.payload,
+        };
+      case types.GET_THIS_MONTH_TASK_GANTT_FAILURE:
+        return {
+          ...state,
+          fetchingThisMonthTaskGantt: false,
+          fetchingThisMonthTaskGanttError: true,
+        };
+
+
       case types.GET_LEAVES_GANTT_REQUEST:
         return { ...state, fetchingLeavesGantt: true };
       case types.GET_LEAVES_GANTT_SUCCESS:
@@ -603,6 +629,22 @@ export const dashboardReducer = (state = initialState, action) => {
           fetchingLeavesGantt: false,
           fetchingLeavesGanttError: true,
         };
+
+
+        case types.GET_TASKS_DASHBOARD_GANTT_REQUEST:
+          return { ...state, fetchingTaskDashboardGantt: true };
+        case types.GET_TASKS_DASHBOARD_GANTT_SUCCESS:
+          return {
+            ...state,
+            fetchingTaskDashboardGantt: false,
+             tasksdashboardGantt: action.payload,
+          };
+        case types.GET_TASKS_DASHBOARD_GANTT_FAILURE:
+          return {
+            ...state,
+            fetchingTaskDashboardGantt: false,
+            fetchingTaskDashboardGanttError: true,
+          };
 
 
     case types.UPDATE_TODO_CALL_BY_ID_REQUEST:

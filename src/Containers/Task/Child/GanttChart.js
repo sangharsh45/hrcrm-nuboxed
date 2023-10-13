@@ -29,10 +29,11 @@ useEffect(()=>{
 
   const tasks = props.grantTask.map(item => ({
     id: item.taskId,
-    name: item.taskName,
+    // name: item.taskName,
+    name: `${item.taskName} `,
     start: new Date(item.startDate),
     end: new Date(item.endDate),
-    type:item.taskType,
+    // type:item.taskType,
   }));
 
   if (props.fetchingGrantTask) {
@@ -49,10 +50,11 @@ useEffect(()=>{
       {props.grantTask.length?
       <Gantt
         tasks={tasks}
-        viewMode={view}
+        // viewMode={view}
+          viewMode={ViewMode.Day}
         listCellWidth={isChecked ? "155px" : ""}
-        columnWidth={columnWidth}
-        barBackgroundColor="blue"
+        columnWidth={50}
+        // barBackgroundColor="blue"
         rowHeight={40}
         fontSize={12}
       />

@@ -4,22 +4,23 @@ import { bindActionCreators } from "redux";
 import ListAltIcon from "@mui/icons-material/ListAlt";
 import {  StyledTabs } from "../../../Components/UI/Antd";
 import { TabsWrapper } from "../../../Components/UI/Layout";
-import TaskGanttChart from "../Child/TaskGanttChart";
-import LeavesGanttChart from "../Child/LeavesGanttChart"
+
 //import ActionNotification from "../Dashboard/ActionNotification";
 import UpcomingIcon from '@mui/icons-material/Upcoming';
-import TaskThisMonthGanttChart from "../Child/TaskThisMonthGanttChart"
+
 import TipsAndUpdatesIcon from "@mui/icons-material/TipsAndUpdates";
 // import {getTodosCount} from "./DashboardAction";
 // import DashboardTodo from "./Child/DashboardTodo";
 // import UpcomingEvents from "./Child/UpcomingEvents";
 import { Badge } from "antd";
 
+import FunnelChartCustomer from "../Child/FunnelChartCustomer"
+
 const TabPane = StyledTabs.TabPane;
 function handleRefreshPage() {
   window.location.reload();
 }
-class GantChartTab extends Component {
+class FunnelTab extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -64,7 +65,7 @@ class GantChartTab extends Component {
               tab={
                 <>
                   <ListAltIcon style={{fontSize:"1.1rem"}}/>
-                  <span class=" ml-1">Open Tasks</span>
+                  <span class=" ml-1">Funnel</span>
 
                 
                 </>
@@ -73,95 +74,13 @@ class GantChartTab extends Component {
             >
               <Suspense fallback={"Loading ..."}>
                 {" "}
-                <TaskGanttChart 
-                // style={{ overflow: "scroll" }} 
-                />
+               <FunnelChartCustomer/>
               </Suspense>
             </TabPane>
 
 
-            <TabPane
-              tab={
-                <>
-                  <ListAltIcon style={{fontSize:"1.1rem"}}/>
-                  <span class=" ml-1">Tasks-This Month</span>
-
-                
-                </>
-              }
-              key="2"
-            >
-              <Suspense fallback={"Loading ..."}>
-                {" "}
-                <TaskThisMonthGanttChart 
-                // style={{ overflow: "scroll" }} 
-                />
-              </Suspense>
-            </TabPane>
-            {/* <TabPane
-              tab={
-                <>
-                  <TipsAndUpdatesIcon style={{fontSize:"1.1rem"}}/>
-
-                  <span class=" ml-1">Actions</span>
-
-                  {activeKey === "2" && (
-                    <>
-                    </>
-                  )}
-                </>
-              }
-              key="2"
-            >
-              <Suspense fallback={"Loading ..."}>
-                {" "}
-                <ActionNotification />
-              </Suspense>
-            </TabPane> */}
-          
-            <TabPane
-              tab={
-                <>
-                  <UpcomingIcon style={{fontSize:"1.1rem"}}/>
-
-                  <span class=" ml-1">Leaves</span>
-
-                 
-                </>
-              }
-              key="3"
-            >
-              <Suspense fallback={"Loading ..."}>
-                {" "}
-                <LeavesGanttChart />
-              </Suspense>
-            </TabPane>
-
-            {/* <TabPane
-              tab={
-                <>
-                 
-               
-                 <FontAwesomeIcon icon={solid('bullseye')} />
-                    <span style={{ marginLeft: "0.25em" }}>Pareto</span>
-                  
-                  {activeKey === "3" && (
-                    <>
-                    
-                    </>
-                  )}
-                </>
-              }
-              key="3"
-            >
-              <Suspense fallback={"Loading ..."}>
-                {" "}
-                <Example/>
-         
-              </Suspense>
-            </TabPane> */}
-
-            {/* )} */}
+       
+        
           </StyledTabs>
         </TabsWrapper>
         <Suspense fallback={null}></Suspense>
@@ -181,4 +100,4 @@ const mapDispatchToProps = (dispatch) => bindActionCreators(
 },
    dispatch);
 
-export default connect(mapStateToProps, mapDispatchToProps)(GantChartTab);
+export default connect(mapStateToProps, mapDispatchToProps)(FunnelTab);

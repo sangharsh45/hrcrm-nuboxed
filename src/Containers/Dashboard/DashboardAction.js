@@ -719,6 +719,28 @@ export const setSubSelectedReportType = (type) => (dispatch) =>
       
   };
 
+  export const getThisMonthTaskGantt = (userId,endDate,startDate) => (dispath) => {
+    dispath({ type: types.GET_THIS_MONTH_TASK_GANTT_REQUEST });
+    axios
+      .get(`${base_url}/task/dateRange/myTask/${userId}?endDate=${endDate}&startDate=${startDate} `, {
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+        },
+      })
+      .then((res) => {
+        dispath({
+          type: types.GET_THIS_MONTH_TASK_GANTT_SUCCESS,
+          payload: res.data,
+        });
+      })
+      .catch((err) => {
+        dispath({
+          type: types.GET_THIS_MONTH_TASK_GANTT_FAILURE,
+          payload: err,
+        });
+      });
+  } 
+
 
   export const getAllDashboardFunnelRecord = (userId,type) => (dispatch) => {
     dispatch({
@@ -1338,3 +1360,27 @@ export const getDashboardTasks = (userId) => (dispatch) => {
       });
     });
 };
+
+
+
+export const getTakskdashboardGantt = (userId) => (dispath) => {
+  dispath({ type: types.GET_TASKS_DASHBOARD_GANTT_REQUEST });
+  axios
+    .get(`${base_url}/task/openTask/list/${userId} `, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      dispath({
+        type: types.GET_TASKS_DASHBOARD_GANTT_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      dispath({
+        type: types.GET_TASKS_DASHBOARD_GANTT_FAILURE,
+        payload: err,
+      });
+    });
+} 
