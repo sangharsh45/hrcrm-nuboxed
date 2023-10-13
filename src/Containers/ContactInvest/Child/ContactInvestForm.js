@@ -205,11 +205,10 @@ class ContactInvestForm extends Component {
             setFieldValue,
             setFieldTouched,
           }) => (
+            <div class="overflow-y-auto h-[34rem] overflow-x-hidden max-sm:h-[30rem]">
             <Form className="form-background">
-              <div class=" flex justify-between h-[27rem] overflow-x-hidden"
-              >
-                <div class=" h-full w-1/2"
-                >
+              <div class=" flex justify-between max-sm:flex-col ">
+                <div class=" h-full w-1/2 max-sm:w-wk">
                   <div class=" flex  flex-nowrap">
                     <FastField name="imageId" component={Upload} />
                     <div>
@@ -440,8 +439,7 @@ class ContactInvestForm extends Component {
                   />
 
                 </div>
-                <div class=" h-3/4 w-5/12 "
-                >
+                <div class=" h-3/4 w-5/12 max-sm:w-wk " >
                   <div class=" flex  justify-between">
                     <div class=" w-1/2">
                       <Field
@@ -635,6 +633,7 @@ class ContactInvestForm extends Component {
                 </Button>
               </div>
             </Form>
+            </div>
           )}
         </Formik>
       </>

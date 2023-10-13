@@ -76,6 +76,10 @@ export const investorReducer = (state = initialState, action) => {
     case types.HANDLE_INVESTOR_UPDATE_MODAL:
       return { ...state, updateInvestorModal: action.payload };
 
+      case types.HANDLE_INVESTOR_MODAL:
+      return { ...state, addInvestorModal: action.payload };
+
+
     case types.UPDATE_INVESTOR_BY_ID_REQUEST:
       return { ...state, updateInvestorById: true };
     case types.UPDATE_INVESTOR_BY_ID_SUCCESS:

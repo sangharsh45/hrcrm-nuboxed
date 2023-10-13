@@ -106,11 +106,10 @@ function UpdateInvestorForm (props) {
             values,
             ...rest
           }) => (
+            <div class="overflow-y-auto h-[34rem] overflow-x-hidden max-sm:h-[30rem]">
             <Form className="form-background">
-              <div class=" flex justify-between h-[27rem] overflow-x-hidden">
-                <div class=" w-2/4"
-              
-                >
+              <div class=" flex justify-between max-sm:flex-col">
+                <div class=" w-2/4 max-sm:w-wk" >
                     <Spacer/>
                    <StyledLabel><FormattedMessage id="app.name" defaultMessage="Name" /></StyledLabel>
                   <Field
@@ -150,7 +149,7 @@ function UpdateInvestorForm (props) {
                     inlineLabel
                     />
                    <div class=" flex justify-between">
-                   <div class=" w-3/12">
+                   <div class=" w-3/12 max-sm:w-[30%]">
                       <FastField
                         name="countryDialCode"
                         selectType="dialCode"
@@ -158,7 +157,7 @@ function UpdateInvestorForm (props) {
                         label={
                           <FormattedMessage
                             id="app.countryDialCode"
-                            defaultMessage="Dial Code #"
+                            defaultMessage="Dial Code "
                           />
                         }
                         isColumn
@@ -183,7 +182,7 @@ function UpdateInvestorForm (props) {
                   <Spacer/>
                   
                      <div class=" flex justify-between">
-                  <div class=" w-6/12">
+                  <div class=" w-6/12 max-sm:w-wk">
                       <FastField                      
                         name="sectorId"
                         isColumnWithoutNoCreate
@@ -213,7 +212,7 @@ function UpdateInvestorForm (props) {
                     />   
                  </div>
 
-                 <div class=" h-3/4 w-5/12 "
+                 <div class=" h-3/4 w-5/12 max-sm:w-wk "
                 >
                    <Spacer/>
                    <div class=" flex justify-between">
@@ -289,8 +288,8 @@ function UpdateInvestorForm (props) {
                   </div>
                     </div>
                     <Spacer/>
-                    <div class=" flex justify-between">
-                    <div class=" w-1/2">
+                    <div class=" flex justify-between max-sm:flex-col">
+                    <div class=" w-1/2 max-sm:w-wk">
                       <Field
                         name="vatNo"
                         type="text" 
@@ -307,7 +306,7 @@ function UpdateInvestorForm (props) {
                         inlineLabel
                         />
                     </div>
-                    <div class=" w-[10rem]">
+                    <div class=" w-[10rem] max-sm:w-wk">
                       <Field
                         name="businessRegistration"
                         type="text"
@@ -343,7 +342,7 @@ function UpdateInvestorForm (props) {
                     )}
                   />
         <div class=" flex justify-between">
-                    <div class=" w-1/2">
+                    <div class=" w-1/2 max-sm:w-wk">
                      <Field
                        // name="address[0].country"
                        name="country"
@@ -385,6 +384,7 @@ function UpdateInvestorForm (props) {
                 </Button>
               </div>
             </Form>
+            </div>
           )}
         </Formik>
       </>

@@ -23,6 +23,7 @@ import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
 import "./header.css";
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
+import MenuOpenIcon from '@mui/icons-material/MenuOpen';
 const SubMenu = Menu.SubMenu;
 
 function NavMenu (props) {
@@ -813,7 +814,7 @@ function NavMenu (props) {
         {click ? (
           <CloseIcon className="menu-icon" />
         ) : (
-          <MenuIcon className="menu-icon" />
+          <MenuOpenIcon className="menu-icon" />
         )}
       </div>
       </div>

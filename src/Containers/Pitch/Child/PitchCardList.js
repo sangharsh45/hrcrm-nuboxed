@@ -99,7 +99,7 @@ const PitchCardList = (props) => {
                                 style={{
                                     borderBottom: "3px dotted #515050"
                                 }}>
-                                     
+                                     <div class="flex justify-between">
                                 <div className=" flex font-medium flex-col w-60 mb-4  max-sm:w-full">
                                 <div className="flex max-sm:w-full"> 
 <div>
@@ -119,8 +119,8 @@ const PitchCardList = (props) => {
 
                                         <div class="max-sm:w-full" >
                                         <Tooltip>
-                                          <div class="max-sm:w-full justify-between flex md:flex-col">
-                                            <h4 class=" text-[0.875rem] text-cardBody font-poppins">
+                                          <div class="max-sm:w-full max-sm:justify-between flex md:flex-col">
+                                            <h4 class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden">
                                             Name
                                             </h4>
                                             <h4 class="text-[0.75rem] text-cardBody font-poppins cursor-pointer">
@@ -146,68 +146,10 @@ const PitchCardList = (props) => {
                                         </div>
                                         </div>
                                 </div>
-                                <div className=" flex font-medium flex-col  md:w-44 max-sm:flex-row w-full justify-between ">
-                           <h4 class=" text-[0.875rem] text-cardBody font-poppins"> Phone # </h4>
-                           <h4 class=" text-[0.75rem] text-cardBody font-poppins">   
-                           {`${item.countryDialCode} ${item.phoneNumber}`}
-                           </h4>
-                       </div>
-                       <div className=" flex font-medium flex-col  md:w-40 max-sm:flex-row w-full justify-between ">
-                           <h4 class=" text-[0.875rem] text-cardBody font-poppins"> Company </h4>
-                           <h4 class=" text-[0.75rem] text-cardBody font-poppins">   
-                           <Link
-           toUrl={`pitch/${item.investorLeadsId}`}
-          title={`${item.companyName}`}
-        >{item.companyName}</Link>
-                           </h4>
-                       </div>
-                       <div class="rounded-full bg-white  h-5 cursor-pointer w-8">
-                    {item.url !== null ? (
-              <Tooltip title={item.url}>
-                <span
-                  //type="edit"
-                  style={{ cursor: "pointer" }}
-                  onClick={() => {}}
-                >
-                  {" "}
-                  <a href={`item.url`} target="_blank">
-                    <ExploreIcon
-                      style={{ cursor: "pointer", color: "green" ,fontSize: "0.8rem",}}
-                    />
-                  </a>
-                </span>
-              </Tooltip>
-            ) : null}
-                        </div>
-                                <div className=" flex font-medium flex-col  md:w-52 max-sm:flex-row w-full justify-between ">
-                           
-                                    <h4 class=" text-[0.875rem] text-cardBody font-poppins"> Sector </h4>
-                                    <h4 class=" text-[0.75rem] text-cardBody font-poppins">   
-                                    {item.sector}
-                                    </h4>
-                                </div>
-                                <div className=" flex font-medium flex-col md:w-32 max-sm:flex-row w-full justify-between ">
-                                  
-
-                                    <h4 class=" text-[0.875rem] text-cardBody font-poppins">Country</h4>
-                                    <h4 class=" text-[0.75rem] text-cardBody font-poppins">
-                                    <ReactCountryFlag countryCode="IN" svg />
-                                    <ReactCountryFlag
-                          countryCode={item.country}
-                          svg
-                          style={{
-                            width: '1em',
-                            height: '1em',
-                          }}
-                          title={item.country}
-                        />
-                        &nbsp;
-                        {item.address && item.address.length && item.address[0].country}
-                                    </h4>
-                                </div>
-                                <div class="flex flex-row md:w-[11%] max-sm:flex-row w-full justify-between">
+                                <div class="flex flex-row md:w-6 max-sm:flex-row w-full max-sm:justify-between">
 
 <div>
+</div>
 <ButtonGroup>
 <RoleButton
  type="Warm"
@@ -270,8 +212,90 @@ style={{fontSize: "1rem"}}
 />
 </div>
      </div>  
-                                <div className=" flex font-medium flex-col md:w-32 max-sm:flex-row w-full justify-between ">
-                                    <h4 class=" text-[0.875rem] text-cardBody font-poppins">Assigned to</h4>
+                                <div class="flex justify-between md:ml-4">
+                                <div className=" flex font-medium flex-col  md:w-28 max-sm:flex-row w-full max-sm:justify-between ">
+                           <h4 class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden"> Phone # </h4>
+                           <h4 class=" text-[0.75rem] text-cardBody font-poppins">   
+                           {`${item.countryDialCode} ${item.phoneNumber}`}
+                           </h4>
+                       </div>
+                       <div className=" flex font-medium flex-col md:w-32 max-sm:flex-row w-full max-sm:justify-between ">
+                                  
+
+                                  <h4 class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden">Country</h4>
+                                  <h4 class=" text-[0.75rem] text-cardBody font-poppins">
+                                  <ReactCountryFlag countryCode="IN" svg />
+                                  <ReactCountryFlag
+                        countryCode={item.country}
+                        svg
+                        style={{
+                          width: '1em',
+                          height: '1em',
+                        }}
+                        title={item.country}
+                      />
+                      &nbsp;
+                      {item.address && item.address.length && item.address[0].country}
+                                  </h4>
+                              </div>
+                              </div>
+                       <div class="flex justify-between  max-sm:mb-2 mt-2">
+                       <div className=" flex font-medium flex-col  md:w-40 max-sm:flex-row w-full max-sm:justify-between ">
+                           <h4 class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden"> Company </h4>
+                           <h4 class=" text-[0.75rem] text-cardBody font-poppins">   
+                           <Link
+           toUrl={`pitch/${item.investorLeadsId}`}
+          title={`${item.companyName}`}
+        >{item.companyName}</Link>
+                           </h4>
+                       </div>
+                       <div class="rounded-full bg-white  h-5 cursor-pointer w-8">
+                    {item.url !== null ? (
+              <Tooltip title={item.url}>
+                <span
+                  //type="edit"
+                  style={{ cursor: "pointer" }}
+                  onClick={() => {}}
+                >
+                  {" "}
+                  <a href={`item.url`} target="_blank">
+                    <ExploreIcon
+                      style={{ cursor: "pointer", color: "green" ,fontSize: "1rem",}}
+                    />
+                  </a>
+                </span>
+              </Tooltip>
+            ) : null}
+                        </div>
+                                <div className=" flex font-medium flex-col  md:w-36 max-sm:flex-row w-full max-sm:justify-between ">
+                           
+                                    <h4 class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden"> Sector </h4>
+                                    <h4 class=" text-[0.75rem] text-cardBody font-poppins">   
+                                    {item.sector}
+                                    </h4>
+                                </div>
+                                </div>
+                               
+          
+     <div class="md:w-[1%]"></div>
+     <div class="flex justify-between max-sm:mb-1">
+     <div class="flex justify-between max-sm:w-[50%] ">
+     <div className=" flex font-medium flex-col md:w-20  max-sm:flex-row w-full max-sm:justify-between">
+                       
+                       <h4 class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden">Owner</h4>
+
+                       <span>
+              <MultiAvatar
+                primaryTitle={item.ownerName}
+                imageId={item.ownerImageId}
+                imageURL={item.imageURL}
+                imgWidth={"1.8rem"}
+                imgHeight={"1.8rem"}
+              />
+            </span>
+                   </div>
+                                <div className=" flex font-medium flex-col md:w-32 max-sm:flex-row w-full max-sm:justify-between ">
+                                    <h4 class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden">Assigned to</h4>
 
                                     <div class=" text-[0.75rem] text-cardBody font-poppins">
                                     
@@ -289,22 +313,9 @@ style={{fontSize: "1rem"}}
              
                                     </div>
                                 </div>
-                                <div className=" flex font-medium flex-col md:w-20  max-sm:flex-row w-full justify-between">
-                       
-                       <h4 class=" text-[0.875rem] text-cardBody font-poppins">Owner</h4>
-
-                       <span>
-              <MultiAvatar
-                primaryTitle={item.ownerName}
-                imageId={item.ownerImageId}
-                imageURL={item.imageURL}
-                imgWidth={"1.8rem"}
-                imgHeight={"1.8rem"}
-              />
-            </span>
-                   </div>
-                   <div className=" flex font-medium flex-col md:w-32 max-sm:flex-row w-full justify-between ">
-                                    <h4 class=" text-[0.875rem] text-cardBody font-poppins">Qualified</h4>
+                         
+                   <div className=" flex font-medium flex-col md:w-24 max-sm:flex-row w-full max-sm:justify-between ">
+                                    <h4 class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden">Qualified</h4>
 
                                     <div class=" text-[0.75rem] text-cardBody font-poppins">
                 {/* qual */}
@@ -317,12 +328,14 @@ style={{fontSize: "1rem"}}
           />
 </div>
                                 </div>
-                                {/* <div class="flex max-sm:flex-row w-full justify-between md:flex-col"> */}
+                                </div>
+                                <div class="flex max-sm:flex-row  justify-between md:w-20 max-sm:w-[25%] ">
+                               
                                 <div class="flex flex-col w-[5%] max-sm:flex-row">
                                 <div>
             <Tooltip title="Edit">
               <BorderColorIcon
-                style={{ cursor: "pointer",fontSize: "0.8rem" }}
+                style={{ cursor: "pointer",fontSize: "1rem" }}
                 onClick={() => {
                    props.setEditPitch(item);
                    props.handleUpdatePitchModal(true);
@@ -341,7 +354,7 @@ style={{fontSize: "1rem"}}
             {/* {user.opportunityDeleteInd ===true && ( */}
             <DeleteIcon
               type="delete"
-              style={{ cursor: "pointer", color: "red" ,fontSize: "0.8rem",}}
+              style={{ cursor: "pointer", color: "red" ,fontSize: "1rem",}}
             />
             {/* )} */}
           </StyledPopconfirm>
@@ -363,7 +376,7 @@ style={{fontSize: "1rem"}}
             >
             <LocationOnIcon   style={{
                 cursor: "pointer",
-                fontSize: "0.8rem"
+                fontSize: "1rem"
               }}/>
             </span>
           </Tooltip>
@@ -372,7 +385,7 @@ style={{fontSize: "1rem"}}
           <Tooltip title={item.email}>
               <MailOutlineIcon
                 type="mail"
-                style={{ cursor: "pointer",fontSize:"0.8rem"  }}
+                style={{ cursor: "pointer",fontSize:"1rem"  }}
                 // onClick={() => {
                 //   handleSetCurrentLeadsId(item);
                 //   props.handleLeadsEmailDrawerModal(true);
@@ -380,10 +393,13 @@ style={{fontSize: "1rem"}}
               />
             </Tooltip> </div>
            
-                      </div>    
+                      </div> 
+                      <div class="md:w-[2%]"></div>   
+                    </div>
+                    </div>
                       </div>
                             </div>
-                        // </div>
+                         
 
 
                     )

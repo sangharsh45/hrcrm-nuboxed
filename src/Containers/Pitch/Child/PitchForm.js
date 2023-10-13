@@ -114,14 +114,9 @@ props.getAllCustomerEmployeelist();
             values,
             ...rest
           }) => (
+            <div class="overflow-y-auto h-[34rem] overflow-x-hidden max-sm:h-[30rem]">
             <Form className="form-background">
-             <div  style={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  height: "70vh",
-                  overflowX: "hidden",
-                  paddingRight: "0.6em",
-                }} >
+            <div class=" flex justify-between max-sm:flex-col">
                    <div class="">
                     {clearbit && clearbit.hasOwnProperty("logo") && (
                       <ProgressiveImage
@@ -146,7 +141,7 @@ props.getAllCustomerEmployeelist();
                       </a>
                     ) : null}
                   </div> 
-                <div class=" h-full w-1/2"   >
+                <div class=" h-full w-1/2 max-sm:w-wk"   >
                   <div class=" flex  flex-nowrap">
                     <div> <FastField name="imageId" component={PostImageUpld} /></div>
                    
@@ -238,7 +233,7 @@ props.getAllCustomerEmployeelist();
                   /> 
                                
                   <div class=" flex justify-between">
-                    <div class=" w-3/12">
+                    <div class=" w-3/12 max-sm:w-[32%]">
                    
                       <FastField
                         name="countryDialCode"
@@ -417,7 +412,7 @@ props.getAllCustomerEmployeelist();
                       </StyledLabel>
                     </div> */}
                 </div>
-                <div class=" h-3/4 w-5/12 "  
+                <div class=" h-3/4 w-5/12 max-sm:w-wk "  
                 >
                    <Listbox value={selected} onChange={setSelected}>
       {({ open }) => (
@@ -525,6 +520,7 @@ props.getAllCustomerEmployeelist();
                 </Button>
               </div>
             </Form>
+            </div>
           )}
         </Formik>
       </>
