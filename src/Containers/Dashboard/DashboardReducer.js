@@ -314,6 +314,22 @@ const initialState = {
   fetchingJumpstartTask2list: false,
   fetchingJumpstartTask2listError: false,
   jumpstartTask2listCount:{},
+
+  fetchingJumpstartInvestor: false,
+  fetchingJumpstartInvestorError: false,
+  jumpstartInvestorCount: {},
+
+  fetchingJumpstartInvestor2: false,
+  fetchingJumpstartInvestor2Error: false,
+  jumpstartInvestor2Count: {},
+
+  fetchingJumpstartInvestor3: false,
+  fetchingJumpstartInvestor3Error: false,
+  jumpstartInvestor3Count: {},
+  
+  fetchingJumpstartInvestor4: false,
+  fetchingJumpstartInvestor4Error: false,
+  jumpstartInvestor4Count: {},
 };
 
 export const dashboardReducer = (state = initialState, action) => {
@@ -1160,8 +1176,85 @@ case types.GET_JUMPSTART_CUSTOMER2_LIST_REQUEST:
                     fetchingJumpstartTask2listError: true,
                   };
 
+                  case types.GET_JUMPSTART_INVESTOR_REQUEST:
+                    return {
+                      ...state,
+                      fetchingJumpstartInvestor: true,
+                      fetchingJumpstartInvestorError: false,
+                    };
+                  case types.GET_JUMPSTART_INVESTOR_SUCCESS:
+                    return {
+                      ...state,
+                      fetchingJumpstartInvestor: false,
+                      fetchingJumpstartInvestorError: false,
+                      jumpstartInvestorCount: action.payload,
+                    };
+                  case types.GET_JUMPSTART_INVESTOR_FAILURE:
+                    return {
+                      ...state,
+                      fetchingJumpstartInvestor: false,
+                      fetchingJumpstartInvestorError: true,
+                    };
 
+                    case types.GET_JUMPSTART_INVESTOR_2_REQUEST:
+                      return {
+                        ...state,
+                        fetchingJumpstartInvestor2: true,
+                        fetchingJumpstartInvestor2Error: false,
+                      };
+                    case types.GET_JUMPSTART_INVESTOR_2_SUCCESS:
+                      return {
+                        ...state,
+                        fetchingJumpstartInvestor2: false,
+                        fetchingJumpstartInvestor2Error: false,
+                        jumpstartInvestor2Count: action.payload,
+                      };
+                    case types.GET_JUMPSTART_INVESTOR_2_FAILURE:
+                      return {
+                        ...state,
+                        fetchingJumpstartInvestor2: false,
+                        fetchingJumpstartInvestor2Error: true,
+                      };
 
+                      case types.GET_JUMPSTART_INVESTOR_3_REQUEST:
+                      return {
+                        ...state,
+                        fetchingJumpstartInvestor3: true,
+                        fetchingJumpstartInvestor3Error: false,
+                      };
+                    case types.GET_JUMPSTART_INVESTOR_3_SUCCESS:
+                      return {
+                        ...state,
+                        fetchingJumpstartInvestor3: false,
+                        fetchingJumpstartInvestor3Error: false,
+                        jumpstartInvestor3Count: action.payload,
+                      };
+                    case types.GET_JUMPSTART_INVESTOR_3_FAILURE:
+                      return {
+                        ...state,
+                        fetchingJumpstartInvestor3: false,
+                        fetchingJumpstartInvestor3Error: true,
+                      };
+
+                      case types.GET_JUMPSTART_INVESTOR_4_REQUEST:
+                      return {
+                        ...state,
+                        fetchingJumpstartInvestor4: true,
+                        fetchingJumpstartInvestor4Error: false,
+                      };
+                    case types.GET_JUMPSTART_INVESTOR_4_SUCCESS:
+                      return {
+                        ...state,
+                        fetchingJumpstartInvestor4: false,
+                        fetchingJumpstartInvestor4Error: false,
+                        jumpstartInvestor4Count: action.payload,
+                      };
+                    case types.GET_JUMPSTART_INVESTOR_4_FAILURE:
+                      return {
+                        ...state,
+                        fetchingJumpstartInvestor4: false,
+                        fetchingJumpstartInvestor4Error: true,
+                      };
     default:
       return state;
   }

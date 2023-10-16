@@ -37,3 +37,104 @@ export const setDealViewType = (viewType) => (dispatch) => {
         });
       });
   };
+
+  export const createDeals = (deal, cb) => (dispatch) => {
+    dispatch({
+      type: types.CREATE_DEAL_REQUEST,
+    });
+    axios
+      .post(`${base_url}/investorOpportunity`, deal, {
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+        },
+      })
+      .then((res) => {
+        console.log(res);
+        const startDate = dayjs()
+          .startOf("month")
+          .toISOString();
+        const endDate = dayjs()
+          .endOf("month")
+          .toISOString();
+        // dispatch(getOpportunityListByUserId(userId));
+        // dispatch(getLatestOpportunities(userId, startDate, endDate));
+        // dispatch(getOpportunitiesByPrice(userId));
+        dispatch({
+          type: types.CREATE_DEAL_SUCCESS,
+          payload: res.data,
+        });
+      
+      })
+      .catch((err) => {
+        console.log(err);
+        dispatch({
+          type: types.CREATE_DEAL_FAILURE,
+          payload: err,
+        });
+      });
+  };
+
+  export const handleDealModal = (modalProps) => (dispatch) => {
+    dispatch({
+      type: types.HANDLE_DEAL_MODAL,
+      payload: modalProps,
+    });
+  };
+
+  export const getDealDetailById = (invOpportunityId) => (dispatch) => {
+    dispatch({
+      type: types.GET_DEAL_DETAILS_BY_ID_REQUEST,
+    });
+    axios
+      .get(`${base_url}/investorOpportunity/${invOpportunityId}`, {
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+        },
+      })
+        .then((res) => {
+        console.log(res);
+        dispatch({
+          type: types.GET_DEAL_DETAILS_BY_ID_SUCCESS,
+          payload: res.data,
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+        dispatch({
+          type: types.GET_DEAL_DETAILS_BY_ID_FAILURE,
+          payload: err,
+        });
+      });
+  };
+
+  
+  export const updateDeal = (data, invOpportunityId) => (dispatch) => {
+
+    dispatch({ type: types.UPDATE_DEAL_BY_ID_REQUEST });
+    axios
+      .put(`${base_url}/investorOpportunity/${invOpportunityId}`, data, {
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+        },
+      })
+      .then((res) => {
+        console.log(res); 
+        dispatch({
+          type: types.UPDATE_DEAL_BY_ID_SUCCESS,
+          payload: res.data,
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+        dispatch({
+          type: types.UPDATE_DEAL_BY_ID_FAILURE,
+          payload: err,
+        });
+      });
+  };
+  export const handleUpdateDealModal = (modalProps) => (dispatch) => {
+    dispatch({
+      type: types.HANDLE_UPDATE_DEAL_MODAL,
+      payload: modalProps,
+    });
+  };

@@ -63,7 +63,7 @@ const DealActionLeft = (props) => {
         >
           <span
             class=" mr-2 text-sm cursor-pointer"
-            // onClick={() => props.setOpportunityViewType("table")}
+            onClick={() => setDealViewType("table")}
             style={{
               color: viewType === "table" && "#1890ff",
             }}
@@ -83,11 +83,11 @@ const DealActionLeft = (props) => {
             style={{
               fontSize: "1.56em",
               marginRight: "0.3rem",
-            //   color: props.viewType === "stage" && "#1890ff",
+              color: viewType === "stage" && "#1890ff",
             }}
             // iconType="table"
             tooltipTitle="Stage View"
-            // onClick={() => props.setOpportunityViewType("stage")}
+            onClick={() => props.setDealViewType("stage")}
           >
            <TableOutlined/>
           </span>

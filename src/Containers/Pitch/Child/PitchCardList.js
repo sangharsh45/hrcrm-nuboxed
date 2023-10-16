@@ -100,7 +100,7 @@ const PitchCardList = (props) => {
                                     borderBottom: "3px dotted #515050"
                                 }}>
                                      <div class="flex justify-between">
-                                <div className=" flex font-medium flex-col w-60 mb-4  max-sm:w-full">
+                                <div className=" flex font-medium flex-col w-[11rem] mb-4  max-sm:w-full">
                                 <div className="flex max-sm:w-full"> 
 <div>
 <SubTitle>
@@ -219,7 +219,7 @@ style={{fontSize: "1rem"}}
                            {`${item.countryDialCode} ${item.phoneNumber}`}
                            </h4>
                        </div>
-                       <div className=" flex font-medium flex-col md:w-32 max-sm:flex-row w-full max-sm:justify-between ">
+                       <div className=" flex font-medium flex-col md:w-[7rem] max-sm:flex-row w-full max-sm:justify-between ">
                                   
 
                                   <h4 class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden">Country</h4>
@@ -240,7 +240,7 @@ style={{fontSize: "1rem"}}
                               </div>
                               </div>
                        <div class="flex justify-between  max-sm:mb-2 mt-2">
-                       <div className=" flex font-medium flex-col  md:w-40 max-sm:flex-row w-full max-sm:justify-between ">
+                       <div className=" flex font-medium flex-col  md:w-[9rem] max-sm:flex-row w-full max-sm:justify-between ">
                            <h4 class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden"> Company </h4>
                            <h4 class=" text-[0.75rem] text-cardBody font-poppins">   
                            <Link
@@ -267,7 +267,7 @@ style={{fontSize: "1rem"}}
               </Tooltip>
             ) : null}
                         </div>
-                                <div className=" flex font-medium flex-col  md:w-36 max-sm:flex-row w-full max-sm:justify-between ">
+                                <div className=" flex font-medium flex-col  md:w-[6rem] max-sm:flex-row w-full max-sm:justify-between ">
                            
                                     <h4 class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden"> Sector </h4>
                                     <h4 class=" text-[0.75rem] text-cardBody font-poppins">   

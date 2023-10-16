@@ -153,6 +153,7 @@ const ContactInvest=lazy(()=>import("../ContactInvest/ContactInvest"));
 const Investor=lazy(()=>import("../Investor/Investor"));
 const InvestorDetail = lazy(() =>import("../Investor/Child/InvestorDetail/InvestorDetail"));
 const ContactInvestDetail = lazy(() =>import("../ContactInvest/Child/ContactInvestDetail/ContactInvestDetail"));
+const DealDetail=lazy(()=>import("../Deal/Child/DealDetail/DealDetail"));
 
 function MainApp(props) {
   const [visible, setVisible] = useState(false);
@@ -714,7 +715,8 @@ function MainApp(props) {
                       <Route exact path="/investor" component={Investor}/>
                       <Route exact path="/investor/:investorId"  component={InvestorDetail} />
                       <Route exact path="/contactinvest/:contactId"  component={ContactInvestDetail} />
-                      
+                      <Route exact path="/dealDetails/:invOpportunityId" component={DealDetail}/>
+
                       <Route path="**" component={PageNotFound} />
                     </Switch>
                   </Suspense>

@@ -255,3 +255,41 @@ export const getInvestorDetailsById = (investorId) => (dispatch) => {
         });
       });
   };
+  export const handleInvestorContactModal =(modalProps)=> (dispatch) => {
+    dispatch({
+      type: types.HANDLE_INVESTOR_CONTACT_MODAL,
+      payload: modalProps,
+    });
+  };
+
+  export const createInvestorContact = (contact) => (dispatch) => {
+    dispatch({
+      type: types.ADD_INVESTOR_CONTACT_REQUEST,
+    });
+  
+    axios
+      .post(`${base_url}/investor/contact`, contact, {
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+        },
+      })
+      .then((res) => {
+        const startDate = dayjs()
+          .startOf("month")
+          .toISOString();
+        const endDate = dayjs()
+          .endOf("month")
+          .toISOString();
+        dispatch({
+          type: types.ADD_INVESTOR_CONTACT_SUCCESS,
+          payload: res.data,
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+        dispatch({
+          type: types.ADD_INVESTOR_CONTACT_FAILURE,
+          payload: err,
+        });
+      });
+  };

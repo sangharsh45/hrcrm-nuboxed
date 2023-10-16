@@ -88,11 +88,10 @@ function InvesterForm(props) {
             name: "",
             url: "",
             gst:"",
-            // sector: "",
             sectorId: "",
             country: props.user.country,
             email: "",
-            // sector: props.user.sectorName,
+            sourceId: "",
             countryDialCode: props.user.countryDialCode,
             phoneNumber: "",
             fullName:"",
@@ -258,19 +257,18 @@ function InvesterForm(props) {
                           />
                     </div>
                     <div class=" w-2/5">
-                          <FastField
-                            name="source"
-                            type="text"
-                            label={
+                    <FastField
+                            name="sourceId"
+                             label={
                               <FormattedMessage
                                 id="app.source"
                                 defaultMessage="Source"
                               />
                             }
-                            options={["Na", "Na2", "None"]}
-                            component={SelectComponent}
-                            inlineLabel
-                            className="field"
+                            isColumnWithoutNoCreate
+                            selectType="sourceName"
+                            component={SearchSelect}
+                            value={values.sourceId}
                             isColumn
                           />
                         </div>
@@ -282,7 +280,7 @@ function InvesterForm(props) {
                     name="notes"
                     // label="Notes"
                     label={
-                      <FormattedMessage id="app.notes" defaultMessage="Notes" />
+                      <FormattedMessage id="app.description" defaultMessage="Description" />
                     }
                     width={"100%"}
                     isColumn

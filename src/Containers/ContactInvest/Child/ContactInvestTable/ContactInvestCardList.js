@@ -204,14 +204,14 @@ function ContactInvestCardList(props) {
                                   </div>
                               </div>
                                 <div className=" flex font-medium flex-col md:w-32 max-sm:flex-row w-full  ">
-                                    <div class=" text-[0.875rem] text-cardBody font-poppins"># Opportunity</div>
+                                    <div class=" text-[0.875rem] text-cardBody font-poppins"># Deals</div>
 
                                     <div class=" text-[0.75rem] text-cardBody font-poppins">
 
                                     </div>
                                 </div>
                                 <div className="flex font-medium justify-between flex-col md:w-32 max-sm:flex-row w-full ">
-                                    <div class="text-[0.875rem] text-cardBody font-poppins">Portal Acess</div>
+                                    <div class="text-[0.875rem] text-cardBody font-poppins"> Source</div>
 
                                     <div class="text-[0.75rem] text-cardBody font-poppins">
 

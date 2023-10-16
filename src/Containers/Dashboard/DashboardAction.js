@@ -1384,3 +1384,96 @@ export const getTakskdashboardGantt = (userId) => (dispath) => {
       });
     });
 } 
+
+export const getJumpInvestorlist = (userId,startDate, endDate) => (dispatch) => {
+  dispatch({ type: types.GET_JUMPSTART_INVESTOR_REQUEST });
+  axios
+    .get(`${base_url}/investorLeads/qualified-investorLeads/count/${userId}?endDate=${endDate}&startDate=${startDate}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      // console.log(res)
+      dispatch({
+        type: types.GET_JUMPSTART_INVESTOR_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.GET_JUMPSTART_INVESTOR_FAILURE,
+        payload: err,
+      });
+    });
+};
+export const getJumpInvestor2list = (userId,startDate, endDate) => (dispatch) => {
+  dispatch({ type: types.GET_JUMPSTART_INVESTOR_2_REQUEST });
+  axios
+    .get(`${base_url}/investorLeads/createded-investorLeads/count//${userId}?endDate=${endDate}&startDate=${startDate}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      // console.log(res)
+      dispatch({
+        type: types.GET_JUMPSTART_INVESTOR_2_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.GET_JUMPSTART_INVESTOR_2_FAILURE,
+        payload: err,
+      });
+    });
+};
+export const getJumpInvestor3list = (userId,startDate, endDate) => (dispatch) => {
+  dispatch({ type: types.GET_JUMPSTART_INVESTOR_3_REQUEST });
+  axios
+    .get(`${base_url}/InvestorOpportunity/added/record/count/date-range/${userId}?endDate=${endDate}&startDate=${startDate}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      // console.log(res)
+      dispatch({
+        type: types.GET_JUMPSTART_INVESTOR_3_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.GET_JUMPSTART_INVESTOR_3_FAILURE,
+        payload: err,
+      });
+    });
+};
+export const getJumpInvestor4list = (userId,startDate, endDate) => (dispatch) => {
+  dispatch({ type: types.GET_JUMPSTART_INVESTOR_4_REQUEST });
+  axios
+    .get(`${base_url}/nvestorOpportunity/Close/record/count/date-range/${userId}?endDate=${endDate}&startDate=${startDate}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      // console.log(res)
+      dispatch({
+        type: types.GET_JUMPSTART_INVESTOR_4_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.GET_JUMPSTART_INVESTOR_4_FAILURE,
+        payload: err,
+      });
+    });
+};

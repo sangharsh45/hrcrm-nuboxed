@@ -36,6 +36,11 @@ const initialState = {
   fetchingInvoiceByInvestorId: false,
   fetchingInvoiceByInvestorIdError: false,
   invoiceOfInvestor: [],
+
+  openInvestorContactModal:false,
+  addingInvestorContact: false,
+  addingInvestorContactError: false,
+
 };
 export const investorReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -209,6 +214,24 @@ export const investorReducer = (state = initialState, action) => {
             fetchingInvoiceByInvestorIdError: true,
           };
     
+          case types.HANDLE_INVESTOR_CONTACT_MODAL:
+            return { ...state, openInvestorContactModal: action.payload };
+
+            case types.ADD_INVESTOR_CONTACT_REQUEST:
+              return { ...state, addingInvestorContact: true };
+            case types.ADD_INVESTOR_CONTACT_SUCCESS:
+              return {
+                ...state,
+                addingInvestorContact: false,
+                openInvestorContactModal: false,
+                contactsbyInvestorId:[action.payload,...state.contactsbyInvestorId]
+              };
+            case types.ADD_INVESTOR_CONTACT_FAILURE:
+              return {
+                ...state,
+                addingInvestorContactError: false,
+                openInvestorContactModal: false,
+              };        
 
     default:
       return state;

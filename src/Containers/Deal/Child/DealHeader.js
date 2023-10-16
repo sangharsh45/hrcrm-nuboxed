@@ -6,12 +6,13 @@ import DealActionRight from "./DealActionRight";
 class DealHeader extends Component {
   render() {
     const {
-      handleOpportunityModal,
+      handleDealModal,
       handleChange,
       currentData,
       handleClear,
       viewType,
-      setDealViewType
+      setDealViewType,
+      opencreateDealModal
     } = this.props;
     return (
       <div style={{position: "sticky",
@@ -29,8 +30,9 @@ class DealHeader extends Component {
           }
           rightComponent={
             <DealActionRight
-            //   viewType={viewType}
-            //   handleOpportunityModal={handleOpportunityModal}
+              viewType={viewType}
+              opencreateDealModal={opencreateDealModal}
+              handleDealModal={handleDealModal}
             />
           }
         />

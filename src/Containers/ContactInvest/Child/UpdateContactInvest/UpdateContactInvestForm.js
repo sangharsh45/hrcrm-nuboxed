@@ -450,7 +450,8 @@ class UpdateContactInvestForm extends Component {
                 </div>
               </div>
               <Spacer />
-              <div class=" w-full">
+              <div class=" flex justify-between">   
+              <div class="w-2/5">
                     <FastField
                       name="departmentId"
                       //label="Department"
@@ -460,31 +461,31 @@ class UpdateContactInvestForm extends Component {
                           defaultMessage="Department"
                         />
                       }
-                      // options={[
-                      //   "Business",
-                      //   "Operations",
-                      //   "IT",
-                      //   "Finance",
-                      //   "Recruitment",
-                      //   "HR",
-                      //   "Sales",
-                      //   "Marketing",
-                      //   "Procurement",
-                      //   "Legal",
-                      //   "Facilities",
-                      //   "Alliance",
-                      // ]}
-                      // onChange={() => {
-                      //   this.handleFieldClik();
-                      // }}
                       isColumn
                       isColumnWithoutNoCreate
-                      // component={SelectComponent}
                       component={SearchSelect}
                       value={values.departmentId}
                       selectType="departmentName"
-                      inlineLabel
+                      inlineLabel    
                     />
+                    </div>
+                    <div class=" w-2/5">
+                  <FastField
+                            name="sourceId"
+                             label={
+                              <FormattedMessage
+                                id="app.source"
+                                defaultMessage="Source"
+                              />
+                            }
+                            isColumnWithoutNoCreate
+                            selectType="sourceName"
+                            component={SearchSelect}
+                            value={values.sourceId}
+                            isColumn
+                          />
+                        </div>
+
                   </div>
                  
                   <Spacer style={{ marginTop: "1.25em" }} />

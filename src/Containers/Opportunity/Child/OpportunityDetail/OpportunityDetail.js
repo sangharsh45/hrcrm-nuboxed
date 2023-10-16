@@ -8,7 +8,7 @@ import { BundleLoader } from "../../../../Components/Placeholder";
 import { getOpportunityById } from "../../OpportunityAction";
 
 const OpportunityDetailLeft = lazy(() => import("./OpportunityDetailLeft"));
- const OpportunityDetailRight = lazy(() => import("./OpportunityDetailRight"));
+const OpportunityDetailRight = lazy(() => import("./OpportunityDetailRight"));
 
 class OpportunityDetail extends Component {
   componentDidMount() {

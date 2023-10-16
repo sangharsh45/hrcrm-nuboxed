@@ -19,7 +19,7 @@ class DealActionRight extends React.Component {
       user,
       department,
       accountFilterText,
-      handleOpportunityModal,
+      handleDealModal,
       setAccountFilterText,
       setAccountFilterUser,
     } = this.props;
@@ -49,7 +49,7 @@ class DealActionRight extends React.Component {
           <Button
             type="primary"
             // ghost
-            onClick={() => handleOpportunityModal(true)}
+            onClick={() => handleDealModal(true)}
           >
             Add
           </Button>
