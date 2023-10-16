@@ -22,6 +22,7 @@ import {
   handleTrainingModal,
   handleBankModal,
   handleEducationModal,
+  handleVisaModal,
   handlePersonalDetailsModal,
   handleSalaryModal,
   handleDocumentUploadModal,
@@ -45,6 +46,8 @@ import CustomerTable from "../../../../../Customer/Child/CustomerTable/CustomerT
 import PartnerTable from "../../../../../Partner/child/PartnerTable/PartnerTable"
 import RecruitmentTable from "../../../../../Opportunity/Child/OpportunityDetail/OpportunityTab/Recruitment/RecruitmentTable";
 import EmployeeExperienceForm from "./Experience/EmployeeExperienceForm";
+import AddVisaModal from "./Visa/AddVisaModal";
+import VisaTable from "./Visa/VisaTable";
 const BankTable = lazy(() => import("./Bank/BankTable"));
 const EducationTable = lazy(() => import("./Education/EducationTable"));
 const EmploymentTable = lazy(() => import("./Employment/EmploymentTable"));
@@ -72,7 +75,9 @@ componentDidMount(){
     const { activeKey } = this.state;
     const {
       addEducationModal,
+      addVisaModal,
       handleEducationModal,
+      handleVisaModal,
       addTrainingModal,
       handleTrainingModal,
       addEmploymentModal,
@@ -575,6 +580,35 @@ componentDidMount(){
                 <EmployeeExperienceForm/>
               </Suspense>
             </TabPane>
+
+            <TabPane
+              tab={
+                <>
+                <SchoolIcon   style={{fontSize:"1.1rem"}}/>
+                  <span class=" font-poppins" style={{ marginLeft: "0.25em" }}>
+                    
+                 Visa
+                  </span>
+                  {activeKey === "17" && (
+                    <>
+                       <PlusOutlined
+                        type="plus"
+                        tooltipTitle="Add"
+                        onClick={() => handleVisaModal(true)}
+                        size="14px"
+                        style={{ marginLeft: "0.25", verticalAlign: "center" }}
+                      />
+                    </>
+                  )}
+                </>
+              }
+              key="17"
+            >
+              <Suspense fallback={"Loading ..."}>
+                {" "}
+                <VisaTable />
+              </Suspense>
+            </TabPane>
       
         
           </StyledTabs> 
@@ -592,6 +626,11 @@ componentDidMount(){
             addEducationModal={addEducationModal}
             handleEducationModal={handleEducationModal}
           />
+           <AddVisaModal
+            addVisaModal={addVisaModal}
+            handleVisaModal={handleVisaModal}
+          />
+
 
           <AddTrainingModal
             addTrainingModal={addTrainingModal}
@@ -626,6 +665,7 @@ componentDidMount(){
 }
 const mapStateToProps = ({ profile,employee }) => ({
   addEducationModal: profile.addEducationModal,
+  addVisaModal:profile.addVisaModal,
   addTrainingModal: profile.addTrainingModal,
   addEmploymentModal: profile.addEmploymentModal,
   addPersonalModal: profile.addPersonalModal,
@@ -641,6 +681,7 @@ const mapDispatchToProps = (dispatch) =>
     {
       handleTrainingModal,
       handleEducationModal,
+      handleVisaModal,
       handleEmploymentModal,
       handlePersonalModal,
       handleBankModal,

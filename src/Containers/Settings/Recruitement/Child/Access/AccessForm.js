@@ -15,6 +15,7 @@ const plainOptions = ['Access', 'Create', 'Update', 'Delete','Full List'];
  const defaultCheckedList=['Full List'];
  const dashboardCheckedList=['Access','Full List'];
  const settingsCheckedList=['Access'];
+ const repositoryCheckedList=['Create'];
  const junkCheckedList=['Access',"Transfer"];
 // const defaultCheckedList = ['Apple', 'Orange'];
 
@@ -60,6 +61,7 @@ const AccessForm = (props) => {
     setCheckedInvestorContactList(props.departmentAcces.investorContact)
     setCheckedDealList(props.departmentAcces.deal)
     setCheckedPitchList(props.departmentAcces.pitch)
+    setCheckedRepositoryList(props.departmentAcces.repository)
     
   }, [props.departmentAcces.vendor,
   props.departmentAcces.customer,
@@ -96,6 +98,7 @@ const AccessForm = (props) => {
   props.departmentAcces.investorContact,
   props.departmentAcces.deal,
   props.departmentAcces.pitch,
+  props.departmentAcces.repository,
   
 ])
   //Vendor
@@ -723,6 +726,23 @@ const AccessForm = (props) => {
     setCheckAllPitch(e.target.checked);
   };
 
+    //Repository
+    const [checkedRepositoryList, setCheckedRepositoryList] = useState(props.departmentAcces.repository);
+    const [indeterminateRepository, setIndeterminateRepository] = useState(true);
+    const [checkAllRepository, setCheckAllRepository] = useState(false);
+  
+    const onRepositoryChange = (list) => {
+      setCheckedRepositoryList(list);
+      setIndeterminateRepository(!!list.length && list.length < repositoryCheckedList.length);
+      setCheckAllRepository(list.length === repositoryCheckedList.length);
+    };
+  
+    const onCheckAllRepositoryChange = (e) => {
+      setCheckedRepositoryList(e.target.checked ? repositoryCheckedList : []);
+      setIndeterminateRepository(false);
+      setCheckAllRepository(e.target.checked);
+    };
+
 
 
   function handleUpdateAccess() {
@@ -762,6 +782,7 @@ const AccessForm = (props) => {
       investorContact:checkedInvestorContactList || [],
       deal:checkedDealList || [],
       pitch:checkedPitchList || [],
+      repository:checkedRepositoryList || [],
       
       departmentId: props.departmentId,
       roleTypeId:props.roleTypeId,
@@ -796,16 +817,6 @@ const AccessForm = (props) => {
                 <CheckboxGroup options={plainOptions} value={checkedUserList} onChange={onUserChange} />
 
               </div>
-                {/* <Spacer />
-                <div >
-                  <h1>Leads</h1>
-                  <Checkbox indeterminate={indeterminateLeads} onChange={onCheckAllLeadsChange} checked={checkAllLeads}>
-                    Check all
-                  </Checkbox>
-                  <Divider />
-                  <CheckboxGroup options={plainOptions} value={checkedLeadsList} onChange={onLeadsChange} />
-
-                </div> */}
                   <Spacer />
                 <div >
                   <h1 class="text-sm">Locations</h1>
@@ -816,6 +827,7 @@ const AccessForm = (props) => {
                   <CheckboxGroup options={plainOptions} value={checkedLocationList} onChange={onLocationChange} />
 
                 </div>
+              
                 </FlexContainer>
               {/* Vendor */}
               <Spacer />
@@ -847,7 +859,16 @@ const AccessForm = (props) => {
               <CheckboxGroup options={junkCheckedList} value={checkedJunkList} onChange={onJunkChange} />
 
             </div>
-            
+        
+                <div >
+                <h1 class="text-sm">Repository</h1>
+                <Checkbox indeterminate={indeterminateRepository} onChange={onCheckAllRepositoryChange} checked={checkAllRepository}>
+                 <label class="text-xs"> Check all</label>
+                </Checkbox>
+                <Divider />
+                <CheckboxGroup options={repositoryCheckedList} value={checkedRepositoryList} onChange={onRepositoryChange} />
+
+              </div>
                
               <div >
                 <h1 class="text-sm">Settings</h1>
