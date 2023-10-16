@@ -36,9 +36,9 @@ class PersonalDetailsDocumentForm extends Component {
   };
   
   componentDidMount() {
-    const { getLinkedUsersDocument ,} = this.props;
-   
-    getLinkedUsersDocument(getLinkedUsersDocument);
+    const { getLinkedUsersDocument ,orgId} = this.props;
+    this.props.getLinkedUsersDocument(this.props.orgId);
+    // getLinkedUsersDocument(orgId);
    
 }
 
@@ -46,8 +46,8 @@ class PersonalDetailsDocumentForm extends Component {
     const { addingPersonalDocumentDetails } = this.props;
     const documentNameOption = this.props.linkedUserDocument.map((item) => {
       return {
-          label: `${item.country_name|| ""}`,
-          value: item.country_name,
+          label: `${item.documentTypeName|| ""}`,
+          value: item.documentTypeName,
       };
   });
     return (
@@ -206,9 +206,10 @@ class PersonalDetailsDocumentForm extends Component {
 
 // }
 
-const mapStateToProps = ({ employee, profile }) => ({
+const mapStateToProps = ({ employee,auth, profile }) => ({
   linkedUserDocument:profile.linkedUserDocument,
   employeeId: employee.singleEmployee.employeeId,
+  orgId: auth.userDetails.organizationId,
   addingPersonalDocumentDetails: profile.addingPersonalDocumentDetails,
 });
 

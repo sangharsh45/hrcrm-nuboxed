@@ -1359,12 +1359,12 @@ export const linkEmailStatus = (data, candidateId) => (
     });
 };
 
-export const getLinkedUsersDocument = () => (dispatch) => {
+export const getLinkedUsersDocument = (OrgId) => (dispatch) => {
   dispatch({
     type: types.GET_LINKED_USERS_DOCUMENT_REQUEST,
   });
   axios
-    .get(`${base_url}/department`, {
+    .get(`${base_url}/document/user-type/user/list/${OrgId}`, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },
