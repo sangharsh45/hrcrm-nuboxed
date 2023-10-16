@@ -67,6 +67,7 @@ function UpdatePitchForm (props) {
             companyName: props.setEditingPitch.companyName || "",
             url: props.setEditingPitch.url || "",
             sectorId: props.setEditingPitch.sectorId  ,
+            sourceId:"",
             vatNo:props.setEditingPitch.vatNo  ,
             email: props.setEditingPitch.email || "",
             country:props.setEditingPitch.country || "",
@@ -325,7 +326,7 @@ function UpdatePitchForm (props) {
                     </div>
                      <Spacer/>
                      <div class=" flex justify-between">
-                   <div class=" w-1/2 max-sm:w-wk">
+                     <div class=" w-1/2">
                       <FastField
                         name="sectorId"
                         isColumnWithoutNoCreate
@@ -340,7 +341,22 @@ function UpdatePitchForm (props) {
                         component={SearchSelect}
                       />
                     </div>
-           
+                    <div class=" w-2/5">
+           <FastField
+                            name="sourceId"
+                             label={
+                              <FormattedMessage
+                                id="app.source"
+                                defaultMessage="Source"
+                              />
+                            }
+                            isColumnWithoutNoCreate
+                            selectType="sourceName"
+                            component={SearchSelect}
+                            // value={values.sourceId}
+                            isColumn
+                          />
+           </div>
                 </div>
                  </div>
                  <div class=" h-3/4 w-5/12 max-sm:w-wk "   >

@@ -51,7 +51,7 @@ class ContactInvestDetailTab extends Component {
       <>
         <TabsWrapper>
           <StyledTabs defaultActiveKey="1" onChange={this.handleTabChange}>
-            {/* <TabPane
+            <TabPane
               tab={
                 <>
                  
@@ -59,8 +59,8 @@ class ContactInvestDetailTab extends Component {
                   />
                     <span class=" ml-1">
                      <FormattedMessage
-                      id="app.orders"
-                      defaultMessage="Orders"
+                      id="app.deals"
+                      defaultMessage="Deals"
                     />
                   </span>
                   {activeKey === "1" && (
@@ -73,9 +73,9 @@ class ContactInvestDetailTab extends Component {
             >
               <Suspense fallback={"Loading ..."}>
                 {" "}
-                <OpportunityTable />
+                {/* <OpportunityTable /> */}
               </Suspense>
-            </TabPane> */}
+            </TabPane>
 
             <TabPane
               tab={

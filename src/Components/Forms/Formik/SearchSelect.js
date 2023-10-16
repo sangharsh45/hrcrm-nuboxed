@@ -32,7 +32,8 @@ import { getExpenses } from "../../../Containers/Settings/Expense/ExpenseAction"
 import { getEvents } from "../../../Containers/Settings/Event/EventAction";
 import { getDepartments } from "../../../Containers/Settings/Department/DepartmentAction";
 import { getEducations } from "../../../Containers/Settings/Educations/EducationAction";
-import { getRoles } from "../../../Containers/Settings/Category/Role/RoleAction"
+import { getRoles } from "../../../Containers/Settings/Category/Role/RoleAction";
+import { getSources } from "../../../Containers/Settings/Category/Source/SourceAction";
 class SearchSelect extends Component {
   componentDidMount() {
     const {
@@ -139,8 +140,8 @@ class SearchSelect extends Component {
       console.log("inside stages");
       getAllProcessStages();
     }
-    if (selectType === "source") {
-      getSources();
+    if (selectType === "sourceName") {
+      getSources(organizationId);
     }
     if (selectType === "country" || "dialCode") {
       getCountries();
@@ -695,12 +696,12 @@ class SearchSelect extends Component {
       // const customOption = ({ label, value }) => <h3>{`${label}---${value}`}</h3>
     }
 
-    if (selectType === "source") {
+    if (selectType === "sourceName") {
       options = sources
-        .sort((a, b) => (a.sourceName < b.sourceName ? -1 : 1))
+        .sort((a, b) => (a.name < b.name ? -1 : 1))
         .map((item, i) => ({
-          value: item.leadSourceId,
-          label: item.sourceName,
+          value: item.sourceId,
+          label: item.name,
           color: "#FF8B00",
         }));
 
@@ -1217,7 +1218,7 @@ class SearchSelect extends Component {
 }
 
 
-const mapStateToProps = ({ auth, call, document, role, functions, contact, customer, employee, partner, sector, candidate, designations, education, tasks, expenses, events, departments }) => ({
+const mapStateToProps = ({ auth, call, document,source, role, functions, contact, customer, employee, partner, sector, candidate, designations, education, tasks, expenses, events, departments }) => ({
   countries: auth.countries,
   currencies: auth.currencies,
   fetchingCountries: auth.fetchingCountries,
@@ -1246,7 +1247,8 @@ const mapStateToProps = ({ auth, call, document, role, functions, contact, custo
   events: events.events,
   functions: functions.functions,
   departments: departments.departments,
-  allcustomersByUserId: customer.allcustomersByUserId
+  allcustomersByUserId: customer.allcustomersByUserId,
+  sources: source.sources,
 });
 
 const mapDispatchToProps = (dispatch) =>
@@ -1266,7 +1268,7 @@ const mapDispatchToProps = (dispatch) =>
       // getOpportunities,
       getCountries,
       getCurrency,
-      // getSources,
+      getSources,
       // getStages,
       // getProducts,
       // getDeliveryUser,

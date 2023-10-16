@@ -5,12 +5,13 @@ import moment from "moment";
 import { JumpStartBox, Spacer } from "../../../../Components/UI/Elements";
 import { FlexContainer } from "../../../../Components/UI/Layout";
 import {
-//   getDateWiseList,
-//   getSalesDateWiseList,
-//   getJumpBulblist,
-//   getJumpBulblist2,
-//   getJumpCustomerlist,
-//   getJumpCustomerlist2,
+  getDateWiseList,
+  getSalesDateWiseList,
+  getJumpInvestorlist,
+  getJumpInvestor2list,
+  getJumpInvestor3list,
+  getJumpInvestor4list
+
 } from "../../DashboardAction";
 
 class DashboardInvestorsOrgJumpstart extends React.Component {
@@ -73,10 +74,10 @@ class DashboardInvestorsOrgJumpstart extends React.Component {
   componentDidMount() {
     const startDate = `${this.state.startDate.format("YYYY-MM-DD")}T20:00:00Z`;
     const endDate = `${this.state.endDate.format("YYYY-MM-DD")}T20:00:00Z`;
-    // this.props.getJumpBulblist(this.props.userId, startDate, endDate);
-    // this.props.getJumpBulblist2(this.props.userId, startDate, endDate);
-    // this.props.getJumpCustomerlist(this.props.userId, startDate, endDate);
-    // this.props.getJumpCustomerlist2(this.props.userId, startDate, endDate);
+    this.props.getJumpInvestorlist(this.props.userId, startDate, endDate);
+    this.props.getJumpInvestor2list(this.props.userId, startDate, endDate);
+    this.props.getJumpInvestor3list(this.props.userId, startDate, endDate);
+    this.props.getJumpInvestor4list(this.props.userId, startDate, endDate);
   }
 
   render() {
@@ -88,28 +89,28 @@ class DashboardInvestorsOrgJumpstart extends React.Component {
           <JumpStartBox
             noProgress
             title="Pitch Qualified"
-            // value={this.props.jumpstartBulbCount.qualifiedLeadsList}
-            // isLoading={this.props.user.fetchingJumpstartBulb}
+            value={this.props.jumpstartInvestorCount.qualifiedInvestorLeadsList}
+            isLoading={this.props.user.fetchingJumpstartInvestor}
           />
 
           <JumpStartBox
             noProgress
             title="Pitch Added"
-            // value={this.props.jumpstartBulb2Count.createdLeadsList}
-            // isLoading={this.props.fetchingJumpstartBulb2}
+            value={this.props.jumpstartInvestor2Count.createdinvestorLeadsList}
+            isLoading={this.props.fetchingJumpstartInvestor2}
           />
 
           <JumpStartBox
             noProgress
             title="Deals Added"
-            // value={this.props.jumpstrtCUSTOCount.opportunityAdded}
-            // isLoading={this.props.fetchingJumpstartCustolist}
+            value={this.props.jumpstartInvestor3Count.opportunityAdded}
+            isLoading={this.props.fetchingJumpstartInvestor3}
           />
           <JumpStartBox
             noProgress
             title="Deals Closed"
-            // value={ this.props.jumpstrtCUSTO2Count.closedOpportunity}
-            //  isLoading={this.props.fetchingJumpstartCusto2list}
+            value={ this.props.jumpstartInvestor4Count.closedOpportunity}
+             isLoading={this.props.fetchingJumpstartInvestor4}
           />
         </FlexContainer>
         <Spacer />
@@ -128,27 +129,27 @@ const mapStateToProps = ({ dashboard, auth }) => ({
   fetchingDatewiseReport: dashboard.fetchingDatewiseReport,
   fetchingDatewiseReportError: dashboard.fetchingDatewiseReportError,
   recruiterId: auth.userDetails.userId,
-  fetchingTaskper: dashboard.fetchingTaskper,
   userId: auth.userDetails.employeeId,
-  jumpstartBulbCount: dashboard.jumpstartBulbCount,
-  jumpstartBulb2Count: dashboard.jumpstartBulb2Count,
-  fetchingJumpstartBulb: dashboard.fetchingJumpstartBulb,
-  fetchingJumpstartBulb2: dashboard.fetchingJumpstartBulb2,
-  jumpstrtCUSTOCount: dashboard.jumpstrtCUSTOCount,
-  fetchingJumpstartCustolist: dashboard.fetchingJumpstartCustolist,
-  jumpstrtCUSTO2Count: dashboard.jumpstrtCUSTO2Count,
-  fetchingJumpstartCusto2list: dashboard.fetchingJumpstartCusto2list,
+    jumpstartInvestorCount: dashboard.jumpstartInvestorCount,
+  jumpstartInvestor2Count: dashboard.jumpstartInvestor2Count,
+  jumpstartInvestor3Count: dashboard.jumpstartInvestor3Count,
+  jumpstartInvestor4Count: dashboard.jumpstartInvestor4Count,
+  fetchingJumpstartInvestor: dashboard.fetchingJumpstartInvestor,
+  fetchingJumpstartInvestor2: dashboard.fetchingJumpstartInvestor2,
+  fetchingJumpstartInvestor3: dashboard.fetchingJumpstartInvestor3,
+  fetchingJumpstartInvestor4: dashboard.fetchingJumpstartInvestor4,
 });
 
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
-    //   getDateWiseList,
-    //   getSalesDateWiseList,
-    //   getJumpBulblist,
-    //   getJumpCustomerlist,
-    //   getJumpBulblist2,
-    //   getJumpCustomerlist2,
+      getDateWiseList,
+      getSalesDateWiseList,
+      getJumpInvestorlist,
+      getJumpInvestor2list,
+      getJumpInvestor3list,
+      getJumpInvestor4list
+
     },
     dispatch
   );

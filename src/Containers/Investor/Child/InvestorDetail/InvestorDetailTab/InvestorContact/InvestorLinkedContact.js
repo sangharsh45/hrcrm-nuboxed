@@ -385,26 +385,26 @@ class InvestorLinkedContact extends Component {
           );
         },
       },
-      {
-        title: "Portal Access",
-        // dataIndex: "active",
-        width: "12%",
-        // render: (name, item, i) => {
-        //   console.log(item.thirdPartyAccessInd);
-        //   return (
-        //     <span>
-        //       {item.thirdPartyAccessInd === true && (
-        //         <CustomerContactActiveToggle
-        //           accessInd={item.accessInd}
-        //           contactId={item.contactId}
-        //           emailId={item.emailId}
-        //           thirdPartyAccessInd={item.thirdPartyAccessInd}
-        //         />
-        //       )}
-        //     </span>
-        //   );
-        // },
-      },
+      // {
+      //   title: "Portal Access",
+      //   // dataIndex: "active",
+      //   width: "12%",
+      //   // render: (name, item, i) => {
+      //   //   console.log(item.thirdPartyAccessInd);
+      //   //   return (
+      //   //     <span>
+      //   //       {item.thirdPartyAccessInd === true && (
+      //   //         <CustomerContactActiveToggle
+      //   //           accessInd={item.accessInd}
+      //   //           contactId={item.contactId}
+      //   //           emailId={item.emailId}
+      //   //           thirdPartyAccessInd={item.thirdPartyAccessInd}
+      //   //         />
+      //   //       )}
+      //   //     </span>
+      //   //   );
+      //   // },
+      // },
     ];
 
     // if (fetchingsInvestorContactError) {

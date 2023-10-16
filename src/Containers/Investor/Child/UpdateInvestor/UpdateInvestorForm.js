@@ -62,7 +62,8 @@ function UpdateInvestorForm (props) {
           initialValues={{
             name: RowData.name || "",
             url: RowData.url || "",
-            sectorId: RowData.sectorId  ,
+            sectorId: RowData.sectorId,
+         sourceId:"",
             vatNo:RowData.vatNo  ,
             email: RowData.email || "",
             country:RowData.country || "",
@@ -197,6 +198,23 @@ function UpdateInvestorForm (props) {
                         component={SearchSelect}
                       />
                     </div>
+                    <div>
+                    <FastField
+                            name="sourceId"
+                             label={
+                              <FormattedMessage
+                                id="app.source"
+                                defaultMessage="Source"
+                              />
+                            }
+                            isColumnWithoutNoCreate
+                            selectType="sourceName"
+                            component={SearchSelect}
+                            // value={values.sourceId}
+                            isColumn
+                          />
+
+                      </div>
                  </div>
                 
                  <Spacer/>

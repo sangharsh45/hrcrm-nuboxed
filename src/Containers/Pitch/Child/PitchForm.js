@@ -10,11 +10,7 @@ import { StyledLabel } from "../../../Components/UI/Elements";
 import { Spacer } from "../../../Components/UI/Elements";
 import SearchSelect from "../../../Components/Forms/Formik/SearchSelect";
 import AddressFieldArray from "../../../Components/Forms/Formik/AddressFieldArray";
-import {
- 
-  setClearbitData
-} from "../../Leads/LeadsAction";
-
+import { setClearbitData} from "../../Leads/LeadsAction";
 import {addPitch} from "../PitchAction"
 import PostImageUpld from "../../../Components/Forms/Formik/PostImageUpld";
 import { TextareaComponent } from "../../../Components/Forms/Formik/TextareaComponent";
@@ -81,6 +77,7 @@ props.getAllCustomerEmployeelist();
             lastName:"",
             proposalValue:"",
             opportunityName:"",
+            sourceId:"",
             address: [
               {
                 address1: "",
@@ -357,18 +354,17 @@ props.getAllCustomerEmployeelist();
                     </div>
                     <div class=" w-2/5">
                           <FastField
-                            name="source"
-                            type="text"
-                            label={
+                            name="sourceId"
+                             label={
                               <FormattedMessage
                                 id="app.source"
                                 defaultMessage="Source"
                               />
                             }
-                            options={["Na", "Na2", "None"]}
-                            component={SelectComponent}
-                            inlineLabel
-                            className="field"
+                            isColumnWithoutNoCreate
+                            selectType="sourceName"
+                            component={SearchSelect}
+                            value={values.sourceId}
                             isColumn
                           />
                         </div>
@@ -527,14 +523,14 @@ props.getAllCustomerEmployeelist();
     );
 }
 
-const mapStateToProps = ({ auth, leads,employee,pitch }) => ({
+const mapStateToProps = ({ auth, leads,employee,pitch,source }) => ({
     addingPitch: pitch.addingPitch,
   addingLeadsError: leads.addingLeadsError,
    clearbit: leads.clearbit,
   user: auth.userDetails,
   allCustomerEmployeeList:employee.allCustomerEmployeeList,
   userId: auth.userDetails.userId,
-  fullName: auth.userDetails.fullName
+  fullName: auth.userDetails.fullName,
 });
 
 const mapDispatchToProps = (dispatch) =>
@@ -543,6 +539,7 @@ const mapDispatchToProps = (dispatch) =>
         addPitch,
       setClearbitData,
        getAllCustomerEmployeelist,
+   
     },
     dispatch
   );

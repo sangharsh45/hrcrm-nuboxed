@@ -1,22 +1,20 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { Button, Select, Icon, Tag, Switch } from "antd";
 import { FormattedMessage } from "react-intl";
+import { Button, Select, Switch } from "antd";
 import { Formik, Form, FastField, Field, FieldArray } from "formik";
 import * as Yup from "yup";
-import { HeaderLabel, Spacer } from "../../../Components/UI/Elements";
-import SearchSelect from "../../../Components/Forms/Formik/SearchSelect";
-import AddressFieldArray from "../../../Components/Forms/Formik/AddressFieldArray";
-import { InputComponent } from "../../../Components/Forms/Formik/InputComponent";
-import { SelectComponent } from "../../../Components/Forms/Formik/SelectComponent";
-import { addLinkContactByOpportunityId } from "../../Contact/ContactAction";
-import Upload from "../../../Components/Forms/Formik/Upload";
-import { TextareaComponent } from "../../../Components/Forms/Formik/TextareaComponent";
-import { getDesignations } from "../../Settings/Designation/DesignationAction";
-import { getDepartments } from "../../Settings/Department/DepartmentAction";
-import { getCustomerData } from "../../Customer/CustomerAction";
-import {addContactInvest,handleContactInvestModal} from "../ContactInvestAction";
+import { Spacer } from "../../../../../../Components/UI/Elements";
+import SearchSelect from "../../../../../../Components/Forms/Formik/SearchSelect";
+import AddressFieldArray from "../../../../../../Components/Forms/Formik/AddressFieldArray";
+import { InputComponent } from "../../../../../../Components/Forms/Formik/InputComponent";
+import { SelectComponent } from "../../../../../../Components/Forms/Formik/SelectComponent";
+import { createInvestorContact } from "../../../../InvestorAction";
+import Upload from "../../../../../../Components/Forms/Formik/Upload";
+import { TextareaComponent } from "../../../../../../Components/Forms/Formik/TextareaComponent";
+import { getDesignations } from "../../../../../Settings/Designation/DesignationAction";
+import { getDepartments } from "../../../../../Settings/Department/DepartmentAction";
 
 const { Option } = Select;
 /**
@@ -25,17 +23,18 @@ const { Option } = Select;
 const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
 const ContactSchema = Yup.object().shape({
   firstName: Yup.string().required("Input needed!"),
-  emailId: Yup.string()
-    .required("Input needed!")
-    .email("Enter a valid Email"),
-  mobileNumber: Yup.string().matches(phoneRegExp, 'Mobile number is not valid').min(5, "Number is too short").max(10, "Number is too long")
+  emailId: Yup.string().email("Enter a valid Email"),
+  whatsappNumber: Yup.string()
+    .matches(phoneRegExp, "Whatsapp number is not valid")
+    .min(5, "Number is too short")
+    .max(10, "Number is too long"),
+  mobileNumber: Yup.string()
+    .matches(phoneRegExp, "Mobile number is not valid")
+    .min(5, "Number is too short")
+    .max(10, "Number is too long"),
 });
 
-class ContactInvestForm extends Component {
-  componentDidMount() {
-    this.props.getCustomerData(this.props.userId);
-  }
-
+class InvestorContactForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -43,8 +42,8 @@ class ContactInvestForm extends Component {
       option: "Mobile",
       option1: "Mobile",
       option2: "Work",
-      currentOption: "",
       whatsapp: false,
+      currentOption: "",
       candidate: false,
       availability: false,
     };
@@ -71,6 +70,12 @@ class ContactInvestForm extends Component {
     console.log(this.state.option);
     console.log(this.state.currentOption);
   };
+  handleFieldClik() {
+    this.setState({
+      disabled: !this.state.disabled,
+      visible: !this.state.visible,
+    });
+  }
   onChange = (value) => {
     console.log(value);
     this.setState({
@@ -94,76 +99,41 @@ class ContactInvestForm extends Component {
   render() {
     const {
       user: { userId, firstName, lastName },
-      addContactInvest,
-      addingContact,
-      customerId,
-      designationTypeId,
-      departmentId,
+      createInvestorContact,
+      addingInvestorContact,
       users,
-      accountId,
-      defaultAccounts,
-      defaultOpportunities,
-      callback,
-      user,
-      creatorId,
-      accountIdTag,
       linkContact,
-      opportunityId,
-      addLinkContactByOpportunityId,
-      defaultCustomers,
-
-      // tagWithCompany,
+      defaultInvestor,
+      customerId,
+      tagWithCompany,
     } = this.props;
     console.log(linkContact);
-    console.log(opportunityId);
-    console.log(customerId);
-    console.log(departmentId);
-    console.log(designationTypeId);
-    const customerNameOption = this.props.customerData
-    .sort((a, b) => {
-      const libraryNameA = a.name && a.name.toLowerCase();
-      const libraryNameB = b.name && b.name.toLowerCase();
-      if (libraryNameA < libraryNameB) {
-        return -1;
-      }
-      if (libraryNameA > libraryNameB) {
-        return 1;
-      }
-  
-      // names must be equal
-      return 0;
-    }
-  )
-    .map((item) => {
-      return {
-        label: `${item.name || ""}`,
-        value: item.customerId,
-      };
-    });
 
     return (
       <>
         <Formik
           initialValues={{
             salutation: "",
+            // designation: undefined,
             designationTypeId: this.props.designationTypeId,
             description: "",
-            departmentId: this.props.departmentId,
+            // department: undefined,
             departmentDetails: "",
+            departmentId: this.props.departmentId,
             userId: this.props.userId,
-            customerId: this.props.customerId,
-            opportunityId: this.props.opportunityId,
+            // tagWithCompany: tagWithCompany ? tagWithCompany : "",
             tagWithCompany: "",
             firstName: "",
             middleName: "",
+            whatsapp: this.state.whatsapp ? "Different" : "Same",
             lastName: "",
             countryDialCode: this.props.user.countryDialCode,
             countryDialCode1: this.props.user.countryDialCode,
-            phoneNumber: "",
+            whatsappNumber: "",
             mobileNumber: "",
+            email: "",
             emailId: "",
             linkedinPublicUrl: "",
-            sourceId:"",
             address: [
               {
                 addressType: "",
@@ -173,7 +143,7 @@ class ContactInvestForm extends Component {
                 street: "",
                 city: "",
                 postalCode: "",
-                country: this.props.user.country,
+                country: this.props.user.countryName,
                 latitude: "",
                 longitude: "",
               },
@@ -183,18 +153,15 @@ class ContactInvestForm extends Component {
           validationSchema={ContactSchema}
           onSubmit={(values, { resetForm }) => {
             console.log(values);
-            linkContact
-              ? addLinkContactByOpportunityId(values, opportunityId, () =>
-                this.handleReset(resetForm)
-              )
-              : addContactInvest(
-                {
-                  ...values,
-                //   whatsapp: this.state.whatsapp ? "Different" : "Same",
-                },
-                this.props.userId,
-                () => this.handleReset(resetForm)
-              );
+            createInvestorContact(
+              {
+                ...values,
+                customerId: this.props.customerId,
+                whatsapp: this.state.whatsapp ? "Different" : "Same",
+              },
+              this.props.userId,
+              () => this.handleReset(resetForm)
+            );
           }}
         >
           {({
@@ -205,11 +172,12 @@ class ContactInvestForm extends Component {
             setFieldValue,
             setFieldTouched,
           }) => (
-            <div class="overflow-y-auto h-[34rem] overflow-x-hidden max-sm:h-[30rem]">
             <Form className="form-background">
-              <div class=" flex justify-between max-sm:flex-col ">
-                <div class=" h-full w-1/2 max-sm:w-wk">
-                  <div class=" flex  flex-nowrap">
+              <div class=" flex justify-between">
+                <div class=" h-full w-2/4"
+                >
+                  <Spacer />
+                  <div class=" flex flex-nowrap">
                     <FastField name="imageId" component={Upload} />
                     <div>
                       <div class=" flex justify-between">
@@ -217,6 +185,7 @@ class ContactInvestForm extends Component {
                           <FastField
                             name="salutation"
                             type="text"
+                            // label="Salutation"
                             label={
                               <FormattedMessage
                                 id="app.salutation"
@@ -230,7 +199,7 @@ class ContactInvestForm extends Component {
                             isColumn
                           />
                         </div>
-                        <div class=" w-1/2">
+                        <div class=" w-2/4">
                           <FastField
                             isRequired
                             name="firstName"
@@ -248,7 +217,8 @@ class ContactInvestForm extends Component {
                             inlineLabel
                           />
                         </div>
-                      </div>                  
+                      </div>
+                      <Spacer />
                       <div class=" flex justify-between">
                         <div class=" w-2/5">
                           <FastField
@@ -256,7 +226,7 @@ class ContactInvestForm extends Component {
                             //label="Middle Name"
                             label={
                               <FormattedMessage
-                                id="app.middleName"
+                                id="app.middle"
                                 defaultMessage="Middle"
                               />
                             }
@@ -267,7 +237,7 @@ class ContactInvestForm extends Component {
                             inlineLabel
                           />
                         </div>
-                        <div class=" w-1/2">
+                        <div class=" w-2/4">
                           <FastField
                             name="lastName"
                             //label="Last Name"
@@ -288,6 +258,142 @@ class ContactInvestForm extends Component {
                     </div>
                   </div>
                   <div class=" flex justify-between">
+                    <div class=" w-2/6">
+                      <FastField
+                        name="countryDialCode"
+                        isColumnWithoutNoCreate
+                        //label="Mobile #"
+                        placeholder='+31'
+                        label={
+                          <FormattedMessage
+                            id="app.countryDialCode"
+                            defaultMessage="Dial Code"
+                          />
+                        }
+                        isColumn
+                        selectType="dialCode"
+                        component={SearchSelect}
+                        defaultValue={{
+                          value: this.props.user.countryDialCode,
+                        }}
+                        value={values.countryDialCode}
+                        inlineLabel
+                      />
+                    </div>
+                    <div class=" w-2/5">
+                      <FastField
+                        type="text"
+                        name="mobileNumber"
+                        //placeholder="Mobile #"
+                        label={
+                          <FormattedMessage
+                            id="app.mobileNumber"
+                            defaultMessage="Mobile #"
+                          />
+                        }
+                        component={InputComponent}
+                        inlineLabel
+                        width={"100%"}
+                        isColumn
+                      />
+                    </div>
+                    
+                  <div class=" w-1/4 font-bold"
+                  >
+                    WhatsApp
+                    <Switch
+                      onChange={this.handleWhatsApp}
+                      checked={this.state.whatsapp}
+                      checkedChildren="Different"
+                      unCheckedChildren="Same"
+                    />
+                  </div>
+                  </div>
+                  {/* <Spacer /> */}
+                  {/* <FlexContainer justifyContent="space-between">
+                    <div style={{ width: "47%" }}>
+                      <FastField
+                        name="countryDialCode1"
+                        isColumnWithoutNoCreate
+                        selectType="dialCode"
+                        //label="Phone No #"
+                        label={
+                          <FormattedMessage
+                            id="app.countryDialCode1"
+                            defaultMessage="Dial Code"
+                          />
+                        }
+                        isColumn
+                        component={SearchSelect}
+                        defaultValue={{
+                          value: this.props.user.countryDialCode,
+                        }}
+                        value={values.countryDialCode1}
+                        inlineLabel
+                      />
+                    </div>
+                    <div style={{ width: "47%" }}>
+                      <FastField
+                        type="text"
+                        name="phoneNumber"
+                        // placeholder="Phone #"
+                        label={
+                          <FormattedMessage
+                            id="app.phoneNumber"
+                            defaultMessage="Phone #"
+                          />
+                        }
+                        isColumn
+                        component={InputComponent}
+                        inlineLabel
+                        width={"100%"}
+                      />
+                    </div>
+                  </FlexContainer> */}
+
+                  <div class=" flex justify-between">
+                    <div class=" w-2/4">
+                      {" "}
+                      {this.state.whatsapp && (
+                        <Field
+                          name="countryDialCode1"
+                          isColumnWithoutNoCreate
+                          placeholder='+31'
+                          selectType="dialCode"
+                          //label="Available from"
+
+                          label={
+                            <FormattedMessage
+                              id="app.#whatsApp"
+                              defaultMessage="Dial Code "
+                            />
+                          }
+                          component={SearchSelect}
+                          isColumn
+                          // value={values.availableDate}
+                          inlineLabel
+                        />
+                      )}
+                    </div>
+                    <div class=" w-2/4">
+                      {this.state.whatsapp && (
+                        <FastField
+                          name="whatsappNumber"
+                          isColumn
+                          width={"100%"}
+                          style={{ flexBasis: "30%" }}
+                          component={InputComponent}
+                          label={
+                            <FormattedMessage
+                              id="app.phoneNumber"
+                              defaultMessage="Whatsapp #"
+                            />}
+                          inlineLabel
+                        />
+                      )}
+                    </div>
+                  </div>
+                  <div class=" flex justify-between">
                     <div class=" w-full">
                       <FastField
                         type="email"
@@ -304,111 +410,12 @@ class ContactInvestForm extends Component {
                         width={"100%"}
                         component={InputComponent}
                         inlineLabel
-                        isRequired
                       />
-                    </div>
-                  </div>               
-                  <div class=" flex justify-between">
-                    <div class=" w-2/6">
-                      <FastField
-                        name="countryDialCode"
-                        isColumnWithoutNoCreate
-                        //label="Mobile #"
-                        label={
-                          <FormattedMessage
-                            id="app.countryDialCode"
-                            defaultMessage="Dial Code"
-                          />
-                        }
-                        isColumn
-                        selectType="dialCode"
-                        component={SearchSelect}
-                        placeholder='+31'
-                        defaultValue={{
-                          value: this.props.user.countryDialCode,
-                        }}
-                        value={values.countryDialCode}
-                        inlineLabel
-                      />
-                    </div>
-                    <div class=" w-2/5">
-                      <FastField
-                        type="number"
-                        name="mobileNumber"
-                        label={
-                          <FormattedMessage
-                            id="app.mobileNo"
-                            defaultMessage="Mobile #"
-                          />
-                        }
-                        //placeholder="Mobile #"
-                        component={InputComponent}
-                        inlineLabel
-                        width={"100%"}
-                        isColumn
-                      />
-                    </div>
-                    {/* <div class=" w-1/4 font-bold"
-                    >
-                      WhatsApp
-                      <Switch
-                        onChange={this.handleWhatsApp}
-                        checked={this.state.whatsapp}
-                        checkedChildren="Different"
-                        unCheckedChildren="Same"
-                      />
-                    </div> */}
-                  </div>
-                  <div class=" flex justify-between">
-                    <div class=" w-2/4">
-                      {" "}
-                      {this.state.whatsapp && (
-                        <FastField
-                          name="countryDialCode1"
-                          selectType="dialCode"
-                          isColumnWithoutNoCreate
-                          //label="Phone No #"
-                          placeholder='+31'
-                          label={
-                            <FormattedMessage
-                              id="app.#whatsApp"
-                              defaultMessage="Dial Code"
-
-                            />
-                          }
-                          isColumn
-                          component={SearchSelect}
-                          defaultValue={{
-                            value: this.props.user.countryDialCode,
-                          }}
-                          value={values.countryDialCode1}
-                          inlineLabel
-                        />
-                      )}
-                    </div>
-                    <div class=" w-2/4">
-                      {this.state.whatsapp && (
-                        <FastField
-                          type="text"
-                          name="phoneNumber"
-                          placeholder="Phone #"
-                          label={
-                            <FormattedMessage
-                              id="app.phoneNumber"
-                              defaultMessage="Whatsapp #"
-                            />
-                          }
-                          isColumn
-                          component={InputComponent}
-                          inlineLabel
-                          width={"100%"}
-                        />
-                      )}
                     </div>
                   </div>
                   <Spacer />
-                  < div class=" flex justify-between">
-                    <div class=" w-full">
+                  <div class=" flex justify-between">
+                    <div class="w-full">
                       <FastField
                         type="text"
                         name="linkedinPublicUrl"
@@ -427,41 +434,32 @@ class ContactInvestForm extends Component {
                     </div>
                   </div>
                   <Spacer />
-                  <Field
-                    name="notes"
-                    // label="Notes"
-                    label={
-                      <FormattedMessage id="app.description" defaultMessage="Description" />
-                    }
-                    width={"100%"}
-                    isColumn
-                    component={TextareaComponent}
-                  />
 
-                </div>
-                <div class=" h-3/4 w-5/12 max-sm:w-wk " >
-                  <div class=" flex  justify-between">
-                    <div class=" w-1/2">
-                      <Field
-                        name="customerId"
-                        // selectType="customerList"
-                        isColumnWithoutNoCreate
-                        label={
-                          <FormattedMessage
-                            id="app.tagCompany"
-                            defaultMessage="Tag Company"
-                          />
-                        }
-                        component={SelectComponent}
-                        isColumn
-                        value={values.customerId}
-                        isDisabled={defaultCustomers}
-                        options={Array.isArray(customerNameOption) ? customerNameOption : []}
-                        // defaultValue={defaultCustomers ? defaultCustomers : null}
-                        inlineLabel
-                      />
+                  <div class=" flex justify-between">
+                    <div class=" w-2/4">
+                      <>
+                        <Field
+                          name="customerId"
+                          isColumnWithoutNoCreate
+                          selectType="customerList"
+                          // label="Tag Company"
+                          label={
+                            <FormattedMessage
+                              id="app.tagcompany"
+                              defaultMessage="Tag Company"
+                            />
+                          }
+                          component={SearchSelect}
+                          isColumn
+                          value={values.customerId}
+                          isDisabled={defaultInvestor}
+                          defaultValue={
+                            defaultInvestor ? defaultInvestor : null
+                          }
+                          inlineLabel
+                        />
+                      </>
                     </div>
-
                     <div class=" w-2/5">
                       <FastField
                         name="designationTypeId"
@@ -481,9 +479,7 @@ class ContactInvestForm extends Component {
                       />
                     </div>
                   </div>
-                  <Spacer />
-                  <div class=" flex justify-between">         
-                  <div class="w-2/5">
+                  <div class=" w-full">
                     <FastField
                       name="departmentId"
                       //label="Department"
@@ -501,29 +497,10 @@ class ContactInvestForm extends Component {
                       inlineLabel
                     />
                   </div>
-                  <div class=" w-2/5">
-                  <FastField
-                            name="sourceId"
-                             label={
-                              <FormattedMessage
-                                id="app.source"
-                                defaultMessage="Source"
-                              />
-                            }
-                            isColumnWithoutNoCreate
-                            selectType="sourceName"
-                            component={SearchSelect}
-                            value={values.sourceId}
-                            isColumn
-                          />
-                        </div>
-                  </div>
+                </div>
+                <div class=" h-4/6 w-2/5"
+                >
                   <Spacer />
-                  <div style={{ width: "100%",backgroundImage: "linear-gradient(-90deg, #00162994, #94b3e4)" }}>
-                      <div>
-                  <HeaderLabel style={{color:"white"}} > Address</HeaderLabel>
-                  </div>
-                    </div>
                   <FieldArray
                     name="address"
                     label="Address"
@@ -534,97 +511,25 @@ class ContactInvestForm extends Component {
                       />
                     )}
                   />
-
-                  <Spacer />
-                  {/* <Field
-                    name="address[0].address1"
-                    // label="Address"
+                  <Spacer style={{ marginTop: "1.25em" }} />
+                  <Field
+                    name="notes"
+                    // label="Notes"
                     label={
-                      <FormattedMessage
-                        id="app.address[0].address1"
-                        defaultMessage="Address"
-                      />
+                      <FormattedMessage id="app.notes" defaultMessage="Notes" />
                     }
-                    component={InputComponent}
+                    width={"100%"}
                     isColumn
-                    width="100%"
+                    component={TextareaComponent}
                   />
-                  <Spacer /> */}
-                  {/* <Field
-                    name="address[0].street"
-                    //label="Street"
-
-                    label={
-                      <FormattedMessage
-                        id="app.street"
-                        defaultMessage="Street"
-                      />
-                    }
-                    component={InputComponent}
-                    isColumn
-                    width="100%"
-                  /> */}
-                  <Spacer />
-                  <div class=" flex  justify-between">
-                    {/* <div style={{ width: "47%" }}>
-                      <Field
-                        name="address[0].city"
-                        //label="City"
-                        label={
-                          <FormattedMessage
-                            id="app.ddress[0].city"
-                            defaultMessage="City"
-                          />
-                        }
-                        component={InputComponent}
-                        isColumn
-                        width="100%"
-                      />
-                    </div> */}
-                  </div>
-                  <Spacer />
-                  {/* <FlexContainer justifyContent="space-between">
-                    <div style={{ width: "47%" }}>
-                      <Field
-                        name="address[0].state"
-                        //label="State"
-
-                        label={
-                          <FormattedMessage
-                            id="app.address[0].State"
-                            defaultMessage="State"
-                          />
-                        }
-                        component={InputComponent}
-                        isColumn
-                        width="100%"
-                      />
-                    </div>
-                    <div style={{ width: "47%" }}>
-                      <Field
-                        name="address[0].postalCode"
-                        //label="Zip Code"
-
-                        label={
-                          <FormattedMessage
-                            id="app.address[0].postalCode"
-                            defaultMessage="Pin Code"
-                          />
-                        }
-                        component={InputComponent}
-                        isColumn
-                        width="100%"
-                      />
-                    </div>
-                  </FlexContainer> */}
                 </div>
               </div>
-              <Spacer />
-              <div class=" flex  justify-end">
+              <Spacer/>
+              <div class=" flex justify-end">
                 <Button
                   type="primary"
                   htmlType="submit"
-                  loading={addingContact}
+                  loading={addingInvestorContact}
                 >
                   <FormattedMessage id="app.create" defaultMessage="Create" />
                   {/*                     
@@ -632,7 +537,6 @@ class ContactInvestForm extends Component {
                 </Button>
               </div>
             </Form>
-            </div>
           )}
         </Formik>
       </>
@@ -640,15 +544,19 @@ class ContactInvestForm extends Component {
   }
 }
 
-const mapStateToProps = ({ auth, contact, customer, opportunity, departments, designations }) => ({
-  addingContact: contact.addingContact,
-  addingContactError: contact.addingContactError,
+const mapStateToProps = ({
+  auth,
+  contact,
+  customer,
+  investor,
+  departments,
+  designations,
+}) => ({
+  addingInvestorContact: investor.addingInvestorContact,
+  addingInvestorContactError: investor.addingInvestorContactError,
   user: auth.userDetails,
   userId: auth.userDetails.userId,
-  customerData:customer.customerData,
   customerId: customer.customer.customerId,
-  tagWithCompany: customer.customer.name,
-  opportunityId: opportunity.opportunity.opportunityId,
   departmentId: departments.departmentId,
   designationTypeId: designations.designationTypeId,
 });
@@ -656,16 +564,11 @@ const mapStateToProps = ({ auth, contact, customer, opportunity, departments, de
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
-      // getContacts,
-      addContactInvest,
-      // getContactById,
-      addLinkContactByOpportunityId,
-      // getCurrency,
+      createInvestorContact,
       getDesignations,
-      getCustomerData,
       getDepartments,
     },
     dispatch
   );
 
-export default connect(mapStateToProps, mapDispatchToProps)(ContactInvestForm);
+export default connect(mapStateToProps, mapDispatchToProps)(InvestorContactForm);

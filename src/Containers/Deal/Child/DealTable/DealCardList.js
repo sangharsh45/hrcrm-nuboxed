@@ -41,10 +41,8 @@ import {
          getOpportunityForecast
 } from "../../../Opportunity/OpportunityAction";
 // import AddOpportunityDrawerModal from "../../..//OpportunityTable/AddOpportunityDrawerModal"
-// import OpportunityDetailView from "./OpportunityDetailView";
-// import UpdateOpportunityModal from "../UpdateOpportunity/UpdateOpportunityModal";
-// import APIFailed from "../../../../Helpers/ErrorBoundary/APIFailed";
-import {getDealListbyUserId} from "../../DealAction";
+import UpdateDealModal from "../UpdateDeal/UpdateDealModal";
+import {getDealListbyUserId,handleUpdateDealModal} from "../../DealAction";
 
 const Option =Select;
 
@@ -73,22 +71,10 @@ function DealCardList(props) {
         props.getAllSalesList();  
     }, 100);
   
-  }
+  };
 
 
-  const [currentOpportunityId, setCurrentOpportunityId] = useState("");
-;
   const [currentItem, setCurrentItem] = useState("");
-
-
-
-
-
-  function handleSetCurrentOpportunityId(item) {
-    setCurrentOpportunityId(item);
-    // console.log("opp",item);
-  }
-
 
   function handleSetCurrentItem(item) {
     setCurrentItem(item);
@@ -103,8 +89,8 @@ function DealCardList(props) {
   const {
     user,
     dealsByuserId,
-    handleUpdateOpportunityModal,
-    updateOpportunityModal,
+    handleUpdateDealModal,
+    openupdateDealModal,
     deleteOpportunityData,
     history,
     fetchingDeal
@@ -133,11 +119,11 @@ function DealCardList(props) {
     <CardWrapper>
     {dealsByuserId.map((item) => {
                  
-                 var findProbability = item.probability;
-                   item.stageList.forEach((element) => {
-                     if (element.oppStage === item.oppStage) {
-                       findProbability = element.probability;}
-                    });
+                //  var findProbability = item.probability;
+                //    item.stageList.forEach((element) => {
+                //      if (element.oppStage === item.oppStage) {
+                //        findProbability = element.probability;}
+                //     });
                  return (
       <CardElement>
         <FlexContainer
@@ -161,7 +147,7 @@ function DealCardList(props) {
           >
             <div style={{ color: "#337df4", cursor: "pointer", fontSize: "1em" }}>
           <Link
-toUrl={`opportunity/${item.opportunityId}`}
+toUrl={`dealDetails/${item.invOpportunityId}`}
 title={`${item.opportunityName}`}>
 {item.opportunityName}
 </Link>
@@ -248,7 +234,7 @@ trigger={["click"]}
 <Progress
 type="circle"
 style={{ cursor: "pointer",color:"red" }}
-percent={findProbability}
+// percent={findProbability}
 //disable={true}
 width={30}
  strokeColor={"#005075"}
@@ -379,9 +365,8 @@ imgHeight={"1.8em"}
             <span
               style={{ cursor: "pointer", color: "blue" }}
               onClick={() => {
-                props.setEditOpportunity(item);
-                handleUpdateOpportunityModal(true);
-                handleSetCurrentOpportunityId(item);
+                handleUpdateDealModal(true);
+                handleSetCurrentItem(item);
               }}
             >
                  <BorderColorIcon  style={{fontSize:"1rem" }}/>
@@ -411,18 +396,18 @@ imgHeight={"1.8em"}
 
       </InfiniteScroll>
       
-      {/* <UpdateOpportunityModal
-        updateOpportunityModal={updateOpportunityModal}
-        opportunityData={currentOpportunityId}
-        handleUpdateOpportunityModal={handleUpdateOpportunityModal}
-        handleSetCurrentOpportunityId={handleSetCurrentOpportunityId}
+     <UpdateDealModal
+         currentItem={currentItem}
+        openupdateDealModal={openupdateDealModal}
+            handleUpdateDealModal={handleUpdateDealModal}
+        handleSetCurrentItem={handleSetCurrentItem}
       />
-
+{/*
 <AddOpportunityDrawerModal
- opportunityData={currentOpportunityId}
+ opportunityData={currentItem}
 opportunityForecast={props.opportunityForecast}
 opportunityInitiativesSkillsDetails={props.opportunityInitiativesSkillsDetails}
- handleSetCurrentOpportunityId={handleSetCurrentOpportunityId}
+ handleSetCurrentItem={handleSetCurrentItem}
  
  fetchingOpportunitySkills={props.fetchingOpportunitySkills}
  item={currentItem}
@@ -454,7 +439,7 @@ const mapStateToProps = ({ auth, deal, opportunity }) => ({
   fetchingDealError: deal.fetchingDealError,
   fetchingAllOpportunities:opportunity.fetchingAllOpportunities,
   opportunityId :opportunity.opportunityId,
-  updateOpportunityModal: opportunity.updateOpportunityModal,
+  openupdateDealModal: deal.openupdateDealModal,
   recruiterId:auth.userDetails.userId,
   addDrawerOpportunityModal:opportunity.addDrawerOpportunityModal,
   allRecruitmentPositionByOppId: opportunity.allRecruitmentPositionByOppId,
@@ -477,7 +462,7 @@ const mapDispatchToProps = (dispatch) =>
       getOpportunitySKill,
       getOpportunityForecast,
       getAllSalesList,
-      handleUpdateOpportunityModal,
+      handleUpdateDealModal,
       handleOpportunityDrawerModal,
       setEditOpportunity,
       deleteOpportunityData,
