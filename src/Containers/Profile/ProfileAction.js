@@ -9,6 +9,13 @@ export const handleEducationModal = (modalProps) => (dispatch) => {
   });
 };
 
+export const handleVisaModal = (modalProps) => (dispatch) => {
+  dispatch({
+    type: types.HANDLE_VISA_MODAL,
+    payload: modalProps,
+  });
+};
+
 export const handleTrainingModal = (modalProps) => (dispatch) => {
   dispatch({
     type: types.HANDLE_TRAINING_MODAL,
@@ -1349,5 +1356,31 @@ export const linkEmailStatus = (data, candidateId) => (
         payload: err,
       });
       // cb && cb("failuer");
+    });
+};
+
+export const getLinkedUsersDocument = () => (dispatch) => {
+  dispatch({
+    type: types.GET_LINKED_USERS_DOCUMENT_REQUEST,
+  });
+  axios
+    .get(`${base_url}/department`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.GET_LINKED_USERS_DOCUMENT_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.GET_LINKED_USERS_DOCUMENT_FAILURE,
+        payload: err,
+      });
     });
 };

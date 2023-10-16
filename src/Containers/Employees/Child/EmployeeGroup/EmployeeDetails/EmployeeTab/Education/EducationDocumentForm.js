@@ -18,7 +18,7 @@ import { DatePicker } from "../../../../../../../Components/Forms/Formik/DatePic
 import ButtonGroup from "antd/lib/button/button-group";
 // import dayjs from "dayjs";
 import SearchSelect from "../../../../../../../Components/Forms/Formik/SearchSelect";
-import { addEducationDetails } from "../../../../../../Profile/ProfileAction";
+import { addEducationDetails,getLinkedUsersDocument } from "../../../../../../Profile/ProfileAction";
 import dayjs from "dayjs";
 import { getEducations } from "../../../../../../Settings/Educations/EducationAction";
 function onChange(date) {}
@@ -37,9 +37,21 @@ class EducationDocumentForm extends Component {
     this.setState({ active: type });
     // alert(this.state.active)
   };
+  componentDidMount() {
+    const { getLinkedUsersDocument ,} = this.props;
+   
+    getLinkedUsersDocument(getLinkedUsersDocument);
+   
+}
 
   render() {
     const { addingEducationDetails } = this.props;
+    const documentNameOption = this.props.linkedUserDocument.map((item) => {
+      return {
+          label: `${item.country_name|| ""}`,
+          value: item.country_name,
+      };
+  });
     return (
       <>
         <Formik
@@ -94,6 +106,31 @@ class EducationDocumentForm extends Component {
                     width: "45%",
                     }}
                 >
+                    <FastField
+                    name="documentTypeId"
+                    type="text"
+                    //label="Type"
+                    label={
+                      <FormattedMessage id="app.type" defaultMessage="Type" />
+                    }
+                    // options={[
+                    //   "Aadhar Card",
+                    //   "Voter-Id Card",
+                    //   "Driving-License",
+                    //   "Pan Card",
+                    //   "Passport",
+                    // ]}
+                    options={
+                      Array.isArray(documentNameOption)
+                        ? documentNameOption
+                        : []
+                    }
+                    component={SelectComponent}
+                    inlineLabel
+                    className="field"
+                    isColumn
+                     />
+                  <Spacer />
                   <FastField
                     name="educationTypeId"
                     // type="text"
@@ -263,7 +300,7 @@ class EducationDocumentForm extends Component {
                         component={SelectComponent}
                         options={["%", "Out of 10", "Out of 5"]}
                         isColumn
-                        type="text"
+                     
                         width={"100%"}
                         />
                     </div>
@@ -346,11 +383,15 @@ class EducationDocumentForm extends Component {
 const mapStateToProps = ({ employee, profile,education }) => ({
   employeeId: employee.singleEmployee.employeeId,
   educations: education.educations,
+  linkedUserDocument:profile.linkedUserDocument,
   addingEducationDetails: profile.addingEducationDetails,
 });
 
 const mapDispatchToProps = (dispatch) =>
-  bindActionCreators({ addEducationDetails,getEducations}, dispatch);
+  bindActionCreators({ 
+    addEducationDetails,
+    getEducations,  
+   getLinkedUsersDocument}, dispatch);
 export default connect(
   mapStateToProps,
   mapDispatchToProps

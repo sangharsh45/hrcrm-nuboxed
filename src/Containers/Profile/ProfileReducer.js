@@ -1,6 +1,7 @@
 import * as types from "./ProfileActionTypes";
 const initialState = {
   addEducationModal: false,
+  addVisaModal:false,
   addTrainingModal: false,
   addEmploymentModal: false,
   addPersonalModal: false,
@@ -106,6 +107,10 @@ const initialState = {
 
   updateContractModal: false,
 
+  fetchingLinkedUsersDocument: false,
+   fetchingLinkedUsersDocumentError: false,
+   linkedUserDocument:[],
+
   updatingEmploymentDetails: false,
   updatingEmploymentDetailsError: false,
 
@@ -140,6 +145,10 @@ export const profileReducer = (state = initialState, action) => {
       };
     case types.HANDLE_EDUCATION_MODAL:
       return { ...state, addEducationModal: action.payload };
+
+      case types.HANDLE_VISA_MODAL:
+        return { ...state, addVisaModal: action.payload };
+  
 
     case types.HANDLE_TRAINING_MODAL:
       return { ...state, addTrainingModal: action.payload };
@@ -862,6 +871,15 @@ export const profileReducer = (state = initialState, action) => {
           linkingEmailStatus: false,
           linkingEmailStatusError: true,
         };
+
+
+        case types.GET_LINKED_USERS_DOCUMENT_REQUEST:
+          return { ...state, fetchingLinkedUsersDocument: true };
+        case types.GET_LINKED_USERS_DOCUMENT_SUCCESS:
+          return { ...state, fetchingLinkedUsersDocument: false, linkedUserDocument: action.payload };
+        case types.GET_LINKED_USERS_DOCUMENT_FAILURE:
+          return { ...state, fetchingLinkedUsersDocument: false, fetchingLinkedUsersDocumentError: true };
+  
     default:
       return state;
   }

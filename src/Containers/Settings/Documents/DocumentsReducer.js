@@ -14,6 +14,9 @@ const initialState = {
   addingDocumentToggle: false,
   addingDocumentToggleError: false,
 
+  addingTypeToggle: false,
+  addingTypeToggleError: false,
+
 
   addingWorkflowDocumentToggle:false,
   addingWorkflowDocumentToggleError:false,
@@ -170,6 +173,27 @@ export const documentsReducer = (state = initialState, action) => {
               fetchingAllDocuments: false,
               fetchingAllDocumentsError: true,
             };
+
+            case types.LINK_TYPE_TOGGLE_REQUEST:
+              return { ...state, addingTypeToggle: true };
+            case types.LINK_TYPE_TOGGLE_SUCCESS:
+              return {
+                ...state,
+                addingTypeToggle: false,
+                documents: state.documents.map((item) => {
+                  if (item.documentTypeId === action.payload.documentTypeId) {
+                    return action.payload;
+                  } else {
+                    return item;
+                  }
+                }),
+              };
+            case types.LINK_TYPE_TOGGLE_FAILURE:
+              return {
+                ...state,
+                addingTypeToggle: false,
+             addingTypeToggleError: true,
+              };
       
 
     default:
