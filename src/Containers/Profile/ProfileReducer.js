@@ -957,7 +957,7 @@ export const profileReducer = (state = initialState, action) => {
           if (visa.visaId === action.payload.visaId) {
             return action.payload;
           } else {
-            return education;
+            return visa;
           }
         }),
       };
