@@ -16,10 +16,11 @@ const LocationCard = (props) => {
      return (
   <CardElement>
     
-     <div class=" flex flex-row justify-evenly w-wk max-sm:flex-col">
+     <div class=" flex flex-row justify-between w-wk max-sm:flex-col">
+      <div class="flex">
      <div className=" flex font-medium flex-col md:w-40 max-sm:flex-row w-full max-sm:justify-between ">
 
-<div class=" text-sm text-cardBody font-semibold font-poppins">
+<div class=" text-sm text-cardBody font-semibold font-poppins max-sm:hidden">
 Name
 </div>
 
@@ -31,7 +32,7 @@ Name
  
 <div className=" flex font-medium flex-col md:w-40  max-sm:flex-row w-full mt-1 max-sm:justify-between">
 
-<div class=" text-sm text-cardBody font-semibold font-poppins">
+<div class=" text-sm text-cardBody font-semibold font-poppins max-sm:hidden">
 Country
 </div>
 
@@ -41,7 +42,7 @@ Country
 </div> 
 <div className=" flex font-medium flex-col md:w-40 max-sm:flex-row w-full mt-1 max-sm:justify-between">
 
-<div class=" text-sm text-cardBody font-semibold font-poppins">
+<div class=" text-sm text-cardBody font-semibold font-poppins max-sm:hidden">
 Address
 </div>
 
@@ -53,8 +54,10 @@ Address
           </span>
 </div>
 </div> 
+</div>
+<div class="flex">
 <div className=" flex font-medium flex-col md:w-24 max-sm:flex-row w-full mt-1 max-sm:justify-between">
-<div class=" text-sm text-cardBody font-semibold font-poppins">
+<div class=" text-sm text-cardBody font-semibold font-poppins max-sm:hidden">
 Production
 </div>
 
@@ -69,7 +72,7 @@ Production
 </div>
 </div> 
 <div className=" flex font-medium flex-col md:w-24 max-sm:flex-row w-full mt-1 max-sm:justify-between">
-<div class=" text-sm text-cardBody font-semibold font-poppins">
+<div class=" text-sm text-cardBody font-semibold font-poppins max-sm:hidden">
 Inventory
 </div>
 
@@ -84,7 +87,7 @@ Inventory
 </div>
 </div> 
 <div className=" flex font-medium flex-col md:w-24 max-sm:flex-row w-full mt-1 max-sm:justify-between ">
-<div class=" text-sm text-cardBody font-semibold font-poppins">
+<div class=" text-sm text-cardBody font-semibold font-poppins max-sm:hidden">
 Billing
 </div>
 <div class=" font-normal text-sm text-cardBody font-poppins">
@@ -97,8 +100,10 @@ Billing
                     />
 </div>
 </div> 
+</div>
+<div class="flex">
 <div className=" flex font-medium flex-col md:w-24 max-sm:flex-row w-full mt-1 max-sm:justify-between">
-<div class=" text-sm text-cardBody font-semibold font-poppins">
+<div class=" text-sm text-cardBody font-semibold font-poppins max-sm:hidden">
 Corporate
 </div>
 <div class=" font-normal text-sm text-cardBody font-poppins">
@@ -112,7 +117,7 @@ Corporate
 </div>
 </div> 
 <div className=" flex font-medium flex-col md:w-24 max-sm:flex-row w-full mt-1 max-sm:justify-between">
-<div class=" text-sm text-cardBody font-semibold font-poppins">
+<div class=" text-sm text-cardBody font-semibold font-poppins max-sm:hidden">
 Project
 </div>
 <div class=" font-normal text-sm text-cardBody font-poppins">
@@ -126,7 +131,7 @@ Project
 </div>
 </div> 
 <div className=" flex font-medium flex-col md:w-24 max-sm:flex-row w-full mt-1 max-sm:justify-between">
-<div class=" text-sm text-cardBody font-semibold font-poppins">
+<div class=" text-sm text-cardBody font-semibold font-poppins max-sm:hidden">
 Retail
 </div>
 <div class=" font-normal text-sm text-cardBody font-poppins">
@@ -139,7 +144,7 @@ Retail
                     />
 </div>
 </div> 
-
+</div>
  </div>
 
   </CardElement>
@@ -189,7 +194,7 @@ border-radius: 0.75rem;
   @media only screen and (max-width: 600px) {
     width: 100%;
     margin: 0.25em;
-     height: 15rem;
+     height: 7rem;
     
   }
 `

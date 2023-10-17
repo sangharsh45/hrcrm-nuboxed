@@ -87,7 +87,7 @@ const LeadsCardList = (props) => {
                                 style={{
                                     borderBottom: "3px dotted #515050"
                                 }}>
-                                     
+                                    <div class="flex"> 
                                 <div className=" flex font-medium flex-col w-60 mb-4  max-sm:w-full">
                                 <div className="flex max-sm:w-full"> 
 <div>
@@ -108,7 +108,7 @@ const LeadsCardList = (props) => {
                                         <div class="max-sm:w-full" >
                                         <Tooltip>
                                           <div class="max-sm:w-full justify-between flex md:flex-col">
-                                            <h4 class=" text-[0.875rem] text-cardBody font-poppins">
+                                            <h4 class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden">
                                             Name
                                             </h4>
                                             <h4 class="text-[0.75rem] text-cardBody font-poppins cursor-pointer">
@@ -134,65 +134,7 @@ const LeadsCardList = (props) => {
                                         </div>
                                         </div>
                                 </div>
-                                <div className=" flex font-medium flex-col  md:w-44 max-sm:flex-row w-full justify-between ">
-                           <h4 class=" text-[0.875rem] text-cardBody font-poppins"> Phone # </h4>
-                           <h4 class=" text-[0.75rem] text-cardBody font-poppins">   
-                           {`${item.countryDialCode} ${item.phoneNumber}`}
-                           </h4>
-                       </div>
-                       <div className=" flex font-medium flex-col  md:w-40 max-sm:flex-row w-full justify-between ">
-                           <h4 class=" text-[0.875rem] text-cardBody font-poppins"> Company </h4>
-                           <h4 class=" text-[0.75rem] text-cardBody font-poppins">   
-                           <Link
-           toUrl={`leads/${item.leadsId}`}
-          title={`${item.companyName}`}
-        >{item.name}</Link>
-                           </h4>
-                       </div>
-                       <div class="rounded-full bg-white  h-5 cursor-pointer w-8">
-                    {item.url !== null ? (
-              <Tooltip title={item.url}>
-                <span
-                  //type="edit"
-                  style={{ cursor: "pointer" }}
-                  onClick={() => {}}
-                >
-                  {" "}
-                  <a href={`item.url`} target="_blank">
-                    <ExploreIcon
-                      style={{ cursor: "pointer", color: "green" ,fontSize: "0.8rem",}}
-                    />
-                  </a>
-                </span>
-              </Tooltip>
-            ) : null}
-                        </div>
-                                <div className=" flex font-medium flex-col  md:w-52 max-sm:flex-row w-full justify-between ">
-                           
-                                    <h4 class=" text-[0.875rem] text-cardBody font-poppins"> Sector </h4>
-                                    <h4 class=" text-[0.75rem] text-cardBody font-poppins">   
-                                    {item.sector}
-                                    </h4>
-                                </div>
-                                <div className=" flex font-medium flex-col md:w-32 max-sm:flex-row w-full justify-between ">
-                                  
 
-                                    <h4 class=" text-[0.875rem] text-cardBody font-poppins">Country</h4>
-                                    <h4 class=" text-[0.75rem] text-cardBody font-poppins">
-                                    <ReactCountryFlag countryCode="IN" svg />
-                                    <ReactCountryFlag
-                          countryCode={item.country}
-                          svg
-                          style={{
-                            width: '1em',
-                            height: '1em',
-                          }}
-                          title={item.country}
-                        />
-                        &nbsp;
-                        {item.address && item.address.length && item.address[0].country}
-                                    </h4>
-                                </div>
                                 <div class="flex flex-row md:w-[11%] max-sm:flex-row w-full justify-between">
 
 <div>
@@ -258,8 +200,75 @@ onClick={()=>{props.handleCETmodal(true)}}
 />
 </div>
      </div>  
+</div>
+<div class="flex"> 
+                                <div className=" flex font-medium flex-col  md:w-32 max-sm:flex-row w-full justify-between ">
+                           <h4 class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden"> Phone # </h4>
+                           <h4 class=" text-[0.75rem] text-cardBody font-poppins">   
+                           {`${item.countryDialCode} ${item.phoneNumber}`}
+                           </h4>
+                       </div>
+                       <div className=" flex font-medium flex-col md:w-32 max-sm:flex-row w-full justify-between ">
+                                  
+
+                                  <h4 class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden">Country</h4>
+                                  <h4 class=" text-[0.75rem] text-cardBody font-poppins">
+                                  <ReactCountryFlag countryCode="IN" svg />
+                                  <ReactCountryFlag
+                        countryCode={item.country}
+                        svg
+                        style={{
+                          width: '1em',
+                          height: '1em',
+                        }}
+                        title={item.country}
+                      />
+                      &nbsp;
+                      {item.address && item.address.length && item.address[0].country}
+                                  </h4>
+                              </div>
+                     
+                       </div>
+                       <div class="flex"> 
+                       <div className=" flex font-medium flex-col  md:w-40 max-sm:flex-row w-full justify-between ">
+                           <h4 class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden"> Company </h4>
+                           <h4 class=" text-[0.75rem] text-cardBody font-poppins">   
+                           <Link
+           toUrl={`leads/${item.leadsId}`}
+          title={`${item.companyName}`}
+        >{item.name}</Link>
+                           </h4>
+                       </div>
+                       <div class="rounded-full bg-white  h-5 cursor-pointer w-8">
+                    {item.url !== null ? (
+              <Tooltip title={item.url}>
+                <span
+                  //type="edit"
+                  style={{ cursor: "pointer" }}
+                  onClick={() => {}}
+                >
+                  {" "}
+                  <a href={`item.url`} target="_blank">
+                    <ExploreIcon
+                      style={{ cursor: "pointer", color: "green" ,fontSize: "0.8rem",}}
+                    />
+                  </a>
+                </span>
+              </Tooltip>
+            ) : null}
+                        </div>
+                       
+                                <div className=" flex font-medium flex-col  md:w-24 max-sm:flex-row w-full justify-between ">
+                           
+                                    <h4 class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden"> Sector </h4>
+                                    <h4 class=" text-[0.75rem] text-cardBody font-poppins">   
+                                    {item.sector}
+                                    </h4>
+                                </div>
+                                </div>
+                                <div class="flex mb-1"> 
                                 <div className=" flex font-medium flex-col md:w-32 max-sm:flex-row w-full justify-between ">
-                                    <h4 class=" text-[0.875rem] text-cardBody font-poppins">Assigned to</h4>
+                                    <h4 class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden">Assigned to</h4>
 
                                     <div class=" text-[0.75rem] text-cardBody font-poppins">
                                     
@@ -279,7 +288,7 @@ onClick={()=>{props.handleCETmodal(true)}}
                                 </div>
                                 <div className=" flex font-medium flex-col md:w-20  max-sm:flex-row w-full justify-between">
                        
-                       <h4 class=" text-[0.875rem] text-cardBody font-poppins">Owner</h4>
+                       <h4 class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden">Owner</h4>
 
                        <span>
               <MultiAvatar
@@ -292,7 +301,7 @@ onClick={()=>{props.handleCETmodal(true)}}
             </span>
                    </div>
                    <div className=" flex font-medium flex-col md:w-32 max-sm:flex-row w-full justify-between ">
-                                    <h4 class=" text-[0.875rem] text-cardBody font-poppins">Qualified</h4>
+                                    <h4 class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden">Qualified</h4>
 
                                     <div class=" text-[0.75rem] text-cardBody font-poppins">
                 {/* qual */}
@@ -306,7 +315,7 @@ onClick={()=>{props.handleCETmodal(true)}}
 </div>
                                 </div>
                                 {/* <div class="flex max-sm:flex-row w-full justify-between md:flex-col"> */}
-                                <div class="flex flex-col w-[5%] max-sm:flex-row">
+                                <div class="flex flex-col w-[5%] max-sm:flex-row max-sm:w-[10%]">
                                 <div>
             <Tooltip title="Edit">
               <BorderColorIcon
@@ -339,7 +348,7 @@ onClick={()=>{props.handleCETmodal(true)}}
 
                     </div>
                     </div>
-                    <div class="flex flex-col w-[2%] max-sm:flex-row">
+                    <div class="flex flex-col w-[2%] max-sm:flex-row max-sm:w-[10%]">
                       <div>
                     <Tooltip overlayStyle={{ maxWidth: "300px" }} title={dataLoc}>
             <span
@@ -368,7 +377,8 @@ onClick={()=>{props.handleCETmodal(true)}}
               />
             </Tooltip> </div>
            
-                      </div>    
+                      </div>  
+                      </div>  
                       </div>
                             </div>
                         // </div>

@@ -153,13 +153,13 @@ function CustomerCardList(props) {
                                 style={{
                                     borderBottom: "3px dotted #515050"
                                 }}>
-                                     
+                                   <div class="flex">
                                 <div className=" flex font-medium flex-col md:w-52 max-sm:w-full  ">
 
                                    
                                         <Tooltip>
                                           <div class="flex max-sm:flex-row justify-between w-full md:flex-col">
-                                            <h4 class=" text-[0.875rem] text-cardBody font-poppins">
+                                            <h4 class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden">
                                             Name
                                             </h4>
                                             <h4 class=" text-[0.75rem] text-blue-500 text-cardBody font-poppins cursor-pointer">
@@ -187,15 +187,16 @@ function CustomerCardList(props) {
 
                                 <div className=" flex font-medium flex-col  md:w-52 max-sm:flex-row w-full justify-between  ">
                            
-                                    <h4 class=" text-[0.875rem] text-cardBody font-poppins"> Sector </h4>
+                                    <h4 class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden"> Sector </h4>
                                     <h4 class=" text-[0.75rem] text-cardBody font-poppins">   
                                     {item.sector}
                                     </h4>
-                                </div>
+                                
+                                </div> 
                                 <div className=" flex font-medium flex-col md:w-36 max-sm:flex-row w-full justify-between ">
                                   
 
-                                    <h4 class=" text-[0.875rem] text-cardBody font-poppins">Country</h4>
+                                    <h4 class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden">Country</h4>
                                     <h4 class=" text-[0.75rem] text-cardBody font-poppins">
                                     <ReactCountryFlag
                           countryCode={item.countryAlpha2Code}
@@ -209,16 +210,16 @@ function CustomerCardList(props) {
                        {item.address && item.address.length && item.address[0].country}
                                     </h4>
                                 </div>
-                             
+                                </div>
                                 <div className=" flex font-medium flex-col md:w-36 max-sm:flex-row w-full justify-between ">
-                                    <h4 class=" text-[0.875rem] text-cardBody font-poppins"># Opportunity</h4>
+                                    <h4 class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden"># Opportunity</h4>
 
                                     <div class=" text-[0.75rem] text-cardBody font-poppins">
 
                                     </div>
                                 </div>
                                 <div className=" flex font-medium flex-col md:w-24 max-sm:max-sm:flex-row w-full justify-between ">
-                                    <h4 class=" text-[0.875rem] text-cardBody font-poppins">Assigned to</h4>
+                                    <h4 class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden">Assigned to</h4>
 
                                     <div class=" text-[0.75rem] text-cardBody font-poppins">
                                     
@@ -236,9 +237,10 @@ function CustomerCardList(props) {
              
                                     </div>
                                 </div>
+                                <div class="flex"> 
                                 <div className=" flex font-medium flex-col md:w-20 max-sm:flex-row w-full justify-between ">
                        
-                       <h4 class=" text-[0.875rem] text-cardBody font-poppins">Owner</h4>
+                       <h4 class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden">Owner</h4>
 
                        <span>
               <MultiAvatar
@@ -258,7 +260,7 @@ function CustomerCardList(props) {
                      <span class="text-[0.75rem]" >Convert to Account</span>
                         </Button>
                    </div>
-                                <div class="flex flex-col md:w-[3%] ">
+                                <div class="flex flex-col md:w-[10%] ">
                     <div class="rounded-full bg-white w-5 h-5 cursor-pointer">
                     <Tooltip title={item.url}>
               {item.url !== "" && (
@@ -344,6 +346,7 @@ function CustomerCardList(props) {
             )}
             </div>
                       </div>    
+                      </div>
                             </div>
                         </div>
 
