@@ -130,7 +130,7 @@ const TaskCardList = (props) => {
                                 style={{
                                     borderBottom: "3px dotted #515050"
                                 }}>
-                                     
+                                     <div class="flex">
                                 <div className=" flex font-medium flex-col md:w-52 max-sm:flex-row justify-between w-full ">
 <div className="flex max-sm:w-full"> 
 {item.priority === "High" && (
@@ -167,7 +167,7 @@ const TaskCardList = (props) => {
           <div class="max-sm:w-full">
                                         <Tooltip>
                                         <div class=" flex max-sm:justify-between flex-row w-full md:flex-col">
-                                            <div class="text-[0.875rem] text-cardBody font-poppins">
+                                            <div class="text-[0.875rem] text-cardBody font-poppins max-sm:hidden">
                                             Type
                                             </div>
                                             <div class="text-[0.75rem] text-cardBody font-poppins cursor-pointer">                                       
@@ -181,7 +181,7 @@ const TaskCardList = (props) => {
                                 </div>
 
                                 <div className=" flex font-medium flex-col  md:w-36 max-sm:flex-row justify-between w-full ">
-                                    <div class=" text-[0.875rem] text-cardBody font-[0.875rem] font-poppins"> Name </div>
+                                    <div class=" text-[0.875rem] text-cardBody font-[0.875rem] font-poppins max-sm:hidden"> Name </div>
                                     <div class=" text-[0.75rem] text-cardBody font-poppins">   
                                     <span   
                 onClick={() => {
@@ -201,119 +201,9 @@ const TaskCardList = (props) => {
                </span>
                                     </div>
                                 </div>
-                                <div className=" flex font-medium flex-col mt-1 md:w-32 max-sm:flex-row justify-between w-full ">
-                                    <div class=" text-[0.875rem] text-cardBody font-poppins">Owner</div>
-                                    <div class="text-[0.75rem] text-cardBody font-poppins">
-                                    <MultiAvatar
-                  primaryTitle={item.submittedBy}
-                  imgWidth={"1.8rem"}
-                  imgHeight={"1.8rem"}
-                />
-                                    </div>
                                 </div>
-                                <div className=" flex font-medium flex-col mt-1 md:w-32 max-sm:flex-row justify-between w-full ">
-                                  <div class="text-[0.875rem] text-cardBody font-poppins">Assigned To</div>
-                                  <div class="text-[0.75rem] text-cardBody font-poppins">
-                                  {item.assignedToName === null ? (
-              ""
-            ) : (
-              <MultiAvatar
-                primaryTitle={item.assignedToName}
-                imgWidth={"1.8em"}
-                imgHeight={"1.8em"}
-              />
-            )}
-                                  </div>
-                              </div>
-                                {/* <div className=" flex font-medium flex-col w-32 ">
-                                    <div class=" text-[0.875rem] text-cardBody font-poppins">Team</div>
-
-                                    <div class=" text-[0.75rem] text-cardBody font-poppins">
-                                    <Avatar.Group
-  maxCount={2}
-  maxStyle={{ color: "#f56a00", backgroundColor: "#fde3cf" }}
->
-  {item.owner &&
-    item.owner.map((candidate, i) => {
-      if (candidate && candidate.fullName) {
-        const data1 = candidate.fullName.slice(0, 2);
-        console.log("datas", data1);
-        return (
-          <Tooltip title={candidate.fullName} key={i}>
-            <Avatar style={{ backgroundColor: "#94b3e4" }}>
-              {data1}
-            </Avatar>
-          </Tooltip>
-        );
-      } else {
-        return null; 
-      }
-    })}
-</Avatar.Group>
-                                    </div>
-                                </div> */}
-                                {/* <div className="flex font-medium flex-col md:w-32 max-sm:flex-row justify-between w-full ">
-                                    <div class="text-[0.875rem] text-cardBody font-poppins">Start</div>
-
-                                    <div class="text-[0.75rem] text-cardBody font-poppins">
-                                     {`${moment(item.startDate).format("ll")}`}
-                                    </div>
-                                </div> */}
-                                <div className="flex font-medium flex-col md:w-20 max-sm:flex-row justify-between w-full ">
-                       
-                       <div class="text-[0.875rem] text-cardBody font-poppins">End</div>
-                       <div class="text-[0.75rem] text-cardBody font-poppins"> 
-                        {`${moment(item.endDate).format("ll")}`}</div>
-                   </div>
-                   <div class="flex flex-col md:w-[10%] max-sm:flex-row justify-between w-full">
-                    <div>
-  {item.taskStatus === "Completed" && !item.approvedInd && item.assignedToName !== item.submittedBy ? (
-    <>
-      <div>
-        <Button
-        onClick={() => approveTaskByTaskId(item.taskId, props.employeeId)}
-          style={{ backgroundColor: "teal", color: "white" }}
-        >
-          <FormattedMessage id="app.approve" defaultMessage="Approve" />
-        </Button>
-        <Button
-          style={{
-            backgroundColor: "rgb(233, 79, 79)",
-            color: "white",
-          }}
-          onClick={() => rejectTaskByTaskId(item.taskId)}
-        >
-          <FormattedMessage id="app.reject" defaultMessage="Reject" />
-        </Button>
-      </div>
-    </>
-  ) : (
-    <>
-      {item.approvedInd === "Approved" ? (
-        <CheckCircleOutlined
-          type="check-circle"
-          theme="twoTone"
-          twoToneColor="#52c41a"
-          size={140}
-          style={{ fontSize: "1rem" }}
-        />
-      ) : item.approvedInd === "Rejected" ? (
-        <CloseCircleOutlined
-          type="close-circle"
-          theme="twoTone"
-          twoToneColor="red"
-          size={140}
-          style={{ fontSize: "1rem" }}
-        />
-      ) : (
-        <></>
-      )}
-    </>
-  )}
-  </div>
-</div>
-
-                                <div class="flex flex-col w-[3%]">
+                               
+                                <div class="flex flex-col w-[13%]">
                     <div class="">
                     <ButtonGroup >
           {/* {item.complitionStatus === "To Start" && ( */}
@@ -375,8 +265,125 @@ const TaskCardList = (props) => {
             )}
                     </div> */}
                     </div>
+                    <div class="flex max-sm:mt-4">
+                                <div className=" flex font-medium flex-col mt-1 md:w-32 max-sm:flex-row justify-between w-full ">
+                                    <div class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden">Owner</div>
+                                    <div class="text-[0.75rem] text-cardBody font-poppins">
+                                    <MultiAvatar
+                  primaryTitle={item.submittedBy}
+                  imgWidth={"1.8rem"}
+                  imgHeight={"1.8rem"}
+                />
+                                    </div>
+                                </div>
+                               
+                                <div className=" flex font-medium flex-col mt-1 md:w-32 max-sm:flex-row justify-between w-full ">
+                                  <div class="text-[0.875rem] text-cardBody font-poppins max-sm:hidden">Assigned To</div>
+                                  <div class="text-[0.75rem] text-cardBody font-poppins">
+                                  {item.assignedToName === null ? (
+              ""
+            ) : (
+              <MultiAvatar
+                primaryTitle={item.assignedToName}
+                imgWidth={"1.8em"}
+                imgHeight={"1.8em"}
+              />
+            )}
+                                  </div>
+                              </div>
+                                {/* <div className=" flex font-medium flex-col w-32 ">
+                                    <div class=" text-[0.875rem] text-cardBody font-poppins">Team</div>
+
+                                    <div class=" text-[0.75rem] text-cardBody font-poppins">
+                                    <Avatar.Group
+  maxCount={2}
+  maxStyle={{ color: "#f56a00", backgroundColor: "#fde3cf" }}
+>
+  {item.owner &&
+    item.owner.map((candidate, i) => {
+      if (candidate && candidate.fullName) {
+        const data1 = candidate.fullName.slice(0, 2);
+        console.log("datas", data1);
+        return (
+          <Tooltip title={candidate.fullName} key={i}>
+            <Avatar style={{ backgroundColor: "#94b3e4" }}>
+              {data1}
+            </Avatar>
+          </Tooltip>
+        );
+      } else {
+        return null; 
+      }
+    })}
+</Avatar.Group>
+                                    </div>
+                                </div> */}
+                                {/* <div className="flex font-medium flex-col md:w-32 max-sm:flex-row justify-between w-full ">
+                                    <div class="text-[0.875rem] text-cardBody font-poppins">Start</div>
+
+                                    <div class="text-[0.75rem] text-cardBody font-poppins">
+                                     {`${moment(item.startDate).format("ll")}`}
+                                    </div>
+                                </div> */}
+                                <div className="flex font-medium flex-col md:w-20 max-sm:flex-row justify-between w-full ">
+                       
+                       <div class="text-[0.875rem] text-cardBody font-poppins max-sm:hidden">End</div>
+                       <div class="text-[0.75rem] text-cardBody font-poppins"> 
+                        {`${moment(item.endDate).format("ll")}`}</div>
+                   </div>
+                   </div>
+                   <div class="flex">
+                   <div class="flex flex-col md:w-[74%] max-sm:flex-row justify-between w-full">
+                    <div>
+  {item.taskStatus === "Completed" && !item.approvedInd && item.assignedToName !== item.submittedBy ? (
+    <>
+      <div>
+        <Button
+        onClick={() => approveTaskByTaskId(item.taskId, props.employeeId)}
+          style={{ backgroundColor: "teal", color: "white" }}
+        >
+          <FormattedMessage id="app.approve" defaultMessage="Approve" />
+        </Button>
+        <Button
+          style={{
+            backgroundColor: "rgb(233, 79, 79)",
+            color: "white",
+          }}
+          onClick={() => rejectTaskByTaskId(item.taskId)}
+        >
+          <FormattedMessage id="app.reject" defaultMessage="Reject" />
+        </Button>
+      </div>
+    </>
+  ) : (
+    <>
+      {item.approvedInd === "Approved" ? (
+        <CheckCircleOutlined
+          type="check-circle"
+          theme="twoTone"
+          twoToneColor="#52c41a"
+          size={140}
+          style={{ fontSize: "1rem" }}
+        />
+      ) : item.approvedInd === "Rejected" ? (
+        <CloseCircleOutlined
+          type="close-circle"
+          theme="twoTone"
+          twoToneColor="red"
+          size={140}
+          style={{ fontSize: "1rem" }}
+        />
+      ) : (
+        <></>
+      )}
+    </>
+  )}
+  </div>
+</div>
+
+                          
                     <div class=" ml-2"></div>
-                    <div class="flex flex-row justify-between w-[3%] max-sm:mt-4">
+                    <div class="flex flex-col justify-between  ">
                     <Tooltip title="Notes">
        <NoteAltIcon
                 onClick={() => {
@@ -400,7 +407,7 @@ const TaskCardList = (props) => {
                     {/* )} */}
             </Tooltip>
             </div>
-                    <div class="flex flex-col w-[2%]">
+                    <div class="flex flex-col justify-between ">
    
    
           <Tooltip title="Edit">
@@ -437,7 +444,8 @@ const TaskCardList = (props) => {
                         )}
       
             </div>
-                      </div>    
+                      </div>   
+                      </div> 
                             </div>
                         </div>
 

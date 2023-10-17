@@ -104,13 +104,13 @@ if (fetchingEventListRangeByUserId)
                                 style={{
                                     borderBottom: "3px dotted #515050"
                                 }}>
-                                     
+                                     <div class="flex">
                                 <div className=" flex font-medium flex-col w-52 max-sm:w-full ">
 <div className="flex max-sm:w-full"> 
           <div class="max-sm:w-full">
                                         <Tooltip>
                                         <div class=" flex max-sm:justify-between flex-row w-full md:flex-col">
-                                            <div class="text-[0.875rem] text-cardBody font-poppins">
+                                            <div class="text-[0.875rem] text-cardBody font-poppins max-sm:hidden">
                                             Type
                                             </div>
                                             <div class="text-[0.75rem] text-cardBody font-poppins cursor-pointer">                                       
@@ -124,13 +124,15 @@ if (fetchingEventListRangeByUserId)
                                 </div>
 
                                 <div className=" flex font-medium flex-col  md:w-52 max-sm:flex-row justify-between w-full ">
-                                    <div class=" text-[0.875rem] text-cardBody font-[0.875rem] font-poppins"> Subject </div>
+                                    <div class=" text-[0.875rem] text-cardBody font-[0.875rem] font-poppins max-sm:hidden"> Subject </div>
                                     <div class=" text-[0.75rem] text-cardBody font-poppins">   
                                     {item.eventSubject}
                                     </div>
                                 </div>
+                                </div>
+                                <div class="flex">
                                 <div className=" flex font-medium flex-col md:w-40 max-sm:flex-row justify-between w-full">
-                                    <div class=" text-[0.875rem] text-cardBody font-poppins">Start</div>
+                                    <div class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden">Start</div>
                                     <div class="text-[0.75rem] text-cardBody font-poppins">
                                     {` ${moment(item.startDate).format("llll")}`}
                                     </div>
@@ -154,7 +156,7 @@ if (fetchingEventListRangeByUserId)
                                   </div>
                               </div> */}
                                 <div className=" flex font-medium flex-col md:w-32 max-sm:flex-row justify-between w-full ">
-                                    <div class=" text-[0.875rem] text-cardBody font-poppins">Include</div>
+                                    <div class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden">Include</div>
 
                                     <div class=" text-[0.75rem] text-cardBody font-poppins">
                                     <Avatar.Group
@@ -181,8 +183,8 @@ if (fetchingEventListRangeByUserId)
             </Avatar.Group>
                                     </div>
                                 </div>
-                                <div className="flex font-medium flex-col md:w-32 max-sm:flex-row justify-between w-full ">
-                                    <div class="text-[0.875rem] text-cardBody font-poppins">Assigned To</div>
+                                <div className="flex font-medium flex-col md:w-48 max-sm:flex-row justify-between w-full ">
+                                    <div class="text-[0.875rem] text-cardBody font-poppins max-sm:hidden">Assigned To</div>
 
                                     <div class="text-[0.75rem] text-cardBody font-poppins">
                                     <Tooltip title={item.assignedToName}>
@@ -198,9 +200,12 @@ if (fetchingEventListRangeByUserId)
              </Tooltip>
                                     </div>
                                 </div>
-                                <div className="flex font-medium flex-col md:w-20 max-sm:flex-row justify-between w-full ">
+                                </div>
+                                <div class="flex">
+                               
+                                <div className="flex font-medium flex-col md:w-48 max-sm:flex-row justify-between w-full ">
                        
-                       <div class="text-[0.875rem] text-cardBody font-poppins">Owner</div>
+                       <div class="text-[0.875rem] text-cardBody font-poppins max-sm:hidden">Owner</div>
 
                    <div class="max-sm:flex justify-end">
               <Tooltip title={item.ownerName}>
@@ -216,7 +221,7 @@ if (fetchingEventListRangeByUserId)
           </Tooltip>
           </div>
                    </div>
-                                <div class="flex flex-col md:w-[3%] max-sm:flex-row justify-between w-full">
+                                <div class="flex flex-col md: max-sm:flex-row items-center justify-between w-full">
                     <div class="">
                     {item.rating === 0 ? (<StarBorderIcon
                 style={{ color: "#eeeedd", fontSize: "1.5em" }} />)
@@ -248,7 +253,8 @@ if (fetchingEventListRangeByUserId)
                         </Tooltip>
                     </div>
                     </div>
-                    <div class="flex flex-col md:w-[2%] max-sm:flex-row justify-between w-full">
+                    
+                    <div class="flex flex-col md: max-sm:flex-row justify-between items-center w-full">
        
           <Tooltip title="Edit">
               <BorderColorIcon
@@ -272,7 +278,8 @@ if (fetchingEventListRangeByUserId)
             </StyledPopconfirm>
       
             </div>
-                      </div>    
+                      </div>   
+                      </div> 
                             </div>
                         </div>
 

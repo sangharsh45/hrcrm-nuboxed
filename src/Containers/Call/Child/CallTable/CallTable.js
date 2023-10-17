@@ -672,15 +672,18 @@ function CallTable(props) {
             style={{
                 borderBottom: "3px dotted #515050"
             }}>
-              <div class="flex  flex-col md:w-12 max-sm:flex-row justify-between w-full">
-              <div >Type</div>
+              <div class="flex">
+              <div class="flex  flex-col md:w-28 max-sm:flex-row justify-between w-full">
+              <div class="max-sm:hidden" >Type</div>
             <div> {item.callType}</div>
             </div>
             <div class="flex  flex-col md:w-40 max-sm:flex-row justify-between w-full">
-              <p>Subject</p><p> {item.callPurpose}</p>
+              <p class="max-sm:hidden" >Subject</p><p> {item.callPurpose}</p>
               </div>
-              <div class="flex  flex-col md:w-16 max-sm:flex-row justify-between w-full">
-              <p>Contact</p>
+              </div>
+              <div class="flex">
+              <div class="flex  flex-col md:w-48 max-sm:flex-row justify-between w-full">
+              <p class="max-sm:hidden" >Contact</p>
               <MultiAvatar2
                     primaryTitle={item.contactName}
                     // imageId={item.ownerImageId}
@@ -692,10 +695,10 @@ function CallTable(props) {
               {/* <p> {item.contactName}</p> */}
               </div>
               <div class="flex  flex-col md:w-48 max-sm:flex-row justify-between w-full">
-              <p>Date</p><p> {moment(item.startDate).format("llll")}</p>
+              <p class="max-sm:hidden" >Date</p><p> {moment(item.startDate).format("llll")}</p>
               </div>
               <div class="flex  flex-col md:w-16 max-sm:flex-row justify-between w-full">
-              <p>Included</p>
+              <p class="max-sm:hidden" >Included</p>
               <div>
                 {item.included &&
                   item.included.map((candidate, i) => {
@@ -716,6 +719,7 @@ function CallTable(props) {
                   })}
               </div>
               </div>
+              </div>
               {/* <div class="flex  flex-col w-16">
               <p>Team </p>
               <MultiAvatar2
@@ -727,14 +731,9 @@ function CallTable(props) {
                   />
              
               </div> */}
-             
-              <div class="flex  flex-col md:w-16 max-sm:flex-row justify-between w-full">
-              <p>Completed</p><p> {item.completionInd ? "Yes" : "No"}</p></div>
-              {/* <div class="flex  flex-col w-16">
-              <p>Rating</p><p> {item.rating > 0 ? item.rating : "Not Rated"}</p>
-              </div> */}
-              <div class="flex  flex-col md:w-24 max-sm:flex-row justify-between w-full">
-              <p>Assigned To</p>
+              <div class="flex items-center">
+             <div class="flex  flex-col md:w-24 max-sm:flex-row justify-between w-full">
+              <p class="max-sm:hidden" >Assigned To</p>
               <MultiAvatar2
                     primaryTitle={item.assignedTo}
                    // imageId={item.ownerImageId}
@@ -744,8 +743,14 @@ function CallTable(props) {
                   />
               {/* <p> {item.assignedTo || "Unassigned"}</p> */}
               </div>
+              <div class="flex  flex-col md:w-36 max-sm:flex-row justify-between w-full">
+              <p class="max-sm:hidden" >Completed</p><p> {item.completionInd ? "Yes" : "No"}</p></div>
+              {/* <div class="flex  flex-col w-16">
+              <p>Rating</p><p> {item.rating > 0 ? item.rating : "Not Rated"}</p>
+              </div> */}
+              
               <div class="flex  flex-col md:w-16 max-sm:flex-row justify-between w-full mt-1">
-              <p>Owner</p>
+              <p class="max-sm:hidden" >Owner</p>
               <MultiAvatar2
                     primaryTitle={item.woner}
                     //imageId={item.ownerImageId}
@@ -755,10 +760,11 @@ function CallTable(props) {
                   />
               {/* <p> {item.woner || "Unknown"}</p> */}
               </div>
+              
               <DeleteIcon  type="delete" style={{ cursor: "pointer",color:"red",fontSize:"1rem" }} 
                 onClick={() => deleteCall(item.callId, employeeId)}
               />
-              
+              </div>
             </div>
           ))}
         </OnlyWrapCard>
