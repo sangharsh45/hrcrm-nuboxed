@@ -268,7 +268,7 @@ class UpdateEducationForm extends Component {
                       component={SelectComponent}
                       options={["%", "Out of 10", "Out of 5"]}
                       isColumn
-                      type="text"
+                     
                       width={"100%"}
                       />
                   </div>

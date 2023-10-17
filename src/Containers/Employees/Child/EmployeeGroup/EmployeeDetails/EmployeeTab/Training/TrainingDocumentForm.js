@@ -14,10 +14,10 @@ import * as Yup from "yup";
 import { FlexContainer } from "../../../../../../../Components/UI/Layout";
 import DragableUpload from "../../../../../../../Components/Forms/Formik/DragableUpload";
 // import Upload from "../../../../../../Components/Forms/Formik/Upload";
-// import { SelectComponent } from "../../../../../../Components/Forms/Formik/SelectComponent";
+ import { SelectComponent } from "../../../../../../../Components/Forms/Formik/SelectComponent";
 // import SearchSelect from "../../../../../../Components/Forms/Formik/SearchSelect";
 import { DatePicker } from "../../../../../../../Components/Forms/Formik/DatePicker";
-import { addTrainingDetails } from "../../../../../../Profile/ProfileAction";
+import { addTrainingDetails,getLinkedUsersDocument } from "../../../../../../Profile/ProfileAction";
 import moment from "moment";
 
 // const documentSchema = Yup.object().shape({
@@ -25,8 +25,20 @@ import moment from "moment";
 // });
 
 class TrainingDocumentForm extends Component {
+  componentDidMount() {
+    const { getLinkedUsersDocument ,orgId} = this.props;
+    this.props.getLinkedUsersDocument(this.props.orgId);
+    // getLinkedUsersDocument(orgId);
+   
+}
   render() {
     const { addingTrainingDetails } = this.props;
+    const documentNameOption = this.props.linkedUserDocument.map((item) => {
+      return {
+          label: `${item.documentTypeName|| ""}`,
+          value: item.documentTypeId,
+      };
+  });
     return (
       <>
         <Formik
@@ -36,6 +48,7 @@ class TrainingDocumentForm extends Component {
             courseName: "",
             grade: "",
             startDate: "",
+            documentTypeId: this.props.documentTypeId,
             endDate: "",
             organization: "",
             documentId: "",
@@ -79,6 +92,31 @@ class TrainingDocumentForm extends Component {
                   >
                     <FlexContainer justifyContent="space-between">
                       <div style={{ width: "100%" }}>
+                      <FastField
+                    name="documentTypeId"
+                    type="text"
+                    //label="Type"
+                    label={
+                      <FormattedMessage id="app.type" defaultMessage="Type" />
+                    }
+                    // options={[
+                    //   "Aadhar Card",
+                    //   "Voter-Id Card",
+                    //   "Driving-License",
+                    //   "Pan Card",
+                    //   "Passport",
+                    // ]}
+                    options={
+                      Array.isArray(documentNameOption)
+                        ? documentNameOption
+                        : []
+                    }
+                    component={SelectComponent}
+                    inlineLabel
+                    className="field"
+                    isColumn
+                     />
+                  <Spacer />
                         <FastField
                           isRequired
                           name="courseName"
@@ -268,14 +306,15 @@ class TrainingDocumentForm extends Component {
   }
 }
 
-const mapStateToProps = ({ employee, profile }) => ({
-  // userId: auth.userDetails.userId,
+const mapStateToProps = ({ employee,auth, profile }) => ({
+  linkedUserDocument:profile.linkedUserDocument,
+  orgId: auth.userDetails.organizationId,
   employeeId: employee.singleEmployee.employeeId,
   addingTrainingDetails: profile.addingTrainingDetails,
 });
 
 const mapDispatchToProps = (dispatch) =>
-  bindActionCreators({ addTrainingDetails }, dispatch);
+  bindActionCreators({ addTrainingDetails,getLinkedUsersDocument }, dispatch);
 export default connect(
   mapStateToProps,
   mapDispatchToProps

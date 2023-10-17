@@ -22,10 +22,12 @@ class SingleDocuments extends Component {
     };
   }
   handleStageType=(value)=>{
+    const { documentTypeId } = this.props.document;
     console.log(value)
     this.setState({type:value});
     let data={
       userType:value,
+      documentTypeId: documentTypeId,
     }
     this.props.linkTypeToggle(data);
     // this.props.linkTypeToggle(value);

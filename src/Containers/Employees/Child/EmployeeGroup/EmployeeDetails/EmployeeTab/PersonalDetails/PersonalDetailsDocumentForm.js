@@ -47,7 +47,7 @@ class PersonalDetailsDocumentForm extends Component {
     const documentNameOption = this.props.linkedUserDocument.map((item) => {
       return {
           label: `${item.documentTypeName|| ""}`,
-          value: item.documentTypeName,
+          value: item.documentTypeId,
       };
   });
     return (
@@ -58,12 +58,13 @@ class PersonalDetailsDocumentForm extends Component {
             employeeId: this.props.employeeId,
 
             idNo: "",
-            documentTypeId: "",
+            documentTypeId: this.props.documentTypeId,
             documentId: "",
           }}
           onSubmit={(values, { resetForm }) => {
             console.log(values);
-            values.documentTypeId = values.documentId;
+            
+            // values.documentTypeId = values.documentId;
             this.props.addDocumentDetails(
               { ...values },
               this.props.employeeId,
@@ -102,13 +103,7 @@ class PersonalDetailsDocumentForm extends Component {
                     label={
                       <FormattedMessage id="app.type" defaultMessage="Type" />
                     }
-                    // options={[
-                    //   "Aadhar Card",
-                    //   "Voter-Id Card",
-                    //   "Driving-License",
-                    //   "Pan Card",
-                    //   "Passport",
-                    // ]}
+                 
                     options={
                       Array.isArray(documentNameOption)
                         ? documentNameOption
