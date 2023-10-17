@@ -330,6 +330,17 @@ const initialState = {
   fetchingJumpstartInvestor4: false,
   fetchingJumpstartInvestor4Error: false,
   jumpstartInvestor4Count: {},
+
+  gettingInvHotColdWarm: false,
+  gettingInvHotColdWarmError: false, 
+  investorHotColdWarm:{}, 
+
+  fetchingdashInvstPitchAdded: false,
+  fetchingdashInvstPitchAddedError: false,
+ dashInvstPitchAdded: [],
+ fetchingdashInvstContactAdded: false,
+ fetchingdashInvstContactAddedError:false,
+dashInvstContactAdded:[],
 };
 
 export const dashboardReducer = (state = initialState, action) => {
@@ -1255,6 +1266,53 @@ case types.GET_JUMPSTART_CUSTOMER2_LIST_REQUEST:
                         fetchingJumpstartInvestor4: false,
                         fetchingJumpstartInvestor4Error: true,
                       };
+
+                      case types.GET_INVSTR_HOT_COLD_WARM_REQUEST:
+                        return { ...state, gettingInvHotColdWarm: true };
+                  
+                      case types.GET_INVSTR_HOT_COLD_WARM_SUCCESS:
+                        return {
+                          ...state,
+                          gettingInvHotColdWarm: false,
+                          investorHotColdWarm: action.payload,
+                        };
+                  
+                      case types.GET_INVSTR_HOT_COLD_WARM_FAILURE:
+                        return {
+                          ...state,
+                          gettingInvHotColdWarm: false,
+                          gettingInvHotColdWarmError: true,
+                        };
+
+                        case types.GET_DASH_INVESTOR_ADDED_PITCH_REQUEST:
+                          return { ...state, fetchingdashInvstPitchAdded: true };
+                        case types.GET_DASH_INVESTOR_ADDED_PITCH_SUCCESS:
+                          return {
+                            ...state,
+                            fetchingdashInvstPitchAdded: false,
+                            dashInvstPitchAdded: action.payload,
+                          };
+                        case types.GET_DASH_INVESTOR_ADDED_PITCH_FAILURE:
+                          return {
+                            ...state,
+                            fetchingdashInvstPitchAdded: false,
+                            fetchingdashInvstPitchAddedError: true,
+                          };
+                          
+                        case types.GET_DASH_INVESTOR_ADDED_CONTACTINVEST_REQUEST:
+                          return { ...state, fetchingdashInvstContactAdded: true };
+                        case types.GET_DASH_INVESTOR_ADDED_CONTACTINVEST_SUCCESS:
+                          return {
+                            ...state,
+                            fetchingdashInvstContactAdded: false,
+                            dashInvstContactAdded: action.payload,
+                          };
+                        case types.GET_DASH_INVESTOR_ADDED_CONTACTINVEST_FAILURE:
+                          return {
+                            ...state,
+                            fetchingdashInvstContactAdded: false,
+                            fetchingdashInvstContactAddedError: true,
+                          };
     default:
       return state;
   }

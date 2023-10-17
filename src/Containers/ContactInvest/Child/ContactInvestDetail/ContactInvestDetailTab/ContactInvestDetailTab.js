@@ -10,7 +10,7 @@ import InsertDriveFileIcon from "@mui/icons-material/InsertDriveFile";
 // import ReactContactSpeechModal from "../ReactContactSpeechModal"
 import { StyledTabs } from "../../../../../Components/UI/Antd";
 import { TabsWrapper } from "../../../../../Components/UI/Layout";
-// import AddDocumentModal from "./Document/AddDocumentModal";
+import AddDocumentModal from "../../../../Contact/Child/ContactDetail/ContactTab/Document/AddDocumentModal";
 // import OpportunityTable from "./Opportunity/LinkedOpportunity";
 import WorkIcon from "@mui/icons-material/Work";
 // import AddContactOpportunityModal from "../../../Child/ContactDetail/ContactTab/Opportunity/AddContactOpportunityModal";
@@ -23,6 +23,8 @@ import {
 import LinkedContactInvestNotes from "./ContactInvestNotes/LinkedContactInvestNotes";
 import LinkedContactInvestDocuments from "./ContactInvestDocument/LinkedContactInvestDocuments";
 
+const LinkedDealTable =lazy(()=>import("./ContactInvestDeal/LinkedDealTable"));
+ 
 const TabPane = StyledTabs.TabPane;
 
 class ContactInvestDetailTab extends Component {
@@ -65,6 +67,22 @@ class ContactInvestDetailTab extends Component {
                   </span>
                   {activeKey === "1" && (
                     <>
+                    {/* <PlusOutlined
+                        type="plus"
+                        // tooltipTitle="Upload Document"
+                        tooltiptitle={
+                          <FormattedMessage
+                            id="app.create"
+                            defaultMessage="Create"
+                          />
+                        }
+                        onClick={() => handleDocumentUploadModal(true)}
+                        size="14px"
+                        style={{
+                          marginLeft: "0.25em",
+                          verticalAlign: "center",
+                        }}
+                      /> */}
                     </>
                   )}
                 </>
@@ -73,7 +91,7 @@ class ContactInvestDetailTab extends Component {
             >
               <Suspense fallback={"Loading ..."}>
                 {" "}
-                {/* <OpportunityTable /> */}
+                <LinkedDealTable />
               </Suspense>
             </TabPane>
 
@@ -149,11 +167,11 @@ class ContactInvestDetailTab extends Component {
           </StyledTabs>
         </TabsWrapper>
         <Suspense fallback={"Loading..."}>
-          {/* <AddDocumentModal
+           <AddDocumentModal
             documentUploadModal={documentUploadModal}
             handleDocumentUploadModal={handleDocumentUploadModal}
           />
-          <AddContactOpportunityModal
+        {/*  <AddContactOpportunityModal
             addContactOpportunityModal={addContactOpportunityModal}
             handleContactOpportunityModal={handleContactOpportunityModal}
             defaultContacts={[
@@ -178,7 +196,7 @@ class ContactInvestDetailTab extends Component {
 }
 const mapStateToProps = ({ contact }) => ({
   //   addContactSpeechModal:contact.addContactSpeechModal,
-  //   documentUploadModal: contact.documentUploadModal,
+    documentUploadModal: contact.documentUploadModal,
   //   addContactOpportunityModal: contact.addContactOpportunityModal,
 });
 const mapDispatchToProps = (dispatch) =>

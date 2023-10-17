@@ -4,7 +4,7 @@ import { bindActionCreators } from "redux";
 import { FlexContainer } from "../../Components/UI/Layout";
 import TimeInterval from "../../Utils/TimeInterval";
 import {setSelectedClosureTimeIntervalReport} from "../Opportunity/OpportunityAction";
-import {getDashCustomerAddedContacts} from "../Dashboard/DashboardAction";
+import {getDashInvestorAddedContactInvest} from "../Dashboard/DashboardAction";
 import {
   BarChart,
   Bar,
@@ -32,28 +32,23 @@ import { MainWrapper } from "../../Components/UI/Elements";
     date: date,
   };
   }
-//   componentDidMount() {
-//     const { getDashCustomerAddedContacts, userId, startDate, endDate } = this.props;
-//     getDashCustomerAddedContacts(userId,  startDate, endDate);
-//   }
+  componentDidMount() {
+    const { getDashInvestorAddedContactInvest, userId, startDate, endDate } = this.props;
+    getDashInvestorAddedContactInvest(userId,  startDate, endDate);
+  }
   componentWillReceiveProps(nextProps) {
     if (
       this.props.startDate !== nextProps.startDate ||
       this.props.endDate !== nextProps.endDate
     ) {
-      const { getDashCustomerAddedContacts, userId, startDate, endDate } = nextProps;
-      getDashCustomerAddedContacts(userId, startDate, endDate);
+      const { getDashInvestorAddedContactInvest, userId, startDate, endDate } = nextProps;
+      getDashInvestorAddedContactInvest(userId, startDate, endDate);
     }
   }
 
  
-
-  // useEffect(() => {
-  //   props.getDashBoardClosureRatio(props.organisationId,"Recruiter");
-    
-  // }, []);
   render() {
-    const data=this.props.dashCustoContactsAdded
+    const data=this.props.dashInvstContactAdded
   return (
     <>
     <MainWrapper
@@ -97,7 +92,7 @@ import { MainWrapper } from "../../Components/UI/Elements";
 }
  }
 const mapStateToProps = ({ dashboard,auth,opportunity }) => ({
-  dashCustoContactsAdded:dashboard.dashCustoContactsAdded,
+  dashInvstContactAdded:dashboard.dashInvstContactAdded,
   userId: auth.userDetails.userId,
   endDate: opportunity.endDate,
   startDate: opportunity.startDate,
@@ -109,7 +104,7 @@ const mapStateToProps = ({ dashboard,auth,opportunity }) => ({
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
-    //   getDashCustomerAddedContacts,
+      getDashInvestorAddedContactInvest,
         setSelectedClosureTimeIntervalReport
       
 

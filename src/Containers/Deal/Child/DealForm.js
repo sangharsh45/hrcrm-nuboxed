@@ -34,7 +34,10 @@ import dayjs from "dayjs";
 import { Fragment } from "react";
 import { Listbox } from "@headlessui/react";
 import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/20/solid";
-import {createDeals} from "../DealAction";
+import {createDeals,  getAllDealStages} from "../DealAction";
+import {
+  getProcessForDeals,
+} from "../../Settings/SettingsAction";
 
 /**
  * yup validation scheme for creating a opportunity
@@ -54,8 +57,10 @@ function DealForm(props) {
     props.getContactData(props.userId);
     props.getCustomerData(props.userId);
     props.getInitiative(props.userId);
-    props.getWorkflow(props.orgId);
-    props.getStages(props.orgId);
+    // props.getWorkflow(props.orgId);
+    // props.getStages(props.orgId);
+    props.getProcessForDeals(props.orgId);
+    props.getAllDealStages(props.orgId);
   }, []);
 
   const [defaultOption, setDefaultOption] = useState(props.fullName);
@@ -110,42 +115,40 @@ function DealForm(props) {
 
   function getStagesOptions(filterOptionKey, filterOptionValue) {
     const StagesOptions =
-      props.stages.length &&
-      props.stages
+      props.dealStages.length &&
+      props.dealStages
         .filter((option) => {
           if (
-            option.opportunityWorkflowDetailsId === filterOptionValue &&
+            option.investorOppWorkflowId === filterOptionValue &&
             option.probability !== 0
           ) {
             return option;
           }
         })
         .sort((a, b) => {
-          const libraryNameA = a.name && a.name.toLowerCase();
-          const libraryNameB = b.name && b.name.toLowerCase();
-          if (libraryNameA < libraryNameB) {
+          const stageDealA = a.name && a.name.toLowerCase();
+          const stageDealB = b.name && b.name.toLowerCase();
+          if (stageDealA < stageDealB) {
             return -1;
           }
-          if (libraryNameA > libraryNameB) {
+          if (stageDealA > stageDealB) {
             return 1;
           }
-
-          // names must be equal
           return 0;
         })
 
         .map((option) => ({
           label: option.stageName || "",
-          value: option.opportunityStagesId,
+          value: option.investorOppStagesId,
         }));
 
     return StagesOptions;
   }
 
-  const WorkflowOptions = props.workflow.map((item) => {
+  const WorkflowOptions = props.dealsProcess.map((item) => {
     return {
       label: `${item.workflowName || ""}`,
-      value: item.opportunityWorkflowDetailsId,
+      value: item.investorOppWorkflowId,
     };
   });
 
@@ -769,7 +772,7 @@ function DealForm(props) {
   );
 }
 
-const mapStateToProps = ({ auth, opportunity,deal, contact, customer }) => ({
+const mapStateToProps = ({ auth, opportunity,deal,settings, contact, customer }) => ({
   user: auth.userDetails,
   userId: auth.userDetails.userId,
   organizationId: auth.userDetails.organizationId,
@@ -782,12 +785,12 @@ const mapStateToProps = ({ auth, opportunity,deal, contact, customer }) => ({
   orgId: auth.userDetails.organizationId,
   // salesUserIds:auth.userDetails.userId,
   sales: opportunity.sales,
-  stages: opportunity.stages,
+  dealStages: deal.dealStages,
   currencies: auth.currencies,
   contactByUserId: contact.contactByUserId,
   customerByUserId: customer.customerByUserId,
   initiatives: opportunity.initiatives,
-  workflow: opportunity.workflow,
+  dealsProcess: settings.dealsProcess,
   customerData: customer.customerData,
   contactData: contact.contactData,
   fullName: auth.userDetails.fullName
@@ -807,6 +810,8 @@ const mapDispatchToProps = (dispatch) =>
       // getOpportunitySKill
       getWorkflow,
       getStages,
+      getProcessForDeals,
+      getAllDealStages
     },
     dispatch
   );

@@ -1411,7 +1411,7 @@ export const getJumpInvestorlist = (userId,startDate, endDate) => (dispatch) => 
 export const getJumpInvestor2list = (userId,startDate, endDate) => (dispatch) => {
   dispatch({ type: types.GET_JUMPSTART_INVESTOR_2_REQUEST });
   axios
-    .get(`${base_url}/investorLeads/createded-investorLeads/count//${userId}?endDate=${endDate}&startDate=${startDate}`, {
+    .get(`${base_url}/investorLeads/createded-investorLeads/count/${userId}?endDate=${endDate}&startDate=${startDate}`, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },
@@ -1457,7 +1457,7 @@ export const getJumpInvestor3list = (userId,startDate, endDate) => (dispatch) =>
 export const getJumpInvestor4list = (userId,startDate, endDate) => (dispatch) => {
   dispatch({ type: types.GET_JUMPSTART_INVESTOR_4_REQUEST });
   axios
-    .get(`${base_url}/nvestorOpportunity/Close/record/count/date-range/${userId}?endDate=${endDate}&startDate=${startDate}`, {
+    .get(`${base_url}/InvestorOpportunity/Close/record/count/date-range/${userId}?endDate=${endDate}&startDate=${startDate}`, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },
@@ -1476,4 +1476,83 @@ export const getJumpInvestor4list = (userId,startDate, endDate) => (dispatch) =>
         payload: err,
       });
     });
+};
+
+export const getInvHotColdWarm = (userId,startDate, endDate) => (
+  dispatch,
+) => {
+  dispatch({
+    type: types.GET_INVSTR_HOT_COLD_WARM_REQUEST,
+  });
+  axios
+    .get(`${base_url}/investorLeads/type/hot-warm-cold/count/date-range/${userId}?endDate=${endDate}&startDate=${startDate}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      dispatch({
+        type: types.GET_INVSTR_HOT_COLD_WARM_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      dispatch({
+        type: types.GET_INVSTR_HOT_COLD_WARM_FAILURE,
+        payload: err,
+      });
+    });
+};
+
+export const getDashInvestorAddedPitch = (userId,endDate,startDate) => (dispatch) => {
+  dispatch({
+    type: types.GET_DASH_INVESTOR_ADDED_PITCH_REQUEST,
+  });
+  axios
+    .get(`${base_url}/investorLeads/added/count/date-wise/${userId}?endDate=${endDate}&startDate=${startDate}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.GET_DASH_INVESTOR_ADDED_PITCH_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err.response);
+      dispatch({
+        type: types.GET_DASH_INVESTOR_ADDED_PITCH_FAILURE,
+        payload: err,
+      });
+    });
+    
+};
+export const getDashInvestorAddedContactInvest = (userId,endDate,startDate) => (dispatch) => {
+  dispatch({
+    type: types.GET_DASH_INVESTOR_ADDED_CONTACTINVEST_REQUEST,
+  });
+  axios
+    .get(`${base_url}/contact/added/investor/count/date-wise/${userId}?endDate=${endDate}&startDate=${startDate}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.GET_DASH_INVESTOR_ADDED_CONTACTINVEST_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err.response);
+      dispatch({
+        type: types.GET_DASH_INVESTOR_ADDED_CONTACTINVEST_FAILURE,
+        payload: err,
+      });
+    });
+    
 };

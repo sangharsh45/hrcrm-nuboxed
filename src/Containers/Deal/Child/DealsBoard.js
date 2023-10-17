@@ -17,6 +17,7 @@ import { BundleLoader } from "../../../Components/Placeholder";
 import { CurrencySymbol } from "../../../Components/Common";
 import { wrap } from "lodash";
 import DealStageColumn from "./DealStageColumn"
+import {getAllDealsbyUserId} from "../DealAction";
 
 const TabPane = StyledTabs.TabPane;
 
@@ -130,7 +131,7 @@ function DealsBoard(props) {
     //debugger;
     // if (!processData) return;
     props.getProcessForDeals(props.orgId);
-     props.getAllOpportunityListByUserId(props.userId)
+     props.getAllDealsbyUserId(props.userId)
   }, []);
 
   useEffect(() => {
@@ -335,6 +336,7 @@ const mapStateToProps = ({
   dashboard,
   auth,
   settings,
+  deal
 }) => ({
     dealsProcess: settings.dealsProcess,
     orgId: auth.userDetails && auth.userDetails.organizationId,
@@ -357,7 +359,7 @@ const mapDispatchToProps = (dispatch) =>
     {
         getProcessForDeals,
         getProcessStagesForDeals,
-        getAllOpportunityListByUserId,
+        getAllDealsbyUserId,
         updateOpportunitydragstage
     //   updateOpportunityStage,
     //   getOpportunityRelatedData,

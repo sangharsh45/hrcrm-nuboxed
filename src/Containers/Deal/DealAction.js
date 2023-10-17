@@ -138,3 +138,60 @@ export const setDealViewType = (viewType) => (dispatch) => {
       payload: modalProps,
     });
   };
+  
+  export const getAllDealsbyUserId = (userId) => (dispatch) => {
+    dispatch({
+      type: types.GET_ALL_DEALS_REQUEST,
+    });
+    axios
+      .get(`${base_url}/investorOpportunities/${userId}`, {
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+        },
+      })
+      .then((res) => {
+        console.log(res);
+        dispatch({
+          type: types.GET_ALL_DEALS_SUCCESS,
+          payload: res.data,
+        });
+      })
+      .catch((err) => {
+        console.log(err.response);
+        dispatch({
+          type: types.GET_ALL_DEALS_FAILURE,
+          payload: err,
+        });
+      });
+  };
+  export const emptyDeals = () => (dispatch) => {
+    dispatch({
+      type: types.EMPTY_DEALS_LIST, 
+    });
+  };
+
+  export const getAllDealStages = (orgId) => (dispatch) => {
+    dispatch({
+      type: types.GET_ALL_DEAL_STAGES_REQUEST,
+    });
+    axios
+      .get(`${base_url}/investorOpportunityWorkflow/opportunityStage/${orgId}`, {
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+        },
+      })
+      .then((res) => {
+        console.log(res);
+        dispatch({
+          type: types.GET_ALL_DEAL_STAGES_SUCCESS,
+          payload: res.data,
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+        dispatch({
+          type: types.GET_ALL_DEAL_STAGES_FAILURE,
+          payload: err,
+        });
+      });
+  };

@@ -8,7 +8,6 @@ import { getDesignations } from "../../../../../Settings/Designation/Designation
 // import {
 //   getContactListByCustomerId,
 //   setEditCustomerContact,
-//   handleUpdateCustomerContactModal,
 // } from "../../../../CustomerAction";
 import {
   StyledTable,
@@ -21,13 +20,11 @@ import { Link } from "../../../../../../Components/Common";
 import { ActionIcon } from "../../../../../../Components/Utils";
 // import CustomerContactActiveToggle from "./CustomerContactActiveToggle";
 import styled from "styled-components";
-import {getContactListByInvestorId} from "../../../../InvestorAction";
-// const AddCustomerUpdateContactModal = lazy(() =>
-//   import("./AddCustomerUpdateContactModal")
-// );
-// const UpdateContactModal = lazy(() =>
-//   import("../../../../../Contact/Child/UpdateContact/UpdateContactModal")
-// );
+import {getContactListByInvestorId,handleUpdateInvestorContactModal} from "../../../../InvestorAction";
+
+const InvestorUpdateContactModal = lazy(() =>
+  import("../InvestorContact/InvestorUpdateContactModal")
+);
 
 const ButtonGroup = Button.Group;
 
@@ -41,7 +38,7 @@ class InvestorLinkedContact extends Component {
   state = {
     searchText: "",
     searchedColumn: "",
-    contactId: "",
+    currentRowData: "",
   };
 
   getColumnSearchProps = (dataIndex) => ({
@@ -139,9 +136,9 @@ class InvestorLinkedContact extends Component {
     clearFilters();
     this.setState({ searchText: "" });
   };
-  handleIconClick = (contactId) => {
+  handleRowData = (items) => {
     debugger;
-    this.setState({ contactId });
+    this.setState({ items });
 
     // this.props.getContactDocument(contactId);
   };
@@ -167,8 +164,8 @@ class InvestorLinkedContact extends Component {
       contactsbyInvestorId,
       unlinkContactFromOpportunity,
       setContactRoleForOpportunity,
-      handleUpdateCustomerContactModal,
-      addUpdateCustomerContactModal,
+      handleUpdateInvestorContactModal,
+      invstrContactUpdateModal,
     } = this.props;
 
     const columns = [
@@ -334,14 +331,12 @@ class InvestorLinkedContact extends Component {
               <span
                 style={{ cursor: "pointer" }}
                 onClick={() => {
-                  this.props.setEditCustomerContact(item);
-                  this.props.handleUpdateCustomerContactModal(true);
-                  this.handleIconClick(item.contactId);
+                  this.handleRowData(item);
+                 handleUpdateInvestorContactModal(true);
                 }}
               >
                 <BorderColorIcon style={{ fontSize: "0.8rem", }} />
               </span>
-              {/* )} */}
             </Tooltip>
           );
         },
@@ -425,11 +420,11 @@ class InvestorLinkedContact extends Component {
           onChange={console.log("contact onChangeHere...")}
   
         />
-        {/* <AddCustomerUpdateContactModal
-          addUpdateCustomerContactModal={addUpdateCustomerContactModal}
-          contactId={this.state.contactId}
-          handleUpdateCustomerContactModal={handleUpdateCustomerContactModal}
-        /> */}
+        <InvestorUpdateContactModal
+           currentRowData={this.state.currentRowData}
+          invstrContactUpdateModal={invstrContactUpdateModal}
+          handleUpdateInvestorContactModal={handleUpdateInvestorContactModal}
+        />
       </>
     );
   }
@@ -440,7 +435,7 @@ const mapStateToProps = ({ customer, investor,designations, departments, contact
   fetchingsInvestorContactError: investor.fetchingsInvestorContactError,
   designations: designations.designations,
   departments: departments.departments,
-  addUpdateCustomerContactModal: customer.addUpdateCustomerContactModal,
+  invstrContactUpdateModal: investor.invstrContactUpdateModal,
   contactsbyInvestorId:investor.contactsbyInvestorId,
 
 });
@@ -452,7 +447,7 @@ const mapDispatchToProps = (dispatch) =>
       getDesignations,
     //   setEditCustomerContact,
       getDepartments,
-    //   handleUpdateCustomerContactModal,
+      handleUpdateInvestorContactModal,
     },
     dispatch
   );

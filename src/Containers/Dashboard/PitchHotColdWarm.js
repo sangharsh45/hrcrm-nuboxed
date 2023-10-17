@@ -6,7 +6,7 @@ import { Button, Divider, message ,Input, Card} from "antd";
 import { MainWrapper, FlexContainer } from "../../Components/UI/Layout";
 import { TextInput, Title } from "../../Components/UI/Elements";
 import moment from "moment";
-import {getHotColdWarm} from "./DashboardAction";
+import {getInvHotColdWarm} from "./DashboardAction";
 
 function PitchHotColdWarm (props) {
     const startDate = moment().startOf("month"); 
@@ -26,10 +26,10 @@ function PitchHotColdWarm (props) {
   useEffect(()=> {
     const startDate = `${startDatestart.format("YYYY-MM-DD")}T20:00:00Z`
     const endDate = `${endDateend.format("YYYY-MM-DD")}T20:00:00Z`
-//    props.getHotColdWarm(props.userId,startDate,endDate);
+   props.getInvHotColdWarm(props.userId,startDate,endDate);
   },[]);
 
-  const {showHotColdWarm}=props;
+  const {investorHotColdWarm}=props;
 
 
     return (
@@ -38,15 +38,15 @@ function PitchHotColdWarm (props) {
           <div className="grid grid-cols-5 gap-4">
         <div className="col-span-2 sm:col-span-1">
           <div className="flex">Hot</div>
-          {/* <div class="text-2xl">{showHotColdWarm.hotList}</div> */}
+          <div class="text-2xl">{investorHotColdWarm.hotList}</div>
           </div>
           <div className="col-span-2 sm:col-span-1">
           <div className="flex">Cold</div>
-          {/* <div class="text-2xl">{showHotColdWarm.coldList}</div> */}
+          <div class="text-2xl">{investorHotColdWarm.coldList}</div>
           </div>
           <div className="col-span-2 sm:col-span-1">
           <div className="flex">Warm</div>
-          {/* <div class="text-2xl">{showHotColdWarm.warmList}</div> */}
+          <div class="text-2xl">{investorHotColdWarm.warmList}</div>
         </div>
 </div>
         
@@ -56,13 +56,13 @@ function PitchHotColdWarm (props) {
 }
 
 const mapStateToProps = ({ dashboard,auth }) => ({
-    showHotColdWarm:dashboard.showHotColdWarm,
+    investorHotColdWarm:dashboard.investorHotColdWarm,
     userId:auth.userDetails.userId,
 });
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
-    //   getHotColdWarm
+      getInvHotColdWarm
     },
     dispatch
   );

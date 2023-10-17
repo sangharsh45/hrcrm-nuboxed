@@ -4,9 +4,9 @@ import dayjs from "dayjs";
 const initialState = {
   viewType: "table",
 
-  dealsByuserId:[],
   fetchingDeal: false,
   fetchingDealError:false,
+  dealsByuserId:[],
 
   creatingDeal: false,
   creatingDealError: false,
@@ -19,6 +19,14 @@ const initialState = {
   updateDealbyID: false,
   updateDealbyIDError: false,
   openupdateDealModal:false,
+
+  fetchingAllDeals: false,
+  fetchingAllDealsError:false,
+  aLLdealsList:[],
+
+  fetchingDealStages: false,
+  fetchingStagesError:false,
+  dealStages: [],
 };
 export const dealReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -97,7 +105,39 @@ export const dealReducer = (state = initialState, action) => {
       
                 case types.HANDLE_UPDATE_DEAL_MODAL:
                   return { ...state, openupdateDealModal: action.payload };
-                   
+                  
+                  case types.GET_ALL_DEALS_REQUEST:
+                    return { ...state, fetchingAllDeals: true };
+                  case types.GET_ALL_DEALS_SUCCESS:
+                    return {
+                      ...state,
+                      fetchingAllDeals: false,
+                      aLLdealsList: action.payload,
+                    };
+                  case types.GET_ALL_DEALS_FAILURE:
+                    return {
+                      ...state,
+                      fetchingAllDeals: false,
+                      fetchingAllDealsError: true,
+                    };  
+
+                    case types.EMPTY_DEALS_LIST:
+                      return { ...state, dealsByuserId: [] }; 
+      
+                      case types.GET_ALL_DEAL_STAGES_REQUEST:
+                        return { ...state, fetchingDealStages: true };
+                      case types.GET_ALL_DEAL_STAGES_SUCCESS:
+                        return {
+                          ...state,
+                          fetchingDealStages: false,
+                          dealStages: action.payload,
+                        };
+                      case types.GET_ALL_DEAL_STAGES_FAILURE:
+                        return {
+                          ...state,
+                          fetchingStages: false,
+                          fetchingStagesError: true,
+                        };                 
     default:
       return state;
   }

@@ -41,6 +41,11 @@ const initialState = {
   addingInvestorContact: false,
   addingInvestorContactError: false,
 
+  opendocumentUploadModal:false,
+  addingDocumentByInvestorId: false,
+  addingDocumentByInvestorIdError: false,
+  
+  invstrContactUpdateModal:false,
 };
 export const investorReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -233,7 +238,54 @@ export const investorReducer = (state = initialState, action) => {
                 openInvestorContactModal: false,
               };        
 
-    default:
+              case types.HANDLE_INVESTOR_DOCUMENT_UPLOAD_MODAL:
+                return { ...state, opendocumentUploadModal: action.payload };             
+              
+     case types.CREATE_INVESTOR_DOCUMENT_REQUEST:
+                  return {
+                    ...state,
+                    addingDocumentByInvestorId: true,
+                    addingDocumentByInvestorIdError: false,
+                  };
+                case types.CREATE_INVESTOR_DOCUMENT_SUCCESS:
+                  return {
+                    ...state,
+                    addingDocumentByInvestorId: false,
+                    addingDocumentByInvestorIdError: false,
+                    opendocumentUploadModal:false,
+                  };
+                case types.CREATE_INVESTOR_DOCUMENT_FAILURE:
+                  return {
+                    ...state,
+                    addingDocumentByInvestorId: false,
+                    addingDocumentByInvestorIdError: true,
+                  }; 
+    
+                  case types.HANDLE_UPDATE_INVESTOR_CONTACT_MODAL:
+                    return { ...state, invstrContactUpdateModal: action.payload };             
+              
+                    case types.UPDATE_INVESTOR_CONTACT_BY_ID_REQUEST:
+                      return { ...state, updateInvestorContactById: true };
+                    case types.UPDATE_INVESTOR_CONTACT_BY_ID_SUCCESS:
+                      return {
+                        ...state,
+                        updateInvestorContactById: false,
+                        invstrContactUpdateModal: false,
+                        contactsbyInvestorId: state.contactsbyInvestorId.map((item) => {
+                          if (item.contactId === action.payload.contactId) {
+                            return action.payload;
+                          } else {
+                            return item;
+                          }
+                        }),
+                      };
+                      case types.UPDATE_INVESTOR_CONTACT_BY_ID_FAILURE:
+                        return {
+                          ...state,
+                          updateInvestorContactById: false,
+                          updateInvestorContactByIdError: true,
+                        };                 
+default:
       return state;
   }
 };
