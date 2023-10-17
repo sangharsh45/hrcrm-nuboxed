@@ -7,122 +7,91 @@ import {
   StyledPopconfirm,
 } from "../../../../../../../Components/UI/Antd";
 import DeleteIcon from "@mui/icons-material/Delete";
+import {getVisaDetails,
+  deleteVisa,
+  handleUpdateVisaModal,
+  setEditVisa
+} from "../../../../../../Profile/ProfileAction"
 import DownloadIcon from "@mui/icons-material/Download";
-import UpdateEducationModal from "../../../../EmployeeGroup/EmployeeDetails/EmployeeTab/Education/UpdateEducationModal";
 import { base_url } from "../../../../../../../Config/Auth";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
+import moment from "moment";
+import UpdateVisaModal from "./UpdateVisaModal";
 
 class VisaTable extends Component {
   componentDidMount() {
     // debugger;
-    const { getEducationDetails, employeeId } = this.props;
+    const { getVisaDetails, userId } = this.props;
     // console.log(employeeId);
-    // if (employeeId) {
-    //   getEducationDetails(employeeId);
-    // }
+    if (userId) {
+      getVisaDetails(userId);
+    }
   }
 
   render() {
-    console.log(this.props.employeeId);
+    console.log(this.props.userId);
     const {
-      eduDetails,
-      fetchingEducationDetails,
-      fetchingEducationDetailsError,
-      handleUpdateEducationModal,
-      updateEducationModal,
+      visaDetails,
+      fetchingVisaDetails,
+      fetchingVisaDetailsError,
+      handleUpdateVisaModal,
+      updateVisaModal,
       singleEmployee,
-      setEditEducation,
+      setEditVisa,
       employeeId,
-      deleteEducationTable,
+      deleteVisa,
     } = this.props;
     console.log(employeeId);
 
     const columns = [
-      {
-        title: (
-          <span className="font-poppins">
-            <FormattedMessage id="app.type" defaultMessage="Type" />
-          </span>
-        ),
-        dataIndex: "educationType",
-        render: (text) => (
-          <span className="font-poppins">{text}</span>
-        ),
-      },
+ 
       {
         //title: "Course Name",
         title: (
           <span className="font-poppins">
-          <FormattedMessage id="app.courseName" defaultMessage="Course Name" />
+          <FormattedMessage id="app.country" defaultMessage="Country" />
           </span>
         ),
-        dataIndex: "courseName",
-        render: (text) => (
-          <span className="font-poppins">{text}</span>
-        ),
+        dataIndex: "country",
+      
       },
       {
         //title: "Year of Passing",
         title: (
           <span className="font-poppins">
           <FormattedMessage
-            id="app.yearOfPassing"
-            defaultMessage="Year of Passing"
+            id="app.type"
+            defaultMessage="Type"
           />
            </span>
         ),
-        dataIndex: "yearOfPassing",
-        render: (text) => (
-          <span className="font-poppins">{text}</span>
-        ),
+        dataIndex: "type",
+     
       },
-      {
-        //title: "University/Institute Name",
-        title:(
-          <span className="font-poppins">
-         <FormattedMessage id="app.college" defaultMessage="College" />
-         </span>),
-        dataIndex: "university",
-        render: (text) => (
-          <span className="font-poppins">{text}</span>
-        ),
+  
+   
+    {
+      //title: "Start Date",
+      title: <FormattedMessage
+        id="app.startDate"
+        defaultMessage="Start Date"
+      />,
+      dataIndex: "startDate",
+      render: (name, item, i) => {
+        return <span>{moment.utc(item.startDate).format("LL")}</span>;
       },
-      {
-        title: "Marks Secured",
-         dataIndex:"marksSecured",
-         render: (name, item, i) => {
-            return (
-                <span>
-                {item.marksSecured} {item.marksType}
-              </span>
-            );
-          },
-       
     },
-      {
-        title: "",
-        dataIndex: "documentId",
-        width: "2%",
-        render: (name, item, i) => {
-          return (
-            <>
-              {item.documentId ? (
-                <a
-                  href={`${base_url}/document/${item.documentId}`}
-                  target="_blank"
-                >
-                  <DownloadIcon
-                    type="download"
-                    // onClick={() => startDownload()}
-                    style={{ cursor: "pointer" }}
-                  />
-                </a>
-              ) : null}
-            </>
-          );
-        },
+    {
+      //title: "End Date",
+      title: <FormattedMessage
+        id="app.endDate"
+        defaultMessage="End Date"
+      />,
+      dataIndex: "endDate",
+      render: (name, item, i) => {
+        return <span>{moment(item.endDate).format("LL")}</span>;
       },
-
+    },
       {
         title: "",
         dataIndex: "documentId",
@@ -132,8 +101,8 @@ class VisaTable extends Component {
             <BorderColorIcon
               style={{ cursor: "pointer", fontSize: "0.8rem" }}
               onClick={() => {
-                setEditEducation(item);
-                handleUpdateEducationModal(true);
+                setEditVisa(item);
+                handleUpdateVisaModal(true);
               }}
             />
           );
@@ -147,7 +116,7 @@ class VisaTable extends Component {
           return (
             <StyledPopconfirm
               title="Do you want to delete?"
-              onConfirm={() => deleteEducationTable(item.id)}
+              onConfirm={() => deleteVisa(item.visaId)}
             >
               <DeleteIcon
                 type="delete"
@@ -170,8 +139,8 @@ class VisaTable extends Component {
         <StyledTable
           // rowKey="opportunityId"
           columns={columns}
-          dataSource={eduDetails}
-          Loading={fetchingEducationDetails || fetchingEducationDetailsError}
+          dataSource={visaDetails}
+          loading={fetchingVisaDetails || fetchingVisaDetailsError}
           onChange={console.log("task onChangeHere...")}
           scroll={{ y: tableHeight }}
           pagination={false}
@@ -184,21 +153,31 @@ class VisaTable extends Component {
             );
           }}
         />
-
+ <UpdateVisaModal
+          updateVisaModal={updateVisaModal}
+          handleUpdateVisaModal={handleUpdateVisaModal}
+        />
      
       </>
     );
   }
 }
 
-const mapStateToProps = ({ profile, employee }) => ({
- 
+const mapStateToProps = ({ profile,auth, employee }) => ({
+  visaDetails:profile.visaDetails,
+  userId:auth.userDetails.userId,
+  updateVisaModal:profile.updateVisaModal,
+  fetchingVisaDetails:profile.fetchingVisaDetails,
+  fetchingVisaDetailsError:profile.fetchingVisaDetailsError,
 });
 
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
-    
+      getVisaDetails,
+      deleteVisa,
+      handleUpdateVisaModal,
+      setEditVisa
     },
     dispatch
   );

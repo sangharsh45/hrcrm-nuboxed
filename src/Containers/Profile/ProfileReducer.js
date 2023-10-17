@@ -41,6 +41,10 @@ const initialState = {
   updatePersonalDetailsModal: false,
   updateSalaryModal: false,
 
+  fetchingVisaDetails: false,
+   fetchingVisaDetailsError: false,
+   visaDetails:[],
+
   updatingBankDetails: false,
   updatingTrainingDetails: false,
   updatingPersonalDetails: false,
@@ -63,6 +67,8 @@ const initialState = {
   fetchingBankDetails: false,
   fetchingBankDetailsError: false,
   bankDetails: [],
+
+  updateVisaModal:false,
 
   fetchingPersonalDetails: false,
   fetchingPersonalDetailsError: false,
@@ -88,6 +94,10 @@ const initialState = {
   updatingEmployeeSalaryDetails: false,
   updatingEmployeeSalaryDetailsError: false,
 
+
+  deleteVisa: false, 
+  deleteVisaError: false ,
+
   setCurrentPersonalData: {},
 
   documentUploadModal: false,
@@ -110,6 +120,8 @@ const initialState = {
   fetchingLinkedUsersDocument: false,
    fetchingLinkedUsersDocumentError: false,
    linkedUserDocument:[],
+
+   setEditingVisa:{},
 
   updatingEmploymentDetails: false,
   updatingEmploymentDetailsError: false,
@@ -879,7 +891,83 @@ export const profileReducer = (state = initialState, action) => {
           return { ...state, fetchingLinkedUsersDocument: false, linkedUserDocument: action.payload };
         case types.GET_LINKED_USERS_DOCUMENT_FAILURE:
           return { ...state, fetchingLinkedUsersDocument: false, fetchingLinkedUsersDocumentError: true };
-  
+
+
+          case types.ADD_VISA_DETAILS_REQUEST:
+            return { ...state, addingVisaDetails: true };
+          case types.ADD_VISA_DETAILS_SUCCESS:
+            return {
+              ...state,
+              addingVisaDetails: false,
+              addVisaModal: false,
+            };
+          case types.ADD_VISA_DETAILS_FAILURE:
+            return {
+              ...state,
+              addingVisaDetails: false,
+              addingVisaDetailsError: true,
+            };
+
+
+            case types.GET_VISA_DETAILS_REQUEST:
+              return { ...state, fetchingVisaDetails: true };
+            case types.GET_VISA_DETAILS_SUCCESS:
+              return {
+                ...state,
+                fetchingVisaDetails: false,
+                visaDetails: action.payload,
+              };
+            case types.GET_VISA_DETAILS_FAILURE:
+              return {
+                ...state,
+                fetchingVisaDetails: false,
+                fetchingVisaDetailsError: true,
+              };
+
+              case types.DELETE_VISA_REQUEST:
+                return { ...state, deleteVisa: true };
+              case types.DELETE_VISA_SUCCESS:
+                return {
+                  ...state,
+                  deleteVisa: false,
+                  // addCallModal: false,
+                  visaDetails: state.visaDetails.filter(
+                    (item) => item.visaId !== action.payload
+                ), 
+                };
+          
+              case types.DELETE_VISA_FAILURE:
+                return { ...state, deleteVisa: false, deleteVisaError: true };
+          
+                case types.HANDLE_UPDATE_VISA_MODAL:
+                  return { ...state, updateVisaModal: action.payload };
+            
+                  case types.SET_VISA_EDIT:
+                    return { ...state, setEditingVisa: action.payload };
+
+                        //UPDATE EDUCATION
+    case types.UPDATE_VISA_DETAILS_REQUEST:
+      return { ...state, updatingVisaDetails: true };
+    case types.UPDATE_VISA_DETAILS_SUCCESS:
+      return {
+        ...state,
+        updatingVisaDetails: false,
+        updateVisaModal: false,
+        visaDetails: state.visaDetails.map((visa, i) => {
+          if (visa.visaId === action.payload.visaId) {
+            return action.payload;
+          } else {
+            return education;
+          }
+        }),
+      };
+    case types.UPDATE_VISA_DETAILS_FAILURE:
+      return {
+        ...state,
+        updatingVisaDetails: false,
+        updatingVisaDetailsError: true,
+      };
+
     default:
       return state;
   }

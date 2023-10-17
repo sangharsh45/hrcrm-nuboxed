@@ -17,7 +17,7 @@ import DragableUpload from "../../../../../../../Components/Forms/Formik/Dragabl
 import { SelectComponent } from "../../../../../../../Components/Forms/Formik/SelectComponent";
 import { DatePicker } from "../../../../../../../Components/Forms/Formik/DatePicker";
 import SearchSelect from "../../../../../../../Components/Forms/Formik/SearchSelect";
-import { addVisaDetails,getLinkedUsersDocument } from "../../../../../../Profile/ProfileAction";
+import { updateVisaDetails ,getLinkedUsersDocument} from "../../../../../../Profile/ProfileAction";
 import dayjs from "dayjs";
 import { getEducations } from "../../../../../../Settings/Educations/EducationAction";
 function onChange(date) {}
@@ -25,7 +25,7 @@ function onChange(date) {}
 const documentSchema = Yup.object().shape({
   documentId: Yup.string().required("Input needed !"),
 });
-class UserVisaForm extends Component {
+class UpdateVisaForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -46,13 +46,14 @@ class UserVisaForm extends Component {
 
   componentDidMount() {
     const { getCountries ,} = this.props;
-    this.props.getLinkedUsersDocument(this.props.orgId);
+   
     getCountries(getCountries);
+     this.props.getLinkedUsersDocument(this.props.orgId);
    
 }
 
   render() {
-    const { addingVisaDetails,startDate,endDate ,userId} = this.props;
+    const { updatingVisaDetails,startDate,endDate ,userId} = this.props;
     const countryNameOption = this.props.countries.map((item) => {
         return {
             label: `${item.country_name|| ""}`,
@@ -60,11 +61,11 @@ class UserVisaForm extends Component {
         };
     });
     const documentNameOption = this.props.linkedUserDocument.map((item) => {
-      return {
-          label: `${item.documentTypeName|| ""}`,
-          value: item.documentTypeId,
-      };
-  });
+        return {
+            label: `${item.documentTypeName|| ""}`,
+            value: item.documentTypeId,
+        }
+    });
     return (
       <>
         <Formik
@@ -72,21 +73,20 @@ class UserVisaForm extends Component {
           initialValues={{
             userId: this.props.userId,
             multipleEntryInd: this.state.entry ? "Yes" : "No",
-            documentTypeId: this.props.documentTypeId,
-            type: "",
-            country: "",
-            startDate: startDate || dayjs(),
-            endDate: endDate || null,
-            endDate: dayjs(),
+            documentTypeId: this.props.setEditingVisa.documentTypeId,
+             type: this.props.setEditingVisa.type || "",
+            country: this.props.setEditingVisa.country || "",
+            startDate: dayjs(this.props.setEditingVisa.startDate) || "",
+            endDate: dayjs(this.props.setEditingVisa.startDate) || "",
             documentId: "",
           }}
           onSubmit={(values, { resetForm }) => {
-            this.props.addVisaDetails(
+            this.props.updateVisaDetails(
               {
                 ...values,
                 multipleEntryInd: this.state.entry ? "Yes" : "No",
               },
-              this.props.userId,
+              this.props.setEditingVisa.visaId,
               values.documentId,
               resetForm()
             );
@@ -115,7 +115,7 @@ class UserVisaForm extends Component {
                     width: "45%",
                     }}
                 >
-                  <div> <FastField
+                      <div> <FastField
                     name="documentTypeId"
                     type="text"
                     //label="Type"
@@ -133,8 +133,8 @@ class UserVisaForm extends Component {
                     className="field"
                     isColumn
                      />
-                  </div>
-                  <Spacer />
+               </div>
+               <Spacer />
                 <Field
                         name="country"
                         isColumnWithoutNoCreate
@@ -241,7 +241,7 @@ class UserVisaForm extends Component {
                
                 </div>
 
-                <div
+                {/* <div
                   style={{
                     width: "45%",
                     }}
@@ -259,16 +259,16 @@ class UserVisaForm extends Component {
                   />
                
                   <Spacer style={{ marginBottom: "0.9375em" }} />
-                </div>
+                </div> */}
               </div>
               <Spacer />
               <FlexContainer justifyContent="flex-end">
                 <Button
                   htmlType="submit"
                   type="primary"
-                  loading={addingVisaDetails}
+                  loading={updatingVisaDetails}
                 >
-                  <FormattedMessage id="app.submit" defaultMessage="Submit" />
+                  <FormattedMessage id="app.update" defaultMessage="Update" />
                 </Button>
               </FlexContainer>
             </Form>
@@ -288,21 +288,22 @@ const mapStateToProps = ({ employee,auth, profile,education }) => ({
   educations: education.educations,
   countries: auth.countries,
   userId:auth.userDetails.userId,
-  addingVisaDetails: profile.addingVisaDetails,
+  setEditingVisa:profile.setEditingVisa,
   linkedUserDocument:profile.linkedUserDocument,
   orgId: auth.userDetails.organizationId,
+  updatingVisaDetails: profile.updatingVisaDetails,
 });
 
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators({ 
-    addVisaDetails,
-    getLinkedUsersDocument,
+     updateVisaDetails,
+     getLinkedUsersDocument,
     getCountries
 }, dispatch);
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(UserVisaForm);
+)(UpdateVisaForm);
 
 function StatusIcon({ type, iconType, tooltip, status, size, onClick, role }) {
   const start = type;

@@ -37,19 +37,17 @@ class EducationDocumentForm extends Component {
     this.setState({ active: type });
     // alert(this.state.active)
   };
-  componentDidMount() {
-    const { getLinkedUsersDocument ,} = this.props;
-   
-    getLinkedUsersDocument(getLinkedUsersDocument);
-   
+componentDidMount() {
+  this.props.getLinkedUsersDocument(this.props.orgId);
+ 
 }
-
   render() {
     const { addingEducationDetails } = this.props;
     const documentNameOption = this.props.linkedUserDocument.map((item) => {
+      console.log(item.documentTypeName)
       return {
-          label: `${item.country_name|| ""}`,
-          value: item.country_name,
+          label: `${item.documentTypeName|| ""}`,
+          value: item.documentTypeId,
       };
   });
     return (
@@ -58,7 +56,7 @@ class EducationDocumentForm extends Component {
           // enableReinitialize
           initialValues={{
             employeeId: this.props.employeeId,
-
+            documentTypeId: this.props.documentTypeId,
             // educationType: "",
             educationTypeId: this.props.educationTypeId,
             courseType: this.state.active,
@@ -106,7 +104,7 @@ class EducationDocumentForm extends Component {
                     width: "45%",
                     }}
                 >
-                    <FastField
+                  <FastField
                     name="documentTypeId"
                     type="text"
                     //label="Type"
@@ -380,9 +378,10 @@ class EducationDocumentForm extends Component {
 
 // }
 
-const mapStateToProps = ({ employee, profile,education }) => ({
+const mapStateToProps = ({ employee,auth, profile,education }) => ({
   employeeId: employee.singleEmployee.employeeId,
   educations: education.educations,
+  orgId: auth.userDetails.organizationId,
   linkedUserDocument:profile.linkedUserDocument,
   addingEducationDetails: profile.addingEducationDetails,
 });
@@ -390,7 +389,7 @@ const mapStateToProps = ({ employee, profile,education }) => ({
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators({ 
     addEducationDetails,
-    getEducations,  
+    getEducations, 
    getLinkedUsersDocument}, dispatch);
 export default connect(
   mapStateToProps,
