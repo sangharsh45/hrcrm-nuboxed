@@ -92,6 +92,29 @@ class VisaTable extends Component {
         return <span>{moment(item.endDate).format("LL")}</span>;
       },
     },
+    {
+      title: "",
+      dataIndex: "documentId",
+      width: "2%",
+      render: (name, item, i) => {
+        return (
+          <>
+            {item.documentId ? (
+              <a
+                href={`${base_url}/document/${item.documentId}`}
+                target="_blank"
+              >
+                <DownloadIcon
+                  type="download"
+                  // onClick={() => startDownload()}
+                  style={{ cursor: "pointer",fontSize: "0.8rem" }}
+                />
+              </a>
+            ) : null}
+          </>
+        );
+      },
+    },
       {
         title: "",
         dataIndex: "documentId",
