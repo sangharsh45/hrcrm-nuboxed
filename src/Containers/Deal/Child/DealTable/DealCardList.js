@@ -42,7 +42,7 @@ import {
 } from "../../../Opportunity/OpportunityAction";
 // import AddOpportunityDrawerModal from "../../..//OpportunityTable/AddOpportunityDrawerModal"
 import UpdateDealModal from "../UpdateDeal/UpdateDealModal";
-import {getDealListbyUserId,handleUpdateDealModal} from "../../DealAction";
+import {getDealListbyUserId,handleUpdateDealModal,emptyDeals} from "../../DealAction";
 
 const Option =Select;
 
@@ -59,32 +59,30 @@ function DealCardList(props) {
     props.getAllSalesList();  
   }, []);
 
-  const handleLoadMore = () => {
-    setTimeout(() => {
+  // const handleLoadMore = () => {
+  //   setTimeout(() => {
      
-        if(props.role==="USER"&&user.department==="Recruiter"){
-          props.getRecruiterList(props.recruiterId);     
-        }else{
-          props.getDealListbyUserId(props.userId,page);
-          setPage(page + 1);
-        } 
-        props.getAllSalesList();  
-    }, 100);
+  //       if(props.role==="USER"&&user.department==="Recruiter"){
+  //         props.getRecruiterList(props.recruiterId);     
+  //       }else{
+  //         props.getDealListbyUserId(props.userId,page);
+  //         setPage(page + 1);
+  //       } 
+  //       props.getAllSalesList();  
+  //   }, 100);
   
-  };
+  // };
 
-
+  useEffect(() => {
+    return () => props.emptyDeals();
+  }, []);
+  
   const [currentItem, setCurrentItem] = useState("");
 
   function handleSetCurrentItem(item) {
     setCurrentItem(item);
   }
 
- 
-
-
-
-  
 
   const {
     user,
@@ -105,7 +103,7 @@ function DealCardList(props) {
 
 <InfiniteScroll
                 dataLength={dealsByuserId.length}
-                next={handleLoadMore}
+                // next={handleLoadMore}
                 hasMore={true}
                 // loader={<h4 style={{ textAlign: 'center' }}>Loading...</h4>}
                 endMessage={
@@ -476,6 +474,7 @@ const mapDispatchToProps = (dispatch) =>
          StatusRecruit,
          lostStatusRecruit,
          LinkStageOpportunity,
+         emptyDeals,
     },
     dispatch
   );

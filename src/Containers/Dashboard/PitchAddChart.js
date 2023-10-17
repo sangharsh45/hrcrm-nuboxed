@@ -4,7 +4,7 @@ import { bindActionCreators } from "redux";
 import { FlexContainer } from "../../Components/UI/Layout";
 import TimeInterval from "../../Utils/TimeInterval";
 import {setSelectedClosureTimeIntervalReport} from "../Opportunity/OpportunityAction";
-import {getDashCustomerAddedLeads} from "../Dashboard/DashboardAction";
+import {getDashInvestorAddedPitch} from "../Dashboard/DashboardAction";
 import {
   BarChart,
   Bar,
@@ -32,17 +32,17 @@ import { MainWrapper } from "../../Components/UI/Elements";
     date: date,
   };
   }
-//   componentDidMount() {
-//     const { getDashCustomerAddedLeads, userId, startDate, endDate } = this.props;
-//     getDashCustomerAddedLeads(userId,  startDate, endDate);
-//   }
+  componentDidMount() {
+    const { getDashInvestorAddedPitch, userId, startDate, endDate } = this.props;
+    getDashInvestorAddedPitch(userId,  startDate, endDate);
+  }
   componentWillReceiveProps(nextProps) {
     if (
       this.props.startDate !== nextProps.startDate ||
       this.props.endDate !== nextProps.endDate
     ) {
-      const { getDashCustomerAddedLeads, userId, startDate, endDate } = nextProps;
-      getDashCustomerAddedLeads(userId, startDate, endDate);
+      const { getDashInvestorAddedPitch, userId, startDate, endDate } = nextProps;
+      getDashInvestorAddedPitch(userId, startDate, endDate);
     }
   }
 
@@ -53,7 +53,7 @@ import { MainWrapper } from "../../Components/UI/Elements";
     
   // }, []);
   render() {
-    // const data=this.props.dashCustoLeadsAdded
+    const data=this.props.dashInvstPitchAdded
   return (
     <>
     <MainWrapper
@@ -73,7 +73,7 @@ import { MainWrapper } from "../../Components/UI/Elements";
     <BarChart
       width={350}
       height={200}
-    //   data={data}
+      data={data}
       margin={{
         top: 10,
         right: 20,
@@ -82,11 +82,11 @@ import { MainWrapper } from "../../Components/UI/Elements";
       }}
     >
       <CartesianGrid strokeDasharray="3 3" />
-      <XAxis dataKey="number" />
+      <XAxis dataKey="Number" />
       <YAxis />
       <Tooltip />
       <Legend className="recharts-default-legend"/>
-      <Bar dataKey="number" stackId="a" fill="rgb(0, 192, 239, 0.4)" />
+      <Bar dataKey="Number" stackId="a" fill="rgb(0, 192, 239, 0.4)" />
       {/* <Bar dataKey="Selected" stackId="a" fill="#ff715885" />
       <Bar dataKey="Onboarded" stackId="a" fill="orange" />  */}
     </BarChart>
@@ -96,7 +96,7 @@ import { MainWrapper } from "../../Components/UI/Elements";
 }
  }
 const mapStateToProps = ({ dashboard,auth,opportunity }) => ({
-  dashCustoLeadsAdded:dashboard.dashCustoLeadsAdded,
+  dashInvstPitchAdded:dashboard.dashInvstPitchAdded,
   userId: auth.userDetails.userId,
   endDate: opportunity.endDate,
   startDate: opportunity.startDate,
@@ -108,7 +108,7 @@ const mapStateToProps = ({ dashboard,auth,opportunity }) => ({
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
-    //   getDashCustomerAddedLeads,
+      getDashInvestorAddedPitch,
         setSelectedClosureTimeIntervalReport
       
 

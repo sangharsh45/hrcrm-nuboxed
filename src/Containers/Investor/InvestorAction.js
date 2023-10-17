@@ -293,3 +293,63 @@ export const getInvestorDetailsById = (investorId) => (dispatch) => {
         });
       });
   };
+  
+  export const handleInvestorDocumentUploadModal =(modalProps)=> (dispatch) => {
+    dispatch({
+      type: types.HANDLE_INVESTOR_DOCUMENT_UPLOAD_MODAL,
+      payload: modalProps,
+    });
+  };
+  export const createInvestorDocument = (data, cb) => (dispatch) => {
+    dispatch({ type: types.CREATE_INVESTOR_DOCUMENT_REQUEST });
+    axios
+      .post(`${base_url}/investor/document`, data, {
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+        },
+      })
+      .then((res) => {
+        console.log(res);
+        dispatch({
+          type: types.CREATE_INVESTOR_DOCUMENT_SUCCESS,
+          payload: res.data,
+        });
+        cb();
+      })
+      .catch((err) => {
+        console.log(err);
+        dispatch({
+          type: types.CREATE_INVESTOR_DOCUMENT_FAILURE,
+          payload: err,
+        });
+      });
+  };
+    export const handleUpdateInvestorContactModal =(modalProps)=> (dispatch) => {
+    dispatch({
+      type: types.HANDLE_UPDATE_INVESTOR_CONTACT_MODAL,
+      payload: modalProps,
+    });
+  };
+  export const updateInvestorContact = (data, contactId) => (dispatch) => {
+    dispatch({ type: types.UPDATE_INVESTOR_CONTACT_BY_ID_REQUEST });
+    axios
+      .put(`${base_url}/contact/${contactId}`, data, {
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+        },
+      })
+      .then((res) => {
+        console.log(res);
+        dispatch({
+          type: types.UPDATE_INVESTOR_CONTACT_BY_ID_SUCCESS,
+          payload: res.data,
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+        dispatch({
+          type: types.UPDATE_INVESTOR_CONTACT_BY_ID_FAILURE,
+          payload: err,
+        });
+      });
+  };

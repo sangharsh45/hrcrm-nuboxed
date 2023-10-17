@@ -32,9 +32,7 @@ function ContactInvest (props) {
 const handleRoleChange = (event) => {
   const role = event.target.value;
   setSelectedRole(role);
-
   const filteredJobs = props.contactiNVESTbyId.filter((job) => {
-    // console.log(job.address.length && job.address[0].country);
     const roleMatch = role === '' || job.designation === role;
     return roleMatch;
   });
