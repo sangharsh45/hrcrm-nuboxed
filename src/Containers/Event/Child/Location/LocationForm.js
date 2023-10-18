@@ -363,7 +363,7 @@ class LocationForm extends Component {
                   />
                 </div>
               </div>
-              <FlexContainer justifyContent="flex-end">
+              <div class="flex justify-end w-wk bottom-2 mr-2 absolute ">
                 <Button
                   type="primary"
                   htmlType="submit"
@@ -371,7 +371,7 @@ class LocationForm extends Component {
                 >
                   Create
                 </Button>
-              </FlexContainer>
+              </div>
             </Form>
             </div>
           )}
