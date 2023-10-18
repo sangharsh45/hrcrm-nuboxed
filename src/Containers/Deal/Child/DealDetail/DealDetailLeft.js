@@ -6,6 +6,7 @@ import { base_url } from "../../../../Config/Auth";
 import { FlexContainer } from "../../../../Components/UI/Layout";
 
 const DealDetailTab = lazy(() => import("./DealTabs/DealDetailTab"));
+const DealCards=lazy(()=>import("./Dealcards/DealCards"));
 
 class DealDetailLeft extends Component {
   constructor(props) {
@@ -26,18 +27,18 @@ class DealDetailLeft extends Component {
       dealDetailsbyID,
     } = this.props;
     const { account } = this.state;
-    console.log(dealDetailsbyID);
+
     return (
       <FlexContainer flexDirection="" style={{ display: "block" }}>
         <div>
-        {/* <DealCards
+        <DealCards
           dealDetailsbyID={dealDetailsbyID}
           account={account}
           updateAccount={this.updateAccount}
           setAccount={this.setAccount}
           department={this.props.department}
           partnerLogin={this.props.partnerLogin}
-        /> */}
+        />
         </div>
         
         

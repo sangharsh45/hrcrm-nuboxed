@@ -16,7 +16,8 @@ const initialState = {
     fetchingContactInvestByContactId: false,
    fetchingContactInvestByContactIdError: false,
    contactInVestDetail:{},
-};
+
+  };
 
 export const contactInvestReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -92,8 +93,7 @@ export const contactInvestReducer = (state = initialState, action) => {
           fetchingContactInvestByContactIdError: true,
         }; 
   
-  
-  
+   
       default:
       return state;
   }

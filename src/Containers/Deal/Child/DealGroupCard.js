@@ -12,28 +12,6 @@ import {
 import { ActionIcon } from "../../../Components/Utils";
 import { CurrencySymbol } from "../../../Components/Common";
 
-// const menu = (
-//   <Menu>
-//     <Menu.Item>
-//       <a target="_blank" rel="noopener noreferrer" href="#">
-//         {/* Call */}
-//         <FormattedMessage
-//           id="app.calls"
-//           defaultMessage="Call"
-//         />,
-//       </a>
-//     </Menu.Item>
-//     <Menu.Item>
-//       <a target="_blank" rel="noopener noreferrer" href="#">
-//         {/* Email */}
-//         <FormattedMessage
-//           id="app.email"
-//           defaultMessage="Email"
-//         />,
-//       </a>
-//     </Menu.Item>
-//   </Menu>
-// );
 
 const DealGroupCard = (props) => {
   const {

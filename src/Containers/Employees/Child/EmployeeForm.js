@@ -12,7 +12,7 @@ import { SelectComponent } from "../../../Components/Forms/Formik/SelectComponen
 import SearchSelect from "../../../Components/Forms/Formik/SearchSelect";
 import Upload from "../../../Components/Forms/Formik/Upload";
 import { Radio } from "antd";
-import { addEmployee } from "../EmployeeAction";
+import { addEmployee,getEmployeelist } from "../EmployeeAction";
 import * as Yup from "yup";
 import { DatePicker } from "../../../Components/Forms/Formik/DatePicker";
 import dayjs from "dayjs";
@@ -102,11 +102,44 @@ class EmployeeForm extends Component {
   
 
   componentDidMount() {
-    const { getCountries ,getRoles,getlocation} = this.props;
+    const { getCountries ,getRoles,getlocation,getEmployeelist} = this.props;
     console.log();
     getRoles(this.props.organizationId);
     getCountries(getCountries);
     getlocation(this.props.orgId);
+    getEmployeelist();
+}
+
+getEmployeesbyDepartment (filterOptionKey, filterOptionValue) {
+  const StagesOptions =
+    this.props.employees.length &&
+    this.props.employees
+      .filter((option) => {
+        if (
+          option.departmentId === filterOptionValue &&
+          option.probability !==0
+        ) {
+          return option;
+        }
+      })
+      .sort((a, b) => {
+        const stageDealA = a.name && a.name.toLowerCase();
+        const stageDealB = b.name && b.name.toLowerCase();
+        if (stageDealA < stageDealB) {
+          return -1;
+        }
+        if (stageDealA > stageDealB) {
+          return 1;
+        }
+        return 0;
+      })
+
+      .map((option) => ({
+        label: option.fullName || "",
+        value: option.employeeId,
+      }));
+
+  return StagesOptions;
 }
   render() {
     console.log(this.state.selectedLocation);
@@ -116,13 +149,15 @@ class EmployeeForm extends Component {
           value: item.country_name,
       };
   });
-//   const locationNameOption = this.props.showLocation.map((item) => {
-//     return {
-//         label: `${item.locationName || ""}`,
-//         value: item.locationDetailsId,
-//     };
-// });
   
+   
+  
+  const WorkflowOptions = this.props.departments.map((item) => {
+    return {
+      label: `${item.departmentName || ""}`,
+      value: item.departmentId,
+    };
+  });
 
   const dialCodeNameOption = this.props.countries.map((item) => {
     return {
@@ -288,8 +323,7 @@ class EmployeeForm extends Component {
                       width={"100%"}
                       label={<FormattedMessage
                         id="app.emailId"
-                        defaultMessage="Email"
-                      />}
+                        defaultMessage="Email"/>}
                       component={InputComponent}
                       inlineLabel
                       />
@@ -301,12 +335,10 @@ class EmployeeForm extends Component {
                         name="currency"
                         isColumnWithoutNoCreate
                         placeholder="Currency"
-                       
                         label={<FormattedMessage
                           id="app.currency"
                           defaultMessage="Currency"
                         />}
-                  
                         isColumn
                         selectType="currencyName"
                         isRequired
@@ -635,31 +667,45 @@ class EmployeeForm extends Component {
                   </div>
 
 
-
-                  {/* <Field
-                    name="designationTypeId"
+                  <div class=" flex justify-between max-sm:flex-col" >
+                      <div class=" w-w48 max-sm:w-wk">
+                  <Field
+                    name="departmentId"
                     label={<FormattedMessage
-                      id="app.designation"
-                      defaultMessage="Designation"
+                      id="app.department"
+                      defaultMessage="Department"
                     />}
                     isColumnWithoutNoCreate
-                    component={SearchSelect}
-                    value={values.designationTypeId}
+                    component={SelectComponent}
+                    // value={values.departmentId}
                     width={"100%"}
+                    options={
+                      Array.isArray(WorkflowOptions) ? WorkflowOptions : []
+                    }
                     isColumn
-                    selectType="designationType"
-                     /> */}
+                    inlineLabel
+                     />
+                     </div>
                      <Spacer/>
-                
+                     <div class="w-w47.5 max-sm:w-wk">
                      <Field
                     name="reportingManager"
                     isColumnWithoutNoCreate
-                    selectType="user"
                     label={<FormattedMessage
                       id="app.reportingManager"
                       defaultMessage="Reporting Manager"
                     />}
-                    component={SearchSelect}
+                    component={SelectComponent}
+                    options={
+                      Array.isArray(
+                        this.getEmployeesbyDepartment("departmentId", values.departmentId)
+                      )
+                        ? this.getEmployeesbyDepartment(
+                            "departmentId",
+                            values.departmentId
+                          )
+                        : []
+                    }
                     isColumn
                     value={values.reportingManager}
                     filterOption={{
@@ -669,7 +715,8 @@ class EmployeeForm extends Component {
                     disabled={!values.departmentId}
                     inlineLabel
                    />
-              
+              </div>
+              </div>
                   {/* <Field
                     name="workplace"
                     label={<FormattedMessage
@@ -785,7 +832,7 @@ class EmployeeForm extends Component {
     );
   }
 }
-const mapStateToProps = ({ auth,role,countrys,location, employee,designations,departments }) => ({
+const mapStateToProps = ({ auth,role,location, employee,designations,departments }) => ({
   userDetails: auth.userDetails,
   roles: role.roles,
   organizationId: auth.userDetails.organizationId,
@@ -795,6 +842,8 @@ const mapStateToProps = ({ auth,role,countrys,location, employee,designations,de
   addingEmployee: employee.addingEmployee,
   departmentId:departments.departmentId,
   designationTypeId:designations.designationTypeId,
+  employees:employee.employees,
+  departments: departments.departments,
 });
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators({
@@ -804,6 +853,7 @@ const mapDispatchToProps = (dispatch) =>
       getDepartments,
       getRoles,
       getlocation,
+      getEmployeelist,
   }, dispatch);
 export default connect(mapStateToProps, mapDispatchToProps)(EmployeeForm);
 function StatusIcon({ type, iconType, tooltip, status, size, onClick, role }) {

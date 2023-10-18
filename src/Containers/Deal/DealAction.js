@@ -195,3 +195,66 @@ export const setDealViewType = (viewType) => (dispatch) => {
         });
       });
   };
+  export const handleDealContactModal = (modalProps) => (dispatch) => {
+    dispatch({
+      type: types.HANDLE_DEAL_CONTACT_MODAL,
+      payload: modalProps,
+});};
+
+export const getDealContactList = (invOpportunityId) => (dispatch) => {
+  dispatch({
+    type: types.GET_DEALS_CONTACT_LIST_REQUEST,
+  });
+  axios
+    .get(`${base_url}/investorOpportunity/contact/details/${invOpportunityId}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.GET_DEALS_CONTACT_LIST_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.GET_DEALS_CONTACT_LIST_FAILURE,
+        payload: err,
+      });
+    });
+};
+
+export const addDealContact = (contact) => (dispatch, getState) => {
+  dispatch({
+    type: types.ADD_DEAL_CONTACT_REQUEST,
+  });
+  axios
+    .post(`${base_url}/investorOpportunity/contact`, contact, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      const startDate = dayjs()
+        .startOf("month")
+        .toISOString();
+      const endDate = dayjs()
+        .endOf("month")
+        .toISOString();
+      dispatch({
+        type: types.ADD_DEAL_CONTACT_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.ADD_DEAL_CONTACT_FAILURE,
+        payload: err,
+      });
+    });
+};

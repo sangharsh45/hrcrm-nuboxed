@@ -258,7 +258,7 @@ function DealForm(props) {
           contactId: undefined,
           oppInnitiative: "",
           oppStage: "",
-          sourceId:"",
+          source:"",
           salesUserIds: selectedOption ? selectedOption.employeeId:props.userId,
         }}
         validationSchema={OpportunitySchema}
@@ -612,7 +612,7 @@ function DealForm(props) {
             </div>
                 <div class=" w-2/5 max-sm:w-wk">
                 <FastField
-                            name="sourceId"
+                            name="source"
                              label={
                               <FormattedMessage
                                 id="app.source"
@@ -622,7 +622,7 @@ function DealForm(props) {
                             isColumnWithoutNoCreate
                             selectType="sourceName"
                             component={SearchSelect}
-                            // value={values.sourceId}
+                            value={values.source}
                             isColumn
                           />
                         </div>
@@ -736,8 +736,7 @@ function DealForm(props) {
                                 "oppWorkflow",
                                 values.oppWorkflow
                               )
-                            : []
-                        }
+                            : []}  
                         value={values.oppStage}
                         filterOption={{
                           filterType: "oppWorkflow",

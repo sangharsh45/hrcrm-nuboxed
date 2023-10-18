@@ -16,28 +16,11 @@ const Stage = styled.h3`
 `;
 class DealStageColumn extends Component {
   render() {
-    const { opportunity, index, history } = this.props;
-    console.log(opportunity);
-    // let opportunityValue;
-    // if (tradeCurrency) {
-    //     if (tradeCurrency === 'USD') {
-    //         opportunityValue = USD
-    //     }
-    //     else if (tradeCurrency === 'INR') {
-    //         opportunityValue = INR
-    //     }
-    //     else if (tradeCurrency === 'GBP') {
-    //         opportunityValue = GBP
-    //     }
-    //     else {
-    //         opportunityValue = EUR
-    //     }
-    // } else {
-    //     opportunityValue = EUR
-    // }
+    const { dealDetailsbyID, index, history } = this.props;
+  
     return (
       <Draggable
-      draggableId={opportunity.opportunityId}
+      draggableId={dealDetailsbyID.invOpportunityId}
       index={index}
       type="stage"
     >
@@ -60,16 +43,16 @@ class DealStageColumn extends Component {
               //   opportunity.metaData.account &&
               //   opportunity.metaData.account.imageId
               // }
-              primaryTitle={`${opportunity.opportunityName || ""}`}
-              secondaryTitle={`${opportunity.proposalAmount} `}
-              currencyType={opportunity.currency}
+              primaryTitle={`${dealDetailsbyID.opportunityName || ""}`}
+              secondaryTitle={`${dealDetailsbyID.proposalAmount} `}
+              currencyType={dealDetailsbyID.currency}
             //   subtitle1={opportunity.description || "-"}
             //   subtitle2={opportunity.phoneNo || "-"}
               // handlePreview={() => this.props.handleContactDrawer(opportunity, true)}
               handleClick={() =>
                 history.push({
-                  pathname: `opportunity/${opportunity.opportunityId}`,
-                  state: { opportunityDetail: opportunity },
+                  pathname: `dealDetails/${dealDetailsbyID.invOpportunityId}`,
+                  state: { dealDetail: dealDetailsbyID },
                 })
               }
             />

@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Button, Tooltip, Icon } from "antd";
 import { FormattedMessage } from "react-intl";
-import LinkTagCustomerModal from "./LinkTagCustomerModal"
+// import LinkTagCustomerModal from "./LinkTagCustomerModal"
 import { Formik, Form, Field } from "formik";
 import {
   StyledModal,
@@ -15,7 +15,7 @@ import {
   MultiAvatar,
 } from "../../../../../Components/UI/Elements";
 import BorderColorIcon from '@mui/icons-material/BorderColor';
-import {linktagCustomer} from "../../../OpportunityAction";
+import {linktagCustomer} from "../../../../Opportunity/OpportunityAction";
 import { FlexContainer } from "../../../../../Components/UI/Layout";
 import { ActionIcon } from "../../../../../Components/Utils";
 import { EditOutlined, LinkOutlined } from "@ant-design/icons";
@@ -50,18 +50,13 @@ class DealView extends Component {
 
     console.log(this.props.account);
     const {
-      opportunity: { opportunityName,opportunityId },
+      dealDetailsbyID: { opportunityName,invOpportunityId },
       account: { accountId, accountName, imageId, imageURL },
-      opportunity,
+      dealDetailsbyID,
       toggleViewType,
-      linkContactModal,
-      handleLinkContactModal,
-      linkAction,
-      linkType,
-      unlinkAccountFromOpportunity,
-      linkAccountToOpportunity,
+
     } = this.props;
-    console.log("function",opportunityId)
+ 
     return (
       <>
         <FlexContainer justifyContent="space-between">
@@ -72,7 +67,7 @@ class DealView extends Component {
           >
             <div style={{ width: "20%",marginTop:"4px"  }}>
               <MultiAvatar
-                primaryTitle={opportunity.opportunityName}
+                primaryTitle={dealDetailsbyID.opportunityName}
                 imageId={imageId}
                 imageURL={imageURL}
               />
@@ -148,11 +143,11 @@ class DealView extends Component {
           
         </FlexContainer>
         
-        <LinkTagCustomerModal
-        opportunityId={opportunityId}
+        {/* <LinkTagCustomerModal
+        invOpportunityId={invOpportunityId}
         linkContactModalVisible={this.state.linkContactModalVisible}
         handleLinkContactModalVisible={this.handleLinkContactModalVisible}
-        />
+        /> */}
       </>
     );
   }

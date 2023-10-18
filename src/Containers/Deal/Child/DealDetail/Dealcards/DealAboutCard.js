@@ -1,28 +1,26 @@
 import React, { Component } from "react";
 import { ViewEditCard } from "../../../../../Components/UI/Elements";
-import DealView from "./DealView";
-import DealEdit from "./DealEdit";
+import DealAboutView from "./DealAboutView";
+import DealAboutEdit from "./DealAboutEdit.js";
 
-class DealCards extends Component {
+class DealAboutCard extends Component {
   render() {
-    const { dealDetailsbyID, account, updateAccount, setAccount } = this.props;
+    const { dealDetailsbyID } = this.props;
     return (
       <div>
         <ViewEditCard>
           {({ viewType }, toggleViewType) =>
             viewType === "view" ? (
-              <DealView
+              <DealAboutView
                 dealDetailsbyID={dealDetailsbyID}
-                account={account}
                 toggleViewType={toggleViewType}
-                updateAccount={updateAccount}
-                setAccount={setAccount}
                 department={this.props.department}
                 partnerLogin={this.props.partnerLogin}
+                tradeCurrency={this.props.tradeCurrency}
               />
             ) : (
-              <DealEdit
-                dealDetailsbyID={dealDetailsbyID}
+              <DealAboutEdit
+              dealDetailsbyID={dealDetailsbyID}
                 toggleViewType={toggleViewType}
               />
             )
@@ -33,4 +31,4 @@ class DealCards extends Component {
   }
 }
 
-export default DealCards;
+export default DealAboutCard;
