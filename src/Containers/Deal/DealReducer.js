@@ -27,6 +27,14 @@ const initialState = {
   fetchingDealStages: false,
   fetchingStagesError:false,
   dealStages: [],
+
+  openDealContactModal:false,
+
+  fetchingDealContactList: false,
+  fetchingDealContactListError:false,
+  dealContactList:[],
+
+  addingDealContact: false, 
 };
 export const dealReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -137,7 +145,36 @@ export const dealReducer = (state = initialState, action) => {
                           ...state,
                           fetchingStages: false,
                           fetchingStagesError: true,
-                        };                 
+                        };        
+                        case types.HANDLE_DEAL_CONTACT_MODAL:
+                          return { ...state, openDealContactModal: action.payload };                      
+                        
+                          case types.GET_DEALS_CONTACT_LIST_REQUEST:
+                            return { ...state, fetchingDealContactList: true };
+                          case types.GET_DEALS_CONTACT_LIST_SUCCESS:
+                            return {
+                              ...state,
+                              fetchingDealContactList: false,
+                              dealContactList: action.payload,
+                            };
+                          case types.GET_DEALS_CONTACT_LIST_FAILURE:
+                            return {
+                              ...state,
+                              fetchingDealContactList: false,
+                              fetchingDealContactListError: true,
+                            };
+                    
+                            case types.ADD_DEAL_CONTACT_REQUEST:
+                              return { ...state, addingDealContact: true };
+                            case types.ADD_DEAL_CONTACT_SUCCESS:
+                              return { ...state, addingDealContact: false, 
+                                openDealContactModal: false,
+                                dealContactList:[action.payload,...state.dealContactList]
+                               };
+                            case types.ADD_DEAL_CONTACT_FAILURE:
+                              return { ...state, addingDealContact: false, openDealContactModal: false };
+                       
+                            
     default:
       return state;
   }

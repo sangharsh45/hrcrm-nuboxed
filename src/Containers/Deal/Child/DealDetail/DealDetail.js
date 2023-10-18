@@ -7,7 +7,7 @@ import { BundleLoader } from "../../../../Components/Placeholder";
 import { getDealDetailById } from "../../DealAction";
 
 const DealDetailLeft = lazy(() => import("./DealDetailLeft.js"));
-// const DealDetailRight = lazy(() => import("./DealDetailRight"));
+const DealDetailRight = lazy(() => import("./DealDetailRight"));
 
 class DealDetail extends Component {
   componentDidMount() {
@@ -15,7 +15,7 @@ class DealDetail extends Component {
   }
   render() {
     const { dealDetailsbyID, fetchDealdetails } = this.props;
-    // console.log(this.props.opportunity&&this.props.opportunity.recruiterDetails.length&&this.props.opportunity.recruiterDetails[0].fullName)
+
     return (
       <>
         <DealDetailHeader
@@ -34,9 +34,9 @@ class DealDetail extends Component {
                   <DealDetailLeft dealDetailsbyID={dealDetailsbyID} />
                 </div>
                 <div style={{ width: "80%" }}>
-                  {/* <DealDetailRight 
+                  <DealDetailRight 
                   dealDetailsbyID={dealDetailsbyID}
-                  /> */}
+                  />
                 </div>
               </FlexContainer>
             </Suspense>

@@ -18,13 +18,7 @@ class DealEdit extends Component {
       fields: {}
     };
   }
-  handleUpdate = () => {
-    // this.props.updateOpportunity(
-    //   this.props.opportunity.opportunityId,
-    //   this.state.fields,
-    //   this.callback
-    // );
-  };
+
   callback = () => {
     this.props.toggleViewType();
   };
@@ -39,7 +33,7 @@ class DealEdit extends Component {
     });
   };
   render() {
-    const { opportunity, toggleViewType, updateOpportunityById } = this.props;
+    const { dealDetailsbyID, toggleViewType, updateOpportunityById } = this.props;
     return (
       <>
         <FlexContainer
@@ -47,7 +41,7 @@ class DealEdit extends Component {
           style={{ padding: "0.625em 1.25em 0.625em 1.25em" }}
         >
           <EditableInput
-            defaultValue={opportunity.opportunityName}
+            defaultValue={dealDetailsbyID.opportunityName}
             handleChange={this.handleChange}
             name={"opportunityName"}
             value={this.state.fields.opportunityName}

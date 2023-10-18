@@ -18,7 +18,7 @@ import {
   DeleteOutlined,
   EyeInvisibleOutlined, LinkOutlined, PlusOutlined, 
 } from '@ant-design/icons';
-// import { handleContactModal,handleLinkContactModal } from "../../../../Contact/ContactAction";
+// import { handleDealContactModal,handleLinkContactModal } from "../../../../Contact/ContactAction";
 // import RecruitmentClosedTable from "../OpportunityTab/RecruitmentClosedTable"
 // import {handleReactSpeechModal} from "../../../OpportunityAction"
 // import {
@@ -35,6 +35,7 @@ import MicIcon from '@mui/icons-material/Mic';
 import LockIcon from '@mui/icons-material/Lock';
 import { BundleLoader } from "../../../../../Components/Placeholder";
 import NoteAltIcon from "@mui/icons-material/NoteAlt";
+import {handleDealContactModal} from "../../../DealAction";
 // import ReactSpeechModal from "./ReactSpeechModal";
 // const RecruitmentTable = lazy(() => import("./Recruitment/RecruitmentTable"));
 // const AddRecruitModal = lazy(() => import("./Recruitment/AddRecruitModal"));
@@ -43,10 +44,10 @@ import NoteAltIcon from "@mui/icons-material/NoteAlt";
 // const SummaryTable = lazy(() => import("./Recruitment/Child/SummaryTable"));
 // const LinkedNotes = lazy(() => import("./LinkedNotes"));
 // const AddDocumentModal = lazy(() => import("./Document/AddDocumentModal"));
-// const LinkedContact = lazy(() => import("./LinkedContact"));
-// const LinkedDocuments = lazy(() => import("./Document/LinkedDocuments"));
-// const AddContactModal = lazy(() => import("../../../../Contact/Child/AddContactModal"));
+const LinkedDealContact = lazy(() => import("./DealContact/LinkedDealContact"));
+const DealContactModal = lazy(() => import("./DealContact/DealContactModal"));
 // const LinkContactModal = lazy(() => import("../../../../Contact/Child/LinkContactModal"));
+// const LinkedDocuments = lazy(() => import("./Document/LinkedDocuments"));
 
 const TabPane = StyledTabs.TabPane;
 function handleRefreshPage() {
@@ -56,7 +57,7 @@ class DealDetailTab extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      activeKey: "1",
+      activeKey: "2",
       contactPopover: false,
       closedPopover:false,
       deletePopover:false,
@@ -124,30 +125,30 @@ class DealDetailTab extends Component {
       user: {
         metaData: {  },
       },
-      opportunity: { opportunityId, opportunityName, accountId },
+      dealDetailsbyID: { invOpportunityId, opportunityName, accountId },
       user,
-      fetchingOpportunityDetailsById,
-      addContactModal,
-      handleContactModal,
+      fetchDealdetails,
+      openDealContactModal,
+      handleDealContactModal,
       linkContactsCheckToOpportunity,
       getContactListByOpportunityId,
       handleLinkContactModal,
       linkContactsToOpportunity,
       handleDocumentUploadModal,
       handleReactSpeechModal,
-      opportunity,
+      dealDetailsbyID,
       addSpeechModal,
       documentUploadModal,
     } = this.props;
     const { deliveryInd, stageName } = this.props;
-    if(fetchingOpportunityDetailsById){
+    if(fetchDealdetails){
 return  <BundleLoader />
     }
     return (
       <>
         <TabsWrapper>
           <StyledTabs
-            defaultActiveKey="1"
+            defaultActiveKey="2"
             onChange={this.handleTabChange}
             forceRender={true}
           >
@@ -178,7 +179,7 @@ return  <BundleLoader />
                           tooltipTitle="Create"
                           onClick={() => {
                             this.handleContactPopoverVisibleChange();
-                            handleContactModal(true);
+                            handleDealContactModal(true);
                           }}
                           size="0.875em"
                           style={{ verticalAlign: "center", marginLeft: "0.125em" }}
@@ -214,7 +215,7 @@ return  <BundleLoader />
             >
               <Suspense fallback={"Loading ..."}>
                 {" "}
-                {/* <LinkedContact/> */}
+                <LinkedDealContact dealDetailsbyID={this.props.dealDetailsbyID}/>
               </Suspense>
             </TabPane>
             <TabPane
@@ -296,7 +297,12 @@ return  <BundleLoader />
           </StyledTabs>
         </TabsWrapper>
         <Suspense fallback={null}>
-
+        <DealContactModal
+            openDealContactModal={openDealContactModal}
+            handleDealContactModal={handleDealContactModal}
+            // callback={() => getContactListByOpportunityId(opportunityId)}
+            linkContact
+          />
           {/* <AddRecruitModal
             addRecruitModal={this.props.addRecruitModal}
             handleRecruitModal={this.props.handleRecruitModal}
@@ -304,13 +310,6 @@ return  <BundleLoader />
           <AddTagProfileModal
             addTagProfileModal={this.props.addTagProfileModal}
             handleTagProfileModal={this.props.handleTagProfileModal}
-          />
-
-          <AddContactModal
-            addContactModal={addContactModal}
-            handleContactModal={handleContactModal}
-            callback={() => getContactListByOpportunityId(opportunityId)}
-            linkContact
           />
 
           <LinkContactModal
@@ -341,21 +340,16 @@ return  <BundleLoader />
 const mapStateToProps = ({
   auth,
   contact,
-  account,
   opportunity,
-  call,
-  event,
-  task,
-  partner,
-  customeField,
+  deal,
 }) => ({
-  fetchingOpportunityDetailsById:opportunity.fetchingOpportunityDetailsById,
+  fetchDealdetails:deal.fetchDealdetails,
   user: auth.userDetails,
   userId: auth.userDetails.userId,
   opportunityId: opportunity.opportunity.opportunityId,
   // organizationId: auth.userDetails.organizationId,
   opportunity: opportunity.opportunity,
-  addContactModal: contact.addContactModal,
+  openDealContactModal: deal.openDealContactModal,
   linkContactModal:contact.linkContactModal,
   addSpeechModal:opportunity.addSpeechModal, 
   addRecruitModal: opportunity.addRecruitModal,
@@ -365,16 +359,7 @@ const mapStateToProps = ({
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
-    //   clearReducerState,
-    //   handleContactModal,
-    //   handleLinkContactModal,
-    //   handleReactSpeechModal,
-    //   handleDocumentUploadModal,
-    //   getContactListByOpportunityId,
-    //    linkContactsCheckToOpportunity,
-    //   handleRecruitModal,
-    //   handleTagProfileModal,
-    //   getRecruitByOpportunityId,
+      handleDealContactModal
     },
     dispatch
   );

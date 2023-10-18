@@ -46,6 +46,11 @@ const initialState = {
   addingDocumentByInvestorIdError: false,
   
   invstrContactUpdateModal:false,
+
+  fetchingInvestorData: false,
+  fetchingInvestorDataError:false,
+  investorData:[],
+
 };
 export const investorReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -284,7 +289,23 @@ export const investorReducer = (state = initialState, action) => {
                           ...state,
                           updateInvestorContactById: false,
                           updateInvestorContactByIdError: true,
-                        };                 
+                        };  
+                        
+                        case types.GET_INVESTOR_DATA_REQUEST:
+                          return { ...state, fetchingInvestorData: true };
+                        case types.GET_INVESTOR_DATA_SUCCESS:
+                          return {
+                            ...state,
+                            fetchingInvestorData: false,
+                            investorData: action.payload,
+                          };
+                        case types.GET_INVESTOR_DATA_FAILURE:
+                          return {
+                            ...state,
+                            fetchingInvestorData: false,
+                            fetchingInvestorDataError: true,
+                          };
+                                    
 default:
       return state;
   }

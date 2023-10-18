@@ -5,18 +5,18 @@ import { Button, Select, Icon, Tag, Switch } from "antd";
 import { FormattedMessage } from "react-intl";
 import { Formik, Form, FastField, Field, FieldArray } from "formik";
 import * as Yup from "yup";
-import { HeaderLabel, Spacer } from "../../../Components/UI/Elements";
-import SearchSelect from "../../../Components/Forms/Formik/SearchSelect";
-import AddressFieldArray from "../../../Components/Forms/Formik/AddressFieldArray";
-import { InputComponent } from "../../../Components/Forms/Formik/InputComponent";
-import { SelectComponent } from "../../../Components/Forms/Formik/SelectComponent";
-import { addLinkContactByOpportunityId } from "../../Contact/ContactAction";
-import Upload from "../../../Components/Forms/Formik/Upload";
-import { TextareaComponent } from "../../../Components/Forms/Formik/TextareaComponent";
-import { getDesignations } from "../../Settings/Designation/DesignationAction";
-import { getDepartments } from "../../Settings/Department/DepartmentAction";
-import {addContactInvest} from "../ContactInvestAction";
-import {getInvestorData} from "../../Investor/InvestorAction";
+import { HeaderLabel, Spacer } from "../../../../../../Components/UI/Elements";
+import SearchSelect from "../../../../../../Components/Forms/Formik/SearchSelect";
+import AddressFieldArray from "../../../../../../Components/Forms/Formik/AddressFieldArray";
+import { InputComponent } from "../../../../../../Components/Forms/Formik/InputComponent";
+import { SelectComponent } from "../../../../../../Components/Forms/Formik/SelectComponent";
+import { addLinkContactByOpportunityId } from "../../../../../Contact/ContactAction";
+import Upload from "../../../../../../Components/Forms/Formik/Upload";
+import { TextareaComponent } from "../../../../../../Components/Forms/Formik/TextareaComponent";
+import { getDesignations } from "../../../../../Settings/Designation/DesignationAction";
+import { getDepartments } from "../../../../../Settings/Department/DepartmentAction";
+import { getCustomerData } from "../../../../../Customer/CustomerAction";
+import {addDealContact} from "../../../../DealAction";
 
 const { Option } = Select;
 /**
@@ -31,11 +31,11 @@ const ContactSchema = Yup.object().shape({
   mobileNumber: Yup.string().matches(phoneRegExp, 'Mobile number is not valid').min(5, "Number is too short").max(10, "Number is too long")
 });
 
-class ContactInvestForm extends Component {
+class DealContactForm extends Component {
   componentDidMount() {
-    this.props.getInvestorData(this.props.userId);
-  }
+    this.props.getCustomerData(this.props.userId);
 
+  }
   constructor(props) {
     super(props);
     this.state = {
@@ -94,8 +94,8 @@ class ContactInvestForm extends Component {
   render() {
     const {
       user: { userId, firstName, lastName },
-      addContactInvest,
-      addingContact,
+      addContact,
+      addingDealContact,
       customerId,
       designationTypeId,
       departmentId,
@@ -111,10 +111,15 @@ class ContactInvestForm extends Component {
       opportunityId,
       addLinkContactByOpportunityId,
       defaultCustomers,
+
+      // tagWithCompany,
     } = this.props;
-
-
-    const investorNameOption = this.props.investorData
+    console.log(linkContact);
+    console.log(opportunityId);
+    console.log(customerId);
+    console.log(departmentId);
+    console.log(designationTypeId);
+    const customerNameOption = this.props.customerData
     .sort((a, b) => {
       const libraryNameA = a.name && a.name.toLowerCase();
       const libraryNameB = b.name && b.name.toLowerCase();
@@ -132,7 +137,7 @@ class ContactInvestForm extends Component {
     .map((item) => {
       return {
         label: `${item.name || ""}`,
-        value: item.investorId,
+        value: item.customerId,
       };
     });
 
@@ -141,13 +146,17 @@ class ContactInvestForm extends Component {
         <Formik
           initialValues={{
             salutation: "",
+            // designation: undefined,
             designationTypeId: this.props.designationTypeId,
             description: "",
+            //department: undefined,
             departmentId: this.props.departmentId,
             departmentDetails: "",
             userId: this.props.userId,
-            investorId: this.props.investorId,
+            customerId: this.props.customerId,
             opportunityId: this.props.opportunityId,
+
+            // tagWithCompany: tagWithCompany ? tagWithCompany : "",
             tagWithCompany: "",
             firstName: "",
             middleName: "",
@@ -158,7 +167,7 @@ class ContactInvestForm extends Component {
             mobileNumber: "",
             emailId: "",
             linkedinPublicUrl: "",
-            sourceId:"",
+            whatsapp: this.state.whatsapp ? "Different" : "Same",
             address: [
               {
                 addressType: "",
@@ -182,10 +191,10 @@ class ContactInvestForm extends Component {
               ? addLinkContactByOpportunityId(values, opportunityId, () =>
                 this.handleReset(resetForm)
               )
-              : addContactInvest(
+              : addDealContact(
                 {
                   ...values,
-                //   whatsapp: this.state.whatsapp ? "Different" : "Same",
+                  whatsapp: this.state.whatsapp ? "Different" : "Same",
                 },
                 this.props.userId,
                 () => this.handleReset(resetForm)
@@ -200,14 +209,15 @@ class ContactInvestForm extends Component {
             setFieldValue,
             setFieldTouched,
           }) => (
-            <div class="overflow-y-auto h-[34rem] overflow-x-hidden max-sm:h-[30rem]">
             <Form className="form-background">
-              <div class=" flex justify-between max-sm:flex-col ">
-                <div class=" h-full w-1/2 max-sm:w-wk">
+              <div class=" flex justify-between h-[27rem] overflow-x-hidden max-sm:flex-col"
+              >
+                <div class=" h-full w-1/2 max-sm:w-wk"
+                >
                   <div class=" flex  flex-nowrap">
                     <FastField name="imageId" component={Upload} />
                     <div>
-                      <div class=" flex justify-between">
+                      <div class=" flex justify-between max-sm:flex-col">
                         <div class=" w-2/5">
                           <FastField
                             name="salutation"
@@ -225,7 +235,7 @@ class ContactInvestForm extends Component {
                             isColumn
                           />
                         </div>
-                        <div class=" w-1/2">
+                        <div class=" w-1/2 max-sm:w-2/5">
                           <FastField
                             isRequired
                             name="firstName"
@@ -304,7 +314,7 @@ class ContactInvestForm extends Component {
                     </div>
                   </div>               
                   <div class=" flex justify-between">
-                    <div class=" w-2/6">
+                    <div class=" w-2/6 max-sm:w-2/5">
                       <FastField
                         name="countryDialCode"
                         isColumnWithoutNoCreate
@@ -326,7 +336,7 @@ class ContactInvestForm extends Component {
                         inlineLabel
                       />
                     </div>
-                    <div class=" w-2/5">
+                    <div class=" w-2/5 max-sm:w-2/4">
                       <FastField
                         type="number"
                         name="mobileNumber"
@@ -343,8 +353,9 @@ class ContactInvestForm extends Component {
                         isColumn
                       />
                     </div>
-                    {/* <div class=" w-1/4 font-bold"
-                    >
+                    
+                  </div>
+                  <div class=" w-1/4 font-bold" >
                       WhatsApp
                       <Switch
                         onChange={this.handleWhatsApp}
@@ -352,8 +363,7 @@ class ContactInvestForm extends Component {
                         checkedChildren="Different"
                         unCheckedChildren="Same"
                       />
-                    </div> */}
-                  </div>
+                    </div>
                   <div class=" flex justify-between">
                     <div class=" w-2/4">
                       {" "}
@@ -426,7 +436,7 @@ class ContactInvestForm extends Component {
                     name="notes"
                     // label="Notes"
                     label={
-                      <FormattedMessage id="app.description" defaultMessage="Description" />
+                      <FormattedMessage id="app.notes" defaultMessage="Notes" />
                     }
                     width={"100%"}
                     isColumn
@@ -434,11 +444,12 @@ class ContactInvestForm extends Component {
                   />
 
                 </div>
-                <div class=" h-3/4 w-5/12 max-sm:w-wk " >
-                  <div class=" flex  justify-between">
+                <div class=" h-3/4 w-5/12 max-sm:w-wk "
+                >
+                  <div class=" flex  justify-between max-sm:mt-20">
                     <div class=" w-1/2">
                       <Field
-                        name="investorId"
+                        name="customerId"
                         // selectType="customerList"
                         isColumnWithoutNoCreate
                         label={
@@ -449,9 +460,10 @@ class ContactInvestForm extends Component {
                         }
                         component={SelectComponent}
                         isColumn
-                        value={values.investorId}
+                        value={values.customerId}
                         isDisabled={defaultCustomers}
-                        options={Array.isArray(investorNameOption) ? investorNameOption : []}
+                        options={Array.isArray(customerNameOption) ? customerNameOption : []}
+                        // defaultValue={defaultCustomers ? defaultCustomers : null}
                         inlineLabel
                       />
                     </div>
@@ -496,18 +508,19 @@ class ContactInvestForm extends Component {
                     />
                   </div>
                   <div class=" w-2/5">
-                  <FastField
-                            name="sourceId"
-                             label={
+                          <FastField
+                            name="source"
+                            type="text"
+                            label={
                               <FormattedMessage
                                 id="app.source"
                                 defaultMessage="Source"
                               />
                             }
-                            isColumnWithoutNoCreate
-                            selectType="sourceName"
-                            component={SearchSelect}
-                            value={values.sourceId}
+                            options={["Na", "Na2", "None"]}
+                            component={SelectComponent}
+                            inlineLabel
+                            className="field"
                             isColumn
                           />
                         </div>
@@ -618,7 +631,7 @@ class ContactInvestForm extends Component {
                 <Button
                   type="primary"
                   htmlType="submit"
-                  loading={addingContact}
+                  loading={addingDealContact}
                 >
                   <FormattedMessage id="app.create" defaultMessage="Create" />
                   {/*                     
@@ -626,7 +639,6 @@ class ContactInvestForm extends Component {
                 </Button>
               </div>
             </Form>
-            </div>
           )}
         </Formik>
       </>
@@ -634,13 +646,13 @@ class ContactInvestForm extends Component {
   }
 }
 
-const mapStateToProps = ({ auth, contact, customer,investor, opportunity, departments, designations }) => ({
-  addingContact: contact.addingContact,
-  addingContactError: contact.addingContactError,
+const mapStateToProps = ({ auth, contact, customer, opportunity, departments, designations }) => ({
+  addingDealContact: contact.addingDealContact,
+  addingDealContactError: contact.addingDealContactError,
   user: auth.userDetails,
   userId: auth.userDetails.userId,
-  investorData:investor.investorData,
-  investorId: investor.investorDetails.investorId,
+  customerData:customer.customerData,
+  customerId: customer.customer.customerId,
   tagWithCompany: customer.customer.name,
   opportunityId: opportunity.opportunity.opportunityId,
   departmentId: departments.departmentId,
@@ -650,13 +662,16 @@ const mapStateToProps = ({ auth, contact, customer,investor, opportunity, depart
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
-      addContactInvest,
+      // getContacts,
+      addDealContact,
+      // getContactById,
       addLinkContactByOpportunityId,
+      // getCurrency,
       getDesignations,
-      getInvestorData,
+      getCustomerData,
       getDepartments,
     },
     dispatch
   );
 
-export default connect(mapStateToProps, mapDispatchToProps)(ContactInvestForm);
+export default connect(mapStateToProps, mapDispatchToProps)(DealContactForm);

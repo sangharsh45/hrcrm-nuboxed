@@ -1,44 +1,35 @@
 import React, { Component, lazy, Suspense } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import OpportunityReportCard from "./OpportunityCards/OpportunityReportCard"
+import DealReportCard from "./Dealcards/DealReportCard.js";
 // import OpportunityAboutCard from "./OpportunityCards/OpportunityAboutCard";
-import OpportunityAboutViewCard from "./OpportunityCards/OpportunityAboutViewCard";
-import OpportunityAboutCard from "./OpportunityCards/OpportunityAboutCard";
-const OpportunityDetailTab = lazy(() =>
-  import("./OpportunityTab/OpportunityDetailTab")
-);
+import DealAboutViewCard from "./Dealcards/DealAboutViewCard";
+import DealAboutCard from "./Dealcards/DealAboutCard";
 
-class OpportunityDetailRight extends Component {
+class DealDetailRight extends Component {
   render() {
     const {
-      opportunity,
+        dealDetailsbyID,
     } = this.props;
     return (
       <>
       <div style={{display:"flex"}}>
         <div style={{ width: "30%" }}>
-          {/* <OpportunityDetailTab
-          //  opportunity={opportunity}
-            // department={this.props.department}
-            // partnerLogin={this.props.partnerLogin}
-          /> */}
-            <OpportunityAboutViewCard
-          opportunity={opportunity} 
+            <DealAboutViewCard
+          dealDetailsbyID={dealDetailsbyID}
         />
         </div>
         <div style={{ width: "20%" ,}}>
-          <OpportunityAboutCard
-          opportunity={opportunity}
+          <DealAboutCard
+          dealDetailsbyID={dealDetailsbyID}
           department={this.props.department}
           partnerLogin={this.props.partnerLogin}
           tradeCurrency={this.props.tradeCurrency}
         />
         </div>
          <div style={{width: "26%"}}>
-         <OpportunityReportCard
-          opportunity={opportunity}
-          
+         <DealReportCard
+          dealDetailsbyID={dealDetailsbyID}
         />
         </div>
         </div>
@@ -57,4 +48,4 @@ const mapDispatchToProps = (dispatch) => bindActionCreators({}, dispatch);
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(OpportunityDetailRight);
+)(DealDetailRight);

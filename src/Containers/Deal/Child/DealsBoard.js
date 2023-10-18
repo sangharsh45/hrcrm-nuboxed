@@ -2,7 +2,7 @@ import React, { useEffect, useMemo, useState } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { withRouter } from "react-router-dom";
-import styled from "styled-components";
+import styled from "styled-components"; 
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import { StyledTabs, StyledModal } from "../../../Components/UI/Antd";
 import { SmileOutlined, MehOutlined } from '@ant-design/icons';
@@ -205,16 +205,8 @@ function DealsBoard(props) {
     setCurrentProcess(item);
     props.getProcessStagesForDeals(item.investorOppWorkflowId);
   }
-  function handleTabChange() { }
-  // if (props.fetchingProcessStages) {
-  //   return <BundleLoader />;
-  // }
-  // useEffect(() => {
-  //   openNotification();
-  // });
-//   if (props.fetchingOpportunities) {
-//     return <BundleLoader />;
-//   }
+
+
   return (
     <FlexContainer flexWrap="nowrap">
       <MainWrapper
@@ -227,7 +219,7 @@ function DealsBoard(props) {
         <div style={{ display: "flex" }}>
           <StyledTabs
             // defaultActiveKey={this.state.activeKey}
-            onChange={handleTabChange}
+            // onChange={handleTabChange}
             type="card"
           >
             {props.dealsProcess.map((item, i) => {
@@ -276,12 +268,6 @@ function DealsBoard(props) {
                                 >
                                   <StageHeader style={{ position: "absolute" }}>
                                     <div>{stage.stageName}</div>
-                                    {/* <div>
-                                      {`${props.tradeCurrency} `}
-                                  
-
-                                      {proposalAmountCalculate(stage.stageId)}
-                                    </div> */}
                                   </StageHeader>
                                   <Spin
                                     tip="Loading..."
@@ -295,22 +281,23 @@ function DealsBoard(props) {
                                       className="scrollbar"
                                       id="style-3"
                                     >
-                                      {/* {props.dealsByuserId
+                                      {props.aLLdealsList
                                         .filter(
                                           (opp, index) =>
-                                            opp.investorOppStagesId === stage.investorOppStagesId
+                                            opp.invOpportunityStagesId === stage.investorOppStagesId
                                         )
                                         .map((opp, index) => {
+                                          console.log("oPPr",opp)
                                           return (
                                             <DealStageColumn
                                               key={index}
-                                              opportunity={opp}
+                                              dealDetailsbyID={opp}
                                               index={index}
                                               history={props.history}
                                             />
                                           );
-                                        })} */}
-                                        {/* <h1>Hello World</h1> */}
+                                        })}
+                                 
                                     </StageColumn>
                                   </Spin>
                                 </div>
@@ -324,7 +311,6 @@ function DealsBoard(props) {
               </DragDropContext>
             </FlexContainer>
           
-        {/* )} */}
       </MainWrapper>
     </FlexContainer>
   );
@@ -344,7 +330,8 @@ const mapStateToProps = ({
 //   startDate: dashboard.startDate,
 //   endDate: dashboard.endDate,
    userId: auth.userDetails.userId,
-   opportunityByUserId:opportunity.opportunityByUserId,
+   aLLdealsList:deal.aLLdealsList,
+  //  dealsByuserId:deal.dealsByuserId,
 //   process: settings.Process,
 //   tradeCurrency: auth.userDetails.tradeCurrency,
 //   opportunities: opportunitySelector(opportunity, account),
