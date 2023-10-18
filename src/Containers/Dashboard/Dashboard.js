@@ -79,8 +79,9 @@ class Dashboard extends Component {
         activeButton={this.state.activeButton}
         />
         <Suspense fallback={<BundleLoader />}>
-         <div style={{ display: "flex", justifyContent: "space-between",  }}>
-           <div style={{ width: "53%" }}>
+          <div class="max-sm:h-[34rem] max-sm:overflow-x-auto">
+         <div class="flex justify-between max-sm:flex-col">
+           <div class="w-[53%] max-sm:w-wk">
            <FlexContainer flexDirection="column" style={{ display: "block" }}>
            {viewType==="ME"?(
              <DashboardJumpstartAll/> )
@@ -131,7 +132,7 @@ class Dashboard extends Component {
         
     </FlexContainer>
     </div>
-     <div style={{ width: "47%" }}>
+     <div class="w-[47%] max-sm:w-wk">
           <FlexContainer flexDirection="column" style={{ display: "block" }}>
        <FlexContainer justifyContent="space-between" >
        {viewType==="ME" || viewType==="test"?(
@@ -155,6 +156,7 @@ class Dashboard extends Component {
     </FlexContainer>
     </div>
    
+    </div>
     </div>
     </Suspense>
  
