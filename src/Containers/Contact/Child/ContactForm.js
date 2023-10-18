@@ -625,7 +625,7 @@ class ContactForm extends Component {
                 </div>
               </div>
               <Spacer />
-              <div class=" flex  justify-end">
+              <div class="flex justify-end w-wk bottom-2 mr-2 absolute ">
                 <Button
                   type="primary"
                   htmlType="submit"

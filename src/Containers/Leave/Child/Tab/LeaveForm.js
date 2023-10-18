@@ -326,13 +326,13 @@ console.log(this.state.firstCase)
                 </div>
               </div>
               <Spacer />
-              <FlexContainer justifyContent="flex-end">
+              <div class="flex justify-end w-wk bottom-2 mr-2 absolute ">
                 &nbsp;
                 <Button htmlType="submit" type="primary"
                   Loading={addingLeaves}>
                   Submit
                 </Button>
-              </FlexContainer>
+              </div>
             </Form>
           )}
         </Formik>
