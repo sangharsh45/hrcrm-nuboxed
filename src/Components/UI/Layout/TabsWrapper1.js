@@ -12,5 +12,11 @@ width:98%;
 padding: 0.3rem;
 height:13rem;
 /* overflow: auto; */
+@media only screen and (max-width: 600px) {
+   
+    height: 17rem;
+
+    
+  }
 `;
 export default TabsWrapper1;

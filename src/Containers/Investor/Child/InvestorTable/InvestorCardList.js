@@ -145,13 +145,13 @@ function InvestorCardList(props) {
                                 style={{
                                     borderBottom: "3px dotted #515050"
                                 }}>
-                                     
+                                     <div class="flex">
                                 <div className=" flex font-medium flex-col md:w-52 max-sm:flex-row w-full ">
 
                                    
                                         <Tooltip>
                                         <div class=" flex max-sm:w-full justify-between flex-row md:flex-col">
-                                            <h4 class=" text-[0.875rem] text-cardBody font-poppins">
+                                            <h4 class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden">
                                             Name
                                             </h4>
                                             <h4 class=" text-[0.75rem] text-blue-500 text-cardBody font-poppins cursor-pointer">
@@ -179,15 +179,16 @@ function InvestorCardList(props) {
 
                                 <div className=" flex font-medium flex-col  md:w-52 max-sm:flex-row w-full justify-between ">
                            
-                                    <h4 class=" text-[0.875rem] text-cardBody font-poppins"> Sector </h4>
+                                    <h4 class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden"> Sector </h4>
                                     <h4 class=" text-[0.75rem] text-cardBody font-poppins">   
                                     {item.sector}
                                     </h4>
                                 </div>
+                               
                                 <div className=" flex font-medium flex-col md:w-36 max-sm:flex-row w-full justify-between ">
                                   
 
-                                    <h4 class=" text-[0.875rem] text-cardBody font-poppins">Country</h4>
+                                    <h4 class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden">Country</h4>
                                     <h4 class=" text-[0.75rem] text-cardBody font-poppins">
                                     <ReactCountryFlag
                           countryCode={item.countryAlpha2Code}
@@ -201,16 +202,17 @@ function InvestorCardList(props) {
                        {item.address && item.address.length && item.address[0].country}
                                     </h4>
                                 </div>
-                             
+                                </div>
+                                <div class="flex">
                                 <div className=" flex font-medium flex-col md:w-36 max-sm:flex-row w-full justify-between ">
-                                    <h4 class=" text-[0.875rem] text-cardBody font-poppins"># Opportunity</h4>
+                                    <h4 class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden"># Opportunity</h4>
 
                                     <div class=" text-[0.75rem] text-cardBody font-poppins">
 
                                     </div>
                                 </div>
                                 <div className=" flex font-medium flex-col md:w-24 max-sm:flex-row w-full justify-between ">
-                                    <h4 class=" text-[0.875rem] text-cardBody font-poppins">Assigned to</h4>
+                                    <h4 class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden">Assigned to</h4>
 
                                     <div class=" text-[0.75rem] text-cardBody font-poppins">
                                     
@@ -230,7 +232,7 @@ function InvestorCardList(props) {
                                 </div>
                                 <div className=" flex font-medium flex-col md:w-20 max-sm:flex-row w-full justify-between ">
                        
-                       <h4 class=" text-[0.875rem] text-cardBody font-poppins">Owner</h4>
+                       <h4 class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden">Owner</h4>
 
                        <span>
               <MultiAvatar
@@ -242,6 +244,8 @@ function InvestorCardList(props) {
               />
             </span>
                    </div>
+                   </div>
+                   <div class="flex max-sm:justify-between">
                    <div className=" flex font-medium flex-col max-sm:flex-row  ">
                        
                        <h4 class=" text-[0.875rem] text-cardBody font-poppins"></h4>
@@ -250,7 +254,7 @@ function InvestorCardList(props) {
                      <span class="text-[0.75rem]" >Convert to Account</span>
                         </Button>
                    </div>
-                                <div class="flex flex-col w-[3%]">
+                                <div class="flex flex-col md:w-24 ">
                     <div class="rounded-full bg-white w-5 h-5 cursor-pointer">
                     <Tooltip title={item.url}>
               {item.url !== "" && (
@@ -293,7 +297,7 @@ function InvestorCardList(props) {
 
                     </div>
                     </div>
-                    <div class="flex flex-col w-[2%]">
+                    <div class="flex flex-col md:w-[2%] max-sm:flex-row">
                       <div>
                     <Tooltip overlayStyle={{ maxWidth: "300px" }} title={dataLoc}>
             <span
@@ -334,7 +338,8 @@ function InvestorCardList(props) {
             </Tooltip>
             )}
             </div>
-                      </div>    
+                      </div> 
+                      </div>   
                             </div>
                         </div>
 

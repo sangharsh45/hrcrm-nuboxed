@@ -39,6 +39,12 @@ const JumpStartWrapper = styled.div`
     -moz-box-shadow: 0 0.75em 0.375em -0.375em rgb(46, 44, 44);
     box-shadow: 0 0.75em 0.375em -0.375em rgb(46, 44, 44);
   }
+  @media only screen and (max-width: 600px) {
+   
+    height: 9rem;
+
+    
+  }
 `;
 const Progress = styled.span`
   color: ${(props) => (props.amount >= 0 ? "#0d9412" : "rgb(248, 15, 15)")};
