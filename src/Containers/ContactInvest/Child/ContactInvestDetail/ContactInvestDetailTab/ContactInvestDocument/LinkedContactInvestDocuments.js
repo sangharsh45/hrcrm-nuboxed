@@ -19,7 +19,7 @@ import { DeleteOutlined, DownloadOutlined } from "@ant-design/icons";
 class LinkedContactInvestDocuments extends Component {
   componentDidMount() {
     const {
-      contact: { contactId },
+      contactInVestDetail: { contactId },
       getContactDocument,
     } = this.props;
     getContactDocument(contactId);
@@ -156,7 +156,7 @@ class LinkedContactInvestDocuments extends Component {
   }
 }
 
-const mapStateToProps = ({ contact }) => ({
+const mapStateToProps = ({ contact,contactinvest }) => ({
   contact: contact.contact,
   fetchingDocumentsByContactId: contact.fetchingDocumentsByContactId,
   fetchingDocumentsByContactIdError: contact.fetchingDocumentsByContactIdError,

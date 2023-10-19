@@ -24,8 +24,8 @@ import ClearbitImage from "../../../Components/Forms/Autocomplete/ClearbitImage"
 const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
 const InvestorSchema = Yup.object().shape({
   name: Yup.string().required("Input needed!"),
-  email: Yup.string().email("Enter a valid Email"),
-  phoneNumber: Yup.string().matches(phoneRegExp, 'Phone number is not valid').min(5,"Number is too short").max(10,"Number is too long")
+  email: Yup.string().required("Input needed!").email("Enter a valid Email"),
+  phoneNumber: Yup.string().required("Input needed!").matches(phoneRegExp, 'Phone number is not valid').min(8,"Minimum 8 digits").max(10,"Number is too long")
 });
 
 function InvesterForm(props) {
@@ -91,7 +91,7 @@ function InvesterForm(props) {
             sectorId: "",
             country: props.user.country,
             email: "",
-            sourceId: "",
+            source: "",
             countryDialCode: props.user.countryDialCode,
             phoneNumber: "",
             fullName:"",
@@ -114,7 +114,7 @@ function InvesterForm(props) {
             ],
             category: whiteblue ? "White" : "Blue" || "Both",
           }}
-          // validationSchema={InvestorSchema}
+          validationSchema={InvestorSchema}
           onSubmit={(values, { resetForm }) => {
             console.log(values);
             AddInvestor(
@@ -258,7 +258,7 @@ function InvesterForm(props) {
                     </div>
                     <div class=" w-2/5">
                     <FastField
-                            name="sourceId"
+                            name="source"
                              label={
                               <FormattedMessage
                                 id="app.source"
@@ -268,7 +268,7 @@ function InvesterForm(props) {
                             isColumnWithoutNoCreate
                             selectType="sourceName"
                             component={SearchSelect}
-                            value={values.sourceId}
+                            value={values.source}
                             isColumn
                           />
                         </div>
@@ -415,30 +415,6 @@ function InvesterForm(props) {
                       />
                     )}
                   />
-                   <div class=" flex justify-between">
-                   <div class=" w-1/2 max-sm:w-wk">
-                     <Field
-                       name="country"
-                       isColumnWithoutNoCreate
-                       label={
-                         <FormattedMessage
-                           id="app.country"
-                           defaultMessage="Country"
-                         />
-                       }
-                       component={SearchSelect}
-                       defaultValue={{
-                         value: props.user.countryName,
-                       }}
-                       value={values.countryName}
-                       selectType="country"
-                       inlineLabel
-                       isColumn
-                       width="100%"
-                     />
-                   </div>
-                 </div>
-               
                 </div>
               </div>
               <Spacer />
@@ -450,8 +426,6 @@ function InvesterForm(props) {
                   loading={addingInvestor}
                 >
                   <FormattedMessage id="app.create" defaultMessage="Create" />
-                  {/*                     
-                    Create */}
                 </Button>
               </div>
             </Form>

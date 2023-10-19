@@ -4,10 +4,7 @@ import dayjs from "dayjs";
 import { base_url } from "../../Config/Auth";
 import { asses_url } from "../../Config/Auth";
 import { message } from "antd";
-
-
-
-
+import Swal from 'sweetalert2'
 
 export const getPitch = (userId) => (dispatch) => {
  
@@ -187,7 +184,12 @@ export const getPitch = (userId) => (dispatch) => {
           type: types.CONVERT_PITCH_STATUS_SUCCESS,
           payload: res.data,
         });
-        // cb && cb("success");
+        Swal.fire({
+          icon: 'success',
+          title: 'Qualifed Succefully',
+          showConfirmButton: false,
+          timer: 1500
+        })
       })
       .catch((err) => {
         console.log(err);

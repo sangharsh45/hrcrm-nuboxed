@@ -96,6 +96,7 @@
     "scss-tokenizer": "^0.4.3",
     "slick-carousel": "^1.8.1",
     "styled-components": "^4.4.1",
+    "sweetalert2": "^11.7.32",
     "tar": "^6.1.13",
     "three": "^0.150.1",
     "trim-newlines": "^4.0.2",
