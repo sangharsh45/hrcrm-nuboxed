@@ -126,19 +126,18 @@ function DealForm(props) {
           }
         })
         .sort((a, b) => {
-          const stageDealA = a.name && a.name.toLowerCase();
-          const stageDealB = b.name && b.name.toLowerCase();
-          if (stageDealA < stageDealB) {
-            return -1;
-          }
-          if (stageDealA > stageDealB) {
+          if (a.probability < b.probability) {
+            return -1; // Sort in increasing order
+          } else if (a.probability > b.probability) {
             return 1;
+          } else {
+            return 0;
           }
-          return 0;
         })
 
         .map((option) => ({
-          label: option.stageName || "",
+          // label: option.stageName || "",
+          label: `${option.stageName}  ${option.probability}`,
           value: option.investorOppStagesId,
         }));
 
@@ -592,8 +591,8 @@ function DealForm(props) {
                     isColumnWithoutNoCreate
                     label={
                       <FormattedMessage
-                        id="app.customer"
-                        defaultMessage="Customer"
+                        id="app.investor"
+                        defaultMessage="Investor"
                       />
                     }
                     //component={SearchSelect}

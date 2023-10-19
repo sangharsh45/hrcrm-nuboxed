@@ -204,6 +204,10 @@ const initialState = {
   fetchinglostOpportunityError: false,
   lostOpportunity:[],
 
+  fetchingOppLinkedStages: false,
+  fetchingOppLinkedStagesError: false,
+  oppLinkStages:[],
+
   fetchingCloseOpportunity: false,
   fetchingCloseOpportunityError: false,
   closeOpportunity:[],
@@ -267,6 +271,10 @@ const initialState = {
   fetchingRemark: false,
   fetchingRemarkError: false,
   remark: [],
+
+  fetchingOppLinkedWorkflow: false,
+  fetchingOppLinkedWorkflowError: false,
+  oppLinkWorkflow:[],
 
   fetchingOpportunitySkillsInitiativesDetails:false,
   fetchingOpportunitySkillsInitiativesDetailsError:false,
@@ -2385,6 +2393,37 @@ case types.REINSTATE_TOGGLE_FOR_OPPORTUNITY_FAILURE:
                                                       fetchingWonRecords: false,
                                                       fetchingWonRecordsError: true,
                                                     };
+
+
+                                                    case types.GET_OPP_LINKED_STAGES_REQUEST:
+                                                      return { ...state, fetchingOppLinkedStages: true };
+                                                    case types.GET_OPP_LINKED_STAGES_SUCCESS:
+                                                      return {
+                                                        ...state,
+                                                        fetchingOppLinkedStages: false,
+                                                        oppLinkStages: action.payload,
+                                                      };
+                                                    case types.GET_OPP_LINKED_STAGES_FAILURE:
+                                                      return {
+                                                        ...state,
+                                                        fetchingOppLinkedStages: false,
+                                                        fetchingOppLinkedStagesError: true,
+                                                      };
+
+                                                      case types.GET_OPP_LINKED_WORKFLOW_REQUEST:
+                                                        return { ...state, fetchingOppLinkedWorkflow: true };
+                                                      case types.GET_OPP_LINKED_WORKFLOW_SUCCESS:
+                                                        return {
+                                                          ...state,
+                                                          fetchingOppLinkedWorkflow: false,
+                                                          oppLinkWorkflow: action.payload,
+                                                        };
+                                                      case types.GET_OPP_LINKED_WORKFLOW_FAILURE:
+                                                        return {
+                                                          ...state,
+                                                          fetchingOppLinkedWorkflow: false,
+                                                          fetchingOppLinkedWorkflowError: true,
+                                                        };
                                                                               
 
                                             default:

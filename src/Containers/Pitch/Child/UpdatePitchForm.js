@@ -326,7 +326,7 @@ function UpdatePitchForm (props) {
                     </div>
                      <Spacer/>
                      <div class=" flex justify-between">
-                     <div class=" w-1/2">
+                     {/* <div class=" w-1/2">
                       <FastField
                         name="sectorId"
                         isColumnWithoutNoCreate
@@ -340,7 +340,7 @@ function UpdatePitchForm (props) {
                         isColumn
                         component={SearchSelect}
                       />
-                    </div>
+                    </div> */}
                     <div class=" w-2/5">
            <FastField
                             name="sourceId"

@@ -315,6 +315,11 @@ function NavMenu (props) {
                    <span class="text-white text-ls ml-1">
                 
                   {translatedMenuItems[8]}
+                  &nbsp;&nbsp;&nbsp;
+                  <Badge
+                    count={props.opportunityRecord.customerContact}
+                    overflowCount={999}
+                  ></Badge>
                 </span>
               </Link>
             </Menu.Item>

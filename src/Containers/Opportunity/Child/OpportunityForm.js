@@ -22,8 +22,8 @@ import {
   getRecruiterName,
   getAllSalesList,
   getInitiative,
-  getWorkflow,
-  getStages,
+  getOppLinkedWorkflow,
+  getOppLinkedStages,
 } from "../OpportunityAction";
 import PlayCircleFilledIcon from "@mui/icons-material/PlayCircleFilled";
 import RotateRightIcon from "@mui/icons-material/RotateRight";
@@ -54,8 +54,8 @@ function OpportunityForm(props) {
     props.getContactData(props.userId);
     props.getCustomerData(props.userId);
     props.getInitiative(props.userId);
-    props.getWorkflow(props.orgId);
-    props.getStages(props.orgId);
+    props.getOppLinkedWorkflow(props.orgId);
+    props.getOppLinkedStages(props.orgId);
   }, []);
 
   const [defaultOption, setDefaultOption] = useState(props.fullName);
@@ -110,8 +110,8 @@ function OpportunityForm(props) {
 
   function getStagesOptions(filterOptionKey, filterOptionValue) {
     const StagesOptions =
-      props.stages.length &&
-      props.stages
+      props.oppLinkStages.length &&
+      props.oppLinkStages
         .filter((option) => {
           if (
             option.opportunityWorkflowDetailsId === filterOptionValue &&
@@ -121,28 +121,25 @@ function OpportunityForm(props) {
           }
         })
         .sort((a, b) => {
-          // const libraryNameA = a.name && a.name.toLowerCase();
-          // const libraryNameB = b.name && b.name.toLowerCase();
-          if (a.probability-b.probability) {
-            return -1;
-          }
-          if (a.probability-b.probability) {
+          if (a.probability < b.probability) {
+            return -1; // Sort in increasing order
+          } else if (a.probability > b.probability) {
             return 1;
+          } else {
+            return 0;
           }
-
-          // names must be equal
-          return 0;
         })
 
         .map((option) => ({
-          label: `${option.stageName}  ${option.probability}`,
+          // label: `${option.stageName || ""}`,
+           label: `${option.stageName}  ${option.probability}`,
           value: option.opportunityStagesId,
         }));
 
     return StagesOptions;
   }
 
-  const WorkflowOptions = props.workflow.map((item) => {
+  const WorkflowOptions = props.oppLinkWorkflow.map((item) => {
     return {
       label: `${item.workflowName || ""}`,
       value: item.opportunityWorkflowDetailsId,
@@ -785,12 +782,12 @@ const mapStateToProps = ({ auth, opportunity, contact, customer }) => ({
   orgId: auth.userDetails.organizationId,
   // salesUserIds:auth.userDetails.userId,
   sales: opportunity.sales,
-  stages: opportunity.stages,
+  oppLinkStages: opportunity.oppLinkStages,
   currencies: auth.currencies,
   contactByUserId: contact.contactByUserId,
   customerByUserId: customer.customerByUserId,
   initiatives: opportunity.initiatives,
-  workflow: opportunity.workflow,
+  oppLinkWorkflow: opportunity.oppLinkWorkflow,
   customerData: customer.customerData,
   contactData: contact.contactData,
   fullName: auth.userDetails.fullName
@@ -808,8 +805,8 @@ const mapDispatchToProps = (dispatch) =>
       getCustomerData,
       getInitiative,
       // getOpportunitySKill
-      getWorkflow,
-      getStages,
+      getOppLinkedWorkflow,
+      getOppLinkedStages,
     },
     dispatch
   );
