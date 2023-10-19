@@ -258,3 +258,55 @@ export const addDealContact = (contact) => (dispatch, getState) => {
       });
     });
 };
+
+export const getDealLinkedStages = (orgId) => (dispatch) => {
+  dispatch({
+    type: types.GET_DEAL_LINKED_STAGES_REQUEST,
+  });
+  axios
+    .get(`${base_url}/investorOpportunityWorkflow/opportunityStage/for-dropdown/${orgId}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.GET_DEAL_LINKED_STAGES_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.GET_DEAL_LINKED_STAGES_FAILURE,
+        payload: err,
+      });
+    });
+};
+
+export const getDealLinkedWorkflow = (orgId) => (dispatch) => {
+  dispatch({
+    type: types.GET_DEAL_LINKED_WORKFLOW_REQUEST,
+  });
+  axios
+    .get(`${base_url}/workflow/investorOpportunityWorkflow/for-dropdown/${orgId}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.GET_DEAL_LINKED_WORKFLOW_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.GET_DEAL_LINKED_WORKFLOW_FAILURE,
+        payload: err,
+      });
+    });
+};

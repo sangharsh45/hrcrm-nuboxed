@@ -87,7 +87,7 @@ function OpportunityWonCard(props) {
   <>
 
       <InfiniteScroll
-        // dataLength={wonOpportunity.length}
+         dataLength={wonOpportunity.length}
         next={handleLoadMore}
         hasMore={true}
         // loader={<h4 style={{ textAlign: 'center' }}>Loading...</h4>}

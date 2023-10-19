@@ -22,8 +22,10 @@ import {
   getRecruiterName,
   getAllSalesList,
   getInitiative,
-  getOppLinkedWorkflow,
-  getOppLinkedStages,
+  getStages,
+  getWorkflow
+  // getOppLinkedWorkflow,
+  // getOppLinkedStages,
 } from "../OpportunityAction";
 import PlayCircleFilledIcon from "@mui/icons-material/PlayCircleFilled";
 import RotateRightIcon from "@mui/icons-material/RotateRight";
@@ -54,8 +56,8 @@ function OpportunityForm(props) {
     props.getContactData(props.userId);
     props.getCustomerData(props.userId);
     props.getInitiative(props.userId);
-    props.getOppLinkedWorkflow(props.orgId);
-    props.getOppLinkedStages(props.orgId);
+     props.getStages(props.orgId);
+     props.getWorkflow(props.orgId);
   }, []);
 
   const [defaultOption, setDefaultOption] = useState(props.fullName);
@@ -110,8 +112,8 @@ function OpportunityForm(props) {
 
   function getStagesOptions(filterOptionKey, filterOptionValue) {
     const StagesOptions =
-      props.oppLinkStages.length &&
-      props.oppLinkStages
+      props.stages.length &&
+      props.stages
         .filter((option) => {
           if (
             option.opportunityWorkflowDetailsId === filterOptionValue &&
@@ -139,7 +141,7 @@ function OpportunityForm(props) {
     return StagesOptions;
   }
 
-  const WorkflowOptions = props.oppLinkWorkflow.map((item) => {
+  const WorkflowOptions = props.workflow.map((item) => {
     return {
       label: `${item.workflowName || ""}`,
       value: item.opportunityWorkflowDetailsId,
@@ -783,10 +785,12 @@ const mapStateToProps = ({ auth, opportunity, contact, customer }) => ({
   // salesUserIds:auth.userDetails.userId,
   sales: opportunity.sales,
   oppLinkStages: opportunity.oppLinkStages,
+  stages:opportunity.stages,
   currencies: auth.currencies,
   contactByUserId: contact.contactByUserId,
   customerByUserId: customer.customerByUserId,
   initiatives: opportunity.initiatives,
+  workflow:opportunity.workflow,
   oppLinkWorkflow: opportunity.oppLinkWorkflow,
   customerData: customer.customerData,
   contactData: contact.contactData,
@@ -804,9 +808,11 @@ const mapDispatchToProps = (dispatch) =>
       // getInitiativeByCustomerId,
       getCustomerData,
       getInitiative,
+      getWorkflow,
       // getOpportunitySKill
-      getOppLinkedWorkflow,
-      getOppLinkedStages,
+      // getOppLinkedWorkflow,
+      // getOppLinkedStages,
+      getStages
     },
     dispatch
   );

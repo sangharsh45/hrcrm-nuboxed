@@ -1032,14 +1032,14 @@ case types.GET_DELETED_OPPORTUNITY_FAILURE:
                         return {
                           ...state,
                           linkingStatusRecruitToOpportunity: false,
-                          opportunityByUserId: state.opportunityByUserId.filter(
-                            (item) => item.opportunityId !== action.payload
-                          ),
-                        //   opportunityByUserId: state.opportunityByUserId.map((opp) =>
-                        //   opp.opportunityId === action.payload.opportunityId
-                        //     ? action.payload
-                        //     : opp
-                        // ),
+                          // opportunityByUserId: state.opportunityByUserId.filter(
+                          //                             (item) => item.opportunityId !== action.payload
+                          //                           ),
+                          opportunityByUserId: state.opportunityByUserId.map((opp) =>
+                          opp.opportunityId === action.payload.opportunityId
+                            ? action.payload
+                            : opp
+                        ),
                         };
                       case types.LINK_RECRUIT_STATUS_TO_OPPORTUNITY_FAILURE:
                         return {
@@ -2035,14 +2035,8 @@ case types.REINSTATE_TOGGLE_FOR_OPPORTUNITY_FAILURE:
                                                 return {
                                                   ...state,
                                                   statusRecruitToOpportunity: false,
-                                                  opportunityByUserId: state. opportunityByUserId.map(
-                                                    (recruit, i) => {
-                                                      if (recruit.opportunityId === action.payload.opportunityId) {
-                                                        return action.payload;
-                                                      } else {
-                                                        return recruit;
-                                                      }
-                                                    }
+                                                  opportunityByUserId: state.opportunityByUserId.filter(
+                                                    (item) => item.opportunityId !== action.payload
                                                   ),
                                                 };
                                               case types.RECRUIT_STATUS_TO_OPPORTUNITY_FAILURE:
