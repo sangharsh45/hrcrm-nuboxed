@@ -547,7 +547,7 @@ function UpdateDealForm (props) {
                 </div>
               </div>
               <Spacer />
-              <div class=" flex justify-end">
+              <div class="flex justify-end w-wk bottom-2 mr-2 md:absolute ">
                 <Button
                   type="primary"
                   htmlType="submit"

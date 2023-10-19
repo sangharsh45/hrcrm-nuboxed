@@ -207,16 +207,17 @@ class ContactForm extends Component {
             setFieldValue,
             setFieldTouched,
           }) => (
+            <div class="overflow-y-auto h-[34rem] overflow-x-hidden max-sm:h-[30rem]">
             <Form className="form-background">
-              <div class=" flex justify-between h-[27rem] overflow-x-hidden max-sm:flex-col"
+              <div class=" flex justify-around max-sm:flex-col"
               >
-                <div class=" h-full w-1/2 max-sm:w-wk"
+                <div class=" h-full w-w47.5 max-sm:w-wk"
                 >
                   <div class=" flex  flex-nowrap">
                     <FastField name="imageId" component={Upload} />
                     <div>
                       <div class=" flex justify-between max-sm:flex-col">
-                        <div class=" w-2/5">
+                        <div class=" w-2/5 max-sm:w-full">
                           <FastField
                             name="salutation"
                             type="text"
@@ -233,7 +234,7 @@ class ContactForm extends Component {
                             isColumn
                           />
                         </div>
-                        <div class=" w-1/2 max-sm:w-2/5">
+                        <div class=" w-1/2 max-sm:w-full">
                           <FastField
                             isRequired
                             name="firstName"
@@ -252,8 +253,8 @@ class ContactForm extends Component {
                           />
                         </div>
                       </div>                  
-                      <div class=" flex justify-between">
-                        <div class=" w-2/5">
+                      <div class=" flex justify-between max-sm:flex-col">
+                        <div class=" w-2/5 max-sm:w-full">
                           <FastField
                             name="middleName"
                             //label="Middle Name"
@@ -270,7 +271,7 @@ class ContactForm extends Component {
                             inlineLabel
                           />
                         </div>
-                        <div class=" w-1/2">
+                        <div class=" w-1/2 max-sm:w-full">
                           <FastField
                             name="lastName"
                             //label="Last Name"
@@ -442,7 +443,7 @@ class ContactForm extends Component {
                   />
 
                 </div>
-                <div class=" h-3/4 w-5/12 max-sm:w-wk "
+                <div class=" h-3/4 w-w47.5 max-sm:w-wk "
                 >
                   <div class=" flex  justify-between max-sm:mt-20">
                     <div class=" w-1/2">
@@ -625,7 +626,7 @@ class ContactForm extends Component {
                 </div>
               </div>
               <Spacer />
-              <div class="flex justify-end w-wk bottom-2 mr-2 absolute ">
+              <div class="flex justify-end md:w-wk bottom-2 md:mr-2 md:absolute ">
                 <Button
                   type="primary"
                   htmlType="submit"
@@ -637,6 +638,7 @@ class ContactForm extends Component {
                 </Button>
               </div>
             </Form>
+            </div>
           )}
         </Formik>
       </>

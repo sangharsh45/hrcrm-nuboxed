@@ -42,6 +42,7 @@ class ContactActionRight extends React.Component {
           currentUser={this.props.currentUser} 
           />
         ) : null}
+        <div class="max-sm:hidden">
        { role == "ADMIN" && (
         <Tooltip placement="left" title="XL">
         <a
@@ -51,7 +52,8 @@ class ContactActionRight extends React.Component {
          </a>
          </Tooltip>
        )}
-        {user.userType !== "USER" && user.department !== "Partner" && ( 
+       </div>
+        {/* {user.userType !== "USER" && user.department !== "Partner" && ( 
         <Button
           type="primary"
           default
@@ -59,7 +61,7 @@ class ContactActionRight extends React.Component {
         >
           Import
         </Button>
-        )}
+        )} */}
         {this.props.viewType === "table" ? (
         <Tooltip placement="left" title="Create">
           <Button 

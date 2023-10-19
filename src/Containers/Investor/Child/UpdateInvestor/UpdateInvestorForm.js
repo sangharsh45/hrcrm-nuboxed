@@ -109,8 +109,8 @@ function UpdateInvestorForm (props) {
           }) => (
             <div class="overflow-y-auto h-[34rem] overflow-x-hidden max-sm:h-[30rem]">
             <Form className="form-background">
-              <div class=" flex justify-between max-sm:flex-col">
-                <div class=" w-2/4 max-sm:w-wk" >
+              <div class=" flex justify-around max-sm:flex-col">
+                <div class=" w-w47.5 max-sm:w-wk" >
                     <Spacer/>
                    <StyledLabel><FormattedMessage id="app.name" defaultMessage="Name" /></StyledLabel>
                   <Field
@@ -182,7 +182,7 @@ function UpdateInvestorForm (props) {
                   </div>
                   <Spacer/>
                   
-                     <div class=" flex justify-between">
+                     <div class=" flex justify-between max-sm:flex-col">
                   <div class=" w-6/12 max-sm:w-wk">
                       <FastField                      
                         name="sectorId"
@@ -230,7 +230,7 @@ function UpdateInvestorForm (props) {
                     />   
                  </div>
 
-                 <div class=" h-3/4 w-5/12 max-sm:w-wk "
+                 <div class=" h-3/4 w-w47.5 max-sm:w-wk "
                 >
                    <Spacer/>
                    <div class=" flex justify-between">
@@ -391,7 +391,7 @@ function UpdateInvestorForm (props) {
                 </div>
               </div>
               <Spacer/>
-              <div class="flex justify-end w-wk bottom-2 mr-2 absolute ">
+              <div class="flex justify-end w-wk bottom-2 mr-2 md:absolute ">
                 <Button
                   type="primary"
                   htmlType="submit"

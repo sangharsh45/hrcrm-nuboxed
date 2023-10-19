@@ -248,8 +248,8 @@ getEmployeesbyDepartment (filterOptionKey, filterOptionValue) {
                   <div class=" flex flex-nowrap" >
                   <FastField name="imageId" component={Upload} />
                   <div>
-                  <div class=" flex justify-between" >
-                    <div class=" w-1/3">
+                  <div class=" flex justify-between max-sm:flex-col" >
+                    <div class=" w-1/3 max-sm:w-full">
                       <FastField
                         name="salutation"
                         placeholder="Select"
@@ -263,7 +263,7 @@ getEmployeesbyDepartment (filterOptionKey, filterOptionValue) {
                         isColumn
                         />
                     </div>
-                    <div class=" w-2/4">
+                    <div class=" w-2/4 max-sm:w-full">
                       <Field
                         isRequired
                         name="firstName"
@@ -279,8 +279,8 @@ getEmployeesbyDepartment (filterOptionKey, filterOptionValue) {
                        />                   
                        </div>
                   </div>
-                  <div class=" flex justify-between" >
-                  <div class=" w-2/5">
+                  <div class=" flex justify-between max-sm:flex-col" >
+                  <div class=" w-2/5 max-sm:w-full">
                       {" "}
                       <Field
                       
@@ -296,7 +296,7 @@ getEmployeesbyDepartment (filterOptionKey, filterOptionValue) {
                         inlineLabel
                         />
                     </div>
-                    <div class=" w-3/6">
+                    <div class=" w-3/6 max-sm:w-full">
                       {" "}
                       <Field
                         name="lastName"
@@ -815,7 +815,7 @@ getEmployeesbyDepartment (filterOptionKey, filterOptionValue) {
                 </div>
               </div>
               <Spacer />
-              <div class=" flex justify-end" >
+              <div class="flex justify-end w-wk bottom-2 mr-2 md:absolute ">
                 <Button
                   htmlType="submit"
                   type="primary"

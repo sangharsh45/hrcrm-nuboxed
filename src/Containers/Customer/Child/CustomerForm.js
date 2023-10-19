@@ -143,8 +143,8 @@ function CustomerForm(props) {
           }) => (
             <div class="max-sm:h-[30rem] overflow-y-auto">
             <Form className="form-background">
-              <div class="flex justify-between h-[70vh] overflow-x-hidden pr-2 max-sm:flex-col">
-                <div class=" h-full w-1/2 max-sm:w-wk"   >
+              <div class="flex justify-around  pr-2 max-sm:flex-col">
+                <div class=" h-full w-w47.5 max-sm:w-wk"   >
                   <div>
                     {clearbit && clearbit.hasOwnProperty("logo") && (
                       <ProgressiveImage
@@ -292,7 +292,7 @@ function CustomerForm(props) {
                     component={TextareaComponent}
                   />
                 </div>
-                <div class=" h-3/4 w-5/12 max-sm:w-wk "  
+                <div class=" h-3/4 w-w47.5 max-sm:w-wk "  
                 >
                  <Spacer/>
                  <div class=" flex justify-between">
@@ -444,7 +444,7 @@ function CustomerForm(props) {
                       />
                     )}
                   />
-                   <div class=" flex justify-between">
+                   {/* <div class=" flex justify-between">
                    <div class=" w-1/2 max-sm:w-wk">
                      <Field
                        name="country"
@@ -466,12 +466,12 @@ function CustomerForm(props) {
                        width="100%"
                      />
                    </div>
-                 </div>
+                 </div> */}
                
                 </div>
               </div>
               <Spacer />
-              <div class="flex justify-end w-wk bottom-2 mr-2 absolute ">
+              <div class="flex justify-end w-wk bottom-2 mr-2 md:absolute ">
                 <Button
                   type="primary"
                   htmlType="submit"

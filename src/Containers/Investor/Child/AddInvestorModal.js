@@ -5,6 +5,8 @@ import { BundleLoader } from "../../../Components/Placeholder";
 const InvesterForm = lazy(() => import("./InvesterForm"));
 
 const AddInvestorModal = (props) => {
+  const isSmallScreen = window.innerWidth <= 600;
+  const drawerWidth = isSmallScreen ? "90%" : "55%";
   return (
     <>
       <StyledDrawer
@@ -12,7 +14,7 @@ const AddInvestorModal = (props) => {
           id="app.investor"
           defaultMessage="Investor"
         />}
-        width="60%"
+        width={drawerWidth}
         style={{marginTop:"5rem"}}
         visible={props.addInvestorModal}
         closable

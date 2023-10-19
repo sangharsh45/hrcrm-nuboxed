@@ -10,13 +10,15 @@ const TabPane = StyledTabs.TabPane;
 
 class AddPitchModal extends Component {
   render() {
+    const isSmallScreen = window.innerWidth <= 600;
+    const drawerWidth = isSmallScreen ? "90%" : "55%";
     const { addLeadsModal, handleLeadsModal, ...formProps } = this.props;
     return (
       <>
         <StyledDrawer
         title="Pitch"
 
-          width="55%"
+        width={drawerWidth}
           visible={this.props.addPitchModal}
           destroyOnClose
           maskClosable={false}

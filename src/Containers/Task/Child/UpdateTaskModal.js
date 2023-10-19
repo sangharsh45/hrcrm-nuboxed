@@ -6,6 +6,8 @@ import UpdateTaskForm from "./UpdateTaskForm";
 
 const UpdateTaskModal = (props) => {
     const { updateTaskModal, handleUpdateTaskModal, ...formProps } = props;
+    const isSmallScreen = window.innerWidth <= 600;
+    const drawerWidth = isSmallScreen ? "90%" : "55%";
     return (
       <>
         <StyledDrawer
@@ -14,7 +16,7 @@ const UpdateTaskModal = (props) => {
             id="app.updatetask"
             defaultMessage="Update Task"
           />}
-          width="55vw"
+          width={drawerWidth}
           visible={updateTaskModal}
           maskClosable={false}
           destroyOnClose

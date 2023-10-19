@@ -488,7 +488,7 @@ const [priority,setpriority]=useState(props.selectedTask
                       </div>
                     )}
                   </div>
-                  <div class=" flex justify-between max-sm:flex-col">
+                  <div class=" flex justify-between ">
                     <div class=" w-1/2 max-sm:w-wk ">
                       <Spacer />
                       <StyledLabel>Type</StyledLabel>

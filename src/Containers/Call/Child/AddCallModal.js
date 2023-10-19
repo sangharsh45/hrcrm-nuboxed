@@ -5,6 +5,8 @@ import CallForm from "./CallForm";
 import { FormattedMessage } from "react-intl";
 const AddCallModal = (props) => {
   const { addCallModal, handleCallModal, ...formProps } = props;
+  const isSmallScreen = window.innerWidth <= 600;
+  const drawerWidth = isSmallScreen ? "90%" : "55%";
   return (
     <>
       <StyledDrawer
@@ -12,7 +14,7 @@ const AddCallModal = (props) => {
           id="app.schedulecall"
           defaultMessage="Schedule Call"
         />}
-        width="55vw"
+        width={drawerWidth}
         visible={addCallModal}
         maskClosable={false}
         destroyOnClose

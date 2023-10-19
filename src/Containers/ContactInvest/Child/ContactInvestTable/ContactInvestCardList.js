@@ -138,7 +138,7 @@ function ContactInvestCardList(props) {
             item.address[0].postalCode} `;
                     return (
                         <div>
-                            <div className="flex justify-between mt-4 max-sm:flex-col"
+                            <div className="flex justify-between mt-1 max-sm:flex-col"
                                 style={{
                                     borderBottom: "3px dotted #515050"
                                 }}>
@@ -339,6 +339,7 @@ function ContactInvestCardList(props) {
       
             </div>
                       </div>  
+                      <div class="w-[2%]"></div>
                       </div>  
                             </div>
                         </div>

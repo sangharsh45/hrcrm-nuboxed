@@ -180,13 +180,13 @@ class UpdateContactInvestForm extends Component {
           }) => (
             <div class="overflow-y-auto h-[34rem] overflow-x-hidden max-sm:h-[30rem]">
             <Form className="form-background">
-              <div class=" flex justify-between max-sm:flex-col  ">
-                <div class=" h-full w-1/2 max-sm:w-wk" >
+              <div class=" flex justify-around max-sm:flex-col  ">
+                <div class=" h-full w-w47.5 max-sm:w-wk" >
                  <div class=" flex  flex-nowrap">
                     <FastField name="imageId" component={Upload} />
                     <div>
-                    <div class=" flex justify-between">
-                        <div class=" w-2/5">
+                    <div class=" flex justify-between max-sm:flex-col">
+                        <div class=" w-2/5 max-sm:w-wk">
                           <FastField
                             name="salutation"
                             type="text"
@@ -204,7 +204,7 @@ class UpdateContactInvestForm extends Component {
                             isColumn
                           />
                         </div>
-                        <div class=" w-1/2">
+                        <div class=" w-1/2 max-sm:w-wk">
                           <FastField
                             isRequired
                             name="firstName"
@@ -223,8 +223,8 @@ class UpdateContactInvestForm extends Component {
                           />
                         </div>
                       </div>
-                      <div class=" flex justify-between">
-                        <div class=" w-2/5">
+                      <div class=" flex justify-between max-sm:flex-col">
+                        <div class=" w-2/5 max-sm:w-wk">
                           <FastField
                             name="middleName"
                             //label="Middle Name"
@@ -241,7 +241,7 @@ class UpdateContactInvestForm extends Component {
                             inlineLabel
                           />
                         </div>
-                        <div class=" w-1/2">
+                        <div class=" w-1/2 max-sm:w-wk">
                           <FastField
                             name="lastName"
                             //label="Last Name"
@@ -283,7 +283,7 @@ class UpdateContactInvestForm extends Component {
                     </div>
                   </div>
                   <div class=" flex justify-between">
-                    <div class=" w-2/6">
+                    <div class=" w-2/6 max-sm:w-2/5">
                       <FastField
                         name="countryDialCode"
                         isColumnWithoutNoCreate
@@ -304,7 +304,7 @@ class UpdateContactInvestForm extends Component {
                         inlineLabel
                       />
                     </div>
-                    <div class=" w-2/5">
+                    <div class=" w-2/5 max-sm:w-2/4">
                       <FastField
                         type="text"
                         name="mobileNumber"
@@ -323,7 +323,7 @@ class UpdateContactInvestForm extends Component {
                     </div>
                   </div>
                   <div class=" flex justify-between">
-                    <div class=" w-2/4">
+                    <div class=" w-2/4 max-sm:w-2/5">
                       <FastField
                         name="countryDialCode1"
                         isColumnWithoutNoCreate
@@ -344,7 +344,7 @@ class UpdateContactInvestForm extends Component {
                         inlineLabel
                       />
                     </div>
-                    <div class=" w-2/4">
+                    <div class=" w-2/4 max-sm:w-2/4">
                       <FastField
                         type="text"
                         name="phoneNumber"
@@ -398,7 +398,7 @@ class UpdateContactInvestForm extends Component {
                   
                 </div>
                 
-                <div class=" h-3/4 w-5/12 max-sm:w-wk "> 
+                <div class=" h-3/4 w-w47.5 max-sm:w-wk "> 
                 <div class=" flex  justify-between">
                 <div class=" w-1/2">
                       <Field
@@ -563,7 +563,7 @@ class UpdateContactInvestForm extends Component {
                 </div>
               </div>
               <Spacer />
-              <div class=" flex  justify-end">
+              <div class="flex justify-end w-wk bottom-2 mr-2 md:absolute ">
                 <Button
                   type="primary"
                   htmlType="submit"

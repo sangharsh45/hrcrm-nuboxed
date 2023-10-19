@@ -8,6 +8,8 @@ const TabPane = StyledTabs.TabPane;
 class AddEmployeeModal extends Component {
   render() {
     const { addEmployeeModal, handleEmployeeModal, ...formProps } = this.props;
+    const isSmallScreen = window.innerWidth <= 600;
+    const drawerWidth = isSmallScreen ? "90%" : "55%";
     return (
       <>
         <StyledDrawer
@@ -16,7 +18,7 @@ class AddEmployeeModal extends Component {
             defaultMessage="New Joinee"
           />}
 
-          width="55%"
+          width={drawerWidth}
           visible={addEmployeeModal}
           destroyOnClose
           maskClosable={false}

@@ -115,7 +115,7 @@ const InvestorActionLeft = (props) => {
       </Tooltip> */}
       <div class=" flex items-center justify-between"
       >
-        <div class=" w-72 max-sm:w-48">
+        <div class=" w-72 max-sm:w-40">
           <Input
             placeholder="Search by Name, Sector or Owner"
             width={"100%"}
