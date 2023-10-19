@@ -110,8 +110,8 @@ function UpdateCustomerForm (props) {
           }) => (
             <div class="max-sm:h-[30rem] overflow-y-auto">
             <Form className="form-background">
-              <div class=" flex justify-between h-[27rem] overflow-x-hidden max-sm:flex-col">
-                <div class=" w-2/4 max-sm:w-wk" >
+              <div class=" flex justify-around max-sm:flex-col">
+                <div class=" w-w47.5 max-sm:w-wk" >
                     <Spacer/>
                    <StyledLabel><FormattedMessage id="app.name" defaultMessage="Name" /></StyledLabel>
                   <Field
@@ -214,7 +214,7 @@ function UpdateCustomerForm (props) {
                     />   
                  </div>
 
-                 <div class=" h-3/4 w-5/12 max-sm:w-wk "
+                 <div class=" h-3/4 w-w47.5 max-sm:w-wk "
                 >
                    <Spacer/>
                    <div class=" flex justify-between">
@@ -343,7 +343,7 @@ function UpdateCustomerForm (props) {
                       />
                     )}
                   />
-        <div class=" flex justify-between">
+        {/* <div class=" flex justify-between">
                     <div class=" w-1/2 max-sm:w-wk">
                      <Field
                        // name="address[0].country"
@@ -369,13 +369,13 @@ function UpdateCustomerForm (props) {
                        width="100%"
                      />
                    </div>
-                 </div>
+                 </div> */}
                
                                      
                 </div>
               </div>
               <Spacer/>
-              <div class="flex justify-end w-wk bottom-2 mr-2 absolute ">
+              <div class="flex justify-end w-wk bottom-2 mr-2 md:absolute ">
                 <Button
                   type="primary"
                   htmlType="submit"

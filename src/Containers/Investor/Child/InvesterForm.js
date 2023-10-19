@@ -139,8 +139,8 @@ function InvesterForm(props) {
           }) => (
             <div class="overflow-y-auto h-[34rem] overflow-x-hidden max-sm:h-[30rem]">
             <Form className="form-background">
-            <div class=" flex justify-between max-sm:flex-col">
-                <div class=" h-full w-1/2 max-sm:w-wk"   >
+            <div class=" flex justify-around max-sm:flex-col">
+                <div class=" h-full w-w47.5 max-sm:w-wk"   >
                   <div>
                     {clearbit && clearbit.hasOwnProperty("logo") && (
                       <ProgressiveImage
@@ -287,7 +287,7 @@ function InvesterForm(props) {
                     component={TextareaComponent}
                   />
                 </div>
-                <div class=" h-3/4 w-5/12 max-sm:w-wk "  
+                <div class=" h-3/4 w-w47.5 max-sm:w-wk "  
                 >
                  <Spacer/>
                  <div class=" flex justify-between">
@@ -443,7 +443,7 @@ function InvesterForm(props) {
               </div>
               <Spacer />
              
-              <div class="flex justify-end w-wk bottom-2 mr-2 absolute ">
+              <div class="flex justify-end w-wk bottom-2 mr-2 md:absolute ">
                 <Button
                   type="primary"
                   htmlType="submit"

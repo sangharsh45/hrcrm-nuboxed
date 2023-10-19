@@ -6,12 +6,14 @@ import { BundleLoader } from "../../../../Components/Placeholder";
 const UpdateInvestorForm = lazy(() => import("./UpdateInvestorForm.js"));
 
 const UpdateInvestorModal = (props) => {
+  const isSmallScreen = window.innerWidth <= 600;
+  const drawerWidth = isSmallScreen ? "90%" : "55%";
   const { updateInvestorModal, handleUpdateInvestorModal,RowData, ...formProps } = props;
   return (
     <>
       <StyledDrawer
         title={RowData.name}
-        width="60%"
+        width={drawerWidth}
         visible={updateInvestorModal}
         maskClosable={false}
         closable

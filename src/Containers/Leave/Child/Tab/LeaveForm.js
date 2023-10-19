@@ -326,7 +326,7 @@ console.log(this.state.firstCase)
                 </div>
               </div>
               <Spacer />
-              <div class="flex justify-end w-wk bottom-2 mr-2 absolute ">
+              <div class="flex justify-end w-wk bottom-2 mr-2 md:absolute ">
                 &nbsp;
                 <Button htmlType="submit" type="primary"
                   Loading={addingLeaves}>

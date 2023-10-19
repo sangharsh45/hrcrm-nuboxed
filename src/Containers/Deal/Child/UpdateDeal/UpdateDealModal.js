@@ -6,11 +6,13 @@ import { StyledDrawer } from "../../../../Components/UI/Antd";
 const UpdateDealForm = lazy(() => import("./UpdateDealForm"));
 
 const UpdateDealModal = (props) => {
+  const isSmallScreen = window.innerWidth <= 600;
+    const drawerWidth = isSmallScreen ? "90%" : "55%";
   return (
     <>
       <StyledDrawer
         title={props.currentItem.opportunityName}
-        width="60%"
+        width={drawerWidth}
         style={{marginTop:"5rem"}}
         visible={props.openupdateDealModal}
         maskClosable={false}

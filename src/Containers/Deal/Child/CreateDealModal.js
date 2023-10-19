@@ -6,7 +6,8 @@ const DealForm = lazy(() => import("./DealForm"));
 
 const CreateDealModal = (props) => {
   const {opencreateDealModal,handleDealModal, ...formProps } = props;
-
+  const isSmallScreen = window.innerWidth <= 600;
+  const drawerWidth = isSmallScreen ? "90%" : "55%";
   return (
     <>
       <StyledDrawer
@@ -14,7 +15,7 @@ const CreateDealModal = (props) => {
           id="app.deal"
           defaultMessage="Deal"
         />}
-        width="60%"
+        width={drawerWidth}
         style={{marginTop:"5rem"}}
         visible={opencreateDealModal}
         maskClosable={false}

@@ -7,6 +7,8 @@ import LocationForm from "./LocationForm";
 
 const AddMileageModal = (props) => {
   const { addlocationModal, handleLocationModal, ...formProps } = props;
+  const isSmallScreen = window.innerWidth <= 600;
+    const drawerWidth = isSmallScreen ? "90%" : "55%";
   return (
     <>
       <StyledDrawer
@@ -14,7 +16,7 @@ const AddMileageModal = (props) => {
           id="app.addLocations"
           defaultMessage="Add Locations"
         />}
-        width="70%"
+        width={drawerWidth}
         visible={addlocationModal}
         destroyOnClose
         closable

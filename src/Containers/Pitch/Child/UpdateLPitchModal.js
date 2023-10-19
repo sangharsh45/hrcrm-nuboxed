@@ -9,14 +9,15 @@ import { StyledDrawer } from "../../../Components/UI/Antd";
 const UpdateLPitchModal = (props) => {
   const { updateCustomerModal, handleUpdateCustomerModal, ...formProps } = props;
 //   console.log("dn",props.setEditingLeads.name)
-
+const isSmallScreen = window.innerWidth <= 600;
+    const drawerWidth = isSmallScreen ? "90%" : "55%";
 console.log(props.item)
 
   return (
     <>
       <StyledDrawer
         title="Update Pitch"
-        width="60%"
+        width={drawerWidth}
         visible={props.updatePitchModal}
         maskClosable={false}
         destroyOnClose

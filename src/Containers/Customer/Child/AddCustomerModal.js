@@ -5,6 +5,8 @@ import { BundleLoader } from "../../../Components/Placeholder";
 const CustomerForm = lazy(() => import("./CustomerForm"));
 
 const AddCustomerModal = (props) => {
+  const isSmallScreen = window.innerWidth <= 600;
+    const drawerWidth = isSmallScreen ? "90%" : "55%";
   return (
     <>
       <StyledDrawer
@@ -12,7 +14,7 @@ const AddCustomerModal = (props) => {
           id="app.customer"
           defaultMessage="Customer"
         />}
-        width="60%"
+        width={drawerWidth}
         style={{marginTop:"5rem"}}
         visible={props.addCustomerModal}
         closable

@@ -5,6 +5,8 @@ import { BundleLoader } from "../../../../Components/Placeholder";
 const UpdateContactForm = lazy(() => import("./UpdateContactForm"));
 
 const UpdateContactModal = props => {
+  const isSmallScreen = window.innerWidth <= 600;
+  const drawerWidth = isSmallScreen ? "90%" : "55%";
   const { updateContactModal, handleUpdateContactModal, ...formProps } = props;
   return (
     <>
@@ -14,7 +16,7 @@ const UpdateContactModal = props => {
         //   defaultMessage="Contact"
         // />}
         title={props.contactData.fullName}
-        width="55%"
+        width={drawerWidth}
         visible={updateContactModal}
         closable
         destroyOnClose

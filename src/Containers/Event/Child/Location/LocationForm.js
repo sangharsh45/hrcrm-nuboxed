@@ -363,7 +363,7 @@ class LocationForm extends Component {
                   />
                 </div>
               </div>
-              <div class="flex justify-end w-wk bottom-2 mr-2 absolute ">
+              <div class="flex justify-end w-wk bottom-2 mr-2 md:absolute ">
                 <Button
                   type="primary"
                   htmlType="submit"

@@ -46,7 +46,7 @@ function CustomerStatusToggle(props) {
         <>
             <div>
                 <Popconfirm
-                    title="Confirm status change?"
+                    title="Qualifying the Lead will move to Customer Contact section!"
                     onConfirm={() => handleToggleCollection()}
                     onCancel={handleCancel}
                     okText="Ok"

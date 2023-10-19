@@ -673,16 +673,16 @@ function CallTable(props) {
                 borderBottom: "3px dotted #515050"
             }}>
               <div class="flex">
-              <div class="flex  flex-col md:w-28 max-sm:flex-row justify-between w-full">
+              <div class="flex  flex-col md:w-28 max-sm:flex-row max-sm:justify-between w-full">
               <div class="max-sm:hidden" >Type</div>
             <div> {item.callType}</div>
             </div>
-            <div class="flex  flex-col md:w-40 max-sm:flex-row justify-between w-full">
+            <div class="flex  flex-col md:w-40 max-sm:flex-row max-sm:justify-between w-full">
               <p class="max-sm:hidden" >Subject</p><p> {item.callPurpose}</p>
               </div>
               </div>
               <div class="flex">
-              <div class="flex  flex-col md:w-48 max-sm:flex-row justify-between w-full">
+              <div class="flex  flex-col md:w-48 max-sm:flex-row max-sm:justify-between w-full">
               <p class="max-sm:hidden" >Contact</p>
               <MultiAvatar2
                     primaryTitle={item.contactName}
@@ -694,10 +694,10 @@ function CallTable(props) {
               
               {/* <p> {item.contactName}</p> */}
               </div>
-              <div class="flex  flex-col md:w-48 max-sm:flex-row justify-between w-full">
+              <div class="flex  flex-col md:w-48 max-sm:flex-row max-sm:justify-between w-full">
               <p class="max-sm:hidden" >Date</p><p> {moment(item.startDate).format("llll")}</p>
               </div>
-              <div class="flex  flex-col md:w-16 max-sm:flex-row justify-between w-full">
+              <div class="flex  flex-col md:w-16 max-sm:flex-row max-sm:justify-between w-full">
               <p class="max-sm:hidden" >Included</p>
               <div>
                 {item.included &&
@@ -732,7 +732,7 @@ function CallTable(props) {
              
               </div> */}
               <div class="flex items-center">
-             <div class="flex  flex-col md:w-24 max-sm:flex-row justify-between w-full">
+             <div class="flex  flex-col md:w-24 max-sm:flex-row max-sm:justify-between w-full">
               <p class="max-sm:hidden" >Assigned To</p>
               <MultiAvatar2
                     primaryTitle={item.assignedTo}
@@ -743,13 +743,13 @@ function CallTable(props) {
                   />
               {/* <p> {item.assignedTo || "Unassigned"}</p> */}
               </div>
-              <div class="flex  flex-col md:w-36 max-sm:flex-row justify-between w-full">
+              <div class="flex  flex-col md:w-36 max-sm:flex-row max-sm:justify-between w-full">
               <p class="max-sm:hidden" >Completed</p><p> {item.completionInd ? "Yes" : "No"}</p></div>
               {/* <div class="flex  flex-col w-16">
               <p>Rating</p><p> {item.rating > 0 ? item.rating : "Not Rated"}</p>
               </div> */}
               
-              <div class="flex  flex-col md:w-16 max-sm:flex-row justify-between w-full mt-1">
+              <div class="flex  flex-col md:w-16 max-sm:flex-row max-sm:justify-between w-full mt-1 mb-1">
               <p class="max-sm:hidden" >Owner</p>
               <MultiAvatar2
                     primaryTitle={item.woner}

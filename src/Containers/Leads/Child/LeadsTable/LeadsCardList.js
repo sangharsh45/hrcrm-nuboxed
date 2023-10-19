@@ -135,7 +135,7 @@ const LeadsCardList = (props) => {
                                         </div>
                                 </div>
 
-                                <div class="flex flex-row md:w-[11%] max-sm:flex-row w-full justify-between">
+                                <div class="flex flex-row md:w-[11%] max-sm:flex-row w-full max-sm:justify-between">
 
 <div>
 <ButtonGroup>
@@ -202,13 +202,13 @@ onClick={()=>{props.handleCETmodal(true)}}
      </div>  
 </div>
 <div class="flex"> 
-                                <div className=" flex font-medium flex-col  md:w-32 max-sm:flex-row w-full justify-between ">
+                                <div className=" flex font-medium flex-col  md:w-32 max-sm:flex-row w-full max-sm:justify-between ">
                            <h4 class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden"> Phone # </h4>
                            <h4 class=" text-[0.75rem] text-cardBody font-poppins">   
                            {`${item.countryDialCode} ${item.phoneNumber}`}
                            </h4>
                        </div>
-                       <div className=" flex font-medium flex-col md:w-32 max-sm:flex-row w-full justify-between ">
+                       <div className=" flex font-medium flex-col md:w-32 max-sm:flex-row w-full max-sm:justify-between ">
                                   
 
                                   <h4 class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden">Country</h4>
@@ -230,7 +230,7 @@ onClick={()=>{props.handleCETmodal(true)}}
                      
                        </div>
                        <div class="flex"> 
-                       <div className=" flex font-medium flex-col  md:w-40 max-sm:flex-row w-full justify-between ">
+                       <div className=" flex font-medium flex-col  md:w-40 max-sm:flex-row w-full max-sm:justify-between ">
                            <h4 class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden"> Company </h4>
                            <h4 class=" text-[0.75rem] text-cardBody font-poppins">   
                            <Link
@@ -258,7 +258,7 @@ onClick={()=>{props.handleCETmodal(true)}}
             ) : null}
                         </div>
                        
-                                <div className=" flex font-medium flex-col  md:w-24 max-sm:flex-row w-full justify-between ">
+                                <div className=" flex font-medium flex-col  md:w-24 max-sm:flex-row w-full max-sm:justify-between ">
                            
                                     <h4 class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden"> Sector </h4>
                                     <h4 class=" text-[0.75rem] text-cardBody font-poppins">   
@@ -267,7 +267,7 @@ onClick={()=>{props.handleCETmodal(true)}}
                                 </div>
                                 </div>
                                 <div class="flex mb-1"> 
-                                <div className=" flex font-medium flex-col md:w-32 max-sm:flex-row w-full justify-between ">
+                                <div className=" flex font-medium flex-col md:w-32 max-sm:flex-row w-full max-sm:justify-between ">
                                     <h4 class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden">Assigned to</h4>
 
                                     <div class=" text-[0.75rem] text-cardBody font-poppins">
@@ -286,7 +286,7 @@ onClick={()=>{props.handleCETmodal(true)}}
              
                                     </div>
                                 </div>
-                                <div className=" flex font-medium flex-col md:w-20  max-sm:flex-row w-full justify-between">
+                                <div className=" flex font-medium flex-col md:w-20  max-sm:flex-row w-full max-sm:justify-between">
                        
                        <h4 class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden">Owner</h4>
 
@@ -300,7 +300,7 @@ onClick={()=>{props.handleCETmodal(true)}}
               />
             </span>
                    </div>
-                   <div className=" flex font-medium flex-col md:w-32 max-sm:flex-row w-full justify-between ">
+                   <div className=" flex font-medium flex-col md:w-32 max-sm:flex-row w-full max-sm:justify-between ">
                                     <h4 class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden">Qualified</h4>
 
                                     <div class=" text-[0.75rem] text-cardBody font-poppins">
@@ -378,6 +378,7 @@ onClick={()=>{props.handleCETmodal(true)}}
             </Tooltip> </div>
            
                       </div>  
+                      <div class="w-[2%]"></div> 
                       </div>  
                       </div>
                             </div>
