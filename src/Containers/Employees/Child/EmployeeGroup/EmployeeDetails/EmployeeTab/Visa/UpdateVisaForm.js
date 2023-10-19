@@ -241,7 +241,7 @@ class UpdateVisaForm extends Component {
                
                 </div>
 
-                {/* <div
+             <div
                   style={{
                     width: "45%",
                     }}
@@ -259,7 +259,7 @@ class UpdateVisaForm extends Component {
                   />
                
                   <Spacer style={{ marginBottom: "0.9375em" }} />
-                </div> */}
+                </div>
               </div>
               <Spacer />
               <FlexContainer justifyContent="flex-end">

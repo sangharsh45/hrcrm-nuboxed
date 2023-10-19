@@ -99,7 +99,7 @@ class VisaTable extends Component {
       render: (name, item, i) => {
         return (
           <>
-            {item.documentId ? (
+            {/* {item.documentId ? ( */}
               <a
                 href={`${base_url}/document/${item.documentId}`}
                 target="_blank"
@@ -110,7 +110,7 @@ class VisaTable extends Component {
                   style={{ cursor: "pointer",fontSize: "0.8rem" }}
                 />
               </a>
-            ) : null}
+            {/* ) : null} */}
           </>
         );
       },
