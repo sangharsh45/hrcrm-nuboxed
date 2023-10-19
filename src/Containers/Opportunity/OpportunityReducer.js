@@ -6,6 +6,10 @@ const initialState = {
   addOpportunityModal: false,
   addRecruiterModal:false,
 
+  fetchingWonRecords: false,
+  fetchingWonRecordsError: false,
+  wonOpportunityData:{},
+
   fetchingInitiativeSkills:false,
   fetchingInitiativeSkillsError:false,
   initiativeSkills:[],
@@ -297,6 +301,11 @@ const initialState = {
 
   linkingSkillsRecruitToOpportunity: false,
   linkingSkillsRecruitToOpportunityError: false,
+
+  fetchingWonOpportunity: false,
+  fetchingWonOpportunityError: false,
+  wonOpportunity:[],
+
 
   linkingCandidateRecruitToOpportunity: false,
   linkingCandidateRecruitToOpportunityError: false,
@@ -1015,15 +1024,14 @@ case types.GET_DELETED_OPPORTUNITY_FAILURE:
                         return {
                           ...state,
                           linkingStatusRecruitToOpportunity: false,
-                          candidateRequirement: state.candidateRequirement.map(
-                            (recruit, i) => {
-                              if (recruit.profileId === action.payload.profileId) {
-                                return action.payload;
-                              } else {
-                                return recruit;
-                              }
-                            }
+                          opportunityByUserId: state.opportunityByUserId.filter(
+                            (item) => item.opportunityId !== action.payload
                           ),
+                        //   opportunityByUserId: state.opportunityByUserId.map((opp) =>
+                        //   opp.opportunityId === action.payload.opportunityId
+                        //     ? action.payload
+                        //     : opp
+                        // ),
                         };
                       case types.LINK_RECRUIT_STATUS_TO_OPPORTUNITY_FAILURE:
                         return {
@@ -2047,15 +2055,18 @@ case types.REINSTATE_TOGGLE_FOR_OPPORTUNITY_FAILURE:
                                                   return {
                                                     ...state,
                                                     loststatusRecruitToOpportunity: false,
-                                                    opportunityByUserId: state. opportunityByUserId.map(
-                                                      (recruit, i) => {
-                                                        if (recruit.opportunityId === action.payload.opportunityId) {
-                                                          return action.payload;
-                                                        } else {
-                                                          return recruit;
-                                                        }
-                                                      }
+                                                    opportunityByUserId: state.opportunityByUserId.filter(
+                                                      (item) => item.opportunityId !== action.payload
                                                     ),
+                                                    // opportunityByUserId: state.opportunityByUserId.map(
+                                                    //   (recruit, i) => {
+                                                    //     if (recruit.opportunityId === action.payload.opportunityId) {
+                                                    //       return action.payload;
+                                                    //     } else {
+                                                    //       return recruit;
+                                                    //     }
+                                                    //   }
+                                                    // ),
                                                   };
                                                 case types.RECRUIT_LOST_STATUS_TO_OPPORTUNITY_FAILURE:
                                                   return {
@@ -2338,6 +2349,42 @@ case types.REINSTATE_TOGGLE_FOR_OPPORTUNITY_FAILURE:
                                                 };
                                               case types.UPDATE_REQUIREMENT_STAGE_FAILURE:
                                                 return { ...state };
+
+
+
+                                                case types.GET_WON_OPPORTUNITY_REQUEST:
+                                                  return { ...state, fetchingWonOpportunity: true };
+                                                case types.GET_WON_OPPORTUNITY_SUCCESS:
+                                                  return {
+                                                    ...state,
+                                                    fetchingWonOpportunity: false,
+                                                    // lostOpportunity:action.payload
+
+                                                    wonOpportunity: [
+                                                      ...state.wonOpportunity,
+                                                      ...action.payload],
+                                                  };
+                                                case types.GET_WON_OPPORTUNITY_FAILURE:
+                                                  return {
+                                                    ...state,
+                                                    fetchingWonOpportunity: false,
+                                                    fetchingWonOpportunityError: true,
+                                                  };
+
+                                                  case types.GET_WON_RECORDS_REQUEST:
+                                                    return { ...state, fetchingWonRecords: true };
+                                                  case types.GET_WON_RECORDS_SUCCESS:
+                                                    return {
+                                                      ...state,
+                                                      fetchingWonRecords: false,
+                                                      wonOpportunityData: action.payload,
+                                                    };
+                                                  case types.GET_WON_RECORDS_FAILURE:
+                                                    return {
+                                                      ...state,
+                                                      fetchingWonRecords: false,
+                                                      fetchingWonRecordsError: true,
+                                                    };
                                                                               
 
                                             default:

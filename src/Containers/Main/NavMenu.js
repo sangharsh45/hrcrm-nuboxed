@@ -350,6 +350,11 @@ function NavMenu (props) {
                  <span class="text-white text-ls ml-1">
                
                   {/* {translatedMenuItems[13]} */}Pitch 
+                  &nbsp;&nbsp;&nbsp;
+              <Badge
+                count={props.opportunityRecord.investorLeads}
+                overflowCount={999}
+              ></Badge>
                 </span>
               </Link>
             </Menu.Item>
@@ -360,7 +365,11 @@ function NavMenu (props) {
                 />
                  <span class="text-white text-ls ml-1">
                
-                  {/* {translatedMenuItems[13]} */}Deals 
+                  {/* {translatedMenuItems[13]} */}Deals
+                  <Badge
+                count={props.opportunityRecord.investorOpportunity}
+                overflowCount={999}
+              ></Badge> 
                 </span>
               </Link>
             </Menu.Item>
@@ -371,7 +380,11 @@ function NavMenu (props) {
                 />
                  <span class="text-white text-ls ml-1">
                
-                  {/* {translatedMenuItems[13]} */}Contact Invest 
+                  {/* {translatedMenuItems[13]} */}Contact Invest
+                  <Badge
+                count={props.opportunityRecord.investorcontact}
+                overflowCount={999}
+              ></Badge> 
                 </span>
               </Link>
             </Menu.Item>
@@ -387,7 +400,7 @@ function NavMenu (props) {
                   {/* {translatedMenuItems[9]} */}Investor
                   &nbsp;&nbsp;&nbsp;
                   <Badge
-                    count={props.opportunityRecord.CustomerNo}
+                    count={props.opportunityRecord.investor}
                     overflowCount={999}
                   ></Badge>
                 </span>

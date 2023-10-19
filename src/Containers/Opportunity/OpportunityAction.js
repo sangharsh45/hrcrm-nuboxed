@@ -1146,7 +1146,7 @@ export const LinkStageRecruit = (data, cb) => (dispatch) => {
     });
 };
 
-export const LinkStatusRecruit = (data, cb) => (dispatch) => {
+export const LinkStatusRecruit = (data,opportunityId, cb) => (dispatch) => {
   dispatch({ type: types.LINK_RECRUIT_STATUS_TO_OPPORTUNITY_REQUEST });
 
   axios
@@ -1160,7 +1160,7 @@ export const LinkStatusRecruit = (data, cb) => (dispatch) => {
       console.log(res);
       dispatch({
         type: types.LINK_RECRUIT_STATUS_TO_OPPORTUNITY_SUCCESS,
-        payload: res.data,
+        payload: opportunityId,
       });
       cb && cb("success");
     })
@@ -2410,6 +2410,7 @@ export const StatusRecruit = ( opportunityId,data ) => (dispatch) => {
     })
 
     .then((res) => {
+      message.success("Congratulations on this Win.Wish you success!");
       console.log(res);
       dispatch({
         type: types.RECRUIT_STATUS_TO_OPPORTUNITY_SUCCESS,
@@ -2418,6 +2419,7 @@ export const StatusRecruit = ( opportunityId,data ) => (dispatch) => {
       // cb && cb("success");
     })
     .catch((err) => {
+     
       console.log(err);
       dispatch({
         type: types.RECRUIT_STATUS_TO_OPPORTUNITY_FAILURE,
@@ -2425,7 +2427,7 @@ export const StatusRecruit = ( opportunityId,data ) => (dispatch) => {
       // cb && cb("failure");
     });
 };
-export const lostStatusRecruit = ( opportunityId,data ) => (dispatch) => {
+export const lostStatusRecruit = ( opportunityId,data,userId ) => (dispatch) => {
   dispatch({ type: types.RECRUIT_LOST_STATUS_TO_OPPORTUNITY_REQUEST });
 
   axios
@@ -2436,10 +2438,12 @@ export const lostStatusRecruit = ( opportunityId,data ) => (dispatch) => {
     })
 
     .then((res) => {
+     
+      message.success("Opportunity move to lost category.Better luck next time!");
       console.log(res);
       dispatch({
         type: types.RECRUIT_LOST_STATUS_TO_OPPORTUNITY_SUCCESS,
-        payload: res.data,
+        payload: opportunityId,
       });
       // cb && cb("success");
     })
@@ -2942,5 +2946,58 @@ export const updateOpportunitydragstage = (
         payload: err,
       });
       cb && cb("failure");
+    });
+};
+
+export const getWonOpportunity = (userId,pageNo) => (dispatch) => {
+  dispatch({
+    type: types.GET_WON_OPPORTUNITY_REQUEST,
+  });
+  axios
+    .get(`${base_url}/opportunity/wonInd/${userId}/${pageNo}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.GET_WON_OPPORTUNITY_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.GET_WON_OPPORTUNITY_FAILURE,
+        payload: err,
+      });
+    });
+};
+
+
+export const getWonRecords = (userId) => (dispatch) => {
+  dispatch({
+    type: types.GET_WON_RECORDS_REQUEST,
+  });
+  axios
+    .get(`${base_url}opportunity/wonInd/record/count/${userId}`, {
+    headers: {
+      Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+    },
+  })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.GET_WON_RECORDS_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err.response);
+      dispatch({
+        type: types.GET_WON_RECORDS_FAILURE,
+        payload: err,
+      });
     });
 };

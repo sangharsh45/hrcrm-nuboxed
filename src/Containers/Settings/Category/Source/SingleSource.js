@@ -51,7 +51,7 @@ class SingleSource extends Component {
                       onClick={toggleViewType}
                       style={{fontSize:"1rem"}}
                     />
-                  {/* ) : null} */}
+                  {/* ) : null}  */}
                   &nbsp;
                   <Tooltip title="Delete">
                     <DeleteIcon
