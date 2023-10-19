@@ -17,7 +17,7 @@ import {
 import { CurrencySymbol } from "../../../../../../Components/Common";
 import { getOpportunityListByCustomerId,handleUpdateCustomerOpportunityModal,
   setEditCustomerOpportunity} from "../../../../CustomerAction";
-import { Tooltip,Button,Input } from "antd";
+import { Tooltip,Button,Input,Progress } from "antd";
 const AddCustomerUpdateOpportunityModal =lazy(()=>import("./AddCustomerUpdateOpportunityModal")); 
 
 
@@ -255,6 +255,31 @@ title:(
     defaultMessage="Status"
   />
 ),
+render: (name, item, i) => {
+  var findProbability = item.probability;
+  item.stageList.forEach((element) => {
+    if (element.oppStage === item.oppStage) {
+      findProbability = element.probability;}
+   });
+  return (
+    <>
+    <Tooltip title={item.oppStage}>
+{" "}
+<Progress
+type="circle"
+style={{ cursor: "pointer",color:"red" }}
+percent={findProbability}
+//disable={true}
+width={30}
+ strokeColor={"#005075"}
+
+/>
+  
+</Tooltip>
+
+    </>
+  );
+},
 dataIndex: "status",
 width: "7%",
 },

@@ -12,6 +12,7 @@ import {
 } from "./OpportunityAction";
 
 import OpportunityBoard from "./Child/OpportunityBoard"
+import OpportunityWonCard from "./Child/OpportunityTable/OpportunityWonCard";
 
 const OpportunityCardView = lazy(() => import("./OpportunityCardView"));
 const OpportunityMap = lazy(() => import("./OpportunityMap"));
@@ -69,12 +70,17 @@ class Opportunity extends Component {
                     // <OpportunitylostTable/>
                    <OpportunityLostCard/>
                     :
+
                     this.props.viewType === "Map" ?
                     <OpportunityMap/> :
              this.props.viewType === "card" ?
              <OpportunityCardView/> :
              this.props.viewType === "stage" ?
              <OpportunityBoard/>:
+             this.props.viewType === "won" ?
+             // <OpportunitylostTable/>
+            <OpportunityWonCard/>
+             :
             null}
         </Suspense>
       </React.Fragment>

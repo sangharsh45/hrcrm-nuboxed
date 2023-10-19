@@ -7,6 +7,7 @@ import { bindActionCreators } from "redux";
 import { withRouter } from "react-router-dom";
 import LightbulbIcon from "@mui/icons-material/Lightbulb";
 import DeleteIcon from "@mui/icons-material/Delete";
+import { CheckCircleTwoTone } from "@ant-design/icons";
 import LockOpenIcon from "@mui/icons-material/LockOpen";
 import {
   inputOpportunityDataSearch,
@@ -14,6 +15,7 @@ import {
   getDeleteRecords,
   getcloseRecords,
   getlostRecords,
+  getWonRecords
 } from "../OpportunityAction";
 import { StopTwoTone, TableOutlined } from "@ant-design/icons";
 import { Input } from "antd";
@@ -33,7 +35,10 @@ const OpportunityActionLeft = (props) => {
       props.getcloseRecords(props.userId);
     } else if (props.viewType === "lost") {
       props.getlostRecords(props.userId);
+    } else if (props.viewType === "won") {
+      props.getWonRecords(props.userId);
     }
+    
   }, [props.viewType, props.userId]);
 
   const {
@@ -168,7 +173,28 @@ const OpportunityActionLeft = (props) => {
         </Badge>
       </Tooltip>
 
-    
+      <Tooltip title={"Won"}>
+      <Badge
+          size="small"
+          count={
+            (viewType === "won" &&
+            lostOpportunityData.OpportunityDetailsbyWonInd) ||
+            0
+          }
+          overflowCount={999}
+        >
+          <span
+            class=" mr-2 text-sm cursor-pointer"
+            onClick={() => props.setOpportunityViewType("won")}
+            style={{
+              color: props.viewType === "won" && "#1890ff",
+            }}
+          >
+            {" "}
+            <CheckCircleTwoTone type="check-circle" theme="twoTone" twoToneColor="#24D8A7" />
+          </span>
+          </Badge>
+      </Tooltip>
       {/* <Tooltip
         title={
           <FormattedMessage
@@ -198,6 +224,7 @@ const mapStateToProps = ({ account, auth, opportunity }) => ({
   recorddeleteOpportunityData: opportunity.recorddeleteOpportunityData,
   closeOpportunityData: opportunity.closeOpportunityData,
   lostOpportunityData: opportunity.lostOpportunityData,
+  wonOpportunityData: opportunity.wonOpportunityData,
 });
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
@@ -206,6 +233,7 @@ const mapDispatchToProps = (dispatch) =>
       getDeleteRecords,
       getcloseRecords,
       getlostRecords,
+      getWonRecords,
       getRecords,
     },
     dispatch

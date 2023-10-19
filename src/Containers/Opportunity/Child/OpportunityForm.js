@@ -121,12 +121,12 @@ function OpportunityForm(props) {
           }
         })
         .sort((a, b) => {
-          const libraryNameA = a.name && a.name.toLowerCase();
-          const libraryNameB = b.name && b.name.toLowerCase();
-          if (libraryNameA < libraryNameB) {
+          // const libraryNameA = a.name && a.name.toLowerCase();
+          // const libraryNameB = b.name && b.name.toLowerCase();
+          if (a.probability-b.probability) {
             return -1;
           }
-          if (libraryNameA > libraryNameB) {
+          if (a.probability-b.probability) {
             return 1;
           }
 
@@ -135,7 +135,7 @@ function OpportunityForm(props) {
         })
 
         .map((option) => ({
-          label: option.stageName || "",
+          label: `${option.stageName}  ${option.probability}`,
           value: option.opportunityStagesId,
         }));
 
@@ -606,25 +606,8 @@ function OpportunityForm(props) {
                   />
                 </StyledLabel>
             </div>
-                <div class=" w-2/5 max-sm:w-wk">
-                          <FastField
-                            name="source"
-                            type="text"
-                            label={
-                              <FormattedMessage
-                                id="app.source"
-                                defaultMessage="Source"
-                              />
-                            }
-                            options={["Na", "Na2", "None"]}
-                            component={SelectComponent}
-                            inlineLabel
-                            className="field"
-                            isColumn
-                          />
-                        </div>
-                        </div>
-                <StyledLabel>
+            <div class=" w-2/5 max-sm:w-wk">
+            <StyledLabel>
                   <Field
                     name="contactId"
                     // selectType="contactListFilter"
@@ -654,7 +637,27 @@ function OpportunityForm(props) {
                     inlineLabel
                   />
                 </StyledLabel>
-                <StyledLabel>
+                </div>
+                {/* <div class=" w-2/5 max-sm:w-wk">
+                          <FastField
+                            name="source"
+                            type="text"
+                            label={
+                              <FormattedMessage
+                                id="app.source"
+                                defaultMessage="Source"
+                              />
+                            }
+                            options={["Na", "Na2", "None"]}
+                            component={SelectComponent}
+                            inlineLabel
+                            className="field"
+                            isColumn
+                          />
+                        </div> */}
+                        </div>
+              
+                {/* <StyledLabel>
                   <Field
                     name="oppInnitiative"
                     //selectType="initiativeName"
@@ -682,7 +685,7 @@ function OpportunityForm(props) {
                     isColumn
                     inlineLabel
                   />
-                </StyledLabel>
+                </StyledLabel> */}
                 <Spacer />
 
                 <div class="flex justify-between max-sm:flex-col">

@@ -11,7 +11,7 @@ import BorderColorIcon from '@mui/icons-material/BorderColor';
 import SearchIcon from '@mui/icons-material/Search';
 import LockOpenIcon from '@mui/icons-material/LockOpen';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { Tooltip, Input, Button, Select, Menu, Dropdown, Progress } from "antd";
+import { Tooltip, Input, Button, Select, Menu, Dropdown, Progress ,Popconfirm} from "antd";
 import { FlexContainer, MainWrapper, ResponsiveCard } from "../../../../Components/UI/Layout";
 import { CurrencySymbol,Link } from "../../../../Components/Common";
 import { CheckCircleTwoTone, StopTwoTone } from "@ant-design/icons";
@@ -47,7 +47,7 @@ import APIFailed from "../../../../Helpers/ErrorBoundary/APIFailed";
 const Option =Select;
 
 function OpportunityCardList(props) {
-
+  const { item } = props;
   const [page, setPage] = useState(0);
   useEffect(() => {
     if(props.role==="USER"&&user.department==="Recruiter"){
@@ -93,10 +93,23 @@ function OpportunityCardList(props) {
   }
 
  
+  const handleConfirm = (opportunityId) => {
+    // Call the function to change the status to "Lost" here
+    props.lostStatusRecruit(opportunityId, {
+      lostInd: true
+    });
+  };
+ 
+
+  const handleWon = (opportunityId) => {
+    // Call the function to change the status to "Lost" here
+    props.StatusRecruit(opportunityId, {
+      wonInd:true
+    });
+  };
 
 
 
-  
 
   const {
     user,
@@ -110,7 +123,7 @@ function OpportunityCardList(props) {
   if (fetchingOpportunity) {
     return <BundleLoader />;
   }
-
+console.log("currentOpportunityId",currentOpportunityId)
   return (
     <>
     
@@ -303,6 +316,12 @@ imgHeight={"1.8em"}
 </>
 ) : (
 <>
+<Popconfirm
+  title="Change status to Won?"
+  onConfirm={() => handleWon(item.opportunityId)}
+  okText="Yes"
+  cancelText="No"
+>
   <Tooltip 
     title={<FormattedMessage
       id="app.Own"
@@ -318,47 +337,34 @@ imgHeight={"1.8em"}
       style={{ fontSize:"1rem" 
      
      }}
-      onClick={() =>                                        
-        props.StatusRecruit(
-          item.opportunityId,
-        
-          {
-           wonInd:true
-          },
-
-         
-        )
-        
-      }
+   
     />
   </Tooltip>
-
+  </Popconfirm>
   &nbsp; &nbsp;
-  <Tooltip 
-    title={<FormattedMessage
-      id="app.drop"
-      defaultMessage="Lost"
-    />}
-
-  >
-    <StopTwoTone
-      type="stop"
-      theme="twoTone"
-      twoToneColor="red"
-      size={140}
-      style={{fontSize:"1rem" 
-      
-     }}
-     onClick={() => 
-    props.lostStatusRecruit(
-      item.opportunityId,
-          {
-           lostInd:true
-          },
-        )
-      }
-    />
-  </Tooltip>
+  <Popconfirm
+  title="Change status to Lost?"
+  onConfirm={() => handleConfirm(item.opportunityId)}
+  okText="Yes"
+  cancelText="No"
+>
+ <Tooltip
+        title={
+          <FormattedMessage id="app.drop" defaultMessage="Lost" />
+        }
+      >
+ 
+  <StopTwoTone
+          type="stop"
+          theme="twoTone"
+          twoToneColor="red"
+          size={140}
+          style={{
+            fontSize: "1rem"
+          }}
+        />
+        </Tooltip>
+    </Popconfirm>
 </>
 )}
 </div>

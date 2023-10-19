@@ -723,7 +723,7 @@ class SearchSelect extends Component {
       // const customOption = ({ label, value }) => <h3>{`${label}-----${value}`}</h3>
     }
     if (selectType === "currencyName") {
-      debugger;
+      // debugger;
       options = currencies
 
         .map((item, i) => ({

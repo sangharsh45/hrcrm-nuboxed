@@ -384,8 +384,8 @@ handleStagePublishClick = (investorOppStagesId, publishInd) => {
                     <FlexContainer justifyContent="flex-end">
                       <Button
                         style={{
-                          border: "0.06em solid #1890ff",
-                          color: "#1890ff",
+                          border: "0.06em solid white",
+                          color: "black",
                         }}
                         htmlType="submit"
                         onClick={this.handleEditProcessName}
@@ -394,8 +394,8 @@ handleStagePublishClick = (investorOppStagesId, publishInd) => {
                       </Button>
                       <Button
                         style={{
-                          border: "0.06em solid #1890ff",
-                          color: "#1890ff",
+                          border: "0.06em solid white",
+                          color: "black",
                         }}
                         onClick={this.handleCancel}
                       >
