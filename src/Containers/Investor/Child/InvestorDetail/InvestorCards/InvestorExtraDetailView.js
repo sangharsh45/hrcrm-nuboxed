@@ -60,7 +60,7 @@ const InvestorItemRow = ({ label, value }) => {
   return (
     <div  class=" flex items-center flex-nowrap m-2"
     >
-      <SubTitle style={{ color: "#444", fontWeight: 600 }}>{label}</SubTitle>
+      <SubTitle style={{ color: "#1c1b1b", fontWeight: 600 }}>{label}</SubTitle>
       <SubTitle>{value}</SubTitle>
     </div>
   );
