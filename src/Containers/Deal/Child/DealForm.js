@@ -21,9 +21,9 @@ import {
   getRecruiterName,
   getAllSalesList,
   getInitiative,
-  getWorkflow,
   getStages,
 } from "../../Opportunity/OpportunityAction";
+import {getSources} from "../../Settings/Category/Source/SourceAction"
 import PlayCircleFilledIcon from "@mui/icons-material/PlayCircleFilled";
 import RotateRightIcon from "@mui/icons-material/RotateRight";
 import StopCircleIcon from "@mui/icons-material/StopCircle";
@@ -34,10 +34,11 @@ import dayjs from "dayjs";
 import { Fragment } from "react";
 import { Listbox } from "@headlessui/react";
 import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/20/solid";
-import {createDeals,  getAllDealStages} from "../DealAction";
-import {
-  getProcessForDeals,
-} from "../../Settings/SettingsAction";
+import {createDeals,  getAllDealStages,
+  getDealLinkedWorkflow,
+  getDealLinkedStages
+} from "../DealAction";
+
 
 /**
  * yup validation scheme for creating a opportunity
@@ -54,12 +55,13 @@ function DealForm(props) {
   useEffect(() => {
     props.getRecruiterName();
     props.getAllSalesList();
+    props.getSources(props.orgId);
     props.getContactData(props.userId);
     props.getCustomerData(props.userId);
     props.getInitiative(props.userId);
     // props.getWorkflow(props.orgId);
-    // props.getStages(props.orgId);
-    props.getProcessForDeals(props.orgId);
+     props.getDealLinkedStages(props.orgId);
+    props.getDealLinkedWorkflow(props.orgId);
     props.getAllDealStages(props.orgId);
   }, []);
 
@@ -115,8 +117,8 @@ function DealForm(props) {
 
   function getStagesOptions(filterOptionKey, filterOptionValue) {
     const StagesOptions =
-      props.dealStages.length &&
-      props.dealStages
+      props.dealLinkStages.length &&
+      props.dealLinkStages
         .filter((option) => {
           if (
             option.investorOppWorkflowId === filterOptionValue &&
@@ -144,7 +146,7 @@ function DealForm(props) {
     return StagesOptions;
   }
 
-  const WorkflowOptions = props.dealsProcess.map((item) => {
+  const WorkflowOptions = props.dealLinkWorkflow.map((item) => {
     return {
       label: `${item.workflowName || ""}`,
       value: item.investorOppWorkflowId,
@@ -198,6 +200,13 @@ function DealForm(props) {
     return {
       label: `${item.fullName || ""}`,
       value: item.employeeId,
+    };
+  });
+
+  const SourceOptions = props.sources.map((item) => {
+    return {
+      label: `${item.name || ""}`,
+      value: item.sourceId,
     };
   });
 
@@ -591,7 +600,7 @@ function DealForm(props) {
                     isColumnWithoutNoCreate
                     label={
                       <FormattedMessage
-                        id="app.investor"
+                        id="app.Investor"
                         defaultMessage="Investor"
                       />
                     }
@@ -620,8 +629,12 @@ function DealForm(props) {
                             }
                             isColumnWithoutNoCreate
                             selectType="sourceName"
-                            component={SearchSelect}
-                            value={values.source}
+                            component={SelectComponent}
+                    options={
+                      Array.isArray(SourceOptions)
+                        ? SourceOptions
+                        : []
+                    }
                             isColumn
                           />
                         </div>
@@ -770,7 +783,7 @@ function DealForm(props) {
   );
 }
 
-const mapStateToProps = ({ auth, opportunity,deal,settings, contact, customer }) => ({
+const mapStateToProps = ({ auth,source, opportunity,deal,settings, contact, customer }) => ({
   user: auth.userDetails,
   userId: auth.userDetails.userId,
   organizationId: auth.userDetails.organizationId,
@@ -788,10 +801,13 @@ const mapStateToProps = ({ auth, opportunity,deal,settings, contact, customer })
   contactByUserId: contact.contactByUserId,
   customerByUserId: customer.customerByUserId,
   initiatives: opportunity.initiatives,
+  dealLinkWorkflow:deal.dealLinkWorkflow,
+  dealLinkStages:deal.dealLinkStages,
   dealsProcess: settings.dealsProcess,
   customerData: customer.customerData,
   contactData: contact.contactData,
-  fullName: auth.userDetails.fullName
+  fullName: auth.userDetails.fullName,
+  sources: source.sources,
   // opportunitySkills:opportunity.opportunitySkills
 });
 
@@ -806,9 +822,11 @@ const mapDispatchToProps = (dispatch) =>
       getCustomerData,
       getInitiative,
       // getOpportunitySKill
-      getWorkflow,
+      // getWorkflow,
       getStages,
-      getProcessForDeals,
+      getSources,
+      getDealLinkedWorkflow,
+      getDealLinkedStages,
       getAllDealStages
     },
     dispatch

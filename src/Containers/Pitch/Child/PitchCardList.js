@@ -206,10 +206,16 @@ const PitchCardList = (props) => {
 </ButtonGroup>
 </div>
 <div>
+<Tooltip
+        title={
+          <FormattedMessage id="app.activity" defaultMessage="Activity" />
+        }
+      >
 <AssignmentLateIcon
-style={{fontSize: "1rem"}}
+style={{fontSize: "1rem",cursor: 'pointer',}}
 //onClick={()=>{props.handleCETmodal(true)}}
 />
+</Tooltip>
 </div>
      </div>  
                                 <div class="flex justify-between md:ml-4">

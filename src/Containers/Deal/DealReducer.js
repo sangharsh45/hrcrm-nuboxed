@@ -8,6 +8,15 @@ const initialState = {
   fetchingDealError:false,
   dealsByuserId:[],
 
+  fetchingDealLinkedWorkflow: false,
+  fetchingDealLinkedWorkflowError: false,
+  dealLinkWorkflow:[],
+
+  fetchingDealLinkedStages: false,
+  fetchingDealLinkedStagesError: false,
+  dealLinkStages:[],
+
+
   creatingDeal: false,
   creatingDealError: false,
   opencreateDealModal: false,
@@ -173,6 +182,37 @@ export const dealReducer = (state = initialState, action) => {
                                };
                             case types.ADD_DEAL_CONTACT_FAILURE:
                               return { ...state, addingDealContact: false, openDealContactModal: false };
+
+
+                              case types.GET_DEAL_LINKED_STAGES_REQUEST:
+                                return { ...state, fetchingDealLinkedStages: true };
+                              case types.GET_DEAL_LINKED_STAGES_SUCCESS:
+                                return {
+                                  ...state,
+                                  fetchingDealLinkedStages: false,
+                                  dealLinkStages: action.payload,
+                                };
+                              case types.GET_DEAL_LINKED_STAGES_FAILURE:
+                                return {
+                                  ...state,
+                                  fetchingDealLinkedStages: false,
+                                  fetchingDealLinkedStagesError: true,
+                                };
+
+                                case types.GET_DEAL_LINKED_WORKFLOW_REQUEST:
+                                  return { ...state, fetchingDealLinkedWorkflow: true };
+                                case types.GET_DEAL_LINKED_WORKFLOW_SUCCESS:
+                                  return {
+                                    ...state,
+                                    fetchingDealLinkedWorkflow: false,
+                                    dealLinkWorkflow: action.payload,
+                                  };
+                                case types.GET_DEAL_LINKED_WORKFLOW_FAILURE:
+                                  return {
+                                    ...state,
+                                    fetchingDealLinkedWorkflow: false,
+                                    fetchingDealLinkedWorkflowError: true,
+                                  };
                        
                             
     default:

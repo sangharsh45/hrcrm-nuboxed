@@ -1160,7 +1160,7 @@ export const LinkStatusRecruit = (data,opportunityId, cb) => (dispatch) => {
       console.log(res);
       dispatch({
         type: types.LINK_RECRUIT_STATUS_TO_OPPORTUNITY_SUCCESS,
-        payload: opportunityId,
+        payload: res.data,
       });
       cb && cb("success");
     })
@@ -2414,7 +2414,7 @@ export const StatusRecruit = ( opportunityId,data ) => (dispatch) => {
       console.log(res);
       dispatch({
         type: types.RECRUIT_STATUS_TO_OPPORTUNITY_SUCCESS,
-        payload: res.data,
+        payload: opportunityId,
       });
       // cb && cb("success");
     })
