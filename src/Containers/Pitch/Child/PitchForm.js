@@ -334,7 +334,7 @@ props.getAllCustomerEmployeelist();
                   </div>
                   <Spacer/>
                   <div class=" flex justify-between">
-                   <div class=" w-1/2">
+                   {/* <div class=" w-1/2">
                
                       <FastField
                         name="sectorId"
@@ -351,7 +351,7 @@ props.getAllCustomerEmployeelist();
                         value={values.sectorId}
                       />
                     
-                    </div>
+                    </div> */}
                     <div class=" w-2/5">
                           <FastField
                             name="sourceId"

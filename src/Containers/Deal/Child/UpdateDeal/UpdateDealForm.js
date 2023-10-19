@@ -324,8 +324,8 @@ function UpdateDealForm (props) {
                           // label="Proposal Amount"
                           label={
                             <FormattedMessage
-                              id="app.proposalAmount"
-                              defaultMessage="Proposal Amount"
+                              id="app.fundValue"
+                              defaultMessage="Fund Value"
                             />
                           }
                           isColumn
@@ -433,8 +433,8 @@ function UpdateDealForm (props) {
                     isColumnWithoutNoCreate
                     label={
                       <FormattedMessage
-                        id="app.customer"
-                        defaultMessage="Customer"
+                        id="app.investor"
+                        defaultMessage="Investor"
                       />
                     }
                     // isRequired
