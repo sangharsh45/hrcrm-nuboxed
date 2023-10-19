@@ -10,7 +10,7 @@ import SearchSelect from "../../../../../../Components/Forms/Formik/SearchSelect
 import AddressFieldArray from "../../../../../../Components/Forms/Formik/AddressFieldArray";
 import { InputComponent } from "../../../../../../Components/Forms/Formik/InputComponent";
 import { SelectComponent } from "../../../../../../Components/Forms/Formik/SelectComponent";
-import { createInvestorContact } from "../../../../InvestorAction";
+import { createInvestorContact,getInvestorData } from "../../../../InvestorAction";
 import Upload from "../../../../../../Components/Forms/Formik/Upload";
 import { TextareaComponent } from "../../../../../../Components/Forms/Formik/TextareaComponent";
 import { getDesignations } from "../../../../../Settings/Designation/DesignationAction";
@@ -23,14 +23,14 @@ const { Option } = Select;
 const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
 const ContactSchema = Yup.object().shape({
   firstName: Yup.string().required("Input needed!"),
-  emailId: Yup.string().email("Enter a valid Email"),
+  emailId: Yup.string().required("Input needed!").email("Enter a valid Email"),
   whatsappNumber: Yup.string()
     .matches(phoneRegExp, "Whatsapp number is not valid")
     .min(5, "Number is too short")
     .max(10, "Number is too long"),
-  mobileNumber: Yup.string()
+  mobileNumber: Yup.string().required("Input needed!")
     .matches(phoneRegExp, "Mobile number is not valid")
-    .min(5, "Number is too short")
+    .min(8, "Minimum 8 digits")
     .max(10, "Number is too long"),
 });
 
@@ -48,6 +48,10 @@ class InvestorContactForm extends Component {
       availability: false,
     };
   }
+  componentDidMount() {
+    this.props.getInvestorData(this.props.userId);
+  }
+
   handleCandidate = (checked) => {
     this.setState({ candidate: checked });
   };
@@ -104,34 +108,49 @@ class InvestorContactForm extends Component {
       users,
       linkContact,
       defaultInvestor,
-      customerId,
       tagWithCompany,
     } = this.props;
-    console.log(linkContact);
-
+    const investorNameOption = this.props.investorData
+    .sort((a, b) => {
+      const libraryNameA = a.name && a.name.toLowerCase();
+      const libraryNameB = b.name && b.name.toLowerCase();
+      if (libraryNameA < libraryNameB) {
+        return -1;
+      }
+      if (libraryNameA > libraryNameB) {
+        return 1;
+      }
+  
+      // names must be equal
+      return 0;
+    }
+  )
+    .map((item) => {
+      return {
+        label: `${item.name || ""}`,
+        value: item.investorId,
+      };
+    });
     return (
       <>
         <Formik
           initialValues={{
             salutation: "",
-            // designation: undefined,
+
             designationTypeId: this.props.designationTypeId,
             description: "",
-            // department: undefined,
-            departmentDetails: "",
+            imageId:"",
+            accessInd: true,
             departmentId: this.props.departmentId,
             userId: this.props.userId,
-            // tagWithCompany: tagWithCompany ? tagWithCompany : "",
             tagWithCompany: "",
             firstName: "",
             middleName: "",
-            whatsapp: this.state.whatsapp ? "Different" : "Same",
             lastName: "",
             countryDialCode: this.props.user.countryDialCode,
             countryDialCode1: this.props.user.countryDialCode,
             whatsappNumber: "",
             mobileNumber: "",
-            email: "",
             emailId: "",
             linkedinPublicUrl: "",
             address: [
@@ -156,10 +175,9 @@ class InvestorContactForm extends Component {
             createInvestorContact(
               {
                 ...values,
-                customerId: this.props.customerId,
-                whatsapp: this.state.whatsapp ? "Different" : "Same",
+                investorId: this.props.investorId,
+        
               },
-              this.props.userId,
               () => this.handleReset(resetForm)
             );
           }}
@@ -298,7 +316,7 @@ class InvestorContactForm extends Component {
                       />
                     </div>
                     
-                  <div class=" w-1/4 font-bold"
+                  {/* <div class=" w-1/4 font-bold"
                   >
                     WhatsApp
                     <Switch
@@ -307,7 +325,7 @@ class InvestorContactForm extends Component {
                       checkedChildren="Different"
                       unCheckedChildren="Same"
                     />
-                  </div>
+                  </div> */}
                   </div>
                   {/* <Spacer /> */}
                   {/* <FlexContainer justifyContent="space-between">
@@ -439,24 +457,24 @@ class InvestorContactForm extends Component {
                     <div class=" w-2/4">
                       <>
                         <Field
-                          name="customerId"
+                          name="investorId"
                           isColumnWithoutNoCreate
-                          selectType="customerList"
-                          // label="Tag Company"
                           label={
                             <FormattedMessage
                               id="app.tagcompany"
                               defaultMessage="Tag Company"
                             />
                           }
-                          component={SearchSelect}
+                          component={SelectComponent}
                           isColumn
-                          value={values.customerId}
+                          value={values.investorId}
                           isDisabled={defaultInvestor}
+                          options={Array.isArray(investorNameOption) ? investorNameOption : []}
                           defaultValue={
                             defaultInvestor ? defaultInvestor : null
                           }
                           inlineLabel
+                        
                         />
                       </>
                     </div>
@@ -546,8 +564,6 @@ class InvestorContactForm extends Component {
 
 const mapStateToProps = ({
   auth,
-  contact,
-  customer,
   investor,
   departments,
   designations,
@@ -556,7 +572,8 @@ const mapStateToProps = ({
   addingInvestorContactError: investor.addingInvestorContactError,
   user: auth.userDetails,
   userId: auth.userDetails.userId,
-  customerId: customer.customer.customerId,
+  investorId: investor.investorDetails.investorId,
+  investorData:investor.investorData,
   departmentId: departments.departmentId,
   designationTypeId: designations.designationTypeId,
 });
@@ -567,6 +584,7 @@ const mapDispatchToProps = (dispatch) =>
       createInvestorContact,
       getDesignations,
       getDepartments,
+      getInvestorData,
     },
     dispatch
   );

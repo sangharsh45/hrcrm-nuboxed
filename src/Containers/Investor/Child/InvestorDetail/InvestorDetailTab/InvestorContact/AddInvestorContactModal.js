@@ -13,6 +13,7 @@ const AddInvestorContactModal = (props) => {
   const {
     openInvestorContactModal,
     handleInvestorContactModal,
+    investorDetails,
     ...formProps
   } = props;
   return (
@@ -33,7 +34,7 @@ const AddInvestorContactModal = (props) => {
         footer={null}
       >
         <Suspense fallback={<BundleLoader />}>
-          <InvestorContactForm {...formProps} />{" "}
+          <InvestorContactForm   investorDetails={investorDetails} {...formProps} />{" "}
     
         </Suspense>
       </StyledDrawer>

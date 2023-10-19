@@ -205,7 +205,7 @@ function InvestorCardList(props) {
                                 </div>
                                 <div class="flex">
                                 <div className=" flex font-medium flex-col md:w-36 max-sm:flex-row w-full max-sm:justify-between ">
-                                    <h4 class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden"># Opportunity</h4>
+                                    <h4 class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden"># Deals</h4>
 
                                     <div class=" text-[0.75rem] text-cardBody font-poppins">
 
@@ -246,14 +246,13 @@ function InvestorCardList(props) {
                    </div>
                    </div>
                    <div class="flex max-sm:justify-between">
-                   <div className=" flex font-medium flex-col max-sm:flex-row  ">
-                       
-                       <h4 class=" text-[0.875rem] text-cardBody font-poppins"></h4>
+                   <div className=" flex font-medium flex-col md:w-36 max-sm:flex-row w-full max-sm:justify-between ">
+                                    <h4 class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden">Source</h4>
 
-                       <Button type="primary">
-                     <span class="text-[0.75rem]" >Convert to Account</span>
-                        </Button>
-                   </div>
+                                    <div class=" text-[0.75rem] text-cardBody font-poppins">
+                                    {item.source}
+                                    </div>
+                                </div>
                                 <div class="flex flex-col md:w-24 ">
                     <div class="rounded-full bg-white w-5 h-5 cursor-pointer">
                     <Tooltip title={item.url}>

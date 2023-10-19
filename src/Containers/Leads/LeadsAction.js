@@ -4,6 +4,7 @@ import dayjs from "dayjs";
 import { base_url } from "../../Config/Auth";
 import { asses_url } from "../../Config/Auth";
 import { message } from "antd";
+import Swal from 'sweetalert2'
 
 export const setLeadsViewType = (viewType) => (dispatch) => {
     dispatch({
@@ -114,6 +115,12 @@ export const setLeadsViewType = (viewType) => (dispatch) => {
           type: types.CONVERT_CUSTOMER_STATUS_SUCCESS,
           payload: res.data,
         });
+        Swal.fire({
+          icon: 'success',
+          title: 'Qualifed Succefully',
+          showConfirmButton: false,
+          timer: 1500
+        })
         // cb && cb("success");
       })
       .catch((err) => {
@@ -973,6 +980,12 @@ export const setLeadsViewType = (viewType) => (dispatch) => {
           type: types.REINSTATE_JUNKED_LEADS_SUCCESS,
           payload: res.data,
         });
+        Swal.fire({
+          icon: 'success',
+          title: 'Reinstated Successfully',
+          showConfirmButton: false,
+          timer: 1500
+        })
       })
       .catch((err) => {
         console.log(err);

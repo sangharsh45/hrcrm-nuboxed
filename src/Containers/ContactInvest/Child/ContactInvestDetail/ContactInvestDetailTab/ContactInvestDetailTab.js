@@ -91,7 +91,7 @@ class ContactInvestDetailTab extends Component {
             >
               <Suspense fallback={"Loading ..."}>
                 {" "}
-                <LinkedDealTable />
+                <LinkedDealTable contactInVestDetail={this.props.contactInVestDetail}/>
               </Suspense>
             </TabPane>
 
@@ -121,7 +121,7 @@ class ContactInvestDetailTab extends Component {
             >
               <Suspense fallback={"Loading ..."}>
                 {" "}
-                <LinkedContactInvestNotes />
+                <LinkedContactInvestNotes contactInVestDetail={this.props.contactInVestDetail}/>
               </Suspense>
             </TabPane>
             <TabPane
@@ -161,7 +161,7 @@ class ContactInvestDetailTab extends Component {
             >
               <Suspense fallback={"Loading ..."}>
                 {" "}
-                <LinkedContactInvestDocuments />
+                <LinkedContactInvestDocuments contactInVestDetail={this.props.contactInVestDetail}/>
               </Suspense>
             </TabPane>
           </StyledTabs>

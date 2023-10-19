@@ -27,9 +27,9 @@ import { Listbox, Transition } from '@headlessui/react'
 
 // yup validation scheme for creating a account
 const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
-const UpdateLeadsSchema = Yup.object().shape({
-  email: Yup.string().email("Enter a valid Email"),
-  phoneNumber: Yup.string().matches(phoneRegExp, 'Phone number is not valid').min(5,"Number is too short").max(10,"Number is too long")
+const UpdatePitchSchema = Yup.object().shape({
+  email: Yup.string().required("Input needed!").email("Enter a valid Email"),
+  phoneNumber: Yup.string().matches(phoneRegExp, 'Phone number is not valid').min(8,"Minimum 8 digits").max(10,"Number is too long")
 });
 
 function UpdatePitchForm (props) {
@@ -81,6 +81,7 @@ function UpdatePitchForm (props) {
             firstName:props.setEditingPitch.firstName || "",
             middleName:props.setEditingPitch.middleName || "",
             lastName:props.setEditingPitch.lastName || "",
+            businessRegistration:props.setEditingPitch.businessRegistration ||"",
             assignedTo:selectedOption ? selectedOption.employeeId:props.setEditingPitch.employeeId,
             address: [
               {
@@ -90,12 +91,13 @@ function UpdatePitchForm (props) {
                 street:  props.setEditingPitch.address.length ? props.setEditingPitch.address[0].street : "",
                 city:  props.setEditingPitch.address.length ? props.setEditingPitch.address[0].city : "",
                 state:  props.setEditingPitch.address.length ? props.setEditingPitch.address[0].state : "",
-                postalCode:  props.setEditingPitch.address.length ? props.setEditingPitch.address[0].postalCode : "",             
+                postalCode:  props.setEditingPitch.address.length ? props.setEditingPitch.address[0].postalCode : "",  
+                country: props.setEditingPitch.address.length ? props.setEditingPitch.address[0].country : "",           
               },
             ],
             
           }}
-        //   validationSchema={UpdateLeadsSchema}
+          validationSchema={UpdatePitchSchema}
           onSubmit={(values, { resetForm }) => {
             console.log(values);
             props.updatePitch(

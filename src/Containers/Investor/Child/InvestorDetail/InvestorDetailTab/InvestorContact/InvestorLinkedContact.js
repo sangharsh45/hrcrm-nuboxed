@@ -138,7 +138,7 @@ class InvestorLinkedContact extends Component {
   };
   handleRowData = (items) => {
     debugger;
-    this.setState({ items });
+    this.setState({ currentRowData:items });
 
     // this.props.getContactDocument(contactId);
   };

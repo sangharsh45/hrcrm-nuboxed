@@ -21,8 +21,8 @@ import {UpdateInvestor} from "../../InvestorAction";
 const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
 const UpdateInvestorSchema = Yup.object().shape({
   name: Yup.string().required("Input needed!"),
-  email: Yup.string().email("Enter a valid Email"),
-  phoneNumber: Yup.string().matches(phoneRegExp, 'Phone number is not valid').min(5,"Number is too short").max(10,"Number is too long")
+  email: Yup.string().required("Input needed!").email("Enter a valid Email"),
+  phoneNumber: Yup.string().matches(phoneRegExp, 'Phone number is not valid').min(8,"Minimum 8 digits").max(10,"Number is too long")
 });
 
 function UpdateInvestorForm (props) {
@@ -62,8 +62,8 @@ function UpdateInvestorForm (props) {
           initialValues={{
             name: RowData.name || "",
             url: RowData.url || "",
-            sectorId: RowData.sectorId,
-         sourceId:"",
+            sectorId: RowData.sectorId || "",
+            source:RowData.source,
             vatNo:RowData.vatNo  ,
             email: RowData.email || "",
             country:RowData.country || "",
@@ -183,7 +183,7 @@ function UpdateInvestorForm (props) {
                   <Spacer/>
                   
                      <div class=" flex justify-between max-sm:flex-col">
-                  <div class=" w-6/12 max-sm:w-wk">
+                  <div class=" w-2/5 max-sm:w-wk">
                       <FastField                      
                         name="sectorId"
                         isColumnWithoutNoCreate
@@ -196,21 +196,24 @@ function UpdateInvestorForm (props) {
                         }
                         isColumn
                         component={SearchSelect}
+                        defaultValue={RowData.sector}
                       />
                     </div>
                     <div>
                     <FastField
-                            name="sourceId"
+                            name="source"
+                            isColumnWithoutNoCreate
                              label={
                               <FormattedMessage
                                 id="app.source"
                                 defaultMessage="Source"
                               />
                             }
-                            isColumnWithoutNoCreate
+                          
                             selectType="sourceName"
                             component={SearchSelect}
-                            // value={values.sourceId}
+                            // value={values.source}
+                            defaultValue={RowData.source}
                             isColumn
                           />
 
@@ -358,36 +361,7 @@ function UpdateInvestorForm (props) {
                         values={values}
                       />
                     )}
-                  />
-        <div class=" flex justify-between">
-                    <div class=" w-1/2 max-sm:w-wk">
-                     <Field
-                       // name="address[0].country"
-                       name="country"
-                       isColumnWithoutNoCreate
-                       // label="Country"
-
-                       label={
-                         <FormattedMessage
-                           id="app.country"
-                           defaultMessage="Country"
-                         />
-                       }
-                       component={SearchSelect}
-                       defaultValue={{
-                         value: props.user.countryName,
-                       }}
-                       value={values.countryName}
-                       selectType="country"
-                       inlineLabel
-                       // style={{ flexBasis: "80%" }}
-                       isColumn
-                       width="100%"
-                     />
-                   </div>
-                 </div>
-               
-                                     
+                  />                 
                 </div>
               </div>
               <Spacer/>

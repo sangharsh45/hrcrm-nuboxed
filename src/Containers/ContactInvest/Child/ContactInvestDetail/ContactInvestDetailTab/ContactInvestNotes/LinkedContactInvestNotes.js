@@ -54,11 +54,11 @@ class LinkedContactNotes extends Component {
   }
 }
 
-const mapStateToProps = ({ auth, contact }) => ({
+const mapStateToProps = ({ auth, contact,contactinvest }) => ({
   userId: auth.userDetails.userId,
   notesListByContactId: contact.notesListByContactId,
   fetchingNotesListByContactId: contact.fetchingNotesListByContactId,
-  contactId: contact.contact.contactId,
+  contactId: contactinvest.contactInVestDetail.contactId,
 });
 
 const mapDispatchToProps = (dispatch) =>

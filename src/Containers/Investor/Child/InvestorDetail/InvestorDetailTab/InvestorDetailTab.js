@@ -347,6 +347,7 @@ getContactListByInvestorId(this.props.investorDetails.investorId);
         </TabsWrapper>
         <Suspense fallback={null}>
         <AddInvestorContactModal
+          investorDetails={this.props.investorDetails}
             openInvestorContactModal={openInvestorContactModal}
             defaultInvestor={[{ label: name, value: investorId }]}
             investorId={{ value: investorId }}
