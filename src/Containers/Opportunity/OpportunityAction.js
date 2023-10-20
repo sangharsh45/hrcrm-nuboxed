@@ -2981,7 +2981,7 @@ export const getWonRecords = (userId) => (dispatch) => {
     type: types.GET_WON_RECORDS_REQUEST,
   });
   axios
-    .get(`${base_url}opportunity/wonInd/record/count/${userId}`, {
+    .get(`${base_url}/opportunity/wonInd/record/count/${userId}`, {
     headers: {
       Authorization: "Bearer " + sessionStorage.getItem("token") || "",
     },

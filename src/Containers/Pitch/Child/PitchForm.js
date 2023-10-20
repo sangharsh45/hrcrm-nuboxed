@@ -266,7 +266,7 @@ props.getAllCustomerEmployeelist();
                   <Spacer />
                   <StyledLabel>
                   <Field
-                    isRequired
+                
                     name="companyName"
                     type="text"
                     label={
@@ -291,8 +291,6 @@ props.getAllCustomerEmployeelist();
                     inlineLabel
                   />
                   </StyledLabel>
-                         
-                  <Spacer />
                   <div class=" flex justify-between">
                     <div class=" w-w47.5">
                     <StyledLabel>
@@ -332,7 +330,6 @@ props.getAllCustomerEmployeelist();
                       </StyledLabel>
                     </div>
                   </div>
-                  <Spacer/>
                   <div class=" flex justify-between">
                    {/* <div class=" w-1/2">
                

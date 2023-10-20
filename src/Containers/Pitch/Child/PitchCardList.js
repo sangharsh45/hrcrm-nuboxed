@@ -71,8 +71,8 @@ const PitchCardList = (props) => {
     <>
    <OnlyWrapCard>
    {props.pitchData.map((item) => { 
-         const currentdate = moment().format("DD/MM/YYYY");
-         const date = moment(item.creationDate).format("DD/MM/YYYY");
+ const currentdate = moment().format("DD/MM/YYYY");
+ const date = moment(item.creationDate).format("DD/MM/YYYY");
        
          const diff = Math.abs(
             moment().diff(moment(item.lastRequirementOn), "days")
@@ -123,24 +123,27 @@ const PitchCardList = (props) => {
                                             <h4 class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden">
                                             Name
                                             </h4>
-                                            <h4 class="text-[0.75rem] text-cardBody font-poppins cursor-pointer">
-                                           {item.firstName}     
-         {/* <Link
-           toUrl={`leads/${item.leadsId}`}
-          title={`${item.name}`}
-        >{item.name}</Link>&nbsp;&nbsp;
-        {date === currentdate ? (
-          <span
-            style={{
-              color: "tomato",
-              fontWeight: "bold",
-            }}
-          >
-            New
-          </span>
-        ) : null} */}
-       
-                                            </h4>
+                                            <h4 class=" text-[0.75rem] text-blue-500 text-cardBody font-poppins cursor-pointer">
+                                                
+                                                {/* <Link
+                                                 toUrl={`customer/${item.customerId}`}
+                                                 title={`${item.name}`} 
+                                               > */}
+                                               {item.firstName}
+                                               {/* </Link> */}
+                                               &nbsp;&nbsp;
+                                               {date === currentdate ? (
+                                                 <span
+                                                   style={{
+                                                     color: "tomato",
+                                                     fontWeight: "bold",
+                                                   }}
+                                                 >
+                                                   New
+                                                 </span>
+                                               ) : null}
+                                              
+                                                                                   </h4>
                                             </div>
                                         </Tooltip>
                                         </div>
@@ -221,11 +224,24 @@ style={{fontSize: "1rem",cursor: 'pointer',}}
                                 <div class="flex justify-between md:ml-4">
                                 <div className=" flex font-medium flex-col  md:w-28 max-sm:flex-row w-full max-sm:justify-between ">
                            <h4 class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden"> Phone # </h4>
+
                            <h4 class="text-[0.75rem] text-cardBody font-poppins">
   {item.countryDialCode && item.phoneNumber
     ? `${item.countryDialCode} ${item.phoneNumber}`
     : 'Not available'}
 </h4>
+
+
+                           <h4 class=" text-[0.75rem] text-cardBody font-poppins">
+
+                           {item.countryDialCode && item.phoneNumber ? (
+    `${item.countryDialCode} ${item.phoneNumber}`
+  ) : (
+    "Not Available"
+  )}
+                               
+                         
+                           </h4>
 
                        </div>
                        <div className=" flex font-medium flex-col md:w-[7rem] max-sm:flex-row w-full max-sm:justify-between ">
@@ -233,19 +249,17 @@ style={{fontSize: "1rem",cursor: 'pointer',}}
 
                                   <h4 class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden">Country</h4>
                                   <h4 class=" text-[0.75rem] text-cardBody font-poppins">
-                                  <ReactCountryFlag countryCode="IN" svg />
-                                  <ReactCountryFlag
-                        countryCode={item.country}
-                        svg
-                        style={{
-                          width: '1em',
-                          height: '1em',
-                        }}
-                        title={item.country}
-                      />
-                      &nbsp;
-                      {item.address && item.address.length && item.address[0].country}
-                                  </h4>
+                                    <ReactCountryFlag
+                          countryCode={item.countryAlpha2Code}
+                          svg
+                          style={{
+                            width: '1em',
+                            height: '1em',
+                          }}
+                        />
+                        &nbsp;
+                       {item.address && item.address.length && item.address[0].country}
+                                    </h4>
                               </div>
                               </div>
                        <div class="flex justify-between  max-sm:mb-2 mt-2">

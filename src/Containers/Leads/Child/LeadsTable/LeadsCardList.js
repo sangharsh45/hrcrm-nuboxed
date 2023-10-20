@@ -112,7 +112,14 @@ const LeadsCardList = (props) => {
                                             Name
                                             </h4>
                                             <h4 class="text-[0.75rem] text-cardBody font-poppins cursor-pointer">
-                                           {item.name}  
+                                            {item.name}
+                                            {/* <span>
+              {item.name === null ? (
+                "None"
+              ) : (
+           `${item.name}`
+              )}
+            </span>                   */}
                                            &nbsp;&nbsp;
                                            {date === currentdate ? (
           <span
@@ -213,8 +220,13 @@ onClick={()=>{props.handleCETmodal(true)}}
 <div class="flex"> 
                                 <div className=" flex font-medium flex-col  md:w-32 max-sm:flex-row w-full max-sm:justify-between ">
                            <h4 class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden"> Phone # </h4>
-                           <h4 class=" text-[0.75rem] text-cardBody font-poppins">   
-                           {`${item.countryDialCode} ${item.phoneNumber}`}
+                           <h4 class=" text-[0.75rem] text-cardBody font-poppins">  
+                           {item.countryDialCode && item.phoneNumber ? (
+    `${item.countryDialCode} ${item.phoneNumber}`
+  ) : (
+    "Not Available"
+  )} 
+                           {/* {`${item.countryDialCode} ${item.phoneNumber}`} */}
                            </h4>
                        </div>
                        <div className=" flex font-medium flex-col md:w-32 max-sm:flex-row w-full max-sm:justify-between ">
@@ -241,10 +253,10 @@ onClick={()=>{props.handleCETmodal(true)}}
                        <div className=" flex font-medium flex-col  md:w-40 max-sm:flex-row w-full max-sm:justify-between ">
                            <h4 class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden"> Company </h4>
                            <h4 class=" text-[0.75rem] text-cardBody font-poppins">   
-                           <Link
-           toUrl={`leads/${item.leadsId}`}
-          title={`${item.companyName}`}
-        >{item.name}</Link>
+                           <Link to={`leads/${item.leadsId}`} title={item.companyName || "Not Available"}>
+  {item.companyName || "Not Available"}
+</Link>
+
                            </h4>
                        </div>
                        <div class="rounded-full bg-white  h-5 cursor-pointer w-8">
