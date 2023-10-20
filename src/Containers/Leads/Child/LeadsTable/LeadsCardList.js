@@ -112,12 +112,9 @@ const LeadsCardList = (props) => {
                                             Name
                                             </h4>
                                             <h4 class="text-[0.75rem] text-cardBody font-poppins cursor-pointer">
-                                           {item.name}     
-         {/* <Link
-           toUrl={`leads/${item.leadsId}`}
-          title={`${item.name}`}
-        >{item.name}</Link>&nbsp;&nbsp;
-        {date === currentdate ? (
+                                           {item.name}  
+                                           &nbsp;&nbsp;
+                                           {date === currentdate ? (
           <span
             style={{
               color: "tomato",
@@ -126,7 +123,12 @@ const LeadsCardList = (props) => {
           >
             New
           </span>
-        ) : null} */}
+        ) : null}   
+         {/* <Link
+           toUrl={`leads/${item.leadsId}`}
+          title={`${item.name}`}
+        >{item.name}</Link>&nbsp;&nbsp;
+         */}
        
                                             </h4>
                                             </div>
@@ -220,7 +222,6 @@ onClick={()=>{props.handleCETmodal(true)}}
 
                                   <h4 class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden">Country</h4>
                                   <h4 class=" text-[0.75rem] text-cardBody font-poppins">
-                                  <ReactCountryFlag countryCode="IN" svg />
                                   <ReactCountryFlag
                         countryCode={item.country}
                         svg

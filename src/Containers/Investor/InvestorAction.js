@@ -185,7 +185,7 @@ export const getInvestorDetailsById = (investorId) => (dispatch) => {
       type: types.GET_NOTES_LIST_BY_INVESTOR_ID_REQUEST,
     });
     axios
-      .get(`${base_url}/customer/note/${investorId}`, {
+      .get(`${base_url}/investor/note/${investorId}`, {
         headers: {
           Authorization: "Bearer " + sessionStorage.getItem("token") || "",
         },

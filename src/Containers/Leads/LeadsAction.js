@@ -119,7 +119,7 @@ export const setLeadsViewType = (viewType) => (dispatch) => {
           icon: 'success',
           title: 'Qualifed Succefully',
           showConfirmButton: false,
-          timer: 1500
+          timer: 4000
         })
         // cb && cb("success");
       })
@@ -984,7 +984,7 @@ export const setLeadsViewType = (viewType) => (dispatch) => {
           icon: 'success',
           title: 'Reinstated Successfully',
           showConfirmButton: false,
-          timer: 1500
+          timer: 4000
         })
       })
       .catch((err) => {

@@ -28,8 +28,8 @@ import { Listbox, Transition } from '@headlessui/react'
 // yup validation scheme for creating a account
 const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
 const UpdateLeadsSchema = Yup.object().shape({
-  email: Yup.string().email("Enter a valid Email"),
-  phoneNumber: Yup.string().matches(phoneRegExp, 'Phone number is not valid').min(5,"Number is too short").max(10,"Number is too long")
+  email: Yup.string().required("Input needed!").email("Enter a valid Email"),
+  phoneNumber: Yup.string().matches(phoneRegExp, 'Phone number is not valid').min(8,"Minimum 8 digits").max(10,"Number is too long")
 });
 
 function UpdateLeadsForm (props) {
@@ -76,10 +76,12 @@ function UpdateLeadsForm (props) {
             phoneNumber: props.setEditingLeads.phoneNumber || "",
             userId: props.userId,
             notes: props.setEditingLeads.notes || "",
+            businessRegistration:props.setEditingLeads.businessRegistration ||"",
             salutation:props.setEditingLeads.salutation || "",
             firstName:props.setEditingLeads.firstName || "",
             middleName:props.setEditingLeads.middleName || "",
             lastName:props.setEditingLeads.lastName || "",
+            source:props.setEditingLeads.source || "",
             assignedTo:selectedOption ? selectedOption.employeeId:props.setEditingLeads.employeeId,
             address: [
               {
@@ -340,7 +342,22 @@ function UpdateLeadsForm (props) {
                         component={SearchSelect}
                       />
                     </div>
-           
+                    <div class=" w-2/5">
+           <FastField
+                            name="source"
+                             label={
+                              <FormattedMessage
+                                id="app.source"
+                                defaultMessage="Source"
+                              />
+                            }
+                            isColumnWithoutNoCreate
+                            selectType="sourceName"
+                            component={SearchSelect}
+                            // value={values.sourceId}
+                            isColumn
+                          />
+           </div>
                 </div>
                  </div>
                  <div class=" h-3/4 w-5/12 max-sm:w-wk "   >

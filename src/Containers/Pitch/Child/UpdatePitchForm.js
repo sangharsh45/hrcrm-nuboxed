@@ -65,6 +65,7 @@ function UpdatePitchForm (props) {
             sectorId: props.setEditingPitch.sectorId  ,
             
             sourceId: props.setEditingPitch.sourceId  ,
+
             vatNo:props.setEditingPitch.vatNo  ,
             email: props.setEditingPitch.email || "",
             country:props.setEditingPitch.country || "",
@@ -338,7 +339,7 @@ function UpdatePitchForm (props) {
                     </div> */}
                     <div class=" w-2/5">
            <FastField
-                            name="sourceId"
+                            name="source"
                              label={
                               <FormattedMessage
                                 id="app.source"
