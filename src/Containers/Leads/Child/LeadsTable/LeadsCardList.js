@@ -45,7 +45,11 @@ const LeadsCardList = (props) => {
   }, []);
 
   const [currentLeadsId, setCurrentLeadsId] = useState("");
+  const [rowdata, setrowData] = useState({});
 
+  const handleRowData = (data) => {
+    setrowData(data);
+  };
   function handleSetCurrentLeadsId(item) {
     setCurrentLeadsId(item);
   }
@@ -211,7 +215,10 @@ const LeadsCardList = (props) => {
 <AssignmentLateIcon
 
 style={{fontSize: "1rem",cursor: 'pointer',}}
-onClick={()=>{props.handleCETmodal(true)}}
+onClick={()=>{
+  props.handleCETmodal(true)
+  handleRowData(item)
+  }}
 />
 </Tooltip>
 </div>
@@ -235,7 +242,7 @@ onClick={()=>{props.handleCETmodal(true)}}
                                   <h4 class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden">Country</h4>
                                   <h4 class=" text-[0.75rem] text-cardBody font-poppins">
                                   <ReactCountryFlag
-                        countryCode={item.country}
+                        countryCode={item.countryAlpha2Code}
                         svg
                         style={{
                           width: '1em',
@@ -421,7 +428,7 @@ onClick={()=>{props.handleCETmodal(true)}}
         handleLeadsEmailDrawerModal={props.handleLeadsEmailDrawerModal}
       />
       <OpenCETmodal 
-       item={currentLeadsId}
+       rowdata={rowdata}
       openCETmodal={props.openCETmodal}
       handleCETmodal={props.handleCETmodal}
       />

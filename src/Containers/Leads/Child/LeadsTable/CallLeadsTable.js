@@ -20,9 +20,10 @@ function CallLeadsTable(props) {
   useEffect(() => {
     const {
         getCallListbyLeads,
-      userDetails: { leadsId },
+     // userDetails: { leadsId },
+     item
     } = props;
-    getCallListbyLeads(leadsId, pageNo);
+    getCallListbyLeads(props.rowdata.leadsId, pageNo);
     setpageNo(pageNo + 1);
    // props.getEmployeelist();
   }, []);
@@ -31,9 +32,9 @@ function CallLeadsTable(props) {
     setTimeout(() => {
       const {
         getCallListbyLeads,
-        userDetails: { leadsId },
+        item
       } = props;
-      getCallListbyLeads(leadsId, pageNo);
+      getCallListbyLeads(props.rowdata.leadsId, pageNo);
       setpageNo(pageNo + 1);
      // props.getEmployeelist();
     }, 100);
@@ -164,7 +165,7 @@ function CallLeadsTable(props) {
       >
          <OnlyWrapCard>   
           {props.callList.map((item) => (
-            <div className="flex justify-between mt-4 max-sm:flex-col"
+            <div className="flex justify-between mt-4 max-sm:flex-col overflow-x-hidden"
             style={{
                 borderBottom: "3px dotted #515050"
             }}>
@@ -178,18 +179,6 @@ function CallLeadsTable(props) {
               </div>
               </div>
               <div class="flex">
-              <div class="flex  flex-col md:w-48 max-sm:flex-row max-sm:justify-between w-full">
-              <p class="max-sm:hidden" >Contact</p>
-              <MultiAvatar2
-                    primaryTitle={item.contactName}
-                    // imageId={item.ownerImageId}
-                    imageURL={item.imageURL}
-                    imgWidth={"1.8em"}
-                    imgHeight={"1.8em"}
-                  />
-              
-              {/* <p> {item.contactName}</p> */}
-              </div>
               <div class="flex  flex-col md:w-48 max-sm:flex-row max-sm:justify-between w-full">
               <p class="max-sm:hidden" >Date</p><p> {moment(item.startDate).format("llll")}</p>
               </div>

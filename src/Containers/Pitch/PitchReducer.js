@@ -13,6 +13,10 @@ const initialState = {
     linkingPitchStatus:false,
     linkingPitchStatusError:false,
 
+    fetchingPitchRecords: false,
+    fetchingPitchRecordsError: false,
+    pitchRecord:{},
+
 
     updateTypePitch:false,
     updateTypePitchError:false,
@@ -286,7 +290,20 @@ case types.GET_PITCH_REQUEST:
           case types.DELETE_PITCH_DATA_FAILURE:
             return { ...state, deletingPitchData: false, deletingPitchDataError: false };
 
-
+            case types.GET_PITCH_RECORDS_REQUEST:
+              return { ...state, fetchingPitchRecords: true };
+            case types.GET_PITCH_RECORDS_SUCCESS:
+              return {
+                ...state,
+                fetchingPitchRecords: false,
+                pitchRecord: action.payload,
+              };
+            case types.GET_PITCH_RECORDS_FAILURE:
+              return {
+                ...state,
+                fetchingPitchRecords: false,
+                fetchingPitchRecordsError: true,
+              };
   
 
 

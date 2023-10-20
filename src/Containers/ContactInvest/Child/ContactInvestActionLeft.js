@@ -11,11 +11,9 @@ import HandshakeIcon from "@mui/icons-material/Handshake";
 import { Input, Menu, Tooltip, Radio } from "antd";
 import { StyledSelect } from "../../../Components/UI/Antd";
 import { Button, Badge } from "antd";
-// import {
-//   inputContactDataSearch,
-//   getRecords,
-//   getCustomerRecords,
-// } from "../ContactAction";
+import {
+  getContactInvest
+} from "../ContactInvestAction";
 
 const Option = StyledSelect.Option;
 const item = [{ type: "Hot" }, { type: "Warm" }, { type: "Cold" }];
@@ -38,17 +36,9 @@ const ContactInvestActionLeft = (props) => {
   } = useSpeechRecognition();
   console.log(transcript);
 
-//   useEffect(() => {
-//     if (props.viewType === "dashboard") {
-//       props.getCustomerRecords(props.userId);
-//     } else if (props.viewType === "table") {
-//       props.getRecords(props.userId, "partner");
-//     }
-//     if (transcript) {
-//       console.log(">>>>>>>", transcript);
-//       props.setCurrentData(transcript);
-//     }
-//   }, [props.userId, props.viewType, props.name, transcript]);
+  useEffect(() => {
+  props.getContactInvest(props.userId)
+  }, [props.userId]);
  
   const { user } = props;
   
@@ -59,11 +49,11 @@ const ContactInvestActionLeft = (props) => {
       >
         <Badge
           size="small"
-        //   count={
-        //     (props.viewType === "table" &&
-        //       props.customerRecordData.customerDetails) ||
-        //     0
-        //   }
+          count={
+            (props.viewType === "card" &&
+              props.contactInvest.contactDetails) ||
+            0
+          }
           overflowCount={5000}
         >
           <span
@@ -111,20 +101,15 @@ const ContactInvestActionLeft = (props) => {
   );
 };
 
-const mapStateToProps = ({ auth, contact }) => ({
+const mapStateToProps = ({ auth, contactinvest }) => ({
   userId: auth.userDetails.userId,
-  user: auth.userDetails,
-  recordData: contact.recordData,
-  customerRecordData: contact.customerRecordData,
-  contactByUserId: contact.contactByUserId,
-  fetchingContactInputSearchData: contact.fetchingContactInputSearchData,
+  contactInvest:contactinvest.contactInvest
+  
 });
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
-    //   inputContactDataSearch,
-    //   getRecords,
-    //   getCustomerRecords,
+      getContactInvest
     },
     dispatch
   );

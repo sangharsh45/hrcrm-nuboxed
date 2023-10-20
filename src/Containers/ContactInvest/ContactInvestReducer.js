@@ -10,6 +10,10 @@ const initialState = {
     fetchingContactsInvestError: false,
     contactiNVESTbyId:[],
 
+    fetchingContactInvestRecords: false,
+            fetchingContactInvestRecordsError: true,
+            contactInvest:[],
+
     updateContactInvestModal:false,
     updateContactInvestById: false,
 
@@ -92,6 +96,23 @@ export const contactInvestReducer = (state = initialState, action) => {
           fetchingContactInvestByContactId: false,
           fetchingContactInvestByContactIdError: true,
         }; 
+
+        case types.GET_CONTACTINVEST_RECORDS_REQUEST:
+          return { ...state, fetchingContactInvestRecords: true };
+        case types.GET_CONTACTINVEST_RECORDS_SUCCESS:
+          return {
+            ...state,
+            fetchingContactInvestRecords: false,
+            contactInvest: action.payload,
+          };
+        case types.GET_CONTACTINVEST_RECORDS_FAILURE:
+          return {
+            ...state,
+            fetchingContactInvestRecords: false,
+            fetchingContactInvestRecordsError: true,
+          };
+
+
   
    
       default:

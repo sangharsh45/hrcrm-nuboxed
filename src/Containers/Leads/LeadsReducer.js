@@ -5,6 +5,8 @@ const initialState = {
 
   addLeadsModal:false,
 
+  addCallTaskModal:false,
+
   updateLeadsContactById: false,
   updateLeadsContactByIdError: false,
   documentsByLeadsId: [],
@@ -742,7 +744,8 @@ case types.HANDLE_LEADS_MODAL:
                         fetchingCallListError: true,
                       };
 
-
+                      case types.HANDLE_LEADS_CALL_MODAL:
+                        return { ...state, addCallTaskModal: action.payload };
 
 
 

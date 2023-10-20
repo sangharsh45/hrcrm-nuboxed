@@ -1028,3 +1028,10 @@ export const setLeadsViewType = (viewType) => (dispatch) => {
         });
       });
   };
+
+  export const handleLeadCallModal = (modalProps) => (dispatch) => {
+    dispatch({
+      type: types.HANDLE_LEADS_CALL_MODAL,
+      payload: modalProps,
+    });
+  };

@@ -5,11 +5,11 @@ import { bindActionCreators } from "redux";
 import { BundleLoader } from "../../../../Components/Placeholder";
 import { StyledTabs } from "../../../../Components/UI/Antd";
 import { TabsWrapper } from "../../../../Components/UI/Layout";
-import { handleCallModal } from "../../../Call/CallAction";
+import { handleLeadCallModal } from "../../LeadsAction";
 import { PlusOutlined } from "@ant-design/icons";
 import LightbulbIcon from '@mui/icons-material/Lightbulb';
 import LeadsOpportunity from "../LeadsDetailTab/OpportunityTab/LeadsOpportunity";
-import AddCallModal from "../../../Call/Child/AddCallModal";
+import AddCallTaskModal from "./AddCallTaskModal";
 import { FormattedMessage } from "react-intl";
 import { Tooltip } from "antd";
 import CallLeadsTable from "./CallLeadsTable";
@@ -50,8 +50,9 @@ function  OpenCETmodal(props)  {
   );
 
  function LeadsCETTab () {
-  const { addCallModal, handleCallModal } = props;
+  const { addCallTaskModal, handleLeadCallModal } = props;
     const { ...formProps } = props;
+    console.log(props.rowdata)
     return (
       <>
         <TabsWrapper>
@@ -102,7 +103,7 @@ function  OpenCETmodal(props)  {
                             />
                           }
                           onClick={() => {
-                            handleCallModal(true);
+                            handleLeadCallModal(true);
                           }}
                           size="0.875em"
                         />
@@ -117,7 +118,7 @@ function  OpenCETmodal(props)  {
               <Suspense fallback={"Loading ..."}>
                 {" "}
                 <CallLeadsTable 
-                 item={props.currentLeadsId}
+                 rowdata={props.rowdata}
                 />
               </Suspense>
             </TabPane>
@@ -149,10 +150,10 @@ function  OpenCETmodal(props)  {
             </TabPane>
           </StyledTabs>
         </TabsWrapper>
-        <AddCallModal
-        
-          addCallModal={addCallModal}
-          handleCallModal={handleCallModal}
+        <AddCallTaskModal
+        rowdata={props.rowdata}
+          addCallTaskModal={addCallTaskModal}
+          handleLeadCallModal={handleLeadCallModal}
         />
       </>
     );
@@ -160,14 +161,14 @@ function  OpenCETmodal(props)  {
 
 };
 
-const mapStateToProps = ({ call }) => ({
-  addCallModal: call.addCallModal,
+const mapStateToProps = ({ leads }) => ({
+  addCallTaskModal: leads.addCallTaskModal,
 
 });
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
-      handleCallModal
+      handleLeadCallModal
      
     },
     dispatch

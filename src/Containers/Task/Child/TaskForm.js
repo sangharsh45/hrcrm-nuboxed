@@ -469,9 +469,9 @@ const [priority,setpriority]=useState(props.selectedTask
           }) => (
             <div class="overflow-y-auto h-[34rem] overflow-x-hidden max-sm:h-[30rem]">
             <Form className="form-background">
-              <div class="flex justify-between pr-2 max-sm:flex-col">
+              <div class="flex justify-around pr-2 max-sm:flex-col">
                
-                <div class=" h-full w-1/2 max-sm:w-wk">
+                <div class=" h-full w-w47.5 max-sm:w-wk">
               
                   <div class=" flex justify-between ">
                     {values.taskTypeId === "TSK52434477391272022" && (
@@ -1091,7 +1091,7 @@ const [priority,setpriority]=useState(props.selectedTask
                     )} */}
                   </div>
                 </div>
-                <div class=" h-full w-2/5 max-sm:w-wk">
+                <div class=" h-full w-w47.5 max-sm:w-wk">
                   <Spacer />
                   {/* <Field
                     name="assignedTo"
