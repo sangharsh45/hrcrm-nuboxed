@@ -59,6 +59,23 @@ const CustomerActionLeft = (props) => {
   return (
     <div class=" flex items-center"
     >
+         <Tooltip title={<FormattedMessage id="app.all" defaultMessage="All" />}>
+        <Badge
+          size="small"
+          count={(props.viewType === "table" && props.recordData.customer) || 0}
+          overflowCount={999}
+        >
+          <span
+            class=" mr-2 text-sm cursor-pointer"
+            onClick={() => props.setCustomerViewType("table")}
+            style={{
+              color: props.viewType === "table" && "#1890ff",
+            }}
+          >
+            <TocIcon />
+          </span>
+        </Badge>
+      </Tooltip>
       <Tooltip>
         <Badge
           size="small"
@@ -76,23 +93,7 @@ const CustomerActionLeft = (props) => {
           </span>
         </Badge>
       </Tooltip>
-      <Tooltip title={<FormattedMessage id="app.all" defaultMessage="All" />}>
-        <Badge
-          size="small"
-          count={(props.viewType === "table" && props.recordData.customer) || 0}
-          overflowCount={999}
-        >
-          <span
-            class=" mr-2 text-sm cursor-pointer"
-            onClick={() => props.setCustomerViewType("table")}
-            style={{
-              color: props.viewType === "table" && "#1890ff",
-            }}
-          >
-            <TocIcon />
-          </span>
-        </Badge>
-      </Tooltip>
+   
       {/* <Tooltip
         title={<FormattedMessage id="app.mapview" defaultMessage="Map View" />}
       >
