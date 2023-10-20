@@ -24,7 +24,7 @@ import ClearbitImage from "../../../Components/Forms/Autocomplete/ClearbitImage"
 const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
 const InvestorSchema = Yup.object().shape({
   name: Yup.string().required("Input needed!"),
-  email: Yup.string().required("Input needed!").email("Enter a valid Email"),
+ // email: Yup.string().required("Input needed!").email("Enter a valid Email"),
   phoneNumber: Yup.string().required("Input needed!").matches(phoneRegExp, 'Phone number is not valid').min(8,"Minimum 8 digits").max(10,"Number is too long")
 });
 
@@ -193,7 +193,7 @@ function InvesterForm(props) {
                     inlineLabel
                   />
                   <Spacer />
-                  <Field
+                  {/* <Field
                     name="email"
                     type="text"
                     // label="Email"
@@ -204,7 +204,7 @@ function InvesterForm(props) {
                     width={"100%"}
                     component={InputComponent}
                     inlineLabel
-                  />                  
+                  />                   */}
                    <div class=" flex justify-between">
                     <div class=" w-3/12 max-sm:w-[30%]">
                       <FastField

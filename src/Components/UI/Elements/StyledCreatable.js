@@ -11,6 +11,7 @@ const StyledCreatable = styled(Creatable)`
 .sales__control{
     height: 1.57rem;
     place-content: center;
+    font-size: 0.75rem;
     min-height:1.35em; 
     width: ${(props) => props.width || "auto"};
     border: 0.0625em solid ${(props) => props.theme.inputBorderColor};

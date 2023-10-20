@@ -19,19 +19,16 @@ import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognitio
 import { Button, Input, Tooltip,Tag,Badge } from "antd";
 import { FormattedMessage } from "react-intl";
 import TocIcon from '@mui/icons-material/Toc';
+import {getPitchRecords} from "../PitchAction";
 //import {inputLeadsDataSearch,getLeadsRecords,getJunkedLeadsRecords} from "../LeadsAction";
 const { Search } = Input;
 
 const PitchActionLeft = (props) => {
   const dummy = ["cloud", "azure", "fgfdg"];
   
-  // useEffect(() => {
-  //   if (props.viewType === "card") {
-  //     props.getLeadsRecords(props.userId);
-  //   } else if (props.viewType === "list") {
-  //     props.getJunkedLeadsRecords(props.userId);
-  //   }
-  // }, [props.viewType, props.userId]);
+  useEffect(() => {
+    props.getPitchRecords(props.userId)
+  }, [ props.userId]);
 
   function handleChange(data) {
     
@@ -46,27 +43,28 @@ const PitchActionLeft = (props) => {
 
     />
   );
+  console.log(props.pitchRecord)
   return (
     <div class=" flex  items-center">
-{/* <Badge
+<Badge
         size="small"
-        count={(props.viewType === "card" && props.leadsCountData.LeadsDetails) || 0}
+        count={(props.viewType === "card" && props.pitchRecord.InvestorLeadsDetails) || 0}
         overflowCount={999}
-      > */}
+      >
 
     <Tooltip
         title= "Card View"
       >
         <span   class=" mr-2 text-sm cursor-pointer"
-        // onClick={() => props.setLeadsViewType("card")}
-        //   style={{
-        //    color: props.viewType === "card" && "#1890ff",
-        //   }}
+        onClick={() => props.setLeadsViewType("card")}
+          style={{
+           color: props.viewType === "card" && "#1890ff",
+          }}
         >
         <TocIcon />
         </span>
       </Tooltip>
-      {/* </Badge> */}
+      </Badge>
       {/* <Badge
         size="small"
         count={(props.viewType === "list" && props.leadsCountJunked.junkedList) || 0}
@@ -123,16 +121,13 @@ const PitchActionLeft = (props) => {
   );
 };
 
-const mapStateToProps = ({leads,auth}) => ({
-  // fetchingLeadsInputSearchData:leads.fetchingLeadsInputSearchData,
-  // leadsCountData:leads.leadsCountData,
-  // leadsCountJunked:leads.leadsCountJunked,
-  // userId: auth.userDetails.userId,
+const mapStateToProps = ({pitch,auth}) => ({
+  pitchRecord:pitch.pitchRecord,
+  userId: auth.userDetails.userId,
 
 });
 const mapDispatchToProps = (dispatch) => bindActionCreators({
-  // inputLeadsDataSearch,
-  // getLeadsRecords,getJunkedLeadsRecords
+  getPitchRecords
 }, dispatch);
 export default withRouter(
   connect(mapStateToProps, mapDispatchToProps)(PitchActionLeft));

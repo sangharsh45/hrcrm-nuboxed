@@ -1,37 +1,36 @@
 import React, { Component,useState, useMemo ,useEffect} from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { getAllSalesList } from "../../Opportunity/OpportunityAction"
+import { getAllSalesList } from "../../../Opportunity/OpportunityAction"
 import { FormattedMessage } from "react-intl";
 import { Button, Icon, Switch, Tooltip } from "antd";
 import { Formik, Form, Field, FastField } from "formik";
 import * as Yup from "yup";
-import { handleCallNotesModal } from "../CallAction";
-import { getFilteredEmailContact } from "../../Candidate/CandidateAction";
+import { handleCallNotesModal } from "../../../Call/CallAction";
+import { getFilteredEmailContact } from "../../../Candidate/CandidateAction";
 import dayjs from "dayjs";
-import { Spacer, StyledLabel } from "../../../Components/UI/Elements";
-import SearchSelect from "../../../Components/Forms/Formik/SearchSelect";
-import { InputComponent } from "../../../Components/Forms/Formik/InputComponent";
-import { SelectComponent } from "../../../Components/Forms/Formik/SelectComponent";
-import { DatePicker } from "../../../Components/Forms/Formik/DatePicker";
-import { TimePicker } from "../../../Components/Forms/Formik/TimePicker";
+import { Spacer, StyledLabel } from "../../../../Components/UI/Elements";
+import { InputComponent } from "../../../../Components/Forms/Formik/InputComponent";
+import { SelectComponent } from "../../../../Components/Forms/Formik/SelectComponent";
+import { DatePicker } from "../../../../Components/Forms/Formik/DatePicker";
+import { TimePicker } from "../../../../Components/Forms/Formik/TimePicker";
 import {
   addCall,
   updateCall,
   deleteCall,
   handleCallModal,
-} from "../CallAction";
-import { handleChooserModal } from "../../Planner/PlannerAction";
-import { TextareaComponent } from "../../../Components/Forms/Formik/TextareaComponent";
-import { StyledPopconfirm } from "../../../Components/UI/Antd";
-import { getEmployeelist } from "../../Employees/EmployeeAction";
-import CandidateClearbit from "../../../Components/Forms/Autocomplete/CandidateClearbit";
-import { setClearbitCandidateData } from "../../Candidate/CandidateAction";
+} from "../../../Call/CallAction";
+import { handleChooserModal } from "../../../Planner/PlannerAction";
+import { TextareaComponent } from "../../../../Components/Forms/Formik/TextareaComponent";
+import { StyledPopconfirm } from "../../../../Components/UI/Antd";
+import { getEmployeelist } from "../../../Employees/EmployeeAction";
+import { setClearbitCandidateData } from "../../../Candidate/CandidateAction";
 import SpeechRecognition, { } from 'react-speech-recognition';
 import { AudioOutlined } from '@ant-design/icons';
 import { Fragment } from 'react'
 import { Listbox, Transition } from '@headlessui/react'
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid'
+import SearchSelect from "../../../../Components/Forms/Formik/SearchSelect";
 const ButtonGroup = Button.Group;
 const suffix = (
   <AudioOutlined
@@ -161,6 +160,7 @@ function CallForm(props) {
     }
    const selectedOption = props.employees.find((item) => item.fullName === selected);
    console.log("bn",selectedOption,selected)
+   console.log(props.rowdata)
    return (
       <>
         <Formik
@@ -171,7 +171,7 @@ function CallForm(props) {
               : {
                 callType: Type,
                 callCategory:category,
-
+                leadsId:props.rowdata.leadsId,
                 callPurpose: "",
                 fullName: "",
                 timeZone: timeZone,
@@ -310,8 +310,8 @@ function CallForm(props) {
           }) => (
             <div class="overflow-y-auto h-[34rem] overflow-x-hidden max-sm:h-[30rem]">
             <Form className="form-background">
-              <div class=" flex justify-around max-sm:flex-col">
-              <div class=" h-full w-w47.5 max-sm:w-wk"   >
+              <div class=" flex justify-between max-sm:flex-col">
+              <div class=" h-full w-1/2 max-sm:w-wk"   >
               <div class=" flex justify-between w-full max-sm:flex-col">
                     <div class=" w-2/6 max-sm:w-wk">
                       <Spacer/>
@@ -603,7 +603,7 @@ function CallForm(props) {
                     </span>
                   )}
                 </div>
-                <div class=" h-full w-w47.5 max-sm:w-wk"   >
+                <div class=" h-full w-2/5 max-sm:w-wk"   >
                 <Listbox value={selected} onChange={setSelected}>
         {({ open }) => (
           <>
@@ -693,7 +693,7 @@ function CallForm(props) {
                     }}
                   />
                   <Spacer />
-                  <div>
+                  {/* <div>
                   <Field
                     name="contactId"
                     //selectType="contactList"
@@ -716,7 +716,7 @@ function CallForm(props) {
                     }}
                     inlineLabel
                   />
-                  </div>
+                  </div> */}
                   <Spacer/>
                   {/* <div >
                   <Field
