@@ -47,6 +47,7 @@ const OpportunityActionLeft = (props) => {
     recorddeleteOpportunityData,
     user,
     lostOpportunityData,
+    wonOpportunityData,
     closeOpportunityData,
     recordData,
   } = props;
@@ -178,7 +179,7 @@ const OpportunityActionLeft = (props) => {
           size="small"
           count={
             (viewType === "won" &&
-            lostOpportunityData.OpportunityDetailsbyWonInd) ||
+            wonOpportunityData.OpportunityDetailsbyWonInd) ||
             0
           }
           overflowCount={999}

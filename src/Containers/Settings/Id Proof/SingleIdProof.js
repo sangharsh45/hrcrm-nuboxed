@@ -42,7 +42,7 @@ class SingleIdProof extends Component {
                   {IdProofType}
                 </IdProofName>
                 <div>
-                  {this.props.idProof.EditInd ? (
+                  {this.props.idProof.editInd ? (
                     <BorderColorIcon
                  
                       tooltipTitle="Edit"

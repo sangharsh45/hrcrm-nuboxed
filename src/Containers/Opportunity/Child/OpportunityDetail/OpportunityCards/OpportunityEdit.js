@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { FormattedMessage } from "react-intl";
 import { bindActionCreators } from "redux";
-// import { updateOpportunity } from "../../../OpportunityAction";
+ import { updateOpportunity } from "../../../OpportunityAction";
 import { Button } from "antd";
 import { FlexContainer } from "../../../../../Components/UI/Layout";
 import {
@@ -19,11 +19,11 @@ class OpportunityOverviewEdit extends Component {
     };
   }
   handleUpdate = () => {
-    // this.props.updateOpportunity(
-    //   this.props.opportunity.opportunityId,
-    //   this.state.fields,
-    //   this.callback
-    // );
+    this.props.updateOpportunity(
+      this.props.opportunity.opportunityId,
+      this.state.fields,
+      this.callback
+    );
   };
   callback = () => {
     this.props.toggleViewType();
@@ -58,7 +58,7 @@ class OpportunityOverviewEdit extends Component {
           <Button
             type="primary"
             Loading={updateOpportunityById}
-          // onClick={this.handleUpdate}
+           onClick={this.handleUpdate}
           >
             <FormattedMessage
               id="app.save"
@@ -81,12 +81,12 @@ class OpportunityOverviewEdit extends Component {
 }
 
 const mapStateToProps = ({ opportunity }) => ({
-  // updateOpportunityById: opportunity.updateOpportunityById,
-  // updateOpportunityByIdFailure: opportunity.updateOpportunityByIdFailure
+  updateOpportunityById: opportunity.updateOpportunityById,
+  updateOpportunityByIdFailure: opportunity.updateOpportunityByIdFailure
 });
 const mapDispatchToProps = dispatch =>
   bindActionCreators({
-    // updateOpportunity 
+     updateOpportunity 
   }, dispatch);
 export default connect(
   mapStateToProps,

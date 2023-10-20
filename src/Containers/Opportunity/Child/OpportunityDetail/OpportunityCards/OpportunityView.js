@@ -21,6 +21,7 @@ import { ActionIcon } from "../../../../../Components/Utils";
 import { EditOutlined, LinkOutlined } from "@ant-design/icons";
 import { SelectComponent } from "../../../../../Components/Forms/Formik/SelectComponent";
 import styled from "styled-components";
+import { lineHeight } from "@mui/system";
 
 class OpportunityView extends Component {
   constructor(props) {
@@ -83,7 +84,7 @@ class OpportunityView extends Component {
               <Title
                 overflow="hidden"
                 textOverflow="ellipsis"
-                fontSize={"1.375em"}
+                style={{fontSize:"0.85rem",lineHeight:"2rem"}}
                 // style={{ marginLeft: "0.625em" }}
               >
                 {`${opportunityName || ""}`}

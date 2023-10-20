@@ -508,7 +508,7 @@ function OpportunityForm(props) {
               </div>
             <div
                class=" h-full w-[24rem] max-sm:w-wk">
-              <Listbox value={selected} onChange={setSelected}>
+              {/* <Listbox value={selected} onChange={setSelected}>
         {({ open }) => (
           <>
             <Listbox.Label className="block font-semibold text-[0.75rem] mt-[0.6rem]">
@@ -577,7 +577,7 @@ function OpportunityForm(props) {
         )}
       </Listbox>
 
-                <Spacer />
+                <Spacer /> */}
 <div class="flex justify-between max-sm:flex-col">
 <div class=" w-2/5 max-sm:w-wk">
                <StyledLabel>
