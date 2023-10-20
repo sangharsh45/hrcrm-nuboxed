@@ -5,7 +5,14 @@ import { bindActionCreators } from "redux";
 import { BundleLoader } from "../../../../Components/Placeholder";
 import { StyledTabs } from "../../../../Components/UI/Antd";
 import { TabsWrapper } from "../../../../Components/UI/Layout";
-
+import { handleCallModal } from "../../../Call/CallAction";
+import { PlusOutlined } from "@ant-design/icons";
+import LightbulbIcon from '@mui/icons-material/Lightbulb';
+import LeadsOpportunity from "../LeadsDetailTab/OpportunityTab/LeadsOpportunity";
+import AddCallModal from "../../../Call/Child/AddCallModal";
+import { FormattedMessage } from "react-intl";
+import { Tooltip } from "antd";
+import CallLeadsTable from "./CallLeadsTable";
 const CallForm = lazy(() =>
   import("../../../Call/Child/CallForm")
 );
@@ -43,7 +50,7 @@ function  OpenCETmodal(props)  {
   );
 
  function LeadsCETTab () {
-
+  const { addCallModal, handleCallModal } = props;
     const { ...formProps } = props;
     return (
       <>
@@ -53,7 +60,7 @@ function  OpenCETmodal(props)  {
             style={{ overflow: "visible", width: "53vw", padding: "15px" }}
             animated={false}
           >
-            <TabPane
+            {/* <TabPane
               tab={
                 <span>
                  <i class="fas fa-phone-square"></i>&nbsp;
@@ -64,6 +71,54 @@ function  OpenCETmodal(props)  {
             >
               <Suspense fallback={"loading ..."}>
                 <CallForm {...formProps} />
+              </Suspense>
+            </TabPane> */}
+            <TabPane
+              tab={
+                <>
+                  <span>
+                    
+                       <i class="fas fa-phone-square"></i>&nbsp;
+                  Calls
+                  </span>
+                
+                    <>
+                      <Tooltip 
+                        title={
+                          <FormattedMessage
+                            id="app.create"
+                            defaultMessage="Create"
+                          />
+                        }
+                      >
+                       
+                        <PlusOutlined
+                          type="plus"
+                          
+                          tooltiptitle={
+                            <FormattedMessage
+                              id="app.Create"
+                              defaultMessage="Create"
+                            />
+                          }
+                          onClick={() => {
+                            handleCallModal(true);
+                          }}
+                          size="0.875em"
+                        />
+                       
+                      </Tooltip>
+                    </>
+                 
+                </>
+              }
+              key="1"
+            >
+              <Suspense fallback={"Loading ..."}>
+                {" "}
+                <CallLeadsTable 
+                 item={props.currentLeadsId}
+                />
               </Suspense>
             </TabPane>
             <TabPane
@@ -94,20 +149,25 @@ function  OpenCETmodal(props)  {
             </TabPane>
           </StyledTabs>
         </TabsWrapper>
+        <AddCallModal
+        
+          addCallModal={addCallModal}
+          handleCallModal={handleCallModal}
+        />
       </>
     );
 }
 
 };
 
-const mapStateToProps = ({  }) => ({
-
+const mapStateToProps = ({ call }) => ({
+  addCallModal: call.addCallModal,
 
 });
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
-
+      handleCallModal
      
     },
     dispatch

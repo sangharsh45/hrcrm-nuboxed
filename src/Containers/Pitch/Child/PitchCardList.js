@@ -221,9 +221,12 @@ style={{fontSize: "1rem",cursor: 'pointer',}}
                                 <div class="flex justify-between md:ml-4">
                                 <div className=" flex font-medium flex-col  md:w-28 max-sm:flex-row w-full max-sm:justify-between ">
                            <h4 class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden"> Phone # </h4>
-                           <h4 class=" text-[0.75rem] text-cardBody font-poppins">   
-                           {`${item.countryDialCode} ${item.phoneNumber}`}
-                           </h4>
+                           <h4 class="text-[0.75rem] text-cardBody font-poppins">
+  {item.countryDialCode && item.phoneNumber
+    ? `${item.countryDialCode} ${item.phoneNumber}`
+    : 'Not available'}
+</h4>
+
                        </div>
                        <div className=" flex font-medium flex-col md:w-[7rem] max-sm:flex-row w-full max-sm:justify-between ">
                                   
@@ -248,12 +251,16 @@ style={{fontSize: "1rem",cursor: 'pointer',}}
                        <div class="flex justify-between  max-sm:mb-2 mt-2">
                        <div className=" flex font-medium flex-col  md:w-[9rem] max-sm:flex-row w-full max-sm:justify-between ">
                            <h4 class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden"> Company </h4>
-                           <h4 class=" text-[0.75rem] text-cardBody font-poppins">   
-                           <Link
-           toUrl={`pitch/${item.investorLeadsId}`}
-          title={`${item.companyName}`}
-        >{item.companyName}</Link>
-                           </h4>
+                           <h4 className="text-[0.75rem] text-cardBody font-poppins">
+  {item.companyName ? (
+    <Link to={`pitch/${item.investorLeadsId}`} title={item.companyName}>
+      {item.companyName}
+    </Link>
+  ) : (
+    'Not available'
+  )}
+</h4>
+
                        </div>
                        <div class="rounded-full bg-white  h-5 cursor-pointer w-8">
                     {item.url !== null ? (

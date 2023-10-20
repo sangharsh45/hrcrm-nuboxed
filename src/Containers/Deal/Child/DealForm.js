@@ -369,8 +369,8 @@ function DealForm(props) {
         }) => (
           <div class="overflow-y-auto h-[34rem] overflow-x-hidden max-sm:h-[30rem]">
           <Form className="form-background">
-            <div class=" flex justify-between max-sm:flex-col">
-              <div class=" h-full w-[24rem] max-sm:w-wk">
+            <div class=" flex justify-around max-sm:flex-col">
+              <div class=" h-full w-w47.5 max-sm:w-wk">
                 <Spacer />
                 <Field
                   isRequired
@@ -389,7 +389,7 @@ function DealForm(props) {
                 />
                 <Spacer />
                 <div class="flex justify-between max-sm:flex-col">
-                <div class=" w-1/2 max-sm:w-wk">
+                <div class=" w-w47.5 max-sm:w-wk">
                     <Field
                       name="startDate"
                       //label="Start "
@@ -405,7 +405,7 @@ function DealForm(props) {
                       inlineLabel
                     />
                   </div>
-                  <div class=" w-2/5 max-sm:w-wk">
+                  <div class=" w-w47.5 max-sm:w-wk">
                     <Field
                       // isRequired
                       name="endDate"
@@ -436,7 +436,7 @@ function DealForm(props) {
                 </div>
                 <Spacer />
                 <div class="flex justify-between max-sm:flex-col">
-                <div class=" w-1/2 max-sm:w-wk">
+                <div class="  w-w47.5 max-sm:w-wk">
                     <Field
                       name="proposalAmount"
                       //label="Proposal Amount"
@@ -452,7 +452,7 @@ function DealForm(props) {
                       component={InputComponent}
                     />
                   </div>
-                  <div class=" w-2/5 max-sm:w-wk">
+                  <div class="  w-w47.5 max-sm:w-wk">
                     <Field
                       name="currency"
                       isColumnWithoutNoCreate
@@ -520,7 +520,7 @@ function DealForm(props) {
                 </div>
               </div>
             <div
-               class=" h-full w-[24rem] max-sm:w-wk">
+               class=" h-full w-w47.5 max-sm:w-wk">
               <Listbox value={selected} onChange={setSelected}>
         {({ open }) => (
           <>
@@ -592,7 +592,7 @@ function DealForm(props) {
 
                 <Spacer />
 <div class="flex justify-between max-sm:flex-col">
-<div class=" w-2/5 max-sm:w-wk">
+<div class=" w-w47.5 max-sm:w-wk">
                <StyledLabel>
                   <Field
                     name="customerId"
@@ -618,7 +618,7 @@ function DealForm(props) {
                   />
                 </StyledLabel>
             </div>
-                <div class=" w-2/5 max-sm:w-wk">
+                <div class=" w-w47.5 max-sm:w-wk">
                 <FastField
                             name="source"
                              label={
@@ -701,7 +701,7 @@ function DealForm(props) {
                 <Spacer />
 
                 <div class="flex justify-between max-sm:flex-col">
-                  <div class=" w-1/2 max-sm:w-wk">
+                  <div class=" w-w47.5 max-sm:w-wk">
                     <StyledLabel>
                       <Field
                         name="oppWorkflow"
@@ -727,7 +727,7 @@ function DealForm(props) {
                     </StyledLabel>
                   </div>
                   <Spacer />
-                  <div class=" w-2/5 max-sm:w-wk">
+                  <div class=" w-w47.5 max-sm:w-wk">
                     <StyledLabel>
                       <Field
                         name="oppStage"

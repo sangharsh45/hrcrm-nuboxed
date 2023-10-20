@@ -218,7 +218,7 @@ function InvestorCardList(props) {
                                     
                                     <span>
               {item.assignedTo === null ? (
-                "None"
+                "Not available"
               ) : (
                 <MultiAvatar2
                   primaryTitle={item.assignedTo}
