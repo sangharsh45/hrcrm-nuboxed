@@ -19,12 +19,12 @@ class SingleCardView extends Component {
           handlePreview={() =>
             this.props.handleCustomerDrawerModal(this.props.customer, true)
           }
-          handleEdit={() =>
+          handleEdit={() =>{
+            this.props.setEditCustomer(this.props.customer);
             this.props.handleUpdateCustomerDrawerModal(
               this.props.customer,
-              true
-            )
-          }
+              true)
+          }}
         />
       </>
     );

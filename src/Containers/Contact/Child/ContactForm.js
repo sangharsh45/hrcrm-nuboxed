@@ -94,29 +94,12 @@ class ContactForm extends Component {
       user: { userId, firstName, lastName },
       addContact,
       addingContact,
-      customerId,
-      designationTypeId,
-      departmentId,
-      users,
-      accountId,
-      defaultAccounts,
-      defaultOpportunities,
-      callback,
-      user,
-      creatorId,
-      accountIdTag,
+  
       linkContact,
       opportunityId,
       addLinkContactByOpportunityId,
       defaultCustomers,
-
-      // tagWithCompany,
     } = this.props;
-    console.log(linkContact);
-    console.log(opportunityId);
-    console.log(customerId);
-    console.log(departmentId);
-    console.log(designationTypeId);
     const customerNameOption = this.props.customerData
     .sort((a, b) => {
       const libraryNameA = a.name && a.name.toLowerCase();
@@ -313,7 +296,7 @@ class ContactForm extends Component {
                     </div>
                   </div>               
                   <div class=" flex justify-between">
-                    <div class=" w-2/6 max-sm:w-2/5">
+                    {/* <div class=" w-2/6 max-sm:w-2/5">
                       <FastField
                         name="countryDialCode"
                         isColumnWithoutNoCreate
@@ -334,7 +317,7 @@ class ContactForm extends Component {
                         value={values.countryDialCode}
                         inlineLabel
                       />
-                    </div>
+                    </div> */}
                     <div class=" w-2/5 max-sm:w-2/4">
                       <FastField
                         type="number"
@@ -364,7 +347,7 @@ class ContactForm extends Component {
                       />
                     </div>
                   <div class=" flex justify-between">
-                    <div class=" w-2/4">
+                    {/* <div class=" w-2/4">
                       {" "}
                       {this.state.whatsapp && (
                         <FastField
@@ -389,7 +372,7 @@ class ContactForm extends Component {
                           inlineLabel
                         />
                       )}
-                    </div>
+                    </div> */}
                     <div class=" w-2/4">
                       {this.state.whatsapp && (
                         <FastField
@@ -468,7 +451,7 @@ class ContactForm extends Component {
                     </div>
 
                     <div class=" w-2/5">
-                      <FastField
+                      {/* <FastField
                         name="designationTypeId"
                         //label="Designation"
                         label={
@@ -483,13 +466,13 @@ class ContactForm extends Component {
                         value={values.designationTypeId}
                         isColumnWithoutNoCreate
                         inlineLabel
-                      />
+                      /> */}
                     </div>
                   </div>
                   <Spacer />
                   <div class=" flex justify-between">         
                   <div class="w-2/5">
-                    <FastField
+                    {/* <FastField
                       name="departmentId"
                       //label="Department"
                       label={
@@ -504,7 +487,7 @@ class ContactForm extends Component {
                       value={values.departmentId}
                       selectType="departmentName"
                       inlineLabel
-                    />
+                    /> */}
                   </div>
                   <div class=" w-2/5">
                           <FastField

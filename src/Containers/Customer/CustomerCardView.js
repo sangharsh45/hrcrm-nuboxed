@@ -14,6 +14,7 @@ import {
   getAllCustomerByPosition,
   handleCustomerDrawerModal,
   handleUpdateCustomerDrawerModal,
+  setEditCustomer,
 } from "../Customer/CustomerAction";
 
 import SingleCardView from "./SingleCardView";
@@ -21,6 +22,7 @@ import AddCustomerDrawerModal from "./AddCustomerDrawerModal";
 import UpdateCustomerDrawerModal from "./Child/CustomerTable/UpdateCustomerDrawerModal";
 
 class CustomerCardView extends Component {
+
   componentDidMount() {
     const {
       user: { userId },
@@ -91,8 +93,9 @@ class CustomerCardView extends Component {
       fetchingCustomerRequirement,
       customerCloser,
       fetchingCustomerCloser,
+      setEditCustomer
     } = this.props;
-    console.log(customerByUserId);
+
     return (
       <>
         <br />
@@ -209,7 +212,7 @@ class CustomerCardView extends Component {
                         key={customer.customerId}
                         user={user}
                         handleCustomerDrawerModal={handleCustomerDrawerModal}
-                        // stages={stages}
+                        setEditCustomer={setEditCustomer}
                         customer={customer}
                         handleUpdateCustomerDrawerModal={handleUpdateCustomerDrawerModal}
                         // handleOpportunityDrawer={handleOpportunityDrawer}
@@ -227,6 +230,7 @@ class CustomerCardView extends Component {
                         user={user}
                         handleCustomerDrawerModal={handleCustomerDrawerModal}
                         handleUpdateCustomerDrawerModal={handleUpdateCustomerDrawerModal}
+                        setEditCustomer={setEditCustomer}
                         // stages={stages}
                         customer={customer}
                       />
@@ -282,6 +286,7 @@ const mapDispatchToProps = (dispatch) =>
       getAllCustomerByPosition,
       handleCustomerDrawerModal,
       handleUpdateCustomerDrawerModal,
+      setEditCustomer,
     },
     dispatch
   );
