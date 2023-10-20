@@ -30,7 +30,7 @@ class InvestorLinkedNotes extends Component {
         <br />
 
         <BorderBox>
-          <div style={{ height: 200, overflow: "auto", padding: "0.3rem" }}>
+          <div style={{ height: "-webkit-fill-available", overflow: "auto", padding: "0.3rem" }}>
             {fetchingNoteByInvestorId ? (
               <BundleLoader />
             ) : (
