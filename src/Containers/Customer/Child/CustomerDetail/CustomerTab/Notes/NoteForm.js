@@ -65,26 +65,8 @@ class NoteForm extends Component {
       user: { userId, firstName, lastName },
       addNote,
       customerId,
+      employeeId,
       notes,
-      collectionDTO,
-      ownerId,
-      accountId,
-      opportunityId,
-      distributorId,
-      Loading,
-      callback,
-      teamId,
-      callId,
-      // leadsAccountId,
-      // contactLeadsId,
-      leadsId,
-      eventId,
-      taskId,
-      type,
-      vendorId,
-
-      // partnerId,
-      // userIdFromPartner,
       fetchingNotesListByLeadsId,
     } = this.props;
     const { editorState, placeholder } = this.state;
@@ -95,7 +77,7 @@ class NoteForm extends Component {
           initialValues={{
             notes: "",
             customerId: customerId ? customerId : "",
-            userId:userId ? userId:"",
+            employeeId:employeeId ? employeeId:"",
           }}
           onSubmit={(values, { resetForm }) => {
             console.log(
@@ -175,7 +157,7 @@ class NoteForm extends Component {
 const mapStateToProps = ({ auth, team, customer }) => ({
   user: auth.userDetails,
   fetchingNotesListByCustomerId: customer.fetchingNotesListByCustomerId,
-  userId: auth.userDetails.userId,
+  employeeId:auth.userDetails.employeeId,
   //   team: team.user,
 });
 

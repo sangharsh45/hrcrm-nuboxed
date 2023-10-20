@@ -62,7 +62,7 @@ function ContactCardList(props) {
         }
       }
     })
-    props.getContactListByUserId(props.userId,page);
+    // props.getContactListByUserId(props.userId,page);
     setPage(page + 1);
     props.getAllSalesList();
     props.getRecruiterName();

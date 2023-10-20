@@ -23,8 +23,8 @@ import { Listbox, Transition } from '@headlessui/react'
 const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
 const UpdateCustomerSchema = Yup.object().shape({
   name: Yup.string().required("Input needed!"),
-  email: Yup.string().email("Enter a valid Email"),
-  phoneNumber: Yup.string().matches(phoneRegExp, 'Phone number is not valid').min(5,"Number is too short").max(10,"Number is too long")
+  email: Yup.string().required("Input needed!").email("Enter a valid Email"),
+  phoneNumber: Yup.string().matches(phoneRegExp, 'Phone number is not valid').min(8,"Minimum 8 digits").max(10,"Number is too long")
 });
 
 function UpdateCustomerForm (props) {
@@ -68,9 +68,11 @@ function UpdateCustomerForm (props) {
             vatNo:setEditingCustomer.vatNo  ,
             email: setEditingCustomer.email || "",
             country:setEditingCustomer.country || "",
+            businessRegistration:setEditingCustomer.businessRegistration ||"",
             countryDialCode: setEditingCustomer.countryDialCode || user.countryDialCode,
             phoneNumber: setEditingCustomer.phoneNumber || "",
             userId: userId,
+            source:setEditingCustomer.source || "",
             assignedTo:selectedOption ? selectedOption.employeeId:props.setEditingCustomer.employeeId,
             notes: setEditingCustomer.notes || "",
             address: [
@@ -184,7 +186,7 @@ function UpdateCustomerForm (props) {
                   <Spacer/>
                   
                      <div class=" flex justify-between">
-                  <div class=" w-6/12 max-sm:w-wk">
+                  <div class=" w-1/2 max-sm:w-wk">
                       <FastField                      
                         name="sectorId"
                         isColumnWithoutNoCreate
@@ -199,6 +201,22 @@ function UpdateCustomerForm (props) {
                         component={SearchSelect}
                       />
                     </div>
+                    <div class=" w-2/5">
+           <FastField
+                            name="source"
+                             label={
+                              <FormattedMessage
+                                id="app.source"
+                                defaultMessage="Source"
+                              />
+                            }
+                            isColumnWithoutNoCreate
+                            selectType="sourceName"
+                            component={SearchSelect}
+                            // value={values.sourceId}
+                            isColumn
+                          />
+           </div>
                  </div>
                 
                  <Spacer/>
