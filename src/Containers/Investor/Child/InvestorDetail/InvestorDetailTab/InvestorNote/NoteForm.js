@@ -95,7 +95,7 @@ class NoteForm extends Component {
           initialValues={{
             notes: "",
             investorId: investorId ? investorId : "",
-            userId:userId ? userId:"",
+            employeeId:userId ? userId:"",
           }}
           onSubmit={(values, { resetForm }) => {
             console.log(

@@ -165,7 +165,7 @@ function InvesterForm(props) {
                       </a>
                     ) : null}
                   </div>
-                  <Spacer />
+                <div class="mt-[0.7rem]">
                   <Field
                     isRequired
                     name="name"
@@ -181,6 +181,7 @@ function InvesterForm(props) {
                     accounts={accounts}
                     inlineLabel
                   />
+                  </div>
                   <Field
                     name="url"
                     type="text"
@@ -238,7 +239,7 @@ function InvesterForm(props) {
 
                   <Spacer/>
                   <div class=" flex justify-between">
-                  <div class="w-2/5">
+                  <div class=" w-w47.5">
                   <FastField                     
                             name="sectorId"
                             label={
@@ -256,7 +257,7 @@ function InvesterForm(props) {
                             }
                           />
                     </div>
-                    <div class=" w-2/5">
+                    <div class=" w-w47.5">
                     <FastField
                             name="source"
                              label={
@@ -289,16 +290,16 @@ function InvesterForm(props) {
                 </div>
                 <div class=" h-3/4 w-w47.5 max-sm:w-wk "  
                 >
-                 <Spacer/>
+                 
                  <div class=" flex justify-between">
-                    <div class=" h-full w-full">
+                    <div class=" h-full w-full mt-2">
                     <Listbox value={selected} onChange={setSelected}>
         {({ open }) => (
           <>
-            <Listbox.Label className="block font-semibold text-[0.75rem] mt-[0.6rem]">
+            <Listbox.Label className="block font-semibold text-[0.75rem] ">
               Assigned to
             </Listbox.Label>
-            <div className="relative mt-1">
+            <div className="relative mt-[0.1rem]">
               <Listbox.Button className="relative w-full leading-4 cursor-default border border-gray-300 bg-white py-0.5 pl-3 pr-10 text-left shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm">
                 {selected}
               </Listbox.Button>

@@ -304,7 +304,7 @@ class UpdateContactInvestForm extends Component {
                         inlineLabel
                       />
                     </div>
-                    <div class=" w-2/5 max-sm:w-2/4">
+                    <div class=" w-[60%] max-sm:w-2/4">
                       <FastField
                         type="text"
                         name="mobileNumber"
@@ -322,8 +322,8 @@ class UpdateContactInvestForm extends Component {
                       />
                     </div>
                   </div>
-                  <div class=" flex justify-between">
-                    <div class=" w-2/4 max-sm:w-2/5">
+                  {/* <div class=" flex justify-between">
+                    <div class=" w-2/6 max-sm:w-2/5">
                       <FastField
                         name="countryDialCode1"
                         isColumnWithoutNoCreate
@@ -344,7 +344,7 @@ class UpdateContactInvestForm extends Component {
                         inlineLabel
                       />
                     </div>
-                    <div class=" w-2/4 max-sm:w-2/4">
+                    <div class=" w-[60%] max-sm:w-2/4">
                       <FastField
                         type="text"
                         name="phoneNumber"
@@ -361,7 +361,7 @@ class UpdateContactInvestForm extends Component {
                         width={"100%"}
                       />
                     </div>
-                  </div>
+                  </div> */}
 
                  
                   <Spacer />
@@ -400,7 +400,7 @@ class UpdateContactInvestForm extends Component {
                 
                 <div class=" h-3/4 w-w47.5 max-sm:w-wk "> 
                 <div class=" flex  justify-between">
-                <div class=" w-1/2">
+                <div class=" w-w47.5">
                       <Field
                         name="customerId"
                         // selectType="customerList"
@@ -421,7 +421,7 @@ class UpdateContactInvestForm extends Component {
                       />
                     </div>
                 <Spacer />
-                <div class=" w-2/5">
+                <div class="  w-w47.5">
                   <FastField
                     name="designationTypeId"
                     //label="Designation"
@@ -451,7 +451,7 @@ class UpdateContactInvestForm extends Component {
               </div>
               <Spacer />
               <div class=" flex justify-between">   
-              <div class="w-2/5">
+              <div class=" w-w47.5">
                     <FastField
                       name="departmentId"
                       //label="Department"
@@ -469,7 +469,7 @@ class UpdateContactInvestForm extends Component {
                       inlineLabel    
                     />
                     </div>
-                    <div class=" w-2/5">
+                    <div class=" w-w47.5">
                   <FastField
                             name="sourceId"
                              label={

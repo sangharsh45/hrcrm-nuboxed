@@ -65,6 +65,7 @@ function UpdateInvestorForm (props) {
             sectorId: RowData.sectorId || "",
             source:RowData.source,
             vatNo:RowData.vatNo  ,
+            businessRegistration:RowData.businessRegistration ||"",
             email: RowData.email || "",
             country:RowData.country || "",
             countryDialCode: RowData.countryDialCode || user.countryDialCode,
@@ -183,7 +184,7 @@ function UpdateInvestorForm (props) {
                   <Spacer/>
                   
                      <div class=" flex justify-between max-sm:flex-col">
-                  <div class=" w-2/5 max-sm:w-wk">
+                  <div class=" w-w47.5 max-sm:w-wk">
                       <FastField                      
                         name="sectorId"
                         isColumnWithoutNoCreate
@@ -199,7 +200,7 @@ function UpdateInvestorForm (props) {
                         defaultValue={RowData.sector}
                       />
                     </div>
-                    <div>
+                    <div class="md:w-w47.5">
                     <FastField
                             name="source"
                             isColumnWithoutNoCreate
