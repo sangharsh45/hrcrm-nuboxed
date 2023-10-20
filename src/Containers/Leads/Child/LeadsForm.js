@@ -25,8 +25,8 @@ import { Listbox, Transition } from '@headlessui/react'
 const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
 const CustomerSchema = Yup.object().shape({
   name: Yup.string().required("Input needed!"),
-  email: Yup.string().email("Enter a valid Email"),
-  phoneNumber: Yup.string().matches(phoneRegExp, 'Phone number is not valid').min(5,"Number is too short").max(10,"Number is too long")
+  email: Yup.string().required("Input needed!").email("Enter a valid Email"),
+  phoneNumber: Yup.string().matches(phoneRegExp, 'Phone number is not valid').min(8,"Minimum 8 digits").max(10,"Number is too long")
 });
 
 function LeadsForm (props) {
@@ -363,8 +363,10 @@ props.getAllCustomerEmployeelist();
                                 defaultMessage="Source"
                               />
                             }
-                            options={["Na", "Na2", "None"]}
-                            component={SelectComponent}
+                            isColumnWithoutNoCreate
+                            selectType="sourceName"
+                            component={SearchSelect}
+                            value={values.source}
                             inlineLabel
                             className="field"
                             isColumn

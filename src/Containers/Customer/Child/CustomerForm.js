@@ -27,8 +27,8 @@ import ClearbitImage from "../../../Components/Forms/Autocomplete/ClearbitImage"
 const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
 const CustomerSchema = Yup.object().shape({
   name: Yup.string().required("Input needed!"),
-  email: Yup.string().email("Enter a valid Email"),
-  phoneNumber: Yup.string().matches(phoneRegExp, 'Phone number is not valid').min(5,"Number is too short").max(10,"Number is too long")
+  email: Yup.string().required("Input needed!").email("Enter a valid Email"),
+  phoneNumber: Yup.string().matches(phoneRegExp, 'Phone number is not valid').min(8,"Minimum 8 digits").max(10,"Number is too long")
 });
 
 function CustomerForm(props) {
@@ -91,7 +91,7 @@ function CustomerForm(props) {
             name: "",
             url: "",
             gst:"",
-            // sector: "",
+            source: "",
             sectorId: "",
             country: props.user.country,
             email: "",
@@ -261,7 +261,7 @@ function CustomerForm(props) {
                           />
                     </div>
                     <div class=" w-2/5 max-sm:w-w47.5">
-                          <FastField
+                    <FastField
                             name="source"
                             type="text"
                             label={
@@ -270,8 +270,10 @@ function CustomerForm(props) {
                                 defaultMessage="Source"
                               />
                             }
-                            options={["Na", "Na2", "None"]}
-                            component={SelectComponent}
+                            isColumnWithoutNoCreate
+                            selectType="sourceName"
+                            component={SearchSelect}
+                            value={values.source}
                             inlineLabel
                             className="field"
                             isColumn
