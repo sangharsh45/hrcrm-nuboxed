@@ -64,7 +64,7 @@ function UpdatePitchForm (props) {
             url: props.setEditingPitch.url || "",
             sectorId: props.setEditingPitch.sectorId  ,
             
-            sourceId: props.setEditingPitch.sourceId  ,
+            source: props.setEditingPitch.source  ,
 
             vatNo:props.setEditingPitch.vatNo  ,
             email: props.setEditingPitch.email || "",
@@ -349,7 +349,7 @@ function UpdatePitchForm (props) {
                             isColumnWithoutNoCreate
                             selectType="sourceName"
                             component={SearchSelect}
-                             //value={values.sourceId}
+                             value={values.sourceId}
                             isColumn
                           />
            </div>

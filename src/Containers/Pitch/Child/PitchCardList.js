@@ -231,18 +231,6 @@ style={{fontSize: "1rem",cursor: 'pointer',}}
     : 'Not available'}
 </h4>
 
-
-                           <h4 class=" text-[0.75rem] text-cardBody font-poppins">
-
-                           {item.countryDialCode && item.phoneNumber ? (
-    `${item.countryDialCode} ${item.phoneNumber}`
-  ) : (
-    "Not Available"
-  )}
-                               
-                         
-                           </h4>
-
                        </div>
                        <div className=" flex font-medium flex-col md:w-[7rem] max-sm:flex-row w-full max-sm:justify-between ">
                                   

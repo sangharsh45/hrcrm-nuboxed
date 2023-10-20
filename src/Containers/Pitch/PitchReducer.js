@@ -142,7 +142,7 @@ case types.GET_PITCH_REQUEST:
                   updatePitchById: false,
                    updatePitchModal: false,
                    pitchData: state.pitchData.map((item) => {
-                    if (item.investorleadsId === action.payload.investorleadsId) {
+                    if (item.investorLeadsId === action.payload.investorLeadsId) {
                       return action.payload;
                     } else {
                       return item;

@@ -141,6 +141,8 @@ function UpdateDealForm (props) {
           initialValues={{
             opportunityName:
               props.currentItem.opportunityName || "",
+              oppWorkflow: props.currentItem.oppWorkflow || "",
+              oppStage: props.currentItem.oppStage || "",
             startDate:
               dayjs(props.currentItem.startDate) || dayjs(),
             endDate: dayjs(props.currentItem.endDate) || dayjs(),
