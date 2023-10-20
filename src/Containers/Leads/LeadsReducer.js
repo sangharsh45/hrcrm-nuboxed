@@ -38,6 +38,10 @@ const initialState = {
   fetchingLeadsInputSearchDataError: false,
   inputData: [],
 
+  fetchingCallList: true,
+  fetchingCallListError: true,
+  callList:[],
+
   addingDocumentByLeadsId: false,
   addingDocumentByLeadsIdError: false,
 
@@ -722,6 +726,25 @@ case types.HANDLE_LEADS_MODAL:
                          
                   case types.HANDLE_CET_MODAL:
                     return { ...state, openCETmodal: action.payload };
+
+                    case types.GET_CALL_LIST_BY_REQUEST:
+                      return { ...state, fetchingCallList: true };
+                    case types.GET_CALL_LIST_BY_SUCCESS:
+                      return {
+                        ...state,
+                        fetchingCallList: false,
+                         callList: action.payload,
+                      };
+                    case types.GET_CALL_LIST_BY_FAILURE:
+                      return {
+                        ...state,
+                        fetchingCallList: false,
+                        fetchingCallListError: true,
+                      };
+
+
+
+
 
 default:
 return state;

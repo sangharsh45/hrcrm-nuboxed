@@ -292,7 +292,7 @@ props.getAllCustomerEmployeelist();
                   />
                   </StyledLabel>
                   <div class=" flex justify-between">
-                    <div class=" w-1/2">
+                    <div class=" w-w47.5">
                     <StyledLabel>
                       <Field
                         name="vatNo"
@@ -310,7 +310,7 @@ props.getAllCustomerEmployeelist();
                       />
                       </StyledLabel>
                     </div>
-                    <div class="">
+                    <div class="w-w47.5">
                     <StyledLabel>
                       <Field
                         name="businessRegistration"
@@ -349,7 +349,7 @@ props.getAllCustomerEmployeelist();
                       />
                     
                     </div> */}
-                    <div class=" w-2/5">
+                    <div class=" w-full">
                           <FastField
                             name="sourceId"
                              label={

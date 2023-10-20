@@ -282,7 +282,7 @@ function UpdatePitchForm (props) {
                     />
                     </StyledLabel>
                   <div class=" flex justify-between max-sm:flex-col">
-                    <div class=" w-1/2 max-sm:w-wk">
+                    <div class=" w-w47.5 max-sm:w-wk">
                     <StyledLabel>
                       <Field
                         name="vatNo"
@@ -301,7 +301,7 @@ function UpdatePitchForm (props) {
                         />
                         </StyledLabel>
                     </div>
-                    <div class=" w-2/5 max-sm:w-wk">
+                    <div class=" w-w47.5 max-sm:w-wk">
                     <StyledLabel>
                       <Field
                         name="businessRegistration"
@@ -337,7 +337,7 @@ function UpdatePitchForm (props) {
                         component={SearchSelect}
                       />
                     </div> */}
-                    <div class=" w-2/5">
+                    <div class="w-full">
            <FastField
                             name="source"
                              label={

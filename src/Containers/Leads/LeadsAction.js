@@ -1002,3 +1002,29 @@ export const setLeadsViewType = (viewType) => (dispatch) => {
       payload: modalProps,
     });
   }
+
+  export const getCallListbyLeads = (leadsId,pageNo) => (dispatch) => {
+    dispatch({
+      type: types.GET_CALL_LIST_BY_REQUEST,
+    });
+    axios
+      .get(`${base_url}/call/leads/${leadsId}/${pageNo}`, {
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+        },
+      })
+      .then((res) => {
+        console.log(res);
+        dispatch({
+          type: types.GET_CALL_LIST_BY_SUCCESS,
+          payload: res.data,
+        });
+      })
+      .catch((err) => {
+        console.log(err.response);
+        dispatch({
+          type: types.GET_CALL_LIST_BY_FAILURE,
+          payload: err,
+        });
+      });
+  };

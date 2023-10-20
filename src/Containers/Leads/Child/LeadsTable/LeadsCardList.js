@@ -421,6 +421,7 @@ onClick={()=>{props.handleCETmodal(true)}}
         handleLeadsEmailDrawerModal={props.handleLeadsEmailDrawerModal}
       />
       <OpenCETmodal 
+       item={currentLeadsId}
       openCETmodal={props.openCETmodal}
       handleCETmodal={props.handleCETmodal}
       />
