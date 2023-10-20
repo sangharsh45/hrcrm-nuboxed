@@ -1,7 +1,7 @@
-import React, { Component ,useState,useEffect} from "react";
+import React, {  useState,useEffect} from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { Button, Switch, Checkbox } from "antd";
+import { Button, } from "antd";
 import { FormattedMessage } from "react-intl";
 import { Formik, Form, Field, FieldArray, FastField } from "formik";
 import * as Yup from "yup";
@@ -16,14 +16,10 @@ import {
     // setClearbitData,
 } from "../PitchAction";
 import PostImageUpld from "../../../Components/Forms/Formik/PostImageUpld";
-import { FlexContainer } from "../../../Components/UI/Layout";
 import { TextareaComponent } from "../../../Components/Forms/Formik/TextareaComponent";
 import { InputComponent } from "../../../Components/Forms/Formik/InputComponent";
 import { SelectComponent } from "../../../Components/Forms/Formik/SelectComponent";
-import ProgressiveImage from "../../../Components/Utils/ProgressiveImage";
-import ClearbitImage from "../../../Components/Forms/Autocomplete/ClearbitImage";
-import Upload from "../../../Components/Forms/Formik/Upload";
-import { Listbox, Transition } from '@headlessui/react'
+import { Listbox, } from '@headlessui/react'
 
 // yup validation scheme for creating a account
 const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
@@ -67,7 +63,9 @@ function UpdatePitchForm (props) {
             companyName: props.setEditingPitch.companyName || "",
             url: props.setEditingPitch.url || "",
             sectorId: props.setEditingPitch.sectorId  ,
-            source:"",
+            
+            sourceId: props.setEditingPitch.sourceId  ,
+
             vatNo:props.setEditingPitch.vatNo  ,
             email: props.setEditingPitch.email || "",
             country:props.setEditingPitch.country || "",
@@ -253,7 +251,7 @@ function UpdatePitchForm (props) {
                   <Spacer/>
                     <StyledLabel>
                   <Field
-                    isRequired
+             
                     name="companyName"
                     type="text"
                     //label="Name"
@@ -283,9 +281,6 @@ function UpdatePitchForm (props) {
                     inlineLabel
                     />
                     </StyledLabel>
-                  <Spacer />
-                  
-                 
                   <div class=" flex justify-between max-sm:flex-col">
                     <div class=" w-1/2 max-sm:w-wk">
                     <StyledLabel>
@@ -326,7 +321,6 @@ function UpdatePitchForm (props) {
                       </StyledLabel>
                     </div>                    
                     </div>
-                     <Spacer/>
                      <div class=" flex justify-between">
                      {/* <div class=" w-1/2">
                       <FastField
@@ -355,7 +349,7 @@ function UpdatePitchForm (props) {
                             isColumnWithoutNoCreate
                             selectType="sourceName"
                             component={SearchSelect}
-                            // value={values.sourceId}
+                             //value={values.sourceId}
                             isColumn
                           />
            </div>

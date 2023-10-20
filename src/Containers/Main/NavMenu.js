@@ -279,6 +279,11 @@ function NavMenu (props) {
                  <span class="text-white text-ls ml-1">
                
                   {translatedMenuItems[13]}
+                  &nbsp;&nbsp;&nbsp;
+                  <Badge
+                    count={props.opportunityRecord.leads}
+                    overflowCount={999}
+                  ></Badge>
                 </span>
               </Link>
             </Menu.Item>
@@ -690,6 +695,11 @@ function NavMenu (props) {
                id="app.leaves"
                defaultMessage="Leaves"
               />
+                &nbsp;&nbsp;&nbsp;
+                  <Badge
+                    count={props.opportunityRecord.leave}
+                    overflowCount={999}
+                  ></Badge>
               </span>
              </Link> 
             </Menu.Item>
@@ -702,6 +712,11 @@ function NavMenu (props) {
               id="app.mileage"
                 defaultMessage="Mileage"
               />
+                &nbsp;&nbsp;&nbsp;
+                  <Badge
+                    count={props.opportunityRecord.mileage}
+                    overflowCount={999}
+                  ></Badge>
             </span>
             </Link>
           </Menu.Item>
@@ -716,6 +731,11 @@ function NavMenu (props) {
                id="app.expense"
               defaultMessage="Expense"
           />
+            &nbsp;&nbsp;&nbsp;
+                  <Badge
+                    count={props.opportunityRecord.expense}
+                    overflowCount={999}
+                  ></Badge>
               </span>
             </Link> 
            </Menu.Item>

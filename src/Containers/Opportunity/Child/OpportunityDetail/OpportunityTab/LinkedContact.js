@@ -222,6 +222,12 @@ class LinkedContact extends Component {
         },
       },
       {
+        title: "",
+        dataIndex: "",
+        width: "2%",
+    
+      },
+      {
         // title: "Name",
         title: <FormattedMessage
           id="app.firstName"

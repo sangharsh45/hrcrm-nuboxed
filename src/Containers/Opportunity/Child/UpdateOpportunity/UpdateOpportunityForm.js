@@ -3,6 +3,13 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Button } from "antd";
 import { FormattedMessage } from "react-intl";
+import SpeechRecognition, {
+  useSpeechRecognition,
+} from "react-speech-recognition";
+import PlayCircleFilledIcon from "@mui/icons-material/PlayCircleFilled";
+import RotateRightIcon from "@mui/icons-material/RotateRight";
+import StopCircleIcon from "@mui/icons-material/StopCircle";
+import { Tooltip } from "antd";
 import { SelectComponent } from "../../../../Components/Forms/Formik/SelectComponent";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
@@ -30,6 +37,7 @@ const UpdateOpportunitySchema = Yup.object().shape({
   oppWorkflow: Yup.string().required("Input needed!"),
 });
 function UpdateOpportunityForm (props) {
+
   useEffect(()=> {
     props.getAllSalesList();
     props.getCustomerData(props.userId);
@@ -38,6 +46,10 @@ function UpdateOpportunityForm (props) {
     props.getStages(props.orgId);
   },[]);
 
+
+  // function handletext(e) {
+  //   setText(e.target.value);
+  // }
   function getStagesOptions(filterOptionKey, filterOptionValue) {
     const StagesOptions =
       props.stages.length &&
@@ -113,9 +125,21 @@ function UpdateOpportunityForm (props) {
         value: item.opportunityWorkflowDetailsId,
       };
     });
-    const { updateOpportunityById, updateOpportunity, startDate, endDate } =
-      props;
+  
+  
+    // const {
+    //   transcript,
+    //   listening,
+    //   resetTranscript,
+    //   browserSupportsSpeechRecognition,
+    // } = useSpeechRecognition();
+  
+    // if (!browserSupportsSpeechRecognition) {
+    //   return <span>Browser doesn't support speech recognition.</span>;
+    // }
 
+    const { updateOpportunityById, updateOpportunity, startDate, endDate } =props;
+    // const [text, setText] = useState("");
       const [defaultOption, setDefaultOption] = useState(props.setEditingOpportunity.assignedTo);
       const [selected, setSelected] = useState(defaultOption);
       const selectedOption = props.sales.find((item) => item.fullName === selected);
@@ -129,7 +153,10 @@ function UpdateOpportunityForm (props) {
               dayjs(props.setEditingOpportunity.startDate) || dayjs(),
             endDate: dayjs(props.setEditingOpportunity.endDate) || dayjs(),
             // endDate: endDate || null,
-
+            oppWorkflow: props.setEditingOpportunity.oppWorkflow || "",
+            oppStage: props.setEditingOpportunity.oppStage || "",
+            
+            // description: props.setEditingOpportunity.description || "",
             proposalAmount:
               props.setEditingOpportunity.proposalAmount || "",
             currency: props.setEditingOpportunity.currency || "",
@@ -217,6 +244,7 @@ function UpdateOpportunityForm (props) {
                 ...values,
                 opportunityId: props.opportunityId,
                 orgId: props.organizationId,
+                // description: transcript ? transcript : text,
                 // customerId: props.customerId,
                 userId: props.userId,
                 startDate: `${newStartDate}T00:00:00Z`,
@@ -355,12 +383,56 @@ function UpdateOpportunityForm (props) {
                         component={SearchSelect}
                       />
 
-                      <Spacer />
+                    
                     </div>
                   </div>
+                  {/* <Spacer />
+                <StyledLabel>Description</StyledLabel>
+                <div>
+                  <div>
+                    <span onClick={SpeechRecognition.startListening}>
+                      <Tooltip title="Start">
+                        <span style={{ fontSize: "1.5em", color: "red" }}>
+                          <PlayCircleFilledIcon />
+                        </span>
+                      </Tooltip>
+                    </span>
+
+                    <span onClick={SpeechRecognition.stopListening}>
+                      <Tooltip title="Stop">
+                        <span
+                          style={{
+                            fontSize: "1.5em",
+                            color: "green",
+                            marginLeft: "3px",
+                          }}
+                        >
+                          <StopCircleIcon />
+                        </span>
+                      </Tooltip>
+                    </span>
+
+                    <span onClick={resetTranscript}>
+                      <Tooltip title="Clear">
+                        <span style={{ fontSize: "1.5em", marginLeft: "3px" }}>
+                          <RotateRightIcon />
+                        </span>
+                      </Tooltip>
+                    </span>
+                  </div>
+                  <div>
+                    <textarea
+                      name="description"
+                      className="textarea"
+                      type="text"
+                      value={transcript ? transcript : text}
+                      onChange={handletext}
+                    ></textarea>
+                  </div>
+                </div> */}
                 </div>
                 <div class=" h-full w-2/5 max-sm:w-wk">
-                <Listbox value={selected} onChange={setSelected}>
+                {/* <Listbox value={selected} onChange={setSelected}>
       {({ open }) => (
         <>
           <Listbox.Label className="block font-semibold text-[0.75rem] mt-[0.6rem]">Assigned to</Listbox.Label>
@@ -426,7 +498,7 @@ function UpdateOpportunityForm (props) {
         </>
       )}
     </Listbox>
-                  <Spacer />
+                  <Spacer /> */}
 
                   <Field
                     name="customerId"
