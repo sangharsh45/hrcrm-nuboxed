@@ -1,7 +1,7 @@
 import * as types from "./CustomerActionTypes";
 import dayjs from "dayjs";
 const initialState = {
-  viewType: "card",
+  viewType: "table",
   addCustomerModal: false,
 
   addingCustomer: false,
