@@ -337,7 +337,7 @@ checked:this.props.setEditingCustomer.category==="White" || this.props.setEditin
                       />
                     )}
                   />
-                  <FlexContainer justifyContent="space-between">
+                  {/* <FlexContainer justifyContent="space-between">
                    
                    <div style={{ width: "47%" }}>
                      <Field
@@ -364,7 +364,7 @@ checked:this.props.setEditingCustomer.category==="White" || this.props.setEditin
                        width="100%"
                      />
                    </div>
-                 </FlexContainer>
+                 </FlexContainer> */}
                
                                      
                 </div>

@@ -3008,7 +3008,7 @@ export const getOppLinkedStages = (orgId) => (dispatch) => {
     type: types.GET_OPP_LINKED_STAGES_REQUEST,
   });
   axios
-    .get(`${base_url}/investorOpportunityWorkflow/opportunityStage/for-dropdown/${orgId}`, {
+    .get(`${base_url}/workflow/opportunity/stages/for_dropdown/${orgId}`, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },
@@ -3034,7 +3034,7 @@ export const getOppLinkedWorkflow = (orgId) => (dispatch) => {
     type: types.GET_OPP_LINKED_WORKFLOW_REQUEST,
   });
   axios
-    .get(`${base_url}/workflow/investorOpportunityWorkflow/for-dropdown/${orgId}`, {
+    .get(`${base_url}/workflow/opportunityWorkflow/for_dropdown/${orgId}`, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },

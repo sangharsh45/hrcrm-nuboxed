@@ -9,6 +9,8 @@ import {
   CloseCircleOutlined,
   SearchOutlined,
 } from "@ant-design/icons";
+import FeedbackIcon from '@mui/icons-material/Feedback';
+import StarBorderIcon from '@mui/icons-material/StarBorder';
 import DownloadForOfflineIcon from '@mui/icons-material/DownloadForOffline';
 import { OnlyWrapCard } from '../../../Components/UI/Layout';
 import NoteAltIcon from "@mui/icons-material/NoteAlt";
@@ -29,6 +31,7 @@ import {
   setEditTask,
   handleDownloadTaskModal,
   handleTaskNotesDrawerModal,
+  handleTaskFeedbackDrawerModal,
   handleTaskProjectDrawerModal,
   handleTaskopenModal
 } from "../TaskAction";
@@ -37,6 +40,7 @@ import BorderColorIcon from "@mui/icons-material/BorderColor";
 import AddTaskNotesDrawerModal from "./AddTaskNotesDrawerModal";
 import OpenTaskModal from "./OpenTaskModal";
 import DownloadTaskModal from "./DownloadTaskModal";
+import AddTaskFeedbackDrawerModal from "./AddTaskFeedbackDrawerModal";
 const UpdateTaskModal = lazy(() => import("./UpdateTaskModal"));
 const ButtonGroup = Button.Group;
 
@@ -87,7 +91,9 @@ const TaskCardList = (props) => {
     updateTaskModal,
     downloadTaskModal,
     addDrawerTaskNotesModal,
+    addDrawerTaskFeedbackModal,
     handleTaskNotesDrawerModal,
+    handleTaskFeedbackDrawerModal,
     setEditTask,
    
     userDetails: { employeeId },
@@ -180,7 +186,7 @@ const TaskCardList = (props) => {
                                         </div>
                                 </div>
 
-                                <div className=" flex font-medium flex-col  md:w-36 max-sm:flex-row justify-between w-full ">
+                                <div className=" flex font-medium flex-col  md:w-36 max-sm:flex-row w-full ">
                                     <div class=" text-[0.875rem] text-cardBody font-[0.875rem] font-poppins max-sm:hidden"> Name </div>
                                     <div class=" text-[0.75rem] text-cardBody font-poppins">   
                                     <span   
@@ -325,12 +331,50 @@ const TaskCardList = (props) => {
                                      {`${moment(item.startDate).format("ll")}`}
                                     </div>
                                 </div> */}
-                                <div className="flex font-medium flex-col md:w-20 max-sm:flex-row justify-between w-full ">
+                                <div className="flex font-medium flex-col md:w-20 max-sm:flex-row  w-full ">
                        
                        <div class="text-[0.875rem] text-cardBody font-poppins max-sm:hidden">End</div>
                        <div class="text-[0.75rem] text-cardBody font-poppins"> 
                         {`${moment(item.endDate).format("ll")}`}</div>
                    </div>
+
+
+                   <div className="flex font-medium flex-col md:w-20 max-sm:flex-row  w-full ">
+             {item.assignedToName !== item.submittedBy ? 
+             <span>
+             <Tooltip overlayStyle={{ maxWidth: "400px" }} title={`Review :${item.feedbackReview}`}>
+            {item.feedbackRating === 0 ? (<StarBorderIcon
+              style={{ color: "#eeeedd", fontSize: "1.5em" }} />)
+              : (
+                <span>
+                  {item.feedbackRating}{<StarBorderIcon
+                    style={{ color: "#FFD700", fontSize: "1.5em" }} />}
+                </span>)}
+             
+                </Tooltip>
+                </span>
+              
+                :null}
+
+     
+     </div> 
+     <div className="flex font-medium flex-col md:w-20 max-sm:flex-row  w-full ">
+             {item.assignedToName !== item.submittedBy ? 
+                         <Tooltip title="Feedback">
+                         <FeedbackIcon
+                                  onClick={() => {
+                                    handleTaskFeedbackDrawerModal(true);
+                                    handleSetTaskNameId(item);
+                                  }}
+                                  style={{  cursor: "pointer", fontSize: "1rem" }}
+                                />
+                             </Tooltip>
+              
+                :null}
+
+     
+     </div> 
+  
                    </div>
                    <div class="flex">
                    <div class="flex flex-col md:w-[74%] max-sm:flex-row justify-between w-full">
@@ -446,6 +490,7 @@ const TaskCardList = (props) => {
             </div>
                       </div>   
                       </div> 
+
                             </div>
                         </div>
 
@@ -484,6 +529,15 @@ handleSetTaskNameId={handleSetTaskNameId}
 
 />
 
+<AddTaskFeedbackDrawerModal
+handleSetTaskNameId={handleSetTaskNameId}
+handleTaskFeedbackDrawerModal={props.handleTaskFeedbackDrawerModal}
+addDrawerTaskFeedbackModal={props.addDrawerTaskFeedbackModal}
+  currentNameId={currentNameId}
+  // taskName={currentprocessName.taskName} // Pass taskName as a prop
+
+/>
+
 
       {/* AddTaskProjectDrawerModal and AddTaskNotesDrawerModal components go here */}
     </>
@@ -493,6 +547,7 @@ handleSetTaskNameId={handleSetTaskNameId}
     userDetails: auth.userDetails,
     addTaskDetailModal:task.addTaskDetailModal,
     addDrawerTaskNotesModal: task.addDrawerTaskNotesModal,
+    addDrawerTaskFeedbackModal:task.addDrawerTaskFeedbackModal,
     userId: auth.userDetails.userId,
     employeeId: auth.userDetails.employeeId,
     addDrawerTaskProjectModal: task.addDrawerTaskProjectModal,
@@ -512,6 +567,7 @@ handleSetTaskNameId={handleSetTaskNameId}
         handleTaskProjectDrawerModal,
         deleteTask,
         linkTaskStatus,
+        handleTaskFeedbackDrawerModal,
         handleTaskNotesDrawerModal,
         approveTaskByTaskId,
         rejectTaskByTaskId,

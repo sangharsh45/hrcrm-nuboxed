@@ -18,6 +18,13 @@ export const handleTaskNotesDrawerModal = (modalProps) => (dispatch) => {
   });
 };
 
+export const handleTaskFeedbackDrawerModal = (modalProps) => (dispatch) => {
+  dispatch({
+    type: types.HANDLE_TASK_FEEDBACK_DRAWER_MODAL,
+    payload: modalProps,
+  });
+};
+
 export const getTaskCompleted = (userId, startDate, endDate) => (dispatch) => {
   ////debugger;
   console.log(startDate, endDate);

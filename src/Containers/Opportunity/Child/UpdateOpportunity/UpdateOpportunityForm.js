@@ -19,7 +19,7 @@ import { updateOpportunity, getAllSalesList } from "../../OpportunityAction";
 import { InputComponent } from "../../../../Components/Forms/Formik/InputComponent";
 import { DatePicker } from "../../../../Components/Forms/Formik/DatePicker";
 import dayjs from "dayjs";
-import { getWorkflow, getStages } from "../../OpportunityAction";
+import { getOppLinkedWorkflow, getOppLinkedStages } from "../../OpportunityAction";
 import { getCustomerData } from "../../../Customer/CustomerAction";
 import { getContactData } from "../../../Contact/ContactAction";
 import { Listbox } from "@headlessui/react";
@@ -42,8 +42,8 @@ function UpdateOpportunityForm (props) {
     props.getAllSalesList();
     props.getCustomerData(props.userId);
     props.getContactData(props.userId);
-    props.getWorkflow(props.orgId);
-    props.getStages(props.orgId);
+    props.getOppLinkedWorkflow(props.orgId);
+    props.getOppLinkedStages(props.orgId);
   },[]);
 
 
@@ -52,8 +52,8 @@ function UpdateOpportunityForm (props) {
   // }
   function getStagesOptions(filterOptionKey, filterOptionValue) {
     const StagesOptions =
-      props.stages.length &&
-      props.stages
+      props.oppLinkStages.length &&
+      props.oppLinkStages
         .filter((option) => {
           if (
             option.opportunityWorkflowDetailsId === filterOptionValue &&
@@ -62,9 +62,17 @@ function UpdateOpportunityForm (props) {
             return option;
           }
         })
-
+        .sort((a, b) => {
+          if (a.probability < b.probability) {
+            return -1; // Sort in increasing order
+          } else if (a.probability > b.probability) {
+            return 1;
+          } else {
+            return 0;
+          }
+        })
         .map((option) => ({
-          label: option.stageName || "",
+          label: `${option.stageName}  ${option.probability}`,
           value: option.opportunityStagesId,
         }));
 
@@ -119,7 +127,7 @@ function UpdateOpportunityForm (props) {
       return contactOptions;
     };
 
-    const WorkflowOptions = props.workflow.map((item) => {
+    const WorkflowOptions = props.oppLinkWorkflow.map((item) => {
       return {
         label: `${item.workflowName || ""}`,
         value: item.opportunityWorkflowDetailsId,
@@ -644,8 +652,8 @@ const mapStateToProps = ({ auth, opportunity, customer, contact }) => ({
   setEditingOpportunity: opportunity.setEditingOpportunity,
   updateOpportunityById: opportunity.updateOpportunityById,
   sales: opportunity.sales,
-  workflow: opportunity.workflow,
-  stages: opportunity.stages,
+  oppLinkWorkflow: opportunity.oppLinkWorkflow,
+  oppLinkStages: opportunity.oppLinkStages,
   contactData: contact.contactData,
   customerData: customer.customerData,
   orgId: auth.userDetails.organizationId,
@@ -656,8 +664,8 @@ const mapDispatchToProps = (dispatch) =>
     {
       updateOpportunity,
       getAllSalesList,
-      getWorkflow,
-      getStages,
+      getOppLinkedWorkflow,
+      getOppLinkedStages,
       getContactData,
       getCustomerData,
     },

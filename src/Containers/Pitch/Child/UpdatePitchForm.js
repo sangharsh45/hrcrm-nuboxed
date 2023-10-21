@@ -15,6 +15,7 @@ import {
     setEditPitch,
     // setClearbitData,
 } from "../PitchAction";
+import {getSources} from "../../Settings/Category/Source/SourceAction"
 import PostImageUpld from "../../../Components/Forms/Formik/PostImageUpld";
 import { TextareaComponent } from "../../../Components/Forms/Formik/TextareaComponent";
 import { InputComponent } from "../../../Components/Forms/Formik/InputComponent";
@@ -37,6 +38,7 @@ function UpdatePitchForm (props) {
   };
   useEffect (()=>{
     props.getAllCustomerEmployeelist();
+    props.getSources(props.orgId)
   },[])
  
 
@@ -51,7 +53,12 @@ function UpdatePitchForm (props) {
       updateLeads,
       setClearbitData,
     } = props;
-
+    const SourceOptions = props.sources.map((item) => {
+      return {
+        label: `${item.name || ""}`,
+        value: item.sourceId,
+      };
+    });
     const [defaultOption, setDefaultOption] = useState(props.setEditingPitch.assignedTo);
     const [selected, setSelected] = useState(defaultOption);
     const selectedOption = props.allCustomerEmployeeList.find((item) => item.fullName === selected);
@@ -338,20 +345,29 @@ function UpdatePitchForm (props) {
                       />
                     </div> */}
                     <div class="w-full">
-           <FastField
-                            name="source"
-                             label={
-                              <FormattedMessage
-                                id="app.source"
-                                defaultMessage="Source"
-                              />
-                            }
-                            isColumnWithoutNoCreate
-                            selectType="sourceName"
-                            component={SearchSelect}
-                             value={values.sourceId}
-                            isColumn
-                          />
+                    <StyledLabel>
+                        <Field
+                          name="source"
+                          isColumnWithoutNoCreate
+                          label={
+                            <FormattedMessage
+                              id="app.source"
+                              defaultMessage="Source"
+                            />
+                          }
+                          component={SelectComponent}
+                          options={
+                            Array.isArray(SourceOptions)
+                              ? SourceOptions
+                              : []
+                          }
+                          value={values.source}
+                          isColumn
+                          margintop={"0"}
+                          inlineLabel
+                        />
+                      </StyledLabel>
+        
            </div>
                 </div>
                  </div>
@@ -475,9 +491,10 @@ function UpdatePitchForm (props) {
   
 }
 
-const mapStateToProps = ({ auth, leads,employee,pitch }) => ({
+const mapStateToProps = ({ auth, leads,employee,source,pitch }) => ({
     setEditingPitch: leads.setEditingPitch,
     updateLeadsById: leads.updateLeadsById,
+    sources: source.sources,
     updatePitchById:pitch.updatePitchById,
     updateLeadsByIdError: leads.updateLeadsByIdError,
     user: auth.userDetails,
@@ -493,6 +510,7 @@ const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
         updatePitch,
+        getSources,
         // updateLeads,
         setEditPitch,
       getAllCustomerEmployeelist,

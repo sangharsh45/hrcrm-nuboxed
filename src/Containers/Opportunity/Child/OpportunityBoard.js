@@ -6,6 +6,7 @@ import { bindActionCreators } from "redux";
 import { withRouter } from "react-router-dom";
 import styled from "styled-components";
 import StageColumns1 from "./StageColumns1";
+import { elipsize } from "../../../Helpers/Function/Functions";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import { StyledTabs, StyledModal } from "../../../Components/UI/Antd";
 import { SmileOutlined, MehOutlined } from '@ant-design/icons';
@@ -376,24 +377,25 @@ function OpportunityBoard(props) {
         }}
       >
         <div style={{ display: "flex" }}>
-          <StyledTabs
-            // defaultActiveKey={this.state.activeKey}
-            onChange={handleTabChange}
-            type="card"
-          >
-            {props.opportunityProcess.map((item, i) => {
-              return (
-                <TabPane
-                  key={i}
-                  tab={
-                    <span onClick={() => handleProcessClick(item)}>
-                      {item.workflowName}
-                    </span>
-                  }
-                ></TabPane>
-              );
-            })}
-          </StyledTabs>
+        <StyledTabs
+  // defaultActiveKey={this.state.activeKey}
+  onChange={handleTabChange}
+  type="card"
+>
+  {props.opportunityProcess
+    .filter(item => item.publishInd === true)
+    .map((item, i) => (
+      <TabPane
+        key={i}
+        tab={
+          <span onClick={() => handleProcessClick(item)}>
+          {elipsize(item.workflowName, 15)}
+          </span>
+        }
+      ></TabPane>
+    ))}
+</StyledTabs>
+
         </div>
         {/* {!props.opportunities.length ? (
           <BundleLoader />

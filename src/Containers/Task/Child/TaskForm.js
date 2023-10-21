@@ -706,7 +706,7 @@ const [priority,setpriority]=useState(props.selectedTask
                             <Tooltip title="High">
                               <Button
                                 type="primary"
-                                // shape="circle"
+                                 shape="circle"
                                 // icon={<ExclamationCircleOutlined />}
                                 onClick={() => handleButtonClick("High")}
                                 style={{
@@ -714,8 +714,8 @@ const [priority,setpriority]=useState(props.selectedTask
                                     priority === "High"
                                       ? "red"
                                       : "white",
-                                      borderRadius: "50%", // Set the borderRadius to 50% for a circular shape
-                                      width: "31px", // Adjust the width as needed
+                                      borderRadius: "50%", 
+                                      width: "31px", 
                                       height: "31px"
                                 }}
                               />
@@ -724,7 +724,7 @@ const [priority,setpriority]=useState(props.selectedTask
                             <Tooltip title="Medium">
                               <Button
                                 type="primary"
-                                // shape="circle"
+                                 shape="circle"
                                 // icon={<ExclamationCircleOutlined />}
                                 onClick={() => handleButtonClick("Medium")}
                                 style={{
@@ -732,8 +732,8 @@ const [priority,setpriority]=useState(props.selectedTask
                                     priority === "Medium"
                                       ? "Orange"
                                       : "white",
-                                      borderRadius: "50%", // Set the borderRadius to 50% for a circular shape
-                                      width: "31px", // Adjust the width as needed
+                                      borderRadius: "50%", 
+                                      width: "31px", 
                                       height: "31px",
                                 }}
                               />
@@ -742,7 +742,7 @@ const [priority,setpriority]=useState(props.selectedTask
                             <Tooltip title="Low">
                               <Button
                                 type="primary"
-                                // shape="circle"
+                                 shape="circle"
                                 // icon={<ExclamationCircleOutlined />}
                                 onClick={() => handleButtonClick("Low")}
                                 style={{
@@ -1121,7 +1121,7 @@ const [priority,setpriority]=useState(props.selectedTask
               Assigned to
             </Listbox.Label>
             <div className="relative mt-1">
-              <Listbox.Button className="relative w-full leading-4 cursor-default rounded-md border border-gray-300 bg-white py-2 pl-3 pr-10 text-left shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm">
+              <Listbox.Button className="relative w-full h-7 leading-4 cursor-default rounded-md border border-gray-300 bg-white py-2 pl-3 pr-10 text-left shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm">
                 {selected}
               </Listbox.Button>
               {open && (
