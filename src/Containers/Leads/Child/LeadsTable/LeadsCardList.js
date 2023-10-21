@@ -285,7 +285,7 @@ onClick={()=>{
             ) : null}
                         </div>
                        
-                                <div className=" flex font-medium flex-col  md:w-24 max-sm:flex-row w-full max-sm:justify-between ">
+                                <div className=" flex font-medium flex-col  md:w-28 max-sm:flex-row w-full max-sm:justify-between ">
                            
                                     <h4 class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden"> Sector </h4>
                                     <h4 class=" text-[0.75rem] text-cardBody font-poppins">   

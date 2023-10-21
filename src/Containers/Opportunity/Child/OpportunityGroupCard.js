@@ -76,7 +76,7 @@ const BussinessCard = (props) => {
               fontSize="0.875em"
               overflow="hidden"
               textOverflow="ellipsis"
-              style={{ color: "#337df4", cursor: "pointer" }}
+              style={{ color: "#337df4", cursor: "pointer",display:"flex",justifyContent:"flex-start" }}
               onClick={handleClick}
             >
               {primaryTitle || ""}
@@ -92,6 +92,7 @@ const BussinessCard = (props) => {
               <CheckCircleTwoTone type="check-circle" theme="twoTone" twoToneColor="#24D8A7" />
               &nbsp;    
               <StopTwoTone type="stop" theme="twoTone" twoToneColor="red" />
+              <Button style={{marginLeft:"0.25rem"}}>Drop</Button>
             </SubTitle>      
           </FlexContainer>
           <FlexContainer

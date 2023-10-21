@@ -318,7 +318,7 @@ class ContactForm extends Component {
                         inlineLabel
                       />
                     </div>
-                    <div class=" w-2/5 max-sm:w-2/4">
+                    <div class=" w-[60%] max-sm:w-2/4">
                       <FastField
                         type="number"
                         name="mobileNumber"
