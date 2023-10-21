@@ -250,7 +250,7 @@ style={{fontSize: "1rem",cursor: 'pointer',}}
                                     </h4>
                               </div>
                               </div>
-                       <div class="flex justify-between  max-sm:mb-2 mt-2">
+                       <div class="flex justify-between  max-sm:mb-2 ">
                        <div className=" flex font-medium flex-col  md:w-[9rem] max-sm:flex-row w-full max-sm:justify-between ">
                            <h4 class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden"> Company </h4>
                            <h4 className="text-[0.75rem] text-cardBody font-poppins">

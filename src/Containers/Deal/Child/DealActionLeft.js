@@ -8,13 +8,7 @@ import { withRouter } from "react-router-dom";
 import LightbulbIcon from "@mui/icons-material/Lightbulb";
 import DeleteIcon from "@mui/icons-material/Delete";
 import LockOpenIcon from "@mui/icons-material/LockOpen";
-// import {
-//   inputOpportunityDataSearch,
-//   getRecords,
-//   getDeleteRecords,
-//   getcloseRecords,
-//   getlostRecords,
-// } from "../OpportunityAction";
+import {getdealsRecord} from "../DealAction";
 import { StopTwoTone, TableOutlined } from "@ant-design/icons";
 import { Input } from "antd";
 
@@ -35,6 +29,9 @@ const DealActionLeft = (props) => {
 //       props.getlostRecords(props.userId);
 //     }
 //   }, [props.viewType, props.userId]);
+useEffect(() => {
+  props.getdealsRecord(props.userId)
+  }, [props.userId]);
 
   const {
     viewType,
@@ -50,7 +47,7 @@ const DealActionLeft = (props) => {
     <div class=" flex items-center">
       <Badge
         size="small"
-        // count={(viewType === "table" && recordData.opportunityDetails) || 0}
+         count={(viewType === "table" &&   props.dealsRecord.opportunityDetails) || 0}
         overflowCount={999}
       >
         <Tooltip
@@ -191,10 +188,11 @@ const DealActionLeft = (props) => {
     </div>
   );
 };
-const mapStateToProps = ({ account, auth, opportunity }) => ({
+const mapStateToProps = ({ deal, auth, opportunity }) => ({
   user: auth.userDetails,
   recordData: opportunity.recordData,
   userId: auth.userDetails.userId,
+  dealsRecord:deal.dealsRecord,
   recorddeleteOpportunityData: opportunity.recorddeleteOpportunityData,
   closeOpportunityData: opportunity.closeOpportunityData,
   lostOpportunityData: opportunity.lostOpportunityData,
@@ -202,11 +200,7 @@ const mapStateToProps = ({ account, auth, opportunity }) => ({
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
-    //   inputOpportunityDataSearch,
-    //   getDeleteRecords,
-    //   getcloseRecords,
-    //   getlostRecords,
-    //   getRecords,
+      getdealsRecord
     },
     dispatch
   );

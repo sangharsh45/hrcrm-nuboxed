@@ -8,6 +8,10 @@ const initialState = {
   fetchingInvestorsError: false,
   investorsbyId: [],
 
+  fetchingInvestorRecords: false,
+  fetchingInvestorRecordsError: false,
+  investorRecord:[],
+
   addingInvestor: false,
   addInvestorModal: false,
   updateInvestorModal: false,
@@ -305,6 +309,23 @@ export const investorReducer = (state = initialState, action) => {
                             fetchingInvestorData: false,
                             fetchingInvestorDataError: true,
                           };
+
+                          case types.GET_INVESTOR_RECORDS_REQUEST:
+                            return { ...state, fetchingInvestorRecords: true };
+                          case types.GET_INVESTOR_RECORDS_SUCCESS:
+                            return {
+                              ...state,
+                              fetchingInvestorRecords: false,
+                              investorRecord: action.payload,
+                            };
+                          case types.GET_INVESTOR_RECORDS_FAILURE:
+                            return {
+                              ...state,
+                              fetchingInvestorRecords: false,
+                              fetchingInvestorRecordsError: true,
+                            };
+                  
+
                                     
 default:
       return state;

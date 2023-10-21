@@ -378,3 +378,30 @@ export const getInvestorDetailsById = (investorId) => (dispatch) => {
         });
       });
   };
+
+  export const getInvestor = (userId) => (dispatch) => {
+    dispatch({
+      type: types.GET_INVESTOR_RECORDS_REQUEST,
+    });
+    axios
+      .get(`${base_url}/investor/record/count/${userId}`, {
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+        },
+      })
+      .then((res) => {
+        console.log(res);
+        dispatch({
+          type: types.GET_INVESTOR_RECORDS_SUCCESS,
+          payload: res.data,
+        });
+      })
+      .catch((err) => {
+        console.log(err.response);
+        dispatch({
+          type: types.GET_INVESTOR_RECORDS_FAILURE,
+          payload: err,
+        });
+      });
+  };
+  

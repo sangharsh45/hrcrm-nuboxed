@@ -56,6 +56,7 @@ const LeadsActionLeft = (props) => {
         </span>
       </Tooltip>
       </Badge>
+      <div class="ml-2">
       <Badge
         size="small"
         count={(props.viewType === "list" && props.leadsCountJunked.junkedList) || 0}
@@ -75,7 +76,7 @@ const LeadsActionLeft = (props) => {
                 Junked
               </Tag>
               </Badge>
-
+              </div>
       <div class=" w-72 max-sm:w-28">
           <Input
             placeholder="Search by Name, Sector or Owner"

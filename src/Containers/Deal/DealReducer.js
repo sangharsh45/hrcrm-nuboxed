@@ -25,6 +25,11 @@ const initialState = {
   fetchDealdetailsError:false,
   dealDetailsbyID:{},
 
+  fetchingDelasRecords: false,
+  fetchingDelasRecordsError: false,
+  dealsRecord:{},
+
+
   updateDealbyID: false,
   updateDealbyIDError: false,
   openupdateDealModal:false,
@@ -213,6 +218,22 @@ export const dealReducer = (state = initialState, action) => {
                                     fetchingDealLinkedWorkflow: false,
                                     fetchingDealLinkedWorkflowError: true,
                                   };
+
+           case types.GET_DEALS_RECORDS_REQUEST:
+          return { ...state, fetchingDelasRecords: true };
+        case types.GET_DEALS_RECORDS_SUCCESS:
+          return {
+            ...state,
+            fetchingDelasRecords: false,
+            dealsRecord: action.payload,
+          };
+        case types.GET_DEALS_RECORDS_FAILURE:
+          return {
+            ...state,
+            fetchingDelasRecords: false,
+            fetchingDelasRecordsError: true,
+          };
+
                        
                             
     default:

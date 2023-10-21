@@ -310,3 +310,30 @@ export const getDealLinkedWorkflow = (orgId) => (dispatch) => {
       });
     });
 };
+
+
+export const getdealsRecord = (userId) => (dispatch) => {
+  dispatch({
+    type: types.GET_DEALS_RECORDS_REQUEST,
+  });
+  axios
+    .get(`${base_url}/investorOpportunity/record/count/${userId}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.GET_DEALS_RECORDS_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err.response);
+      dispatch({
+        type: types.GET_DEALS_RECORDS_FAILURE,
+        payload: err,
+      });
+    });
+};

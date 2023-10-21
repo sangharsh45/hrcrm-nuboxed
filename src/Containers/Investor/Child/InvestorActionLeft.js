@@ -17,6 +17,7 @@ import SpeechRecognition, {
 //   getRecords,
 //   getCategoryRecords,
 // } from "../CustomerAction";
+import {getInvestor} from "../InvestorAction";
 import { Input } from "antd";
 
 const Option = StyledSelect.Option;
@@ -56,13 +57,17 @@ const InvestorActionLeft = (props) => {
 //       props.setCurrentData(transcript);
 //     }
 //   }, [props.viewType, props.userId, transcript]);
+useEffect(() => {
+  props.getInvestor(props.userId)
+  }, [props.userId]);
+
   return (
     <div class=" flex items-center"
     >
       <Tooltip title={<FormattedMessage id="app.all" defaultMessage="All" />}>
         <Badge
           size="small"
-        //count={(props.viewType === "list" && props.recordData.customer) || 0}
+        count={(props.viewType === "list" && props.investorRecord.investor) || 0}
           overflowCount={999}
         >
           <span
@@ -147,6 +152,7 @@ const InvestorActionLeft = (props) => {
 };
 const mapStateToProps = ({ investor, auth, candidate }) => ({
   user: auth.userDetails,
+  investorRecord:investor.investorRecord,
 //   recordData: customer.recordData,
 //   recordCategoryData: customer.recordCategoryData,
 //   recordCategoryDataBlue: customer.recordCategoryDataBlue,
@@ -156,9 +162,7 @@ const mapStateToProps = ({ investor, auth, candidate }) => ({
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
-    //   inputCustomerDataSearch,
-    //   getRecords,
-    //   getCategoryRecords,
+      getInvestor
     },
     dispatch
   );
