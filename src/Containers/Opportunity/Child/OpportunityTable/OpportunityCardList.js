@@ -285,7 +285,7 @@ imgHeight={"1.8em"}
         <FlexContainer 
           style={{ width: "100%", paddingLeft: "0.5em", marginTop: "-0.18em" }}
         >
-            <div class="flex justify-between w-wk">
+            <div class="flex justify-between w-wk mt-1">
               <div>
               {item.approveInd&&item.opportunityOwner ? (
 <>
