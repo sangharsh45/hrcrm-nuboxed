@@ -11,7 +11,7 @@ const Option = StyledSelect.Option;
 const PlannerActionRight = (props) => {
   return (
     <FlexContainer alignItems="center">
-        {props.user.taskFullListInd === true &&(
+        {props.user.dashboardFullListInd === true &&(
        <PlannerSharedForm/>
        )} 
       &nbsp;

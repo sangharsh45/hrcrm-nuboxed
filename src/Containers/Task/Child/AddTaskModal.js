@@ -8,7 +8,7 @@ const AddTaskModal = (props) => {
   const { addTaskModal, handleTaskModal, ...formProps } = props;
   console.log(props.selectedTask);
   const isSmallScreen = window.innerWidth <= 600;
-  const drawerWidth = isSmallScreen ? "90%" : "55%";
+  const drawerWidth = isSmallScreen ? "90%" : "60%";
   return (
     <>
       <StyledDrawer
