@@ -15,7 +15,7 @@ const initialState = {
 
     fetchingPitchRecords: false,
     fetchingPitchRecordsError: false,
-    pitchRecord:{},
+    pitchRecord:[],
 
 
     updateTypePitch:false,

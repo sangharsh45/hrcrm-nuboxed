@@ -3,7 +3,8 @@ import { Avatar, Divider, Button, Menu, Dropdown } from "antd";
 import { UserOutlined } from '@ant-design/icons';
 import { FormattedMessage } from "react-intl";
 import { elipsize } from "../../../Helpers/Function/Functions";
-
+import { StopTwoTone, TableOutlined } from "@ant-design/icons";
+import { CheckCircleTwoTone } from "@ant-design/icons";
 import { FlexContainer, MainWrapper } from "../../../Components/UI/Layout";
 import {
   MultiAvatar,
@@ -56,7 +57,7 @@ const BussinessCard = (props) => {
         <FlexContainer
           alignItems="center"
           flexWrap="no-wrap"
-          style={{ height: "2.5em" }}
+          style={{ height: "3rem" }}
         >
           <FlexContainer style={{ flexBasis: "20%", margin: "0.3rem" }}>
             <MultiAvatar
@@ -85,9 +86,13 @@ const BussinessCard = (props) => {
               {/* <i class="far fa-address-book"></i> */}
               &nbsp;&nbsp;
               {currencyType && <CurrencySymbol currencyType={currencyType} />}
-              &nbsp;
+             
+              &nbsp;             
               {secondaryTitle || ""} 
-            </SubTitle>
+              <CheckCircleTwoTone type="check-circle" theme="twoTone" twoToneColor="#24D8A7" />
+              &nbsp;    
+              <StopTwoTone type="stop" theme="twoTone" twoToneColor="red" />
+            </SubTitle>      
           </FlexContainer>
           <FlexContainer
             style={{ flexBasis: "10%", alignSelf: "flex-start" }}

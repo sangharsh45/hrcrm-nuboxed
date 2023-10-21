@@ -26,10 +26,10 @@ const { Search } = Input;
 const PitchActionLeft = (props) => {
   const dummy = ["cloud", "azure", "fgfdg"];
   
+
   useEffect(() => {
     props.getPitchRecords(props.userId)
-  }, [ props.userId]);
-
+    }, [props.userId]);
   function handleChange(data) {
     
   }
