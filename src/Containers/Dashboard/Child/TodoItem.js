@@ -125,9 +125,9 @@ class TodoItem extends Component {
               &nbsp;&nbsp; &nbsp;&nbsp;
             
               <SubTitle style={{ fontSize: 12, marginLeft: "1.56em" }}>
-                 {`${todo.topic} / `}
-                 {`${todo.activity}  `}
-                 {`${todo.type}`}
+                 {/* {` / `} */}
+                 {`${todo.activity} ${todo.topic} ${todo.type} `}
+                 {/* {``} */}
                  </SubTitle>
             </FlexContainer>
           </div>

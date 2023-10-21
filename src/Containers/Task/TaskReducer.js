@@ -28,6 +28,8 @@ const initialState = {
   fetchingCandidateTaskListError:false,
   candidateTaskList:[],
 
+  addDrawerTaskFeedbackModal:false,
+
   addSharingTask: false,
   addSharingTaskError: false,
 
@@ -741,6 +743,9 @@ export const TaskReducer = (state = initialState, action) => {
 
       case types.HANDLE_TASK_NOTES_DRAWER_MODAL:
         return { ...state, addDrawerTaskNotesModal: action.payload };
+
+        case types.HANDLE_TASK_FEEDBACK_DRAWER_MODAL:
+          return { ...state, addDrawerTaskFeedbackModal: action.payload };
     
 
         case types.ADD_TASK_NOTES_REQUEST:

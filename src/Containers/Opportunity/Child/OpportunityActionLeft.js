@@ -54,6 +54,27 @@ const OpportunityActionLeft = (props) => {
 
   return (
     <div class=" flex items-center">
+
+<Tooltip
+          title={
+            <FormattedMessage id="app.stageview" defaultMessage="Stage View" />
+          }
+        >
+          {/*<TableOutlined*/}
+          <span
+            style={{
+              fontSize: "1.56em",
+              marginRight: "0.3rem",
+              cursor:"pointer",
+              color: props.viewType === "stage" && "#1890ff",
+            }}
+            // iconType="table"
+            tooltipTitle="Stage View"
+            onClick={() => props.setOpportunityViewType("stage")}
+          >
+           <TableOutlined/>
+          </span>
+        </Tooltip>
       <Badge
         size="small"
         count={(viewType === "table" && recordData.opportunityDetails) || 0}
@@ -68,10 +89,10 @@ const OpportunityActionLeft = (props) => {
           }
         >
           <span
-            class=" mr-2 text-sm cursor-pointer"
+            class=" mr-2 text-sm "
             onClick={() => props.setOpportunityViewType("table")}
             style={{
-              color: props.viewType === "table" && "#1890ff",
+              color: props.viewType === "table" && "#1890ff",cursor:"pointer"
             }}
           >
             {" "}
@@ -79,25 +100,7 @@ const OpportunityActionLeft = (props) => {
           </span>
         </Tooltip>
       </Badge>
-      <Tooltip
-          title={
-            <FormattedMessage id="app.stageview" defaultMessage="Stage View" />
-          }
-        >
-          {/*<TableOutlined*/}
-          <span
-            style={{
-              fontSize: "1.56em",
-              marginRight: "0.3rem",
-              color: props.viewType === "stage" && "#1890ff",
-            }}
-            // iconType="table"
-            tooltipTitle="Stage View"
-            onClick={() => props.setOpportunityViewType("stage")}
-          >
-           <TableOutlined/>
-          </span>
-        </Tooltip>
+  
       <Tooltip title={"Close"}>
         {" "}
         <Badge
@@ -113,6 +116,7 @@ const OpportunityActionLeft = (props) => {
             class=" mr-2 text-sm cursor-pointer"
             onClick={() => props.setOpportunityViewType("close")}
             style={{
+              cursor:"pointer",
               color: props.viewType === "close" && "#1890ff",
             }}
           >
@@ -135,6 +139,7 @@ const OpportunityActionLeft = (props) => {
             class=" mr-2 text-sm cursor-pointer"
             onClick={() => props.setOpportunityViewType("lost")}
             style={{
+              cursor:"pointer",
               color: props.viewType === "lost" && "#1890ff",
             }}
           >
@@ -166,6 +171,7 @@ const OpportunityActionLeft = (props) => {
             class=" mr-2 text-sm cursor-pointer"
             onClick={() => props.setOpportunityViewType("dashboard")}
             style={{
+              cursor:"pointer",
               color: props.viewType === "dashboard" && "#1890ff",
             }}
           >
@@ -188,6 +194,7 @@ const OpportunityActionLeft = (props) => {
             class=" mr-2 text-sm cursor-pointer"
             onClick={() => props.setOpportunityViewType("won")}
             style={{
+              cursor:"pointer",
               color: props.viewType === "won" && "#1890ff",
             }}
           >

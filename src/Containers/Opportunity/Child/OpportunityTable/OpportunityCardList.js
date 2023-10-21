@@ -277,6 +277,9 @@ imgWidth={"1.8em"}
 imgHeight={"1.8em"}
 />
 </span>
+<span>
+  <Button>Drop</Button>
+</span>
         </div>
     
         <FlexContainer 

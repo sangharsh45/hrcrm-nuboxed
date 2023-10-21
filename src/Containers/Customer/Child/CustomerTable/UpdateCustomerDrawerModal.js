@@ -40,7 +40,7 @@ class UpdateCustomerDrawerModal extends Component {
       <div className="pulse-background">
         <StyledDrawer
           title={name}
-          width="45em"
+          width="55em"
           style={{ marginTop: "5rem" }}
           visible={this.props.updateDrawerCustomerModal}
           closable

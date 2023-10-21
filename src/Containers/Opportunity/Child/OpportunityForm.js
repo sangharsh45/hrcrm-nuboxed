@@ -22,10 +22,10 @@ import {
   getRecruiterName,
   getAllSalesList,
   getInitiative,
-  getStages,
-  getWorkflow
-  // getOppLinkedWorkflow,
-  // getOppLinkedStages,
+  // getStages,
+  // getWorkflow
+  getOppLinkedWorkflow,
+  getOppLinkedStages,
 } from "../OpportunityAction";
 import PlayCircleFilledIcon from "@mui/icons-material/PlayCircleFilled";
 import RotateRightIcon from "@mui/icons-material/RotateRight";
@@ -56,8 +56,8 @@ function OpportunityForm(props) {
     props.getContactData(props.userId);
     props.getCustomerData(props.userId);
     props.getInitiative(props.userId);
-     props.getStages(props.orgId);
-     props.getWorkflow(props.orgId);
+     props.getOppLinkedStages(props.orgId);
+     props.getOppLinkedWorkflow(props.orgId);
   }, []);
 
   const [defaultOption, setDefaultOption] = useState(props.fullName);
@@ -112,8 +112,8 @@ function OpportunityForm(props) {
 
   function getStagesOptions(filterOptionKey, filterOptionValue) {
     const StagesOptions =
-      props.stages.length &&
-      props.stages
+      props.oppLinkStages.length &&
+      props.oppLinkStages
         .filter((option) => {
           if (
             option.opportunityWorkflowDetailsId === filterOptionValue &&
@@ -141,7 +141,7 @@ function OpportunityForm(props) {
     return StagesOptions;
   }
 
-  const WorkflowOptions = props.workflow.map((item) => {
+  const WorkflowOptions = props.oppLinkWorkflow.map((item) => {
     return {
       label: `${item.workflowName || ""}`,
       value: item.opportunityWorkflowDetailsId,
@@ -808,11 +808,9 @@ const mapDispatchToProps = (dispatch) =>
       // getInitiativeByCustomerId,
       getCustomerData,
       getInitiative,
-      getWorkflow,
+      getOppLinkedWorkflow,
       // getOpportunitySKill
-      // getOppLinkedWorkflow,
-      // getOppLinkedStages,
-      getStages
+      getOppLinkedStages
     },
     dispatch
   );

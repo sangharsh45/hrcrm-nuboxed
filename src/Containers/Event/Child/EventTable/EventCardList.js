@@ -123,7 +123,7 @@ if (fetchingEventListRangeByUserId)
                                         </div>
                                 </div>
 
-                                <div className=" flex font-medium flex-col  md:w-52 max-sm:flex-row justify-between w-full ">
+                                <div className=" flex font-medium flex-col  md:w-52 max-sm:flex-row  w-full ">
                                     <div class=" text-[0.875rem] text-cardBody font-[0.875rem] font-poppins max-sm:hidden"> Subject </div>
                                     <div class=" text-[0.75rem] text-cardBody font-poppins">   
                                     {item.eventSubject}
@@ -131,7 +131,7 @@ if (fetchingEventListRangeByUserId)
                                 </div>
                                 </div>
                                 <div class="flex">
-                                <div className=" flex font-medium flex-col md:w-40 max-sm:flex-row justify-between w-full">
+                                <div className=" flex font-medium flex-col md:w-40 max-sm:flex-row  w-full">
                                     <div class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden">Start</div>
                                     <div class="text-[0.75rem] text-cardBody font-poppins">
                                     {` ${moment(item.startDate).format("llll")}`}
@@ -155,7 +155,7 @@ if (fetchingEventListRangeByUserId)
                 </span>
                                   </div>
                               </div> */}
-                                <div className=" flex font-medium flex-col md:w-32 max-sm:flex-row justify-between w-full ">
+                                <div className=" flex font-medium flex-col md:w-32 max-sm:flex-row  w-full ">
                                     <div class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden">Include</div>
 
                                     <div class=" text-[0.75rem] text-cardBody font-poppins">
@@ -183,7 +183,7 @@ if (fetchingEventListRangeByUserId)
             </Avatar.Group>
                                     </div>
                                 </div>
-                                <div className="flex font-medium flex-col md:w-48 max-sm:flex-row justify-between w-full ">
+                                <div className="flex font-medium flex-col md:w-48 max-sm:flex-row  w-full ">
                                     <div class="text-[0.875rem] text-cardBody font-poppins max-sm:hidden">Assigned To</div>
 
                                     <div class="text-[0.75rem] text-cardBody font-poppins">
@@ -203,7 +203,7 @@ if (fetchingEventListRangeByUserId)
                                 </div>
                                 <div class="flex">
                                
-                                <div className="flex font-medium flex-col md:w-48 max-sm:flex-row justify-between w-full ">
+                                <div className="flex font-medium flex-col md:w-48 max-sm:flex-row  w-full ">
                        
                        <div class="text-[0.875rem] text-cardBody font-poppins max-sm:hidden">Owner</div>
 
