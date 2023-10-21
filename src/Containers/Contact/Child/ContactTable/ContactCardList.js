@@ -228,7 +228,11 @@ function ContactCardList(props) {
                                     <div class="text-[0.875rem] text-cardBody font-poppins max-sm:hidden">Portal Acess</div>
 
                                     <div class="text-[0.75rem] text-cardBody font-poppins">
-{item.thirdPartyAccessInd}
+
+                                    {item.thirdPartyAccessInd 
+    ? `${item.thirdPartyAccessInd}`
+    : 'Not Provided'}
+
                                     </div>
                                 </div>
                                 <div class="flex">

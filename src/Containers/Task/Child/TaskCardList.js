@@ -35,7 +35,7 @@ import {
   handleTaskProjectDrawerModal,
   handleTaskopenModal
 } from "../TaskAction";
-import { MultiAvatar } from "../../../Components/UI/Elements";
+import { MultiAvatar, StyledLabel } from "../../../Components/UI/Elements";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
 import AddTaskNotesDrawerModal from "./AddTaskNotesDrawerModal";
 import OpenTaskModal from "./OpenTaskModal";
@@ -127,7 +127,7 @@ const TaskCardList = (props) => {
       {taskListRangeByUserId.map((item) => { 
         const currentDate = moment();
         const endDate = moment(item.endDate);
-        const difference = endDate.diff(currentDate, 'days');
+        const difference = currentDate.diff(endDate, 'days');
          console.log("difference",difference)
          console.log("item",item.taskId)
                     return (
@@ -210,7 +210,9 @@ const TaskCardList = (props) => {
                                 </div>
                                
                                 <div class="flex flex-col w-[13%]">
+                                  {/* <StyledLabel>today-enddate</StyledLabel> */}
                     <div class="">
+                   
                     <ButtonGroup >
           {/* {item.complitionStatus === "To Start" && ( */}
           <StatusIcon
@@ -272,10 +274,11 @@ const TaskCardList = (props) => {
                     </div> */}
                     </div>
                     <div class="flex max-sm:mt-4">
-                                <div className=" flex font-medium flex-col mt-1 md:w-32 max-sm:flex-row justify-between w-full ">
+                                <div className=" flex font-medium flex-col  md:w-32 max-sm:flex-row justify-between w-full ">
                                     <div class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden">Owner</div>
                                     <div class="text-[0.75rem] text-cardBody font-poppins">
                                     <MultiAvatar
+                                    // style={{marginBottom:"0.25rem"}}
                   primaryTitle={item.submittedBy}
                   imgWidth={"1.8rem"}
                   imgHeight={"1.8rem"}
@@ -283,7 +286,7 @@ const TaskCardList = (props) => {
                                     </div>
                                 </div>
                                
-                                <div className=" flex font-medium flex-col mt-1 md:w-32 max-sm:flex-row justify-between w-full ">
+                                <div className=" flex font-medium flex-col md:w-32 max-sm:flex-row justify-between w-full ">
                                   <div class="text-[0.875rem] text-cardBody font-poppins max-sm:hidden">Assigned To</div>
                                   <div class="text-[0.75rem] text-cardBody font-poppins">
                                   {item.assignedToName === null ? (
