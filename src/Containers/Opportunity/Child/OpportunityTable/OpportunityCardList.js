@@ -170,7 +170,7 @@ console.log("currentOpportunityId",currentOpportunityId)
             flexDirection="column"
             style={{ flexBasis: "83%", overflow: "hidden" }}
           >
-            <div style={{ color: "#337df4", cursor: "pointer", fontSize: "1em" }}>
+            <div class="font-semibold " style={{ color: "#337df4", cursor: "pointer", fontSize: "1em" }}>
           <Link
 toUrl={`opportunity/${item.opportunityId}`}
 title={`${item.opportunityName}`}>

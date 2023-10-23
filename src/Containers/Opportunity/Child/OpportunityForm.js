@@ -580,7 +580,8 @@ function OpportunityForm(props) {
                 <Spacer /> */}
 <div class="flex justify-between max-sm:flex-col">
 <div class=" w-2/5 max-sm:w-wk">
-               <StyledLabel>
+          
+               <Spacer />
                   <Field
                     name="customerId"
                     // selectType="customerList"
@@ -603,7 +604,7 @@ function OpportunityForm(props) {
                     value={values.customerId}
                     inlineLabel
                   />
-                </StyledLabel>
+          
             </div>
             <div class=" w-2/5 max-sm:w-wk">
             <StyledLabel>

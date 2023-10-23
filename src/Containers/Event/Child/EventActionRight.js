@@ -32,7 +32,7 @@ class EventActionRight extends React.Component {
          )} 
         <Tooltip placement="left" title="Create">
           <Button type="primary"
-           ghost onClick={() => handleEventModal(true)}>
+            onClick={() => handleEventModal(true)}>
             Add
           </Button>
         </Tooltip>

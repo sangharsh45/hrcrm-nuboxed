@@ -28,7 +28,7 @@ class LeadsActionRight extends React.Component {
       currentUser={this.props.currentUser} 
       /> */}
       {/* )} */}
-          <Button type="primary" ghost onClick={() => handleLeadsModal(true)}>
+          <Button type="primary"  onClick={() => handleLeadsModal(true)}>
             Add
           </Button>
         </div>

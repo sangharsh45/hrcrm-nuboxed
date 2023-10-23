@@ -58,7 +58,7 @@ class MileageCard2 extends React.Component {
                                             <h4 class=" text-sm text-cardBody font-poppins">
                                             Voucher ID
                                             </h4>
-                                            <h4 class=" text-xs text-blue-500 text-cardBody font-poppins cursor-pointer">
+                                            <h4 class=" text-xs text-blue-500 text-cardBody font-poppins font-semibold  cursor-pointer">
                                                 
                                             <div onClick={() => { this.handleExpand(item.voucherId) 
                 this.props.handleMileageVoucherIdDrwer(true)}}>

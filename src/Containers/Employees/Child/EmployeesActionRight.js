@@ -36,7 +36,7 @@ class EmployeesActionRight extends React.Component {
 
           <Button
             type="primary"
-            ghost
+         
             onClick={() => handleEmployeeModal(true)}
           >
             Add

@@ -54,7 +54,9 @@ class Opportunity extends Component {
           handleOpportunityModal={handleOpportunityModal}
         />
         <Suspense fallback={<BundleLoader />}>
-          {this.props.viewType === "table" ?
+          {      this.props.viewType === "stage" ?
+             <OpportunityBoard/>:
+          this.props.viewType === "table" ?
           // <OpportunityTable /> 
           <OpportunityCardList/>
           :
@@ -75,8 +77,7 @@ class Opportunity extends Component {
                     <OpportunityMap/> :
              this.props.viewType === "card" ?
              <OpportunityCardView/> :
-             this.props.viewType === "stage" ?
-             <OpportunityBoard/>:
+       
              this.props.viewType === "won" ?
              // <OpportunitylostTable/>
             <OpportunityWonCard/>

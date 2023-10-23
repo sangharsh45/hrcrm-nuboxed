@@ -162,7 +162,7 @@ function CustomerCardList(props) {
                                             <h4 class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden">
                                             Name
                                             </h4>
-                                            <h4 class=" text-[0.75rem] text-blue-500 text-cardBody font-poppins cursor-pointer">
+                                            <h4 class=" text-[0.75rem] text-blue-500 text-cardBody font-poppins font-semibold  cursor-pointer">
                                                 
          <Link
           toUrl={`customer/${item.customerId}`}
@@ -185,7 +185,7 @@ function CustomerCardList(props) {
                               
                                 </div>
 
-                                <div className=" flex font-medium flex-col  md:w-52 max-sm:flex-row w-full max-sm:justify-between  ">
+                                <div className=" flex font-medium flex-col  md:w-40 max-sm:flex-row w-full max-sm:justify-between  ">
                            
                                     <h4 class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden"> Sector </h4>
                                     <h4 class=" text-[0.75rem] text-cardBody font-poppins">   
@@ -193,7 +193,7 @@ function CustomerCardList(props) {
                                     </h4>
                                 
                                 </div> 
-                                <div className=" flex font-medium flex-col md:w-36 max-sm:flex-row w-full max-sm:justify-between ">
+                                <div className=" flex font-medium flex-col md:w-28 max-sm:flex-row w-full max-sm:justify-between ">
                                   
 
                                     <h4 class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden">Country</h4>

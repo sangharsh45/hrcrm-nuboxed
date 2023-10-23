@@ -188,7 +188,7 @@ const TaskCardList = (props) => {
 
                                 <div className=" flex font-medium flex-col  md:w-36 max-sm:flex-row w-full ">
                                     <div class=" text-[0.875rem] text-cardBody font-[0.875rem] font-poppins max-sm:hidden"> Name </div>
-                                    <div class=" text-[0.75rem] text-cardBody font-poppins">   
+                                    <div class=" text-[0.75rem] text-cardBody font-semibold  font-poppins">   
                                     <span   
                 onClick={() => {
                   props.handleTaskopenModal(true);               

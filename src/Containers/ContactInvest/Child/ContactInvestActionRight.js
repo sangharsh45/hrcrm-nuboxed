@@ -64,7 +64,7 @@ class ContactInvestActionRight extends React.Component {
         <Tooltip placement="left" title="Create">
           <Button 
            type="primary"
-           ghost onClick={() => handleContactInvestModal(true)}
+         onClick={() => handleContactInvestModal(true)}
         >
             Add
           </Button>

@@ -259,7 +259,7 @@ onClick={()=>{
                        <div class="flex"> 
                        <div className=" flex font-medium flex-col  md:w-40 max-sm:flex-row w-full max-sm:justify-between ">
                            <h4 class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden"> Company </h4>
-                           <h4 class=" text-[0.75rem] text-cardBody font-poppins">   
+                           <h4 class=" text-[0.75rem] text-cardBody font-semibold  font-poppins">   
                            <Link to={`leads/${item.leadsId}`} title={item.companyName || "Not Available"}>
   {item.companyName || "Not Available"}
 </Link>

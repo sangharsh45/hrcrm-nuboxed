@@ -162,7 +162,7 @@ function ContactInvestCardList(props) {
                                             <div class="text-[0.875rem] text-cardBody font-poppins max-sm:hidden">
                                             Name
                                             </div>
-                                            <div class="text-[0.75rem] text-blue-500 text-cardBody font-poppins cursor-pointer">
+                                            <div class="text-[0.75rem] text-blue-500 text-cardBody font-poppins font-semibold  cursor-pointer">
                                                 
          <Link
           toUrl={`contactinvest/${item.contactId}`}
