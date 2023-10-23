@@ -889,6 +889,8 @@ class SearchSelect extends Component {
       // const customOption = ({ label, value }) => <h3>{`${label}----${value}`}</h3>
     }
     if (selectType === "contactOpportunityList") {
+      <>
+     {contactByCustomerId.length ? 
       options = contactByCustomerId
         // .sort((a, b) => (a.sourceName < b.sourceName ? -1 : 1))
         .map((item, i) => ({
@@ -896,9 +898,9 @@ class SearchSelect extends Component {
           label: `${item.firstName || ""} ${item.middleName ||
             ""} ${item.lastName || ""}`,
           color: "#FF8B00",
-        }));
-
-      // const customOption = ({ label, value }) => <h3>{`${label}----${value}`}</h3>
+        }))
+        :null}
+</>
     }
 
     if (selectType === "customerList") {

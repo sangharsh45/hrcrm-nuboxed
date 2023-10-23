@@ -133,12 +133,12 @@ function CustomerOpportunityForm(props) {
     return classes.filter(Boolean).join(' ')
   }
 
-  const ContactOptions = props.contactByCustomerId.map((item) => {
-    return {
-      label: `${item.contactName || ""}`,
-      value: item.contactId,
-    };
-  });
+  // const ContactOptions = props.contactByCustomerId.map((item) => {
+  //   return {
+  //     label: `${item.contactName || ""}`,
+  //     value: item.contactId,
+  //   };
+  // });
 
   function getInitiativeOptions(filterOptionKey, filterOptionValue) {
     const initiativeOptions =
@@ -609,13 +609,9 @@ function CustomerOpportunityForm(props) {
                       defaultMessage="Contact"
                     />
                   }
-                  // isRequired
                   component={SearchSelect}
                   isColumn
                   value={values.contactId}
-                  // defaultValue={{ label: firstName, value: documentId }}
-                  // isDisabled={defaultContacts}
-                  // defaultValue={defaultContacts ? defaultContacts : null}
                   inlineLabel
                 />
 
