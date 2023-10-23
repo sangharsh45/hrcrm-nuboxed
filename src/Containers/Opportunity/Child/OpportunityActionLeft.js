@@ -38,6 +38,9 @@ const OpportunityActionLeft = (props) => {
     } else if (props.viewType === "won") {
       props.getWonRecords(props.userId);
     }
+    else if (props.viewType === "stage") {
+      props.getRecords(props.userId);
+    }
     
   }, [props.viewType, props.userId]);
 
@@ -54,12 +57,17 @@ const OpportunityActionLeft = (props) => {
 
   return (
     <div class=" flex items-center">
-
+  
 <Tooltip
           title={
             <FormattedMessage id="app.stageview" defaultMessage="Stage View" />
           }
         >
+             <Badge
+        size="small"
+        count={(viewType === "stage" && recordData.opportunityDetails) || 0}
+        overflowCount={999}
+      >
           {/*<TableOutlined*/}
           <span
             style={{
@@ -69,12 +77,14 @@ const OpportunityActionLeft = (props) => {
               color: props.viewType === "stage" && "#1890ff",
             }}
             // iconType="table"
-            tooltipTitle="Stage View"
+            // tooltipTitle="Stage View"
             onClick={() => props.setOpportunityViewType("stage")}
           >
            <TableOutlined/>
           </span>
+          </Badge>
         </Tooltip>
+      
       <Badge
         size="small"
         count={(viewType === "table" && recordData.opportunityDetails) || 0}

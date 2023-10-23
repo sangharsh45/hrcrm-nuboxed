@@ -30,7 +30,7 @@ const TaskActionRight = (props) => {
       <Tooltip placement="left" title="Create">
         <Button
           type="primary"
-          ghost
+       
           onClick={() => props.handleTaskModal(true)}
         >
           Add

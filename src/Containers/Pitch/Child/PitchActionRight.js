@@ -38,7 +38,7 @@ class PitchActionRight extends React.Component {
       currentUser={this.props.currentUser} 
       /> */}
       {/* )} */}
-          <Button type="primary" ghost 
+          <Button type="primary" 
            onClick={() => this.props.handlePitchModal(true)}
           >
             Add

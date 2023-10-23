@@ -94,7 +94,7 @@ function handleSetCurrentEmployeeId(employeeId,) {
                           />
                          </div>
                       {/* <CardDescription> */}
-                      <div>
+                      <div class="font-semibold ">
                         <Header>
                         <EmployeeDetailsView
    employeeId={item.employeeId}

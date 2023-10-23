@@ -123,7 +123,7 @@ const PitchCardList = (props) => {
                                             <h4 class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden">
                                             Name
                                             </h4>
-                                            <h4 class=" text-[0.75rem] text-blue-500 text-cardBody font-poppins cursor-pointer">
+                                            <h4 class=" text-[0.75rem] text-blue-500 text-cardBody font-poppins font-semibold  cursor-pointer">
                                                 
                                                 {/* <Link
                                                  toUrl={`customer/${item.customerId}`}

@@ -302,7 +302,9 @@ function CustomerForm(props) {
                     <Listbox value={selected} onChange={setSelected}>
         {({ open }) => (
           <>
-            <Listbox.Label className="block font-semibold text-[0.75rem] ">
+            <Listbox.Label className="block font-semibold text-[0.75rem] mb-1 leading-lh1.2  "
+            // style={{boxShadow:"0em 0.25em 0.625em -0.25em" }}
+            >
               Assigned to
             </Listbox.Label>
             <div className="relative mt-1">

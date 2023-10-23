@@ -64,7 +64,7 @@ function ExpenseCard2(props) {
                                   <h4 class=" text-sm text-cardBody font-poppins">
                                   Voucher ID
                                   </h4>
-                                  <h4 class=" text-xs text-blue-500 text-cardBody font-poppins cursor-pointer">
+                                  <h4 class=" text-xs text-blue-500 text-cardBody font-poppins font-semibold  cursor-pointer">
 <div onClick={() => { handleExpand(item.voucherId);
                 handleSetParticularRowData(item);
                 props.handleExpenseVoucherIdDrawer(true);}}>
