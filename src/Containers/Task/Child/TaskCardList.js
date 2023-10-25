@@ -132,12 +132,12 @@ const TaskCardList = (props) => {
          console.log("item",item.taskId)
                     return (
                         <div>
-                            <div className="flex justify-between mt-4 max-sm:flex-col"
+                            <div className="flex justify-between mt-1 max-sm:flex-col"
                                 style={{
                                     borderBottom: "3px dotted #515050"
                                 }}>
                                      <div class="flex">
-                                <div className=" flex font-medium flex-col md:w-52 max-sm:flex-row justify-between w-full ">
+                                <div className=" flex font-medium flex-col md:w-36 max-sm:flex-row justify-between w-full ">
 <div className="flex max-sm:w-full"> 
 {item.priority === "High" && (
                       <div
@@ -186,7 +186,7 @@ const TaskCardList = (props) => {
                                         </div>
                                 </div>
 
-                                <div className=" flex font-medium flex-col  md:w-36 max-sm:flex-row w-full ">
+                                <div className=" flex font-medium flex-col  md:w-32 max-sm:flex-row w-full ">
                                     <div class=" text-[0.875rem] text-cardBody font-[0.875rem] font-poppins max-sm:hidden"> Name </div>
                                     <div class=" text-[0.75rem] text-cardBody font-semibold  font-poppins">   
                                     <span   
@@ -208,8 +208,13 @@ const TaskCardList = (props) => {
                                     </div>
                                 </div>
                                 </div>
-                               
-                                <div class="flex flex-col w-[13%]">
+                                <div className="flex font-medium flex-col md:w-24 max-sm:flex-row  w-full ">
+                       
+                       <div class="text-[0.875rem] text-cardBody font-poppins max-sm:hidden">End</div>
+                       <div class="text-[0.75rem] text-cardBody font-poppins"> 
+                        {`${moment(item.endDate).format("ll")}`}</div>
+                   </div>
+                                <div class="flex flex-col w-16">
                                   {/* <StyledLabel>today-enddate</StyledLabel> */}
                     <div class="">
                    
@@ -273,22 +278,14 @@ const TaskCardList = (props) => {
             )}
                     </div> */}
                     </div>
-                    <div class="flex max-sm:mt-4">
-                                <div className=" flex font-medium flex-col  md:w-32 max-sm:flex-row justify-between w-full ">
-                                    <div class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden">Owner</div>
-                                    <div class="text-[0.75rem] text-cardBody font-poppins">
-                                    <MultiAvatar
-                                    // style={{marginBottom:"0.25rem"}}
-                  primaryTitle={item.submittedBy}
-                  imgWidth={"1.8rem"}
-                  imgHeight={"1.8rem"}
-                />
-                                    </div>
-                                </div>
-                               
-                                <div className=" flex font-medium flex-col md:w-32 max-sm:flex-row justify-between w-full ">
+                    <div className="flex font-medium flex-col md:w-24 max-sm:flex-row  w-full ">
+                       
+                       <div class="text-[0.875rem] text-cardBody font-poppins max-sm:hidden">Deviation</div>
+                     
+                   </div>
+                    <div className=" flex font-medium flex-col md:w-28 max-sm:flex-row justify-between w-full ">
                                   <div class="text-[0.875rem] text-cardBody font-poppins max-sm:hidden">Assigned To</div>
-                                  <div class="text-[0.75rem] text-cardBody font-poppins">
+                                  <div class="text-[0.75rem] text-cardBody font-poppins mb-2">
                                   {item.assignedToName === null ? (
               ""
             ) : (
@@ -300,6 +297,21 @@ const TaskCardList = (props) => {
             )}
                                   </div>
                               </div>
+                        
+                    <div class="flex max-sm:mt-4 w-36">
+                                <div className=" flex font-medium flex-col  md:w-32 max-sm:flex-row justify-between w-full ">
+                                    <div class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden">Owner</div>
+                                    <div class="text-[0.75rem] text-cardBody font-poppins mb-2">
+                                    <MultiAvatar
+                                    // style={{marginBottom:"0.25rem"}}
+                  primaryTitle={item.submittedBy}
+                  imgWidth={"1.8rem"}
+                  imgHeight={"1.8rem"}
+                />
+                                    </div>
+                                </div>
+                               
+                               
                                 {/* <div className=" flex font-medium flex-col w-32 ">
                                     <div class=" text-[0.875rem] text-cardBody font-poppins">Team</div>
 
@@ -334,12 +346,7 @@ const TaskCardList = (props) => {
                                      {`${moment(item.startDate).format("ll")}`}
                                     </div>
                                 </div> */}
-                                <div className="flex font-medium flex-col md:w-20 max-sm:flex-row  w-full ">
                        
-                       <div class="text-[0.875rem] text-cardBody font-poppins max-sm:hidden">End</div>
-                       <div class="text-[0.75rem] text-cardBody font-poppins"> 
-                        {`${moment(item.endDate).format("ll")}`}</div>
-                   </div>
 
 
                    <div className="flex font-medium flex-col md:w-20 max-sm:flex-row  w-full ">
@@ -379,7 +386,7 @@ const TaskCardList = (props) => {
      </div> 
   
                    </div>
-                   <div class="flex">
+                   <div class="flex w-40">
                    <div class="flex flex-col md:w-[74%] max-sm:flex-row justify-between w-full">
                     <div>
   {item.taskStatus === "Completed" && !item.approvedInd && item.assignedToName !== item.submittedBy ? (

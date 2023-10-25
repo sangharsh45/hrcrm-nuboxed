@@ -47,12 +47,12 @@ export const handleContactInvestModal = (modalProps) => (dispatch) => {
       });
   };
 
-  export const getContactInvestByUserId = (userId,page) => (dispatch) => {
+  export const getContactInvestByUserId = (userId,pageNo) => (dispatch) => {
     dispatch({
       type: types.GET_CONTACTS_INVEST_REQUEST,
     });
     axios
-      .get(`${base_url}/contact/user/${userId}/${page}`, {
+      .get(`${base_url}/contact/Invester/all-contact/user/${userId}/${pageNo}`, {
         headers: {
           Authorization: "Bearer " + sessionStorage.getItem("token") || "",
         },

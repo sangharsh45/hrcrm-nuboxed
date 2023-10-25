@@ -42,7 +42,7 @@ const Option = Select;
 
 
 function ContactInvestCardList(props) {
-  const [page, setPage] = useState(0);
+  const [pageNo, setPage] = useState(0);
   useEffect(() => {
     window.addEventListener('error', e => {
       if (e.message === 'ResizeObserver loop limit exceeded' || e.message === 'Script error.') {
@@ -60,8 +60,8 @@ function ContactInvestCardList(props) {
         }
       }
     })
-    props.getContactInvestByUserId(props.userId,page);
-    setPage(page + 1);
+    props.getContactInvestByUserId(props.userId,pageNo);
+    setPage(pageNo + 1);
     props.getAllSalesList();
     props.getRecruiterName();
   }, []);
@@ -77,8 +77,8 @@ function ContactInvestCardList(props) {
 
   const handleLoadMore = () => {
     setTimeout(() => {
-            setPage(page + 1);
-            props.getContactInvestByUserId(props.currentUser?props.currentUser:props.userId,page);
+            setPage(pageNo + 1);
+            props.getContactInvestByUserId(props.currentUser?props.currentUser:props.userId,pageNo);
     }, 100);
   
   }

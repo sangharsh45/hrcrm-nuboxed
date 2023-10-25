@@ -13,7 +13,7 @@ import { InputComponent } from "../../../../Components/Forms/Formik/InputCompone
 import { DatePicker } from "../../../../Components/Forms/Formik/DatePicker";
 import dayjs from "dayjs";
 import {updateDeal} from "../../DealAction";
-import { getCustomerData } from "../../../Customer/CustomerAction";
+import { getInvestorData } from "../../../Customer/CustomerAction";
 import { getContactData } from "../../../Contact/ContactAction";
 import {
   getDealLinkedWorkflow,
@@ -36,7 +36,7 @@ const UpdateOpportunitySchema = Yup.object().shape({
 function UpdateDealForm (props) {
   useEffect(()=> {
     props.getAllSalesList();
-    props.getCustomerData(props.userId);
+    props.getInvestorData(props.userId);
     props.getContactData(props.userId);
     props.getDealLinkedStages(props.orgId);
     props.getDealLinkedWorkflow(props.orgId);
@@ -82,7 +82,7 @@ function UpdateDealForm (props) {
       };
     });
 
-    const customerNameOption = props.customerData
+    const customerNameOption = props.investorData
       .sort((a, b) => {
         const libraryNameA = a.name && a.name.toLowerCase();
         const libraryNameB = b.name && b.name.toLowerCase();
@@ -235,7 +235,7 @@ function UpdateDealForm (props) {
                 ...values,
                 invOpportunityId: props.currentItem.invOpportunityId,
                 orgId: props.organizationId,
-                // customerId: props.customerId,
+                 customerId: props.customerId,
                 userId: props.userId,
                 startDate: `${newStartDate}T00:00:00Z`,
                 endDate: `${newEndDate}T00:00:00Z`,
@@ -595,7 +595,7 @@ const mapStateToProps = ({ auth,deal, opportunity, customer, contact }) => ({
   workflow: opportunity.workflow,
   stages: opportunity.stages,
   contactData: contact.contactData,
-  customerData: customer.customerData,
+  investorData: customer.investorData,
   orgId: auth.userDetails.organizationId,
 });
 
@@ -609,7 +609,7 @@ const mapDispatchToProps = (dispatch) =>
       getDealLinkedWorkflow,
       getDealLinkedStages,
       getContactData,
-      getCustomerData,
+      getInvestorData,
     },
     dispatch
   );

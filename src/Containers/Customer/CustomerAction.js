@@ -141,12 +141,6 @@ export const getCustomerListByUserId = (userId,page) => (dispatch) => {
 
 
 export const getCustomerData = (userId,page) => (dispatch) => {
-  // let api_url = "";
-  // if (userId) {
-  //   api_url = `/sort/all/Customers/user/${userId}`;
-  // } else {
-  //   api_url = `/Customers`;
-  // }
   dispatch({
     type: types.GET_CUSTOMERS_DATA_REQUEST,
   });
@@ -167,6 +161,32 @@ export const getCustomerData = (userId,page) => (dispatch) => {
       console.log(err.response);
       dispatch({
         type: types.GET_CUSTOMERS_DATA_FAILURE,
+        payload: err,
+      });
+    });
+};
+
+export const getInvestorData = (userId,page) => (dispatch) => {
+  dispatch({
+    type: types.GET_INVESTOR_DATA_REQUEST,
+  });
+  axios
+    .get(`${base_url}/investor/user/${userId}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.GET_INVESTOR_DATA_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err.response);
+      dispatch({
+        type: types.GET_INVESTOR_DATA_FAILURE,
         payload: err,
       });
     });

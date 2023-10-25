@@ -288,6 +288,11 @@ const initialState = {
   fetchingCustomersDataError:false,
   customerData:[],
 
+  fetchingInvestorData: false,
+  fetchingInvestorDataError: false,
+  investorData:[],
+
+
   fetchingRecruitToCustomer: false,
   fetchingRecruitToCustomerError: false,
   recruitByCustomerId: [],
@@ -1127,6 +1132,27 @@ export const customerReducer = (state = initialState, action) => {
             fetchingCustomersData: false,
             fetchingCustomersDataError: true,
           };
+
+          case types.GET_INVESTOR_DATA_REQUEST:
+            return { ...state, fetchingInvestorData: true };
+          case types.GET_INVESTOR_DATA_SUCCESS:
+            return {
+              ...state,
+              fetchingInvestorData: false,
+               investorData: action.payload,
+            };
+          case types.GET_INVESTOR_DATA_FAILURE:
+            return {
+              ...state,
+              fetchingInvestorData: false,
+              fetchingInvestorDataError: true,
+            };
+
+
+
+
+
+
       case types.UPDATE_CUSTOMER_CONTACT_BY_ID_FAILURE:
         return {
           ...state,

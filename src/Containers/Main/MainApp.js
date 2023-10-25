@@ -85,6 +85,8 @@ import Location from "../Event/Child/Location/Location";
 import MobileNavMenu from "./Mobilemenu";
 import PitchDetails from "../Pitch/Child/PitchDetails/PitchDetails"
 import Navmenu2 from "./Navmenu2";
+import Plant from "./Plant/Plant";
+import Teams from "./Teams/Teams";
 
 const OpportunityDetail = lazy(() =>
   import("../Opportunity/Child/OpportunityDetail/OpportunityDetail")
@@ -239,7 +241,7 @@ function MainApp(props) {
     <>
       <ThemeProvider theme={props.theme}>
         <LayoutWrapper>
-        <div class="max-sm:hidden">
+        <div class="max-sm:hidden overflow-x-auto">
           <Sider
             trigger={null}
             collapsible
@@ -562,6 +564,8 @@ function MainApp(props) {
                       <Route exact path="/mileage" component={Mileage} />
                       <Route exact path="/expense" component={Expense} />
                       <Route exact path="/location" component={Location} />
+                      <Route exact path="/plant" component={Plant} />
+                      <Route exact path="/teams" component={Teams} />
                       <Route exact path="/employees" component={Employees} />
                       <Route exact path="/leads" component={Leads} />
                       <Route exact path="/accessment" component={Accessment} />

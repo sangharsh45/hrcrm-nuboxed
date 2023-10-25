@@ -217,7 +217,7 @@ function CallLeadsTable(props) {
              
               </div> */}
               <div class="flex items-center">
-             <div class="flex  flex-col md:w-24 max-sm:flex-row max-sm:justify-between w-full">
+             <div class="flex  flex-col md:w-24 max-sm:flex-row max-sm:justify-between w-full mb-5">
               <p class="max-sm:hidden" >Assigned To</p>
               <MultiAvatar2
                     primaryTitle={item.assignedTo}
@@ -228,7 +228,7 @@ function CallLeadsTable(props) {
                   />
               {/* <p> {item.assignedTo || "Unassigned"}</p> */}
               </div>
-              <div class="flex  flex-col md:w-36 max-sm:flex-row max-sm:justify-between w-full">
+              <div class="flex  flex-col md:w-36 max-sm:flex-row max-sm:justify-between w-full mb-7">
               <p class="max-sm:hidden" >Completed</p><p> {item.completionInd ? "Yes" : "No"}</p></div>
               {/* <div class="flex  flex-col w-16">
               <p>Rating</p><p> {item.rating > 0 ? item.rating : "Not Rated"}</p>

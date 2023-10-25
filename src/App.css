@@ -821,8 +821,9 @@ h1{
 }
 .ant-layout.ant-layout-has-sider {
   flex-direction: row;
-  overflow: hidden;
-  height: 107vh;
+  overflow-x: auto;
+  overflow-y: hidden;
+  height: 100vh;
 }
 
 .ant-avatar {

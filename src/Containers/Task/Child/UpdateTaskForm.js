@@ -411,7 +411,7 @@ function UpdateTaskForm(props) {
                   )}
                 </div>
                 <div class=" flex justify-between  max-sm:flex-col">
-                <div class=" flex justify-between flex-row w-full">
+                <div class=" flex justify-between flex-col w-full">
                         
                         <StyledLabel>
                           {/* Priority */}
@@ -479,7 +479,7 @@ function UpdateTaskForm(props) {
                         </div>
                       </div>
                   <div class=" w-1/2 max-sm:w-wk">
-                    <Spacer />
+                   
                     <StyledLabel>Type</StyledLabel>
                     <Field
                       name="taskTypeId"
@@ -489,8 +489,7 @@ function UpdateTaskForm(props) {
                       // value={values.taskTypeId}
                     />
                   </div>
-                  <div class=" w-3/12">
-                    <Spacer />
+                  <div class=" w-3/12 ml-2">                
                     <StyledLabel>
                       <FormattedMessage
                         id="app.status"
@@ -846,8 +845,7 @@ function UpdateTaskForm(props) {
                   )} */}
                 </div>
               </div>
-              <div class=" h-full w-2/5 max-sm:w-wk">
-                <Spacer />
+              <div class=" h-full w-2/5 max-sm:w-wk">          
                 <Field
                   name="assignedTo"
                   // label="Assigned to"

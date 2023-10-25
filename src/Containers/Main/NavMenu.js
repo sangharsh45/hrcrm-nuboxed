@@ -798,6 +798,96 @@ function NavMenu (props) {
             </Link> 
            </Menu.Item>
            )}
+             { user.locationAccessInd === true && (
+         
+         <Menu.Item key="/material" style={{height:"30px",paddingLeft:"1rem"}}>
+          <Link to="/material">
+           <ReceiptIcon
+          style={{ fontSize: "large" }}
+            />
+            <span class="text-white text-ls ml-1"><FormattedMessage 
+              id="app.material"
+             defaultMessage="Material"
+         />
+             </span>
+           </Link> 
+          </Menu.Item>
+          )}
+            { user.locationAccessInd === true && (
+         
+         <Menu.Item key="/shipper" style={{height:"30px",paddingLeft:"1rem"}}>
+          <Link to="/shipper">
+           <ReceiptIcon
+          style={{ fontSize: "large" }}
+            />
+            <span class="text-white text-ls ml-1"><FormattedMessage 
+              id="app.shipper"
+             defaultMessage="Shipper"
+         />
+             </span>
+           </Link> 
+          </Menu.Item>
+          )}
+            { user.locationAccessInd === true && (
+         
+         <Menu.Item key="/plant" style={{height:"30px",paddingLeft:"1rem"}}>
+          <Link to="/plant">
+           <ReceiptIcon
+          style={{ fontSize: "large" }}
+            />
+            <span class="text-white text-ls ml-1"><FormattedMessage 
+              id="app.plant"
+             defaultMessage="Plant"
+         />
+             </span>
+           </Link> 
+          </Menu.Item>
+          )}
+            { user.locationAccessInd === true && (
+         
+         <Menu.Item key="/terms" style={{height:"30px",paddingLeft:"1rem"}}>
+          <Link to="/terms">
+           <ReceiptIcon
+          style={{ fontSize: "large" }}
+            />
+            <span class="text-white text-ls ml-1"><FormattedMessage 
+              id="app.terms"
+             defaultMessage="Terms"
+         />
+             </span>
+           </Link> 
+          </Menu.Item>
+          )}
+            { user.locationAccessInd === true && (
+         
+         <Menu.Item key="/inventory " style={{height:"30px",paddingLeft:"1rem"}}>
+          <Link to="/inventory">
+           <ReceiptIcon
+          style={{ fontSize: "large" }}
+            />
+            <span class="text-white text-ls ml-1"><FormattedMessage 
+              id="app.inventory"
+             defaultMessage="Inventory"
+         />
+             </span>
+           </Link> 
+          </Menu.Item>
+          )}
+            { user.locationAccessInd === true && (
+         
+         <Menu.Item key="/order" style={{height:"30px",paddingLeft:"1rem"}}>
+          <Link to="/order">
+           <ReceiptIcon
+          style={{ fontSize: "large" }}
+            />
+            <span class="text-white text-ls ml-1"><FormattedMessage 
+              id="app.order"
+             defaultMessage="Order"
+         />
+             </span>
+           </Link> 
+          </Menu.Item>
+          )}
         </Menu>
        
       </div>
