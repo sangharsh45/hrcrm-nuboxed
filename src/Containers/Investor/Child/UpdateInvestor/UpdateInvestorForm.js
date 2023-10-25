@@ -55,6 +55,7 @@ function UpdateInvestorForm (props) {
     const [defaultOption, setDefaultOption] = useState(RowData.assignedTo);
     const [selected, setSelected] = useState(defaultOption);
     const selectedOption = props.allCustomerEmployeeList.find((item) => item.fullName === selected);
+    console.log(props.RowData)
     return (
       <>
         <Formik
@@ -63,7 +64,7 @@ function UpdateInvestorForm (props) {
             name: RowData.name || "",
             url: RowData.url || "",
             sectorId: RowData.sectorId || "",
-            source:RowData.source,
+            source: RowData.source || "" ,
             vatNo:RowData.vatNo  ,
             businessRegistration:RowData.businessRegistration ||"",
             email: RowData.email || "",
@@ -92,6 +93,7 @@ function UpdateInvestorForm (props) {
               {
                 ...values,
                 investorId: RowData.investorId,
+                source: RowData.source,
                 assignedTo:selectedOption ? selectedOption.employeeId:props.RowData.employeeId,
               },
               RowData.investorId,
@@ -245,8 +247,8 @@ function UpdateInvestorForm (props) {
             <Listbox.Label className="block font-semibold text-[0.75rem]">
               Assigned to
             </Listbox.Label>
-            <div className="relative mt-1">
-              <Listbox.Button className="relative w-full leading-4 cursor-default border border-gray-300 bg-white py-0.5 pl-3 pr-10 text-left shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm">
+            <div className="relative mt-[0.1rem]">
+              <Listbox.Button className="relative w-full leading-4 cursor-default border border-gray-300 bg-white py-0.5 pl-3 pr-10 text-left shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm" style={{boxShadow: "rgb(170, 170, 170) 0px 0.25em 0.62em"}}>
                 {selected}
               </Listbox.Button>
               {open && (
@@ -309,8 +311,8 @@ function UpdateInvestorForm (props) {
       </Listbox>
                   </div>
                     </div>
-                    <Spacer/>
-                    <div class=" flex justify-between max-sm:flex-col">
+                   
+                    <div class=" flex justify-between max-sm:flex-col mt-[0.35rem]">
                     <div class=" w-1/2 max-sm:w-wk">
                       <Field
                         name="vatNo"

@@ -1,7 +1,7 @@
 import React, { Component, useState, useMemo, useEffect } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { getCustomerData } from "../../Customer/CustomerAction";
+import { getCustomerData,getInvestorData } from "../../Customer/CustomerAction";
 import { getContactData } from "../../Contact/ContactAction";
 import { FormattedMessage } from "react-intl";
 import SpeechRecognition, {
@@ -58,6 +58,7 @@ function DealForm(props) {
     props.getSources(props.orgId);
     props.getContactData(props.userId);
     props.getCustomerData(props.userId);
+    props.getInvestorData(props.userId)
     props.getInitiative(props.userId);
     // props.getWorkflow(props.orgId);
      props.getDealLinkedStages(props.orgId);
@@ -175,7 +176,7 @@ function DealForm(props) {
     return skillOptions;
   }
 
-  const customerNameOption = props.customerData
+  const customerNameOption = props.investorData
     .sort((a, b) => {
       const libraryNameA = a.name && a.name.toLowerCase();
       const libraryNameB = b.name && b.name.toLowerCase();
@@ -528,7 +529,7 @@ function DealForm(props) {
               Assigned to
             </Listbox.Label>
             <div className="relative mt-1">
-              <Listbox.Button className="relative w-full leading-4 cursor-default border border-gray-300 bg-white py-0.5 pl-3 pr-10 text-left shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm">
+              <Listbox.Button className="relative w-full leading-4 cursor-default border border-gray-300 bg-white py-0.5 pl-3 pr-10 text-left shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm"style={{boxShadow: "rgb(170, 170, 170) 0px 0.25em 0.62em"}} >
                 {selected}
               </Listbox.Button>
               {open && (
@@ -805,6 +806,7 @@ const mapStateToProps = ({ auth,source, opportunity,deal,settings, contact, cust
   dealLinkStages:deal.dealLinkStages,
   dealsProcess: settings.dealsProcess,
   customerData: customer.customerData,
+  investorData:customer.investorData,
   contactData: contact.contactData,
   fullName: auth.userDetails.fullName,
   sources: source.sources,
@@ -820,6 +822,7 @@ const mapDispatchToProps = (dispatch) =>
       getAllSalesList,
       // getInitiativeByCustomerId,
       getCustomerData,
+      getInvestorData,
       getInitiative,
       // getOpportunitySKill
       // getWorkflow,

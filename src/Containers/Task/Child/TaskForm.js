@@ -490,7 +490,7 @@ const [priority,setpriority]=useState(props.selectedTask
                   </div>
                   <div class=" flex justify-between ">
                
-                      <div class=" flex justify-between flex-row w-full">
+                      <div class=" flex justify-between flex-col w-full">
                         
                           <StyledLabel>
                             {/* Priority */}
@@ -559,8 +559,8 @@ const [priority,setpriority]=useState(props.selectedTask
                         </div>
                    
                  
-                    <div class=" w-1/2 max-sm:w-wk ">
-                      <Spacer />
+                    <div class=" w-1/2  max-sm:w-wk ">
+                      
                       <StyledLabel>Type</StyledLabel>
                       <select 
                         style={{ border: "0.06em solid #aaa" }}
@@ -601,8 +601,8 @@ const [priority,setpriority]=useState(props.selectedTask
                     </div>
                   
                     {/* {values.taskTypeId === "TSK42340139329302023" && ( */}
-                      <div class=" w-1/2 max-sm:w-wk">
-                          <Spacer />
+                      <div class=" w-1/2 ml-2 max-sm:w-wk">
+                          
                           <StyledLabel>Workflow</StyledLabel>
                           <select
                  style={{ border: "0.06em solid #aaa" }}
@@ -699,7 +699,7 @@ const [priority,setpriority]=useState(props.selectedTask
 
                  
                     <div style={{ width: "24%" }}>
-                      <Spacer style={{ marginTop: "1.25em" }} />
+                     
                       <StyledLabel>
                         <FormattedMessage
                           id="app.status"
@@ -1113,7 +1113,7 @@ const [priority,setpriority]=useState(props.selectedTask
                   </div>
                 </div>
                 <div class=" h-full w-w47.5 max-sm:w-wk">
-                  <Spacer />
+                 
                   {/* <Field
                     name="assignedTo"
                     selectType="employee"
@@ -1138,11 +1138,11 @@ const [priority,setpriority]=useState(props.selectedTask
                                    <Listbox value={selected} onChange={setSelected}>
         {({ open }) => (
           <>
-            <Listbox.Label className="block text-sm font-semibold text-gray-700">
+            <Listbox.Label className="block font-semibold text-[0.75rem] ">
               Assigned to
             </Listbox.Label>
             <div className="relative mt-1">
-              <Listbox.Button className="relative w-full h-7 leading-4 cursor-default rounded-md border border-gray-300 bg-white py-2 pl-3 pr-10 text-left shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm">
+              <Listbox.Button className="relative w-full leading-4 cursor-default border border-gray-300 bg-white py-0.5 pl-3 pr-10 text-left shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm"style={{boxShadow: "rgb(170, 170, 170) 0px 0.25em 0.62em"}}>
                 {selected}
               </Listbox.Button>
               {open && (
