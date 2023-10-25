@@ -136,8 +136,7 @@ class ContactForm extends Component {
             userId: this.props.userId,
             customerId: this.props.customerId,
             opportunityId: this.props.opportunityId,
-
-            // tagWithCompany: tagWithCompany ? tagWithCompany : "",
+            source:"",
             tagWithCompany: "",
             firstName: "",
             middleName: "",
@@ -318,7 +317,7 @@ class ContactForm extends Component {
                         inlineLabel
                       />
                     </div>
-                    <div class=" w-[60%] max-sm:w-2/4">
+                    <div class=" w-2/5 max-sm:w-2/5">
                       <FastField
                         type="number"
                         name="mobileNumber"
@@ -335,9 +334,7 @@ class ContactForm extends Component {
                         isColumn
                       />
                     </div>
-                    
-                  </div>
-                  <div class=" w-1/4 font-bold" >
+                    <div class=" w-1/4 font-bold" >
                       WhatsApp
                       <Switch
                         onChange={this.handleWhatsApp}
@@ -346,8 +343,10 @@ class ContactForm extends Component {
                         unCheckedChildren="Same"
                       />
                     </div>
+                  </div>
+                 
                   <div class=" flex justify-between">
-                    {/* <div class=" w-2/4">
+                    <div class=" w-2/4">
                       {" "}
                       {this.state.whatsapp && (
                         <FastField
@@ -372,7 +371,7 @@ class ContactForm extends Component {
                           inlineLabel
                         />
                       )}
-                    </div> */}
+                    </div>
                     <div class=" w-2/4">
                       {this.state.whatsapp && (
                         <FastField
@@ -452,19 +451,18 @@ class ContactForm extends Component {
 
                    
                     <div class=" w-w47.5">
-                          <FastField
+                    <FastField
                             name="source"
-                            type="text"
-                            label={
+                             label={
                               <FormattedMessage
                                 id="app.source"
                                 defaultMessage="Source"
                               />
                             }
-                            options={["Na", "Na2", "None"]}
-                            component={SelectComponent}
-                            inlineLabel
-                            className="field"
+                            isColumnWithoutNoCreate
+                            selectType="sourceName"
+                            component={SearchSelect}
+                            value={values.source}
                             isColumn
                           />
                         </div>

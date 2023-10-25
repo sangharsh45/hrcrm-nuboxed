@@ -295,46 +295,6 @@ props.getAllCustomerEmployeelist();
                   </StyledLabel>
                          
                   <Spacer />
-                  <div class=" flex justify-between max-sm:flex-col">
-                    <div class=" w-1/2 max-sm:w-wk">
-                    <StyledLabel>
-                      <Field
-                        name="vatNo"
-                        type="text"
-                        label={
-                          <FormattedMessage
-                            id="app.vatNumber"
-                            defaultMessage="VAT Number"
-                          />
-                        }
-                        isColumn
-                        width={"100%"}
-                        component={InputComponent}
-                        inlineLabel
-                      />
-                      </StyledLabel>
-                    </div>
-                    <div class="">
-                    <StyledLabel>
-                      <Field
-                        name="businessRegistration"
-                        type="text"
-                        // label="URL"
-                        label={
-                          <FormattedMessage
-                            id="app.businessregistration"
-                            defaultMessage=" Business Registration#"
-                          />
-                        }
-                        isColumn
-                        width={"100%"}
-                        component={InputComponent}
-                        inlineLabel
-                      />
-                      </StyledLabel>
-                    </div>
-                  </div>
-                  <Spacer/>
                   <div class=" flex justify-between">
                    <div class=" w-1/2">
                
@@ -374,6 +334,47 @@ props.getAllCustomerEmployeelist();
                           />
                         </div>
                     </div>
+                  <Spacer/>
+                 
+                    <div class=" flex justify-between max-sm:flex-col">
+                    <div class=" w-1/2 max-sm:w-wk">
+                    <StyledLabel>
+                      <Field
+                        name="vatNo"
+                        type="text"
+                        label={
+                          <FormattedMessage
+                            id="app.vatNumber"
+                            defaultMessage="VAT Number"
+                          />
+                        }
+                        isColumn
+                        width={"100%"}
+                        component={InputComponent}
+                        inlineLabel
+                      />
+                      </StyledLabel>
+                    </div>
+                    <div class="">
+                    <StyledLabel>
+                      <Field
+                        name="businessRegistration"
+                        type="text"
+                        // label="URL"
+                        label={
+                          <FormattedMessage
+                            id="app.businessregistration"
+                            defaultMessage=" Business Registration#"
+                          />
+                        }
+                        isColumn
+                        width={"100%"}
+                        component={InputComponent}
+                        inlineLabel
+                      />
+                      </StyledLabel>
+                    </div>
+                  </div>
                   <Spacer />
 
                   {/* <div class=" w-1/2">
@@ -413,14 +414,14 @@ props.getAllCustomerEmployeelist();
                       </StyledLabel>
                     </div> */}
                 </div>
-                <div class=" h-3/4 w-w47.5 max-sm:w-wk "  
+                <div class=" h-3/4 w-w47.5 max-sm:w-wk " 
                 >
                    <Listbox value={selected} onChange={setSelected}>
       {({ open }) => (
         <>
           <Listbox.Label className="block font-semibold text-[0.75rem]">Assigned to</Listbox.Label>
           <div className="relative mt-1">
-              <Listbox.Button className="relative w-full leading-4 cursor-default border border-gray-300 bg-white py-0.5 pl-3 pr-10 text-left shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm">
+              <Listbox.Button  style={{boxShadow: "rgb(170, 170, 170) 0px 0.25em 0.62em"}} className="relative w-full leading-4 cursor-default border border-gray-300 bg-white py-0.5 pl-3 pr-10 text-left shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm">
                 {selected}
               </Listbox.Button>
               {open && (

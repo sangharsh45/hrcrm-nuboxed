@@ -284,8 +284,43 @@ function UpdateLeadsForm (props) {
                     </StyledLabel>
                   <Spacer />
                   
-                 
-                  <div class=" flex justify-between max-sm:flex-col">
+                  <div class=" flex justify-between">
+                   <div class=" w-1/2 max-sm:w-wk">
+                      <FastField
+                        name="sectorId"
+                        isColumnWithoutNoCreate
+                        selectType="sectorName"
+                        label={
+                          <FormattedMessage
+                            id="app.sector"
+                            defaultMessage="Sector"
+                          />
+                        }
+                        isColumn
+                        component={SearchSelect}
+                      />
+                    </div>
+                    <div class=" w-2/5">
+           <FastField
+                            name="source"
+                             label={
+                              <FormattedMessage
+                                id="app.source"
+                                defaultMessage="Source"
+                              />
+                            }
+                            isColumnWithoutNoCreate
+                            selectType="sourceName"
+                            component={SearchSelect}
+                            // value={values.sourceId}
+                            isColumn
+                          />
+           </div>
+                </div>
+              
+                     <Spacer/>
+          
+                <div class=" flex justify-between max-sm:flex-col">
                     <div class=" w-1/2 max-sm:w-wk">
                     <StyledLabel>
                       <Field
@@ -325,41 +360,8 @@ function UpdateLeadsForm (props) {
                       </StyledLabel>
                     </div>                    
                     </div>
-                     <Spacer/>
-                     <div class=" flex justify-between">
-                   <div class=" w-1/2 max-sm:w-wk">
-                      <FastField
-                        name="sectorId"
-                        isColumnWithoutNoCreate
-                        selectType="sectorName"
-                        label={
-                          <FormattedMessage
-                            id="app.sector"
-                            defaultMessage="Sector"
-                          />
-                        }
-                        isColumn
-                        component={SearchSelect}
-                      />
-                    </div>
-                    <div class=" w-2/5">
-           <FastField
-                            name="source"
-                             label={
-                              <FormattedMessage
-                                id="app.source"
-                                defaultMessage="Source"
-                              />
-                            }
-                            isColumnWithoutNoCreate
-                            selectType="sourceName"
-                            component={SearchSelect}
-                            // value={values.sourceId}
-                            isColumn
-                          />
-           </div>
-                </div>
                  </div>
+
                  <div class=" h-3/4 w-5/12 max-sm:w-wk "   >
                    <Spacer/>
                    
@@ -367,9 +369,9 @@ function UpdateLeadsForm (props) {
                     <Listbox value={selected} onChange={setSelected}>
       {({ open }) => (
         <>
-          <Listbox.Label className="block font-semibold text-[0.75rem] mt-[0.6rem]">Assigned to</Listbox.Label>
+          <Listbox.Label className="block font-semibold text-[0.75rem] mt-[0.6rem]" >Assigned to</Listbox.Label>
           <div className="relative mt-1">
-              <Listbox.Button className="relative w-full leading-4 cursor-default border border-gray-300 bg-white py-0.5 pl-3 pr-10 text-left shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm">
+              <Listbox.Button style={{boxShadow: "rgb(170, 170, 170) 0px 0.25em 0.62em"}} className="relative w-full leading-4 cursor-default border border-gray-300 bg-white py-0.5 pl-3 pr-10 text-left shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm">
                 {selected}
               </Listbox.Button>
               {open && (

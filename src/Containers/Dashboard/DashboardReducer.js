@@ -341,6 +341,31 @@ const initialState = {
  fetchingdashInvstContactAdded: false,
  fetchingdashInvstContactAddedError:false,
 dashInvstContactAdded:[],
+
+openLeadQualified:false,
+fetchingLeadsQualified: false,
+fetchingLeadsQualifiedError: false,
+showQualifiedLeads:[],
+
+openLeadAdded:false,
+fetchingLeadsAdded: false,
+fetchingLeadsAddedError: false,
+showAddedLeads:[],
+
+openOppoAdded:false,
+fetchingOppoAdded: false,
+fetchingOppoAddedError: false,
+showAddedOppo:[],
+
+clickOppoClosed:false,
+fetchingOppoClosed: false,
+fetchingOppoClosedError:false,
+showClosedOppo:[],
+
+openPitchQualified:false,
+fetchingPitchQualified: false,
+fetchingPitchQualifiedError:false,
+showQualifiedPitch:[],
 };
 
 export const dashboardReducer = (state = initialState, action) => {
@@ -1313,6 +1338,97 @@ case types.GET_JUMPSTART_CUSTOMER2_LIST_REQUEST:
                             fetchingdashInvstContactAdded: false,
                             fetchingdashInvstContactAddedError: true,
                           };
+                          
+   case types.HANDLE_LEAD_QUALIFIED_DRAWER: 
+  return {...state, openLeadQualified:action.payload};
+
+  case types.GET_LEADS_QUALIFIED_REQUEST:
+    return { ...state, fetchingLeadsQualified: true };
+  case types.GET_LEADS_QUALIFIED_SUCCESS:
+    return {
+      ...state,
+      fetchingLeadsQualified: false,
+      showQualifiedLeads: action.payload,
+    };
+  case types.GET_LEADS_QUALIFIED_FAILURE:
+    return {
+      ...state,
+      fetchingLeadsQualified: false,
+      fetchingLeadsQualifiedError: true,
+    };
+
+    case types.HANDLE_LEAD_ADDED_DRAWER: 
+    return {...state, openLeadAdded:action.payload};
+  
+    case types.GET_LEADS_ADDED_REQUEST:
+      return { ...state, fetchingLeadsAdded: true };
+    case types.GET_LEADS_ADDED_SUCCESS:
+      return {
+        ...state,
+        fetchingLeadsAdded: false,
+        showAddedLeads: action.payload,
+      };
+    case types.GET_LEADS_ADDED_FAILURE:
+      return {
+        ...state,
+        fetchingLeadsAdded: false,
+        fetchingLeadsAddedError: true,
+      };
+
+      case types.HANDLE_OPPO_ADDED_DRAWER: 
+      return {...state, openOppoAdded:action.payload};
+    
+      case types.GET_OPPO_ADDED_REQUEST:
+        return { ...state, fetchingOppoAdded: true };
+      case types.GET_OPPO_ADDED_SUCCESS:
+        return {
+          ...state,
+          fetchingOppoAdded: false,
+          showAddedOppo: action.payload,
+        };
+      case types.GET_OPPO_ADDED_FAILURE:
+        return {
+          ...state,
+          fetchingOppoAdded: false,
+          fetchingOppoAddedError: true,
+        };
+  
+        case types.HANDLE_OPPO_CLOSED_DRAWER: 
+        return {...state, clickOppoClosed:action.payload};
+
+        case types.GET_OPPO_CLOSED_REQUEST:
+          return { ...state, fetchingOppoClosed: true };
+        case types.GET_OPPO_CLOSED_SUCCESS:
+          return {
+            ...state,
+            fetchingOppoClosed: false,
+            showClosedOppo: action.payload,
+          };
+        case types.GET_OPPO_CLOSED_FAILURE:
+          return {
+            ...state,
+            fetchingOppoClosed: false,
+            fetchingOppoClosedError: true,
+          };
+
+          case types.HANDLE_PITCH_QUALIFIED_DRAWER: 
+          return {...state, openPitchQualified:action.payload};
+        
+          case types.GET_PITCH_QUALIFIED_REQUEST:
+            return { ...state, fetchingPitchQualified: true };
+          case types.GET_PITCH_QUALIFIED_SUCCESS:
+            return {
+              ...state,
+              fetchingPitchQualified: false,
+              showQualifiedPitch: action.payload,
+            };
+          case types.GET_PITCH_QUALIFIED_FAILURE:
+            return {
+              ...state,
+              fetchingPitchQualified: false,
+              fetchingPitchQualifiedError: true,
+            };
+        
     default:
       return state;
   }

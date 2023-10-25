@@ -1,11 +1,17 @@
-import React, {useEffect} from "react";
+import React, {useEffect,lazy} from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import moment from "moment"; 
 import { JumpStartBox, Spacer } from "../../../../Components/UI/Elements";
 import { FlexContainer } from "../../../../Components/UI/Layout";
 import {getDateWiseList,getSalesDateWiseList,getJumpBulblist,getJumpBulblist2,
-getJumpCustomerlist,getJumpCustomerlist2 } from "../../DashboardAction";
+getJumpCustomerlist,getJumpCustomerlist2,handleLeadQualifiedDrawer,handleLeadAddedDrawer,
+handleOppoAddedDrawer,handleOppoClosedDrawer
+} from "../../DashboardAction";
+const LeadQualifiedDrawer=lazy(()=>import("./CustomerDrawer/LeadQualifiedDrawer"));
+const LeadAddedDrawer=lazy(()=>import("./CustomerDrawer/LeadAddedDrawer"));
+const OppoAddedDrawer=lazy(()=>import("./CustomerDrawer/OppoAddedDrawer")); 
+const OppoClosedDrawer=lazy(()=>import("./CustomerDrawer/OppoClosedDrawer")); 
 
 class DashboardCustomerOrgJumpstart extends React.Component{
   constructor() {
@@ -67,16 +73,20 @@ componentDidMount() {
 }
   
 render() {
-  const { showDatelist, fetchingDatewiseReport } = this.props;
+  const {handleLeadQualifiedDrawer,openLeadQualified,handleLeadAddedDrawer,
+    openLeadAdded,handleOppoAddedDrawer,openOppoAdded,handleOppoClosedDrawer,clickOppoClosed
+   } = this.props;
    const startDate = `${this.state.startDate.format("YYYY-MM-DD")}T20:00:00Z`
   return(
+    <>
       <FlexContainer flexDirection="row" style={{ width: "100%"}}>
         <FlexContainer style={{ width: "100%"}}>
         
           <JumpStartBox
             noProgress
             title="Leads Qualified"
-
+            jumpstartClick={()=>handleLeadQualifiedDrawer(true)}
+            cursorData={"pointer"}
             value={this.props.jumpstartBulbCount.qualifiedLeadsList}
             isLoading={this.props.user.fetchingJumpstartBulb}
           />
@@ -84,26 +94,27 @@ render() {
           <JumpStartBox
             noProgress
             title="Leads Added"
-            value={
-                this.props.jumpstartBulb2Count.createdLeadsList
-                         }
-                          isLoading={this.props.fetchingJumpstartBulb2}
+            jumpstartClick={()=>handleLeadAddedDrawer(true)}
+            cursorData={"pointer"}
+            value={this.props.jumpstartBulb2Count.createdLeadsList }
+           isLoading={this.props.fetchingJumpstartBulb2}
     
           />
 
           <JumpStartBox
             noProgress
             title="Opportunities Added"
-
-            value={
-   this.props.jumpstrtCUSTOCount.opportunityAdded
-            }
+            jumpstartClick={()=>handleOppoAddedDrawer(true)}
+            cursorData={"pointer"}
+            value={this.props.jumpstrtCUSTOCount.opportunityAdded}
              isLoading={this.props.fetchingJumpstartCustolist}
             
           />
           <JumpStartBox
             noProgress
             title="Opportunities Closed"
+            jumpstartClick={()=>handleOppoClosedDrawer(true)}
+            cursorData={"pointer"}
             value={
                 this.props.jumpstrtCUSTO2Count.closedOpportunity
             }
@@ -114,7 +125,25 @@ render() {
         <Spacer />
     
       </FlexContainer>
-    
+
+      <LeadQualifiedDrawer
+      openLeadQualified={openLeadQualified}
+      handleLeadQualifiedDrawer={handleLeadQualifiedDrawer}
+      />
+      <LeadAddedDrawer
+      openLeadAdded={openLeadAdded}
+      handleLeadAddedDrawer={handleLeadAddedDrawer}
+      />
+      <OppoAddedDrawer
+      openOppoAdded={openOppoAdded}
+      handleOppoAddedDrawer={handleOppoAddedDrawer}
+      />
+      <OppoClosedDrawer
+            clickOppoClosed={clickOppoClosed}
+            handleOppoClosedDrawer={handleOppoClosedDrawer}
+      />
+
+      </>
   ); 
 }
 }
@@ -138,7 +167,11 @@ const mapStateToProps = ({ dashboard,auth }) => ({
   jumpstrtCUSTOCount:dashboard.jumpstrtCUSTOCount,
   fetchingJumpstartCustolist:dashboard.fetchingJumpstartCustolist,
   jumpstrtCUSTO2Count:dashboard.jumpstrtCUSTO2Count,
-  fetchingJumpstartCusto2list:dashboard.fetchingJumpstartCusto2list
+  fetchingJumpstartCusto2list:dashboard.fetchingJumpstartCusto2list,
+  openLeadQualified:dashboard.openLeadQualified,
+  openLeadAdded:dashboard.openLeadAdded,
+  openOppoAdded:dashboard.openOppoAdded,
+  clickOppoClosed:dashboard.clickOppoClosed
 });
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({
@@ -147,7 +180,11 @@ const mapDispatchToProps = (dispatch) => bindActionCreators({
   getJumpBulblist,
   getJumpCustomerlist,
   getJumpBulblist2,
-  getJumpCustomerlist2
+  getJumpCustomerlist2,
+  handleLeadQualifiedDrawer,
+  handleLeadAddedDrawer,
+  handleOppoAddedDrawer,
+  handleOppoClosedDrawer
 }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(DashboardCustomerOrgJumpstart);

@@ -1552,7 +1552,145 @@ export const getDashInvestorAddedContactInvest = (userId,endDate,startDate) => (
       dispatch({
         type: types.GET_DASH_INVESTOR_ADDED_CONTACTINVEST_FAILURE,
         payload: err,
-      });
+      });});};
+
+export const handleLeadQualifiedDrawer = (modalProps)=>(dispatch)=>{
+  dispatch({
+    type:types.HANDLE_LEAD_QUALIFIED_DRAWER,
+    payload:modalProps
+  });
+}
+export const getLeadQualified = (userId)=>(dispatch)=>{
+  dispatch({
+    type:types.GET_LEADS_QUALIFIED_REQUEST,
+  });
+  axios
+  .get(`${base_url}/leads/qualified-leads/list/${userId}`, {
+    headers: {
+      Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+    },
+  })
+  .then((res) => {
+    dispatch({
+      type: types.GET_LEADS_QUALIFIED_SUCCESS,
+      payload: res.data,
     });
-    
-};
+  })
+  .catch((err) => {
+    dispatch({
+      type: types.GET_LEADS_QUALIFIED_FAILURE,
+      payload: err,
+    });});};
+
+    export const handleLeadAddedDrawer = (modalProps)=>(dispatch)=>{
+      dispatch({
+        type:types.HANDLE_LEAD_ADDED_DRAWER,
+        payload:modalProps
+      });
+    }
+    export const getLeadAdded= (userId,startDate,endDate)=>(dispatch)=>{
+      dispatch({
+        type:types.GET_LEADS_ADDED_REQUEST,
+      });
+      axios
+      .get(`${base_url}/leads/createded-leads/list/${userId}`, {
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+        },
+      })
+      .then((res) => {
+        dispatch({
+          type: types.GET_LEADS_ADDED_SUCCESS,
+          payload: res.data,
+        });
+      })
+      .catch((err) => {
+        dispatch({
+          type: types.GET_LEADS_ADDED_FAILURE,
+          payload: err,
+        });});};
+
+        export const handleOppoAddedDrawer = (modalProps)=>(dispatch)=>{
+          dispatch({
+            type:types.HANDLE_OPPO_ADDED_DRAWER,
+            payload:modalProps
+          });
+        }
+        export const getOppoAdded= (userId)=>(dispatch)=>{
+          dispatch({
+            type:types.GET_OPPO_ADDED_REQUEST,
+          });
+          axios
+          .get(`${base_url}/opportunity/added/date-range/${userId}`, {
+            headers: {
+              Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+            },
+          })
+          .then((res) => {
+            dispatch({
+              type: types.GET_OPPO_ADDED_SUCCESS,
+              payload: res.data,
+            });
+          })
+          .catch((err) => {
+            dispatch({
+              type: types.GET_OPPO_ADDED_FAILURE,
+              payload: err,
+            });});};
+
+            export const handleOppoClosedDrawer = (modalProps)=>(dispatch)=>{
+              dispatch({
+                type:types.HANDLE_OPPO_CLOSED_DRAWER,
+                payload:modalProps
+              });
+            }
+            export const getOppocLOSED= (userId)=>(dispatch)=>{
+              dispatch({
+                type:types.GET_OPPO_CLOSED_REQUEST,
+              });
+              axios
+              .get(`${base_url}/opportunity/ClosedList/date-range/${userId}`, {
+                headers: {
+                  Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+                },
+              })
+              .then((res) => {
+                dispatch({
+                  type: types.GET_OPPO_CLOSED_SUCCESS,
+                  payload: res.data,
+                });
+              })
+              .catch((err) => {
+                dispatch({
+                  type: types.GET_OPPO_CLOSED_FAILURE,
+                  payload: err,
+                });});};
+          
+                   
+    export const handlePitchQualifiedDrawer = (modalProps)=>(dispatch)=>{
+      dispatch({
+        type:types.HANDLE_PITCH_QUALIFIED_DRAWER,
+        payload:modalProps
+      });
+    }
+    export const getPitchQualified = (userId)=>(dispatch)=>{
+      dispatch({
+        type:types.GET_PITCH_QUALIFIED_REQUEST,
+      });
+      axios
+      .get(`${base_url}/investorLeads/qualified-investorLeads/list/${userId}`, {
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+        },
+      })
+      .then((res) => {
+        dispatch({
+          type: types.GET_PITCH_QUALIFIED_SUCCESS,
+          payload: res.data,
+        });
+      })
+      .catch((err) => {
+        dispatch({
+          type: types.GET_PITCH_QUALIFIED_FAILURE,
+          payload: err,
+        });});};
