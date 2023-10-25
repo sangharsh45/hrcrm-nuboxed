@@ -1,4 +1,4 @@
-import React from "react";
+import React, {lazy} from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import moment from "moment";
@@ -10,9 +10,10 @@ import {
   getJumpInvestorlist,
   getJumpInvestor2list,
   getJumpInvestor3list,
-  getJumpInvestor4list
-
+  getJumpInvestor4list,
+  handlePitchQualifiedDrawer
 } from "../../DashboardAction";
+const PitchQualifiedDrawer = lazy(()=>import("./InvestorDrawer/PitchQualifiedDrawer"));
 
 class DashboardInvestorsOrgJumpstart extends React.Component {
   constructor() {
@@ -81,14 +82,17 @@ class DashboardInvestorsOrgJumpstart extends React.Component {
   }
 
   render() {
-    const { showDatelist, fetchingDatewiseReport } = this.props;
+    const { openPitchQualified,handlePitchQualifiedDrawer } = this.props;
     const startDate = `${this.state.startDate.format("YYYY-MM-DD")}T20:00:00Z`;
     return (
-      <FlexContainer flexDirection="row" style={{ width: "100%" }}>
+      <>
+       <FlexContainer flexDirection="row" style={{ width: "100%" }}>
         <FlexContainer style={{ width: "100%" }}>
           <JumpStartBox
             noProgress
             title="Pitch Qualified"
+            jumpstartClick={()=>handlePitchQualifiedDrawer(true)}
+            cursorData={"pointer"}
             value={this.props.jumpstartInvestorCount.qualifiedInvestorLeadsList}
             isLoading={this.props.user.fetchingJumpstartInvestor}
           />
@@ -115,6 +119,13 @@ class DashboardInvestorsOrgJumpstart extends React.Component {
         </FlexContainer>
         <Spacer />
       </FlexContainer>
+
+      <PitchQualifiedDrawer
+      openPitchQualified={openPitchQualified}
+      handlePitchQualifiedDrawer={handlePitchQualifiedDrawer}
+      />
+      </>
+     
     );
   }
 }
@@ -138,6 +149,7 @@ const mapStateToProps = ({ dashboard, auth }) => ({
   fetchingJumpstartInvestor2: dashboard.fetchingJumpstartInvestor2,
   fetchingJumpstartInvestor3: dashboard.fetchingJumpstartInvestor3,
   fetchingJumpstartInvestor4: dashboard.fetchingJumpstartInvestor4,
+  openPitchQualified:dashboard.openPitchQualified,
 });
 
 const mapDispatchToProps = (dispatch) =>
@@ -148,8 +160,8 @@ const mapDispatchToProps = (dispatch) =>
       getJumpInvestorlist,
       getJumpInvestor2list,
       getJumpInvestor3list,
-      getJumpInvestor4list
-
+      getJumpInvestor4list,
+      handlePitchQualifiedDrawer
     },
     dispatch
   );

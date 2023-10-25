@@ -45,8 +45,7 @@ function OpportunityShareForm(props) {
     <>
     {findLoginData &&
       <StyledSelect
-        // defaultValue={findLoginData && findLoginData.userName}
-        defaultValue={"Select User"}
+      defaultValue={props.fullName}
         style={{ width: 140 }}
         placeholder="Select to View"
         onChange={(e) => handleChange(e)}
@@ -65,6 +64,7 @@ const mapStateToProps = ({ opportunity,auth }) => ({
   addSharingOpportunity: opportunity.addSharingOpportunity,
   userId:auth.userDetails.userId,
   permissionsDataList: opportunity.permissionsDataList,
+  fullName:(auth.userDetails.fullName),
 });
 
 const mapDispatchToProps = (dispatch) =>

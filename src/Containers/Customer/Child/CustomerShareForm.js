@@ -44,8 +44,7 @@ console.log("findLoginData",findLoginData&& findLoginData.userName);
   return (
     <>
      <StyledSelect
-        // defaultValue={props.fullName}
-        defaultValue={"Select User"}
+        defaultValue={props.fullName}
         style={{ width: "auto",margin:"auto",paddingRight:"5px"}}
         placeholder="Select to View"
         onChange={(e) =>  props.handleDropChange(e)}
@@ -62,8 +61,7 @@ console.log("findLoginData",findLoginData&& findLoginData.userName);
 const mapStateToProps = ({ customer ,auth}) => ({
   addSharingCustomer: customer.addSharingCustomer,
   userId:auth.userDetails.userId,
-  fullName:
-  (auth.userDetails.fullName),
+  fullName:(auth.userDetails.fullName),
   permissionsDataListCustomer: customer.permissionsDataListCustomer,
 });
 

@@ -80,7 +80,7 @@ class NoteForm extends Component {
       taskId,
       type,
       vendorId,
-
+      employeeId,
       // partnerId,
       // userIdFromPartner,
       fetchingNotesListByLeadsId,
@@ -93,6 +93,7 @@ class NoteForm extends Component {
           initialValues={{
             notes: "",
             contactId: contactId ? contactId : "",
+            employeeId:employeeId ?employeeId:"",
             type: type ? type : "",
           }}
           onSubmit={(values, { resetForm }) => {
@@ -170,7 +171,7 @@ class NoteForm extends Component {
 const mapStateToProps = ({ auth, team, contact }) => ({
   user: auth.userDetails,
   fetchingNotesListBycontactId: contact.fetchingNotesListBycontactId,
-
+  employeeId: auth.userDetails.employeeId,
   //   team: team.user,
 });
 

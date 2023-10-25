@@ -149,7 +149,7 @@ function CustomerCardList(props) {
            } `;
                     return (
                         <div>
-                            <div className="flex justify-between mt-4 max-sm:flex-col"
+                            <div className="flex justify-between mt-1 max-sm:flex-col"
                                 style={{
                                     borderBottom: "3px dotted #515050"
                                 }}>

@@ -87,12 +87,12 @@ const LeadsCardList = (props) => {
                } `;
                     return (
                         <div>
-                            <div className="flex justify-between mt-4 max-sm:flex-col"
+                            <div className="flex justify-between mt-1 max-sm:flex-col"
                                 style={{
                                     borderBottom: "3px dotted #515050"
                                 }}>
                                     <div class="flex"> 
-                                <div className=" flex font-medium flex-col w-60 mb-4  max-sm:w-full">
+                                <div className=" flex font-medium flex-col w-[13rem] mb-4  max-sm:w-full">
                                 <div className="flex max-sm:w-full"> 
 <div>
 <SubTitle>
