@@ -504,6 +504,7 @@ import moment from "moment";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { SearchOutlined } from "@ant-design/icons";
 import { Tooltip, Button, Input, Avatar } from "antd";
+import NoteAltIcon from "@mui/icons-material/NoteAlt";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { OnlyWrapCard } from '../../../../Components/UI/Layout'
 import { getEmployeelist } from "../../../Employees/EmployeeAction";
@@ -512,15 +513,17 @@ import {
   getCallListRangeByUserId,
   handleCallModal,
   setEditNote,
+  handleCallNotesDrawerModal,
   getNotesListByCallId,
 } from "../../CallAction";
 import APIFailed from "../../../../Helpers/ErrorBoundary/APIFailed";
 import Highlighter from "react-highlight-words";
 import { MultiAvatar2, } from "../../../../Components/UI/Elements";
+import AddCallNotesDrawerModal from "../AddCallNotesDrawerModal";
 
 function CallTable(props) {
   const [page, setPage] = useState(0);
-
+  const [currentNameId, setCurrentNameId] = useState("");
   useEffect(() => {
     const {
       getCallListRangeByUserId,
@@ -542,6 +545,9 @@ function CallTable(props) {
       props.getEmployeelist();
     }, 100);
   };
+  function handleSetCallNameId(item) {
+    setCurrentNameId(item);
+  }
 
   const [searchText, setSearchText] = useState("");
   const [searchedColumn, setSearchedColumn] = useState("");
@@ -639,6 +645,7 @@ function CallTable(props) {
     fetchingCallListRangeByUserIdError,
     callListRangeByUserId,
     deleteCall,
+    handleCallNotesDrawerModal,
     userDetails: { employeeId },
     setEditNote,
   } = props;
@@ -744,7 +751,9 @@ function CallTable(props) {
               {/* <p> {item.assignedTo || "Unassigned"}</p> */}
               </div>
               <div class="flex  flex-col md:w-36 max-sm:flex-row max-sm:justify-between w-full">
-              <p class="max-sm:hidden" >Completed</p><p> {item.completionInd ? "Yes" : "No"}</p></div>
+              <p class="max-sm:hidden" >Completed</p>
+              <p> {item.completionInd ? "Yes" : "No"}</p>
+              </div>
               {/* <div class="flex  flex-col w-16">
               <p>Rating</p><p> {item.rating > 0 ? item.rating : "Not Rated"}</p>
               </div> */}
@@ -760,6 +769,18 @@ function CallTable(props) {
                   />
               {/* <p> {item.woner || "Unknown"}</p> */}
               </div>
+              <div class="flex flex-col justify-between  ">
+                    <Tooltip title="Notes">
+       <NoteAltIcon
+                onClick={() => {
+                  handleCallNotesDrawerModal(true);
+                  handleSetCallNameId(item);
+                }}
+                style={{ color: "green", cursor: "pointer", fontSize: "1rem" }}
+              />
+           </Tooltip>
+
+            </div>
               
               <DeleteIcon  type="delete" style={{ cursor: "pointer",color:"red",fontSize:"1rem" }} 
                 onClick={() => deleteCall(item.callId, employeeId)}
@@ -769,6 +790,14 @@ function CallTable(props) {
           ))}
         </OnlyWrapCard>
       </InfiniteScroll>
+      <AddCallNotesDrawerModal
+handleSetCallNameId={handleSetCallNameId}
+handleCallNotesDrawerModal={props.handleCallNotesDrawerModal}
+addDrawerCallNotesModal={props.addDrawerCallNotesModal}
+  currentNameId={currentNameId}
+  // taskName={currentprocessName.taskName} // Pass taskName as a prop
+
+/>
     </>
   );
 }
@@ -777,6 +806,7 @@ const mapStateToProps = ({ auth, call, employee }) => ({
   fetchingCallListRangeByUserId: call.fetchingCallListRangeByUserId,
   fetchingCallListRangeByUserIdError: call.fetchingCallListRangeByUserIdError,
   callListRangeByUserId: call.callListRangeByUserId,
+  addDrawerCallNotesModal:call.addDrawerCallNotesModal,
   employees: employee.employees,
 });
 const mapDispatchToProps = (dispatch) =>
@@ -788,6 +818,7 @@ const mapDispatchToProps = (dispatch) =>
       setEditNote,
       getNotesListByCallId,
       getEmployeelist,
+      handleCallNotesDrawerModal
     },
     dispatch
   );

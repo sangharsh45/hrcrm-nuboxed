@@ -5,7 +5,6 @@ import AddCustomerModal from "../Customer/Child/AddCustomerModal";
 import { handleCustomerModal } from "../Customer/CustomerAction";
 import { handleTaskModal } from "../Task/TaskAction";
 import AddTaskModal from "../Task/Child/AddTaskModal";
-import UploadOrganization from "./UploadOrganization"
 import {
   handleCandidateResumeModal,
 } from "../Candidate/CandidateAction";
@@ -87,6 +86,7 @@ import PitchDetails from "../Pitch/Child/PitchDetails/PitchDetails"
 import Navmenu2 from "./Navmenu2";
 import Plant from "./Plant/Plant";
 import Teams from "./Teams/Teams";
+import RepositoryData from "./RepositoryData";
 import Inventory from "./Inventory/Inventory";
 import Order from "./Order/Order";
 import Supplies from "./Supplies/Supplies";
@@ -545,7 +545,8 @@ function MainApp(props) {
                       </FlexContainer>
                     </Tooltip>
                   </Link> */}
-                   <UploadOrganization />
+                 
+                   <RepositoryData />
                   <ProfileDropdown />
                   {/* <Theme /> */}
                 </div>

@@ -117,7 +117,8 @@ export const setLeadsViewType = (viewType) => (dispatch) => {
         });
         Swal.fire({
           icon: 'success',
-          title: 'Qualifed Succefully',
+          fontSize:"2rem",
+          title: 'Lead Qualified Succefully!',
           showConfirmButton: false,
           timer: 4000
         })

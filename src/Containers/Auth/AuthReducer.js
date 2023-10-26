@@ -16,9 +16,16 @@ const initialState = {
   updatingOrganizationDetails: false,
   updatingOrganizationDetailsError: false,
 
+  linkingOrgDocsPublish: false,
+  linkingOrgDocsPublishError: false,
+
   editingOrganizationDetails: false,
   editingOrganizationDetailsError: false,
   organizationDetails:{},
+
+  fetchingRepositoryDocuments: false,
+  fetchingRepositoryDocumentsError: false,
+  repositoryData:[],
 
   changingPassword: false,
   changingPasswordError: false,
@@ -52,6 +59,8 @@ const initialState = {
 
   updateOrganizationModal:false,
 
+  repositoryOrganizationModal:false,
+
   fetchingCallsListByUserId: false,
   fetchingCallsListByUserIdError: false,
   callsListByUserId: [],
@@ -64,9 +73,14 @@ const initialState = {
   fetchingLeavesByUserIdError: false,
   leavesListByUserId: [],
 
+  deletingOrgDocData: false, 
+  deletingOrgDocDataError: false, 
+
   fetchingTasksListByUserId: false,
   fetchingTasksListByUserIdError: false,
   tasksListByUserId: [],
+
+  organizationDocumentDrawer:false,
 
 
   addingOrganizationDocument:false,
@@ -659,6 +673,7 @@ export const authReducer = (state = initialState, action) => {
         return { ...state, 
           addingOrganizationDocument: false, 
           updateOrganizationModal: false ,
+          organizationDocumentDrawer:false,
         
         };
       case types.ADD_ORGANIZATION_DOCUMENT_FAILURE:
@@ -702,6 +717,68 @@ export const authReducer = (state = initialState, action) => {
             editingOrganizationDetails: false,
             editingOrganizationDetailsError: true,
           };
+
+          case types.GET_REPOSITORY_DOCUMENTS_REQUEST:
+            return { ...state, fetchingRepositoryDocuments: true };
+          case types.GET_REPOSITORY_DOCUMENTS_SUCCESS:
+            return {
+              ...state,
+              fetchingRepositoryDocuments: false,
+              repositoryData: action.payload,
+            };
+          case types.GET_REPOSITORY_DOCUMENTS_FAILURE:
+            return {
+              ...state,
+              fetchingRepositoryDocuments: false,
+              fetchingRepositoryDocumentsError: true,
+            };
+
+            case types.HANDLE_REPOSITORY_ORGANIZATION_MODAL:
+      return { ...state, repositoryOrganizationModal: action.payload };
+
+      case types.HANDLE_ORGANIZATION_DOCUMENT_DRAWER:
+        return { ...state, organizationDocumentDrawer: action.payload };
+
+        case types.DELETE_ORG_DOC_DATA_REQUEST:
+          return { ...state, deletingOrgDocData: true };
+        case types.DELETE_ORG_DOC_DATA_SUCCESS:
+          return {
+            ...state,
+            deletingOrgDocData: false,
+            repositoryData: state.repositoryData.filter(
+              (item) => item.documentId !== action.payload
+            ),
+          };
+        case types.DELETE_ORG_DOC_DATA_FAILURE:
+          return { ...state, deletingOrgDocData: false, deletingOrgDocDataError: false };
+
+
+          case types.LINK_ORG_DOC_PUBLISH_REQUEST:
+            return {
+              ...state,
+              linkingOrgDocsPublish: true,
+            };
+          case types.LINK_ORG_DOC_PUBLISH_SUCCESS:
+            return {
+              ...state,
+              linkingOrgDocsPublish: false,
+              repositoryData: state.repositoryData.map((item) => {
+                if (
+                  item.documentId === action.payload.documentId
+                ) {
+                  return action.payload;
+                } else {
+                  return item;
+                }
+              }),
+            };
+          case types.LINK_ORG_DOC_PUBLISH_FAILURE:
+            return {
+              ...state,
+              linkingOrgDocsPublish: false,
+              linkingOrgDocsPublishError: true,
+            };
+
     
 
     default:
