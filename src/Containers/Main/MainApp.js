@@ -87,6 +87,10 @@ import PitchDetails from "../Pitch/Child/PitchDetails/PitchDetails"
 import Navmenu2 from "./Navmenu2";
 import Plant from "./Plant/Plant";
 import Teams from "./Teams/Teams";
+import Inventory from "./Inventory/Inventory";
+import Order from "./Order/Order";
+import Supplies from "./Supplies/Supplies";
+import Shipper from "./Shipper/Shipper";
 
 const OpportunityDetail = lazy(() =>
   import("../Opportunity/Child/OpportunityDetail/OpportunityDetail")
@@ -562,9 +566,13 @@ function MainApp(props) {
                         component={Permissions}
                       />
                       <Route exact path="/mileage" component={Mileage} />
+                      <Route exact path="/shipper" component={Shipper} />
                       <Route exact path="/expense" component={Expense} />
+                      <Route exact path="/supplies" component={Supplies} />
+                      <Route exact path="/order" component={Order} />
                       <Route exact path="/location" component={Location} />
                       <Route exact path="/plant" component={Plant} />
+                      <Route exact path="/inventory" component={Inventory} />
                       <Route exact path="/teams" component={Teams} />
                       <Route exact path="/employees" component={Employees} />
                       <Route exact path="/leads" component={Leads} />

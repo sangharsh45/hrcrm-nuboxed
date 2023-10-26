@@ -800,8 +800,8 @@ function NavMenu (props) {
            )}
              { user.locationAccessInd === true && (
          
-         <Menu.Item key="/material" style={{height:"30px",paddingLeft:"1rem"}}>
-          <Link to="/material">
+         <Menu.Item key="/supplies" style={{height:"30px",paddingLeft:"1rem"}}>
+          <Link to="/supplies">
            <ReceiptIcon
           style={{ fontSize: "large" }}
             />
@@ -845,20 +845,20 @@ function NavMenu (props) {
           )}
             { user.locationAccessInd === true && (
          
-         <Menu.Item key="/terms" style={{height:"30px",paddingLeft:"1rem"}}>
-          <Link to="/terms">
+         <Menu.Item key="/teams" style={{height:"30px",paddingLeft:"1rem"}}>
+          <Link to="/teams">
            <ReceiptIcon
           style={{ fontSize: "large" }}
             />
             <span class="text-white text-ls ml-1"><FormattedMessage 
-              id="app.terms"
-             defaultMessage="Terms"
+              id="app.teams"
+             defaultMessage="Teams"
          />
              </span>
            </Link> 
           </Menu.Item>
           )}
-            { user.locationAccessInd === true && (
+            { user.inventoryAccessInd === true && (
          
          <Menu.Item key="/inventory " style={{height:"30px",paddingLeft:"1rem"}}>
           <Link to="/inventory">
@@ -873,7 +873,7 @@ function NavMenu (props) {
            </Link> 
           </Menu.Item>
           )}
-            { user.locationAccessInd === true && (
+            { user.orderAccessInd === true && (
          
          <Menu.Item key="/order" style={{height:"30px",paddingLeft:"1rem"}}>
           <Link to="/order">

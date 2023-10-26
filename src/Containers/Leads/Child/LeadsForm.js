@@ -62,7 +62,7 @@ props.getAllCustomerEmployeelist();
           // enableReinitialize
           initialValues={{
             partnerName: "",
-            companyName: "",
+            
             url: "",
             sectorId: "",
             email: "",
@@ -96,10 +96,14 @@ props.getAllCustomerEmployeelist();
             addLeads(
               {
                 ...values,
+                companyName: "",
                 assignedTo: selectedOption ? selectedOption.employeeId:userId,
               },
               props.userId,
-              () => handleReset(resetForm)
+              
+              () =>{ handleReset(resetForm);
+              window.location.reload();
+              }
             );
           }}
         >
