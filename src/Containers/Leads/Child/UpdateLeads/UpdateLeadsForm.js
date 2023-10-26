@@ -5,6 +5,7 @@ import { Button, Switch, Checkbox } from "antd";
 import { FormattedMessage } from "react-intl";
 import { Formik, Form, Field, FieldArray, FastField } from "formik";
 import * as Yup from "yup";
+import {getSources} from "../../../Settings/Category/Source/SourceAction"
 import { getAllCustomerEmployeelist } from "../../../Employees/EmployeeAction";
 import { StyledLabel } from "../../../../Components/UI/Elements";
 import { Spacer } from "../../../../Components/UI/Elements";
@@ -41,6 +42,7 @@ function UpdateLeadsForm (props) {
   };
   useEffect (()=>{
     props.getAllCustomerEmployeelist();
+    props.getSources(props.orgId)
   },[])
  
 
@@ -55,6 +57,12 @@ function UpdateLeadsForm (props) {
       updateLeads,
       setClearbitData,
     } = props;
+    const SourceOptions = props.sources.map((item) => {
+      return {
+        label: `${item.name || ""}`,
+        value: item.sourceId,
+      };
+    });
 
     const [defaultOption, setDefaultOption] = useState(props.setEditingLeads.assignedTo);
     const [selected, setSelected] = useState(defaultOption);
@@ -301,20 +309,26 @@ function UpdateLeadsForm (props) {
                       />
                     </div>
                     <div class=" w-2/5">
-           <FastField
-                            name="source"
-                             label={
-                              <FormattedMessage
-                                id="app.source"
-                                defaultMessage="Source"
-                              />
-                            }
-                            isColumnWithoutNoCreate
-                            selectType="sourceName"
-                            component={SearchSelect}
-                            // value={values.sourceId}
-                            isColumn
-                          />
+                    <Field
+                          name="source"
+                          isColumnWithoutNoCreate
+                          label={
+                            <FormattedMessage
+                              id="app.source"
+                              defaultMessage="Source"
+                            />
+                          }
+                          component={SelectComponent}
+                          options={
+                            Array.isArray(SourceOptions)
+                              ? SourceOptions
+                              : []
+                          }
+                          value={values.source}
+                          isColumn
+                          margintop={"0"}
+                          inlineLabel
+                        />
            </div>
                 </div>
               
@@ -482,11 +496,12 @@ function UpdateLeadsForm (props) {
   
 }
 
-const mapStateToProps = ({ auth, leads,employee }) => ({
+const mapStateToProps = ({ auth, leads,employee,source }) => ({
     setEditingLeads: leads.setEditingLeads,
     updateLeadsById: leads.updateLeadsById,
     updateLeadsByIdError: leads.updateLeadsByIdError,
     user: auth.userDetails,
+    sources: source.sources,
     userId: auth.userDetails.userId,
     organizationId: auth.userDetails.organizationId,
     employees: employee.employees,
@@ -501,6 +516,7 @@ const mapDispatchToProps = (dispatch) =>
         setEditLeads,
       getAllCustomerEmployeelist,
       setClearbitData,
+      getSources
     },
     dispatch
   );

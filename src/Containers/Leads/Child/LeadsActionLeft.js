@@ -79,7 +79,7 @@ const LeadsActionLeft = (props) => {
               </div>
       <div class=" w-72 max-sm:w-28">
           <Input
-            placeholder="Search by Name, Sector or Owner"
+            placeholder="Search by Name or Sector"
             width={"100%"}
              suffix={suffix}
             onSearch={(value) => {

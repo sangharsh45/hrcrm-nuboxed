@@ -5,7 +5,7 @@ import { Button, Switch, Tooltip, Icon } from "antd";
 import { getDepartments } from "../../Containers/Settings/Department/DepartmentAction";
 import {addOrganizationDocument} from "../Auth/AuthAction"
 // import { RightSquareOutlined, ToTopOutlined } from '@ant-design/icons';
-import { Formik, Form, Field, FieldArray } from "formik";
+import { Formik, Form, Field, FieldArray,FastField } from "formik";
 import { StyledDrawer, StyledModal } from "../../Components/UI/Antd";
 import { Spacer, StyledLabel } from "../../Components/UI/Elements";
 import SearchSelect from "../../Components/Forms/Formik/SearchSelect";
@@ -14,7 +14,7 @@ import DocumentUpload from "../../Components/Forms/Formik/DocumentUpload";
 import { InputComponent } from "../../Components/Forms/Formik/InputComponent";
 import { TextareaComponent } from "../../Components/Forms/Formik/TextareaComponent";
 import * as Yup from "yup";
-
+import {getDocuments} from "../Settings/Documents/DocumentsAction"
 // import { getOppoStages, getLevels } from "../../Settings/SettingsAction";
 import { FlexContainer } from "../../Components/UI/Layout";
 import DragableUpload from "../../Components/Forms/Formik/DragableUpload";
@@ -75,11 +75,17 @@ class AddOrgDocumentForm extends Component {
   };
 
   componentDidMount() {
-   
+   this.props.getDocuments();
     this.props.getDepartments();
   }
 
   render() {
+    const documentNameOption = this.props.documents.map((item) => {
+      return {
+          label: `${item.documentTypeName|| ""}`,
+          value: item.documentTypeId,
+      };
+  });
    const catagory=[
     {
       id:1,
@@ -127,6 +133,8 @@ class AddOrgDocumentForm extends Component {
                 documentId:"",
                 department:"",
                 catagory:"",
+                userId:this.props.userId,
+                documentTypeId: this.props.documentTypeId,
                 // shareInd:"",
                 //opportunityId:this.props.opportunity.opportunityId,
               }}
@@ -176,7 +184,31 @@ class AddOrgDocumentForm extends Component {
                         </p>
                       )}
                       <Spacer />
-                    
+                      <FastField
+                    name="documentTypeId"
+                    type="text"
+                    //label="Type"
+                    label={
+                      <FormattedMessage id="app.type" defaultMessage="Type" />
+                    }
+                    // options={[
+                    //   "Aadhar Card",
+                    //   "Voter-Id Card",
+                    //   "Driving-License",
+                    //   "Pan Card",
+                    //   "Passport",
+                    // ]}
+                    options={
+                      Array.isArray(documentNameOption)
+                        ? documentNameOption
+                        : []
+                    }
+                    component={SelectComponent}
+                    inlineLabel
+                    className="field"
+                    isColumn
+                     />
+                  <Spacer />
                         <Field
                         name="description"
                         //label="Description"
@@ -286,17 +318,20 @@ class AddOrgDocumentForm extends Component {
 
 // }
 
-const mapStateToProps = ({ opportunity, settings, departments,auth }) => ({
+const mapStateToProps = ({ document, settings, departments,auth }) => ({
     addingOrganizationDocument:auth.addingOrganizationDocument,
     departments: departments.departments,
+    documents: document.documents,
     orgId: auth.userDetails.organizationId,
+    userId: auth.userDetails.userId,
 });
 
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
         addOrganizationDocument,
-        getDepartments
+        getDepartments,
+        getDocuments
     //   handleDocumentUploadModal,
     //   addOpportunityDocument,
     //   getOpportunityDocument,

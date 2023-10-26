@@ -111,6 +111,7 @@ export const setLeadsViewType = (viewType) => (dispatch) => {
       })
       .then((res) => {
         dispatch(getLeads(userId));
+        dispatch(getLeadsRecords(userId));
         dispatch({
           type: types.CONVERT_CUSTOMER_STATUS_SUCCESS,
           payload: res.data,
