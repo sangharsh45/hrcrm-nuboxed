@@ -178,6 +178,7 @@ case types.HANDLE_LEADS_MODAL:
             ...state,
             fetchingLeads: false,
             leadsAllData: action.payload,
+            clearbit:null
           };
         case types.GET_LEADS_FAILURE:
           return {

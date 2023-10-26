@@ -5,6 +5,10 @@ import { BundleLoader } from "../../../Components/Placeholder";
 import { handleTeamsModal, setTeamsViewType } from "./TeamsAction";
 import TeamsHeader from "./TeamsHeader";
 import TeamsModal from "./TeamsModal";
+import TeamsTable from "./TeamsTable";
+import TeamsAllocationTable from "./TeamsAllocationTable";
+import TeamsClientTable from "./TeamsClientTable";
+import TeamsInventoryTable from "./TeamsInventoryTable";
 
 class Teams extends Component {
   render() {

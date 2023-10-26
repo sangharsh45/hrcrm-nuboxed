@@ -45,8 +45,9 @@ class Upload1 extends React.Component {
       .then(res => {
         ////debugger;
         console.log(res);
+
         onSuccess();
-        this.props.handleImageUpload(res.data)
+        //this.props.handleImageUpload(res.data)
         this.props.form.setFieldValue(this.props.field.name, res.data);
         this.setState({ previewVisible: false, previewImage: "" });
       })

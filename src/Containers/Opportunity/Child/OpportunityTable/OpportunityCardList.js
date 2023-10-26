@@ -547,11 +547,11 @@ border-radius: 0.35rem;
 border: 3px solid #EEEEEE;
 background-color: rgb(255,255,255);
 box-shadow: 0 0.25em 0.62em #aaa;
-height: 7rem;
+height: 8rem;
 color: rgb(68,68,68);
 margin: 1em;
 padding: 0.2rem;
-width: 20vw;
+width: 19vw;
 display: flex;
 flex-direction: column;
   @media only screen and (max-width: 600px) {
