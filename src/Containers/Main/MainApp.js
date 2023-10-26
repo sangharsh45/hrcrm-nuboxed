@@ -86,14 +86,11 @@ import PitchDetails from "../Pitch/Child/PitchDetails/PitchDetails"
 import Navmenu2 from "./Navmenu2";
 import Plant from "./Plant/Plant";
 import Teams from "./Teams/Teams";
-<<<<<<< HEAD
 import RepositoryData from "./RepositoryData";
-=======
 import Inventory from "./Inventory/Inventory";
 import Order from "./Order/Order";
 import Supplies from "./Supplies/Supplies";
 import Shipper from "./Shipper/Shipper";
->>>>>>> 88c83a6a722a40b18954b4ec2edfd856854e4356
 
 const OpportunityDetail = lazy(() =>
   import("../Opportunity/Child/OpportunityDetail/OpportunityDetail")
