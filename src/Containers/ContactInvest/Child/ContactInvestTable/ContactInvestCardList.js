@@ -227,7 +227,7 @@ function ContactInvestCardList(props) {
 
                    
               <Tooltip title={item.ownerName}>
-                <div class="max-sm:flex justify-end">
+                <div class="max-sm:flex justify-end mt-1">
             <SubTitle>
               <MultiAvatar
                 primaryTitle={item.ownerName}
@@ -279,8 +279,8 @@ function ContactInvestCardList(props) {
             />
            </Tooltip>
                         </div>
-                      &nbsp;&nbsp;
-                        <div>
+                     
+                        <div >
                         <span
               style={{ cursor: "pointer" }}
               onClick={() => {

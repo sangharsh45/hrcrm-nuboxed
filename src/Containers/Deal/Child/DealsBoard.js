@@ -51,8 +51,8 @@ const StageColumn = styled.div`
   display: flex;
   flex-direction: column;
   flex: 1;
-  height: 17.5em;
-  width: 200px;
+  height: 26rem;
+  width: 250px;
   margin-top: 3.75em;
   overflow-y: auto;
   border-right: 0.06em solid #d2cfcf;
@@ -93,7 +93,7 @@ const StageHeader = styled.div`
   background-color: rgb(24, 144, 255);
   color: white;
   font-size: 0.93em;
-  width: 200px;
+  width: 250px;
   font-weight: bold;
   justify-content: center;
   align-items: center;

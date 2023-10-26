@@ -17,6 +17,7 @@ import { TextareaComponent } from "../../../../Components/Forms/Formik/TextareaC
 import { getDesignations } from "../../../Settings/Designation/DesignationAction";
 import { getDepartments } from "../../../Settings/Department/DepartmentAction";
 import { getCustomerData } from "../../../Customer/CustomerAction";
+import {getInvestorData} from "../../../Investor/InvestorAction";
 
 const { Option } = Select;
 const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
@@ -31,7 +32,7 @@ const UpdateContactSchema = Yup.object().shape({
 class UpdateContactInvestForm extends Component {
   componentDidMount() {
     this.props.getCustomerData(this.props.userId);
-
+    this.props.getInvestorData(this.props.userId);
   }
   constructor(props) {
     super(props);
@@ -98,7 +99,7 @@ class UpdateContactInvestForm extends Component {
       contactiData
     } = this.props;
     console.log(linkContact);
-    const customerNameOption = this.props.customerData
+    const customerNameOption = this.props.investorData
     .sort((a, b) => {
       const libraryNameA = a.name && a.name.toLowerCase();
       const libraryNameB = b.name && b.name.toLowerCase();
@@ -583,11 +584,12 @@ class UpdateContactInvestForm extends Component {
   }
 }
 
-const mapStateToProps = ({ auth, contact, contactinvest,customer, departments, designations, opportunity }) => ({
+const mapStateToProps = ({ auth,investor, contact, contactinvest,customer, departments, designations, opportunity }) => ({
   setEditingContact: contact.setEditingContact,
   updateContactInvestById: contactinvest.updateContactInvestById,
   updateContactByIdError: contact.updateContactByIdError,
   user: auth.userDetails,
+  investorData:investor.investorData,
   customerData:customer.customerData,
   userId: auth.userDetails.userId,
   customerId: customer.customer.customerId,
@@ -602,6 +604,7 @@ const mapDispatchToProps = (dispatch) =>
       getCustomerData,
       getDesignations,
       getDepartments,
+      getInvestorData,
     },
     dispatch
   );

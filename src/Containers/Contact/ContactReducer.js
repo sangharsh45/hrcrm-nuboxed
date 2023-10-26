@@ -13,6 +13,10 @@ const initialState = {
   fetchingContactDataError:false,
   contactData:[],
 
+  fetchingDelasContactData: false,
+  fetchingDelasContactDataError: false,
+  dealsContactData:[],
+
   fetchingVendorContactData: false,
   fetchingVendorContactDataError: false,
   vendorContactData:[],
@@ -715,9 +719,6 @@ export const contactReducer = (state = initialState, action) => {
               ...state,
               fetchingContactData: false,
                contactData: action.payload,
-      
-             
-            
             };
           case types.GET_CONTACT_DATA_FAILURE:
             return {
@@ -726,6 +727,21 @@ export const contactReducer = (state = initialState, action) => {
               fetchingContactDataError: true,
             };
 
+            case types.GET_DEALS_CONTACT_DATA_REQUEST:
+              return { ...state, fetchingDelasContactData: true };
+            case types.GET_DEALS_CONTACT_DATA_SUCCESS:
+              return {
+                ...state,
+                fetchingDelasContactData: false,
+                 dealsContactData: action.payload,
+              };
+            case types.GET_DEALS_CONTACT_DATA_FAILURE:
+              return {
+                ...state,
+                fetchingDelasContactData: false,
+                fetchingDelasContactDataError: true,
+              };
+  
 
 
             case types.GET_VENDOR_CONTACT_DATA_REQUEST:

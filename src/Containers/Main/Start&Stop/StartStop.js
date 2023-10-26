@@ -404,12 +404,12 @@ useEffect(()=>{
       </Button>
       </div>
       {/* </Popconfirm> */}
-      <div style={{marginLeft:"22px"}}>
+      <div class="ml-[22px] mt-[0.2rem]">
       <select
       value={drop1}
       onChange={handleDrop1}
       disabled={!startInd}
-      style={{border:"0.5px solid "}}
+      style={{border:"0.5px solid lightgray "}}
       >
          {/* <option value="">Select</option> */}
         <option value="In Office">In Office</option>
@@ -418,13 +418,14 @@ useEffect(()=>{
       </select>
       
       </div>
-     {drop1==="On Travel" ?  <div style={{marginLeft:"11px"}}>
+     {drop1==="On Travel" ?  
+     <div class="mt-[0.2rem]" style={{marginLeft:"11px"}}>
       <select
-       style={{border:"2px solid black"}}
+       style={{border:"0.5px solid lightgray"}}
         value={mandatorCountry}
 onChange={handleMandatoryCountry}
       >
-         <option value="">Select a country</option>
+         <option value="">Select Country</option>
          <option value="Others">Others</option>
         {props.countries.map((item)=>{
           return(
