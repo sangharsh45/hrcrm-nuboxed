@@ -68,10 +68,10 @@ class SingleDocuments extends Component {
                       documentTypeId={documentTypeId}
                     />  
                     </div>
-                    <div >
+                    <div  >
                     <Select style={{ width: "100%"}}
                 onChange={this.handleStageType}
-                placeholder="Select Type"
+                placeholder="Select Entity"
                 >
                   <option value="User">User</option>
         <option value="Customer">Customer</option>

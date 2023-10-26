@@ -310,3 +310,37 @@ export const handleCallNotesModal = (modalProps) => (dispatch) => {
     payload: modalProps,
   });
 };
+
+
+export const handleCallNotesDrawerModal = (modalProps) => (dispatch) => {
+  dispatch({
+    type: types.HANDLE_CALL_NOTES_DRAWER_MODAL,
+    payload: modalProps,
+  });
+};
+export const addNote = (note, cb) => (dispatch) => {
+  dispatch({ type: types.ADD_CALL_NOTES_REQUEST });
+  axios
+    .post(`${base_url}/task/comment/save`, note, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      dispatch({
+        type: types.ADD_CALL_NOTES_SUCCESS,
+        payload: res.note,
+      });
+      console.log(res);
+      cb && cb();
+    })
+    .catch((err) => {
+      dispatch({
+        type: types.ADD_CALL_NOTES_FAILURE,
+        payload: err,
+      });
+      console.log(err);
+      cb && cb();
+    });
+};
+

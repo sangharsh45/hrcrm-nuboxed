@@ -1000,7 +1000,7 @@ export const editOrganizationDetails = (orgId, data, cb) => (
 
 
 
-export const addOrganizationDocument = (customer) => (dispatch, getState) => {
+export const addOrganizationDocument = (customer,orgId) => (dispatch, getState) => {
   const userId = getState().auth.userDetails.userId;
 
   // const opportunityId = getState().opportunity.opportunity.opportunityId;
@@ -1017,9 +1017,7 @@ export const addOrganizationDocument = (customer) => (dispatch, getState) => {
     })
     .then((res) => {
       console.log(res);
-      // dispatch(
-      //   linkCustomersToOpportunity(opportunityId, { CustomerIds: [res.data] }, cb)
-      // );
+      dispatch(getRepositoryDocuments(orgId));
       const startDate = dayjs()
         .startOf("month")
         .toISOString();
@@ -1043,5 +1041,102 @@ export const addOrganizationDocument = (customer) => (dispatch, getState) => {
         payload: err,
       });
       // cb && cb();
+    });
+};
+
+export const getRepositoryDocuments = (orgId) => (dispatch) => {
+  dispatch({
+    type: types.GET_REPOSITORY_DOCUMENTS_REQUEST,
+  });
+  axios
+  .get(`${base_url}/organization/document/organization/${orgId}`, {
+    headers: {
+      Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+    },
+  })
+    
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.GET_REPOSITORY_DOCUMENTS_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.GET_REPOSITORY_DOCUMENTS_FAILURE,
+        payload: err,
+      });
+    });
+};
+
+export const handleRepositoryOrganizationModal = (modalProps) => (dispatch) => {
+  dispatch({
+    type: types.HANDLE_REPOSITORY_ORGANIZATION_MODAL,
+    payload: modalProps,
+  });
+};
+
+export const handleOrganizationDocumentDrawer = (modalProps) => (dispatch) => {
+  dispatch({
+    type: types.HANDLE_ORGANIZATION_DOCUMENT_DRAWER,
+    payload: modalProps,
+  });
+};
+
+export const deleteOrgDocata = (documentId,orgId) => (dispatch, getState) => {
+  const { userId } = getState("auth").auth.userDetails;
+  // console.log("inside deleteCall", callId);
+  dispatch({
+    type: types.DELETE_ORG_DOC_DATA_REQUEST,
+  });
+  axios
+    .delete(`${base_url}/organization/document/${documentId}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      //  dispatch(getScheduler(orgId));
+      dispatch({
+        type: types.DELETE_ORG_DOC_DATA_SUCCESS,
+        payload: documentId,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.DELETE_ORG_DOC_DATA_FAILURE,
+        payload: err,
+      });
+    });
+};
+
+export const LinkOrgDocPublish = (data, cb,) => (dispatch) => {
+  dispatch({ type: types.LINK_ORG_DOC_PUBLISH_REQUEST });
+
+  axios
+    .put(`${base_url}/investorOpportunityWorkflow/update/publishInd`, data, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.LINK_ORG_DOC_PUBLISH_SUCCESS,
+        payload: res.data,
+      });
+      cb && cb("Success", res.data);
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.LINK_ORG_DOC_PUBLISH_FAILURE,
+      });
+      cb && cb("Failure");
     });
 };
