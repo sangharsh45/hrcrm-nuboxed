@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { StyledTable } from "../../../../Components/UI/Antd";
-import { getTeamList } from "../../TeamsAction";
-import TeamDetailsView from "../TeamsDetails/TeamDetailsView";
-import APIFailed from "../../../../Helpers/ErrorBoundary/APIFailed";
+import { StyledTable } from "../../../Components/UI/Antd";
+import { getTeamList } from "./TeamsAction";
+import TeamDetailsView from "./TeamDetailsView";
+import APIFailed from "../../../Helpers/ErrorBoundary/APIFailed";
 
 function TeamsTable(props) {
   useEffect(() => {
