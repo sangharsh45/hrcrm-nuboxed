@@ -175,6 +175,32 @@ export const getContactData = (userId,page) => (dispatch) => {
     });
 };
 
+export const getdealsContactdata = (userId,page) => (dispatch) => {
+
+  dispatch({
+    type: types.GET_DEALS_CONTACT_DATA_REQUEST,
+  });
+  axios
+    .get(`${base_url}/contact/investor/user/${userId}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.GET_DEALS_CONTACT_DATA_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err.response);
+      dispatch({
+        type: types.GET_DEALS_CONTACT_DATA_FAILURE,
+        payload: err,
+      });
+    });
+};
 
 
 

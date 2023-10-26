@@ -120,14 +120,16 @@ useEffect(() => {
       </Tooltip> */}
       <div class=" flex items-center justify-between"
       >
-        <div class=" w-72 max-sm:w-40">
-          <Input
-            placeholder="Search by Name, Sector or Owner"
-            width={"100%"}
-            // suffix={suffix}
-            onChange={(e) => props.handleChange(e)}
-            value={props.currentData}
-          />
+       <div class=" w-72 md:ml-4 max-sm:w-16 ml-0">
+       <Input
+          placeholder="Search by Name, Company"
+          class="w-96"
+          suffix={suffix}
+          allowClear
+          enterButton
+          onChange={(e) => props.handleChange(e)}
+          value={props.currentData}
+        />
         </div>
         <Button
           type={props.currentData ? "primary" : "danger"}

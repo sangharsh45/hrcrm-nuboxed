@@ -573,6 +573,7 @@ function MainApp(props) {
                       <Route exact path="/order" component={Order} />
                       <Route exact path="/location" component={Location} />
                       <Route exact path="/plant" component={Plant} />
+                      {/* <Route exact path="/suppliers" component={Suppliers} /> */}
                       <Route exact path="/inventory" component={Inventory} />
                       <Route exact path="/teams" component={Teams} />
                       <Route exact path="/employees" component={Employees} />

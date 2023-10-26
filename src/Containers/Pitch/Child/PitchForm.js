@@ -113,8 +113,7 @@ props.getAllCustomerEmployeelist();
           }) => (
             <div class="overflow-y-auto h-[34rem] md:overflow-x-hidden max-sm:h-[30rem]">
             <Form className="form-background">
-            <div class=" flex justify-around max-sm:flex-col">
-                   <div class="">
+            <div class="">
                     {clearbit && clearbit.hasOwnProperty("logo") && (
                       <ProgressiveImage
                         preview={
@@ -138,6 +137,8 @@ props.getAllCustomerEmployeelist();
                       </a>
                     ) : null}
                   </div> 
+            <div class=" flex justify-around max-sm:flex-col">
+                   
                 <div class=" h-full w-w47.5 max-sm:w-wk"   >
                   <div class=" flex  flex-nowrap">
                     <div> <FastField name="imageId" component={PostImageUpld} /></div>

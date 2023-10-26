@@ -2,7 +2,7 @@ import React, { Component, useState, useMemo, useEffect } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { getCustomerData,getInvestorData } from "../../Customer/CustomerAction";
-import { getContactData } from "../../Contact/ContactAction";
+import { getdealsContactdata } from "../../Contact/ContactAction";
 import { FormattedMessage } from "react-intl";
 import SpeechRecognition, {
   useSpeechRecognition,
@@ -56,10 +56,10 @@ function DealForm(props) {
     props.getRecruiterName();
     props.getAllSalesList();
     props.getSources(props.orgId);
-    props.getContactData(props.userId);
-    props.getCustomerData(props.userId);
+    props.getdealsContactdata(props.userId);
+    // props.getCustomerData(props.userId);
     props.getInvestorData(props.userId)
-    props.getInitiative(props.userId);
+    // props.getInitiative(props.userId);
     // props.getWorkflow(props.orgId);
      props.getDealLinkedStages(props.orgId);
     props.getDealLinkedWorkflow(props.orgId);
@@ -72,8 +72,8 @@ function DealForm(props) {
 
   function getAreaOptions(filterOptionKey, filterOptionValue) {
     const contactOptions =
-      props.contactData.length &&
-      props.contactData
+      props.dealsContactData.length &&
+      props.dealsContactData
         .filter((option) => {
           if (
             option.customerId === filterOptionValue &&
@@ -807,7 +807,7 @@ const mapStateToProps = ({ auth,source, opportunity,deal,settings, contact, cust
   dealsProcess: settings.dealsProcess,
   customerData: customer.customerData,
   investorData:customer.investorData,
-  contactData: contact.contactData,
+  dealsContactData: contact.dealsContactData,
   fullName: auth.userDetails.fullName,
   sources: source.sources,
   // opportunitySkills:opportunity.opportunitySkills
@@ -817,7 +817,7 @@ const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
       createDeals,
-      getContactData,
+      getdealsContactdata,
       getRecruiterName,
       getAllSalesList,
       // getInitiativeByCustomerId,

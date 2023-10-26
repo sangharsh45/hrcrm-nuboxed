@@ -130,6 +130,10 @@ const PitchCardList = (props) => {
                                                  title={`${item.name}`} 
                                                > */}
                                                {item.firstName}
+                                               &nbsp;
+                                               {item.middleName}
+                                               &nbsp;
+                                               {item.lastName}
                                                {/* </Link> */}
                                                &nbsp;&nbsp;
                                                {date === currentdate ? (
