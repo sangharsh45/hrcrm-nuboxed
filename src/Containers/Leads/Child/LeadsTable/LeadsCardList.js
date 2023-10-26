@@ -112,10 +112,10 @@ const LeadsCardList = (props) => {
                                         <div class="max-sm:w-full" >
                                         <Tooltip>
                                           <div class="max-sm:w-full justify-between flex md:flex-col">
-                                            <h4 class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden">
+                                            <h4 class=" text-[0.875rem] text-cardBody  font-poppins max-sm:hidden">
                                             Name
                                             </h4>
-                                            <h4 class="text-[0.75rem] text-cardBody font-poppins cursor-pointer">
+                                            <h4 class="text-[0.75rem] text-cardBody font-semibold  font-poppins cursor-pointer">
                                             {item.name}
                                             {/* <span>
               {item.name === null ? (

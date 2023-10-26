@@ -116,7 +116,7 @@ const CustomerActionLeft = (props) => {
       >
         <div class=" w-72 max-sm:w-32">
           <Input
-            placeholder="Search by Name, Sector or Owner"
+            placeholder="Search by Name or Sector"
             width={"100%"}
             suffix={suffix}
             onChange={(e) => props.handleChange(e)}

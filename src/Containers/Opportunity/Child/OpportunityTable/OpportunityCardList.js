@@ -168,7 +168,7 @@ console.log("currentOpportunityId",currentOpportunityId)
           &nbsp;
           <FlexContainer
             flexDirection="column"
-            style={{ flexBasis: "83%", overflow: "hidden" }}
+            style={{ flexBasis: "85%", overflow: "hidden" }}
           >
             <div class="font-semibold " style={{ color: "#337df4", cursor: "pointer", fontSize: "1em" }}>
           <Link

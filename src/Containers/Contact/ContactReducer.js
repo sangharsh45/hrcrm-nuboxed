@@ -8,6 +8,9 @@ const initialState = {
   addingContact: false,
   addingContactError: false,
 
+  fetchingContactRecords: false,
+  fetchingContactRecordsError: true,
+  contactRecord:[],
 
   fetchingContactData:false,
   fetchingContactDataError:false,
@@ -761,6 +764,22 @@ export const contactReducer = (state = initialState, action) => {
                 fetchingVendorContactData: false,
                 fetchingVendorContactDataError: true,
               };
+
+              
+        case types.GET_CONTACT_RECORDS_REQUEST:
+          return { ...state, fetchingContactRecords: true };
+        case types.GET_CONTACT_RECORDS_SUCCESS:
+          return {
+            ...state,
+            fetchingContactRecords: false,
+            contactRecord: action.payload,
+          };
+        case types.GET_CONTACT_RECORDS_FAILURE:
+          return {
+            ...state,
+            fetchingContactRecords: false,
+            fetchingContactRecordsError: true,
+          };
 
     default:
       return state;

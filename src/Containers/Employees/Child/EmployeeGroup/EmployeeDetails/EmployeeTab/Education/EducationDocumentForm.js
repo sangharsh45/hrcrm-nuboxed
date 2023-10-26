@@ -44,7 +44,6 @@ componentDidMount() {
   render() {
     const { addingEducationDetails } = this.props;
     const documentNameOption = this.props.linkedUserDocument.map((item) => {
-      console.log(item.documentTypeName)
       return {
           label: `${item.documentTypeName|| ""}`,
           value: item.documentTypeId,
@@ -104,7 +103,7 @@ componentDidMount() {
                     width: "45%",
                     }}
                 >
-                  <FastField
+                   <FastField
                     name="documentTypeId"
                     type="text"
                     //label="Type"

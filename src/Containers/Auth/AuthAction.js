@@ -1118,7 +1118,7 @@ export const LinkOrgDocPublish = (data, cb,) => (dispatch) => {
   dispatch({ type: types.LINK_ORG_DOC_PUBLISH_REQUEST });
 
   axios
-    .put(`${base_url}/investorOpportunityWorkflow/update/publishInd`, data, {
+    .put(`${base_url}/organization/publishInd`, data, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },

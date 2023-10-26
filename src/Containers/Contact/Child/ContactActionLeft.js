@@ -15,6 +15,7 @@ import {
   inputContactDataSearch,
   getRecords,
   getCustomerRecords,
+  getContactRecord,
 } from "../ContactAction";
 
 const Option = StyledSelect.Option;
@@ -38,16 +39,19 @@ const ContactActionLeft = (props) => {
   } = useSpeechRecognition();
   console.log(transcript);
   useEffect(() => {
-    if (props.viewType === "dashboard") {
-      props.getCustomerRecords(props.userId);
-    } else if (props.viewType === "table") {
-      props.getRecords(props.userId, "partner");
-    }
-    if (transcript) {
-      console.log(">>>>>>>", transcript);
-      props.setCurrentData(transcript);
-    }
-  }, [props.userId, props.viewType, props.name, transcript]);
+    props.getContactRecord(props.userId)
+    }, [props.userId]);
+  // useEffect(() => {
+  //   if (props.viewType === "table") {
+  //     props.getContactRecord(props.userId);
+  //   } else if (props.viewType === "dashboard") {
+  //     props.getRecords(props.userId, "partner");
+  //   }
+  //   if (transcript) {
+  //     console.log(">>>>>>>", transcript);
+  //     props.setCurrentData(transcript);
+  //   }
+  // }, [props.userId, props.viewType, props.name, transcript]);
   console.log(props.customerRecordData);
   const { user } = props;
   
@@ -88,7 +92,7 @@ const ContactActionLeft = (props) => {
           size="small"
           count={
             (props.viewType === "table" &&
-              props.customerRecordData.customerDetails) ||
+              props.contactRecord.customerDetails) ||
             0
           }
           overflowCount={5000}
@@ -170,6 +174,7 @@ const mapStateToProps = ({ auth, contact }) => ({
   userId: auth.userDetails.userId,
   user: auth.userDetails,
   recordData: contact.recordData,
+  contactRecord:contact.contactRecord,
   customerRecordData: contact.customerRecordData,
   contactByUserId: contact.contactByUserId,
   fetchingContactInputSearchData: contact.fetchingContactInputSearchData,
@@ -180,6 +185,7 @@ const mapDispatchToProps = (dispatch) =>
       inputContactDataSearch,
       getRecords,
       getCustomerRecords,
+      getContactRecord,
     },
     dispatch
   );

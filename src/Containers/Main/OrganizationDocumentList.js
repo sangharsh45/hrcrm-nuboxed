@@ -27,8 +27,6 @@ class OrganizationDocumentList extends Component {
     if (status === "Success") {
        this.props.getRepositoryDocuments(this.props.orgId);
       this.setState({ currentProcess: data });
-    } else {
-      alert("error");
     }
   };
 
@@ -36,9 +34,9 @@ class OrganizationDocumentList extends Component {
     const { currentProcess, publish } = this.state;
     console.log(currentProcess);
 
-    const Id = currentProcess.investorOppWorkflowId;
+    const Id = currentProcess.organizationDocumentLinkId;
     let data = {
-      investorOppWorkflowId: Id,
+      organizationDocumentLinkId: Id,
       publishInd: currentProcess.publishInd ? false : true,
     };
 
@@ -46,6 +44,7 @@ class OrganizationDocumentList extends Component {
   };
 
   render() {
+    const{user}=this.props;
     return (
       <div className="overflow-y-auto max-h-[39rem]">
         <CardWrapper>
@@ -85,12 +84,14 @@ class OrganizationDocumentList extends Component {
                       {item.description}
                     </div>
                   </div>
-                  <div className="flex font-medium flex-col md:w-40 max-sm:flex-row w-full mt-1 max-sm:justify-between">
+                  <div class="flex">
+                  <div className=" flex font-medium flex-col max-sm:flex-row w-full mt-1 max-sm:justify-between">
                     <div className="text-sm text-cardBody font-semibold font-poppins max-sm:hidden">
                  
                     </div>
-                    {/* {this.state.currentProcess.workflowName && ( */}
+                  {item.userId === "EMP16818052295222021" && item.shareInd === true && user.repositoryCreateInd ===true  ? (
                       <Button
+                            // style={{width:"5rem"}}
                         onClick={this.handlePublishClick}
                       >
                         {/* {this.state.change?"Publish":"Unpublish"}  */}
@@ -98,19 +99,34 @@ class OrganizationDocumentList extends Component {
                           ? "Unpublish"
                           : "Publish"}
                       </Button>
-                    {/* )} */}
+                    ):null} 
+                  </div>
+                  <div className=" flex font-medium flex-col  max-sm:flex-row w-full mt-1 max-sm:justify-between">
+                    {item.userId === "EMP16818052295222021" && user.repositoryCreateInd ===true && (
+                      <Button
+                      // style={{width:"5rem"}}
+                 
+                        onClick={this.handlePublishClick}
+                      >
+                        {/* {this.state.change?"Publish":"Unpublish"}  */}
+                        {this.state.currentProcess.shareInd
+                          ? "Private"
+                          : "Public"}
+                      </Button>
+                    )} 
+                  </div>
                   </div>
                   <div>
                         <StyledPopconfirm
             title="Do you want to delete?"
              onConfirm={() => this.props.deleteOrgDocata(item.documentId)}
           >
-            {/* {user.opportunityDeleteInd ===true && ( */}
+           {user.repositoryCreateInd ===true && (
             <DeleteIcon
               type="delete"
               style={{ cursor: "pointer", color: "red" ,fontSize: "1rem",}}
             />
-            {/* )} */}
+            )} 
           </StyledPopconfirm>
                         </div>
                         <div>
@@ -141,6 +157,7 @@ class OrganizationDocumentList extends Component {
 const mapStateToProps = ({ location, auth }) => ({
   repositoryData: auth.repositoryData,
   orgId: auth.userDetails.organizationId,
+  user: auth.userDetails,
 });
 
 const mapDispatchToProps = (dispatch) =>

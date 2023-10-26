@@ -4,6 +4,7 @@ import { Draggable } from "react-beautiful-dnd";
 import { BussinessCard } from "../../../Components/UI/Elements";
 import OpportunityGroupCard from "../Child/OpportunityGroupCard";
 import { MainWrapper, FlexContainer } from "../../../Components/UI/Layout";
+import { elipsize } from "../../../Helpers/Function/Functions";
 const StageContainer = styled.div`
   padding: 0.8rem 1.5rem;
   margin: 0.2rem;
@@ -61,7 +62,7 @@ class StageColumns1 extends Component {
               //   opportunity.metaData.account &&
               //   opportunity.metaData.account.imageId
               // }
-              primaryTitle={`${opportunity.opportunityName || ""}`}
+              primaryTitle={`${elipsize(opportunity.opportunityName, 60)}`} 
               secondaryTitle={`${opportunity.proposalAmount} `}
               currencyType={opportunity.currency}
             //   subtitle1={opportunity.description || "-"}

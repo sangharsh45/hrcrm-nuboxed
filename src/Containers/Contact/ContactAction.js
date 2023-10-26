@@ -1054,3 +1054,29 @@ export const getPArtnerContactPagination = (userId,pageNo) => (dispatch) => {
       });
     });
 };
+
+export const getContactRecord = (userId) => (dispatch) => {
+  dispatch({
+    type: types.GET_CONTACT_RECORDS_REQUEST,
+  });
+  axios
+    .get(`${base_url}/contact/customer/record/count/${userId}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.GET_CONTACT_RECORDS_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err.response);
+      dispatch({
+        type: types.GET_CONTACT_RECORDS_FAILURE,
+        payload: err,
+      });
+    });
+};

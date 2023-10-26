@@ -1,12 +1,13 @@
 import React, { Component, useEffect, useState, useMemo, lazy } from "react";
 import { MultiAvatar2, StyledLabel, } from '../../../../Components/UI/Elements'
 import { FlexContainer } from '../../../../Components/UI/Layout'
-import {  Tooltip,Button } from 'antd'
+import {  Tooltip,Button, Badge } from 'antd'
 import { connect } from 'react-redux'
 import MonitorHeartIcon from "@mui/icons-material/MonitorHeart";
 import { bindActionCreators } from 'redux'
 import CellTowerIcon from '@mui/icons-material/CellTower';
 import { Select } from "antd";
+import InsertDriveFileIcon from '@mui/icons-material/InsertDriveFile';
 import DraftsIcon from '@mui/icons-material/Drafts';
 import CircleIcon from '@mui/icons-material/Circle';
 import VolumeUpIcon from '@mui/icons-material/VolumeUp';
@@ -73,6 +74,7 @@ function handleSetCurrentEmployeeId(employeeId,) {
              
               <CardWrapper>      
               {props.employees.map((item) => {
+                console.log("noOfDocPending",item.noOfDocPending)
       
                  return (
                     <CardElement>
@@ -124,6 +126,7 @@ function handleSetCurrentEmployeeId(employeeId,) {
                    
                        <div class=" font-normal text-xs text-cardBody font-poppins mt-2 "><VolumeUpIcon style={{fontSize:"0.75rem"}}/> {`${item.countryDialCode} ${item.mobileNo}`}</div>
           <div class=" font-normal text-xs text-cardBody font-poppins "><DraftsIcon style={{fontSize:"0.75rem"}} /> {item.emailId}</div>
+          <div class=" flex flex-row justify-evenly  w-full items-end">
           <div class=" font-normal text-xs text-cardBody font-poppins ">
           <span
               style={{ cursor: "pointer" }}
@@ -138,6 +141,28 @@ function handleSetCurrentEmployeeId(employeeId,) {
               <MonitorHeartIcon  style={{ fontSize: "0.8rem", color: "#df9697" }}/>
      </span>
            </div>
+           <div class=" font-normal text-xs text-cardBody font-poppins ">
+          <span
+              style={{ cursor: "pointer" }}
+              // onClick={() => {
+              //   // props.getCandidateById(item.candidateId);
+              //    props.getEmployeeDocument(item.employeeId);
+              //    props.getEmployeeTreeMap(item.employeeId);
+              //   props.handleEmployeePulseDrawerModal(true);
+              //   handleSetCurrentEmployeeId(item)
+              // }}
+            >
+                   <Badge
+                   style={{  fontSize:"0.75em",height:"18px" ,width:"5px"}}
+                count={item.noOfDocPending}
+                overflowCount={999}
+              > 
+              <InsertDriveFileIcon  style={{ fontSize: "1rem", }}/>
+              </Badge>
+     </span>
+           </div>
+           </div>
+         
                      
                       {/* <div class=" flex flex-row justify-around w-full items-end">
               
