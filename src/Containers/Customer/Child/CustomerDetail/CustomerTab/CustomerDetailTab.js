@@ -367,6 +367,30 @@ class ContactDetailTab extends Component {
                 <LinkedInvoice />
               </Suspense>
             </TabPane>
+            <TabPane
+              tab={
+                <>
+                  <ReceiptIcon style={{fontSize:"1.1rem"}}/>
+                  <span class=" ml-1">
+                    {
+                      <FormattedMessage
+                        id="app.activity"
+                        defaultMessage="Activity"
+                      />
+                    }
+                    {/* Documents */}
+                  </span>
+                
+                
+                </>
+              }
+              key="8"
+            >
+              <Suspense fallback={"Loading ..."}>
+                {" "}
+                {/* <LinkedInvoice /> */}
+              </Suspense>
+            </TabPane>
            
           </StyledTabs>
         </TabsWrapper>

@@ -1898,5 +1898,37 @@ export const getAllCustomerByCloser = (userId, startDate, endDate) => (
       });
   };
 
+  export const getCustomerFilterData = (userId,pageNo,filter) => (dispatch) => {
+    // let api_url = "";
+    // if (userId) {
+    //   api_url = `/sort/all/Customers/user/${userId}`;
+    // } else {
+    //   api_url = `/Customers`;
+    // }
+    dispatch({
+      type: types.GET_CUSTOMERS_FILTER_DATA_REQUEST,
+    });
+    axios
+      .get(`${base_url}/customer/user/${userId}/${pageNo}/${filter}`, {
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+        },
+      })
+      .then((res) => {
+        console.log(res);
+        dispatch({
+          type: types.GET_CUSTOMERS_FILTER_DATA_SUCCESS,
+          payload: res.data,
+        });
+      })
+      .catch((err) => {
+        console.log(err.response);
+        dispatch({
+          type: types.GET_CUSTOMERS_FILTER_DATA_FAILURE,
+          payload: err,
+        });
+      });
+  };
+
 
  
