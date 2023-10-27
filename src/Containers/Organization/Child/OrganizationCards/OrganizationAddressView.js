@@ -4,7 +4,7 @@ import { bindActionCreators } from "redux";
 import {
   EditOutlined
 } from '@ant-design/icons';
-import EditIcon from '@mui/icons-material/Edit';
+import BorderColorIcon from '@mui/icons-material/Edit';
 import { ViewEditCard } from "../../../../Components/UI/Elements";
 import { FlexContainer,MainWrapper } from "../../../../Components/UI/Layout";
 import { Button } from "antd";
@@ -28,7 +28,7 @@ class OrganizationAddressView extends Component {
        
       <>
       <FlexContainer justifyContent="flex-end">
-      <EditIcon 
+      <BorderColorIcon 
               // tooltipTitle="Edit"
               // iconType="edit"
               onClick={toggleViewType}

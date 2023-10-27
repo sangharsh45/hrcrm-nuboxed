@@ -53,6 +53,9 @@ const initialState = {
   fetchingDocumentsByContactIdError: false,
   documentsByContactId: [],
 
+  fetchingFilterContacts: false,
+   fetchingFilterContactsError: false,
+
   deleteDocument: false,
   deleteDocumentError: false,
 
@@ -780,6 +783,21 @@ export const contactReducer = (state = initialState, action) => {
             fetchingContactRecords: false,
             fetchingContactRecordsError: true,
           };
+
+          case types.GET_FILTER_CONTACTS_REQUEST:
+            return { ...state, fetchingFilterContacts: true };
+          case types.GET_FILTER_CONTACTS_SUCCESS:
+            return {
+              ...state,
+              fetchingFilterContacts: false,
+              contactByUserId:action.payload,
+              // contactByUserId: [
+              //   ...state.contactByUserId,
+              //   ...action.payload],
+            
+            };
+          case types.GET_FILTER_CONTACTS_FAILURE:
+            return { ...state, fetchingFilterContacts: false, fetchingFilterContactsError: true };
 
     default:
       return state;
