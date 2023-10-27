@@ -11,6 +11,9 @@ const initialState = {
   addDrawerCustomerEmailModal:false,
 
   customerProjectModal:false,
+
+  fetchingFilterCustomers: false,
+  fetchingFilterCustomersError: false,
  
 
   addingAttendence: false,
@@ -1497,6 +1500,27 @@ export const customerReducer = (state = initialState, action) => {
                                       fetchingAttendanceList: false,
                                       fetchingAttendanceListError: true,
                                     };
+
+
+                                    case types.GET_CUSTOMERS_FILTER_DATA_REQUEST:
+                                      return { ...state, fetchingFilterCustomers: true };
+                                    case types.GET_CUSTOMERS_FILTER_DATA_SUCCESS:
+                                      return {
+                                        ...state,
+                                        fetchingFilterCustomers: false,
+                                         customerByUserId: action.payload,
+                                
+                                        // customerByUserId: [
+                                        //   ...state.customerByUserId,
+                                        //   ...action.payload],
+                                      
+                                      };
+                                    case types.GET_CUSTOMERS_FILTER_DATA_FAILURE:
+                                      return {
+                                        ...state,
+                                        fetchingFilterCustomers: false,
+                                        fetchingFilterCustomersError: true,
+                                      };
                   
                       
 

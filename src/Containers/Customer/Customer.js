@@ -14,6 +14,7 @@ import {
     emptyCustomer,
     getLatestCustomer,
     getCustomerCloser,
+    getCustomerFilterData,
     
   } from "./CustomerAction";
 import CustomerCardView from "./CustomerCardView";
@@ -44,7 +45,7 @@ class Customer extends Component {
   };
   handleFilterChange=(data)=>{
     this.setState({filter:data})
-    this.props.getCustomerListByUserId(this.props.userId,0,data)
+    this.props.getCustomerFilterData(this.props.userId,0,data)
   }
   setCurrentData = (value) => {
     this.setState({ currentData: value });
@@ -134,7 +135,8 @@ const mapDispatchToProps = (dispatch) =>
       getCustomerPagination,
       emptyCustomer,
       getLatestCustomer,
-      getCustomerCloser
+      getCustomerCloser,
+      getCustomerFilterData
     },
     dispatch
   );
