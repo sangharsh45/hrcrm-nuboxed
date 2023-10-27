@@ -92,7 +92,7 @@ const ContactActionLeft = (props) => {
           size="small"
           count={
             (props.viewType === "table" &&
-              props.contactRecord.customerDetails) ||
+              props.contactRecord.customerContactCount) ||
             0
           }
           overflowCount={5000}

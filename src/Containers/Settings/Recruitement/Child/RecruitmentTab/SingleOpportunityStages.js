@@ -153,6 +153,7 @@ class SingleOpportunityStages extends Component {
                              </Button> 
                              }
                    </span>
+                   &nbsp; &nbsp;  &nbsp; &nbsp;
                  <span>
                    <Tooltip title="Edit">
                    {probability !== 0 && probability !== 100 && (

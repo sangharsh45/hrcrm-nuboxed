@@ -6,6 +6,7 @@ import { FormattedMessage } from "react-intl";
 import { Button, Icon, Switch, Tooltip } from "antd";
 import { Formik, Form, Field, FastField } from "formik";
 import * as Yup from "yup";
+import{getAllOpportunityData} from "../../Opportunity/OpportunityAction"
 import { handleCallNotesModal } from "../CallAction";
 import { getFilteredEmailContact } from "../../Candidate/CandidateAction";
 import dayjs from "dayjs";
@@ -21,6 +22,7 @@ import {
   deleteCall,
   handleCallModal,
 } from "../CallAction";
+import {getAllCustomerData} from "../../Customer/CustomerAction"
 import { handleChooserModal } from "../../Planner/PlannerAction";
 import { TextareaComponent } from "../../../Components/Forms/Formik/TextareaComponent";
 import { StyledPopconfirm } from "../../../Components/UI/Antd";
@@ -98,7 +100,9 @@ function CallForm(props) {
   useEffect(() => {
     props.getEmployeelist();
     props.getAllSalesList();
+    props.getAllCustomerData(props.userId)
     props.getFilteredEmailContact(userId);
+    props.getAllOpportunityData(userId)
   }, []);
 
   
@@ -113,10 +117,37 @@ function CallForm(props) {
     function classNames(...classes) {
       return classes.filter(Boolean).join(' ')
     }
+
+    const customerNameOption = props.allCustomerData
+    .sort((a, b) => {
+      const libraryNameA = a.name && a.name.toLowerCase();
+      const libraryNameB = b.name && b.name.toLowerCase();
+      if (libraryNameA < libraryNameB) {
+        return -1;
+      }
+      if (libraryNameA > libraryNameB) {
+        return 1;
+      }
+
+      // names must be equal
+      return 0;
+    })
+    .map((item) => {
+      return {
+        label: `${item.name || ""}`,
+        value: item.customerId,
+      };
+    });
     const employeesData = props.employees.map((item) => {
       return {
         label: `${item.fullName}`,
-        value: item.employeeId,
+        value: item.opportunityId,
+      };
+    });
+    const opportunityNameOption = props.allOpportunityData.map((item) => {
+      return {
+        label: `${item.opportunityName}`,
+        value: item.opportunityId,
       };
     });
 
@@ -694,6 +725,7 @@ function CallForm(props) {
                   />
                   <Spacer />
                   <div>
+                  {props.user.crmInd === true &&(
                   <Field
                     name="contactId"
                     //selectType="contactList"
@@ -716,6 +748,61 @@ function CallForm(props) {
                     }}
                     inlineLabel
                   />
+                  )} 
+                  </div>
+                  <Spacer />
+                  <div>
+                  {props.user.crmInd === true &&(
+                 <Field
+                 name="customerId"
+                 // selectType="customerList"
+                 isColumnWithoutNoCreate
+                 label={
+                   <FormattedMessage
+                     id="app.customer"
+                     defaultMessage="Customer"
+                   />
+                 }
+                 //component={SearchSelect}
+                 component={SelectComponent}
+                 options={
+                   Array.isArray(customerNameOption)
+                     ? customerNameOption
+                     : []
+                 }
+                 isColumn
+                 margintop={"0"}
+                 value={values.customerId}
+                 inlineLabel
+               />
+                  )} 
+                  </div>
+                  <Spacer/>
+                  <div>
+                  {props.user.crmInd === true &&(
+                 <Field
+                 name="opportunityId"
+                 // selectType="customerList"
+                 isColumnWithoutNoCreate
+                 label={
+                   <FormattedMessage
+                     id="app.opportunity"
+                     defaultMessage="Opportunity"
+                   />
+                 }
+                 //component={SearchSelect}
+                 component={SelectComponent}
+                 options={
+                   Array.isArray(opportunityNameOption)
+                     ? opportunityNameOption
+                     : []
+                 }
+                 isColumn
+                 margintop={"0"}
+                 value={values.opportunityId}
+                 inlineLabel
+               />
+                  )} 
                   </div>
                   <Spacer/>
                   {/* <div >
@@ -846,9 +933,13 @@ function CallForm(props) {
     );
   }
 
-const mapStateToProps = ({ auth, call, employee, opportunity, candidate }) => ({
+const mapStateToProps = ({ auth, call, employee,customer, opportunity, candidate }) => ({
   addingCall: call.addingCall,
+  allCustomerData:customer.allCustomerData,
   userId: auth.userDetails.userId,
+  allOpportunityData:opportunity.allOpportunityData,
+  orgId: auth.userDetails.organizationId,
+  user: auth.userDetails,
   updatingCall: call.updatingCall,
   user: auth.userDetails,
   deletingCall: call.deleteCall,
@@ -864,12 +955,14 @@ const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
       addCall,
+      getAllCustomerData,
       handleChooserModal,
       getAllSalesList,
       updateCall,
       handleCallModal,
       deleteCall,
       getEmployeelist,
+      getAllOpportunityData,
       getFilteredEmailContact,
       setClearbitCandidateData, 
       handleCallNotesModal,

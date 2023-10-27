@@ -3054,3 +3054,29 @@ export const getOppLinkedWorkflow = (orgId) => (dispatch) => {
       });
     });
 };
+
+export const getAllOpportunityData = (userId,page) => (dispatch) => {
+  dispatch({
+    type: types.GET_ALL_OPPORTUNITY_DATA_REQUEST,
+  });
+  axios
+    .get(`${base_url}/opportunity/drop-opportunityList/${userId}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.GET_ALL_OPPORTUNITY_DATA_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err.response);
+      dispatch({
+        type: types.GET_ALL_OPPORTUNITY_DATA_FAILURE,
+        payload: err,
+      });
+    });
+};

@@ -11,6 +11,8 @@ const initialState = {
   updatingCall: false,
   updatingCallError: false,
 
+
+
   addingNotesByCallId: false,
   addingNotesByCallIdError: false,
 
@@ -220,6 +222,9 @@ export const callReducer = (state = initialState, action) => {
         addingNotesByCallId: false,
         addingNotesByCallIdError: true,
       };  
+
+
+  
 
     default:
       return state;

@@ -5,6 +5,8 @@ import { bindActionCreators } from "redux";
 import { Button, Switch } from "antd";
 import { Formik, Form, Field, FieldArray } from "formik";
 import * as Yup from "yup";
+import {getAllCustomerData} from "../../Customer/CustomerAction"
+import { getFilteredEmailContact } from "../../Candidate/CandidateAction";
 import dayjs from "dayjs";
 import { Spacer, StyledLabel } from "../../../Components/UI/Elements";
 import SearchSelect from "../../../Components/Forms/Formik/SearchSelect";
@@ -19,6 +21,7 @@ import {
   updateEvent,
   handleEventModal,
 } from "../EventAction";
+import{getAllOpportunityData} from "../../Opportunity/OpportunityAction"
 import { handleChooserModal } from "../../Planner/PlannerAction";
 import { TextareaComponent } from "../../../Components/Forms/Formik/TextareaComponent";
 import { StyledPopconfirm } from "../../../Components/UI/Antd";
@@ -60,6 +63,9 @@ function EventForm (props) {
   useEffect(()=> {
    props.getEmployeelist();
    props.getEvents();
+   props.getAllCustomerData(userId)
+   props.getAllOpportunityData(userId)
+   props.getFilteredEmailContact(userId);
   },[])
   
     const employeesData =props.employees.map((item) => {
@@ -68,6 +74,38 @@ function EventForm (props) {
         // label: `${item.salutation || ""} ${item.firstName ||
         //   ""} ${item.middleName || ""} ${item.lastName || ""}`,
         value: item.employeeId,
+      };
+    });
+    const opportunityNameOption = props.allOpportunityData.map((item) => {
+      return {
+        label: `${item.opportunityName}`,
+        value: item.opportunityId,
+      };
+    });
+    const ContactData = props.filteredContact.map((item) => {
+      return {
+        label: `${item.fullName}`,
+        value: item.contactId,
+      };
+    });
+    const customerNameOption = props.allCustomerData
+    .sort((a, b) => {
+      const libraryNameA = a.name && a.name.toLowerCase();
+      const libraryNameB = b.name && b.name.toLowerCase();
+      if (libraryNameA < libraryNameB) {
+        return -1;
+      }
+      if (libraryNameA > libraryNameB) {
+        return 1;
+      }
+
+      // names must be equal
+      return 0;
+    })
+    .map((item) => {
+      return {
+        label: `${item.name || ""}`,
+        value: item.customerId,
       };
     });
 const selectedOption = props.employees.find((item) => item.fullName === selected);
@@ -82,6 +120,7 @@ const {
       deleteEvent,
       startDate,
       endDate,
+      contactId,
       startTime,
       endTime,
       defaultContacts,
@@ -121,6 +160,7 @@ const {
                   candidateId: "",
                   included: [],
                   fullName: "",
+                  contactId: "",
                   repeatStartDate: "",
                   complitionInd: "Incomplete",
                   repeatEndDate: "",
@@ -510,6 +550,87 @@ const {
                       value: employeeId,
                     }}
                   />
+                    <Spacer />
+                  <div>
+                  {props.user.crmInd === true &&(
+                  <Field
+                    name="contactId"
+                    //selectType="contactList"
+                    isColumnWithoutNoCreate
+                    // label="Contact"
+                    label={
+                      <FormattedMessage
+                        id="app.contact"
+                        defaultMessage="Contact"
+                      />
+                    }
+                    component={SelectComponent}
+                    isColumn
+                    options={Array.isArray(ContactData) ? ContactData : []}
+                    value={values.contactId}
+                    // isDisabled={defaultContacts}
+                    defaultValue={{
+                      label: `${fullName || ""} `,
+                      value: contactId,
+                    }}
+                    inlineLabel
+                  />
+                  )} 
+                  </div>
+                  <Spacer />
+                  <div>
+                  {props.user.crmInd === true &&(
+                 <Field
+                 name="customerId"
+                 // selectType="customerList"
+                 isColumnWithoutNoCreate
+                 label={
+                   <FormattedMessage
+                     id="app.customer"
+                     defaultMessage="Customer"
+                   />
+                 }
+                 //component={SearchSelect}
+                 component={SelectComponent}
+                 options={
+                   Array.isArray(customerNameOption)
+                     ? customerNameOption
+                     : []
+                 }
+                 isColumn
+                 margintop={"0"}
+                 value={values.customerId}
+                 inlineLabel
+               />
+                  )} 
+                  </div>
+                  <Spacer/>
+                  <div>
+                  {props.user.crmInd === true &&(
+                 <Field
+                 name="opportunityId"
+                 // selectType="customerList"
+                 isColumnWithoutNoCreate
+                 label={
+                   <FormattedMessage
+                     id="app.opportunity"
+                     defaultMessage="Opportunity"
+                   />
+                 }
+                 //component={SearchSelect}
+                 component={SelectComponent}
+                 options={
+                   Array.isArray(opportunityNameOption)
+                     ? opportunityNameOption
+                     : []
+                 }
+                 isColumn
+                 margintop={"0"}
+                 value={values.opportunityId}
+                 inlineLabel
+               />
+                  )} 
+                  </div>
                   <Spacer />
                   {/* <Field
                     disabled="true"
@@ -652,10 +773,13 @@ const {
       </>
     );
 }
-const mapStateToProps = ({ auth, event, employee, events, candidate }) => ({
+const mapStateToProps = ({ auth, event,opportunity,customer, employee, events, candidate }) => ({
   addingEvent: event.addingEvent,
+  allCustomerData:customer.allCustomerData,
   updatingEvent: event.updatingEvent,
   user: auth.userDetails,
+  allOpportunityData:opportunity.allOpportunityData,
+  filteredContact: candidate.filteredContact,
   deletingEvent: event.deleteEvent,
   employees: employee.employees,
   events: events.events,
@@ -673,6 +797,9 @@ const mapDispatchToProps = (dispatch) =>
       handleEventModal,
       getEmployeelist,
       getEvents,
+      getAllOpportunityData,
+      getAllCustomerData,
+      getFilteredEmailContact,
       setClearbitCandidateData,
     },
     dispatch

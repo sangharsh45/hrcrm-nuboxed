@@ -27,7 +27,7 @@ function Contact(props) {
   const [selectedRole, setSelectedRole] = useState('');
   const [selectedCountry, setSelectedCountry] = useState('');
   const [filterText, setFilterText] = useState('');
-  const[filter,setFilter]=useState("creationdate")
+  const [filter, setFilter] = useState("creationdate");
 const [filteredData, setFilteredData] = useState(props.contactByUserId);
 
 const handleCountryChange = (event) => {
@@ -59,9 +59,9 @@ const handleRoleChange = (event) => {
 
   setFilteredData(filteredJobs);
 };
-useEffect(()=>{
-props.getContactListByUserId(props.userId,0)
-},[])
+// useEffect(()=>{
+// props.getContactListByUserId(props.userId,0)
+// },[])
 
 const filterData = filteredData.filter(item =>
   Object.values(item).some(value =>
@@ -73,10 +73,14 @@ const filterData = filteredData.filter(item =>
     props.emptyContact();
     props.getContactListByUserId(currentUser ? currentUser : props.userId, 0);
   };
-  const handleFilterChange=(data)=>{
-    setFilter({filter:data})
-    props.getFilterContactList(props.userId,0,data)
-  }
+  // const handleFilterChange=(data)=>{
+  //   setFilter({filter:data})
+  //   props.getFilterContactList(props.userId,0,data)
+  // }
+  const handleFilterChange = (data) => {
+    setFilter(data);
+    props.getFilterContactList(props.userId, 0, data);
+  };
 
   // const handlePartnerClear = () => {
   //   setCurrentPartnerData("");

@@ -1037,3 +1037,30 @@ export const setLeadsViewType = (viewType) => (dispatch) => {
       payload: modalProps,
     });
   };
+
+  export const getCallTimeline = (leadsId) => (dispatch) => {
+    dispatch({
+        type: types.GET_CALL_TIMELINE_REQUEST,
+    });
+  
+    axios
+        .get(`${base_url}/leads/activity/list/${leadsId}`, {
+            headers: {
+                Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+            },
+        })
+        .then((res) => {
+            console.log(res);
+            dispatch({
+                type: types.GET_CALL_TIMELINE_SUCCESS,
+                payload: res.data,
+            });
+        })
+        .catch((err) => {
+            console.log(err);
+            dispatch({
+                type: types.GET_CALL_TIMELINE_FAILURE,
+                payload: err,
+            });
+        });
+  };

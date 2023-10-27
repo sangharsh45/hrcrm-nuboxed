@@ -325,6 +325,13 @@ export const handleInvoiceModal = (modalProps) => (dispatch) => {
   });
 };
 
+export const handleCallActivityModal = (modalProps) => (dispatch) => {
+  dispatch({
+    type: types.HANDLE_CALL_ACTIVITY_MODAL,
+    payload: modalProps,
+  });
+};
+
 export const deleteDocument = (documentId) => (dispatch, getState) => {
   console.log("inside deleteDocument", documentId);
   // const { opportunityId } = getState("opportunity").opportunity.opportunity;
@@ -1925,6 +1932,32 @@ export const getAllCustomerByCloser = (userId, startDate, endDate) => (
         console.log(err.response);
         dispatch({
           type: types.GET_CUSTOMERS_FILTER_DATA_FAILURE,
+          payload: err,
+        });
+      });
+  };
+
+  export const getAllCustomerData = (userId,page) => (dispatch) => {
+    dispatch({
+      type: types.GET_ALL_CUSTOMERS_DATA_REQUEST,
+    });
+    axios
+      .get(`${base_url}/customer/drop/customer-list/${userId}`, {
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+        },
+      })
+      .then((res) => {
+        console.log(res);
+        dispatch({
+          type: types.GET_ALL_CUSTOMERS_DATA_SUCCESS,
+          payload: res.data,
+        });
+      })
+      .catch((err) => {
+        console.log(err.response);
+        dispatch({
+          type: types.GET_ALL_CUSTOMERS_DATA_FAILURE,
           payload: err,
         });
       });

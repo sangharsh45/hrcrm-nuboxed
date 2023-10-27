@@ -224,7 +224,7 @@ function CustomerCardList(props) {
                                     <h4 class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden">Pipeline Value</h4>
 
                                     <div class=" text-[0.75rem] text-cardBody font-poppins text-center">
-                                    {item.pipe}
+                                    {item.totalProposalValue}
 
                                     </div>
                                 </div>

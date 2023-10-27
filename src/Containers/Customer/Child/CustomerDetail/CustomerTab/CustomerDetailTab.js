@@ -27,6 +27,7 @@ import {
   handlefileRecruitModal,
   handleTagProfileModal,
   handleInvoiceModal,
+  handleCallActivityModal,
   handleCustomerReactSpeechModal,
 } from "../../../CustomerAction";
 import ReactCustomerSpeechModal from "../ReactCustomerSpeechModal";
@@ -129,7 +130,9 @@ class ContactDetailTab extends Component {
       getContactListByCustomerId,
       getOpportunityListByCustomerId,
       addInvoiceModal,
+      callActivityModal,
       handleInvoiceModal,
+      handleCallActivityModal,
     } = this.props;
 
     return (
@@ -380,7 +383,25 @@ class ContactDetailTab extends Component {
                     }
                     {/* Documents */}
                   </span>
-                
+                  {activeKey === "8" && (
+                    <>
+                      <PlusOutlined
+                        type="plus"
+                        title={
+                          <FormattedMessage
+                            id="app.create"
+                            defaultMessage="Create"
+                          />
+                        }
+                        onClick={() => handleCallActivityModal(true)}
+                        size="0.875em"
+                        style={{
+                          marginLeft: "0.3125em",
+                          verticalAlign: "center",
+                        }}
+                      />
+                    </>
+                  )}
                 
                 </>
               }
@@ -439,6 +460,11 @@ class ContactDetailTab extends Component {
             addCustomerProjectDrawer={addCustomerProjectDrawer}
             handleCustomerProjectDrawer={handleCustomerProjectDrawer}
           />
+{/*           
+          <AddCustomerActivityModal
+            callActivityModal={callActivityModal}
+            handleInvoiceModal={handleInvoiceModal}
+          /> */}
         </Suspense>
       </>
     );
@@ -458,6 +484,7 @@ const mapStateToProps = ({ auth, customer, contact, opportunity }) => ({
   addFileRecruitModal: customer.addFileRecruitModal,
   addTagProfileModal: customer.addTagProfileModal,
   addInvoiceModal: customer.addInvoiceModal,
+  callActivityModal:customer.callActivityModal,
 });
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
@@ -471,6 +498,7 @@ const mapDispatchToProps = (dispatch) =>
       handlefileRecruitModal,
       handleTagProfileModal,
       handleInvoiceModal,
+      handleCallActivityModal,
       handleCustomerProjectDrawer,
       handleCustomerReactSpeechModal,
       //handleCustomerCommercialsModal,
