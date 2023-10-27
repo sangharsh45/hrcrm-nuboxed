@@ -4,6 +4,7 @@ import { Formik, Form, FastField, Field, FieldArray } from "formik";
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import dayjs from "dayjs";
+import { FloatButton } from 'antd';
 import { BundleLoader } from "../../../../../Components/Placeholder";
 import { bindActionCreators } from 'redux';
 import { Spacer } from '../../../../../Components/UI/Elements';
@@ -1150,6 +1151,7 @@ const AccessForm = (props) => {
               <h4 class="mt-2">Updated on {dayjs(props.departmentAcces.lastUpdatedOn).format("ll")} by {props.departmentAcces.name}</h4>
               
               <FlexContainer justifyContent="flex-end" >
+              <FloatButton.Group style={{ width: "3rem", height: "5rem" }} >
                 <Button
                   type="primary"
                   htmlType="submit"
@@ -1160,6 +1162,7 @@ const AccessForm = (props) => {
                 >
                   <FormattedMessage id="app.Update" defaultMessage="Update" />
                 </Button>
+                </FloatButton.Group>
               </FlexContainer>
 
 

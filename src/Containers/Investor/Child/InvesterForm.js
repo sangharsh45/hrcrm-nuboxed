@@ -85,7 +85,7 @@ function InvesterForm(props) {
             // sectorName:"",
             partnerName: "",
             // sectorDescription:"",
-            name: "",
+           
             url: "",
             gst:"",
             sectorId: "",
@@ -120,6 +120,7 @@ function InvesterForm(props) {
             AddInvestor(
               {
                 ...values,
+                name: "",
                 category: checked ? "Both" : whiteblue ? "White" : "Blue",
                 assignedTo: selectedOption ? selectedOption.employeeId:userId,
               },

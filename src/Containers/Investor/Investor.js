@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { BundleLoader, GridLoader } from "../../Components/Placeholder";
 import {setInvestorViewType,handleInvestorModal} from "./InvestorAction";
-import {getInvestorsbyId,emptyInvestor} from "./InvestorAction";
+import {getInvestorsbyId,emptyInvestor,getInvestorsFilterData} from "./InvestorAction";
 import {
   getLatestCustomer,
   getCustomerCloser, 
@@ -38,7 +38,7 @@ function handleCurrentData (value){
 }
 const handleFilterChange = (data) => {
   setFilter(data);
-  props.getInvestorsbyId(props.userId, 0, data);
+  props.getInvestorsFilterData(props.userId, 0, data);
 };
 const handleChange = (e) => {
   setcurrentData(e.target.value)
@@ -93,6 +93,6 @@ const mapDispatchToProps = dispatch => bindActionCreators({
   handleInvestorModal,
   getLatestCustomer,
   getCustomerCloser,
-  getInvestorsbyId,emptyInvestor
+  getInvestorsbyId,emptyInvestor,getInvestorsFilterData
 }, dispatch)
 export default connect(mapStateToProps, mapDispatchToProps)(Investor);

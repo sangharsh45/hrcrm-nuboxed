@@ -12,6 +12,9 @@ const initialState = {
   fetchingInvestorRecordsError: false,
   investorRecord:[],
 
+  fetchingInvestorsfilterdata: false,
+  fetchingInvestorsfilterdataError: false,
+
   addingInvestor: false,
   addInvestorModal: false,
   updateInvestorModal: false,
@@ -68,6 +71,7 @@ export const investorReducer = (state = initialState, action) => {
         ...state,
         fetchingInvestors: false,
         investorsbyId: [...state.investorsbyId, ...action.payload],
+        clearbit:null
       };
     case types.GET_INVESTORS_BY_ID_FAILURE:
       return {
@@ -75,6 +79,23 @@ export const investorReducer = (state = initialState, action) => {
         fetchingInvestors: false,
         fetchingInvestorsError: true,
       };
+
+      case types.GET_INVESTORS_FILTER_DATA_REQUEST:
+        return { ...state, fetchingInvestorsfilterdata: true };
+      case types.GET_INVESTORS_FILTER_DATA_SUCCESS:
+        return {
+          ...state,
+          fetchingInvestorsfilterdata: false,
+          investorsbyId: action.payload,
+        };
+      case types.GET_INVESTORS_FILTER_DATA_FAILURE:
+        return {
+          ...state,
+          fetchingInvestorsfilterdata: false,
+          fetchingInvestorsfilterdataError: true,
+        };
+
+
     case types.EMPTY_INVESTOR_LIST:
       return { ...state, investorsbyId: [] };
 

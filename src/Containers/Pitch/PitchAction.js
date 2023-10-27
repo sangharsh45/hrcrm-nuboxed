@@ -413,3 +413,37 @@ export const getPitch = (userId) => (dispatch) => {
         });
       });
   };
+
+  export const handleAssimodal= (modalProps) => (dispatch) => {
+    dispatch({
+      type: types.HANDLE_ASSI_MODAL,
+      payload: modalProps,
+    });
+  }
+
+  export const getpichTimeline = (investorLeadsId) => (dispatch) => {
+    dispatch({
+        type: types.GET_PITCH_TIMELINE_REQUEST,
+    });
+  
+    axios
+        .get(`${base_url}/investorLeads/activity/list/${investorLeadsId}`, {
+            headers: {
+                Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+            },
+        })
+        .then((res) => {
+            console.log(res);
+            dispatch({
+                type: types.GET_PITCH_TIMELINE_SUCCESS,
+                payload: res.data,
+            });
+        })
+        .catch((err) => {
+            console.log(err);
+            dispatch({
+                type: types.GET_PITCH_TIMELINE_FAILURE,
+                payload: err,
+            });
+        });
+  };

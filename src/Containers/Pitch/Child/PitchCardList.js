@@ -33,7 +33,8 @@ import {
   deletePitchData,
   handleUpdatePitchModal,
   setEditPitch,
-  updateTypeForPitch
+  updateTypeForPitch,
+  handleAssimodal
 } from "../PitchAction";
 import ReactCountryFlag from 'react-country-flag';
 import AssignmentLateIcon from '@mui/icons-material/AssignmentLate';
@@ -44,6 +45,7 @@ import { FormattedMessage } from "react-intl";
 // import AddLeadsEmailDrawerModal from "../UpdateLeads/AddLeadsEmailDrawerModal";
 import { BundleLoader } from "../../../Components/Placeholder";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
+import OpenASSimodal from "./OpenASSimodal";
 // import OpenCETmodal from "./OpenCETmodal";
 
 const ButtonGroup = Button.Group;
@@ -57,7 +59,11 @@ const PitchCardList = (props) => {
   }, []);
 
   const [currentLeadsId, setCurrentLeadsId] = useState("");
+  const [rowdata, setrowData] = useState({});
 
+  const handleRowData = (data) => {
+    setrowData(data);
+  };
   function handleSetCurrentLeadsId(item) {
     setCurrentLeadsId(item);
   }
@@ -220,7 +226,10 @@ const PitchCardList = (props) => {
       >
 <AssignmentLateIcon
 style={{fontSize: "1rem",cursor: 'pointer',}}
-//onClick={()=>{props.handleCETmodal(true)}}
+onClick={()=>{
+  props.handleAssimodal(true)
+  handleRowData(item)
+  }}
 />
 </Tooltip>
 </div>
@@ -438,10 +447,11 @@ style={{fontSize: "1rem",cursor: 'pointer',}}
         addDrawerLeadsEmailModal={props.addDrawerLeadsEmailModal}
         handleLeadsEmailDrawerModal={props.handleLeadsEmailDrawerModal}
       /> */}
-      {/* <OpenCETmodal 
-      openCETmodal={props.openCETmodal}
-      handleCETmodal={props.handleCETmodal}
-      /> */}
+      <OpenASSimodal 
+        rowdata={rowdata}
+        openASSImodal={props.openASSImodal}
+      handleAssimodal={props.handleAssimodal}
+      />
     </>
   );
 };
@@ -450,7 +460,7 @@ const mapStateToProps = ({ auth, leads, sector,pitch }) => ({
 //   leadsAllData: leads.leadsAllData,
   userId: auth.userDetails.userId,
   updatePitchModal:pitch.updatePitchModal,
-
+  openASSImodal:pitch.openASSImodal,
   pitchData:pitch.pitchData
 });
 const mapDispatchToProps = (dispatch) =>
@@ -460,7 +470,8 @@ const mapDispatchToProps = (dispatch) =>
         deletePitchData,
         handleUpdatePitchModal,
         setEditPitch,
-        updateTypeForPitch
+        updateTypeForPitch,
+        handleAssimodal
     //   getLeads,
     //   getSectors,
     //   deleteLeadsData,
