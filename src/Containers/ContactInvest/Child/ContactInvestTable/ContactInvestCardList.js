@@ -209,7 +209,14 @@ function ContactInvestCardList(props) {
                                     <div class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden"># Deals</div>
 
                                     <div class=" text-[0.75rem] text-cardBody font-poppins">
+                                     {item.oppNo}
+                                    </div>
+                                </div>
+                                <div className=" flex font-medium flex-col md:w-32 max-sm:flex-row w-full  ">
+                                    <div class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden">Deal Value</div>
 
+                                    <div class=" text-[0.75rem] text-cardBody font-poppins">
+                                     {item.totalProposalValue}
                                     </div>
                                 </div>
                                 <div className="flex font-medium max-sm:justify-between flex-col md:w-32 max-sm:flex-row w-full ">

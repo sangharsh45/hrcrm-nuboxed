@@ -147,8 +147,21 @@ function InvestorCardList(props) {
                                     borderBottom: "3px dotted #515050"
                                 }}>
                                      <div class="flex">
-                                <div className=" flex font-medium flex-col md:w-52 max-sm:flex-row w-full ">
+                                <div className=" flex font-medium  md:w-60 max-sm:flex-row w-full ">
+                                <div>
+<SubTitle>
+            <MultiAvatar
+              primaryTitle={item.name}
+              imageId={item.imageId}
+              imageURL={item.imageURL}
+              imgWidth={"1.8em"}
+              imgHeight={"1.8em"}
+            />
+          </SubTitle>
+</div>
+                                   <div class="w-[4%]">
 
+                                   </div>
                                    
                                         <Tooltip>
                                         <div class=" flex max-sm:w-full justify-between flex-row md:flex-col">

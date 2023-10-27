@@ -36,6 +36,34 @@ export const getInvestorsbyId = (userId,pageNo,filter) => (dispatch) => {
         });
       });
   };
+
+  export const getInvestorsFilterData = (userId,pageNo,filter) => (dispatch) => {
+    dispatch({
+      type: types.GET_INVESTORS_FILTER_DATA_REQUEST,
+    });
+    axios
+      .get(`${base_url}/investor/${userId}/${pageNo}/${filter}`, {
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+        },
+      })
+      .then((res) => {
+        console.log(res);
+        dispatch({
+          type: types.GET_INVESTORS_FILTER_DATA_SUCCESS,
+          payload: res.data,
+        });
+      })
+      .catch((err) => {
+        console.log(err.response);
+        dispatch({
+          type: types.GET_INVESTORS_FILTER_DATA_FAILURE,
+          payload: err,
+        });
+      });
+  };
+
+
   export const emptyInvestor = () => (dispatch) => {
     dispatch({
       type: types.EMPTY_INVESTOR_LIST, 

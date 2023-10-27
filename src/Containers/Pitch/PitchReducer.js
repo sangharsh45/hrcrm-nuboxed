@@ -17,6 +17,10 @@ const initialState = {
     fetchingPitchRecordsError: false,
     pitchRecord:[],
 
+    fetchingPitchStatus: false,
+    fetchingPitchStatusError: false,
+    pitchStatus:[],
+
 
     updateTypePitch:false,
     updateTypePitchError:false,
@@ -53,6 +57,7 @@ const initialState = {
     deletingPitchData:false,
   deletingPitchDataError:false,
 
+  openASSImodal:false,
 
   pitchDocumentUploadModal:false,
 
@@ -305,8 +310,25 @@ case types.GET_PITCH_REQUEST:
                 fetchingPitchRecordsError: true,
               };
   
+              case types.HANDLE_ASSI_MODAL:
+                return { ...state, openASSImodal: action.payload };
 
 
+                case types.GET_PITCH_TIMELINE_REQUEST:
+                  return { ...state, fetchingPitchStatus: true };
+              case types.GET_PITCH_TIMELINE_SUCCESS:
+                  return {
+                      ...state,
+                      fetchingPitchStatus: false,
+                      pitchStatus: action.payload,
+                  };
+              case types.GET_PITCH_TIMELINE_FAILURE:
+                  return {
+                      ...state,
+                      fetchingPitchStatus: false,
+                      fetchingPitchStatusError: true,
+                  };
+                
 
     default:
 return state;

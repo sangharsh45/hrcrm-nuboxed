@@ -33,7 +33,7 @@ function ContactInvest (props) {
 };
 const handleFilterChange = (data) => {
   setFilter(data);
-  props.getContactInvestByUserId(props.userId, 0, data);
+  props.getContactInvestFilterData(props.userId, 0, data);
 };
 const handleRoleChange = (event) => {
   const role = event.target.value;
