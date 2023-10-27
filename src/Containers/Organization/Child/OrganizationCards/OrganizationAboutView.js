@@ -6,7 +6,7 @@ import {
   MultiAvatar,
   StyledLabel,
 } from "../../../../Components/UI/Elements";
-import EditIcon from '@mui/icons-material/Edit';
+import BorderColorIcon from '@mui/icons-material/Edit';
 import { FlexContainer } from "../../../../Components/UI/Layout";
 class OrganizationAboutView extends Component {
   render() {
@@ -18,7 +18,7 @@ class OrganizationAboutView extends Component {
     return (
       <>
         <FlexContainer justifyContent="flex-end">
-          <EditIcon
+          <BorderColorIcon
             // tooltipTitle="Edit"
             // iconType="edit"
             onClick={toggleViewType}

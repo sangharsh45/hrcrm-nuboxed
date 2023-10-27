@@ -25,6 +25,8 @@ class ContactHeader extends Component {
               handleClear={this.props.handleClear}
               setCurrentData={this.props.setCurrentData}
               viewType={viewType}
+              handleFilterChange={this.props.handleFilterChange}
+              filter={this.props.filter}
               setContactsViewType={setContactsViewType}
               currentPartnerData={this.props.currentPartnerData}
               handlePartnerClear={this.props.handlePartnerClear}

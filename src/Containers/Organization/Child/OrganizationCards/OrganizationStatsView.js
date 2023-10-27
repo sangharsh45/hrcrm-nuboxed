@@ -7,7 +7,7 @@ import {
   StyledLabel,
 } from "../../../../Components/UI/Elements";
 import { FlexContainer } from "../../../../Components/UI/Layout";
-import { ActionIcon } from "../../../../Components/Utils";
+import BorderColorIcon from '@mui/icons-material/BorderColor';
 class OrganizationStatsView extends Component {
   render() {
     const {
@@ -25,10 +25,10 @@ class OrganizationStatsView extends Component {
     return (
       <>
         <FlexContainer justifyContent="flex-end">
-          <ActionIcon
+          <BorderColorIcon
             tooltipTitle="Edit"
             iconType="edit"
-            handleIconClick={toggleViewType}
+            onClick={toggleViewType}
             size="1em"
           />
         </FlexContainer>

@@ -108,7 +108,7 @@ export const addContact = (contact) => (dispatch, getState) => {
 /**
  * get all the contact of the user
  */
-export const getContactListByUserId = (userId,page) => (dispatch) => {
+export const getContactListByUserId = (userId,pageNo,filter) => (dispatch) => {
   // let api_url = "";
   // if (userId) {
   //   api_url = `/sort/all/contacts/user/${userId}`;
@@ -119,7 +119,7 @@ export const getContactListByUserId = (userId,page) => (dispatch) => {
     type: types.GET_CONTACTS_REQUEST,
   });
   axios
-    .get(`${base_url}/contact/user/${userId}/${page}`, {
+    .get(`${base_url}/contact/user/${userId}/${pageNo}/${filter}`, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },
@@ -1076,6 +1076,38 @@ export const getContactRecord = (userId) => (dispatch) => {
       console.log(err.response);
       dispatch({
         type: types.GET_CONTACT_RECORDS_FAILURE,
+        payload: err,
+      });
+    });
+};
+
+export const getFilterContactList = (userId,pageNo,filter) => (dispatch) => {
+  // let api_url = "";
+  // if (userId) {
+  //   api_url = `/sort/all/contacts/user/${userId}`;
+  // } else {
+  //   api_url = `/contacts`;
+  // }
+  dispatch({
+    type: types.GET_FILTER_CONTACTS_REQUEST,
+  });
+  axios
+    .get(`${base_url}/contact/user/${userId}/${pageNo}/${filter}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.GET_FILTER_CONTACTS_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err.response);
+      dispatch({
+        type: types.GET_FILTER_CONTACTS_FAILURE,
         payload: err,
       });
     });

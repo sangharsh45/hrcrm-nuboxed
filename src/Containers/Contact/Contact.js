@@ -10,6 +10,7 @@ import {
   getContactListByUserId,
   getContactPartnerListByUserId,
   getContactPagination,
+  getFilterContactList
 } from "./ContactAction";
 
 const AddContactModal = lazy(() => import("./Child/AddContactModal"));
@@ -26,6 +27,7 @@ function Contact(props) {
   const [selectedRole, setSelectedRole] = useState('');
   const [selectedCountry, setSelectedCountry] = useState('');
   const [filterText, setFilterText] = useState('');
+  const[filter,setFilter]=useState("creationdate")
 const [filteredData, setFilteredData] = useState(props.contactByUserId);
 
 const handleCountryChange = (event) => {
@@ -71,6 +73,10 @@ const filterData = filteredData.filter(item =>
     props.emptyContact();
     props.getContactListByUserId(currentUser ? currentUser : props.userId, 0);
   };
+  const handleFilterChange=(data)=>{
+    setFilter({filter:data})
+    props.getFilterContactList(props.userId,0,data)
+  }
 
   // const handlePartnerClear = () => {
   //   setCurrentPartnerData("");
@@ -136,6 +142,8 @@ const filterData = filteredData.filter(item =>
         handleClear={handleClear}
         currentData={currentData}
         setCurrentData={setCurrentData}
+        handleFilterChange={handleFilterChange}
+        filter={filter}
         // handlePartnerClear={handlePartnerClear}
         // currentPartnerData={currentPartnerData}
         // setCurrentPartnerData={setCurrentPartnerData}
@@ -148,7 +156,11 @@ const filterData = filteredData.filter(item =>
         handleContactModal={handleContactModal}
       />
       <Suspense fallback={<BundleLoader />}>
-        {props.viewType === "table" ? <ContactCardList currentUser={currentUser}  filterData={filterData}/> : null}
+        {props.viewType === "table" ? <ContactCardList 
+        currentUser={currentUser} 
+        filter={filter}
+         filterData={filterData}
+         /> : null}
       </Suspense>
     </React.Fragment>
   );
@@ -168,6 +180,7 @@ const mapDispatchToProps = (dispatch) =>
       getPArtnerContactPagination,
       setContactsViewType,
       getContactListByUserId,
+      getFilterContactList,
       getContactPartnerListByUserId,
       getContactPagination,
       emptyContact,

@@ -226,7 +226,7 @@ function Notifications(props) {
                       justifyContent: "space-between",
                     }}
                   >
-                    <p>In sms</p>
+                    <p>In SMS</p>
                     <div>
                       <Popconfirm
                         title="Do you wish to change Status ? "
@@ -276,7 +276,7 @@ function Notifications(props) {
                       justifyContent: "space-between",
                     }}
                   >
-                    <p>In whatsapp</p>
+                    <p>In Whatsapp</p>
                     <div>
                       <Popconfirm
                         title="Do you wish to change Status ? "
