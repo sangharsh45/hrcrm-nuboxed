@@ -19,6 +19,7 @@ class SingleDocuments extends Component {
       documentTypeName: "",
       type:"",
       
+      
     };
   }
   handleStageType=(value)=>{
@@ -35,10 +36,11 @@ class SingleDocuments extends Component {
 
   render() {
     const {
-      document: { documentTypeName,editInd, mandatoryInd, documentTypeId },
+      document: { documentTypeName,editInd, mandatoryInd, userType, documentTypeId },
       handleChange,
       name,
       value,
+  
       documents,
       linkedDocuments,
       updatingDocuments,
@@ -60,6 +62,18 @@ class SingleDocuments extends Component {
                   </div>
                   {/* <FlexContainer style={{justifyContent:"flex-end",marginTop:"-31px"}} > */}
                   <div class="flex justify-between w-96">
+                  <div  >
+                    <Select style={{ width: "100%"}}
+                onChange={this.handleStageType}
+                value={userType}
+                // defaultValue={this.state.type}
+                placeholder="Select Entity"
+                >
+                  <option value="User">User</option>
+        <option value="Customer">Customer</option>
+      
+                </Select> 
+                    </div>
                   <div >
                     <DocumentStatusToggle
                   editInd={editInd}
@@ -68,16 +82,7 @@ class SingleDocuments extends Component {
                       documentTypeId={documentTypeId}
                     />  
                     </div>
-                    <div  >
-                    <Select style={{ width: "100%"}}
-                onChange={this.handleStageType}
-                placeholder="Select Entity"
-                >
-                  <option value="User">User</option>
-        <option value="Customer">Customer</option>
-      
-                </Select> 
-                    </div>
+                  
                     <div >               
                    {this.props.document.editInd === true &&(
                       <BorderColorIcon

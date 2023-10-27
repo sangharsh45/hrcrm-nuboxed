@@ -118,7 +118,8 @@ function LevelApproveForm(props) {
               </div>
             </div>
           ))}
-                    <div class="flex justify-end" >
+          <div class=" flex justify-between">
+                    <div class="flex justify-end " >
                         <div className="button">
                             <Button type="primary" onClick={handleAddRowClick}>
                                 Add Level
@@ -135,6 +136,7 @@ function LevelApproveForm(props) {
                             Submit
                         </Button>
                         </div>
+                    </div>
                     </div>
                 </div>
             </div>

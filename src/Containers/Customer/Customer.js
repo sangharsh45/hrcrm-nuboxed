@@ -26,7 +26,9 @@ const CustomerTable = lazy(() => import("./Child/CustomerTable/CustomerTable"));
 const CustomerCardList=lazy(() => import("./Child/CustomerTable/CustomerCardList"));
 
 class Customer extends Component {
-  state = { currentData: "",currentUser:"" };
+  state = { currentData: "",
+  filter:"",
+  currentUser:"" };
   handleClear = () => {
     const startDate = moment()
       .startOf("month")
@@ -40,6 +42,9 @@ class Customer extends Component {
     this.props.getLatestCustomer(this.props.userId);
     this.props.getCustomerCloser(this.props.userId, startDate, endDate);
   };
+  handleFilterChange=()=>{
+    
+  }
   setCurrentData = (value) => {
     this.setState({ currentData: value });
   };

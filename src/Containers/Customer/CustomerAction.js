@@ -106,7 +106,7 @@ export const addCustomer = (customer) => (dispatch, getState) => {
 /**
  * get all the customer of the user
  */
-export const getCustomerListByUserId = (userId,page) => (dispatch) => {
+export const getCustomerListByUserId = (userId,pageNo,filter) => (dispatch) => {
   // let api_url = "";
   // if (userId) {
   //   api_url = `/sort/all/Customers/user/${userId}`;
@@ -117,7 +117,7 @@ export const getCustomerListByUserId = (userId,page) => (dispatch) => {
     type: types.GET_CUSTOMERS_REQUEST,
   });
   axios
-    .get(`${base_url}/customer/user/${userId}/${page}`, {
+    .get(`${base_url}/customer/user/${userId}/${pageNo}/${filter}`, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },

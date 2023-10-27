@@ -430,12 +430,11 @@ function OpportunityBoard(props) {
                                   <StageHeader style={{ position: "absolute" }}>
                                   {/* {elipsize(stage.stageName, 30)} */}
                                     <div>{stage.stageName}</div>
-                                    {/* <div>
-                                      {`${props.tradeCurrency} `}
+                                    <div>
+                                     {`${stage.proposalAmount} `}
                                   
 
-                                      {proposalAmountCalculate(stage.stageId)}
-                                    </div> */}
+                                    </div>
                                   </StageHeader>
                                   <Spin
                                     tip="Loading..."

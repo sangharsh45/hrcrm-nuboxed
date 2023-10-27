@@ -307,14 +307,14 @@ function CustomerForm(props) {
             >
               Assigned to
             </Listbox.Label>
-            <div className="relative mt-1">
+            <div className="relative ">
               <Listbox.Button style={{boxShadow: "rgb(170, 170, 170) 0px 0.25em 0.62em"}} className="relative w-full leading-4 cursor-default border border-gray-300 bg-white py-0.5 pl-3 pr-10 text-left shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm">
                 {selected}
               </Listbox.Button>
               {open && (
                 <Listbox.Options
                   static
-                  className="absolute z-10 mt-1 max-h-56 w-full overflow-auto  bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
+                  className="absolute z-10 max-h-56 w-full overflow-auto mt-1  bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
                 >
                   {props.allCustomerEmployeeList.map((item) => (
                     <Listbox.Option
@@ -395,7 +395,7 @@ function CustomerForm(props) {
                   </div>
                     </div>
                    
-                    <div class=" flex justify-between mt-[0.1rem] max-sm:flex-col ">
+                    <div class=" flex justify-between mt-[0.2rem] max-sm:flex-col ">
                     <div class=" w-2/5 max-sm:w-wk">
                       <Field
                         name="vatNo"
