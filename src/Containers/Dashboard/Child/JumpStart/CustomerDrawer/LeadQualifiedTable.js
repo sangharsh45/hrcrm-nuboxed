@@ -8,8 +8,13 @@ import {getLeadQualified} from "../../../DashboardAction";
 
 function LeadQualifiedTable (props) {
     useEffect(()=>{
-        props.getLeadQualified(props.userId);
-    },[]);
+      if (props.timeRangeType === "today"){
+        props.getLeadQualified(props.userId,props.startDate,props.endDate);
+      }
+      else {
+        props.getLeadQualified(props.userId,props.startDate,props.endDate); 
+      }
+    }, [props.userId,props.startDate,props.endDate]);
 
     const columns = [
       {
@@ -18,16 +23,16 @@ function LeadQualifiedTable (props) {
           defaultMessage="Name"
         />,
         width: "30%",
-        dataIndex: "opportunityName",
+        dataIndex: "name",
       },
      
       {
         title: <FormattedMessage
-          id="app.proposalvalue"
-          defaultMessage="Proposal Value"
+          id="app.emailId"
+          defaultMessage="Email Id"
         />,
         width: "22%",
-        dataIndex: "proposalAmount",
+        dataIndex: "email",
         defaultSortOrder: 'descend',
         // sorter: (a, b) => a.proposalAmount - b.proposalAmount,
   
@@ -43,11 +48,11 @@ function LeadQualifiedTable (props) {
       {
         // title: "Status",
         title: <FormattedMessage
-          id="app.status"
-          defaultMessage="Status"
+          id="app.companyName"
+          defaultMessage="Company Name"
         />,
         width: "25%",
-        dataIndex: "stageName",
+        dataIndex: "companyName",
         // sorter: (a, b) => {
         //   const stageNameA = a.stageName && a.stageName.toLowerCase();
         //   const stageNameB = b.stageName && b.stageName.toLowerCase();
@@ -75,7 +80,10 @@ function LeadQualifiedTable (props) {
   const mapStateToProps = ({dashboard,auth }) => ({
     showQualifiedLeads:dashboard.showQualifiedLeads,
     userId: auth.userDetails.userId,
-    fetchingLeadsQualified:dashboard.fetchingLeadsQualified
+    fetchingLeadsQualified:dashboard.fetchingLeadsQualified,
+    timeRangeType:dashboard.timeRangeType,
+    startDate: dashboard.startDate,
+    endDate: dashboard.endDate,
 });
 
 const mapDispatchToProps = (dispatch) =>

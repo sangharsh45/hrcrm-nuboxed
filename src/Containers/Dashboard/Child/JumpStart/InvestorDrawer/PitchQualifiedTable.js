@@ -8,9 +8,13 @@ import {getPitchQualified} from "../../../DashboardAction";
 
 function PitchQualifiedTable (props) {
     useEffect(()=>{
-        props.getPitchQualified(props.userId);
-    },[]);
-
+      if (props.timeRangeType === "today"){
+        props.getPitchQualified(props.userId,props.startDate,props.endDate);
+      }
+      else {
+        props.getPitchQualified(props.userId,props.startDate,props.endDate);
+      }
+    }, [props.userId,props.startDate,props.endDate]);
     const columns = [
       {
         title: <FormattedMessage
@@ -18,16 +22,16 @@ function PitchQualifiedTable (props) {
           defaultMessage="Name"
         />,
         width: "30%",
-        dataIndex: "opportunityName",
+        dataIndex: "firstName",
       },
      
       {
         title: <FormattedMessage
-          id="app.proposalvalue"
-          defaultMessage="Proposal Value"
+          id="app.emailId"
+          defaultMessage="Email Id"
         />,
         width: "22%",
-        dataIndex: "proposalAmount",
+        dataIndex: "email",
         defaultSortOrder: 'descend',
         // sorter: (a, b) => a.proposalAmount - b.proposalAmount,
   
@@ -43,11 +47,11 @@ function PitchQualifiedTable (props) {
       {
         // title: "Status",
         title: <FormattedMessage
-          id="app.status"
-          defaultMessage="Status"
+          id="app.companyName"
+          defaultMessage="Company Name"
         />,
         width: "25%",
-        dataIndex: "stageName",
+        dataIndex: "companyName",
         // sorter: (a, b) => {
         //   const stageNameA = a.stageName && a.stageName.toLowerCase();
         //   const stageNameB = b.stageName && b.stageName.toLowerCase();
@@ -75,7 +79,10 @@ function PitchQualifiedTable (props) {
   const mapStateToProps = ({dashboard,auth }) => ({
     showQualifiedPitch:dashboard.showQualifiedPitch,
     userId: auth.userDetails.userId,
-    fetchingPitchQualified:dashboard.fetchingPitchQualified
+    fetchingPitchQualified:dashboard.fetchingPitchQualified,
+    timeRangeType:dashboard.timeRangeType,
+    startDate: dashboard.startDate,
+    endDate: dashboard.endDate,
 });
 
 const mapDispatchToProps = (dispatch) =>

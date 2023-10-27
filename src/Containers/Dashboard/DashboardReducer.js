@@ -142,60 +142,7 @@ const initialState = {
   startDate: dayjs().toISOString(),
   endDate: dayjs().toISOString(),
 
-  dateRangeList: [
-    {
-      id: 1,
-      type: "Today",
-      value: "Today",
-      starter: true,
-      isSelected: true,
-      startDate: dayjs().toISOString(),
-      endDate: dayjs().toISOString(),
-    },
-    {
-      id: 3,
-      type: "Last7days",
-      value: "Last 7 days",
-      starter: false,
-      isSelected: false,
-      endDate: dayjs()
-        .subtract(7, "days")
-
-        .toISOString(),
-      startDate: dayjs().toISOString(),
-    },
-
-    {
-      id: 4,
-      type: "Last30days",
-      value: "Last 30 days",
-      starter: false,
-      isSelected: false,
-      endDate: dayjs().subtract(30, "days").toISOString(),
-      startDate: dayjs().toISOString(),
-    },
-    {
-      id: 5,
-      type: "Thismonth",
-      value: "This month",
-      starter: false,
-      isSelected: false,
-      endDate: dayjs().startOf("week").toISOString(),
-      startDate: dayjs().toISOString(),
-    },
-    {
-      id: 6,
-      type: "Lastmonth",
-      value: "Last month",
-      starter: false,
-      isSelected: false,
-      startDate: dayjs().startOf("month").toISOString(),
-      endDate: dayjs().toISOString(),
-    },
-  ],
-  type: "All",
-
-  fetchingOrderListByOrderId: false,
+    fetchingOrderListByOrderId: false,
   fetchingOrderListByOrderIdError: false,
   showDatelist: [],
 
@@ -212,7 +159,7 @@ const initialState = {
   updatingTodoEvent: false,
   updatingTodoEventError: false,
 
-  reportType: ["dashboard"],
+
   selectedReportType: "dashboard",
   selectedSubReportType: "dashboard",
 
@@ -233,7 +180,7 @@ const initialState = {
   dateRangeList: [
     {
       id: 1,
-      type: "Today",
+      type: "today",
       value: "Today",
       starter: false,
       isSelected: true,
@@ -270,16 +217,9 @@ const initialState = {
       endDate: moment().endOf("week").toISOString(),
     },
   ],
+  timeRangeType: "today",
   isCustomSelected: false,
-  // startDate: dayjs()
-  //     .startOf("year")
-  //     .toISOString(),
-  // endDate: dayjs()
-  //     .endOf("year")
-  //     .toISOString(),
 
-  reportTypes: ["Requirement", "Selected"],
-  reportType: ["Requirement", "Selected"],
   selectedReportType: "Select Report",
 
   selectedSubReportType: "Select",
@@ -366,6 +306,17 @@ openPitchQualified:false,
 fetchingPitchQualified: false,
 fetchingPitchQualifiedError:false,
 showQualifiedPitch:[],
+
+openDealAdded:false,
+fetchingDealAdded: false,
+fetchingDealAddedError: false,
+showAddedDeal:[],
+
+openDealClosed:false,
+fetchingDealClosed: false,
+fetchingDealClosedError: false,
+showClosedDeal:[],
+
 };
 
 export const dashboardReducer = (state = initialState, action) => {
@@ -394,7 +345,7 @@ export const dashboardReducer = (state = initialState, action) => {
         isCustomSelected: false,
         startDate: action.payload.startDate,
         endDate: action.payload.endDate,
-        type: action.payload.type,
+        timeRangeType: action.payload.type,
       };
 
     case types.SET_TIME_INTERVAL_REPORT:
@@ -647,7 +598,7 @@ export const dashboardReducer = (state = initialState, action) => {
         ...state,
         fetchingSalesDatewiseReport: false,
         fetchingSalesDatewiseReportError: true,
-        selectedReportType: "dashboard",
+        // selectedReportType: "dashboard",
       };
 
 
@@ -1428,7 +1379,60 @@ case types.GET_JUMPSTART_CUSTOMER2_LIST_REQUEST:
               fetchingPitchQualified: false,
               fetchingPitchQualifiedError: true,
             };
-        
+
+            case types.HANDLE_PITCH_ADDED_DRAWER: 
+            return {...state, openPitchAdded:action.payload};
+          
+            case types.GET_PITCH_ADDED_REQUEST:
+              return { ...state, fetchingPitchAdded: true };
+            case types.GET_PITCH_ADDED_SUCCESS:
+              return {
+                ...state,
+                fetchingPitchAdded: false,
+                showAddedPitch: action.payload,
+              };
+            case types.GET_PITCH_ADDED_FAILURE:
+              return {
+                ...state,
+                fetchingPitchAdded: false,
+                fetchingPitchAddedError: true,
+              };
+          
+              case types.HANDLE_DEAL_ADDED_DRAWER: 
+            return {...state, openDealAdded:action.payload};
+          
+            case types.GET_DEAL_ADDED_REQUEST:
+              return { ...state, fetchingDealAdded: true };
+            case types.GET_DEAL_ADDED_SUCCESS:
+              return {
+                ...state,
+                fetchingDealAdded: false,
+                showAddedDeal: action.payload,
+              };
+            case types.GET_DEAL_ADDED_FAILURE:
+              return {
+                ...state,
+                fetchingDealAdded: false,
+                fetchingDealAddedError: true,
+              };
+
+              case types.HANDLE_DEAL_CLOSED_DRAWER: 
+              return {...state, openDealClosed:action.payload};
+            
+              case types.GET_DEAL_CLOSED_REQUEST:
+                return { ...state, fetchingDealClosed: true };
+              case types.GET_DEAL_CLOSED_SUCCESS:
+                return {
+                  ...state,
+                  fetchingDealClosed: false,
+                  showClosedDeal: action.payload,
+                };
+              case types.GET_DEAL_CLOSED_FAILURE:
+                return {
+                  ...state,
+                  fetchingDealClosed: false,
+                  fetchingDealClosedError: true,
+                };         
     default:
       return state;
   }

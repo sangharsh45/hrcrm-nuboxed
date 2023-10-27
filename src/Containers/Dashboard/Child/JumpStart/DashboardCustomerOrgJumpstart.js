@@ -13,70 +13,28 @@ const LeadAddedDrawer=lazy(()=>import("./CustomerDrawer/LeadAddedDrawer"));
 const OppoAddedDrawer=lazy(()=>import("./CustomerDrawer/OppoAddedDrawer")); 
 const OppoClosedDrawer=lazy(()=>import("./CustomerDrawer/OppoClosedDrawer")); 
 
-class DashboardCustomerOrgJumpstart extends React.Component{
-  constructor() {
-    super();
-    const startDate = moment().startOf("month"); 
-    const endDate = moment();
-    var today = new Date(),
-    date =
-      today.getFullYear() +
-      "-" +
-      (today.getMonth() + 1) +
-      "-" +
-      today.getDate();
+function DashboardCustomerOrgJumpstart (props){
 
-  this.state = {
-    date: date,
-    startDate,
-    endDate
-  };
-}
-
-componentDidMount() {
-  
-   if (this.props.role==="USER"&&this.props.user.department==="Recruiter"){
-    const startDate = `${this.state.startDate.format("YYYY-MM-DD")}T20:00:00Z`
-    const endDate = `${this.state.endDate.format("YYYY-MM-DD")}T20:00:00Z`
-  const { getDateWiseList, recruiterId,   } = this.props;
-  getDateWiseList(recruiterId,  startDate, endDate);
-   }else{
-    const startDate = `${this.state.startDate.format("YYYY-MM-DD")}T20:00:00Z`
-    const endDate = `${this.state.endDate.format("YYYY-MM-DD")}T20:00:00Z`
-    const { getSalesDateWiseList, orgId } = this.props;
-    getSalesDateWiseList(orgId,  startDate, endDate);
-   }
-   
-}
-componentWillReceiveProps(nextProps) {
-  if (
-    this.props.startDate !== nextProps.startDate ||
-    this.props.endDate !== nextProps.endDate
-  ) {
-        if(this.props.role==="USER"&&this.props.user.department==="Recruiter"){
-    const { getDateWiseList, recruiterId, startDate, endDate } = nextProps;
-    getDateWiseList(recruiterId, startDate, endDate);
-        }else{
-          const { getSalesDateWiseList, orgId, startDate, endDate } = nextProps;
-          getSalesDateWiseList(orgId, startDate, endDate);
-        }
-        
+  useEffect(()=>{
+  if (props.timeRangeType === "today") {
+  props.getJumpBulblist(props.userId,props.startDate, props.endDate)
+  props.getJumpBulblist2(props.userId,props.startDate,props.endDate)
+   props.getJumpCustomerlist(props.userId, props.startDate, props.endDate);
+   props.getJumpCustomerlist2(props.userId, props.startDate, props.endDate);
   }
-}
-componentDidMount() {
-  const startDate = `${this.state.startDate.format("YYYY-MM-DD")}T20:00:00Z`
-  const endDate = `${this.state.endDate.format("YYYY-MM-DD")}T20:00:00Z`
-  this.props.getJumpBulblist(this.props.userId,startDate, endDate)
-  this.props.getJumpBulblist2(this.props.userId,startDate,endDate)
-   this.props.getJumpCustomerlist(this.props.userId, startDate, endDate);
-   this.props.getJumpCustomerlist2(this.props.userId, startDate, endDate);
-}
+  else {
+    props.getJumpBulblist(props.userId,props.startDate,props.endDate)
+    props.getJumpBulblist2(props.userId,props.startDate,props.endDate)
+     props.getJumpCustomerlist(props.userId, props.startDate,props.endDate);
+     props.getJumpCustomerlist2(props.userId, props.startDate,props.endDate);
+  }
+},[props.userId, props.startDate,props.endDate]);
   
-render() {
   const {handleLeadQualifiedDrawer,openLeadQualified,handleLeadAddedDrawer,
     openLeadAdded,handleOppoAddedDrawer,openOppoAdded,handleOppoClosedDrawer,clickOppoClosed
-   } = this.props;
-   const startDate = `${this.state.startDate.format("YYYY-MM-DD")}T20:00:00Z`
+   } = props;
+ 
+
   return(
     <>
       <FlexContainer flexDirection="row" style={{ width: "100%"}}>
@@ -87,8 +45,8 @@ render() {
             title="Leads Qualified"
             jumpstartClick={()=>handleLeadQualifiedDrawer(true)}
             cursorData={"pointer"}
-            value={this.props.jumpstartBulbCount.qualifiedLeadsList}
-            isLoading={this.props.user.fetchingJumpstartBulb}
+            value={props.jumpstartBulbCount.qualifiedLeadsList}
+            isLoading={props.user.fetchingJumpstartBulb}
           />
        
           <JumpStartBox
@@ -96,8 +54,8 @@ render() {
             title="Leads Added"
             jumpstartClick={()=>handleLeadAddedDrawer(true)}
             cursorData={"pointer"}
-            value={this.props.jumpstartBulb2Count.createdLeadsList }
-           isLoading={this.props.fetchingJumpstartBulb2}
+            value={props.jumpstartBulb2Count.createdLeadsList }
+           isLoading={props.fetchingJumpstartBulb2}
     
           />
 
@@ -106,8 +64,8 @@ render() {
             title="Opportunities Added"
             jumpstartClick={()=>handleOppoAddedDrawer(true)}
             cursorData={"pointer"}
-            value={this.props.jumpstrtCUSTOCount.opportunityAdded}
-             isLoading={this.props.fetchingJumpstartCustolist}
+            value={props.jumpstrtCUSTOCount.opportunityAdded}
+             isLoading={props.fetchingJumpstartCustolist}
             
           />
           <JumpStartBox
@@ -116,10 +74,10 @@ render() {
             jumpstartClick={()=>handleOppoClosedDrawer(true)}
             cursorData={"pointer"}
             value={
-                this.props.jumpstrtCUSTO2Count.closedOpportunity
+                props.jumpstrtCUSTO2Count.closedOpportunity
             }
             
-            isLoading={this.props.fetchingJumpstartCusto2list}
+            isLoading={props.fetchingJumpstartCusto2list}
           />
         </FlexContainer>
         <Spacer />
@@ -146,7 +104,6 @@ render() {
       </>
   ); 
 }
-}
 const mapStateToProps = ({ dashboard,auth }) => ({
   user: auth.userDetails,
   role: auth.userDetails.role,
@@ -171,12 +128,13 @@ const mapStateToProps = ({ dashboard,auth }) => ({
   openLeadQualified:dashboard.openLeadQualified,
   openLeadAdded:dashboard.openLeadAdded,
   openOppoAdded:dashboard.openOppoAdded,
-  clickOppoClosed:dashboard.clickOppoClosed
+  clickOppoClosed:dashboard.clickOppoClosed,
+  timeRangeType:dashboard.timeRangeType,
+  startDate: dashboard.startDate,
+  endDate: dashboard.endDate,
 });
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({
-  getDateWiseList,
-  getSalesDateWiseList,
   getJumpBulblist,
   getJumpCustomerlist,
   getJumpBulblist2,

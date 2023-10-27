@@ -9,25 +9,14 @@ import moment from "moment";
 import {getInvHotColdWarm} from "./DashboardAction";
 
 function PitchHotColdWarm (props) {
-    const startDate = moment().startOf("month"); 
-    const endDate = moment();
-    var today = new Date(),
-    date =
-      today.getFullYear() +
-      "-" +
-      (today.getMonth() + 1) +
-      "-" +
-      today.getDate();
-  
-      const [dateD,setdateD]=useState(date);
-      const [startDatestart,setstartDate]=useState(startDate);
-      const [endDateend,setendDate]=useState(endDate);
-      
+    
   useEffect(()=> {
-    const startDate = `${startDatestart.format("YYYY-MM-DD")}T20:00:00Z`
-    const endDate = `${endDateend.format("YYYY-MM-DD")}T20:00:00Z`
-   props.getInvHotColdWarm(props.userId,startDate,endDate);
-  },[]);
+    if (props.timeRangeType === "today") {
+   props.getInvHotColdWarm(props.userId,props.startDate,props.endDate);
+    }else{
+      props.getInvHotColdWarm(props.userId,props.startDate,props.endDate);
+    }
+  },[props.userId,props.startDate,props.endDate]);
 
   const {investorHotColdWarm}=props;
 
@@ -58,6 +47,9 @@ function PitchHotColdWarm (props) {
 const mapStateToProps = ({ dashboard,auth }) => ({
     investorHotColdWarm:dashboard.investorHotColdWarm,
     userId:auth.userDetails.userId,
+    timeRangeType:dashboard.timeRangeType,
+    startDate: dashboard.startDate,
+    endDate: dashboard.endDate,
 });
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
@@ -68,13 +60,3 @@ const mapDispatchToProps = (dispatch) =>
   );
 export default connect(mapStateToProps, mapDispatchToProps)(PitchHotColdWarm);
 
-
-// import React from 'react'
-
-// function TaskNew() {
-//   return (
-//     <div>TaskNew</div>
-//   )
-// }
-
-// export default TaskNew

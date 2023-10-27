@@ -9,29 +9,17 @@ import moment from "moment";
 import {getHotColdWarm} from "./DashboardAction";
 
 function LeadsHotColdWarm (props) {
-    const startDate = moment().startOf("month"); 
-    const endDate = moment();
-    var today = new Date(),
-    date =
-      today.getFullYear() +
-      "-" +
-      (today.getMonth() + 1) +
-      "-" +
-      today.getDate();
-  
-      const [dateD,setdateD]=useState(date);
-      const [startDatestart,setstartDate]=useState(startDate);
-      const [endDateend,setendDate]=useState(endDate);
       
   useEffect(()=> {
-    const startDate = `${startDatestart.format("YYYY-MM-DD")}T20:00:00Z`
-    const endDate = `${endDateend.format("YYYY-MM-DD")}T20:00:00Z`
-   props.getHotColdWarm(props.userId,startDate,endDate);
-  },[]);
+    if (props.timeRangeType === "today") {
+   props.getHotColdWarm(props.userId,props.startDate,props.endDate);
+    }
+    else {
+      props.getHotColdWarm(props.userId,props.startDate,props.endDate);
+    }
+  },[props.userId,props.startDate,props.endDate]);
 
   const {showHotColdWarm}=props;
-
- console.log("hcw",showHotColdWarm) 
     return (
       <>
    
@@ -57,6 +45,9 @@ function LeadsHotColdWarm (props) {
 const mapStateToProps = ({ dashboard,auth }) => ({
     showHotColdWarm:dashboard.showHotColdWarm,
     userId:auth.userDetails.userId,
+    timeRangeType:dashboard.timeRangeType,
+    startDate: dashboard.startDate,
+    endDate: dashboard.endDate,
 });
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(

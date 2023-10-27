@@ -7,8 +7,6 @@ import { connect } from "react-redux";
 import {
   setSelectedTimeIntervalReport,
   setTimeRangeReport,
-  setSelectedReportType,
-  setSubSelectedReportType,
 
 } from "../DashboardAction";
 import { Link } from "react-router-dom";
@@ -111,7 +109,7 @@ const mapStateToProps = ({ auth, dashboard }) => ({
   user: auth.user,
   userId: auth.userDetails.userId,
   dateRangeList: dashboard.dateRangeList,
-  // viewType:dashboard.viewType,
+
 
 });
 
@@ -120,8 +118,6 @@ const mapDispatchToProps = (dispatch) =>
     {
       setSelectedTimeIntervalReport,
       setTimeRangeReport,
-      setSelectedReportType,
-      setSubSelectedReportType,
     
     },
     dispatch

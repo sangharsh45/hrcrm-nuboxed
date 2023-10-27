@@ -1560,12 +1560,12 @@ export const handleLeadQualifiedDrawer = (modalProps)=>(dispatch)=>{
     payload:modalProps
   });
 }
-export const getLeadQualified = (userId)=>(dispatch)=>{
+export const getLeadQualified = (userId,endDate,startDate)=>(dispatch)=>{
   dispatch({
     type:types.GET_LEADS_QUALIFIED_REQUEST,
   });
   axios
-  .get(`${base_url}/leads/qualified-leads/list/${userId}`, {
+  .get(`${base_url}/leads/qualified-leads/list/${userId}?endDate=${endDate}&startDate=${startDate}`, {
     headers: {
       Authorization: "Bearer " + sessionStorage.getItem("token") || "",
     },
@@ -1593,7 +1593,7 @@ export const getLeadQualified = (userId)=>(dispatch)=>{
         type:types.GET_LEADS_ADDED_REQUEST,
       });
       axios
-      .get(`${base_url}/leads/createded-leads/list/${userId}`, {
+      .get(`${base_url}/leads/createded-leads/list/${userId}?endDate=${endDate}&startDate=${startDate}`, {
         headers: {
           Authorization: "Bearer " + sessionStorage.getItem("token") || "",
         },
@@ -1616,12 +1616,12 @@ export const getLeadQualified = (userId)=>(dispatch)=>{
             payload:modalProps
           });
         }
-        export const getOppoAdded= (userId)=>(dispatch)=>{
+        export const getOppoAdded= (userId,startDate,endDate)=>(dispatch)=>{
           dispatch({
             type:types.GET_OPPO_ADDED_REQUEST,
           });
           axios
-          .get(`${base_url}/opportunity/added/date-range/${userId}`, {
+          .get(`${base_url}/opportunity/added/date-range/${userId}?endDate=${endDate}&startDate=${startDate}`, {
             headers: {
               Authorization: "Bearer " + sessionStorage.getItem("token") || "",
             },
@@ -1644,12 +1644,12 @@ export const getLeadQualified = (userId)=>(dispatch)=>{
                 payload:modalProps
               });
             }
-            export const getOppocLOSED= (userId)=>(dispatch)=>{
+            export const getOppocLOSED= (userId,startDate,endDate)=>(dispatch)=>{
               dispatch({
                 type:types.GET_OPPO_CLOSED_REQUEST,
               });
               axios
-              .get(`${base_url}/opportunity/ClosedList/date-range/${userId}`, {
+              .get(`${base_url}/opportunity/ClosedList/date-range/${userId}?endDate=${endDate}&startDate=${startDate}`, {
                 headers: {
                   Authorization: "Bearer " + sessionStorage.getItem("token") || "",
                 },
@@ -1673,12 +1673,12 @@ export const getLeadQualified = (userId)=>(dispatch)=>{
         payload:modalProps
       });
     }
-    export const getPitchQualified = (userId)=>(dispatch)=>{
+    export const getPitchQualified = (userId,startDate,endDate)=>(dispatch)=>{
       dispatch({
         type:types.GET_PITCH_QUALIFIED_REQUEST,
       });
       axios
-      .get(`${base_url}/investorLeads/qualified-investorLeads/list/${userId}`, {
+      .get(`${base_url}/investorLeads/qualified-investorLeads/list/${userId}?endDate=${endDate}&startDate=${startDate}`, {
         headers: {
           Authorization: "Bearer " + sessionStorage.getItem("token") || "",
         },
@@ -1694,3 +1694,87 @@ export const getLeadQualified = (userId)=>(dispatch)=>{
           type: types.GET_PITCH_QUALIFIED_FAILURE,
           payload: err,
         });});};
+
+        export const handlePitchAddedDrawer = (modalProps)=>(dispatch)=>{
+          dispatch({
+            type:types.HANDLE_PITCH_ADDED_DRAWER,
+            payload:modalProps
+          });
+        }
+        export const getPitchAdded = (userId,endDate,startDate)=>(dispatch)=>{
+          dispatch({
+            type:types.GET_PITCH_ADDED_REQUEST,
+          });
+          axios
+          .get(`${base_url}/investorLeads/createded-investorLeads/list/${userId}?endDate=${endDate}&startDate=${startDate}`, {
+            headers: {
+              Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+            },
+          })
+          .then((res) => {
+            dispatch({
+              type: types.GET_PITCH_ADDED_SUCCESS,
+              payload: res.data,
+            });
+          })
+          .catch((err) => {
+            dispatch({
+              type: types.GET_PITCH_ADDED_FAILURE,
+              payload: err,
+            });});};  
+
+            export const handleDealAddedDrawer = (modalProps)=>(dispatch)=>{
+              dispatch({
+                type:types.HANDLE_DEAL_ADDED_DRAWER,
+                payload:modalProps
+              });}
+
+            export const getDealAdded = (userId,endDate,startDate)=>(dispatch)=>{
+              dispatch({
+                type:types.GET_DEAL_ADDED_REQUEST,
+              });
+              axios
+              .get(`${base_url}/investorLeads/createded-investorLeads/list/${userId}?endDate=${endDate}&startDate=${startDate}`, {
+                headers: {
+                  Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+                },
+              })
+              .then((res) => {
+                dispatch({
+                  type: types.GET_DEAL_ADDED_SUCCESS,
+                  payload: res.data,
+                });
+              })
+              .catch((err) => {
+                dispatch({
+                  type: types.GET_DEAL_ADDED_FAILURE,
+                  payload: err,
+                });});};  
+            
+                export const handleDealClosedDrawer = (modalProps)=>(dispatch)=>{
+                  dispatch({
+                    type:types.HANDLE_DEAL_CLOSED_DRAWER,
+                    payload:modalProps
+                  });}
+    
+                export const getDealClosed = (userId,endDate,startDate)=>(dispatch)=>{
+                  dispatch({
+                    type:types.GET_DEAL_CLOSED_REQUEST,
+                  });
+                  axios
+                  .get(`${base_url}/investorLeads/createded-investorLeads/list/${userId}?endDate=${endDate}&startDate=${startDate}`, {
+                    headers: {
+                      Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+                    },
+                  })
+                  .then((res) => {
+                    dispatch({
+                      type: types.GET_DEAL_CLOSED_SUCCESS,
+                      payload: res.data,
+                    });
+                  })
+                  .catch((err) => {
+                    dispatch({
+                      type: types.GET_DEAL_CLOSED_FAILURE,
+                      payload: err,
+                    });});};  
