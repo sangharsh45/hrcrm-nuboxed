@@ -27,7 +27,7 @@ const CustomerCardList=lazy(() => import("./Child/CustomerTable/CustomerCardList
 
 class Customer extends Component {
   state = { currentData: "",
-  filter:"",
+  filter:"creationdate",
   currentUser:"" };
   handleClear = () => {
     const startDate = moment()
@@ -42,8 +42,9 @@ class Customer extends Component {
     this.props.getLatestCustomer(this.props.userId);
     this.props.getCustomerCloser(this.props.userId, startDate, endDate);
   };
-  handleFilterChange=()=>{
-    
+  handleFilterChange=(data)=>{
+    this.setState({filter:data})
+    this.props.getCustomerListByUserId(this.props.userId,0,data)
   }
   setCurrentData = (value) => {
     this.setState({ currentData: value });
@@ -77,6 +78,8 @@ class Customer extends Component {
           handleChange={this.handleChange}
           currentData={this.state.currentData}
           setCurrentData={this.setCurrentData}
+          handleFilterChange={this.handleFilterChange}
+          filter={this.state.filter}
         />
         <AddCustomerModal
           addCustomerModal={addCustomerModal}
@@ -91,6 +94,7 @@ class Customer extends Component {
              <CustomerBlueTable/> :
              this.props.viewType === "table" ?
              <CustomerCardList
+             filter={this.state.filter}
              currentUser={this.state.currentUser} 
              /> :
           this.props.viewType==="map"?

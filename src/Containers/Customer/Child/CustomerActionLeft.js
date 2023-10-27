@@ -149,7 +149,7 @@ function  handleFilterChange(data){
           {/* Clear */}
         </Button>
         <div style={{ width: "15%" }}>
-          <StyledSelect placeholder="Sort" onChange={(e) => handleFilterChange(e)}>
+          <StyledSelect placeholder="Sort"  onChange={(e)  => props.handleFilterChange(e)}>
           <Option value="CreationDate">CreationDate</Option>
             <Option value="ascending">A To Z</Option>
             <Option value="descending">Z To A</Option>
