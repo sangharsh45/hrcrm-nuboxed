@@ -31,6 +31,8 @@ function InvestorHeader (props) {
             handleClear={handleClear}
             handleChange={handleChange}
             handleCurrentData={handleCurrentData}
+            handleFilterChange={props.handleFilterChange}
+                        filter={props.filter}
             />
           }
           rightComponent={

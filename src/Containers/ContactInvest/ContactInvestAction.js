@@ -47,12 +47,12 @@ export const handleContactInvestModal = (modalProps) => (dispatch) => {
       });
   };
 
-  export const getContactInvestByUserId = (userId,pageNo) => (dispatch) => {
+  export const getContactInvestByUserId = (userId,pageNo,filter) => (dispatch) => {
     dispatch({
       type: types.GET_CONTACTS_INVEST_REQUEST,
     });
     axios
-      .get(`${base_url}/contact/Invester/all-contact/user/${userId}/${pageNo}`, {
+      .get(`${base_url}/contact/Invester/all-contact/user/${userId}/${pageNo}/${filter}`, {
         headers: {
           Authorization: "Bearer " + sessionStorage.getItem("token") || "",
         },
@@ -70,6 +70,30 @@ export const handleContactInvestModal = (modalProps) => (dispatch) => {
           type: types.GET_CONTACTS_INVEST_FAILURE,
           payload: err,
         });});};
+
+        export const getContactInvestFilterData = (userId,pageNo,filter) => (dispatch) => {
+          dispatch({
+            type: types.GET_CONTACTS_INVEST_FILTER_DATA_REQUEST,
+          });
+          axios
+            .get(`${base_url}/contact/Invester/all-contact/user/${userId}/${pageNo}/${filter}`, {
+              headers: {
+                Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+              },
+            })
+            .then((res) => {
+              console.log(res);
+              dispatch({
+                type: types.GET_CONTACTS_INVEST_FILTER_DATA_SUCCESS,
+                payload: res.data,
+              });
+            })
+            .catch((err) => {
+              console.log(err.response);
+              dispatch({
+                type: types.GET_CONTACTS_INVEST_FILTER_DATA_FAILURE,
+                payload: err,
+              });});};
 
 export const emptyContactInvest = () => (dispatch) => {
     dispatch({ type: types.EMPTY_CONTACT_INVEST_LIST,});};

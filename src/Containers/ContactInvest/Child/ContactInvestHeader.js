@@ -26,6 +26,8 @@ class ContactInvestHeader extends Component {
             //   text={this.props.text}
             //   handleClear={this.props.handleClear}
             //   setCurrentData={this.props.setCurrentData}
+            handleFilterChange={this.props.handleFilterChange}
+            filter={this.props.filter}
               viewType={viewType}
               setContactsViewType={setContactsViewType}
             //   currentPartnerData={this.props.currentPartnerData}

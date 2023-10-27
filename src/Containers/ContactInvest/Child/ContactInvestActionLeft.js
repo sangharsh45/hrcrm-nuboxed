@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect,useState } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { FormattedMessage } from "react-intl";
@@ -19,6 +19,8 @@ const Option = StyledSelect.Option;
 const item = [{ type: "Hot" }, { type: "Warm" }, { type: "Cold" }];
 const { Search } = Input;
 const ContactInvestActionLeft = (props) => {
+  const[filter,setFilter]=useState("creationdate")
+  const [page, setPage] = useState(0);
   const suffix = (
     <AudioOutlined
       onClick={SpeechRecognition.startListening}
@@ -35,7 +37,11 @@ const ContactInvestActionLeft = (props) => {
     browserSupportsSpeechRecognition,
   } = useSpeechRecognition();
   console.log(transcript);
-
+  function  handleFilterChange(data){
+    setFilter(data)
+    props.getContactInvestByUserId(props.userId, page,data);
+    setPage(page + 1);
+  }
   useEffect(() => {
   props.getContactInvest(props.userId)
   }, [props.userId]);
@@ -96,7 +102,13 @@ const ContactInvestActionLeft = (props) => {
       >
         <FormattedMessage id="app.clear" defaultMessage="Clear" />
       </Button>
-
+      <div style={{ width: "15%" }}>
+          <StyledSelect placeholder="Sort"  onChange={(e)  => props.handleFilterChange(e)}>
+          <Option value="CreationDate">CreationDate</Option>
+            <Option value="ascending">A To Z</Option>
+            <Option value="descending">Z To A</Option>
+          </StyledSelect>
+        </div>
     </div>
   );
 };

@@ -6,6 +6,9 @@ const initialState = {
     addingContactInvest: false, 
     addContactInvestModal: false,
 
+    fetchingFilterContactsInvest: false,
+    fetchingFilterContactsInvestError: false,
+
     fetchingContactsInvest: false,
     fetchingContactsInvestError: false,
     contactiNVESTbyId:[],
@@ -55,6 +58,22 @@ export const contactInvestReducer = (state = initialState, action) => {
         };
       case types.GET_CONTACTS_INVEST_FAILURE:
         return { ...state, fetchingContactsInvest: false, fetchingContactsInvestError: true };
+
+
+        case types.GET_CONTACTS_INVEST_FILTER_DATA_REQUEST:
+          return { ...state, fetchingFilterContactsInvest: true };
+        case types.GET_CONTACTS_INVEST_FILTER_DATA_SUCCESS:
+          return {
+            ...state,
+            fetchingFilterContactsInvest: false,
+            contactiNVESTbyId: action.payload,
+            // contactiNVESTbyId: [
+            //   ...state.contactiNVESTbyId,
+            //   ...action.payload],
+          };
+        case types.GET_CONTACTS_INVEST_FILTER_DATA_FAILURE:
+          return { ...state, fetchingFilterContactsInvest: false,
+                             fetchingFilterContactsInvestError: true };
 
         case types.EMPTY_CONTACT_INVEST_LIST:
             return { ...state, contactiNVESTbyId:[] };
