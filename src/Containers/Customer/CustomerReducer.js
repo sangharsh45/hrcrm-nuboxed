@@ -31,12 +31,18 @@ const initialState = {
   fetchinglatestCustomerError:false,
   latestCustomer:[],
 
+  fetchingAllCustomersData: false,
+  fetchingAllCustomersDataError: false,
+  allCustomerData:[],
+
   fetchingAllCustomerByPosition:false,
   fetchingAllCustomerByPosition:false,
 
   fetchingCustomerRequirement:false,
   fetchingCustomerRequirementError:false,
   customerRequirement:[],
+
+  callActivityModal:false,
 
   fetchingCustomers: false,
   fetchingCustomersError: false,
@@ -451,6 +457,9 @@ export const customerReducer = (state = initialState, action) => {
       return { ...state, documentUploadModal: action.payload };
     case types.HANDLE_INVOICE_MODAL:
       return { ...state, invoiceModal: action.payload };
+
+      case types.HANDLE_CALL_ACTIVITY_MODAL:
+        return { ...state, callActivityModal: action.payload };
     case types.DELETE_DOCUMENT_REQUEST:
       return { ...state, deleteDocument: true };
     case types.DELETE_DOCUMENT_SUCCESS:
@@ -1521,6 +1530,24 @@ export const customerReducer = (state = initialState, action) => {
                                         fetchingFilterCustomers: false,
                                         fetchingFilterCustomersError: true,
                                       };
+
+                                      case types.GET_ALL_CUSTOMERS_DATA_REQUEST:
+                                        return { ...state, fetchingAllCustomersData: true };
+                                      case types.GET_ALL_CUSTOMERS_DATA_SUCCESS:
+                                        return {
+                                          ...state,
+                                          fetchingAllCustomersData: false,
+                                           allCustomerData: action.payload,
+                                  
+                                         
+                                        
+                                        };
+                                      case types.GET_ALL_CUSTOMERS_DATA_FAILURE:
+                                        return {
+                                          ...state,
+                                          fetchingAllCustomersData: false,
+                                          fetchingAllCustomersDataError: true,
+                                        };
                   
                       
 

@@ -33,7 +33,7 @@ function General(props) {
         enableReinitialize
         initialValues={{
           timePeriod: props.requirementDuration.timePeriod || "",
-          oppTimePeriod: props.requirementDuration.oppTimePeriod || "",
+          orderTimePeriod: props.requirementDuration.orderTimePeriod || "",
           userId: props.userId,
           orgId: props.organizationId,
         }}
@@ -93,7 +93,7 @@ function General(props) {
                 <p style={{ minWidth:"-webkit-fill-available"}}>Auto drop Open Opportunities (in months)</p>
                 <div>
                 <Field
-                    name="oppTimePeriod"
+                    name="orderTimePeriod"
                     style={{width:"8rem"}}
                     component={SelectComponent}
                     options={["1", "2", "3", "4", "5","Not Applicable"]}

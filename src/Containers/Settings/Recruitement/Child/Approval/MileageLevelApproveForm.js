@@ -310,23 +310,26 @@ function MileageLevelApproveForm(props) {
               </div>
             </div>
           ))}
-          <div className="flex justify-end">
-            <div className="button">
-              <Button type="primary" onClick={handleAddRowClick}>
-                Add Level
-              </Button>
-            </div>
-          </div>
-          <div class="flex justify-end mt-4" >
-                    <div className="button">
-            <Button
-                    type="primary"
-              onClick={() => buttonOnClick()}
-            >
-              Submit
-            </Button>
-            </div>
-          </div>
+          <div class=" flex justify-end">
+                  
+                  <div className="button">
+                      <Button type="primary" onClick={handleAddRowClick}>
+                          Add Level
+                      </Button>
+                  
+              </div>
+            
+              <div className="button">
+                  <Button
+                      type="primary"
+                   
+                      onClick={() => buttonOnClick()}
+                  >
+                      Submit
+                  </Button>
+                  </div>
+           
+              </div>
         </div>
       </div>
     </div>

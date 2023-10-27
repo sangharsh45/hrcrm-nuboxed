@@ -6,6 +6,10 @@ const initialState = {
   addOpportunityModal: false,
   addRecruiterModal:false,
 
+  fetchingAllOpportunityData: false,
+  fetchingAllOpportunityDataError: false,
+  allOpportunityData:[],
+
   fetchingWonRecords: false,
   fetchingWonRecordsError: false,
   wonOpportunityData:{},
@@ -2418,6 +2422,26 @@ case types.REINSTATE_TOGGLE_FOR_OPPORTUNITY_FAILURE:
                                                           fetchingOppLinkedWorkflow: false,
                                                           fetchingOppLinkedWorkflowError: true,
                                                         };
+
+
+                                                        
+                                      case types.GET_ALL_OPPORTUNITY_DATA_REQUEST:
+                                        return { ...state, fetchingAllOpportunityData: true };
+                                      case types.GET_ALL_OPPORTUNITY_DATA_SUCCESS:
+                                        return {
+                                          ...state,
+                                          fetchingAllOpportunityData: false,
+                                           allOpportunityData: action.payload,
+                                  
+                                         
+                                        
+                                        };
+                                      case types.GET_ALL_OPPORTUNITY_DATA_FAILURE:
+                                        return {
+                                          ...state,
+                                          fetchingAllOpportunityData: false,
+                                          fetchingAllOpportunityDataError: true,
+                                        };
                                                                               
 
                                             default:

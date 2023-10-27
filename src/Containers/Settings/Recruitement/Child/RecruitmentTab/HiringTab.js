@@ -430,6 +430,7 @@ class HiringTab extends Component {
                    
                     {this.state.currentProcess.workflowName && (
                            <span
+                           style={{marginLeft:"1rem"}}
                                      tooltipTitle="Edit"
                         onClick={this.handleEdit}
                         size="0.875em"
@@ -449,22 +450,20 @@ class HiringTab extends Component {
                        onConfirm={() => this.props.deleteOpportunityProcessData(this.state.currentProcess.opportunityWorkflowDetailsId )}
                     >
                       <DeleteIcon
-                      type="delete" style={{ color: "white" }} />
+                      type="delete" style={{ color: "white",marginLeft:"1rem" }} />
                     </Popconfirm>
 
                     </span>
                     )}
                   
-                   {this.state.currentProcess.workflowName && (
-                      <Button
-                        onClick={this.handlePublishClick}
-                      >
-                        {/* {this.state.change?"Publish":"Unpublish"}  */}
-                        {this.state.currentProcess.publishInd
-                          ? "Unpublish"
-                          : "Publish"}
-                      </Button>
-                    )}
+                  {this.state.currentProcess.workflowName && (
+  <Button
+    style={{ color: "white",marginLeft:"1rem" }} // Add this line to change the font color to white
+    onClick={this.handlePublishClick}
+  >
+    {this.state.currentProcess.publishInd ? "Unpublish" : "Publish"}
+  </Button>
+)}
                 
                   </h1> 
                 </>

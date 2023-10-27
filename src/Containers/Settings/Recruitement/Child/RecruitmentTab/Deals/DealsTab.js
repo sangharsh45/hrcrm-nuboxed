@@ -417,6 +417,7 @@ handleStagePublishClick = (investorOppStagesId, publishInd) => {
                    
                     {this.state.currentProcess.workflowName && (
                            <span
+                           style={{marginLeft:"1rem"}}
                                      tooltipTitle="Edit"
                         onClick={this.handleEdit}
                         size="0.875em"
@@ -436,7 +437,7 @@ handleStagePublishClick = (investorOppStagesId, publishInd) => {
                         onConfirm={() => this.props.deleteDealsProcessData(this.state.currentProcess.investorOppWorkflowId )}
                     >
                       <DeleteIcon
-                      type="delete" style={{ color: "white" }} />
+                      type="delete" style={{ color: "white",marginLeft:"1rem" }} />
                     </Popconfirm>
 
                     </span>
@@ -444,6 +445,7 @@ handleStagePublishClick = (investorOppStagesId, publishInd) => {
                   
                    {this.state.currentProcess.workflowName && (
                       <Button
+                      style={{ color: "white",marginLeft:"1rem"}}
                         onClick={this.handlePublishClick}
                       >
                         {/* {this.state.change?"Publish":"Unpublish"}  */}

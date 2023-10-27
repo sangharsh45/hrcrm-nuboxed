@@ -47,7 +47,7 @@ country:props.countryId,
           carryForward: props.leaveData.carryForward || "",
           mileageRate:props.leaveData.mileageRate || "",
 
-          maximumCarryForward: props.leaveData.maximumCarryForward || "",
+          leavesCappedTimesAnnualy: props.leaveData.leavesCappedTimesAnnualy || "",
           // organizationId: props.organizationId,
         }}
         // onSubmit={(values) => {
@@ -106,10 +106,10 @@ country:props.countryId,
                 <Spacer />
                 <Field
                   isRequired
-                  name="maximumCarryForward"
+                  name="leavesCappedTimesAnnualy"
                   //label="Max Carry Forward(%)"
                   label={<div class="w-60"><FormattedMessage
-                    id="app.maximumCarryForward"
+                    id="app.leavesCappedTimesAnnualy"
                     defaultMessage="Leaves Capped at times Annual Leave"
                   /></div>}
                   inlineLabel
@@ -129,7 +129,7 @@ country:props.countryId,
                   // label="Max leaves (in days)"
                   label={<div class="w-60"><FormattedMessage
                     id="app.mileageRate"
-                    defaultMessage="Mileage Rate"
+                    defaultMessage="Mileage Rate (ur/km)"
                   /></div>}
                   width={"10%"}
                   component={InputComponent}

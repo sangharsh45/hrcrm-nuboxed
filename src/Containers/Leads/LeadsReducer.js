@@ -7,6 +7,10 @@ const initialState = {
 
   addCallTaskModal:false,
 
+  fetchingCallTimelineStatus: false,
+  fetchingCallTimelineStatusError: false,
+  callTimeline:[],
+
   updateLeadsContactById: false,
   updateLeadsContactByIdError: false,
   documentsByLeadsId: [],
@@ -747,6 +751,21 @@ case types.HANDLE_LEADS_MODAL:
 
                       case types.HANDLE_LEADS_CALL_MODAL:
                         return { ...state, addCallTaskModal: action.payload };
+
+                        case types.GET_CALL_TIMELINE_REQUEST:
+                          return { ...state, fetchingCallTimelineStatus: true };
+                      case types.GET_CALL_TIMELINE_SUCCESS:
+                          return {
+                              ...state,
+                              fetchingCallTimelineStatus: false,
+                              callTimeline: action.payload,
+                          };
+                      case types.GET_CALL_TIMELINE_FAILURE:
+                          return {
+                              ...state,
+                              fetchingCallTimelineStatus: false,
+                              fetchingCallTimelineStatusError: true,
+                          };
 
 
 

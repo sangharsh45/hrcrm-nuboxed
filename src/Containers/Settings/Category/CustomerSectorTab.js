@@ -64,6 +64,36 @@ class CustomerSectorTab extends Component {
                     <Source />
                   </Suspense>
                 </TabPane>
+                <TabPane
+                  tab={
+                    <>
+                    <SourceIcon  />
+                      <span style={{ marginLeft: "0.25em" }}>
+                     Ship By
+                      </span>
+                    </>
+                  }
+                  key="2"
+                >
+                  <Suspense>
+                    {/* <Source /> */}
+                  </Suspense>
+                </TabPane>
+                <TabPane
+                  tab={
+                    <>
+                    <SourceIcon  />
+                      <span style={{ marginLeft: "0.25em" }}>
+                     Customer
+                      </span>
+                    </>
+                  }
+                  key="3"
+                >
+                  <Suspense>
+                    {/* <Source /> */}
+                  </Suspense>
+                </TabPane>
               
                 
               </StyledTabs>
