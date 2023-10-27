@@ -14,57 +14,32 @@ import {
   Tooltip,
   Legend
 } from "recharts";
-import OpportunityCardView from "../Opportunity/OpportunityCardView";
 import { MainWrapper } from "../../Components/UI/Elements";
 
- class ContactInvestAddChart extends React.Component {
-  constructor() {
-    super();
-    var today = new Date(),
-    date =
-      today.getFullYear() +
-      "-" +
-      (today.getMonth() + 1) +
-      "-" +
-      today.getDate();
-  
-  this.state = {
-    date: date,
-  };
-  }
-  componentDidMount() {
-    const { getDashInvestorAddedContactInvest, userId, startDate, endDate } = this.props;
-    getDashInvestorAddedContactInvest(userId,  startDate, endDate);
-  }
-  componentWillReceiveProps(nextProps) {
-    if (
-      this.props.startDate !== nextProps.startDate ||
-      this.props.endDate !== nextProps.endDate
-    ) {
-      const { getDashInvestorAddedContactInvest, userId, startDate, endDate } = nextProps;
-      getDashInvestorAddedContactInvest(userId, startDate, endDate);
+ function ContactInvestAddChart (props) {
+  useEffect(() => {
+    if (props.timeRangeType === "today"){
+    props.getDashInvestorAddedContactInvest(props.userId,props.startDate,props.endDate); 
     }
-  }
+    else {
+      props.getDashInvestorAddedContactInvest(props.userId,props.startDate,props.endDate); 
+    }
+  }, [props.userId,props.startDate,props.endDate]);
 
- 
-  render() {
-    const data=this.props.dashInvstContactAdded
+
+
+    const data=props.dashInvstContactAdded
   return (
     <>
     <MainWrapper
     style={{height:"16em",width:"-webkit-fill-available"}}
     >
-      {/* Recruitment Performance */}
       <FlexContainer justifyContent="space-between">
-      {/* <div style={{ width: "47%" }}> */}
       <span>Hours</span>
-      {/* </div> */}
-      {/* <div style={{ width: "47%" }}> */}
     <TimeInterval
-          times={this.props.dateClosureRangeList}
-           handleClick={this.props.setSelectedClosureTimeIntervalReport}
+          times={props.dateClosureRangeList}
+           handleClick={props.setSelectedClosureTimeIntervalReport}
         />
-        {/* </div> */}
         </FlexContainer>
     <BarChart
       width={350}
@@ -83,14 +58,11 @@ import { MainWrapper } from "../../Components/UI/Elements";
       <Tooltip />
       <Legend className="recharts-default-legend"/>
       <Bar dataKey="Number" stackId="a" fill="rgb(0, 192, 239, 0.4)" />
-      {/* <Bar dataKey="Selected" stackId="a" fill="#ff715885" />
-      <Bar dataKey="Onboarded" stackId="a" fill="orange" />  */}
     </BarChart>
     </MainWrapper>
     </>
   );
 }
- }
 const mapStateToProps = ({ dashboard,auth,opportunity }) => ({
   dashInvstContactAdded:dashboard.dashInvstContactAdded,
   userId: auth.userDetails.userId,
@@ -99,13 +71,16 @@ const mapStateToProps = ({ dashboard,auth,opportunity }) => ({
   dashBoardClosureRatio:dashboard.dashBoardClosureRatio,
   organisationId:auth.userDetails.organizationId,
   userId: auth.userDetails.userId,
-  dateClosureRangeList:opportunity.dateClosureRangeList
+  dateClosureRangeList:opportunity.dateClosureRangeList,
+  timeRangeType:dashboard.timeRangeType,
+  startDate: dashboard.startDate,
+  endDate: dashboard.endDate,
 });
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
       getDashInvestorAddedContactInvest,
-        setSelectedClosureTimeIntervalReport
+      setSelectedClosureTimeIntervalReport
       
 
     },

@@ -8,8 +8,12 @@ import {getOppoAdded} from "../../../DashboardAction";
 
 function OppoAddedTable (props) {
     useEffect(()=>{
-        props.getOppoAdded(props.userId)
-    },[]);
+      if (props.timeRangeType === "today"){
+        props.getOppoAdded(props.userId,props.startDate,props.endDate);
+      }else {
+        props.getOppoAdded(props.userId,props.startDate,props.endDate);
+      }
+    },[props.startDate,props.endDate]);
     const columns = [
       {
         title: <FormattedMessage
@@ -74,7 +78,10 @@ function OppoAddedTable (props) {
 const mapStateToProps = ({dashboard,auth }) => ({
         showAddedOppo:dashboard.showAddedOppo,
         userId: auth.userDetails.userId,
-        fetchingLeadsAdded:dashboard.fetchingLeadsAdded
+        fetchingLeadsAdded:dashboard.fetchingLeadsAdded,
+        timeRangeType:dashboard.timeRangeType,
+        startDate: dashboard.startDate,
+        endDate: dashboard.endDate,
   });
   
   const mapDispatchToProps = (dispatch) =>

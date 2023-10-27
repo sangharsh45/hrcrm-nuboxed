@@ -57,7 +57,7 @@ class DashInvestorsChartTab extends Component {
                 <>
                   {/* <EventAvailableIcon style={{fontSize:"1.1rem"}}/> */}
 
-                  <span class=" ml-1">Contactinvest Added</span>
+                  <span class=" ml-1">Contact Investor Added</span>
 
                   {activeKey === "2" && (
                     <>

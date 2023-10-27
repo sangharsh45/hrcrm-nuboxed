@@ -1,89 +1,46 @@
-import React, {lazy} from "react";
+import React, {useEffect,lazy} from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import moment from "moment";
 import { JumpStartBox, Spacer } from "../../../../Components/UI/Elements";
 import { FlexContainer } from "../../../../Components/UI/Layout";
 import {
-  getDateWiseList,
-  getSalesDateWiseList,
   getJumpInvestorlist,
   getJumpInvestor2list,
   getJumpInvestor3list,
   getJumpInvestor4list,
-  handlePitchQualifiedDrawer
+  handlePitchQualifiedDrawer,
+  handlePitchAddedDrawer,
+  handleDealAddedDrawer,
+  handleDealClosedDrawer
 } from "../../DashboardAction";
 const PitchQualifiedDrawer = lazy(()=>import("./InvestorDrawer/PitchQualifiedDrawer"));
+const PitchAddedDrawer = lazy(()=>import("./InvestorDrawer/PitchAddedDrawer"));
+const DealsAddedDrawer =lazy(()=>import("./InvestorDrawer/DealsAddedDrawer"));
+const DealsClosedDrawer= lazy(()=>import("./InvestorDrawer/DealsClosedDrawer"));
 
-class DashboardInvestorsOrgJumpstart extends React.Component {
-  constructor() {
-    super();
-    const startDate = moment().startOf("month");
-    const endDate = moment();
-    var today = new Date(),
-      date =
-        today.getFullYear() +
-        "-" +
-        (today.getMonth() + 1) +
-        "-" +
-        today.getDate();
+function DashboardInvestorsOrgJumpstart (props) {
+ 
+  useEffect(()=>{
+    if (props.timeRangeType === "today") {
+    props.getJumpInvestorlist(props.userId, props.startDate, props.endDate);
+    props.getJumpInvestor2list(props.userId, props.startDate, props.endDate);
+    props.getJumpInvestor3list(props.userId, props.startDate, props.endDate);
+    props.getJumpInvestor4list(props.userId, props.startDate, props.endDate);
+  }
+  else {
+    props.getJumpInvestorlist(props.userId, props.startDate, props.endDate);
+    props.getJumpInvestor2list(props.userId, props.startDate, props.endDate);
+    props.getJumpInvestor3list(props.userId, props.startDate, props.endDate);
+    props.getJumpInvestor4list(props.userId, props.startDate, props.endDate);
+  }
+  },[props.userId,props.startDate,props.endDate]);
 
-    this.state = {
-      date: date,
-      startDate,
-      endDate,
-    };
-  }
 
-  componentDidMount() {
-    if (
-      this.props.role === "USER" &&
-      this.props.user.department === "Recruiter"
-    ) {
-      const startDate = `${this.state.startDate.format(
-        "YYYY-MM-DD"
-      )}T20:00:00Z`;
-      const endDate = `${this.state.endDate.format("YYYY-MM-DD")}T20:00:00Z`;
-      const { getDateWiseList, recruiterId } = this.props;
-      getDateWiseList(recruiterId, startDate, endDate);
-    } else {
-      const startDate = `${this.state.startDate.format(
-        "YYYY-MM-DD"
-      )}T20:00:00Z`;
-      const endDate = `${this.state.endDate.format("YYYY-MM-DD")}T20:00:00Z`;
-      const { getSalesDateWiseList, orgId } = this.props;
-      getSalesDateWiseList(orgId, startDate, endDate);
-    }
-  }
-  componentWillReceiveProps(nextProps) {
-    if (
-      this.props.startDate !== nextProps.startDate ||
-      this.props.endDate !== nextProps.endDate
-    ) {
-      if (
-        this.props.role === "USER" &&
-        this.props.user.department === "Recruiter"
-      ) {
-        const { getDateWiseList, recruiterId, startDate, endDate } = nextProps;
-        getDateWiseList(recruiterId, startDate, endDate);
-      } else {
-        const { getSalesDateWiseList, orgId, startDate, endDate } = nextProps;
-        getSalesDateWiseList(orgId, startDate, endDate);
-      }
-    }
-  }
-  componentDidMount() {
-    const startDate = `${this.state.startDate.format("YYYY-MM-DD")}T20:00:00Z`;
-    const endDate = `${this.state.endDate.format("YYYY-MM-DD")}T20:00:00Z`;
-    this.props.getJumpInvestorlist(this.props.userId, startDate, endDate);
-    this.props.getJumpInvestor2list(this.props.userId, startDate, endDate);
-    this.props.getJumpInvestor3list(this.props.userId, startDate, endDate);
-    this.props.getJumpInvestor4list(this.props.userId, startDate, endDate);
-  }
+    const { openPitchQualified,handlePitchQualifiedDrawer,openPitchAdded,handlePitchAddedDrawer,
+      openDealAdded,handleDealAddedDrawer,openDealClosed,handleDealClosedDrawer
+    } = props;
 
-  render() {
-    const { openPitchQualified,handlePitchQualifiedDrawer } = this.props;
-    const startDate = `${this.state.startDate.format("YYYY-MM-DD")}T20:00:00Z`;
     return (
       <>
        <FlexContainer flexDirection="row" style={{ width: "100%" }}>
@@ -93,28 +50,34 @@ class DashboardInvestorsOrgJumpstart extends React.Component {
             title="Pitch Qualified"
             jumpstartClick={()=>handlePitchQualifiedDrawer(true)}
             cursorData={"pointer"}
-            value={this.props.jumpstartInvestorCount.qualifiedInvestorLeadsList}
-            isLoading={this.props.user.fetchingJumpstartInvestor}
+            value={props.jumpstartInvestorCount.qualifiedInvestorLeadsList}
+            isLoading={props.user.fetchingJumpstartInvestor}
           />
 
           <JumpStartBox
             noProgress
             title="Pitch Added"
-            value={this.props.jumpstartInvestor2Count.createdinvestorLeadsList}
-            isLoading={this.props.fetchingJumpstartInvestor2}
+            jumpstartClick={()=>handlePitchAddedDrawer(true)}
+            cursorData={"pointer"}
+            value={props.jumpstartInvestor2Count.createdinvestorLeadsList}
+            isLoading={props.fetchingJumpstartInvestor2}
           />
 
           <JumpStartBox
             noProgress
             title="Deals Added"
-            value={this.props.jumpstartInvestor3Count.opportunityAdded}
-            isLoading={this.props.fetchingJumpstartInvestor3}
+            jumpstartClick={()=>handleDealAddedDrawer(true)}
+            cursorData={"pointer"}
+            value={props.jumpstartInvestor3Count.opportunityAdded}
+            isLoading={props.fetchingJumpstartInvestor3}
           />
           <JumpStartBox
             noProgress
             title="Deals Closed"
-            value={ this.props.jumpstartInvestor4Count.closedOpportunity}
-             isLoading={this.props.fetchingJumpstartInvestor4}
+            jumpstartClick={()=>handleDealClosedDrawer(true)}
+            cursorData={"pointer"}
+            value={ props.jumpstartInvestor4Count.closedOpportunity}
+            isLoading={props.fetchingJumpstartInvestor4}
           />
         </FlexContainer>
         <Spacer />
@@ -124,11 +87,22 @@ class DashboardInvestorsOrgJumpstart extends React.Component {
       openPitchQualified={openPitchQualified}
       handlePitchQualifiedDrawer={handlePitchQualifiedDrawer}
       />
+       <PitchAddedDrawer
+      openPitchAdded={openPitchAdded}
+      handlePitchAddedDrawer={handlePitchAddedDrawer}
+      />
+      <DealsAddedDrawer 
+     openDealAdded={openDealAdded}
+     handleDealAddedDrawer={handleDealAddedDrawer}
+    />
+    <DealsClosedDrawer 
+     openDealClosed={openDealClosed}
+     handleDealClosedDrawer={handleDealClosedDrawer}
+    />
       </>
      
     );
   }
-}
 const mapStateToProps = ({ dashboard, auth }) => ({
   user: auth.userDetails,
   role: auth.userDetails.role,
@@ -150,18 +124,26 @@ const mapStateToProps = ({ dashboard, auth }) => ({
   fetchingJumpstartInvestor3: dashboard.fetchingJumpstartInvestor3,
   fetchingJumpstartInvestor4: dashboard.fetchingJumpstartInvestor4,
   openPitchQualified:dashboard.openPitchQualified,
+  openPitchAdded:dashboard.openPitchAdded,
+  openDealAdded:dashboard.openDealAdded,
+  openDealClosed:dashboard.openDealClosed,
+  timeRangeType:dashboard.timeRangeType,
+  startDate: dashboard.startDate,
+  endDate: dashboard.endDate,
 });
 
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
-      getDateWiseList,
-      getSalesDateWiseList,
       getJumpInvestorlist,
       getJumpInvestor2list,
       getJumpInvestor3list,
       getJumpInvestor4list,
-      handlePitchQualifiedDrawer
+      handlePitchQualifiedDrawer,
+      handlePitchAddedDrawer,
+      handleDealAddedDrawer,
+      handleDealClosedDrawer
+
     },
     dispatch
   );

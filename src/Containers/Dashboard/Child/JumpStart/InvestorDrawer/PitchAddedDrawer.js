@@ -1,32 +1,32 @@
 import React, { lazy, Suspense,useState,useEffect } from "react";
- import { BundleLoader } from "../../../../../Components/Placeholder";
+import { BundleLoader } from "../../../../../Components/Placeholder";
 import { StyledDrawer} from "../../../../../Components/UI/Antd";
-const OppoClosedTable =lazy(()=>import("./OppoClosedTable"));
+const PitchAddedTable =lazy(()=>import("./PitchAddedTable.js"));
 
-const OppoClosedDrawer = (props) => {
+const PitchAddedDrawer = (props) => {
 
   return (
     <>
       <StyledDrawer
-        title="Opportunities Closed"
+        title="Pitch Added"
         width="45%"
-        visible={props.clickOppoClosed}
+        visible={props.openPitchAdded}
         maskClosable={false}
         closable
         destroyOnClose
         maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}
         style={{ top: 40 }}
-        onClose={()  => props.handleOppoClosedDrawer(false)}
+        onClose={()  => props.handlePitchAddedDrawer(false)}
         footer={null}
       >
         <Suspense fallback={<BundleLoader />}>
-        <OppoClosedTable/>
+        <PitchAddedTable/>
         </Suspense>
       </StyledDrawer>
     </>
   );
 };
-export default OppoClosedDrawer;
+export default PitchAddedDrawer;
 
 
 

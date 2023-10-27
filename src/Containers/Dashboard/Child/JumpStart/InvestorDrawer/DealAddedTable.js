@@ -4,17 +4,18 @@ import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
  import { BundleLoader } from "../../../../../Components/Placeholder";
 import { StyledTable } from "../../../../../Components/UI/Antd";
-import {getOppocLOSED} from "../../../DashboardAction";
+import {getDealAdded} from "../../../DashboardAction";
 
-function OppoClosedTable (props) {
+function DealAddedTable (props) {
+
     useEffect(()=>{
       if (props.timeRangeType === "today"){
-        props.getOppocLOSED(props.userId,props.startDate,props.endDate);
+        props.getDealAdded(props.userId,props.startDate,props.endDate);
       }
-      else{
-        props.getOppocLOSED(props.userId,props.startDate,props.endDate);
+      else {
+        props.getDealAdded(props.userId,props.startDate,props.endDate); 
       }
-    },[props.userId,props.startDate,props.endDate]);
+    }, [props.userId,props.startDate,props.endDate]);
     const columns = [
       {
         title: <FormattedMessage
@@ -70,27 +71,27 @@ function OppoClosedTable (props) {
       <>
         <StyledTable
           columns={columns}
-          dataSource={props.showClosedOppo}
-          loading={props.fetchingOppoClosed}
+          dataSource={props.showAddedDeal}
+          loading={props.fetchingPitchAdded}
         />
       </>
     );
-  };
-const mapStateToProps = ({dashboard,auth }) => ({
-         showClosedOppo:dashboard.showClosedOppo,
-        userId: auth.userDetails.userId,
-        fetchingOppoClosed:dashboard.fetchingOppoClosed,
-        timeRangeType:dashboard.timeRangeType,
-        startDate: dashboard.startDate,
-        endDate: dashboard.endDate,
-  });
-  
-  const mapDispatchToProps = (dispatch) =>
-    bindActionCreators(
-      {
-        getOppocLOSED,
-      },
-      dispatch
-    );
+  }
+  const mapStateToProps = ({dashboard,auth }) => ({
+    showAddedDeal:dashboard.showAddedDeal,
+    userId: auth.userDetails.userId,
+    fetchingDealAdded:dashboard.fetchingDealAdded,
+    timeRangeType:dashboard.timeRangeType,
+    startDate: dashboard.startDate,
+    endDate: dashboard.endDate,
+});
 
-    export default connect(mapStateToProps, mapDispatchToProps)(OppoClosedTable);
+const mapDispatchToProps = (dispatch) =>
+bindActionCreators(
+  {
+    getDealAdded,
+  },
+  dispatch
+);
+
+export default connect(mapStateToProps, mapDispatchToProps)(DealAddedTable);
