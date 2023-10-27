@@ -15,8 +15,27 @@ class OrganizationDocumentList extends Component {
         this.formRef = null;
         this.state = {
           fields: {},
+          activeKey: "0",
+          // viewAll:false,
+          // setIsViewAll:false,
+          change: true,
+          isTextOpen:false,
+          isTextInputOpen: false,
+          addingStage: false,
+          stageName: "",
+          probability: null,
+          days: null,
+          visible: false,
+          isViewAll: false,
           currentProcess: [],
-       
+          currentProcessItem:{},
+          currentStageId: "",
+          currentStage: [],
+          currentStageName: "",
+          exist: false,
+          responsible:"",
+          isProcessTextInputOpen: false,
+          workflowName: "",
           publish: false,
         };
       }
@@ -30,20 +49,23 @@ class OrganizationDocumentList extends Component {
     }
   };
 
-  handlePublishClick = () => {
-    const { currentProcess, publish } = this.state;
-    console.log(currentProcess);
+  handlePublishClick = (item) => {
+console.log(item)
+this.setState({
+  currentProcessItem:item
+})
 
-    const Id = currentProcess.organizationDocumentLinkId;
+    const Id = item.organizationDocumentLinkId;
     let data = {
       organizationDocumentLinkId: Id,
-      publishInd: currentProcess.publishInd ? false : true,
+      publishInd: item.publishInd ? false : true,
     };
 
      this.props.LinkOrgDocPublish(data, this.handleCallBack1);
   };
 
   render() {
+     console.log("karisma",this.state.currentProcessItem)
     const{user}=this.props;
     return (
       <div className="overflow-y-auto max-h-[39rem]">
@@ -92,10 +114,14 @@ class OrganizationDocumentList extends Component {
                   {item.userId === "EMP16818052295222021" && item.shareInd === true && user.repositoryCreateInd ===true  ? (
                       <Button
                             // style={{width:"5rem"}}
-                        onClick={this.handlePublishClick}
+                        // onClick={this.handlePublishClick}
+                        onClick={() => {
+                        
+                          this.handlePublishClick(item);
+                        }}
                       >
                         {/* {this.state.change?"Publish":"Unpublish"}  */}
-                        {this.state.currentProcess.publishInd
+                        {item.publishInd
                           ? "Unpublish"
                           : "Publish"}
                       </Button>

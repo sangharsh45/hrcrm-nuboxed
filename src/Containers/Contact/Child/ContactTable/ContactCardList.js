@@ -216,14 +216,12 @@ function ContactCardList(props) {
                                   </div>
                               </div>
                               </div>
-                                <div className=" flex font-medium flex-col md:w-32 max-sm:flex-row w-full max-sm:justify-between ">
-                                    <div class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden"># Opportunity</div>
-
-                                    <div class=" text-[0.75rem] text-cardBody font-poppins">
-                                    {item.oppNo}
-
-                                    </div>
-                                </div>
+                              <div className="flex font-medium flex-col md:w-32 max-sm:flex-row w-full max-sm:justify-between ">
+  <div className="text-[0.875rem] text-cardBody font-poppins max-sm:hidden"># Opportunity</div>
+  <div className="text-[0.75rem] text-cardBody font-poppins text-center">
+    {item.oppNo}
+  </div>
+</div>
                                 <div className="flex font-medium flex-col md:w-32 max-sm:flex-row w-full max-sm:justify-between ">
                                     <div class="text-[0.875rem] text-cardBody font-poppins max-sm:hidden">Portal Acess</div>
 

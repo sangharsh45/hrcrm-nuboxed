@@ -69,7 +69,7 @@ function CustomerCardList(props) {
         }
       }
     })
-    props.getCustomerListByUserId(props.userId, page);
+    props.getCustomerListByUserId(props.userId, page,"creationdate");
     setPage(page + 1);
     props.getSectors();
     props.getCountries();
@@ -92,7 +92,8 @@ function CustomerCardList(props) {
       setPage(page + 1);
       props.getCustomerListByUserId(
         props.currentUser ? props.currentUser : props.userId,
-        page
+        page,
+        "creationdate"
       );
     }, 100);
   };
@@ -214,7 +215,7 @@ function CustomerCardList(props) {
                                 <div className=" flex font-medium flex-col md:w-36 max-sm:flex-row w-full max-sm:justify-between ">
                                     <h4 class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden"># Opportunity</h4>
 
-                                    <div class=" text-[0.75rem] text-cardBody font-poppins">
+                                    <div class=" text-[0.75rem] text-cardBody font-poppins text-center">
                                     {item.oppNo}
 
                                     </div>
@@ -222,7 +223,7 @@ function CustomerCardList(props) {
                                 <div className=" flex font-medium flex-col md:w-36 max-sm:flex-row w-full max-sm:justify-between ">
                                     <h4 class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden">Pipeline Value</h4>
 
-                                    <div class=" text-[0.75rem] text-cardBody font-poppins">
+                                    <div class=" text-[0.75rem] text-cardBody font-poppins text-center">
                                     {item.pipe}
 
                                     </div>
@@ -230,12 +231,12 @@ function CustomerCardList(props) {
                                 <div className=" flex font-medium flex-col md:w-36 max-sm:flex-row w-full max-sm:justify-between ">
                                     <h4 class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden">Weighted Value</h4>
 
-                                    <div class=" text-[0.75rem] text-cardBody font-poppins">
+                                    <div class=" text-[0.75rem] text-cardBody font-poppins text-center">
                                     {item.weight}
 
                                     </div>
                                 </div>
-                                <div className=" flex font-medium h-7 flex-col md:w-24 max-sm:max-sm:flex-row w-full max-sm:justify-between ">
+                                <div className=" flex font-medium  flex-col md:w-24 max-sm:max-sm:flex-row w-full max-sm:justify-between ">
                                     <h4 class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden">Assigned to</h4>
 
                                     <div class=" text-[0.75rem] text-cardBody font-poppins">
@@ -269,7 +270,7 @@ function CustomerCardList(props) {
               />
             </span>
                    </div>
-                   <div className=" flex font-medium flex-col max-sm:flex-row  ">
+                   <div className=" flex font-medium justify-center flex-col max-sm:flex-row  ">
                        
                        <h4 class=" text-[0.875rem] text-cardBody font-poppins"></h4>
 

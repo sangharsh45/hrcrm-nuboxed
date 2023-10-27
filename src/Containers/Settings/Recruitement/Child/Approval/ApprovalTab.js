@@ -32,11 +32,11 @@ function ApprovalTab(props) {
                         <ExpenseApproveForm/>
                         </div>
                     </TabPane>
-                    <TabPane tab={`ApproveList`} key="4">
+                    {/* <TabPane tab={`ApproveList`} key="4">
                         <div style={{ marginTop: 10 }}>
                             <ApproveTable/>
                         </div>
-                    </TabPane>
+                    </TabPane> */}
                 </StyledTabs>
             </TabsWrapper>
         </>
