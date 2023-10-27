@@ -100,7 +100,7 @@ if (fetchingEventListRangeByUserId)
       {eventListRangeByUserId.map((item) => { 
                     return (
                         <div>
-                            <div className="flex justify-between mt-4  max-sm:flex-col"
+                            <div className="flex justify-between mt-1  max-sm:flex-col"
                                 style={{
                                     borderBottom: "3px dotted #515050"
                                 }}>
@@ -123,7 +123,7 @@ if (fetchingEventListRangeByUserId)
                                         </div>
                                 </div>
 
-                                <div className=" flex font-medium flex-col  md:w-52 max-sm:flex-row  w-full ">
+                                <div className=" flex font-medium flex-col  md:w-20 max-sm:flex-row  w-full ">
                                     <div class=" text-[0.875rem] text-cardBody font-[0.875rem] font-poppins max-sm:hidden"> Subject </div>
                                     <div class=" text-[0.75rem] text-cardBody font-poppins">   
                                     {item.eventSubject}
@@ -133,6 +133,12 @@ if (fetchingEventListRangeByUserId)
                                 <div class="flex">
                                 <div className=" flex font-medium flex-col md:w-40 max-sm:flex-row  w-full">
                                     <div class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden">Start</div>
+                                    <div class="text-[0.75rem] text-cardBody font-poppins">
+                                    {` ${moment(item.startDate).format("llll")}`}
+                                    </div>
+                                </div>
+                                <div className=" flex font-medium flex-col md:w-40 max-sm:flex-row  w-full">
+                                    <div class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden">End</div>
                                     <div class="text-[0.75rem] text-cardBody font-poppins">
                                     {` ${moment(item.startDate).format("llll")}`}
                                     </div>
@@ -221,7 +227,7 @@ if (fetchingEventListRangeByUserId)
           </Tooltip>
           </div>
                    </div>
-                                <div class="flex flex-col md: max-sm:flex-row items-center justify-between w-full">
+                                <div class="flex  md: max-sm:flex-row items-center justify-between w-full">
                     <div class="">
                     {item.rating === 0 ? (<StarBorderIcon
                 style={{ color: "#eeeedd", fontSize: "1.5em" }} />)

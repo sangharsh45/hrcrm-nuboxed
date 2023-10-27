@@ -26,6 +26,8 @@ class CustomerHeader extends Component {
               currentData={currentData}
               handleClear={handleClear}
               setCurrentData={this.props.setCurrentData}
+              handleFilterChange={this.props.handleFilterChange}
+              filter={this.props.filter}
             />
           }
           rightComponent={

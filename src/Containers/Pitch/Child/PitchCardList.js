@@ -95,12 +95,12 @@ const PitchCardList = (props) => {
                } `;
                     return (
                         <div>
-                            <div className="flex justify-between mt-4 max-sm:flex-col"
+                            <div className="flex justify-between mt-1 max-sm:flex-col"
                                 style={{
                                     borderBottom: "3px dotted #515050"
                                 }}>
                                      <div class="flex justify-between">
-                                <div className=" flex font-medium flex-col w-[11rem] mb-4  max-sm:w-full">
+                                <div className=" flex font-medium flex-col w-[12rem] mb-4  max-sm:w-full">
                                 <div className="flex max-sm:w-full"> 
 <div>
 <SubTitle>
@@ -299,21 +299,7 @@ style={{fontSize: "1rem",cursor: 'pointer',}}
      <div class="md:w-[1%]"></div>
      <div class="flex justify-between max-sm:mb-1">
      <div class="flex justify-between max-sm:w-[50%] ">
-     <div className=" flex font-medium flex-col md:w-20  max-sm:flex-row w-full max-sm:justify-between">
-                       
-                       <h4 class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden">Owner</h4>
-
-                       <span>
-              <MultiAvatar
-                primaryTitle={item.ownerName}
-                imageId={item.ownerImageId}
-                imageURL={item.imageURL}
-                imgWidth={"1.8rem"}
-                imgHeight={"1.8rem"}
-              />
-            </span>
-                   </div>
-                                <div className=" flex font-medium flex-col md:w-32 max-sm:flex-row w-full max-sm:justify-between ">
+     <div className=" flex font-medium flex-col md:w-32 max-sm:flex-row w-full max-sm:justify-between ">
                                     <h4 class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden">Assigned to</h4>
 
                                     <div class=" text-[0.75rem] text-cardBody font-poppins">
@@ -332,6 +318,21 @@ style={{fontSize: "1rem",cursor: 'pointer',}}
              
                                     </div>
                                 </div>
+     <div className=" flex font-medium flex-col md:w-20  max-sm:flex-row w-full max-sm:justify-between">
+                       
+                       <h4 class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden">Owner</h4>
+
+                       <span>
+              <MultiAvatar
+                primaryTitle={item.ownerName}
+                imageId={item.ownerImageId}
+                imageURL={item.imageURL}
+                imgWidth={"1.8rem"}
+                imgHeight={"1.8rem"}
+              />
+            </span>
+                   </div>
+                               
                          
                    <div className=" flex font-medium flex-col md:w-24 max-sm:flex-row w-full max-sm:justify-between ">
                                     <h4 class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden">Qualified</h4>

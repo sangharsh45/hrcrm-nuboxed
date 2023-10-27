@@ -93,7 +93,7 @@ function CustomerCardList(props) {
       props.getCustomerListByUserId(
         props.currentUser ? props.currentUser : props.userId,
         page,
-        "creationdate"
+        props.filter?props.filter:"creationdate"
       );
     }, 100);
   };

@@ -62,7 +62,7 @@ function InvestorCardList(props) {
         }
       }
     })
-    props.getInvestorsbyId(props.userId, page);
+    props.getInvestorsbyId(props.userId, page,"creationdate");
     setPage(page + 1);
     props.getSectors();
     props.getCountries();
@@ -211,7 +211,7 @@ function InvestorCardList(props) {
 
                                     </div>
                                 </div>
-                                <div className=" flex font-medium flex-col md:w-24 max-sm:flex-row w-full max-sm:justify-between ">
+                                <div className=" flex font-medium flex-col md:w-32 max-sm:flex-row w-full max-sm:justify-between ">
                                     <h4 class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden">Assigned to</h4>
 
                                     <div class=" text-[0.75rem] text-cardBody font-poppins">

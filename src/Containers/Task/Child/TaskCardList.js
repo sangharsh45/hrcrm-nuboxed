@@ -214,7 +214,7 @@ const TaskCardList = (props) => {
                        <div class="text-[0.75rem] text-cardBody font-poppins"> 
                         {`${moment(item.endDate).format("ll")}`}</div>
                    </div>
-                                <div class="flex flex-col w-16">
+                                <div class="flex flex-col w-24">
                                   {/* <StyledLabel>today-enddate</StyledLabel> */}
                     <div class="">
                    
@@ -349,7 +349,7 @@ const TaskCardList = (props) => {
                        
 
 
-                   <div className="flex font-medium flex-col md:w-20 max-sm:flex-row  w-full ">
+                   <div className="flex font-medium flex-col md:w-20 max-sm:flex-row  w-full justify-center ">
              {item.assignedToName !== item.submittedBy ? 
              <span>
              <Tooltip overlayStyle={{ maxWidth: "400px" }} title={`Review :${item.feedbackReview}`}>
@@ -368,7 +368,7 @@ const TaskCardList = (props) => {
 
      
      </div> 
-     <div className="flex font-medium flex-col md:w-20 max-sm:flex-row  w-full ">
+     <div className="flex font-medium flex-col md:w-20 max-sm:flex-row  w-full  justify-center ">
              {item.assignedToName !== item.submittedBy ? 
                          <Tooltip title="Feedback">
                          <FeedbackIcon

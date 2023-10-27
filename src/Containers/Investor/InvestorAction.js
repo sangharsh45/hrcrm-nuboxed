@@ -11,12 +11,12 @@ export const setInvestorViewType = (viewType) => (dispatch) => {
     });
 };
 
-export const getInvestorsbyId = (userId,pageNo) => (dispatch) => {
+export const getInvestorsbyId = (userId,pageNo,filter) => (dispatch) => {
     dispatch({
       type: types.GET_INVESTORS_BY_ID_REQUEST,
     });
     axios
-      .get(`${base_url}/investor/${userId}/${pageNo}`, {
+      .get(`${base_url}/investor/${userId}/${pageNo}/${filter}`, {
         headers: {
           Authorization: "Bearer " + sessionStorage.getItem("token") || "",
         },
