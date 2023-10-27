@@ -60,7 +60,7 @@ function ContactInvestCardList(props) {
         }
       }
     })
-    props.getContactInvestByUserId(props.userId,pageNo);
+    props.getContactInvestByUserId(props.userId,pageNo,"creationdate");
     setPage(pageNo + 1);
     props.getAllSalesList();
     props.getRecruiterName();

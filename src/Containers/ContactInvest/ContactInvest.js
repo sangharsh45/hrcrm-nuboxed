@@ -2,7 +2,9 @@ import React, { useState,useEffect,Suspense, lazy } from 'react';
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { BundleLoader, GridLoader } from "../../Components/Placeholder";
-import {handleContactInvestModal,setContactInvetViewType,getContactInvestByUserId} from "./ContactInvestAction";
+import {handleContactInvestModal,setContactInvetViewType,
+  getContactInvestByUserId,
+  getContactInvestFilterData} from "./ContactInvestAction";
 
 const ContactInvestHeader = lazy(() => import("./Child/ContactInvestHeader"));
 const AddContactInvestModal = lazy(() => import("./Child/AddContactInvestModal"));
@@ -17,7 +19,7 @@ function ContactInvest (props) {
     const [selectedCountry, setSelectedCountry] = useState('');
     const [filterText, setFilterText] = useState('');
   const [filteredData, setFilteredData] = useState(props.contactiNVESTbyId);
-
+  const [filter, setFilter] = useState("creationdate");
   const handleCountryChange = (event) => {
     const country = event.target.value;
     setSelectedCountry(country);
@@ -28,6 +30,10 @@ function ContactInvest (props) {
       const filteredJobs = props.contactiNVESTbyId.filter((job) => job.department ===country );
       setFilteredData(filteredJobs);
     }
+};
+const handleFilterChange = (data) => {
+  setFilter(data);
+  props.getContactInvestByUserId(props.userId, 0, data);
 };
 const handleRoleChange = (event) => {
   const role = event.target.value;
@@ -106,6 +112,8 @@ const{handleContactInvestModal,addContactInvestModal,
                 handleClear={handleClear}
                 currentData={currentData}
                 setCurrentData={setCurrentData}
+                handleFilterChange={handleFilterChange}
+                filter={filter}
               />
              <AddContactInvestModal
         addContactInvestModal={addContactInvestModal}
@@ -118,15 +126,17 @@ const{handleContactInvestModal,addContactInvestModal,
         )
 }
 
-const mapStateToProps = ({ contactinvest }) => ({
+const mapStateToProps = ({ contactinvest,auth }) => ({
     addContactInvestModal:contactinvest.addContactInvestModal,
     viewType:contactinvest.viewType,
     contactiNVESTbyId: contactinvest.contactiNVESTbyId,
+    userId: auth.userDetails.userId,
 })
 
 const mapDispatchToProps = dispatch => bindActionCreators({
     handleContactInvestModal,
     setContactInvetViewType,
-    getContactInvestByUserId
+    getContactInvestByUserId,
+    getContactInvestFilterData
 }, dispatch)
 export default connect(mapStateToProps, mapDispatchToProps)(ContactInvest);

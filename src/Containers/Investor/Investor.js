@@ -18,6 +18,7 @@ const InvestorCardView=lazy(()=>import("./Child/InvestorTable/InvestorCardView")
 function Investor (props) {
 const [currentData,setcurrentData]=useState("");
 const [currentUser,setcurrentUser]=useState("");
+const [filter, setFilter] = useState("creationdate");
 
 function handleClear () {
   const startDate = moment()
@@ -35,7 +36,10 @@ props.emptyInvestor();
 function handleCurrentData (value){
   setcurrentData(value)
 }
-
+const handleFilterChange = (data) => {
+  setFilter(data);
+  props.getInvestorsbyId(props.userId, 0, data);
+};
 const handleChange = (e) => {
   setcurrentData(e.target.value)
 };
@@ -58,6 +62,8 @@ const handleChange = (e) => {
           handleClear={handleClear}
           handleChange={handleChange}
           handleCurrentData={handleCurrentData}
+          handleFilterChange={handleFilterChange}
+          filter={filter}
           />
           <AddInvestorModal
           addInvestorModal={addInvestorModal}

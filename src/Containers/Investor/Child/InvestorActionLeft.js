@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect,useState } from "react";
 import { FormattedMessage } from "react-intl";
 import GridViewIcon from '@mui/icons-material/GridView';
 import TocIcon from '@mui/icons-material/Toc';
@@ -24,6 +24,8 @@ const Option = StyledSelect.Option;
 const { Search } = Input;
 
 const InvestorActionLeft = (props) => {
+  const[filter,setFilter]=useState("creationdate")
+  const [page, setPage] = useState(0);
   const dummy = ["cloud", "azure", "fgfdg"];
   function handleChange(data) {}
   const suffix = (
@@ -42,7 +44,11 @@ const InvestorActionLeft = (props) => {
     browserSupportsSpeechRecognition,
   } = useSpeechRecognition();
   console.log(transcript);
-
+  function  handleFilterChange(data){
+    setFilter(data)
+    props.getInvestorsbyId(props.userId, page,data);
+    setPage(page + 1);
+  }
 //   useEffect(() => {
 //     if (props.viewType === "card") {
 //       props.getRecords(props.userId);
@@ -147,7 +153,13 @@ useEffect(() => {
         >
           <FormattedMessage id="app.clear" defaultMessage="Clear" />
         </Button>
- 
+        <div style={{ width: "15%" }}>
+          <StyledSelect placeholder="Sort"  onChange={(e)  => props.handleFilterChange(e)}>
+          <Option value="CreationDate">CreationDate</Option>
+            <Option value="ascending">A To Z</Option>
+            <Option value="descending">Z To A</Option>
+          </StyledSelect>
+        </div>
       </div>
     </div>
   );

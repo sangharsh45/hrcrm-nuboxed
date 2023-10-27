@@ -84,7 +84,8 @@ function InvestorCardList(props) {
       setPage(page + 1);
       props.getInvestorsbyId(
         props.currentUser ? props.currentUser : props.userId,
-        page
+        page,
+        props.filter?props.filter:"creationdate"
       );
     }, 100);
   };
