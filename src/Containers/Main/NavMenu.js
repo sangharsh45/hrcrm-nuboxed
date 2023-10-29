@@ -1,8 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
+import DynamicFeedIcon from '@mui/icons-material/DynamicFeed'; 
+import FactoryIcon from '@mui/icons-material/Factory'; 
+import GroupsIcon from '@mui/icons-material/Groups'; 
+import InventoryIcon from '@mui/icons-material/Inventory'; 
 import { Menu, Icon, Popover, Badge } from "antd";
 import { FormattedMessage } from "react-intl";
+import LocalShippingIcon from '@mui/icons-material/LocalShipping';
 import { translateText, getSupportedLanguages } from '../Translate/TranslateService';
 import CurrencyExchangeIcon from '@mui/icons-material/CurrencyExchange';
 import PermContactCalendarIcon from '@mui/icons-material/PermContactCalendar'; 
@@ -10,12 +15,12 @@ import HandshakeIcon from '@mui/icons-material/Handshake';
 import FilePresentIcon from '@mui/icons-material/FilePresent'
 import CellTowerIcon from '@mui/icons-material/CellTower';
 import DashboardIcon from '@mui/icons-material/Dashboard';
-import LocationCityIcon from '@mui/icons-material/LocationCity'; 
+import LocationCityIcon from '@mui/icons-material/LocationCity';
+import LocationOnIcon from '@mui/icons-material/LocationOn';   
 import LightbulbIcon from '@mui/icons-material/Lightbulb';
 import EventAvailableIcon from '@mui/icons-material/EventAvailable';
 import RecentActorsIcon from '@mui/icons-material/RecentActors';
 import FactCheckIcon from '@mui/icons-material/FactCheck';
-import GroupsIcon from '@mui/icons-material/Groups';
 import ApartmentIcon from '@mui/icons-material/Apartment';
 import ContactsIcon from '@mui/icons-material/Contacts';
 import ReceiptIcon from '@mui/icons-material/Receipt';
@@ -24,6 +29,7 @@ import { Link } from "react-router-dom";
 import VolumeUpIcon from '@mui/icons-material/VolumeUp';
 import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
 import { TeamOutlined } from "@ant-design/icons";
+import CategoryIcon from '@mui/icons-material/Category'
 import AccessAlarmIcon from '@mui/icons-material/AccessAlarm';
 import PortraitIcon from '@mui/icons-material/Portrait';
 import NewspaperIcon from '@mui/icons-material/Newspaper';
@@ -93,7 +99,7 @@ function NavMenu (props) {
           {/* dashboard */}
           {user.userType !== "USER" && user.department !== "Vendor" && user.department !== "Customer" && (
 
-            <Menu.Item key="/dashboard" style={{height:"30px",paddingLeft:"1rem"}}>
+            <Menu.Item key="/dashboard" style={{height:"20px",paddingLeft:"1rem"}}>
               <Link to="/dashboard">
                 <DashboardIcon 
 
@@ -787,7 +793,7 @@ function NavMenu (props) {
          
           <Menu.Item key="/location" style={{height:"30px",paddingLeft:"1rem"}}>
            <Link to="/location">
-            <ReceiptIcon
+            <LocationOnIcon
            style={{ fontSize: "large" }}
              />
              <span class="text-white text-ls ml-1"><FormattedMessage 
@@ -802,7 +808,7 @@ function NavMenu (props) {
          
          <Menu.Item key="/supplies" style={{height:"30px",paddingLeft:"1rem"}}>
           <Link to="/supplies">
-           <ReceiptIcon
+           <CategoryIcon
           style={{ fontSize: "large" }}
             />
             <span class="text-white text-ls ml-1"><FormattedMessage 
@@ -817,7 +823,7 @@ function NavMenu (props) {
          
          <Menu.Item key="/shipper" style={{height:"30px",paddingLeft:"1rem"}}>
           <Link to="/shipper">
-           <ReceiptIcon
+           <LocalShippingIcon
           style={{ fontSize: "large" }}
             />
             <span class="text-white text-ls ml-1"><FormattedMessage 
@@ -832,7 +838,7 @@ function NavMenu (props) {
          
          <Menu.Item key="/plant" style={{height:"30px",paddingLeft:"1rem"}}>
           <Link to="/plant">
-           <ReceiptIcon
+           <FactoryIcon
           style={{ fontSize: "large" }}
             />
             <span class="text-white text-ls ml-1"><FormattedMessage 
@@ -847,7 +853,7 @@ function NavMenu (props) {
          
          <Menu.Item key="/teams" style={{height:"30px",paddingLeft:"1rem"}}>
           <Link to="/teams">
-           <ReceiptIcon
+           <GroupsIcon
           style={{ fontSize: "large" }}
             />
             <span class="text-white text-ls ml-1"><FormattedMessage 
@@ -862,7 +868,7 @@ function NavMenu (props) {
          
          <Menu.Item key="/inventory " style={{height:"30px",paddingLeft:"1rem"}}>
           <Link to="/inventory">
-           <ReceiptIcon
+           <InventoryIcon
           style={{ fontSize: "large" }}
             />
             <span class="text-white text-ls ml-1"><FormattedMessage 
@@ -877,7 +883,7 @@ function NavMenu (props) {
          
          <Menu.Item key="/order" style={{height:"30px",paddingLeft:"1rem"}}>
           <Link to="/order">
-           <ReceiptIcon
+           <DynamicFeedIcon
           style={{ fontSize: "large" }}
             />
             <span class="text-white text-ls ml-1"><FormattedMessage 

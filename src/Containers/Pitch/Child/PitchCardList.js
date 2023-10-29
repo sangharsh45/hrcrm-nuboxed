@@ -37,7 +37,7 @@ import {
   handleAssimodal
 } from "../PitchAction";
 import ReactCountryFlag from 'react-country-flag';
-import AssignmentLateIcon from '@mui/icons-material/AssignmentLate';
+import AddchartIcon from '@mui/icons-material/Addchart';  
 import { Button, Tooltip } from "antd";
 // import StatusCustomerToggle from "./StatusCustomerToggle";
 import { FormattedMessage } from "react-intl";
@@ -129,7 +129,7 @@ const PitchCardList = (props) => {
                                             <h4 class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden">
                                             Name
                                             </h4>
-                                            <h4 class=" text-[0.75rem] text-blue-500 text-cardBody font-poppins font-semibold  cursor-pointer">
+                                            <h4 class=" text-[0.82rem] text-blue-500 text-cardBody font-poppins font-semibold  cursor-pointer">
                                                 
                                                 {/* <Link
                                                  toUrl={`customer/${item.customerId}`}
@@ -159,11 +159,9 @@ const PitchCardList = (props) => {
                                         </div>
                                         </div>
                                 </div>
-                                <div class="flex flex-row md:w-6 max-sm:flex-row w-full max-sm:justify-between">
+                                <div class="flex flex-row items-center md:w-3/12 max-sm:flex-row w-full max-sm:justify-between">
 
-<div>
-</div>
-<ButtonGroup>
+<div><ButtonGroup>
 <RoleButton
  type="Warm"
  iconType="	fas fa-burn"
@@ -178,8 +176,9 @@ const PitchCardList = (props) => {
    props.updateTypeForPitch(item.investorLeadsId,typ)
  }}
 />
-</ButtonGroup>
-</div>    
+</ButtonGroup></div>
+
+  
 
 
      <div>
@@ -224,7 +223,7 @@ const PitchCardList = (props) => {
           <FormattedMessage id="app.activity" defaultMessage="Activity" />
         }
       >
-<AssignmentLateIcon
+<AddchartIcon
 style={{fontSize: "1rem",cursor: 'pointer',}}
 onClick={()=>{
   props.handleAssimodal(true)
@@ -233,12 +232,13 @@ onClick={()=>{
 />
 </Tooltip>
 </div>
+</div>  
      </div>  
                                 <div class="flex justify-between md:ml-4">
                                 <div className=" flex font-medium flex-col  md:w-28 max-sm:flex-row w-full max-sm:justify-between ">
                            <h4 class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden"> Phone # </h4>
 
-                           <h4 class="text-[0.75rem] text-cardBody font-poppins">
+                           <h4 class="text-[0.82rem] text-cardBody font-poppins">
   {item.countryDialCode && item.phoneNumber
     ? `${item.countryDialCode} ${item.phoneNumber}`
     : 'Not available'}
@@ -249,7 +249,7 @@ onClick={()=>{
                                   
 
                                   <h4 class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden">Country</h4>
-                                  <h4 class=" text-[0.75rem] text-cardBody font-poppins">
+                                  <h4 class=" text-[0.82rem] text-cardBody font-poppins">
                                     <ReactCountryFlag
                           countryCode={item.countryAlpha2Code}
                           svg
@@ -266,7 +266,7 @@ onClick={()=>{
                        <div class="flex justify-between  max-sm:mb-2 ">
                        <div className=" flex font-medium flex-col  md:w-[9rem] max-sm:flex-row w-full max-sm:justify-between ">
                            <h4 class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden"> Company </h4>
-                           <h4 className="text-[0.75rem] text-cardBody font-poppins">
+                           <h4 className="text-[0.82rem] text-cardBody font-poppins">
   {item.companyName ? (
     <Link to={`pitch/${item.investorLeadsId}`} title={item.companyName}>
       {item.companyName}
@@ -298,7 +298,7 @@ onClick={()=>{
                                 {/* <div className=" flex font-medium flex-col  md:w-[6rem] max-sm:flex-row w-full max-sm:justify-between ">
                            
                                     <h4 class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden"> Sector </h4>
-                                    <h4 class=" text-[0.75rem] text-cardBody font-poppins">   
+                                    <h4 class=" text-[0.82rem] text-cardBody font-poppins">   
                                     {item.sector}
                                     </h4>
                                 </div> */}
@@ -311,7 +311,7 @@ onClick={()=>{
      <div className=" flex font-medium flex-col md:w-32 max-sm:flex-row w-full max-sm:justify-between ">
                                     <h4 class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden">Assigned to</h4>
 
-                                    <div class=" text-[0.75rem] text-cardBody font-poppins">
+                                    <div class=" text-[0.82rem] text-cardBody font-poppins">
                                     
                                     <span>
               {item.assignedTo === null ? (
@@ -346,7 +346,7 @@ onClick={()=>{
                    <div className=" flex font-medium flex-col md:w-24 max-sm:flex-row w-full max-sm:justify-between ">
                                     <h4 class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden">Qualified</h4>
 
-                                    <div class=" text-[0.75rem] text-cardBody font-poppins">
+                                    <div class=" text-[0.82rem] text-cardBody font-poppins">
                 {/* qual */}
                                     </div>
                                     <div>
@@ -358,7 +358,7 @@ onClick={()=>{
 </div>
                                 </div>
                                 </div>
-                                <div class="flex max-sm:flex-row  justify-between md:w-20 max-sm:w-[25%] ">
+                                <div class="flex max-sm:flex-row  justify-evenly md:w-20 max-sm:w-[25%] ">
                                
                                 <div class="flex flex-col w-[5%] max-sm:flex-row">
                                 <div>
@@ -506,7 +506,7 @@ function RoleButton({ type, iconType, tooltip, role, size, onClick }) {
         ghost={role !== type}
         onClick={onClick}
       >
-        <i className={`${iconType}`} style={{ fontSize: "1.25em" }}></i>
+        <i className={`${iconType}`} style={{ fontSize: "1.1rem" }}></i>
       </Button>
     </Tooltip>
   );

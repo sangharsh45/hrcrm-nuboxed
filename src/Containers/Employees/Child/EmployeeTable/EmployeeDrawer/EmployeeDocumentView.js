@@ -14,7 +14,7 @@ class EmployeeDocumentView extends Component {
                 <MainWrapper>
                   <CardImage>
                     <a href={`${base_url}/document/${item.documentId}`}>
-                      <FileCopyIcon style={{ fontSize: "2.5em", color: "cornflowerblue" }} />
+                      <FileCopyIcon style={{ fontSize: "1.5rem", color: "cornflowerblue" }} />
                     </a>
                   
                   </CardImage>

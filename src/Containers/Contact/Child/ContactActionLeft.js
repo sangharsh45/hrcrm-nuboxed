@@ -167,9 +167,9 @@ const ContactActionLeft = (props) => {
       </select>
       </div>
 
-      <div style={{ width: "15%" }}>
+      <div style={{ width: "22%" }}>
           <StyledSelect placeholder="Sort"  onChange={(e)  => props.handleFilterChange(e)}>
-          <Option value="CreationDate">CreationDate</Option>
+          <Option value="CreationDate">Creation Date</Option>
             <Option value="ascending">A To Z</Option>
             <Option value="descending">Z To A</Option>
           </StyledSelect>

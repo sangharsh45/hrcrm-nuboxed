@@ -168,7 +168,7 @@ function InvestorCardList(props) {
                                             <h4 class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden">
                                             Name
                                             </h4>
-                                            <h4 class=" text-[0.75rem] text-blue-500 text-cardBody font-poppins font-semibold cursor-pointer">
+                                            <h4 class=" text-[0.82rem] text-blue-500 text-cardBody font-poppins font-semibold cursor-pointer">
                                                 
          <Link
           toUrl={`investor/${item.investorId}`}
@@ -194,7 +194,7 @@ function InvestorCardList(props) {
                                 <div className=" flex font-medium flex-col  md:w-52 max-sm:flex-row w-full max-sm:justify-between ">
                            
                                     <h4 class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden"> Sector </h4>
-                                    <h4 class=" text-[0.75rem] text-cardBody font-poppins">   
+                                    <h4 class=" text-[0.82rem] text-cardBody font-poppins">   
                                     {item.sector}
                                     </h4>
                                 </div>
@@ -203,7 +203,7 @@ function InvestorCardList(props) {
                                   
 
                                     <h4 class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden">Country</h4>
-                                    <h4 class=" text-[0.75rem] text-cardBody font-poppins">
+                                    <h4 class=" text-[0.82rem] text-cardBody font-poppins">
                                     <ReactCountryFlag
                           countryCode={item.countryAlpha2Code}
                           svg
@@ -221,14 +221,14 @@ function InvestorCardList(props) {
                                 <div className=" flex font-medium flex-col md:w-36 max-sm:flex-row w-full max-sm:justify-between ">
                                     <h4 class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden"># Deals</h4>
 
-                                    <div class=" text-[0.75rem] text-cardBody font-poppins">
+                                    <div class=" text-[0.82rem] text-cardBody font-poppins">
 
                                     </div>
                                 </div>
                                 <div className=" flex font-medium flex-col md:w-32 max-sm:flex-row w-full max-sm:justify-between ">
                                     <h4 class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden">Assigned to</h4>
 
-                                    <div class=" text-[0.75rem] text-cardBody font-poppins">
+                                    <div class=" text-[0.82rem] text-cardBody font-poppins">
                                     
                                     <span>
               {item.assignedTo === null ? (
@@ -263,7 +263,7 @@ function InvestorCardList(props) {
                    <div className=" flex font-medium flex-col md:w-36 max-sm:flex-row w-full max-sm:justify-between ">
                                     <h4 class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden">Source</h4>
 
-                                    <div class=" text-[0.75rem] text-cardBody font-poppins">
+                                    <div class=" text-[0.82rem] text-cardBody font-poppins">
                                     {item.source}
                                     </div>
                                 </div>

@@ -174,7 +174,7 @@ function ContactCardList(props) {
                                             <div class="text-[0.875rem] text-cardBody font-poppins max-sm:hidden">
                                             Name
                                             </div>
-                                            <div class="text-[0.75rem] text-blue-500 text-cardBody font-poppins font-semibold  cursor-pointer">
+                                            <div class="text-[0.82rem] text-blue-500 text-cardBody font-poppins font-semibold  cursor-pointer">
                                                 
          <Link
           toUrl={`contact/${item.contactId}`}
@@ -201,33 +201,33 @@ function ContactCardList(props) {
 
                                 <div className=" flex font-medium flex-col  md:w-52 max-sm:flex-row w-full max-sm:justify-between ">
                                     <div class=" text-[0.875rem] text-cardBody font-[0.875rem] font-poppins max-sm:hidden"> Company </div>
-                                    <div class=" text-[0.75rem] text-cardBody font-poppins">   
+                                    <div class=" text-[0.82rem] text-cardBody font-poppins">   
                                     {item.tagWithCompany}
                                     </div>
                                 </div>
                                 <div className=" flex font-medium flex-col md:w-36 max-sm:flex-row w-full max-sm:justify-between ">
                                     <div class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden">Designation</div>
-                                    <div class="text-[0.75rem] text-cardBody font-poppins">
+                                    <div class="text-[0.82rem] text-cardBody font-poppins">
                                          {item.designation}
                                     </div>
                                 </div>
                                 <div className=" flex font-medium flex-col md:w-36  max-sm:flex-row w-full max-sm:justify-between">
                                   <div class="text-[0.875rem] text-cardBody font-poppins max-sm:hidden">Department</div>
-                                  <div class="text-[0.75rem] text-cardBody font-poppins">
+                                  <div class="text-[0.82rem] text-cardBody font-poppins">
                                        {item.department}
                                   </div>
                               </div>
                               </div>
                               <div className="flex font-medium flex-col md:w-32 max-sm:flex-row w-full max-sm:justify-between ">
   <div className="text-[0.875rem] text-cardBody font-poppins max-sm:hidden"># Opportunity</div>
-  <div className="text-[0.75rem] text-cardBody font-poppins text-center">
+  <div className="text-[0.82rem] text-cardBody font-poppins text-center">
     {item.oppNo}
   </div>
 </div>
                                 <div className="flex font-medium flex-col md:w-32 max-sm:flex-row w-full max-sm:justify-between ">
                                     <div class="text-[0.875rem] text-cardBody font-poppins max-sm:hidden">Portal Acess</div>
 
-                                    <div class="text-[0.75rem] text-cardBody font-poppins">
+                                    <div class="text-[0.82rem] text-cardBody font-poppins">
 
                                     {item.thirdPartyAccessInd 
     ? `${item.thirdPartyAccessInd}`
@@ -257,7 +257,7 @@ function ContactCardList(props) {
 
                    </div>
                    
-                                <div class="flex flex-col  max-sm:flex-row w-full max-sm:justify-between items-center">
+                                <div class="flex flex-col  max-sm:flex-row w-full max-sm:justify-evenly items-center">
                     <div class="rounded-full bg-white w-5 h-5 cursor-pointer">
                     <Tooltip title={item.mobileNo} >
             {item.doNotCallInd !== true && (
@@ -313,7 +313,7 @@ function ContactCardList(props) {
 
                     </div>
                     </div>
-                    <div class="flex flex-col md:w-[2%] max-sm:flex-row w-full max-sm:justify-between items-center">
+                    <div class="flex flex-col md:w-[2%] max-sm:flex-row w-full max-sm:justify-evenly items-center">
                       <div>
                     <Tooltip overlayStyle={{ maxWidth: "300px" }} title={dataLoc}>
             <span

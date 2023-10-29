@@ -106,7 +106,7 @@ const OpportunityActionLeft = (props) => {
             }}
           >
             {" "}
-            <LightbulbIcon />
+            <LightbulbIcon style={{ color: "rgb(14, 149, 144)"}}/>
           </span>
         </Tooltip>
       </Badge>

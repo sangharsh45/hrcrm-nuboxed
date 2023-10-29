@@ -1,4 +1,4 @@
-import BatchPredictionIcon from '@mui/icons-material/BatchPrediction';
+import LibraryBooksIcon from '@mui/icons-material/LibraryBooks'; 
 import React from 'react'
 import { connect } from "react-redux";
 
@@ -11,7 +11,7 @@ function RepositoryData(props) {
   return (
     <>
     <div>
-        <BatchPredictionIcon
+        <LibraryBooksIcon
         style={{fontSize:"1.2rem",marginLeft:"0.5rem"}}
           onClick={() => {
           

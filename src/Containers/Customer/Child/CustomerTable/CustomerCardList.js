@@ -163,7 +163,7 @@ function CustomerCardList(props) {
                                             <h4 class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden">
                                             Name
                                             </h4>
-                                            <h4 class=" text-[0.75rem] text-blue-500 text-cardBody font-poppins font-semibold  cursor-pointer">
+                                            <h4 class=" text-[0.82rem] text-blue-500 text-cardBody font-poppins font-semibold  cursor-pointer">
                                                 
          <Link
           toUrl={`customer/${item.customerId}`}
@@ -189,7 +189,7 @@ function CustomerCardList(props) {
                                 <div className=" flex font-medium flex-col  md:w-40 max-sm:flex-row w-full max-sm:justify-between  ">
                            
                                     <h4 class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden"> Sector </h4>
-                                    <h4 class=" text-[0.75rem] text-cardBody font-poppins">   
+                                    <h4 class=" text-[0.82rem] text-cardBody font-poppins">   
                                     {item.sector}
                                     </h4>
                                 
@@ -198,7 +198,7 @@ function CustomerCardList(props) {
                                   
 
                                     <h4 class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden">Country</h4>
-                                    <h4 class=" text-[0.75rem] text-cardBody font-poppins">
+                                    <h4 class=" text-[0.82rem] text-cardBody font-poppins">
                                     <ReactCountryFlag
                           countryCode={item.countryAlpha2Code}
                           svg
@@ -215,7 +215,7 @@ function CustomerCardList(props) {
                                 <div className=" flex font-medium flex-col md:w-36 max-sm:flex-row w-full max-sm:justify-between ">
                                     <h4 class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden"># Opportunity</h4>
 
-                                    <div class=" text-[0.75rem] text-cardBody font-poppins text-center">
+                                    <div class=" text-[0.82rem] text-cardBody font-poppins text-center">
                                     {item.oppNo}
 
                                     </div>
@@ -223,7 +223,7 @@ function CustomerCardList(props) {
                                 <div className=" flex font-medium flex-col md:w-36 max-sm:flex-row w-full max-sm:justify-between ">
                                     <h4 class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden">Pipeline Value</h4>
 
-                                    <div class=" text-[0.75rem] text-cardBody font-poppins text-center">
+                                    <div class=" text-[0.82rem] text-cardBody font-poppins text-center">
                                     {item.totalProposalValue}
 
                                     </div>
@@ -231,7 +231,7 @@ function CustomerCardList(props) {
                                 <div className=" flex font-medium flex-col md:w-36 max-sm:flex-row w-full max-sm:justify-between ">
                                     <h4 class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden">Weighted Value</h4>
 
-                                    <div class=" text-[0.75rem] text-cardBody font-poppins text-center">
+                                    <div class=" text-[0.82rem] text-cardBody font-poppins text-center">
                                     {item.weight}
 
                                     </div>
@@ -239,7 +239,7 @@ function CustomerCardList(props) {
                                 <div className=" flex font-medium  flex-col md:w-24 max-sm:max-sm:flex-row w-full max-sm:justify-between ">
                                     <h4 class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden">Assigned to</h4>
 
-                                    <div class=" text-[0.75rem] text-cardBody font-poppins">
+                                    <div class=" text-[0.82rem] text-cardBody font-poppins">
                                     
                                     <span>
               {item.assignedTo === null ? (
@@ -321,7 +321,7 @@ function CustomerCardList(props) {
 
                     </div>
                     </div>
-                    <div class="flex flex-col md:w-[2%]  max-sm:flex-row w-full max-sm:justify-between">
+                    <div class="flex flex-col md:w-[2%]  max-sm:flex-row w-full max-sm:justify-evenly">
                       <div>
                     <Tooltip overlayStyle={{ maxWidth: "300px" }} title={dataLoc}>
             <span
