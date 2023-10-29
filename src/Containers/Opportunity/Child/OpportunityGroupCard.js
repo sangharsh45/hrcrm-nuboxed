@@ -89,7 +89,7 @@ const BussinessCard = (props) => {
              
               &nbsp;             
               {secondaryTitle || ""} 
-              <CheckCircleTwoTone type="check-circle" theme="twoTone" twoToneColor="#24D8A7" />
+              <CheckCircleTwoTone style={{ color: "rgb(14, 149, 144)"}} type="check-circle" theme="twoTone" />
               &nbsp;    
               <StopTwoTone type="stop" theme="twoTone" twoToneColor="red" />
               <Button style={{marginLeft:"0.25rem"}}>Drop</Button>

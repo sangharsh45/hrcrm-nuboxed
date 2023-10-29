@@ -437,7 +437,7 @@ const TaskCardList = (props) => {
 
                           
                     <div class=" ml-2"></div>
-                    <div class="flex flex-col justify-between  ">
+                    <div class="flex flex-col justify-evenly  ">
                     <Tooltip title="Notes">
        <NoteAltIcon
                 onClick={() => {
@@ -461,7 +461,7 @@ const TaskCardList = (props) => {
                     {/* )} */}
             </Tooltip>
             </div>
-                    <div class="flex flex-col justify-between ">
+                    <div class="flex flex-col justify-evenly ">
    
    
           <Tooltip title="Edit">

@@ -91,7 +91,7 @@ const LossColumn = styled.div`
 `;
 
 const StageHeader = styled.div`
-  background-color: rgb(24, 144, 255);
+  background-color: rgb(14, 149, 144);
   color: white;
   font-size: 0.93em;
   width: 250px;

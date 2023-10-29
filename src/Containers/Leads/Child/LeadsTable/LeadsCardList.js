@@ -3,7 +3,7 @@ import { StyledPopconfirm} from "../../../../Components/UI/Antd";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import moment from "moment";
-import ExploreIcon from "@mui/icons-material/Explore";
+import OpenInBrowserIcon from '@mui/icons-material/OpenInBrowser';
 import { getSectors } from "../../../Settings/Sectors/SectorsAction";
 import { MultiAvatar, SubTitle } from "../../../../Components/UI/Elements";
 import "jspdf-autotable";
@@ -24,7 +24,7 @@ import {
   handleCETmodal,
 } from "../../../Leads/LeadsAction";
 import ReactCountryFlag from 'react-country-flag';
-import AssignmentLateIcon from '@mui/icons-material/AssignmentLate';
+import AddchartIcon from '@mui/icons-material/Addchart';   
 import { Button, Tooltip } from "antd";
 import StatusCustomerToggle from "./StatusCustomerToggle";
 import { FormattedMessage } from "react-intl";
@@ -115,7 +115,7 @@ const LeadsCardList = (props) => {
                                             <h4 class=" text-[0.875rem] text-cardBody  font-poppins max-sm:hidden">
                                             Name
                                             </h4>
-                                            <h4 class="text-[0.75rem] text-cardBody font-semibold  font-poppins cursor-pointer">
+                                            <h4 class="text-[0.82rem] text-cardBody font-semibold  font-poppins cursor-pointer">
                                             {item.name}
                                             {/* <span>
               {item.name === null ? (
@@ -148,7 +148,7 @@ const LeadsCardList = (props) => {
                                         </div>
                                 </div>
 
-                                <div class="flex flex-row md:w-[11%] max-sm:flex-row w-full max-sm:justify-between">
+                                <div class="flex flex-row items-center md:w-[11%] max-sm:flex-row w-full max-sm:justify-between">
 
 <div>
 <ButtonGroup>
@@ -212,7 +212,7 @@ const LeadsCardList = (props) => {
           <FormattedMessage id="app.activity" defaultMessage="Activity" />
         }
       >
-<AssignmentLateIcon
+<AddchartIcon
 
 style={{fontSize: "1rem",cursor: 'pointer',}}
 onClick={()=>{
@@ -227,7 +227,7 @@ onClick={()=>{
 <div class="flex"> 
                                 <div className=" flex font-medium flex-col  md:w-32 max-sm:flex-row w-full max-sm:justify-between ">
                            <h4 class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden"> Phone # </h4>
-                           <h4 class=" text-[0.75rem] text-cardBody font-poppins">  
+                           <h4 class=" text-[0.82rem] text-cardBody font-poppins">  
                            {item.countryDialCode && item.phoneNumber ? (
     `${item.countryDialCode} ${item.phoneNumber}`
   ) : (
@@ -240,7 +240,7 @@ onClick={()=>{
                                   
 
                                   <h4 class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden">Country</h4>
-                                  <h4 class=" text-[0.75rem] text-cardBody font-poppins">
+                                  <h4 class=" text-[0.82rem] text-cardBody font-poppins">
                                   <ReactCountryFlag
                         countryCode={item.countryAlpha2Code}
                         svg
@@ -259,7 +259,7 @@ onClick={()=>{
                        <div class="flex"> 
                        <div className=" flex font-medium flex-col  md:w-40 max-sm:flex-row w-full max-sm:justify-between ">
                            <h4 class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden"> Company </h4>
-                           <h4 class=" text-[0.75rem] text-cardBody font-semibold  font-poppins">   
+                           <h4 class=" text-[0.82rem] text-cardBody font-semibold  font-poppins">   
                            <Link to={`leads/${item.leadsId}`} title={item.companyName || "Not Available"}>
   {item.companyName || "Not Available"}
 </Link>
@@ -276,7 +276,7 @@ onClick={()=>{
                 >
                   {" "}
                   <a href={`item.url`} target="_blank">
-                    <ExploreIcon
+                    <OpenInBrowserIcon
                       style={{ cursor: "pointer", color: "green" ,fontSize: "0.8rem",}}
                     />
                   </a>
@@ -288,7 +288,7 @@ onClick={()=>{
                                 <div className=" flex font-medium flex-col  md:w-28 max-sm:flex-row w-full max-sm:justify-between ">
                            
                                     <h4 class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden"> Sector </h4>
-                                    <h4 class=" text-[0.75rem] text-cardBody font-poppins">   
+                                    <h4 class=" text-[0.82rem] text-cardBody font-poppins">   
                                     {item.sector}
                                     </h4>
                                 </div>
@@ -297,7 +297,7 @@ onClick={()=>{
                                 <div className=" flex font-medium flex-col md:w-32 max-sm:flex-row w-full max-sm:justify-between ">
                                     <h4 class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden">Assigned to</h4>
 
-                                    <div class=" text-[0.75rem] text-cardBody font-poppins">
+                                    <div class=" text-[0.82rem] text-cardBody font-poppins">
                                     
                                     <span>
               {item.assignedTo === null ? (
@@ -330,7 +330,7 @@ onClick={()=>{
                    <div className=" flex font-medium flex-col md:w-32 max-sm:flex-row w-full max-sm:justify-between ">
                                     <h4 class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden">Qualified</h4>
 
-                                    <div class=" text-[0.75rem] text-cardBody font-poppins">
+                                    <div class=" text-[0.82rem] text-cardBody font-poppins">
                 {/* qual */}
                                     </div>
                                     <div>
@@ -484,7 +484,7 @@ function RoleButton({ type, iconType, tooltip, role, size, onClick }) {
         ghost={role !== type}
         onClick={onClick}
       >
-        <i className={`${iconType}`} style={{ fontSize: "1.25em" }}></i>
+        <i className={`${iconType}`} style={{ fontSize: "1.1rem" }}></i>
       </Button>
     </Tooltip>
   );

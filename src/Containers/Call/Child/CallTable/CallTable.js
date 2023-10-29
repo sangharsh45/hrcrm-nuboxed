@@ -769,7 +769,7 @@ function CallTable(props) {
                   />
               {/* <p> {item.woner || "Unknown"}</p> */}
               </div>
-              <div class="flex flex-col justify-between  ">
+              <div class="flex flex-col justify-evenly  ">
                     <Tooltip title="Notes">
        <NoteAltIcon
                 onClick={() => {

@@ -66,7 +66,7 @@ useEffect(() => {
             }}
           >
             {" "}
-            <LightbulbIcon />
+            <LightbulbIcon style={{color:"rgb(214, 144, 149)"}} />
           </span>
         </Tooltip>
       </Badge>

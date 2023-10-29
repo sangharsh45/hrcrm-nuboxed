@@ -51,7 +51,41 @@ const SettingsMenu = ({ history, pathName, recruitmentInd }) => (
             Sources
           </a>
         </StyledMenuItem> */}
+   
+
+        <StyledMenuItem key="1">
+          <a
+            href="#"
+            style={{
+              color:
+                pathName === "/recruite" ? "#1890ff" : "rgba(0, 0, 0, 0.65)",
+            }}
+            onClick={() => history.push("/recruite")}
+          >
+            <FormattedMessage
+              id="app.configure"
+              defaultMessage="Configure"
+            />
+      {/* RecruitPro */}
+          </a>
+        </StyledMenuItem>
         <StyledMenuItem key="2">
+          <a
+            href="#"
+            style={{
+              color:
+                pathName === "/categoryTab" ? "#1890ff" : "rgba(0, 0, 0, 0.65)",
+            }}
+            onClick={() => history.push("/categoryTab")}
+          >
+            <FormattedMessage
+              id="app.category"
+              defaultMessage="Category"
+            />
+      {/* Category */}
+          </a>
+        </StyledMenuItem>
+        <StyledMenuItem key="3">
           <a
             href="#"
             style={{
@@ -100,39 +134,7 @@ const SettingsMenu = ({ history, pathName, recruitmentInd }) => (
             />
           </a>
         </StyledMenuItem>  */}
-        <StyledMenuItem key="3">
-          <a
-            href="#"
-            style={{
-              color:
-                pathName === "/categoryTab" ? "#1890ff" : "rgba(0, 0, 0, 0.65)",
-            }}
-            onClick={() => history.push("/categoryTab")}
-          >
-            <FormattedMessage
-              id="app.category"
-              defaultMessage="Category"
-            />
-      {/* Category */}
-          </a>
-        </StyledMenuItem>
-
-        <StyledMenuItem key="7">
-          <a
-            href="#"
-            style={{
-              color:
-                pathName === "/recruite" ? "#1890ff" : "rgba(0, 0, 0, 0.65)",
-            }}
-            onClick={() => history.push("/recruite")}
-          >
-            <FormattedMessage
-              id="app.configure"
-              defaultMessage="Configure"
-            />
-      {/* RecruitPro */}
-          </a>
-        </StyledMenuItem>
+    
 
         {/* <StyledMenuItem key="8">
             <a

@@ -260,7 +260,7 @@ if (fetchingEventListRangeByUserId)
                     </div>
                     </div>
                     
-                    <div class="flex flex-col md: max-sm:flex-row justify-between items-center w-full">
+                    <div class="flex flex-col md: max-sm:flex-row justify-evenly items-center w-full">
        
           <Tooltip title="Edit">
               <BorderColorIcon
