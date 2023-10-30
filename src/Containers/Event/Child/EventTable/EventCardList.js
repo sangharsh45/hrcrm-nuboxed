@@ -113,7 +113,7 @@ if (fetchingEventListRangeByUserId)
                                             <div class="text-[0.875rem] text-cardBody font-poppins max-sm:hidden">
                                             Type
                                             </div>
-                                            <div class="text-[0.75rem] text-cardBody font-poppins cursor-pointer">                                       
+                                            <div class="text-[0.82rem] text-cardBody font-poppins cursor-pointer">                                       
                                             {item.eventType}
        
                                             </div>
@@ -125,7 +125,7 @@ if (fetchingEventListRangeByUserId)
 
                                 <div className=" flex font-medium flex-col  md:w-20 max-sm:flex-row  w-full ">
                                     <div class=" text-[0.875rem] text-cardBody font-[0.875rem] font-poppins max-sm:hidden"> Subject </div>
-                                    <div class=" text-[0.75rem] text-cardBody font-poppins">   
+                                    <div class=" text-[0.82rem] text-cardBody font-poppins">   
                                     {item.eventSubject}
                                     </div>
                                 </div>
@@ -133,19 +133,19 @@ if (fetchingEventListRangeByUserId)
                                 <div class="flex">
                                 <div className=" flex font-medium flex-col md:w-40 max-sm:flex-row  w-full">
                                     <div class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden">Start</div>
-                                    <div class="text-[0.75rem] text-cardBody font-poppins">
+                                    <div class="text-[0.82rem] text-cardBody font-poppins">
                                     {` ${moment(item.startDate).format("llll")}`}
                                     </div>
                                 </div>
                                 <div className=" flex font-medium flex-col md:w-40 max-sm:flex-row  w-full">
                                     <div class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden">End</div>
-                                    <div class="text-[0.75rem] text-cardBody font-poppins">
+                                    <div class="text-[0.82rem] text-cardBody font-poppins">
                                     {` ${moment(item.startDate).format("llll")}`}
                                     </div>
                                 </div>
                                 {/* <div className=" flex font-medium flex-col w-36 ">
                                   <div class="text-[0.875rem] text-cardBody font-poppins">Team</div>
-                                  <div class="text-[0.75rem] text-cardBody font-poppins">
+                                  <div class="text-[0.82rem] text-cardBody font-poppins">
                                   <span>
                 {item.candidateName === null ? (
                 ""
@@ -164,7 +164,7 @@ if (fetchingEventListRangeByUserId)
                                 <div className=" flex font-medium flex-col md:w-32 max-sm:flex-row  w-full ">
                                     <div class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden">Include</div>
 
-                                    <div class=" text-[0.75rem] text-cardBody font-poppins">
+                                    <div class=" text-[0.82rem] text-cardBody font-poppins">
                                     <Avatar.Group
                    maxCount={7}
                   maxStyle={{ color: "#f56a00", backgroundColor: "#fde3cf" }}
@@ -192,7 +192,7 @@ if (fetchingEventListRangeByUserId)
                                 <div className="flex font-medium flex-col md:w-48 max-sm:flex-row  w-full ">
                                     <div class="text-[0.875rem] text-cardBody font-poppins max-sm:hidden">Assigned To</div>
 
-                                    <div class="text-[0.75rem] text-cardBody font-poppins">
+                                    <div class="text-[0.82rem] text-cardBody font-poppins">
                                     <Tooltip title={item.assignedToName}>
               <SubTitle>
                 <MultiAvatar2

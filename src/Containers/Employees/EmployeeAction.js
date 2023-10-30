@@ -874,6 +874,13 @@ export const handleEmployeePulseDrawerModal = (modalProps) => (dispatch) => {
   });
 };
 
+export const handleEmployeeDocumentDrawerModal = (modalProps) => (dispatch) => {
+  dispatch({
+    type: types.HANDLE_EMPLOYEE_DOCUMENT_DRAWER_MODAL,
+    payload: modalProps,
+  });
+};
+
 export const getEmployeeTreeMap = (employeeId) => (dispatch) => {
   dispatch({
     type: types.GET_EMPLOYEE_TREE_MAP_REQUEST,

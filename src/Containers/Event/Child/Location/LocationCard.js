@@ -24,7 +24,7 @@ const LocationCard = (props) => {
 Name
 </div>
 
-<div class=" font-normal text-sm text-cardBody font-poppins">
+<div class=" font-normal text-[0.82rem]text-cardBody font-poppins">
   {item.locationName}
 </div>
 {/* </Tooltip>   */}
@@ -36,7 +36,7 @@ Name
 Country
 </div>
 
-<div class=" font-normal text-sm text-cardBody font-poppins">
+<div class=" font-normal text-[0.82rem] text-cardBody font-poppins">
   {item.country_name}
 </div>
 </div> 
@@ -46,7 +46,7 @@ Country
 Address
 </div>
 
-<div class=" font-normal text-sm text-cardBody font-poppins">
+<div class=" font-normal text-[0.82rem] text-cardBody font-poppins">
 <span>
             {`${(item.address && item.address[0].city) || ""}` +
               " " +
@@ -61,7 +61,7 @@ Address
 Production
 </div>
 
-<div class=" font-normal text-sm text-cardBody font-poppins">
+<div class=" font-normal text-[0.82rem] text-cardBody font-poppins">
   <Switch className="toggle-clr"
                         checked={item.productionInd}
                         isLoading={true}
@@ -76,7 +76,7 @@ Production
 Inventory
 </div>
 
-<div class=" font-normal text-sm text-cardBody font-poppins">
+<div class=" font-normal text-[0.82rem] text-cardBody font-poppins">
 <Switch className="toggle-clr"
                         checked={item.inventoryInd}
                         isLoading={true}
@@ -90,7 +90,7 @@ Inventory
 <div class=" text-sm text-cardBody font-semibold font-poppins max-sm:hidden">
 Billing
 </div>
-<div class=" font-normal text-sm text-cardBody font-poppins">
+<div class=" font-normal text-[0.82rem] text-cardBody font-poppins">
   <Switch className="toggle-clr"
                         checked={item.billingInd}
                         isLoading={true}
@@ -106,7 +106,7 @@ Billing
 <div class=" text-sm text-cardBody font-semibold font-poppins max-sm:hidden">
 Corporate
 </div>
-<div class=" font-normal text-sm text-cardBody font-poppins">
+<div class=" font-normal text-[0.82rem] text-cardBody font-poppins">
   <Switch className="toggle-clr"
                         checked={item.corporateInd}
                         isLoading={true}
@@ -120,7 +120,7 @@ Corporate
 <div class=" text-sm text-cardBody font-semibold font-poppins max-sm:hidden">
 Project
 </div>
-<div class=" font-normal text-sm text-cardBody font-poppins">
+<div class=" font-normal text-[0.82rem] text-cardBody font-poppins">
   <Switch className="toggle-clr"
                         checked={item.projectInd}
                         isLoading={true}
@@ -134,7 +134,7 @@ Project
 <div class=" text-sm text-cardBody font-semibold font-poppins max-sm:hidden">
 Retail
 </div>
-<div class=" font-normal text-sm text-cardBody font-poppins">
+<div class=" font-normal text-[0.82rem] text-cardBody font-poppins">
   <Switch className="toggle-clr"
                         checked={item.retailInd}
                         isLoading={true}

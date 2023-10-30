@@ -106,7 +106,7 @@ function handleSetCurrentCandidateId(candidateId) {
                     Name
          
             </div> 
-            <div class=" font-normal text-sm text-cardBody font-semibold  font-poppins">
+            <div class=" font-normal text-[0.82rem]text-cardBody font-semibold  font-poppins">
             {/* <Link to={`/provider/${item.serviceId}`} style={{cursor:"pointer"}}>
             {item.name}
             </Link> */}
@@ -125,7 +125,7 @@ function handleSetCurrentCandidateId(candidateId) {
                       Department
                       </div>
 
-                      <div class=" font-normal text-sm text-cardBody font-poppins">
+                      <div class=" font-normal text-[0.82rem] text-cardBody font-poppins">
                         {item.department}
                       </div>
                       {/* </Tooltip>   */}
@@ -137,7 +137,7 @@ function handleSetCurrentCandidateId(candidateId) {
                         Role
                         </div>
 
-                        <div class=" font-normal text-sm text-cardBody font-poppins">
+                        <div class=" font-normal text-[0.82rem] text-cardBody font-poppins">
                           {item.role}
                         </div>
                      
@@ -151,7 +151,7 @@ function handleSetCurrentCandidateId(candidateId) {
                         Mobile #
                         </div>
 
-                        <div class=" font-normal text-sm text-cardBody font-poppins">
+                        <div class=" font-normal text-[0.82rem] text-cardBody font-poppins">
                           {item.mobileNo}
                         </div>
                    
@@ -163,7 +163,7 @@ function handleSetCurrentCandidateId(candidateId) {
                       Email #
                       </div>
 
-                      <div class=" font-normal text-sm text-cardBody font-poppins">
+                      <div class=" font-normal text-[0.82rem] text-cardBody font-poppins">
                       {item.emailId}
                       </div>
                     
@@ -174,7 +174,7 @@ function handleSetCurrentCandidateId(candidateId) {
                 
                     <div className=" flex font-medium flex-col md:w-40 max-sm:flex-row justify-between w-full mt-1">
                   
-                      <div class=" text-sm text-cardBody font-semibold font-poppins max-sm:hidden">
+                      <div class="text-[0.82rem]  text-cardBody font-semibold font-poppins max-sm:hidden">
                      
                       Type
                       </div>

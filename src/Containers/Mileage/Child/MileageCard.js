@@ -57,7 +57,7 @@ class MileageCard extends React.Component {
                       <div class="flex items-center justify-between ">
                       <h4 class="text-sm">Voucher ID</h4>
                         <Header>
-<div class="text-xs font-semibold " onClick={() => { this.handleExpand(item.voucherId) 
+<div class="text-[0.82rem] font-semibold " onClick={() => { this.handleExpand(item.voucherId) 
                 this.props.handleMileageVoucherIdDrwer(true)}}>
          {item.voucherId}
          </div>
@@ -73,11 +73,11 @@ class MileageCard extends React.Component {
            
                         <div class="flex  justify-between">
                             <h3 class="text-sm">Voucher Date</h3>
-                            <h4 class="text-xs">{dayjs(item.voucherDate).format("MMM Do YY")}</h4>
+                            <h4 class="text-[0.82rem]">{dayjs(item.voucherDate).format("MMM Do YY")}</h4>
                         </div>
                         <div class="flex justify-between">
                     <h4 class="text-sm">Amount</h4> 
-                    <h5 class="text-xs">{item.amount}</h5>
+                    <h5 class="text-[0.82rem]">{item.amount}</h5>
                     </div>
 
                     <div class="flex  justify-between" >

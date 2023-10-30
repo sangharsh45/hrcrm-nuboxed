@@ -93,7 +93,7 @@ function LeaveCardList (props) {
             </div> 
          
         
-            <div class=" font-normal text-xs text-cardBody font-poppins">
+            <div class=" font-normal text-[0.82rem] text-cardBody font-poppins">
    {` ${moment.utc(item.startDate).format("ll")}`}
    </div>
           
@@ -106,7 +106,7 @@ function LeaveCardList (props) {
                       </div>
 
                             
-            <div class=" font-normal text-xs text-cardBody font-poppins">
+            <div class=" font-normal text-[0.82rem] text-cardBody font-poppins">
    {` ${moment.utc(item.endDate).format("ll")}`}
    </div>
           
@@ -119,7 +119,7 @@ function LeaveCardList (props) {
                         Cover
                         </div>
 
-                        <div class=" font-normal text-xs text-cardBody font-poppins">
+                        <div class=" font-normal text-[0.82rem] text-cardBody font-poppins">
                           {item.coverDetails}
                         </div>
                      
@@ -131,7 +131,7 @@ function LeaveCardList (props) {
                         Reason
                         </div>
 
-                        <div class=" font-normal text-xs text-cardBody font-poppins">
+                        <div class=" font-normal text-[0.82rem] text-cardBody font-poppins">
                           {item.reason}
                         </div>
                    
@@ -183,7 +183,7 @@ function LeaveCardList (props) {
               )}
                                     </div>
                                 </div>
-                                <div class="flex flex-col w-20">
+                                <div class="flex flex-col justify-evenly w-20">
                     <div >
                     {item.status === "Pending" ? 
             <Tooltip title="Edit">

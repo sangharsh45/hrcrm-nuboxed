@@ -310,7 +310,7 @@ function InvestorCardList(props) {
 
                     </div>
                     </div>
-                    <div class="flex flex-col md:w-[2%] max-sm:flex-row">
+                    <div class="flex justify-evenly flex-col md:w-[2%] max-sm:flex-row">
                       <div>
                     <Tooltip overlayStyle={{ maxWidth: "300px" }} title={dataLoc}>
             <span

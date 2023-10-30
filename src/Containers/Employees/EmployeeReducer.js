@@ -20,6 +20,8 @@ const initialState = {
   fetchingEmployeeError: false,
   employees: [],
 
+  addDrawerEmployeeDocumentModal:false,
+
   fetchingEmployeeData: false,
   fetchingEmployeeDataError: false,
   employeesData: [],
@@ -604,6 +606,10 @@ export const EmployeeReducer = (state = initialState, action) => {
 
                             case types.HANDLE_EMPLOYEE_PULSE_DRAWER_MODAL:
                               return { ...state, addDrawerEmployeePulseModal: action.payload };
+
+                              case types.HANDLE_EMPLOYEE_DOCUMENT_DRAWER_MODAL:
+                              return { ...state, addDrawerEmployeeDocumentModal: action.payload };
+
 
 
                               case types.GET_EMPLOYEE_TREE_MAP_REQUEST:

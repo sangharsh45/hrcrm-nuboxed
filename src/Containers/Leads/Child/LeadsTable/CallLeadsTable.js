@@ -11,7 +11,7 @@ import moment from 'moment';
 
 const CallLeadsTable = (props) => {
   useEffect(() => {
-     props.getCallTimeline(props.rowdata.leadsId);
+      props.getCallTimeline(props.rowdata.leadsId);
   }, []);
 
   const { callTimeline, ratingValue } = props;

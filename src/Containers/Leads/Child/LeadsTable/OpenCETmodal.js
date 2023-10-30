@@ -13,6 +13,7 @@ import AddCallTaskModal from "./AddCallTaskModal";
 import { FormattedMessage } from "react-intl";
 import { Tooltip } from "antd";
 import CallLeadsTable from "./CallLeadsTable";
+import LeadsActivityTab from "./LeadsActivityTab";
 const CallForm = lazy(() =>
   import("../../../Call/Child/CallForm")
 );
@@ -30,7 +31,7 @@ function  OpenCETmodal(props)  {
   return (
     <>
       <StyledDrawer
-        title={"All"}
+        title={props.rowdata.name}
         width="60%"
         style={{marginTop:"5rem"}}
         visible={props.openCETmodal}
@@ -61,26 +62,13 @@ function  OpenCETmodal(props)  {
             style={{ overflow: "visible", width: "53vw", padding: "15px" }}
             animated={false}
           >
-            {/* <TabPane
-              tab={
-                <span>
-                 <i class="fas fa-phone-square"></i>&nbsp;
-                  Calls
-                </span>
-              }
-              key="1"
-            >
-              <Suspense fallback={"loading ..."}>
-                <CallForm {...formProps} />
-              </Suspense>
-            </TabPane> */}
             <TabPane
               tab={
                 <>
                   <span>
                     
                        <i class="fas fa-phone-square"></i>&nbsp;
-                  Calls
+                  Activity
                   </span>
                 
                     <>
@@ -117,37 +105,15 @@ function  OpenCETmodal(props)  {
             >
               <Suspense fallback={"Loading ..."}>
                 {" "}
-                <CallLeadsTable 
-                 rowdata={props.rowdata}
+                <CallLeadsTable
+                  rowdata={props.rowdata}
                 />
+                {/* <LeadsActivityTab 
+                 rowdata={props.rowdata}
+                /> */}
               </Suspense>
             </TabPane>
-            <TabPane
-              tab={
-                <span>
-                  <i class="fas fa-tasks"></i>&nbsp;
-                  Events
-                </span>
-              }
-              key="2"
-            >
-              <Suspense fallback={"loading ..."}>
-                <EventForm {...formProps}/>
-              </Suspense>
-            </TabPane>
-            <TabPane
-              tab={
-                <span>
-                  <i class="far fa-calendar-check"></i>&nbsp;
-                  Tasks
-                </span>
-              }
-              key="3"
-            >
-              <Suspense fallback={"loading ..."}>
-                <TaskForm {...formProps}/>
-              </Suspense>
-            </TabPane>
+          
           </StyledTabs>
         </TabsWrapper>
         <AddCallTaskModal
