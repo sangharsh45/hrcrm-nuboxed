@@ -7,37 +7,15 @@ import TabsWrapper1 from "../../Components/UI/Layout/TabsWrapper1";
 import PitchHotColdWarm from "./PitchHotColdWarm";
 
 const TabPane = StyledTabs.TabPane;
-function handleRefreshPage() {
-  window.location.reload();
-}
+
 class InvestorsPitchTab extends Component {
   constructor(props) {
     super(props);
     this.state = {
       activeKey: "1",
-      contactPopover: false,
-      partnerPopover: false,
-      quotProPopover: false,
-      deliveryProPopover: false,
-      breadCumb: false,
-      visibleModal: false,
-      recriutmentdashboard: false,
-      currentTabName: "",
-      currentTabId: "",
-      customField: [],
-      ganttChart: false,
-      costId: "",
     };
   }
 
-//   componentDidMount() {
-//     const { getTodosCount, userId, startDate, endDate } = this.props;
-//     getTodosCount(userId, startDate, endDate);
-//   }
-  handleContactPopoverVisibleChange = () =>
-    this.setState({ contactPopover: !this.state.contactPopover });
-  handlepartnerPopoverVisibleChange = () =>
-    this.setState({ partnerPopover: !this.state.partnerPopover });
   handleTabChange = (key) => {
     this.setState({ activeKey: key });
   };

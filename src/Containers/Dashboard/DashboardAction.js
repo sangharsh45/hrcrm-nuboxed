@@ -1230,7 +1230,7 @@ export const getJumpCustomerlist2 = (userId,startDate, endDate) => (dispatch) =>
       });
     });
 };
-export const getDashCustomerAddedLeads = (userId,endDate,startDate) => (dispatch) => {
+export const getDashCustomerAddedLeads = (userId,startDate,endDate) => (dispatch) => {
   dispatch({
     type: types.GET_DASH_CUSTOMER_ADDED_LEADS_REQUEST,
   });
@@ -1283,7 +1283,7 @@ export const getJumpTasklist = (userId,startDate, endDate) => (dispatch) => {
 
 
 
-export const getDashCustomerAddedContacts = (userId,endDate,startDate) => (dispatch) => {
+export const getDashCustomerAddedContacts = (userId,startDate,endDate) => (dispatch) => {
   dispatch({
     type: types.GET_DASH_CUSTOMER_ADDED_CONTACTS_REQUEST,
   });
@@ -1504,7 +1504,7 @@ export const getInvHotColdWarm = (userId,startDate, endDate) => (
     });
 };
 
-export const getDashInvestorAddedPitch = (userId,endDate,startDate) => (dispatch) => {
+export const getDashInvestorAddedPitch = (userId,startDate,endDate) => (dispatch) => {
   dispatch({
     type: types.GET_DASH_INVESTOR_ADDED_PITCH_REQUEST,
   });
@@ -1530,7 +1530,7 @@ export const getDashInvestorAddedPitch = (userId,endDate,startDate) => (dispatch
     });
     
 };
-export const getDashInvestorAddedContactInvest = (userId,endDate,startDate) => (dispatch) => {
+export const getDashInvestorAddedContactInvest = (userId,startDate,endDate) => (dispatch) => {
   dispatch({
     type: types.GET_DASH_INVESTOR_ADDED_CONTACTINVEST_REQUEST,
   });
@@ -1560,7 +1560,7 @@ export const handleLeadQualifiedDrawer = (modalProps)=>(dispatch)=>{
     payload:modalProps
   });
 }
-export const getLeadQualified = (userId,endDate,startDate)=>(dispatch)=>{
+export const getLeadQualified = (userId,startDate,endDate)=>(dispatch)=>{
   dispatch({
     type:types.GET_LEADS_QUALIFIED_REQUEST,
   });
@@ -1701,7 +1701,7 @@ export const getLeadQualified = (userId,endDate,startDate)=>(dispatch)=>{
             payload:modalProps
           });
         }
-        export const getPitchAdded = (userId,endDate,startDate)=>(dispatch)=>{
+        export const getPitchAdded = (userId,startDate,endDate)=>(dispatch)=>{
           dispatch({
             type:types.GET_PITCH_ADDED_REQUEST,
           });
@@ -1729,12 +1729,12 @@ export const getLeadQualified = (userId,endDate,startDate)=>(dispatch)=>{
                 payload:modalProps
               });}
 
-            export const getDealAdded = (userId,endDate,startDate)=>(dispatch)=>{
+            export const getDealAdded = (userId,startDate,endDate)=>(dispatch)=>{
               dispatch({
                 type:types.GET_DEAL_ADDED_REQUEST,
               });
               axios
-              .get(`${base_url}/investorLeads/createded-investorLeads/list/${userId}?endDate=${endDate}&startDate=${startDate}`, {
+              .get(`${base_url}/InvestorOpportunity/added/date-range/${userId}?endDate=${endDate}&startDate=${startDate}`, {
                 headers: {
                   Authorization: "Bearer " + sessionStorage.getItem("token") || "",
                 },
@@ -1757,12 +1757,12 @@ export const getLeadQualified = (userId,endDate,startDate)=>(dispatch)=>{
                     payload:modalProps
                   });}
     
-                export const getDealClosed = (userId,endDate,startDate)=>(dispatch)=>{
+                export const getDealClosed = (userId,startDate,endDate)=>(dispatch)=>{
                   dispatch({
                     type:types.GET_DEAL_CLOSED_REQUEST,
                   });
                   axios
-                  .get(`${base_url}/investorLeads/createded-investorLeads/list/${userId}?endDate=${endDate}&startDate=${startDate}`, {
+                  .get(`${base_url}/InvestorOpportunity/ClosedList/date-range/${userId}?endDate=${endDate}&startDate=${startDate}`, {
                     headers: {
                       Authorization: "Bearer " + sessionStorage.getItem("token") || "",
                     },
@@ -1778,3 +1778,148 @@ export const getLeadQualified = (userId,endDate,startDate)=>(dispatch)=>{
                       type: types.GET_DEAL_CLOSED_FAILURE,
                       payload: err,
                     });});};  
+
+export const handleLeadHCWdrawer = (modalProps)=>(dispatch)=>{
+  dispatch({
+    type:types.HANDLE_LEAD_HCW_DRAWER,
+    payload:modalProps
+  });}
+
+  export const getLeadHotList = (userId,startDate,endDate)=>(dispatch)=>{
+    dispatch({
+      type:types.GET_LEAD_HOTLIST_REQUEST,
+    });
+    axios
+    .get(`${base_url}/leads/hot/list/date-range/${userId}?endDate=${endDate}&startDate=${startDate}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      dispatch({
+        type: types.GET_LEAD_HOTLIST_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      dispatch({
+        type: types.GET_LEAD_HOTLIST_FAILURE,
+        payload: err,
+      });});}; 
+
+      export const getLeadColdList = (userId,startDate,endDate)=>(dispatch)=>{
+        dispatch({
+          type:types.GET_LEAD_COLDLIST_REQUEST,
+        });
+        axios
+        .get(`${base_url}/leads/cold/list/date-range/${userId}?endDate=${endDate}&startDate=${startDate}`, {
+          headers: {
+            Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+          },
+        })
+        .then((res) => {
+          dispatch({
+            type: types.GET_LEAD_COLDLIST_SUCCESS,
+            payload: res.data,
+          });
+        })
+        .catch((err) => {
+          dispatch({
+            type: types.GET_LEAD_COLDLIST_FAILURE,
+            payload: err,
+          });});};
+
+          export const getLeadWarmList = (userId,startDate,endDate)=>(dispatch)=>{
+            dispatch({
+              type:types.GET_LEAD_WARMLIST_REQUEST,
+            });
+            axios
+            .get(`${base_url}/leads/warm/list/date-range/${userId}?endDate=${endDate}&startDate=${startDate}`, {
+              headers: {
+                Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+              },
+            })
+            .then((res) => {
+              dispatch({
+                type: types.GET_LEAD_WARMLIST_SUCCESS,
+                payload: res.data,
+              });
+            })
+            .catch((err) => {
+              dispatch({
+                type: types.GET_LEAD_WARMLIST_FAILURE,
+                payload: err,
+              });});};         
+
+              export const handlePitchHCWdrawer = (modalProps)=>(dispatch)=>{
+                dispatch({
+                  type:types.HANDLE_PITCH_HCW_DRAWER,
+                  payload:modalProps
+                });}                       
+
+                export const getPitchHotList = (userId,startDate,endDate)=>(dispatch)=>{
+                  dispatch({
+                    type:types.GET_PITCH_HOTLIST_REQUEST,
+                  });
+                  axios
+                  .get(`${base_url}/investorLeads/type-hot/date-range/${userId}?endDate=${endDate}&startDate=${startDate}`, {
+                    headers: {
+                      Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+                    },
+                  })
+                  .then((res) => {
+                    dispatch({
+                      type: types.GET_PITCH_HOTLIST_SUCCESS,
+                      payload: res.data,
+                    });
+                  })
+                  .catch((err) => {
+                    dispatch({
+                      type: types.GET_PITCH_HOTLIST_FAILURE,
+                      payload: err,
+                    });});}; 
+              
+                    export const getPitchColdList = (userId,startDate,endDate)=>(dispatch)=>{
+                      dispatch({
+                        type:types.GET_PITCH_COLDLIST_REQUEST,
+                      });
+                      axios
+                      .get(`${base_url}/investorLeads/type-cold/date-range/${userId}?endDate=${endDate}&startDate=${startDate}`, {
+                        headers: {
+                          Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+                        },
+                      })
+                      .then((res) => {
+                        dispatch({
+                          type: types.GET_PITCH_COLDLIST_SUCCESS,
+                          payload: res.data,
+                        });
+                      })
+                      .catch((err) => {
+                        dispatch({
+                          type: types.GET_PITCH_COLDLIST_FAILURE,
+                          payload: err,
+                        });});};
+              
+                        export const getPitchWarmList = (userId,startDate,endDate)=>(dispatch)=>{
+                          dispatch({
+                            type:types.GET_PITCH_WARMLIST_REQUEST,
+                          });
+                          axios
+                          .get(`${base_url}/investorLeads/type-warm/date-range/${userId}?endDate=${endDate}&startDate=${startDate}`, {
+                            headers: {
+                              Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+                            },
+                          })
+                          .then((res) => {
+                            dispatch({
+                              type: types.GET_PITCH_WARMLIST_SUCCESS,
+                              payload: res.data,
+                            });
+                          })
+                          .catch((err) => {
+                            dispatch({
+                              type: types.GET_PITCH_WARMLIST_FAILURE,
+                              payload: err,
+                            });});};         
+                             

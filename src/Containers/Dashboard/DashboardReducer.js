@@ -317,6 +317,32 @@ fetchingDealClosed: false,
 fetchingDealClosedError: false,
 showClosedDeal:[],
 
+openLeadHCWdrawer:false,
+fetchingHottestLeads: false,
+fetchingHottestLeadsError: false,
+showHottestLeads:[],
+
+fetchingColdestLeads: false,
+fetchingColdestLeadsError: false,
+showColdestLeads:[],
+
+fetchingWarmedLeads: false,
+fetchingWarmedLeadsError: false,
+showWarmedLeads:[],
+
+openPitchHCWdrawer:false,
+fetchingHottestPitch: false,
+fetchingHottestPitchError:false,
+showHottestPitch:[],
+
+fetchingColdestPitch: false,
+fetchingColdestPitchError: false,
+showColdestPitch:[],
+
+fetchingWarmedPitch: false,
+fetchingWarmedPitchError: false,
+showWarmedPitch:[],
+
 };
 
 export const dashboardReducer = (state = initialState, action) => {
@@ -1433,7 +1459,105 @@ case types.GET_JUMPSTART_CUSTOMER2_LIST_REQUEST:
                   fetchingDealClosed: false,
                   fetchingDealClosedError: true,
                 };         
-    default:
+    
+                case types.HANDLE_LEAD_HCW_DRAWER: 
+                return {...state, openLeadHCWdrawer:action.payload};
+
+                case types.GET_LEAD_HOTLIST_REQUEST:
+                  return { ...state, fetchingHottestLeads: true };
+                case types.GET_LEAD_HOTLIST_SUCCESS:
+                  return {
+                    ...state,
+                    fetchingHottestLeads: false,
+                    showHottestLeads: action.payload,
+                  };
+                case types.GET_LEAD_HOTLIST_FAILURE:
+                  return {
+                    ...state,
+                    fetchingHottestLeads: false,
+                    fetchingHottestLeadsError: true,
+                  };    
+
+                  case types.GET_LEAD_COLDLIST_REQUEST:
+                    return { ...state, fetchingColdestLeads: true };
+                  case types.GET_LEAD_COLDLIST_SUCCESS:
+                    return {
+                      ...state,
+                      fetchingColdestLeads: false,
+                      showColdestLeads: action.payload,
+                    };
+                  case types.GET_LEAD_COLDLIST_FAILURE:
+                    return {
+                      ...state,
+                      fetchingColdestLeads: false,
+                      fetchingColdestLeadsError: true,
+                    };     
+
+                    case types.GET_LEAD_WARMLIST_REQUEST:
+                      return { ...state, fetchingWarmedLeads: true };
+                    case types.GET_LEAD_WARMLIST_SUCCESS:
+                      return {
+                        ...state,
+                        fetchingWarmedLeads: false,
+                        showWarmedLeads: action.payload,
+                      };
+                    case types.GET_LEAD_WARMLIST_FAILURE:
+                      return {
+                        ...state,
+                        fetchingWarmedLeads: false,
+                        fetchingWarmedLeadsError: true,
+                      };                 
+                        
+                      case types.HANDLE_PITCH_HCW_DRAWER: 
+                      return {...state, openPitchHCWdrawer:action.payload};            
+
+                      case types.GET_PITCH_HOTLIST_REQUEST:
+                        return { ...state, fetchingHottestPitch: true };
+                      case types.GET_PITCH_HOTLIST_SUCCESS:
+                        return {
+                          ...state,
+                          fetchingHottestPitch: false,
+                          showHottestPitch: action.payload,
+                        };
+                      case types.GET_PITCH_HOTLIST_FAILURE:
+                        return {
+                          ...state,
+                          fetchingHottestPitch: false,
+                          fetchingHottestPitchError: true,
+                        };    
+      
+                        case types.GET_PITCH_COLDLIST_REQUEST:
+                          return { ...state, fetchingColdestPitch: true };
+                        case types.GET_PITCH_COLDLIST_SUCCESS:
+                          return {
+                            ...state,
+                            fetchingColdestPitch: false,
+                            showColdestPitch: action.payload,
+                          };
+                        case types.GET_PITCH_COLDLIST_FAILURE:
+                          return {
+                            ...state,
+                            fetchingColdestPitch: false,
+                            fetchingColdestPitchError: true,
+                          };     
+      
+                          case types.GET_PITCH_WARMLIST_REQUEST:
+                            return { ...state, fetchingWarmedPitch: true };
+                          case types.GET_PITCH_WARMLIST_SUCCESS:
+                            return {
+                              ...state,
+                              fetchingWarmedPitch: false,
+                              showWarmedPitch: action.payload,
+                            };
+                          case types.GET_PITCH_WARMLIST_FAILURE:
+                            return {
+                              ...state,
+                              fetchingWarmedPitch: false,
+                              fetchingWarmedPitchError: true,
+                            }; 
+
+
+                default:
       return state;
   }
 };
