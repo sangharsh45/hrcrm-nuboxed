@@ -66,7 +66,7 @@ function ExpenseCard(props) {
                       <div class="flex items-center justify-between">
                       <h4 class="text-sm">Voucher ID</h4>
                         <Header>
-<div class="text-xs" onClick={() => { handleExpand(item.voucherId);
+<div class="text-[0.82rem]" onClick={() => { handleExpand(item.voucherId);
                 handleSetParticularRowData(item);
                 props.handleExpenseVoucherIdDrawer(true);}}>
          {item.voucherId}
@@ -75,15 +75,15 @@ function ExpenseCard(props) {
                         </div>
                         <div class="flex justify-between">
                             <h3 class="text-sm">Voucher Name</h3>
-                            <h4 class="text-xs">{item.voucherName}</h4>
+                            <h4 class="text-[0.82rem]">{item.voucherName}</h4>
                         </div>
                         <div class="flex justify-between">
                             <h3 class="text-sm">Voucher Date</h3>
-                            <h4 class="text-xs">{dayjs(item.voucherDate).format("MMM Do YY")}</h4>
+                            <h4 class="text-[0.82rem]">{dayjs(item.voucherDate).format("MMM Do YY")}</h4>
                         </div>
                         <div class="flex justify-between">
                     <h4 class="text-sm">Total Amount</h4> 
-                    <h5 class="text-xs">{item.totalAmount}</h5>
+                    <h5 class="text-[0.82rem]">{item.totalAmount}</h5>
                     </div>
                         {item.status === "Approved" && (
                  <div

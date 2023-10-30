@@ -1,4 +1,5 @@
 import React, { lazy, Suspense } from "react";
+import AddCallTaskModal from "./AddCallTaskModal";
 import { StyledDrawer } from "../../../../Components/UI/Antd";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
@@ -12,7 +13,6 @@ import LeadsOpportunity from "../LeadsDetailTab/OpportunityTab/LeadsOpportunity"
 import { FormattedMessage } from "react-intl";
 import { Tooltip } from "antd";
 import CallLeadsTable from "./CallLeadsTable";
-import LeadsActivityTab from "./LeadsActivityTab";
 const CallForm = lazy(() =>
   import("../../../Call/Child/CallForm")
 );
@@ -25,37 +25,7 @@ const TaskForm = lazy(() =>
 
 const TabPane = StyledTabs.TabPane;
 
-const AddCallTaskModal = (props) => {
-  const { addCallTaskModal, handleLeadCallModal, ...formProps } = props;
-  const isSmallScreen = window.innerWidth <= 600;
-  const drawerWidth = isSmallScreen ? "90%" : "55%";
-  return (
-    <>
-      <StyledDrawer
-        title={<FormattedMessage
-          id="app.schedulecall"
-          defaultMessage="Schedule Call"
-        />}
-        width={drawerWidth}
-        visible={addCallTaskModal}
-        maskClosable={false}
-        destroyOnClose
-        maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}
-        onClose={() => handleLeadCallModal(false)}
-        style={{marginTop:"5rem"}}
-        footer={null}
-      >
-        <Suspense fallback={<BundleLoader />}>
-          {/* <CallTaskForm
-          rowdata={props.rowdata}
-          /> */}
-          <LeadsActivityTab/>
-
-        </Suspense>
-      </StyledDrawer>
-    </>
-  );
-  function LeadsActivityTab (props) {
+function LeadsActivityTab (props) {
     const { addCallTaskModal, handleLeadCallModal } = props;
       const { ...formProps } = props;
       console.log(props.rowdata)
@@ -80,7 +50,7 @@ const AddCallTaskModal = (props) => {
                   <CallForm {...formProps} />
                 </Suspense>
               </TabPane>
-          
+        
               <TabPane
                 tab={
                   <span>
@@ -109,14 +79,12 @@ const AddCallTaskModal = (props) => {
               </TabPane>
             </StyledTabs>
           </TabsWrapper>
-          <AddCallTaskModal
+          {/* <AddCallTaskModal
           rowdata={props.rowdata}
             addCallTaskModal={addCallTaskModal}
             handleLeadCallModal={handleLeadCallModal}
-          />
+          /> */}
         </>
       );
   }
-};
-
-export default AddCallTaskModal;
+  export default LeadsActivityTab;

@@ -176,7 +176,7 @@ const TaskCardList = (props) => {
                                             <div class="text-[0.875rem] text-cardBody font-poppins max-sm:hidden">
                                             Type
                                             </div>
-                                            <div class="text-[0.75rem] text-cardBody font-poppins cursor-pointer">                                       
+                                            <div class="text-[0.82rem] text-cardBody font-poppins cursor-pointer">                                       
                                             {item.taskType}
        
                                             </div>
@@ -188,7 +188,7 @@ const TaskCardList = (props) => {
 
                                 <div className=" flex font-medium flex-col  md:w-32 max-sm:flex-row w-full ">
                                     <div class=" text-[0.875rem] text-cardBody font-[0.875rem] font-poppins max-sm:hidden"> Name </div>
-                                    <div class=" text-[0.75rem] text-cardBody font-semibold  font-poppins">   
+                                    <div class=" text-[0.82rem] text-cardBody font-semibold  font-poppins">   
                                     <span   
                 onClick={() => {
                   props.handleTaskopenModal(true);               
@@ -211,7 +211,7 @@ const TaskCardList = (props) => {
                                 <div className="flex font-medium flex-col md:w-24 max-sm:flex-row  w-full ">
                        
                        <div class="text-[0.875rem] text-cardBody font-poppins max-sm:hidden">End</div>
-                       <div class="text-[0.75rem] text-cardBody font-poppins"> 
+                       <div class="text-[0.82rem] text-cardBody font-poppins"> 
                         {`${moment(item.endDate).format("ll")}`}</div>
                    </div>
                                 <div class="flex flex-col w-24">
@@ -285,7 +285,7 @@ const TaskCardList = (props) => {
                    </div>
                     <div className=" flex font-medium flex-col md:w-28 max-sm:flex-row justify-between w-full ">
                                   <div class="text-[0.875rem] text-cardBody font-poppins max-sm:hidden">Assigned To</div>
-                                  <div class="text-[0.75rem] text-cardBody font-poppins mb-2">
+                                  <div class="text-[0.82rem] text-cardBody font-poppins mb-2">
                                   {item.assignedToName === null ? (
               ""
             ) : (
@@ -301,7 +301,7 @@ const TaskCardList = (props) => {
                     <div class="flex max-sm:mt-4 w-36">
                                 <div className=" flex font-medium flex-col  md:w-32 max-sm:flex-row justify-between w-full ">
                                     <div class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden">Owner</div>
-                                    <div class="text-[0.75rem] text-cardBody font-poppins mb-2">
+                                    <div class="text-[0.82rem] text-cardBody font-poppins mb-2">
                                     <MultiAvatar
                                     // style={{marginBottom:"0.25rem"}}
                   primaryTitle={item.submittedBy}
@@ -315,7 +315,7 @@ const TaskCardList = (props) => {
                                 {/* <div className=" flex font-medium flex-col w-32 ">
                                     <div class=" text-[0.875rem] text-cardBody font-poppins">Team</div>
 
-                                    <div class=" text-[0.75rem] text-cardBody font-poppins">
+                                    <div class=" text-[0.82rem] text-cardBody font-poppins">
                                     <Avatar.Group
   maxCount={2}
   maxStyle={{ color: "#f56a00", backgroundColor: "#fde3cf" }}
@@ -342,7 +342,7 @@ const TaskCardList = (props) => {
                                 {/* <div className="flex font-medium flex-col md:w-32 max-sm:flex-row justify-between w-full ">
                                     <div class="text-[0.875rem] text-cardBody font-poppins">Start</div>
 
-                                    <div class="text-[0.75rem] text-cardBody font-poppins">
+                                    <div class="text-[0.82rem] text-cardBody font-poppins">
                                      {`${moment(item.startDate).format("ll")}`}
                                     </div>
                                 </div> */}
@@ -642,7 +642,7 @@ addDrawerTaskFeedbackModal={props.addDrawerTaskFeedbackModal}
           >
             <i className={`fas ${iconType}`} style={{ fontSize: "1.375em" }} />
 
-            {status === type && <span style={{ fontSize: "0.75rem",display:"flex" }}>{daysLabel}</span>}
+            {status === type && <span style={{ fontSize: "0.82rem",display:"flex" }}>{daysLabel}</span>}
          
           </Button>
         </Tooltip>

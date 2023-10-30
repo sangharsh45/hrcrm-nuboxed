@@ -18,11 +18,13 @@ import {
     handleEmployeeDrawerForAdmin,
     handleEmployeePulseDrawerModal,
     getEmployeeTreeMap,
+    handleEmployeeDocumentDrawerModal,
     getEmployeeDocument
   } from "../../EmployeeAction";
 import EmployeeDetailsView from "../EmployeeGroup/EmployeeDetails/EmployeeDetailsView";
 import EmployeeDrawerForAdmin from "../EmployeeTable/EmployeeDrawer/EmployeeDrawerForAdmin";
 import EmployeePulseDrawerModal from "../EmployeeTable/EmployeePulseDrawerModal";
+import EmployeeDocumentDrawerModal from "./EmployeeDocumentDrawerModal";
 
 const { Option } = Select;
 function EmployeeCardView (props) {
@@ -144,13 +146,11 @@ function handleSetCurrentEmployeeId(employeeId,) {
            <div class=" font-normal text-xs text-cardBody font-poppins ">
           <span
               style={{ cursor: "pointer" }}
-              // onClick={() => {
-              //   // props.getCandidateById(item.candidateId);
-              //    props.getEmployeeDocument(item.employeeId);
-              //    props.getEmployeeTreeMap(item.employeeId);
-              //   props.handleEmployeePulseDrawerModal(true);
-              //   handleSetCurrentEmployeeId(item)
-              // }}
+              onClick={() => {
+               
+                props.handleEmployeeDocumentDrawerModal(true);
+                handleSetCurrentEmployeeId(item)
+              }}
             >
                    <Badge
                    style={{  fontSize:"0.75em",height:"18px" ,width:"5px"}}
@@ -233,6 +233,12 @@ function handleSetCurrentEmployeeId(employeeId,) {
         handleEmployeePulseDrawerModal={props.handleEmployeePulseDrawerModal}
         // candidateByUserId={this.props.candidateByUserId}
       />
+               <EmployeeDocumentDrawerModal
+         singleEmployee={props.singleEmployee}
+        employeeName={currentEmployeeId}
+        addDrawerEmployeeDocumentModal={props.addDrawerEmployeeDocumentModal}
+        handleEmployeeDocumentDrawerModal={props.handleEmployeeDocumentDrawerModal}
+      />
             </>
       
     
@@ -252,6 +258,7 @@ const mapStateToProps = ({ auth,role, employee,designations,departments }) => ({
     employeeTreeMap:employee.employeeTreeMap,
     documentsByEmployeeId: employee.documentsByEmployeeId,
     addDrawerEmployeePulseModal:employee.addDrawerEmployeePulseModal,
+    addDrawerEmployeeDocumentModal:employee.addDrawerEmployeeDocumentModal,
     fetchingEmployeeError: employee.fetchingEmployeeError,
     employeeDrawerVisibleForAdmin: employee.employeeDrawerVisibleForAdmin,
 })
@@ -262,6 +269,7 @@ const mapDispatchToProps = (dispatch) =>
         getEmployeelist,
         handleEmployeeDrawerForAdmin,
         handleEmployeePulseDrawerModal,
+        handleEmployeeDocumentDrawerModal,
         getEmployeeTreeMap,
         getEmployeeDocument
     },
