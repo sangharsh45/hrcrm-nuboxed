@@ -52,7 +52,7 @@ function handleSetCurrentEmployeeId(employeeId,) {
   setCurrentEmployeeId(employeeId,);
  
 }
-  if (props.fetchingCandidates) {
+  if (props.fetchingEmployee) {
     return <BundleLoader/>
   
     
@@ -114,8 +114,8 @@ function handleSetCurrentEmployeeId(employeeId,) {
                         <div class=" flex flex-row justify-evenly  w-full items-end">
                        
                         {/* <div class=" text-sm text-cardBody font-medium font-poppins">Department   </div> */}
-                      <div class=" font-normal text-xs text-cardBody font-poppins">{item.department}</div>
-                      <div class=" font-normal text-xs text-cardBody font-poppins">{item.roleType}</div>
+                      <div class=" font-normal text-xs text-cardBody font-poppins">{item.department === null ? "Not Available" :item.department}</div>
+                      <div class=" font-normal text-xs text-cardBody font-poppins">{item.roleType  === null ? "Not Available" :item.roleType}</div>
           
                    
                       

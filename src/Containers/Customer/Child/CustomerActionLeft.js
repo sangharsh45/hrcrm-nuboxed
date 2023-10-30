@@ -53,8 +53,8 @@ function  handleFilterChange(data){
   useEffect(() => {
     if (props.viewType === "card") {
       props.getRecords(props.userId);
-    } else if (props.viewType === "list") {
-      props.getCategoryRecords("White");
+    } else if (props.viewType === "table") {
+      props.getRecords(props.userId);
     } else if (props.viewType === "dashboard") {
       props.getCategoryRecords("blue");
     }
