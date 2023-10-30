@@ -261,7 +261,7 @@
 // // export default Stopwatch;
 
 
-import { Button, Popconfirm } from "antd";
+import { Button, DatePicker, Popconfirm } from "antd";
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
@@ -278,6 +278,34 @@ const[mandatorCountry,setmandatoryCountry]=useState(props.attendanceByList.count
 const[country,setAllCountry]=useState(""); 
   console.log("Initial startInd:", startInd);
   console.log(drop1)
+
+
+  const [selectedDate, setSelectedDate] = useState(null);
+
+  const handleDateChange = (date) => {
+
+    if (date) {
+      setSelectedDate(date.format("YYYY-MM-DD"))
+      console.log("Selected date:", date.format("YYYY-MM-DD"));
+    } else {
+      console.log("No date selected");
+    }
+    // setSelectedDate(date);
+  };
+
+  // const handleLogDate = () => {
+  //   if (selectedDate) {
+  //     setSelectedDate(selectedDate.format("YYYY-MM-DD"))
+  //     console.log("Selected date:", selectedDate.format("YYYY-MM-DD"));
+  //   } else {
+  //     console.log("No date selected");
+  //   }
+  // };
+
+
+
+  const returnDate=`${selectedDate}T20:00:00Z`
+  console.log(returnDate)
 
   // const handleClick = () => {
   //   if (startInd) {
@@ -332,6 +360,7 @@ const[country,setAllCountry]=useState("");
       country:mandatorCountry?mandatorCountry:null,
       location:drop1?drop1:null,
       other:country?country:null,
+      returnDate:returnDate,
     }
     props.addLocationDetails(data)
   }
@@ -418,6 +447,12 @@ useEffect(()=>{
       </select>
       
       </div>
+
+      {drop1==="On Travel" ?  
+     <div class="mt-[0.2rem]" style={{marginLeft:"11px"}}>
+     <DatePicker onChange={handleDateChange}/>
+      </div>:null
+     }
      {drop1==="On Travel" ?  
      <div class="mt-[0.2rem]" style={{marginLeft:"11px"}}>
       <select
