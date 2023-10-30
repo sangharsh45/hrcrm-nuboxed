@@ -1,4 +1,4 @@
-import React, { useEffect,useState } from "react";
+import React, { useEffect,lazy } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { FormattedMessage } from "react-intl";
@@ -6,7 +6,8 @@ import { Button, Divider, message ,Input, Card} from "antd";
 import { MainWrapper, FlexContainer } from "../../Components/UI/Layout";
 import { TextInput, Title } from "../../Components/UI/Elements";
 import moment from "moment";
-import {getInvHotColdWarm} from "./DashboardAction";
+import {getInvHotColdWarm,handlePitchHCWdrawer} from "./DashboardAction";
+const PitchHCWdrawer = lazy(()=>import("./PitchHCWdrawer/PitchHCWdrawer"));
 
 function PitchHotColdWarm (props) {
     
@@ -18,27 +19,31 @@ function PitchHotColdWarm (props) {
     }
   },[props.userId,props.startDate,props.endDate]);
 
-  const {investorHotColdWarm}=props;
+  const {investorHotColdWarm,openPitchHCWdrawer,handlePitchHCWdrawer}=props;
 
 
     return (
       <>
    
-          <div className="grid grid-cols-5 gap-4">
+          <div className="grid grid-cols-5 gap-4 p-4">
         <div className="col-span-2 sm:col-span-1">
           <div className="flex">Hot</div>
-          <div class="text-2xl">{investorHotColdWarm.hotList}</div>
+          <div class="text-2xl cursor-pointer" onClick={()=>{handlePitchHCWdrawer(true)}}>{investorHotColdWarm.hotList}</div>
           </div>
           <div className="col-span-2 sm:col-span-1">
           <div className="flex">Cold</div>
-          <div class="text-2xl">{investorHotColdWarm.coldList}</div>
+          <div class="text-2xl cursor-pointer" onClick={()=>{handlePitchHCWdrawer(true)}}>{investorHotColdWarm.coldList}</div>
           </div>
           <div className="col-span-2 sm:col-span-1">
           <div className="flex">Warm</div>
-          <div class="text-2xl">{investorHotColdWarm.warmList}</div>
+          <div class="text-2xl cursor-pointer" onClick={()=>{handlePitchHCWdrawer(true)}}>{investorHotColdWarm.warmList}</div>
         </div>
 </div>
         
+<PitchHCWdrawer
+openPitchHCWdrawer={openPitchHCWdrawer}
+handlePitchHCWdrawer={handlePitchHCWdrawer}
+/>
       </>
     );
   
@@ -50,11 +55,13 @@ const mapStateToProps = ({ dashboard,auth }) => ({
     timeRangeType:dashboard.timeRangeType,
     startDate: dashboard.startDate,
     endDate: dashboard.endDate,
+    openPitchHCWdrawer:dashboard.openPitchHCWdrawer
 });
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
-      getInvHotColdWarm
+      getInvHotColdWarm,
+      handlePitchHCWdrawer
     },
     dispatch
   );

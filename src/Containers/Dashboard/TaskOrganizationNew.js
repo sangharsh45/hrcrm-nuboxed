@@ -122,7 +122,7 @@ class TaskOrganizationNew extends Component {
         })}
           
           </div> */}
-          <div className="grid grid-cols-5 gap-4">
+          <div className="grid grid-cols-5 gap-4 p-4">
   {this.props.tasks.length &&
     this.props.tasks.map((item) => {
       const randomNumber = Math.floor(Math.random() * 100) + 1;

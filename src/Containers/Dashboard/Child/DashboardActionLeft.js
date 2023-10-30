@@ -89,13 +89,13 @@ const DashboardActionLeft = (props) => {
 
 {user.dashboardFullListInd===true && (
               <Tag
-                color={viewType === "ALL" ? "#FFA500" : "orange"}
+                color={viewType === "ALL" ? "tomato" : "#FFA500"}
                 style={{
                   cursor: "pointer",                  
-                  fontWeight: viewType === "ALL" ? "#FFA500" : "orange",
+                  fontWeight: viewType === "ALL" ? "tomato" : "#FFA500",
                   textAlign: "center",
                   fontFamily:"poppins",
-                  borderColor: "orange",
+                  borderColor: "tomato",
                 }}
                onClick={() => setDashboardViewType("ALL")}
               >
