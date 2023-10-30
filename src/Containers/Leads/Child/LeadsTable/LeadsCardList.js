@@ -3,6 +3,7 @@ import { StyledPopconfirm} from "../../../../Components/UI/Antd";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import moment from "moment";
+import NoteAltIcon from "@mui/icons-material/NoteAlt";
 import OpenInBrowserIcon from '@mui/icons-material/OpenInBrowser';
 import { getSectors } from "../../../Settings/Sectors/SectorsAction";
 import { MultiAvatar, SubTitle } from "../../../../Components/UI/Elements";
@@ -260,9 +261,9 @@ onClick={()=>{
                        <div className=" flex font-medium flex-col  md:w-40 max-sm:flex-row w-full max-sm:justify-between ">
                            <h4 class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden"> Company </h4>
                            <h4 class=" text-[0.82rem] text-cardBody font-semibold  font-poppins">   
-                           <Link to={`leads/${item.leadsId}`} title={item.companyName || "Not Available"}>
+
   {item.companyName || "Not Available"}
-</Link>
+
 
                            </h4>
                        </div>
@@ -341,6 +342,18 @@ onClick={()=>{
           />
 </div>
                                 </div>
+                                <div class="flex flex-col justify-evenly  ">
+                    <Tooltip title="Notes">
+       <NoteAltIcon
+                // onClick={() => {
+                //   handleCallNotesDrawerModal(true);
+                //   handleSetCallNameId(item);
+                // }}
+                style={{ color: "green", cursor: "pointer", fontSize: "1rem" }}
+              />
+           </Tooltip>
+
+            </div>
                                 {/* <div class="flex max-sm:flex-row w-full justify-between md:flex-col"> */}
                                 <div class="flex flex-col w-[5%] max-sm:flex-row max-sm:w-[10%]">
                                 <div>

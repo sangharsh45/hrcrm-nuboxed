@@ -17,7 +17,7 @@ import SpeechRecognition, {
 //   getRecords,
 //   getCategoryRecords,
 // } from "../CustomerAction";
-import {getInvestor} from "../InvestorAction";
+import {getInvestor,searchInvestorName} from "../InvestorAction";
 import { Input } from "antd";
 
 const Option = StyledSelect.Option;
@@ -131,8 +131,8 @@ useEffect(() => {
           placeholder="Search by Name, Company"
           class="w-96"
           suffix={suffix}
-          allowClear
-          enterButton
+          // allowClear
+          // enterButton
           onChange={(e) => props.handleChange(e)}
           value={props.currentData}
         />
@@ -140,7 +140,7 @@ useEffect(() => {
         <Button
           type={props.currentData ? "primary" : "danger"}
           onClick={() => {
-            // props.inputCustomerDataSearch(props.currentData);
+             props.searchInvestorName(props.currentData);
           }}
         >
           Submit
@@ -176,7 +176,8 @@ const mapStateToProps = ({ investor, auth, candidate }) => ({
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
-      getInvestor
+      getInvestor,
+      searchInvestorName
     },
     dispatch
   );

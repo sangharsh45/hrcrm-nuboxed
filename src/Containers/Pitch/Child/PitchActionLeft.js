@@ -19,7 +19,7 @@ import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognitio
 import { Button, Input, Tooltip,Tag,Badge } from "antd";
 import { FormattedMessage } from "react-intl";
 import TocIcon from '@mui/icons-material/Toc';
-import {getPitchRecords} from "../PitchAction";
+import {getPitchRecords,searchPitchName} from "../PitchAction";
 //import {inputLeadsDataSearch,getLeadsRecords,getJunkedLeadsRecords} from "../LeadsAction";
 const { Search } = Input;
 
@@ -87,32 +87,30 @@ const PitchActionLeft = (props) => {
 
       <div class=" w-72 max-sm:w-28">
           <Input
-            placeholder="Search by Name, Sector or Owner"
+            placeholder="Search by Name or Company"
             width={"100%"}
-             suffix={suffix}
-            // onSearch={(value) => {
-            //   props.inputLeadsDataSearch(value);
-            //   props.setCurrentData(value);
-
-            // }}
-            // onChange={(e) => props.handleChange(e)}
-            // value={props.currentData}
+            suffix={suffix}
+            // allowClear
+            // enterButton
+            onChange={(e) => props.handleChange(e)}
+            value={props.currentData}
+        
           />
         </div>
       <Button
-          // type={props.currentData ? "primary" : "danger"}
-          // onClick={() => {
-          //   props.inputLeadsDataSearch(props.currentData);
+          type={props.currentData ? "primary" : "danger"}
+          onClick={() => {
+            props.searchPitchName(props.currentData);
 
-          // }}
+          }}
         >
           Submit
         </Button>
         <Button
           type={props.currentData ? "primary" : "danger"}
-          // onClick={() => {
-          //   props.handleClear();
-          // }}
+          onClick={() => {
+            props.handleClear();
+          }}
         >
           <FormattedMessage id="app.clear" defaultMessage="Clear" />
           {/* Clear */}
@@ -127,7 +125,8 @@ const mapStateToProps = ({pitch,auth}) => ({
 
 });
 const mapDispatchToProps = (dispatch) => bindActionCreators({
-  getPitchRecords
+  getPitchRecords,
+  searchPitchName
 }, dispatch);
 export default withRouter(
   connect(mapStateToProps, mapDispatchToProps)(PitchActionLeft));

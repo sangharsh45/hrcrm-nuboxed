@@ -28,6 +28,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import StatusPitchToggle from "../Child/StatusPitchToggle"
 // import { getCountries } from "../../../Auth/AuthAction";
 import { Link } from "../../../Components/Common";
+import NoteAltIcon from "@mui/icons-material/NoteAlt";
 import {
   getPitch,
   deletePitchData,
@@ -267,13 +268,7 @@ onClick={()=>{
                        <div className=" flex font-medium flex-col  md:w-[9rem] max-sm:flex-row w-full max-sm:justify-between ">
                            <h4 class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden"> Company </h4>
                            <h4 className="text-[0.82rem] text-cardBody font-poppins">
-  {item.companyName ? (
-    <Link to={`pitch/${item.investorLeadsId}`} title={item.companyName}>
-      {item.companyName}
-    </Link>
-  ) : (
-    'Not available'
-  )}
+                           {item.companyName || "Not Available"}
 </h4>
 
                        </div>
@@ -357,6 +352,18 @@ onClick={()=>{
           />
 </div>
                                 </div>
+                                <div class="flex flex-col justify-evenly  ">
+                    <Tooltip title="Notes">
+       <NoteAltIcon
+                // onClick={() => {
+                //   handleCallNotesDrawerModal(true);
+                //   handleSetCallNameId(item);
+                // }}
+                style={{ color: "green", cursor: "pointer", fontSize: "1rem" }}
+              />
+           </Tooltip>
+
+            </div>
                                 </div>
                                 <div class="flex max-sm:flex-row  justify-evenly md:w-20 max-sm:w-[25%] ">
                                

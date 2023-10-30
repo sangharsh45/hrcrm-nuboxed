@@ -12,7 +12,8 @@ import { Input, Menu, Tooltip, Radio } from "antd";
 import { StyledSelect } from "../../../Components/UI/Antd";
 import { Button, Badge } from "antd";
 import {
-  getContactInvest
+  getContactInvest,
+  searchInvestorContactName
 } from "../ContactInvestAction";
 
 const Option = StyledSelect.Option;
@@ -76,11 +77,10 @@ const ContactInvestActionLeft = (props) => {
    
       <div class=" w-72 md:ml-4 max-sm:w-16 ml-0">
         <Input
-          placeholder="Search by Name, Company"
+          placeholder="Search by Name or Company"
           class="w-96"
           suffix={suffix}
-          allowClear
-          enterButton
+       
           onChange={(e) => props.handleChange(e)}
           value={props.currentData}
         />
@@ -88,7 +88,7 @@ const ContactInvestActionLeft = (props) => {
       <Button
         type={props.currentData ? "primary" : "danger"}
         onClick={() => {
-          props.inputContactDataSearch(props.currentData);
+          props.searchInvestorContactName(props.currentData);
         }}
       >
         Submit
@@ -121,7 +121,8 @@ const mapStateToProps = ({ auth, contactinvest }) => ({
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
-      getContactInvest
+      getContactInvest,
+      searchInvestorContactName
     },
     dispatch
   );

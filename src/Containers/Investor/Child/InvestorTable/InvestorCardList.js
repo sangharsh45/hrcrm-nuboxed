@@ -221,7 +221,16 @@ function InvestorCardList(props) {
                                 <div className=" flex font-medium flex-col md:w-36 max-sm:flex-row w-full max-sm:justify-between ">
                                     <h4 class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden"># Deals</h4>
 
-                                    <div class=" text-[0.82rem] text-cardBody font-poppins">
+                                    <div class=" text-[0.82rem] justify-center text-cardBody font-poppins">
+                                    {item.oppNo}
+                                    </div>
+                                </div>
+                             
+                                <div className=" flex font-medium flex-col md:w-36 max-sm:flex-row w-full max-sm:justify-between ">
+                                    <h4 class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden">Pipeline Value</h4>
+
+                                    <div class=" text-[0.82rem] text-cardBody font-poppins text-center">
+                                    {item.totalProposalValue}
 
                                     </div>
                                 </div>

@@ -432,4 +432,36 @@ export const getInvestorDetailsById = (investorId) => (dispatch) => {
         });
       });
   };
+
+  export const searchInvestorName = (name) => (dispatch) => {
+    dispatch({
+      type: types.GET_INVESTOR_SEARCH_REQUEST,
+    });
+    axios
+      .get(`${base_url}/investor/search/${name}`, {
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+        },
+      })
+      .then((res) => {
+        // const actualData = res.data;
+        // const filteredData = actualData.filter((item) => { return item.name !== null })
+        // message.success(res.data.message);
+        // message.success("Data has been updated successfully!");
+    
+      
+      
+        dispatch({
+          type: types.GET_INVESTOR_SEARCH_SUCCESS,
+          payload: res.data,
+        });
+      }
+      )
+      .catch((err) => {
+        dispatch({
+          type: types.GET_INVESTOR_SEARCH_FAILURE,
+          payload: err,
+        });
+      });
+  }; 
   

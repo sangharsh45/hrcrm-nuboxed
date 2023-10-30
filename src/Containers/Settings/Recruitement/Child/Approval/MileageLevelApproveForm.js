@@ -195,6 +195,8 @@ import {
 } from "../../../SettingsAction";
 import { InputComponent } from "../../../../../Components/Forms/Formik/InputComponent";
 import { BundleLoader } from "../../../../../Components/Placeholder";
+import { SelectComponent } from "../../../../../Components/Forms/Formik/SelectComponent";
+import { Field } from "formik";
 const { Option } = Select;
 
 function MileageLevelApproveForm(props) {
@@ -231,6 +233,7 @@ function MileageLevelApproveForm(props) {
   }
 
   function handleChangeValue(value, index) {
+    console.log(value)
     setRows((prevRows) =>
       prevRows.map((row, i) => {
         if (i === index) {
@@ -242,6 +245,16 @@ function MileageLevelApproveForm(props) {
   }
 
   function handleChangeValue1(value, index) {
+    setRows((prevRows) =>
+      prevRows.map((row, i) => {
+        if (i === index) {
+          return { ...row, threshold: value };
+        }
+        return row;
+      })
+    );
+  }
+  function handleChangeRoleValue(value, index) {
     setRows((prevRows) =>
       prevRows.map((row, i) => {
         if (i === index) {
@@ -269,8 +282,15 @@ function MileageLevelApproveForm(props) {
   if (isLoading) {
     return <BundleLoader />;
   }
+  const roleNameOption = props.roles.map((item) => {
+    return {
+        label: `${item.roleType || ""}`,
+        value: item.roleTypeId,
+    };
+});
 
   return (
+    
     <div>
       <div className="MainBox">
         <div className="InputBox">
@@ -280,6 +300,7 @@ function MileageLevelApproveForm(props) {
                 <div className="w-20">
                   <p>{`Level ${index + 1}`}</p>
                 </div>
+                
                 <div style={{ width: "47%" }}>
                   <Select
                     name={`level_${index}`}
@@ -291,6 +312,25 @@ function MileageLevelApproveForm(props) {
                     <option value="Management">Management</option>
                   </Select>
                 </div>
+                <div className="w-full flex font-bold mt-4">
+                <div style={{ width:"9rem"}}>
+                
+                </div>
+                <div style={{ width: "47%" }}>
+                     <Field
+                                                            name="roleTypeId"
+                                                             label="Role"
+                                                            options={Array.isArray(roleNameOption) ? roleNameOption : []}
+                                                            component={SelectComponent}
+                                                            // value={values.roleTypeId}
+                                                            placeholder
+                                                            isColumn
+                                                            inlineLabel
+                                                            style={{ flexBasis: "80%", marginTop: "0px", width: "100%" }}
+                                                        /> 
+                                                        </div>
+                                                        </div>
+                                                      
                 <div className="w-24 ml-4">
                   <p>Threshold</p>
                 </div>
@@ -336,8 +376,9 @@ function MileageLevelApproveForm(props) {
   );
 }
 
-const mapStateToProps = ({ settings, auth, departments }) => ({
+const mapStateToProps = ({ settings,role, auth, departments }) => ({
   departments: departments.departments,
+  roles:role.roles,
   approvalData: settings.approvalData,
   userId: auth.userDetails.userId,
 });

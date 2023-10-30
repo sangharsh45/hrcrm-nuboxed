@@ -266,6 +266,7 @@ function NavMenu (props) {
 
           {/*Activity*/}
           {/*Reports*/}
+          {user.imInd === true  && (
           <Menu.Item key="/reports" style={{height:"30px",paddingLeft:"1rem"}}>
             <Link to="/reports">
               <PictureAsPdfIcon
@@ -278,12 +279,13 @@ function NavMenu (props) {
               </span>
             </Link>
           </Menu.Item>
+          )}
           {/*Reports*/}
 
 
 
 <hr />
-     {user.leadsAccessInd === true && user.crmInd === true &&(
+     {user.leadsAccessInd === true && user.crmInd === true && user.imInd === true  &&(
      <Menu.Item key="/leads" style={{height:"30px",paddingLeft:"1rem"}}>
               <Link to="/Leads">
                 <GroupsIcon
@@ -303,7 +305,7 @@ function NavMenu (props) {
             </Menu.Item>
 )} 
              {/*Opportunity*/}
-             {user.opportunityAccessInd === true && user.crmInd === true && (
+             {user.opportunityAccessInd === true && user.imInd === true  && user.crmInd === true && (
             <Menu.Item key="/opportunity" style={{height:"30px",paddingLeft:"1rem"}}>
               <Link to="/opportunity">
            
@@ -324,7 +326,7 @@ function NavMenu (props) {
           )}
 
              {/* Contact */}
-             {user.contactAccessInd === true && user.crmInd === true && (
+             {user.contactAccessInd === true && user.imInd === true  && user.crmInd === true && (
             <Menu.Item key="/contact" style={{height:"30px",paddingLeft:"1rem"}}>
               <Link to="/contact">
              
@@ -345,7 +347,7 @@ function NavMenu (props) {
           )}
 
            {/* Customer */}
-           {user.customerAccessInd === true && user.crmInd === true &&(
+           {user.customerAccessInd === true && user.imInd === true  && user.crmInd === true &&(
             <Menu.Item key="/customer" style={{height:"30px",paddingLeft:"1rem"}}>
               <Link to="/customer">
             
@@ -366,6 +368,7 @@ function NavMenu (props) {
             </Menu.Item>
           )}
           <hr />
+          {user.imInd === true  && (
           <Menu.Item key="/pitch " style={{height:"30px",paddingLeft:"1rem"}}>
               <Link to="/pitch">
                 <FilePresentIcon
@@ -382,6 +385,8 @@ function NavMenu (props) {
                 </span>
               </Link>
             </Menu.Item>
+          )}
+           {user.imInd === true  && (
             <Menu.Item key="/deal " style={{height:"30px",paddingLeft:"1rem"}}>
               <Link to="/deal">
               <CurrencyExchangeIcon
@@ -397,6 +402,8 @@ function NavMenu (props) {
                 </span>
               </Link>
             </Menu.Item>
+           )}
+            {user.imInd === true  && (
             <Menu.Item key="/contactInvest" style={{height:"30px",paddingLeft:"1rem"}}>
               <Link to="/contactInvest">
               <PermContactCalendarIcon
@@ -412,6 +419,8 @@ function NavMenu (props) {
                 </span>
               </Link>
             </Menu.Item>
+            )}
+             {user.imInd === true  && (
             <Menu.Item key="/investor" style={{height:"30px",paddingLeft:"1rem"}}>
               <Link to="/investor">
             
@@ -430,6 +439,7 @@ function NavMenu (props) {
                 </span>
               </Link>
             </Menu.Item>
+             )}
           {/* {user.userType !== "USER" && user.department !== "Customer" &&user.department == "VENDOR" && ( */}
          
           <hr />
@@ -473,7 +483,7 @@ function NavMenu (props) {
           )} */}
           {/*Talent*/}
           {/*Requirement*/}
-          {user.requirementAccessInd === true && (
+          {user.requirementAccessInd === true && user.imInd === true  &&  (
             <Menu.Item key="/requirement" style={{height:"30px",paddingLeft:"1rem"}}>
               <Link to="/requirement">
              
@@ -493,7 +503,7 @@ function NavMenu (props) {
             </Menu.Item>
           )}
           {/*Demand*/}
-          {user.userType === "USER" && user.department === "Customer" && (
+          {user.userType === "USER" && user.imInd === true  &&  user.department === "Customer" && (
             <Menu.Item key="/demand" style={{height:"30px",paddingLeft:"1rem"}}>
               <Link to="/demand">
                 <ContactsIcon 
@@ -519,7 +529,7 @@ function NavMenu (props) {
           {/*Publish*/}
           {/* {user.userType !== "USER" && user.department !== "Recruiter" &&user.department !== "Customer"&&
             user.department !== "VENDOR" && (  */}
-          {user.publishAccessInd === true && (
+          {user.publishAccessInd === true && user.imInd === true  &&  (
             <Menu.Item key="/publish" style={{height:"30px",paddingLeft:"1rem"}}>
               <Link to="/publish">
             
@@ -702,6 +712,7 @@ function NavMenu (props) {
             }
           >
            */}
+                     {user.imInd === true  && (
               <Menu.Item key="/report" style={{height:"30px",paddingLeft:"1rem"}}>
           <Link to="/leave">
               <i class="fas fa-luggage-cart"></i>
@@ -717,7 +728,8 @@ function NavMenu (props) {
               </span>
              </Link> 
             </Menu.Item>
-            {user.userType !== "USER" && user.department !== "VENDOR" && ( 
+                     )}
+            {user.userType !== "USER" && user.imInd === true  && user.department !== "VENDOR" && ( 
            <Menu.Item key="/mileage" style={{height:"30px",paddingLeft:"1rem"}}> 
           <Link to="/mileage"> 
               
@@ -735,7 +747,7 @@ function NavMenu (props) {
             </Link>
           </Menu.Item>
              )}
-
+    {user.imInd === true  && (
            <Menu.Item key="/expense" style={{height:"30px",paddingLeft:"1rem"}}>
            <Link to="/expense">
             <ReceiptIcon
@@ -753,9 +765,10 @@ function NavMenu (props) {
               </span>
             </Link> 
            </Menu.Item>
+    )}
 
        
-
+{user.imInd === true  && (
            <Menu.Item key="/holiday" style={{height:"30px",paddingLeft:"1rem"}}> 
             <Link to="/holiday"> 
            
@@ -769,14 +782,14 @@ function NavMenu (props) {
               </span>
              </Link> 
          </Menu.Item>
-
+)}
        
 {/* 
            </SubMenu> 
      )}  */}
         <hr/>
                   {/* Employees */}
-                  {user.userAccessInd === true && (
+                  {user.userAccessInd === true && user.imInd === true  && (
                   
             <Menu.Item key="/employees" style={{height:"30px",paddingLeft:"1rem"}}>
               <Link to="/Employees">
@@ -797,7 +810,7 @@ function NavMenu (props) {
               </Link>
             </Menu.Item>
           )}
-           { user.locationAccessInd === true && (
+           { user.locationAccessInd === true && user.imInd === true  && (
          
           <Menu.Item key="/location" style={{height:"30px",paddingLeft:"1rem"}}>
            <Link to="/location">
@@ -812,7 +825,7 @@ function NavMenu (props) {
             </Link> 
            </Menu.Item>
            )}
-             { user.locationAccessInd === true && (
+             { user.locationAccessInd === true && user.imInd === true  && (
          
          <Menu.Item key="/supplies" style={{height:"30px",paddingLeft:"1rem"}}>
           <Link to="/supplies">
@@ -827,7 +840,7 @@ function NavMenu (props) {
            </Link> 
           </Menu.Item>
           )}
-            { user.locationAccessInd === true && (
+            { user.locationAccessInd === true && user.imInd === true  && (
          
          <Menu.Item key="/shipper" style={{height:"30px",paddingLeft:"1rem"}}>
           <Link to="/shipper">
@@ -842,7 +855,7 @@ function NavMenu (props) {
            </Link> 
           </Menu.Item>
           )}
-            { user.locationAccessInd === true && (
+            { user.locationAccessInd === true && user.imInd === true  && (
          
          <Menu.Item key="/plant" style={{height:"30px",paddingLeft:"1rem"}}>
           <Link to="/plant">
@@ -857,7 +870,7 @@ function NavMenu (props) {
            </Link> 
           </Menu.Item>
           )}
-            { user.locationAccessInd === true && (
+            { user.locationAccessInd === true && user.imInd === true  && (
          
          <Menu.Item key="/teams" style={{height:"30px",paddingLeft:"1rem"}}>
           <Link to="/teams">
@@ -872,7 +885,7 @@ function NavMenu (props) {
            </Link> 
           </Menu.Item>
           )}
-            { user.inventoryAccessInd === true && (
+            { user.inventoryAccessInd === true && user.imInd === true  && (
          
          <Menu.Item key="/inventory " style={{height:"30px",paddingLeft:"1rem"}}>
           <Link to="/inventory">
@@ -887,7 +900,7 @@ function NavMenu (props) {
            </Link> 
           </Menu.Item>
           )}
-            { user.orderAccessInd === true && (
+            { user.orderAccessInd === true && user.imInd === true  && (
          
          <Menu.Item key="/order" style={{height:"30px",paddingLeft:"1rem"}}>
           <Link to="/order">

@@ -229,7 +229,7 @@ class MileageApproveForm extends Component {
                                                     </div>
 
                                                     <div style={{ width: "32%" }}>
-                                                    <Field
+                                                    {/* <Field
                                                             name="roleTypeId"
                                                             label="Role"
                                                             options={Array.isArray(roleNameOption) ? roleNameOption : []}
@@ -239,8 +239,8 @@ class MileageApproveForm extends Component {
                                                             isColumn
                                                             inlineLabel
                                                             style={{ flexBasis: "80%", marginTop: "0px", width: "100%" }}
-                                                        />
-                                                    {/* <Field
+                                                        /> */}
+                                                  <Field
                     name="roleTypeId"
                     label={<FormattedMessage
                       id="app.role"
@@ -275,7 +275,7 @@ class MileageApproveForm extends Component {
                     // width={"100%"}
                     // isColumn
                     // selectType="roleType"
-                     /> */}
+                     />
                                                     </div>
                                                     <div style={{ width: "32%" }}>
                                                         <Field

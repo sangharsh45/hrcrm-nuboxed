@@ -5,25 +5,29 @@ const PitchActionLeft=lazy(()=> import("./PitchActionLeft"));
 
 class PitchHeader extends Component {
   render() {
-    // const {
-    //   handleLeadsModal,
-    //   viewType,
-    //   setLeadsViewType,
-    //   handleChange,
-    //   currentData,
-    //   handleClear,
-    // } = this.props;
+    const {
+      handleLeadsModal,
+      viewType,
+      currentUser,
+      setLeadsViewType,
+      handleChange,
+      currentData,
+      handleClear,
+      handleCurrentData
+    } = this.props;
     return (
       <div>
         <ActionHeader
           leftComponent={
             <PitchActionLeft
             // viewType={viewType}
-            // handleChange={handleChange}
-            // setLeadsViewType={setLeadsViewType}
-            //   currentData={currentData}
-            //   handleClear={handleClear}
-            //   setCurrentData={this.props.setCurrentData}
+            currentUser={currentUser}
+            currentData={currentData}
+            handleClear={handleClear}
+     
+            handleChange={handleChange}
+            handleCurrentData={handleCurrentData}
+             
             />
           }
           rightComponent={

@@ -13,6 +13,7 @@ function InvestorHeader (props) {
       handleChange,
       currentData,
       handleClear,
+      handleClean,
       handleCurrentData,
       currentUser
 
@@ -29,6 +30,7 @@ function InvestorHeader (props) {
             currentUser={currentUser}
             currentData={currentData}
             handleClear={handleClear}
+     
             handleChange={handleChange}
             handleCurrentData={handleCurrentData}
             handleFilterChange={props.handleFilterChange}

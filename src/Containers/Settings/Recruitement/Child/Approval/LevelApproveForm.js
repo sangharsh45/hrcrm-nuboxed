@@ -10,7 +10,22 @@ import {
  } from "../../../SettingsAction";
 import { BundleLoader } from "../../../../../Components/Placeholder";
 const { Option } = Select;
+const departmentData=[
+
+  {
+    departmentName:'Reporting Manager',
+  },
+  {
+    departmentName:'Reporting Manager +1',
+  },
+  {
+    departmentName:'Management',
+
+  },
+
+];
 function LevelApproveForm(props) {
+
     useEffect(() => {
         props.getDepartments();
     }, [])
@@ -106,11 +121,13 @@ function LevelApproveForm(props) {
                     value={row.level}
                     onChange={(value) => handleChangeValue(value, index)}
                   >
+                    
                                       <option value="ReportingManager">Reporting Manager</option>
                     <option value="ReportingManager+1">Reporting Manager +1</option>
                     <option value="Management">Management</option>
                   </Select>
                 </div>
+                
                
                 {rows.length > 1 ? (
                   <CloseOutlined onClick={() => handleDelete(index)} />

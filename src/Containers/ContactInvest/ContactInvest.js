@@ -11,7 +11,7 @@ const AddContactInvestModal = lazy(() => import("./Child/AddContactInvestModal")
 const ContactInvestCardList = lazy(() => import("./Child/ContactInvestTable/ContactInvestCardList"));
 
 function ContactInvest (props) {
-    const [currentData, setCurrentData] = useState(undefined);
+  const [currentData,setcurrentData]=useState("");
     const [text, setText] = useState(undefined);
     const [currentUser, setCurrentUser] = useState("");
     const [currentPartnerUser, setCurrentPartnerUser] = useState("");
@@ -46,7 +46,7 @@ const handleRoleChange = (event) => {
   setFilteredData(filteredJobs);
 };
 useEffect(()=>{
-props.getContactInvestByUserId(props.userId,0)
+props.getContactInvestByUserId(props.userId,0,"creationdate")
 },[])
 
 const filterData = filteredData.filter(item =>
@@ -54,11 +54,16 @@ const filterData = filteredData.filter(item =>
     typeof value === 'string' && value.toLowerCase().includes(filterText.toLowerCase())
   )
 );
-  const handleClear = () => {
-    setCurrentData(undefined);
-    props.emptyContact();
-    props.getContactInvestByUserId(currentUser ? currentUser : props.userId, 0);
-  };
+const handleClear = () => {
+  setcurrentData("");
+  props.getContactInvestByUserId(currentUser || props.userId, 0, "creationdate");
+};
+const handleChange = (e) => {
+  setcurrentData(e.target.value)
+};
+function handleCurrentData (value){
+  setcurrentData(value)
+}
   const handlePartnerDropChange = (value) => {
     setCurrentPartnerUser(value);
     props.getPArtnerContactPagination(value, 0);
@@ -71,9 +76,7 @@ const filterData = filteredData.filter(item =>
     console.log("valid", value);
   };
 
-  const handleChange = (e) => {
-    setCurrentData(e.target.value);
-  };
+
 
   useEffect(() => {
  
@@ -108,10 +111,13 @@ const{handleContactInvestModal,addContactInvestModal,
                 currentUser={currentUser}
                 currentPartnerUser={currentPartnerUser}
                 text={text}
-                handleChange={handleChange}
-                handleClear={handleClear}
+             
                 currentData={currentData}
-                setCurrentData={setCurrentData}
+                handleClear={handleClear}
+             
+                handleChange={handleChange}
+                handleCurrentData={handleCurrentData}
+                // setCurrentData={setCurrentData}
                 handleFilterChange={handleFilterChange}
                 filter={filter}
               />
