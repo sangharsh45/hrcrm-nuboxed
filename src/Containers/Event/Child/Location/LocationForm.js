@@ -256,7 +256,7 @@ class LocationForm extends Component {
                   <StyledLabel style={{ fontWeight: "bold" }}>Functions</StyledLabel>
                   <FlexContainer>
                     <div style={{ width: "47%" }} class="mt-2">
-                      <div class="font-bold text-xs">Production &nbsp;<i class="fas fa-cogs text-base"></i></div>
+                      <div class="font-bold text-xs">Refurbish &nbsp;<i class="fas fa-cogs text-base"></i></div>
                       <div>
                         <Switch
                           style={{ width: "6.25em" }}
@@ -308,6 +308,18 @@ class LocationForm extends Component {
                     </div>
                   </FlexContainer>
                   <FlexContainer>
+                  <div style={{ width: "47%" }} class="mt-2">
+                      <div class="font-bold text-xs">Retail &nbsp;<i class="fas fa-money-check text-base"></i></div>
+                      <div>
+                        <Switch
+                          style={{ width: "6.25em" }}
+                          checked={this.state.retail}
+                          onChange={this.handleRetail}
+                          checkedChildren="Yes"
+                          unCheckedChildren="No"
+                        />
+                      </div>
+                    </div>
                     <div style={{ width: "47%" }} class="mt-2">
                       <div class="font-bold text-xs">Project &nbsp;<i class="fas fa-project-diagram text-base"></i></div>
                       <div>
@@ -320,18 +332,7 @@ class LocationForm extends Component {
                         />
                       </div>
                     </div>
-                    <div style={{ width: "47%" }} class="mt-2">
-                      <div class="font-bold text-xs">Retail &nbsp;<i class="fas fa-money-check text-base"></i></div>
-                      <div>
-                        <Switch
-                          style={{ width: "6.25em" }}
-                          checked={this.state.retail}
-                          onChange={this.handleRetail}
-                          checkedChildren="Yes"
-                          unCheckedChildren="No"
-                        />
-                      </div>
-                    </div>
+                  
                   </FlexContainer>
                 </div>
                 <div class="h-full w-[45%] max-sm:w-wk mt-2">

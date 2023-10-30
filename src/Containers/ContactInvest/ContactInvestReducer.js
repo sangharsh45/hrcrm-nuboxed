@@ -6,6 +6,9 @@ const initialState = {
     addingContactInvest: false, 
     addContactInvestModal: false,
 
+    fetchingInvestorContactSearchData:false,
+    fetchingInvestorContactSearchDataError:false,
+
     fetchingFilterContactsInvest: false,
     fetchingFilterContactsInvestError: false,
 
@@ -130,6 +133,21 @@ export const contactInvestReducer = (state = initialState, action) => {
             fetchingContactInvestRecords: false,
             fetchingContactInvestRecordsError: true,
           };
+
+
+          case types.GET_INVESTOR_CONTACT_SEARCH_REQUEST:
+            return { ...state, fetchingInvestorContactSearchData: true };
+          case types.GET_INVESTOR_CONTACT_SEARCH_SUCCESS:
+            return {
+              ...state,
+              fetchingInvestorContactSearchData: false,
+              contactiNVESTbyId: action.payload,
+              // serachedData: action.payload,
+            };
+          case types.GET_INVESTOR_CONTACT_SEARCH_FAILURE:
+            return { ...state, fetchingInvestorContactSearchDataError: true };
+      
+
 
 
   

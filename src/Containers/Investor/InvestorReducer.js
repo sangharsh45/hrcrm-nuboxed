@@ -12,6 +12,9 @@ const initialState = {
   fetchingInvestorRecordsError: false,
   investorRecord:[],
 
+  fetchingInvestorSearchData: false,
+  fetchingInvestorSearchDataError: false,
+
   fetchingInvestorsfilterdata: false,
   fetchingInvestorsfilterdataError: false,
 
@@ -345,6 +348,19 @@ export const investorReducer = (state = initialState, action) => {
                               fetchingInvestorRecords: false,
                               fetchingInvestorRecordsError: true,
                             };
+
+                            case types.GET_INVESTOR_SEARCH_REQUEST:
+                              return { ...state, fetchingInvestorSearchData: true };
+                            case types.GET_INVESTOR_SEARCH_SUCCESS:
+                              return {
+                                ...state,
+                                fetchingInvestorSearchData: false,
+                                investorsbyId: action.payload,
+                                // serachedData: action.payload,
+                              };
+                            case types.GET_INVESTOR_SEARCH_FAILURE:
+                              return { ...state, fetchingInvestorSearchDataError: true };
+                        
                   
 
                                     

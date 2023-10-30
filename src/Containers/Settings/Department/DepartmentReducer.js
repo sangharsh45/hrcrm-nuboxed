@@ -142,13 +142,13 @@ export const departmentsReducer = (state = initialState, action) => {
               return {
                 ...state,
                 addingCrmToggle: false,
-                departments: state.departments.map((item) => {
-                  if (item.departmentId === action.payload.departmentId) {
-                    return action.payload;
-                  } else {
-                    return item;
-                  }
-                }),
+                departments:action.payload,
+              //   departments: state.departments.map((sector) =>
+              //   sector.departmentId === action.payload.departmentId
+              //     ? action.payload
+              //     : sector
+              // ),
+               
               };
             case types.LINK_CRM_TOGGLE_FAILURE:
               return {
@@ -164,13 +164,14 @@ export const departmentsReducer = (state = initialState, action) => {
                 return {
                   ...state,
                   addingImToggle: false,
-                  departments: state.departments.map((item) => {
-                    if (item.departmentId === action.payload.departmentId) {
-                      return action.payload;
-                    } else {
-                      return item;
-                    }
-                  }),
+                      departments:action.payload,
+                  // departments: state.departments.map((item) => {
+                  //   if (item.departmentId === action.payload.departmentId) {
+                  //     return action.payload;
+                  //   } else {
+                  //     return item;
+                  //   }
+                  // }),
                 };
               case types.LINK_IM_TOGGLE_FAILURE:
                 return {
@@ -185,13 +186,14 @@ export const departmentsReducer = (state = initialState, action) => {
                 return {
                   ...state,
                   addingErpToggle: false,
-                  departments: state.departments.map((item) => {
-                    if (item.departmentId === action.payload.departmentId) {
-                      return action.payload;
-                    } else {
-                      return item;
-                    }
-                  }),
+                  departments:action.payload,
+                  // departments: state.departments.map((item) => {
+                  //   if (item.departmentId === action.payload.departmentId) {
+                  //     return action.payload;
+                  //   } else {
+                  //     return item;
+                  //   }
+                  // }),
                 };
               case types.LINK_ERP_TOGGLE_FAILURE:
                 return {

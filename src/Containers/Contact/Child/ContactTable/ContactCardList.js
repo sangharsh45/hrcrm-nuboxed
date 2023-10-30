@@ -224,6 +224,14 @@ function ContactCardList(props) {
     {item.oppNo}
   </div>
 </div>
+<div className=" flex font-medium flex-col md:w-36 max-sm:flex-row w-full max-sm:justify-between ">
+                                    <h4 class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden">Pipeline Value</h4>
+
+                                    <div class=" text-[0.82rem] text-cardBody font-poppins text-center">
+                                    {item.totalProposalValue}
+
+                                    </div>
+                                </div>
                                 <div className="flex font-medium flex-col md:w-32 max-sm:flex-row w-full max-sm:justify-between ">
                                     <div class="text-[0.875rem] text-cardBody font-poppins max-sm:hidden">Portal Acess</div>
 

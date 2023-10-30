@@ -10,33 +10,30 @@ class ContactInvestHeader extends Component {
       handleContactInvestModal,
       viewType,
       setContactsViewType,
+      handleChange,
       currentData,
-      handleButtonClick,
-      visibility,
-      handleSecondFilterChange,
-      currentSecondData,
+      handleClear,
+      handleClean,
+      handleCurrentData,
+      currentUser
     } = this.props;
     return (
       <div>
         <ActionHeader
           leftComponent={
             <ContactInvestActionLeft
-            //   currentData={this.props.currentData}
-            //   handleChange={this.props.handleChange}
-            //   text={this.props.text}
-            //   handleClear={this.props.handleClear}
-            //   setCurrentData={this.props.setCurrentData}
+         
             handleFilterChange={this.props.handleFilterChange}
             filter={this.props.filter}
               viewType={viewType}
               setContactsViewType={setContactsViewType}
-            //   currentPartnerData={this.props.currentPartnerData}
-            //   handlePartnerClear={this.props.handlePartnerClear}
-            //   setCurrentPartnerData={this.props.setCurrentPartnerData}
-            //   // selectedChoice={this.props.selectedChoice}
-            //   // handleChoiceChange={this.props.handleChoiceChange}
-            //   selectedCountry={this.props.selectedCountry}
-            //   handleCountryChange={this.props.handleCountryChange}
+              currentUser={currentUser}
+            currentData={currentData}
+            handleClear={handleClear}
+     
+            handleChange={handleChange}
+            handleCurrentData={handleCurrentData}
+           
             />
           }
           rightComponent={

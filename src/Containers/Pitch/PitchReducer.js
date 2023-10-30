@@ -34,6 +34,9 @@ const initialState = {
     updatePitchById:false,
     updatePitchByIdError:false,
 
+    fetchingPitchSearchData:false,
+    fetchingPitchSearchDataError:false,
+
 
     fetchingPitchOpportunity:false,
     fetchingPitchOpportunityError:false,
@@ -328,6 +331,19 @@ case types.GET_PITCH_REQUEST:
                       fetchingPitchStatus: false,
                       fetchingPitchStatusError: true,
                   };
+
+                  case types.GET_PITCH_SEARCH_REQUEST:
+                    return { ...state, fetchingPitchSearchData: true };
+                  case types.GET_PITCH_SEARCH_SUCCESS:
+                    return {
+                      ...state,
+                      fetchingPitchSearchData: false,
+                      pitchData: action.payload,
+                      // serachedData: action.payload,
+                    };
+                  case types.GET_PITCH_SEARCH_FAILURE:
+                    return { ...state, fetchingPitchSearchDataError: true };
+              
                 
 
     default:

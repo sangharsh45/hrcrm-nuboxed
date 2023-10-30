@@ -178,3 +178,35 @@ export const getContactInvest = (userId) => (dispatch) => {
       });
     });
 };
+
+export const searchInvestorContactName = (name) => (dispatch) => {
+  dispatch({
+    type: types.GET_INVESTOR_CONTACT_SEARCH_REQUEST,
+  });
+  axios
+    .get(`${base_url}/contact/Invester/search/${name}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      // const actualData = res.data;
+      // const filteredData = actualData.filter((item) => { return item.name !== null })
+      // message.success(res.data.message);
+      // message.success("Data has been updated successfully!");
+  
+    
+    
+      dispatch({
+        type: types.GET_INVESTOR_CONTACT_SEARCH_SUCCESS,
+        payload: res.data,
+      });
+    }
+    )
+    .catch((err) => {
+      dispatch({
+        type: types.GET_INVESTOR_CONTACT_SEARCH_FAILURE,
+        payload: err,
+      });
+    });
+}; 

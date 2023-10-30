@@ -20,18 +20,22 @@ const [currentData,setcurrentData]=useState("");
 const [currentUser,setcurrentUser]=useState("");
 const [filter, setFilter] = useState("creationdate");
 
-function handleClear () {
-  const startDate = moment()
-    .startOf("month")
-    .toISOString();
-  const endDate = moment()
-    .endOf("month")
-    .toISOString();
-    setcurrentData(currentData);
-props.emptyInvestor();
-  this.props.getInvestorsbyId(this.state.currentUser?this.state.currentUser:this.props.userId,0);
-  this.props.getLatestCustomer(this.props.userId);
-  this.props.getCustomerCloser(this.props.userId, startDate, endDate);
+// function handleClear () {
+//   const startDate = moment()
+//     .startOf("month")
+//     .toISOString();
+//   const endDate = moment()
+//     .endOf("month")
+//     .toISOString();
+//     setcurrentData(currentData);
+// props.emptyInvestor();
+//   this.props.getInvestorsbyId(this.state.currentUser?this.state.currentUser:this.props.userId,0,"creationdate");
+//   this.props.getLatestCustomer(this.props.userId);
+//   this.props.getCustomerCloser(this.props.userId, startDate, endDate);
+// };
+const handleClear = () => {
+  setcurrentData("");
+  props.getInvestorsbyId(currentUser || props.userId, 0, "creationdate");
 };
 function handleCurrentData (value){
   setcurrentData(value)
@@ -60,6 +64,7 @@ const handleChange = (e) => {
           currentUser={currentUser}
           currentData={currentData}
           handleClear={handleClear}
+       
           handleChange={handleChange}
           handleCurrentData={handleCurrentData}
           handleFilterChange={handleFilterChange}
