@@ -16,6 +16,7 @@ const plainOptions = ['Access', 'Create', 'Update', 'Delete','Full List'];
  const defaultCheckedList=['Full List'];
  const dashboardCheckedList=['Access','Full List'];
  const settingsCheckedList=['Access'];
+ const basicCheckedList=['Access'];
  const repositoryCheckedList=['Create'];
  const junkCheckedList=['Access',"Transfer"];
 // const defaultCheckedList = ['Apple', 'Orange'];
@@ -63,6 +64,7 @@ const AccessForm = (props) => {
     setCheckedDealList(props.departmentAcces.deal)
     setCheckedPitchList(props.departmentAcces.pitch)
     setCheckedRepositoryList(props.departmentAcces.repository)
+    setCheckedBasicList(props.departmentAcces.basic)
     
   }, [props.departmentAcces.vendor,
   props.departmentAcces.customer,
@@ -95,6 +97,7 @@ const AccessForm = (props) => {
   props.departmentAcces.settings,
   props.departmentAcces.task,
   props.departmentAcces.junk,
+  props.departmentAcces.basic,
   props.departmentAcces.investor,
   props.departmentAcces.investorContact,
   props.departmentAcces.deal,
@@ -619,6 +622,24 @@ const AccessForm = (props) => {
                            setCheckAllSettings(e.target.checked);
                          };
 
+
+                                // Settings
+
+                                const [checkedBasicList, setCheckedBasicList] = useState(props.departmentAcces.basic              );
+                                const [indeterminateBasic, setIndeterminateBasic] = useState(true);
+                                const [checkAllBasic, setCheckAllBasic] = useState(false);
+                              
+                                const onBasicChange = (list) => {
+                                  setCheckedBasicList(list);
+                                  setIndeterminateBasic(!!list.length && list.length < basicCheckedList.length);
+                                  setCheckAllBasic(list.length === basicCheckedList.length);
+                                };
+                              
+                                const onCheckAllBasicChange = (e) => {
+                                  setCheckedBasicList(e.target.checked ? basicCheckedList : []);
+                                  setIndeterminateBasic(false);
+                                  setCheckAllBasic(e.target.checked);
+                                };
                                 // Tasks
 
                                 const [checkedTasksList, setCheckedTasksList] = useState(props.departmentAcces.task);
@@ -784,6 +805,7 @@ const AccessForm = (props) => {
       deal:checkedDealList || [],
       pitch:checkedPitchList || [],
       repository:checkedRepositoryList || [],
+      basic:checkedBasicList || [],
       
       departmentId: props.departmentId,
       roleTypeId:props.roleTypeId,
@@ -878,6 +900,15 @@ const AccessForm = (props) => {
                 </Checkbox>
                 <Divider />
                 <CheckboxGroup options={settingsCheckedList} value={checkedSettingsList} onChange={onSettingsChange} />
+
+              </div>
+              <div >
+                <h1 class="text-sm">Basic</h1>
+                <Checkbox indeterminate={indeterminateBasic} onChange={onCheckAllBasicChange} checked={checkAllBasic}>
+                <label class="text-xs">  Check all</label>
+                </Checkbox>
+                <Divider />
+                <CheckboxGroup options={basicCheckedList} value={checkedBasicList} onChange={onBasicChange} />
 
               </div>
               <div >

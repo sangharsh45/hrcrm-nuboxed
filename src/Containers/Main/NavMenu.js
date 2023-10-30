@@ -134,6 +134,7 @@ function NavMenu (props) {
           </Menu.Item> */}
           {/* {user.userType !== "USER" && user.department !== "VENDOR" && ( */}
           {/*planner*/}
+          {user.imInd === true  && (
           <Menu.Item key="/planner" style={{height:"30px",paddingLeft:"1rem"}}>
             <Link to="/planner">
               {/* <Icon type="calendar" style={{ color: "white" }} /> */}
@@ -148,6 +149,7 @@ function NavMenu (props) {
               </span>
             </Link>
           </Menu.Item>
+           )}
           {/*planner*/}
           {/* )} */}
           {/* <Menu.Item key="/planner">
@@ -189,6 +191,7 @@ function NavMenu (props) {
                   </span>
                 }
               > */}
+               {user.imInd === true  && (
           <Menu.Item key="/call" style={{height:"30px",paddingLeft:"1rem"}}>
             <Link to="/call">
               {/* <Icon style={{ color: "white" }} type="phone" /> */}
@@ -208,6 +211,8 @@ function NavMenu (props) {
               ></Badge>
             </Link>
           </Menu.Item>
+               )}
+                {user.imInd === true  && (
           <Menu.Item key="task" style={{height:"30px",paddingLeft:"1rem"}}>
             <Link to="/Task">
               {/* <Icon type="file-done" /> */}
@@ -226,6 +231,8 @@ function NavMenu (props) {
               ></Badge>
             </Link>
           </Menu.Item>
+                )}
+                 {user.imInd === true  && (
           <Menu.Item key="event" style={{height:"30px",paddingLeft:"1rem"}}>
             <Link to="/Event">
               {/* <Icon type="schedule" /> */}
@@ -247,6 +254,7 @@ function NavMenu (props) {
               ></Badge>
             </Link>
           </Menu.Item>
+                 )}
           {/* <Menu.Item key="/mileage">
               <Link to="/mileage">
                 <Icon type="dashboard" style={{ color: "white" }} />
