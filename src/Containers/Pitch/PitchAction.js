@@ -490,7 +490,7 @@ export const getPitch = (userId) => (dispatch) => {
   export const addPitchNote = (note, cb) => (dispatch) => {
     dispatch({ type: types.ADD_PITCH_NOTES_REQUEST });
     axios
-      .post(`${base_url}/pitch/notes`, note, {
+      .post(`${base_url}/investorleads/notes`, note, {
         headers: {
           Authorization: "Bearer " + sessionStorage.getItem("token") || "",
         },
@@ -513,12 +513,12 @@ export const getPitch = (userId) => (dispatch) => {
       });
   };
 
-  export const getNotesListByPitchId = (leadsId) => (dispatch) => {
+  export const getNotesListByPitchId = (investorLeadsId) => (dispatch) => {
     dispatch({
       type: types.GET_NOTES_LIST_BY_PITCH_ID_REQUEST,
     });
     axios
-      .get(`${base_url}/leads/note/${leadsId}`, {
+      .get(`${base_url}/investorleads/note/${investorLeadsId}`, {
         headers: {
           Authorization: "Bearer " + sessionStorage.getItem("token") || "",
         },
