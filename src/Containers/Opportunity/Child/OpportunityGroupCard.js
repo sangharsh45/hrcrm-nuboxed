@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Avatar, Divider, Button, Menu, Dropdown } from "antd";
+import {  Button, Popconfirm,Tooltip } from "antd";
 import { UserOutlined } from '@ant-design/icons';
 import { FormattedMessage } from "react-intl";
 import { elipsize } from "../../../Helpers/Function/Functions";
@@ -40,15 +40,13 @@ import { CurrencySymbol } from "../../../Components/Common";
 const BussinessCard = (props) => {
   const {
     handleClick,
-    handlePreview,
-    imageId,
     imageURL,
     primaryTitle,
     secondaryTitle,
-    subtitle1,
-    subtitle2,
     currencyType,
-    currency,
+    opportunityId,
+    handleWon,
+    handleConfirm
   } = props;
   console.log("...>>>>>>>>>>>.......<<<<<<<<<<<<<<", imageURL);
   return (
@@ -82,16 +80,61 @@ const BussinessCard = (props) => {
               {primaryTitle || ""}
             </Title>
             <SubTitle>
-              {/* <UserOutlined theme="filled" /> */}
-              {/* <i class="far fa-address-book"></i> */}
               &nbsp;&nbsp;
               {currencyType && <CurrencySymbol currencyType={currencyType} />}
              
               &nbsp;             
               {secondaryTitle || ""} 
-              <CheckCircleTwoTone style={{ color: "rgb(14, 149, 144)"}} type="check-circle" theme="twoTone" />
+              <Popconfirm
+  title="Change status to Won?"
+  onConfirm={() => handleWon(opportunityId)}
+  okText="Yes"
+  cancelText="No"
+>
+  <Tooltip 
+    title={<FormattedMessage
+      id="app.Own"
+      defaultMessage="Won"
+    />}
+
+  >
+    <CheckCircleTwoTone
+      type="check-circle"
+      theme="twoTone"
+      twoToneColor="#24D8A7"
+      size={140}
+      style={{ fontSize:"1rem" 
+     
+     }}
+   
+    />
+  </Tooltip>
+  </Popconfirm>
+
               &nbsp;    
-              <StopTwoTone type="stop" theme="twoTone" twoToneColor="red" />
+              <Popconfirm
+  title="Change status to Lost?"
+  onConfirm={() => handleConfirm(opportunityId)}
+  okText="Yes"
+  cancelText="No"
+>
+ <Tooltip
+        title={
+          <FormattedMessage id="app.drop" defaultMessage="Lost" />
+        }
+      >
+ 
+  <StopTwoTone
+          type="stop"
+          theme="twoTone"
+          twoToneColor="red"
+          size={140}
+          style={{
+            fontSize: "1rem"
+          }}
+        />
+        </Tooltip>
+    </Popconfirm>
               <Button style={{marginLeft:"0.25rem"}}>Drop</Button>
             </SubTitle>      
           </FlexContainer>
@@ -101,7 +144,6 @@ const BussinessCard = (props) => {
         </FlexContainer>
 
         <SubTitle style={{ color: "#337df4", fontSize: "0.75em" }}>
-          {/* {elipsize(subtitle1 || "", 23)} */}
         </SubTitle>
       </MainWrapper>
     </FlexContainer>
