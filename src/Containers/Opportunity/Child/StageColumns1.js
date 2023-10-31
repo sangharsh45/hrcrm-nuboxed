@@ -1,10 +1,14 @@
 import React, { Component } from "react";
 import styled from "styled-components";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
 import { Draggable } from "react-beautiful-dnd";
 import { BussinessCard } from "../../../Components/UI/Elements";
 import OpportunityGroupCard from "../Child/OpportunityGroupCard";
 import { MainWrapper, FlexContainer } from "../../../Components/UI/Layout";
 import { elipsize } from "../../../Helpers/Function/Functions";
+import {  StatusRecruit, lostStatusRecruit} from "../OpportunityAction";
+
 const StageContainer = styled.div`
   padding: 0.8rem 1.5rem;
   margin: 0.2rem;
@@ -19,24 +23,6 @@ const Stage = styled.h3`
 class StageColumns1 extends Component {
   render() {
     const { opportunity, index, history } = this.props;
-    console.log(opportunity);
-    // let opportunityValue;
-    // if (tradeCurrency) {
-    //     if (tradeCurrency === 'USD') {
-    //         opportunityValue = USD
-    //     }
-    //     else if (tradeCurrency === 'INR') {
-    //         opportunityValue = INR
-    //     }
-    //     else if (tradeCurrency === 'GBP') {
-    //         opportunityValue = GBP
-    //     }
-    //     else {
-    //         opportunityValue = EUR
-    //     }
-    // } else {
-    //     opportunityValue = EUR
-    // }
     return (
       <Draggable
       draggableId={opportunity.opportunityId}
@@ -52,29 +38,28 @@ class StageColumns1 extends Component {
   
             <OpportunityGroupCard
               isDragging={snapshot.isDragging}
-              // imageURL={
-              //   opportunity.metaData &&
-              //   opportunity.metaData.account &&
-              //   opportunity.metaData.account.imageURL
-              // }
-              // imageId={
-              //   opportunity.metaData &&
-              //   opportunity.metaData.account &&
-              //   opportunity.metaData.account.imageId
-              // }
+              opportunityId={opportunity.opportunityId}
               primaryTitle={`${elipsize(opportunity.opportunityName, 60)}`} 
               secondaryTitle={`${opportunity.proposalAmount} `}
               currencyType={opportunity.currency}
-            //   subtitle1={opportunity.description || "-"}
-            //   subtitle2={opportunity.phoneNo || "-"}
-              // handlePreview={() => this.props.handleContactDrawer(opportunity, true)}
               handleClick={() =>
                 history.push({
                   pathname: `opportunity/${opportunity.opportunityId}`,
                   state: { opportunityDetail: opportunity },
                 })
               }
+               handleWon={() => {
+                this.props.StatusRecruit(opportunity.opportunityId, {
+                  wonInd:true
+                })
+              }}
+              handleConfirm ={() => {
+                this.props.lostStatusRecruit(opportunity.opportunityId, {
+                  lostInd: true
+                })
+              }}
             />
+             
             </div>
             )}
                  </Draggable>
@@ -82,4 +67,18 @@ class StageColumns1 extends Component {
     );
   }
 }
-export default StageColumns1;
+const mapStateToProps = ({ auth, account, opportunity }) => ({
+  userId: auth.userDetails.userId,
+  user: auth.userDetails,
+});
+const mapDispatchToProps = (dispatch) =>
+  bindActionCreators(
+    {
+    
+         StatusRecruit,
+         lostStatusRecruit,
+     
+    },
+    dispatch
+  );
+export default connect(mapStateToProps, mapDispatchToProps)(StageColumns1); ;

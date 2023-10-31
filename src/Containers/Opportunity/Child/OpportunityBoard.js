@@ -119,28 +119,17 @@ const DragDropContextDiv = styled.div`
 
 function OpportunityBoard(props) {
   const { userId, opportunities, process, ProcessStages, udatingOpp } = props;
-  // const [processId, setProcessId] = useState("");
 
   function proposalAmountCalculate(stageId) {
     const { opportunities } = props;
     let value = 0;
     opportunities.forEach((item) => {
       if (item.stageId === stageId) {
-        //debugger;
         value = value + item.userCurrencyAmount;
       }
     });
     return Math.round(value);
   }
-
-  // const getArray = process[0];
-  // console.log("getArray value...........", getArray);
-  // setProcessId(process[0]);
-  // // useEffect(() => {
-  // //   console.log("getArray value...........", process[0].processId);
-  // // });
-  // console.log(processId);
-
   const processData = useMemo(() => {
     if (!props.opportunityProcess) return null;
     let id = props.opportunityProcess[0];
@@ -148,68 +137,19 @@ function OpportunityBoard(props) {
   }, [props.opportunityProcess]);
 
   useEffect(() => {
-    //debugger;
-    // if (!processData) return;
     props.getProcessForOpportunity(props.orgId);
      props.getAllOpportunityListByUserId(props.userId)
   }, []);
 
   useEffect(() => {
-    //debugger;
     if (!processData) return;
     props.getProcessStagesForOpportunity(processData.opportunityWorkflowDetailsId);
   }, [processData]);
-  // var newArr = Array.from(process.length && process);
-  // console.log("shifting value...........", newArr);
-  // if (newArr.length) {
-  //   const value = newArr.shift();
-  //   console.log("shifting value...........", value);
-  //   const processId = value["processId"];
-  //   console.log("processId value...........", processId);
-  // }
-  // const processId = value["processId"];
-  // console.log("processId value...........", processId);
-  // useEffect(() => {
-  //   if (!processId) return;
-  //   props.getProcessStages(processId);
-  // }, [processId]);
-  // const processId = useMemo(() => {
-  //   const value = props.process.shift();
-  //   console.log("shifting value...........", value);
-  //   return value;
-  // });
-  // console.log("ProcessID>>>>>>>>>>>>>>>>>>>>>>>>>>>>", processId);
 
-  // const processId = useMemo(() => {
-  //   if (!opportunities) return null;
-  //   var processMapper = {};
-
-  //   for (var i = 0; i < opportunities.length; i++) {
-  //     const val = opportunities[i].processId;
-  //     console.log(val);
-  //     if (!processMapper[val]) {
-  //       //debugger;
-  //       processMapper[val] = 1;
-  //     } else {
-  //       processMapper[val] = processMapper[val] + 1;
-  //     }
-  //   }
-  //   console.log(processMapper);
-  //   let val = 0;
-  //   let id = "";
-  //   Object.entries(processMapper).forEach(([key, value]) => {
-  //     if (value > val) {
-  //       val = value;
-  //       id = key;
-  //     }
-  //   });
-  //   return id;
-  // }, [opportunities]);
 
   const [isDragging, setIsDragging] = useState(false);
   const [currentProcess, setCurrentProcess] = useState({});
   const close = (key) => {
-    //debugger;
 
     notification.close(key);
     console.log(
@@ -220,92 +160,27 @@ function OpportunityBoard(props) {
     const key = `success`;
     const btn = (
       <></>
-      // <Button
-      //   type="primary"
-      //   size="small"
-      //   onClick={() => notification.close(key)}
-      // >
-      //   Confirm
-      // </Button>
+    
     );
-    // notification.open({
-    //   message: "Congratulations on this Win!",
-    //   icon: <SmileOutlined style={{ color: "tomato" }} />,
-    //   description: (
-    //     <AddReason
-    //       addReson={props.addReson}
-    //       opportunityId={opportunityId}
-    //       stageId={stageId}
-    //       close={close}
-    //     />
-    //   ),
-    //   duration: 0,
-    //   closeIcon: null,
-    //   // btn,
-    //   key,
-    //   onClose: close,
-    //   style: {
-    //     backgroundColor: "whiteSmoke",
-    //   },
-    // });
   }
 
   function openNotificationForLoss(opportunityId, stageId) {
     const key = `success`;
     const btn = (
       <></>
-      // <Button
-      //   type="primary"
-      //   size="small"
-      //   onClick={() => notification.close(key)}
-      // >
-      //   Confirm
-      // </Button>
+    
     );
-    // notification.open({
-    //   message: "Better luck next time",
-    //   icon: <MehOutlined style={{ color: "#108ee9" }} />,
-    //   description: (
-    //     <AddReason
-    //       addReson={props.addReson}
-    //       opportunityId={opportunityId}
-    //       stageId={stageId}
-    //       close={close}
-    //       forLoss
-    //     />
-    //   ),
-    //   duration: 0,
-    //   // btn,
-    //   key,
-    //   onClose: close,
-    //   style: {
-    //     backgroundColor: "whiteSmoke",
-    //   },
-    // });
+   
   }
-//   function handleCallback(data) {
-//     //debugger;
-//     const { getOpportunityRelatedData, userId, startDate, endDate } = props;
-//     if (data.probability === 100) {
-//       //debugger;
-//       openNotification(data.opportunityId, data.stageId);
 
-//       getOpportunityRelatedData(userId, startDate, endDate);
-//     } else if (data.probability === 0) {
-//       openNotificationForLoss(data.opportunityId, data.stageId);
-//       getOpportunityRelatedData(userId, startDate, endDate);
-//     } else {
-//       getOpportunityRelatedData(userId, startDate, endDate);
-//     }
-//   }
   function onDragEnd(result) {
     console.log(result);
     setIsDragging(false);
-    //stop navigation is offline
+
     if (!navigator.onLine) {
       return;
     }
-    // dropped nowhere
+
     if (!result.destination) {
       return;
     }
@@ -313,7 +188,7 @@ function OpportunityBoard(props) {
     const { draggableId, destination, source } = result;
     console.log(destination);
     console.log("drag",draggableId);
-    // did not move anywhere - can bail early
+
     if (
       source.droppableId === destination.droppableId &&
       source.index === destination.index
@@ -336,7 +211,7 @@ function OpportunityBoard(props) {
       source.droppableId,
       destination.droppableId,
       draggableId,
-      //handleCallback
+
     );
   }
 
@@ -346,27 +221,14 @@ function OpportunityBoard(props) {
   function dragUpdate() {
     setIsDragging(false);
   }
-//   useEffect(() => {
-//     if (!userId) return;
-//     props.getProcess();
-//     props.getOpportunities(userId);
-//     props.getAccounts(userId);
-//   }, [userId]);
+
 
   function handleProcessClick(item) {
     setCurrentProcess(item);
     props.getProcessStagesForOpportunity(item.opportunityWorkflowDetailsId);
   }
   function handleTabChange() { }
-  // if (props.fetchingProcessStages) {
-  //   return <BundleLoader />;
-  // }
-  // useEffect(() => {
-  //   openNotification();
-  // });
-//   if (props.fetchingOpportunities) {
-//     return <BundleLoader />;
-//   }
+
   return (
     <FlexContainer flexWrap="nowrap">
       <MainWrapper
@@ -378,7 +240,6 @@ function OpportunityBoard(props) {
       >
         <div style={{ display: "flex" }}>
         <StyledTabs
-  // defaultActiveKey={this.state.activeKey}
   onChange={handleTabChange}
   type="card"
 >
@@ -397,10 +258,6 @@ function OpportunityBoard(props) {
 </StyledTabs>
 
         </div>
-        {/* {!props.opportunities.length ? (
-          <BundleLoader />
-        ) : ( */}
-          
             <FlexContainer flexWrap="no-wrap" style={{ justifyContent:"center",height:"28rem"}}>
               <DragDropContext
                  onDragEnd={onDragEnd}
@@ -428,12 +285,8 @@ function OpportunityBoard(props) {
                                   }}
                                 >
                                   <StageHeader style={{ position: "absolute" }}>
-                                  {/* {elipsize(stage.stageName, 30)} */}
                                     <div>{stage.stageName}</div>
                                     <div>
-                                     {/* {`${stage.proposalAmount} `} */}
-                                  
-
                                     </div>
                                   </StageHeader>
                                   <Spin
@@ -463,7 +316,6 @@ function OpportunityBoard(props) {
                                             />
                                           );
                                         })}
-                                        {/* <h1>Hello World</h1> */}
                                     </StageColumn>
                                   </Spin>
                                 </div>
@@ -476,8 +328,6 @@ function OpportunityBoard(props) {
                 </Container>
               </DragDropContext>
             </FlexContainer>
-          
-        {/* )} */}
       </MainWrapper>
     </FlexContainer>
   );
@@ -485,25 +335,13 @@ function OpportunityBoard(props) {
 
 const mapStateToProps = ({
   opportunity,
-  account,
-  dashboard,
   auth,
   settings,
 }) => ({
     opportunityProcess: settings.opportunityProcess,
     orgId: auth.userDetails && auth.userDetails.organizationId,
-//   fetchingOpportunities: opportunity.fetchingOpportunities,
-//   startDate: dashboard.startDate,
-//   endDate: dashboard.endDate,
    userId: auth.userDetails.userId,
    opportunityByUserId:opportunity.opportunityByUserId,
-//   process: settings.Process,
-//   tradeCurrency: auth.userDetails.tradeCurrency,
-//   opportunities: opportunitySelector(opportunity, account),
-//   ProcessStages: settings.ProcessStages,
-//   stages: opportunity.stages,
-//   fetchingProcessStages: settings.fetchingProcessStages,
-//   udatingOpp: opportunity.udatingOpp,
 opportunityProcessStages: settings.opportunityProcessStages,
 });
 const mapDispatchToProps = (dispatch) =>
@@ -513,14 +351,6 @@ const mapDispatchToProps = (dispatch) =>
         getProcessStagesForOpportunity,
         getAllOpportunityListByUserId,
         updateOpportunitydragstage
-    //   updateOpportunityStage,
-    //   getOpportunityRelatedData,
-    //   getOpportunities,
-    //   getAccounts,
-    //   getStages,
-    //   getProcess,
-    //   getProcessStages,
-    //   addReson,
     },
     dispatch
   );
