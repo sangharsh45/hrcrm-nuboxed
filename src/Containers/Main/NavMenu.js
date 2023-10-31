@@ -134,7 +134,7 @@ function NavMenu (props) {
           </Menu.Item> */}
           {/* {user.userType !== "USER" && user.department !== "VENDOR" && ( */}
           {/*planner*/}
-          {user.imInd === true  && (
+          {user.imInd === true  && user.basicAccessInd === true && (
           <Menu.Item key="/planner" style={{height:"30px",paddingLeft:"1rem"}}>
             <Link to="/planner">
               {/* <Icon type="calendar" style={{ color: "white" }} /> */}
@@ -191,7 +191,7 @@ function NavMenu (props) {
                   </span>
                 }
               > */}
-               {user.imInd === true  && (
+               {user.imInd === true  && user.basicAccessInd === true &&  (
           <Menu.Item key="/call" style={{height:"30px",paddingLeft:"1rem"}}>
             <Link to="/call">
               {/* <Icon style={{ color: "white" }} type="phone" /> */}
@@ -212,7 +212,7 @@ function NavMenu (props) {
             </Link>
           </Menu.Item>
                )}
-                {user.imInd === true  && (
+                {user.imInd === true  && user.basicAccessInd === true &&  (
           <Menu.Item key="task" style={{height:"30px",paddingLeft:"1rem"}}>
             <Link to="/Task">
               {/* <Icon type="file-done" /> */}
@@ -232,7 +232,7 @@ function NavMenu (props) {
             </Link>
           </Menu.Item>
                 )}
-                 {user.imInd === true  && (
+                 {user.imInd === true  && user.basicAccessInd === true &&  (
           <Menu.Item key="event" style={{height:"30px",paddingLeft:"1rem"}}>
             <Link to="/Event">
               {/* <Icon type="schedule" /> */}
@@ -266,7 +266,7 @@ function NavMenu (props) {
 
           {/*Activity*/}
           {/*Reports*/}
-          {user.imInd === true  && (
+          {user.imInd === true  && user.basicAccessInd === true &&  (
           <Menu.Item key="/reports" style={{height:"30px",paddingLeft:"1rem"}}>
             <Link to="/reports">
               <PictureAsPdfIcon

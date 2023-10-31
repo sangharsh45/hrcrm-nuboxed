@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from "react-redux";
 import { StyledPopconfirm} from "../../Components/UI/Antd";
 import { bindActionCreators } from "redux";
-import { getRepositoryDocuments ,deleteOrgDocata,LinkOrgDocPublish} from "../Auth/AuthAction";
+import { getRepositoryDocuments ,deleteOrgDocata,LinkOrgDocPublish,LinkOrgDocPrivate} from "../Auth/AuthAction";
 import styled from 'styled-components';
 import { base_url } from "../../Config/Auth";
 import { Switch ,Button} from "antd";
@@ -29,6 +29,7 @@ class OrganizationDocumentList extends Component {
           isViewAll: false,
           currentProcess: [],
           currentProcessItem:{},
+          currentProcessItem1:{},
           currentStageId: "",
           currentStage: [],
           currentStageName: "",
@@ -49,6 +50,8 @@ class OrganizationDocumentList extends Component {
     }
   };
 
+
+
   handlePublishClick = (item) => {
 console.log(item)
 this.setState({
@@ -64,8 +67,24 @@ this.setState({
      this.props.LinkOrgDocPublish(data, this.handleCallBack1);
   };
 
+  handlePrivateClick = (item) => {
+    console.log(item);
+    this.setState({
+      currentProcessItem1: item,
+    });
+
+    const organizationDocumentLinkId = item.organizationDocumentLinkId;
+
+    let data = {
+      organizationDocumentLinkId: organizationDocumentLinkId,
+      publicInd: item.publicInd ? false : true,
+    };
+
+    this.props.LinkOrgDocPrivate(data, this.handleCallBack1);
+};
+
   render() {
-     console.log("karisma",this.state.currentProcessItem)
+     console.log("karisma",this.state.currentProcessItem1)
     const{user}=this.props;
     return (
       <div className="overflow-y-auto max-h-[39rem]">
@@ -128,18 +147,13 @@ this.setState({
                     ):null} 
                   </div>
                   <div className=" flex font-medium flex-col  max-sm:flex-row w-full mt-1 max-sm:justify-between">
-                    {item.userId === "EMP16818052295222021" && user.repositoryCreateInd ===true && (
-                      <Button
-                      // style={{width:"5rem"}}
-                 
-                        onClick={this.handlePublishClick}
-                      >
-                        {/* {this.state.change?"Publish":"Unpublish"}  */}
-                        {this.state.currentProcess.shareInd
-                          ? "Private"
-                          : "Public"}
-                      </Button>
-                    )} 
+                  {item.userId === "EMP16818052295222021" && item.shareInd === true && user.repositoryCreateInd ===true  ? (
+                 <Button
+                 onClick={() => this.handlePrivateClick(item)}
+             >
+                 {item.publicInd ? "Private" : "Public"}
+             </Button>
+                      ):null} 
                   </div>
                   </div>
                   <div>
@@ -191,7 +205,8 @@ const mapDispatchToProps = (dispatch) =>
     {
       getRepositoryDocuments,
       deleteOrgDocata,
-      LinkOrgDocPublish
+      LinkOrgDocPublish,
+      LinkOrgDocPrivate
     },
     dispatch
   );

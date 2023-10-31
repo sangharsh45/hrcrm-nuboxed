@@ -1140,3 +1140,30 @@ export const LinkOrgDocPublish = (data, cb,) => (dispatch) => {
       cb && cb("Failure");
     });
 };
+
+export const LinkOrgDocPrivate = (data, cb,) => (dispatch) => {
+  dispatch({ type: types.LINK_ORG_DOC_PRIVATE_REQUEST });
+
+  axios
+    .put(`${base_url}/organization/publicInd`, data, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.LINK_ORG_DOC_PRIVATE_SUCCESS,
+        payload: res.data,
+      });
+      cb && cb("Success", res.data);
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.LINK_ORG_DOC_PRIVATE_FAILURE,
+      });
+      cb && cb("Failure");
+    });
+};

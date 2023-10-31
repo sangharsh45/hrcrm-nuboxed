@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import EmployeesHeader from "./Child/EmployeesHeader";
 import AddEmploymentModal from "./Child/AddEmployeeModal";
-import { setEmployeeViewType, handleEmployeeModal, getEmployeelist } from "./EmployeeAction";
+import { setEmployeeViewType, handleEmployeeModal, getEmployeelist,getEmployeeFilterlist } from "./EmployeeAction";
 import EmployeeCardView from "./Child/EmployeeCard/EmployeeCardView";
 import EmployeeCardList from "./Child/EmployeeCard/EmployeeCardList";
 const EmployeeTable = lazy(() => import("./Child/EmployeeTable/EmployeeTable"));
@@ -11,7 +11,7 @@ const EmployeeGroup = lazy(() => import("./Child/EmployeeGroup/EmployeeGroup"));
 
 class Employees extends Component {
 
-  state = { currentData: "" };
+  state = { currentData: "", filter:"cretiondate", };
   handleClear = () => {
     this.setState({ currentData: "" });
     this.props.getEmployeelist();
@@ -23,6 +23,10 @@ class Employees extends Component {
     this.setState({ currentData: e.target.value })
    
   };
+  handleFilterChange=(data)=>{
+    this.setState({filter:data})
+    this.props.getEmployeeFilterlist(data)
+  }
   handleClear = () => {
     this.setState({ currentData: "" });
     // this.props.emptyCustomer();
@@ -41,6 +45,8 @@ class Employees extends Component {
           handleEmployeeModal={handleEmployeeModal}
           setEmployeeViewType={setEmployeeViewType}
           viewType={viewType}
+          handleFilterChange={this.handleFilterChange}
+          filter={this.state.filter}
           handleClear={this.handleClear}
           handleChange={this.handleChange}
           currentData={this.state.currentData}
@@ -53,6 +59,7 @@ class Employees extends Component {
         {/* <EmployeeTable /> */}
         { this.props.viewType==="tile"?
         <EmployeeCardView
+        filter={this.state.filter}
            viewType={viewType}
         />:
         this.props.viewType === "table" ?
@@ -61,6 +68,7 @@ class Employees extends Component {
         />:
         this.props.viewType === "card" ?
         <EmployeeCardList 
+        filter={this.state.filter}
         viewType={viewType}
         />:
         null}
@@ -80,6 +88,7 @@ const mapDispatchToProps = (dispatch) =>
       setEmployeeViewType,
       handleEmployeeModal,
       getEmployeelist,
+      getEmployeeFilterlist
     },
     dispatch
   );

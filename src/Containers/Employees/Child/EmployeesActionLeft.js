@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import TocIcon from '@mui/icons-material/Toc';
+import { StyledSelect } from "../../../Components/UI/Antd";
 import { withRouter } from "react-router-dom";
 import { inputEmployeeDataSearch, getRecords } from "../EmployeeAction";
 import { Button, Input, Tooltip, Badge } from "antd";
@@ -10,6 +11,7 @@ import TableViewIcon from "@mui/icons-material/TableView";
 import GroupsIcon from "@mui/icons-material/Groups";
 import GridViewIcon from '@mui/icons-material/GridView';
 const { Search } = Input;
+const Option = StyledSelect.Option;
 
 const EmployeesActionLeft = (props) => {
   useEffect(() => {
@@ -109,6 +111,13 @@ const EmployeesActionLeft = (props) => {
           <FormattedMessage id="app.clear" defaultMessage="Clear" />
           {/* Clear */}
         </Button>
+        <div style={{ width: "25%" }}>
+          <StyledSelect placeholder="Sort"  onChange={(e)  => props.handleFilterChange(e)}>
+          <Option value="cretiondate">Creation Date</Option>
+            <Option value="workplace">Work Place</Option>
+           
+          </StyledSelect>
+        </div>
     </div>
   );
 };

@@ -34,6 +34,7 @@ import {
   deletePitchData,
   handleUpdatePitchModal,
   setEditPitch,
+  handlePitchNotesDrawerModal,
   updateTypeForPitch,
   handleAssimodal
 } from "../PitchAction";
@@ -47,6 +48,7 @@ import { FormattedMessage } from "react-intl";
 import { BundleLoader } from "../../../Components/Placeholder";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
 import OpenASSimodal from "./OpenASSimodal";
+import AddPitchNotesDrawerModal from "./AddPitchNotesDrawerModal";
 // import OpenCETmodal from "./OpenCETmodal";
 
 const ButtonGroup = Button.Group;
@@ -355,10 +357,10 @@ onClick={()=>{
                                 <div class="flex flex-col justify-evenly  ">
                     <Tooltip title="Notes">
        <NoteAltIcon
-                // onClick={() => {
-                //   handleCallNotesDrawerModal(true);
-                //   handleSetCallNameId(item);
-                // }}
+                onClick={() => {
+                  props.handlePitchNotesDrawerModal(true);
+                  handleSetCurrentLeadsId(item);
+                }}
                 style={{ color: "green", cursor: "pointer", fontSize: "1rem" }}
               />
            </Tooltip>
@@ -459,6 +461,11 @@ onClick={()=>{
         openASSImodal={props.openASSImodal}
       handleAssimodal={props.handleAssimodal}
       />
+         <AddPitchNotesDrawerModal 
+       item={currentLeadsId}
+        addDrawerPitchNotesModal={props.addDrawerPitchNotesModal}
+        handlePitchNotesDrawerModal={props.handlePitchNotesDrawerModal}
+      />
     </>
   );
 };
@@ -466,6 +473,7 @@ onClick={()=>{
 const mapStateToProps = ({ auth, leads, sector,pitch }) => ({
 //   leadsAllData: leads.leadsAllData,
   userId: auth.userDetails.userId,
+  addDrawerPitchNotesModal:pitch.addDrawerPitchNotesModal,
   updatePitchModal:pitch.updatePitchModal,
   openASSImodal:pitch.openASSImodal,
   pitchData:pitch.pitchData
@@ -478,6 +486,7 @@ const mapDispatchToProps = (dispatch) =>
         handleUpdatePitchModal,
         setEditPitch,
         updateTypeForPitch,
+        handlePitchNotesDrawerModal,
         handleAssimodal
     //   getLeads,
     //   getSectors,

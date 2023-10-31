@@ -19,6 +19,9 @@ const initialState = {
   linkingOrgDocsPublish: false,
   linkingOrgDocsPublishError: false,
 
+  linkingOrgDocsPrivate: false,
+  linkingOrgDocsPrivateError: false,
+
   editingOrganizationDetails: false,
   editingOrganizationDetailsError: false,
   organizationDetails:{},
@@ -777,6 +780,33 @@ export const authReducer = (state = initialState, action) => {
               ...state,
               linkingOrgDocsPublish: false,
               linkingOrgDocsPublishError: true,
+            };
+
+            
+          case types.LINK_ORG_DOC_PRIVATE_REQUEST:
+            return {
+              ...state,
+              linkingOrgDocsPrivate: true,
+            };
+          case types.LINK_ORG_DOC_PRIVATE_SUCCESS:
+            return {
+              ...state,
+              linkingOrgDocsPrivate: false,
+              repositoryData: state.repositoryData.map((item) => {
+                if (
+                  item.documentId === action.payload.documentId
+                ) {
+                  return action.payload;
+                } else {
+                  return item;
+                }
+              }),
+            };
+          case types.LINK_ORG_DOC_PRIVATE_FAILURE:
+            return {
+              ...state,
+              linkingOrgDocsPrivate: false,
+              linkingOrgDocsPrivateError: true,
             };
 
     

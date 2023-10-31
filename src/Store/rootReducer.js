@@ -70,6 +70,8 @@ import { sourceReducer } from "../Containers/Settings/Category/Source/SourceRedu
 import {investorReducer} from "../Containers/Investor/InvestorReducer";
 import {contactInvestReducer} from "../Containers/ContactInvest/ContactInvestReducer";
 import {dealReducer} from "../Containers/Deal/DealReducer";
+import { shipByReducer } from "../Containers/Settings/Category/ShipBy/ShipByReducer";
+import { catgCustomerReducer } from "../Containers/Settings/Category/Customer/CustomerReducer";
 
 const appReducer = combineReducers({
   dashboard: dashboardReducer,
@@ -133,6 +135,8 @@ source:sourceReducer,
 investor:investorReducer,
 contactinvest:contactInvestReducer,
 deal:dealReducer,
+shipBy:shipByReducer,
+catgCustomer:catgCustomerReducer,
 });
 
 const rootReducer = (state, action) => {

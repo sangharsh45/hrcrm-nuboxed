@@ -56,7 +56,7 @@ function EmployeeTable(props) {
         }
       }
     })
-    props.getEmployeelist();
+    props.getEmployeelist("cretiondate");
     props.getDesignations();
     props.getRoles(props.organizationId);
     props.getDepartments();

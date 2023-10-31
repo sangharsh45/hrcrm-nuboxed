@@ -431,7 +431,7 @@ function OpportunityBoard(props) {
                                   {/* {elipsize(stage.stageName, 30)} */}
                                     <div>{stage.stageName}</div>
                                     <div>
-                                     {`${stage.proposalAmount} `}
+                                     {/* {`${stage.proposalAmount} `} */}
                                   
 
                                     </div>
