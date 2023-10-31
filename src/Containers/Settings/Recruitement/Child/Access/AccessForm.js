@@ -15,6 +15,7 @@ const CheckboxGroup = Checkbox.Group;
 const plainOptions = ['Access', 'Create', 'Update', 'Delete','Full List'];
  const defaultCheckedList=['Full List'];
  const dashboardCheckedList=['Access','Full List'];
+ const refurbishCheckedList=['Workshop','Adminview','Adminassign'];
  const settingsCheckedList=['Access'];
  const basicCheckedList=['Access'];
  const repositoryCheckedList=['Create'];
@@ -556,12 +557,12 @@ const AccessForm = (props) => {
        
          const onRefurbishChange = (list) => {
            setCheckedRefurbishList(list);
-           setIndeterminateRefurbish(!!list.length && list.length < plainOptions.length);
-           setCheckAllRefurbish(list.length === plainOptions.length);
+           setIndeterminateRefurbish(!!list.length && list.length < refurbishCheckedList.length);
+           setCheckAllRefurbish(list.length === refurbishCheckedList.length);
          };
        
          const onCheckAllRefurbishChange = (e) => {
-           setCheckedRefurbishList(e.target.checked ? plainOptions : []);
+           setCheckedRefurbishList(e.target.checked ? refurbishCheckedList : []);
            setIndeterminateRefurbish(false);
            setCheckAllRefurbish(e.target.checked);
          };
@@ -1105,7 +1106,7 @@ const AccessForm = (props) => {
             <label class="text-xs"> Check all </label>
             </Checkbox>
             <Divider />
-            <CheckboxGroup options={plainOptions} value={checkedRefurbishList} onChange={onRefurbishChange} />
+            <CheckboxGroup options={refurbishCheckedList} value={checkedRefurbishList} onChange={onRefurbishChange} />
 
           </div>
           </FlexContainer>

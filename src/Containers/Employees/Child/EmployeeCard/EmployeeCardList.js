@@ -29,7 +29,7 @@ function EmployeeCardList (props) {
   const [page, setPage] = useState(0);
 
 useEffect(() => {
-  props.getEmployeelist();
+  props.getEmployeelist("cretiondate");
  
 }, []);
 function handleChange(data) {

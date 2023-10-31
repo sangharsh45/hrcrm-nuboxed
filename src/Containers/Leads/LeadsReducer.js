@@ -15,6 +15,8 @@ const initialState = {
   updateLeadsContactByIdError: false,
   documentsByLeadsId: [],
 
+  addDrawerLeadsNotesModal:false,
+
 
   fetchingDocumentsByLeadsId: false,
   fetchingDocumentsByLeadsIdError: false,
@@ -767,6 +769,8 @@ case types.HANDLE_LEADS_MODAL:
                               fetchingCallTimelineStatusError: true,
                           };
 
+                          case types.HANDLE_LEADS_NOTES_DRAWER_MODAL:
+    return { ...state, addDrawerLeadsNotesModal: action.payload };
 
 
 default:

@@ -18,6 +18,7 @@ import {
   getLeads,
   deleteLeadsData,
   setEditLeads,
+  handleLeadsNotesDrawerModal,
   handleUpdateLeadsModal,
   handleLeadsEmailDrawerModal,
   getLeadDetailsById,
@@ -34,6 +35,7 @@ import AddLeadsEmailDrawerModal from "../UpdateLeads/AddLeadsEmailDrawerModal";
 import { BundleLoader } from "../../../../Components/Placeholder";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
 import OpenCETmodal from "./OpenCETmodal";
+import AddLeadsNotesDrawerModal from "../AddLeadsNotesDrawerModal";
 
 const ButtonGroup = Button.Group;
 
@@ -54,7 +56,7 @@ const LeadsCardList = (props) => {
   function handleSetCurrentLeadsId(item) {
     setCurrentLeadsId(item);
   }
-  const { deleteLeadsData, handleUpdateLeadsModal, updateLeadsModal,fetchingLeads,leadsAllData  } = props;
+  const { deleteLeadsData, handleUpdateLeadsModal,handleLeadsNotesDrawerModal, updateLeadsModal,fetchingLeads,leadsAllData  } = props;
 
   if (fetchingLeads) {
     return <BundleLoader />;
@@ -345,10 +347,10 @@ onClick={()=>{
                                 <div class="flex flex-col justify-evenly  ">
                     <Tooltip title="Notes">
        <NoteAltIcon
-                // onClick={() => {
-                //   handleCallNotesDrawerModal(true);
-                //   handleSetCallNameId(item);
-                // }}
+                onClick={() => {
+                  handleLeadsNotesDrawerModal(true);
+                  handleRowData(item);
+                }}
                 style={{ color: "green", cursor: "pointer", fontSize: "1rem" }}
               />
            </Tooltip>
@@ -445,6 +447,11 @@ onClick={()=>{
       openCETmodal={props.openCETmodal}
       handleCETmodal={props.handleCETmodal}
       />
+         <AddLeadsNotesDrawerModal 
+       rowdata={rowdata}
+       addDrawerLeadsNotesModal={props.addDrawerLeadsNotesModal}
+      handleLeadsNotesDrawerModal={props.handleLeadsNotesDrawerModal}
+      />
     </>
   );
 };
@@ -459,6 +466,7 @@ const mapStateToProps = ({ auth, leads, sector }) => ({
   addDrawerLeadsEmailModal: leads.addDrawerLeadsEmailModal,
   fetchingLeads:leads.fetchingLeads,
   openCETmodal:leads.openCETmodal,
+  addDrawerLeadsNotesModal:leads.addDrawerLeadsNotesModal,
 });
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
@@ -468,6 +476,7 @@ const mapDispatchToProps = (dispatch) =>
       deleteLeadsData,
       setEditLeads,
       handleUpdateLeadsModal,
+      handleLeadsNotesDrawerModal,
       handleLeadsEmailDrawerModal,
       getLeadDetailsById,
       getCountries,

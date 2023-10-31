@@ -10,7 +10,7 @@ import { Editor } from "react-draft-wysiwyg";
 import { EditorState, convertToRaw, ContentState } from "draft-js";
 import draftToHtml from "draftjs-to-html";
 //import { TextareaComponent } from "../../../../../Components/Forms/Formik/TextareaComponent";
-  import { addNote } from "../CallAction";
+import { addPitchNote } from "../PitchAction";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 
 
@@ -64,8 +64,9 @@ class NoteFile extends Component {
   render() {
     const {
       user: { userId, firstName, lastName },
-      addNote,
-      
+      addPitchNote,
+      investorLeadsId,
+      OpportunityId,
       notes,
       collectionDTO,
       ownerId,
@@ -78,7 +79,7 @@ class NoteFile extends Component {
       callId,
       // leadsAccountId,
       // contactLeadsId,
-      leadsId,
+  
       eventId,
       taskId,
       type,
@@ -95,11 +96,8 @@ class NoteFile extends Component {
           enableReinitialize
           initialValues={{
             // comment: ""
-            callId: callId ? callId : "",
+            investorLeadsId: investorLeadsId ? investorLeadsId : "",
             notes: "",
-            // taskId:this.props.taskId,
-            // providerId:this.props.userId,
-            // orgId:this.props.organizationId,
           }}
           onSubmit={(values, { resetForm }) => {
             console.log(
@@ -111,7 +109,7 @@ class NoteFile extends Component {
             // const htmlBody = 'draftToHtml(convertToRaw(editorState.getCurrentContent()))'
 
             console.log({ ...values, notes: htmlBody });
-             addNote({ ...values, notes: htmlBody }, this.createCallback);
+            addPitchNote({ ...values, notes: htmlBody }, this.createCallback);
             resetForm();
           }}
         >
@@ -176,10 +174,10 @@ class NoteFile extends Component {
   }
 }
 
-const mapStateToProps = ({ auth, team, task,call }) => ({
+const mapStateToProps = ({ auth, team, task,leads ,pitch}) => ({
   user: auth.userDetails,
   userId: auth.userDetails.userId,
-  fetchingNotesListByCallId: call.fetchingNotesListByCallId,
+  fetchingNotesListByPitchId: pitch.fetchingNotesListByPitchId,
   organizationId: auth.userDetails.organizationId,
      candidateId:auth.userDetails.candidateId,
 
@@ -188,7 +186,7 @@ const mapStateToProps = ({ auth, team, task,call }) => ({
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
-    addNote,
+        addPitchNote,
     },
     dispatch
   );
