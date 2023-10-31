@@ -24,6 +24,8 @@ import FactCheckIcon from '@mui/icons-material/FactCheck';
 import ApartmentIcon from '@mui/icons-material/Apartment';
 import ContactsIcon from '@mui/icons-material/Contacts';
 import ReceiptIcon from '@mui/icons-material/Receipt';
+import AcUnitIcon from '@mui/icons-material/AcUnit';
+import OnDeviceTrainingIcon from '@mui/icons-material/OnDeviceTraining';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import { Link } from "react-router-dom";
 import VolumeUpIcon from '@mui/icons-material/VolumeUp';
@@ -910,6 +912,36 @@ function NavMenu (props) {
             <span class="text-white text-ls ml-1"><FormattedMessage 
               id="app.order"
              defaultMessage="Order"
+         />
+             </span>
+           </Link> 
+          </Menu.Item>
+          )}
+            { user.orderAccessInd === true && user.imInd === true  && (
+         
+         <Menu.Item key="/account" style={{height:"30px",paddingLeft:"1rem"}}>
+          <Link to="/account">
+           <AcUnitIcon
+          style={{ fontSize: "large" }}
+            />
+            <span class="text-white text-ls ml-1"><FormattedMessage 
+              id="app.account"
+             defaultMessage="Account"
+         />
+             </span>
+           </Link> 
+          </Menu.Item>
+          )}
+              { user.orderAccessInd === true && user.imInd === true  && (
+         
+         <Menu.Item key="/refurbish" style={{height:"30px",paddingLeft:"1rem"}}>
+          <Link to="/refurbish">
+           <OnDeviceTrainingIcon
+          style={{ fontSize: "large" }}
+            />
+            <span class="text-white text-ls ml-1"><FormattedMessage 
+              id="app.refurbish"
+             defaultMessage="Refurbish"
          />
              </span>
            </Link> 

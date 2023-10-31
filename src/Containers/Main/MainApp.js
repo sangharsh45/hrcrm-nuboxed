@@ -91,6 +91,8 @@ import Inventory from "./Inventory/Inventory";
 import Order from "./Order/Order";
 import Supplies from "./Supplies/Supplies";
 import Shipper from "./Shipper/Shipper";
+import Account from "./Account/Account";
+import Refurbish from "./Refurbish/Refurbish";
 
 const OpportunityDetail = lazy(() =>
   import("../Opportunity/Child/OpportunityDetail/OpportunityDetail")
@@ -571,6 +573,8 @@ function MainApp(props) {
                       <Route exact path="/expense" component={Expense} />
                       <Route exact path="/supplies" component={Supplies} />
                       <Route exact path="/order" component={Order} />
+                      <Route exact path="/account"component={Account}/>
+                      <Route exact path="/refurbish " component={Refurbish } />
                       <Route exact path="/location" component={Location} />
                       <Route exact path="/plant" component={Plant} />
                       {/* <Route exact path="/suppliers" component={Suppliers} /> */}

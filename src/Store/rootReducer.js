@@ -70,8 +70,14 @@ import { sourceReducer } from "../Containers/Settings/Category/Source/SourceRedu
 import {investorReducer} from "../Containers/Investor/InvestorReducer";
 import {contactInvestReducer} from "../Containers/ContactInvest/ContactInvestReducer";
 import {dealReducer} from "../Containers/Deal/DealReducer";
+import {suppliesReducer} from "../Containers/Main/Supplies/SuppliesReducer";
+import {shipperReducer} from "../Containers/Main/Shipper/ShipperReducer";
+import {plantReducer} from "../Containers/Main/Plant/PlantReducer";
+import {teamsReducer} from "../Containers/Main/Teams/TeamsReducer";
+import {inventoryReducer} from "../Containers/Main/Inventory/InventoryReducer";
+import {orderReducer} from "../Containers/Main/Order/OrderReducer";
 import { shipByReducer } from "../Containers/Settings/Category/ShipBy/ShipByReducer";
-import { catgCustomerReducer } from "../Containers/Settings/Category/Customer/CustomerReducer";
+import { catgCustomerReducer } from "../Containers/Settings/Category/Customer/CustomerReducer"
 
 const appReducer = combineReducers({
   dashboard: dashboardReducer,
@@ -135,6 +141,12 @@ source:sourceReducer,
 investor:investorReducer,
 contactinvest:contactInvestReducer,
 deal:dealReducer,
+supplies: suppliesReducer,
+shipper: shipperReducer,
+plant: plantReducer,
+teams: teamsReducer,
+inventory: inventoryReducer,
+order: orderReducer,
 shipBy:shipByReducer,
 catgCustomer:catgCustomerReducer,
 });

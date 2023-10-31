@@ -1,0 +1,1760 @@
+
+import * as types from "./AccountActionType";
+
+const initialState = {
+  viewType: "list",
+
+  addDistributorModal: false,
+  setEditingDistributor: {},
+
+  checkingTaskCompletion: false,
+  checkingTaskCompletionError: false,
+
+  addingOrder: false,
+  addingOrderError: false,
+  orderDetailsId: {},
+
+  addingDistributor: false,
+  addingDistributorError: false,
+
+  fetchingDistributorsByUserId: false,
+  fetchingDistributorsByUserIdError: false,
+  distributorsByUserId: [],
+
+  fetchingDistributorDetailsByDistributorId: false,
+  fetchingDistributorDetailsByDistributorIdError: false,
+  distributorDetailsByDistributorId: [],
+
+  addLinkDistributorOrderConfigureModal: false,
+
+  addingOrderByDistributorId: false,
+  addingOrderByDistributorIdError: false,
+
+  clearbitOrder: {},
+
+  addInventoryInOrder: false,
+
+  fetchingDistributorOrder: false,
+  fetchingDistributorOrderError: false,
+  orderForGenerating: [],
+
+  addDistributorSubscriptionConfigureModal: false,
+
+  fetchingActivityDistributor: false,
+  fetchingActivityDistributorError: false,
+  activityDistributor: [],
+
+  addDistributorActivityModal: false,
+
+  addingDistributorActivityCall: false,
+  addingDistributorActivityCallError: false,
+
+  addingDistributorActivityEvent: false,
+  addingDistributorActivityEventError: false,
+
+  addingDistributorActivityTask: false,
+  addingDistributorActivityTaskError: false,
+
+  fetchingNotesListByDistributorId: false,
+  fetchingNotesListByDistributorIdError: false,
+  notesListByDistributorId: [],
+
+  generatingOrderByDistributorId: false,
+  generatingOrderByDistributorIdError: false,
+
+  fetchingDistributorByDistributorId: false,
+  fetchingDistributorByDistributorIdError: false,
+  distributorOrder: [],
+
+  addRenewalButtonModal: false,
+
+  addPauseButtonModal: false,
+
+  updateDistributorModal: false,
+
+  linkingRenewalByDistributorId: false,
+  linkingRenewalByDistributorIdError: false,
+
+  linkingPauseByDistributorId: false,
+  linkingPauseByDistributorIdError: false,
+
+  updateEventModal: false,
+  updateCallModal: false,
+  updateTaskModal: false,
+
+  updateDisributorById: false,
+  updateDisributorByIdError: false,
+
+  fetchingInputDistributorData: false,
+  fetchingInputDistributorDataError: false,
+
+  fetchingOrderDetailsById: false,
+  fetchingOrderDetailsByIdError: false,
+  orderByOrderId: [],
+
+  fetchingAllDistributors: false,
+  fetchingAllDistributorsError: false,
+  allDistributors: [],
+
+  addDistributorOrderModal: false,
+
+  addDistributorActivityTableModal: false,
+
+  setEditingOrder: {},
+
+  updatingQCStatus: false,
+  updatingQCStatusError: false,
+
+  updateOrderDetailModal: false,
+
+  updateDisributorOrderById: false,
+  updateDisributorOrderByIdError: false,
+
+  fetchingOrderHistoryById: false,
+  fetchingOrderHistoryByIdError: true,
+  orderHistory: [],
+
+  updatingDistributorById: false,
+  updatingDistributorByIdError: false,
+
+  fetchingFeedbackByDistributorId: false,
+  fetchingFeedbackByDistributorIdError: false,
+  feedbacks: [],
+
+  addingLocationInOrder: false,
+  addingLocationInOrderError: false,
+
+  feedbackModal: false,
+
+  fetchingFeedbackByOrderId: false,
+  fetchingFeedbackByOrderIdError: false,
+  orderFeedbacks: [],
+
+  fetchingDistributorHistory: false,
+  fetchingDistributorHistoryError: true,
+  distributorHistory: [],
+
+  addPaidButtonModal: false,
+
+  addingPaidByDistributorId: false,
+  addingPaidByDistributorIdError: false,
+
+  fetchingPaymentHistory: false,
+  fetchingPaymentHistoryError: false,
+  paymentHistory: [],
+
+  updatingOfferPriceOfOrder: false,
+  updatingOfferPriceOfOrderError: false,
+
+  deletingDistributorData: false,
+  deletingDistributorDataError: false,
+
+  updatingDistributorCall: false,
+  updatingDistributorCallError: false,
+
+  updatingDistributorEvent: false,
+  updatingDistributorEventError: false,
+
+  updatingDistributorTask: false,
+  updatingDistributorTaskError: false,
+
+  fetchingDeletedDistributors: false,
+  fetchingDeletedDistributorsError: false,
+  deletedDistributors: [],
+
+  fetchingRecordsByUserId: false,
+  fetchingRecordsByUserIdError: false,
+  recordData: {},
+
+  applyingForLoginInContact: false,
+  applyingForLoginInContactError: false,
+
+  fetchingDistributorsDeletedOrderById: false,
+  fetchingDistributorsDeletedOrderByIdError: false,
+  distributorDeletedOrder: [],
+
+  addDeleteOrderModal: false,
+
+  deletingDistributorOrderData: false,
+  deletingDistributorOrderDataError: false,
+
+  fetchingAllRecords: false,
+  fetchingAllRecordsError: false,
+  recordAllData: {},
+
+  addingSpareList: false,
+  addingSpareListError: false,
+
+  fetchingSpareListByPhoneId: false,
+  fetchingSpareListByPhoneIdError: false,
+  spareList: [],
+
+  updateProductDetailModal: false,
+
+  setEditingOrderDetail: {},
+
+  fetchingPhoneListById: false,
+  fetchingPhoneListByIdError: false,
+  phoneListById: [],
+
+  //document
+  distributorDocumentUploadModal: false,
+  //add document
+  addingDocumentByDistributorId: false,
+  addingDocumentByDistributorIdError: false,
+
+  addingCar: false,
+  addingCarError: false,
+
+  //get document
+  fetchingDocumentsByDistributorId: false,
+  fetchingDocumentsByDistributorIdError: false,
+  documentsByDistributorId: [],
+
+  fetchingDocumentsByTable: false,
+  fetchingDocumentsByTableError: false,
+  documentTable: [],
+
+  fetchingRenewOrderByOrderId: false,
+  fetchingRenewOrderByOrderIdError: false,
+  RenewOrder: [],
+
+  distributorContactModal: false,
+
+  addingContactDistributor: false,
+  addingContactDistributorError: false,
+
+  fetchingContactDistributorsById: false,
+  fetchingContactDistributorsByIdError: false,
+  contactDistributor: [],
+
+  setEditingDistributorContact: {},
+
+  updateDistributorContactModal: false,
+
+  updateDisributorContactById: false,
+  updateDisributorContactByIdError: false,
+
+  setEditingPayment: {},
+
+  updatePaymentModal: false,
+
+  updateOrderPayment: false,
+  updateOrderPaymentError: false,
+
+  deletingOrderPaymentData: false,
+  deletingOrderPaymentDataError: false,
+
+  fetchingRealTimeDistributorPayment: false,
+  fetchingRealTimeDistributorPaymentError: false,
+
+  updatingOrderDetails: false,
+  updatingOrderDetailsError: false,
+
+  reInstateToggleForOrder: false,
+  reInstateToggleForOrderError: false,
+
+  addBillToAddress: false,
+
+  fetchingBillingAddressById: false,
+  fetchingBillingAddressByIdError: false,
+  billAddress: {},
+
+  addingBillingAddress: false,
+  addingBillingAddressError: false,
+
+  fetchingChoosenCurrencyId: false,
+  fetchingChoosenCurrencyIdError: false,
+  orderCurrency: {},
+
+  addingCurrencyForOrder: false,
+  addingCurrencyForOrderError: false,
+
+  fetchingProductByCurrency: false,
+  fetchingProductByCurrencyError: false,
+  currencyWiseProduct: [],
+
+  receivingTaskCompletionByDispatch: false,
+  receivingTaskCompletionByDispatchError: false,
+
+  fetchingTaggedSuppliesByBrand: false,
+  fetchingTaggedSuppliesByBrandError: false,
+  spareByBrand: [],
+
+  fetchingDistributorByGroup: false,
+  fetchingDistributorByGroupError: false,
+  distributorGroup: [],
+
+  generateQuoteInDistributor: false,
+
+  fetchingDistributorQuoteByDistributorId: false,
+  fetchingDistributorQuoteByDistributorIdError: false,
+  distributorQuote: [],
+
+  startingQcInStatus: false,
+  startingQcInStatusError: false,
+
+  startRepairingInStatus: false,
+  startRepairingInStatusError: false,
+
+  addNotesInOrder: false,
+  fetchingNotesInOrders: false,
+  fetchingNotesInOrdersError: false,
+  notesInOrders: [],
+
+  addStatusOfOrder: false,
+  fetchingPhoNotesOrder: false,
+  fetchingPhoNotesOrderError: false,
+  phoNotesOrder: [],
+  phoNotesOrderModal: false,
+
+  fetchingPhoTasklist: false,
+  fetchingPhoTasklist: false,
+  phoTasklist: [],
+
+  orderCartDrawer:false,
+};
+
+export const distributorReducer = (state = initialState, action) => {
+  switch (action.type) {
+    //set view type
+    case types.SET_DISTRIBUTOR_VIEW_TYPE:
+      return { ...state, viewType: action.payload };
+
+    case types.HANDLE_DISTRIBUTOR_MODAL:
+      return { ...state, addDistributorModal: action.payload };
+
+    /**
+     * Add a distributor
+     */
+    case types.ADD_DISTRIBUTOR_REQUEST:
+      return { ...state, addingDistributor: true };
+    case types.ADD_DISTRIBUTOR_SUCCESS:
+      return {
+        ...state,
+        addingDistributor: false,
+        addDistributorModal: false,
+      };
+    case types.ADD_DISTRIBUTOR_FAILURE:
+      return {
+        ...state,
+        addingDistributor: false,
+        addingDistributorError: true,
+        addDistributorModal: false,
+      };
+
+    /**
+     * get the list of all distributors
+     */
+    case types.GET_DISTRIBUTORS_BY_USER_ID_REQUEST:
+      return { ...state, fetchingDistributorsByUserId: true };
+    case types.GET_DISTRIBUTORS_BY_USER_ID_SUCCESS:
+      return {
+        ...state,
+        fetchingDistributorsByUserId: false,
+        distributorsByUserId: action.payload,
+      };
+    case types.GET_DISTRIBUTORS_BY_USER_ID_FAILURE:
+      return {
+        ...state,
+        fetchingDistributorsByUserId: false,
+        fetchingDistributorsByUserIdError: true,
+      };
+
+    case types.GET_DISTRIBUTOR_BY_DISTRIBUTOR_ID_REQUEST:
+      return { ...state, fetchingDistributorDetailsByDistributorId: true };
+    case types.GET_DISTRIBUTOR_BY_DISTRIBUTOR_ID_SUCCESS:
+      return {
+        ...state,
+        fetchingDistributorDetailsByDistributorId: false,
+        distributorDetailsByDistributorId: action.payload,
+      };
+    case types.GET_DISTRIBUTOR_BY_DISTRIBUTOR_ID_FAILURE:
+      return {
+        ...state,
+        fetchingDistributorDetailsByDistributorId: false,
+        fetchingDistributorDetailsByDistributorIdError: true,
+      };
+
+    /**
+     * handle order modal
+     */
+    case types.HANDLE_LINK_ORDER_CONFIGURE_MODAL:
+      return {
+        ...state,
+        addLinkDistributorOrderConfigureModal: action.payload,
+      };
+    /**
+     * link product
+     */
+    case types.LINK_ORDER_BY_DISTRIBUTOR_ID_REQUEST:
+      return {
+        ...state,
+        addingOrderByDistributorId: true,
+      };
+    case types.LINK_ORDER_BY_DISTRIBUTOR_ID_SUCCESS:
+      return {
+        ...state,
+        addingOrderByDistributorId: false,
+        addLinkDistributorOrderConfigureModal: false,
+      };
+    case types.LINK_ORDER_BY_DISTRIBUTOR_ID_FAILURE:
+      return {
+        ...state,
+        addingOrderByDistributorId: false,
+        addingOrderByDistributorIdError: true,
+        addLinkDistributorOrderConfigureModal: false,
+      };
+
+    case types.SET_CLEARBIT_ORDER_DATA:
+      return { ...state, clearbitOrder: action.payload };
+
+    case types.FETCHING_NEW_DISTRIBUTOR_ORDER_REQUEST:
+      return {
+        ...state,
+        fetchingDistributorOrder: true,
+      };
+    case types.FETCHING_NEW_DISTRIBUTOR_ORDER_SUCCESS:
+      return {
+        ...state,
+        fetchingDistributorOrder: false,
+        orderForGenerating: action.payload,
+      };
+    case types.FETCHING_NEW_DISTRIBUTOR_ORDER_FAILURE:
+      return {
+        ...state,
+        fetchingDistributorOrder: false,
+        fetchingDistributorOrderError: true,
+      };
+    /**
+     * handle subscription modal
+     */
+    case types.HANDLE_DISTRIBUTOR_SUBSCRIPTION_MODAL:
+      return {
+        ...state,
+        addDistributorSubscriptionConfigureModal: action.payload,
+      };
+
+    /**
+     * get the list of all activity distributors
+     */
+    case types.GET_ACTIVITY_LIST_BY_DISTRIBUTORID_REQUEST:
+      return { ...state, fetchingActivityDistributor: true };
+    case types.GET_ACTIVITY_LIST_BY_DISTRIBUTORID_SUCCESS:
+      return {
+        ...state,
+        fetchingActivityDistributor: false,
+        activityDistributor: action.payload,
+      };
+    case types.GET_ACTIVITY_LIST_BY_DISTRIBUTORID_FAILURE:
+      return {
+        ...state,
+        fetchingActivityDistributor: false,
+        fetchingActivityDistributorError: true,
+      };
+    /**
+     * handle order modal
+     */
+    case types.HANDLE_DISTRIBUTOR_ACTIVITY_MODAL:
+      return { ...state, addDistributorActivityModal: action.payload };
+
+    /**
+     * add call activity
+     */
+    case types.ADD_DISTRIBUTOR_ACTIVITY_CALL_REQUEST:
+      return { ...state, addingDistributorActivityCall: true };
+    case types.ADD_DISTRIBUTOR_ACTIVITY_CALL_SUCCESS:
+      return {
+        ...state,
+        addingDistributorActivityCall: false,
+        addDistributorActivityModal: false,
+      };
+    case types.ADD_DISTRIBUTOR_ACTIVITY_CALL_FAILURE:
+      return {
+        ...state,
+        addingDistributorActivityCall: false,
+        addingDistributorActivityCallError: false,
+        addDistributorActivityModal: false,
+      };
+
+    /**
+     * add event activity
+     */
+    case types.ADD_DISTRIBUTOR_ACTIVITY_EVENT_REQUEST:
+      return { ...state, addingDistributorActivityEvent: true };
+    case types.ADD_DISTRIBUTOR_ACTIVITY_EVENT_SUCCESS:
+      return {
+        ...state,
+        addingDistributorActivityEvent: false,
+        addDistributorActivityModal: false,
+      };
+    case types.ADD_DISTRIBUTOR_ACTIVITY_EVENT_FAILURE:
+      return {
+        ...state,
+        addingDistributorActivityEvent: false,
+        addingDistributorActivityEventError: false,
+        addDistributorActivityModal: false,
+      };
+
+    /**
+     * add task activity
+     */
+    case types.ADD_DISTRIBUTOR_ACTIVITY_TASK_REQUEST:
+      return { ...state, addingDistributorActivityTask: true };
+    case types.ADD_DISTRIBUTOR_ACTIVITY_TASK_SUCCESS:
+      return {
+        ...state,
+        addingDistributorActivityTask: false,
+        addDistributorActivityModal: false,
+      };
+    case types.ADD_DISTRIBUTOR_ACTIVITY_TASK_FAILURE:
+      return {
+        ...state,
+        addingDistributorActivityTask: false,
+        addingDistributorActivityTaskError: false,
+        addDistributorActivityModal: false,
+      };
+
+    /**
+     * get notes list by distributorId
+     */
+    case types.GET_NOTES_LIST_BY_DISTRIBUTOR_ID_REQUEST:
+      return { ...state, fetchingNotesListByDistributorId: true };
+    case types.GET_NOTES_LIST_BY_DISTRIBUTOR_ID_SUCCESS:
+      return {
+        ...state,
+        fetchingNotesListByDistributorId: false,
+        notesListByDistributorId: action.payload,
+      };
+    case types.GET_NOTES_LIST_BY_DISTRIBUTOR_ID_FAILURE:
+      return {
+        ...state,
+        fetchingNotesListByDistributorId: false,
+        fetchingNotesListByDistributorIdError: true,
+      };
+    /**
+     * generate order with subscription
+     */
+
+    case types.GENERATE_ORDER_BY_DISTRIBUTOR_ID_REQUEST:
+      return {
+        ...state,
+        generatingOrderByDistributorId: true,
+      };
+    case types.GENERATE_ORDER_BY_DISTRIBUTOR_ID_SUCCESS:
+      return {
+        ...state,
+        generatingOrderByDistributorId: false,
+        addDistributorSubscriptionConfigureModal: false,
+      };
+    case types.GENERATE_ORDER_BY_DISTRIBUTOR_ID_FAILURE:
+      return {
+        ...state,
+        generatingOrderByDistributorId: false,
+        generatingOrderByDistributorIdError: true,
+        addDistributorSubscriptionConfigureModal: false,
+      };
+    /**
+     * get the list of all order distributors
+     */
+    case types.GET_DISTRIBUTOR_ORDER_BY_DISTRIBUTOR_ID_REQUEST:
+      return { ...state, fetchingDistributorByDistributorId: true };
+    case types.GET_DISTRIBUTOR_ORDER_BY_DISTRIBUTOR_ID_SUCCESS:
+      return {
+        ...state,
+        fetchingDistributorByDistributorId: false,
+        distributorOrder: action.payload,
+      };
+    case types.GET_DISTRIBUTOR_ORDER_BY_DISTRIBUTOR_ID_FAILURE:
+      return {
+        ...state,
+        fetchingDistributorByDistributorId: false,
+        fetchingDistributorByDistributorIdError: true,
+      };
+    /**
+     * renewal modal
+     */
+    case types.HANDLE_RENEWAL_BUTTON_MODAL:
+      return { ...state, addRenewalButtonModal: action.payload };
+
+    /**
+     * Pause modal
+     */
+    case types.HANDLE_PAUSE_BUTTON_MODAL:
+      return { ...state, addPauseButtonModal: action.payload };
+
+    /**
+     * post renwal form
+     */
+
+    case types.LINK_RENEWAL_BY_DISTRIBUTOR_ID_REQUEST:
+      return {
+        ...state,
+        linkingRenewalByDistributorId: true,
+      };
+    case types.LINK_RENEWAL_BY_DISTRIBUTOR_ID_SUCCESS:
+      return {
+        ...state,
+        linkingRenewalByDistributorId: false,
+        addRenewalButtonModal: false,
+        distributorOrder: state.distributorOrder.map((item) => {
+          if (item.orderId == action.payload.orderId) {
+            return action.payload;
+          } else {
+            return item;
+          }
+        }),
+      };
+    case types.LINK_RENEWAL_BY_DISTRIBUTOR_ID_FAILURE:
+      return {
+        ...state,
+        linkingRenewalByDistributorId: false,
+        linkingRenewalByDistributorIdError: true,
+        addRenewalButtonModal: false,
+      };
+
+    /**
+     * post pause form
+     */
+
+    case types.LINK_PAUSE_BY_DISTRIBUTOR_ID_REQUEST:
+      return {
+        ...state,
+        linkingPauseByDistributorId: true,
+      };
+    case types.LINK_PAUSE_BY_DISTRIBUTOR_ID_SUCCESS:
+      return {
+        ...state,
+        linkingPauseByDistributorId: false,
+        addPauseButtonModal: false,
+        distributorOrder: state.distributorOrder.map((item) => {
+          if (item.orderId == action.payload.orderId) {
+            return action.payload;
+          } else {
+            return item;
+          }
+        }),
+      };
+    case types.LINK_PAUSE_BY_DISTRIBUTOR_ID_FAILURE:
+      return {
+        ...state,
+        linkingPauseByDistributorId: false,
+        linkingPauseByDistributorIdError: true,
+        addPauseButtonModal: false,
+      };
+
+    /**
+     * update event modal
+     */
+    case types.HANDLE_UPDATE_EVENT_MODAL:
+      return { ...state, updateEventModal: action.payload };
+
+    /**
+     * update call modal
+     */
+    case types.HANDLE_UPDATE_CALL_MODAL:
+      return { ...state, updateCallModal: action.payload };
+
+    /**
+     * update task modal
+     */
+    case types.HANDLE_UPDATE_TASK_MODAL:
+      return { ...state, updateTaskModal: action.payload };
+
+    case types.SET_DISTRIBUTOR_EDIT:
+      return { ...state, setEditingDistributor: action.payload };
+    /**
+     * update distributor modal
+     */
+    case types.HANDLE_UPDATE_DISTRIBUTOR_MODAL:
+      return { ...state, updateDistributorModal: action.payload };
+
+    /**
+     * update a single distributor by its ID
+     */
+    case types.UPDATE_DISTRIBUTOR_BY_ID_REQUEST:
+      return { ...state, updateDisributorById: true };
+    case types.UPDATE_DISTRIBUTOR_BY_ID_SUCCESS:
+      return {
+        ...state,
+        updateDisributorById: false,
+        updateDistributorModal: false,
+        distributorsByUserId: state.distributorsByUserId.map((item) => {
+          if (item.distributorId == action.payload.distributorId) {
+            return action.payload;
+          } else {
+            return item;
+          }
+        }),
+      };
+    case types.UPDATE_DISTRIBUTOR_BY_ID_FAILURE:
+      return {
+        ...state,
+        updateDisributorById: false,
+        updateDisributorByIdError: true,
+      };
+
+    case types.INPUT_SEARCH_DATA_REQUEST:
+      return { ...state, fetchingInputDistributorData: true };
+    case types.INPUT_SEARCH_DATA_SUCCESS:
+      return {
+        ...state,
+        fetchingInputDistributorData: false,
+        distributorsByUserId: state.viewType === "all" ? null : action.payload,
+        allDistributors: state.viewType === "all" ? action.payload : null,
+        // serachedData: action.payload,
+      };
+    case types.INPUT_SEARCH_DATA_FAILURE:
+      return { ...state, fetchingInputDistributorDataError: true };
+
+    case types.GET_ORDER_DETAILS_BY_ID_REQUEST:
+      return { ...state, fetchingOrderDetailsById: true };
+    case types.GET_ORDER_DETAILS_BY_ID_SUCCESS:
+      return {
+        ...state,
+        fetchingOrderDetailsById: false,
+        orderByOrderId: action.payload,
+      };
+    case types.GET_ORDER_DETAILS_BY_ID_FAILURE:
+      return {
+        ...state,
+        fetchingOrderDetailsById: false,
+        fetchingOrderDetailsByIdError: true,
+      };
+
+    /**get the list of all distributors*/
+    case types.GET_ALL_DISTRIBUTORS_LIST_REQUEST:
+      return { ...state, fetchingAllDistributors: true };
+    case types.GET_ALL_DISTRIBUTORS_LIST_SUCCESS:
+      return {
+        ...state,
+        fetchingAllDistributors: false,
+        allDistributors: action.payload,
+      };
+    case types.GET_ALL_DISTRIBUTORS_LIST_FAILURE:
+      return {
+        ...state,
+        fetchingAllDistributors: false,
+        fetchingAllDistributorsError: true,
+      };
+
+    case types.HANDLE_DISTRIBUTOR_ORDER_MODAL:
+      return {
+        ...state,
+        addDistributorOrderModal: action.payload,
+      };
+
+    case types.HANDLE_DISTRIBUTOR_ACTIVITY_TABLE_MODAL:
+      return {
+        ...state,
+        addDistributorActivityTableModal: action.payload,
+      };
+
+    case types.SET_DISTRIBUTOR_ORDER_EDIT:
+      return { ...state, setEditingOrder: action.payload };
+    /**
+     * update Order distributor modal
+     */
+    case types.HANDLE_UPDATE_DISTRIBUTOR_ORDER_MODAL:
+      return { ...state, updateOrderDetailModal: action.payload };
+
+    case types.UPDATE_DISTRIBUTOR_ORDER_BY_ID_REQUEST:
+      return { ...state, updateDisributorOrderById: true };
+    case types.UPDATE_DISTRIBUTOR_ORDER_BY_ID_SUCCESS:
+      return {
+        ...state,
+        updateDisributorOrderById: false,
+        updateOrderDetailModal: false,
+        orderForGenerating: state.orderForGenerating.map((item) => {
+          if (item.productId == action.payload.productId) {
+            return action.payload;
+          } else {
+            return item;
+          }
+        }),
+      };
+    case types.UPDATE_DISTRIBUTOR_ORDER_BY_ID_FAILURE:
+      return {
+        ...state,
+        updateDisributorOrderById: false,
+        updateDisributorOrderByIdError: true,
+      };
+
+    case types.FETCHING_DISTRIBUTOR_ORDER_HISTORY_REQUEST:
+      return { ...state, fetchingOrderHistoryById: true };
+    case types.FETCHING_DISTRIBUTOR_ORDER_HISTORY_SUCCESS:
+      return {
+        ...state,
+        fetchingOrderHistoryById: false,
+        orderHistory: action.payload,
+      };
+    case types.FETCHING_DISTRIBUTOR_ORDER_HISTORY_FAILURE:
+      return {
+        ...state,
+        fetchingOrderHistoryById: false,
+        fetchingOrderHistoryByIdError: true,
+      };
+
+    case types.UPDATE_DISTRIBUTOR_CARD_REQUEST:
+      return { ...state, updatingDistributorById: true };
+    case types.UPDATE_DISTRIBUTOR_CARD_SUCCESS:
+      return {
+        ...state,
+        updatingDistributorById: false,
+        distributorsByUserId: action.payload,
+      };
+    case types.UPDATE_DISTRIBUTOR_CARD_FAILURE:
+      return {
+        ...state,
+        updatingDistributorById: false,
+        updatingDistributorByIdError: true,
+      };
+
+    /**
+     * Distributor Feedback
+     */
+
+    case types.GET_FEEDBACK_BY_DISTRIBUTOR_ID_REQUEST:
+      return { ...state, fetchingFeedbackByDistributorId: true };
+    case types.GET_FEEDBACK_BY_DISTRIBUTOR_ID_SUCCESS:
+      return {
+        ...state,
+        fetchingFeedbackByDistributorId: false,
+        feedbacks: action.payload,
+      };
+    case types.GET_FEEDBACK_BY_DISTRIBUTOR_ID_FAILURE:
+      return {
+        ...state,
+        fetchingFeedbackByDistributorId: false,
+        fetchingFeedbackByDistributorIdError: true,
+      };
+
+    /**
+     * feedback-card modal
+     */
+    case types.HANDLE_FEEDBACK_MODAL:
+      return { ...state, feedbackModal: action.payload };
+
+    /**
+     * Distributor order Feedback
+     */
+
+    case types.GET_FEEDBACK_BY_ORDER_ID_REQUEST:
+      return { ...state, fetchingFeedbackByOrderId: true };
+    case types.GET_FEEDBACK_BY_ORDER_ID_SUCCESS:
+      return {
+        ...state,
+        fetchingFeedbackByOrderId: false,
+        orderFeedbacks: action.payload,
+      };
+    case types.GET_FEEDBACK_BY_ORDER_ID_FAILURE:
+      return {
+        ...state,
+        fetchingFeedbackByOrderId: false,
+        fetchingFeedbackByOrderIdError: true,
+      };
+    /**
+     * get history of distributor
+     */
+    case types.GET_DISTRIBUTOR_HISTORY_REQUEST:
+      return { ...state, fetchingDistributorHistory: true };
+    case types.GET_DISTRIBUTOR_HISTORY_SUCCESS:
+      return {
+        ...state,
+        fetchingDistributorHistory: false,
+        distributorHistory: action.payload,
+      };
+    case types.GET_DISTRIBUTOR_HISTORY_FAILURE:
+      return {
+        ...state,
+        fetchingDistributorHistory: false,
+        fetchingDistributorHistoryError: true,
+      };
+    /**
+     * paid modal
+     */
+    case types.HANDLE_PAID_BUTTON_MODAL:
+      return { ...state, addPaidButtonModal: action.payload };
+
+    /**
+     * post paid form
+     */
+
+    case types.ADD_PAID_BY_DISTRIBUTOR_ID_REQUEST:
+      return {
+        ...state,
+        addingPaidByDistributorId: true,
+      };
+    case types.ADD_PAID_BY_DISTRIBUTOR_ID_SUCCESS:
+      return {
+        ...state,
+        addingPaidByDistributorId: false,
+        addPaidButtonModal: false,
+
+        distributorOrder: state.distributorOrder.map((item) => {
+          if (item.orderId == action.payload.orderId) {
+            return action.payload;
+          } else {
+            return item;
+          }
+        }),
+      };
+    case types.ADD_PAID_BY_DISTRIBUTOR_ID_FAILURE:
+      return {
+        ...state,
+        addingPaidByDistributorId: false,
+        addingPaidByDistributorIdError: true,
+        addPaidButtonModal: false,
+      };
+
+    /**
+     * get Payment history of distributor
+     */
+    case types.FETCHING_DISTRIBUTOR_PAYMENT_HISTORY_REQUEST:
+      return { ...state, fetchingPaymentHistory: true };
+    case types.FETCHING_DISTRIBUTOR_PAYMENT_HISTORY_SUCCESS:
+      return {
+        ...state,
+        fetchingPaymentHistory: false,
+        paymentHistory: action.payload,
+      };
+    case types.FETCHING_DISTRIBUTOR_PAYMENT_HISTORY_FAILURE:
+      return {
+        ...state,
+        fetchingPaymentHistory: false,
+        fetchingPaymentHistoryError: true,
+      };
+
+    case types.DELETE_DISTRIBUTOR_DATA_REQUEST:
+      return { ...state, deletingDistributorData: true };
+    case types.DELETE_DISTRIBUTOR_DATA_SUCCESS:
+      return {
+        ...state,
+        deletingDistributorData: false,
+        distributorsByUserId: state.distributorsByUserId.filter(
+          (item) => item.distributorId !== action.payload
+        ),
+      };
+    case types.DELETE_DISTRIBUTOR_DATA_FAILURE:
+      return {
+        ...state,
+        deletingDistributorData: false,
+        deletingDistributorDataError: true,
+      };
+
+    case types.UPDATE_DISTRIBUTOR_CALL_BY_ID_REQUEST:
+      return { ...state, updatingDistributorCall: true };
+    case types.UPDATE_DISTRIBUTOR_CALL_BY_ID_SUCCESS:
+      return {
+        ...state,
+        updatingDistributorCall: false,
+        updateCallModal: false,
+        activityDistributor: state.activityDistributor.map((item) => {
+          if (item.callId === action.payload.callId) {
+            return action.payload;
+          } else {
+            return item;
+          }
+        }),
+      };
+    case types.UPDATE_DISTRIBUTOR_CALL_BY_ID_FAILURE:
+      return {
+        ...state,
+        updatingDistributorCall: false,
+        updatingDistributorCallError: true,
+      };
+
+    case types.UPDATE_DISTRIBUTOR_EVENT_BY_ID_REQUEST:
+      return { ...state, updatingDistributorEvent: true };
+    case types.UPDATE_DISTRIBUTOR_EVENT_BY_ID_SUCCESS:
+      return {
+        ...state,
+        updatingDistributorEvent: false,
+        updateEventModal: false,
+        activityDistributor: state.activityDistributor.map((item) => {
+          if (item.eventId === action.payload.eventId) return action.payload;
+          else {
+            return item;
+          }
+        }),
+      };
+    case types.UPDATE_DISTRIBUTOR_EVENT_BY_ID_FAILURE:
+      return {
+        ...state,
+        updatingDistributorEvent: false,
+        updatingDistributorEventError: true,
+      };
+
+    case types.UPDATE_DISTRIBUTOR_TASK_BY_ID_REQUEST:
+      return { ...state, updatingDistributorTask: true };
+    case types.UPDATE_DISTRIBUTOR_TASK_BY_ID_SUCCESS:
+      return {
+        ...state,
+        updatingDistributorTask: false,
+        updateTaskModal: false,
+        activityDistributor: state.activityDistributor.map((item) => {
+          if (item.taskId === action.payload.taskId) return action.payload;
+          else {
+            return item;
+          }
+        }),
+      };
+    case types.UPDATE_DISTRIBUTOR_TASK_BY_ID_FAILURE:
+      return {
+        ...state,
+        updatingDistributorTask: false,
+        updatingDistributorTaskError: true,
+      };
+
+    //deleteDISTRIBUTORS
+
+    case types.GET_DELETED_DISTRIBUTORS_REQUEST:
+      return { ...state, fetchingDeletedDistributors: true };
+    case types.GET_DELETED_DISTRIBUTORS_SUCCESS:
+      return {
+        ...state,
+        fetchingDeletedDistributors: false,
+        deletedDistributors: action.payload,
+      };
+    case types.GET_DELETED_DISTRIBUTORS_FAILURE:
+      return {
+        ...state,
+        fetchingDeletedDistributors: false,
+        fetchingDeletedDistributorsError: true,
+      };
+
+    //GET RECORDS
+    case types.GET_RECORDS_REQUEST:
+      return { ...state, fetchingRecordsByUserId: true };
+    case types.GET_RECORDS_SUCCESS:
+      return {
+        ...state,
+        fetchingRecordsByUserId: false,
+        recordData: action.payload,
+      };
+    case types.GET_RECORDS_FAILURE:
+      return {
+        ...state,
+        fetchingRecordsByUserId: false,
+        fetchingRecordsByUserIdError: true,
+      };
+
+    case types.FETCHING_DISTRIBUTOR_DELETED_ORDER_BY_ID_REQUEST:
+      return { ...state, fetchingDistributorsDeletedOrderById: true };
+    case types.FETCHING_DISTRIBUTOR_DELETED_ORDER_BY_ID_SUCCESS:
+      return {
+        ...state,
+        fetchingDistributorsDeletedOrderById: false,
+        distributorDeletedOrder: action.payload,
+      };
+    case types.FETCHING_DISTRIBUTOR_DELETED_ORDER_BY_ID_FAILURE:
+      return {
+        ...state,
+        fetchingDistributorsDeletedOrderById: false,
+        fetchingDistributorsDeletedOrderByIdError: true,
+      };
+
+    /**
+     * handle delete order modal
+     */
+    case types.HANDLE_DELETE_ORDER_MODAL:
+      return {
+        ...state,
+        addDeleteOrderModal: action.payload,
+      };
+
+    case types.DELETE_DISTRIBUTOR_ORDER_DATA_REQUEST:
+      return { ...state, deletingDistributorOrderData: true };
+    case types.DELETE_DISTRIBUTOR_ORDER_DATA_SUCCESS:
+      return {
+        ...state,
+        deletingDistributorOrderData: false,
+        addDeleteOrderModal: false,
+        distributorOrder: state.distributorOrder.filter(
+          (item) => item.orderId !== action.payload
+        ),
+      };
+    case types.DELETE_DISTRIBUTOR_ORDER_DATA_FAILURE:
+      return {
+        ...state,
+        deletingDistributorOrderData: false,
+        deletingDistributorOrderDataError: true,
+      };
+
+    //GET ALL RECORDS
+    case types.GET_ALL_RECORDS_REQUEST:
+      return { ...state, fetchingAllRecords: true };
+    case types.GET_ALL_RECORDS_SUCCESS:
+      return {
+        ...state,
+        fetchingAllRecords: false,
+        recordAllData: action.payload,
+      };
+    case types.GET_ALL_RECORDS_FAILURE:
+      return {
+        ...state,
+        fetchingAllRecords: false,
+        fetchingAllRecordsError: true,
+      };
+
+
+    case types.ADD_CAR_REQUEST:
+      return { ...state, addingCar: true };
+    case types.ADD_CAR_SUCCESS:
+      return {
+        ...state,
+        addingCar: false,
+        addLinkDistributorOrderConfigureModal: false,
+        //showReqTable:[action.payload,...state.showReqTable]
+        // addDriverModal: false,
+
+
+      };
+    case types.ADD_CAR_FAILURE:
+      return {
+        ...state, addingCar: false,
+        // addCustomerModal: false 
+      };
+
+    /**
+     * update product detail modal
+     */
+    case types.HANDLE_UPDATE_PRODUCT_DETAIL_MODAL:
+      return { ...state, updateProductDetailModal: action.payload };
+
+    case types.SET_ORDER_DETAIL_EDIT:
+      return { ...state, setEditingOrderDetail: action.payload };
+
+    //document
+    case types.HANDLE_DISTRIBUTOR_DOCUMENT_UPLOAD_MODAL:
+      return { ...state, distributorDocumentUploadModal: action.payload };
+
+    /* add/link distributor document */
+    case types.ADD_DISTRIBUTOR_DOCUMENT_REQUEST:
+      return {
+        ...state,
+        addingDocumentByDistributorId: true,
+        addingDocumentByDistributorIdError: false,
+      };
+    case types.ADD_DISTRIBUTOR_DOCUMENT_SUCCESS:
+      return {
+        ...state,
+        addingDocumentByDistributorId: false,
+        addingDocumentByDistributorIdError: false,
+        distributorDocumentUploadModal: false,
+      };
+    case types.ADD_DISTRIBUTOR_DOCUMENT_FAILURE:
+      return {
+        ...state,
+        addingDocumentByDistributorId: false,
+        addingDocumentByDistributorIdError: true,
+        distributorDocumentUploadModal: false,
+      };
+
+
+    case types.ADD_ORDER_REQUEST:
+      return { ...state, addingOrder: true };
+    case types.ADD_ORDER_SUCCESS:
+      return {
+        ...state,
+        addingOrder: false,
+        orderDetailsId: action.payload
+        // addDriverModal: false,
+
+
+      };
+    case types.ADD_ORDER_FAILURE:
+      return {
+        ...state,
+        addingOrder: false,
+        addingOrderError: true,
+        // addCustomerModal: false 
+      };
+    /**
+     * get list of documents of a DISTRIBUTOR
+     */
+    case types.GET_DISTRIBUTOR_DOCUMENTS_REQUEST:
+      return {
+        ...state,
+        fetchingDocumentsByDistributorId: true,
+      };
+    case types.GET_DISTRIBUTOR_DOCUMENTS_SUCCESS:
+      return {
+        ...state,
+        fetchingDocumentsByDistributorId: false,
+        documentsByDistributorId: action.payload,
+      };
+    case types.GET_DISTRIBUTOR_DOCUMENTS_FAILURE:
+      return {
+        ...state,
+        fetchingDocumentsByDistributorId: false,
+        fetchingDocumentsByDistributorIdError: true,
+      };
+
+
+    case types.GET_DISTRIBUTOR_TABLE_REQUEST:
+      return {
+        ...state,
+        fetchingDocumentsByTable: true,
+      };
+    case types.GET_DISTRIBUTOR_TABLE_SUCCESS:
+      return {
+        ...state,
+        fetchingDocumentsByTable: false,
+        documentTable: action.payload,
+      };
+    case types.GET_DISTRIBUTOR_TABLE_FAILURE:
+      return {
+        ...state,
+        fetchingDocumentsByTable: false,
+        fetchingDocumentsByTableError: true,
+      };
+
+    case types.GET_RENEW_ORDER_REQUEST:
+      return { ...state, fetchingRenewOrderByOrderId: true };
+    case types.GET_RENEW_ORDER_SUCCESS:
+      return {
+        ...state,
+        fetchingRenewOrderByOrderId: false,
+        RenewOrder: action.payload,
+      };
+    case types.GET_RENEW_ORDER_FAILURE:
+      return {
+        ...state,
+        fetchingRenewOrderByOrderId: false,
+        fetchingRenewOrderByOrderIdError: true,
+      };
+
+    case types.HANDLE_DISTRIBUTOR_CONTACT_MODAL:
+      return { ...state, distributorContactModal: action.payload };
+
+    /**
+     * add  distributor's contact
+     */
+
+    case types.ADD_CONTACT_DISTRIBUTOR_REQUEST:
+      return { ...state, addingContactDistributor: true };
+    case types.ADD_CONTACT_DISTRIBUTOR_SUCCESS:
+      return {
+        ...state,
+        addingContactDistributor: false,
+        distributorContactModal: false,
+      };
+    case types.ADD_CONTACT_DISTRIBUTOR_FAILURE:
+      return {
+        ...state,
+        addingContactDistributor: false,
+        addingContactDistributorError: true,
+        distributorContactModal: false,
+      };
+
+    case types.START_QC_STATUS_REQUEST:
+      return { ...state, startingQcInStatus: true };
+    case types.START_QC_STATUS_SUCCESS:
+      return {
+        ...state,
+        startingQcInStatus: false,
+        addStatusOfOrder: false,
+      };
+    case types.START_QC_STATUS_FAILURE:
+      return {
+        ...state,
+        startingQcInStatus: false,
+        startingQcInStatusError: true,
+      };
+
+    case types.START_REPAIR_IN_STATUS_REQUEST:
+      return { ...state, startRepairingInStatus: true };
+    case types.START_REPAIR_IN_STATUS_SUCCESS:
+      return {
+        ...state,
+        startRepairingInStatus: false,
+        addStatusOfOrder: false,
+      };
+    case types.START_REPAIR_IN_STATUS_FAILURE:
+      return {
+        ...state,
+        startRepairingInStatus: false,
+        startRepairingInStatusError: true,
+      };
+    /**
+     * get  distributor's contact list
+     */
+    case types.GET_CONTACT_DISTRIBUTORS_LIST_BY_ID_REQUEST:
+      return { ...state, fetchingContactDistributorsById: true };
+    case types.GET_CONTACT_DISTRIBUTORS_LIST_BY_ID_SUCCESS:
+      return {
+        ...state,
+        fetchingContactDistributorsById: false,
+        contactDistributor: action.payload,
+      };
+    case types.GET_CONTACT_DISTRIBUTORS_LIST_BY_ID_FAILURE:
+      return {
+        ...state,
+        fetchingContactDistributorsById: false,
+        fetchingContactDistributorsByIdError: true,
+      };
+
+    case types.SET_DISTRIBUTOR_CONTACT_EDIT:
+      return { ...state, setEditingDistributorContact: action.payload };
+
+    case types.HANDLE_UPDATE_DISTRIBUTOR_CONTACT_MODAL:
+      return { ...state, updateDistributorContactModal: action.payload };
+
+    case types.UPDATE_DISTRIBUTOR_CONTACT_BY_ID_REQUEST:
+      return { ...state, updateDisributorContactById: true };
+    case types.UPDATE_DISTRIBUTOR_CONTACT_BY_ID_SUCCESS:
+      return {
+        ...state,
+        updateDisributorContactById: false,
+        updateDistributorContactModal: false,
+        contactDistributor: state.contactDistributor.map((item) => {
+          if (item.contactPersonId == action.payload.contactPersonId) {
+            return action.payload;
+          } else {
+            return item;
+          }
+        }),
+      };
+    case types.UPDATE_DISTRIBUTOR_CONTACT_BY_ID_FAILURE:
+      return {
+        ...state,
+        updateDisributorContactById: false,
+        updateDisributorContactByIdError: true,
+        updateDistributorContactModal: false,
+      };
+
+    case types.SET_EDIT_PAYMENT_DATA:
+      return { ...state, setEditingPayment: action.payload };
+
+    case types.HANDLE_ORDER_PAYMENT_MODAL:
+      return { ...state, updatePaymentModal: action.payload };
+
+    case types.UPDATE_ORDER_PAYMENT_REQUEST:
+      return { ...state, updateOrderPayment: true };
+    case types.UPDATE_ORDER_PAYMENT_SUCCESS:
+      return {
+        ...state,
+        updateOrderPayment: false,
+        updatePaymentModal: false,
+        paymentHistory: state.paymentHistory.map((item) => {
+          if (item.paymentId === action.payload.paymentId) {
+            return action.payload;
+          } else {
+            return item;
+          }
+        }),
+      };
+    case types.UPDATE_ORDER_PAYMENT_FAILURE:
+      return {
+        ...state,
+        updateOrderPayment: false,
+        updateOrderPaymentError: true,
+        updatePaymentModal: false,
+      };
+    case types.DELETE_ORDER_PAYMENT_DATA_REQUEST:
+      return { ...state, deletingOrderPaymentData: true };
+    case types.DELETE_ORDER_PAYMENT_DATA_SUCCESS:
+      return {
+        ...state,
+        deletingOrderPaymentData: false,
+        paymentHistory: state.paymentHistory.filter(
+          (item) => item.paymentId !== action.payload
+        ),
+      };
+    case types.DELETE_ORDER_PAYMENT_DATA_FAILURE:
+      return {
+        ...state,
+        deletingOrderPaymentData: false,
+        deletingOrderPaymentDataError: true,
+      };
+
+    case types.GET_REAL_TIME_DISTRIBUTOR_PAYMENT_REQUEST:
+      return { ...state, fetchingRealTimeDistributorPayment: true };
+    case types.GET_REAL_TIME_DISTRIBUTOR_PAYMENT_SUCCESS:
+      return {
+        ...state,
+        fetchingRealTimeDistributorPayment: false,
+        paymentHistory: [action.payload],
+        // action.payload,
+      };
+
+    case types.GET_REAL_TIME_DISTRIBUTOR_PAYMENT_FAILURE:
+      return {
+        ...state,
+        fetchingRealTimeDistributorPayment: false,
+        fetchingRealTimeDistributorPaymentError: true,
+      };
+
+    case types.UPDATE_ORDER_DETAILS_REQUEST:
+      return { ...state, updatingOrderDetails: true };
+    case types.UPDATE_ORDER_DETAILS_SUCCESS:
+      return {
+        ...state,
+        updatingOrderDetails: false,
+        updateProductDetailModal: false,
+        orderByOrderId: state.orderByOrderId.map((item) => {
+          if (item.productId == action.payload.productId) {
+            return action.payload;
+          } else {
+            return item;
+          }
+        }),
+      };
+    case types.UPDATE_ORDER_DETAILS_FAILURE:
+      return {
+        ...state,
+        updatingOrderDetails: false,
+        updatingOrderDetailsError: true,
+        updateProductDetailModal: false,
+      };
+
+    case types.REINSTATE_TOGGLE_FOR_ORDER_REQUEST:
+      return { ...state, reInstateToggleForOrder: true };
+    case types.REINSTATE_TOGGLE_FOR_ORDER_SUCCESS:
+      return {
+        ...state,
+        reInstateToggleForOrder: false,
+        distributorDeletedOrder: state.distributorDeletedOrder.filter(
+          (item) => item.orderId !== action.payload.orderId
+        ),
+      };
+    case types.REINSTATE_TOGGLE_FOR_ORDER_FAILURE:
+      return {
+        ...state,
+        reInstateToggleForOrder: false,
+        reInstateToggleForOrderError: true,
+      };
+
+    case types.HANDLE_BILLING_ADDRESS_MODAL:
+      return { ...state, addBillToAddress: action.payload };
+
+    case types.ADD_BILLING_ADDRESS_DISTRIBUTOR_REQUEST:
+      return { ...state, addingBillingAddress: true };
+    case types.ADD_BILLING_ADDRESS_DISTRIBUTOR_SUCCESS:
+      return {
+        ...state,
+        addingBillingAddress: false,
+        // addBillToAddress: false,
+      };
+    case types.ADD_BILLING_ADDRESS_DISTRIBUTOR_FAILURE:
+      return {
+        ...state,
+        addingBillingAddress: false,
+        addingBillingAddressError: true,
+        // addBillToAddress: false,
+      };
+
+    /**
+     * get the list of all distributors
+     */
+    case types.GET_BILLING_ADDRESS_BY_ID_REQUEST:
+      return { ...state, fetchingBillingAddressById: true };
+    case types.GET_BILLING_ADDRESS_BY_ID_SUCCESS:
+      return {
+        ...state,
+        fetchingBillingAddressById: false,
+        billAddress: action.payload,
+      };
+    case types.GET_BILLING_ADDRESS_BY_ID_FAILURE:
+      return {
+        ...state,
+        fetchingBillingAddressById: false,
+        fetchingBillingAddressByIdError: true,
+      };
+
+    case types.ADD_CURRENCY_FOR_ORDER_REQUEST:
+      return { ...state, addingCurrencyForOrder: true };
+    case types.ADD_CURRENCY_FOR_ORDER_SUCCESS:
+      return {
+        ...state,
+        addingCurrencyForOrder: false,
+      };
+    case types.ADD_CURRENCY_FOR_ORDER_FAILURE:
+      return {
+        ...state,
+        addingCurrencyForOrder: false,
+        addingCurrencyForOrderError: true,
+      };
+
+    /**
+     * get the list of all distributors
+     */
+    case types.GET_CHOOSEN_CURRENCYID_REQUEST:
+      return { ...state, fetchingChoosenCurrencyId: true };
+    case types.GET_CHOOSEN_CURRENCYID_SUCCESS:
+      return {
+        ...state,
+        fetchingChoosenCurrencyId: false,
+        orderCurrency: action.payload,
+      };
+    case types.GET_CHOOSEN_CURRENCYID_FAILURE:
+      return {
+        ...state,
+        fetchingChoosenCurrencyId: false,
+        fetchingChoosenCurrencyIdError: true,
+      };
+
+    case types.GET_PRODUCT_BY_CURRENCY_REQUEST:
+      return { ...state, fetchingProductByCurrency: true };
+    case types.GET_PRODUCT_BY_CURRENCY_SUCCESS:
+      return {
+        ...state,
+        fetchingProductByCurrency: false,
+        currencyWiseProduct: action.payload,
+      };
+    case types.GET_PRODUCT_BY_CURRENCY_FAILURE:
+      return {
+        ...state,
+        fetchingProductByCurrency: false,
+        fetchingProductByCurrencyError: true,
+      };
+
+    case types.GET_DISTRIBUTOR_BY_GROUP_REQUEST:
+      return { ...state, fetchingDistributorByGroup: true };
+    case types.GET_DISTRIBUTOR_BY_GROUP_SUCCESS:
+      return {
+        ...state,
+        fetchingDistributorByGroup: false,
+        distributorGroup: action.payload,
+      };
+    case types.GET_DISTRIBUTOR_BY_GROUP_FAILURE:
+      return {
+        ...state,
+        fetchingDistributorByGroup: false,
+        fetchingDistributorByGroupError: true,
+      };
+
+    case types.HANDLE_DISTRIBUTOR_GENERATE_QUOTE_MODAL:
+      return {
+        ...state,
+        generateQuoteInDistributor: action.payload,
+      };
+
+    case types.GET_DISTRIBUTOR_QUOTE_BY_DISTRIBUTOR_ID_REQUEST:
+      return { ...state, fetchingDistributorQuoteByDistributorId: true };
+    case types.GET_DISTRIBUTOR_QUOTE_BY_DISTRIBUTOR_ID_SUCCESS:
+      return {
+        ...state,
+        fetchingDistributorQuoteByDistributorId: false,
+        generateQuoteInDistributor: false,
+        distributorQuote: action.payload,
+      };
+    case types.GET_DISTRIBUTOR_QUOTE_BY_DISTRIBUTOR_ID_FAILURE:
+      return {
+        ...state,
+        fetchingDistributorQuoteByDistributorId: false,
+        fetchingDistributorQuoteByDistributorIdError: true,
+        generateQuoteInDistributor: false
+      };
+
+    case types.APPLY_FOR_LOGIN_IN_CONTACT_REQUEST:
+      return { ...state, applyingForLoginInContact: true };
+    case types.APPLY_FOR_LOGIN_IN_CONTACT_SUCCESS:
+      return {
+        ...state,
+        applyingForLoginInContact: false,
+      };
+    case types.APPLY_FOR_LOGIN_IN_CONTACT_FAILURE:
+      return {
+        ...state,
+        applyingForLoginInContact: false,
+        applyingForLoginInContactError: true,
+      };
+
+    case types.HANDLE_INVENTORY_LOCATION_IN_ORDER_MODAL:
+      return { ...state, addInventoryInOrder: action.payload };
+
+    case types.ADD_LOCATION_IN_ORDER_REQUEST:
+      return { ...state, addingLocationInOrder: true };
+    case types.ADD_LOCATION_IN_ORDER_SUCCESS:
+      return {
+        ...state,
+        addingLocationInOrder: false,
+        addInventoryInOrder: false,
+      };
+    case types.ADD_LOCATION_IN_ORDER_FAILURE:
+      return {
+        ...state,
+        addingLocationInOrder: false,
+        addingLocationInOrderError: true,
+        addInventoryInOrder: false,
+      };
+
+    case types.GET_PHONE_LIST_BY_ID_REQUEST:
+      return { ...state, fetchingPhoneListById: true };
+    case types.GET_PHONE_LIST_BY_ID_SUCCESS:
+      return {
+        ...state,
+        fetchingPhoneListById: false,
+        phoneListById: action.payload
+      };
+    case types.GET_PHONE_LIST_BY_ID_FAILURE:
+      return {
+        ...state,
+        fetchingPhoneListById: false,
+        fetchingPhoneListByIdError: true,
+      };
+
+    case types.HANDLE_NOTES_MODAL_IN_ORDER:
+      return { ...state, addNotesInOrder: action.payload };
+
+    case types.GET_NOTES_LIST_IN_ORDER_REQUEST:
+      return { ...state, fetchingNotesInOrders: true };
+    case types.GET_NOTES_LIST_IN_ORDER_SUCCESS:
+      return {
+        ...state,
+        fetchingNotesInOrders: false,
+        notesInOrders: action.payload,
+      };
+    case types.GET_NOTES_LIST_IN_ORDER_FAILURE:
+      return {
+        ...state,
+        fetchingNotesInOrders: false,
+        fetchingNotesInOrdersError: true,
+      };
+
+    case types.HANDLE_STATUS_OF_ORDER_MODAL:
+      return { ...state, addStatusOfOrder: action.payload };
+
+    case types.GET_ORDER_PHONE_NOTE_REQUEST:
+      return { ...state, fetchingPhoNotesOrder: true };
+    case types.GET_ORDER_PHONE_NOTE_SUCCESS:
+      return {
+        ...state,
+        fetchingPhoNotesOrder: false,
+        phoNotesOrder: action.payload,
+      };
+    case types.GET_ORDER_PHONE_NOTE_FAILURE:
+      return {
+        ...state,
+        fetchingPhoNotesOrder: false,
+        fetchingPhoNotesOrderError: true,
+      };
+
+    case types.HANDLE_PHONE_NOTES_ORDER_MODAL:
+      return { ...state, phoNotesOrderModal: action.payload };
+
+    case types.GET_PHONE_TASK_LIST_REQUEST:
+      return { ...state, fetchingPhoTasklist: true };
+    case types.GET_PHONE_TASK_LIST_SUCCESS:
+      return {
+        ...state,
+        fetchingPhoTasklist: false,
+        phoTasklist: action.payload,
+      };
+    case types.GET_PHONE_TASK_LIST_FAILURE:
+      return {
+        ...state,
+        fetchingPhoTasklist: false,
+        fetchingPhoTasklistError: true,
+      };
+
+    case types.ADD_SPARE_LIST_REQUEST:
+      return { ...state, addingSpareList: true };
+    case types.ADD_SPARE_LIST_SUCCESS:
+      return {
+        ...state,
+        addingSpareList: false,
+      };
+    case types.ADD_SPARE_LIST_FAILURE:
+      return {
+        ...state,
+        addingSpareList: false,
+        addingSpareListError: true,
+      };
+
+    case types.GET_SPARE_LIST_BY_PHONEID_REQUEST:
+      return { ...state, fetchingSpareListByPhoneId: true };
+    case types.GET_SPARE_LIST_BY_PHONEID_SUCCESS:
+      return {
+        ...state,
+        fetchingSpareListByPhoneId: false,
+        spareList: action.payload,
+      };
+    case types.GET_SPARE_LIST_BY_PHONEID_FAILURE:
+      return {
+        ...state,
+        fetchingSpareListByPhoneId: false,
+        fetchingSpareListByPhoneIdError: true,
+      };
+
+    case types.UPDATE_QC_STATUS_REQUEST:
+      return { ...state, updatingQCStatus: true };
+    case types.UPDATE_QC_STATUS_SUCCESS:
+      return {
+        ...state,
+        updatingQCStatus: false,
+      };
+    case types.UPDATE_QC_STATUS_FAILURE:
+      return {
+        ...state,
+        updatingQCStatus: false,
+        updatingQCStatusError: true,
+      };
+
+    case types.UPDATE_OFFER_PRICE_REQUEST:
+      return { ...state, updatingOfferPriceOfOrder: true };
+    case types.UPDATE_OFFER_PRICE_SUCCESS:
+      return {
+        ...state,
+        updatingOfferPriceOfOrder: false,
+      };
+    case types.UPDATE_OFFER_PRICE_FAILURE:
+      return {
+        ...state,
+        updatingOfferPriceOfOrder: false,
+        updatingOfferPriceOfOrderError: true,
+      };
+
+    case types.CHECK_TASK_COMPLETION_REQUEST:
+      return { ...state, checkingTaskCompletion: true };
+    case types.CHECK_TASK_COMPLETION_SUCCESS:
+      return {
+        ...state,
+        checkingTaskCompletion: false,
+      };
+    case types.CHECK_TASK_COMPLETION_FAILURE:
+      return {
+        ...state,
+        checkingTaskCompletion: false,
+        checkingTaskCompletionError: true,
+      };
+
+    case types.GET_TAGGED_SUPPLIES_BYBRAND_REQUEST:
+      return { ...state, fetchingTaggedSuppliesByBrand: true };
+    case types.GET_TAGGED_SUPPLIES_BYBRAND_SUCCESS:
+      return {
+        ...state,
+        fetchingTaggedSuppliesByBrand: false,
+        spareByBrand: action.payload,
+      };
+    case types.GET_TAGGED_SUPPLIES_BYBRAND_FAILURE:
+      return {
+        ...state,
+        fetchingTaggedSuppliesByBrand: false,
+        fetchingTaggedSuppliesByBrandError: true,
+      };
+
+    case types.RECEIVE_TASK_BY_DISPATCH_REQUEST:
+      return { ...state, receivingTaskCompletionByDispatch: true };
+    case types.RECEIVE_TASK_BY_DISPATCH_SUCCESS:
+      return {
+        ...state,
+        receivingTaskCompletionByDispatch: false,
+      };
+    case types.RECEIVE_TASK_BY_DISPATCH_FAILURE:
+      return {
+        ...state,
+        receivingTaskCompletionByDispatch: false,
+        receivingTaskCompletionByDispatchError: true,
+      };
+
+      case types.HANDLE_ORDER_CART_MODAL:
+        return { ...state, orderCartDrawer: action.payload };
+  
+
+    default:
+      return state;
+  }
+};
