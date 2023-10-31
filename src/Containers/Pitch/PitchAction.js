@@ -479,3 +479,62 @@ export const getPitch = (userId) => (dispatch) => {
         });
       });
   };
+
+  export const handlePitchNotesDrawerModal = (modalProps) => (dispatch) => {
+    dispatch({
+      type: types.HANDLE_PITCH_NOTES_DRAWER_MODAL,
+      payload: modalProps,
+    });
+  };
+
+  export const addPitchNote = (note, cb) => (dispatch) => {
+    dispatch({ type: types.ADD_PITCH_NOTES_REQUEST });
+    axios
+      .post(`${base_url}/investorleads/notes`, note, {
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+        },
+      })
+      .then((res) => {
+        dispatch({
+          type: types.ADD_PITCH_NOTES_SUCCESS,
+          payload: res.note,
+        });
+        console.log(res);
+        cb && cb();
+      })
+      .catch((err) => {
+        dispatch({
+          type: types.ADD_PITCH_NOTES_FAILURE,
+          payload: err,
+        });
+        console.log(err);
+        cb && cb();
+      });
+  };
+
+  export const getNotesListByPitchId = (investorLeadsId) => (dispatch) => {
+    dispatch({
+      type: types.GET_NOTES_LIST_BY_PITCH_ID_REQUEST,
+    });
+    axios
+      .get(`${base_url}/investorleads/note/${investorLeadsId}`, {
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+        },
+      })
+      .then((res) => {
+        console.log(res);
+        dispatch({
+          type: types.GET_NOTES_LIST_BY_PITCH_ID_SUCCESS,
+          payload: res.data,
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+        dispatch({
+          type: types.GET_NOTES_LIST_BY_PITCH_ID_FAILURE,
+          payload: err,
+        });
+      });
+  };

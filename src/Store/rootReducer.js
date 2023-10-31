@@ -76,9 +76,8 @@ import {plantReducer} from "../Containers/Main/Plant/PlantReducer";
 import {teamsReducer} from "../Containers/Main/Teams/TeamsReducer";
 import {inventoryReducer} from "../Containers/Main/Inventory/InventoryReducer";
 import {orderReducer} from "../Containers/Main/Order/OrderReducer";
-
-
-
+import { shipByReducer } from "../Containers/Settings/Category/ShipBy/ShipByReducer";
+import { catgCustomerReducer } from "../Containers/Settings/Category/Customer/CustomerReducer"
 
 const appReducer = combineReducers({
   dashboard: dashboardReducer,
@@ -148,6 +147,8 @@ plant: plantReducer,
 teams: teamsReducer,
 inventory: inventoryReducer,
 order: orderReducer,
+shipBy:shipByReducer,
+catgCustomer:catgCustomerReducer,
 });
 
 const rootReducer = (state, action) => {

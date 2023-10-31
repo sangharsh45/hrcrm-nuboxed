@@ -7,6 +7,10 @@ const initialState = {
     fetchingPitchError:false,
     pitchData:[],
 
+    fetchingNotesListByPitchId: false,
+          fetchingNotesListByPitchIdError: false,
+          notesListByPitchId:[],
+
     addingDocumentByPitchId:false,
     addingDocumentByPitchIdError:false,
 
@@ -25,6 +29,8 @@ const initialState = {
     updateTypePitch:false,
     updateTypePitchError:false,
 
+    addDrawerPitchNotesModal:false,
+
 
     fetchingDocumentsByPitchId:false,
     fetchingDocumentsByPitchIdError:false,
@@ -36,6 +42,9 @@ const initialState = {
 
     fetchingPitchSearchData:false,
     fetchingPitchSearchDataError:false,
+
+    addingNotesByPitchId: false,
+    addingNotesByPitchIdError: false,
 
 
     fetchingPitchOpportunity:false,
@@ -343,6 +352,44 @@ case types.GET_PITCH_REQUEST:
                     };
                   case types.GET_PITCH_SEARCH_FAILURE:
                     return { ...state, fetchingPitchSearchDataError: true };
+
+                    case types.HANDLE_PITCH_NOTES_DRAWER_MODAL:
+                      return { ...state, addDrawerPitchNotesModal: action.payload };
+
+                      case types.ADD_PITCH_NOTES_REQUEST:
+                        return {
+                          ...state,
+                          addingNotesByPitchId: true,
+                        };
+                      case types.ADD_PITCH_NOTES_SUCCESS:
+                        return {
+                          ...state,
+                          addingNotesByPitchId: false,
+                          addingNotesByPitchId: false,
+                          addDrawerPitchNotesModal: false,
+                        };
+                      case types.ADD_PITCH_NOTES_FAILURE:
+                        return {
+                          ...state,
+                          addingNotesByPitchId: false,
+                          addingNotesByPitchIdError: true,
+                        };
+
+                        
+      case types.GET_NOTES_LIST_BY_PITCH_ID_REQUEST:
+        return { ...state, fetchingNotesListByPitchId: true };
+      case types.GET_NOTES_LIST_BY_PITCH_ID_SUCCESS:
+        return {
+          ...state,
+          fetchingNotesListByPitchId: false,
+          notesListByPitchId: action.payload,
+        };
+      case types.GET_NOTES_LIST_BY_PITCH_ID_FAILURE:
+        return {
+          ...state,
+          fetchingNotesListByPitchId: false,
+          fetchingNotesListByPitchIdError: true,
+        };
               
                 
 

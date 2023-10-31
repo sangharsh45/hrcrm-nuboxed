@@ -6,11 +6,13 @@ import { bindActionCreators } from "redux";
 import AddUploadOrganizationModal from "./AddUploadOrganizationModal"
 import {handleRepositoryOrganizationModal} from "../Auth/AuthAction"
 import RepositoryOrganizationModal from './RepositoryOrganizationModal';
+import { Tooltip } from 'antd';
 
 function RepositoryData(props) {
   return (
     <>
     <div>
+    <Tooltip title="Repository">
         <LibraryBooksIcon
         style={{fontSize:"1.2rem",marginLeft:"0.5rem"}}
           onClick={() => {
@@ -18,6 +20,7 @@ function RepositoryData(props) {
             props.handleRepositoryOrganizationModal(true);
           }}
         />
+           </Tooltip>
         </div>
 
         <RepositoryOrganizationModal

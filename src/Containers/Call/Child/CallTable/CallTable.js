@@ -649,12 +649,12 @@ function CallTable(props) {
     userDetails: { employeeId },
     setEditNote,
   } = props;
-  const assignToTypeOption = props.employees.map((item) => {
-    return {
-      text: item.assignToName,
-      value: item.assignToName,
-    };
-  });
+  // const assignToTypeOption = props.employees.map((item) => {
+  //   return {
+  //     text: item.assignToName,
+  //     value: item.assignToName,
+  //   };
+  // });
 
   if (fetchingCallListRangeByUserIdError) {
     return <APIFailed />;

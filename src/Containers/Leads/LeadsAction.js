@@ -1064,3 +1064,11 @@ export const setLeadsViewType = (viewType) => (dispatch) => {
             });
         });
   };
+
+  export const handleLeadsNotesDrawerModal = (modalProps) => (dispatch) => {
+    dispatch({
+      type: types.HANDLE_LEADS_NOTES_DRAWER_MODAL,
+      payload: modalProps,
+    });
+  };
+
