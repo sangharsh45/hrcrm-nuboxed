@@ -1,14 +1,15 @@
-import React, { Component, lazy, Suspense } from "react";
+import React, { Component, Suspense } from "react";
 import { bindActionCreators } from "redux";
 import { StyledTabs } from "../../../Components/UI/Antd";
 import { TabsWrapper } from "../../../Components/UI/Layout";
-import { MainWrapper, FlexContainer } from "../../../Components/UI/Layout";
+import { FlexContainer } from "../../../Components/UI/Layout";
 import { connect } from "react-redux";
 import SourceIcon from '@mui/icons-material/Source';
 import FactoryIcon from '@mui/icons-material/Factory';
 import Sectors from "../Sectors/Sectors";
 import Source from "./Source/Source";
-
+import ShipBy from "./ShipBy/ShipBy"
+import Customer from "./Customer/Customer";
 const TabPane = StyledTabs.TabPane;
 
 class CustomerSectorTab extends Component {
@@ -76,7 +77,7 @@ class CustomerSectorTab extends Component {
                   key="2"
                 >
                   <Suspense>
-                    {/* <Source /> */}
+                    <ShipBy/>
                   </Suspense>
                 </TabPane>
                 <TabPane
@@ -91,7 +92,7 @@ class CustomerSectorTab extends Component {
                   key="3"
                 >
                   <Suspense>
-                    {/* <Source /> */}
+                    <Customer /> 
                   </Suspense>
                 </TabPane>
               

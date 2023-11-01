@@ -126,10 +126,13 @@ const TaskCardList = (props) => {
           <OnlyWrapCard style={{height:"81vh"}}>
       {taskListRangeByUserId.map((item) => { 
         const currentDate = moment();
+        const completionDate = moment(item.completionDate);
         const endDate = moment(item.endDate);
         const difference = currentDate.diff(endDate, 'days');
+        const incompleteDeviationDate = endDate.diff(currentDate, 'days');
+        const completeDeviation = endDate.diff(completionDate, 'days');
          console.log("difference",difference)
-         console.log("item",item.taskId)
+         console.log("deviationDate",incompleteDeviationDate)
                     return (
                         <div>
                             <div className="flex justify-between mt-1 max-sm:flex-col"
@@ -281,6 +284,9 @@ const TaskCardList = (props) => {
                     <div className="flex font-medium flex-col md:w-24 max-sm:flex-row  w-full ">
                        
                        <div class="text-[0.875rem] text-cardBody font-poppins max-sm:hidden">Deviation</div>
+                       <div class="text-[0.82rem] text-cardBody font-poppins"> 
+                       {item.taskStatus === "Completed" ? `${completeDeviation} Days` : `${incompleteDeviationDate} Days`}
+                   </div>
                      
                    </div>
                     <div className=" flex font-medium flex-col md:w-28 max-sm:flex-row justify-between w-full ">

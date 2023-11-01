@@ -11,7 +11,7 @@ const EmployeeGroup = lazy(() => import("./Child/EmployeeGroup/EmployeeGroup"));
 
 class Employees extends Component {
 
-  state = { currentData: "", filter:"cretiondate", };
+  state = { currentData: "", filter:"cretiondate", currentUser: '',selectedLocation:"" };
   handleClear = () => {
     this.setState({ currentData: "" });
     this.props.getEmployeelist();
@@ -23,6 +23,9 @@ class Employees extends Component {
     this.setState({ currentData: e.target.value })
    
   };
+  handleDropdownChange = (e) => {
+    this.setState({ selectedLocation: e.target.value });
+  };
   handleFilterChange=(data)=>{
     this.setState({filter:data})
     this.props.getEmployeeFilterlist(data)
@@ -32,7 +35,13 @@ class Employees extends Component {
     // this.props.emptyCustomer();
     this.props.getEmployeelist();
   };
+  componentDidMount(){
+    this.props.getEmployeelist("cretiondate");
+  }
   render() {
+    const filteredData = this.props.employees.filter((item) =>
+      this.state.selectedLocation === '' || item.location === this.state.selectedLocation
+    );
     const {
       setEmployeeViewType,
       addEmployeeModal,
@@ -45,8 +54,11 @@ class Employees extends Component {
           handleEmployeeModal={handleEmployeeModal}
           setEmployeeViewType={setEmployeeViewType}
           viewType={viewType}
+          selectedLocation={this.state.selectedLocation}
+          handleDropdownChange={this.handleDropdownChange}
           handleFilterChange={this.handleFilterChange}
           filter={this.state.filter}
+          
           handleClear={this.handleClear}
           handleChange={this.handleChange}
           currentData={this.state.currentData}
@@ -59,15 +71,18 @@ class Employees extends Component {
         {/* <EmployeeTable /> */}
         { this.props.viewType==="tile"?
         <EmployeeCardView
+        filteredData={filteredData}
         filter={this.state.filter}
            viewType={viewType}
         />:
         this.props.viewType === "table" ?
         <EmployeeTable 
+        filteredData={filteredData}
         viewType={viewType}
         />:
         this.props.viewType === "card" ?
         <EmployeeCardList 
+        filteredData={filteredData}
         filter={this.state.filter}
         viewType={viewType}
         />:
@@ -80,6 +95,7 @@ class Employees extends Component {
 const mapStateToProps = ({ employee }) => ({
   addEmployeeModal: employee.addEmployeeModal,
   viewType: employee.viewType,
+  employees: employee.employees,
 
 });
 const mapDispatchToProps = (dispatch) =>

@@ -68,7 +68,7 @@ export const catgCustomerReducer = (state = initialState, action) => {
           ...state,
            removingCustomer: false,
            customerListData: state.customerListData.filter(
-            (item) => item.sectorId !== action.payload
+            (item) => item.customerTypeId !== action.payload
         ), 
         };
       case types.REMOVE_CUSTOMER_FAILURE:
@@ -88,7 +88,7 @@ export const catgCustomerReducer = (state = initialState, action) => {
           ...state,
             updatingCustomer: false,
             customerListData: state.customerListData.map((sector) =>
-            sector.sectorId === action.payload.sectorId
+            sector.customerTypeId === action.payload.customerTypeId
               ? action.payload
               : sector
           ),

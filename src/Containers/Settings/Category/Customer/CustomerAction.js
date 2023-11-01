@@ -1,18 +1,18 @@
 import * as types from "./CustomerActionTypes";
 import axios from "axios";
 import dayjs from "dayjs";
-import { base_url } from "../../../Config/Auth";
+import { base_url } from "../../../../Config/Auth";
 import { message } from "antd"
 
 /**
  * get all the Sector
  */
- export const getCustomer = () => (dispatch) => {
+ export const getCustomer = (orgId) => (dispatch) => {
     dispatch({
       type: types.GET_CUSTOMER_REQUEST,
     });
     axios
-    .get(`${base_url}/sector`, {
+    .get(`${base_url}/customerType/${orgId}`, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },
@@ -37,19 +37,19 @@ import { message } from "antd"
   // /**
 //  * add a new sector 
 //  */
-export const addCustomer = (sectors, cb) => (dispatch) => {
+export const addCustomer = (sectors,orgId, cb) => (dispatch) => {
     console.log(sectors);
     dispatch({
       type: types.ADD_CUSTOMER_REQUEST,
     });
     axios
-      .post(`${base_url}/sector`, sectors, {
+      .post(`${base_url}/customerType`, sectors, {
         headers: {
           Authorization: "Bearer " + sessionStorage.getItem("token") || "",
         },
       })
       .then((res) => {
-        dispatch(getCustomer());
+        dispatch(getCustomer(orgId));
         {res.data.message?  
           message.success(res.data.message):
         message.success("CUSTOMER has been added successfully!");
@@ -75,13 +75,13 @@ export const addCustomer = (sectors, cb) => (dispatch) => {
   /**
  * remove a new sector
  */
-export const removeCustomer = ( sectorId) => (dispatch) => {
+export const removeCustomer = ( customerTypeId) => (dispatch) => {
     // console.log(typeId);
     dispatch({
       type: types.REMOVE_CUSTOMER_REQUEST,
     });
     axios
-      .delete(`${base_url}/sector/${sectorId}`, {
+      .delete(`${base_url}/customerType/${customerTypeId}`, {
         headers: {
           Authorization: "Bearer " + sessionStorage.getItem("token") || "",
         },
@@ -91,7 +91,7 @@ export const removeCustomer = ( sectorId) => (dispatch) => {
         console.log(res);
         dispatch({
           type: types.REMOVE_CUSTOMER_SUCCESS,
-          payload:sectorId,
+          payload:customerTypeId,
         });
       })
       .catch((err) => {
@@ -105,15 +105,15 @@ export const removeCustomer = ( sectorId) => (dispatch) => {
   /**
  *update label of sector
  */
-export const updateCustomer = ( sectorId,sectorName,cb) => (dispatch) => {
+export const updateCustomer = ( customerTypeId,name,cb) => (dispatch) => {
     
     dispatch({
       type: types.UPDATE_CUSTOMER_REQUEST,
     });
     axios
       .put(
-        `${base_url}/sector/update`,
-        { sectorName,sectorId,editInd:true },
+        `${base_url}/customerType/${customerTypeId}`,
+        { name,customerTypeId,editInd:true },
         {
           headers: {
             Authorization: "Bearer " + sessionStorage.getItem("token") || "",

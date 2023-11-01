@@ -13,8 +13,8 @@ import {
   removeCustomer,
   updateCustomer
   // searchSectorName,
-} from "./SourceAction";
-import SingleSource from "./SingleSource";
+} from "./CustomerAction";
+import SingleCustomer from "./SingleCustomer";
 
 class Customer extends Component {
   constructor(props) {
@@ -25,7 +25,7 @@ class Customer extends Component {
       addingCustomer: false,
       name: "",
       type: "",
-      singleSource: "",
+      singleCustomer: "",
       editInd: true,
       currentData: "",
     };
@@ -49,60 +49,60 @@ class Customer extends Component {
     }));
   handleChange = ({ target: { name, value } }) =>
     this.setState({ [name]: value });
-    handleAddSource = () => {
-      const {   addCustomer, sources } = this.props;
+    handleAddCustomer = () => {
+      const {   addCustomer, customers } = this.props;
       const { name, editInd, addingCustomer, isTextInputOpen } = this.state;
-      let source = { name,
+      let customer = { name,
         orgId: this.props.orgId,
         userId:this.props.userId,
          editInd };
     
       let exist =
-      sources && sources.some((element) => element.name === name);
+      customers && customers.some((element) => element.name === name);
     
       // if (exist) {
       //   message.error(
       //     "Can't create as another source type exists with the same name!"
       //   );
       // } else {
-        //   addCustomer(source,this.props.orgId ,() => console.log("add sector callback"));
+           addCustomer(customer,this.props.orgId ,() => console.log("add sector callback"));
         this.setState({
           name: "",
-          singleSource: "",
+          singleCustomer: "",
           isTextInputOpen: false,
           editInd: true,
         });
       // }
     };
     
-  handleDeleteSource = (sourceId = { sourceId }) => {
-    // this.props.removeCustomer(sourceId);
-    // this.setState({ name: "", singleSource: "" });
+  handleDeleteCustomer = (customerTypeId = { customerTypeId }) => {
+     this.props.removeCustomer(customerTypeId);
+    // this.setState({ name: "", singleCustomer: "" });
   };
-  handleupdateCustomer = (name, sourceId, editInd, cb) => {
-    // this.props.updateCustomer(name, sourceId, editInd, cb);
-    this.setState({ name: "", singleSource: "",sourceId:"", editInd: true });
+  handleupdateCustomer = (name, customerTypeId, editInd, cb) => {
+     this.props.updateCustomer(name, customerTypeId, editInd, cb);
+    this.setState({ name: "", singleCustomer: "",customerTypeId:"", editInd: true });
   };
 
   componentDidMount() {
     const {   getCustomer,orgId } = this.props;
     console.log();
-    //   getCustomer(orgId);
+       getCustomer(orgId);
     // this.getLinkedSources();
   }
   render() {
     const {
       fetchingCustomer,
       fetchingCustomerError,
-      sources,
+      customerListData,
       addingCustomer,
-      updatingSources,
+      updatingCustomer,
     } = this.props;
     const {
       isTextInputOpen,
       type,
       name,
-      singleSource,
+      singleCustomer,
       linkedSectors,
     } = this.state;
     if (fetchingCustomer) return <BundleLoader/>;
@@ -152,18 +152,18 @@ class Customer extends Component {
             <FlexContainer flexDirection="column">
               {/* <Title style={{ padding: 8 }}>Types Of Documents</Title> */}
              <MainWrapper style={{ height: "30em", marginTop: "0.625em" }}>
-                {sources.length &&
-                  sources.map((source, i) => (
-                    <SingleSource
+                {customerListData.length &&
+                  customerListData.map((customer, i) => (
+                    <SingleCustomer
                       key={i}
-                      value={singleSource}
-                      name1="singleSource"
-                      source={source}
+                      value={singleCustomer}
+                      name1="singleCustomer"
+                      customer={customer}
                       linkedSectors={linkedSectors}
-                      updatingSources={updatingSources}
+                      updatingCustomer={updatingCustomer}
                       handleChange={this.handleChange}
                       handleupdateCustomer={this.handleupdateCustomer}
-                      handleDeleteSource={this.handleDeleteSource}
+                      handleDeleteCustomer={this.handleDeleteCustomer}
                       handleClear={this.handleClear}
                       handleSearchChange={this.handleSearchChange}
                       currentData={this.state.currentData}
@@ -180,7 +180,7 @@ class Customer extends Component {
                 <br />
                 <br />
                 <TextInput
-                  placeholder="Add Source"
+                  placeholder="Add Customer"
                   name="name"
                   value={name}
                   onChange={this.handleChange}
@@ -193,7 +193,7 @@ class Customer extends Component {
                   htmlType="submit"
                   disabled={!name}
                   Loading={addingCustomer}
-                  onClick={this.handleAddSource}
+                  onClick={this.handleAddCustomer}
                   style={{ marginRight: "0.125em" }}
                 >
                   {/* Save */}
@@ -230,7 +230,7 @@ class Customer extends Component {
       
        
         </FlexContainer>
-        <h4>Updated on {moment(this.props.sources && this.props.sources.length && this.props.sources[0].updationDate).format("ll")} by {this.props.sources && this.props.sources.length && this.props.sources[0].updatedBy}</h4>
+        <h4>Updated on {moment(this.props.customerListData && this.props.customerListData.length && this.props.customerListData[0].updationDate).format("ll")} by {this.props.customerListData && this.props.customerListData.length && this.props.customerListData[0].updatedBy}</h4>
       </>
     );
   }

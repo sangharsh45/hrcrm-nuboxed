@@ -2,18 +2,18 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { FormattedMessage } from "react-intl";
-import { Button, Divider, message, Input } from "antd";
+import { Button, Input } from "antd";
 import moment from "moment";
 import { BundleLoader } from "../../../../Components/Placeholder";
 import { MainWrapper, FlexContainer } from "../../../../Components/UI/Layout";
-import { TextInput, Title } from "../../../../Components/UI/Elements";
+import { TextInput } from "../../../../Components/UI/Elements";
 import {
   getShipByData,
   addShipBy,
   removeShipBy,
   updateShipBy
   // searchSectorName,
-} from "./SourceAction";
+} from "../ShipBy/ShipByAction";
 import SingleShipBy from "./SingleShipBy";
 
 class ShipBy extends Component {
@@ -50,22 +50,22 @@ class ShipBy extends Component {
   handleChange = ({ target: { name, value } }) =>
     this.setState({ [name]: value });
     handleAddSource = () => {
-      const { addShipBy, sources } = this.props;
+      const { addShipBy, shipBy } = this.props;
       const { name, editInd, addingShipByError, isTextInputOpen } = this.state;
-      let source = { name,
+      let ship = { name,
         orgId: this.props.orgId,
         userId:this.props.userId,
          editInd };
     
       let exist =
-      sources && sources.some((element) => element.name === name);
+      shipBy && shipBy.some((element) => element.name === name);
     
       // if (exist) {
       //   message.error(
       //     "Can't create as another source type exists with the same name!"
       //   );
       // } else {
-        // addShipBy(source,this.props.orgId ,() => console.log("add sector callback"));
+         addShipBy(ship,this.props.orgId ,() => console.log("add sector callback"));
         this.setState({
           name: "",
           singleShipBy: "",
@@ -75,28 +75,28 @@ class ShipBy extends Component {
       // }
     };
     
-  handleDeleteSource = (sourceId = { sourceId }) => {
-    // this.props.removeShipBy(sourceId);
+  handleDeleteShip = (shipById = { shipById }) => {
+     this.props.removeShipBy(shipById);
     // this.setState({ name: "", singleShipBy: "" });
   };
-  handleupdateShipBy = (name, sourceId, editInd, cb) => {
-    // this.props.updateShipBy(name, sourceId, editInd, cb);
-    this.setState({ name: "", singleShipBy: "",sourceId:"", editInd: true });
+  handleupdateShipBy = (name, shipById, editInd, cb) => {
+     this.props.updateShipBy(name, shipById, editInd, cb);
+    this.setState({ name: "", singleShipBy: "",shipById:"", editInd: true });
   };
 
   componentDidMount() {
     const { getShipByData,orgId } = this.props;
     console.log();
-    // getShipByData(orgId);
+    getShipByData(orgId);
     // this.getLinkedSources();
   }
   render() {
     const {
       fetchingSources,
       fetchingSourcesError,
-      sources,
+      ShipByData,
       addingShipByError,
-      updatingSources,
+      updatingShipBy,
     } = this.props;
     const {
       isTextInputOpen,
@@ -152,18 +152,18 @@ class ShipBy extends Component {
             <FlexContainer flexDirection="column">
               {/* <Title style={{ padding: 8 }}>Types Of Documents</Title> */}
              <MainWrapper style={{ height: "30em", marginTop: "0.625em" }}>
-                {sources.length &&
-                  sources.map((source, i) => (
+                {ShipByData.length &&
+                  ShipByData.map((ship, i) => (
                     <SingleShipBy
                       key={i}
                       value={singleShipBy}
                       name1="singleShipBy"
-                      source={source}
+                      ship={ship}
                       linkedSectors={linkedSectors}
-                      updatingSources={updatingSources}
+                      updatingShipBy={updatingShipBy}
                       handleChange={this.handleChange}
                       handleupdateShipBy={this.handleupdateShipBy}
-                      handleDeleteSource={this.handleDeleteSource}
+                      handleDeleteShip={this.handleDeleteShip}
                       handleClear={this.handleClear}
                       handleSearchChange={this.handleSearchChange}
                       currentData={this.state.currentData}
@@ -180,7 +180,7 @@ class ShipBy extends Component {
                 <br />
                 <br />
                 <TextInput
-                  placeholder="Add Source"
+                  placeholder="Add Ship"
                   name="name"
                   value={name}
                   onChange={this.handleChange}

@@ -80,7 +80,7 @@ function handleSetCurrentCandidateId(candidateId) {
             > */}
        
  
-        {props.employees.map((item) => {
+        {props.filteredData.map((item) => {
             const currentdate = moment().format("DD/MM/YYYY");
             const date = moment(item.creationDate).format("DD/MM/YYYY");
        

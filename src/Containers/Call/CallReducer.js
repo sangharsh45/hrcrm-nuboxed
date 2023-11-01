@@ -212,7 +212,7 @@ export const callReducer = (state = initialState, action) => {
     case types.ADD_CALL_NOTES_SUCCESS:
       return {
         ...state,
-        addDrawerCallNotesModal:false,
+        // addDrawerCallNotesModal:false,
         addingNotesByCallId: false,
 
       };

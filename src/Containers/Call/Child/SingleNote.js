@@ -9,7 +9,7 @@ const NotesWrapper = styled.div``;
 export default function SingleNote(props) {
   console.log(creationDate);
   const {
-    comment,
+    notes,
     creationDate,
     userId,
     creatorId,
@@ -22,7 +22,7 @@ export default function SingleNote(props) {
       {/* <SubTitle fontSize='1.125em' whiteSpace='normal' fontFamily='Abel' style={{ color: '#393a3a' }}>
                 {description}
             </SubTitle> */}
-      <div dangerouslySetInnerHTML={{ __html: comment }} />
+      <div dangerouslySetInnerHTML={{ __html: notes }} />
       <SubTitle
         fontSize="0.875em"
         fontFamily="Karla"
@@ -36,7 +36,7 @@ export default function SingleNote(props) {
             : ""}
         </b> */}
         <div>
-        {props.providerName}
+        {props.ownerName}
         </div>
       </SubTitle>
     </NotesWrapper>
