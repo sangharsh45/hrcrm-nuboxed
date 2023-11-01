@@ -73,7 +73,7 @@ export const getEmployeelist = (filter) => (dispatch) => {
   });
 
   axios
-  .get(`${base_url}/employee/employees/${filter}`, {
+  .get(`${base_url}/employee/employees/filter/${filter}`, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },
@@ -101,7 +101,7 @@ export const getEmployeeFilterlist = (filter) => (dispatch) => {
   });
 
   axios
-  .get(`${base_url}/employee/employees/${filter}`, {
+  .get(`${base_url}/employee/employees/filter/${filter}`, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },

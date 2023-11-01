@@ -418,7 +418,7 @@ function EmployeeTable(props) {
         scroll={{ y: tableHeight }}
        
         pagination={false}
-        dataSource={employees}
+        dataSource={props.filteredData}
       />
       <Spacer />
       <EmployeeDrawerForAdmin

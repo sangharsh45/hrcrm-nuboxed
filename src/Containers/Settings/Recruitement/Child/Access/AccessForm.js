@@ -66,6 +66,9 @@ const AccessForm = (props) => {
     setCheckedPitchList(props.departmentAcces.pitch)
     setCheckedRepositoryList(props.departmentAcces.repository)
     setCheckedBasicList(props.departmentAcces.basic)
+    setCheckedShipperList(props.departmentAcces.shipper)
+    setCheckedPlantList(props.departmentAcces.plant)
+    setCheckedTeamsList(props.departmentAcces.teams)
     
   }, [props.departmentAcces.vendor,
   props.departmentAcces.customer,
@@ -104,6 +107,9 @@ const AccessForm = (props) => {
   props.departmentAcces.deal,
   props.departmentAcces.pitch,
   props.departmentAcces.repository,
+  props.departmentAcces.shipper,
+  props.departmentAcces.plant,
+  props.departmentAcces.teams,
   
 ])
   //Vendor
@@ -624,7 +630,7 @@ const AccessForm = (props) => {
                          };
 
 
-                                // Settings
+                                // Basic
 
                                 const [checkedBasicList, setCheckedBasicList] = useState(props.departmentAcces.basic              );
                                 const [indeterminateBasic, setIndeterminateBasic] = useState(true);
@@ -766,6 +772,60 @@ const AccessForm = (props) => {
       setCheckAllRepository(e.target.checked);
     };
 
+            // Shipper
+
+            const [checkedShipperList, setCheckedShipperList] = useState(props.departmentAcces.shipper              );
+            const [indeterminateShipper, setIndeterminateShipper] = useState(true);
+            const [checkAllShipper, setCheckAllShipper] = useState(false);
+          
+            const onShipperChange = (list) => {
+              setCheckedShipperList(list);
+              setIndeterminateShipper(!!list.length && list.length < plainOptions.length);
+              setCheckAllShipper(list.length === plainOptions.length);
+            };
+          
+            const onCheckAllShipperChange = (e) => {
+              setCheckedShipperList(e.target.checked ? plainOptions : []);
+              setIndeterminateShipper(false);
+              setCheckAllShipper(e.target.checked);
+            };
+
+                 // Plant
+
+                 const [checkedPlantList, setCheckedPlantList] = useState(props.departmentAcces.plant              );
+                 const [indeterminatePlant, setIndeterminatePlant] = useState(true);
+                 const [checkAllPlant, setCheckAllPlant] = useState(false);
+               
+                 const onPlantChange = (list) => {
+                   setCheckedPlantList(list);
+                   setIndeterminatePlant(!!list.length && list.length < plainOptions.length);
+                   setCheckAllPlant(list.length === plainOptions.length);
+                 };
+               
+                 const onCheckAllPlantChange = (e) => {
+                   setCheckedPlantList(e.target.checked ? plainOptions : []);
+                   setIndeterminatePlant(false);
+                   setCheckAllPlant(e.target.checked);
+                 };
+
+                   // Teams
+
+                   const [checkedTeamsList, setCheckedTeamsList] = useState(props.departmentAcces.teams              );
+                   const [indeterminateTeams, setIndeterminateTeams] = useState(true);
+                   const [checkAllTeams, setCheckAllTeams] = useState(false);
+                 
+                   const onTeamsChange = (list) => {
+                     setCheckedTeamsList(list);
+                     setIndeterminateTeams(!!list.length && list.length < plainOptions.length);
+                     setCheckAllTeams(list.length === plainOptions.length);
+                   };
+                 
+                   const onCheckAllTeamsChange = (e) => {
+                     setCheckedTeamsList(e.target.checked ? plainOptions : []);
+                     setIndeterminateTeams(false);
+                     setCheckAllTeams(e.target.checked);
+                   };
+
 
 
   function handleUpdateAccess() {
@@ -807,6 +867,9 @@ const AccessForm = (props) => {
       pitch:checkedPitchList || [],
       repository:checkedRepositoryList || [],
       basic:checkedBasicList || [],
+      shipper:checkedShipperList || [],
+      plant:checkedPlantList || [],
+      teams:checkedTeamsList || [],
       
       departmentId: props.departmentId,
       roleTypeId:props.roleTypeId,
@@ -855,6 +918,43 @@ const AccessForm = (props) => {
                 </FlexContainer>
               {/* Vendor */}
               <Spacer />
+              <FlexContainer justifyContent="space-around">
+            
+            <div >
+              <h1 class="text-sm">Shipper</h1>
+              <Checkbox indeterminate={indeterminateShipper} onChange={onCheckAllShipperChange} checked={checkAllShipper}>
+               <label class="text-xs"> Check all</label>
+              </Checkbox>
+              <Divider />
+              <CheckboxGroup options={plainOptions} value={checkedShipperList} onChange={onShipperChange} />
+
+            </div>
+                <Spacer />
+              <div >
+                <h1 class="text-sm">Plant</h1>
+                <Checkbox indeterminate={indeterminatePlant} onChange={onCheckAllPlantChange} checked={checkAllPlant}>
+                <label class="text-xs"> Check all</label>
+                </Checkbox>
+                <Divider />
+                <CheckboxGroup options={plainOptions} value={checkedPlantList} onChange={onPlantChange} />
+
+              </div>
+              <Spacer />
+              <div >
+              <h1 class="text-sm">Teams</h1>
+              <Checkbox indeterminate={indeterminateTeams} onChange={onCheckAllTeamsChange} checked={checkAllTeams}>
+               <label class="text-xs"> Check all</label>
+              </Checkbox>
+              <Divider />
+              <CheckboxGroup options={plainOptions} value={checkedTeamsList} onChange={onTeamsChange} />
+
+            </div>
+              
+            
+              </FlexContainer>
+            {/* Vendor */}
+            <Spacer />
+
               <FlexContainer justifyContent="space-around">
             
          

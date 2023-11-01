@@ -68,7 +68,7 @@ export const shipByReducer = (state = initialState, action) => {
           ...state,
            removingShipBy: false,
            ShipByData: state.ShipByData.filter(
-            (item) => item.sectorId !== action.payload
+            (item) => item.shipById !== action.payload
         ), 
         };
       case types.REMOVE_SHIPBY_FAILURE:
@@ -88,7 +88,7 @@ export const shipByReducer = (state = initialState, action) => {
           ...state,
            updatingShipBy: false,
            ShipByData: state.ShipByData.map((sector) =>
-            sector.sectorId === action.payload.sectorId
+            sector.shipById === action.payload.shipById
               ? action.payload
               : sector
           ),

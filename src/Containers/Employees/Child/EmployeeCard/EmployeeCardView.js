@@ -62,6 +62,7 @@ function handleSetCurrentEmployeeId(employeeId,) {
     fetchingEmployee,
     type,
     user,
+    filteredData,
     fetchingEmployeeError,
     employees,
     handleEmployeeDrawerForAdmin,
@@ -75,7 +76,7 @@ function handleSetCurrentEmployeeId(employeeId,) {
             <div class=" h-h86 overflow-auto overflow-x-auto">
              
               <CardWrapper>      
-              {props.employees.map((item) => {
+              {props.filteredData.map((item) => {
                 console.log("noOfDocPending",item.noOfDocPending)
       
                  return (
@@ -160,6 +161,20 @@ function handleSetCurrentEmployeeId(employeeId,) {
               <InsertDriveFileIcon  style={{ fontSize: "1rem", }}/>
               </Badge>
      </span>
+           </div>
+           <div class=" font-normal text-xs text-cardBody font-poppins ">
+           <Tooltip 
+                   title={`${item.workplace} , ${item.location}`}
+                   >
+          <span
+              style={{ cursor: "pointer" }}
+            
+            >
+              
+              <InsertDriveFileIcon  style={{ fontSize: "1rem", }}/>
+         
+     </span>
+     </Tooltip>
            </div>
            </div>
          

@@ -21,14 +21,14 @@ class SingleCustomer extends Component {
   }
   render() {
     const {
-      source: { name, sourceId, EditInd },
+      customer: { name, customerTypeId, EditInd },
       handleChange,
       name1,
       value,
       linkedSectors,
-      updatingSources,
-      handleUpdateSource,
-      handleDeleteSource,
+      updatingCustomer,
+      handleupdateCustomer,
+      handleDeleteCustomer,
     } = this.props;
     console.log(linkedSectors);
     console.log("name", name);
@@ -55,7 +55,7 @@ class SingleCustomer extends Component {
                   &nbsp;
                   <Tooltip title="Delete">
                     <DeleteIcon
-                        onClick={() => handleDeleteSource(sourceId)}
+                        onClick={() => handleDeleteCustomer(customerTypeId)}
                       size="14px"
                       style={{
                         verticalAlign: "center",
@@ -89,11 +89,11 @@ class SingleCustomer extends Component {
                   <Button
                     type="primary"
                     htmlType="submit"
-                    loading={updatingSources}
+                    loading={updatingCustomer}
                     // disabled={!value}
                     onClick={() => {
                       console.log(value); 
-                      handleUpdateSource(sourceId, value, toggleViewType());
+                      handleupdateCustomer(customerTypeId, value, toggleViewType());
                     }}>
 
                   

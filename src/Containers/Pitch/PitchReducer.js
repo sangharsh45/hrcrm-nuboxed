@@ -366,7 +366,7 @@ case types.GET_PITCH_REQUEST:
                           ...state,
                           addingNotesByPitchId: false,
                           addingNotesByPitchId: false,
-                          addDrawerPitchNotesModal: false,
+                          // addDrawerPitchNotesModal: false,
                         };
                       case types.ADD_PITCH_NOTES_FAILURE:
                         return {

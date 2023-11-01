@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import styled from "styled-components";
-import { Button, Tooltip, Input } from "antd";
-import EditableInput from "../../../../Components/Forms/Edit/EditableInput";
+import { Button, Tooltip, } from "antd";
 import { FlexContainer } from "../../../../Components/UI/Layout";
 import { FormattedMessage } from "react-intl";
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -21,14 +20,14 @@ class SingleShipBy extends Component {
   }
   render() {
     const {
-      source: { name, sourceId, EditInd },
+      ship: { name, shipById, EditInd },
       handleChange,
       name1,
       value,
       linkedSectors,
-      updatingSources,
-      handleUpdateSource,
-      handleDeleteSource,
+      updatingShipBy,
+      handleupdateShipBy,
+      handleDeleteShip,
     } = this.props;
     console.log(linkedSectors);
     console.log("name", name);
@@ -55,7 +54,7 @@ class SingleShipBy extends Component {
                   &nbsp;
                   <Tooltip title="Delete">
                     <DeleteIcon
-                        onClick={() => handleDeleteSource(sourceId)}
+                        onClick={() => handleDeleteShip(shipById)}
                       size="14px"
                       style={{
                         verticalAlign: "center",
@@ -89,11 +88,11 @@ class SingleShipBy extends Component {
                   <Button
                     type="primary"
                     htmlType="submit"
-                    loading={updatingSources}
+                    loading={updatingShipBy}
                     // disabled={!value}
                     onClick={() => {
                       console.log(value); 
-                      handleUpdateSource(sourceId, value, toggleViewType());
+                      handleupdateShipBy(shipById, value, toggleViewType());
                     }}>
 
                   

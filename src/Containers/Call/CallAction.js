@@ -321,7 +321,7 @@ export const handleCallNotesDrawerModal = (modalProps) => (dispatch) => {
 export const addNote = (note, cb) => (dispatch) => {
   dispatch({ type: types.ADD_CALL_NOTES_REQUEST });
   axios
-    .post(`${base_url}/task/comment/save`, note, {
+    .post(`${base_url}/call/notes`, note, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },

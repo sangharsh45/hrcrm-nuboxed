@@ -1,15 +1,3 @@
-// import React from 'react'
-
-// function PitchCardList() {
-//   return (
-//     <div>PitchCardList</div>
-//   )
-// }
-
-// export default PitchCardList
-
-
-
 
 import React, { useEffect, useState} from "react";
 import { StyledPopconfirm} from "../../../Components/UI/Antd";
@@ -18,7 +6,6 @@ import { bindActionCreators } from "redux";
 import moment from "moment";
 import UpdateLPitchModal from "../Child/UpdateLPitchModal"
 import ExploreIcon from "@mui/icons-material/Explore";
-//import { getSectors } from "../../../Settings/Sectors/SectorsAction";
 import { MultiAvatar, SubTitle } from "../../../Components/UI/Elements";
 import "jspdf-autotable";
 import { OnlyWrapCard } from '../../../Components/UI/Layout'
@@ -26,8 +13,6 @@ import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import DeleteIcon from "@mui/icons-material/Delete";
 import StatusPitchToggle from "../Child/StatusPitchToggle"
-// import { getCountries } from "../../../Auth/AuthAction";
-import { Link } from "../../../Components/Common";
 import NoteAltIcon from "@mui/icons-material/NoteAlt";
 import {
   getPitch,
@@ -41,15 +26,11 @@ import {
 import ReactCountryFlag from 'react-country-flag';
 import AddchartIcon from '@mui/icons-material/Addchart';  
 import { Button, Tooltip } from "antd";
-// import StatusCustomerToggle from "./StatusCustomerToggle";
 import { FormattedMessage } from "react-intl";
-// import UpdateLeadsModal from "../UpdateLeads/UpdateLeadsModal";
-// import AddLeadsEmailDrawerModal from "../UpdateLeads/AddLeadsEmailDrawerModal";
-import { BundleLoader } from "../../../Components/Placeholder";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
 import OpenASSimodal from "./OpenASSimodal";
 import AddPitchNotesDrawerModal from "./AddPitchNotesDrawerModal";
-// import OpenCETmodal from "./OpenCETmodal";
+import { BundleLoader } from "../../../Components/Placeholder";
 
 const ButtonGroup = Button.Group;
 
@@ -70,11 +51,11 @@ const PitchCardList = (props) => {
   function handleSetCurrentLeadsId(item) {
     setCurrentLeadsId(item);
   }
-//   const { deleteLeadsData, handleUpdateLeadsModal, updateLeadsModal,fetchingLeads,leadsAllData  } = props;
+   const { deleteLeadsData, handleUpdateLeadsModal, updateLeadsModal,fetchingPitch,leadsAllData  } = props;
 
-//   if (fetchingLeads) {
-//     return <BundleLoader />;
-//   }
+  if (fetchingPitch) {
+    return <BundleLoader />;
+  }
 
   return (
     <>
@@ -473,6 +454,7 @@ onClick={()=>{
 const mapStateToProps = ({ auth, leads, sector,pitch }) => ({
 //   leadsAllData: leads.leadsAllData,
   userId: auth.userDetails.userId,
+  fetchingPitch:pitch.fetchingPitch,
   addDrawerPitchNotesModal:pitch.addDrawerPitchNotesModal,
   updatePitchModal:pitch.updatePitchModal,
   openASSImodal:pitch.openASSImodal,
