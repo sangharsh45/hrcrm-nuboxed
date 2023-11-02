@@ -1,5 +1,5 @@
 import * as types from "./SuppliesActionType";
-import { base_url } from "../../../Config/Auth";
+import { base_url2 } from "../../../Config/Auth";
 import axios from "axios";
 import moment from "moment";
 import { message } from "antd";
@@ -24,7 +24,7 @@ export const addSupplies = (purchase, groupId) => (dispatch) => {
   console.log("inside add purchase");
   dispatch({ type: types.ADD_SUPPLIES_REQUEST });
   axios
-    .post(`${base_url}/supplies`, purchase, {})
+    .post(`${base_url2}/supplies`, purchase, {})
     .then((res) => {
       console.log(res);
       dispatch(getSuppliesList());
@@ -50,7 +50,7 @@ export const getSuppliesList = () => (dispatch) => {
     type: types.GET_SUPPLIES_LIST_REQUEST,
   });
   axios
-    .get(`${base_url}/supplies`, {
+    .get(`${base_url2}/supplies`, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },
@@ -89,7 +89,7 @@ export const updateSupplies = (suppliesId, data, cb) => (dispatch) => {
   console.log(data);
   dispatch({ type: types.UPDATE_SUPPLIES_BY_ID_REQUEST });
   axios
-    .put(`${base_url}/supplies/${suppliesId}`, { ...data })
+    .put(`${base_url2}/supplies/${suppliesId}`, { ...data })
     .then((res) => {
       console.log(res);
       dispatch({
@@ -112,7 +112,7 @@ export const getSuppliesHistory = (suppliesId) => (dispatch) => {
     type: types.GET_SUPPLIES_HISTORY_REQUEST,
   });
   axios
-    .get(`${base_url}/supplier/supplierList/${suppliesId}`)
+    .get(`${base_url2}/supplier/supplierList/${suppliesId}`)
     .then((res) => {
       console.log(res);
       dispatch({
@@ -148,7 +148,7 @@ export const deletePurchaseData = (suppliesId) => (dispatch) => {
     type: types.DELETE_PURCHASE_DATA_REQUEST,
   });
   axios
-    .delete(`${base_url}/supplies/${suppliesId}`)
+    .delete(`${base_url2}/supplies/${suppliesId}`)
     .then((res) => {
       console.log(res);
       // dispatch(getDeletedPurchaseById());
@@ -173,7 +173,7 @@ export const getDeleteHistory = () => (dispatch) => {
     type: types.GET_DELETE_HISTORY_REQUEST,
   });
   axios
-    .get(`${base_url}/supplies/deleteSuppliesHistory`)
+    .get(`${base_url2}/supplies/deleteSuppliesHistory`)
     .then((res) => {
       console.log(res);
       dispatch({
@@ -198,7 +198,7 @@ export const reinstateToggleForSupplies = (data, suppliesId) => (
     type: types.REINSTATE_TOGGLE_FOR_SUPPLIES_REQUEST,
   });
   axios
-    .put(`${base_url}/supplies/reinstate/deleteSuppliesHistory/${suppliesId}`, data)
+    .put(`${base_url2}/supplies/reinstate/deleteSuppliesHistory/${suppliesId}`, data)
     .then((res) => {
       dispatch({
         type: types.REINSTATE_TOGGLE_FOR_SUPPLIES_SUCCESS,
@@ -221,7 +221,7 @@ export const addToCatalogue = (data, suppliesId, groupId) => (dispatch) => {
     type: types.ADD_TO_CATALOGUE_REQUEST,
   });
   axios
-    .put(`${base_url}/supplies/transferToCatalog/${suppliesId}`, data)
+    .put(`${base_url2}/supplies/transferToCatalog/${suppliesId}`, data)
     .then((res) => {
       console.log(res);
       dispatch(getSuppliesByGroupId(groupId));
@@ -249,7 +249,7 @@ export const addPriceRate = (data, suppliesId) => (dispatch) => {
   console.log("inside add data");
   dispatch({ type: types.ADD_PRICE_RATE_REQUEST });
   axios
-    .post(`${base_url}/supplies/suppliesPrice`, data, {})
+    .post(`${base_url2}/supplies/suppliesPrice`, data, {})
     .then((res) => {
       dispatch(getMaterialPriceById(suppliesId))
       dispatch({
@@ -273,7 +273,7 @@ export const getSuppliesByGroupId = (groupId) => (dispatch) => {
     type: types.GET_SUPPLIES_BY_GROUP_ID_REQUEST,
   });
   axios
-    .get(`${base_url}/supplies/suppliesList/${groupId}`, {})
+    .get(`${base_url2}/supplies/suppliesList/${groupId}`, {})
     .then((res) => {
       console.log(res);
       dispatch({
@@ -295,7 +295,7 @@ export const getMaterialPriceById = (suppliesId) => (dispatch) => {
     type: types.GET_MATERIAL_PRICE_BY_ID_REQUEST,
   });
   axios
-    .get(`${base_url}/supplies/suppliesPrice/${suppliesId}`, {})
+    .get(`${base_url2}/supplies/suppliesPrice/${suppliesId}`, {})
     .then((res) => {
       console.log(res);
       dispatch({
@@ -315,7 +315,7 @@ export const getMaterialPriceById = (suppliesId) => (dispatch) => {
 export const addMasterList = (data) => (dispatch) => {
   dispatch({ type: types.ADD_MASTER_LIST_REQUEST });
   axios
-    .post(`${base_url}/supplies/suppliesMasterLink`, data, {
+    .post(`${base_url2}/supplies/suppliesMasterLink`, data, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },
@@ -340,7 +340,7 @@ export const getTaggedBrandById = (suppliesId) => (dispatch) => {
     type: types.GET_TAGGED_BRAND_BY_ID_REQUEST,
   });
   axios
-    .get(`${base_url}/supplies/optional/suppliesMasterLink/${suppliesId}`, {
+    .get(`${base_url2}/supplies/optional/suppliesMasterLink/${suppliesId}`, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },
