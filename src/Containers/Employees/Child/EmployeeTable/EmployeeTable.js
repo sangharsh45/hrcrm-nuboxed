@@ -56,7 +56,7 @@ function EmployeeTable(props) {
         }
       }
     })
-    props.getEmployeelist();
+    props.getEmployeelist("cretiondate");
     props.getDesignations();
     props.getRoles(props.organizationId);
     props.getDepartments();
@@ -305,23 +305,23 @@ function EmployeeTable(props) {
     //     );
     //   }
     // },
-    {
-      title: "Type",
-      width: "7%",
+    // {
+    //   title: "Type",
+    //   width: "7%",
       
 
-      render: (name, item, i) => {
-        return (
-          <>
+    //   render: (name, item, i) => {
+    //     return (
+    //       <>
         
-            <EmployeeType
-            type={item.type}
-              employeeId={item.employeeId}
-            />
-          </>
-        );
-      },
-    },
+    //         <EmployeeType
+    //         type={item.type}
+    //           employeeId={item.employeeId}
+    //         />
+    //       </>
+    //     );
+    //   },
+    // },
     {
       title: "Suspend",
       width: "5%",
@@ -418,7 +418,7 @@ function EmployeeTable(props) {
         scroll={{ y: tableHeight }}
        
         pagination={false}
-        dataSource={employees}
+        dataSource={props.filteredData}
       />
       <Spacer />
       <EmployeeDrawerForAdmin

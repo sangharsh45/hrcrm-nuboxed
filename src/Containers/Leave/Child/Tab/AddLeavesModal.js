@@ -5,6 +5,8 @@ import { BundleLoader } from "../../../../Components/Placeholder";
 const LeaveForm = lazy(() => import("./LeaveForm"));
 const AddLeavesModal = (props) => {
   const { addLeaveModal, handleLeavesModal, ...formProps } = props;
+  const isSmallScreen = window.innerWidth <= 600;
+  const drawerWidth = isSmallScreen ? "90%" : "55%";
   return (
     <>
       <StyledDrawer
@@ -13,7 +15,7 @@ const AddLeavesModal = (props) => {
           id="app.applyforleaves"
           defaultMessage="Apply for Leaves"
         />}
-        width="30vw"
+        width={drawerWidth}
         visible={addLeaveModal}
         maskClosable={false}
         destroyOnClose

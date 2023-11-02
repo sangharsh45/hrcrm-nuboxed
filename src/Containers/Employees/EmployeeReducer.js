@@ -16,9 +16,14 @@ const initialState = {
   fetchingEmployeeTreeMapError: false,
   employeeTreeMap:{},
 
+  fetchingFilterEmployee: false,
+   fetchingFilterEmployeeError: false,
+
   fetchingEmployee: false,
   fetchingEmployeeError: false,
   employees: [],
+
+  addDrawerEmployeeDocumentModal:false,
 
   fetchingEmployeeData: false,
   fetchingEmployeeDataError: false,
@@ -145,6 +150,15 @@ export const EmployeeReducer = (state = initialState, action) => {
       return { ...state, fetchingEmployee: false, employees: action.payload };
     case types.GET_EMPLOYEE_LIST_FAILURE:
       return { ...state, fetchingEmployee: false, fetchingEmployeeError: true };
+
+
+      case types.GET_EMPLOYEE_FILTER_LIST_REQUEST:
+        return { ...state, fetchingFilterEmployee: true };
+      case types.GET_EMPLOYEE_FILTER_LIST_SUCCESS:
+        return { ...state, fetchingFilterEmployee: false, employees: action.payload };
+      case types.GET_EMPLOYEE_FILTER_LIST_FAILURE:
+        return { ...state, fetchingFilterEmployee: false, fetchingFilterEmployeeError: true };
+  
 
 
       case types.GET_EMPLOYEE_DATA_REQUEST:
@@ -604,6 +618,10 @@ export const EmployeeReducer = (state = initialState, action) => {
 
                             case types.HANDLE_EMPLOYEE_PULSE_DRAWER_MODAL:
                               return { ...state, addDrawerEmployeePulseModal: action.payload };
+
+                              case types.HANDLE_EMPLOYEE_DOCUMENT_DRAWER_MODAL:
+                              return { ...state, addDrawerEmployeeDocumentModal: action.payload };
+
 
 
                               case types.GET_EMPLOYEE_TREE_MAP_REQUEST:

@@ -1,33 +1,35 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { Timeline } from "antd";
+import { Button, Timeline } from "antd";
 //import { BorderBox } from "../../../../Components/UI/Layout";
  import {getNotesListByTaskId } from "../TaskAction";
 
  import NoteFile from "./NoteFile";
 import { BundleLoader } from "../../../Components/Placeholder";
 import SingleNote from "./SingleNote";
+import { FormattedMessage } from "react-intl";
 
 class NotesForm extends Component {
   componentDidMount() {
-    this.props.getNotesListByTaskId(this.props.data1.taskId);
+    this.props.getNotesListByTaskId(this.props.currentNameId.taskId);
   }
 
   render() {
     const { fetchingNotesListByTaskId, notesListByTaskId } = this.props;
-
+// console.log(this.props.currentNameId.taskId);
     return (
       <>
         <div style={{ backgroundColor: "#dcdcdc", height: "14.375em" }}>
           <NoteFile
             type={"task"}
-            taskId={this.props.data1.taskId}
+            taskId={this.props.currentNameId.taskId}
             callback={() =>
-              this.props.getNotesListByTaskId(this.props.data1.taskId)
+              this.props.getNotesListByTaskId(this.props.currentNameId.taskId)
             }
           />
         </div>
+      
         <br />
 
         <div class="border-spacing-2 rounded-md shadow-2xl mb-1 mt-9">

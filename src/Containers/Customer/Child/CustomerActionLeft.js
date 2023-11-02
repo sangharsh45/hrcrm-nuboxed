@@ -1,10 +1,9 @@
-import React, { useEffect } from "react";
+import React, { useEffect,useState } from "react";
 import { FormattedMessage } from "react-intl";
-import TableViewIcon from "@mui/icons-material/TableView";
-import GroupsIcon from "@mui/icons-material/Groups";
-import PermIdentityIcon from "@mui/icons-material/PermIdentity";
-import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
+import GridViewIcon from '@mui/icons-material/GridView';
+import TocIcon from '@mui/icons-material/Toc';
 import LanguageIcon from "@mui/icons-material/Language";
+import {getCustomerListByUserId} from "../CustomerAction"
 import { StyledSelect } from "../../../Components/UI/Antd";
 import { Button, Tooltip, Badge } from "antd";
 import { connect } from "react-redux";
@@ -25,6 +24,8 @@ const Option = StyledSelect.Option;
 const { Search } = Input;
 
 const CustomerActionLeft = (props) => {
+  const[filter,setFilter]=useState("creationdate")
+  const [page, setPage] = useState(0);
   const dummy = ["cloud", "azure", "fgfdg"];
   function handleChange(data) {}
   const suffix = (
@@ -43,12 +44,17 @@ const CustomerActionLeft = (props) => {
     browserSupportsSpeechRecognition,
   } = useSpeechRecognition();
   console.log(transcript);
+function  handleFilterChange(data){
+    setFilter(data)
+    props.getCustomerListByUserId(props.userId, page,data);
+    setPage(page + 1);
+  }
 
   useEffect(() => {
     if (props.viewType === "card") {
       props.getRecords(props.userId);
-    } else if (props.viewType === "list") {
-      props.getCategoryRecords("White");
+    } else if (props.viewType === "table") {
+      props.getRecords(props.userId);
     } else if (props.viewType === "dashboard") {
       props.getCategoryRecords("blue");
     }
@@ -61,6 +67,23 @@ const CustomerActionLeft = (props) => {
   return (
     <div class=" flex items-center"
     >
+         <Tooltip title={<FormattedMessage id="app.all" defaultMessage="All" />}>
+        <Badge
+          size="small"
+          count={(props.viewType === "table" && props.recordData.customer) || 0}
+          overflowCount={999}
+        >
+          <span
+            class=" mr-2 text-sm cursor-pointer"
+            onClick={() => props.setCustomerViewType("table")}
+            style={{
+              color: props.viewType === "table" && "#1890ff",
+            }}
+          >
+            <TocIcon />
+          </span>
+        </Badge>
+      </Tooltip>
       <Tooltip>
         <Badge
           size="small"
@@ -74,72 +97,12 @@ const CustomerActionLeft = (props) => {
               color: props.viewType === "card" && "#1890ff",
             }}
           >
-            <TableViewIcon />
+            <GridViewIcon />
           </span>
         </Badge>
       </Tooltip>
-      <Tooltip title={<FormattedMessage id="app.all" defaultMessage="All" />}>
-        <Badge
-          size="small"
-          count={(props.viewType === "table" && props.recordData.customer) || 0}
-          overflowCount={999}
-        >
-          <span
-            class=" mr-2 text-sm cursor-pointer"
-            onClick={() => props.setCustomerViewType("table")}
-            style={{
-              color: props.viewType === "table" && "#1890ff",
-            }}
-          >
-            <GroupsIcon />
-          </span>
-        </Badge>
-      </Tooltip>
-      <Tooltip
-        title={<FormattedMessage id="app.white" defaultMessage="White" />}
-      >
-        <Badge
-          size="small"
-          count={
-            (props.viewType === "list" && props.recordCategoryData.customer) ||
-            0
-          }
-          overflowCount={999}
-        >
-          <span
-            class=" mr-2 text-sm cursor-pointer"
-            onClick={() => props.setCustomerViewType("list")}
-            style={{
-              color: props.viewType === "list" && "#1890ff",
-            }}
-          >
-            <PermIdentityIcon />
-          </span>
-        </Badge>
-      </Tooltip>
-      <Tooltip title={<FormattedMessage id="app.blue" defaultMessage="Blue" />}>
-        <Badge
-          size="small"
-          count={
-            (props.viewType === "dashboard" &&
-              props.recordCategoryDataBlue.customer) ||
-            0
-          }
-          overflowCount={999}
-        >
-          <span
-            class=" mr-2 text-sm cursor-pointer"
-            onClick={() => props.setCustomerViewType("dashboard")}
-            style={{
-              color: props.viewType === "dashboard" && "#1890ff",
-            }}
-          >
-            <ManageAccountsIcon />
-          </span>
-        </Badge>
-      </Tooltip>
-
-      <Tooltip
+   
+      {/* <Tooltip
         title={<FormattedMessage id="app.mapview" defaultMessage="Map View" />}
       >
         <Badge
@@ -156,12 +119,12 @@ const CustomerActionLeft = (props) => {
             <LanguageIcon />
           </span>
         </Badge>
-      </Tooltip>
+      </Tooltip> */}
       <div class=" flex items-center justify-between"
       >
-        <div class=" w-72">
+        <div class=" w-72 max-sm:w-32">
           <Input
-            placeholder="Search by Name, Sector or Owner"
+            placeholder="Search by Name or Sector"
             width={"100%"}
             suffix={suffix}
             onChange={(e) => props.handleChange(e)}
@@ -186,9 +149,10 @@ const CustomerActionLeft = (props) => {
           {/* Clear */}
         </Button>
         <div style={{ width: "15%" }}>
-          <StyledSelect placeholder="Sort" onChange={(e) => handleChange(e)}>
-            <Option value="aToz">A To Z</Option>
-            <Option value="zToa">Z To A</Option>
+          <StyledSelect placeholder="Sort"  onChange={(e)  => props.handleFilterChange(e)}>
+          <Option value="CreationDate">Creation Date</Option>
+            <Option value="ascending">A To Z</Option>
+            <Option value="descending">Z To A</Option>
           </StyledSelect>
         </div>
       </div>
@@ -209,6 +173,7 @@ const mapDispatchToProps = (dispatch) =>
       inputCustomerDataSearch,
       getRecords,
       getCategoryRecords,
+      getCustomerListByUserId
     },
     dispatch
   );

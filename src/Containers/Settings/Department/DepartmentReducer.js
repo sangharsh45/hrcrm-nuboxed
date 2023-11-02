@@ -20,6 +20,15 @@ const initialState = {
     updatingDepartments: false,
     updatingDepartmentsError: false,
 
+    addingCrmToggle: false,
+    addingCrmToggleError: false,
+
+    addingImToggle: false,
+    addingImToggleError: false,
+
+    addingErpToggle: false,
+    addingErpToggleError: false,
+
 
     addingDepartmentDocumentToggle: false,
               addingDepartmentDocumentToggleError: false,
@@ -125,6 +134,73 @@ export const departmentsReducer = (state = initialState, action) => {
               addingDepartmentDocumentToggle: false,
               addingDepartmentDocumentToggleError: true,
             };
+
+
+            case types.LINK_CRM_TOGGLE_REQUEST:
+              return { ...state, addingCrmToggle: true };
+            case types.LINK_CRM_TOGGLE_SUCCESS:
+              return {
+                ...state,
+                addingCrmToggle: false,
+                departments:action.payload,
+              //   departments: state.departments.map((sector) =>
+              //   sector.departmentId === action.payload.departmentId
+              //     ? action.payload
+              //     : sector
+              // ),
+               
+              };
+            case types.LINK_CRM_TOGGLE_FAILURE:
+              return {
+                ...state,
+                addingCrmToggle: false,
+                addingCrmToggleError: true,
+              };
+
+
+              case types.LINK_IM_TOGGLE_REQUEST:
+                return { ...state, addingImToggle: true };
+              case types.LINK_IM_TOGGLE_SUCCESS:
+                return {
+                  ...state,
+                  addingImToggle: false,
+                      departments:action.payload,
+                  // departments: state.departments.map((item) => {
+                  //   if (item.departmentId === action.payload.departmentId) {
+                  //     return action.payload;
+                  //   } else {
+                  //     return item;
+                  //   }
+                  // }),
+                };
+              case types.LINK_IM_TOGGLE_FAILURE:
+                return {
+                  ...state,
+                  addingImToggle: false,
+                  addingImToggleError: true,
+                };
+
+              case types.LINK_ERP_TOGGLE_REQUEST:
+                return { ...state, addingErpToggle: true };
+              case types.LINK_ERP_TOGGLE_SUCCESS:
+                return {
+                  ...state,
+                  addingErpToggle: false,
+                  departments:action.payload,
+                  // departments: state.departments.map((item) => {
+                  //   if (item.departmentId === action.payload.departmentId) {
+                  //     return action.payload;
+                  //   } else {
+                  //     return item;
+                  //   }
+                  // }),
+                };
+              case types.LINK_ERP_TOGGLE_FAILURE:
+                return {
+                  ...state,
+                  addingErpToggle: false,
+                  addingErpToggleError: true,
+                };
     
 
         default:

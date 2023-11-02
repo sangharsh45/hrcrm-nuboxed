@@ -1,13 +1,21 @@
 import * as types from "./LeadsActionTypes";
 import dayjs from "dayjs"; 
 const initialState = {
-  viewType: "table",
+  viewType: "card",
 
   addLeadsModal:false,
+
+  addCallTaskModal:false,
+
+  fetchingCallTimelineStatus: false,
+  fetchingCallTimelineStatusError: false,
+  callTimeline:[],
 
   updateLeadsContactById: false,
   updateLeadsContactByIdError: false,
   documentsByLeadsId: [],
+
+  addDrawerLeadsNotesModal:false,
 
 
   fetchingDocumentsByLeadsId: false,
@@ -37,6 +45,10 @@ const initialState = {
   fetchingLeadsInputSearchData: false,
   fetchingLeadsInputSearchDataError: false,
   inputData: [],
+
+  fetchingCallList: true,
+  fetchingCallListError: true,
+  callList:[],
 
   addingDocumentByLeadsId: false,
   addingDocumentByLeadsIdError: false,
@@ -78,6 +90,9 @@ const initialState = {
   deletingLeadsData: false,
   deletingLeadsDataError: false,
 
+
+  
+
   fetchingLeadsOpportunity: false,
   fetchingLeadsOpportunityError: false,
   opportunityByLeadsId: [],
@@ -116,7 +131,28 @@ const initialState = {
   addingLeadsSkill: false,
   addingLeadsSkillError: false,
 
+  fetchingLeadsPermissionsList: false,
+  fetchingLeadsPermissionsListError: false,
+  leadspermissionsDataList:[],
 
+  addSharingLeads: false,
+  addSharingLeadsError: false,
+
+  updateTypeLeads: false,
+  updateTypeLeadsError:false,
+
+  fetchingJunkedLeads: false,
+  fetchingJunkedLeadsError: false,
+  junkedLeadsData:[],
+  fetchingLeadsRecords: false,
+  fetchingLeadsRecordsError: false,
+  leadsCountData:[],
+  fetchingJunkedLeadsRecords: false,
+  fetchingJunkedLeadsRecordsError: false,
+  leadsCountJunked:[],
+
+  openCETmodal:false,
+  
 };
 export const leadsReducer = (state = initialState, action) => {
     switch (action.type) {
@@ -148,6 +184,7 @@ case types.HANDLE_LEADS_MODAL:
             ...state,
             fetchingLeads: false,
             leadsAllData: action.payload,
+            clearbit:null
           };
         case types.GET_LEADS_FAILURE:
           return {
@@ -584,6 +621,157 @@ case types.HANDLE_LEADS_MODAL:
       };
     case types.INPUT_LEADS_SEARCH_DATA_FAILURE:
       return { ...state, fetchingLeadsInputSearchDataError: true };
+
+      case types.GET_LEADS_PERMISSIONS_LIST_REQUEST:
+        return { ...state, fetchingLeadsPermissionsList: true };
+      case types.GET_LEADS_PERMISSIONS_LIST_SUCCESS:
+        return {
+          ...state,
+          fetchingLeadsPermissionsList: false,
+          leadspermissionsDataList: action.payload,
+        };
+      case types.GET_LEADS_PERMISSIONS_LIST_FAILURE:
+        return {
+          ...state,
+          fetchingLeadsPermissionsList: false,
+          fetchingLeadsPermissionsListError: true,
+        };
+
+        case types.ADD_SHARE_LEADS_PERMISSION_REQUEST:
+          return { ...state, addSharingLeads: true };
+    
+        case types.ADD_SHARE_LEADS_PERMISSION_SUCCESS:
+          return { ...state, addSharingLeads: false, leadsAllData: action.payload };
+    
+        case types.ADD_SHARE_LEADS_PERMISSION_FAILURE:
+          return {
+            ...state,
+            addSharingLeads: false,
+            addSharingLeadsError: true,
+          };
+          case types.UPDATE_TYPE_FOR_LEAD_REQUEST:
+            return { ...state,updateTypeLeads: true };
+          case types.UPDATE_TYPE_FOR_LEAD_SUCCESS:
+            return {
+              ...state,
+              updateTypeLeads: false,
+                 leadsAllData: state.leadsAllData.map((item) => {
+                if (item.leadsId === action.payload.leadsId) {
+                  return action.payload;
+                } else {
+                  return item;
+                }
+              }),
+            };
+          case types.UPDATE_TYPE_FOR_LEAD_FAILURE:
+            return { ...state, updateTypeLeads: false,updateTypeLeadsError:true, };
+
+            case types.GET_JUNKED_LEADS_REQUEST:
+              return { ...state, fetchingJunkedLeads: true };
+            case types.GET_JUNKED_LEADS_SUCCESS:
+              return {
+                ...state,
+                fetchingJunkedLeads: false,
+                junkedLeadsData: action.payload,
+              };
+            case types.GET_JUNKED_LEADS_FAILURE:
+              return {
+                ...state,
+                fetchingJunkedLeads: false,
+                fetchingJunkedLeadsError: true,
+              }; 
+
+              case types.GET_LEADS_RECORDS_REQUEST:
+                return { ...state, fetchingLeadsRecords: true };
+              case types.GET_LEADS_RECORDS_SUCCESS:
+                return {
+                  ...state,
+                  fetchingLeadsRecords: false,
+                  leadsCountData: action.payload,
+                };
+              case types.GET_LEADS_RECORDS_FAILURE:
+                return {
+                  ...state,
+                  fetchingLeadsRecords: false,
+                  fetchingLeadsRecordsError: true,
+                };
+
+                case types.GET_JUNKED_LEADS_RECORDS_REQUEST:
+                return { ...state, fetchingJunkedLeadsRecords: true };
+              case types.GET_JUNKED_LEADS_RECORDS_SUCCESS:
+                return {
+                  ...state,
+                  fetchingJunkedLeadsRecords: false,
+                  leadsCountJunked: action.payload,
+                };
+              case types.GET_JUNKED_LEADS_RECORDS_FAILURE:
+                return {
+                  ...state,
+                  fetchingJunkedLeadsRecords: false,
+                  fetchingJunkedLeadsRecordsError: true,
+                };
+
+                case types.REINSTATE_JUNKED_LEADS_REQUEST:
+                  return { ...state, reInstateJunkedLeads: true };
+                case types.REINSTATE_JUNKED_LEADS_SUCCESS:
+                  return {
+                    ...state,
+                    reInstateJunkedLeads: false,
+                    junkedLeadsData:action.payload,
+                    // junkedLeadsData: state.junkedLeadsData.map((item) => {
+                    //   if (item.leadsId === action.payload.leadsId) {
+                    //     return action.payload;
+                    //   } else {
+                    //     return item;
+                    //   }
+                    // }),
+                  };
+                case types.REINSTATE_JUNKED_LEADS_FAILURE:
+                  return {
+                    ...state,
+                    reInstateJunkedLeads: false,
+                    reInstateJunkedLeadsError: true,
+                  }; 
+                         
+                  case types.HANDLE_CET_MODAL:
+                    return { ...state, openCETmodal: action.payload };
+
+                    case types.GET_CALL_LIST_BY_REQUEST:
+                      return { ...state, fetchingCallList: true };
+                    case types.GET_CALL_LIST_BY_SUCCESS:
+                      return {
+                        ...state,
+                        fetchingCallList: false,
+                         callList: action.payload,
+                      };
+                    case types.GET_CALL_LIST_BY_FAILURE:
+                      return {
+                        ...state,
+                        fetchingCallList: false,
+                        fetchingCallListError: true,
+                      };
+
+                      case types.HANDLE_LEADS_CALL_MODAL:
+                        return { ...state, addCallTaskModal: action.payload };
+
+                        case types.GET_CALL_TIMELINE_REQUEST:
+                          return { ...state, fetchingCallTimelineStatus: true };
+                      case types.GET_CALL_TIMELINE_SUCCESS:
+                          return {
+                              ...state,
+                              fetchingCallTimelineStatus: false,
+                              callTimeline: action.payload,
+                          };
+                      case types.GET_CALL_TIMELINE_FAILURE:
+                          return {
+                              ...state,
+                              fetchingCallTimelineStatus: false,
+                              fetchingCallTimelineStatusError: true,
+                          };
+
+                          case types.HANDLE_LEADS_NOTES_DRAWER_MODAL:
+    return { ...state, addDrawerLeadsNotesModal: action.payload };
+
 
 default:
 return state;

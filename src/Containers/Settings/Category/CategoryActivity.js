@@ -30,7 +30,7 @@ class CategoryActivity extends Component {
     return (
       <>
         <FlexContainer flexWrap="nowrap">
-        <div style= {{width:"46%"}}>
+        <div style= {{width:"70%"}}>
           <TabsWrapper>
             <StyledTabs defaultActiveKey="0" onChange={this.handleTabChange}>
            
@@ -62,7 +62,7 @@ class CategoryActivity extends Component {
                 </Suspense>
               </TabPane>
 
-              <TabPane
+              {/* <TabPane
                 tab={
                   <>
                   <i class="fas fa-tasks"></i>
@@ -74,7 +74,7 @@ class CategoryActivity extends Component {
                 <Suspense>
                   <Unit />
                 </Suspense>
-              </TabPane>
+              </TabPane> */}
               {/* <TabPane
                 tab={
                   <>
@@ -89,19 +89,7 @@ class CategoryActivity extends Component {
                 </Suspense>
               </TabPane> */}
 
-              <TabPane
-                tab={
-                  <>
-                  <i class="fas fa-tasks"></i>
-                    <span style={{ marginLeft: "0.25em" }}>Country</span>
-                  </>
-                }
-                key="5"
-              >
-                <Suspense>
-                  <Country />
-                </Suspense>
-              </TabPane>
+          
             </StyledTabs>
           </TabsWrapper>
           </div>

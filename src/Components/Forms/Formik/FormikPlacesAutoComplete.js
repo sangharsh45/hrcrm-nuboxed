@@ -40,7 +40,7 @@ const StyledInput = styled.input.attrs({
  */
 const StyledDropDownContainer = styled.div`
   border-radius: 0.1875em;
-  background-color: ${(props) => props.theme.backgroundColor};
+  background-color: white;
   color: ${(props) => props.theme.color};
   box-shadow: 0em 0.25em 0.625em -0.25em ${(props) => props.theme.boxShadowColor};
   position: absolute;

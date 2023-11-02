@@ -3,12 +3,17 @@ import React, { lazy } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Tooltip,Button } from "antd";
-import { getMileageByUserId,deleteMileageVoucher,handleMileageVoucherIdDrwer } from "../MileageAction";
+import { getMileageByUserId,
+  deleteMileageVoucher,
+  handleStatusMileageModal,
+  handleMileageVoucherIdDrwer
+ } from "../MileageAction";
 import styled from 'styled-components'
-import { FlexContainer } from '../../../Components/UI/Layout'
+import AssistantIcon from '@mui/icons-material/Assistant';
 import APIFailed from "../../../Helpers/ErrorBoundary/APIFailed";
 import { DeleteOutlined, } from "@ant-design/icons";
 import MileageVoucherIdDrawer from "./MileageVoucherIdDrawer";
+import StatusMileageDrawer from "./StatusMileageDrawer";
 
 
 class MileageCard extends React.Component {
@@ -27,15 +32,18 @@ class MileageCard extends React.Component {
     this.props.getMileageByUserId(this.props.userId);
   }
   render() {
+    console.log("voucherId",this.state.voucherId)
     const {
       MileageDat,
       fetchingMileageByUserId,
+      handleStatusMileageModal,
+     
       fetchingMileageByUserIdError,
     } = this.props;
 
     return (
       <>
-        
+       <div class=" h-h86 overflow-auto overflow-x-auto">
         <CardWrapper>      
               {MileageDat.map((item) => {
                  return (
@@ -47,9 +55,9 @@ class MileageCard extends React.Component {
                          </div>
                       {/* <CardDescription> */}
                       <div class="flex items-center justify-between ">
-                      <h4>Voucher ID</h4>
+                      <h4 class="text-sm">Voucher ID</h4>
                         <Header>
-<div onClick={() => { this.handleExpand(item.voucherId) 
+<div class="text-[0.82rem] font-semibold " onClick={() => { this.handleExpand(item.voucherId) 
                 this.props.handleMileageVoucherIdDrwer(true)}}>
          {item.voucherId}
          </div>
@@ -64,12 +72,12 @@ class MileageCard extends React.Component {
                      
            
                         <div class="flex  justify-between">
-                            <h3>Voucher Date</h3>
-                            <h4>{dayjs(item.voucherDate).format("MMM Do YY")}</h4>
+                            <h3 class="text-sm">Voucher Date</h3>
+                            <h4 class="text-[0.82rem]">{dayjs(item.voucherDate).format("MMM Do YY")}</h4>
                         </div>
                         <div class="flex justify-between">
-                    <h4>Amount</h4> 
-                    <h5>{item.amount}</h5>
+                    <h4 class="text-sm">Amount</h4> 
+                    <h5 class="text-[0.82rem]">{item.amount}</h5>
                     </div>
 
                     <div class="flex  justify-between" >
@@ -112,9 +120,27 @@ class MileageCard extends React.Component {
                   }}
                 >
                   
-                  <div className="text-[#e1d16c]"> Waiting for approval</div>
+                  <div className="text-[#e1d16c]" > Waiting for approval</div>
                   </div>
               )}
+
+
+<div style={{ cursor: "pointer",padding:"2px"}}
+
+onClick={() => {
+this.props.handleStatusMileageModal(true);
+this.handleExpand(item.voucherId)
+
+
+}}
+>
+                 <Tooltip  title={"status"}>
+                 <AssistantIcon
+style={{ color: "grey",fontSize:"1.2rem",padding:"2px" }}/>
+   </Tooltip> 
+
+   </div>
+        
                         
                            {item.status === "Pending" && (
             <Tooltip title="Delete">
@@ -138,108 +164,28 @@ class MileageCard extends React.Component {
           )}
               </div>           
                       
-                        {/* <div class=" flex flex-row justify-around w-full items-end">
-                        <div style={{alignItems:"center"}}>
-              <Tooltip>
-              <CircleIcon
-             style={{ borderRadius: "45%", backgroundColor:"grey",
-                  fontSize:"0.8rem" }}/>
-              </Tooltip>
-              </div>     
-                     <span>
-                        <Tooltip >
-                        <VolumeUpIcon  style={{fontSize:"0.8rem",color:"#24d8a7"}}  />
-                        </Tooltip> 
-                        </span>
-                        <span>
-                        <Tooltip>
-                   <DraftsIcon 
-                   style={{fontSize:"0.8rem",color:"#24d8a7"}}
-                  // icon={regular("envelope")}  
-                  />
-          </Tooltip> 
-          </span>
-          <Tooltip
-            overlayStyle={{ maxWidth: "300px" }}
-                     >
-            <span
-              style={{
-                cursor: "pointer",
-                
-              }}
-            >
-               <LocationOnIcon  style={{fontSize:"0.8rem",color:"grey"}} 
-              //  icon={solid("location-dot")}
-                />
-            </span>
-          </Tooltip>
          
-                        <span 
-                      className="hover_button"
-                        // onClick={() => {
-                        
-                        //   props.getCandidateById(item.candidateId );
-                        //   props.getCandidateDocument(item.candidateId );
-                        //   props.getCandidateTreeMap(item.candidateId );
-                        //   props.getTopicsByCandidateId(item.candidateId)
-                        //   props.getCountries();
-                        //   props.handleCandidateDrawerModal(true);
-                        // }}
-                   
-                        >
-                           
-                          <MonitorHeartIcon 
-                          // icon={solid('heart-pulse')} 
-                          style={{color:"#993333",fontSize:"0.8rem",cursor: "pointer"}} />
-                        </span>
-
-                        <span 
-                      className="hover_button"
-                    //     onClick={() => {
-                        
-                    //   props.getCandidateTasksInfo(item.candidateId);
-                    //       props.handleCandidatesTasksDrawerModal(true);
-                    //     }}
-                   
-                        >
-                          
-                          <FactCheckIcon
-               style={{ fontSize: "large" }}
-              />
-                        
-                        
-                        </span>
-                      <span>
-                        <StyledPopconfirm
-            title="Do you want to blacklist?"
-            // onConfirm={() => props.getBlackListCandidate(item.candidateId)}
-          >
-            <UpCircleOutlined
-              type="up-circle"
-              theme="filled"
-              style={{ cursor: "pointer",fontSize:"0.8rem",color:"grey" }}
-            />
-          </StyledPopconfirm>
-          </span>
-          <Tooltip>
-                 <span>
-                Image
-                </span>
-               </Tooltip>
-                        </div> */}
                         
                     </CardElement>
                  )  
             })}
               </CardWrapper>
 
-
+              </div> 
 
 
         <MileageVoucherIdDrawer 
         voucherId={this.state.voucherId}
         mileageVoucherIdDrawer={this.props.mileageVoucherIdDrawer}
         handleMileageVoucherIdDrwer={this.props.handleMileageVoucherIdDrwer}
+        />
+
+        
+<StatusMileageDrawer 
+handleExpand={this.handleExpand}
+         voucherId={this.state.voucherId}
+        updateStatusMileageModal={this.props.updateStatusMileageModal}
+        handleStatusMileageModal={this.props.handleStatusMileageModal}
         />
       </>
     );
@@ -248,6 +194,7 @@ class MileageCard extends React.Component {
 const mapStateToProps = ({ auth, mileage }) => ({
   userId: auth.userDetails.userId,
   MileageDat: mileage.MileageDat,
+  updateStatusMileageModal:mileage.updateStatusMileageModal,
   fetchingMileageByUserId: mileage.fetchingMileageByUserId,
   fetchingMileageByUserIdError: mileage.fetchingMileageByUserIdError,
   mileageVoucherIdDrawer:mileage.mileageVoucherIdDrawer,
@@ -257,7 +204,8 @@ const mapDispatchToProps = (dispatch) =>
     {
       getMileageByUserId,
       deleteMileageVoucher,
-      handleMileageVoucherIdDrwer
+      handleMileageVoucherIdDrwer,
+      handleStatusMileageModal
     },
     dispatch
   );
@@ -275,7 +223,7 @@ const CardWrapper = styled.div`
 `
 const CardElement = styled.div`
  
-border-radius: 0.75rem;
+border-radius: 0.35rem;
     border: 3px solid #EEEEEE;
     background-color: rgb(255,255,255);
     box-shadow: 0 0.25em 0.62em #aaa;
@@ -287,7 +235,7 @@ border-radius: 0.75rem;
     display: flex;
     flex-direction: column;
   @media only screen and (max-width: 600px) {
-    width: 100%;
+    width: -webkit-fill-available;
     
   }
 `

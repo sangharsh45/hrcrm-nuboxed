@@ -7,9 +7,9 @@ import TaskDeletedTable from "../Task/Child/TaskDeletedTable"
 import TaskHeader from "./Child/TaskHeader";
 import { handleTaskModal ,setTaskViewType} from "./TaskAction";
 import TaskApproveTable from "./Child/TaskApproveTable";
-
+import GanttChart from "./Child/GanttChart";
 const TaskTable = lazy(() => import("./Child/TaskTable"));
-
+const TaskCardList = lazy(() => import("./Child/TaskCardList"));
 class Task extends Component {
   render() {
     const { addTaskModal, handleTaskModal } = this.props;
@@ -26,7 +26,11 @@ class Task extends Component {
         />
         <Suspense fallback={<BundleLoader />}>
         {this.props.viewType === "table" ?
-          <TaskTable />:
+          // <TaskTable />
+          <TaskCardList/>
+          :
+          this.props.viewType === "gantt" ?
+          <GanttChart/>:
           this.props.viewType === "dashboard" ?
           <TaskDeletedTable/>:
           this.props.viewType === "approve" ?

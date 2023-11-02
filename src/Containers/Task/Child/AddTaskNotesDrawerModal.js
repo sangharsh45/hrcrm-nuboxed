@@ -9,13 +9,13 @@ import NotesForm from "./NotesForm";
 
 class AddTaskNotesDrawerModal extends Component {
   render() {
-    console.log("data5", this.props.data1);
+    //  console.log("data5", this.props.currentNameId.taskName);
 
     return (
       <div>
         <StyledDrawer
         // title="Notes"
-          title={this.props.data1.taskName}
+          title={this.props.currentNameId.taskName}
           width="64%"
           style={{ marginTop: "5rem" }}
           visible={this.props.addDrawerTaskNotesModal}
@@ -26,7 +26,9 @@ class AddTaskNotesDrawerModal extends Component {
           onClose={() => this.props.handleTaskNotesDrawerModal(false)}
         >
           <Suspense fallback={<BundleLoader />}>
-            <NotesForm data1={this.props.data1} />
+            <NotesForm currentNameId={this.props.currentNameId} 
+            taskId={this.props.currentNameId.taskId} 
+            />
           </Suspense>
         </StyledDrawer>
       </div>

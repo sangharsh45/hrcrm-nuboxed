@@ -8,44 +8,16 @@ import {
 import { StyledCreatable, StyledLabel } from "../../UI/Elements";
 import { FlexContainer } from "../../UI/Layout";
 import { functions, get, uniqBy } from "lodash";
-// import AddUserModal from "../../../Containers/Team/Child/AddUserModal";
 import ValidationError from "../../UI/Elements/ValidationError";
 import {
   getContactListByUserId,
-  //   handleContactModal,
 } from "../../../Containers/Contact/ContactAction";
 import { getContactListByCustomerId, getAllCustomerListByUserId } from "../../../Containers/Customer/CustomerAction";
 import { getAllCandidateListByUserId } from "../../../Containers/Candidate/CandidateAction";
-// import {
-//   getAccounts,
-//   handleAccountModal,
-// } from "../../../Containers/Account/AccountAction";
-// import { getLeadsAccounts } from "../../../Containers/Leads/LeadsAction";
 import { getAllUsersByOrganizationId } from "../../../Containers/Call/CallAction";
-// import {
-//   getCountries,
-//   getSources,
-//   getStages,
-//   getOpportunities,
-//   handleOpportunityModal,
-// } from "../../../Containers/Opportunity/OpportunityAction";
-
 import { getCountries, getCurrency } from "../../../Containers/Auth/AuthAction";
-// import { getProducts } from "../../../Containers/Product/ProductAction";
-// import {
-//   getDeliveryUser,
-//   getDepartment,
-//   getOnlySalesUser,
-// } from "../../../Containers/Team/TeamAction";
 import { getTimeZone } from "../../../Containers/Auth/AuthAction";
 import { callReducer } from "../../../Containers/Call/CallReducer";
-// import {
-//   getProcess,
-//   getProcessStages,
-//   getAllProcessStages,
-//   getDepartments, 
-//   getLevels,
-// } from "../../../Containers/Settings/SettingsAction";
 import { getDocuments } from "../../../Containers/Settings/Documents/DocumentsAction";
 import { getSectors } from "../../../Containers/Settings/Sectors/SectorsAction";
 import { getCustomerListByUserId } from "../../../Containers/Customer/CustomerAction";
@@ -60,10 +32,10 @@ import { getExpenses } from "../../../Containers/Settings/Expense/ExpenseAction"
 import { getEvents } from "../../../Containers/Settings/Event/EventAction";
 import { getDepartments } from "../../../Containers/Settings/Department/DepartmentAction";
 import { getEducations } from "../../../Containers/Settings/Educations/EducationAction";
-import { getRoles } from "../../../Containers/Settings/Category/Role/RoleAction"
+import { getRoles } from "../../../Containers/Settings/Category/Role/RoleAction";
+import { getSources } from "../../../Containers/Settings/Category/Source/SourceAction";
 class SearchSelect extends Component {
   componentDidMount() {
-    // const id = "PRIN8195435358122020" = this.props;
     const {
       opportunityId,
       processId,
@@ -168,8 +140,8 @@ class SearchSelect extends Component {
       console.log("inside stages");
       getAllProcessStages();
     }
-    if (selectType === "source") {
-      getSources();
+    if (selectType === "sourceName") {
+      getSources(organizationId);
     }
     if (selectType === "country" || "dialCode") {
       getCountries();
@@ -724,12 +696,12 @@ class SearchSelect extends Component {
       // const customOption = ({ label, value }) => <h3>{`${label}---${value}`}</h3>
     }
 
-    if (selectType === "source") {
+    if (selectType === "sourceName") {
       options = sources
-        .sort((a, b) => (a.sourceName < b.sourceName ? -1 : 1))
+        .sort((a, b) => (a.name < b.name ? -1 : 1))
         .map((item, i) => ({
-          value: item.leadSourceId,
-          label: item.sourceName,
+          value: item.sourceId,
+          label: item.name,
           color: "#FF8B00",
         }));
 
@@ -751,7 +723,7 @@ class SearchSelect extends Component {
       // const customOption = ({ label, value }) => <h3>{`${label}-----${value}`}</h3>
     }
     if (selectType === "currencyName") {
-      debugger;
+      // debugger;
       options = currencies
 
         .map((item, i) => ({
@@ -764,8 +736,8 @@ class SearchSelect extends Component {
 
     if (selectType === "dialCode") {
       options = countries.map((item, i) => ({
-        label: `+${item.countryDialCode}`,
-        value: `+${item.countryDialCode}`,
+        label: `+${item.country_dial_code}`,
+        value: `+${item.country_dial_code}`,
       }));
       // options.filter((item, i) => options.indexOf())
       options = uniqBy(options, "value");
@@ -917,6 +889,8 @@ class SearchSelect extends Component {
       // const customOption = ({ label, value }) => <h3>{`${label}----${value}`}</h3>
     }
     if (selectType === "contactOpportunityList") {
+      <>
+     {contactByCustomerId.length ? 
       options = contactByCustomerId
         // .sort((a, b) => (a.sourceName < b.sourceName ? -1 : 1))
         .map((item, i) => ({
@@ -924,9 +898,9 @@ class SearchSelect extends Component {
           label: `${item.firstName || ""} ${item.middleName ||
             ""} ${item.lastName || ""}`,
           color: "#FF8B00",
-        }));
-
-      // const customOption = ({ label, value }) => <h3>{`${label}----${value}`}</h3>
+        }))
+        :null}
+</>
     }
 
     if (selectType === "customerList") {
@@ -1246,7 +1220,7 @@ class SearchSelect extends Component {
 }
 
 
-const mapStateToProps = ({ auth, call, document, role, functions, contact, customer, employee, partner, sector, candidate, designations, education, tasks, expenses, events, departments }) => ({
+const mapStateToProps = ({ auth, call, document,source, role, functions, contact, customer, employee, partner, sector, candidate, designations, education, tasks, expenses, events, departments }) => ({
   countries: auth.countries,
   currencies: auth.currencies,
   fetchingCountries: auth.fetchingCountries,
@@ -1275,7 +1249,8 @@ const mapStateToProps = ({ auth, call, document, role, functions, contact, custo
   events: events.events,
   functions: functions.functions,
   departments: departments.departments,
-  allcustomersByUserId: customer.allcustomersByUserId
+  allcustomersByUserId: customer.allcustomersByUserId,
+  sources: source.sources,
 });
 
 const mapDispatchToProps = (dispatch) =>
@@ -1295,7 +1270,7 @@ const mapDispatchToProps = (dispatch) =>
       // getOpportunities,
       getCountries,
       getCurrency,
-      // getSources,
+      getSources,
       // getStages,
       // getProducts,
       // getDeliveryUser,

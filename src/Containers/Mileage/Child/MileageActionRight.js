@@ -28,13 +28,13 @@ class MileageActionRight extends React.Component {
   render() {
     return (
       <FlexContainer alignItems="center">
-        <Button
+        {/* <Button
           type={this.state.isClicked === "import" ? "primary" : ""}
           onClick={() => this.handleClicked("import")}
           // onClick={() => this.props.history.push("/import/product")}
         >
           Import
-        </Button>
+        </Button> */}
         &nbsp;
         <Spacer />
         <Button

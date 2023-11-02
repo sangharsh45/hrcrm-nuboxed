@@ -108,6 +108,13 @@ export const handleUpdateLeaveModal = (modalProps) => (dispatch) => {
       payload: modalProps,
     });
   };
+
+  export const handleStatusLeaveModal = (modalProps) => (dispatch) => {
+    dispatch({
+      type: types.HANDLE_STATUS_LEAVE_MODAL,
+      payload: modalProps,
+    });
+  };
   
   export const setEditLeave = (name) => (dispatch) => {
     dispatch({
@@ -139,6 +146,8 @@ export const handleUpdateLeaveModal = (modalProps) => (dispatch) => {
         });
       });
   };
+  
+
   
   export const DeleteLeaves = (expensdeId) => (dispatch, getState) => {
 
@@ -173,3 +182,30 @@ export const handleUpdateLeaveModal = (modalProps) => (dispatch) => {
       payload: viewType,
     });
   };
+
+  export const getLeaveStatusByLeaveId = (leaveId) => (dispatch) => {
+    dispatch({
+        type: types.GET_LEAVE_STATUS_BY_LEAVEID_REQUEST,
+    });
+
+    axios
+        .get(`${base_url}/task/leave/status/${leaveId}`, {
+            headers: {
+                Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+            },
+        })
+        .then((res) => {
+            console.log(res);
+            dispatch({
+                type: types.GET_LEAVE_STATUS_BY_LEAVEID_SUCCESS,
+                payload: res.data,
+            });
+        })
+        .catch((err) => {
+            console.log(err);
+            dispatch({
+                type: types.GET_LEAVE_STATUS_BY_LEAVEID_FAILURE,
+                payload: err,
+            });
+        });
+};

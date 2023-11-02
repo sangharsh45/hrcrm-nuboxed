@@ -121,7 +121,7 @@ export const rolesReducer = (state = initialState, action) => {
               ...state,
               updatingTalentRoles: false,
               talentRoles: state.talentRoles.map((role) =>
-                role.roleTypeId === action.payload.roleTypeId ? action.payload : role
+                role.roleTypeExternalId === action.payload.roleTypeExternalId ? action.payload : role
               ),
             };
           case types.UPDATE_TALENT_ROLES_FAILURE:
@@ -134,7 +134,9 @@ export const rolesReducer = (state = initialState, action) => {
               return {
                 ...state,
                 removingTalentRole: false,
-                talentRoles: state.roltalentRoleses.filter((item) => item.roleTypeExternalId !== action.payload),
+                talentRoles: state.talentRoles.filter(
+                  (item) => item.roleTypeExternalId !== action.payload
+              ),
               };
             case types.REMOVE_TALENT_ROLE_FAILURE:
               return {

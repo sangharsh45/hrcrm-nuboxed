@@ -1,448 +1,542 @@
 import * as types from "./DashboardActionTypes";
 import dayjs from "dayjs";
+import moment from "moment";
 
 const initialState = {
-    fetchingSkillsCloud: false,
-    fetchingSkillsCloudError:false,
-    skillsCloud:[],
+  fetchingSkillsCloud: false,
+  fetchingSkillsCloudError: false,
+  skillsCloud: [],
 
-    fetchingdashboardTable:false,
-    fetchingdashboardTableError:false,
-    tableDashboard:[],
+  fetchingThisMonthTaskGantt:false,
+  fetchingThisMonthTaskGanttError:false,
 
-    updatingCall: false,
+  thisMonthTaskGant:[],
+
+  fetchingDashboardTasks: false,
+  fetchingDashboardTasksError: false,
+  dashboardTasks:[],
+
+  fetchingdashboardTable: false,
+  fetchingdashboardTableError: false,
+  tableDashboard: [],
+
+  updatingCall: false,
   updatingCallError: false,
 
-    fetchingDashBoardIndicator:false,
-    fetchingDashBoardIndicatorError:false,
-    dashboardIndicator:[],
+  fetchingDashBoardIndicator: false,
+  fetchingDashBoardIndicatorError: false,
+  dashboardIndicator: [],
 
-    fetchingalldashBoardClosureRatio: false,
-    fetchingalldashBoardClosureRatioError: false,
-    dashBoardallClosureRatio:[],
+  fetchingalldashBoardClosureRatio: false,
+  fetchingalldashBoardClosureRatioError: false,
+  dashBoardallClosureRatio: [],
 
+  addjobDetailModal: false,
 
-    addjobDetailModal:false,
+  fetchingRecruiterDashboardList: false,
+  fetchingRecruiterDashboardListError: false,
+  listRecruiterDashboard: [],
 
-
-
-    fetchingRecruiterDashboardList: false,
-    fetchingRecruiterDashboardListError: false,
-    listRecruiterDashboard:[],
-
-    fetchingTodos: false,
+  fetchingTodos: false,
   fetchingTodosError: false,
   todos: [],
 
-    fetchingdashBoardCommissionTable: false,
-    fetchingdashBoardCommissionTableError: false,
-    tableDashBoardCommission:[],
+  fetchingTodosCount: false,
+  fetchingTodosCountError: false,
+  todosCount: {},
 
-    fetchingActionSteps:false,
-    fetchingActionStepsError:false,
-    actionSteps:[],
+  fetchingAvgHour: false,
+  fetchingAvgHourError: false,
+  avgHour: {},
 
+  fetchingdashBoardCommissionTable: false,
+  fetchingdashBoardCommissionTableError: false,
+  tableDashBoardCommission: [],
 
-    fetchingalldashboardTable2:false,
-    fetchingalldashboardTable2Error:false,
-    tableallDashboard2:[],
+  fetchingActionSteps: false,
+  fetchingActionStepsError: false,
+  actionSteps: [],
 
+  fetchingalldashboardTable2: false,
+  fetchingalldashboardTable2Error: false,
+  tableallDashboard2: [],
 
-    fetchingdashboardTable2:false,
-    fetchingdashboardTable2Error:false,
-    tableDashboard2:[],
+  fetchingdashboardTable2: false,
+  fetchingdashboardTable2Error: false,
+  tableDashboard2: [],
 
-    fetchingDashBoardFunnel: false,
-    fetchingDashBoardFunnelError: false,
-    dashboardFunnel:[],
+  fetchingDashBoardFunnel: false,
+  fetchingDashBoardFunnelError: false,
+  dashboardFunnel: [],
 
-    fetchingUpcomingEvents: false,
-    fetchingUpcomingEventsError: false,
-    upcomingEvents: [],
+  fetchingUpcomingEvents: false,
+  fetchingUpcomingEventsError: false,
+  upcomingEvents: [],
 
-    fetchingdashBoardCustomerChart: false,
-    fetchingdashBoardCustomerChartError: false,
-    dashBoardCustomerChart:[],
+  fetchingdashBoardCustomerChart: false,
+  fetchingdashBoardCustomerChartError: false,
+  dashBoardCustomerChart: [],
 
-    fetchingCandidateTotalBillableAmount: false,
-     fetchingCandidateTotalBillableAmountError: false,
-     candidatesBillableAmount:[],
+  fetchingCandidateTotalBillableAmount: false,
+  fetchingCandidateTotalBillableAmountError: false,
+  candidatesBillableAmount: [],
 
-    fetchingAllSalesDatewiseReport:false,
-    fetchingAllSalesDatewiseReportError:false,
-    showAllSalesDatelist:[],
+  fetchingAllSalesDatewiseReport: false,
+  fetchingAllSalesDatewiseReportError: false,
+  showAllSalesDatelist: [],
 
-    fetchingdashBoardClosureRatio:false,
-    fetchingdashBoardClosureRatioError:false,
-    dashBoardClosureRatio:[],
+  fetchingdashBoardClosureRatio: false,
+  fetchingdashBoardClosureRatioError: false,
+  dashBoardClosureRatio: [],
 
-    fetchingalldashBoardCustomerChart: false,
-    fetchingalldashBoardCustomerChartError: false,
-    dashBoardallCustomerChart:[],
+  fetchingalldashBoardCustomerChart: false,
+  fetchingalldashBoardCustomerChartError: false,
+  dashBoardallCustomerChart: [],
 
-    addDrawerActionModal:false,
+  addDrawerActionModal: false,
 
-    fetchingActionNotifications:false,
-    fetchingActionNotificationsError:false,
-    actionNotifications:[],
-
-
-    addingActionNotifications:false,
-    addingActionNotificationsError:false,
-
-
-    updatingTodoTask:false,
-    updatingTodoTaskError:false,
-
-    fetchingallDashBoardFunnel:false,
-    fetchingallDashBoardFunnelError:false,
-    alldashboardFunnel:[],
-
-    // updatingReqStage:false,
-    fetchingDetails: false,
-    fetchingDetailsError: false,
-    detail:[],
-
-    fetchingdashBoardSummaryChart:false,
-    fetchingdashBoardSummaryChartError:false,
-    dashBoardSummaryChart:[],
-
-    fetchingSalesDatewiseReport:false,
-    fetchingSalesDatewiseReportError:false,
-    showSalesDatelist:[],
+  fetchingActionNotifications: false,
+  fetchingActionNotificationsError: false,
+  actionNotifications: [],
 
 
+  fetchingTaskDashboardGantt:false,
+  fetchingTaskDashboardGanttError:false,
+  tasksdashboardGantt:[],
 
-    viewType: "ME",
+  fetchingTaskper: false,
+  fetchingTaskperError: false,
+  taskperCount: {},
 
+  addingActionNotifications: false,
+  addingActionNotificationsError: false,
+
+  updatingTodoTask: false,
+  updatingTodoTaskError: false,
+
+  fetchingallDashBoardFunnel: false,
+  fetchingallDashBoardFunnelError: false,
+  alldashboardFunnel: [],
+
+
+  fetchingLeavesGantt:false,
+  fetchingLeavesGanttError:false,
+
+  leavesGantt:[],
+
+  // updatingReqStage:false,
+  fetchingDetails: false,
+  fetchingDetailsError: false,
+  detail: [],
+
+  fetchingdashBoardSummaryChart: false,
+  fetchingdashBoardSummaryChartError: false,
+  dashBoardSummaryChart: [],
+
+  fetchingSalesDatewiseReport: false,
+  fetchingSalesDatewiseReportError: false,
+  showSalesDatelist: [],
+
+  viewType: "test",
   isCustomSelected: false,
   startDate: dayjs().toISOString(),
   endDate: dayjs().toISOString(),
 
-  dateRangeList: [
-
-    // {
-    //   id: 8,
-    //   type: "All",
-    //   value: "All",
-    //   starter: true,
-    //   isSelected: true,
-    //   startDate: dayjs()
-    //     .toISOString(),
-    //   endDate: dayjs().toISOString(),
-    // },
-    {
-      id: 1,
-      type: "Today",
-      value: "Today",
-      starter: true,
-      isSelected: true,
-      startDate: dayjs()
-        // .subtract(1, "days")
-        .toISOString(),
-      endDate: dayjs().toISOString(),
-    },
-    // {
-    //   id: 2,
-    //   type: "Yesterday",
-    //   value: "Yesterday",
-    //   starter: false,
-    //   isSelected: false,
-    //   endDate: dayjs()
-    //     .subtract(1, "days")
-
-    //     .toISOString(),
-    //   startDate: dayjs().toISOString(),
-    // },
-    {
-      id: 3,
-      type: "Last7days",
-      value: "Last 7 days",
-      starter: false,
-      isSelected: false,
-      endDate: dayjs()
-      .subtract(7, "days")
-
-      .toISOString(),
-    startDate: dayjs().toISOString(),
-      // startDate: dayjs()
-      //   .subtract(7, "days")
-
-      //   .toISOString(),
-      // endDate: dayjs().toISOString(),
-    },
-
-    {
-      id: 4,
-      type: "Last30days",
-      value: "Last 30 days",
-      starter: false,
-      isSelected: false,
-      endDate: dayjs()
-      .subtract(30, "days")
-
-      .toISOString(),
-    startDate: dayjs().toISOString(),
-      // startDate: dayjs()
-      //   .subtract(30, "days")
-
-      //   .toISOString(),
-      // endDate: dayjs().toISOString(),
-    },
-    {
-      id: 5,
-      type: "Thismonth",
-      value: "This month",
-      starter: false,
-      isSelected: false,
-      endDate: dayjs()
-      .startOf("week").toISOString(),
-    startDate: dayjs().toISOString(),
-      
-    },
-    {
-      id: 6,
-      type: "Lastmonth",
-      value: "Last month",
-      starter: false,
-      isSelected: false,
-      startDate: dayjs().startOf("month").toISOString(),
-      endDate: dayjs().toISOString(),
-    },
-    // {
-    //   id: 8,
-    //   type: "DateRange",
-    //   value: "Date Range",
-    //   starter: false,
-    //   isSelected: false,
-    //   startDate: dayjs().startOf("year").toISOString,
-    //   endDate: dayjs().endOf("year").toISOString(),
-    // },
-  ],
-  type: 'All',
-
-  fetchingOrderListByOrderId: false,
+    fetchingOrderListByOrderId: false,
   fetchingOrderListByOrderIdError: false,
   showDatelist: [],
 
-  fetchingStageActionNotifications:false,
-  fetchingStageActionNotificationsError:false,
-  stageactionNotifications:[],
+  fetchingStageActionNotifications: false,
+  fetchingStageActionNotificationsError: false,
+  stageactionNotifications: [],
 
-  billableCandidateModal:false,
+  billableCandidateModal: false,
 
   fetchingAllDatewiseReport: false,
   fetchingAllDatewiseReportError: false,
-  showAllDatelist:[],
+  showAllDatelist: [],
 
   updatingTodoEvent: false,
   updatingTodoEventError: false,
-  
-  reportType: [
-    "dashboard",
-  ],
+
+
   selectedReportType: "dashboard",
   selectedSubReportType: "dashboard",
 
   fetchingDatewiseReport: false,
   fetchingDatewiseReportError: false,
   dateDashboardReport: [],
+
+  fetchingJumpstartBulb: false,
+  fetchingJumpstartBulbError: false,
+  jumpstartBulbCount: [],
+  fetchingJumpstartBulb2: false,
+  fetchingJumpstartBulb2Error: false,
+  jumpstartBulb2Count: [],
+  fetchingJumpstartBulb3: false,
+  fetchingJumpstartBulb3Error: false,
+  jumpstartBulb3Count: [],
+
+  dateRangeList: [
+    {
+      id: 1,
+      type: "today",
+      value: "Today",
+      starter: false,
+      isSelected: true,
+      startDate: dayjs()
+        // .subtract(1, "days")
+        .toISOString(),
+      endDate: dayjs().toISOString(),
+    },
+    {
+      id: 2,
+      type: "quarter",
+      value: "QTD",
+      starter: false,
+      isSelected: false,
+      startDate: moment().startOf("quarter").toISOString(),
+      endDate: moment().endOf("quarter").toISOString(),
+    },
+    {
+      id: 3,
+      type: "month",
+      value: "MTD",
+      starter: false,
+      isSelected: false,
+      startDate: moment().startOf("month").toISOString(),
+      endDate: moment().endOf("month").toISOString(),
+    },
+    {
+      id: 4,
+      type: "week",
+      value: "1W",
+      starter: false,
+      isSelected: false,
+      startDate: moment().startOf("week").toISOString(),
+      endDate: moment().endOf("week").toISOString(),
+    },
+  ],
+  timeRangeType: "today",
+  isCustomSelected: false,
+
+  selectedReportType: "Select Report",
+
+  selectedSubReportType: "Select",
+
+  fetchingDashboardUserList: false,
+  fetchingDashboardUserListError: false,
+  dashboardUserlist: [],
+
+  gettingHotColdWarm: false,
+  gettingHotColdWarmError: false,
+  showHotColdWarm: {},
+
+  fetchingJumpstartCustolist: false,
+  fetchingJumpstartCustolistError: false,
+  jumpstrtCUSTOCount:{},
+  fetchingJumpstartCusto2list: false,
+  fetchingJumpstartCusto2listError: false,
+  jumpstrtCUSTO2Count:{},
+
+  fetchingdashCustoLeadsAdded: false,
+  fetchingdashCustoLeadsAddedError: false,
+  dashCustoLeadsAdded:[],
+
+  fetchingJumpstartTasklist: false,
+  fetchingJumpstartTasklistError: false,
+  jumpstartTasklistCount:{},
+
+  fetchingdashCustoContactsAdded: false,
+  fetchingdashCustoContactsAddedError: false,
+  dashCustoContactsAdded:[],
+
+  fetchingJumpstartTask2list: false,
+  fetchingJumpstartTask2listError: false,
+  jumpstartTask2listCount:{},
+
+  fetchingJumpstartInvestor: false,
+  fetchingJumpstartInvestorError: false,
+  jumpstartInvestorCount: {},
+
+  fetchingJumpstartInvestor2: false,
+  fetchingJumpstartInvestor2Error: false,
+  jumpstartInvestor2Count: {},
+
+  fetchingJumpstartInvestor3: false,
+  fetchingJumpstartInvestor3Error: false,
+  jumpstartInvestor3Count: {},
+  
+  fetchingJumpstartInvestor4: false,
+  fetchingJumpstartInvestor4Error: false,
+  jumpstartInvestor4Count: {},
+
+  gettingInvHotColdWarm: false,
+  gettingInvHotColdWarmError: false, 
+  investorHotColdWarm:{}, 
+
+  fetchingdashInvstPitchAdded: false,
+  fetchingdashInvstPitchAddedError: false,
+ dashInvstPitchAdded: [],
+ fetchingdashInvstContactAdded: false,
+ fetchingdashInvstContactAddedError:false,
+dashInvstContactAdded:[],
+
+openLeadQualified:false,
+fetchingLeadsQualified: false,
+fetchingLeadsQualifiedError: false,
+showQualifiedLeads:[],
+
+openLeadAdded:false,
+fetchingLeadsAdded: false,
+fetchingLeadsAddedError: false,
+showAddedLeads:[],
+
+openOppoAdded:false,
+fetchingOppoAdded: false,
+fetchingOppoAddedError: false,
+showAddedOppo:[],
+
+clickOppoClosed:false,
+fetchingOppoClosed: false,
+fetchingOppoClosedError:false,
+showClosedOppo:[],
+
+openPitchQualified:false,
+fetchingPitchQualified: false,
+fetchingPitchQualifiedError:false,
+showQualifiedPitch:[],
+
+openDealAdded:false,
+fetchingDealAdded: false,
+fetchingDealAddedError: false,
+showAddedDeal:[],
+
+openDealClosed:false,
+fetchingDealClosed: false,
+fetchingDealClosedError: false,
+showClosedDeal:[],
+
+openLeadHCWdrawer:false,
+fetchingHottestLeads: false,
+fetchingHottestLeadsError: false,
+showHottestLeads:[],
+
+fetchingColdestLeads: false,
+fetchingColdestLeadsError: false,
+showColdestLeads:[],
+
+fetchingWarmedLeads: false,
+fetchingWarmedLeadsError: false,
+showWarmedLeads:[],
+
+openPitchHCWdrawer:false,
+fetchingHottestPitch: false,
+fetchingHottestPitchError:false,
+showHottestPitch:[],
+
+fetchingColdestPitch: false,
+fetchingColdestPitchError: false,
+showColdestPitch:[],
+
+fetchingWarmedPitch: false,
+fetchingWarmedPitchError: false,
+showWarmedPitch:[],
+
 };
 
-
 export const dashboardReducer = (state = initialState, action) => {
- 
-      switch (action.type) {
-        case types.SET_DASHBOARD_VIEW_TYPE:
-          return { ...state, viewType: action.payload };
+  switch (action.type) {
+    case types.SET_DASHBOARD_VIEW_TYPE:
+      return { ...state, viewType: action.payload };
 
-        case types.GET_SKILLS_CLOUD_REQUEST:
-            return { ...state, fetchingSkillsCloud: true };
-          case types.GET_SKILLS_CLOUD_SUCCESS:
-            return {
-              ...state,
-              fetchingSkillsCloud: false,
-              skillsCloud: action.payload,
-            };
-          case types.GET_SKILLS_CLOUD_FAILURE:
-            return {
-              ...state,
-              fetchingSkillsCloud: false,
-              fetchingSkillsCloudError: true,
-            };
-            case types.CHANGE_SELECTED_TIME_INTERVAL_REPORT:
-              return {
-                ...state,
-                dateRangeList: newDateRange(state.dateRangeList, action.payload),
-                isCustomSelected: false,
-                startDate: action.payload.startDate,
-                endDate: action.payload.endDate,
-                type: action.payload.type
-              };
-        
-            case types.SET_TIME_INTERVAL_REPORT:
-              return {
-                ...state,
-                isCustomSelected: true,
-                startDate: action.payload.startDate,
-                endDate: action.payload.endDate,
-              };
-        
-            case types.GET_ORDER_LIST_BY_ORDER_ID_REQUEST:
-              return { ...state, fetchingOrderListByOrderId: true };
-            case types.GET_ORDER_LIST_BY_ORDER_ID_SUCCESS:
-              return {
-                ...state,
-                fetchingOrderListByOrderId: false,
-                orderListByOrderId: action.payload,
-              };
-            case types.GET_ORDER_LIST_BY_ORDER_ID_FAILURE:
-              return {
-                ...state,
-                fetchingOrderListByOrderId: false,
-                fetchingOrderListByOrderIdError: true,
-              };
-        
-            case types.SET_SELECTED_REPORT_TYPE:
-              return {
-                ...state,
-                selectedReportType: action.payload,
-                // selectedSubReportType: "order",
-              };
-        
-            case types.GET_DATE_WISE_REPORT_REQUEST:
-              return { ...state, fetchingDatewiseReport: true };
-            case types.GET_DATE_WISE_REPORT_SUCCESS:
-              return {
-                ...state,
-                fetchingDatewiseReport: false,
-                fetchingDatewiseReportError: false,
-                showDatelist: action.payload,
-              };
-            case types.GET_DATE_WISE_REPORT_FAILURE:
-              return {
-                ...state,
-                fetchingDatewiseReport: false,
-                fetchingDatewiseReportError: true,
-                selectedReportType: "dashboard"
-              };
+    case types.GET_SKILLS_CLOUD_REQUEST:
+      return { ...state, fetchingSkillsCloud: true };
+    case types.GET_SKILLS_CLOUD_SUCCESS:
+      return {
+        ...state,
+        fetchingSkillsCloud: false,
+        skillsCloud: action.payload,
+      };
+    case types.GET_SKILLS_CLOUD_FAILURE:
+      return {
+        ...state,
+        fetchingSkillsCloud: false,
+        fetchingSkillsCloudError: true,
+      };
+    case types.CHANGE_SELECTED_TIME_INTERVAL_REPORT:
+      return {
+        ...state,
+        dateRangeList: newDateRange(state.dateRangeList, action.payload),
+        isCustomSelected: false,
+        startDate: action.payload.startDate,
+        endDate: action.payload.endDate,
+        timeRangeType: action.payload.type,
+      };
 
-              case types.GET_DASHBOARD_TABLE_REQUEST:
-                return { ...state, fetchingdashboardTable: true };
-              case types.GET_DASHBOARD_TABLE_SUCCESS:
-                return {
-                  ...state,
-                  fetchingdashboardTable: false,
-                  tableDashboard: action.payload,
-                };
-                case types.GET_DASHBOARD_TABLE_FAILURE:
-                  return {
-                    ...state,
-                    fetchingdashboardTable: false,
-                    fetchingdashboardTableError: true,
-                  };
+    case types.SET_TIME_INTERVAL_REPORT:
+      return {
+        ...state,
+        isCustomSelected: true,
+        startDate: action.payload.startDate,
+        endDate: action.payload.endDate,
+      };
 
-                  case types.GET_RECRUITER_DASHBOARD_LIST_REQUEST:
-                    return { ...state, fetchingRecruiterDashboardList: true };
-                  case types.GET_RECRUITER_DASHBOARD_LIST_SUCCESS:
-                    return {
-                      ...state,
-                      fetchingRecruiterDashboardList: false,
-                      listRecruiterDashboard: action.payload,
-                    };
-                    case types.GET_RECRUITER_DASHBOARD_LIST_FAILURE:
-                      return {
-                        ...state,
-                        fetchingRecruiterDashboardList: false,
-                        fetchingRecruiterDashboardListError: true,
-                      };
+    case types.GET_ORDER_LIST_BY_ORDER_ID_REQUEST:
+      return { ...state, fetchingOrderListByOrderId: true };
+    case types.GET_ORDER_LIST_BY_ORDER_ID_SUCCESS:
+      return {
+        ...state,
+        fetchingOrderListByOrderId: false,
+        orderListByOrderId: action.payload,
+      };
+    case types.GET_ORDER_LIST_BY_ORDER_ID_FAILURE:
+      return {
+        ...state,
+        fetchingOrderListByOrderId: false,
+        fetchingOrderListByOrderIdError: true,
+      };
 
-                  case types.GET_DASHBOARD_TABLE_PROGRESS_REQUEST:
-                return { ...state, fetchingdashboardTable2: true };
-              case types.GET_DASHBOARD_TABLE_PROGRESS_SUCCESS:
-                return {
-                  ...state,
-                  fetchingdashboardTable2: false,
-                  tableDashboard2: action.payload,
-                };
-                case types.GET_DASHBOARD_TABLE_PROGRESS_FAILURE:
-                  return {
-                    ...state,
-                    fetchingdashboardTable2: false,
-                    fetchingdashboardTable2Error: true,
-                  };
+    case types.SET_SELECTED_REPORT_TYPE:
+      return {
+        ...state,
+        selectedReportType: action.payload,
+        // selectedSubReportType: "order",
+      };
 
-                  case types.GET_DASHBOARD_COMMISSION_TABLE_REQUEST:
-                    return { ...state, fetchingdashBoardCommissionTable: true };
-                  case types.GET_DASHBOARD_COMMISSION_TABLE_SUCCESS:
-                    return {
-                      ...state,
-                      fetchingdashBoardCommissionTable: false,
-                      tableDashBoardCommission: action.payload,
-                    };
-                    case types.GET_DASHBOARD_COMMISSION_TABLE_FAILURE:
-                      return {
-                        ...state,
-                        fetchingdashBoardCommissionTable: false,
-                        fetchingdashBoardCommissionTableError: true,
-                      };
+    case types.GET_DATE_WISE_REPORT_REQUEST:
+      return { ...state, fetchingDatewiseReport: true };
+    case types.GET_DATE_WISE_REPORT_SUCCESS:
+      return {
+        ...state,
+        fetchingDatewiseReport: false,
+        fetchingDatewiseReportError: false,
+        showDatelist: action.payload,
+      };
+    case types.GET_DATE_WISE_REPORT_FAILURE:
+      return {
+        ...state,
+        fetchingDatewiseReport: false,
+        fetchingDatewiseReportError: true,
+        selectedReportType: "dashboard",
+      };
 
-                      case types.GET_DASHBOARD_CUSTOMER_CHART_REQUEST:
-                        return { ...state, fetchingdashBoardCustomerChart: true };
-                      case types.GET_DASHBOARD_CUSTOMER_CHART_SUCCESS:
-                        return {
-                          ...state,
-                          fetchingdashBoardCustomerChart: false,
-                          dashBoardCustomerChart: action.payload,
-                        };
-                        case types.GET_DASHBOARD_CUSTOMER_CHART_FAILURE:
-                          return {
-                            ...state,
-                            fetchingdashBoardCustomerChart: false,
-                            fetchingdashBoardCustomerChartError: true,
-                          };
+    case types.GET_DASHBOARD_TABLE_REQUEST:
+      return { ...state, fetchingdashboardTable: true };
+    case types.GET_DASHBOARD_TABLE_SUCCESS:
+      return {
+        ...state,
+        fetchingdashboardTable: false,
+        tableDashboard: action.payload,
+      };
+    case types.GET_DASHBOARD_TABLE_FAILURE:
+      return {
+        ...state,
+        fetchingdashboardTable: false,
+        fetchingdashboardTableError: true,
+      };
 
-                          case types.GET_DASHBOARD_CLOSURE_RATIO_REQUEST:
-                            return { ...state, fetchingdashBoardClosureRatio: true };
-                          case types.GET_DASHBOARD_CLOSURE_RATIO_SUCCESS:
-                            return {
-                              ...state,
-                              fetchingdashBoardClosureRatio: false,
-                              dashBoardClosureRatio: action.payload,
-                            };
-                            case types.GET_DASHBOARD_CLOSURE_RATIO_FAILURE:
-                              return {
-                                ...state,
-                                fetchingdashBoardClosureRatio: false,
-                                fetchingdashBoardClosureRatioError: true,
-                              };
+    case types.GET_RECRUITER_DASHBOARD_LIST_REQUEST:
+      return { ...state, fetchingRecruiterDashboardList: true };
+    case types.GET_RECRUITER_DASHBOARD_LIST_SUCCESS:
+      return {
+        ...state,
+        fetchingRecruiterDashboardList: false,
+        listRecruiterDashboard: action.payload,
+      };
+    case types.GET_RECRUITER_DASHBOARD_LIST_FAILURE:
+      return {
+        ...state,
+        fetchingRecruiterDashboardList: false,
+        fetchingRecruiterDashboardListError: true,
+      };
 
-                              case types.GET_DASHBOARD_SUMMARY_CHART_REQUEST:
-                                return { ...state, fetchingdashBoardSummaryChart: true };
-                              case types.GET_DASHBOARD_SUMMARY_CHART_SUCCESS:
-                                return {
-                                  ...state,
-                                  fetchingdashBoardSummaryChart: false,
-                                  dashBoardSummaryChart: action.payload,
-                                };
-                                case types.GET_DASHBOARD_SUMMARY_CHART_FAILURE:
-                                  return {
-                                    ...state,
-                                    fetchingdashBoardSummaryChart: false,
-                                    fetchingdashBoardSummaryChartError: true,
-                                  };
+    case types.GET_DASHBOARD_TABLE_PROGRESS_REQUEST:
+      return { ...state, fetchingdashboardTable2: true };
+    case types.GET_DASHBOARD_TABLE_PROGRESS_SUCCESS:
+      return {
+        ...state,
+        fetchingdashboardTable2: false,
+        tableDashboard2: action.payload,
+      };
+    case types.GET_DASHBOARD_TABLE_PROGRESS_FAILURE:
+      return {
+        ...state,
+        fetchingdashboardTable2: false,
+        fetchingdashboardTable2Error: true,
+      };
 
-                                  // case types.CHANGE_SELECTED_TODO_TIME_INTERVAL_REPORT:
-                                  //   return {
-                                  //     ...state,
-                                  //     dateTodoRangeList: newDateRange(state.dateTodoRangeList, action.payload),
-                                  //    // isCustomSelected: false,
-                                  //     startDate: action.payload.startDate,
-                                  //     endDate: action.payload.endDate,
-                                  //     type: action.payload.type
-                                  //   };
+    case types.GET_DASHBOARD_COMMISSION_TABLE_REQUEST:
+      return { ...state, fetchingdashBoardCommissionTable: true };
+    case types.GET_DASHBOARD_COMMISSION_TABLE_SUCCESS:
+      return {
+        ...state,
+        fetchingdashBoardCommissionTable: false,
+        tableDashBoardCommission: action.payload,
+      };
+    case types.GET_DASHBOARD_COMMISSION_TABLE_FAILURE:
+      return {
+        ...state,
+        fetchingdashBoardCommissionTable: false,
+        fetchingdashBoardCommissionTableError: true,
+      };
 
-                                    case types.GET_TODOS_REQUEST:
+    case types.GET_DASHBOARD_CUSTOMER_CHART_REQUEST:
+      return { ...state, fetchingdashBoardCustomerChart: true };
+    case types.GET_DASHBOARD_CUSTOMER_CHART_SUCCESS:
+      return {
+        ...state,
+        fetchingdashBoardCustomerChart: false,
+        dashBoardCustomerChart: action.payload,
+      };
+    case types.GET_DASHBOARD_CUSTOMER_CHART_FAILURE:
+      return {
+        ...state,
+        fetchingdashBoardCustomerChart: false,
+        fetchingdashBoardCustomerChartError: true,
+      };
+
+    case types.GET_DASHBOARD_CLOSURE_RATIO_REQUEST:
+      return { ...state, fetchingdashBoardClosureRatio: true };
+    case types.GET_DASHBOARD_CLOSURE_RATIO_SUCCESS:
+      return {
+        ...state,
+        fetchingdashBoardClosureRatio: false,
+        dashBoardClosureRatio: action.payload,
+      };
+    case types.GET_DASHBOARD_CLOSURE_RATIO_FAILURE:
+      return {
+        ...state,
+        fetchingdashBoardClosureRatio: false,
+        fetchingdashBoardClosureRatioError: true,
+      };
+
+    case types.GET_DASHBOARD_SUMMARY_CHART_REQUEST:
+      return { ...state, fetchingdashBoardSummaryChart: true };
+    case types.GET_DASHBOARD_SUMMARY_CHART_SUCCESS:
+      return {
+        ...state,
+        fetchingdashBoardSummaryChart: false,
+        dashBoardSummaryChart: action.payload,
+      };
+    case types.GET_DASHBOARD_SUMMARY_CHART_FAILURE:
+      return {
+        ...state,
+        fetchingdashBoardSummaryChart: false,
+        fetchingdashBoardSummaryChartError: true,
+      };
+
+    // case types.CHANGE_SELECTED_TODO_TIME_INTERVAL_REPORT:
+    //   return {
+    //     ...state,
+    //     dateTodoRangeList: newDateRange(state.dateTodoRangeList, action.payload),
+    //    // isCustomSelected: false,
+    //     startDate: action.payload.startDate,
+    //     endDate: action.payload.endDate,
+    //     type: action.payload.type
+    //   };
+
+    case types.GET_TODOS_REQUEST:
       return { ...state, fetchingTodos: true, fetchingTodosError: false };
     case types.GET_TODOS_SUCCESS:
       return {
@@ -454,356 +548,1018 @@ export const dashboardReducer = (state = initialState, action) => {
     case types.GET_TODOS_FAILURE:
       return { ...state, fetchingTodos: false, fetchingTodosError: true };
 
+    case types.GET_TODOS_COUNT_REQUEST:
+      return {
+        ...state,
+        fetchingTodosCount: true,
+        fetchingTodosCountError: false,
+      };
+    case types.GET_TODOS_COUNT_SUCCESS:
+      return {
+        ...state,
+        fetchingTodosCount: false,
+        fetchingTodosCountError: false,
+        todosCount: action.payload,
+      };
+    case types.GET_TODOS_COUNT_FAILURE:
+      return {
+        ...state,
+        fetchingTodosCount: false,
+        fetchingTodosCountError: true,
+      };
 
-      case types.GET_DASHBOARD_FUNNEL_REQUEST:
-        return { ...state, fetchingDashBoardFunnel: true };
-      case types.GET_DASHBOARD_FUNNEL_SUCCESS:
+    case types.GET_AVG_HOUR_REQUEST:
+      return { ...state, fetchingAvgHour: true, fetchingAvgHourError: false };
+    case types.GET_AVG_HOUR__SUCCESS:
+      return {
+        ...state,
+        fetchingAvgHour: false,
+        fetchingAvgHourError: false,
+        avgHour: action.payload,
+      };
+    case types.GET_AVG_HOUR__FAILURE:
+      return { ...state, fetchingAvgHour: false, fetchingAvgHourError: true };
+
+    case types.GET_DASHBOARD_FUNNEL_REQUEST:
+      return { ...state, fetchingDashBoardFunnel: true };
+    case types.GET_DASHBOARD_FUNNEL_SUCCESS:
+      return {
+        ...state,
+        fetchingDashBoardFunnel: false,
+        dashboardFunnel: action.payload,
+      };
+    case types.GET_DASHBOARD_FUNNEL_FAILURE:
+      return {
+        ...state,
+        fetchingDashBoardFunnel: false,
+        fetchingDashBoardFunnelError: true,
+      };
+
+    case types.GET_DASHBOARD_INDICATOR_REQUEST:
+      return { ...state, fetchingDashBoardIndicator: true };
+    case types.GET_DASHBOARD_INDICATOR_SUCCESS:
+      return {
+        ...state,
+        fetchingDashBoardIndicator: false,
+        dashboardIndicator: action.payload,
+      };
+    case types.GET_DASHBOARD_INDICATOR_FAILURE:
+      return {
+        ...state,
+        fetchingDashBoardIndicator: false,
+        fetchingDashBoardIndicatorError: true,
+      };
+
+    case types.GET_SALES_DATE_WISE_REPORT_REQUEST:
+      return { ...state, fetchingSalesDatewiseReport: true };
+    case types.GET_SALES_DATE_WISE_REPORT_SUCCESS:
+      return {
+        ...state,
+        fetchingSalesDatewiseReport: false,
+        fetchingSalesDatewiseReportError: false,
+        showSalesDatelist: action.payload,
+      };
+    case types.GET_SALES_DATE_WISE_REPORT_FAILURE:
+      return {
+        ...state,
+        fetchingSalesDatewiseReport: false,
+        fetchingSalesDatewiseReportError: true,
+        // selectedReportType: "dashboard",
+      };
+
+
+      case types.GET_THIS_MONTH_TASK_GANTT_REQUEST:
+        return { ...state, fetchingThisMonthTaskGantt: true };
+      case types.GET_THIS_MONTH_TASK_GANTT_SUCCESS:
         return {
           ...state,
-          fetchingDashBoardFunnel: false,
-          dashboardFunnel: action.payload,
+          fetchingThisMonthTaskGantt: false,
+           thisMonthTaskGant: action.payload,
         };
-      case types.GET_DASHBOARD_FUNNEL_FAILURE:
+      case types.GET_THIS_MONTH_TASK_GANTT_FAILURE:
         return {
           ...state,
-          fetchingDashBoardFunnel: false,
-          fetchingDashBoardFunnelError: true,
+          fetchingThisMonthTaskGantt: false,
+          fetchingThisMonthTaskGanttError: true,
         };
 
 
-        case types.GET_DASHBOARD_INDICATOR_REQUEST:
-        return { ...state, fetchingDashBoardIndicator: true };
-      case types.GET_DASHBOARD_INDICATOR_SUCCESS:
+      case types.GET_LEAVES_GANTT_REQUEST:
+        return { ...state, fetchingLeavesGantt: true };
+      case types.GET_LEAVES_GANTT_SUCCESS:
         return {
           ...state,
-          fetchingDashBoardIndicator: false,
-          dashboardIndicator: action.payload,
+          fetchingLeavesGantt: false,
+           leavesGantt: action.payload,
         };
-      case types.GET_DASHBOARD_INDICATOR_FAILURE:
+      case types.GET_LEAVES_GANTT_FAILURE:
         return {
           ...state,
-          fetchingDashBoardIndicator: false,
-          fetchingDashBoardIndicatorError: true,
+          fetchingLeavesGantt: false,
+          fetchingLeavesGanttError: true,
         };
 
 
-        case types.GET_SALES_DATE_WISE_REPORT_REQUEST:
-          return { ...state, fetchingSalesDatewiseReport: true };
-        case types.GET_SALES_DATE_WISE_REPORT_SUCCESS:
+        case types.GET_TASKS_DASHBOARD_GANTT_REQUEST:
+          return { ...state, fetchingTaskDashboardGantt: true };
+        case types.GET_TASKS_DASHBOARD_GANTT_SUCCESS:
           return {
             ...state,
-            fetchingSalesDatewiseReport: false,
-            fetchingSalesDatewiseReportError: false,
-            showSalesDatelist: action.payload,
+            fetchingTaskDashboardGantt: false,
+             tasksdashboardGantt: action.payload,
           };
-        case types.GET_SALES_DATE_WISE_REPORT_FAILURE:
+        case types.GET_TASKS_DASHBOARD_GANTT_FAILURE:
           return {
             ...state,
-            fetchingSalesDatewiseReport: false,
-            fetchingSalesDatewiseReportError: true,
-            selectedReportType: "dashboard"
+            fetchingTaskDashboardGantt: false,
+            fetchingTaskDashboardGanttError: true,
           };
 
 
-          case types.UPDATE_TODO_CALL_BY_ID_REQUEST:
-            return { ...state, updatingTodoCall: true };
-          case types.UPDATE_TODO_CALL_BY_ID_SUCCESS:
+    case types.UPDATE_TODO_CALL_BY_ID_REQUEST:
+      return { ...state, updatingTodoCall: true };
+    case types.UPDATE_TODO_CALL_BY_ID_SUCCESS:
+      return {
+        ...state,
+        updatingTodoCall: false,
+        todos: state.todos.map((item, i) => {
+          ////debugger;
+          if (item.taskId === action.payload.taskId) {
+            ////debugger;
+            return action.payload;
+          } else {
+            ////debugger;
+            return item;
+          }
+        }),
+      };
+    case types.UPDATE_TODO_CALL_BY_ID_FAILURE:
+      return { ...state, updatingCall: false, updatingCallError: false };
+
+    case types.UPDATE_TODO_EVENT_BY_ID_REQUEST:
+      return { ...state, updatingTodoEvent: true };
+    case types.UPDATE_TODO_EVENT_BY_ID_SUCCESS:
+      return {
+        ...state,
+        updatingTodoEvent: false,
+        todos: state.todos.map((item, i) => {
+          ////debugger;
+          if (item.eventId === action.payload.eventId) {
+            ////debugger;
+            return action.payload;
+          } else {
+            ////debugger;
+            return item;
+          }
+        }),
+      };
+    case types.UPDATE_TODO_EVENT_BY_ID_FAILURE:
+      return {
+        ...state,
+        updatingTodoEvent: false,
+        updatingTodoEventError: false,
+      };
+
+    case types.UPDATE_TODO_TASK_BY_ID_REQUEST:
+      return { ...state, updatingTodoTask: true };
+    case types.UPDATE_TODO_TASK_BY_ID_SUCCESS:
+      return {
+        ...state,
+        updatingTodoTask: false,
+        todos: state.todos.map((item, i) => {
+          ////debugger;
+          if (item.taskId === action.payload.taskId) {
+            ////debugger;
+            return action.payload;
+          } else {
+            ////debugger;
+            return item;
+          }
+        }),
+      };
+    case types.UPDATE_TODO_TASK_BY_ID_FAILURE:
+      return {
+        ...state,
+        updatingTodoTask: false,
+        updatingTodoTaskError: false,
+      };
+
+    case types.GET_ALL_SALES_DATE_WISE_REPORT_REQUEST:
+      return { ...state, fetchingAllSalesDatewiseReport: true };
+    case types.GET_ALL_SALES_DATE_WISE_REPORT_SUCCESS:
+      return {
+        ...state,
+        fetchingAllSalesDatewiseReport: false,
+        fetchingAllSalesDatewiseReportError: false,
+        showAllSalesDatelist: action.payload,
+      };
+    case types.GET_ALL_SALES_DATE_WISE_REPORT_FAILURE:
+      return {
+        ...state,
+        fetchingAllSalesDatewiseReport: false,
+        fetchingAllSalesDatewiseReportError: true,
+        // selectedReportType: "dashboard"
+      };
+
+    case types.GET_ALL_DATE_WISE_REPORT_REQUEST:
+      return { ...state, fetchingAllDatewiseReport: true };
+    case types.GET_ALL_DATE_WISE_REPORT_SUCCESS:
+      return {
+        ...state,
+        fetchingAllDatewiseReport: false,
+        fetchingAllDatewiseReportError: false,
+        showAllDatelist: action.payload,
+      };
+    case types.GET_ALL_DATE_WISE_REPORT_FAILURE:
+      return {
+        ...state,
+        fetchingAllDatewiseReport: false,
+        fetchingAllDatewiseReportError: true,
+        // selectedReportType: "dashboard"
+      };
+
+    case types.GET_ALL_DASHBOARD_CLOSURE_RATIO_REQUEST:
+      return { ...state, fetchingalldashBoardClosureRatio: true };
+    case types.GET_ALL_DASHBOARD_CLOSURE_RATIO_SUCCESS:
+      return {
+        ...state,
+        fetchingalldashBoardClosureRatio: false,
+        dashBoardallClosureRatio: action.payload,
+      };
+    case types.GET_ALL_DASHBOARD_CLOSURE_RATIO_FAILURE:
+      return {
+        ...state,
+        fetchingalldashBoardClosureRatio: false,
+        fetchingalldashBoardClosureRatioError: true,
+      };
+
+    case types.GET_ALL_DASHBOARD_CUSTOMER_CHART_REQUEST:
+      return { ...state, fetchingalldashBoardCustomerChart: true };
+    case types.GET_ALL_DASHBOARD_CUSTOMER_CHART_SUCCESS:
+      return {
+        ...state,
+        fetchingalldashBoardCustomerChart: false,
+        dashBoardallCustomerChart: action.payload,
+      };
+    case types.GET_ALL_DASHBOARD_CUSTOMER_CHART_FAILURE:
+      return {
+        ...state,
+        fetchingalldashBoardCustomerChart: false,
+        fetchingalldashBoardCustomerChartError: true,
+      };
+
+    case types.GET_ALL_DASHBOARD_TABLE_PROGRESS_REQUEST:
+      return { ...state, fetchingalldashboardTable2: true };
+    case types.GET_ALL_DASHBOARD_TABLE_PROGRESS_SUCCESS:
+      return {
+        ...state,
+        fetchingalldashboardTable2: false,
+        tableallDashboard2: action.payload,
+      };
+    case types.GET_ALL_DASHBOARD_TABLE_PROGRESS_FAILURE:
+      return {
+        ...state,
+        fetchingalldashboardTable2: false,
+        fetchingalldashboardTable2Error: true,
+      };
+
+    case types.GET_ALL_DASHBOARD_FUNNEL_REQUEST:
+      return { ...state, fetchingallDashBoardFunnel: true };
+    case types.GET_ALL_DASHBOARD_FUNNEL_SUCCESS:
+      return {
+        ...state,
+        fetchingallDashBoardFunnel: false,
+        alldashboardFunnel: action.payload,
+      };
+    case types.GET_ALL_DASHBOARD_FUNNEL_FAILURE:
+      return {
+        ...state,
+        fetchingallDashBoardFunnel: false,
+        fetchingallDashBoardFunnelError: true,
+      };
+
+    case types.GET_ACTION_NOTIFICATIONS_REQUEST:
+      return { ...state, fetchingActionNotifications: true };
+    case types.GET_ACTION_NOTIFICATIONS_SUCCESS:
+      return {
+        ...state,
+        fetchingActionNotifications: false,
+        actionNotifications: action.payload,
+      };
+    case types.GET_ACTION_NOTIFICATIONS_FAILURE:
+      return {
+        ...state,
+        fetchingActionNotifications: false,
+        fetchingActionNotificationsError: true,
+      };
+
+    case types.HANDLE_ADD_JOB_DETAIL_MODAL:
+      return { ...state, addjobDetailModal: action.payload };
+
+    case types.ADD_ACTION_NOTIFICATIONS_REQUEST:
+      return { ...state, addingActionNotifications: true };
+    case types.ADD_ACTION_NOTIFICATIONS_SUCCESS:
+      return {
+        ...state,
+        addingActionNotifications: false,
+        // actionNotifications: action.payload
+      };
+    case types.ADD_ACTION_NOTIFICATIONS_FAILURE:
+      return {
+        ...state,
+        addingActionNotifications: false,
+        addingActionNotificationsError: true,
+      };
+
+    case types.GET_STAGE_ACTION_NOTIFICATIONS_REQUEST:
+      return { ...state, fetchingStageActionNotifications: true };
+    case types.GET_STAGE_ACTION_NOTIFICATIONS_SUCCESS:
+      return {
+        ...state,
+        fetchingStageActionNotifications: false,
+        stageactionNotifications: action.payload,
+      };
+    case types.GET_STAGE_ACTION_NOTIFICATIONS_FAILURE:
+      return {
+        ...state,
+        fetchingStageActionNotifications: false,
+        fetchingStageActionNotificationsError: true,
+      };
+
+    case types.HANDLE_ACTION_DRAWER_MODAL:
+      return { ...state, addDrawerActionModal: action.payload };
+
+    case types.GET_ACTION_STEPS_REQUEST:
+      return { ...state, fetchingActionSteps: true };
+    case types.GET_ACTION_STEPS_SUCCESS:
+      return {
+        ...state,
+        fetchingActionSteps: false,
+        actionSteps: action.payload,
+      };
+    case types.GET_ACTION_STEPS_FAILURE:
+      return {
+        ...state,
+        fetchingActionSteps: false,
+        fetchingActionStepsError: true,
+      };
+
+    // case types.UPDATE_REQUIREMENT_STAGE_REQUEST:
+    //   return {
+    //     ...state,
+    //     updatingReqStage: true,
+    //     //opportunities: updatedOpportunity(state.opportunities, action.payload),
+    //   };
+    // case types.UPDATE_REQUIREMENT_STAGE_SUCCESS:
+    //   return { ...state, updatingReqStage: false };
+    // case types.UPDATE_REQUIREMENT_STAGE_FAILURE:
+    //   return { ...state };
+
+    case types.GET_DETAILS_LIST_REQUEST:
+      return { ...state, fetchingDetails: true };
+    case types.GET_DETAILS_LIST_SUCCESS:
+      return {
+        ...state,
+        fetchingDetails: false,
+        detail: action.payload,
+      };
+    case types.GET_DETAILS_LIST_FAILURE:
+      return {
+        ...state,
+        fetchingDetails: false,
+        fetchingDetailsError: true,
+      };
+    case types.HANDLE_BILLABLE_CANDIDATE_MODAL:
+      return {
+        ...state,
+        billableCandidateModal: action.payload,
+        candidatesBillableAmount: [],
+      };
+
+    case types.GET_CANDIDATES_BILLABLE_AMOUNT_REQUEST:
+      return { ...state, fetchingCandidateTotalBillableAmount: true };
+    case types.GET_CANDIDATES_BILLABLE_AMOUNT_SUCCESS:
+      return {
+        ...state,
+        fetchingCandidateTotalBillableAmount: false,
+        candidatesBillableAmount: action.payload,
+      };
+    case types.GET_CANDIDATES_BILLABLE_AMOUNT_FAILURE:
+      return {
+        ...state,
+        fetchingCandidateTotalBillableAmount: false,
+        fetchingCandidateTotalBillableAmountError: true,
+      };
+
+    case types.GET_UPCOMING_EVENTS_REQUEST:
+      return {
+        ...state,
+        fetchingUpcomingEvents: true,
+        fetchingUpcomingEventsError: false,
+      };
+    case types.GET_UPCOMING_EVENTS_SUCCESS:
+      return {
+        ...state,
+        fetchingUpcomingEvents: false,
+        fetchingUpcomingEventsError: false,
+        upcomingEvents: action.payload,
+      };
+    case types.GET_UPCOMING_EVENTS_FAILURE:
+      return {
+        ...state,
+        fetchingUpcomingEvents: false,
+        fetchingUpcomingEventsError: true,
+      };
+
+    case types.GET_TASK_PER_REQUEST:
+      return { ...state, fetchingTaskper: true, fetchingTaskperError: false };
+    case types.GET_TASK_PER_SUCCESS:
+      return {
+        ...state,
+        fetchingTaskper: false,
+        fetchingTaskperError: false,
+        taskperCount: action.payload,
+      };
+    case types.GET_TASK_PER_FAILURE:
+      return { ...state, fetchingTaskper: false, fetchingTaskperError: true };
+
+    case types.GET_JUMPSTART_BULB_REQUEST:
+      return {
+        ...state,
+        fetchingJumpstartBulb: true,
+        fetchingJumpstartBulbError: false,
+      };
+    case types.GET_JUMPSTART_BULB_SUCCESS:
+      return {
+        ...state,
+        fetchingJumpstartBulb: false,
+        fetchingJumpstartBulbError: false,
+        jumpstartBulbCount: action.payload,
+      };
+    case types.GET_JUMPSTART_BULB_FAILURE:
+      return {
+        ...state,
+        fetchingJumpstartBulb: false,
+        fetchingJumpstartBulbError: true,
+      };
+
+    case types.GET_JUMPSTART_BULB2_REQUEST:
+      return {
+        ...state,
+        fetchingJumpstartBulb2: true,
+        fetchingJumpstartBulb2Error: false,
+      };
+    case types.GET_JUMPSTART_BULB2_SUCCESS:
+      return {
+        ...state,
+        fetchingJumpstartBulb2: false,
+        fetchingJumpstartBulb2Error: false,
+        jumpstartBulb2Count: action.payload,
+      };
+    case types.GET_JUMPSTART_BULB2_FAILURE:
+      return {
+        ...state,
+        fetchingJumpstartBulb2: false,
+        fetchingJumpstartBulb2Error: true,
+      };
+    case types.GET_JUMPSTART_BULB3_REQUEST:
+      return {
+        ...state,
+        fetchingJumpstartBulb3: true,
+        fetchingJumpstartBulb3Error: false,
+      };
+    case types.GET_JUMPSTART_BULB3_SUCCESS:
+      return {
+        ...state,
+        fetchingJumpstartBulb3: false,
+        fetchingJumpstartBulb3Error: false,
+        jumpstartBulb3Count: action.payload,
+      };
+    case types.GET_JUMPSTART_BULB3_FAILURE:
+      return {
+        ...state,
+        fetchingJumpstartBulb3: false,
+        fetchingJumpstartBulb3Error: true,
+      };
+
+    case types.GET_DASHBOARD_USER_LIST_REQUEST:
+      return { ...state, fetchingDashboardUserList: true };
+    case types.GET_DASHBOARD_USER_LIST_SUCCESS:
+      return {
+        ...state,
+        fetchingDashboardUserList: false,
+        dashboardUserlist: action.payload,
+      };
+    case types.GET_DASHBOARD_USER_LIST_FAILURE:
+      return {
+        ...state,
+        fetchingDashboardUserList: false,
+        fetchingDashboardUserListError: true,
+      };
+
+    case types.GET_HOT_COLD_WARM_REQUEST:
+      return { ...state, gettingHotColdWarm: true };
+
+    case types.GET_HOT_COLD_WARM_SUCCESS:
+      return {
+        ...state,
+        gettingHotColdWarm: false,
+        showHotColdWarm: action.payload,
+      };
+
+    case types.GET_HOT_COLD_WARM_FAILURE:
+      return {
+        ...state,
+        gettingHotColdWarm: false,
+        gettingHotColdWarmError: true,
+      };
+
+      case types.GET_JUMPSTART_CUSTOMER_LIST_REQUEST:
+        return { ...state, fetchingJumpstartCustolist: true,
+          fetchingJumpstartCustolistError: false };
+      case types.GET_JUMPSTART_CUSTOMER_LIST_SUCCESS:
+        return {
+          ...state,
+          fetchingJumpstartCustolist: false,
+          fetchingJumpstartCustolistError: false,
+          jumpstrtCUSTOCount: action.payload,
+        };
+      case types.GET_JUMPSTART_CUSTOMER_LIST_FAILURE:
+        return { ...state,
+          fetchingJumpstartCustolist: false,
+          fetchingJumpstartCustolistError: true };
+
+case types.GET_JUMPSTART_CUSTOMER2_LIST_REQUEST:
+        return { ...state, fetchingJumpstartCusto2list: true,
+          fetchingJumpstartCusto2listError: false };
+      case types.GET_JUMPSTART_CUSTOMER2_LIST_SUCCESS:
+        return {
+          ...state,
+          fetchingJumpstartCusto2list: false,
+          fetchingJumpstartCusto2listError: false,
+          jumpstrtCUSTO2Count: action.payload,
+        };
+      case types.GET_JUMPSTART_CUSTOMER2_LIST_FAILURE:
+        return { ...state,
+          fetchingJumpstartCusto2list: false,
+          fetchingJumpstartCusto2listError: true };
+
+          case types.GET_DASH_CUSTOMER_ADDED_LEADS_REQUEST:
+            return { ...state, fetchingdashCustoLeadsAdded: true };
+          case types.GET_DASH_CUSTOMER_ADDED_LEADS_SUCCESS:
             return {
               ...state,
-              updatingTodoCall: false,
-              todos: state.todos.map((item, i) => {
-                ////debugger;
-                if (item.taskId === action.payload.taskId) {
-                  ////debugger;
-                  return action.payload;
-                } else {
-                  ////debugger;
-                  return item;
-                }
-              }),
+              fetchingdashCustoLeadsAdded: false,
+              dashCustoLeadsAdded: action.payload,
             };
-          case types.UPDATE_TODO_CALL_BY_ID_FAILURE:
-            return { ...state, updatingCall: false, updatingCallError: false };
+          case types.GET_DASH_CUSTOMER_ADDED_LEADS_FAILURE:
+            return {
+              ...state,
+              fetchingdashCustoLeadsAdded: false,
+              fetchingdashCustoLeadsAddedError: true,
+            };
 
-            case types.UPDATE_TODO_EVENT_BY_ID_REQUEST:
-              return { ...state, updatingTodoEvent: true };
-            case types.UPDATE_TODO_EVENT_BY_ID_SUCCESS:
+            case types.GET_JUMPSTART_TASK_LIST_REQUEST:
               return {
                 ...state,
-                updatingTodoEvent: false,
-                todos: state.todos.map((item, i) => {
-                  ////debugger;
-                  if (item.eventId === action.payload.eventId) {
-                    ////debugger;
-                    return action.payload;
-                  } else {
-                    ////debugger;
-                    return item;
-                  }
-                }),
+                fetchingJumpstartTasklist: true,
+                fetchingJumpstartTasklistError: false,
               };
-            case types.UPDATE_TODO_EVENT_BY_ID_FAILURE:
+            case types.GET_JUMPSTART_TASK_LIST_SUCCESS:
               return {
                 ...state,
-                updatingTodoEvent: false,
-                updatingTodoEventError: false,
+                fetchingJumpstartTasklist: false,
+                fetchingJumpstartTasklistError: false,
+                jumpstartTasklistCount: action.payload,
+              };
+            case types.GET_JUMPSTART_TASK_LIST_FAILURE:
+              return {
+                ...state,
+                fetchingJumpstartTasklist: false,
+                fetchingJumpstartTasklistError: true,
               };
 
-              case types.UPDATE_TODO_TASK_BY_ID_REQUEST:
-                return { ...state, updatingTodoTask: true };
-              case types.UPDATE_TODO_TASK_BY_ID_SUCCESS:
+              case types.GET_DASHBOARD_TASK_REQUEST:
+    return { ...state, fetchingDashboardTasks: true };
+  case types.GET_DASHBOARD_TASK_SUCCESS:
+    return {
+      ...state,
+      fetchingDashboardTasks: false,
+      dashboardTasks: action.payload,
+    };
+  case types.GET_DASHBOARD_TASK_FAILURE:
+    return {
+      ...state,
+      fetchingDashboardTasks: false,
+      fetchingDashboardTasksError: true,
+    };
+
+              case types.GET_DASH_CUSTOMER_ADDED_CONTACTS_REQUEST:
+                return { ...state, fetchingdashCustoContactsAdded: true };
+              case types.GET_DASH_CUSTOMER_ADDED_CONTACTS_SUCCESS:
                 return {
                   ...state,
-                  updatingTodoTask: false,
-                  todos: state.todos.map((item, i) => {
-                    ////debugger;
-                    if (item.taskId === action.payload.taskId) {
-                      ////debugger;
-                      return action.payload;
-                    } else {
-                      ////debugger;
-                      return item;
-                    }
-                  }),
+                  fetchingdashCustoContactsAdded: false,
+                  dashCustoContactsAdded: action.payload,
                 };
-              case types.UPDATE_TODO_TASK_BY_ID_FAILURE:
-                return { ...state, updatingTodoTask: false, updatingTodoTaskError: false };
+              case types.GET_DASH_CUSTOMER_ADDED_CONTACTS_FAILURE:
+                return {
+                  ...state,
+                  fetchingdashCustoContactsAdded: false,
+                  fetchingdashCustoContactsAddedError: true,
+                };
 
-                case types.GET_ALL_SALES_DATE_WISE_REPORT_REQUEST:
-                  return { ...state, fetchingAllSalesDatewiseReport: true };
-                case types.GET_ALL_SALES_DATE_WISE_REPORT_SUCCESS:
+                case types.GET_JUMPSTART_TASK_2_LIST_REQUEST:
                   return {
                     ...state,
-                    fetchingAllSalesDatewiseReport: false,
-                    fetchingAllSalesDatewiseReportError: false,
-                    showAllSalesDatelist: action.payload,
+                    fetchingJumpstartTask2list: true,
+                    fetchingJumpstartTask2listError: false,
                   };
-                case types.GET_ALL_SALES_DATE_WISE_REPORT_FAILURE:
+                case types.GET_JUMPSTART_TASK_2_LIST_SUCCESS:
                   return {
                     ...state,
-                    fetchingAllSalesDatewiseReport: false,
-                    fetchingAllSalesDatewiseReportError: true,
-                    // selectedReportType: "dashboard"
+                    fetchingJumpstartTask2list: false,
+                    fetchingJumpstartTask2listError: false,
+                    jumpstartTask2listCount: action.payload,
+                  };
+                case types.GET_JUMPSTART_TASK_2_LIST_FAILURE:
+                  return {
+                    ...state,
+                    fetchingJumpstartTask2list: false,
+                    fetchingJumpstartTask2listError: true,
                   };
 
-                  case types.GET_ALL_DATE_WISE_REPORT_REQUEST:
-                    return { ...state, fetchingAllDatewiseReport: true };
-                  case types.GET_ALL_DATE_WISE_REPORT_SUCCESS:
+                  case types.GET_JUMPSTART_INVESTOR_REQUEST:
                     return {
                       ...state,
-                      fetchingAllDatewiseReport: false,
-                      fetchingAllDatewiseReportError: false,
-                      showAllDatelist: action.payload,
+                      fetchingJumpstartInvestor: true,
+                      fetchingJumpstartInvestorError: false,
                     };
-                  case types.GET_ALL_DATE_WISE_REPORT_FAILURE:
+                  case types.GET_JUMPSTART_INVESTOR_SUCCESS:
                     return {
                       ...state,
-                      fetchingAllDatewiseReport: false,
-                      fetchingAllDatewiseReportError: true,
-                      // selectedReportType: "dashboard"
+                      fetchingJumpstartInvestor: false,
+                      fetchingJumpstartInvestorError: false,
+                      jumpstartInvestorCount: action.payload,
+                    };
+                  case types.GET_JUMPSTART_INVESTOR_FAILURE:
+                    return {
+                      ...state,
+                      fetchingJumpstartInvestor: false,
+                      fetchingJumpstartInvestorError: true,
                     };
 
-
-                    case types.GET_ALL_DASHBOARD_CLOSURE_RATIO_REQUEST:
-                      return { ...state, fetchingalldashBoardClosureRatio: true };
-                    case types.GET_ALL_DASHBOARD_CLOSURE_RATIO_SUCCESS:
+                    case types.GET_JUMPSTART_INVESTOR_2_REQUEST:
                       return {
                         ...state,
-                        fetchingalldashBoardClosureRatio: false,
-                        dashBoardallClosureRatio: action.payload,
+                        fetchingJumpstartInvestor2: true,
+                        fetchingJumpstartInvestor2Error: false,
                       };
-                      case types.GET_ALL_DASHBOARD_CLOSURE_RATIO_FAILURE:
+                    case types.GET_JUMPSTART_INVESTOR_2_SUCCESS:
+                      return {
+                        ...state,
+                        fetchingJumpstartInvestor2: false,
+                        fetchingJumpstartInvestor2Error: false,
+                        jumpstartInvestor2Count: action.payload,
+                      };
+                    case types.GET_JUMPSTART_INVESTOR_2_FAILURE:
+                      return {
+                        ...state,
+                        fetchingJumpstartInvestor2: false,
+                        fetchingJumpstartInvestor2Error: true,
+                      };
+
+                      case types.GET_JUMPSTART_INVESTOR_3_REQUEST:
+                      return {
+                        ...state,
+                        fetchingJumpstartInvestor3: true,
+                        fetchingJumpstartInvestor3Error: false,
+                      };
+                    case types.GET_JUMPSTART_INVESTOR_3_SUCCESS:
+                      return {
+                        ...state,
+                        fetchingJumpstartInvestor3: false,
+                        fetchingJumpstartInvestor3Error: false,
+                        jumpstartInvestor3Count: action.payload,
+                      };
+                    case types.GET_JUMPSTART_INVESTOR_3_FAILURE:
+                      return {
+                        ...state,
+                        fetchingJumpstartInvestor3: false,
+                        fetchingJumpstartInvestor3Error: true,
+                      };
+
+                      case types.GET_JUMPSTART_INVESTOR_4_REQUEST:
+                      return {
+                        ...state,
+                        fetchingJumpstartInvestor4: true,
+                        fetchingJumpstartInvestor4Error: false,
+                      };
+                    case types.GET_JUMPSTART_INVESTOR_4_SUCCESS:
+                      return {
+                        ...state,
+                        fetchingJumpstartInvestor4: false,
+                        fetchingJumpstartInvestor4Error: false,
+                        jumpstartInvestor4Count: action.payload,
+                      };
+                    case types.GET_JUMPSTART_INVESTOR_4_FAILURE:
+                      return {
+                        ...state,
+                        fetchingJumpstartInvestor4: false,
+                        fetchingJumpstartInvestor4Error: true,
+                      };
+
+                      case types.GET_INVSTR_HOT_COLD_WARM_REQUEST:
+                        return { ...state, gettingInvHotColdWarm: true };
+                  
+                      case types.GET_INVSTR_HOT_COLD_WARM_SUCCESS:
                         return {
                           ...state,
-                          fetchingalldashBoardClosureRatio: false,
-                          fetchingalldashBoardClosureRatioError: true,
+                          gettingInvHotColdWarm: false,
+                          investorHotColdWarm: action.payload,
+                        };
+                  
+                      case types.GET_INVSTR_HOT_COLD_WARM_FAILURE:
+                        return {
+                          ...state,
+                          gettingInvHotColdWarm: false,
+                          gettingInvHotColdWarmError: true,
                         };
 
-
-                        case types.GET_ALL_DASHBOARD_CUSTOMER_CHART_REQUEST:
-                          return { ...state, fetchingalldashBoardCustomerChart: true };
-                        case types.GET_ALL_DASHBOARD_CUSTOMER_CHART_SUCCESS:
+                        case types.GET_DASH_INVESTOR_ADDED_PITCH_REQUEST:
+                          return { ...state, fetchingdashInvstPitchAdded: true };
+                        case types.GET_DASH_INVESTOR_ADDED_PITCH_SUCCESS:
                           return {
                             ...state,
-                            fetchingalldashBoardCustomerChart: false,
-                            dashBoardallCustomerChart: action.payload,
+                            fetchingdashInvstPitchAdded: false,
+                            dashInvstPitchAdded: action.payload,
                           };
-                          case types.GET_ALL_DASHBOARD_CUSTOMER_CHART_FAILURE:
+                        case types.GET_DASH_INVESTOR_ADDED_PITCH_FAILURE:
+                          return {
+                            ...state,
+                            fetchingdashInvstPitchAdded: false,
+                            fetchingdashInvstPitchAddedError: true,
+                          };
+                          
+                        case types.GET_DASH_INVESTOR_ADDED_CONTACTINVEST_REQUEST:
+                          return { ...state, fetchingdashInvstContactAdded: true };
+                        case types.GET_DASH_INVESTOR_ADDED_CONTACTINVEST_SUCCESS:
+                          return {
+                            ...state,
+                            fetchingdashInvstContactAdded: false,
+                            dashInvstContactAdded: action.payload,
+                          };
+                        case types.GET_DASH_INVESTOR_ADDED_CONTACTINVEST_FAILURE:
+                          return {
+                            ...state,
+                            fetchingdashInvstContactAdded: false,
+                            fetchingdashInvstContactAddedError: true,
+                          };
+                          
+   case types.HANDLE_LEAD_QUALIFIED_DRAWER: 
+  return {...state, openLeadQualified:action.payload};
+
+  case types.GET_LEADS_QUALIFIED_REQUEST:
+    return { ...state, fetchingLeadsQualified: true };
+  case types.GET_LEADS_QUALIFIED_SUCCESS:
+    return {
+      ...state,
+      fetchingLeadsQualified: false,
+      showQualifiedLeads: action.payload,
+    };
+  case types.GET_LEADS_QUALIFIED_FAILURE:
+    return {
+      ...state,
+      fetchingLeadsQualified: false,
+      fetchingLeadsQualifiedError: true,
+    };
+
+    case types.HANDLE_LEAD_ADDED_DRAWER: 
+    return {...state, openLeadAdded:action.payload};
+  
+    case types.GET_LEADS_ADDED_REQUEST:
+      return { ...state, fetchingLeadsAdded: true };
+    case types.GET_LEADS_ADDED_SUCCESS:
+      return {
+        ...state,
+        fetchingLeadsAdded: false,
+        showAddedLeads: action.payload,
+      };
+    case types.GET_LEADS_ADDED_FAILURE:
+      return {
+        ...state,
+        fetchingLeadsAdded: false,
+        fetchingLeadsAddedError: true,
+      };
+
+      case types.HANDLE_OPPO_ADDED_DRAWER: 
+      return {...state, openOppoAdded:action.payload};
+    
+      case types.GET_OPPO_ADDED_REQUEST:
+        return { ...state, fetchingOppoAdded: true };
+      case types.GET_OPPO_ADDED_SUCCESS:
+        return {
+          ...state,
+          fetchingOppoAdded: false,
+          showAddedOppo: action.payload,
+        };
+      case types.GET_OPPO_ADDED_FAILURE:
+        return {
+          ...state,
+          fetchingOppoAdded: false,
+          fetchingOppoAddedError: true,
+        };
+  
+        case types.HANDLE_OPPO_CLOSED_DRAWER: 
+        return {...state, clickOppoClosed:action.payload};
+
+        case types.GET_OPPO_CLOSED_REQUEST:
+          return { ...state, fetchingOppoClosed: true };
+        case types.GET_OPPO_CLOSED_SUCCESS:
+          return {
+            ...state,
+            fetchingOppoClosed: false,
+            showClosedOppo: action.payload,
+          };
+        case types.GET_OPPO_CLOSED_FAILURE:
+          return {
+            ...state,
+            fetchingOppoClosed: false,
+            fetchingOppoClosedError: true,
+          };
+
+          case types.HANDLE_PITCH_QUALIFIED_DRAWER: 
+          return {...state, openPitchQualified:action.payload};
+        
+          case types.GET_PITCH_QUALIFIED_REQUEST:
+            return { ...state, fetchingPitchQualified: true };
+          case types.GET_PITCH_QUALIFIED_SUCCESS:
+            return {
+              ...state,
+              fetchingPitchQualified: false,
+              showQualifiedPitch: action.payload,
+            };
+          case types.GET_PITCH_QUALIFIED_FAILURE:
+            return {
+              ...state,
+              fetchingPitchQualified: false,
+              fetchingPitchQualifiedError: true,
+            };
+
+            case types.HANDLE_PITCH_ADDED_DRAWER: 
+            return {...state, openPitchAdded:action.payload};
+          
+            case types.GET_PITCH_ADDED_REQUEST:
+              return { ...state, fetchingPitchAdded: true };
+            case types.GET_PITCH_ADDED_SUCCESS:
+              return {
+                ...state,
+                fetchingPitchAdded: false,
+                showAddedPitch: action.payload,
+              };
+            case types.GET_PITCH_ADDED_FAILURE:
+              return {
+                ...state,
+                fetchingPitchAdded: false,
+                fetchingPitchAddedError: true,
+              };
+          
+              case types.HANDLE_DEAL_ADDED_DRAWER: 
+            return {...state, openDealAdded:action.payload};
+          
+            case types.GET_DEAL_ADDED_REQUEST:
+              return { ...state, fetchingDealAdded: true };
+            case types.GET_DEAL_ADDED_SUCCESS:
+              return {
+                ...state,
+                fetchingDealAdded: false,
+                showAddedDeal: action.payload,
+              };
+            case types.GET_DEAL_ADDED_FAILURE:
+              return {
+                ...state,
+                fetchingDealAdded: false,
+                fetchingDealAddedError: true,
+              };
+
+              case types.HANDLE_DEAL_CLOSED_DRAWER: 
+              return {...state, openDealClosed:action.payload};
+            
+              case types.GET_DEAL_CLOSED_REQUEST:
+                return { ...state, fetchingDealClosed: true };
+              case types.GET_DEAL_CLOSED_SUCCESS:
+                return {
+                  ...state,
+                  fetchingDealClosed: false,
+                  showClosedDeal: action.payload,
+                };
+              case types.GET_DEAL_CLOSED_FAILURE:
+                return {
+                  ...state,
+                  fetchingDealClosed: false,
+                  fetchingDealClosedError: true,
+                };         
+    
+                case types.HANDLE_LEAD_HCW_DRAWER: 
+                return {...state, openLeadHCWdrawer:action.payload};
+
+                case types.GET_LEAD_HOTLIST_REQUEST:
+                  return { ...state, fetchingHottestLeads: true };
+                case types.GET_LEAD_HOTLIST_SUCCESS:
+                  return {
+                    ...state,
+                    fetchingHottestLeads: false,
+                    showHottestLeads: action.payload,
+                  };
+                case types.GET_LEAD_HOTLIST_FAILURE:
+                  return {
+                    ...state,
+                    fetchingHottestLeads: false,
+                    fetchingHottestLeadsError: true,
+                  };    
+
+                  case types.GET_LEAD_COLDLIST_REQUEST:
+                    return { ...state, fetchingColdestLeads: true };
+                  case types.GET_LEAD_COLDLIST_SUCCESS:
+                    return {
+                      ...state,
+                      fetchingColdestLeads: false,
+                      showColdestLeads: action.payload,
+                    };
+                  case types.GET_LEAD_COLDLIST_FAILURE:
+                    return {
+                      ...state,
+                      fetchingColdestLeads: false,
+                      fetchingColdestLeadsError: true,
+                    };     
+
+                    case types.GET_LEAD_WARMLIST_REQUEST:
+                      return { ...state, fetchingWarmedLeads: true };
+                    case types.GET_LEAD_WARMLIST_SUCCESS:
+                      return {
+                        ...state,
+                        fetchingWarmedLeads: false,
+                        showWarmedLeads: action.payload,
+                      };
+                    case types.GET_LEAD_WARMLIST_FAILURE:
+                      return {
+                        ...state,
+                        fetchingWarmedLeads: false,
+                        fetchingWarmedLeadsError: true,
+                      };                 
+                        
+                      case types.HANDLE_PITCH_HCW_DRAWER: 
+                      return {...state, openPitchHCWdrawer:action.payload};            
+
+                      case types.GET_PITCH_HOTLIST_REQUEST:
+                        return { ...state, fetchingHottestPitch: true };
+                      case types.GET_PITCH_HOTLIST_SUCCESS:
+                        return {
+                          ...state,
+                          fetchingHottestPitch: false,
+                          showHottestPitch: action.payload,
+                        };
+                      case types.GET_PITCH_HOTLIST_FAILURE:
+                        return {
+                          ...state,
+                          fetchingHottestPitch: false,
+                          fetchingHottestPitchError: true,
+                        };    
+      
+                        case types.GET_PITCH_COLDLIST_REQUEST:
+                          return { ...state, fetchingColdestPitch: true };
+                        case types.GET_PITCH_COLDLIST_SUCCESS:
+                          return {
+                            ...state,
+                            fetchingColdestPitch: false,
+                            showColdestPitch: action.payload,
+                          };
+                        case types.GET_PITCH_COLDLIST_FAILURE:
+                          return {
+                            ...state,
+                            fetchingColdestPitch: false,
+                            fetchingColdestPitchError: true,
+                          };     
+      
+                          case types.GET_PITCH_WARMLIST_REQUEST:
+                            return { ...state, fetchingWarmedPitch: true };
+                          case types.GET_PITCH_WARMLIST_SUCCESS:
                             return {
                               ...state,
-                              fetchingalldashBoardCustomerChart: false,
-                              fetchingalldashBoardCustomerChartError: true,
+                              fetchingWarmedPitch: false,
+                              showWarmedPitch: action.payload,
                             };
+                          case types.GET_PITCH_WARMLIST_FAILURE:
+                            return {
+                              ...state,
+                              fetchingWarmedPitch: false,
+                              fetchingWarmedPitchError: true,
+                            }; 
 
 
-                            case types.GET_ALL_DASHBOARD_TABLE_PROGRESS_REQUEST:
-                              return { ...state, fetchingalldashboardTable2: true };
-                            case types.GET_ALL_DASHBOARD_TABLE_PROGRESS_SUCCESS:
-                              return {
-                                ...state,
-                                fetchingalldashboardTable2: false,
-                                tableallDashboard2: action.payload,
-                              };
-                              case types.GET_ALL_DASHBOARD_TABLE_PROGRESS_FAILURE:
-                                return {
-                                  ...state,
-                                  fetchingalldashboardTable2: false,
-                                  fetchingalldashboardTable2Error: true,
-                                };
-
-
-                                case types.GET_ALL_DASHBOARD_FUNNEL_REQUEST:
-                                  return { ...state, fetchingallDashBoardFunnel: true };
-                                case types.GET_ALL_DASHBOARD_FUNNEL_SUCCESS:
-                                  return {
-                                    ...state,
-                                    fetchingallDashBoardFunnel: false,
-                                    alldashboardFunnel: action.payload,
-                                  };
-                                case types.GET_ALL_DASHBOARD_FUNNEL_FAILURE:
-                                  return {
-                                    ...state,
-                                    fetchingallDashBoardFunnel: false,
-                                    fetchingallDashBoardFunnelError: true,
-                                  };
-
-
-                                  case types.GET_ACTION_NOTIFICATIONS_REQUEST:
-                                    return { ...state, fetchingActionNotifications: true };
-                                  case types.GET_ACTION_NOTIFICATIONS_SUCCESS:
-                                    return {
-                                      ...state,
-                                      fetchingActionNotifications: false,
-                                      actionNotifications: action.payload
-                                    };
-                                  case types.GET_ACTION_NOTIFICATIONS_FAILURE:
-                                    return {
-                                      ...state,
-                                      fetchingActionNotifications: false,
-                                      fetchingActionNotificationsError: true
-                                    };
-
-
-                                    case types.HANDLE_ADD_JOB_DETAIL_MODAL:
-                                      return { ...state, addjobDetailModal: action.payload };
-
-
-
-                                      case types.ADD_ACTION_NOTIFICATIONS_REQUEST:
-                                        return { ...state, addingActionNotifications: true };
-                                      case types.ADD_ACTION_NOTIFICATIONS_SUCCESS:
-                                        return {
-                                          ...state,
-                                          addingActionNotifications: false,
-                                          // actionNotifications: action.payload
-                                        };
-                                      case types.ADD_ACTION_NOTIFICATIONS_FAILURE:
-                                        return {
-                                          ...state,
-                                          addingActionNotifications: false,
-                                          addingActionNotificationsError: true
-                                        };
-
-
-
-                                        case types.GET_STAGE_ACTION_NOTIFICATIONS_REQUEST:
-                                          return { ...state, fetchingStageActionNotifications: true };
-                                        case types.GET_STAGE_ACTION_NOTIFICATIONS_SUCCESS:
-                                          return {
-                                            ...state,
-                                            fetchingStageActionNotifications: false,
-                                            stageactionNotifications: action.payload
-                                          };
-                                        case types.GET_STAGE_ACTION_NOTIFICATIONS_FAILURE:
-                                          return {
-                                            ...state,
-                                            fetchingStageActionNotifications: false,
-                                            fetchingStageActionNotificationsError: true
-                                          };
-                          
-              
-      
-                                          case types.HANDLE_ACTION_DRAWER_MODAL:
-                                            return { ...state, addDrawerActionModal: action.payload };
-
-
-                                            case types.GET_ACTION_STEPS_REQUEST:
-                                              return { ...state, fetchingActionSteps: true };
-                                            case types.GET_ACTION_STEPS_SUCCESS:
-                                              return {
-                                                ...state,
-                                                fetchingActionSteps: false,
-                                                actionSteps: action.payload
-                                              };
-                                            case types.GET_ACTION_STEPS_FAILURE:
-                                              return {
-                                                ...state,
-                                                fetchingActionSteps: false,
-                                                fetchingActionStepsError: true
-                                              };
-
-                                              // case types.UPDATE_REQUIREMENT_STAGE_REQUEST:
-                                              //   return {
-                                              //     ...state,
-                                              //     updatingReqStage: true,
-                                              //     //opportunities: updatedOpportunity(state.opportunities, action.payload),
-                                              //   };
-                                              // case types.UPDATE_REQUIREMENT_STAGE_SUCCESS:
-                                              //   return { ...state, updatingReqStage: false };
-                                              // case types.UPDATE_REQUIREMENT_STAGE_FAILURE:
-                                              //   return { ...state };
-
-                                              case types.GET_DETAILS_LIST_REQUEST:
-                                                return { ...state, fetchingDetails: true };
-                                              case types.GET_DETAILS_LIST_SUCCESS:
-                                                return {
-                                                  ...state,
-                                                  fetchingDetails: false,
-                                                  detail: action.payload,
-                                                };
-                                              case types.GET_DETAILS_LIST_FAILURE:
-                                                return {
-                                                  ...state,
-                                                  fetchingDetails: false,
-                                                  fetchingDetailsError: true,
-                                                };
-                                                case types.HANDLE_BILLABLE_CANDIDATE_MODAL:
-                                                  return { ...state, billableCandidateModal: action.payload,
-                                                    candidatesBillableAmount:[] };                                
-   
-   
-                                                  case types.GET_CANDIDATES_BILLABLE_AMOUNT_REQUEST:
-                                                    return { ...state, fetchingCandidateTotalBillableAmount: true };
-                                                  case types.GET_CANDIDATES_BILLABLE_AMOUNT_SUCCESS:
-                                                    return {
-                                                      ...state,
-                                                      fetchingCandidateTotalBillableAmount: false,
-                                                      candidatesBillableAmount: action.payload,
-                                                    };
-                                                  case types.GET_CANDIDATES_BILLABLE_AMOUNT_FAILURE:
-                                                    return {
-                                                      ...state,
-                                                      fetchingCandidateTotalBillableAmount: false,
-                                                      fetchingCandidateTotalBillableAmountError: true,
-                                                    }; 
-                                                    
-                                                    
-                                                    case types.GET_UPCOMING_EVENTS_REQUEST:
-                                                      return { ...state, fetchingUpcomingEvents: true, fetchingUpcomingEventsError: false };
-                                                    case types.GET_UPCOMING_EVENTS_SUCCESS:
-                                                      return {
-                                                        ...state,
-                                                        fetchingUpcomingEvents: false,
-                                                        fetchingUpcomingEventsError: false,
-                                                        upcomingEvents: action.payload,
-                                                      };
-                                                    case types.GET_UPCOMING_EVENTS_FAILURE:
-                                                      return { ...state, fetchingUpcomingEvents: false, fetchingUpcomingEventsError: true };
-                                                
-
-    default:
-        return state;
-    }
+                default:
+      return state;
+  }
 };
 
 const newDateRange = (dateRange, newDate) =>

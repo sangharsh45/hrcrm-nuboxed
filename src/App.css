@@ -53,7 +53,7 @@
 .login_password{
   display: flex;
   flex-direction: row;
-  width: 85%;
+  width: 100%;
 }
 .randome_text2 {
   line-height: 1.1;
@@ -550,7 +550,8 @@ box-shadow: 0em 0.25em 0.625em -0.25em #aaa;
 padding: 0.3rem 1rem;
 }
  .ant-switch{ 
-  background-color: #24d8a7;
+  background-color: rgb(213, 213, 213);
+  /* background: #09bc8b; */
 }
 .ant-time-picker-input{
   width:10rem;
@@ -813,5 +814,37 @@ h1{
       font-size: 1.25em;
       color: #40A9FF;
       font-family: "Poppins";
+}
+.ant-checkbox+span {
+  
+  font-size: 0.75rem;
+}
+.ant-layout.ant-layout-has-sider {
+  flex-direction: row;
+  overflow-x: auto;
+  overflow-y: hidden;
+  height: 100vh;
+}
+
+.ant-avatar {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  color: #fff;
+  font-size: 0.875rem;
+  line-height: 1.8rem;
+  list-style: none;
+  font-family: poppins;
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+  white-space: nowrap;
+  text-align: center;
+  vertical-align: middle;
+  background: rgba(0, 0, 0, 0.25);
+  border: 1px solid transparent;
+  width: 1.8rem;
+  height: 1.8rem;
+  border-radius: 50%;
 }
 

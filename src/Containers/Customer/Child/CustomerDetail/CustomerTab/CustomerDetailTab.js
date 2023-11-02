@@ -27,6 +27,7 @@ import {
   handlefileRecruitModal,
   handleTagProfileModal,
   handleInvoiceModal,
+  handleCallActivityModal,
   handleCustomerReactSpeechModal,
 } from "../../../CustomerAction";
 import ReactCustomerSpeechModal from "../ReactCustomerSpeechModal";
@@ -62,6 +63,7 @@ const AddTagProfileModal = lazy(() =>
 );
 const AddInvoiceModal = lazy(() => import("./Invoice/AddInvoiceModal"));
 const LinkedInvoice = lazy(() => import("./Invoice/LinkedInvoice"));
+
 const TabPane = StyledTabs.TabPane;
 function handleRefreshPage() {
   window.location.reload();
@@ -120,7 +122,6 @@ class ContactDetailTab extends Component {
       handleCustomerReactSpeechModal,
       addCustomerSpeechModal,
       handleCustomerContactModal,
-      // ComhandleCustomermercialsModal,
       addCustomerContactModal,
       handleCustomerOpportunityModal,
       handleCustomerProjectDrawer,
@@ -128,9 +129,10 @@ class ContactDetailTab extends Component {
       addCustomerProjectDrawer,
       getContactListByCustomerId,
       getOpportunityListByCustomerId,
-      handleTagProfileModal,
       addInvoiceModal,
+      callActivityModal,
       handleInvoiceModal,
+      handleCallActivityModal,
     } = this.props;
 
     return (
@@ -239,99 +241,8 @@ class ContactDetailTab extends Component {
                 <LinkedContact />
               </Suspense>
             </TabPane>
-            <TabPane
-              tab={
-                <>
-                  <span>
-                    <TransferWithinAStationIcon style={{fontSize:"1.1rem"}}/>
-                    <span class=" ml-1">
-                    <FormattedMessage
-                        id="app.recruitPro"
-                        defaultMessage="RecruitPro"
-                      />
-                      {/* RecruitPro */}
-                    </span>
-                  </span>
 
-                  {activeKey === "3" && (
-                    <>
-                      <>
-                        <Tooltip //title="Create"
-                          title={
-                            <FormattedMessage
-                              id="app.addrequirement"
-                              defaultMessage="Add Requirement"
-                            />
-                          }
-                        ></Tooltip>
-                        {/* <Tooltip //title="Tag Position"
-                          title={<FormattedMessage
-                            id="app.tagposition"
-                            defaultMessage="Tag Position"
-                          />}
-
-                        >
-                          <Icon
-                            type="link"
-                            onClick={() => {
-                              this.handlepartnerPopoverVisibleChange();
-                              handleTagProfileModal(true);
-                            }}
-                            size="0.875em"
-                            style={{
-                              marginLeft: "-0.31em",
-                              verticalAlign: "center",
-                            }}
-                          />
-                        </Tooltip> */}
-
-                        <Tooltip
-                          title={
-                            <FormattedMessage
-                              id="app.summary"
-                              defaultMessage="Summary"
-                            />
-                          }
-                        >
-                          <span
-                            type="area-chart"
-                            // tooltipTitle="Summary"
-                            onClick={() => {
-                              this.handleRecriutmentdashboard();
-                            }}
-                            size="0.875em"
-                          >
-                            <PieChartIcon 
-                            // icon={solid("chart-pie")}
-                             />
-                          </span>
-                        </Tooltip>
-                      </>
-                    </>
-                  )}
-                </>
-              }
-              key="3"
-            >
-              {this.state.recriutmentdashboard ? (
-                <Suspense fallback={"Loading ..."}>
-                  {" "}
-                  <RecruitProJumpstart />
-                  <SummaryTable />
-                </Suspense>
-              ) : this.state.file ? (
-                <Suspense fallback={"Loading ..."}>
-                  {" "}
-                  <RecruitmentFileTable />
-                </Suspense>
-              ) : (
-                <Suspense fallback={"Loading ..."}>
-                  {" "}
-                  <RecruitmentTable />
-                </Suspense>
-              )}
-            </TabPane>
-            <TabPane
+            {/* <TabPane
               tab={
                 <>
                   <MonetizationOnIcon 
@@ -343,7 +254,7 @@ class ContactDetailTab extends Component {
               key="9"
             >
               <CommercialsForm />
-            </TabPane>
+            </TabPane> */}
 
             <TabPane
               tab={
@@ -462,70 +373,46 @@ class ContactDetailTab extends Component {
             <TabPane
               tab={
                 <>
-                  <i class="fas fa-print" style={{fontSize:"1.1rem"}}></i>
+                  <ReceiptIcon style={{fontSize:"1.1rem"}}/>
                   <span class=" ml-1">
-                    <FormattedMessage
-                      id="app.initiatives"
-                      defaultMessage="Initiatives"
-                    />
-                  </span>
-                </>
-              }
-              key="8"
-            >
-              <InitiativeForm />
-            </TabPane>
-
-            <TabPane
-              tab={
-                <>
-                  <span>
-                    <i class="far fa-lightbulb" style={{fontSize:"1.1rem"}}></i>
-                    <span class=" ml-1">
+                    {
                       <FormattedMessage
-                        id="app.project"
-                        defaultMessage="Project"
+                        id="app.activity"
+                        defaultMessage="Activity"
                       />
-                    </span>
+                    }
+                    {/* Documents */}
                   </span>
-                  {/* {activeKey === "10" && (
+                  {activeKey === "8" && (
                     <>
-                      <Tooltip 
+                      <PlusOutlined
+                        type="plus"
                         title={
                           <FormattedMessage
                             id="app.create"
                             defaultMessage="Create"
                           />
                         }
-                      >
-                        
-                          <PlusOutlined
-                            type="plus"
-                           
-                            tooltiptitle={
-                              <FormattedMessage
-                                id="app.Create"
-                                defaultMessage="Create"
-                              />
-                            }
-                            onClick={() => {
-                              handleCustomerProjectDrawer(true);
-                            }}
-                            size="0.875em"
-                          />
-                    
-                      </Tooltip>
+                        onClick={() => handleCallActivityModal(true)}
+                        size="0.875em"
+                        style={{
+                          marginLeft: "0.3125em",
+                          verticalAlign: "center",
+                        }}
+                      />
                     </>
-                  )} */}
+                  )}
+                
                 </>
               }
-              key="10"
+              key="8"
             >
               <Suspense fallback={"Loading ..."}>
                 {" "}
-                <LinkedProject />
+                {/* <LinkedInvoice /> */}
               </Suspense>
             </TabPane>
+           
           </StyledTabs>
         </TabsWrapper>
         <Suspense fallback={null}>
@@ -573,6 +460,11 @@ class ContactDetailTab extends Component {
             addCustomerProjectDrawer={addCustomerProjectDrawer}
             handleCustomerProjectDrawer={handleCustomerProjectDrawer}
           />
+{/*           
+          <AddCustomerActivityModal
+            callActivityModal={callActivityModal}
+            handleInvoiceModal={handleInvoiceModal}
+          /> */}
         </Suspense>
       </>
     );
@@ -592,6 +484,7 @@ const mapStateToProps = ({ auth, customer, contact, opportunity }) => ({
   addFileRecruitModal: customer.addFileRecruitModal,
   addTagProfileModal: customer.addTagProfileModal,
   addInvoiceModal: customer.addInvoiceModal,
+  callActivityModal:customer.callActivityModal,
 });
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
@@ -605,6 +498,7 @@ const mapDispatchToProps = (dispatch) =>
       handlefileRecruitModal,
       handleTagProfileModal,
       handleInvoiceModal,
+      handleCallActivityModal,
       handleCustomerProjectDrawer,
       handleCustomerReactSpeechModal,
       //handleCustomerCommercialsModal,

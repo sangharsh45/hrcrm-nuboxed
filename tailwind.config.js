@@ -21,13 +21,21 @@ module.exports = {
             },
             fontSize:{
 'xxs':'0.62rem',
-'xm':'0.875rem'
+'xm':'0.875rem',
+'ls':'0.8rem'
+            },
+            colors: {
+              "clr": "tomato",
+      
             },
             fontFamily: {
               'poppins': ['Poppins'],
             },
             height:{
   'hp':'382px',
+  "h72":"72vh",
+  "h86":"86vh",
+  "lh1.2":"1.2rem"
             },
             flexGrow: {
               '3': '3'

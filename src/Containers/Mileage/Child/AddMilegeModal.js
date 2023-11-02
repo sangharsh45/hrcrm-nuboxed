@@ -6,6 +6,8 @@ const MileageForm=lazy(()=>import("./MileageForm"));
 
 const AddMileageModal = (props) => {
   const { addMileageModal, handleMileageModal, ...formProps } = props;
+  const isSmallScreen = window.innerWidth <= 600;
+  const drawerWidth = isSmallScreen ? "90%" : "55%";
   return (
     <>
       <StyledDrawer
@@ -13,7 +15,7 @@ const AddMileageModal = (props) => {
           id="app.mileage"
           defaultMessage="Mileage"
         />}
-        width="70%"
+        width={drawerWidth}
         visible={addMileageModal}
         destroyOnClose
         closable

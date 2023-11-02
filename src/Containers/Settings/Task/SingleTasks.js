@@ -9,6 +9,7 @@ import { FormattedMessage } from "react-intl";
 import { TextInput } from "../../../Components/UI/Elements";
 import { ActionIcon } from "../../../Components/Utils";
 import ViewEditCard from "../../../Components/UI/Elements/ViewEditCard";
+import TaskConnetToggle from "./TaskConnetToggle";
 
 class SingleTasks extends Component {
   constructor(props) {
@@ -21,7 +22,7 @@ class SingleTasks extends Component {
   }
   render() {
     const {
-      task: { taskType, taskTypeId },
+      task: { taskType, taskTypeId,taskCheckListInd },
       handleChange,
       name,
       value,
@@ -38,8 +39,23 @@ class SingleTasks extends Component {
           {({ viewType }, toggleViewType) =>
             viewType === "view" ? (
               <FlexContainer justifyContent="space-between">
-                <TaskName style={{ flexBasis: "85%" }}>{taskType}</TaskName>
+                   <div class=" flex w-2/5">
+                <TaskName style={{ flexBasis: "45%" }}>{taskType}</TaskName>
                 <div>
+                  </div>
+                </div>
+                <div class="flex w-60">
+                  <div class="ml-2 w-20">Workflow</div>
+                 
+                  <div class="ml-4 w-20">
+                    <TaskConnetToggle 
+                        taskType={taskType}
+                        taskTypeId={taskTypeId}
+                  taskCheckListInd={taskCheckListInd}
+                    />  
+                    </div>
+                    </div>
+                    <div>
                   {this.props.task.editInd ? (
                     <BorderColorIcon
                    

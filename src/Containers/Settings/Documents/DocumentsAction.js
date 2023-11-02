@@ -48,7 +48,10 @@ export const addDocuments = (documents, cb) => (dispatch) => {
         },
       })
       .then((res) => {
+        {res.data.message?  
+          message.success(res.data.message):
         message.success("Document has been added successfully!");
+        }
         dispatch(getDocuments());
         console.log(res);
         dispatch({
@@ -246,6 +249,36 @@ export const removeDocuments = (documentTypeId) => (dispatch) => {
         console.log(err);
         dispatch({
           type: types.LINK_WORKFLOW_DOCUMENT_TOGGLE_FAILURE,
+          payload: err,
+        });
+      })
+  };
+
+  export const linkTypeToggle = ( data,cb) => (dispatch, getState) => {
+    //console.log(permissions, userId);
+    const orgId = getState().auth.userDetails.organizationId;
+    dispatch({
+      type: types.LINK_TYPE_TOGGLE_REQUEST,
+    });
+    axios
+    .put(`${base_url}/document/update/user-type`, data, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+  
+      .then((res) => {
+        console.log(res);
+        // dispatch(getThirdPartyAccess(orgId))
+        dispatch({
+          type: types.LINK_TYPE_TOGGLE_SUCCESS,
+          payload: res.data,
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+        dispatch({
+          type: types.LINK_TYPE_TOGGLE_FAILURE,
           payload: err,
         });
       })

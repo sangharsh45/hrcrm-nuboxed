@@ -25,8 +25,8 @@ export default function SingleNote(props) {
       <div dangerouslySetInnerHTML={{ __html: comment }} />
       <SubTitle
         fontSize="0.875em"
-        fontFamily="Karla"
-        style={{ color: "#a7b2bc", marginTop: "-0.75em" }}
+        fontFamily="poppins"
+        style={{ color: "rgb(53, 57, 61)", marginTop: "-0.75em" }}
       >
         <Spacer />
         {`${moment.utc(creationDate).fromNow()}`}

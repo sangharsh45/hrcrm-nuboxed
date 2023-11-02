@@ -4,7 +4,7 @@ import { bindActionCreators } from "redux";
 import { addHoliday, getHoliday, updateHoliday,deleteHoliday } from "../../../../Holiday/HolidayAction";
 import { StyledTabs } from "../../../../../Components/UI/Antd";
 import { MainWrapper, FlexContainer } from "../../../../../Components/UI/Layout";
-import { TextInput } from "../../../../../Components/UI/Elements";
+import { Spacer, TextInput } from "../../../../../Components/UI/Elements";
 import dayjs from "dayjs";
 import moment from "moment";
 import SettingsSingleHoliday from "./SettingsSingleHoliday";
@@ -142,7 +142,7 @@ handleYearChange = (date) => {
       <>
         <FlexContainer>
           <div style={{ width: "80%" }}>
-            <MainWrapper>
+            <MainWrapper justifyContent="space-between">
               <h1
                 style={{
                   display: "flex",
@@ -167,7 +167,12 @@ handleYearChange = (date) => {
                  onChange={this.onChange}
                   picker="year" />
                  </div>
-                 {/* <div>Optional Allowed</div> */}
+                 {/* <Spacer/>
+                 <div>Optional Allowed
+                  <input
+                  type="number"
+                  ></input>
+                 </div> */}
               {/* <div
                 style={{
                   marginLeft:"326px"
@@ -288,10 +293,12 @@ handleYearChange = (date) => {
                       </div>
                     )}
                   </FlexContainer>
+
                 )} 
             </MainWrapper>
           </div>
         </FlexContainer>
+        <h4>Updated on {moment(this.props.holidays && this.props.holidays.length && this.props.holidays[0].updationDate).format("ll")} by {this.props.holidays && this.props.holidays.length && this.props.holidays[0].updatedBy}</h4>
       </>
     );
   }

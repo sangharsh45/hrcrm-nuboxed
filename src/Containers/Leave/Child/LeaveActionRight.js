@@ -33,7 +33,7 @@ class LeaveActionRight extends React.Component {
       <FlexContainer alignItems="center">
         <Tooltip placement="right" title="Apply">
           <Button type="primary"
-           ghost onClick={() => handleLeavesModal(true)}>
+          onClick={() => handleLeavesModal(true)}>
             Add
           </Button>
         </Tooltip>

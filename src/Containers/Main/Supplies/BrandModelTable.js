@@ -1,0 +1,79 @@
+import React, { useEffect, useState } from 'react'
+import { StyledTable } from '../../../Components/UI/Antd'
+// import { getBrandModel } from "../../Settings/Category/Brand&Model/BrandModelAction"
+import { addMasterList } from "./SuppliesAction"
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+import { Button } from 'antd'
+
+const BrandModelTable = (props) => {
+    useEffect(() => {
+       // props.getBrandModel()
+    }, [])
+    const [selectedRow, setselectedRow] = useState([]);
+
+    const rowSelection = {
+        onChange: (selectedRowKeys, selectedRows) => {
+            setselectedRow(selectedRows);
+        },
+    };
+    console.log(selectedRow)
+    const IdList = selectedRow.map(function (item) {
+        return item['phoneMasterListId'];
+    });
+    const handleSubmit = () => {
+        props.addMasterList({
+            phoneMasterListIds: IdList,
+            suppliesId: props.particularDiscountData.suppliesId
+        })
+    }
+    const columns = [
+        {
+            width: "2%"
+        },
+        {
+            title: "Brand",
+            dataIndex: "brand"
+        },
+        {
+            title: "Model",
+            dataIndex: "model"
+        }
+    ]
+    return (
+        <>
+            <StyledTable
+                rowKey="phoneMasterListId"
+                dataSource={props.brandModel}
+                columns={columns}
+                pagination={false}
+                rowSelection={rowSelection}
+            />
+            <div style={{ display: "flex", justifyContent: "flex-end" }}>
+                <Button
+                    type="primary"
+                    onClick={handleSubmit}
+                >
+                    Submit
+                </Button>
+            </div>
+        </>
+    )
+}
+const mapStateToProps = ({ auth, brandmodel, supplies }) => ({
+    brandModel: brandmodel.brandModel,
+    taggedBrand: supplies.taggedBrand
+});
+
+const mapDispatchToProps = (dispatch) =>
+    bindActionCreators(
+        {
+           // getBrandModel,
+            addMasterList,
+
+        },
+        dispatch
+    );
+
+export default connect(mapStateToProps, mapDispatchToProps)(BrandModelTable);
+

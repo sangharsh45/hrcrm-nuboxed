@@ -17,9 +17,15 @@ const initialState = {
 
     setEditingLeave:{},
     updateLeaveModal:false,
+
+    updateStatusLeaveModal:false,
   
     updatingLeave: false,
     updatingLeaveError: false,
+
+    fetchingLeaveStatus: false,
+    fetchingLeaveStatusError: true,
+    leaveStatus:[],
 };
 
 export const LeavesReducer = (state = initialState, action) => {
@@ -82,6 +88,9 @@ export const LeavesReducer = (state = initialState, action) => {
         
                 case types.HANDLE_UPDATE_LEAVE_MODAL:
                   return { ...state, updateLeaveModal: action.payload };
+
+                  case types.HANDLE_STATUS_LEAVE_MODAL:
+                    return { ...state, updateStatusLeaveModal: action.payload };
         
                   case types.UPDATE_LEAVE_REQUEST:
                     return { ...state, updatingLeave: true };
@@ -120,6 +129,26 @@ export const LeavesReducer = (state = initialState, action) => {
 
                         case types.SET_LEAVES_VIEW_TYPE:
                           return { ...state, viewType: action.payload };
+
+
+                          case types.GET_LEAVE_STATUS_BY_LEAVEID_REQUEST:
+                            return { ...state, fetchingLeaveStatus: true };
+                        case types.GET_LEAVE_STATUS_BY_LEAVEID_SUCCESS:
+                            return {
+                                ...state,
+                                fetchingLeaveStatus: false,
+                                leaveStatus: action.payload,
+                            };
+                        case types.GET_LEAVE_STATUS_BY_LEAVEID_FAILURE:
+                            return {
+                                ...state,
+                                fetchingLeaveStatus: false,
+                                fetchingLeaveStatusError: true,
+                            };
+
+
     }
+
+    
     return state;
 };

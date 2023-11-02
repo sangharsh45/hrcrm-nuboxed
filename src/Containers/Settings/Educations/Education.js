@@ -6,6 +6,7 @@ import { Button, Divider, message,Input } from "antd";
 import { MainWrapper, FlexContainer } from "../../../Components/UI/Layout";
 import { TextInput, Title } from "../../../Components/UI/Elements";
 import SingleEducations from "./SingleEducation";
+import { BundleLoader } from "../../../Components/Placeholder";
 // import * as Yup from "yup";
 import {
   getEducations,
@@ -122,7 +123,7 @@ class Education extends Component {
       singleEducation,
       linkedEducations,
     } = this.state;
-    if (fetchingEducations) return <p>Loading ...</p>;
+    if (fetchingEducations) return <BundleLoader/>;
     if (fetchingEducationsError) return <p>We are unable to load data</p>;
     return (
       <>
@@ -197,7 +198,7 @@ class Education extends Component {
                 <br />
                 <br />
                 <TextInput
-                  placeholder="Add More"
+                  placeholder="Add Education"
                   name="educationType"
                   value={educationType}
                   onChange={this.handleChange}

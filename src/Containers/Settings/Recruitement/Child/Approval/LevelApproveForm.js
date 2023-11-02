@@ -1,122 +1,159 @@
 import React, { useEffect, useState } from "react";
 import { Button, Select } from "antd";
-// import "antd/dist/antd.css";
 import { CloseOutlined } from "@ant-design/icons";
 import { getDepartments } from "../../../Department/DepartmentAction";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-// import { FlexContainer } from "../../../../../Components/UI/Elements";
 import { 
     addApprove, 
     getApproveData
  } from "../../../SettingsAction";
+import { BundleLoader } from "../../../../../Components/Placeholder";
 const { Option } = Select;
+const departmentData=[
+
+  {
+    departmentName:'Reporting Manager',
+  },
+  {
+    departmentName:'Reporting Manager +1',
+  },
+  {
+    departmentName:'Management',
+
+  },
+
+];
 function LevelApproveForm(props) {
+
     useEffect(() => {
         props.getDepartments();
     }, [])
-    const [rows, setRows] = useState([{ value: "", id: 1 }]);
-    const [id, setId] = useState(1);
-    const [level, setLevel] = useState(1);
+    const selectedDepartment = props.departments;
+  const [rows, setRows] = useState(props.approvalData.level || []);
+   const [isLoading, setIsLoading] = useState(true)
+      
+      
+   useEffect(() => {
+    // Once approvalData.level is available, set rows and update isLoading
+    if (props.approvalData.level) {
+      setRows(props.approvalData.level);
+      setIsLoading(false);
+    }
+  }, [props.approvalData.level]);
 
-
+    // function buttonOnClick() {
+    //     var mapped = rows.map((item, i) => ({ [`level${i + 1}`]: item.value }));
+    //     var data = Object.assign(
+    //         {},
+    //         ...mapped,
+    //         { levelCount: level },
+    //         { approvalIndicator: props.approvalIndicator },
+    //         { approvalType: props.approvalType },
+    //         // { ammendmentInd: props.ammendmentInd },
+    //         // { processName: "BOQ" },
+    //         { subProcessName: "Leave" },
+    //     );
+    //     console.log(data);
+    //      props.addApprove(data);
+    // };
     function buttonOnClick() {
-        var mapped = rows.map((item, i) => ({ [`level${i + 1}`]: item.value }));
-        var data = Object.assign(
-            {},
-            ...mapped,
-            { levelCount: level },
-            { approvalIndicator: props.approvalIndicator },
-            { approvalType: props.approvalType },
-            // { ammendmentInd: props.ammendmentInd },
-            // { processName: "BOQ" },
-            { subProcessName: "Leave" },
-        );
+        const data = {
+          levelCount: rows.length,
+          level: rows.map((row, i) => ({ level: row.level,})),
+          // thresholds: rows.map((row, i) => ({ [`threshold${i + 1}`]: row.threshold })),
+          approvalIndicator: props.approvalIndicator,
+          approvalType: props.approvalType,
+          subProcessName: "Leave",
+        };
+      
         console.log(data);
-         props.addApprove(data);
-    };
-    //     approvalIndicator: true
-    // approvalType: "Exception"
-    // designationId: "DDG49470159634152021"
-    // functionId: "FDG18460358639152021"
-    // jobLevel: "3"
-    // processName: "BOQ"
-    // reportingTo: ""
-    // subProcessName: "BOQApprove"
-    // threshold: ""
-    function handleChangeValue(value, a) {
-        setRows((v) => {
-            return v.map((d) => {
-                if (`${d.id}_value` === a) {
-                    return { ...d, value: value };
-                } else {
-                    return d;
-                }
-            });
-        });
-    }
+        props.addApprove(data);
+      }
+      function handleChangeValue(value, index) {
+        setRows((prevRows) =>
+          prevRows.map((row, i) => {
+            if (i === index) {
+              return { ...row, level: value };
+            }
+            return row;
+          })
+        );
+      }
+    // function handleChangeValue(value, a) {
+    //     setRows((v) => {
+    //         return v.map((d) => {
+    //             if (`${d.id}_value` === a) {
+    //                 return { ...d, value: value };
+    //             } else {
+    //                 return d;
+    //             }
+    //         });
+    //     });
+    // }
     function handleAddRowClick() {
-        setId((v) => v + 1);
-        setLevel((v) => v + 1);
-        setRows((v) => [...v, { value: "", id: id + 1 }]);
+        const newRow = { level: "", };
+        setRows((prevRows) => [...prevRows, newRow]);
+      }
 
-    }
-
-    function handleDelete(row) {
-        setRows((v) => v.filter((d) => d.id !== row.id));
-        setLevel((v) => v - 1);
-    }
+      function handleDelete(index) {
+        setRows((prevRows) =>
+          prevRows.filter((_, i) => i !== index)
+        );
+      }
+      if (isLoading) {
+        return <BundleLoader />;
+      }
     console.log(rows);
     return (
         <div>
             <div className="MainBox">
                 <div className="InputBox">
-                    {rows.map((row, i) => {
-                        return (
-                            <div style={{ width: "100%", display: "flex", fontWeight: "bold" }}>
-                                <div style={{ width: "16%" }}>
-                                    <p>{`Level ${i + 1}`}</p>
-                                </div>
-                                <div style={{ width: "47%" }}>
-                                    <Select
-                                        name={`${row.id}_value`}
-                                        value={`${row.value}`}
-                                        onChange={(value) =>
-                                            handleChangeValue(value, `${row.id}_value`)
-                                        }
-                                    // placeholder={`select`}
-                                    >
-                                        {props.departments.map((a) => {
-                                            return <Option value={a.departmentId}>{a.departmentName}</Option>;
-                                        })}
-                                    </Select>
-                                </div>
-                                {rows.length > 1 && (row.id + 1 > row.id) ? (
-                                    <CloseOutlined onClick={() => handleDelete(row)} />
-                                ) : null}
-                            </div>
-                        );
-                    })}
-                    <div class=" justify-end" >
+                {rows.map((row, index) => (
+            <div key={index}>
+              <div className="w-full flex font-bold mt-4">
+                <div className="w-20">
+                  <p>{`Level ${index + 1}`}</p>
+                </div>
+                <div style={{ width: "47%" }}>
+                  <Select
+                    name={`level_${index}`}
+                    value={row.level}
+                    onChange={(value) => handleChangeValue(value, index)}
+                  >
+                    
+                                      <option value="ReportingManager">Reporting Manager</option>
+                    <option value="ReportingManager+1">Reporting Manager +1</option>
+                    <option value="Management">Management</option>
+                  </Select>
+                </div>
+                
+               
+                {rows.length > 1 ? (
+                  <CloseOutlined onClick={() => handleDelete(index)} />
+                ) : null}
+              </div>
+            </div>
+          ))}
+          <div class=" flex justify-end">
+                  
                         <div className="button">
                             <Button type="primary" onClick={handleAddRowClick}>
                                 Add Level
                             </Button>
-                        </div>
+                        
                     </div>
-                    <div class=" justify-end" 
-                        style={{ marginLeft: "104%", marginTop: "52px" }}>
+                  
+                    <div className="button">
                         <Button
                             type="primary"
-                            style={{
-                                marginRight: "-230px",
-                                marginTop: "52px",
-                                marginBottom: "5px",
-                            }}
+                         
                             onClick={() => buttonOnClick()}
                         >
                             Submit
                         </Button>
+                        </div>
+                 
                     </div>
                 </div>
             </div>
@@ -138,3 +175,17 @@ const mapDispatchToProps = (dispatch) =>
     }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(LevelApproveForm);
+
+
+{/* <Select
+name={`${row.id}_value`}
+value={`${row.value}`}
+onChange={(value) =>
+    handleChangeValue(value, `${row.id}_value`)
+}
+// placeholder={`select`}
+>
+{props.functionById.map((a) => {
+    return <Option value={a.functionId}>{a.functionName}</Option>;
+})}
+</Select> */}

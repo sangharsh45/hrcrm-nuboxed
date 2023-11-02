@@ -136,6 +136,32 @@ export const deleteHoliday = (holidayId) => (dispatch, getState) => {
     });
 };
 
+export const getPlannerHoliday = (userId,year) => (dispatch) => {
+  dispatch({
+    type: types.GET_PLANNER_HOLIDAY_REQUEST,
+  });
+
+  axios
+    .get(`${base_url}/holidays/planner/${userId}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      dispatch({
+        type: types.GET_PLANNER_HOLIDAY_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.GET_PLANNER_HOLIDAY_FAILURE,
+        payload: err,
+      });
+    });
+};
+
 // export const getHolidaysByCountryAndYear = () => (dispatch) => {
 //   dispatch({
 //     type: types.GET_HOLIDAY_BY_COUNTRY_AND_YEAR_REQUEST,

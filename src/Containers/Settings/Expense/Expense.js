@@ -6,6 +6,7 @@ import { Button, Divider, message,Input } from "antd";
 import { MainWrapper, FlexContainer } from "../../../Components/UI/Layout";
 import { TextInput, Title } from "../../../Components/UI/Elements";
 import SingleExpenses from "./SingleExpenses";
+import { BundleLoader } from "../../../Components/Placeholder";
 // import * as Yup from "yup";
 import {
   getExpenses,
@@ -66,13 +67,13 @@ class Expense extends Component {
     expenses &&
     expenses.some((element) => element.expenseType == expenseType);
 
-    if (exist) {
-      message.error(
-        "Can't create as another expense type exists with same name!"
-      );
-    } else {
+    // if (exist) {
+    //   message.error(
+    //     "Can't create as another expense type exists with same name!"
+    //   );
+    // } else {
       addExpenses(expense, () => console.log("add expense callback"));
-    }
+    // }
 
     this.setState({
       expenseType: "",
@@ -127,7 +128,7 @@ class Expense extends Component {
       singleExpense,
       linkedExpenses,
     } = this.state;
-    if (fetchingExpenses) return <p>Loading ...</p>;
+    if (fetchingExpenses) return <BundleLoader/>;
     if (fetchingExpensesError) return <p>We are unable to load data</p>;
     return (
       <>
@@ -198,7 +199,7 @@ class Expense extends Component {
                 <br />
                 <br />
                 <TextInput
-                  placeholder="Add More"
+                  placeholder="Add Expense"
                   name="expenseType"
                  value={expenseType}
                   onChange={this.handleChange}

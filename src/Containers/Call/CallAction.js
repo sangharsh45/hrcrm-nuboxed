@@ -2,7 +2,7 @@ import * as types from "./CallActionTypes";
 import axios from "axios";
 import { message } from "antd";
 import { base_url } from "../../Config/Auth";
-import { getCallsListByUserId } from "../Auth/AuthAction";
+
 /**
  * handle call modal opening and close
  */
@@ -310,3 +310,41 @@ export const handleCallNotesModal = (modalProps) => (dispatch) => {
     payload: modalProps,
   });
 };
+
+
+export const handleCallNotesDrawerModal = (modalProps) => (dispatch) => {
+  dispatch({
+    type: types.HANDLE_CALL_NOTES_DRAWER_MODAL,
+    payload: modalProps,
+  });
+};
+export const addNote = (note, cb) => (dispatch) => {
+  dispatch({ type: types.ADD_CALL_NOTES_REQUEST });
+  axios
+    .post(`${base_url}/call/notes`, note, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      dispatch({
+        type: types.ADD_CALL_NOTES_SUCCESS,
+        payload: res.note,
+      });
+      console.log(res);
+      cb && cb();
+    })
+    .catch((err) => {
+      dispatch({
+        type: types.ADD_CALL_NOTES_FAILURE,
+        payload: err,
+      });
+      console.log(err);
+      cb && cb();
+    });
+};
+
+
+
+
+

@@ -1,10 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import Button from "antd/lib/button";
-import Icon from "antd/lib/icon";
 import { FlexContainer } from "../../../Components/UI/Layout";
-import { TextInput } from "../../../Components/UI/Elements";
 import PlannerSharedForm from "./PlannerSharedForm";
 import { StyledSelect } from "../../../Components/UI/Antd";
 
@@ -14,7 +11,9 @@ const Option = StyledSelect.Option;
 const PlannerActionRight = (props) => {
   return (
     <FlexContainer alignItems="center">
+        {props.user.dashboardFullListInd === true &&(
        <PlannerSharedForm/>
+       )} 
       &nbsp;
         {/* <Button
           type="primary"
@@ -64,6 +63,7 @@ const PlannerActionRight = (props) => {
 };
 
 const mapStateToProps = ({ auth }) => ({
+  user: auth.userDetails,
   // userType: auth.userDetails && auth.userDetails.userType,
   userType: auth.userDetails,
 

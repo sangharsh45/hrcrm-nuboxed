@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { FormattedMessage } from "react-intl";
 import { bindActionCreators } from "redux";
 import { Button, message,Input } from "antd";
+import { BundleLoader } from "../../../Components/Placeholder";
 import { MainWrapper, FlexContainer } from "../../../Components/UI/Layout";
 import { TextInput, Title } from "../../../Components/UI/Elements";
 import SingleDepartment from "./SingleDepartment";
@@ -70,13 +71,13 @@ class Department extends Component {
       departments &&
       departments.some((element) => element.departmentName == departmentName);
 
-    if (exist) {
-      message.error(
-        "Can't create as another departmentName exists with same name!"
-      );
-    } else {
+    // if (exist) {
+    //   message.error(
+    //     "Can't create as another departmentName exists with same name!"
+    //   );
+    // } else {
       addDepartments(department, () => console.log("add department callback"));
-    }
+    // }
 
     this.setState({
       departmentName: "",
@@ -134,7 +135,7 @@ class Department extends Component {
       linkedDepartments,
       sectorId
     } = this.state;
-    if (fetchingDepartments) return <p>Loading ...</p>;
+    if (fetchingDepartments) return <BundleLoader/>;
     if (fetchingDepartmentsError) return <p>Error ...</p>;
 
     return (
@@ -212,7 +213,7 @@ class Department extends Component {
                 <br />
                 <br />
                   <TextInput
-                    placeholder="Add More"
+                    placeholder="Add Department"
                     name="departmentName"
                     value={departmentName}
                     onChange={this.handleChange}

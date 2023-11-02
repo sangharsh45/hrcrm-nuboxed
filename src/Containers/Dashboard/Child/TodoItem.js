@@ -73,15 +73,9 @@ class TodoItem extends Component {
   };
   render() {
     const { todo, ratingValue } = this.props;
-     console.log("Rank1",ratingValue);
-    console.log("Tweet",todo);
-     console.log("todos",todo.eventTypeId);
-    // let accountList = todo.metaData && todo.metaData.accountMapper;
     let contactName = todo.metaData && todo.metaData.contacts;
     let accountName = todo.metaData && todo.metaData.accounts;
     let opportunity = todo.metaData && todo.metaData.opportunity;
-    // console.log(contactName);
-    // console.log(accountName);
     const add = todo.metaData && todo.metaData.Address;
     
   
@@ -125,9 +119,9 @@ class TodoItem extends Component {
               &nbsp;&nbsp; &nbsp;&nbsp;
             
               <SubTitle style={{ fontSize: 12, marginLeft: "1.56em" }}>
-                 {`${todo.topic} / `}
-                 {`${todo.activity}  `}
-                 {`${todo.type}`}
+                 {/* {` / `} */}
+                 {`${todo.activity} ${todo.topic} ${todo.type} `}
+                 {/* {``} */}
                  </SubTitle>
             </FlexContainer>
           </div>

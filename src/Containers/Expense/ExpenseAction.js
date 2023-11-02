@@ -151,7 +151,7 @@ export const handleUpdateExpenseModal = (modalProps) => (dispatch) => {
 export const updateExpense = (data, expenseId) => (dispatch) => {
   dispatch({ type: types.UPDATE_EXPENSE_REQUEST });
   axios
-    .put(`${base_url}/expense`,{data}, {
+    .put(`${base_url}/expense`,data, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },
@@ -380,4 +380,42 @@ export const getRejectdExpense = (userId,pageNo) => (dispatch) => {
         payload: err,
       });
     });
+};
+
+export const handleStatusExpenseModal = (modalProps) => (dispatch) => {
+  dispatch({
+    type: types.HANDLE_STATUS_EXPENSE_MODAL,
+    payload: modalProps,
+  });
+};
+
+
+export const getExpenseStatusByExpenseId = (voucherId) => (dispatch) => {
+  dispatch({
+      type: types.GET_EXPENSE_STATUS_BY_EXPENSEID_REQUEST,
+  });
+
+  axios
+      .get(`${base_url}/task/expense/status/${voucherId}`, {
+          headers: {
+              Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+          },
+      })
+      .then((res) => {
+          console.log(res);
+          dispatch({
+              type: types.GET_EXPENSE_STATUS_BY_EXPENSEID_SUCCESS,
+              payload: res.data,
+          });
+      })
+      .catch((err) => {
+          console.log(err);
+          dispatch({
+              type: types.GET_EXPENSE_STATUS_BY_EXPENSEID_FAILURE,
+              payload: err,
+          });
+      });
+};
+export const handlePExpenseVoucherIdDrawer = (modalProps) => (dispatch) => {
+  dispatch({ type: types.HANDLE_PEXPENSE_VOUCHERID_DRAWER, payload: modalProps });
 };

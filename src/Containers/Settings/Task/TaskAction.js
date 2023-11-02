@@ -4,12 +4,13 @@ import dayjs from "dayjs";
 import { base_url } from "../../../Config/Auth";
 import { message } from "antd";
 
-export const getTasks = () => (dispatch) => {
+export const getTasks = (userId) => (dispatch) => {
   dispatch({
     type: types.GET_TASK_REQUEST,
   });
   axios
     .get(`${base_url}/taskType`, {
+     
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },
@@ -43,7 +44,10 @@ export const addTasks = (task, cb) => (dispatch) => {
       },
     })
     .then((res) => {
+      {res.data.message?  
+        message.success(res.data.message):
       message.success("Task has been added successfully!");
+      }
       dispatch(getTasks());
       console.log(res);
       dispatch({
@@ -142,4 +146,31 @@ export const removeTask = ( taskTypeId) => (dispatch) => {
         type: types.REMOVE_TASK_FAILURE,
       });
     });
+};
+
+export const linkTaskWorkflowToggle = ( data,cb) => (dispatch) => {
+  dispatch({
+    type: types.LINK_TASK_WORKFLOW_TOGGLE_REQUEST,
+  });
+  axios
+  .put(`${base_url}/taskType/activeTaskCheckList`, data, {
+    headers: {
+      Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+    },
+  })
+
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.LINK_TASK_WORKFLOW_TOGGLE_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.LINK_TASK_WORKFLOW_TOGGLE_FAILURE,
+        payload: err,
+      });
+    })
 };

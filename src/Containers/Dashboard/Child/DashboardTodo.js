@@ -89,10 +89,6 @@ class Todo extends Component {
       ratingValue,
       idValue,
     } = this.props;
-
-    console.log("Rate4", idValue);
-    console.log("Rate", ratingValue);
-
     if (idValue.activity === "Call") {
       console.log("inside call");
       if (idValue.completionInd === true) {
@@ -116,7 +112,6 @@ class Todo extends Component {
     }
     if (idValue.activity === "Event") {
       ////debugger;
-      console.log("inside event", todo);
       if (idValue.completionInd === true) {
         ////debugger;
         updateTodoEvent(
@@ -211,15 +206,15 @@ class Todo extends Component {
    
       }}
       > */}
+      <div style={{ height: "100vh", overflow: "auto" }}>
 
         <TimeInterval
           times={this.props.dateTodoRangeList}
           handleClick={this.props.setSelectedTodoTimeIntervalReport}
         />
 
-
-
-        <FlexContainer>
+        {todos.length ? 
+                <FlexContainer>
           {todos &&
             todos.slice(0, 5).map((todo, i) => {
               return (
@@ -262,7 +257,7 @@ class Todo extends Component {
 
                       >
 
-                        <Rate
+                        {/* <Rate
                           allowHalf
                           style={{ color: "orange" }}
                           tooltips={desc}
@@ -272,7 +267,7 @@ class Todo extends Component {
                           value={`${todo.rating} `}
                           title={text}
 
-                        />
+                        /> */}
                       </Button>
                     </FlexContainer>
                   </Popconfirm>
@@ -286,9 +281,10 @@ class Todo extends Component {
               );
             })}
         </FlexContainer>
+        :"Data Not Available"
+  }
 
-
-
+</div>
         {/* </MainWrapper> */}
       </>
     );
@@ -299,13 +295,9 @@ const mapStateToProps = ({ auth, dashboard, customer, event }) => ({
   user: auth.userDetails,
   fetchingTodos: dashboard.fetchingTodos,
   userId: auth.userDetails.userId,
-  // todosPrevious: dashboard.todosPrevious,
-  // todosUpcoming: dashboard.todosUpcoming,
-  // todos: dashboard.todos,
   ratingValue: event.ratingValue,
   idValue: event.idValue,
   dateTodoRangeList: customer.dateTodoRangeList,
-
   endDate: customer.endDate,
   startDate: customer.startDate,
   todos: dashboard.todos

@@ -116,33 +116,8 @@ class SingleOpportunityStages extends Component {
                 </StageValue>            
                 <div style={{ flexBasis:"no-wrap",justifyContent:"space-between" }}>
                     <>                 
-                   <Tooltip title="Edit">
-                   {probability !== 0 && probability !== 100 && (
-                   <BorderColorIcon
-                   style={{fontSize:"1rem"}}
-                          tooltipTitle="Edit"
-                          onClick={toggleViewType}
-                        />
-                        )}
-                      </Tooltip>
-                    </>
-                     &nbsp; &nbsp;
-                     <>                 
-                     <Popconfirm
-              title="Do you want to delete?"
-              okText="Yes"
-              cancelText="No"
-               onConfirm={() => deleteOpportunityStagesData(opportunityStagesId)}
-            >
-               {/* {user.opportunityDeleteInd ===true && ( */}
-               {probability !== 0 && probability !== 100 && (
-              <DeleteIcon
-              type="delete" style={{ cursor: "pointer", color: "red" }} />
-              )}
-               {/* )} */}
-            </Popconfirm>
-                    </>
-                   <Tooltip title="Approval" >
+                
+                   {/* <Tooltip title="Approval" >
                     <span
                     onClick={(item) => 
                      {
@@ -159,7 +134,7 @@ class SingleOpportunityStages extends Component {
                    )}
                    </span>
                    </Tooltip>
-                   &nbsp; 
+                   &nbsp;  */}
                    <span>
                        
                      {opportunityProcessStages.probability === 0 || opportunityProcessStages.probability === 100 ? null :
@@ -178,9 +153,37 @@ class SingleOpportunityStages extends Component {
                              </Button> 
                              }
                    </span>
-
-                  
-
+                   &nbsp; &nbsp;  &nbsp; &nbsp;
+                 <span>
+                   <Tooltip title="Edit">
+                   {probability !== 0 && probability !== 100 && (
+                   <BorderColorIcon
+                   style={{fontSize:"1rem"}}
+                          tooltipTitle="Edit"
+                          onClick={toggleViewType}
+                        />
+                        )}
+                      </Tooltip>
+                      </span>
+                     &nbsp; &nbsp;
+                     <span>
+                     <>                 
+                     <Popconfirm
+              title="Do you want to delete?"
+              okText="Yes"
+              cancelText="No"
+               onConfirm={() => deleteOpportunityStagesData(opportunityStagesId)}
+            >
+               {/* {user.opportunityDeleteInd ===true && ( */}
+               {probability !== 0 && probability !== 100 && (
+              <DeleteIcon
+              type="delete" style={{ cursor: "pointer", color: "red" }} />
+              )}
+               {/* )} */}
+            </Popconfirm>
+                    </>
+                    </span>  
+</>
                   </div>
                      
                    

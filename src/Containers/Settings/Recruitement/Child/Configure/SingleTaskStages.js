@@ -15,6 +15,7 @@ import { deleteTaskStagesData } from "../../../../Settings/SettingsAction";
 import { bindActionCreators } from "redux";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { StyledPopconfirm } from "../../../../../Components/UI/Antd";
+import moment from "moment";
 const { Option } = Select;
 
 class SingleTaskStages extends Component {
@@ -50,13 +51,17 @@ class SingleTaskStages extends Component {
     const {
       recruitTaskStages:
        { taskChecklistStageName,
-         taskChecklistStagelinkId 
+         taskChecklistStagelinkId,
+         probability,
+         days,
+         startDate,
+         endDate
         },
       linkedStages,
       organization,
       newStageName,
-      newProbability,
       newDays,
+      newProbability,
       deleteTaskStagesData,
       stageValue1,
       handleChange,
@@ -89,9 +94,23 @@ class SingleTaskStages extends Component {
                     "rgb(161, 185, 185)",
                 }}
               >
-                <StageName style={{ flexBasis: "25%", textAlign: "left" }}>
+                <StageName style={{ flexBasis: "25%", }}>
                   {elipsize(taskChecklistStageName, 23)}
                 </StageName>
+                <StageName style={{ flexBasis: "20%", }}>
+  {probability > 0 && probability < 100 ? `${probability}%` : 'Invalid Probability'}
+</StageName>
+           
+                <StageName  >
+                  {days}D
+                </StageName>
+                {/* <StageName>
+                  {`${ moment(startDate).format("DD/MM/YYYY")}`}
+                </StageName>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <StageName>
+                {`${ moment(endDate).format("DD/MM/YYYY")}`}
+                </StageName> */}
                 <div class=" flex justify-between ml-margin65 w-4">
                   <>
                     <Tooltip title="Edit">
@@ -130,6 +149,22 @@ class SingleTaskStages extends Component {
                   // disabled={disabled}
                   width={"25%"}
                 />
+                    <TextInput
+                  name={newProbability}
+                  // value={stageValue1 || taskChecklistStageName}
+                  defaultValue={probability}
+                  onChange={this.handleChange}
+                  // disabled={disabled}
+                  width={"25%"}
+                />
+                    <TextInput
+                  name={newDays}
+                  // value={stageValue1 || taskChecklistStageName}
+                  defaultValue={days}
+                  onChange={this.handleChange}
+                  // disabled={disabled}
+                  width={"25%"}
+                />
 
                 <Button
                   type="primary"
@@ -141,6 +176,8 @@ class SingleTaskStages extends Component {
                       // this.props.taskChecklistStagelinkId,
                       this.props.taskChecklistStagelinkId,
                       this.state.fields.taskChecklistStageName,
+                      this.state.fields.probability,
+                      this.state.fields.days,
                       toggleViewType()
                     )
                   }

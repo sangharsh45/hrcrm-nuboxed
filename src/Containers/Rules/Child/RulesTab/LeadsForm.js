@@ -42,11 +42,12 @@ function LeadsForm(props) {
         enableReinitialize
         initialValues={{
           // employeeId: props.userId,
-
+country:props.countryId,
           maximumLeaves: props.leaveData.maximumLeaves || "",
           carryForward: props.leaveData.carryForward || "",
+          mileageRate:props.leaveData.mileageRate || "",
 
-          maximumCarryForward: props.leaveData.maximumCarryForward || "",
+          leavesCappedTimesAnnualy: props.leaveData.leavesCappedTimesAnnualy || "",
           // organizationId: props.organizationId,
         }}
         // onSubmit={(values) => {
@@ -70,10 +71,10 @@ function LeadsForm(props) {
                   isRequired
                   name="maximumLeaves"
                   // label="Max leaves (in days)"
-                  label={<FormattedMessage
+                  label={<div class="w-60"><FormattedMessage
                     id="app.maximumLeaves"
                     defaultMessage="Max leaves (in days)"
-                  />}
+                  /></div>}
                   width={"10%"}
                   component={InputComponent}
                   inlineLabel
@@ -88,10 +89,10 @@ function LeadsForm(props) {
                   isRequired
                   name="carryForward"
                   //label="Carry Forward(%)"
-                  label={<FormattedMessage
+                  label={<div class="w-60"><FormattedMessage
                     id="app.carryForward"
                     defaultMessage="Carry Forward(%)"
-                  />}
+                  /></div>}
                   inlineLabel
                   width={"10%"}
                   component={InputComponent}
@@ -105,12 +106,12 @@ function LeadsForm(props) {
                 <Spacer />
                 <Field
                   isRequired
-                  name="maximumCarryForward"
+                  name="leavesCappedTimesAnnualy"
                   //label="Max Carry Forward(%)"
-                  label={<FormattedMessage
-                    id="app.maximumCarryForward"
+                  label={<div class="w-60"><FormattedMessage
+                    id="app.leavesCappedTimesAnnualy"
                     defaultMessage="Leaves Capped at times Annual Leave"
-                  />}
+                  /></div>}
                   inlineLabel
                   width={"10%"}
                   component={InputComponent}
@@ -122,6 +123,23 @@ function LeadsForm(props) {
                 // }}
                 />
                 <Spacer />
+                <Field
+                  isRequired
+                  name="mileageRate"
+                  // label="Max leaves (in days)"
+                  label={<div class="w-60"><FormattedMessage
+                    id="app.mileageRate"
+                    defaultMessage="Mileage Rate (ur/km)"
+                  /></div>}
+                  width={"10%"}
+                  component={InputComponent}
+                  inlineLabel
+                // style={{
+                //   flexBasis: "80%",
+                //   marginTop: "0.25em",
+                //   height: "2.0625em",
+                // }}
+                />
 
                 {/* <FlexContainer justifyContent="space-between">
                   <div style={{ width: "50%", marginTop: "0.625em" }}>

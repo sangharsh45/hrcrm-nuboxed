@@ -99,7 +99,7 @@ class ChangePassword extends Component {
                 {({ errors, touched, values, isSubmitting }) => (
                   <Form style={{ width: "25vw" }}>
                     <div className="set_password">
-                      <div style={{ width: "89%" }}>
+                      <div style={{ width: "100%" }}>
                         <Field
                           name="password"
                           type={this.state.type}
@@ -112,7 +112,7 @@ class ChangePassword extends Component {
                         <EyeOutlined
                           type="eye"
                           onClick={this.handleClick}
-                          style={{ marginLeft: "-1.25em", marginTop: "1.25em" }}
+                          style={{ marginLeft: "-1.25em",  }}
                           size="24"
                         />
                       ) : (
@@ -120,7 +120,7 @@ class ChangePassword extends Component {
                           type="eye-invisible"
                           onClick={this.handleClick}
                           size="24"
-                          style={{ marginLeft: "-1.25em", marginTop: "1.25em" }}
+                          style={{ marginLeft: "-1.25em",  }}
                         />
                       )}
                     </div>
@@ -128,7 +128,7 @@ class ChangePassword extends Component {
 
                     <div className="set_password">
                       <FlexContainer justifyContent="space-between">
-                        <div style={{ width: "80%" }}>
+                        <div style={{ width: "100%" }}>
                           <Field
                             name="confirmPassword"
                             type={this.state.type1}
@@ -159,7 +159,7 @@ class ChangePassword extends Component {
                           // style={{ size: 24 }}
                           />
                         )}
-                        <div >
+                        {/* <div >
                           <Button
                             type="primary"
                             onClick={() => {
@@ -173,7 +173,7 @@ class ChangePassword extends Component {
                           >
                             <ArrowRightOutlined />
                           </Button>
-                        </div>
+                        </div> */}
                       </FlexContainer>
                       {values.password.length &&
                         values.password === values.confirmPassword ? (
@@ -210,18 +210,17 @@ class ChangePassword extends Component {
 
                     
 
-                    <div>
-                    <Spacer />
-                      <FlexContainer justifyContent="space-between">
+                 
+                   
+                      {/* <FlexContainer justifyContent="space-between">
                         <div>
-                          {/* <div style={{ display: "flex", justifyContent: "space-between" }}>
-                      <div style={{ width: "30%", padding: "2px", marginTop: "8px" }}> */}
+                         
                           <Field
                             name="otp"
                             placeholder="Enter OTP"
-                            // value={values.password}
+                            
                             component={InputComponent}
-                          // style={{ border: "1px solid lightgrey", height: "30px", boxShadow: "rgb(220 216 216) 2px 2px 2px" }}
+                         
 
                           />
                         </div>
@@ -239,15 +238,15 @@ class ChangePassword extends Component {
                             Validate
                           </Button>
                         </div>
-                      </FlexContainer>
-                    </div>
+                      </FlexContainer> */}
+                   
 
-
+                   <div class="mt-2">
                     <Button
                       type="primary"
                       htmlType="submit"
                       Loading={this.props.changingPassword}
-                      style={{ width: "90%", height: "2.5em" }}
+                      style={{ width: "100%", height: "2.5em" }}
                     // onClick={() => this.props.login('prabeen.strange@gmail.com', 'chicharito14')}
                     >
                       {/* Save Password */}
@@ -256,6 +255,7 @@ class ChangePassword extends Component {
                         defaultMessage="Save Password"
                       />
                     </Button>
+                    </div>
                   </Form>
                 )}
               </Formik>

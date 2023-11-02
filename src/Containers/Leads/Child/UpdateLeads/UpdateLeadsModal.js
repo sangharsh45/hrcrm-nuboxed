@@ -9,12 +9,13 @@ import { setEditLeads } from "../../LeadsAction";
 const UpdateLeadsModal = (props) => {
   const { updateCustomerModal, handleUpdateCustomerModal, ...formProps } = props;
   console.log("dn",props.setEditingLeads.name)
-
+  const isSmallScreen = window.innerWidth <= 600;
+  const drawerWidth = isSmallScreen ? "90%" : "55%";
   return (
     <>
       <StyledDrawer
         title={props.item.name}
-        width="60%"
+        width={drawerWidth}
         visible={props.updateLeadsModal}
         maskClosable={false}
         destroyOnClose

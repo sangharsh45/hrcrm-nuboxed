@@ -1,12 +1,13 @@
 import React, { Component, useEffect, useState, useMemo, lazy } from "react";
 import { MultiAvatar2, StyledLabel, } from '../../../../Components/UI/Elements'
 import { FlexContainer } from '../../../../Components/UI/Layout'
-import {  Tooltip,Button } from 'antd'
+import {  Tooltip,Button, Badge } from 'antd'
 import { connect } from 'react-redux'
 import MonitorHeartIcon from "@mui/icons-material/MonitorHeart";
 import { bindActionCreators } from 'redux'
 import CellTowerIcon from '@mui/icons-material/CellTower';
 import { Select } from "antd";
+import InsertDriveFileIcon from '@mui/icons-material/InsertDriveFile';
 import DraftsIcon from '@mui/icons-material/Drafts';
 import CircleIcon from '@mui/icons-material/Circle';
 import VolumeUpIcon from '@mui/icons-material/VolumeUp';
@@ -17,18 +18,20 @@ import {
     handleEmployeeDrawerForAdmin,
     handleEmployeePulseDrawerModal,
     getEmployeeTreeMap,
+    handleEmployeeDocumentDrawerModal,
     getEmployeeDocument
   } from "../../EmployeeAction";
 import EmployeeDetailsView from "../EmployeeGroup/EmployeeDetails/EmployeeDetailsView";
 import EmployeeDrawerForAdmin from "../EmployeeTable/EmployeeDrawer/EmployeeDrawerForAdmin";
 import EmployeePulseDrawerModal from "../EmployeeTable/EmployeePulseDrawerModal";
+import EmployeeDocumentDrawerModal from "./EmployeeDocumentDrawerModal";
 
 const { Option } = Select;
 function EmployeeCardView (props) {
   const [page, setPage] = useState(0);
 
 useEffect(() => {
-  props.getEmployeelist();
+  props.getEmployeelist("cretiondate");
  
 }, []);
 function handleChange(data) {
@@ -49,7 +52,7 @@ function handleSetCurrentEmployeeId(employeeId,) {
   setCurrentEmployeeId(employeeId,);
  
 }
-  if (props.fetchingCandidates) {
+  if (props.fetchingEmployee) {
     return <BundleLoader/>
   
     
@@ -59,6 +62,7 @@ function handleSetCurrentEmployeeId(employeeId,) {
     fetchingEmployee,
     type,
     user,
+    filteredData,
     fetchingEmployeeError,
     employees,
     handleEmployeeDrawerForAdmin,
@@ -69,10 +73,11 @@ function handleSetCurrentEmployeeId(employeeId,) {
       
             <>
             
-
+            <div class=" h-h86 overflow-auto overflow-x-auto">
              
               <CardWrapper>      
-              {props.employees.map((item) => {
+              {props.filteredData.map((item) => {
+                console.log("noOfDocPending",item.noOfDocPending)
       
                  return (
                     <CardElement>
@@ -82,7 +87,7 @@ function handleSetCurrentEmployeeId(employeeId,) {
                    >
                  
                    </Tooltip>
-                                  
+                           <div class="flex flex-row max-sm:justify-start items-center" >     
                    <div >
                           <MultiAvatar2
 
@@ -94,7 +99,7 @@ function handleSetCurrentEmployeeId(employeeId,) {
                           />
                          </div>
                       {/* <CardDescription> */}
-                      <div>
+                      <div class="font-semibold ">
                         <Header>
                         <EmployeeDetailsView
    employeeId={item.employeeId}
@@ -102,7 +107,7 @@ function handleSetCurrentEmployeeId(employeeId,) {
           />       
                         </Header> 
                         </div>
-                
+                        </div> 
         
                          
                         </CardImage>
@@ -110,8 +115,8 @@ function handleSetCurrentEmployeeId(employeeId,) {
                         <div class=" flex flex-row justify-evenly  w-full items-end">
                        
                         {/* <div class=" text-sm text-cardBody font-medium font-poppins">Department   </div> */}
-                      <div class=" font-normal text-xs text-cardBody font-poppins">{item.department}</div>
-                      <div class=" font-normal text-xs text-cardBody font-poppins">{item.roleType}</div>
+                      <div class=" font-normal text-xs text-cardBody font-poppins">{item.department === null ? "Not Available" :item.department}</div>
+                      <div class=" font-normal text-xs text-cardBody font-poppins">{item.roleType  === null ? "Not Available" :item.roleType}</div>
           
                    
                       
@@ -122,8 +127,9 @@ function handleSetCurrentEmployeeId(employeeId,) {
           
                       </div> 
                    
-                       <div class=" font-normal text-xs text-cardBody font-poppins"><VolumeUpIcon style={{fontSize:"0.75rem"}}/> {`${item.countryDialCode} ${item.mobileNo}`}</div>
+                       <div class=" font-normal text-xs text-cardBody font-poppins mt-2 "><VolumeUpIcon style={{fontSize:"0.75rem"}}/> {`${item.countryDialCode} ${item.mobileNo}`}</div>
           <div class=" font-normal text-xs text-cardBody font-poppins "><DraftsIcon style={{fontSize:"0.75rem"}} /> {item.emailId}</div>
+          <div class=" flex flex-row justify-evenly  w-full items-end">
           <div class=" font-normal text-xs text-cardBody font-poppins ">
           <span
               style={{ cursor: "pointer" }}
@@ -138,6 +144,40 @@ function handleSetCurrentEmployeeId(employeeId,) {
               <MonitorHeartIcon  style={{ fontSize: "0.8rem", color: "#df9697" }}/>
      </span>
            </div>
+           <div class=" font-normal text-xs text-cardBody font-poppins ">
+          <span
+              style={{ cursor: "pointer" }}
+              onClick={() => {
+               
+                props.handleEmployeeDocumentDrawerModal(true);
+                handleSetCurrentEmployeeId(item)
+              }}
+            >
+                   <Badge
+                   style={{  fontSize:"0.75em",height:"18px" ,width:"5px"}}
+                count={item.noOfDocPending}
+                overflowCount={999}
+              > 
+              <InsertDriveFileIcon  style={{ fontSize: "1rem", }}/>
+              </Badge>
+     </span>
+           </div>
+           <div class=" font-normal text-xs text-cardBody font-poppins ">
+           <Tooltip 
+                   title={`${item.workplace} , ${item.location}`}
+                   >
+          <span
+              style={{ cursor: "pointer" }}
+            
+            >
+              
+              <InsertDriveFileIcon  style={{ fontSize: "1rem", }}/>
+         
+     </span>
+     </Tooltip>
+           </div>
+           </div>
+         
                      
                       {/* <div class=" flex flex-row justify-around w-full items-end">
               
@@ -192,6 +232,7 @@ function handleSetCurrentEmployeeId(employeeId,) {
                  )  
             })}
               </CardWrapper>
+              </div>
               <EmployeeDrawerForAdmin
       employeeId={currentEmployeeId}
         handleEmployeeDrawerForAdmin={handleEmployeeDrawerForAdmin}
@@ -206,6 +247,12 @@ function handleSetCurrentEmployeeId(employeeId,) {
         addDrawerEmployeePulseModal={props.addDrawerEmployeePulseModal}
         handleEmployeePulseDrawerModal={props.handleEmployeePulseDrawerModal}
         // candidateByUserId={this.props.candidateByUserId}
+      />
+               <EmployeeDocumentDrawerModal
+         singleEmployee={props.singleEmployee}
+        employeeName={currentEmployeeId}
+        addDrawerEmployeeDocumentModal={props.addDrawerEmployeeDocumentModal}
+        handleEmployeeDocumentDrawerModal={props.handleEmployeeDocumentDrawerModal}
       />
             </>
       
@@ -226,6 +273,7 @@ const mapStateToProps = ({ auth,role, employee,designations,departments }) => ({
     employeeTreeMap:employee.employeeTreeMap,
     documentsByEmployeeId: employee.documentsByEmployeeId,
     addDrawerEmployeePulseModal:employee.addDrawerEmployeePulseModal,
+    addDrawerEmployeeDocumentModal:employee.addDrawerEmployeeDocumentModal,
     fetchingEmployeeError: employee.fetchingEmployeeError,
     employeeDrawerVisibleForAdmin: employee.employeeDrawerVisibleForAdmin,
 })
@@ -236,6 +284,7 @@ const mapDispatchToProps = (dispatch) =>
         getEmployeelist,
         handleEmployeeDrawerForAdmin,
         handleEmployeePulseDrawerModal,
+        handleEmployeeDocumentDrawerModal,
         getEmployeeTreeMap,
         getEmployeeDocument
     },
@@ -263,19 +312,19 @@ const CardWrapper = styled.div`
 `
 const CardElement = styled.div`
  
-border-radius: 0.75rem;
+border-radius: 0.35rem;
     border: 3px solid #EEEEEE;
     background-color: rgb(255,255,255);
     box-shadow: 0 0.25em 0.62em #aaa;
-    height: 7.5rem;
+    height: 7rem;
     color: rgb(68,68,68);
-    margin: 1em;
+    margin: 1rem;
     padding: 0.2rem;
-    width: 15vw;
+    width: 19vw;
     display: flex;
     flex-direction: column;
   @media only screen and (max-width: 600px) {
-    width: 100%;
+    width: 22rem;
     
   }
 `
@@ -296,7 +345,6 @@ const CardImage = styled.div`
   @media only screen and (max-width: 600px) {
     width: 100%;
     display:flex;
-    align-items: center;
     flex-direction:column
   }
 `

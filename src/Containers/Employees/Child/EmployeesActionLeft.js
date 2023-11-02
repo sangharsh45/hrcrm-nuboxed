@@ -2,21 +2,31 @@ import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import TocIcon from '@mui/icons-material/Toc';
+import { StyledSelect } from "../../../Components/UI/Antd";
 import { withRouter } from "react-router-dom";
 import { inputEmployeeDataSearch, getRecords } from "../EmployeeAction";
 import { Button, Input, Tooltip, Badge } from "antd";
 import { FormattedMessage } from "react-intl";
-import TableViewIcon from "@mui/icons-material/TableView";
+import { getlocation } from "../../Event/Child/Location/LocationAction";
 import GroupsIcon from "@mui/icons-material/Groups";
 import GridViewIcon from '@mui/icons-material/GridView';
 const { Search } = Input;
+const Option = StyledSelect.Option;
 
 const EmployeesActionLeft = (props) => {
   useEffect(() => {
-    if (props.viewType === "table") {
+    if (props.viewType === "tile") {
+      props.getRecords(props.orgId);
+    }else if (props.viewType === "table") {
+      props.getRecords(props.orgId);
+    } else if (props.viewType === "card") {
       props.getRecords(props.orgId);
     }
+    props.getlocation(props.orgId);
   }, [props.viewType]);
+  // useEffect(()=>{
+  //   props.getCountries();
+  // })
   return (
     <div class=" flex items-center">
       <Tooltip
@@ -64,7 +74,15 @@ const EmployeesActionLeft = (props) => {
         </Badge>
       </Tooltip>
       <Tooltip title={<FormattedMessage id="app.cardView" defaultMessage="Card View" />}>
-    
+      <Badge
+          size="small"
+          count={
+            (props.viewType === "card" &&
+              props.employeerecordData.EmployeeListByLiveInd) ||
+            0
+          }
+          overflowCount={999}
+        >
           <span
             class=" mr-2 text-sm cursor-pointer"
             onClick={() => props.setEmployeeViewType("card")}
@@ -74,10 +92,10 @@ const EmployeesActionLeft = (props) => {
           >
             <TocIcon />
           </span>
-    
+          </Badge>
       </Tooltip>
 
-      <div class=" ml-6 h-6">
+      <div class=" ml-6 h-6 w-60">
         <Input
           placeholder="Search By Name"
           width={"100%"}
@@ -109,13 +127,39 @@ const EmployeesActionLeft = (props) => {
           <FormattedMessage id="app.clear" defaultMessage="Clear" />
           {/* Clear */}
         </Button>
+        <div style={{ width: "35%" ,marginTop:"0.55rem"}}>
+          <StyledSelect placeholder="Sort"  onChange={(e)  => props.handleFilterChange(e)}>
+          <Option value="cretiondate">Creation Date</Option>
+            <Option value="workplace">Work Place</Option>
+           
+          </StyledSelect>
+        </div>
+        <div class=" flex items-center ml-4"  style={{border:"0.5px solid lightgray "}} >
+                  <select
+                    // placeholder="Select Location"
+                    //  defaultValue={partners}
+                    style={{ width: "auto",margin:"auto"}}
+                     onChange={props.handleDropdownChange}
+                     value={props.selectedLocation}
+                  >
+                    <option value="">All Locations</option>
+                    {props.showLocation.map((item) => {
+                      return (
+                        <option value={item.locationName}>
+                          {item.locationName}
+                        </option>
+                      );
+                    })}
+                  </select>
+                </div>
     </div>
   );
 };
 
-const mapStateToProps = ({ auth, employee }) => ({
+const mapStateToProps = ({ auth,location, employee }) => ({
   userId: auth.userDetails.userId,
   orgId: auth.userDetails.organizationId,
+  showLocation:location.showLocation,
   employeerecordData: employee.employeerecordData,
 });
 const mapDispatchToProps = (dispatch) =>
@@ -123,6 +167,7 @@ const mapDispatchToProps = (dispatch) =>
     {
       inputEmployeeDataSearch,
       getRecords,
+      getlocation,
     },
     dispatch
   );

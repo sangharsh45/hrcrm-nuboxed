@@ -43,7 +43,11 @@ export const getRoles = (orgId) => (dispatch) => {
         },
       })
       .then((res) => {
+        // message.error(roleType.message)
+        {res.data.message?  
+          message.success(res.data.message):
         message.success("Role has been added successfully!");
+        }
         dispatch(getRoles(orgId));
         console.log(res);
         dispatch({
@@ -62,12 +66,18 @@ export const getRoles = (orgId) => (dispatch) => {
         dispatch({
           type: types.ADD_ROLES_FAILURE,
         });
+        // if (err.response && err.response.status === 400) {
+        //   // Handle the error message sent by the backend
+        //   message.error(err.response.data.message);
+        // } else {
+        //   message.error("An error occurred while adding the role.");
+        // }
         cb();
       });
   };
 
 
-  export const updateRoles = (roleTypeId, roleType,departmentName,departmentId, cb) => (dispatch) => {
+  export const updateRoles = (roleTypeId, roleType,departmentId,departmentName, cb) => (dispatch) => {
     // console.log(leadDocumentsId, DocumentsName);
     dispatch({
       type: types.UPDATE_ROLES_REQUEST,
@@ -75,7 +85,7 @@ export const getRoles = (orgId) => (dispatch) => {
     axios
       .put(
         `${base_url}/roleType`,
-        { roleType, roleTypeId,departmentName,departmentId,editInd:"true"
+        { roleType, roleTypeId,departmentId,departmentName,editInd:"true"
         },
         {
           headers: {
@@ -188,6 +198,10 @@ export const addTalentRoles = (roleType,cb) => (dispatch) => {
       },
     })
     .then((res) => {
+      {res.data.message?  
+        message.success(res.data.message):
+      message.success("Role has been added successfully!");
+      }
       console.log(res);
       dispatch({
         type: types.ADD_TALENT_ROLES_SUCCESS,

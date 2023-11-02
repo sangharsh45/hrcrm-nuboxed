@@ -44,57 +44,59 @@ function ExpenseCard2(props) {
 
     return (
       <>
+      <div class=" h-h86 overflow-auto overflow-x-auto">
          <OnlyWrapCard>      
               {Expenses.map((item) => {
                  return (
                   <div>
-                  <div className="flex justify-between mt-4"
+                  <div className="flex justify-between mt-4 max-sm:flex-col"
                       style={{
                           borderBottom: "3px dotted #515050"
                       }}>
-                          <h4 class=" text-base text-cardBody font-poppins">
+                          <h4 class=" text-sm text-cardBody font-poppins">
                                  Name
                                   </h4> 
-                      <div className=" flex font-medium flex-col w-72 ">
+                      <div className=" flex font-medium flex-col md:w-72 max-sm:w-full justify-between max-sm:flex-row  ">
 
                          
                               <Tooltip >
-                                  <h4 class=" text-base text-cardBody font-poppins">
+                                <div  class=" flex max-sm:w-full justify-between max-sm:flex-row md:flex-col ">
+                                  <h4 class=" text-sm text-cardBody font-poppins">
                                   Voucher ID
                                   </h4>
-                                  <h4 class=" text-base text-blue-500 text-cardBody font-poppins cursor-pointer">
+                                  <h4 class=" text-xs text-blue-500 text-cardBody font-poppins font-semibold  cursor-pointer">
 <div onClick={() => { handleExpand(item.voucherId);
                 handleSetParticularRowData(item);
                 props.handleExpenseVoucherIdDrawer(true);}}>
          {item.voucherId}
          </div>
          </h4>
-
+         </div>
 </Tooltip>
 
 </div>
-<div className=" flex font-medium flex-col  w-52 ">
+<div className=" flex font-medium flex-col  md:w-52 max-sm:w-full justify-between max-sm:flex-row ">
                            
-                           <h4 class=" text-base text-cardBody font-poppins"> Voucher Date </h4>
-                           <h4 class=" text-base text-cardBody font-poppins">
+                           <h4 class=" text-sm text-cardBody font-poppins"> Voucher Date </h4>
+                           <h4 class=" text-xs text-cardBody font-poppins">
                                
                            
                            {dayjs(item.voucherDate).format("MMM Do YY")}
 
                            </h4>
                        </div>
-                       <div className=" flex font-medium flex-col w-32 ">
+                       <div className=" flex font-medium flex-col md:w-32 max-sm:w-full justify-between max-sm:flex-row ">
                                   
 
-                                  <h4 class=" text-base text-cardBody font-poppins">Amount</h4>
-                                  <h4 class=" text-base text-cardBody font-poppins">
+                                  <h4 class=" text-sm text-cardBody font-poppins">Amount</h4>
+                                  <h4 class=" text-xs text-cardBody font-poppins">
                                       € {item.amount}
                                   </h4>
                               </div>
-                              <div className=" flex font-medium flex-col w-[12rem] ">
-                                    <h4 class=" text-base text-cardBody font-poppins">Status</h4>
+                              <div className=" flex font-medium flex-col md:w-[12rem] max-sm:w-full justify-between max-sm:flex-row ">
+                                    <h4 class=" text-sm text-cardBody font-poppins">Status</h4>
 
-                                    <div class=" text-base text-cardBody font-poppins">
+                                    <div class=" text-xs text-cardBody font-poppins">
                                     {item.status === "Approved" && (
                  <div
                  style={{
@@ -129,7 +131,7 @@ function ExpenseCard2(props) {
                     textAlign: "center",
                     margin: "2px",
                     borderRadius: "0.62em",
-                    width:"12rem"
+                    width:"11rem"
                   }}
                 >
                  <div className="text-[#e1d16c]"> Waiting for approval</div>
@@ -143,6 +145,7 @@ function ExpenseCard2(props) {
                     )
                 })}
       </OnlyWrapCard>
+      </div>
 
         <ExpenseVoucherIdDrawer
         voucherId={voucherId} 

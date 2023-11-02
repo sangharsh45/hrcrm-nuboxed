@@ -81,6 +81,18 @@ import Invoice from "../Invoice/Invoice";
 import CandidateTotalBilling from "../Projects/Child/ProjectDetailsTab/CandidateTotalBilling";
 import { getSupportedLanguages } from '../Translate/TranslateService';
 import Location from "../Event/Child/Location/Location";
+import MobileNavMenu from "./Mobilemenu";
+import PitchDetails from "../Pitch/Child/PitchDetails/PitchDetails"
+import Navmenu2 from "./Navmenu2";
+import Plant from "./Plant/Plant";
+import Teams from "./Teams/Teams";
+import RepositoryData from "./RepositoryData";
+import Inventory from "./Inventory/Inventory";
+import Order from "./Order/Order";
+import Supplies from "./Supplies/Supplies";
+import Shipper from "./Shipper/Shipper";
+import Account from "./Account/Account";
+import Refurbish from "./Refurbish/Refurbish";
 
 const OpportunityDetail = lazy(() =>
   import("../Opportunity/Child/OpportunityDetail/OpportunityDetail")
@@ -143,39 +155,14 @@ const AccountImport = lazy(() => import("../Import/Child/AccountImport"));
 const Requirement = lazy(() => import("../Requirement/Requirement"));
 const Demand = lazy(() => import("../Demand/Demand"));
 const AddContactModal = lazy(() => import("../Contact/Child/AddContactModal"));
-// const Users = lazy(() => import("../Users/Users"));
+const Pitch=lazy(()=>import("../Pitch/Pitch"));
+const Deal=lazy(()=>import("../Deal/Deal"));
+const ContactInvest=lazy(()=>import("../ContactInvest/ContactInvest"));
+const Investor=lazy(()=>import("../Investor/Investor"));
+const InvestorDetail = lazy(() =>import("../Investor/Child/InvestorDetail/InvestorDetail"));
+const ContactInvestDetail = lazy(() =>import("../ContactInvest/Child/ContactInvestDetail/ContactInvestDetail"));
+const DealDetail=lazy(()=>import("../Deal/Child/DealDetail/DealDetail"));
 
-// class MainApp extends React.Component {
-//   constructor(props) {
-//     super(props);
-//     this.state = {
-//       collapsed: false,
-//       theme: "light",
-//     };
-//   }
-
-//   toggle = () => {
-//     this.setState({
-//       collapsed: !this.state.collapsed,
-//     });
-//   };
-//   toggleTheme = (value) => {
-//     this.setState({
-//       theme: value ? "light" : "light",
-//     });
-//   };
-// componentDidMount = () => {
-//   const { user, getPresentNotifications } = this.props;
-//   if (user && user.userId) {
-//     getPresentNotifications(user.userId);
-//   }
-// };
-// componentWillReceiveProps(nextProps) {
-//   const { user, getPresentNotifications } = nextProps;
-//   if (user.userId !== this.props.user.userId) {
-//     getPresentNotifications(user.userId);
-//   }
-// }
 function MainApp(props) {
   const [visible, setVisible] = useState(false);
   const [confirmLoading, setConfirmLoading] = useState(false);
@@ -186,7 +173,6 @@ function MainApp(props) {
 
   useEffect(() => {
     props.getOpportunityRecord(props.userId);
-    // props.getRequirementRecord();
   }, []);
 
  
@@ -261,6 +247,7 @@ function MainApp(props) {
     <>
       <ThemeProvider theme={props.theme}>
         <LayoutWrapper>
+        <div class="max-sm:hidden overflow-x-auto">
           <Sider
             trigger={null}
             collapsible
@@ -321,12 +308,14 @@ function MainApp(props) {
               selectedLanguage={selectedLanguage}
             />
           </Sider>
+          </div>
           <LayoutWrapper>
             <NavbarWrapper style={{ padding: 0, height: 50, alignItems: "center", position: "sticky", zIndex: "999",top:" 0.15rem",
   
  
  }}>
               <Header>
+              <div class="md:hidden"><Navmenu2  selectedLanguage={selectedLanguage}/></div>
                 <div
                   style={{
                     height: "100%",
@@ -478,7 +467,8 @@ function MainApp(props) {
                                         </FlexContainer>
                                     </Link> */}
                   {/* <Subscription /> */}
-                  <div
+                 
+                  <div class="max-sm:hidden"
                     style={{
                       backgroundColor: "#ff7158bf",
                       color: "white",
@@ -497,7 +487,7 @@ function MainApp(props) {
                   >
                     {props.department}
                   </div>
-                  <div
+                  <div class="max-sm:hidden"
                     style={{
                       backgroundColor: "#ff7158bf",
                       color: "white",
@@ -517,9 +507,13 @@ function MainApp(props) {
                     {props.roleType}
                   </div>
                   {/* <Subscription /> */}
+                  {user.settingsAccessInd === true ?
                   <IsAuthorized>
+                  
                     <SettingsDropdown />
+                  
                   </IsAuthorized>
+                    : null}
                   {/* <a href="#" style={{ height: 45, marginRight: 20 }}>
                                         <FlexContainer alignItems='center' style={{ height: '100%' }}>
                                             <Badge count={5} >
@@ -553,6 +547,8 @@ function MainApp(props) {
                       </FlexContainer>
                     </Tooltip>
                   </Link> */}
+                 
+                   <RepositoryData />
                   <ProfileDropdown />
                   {/* <Theme /> */}
                 </div>
@@ -573,8 +569,17 @@ function MainApp(props) {
                         component={Permissions}
                       />
                       <Route exact path="/mileage" component={Mileage} />
+                      <Route exact path="/shipper" component={Shipper} />
                       <Route exact path="/expense" component={Expense} />
+                      <Route exact path="/supplies" component={Supplies} />
+                      <Route exact path="/order" component={Order} />
+                      <Route exact path="/account"component={Account}/>
+                      <Route exact path="/refurbish " component={Refurbish } />
                       <Route exact path="/location" component={Location} />
+                      <Route exact path="/plant" component={Plant} />
+                      {/* <Route exact path="/suppliers" component={Suppliers} /> */}
+                      <Route exact path="/inventory" component={Inventory} />
+                      <Route exact path="/teams" component={Teams} />
                       <Route exact path="/employees" component={Employees} />
                       <Route exact path="/leads" component={Leads} />
                       <Route exact path="/accessment" component={Accessment} />
@@ -688,6 +693,12 @@ function MainApp(props) {
                         path="/contact/:contactId"
                         component={ContactDetail}
                       />
+
+<Route
+                        exact
+                        path="/pitch/:investorLeadsId"
+                        component={PitchDetails}
+                      />
                       <Route
                         exact
                         path="/opportunity"
@@ -714,8 +725,15 @@ function MainApp(props) {
                         path="/requirement"
                         component={Requirement}
                       />
-
                       <Route exact path="/demand" component={Demand} />
+
+                      <Route exact path="/pitch" component={Pitch}/>
+                      <Route exact path="/deal" component={Deal}/>
+                      <Route exact path="/contactInvest" component={ContactInvest}/>
+                      <Route exact path="/investor" component={Investor}/>
+                      <Route exact path="/investor/:investorId"  component={InvestorDetail} />
+                      <Route exact path="/contactinvest/:contactId"  component={ContactInvestDetail} />
+                      <Route exact path="/dealDetails/:invOpportunityId" component={DealDetail}/>
 
                       <Route path="**" component={PageNotFound} />
                     </Switch>
@@ -825,6 +843,7 @@ const mapStateToProps = ({
   addCallModal: call.addCallModal,
   addEventModal: event.addEventModal,
   addTaskModal: task.addTaskModal,
+  user: auth.userDetails,
 });
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(

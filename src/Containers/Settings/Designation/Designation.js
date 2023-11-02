@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { FormattedMessage } from "react-intl";
 import { Button, Divider, message,Input } from "antd";
+import { BundleLoader } from "../../../Components/Placeholder";
 import { MainWrapper, FlexContainer } from "../../../Components/UI/Layout";
 import { TextInput, Title } from "../../../Components/UI/Elements";
 import SingleDesignation from "./Child/SingleDesignation";
@@ -61,13 +62,13 @@ class Designation extends Component {
     designations &&
     designations.some((element) => element.designationType == designationType);
 
-    if (exist) {
-      message.error(
-        "Can't create as another designation type exists with same name!"
-      );
-    } else {
+    // if (exist) {
+    //   message.error(
+    //     "Can't create as another designation type exists with same name!"
+    //   );
+    // } else {
       addDesignations(designation, () => console.log("add designation callback"));
-    }
+    // }
 
     this.setState({
       designationType: "",
@@ -118,7 +119,7 @@ class Designation extends Component {
       singleDesignation,
       linkedDesignations,
     } = this.state;
-    if (fetchingDesignations) return <p>Loading ...</p>;
+    if (fetchingDesignations) return <BundleLoader/>;
     if (fetchingDesignationsError) return <p>We are unable to load data</p>;
     return (
       <>
@@ -190,7 +191,7 @@ class Designation extends Component {
                 <br />
                 <br />
                 <TextInput
-                  placeholder="Add More"
+                  placeholder="Add Designation"
                   name="designationType"
                   value={designationType}
                   onChange={this.handleChange}

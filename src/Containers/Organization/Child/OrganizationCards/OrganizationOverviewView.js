@@ -4,6 +4,7 @@ import {
   SubTitle,
   MultiAvatar,
 } from "../../../../Components/UI/Elements";
+import BorderColorIcon from '@mui/icons-material/BorderColor';
 import { FlexContainer } from "../../../../Components/UI/Layout";
 import { ActionIcon } from "../../../../Components/Utils";
 class OrganizationOverviewView extends Component {
@@ -28,10 +29,10 @@ class OrganizationOverviewView extends Component {
               {/* <SubTitle>{designation}</SubTitle> */}
             </FlexContainer>
           </FlexContainer>
-          <ActionIcon
+          <BorderColorIcon
             tooltipTitle="Edit"
             iconType="edit"
-            handleIconClick={toggleViewType}
+            onClick={toggleViewType}
             size="1em"
           />
         </FlexContainer>

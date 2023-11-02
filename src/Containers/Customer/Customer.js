@@ -11,24 +11,42 @@ import {
     getCustomerListByUserId,
     setCustomerViewType,
     getCustomerPagination,
-    emptyCustomer
+    emptyCustomer,
+    getLatestCustomer,
+    getCustomerCloser,
+    getCustomerFilterData,
     
   } from "./CustomerAction";
 import CustomerCardView from "./CustomerCardView";
 import CustomerMap from "./CustomerMap"
-
+import moment from "moment";
   
 const AddCustomerModal = lazy(() => import( "./Child/AddCustomerModal"));
 const CustomerHeader = lazy(() => import("./Child/CustomerHeader"));
 const CustomerTable = lazy(() => import("./Child/CustomerTable/CustomerTable"));
+const CustomerCardList=lazy(() => import("./Child/CustomerTable/CustomerCardList"));
 
-class  Customer extends Component {
-  state = { currentData: "",currentUser:"" };
+class Customer extends Component {
+  state = { currentData: "",
+  filter:"creationdate",
+  currentUser:"" };
   handleClear = () => {
+    const startDate = moment()
+      .startOf("month")
+      .toISOString();
+    const endDate = moment()
+      .endOf("month")
+      .toISOString();
     this.setState({ currentData: "" });
     this.props.emptyCustomer();
     this.props.getCustomerListByUserId(this.state.currentUser?this.state.currentUser:this.props.userId,0);
+    this.props.getLatestCustomer(this.props.userId);
+    this.props.getCustomerCloser(this.props.userId, startDate, endDate);
   };
+  handleFilterChange=(data)=>{
+    this.setState({filter:data})
+    this.props.getCustomerFilterData(this.props.userId,0,data)
+  }
   setCurrentData = (value) => {
     this.setState({ currentData: value });
   };
@@ -61,6 +79,8 @@ class  Customer extends Component {
           handleChange={this.handleChange}
           currentData={this.state.currentData}
           setCurrentData={this.setCurrentData}
+          handleFilterChange={this.handleFilterChange}
+          filter={this.state.filter}
         />
         <AddCustomerModal
           addCustomerModal={addCustomerModal}
@@ -74,7 +94,8 @@ class  Customer extends Component {
           this.props.viewType === "dashboard" ?
              <CustomerBlueTable/> :
              this.props.viewType === "table" ?
-             <CustomerTable
+             <CustomerCardList
+             filter={this.state.filter}
              currentUser={this.state.currentUser} 
              /> :
           this.props.viewType==="map"?
@@ -103,6 +124,7 @@ const mapStateToProps = ({ customer, auth }) => ({
   userId: auth.userDetails.userId,
   addCustomerModal: customer.addCustomerModal,
   viewType: customer.viewType,
+
 });
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
@@ -111,7 +133,10 @@ const mapDispatchToProps = (dispatch) =>
       getCustomerListByUserId,
       setCustomerViewType,
       getCustomerPagination,
-      emptyCustomer
+      emptyCustomer,
+      getLatestCustomer,
+      getCustomerCloser,
+      getCustomerFilterData
     },
     dispatch
   );

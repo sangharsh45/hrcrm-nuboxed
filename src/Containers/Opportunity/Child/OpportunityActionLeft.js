@@ -7,6 +7,7 @@ import { bindActionCreators } from "redux";
 import { withRouter } from "react-router-dom";
 import LightbulbIcon from "@mui/icons-material/Lightbulb";
 import DeleteIcon from "@mui/icons-material/Delete";
+import { CheckCircleTwoTone } from "@ant-design/icons";
 import LockOpenIcon from "@mui/icons-material/LockOpen";
 import {
   inputOpportunityDataSearch,
@@ -14,8 +15,9 @@ import {
   getDeleteRecords,
   getcloseRecords,
   getlostRecords,
+  getWonRecords
 } from "../OpportunityAction";
-import { StopTwoTone } from "@ant-design/icons";
+import { StopTwoTone, TableOutlined } from "@ant-design/icons";
 import { Input } from "antd";
 
 const Option = StyledSelect.Option;
@@ -33,7 +35,13 @@ const OpportunityActionLeft = (props) => {
       props.getcloseRecords(props.userId);
     } else if (props.viewType === "lost") {
       props.getlostRecords(props.userId);
+    } else if (props.viewType === "won") {
+      props.getWonRecords(props.userId);
     }
+    else if (props.viewType === "stage") {
+      props.getRecords(props.userId);
+    }
+    
   }, [props.viewType, props.userId]);
 
   const {
@@ -42,12 +50,41 @@ const OpportunityActionLeft = (props) => {
     recorddeleteOpportunityData,
     user,
     lostOpportunityData,
+    wonOpportunityData,
     closeOpportunityData,
     recordData,
   } = props;
 
   return (
     <div class=" flex items-center">
+  
+<Tooltip
+          title={
+            <FormattedMessage id="app.stageview" defaultMessage="Stage View" />
+          }
+        >
+             <Badge
+        size="small"
+        count={(viewType === "stage" && recordData.opportunityDetails) || 0}
+        overflowCount={999}
+      >
+          {/*<TableOutlined*/}
+          <span
+            style={{
+              fontSize: "1.56em",
+              marginRight: "0.3rem",
+              cursor:"pointer",
+              color: props.viewType === "stage" && "#1890ff",
+            }}
+            // iconType="table"
+            // tooltipTitle="Stage View"
+            onClick={() => props.setOpportunityViewType("stage")}
+          >
+           <TableOutlined/>
+          </span>
+          </Badge>
+        </Tooltip>
+      
       <Badge
         size="small"
         count={(viewType === "table" && recordData.opportunityDetails) || 0}
@@ -62,17 +99,18 @@ const OpportunityActionLeft = (props) => {
           }
         >
           <span
-            class=" mr-2 text-sm cursor-pointer"
+            class=" mr-2 text-sm "
             onClick={() => props.setOpportunityViewType("table")}
             style={{
-              color: props.viewType === "table" && "#1890ff",
+              color: props.viewType === "table" && "#1890ff",cursor:"pointer"
             }}
           >
             {" "}
-            <LightbulbIcon />
+            <LightbulbIcon style={{ color: "rgb(14, 149, 144)"}}/>
           </span>
         </Tooltip>
       </Badge>
+  
       <Tooltip title={"Close"}>
         {" "}
         <Badge
@@ -88,6 +126,7 @@ const OpportunityActionLeft = (props) => {
             class=" mr-2 text-sm cursor-pointer"
             onClick={() => props.setOpportunityViewType("close")}
             style={{
+              cursor:"pointer",
               color: props.viewType === "close" && "#1890ff",
             }}
           >
@@ -110,6 +149,7 @@ const OpportunityActionLeft = (props) => {
             class=" mr-2 text-sm cursor-pointer"
             onClick={() => props.setOpportunityViewType("lost")}
             style={{
+              cursor:"pointer",
               color: props.viewType === "lost" && "#1890ff",
             }}
           >
@@ -141,6 +181,7 @@ const OpportunityActionLeft = (props) => {
             class=" mr-2 text-sm cursor-pointer"
             onClick={() => props.setOpportunityViewType("dashboard")}
             style={{
+              cursor:"pointer",
               color: props.viewType === "dashboard" && "#1890ff",
             }}
           >
@@ -149,6 +190,29 @@ const OpportunityActionLeft = (props) => {
         </Badge>
       </Tooltip>
 
+      <Tooltip title={"Won"}>
+      <Badge
+          size="small"
+          count={
+            (viewType === "won" &&
+            wonOpportunityData.OpportunityDetailsbyWonInd) ||
+            0
+          }
+          overflowCount={999}
+        >
+          <span
+            class=" mr-2 text-sm cursor-pointer"
+            onClick={() => props.setOpportunityViewType("won")}
+            style={{
+              cursor:"pointer",
+              color: props.viewType === "won" && "#1890ff",
+            }}
+          >
+            {" "}
+            <CheckCircleTwoTone type="check-circle" theme="twoTone" twoToneColor="#24D8A7" />
+          </span>
+          </Badge>
+      </Tooltip>
       {/* <Tooltip
         title={
           <FormattedMessage
@@ -178,6 +242,7 @@ const mapStateToProps = ({ account, auth, opportunity }) => ({
   recorddeleteOpportunityData: opportunity.recorddeleteOpportunityData,
   closeOpportunityData: opportunity.closeOpportunityData,
   lostOpportunityData: opportunity.lostOpportunityData,
+  wonOpportunityData: opportunity.wonOpportunityData,
 });
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
@@ -186,6 +251,7 @@ const mapDispatchToProps = (dispatch) =>
       getDeleteRecords,
       getcloseRecords,
       getlostRecords,
+      getWonRecords,
       getRecords,
     },
     dispatch

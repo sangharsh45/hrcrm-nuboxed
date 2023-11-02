@@ -15,7 +15,8 @@ import { FlexContainer } from "../../../../../../../Components/UI/Layout";
 import DragableUpload from "../../../../../../../Components/Forms/Formik/DragableUpload";
 import { SelectComponent } from "../../../../../../../Components/Forms/Formik/SelectComponent";
 
-import { addDocumentDetails } from "../../../../../../Profile/ProfileAction";
+import { addDocumentDetails,
+  getLinkedUsersDocument } from "../../../../../../Profile/ProfileAction";
 
 function onChange(date) {}
 
@@ -33,9 +34,22 @@ class PersonalDetailsDocumentForm extends Component {
     this.setState({ active: type });
     // alert(this.state.active)
   };
+  
+  componentDidMount() {
+    const { getLinkedUsersDocument ,orgId} = this.props;
+    this.props.getLinkedUsersDocument(this.props.orgId);
+    // getLinkedUsersDocument(orgId);
+   
+}
 
   render() {
     const { addingPersonalDocumentDetails } = this.props;
+    const documentNameOption = this.props.linkedUserDocument.map((item) => {
+      return {
+          label: `${item.documentTypeName|| ""}`,
+          value: item.documentTypeId,
+      };
+  });
     return (
       <>
         <Formik
@@ -44,12 +58,13 @@ class PersonalDetailsDocumentForm extends Component {
             employeeId: this.props.employeeId,
 
             idNo: "",
-            idType: "",
+            documentTypeId: this.props.documentTypeId,
             documentId: "",
           }}
           onSubmit={(values, { resetForm }) => {
             console.log(values);
-
+            
+            // values.documentTypeId = values.documentId;
             this.props.addDocumentDetails(
               { ...values },
               this.props.employeeId,
@@ -82,19 +97,18 @@ class PersonalDetailsDocumentForm extends Component {
                      }}
                 >
                   <FastField
-                    name="idType"
+                    name="documentTypeId"
                     type="text"
                     //label="Type"
                     label={
                       <FormattedMessage id="app.type" defaultMessage="Type" />
                     }
-                    options={[
-                      "Aadhar Card",
-                      "Voter-Id Card",
-                      "Driving-License",
-                      "Pan Card",
-                      "Passport",
-                    ]}
+                 
+                    options={
+                      Array.isArray(documentNameOption)
+                        ? documentNameOption
+                        : []
+                    }
                     component={SelectComponent}
                     inlineLabel
                     className="field"
@@ -187,13 +201,18 @@ class PersonalDetailsDocumentForm extends Component {
 
 // }
 
-const mapStateToProps = ({ employee, profile }) => ({
+const mapStateToProps = ({ employee,auth, profile }) => ({
+  linkedUserDocument:profile.linkedUserDocument,
   employeeId: employee.singleEmployee.employeeId,
+  orgId: auth.userDetails.organizationId,
   addingPersonalDocumentDetails: profile.addingPersonalDocumentDetails,
 });
 
 const mapDispatchToProps = (dispatch) =>
-  bindActionCreators({ addDocumentDetails }, dispatch);
+  bindActionCreators({ 
+    addDocumentDetails,
+    getLinkedUsersDocument
+   }, dispatch);
 export default connect(
   mapStateToProps,
   mapDispatchToProps

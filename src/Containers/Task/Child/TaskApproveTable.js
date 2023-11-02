@@ -10,6 +10,7 @@ import {
   SearchOutlined,
 } from "@ant-design/icons";
 import NoteAltIcon from "@mui/icons-material/NoteAlt";
+import { OnlyWrapCard } from '../../../Components/UI/Layout';
 import MonitorHeartIcon from "@mui/icons-material/MonitorHeart";
 import AddTaskProjectDrawerModal from "../Child/AddTaskProjectDrawerModal";
 import { Tooltip, Input, Button, Avatar,FloatButton } from "antd";
@@ -40,9 +41,10 @@ const ButtonGroup = Button.Group;
 const TaskApproveTable = (props) => {
   const [data, setData] = useState("");
   const [data1, setData1] = useState("");
+  const [currentNameId, setCurrentNameId] = useState("");
   const tab = document.querySelector('.ant-layout-sider-children');
   const tableHeight = tab && tab.offsetHeight * 0.75;
-
+  const [currentprocessName, setCurrentprocessName] = useState("");
   const [searchText, setSearchText] = useState("");
   const [searchedColumn, setSearchedColumn] = useState("");
   const [page, setPage] = useState(0);
@@ -58,6 +60,14 @@ const TaskApproveTable = (props) => {
       // props.getProviderCustomerData(props.provider.serviceId, page);
     }, 100);
   };
+  function handleSetTaskNameId(item) {
+    setCurrentNameId(item);
+  }
+  function handleSetCurrentProcessName(item) {
+    setCurrentprocessName(item);
+     console.log(item);
+   }
+  
 
   const handleIconClick = (data) => {
     setData(data);
@@ -177,24 +187,38 @@ const TaskApproveTable = (props) => {
     userDetails: { employeeId },
   } = props;
 
-  const columns = [
-    {
-      title: "",
-      width: "2%",
-    },
-
-    {
-      title: "",
-     
-      width: "2%",
-      dataIndex: "priority",
-  
-      defaultSortOrder: "ascend",
-      // width: "20%",
-      render: (name, item, i) => {     
-        return (
-                  <div>
-                    {item.priority === "High" && (
+  return (
+    <>
+      {page < props.noOfPages ?
+          <div style={{ display: "flex", justifyContent: "flex-end", marginTop: "10px" }}>
+            <FloatButton.Group style={{width:"8rem",height:"5rem"}} >
+            <Button
+              style={{
+                color: "#1f92e2",
+                fontWeight: "600",
+                fontSize: "15px",
+                padding: "4px 12px",
+                boxShadow: "0px 0px 5px 2px #d2e2ed",
+                borderRadius: "22px"
+              }}
+              onClick={() => handleLoadMore()}
+            >Load More</Button>
+            </FloatButton.Group>
+          </div> : null}
+          <OnlyWrapCard style={{height:"81vh"}}>
+      {approvalTaskTable.map((item) => { 
+        
+         console.log("item",item.taskId)
+                    return (
+                        <div>
+                            <div className="flex justify-between mt-4 max-sm:flex-col"
+                                style={{
+                                    borderBottom: "3px dotted #515050"
+                                }}>
+                                     <div class="flex">
+                                <div className=" flex font-medium flex-col md:w-52 max-sm:flex-row w-full justify-between  ">
+<div className="flex max-sm:w-full"> 
+{item.priority === "High" && (
                       <div
                         style={{
                           borderRadius: "50%",
@@ -224,97 +248,74 @@ const TaskApproveTable = (props) => {
                         }}
                       ></div>
                     )}
-                  </div>
-                );
-      },
-    },
-    {
-      title: "Type",
-     
-      dataIndex: "taskType",
-     
-       width: "6%",
-       render: (name, item, i) => { 
-        return <span>{` ${item.taskType}`}</span>;
-             
-       }
-    },
+                    <div class=" w-1"></div>
+          <div class="max-sm:w-full">
+                                        <Tooltip>
+                                        <div class=" flex max-sm:justify-between flex-row w-full md:flex-col">
+                                            <div class="text-[0.875rem] text-cardBody font-poppins max-sm:hidden">
+                                            Type
+                                            </div>
+                                            <div class="text-[0.75rem] text-cardBody font-poppins cursor-pointer">                                       
+                                            {item.taskType}
+       
+                                            </div>
+                                        </div>
+                                        </Tooltip>
+                                        </div>
+                                        </div>
+                                </div>
 
-      {
-        title: "Name",
+                                <div className=" flex font-medium flex-col  md:w-36 max-sm:flex-row w-full justify-between ">
+                                    <div class=" text-[0.875rem] text-cardBody font-[0.875rem] font-poppins max-sm:hidden"> Name </div>
+                                    <div class=" text-[0.75rem] text-cardBody font-poppins">   
+                                    <span   
+                onClick={() => {
+                  // props.handleTaskopenModal(true);               
+                  handleSetCurrentProcessName(item)
+                  // this.props.setCurrentOpportunityRecruitMentData(item);
+                }}
+                style={{
+                  cursor: "pointer",
+                  color: "#042E8A",
+                }}          
+               >
 
-    
-   dataIndex: "taskName",
-      width: "7%",
-    },
+                 {`${item.taskName} `} &nbsp;
 
-    {
-      title: "Customer",
 
-    
-      dataIndex: "customerName",
-      width: 8,
-      render: (name, item, i) => { 
-        
-        return (
-          <span>
-            {item.customerName === null ? (
+               </span>
+                                    </div>
+                                </div>
+                                <div className=" flex font-medium flex-col md:w-32 max-sm:flex-row w-full justify-between ">
+                                    <div class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden">Customer</div>
+                                    <div class="text-[0.75rem] text-cardBody font-poppins">
+                                    {item.customerName === null ? (
               ""
             ) : (
-            <Tooltip title={item.customerName}>
-              <MultiAvatar
-                primaryTitle={item.customerName}
-                imgWidth={"1.8em"}
-                imgHeight={"1.8em"}
-              />
-           
-            </Tooltip>
-               )}
-          </span>
-        );
-      },
-    },
-
-
-        {
-          title: "Owner",
-          dataIndex: "submittedBy",
-          width: 6,
-         
-          render: (name, item, i) => { 
-            return (
-              <span>
-                <MultiAvatar
-                  primaryTitle={item.submittedBy}
-                  imgWidth={"1.8em"}
-                  imgHeight={"1.8em"}
+                                    <MultiAvatar
+                  primaryTitle={item.customerName}
+                  imgWidth={"1.8rem"}
+                  imgHeight={"1.8rem"}
                 />
-              </span>
-            );
-          },
-        },
-
-           {
-            title: "Assigned on",
-          // dataIndex: "submittedBy",
-     
-      width: 8,
-      render: (name, item, i) => { 
-       
-        return <span>{` ${moment(item.assignedOn).format("ll")}`}</span>;
-      },
-    },
-
-    {
-      title: "Assigned To",
-    // dataIndex: "submittedBy",
-
-width: 8,
-render: (name, item, i) => { 
- 
-  return (
-            <span>
-            {item.assignedToName === null ? (
+                )}
+                                    </div>
+                                </div>
+                                </div>
+                                <div class="flex">
+                                <div className=" flex font-medium flex-col md:w-32 max-sm:flex-row w-full justify-between ">
+                                    <div class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden">Submitted By</div>
+                                    <div class="text-[0.75rem] text-cardBody font-poppins">
+                                    <MultiAvatar
+                  primaryTitle={item.submittedBy}
+                  imgWidth={"1.8rem"}
+                  imgHeight={"1.8rem"}
+                />
+                                    </div>
+                                </div>
+                                {/* <div className=" flex font-medium flex-col md:w-32 max-sm:flex-row w-full justify-between ">
+                                  <div class="text-[0.875rem] text-cardBody font-poppins">Assigned To</div>
+                                  <div class="text-[0.75rem] text-cardBody font-poppins">
+                                  {item.assignedToName === null ? (
               ""
             ) : (
               <MultiAvatar
@@ -323,28 +324,21 @@ render: (name, item, i) => {
                 imgHeight={"1.8em"}
               />
             )}
-            </span>
-          );
-},
-},
-
-
-
-
-
-
-
-
-      {
-      title: "",
-      
-      dataIndex: "Completed",
-      width: 10,
-      render: (name, item, i) => { 
-       
-        return (
-          <span>
-            {item.taskStatus === "Completed" && !item.approvedInd ? (
+                                  </div>
+                              </div> */}
+                              <div className=" flex font-medium flex-col md:w-32 max-sm:flex-row w-full justify-between ">
+                                  <div class="text-[0.875rem] text-cardBody font-poppins max-sm:hidden">Assigned On</div>
+                                  <div class="text-[0.75rem] text-cardBody font-poppins">
+                                  <span>{` ${moment(item.assignedOn).format("ll")}`}</span>
+                                  </div>
+                              </div>
+                              </div>
+                              <div class="flex">
+                              <div className=" flex font-medium flex-col md:w-32 max-sm:flex-row w-full justify-between ">
+                              
+                                  <div class="text-[0.75rem] text-cardBody font-poppins">
+                                  <span>
+            {item.filterTaskInd === true && item.approvedInd === "Pending"  ? (
               <>
                 <div>
                   <Button
@@ -372,9 +366,9 @@ render: (name, item, i) => {
                   </Button>
                 </div>
               </>
-            ) : (
+            ) :  (
               <>
-                {item.approvedInd === "Approved" ? (
+                {  item.filterTaskInd === true && item.approvedInd === "Approved" ? (
                   <CheckCircleOutlined
                     type="check-circle"
                     theme="twoTone"
@@ -382,7 +376,7 @@ render: (name, item, i) => {
                     size={140}
                     style={{ fontSize: "1rem" }}
                   />
-                ) : item.approvedInd === "Rejected" ? (
+                ) : item.filterTaskInd === true && item.approvedInd === "Rejected" ? (
                   <CloseCircleOutlined
                     type="close-circle"
                     theme="twoTone"
@@ -396,101 +390,54 @@ render: (name, item, i) => {
               </>
             )}
           </span>
-        );
-      },
-    },
+                                  </div>
+                              </div>
+   
 
-
-    {
-      title: "",
-      // dataIndex: "submittedBy",
-          width: 2,
-          render: (name, item, i) => { 
-           
-            return (
-              <NoteAltIcon
+               
+                    <div class="flex flex-col w-[2%]">
+       <div>
+       <NoteAltIcon
                 onClick={() => {
                   handleTaskNotesDrawerModal(true);
-                  this.handleNotesClick(item);
+                  handleSetTaskNameId(item);
                 }}
                 style={{ color: "green", cursor: "pointer", fontSize: "0.8rem" }}
               />
-            );
-          },
-        },
+       </div>
+       
+          
+        
+                      </div>    
+                      </div>
+                            </div>
+                        </div>
 
 
-      
-
-
-
-                        {
-   
-                          title: "",
-                          // dataIndex: "submittedBy",
-                              width: 2,
-                              render: (name, item, i) => { 
-        return (
-          <>
-            {item.complitionStatus === "completed" && (
-              <TaskStatusToggle
-                completionInd={item.completionInd}
-                taskId={item.taskId}
-              />
-            )}
-          </>
-        );
-      },
-    },
-              
-
-
-   
-                  
-    
-  ];
-
-  return (
-    <>
-      {page < props.noOfPages ?
-          <div style={{ display: "flex", justifyContent: "flex-end", marginTop: "10px" }}>
-            <FloatButton.Group style={{width:"8rem",height:"5rem"}} >
-            <Button
-              style={{
-                color: "#1f92e2",
-                fontWeight: "600",
-                fontSize: "15px",
-                padding: "4px 12px",
-                boxShadow: "0px 0px 5px 2px #d2e2ed",
-                borderRadius: "22px"
-              }}
-              onClick={() => handleLoadMore()}
-            >Load More</Button>
-            </FloatButton.Group>
-          </div> : null}
-      <StyledTable
-        columns={columns}
-        dataSource={approvalTaskTable}
-        pagination={false}
-        loading={fetchingApproveTaskTable || fetchingApproveTaskTableError}
-        scroll={{ y: tableHeight }}
-      />
+                    )
+                })}
+      </OnlyWrapCard>
 
 <UpdateTaskModal
           updateTaskModal={updateTaskModal}
           handleUpdateTaskModal={handleUpdateTaskModal}
         />
+   
 
         <AddTaskProjectDrawerModal
           handleTaskProjectDrawerModal={props.handleTaskProjectDrawerModal}
           addDrawerTaskProjectModal={props.addDrawerTaskProjectModal}
           data={data}
         />
-        <AddTaskNotesDrawerModal
-          handleTaskNotesDrawerModal={props.handleTaskNotesDrawerModal}
-          addDrawerTaskNotesModal={props.addDrawerTaskNotesModal}
-          data1={data1}
-        />
+<AddTaskNotesDrawerModal
+handleSetTaskNameId={handleSetTaskNameId}
+  handleTaskNotesDrawerModal={props.handleTaskNotesDrawerModal}
+  addDrawerTaskNotesModal={props.addDrawerTaskNotesModal}
+  currentNameId={currentNameId}
+  // taskName={currentprocessName.taskName} // Pass taskName as a prop
+
+/>
+
 
       {/* AddTaskProjectDrawerModal and AddTaskNotesDrawerModal components go here */}
     </>

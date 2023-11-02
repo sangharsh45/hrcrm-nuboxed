@@ -48,7 +48,7 @@ class ContactDetailTab extends Component {
       <>
         <TabsWrapper>
           <StyledTabs defaultActiveKey="1" onChange={this.handleTabChange}>
-          <TabPane
+          {/* <TabPane
               tab={
                 <>
                  
@@ -56,8 +56,8 @@ class ContactDetailTab extends Component {
                   />
                     <span class=" ml-1">
                      <FormattedMessage
-                      id="app.requirements"
-                      defaultMessage="Requirements"
+                      id="app.orders"
+                      defaultMessage="Orders"
                     />
                   </span>
                   {activeKey === "1" && (
@@ -72,7 +72,7 @@ class ContactDetailTab extends Component {
                 {" "}
                 <OpportunityTable />
               </Suspense>
-            </TabPane>
+            </TabPane> */}
             
              <TabPane
               tab={

@@ -96,14 +96,17 @@ class AddressFieldArray extends Component {
                                 inlineLabel
                                 style={{ flexBasis: '80%' }}
                             /> */}                
-                <p
+                <p class="text-xs"
                   style={{
                     fontWeight: "bold",                   
                     fontStyle: "italic",
                     color: "#1890ff",                   
                   }}
                 >Address input is only allowed using Location feature</p>
-                <Field
+                
+                <div class="flex justify-between max-sm:flex-col">
+                <div class="w-[32%] max-sm:w-wk">     
+                 <Field
                   name={`address.${index}.address1`}
                   label="Address 1"
                   isColumn
@@ -111,8 +114,8 @@ class AddressFieldArray extends Component {
                   width={"100%"}
                   inlineLabel
                 />  
-                 <FlexContainer justifyContent="space-between">  
-                 <div style={{ width: "47%" }}>                        
+                </div>
+                <div class="w-[32%] max-sm:w-wk">                         
                 <Field
                   name={`address.${index}.street`}
                   label="Street"
@@ -122,35 +125,7 @@ class AddressFieldArray extends Component {
                   inlineLabel                 
                 /> 
                 </div> 
-                 <div style={{ width: "47%" }}>
-                    <Tooltip title="Use Location feature for easy search ">
-                      <Field
-                        name={`address.${index}.city`}
-                        label="City"
-                        component={InputComponent}
-                        disabled
-                        width={"100%"}
-                        isColumn
-                        inlineLabel                       
-                      />
-                    </Tooltip>
-                  </div> 
-                  </FlexContainer>             
-                <FlexContainer justifyContent="space-between">
-                  <div style={{ width: "47%" }}>
-                    <Tooltip title="Use Location feature for easy search ">
-                      <Field
-                        name={`address.${index}.state`}
-                        label="State/Province"
-                        component={InputComponent}
-                        disabled
-                        width={"100%"}
-                        isColumn
-                        inlineLabel                       
-                      />
-                    </Tooltip>
-                  </div>
-                  <div style={{ width: "47%" }}>
+                <div class="w-[32%] max-sm:w-wk"> 
                     <Tooltip title="Use Location feature for easy search ">
                       <Field
                         name={`address.${index}.postalCode`}
@@ -163,8 +138,36 @@ class AddressFieldArray extends Component {
                       />
                     </Tooltip>
                   </div>
-                </FlexContainer>   
-                <div style={{ width: "47%" }}>
+                  </div>         
+                <div class="flex justify-between max-sm:flex-col" >
+                <div class="w-[32%] max-sm:w-wk"> 
+                    <Tooltip title="Use Location feature for easy search ">
+                      <Field
+                        name={`address.${index}.city`}
+                        label="City"
+                        component={InputComponent}
+                        disabled
+                        width={"100%"}
+                        isColumn
+                        inlineLabel    
+                        isDisabled                   
+                      />
+                    </Tooltip>
+                  </div> 
+                  <div class="w-[32%] max-sm:w-wk"> 
+                    <Tooltip title="Use Location feature for easy search ">
+                      <Field
+                        name={`address.${index}.state`}
+                        label="State/Province"
+                        component={InputComponent}
+                        disabled
+                        width={"100%"}
+                        isColumn
+                        inlineLabel                       
+                      />
+                    </Tooltip>
+                  </div>
+                  <div class="w-[32%] max-sm:w-wk"> 
                     <Tooltip title="Use Location feature for easy search ">
                       <Field
                         name={`address.${index}.country`}
@@ -176,7 +179,9 @@ class AddressFieldArray extends Component {
                         inlineLabel                       
                       />
                     </Tooltip>
-                  </div>             
+                  </div>   
+                </div>   
+                          
                 <FlexContainer justifyContent="space-between">
                   {/* <div style={{ width: "47%" }}>
                     <Tooltip title="Use Location feature for easy search ">

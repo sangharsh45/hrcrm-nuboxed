@@ -246,6 +246,8 @@ function UpdateTaskForm(props) {
           // isEditing ? prefillTask :
           {
             taskType: props.setEditingTask.taskType || "",
+            link:props.setEditingTask.link || "",
+            documentId:"",
             taskName: props.setEditingTask.taskName || "",
             value: props.setEditingTask.value || "",
             taskDescription: props.setEditingTask.taskDescription || "",
@@ -389,24 +391,17 @@ function UpdateTaskForm(props) {
           values,
           ...rest
         }) => (
+          <div class="overflow-y-auto h-[34rem] overflow-x-hidden max-sm:h-[30rem]">
           <Form className="form-background">
-             <div
-                style={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  height: "70vh",
-                  overflow: "scroll",
-                  paddingRight: "0.6em",
-                }}
-              >
-              <div class=" h-full w-1/2">
+          <div class="flex justify-between pr-2 max-sm:flex-col">
+              <div class=" h-full w-w47.5  max-sm:w-wk">
                 <div class=" flex justify-between">
                   {values.taskTypeId === "TSK52434477391272022" && (
                     <FastField name="imageId" component={Upload} />
                   )}
 
                   {values.taskTypeId === "TSK52434477391272022" && (
-                    <div class=" w-4/6">
+                    <div class=" w-4/6  max-sm:w-wk">
                       <Field
                         name="documentId"
                         isRequired
@@ -415,9 +410,76 @@ function UpdateTaskForm(props) {
                     </div>
                   )}
                 </div>
-                <div class=" flex justify-between">
-                  <div class=" w-1/2">
-                    <Spacer />
+                <div class=" flex justify-between  max-sm:flex-col">
+                <div class=" flex justify-between flex-col w-full">
+                        
+                        <StyledLabel>
+                          {/* Priority */}
+                          <FormattedMessage
+                            id="app.priority"
+                            defaultMessage="Priority"
+                          />
+                          
+                        </StyledLabel>
+                      
+                        <div class="flex">
+                          <Tooltip title="High">
+                            <Button
+                              type="primary"
+                               shape="circle"
+                              // icon={<ExclamationCircleOutlined />}
+                              onClick={() => handleButtonClick("High")}
+                              style={{
+                                backgroundColor:
+                                  priority === "High"
+                                    ? "red"
+                                    : "white",
+                                    borderRadius: "50%", 
+                                    width: "31px", 
+                                    height: "31px"
+                              }}
+                            />
+                          </Tooltip>
+                          &nbsp;
+                          <Tooltip title="Medium">
+                            <Button
+                              type="primary"
+                               shape="circle"
+                              // icon={<ExclamationCircleOutlined />}
+                              onClick={() => handleButtonClick("Medium")}
+                              style={{
+                                backgroundColor:
+                                  priority === "Medium"
+                                    ? "Orange"
+                                    : "white",
+                                    borderRadius: "50%", 
+                                    width: "31px", 
+                                    height: "31px",
+                              }}
+                            />
+                          </Tooltip>
+                          &nbsp;
+                          <Tooltip title="Low">
+                            <Button
+                              type="primary"
+                               shape="circle"
+                              // icon={<ExclamationCircleOutlined />}
+                              onClick={() => handleButtonClick("Low")}
+                              style={{
+                                backgroundColor:
+                                  priority === "Low"
+                                    ? "teal"
+                                    : "white",
+                                    borderRadius: "50%", // Set the borderRadius to 50% for a circular shape
+                                    width: "31px", // Adjust the width as needed
+                                    height: "31px"
+                              }}
+                            ></Button>
+                          </Tooltip>
+                        </div>
+                      </div>
+                  <div class=" w-1/2 max-sm:w-wk">
+                   
                     <StyledLabel>Type</StyledLabel>
                     <Field
                       name="taskTypeId"
@@ -427,8 +489,7 @@ function UpdateTaskForm(props) {
                       // value={values.taskTypeId}
                     />
                   </div>
-                  <div class=" w-3/12">
-                    <Spacer />
+                  <div class=" w-3/12 ml-2">                
                     <StyledLabel>
                       <FormattedMessage
                         id="app.status"
@@ -487,59 +548,9 @@ function UpdateTaskForm(props) {
                   </div>
                 </div>
                 <Spacer />
-                <div class=" flex justify-between w-full">
-                  <div class=" w-1/2">
-                    <div class=" flex justify-between w-full">
-                      <div class=" w-full">
-                        <StyledLabel>
-                          {/* Priority */}
-                          <FormattedMessage
-                            id="app.priority"
-                            defaultMessage="Priority"
-                          />
-                        </StyledLabel>
-                        <div>
-                          <Tooltip title="High">
-                            <Button
-                              type="primary"
-                              shape="circle"
-                              icon={<ExclamationCircleOutlined />}
-                              onClick={() => handleButtonClick("High")}
-                              style={{
-                                backgroundColor:
-                                  priority === "High" ? "red" : "white",
-                              }}
-                            />
-                          </Tooltip>
-                          <Tooltip title="Medium">
-                            <Button
-                              type="primary"
-                              shape="circle"
-                              icon={<ExclamationCircleOutlined />}
-                              onClick={() => handleButtonClick("Medium")}
-                              style={{
-                                backgroundColor:
-                                  priority === "Medium" ? "Orange" : "white",
-                              }}
-                            />
-                          </Tooltip>
-                          <Tooltip title="Low">
-                            <Button
-                              type="primary"
-                              shape="circle"
-                              icon={<ExclamationCircleOutlined />}
-                              onClick={() => handleButtonClick("Low")}
-                              style={{
-                                backgroundColor:
-                                  priority === "Low" ? "teal" : "white",
-                              }}
-                            ></Button>
-                          </Tooltip>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class=" w-5/12">
+                {/* <div class=" flex justify-between w-full max-sm:flex-col">
+                
+                  <div class=" w-5/12 max-sm:w-wk">
                     <div class=" flex justify-between w-full">
                       <div class=" w-full">
                         <Field
@@ -560,55 +571,11 @@ function UpdateTaskForm(props) {
                     </div>
                   </div>
                 </div>
-                <Spacer />
-                <div class=" flex justify-between">
-                  <div class=" w-1/2">
-                    <Field
-                      isRequired
-                      name="startDate"
-                      //label="Start "
-                      label={
-                        <FormattedMessage
-                          id="app.startDate"
-                          defaultMessage="Start Date"
-                        />
-                      }
-                      isColumn
-                      component={DatePicker}
-                      value={values.startDate}
-                      inlineLabel
-                      style={{
-                        width: "100%",
-                      }}
-                    />
-                  </div>
-                  <Spacer />
-                  <div class=" w-5/12">
-                    <Field
-                      // isRequired
-                      name="startTime"
-                      // label="Start Time"
-                      label={
-                        <FormattedMessage
-                          id="app.startTime"
-                          defaultMessage="Start Time"
-                        />
-                      }
-                      isColumn
-                      component={TimePicker}
-                      use12Hours
-                      value={values.startTime}
-                      inlineLabel
-                      style={{
-                        width: "100%",
-                      }}
-                    />
-                  </div>
-                </div>
-                <Spacer />
+                <Spacer /> */}
+                
                 <div class=" flex justify-between">
                 {values.taskTypeId === "TSK52434477391272022" && (
-                    <div class=" w-1/2">
+                    <div class=" w-1/2 max-sm:w-wk">
                    <StyledLabel>
                   <Field
                    name="taskChecklistId"
@@ -634,63 +601,67 @@ function UpdateTaskForm(props) {
                 )}
                  </div>
                 <div class=" flex justify-between">
-                  <div class=" w-1/2">
-                    <Field
-                      isRequired
-                      name="endDate"
-                      // label="End "
-                      label={
-                        <FormattedMessage
-                          id="app.endDate"
-                          defaultMessage="End Date"
-                        />
-                      }
-                      component={DatePicker}
-                      isColumn
-                      value={values.endDate || values.startDate}
-                      // defaultValue={dayjs("2015-01-01")}
-                      inlineLabel
-                      style={{
-                        width: "100%",
-                      }}
-                      disabledDate={(currentDate) => {
-                        if (values.startDate) {
-                          if (
-                            moment(currentDate).isBefore(
-                              moment(values.startDate)
-                            )
-                          ) {
-                            return true;
-                          } else {
-                            return false;
-                          }
+                <div class=" w-1/2 ">
+                      <Field
+                        isRequired
+                        name="endDate"
+                        // label="End "
+                        label={
+                          <FormattedMessage
+                            id="app.endDate"
+                            defaultMessage="End Date"
+                          />
                         }
-                      }}
-                    />
-                  </div>
-                  <div class=" w-5/12">
-                    <Field
-                      // isRequired
-                      name="endTime"
-                      //label="End Time"
-                      label={
-                        <FormattedMessage
-                          id="app.endTime"
-                          defaultMessage="End Time"
-                        />
-                      }
-                      isColumn
-                      component={TimePicker}
-                      use12Hours
-                      value={values.endTime}
-                      inlineLabel
-                      style={{
-                        width: "100%",
-                        // borderRight: "0.18em solid red",
-                      }}
-                    />
-                  </div>
+                        component={DatePicker}
+                        isColumn
+                        value={values.endDate || values.startDate}
+                        // defaultValue={dayjs("2015-01-01")}
+                        inlineLabel
+                        style={{
+                          width: "100%",
+                        }}
+                        disabledDate={(currentDate) => {
+                          if (values.startDate) {
+                            if (
+                              moment(currentDate).isBefore(
+                                moment(values.startDate)
+                              )
+                            ) {
+                              return true;
+                            } else {
+                              return false;
+                            }
+                          }
+                        }}
+                      />
+                    </div>
+                    <div class=" w-5/12">
+                          <Field
+                            isRequired
+                            name="taskName"
+                            //label="Name"
+                            // value={values.taskName}
+                            label={
+                              <FormattedMessage
+                                id="app.name"
+                                defaultMessage="Name"
+                              />
+                            }
+                            component={InputComponent}
+                            isColumn
+                            width={"100%"}
+                            inlineLabel
+                          />
+                        </div>
+               
                 </div>
+                <div class=" w-full mt-4">
+                        <Field
+                          name="documentId"
+                          isRequired
+                          component={DragableUpload}
+                        />
+                      </div>
 
                 <div class=" flex justify-between">
                   {values.taskTypeId === "TSK52434477391272022" && (
@@ -832,7 +803,7 @@ function UpdateTaskForm(props) {
                       )}
                     </div>
                   </div>
-                  <div class=" w-2/5">
+                  <div class=" w-2/5 max-sm:w-wk">
                     <div class=" flex justify-between w-full">
                       {values.taskTypeId === "TSK52434477391272022" && (
                       <div class=" w-full">
@@ -874,8 +845,7 @@ function UpdateTaskForm(props) {
                   )} */}
                 </div>
               </div>
-              <div class=" h-full w-2/5">
-                <Spacer />
+              <div class=" h-full w-w47.5 max-sm:w-wk">          
                 <Field
                   name="assignedTo"
                   // label="Assigned to"
@@ -897,22 +867,9 @@ function UpdateTaskForm(props) {
                   inlineLabel
                 />
                 <Spacer />
-                {values.taskTypeId === "TSK52434477391272022" && (
-                  // <Field
+                {/* {values.taskTypeId === "TSK52434477391272022" && (
+                 
 
-                  //   name="candidateId"
-                  //   //type="text"
-                  //   label="Talent"
-                  //   mode
-                  //   component={SelectComponent}
-                  //   options={
-                  //     Array.isArray(this.handlecandidateOptions("customerId", values.customerId))
-                  //       ? this.handlecandidateOptions("customerId", values.customerId)
-                  //       : []
-                  //   }
-                  //    value={values.candidateId}
-
-                  // />
                   <Select
                   label="Team"
                     name="candidateId"
@@ -946,7 +903,7 @@ function UpdateTaskForm(props) {
                     }
                   />
                 )}
-                <Spacer />
+                <Spacer /> */}
                 <Field
                   name="taskDescription"
                   //label="Notes"
@@ -959,6 +916,24 @@ function UpdateTaskForm(props) {
                   inlineLabel
                 />
                 <Spacer />
+                <div class=" mt-4">
+                      <Field
+                            type="text"
+                            name="link"
+                            //label="Name"
+                            // value={values.taskName}
+                            label={
+                              <FormattedMessage
+                                id="app.link"
+                                defaultMessage="Link"
+                              />
+                            }
+                            component={InputComponent}
+                            isColumn
+                            width={"100%"}
+                            inlineLabel
+                          />
+                      </div>
                 <div class=" flex justify-between">
                   {values.taskTypeId === "TSK52434477391272022" && (
                     <div class=" w-1/2 font-bold">
@@ -1047,6 +1022,7 @@ function UpdateTaskForm(props) {
               </Button>
             </div>
           </Form>
+          </div>
         )}
       </Formik>
     </>

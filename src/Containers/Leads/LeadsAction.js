@@ -4,9 +4,7 @@ import dayjs from "dayjs";
 import { base_url } from "../../Config/Auth";
 import { asses_url } from "../../Config/Auth";
 import { message } from "antd";
-
-
-
+import Swal from 'sweetalert2'
 
 export const setLeadsViewType = (viewType) => (dispatch) => {
     dispatch({
@@ -113,10 +111,18 @@ export const setLeadsViewType = (viewType) => (dispatch) => {
       })
       .then((res) => {
         dispatch(getLeads(userId));
+        dispatch(getLeadsRecords(userId));
         dispatch({
           type: types.CONVERT_CUSTOMER_STATUS_SUCCESS,
           payload: res.data,
         });
+        Swal.fire({
+          icon: 'success',
+          fontSize:"2rem",
+          title: 'Lead Qualified Succefully!',
+          showConfirmButton: false,
+          timer: 4000
+        })
         // cb && cb("success");
       })
       .catch((err) => {
@@ -779,7 +785,11 @@ export const setLeadsViewType = (viewType) => (dispatch) => {
     dispatch({
       type: types.INPUT_LEADS_SEARCH_DATA_REQUEST,
     });
-    axios.get(`${base_url}/leads/search/${name}`)
+    axios.get(`${base_url}/leads/search/${name}`,{
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+        },
+      })
     .then((res)=>{
       dispatch({
         type:types.INPUT_LEADS_SEARCH_DATA_SUCCESS,
@@ -792,5 +802,273 @@ export const setLeadsViewType = (viewType) => (dispatch) => {
     payload:err,
       });
     });
-      };
+  };
   
+  export const getLeadsPermissionsList = () => (dispath) => {
+    dispath({ type: types.GET_LEADS_PERMISSIONS_LIST_REQUEST });
+    axios
+      .get(`${base_url}/permission/type?type=${"leads"}`, 
+      // {
+      //   headers: {
+      //     Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      //   },
+      // }
+      )
+      .then((res) => {
+        dispath({
+          type: types.GET_LEADS_PERMISSIONS_LIST_SUCCESS,
+          payload: res.data,
+        });
+      })
+      .catch((err) => {
+        dispath({
+          type: types.GET_LEADS_PERMISSIONS_LIST_FAILURE,
+          payload: err,
+        });
+      });
+  };
+  export const shareLeadsPermission = (data, userId,a) => (
+    dispatch,
+    getState
+  ) => {
+    // const { userId } = getState("auth").auth.userDetails;
+    dispatch({
+      type: types.ADD_SHARE_LEADS_PERMISSION_REQUEST,
+    });
+  
+    axios
+      .post(`${base_url}/permission/details`, data, {
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+        },
+      })
+      .then((res) => {
+        console.log(res);
+        if (a === "All") {
+          // dispatch(getAllOpportunityListByUserId());
+          // dispatch(getRecords(userId));
+          // dispatch(getAllRecords(userId));
+        } else {
+        dispatch(getLeads(userId));
+        // dispatch(getRecords(userId));
+        }
+        dispatch({
+          type: types.ADD_SHARE_LEADS_PERMISSION_SUCCESS,
+          payload: res.data,
+        });
+        // cb && cb("success");
+      })
+      .catch((err) => {
+        console.log(err);
+        dispatch({
+          type: types.ADD_SHARE_LEADS_PERMISSION_FAILURE,
+          payload: err,
+        });
+        // cb && cb("failure");
+      });
+  };
+  export const updateTypeForLead = (leadsId,type,data) => (dispatch) => {
+    dispatch({ type: types.UPDATE_TYPE_FOR_LEAD_REQUEST });
+    axios
+      .put(
+        `${base_url}/leads/type/update/${leadsId}/${type}`,data,
+        {
+          headers: {
+            Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+          },
+        })
+      .then((res) => {
+        dispatch({
+          type: types.UPDATE_TYPE_FOR_LEAD_SUCCESS,
+          payload: res.data,
+        });
+      })
+      .catch((err) => {
+        dispatch({
+          type: types.UPDATE_TYPE_FOR_LEAD_FAILURE,
+          payload:err
+        });
+      });
+  };
+
+  export const getJunkedLeads = (userId) => (dispatch) => {
+    dispatch({
+      type: types.GET_JUNKED_LEADS_REQUEST,
+    });
+    axios
+      .get(`${base_url}/leads/junked/list/${userId}`, {
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+        },
+      })
+      .then((res) => {
+        console.log(res);
+        dispatch({
+          type: types.GET_JUNKED_LEADS_SUCCESS,
+          payload: res.data,
+        });
+      })
+      .catch((err) => {
+        console.log(err.response);
+        dispatch({
+          type: types.GET_JUNKED_LEADS_FAILURE,
+          payload: err,
+        });
+      });
+  };
+  export const getLeadsRecords = (userId) => (dispatch) => {
+    dispatch({
+      type: types.GET_LEADS_RECORDS_REQUEST,
+    });
+    axios
+      .get(`${base_url}/leads/record/count/${userId}`, {
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+        },
+      })
+      .then((res) => {
+        console.log(res);
+        dispatch({
+          type: types.GET_LEADS_RECORDS_SUCCESS,
+          payload: res.data,
+        });
+      })
+      .catch((err) => {
+        console.log(err.response);
+        dispatch({
+          type: types.GET_LEADS_RECORDS_FAILURE,
+          payload: err,
+        });
+      });
+  };
+
+  export const getJunkedLeadsRecords = (userId) => (dispatch) => {
+    dispatch({
+      type: types.GET_JUNKED_LEADS_RECORDS_REQUEST,
+    });
+    axios
+      .get(`${base_url}/leads/junked/count/${userId}`, {
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+        },
+      })
+      .then((res) => {
+        console.log(res);
+        dispatch({
+          type: types.GET_JUNKED_LEADS_RECORDS_SUCCESS,
+          payload: res.data,
+        });
+      })
+      .catch((err) => {
+        console.log(err.response);
+        dispatch({
+          type: types.GET_JUNKED_LEADS_RECORDS_FAILURE,
+          payload: err,
+        });
+      });
+  };
+  
+  export const reInstateJunkLeads = (leadsId,data) => (dispatch) => {
+    dispatch({ type: types.REINSTATE_JUNKED_LEADS_REQUEST });
+    axios
+      .put(`${base_url}/leads/reinstate/${leadsId}`, data, {
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+        },
+      })
+      .then((res) => {
+        console.log(res);
+        dispatch({
+          type: types.REINSTATE_JUNKED_LEADS_SUCCESS,
+          payload: res.data,
+        });
+        Swal.fire({
+          icon: 'success',
+          title: 'Reinstated Successfully',
+          showConfirmButton: false,
+          timer: 4000
+        })
+      })
+      .catch((err) => {
+        console.log(err);
+        dispatch({
+          type: types.REINSTATE_JUNKED_LEADS_FAILURE,
+          payload: err,
+        });
+      });
+  };
+
+  export const handleCETmodal= (modalProps) => (dispatch) => {
+    dispatch({
+      type: types.HANDLE_CET_MODAL,
+      payload: modalProps,
+    });
+  }
+
+  export const getCallListbyLeads = (leadsId,pageNo) => (dispatch) => {
+    dispatch({
+      type: types.GET_CALL_LIST_BY_REQUEST,
+    });
+    axios
+      .get(`${base_url}/call/leads/${leadsId}/${pageNo}`, {
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+        },
+      })
+      .then((res) => {
+        console.log(res);
+        dispatch({
+          type: types.GET_CALL_LIST_BY_SUCCESS,
+          payload: res.data,
+        });
+      })
+      .catch((err) => {
+        console.log(err.response);
+        dispatch({
+          type: types.GET_CALL_LIST_BY_FAILURE,
+          payload: err,
+        });
+      });
+  };
+
+  export const handleLeadCallModal = (modalProps) => (dispatch) => {
+    dispatch({
+      type: types.HANDLE_LEADS_CALL_MODAL,
+      payload: modalProps,
+    });
+  };
+
+  export const getCallTimeline = (leadsId) => (dispatch) => {
+    dispatch({
+        type: types.GET_CALL_TIMELINE_REQUEST,
+    });
+  
+    axios
+        .get(`${base_url}/leads/activity/list/${leadsId}`, {
+            headers: {
+                Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+            },
+        })
+        .then((res) => {
+            console.log(res);
+            dispatch({
+                type: types.GET_CALL_TIMELINE_SUCCESS,
+                payload: res.data,
+            });
+        })
+        .catch((err) => {
+            console.log(err);
+            dispatch({
+                type: types.GET_CALL_TIMELINE_FAILURE,
+                payload: err,
+            });
+        });
+  };
+
+  export const handleLeadsNotesDrawerModal = (modalProps) => (dispatch) => {
+    dispatch({
+      type: types.HANDLE_LEADS_NOTES_DRAWER_MODAL,
+      payload: modalProps,
+    });
+  };
+

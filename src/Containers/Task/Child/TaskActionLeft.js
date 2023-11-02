@@ -1,23 +1,38 @@
 import React from "react";
 import {Tooltip } from "antd";
-import LightbulbIcon from '@mui/icons-material/Lightbulb';
 import { FormattedMessage } from "react-intl";
 import DeleteIcon from '@mui/icons-material/Delete';
+import FactCheckIcon from '@mui/icons-material/FactCheck';
 import ApprovalIcon from '@mui/icons-material/Approval';
+import LeaderboardIcon from '@mui/icons-material/Leaderboard';
+import TocIcon from '@mui/icons-material/Toc';
 
 const TaskActionLeft = props => {
   return (
     <div class=" flex items-center" >
       <Tooltip
-        title={<FormattedMessage id="app.myTask" defaultMessage="My Task" />}
+        title={<FormattedMessage id="app.myTasks" defaultMessage="My Tasks" />}
       >
         <span class=" mr-2 cursor-pointer text-xs"
           onClick={() => props.setTaskViewType("table")}
           style={{
             color: props.viewType === "table" && "#1890ff",
-  
+            cursor:"pointer"
           }}
-        > <LightbulbIcon  />
+        > <TocIcon  />
+        
+        </span>
+      </Tooltip>
+      <Tooltip
+        title={<FormattedMessage id="app.mytaskView" defaultMessage="My Tasks- Gantt View" />}
+      >
+        <span class=" mr-2 cursor-pointer text-xs"
+          onClick={() => props.setTaskViewType("gantt")}
+          style={{
+            color: props.viewType === "gantt" && "#1890ff",
+            cursor:"pointer"
+          }}
+        > <LeaderboardIcon  />
         
         </span>
       </Tooltip>
@@ -29,14 +44,15 @@ const TaskActionLeft = props => {
           onClick={() => props.setTaskViewType("approve")}
           style={{
             color: props.viewType === "approve" && "#1890ff",
+            cursor:"pointer"
           }}
         >
-          <ApprovalIcon />
+          <FactCheckIcon />
         </span>
        
       </Tooltip>
 
-      <Tooltip
+      {/* <Tooltip
         title={<FormattedMessage id="app.deletedOpportunity" defaultMessage="Deleted Opportunity" />}
       >  
         
@@ -49,7 +65,7 @@ const TaskActionLeft = props => {
           <DeleteIcon />
         </span>
        
-      </Tooltip>
+      </Tooltip> */}
     
     </div>
   

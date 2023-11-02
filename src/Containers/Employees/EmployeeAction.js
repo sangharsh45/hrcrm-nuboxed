@@ -67,13 +67,13 @@ export const addEmployee = (employee) => (dispatch) => {
 /**
  * Fetching all employees of org
  */
-export const getEmployeelist = () => (dispatch) => {
+export const getEmployeelist = (filter) => (dispatch) => {
   dispatch({
     type: types.GET_EMPLOYEE_LIST_REQUEST,
   });
 
   axios
-  .get(`${base_url}/employee/employees`, {
+  .get(`${base_url}/employee/employees/filter/${filter}`, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },
@@ -89,6 +89,34 @@ export const getEmployeelist = () => (dispatch) => {
       console.log(err);
       dispatch({
         type: types.GET_EMPLOYEE_LIST_FAILURE,
+        payload: err,
+      });
+    });
+};
+
+
+export const getEmployeeFilterlist = (filter) => (dispatch) => {
+  dispatch({
+    type: types.GET_EMPLOYEE_FILTER_LIST_REQUEST,
+  });
+
+  axios
+  .get(`${base_url}/employee/employees/filter/${filter}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.GET_EMPLOYEE_FILTER_LIST_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.GET_EMPLOYEE_FILTER_LIST_FAILURE,
         payload: err,
       });
     });
@@ -870,6 +898,13 @@ export const addTopicByUserId = (data, employeeId) => (dispatch) => {
 export const handleEmployeePulseDrawerModal = (modalProps) => (dispatch) => {
   dispatch({
     type: types.HANDLE_EMPLOYEE_PULSE_DRAWER_MODAL,
+    payload: modalProps,
+  });
+};
+
+export const handleEmployeeDocumentDrawerModal = (modalProps) => (dispatch) => {
+  dispatch({
+    type: types.HANDLE_EMPLOYEE_DOCUMENT_DRAWER_MODAL,
     payload: modalProps,
   });
 };

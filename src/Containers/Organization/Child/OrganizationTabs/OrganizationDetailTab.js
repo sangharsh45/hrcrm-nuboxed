@@ -100,7 +100,7 @@ class OrganizationDetailTab extends Component {
                 <EmailTable />
               </Suspense>
             </TabPane>
-            <TabPane
+            {/* <TabPane
               tab={
                 <>
                   <span>
@@ -133,7 +133,7 @@ class OrganizationDetailTab extends Component {
                 {" "}
                 <WebsiteTable />
               </Suspense>
-            </TabPane>
+            </TabPane> */}
           </StyledTabs>
         </TabsWrapper>
         <Suspense fallback={null}>

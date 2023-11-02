@@ -3,17 +3,18 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import AddLeadsModal from "./Child/AddLeadsModal";
 import LeadsHeader from "./Child/LeadsHeader";
+import { BundleLoader } from "../../Components/Placeholder";
 import LeadsTable from "./Child/LeadsTable/LeadsTable";
 import {getLeads} from "../Leads/LeadsAction"
- import { setLeadsViewType, handleLeadsModal, getEmployeelist } from "./LeadsAction";
-
-
+import { setLeadsViewType, handleLeadsModal, getEmployeelist, } from "./LeadsAction";
+const LeadsCardList = lazy(()=>import("./Child/LeadsTable/LeadsCardList"));
+const LeadsJunkList=lazy(()=>import ("./Child/LeadsTable/LeadsJunkList"));
 class Leads extends Component {
 
-  state = { currentData: "" };
+  state = { currentData: "",currentUser:"" };
   handleClear = () => {
     this.setState({ currentData: "" });
-    this.props.getLeads(this.props.leadsId);
+    this.props.getLeads(this.props.userId);
   };
   handleChange = (e) => {
     this.setState({ currentData: e.target.value })
@@ -21,6 +22,11 @@ class Leads extends Component {
   };
   setCurrentData = (value) => {
     this.setState({ currentData: value });
+  };
+  handleDropChange=(value)=>{
+    this.setState({ currentUser: value });
+      this.props.getLeads(value );
+
   };
   render() {
     const {
@@ -32,6 +38,8 @@ class Leads extends Component {
     return (
       <React.Fragment>
         <LeadsHeader
+        handleDropChange={this.handleDropChange}
+        currentUser={this.state.currentUser}
             handleLeadsModal={handleLeadsModal}
         setLeadsViewType={setLeadsViewType}
           viewType={viewType}
@@ -45,15 +53,24 @@ class Leads extends Component {
           handleLeadsModal={handleLeadsModal}
         />
        
-        <LeadsTable/> 
+        {/* <LeadsTable/>  */}
+        <Suspense fallback={<BundleLoader />}>
+          {viewType==="card" ? (
+ <LeadsCardList/>
+          ):viewType==="list" ? (<LeadsJunkList/>)
+        :null}
+       
+        </Suspense>
+ 
       </React.Fragment>
     );
   }
 }
 
-const mapStateToProps = ({ leads }) => ({
+const mapStateToProps = ({ leads,auth }) => ({
     addLeadsModal:leads.addLeadsModal,
    viewType: leads.viewType,
+   userId: auth.userDetails.userId,
 
 });
 const mapDispatchToProps = (dispatch) =>

@@ -27,7 +27,13 @@ const initialState = {
   deleteExpense: false,
   deleteExpenseError: false,
 
+  fetchingExpenseStatus: false,
+  fetchingExpenseStatusError: false,
+  expenseStatus:[],
+
   documentUploadModal: false,
+
+  updateStatusExpenseModal:false,
 
   addingDocumentByExpenseId: false,
   addingDocumentByExpenseIdError: false,
@@ -48,6 +54,8 @@ const initialState = {
   fetchingRejectedExpense: false,
   fetchingRejectedExpenseError:false,
   rejectedExpenses:[],
+
+  pexpenseVoucherIdDrawer:false
 
 };
 
@@ -118,6 +126,14 @@ export const expenseReducer = (state = initialState, action) => {
                   return item;
                 }
               }),
+              // Expenses: state.Expenses.map((item) => {
+              //   if (item.amount === action.payload.amount) {
+              //     return action.payload;
+              //   } else {
+              //     return item;
+              //   }
+              // }),
+              // Expenses: action.payload
             };
           case types.UPDATE_EXPENSE_FAILURE:
             return {
@@ -239,6 +255,28 @@ export const expenseReducer = (state = initialState, action) => {
                 fetchingRejectedExpense: false,
                 fetchingRejectedExpenseError: true,
               };
+
+              case types.HANDLE_STATUS_EXPENSE_MODAL:
+                return { ...state, updateStatusExpenseModal: action.payload };
+
+
+                case types.GET_EXPENSE_STATUS_BY_EXPENSEID_REQUEST:
+                  return { ...state, fetchingExpenseStatus: true };
+              case types.GET_EXPENSE_STATUS_BY_EXPENSEID_SUCCESS:
+                  return {
+                      ...state,
+                      fetchingExpenseStatus: false,
+                      expenseStatus: action.payload,
+                  };
+              case types.GET_EXPENSE_STATUS_BY_EXPENSEID_FAILURE:
+                  return {
+                      ...state,
+                      fetchingExpenseStatus: false,
+                      fetchingExpenseStatusError: true,
+                  };
+                 
+                  case types.HANDLE_PEXPENSE_VOUCHERID_DRAWER:
+                    return {...state,pexpenseVoucherIdDrawer:action.payload}
       default:
   return state;
     }

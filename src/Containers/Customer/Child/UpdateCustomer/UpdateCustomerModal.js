@@ -8,13 +8,14 @@ import { setEditCustomer } from "../../CustomerAction";
 const UpdateCustomerForm = lazy(() => import("./UpdateCustomerForm"));
 
 const UpdateCustomerModal = (props) => {
+  const isSmallScreen = window.innerWidth <= 600;
+    const drawerWidth = isSmallScreen ? "90%" : "55%";
   const { updateCustomerModal, handleUpdateCustomerModal, ...formProps } = props;
-  console.log("dn",props.setEditingCustomer.name)
   return (
     <>
       <StyledDrawer
         title={props.setEditingCustomer.name}
-        width="60%"
+        width={drawerWidth}
         visible={props.updateCustomerModal}
         maskClosable={false}
         closable

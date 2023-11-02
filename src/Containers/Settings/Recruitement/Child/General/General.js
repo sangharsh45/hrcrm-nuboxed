@@ -20,6 +20,7 @@ import {
 import { FlexContainer } from "../../../../../Components/UI/Layout";
 import Notifications from "./Notifications";
 import dayjs from "dayjs";
+import moment from "moment";
 const { Option } = Select;
 function General(props) {
   useEffect(() => {
@@ -32,7 +33,7 @@ function General(props) {
         enableReinitialize
         initialValues={{
           timePeriod: props.requirementDuration.timePeriod || "",
-          oppTimePeriod: props.requirementDuration.oppTimePeriod || "",
+          orderTimePeriod: props.requirementDuration.orderTimePeriod || "",
           userId: props.userId,
           orgId: props.organizationId,
         }}
@@ -68,13 +69,14 @@ function General(props) {
                   justifyContent: "space-between",
                 }}
               >
-                <p style={{ minWidth:"-webkit-fill-available"}}>Auto Close Open Requirements (in months)</p>
+                <p style={{ minWidth:"-webkit-fill-available"}}>Auto drop Open Orders (in months)</p>
                 <div>
                 <Field
+                style={{width:"8rem"}}
                     name="timePeriod"
                  
                     component={SelectComponent}
-                    options={["1", "2", "3", "4", "5"]}
+                    options={["1", "2", "3", "4", "5","Not Applicable"]}
                     isColumn
                     //  inlineLabel
                   />
@@ -88,13 +90,13 @@ function General(props) {
                   justifyContent: "space-between",
                 }}
               >
-                <p style={{ minWidth:"-webkit-fill-available"}}>Auto Close Open Opportunities (in months)</p>
+                <p style={{ minWidth:"-webkit-fill-available"}}>Auto drop Open Opportunities (in months)</p>
                 <div>
                 <Field
-                    name="oppTimePeriod"
-                   
+                    name="orderTimePeriod"
+                    style={{width:"8rem"}}
                     component={SelectComponent}
-                    options={["1", "2", "3", "4", "5"]}
+                    options={["1", "2", "3", "4", "5","Not Applicable"]}
                     isColumn
                     // inlineLabel
                   />
@@ -105,7 +107,7 @@ function General(props) {
           </FlexContainer>
           <h4>
                 Updated on{" "}
-                {dayjs(props.requirementDuration.creationDate).format("ll")} by{" "}
+                {moment(props.requirementDuration.creationDate).format("ll")} by{" "}
                 {props.requirementDuration.ownerName}
               </h4>
               <Spacer style={{ marginTop: "1.25em" }} />

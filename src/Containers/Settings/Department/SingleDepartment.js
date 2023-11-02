@@ -11,6 +11,9 @@ import ViewEditCard from "../../../Components/UI/Elements/ViewEditCard";
 import { Select } from "../../../Components/UI/Elements";
 import { EditOutlined } from "@ant-design/icons";
 import DepartmentStatusToggle from "./DepartmentStatusToggle";
+import ERPStatusToggle from "./ERPStatusToggle";
+import CRMStatusToggle from "./CRMStatusToggle";
+import IMStatusToggle from "./IMStatusToggle";
 const { Option } = Select;
 
 class SingleDepartment extends Component {
@@ -29,7 +32,7 @@ class SingleDepartment extends Component {
     this.setState({ sectorId: value });
   render() {
     const {
-       department: { departmentName, departmentId,sectorId,mandetoryInd,sectorName },
+       department: { departmentName, departmentId,sectorId,mandetoryInd,sectorName,crmInd,erpInd,imInd },
       handleChange,
       name,
       value,
@@ -48,23 +51,57 @@ class SingleDepartment extends Component {
         <ViewEditCard>
           {({ viewType }, toggleViewType) =>
             viewType === "view" ? (
+              <div class="flex" >
+                <div class="w-11/12 flex-row">
               <FlexContainer justifyContent="space-between">
-                <div class=" flex w-1/2">
-                <DepartmentName style={{ flexBasis: "45%" }}>
+                {/* <div class=" flex w-1/2"> */}
+               <div class=" w-28">
+                <DepartmentName >
                   {departmentName}
                 </DepartmentName>
-                <DepartmentName style={{ flexBasis: "42%" }}>
+                </div>
+                {/* <div class="w-20">
+                <DepartmentName >
                   {sectorName}
                 </DepartmentName>
-                </div>
-                <div style={{width:"35%"}}>
+                </div> */}
+                {/* </div> */}
+                <div style={{width:"19%"}}>
                     <DepartmentStatusToggle
                       mandetoryInd={mandetoryInd}
                       departmentName={departmentName}
                       departmentId={departmentId}
                     />  
                     </div>
-                <div>
+                    <h1 class="ml-4">ERP</h1>
+                    <div style={{width:"15%"}}>
+                    
+                    <ERPStatusToggle
+                      erpInd={erpInd}
+                      departmentName={departmentName}
+                      departmentId={departmentId}
+                    />  
+                    </div>
+                    <h1>CRM</h1>
+                    <div style={{width:"15%"}}>
+                    <CRMStatusToggle
+                      crmInd={crmInd}
+                      departmentName={departmentName}
+                      departmentId={departmentId}
+                    />  
+                    </div>
+                    <h1>IM</h1>
+                    <div style={{width:"16%"}}>
+                    <IMStatusToggle
+                      imInd={imInd}
+                      departmentName={departmentName}
+                      departmentId={departmentId}
+                    />  
+                    </div>
+                
+              </FlexContainer>
+              </div>
+              <div>
                 
                   {this.props.department.mandetoryInd !== true &&(
                   <BorderColorIcon 
@@ -94,7 +131,8 @@ class SingleDepartment extends Component {
                  )}
                  
                 </div> 
-              </FlexContainer>
+              </div>
+              
             ) : (
                 <FlexContainer>
                   <TextInput

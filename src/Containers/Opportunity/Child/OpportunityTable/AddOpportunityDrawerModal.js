@@ -16,7 +16,7 @@ class AddOpportunityDrawerModal extends Component {
       <div>
         <StyledDrawer
           title={this.props.opportunityName}
-          width="45em"
+          width="55em"
           style={{ marginTop: "5rem" }}
           visible={this.props.addDrawerOpportunityModal}
           closable

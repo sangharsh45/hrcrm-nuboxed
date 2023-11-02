@@ -6,6 +6,7 @@ import { FormattedMessage } from "react-intl";
 import { Button, Icon, Switch, Tooltip } from "antd";
 import { Formik, Form, Field, FastField } from "formik";
 import * as Yup from "yup";
+import{getAllOpportunityData} from "../../Opportunity/OpportunityAction"
 import { handleCallNotesModal } from "../CallAction";
 import { getFilteredEmailContact } from "../../Candidate/CandidateAction";
 import dayjs from "dayjs";
@@ -21,6 +22,7 @@ import {
   deleteCall,
   handleCallModal,
 } from "../CallAction";
+import {getAllCustomerData} from "../../Customer/CustomerAction"
 import { handleChooserModal } from "../../Planner/PlannerAction";
 import { TextareaComponent } from "../../../Components/Forms/Formik/TextareaComponent";
 import { StyledPopconfirm } from "../../../Components/UI/Antd";
@@ -66,80 +68,12 @@ const CallSchema = Yup.object().shape({
 });
 function CallForm(props) {
 
-  const people = [
-    {
-      id: 1,
-      name: 'Wade Cooper',
-      avatar:""
-        
-    },
-    {
-      id: 2,
-      name: 'Arlene Mccoy',
-      avatar:
-      'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-    },
-    {
-      id: 3,
-      name: 'Devon Webb',
-      avatar:
-        "",
-    },
-    {
-      id: 4,
-      name: 'Tom Cook',
-      avatar:
-       "",
-    },
-    {
-      id: 5,
-      name: 'Tanya Fox',
-      avatar:
-      'https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-    },
-    {
-      id: 6,
-      name: 'Hellen Schmidt',
-      avatar:
-      'https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-    },
-    {
-      id: 7,
-      name: 'Caroline Schultz',
-      avatar:
-       "",
-    },
-    {
-      id: 8,
-      name: 'Mason Heaney',
-      avatar:
-        "",
-    },
-    {
-      id: 9,
-      name: 'Claudie Smitham',
-      avatar:
-        "",
-    },
-    {
-      id: 10,
-      name: 'Emil Schaefer',
-      avatar:
-       "",
-    },
-  ]
-  const [selected1, setSelected1] = useState(people[3])
+
+  
   const[category,setCategory] =useState(props.selectedCall ? props.selectedCall.callCategory : "New")
-  const[selected,setSelected] =useState(props.selectedCall
-         ? props.selectedCall.callCategory
-           : "New",)
-  const[Type,setType] =useState(props.selectedCall
-           ? props.selectedCall.callType
-           : "Inbound",)
   const[reminder,setReminder] =useState(true)
   console.log("category",category);
-  console.log("selected",selected);
-  console.log("Type",Type);
+  const[Type,setType]=useState(props.selectedCall?props.selectedCall.callType:"Inbound",)
 
   function handleCategoryChange (data)  {
     debugger;
@@ -166,11 +100,15 @@ function CallForm(props) {
   useEffect(() => {
     props.getEmployeelist();
     props.getAllSalesList();
+    props.getAllCustomerData(props.userId)
     props.getFilteredEmailContact(userId);
+    props.getAllOpportunityData(userId)
   }, []);
 
   
- 
+  const [defaultOption, setDefaultOption] = useState(props.fullName);
+  const [selected, setSelected] = useState(defaultOption);
+
     const {
       handleCallNotesModal
 
@@ -179,10 +117,37 @@ function CallForm(props) {
     function classNames(...classes) {
       return classes.filter(Boolean).join(' ')
     }
+
+    const customerNameOption = props.allCustomerData
+    .sort((a, b) => {
+      const libraryNameA = a.name && a.name.toLowerCase();
+      const libraryNameB = b.name && b.name.toLowerCase();
+      if (libraryNameA < libraryNameB) {
+        return -1;
+      }
+      if (libraryNameA > libraryNameB) {
+        return 1;
+      }
+
+      // names must be equal
+      return 0;
+    })
+    .map((item) => {
+      return {
+        label: `${item.name || ""}`,
+        value: item.customerId,
+      };
+    });
     const employeesData = props.employees.map((item) => {
       return {
         label: `${item.fullName}`,
-        value: item.employeeId,
+        value: item.opportunityId,
+      };
+    });
+    const opportunityNameOption = props.allOpportunityData.map((item) => {
+      return {
+        label: `${item.opportunityName}`,
+        value: item.opportunityId,
       };
     });
 
@@ -225,8 +190,9 @@ function CallForm(props) {
     if (props.selectedCall) {
       var data = props.selectedCall.callCategory === "New" ? false : true;
     }
-    console.log("cdc", props.candidateId)
-    return (
+   const selectedOption = props.employees.find((item) => item.fullName === selected);
+   console.log("bn",selectedOption,selected)
+   return (
       <>
         <Formik
           // enableReinitialize
@@ -253,7 +219,7 @@ function CallForm(props) {
                 callDescription: "",
 
                 included: [],
-                assignedTo: userId ? userId : "",
+                assignedTo: selectedOption ? selectedOption.employeeId:userId,
                 contactId: "",
                 candidateId: "",
               }
@@ -342,6 +308,7 @@ function CallForm(props) {
 
               startTime: 0,
               endTime: 0,
+              assignedTo: selectedOption ? selectedOption.employeeId:userId,
             };
             isEditing
               ? updateCall(
@@ -355,6 +322,7 @@ function CallForm(props) {
                   endDate: `${newEndDate}T${newEndTime}`,
                   startTime: 0,
                   endTime: 0,
+                  assignedTo: selectedOption ? selectedOption.employeeId:userId,
                 },
                 () => handleCallback(resetForm)
               )
@@ -371,11 +339,12 @@ function CallForm(props) {
             values,
             ...rest
           }) => (
+            <div class="overflow-y-auto h-[34rem] overflow-x-hidden max-sm:h-[30rem]">
             <Form className="form-background">
-              <div class=" flex justify-between">
-              <div class=" h-full w-1/2"   >
-              <div class=" flex justify-between w-full">
-                    <div class=" w-2/6">
+              <div class=" flex justify-around max-sm:flex-col">
+              <div class=" h-full w-w47.5 max-sm:w-wk"   >
+              <div class=" flex justify-between w-full max-sm:flex-col">
+                    <div class=" w-2/6 max-sm:w-wk">
                       <Spacer/>
                       <StyledLabel>
                         {/* Type */}
@@ -500,7 +469,7 @@ function CallForm(props) {
                     </div>
                   </div>
                   <Spacer/>
-                  <div class=" flex justify-between items-end " >
+                  <div class=" flex justify-between items-end max-sm:flex-col " >
                     <div class=" self-start">
                       <StyledLabel>
                       Mode
@@ -514,7 +483,7 @@ function CallForm(props) {
                         unCheckedChildren="Video"
                       />
                     </div>
-                    <div class=" w-1/3 self-baseline">
+                    <div class=" w-1/3 self-baseline max-sm:w-wk">
                       <FastField
                         name="modeType"
                         label="Channel"
@@ -529,7 +498,7 @@ function CallForm(props) {
                         inlineLabel
                       />
                     </div>
-                    <div class=" w-2/5">
+                    <div class=" w-2/5 max-sm:w-wk">
                       <FastField
                         type="text"
                         name="modeLink"
@@ -572,8 +541,8 @@ function CallForm(props) {
                     inlineLabel
                   />
                   <Spacer />
-                  <div class=" flex justify-between">
-                    <div class=" w-1/2">
+                  <div class=" flex justify-between max-sm:flex-col">
+                    <div class=" w-1/2 max-sm:w-wk">
                       <Field
                         name="startTime"
                         // label="Start Time"
@@ -594,7 +563,7 @@ function CallForm(props) {
                         }}
                       />
                     </div>
-                    <div class=" w-2/5">
+                    <div class=" w-2/5 max-sm:w-wk">
                       <Field
                         name="endTime"
                         // label="End Time"
@@ -665,75 +634,75 @@ function CallForm(props) {
                     </span>
                   )}
                 </div>
-                <div class=" h-full w-2/5"   >
-                  <Listbox value={selected1} onChange={setSelected1}>
-      {({ open }) => (
-        <>
-          <Listbox.Label className="block text-sm font-bold text-gray-700">Assigned to</Listbox.Label>
-          <div className="relative mt-1">
-            <Listbox.Button className="relative w-full leading-4 cursor-default rounded-md border border-gray-300 bg-white py-2 pl-3 pr-10 text-left shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm: text-sm">
-          
-              <span className="flex items-center">
-                <img src={selected1.avatar} alt="" className="h-2 w-2 flex-shrink-0 rounded-full" />
-                <span className="ml-3 block truncate">{selected1.fullName}</span>
-              </span>
-             
-
-              <span className="pointer-events-none absolute inset-y-0 right-0 ml-3 flex items-center pr-2">
-                <ChevronUpDownIcon className="h-5 w-5 text-gray-400" aria-hidden="true" />
-              </span>
-            </Listbox.Button>
-
-            <Transition
-              show={open}
-              as={Fragment}
-              leave="transition ease-in duration-100"
-              leaveFrom="opacity-100"
-              leaveTo="opacity-0"
-            >
-              <Listbox.Options className="absolute z-10 mt-1 max-h-56 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
-                {props.sales.map((person) => (
-                  <Listbox.Option
-                    key={person.id}
-                    className={({ active }) =>
-                      classNames(
-                        active ? 'text-white bg-indigo-600' : 'text-gray-900',
-                        'relative cursor-default select-none py-2 pl-3 pr-9'
-                      )
-                    }
-                    value={person}
-                  >
-                    {({ selected1, active }) => (
-                      <>
-                        <div className="flex items-center">
-                          <img src={person.avatar} alt="" className="h-6 w-6 flex-shrink-0 rounded-full" />
-                          <span
-                            className={classNames(selected1 ? 'font-semibold' : 'font-normal', 'ml-3 block truncate')}
-                          >
-                            {person.fullName}
-                          </span>
-                        </div>
-
-                        {selected1 ? (
-                          <span
-                            className={classNames(
-                              active ? 'text-white' : 'text-indigo-600',
-                              'absolute inset-y-0 right-0 flex items-center pr-4'
-                            )}
-                          >
-                            <CheckIcon className="h-5 w-5" aria-hidden="true" />
-                          </span>
-                        ) : null}
-                      </>
-                    )}
-                  </Listbox.Option>
-                ))}
-              </Listbox.Options>
-            </Transition>
-          </div>
-        </>
-      )}
-    </Listbox>
+                <div class=" h-full w-w47.5 max-sm:w-wk"   >
+                <Listbox value={selected} onChange={setSelected}>
+        {({ open }) => (
+          <>
+            <Listbox.Label className="block text-sm font-semibold text-gray-700">
+              Assigned to
+            </Listbox.Label>
+            <div className="relative mt-1">
+              <Listbox.Button className="relative w-full leading-4 cursor-default rounded-md border border-gray-300 bg-white py-1 pl-3 pr-10 text-left shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm">
+                {selected}
+              </Listbox.Button>
+              {open && (
+                <Listbox.Options
+                  static
+                  className="absolute z-10 mt-1 max-h-56 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
+                >
+                  {props.employees.map((item) => (
+                    <Listbox.Option
+                      key={item.employeeId}
+                      className={({ active }) =>
+                        `relative cursor-default select-none py-2 pl-3 pr-9 ${
+                          active ? "text-white bg-indigo-600" : "text-gray-900"
+                        }`
+                      }
+                      value={item.fullName}
+                    >
+                      {({ selected, active }) => (
+                        <>
+                          <div className="flex items-center">
+                            <span
+                              className={`ml-3 block truncate ${
+                                selected ? "font-semibold" : "font-normal"
+                              }`}
+                            >
+                              {item.fullName}
+                            </span>
+                          </div>
+                          {selected && (
+                            <span
+                              className={`absolute inset-y-0 right-0 flex items-center pr-4 ${
+                                active ? "text-white" : "text-indigo-600"
+                              }`}
+                            >
+                              
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                className="h-5 w-5"
+                                viewBox="0 0 20 20"
+                                fill="currentColor"
+                                aria-hidden="true"
+                              >
+                                <path
+                                  fillRule="evenodd"
+                                  d="M6.293 9.293a1 1 0 011.414 0L10 11.586l2.293-2.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z"
+                                  clipRule="evenodd"
+                                />
+                              </svg>
+                            </span>
+                          )}
+                        </>
+                      )}
+                    </Listbox.Option>
+                  ))}
+                </Listbox.Options>
+              )}
+            </div>
+          </>
+        )}
+      </Listbox>
                       <Spacer />
                   <Field
                     name="included"
@@ -756,6 +725,7 @@ function CallForm(props) {
                   />
                   <Spacer />
                   <div>
+                  {props.user.crmInd === true &&(
                   <Field
                     name="contactId"
                     //selectType="contactList"
@@ -778,9 +748,64 @@ function CallForm(props) {
                     }}
                     inlineLabel
                   />
+                  )} 
+                  </div>
+                  <Spacer />
+                  <div>
+                  {props.user.crmInd === true &&(
+                 <Field
+                 name="customerId"
+                 // selectType="customerList"
+                 isColumnWithoutNoCreate
+                 label={
+                   <FormattedMessage
+                     id="app.customer"
+                     defaultMessage="Customer"
+                   />
+                 }
+                 //component={SearchSelect}
+                 component={SelectComponent}
+                 options={
+                   Array.isArray(customerNameOption)
+                     ? customerNameOption
+                     : []
+                 }
+                 isColumn
+                 margintop={"0"}
+                 value={values.customerId}
+                 inlineLabel
+               />
+                  )} 
                   </div>
                   <Spacer/>
-                  <div >
+                  <div>
+                  {props.user.crmInd === true &&(
+                 <Field
+                 name="opportunityId"
+                 // selectType="customerList"
+                 isColumnWithoutNoCreate
+                 label={
+                   <FormattedMessage
+                     id="app.opportunity"
+                     defaultMessage="Opportunity"
+                   />
+                 }
+                 //component={SearchSelect}
+                 component={SelectComponent}
+                 options={
+                   Array.isArray(opportunityNameOption)
+                     ? opportunityNameOption
+                     : []
+                 }
+                 isColumn
+                 margintop={"0"}
+                 value={values.opportunityId}
+                 inlineLabel
+               />
+                  )} 
+                  </div>
+                  <Spacer/>
+                  {/* <div >
                   <Field
                     disabled="true"
                     isRequired
@@ -800,7 +825,7 @@ function CallForm(props) {
                     inlineLabel
                   />
                    </div>
-                  <Spacer />
+                  <Spacer /> */}
                   <div>
                     <div class=" w-full"><Field
                       name="callDescription"
@@ -816,7 +841,7 @@ function CallForm(props) {
                   </div>
                  
                   <Spacer  />
-                  <div class=" flex justify-between" >
+                  {/* <div class=" flex justify-between" >
                     <div 
                     class=" w-1/2 font-bold">
                     <div class=" flex justify-between" >
@@ -856,7 +881,7 @@ function CallForm(props) {
                         </div>
                       ) : null}
                     </div>
-                  </div>
+                  </div> */}
                 </div>
               </div>
               <Spacer  />
@@ -901,15 +926,20 @@ function CallForm(props) {
                 </Button>
               </div>
             </Form>
+            </div>
           )}
         </Formik>
       </>
     );
   }
 
-const mapStateToProps = ({ auth, call, employee, opportunity, candidate }) => ({
+const mapStateToProps = ({ auth, call, employee,customer, opportunity, candidate }) => ({
   addingCall: call.addingCall,
+  allCustomerData:customer.allCustomerData,
   userId: auth.userDetails.userId,
+  allOpportunityData:opportunity.allOpportunityData,
+  orgId: auth.userDetails.organizationId,
+  user: auth.userDetails,
   updatingCall: call.updatingCall,
   user: auth.userDetails,
   deletingCall: call.deleteCall,
@@ -917,7 +947,7 @@ const mapStateToProps = ({ auth, call, employee, opportunity, candidate }) => ({
   employees: employee.employees,
   filteredContact: candidate.filteredContact,
   addNotesSpeechModal: call.addNotesSpeechModal,
-  // candidateId: candidate.candidate.candidateId,
+  fullName: auth.userDetails.fullName
   // candidateByuserId:candidate.candidateByuserId
 });
 
@@ -925,14 +955,16 @@ const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
       addCall,
+      getAllCustomerData,
       handleChooserModal,
       getAllSalesList,
       updateCall,
       handleCallModal,
       deleteCall,
       getEmployeelist,
+      getAllOpportunityData,
       getFilteredEmailContact,
-      setClearbitCandidateData,
+      setClearbitCandidateData, 
       handleCallNotesModal,
     },
     dispatch

@@ -7,7 +7,6 @@ import dayjs from "dayjs";
 import LightbulbIcon from '@mui/icons-material/Lightbulb';
 import { FormattedMessage } from "react-intl";
 import {
- 
   setDashboardViewType,
 } from "../DashboardAction";
 import { Button, Icon, Tooltip,Badge } from "antd";
@@ -17,6 +16,8 @@ import { withRouter } from "react-router-dom";
 import { Input,Tag } from "antd";
 import { dashboardReducer } from "../DashboardReducer";
 import { BundleLoader } from "../../../Components/Placeholder";
+import PersonIcon from '@mui/icons-material/Person';
+import DashboardShareForm from "./DashboardShareForm";
 
 const Option = StyledSelect.Option;
 const { Search } = Input;
@@ -37,7 +38,7 @@ const DashboardActionLeft = (props) => {
             
             
             
-              <Tag
+              {/* <Tag
                 color={viewType === "ME" ? "#FFA500" : "orange"}
                 style={{
                   cursor: "pointer",                  
@@ -55,47 +56,58 @@ const DashboardActionLeft = (props) => {
                   defaultMessage="My View"
                 />
                 
-              </Tag>
+              </Tag> */}
            
              
              
             
-              <Tag
-                color={viewType === "ALL" ? "#FFA500" : "orange"}
-                style={{
-                  cursor: "pointer",                  
-                  fontWeight: viewType === "ALL" ? "#FFA500" : "orange",
-                  textAlign: "center",
-                  fontFamily:"poppins",
-                  borderColor: "orange",
-                }}
-               onClick={() => setDashboardViewType("ALL")}
-              >
-                <FormattedMessage
-                  id="app.organization"
-                  defaultMessage="Organization"
-                />
-              </Tag>
             
-              {/* <Tooltip
-        title={<FormattedMessage id="app.myTask" defaultMessage="My Task" />}
-      > */}
         <span class=" mr-2 cursor-pointer text-xs"
           onClick={() => props.setDashboardViewType("test")}
           style={{
             color: props.viewType === "test" && "#1890ff",
   
           }}
+        > <PersonIcon/>
+        
+        </span>
+           
+{user.crmInd===true && (
+
+        <span class=" mr-2 cursor-pointer text-xs"
+          onClick={() => props.setDashboardViewType("bulb")}
+          style={{
+            color: props.viewType === "bulb" && "#1890ff",
+  
+          }}
         > <LightbulbIcon  />
         
         </span>
-      {/* </Tooltip> */}
-           
+)}
             </>
              )}
 
-            
-         
+{user.dashboardFullListInd===true && (
+              <Tag
+                color={viewType === "ALL" ? "tomato" : "#FFA500"}
+                style={{
+                  cursor: "pointer",                  
+                  fontWeight: viewType === "ALL" ? "tomato" : "#FFA500",
+                  textAlign: "center",
+                  fontFamily:"poppins",
+                  borderColor: "tomato",
+                }}
+               onClick={() => setDashboardViewType("ALL")}
+              >
+                <FormattedMessage
+                  id="app.enterprise"
+                  defaultMessage="Enterprise"
+                />
+              </Tag>
+            )}
+             {viewType==="ALL" && (
+        <DashboardShareForm/>
+        )}
            
     </FlexContainer>
   );

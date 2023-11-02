@@ -61,8 +61,7 @@ console.log("findLoginData",findLoginData&& findLoginData.userName);
 const mapStateToProps = ({ customer ,auth}) => ({
   addSharingCustomer: customer.addSharingCustomer,
   userId:auth.userDetails.userId,
-  fullName:
-  (auth.userDetails.fullName),
+  fullName:(auth.userDetails.fullName),
   permissionsDataListCustomer: customer.permissionsDataListCustomer,
 });
 

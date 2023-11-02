@@ -11,12 +11,15 @@ import moment from "moment";
 import BorderColorIcon from '@mui/icons-material/BorderColor';
 import { BundleLoader } from "../../../../Components/Placeholder";
 import InfoIcon from '@mui/icons-material/Info';
+import AssistantIcon from '@mui/icons-material/Assistant';
 import { getLeaveListRangeByUserId,
     updateLeaves,
     setEditLeave,
     handleUpdateLeaveModal,
+    handleStatusLeaveModal
     } from "../../LeavesAction";
     import UpdateLeavesModal from "../Tab/UpdateLeavesModal";
+import StatusLeavesModal from "./StatusLeavesModal";
 const { Option } = Select;
 function LeaveCardView (props) {
   const [page, setPage] = useState(0);
@@ -45,6 +48,8 @@ function LeaveCardView (props) {
     fetchingLeaveListRangeByUserIdError,
     handleUpdateLeaveModal,
     updateLeaveModal,
+    updateStatusLeaveModal,
+    handleStatusLeaveModal
     
     // fetchingBankDetails,
     // bank,
@@ -57,7 +62,7 @@ function LeaveCardView (props) {
       
             <>
             
-
+<div class=" h-h72 overflow-auto overflow-x-auto">
              
               <CardWrapper>      
               {props.leaveListRangeByUserId.map((item) => {
@@ -75,7 +80,7 @@ function LeaveCardView (props) {
 <div class=" text-sm text-cardBody font-medium font-poppins">
   {/* Delivery Date */}
 Start Date: {item.startDate === null ? "No Transaction" :
-    <span>
+    <span class="text-xs">
       {moment.utc(item.startDate).format("DD-MM-YYYY")}
     </span>
   }
@@ -91,7 +96,7 @@ Start Date: {item.startDate === null ? "No Transaction" :
                         <div class=" text-sm text-cardBody font-medium font-poppins">
   {/* Delivery Date */}
 End Date: {item.endDate === null ? "No Transaction" :
-    <span>
+    <span class="text-xs">
       {moment.utc(item.endDate).format("DD-MM-YYYY")}
     </span>
   }
@@ -101,7 +106,7 @@ End Date: {item.endDate === null ? "No Transaction" :
           <div >
                         <div class=" text-sm text-cardBody font-medium font-poppins">
 
-  Cover:    {item.coverDetails}
+  Cover:   <label class="text-xs"> {item.coverDetails}</label>
  
 
   &nbsp;
@@ -109,7 +114,7 @@ End Date: {item.endDate === null ? "No Transaction" :
           </div>
 
           {/* <div >
-                        <div class=" text-sm text-cardBody font-medium font-poppins">
+                        <div class=" text-xs text-cardBody font-medium font-poppins">
 
                         Reason:    {item.reason}
  
@@ -187,6 +192,25 @@ style={{ color: "grey",fontSize:"1.2rem",padding:"2px" }}/>
    : ""}
    </span>
 
+   <span >
+                 
+                 <div style={{ cursor: "pointer",padding:"2px"}}
+// style={{ cursor: "pointer" }}
+onClick={() => {
+handleStatusLeaveModal(true);
+handleSetCurrentLeaveId(item.leaveId);
+
+}}
+>
+                 <Tooltip  title={"status"}>
+                 <AssistantIcon
+style={{ color: "grey",fontSize:"1.2rem",padding:"2px" }}/>
+   </Tooltip> 
+
+   </div>
+ 
+   </span>
+
      <span
      
      >
@@ -212,10 +236,18 @@ style={{ cursor: "pointer" }}></DeleteOutlined>
                  )  
             })}
               </CardWrapper>
+              </div>
               <UpdateLeavesModal
         leaveId={currentLeaveId}
         updateLeaveModal={updateLeaveModal}
         handleUpdateLeaveModal={handleUpdateLeaveModal}
+        handleSetCurrentLeaveId={handleSetCurrentLeaveId}
+        />
+
+<StatusLeavesModal
+        leaveId={currentLeaveId}
+        updateStatusLeaveModal={updateStatusLeaveModal}
+        handleStatusLeaveModal={handleStatusLeaveModal}
         handleSetCurrentLeaveId={handleSetCurrentLeaveId}
         />
             </>
@@ -233,6 +265,7 @@ const mapStateToProps = ({ leave, auth }) => ({
     leaveListRangeByUserId: leave.leaveListRangeByUserId,
     // fetchingBankDetails: profile.fetchingBankDetails,
     updateLeaveModal:leave.updateLeaveModal,
+    updateStatusLeaveModal:leave.updateStatusLeaveModal,
 })
 
 const mapDispatchToProps = (dispatch) =>
@@ -242,6 +275,7 @@ const mapDispatchToProps = (dispatch) =>
         updateLeaves,
         setEditLeave,
         handleUpdateLeaveModal,
+        handleStatusLeaveModal
     },
     dispatch,
   )
@@ -267,7 +301,7 @@ const CardWrapper = styled.div`
 `
 const CardElement = styled.div`
  
-border-radius: 0.75rem;
+border-radius: 0.35rem;
     border: 3px solid #EEEEEE;
     background-color: rgb(255,255,255);
     box-shadow: 0 0.25em 0.62em #aaa;
@@ -275,11 +309,11 @@ border-radius: 0.75rem;
     color: rgb(68,68,68);
     margin: 1em;
     padding: 0.2rem;
-    width: 15vw;
+    width: 20vw;
     display: flex;
     flex-direction: column;
   @media only screen and (max-width: 600px) {
-    width: 100%;
+    width: -webkit-fill-available;
     
   }
 `

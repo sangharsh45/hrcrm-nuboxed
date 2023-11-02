@@ -7,6 +7,7 @@ import moment from "moment";
 import { MainWrapper, FlexContainer } from "../../../Components/UI/Layout";
 import { TextInput, Title } from "../../../Components/UI/Elements";
 import SingleSectors from "./SingleSector";
+import { BundleLoader } from "../../../Components/Placeholder";
 import dayjs from "dayjs";
 import {
   getSectors,
@@ -59,11 +60,11 @@ class Sectors extends Component {
       let exist =
         sectors && sectors.some((element) => element.sectorName === sectorName);
     
-      if (exist) {
-        message.error(
-          "Can't create as another sector type exists with the same name!"
-        );
-      } else {
+      // if (exist) {
+      //   message.error(
+      //     "Can't create as another sector type exists with the same name!"
+      //   );
+      // } else {
         addSectors(sector, () => console.log("add sector callback"));
         this.setState({
           sectorName: "",
@@ -71,7 +72,7 @@ class Sectors extends Component {
           isTextInputOpen: false,
           editInd: true,
         });
-      }
+      // }
     };
     
   handleDeleteSector = (sectorId = { sectorId }) => {
@@ -118,7 +119,7 @@ class Sectors extends Component {
       singleSector,
       linkedSectors,
     } = this.state;
-    if (fetchingSectors) return <p>Loading ...</p>;
+    if (fetchingSectors) return <BundleLoader/>;
     //if (fetchingSectorsError) return <p>We are unable to load data</p>;
     return (
       <>
@@ -193,7 +194,7 @@ class Sectors extends Component {
                 <br />
                 <br />
                 <TextInput
-                  placeholder="Add More"
+                  placeholder="Add Sector"
                   name="sectorName"
                   value={sectorName}
                   onChange={this.handleChange}

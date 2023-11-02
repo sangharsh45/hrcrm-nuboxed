@@ -1,14 +1,10 @@
 import React, { Component, useEffect, useState, useMemo, lazy } from "react";
-import { MultiAvatar2 } from "../../../../Components/UI/Elements";
-import { FlexContainer, OnlyWrapCard } from "../../../../Components/UI/Layout";
-import { Button, Tooltip } from "antd";
+import {  OnlyWrapCard } from "../../../../Components/UI/Layout";
+import { Button } from "antd";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Select } from "antd";
-import styled from "styled-components";
-import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import moment from "moment";
-import BorderColorIcon from "@mui/icons-material/BorderColor";
 import { BundleLoader } from "../../../../Components/Placeholder";
 import {
   getLeaveListRangeByUserId,
@@ -69,14 +65,23 @@ function LeaveRejectedStatusCard(props) {
                     }}
                   >
                     <div class=" flex flex-row justify-evenly w-wk">
-                      <div className=" flex font-medium flex-col w-44 ">
+                      <div className=" flex font-medium flex-col w-44 mb-1">
                         <div class=" text-sm text-cardBody font-medium font-poppins">
                           Start Date
                         </div>
 
-                        <div class=" font-normal text-sm text-cardBody font-poppins">
+                        <div class=" font-normal text-xs text-cardBody font-poppins">
                           {` ${moment.utc(item.startDate).format("ll")}`}
                         </div>
+                        <div className=" flex font-medium flex-col w-40">
+                        <div class=" text-sm text-cardBody font-medium font-poppins">
+                          Reason
+                        </div>
+
+                        <div class=" font-normal text-xs text-cardBody font-poppins">
+                          {item.reason}
+                        </div>
+                      </div>
                       </div>
 
                       <div className=" flex font-medium flex-col w-40">
@@ -84,33 +89,11 @@ function LeaveRejectedStatusCard(props) {
                           End Date
                         </div>
 
-                        <div class=" font-normal text-sm text-cardBody font-poppins">
+                        <div class=" font-normal text-xs text-cardBody font-poppins">
                           {` ${moment.utc(item.endDate).format("ll")}`}
                         </div>
-
-                        {/* </Tooltip>   */}
-                      </div>
-                      <div className=" flex font-medium flex-col w-40">
-                        <div class=" text-sm text-cardBody font-medium font-poppins">
-                          Cover
-                        </div>
-
-                        <div class=" font-normal text-sm text-cardBody font-poppins">
-                          {item.coverDetails}
-                        </div>
-                      </div>
-                      <div className=" flex font-medium flex-col w-40">
-                        <div class=" text-sm text-cardBody font-medium font-poppins">
-                          Reason
-                        </div>
-
-                        <div class=" font-normal text-sm text-cardBody font-poppins">
-                          {item.reason}
-                        </div>
-                      </div>
-
-                      <div className=" flex font-medium flex-col w-48 ">
-                        <div class=" text-base text-cardBody font-poppins">
+                        <div className=" flex font-medium flex-col w-max ">
+                        <div class=" text-xs text-cardBody font-poppins">
                           {item.status === "Rejected" && (
                             <div
                               style={{
@@ -126,7 +109,17 @@ function LeaveRejectedStatusCard(props) {
                           )}
                         </div>
                       </div>
-                      <div class="flex flex-col w-20">
+                        {/* </Tooltip>   */}
+                      </div>
+                      <div className=" flex font-medium flex-col w-40">
+                        <div class=" text-sm text-cardBody font-medium font-poppins">
+                          Cover
+                        </div>
+
+                        <div class=" font-normal text-xs text-cardBody font-poppins">
+                          {item.coverDetails}
+                        </div>
+                        <div class="flex flex-col w-20">
                         <div></div>
                         <div>
                           <div>
@@ -143,6 +136,11 @@ function LeaveRejectedStatusCard(props) {
                           </div>
                         </div>
                       </div>
+                      </div>
+                     
+
+                     
+                     
                     </div>
                   </div>
                 </div>

@@ -18,7 +18,7 @@ class ContactOverView extends Component {
               <MultiAvatar />
             </div>
             &nbsp;
-            <div class=" flex flex-col w-4/6">
+            <div class=" flex flex-col w-4/5">
               <Title
                 overflow="hidden"
                 textOverflow="ellipsis"

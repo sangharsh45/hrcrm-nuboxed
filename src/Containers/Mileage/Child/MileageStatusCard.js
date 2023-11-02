@@ -20,14 +20,14 @@ function MileageStatusCard(props) {
  
     return (
       <>
-       <div className="flex justify-arround">
-        <div className="w-[28rem]">
+      <div className="flex justify-arround max-sm:flex-col max-sm:overflow-x-auto h-[34rem]">
+        <div className="w-[26rem] max-sm:w-wk">
           <MileagePendingStatusCard/>
         </div>
-        <div className="w-[28rem]">
+        <div className="w-[26rem] max-sm:w-wk">
           <MileageApprovedStatusCard/>
         </div>
-        <div className="w-[28rem]">
+        <div className="w-[26rem] max-sm:w-wk">
           <MileageRejectedStatusCard/>
         </div>
        </div>

@@ -15,7 +15,6 @@ import {
   addCustomer,
   setClearbitData
 } from "../CustomerAction";
-import { Fragment } from 'react'
 import { getAllSalesList } from "../../Opportunity/OpportunityAction"
 import { Listbox, Transition } from '@headlessui/react'
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid'
@@ -28,75 +27,13 @@ import ClearbitImage from "../../../Components/Forms/Autocomplete/ClearbitImage"
 const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
 const CustomerSchema = Yup.object().shape({
   name: Yup.string().required("Input needed!"),
-  email: Yup.string().email("Enter a valid Email"),
-  phoneNumber: Yup.string().matches(phoneRegExp, 'Phone number is not valid').min(5,"Number is too short").max(10,"Number is too long")
+  // email: Yup.string().required("Input needed!").email("Enter a valid Email"),
+  phoneNumber: Yup.string().matches(phoneRegExp, 'Phone number is not valid').min(8,"Minimum 8 digits").max(10,"Number is too long")
 });
 
 function CustomerForm(props) {
-  const people = [
-    {
-      id: 1,
-      name: 'Wade Cooper',
-      avatar:""
-        
-    },
-    {
-      id: 2,
-      name: 'Arlene Mccoy',
-      avatar:
-      'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-    },
-    {
-      id: 3,
-      name: 'Devon Webb',
-      avatar:
-        "",
-    },
-    {
-      id: 4,
-      name: 'Tom Cook',
-      avatar:
-       "",
-    },
-    {
-      id: 5,
-      name: 'Tanya Fox',
-      avatar:
-      'https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-    },
-    {
-      id: 6,
-      name: 'Hellen Schmidt',
-      avatar:
-      'https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-    },
-    {
-      id: 7,
-      name: 'Caroline Schultz',
-      avatar:
-       "",
-    },
-    {
-      id: 8,
-      name: 'Mason Heaney',
-      avatar:
-        "",
-    },
-    {
-      id: 9,
-      name: 'Claudie Smitham',
-      avatar:
-        "",
-    },
-    {
-      id: 10,
-      name: 'Emil Schaefer',
-      avatar:
-       "",
-    },
-  ]
-  const [selected1, setSelected1] = useState(people[3])
-  const[checked,setChecked]=useState(true);
+
+   const[checked,setChecked]=useState(true);
   const[whiteblue,setWhiteblue]=useState(true);
 
   function handleWhiteBlue (checked) {
@@ -129,18 +66,7 @@ function CustomerForm(props) {
       clearbit,
       // setClearbitData,
     } = props;
-    const employeesData = props.allCustomerEmployeeList.map((item) => {
-      return {
-        label: `${item.fullName}`,
-        value: item.employeeId,
-      };
-    });
-    const salesNameOption = props.sales.map((item) => {
-      return {
-        label: `${item.fullName || ""}`,
-        value: item.employeeId,
-      };
-    });
+   
     function classNames(...classes) {
       return classes.filter(Boolean).join(' ')
     }
@@ -150,6 +76,9 @@ function CustomerForm(props) {
         value: item.sectorId,
       };
     });
+    const [defaultOption, setDefaultOption] = useState(props.fullName);
+    const [selected, setSelected] = useState(defaultOption);
+    const selectedOption = props.allCustomerEmployeeList.find((item) => item.fullName === selected);
     return (
       <>
         <Formik
@@ -162,7 +91,7 @@ function CustomerForm(props) {
             name: "",
             url: "",
             gst:"",
-            // sector: "",
+            source: "",
             sectorId: "",
             country: props.user.country,
             email: "",
@@ -174,7 +103,7 @@ function CustomerForm(props) {
             userId: props.userId,
             notes: "",
             businessRegistration: "",
-            assignedTo: userId ? userId : "",
+            assignedTo: selectedOption ? selectedOption.employeeId:userId,
             department: "",
             address: [
               {
@@ -196,6 +125,7 @@ function CustomerForm(props) {
               {
                 ...values,
                 category: checked ? "Both" : whiteblue ? "White" : "Blue",
+                assignedTo: selectedOption ? selectedOption.employeeId:userId,
               },
               props.userId,
               () => handleReset(resetForm)
@@ -211,15 +141,10 @@ function CustomerForm(props) {
             values,
             ...rest
           }) => (
+            <div class="max-sm:h-[30rem] overflow-y-auto">
             <Form className="form-background">
-              <div  style={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  height: "70vh",
-                  overflow: "scroll",
-                  paddingRight: "0.6em",
-                }} >
-                <div class=" h-full w-1/2"   >
+              <div class="flex justify-around  pr-2 max-sm:flex-col">
+                <div class=" h-full w-w47.5 max-sm:w-wk"   >
                   <div>
                     {clearbit && clearbit.hasOwnProperty("logo") && (
                       <ProgressiveImage
@@ -271,7 +196,7 @@ function CustomerForm(props) {
                     inlineLabel
                   />
                   <Spacer />
-                  <Field
+                  {/* <Field
                     name="email"
                     type="text"
                     // label="Email"
@@ -282,9 +207,9 @@ function CustomerForm(props) {
                     width={"100%"}
                     component={InputComponent}
                     inlineLabel
-                  />                  
+                  />                   */}
                    <div class=" flex justify-between">
-                    <div class=" w-3/12">
+                    <div class=" w-3/12 max-sm:w-[30%]">
                       <FastField
                         name="countryDialCode"
                         selectType="dialCode"
@@ -317,7 +242,7 @@ function CustomerForm(props) {
 
                   <Spacer/>
                   <div class=" flex justify-between">
-                  <div class=" w-6/12">
+                  <div class="w-w47.5 max-sm:w-w47.5">
                   <FastField                     
                             name="sectorId"
                             label={
@@ -335,28 +260,25 @@ function CustomerForm(props) {
                             }
                           />
                     </div>
-                   
-                 
-                    <div class=" w-1/3">
-                     <div>
-                        <StyledLabel>Requirement Type</StyledLabel>
+                    <div class=" w-2/5 max-sm:w-w47.5">
+                    <FastField
+                            name="source"
+                            type="text"
+                            label={
+                              <FormattedMessage
+                                id="app.source"
+                                defaultMessage="Source"
+                              />
+                            }
+                            isColumnWithoutNoCreate
+                            selectType="sourceName"
+                            component={SearchSelect}
+                            value={values.source}
+                            inlineLabel
+                            className="field"
+                            isColumn
+                          />
                         </div>
-                        <Switch
-                          checked={whiteblue}
-                          onChange={handleWhiteBlue}
-                          disabled={checked}
-                          checkedChildren="White collar"
-                          unCheckedChildren="Blue collar"
-                        />
-                    
-                    </div>
-                    <div>
-                      <Checkbox
-                        checked={checked}
-                        onChange={() => handleChange()}
-                      >Both
-                      </Checkbox>
-                    </div>
                   </div>
 
                  
@@ -372,79 +294,81 @@ function CustomerForm(props) {
                     component={TextareaComponent}
                   />
                 </div>
-                <div class=" h-3/4 w-5/12 "  
+                <div class=" h-3/4 w-w47.5 max-sm:w-wk "  
                 >
                  <Spacer/>
                  <div class=" flex justify-between">
                     <div class=" h-full w-full">
-                    <Listbox value={selected1} onChange={setSelected1}>
-      {({ open }) => (
-        <>
-          <Listbox.Label className="block text-sm font-medium text-gray-700">Assigned to</Listbox.Label>
-          <div className="relative mt-1">
-            <Listbox.Button className="relative w-full leading-4 cursor-default rounded-md border border-gray-300 bg-white py-2 pl-3 pr-10 text-left shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm: text-sm">
-          
-              <span className="flex items-center">
-                <img src={selected1.avatar} alt="" className="h-2 w-2 flex-shrink-0 rounded-full" />
-                <span className="ml-3 block truncate">{selected1.fullName}</span>
-              </span>
-             
-
-              <span className="pointer-events-none absolute inset-y-0 right-0 ml-3 flex items-center pr-2">
-                <ChevronUpDownIcon className="h-5 w-5 text-gray-400" aria-hidden="true" />
-              </span>
-            </Listbox.Button>
-
-            <Transition
-              show={open}
-              as={Fragment}
-              leave="transition ease-in duration-100"
-              leaveFrom="opacity-100"
-              leaveTo="opacity-0"
+                    <Listbox value={selected} onChange={setSelected}>
+        {({ open }) => (
+          <>
+            <Listbox.Label className="block font-semibold text-[0.75rem] mb-1 leading-lh1.2  "
+            // style={{boxShadow:"0em 0.25em 0.625em -0.25em" }}
             >
-              <Listbox.Options className="absolute z-10 mt-1 max-h-56 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
-                {props.sales.map((person) => (
-                  <Listbox.Option
-                    key={person.id}
-                    className={({ active }) =>
-                      classNames(
-                        active ? 'text-white bg-indigo-600' : 'text-gray-900',
-                        'relative cursor-default select-none py-2 pl-3 pr-9'
-                      )
-                    }
-                    value={person}
-                  >
-                    {({ selected1, active }) => (
-                      <>
-                        <div className="flex items-center">
-                          <img src={person.avatar} alt="" className="h-6 w-6 flex-shrink-0 rounded-full" />
-                          <span
-                            className={classNames(selected1 ? 'font-semibold' : 'font-normal', 'ml-3 block truncate')}
-                          >
-                            {person.fullName}
-                          </span>
-                        </div>
-
-                        {selected1 ? (
-                          <span
-                            className={classNames(
-                              active ? 'text-white' : 'text-indigo-600',
-                              'absolute inset-y-0 right-0 flex items-center pr-4'
-                            )}
-                          >
-                            <CheckIcon className="h-5 w-5" aria-hidden="true" />
-                          </span>
-                        ) : null}
-                      </>
-                    )}
-                  </Listbox.Option>
-                ))}
-              </Listbox.Options>
-            </Transition>
-          </div>
-        </>
-      )}
-    </Listbox>
+              Assigned to
+            </Listbox.Label>
+            <div className="relative ">
+              <Listbox.Button style={{boxShadow: "rgb(170, 170, 170) 0px 0.25em 0.62em"}} className="relative w-full leading-4 cursor-default border border-gray-300 bg-white py-0.5 pl-3 pr-10 text-left shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm">
+                {selected}
+              </Listbox.Button>
+              {open && (
+                <Listbox.Options
+                  static
+                  className="absolute z-10 max-h-56 w-full overflow-auto mt-1  bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
+                >
+                  {props.allCustomerEmployeeList.map((item) => (
+                    <Listbox.Option
+                      key={item.employeeId}
+                      className={({ active }) =>
+                        `relative cursor-default select-none py-2 pl-3 pr-9 ${
+                          active ? "text-white bg-indigo-600" : "text-gray-900"
+                        }`
+                      }
+                      value={item.fullName}
+                    >
+                      {({ selected, active }) => (
+                        <>
+                          <div className="flex items-center">
+                            <span
+                              className={`ml-3 block truncate ${
+                                selected ? "font-semibold" : "font-normal"
+                              }`}
+                            >
+                              {item.fullName}
+                            </span>
+                          </div>
+                          {selected && (
+                            <span
+                              className={`absolute inset-y-0 right-0 flex items-center pr-4 ${
+                                active ? "text-white" : "text-indigo-600"
+                              }`}
+                            >
+                              
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                className="h-5 w-5"
+                                viewBox="0 0 20 20"
+                                fill="currentColor"
+                                aria-hidden="true"
+                              >
+                                <path
+                                  fillRule="evenodd"
+                                  d="M6.293 9.293a1 1 0 011.414 0L10 11.586l2.293-2.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z"
+                                  clipRule="evenodd"
+                                />
+                              </svg>
+                            </span>
+                          )}
+                        </>
+                      )}
+                    </Listbox.Option>
+                  ))}
+                </Listbox.Options>
+              )}
+            </div>
+          </>
+        )}
+      </Listbox>
                     {/* <Field
                     name="assignedTo"
                     selectType="employee"
@@ -470,9 +394,9 @@ function CustomerForm(props) {
                   /> */}
                   </div>
                     </div>
-                    <Spacer />
-                    <div class=" flex justify-between">
-                    <div class=" w-2/5">
+                   
+                    <div class=" flex justify-between mt-[0.2rem] max-sm:flex-col ">
+                    <div class=" w-2/5 max-sm:w-wk">
                       <Field
                         name="vatNo"
                         type="text"
@@ -489,7 +413,7 @@ function CustomerForm(props) {
                         inlineLabel
                       />
                     </div>
-                    <div class=" w-2/5">
+                    <div class=" w-[10rem] max-sm:w-wk">
                       <Field
                         name="businessRegistration"
                         type="text"
@@ -508,27 +432,6 @@ function CustomerForm(props) {
                     </div>
                   </div>
                   <Spacer/>
-                  <div class=" flex justify-between">
-                    <div class=" w-2/5">
-                      <Field
-                        name="gst"
-                        type="text"
-                        // label="VAT Number"
-                        label={
-                          <FormattedMessage
-                            id="app.gst"
-                            defaultMessage="GST"
-                          />
-                        }
-                        isColumn
-                        width={"100%"}
-                        component={InputComponent}
-                        inlineLabel
-                      />
-                    </div>
-                  
-                  </div>
-                  <Spacer/>
                   <div style={{ width: "100%",backgroundImage: "linear-gradient(-90deg, #00162994, #94b3e4)" }}>
                       <div>
                   <HeaderLabel style={{color:"white"}} >Corporate Address</HeaderLabel>
@@ -545,8 +448,8 @@ function CustomerForm(props) {
                       />
                     )}
                   />
-                   <div class=" flex justify-between">
-                   <div class=" w-1/2">
+                   {/* <div class=" flex justify-between">
+                   <div class=" w-1/2 max-sm:w-wk">
                      <Field
                        name="country"
                        isColumnWithoutNoCreate
@@ -567,12 +470,12 @@ function CustomerForm(props) {
                        width="100%"
                      />
                    </div>
-                 </div>
+                 </div> */}
                
                 </div>
               </div>
               <Spacer />
-              <div class=" flex justify-end">
+              <div class="flex justify-end w-wk bottom-2 mr-2 md:absolute ">
                 <Button
                   type="primary"
                   htmlType="submit"
@@ -584,6 +487,7 @@ function CustomerForm(props) {
                 </Button>
               </div>
             </Form>
+            </div>
           )}
         </Formik>
       </>
@@ -597,10 +501,10 @@ const mapStateToProps = ({ auth, customer,employee ,opportunity,sector}) => ({
   clearbit: customer.clearbit,
   user: auth.userDetails,
   sales: opportunity.sales,
-  // employees: employee.employees,
   allCustomerEmployeeList:employee.allCustomerEmployeeList,
   userId: auth.userDetails.userId,
   sectors: sector.sectors,
+  fullName: auth.userDetails.fullName
 });
 
 const mapDispatchToProps = (dispatch) =>

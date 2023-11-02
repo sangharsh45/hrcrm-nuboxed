@@ -8,10 +8,17 @@ const initialState = {
   addingContact: false,
   addingContactError: false,
 
+  fetchingContactRecords: false,
+  fetchingContactRecordsError: true,
+  contactRecord:[],
 
   fetchingContactData:false,
   fetchingContactDataError:false,
   contactData:[],
+
+  fetchingDelasContactData: false,
+  fetchingDelasContactDataError: false,
+  dealsContactData:[],
 
   fetchingVendorContactData: false,
   fetchingVendorContactDataError: false,
@@ -45,6 +52,9 @@ const initialState = {
   fetchingDocumentsByContactId: false,
   fetchingDocumentsByContactIdError: false,
   documentsByContactId: [],
+
+  fetchingFilterContacts: false,
+   fetchingFilterContactsError: false,
 
   deleteDocument: false,
   deleteDocumentError: false,
@@ -81,7 +91,7 @@ const initialState = {
   addingContactOpportunity: false,
   addingContactOpportunityError: false,
   addContactOpportunityModal: false,
-  viewType: "dashboard",
+  viewType: "table",
 
   fetchingContactsPartner: false,
   fetchingContactsPartnerError: false,
@@ -715,9 +725,6 @@ export const contactReducer = (state = initialState, action) => {
               ...state,
               fetchingContactData: false,
                contactData: action.payload,
-      
-             
-            
             };
           case types.GET_CONTACT_DATA_FAILURE:
             return {
@@ -726,6 +733,21 @@ export const contactReducer = (state = initialState, action) => {
               fetchingContactDataError: true,
             };
 
+            case types.GET_DEALS_CONTACT_DATA_REQUEST:
+              return { ...state, fetchingDelasContactData: true };
+            case types.GET_DEALS_CONTACT_DATA_SUCCESS:
+              return {
+                ...state,
+                fetchingDelasContactData: false,
+                 dealsContactData: action.payload,
+              };
+            case types.GET_DEALS_CONTACT_DATA_FAILURE:
+              return {
+                ...state,
+                fetchingDelasContactData: false,
+                fetchingDelasContactDataError: true,
+              };
+  
 
 
             case types.GET_VENDOR_CONTACT_DATA_REQUEST:
@@ -745,6 +767,37 @@ export const contactReducer = (state = initialState, action) => {
                 fetchingVendorContactData: false,
                 fetchingVendorContactDataError: true,
               };
+
+              
+        case types.GET_CONTACT_RECORDS_REQUEST:
+          return { ...state, fetchingContactRecords: true };
+        case types.GET_CONTACT_RECORDS_SUCCESS:
+          return {
+            ...state,
+            fetchingContactRecords: false,
+            contactRecord: action.payload,
+          };
+        case types.GET_CONTACT_RECORDS_FAILURE:
+          return {
+            ...state,
+            fetchingContactRecords: false,
+            fetchingContactRecordsError: true,
+          };
+
+          case types.GET_FILTER_CONTACTS_REQUEST:
+            return { ...state, fetchingFilterContacts: true };
+          case types.GET_FILTER_CONTACTS_SUCCESS:
+            return {
+              ...state,
+              fetchingFilterContacts: false,
+              contactByUserId:action.payload,
+              // contactByUserId: [
+              //   ...state.contactByUserId,
+              //   ...action.payload],
+            
+            };
+          case types.GET_FILTER_CONTACTS_FAILURE:
+            return { ...state, fetchingFilterContacts: false, fetchingFilterContactsError: true };
 
     default:
       return state;

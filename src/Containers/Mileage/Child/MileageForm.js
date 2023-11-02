@@ -258,7 +258,7 @@ function MileageForm(props) {
         <th>From</th>
         <th>To</th>
         <th>Distance</th>
-        <th>Unit</th>
+        {/* <th>Unit</th> */}
         <th>Remarks</th>
 
         {/* <th>Rate</th>
@@ -310,20 +310,19 @@ function MileageForm(props) {
                   isRequired
                 />
               </td>
-              <td style={{ width: "11%" }}>
+              {/* <td style={{ width: "11%" }}>
                 <Select
                   style={{ width: "90%" }}
-                  // onChange={(value) => handleChange(`${item.id}select`, value)}
+          
                   isRequired
                    disabled
                    value="km"
                   
                 >
                   
-                  {/* <Option value="Km" disabled>Km</Option> */}
-                  {/* <Option value="Mile">Mile</Option> */}
+                
                 </Select>
-              </td>
+              </td> */}
               <td>
                 <TextInput
                   style={{ width: "100%" }}

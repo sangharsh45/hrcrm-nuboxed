@@ -1,7 +1,7 @@
 import * as types from "./CustomerActionTypes";
 import dayjs from "dayjs";
 const initialState = {
-  viewType: "card",
+  viewType: "table",
   addCustomerModal: false,
 
   addingCustomer: false,
@@ -11,6 +11,9 @@ const initialState = {
   addDrawerCustomerEmailModal:false,
 
   customerProjectModal:false,
+
+  fetchingFilterCustomers: false,
+  fetchingFilterCustomersError: false,
  
 
   addingAttendence: false,
@@ -28,12 +31,18 @@ const initialState = {
   fetchinglatestCustomerError:false,
   latestCustomer:[],
 
+  fetchingAllCustomersData: false,
+  fetchingAllCustomersDataError: false,
+  allCustomerData:[],
+
   fetchingAllCustomerByPosition:false,
   fetchingAllCustomerByPosition:false,
 
   fetchingCustomerRequirement:false,
   fetchingCustomerRequirementError:false,
   customerRequirement:[],
+
+  callActivityModal:false,
 
   fetchingCustomers: false,
   fetchingCustomersError: false,
@@ -154,6 +163,8 @@ const initialState = {
   fetchingCustomerDetailsById: false,
   fetchingCustomerDetailsByIdError: false,
   customer: {},
+
+  addingLocationDetails:false,
 
   documentUploadModal: false,
 
@@ -286,6 +297,11 @@ const initialState = {
   fetchingCustomersDataError:false,
   customerData:[],
 
+  fetchingInvestorData: false,
+  fetchingInvestorDataError: false,
+  investorData:[],
+
+
   fetchingRecruitToCustomer: false,
   fetchingRecruitToCustomerError: false,
   recruitByCustomerId: [],
@@ -300,6 +316,10 @@ const initialState = {
   fetchingCustomersList:false,
   fetchingCustomersListError:false,
   customerByList:[],
+
+  fetchingAttendanceList: false,
+  fetchingAttendanceListError: false,
+  attendanceByList:[],
 
  
 
@@ -437,6 +457,9 @@ export const customerReducer = (state = initialState, action) => {
       return { ...state, documentUploadModal: action.payload };
     case types.HANDLE_INVOICE_MODAL:
       return { ...state, invoiceModal: action.payload };
+
+      case types.HANDLE_CALL_ACTIVITY_MODAL:
+        return { ...state, callActivityModal: action.payload };
     case types.DELETE_DOCUMENT_REQUEST:
       return { ...state, deleteDocument: true };
     case types.DELETE_DOCUMENT_SUCCESS:
@@ -556,6 +579,14 @@ export const customerReducer = (state = initialState, action) => {
         fetchingDocumentsByCustomerIdError: true,
       };
 
+
+      case types.ADD_LOCATION_DETAILS_REQUEST:
+        return { ...state, addingLocationDetails: true };
+      case types.ADD_LOCATION_DETAILS_SUCCESS:
+        return { ...state, addingLocationDetails: false, };
+      case types.ADD_LOCATION_DETAILS_FAILURE:
+        return { ...state, addingLocationDetails: false, };
+
     /* Get customer opportunity  */
     case types.GET_CUSTOMER_OPPORTUNITY_REQUEST:
       return { ...state, fetchingCustomerOpportunity: true };
@@ -648,7 +679,8 @@ export const customerReducer = (state = initialState, action) => {
         ...state,
         fetchingCustomerInputSearchData: false,
         customerByUserId: action.payload,
-        // serachedData: action.payload,
+        latestCustomer:action.payload,
+        customerCloser: action.payload,
       };
     case types.INPUT_CUSTOMER_SEARCH_DATA_FAILURE:
       return { ...state, fetchingCustomerInputSearchDataError: true };
@@ -1112,6 +1144,27 @@ export const customerReducer = (state = initialState, action) => {
             fetchingCustomersData: false,
             fetchingCustomersDataError: true,
           };
+
+          case types.GET_INVESTOR_DATA_REQUEST:
+            return { ...state, fetchingInvestorData: true };
+          case types.GET_INVESTOR_DATA_SUCCESS:
+            return {
+              ...state,
+              fetchingInvestorData: false,
+               investorData: action.payload,
+            };
+          case types.GET_INVESTOR_DATA_FAILURE:
+            return {
+              ...state,
+              fetchingInvestorData: false,
+              fetchingInvestorDataError: true,
+            };
+
+
+
+
+
+
       case types.UPDATE_CUSTOMER_CONTACT_BY_ID_FAILURE:
         return {
           ...state,
@@ -1437,6 +1490,64 @@ export const customerReducer = (state = initialState, action) => {
                                     linkedProjectTask: false,
                                     linkedProjectTaskError: true,
                                   };
+
+
+                                  case types.GET_ATTENDANCE_LIST_REQUEST:
+                                    return { ...state, fetchingAttendanceList: true };
+                                  case types.GET_ATTENDANCE_LIST_SUCCESS:
+                                    return {
+                                      ...state,
+                                      fetchingAttendanceList: false,
+                                       attendanceByList: action.payload,
+                              
+                                     
+                                    
+                                    };
+                                  case types.GET_ATTENDANCE_LIST_FAILURE:
+                                    return {
+                                      ...state,
+                                      fetchingAttendanceList: false,
+                                      fetchingAttendanceListError: true,
+                                    };
+
+
+                                    case types.GET_CUSTOMERS_FILTER_DATA_REQUEST:
+                                      return { ...state, fetchingFilterCustomers: true };
+                                    case types.GET_CUSTOMERS_FILTER_DATA_SUCCESS:
+                                      return {
+                                        ...state,
+                                        fetchingFilterCustomers: false,
+                                         customerByUserId: action.payload,
+                                
+                                        // customerByUserId: [
+                                        //   ...state.customerByUserId,
+                                        //   ...action.payload],
+                                      
+                                      };
+                                    case types.GET_CUSTOMERS_FILTER_DATA_FAILURE:
+                                      return {
+                                        ...state,
+                                        fetchingFilterCustomers: false,
+                                        fetchingFilterCustomersError: true,
+                                      };
+
+                                      case types.GET_ALL_CUSTOMERS_DATA_REQUEST:
+                                        return { ...state, fetchingAllCustomersData: true };
+                                      case types.GET_ALL_CUSTOMERS_DATA_SUCCESS:
+                                        return {
+                                          ...state,
+                                          fetchingAllCustomersData: false,
+                                           allCustomerData: action.payload,
+                                  
+                                         
+                                        
+                                        };
+                                      case types.GET_ALL_CUSTOMERS_DATA_FAILURE:
+                                        return {
+                                          ...state,
+                                          fetchingAllCustomersData: false,
+                                          fetchingAllCustomersDataError: true,
+                                        };
                   
                       
 

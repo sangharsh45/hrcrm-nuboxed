@@ -13,9 +13,20 @@ import {
   updateRoles,
   searchRoleName,removeRole
 } from "./RoleAction";
+import { BundleLoader } from "../../../../Components/Placeholder";
+import * as Yup from "yup";
+
 import { getDepartments } from "../../Department/DepartmentAction";
 import { Select } from "../../../../Components/UI/Elements";
 const { Option } = Select;
+
+const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
+const documentSchema = Yup.object().shape({
+  mobileNo: Yup.string().matches(phoneRegExp, 'Mobile number is not valid').min(5,"Number is too short").max(10,"Number is too long"),
+  phoneNo: Yup.string().matches(phoneRegExp, 'Phone number is not valid').min(5,"Number is too short").max(10,"Number is too long"),
+  departmentName: Yup.string().required("Input needed!"),
+});
+
 
 class Department extends Component {
   constructor(props) {
@@ -28,12 +39,14 @@ class Department extends Component {
       singleRole: "",
       userId: "",
       orgId: "",
-      departmentId: "",
+      departmentId: "", // Add departmentId to state
       departmentName: "",
       editInd: true,
       currentData: "",
+      error: "", // Add error field for validation error message
     };
   }
+  
   toggleInput = () =>
     this.setState((prevState) => ({
       isTextInputOpen: !prevState.isTextInputOpen,
@@ -44,15 +57,23 @@ class Department extends Component {
   handleDepartment = (value) => this.setState({ departmentId: value });
 
   handleAddRole = () => {
+ 
     const { addRoles, roles } = this.props;
     const {
       roleType,
       cb,
       addingRoles,
       isTextInputOpen,
-      departmentId,
+      departmentId, // Add departmentId to state
       editInd,
     } = this.state;
+  
+  
+    if (!departmentId) {
+      this.setState({ error: "Please select a department" });
+      return;
+    }
+  
     let role = {
       roleType,
       userId: this.props.userId,
@@ -60,24 +81,25 @@ class Department extends Component {
       departmentId,
       editInd,
     };
-
+  
     let exist = roles && roles.some((element) => element.roleType == roleType);
-
-    if (exist) {
-      message.error("Can't create as another roleType exists with same name!");
-    } else {
+  
+    // if (exist) {
+    //   message.error("Can't create as same Role exists!");
+    // } else {
       addRoles(role, () => console.log("add role callback"));
-    }
-
-    this.setState({
-      roleType: "",
-      singleRole: "",
-      departmentId: "",
-      departmentName: "",
-      isTextInputOpen: false,
-      editInd: true,
-    });
+      this.setState({
+        roleType: "",
+        singleRole: "",
+        departmentId: "",
+        departmentName: "",
+        isTextInputOpen: false,
+        editInd: true,
+        error: "", // Clear the error message when successfully adding a role
+      });
+    // }
   };
+  
 
   handleClear = () => {
     this.setState({ currentData: "" });
@@ -144,6 +166,7 @@ class Department extends Component {
     // getRoles();
   }
   render() {
+    console.log("departmentId",this.state.departmentId)
     const {
       fetchingRoles,
       fetchingRolesError,
@@ -160,7 +183,7 @@ class Department extends Component {
       linkedRoles,
       // linkedRole,
     } = this.state;
-    if (fetchingRoles) return <p>Loading ...</p>;
+    if (fetchingRoles) return <BundleLoader/>;
     if (fetchingRolesError) return <p>Error ...</p>;
     return (
       <>
@@ -218,6 +241,7 @@ class Department extends Component {
                       handleChange={this.handleChange}
                       handleUpdateRole={this.handleUpdateRole}
                       departments={this.props.departments}
+                      departmentId={this.state.departmentId}
                       handleDepartment={this.handleDepartment}
                       handleClear={this.handleClear}
                       handleSearchChange={this.handleSearchChange}
@@ -257,6 +281,9 @@ class Department extends Component {
                       </Option>
                     );
                   })}
+                
+{this.state.error && <p style={{ color: "red" }}>{this.state.error}</p>}
+
                 </Select>
                 &nbsp;
                 <Button

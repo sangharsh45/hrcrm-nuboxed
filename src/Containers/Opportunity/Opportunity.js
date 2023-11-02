@@ -11,11 +11,19 @@ import {
   setOpportunityViewType,
 } from "./OpportunityAction";
 
+import OpportunityBoard from "./Child/OpportunityBoard"
+import OpportunityWonCard from "./Child/OpportunityTable/OpportunityWonCard";
+
 const OpportunityCardView = lazy(() => import("./OpportunityCardView"));
 const OpportunityMap = lazy(() => import("./OpportunityMap"));
 const OpportunityHeader = lazy(() => import("./Child/OpportunityHeader"));
 const AddOpportunityModal = lazy(() => import("./Child/AddOpportunityModal"));
 const OpportunityTable = lazy(() => import("./Child/OpportunityTable/OpportunityTable"));
+const OpportunityCardList = lazy(() => import("./Child/OpportunityTable/OpportunityCardList"));
+const OpportunityCloseCard=lazy(()=>import("./Child/OpportunityTable/OpportunityCloseCard"));
+const OpportunityLostCard=lazy(()=>import("./Child/OpportunityTable/OpportunityLostCard"));
+const OpportunityDeletedCard=lazy(()=>import("./Child/OpportunityTable/OpportunityDeletedCard"));
+
 class Opportunity extends Component {
   state = { currentData: "" };
   handleClear = () => {
@@ -46,18 +54,34 @@ class Opportunity extends Component {
           handleOpportunityModal={handleOpportunityModal}
         />
         <Suspense fallback={<BundleLoader />}>
-          {this.props.viewType === "table" ?
-          <OpportunityTable /> :
+          {      this.props.viewType === "stage" ?
+             <OpportunityBoard/>:
+          this.props.viewType === "table" ?
+          // <OpportunityTable /> 
+          <OpportunityCardList/>
+          :
           this.props.viewType === "dashboard" ?
-             <OpportunityDeletedTable/> :
+            //  <OpportunityDeletedTable/> 
+            <OpportunityDeletedCard/>
+             :
              this.props.viewType === "close" ?
-                    <OpportunityCloseTable/> :
+                    // <OpportunityCloseTable/>
+                    <OpportunityCloseCard/>
+                     :
              this.props.viewType === "lost" ?
-                    <OpportunitylostTable/> :
+                    // <OpportunitylostTable/>
+                   <OpportunityLostCard/>
+                    :
+
                     this.props.viewType === "Map" ?
                     <OpportunityMap/> :
              this.props.viewType === "card" ?
              <OpportunityCardView/> :
+       
+             this.props.viewType === "won" ?
+             // <OpportunitylostTable/>
+            <OpportunityWonCard/>
+             :
             null}
         </Suspense>
       </React.Fragment>

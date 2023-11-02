@@ -54,7 +54,9 @@ class DepartmentRole extends PureComponent {
                                           
                                             <AccessForm 
                                             departmentId={this.props.departmentId}
+                                            departmentData={this.state.departmentData}
                                             roleTypeId={this.state.departmentData.roleTypeId} 
+
                                             />
                                         </Suspense>
                                     )}

@@ -5,13 +5,23 @@ import { withRouter } from "react-router-dom";
 import TableViewIcon from '@mui/icons-material/TableView';
 import { AudioOutlined } from '@ant-design/icons';
 import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
-import { Button, Input, Tooltip } from "antd";
+import { Button, Input, Tooltip,Tag,Badge } from "antd";
 import { FormattedMessage } from "react-intl";
-import {inputLeadsDataSearch} from "../LeadsAction";
+import TocIcon from '@mui/icons-material/Toc';
+import {inputLeadsDataSearch,getLeadsRecords,getJunkedLeadsRecords} from "../LeadsAction";
 const { Search } = Input;
 
 const LeadsActionLeft = (props) => {
   const dummy = ["cloud", "azure", "fgfdg"];
+  
+  useEffect(() => {
+    if (props.viewType === "card") {
+      props.getLeadsRecords(props.userId);
+    } else if (props.viewType === "list") {
+      props.getJunkedLeadsRecords(props.userId);
+    }
+  }, [props.viewType, props.userId]);
+
   function handleChange(data) {
     
   }
@@ -27,23 +37,49 @@ const LeadsActionLeft = (props) => {
   );
   return (
     <div class=" flex  items-center">
+<Badge
+        size="small"
+        count={(props.viewType === "card" && props.leadsCountData.LeadsDetails) || 0}
+        overflowCount={999}
+      >
 
-<Tooltip
-        title= "Table View"
+    <Tooltip
+        title= "Card View"
       >
         <span   class=" mr-2 text-sm cursor-pointer"
+        onClick={() => props.setLeadsViewType("card")}
           style={{
-           color: props.viewType === "table" && "#1890ff",
+           color: props.viewType === "card" && "#1890ff",
           }}
         >
-        <TableViewIcon  />
+        <TocIcon />
         </span>
       </Tooltip>
-      
-
-      <div class=" w-72">
+      </Badge>
+      <div class="ml-2">
+      <Badge
+        size="small"
+        count={(props.viewType === "list" && props.leadsCountJunked.junkedList) || 0}
+        overflowCount={999}
+      >
+      <Tag
+                color={props.viewType === "list" ? "#FFA500" : "orange"}
+                style={{
+                  cursor: "pointer",                  
+                  fontWeight: props.viewType === "list" ? "bold" : null,
+                  textAlign: "center",
+                  fontFamily:"poppins",
+                  borderColor: "orange",
+                }}
+                onClick={() => props.setLeadsViewType("list")}
+              >
+                Junked
+              </Tag>
+              </Badge>
+              </div>
+      <div class=" w-72 max-sm:w-28">
           <Input
-            placeholder="Search by Name, Sector or Owner"
+            placeholder="Search by Name or Sector"
             width={"100%"}
              suffix={suffix}
             onSearch={(value) => {
@@ -77,11 +113,16 @@ const LeadsActionLeft = (props) => {
   );
 };
 
-const mapStateToProps = ({leads}) => ({
+const mapStateToProps = ({leads,auth}) => ({
   fetchingLeadsInputSearchData:leads.fetchingLeadsInputSearchData,
+  leadsCountData:leads.leadsCountData,
+  leadsCountJunked:leads.leadsCountJunked,
+  userId: auth.userDetails.userId,
+
 });
 const mapDispatchToProps = (dispatch) => bindActionCreators({
-  inputLeadsDataSearch
+  inputLeadsDataSearch,
+  getLeadsRecords,getJunkedLeadsRecords
 }, dispatch);
 export default withRouter(
   connect(mapStateToProps, mapDispatchToProps)(LeadsActionLeft));

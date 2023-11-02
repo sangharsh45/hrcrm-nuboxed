@@ -15,6 +15,7 @@ import { getRequirementsDuration } from "../../../../Settings/SettingsAction";
 import { FlexContainer } from "../../../../../Components/UI/Layout";
 import { addingNotifications, getNotifications } from "../../../SettingsAction";
 import dayjs from "dayjs";
+import moment from "moment";
 const { Option } = Select;
 function Notifications(props) {
   useEffect(() => {
@@ -225,7 +226,7 @@ function Notifications(props) {
                       justifyContent: "space-between",
                     }}
                   >
-                    <p>In sms</p>
+                    <p>In SMS</p>
                     <div>
                       <Popconfirm
                         title="Do you wish to change Status ? "
@@ -275,7 +276,7 @@ function Notifications(props) {
                       justifyContent: "space-between",
                     }}
                   >
-                    <p>In whatsapp</p>
+                    <p>In Whatsapp</p>
                     <div>
                       <Popconfirm
                         title="Do you wish to change Status ? "
@@ -293,7 +294,7 @@ function Notifications(props) {
                       </Popconfirm>
                     </div>
                   </div>
-                  <Spacer />
+                  {/* <Spacer />
                   <div
                     style={{
                       display: "flex",
@@ -317,10 +318,10 @@ function Notifications(props) {
                         />
                       </Popconfirm>
                     </div>
-                  </div>
+                  </div> */}
                 </div>
               </FlexContainer>
-              <h4>Updated on {dayjs(props.notifications.updatedDate).format("ll")} by {props.notifications.ownerName}</h4>
+              <h4>Updated on {moment(props.notifications.updatedDate).format("ll")} by {props.notifications.ownerName}</h4>
             </Form>
           </MainWrapper>
         )}

@@ -5,6 +5,9 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import RecruitmentTab from "./RecruitmentTab";
 import HiringTab from "./HiringTab";
+import ConfigureTab from "../Configure/ConfigureTab";
+import TaskTab from "../Configure/TaskTab";
+import DealsTab from "./Deals/DealsTab";
 
 const TabPane = StyledTabs.TabPane;
 
@@ -13,16 +16,27 @@ function WorkFlow(props) {
     <>
       <TabsWrapper>
         <StyledTabs defaultActiveKey="1" type="card">
-          <TabPane tab={`Hiring`} key="1">
+          {/* <TabPane tab={`Hiring`} key="1">
             <div style={{ marginTop: 10 }}>
               <RecruitmentTab />
             </div>
-          </TabPane>
+          </TabPane> */}
           <TabPane tab={`Opportunity`} key="2">
             <div style={{ marginTop: 10 }}>
               <HiringTab />
             </div>
           </TabPane>
+          <TabPane tab={`Task`} key="3">
+            <div style={{ marginTop: 10 }}>
+            <TaskTab />
+            </div>
+          </TabPane>
+          <TabPane tab={`Deals`} key="4">
+            <div style={{ marginTop: 10 }}>
+            <DealsTab />
+            </div>
+          </TabPane>
+
         </StyledTabs>
       </TabsWrapper>
     </>

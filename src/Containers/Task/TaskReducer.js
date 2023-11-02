@@ -16,6 +16,7 @@ const initialState = {
   rejectApprove: false,
   rejectApproveError: false,
 
+  addTaskDetailModal:false,
 
   updateProjectTaskModal:false,
 
@@ -27,8 +28,17 @@ const initialState = {
   fetchingCandidateTaskListError:false,
   candidateTaskList:[],
 
+  addDrawerTaskFeedbackModal:false,
+
+  addSharingTask: false,
+  addSharingTaskError: false,
+
   approvedTask: false,
   approvedTaskError: false,
+
+  fetchingPermissionsListTask: false,
+  fetchingPermissionsListTaskError: false,
+  permissionsDataListTask:[],
 
 
   addDrawerTaskProjectModal:false,
@@ -39,6 +49,9 @@ const initialState = {
   rejectPartnerError: false,
   statusChecking: false,
   statusCheckingError: false,
+
+  deleteDocumentTask: false, 
+  deleteDocumentTaskError: false,
 
   fetchingTaskListRangeByUserId: false,
   fetchingTaskListRangeByUserIdError: false,
@@ -106,6 +119,10 @@ const initialState = {
   fetchingNotesListByTaskIdError: false,
   notesListByTaskId: [],
 
+  fetchingDocumentsByTaskId: false,
+  fetchingDocumentsByTaskIdError: false,
+  documentsByTaskId: [],
+
   fetchingCustomersTaskList:false,
   fetchingCustomersTaskListError:false,
   customerTaskList:[],
@@ -129,7 +146,12 @@ const initialState = {
   setEditingTask:{},
   updateTaskModal:false,
 
+  downloadTaskModal:false,
+
   taskById:[],
+  fetchingGrantTask: false,
+  fetchingGrantTaskError:false,
+  grantTask:[],
 };
 export const TaskReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -524,7 +546,7 @@ export const TaskReducer = (state = initialState, action) => {
       return {
         ...state,
         fetchingTaskById: false,
-        taskListRangeByUserId: state.taskListRangeByUserId.map((task, i) => {
+        approvalTaskTable: state.approvalTaskTable.map((task, i) => {
           if (task.taskId === action.payload.taskId) {
             return action.payload;
           } else {
@@ -644,6 +666,10 @@ export const TaskReducer = (state = initialState, action) => {
         case types.HANDLE_UPDATE_TASK_MODAL:
           return { ...state, updateTaskModal: action.payload };
 
+          case types.HANDLE_DOWNLOAD_TASK_MODAL:
+            return { ...state, downloadTaskModal: action.payload };
+  
+
 
           case types.GET_PROJECT_TASK_TABLE_REQUEST:
         return { ...state, fetchingProjectTaskTable: true };
@@ -702,6 +728,8 @@ export const TaskReducer = (state = initialState, action) => {
             return item;
           }
         }),
+
+        
         // cancelOrder: action.payload,
         // candidateByUserId: action.payload,
         // addTeamTransferModal: false,
@@ -715,6 +743,9 @@ export const TaskReducer = (state = initialState, action) => {
 
       case types.HANDLE_TASK_NOTES_DRAWER_MODAL:
         return { ...state, addDrawerTaskNotesModal: action.payload };
+
+        case types.HANDLE_TASK_FEEDBACK_DRAWER_MODAL:
+          return { ...state, addDrawerTaskFeedbackModal: action.payload };
     
 
         case types.ADD_TASK_NOTES_REQUEST:
@@ -769,8 +800,86 @@ export const TaskReducer = (state = initialState, action) => {
                   fetchingApproveTaskTableError: true,
                 };
 
+                case types.HANDLE_TASK_OPEN_MODAL:
+                  return { ...state, addTaskDetailModal: action.payload };
 
 
+
+                  case types.GET_PERMISSIONS_LIST_TASK_REQUEST:
+                    return { ...state, fetchingPermissionsListTask: true };
+                  case types.GET_PERMISSIONS_LIST_TASK_SUCCESS:
+                    return {
+                      ...state,
+                      fetchingPermissionsListTask: false,
+                      permissionsDataListTask: action.payload,
+                    };
+                  case types.GET_PERMISSIONS_LIST_TASK_FAILURE:
+                    return {
+                      ...state,
+                      fetchingPermissionsListTask: false,
+                      fetchingPermissionsListTaskError: false,
+                    };
+                    case types.ADD_SHARE_TASK_PERMISSION_REQUEST:
+                      return { ...state, addSharingTask: true };
+                
+                    case types.ADD_SHARE_TASK_PERMISSION_SUCCESS:
+                      return { ...state, addSharingTask: false, taskListRangeByUserId: action.payload };
+                
+                    case types.ADD_SHARE_TASK_PERMISSION_FAILURE:
+                      return {
+                        ...state,
+                        addSharingTask: false,
+                        addSharingTaskError: true,
+                      };
+
+                      case types.GET_GRANTT_TASK_REQUEST:
+                        return { ...state, fetchingGrantTask: true };
+                      case types.GET_GRANTT_TASK_SUCCESS:
+                        return {
+                          ...state,
+                          fetchingGrantTask: false,
+                           grantTask: action.payload,
+                        };
+                      case types.GET_GRANTT_TASK_FAILURE:
+                        return {
+                          ...state,
+                          fetchingGrantTask: false,
+                          fetchingGrantTaskError: true,
+                        };
+
+                        case types.GET_TASK_DOCUMENTS_REQUEST:
+                          return {
+                            ...state,
+                            fetchingDocumentsByTaskId: true,
+                            fetchingDocumentsByTaskIdError: false,
+                          };
+                        case types.GET_TASK_DOCUMENTS_SUCCESS:
+                          return {
+                            ...state,
+                            fetchingDocumentsByTaskId: false,
+                            fetchingDocumentsByTaskIdError: false,
+                            documentsByTaskId: action.payload,
+                          };
+                        case types.GET_TASK_DOCUMENTS_FAILURE:
+                          return {
+                            ...state,
+                            fetchingDocumentsByTaskId: false,
+                            fetchingDocumentsByTaskIdError: true,
+                          };
+
+                          case types.DELETE_DOCUMENT_TASK_REQUEST:
+                            return { ...state, deleteDocumentTask: true };
+                          case types.DELETE_DOCUMENT_TASK_SUCCESS:
+                            return {
+                              ...state,
+                              deleteDocumentTask: false,
+                              documentsByTaskId: state.documentsByTaskId.filter(
+                                (item) => item.documentId !== action.payload
+                              ),
+                            };
+                          case types.DELETE_DOCUMENT_TASK_FAILURE:
+                            return { ...state, deleteDocumentTask: false, deleteDocumentTaskError: false };
+                
 
         default:
       return state;

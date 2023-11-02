@@ -94,29 +94,12 @@ class ContactForm extends Component {
       user: { userId, firstName, lastName },
       addContact,
       addingContact,
-      customerId,
-      designationTypeId,
-      departmentId,
-      users,
-      accountId,
-      defaultAccounts,
-      defaultOpportunities,
-      callback,
-      user,
-      creatorId,
-      accountIdTag,
+  
       linkContact,
       opportunityId,
       addLinkContactByOpportunityId,
       defaultCustomers,
-
-      // tagWithCompany,
     } = this.props;
-    console.log(linkContact);
-    console.log(opportunityId);
-    console.log(customerId);
-    console.log(departmentId);
-    console.log(designationTypeId);
     const customerNameOption = this.props.customerData
     .sort((a, b) => {
       const libraryNameA = a.name && a.name.toLowerCase();
@@ -153,8 +136,7 @@ class ContactForm extends Component {
             userId: this.props.userId,
             customerId: this.props.customerId,
             opportunityId: this.props.opportunityId,
-
-            // tagWithCompany: tagWithCompany ? tagWithCompany : "",
+            source:"",
             tagWithCompany: "",
             firstName: "",
             middleName: "",
@@ -207,16 +189,17 @@ class ContactForm extends Component {
             setFieldValue,
             setFieldTouched,
           }) => (
+            <div class="overflow-y-auto h-[34rem] overflow-x-hidden max-sm:h-[30rem]">
             <Form className="form-background">
-              <div class=" flex justify-between overflow-scroll "
+              <div class=" flex justify-around max-sm:flex-col"
               >
-                <div class=" h-full w-1/2"
+                <div class=" h-full w-w47.5 max-sm:w-wk"
                 >
                   <div class=" flex  flex-nowrap">
                     <FastField name="imageId" component={Upload} />
                     <div>
-                      <div class=" flex justify-between">
-                        <div class=" w-2/5">
+                      <div class=" flex justify-between max-sm:flex-col">
+                        <div class=" w-2/5 max-sm:w-full">
                           <FastField
                             name="salutation"
                             type="text"
@@ -233,7 +216,7 @@ class ContactForm extends Component {
                             isColumn
                           />
                         </div>
-                        <div class=" w-1/2">
+                        <div class=" w-1/2 max-sm:w-full">
                           <FastField
                             isRequired
                             name="firstName"
@@ -252,8 +235,8 @@ class ContactForm extends Component {
                           />
                         </div>
                       </div>                  
-                      <div class=" flex justify-between">
-                        <div class=" w-2/5">
+                      <div class=" flex justify-between max-sm:flex-col">
+                        <div class=" w-2/5 max-sm:w-full">
                           <FastField
                             name="middleName"
                             //label="Middle Name"
@@ -270,7 +253,7 @@ class ContactForm extends Component {
                             inlineLabel
                           />
                         </div>
-                        <div class=" w-1/2">
+                        <div class=" w-1/2 max-sm:w-full">
                           <FastField
                             name="lastName"
                             //label="Last Name"
@@ -312,7 +295,7 @@ class ContactForm extends Component {
                     </div>
                   </div>               
                   <div class=" flex justify-between">
-                    <div class=" w-2/6">
+                    <div class=" w-2/6 max-sm:w-2/5">
                       <FastField
                         name="countryDialCode"
                         isColumnWithoutNoCreate
@@ -334,7 +317,7 @@ class ContactForm extends Component {
                         inlineLabel
                       />
                     </div>
-                    <div class=" w-2/5">
+                    <div class=" w-2/5 max-sm:w-2/5">
                       <FastField
                         type="number"
                         name="mobileNumber"
@@ -351,8 +334,7 @@ class ContactForm extends Component {
                         isColumn
                       />
                     </div>
-                    <div class=" w-1/4 font-bold"
-                    >
+                    <div class=" w-1/4 font-bold" >
                       WhatsApp
                       <Switch
                         onChange={this.handleWhatsApp}
@@ -362,6 +344,7 @@ class ContactForm extends Component {
                       />
                     </div>
                   </div>
+                 
                   <div class=" flex justify-between">
                     <div class=" w-2/4">
                       {" "}
@@ -442,10 +425,10 @@ class ContactForm extends Component {
                   />
 
                 </div>
-                <div class=" h-3/4 w-5/12 "
+                <div class=" h-3/4 w-w47.5 max-sm:w-wk "
                 >
-                  <div class=" flex  justify-between">
-                    <div class=" w-1/2">
+                  <div class=" flex  justify-between max-sm:mt-20">
+                    <div class="  w-w47.5">
                       <Field
                         name="customerId"
                         // selectType="customerList"
@@ -466,27 +449,29 @@ class ContactForm extends Component {
                       />
                     </div>
 
-                    <div class=" w-2/5">
-                      <FastField
-                        name="designationTypeId"
-                        //label="Designation"
-                        label={
-                          <FormattedMessage
-                            id="app.designation"
-                            defaultMessage="Designation"
+                   
+                    <div class=" w-w47.5">
+                    <FastField
+                            name="source"
+                             label={
+                              <FormattedMessage
+                                id="app.source"
+                                defaultMessage="Source"
+                              />
+                            }
+                            isColumnWithoutNoCreate
+                            selectType="sourceName"
+                            component={SearchSelect}
+                            value={values.source}
+                            isColumn
                           />
-                        }
-                        selectType="designationType"
-                        isColumn
-                        component={SearchSelect}
-                        value={values.designationTypeId}
-                        isColumnWithoutNoCreate
-                        inlineLabel
-                      />
-                    </div>
+                        </div>
+                     
+                    
                   </div>
                   <Spacer />
-                  <div class=" w-full">
+                  <div class=" flex justify-between">         
+                  <div class="w-w47.5">
                     <FastField
                       name="departmentId"
                       //label="Department"
@@ -503,6 +488,25 @@ class ContactForm extends Component {
                       selectType="departmentName"
                       inlineLabel
                     />
+                  </div>
+                  <div class="w-w47.5">
+                  <FastField
+                        name="designationTypeId"
+                        //label="Designation"
+                        label={
+                          <FormattedMessage
+                            id="app.designation"
+                            defaultMessage="Designation"
+                          />
+                        }
+                        selectType="designationType"
+                        isColumn
+                        component={SearchSelect}
+                        value={values.designationTypeId}
+                        isColumnWithoutNoCreate
+                        inlineLabel
+                      />
+                      </div>
                   </div>
                   <Spacer />
                   <div style={{ width: "100%",backgroundImage: "linear-gradient(-90deg, #00162994, #94b3e4)" }}>
@@ -606,7 +610,7 @@ class ContactForm extends Component {
                 </div>
               </div>
               <Spacer />
-              <div class=" flex  justify-end">
+              <div class="flex justify-end md:w-wk bottom-2 md:mr-2 md:absolute ">
                 <Button
                   type="primary"
                   htmlType="submit"
@@ -618,6 +622,7 @@ class ContactForm extends Component {
                 </Button>
               </div>
             </Form>
+            </div>
           )}
         </Formik>
       </>

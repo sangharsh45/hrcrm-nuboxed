@@ -106,7 +106,7 @@ export const addCustomer = (customer) => (dispatch, getState) => {
 /**
  * get all the customer of the user
  */
-export const getCustomerListByUserId = (userId,page) => (dispatch) => {
+export const getCustomerListByUserId = (userId,pageNo,filter) => (dispatch) => {
   // let api_url = "";
   // if (userId) {
   //   api_url = `/sort/all/Customers/user/${userId}`;
@@ -117,7 +117,7 @@ export const getCustomerListByUserId = (userId,page) => (dispatch) => {
     type: types.GET_CUSTOMERS_REQUEST,
   });
   axios
-    .get(`${base_url}/customer/user/${userId}/${page}`, {
+    .get(`${base_url}/customer/user/${userId}/${pageNo}/${filter}`, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },
@@ -141,12 +141,6 @@ export const getCustomerListByUserId = (userId,page) => (dispatch) => {
 
 
 export const getCustomerData = (userId,page) => (dispatch) => {
-  // let api_url = "";
-  // if (userId) {
-  //   api_url = `/sort/all/Customers/user/${userId}`;
-  // } else {
-  //   api_url = `/Customers`;
-  // }
   dispatch({
     type: types.GET_CUSTOMERS_DATA_REQUEST,
   });
@@ -167,6 +161,32 @@ export const getCustomerData = (userId,page) => (dispatch) => {
       console.log(err.response);
       dispatch({
         type: types.GET_CUSTOMERS_DATA_FAILURE,
+        payload: err,
+      });
+    });
+};
+
+export const getInvestorData = (userId,page) => (dispatch) => {
+  dispatch({
+    type: types.GET_INVESTOR_DATA_REQUEST,
+  });
+  axios
+    .get(`${base_url}/investor/user/${userId}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.GET_INVESTOR_DATA_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err.response);
+      dispatch({
+        type: types.GET_INVESTOR_DATA_FAILURE,
         payload: err,
       });
     });
@@ -301,6 +321,13 @@ export const handleDocumentUploadModal = (modalProps) => (dispatch) => {
 export const handleInvoiceModal = (modalProps) => (dispatch) => {
   dispatch({
     type: types.HANDLE_INVOICE_MODAL,
+    payload: modalProps,
+  });
+};
+
+export const handleCallActivityModal = (modalProps) => (dispatch) => {
+  dispatch({
+    type: types.HANDLE_CALL_ACTIVITY_MODAL,
     payload: modalProps,
   });
 };
@@ -743,7 +770,7 @@ export const inputCustomerDataSearch = (name) => (dispatch) => {
         payload: err,
       });
     });
-};
+}; 
 
 //CONTACT PERMISSION SHARE Of Partner
 export const shareCustomerPermission = (data, userId, a) => (
@@ -987,7 +1014,7 @@ export const setEditCustomerOpportunity = (name) => (dispatch) => {
   });
 };
 
-export const addAttendence = (attendance) => (dispatch) => {
+export const addAttendence = (attendance,userId) => (dispatch) => {
 
 
   // const opportunityId = getState().opportunity.opportunity.opportunityId;
@@ -1003,6 +1030,7 @@ export const addAttendence = (attendance) => (dispatch) => {
       },
     })
     .then((res) => {
+         dispatch(getAttendanceList(userId));
       console.log(res);
 
 
@@ -1045,6 +1073,43 @@ export const putCustomerContactToggle = (data, contactId) => (dispatch) => {
       dispatch({
         type: types.PUT_CUSTO_CONTACT_TOGGLE_FAILURE,
       });
+    });
+};
+
+
+export const addLocationDetails = (attendance,userId) => (dispatch) => {
+
+
+  // const opportunityId = getState().opportunity.opportunity.opportunityId;
+  // console.log("inside add customer");
+  dispatch({
+    type: types.ADD_LOCATION_DETAILS_REQUEST,
+  });
+
+  axios
+    .put(`${base_url}/attendance/add/location`, attendance, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+         //dispatch(getAttendanceList(userId));
+      console.log(res);
+
+
+      dispatch({
+        type: types.ADD_LOCATION_DETAILS_SUCCESS,
+        payload: res.data,
+      });
+      // cb && cb();
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.ADD_LOCATION_DETAILS_FAILURE,
+        payload: err,
+      });
+      // cb && cb();
     });
 };
 
@@ -1809,6 +1874,90 @@ export const getAllCustomerByCloser = (userId, startDate, endDate) => (
         console.log(err.response);
         dispatch({
           type: types.LINKED_PROJECT_TASK_FAILURE,
+          payload: err,
+        });
+      });
+  };
+
+  export const getAttendanceList = (userId) => (dispatch) => {
+    dispatch({
+      type: types.GET_ATTENDANCE_LIST_REQUEST,
+    });
+    axios
+      .get(`${base_url}/attendance/${userId}`, {
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+        },
+      })
+      .then((res) => {
+        console.log(res);
+        dispatch({
+          type: types.GET_ATTENDANCE_LIST_SUCCESS,
+          payload: res.data,
+        });
+      })
+      .catch((err) => {
+        console.log(err.response);
+        dispatch({
+          type: types.GET_ATTENDANCE_LIST_FAILURE,
+          payload: err,
+        });
+      });
+  };
+
+  export const getCustomerFilterData = (userId,pageNo,filter) => (dispatch) => {
+    // let api_url = "";
+    // if (userId) {
+    //   api_url = `/sort/all/Customers/user/${userId}`;
+    // } else {
+    //   api_url = `/Customers`;
+    // }
+    dispatch({
+      type: types.GET_CUSTOMERS_FILTER_DATA_REQUEST,
+    });
+    axios
+      .get(`${base_url}/customer/user/${userId}/${pageNo}/${filter}`, {
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+        },
+      })
+      .then((res) => {
+        console.log(res);
+        dispatch({
+          type: types.GET_CUSTOMERS_FILTER_DATA_SUCCESS,
+          payload: res.data,
+        });
+      })
+      .catch((err) => {
+        console.log(err.response);
+        dispatch({
+          type: types.GET_CUSTOMERS_FILTER_DATA_FAILURE,
+          payload: err,
+        });
+      });
+  };
+
+  export const getAllCustomerData = (userId,page) => (dispatch) => {
+    dispatch({
+      type: types.GET_ALL_CUSTOMERS_DATA_REQUEST,
+    });
+    axios
+      .get(`${base_url}/customer/drop/customer-list/${userId}`, {
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+        },
+      })
+      .then((res) => {
+        console.log(res);
+        dispatch({
+          type: types.GET_ALL_CUSTOMERS_DATA_SUCCESS,
+          payload: res.data,
+        });
+      })
+      .catch((err) => {
+        console.log(err.response);
+        dispatch({
+          type: types.GET_ALL_CUSTOMERS_DATA_FAILURE,
           payload: err,
         });
       });

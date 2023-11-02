@@ -60,11 +60,22 @@ class LeaveForm extends Component {
       Travel: false,
       Project: false,   
       day:"",
-      firstCase:true,
+      firstCase:false,
       isAccepted:true
     };
   }
   
+  handleSwitchChange = (value) => {
+    this.setState({ firstCase: value });
+
+    
+    if (value) {
+      console.log('1'); 
+    } else {
+      console.log('0');
+    }
+  };
+
   handleProject = (checked) => {
     this.setState({ Project: checked });
   };
@@ -103,7 +114,7 @@ console.log(this.state.firstCase)
                 startDate: startDate || dayjs(),
 
                 endDate: endDate || dayjs(),
-                case:this.state.firstCase===true?"0":this.state.firstCase===false&&"1",
+                
                 employeeId: this.props.userId,
                 halfDay: this.state.day,
                 reason: "",
@@ -120,6 +131,7 @@ console.log(this.state.firstCase)
                 halfDay: this.state.day,
                 startDate: dayjs(values.startDate).toISOString(),
                 endDate: dayjs(values.endDate).toISOString(),
+                halfDayType:this.state.firstCase?"0":"1",
               },
               this.props.userId,
 
@@ -245,18 +257,18 @@ console.log(this.state.firstCase)
                  </div>
                  
                   ):(
-                    <div
+                    <div class=" flex items-center h-16 flex-row-reverse w-3/12 max-sm:w-wk"
                       style={{
-                        width: "25%",
+                       
                         fontWeight: "bold",
                       }}
                     >
                       
                       <Switch
-                         onChange={this.firstClick}
+                         onChange={this.handleSwitchChange}
                         checked={this.state.firstCase}
-                        checkedChildren="1st"
-                        unCheckedChildren="2nd"
+                        checkedChildren="1st hlf"
+                        unCheckedChildren="2nd hlf"
                       />
                       
                     </div>
@@ -265,9 +277,9 @@ console.log(this.state.firstCase)
   
   <Spacer />
                     
-                     <div
+                     <div class="w-3/12 max-sm:w-wk"
                       style={{
-                        width: "25%",
+                       
                         fontWeight: "bold",
                       }}
                     >
@@ -283,7 +295,7 @@ console.log(this.state.firstCase)
          
                   </FlexContainer>
                   <Spacer />
-                 
+                 <div class="max-sm:flex flex-col">
                   <Field
                     name="coverDetails"
                     //label="Cover"
@@ -295,6 +307,7 @@ console.log(this.state.firstCase)
                     component={InputComponent}
                     inlineLabel
                   />
+                  </div>
                   <Spacer />
                   <Field
                     isRequired
@@ -313,13 +326,13 @@ console.log(this.state.firstCase)
                 </div>
               </div>
               <Spacer />
-              <FlexContainer justifyContent="flex-end">
+              <div class="flex justify-end w-wk bottom-2 mr-2 md:absolute ">
                 &nbsp;
                 <Button htmlType="submit" type="primary"
                   Loading={addingLeaves}>
                   Submit
                 </Button>
-              </FlexContainer>
+              </div>
             </Form>
           )}
         </Formik>

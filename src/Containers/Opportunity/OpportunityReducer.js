@@ -1,10 +1,18 @@
 import * as types from "./OpportunityActionTypes";
 import dayjs from "dayjs";
 const initialState = {
-  viewType: "table",
+  viewType: "stage",
 
   addOpportunityModal: false,
   addRecruiterModal:false,
+
+  fetchingAllOpportunityData: false,
+  fetchingAllOpportunityDataError: false,
+  allOpportunityData:[],
+
+  fetchingWonRecords: false,
+  fetchingWonRecordsError: false,
+  wonOpportunityData:{},
 
   fetchingInitiativeSkills:false,
   fetchingInitiativeSkillsError:false,
@@ -200,6 +208,10 @@ const initialState = {
   fetchinglostOpportunityError: false,
   lostOpportunity:[],
 
+  fetchingOppLinkedStages: false,
+  fetchingOppLinkedStagesError: false,
+  oppLinkStages:[],
+
   fetchingCloseOpportunity: false,
   fetchingCloseOpportunityError: false,
   closeOpportunity:[],
@@ -264,6 +276,10 @@ const initialState = {
   fetchingRemarkError: false,
   remark: [],
 
+  fetchingOppLinkedWorkflow: false,
+  fetchingOppLinkedWorkflowError: false,
+  oppLinkWorkflow:[],
+
   fetchingOpportunitySkillsInitiativesDetails:false,
   fetchingOpportunitySkillsInitiativesDetailsError:false,
   opportunityInitiativesSkillsDetails:[],
@@ -297,6 +313,11 @@ const initialState = {
 
   linkingSkillsRecruitToOpportunity: false,
   linkingSkillsRecruitToOpportunityError: false,
+
+  fetchingWonOpportunity: false,
+  fetchingWonOpportunityError: false,
+  wonOpportunity:[],
+
 
   linkingCandidateRecruitToOpportunity: false,
   linkingCandidateRecruitToOpportunityError: false,
@@ -362,6 +383,8 @@ const initialState = {
 
   updatingOpportunityOwenership:false,
   updatingOpportunityOwenershipError:false,
+
+  updatingDragStage:false,
 
   addCandidateDateModal:false,
 
@@ -478,6 +501,19 @@ const updatedOpportunity = (item, newProps) => {
     if (opp.profileId === newProps.opportunityId) {
       console.log("inside opp");
       opp.stageId = newProps.destinationStageId;
+    }
+    return opp;
+  });
+};
+
+
+const updatedDragOpportunity = (item, newProps) => {
+  return item.map((opp, index) => {
+    console.log("Author7",opp);
+    console.log("Author8",newProps);
+    if (opp.opportunityId === newProps.opportunityId) {
+      console.log("inside opp");
+      opp.opportunityStagesId = newProps.opportunityStagesId;
     }
     return opp;
   });
@@ -1000,15 +1036,14 @@ case types.GET_DELETED_OPPORTUNITY_FAILURE:
                         return {
                           ...state,
                           linkingStatusRecruitToOpportunity: false,
-                          candidateRequirement: state.candidateRequirement.map(
-                            (recruit, i) => {
-                              if (recruit.profileId === action.payload.profileId) {
-                                return action.payload;
-                              } else {
-                                return recruit;
-                              }
-                            }
-                          ),
+                          // opportunityByUserId: state.opportunityByUserId.filter(
+                          //                             (item) => item.opportunityId !== action.payload
+                          //                           ),
+                          opportunityByUserId: state.opportunityByUserId.map((opp) =>
+                          opp.opportunityId === action.payload.opportunityId
+                            ? action.payload
+                            : opp
+                        ),
                         };
                       case types.LINK_RECRUIT_STATUS_TO_OPPORTUNITY_FAILURE:
                         return {
@@ -2004,14 +2039,8 @@ case types.REINSTATE_TOGGLE_FOR_OPPORTUNITY_FAILURE:
                                                 return {
                                                   ...state,
                                                   statusRecruitToOpportunity: false,
-                                                  opportunityByUserId: state. opportunityByUserId.map(
-                                                    (recruit, i) => {
-                                                      if (recruit.opportunityId === action.payload.opportunityId) {
-                                                        return action.payload;
-                                                      } else {
-                                                        return recruit;
-                                                      }
-                                                    }
+                                                  opportunityByUserId: state.opportunityByUserId.filter(
+                                                    (item) => item.opportunityId !== action.payload
                                                   ),
                                                 };
                                               case types.RECRUIT_STATUS_TO_OPPORTUNITY_FAILURE:
@@ -2032,15 +2061,18 @@ case types.REINSTATE_TOGGLE_FOR_OPPORTUNITY_FAILURE:
                                                   return {
                                                     ...state,
                                                     loststatusRecruitToOpportunity: false,
-                                                    opportunityByUserId: state. opportunityByUserId.map(
-                                                      (recruit, i) => {
-                                                        if (recruit.opportunityId === action.payload.opportunityId) {
-                                                          return action.payload;
-                                                        } else {
-                                                          return recruit;
-                                                        }
-                                                      }
+                                                    opportunityByUserId: state.opportunityByUserId.filter(
+                                                      (item) => item.opportunityId !== action.payload
                                                     ),
+                                                    // opportunityByUserId: state.opportunityByUserId.map(
+                                                    //   (recruit, i) => {
+                                                    //     if (recruit.opportunityId === action.payload.opportunityId) {
+                                                    //       return action.payload;
+                                                    //     } else {
+                                                    //       return recruit;
+                                                    //     }
+                                                    //   }
+                                                    // ),
                                                   };
                                                 case types.RECRUIT_LOST_STATUS_TO_OPPORTUNITY_FAILURE:
                                                   return {
@@ -2232,7 +2264,25 @@ case types.REINSTATE_TOGGLE_FOR_OPPORTUNITY_FAILURE:
                                                                         ...state,
                                                                         deleteLostOpportunity: false,
                                                                         deleteLostOpportunityError: true,
-                                                                      };    
+                                                                      };  
+
+
+                                                                                              case types.UPDATE_OPPORTUNITY_DRAG_STAGE_REQUEST:
+                                                return {
+                                                  ...state,
+                                                  updatingDragStage: true,
+                                                
+                                                  // candidateRequirement: action.payload,
+                                                };
+                                              case types.UPDATE_OPPORTUNITY_DRAG_STAGE_SUCCESS:
+                                                return { ...state, 
+                                                  updatingDragStage: false ,
+                                                  opportunityByUserId: updatedDragOpportunity(state.opportunityByUserId, action.payload),
+                                                 // candidateRequirement: [action.payload]
+
+                                                };
+                                              case types.UPDATE_OPPORTUNITY_DRAG_STAGE_FAILURE:
+                                                return { ...state };  
 
                                                                       
                                                                       case types.GET_OPPORTUNITY_INITIATIVES_SKILLS_DETAILS_REQUEST:
@@ -2305,6 +2355,93 @@ case types.REINSTATE_TOGGLE_FOR_OPPORTUNITY_FAILURE:
                                                 };
                                               case types.UPDATE_REQUIREMENT_STAGE_FAILURE:
                                                 return { ...state };
+
+
+
+                                                case types.GET_WON_OPPORTUNITY_REQUEST:
+                                                  return { ...state, fetchingWonOpportunity: true };
+                                                case types.GET_WON_OPPORTUNITY_SUCCESS:
+                                                  return {
+                                                    ...state,
+                                                    fetchingWonOpportunity: false,
+                                                    // lostOpportunity:action.payload
+
+                                                    wonOpportunity: [
+                                                      ...state.wonOpportunity,
+                                                      ...action.payload],
+                                                  };
+                                                case types.GET_WON_OPPORTUNITY_FAILURE:
+                                                  return {
+                                                    ...state,
+                                                    fetchingWonOpportunity: false,
+                                                    fetchingWonOpportunityError: true,
+                                                  };
+
+                                                  case types.GET_WON_RECORDS_REQUEST:
+                                                    return { ...state, fetchingWonRecords: true };
+                                                  case types.GET_WON_RECORDS_SUCCESS:
+                                                    return {
+                                                      ...state,
+                                                      fetchingWonRecords: false,
+                                                      wonOpportunityData: action.payload,
+                                                    };
+                                                  case types.GET_WON_RECORDS_FAILURE:
+                                                    return {
+                                                      ...state,
+                                                      fetchingWonRecords: false,
+                                                      fetchingWonRecordsError: true,
+                                                    };
+
+
+                                                    case types.GET_OPP_LINKED_STAGES_REQUEST:
+                                                      return { ...state, fetchingOppLinkedStages: true };
+                                                    case types.GET_OPP_LINKED_STAGES_SUCCESS:
+                                                      return {
+                                                        ...state,
+                                                        fetchingOppLinkedStages: false,
+                                                        oppLinkStages: action.payload,
+                                                      };
+                                                    case types.GET_OPP_LINKED_STAGES_FAILURE:
+                                                      return {
+                                                        ...state,
+                                                        fetchingOppLinkedStages: false,
+                                                        fetchingOppLinkedStagesError: true,
+                                                      };
+
+                                                      case types.GET_OPP_LINKED_WORKFLOW_REQUEST:
+                                                        return { ...state, fetchingOppLinkedWorkflow: true };
+                                                      case types.GET_OPP_LINKED_WORKFLOW_SUCCESS:
+                                                        return {
+                                                          ...state,
+                                                          fetchingOppLinkedWorkflow: false,
+                                                          oppLinkWorkflow: action.payload,
+                                                        };
+                                                      case types.GET_OPP_LINKED_WORKFLOW_FAILURE:
+                                                        return {
+                                                          ...state,
+                                                          fetchingOppLinkedWorkflow: false,
+                                                          fetchingOppLinkedWorkflowError: true,
+                                                        };
+
+
+                                                        
+                                      case types.GET_ALL_OPPORTUNITY_DATA_REQUEST:
+                                        return { ...state, fetchingAllOpportunityData: true };
+                                      case types.GET_ALL_OPPORTUNITY_DATA_SUCCESS:
+                                        return {
+                                          ...state,
+                                          fetchingAllOpportunityData: false,
+                                           allOpportunityData: action.payload,
+                                  
+                                         
+                                        
+                                        };
+                                      case types.GET_ALL_OPPORTUNITY_DATA_FAILURE:
+                                        return {
+                                          ...state,
+                                          fetchingAllOpportunityData: false,
+                                          fetchingAllOpportunityDataError: true,
+                                        };
                                                                               
 
                                             default:
@@ -2320,5 +2457,8 @@ case types.REINSTATE_TOGGLE_FOR_OPPORTUNITY_FAILURE:
                                                   return { ...range, isSelected: false };
                                               }
                                           });
+
+
+                                         
 
                                                              

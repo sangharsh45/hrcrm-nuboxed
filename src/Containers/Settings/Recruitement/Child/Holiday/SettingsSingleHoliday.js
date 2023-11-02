@@ -3,13 +3,17 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { FormattedMessage } from "react-intl";
 import styled from "styled-components";
-import { Button, Tooltip,Popconfirm, DatePicker, Switch } from "antd";
+import DeleteIcon from '@mui/icons-material/Delete';
+import { DatePicker } from "antd";
+import BorderColorIcon from '@mui/icons-material/BorderColor';
+import { Button, Tooltip,Popconfirm, Switch } from "antd";
 import { FlexContainer } from "../../../../../Components/UI/Layout";
 import { TextInput, Spacer } from "../../../../../Components/UI/Elements";
 import { ActionIcon } from "../../../../../Components/Utils";
 import ViewEditCard from "../../../../../Components/UI/Elements/ViewEditCard";
 import { elipsize } from "../../../../../Helpers/Function/Functions";
 import moment from "moment";
+import dayjs from "dayjs";
 import { date } from "yup";
 
 class SettingsSingleHoliday extends Component {
@@ -20,7 +24,8 @@ class SettingsSingleHoliday extends Component {
       color: "red",
       currentStage: "",
       fields: {},
-      date: this.props.holidays.date,
+       date: this.props.holidays.date,
+      // date:"",
       holidayType: false,
       
     };
@@ -34,9 +39,13 @@ class SettingsSingleHoliday extends Component {
       },
     });
   };
+  // onChangeDatePicker = (date, dateString) => {
+  //   console.log(date, dateString);
+  //   this.setState({ date: moment(dateString) });
+  // };
   onChangeDatePicker = (date, dateString) => {
     console.log(date, dateString);
-    this.setState({ date: moment(dateString) });
+    this.setState({ date: dayjs(dateString) });
   };
  
   handleChangeHolidayTime = (checked) => {
@@ -128,27 +137,33 @@ class SettingsSingleHoliday extends Component {
           :null} */}
       
               
-                {this.props.role === "ADMIN" && (
+                {/* {this.props.role === "ADMIN" && ( */}
                   <div style={{}}>
-                    <ActionIcon
+                    <BorderColorIcon
                       tooltipTitle="Edit"
                       iconType="edit"
-                      handleIconClick={toggleViewType}
-                      size="0.75em"
+                      onClick={toggleViewType}
+                      style={{fontSize:"1rem"}}
                     />
-                  </div>)}
+                  </div>
+                  {/* )} */}
                   &nbsp; &nbsp;
-                  {this.props.role === "ADMIN" && (
+                  {/* {this.props.role === "ADMIN" && ( */}
                   <div style={{}}>
-                    <ActionIcon
+                    <DeleteIcon
                       tooltipTitle="Delete"
                       iconType="delete"
                       //  onClick={() => this.props.handleDeleteHoliday(holidayId)}
                       // handleIconClick={item.holidayId}
-                      handleIconClick={() => this.props.handleDeleteHoliday(holidayId)}
-                      size="0.75em"
+                      onClick={() => this.props.handleDeleteHoliday(holidayId)}
+                      style={{
+                        verticalAlign: "center",
+                        marginLeft: "5px",
+                        color: "red",
+                      }}
                     />
-                  </div>)}
+                  </div>
+                  {/* )} */}
               </FlexContainer>
 
             ) : (
@@ -160,10 +175,10 @@ class SettingsSingleHoliday extends Component {
                     width={"48%"}
                   />
                 &nbsp;
-                  <DatePicker
-                    defaultValue={moment(date)}
-                    onChange={this.onChangeDatePicker}
-                  />
+                <DatePicker
+                  value={dayjs(this.state.date)}
+                  onChange={this.onChangeDatePicker}
+                />
                 &nbsp;
                   <Switch
                     style={{ width: "6.25em", marginLeft: "0.625em" }}
@@ -232,6 +247,7 @@ class SettingsSingleHoliday extends Component {
                   </Button>
                   </FlexContainer>
                 </FlexContainer>
+                 
               )
           }
         </ViewEditCard>

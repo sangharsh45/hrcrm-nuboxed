@@ -22,8 +22,10 @@ import {
   getRecruiterName,
   getAllSalesList,
   getInitiative,
-  getWorkflow,
-  getStages,
+  // getStages,
+  // getWorkflow
+  getOppLinkedWorkflow,
+  getOppLinkedStages,
 } from "../OpportunityAction";
 import PlayCircleFilledIcon from "@mui/icons-material/PlayCircleFilled";
 import RotateRightIcon from "@mui/icons-material/RotateRight";
@@ -33,7 +35,7 @@ import { SelectComponent } from "../../../Components/Forms/Formik/SelectComponen
 import { DatePicker } from "../../../Components/Forms/Formik/DatePicker";
 import dayjs from "dayjs";
 import { Fragment } from "react";
-import { Listbox, Transition } from "@headlessui/react";
+import { Listbox } from "@headlessui/react";
 import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/20/solid";
 
 /**
@@ -45,6 +47,7 @@ const OpportunitySchema = Yup.object().shape({
   oppWorkflow: Yup.string().required("Input needed!"),
   currency: Yup.string().required("Input needed!"),
   oppStage: Yup.string().required("Input needed!"),
+  customerId:Yup.string().required("Input needed!"),
 });
 function OpportunityForm(props) {
   useEffect(() => {
@@ -53,66 +56,13 @@ function OpportunityForm(props) {
     props.getContactData(props.userId);
     props.getCustomerData(props.userId);
     props.getInitiative(props.userId);
-    props.getWorkflow(props.orgId);
-    props.getStages(props.orgId);
+     props.getOppLinkedStages(props.orgId);
+     props.getOppLinkedWorkflow(props.orgId);
   }, []);
 
-  const people = [
-    {
-      id: 1,
-      name: "Wade Cooper",
-      avatar: "",
-    },
-    {
-      id: 2,
-      name: "Arlene Mccoy",
-      avatar:
-        "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-    },
-    {
-      id: 3,
-      name: "Devon Webb",
-      avatar: "",
-    },
-    {
-      id: 4,
-      name: "Tom Cook",
-      avatar: "",
-    },
-    {
-      id: 5,
-      name: "Tanya Fox",
-      avatar:
-        "https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-    },
-    {
-      id: 6,
-      name: "Hellen Schmidt",
-      avatar:
-        "https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-    },
-    {
-      id: 7,
-      name: "Caroline Schultz",
-      avatar: "",
-    },
-    {
-      id: 8,
-      name: "Mason Heaney",
-      avatar: "",
-    },
-    {
-      id: 9,
-      name: "Claudie Smitham",
-      avatar: "",
-    },
-    {
-      id: 10,
-      name: "Emil Schaefer",
-      avatar: "",
-    },
-  ];
-  const [selected, setSelected] = useState(people[3]);
+  const [defaultOption, setDefaultOption] = useState(props.fullName);
+  const [selected, setSelected] = useState(defaultOption);
+
 
   function getAreaOptions(filterOptionKey, filterOptionValue) {
     const contactOptions =
@@ -133,6 +83,8 @@ function OpportunityForm(props) {
 
     return contactOptions;
   }
+
+
 
   function getInitiativeOptions(filterOptionKey, filterOptionValue) {
     const initiativeOptions =
@@ -160,8 +112,8 @@ function OpportunityForm(props) {
 
   function getStagesOptions(filterOptionKey, filterOptionValue) {
     const StagesOptions =
-      props.stages.length &&
-      props.stages
+      props.oppLinkStages.length &&
+      props.oppLinkStages
         .filter((option) => {
           if (
             option.opportunityWorkflowDetailsId === filterOptionValue &&
@@ -171,28 +123,25 @@ function OpportunityForm(props) {
           }
         })
         .sort((a, b) => {
-          const libraryNameA = a.name && a.name.toLowerCase();
-          const libraryNameB = b.name && b.name.toLowerCase();
-          if (libraryNameA < libraryNameB) {
-            return -1;
-          }
-          if (libraryNameA > libraryNameB) {
+          if (a.probability < b.probability) {
+            return -1; // Sort in increasing order
+          } else if (a.probability > b.probability) {
             return 1;
+          } else {
+            return 0;
           }
-
-          // names must be equal
-          return 0;
         })
 
         .map((option) => ({
-          label: option.stageName || "",
+          // label: `${option.stageName || ""}`,
+           label: `${option.stageName}  ${option.probability}`,
           value: option.opportunityStagesId,
         }));
 
     return StagesOptions;
   }
 
-  const WorkflowOptions = props.workflow.map((item) => {
+  const WorkflowOptions = props.oppLinkWorkflow.map((item) => {
     return {
       label: `${item.workflowName || ""}`,
       value: item.opportunityWorkflowDetailsId,
@@ -284,7 +233,8 @@ function OpportunityForm(props) {
     defaultContacts,
     name,
   } = props;
-  console.log(customerId);
+  const selectedOption = props.sales.find((item) => item.fullName === selected);
+  
   return (
     <>
       <Formik
@@ -304,7 +254,7 @@ function OpportunityForm(props) {
           contactId: undefined,
           oppInnitiative: "",
           oppStage: "",
-          salesUserIds: props.user.employeeId || "",
+          salesUserIds: selectedOption ? selectedOption.employeeId:props.userId,
         }}
         validationSchema={OpportunitySchema}
         onSubmit={(values, { resetForm }) => {
@@ -387,6 +337,7 @@ function OpportunityForm(props) {
               startDate: `${newStartDate}T20:00:00Z`,
               endDate: `${newEndDate}T20:00:00Z`,
               description: transcript ? transcript : text,
+              salesUserIds: selectedOption ? selectedOption.employeeId:props.userId,
             },
             props.userId,
             props.customerId,
@@ -403,11 +354,10 @@ function OpportunityForm(props) {
           values,
           ...rest
         }) => (
+          <div class="overflow-y-auto h-[34rem] overflow-x-hidden max-sm:h-[30rem]">
           <Form className="form-background">
-            <div class=" flex justify-between">
-              <div
-class=" h-full w-1/2"
-              >
+            <div class=" flex justify-between max-sm:flex-col">
+              <div class=" h-full w-[24rem] max-sm:w-wk">
                 <Spacer />
                 <Field
                   isRequired
@@ -425,8 +375,8 @@ class=" h-full w-1/2"
                   inlineLabel
                 />
                 <Spacer />
-                <div class="flex justify-between">
-                <div class=" w-1/2">
+                <div class="flex justify-between max-sm:flex-col">
+                <div class=" w-1/2 max-sm:w-wk">
                     <Field
                       name="startDate"
                       //label="Start "
@@ -442,7 +392,7 @@ class=" h-full w-1/2"
                       inlineLabel
                     />
                   </div>
-                  <div class=" w-2/5">
+                  <div class=" w-2/5 max-sm:w-wk">
                     <Field
                       // isRequired
                       name="endDate"
@@ -472,8 +422,8 @@ class=" h-full w-1/2"
                   </div>
                 </div>
                 <Spacer />
-                <div class="flex justify-between">
-                <div class=" w-1/2">
+                <div class="flex justify-between max-sm:flex-col">
+                <div class=" w-1/2 max-sm:w-wk">
                     <Field
                       name="proposalAmount"
                       //label="Proposal Amount"
@@ -489,7 +439,7 @@ class=" h-full w-1/2"
                       component={InputComponent}
                     />
                   </div>
-                  <div class=" w-2/5">
+                  <div class=" w-2/5 max-sm:w-wk">
                     <Field
                       name="currency"
                       isColumnWithoutNoCreate
@@ -556,106 +506,80 @@ class=" h-full w-1/2"
                   </div>
                 </div>
               </div>
-              <div
-               class=" h-full w-2/5"
-              >
-                <Listbox value={selected} onChange={setSelected}>
-                  {({ open }) => (
-                    <>
-                      <Listbox.Label className="block text-sm font-medium text-gray-700">
-                        Assigned to
-                      </Listbox.Label>
-                      <div className="relative mt-1">
-                        <Listbox.Button className="relative w-full leading-4 cursor-default rounded-md border border-gray-300 bg-white py-2 pl-3 pr-10 text-left shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm: text-sm">
-                          <span className="flex items-center">
-                            <img
-                              src={selected.avatar}
-                              alt=""
-                              className="h-2 w-2 flex-shrink-0 rounded-full"
-                            />
-                            <span className="ml-3 block truncate">
-                              {selected.fullName}
+            <div
+               class=" h-full w-[24rem] max-sm:w-wk">
+              <Listbox value={selected} onChange={setSelected}>
+        {({ open }) => (
+          <>
+            <Listbox.Label className="block font-semibold text-[0.75rem] mt-[0.6rem]">
+              Assigned to
+            </Listbox.Label>
+            <div className="relative mt-1">
+              <Listbox.Button style={{boxShadow: "rgb(170, 170, 170) 0px 0.25em 0.62em"}} className="relative w-full leading-4 cursor-default border border-gray-300 bg-white py-0.5 pl-3 pr-10 text-left shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm">
+                {selected}
+              </Listbox.Button>
+              {open && (
+                <Listbox.Options
+                  static
+                  className="absolute z-10 mt-1 max-h-56 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
+                >
+                  {props.sales.map((item) => (
+                    <Listbox.Option
+                      key={item.employeeId}
+                      className={({ active }) =>
+                        `relative cursor-default select-none py-2 pl-3 pr-9 ${
+                          active ? "text-white bg-indigo-600" : "text-gray-900"
+                        }`
+                      }
+                      value={item.fullName}
+                    >
+                      {({ selected, active }) => (
+                        <>
+                          <div className="flex items-center">
+                            <span
+                              className={`ml-3 block truncate ${
+                                selected ? "font-semibold" : "font-normal"
+                              }`}
+                            >
+                              {item.fullName}
                             </span>
-                          </span>
-
-                          <span className="pointer-events-none absolute inset-y-0 right-0 ml-3 flex items-center pr-2">
-                            <ChevronUpDownIcon
-                              className="h-5 w-5 text-gray-400"
-                              aria-hidden="true"
-                            />
-                          </span>
-                        </Listbox.Button>
-
-                        <Transition
-                          show={open}
-                          as={Fragment}
-                          leave="transition ease-in duration-100"
-                          leaveFrom="opacity-100"
-                          leaveTo="opacity-0"
-                        >
-                          <Listbox.Options className="absolute z-10 mt-1 max-h-56 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
-                            {props.sales.map((person) => (
-                              <Listbox.Option
-                                key={person.id}
-                                className={({ active }) =>
-                                  classNames(
-                                    active
-                                      ? "text-white bg-indigo-600"
-                                      : "text-gray-900",
-                                    "relative cursor-default select-none py-2 pl-3 pr-9"
-                                  )
-                                }
-                                value={person}
+                          </div>
+                          {selected && (
+                            <span
+                              className={`absolute inset-y-0 right-0 flex items-center pr-4 ${
+                                active ? "text-white" : "text-indigo-600"
+                              }`}
+                            >
+                              
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                className="h-5 w-5"
+                                viewBox="0 0 20 20"
+                                fill="currentColor"
+                                aria-hidden="true"
                               >
-                                {({ selected, active }) => (
-                                  <>
-                                    <div className="flex items-center">
-                                      <img
-                                        src={person.avatar}
-                                        alt=""
-                                        className="h-6 w-6 flex-shrink-0 rounded-full"
-                                      />
-                                      <span
-                                        className={classNames(
-                                          selected
-                                            ? "font-semibold"
-                                            : "font-normal",
-                                          "ml-3 block truncate"
-                                        )}
-                                      >
-                                        {person.fullName}
-                                      </span>
-                                    </div>
+                                <path
+                                  fillRule="evenodd"
+                                  d="M6.293 9.293a1 1 0 011.414 0L10 11.586l2.293-2.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z"
+                                  clipRule="evenodd"
+                                />
+                              </svg>
+                            </span>
+                          )}
+                        </>
+                      )}
+                    </Listbox.Option>
+                  ))}
+                </Listbox.Options>
+              )}
+            </div>
+          </>
+        )}
+      </Listbox>
 
-                                    {selected ? (
-                                      <span
-                                        className={classNames(
-                                          active
-                                            ? "text-white"
-                                            : "text-indigo-600",
-                                          "absolute inset-y-0 right-0 flex items-center pr-4"
-                                        )}
-                                      >
-                                        <CheckIcon
-                                          className="h-5 w-5"
-                                          aria-hidden="true"
-                                        />
-                                      </span>
-                                    ) : null}
-                                  </>
-                                )}
-                              </Listbox.Option>
-                            ))}
-                          </Listbox.Options>
-                        </Transition>
-                      </div>
-                    </>
-                  )}
-                </Listbox>
-
-                <Spacer />
-
-                <StyledLabel>
+               
+<div class="flex justify-between max-sm:flex-col mt-[0.85rem]">
+<div class=" w-2/5 max-sm:w-wk">
                   <Field
                     name="customerId"
                     // selectType="customerList"
@@ -678,8 +602,10 @@ class=" h-full w-1/2"
                     value={values.customerId}
                     inlineLabel
                   />
-                </StyledLabel>
-                <StyledLabel>
+          
+            </div>
+            <div class=" w-2/5 max-sm:w-wk">
+            <StyledLabel>
                   <Field
                     name="contactId"
                     // selectType="contactListFilter"
@@ -709,7 +635,10 @@ class=" h-full w-1/2"
                     inlineLabel
                   />
                 </StyledLabel>
-                <StyledLabel>
+                </div>
+                        </div>
+              
+                {/* <StyledLabel>
                   <Field
                     name="oppInnitiative"
                     //selectType="initiativeName"
@@ -737,11 +666,11 @@ class=" h-full w-1/2"
                     isColumn
                     inlineLabel
                   />
-                </StyledLabel>
+                </StyledLabel> */}
                 <Spacer />
 
-                <div class="flex justify-between">
-                  <div class=" w-1/2">
+                <div class="flex justify-between max-sm:flex-col">
+                  <div class=" w-1/2 max-sm:w-wk">
                     <StyledLabel>
                       <Field
                         name="oppWorkflow"
@@ -767,7 +696,7 @@ class=" h-full w-1/2"
                     </StyledLabel>
                   </div>
                   <Spacer />
-                  <div class=" w-2/5">
+                  <div class=" w-2/5 max-sm:w-wk">
                     <StyledLabel>
                       <Field
                         name="oppStage"
@@ -802,10 +731,11 @@ class=" h-full w-1/2"
                     </StyledLabel>
                   </div>
                 </div>
-              </div>
+              </div> 
+  
             </div>
             <Spacer />
-            <div class=" flex justify-end">
+            <div class="flex justify-end w-wk bottom-2 mr-2 absolute ">
               <Button
                 type="primary"
                 htmlType="submit"
@@ -816,6 +746,7 @@ class=" h-full w-1/2"
               </Button>
             </div>
           </Form>
+          </div>
         )}
       </Formik>
     </>
@@ -835,14 +766,17 @@ const mapStateToProps = ({ auth, opportunity, contact, customer }) => ({
   orgId: auth.userDetails.organizationId,
   // salesUserIds:auth.userDetails.userId,
   sales: opportunity.sales,
-  stages: opportunity.stages,
+  oppLinkStages: opportunity.oppLinkStages,
+  stages:opportunity.stages,
   currencies: auth.currencies,
   contactByUserId: contact.contactByUserId,
   customerByUserId: customer.customerByUserId,
   initiatives: opportunity.initiatives,
-  workflow: opportunity.workflow,
+  workflow:opportunity.workflow,
+  oppLinkWorkflow: opportunity.oppLinkWorkflow,
   customerData: customer.customerData,
   contactData: contact.contactData,
+  fullName: auth.userDetails.fullName
   // opportunitySkills:opportunity.opportunitySkills
 });
 
@@ -856,9 +790,9 @@ const mapDispatchToProps = (dispatch) =>
       // getInitiativeByCustomerId,
       getCustomerData,
       getInitiative,
+      getOppLinkedWorkflow,
       // getOpportunitySKill
-      getWorkflow,
-      getStages,
+      getOppLinkedStages
     },
     dispatch
   );

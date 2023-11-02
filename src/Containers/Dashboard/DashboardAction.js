@@ -285,12 +285,12 @@ export const setSubSelectedReportType = (type) => (dispatch) =>
       
   };
 
-  export const getDashBoardClosureRatio = (organisationId,endDate,startDate) => (dispatch) => {
+  export const getDashBoardClosureRatio = (userId,endDate,startDate) => (dispatch) => {
     dispatch({
       type: types.GET_DASHBOARD_CLOSURE_RATIO_REQUEST,
     });
     axios
-      .get(`${base_url}/recruitment/org/closer/${organisationId}?endDate=${endDate}&startDate=${startDate}`, {
+      .get(`${base_url}/attendance/getWorkingHour/${userId}?endDate=${endDate}&startDate=${startDate}`, {
         headers: {
           Authorization: "Bearer " + sessionStorage.getItem("token") || "",
         },
@@ -363,6 +363,58 @@ export const setSubSelectedReportType = (type) => (dispatch) =>
         });
       });
   };
+
+  export const getTodosCount = (userId, startDate, endDate) => (dispatch) => {
+    dispatch({ type: types.GET_TODOS_COUNT_REQUEST });
+   
+    axios
+      .get(`${base_url}/todoCount/${userId}?endDate=${endDate}&startDate=${startDate}`, {
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+        },
+      })
+      .then((res) => {
+        // console.log(res)
+        dispatch({
+          type: types.GET_TODOS_COUNT_SUCCESS,
+          payload: res.data,
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+        dispatch({
+          type: types.GET_TODOS_COUNT_FAILURE,
+          payload: err,
+        });
+      });
+  };
+
+  export const getavgHour = (userId, startDate, endDate) => (dispatch) => {
+    dispatch({ type: types.GET_AVG_HOUR_REQUEST });
+   
+    axios
+      .get(`${base_url}/attendance/getAverageHour/${userId}?endDate=${endDate}&startDate=${startDate}`, {
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+        },
+      })
+      .then((res) => {
+        // console.log(res)
+        dispatch({
+          type: types.GET_AVG_HOUR__SUCCESS,
+          payload: res.data,
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+        dispatch({
+          type: types.GET_AVG_HOUR__FAILURE,
+          payload: err,
+        });
+      });
+  };
+
+
 
   export const getDashboardFunnelRecord = (orgId) => (dispatch) => {
     dispatch({
@@ -667,6 +719,28 @@ export const setSubSelectedReportType = (type) => (dispatch) =>
       
   };
 
+  export const getThisMonthTaskGantt = (userId,endDate,startDate) => (dispath) => {
+    dispath({ type: types.GET_THIS_MONTH_TASK_GANTT_REQUEST });
+    axios
+      .get(`${base_url}/task/dateRange/myTask/${userId}?endDate=${endDate}&startDate=${startDate} `, {
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+        },
+      })
+      .then((res) => {
+        dispath({
+          type: types.GET_THIS_MONTH_TASK_GANTT_SUCCESS,
+          payload: res.data,
+        });
+      })
+      .catch((err) => {
+        dispath({
+          type: types.GET_THIS_MONTH_TASK_GANTT_FAILURE,
+          payload: err,
+        });
+      });
+  } 
+
 
   export const getAllDashboardFunnelRecord = (userId,type) => (dispatch) => {
     dispatch({
@@ -943,3 +1017,909 @@ export const setSubSelectedReportType = (type) => (dispatch) =>
         });
       });
   };
+
+  export const getTasklist = (userId) => (dispatch) => {
+    dispatch({ type: types.GET_TASK_PER_REQUEST });
+   
+    axios
+      .get(`${base_url}/task/count/opentask/${userId}`, {
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+        },
+      })
+      .then((res) => {
+        // console.log(res)
+        dispatch({
+          type: types.GET_TASK_PER_SUCCESS,
+          payload: res.data,
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+        dispatch({
+          type: types.GET_TASK_PER_FAILURE,
+          payload: err,
+        });
+      });
+  };
+
+  export const getJumpBulblist = (userId,startDate, endDate) => (dispatch) => {
+    dispatch({ type: types.GET_JUMPSTART_BULB_REQUEST });
+    axios
+      .get(`${base_url}/leads/qualified-leads/count/${userId}?endDate=${endDate}&startDate=${startDate}`, {
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+        },
+      })
+      .then((res) => {
+        // console.log(res)
+        dispatch({
+          type: types.GET_JUMPSTART_BULB_SUCCESS,
+          payload: res.data,
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+        dispatch({
+          type: types.GET_JUMPSTART_BULB_FAILURE,
+          payload: err,
+        });
+      });
+  };
+  export const getJumpBulblist2 = (userId,startDate, endDate) => (dispatch) => {
+    dispatch({ type: types.GET_JUMPSTART_BULB2_REQUEST });
+    axios
+      .get(`${base_url}/leads/createded-leads/count/${userId}?endDate=${endDate}&startDate=${startDate}`, {
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+        },
+      })
+      .then((res) => {
+        // console.log(res)
+        dispatch({
+          type: types.GET_JUMPSTART_BULB2_SUCCESS,
+          payload: res.data,
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+        dispatch({
+          type: types.GET_JUMPSTART_BULB2_FAILURE,
+          payload: err,
+        });
+      });
+  };
+  export const getJumpBulblist3 = (userId,startDate, endDate) => (dispatch) => {
+    dispatch({ type: types.GET_JUMPSTART_BULB3_REQUEST });
+    axios
+      .get(`${base_url}/leads/junked-leads/count/${userId}?endDate=${endDate}&startDate=${startDate}`, {
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+        },
+      })
+      .then((res) => {
+        // console.log(res)
+        dispatch({
+          type: types.GET_JUMPSTART_BULB3_SUCCESS,
+          payload: res.data,
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+        dispatch({
+          type: types.GET_JUMPSTART_BULB3_FAILURE,
+          payload: err,
+        });
+      });
+  };
+
+
+export const getDashUserlist = (orgId) => (dispath) => {
+  dispath({ type: types.GET_DASHBOARD_USER_LIST_REQUEST });
+  axios
+    .get(`${base_url}/employee/active/user/drop-down/${orgId}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      dispath({
+        type: types.GET_DASHBOARD_USER_LIST_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      dispath({
+        type: types.GET_DASHBOARD_USER_LIST_FAILURE,
+        payload: err,
+      });
+    });
+};
+
+export const getHotColdWarm = (userId,startDate, endDate) => (
+  dispatch,
+) => {
+  dispatch({
+    type: types.GET_HOT_COLD_WARM_REQUEST,
+  });
+  axios
+    .get(`${base_url}/leads/type/hot-warm-cold/count/date-range/${userId}?endDate=${endDate}&startDate=${startDate}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      dispatch({
+        type: types.GET_HOT_COLD_WARM_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      dispatch({
+        type: types.GET_HOT_COLD_WARM_FAILURE,
+        payload: err,
+      });
+    });
+};
+
+
+export const getLeavesGantt = (orgId,endDate,startDate) => (dispath) => {
+  dispath({ type: types.GET_LEAVES_GANTT_REQUEST });
+  axios
+    .get(`${base_url}/leaves/employee/leave-list/date-wise/${orgId}?endDate=${endDate}&startDate=${startDate} `, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      dispath({
+        type: types.GET_LEAVES_GANTT_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      dispath({
+        type: types.GET_LEAVES_GANTT_FAILURE,
+        payload: err,
+      });
+    });
+} 
+export const getJumpCustomerlist = (userId,startDate, endDate) => (dispatch) => {
+  dispatch({ type: types.GET_JUMPSTART_CUSTOMER_LIST_REQUEST });
+  axios
+    .get(`${base_url}/opportunity/added/record/count/date-range/${userId}?endDate=${endDate}&startDate=${startDate}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      // console.log(res)
+      dispatch({
+        type: types.GET_JUMPSTART_CUSTOMER_LIST_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.GET_JUMPSTART_CUSTOMER_LIST_FAILURE,
+        payload: err,
+      });
+    });
+};
+export const getJumpCustomerlist2 = (userId,startDate, endDate) => (dispatch) => {
+  dispatch({ type: types.GET_JUMPSTART_CUSTOMER2_LIST_REQUEST });
+  axios
+    .get(`${base_url}/opportunity/Close/record/count/date-range/${userId}?endDate=${endDate}&startDate=${startDate}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      // console.log(res)
+      dispatch({
+        type: types.GET_JUMPSTART_CUSTOMER2_LIST_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.GET_JUMPSTART_CUSTOMER2_LIST_FAILURE,
+        payload: err,
+      });
+    });
+};
+export const getDashCustomerAddedLeads = (userId,startDate,endDate) => (dispatch) => {
+  dispatch({
+    type: types.GET_DASH_CUSTOMER_ADDED_LEADS_REQUEST,
+  });
+  axios
+    .get(`${base_url}/leads/added/count/date-wise/${userId}?endDate=${endDate}&startDate=${startDate}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.GET_DASH_CUSTOMER_ADDED_LEADS_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err.response);
+      dispatch({
+        type: types.GET_DASH_CUSTOMER_ADDED_LEADS_FAILURE,
+        payload: err,
+      });
+    });
+    
+};
+export const getJumpTasklist = (userId,startDate, endDate) => (dispatch) => {
+  dispatch({ type: types.GET_JUMPSTART_TASK_LIST_REQUEST });
+  axios
+    .get(`${base_url}/task/count/highPriority/${userId}?endDate=${endDate}&startDate=${startDate}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      // console.log(res)
+      dispatch({
+        type: types.GET_JUMPSTART_TASK_LIST_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.GET_JUMPSTART_TASK_LIST_FAILURE,
+        payload: err,
+      });
+    });
+};
+
+
+
+
+export const getDashCustomerAddedContacts = (userId,startDate,endDate) => (dispatch) => {
+  dispatch({
+    type: types.GET_DASH_CUSTOMER_ADDED_CONTACTS_REQUEST,
+  });
+  axios
+    .get(`${base_url}/contact/added/count/date-wise/${userId}?endDate=${endDate}&startDate=${startDate}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.GET_DASH_CUSTOMER_ADDED_CONTACTS_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+    
+      dispatch({
+        type: types.GET_DASH_CUSTOMER_ADDED_CONTACTS_FAILURE,
+        payload: err,
+      });
+    });
+};
+export const getJumpTask2list = (userId,startDate, endDate) => (dispatch) => {
+  dispatch({ type: types.GET_JUMPSTART_TASK_2_LIST_REQUEST });
+  axios
+    .get(`${base_url}/task/count/deadlineTask/${userId}?endDate=${endDate}&startDate=${startDate}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      // console.log(res)
+      dispatch({
+        type: types.GET_JUMPSTART_TASK_2_LIST_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.GET_JUMPSTART_TASK_2_LIST_FAILURE,
+        payload: err,
+      });
+    });
+};
+
+export const getDashboardTasks = (userId) => (dispatch) => {
+  dispatch({
+    type: types.GET_DASHBOARD_TASK_REQUEST,
+  });
+  axios
+    .get(`${base_url}/task/type/count/${userId}`, {
+     
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.GET_DASHBOARD_TASK_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.GET_DASHBOARD_TASK_FAILURE,
+        payload: err,
+      });
+    });
+};
+
+
+
+export const getTakskdashboardGantt = (userId) => (dispath) => {
+  dispath({ type: types.GET_TASKS_DASHBOARD_GANTT_REQUEST });
+  axios
+    .get(`${base_url}/task/openTask/list/${userId} `, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      dispath({
+        type: types.GET_TASKS_DASHBOARD_GANTT_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      dispath({
+        type: types.GET_TASKS_DASHBOARD_GANTT_FAILURE,
+        payload: err,
+      });
+    });
+} 
+
+export const getJumpInvestorlist = (userId,startDate, endDate) => (dispatch) => {
+  dispatch({ type: types.GET_JUMPSTART_INVESTOR_REQUEST });
+  axios
+    .get(`${base_url}/investorLeads/qualified-investorLeads/count/${userId}?endDate=${endDate}&startDate=${startDate}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      // console.log(res)
+      dispatch({
+        type: types.GET_JUMPSTART_INVESTOR_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.GET_JUMPSTART_INVESTOR_FAILURE,
+        payload: err,
+      });
+    });
+};
+export const getJumpInvestor2list = (userId,startDate, endDate) => (dispatch) => {
+  dispatch({ type: types.GET_JUMPSTART_INVESTOR_2_REQUEST });
+  axios
+    .get(`${base_url}/investorLeads/createded-investorLeads/count/${userId}?endDate=${endDate}&startDate=${startDate}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      // console.log(res)
+      dispatch({
+        type: types.GET_JUMPSTART_INVESTOR_2_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.GET_JUMPSTART_INVESTOR_2_FAILURE,
+        payload: err,
+      });
+    });
+};
+export const getJumpInvestor3list = (userId,startDate, endDate) => (dispatch) => {
+  dispatch({ type: types.GET_JUMPSTART_INVESTOR_3_REQUEST });
+  axios
+    .get(`${base_url}/InvestorOpportunity/added/record/count/date-range/${userId}?endDate=${endDate}&startDate=${startDate}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      // console.log(res)
+      dispatch({
+        type: types.GET_JUMPSTART_INVESTOR_3_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.GET_JUMPSTART_INVESTOR_3_FAILURE,
+        payload: err,
+      });
+    });
+};
+export const getJumpInvestor4list = (userId,startDate, endDate) => (dispatch) => {
+  dispatch({ type: types.GET_JUMPSTART_INVESTOR_4_REQUEST });
+  axios
+    .get(`${base_url}/InvestorOpportunity/Close/record/count/date-range/${userId}?endDate=${endDate}&startDate=${startDate}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      // console.log(res)
+      dispatch({
+        type: types.GET_JUMPSTART_INVESTOR_4_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.GET_JUMPSTART_INVESTOR_4_FAILURE,
+        payload: err,
+      });
+    });
+};
+
+export const getInvHotColdWarm = (userId,startDate, endDate) => (
+  dispatch,
+) => {
+  dispatch({
+    type: types.GET_INVSTR_HOT_COLD_WARM_REQUEST,
+  });
+  axios
+    .get(`${base_url}/investorLeads/type/hot-warm-cold/count/date-range/${userId}?endDate=${endDate}&startDate=${startDate}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      dispatch({
+        type: types.GET_INVSTR_HOT_COLD_WARM_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      dispatch({
+        type: types.GET_INVSTR_HOT_COLD_WARM_FAILURE,
+        payload: err,
+      });
+    });
+};
+
+export const getDashInvestorAddedPitch = (userId,startDate,endDate) => (dispatch) => {
+  dispatch({
+    type: types.GET_DASH_INVESTOR_ADDED_PITCH_REQUEST,
+  });
+  axios
+    .get(`${base_url}/investorLeads/added/count/date-wise/${userId}?endDate=${endDate}&startDate=${startDate}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.GET_DASH_INVESTOR_ADDED_PITCH_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err.response);
+      dispatch({
+        type: types.GET_DASH_INVESTOR_ADDED_PITCH_FAILURE,
+        payload: err,
+      });
+    });
+    
+};
+export const getDashInvestorAddedContactInvest = (userId,startDate,endDate) => (dispatch) => {
+  dispatch({
+    type: types.GET_DASH_INVESTOR_ADDED_CONTACTINVEST_REQUEST,
+  });
+  axios
+    .get(`${base_url}/contact/added/investor/count/date-wise/${userId}?endDate=${endDate}&startDate=${startDate}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.GET_DASH_INVESTOR_ADDED_CONTACTINVEST_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err.response);
+      dispatch({
+        type: types.GET_DASH_INVESTOR_ADDED_CONTACTINVEST_FAILURE,
+        payload: err,
+      });});};
+
+export const handleLeadQualifiedDrawer = (modalProps)=>(dispatch)=>{
+  dispatch({
+    type:types.HANDLE_LEAD_QUALIFIED_DRAWER,
+    payload:modalProps
+  });
+}
+export const getLeadQualified = (userId,startDate,endDate)=>(dispatch)=>{
+  dispatch({
+    type:types.GET_LEADS_QUALIFIED_REQUEST,
+  });
+  axios
+  .get(`${base_url}/leads/qualified-leads/list/${userId}?endDate=${endDate}&startDate=${startDate}`, {
+    headers: {
+      Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+    },
+  })
+  .then((res) => {
+    dispatch({
+      type: types.GET_LEADS_QUALIFIED_SUCCESS,
+      payload: res.data,
+    });
+  })
+  .catch((err) => {
+    dispatch({
+      type: types.GET_LEADS_QUALIFIED_FAILURE,
+      payload: err,
+    });});};
+
+    export const handleLeadAddedDrawer = (modalProps)=>(dispatch)=>{
+      dispatch({
+        type:types.HANDLE_LEAD_ADDED_DRAWER,
+        payload:modalProps
+      });
+    }
+    export const getLeadAdded= (userId,startDate,endDate)=>(dispatch)=>{
+      dispatch({
+        type:types.GET_LEADS_ADDED_REQUEST,
+      });
+      axios
+      .get(`${base_url}/leads/createded-leads/list/${userId}?endDate=${endDate}&startDate=${startDate}`, {
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+        },
+      })
+      .then((res) => {
+        dispatch({
+          type: types.GET_LEADS_ADDED_SUCCESS,
+          payload: res.data,
+        });
+      })
+      .catch((err) => {
+        dispatch({
+          type: types.GET_LEADS_ADDED_FAILURE,
+          payload: err,
+        });});};
+
+        export const handleOppoAddedDrawer = (modalProps)=>(dispatch)=>{
+          dispatch({
+            type:types.HANDLE_OPPO_ADDED_DRAWER,
+            payload:modalProps
+          });
+        }
+        export const getOppoAdded= (userId,startDate,endDate)=>(dispatch)=>{
+          dispatch({
+            type:types.GET_OPPO_ADDED_REQUEST,
+          });
+          axios
+          .get(`${base_url}/opportunity/added/date-range/${userId}?endDate=${endDate}&startDate=${startDate}`, {
+            headers: {
+              Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+            },
+          })
+          .then((res) => {
+            dispatch({
+              type: types.GET_OPPO_ADDED_SUCCESS,
+              payload: res.data,
+            });
+          })
+          .catch((err) => {
+            dispatch({
+              type: types.GET_OPPO_ADDED_FAILURE,
+              payload: err,
+            });});};
+
+            export const handleOppoClosedDrawer = (modalProps)=>(dispatch)=>{
+              dispatch({
+                type:types.HANDLE_OPPO_CLOSED_DRAWER,
+                payload:modalProps
+              });
+            }
+            export const getOppocLOSED= (userId,startDate,endDate)=>(dispatch)=>{
+              dispatch({
+                type:types.GET_OPPO_CLOSED_REQUEST,
+              });
+              axios
+              .get(`${base_url}/opportunity/ClosedList/date-range/${userId}?endDate=${endDate}&startDate=${startDate}`, {
+                headers: {
+                  Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+                },
+              })
+              .then((res) => {
+                dispatch({
+                  type: types.GET_OPPO_CLOSED_SUCCESS,
+                  payload: res.data,
+                });
+              })
+              .catch((err) => {
+                dispatch({
+                  type: types.GET_OPPO_CLOSED_FAILURE,
+                  payload: err,
+                });});};
+          
+                   
+    export const handlePitchQualifiedDrawer = (modalProps)=>(dispatch)=>{
+      dispatch({
+        type:types.HANDLE_PITCH_QUALIFIED_DRAWER,
+        payload:modalProps
+      });
+    }
+    export const getPitchQualified = (userId,startDate,endDate)=>(dispatch)=>{
+      dispatch({
+        type:types.GET_PITCH_QUALIFIED_REQUEST,
+      });
+      axios
+      .get(`${base_url}/investorLeads/qualified-investorLeads/list/${userId}?endDate=${endDate}&startDate=${startDate}`, {
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+        },
+      })
+      .then((res) => {
+        dispatch({
+          type: types.GET_PITCH_QUALIFIED_SUCCESS,
+          payload: res.data,
+        });
+      })
+      .catch((err) => {
+        dispatch({
+          type: types.GET_PITCH_QUALIFIED_FAILURE,
+          payload: err,
+        });});};
+
+        export const handlePitchAddedDrawer = (modalProps)=>(dispatch)=>{
+          dispatch({
+            type:types.HANDLE_PITCH_ADDED_DRAWER,
+            payload:modalProps
+          });
+        }
+        export const getPitchAdded = (userId,startDate,endDate)=>(dispatch)=>{
+          dispatch({
+            type:types.GET_PITCH_ADDED_REQUEST,
+          });
+          axios
+          .get(`${base_url}/investorLeads/createded-investorLeads/list/${userId}?endDate=${endDate}&startDate=${startDate}`, {
+            headers: {
+              Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+            },
+          })
+          .then((res) => {
+            dispatch({
+              type: types.GET_PITCH_ADDED_SUCCESS,
+              payload: res.data,
+            });
+          })
+          .catch((err) => {
+            dispatch({
+              type: types.GET_PITCH_ADDED_FAILURE,
+              payload: err,
+            });});};  
+
+            export const handleDealAddedDrawer = (modalProps)=>(dispatch)=>{
+              dispatch({
+                type:types.HANDLE_DEAL_ADDED_DRAWER,
+                payload:modalProps
+              });}
+
+            export const getDealAdded = (userId,startDate,endDate)=>(dispatch)=>{
+              dispatch({
+                type:types.GET_DEAL_ADDED_REQUEST,
+              });
+              axios
+              .get(`${base_url}/InvestorOpportunity/added/date-range/${userId}?endDate=${endDate}&startDate=${startDate}`, {
+                headers: {
+                  Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+                },
+              })
+              .then((res) => {
+                dispatch({
+                  type: types.GET_DEAL_ADDED_SUCCESS,
+                  payload: res.data,
+                });
+              })
+              .catch((err) => {
+                dispatch({
+                  type: types.GET_DEAL_ADDED_FAILURE,
+                  payload: err,
+                });});};  
+            
+                export const handleDealClosedDrawer = (modalProps)=>(dispatch)=>{
+                  dispatch({
+                    type:types.HANDLE_DEAL_CLOSED_DRAWER,
+                    payload:modalProps
+                  });}
+    
+                export const getDealClosed = (userId,startDate,endDate)=>(dispatch)=>{
+                  dispatch({
+                    type:types.GET_DEAL_CLOSED_REQUEST,
+                  });
+                  axios
+                  .get(`${base_url}/InvestorOpportunity/ClosedList/date-range/${userId}?endDate=${endDate}&startDate=${startDate}`, {
+                    headers: {
+                      Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+                    },
+                  })
+                  .then((res) => {
+                    dispatch({
+                      type: types.GET_DEAL_CLOSED_SUCCESS,
+                      payload: res.data,
+                    });
+                  })
+                  .catch((err) => {
+                    dispatch({
+                      type: types.GET_DEAL_CLOSED_FAILURE,
+                      payload: err,
+                    });});};  
+
+export const handleLeadHCWdrawer = (modalProps)=>(dispatch)=>{
+  dispatch({
+    type:types.HANDLE_LEAD_HCW_DRAWER,
+    payload:modalProps
+  });}
+
+  export const getLeadHotList = (userId,startDate,endDate)=>(dispatch)=>{
+    dispatch({
+      type:types.GET_LEAD_HOTLIST_REQUEST,
+    });
+    axios
+    .get(`${base_url}/leads/hot/list/date-range/${userId}?endDate=${endDate}&startDate=${startDate}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      dispatch({
+        type: types.GET_LEAD_HOTLIST_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      dispatch({
+        type: types.GET_LEAD_HOTLIST_FAILURE,
+        payload: err,
+      });});}; 
+
+      export const getLeadColdList = (userId,startDate,endDate)=>(dispatch)=>{
+        dispatch({
+          type:types.GET_LEAD_COLDLIST_REQUEST,
+        });
+        axios
+        .get(`${base_url}/leads/cold/list/date-range/${userId}?endDate=${endDate}&startDate=${startDate}`, {
+          headers: {
+            Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+          },
+        })
+        .then((res) => {
+          dispatch({
+            type: types.GET_LEAD_COLDLIST_SUCCESS,
+            payload: res.data,
+          });
+        })
+        .catch((err) => {
+          dispatch({
+            type: types.GET_LEAD_COLDLIST_FAILURE,
+            payload: err,
+          });});};
+
+          export const getLeadWarmList = (userId,startDate,endDate)=>(dispatch)=>{
+            dispatch({
+              type:types.GET_LEAD_WARMLIST_REQUEST,
+            });
+            axios
+            .get(`${base_url}/leads/warm/list/date-range/${userId}?endDate=${endDate}&startDate=${startDate}`, {
+              headers: {
+                Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+              },
+            })
+            .then((res) => {
+              dispatch({
+                type: types.GET_LEAD_WARMLIST_SUCCESS,
+                payload: res.data,
+              });
+            })
+            .catch((err) => {
+              dispatch({
+                type: types.GET_LEAD_WARMLIST_FAILURE,
+                payload: err,
+              });});};         
+
+              export const handlePitchHCWdrawer = (modalProps)=>(dispatch)=>{
+                dispatch({
+                  type:types.HANDLE_PITCH_HCW_DRAWER,
+                  payload:modalProps
+                });}                       
+
+                export const getPitchHotList = (userId,startDate,endDate)=>(dispatch)=>{
+                  dispatch({
+                    type:types.GET_PITCH_HOTLIST_REQUEST,
+                  });
+                  axios
+                  .get(`${base_url}/investorLeads/type-hot/date-range/${userId}?endDate=${endDate}&startDate=${startDate}`, {
+                    headers: {
+                      Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+                    },
+                  })
+                  .then((res) => {
+                    dispatch({
+                      type: types.GET_PITCH_HOTLIST_SUCCESS,
+                      payload: res.data,
+                    });
+                  })
+                  .catch((err) => {
+                    dispatch({
+                      type: types.GET_PITCH_HOTLIST_FAILURE,
+                      payload: err,
+                    });});}; 
+              
+                    export const getPitchColdList = (userId,startDate,endDate)=>(dispatch)=>{
+                      dispatch({
+                        type:types.GET_PITCH_COLDLIST_REQUEST,
+                      });
+                      axios
+                      .get(`${base_url}/investorLeads/type-cold/date-range/${userId}?endDate=${endDate}&startDate=${startDate}`, {
+                        headers: {
+                          Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+                        },
+                      })
+                      .then((res) => {
+                        dispatch({
+                          type: types.GET_PITCH_COLDLIST_SUCCESS,
+                          payload: res.data,
+                        });
+                      })
+                      .catch((err) => {
+                        dispatch({
+                          type: types.GET_PITCH_COLDLIST_FAILURE,
+                          payload: err,
+                        });});};
+              
+                        export const getPitchWarmList = (userId,startDate,endDate)=>(dispatch)=>{
+                          dispatch({
+                            type:types.GET_PITCH_WARMLIST_REQUEST,
+                          });
+                          axios
+                          .get(`${base_url}/investorLeads/type-warm/date-range/${userId}?endDate=${endDate}&startDate=${startDate}`, {
+                            headers: {
+                              Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+                            },
+                          })
+                          .then((res) => {
+                            dispatch({
+                              type: types.GET_PITCH_WARMLIST_SUCCESS,
+                              payload: res.data,
+                            });
+                          })
+                          .catch((err) => {
+                            dispatch({
+                              type: types.GET_PITCH_WARMLIST_FAILURE,
+                              payload: err,
+                            });});};         
+                             

@@ -83,8 +83,8 @@ function LeaveCardList (props) {
                     borderBottom: "3px dotted #515050"
                   }}
                 >
-                  <div class=" flex flex-row justify-evenly w-wk">
-                    <div className=" flex font-medium flex-col w-44 ">
+                  <div class=" flex flex-row justify-evenly w-wk max-sm:flex-col">
+                    <div className=" flex font-medium flex-col md:w-44 max-sm:justify-between w-full max-sm:flex-row ">
 
                     <div class=" text-sm text-cardBody font-medium font-poppins">
          
@@ -93,52 +93,52 @@ function LeaveCardList (props) {
             </div> 
          
         
-            <div class=" font-normal text-sm text-cardBody font-poppins">
+            <div class=" font-normal text-[0.82rem] text-cardBody font-poppins">
    {` ${moment.utc(item.startDate).format("ll")}`}
    </div>
           
                     </div>
                   
-                    <div className=" flex font-medium flex-col w-40">
+                    <div className=" flex font-medium flex-col md:w-40 max-sm:justify-between w-full max-sm:flex-row">
 
                       <div class=" text-sm text-cardBody font-medium font-poppins">
                       End Date
                       </div>
 
                             
-            <div class=" font-normal text-sm text-cardBody font-poppins">
+            <div class=" font-normal text-[0.82rem] text-cardBody font-poppins">
    {` ${moment.utc(item.endDate).format("ll")}`}
    </div>
           
                       {/* </Tooltip>   */}
                     </div>
-                    <div className=" flex font-medium flex-col w-40">
+                    <div className=" flex font-medium flex-col md:w-40 max-sm:justify-between w-full max-sm:flex-row">
              
 
                         <div class=" text-sm text-cardBody font-medium font-poppins">
                         Cover
                         </div>
 
-                        <div class=" font-normal text-sm text-cardBody font-poppins">
+                        <div class=" font-normal text-[0.82rem] text-cardBody font-poppins">
                           {item.coverDetails}
                         </div>
                      
                     </div>
-                    <div className=" flex font-medium flex-col w-40">
+                    <div className=" flex font-medium flex-col md:w-40 max-sm:justify-between w-full max-sm:flex-row">
                     
 
                         <div class=" text-sm text-cardBody font-medium font-poppins">
                         Reason
                         </div>
 
-                        <div class=" font-normal text-sm text-cardBody font-poppins">
+                        <div class=" font-normal text-[0.82rem] text-cardBody font-poppins">
                           {item.reason}
                         </div>
                    
                     </div>
  
-     <div className=" flex font-medium flex-col w-48 ">
-                                    <h4 class=" text-base text-cardBody font-poppins">Status</h4>
+     <div className=" flex font-medium flex-col md:w-48 max-sm:justify-between w-full max-sm:flex-row ">
+                                    <h4 class=" text-sm text-cardBody font-poppins">Status</h4>
 
                                     <div class=" text-base text-cardBody font-poppins">
                                     {item.status === "Approved" && (
@@ -175,15 +175,15 @@ function LeaveCardList (props) {
                     textAlign: "center",
                     margin: "2px",
                     borderRadius: "0.62em",
-                    width:"12rem"
+                    width:"11rem"
                   }}
                 >
-                 <div className="text-[#e1d16c]"> Waiting for approval</div>
+                 <div className="text-[#e1d16c] text-sm"> Waiting for approval</div>
                   </div>
               )}
                                     </div>
                                 </div>
-                                <div class="flex flex-col w-20">
+                                <div class="flex flex-col justify-evenly w-20">
                     <div >
                     {item.status === "Pending" ? 
             <Tooltip title="Edit">

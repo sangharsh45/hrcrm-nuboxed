@@ -9,6 +9,13 @@ export const handleEducationModal = (modalProps) => (dispatch) => {
   });
 };
 
+export const handleVisaModal = (modalProps) => (dispatch) => {
+  dispatch({
+    type: types.HANDLE_VISA_MODAL,
+    payload: modalProps,
+  });
+};
+
 export const handleTrainingModal = (modalProps) => (dispatch) => {
   dispatch({
     type: types.HANDLE_TRAINING_MODAL,
@@ -1349,5 +1356,166 @@ export const linkEmailStatus = (data, candidateId) => (
         payload: err,
       });
       // cb && cb("failuer");
+    });
+};
+
+export const getLinkedUsersDocument = (OrgId) => (dispatch) => {
+  dispatch({
+    type: types.GET_LINKED_USERS_DOCUMENT_REQUEST,
+  });
+  axios
+    .get(`${base_url}/document/user-type/user/list/${OrgId}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.GET_LINKED_USERS_DOCUMENT_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.GET_LINKED_USERS_DOCUMENT_FAILURE,
+        payload: err,
+      });
+    });
+};
+
+export const addVisaDetails = (employee, userId, cb) => (dispatch) => {
+  dispatch({
+    type: types.ADD_VISA_DETAILS_REQUEST,
+  });
+  console.log(employee);
+
+  axios
+    .post(`${base_url}/employee/visa`, employee, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+       dispatch(getVisaDetails(userId));
+      dispatch({
+        type: types.ADD_VISA_DETAILS_SUCCESS,
+        payload: res.data,
+      });
+      // cb&&cb("success");
+      console.log(res.data);
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.ADD_VISA_DETAILS_FAILURE,
+        payload: err,
+      });
+      // cb && cb("error");
+    });
+};
+
+export const getVisaDetails = (userId) => (dispatch) => {
+  dispatch({
+    type: types.GET_VISA_DETAILS_REQUEST,
+  });
+
+  axios
+    .get(`${base_url}/employee/visa/user/${userId}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.GET_VISA_DETAILS_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.GET_VISA_DETAILS_FAILURE,
+        payload: err,
+      });
+    });
+};
+
+export const deleteVisa = (visaId) => (dispatch, getState) => {
+  const { userId } = getState("auth").auth.userDetails;
+  // console.log("inside deleteCall", callId);
+  dispatch({
+    type: types.DELETE_VISA_REQUEST,
+  });
+
+  axios
+    .delete(`${base_url}/employee/visa/delete/${visaId}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      // dispatch(getEducationDetails(userId));
+      dispatch({
+        type: types.DELETE_VISA_SUCCESS,
+        payload: visaId,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.DELETE_VISA_FAILURE,
+        payload: err,
+      });
+    });
+};
+
+export const handleUpdateVisaModal = (modalProps) => (dispatch) => {
+  dispatch({
+    type: types.HANDLE_UPDATE_VISA_MODAL,
+    payload: modalProps,
+  });
+};
+
+export const setEditVisa = (name) => (dispatch) => {
+  dispatch({
+    type: types.SET_VISA_EDIT,
+    payload: name,
+  });
+};
+
+export const updateVisaDetails = (employee, visaId, cb) => (
+  dispatch
+) => {
+  dispatch({
+    type: types.UPDATE_VISA_DETAILS_REQUEST,
+  });
+  console.log(employee);
+
+  axios
+    .put(`${base_url}/employee/visa/update/${visaId}`, employee, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      // dispatch(getEducationDetails(employeeId));
+      dispatch({
+        type: types.UPDATE_VISA_DETAILS_SUCCESS,
+        payload: res.data,
+      });
+      cb && cb("success");
+      console.log(res.data);
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.UPDATE_VISA_DETAILS_FAILURE,
+        payload: err,
+      });
+      cb && cb("error");
     });
 };

@@ -27,7 +27,7 @@ class ContactActionRight extends React.Component {
     return (
       <div class=" flex  items-center">
         
-        {this.props.viewType === "table"&&user.employee_type !=="external" ? (
+        {this.props.viewType === "table" && user.contactFullListInd===true && user.employee_type !=="external" ? (
           
           <ContactSharePartnerForm 
           currentPartnerUser={this.props.currentPartnerUser}
@@ -36,21 +36,14 @@ class ContactActionRight extends React.Component {
         
         ) : null}
        
-        {this.props.viewType === "dashboard"&&user.employee_type !=="external" ? (
+        {this.props.viewType === "dashboard"&& user.contactFullListInd===true && user.employee_type !=="external" ? (
           <ContactShareCustomerForm 
           handleDropChange={this.props.handleDropChange}
           currentUser={this.props.currentUser} 
           />
         ) : null}
-        {/* <Button
-          type="primary"
-          default
-          href={`${base_url}/excel/export/user/contact/${userId}`}
-        >
-          Export
-        </Button> */}
+        <div class="max-sm:hidden">
        { role == "ADMIN" && (
-        
         <Tooltip placement="left" title="XL">
         <a
         href={`${base_url}/excel/export/user/contact/${userId}`}>
@@ -59,7 +52,8 @@ class ContactActionRight extends React.Component {
          </a>
          </Tooltip>
        )}
-        {user.userType !== "USER" && user.department !== "Partner" && ( 
+       </div>
+        {/* {user.userType !== "USER" && user.department !== "Partner" && ( 
         <Button
           type="primary"
           default
@@ -67,12 +61,12 @@ class ContactActionRight extends React.Component {
         >
           Import
         </Button>
-        )}
-        {this.props.viewType === "dashboard" ? (
+        )} */}
+        {this.props.viewType === "table" ? (
         <Tooltip placement="left" title="Create">
           <Button 
            type="primary"
-           ghost onClick={() => handleContactModal(true)}>
+           onClick={() => handleContactModal(true)}>
             Add
           </Button>
         </Tooltip>

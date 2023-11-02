@@ -270,3 +270,37 @@ export const getRejectdMileage = (userId,pageNo) => (dispatch) => {
       });
     });
 };
+
+export const handleStatusMileageModal = (modalProps) => (dispatch) => {
+  dispatch({
+    type: types.HANDLE_STATUS_MILEAGE_MODAL,
+    payload: modalProps,
+  });
+};
+
+export const getMileageStatusByMileageId = (voucherId) => (dispatch) => {
+  dispatch({
+      type: types.GET_MILEAGE_STATUS_BY_MILEAGEID_REQUEST,
+  });
+
+  axios
+      .get(`${base_url}/task/mileage/status/${voucherId}`, {
+          headers: {
+              Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+          },
+      })
+      .then((res) => {
+          console.log(res);
+          dispatch({
+              type: types.GET_MILEAGE_STATUS_BY_MILEAGEID_SUCCESS,
+              payload: res.data,
+          });
+      })
+      .catch((err) => {
+          console.log(err);
+          dispatch({
+              type: types.GET_MILEAGE_STATUS_BY_MILEAGEID_FAILURE,
+              payload: err,
+          });
+      });
+};

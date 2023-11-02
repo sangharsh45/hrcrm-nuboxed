@@ -20,7 +20,7 @@ function RecruitmentProfileView(props) {
             fontFamily:"poppins"
           }}
         >
-          Category
+          Theme
         </h1>
       </div>
      

@@ -24,8 +24,7 @@ class OpportunityDetailRight extends Component {
             // partnerLogin={this.props.partnerLogin}
           /> */}
             <OpportunityAboutViewCard
-          opportunity={opportunity}
-          
+          opportunity={opportunity} 
         />
         </div>
         <div style={{ width: "20%" ,}}>
