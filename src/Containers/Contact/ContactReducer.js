@@ -16,6 +16,10 @@ const initialState = {
   fetchingContactDataError:false,
   contactData:[],
 
+  addDrawerContactPulseModal:false,
+
+  addDrawerContactNotesModal:false,
+
   fetchingDelasContactData: false,
   fetchingDelasContactDataError: false,
   dealsContactData:[],
@@ -798,6 +802,13 @@ export const contactReducer = (state = initialState, action) => {
             };
           case types.GET_FILTER_CONTACTS_FAILURE:
             return { ...state, fetchingFilterContacts: false, fetchingFilterContactsError: true };
+
+
+            case types.HANDLE_CONTACT_NOTES_DRAWER_MODAL:
+                      return { ...state, addDrawerContactNotesModal: action.payload };
+
+                      case types.HANDLE_CONTACT_PULSE_DRAWER_MODAL:
+                        return { ...state, addDrawerContactPulseModal: action.payload };                   
 
     default:
       return state;

@@ -1970,5 +1970,12 @@ export const getAllCustomerByCloser = (userId, startDate, endDate) => (
     });
   };
 
+  export const handleCustomerPulseDrawerModal = (modalProps) => (dispatch) => {
+    dispatch({
+      type: types.HANDLE_CUSTOMER_PULSE_DRAWER_MODAL,
+      payload: modalProps,
+    });
+  };
+
 
  

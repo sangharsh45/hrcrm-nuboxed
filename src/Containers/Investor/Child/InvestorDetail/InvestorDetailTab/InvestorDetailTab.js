@@ -270,7 +270,7 @@ getContactListByInvestorId(this.props.investorDetails.investorId);
                 <InvestorLinkedDocuments investorDetails={this.props.investorDetails}/>
               </Suspense>
             </TabPane>
-            <TabPane
+            {/* <TabPane
               tab={
                 <>
                   <span>
@@ -300,7 +300,7 @@ getContactListByInvestorId(this.props.investorDetails.investorId);
                 {" "}
                 <InvestorLinkedNotes investorDetails={this.props.investorDetails} />
               </Suspense>
-            </TabPane>
+            </TabPane> */}
             {/* <TabPane
               tab={
                 <>

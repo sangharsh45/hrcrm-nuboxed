@@ -102,7 +102,59 @@ function General(props) {
                   />
                 </div>
               </div>
-           
+              <Spacer />
+              <div
+                style={{
+                  width: "74%",
+                  display: "flex",
+                  justifyContent: "space-between",
+                }}
+              >
+                <p style={{ minWidth:"-webkit-fill-available"}}>Auto Send Job Anniversary Email</p>
+                <div>
+                      <Popconfirm
+                        title="Do you wish to change Status ? "
+                        // onConfirm={handleAppClick}
+                        // onCancel={handleCancel}
+                        okText="Yes"
+                        cancelText="No"
+                      >
+                        <Switch
+                          style={{ width: "5em" }}
+                          // checked={toggle || inappInd}
+                          checkedChildren="Yes"
+                          unCheckedChildren="No"
+                        />
+                      </Popconfirm>
+                    </div>
+              </div>
+              <Spacer />
+              <div
+                style={{
+                  width: "74%",
+                  display: "flex",
+                  justifyContent: "space-between",
+                }}
+              >
+                <p style={{ minWidth:"-webkit-fill-available"}}>Auto Send BirthDay Anniversary Email</p>
+                <div>
+                      <Popconfirm
+                        title="Do you wish to change Status ? "
+                        // onConfirm={handleAppClick}
+                        // onCancel={handleCancel}
+                        okText="Yes"
+                        cancelText="No"
+                      >
+                        <Switch
+                          style={{ width: "5em" }}
+                          // checked={toggle || inappInd}
+                          checkedChildren="Yes"
+                          unCheckedChildren="No"
+                        />
+                      </Popconfirm>
+                    </div>
+              </div>
+              <Spacer />
             </div>
           </FlexContainer>
           <h4>

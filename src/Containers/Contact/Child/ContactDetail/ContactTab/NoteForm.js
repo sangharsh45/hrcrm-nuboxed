@@ -70,6 +70,7 @@ class NoteForm extends Component {
       accountId,
       distributorId,
       Loading,
+      contactData,
       callback,
       teamId,
       callId,

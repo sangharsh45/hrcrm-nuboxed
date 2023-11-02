@@ -298,7 +298,7 @@ class ContactDetailTab extends Component {
                 <LinkedDocuments />
               </Suspense>
             </TabPane>
-            <TabPane
+            {/* <TabPane
               tab={
                 <>
                   <span>
@@ -328,7 +328,7 @@ class ContactDetailTab extends Component {
                 {" "}
                 <LinkedNotes />
               </Suspense>
-            </TabPane>
+            </TabPane> */}
             <TabPane
               tab={
                 <>

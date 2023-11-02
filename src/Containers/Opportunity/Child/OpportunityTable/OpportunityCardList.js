@@ -9,6 +9,7 @@ import OpportunitySelectStages from "../OpportunityTable/OpportunitySelectStages
 import styled from 'styled-components';
 import BorderColorIcon from '@mui/icons-material/BorderColor';
 import SearchIcon from '@mui/icons-material/Search';
+import NoteAltIcon from "@mui/icons-material/NoteAlt";
 import LockOpenIcon from '@mui/icons-material/LockOpen';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { Tooltip, Input, Button, Select, Menu, Dropdown, Progress ,Popconfirm} from "antd";
@@ -21,6 +22,7 @@ import { MultiAvatar, MultiAvatar2, SubTitle,Title } from "../../../../Component
 import {
   getOpportunityListByUserId,
   getRecruiterList,
+  handleOpportunityNotesDrawerModal,
   handleUpdateOpportunityModal,
   setEditOpportunity,
   deleteOpportunityData,
@@ -44,6 +46,7 @@ import AddOpportunityDrawerModal from "../../Child/OpportunityTable/AddOpportuni
 import OpportunityDetailView from "./OpportunityDetailView";
 import UpdateOpportunityModal from "../UpdateOpportunity/UpdateOpportunityModal";
 import APIFailed from "../../../../Helpers/ErrorBoundary/APIFailed";
+import AddOpportunityNotesDrawerModal from "./AddOpportunityNotesDrawerModal";
 const Option =Select;
 
 function OpportunityCardList(props) {
@@ -115,6 +118,8 @@ function OpportunityCardList(props) {
     user,
     opportunityByUserId,
     handleUpdateOpportunityModal,
+    addDrawerOpportunityNotesModal,
+    handleOpportunityNotesDrawerModal,
     updateOpportunityModal,
     deleteOpportunityData,
     history,
@@ -376,6 +381,29 @@ imgHeight={"1.8em"}
           placement="right"
           title={
             <FormattedMessage
+              id="app.notes"
+              defaultMessage="Notes"
+            />
+          }
+        >
+         
+              
+            <span
+
+              onClick={() => {
+              
+                handleOpportunityNotesDrawerModal(true);
+                handleSetCurrentOpportunityId(item);
+              }}
+            >
+                 <NoteAltIcon   style={{ color: "green", cursor: "pointer", fontSize: "1rem" }}/>
+              </span>
+        
+          </Tooltip>
+<Tooltip
+          placement="right"
+          title={
+            <FormattedMessage
               id="app.edit"
               defaultMessage="Edit"
             />
@@ -395,6 +423,7 @@ imgHeight={"1.8em"}
               </span>
            )}
           </Tooltip>
+       
           <StyledPopconfirm
             title="Do you want to delete?"
             onConfirm={() => deleteOpportunityData(item.opportunityId)}
@@ -424,6 +453,12 @@ imgHeight={"1.8em"}
         handleUpdateOpportunityModal={handleUpdateOpportunityModal}
         handleSetCurrentOpportunityId={handleSetCurrentOpportunityId}
       />
+       <AddOpportunityNotesDrawerModal
+        addDrawerOpportunityNotesModal={addDrawerOpportunityNotesModal}
+        opportunityData={currentOpportunityId}
+        handleOpportunityNotesDrawerModal={handleOpportunityNotesDrawerModal}
+        handleSetCurrentOpportunityId={handleSetCurrentOpportunityId}
+      />
 
 <AddOpportunityDrawerModal
  opportunityData={currentOpportunityId}
@@ -450,6 +485,7 @@ allRecruitmentDetailsByOppId={props.allRecruitmentDetailsByOppId}
 const mapStateToProps = ({ auth, account, opportunity }) => ({
   userId: auth.userDetails.userId,
   user: auth.userDetails,
+  addDrawerOpportunityNotesModal:opportunity.addDrawerOpportunityNotesModal,
   role: auth.userDetails.role,
   opportunitySkills:opportunity.opportunitySkills,
   sales: opportunity.sales,
@@ -486,6 +522,7 @@ const mapDispatchToProps = (dispatch) =>
       getOpportunityForecast,
       getAllSalesList,
       handleUpdateOpportunityModal,
+      handleOpportunityNotesDrawerModal,
       handleOpportunityDrawerModal,
       setEditOpportunity,
       deleteOpportunityData,

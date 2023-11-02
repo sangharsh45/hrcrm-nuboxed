@@ -163,6 +163,8 @@ const initialState = {
   linkClosedRequirement:false,
   linkClosedRequirementError:false,
 
+  addDrawerOpportunityNotesModal:false,
+
   linkingRecruitToOpportunity: false,
   linkingRecruitToOpportunityError: false,
 
@@ -2442,6 +2444,9 @@ case types.REINSTATE_TOGGLE_FOR_OPPORTUNITY_FAILURE:
                                           fetchingAllOpportunityData: false,
                                           fetchingAllOpportunityDataError: true,
                                         };
+
+                                        case types.HANDLE_OPPORTUNITY_NOTES_DRAWER_MODAL:
+                                          return { ...state, addDrawerOpportunityNotesModal: action.payload };
                                                                               
 
                                             default:
