@@ -17,6 +17,7 @@ const plainOptions = ['Access', 'Create', 'Update', 'Delete','Full List'];
  const dashboardCheckedList=['Access','Full List'];
  const refurbishCheckedList=['Workshop','Adminview','Adminassign'];
  const settingsCheckedList=['Access'];
+ const accountingCheckedList=['Access'];
  const basicCheckedList=['Access'];
  const repositoryCheckedList=['Create'];
  const junkCheckedList=['Access',"Transfer"];
@@ -888,7 +889,7 @@ const AccessForm = (props) => {
           {props.fetchingDepartmentAccess ? (
             <BundleLoader />
           ) : (
-            <TabsWrapper style={{height:"60rem"}}>
+            <TabsWrapper style={{height:"90rem"}}>
  
 
 <h1 class=" text-clr font-bold">HR</h1>
@@ -920,18 +921,9 @@ const AccessForm = (props) => {
               <Spacer />
               <FlexContainer justifyContent="space-around">
             
-            <div >
-              <h1 class="text-sm">Shipper</h1>
-              <Checkbox indeterminate={indeterminateShipper} onChange={onCheckAllShipperChange} checked={checkAllShipper}>
-               <label class="text-xs"> Check all</label>
-              </Checkbox>
-              <Divider />
-              <CheckboxGroup options={plainOptions} value={checkedShipperList} onChange={onShipperChange} />
-
-            </div>
-                <Spacer />
+          
               <div >
-                <h1 class="text-sm">Plant</h1>
+                <h1 class="text-sm">Facility</h1>
                 <Checkbox indeterminate={indeterminatePlant} onChange={onCheckAllPlantChange} checked={checkAllPlant}>
                 <label class="text-xs"> Check all</label>
                 </Checkbox>
@@ -1143,7 +1135,16 @@ const AccessForm = (props) => {
 <h1 class=" text-clr font-bold">ERP</h1>
                 <Spacer />
               <FlexContainer justifyContent="space-around">
-             
+              <div >
+              <h1 class="text-sm">Shipper</h1>
+              <Checkbox indeterminate={indeterminateShipper} onChange={onCheckAllShipperChange} checked={checkAllShipper}>
+               <label class="text-xs"> Check all</label>
+              </Checkbox>
+              <Divider />
+              <CheckboxGroup options={plainOptions} value={checkedShipperList} onChange={onShipperChange} />
+
+            </div>
+                <Spacer />
                <div >
                   <h1 class="text-sm">Account</h1>
                   <Checkbox indeterminate={indeterminateAccount} onChange={onCheckAllAccountChange} checked={checkAllAccount}>
@@ -1279,6 +1280,52 @@ const AccessForm = (props) => {
               <Spacer />
               </div> 
              : null } 
+
+
+    <div>     
+            <h1 class=" text-clr font-bold">Accounting</h1>
+            <Spacer />
+              <FlexContainer justifyContent="space-around">
+          
+
+              
+                <div >
+                  <h1 class="text-sm">Payments</h1>
+                  <Checkbox indeterminate={indeterminateInvestor} onChange={onCheckAllInvestorChange} checked={checkAllInvestor}>
+                  <label class="text-xs">  Check all  </label>
+                  </Checkbox>
+                  <Divider />
+                  <CheckboxGroup options={accountingCheckedList} value={checkedInvestorList} onChange={onInvestorChange} />
+                </div>
+                <Spacer />
+                    {/* Contact */}
+                    <div >
+                  <h1 class="text-sm">Collections</h1>
+                  <Checkbox indeterminate={indeterminateInvestorContact} onChange={onCheckAllInvestorContactChange} checked={checkAllInvestorContact}>
+                  <label class="text-xs"> Check all</label>
+                  </Checkbox>
+                  <Divider />
+                  <CheckboxGroup options={accountingCheckedList} value={checkedInvestorContactList} onChange={onInvestorContactChange} />
+
+                </div>
+                <Spacer />
+            
+
+<div >
+    <h1 class="text-sm">Invoices</h1>
+    <Checkbox indeterminate={indeterminateDeal} onChange={onCheckAllDealChange} checked={checkAllDeal}>
+    <label class="text-xs">  Check all </label>
+    </Checkbox>
+    <Divider />
+    <CheckboxGroup options={accountingCheckedList} value={checkedDealList} onChange={onDealChange} />
+
+  </div>
+
+              </FlexContainer>
+            
+              <Spacer />
+              </div> 
+            
                
               <h4 class="mt-2">Updated on {dayjs(props.departmentAcces.lastUpdatedOn).format("ll")} by {props.departmentAcces.name}</h4>
               

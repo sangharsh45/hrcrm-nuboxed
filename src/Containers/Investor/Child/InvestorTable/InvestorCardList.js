@@ -7,6 +7,7 @@ import LocationOnIcon from '@mui/icons-material/LocationOn';
 import ExploreIcon from "@mui/icons-material/Explore";
 import { getSectors } from "../../../Settings/Sectors/SectorsAction";
 import moment from "moment";
+import NoteAltIcon from "@mui/icons-material/NoteAlt";
 import { OnlyWrapCard } from '../../../../Components/UI/Layout'
 import { getCountries } from "../../../Auth/AuthAction";
 import InfiniteScroll from "react-infinite-scroll-component";
@@ -319,6 +320,8 @@ function InvestorCardList(props) {
 
                     </div>
                     </div>
+       
+                        
                     <div class="flex justify-evenly flex-col md:w-[2%] max-sm:flex-row">
                       <div>
                     <Tooltip overlayStyle={{ maxWidth: "300px" }} title={dataLoc}>
@@ -361,6 +364,18 @@ function InvestorCardList(props) {
             )}
             </div>
                       </div> 
+                      <div class="flex justify-evenly flex-col md:w-[2%] max-sm:flex-row">
+                    <Tooltip title="Notes">
+       <NoteAltIcon
+                // onClick={() => {
+                //   props.handlePitchNotesDrawerModal(true);
+                //   handleSetCurrentLeadsId(item);
+                // }}
+                style={{ color: "green", cursor: "pointer", fontSize: "1rem" }}
+              />
+           </Tooltip>
+
+            </div>
                       </div>   
                             </div>
                         </div>

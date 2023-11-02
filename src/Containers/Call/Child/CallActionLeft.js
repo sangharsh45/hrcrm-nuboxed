@@ -1,23 +1,37 @@
 import React from 'react'
-import { ActionIcon } from "../../../Components/Utils";
-import { FlexContainer } from '../../../Components/UI/Layout'
+import {Tooltip } from "antd";
+import { FormattedMessage } from "react-intl";
+import TocIcon from '@mui/icons-material/Toc';
 
 const CallActionLeft = (props) => {
     return (
-        <FlexContainer alignItems='center'>
-            <ActionIcon
+        <div class=" flex items-center" >
+               <Tooltip
+        title={<FormattedMessage id="app.myTasks" defaultMessage="calls" />}
+      >
+        <span class=" mr-2 cursor-pointer text-xs"
+          onClick={() => props.setCallViewType("table")}
+          style={{
+            color: props.viewType === "table" && "#1890ff",
+            cursor:"pointer"
+          }}
+        > <TocIcon  />
+        
+        </span>
+      </Tooltip>
+            {/* <ActionIcon
                 style={{ marginRight: '0.3rem', color: props.viewType === 'grid' && '#1890ff' }}
                 iconType='appstore-o'
                 tooltipTitle='GRID VIEW'
                 handleIconClick={() => props.setCallViewType('grid')}
             />
-            <ActionIcon
+            <TocIcon
                 style={{ marginRight: '0.3rem', color: props.viewType === 'table' && '#1890ff'  }}
                 iconType='table'
                 tooltipTitle='Table VIEW'
                 handleIconClick={() => props.setCallViewType('table')}
-            />
-        </FlexContainer>
+            /> */}
+        </div>
     )
 }
 

@@ -4,11 +4,13 @@ import { bindActionCreators } from "redux";
 import { getlocation } from "./LocationAction";
 import styled from 'styled-components';
 import {Switch}from "antd";
+import { BundleLoader } from '../../../../Components/Placeholder';
 
 const LocationCard = (props) => {
   useEffect(() => {
    props.getlocation(props.orgId);
     }, [])
+    if (props.fetchingLocationData) return <BundleLoader/>;
   return (
     <div class="overflow-y-auto max-h-[39rem]">
       <CardWrapper>  

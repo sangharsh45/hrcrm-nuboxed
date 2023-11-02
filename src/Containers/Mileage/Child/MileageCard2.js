@@ -14,6 +14,7 @@ import { DeleteOutlined,UpCircleOutlined } from "@ant-design/icons";
 import MileageVoucherIdDrawer from "./MileageVoucherIdDrawer";
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
+import { BundleLoader } from "../../../Components/Placeholder";
 const MileageTable2=lazy(()=>import("./MileageTable2"));
 
 class MileageCard2 extends React.Component {
@@ -37,7 +38,7 @@ class MileageCard2 extends React.Component {
       fetchingMileageByUserId,
       fetchingMileageByUserIdError,
     } = this.props;
-
+    if (fetchingMileageByUserId) return <BundleLoader/>;
     return (
       <>
          <div class=" h-h86 overflow-auto overflow-x-auto">

@@ -227,7 +227,7 @@ getEmployeesbyDepartment (filterOptionKey, filterOptionValue) {
               type: this.state.typeInd ? "true" : "false",
               // job_type: this.state.active,
               employee_type: this.state.workType,
-            });
+            },"cretiondate");
             resetForm();
           }}
         >

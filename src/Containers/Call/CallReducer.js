@@ -11,7 +11,7 @@ const initialState = {
   updatingCall: false,
   updatingCallError: false,
 
-
+  viewType: "table",
 
   addingNotesByCallId: false,
   addingNotesByCallIdError: false,

@@ -2,28 +2,29 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Timeline } from "antd";
-import { BorderBox } from "../../../../../../Components/UI/Layout";
-import { BundleLoader } from "../../../../../../Components/Placeholder";
-import { getNotesListByContactId } from "../../../../../Contact/ContactAction";
-import NoteContactInvestForm from "./NoteContactInvestForm";
-import { SingleNote } from "../../../../../../Components/Common";
+import { BorderBox } from "../../../../Components/UI/Layout";
+import { BundleLoader } from "../../../../Components/Placeholder";
+import { getNotesListByContactId } from "../../../Contact/ContactAction";
 
-class LinkedContactNotes extends Component {
+import { SingleNote } from "../../../../Components/Common";
+import NoteDealForm from "./NoteDealForm";
+
+class LinkedDealNotes extends Component {
   componentDidMount() {
-    this.props.getNotesListByContactId(this.props.contactiData.contactId);
+    this.props.getNotesListByContactId(this.props.invOpportunityId);
   }
 
   render() {
     const { fetchingNotesListByContactId, notesListByContactId } = this.props;
-    console.log("data5", this.props.contactiData.contactId);
+    console.log("data5", this.props.invOpportunityId);
     return (
       <>
         <div style={{ backgroundColor: "#dcdcdc", height: "14.375em" }}>
-          <NoteContactInvestForm
+          <NoteDealForm
             type={"contact"}
-            contactId={this.props.contactiData.contactId}
+            invOpportunityId={this.props.invOpportunityId}
             callback={() =>
-              this.props.getNotesListByContactId(this.props.contactiData.contactId)
+              this.props.getNotesListByContactId(this.props.invOpportunityId)
             }
           />
         </div>
@@ -69,4 +70,4 @@ const mapDispatchToProps = (dispatch) =>
     dispatch
   );
 
-export default connect(mapStateToProps, mapDispatchToProps)(LinkedContactNotes);
+export default connect(mapStateToProps, mapDispatchToProps)(LinkedDealNotes);

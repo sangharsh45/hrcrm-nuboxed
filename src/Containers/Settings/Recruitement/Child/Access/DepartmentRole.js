@@ -37,7 +37,7 @@ class DepartmentRole extends PureComponent {
         console.log(this.state.departmentData.roleTypeId)
         return (
             <>
-                <TabsWrapper>
+                <TabsWrapper >
                     <StyledTabs type="card">
                         {departmentRoleData.map((member, i) => {
                             return (

@@ -14,6 +14,7 @@ import APIFailed from "../../../Helpers/ErrorBoundary/APIFailed";
 import { DeleteOutlined, } from "@ant-design/icons";
 import MileageVoucherIdDrawer from "./MileageVoucherIdDrawer";
 import StatusMileageDrawer from "./StatusMileageDrawer";
+import { BundleLoader } from "../../../Components/Placeholder";
 
 
 class MileageCard extends React.Component {
@@ -40,7 +41,7 @@ class MileageCard extends React.Component {
      
       fetchingMileageByUserIdError,
     } = this.props;
-
+    if (fetchingMileageByUserId) return <BundleLoader/>;
     return (
       <>
        <div class=" h-h86 overflow-auto overflow-x-auto">

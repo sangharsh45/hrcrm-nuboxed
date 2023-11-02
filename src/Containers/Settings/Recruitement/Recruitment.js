@@ -74,11 +74,11 @@ function Recruitment(props) {
       ruleId: "6",
       component: <SkillsTab/>,
     },
-    // {
-    //   rulesName: "Template",
-    //   ruleId: "4",
-    //   component: <Template />,
-    // },
+    {
+      rulesName: "Template",
+      ruleId: "4",
+      component: <Template />,
+    },
     {
       rulesName: "Workflow",
       ruleId: "1",

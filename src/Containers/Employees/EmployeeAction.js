@@ -33,7 +33,7 @@ export const addEmployeeAddress = (address) => (dispatch) => {
  * request for adding an employee
  */
 
-export const addEmployee = (employee) => (dispatch) => {
+export const addEmployee = (employee,cretiondate) => (dispatch) => {
   dispatch({
     type: types.ADD_EMPLOYEE_REQUEST,
   });
@@ -46,7 +46,7 @@ export const addEmployee = (employee) => (dispatch) => {
       },
     })
     .then((res) => {
-      dispatch(getEmployeelist());
+      dispatch(getEmployeelist("cretiondate"));
       dispatch({
         type: types.ADD_EMPLOYEE_SUCCESS,
         payload: res.data,

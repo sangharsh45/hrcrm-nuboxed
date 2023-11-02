@@ -337,3 +337,10 @@ export const getdealsRecord = (userId) => (dispatch) => {
       });
     });
 };
+
+export const handleDealsNotesDrawerModal = (modalProps) => (dispatch) => {
+  dispatch({
+    type: types.HANDLE_DEALS_NOTES_DRAWER_MODAL,
+    payload: modalProps,
+  });
+};
