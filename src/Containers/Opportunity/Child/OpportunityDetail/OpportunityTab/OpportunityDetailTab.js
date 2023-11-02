@@ -260,7 +260,7 @@ return  <BundleLoader />
               </Suspense>
             </TabPane>
 
-            <TabPane
+            {/* <TabPane
               tab={
                 <>
                   <span>
@@ -292,7 +292,7 @@ return  <BundleLoader />
                 {" "}
                 <LinkedNotes />
               </Suspense>
-            </TabPane>
+            </TabPane> */}
           </StyledTabs>
         </TabsWrapper>
         <Suspense fallback={null}>

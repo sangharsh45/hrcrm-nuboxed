@@ -1112,3 +1112,18 @@ export const getFilterContactList = (userId,pageNo,filter) => (dispatch) => {
       });
     });
 };
+
+
+export const handleContactNotesDrawerModal = (modalProps) => (dispatch) => {
+  dispatch({
+    type: types.HANDLE_CONTACT_NOTES_DRAWER_MODAL,
+    payload: modalProps,
+  });
+};
+
+export const handleContactPulseDrawerModal = (modalProps) => (dispatch) => {
+  dispatch({
+    type: types.HANDLE_CONTACT_PULSE_DRAWER_MODAL,
+    payload: modalProps,
+  });
+};

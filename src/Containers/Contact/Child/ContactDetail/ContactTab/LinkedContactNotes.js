@@ -10,7 +10,7 @@ import { SingleNote } from "../../../../../Components/Common";
 
 class LinkedContactNotes extends Component {
   componentDidMount() {
-    this.props.getNotesListByContactId(this.props.contactId);
+    this.props.getNotesListByContactId(this.props.contactData.contactId);
   }
 
   render() {
@@ -21,9 +21,9 @@ class LinkedContactNotes extends Component {
         <div style={{ backgroundColor: "#dcdcdc", height: "14.375em" }}>
           <NoteForm
             type={"contact"}
-            contactId={this.props.contactId}
+            contactId={this.props.contactData.contactId}
             callback={() =>
-              this.props.getNotesListByContactId(this.props.contactId)
+              this.props.getNotesListByContactId(this.props.contactData.contactId)
             }
           />
         </div>

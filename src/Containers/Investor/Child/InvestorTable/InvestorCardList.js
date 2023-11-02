@@ -34,7 +34,8 @@ import APIFailed from "../../../../Helpers/ErrorBoundary/APIFailed";
 // import AddCustomerEmailDrawerModal from "../UpdateCustomer/AddCustomerEmailDrawerModal";
 import ReactCountryFlag from 'react-country-flag';
 import { BundleLoader } from "../../../../Components/Placeholder";
-import {getInvestorsbyId,emptyInvestor,handleUpdateInvestorModal} from "../../InvestorAction";
+import {getInvestorsbyId,handleInvestorNotesDrawerModal,emptyInvestor,handleUpdateInvestorModal} from "../../InvestorAction";
+import AddInvestorNotesDrawerModal from "../InvestorDetail/AddInvestorNotesDrawerModal";
 const UpdateInvestorModal = lazy(() =>
   import("../UpdateInvestor/UpdateInvestorModal")
 );
@@ -277,7 +278,19 @@ function InvestorCardList(props) {
                                     {item.source}
                                     </div>
                                 </div>
-                                <div class="flex flex-col md:w-24 ">
+                                <div class="flex flex-col md:w-24 justify-evenly ">
+                                <div class="flex justify-evenly flex-col md:w-[2%] max-sm:flex-row">
+                    <Tooltip title="Notes">
+       <NoteAltIcon
+                onClick={() => {
+                  props.handleInvestorNotesDrawerModal(true);
+                  handleCurrentRowData(item);
+                }}
+                style={{ color: "green", cursor: "pointer", fontSize: "1rem" }}
+              />
+           </Tooltip>
+
+            </div>
                     <div class="rounded-full bg-white w-5 h-5 cursor-pointer">
                     <Tooltip title={item.url}>
               {item.url !== "" && (
@@ -364,18 +377,7 @@ function InvestorCardList(props) {
             )}
             </div>
                       </div> 
-                      <div class="flex justify-evenly flex-col md:w-[2%] max-sm:flex-row">
-                    <Tooltip title="Notes">
-       <NoteAltIcon
-                // onClick={() => {
-                //   props.handlePitchNotesDrawerModal(true);
-                //   handleSetCurrentLeadsId(item);
-                // }}
-                style={{ color: "green", cursor: "pointer", fontSize: "1rem" }}
-              />
-           </Tooltip>
-
-            </div>
+          
                       </div>   
                             </div>
                         </div>
@@ -390,6 +392,12 @@ function InvestorCardList(props) {
         RowData={RowData}
         updateInvestorModal={updateInvestorModal}
         handleUpdateInvestorModal={handleUpdateInvestorModal}
+        handleCurrentRowData={handleCurrentRowData}
+      />
+           <AddInvestorNotesDrawerModal
+        RowData={RowData}
+        addDrawerInvestorNotesModal={props.addDrawerInvestorNotesModal}
+        handleInvestorNotesDrawerModal={props.handleInvestorNotesDrawerModal}
         handleCurrentRowData={handleCurrentRowData}
       />
       {/* <AddCustomerDrawerModal
@@ -416,6 +424,7 @@ const mapStateToProps = ({
   userId: auth.userDetails.userId,
   investorsbyId:investor.investorsbyId,
   sales: opportunity.sales,
+  addDrawerInvestorNotesModal:investor.addDrawerInvestorNotesModal,
   recruiterName: opportunity.recruiterName,
   fetchingAllCustomers: customer.fetchingAllCustomers,
   sectors: sector.sectors,
@@ -435,6 +444,7 @@ const mapDispatchToProps = (dispatch) =>
       handleUpdateInvestorModal,
       getSectors,
       emptyInvestor,
+      handleInvestorNotesDrawerModal,
       updateOwnercustomerById,
       handleCustomerDrawerModal,
       getCustomerDetailsById,

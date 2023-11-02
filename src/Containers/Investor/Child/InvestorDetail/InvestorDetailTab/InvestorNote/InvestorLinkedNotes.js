@@ -10,7 +10,7 @@ const NoteForm =lazy(()=> import("./NoteForm"));
 
 class InvestorLinkedNotes extends Component {
   componentDidMount() {
-    this.props.getNotesListByInvestorId(this.props.investorDetails.investorId);
+    this.props.getNotesListByInvestorId(this.props.RowData.investorId);
   }
 
   render() {
@@ -21,9 +21,9 @@ class InvestorLinkedNotes extends Component {
         <div style={{ backgroundColor: "#dcdcdc", height: "14.375em" }}>
           <NoteForm
             type={"customer"}
-          investorId={this.props.investorDetails.investorId}
+          investorId={this.props.RowData.investorId}
             callback={() =>
-              this.props.getNotesListByInvestorId(this.props.investorDetails.investorId)
+              this.props.getNotesListByInvestorId(this.props.RowData.investorId)
             }
           />
         </div>

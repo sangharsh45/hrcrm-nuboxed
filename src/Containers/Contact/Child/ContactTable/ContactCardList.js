@@ -21,12 +21,15 @@ import {
   handleDonotCallModal,
   handleContactDrawerModal,
   handleContactEmailDrawerModal,
-  emptyContact
+  handleContactNotesDrawerModal,
+  emptyContact,
+  handleContactPulseDrawerModal
 } from "../../ContactAction";
 import {
   getAllSalesList,
   getRecruiterName,
 } from "../../../Opportunity/OpportunityAction";
+import NoteAltIcon from "@mui/icons-material/NoteAlt";
 import PhoneInTalkIcon from '@mui/icons-material/PhoneInTalk';
 import { getDesignations } from "../../../Settings/Designation/DesignationAction";
 import MonitorHeartIcon from '@mui/icons-material/MonitorHeart';
@@ -37,6 +40,8 @@ import AddContactDrawerModal from "../UpdateContact/AddContactDrawerModal";
 import AddContactEmailDrawerModal from "../UpdateContact/AddContactEmailDrawerModal";
 import BorderColorIcon from '@mui/icons-material/BorderColor';
 import { BundleLoader } from "../../../../Components/Placeholder";
+import AddContactNotesDrawerModal from "../AddContactNotesDrawerModal";
+import AddContactPulseDrawerModal from "./AddContactPulseDrawerModal";
 
 const Option = Select;
 const UpdateContactModal = lazy(() =>
@@ -72,10 +77,15 @@ function ContactCardList(props) {
     return()=>props.emptyContact();
   },[] );
   const [currentContactId, setCurrentContactId] = useState("");
+  const [currentContact, setCurrentContact] = useState("");
 
   function handleSetCurrentContactId(contactId) {
     setCurrentContactId(contactId);
     console.log(contactId);
+  }
+  function handleSetCurrentContact(item) {
+    setCurrentContact(item);
+    console.log(item);
   }
 
   const handleLoadMore = () => {
@@ -101,7 +111,11 @@ function ContactCardList(props) {
     newFiltersdata,
     contactByUserId,
     filterData,
+    addDrawerContactPulseModal,
+    addDrawerContactNotesModal,
     handleUpdateContactModal,
+    handleContactNotesDrawerModal,
+    handleContactPulseDrawerModal,
     handleContactReactSpeechModal,
     addContactSpeechModal,
     updateContactModal,
@@ -264,6 +278,18 @@ function ContactCardList(props) {
           </Tooltip>
 
                    </div>
+                   <div class="flex flex-col justify-evenly  ">
+                    <Tooltip title="Notes">
+       <NoteAltIcon
+                onClick={() => {
+                  handleContactNotesDrawerModal(true);
+                  handleSetCurrentContact(item);
+                }}
+                style={{ color: "green", cursor: "pointer", fontSize: "1rem" }}
+              />
+           </Tooltip>
+
+            </div>
                    
                                 <div class="flex flex-col  max-sm:flex-row w-full max-sm:justify-evenly items-center">
                     <div class="rounded-full bg-white w-5 h-5 cursor-pointer">
@@ -303,13 +329,25 @@ function ContactCardList(props) {
             />
            </Tooltip>
                         </div>
+                        <div >
+                    <Tooltip title="Pulse">
+       <MonitorHeartIcon
+                onClick={() => {
+                  handleContactPulseDrawerModal(true);
+                  handleSetCurrentContact(item);
+                }}
+                style={{ fontSize: "0.8rem", color: "#df9697" }}
+              />
+           </Tooltip>
+
+            </div> 
                       &nbsp;&nbsp;
                         <div>
                         <span
               style={{ cursor: "pointer" }}
               onClick={() => {
                 handleSetCurrentContactId(item);
-                props.handleContactDrawerModal(true);
+                props.handleContactPulseDrawerModal(true);
               }}
             >{user.pulseAccessInd === true && (
               <MonitorHeartIcon style={{fontSize:"0.8rem" ,color: "#df9697"}}/>
@@ -382,6 +420,20 @@ function ContactCardList(props) {
         handleUpdateContactModal={handleUpdateContactModal}
         handleSetCurrentContactId={handleSetCurrentContactId}
       />
+       <AddContactNotesDrawerModal
+        contactData={currentContact}
+        // fullName={currentContactId}
+        addDrawerContactNotesModal={addDrawerContactNotesModal}
+        handleContactNotesDrawerModal={handleContactNotesDrawerModal}
+        handleSetCurrentContact={handleSetCurrentContact}
+      />
+         <AddContactPulseDrawerModal
+        contactData={currentContact}
+        // fullName={currentContactId}
+        addDrawerContactPulseModal={addDrawerContactPulseModal}
+        handleContactPulseDrawerModal={handleContactPulseDrawerModal}
+        handleSetCurrentContact={handleSetCurrentContact}
+      />
       <AddContactEmailDrawerModal
         // item={currentContactId}
         contactData={currentContactId}
@@ -420,10 +472,12 @@ const mapStateToProps = ({
   contactByUserId: contact.contactByUserId,
   sales: opportunity.sales,
   user: auth.userDetails,
+  addDrawerContactPulseModal:contact.addDrawerContactPulseModal,
   recruiterName: opportunity.recruiterName,
   fetchingContacts: contact.fetchingContacts,
   fetchingContactsError: contact.fetchingContactsError,
   updateContactModal: contact.updateContactModal,
+  addDrawerContactNotesModal:contact.addDrawerContactNotesModal,
   designations: designations.designations,
   departments: departments.departments,
   addDrawerContactEmailModal: contact.addDrawerContactEmailModal,
@@ -444,6 +498,8 @@ const mapDispatchToProps = (dispatch) =>
       handleContactReactSpeechModal,
       handleContactDrawerModal,
       getContactById,
+      handleContactNotesDrawerModal,
+      handleContactPulseDrawerModal,
       handleContactEmailDrawerModal,
       emptyContact
     },

@@ -3080,3 +3080,10 @@ export const getAllOpportunityData = (userId,page) => (dispatch) => {
       });
     });
 };
+
+export const handleOpportunityNotesDrawerModal = (modalProps) => (dispatch) => {
+  dispatch({
+    type: types.HANDLE_OPPORTUNITY_NOTES_DRAWER_MODAL,
+    payload: modalProps,
+  });
+};

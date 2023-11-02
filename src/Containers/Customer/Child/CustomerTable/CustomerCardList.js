@@ -2,7 +2,6 @@ import React, { useEffect, useState, useMemo, lazy } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
-import MonitorHeartIcon from "@mui/icons-material/MonitorHeart";
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import ExploreIcon from "@mui/icons-material/Explore";
 import { getSectors } from "../../../Settings/Sectors/SectorsAction";
@@ -11,7 +10,7 @@ import { OnlyWrapCard } from '../../../../Components/UI/Layout'
 import { getCountries } from "../../../Auth/AuthAction";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { Tooltip, Select,Button } from "antd";
-
+import MonitorHeartIcon from "@mui/icons-material/MonitorHeart";
 import {
   MultiAvatar,
   MultiAvatar2,
@@ -31,6 +30,7 @@ import {
   handleCustomerNotesDrawerModal,
   getCustomerById,
   emptyCustomer,
+  handleCustomerPulseDrawerModal,
 } from "../../CustomerAction";
 import NoteAltIcon from "@mui/icons-material/NoteAlt";
 import AddCustomerDrawerModal from "../../AddCustomerDrawerModal";
@@ -39,6 +39,8 @@ import APIFailed from "../../../../Helpers/ErrorBoundary/APIFailed";
 import AddCustomerEmailDrawerModal from "../UpdateCustomer/AddCustomerEmailDrawerModal";
 import ReactCountryFlag from 'react-country-flag';
 import { BundleLoader } from "../../../../Components/Placeholder";
+import AddCustomerNotesDrawerModal from "../CustomerDetail/AddCustomerNotesDrawerModal";
+import CustomerPulseDrawerModal from "./CustomerPulseDrawerModal";
 
 const UpdateCustomerModal = lazy(() =>
   import("../UpdateCustomer/UpdateCustomerModal")
@@ -83,10 +85,13 @@ function CustomerCardList(props) {
   }, []);
 
   const [currentCustomerId, setCurrentCustomerId] = useState("");
-
+  const [currentCustomer, setCurrentCustomer] = useState("");
   function handleSetCurrentCustomerId(customerId) {
     setCurrentCustomerId(customerId);
     console.log(customerId);
+  }
+  function handleSetCurrentCustomer(item) {
+    setCurrentCustomer(item);
   }
 
   const handleLoadMore = () => {
@@ -104,6 +109,8 @@ function CustomerCardList(props) {
     fetchingCustomers,
     customerByUserId,
     handleUpdateCustomerModal,
+    addDrawerCustomerPulseModal,
+    handleCustomerPulseDrawerModal,
     updateCustomerModal,
     fetchingCustomersError,
     fetchingAllCustomers,
@@ -325,7 +332,32 @@ function CustomerCardList(props) {
 
                     </div>
                     </div>
+              
                     <div class="flex flex-col md:w-[2%]  max-sm:flex-row w-full max-sm:justify-evenly">
+                    <div >
+                    <Tooltip title="Pulse">
+       <MonitorHeartIcon
+                onClick={() => {
+                  handleCustomerPulseDrawerModal(true);
+                  handleSetCurrentCustomer(item);
+                }}
+                style={{ fontSize: "0.8rem", color: "#df9697" }}
+              />
+           </Tooltip>
+
+            </div> 
+                    <div >
+                    <Tooltip title="Notes">
+       <NoteAltIcon
+                onClick={() => {
+                  handleCustomerNotesDrawerModal(true);
+                  handleSetCurrentCustomer(item);
+                }}
+                style={{ color: "green", cursor: "pointer", fontSize: "1rem" }}
+              />
+           </Tooltip>
+
+            </div> 
                       <div>
                     <Tooltip overlayStyle={{ maxWidth: "300px" }} title={dataLoc}>
             <span
@@ -368,18 +400,7 @@ function CustomerCardList(props) {
             )}
             </div>
                       </div>  
-                      {/* <div class="flex flex-col md:w-[2%]  max-sm:flex-row w-full max-sm:justify-evenly">
-                    <Tooltip title="Notes">
-       <NoteAltIcon
-                onClick={() => {
-                  handleCustomerNotesDrawerModal(true);
-                  handleSetCurrentCustomerId(item);
-                }}
-                style={{ color: "green", cursor: "pointer", fontSize: "1rem" }}
-              />
-           </Tooltip>
-
-            </div>  */}
+           
                       <div class="w-[2%]"></div> 
                       </div>
                             </div>
@@ -401,6 +422,12 @@ function CustomerCardList(props) {
         handleUpdateCustomerModal={handleUpdateCustomerModal}
         handleSetCurrentCustomerId={handleSetCurrentCustomerId}
       />
+         <CustomerPulseDrawerModal
+    customer={currentCustomer}
+        addDrawerCustomerPulseModal={addDrawerCustomerPulseModal}
+        handleCustomerPulseDrawerModal={handleCustomerPulseDrawerModal}
+        handleSetCurrentCustomer={handleSetCurrentCustomer}
+      />
       <AddCustomerEmailDrawerModal
         // contactById={props.contactById}
         addDrawerCustomerEmailModal={props.addDrawerCustomerEmailModal}
@@ -408,12 +435,12 @@ function CustomerCardList(props) {
       />
 
       
-{/* <UpdateCustomerModal
-        customerId={currentCustomerId}
+<AddCustomerNotesDrawerModal
+        customer={currentCustomer}
         addDrawerCustomerNotesModal={addDrawerCustomerNotesModal}
         handleCustomerNotesDrawerModal={handleCustomerNotesDrawerModal}
-        handleSetCurrentCustomerId={handleSetCurrentCustomerId}
-      /> */}
+        handleSetCurrentCustomer={handleSetCurrentCustomer}
+      />
     </>
   );
 }
@@ -429,6 +456,7 @@ const mapStateToProps = ({
   addDrawerCustomerNotesModal:customer.addDrawerCustomerNotesModal,
   customerByUserId: customer.customerByUserId,
   sales: opportunity.sales,
+  addDrawerCustomerPulseModal:customer.addDrawerCustomerPulseModal,
   recruiterName: opportunity.recruiterName,
   fetchingAllCustomers: customer.fetchingAllCustomers,
   sectors: sector.sectors,
@@ -446,6 +474,7 @@ const mapDispatchToProps = (dispatch) =>
     {
       getCustomerListByUserId,
       handleUpdateCustomerModal,
+      handleCustomerPulseDrawerModal,
       setEditCustomer,
       getSectors,
       emptyCustomer,

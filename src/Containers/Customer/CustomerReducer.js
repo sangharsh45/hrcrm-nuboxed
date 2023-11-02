@@ -7,6 +7,8 @@ const initialState = {
   addingCustomer: false,
   addingCustomerError: false,
 
+  addDrawerCustomerPulseModal:false,
+
   addDrawerCustomerNotesModal:false,
 
 
@@ -1554,7 +1556,8 @@ export const customerReducer = (state = initialState, action) => {
                                         case types.HANDLE_CUSTOMER_NOTES_DRAWER_MODAL:
                                           return { ...state, addDrawerCustomerNotesModal: action.payload };
                   
-                      
+                                          case types.HANDLE_CUSTOMER_PULSE_DRAWER_MODAL:
+                                            return { ...state, addDrawerCustomerPulseModal: action.payload };                   
 
     default:
       return state;

@@ -33,6 +33,8 @@ const initialState = {
   fetchingsInvestorContactError: false,
   contactsbyInvestorId: [],
 
+  addDrawerInvestorNotesModal:false,
+
   fetchingDocumentsByInvestorId: false,
   fetchingDocumentsByInvestorIdError: false,
   documentsByInvestorId: [],
@@ -361,7 +363,8 @@ export const investorReducer = (state = initialState, action) => {
                             case types.GET_INVESTOR_SEARCH_FAILURE:
                               return { ...state, fetchingInvestorSearchDataError: true };
                         
-                  
+                              case types.HANDLE_INVESTOR_NOTES_DRAWER_MODAL:
+                                return { ...state, addDrawerInvestorNotesModal: action.payload };                 
 
                                     
 default:
