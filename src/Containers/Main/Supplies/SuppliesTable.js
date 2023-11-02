@@ -13,7 +13,7 @@ import {
   handleBrandModel
 } from "./SuppliesAction";
 import { Empty, Icon, Tooltip, Button, Popconfirm, Switch } from "antd";
-import { DeleteOutlined, EditOutlined, MoneyCollectOutlined, PhoneFilled, } from "@ant-design/icons";
+import { DeleteFilled, DeleteOutlined, EditOutlined, MoneyCollectOutlined, PhoneFilled, } from "@ant-design/icons";
 import moment from "moment";
 import TagBrandModel from "./TagBrandModel";
 
@@ -109,41 +109,13 @@ function SuppliesTable(props) {
         )
       }
     },
-    {
-      title: "Gross Wt.",
-      width: "7%",
-      render: (text, item) => {
-        return (
-          <>{item.grossWeight} {item.grossUnit}</>
-        )
-      }
-    },
-    {
-      title: "Net Wt.",
-      width: "7%",
-      render: (text, item) => {
-        return (
-          <>{item.netWeight} {item.netUnit}</>
-        )
-      }
-    },
+
     {
       title: "Re-order level",
       width: "7%",
       dataIndex: "reorder",
     },
-    {
-      title: "Manufacture Date",
-      width: "14%",
-      dataIndex: "dateOfManufacture",
-      render: (text, item) => {
-        return (
-          <>
-            {moment(item.dateOfManufacture).format("DD-MM-YY")}
-          </>
-        )
-      }
-    },
+
     {
       title: "Created",
       width: "7%",
@@ -174,19 +146,21 @@ function SuppliesTable(props) {
     },
     {
       title: "",
-      width: "2%",
+      width: "5%",
       render: (text, item) => {
         return (
           <>
-            <Tooltip title={item.description}>
-             
-            </Tooltip>
-
+            <span
+              style={{ color: "red" }}
+              onClick={() => {
+                // props.deletePurchaseData(item.suppliesId)
+              }}>
+              <DeleteFilled />
+            </span>
           </>
         )
       }
     },
-
 
   ];
 
