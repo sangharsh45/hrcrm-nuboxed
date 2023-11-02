@@ -1,32 +1,32 @@
 import React, { useEffect, useState } from 'react'
 import { StyledTable } from '../../../Components/UI/Antd'
 // import { getBrandModel } from "../../Settings/Category/Brand&Model/BrandModelAction"
-import { addMasterList } from "./SuppliesAction"
+// import { addMasterList } from "./SuppliesAction"
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { Button } from 'antd'
 
 const BrandModelTable = (props) => {
-    useEffect(() => {
-       // props.getBrandModel()
-    }, [])
-    const [selectedRow, setselectedRow] = useState([]);
+    // useEffect(() => {
+    //    // props.getBrandModel()
+    // }, [])
+    // const [selectedRow, setselectedRow] = useState([]);
 
-    const rowSelection = {
-        onChange: (selectedRowKeys, selectedRows) => {
-            setselectedRow(selectedRows);
-        },
-    };
-    console.log(selectedRow)
-    const IdList = selectedRow.map(function (item) {
-        return item['phoneMasterListId'];
-    });
-    const handleSubmit = () => {
-        props.addMasterList({
-            phoneMasterListIds: IdList,
-            suppliesId: props.particularDiscountData.suppliesId
-        })
-    }
+    // const rowSelection = {
+    //     onChange: (selectedRowKeys, selectedRows) => {
+    //         setselectedRow(selectedRows);
+    //     },
+    // };
+    // console.log(selectedRow)
+    // const IdList = selectedRow.map(function (item) {
+    //     return item['phoneMasterListId'];
+    // });
+    // const handleSubmit = () => {
+    //     props.addMasterList({
+    //         phoneMasterListIds: IdList,
+    //         suppliesId: props.particularDiscountData.suppliesId
+    //     })
+    // }
     const columns = [
         {
             width: "2%"
@@ -40,19 +40,22 @@ const BrandModelTable = (props) => {
             dataIndex: "model"
         }
     ]
+    const tab = document.querySelector(".ant-layout-sider-children");
+    const tableHeight = tab && tab.offsetHeight * 1.2;
     return (
         <>
             <StyledTable
                 rowKey="phoneMasterListId"
-                dataSource={props.brandModel}
+                // dataSource={props.brandModel}
                 columns={columns}
+                scroll={{ y: tableHeight }}
                 pagination={false}
-                rowSelection={rowSelection}
+            // rowSelection={rowSelection}
             />
             <div style={{ display: "flex", justifyContent: "flex-end" }}>
                 <Button
                     type="primary"
-                    onClick={handleSubmit}
+                // onClick={handleSubmit}
                 >
                     Submit
                 </Button>
@@ -61,15 +64,15 @@ const BrandModelTable = (props) => {
     )
 }
 const mapStateToProps = ({ auth, brandmodel, supplies }) => ({
-    brandModel: brandmodel.brandModel,
-    taggedBrand: supplies.taggedBrand
+    // brandModel: brandmodel.brandModel,
+    // taggedBrand: supplies.taggedBrand
 });
 
 const mapDispatchToProps = (dispatch) =>
     bindActionCreators(
         {
-           // getBrandModel,
-            addMasterList,
+            // getBrandModel,
+            // addMasterList,
 
         },
         dispatch
