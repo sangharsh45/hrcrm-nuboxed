@@ -221,7 +221,7 @@ class TemplateTab extends Component {
                   <TemplateTable />
                </Suspense>             
             </TabPane>
-            <TabPane
+            {/* <TabPane
               tab={
                 <>
                   <span onClick={this.handleRecruitClick}>
@@ -255,16 +255,16 @@ class TemplateTab extends Component {
             >
               <Suspense fallback={"Loading ..."}>
                   {" "}
-                  {/* <EmailandNotificationPanel /> */}
+                 
                   <NotificationTable />
                </Suspense>
              
-            </TabPane>
-            <TabPane
+            </TabPane> */}
+            {/* <TabPane
               tab={
                 <>
                   <span onClick={this.handleRecruitClick}>
-                  {/* <FontAwesomeIcon icon={solid('artstation')} /> */}
+            
                     <span style={{ marginLeft: '0.25em' }}>Action</span>
                   </span>
                   {activeKey === "3" && (
@@ -272,18 +272,7 @@ class TemplateTab extends Component {
                       <>                     
                         <Tooltip title="Create">
                        
-                          {/* <PlusOutlined
-                            type="plus"
-                            tooltipTitle="Create"
-                            onClick={() =>
-                              this.props.handleTemplateNotificatonModal(true)
-                            }
-                            size="0.875em"
-                            style={{
-                              marginLeft: "0.125em",
-                              verticalAlign: "center",
-                            }}
-                          />                        */}
+                       
                           </Tooltip>
                        </>
                     </>
@@ -294,11 +283,11 @@ class TemplateTab extends Component {
             >
               <Suspense fallback={"Loading ..."}>
                   {" "}
-                  {/* <EmailandNotificationPanel /> */}
+              
                   <ActionTable />
                </Suspense>
              
-            </TabPane>
+            </TabPane> */}
             {/* )} */}
           </StyledTabs>
         </TabsWrapper>

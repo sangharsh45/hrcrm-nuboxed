@@ -1,22 +1,18 @@
 import React, { useEffect, useState ,useMemo} from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import moment from "moment";
-import MonitorHeartIcon from '@mui/icons-material/MonitorHeart';
+import NoteAltIcon from "@mui/icons-material/NoteAlt";
 import InfiniteScroll from "react-infinite-scroll-component"
 import { FormattedMessage } from "react-intl";
-// import OpportunitySelectStages from "../OpportunityTable/OpportunitySelectStages"
 import styled from 'styled-components';
 import BorderColorIcon from '@mui/icons-material/BorderColor';
-import SearchIcon from '@mui/icons-material/Search';
-import LockOpenIcon from '@mui/icons-material/LockOpen';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { Tooltip, Input, Button, Select, Menu, Dropdown, Progress } from "antd";
-import { FlexContainer, MainWrapper, ResponsiveCard } from "../../../../Components/UI/Layout";
+import { Tooltip, Select, Menu, Dropdown, Progress } from "antd";
+import { FlexContainer,  } from "../../../../Components/UI/Layout";
 import { CurrencySymbol,Link } from "../../../../Components/Common";
 import { CheckCircleTwoTone, StopTwoTone } from "@ant-design/icons";
 import { BundleLoader } from "../../../../Components/Placeholder";
-import { StyledTable, StyledPopconfirm } from "../../../../Components/UI/Antd";
+import { StyledPopconfirm } from "../../../../Components/UI/Antd";
 import { MultiAvatar, MultiAvatar2, SubTitle,Title } from "../../../../Components/UI/Elements";
 import {
   getOpportunityListByUserId,
@@ -27,6 +23,7 @@ import {
   getOpportunityInitiativeSKillDetails,
   updateOwneroppById,
       getAllSalesList,
+      
       handleOpportunityDrawerModal,
       getAllRecruitmentByOppId,
         getAllRecruitmentPositionByOppId,
@@ -40,9 +37,9 @@ import {
          LinkStageOpportunity,
          getOpportunityForecast
 } from "../../../Opportunity/OpportunityAction";
-// import AddOpportunityDrawerModal from "../../..//OpportunityTable/AddOpportunityDrawerModal"
 import UpdateDealModal from "../UpdateDeal/UpdateDealModal";
-import {getDealListbyUserId,handleUpdateDealModal,emptyDeals} from "../../DealAction";
+import {getDealListbyUserId,handleUpdateDealModal,emptyDeals,handleDealsNotesDrawerModal} from "../../DealAction";
+import AddDealsNotesDrawerModal from "../AddDealsNotesDrawerModal";
 
 const Option =Select;
 
@@ -353,6 +350,28 @@ imgHeight={"1.8em"}
           placement="right"
           title={
             <FormattedMessage
+              id="app.notes"
+              defaultMessage="Notes"
+            />
+          }
+        >
+         
+              
+            <span
+            onClick={() => {
+              props.handleDealsNotesDrawerModal(true);
+              handleSetCurrentItem(item);
+            }}
+          
+            >
+                 <NoteAltIcon    style={{ color: "green", cursor: "pointer", fontSize: "1rem" }}/>
+              </span>
+         
+          </Tooltip>
+<Tooltip
+          placement="right"
+          title={
+            <FormattedMessage
               id="app.edit"
               defaultMessage="Edit"
             />
@@ -400,6 +419,12 @@ imgHeight={"1.8em"}
             handleUpdateDealModal={handleUpdateDealModal}
         handleSetCurrentItem={handleSetCurrentItem}
       />
+         <AddDealsNotesDrawerModal
+         currentItem={currentItem}
+         addDrawerDealsNotesModal={props.addDrawerDealsNotesModal}
+        handleDealsNotesDrawerModal={props.handleDealsNotesDrawerModal}
+        handleSetCurrentItem={handleSetCurrentItem}
+      />
 {/*
 <AddOpportunityDrawerModal
  opportunityData={currentItem}
@@ -445,6 +470,7 @@ const mapStateToProps = ({ auth, deal, opportunity }) => ({
   opportunityInitiativesSkillsDetails:opportunity.opportunityInitiativesSkillsDetails,
   allRecruitmentPositionFilledByOppId:
     opportunity.allRecruitmentPositionFilledByOppId,
+    addDrawerDealsNotesModal:deal.addDrawerDealsNotesModal,
     opportunityForecast:opportunity.opportunityForecast,
     allRecruitmentByOppId: opportunity.allRecruitmentByOppId,
     allRecruitmentDetailsByOppId:opportunity.allRecruitmentDetailsByOppId,
@@ -462,6 +488,7 @@ const mapDispatchToProps = (dispatch) =>
       getAllSalesList,
       handleUpdateDealModal,
       handleOpportunityDrawerModal,
+      handleDealsNotesDrawerModal,
       setEditOpportunity,
       deleteOpportunityData,
       updateOwneroppById,

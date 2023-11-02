@@ -95,7 +95,7 @@ class ContactInvestDetailTab extends Component {
               </Suspense>
             </TabPane>
 
-            <TabPane
+            {/* <TabPane
               tab={
                 <>
                   <span>
@@ -123,7 +123,7 @@ class ContactInvestDetailTab extends Component {
                 {" "}
                 <LinkedContactInvestNotes contactInVestDetail={this.props.contactInVestDetail}/>
               </Suspense>
-            </TabPane>
+            </TabPane> */}
             <TabPane
               tab={
                 <>

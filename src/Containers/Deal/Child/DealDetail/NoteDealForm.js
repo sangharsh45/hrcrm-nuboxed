@@ -2,16 +2,15 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { FormattedMessage } from "react-intl";
 import { bindActionCreators } from "redux";
-import { Button, Icon } from "antd";
-import { Formik, Form, Field } from "formik";
+import { Button, } from "antd";
+import { Formik, Form,} from "formik";
 import * as Yup from "yup";
 import { Editor } from "react-draft-wysiwyg";
-import { EditorState, convertToRaw, ContentState } from "draft-js";
+import { EditorState, convertToRaw } from "draft-js";
 import draftToHtml from "draftjs-to-html";
-import { TextareaComponent } from "../../../../../../Components/Forms/Formik/TextareaComponent";
-import { addNote } from "../../../../../Contact/ContactAction";
+import { addNote } from "../../../Contact/ContactAction";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
-import { FlexContainer } from "../../../../../../Components/UI/Layout";
+import { FlexContainer } from "../../../../Components/UI/Layout";
 
 /**
  * yup validation scheme for creating a note
@@ -38,7 +37,7 @@ const toolbarOption = {
     options: ["bold", "italic", "underline", "strikethrough"],
   },
 };
-class NoteContactInvestForm extends Component {
+class NoteDealForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -63,7 +62,7 @@ class NoteContactInvestForm extends Component {
     const {
       user: { userId, firstName, lastName },
       addNote,
-      contactId,
+      invOpportunityId,
       notes,
       collectionDTO,
       ownerId,
@@ -92,7 +91,7 @@ class NoteContactInvestForm extends Component {
           enableReinitialize
           initialValues={{
             notes: "",
-            contactId:contactId ? contactId : "",
+            invOpportunityId:invOpportunityId ? invOpportunityId : "",
             type: type ? type : "",
           }}
           onSubmit={(values, { resetForm }) => {
@@ -182,4 +181,4 @@ const mapDispatchToProps = (dispatch) =>
     dispatch
   );
 
-export default connect(mapStateToProps, mapDispatchToProps)(NoteContactInvestForm);
+export default connect(mapStateToProps, mapDispatchToProps)(NoteDealForm);

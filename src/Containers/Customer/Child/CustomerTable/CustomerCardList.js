@@ -28,9 +28,11 @@ import {
   getCustomerDetailsById,
   getCustomerKeySkill,
   handleCustomerEmailDrawerModal,
+  handleCustomerNotesDrawerModal,
   getCustomerById,
   emptyCustomer,
 } from "../../CustomerAction";
+import NoteAltIcon from "@mui/icons-material/NoteAlt";
 import AddCustomerDrawerModal from "../../AddCustomerDrawerModal";
 import { getAllCustomerEmployeelist } from "../../../Employees/EmployeeAction";
 import APIFailed from "../../../../Helpers/ErrorBoundary/APIFailed";
@@ -106,6 +108,8 @@ function CustomerCardList(props) {
     fetchingCustomersError,
     fetchingAllCustomers,
     user,
+    addDrawerCustomerNotesModal,
+    handleCustomerNotesDrawerModal,
     IconShowhover,
   } = props;
   console.log("ee");
@@ -363,7 +367,19 @@ function CustomerCardList(props) {
             </Tooltip>
             )}
             </div>
-                      </div>   
+                      </div>  
+                      {/* <div class="flex flex-col md:w-[2%]  max-sm:flex-row w-full max-sm:justify-evenly">
+                    <Tooltip title="Notes">
+       <NoteAltIcon
+                onClick={() => {
+                  handleCustomerNotesDrawerModal(true);
+                  handleSetCurrentCustomerId(item);
+                }}
+                style={{ color: "green", cursor: "pointer", fontSize: "1rem" }}
+              />
+           </Tooltip>
+
+            </div>  */}
                       <div class="w-[2%]"></div> 
                       </div>
                             </div>
@@ -390,6 +406,14 @@ function CustomerCardList(props) {
         addDrawerCustomerEmailModal={props.addDrawerCustomerEmailModal}
         handleCustomerEmailDrawerModal={props.handleCustomerEmailDrawerModal}
       />
+
+      
+{/* <UpdateCustomerModal
+        customerId={currentCustomerId}
+        addDrawerCustomerNotesModal={addDrawerCustomerNotesModal}
+        handleCustomerNotesDrawerModal={handleCustomerNotesDrawerModal}
+        handleSetCurrentCustomerId={handleSetCurrentCustomerId}
+      /> */}
     </>
   );
 }
@@ -402,6 +426,7 @@ const mapStateToProps = ({
   employee,
 }) => ({
   userId: auth.userDetails.userId,
+  addDrawerCustomerNotesModal:customer.addDrawerCustomerNotesModal,
   customerByUserId: customer.customerByUserId,
   sales: opportunity.sales,
   recruiterName: opportunity.recruiterName,
@@ -429,6 +454,7 @@ const mapDispatchToProps = (dispatch) =>
       getCustomerDetailsById,
       getCustomerKeySkill,
       handleCustomerEmailDrawerModal,
+      handleCustomerNotesDrawerModal,
       getCustomerById,
       getCountries,
       getAllCustomerEmployeelist,

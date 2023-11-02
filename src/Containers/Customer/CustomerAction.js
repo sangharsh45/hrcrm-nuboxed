@@ -1963,5 +1963,12 @@ export const getAllCustomerByCloser = (userId, startDate, endDate) => (
       });
   };
 
+  export const handleCustomerNotesDrawerModal = (modalProps) => (dispatch) => {
+    dispatch({
+      type: types.HANDLE_CUSTOMER_NOTES_DRAWER_MODAL,
+      payload: modalProps,
+    });
+  };
+
 
  

@@ -48,7 +48,7 @@ function ExpenseCard(props) {
       expenseVoucherIdDrawer,
       handleExpenseVoucherIdDrawer,
     } = props;
-  
+    if (fetchingExpenseById) return <BundleLoader/>;
 
     return (
       <>

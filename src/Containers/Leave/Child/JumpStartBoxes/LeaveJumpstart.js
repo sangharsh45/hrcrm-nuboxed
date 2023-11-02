@@ -47,7 +47,7 @@ class LeaveJumpstart extends React.Component {
                 title="Approved"
                 stringValue
                 noProgress
-                // value={totalPendingLeaves}
+                 value={"Data Not Available"}
                 />
                 </div>
 

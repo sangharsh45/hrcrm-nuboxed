@@ -99,7 +99,7 @@ function NavMenu (props) {
           inlineCollapsed={props.collapsed}
         >
           {/* dashboard */}
-          {user.userType !== "USER" && user.department !== "Vendor" && user.department !== "Customer" && (
+          {user.userType !== "USER" && user.department !== "Vendor" && user.department !== "Customer" && user.dashboardAccessInd === true && (
 
             <Menu.Item key="/dashboard" style={{height:"20px",paddingLeft:"1rem"}}>
               <Link to="/dashboard">
@@ -193,7 +193,7 @@ function NavMenu (props) {
                   </span>
                 }
               > */}
-               {user.imInd === true  && user.basicAccessInd === true &&  (
+               { user.basicAccessInd === true &&  (
           <Menu.Item key="/call" style={{height:"30px",paddingLeft:"1rem"}}>
             <Link to="/call">
               {/* <Icon style={{ color: "white" }} type="phone" /> */}
@@ -214,7 +214,7 @@ function NavMenu (props) {
             </Link>
           </Menu.Item>
                )}
-                {user.imInd === true  && user.basicAccessInd === true &&  (
+                {user.basicAccessInd === true &&  (
           <Menu.Item key="task" style={{height:"30px",paddingLeft:"1rem"}}>
             <Link to="/Task">
               {/* <Icon type="file-done" /> */}
@@ -234,7 +234,7 @@ function NavMenu (props) {
             </Link>
           </Menu.Item>
                 )}
-                 {user.imInd === true  && user.basicAccessInd === true &&  (
+                 { user.basicAccessInd === true &&  (
           <Menu.Item key="event" style={{height:"30px",paddingLeft:"1rem"}}>
             <Link to="/Event">
               {/* <Icon type="schedule" /> */}
@@ -268,7 +268,7 @@ function NavMenu (props) {
 
           {/*Activity*/}
           {/*Reports*/}
-          {user.imInd === true  && user.basicAccessInd === true &&  (
+          { user.basicAccessInd === true &&  (
           <Menu.Item key="/reports" style={{height:"30px",paddingLeft:"1rem"}}>
             <Link to="/reports">
               <PictureAsPdfIcon
@@ -287,7 +287,7 @@ function NavMenu (props) {
 
 
 <hr />
-     {user.leadsAccessInd === true && user.crmInd === true && user.imInd === true  &&(
+     {user.leadsAccessInd === true && user.crmInd === true &&(
      <Menu.Item key="/leads" style={{height:"30px",paddingLeft:"1rem"}}>
               <Link to="/Leads">
                 <GroupsIcon
@@ -307,7 +307,7 @@ function NavMenu (props) {
             </Menu.Item>
 )} 
              {/*Opportunity*/}
-             {user.opportunityAccessInd === true && user.imInd === true  && user.crmInd === true && (
+             {user.opportunityAccessInd === true   && user.crmInd === true && (
             <Menu.Item key="/opportunity" style={{height:"30px",paddingLeft:"1rem"}}>
               <Link to="/opportunity">
            
@@ -328,7 +328,7 @@ function NavMenu (props) {
           )}
 
              {/* Contact */}
-             {user.contactAccessInd === true && user.imInd === true  && user.crmInd === true && (
+             {user.contactAccessInd === true &&  user.crmInd === true && (
             <Menu.Item key="/contact" style={{height:"30px",paddingLeft:"1rem"}}>
               <Link to="/contact">
              
@@ -349,7 +349,7 @@ function NavMenu (props) {
           )}
 
            {/* Customer */}
-           {user.customerAccessInd === true && user.imInd === true  && user.crmInd === true &&(
+           {user.customerAccessInd === true  && user.crmInd === true &&(
             <Menu.Item key="/customer" style={{height:"30px",paddingLeft:"1rem"}}>
               <Link to="/customer">
             
@@ -485,7 +485,7 @@ function NavMenu (props) {
           )} */}
           {/*Talent*/}
           {/*Requirement*/}
-          {user.requirementAccessInd === true && user.imInd === true  &&  (
+          {user.requirementAccessInd === true &&  (
             <Menu.Item key="/requirement" style={{height:"30px",paddingLeft:"1rem"}}>
               <Link to="/requirement">
              
@@ -505,7 +505,7 @@ function NavMenu (props) {
             </Menu.Item>
           )}
           {/*Demand*/}
-          {user.userType === "USER" && user.imInd === true  &&  user.department === "Customer" && (
+          {user.userType === "USER"  &&  user.department === "Customer" && (
             <Menu.Item key="/demand" style={{height:"30px",paddingLeft:"1rem"}}>
               <Link to="/demand">
                 <ContactsIcon 
@@ -531,7 +531,7 @@ function NavMenu (props) {
           {/*Publish*/}
           {/* {user.userType !== "USER" && user.department !== "Recruiter" &&user.department !== "Customer"&&
             user.department !== "VENDOR" && (  */}
-          {user.publishAccessInd === true && user.imInd === true  &&  (
+          {user.publishAccessInd === true   &&  (
             <Menu.Item key="/publish" style={{height:"30px",paddingLeft:"1rem"}}>
               <Link to="/publish">
             
@@ -714,7 +714,164 @@ function NavMenu (props) {
             }
           >
            */}
-                     {user.imInd === true  && (
+                     {user.userAccessInd === true   && (
+                  
+                  <Menu.Item key="/employees" style={{height:"30px",paddingLeft:"1rem"}}>
+                    <Link to="/Employees">
+                      <GroupsIcon
+      
+                       style={{ fontSize: "large" }}
+                      />
+                      <span class="text-white text-ls ml-1">
+                        {/* <FormattedMessage id="app.users" defaultMessage="Users" /> */}
+                        {/* Users */}
+                        {translatedMenuItems[6]}
+                      </span>
+                      &nbsp;&nbsp;&nbsp;
+                    <Badge
+                      count={props.opportunityRecord.Employee}
+                      overflowCount={999}
+                    ></Badge>
+                    </Link>
+                  </Menu.Item>
+                )}
+                 { user.locationAccessInd === true   && (
+               
+                <Menu.Item key="/location" style={{height:"30px",paddingLeft:"1rem"}}>
+                 <Link to="/location">
+                  <LocationOnIcon
+                 style={{ fontSize: "large" }}
+                   />
+                   <span class="text-white text-ls ml-1"><FormattedMessage 
+                     id="app.location"
+                    defaultMessage="Location"
+                />
+                    </span>
+                  </Link> 
+                 </Menu.Item>
+                 )}
+                   { user.materialAccessInd === true && user.erpInd === true  && (
+               
+               <Menu.Item key="/supplies" style={{height:"30px",paddingLeft:"1rem"}}>
+                <Link to="/supplies">
+                 <CategoryIcon
+                style={{ fontSize: "large" }}
+                  />
+                  <span class="text-white text-ls ml-1"><FormattedMessage 
+                    id="app.material"
+                   defaultMessage="Material"
+               />
+                   </span>
+                 </Link> 
+                </Menu.Item>
+                )}
+                  { user.shipperAccessInd === true && user.erpInd === true  && (
+               
+               <Menu.Item key="/shipper" style={{height:"30px",paddingLeft:"1rem"}}>
+                <Link to="/shipper">
+                 <LocalShippingIcon
+                style={{ fontSize: "large" }}
+                  />
+                  <span class="text-white text-ls ml-1"><FormattedMessage 
+                    id="app.shipper"
+                   defaultMessage="Shipper"
+               />
+                   </span>
+                 </Link> 
+                </Menu.Item>
+                )}
+                  { user.locationAccessInd === true && user.erpInd === true  && (
+               
+               <Menu.Item key="/plant" style={{height:"30px",paddingLeft:"1rem"}}>
+                <Link to="/plant">
+                 <FactoryIcon
+                style={{ fontSize: "large" }}
+                  />
+                  <span class="text-white text-ls ml-1"><FormattedMessage 
+                    id="app.plant"
+                   defaultMessage="Plant"
+               />
+                   </span>
+                 </Link> 
+                </Menu.Item>
+                )}
+                  { user.teamsAccessInd === true && user.erpInd === true  && (
+               
+               <Menu.Item key="/teams" style={{height:"30px",paddingLeft:"1rem"}}>
+                <Link to="/teams">
+                 <GroupsIcon
+                style={{ fontSize: "large" }}
+                  />
+                  <span class="text-white text-ls ml-1"><FormattedMessage 
+                    id="app.teams"
+                   defaultMessage="Teams"
+               />
+                   </span>
+                 </Link> 
+                </Menu.Item>
+                )}
+                  { user.inventoryAccessInd === true && user.erpInd === true  && (
+               
+               <Menu.Item key="/inventory " style={{height:"30px",paddingLeft:"1rem"}}>
+                <Link to="/inventory">
+                 <InventoryIcon
+                style={{ fontSize: "large" }}
+                  />
+                  <span class="text-white text-ls ml-1"><FormattedMessage 
+                    id="app.inventory"
+                   defaultMessage="Inventory"
+               />
+                   </span>
+                 </Link> 
+                </Menu.Item>
+                )}
+                  { user.orderAccessInd === true && user.erpInd === true  && (
+               
+               <Menu.Item key="/order" style={{height:"30px",paddingLeft:"1rem"}}>
+                <Link to="/order">
+                 <DynamicFeedIcon
+                style={{ fontSize: "large" }}
+                  />
+                  <span class="text-white text-ls ml-1"><FormattedMessage 
+                    id="app.order"
+                   defaultMessage="Order"
+               />
+                   </span>
+                 </Link> 
+                </Menu.Item>
+                )}
+                  { user.accountAccessInd === true && user.erpInd === true  && (
+               
+               <Menu.Item key="/account" style={{height:"30px",paddingLeft:"1rem"}}>
+                <Link to="/account">
+                 <AcUnitIcon
+                style={{ fontSize: "large" }}
+                  />
+                  <span class="text-white text-ls ml-1"><FormattedMessage 
+                    id="app.account"
+                   defaultMessage="Account"
+               />
+                   </span>
+                 </Link> 
+                </Menu.Item>
+                )}
+                    { user.refurbishWorkshopInd === true && user.erpInd === true  && (
+               
+               <Menu.Item key="/refurbish" style={{height:"30px",paddingLeft:"1rem"}}>
+                <Link to="/refurbish">
+                 <OnDeviceTrainingIcon
+                style={{ fontSize: "large" }}
+                  />
+                  <span class="text-white text-ls ml-1"><FormattedMessage 
+                    id="app.refurbish"
+                   defaultMessage="Refurbish"
+               />
+                   </span>
+                 </Link> 
+                </Menu.Item>
+                )}
+                <hr/>
+                     {/* {user.imInd === true  && ( */}
               <Menu.Item key="/report" style={{height:"30px",paddingLeft:"1rem"}}>
           <Link to="/leave">
               <i class="fas fa-luggage-cart"></i>
@@ -730,8 +887,8 @@ function NavMenu (props) {
               </span>
              </Link> 
             </Menu.Item>
-                     )}
-            {user.userType !== "USER" && user.imInd === true  && user.department !== "VENDOR" && ( 
+                     {/* )} */}
+            {/* {user.userType !== "USER" && user.imInd === true  && user.department !== "VENDOR" && (  */}
            <Menu.Item key="/mileage" style={{height:"30px",paddingLeft:"1rem"}}> 
           <Link to="/mileage"> 
               
@@ -748,8 +905,8 @@ function NavMenu (props) {
             </span>
             </Link>
           </Menu.Item>
-             )}
-    {user.imInd === true  && (
+             {/* )} */}
+    {/* {user.imInd === true  && ( */}
            <Menu.Item key="/expense" style={{height:"30px",paddingLeft:"1rem"}}>
            <Link to="/expense">
             <ReceiptIcon
@@ -767,10 +924,10 @@ function NavMenu (props) {
               </span>
             </Link> 
            </Menu.Item>
-    )}
+    {/* )} */}
 
        
-{user.imInd === true  && (
+{/* {user.imInd === true  && ( */}
            <Menu.Item key="/holiday" style={{height:"30px",paddingLeft:"1rem"}}> 
             <Link to="/holiday"> 
            
@@ -784,169 +941,14 @@ function NavMenu (props) {
               </span>
              </Link> 
          </Menu.Item>
-)}
+{/* )} */}
        
 {/* 
            </SubMenu> 
      )}  */}
         <hr/>
                   {/* Employees */}
-                  {user.userAccessInd === true && user.imInd === true  && (
-                  
-            <Menu.Item key="/employees" style={{height:"30px",paddingLeft:"1rem"}}>
-              <Link to="/Employees">
-                <GroupsIcon
-
-                 style={{ fontSize: "large" }}
-                />
-                <span class="text-white text-ls ml-1">
-                  {/* <FormattedMessage id="app.users" defaultMessage="Users" /> */}
-                  {/* Users */}
-                  {translatedMenuItems[6]}
-                </span>
-                &nbsp;&nbsp;&nbsp;
-              <Badge
-                count={props.opportunityRecord.Employee}
-                overflowCount={999}
-              ></Badge>
-              </Link>
-            </Menu.Item>
-          )}
-           { user.locationAccessInd === true && user.imInd === true  && (
-         
-          <Menu.Item key="/location" style={{height:"30px",paddingLeft:"1rem"}}>
-           <Link to="/location">
-            <LocationOnIcon
-           style={{ fontSize: "large" }}
-             />
-             <span class="text-white text-ls ml-1"><FormattedMessage 
-               id="app.location"
-              defaultMessage="Location"
-          />
-              </span>
-            </Link> 
-           </Menu.Item>
-           )}
-             { user.locationAccessInd === true && user.imInd === true  && (
-         
-         <Menu.Item key="/supplies" style={{height:"30px",paddingLeft:"1rem"}}>
-          <Link to="/supplies">
-           <CategoryIcon
-          style={{ fontSize: "large" }}
-            />
-            <span class="text-white text-ls ml-1"><FormattedMessage 
-              id="app.material"
-             defaultMessage="Material"
-         />
-             </span>
-           </Link> 
-          </Menu.Item>
-          )}
-            { user.locationAccessInd === true && user.imInd === true  && (
-         
-         <Menu.Item key="/shipper" style={{height:"30px",paddingLeft:"1rem"}}>
-          <Link to="/shipper">
-           <LocalShippingIcon
-          style={{ fontSize: "large" }}
-            />
-            <span class="text-white text-ls ml-1"><FormattedMessage 
-              id="app.shipper"
-             defaultMessage="Shipper"
-         />
-             </span>
-           </Link> 
-          </Menu.Item>
-          )}
-            { user.locationAccessInd === true && user.imInd === true  && (
-         
-         <Menu.Item key="/plant" style={{height:"30px",paddingLeft:"1rem"}}>
-          <Link to="/plant">
-           <FactoryIcon
-          style={{ fontSize: "large" }}
-            />
-            <span class="text-white text-ls ml-1"><FormattedMessage 
-              id="app.plant"
-             defaultMessage="Plant"
-         />
-             </span>
-           </Link> 
-          </Menu.Item>
-          )}
-            { user.locationAccessInd === true && user.imInd === true  && (
-         
-         <Menu.Item key="/teams" style={{height:"30px",paddingLeft:"1rem"}}>
-          <Link to="/teams">
-           <GroupsIcon
-          style={{ fontSize: "large" }}
-            />
-            <span class="text-white text-ls ml-1"><FormattedMessage 
-              id="app.teams"
-             defaultMessage="Teams"
-         />
-             </span>
-           </Link> 
-          </Menu.Item>
-          )}
-            { user.inventoryAccessInd === true && user.imInd === true  && (
-         
-         <Menu.Item key="/inventory " style={{height:"30px",paddingLeft:"1rem"}}>
-          <Link to="/inventory">
-           <InventoryIcon
-          style={{ fontSize: "large" }}
-            />
-            <span class="text-white text-ls ml-1"><FormattedMessage 
-              id="app.inventory"
-             defaultMessage="Inventory"
-         />
-             </span>
-           </Link> 
-          </Menu.Item>
-          )}
-            { user.orderAccessInd === true && user.imInd === true  && (
-         
-         <Menu.Item key="/order" style={{height:"30px",paddingLeft:"1rem"}}>
-          <Link to="/order">
-           <DynamicFeedIcon
-          style={{ fontSize: "large" }}
-            />
-            <span class="text-white text-ls ml-1"><FormattedMessage 
-              id="app.order"
-             defaultMessage="Order"
-         />
-             </span>
-           </Link> 
-          </Menu.Item>
-          )}
-            { user.orderAccessInd === true && user.imInd === true  && (
-         
-         <Menu.Item key="/account" style={{height:"30px",paddingLeft:"1rem"}}>
-          <Link to="/account">
-           <AcUnitIcon
-          style={{ fontSize: "large" }}
-            />
-            <span class="text-white text-ls ml-1"><FormattedMessage 
-              id="app.account"
-             defaultMessage="Account"
-         />
-             </span>
-           </Link> 
-          </Menu.Item>
-          )}
-              { user.orderAccessInd === true && user.imInd === true  && (
-         
-         <Menu.Item key="/refurbish" style={{height:"30px",paddingLeft:"1rem"}}>
-          <Link to="/refurbish">
-           <OnDeviceTrainingIcon
-          style={{ fontSize: "large" }}
-            />
-            <span class="text-white text-ls ml-1"><FormattedMessage 
-              id="app.refurbish"
-             defaultMessage="Refurbish"
-         />
-             </span>
-           </Link> 
-          </Menu.Item>
-          )}
+        
         </Menu>
        
       </div>

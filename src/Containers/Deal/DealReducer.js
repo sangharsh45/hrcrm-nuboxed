@@ -8,6 +8,8 @@ const initialState = {
   fetchingDealError:false,
   dealsByuserId:[],
 
+  addDrawerDealsNotesModal:false,
+
   fetchingDealLinkedWorkflow: false,
   fetchingDealLinkedWorkflowError: false,
   dealLinkWorkflow:[],
@@ -233,7 +235,8 @@ export const dealReducer = (state = initialState, action) => {
             fetchingDelasRecords: false,
             fetchingDelasRecordsError: true,
           };
-
+          case types.HANDLE_DEALS_NOTES_DRAWER_MODAL:
+            return { ...state, addDrawerDealsNotesModal: action.payload };
                        
                             
     default:

@@ -6,6 +6,8 @@ const initialState = {
     addingContactInvest: false, 
     addContactInvestModal: false,
 
+    addDrawerContactInvestNotesModal:false,
+
     fetchingInvestorContactSearchData:false,
     fetchingInvestorContactSearchDataError:false,
 
@@ -148,6 +150,8 @@ export const contactInvestReducer = (state = initialState, action) => {
             return { ...state, fetchingInvestorContactSearchDataError: true };
       
 
+            case types.HANDLE_CONTACT_INVEST_NOTES_DRAWER_MODAL:
+              return { ...state, addDrawerContactInvestNotesModal: action.payload };
 
 
   

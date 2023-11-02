@@ -7,6 +7,8 @@ const initialState = {
   addingCustomer: false,
   addingCustomerError: false,
 
+  addDrawerCustomerNotesModal:false,
+
 
   addDrawerCustomerEmailModal:false,
 
@@ -1548,6 +1550,9 @@ export const customerReducer = (state = initialState, action) => {
                                           fetchingAllCustomersData: false,
                                           fetchingAllCustomersDataError: true,
                                         };
+
+                                        case types.HANDLE_CUSTOMER_NOTES_DRAWER_MODAL:
+                                          return { ...state, addDrawerCustomerNotesModal: action.payload };
                   
                       
 

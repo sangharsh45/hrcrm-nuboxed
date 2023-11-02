@@ -92,8 +92,8 @@ class ShipBy extends Component {
   }
   render() {
     const {
-      fetchingSources,
-      fetchingSourcesError,
+      fetchingShipBy,
+      fetchingShipByError,
       ShipByData,
       addingShipByError,
       updatingShipBy,
@@ -105,7 +105,7 @@ class ShipBy extends Component {
       singleShipBy,
       linkedSectors,
     } = this.state;
-    if (fetchingSources) return <BundleLoader/>;
+    if (fetchingShipBy) return <BundleLoader/>;
     //if (fetchingSectorsError) return <p>We are unable to load data</p>;
     return (
       <>
@@ -230,7 +230,7 @@ class ShipBy extends Component {
       
        
         </FlexContainer>
-        <h4>Updated on {moment(this.props.sources && this.props.sources.length && this.props.sources[0].updationDate).format("ll")} by {this.props.sources && this.props.sources.length && this.props.sources[0].updatedBy}</h4>
+        <h4>Updated on {moment(this.props.ShipByData && this.props.ShipByData.length && this.props.ShipByData[0].updationDate).format("ll")} by {this.props.ShipByData && this.props.ShipByData.length && this.props.ShipByData[0].updatedBy}</h4>
       </>
     );
   }

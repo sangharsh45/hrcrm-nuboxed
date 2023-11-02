@@ -261,7 +261,7 @@ return  <BundleLoader />
               </Suspense>
             </TabPane>
 
-            <TabPane
+            {/* <TabPane
               tab={
                 <>
                   <span>
@@ -291,9 +291,9 @@ return  <BundleLoader />
               key="4">
               <Suspense fallback={"Loading ..."}>
                 {" "}
-                {/* <LinkedNotes /> */}
+            
               </Suspense>
-            </TabPane>
+            </TabPane> */}
           </StyledTabs>
         </TabsWrapper>
         <Suspense fallback={null}>

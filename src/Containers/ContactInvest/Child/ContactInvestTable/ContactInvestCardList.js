@@ -25,13 +25,17 @@ import {
   getAllSalesList,
   getRecruiterName,
 } from "../../../Opportunity/OpportunityAction";
+import NoteAltIcon from "@mui/icons-material/NoteAlt";
 import PhoneInTalkIcon from '@mui/icons-material/PhoneInTalk';
 import { getDesignations } from "../../../Settings/Designation/DesignationAction";
 import MonitorHeartIcon from '@mui/icons-material/MonitorHeart';
 import APIFailed from "../../../../Helpers/ErrorBoundary/APIFailed";
 import BorderColorIcon from '@mui/icons-material/BorderColor';
 import { BundleLoader } from "../../../../Components/Placeholder";
-import {getContactInvestByUserId,emptyContactInvest,handleUpdateContactInvestModal} from "../../ContactInvestAction";
+import {getContactInvestByUserId,
+  handleContactInvestNotesDrawerModal,
+  emptyContactInvest,handleUpdateContactInvestModal} from "../../ContactInvestAction";
+import AddContactInvestNotesDrawerModal from "../AddContactInvestNotesDrawerModal";
 const UpdateContactInvestModal = lazy(() =>
   import("../UpdateContactInvest/UpdateContactInvestModal")
 );
@@ -89,7 +93,9 @@ function ContactInvestCardList(props) {
     handleContactReactSpeechModal,
     addContactSpeechModal,
     updateContactInvestModal,
-    handleUpdateContactInvestModal
+    addDrawerContactInvestNotesModal,
+    handleUpdateContactInvestModal,
+    handleContactInvestNotesDrawerModal
   } = props;
 
  if(fetchingContactsInvest){
@@ -345,6 +351,18 @@ function ContactInvestCardList(props) {
                       </div>  
                       <div class="w-[2%]"></div>
                       </div>  
+                      <div class="flex flex-col justify-evenly  ">
+                    <Tooltip title="Notes">
+       <NoteAltIcon
+                onClick={() => {
+                  props.handleContactInvestNotesDrawerModal(true);
+                  handleCurrentContactIdata(item);
+                }}
+                style={{ color: "green", cursor: "pointer", fontSize: "1rem" }}
+              />
+           </Tooltip>
+
+            </div>
                             </div>
                         </div>
 
@@ -358,6 +376,13 @@ function ContactInvestCardList(props) {
         contactiData={contactiData}
         updateContactInvestModal={updateContactInvestModal}
         handleUpdateContactInvestModal={handleUpdateContactInvestModal}
+        handleCurrentContactIdata={handleCurrentContactIdata}
+      />
+      
+      <AddContactInvestNotesDrawerModal
+        contactiData={contactiData}
+        addDrawerContactInvestNotesModal={addDrawerContactInvestNotesModal}
+        handleContactInvestNotesDrawerModal={handleContactInvestNotesDrawerModal}
         handleCurrentContactIdata={handleCurrentContactIdata}
       />
       {/* <AddContactEmailDrawerModal
@@ -391,6 +416,7 @@ const mapStateToProps = ({
   contactByUserId: contact.contactByUserId,
   sales: opportunity.sales,
   user: auth.userDetails,
+  addDrawerContactInvestNotesModal:contactinvest.addDrawerContactInvestNotesModal,
   recruiterName: opportunity.recruiterName,
   fetchingContactsInvest: contactinvest.fetchingContactsInvest,
   fetchingContactsInvestError: contactinvest.fetchingContactsInvestError,
@@ -418,7 +444,8 @@ const mapDispatchToProps = (dispatch) =>
       handleContactEmailDrawerModal,
       emptyContactInvest,
       getContactInvestByUserId,
-      handleUpdateContactInvestModal
+      handleUpdateContactInvestModal,
+      handleContactInvestNotesDrawerModal
     },
     dispatch
   );

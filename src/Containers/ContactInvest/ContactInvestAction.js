@@ -210,3 +210,10 @@ export const searchInvestorContactName = (name) => (dispatch) => {
       });
     });
 }; 
+
+export const handleContactInvestNotesDrawerModal = (modalProps) => (dispatch) => {
+  dispatch({
+    type: types.HANDLE_CONTACT_INVEST_NOTES_DRAWER_MODAL,
+    payload: modalProps,
+  });
+};
