@@ -670,7 +670,7 @@ export const updateShipper = (data, shipperId, userId) => (dispatch) => {
     type: types.UPDATE_SHIPPER_BY_ID_REQUEST,
   });
   axios
-    .put(`${base_url}/shipper/updateShipper/${shipperId} `, data)
+    .put(`${base_url2}/shipper/updateShipper/${shipperId} `, data)
     .then((res) => {
       console.log(res);
       // dispatch(getShipperByUserId(userId));
@@ -782,7 +782,7 @@ export const getAllShipperList = (userId) => (dispatch) => {
     type: types.GET_ALL_SHIPPER_LIST_REQUEST,
   });
   axios
-    .get(`${base_url}/distributor/all-distributors`, {
+    .get(`${base_url2}/shipper/all-shipper`, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },
@@ -1132,7 +1132,7 @@ export const deleteShipperData = (id) => (dispatch, getState) => {
     type: types.DELETE_SHIPPER_DATA_REQUEST,
   });
   axios
-    .delete(`${base_url}/distributor/${id}`)
+    .delete(`${base_url2}/shipper/${id}`)
     .then((res) => {
       console.log(res);
       // dispatch(getShipperByUserId(userId));

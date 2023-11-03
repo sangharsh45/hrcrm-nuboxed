@@ -63,7 +63,7 @@ const ShipperActionLeft = (props) => {
           </span>          
         </Badge>
       </Tooltip>
-      {/* {user.designation === "Manager" && user.functionName === "Management" && ( */}
+      { user.shipperAccessInd === true && user.erpInd === true  && (
         <Tooltip title="All Shipper">
            <Badge size="small" 
             count={props.recordAllData.shipper || 0}
@@ -74,12 +74,12 @@ const ShipperActionLeft = (props) => {
               color: props.viewType === "all" && "#1890ff",
             }}
             onClick={() => props.setShipperViewType("all")}
-          >All   <TocIcon style={{fontSize:"1.4rem"}}   />
+          >   <TocIcon style={{fontSize:"1.4rem",cursor:"pointer"}}   />
           </span>
           </Badge>
         </Tooltip>
-      {/* )} */}
-      {/* <Tooltip title="Deleted Shipper">
+   )}
+      <Tooltip title="Deleted Shipper">
         <DeleteOutlined
           style={{
             marginRight: "0.5rem",
@@ -87,8 +87,8 @@ const ShipperActionLeft = (props) => {
           }}
           onClick={() => props.setShipperViewType("grid")}
         />
-      </Tooltip> */}
-      <Tooltip title="Dashboard View">
+      </Tooltip>
+      {/* <Tooltip title="Dashboard View">
         <AreaChartOutlined
           style={{
             marginRight: "0.5rem",
@@ -96,7 +96,7 @@ const ShipperActionLeft = (props) => {
           }}
           onClick={() => props.setShipperViewType("dashboard")}
         />
-      </Tooltip>
+      </Tooltip> */}
       {viewType === "dashboard" && (
         <FlexContainer alignItems="center">
           <TimeInterval
@@ -122,7 +122,7 @@ const ShipperActionLeft = (props) => {
         </FlexContainer>
       )}
       &nbsp;&nbsp;
-      <div style={{ marginLeft: "30px" }}>
+      <div class="ml-[2.5rem] max-sm:w-20">
         <Search
           placeholder="Search By Name"
           onSearch={(value) => {
