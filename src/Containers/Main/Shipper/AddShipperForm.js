@@ -72,14 +72,11 @@ class AddShipperForm extends Component {
             values,
             ...rest
           }) => (
+            <div class="overflow-y-auto h-[34rem] overflow-x-hidden max-sm:h-[33rem]">
             <Form class="form-background">
-              <div style={{ display: "flex", justifyContent: "space-between" }}>
-                <div
-                  style={{
-                    height: "100%",
-                    width: "45%",
-                  }}
-                >
+              <div class="flex justify-between max-sm:flex-col">
+                <div class="h-full w-w47.5 max-sm:w-full">
+                
                   <Field
                     isRequired
                     name="name"
@@ -92,11 +89,13 @@ class AddShipperForm extends Component {
                     inlineLabel
                   />
                   <FlexContainer justifyContent="space-between">
-                    <div style={{ width: "30%" }}>
+                    <div class="w-[30%] max-sm:w-[40%] ">
+                      <label>Dial Code</label>
+                      <div class="-ml-8">
                       <FastField
                         name="dialCode2"
                         selectType="dialCode"
-                        label="Dial Code"
+                        //label="Dial Code"
                         isColumn
                         //margintop={"0.25em"}
                         component={SearchSelect}
@@ -106,8 +105,10 @@ class AddShipperForm extends Component {
                         value={values.countryDialCode1}
                         inlineLabel
                       />
+                      </div>
                     </div>
-                    <div style={{ width: "68%" }}>
+                    <div class="w-[68%] max-sm:w-[50%]">
+                    <label>Phone #</label>
                       <FastField
                         type="text"
                         name="phoneNo"
@@ -132,24 +133,22 @@ class AddShipperForm extends Component {
                     />
                   </div>
                   <div style={{ width: "100%" }}>
-                    <Field
+                    <label>Ship By</label>
+                    <div class="md:-ml-24 max-sm:-ml-12">
+                    <FastField
                       name="shipById"
                       selectType="shipperName"
-                      label="Ship By"
+                    //  label="Ship By"
                       component={SearchSelect}
                       isColumn
                       value={values.shipById}
                       // defaultValue={{ label: firstName, value: documentId }}
                       inlineLabel
                     />
+                    </div>
                   </div>
                 </div>
-                <div
-                  style={{
-                    height: "100%",
-                    width: "45%",
-                  }}
-                >
+                <div class="h-full w-w47.5 max-sm:w-full">
                   <div>
                     <Spacer />
                     <FieldArray
@@ -176,6 +175,7 @@ class AddShipperForm extends Component {
                 </Button>
               </FlexContainer>
             </Form>
+            </div>
           )}
         </Formik>
       </>
