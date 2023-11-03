@@ -1,6 +1,6 @@
 import * as types from "./ShipperActionType";
 import axios from "axios";
-import { base_url } from "../../../Config/Auth";
+import { base_url, base_url2 } from "../../../Config/Auth";
 import moment from "moment";
 /**
  * handle Shipper modal action
@@ -31,7 +31,7 @@ export const addShipper = (shipper, userId) => (dispatch) => {
     type: types.ADD_SHIPPER_REQUEST,
   });
   axios
-    .post(`${base_url}/shipper`, shipper, {
+    .post(`${base_url2}/shipper`, shipper, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },
@@ -60,7 +60,7 @@ export const getShipperByUserId = (userId) => (dispatch) => {
     type: types.GET_SHIPPER_BY_USER_ID_REQUEST,
   });
   axios
-    .get(`${base_url}/shipper/user/${userId}`,
+    .get(`${base_url2}/shipper/all-shipper`,
       {
         headers: {
           Authorization: "Bearer " + sessionStorage.getItem("token") || "",

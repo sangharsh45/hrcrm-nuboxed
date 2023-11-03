@@ -383,10 +383,10 @@ function AccountTable(props) {
         rowKey=""
         columns={columns}
         dataSource={props.distributorsByUserId}
-        loading={
-          props.fetchingDistributorsByUserId ||
-          props.fetchingDistributorsByUserIdError
-        }
+        // loading={
+        //   props.fetchingDistributorsByUserId ||
+        //   props.fetchingDistributorsByUserIdError
+        // }
         scroll={{ y: tableHeight }}
         pagination={false}
       />

@@ -3,6 +3,8 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { FlexContainer } from "../../../Components/UI/Layout";
 import { Input, Button, Tooltip, Badge } from "antd";
+import TocIcon from '@mui/icons-material/Toc';
+import GridViewIcon from '@mui/icons-material/GridView';
 import { inputDataSearch, getRecords, getAllRecords } from "./AccountAction";
 import { DeleteOutlined, TableOutlined, BookOutlined, AppstoreOutlined } from "@ant-design/icons";
 import moment from "moment";
@@ -63,7 +65,7 @@ const AccountActionLeft = (props) => {
                             cursor: "pointer",
                         }}
                         onClick={() => props.setDistributorViewType("list")}>
-                           
+                               <GridViewIcon style={{fontSize:"1.4rem"}}  />
                         </span>
                     </Badge>
                 </Tooltip>
@@ -80,8 +82,8 @@ const AccountActionLeft = (props) => {
                 />
             </Tooltip> */}
 
-            {user.designation === "Manager" &&
-                (user.functionName === "Management" || user.functionName === "Sales") && (
+            {/* {user.designation === "Manager" &&
+                (user.functionName === "Management" || user.functionName === "Sales") && ( */}
                     <Tooltip title="All Distributor">
                         <Badge size="small"
                             count={props.recordAllData.distributor || 0}>
@@ -93,11 +95,11 @@ const AccountActionLeft = (props) => {
                                     cursor: "pointer",
                                 }}
                                 onClick={() => props.setDistributorViewType("all")}
-                            >All
+                            >All <TocIcon style={{fontSize:"1.4rem"}}   />
                             </span>
                         </Badge>
                     </Tooltip>
-                )}
+                {/* )} */}
 
 
 

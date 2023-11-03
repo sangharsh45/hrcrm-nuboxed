@@ -1,6 +1,6 @@
 import * as types from "./AccountActionType";
 import axios from "axios";
-import { base_url } from "../../../Config/Auth";
+import { base_url, base_url2 } from "../../../Config/Auth";
 import { message } from "antd";
 
 /**
@@ -32,7 +32,7 @@ export const addDistributor = (distributor, userId) => (dispatch) => {
     type: types.ADD_DISTRIBUTOR_REQUEST,
   });
   axios
-    .post(`${base_url}/distributor`, distributor,
+    .post(`${base_url2}/distributor`, distributor,
       {
         headers: {
           Authorization: "Bearer " + sessionStorage.getItem("token") || "",

@@ -1,7 +1,9 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
+import GridViewIcon from '@mui/icons-material/GridView';
 import { FlexContainer } from "../../../Components/UI/Layout";
+import TocIcon from '@mui/icons-material/Toc';
 import { Input, Button, Tooltip,Badge  } from "antd";
 import {
   inputDataSearch,
@@ -57,10 +59,11 @@ const ShipperActionLeft = (props) => {
           }}
           onClick={() => props.setShipperViewType("table")}
           >
+             <GridViewIcon style={{fontSize:"1.4rem"}}  />
           </span>          
         </Badge>
       </Tooltip>
-      {user.designation === "Manager" && user.functionName === "Management" && (
+      {/* {user.designation === "Manager" && user.functionName === "Management" && ( */}
         <Tooltip title="All Shipper">
            <Badge size="small" 
             count={props.recordAllData.shipper || 0}
@@ -71,11 +74,11 @@ const ShipperActionLeft = (props) => {
               color: props.viewType === "all" && "#1890ff",
             }}
             onClick={() => props.setShipperViewType("all")}
-          >All
+          >All   <TocIcon style={{fontSize:"1.4rem"}}   />
           </span>
           </Badge>
         </Tooltip>
-      )}
+      {/* )} */}
       {/* <Tooltip title="Deleted Shipper">
         <DeleteOutlined
           style={{
