@@ -42,31 +42,31 @@ class AddAccountForm extends Component {
         this.setState({ vatInd: true })
     }
     render() {
-        const vatOption = this.props.vat.map((item) => {
-            return {
-                value: item.country,
-                label: item.country
-            }
-        })
+        // const vatOption = this.props.vat.map((item) => {
+        //     return {
+        //         value: item.country,
+        //         label: item.country
+        //     }
+        // })
         const currencyOption = this.props.currencies.map((item) => {
             return {
                 label: item.currencyName || "",
                 value: item.currencyName,
             };
         })
-        const customerOption = this.props.customer.map((item) => {
-            return {
-                label: item.clientName || "",
-                value: item.clientId,
-            };
-        })
+        // const customerOption = this.props.customer.map((item) => {
+        //     return {
+        //         label: item.clientName || "",
+        //         value: item.clientId,
+        //     };
+        // })
 
-        const assignToOption = this.props.groupUsers.map((item) => {
-            return {
-                label: item.name || "",
-                value: item.userId,
-            };
-        })
+        // const assignToOption = this.props.groupUsers.map((item) => {
+        //     return {
+        //         label: item.name || "",
+        //         value: item.userId,
+        //     };
+        // })
         return (
             <>
                 <Formik
@@ -197,8 +197,8 @@ class AddAccountForm extends Component {
                                                 label="Country"
                                                 isColumn
                                                 inlineLabel
-                                                component={SelectComponent}
-                                                options={Array.isArray(vatOption) ? vatOption : []}
+                                              //  component={SelectComponent}
+                                                //options={Array.isArray(vatOption) ? vatOption : []}
                                             />
                                         </div>
                                         <div style={{ width: "47%" }}>
@@ -267,8 +267,8 @@ class AddAccountForm extends Component {
                                                 label="Type"
                                                 isColumn
                                                 inlineLabel
-                                                component={SelectComponent}
-                                                options={Array.isArray(customerOption) ? customerOption : []}
+                                             //   component={SelectComponent}
+                                               // options={Array.isArray(customerOption) ? customerOption : []}
                                             // options={["Marketplace", "Customer", "Distributor"]}
                                             />
                                         </div>
@@ -294,8 +294,8 @@ class AddAccountForm extends Component {
                                             label="Assigned To"
                                             isColumn
                                             inlineLabel
-                                            component={SelectComponent}
-                                            options={Array.isArray(assignToOption) ? assignToOption : []}
+                                           // component={SelectComponent}
+                                           // options={Array.isArray(assignToOption) ? assignToOption : []}
                                         />
                                     </div>
                                     <Spacer />
@@ -337,8 +337,8 @@ const mapStateToProps = ({ auth, distributor, rule, groups, category }) => ({
     groupId: auth.userDetails.groupId,
     vat: rule.vat,
     currencies: auth.currencies,
-    groupUsers: groups.groupUsers,
-    customer: category.customer,
+  //  groupUsers: groups.groupUsers,
+   // customer: category.customer,
     addingDistributor: distributor.addingDistributor
 });
 
