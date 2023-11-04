@@ -1,5 +1,5 @@
 import * as types from "./SettingsActionTypes";
-import { base_url } from "../../Config/Auth";
+import { base_url, base_url2 } from "../../Config/Auth";
 import axios from "axios";
 import { ActionIcon } from "../../Components/Utils";
 import { UPDATE_RECRUITMENT_ADVANCE_SUCCESS } from "../Auth/AuthTypes";
@@ -154,7 +154,7 @@ export const addTaskForRecruiter = (data, taskTypeId, cb) => (
     })
     .then((res) => {
       console.log(res);
-       dispatch(getTaskForWorkflow(taskTypeId));
+      dispatch(getTaskForWorkflow(taskTypeId));
       dispatch({
         type: types.ADD_TASK_FOR_RECRUIT_SUCCESS,
         payload: res.data,
@@ -876,7 +876,7 @@ export const updateStageForRecruit = (
   axios
     .put(
       `${base_url}/employee/recriutment-stage`,
-      { stageId,responsible, stageName, probability, days },
+      { stageId, responsible, stageName, probability, days },
       {
         headers: {
           Authorization: "Bearer " + sessionStorage.getItem("token") || "",
@@ -926,7 +926,7 @@ export const getAllProcessStagesForRecruit = () => (dispatch) => {
     });
 };
 
-export const addLeaves = (data,countryId) => (dispatch) => {
+export const addLeaves = (data, countryId) => (dispatch) => {
   dispatch({ type: types.ADD_LEAVES_REQUEST });
 
   axios
@@ -943,7 +943,7 @@ export const addLeaves = (data,countryId) => (dispatch) => {
         type: types.ADD_LEAVES_SUCCESS,
         payload: res.data,
       });
-  
+
     })
     .catch((err) => {
       console.log(err);
@@ -1099,7 +1099,7 @@ export const getMileageDetails = (orgId) => (dispatch) => {
     });
 };
 
-export const updateMileage = (data,orgId) => (dispatch, getState) => {
+export const updateMileage = (data, orgId) => (dispatch, getState) => {
   // const orgId = getState().auth.userDetails.orgId;
   dispatch({ type: types.UPDATE_MILEAGE_REQUEST });
 
@@ -2294,9 +2294,9 @@ export const getNotifications = (orgId) => (dispath) => {
       });
     });
 };
-export const addingNotifications = (data,orgId ) => (dispatch, getState) => {
+export const addingNotifications = (data, orgId) => (dispatch, getState) => {
   //console.log(permissions, userId);
-   const userId = getState().auth.userDetails.userId;
+  const userId = getState().auth.userDetails.userId;
   dispatch({
     type: types.ADDING_NOTIFICATIONS_REQUEST,
   });
@@ -2309,7 +2309,7 @@ export const addingNotifications = (data,orgId ) => (dispatch, getState) => {
 
     .then((res) => {
       console.log(res);
-       dispatch(getNotifications(orgId))
+      dispatch(getNotifications(orgId))
       dispatch({
         type: types.ADDING_NOTIFICATIONS_SUCCESS,
         payload: res.data,
@@ -2360,14 +2360,14 @@ export const updateRequirement = (process, cb) => (dispatch) => {
         type: types.UPDATE_REQUIREMENT_SUCCESS,
         payload: res.data,
       });
-      
+
     })
     .catch((err) => {
       console.log(err);
       dispatch({
         type: types.UPDATE_REQUIREMENT_FAILURE,
       });
-     
+
     });
 };
 
@@ -2386,14 +2386,14 @@ export const updateOpportunity = (process, cb) => (dispatch) => {
         type: types.UPDATE_OPPORTUNITIES_SUCCESS,
         payload: res.data,
       });
-      
+
     })
     .catch((err) => {
       console.log(err);
       dispatch({
         type: types.UPDATE_OPPORTUNITIES_FAILURE,
       });
-     
+
     });
 };
 
@@ -2434,7 +2434,7 @@ export const addNotificationAccess = (data, userId) => (dispatch) => {
 
     .then((res) => {
       console.log(res);
-       dispatch(getNotificationAccess(userId))
+      dispatch(getNotificationAccess(userId))
       dispatch({
         type: types.ADDING_NOTIFICATION_ACCESS_SUCCESS,
         payload: res.data,
@@ -2474,7 +2474,7 @@ export const getNotificationAccess = (userId) => (dispath) => {
       });
     });
 };
-export const deleteReportSchedulerInternalData = (reportSchedulingId,orgId) => (dispatch, getState) => {
+export const deleteReportSchedulerInternalData = (reportSchedulingId, orgId) => (dispatch, getState) => {
   const { userId } = getState("auth").auth.userDetails;
   // console.log("inside deleteCall", callId);
   dispatch({
@@ -2503,7 +2503,7 @@ export const deleteReportSchedulerInternalData = (reportSchedulingId,orgId) => (
     });
 };
 
-export const deleteSequenceData = (sequenceId,orgId) => (dispatch, getState) => {
+export const deleteSequenceData = (sequenceId, orgId) => (dispatch, getState) => {
   const { userId } = getState("auth").auth.userDetails;
   // console.log("inside deleteCall", callId);
   dispatch({
@@ -2546,7 +2546,7 @@ export const addProcessForOpportunity = (data, orgId, cb) => (
     })
     .then((res) => {
       console.log(res);
-       dispatch(getProcessForOpportunity(orgId));
+      dispatch(getProcessForOpportunity(orgId));
       dispatch({
         type: types.ADD_PROCESS_FOR_OPPORTUNITY_SUCCESS,
         payload: res.data,
@@ -2588,7 +2588,7 @@ export const getProcessForOpportunity = (orgId) => (dispatch) => {
     });
 };
 
-export const deleteWorkflowData = (processId,orgId) => (dispatch, getState) => {
+export const deleteWorkflowData = (processId, orgId) => (dispatch, getState) => {
   const { userId } = getState("auth").auth.userDetails;
   // console.log("inside deleteCall", callId);
   dispatch({
@@ -2618,7 +2618,7 @@ export const deleteWorkflowData = (processId,orgId) => (dispatch, getState) => {
 };
 
 
-export const deleteTaskData = (taskChecklistId,orgId) => (dispatch, getState) => {
+export const deleteTaskData = (taskChecklistId, orgId) => (dispatch, getState) => {
   const { userId } = getState("auth").auth.userDetails;
   // console.log("inside deleteCall", callId);
   dispatch({
@@ -2648,7 +2648,7 @@ export const deleteTaskData = (taskChecklistId,orgId) => (dispatch, getState) =>
 };
 
 
-export const deleteOpportunityProcessData = (opportunityWorkflowDetailsId,orgId) => (dispatch, getState) => {
+export const deleteOpportunityProcessData = (opportunityWorkflowDetailsId, orgId) => (dispatch, getState) => {
   const { userId } = getState("auth").auth.userDetails;
   // console.log("inside deleteCall", callId);
   dispatch({
@@ -2677,20 +2677,20 @@ export const deleteOpportunityProcessData = (opportunityWorkflowDetailsId,orgId)
     });
 };
 
-export const updateSequenceTableData= (data,sequenceId) => (dispatch) => {
+export const updateSequenceTableData = (data, sequenceId) => (dispatch) => {
   dispatch({
     type: types.UPDATE_SEQUENCE_TABLE_DATA_REQUEST,
   });
 
 
   axios
-    .put(`${base_url}/sequence/${sequenceId}`,data,{
+    .put(`${base_url}/sequence/${sequenceId}`, data, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },
     })
     .then((res) => {
-    //  dispatch(getExperienceByCandidateId(candidateId));
+      //  dispatch(getExperienceByCandidateId(candidateId));
       dispatch({
         type: types.UPDATE_SEQUENCE_TABLE_DATA_SUCCESS,
         payload: res.data,
@@ -2707,7 +2707,7 @@ export const updateSequenceTableData= (data,sequenceId) => (dispatch) => {
       // cb && cb("error");
     });
 };
-export const updateProcessNameForOpportunity = (process,opportunityWorkflowDetailsId, cb) => (dispatch) => {
+export const updateProcessNameForOpportunity = (process, opportunityWorkflowDetailsId, cb) => (dispatch) => {
   debugger;
   dispatch({ type: types.UPDATE_PROCESS_NAME_FOR_OPPORTUNITY_REQUEST });
 
@@ -2899,7 +2899,7 @@ export const updateStageForOpportunity = (
   opportunityStagesId,
   responsible,
   stageName,
-  
+
   probability,
   days,
   cb
@@ -2911,7 +2911,7 @@ export const updateStageForOpportunity = (
   axios
     .put(
       `${base_url}/opportunityStages/${opportunityStagesId}`,
-      { opportunityStagesId,responsible, stageName, probability, days },
+      { opportunityStagesId, responsible, stageName, probability, days },
       {
         headers: {
           Authorization: "Bearer " + sessionStorage.getItem("token") || "",
@@ -2935,7 +2935,7 @@ export const updateStageForOpportunity = (
     });
 };
 
-export const deleteHiringStagesData = (stageId,orgId) => (dispatch, getState) => {
+export const deleteHiringStagesData = (stageId, orgId) => (dispatch, getState) => {
   const { userId } = getState("auth").auth.userDetails;
   // console.log("inside deleteCall", callId);
   dispatch({
@@ -2964,7 +2964,7 @@ export const deleteHiringStagesData = (stageId,orgId) => (dispatch, getState) =>
     });
 };
 
-export const deleteOpportunityStagesData = (opportunityStagesId,orgId) => (dispatch, getState) => {
+export const deleteOpportunityStagesData = (opportunityStagesId, orgId) => (dispatch, getState) => {
   const { userId } = getState("auth").auth.userDetails;
   // console.log("inside deleteCall", callId);
   dispatch({
@@ -3026,7 +3026,7 @@ export const LinkOpportunityProcessPublish = (data, cb,) => (dispatch) => {
     });
 };
 
-export const updateSequence = (data,cb) => (dispatch) => {
+export const updateSequence = (data, cb) => (dispatch) => {
   dispatch({
     type: types.UPDATE_SEQUENCE_REQUEST,
   });
@@ -3039,7 +3039,7 @@ export const updateSequence = (data,cb) => (dispatch) => {
     })
     .then((res) => {
       console.log(res);
-     // dispatch(getNotificationTemplate());
+      // dispatch(getNotificationTemplate());
 
       dispatch({
         type: types.UPDATE_SEQUENCE_SUCCESS,
@@ -3071,7 +3071,7 @@ export const addingWeekendAccess = (data, countryName) => (dispatch, getState) =
 
     .then((res) => {
       console.log(res);
-       dispatch(getWeekendAccess(countryName))
+      dispatch(getWeekendAccess(countryName))
       dispatch({
         type: types.ADDING_WEEKEND_ACCESS_SUCCESS,
         payload: res.data,
@@ -3194,7 +3194,7 @@ export const getTaskStagesForRecruit = (taskChecklistId) => (
 };
 
 
-export const deleteTaskStagesData = (taskChecklistStagelinkId,orgId) => (dispatch, getState) => {
+export const deleteTaskStagesData = (taskChecklistStagelinkId, orgId) => (dispatch, getState) => {
   const { userId } = getState("auth").auth.userDetails;
   // console.log("inside deleteCall", callId);
   dispatch({
@@ -3238,7 +3238,7 @@ export const updateTaskStageForRecruit = (
   axios
     .put(
       `${base_url}/category/task/checklist/stage/update`,
-      { taskChecklistStagelinkId, taskChecklistStageName, probability,days},
+      { taskChecklistStagelinkId, taskChecklistStageName, probability, days },
       {
         headers: {
           Authorization: "Bearer " + sessionStorage.getItem("token") || "",
@@ -3263,10 +3263,10 @@ export const updateTaskStageForRecruit = (
 };
 
 
-export const addApprove = (data,subProcessName) => (dispatch) => {
+export const addApprove = (data, subProcessName) => (dispatch) => {
   dispatch({ type: types.ADD_APPROVE_REQUEST });
   axios
-    .post(`${base_url}/approve/save/processName/subProcessName`, data,{
+    .post(`${base_url}/approve/save/processName/subProcessName`, data, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },
@@ -3296,7 +3296,7 @@ export const getApproveData = (subProcessName, IndentApproval) => (dispatch) => 
     type: types.GET_APPROVE_DATA_REQUEST,
   });
   axios
-    .get(`${base_url}/approve/${subProcessName}`,{
+    .get(`${base_url}/approve/${subProcessName}`, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },
@@ -3320,7 +3320,7 @@ export const getApproveData = (subProcessName, IndentApproval) => (dispatch) => 
 };
 
 
-export const getDepartmentRoleData = (departmentId,page) => (dispatch) => {
+export const getDepartmentRoleData = (departmentId, page) => (dispatch) => {
 
   dispatch({
     type: types.GET_DEPARTMENT_ROLE_DATA_REQUEST,
@@ -3431,30 +3431,30 @@ export const getTaskForWorkflow = (taskTypeId) => (dispatch) => {
     });
 };
 
-export const addTaskWorkflow = (included,startDate,endDate,taskId,taskChecklistStagelinkId,cb) => (dispatch) => {
+export const addTaskWorkflow = (included, startDate, endDate, taskId, taskChecklistStagelinkId, cb) => (dispatch) => {
   console.log(taskId);
   dispatch({
     type: types.ADD_TASK_WORKFLOW_REQUEST,
   });
   axios
-    .post(`${base_url}/task/subTask`, {included,startDate,endDate,taskId,taskChecklistStagelinkId}, {
+    .post(`${base_url}/task/subTask`, { included, startDate, endDate, taskId, taskChecklistStagelinkId }, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },
     })
     .then((res) => {
-       dispatch(getTaskWorkflowStagesForRecruit(taskId));
+      dispatch(getTaskWorkflowStagesForRecruit(taskId));
       message.success("data has been added successfully!");
       console.log(res);
       dispatch({
         type: types.ADD_TASK_WORKFLOW_SUCCESS,
-        payload:res.data,
+        payload: res.data,
       });
       cb();
     })
     .catch((err) => {
       console.log(err);
-   
+
       dispatch({
         type: types.ADD_TASK_WORKFLOW_FAILURE,
       });
@@ -3468,12 +3468,12 @@ export const getTaskTeamList = (taskId) => (dispatch) => {
     type: types.GET_TASK_TEAM_LIST_REQUEST,
   });
   axios
-  .get(`${base_url}/task/teamList/${taskId}`, {
-    headers: {
-      Authorization: "Bearer " + sessionStorage.getItem("token") || "",
-    },
-  })
-    
+    .get(`${base_url}/task/teamList/${taskId}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+
     .then((res) => {
       console.log(res);
       dispatch({
@@ -3556,7 +3556,7 @@ export const addProcessForDeals = (data, orgId, cb) => (
     })
     .then((res) => {
       console.log(res);
-       dispatch(getProcessForDeals(orgId));
+      dispatch(getProcessForDeals(orgId));
       dispatch({
         type: types.ADD_PROCESS_FOR_DEALS_SUCCESS,
         payload: res.data,
@@ -3709,7 +3709,7 @@ export const LinkDealsStagePublish = (data, cb) => (dispatch) => {
 };
 
 
-export const deleteDealsProcessData = (investorOppWorkflowId,orgId) => (dispatch, getState) => {
+export const deleteDealsProcessData = (investorOppWorkflowId, orgId) => (dispatch, getState) => {
   const { userId } = getState("auth").auth.userDetails;
   // console.log("inside deleteCall", callId);
   dispatch({
@@ -3738,7 +3738,7 @@ export const deleteDealsProcessData = (investorOppWorkflowId,orgId) => (dispatch
     });
 };
 
-export const deleteDealsStagesData = (investorOppStagesId,orgId) => (dispatch, getState) => {
+export const deleteDealsStagesData = (investorOppStagesId, orgId) => (dispatch, getState) => {
   const { userId } = getState("auth").auth.userDetails;
   // console.log("inside deleteCall", callId);
   dispatch({
@@ -3767,7 +3767,7 @@ export const deleteDealsStagesData = (investorOppStagesId,orgId) => (dispatch, g
     });
 };
 
-export const updateProcessNameForDeals = (process,investorOppWorkflowId, cb) => (dispatch) => {
+export const updateProcessNameForDeals = (process, investorOppWorkflowId, cb) => (dispatch) => {
   debugger;
   dispatch({ type: types.UPDATE_PROCESS_NAME_FOR_DEALS_REQUEST });
 
@@ -3799,7 +3799,7 @@ export const updateStageForDeals = (
   investorOppStagesId,
   responsible,
   stageName,
-  
+
   probability,
   days,
   cb
@@ -3811,7 +3811,7 @@ export const updateStageForDeals = (
   axios
     .put(
       `${base_url}/investorOpportunityWorkflow/opportunityStages/${investorOppStagesId}`,
-      { investorOppStagesId,responsible, stageName, probability, days },
+      { investorOppStagesId, responsible, stageName, probability, days },
       {
         headers: {
           Authorization: "Bearer " + sessionStorage.getItem("token") || "",
@@ -3835,9 +3835,31 @@ export const updateStageForDeals = (
     });
 };
 
-
-
-
-
-
+export const getAllVat = () => (
+  dispatch
+) => {
+  dispatch({
+    type: types.GET_ALL_VAT_REQUEST,
+  });
+  axios
+    .get(`${base_url2}/vat/all-vat`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.GET_ALL_VAT_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.GET_ALL_VAT_FAILURE,
+        payload: err,
+      });
+    });
+};
 
