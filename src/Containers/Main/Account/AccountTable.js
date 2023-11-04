@@ -5,11 +5,7 @@ import { StyledTable } from "../../../Components/UI/Antd";
 import { Tooltip, Input, Button, Space, Popconfirm } from "antd";
 import {
   DeleteOutlined,
-  EditOutlined,
-  ShoppingCartOutlined,
   SearchOutlined,
-  PlusSquareFilled,
-  PlusOutlined,
 } from "@ant-design/icons";
 import { Spacer } from "../../../Components/UI/Elements";
 import {
@@ -45,10 +41,6 @@ function AccountTable(props) {
   function handleSetCurrentDistributorId(distributorId) {
     setCurrentDistributorId(distributorId);
   }
-  function handleShowBillingAddress(distributorId) {
-    setshow(!show);
-  }
-
   function getColumnSearchProps(dataIndex) {
     return {
       filterDropdown: ({
@@ -286,7 +278,7 @@ function AccountTable(props) {
                 handleBillingAddressModal(true)
                 handleSetCurrentDistributorId(item.distributorId);
               }}>
-           </div>
+            </div>
           </Tooltip>
         );
       },
@@ -299,7 +291,7 @@ function AccountTable(props) {
         return (
           <Tooltip title="Order">
 
-            <div 
+            <div
               onClick={() => {
                 props.handleDistributorOrderModal(true);
                 handleSetCurrentDistributorId(item.distributorId);

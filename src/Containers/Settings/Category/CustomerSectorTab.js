@@ -10,6 +10,8 @@ import Sectors from "../Sectors/Sectors";
 import Source from "./Source/Source";
 import ShipBy from "./ShipBy/ShipBy"
 import Customer from "./Customer/Customer";
+import BrandModel from "./Brand&Model/BrandModel";
+import Vat from "./Vat/Vat";
 const TabPane = StyledTabs.TabPane;
 
 class CustomerSectorTab extends Component {
@@ -38,7 +40,7 @@ class CustomerSectorTab extends Component {
                 <TabPane
                   tab={
                     <>
-                    <FactoryIcon  />
+                      <FactoryIcon />
                       <span style={{ marginLeft: "0.25em" }}>
                         Sector
                       </span>
@@ -53,9 +55,9 @@ class CustomerSectorTab extends Component {
                 <TabPane
                   tab={
                     <>
-                    <SourceIcon  />
+                      <SourceIcon />
                       <span style={{ marginLeft: "0.25em" }}>
-                     Source
+                        Source
                       </span>
                     </>
                   }
@@ -68,35 +70,64 @@ class CustomerSectorTab extends Component {
                 <TabPane
                   tab={
                     <>
-                    <SourceIcon  />
+                      <SourceIcon />
                       <span style={{ marginLeft: "0.25em" }}>
-                     Ship By
+                        Ship By
                       </span>
                     </>
                   }
                   key="2"
                 >
                   <Suspense>
-                    <ShipBy/>
+                    <ShipBy />
                   </Suspense>
                 </TabPane>
                 <TabPane
                   tab={
                     <>
-                    <SourceIcon  />
+                      <SourceIcon />
                       <span style={{ marginLeft: "0.25em" }}>
-                     Customer
+                        Customer
                       </span>
                     </>
                   }
                   key="3"
                 >
                   <Suspense>
-                    <Customer /> 
+                    <Customer />
                   </Suspense>
                 </TabPane>
-              
-                
+
+                <TabPane
+                  tab={
+                    <>
+                      <SourceIcon />
+                      <span style={{ marginLeft: "0.25em" }}>
+                        BrandModel
+                      </span>
+                    </>
+                  }
+                  key="4"
+                >
+                  <Suspense>
+                    <BrandModel />
+                  </Suspense>
+                </TabPane>
+                <TabPane
+                  tab={
+                    <>
+                      <SourceIcon />
+                      <span style={{ marginLeft: "0.25em" }}>
+                        Vat
+                      </span>
+                    </>
+                  }
+                  key="5"
+                >
+                  <Suspense>
+                    <Vat />
+                  </Suspense>
+                </TabPane>
               </StyledTabs>
             </TabsWrapper>
           </div>
@@ -105,7 +136,7 @@ class CustomerSectorTab extends Component {
     );
   }
 }
-const mapStateToProps = ({}) => ({});
+const mapStateToProps = ({ }) => ({});
 const mapDispatchToProps = (dispatch) => bindActionCreators({}, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(CustomerSectorTab);

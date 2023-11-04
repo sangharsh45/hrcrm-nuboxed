@@ -33,10 +33,10 @@ class AddAccountForm extends Component {
         }
     }
     componentDidMount() {
-       // this.props.getCustomer();
-       // this.props.getVat();
+        // this.props.getCustomer();
+        // this.props.getVat();
         this.props.getCurrency();
-       // this.props.getUserById(this.props.groupId)
+        // this.props.getUserById(this.props.groupId)
     }
     handleVatCheckBox() {
         this.setState({ vatInd: true })
@@ -144,7 +144,7 @@ class AddAccountForm extends Component {
                                     />
                                     <Spacer />
                                     <FlexContainer justifyContent="space-between">
-                                        <div style={{ width: "47%" }}>
+                                        <div style={{ width: "50%" }}>
                                             <FastField
                                                 name="dialCode"
                                                 label="Dial Code"
@@ -152,7 +152,7 @@ class AddAccountForm extends Component {
                                                 width={"100%"}
                                                 selectType="dialCode"
                                                 component={SearchSelect}
-                                                inlineLabe
+                                                inlineLabel
                                             />
                                         </div>
                                         <div style={{ width: "47%" }}>
@@ -197,8 +197,8 @@ class AddAccountForm extends Component {
                                                 label="Country"
                                                 isColumn
                                                 inlineLabel
-                                              //  component={SelectComponent}
-                                                //options={Array.isArray(vatOption) ? vatOption : []}
+                                                component={SelectComponent}
+                                                options={["India", "Netherland"]}
                                             />
                                         </div>
                                         <div style={{ width: "47%" }}>
@@ -267,9 +267,8 @@ class AddAccountForm extends Component {
                                                 label="Type"
                                                 isColumn
                                                 inlineLabel
-                                             //   component={SelectComponent}
-                                               // options={Array.isArray(customerOption) ? customerOption : []}
-                                            // options={["Marketplace", "Customer", "Distributor"]}
+                                                component={SelectComponent}
+                                                options={["Marketplace", "Customer", "Distributor"]}
                                             />
                                         </div>
                                     </FlexContainer>
@@ -293,9 +292,11 @@ class AddAccountForm extends Component {
                                             name="assignTo"
                                             label="Assigned To"
                                             isColumn
+                                            component={SelectComponent}
+                                            options={["1", "2"]}
                                             inlineLabel
-                                           // component={SelectComponent}
-                                           // options={Array.isArray(assignToOption) ? assignToOption : []}
+                                        // component={SelectComponent}
+                                        // options={Array.isArray(assignToOption) ? assignToOption : []}
                                         />
                                     </div>
                                     <Spacer />
@@ -337,8 +338,8 @@ const mapStateToProps = ({ auth, distributor, rule, groups, category }) => ({
     groupId: auth.userDetails.groupId,
     vat: rule.vat,
     currencies: auth.currencies,
-  //  groupUsers: groups.groupUsers,
-   // customer: category.customer,
+    //  groupUsers: groups.groupUsers,
+    // customer: category.customer,
     addingDistributor: distributor.addingDistributor
 });
 
@@ -346,10 +347,10 @@ const mapDispatchToProps = (dispatch) =>
     bindActionCreators(
         {
             addDistributor,
-          //  getVat,
+            //  getVat,
             getCurrency,
-           // getUserById,
-           // getCustomer
+            // getUserById,
+            // getCustomer
         },
         dispatch
     );

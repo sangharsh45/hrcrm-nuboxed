@@ -1,6 +1,6 @@
 import * as types from "./AccountActionType";
 import axios from "axios";
-import { base_url, base_url2 } from "../../../Config/Auth";
+import { base_url2 } from "../../../Config/Auth";
 import { message } from "antd";
 
 /**
@@ -63,7 +63,7 @@ export const getDistributorsByUserId = (userId) => (dispatch) => {
     type: types.GET_DISTRIBUTORS_BY_USER_ID_REQUEST,
   });
   axios
-    .get(`${base_url}/distributor/user/${userId}`,
+    .get(`${base_url2}/distributor/${userId}`,
       {
         headers: {
           Authorization: "Bearer " + sessionStorage.getItem("token") || "",
@@ -93,7 +93,7 @@ export const getDistributorByDistributorId = (distributorId) => (dispatch) => {
     type: types.GET_DISTRIBUTOR_BY_DISTRIBUTOR_ID_REQUEST,
   });
   axios
-    .get(`${base_url}/distributor/${distributorId}`,
+    .get(`${base_url2}/distributor/${distributorId}`,
       {
         headers: {
           Authorization: "Bearer " + sessionStorage.getItem("token") || "",
@@ -140,7 +140,7 @@ export const handleLinkDistributorOrderConfigureModal = (modalProps) => (
 export const linkOrderByDistributorId = (data, distributorId) => (dispatch) => {
   dispatch({ type: types.LINK_ORDER_BY_DISTRIBUTOR_ID_REQUEST });
   axios
-    .post(`${base_url}/distributor/product`, data, {
+    .post(`${base_url2}/distributor/product`, data, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },
@@ -176,7 +176,7 @@ export const fetchingNewDistributorOrder = (distributorId) => (dispatch) => {
     type: types.FETCHING_NEW_DISTRIBUTOR_ORDER_REQUEST,
   });
   axios
-    .get(`${base_url}/distributor/product/${distributorId}`, {
+    .get(`${base_url2}/distributor/product/${distributorId}`, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },
@@ -218,7 +218,7 @@ export const getActivityListByDistributorId = (distributorId) => (dispatch) => {
     type: types.GET_ACTIVITY_LIST_BY_DISTRIBUTORID_REQUEST,
   });
   axios
-    .get(`${base_url}/activity/distributor/${distributorId}`, {})
+    .get(`${base_url2}/activity/distributor/${distributorId}`, {})
     .then((res) => {
       console.log(res);
       dispatch({
@@ -253,7 +253,7 @@ export const addDistributorActivityCall = (call, cb) => (dispatch) => {
     type: types.ADD_DISTRIBUTOR_ACTIVITY_CALL_REQUEST,
   });
   axios
-    .post(`${base_url}/call`, call)
+    .post(`${base_url2}/call`, call)
     .then((res) => {
       console.log(res);
       dispatch({
@@ -281,7 +281,7 @@ export const addDistributorActivityEvent = (event, cb) => (dispatch) => {
     type: types.ADD_DISTRIBUTOR_ACTIVITY_EVENT_REQUEST,
   });
   axios
-    .post(`${base_url}/event`, event, {})
+    .post(`${base_url2}/event`, event, {})
     .then((res) => {
       console.log(res);
       dispatch({
@@ -311,7 +311,7 @@ export const addOrderForm = (customer) => (dispatch, getState) => {
   });
 
   axios
-    .post(`${base_url}/phoneOrder`, customer, {
+    .post(`${base_url2}/phoneOrder`, customer, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },
@@ -342,7 +342,7 @@ export const addDistributorActivityTask = (task, cb) => (dispatch) => {
     type: types.ADD_DISTRIBUTOR_ACTIVITY_TASK_REQUEST,
   });
   axios
-    .post(`${base_url}/task`, task, {})
+    .post(`${base_url2}/task`, task, {})
     .then((res) => {
       console.log(res);
       // dispatch(getActivityListByDistributorId(distributorId));
@@ -370,7 +370,7 @@ export const getNotesListByDistributorId = (distributorId) => (dispatch) => {
     type: types.GET_NOTES_LIST_BY_DISTRIBUTOR_ID_REQUEST,
   });
   axios
-    .get(`${base_url}/distributor/notes/${distributorId}`, {
+    .get(`${base_url2}/distributor/notes/${distributorId}`, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },
@@ -398,7 +398,7 @@ export const generateOrderByDistributorId = (data, cb) => (dispatch) => {
   // debugger;
   dispatch({ type: types.GENERATE_ORDER_BY_DISTRIBUTOR_ID_REQUEST });
   axios
-    .post(`${base_url}/order/distributor`, data,
+    .post(`${base_url2}/order/distributor`, data,
       {
         headers: {
           Authorization: "Bearer " + sessionStorage.getItem("token") || "",
@@ -428,7 +428,7 @@ export const getDistributorOrderByDistributorId = (distributorId) => (
     type: types.GET_DISTRIBUTOR_ORDER_BY_DISTRIBUTOR_ID_REQUEST,
   });
   axios
-    .get(`${base_url}/phoneOrder/all-phoneOrders/${distributorId}`,
+    .get(`${base_url2}/phoneOrder/all-phoneOrders/${distributorId}`,
       {
         headers: {
           Authorization: "Bearer " + sessionStorage.getItem("token") || "",
@@ -476,7 +476,7 @@ export const handlePauseButtonModal = (modalProps) => (dispatch) => {
 export const linkRenewalOrder = (data, cb) => (dispatch) => {
   dispatch({ type: types.LINK_RENEWAL_BY_DISTRIBUTOR_ID_REQUEST });
   axios
-    .post(`${base_url}/order/renew-order`, data, {
+    .post(`${base_url2}/order/renew-order`, data, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },
@@ -505,7 +505,7 @@ export const linkRenewalOrder = (data, cb) => (dispatch) => {
 export const linkPauseOrder = (data, cb) => (dispatch) => {
   dispatch({ type: types.LINK_PAUSE_BY_DISTRIBUTOR_ID_REQUEST });
   axios
-    .post(`${base_url}/order/pause-order`, data, {})
+    .post(`${base_url2}/order/pause-order`, data, {})
     .then((res) => {
       console.log(res);
 
@@ -580,7 +580,7 @@ export const updateDistributor = (data, distributorId, userId) => (
     type: types.UPDATE_DISTRIBUTOR_BY_ID_REQUEST,
   });
   axios
-    .put(`${base_url}/distributor/${distributorId}`, data,
+    .put(`${base_url2}/distributor/${distributorId}`, data,
       {
         headers: {
           Authorization: "Bearer " + sessionStorage.getItem("token") || "",
@@ -612,7 +612,7 @@ export const inputDataSearch = (name) => (dispatch) => {
     type: types.INPUT_SEARCH_DATA_REQUEST,
   });
   axios
-    .get(`${base_url}/distributor/distributorName/${name}`, {})
+    .get(`${base_url2}/distributor/distributorName/${name}`, {})
     .then((res) => {
       // if (res.data.contactId) {
       //   console.log(res.data);
@@ -639,7 +639,7 @@ export const getOrderDetailsById = (orderId) => (dispatch) => {
     type: types.GET_ORDER_DETAILS_BY_ID_REQUEST,
   });
   axios
-    .get(`${base_url}/order/product/${orderId}`, {
+    .get(`${base_url2}/order/product/${orderId}`, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },
@@ -668,7 +668,7 @@ export const getAllDistributorsList = (userId) => (dispatch) => {
     type: types.GET_ALL_DISTRIBUTORS_LIST_REQUEST,
   });
   axios
-    .get(`${base_url}/distributor/all-distributors`,
+    .get(`${base_url2}/distributor/all-distributors`,
       {
         headers: {
           Authorization: "Bearer " + sessionStorage.getItem("token") || "",
@@ -730,7 +730,7 @@ export const updateDistributorOrder = (data, productId) => (dispatch) => {
     type: types.UPDATE_DISTRIBUTOR_ORDER_BY_ID_REQUEST,
   });
   axios
-    .put(`${base_url}/distributor/product/${productId}`, data)
+    .put(`${base_url2}/distributor/product/${productId}`, data)
     .then((res) => {
       console.log(res);
       // dispatch(getOrderDetailsById(orderId));
@@ -753,7 +753,7 @@ export const getDistributorOrderHistory = (orderId) => (dispatch) => {
     type: types.FETCHING_DISTRIBUTOR_ORDER_HISTORY_REQUEST,
   });
   axios
-    .get(`${base_url}/order/order-history/${orderId}`, {
+    .get(`${base_url2}/order/order-history/${orderId}`, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },
@@ -780,7 +780,7 @@ export const updateDistributorById = (distributorId, data, cb) => (
   console.log(data);
   dispatch({ type: types.UPDATE_DISTRIBUTOR_CARD_REQUEST });
   axios
-    .put(`${base_url}/distributor/${distributorId}`, { ...data })
+    .put(`${base_url2}/distributor/${distributorId}`, { ...data })
     .then((res) => {
       console.log(res);
       dispatch({
@@ -805,7 +805,7 @@ export const addCarDetails = (customer, id, cb) => (dispatch, getState) => {
   });
 
   axios
-    .post(`${base_url}/excel/import/phone-details`, customer, {
+    .post(`${base_url2}/excel/import/phone-details`, customer, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },
@@ -835,7 +835,7 @@ export const getFeedbackByDistributorId = (distributorId) => (dispatch) => {
     type: types.GET_FEEDBACK_BY_DISTRIBUTOR_ID_REQUEST,
   });
   axios
-    .get(`${base_url}/distributor/feedback/${distributorId}`)
+    .get(`${base_url2}/distributor/feedback/${distributorId}`)
     .then((res) => {
       console.log(res);
       dispatch({
@@ -869,7 +869,7 @@ export const getFeedbackByOrderId = (orderId) => (dispatch) => {
     type: types.GET_FEEDBACK_BY_ORDER_ID_REQUEST,
   });
   axios
-    .get(`${base_url}/order/feedback/${orderId}`, {
+    .get(`${base_url2}/order/feedback/${orderId}`, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },
@@ -895,7 +895,7 @@ export const getDistributorHistory = (distributorId) => (dispatch) => {
     type: types.GET_DISTRIBUTOR_HISTORY_REQUEST,
   });
   axios
-    .get(`${base_url}/distributor/history/${distributorId}`)
+    .get(`${base_url2}/distributor/history/${distributorId}`)
     .then((res) => {
       console.log(res);
       dispatch({
@@ -926,7 +926,7 @@ export const handlePaidModal = (modalProps) => (dispatch) => {
 export const addPaidOrder = (data, orderId, distributorId) => (dispatch) => {
   dispatch({ type: types.ADD_PAID_BY_DISTRIBUTOR_ID_REQUEST });
   axios
-    .put(`${base_url}/phoneOrder/qcUpdateInd`, data, {
+    .put(`${base_url2}/phoneOrder/qcUpdateInd`, data, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },
@@ -955,7 +955,7 @@ export const getDistributorOrderPayment = (orderPhoneId) => (dispatch) => {
     type: types.FETCHING_DISTRIBUTOR_PAYMENT_HISTORY_REQUEST,
   });
   axios
-    .get(`${base_url}/phoneOrder/order-payment/${orderPhoneId}`, {
+    .get(`${base_url2}/phoneOrder/order-payment/${orderPhoneId}`, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },
@@ -982,7 +982,7 @@ export const deleteDistributorData = (id) => (dispatch, getState) => {
     type: types.DELETE_DISTRIBUTOR_DATA_REQUEST,
   });
   axios
-    .delete(`${base_url}/distributor/${id}`,
+    .delete(`${base_url2}/distributor/${id}`,
       {
         headers: {
           Authorization: "Bearer " + sessionStorage.getItem("token") || "",
@@ -1010,7 +1010,7 @@ export const updateDistributorCall = (data, id, cb) => (dispatch, getState) => {
   console.log(data);
   dispatch({ type: types.UPDATE_DISTRIBUTOR_CALL_BY_ID_REQUEST });
   axios
-    .put(`${base_url}/call/${id}`, { ...data })
+    .put(`${base_url2}/call/${id}`, { ...data })
     .then((res) => {
       // dispatch(getCallListRangeByUserId(userId));
       console.log(res);
@@ -1035,7 +1035,7 @@ export const updateDistributorEvent = (data, id, cb) => (
 ) => {
   dispatch({ type: types.UPDATE_DISTRIBUTOR_EVENT_BY_ID_REQUEST });
   axios
-    .put(`${base_url}/event/${id}`, { ...data })
+    .put(`${base_url2}/event/${id}`, { ...data })
     .then((res) => {
       console.log(res);
       dispatch({
@@ -1058,7 +1058,7 @@ export const updateDistributorTask = (id, data, cb) => (dispatch, getState) => {
   console.log(data);
   dispatch({ type: types.UPDATE_DISTRIBUTOR_TASK_BY_ID_REQUEST });
   axios
-    .put(`${base_url}/task/${id}`, { ...data })
+    .put(`${base_url2}/task/${id}`, { ...data })
     .then((res) => {
       // dispatch(getTasksListByUserId(userId));
       console.log(res);
@@ -1083,7 +1083,7 @@ export const getDeletedDistributors = () => (dispatch) => {
     type: types.GET_DELETED_DISTRIBUTORS_REQUEST,
   });
   axios
-    .get(`${base_url}/distributor/deleteDistributorHistory`, {})
+    .get(`${base_url2}/distributor/deleteDistributorHistory`, {})
     .then((res) => {
       console.log(res);
       dispatch({
@@ -1105,7 +1105,12 @@ export const getRecords = (userId) => (dispatch) => {
     type: types.GET_RECORDS_REQUEST,
   });
   axios
-    .get(`${base_url}/user/record/count/${userId}`, {})
+    .get(`${base_url2}/user/record/count/${userId}`,
+      {
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+        },
+      })
     .then((res) => {
       console.log(res);
       dispatch({
@@ -1127,7 +1132,7 @@ export const getDeletedOrderTableData = (distributorId) => (dispatch) => {
     type: types.FETCHING_DISTRIBUTOR_DELETED_ORDER_BY_ID_REQUEST,
   });
   axios
-    .get(`${base_url}/order/orderDeleteDistributor/${distributorId}`, {
+    .get(`${base_url2}/order/orderDeleteDistributor/${distributorId}`, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },
@@ -1152,7 +1157,7 @@ export const getDeletedQuoteTableData = (distributorId) => (dispatch) => {
     type: types.FETCHING_DISTRIBUTOR_DELETED_QUOTE_BY_ID_REQUEST,
   });
   axios
-    .get(`${base_url}/order/orderDeleteDistributor/${distributorId}`,
+    .get(`${base_url2}/order/orderDeleteDistributor/${distributorId}`,
       {
         headers: {
           Authorization: "Bearer " + sessionStorage.getItem("token") || "",
@@ -1189,7 +1194,7 @@ export const deleteDistributorOrderData = (data, id) => (dispatch) => {
     type: types.DELETE_DISTRIBUTOR_ORDER_DATA_REQUEST,
   });
   axios
-    .put(`${base_url}/order/${id}`, data,
+    .put(`${base_url2}/order/${id}`, data,
       {
         headers: {
           Authorization: "Bearer " + sessionStorage.getItem("token") || "",
@@ -1216,7 +1221,7 @@ export const getAllRecords = () => (dispatch) => {
     type: types.GET_ALL_RECORDS_REQUEST,
   });
   axios
-    .get(`${base_url}/user/record/count`, {})
+    .get(`${base_url2}/user/record/count`, {})
     .then((res) => {
       console.log(res);
       dispatch({
@@ -1267,7 +1272,7 @@ export const addDistributorDocument = (data, cb, distributorId) => (dispatch) =>
   console.log(data);
   dispatch({ type: types.ADD_DISTRIBUTOR_DOCUMENT_REQUEST });
   axios
-    .post(`${base_url}/distributor/distributor/document`, data, {
+    .post(`${base_url2}/distributor/distributor/document`, data, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },
@@ -1293,7 +1298,7 @@ export const addDistributorDocument = (data, cb, distributorId) => (dispatch) =>
 export const getDistributorDocument = (distributorId) => (dispatch) => {
   dispatch({ type: types.GET_DISTRIBUTOR_DOCUMENTS_REQUEST });
   axios
-    .get(`${base_url}/documemt`, {
+    .get(`${base_url2}/documemt`, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },
@@ -1318,7 +1323,7 @@ export const getDistributorDocument = (distributorId) => (dispatch) => {
 export const getDistributorTable = (distributorId) => (dispatch) => {
   dispatch({ type: types.GET_DISTRIBUTOR_TABLE_REQUEST });
   axios
-    .get(`${base_url}/distributor/distributor/document/${distributorId}`, {
+    .get(`${base_url2}/distributor/distributor/document/${distributorId}`, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },
@@ -1347,7 +1352,7 @@ export const getRenewOrder = (orderId) => (dispatch) => {
     type: types.GET_RENEW_ORDER_REQUEST,
   });
   axios
-    .get(`${base_url}/renew/renewlist/${orderId}`, {
+    .get(`${base_url2}/renew/renewlist/${orderId}`, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },
@@ -1385,7 +1390,7 @@ export const addContactDistributor = (contact, distributorId) => (dispatch) => {
     type: types.ADD_CONTACT_DISTRIBUTOR_REQUEST,
   });
   axios
-    .post(`${base_url}/contactPerson`, contact,
+    .post(`${base_url2}/contactPerson`, contact,
       {
         headers: {
           Authorization: "Bearer " + sessionStorage.getItem("token") || "",
@@ -1415,7 +1420,7 @@ export const getContactDistributorList = (distributorId) => (dispatch) => {
     type: types.GET_CONTACT_DISTRIBUTORS_LIST_BY_ID_REQUEST,
   });
   axios
-    .get(`${base_url}/distributor/contactPerson/${distributorId}`, {
+    .get(`${base_url2}/distributor/contactPerson/${distributorId}`, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },
@@ -1459,7 +1464,7 @@ export const updateDistributorContact = (data, contactPersonId) => (
     type: types.UPDATE_DISTRIBUTOR_CONTACT_BY_ID_REQUEST,
   });
   axios
-    .put(`${base_url}/contactPerson/${contactPersonId}`, data, {
+    .put(`${base_url2}/contactPerson/${contactPersonId}`, data, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },
@@ -1497,7 +1502,7 @@ export const handlePaymentModal = (modalProps) => (dispatch) => {
 export const updatePaymentData = (data, paymentId, cb) => (dispatch) => {
   dispatch({ type: types.UPDATE_ORDER_PAYMENT_REQUEST });
   axios
-    .put(`${base_url}/order/payment/${paymentId}`, data, {
+    .put(`${base_url2}/order/payment/${paymentId}`, data, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },
@@ -1526,7 +1531,7 @@ export const deleteOrderPaymentData = (paymentId, distributorId) => (dispatch) =
     type: types.DELETE_ORDER_PAYMENT_DATA_REQUEST,
   });
   axios
-    .delete(`${base_url}/order/deletePayment/${paymentId}`, {
+    .delete(`${base_url2}/order/deletePayment/${paymentId}`, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },
@@ -1571,7 +1576,7 @@ export const updateOrderDetails = (data, orderId, distributorId) => (
 ) => {
   dispatch({ type: types.UPDATE_ORDER_DETAILS_REQUEST });
   axios
-    .put(`${base_url}/order/product-quantity/increase/${orderId}`, data, {
+    .put(`${base_url2}/order/product-quantity/increase/${orderId}`, data, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },
@@ -1599,7 +1604,7 @@ export const reinstateToggleForOrder = (data, orderId) => (dispatch) => {
     type: types.REINSTATE_TOGGLE_FOR_ORDER_REQUEST,
   });
   axios
-    .put(`${base_url}/order/orderReInState/${orderId}`, data, {
+    .put(`${base_url2}/order/orderReInState/${orderId}`, data, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },
@@ -1635,7 +1640,7 @@ export const addBillingAddress = (data, distributorId) => (dispatch) => {
     type: types.ADD_BILLING_ADDRESS_DISTRIBUTOR_REQUEST,
   });
   axios
-    .post(`${base_url}/distributor/shipToAddress`, data)
+    .post(`${base_url2}/distributor/shipToAddress`, data)
     .then((res) => {
       console.log(res);
       dispatch(getBillingAddress(distributorId));
@@ -1660,7 +1665,7 @@ export const getBillingAddress = (distributorId) => (dispatch) => {
     type: types.GET_BILLING_ADDRESS_BY_ID_REQUEST,
   });
   axios
-    .get(`${base_url}/distributor/distributorShipAddressesList/${distributorId}`, {
+    .get(`${base_url2}/distributor/distributorShipAddressesList/${distributorId}`, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },
@@ -1686,7 +1691,7 @@ export const addCurrencyForOrder = (data, distributorId) => (dispatch) => {
     type: types.ADD_CURRENCY_FOR_ORDER_REQUEST,
   });
   axios
-    .post(`${base_url}/order/order-currency`, data, {
+    .post(`${base_url2}/order/order-currency`, data, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },
@@ -1716,7 +1721,7 @@ export const addCurrencyForQuote = (data, distributorId) => (dispatch) => {
     type: types.ADD_CURRENCY_FOR_QUOTE_REQUEST,
   });
   axios
-    .post(`${base_url}/order/order-currency`, data, {
+    .post(`${base_url2}/order/order-currency`, data, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },
@@ -1743,7 +1748,7 @@ export const getChoosenCurrencyId = (distributorId) => (dispatch) => {
     type: types.GET_CHOOSEN_CURRENCYID_REQUEST,
   });
   axios
-    .get(`${base_url}/order/order-currency-list/${distributorId}`, {
+    .get(`${base_url2}/order/order-currency-list/${distributorId}`, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },
@@ -1769,7 +1774,7 @@ export const getProductByCurrency = (groupId, currencyId) => (dispatch) => {
     type: types.GET_PRODUCT_BY_CURRENCY_REQUEST,
   });
   axios
-    .get(`${base_url}/product/productSearch/${groupId}/${currencyId}`, {})
+    .get(`${base_url2}/product/productSearch/${groupId}/${currencyId}`, {})
     .then((res) => {
       console.log(res);
       dispatch({
@@ -1793,7 +1798,7 @@ export const getDistributorByGroup = (groupId) => (dispatch) => {
     type: types.GET_DISTRIBUTOR_BY_GROUP_REQUEST,
   });
   axios
-    .get(`${base_url}/distributor/distributor/${groupId}`, {})
+    .get(`${base_url2}/distributor/distributor/${groupId}`, {})
     .then((res) => {
       console.log(res);
       dispatch({
@@ -1825,7 +1830,7 @@ export const generateQuoteByDistributorId = (data, cb) => (dispatch) => {
   // debugger;
   dispatch({ type: types.GENERATE_QUOTE_BY_DISTRIBUTOR_ID_REQUEST });
   axios
-    .post(`${base_url}/quote/distributor`, data,
+    .post(`${base_url2}/quote/distributor`, data,
       {
         headers: {
           Authorization: "Bearer " + sessionStorage.getItem("token") || "",
@@ -1855,7 +1860,7 @@ export const getDistributorQuoteByDistributorId = (distributorId) => (
     type: types.GET_DISTRIBUTOR_QUOTE_BY_DISTRIBUTOR_ID_REQUEST,
   });
   axios
-    .get(`${base_url}/quote/distributor/${distributorId}`,
+    .get(`${base_url2}/quote/distributor/${distributorId}`,
       {
         headers: {
           Authorization: "Bearer " + sessionStorage.getItem("token") || "",
@@ -1882,7 +1887,7 @@ export const applyForLoginInContact = (data, contactPersonId, id, userId) => (di
     type: types.APPLY_FOR_LOGIN_IN_CONTACT_REQUEST,
   });
   axios
-    .put(`${base_url}/distributor/convert/contactToUser/${contactPersonId}/${userId}`, data,
+    .put(`${base_url2}/distributor/convert/contactToUser/${contactPersonId}/${userId}`, data,
       {
         headers: {
           Authorization: "Bearer " + sessionStorage.getItem("token") || "",
@@ -1911,7 +1916,7 @@ export const addLocationInOrder = (data, distributorId) => (dispatch) => {
     type: types.ADD_LOCATION_IN_ORDER_REQUEST,
   });
   axios
-    .post(`${base_url}/orderInventoryLocationLink/save`, data, {
+    .post(`${base_url2}/orderInventoryLocationLink/save`, data, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },
@@ -1939,7 +1944,7 @@ export const getPhonelistById = (orderPhoneId) => (dispatch) => {
     type: types.GET_PHONE_LIST_BY_ID_REQUEST,
   });
   axios
-    .get(`${base_url}/phone/phoneDetail/${orderPhoneId}`, {
+    .get(`${base_url2}/phone/phoneDetail/${orderPhoneId}`, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },
@@ -1978,7 +1983,7 @@ export const getNotesInOrder = (id) => (dispatch) => {
     type: types.GET_NOTES_LIST_IN_ORDER_REQUEST,
   });
   axios
-    .get(`${base_url}/phoneOrder/notes/${id}`, {
+    .get(`${base_url2}/phoneOrder/notes/${id}`, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },
@@ -2010,7 +2015,7 @@ export const getOrderPhoneNote = (phoneId) => (dispatch) => {
     type: types.GET_ORDER_PHONE_NOTE_REQUEST,
   });
   axios
-    .get(`${base_url}/phone/notes/${phoneId}`, {
+    .get(`${base_url2}/phone/notes/${phoneId}`, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },
@@ -2041,7 +2046,7 @@ export const getPhoneTasklist = (phoneId) => (dispatch) => {
     type: types.GET_PHONE_TASK_LIST_REQUEST,
   });
   axios
-    .get(`${base_url}/phone/phoneTask/${phoneId}`, {
+    .get(`${base_url2}/phone/phoneTask/${phoneId}`, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },
@@ -2065,7 +2070,7 @@ export const checkTaskComplition = (data, phoneId) => (dispatch) => {
   // debugger;
   dispatch({ type: types.CHECK_TASK_COMPLETION_REQUEST });
   axios
-    .put(`${base_url}/phoneOrder/phone/task/${phoneId}`, data, {
+    .put(`${base_url2}/phoneOrder/phone/task/${phoneId}`, data, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },
@@ -2089,7 +2094,7 @@ export const addSpareList = (data, phoneId, orderId, cb) => (dispatch) => {
   // debugger;
   dispatch({ type: types.ADD_SPARE_LIST_REQUEST });
   axios
-    .post(`${base_url}/phoneSpare`, data, {
+    .post(`${base_url2}/phoneSpare`, data, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },
@@ -2120,7 +2125,7 @@ export const getSpareListByPhoneId = (phoneId) => (
     type: types.GET_SPARE_LIST_BY_PHONEID_REQUEST,
   });
   axios
-    .get(`${base_url}/phoneSpare/spareDetails/${phoneId}`, {
+    .get(`${base_url2}/phoneSpare/spareDetails/${phoneId}`, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },
@@ -2145,7 +2150,7 @@ export const updateQCStatus = (data, phoneId, orderPhoneId, cb) => (dispatch) =>
   // debugger;
   dispatch({ type: types.UPDATE_QC_STATUS_REQUEST });
   axios
-    .put(`${base_url}/phone/qcstatus/${phoneId}`, data, {
+    .put(`${base_url2}/phone/qcstatus/${phoneId}`, data, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },
@@ -2174,7 +2179,7 @@ export const startQCStatus = (data, distributorId, cb) => (dispatch) => {
   // debugger;
   dispatch({ type: types.START_QC_STATUS_REQUEST });
   axios
-    .put(`${base_url}/phoneOrder/qcUpdateInd`, data, {
+    .put(`${base_url2}/phoneOrder/qcUpdateInd`, data, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },
@@ -2202,7 +2207,7 @@ export const startRepairInStatus = (data, id) => (dispatch) => {
   // debugger;
   dispatch({ type: types.START_REPAIR_IN_STATUS_REQUEST });
   axios
-    .put(`${base_url}/phoneOrder/qcRepair`, data, {
+    .put(`${base_url2}/phoneOrder/qcRepair`, data, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },
@@ -2229,7 +2234,7 @@ export const updateOfferPrice = (data, orderPhoneId, id, cb) => (dispatch) => {
     type: types.UPDATE_OFFER_PRICE_REQUEST,
   });
   axios
-    .put(`${base_url}/phoneOrder/updatePrice/${orderPhoneId}`, data, {
+    .put(`${base_url2}/phoneOrder/updatePrice/${orderPhoneId}`, data, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },
@@ -2259,7 +2264,7 @@ export const getTaggedSuppliesByBrand = (brand, model) => (dispatch) => {
     type: types.GET_TAGGED_SUPPLIES_BYBRAND_REQUEST,
   });
   axios
-    .get(`${base_url}/supplies/masterName/${brand}/${model}`, {
+    .get(`${base_url2}/supplies/masterName/${brand}/${model}`, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },
@@ -2286,7 +2291,7 @@ export const receiveTaskByDispatch = (data, phoneId) => (dispatch) => {
     type: types.RECEIVE_TASK_BY_DISPATCH_REQUEST,
   });
   axios
-    .put(`${base_url}/phoneOrder/update/phone/task/${phoneId}`, data, {
+    .put(`${base_url2}/phoneOrder/update/phone/task/${phoneId}`, data, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },
