@@ -54,7 +54,7 @@ useEffect(() => {
           title={
             <FormattedMessage
               id="app.listOpportunity"
-              defaultMessage="Opportunity List"
+              defaultMessage="Deal List"
             />
           }
         >

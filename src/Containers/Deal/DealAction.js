@@ -344,3 +344,31 @@ export const handleDealsNotesDrawerModal = (modalProps) => (dispatch) => {
     payload: modalProps,
   });
 };
+
+export const LinkStageDeal = (data, cb) => (dispatch) => {
+  dispatch({ type: types.LINK_DEAL_REQUEST });
+
+  axios
+    .put(`${base_url}/opportunity/update/stage `, data, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+
+    .then((res) => {
+      console.log(res);
+
+      dispatch({
+        type: types.LINK_DEAL_SUCCESS,
+        payload: res.data,
+      });
+      cb && cb("success");
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.LINK_DEAL_FAILURE,
+      });
+      cb && cb("failure");
+    });
+};

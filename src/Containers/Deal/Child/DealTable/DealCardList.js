@@ -38,8 +38,10 @@ import {
          getOpportunityForecast
 } from "../../../Opportunity/OpportunityAction";
 import UpdateDealModal from "../UpdateDeal/UpdateDealModal";
-import {getDealListbyUserId,handleUpdateDealModal,emptyDeals,handleDealsNotesDrawerModal} from "../../DealAction";
+import {getDealListbyUserId,handleUpdateDealModal,emptyDeals,handleDealsNotesDrawerModal,
+  LinkStageDeal} from "../../DealAction";
 import AddDealsNotesDrawerModal from "../AddDealsNotesDrawerModal";
+import DealSelectStages from "./DealSelectStages";
 
 const Option =Select;
 
@@ -114,11 +116,11 @@ function DealCardList(props) {
     <CardWrapper>
     {dealsByuserId.map((item) => {
                  
-                //  var findProbability = item.probability;
-                //    item.stageList.forEach((element) => {
-                //      if (element.oppStage === item.oppStage) {
-                //        findProbability = element.probability;}
-                //     });
+                 var findProbability = item.probability;
+                   item.stageList.forEach((element) => {
+                     if (element.oppStage === item.oppStage) {
+                       findProbability = element.probability;}
+                    });
                  return (
       <CardElement>
         <FlexContainer
@@ -197,27 +199,25 @@ overlay={
       backgroundColor: "#F5F5F5",
     }}
   >
-    {/* <OpportunitySelectStages
+  <DealSelectStages
       rec={item}
       oppStage={item.oppStage}
       // recruitOwner={item.recruitOwner}
       // candidateName={item.candidateName}
       // approveInd={item.approveInd}
       // rejectInd={item.rejectInd}
-      stageClick={(opportunityStagesId) => {
-        props.LinkStageOpportunity(
+      stageClick={(investorOppStagesId) => {
+        props.LinkStageDeal(
           {
-            opportunityId: item.opportunityId,
-            //oppStage: item.oppStage,
-            opportunityStagesId:opportunityStagesId
-            // recruitmentProcessId: item.recruitmentProcessId,
-            // recruitmentId: item.recruitmentId,
-            // profileId: item.profileId,
+            invOpportunityId: item.invOpportunityId,
+           
+            investorOppStagesId:investorOppStagesId
+         
           },
          
         );
       }}
-    />{" "} */}
+    />{" "} 
   </Menu.Item>
 </Menu>
 </div>
@@ -229,7 +229,7 @@ trigger={["click"]}
 <Progress
 type="circle"
 style={{ cursor: "pointer",color:"red" }}
-// percent={findProbability}
+ percent={findProbability}
 //disable={true}
 width={30}
  strokeColor={"#005075"}
@@ -481,6 +481,7 @@ const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
         getDealListbyUserId,
+  
       getOpportunityInitiativeSKillDetails,
       getRecruiterList,
       getOpportunitySKill,
@@ -502,6 +503,7 @@ const mapDispatchToProps = (dispatch) =>
          lostStatusRecruit,
          LinkStageOpportunity,
          emptyDeals,
+         LinkStageDeal,
     },
     dispatch
   );
