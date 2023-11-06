@@ -1083,7 +1083,11 @@ export const getDeletedDistributors = () => (dispatch) => {
     type: types.GET_DELETED_DISTRIBUTORS_REQUEST,
   });
   axios
-    .get(`${base_url2}/distributor/deleteDistributorHistory`, {})
+    .get(`${base_url2}/distributor/deleteDistributorHistory`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
     .then((res) => {
       console.log(res);
       dispatch({

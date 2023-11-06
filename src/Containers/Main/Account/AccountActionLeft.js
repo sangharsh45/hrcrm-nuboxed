@@ -53,7 +53,9 @@ const AccountActionLeft = (props) => {
 
     return (
         <FlexContainer alignItems="center">
+            <div class="max-sm:hidden">
             {user.functionName !== "Customer Care" && (
+                
                 <Tooltip title="List View">
                     <Badge size="small"
                         count={props.recordData.distributor || 0}
@@ -69,8 +71,9 @@ const AccountActionLeft = (props) => {
                         </span>
                     </Badge>
                 </Tooltip>
+               
             )}
-
+            </div>
             {/* <Tooltip title="Distributor By Group">
                 <AppstoreOutlined
                     style={{
@@ -95,12 +98,26 @@ const AccountActionLeft = (props) => {
                                     cursor: "pointer",
                                 }}
                                 onClick={() => props.setDistributorViewType("all")}
-                            >All <TocIcon style={{fontSize:"1.4rem"}}   />
+                            >All 
                             </span>
                         </Badge>
                     </Tooltip>
                 {/* )} */}
-
+                <Tooltip title="card Distributor">
+                        <Badge size="small"
+                            count={props.recordAllData.distributor || 0}>
+                            <span
+                                style={{
+                                    marginRight: "0.5rem",
+                                    color: props.viewType === "card" && "#1890ff",
+                                    fontSize: "17px",
+                                    cursor: "pointer",
+                                }}
+                                onClick={() => props.setDistributorViewType("card")}
+                            > <TocIcon style={{fontSize:"1.4rem"}}   />
+                            </span>
+                        </Badge>
+                    </Tooltip>
 
 
             <Tooltip title="Deleted Distributor">
