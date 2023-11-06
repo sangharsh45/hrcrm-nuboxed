@@ -93,6 +93,7 @@ import Supplies from "./Supplies/Supplies";
 import Shipper from "./Shipper/Shipper";
 import Account from "./Account/Account";
 import Refurbish from "./Refurbish/Refurbish";
+import ShipperDetails from "./Shipper/ShipperDetails";
 
 const OpportunityDetail = lazy(() =>
   import("../Opportunity/Child/OpportunityDetail/OpportunityDetail")
@@ -692,6 +693,11 @@ function MainApp(props) {
                         exact
                         path="/contact/:contactId"
                         component={ContactDetail}
+                      />
+                      <Route
+                        exact
+                        path="/shipper/:shipperId"
+                        component={ShipperDetails}
                       />
 
 <Route
