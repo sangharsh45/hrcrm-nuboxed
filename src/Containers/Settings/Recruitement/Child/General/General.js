@@ -32,15 +32,25 @@ function General(props) {
       <Formik
         enableReinitialize
         initialValues={{
-          timePeriod: props.requirementDuration.timePeriod || "",
-          orderTimePeriod: props.requirementDuration.orderTimePeriod || "",
+          timePeriod: props.requirementDuration.timePeriod === 0 ? "Not Applicable" :props.requirementDuration.timePeriod|| "",
+          orderTimePeriod: props.requirementDuration.orderTimePeriod === 0 ? "Not Applicable" :props.requirementDuration.orderTimePeriod || "",
           userId: props.userId,
           orgId: props.organizationId,
         }}
         onSubmit={(values) => {
+          console.log(values)
+          // if (values.timePeriod === "0") {
+          //   values.timePeriod = "Not Applicable";
+          // }
+          // if (values.orderTimePeriod === "0") {
+          //   values.orderTimePeriod = "Not Applicable";
+          // }
           props.updateRequirement(
             {
               ...values,
+            
+              timePeriod:values.timePeriod === "Not Applicable" ? "0" :values.timePeriod,
+              orderTimePeriod:values.orderTimePeriod === "Not Applicable" ? "0" :values.orderTimePeriod,
             },
             props.orgId
           );
@@ -72,7 +82,7 @@ function General(props) {
                 <p style={{ minWidth:"-webkit-fill-available"}}>Auto drop Open Orders (in months)</p>
                 <div>
                 <Field
-                style={{width:"8rem"}}
+                style={{width:"10rem"}}
                     name="timePeriod"
                  
                     component={SelectComponent}
@@ -94,7 +104,7 @@ function General(props) {
                 <div>
                 <Field
                     name="orderTimePeriod"
-                    style={{width:"8rem"}}
+                    style={{width:"10rem"}}
                     component={SelectComponent}
                     options={["1", "2", "3", "4", "5","Not Applicable"]}
                     isColumn
@@ -136,7 +146,7 @@ function General(props) {
                   justifyContent: "space-between",
                 }}
               >
-                <p style={{ minWidth:"-webkit-fill-available"}}>Auto Send BirthDay Anniversary Email</p>
+                <p style={{ minWidth:"-webkit-fill-available"}}>Auto Send BirthDay Email</p>
                 <div>
                       <Popconfirm
                         title="Do you wish to change Status ? "

@@ -18,6 +18,9 @@ const initialState = {
   fetchingDealLinkedStagesError: false,
   dealLinkStages:[],
 
+  linkingDeal: false,
+  linkingDealError: false,
+
 
   creatingDeal: false,
   creatingDealError: false,
@@ -237,6 +240,34 @@ export const dealReducer = (state = initialState, action) => {
           };
           case types.HANDLE_DEALS_NOTES_DRAWER_MODAL:
             return { ...state, addDrawerDealsNotesModal: action.payload };
+
+
+            case types.LINK_DEAL_REQUEST:
+              return {
+                ...state,
+                linkingDeal: true,
+              };
+            case types.LINK_DEAL_SUCCESS:
+              return {
+                ...state,
+                linkingDeal: false,
+               // addTagProfileModal: false,
+               dealsByuserId: state.dealsByuserId.map(
+                  (recruit, i) => {
+                    if (recruit.invOpportunityId === action.payload.invOpportunityId) {
+                      return action.payload;
+                    } else {
+                      return recruit;
+                    }
+                  }
+                ),
+              };
+              case types.LINK_DEAL_FAILURE:
+             return {
+               ...state,
+               linkingDeal: false,
+               linkingDealError: true,
+             };
                        
                             
     default:
