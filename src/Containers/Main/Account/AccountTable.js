@@ -9,7 +9,7 @@ import {
 } from "@ant-design/icons";
 import { Spacer } from "../../../Components/UI/Elements";
 import {
-  getDistributorsByUserId,
+  getAllDistributorsList,
   setEditDistributor,
   handleUpdateDistributorModal,
   handleDistributorOrderModal,
@@ -23,113 +23,11 @@ import AccountDetailsView from "./AccountDetailsView";
 import UpdateAccountModal from "./UpdateAccountModal";
 import AddAccountOrderModal from "./AddAccountOrderModal";
 import AddAccountActivityModal from "./AddAccountActivityModal";
-// import BillingAddressModal from "../DistributorBillingAddress/BillingAddressModal";
-// import BillingAddressLocation from "../DistributorBillingAddress/BillingAddressLocation";
 
 function AccountTable(props) {
   useEffect(() => {
-    props.getDistributorsByUserId(props.userId);
+    props.getAllDistributorsList();
   }, []);
-
-  const { handleUpdateDistributorModal, updateDistributorModal, addBillToAddress, handleBillingAddressModal } = props;
-
-  const [currentDistributorId, setCurrentDistributorId] = useState("");
-  const [searchText, setSearchText] = useState("");
-  const [searchedColumn, setSearchedColumn] = useState("");
-  const [show, setshow] = useState(false);
-
-  function handleSetCurrentDistributorId(distributorId) {
-    setCurrentDistributorId(distributorId);
-  }
-  function getColumnSearchProps(dataIndex) {
-    return {
-      filterDropdown: ({
-        setSelectedKeys,
-        selectedKeys,
-        confirm,
-        clearFilters,
-      }) => (
-        <div style={{ padding: 8 }}>
-          <Input
-            // ref={node => {
-            //   this.searchInput = node;
-            // }}
-            placeholder={`Search ${dataIndex}`}
-            value={selectedKeys[0]}
-            onChange={(e) =>
-              setSelectedKeys(e.target.value ? [e.target.value] : [])
-            }
-            onPressEnter={() => handleSearch(selectedKeys, confirm, dataIndex)}
-            style={{ width: 240, marginBottom: 8, display: "block" }}
-          />
-          <Space>
-            <Button
-              type="primary"
-              onClick={() => handleSearch(selectedKeys, confirm, dataIndex)}
-              icon={<SearchOutlined />}
-              size="small"
-              style={{ width: 90 }}
-            >
-              Search
-            </Button>
-            <Button
-              onClick={() => handleReset(clearFilters)}
-              size="small"
-              style={{ width: 90 }}
-            >
-              Reset
-            </Button>
-            <Button
-              type="link"
-              size="small"
-              onClick={() => {
-                confirm({ closeDropdown: false });
-                setSearchText(selectedKeys[0]);
-                setSearchedColumn(dataIndex);
-              }}
-            >
-              Filter
-            </Button>
-          </Space>
-        </div>
-      ),
-      filterIcon: (filtered) => (
-        <SearchOutlined style={{ color: filtered ? "#1890ff" : undefined }} />
-      ),
-      onFilter: (value, record) =>
-        record[dataIndex]
-          .toString()
-          .toLowerCase()
-          .includes(value.toLowerCase()),
-      onFilterDropdownVisibleChange: (visible) => {
-        if (visible) {
-          // setTimeout(() => this.searchInput.select());
-        }
-      },
-      render: (text) =>
-        searchedColumn === dataIndex ? (
-          <Highlighter
-            highlightStyle={{ backgroundColor: "#ffc069", padding: 0 }}
-            searchWords={[searchText]}
-            autoEscape
-            textToHighlight={text.toString()}
-          />
-        ) : (
-          text
-        ),
-    };
-  }
-
-  function handleSearch(selectedKeys, confirm, dataIndex) {
-    confirm();
-    setSearchText(selectedKeys[0]);
-    setSearchedColumn(dataIndex);
-  }
-
-  function handleReset(clearFilters) {
-    clearFilters();
-    setSearchText("");
-  }
 
   const columns = [
     {
@@ -140,7 +38,7 @@ function AccountTable(props) {
       title: "Name",
       width: "12%",
       defaultSortOrder: "descend",
-      ...getColumnSearchProps("name"),
+      dataIndex: "name",
       sorter: (a, b) => {
         var nameA = a.name.toLowerCase(); // ignore upper and lowercase
         var nameB = b.name.toLowerCase(); // ignore upper and lowercase
@@ -212,7 +110,7 @@ function AccountTable(props) {
       dataIndex: "",
       textAlign: "center",
       width: "8%",
-      ...getColumnSearchProps("countryValue"),
+
       render: (text, item) => {
         return (
           <>
@@ -221,33 +119,21 @@ function AccountTable(props) {
         )
       }
     },
-    // {
-    //   title: "Credit",
-    //   dataIndex: "",
-    //   textAlign: "center",
-    //   width: "8%",
-    //   render: (text, item) => {
-    //     return (
-    //       <>
-    //         {item.currencyPrice} {item.currency}
-    //       </>
-    //     )
-    //   }
-    // },
+
     {
       title: "Invoice Address",
-      render: (name, item, i) => {
-        return `${item.addresses[0].address1 || ""} ${item.addresses[0]
-          .address2 || ""} ${item.addresses[0].street || ""} ${item.addresses[0].city || ""}`;
-      },
+      // render: (name, item, i) => {
+      //   return `${item.addresses[0].address1 || ""} ${item.addresses[0]
+      //     .address2 || ""} ${item.addresses[0].street || ""} ${item.addresses[0].city || ""}`;
+      // },
       width: "22%",
     },
 
     {
       title: "Pin Code",
-      render: (name, item, i) => {
-        return `${item.addresses[0].pinCode || ""}`;
-      },
+      // render: (name, item, i) => {
+      //   return `${item.addresses[0].pinCode || ""}`;
+      // },
       width: "6%",
     },
     // {
@@ -274,10 +160,11 @@ function AccountTable(props) {
         return (
           <Tooltip title="Contacts">
             <div
-              onClick={() => {
-                handleBillingAddressModal(true)
-                handleSetCurrentDistributorId(item.distributorId);
-              }}>
+            // onClick={() => {
+            //   handleBillingAddressModal(true)
+            //   handleSetCurrentDistributorId(item.distributorId);
+            // }}
+            >
             </div>
           </Tooltip>
         );
@@ -292,10 +179,10 @@ function AccountTable(props) {
           <Tooltip title="Order">
 
             <div
-              onClick={() => {
-                props.handleDistributorOrderModal(true);
-                handleSetCurrentDistributorId(item.distributorId);
-              }}
+            // onClick={() => {
+            //   props.handleDistributorOrderModal(true);
+            //   handleSetCurrentDistributorId(item.distributorId);
+            // }}
             />
           </Tooltip>
         );
@@ -312,10 +199,10 @@ function AccountTable(props) {
               <i
                 class="fab fa-connectdevelop"
                 style={{ cursor: "pointer" }}
-                onClick={() => {
-                  props.handleDistributorActivityTableModal(true);
-                  handleSetCurrentDistributorId(item.distributorId);
-                }}
+              // onClick={() => {
+              //   props.handleDistributorActivityTableModal(true);
+              //   handleSetCurrentDistributorId(item.distributorId);
+              // }}
               ></i>
             </span>
           </Tooltip>
@@ -332,11 +219,11 @@ function AccountTable(props) {
           <Tooltip title="Edit">
             <div
               style={{ cursor: "pointer" }}
-              onClick={() => {
-                props.setEditDistributor(item);
-                handleUpdateDistributorModal(true);
-                handleSetCurrentDistributorId(item.distributorId);
-              }}
+            // onClick={() => {
+            //   props.setEditDistributor(item);
+            //   handleUpdateDistributorModal(true);
+            //   handleSetCurrentDistributorId(item.distributorId);
+            // }}
             />
           </Tooltip>
         );
@@ -352,7 +239,7 @@ function AccountTable(props) {
             <Tooltip title="Delete Client">
               <Popconfirm
                 title="Do you want to delete?"
-                onConfirm={() => props.deleteDistributorData(item.distributorId)}
+              // onConfirm={() => props.deleteDistributorData(item.distributorId)}
               >
                 <DeleteOutlined
 
@@ -374,15 +261,14 @@ function AccountTable(props) {
       <StyledTable
         rowKey=""
         columns={columns}
-        dataSource={props.distributorsByUserId}
-        // loading={
-        //   props.fetchingDistributorsByUserId ||
-        //   props.fetchingDistributorsByUserIdError
-        // }
+        dataSource={props.allDistributors}
+        loading={
+          props.fetchingAllDistributors
+        }
         scroll={{ y: tableHeight }}
         pagination={false}
       />
-      <UpdateAccountModal
+      {/* <UpdateAccountModal
         distributorId={currentDistributorId}
         updateDistributorModal={updateDistributorModal}
         handleSetCurrentDistributorId={handleSetCurrentDistributorId}
@@ -403,7 +289,7 @@ function AccountTable(props) {
         }
         distributorId={currentDistributorId}
         handleSetCurrentDistributorId={handleSetCurrentDistributorId}
-      />
+      /> */}
       {/* <BillingAddressModal
         handleBillingAddressModal={handleBillingAddressModal}
         addBillToAddress={addBillToAddress}
@@ -415,8 +301,8 @@ function AccountTable(props) {
   );
 }
 const mapStateToProps = ({ distributor, auth }) => ({
-  distributorsByUserId: distributor.distributorsByUserId,
-  fetchingDistributorsByUserId: distributor.fetchingDistributorsByUserId,
+  allDistributors: distributor.allDistributors,
+  fetchingAllDistributors: distributor.fetchingAllDistributors,
   fetchingDistributorsByUserIdError:
     distributor.fetchingDistributorsByUserIdError,
   userId: auth.userDetails.userId,
@@ -431,7 +317,7 @@ const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
       handleUpdateDistributorModal,
-      getDistributorsByUserId,
+      getAllDistributorsList,
       setEditDistributor,
       handleDistributorOrderModal,
       handleDistributorActivityTableModal,

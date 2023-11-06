@@ -94,6 +94,7 @@ import Shipper from "./Shipper/Shipper";
 import Account from "./Account/Account";
 import Refurbish from "./Refurbish/Refurbish";
 import ShipperDetails from "./Shipper/ShipperDetails";
+import AccountDetails from "./Account/AccountDetailsTab/AccountDetails";
 
 const OpportunityDetail = lazy(() =>
   import("../Opportunity/Child/OpportunityDetail/OpportunityDetail")
@@ -156,27 +157,27 @@ const AccountImport = lazy(() => import("../Import/Child/AccountImport"));
 const Requirement = lazy(() => import("../Requirement/Requirement"));
 const Demand = lazy(() => import("../Demand/Demand"));
 const AddContactModal = lazy(() => import("../Contact/Child/AddContactModal"));
-const Pitch=lazy(()=>import("../Pitch/Pitch"));
-const Deal=lazy(()=>import("../Deal/Deal"));
-const ContactInvest=lazy(()=>import("../ContactInvest/ContactInvest"));
-const Investor=lazy(()=>import("../Investor/Investor"));
-const InvestorDetail = lazy(() =>import("../Investor/Child/InvestorDetail/InvestorDetail"));
-const ContactInvestDetail = lazy(() =>import("../ContactInvest/Child/ContactInvestDetail/ContactInvestDetail"));
-const DealDetail=lazy(()=>import("../Deal/Child/DealDetail/DealDetail"));
+const Pitch = lazy(() => import("../Pitch/Pitch"));
+const Deal = lazy(() => import("../Deal/Deal"));
+const ContactInvest = lazy(() => import("../ContactInvest/ContactInvest"));
+const Investor = lazy(() => import("../Investor/Investor"));
+const InvestorDetail = lazy(() => import("../Investor/Child/InvestorDetail/InvestorDetail"));
+const ContactInvestDetail = lazy(() => import("../ContactInvest/Child/ContactInvestDetail/ContactInvestDetail"));
+const DealDetail = lazy(() => import("../Deal/Child/DealDetail/DealDetail"));
 
 function MainApp(props) {
   const [visible, setVisible] = useState(false);
   const [confirmLoading, setConfirmLoading] = useState(false);
 
   const [selectedLanguage, setSelectedLanguage] = useState('en');
- 
+
   const [supportedLanguages, setSupportedLanguages] = useState([]);
 
   useEffect(() => {
     props.getOpportunityRecord(props.userId);
   }, []);
 
- 
+
 
   useEffect(() => {
     const fetchSupportedLanguages = async () => {
@@ -240,53 +241,53 @@ function MainApp(props) {
   const organizationLogo = (
     <MultiAvatar
       imageId={imageId}
-      //marginLeft="30px"
-      // primaryTitle={organizationName}
+    //marginLeft="30px"
+    // primaryTitle={organizationName}
     />
   );
   return (
     <>
       <ThemeProvider theme={props.theme}>
         <LayoutWrapper>
-        <div class="max-sm:hidden overflow-x-auto">
-          <Sider
-            trigger={null}
-            collapsible
-            collapsed={collapsed}
-            width={"10vw"}
-            style={{
-              minHeight: "100vh",
-              background: "#38445E",
-              overflow: "auto",
-              //flex:"0 0 11vw"
-              // height: "100vh",
-              // position: "fixed",
-            }}
-          >
-            {/* <div
+          <div class="max-sm:hidden overflow-x-auto">
+            <Sider
+              trigger={null}
+              collapsible
+              collapsed={collapsed}
+              width={"10vw"}
+              style={{
+                minHeight: "100vh",
+                background: "#38445E",
+                overflow: "auto",
+                //flex:"0 0 11vw"
+                // height: "100vh",
+                // position: "fixed",
+              }}
+            >
+              {/* <div
             className="logo"
             style={{
               justifyContent: !collapsed ? "flex-start" : "center",
               height: 50,
             }}
           > */}
-            <div
-              className="logo"
-              style={{
-                justifyContent: !collapsed ? "center" : "center",
-                height: 50,
-                marginLeft: "40px",
-              }}
-            >
-              {collapsed && organizationLogo}
-              {!collapsed && organizationLogo}
-              {/* {collapsed && organizationLogo}
+              <div
+                className="logo"
+                style={{
+                  justifyContent: !collapsed ? "center" : "center",
+                  height: 50,
+                  marginLeft: "40px",
+                }}
+              >
+                {collapsed && organizationLogo}
+                {!collapsed && organizationLogo}
+                {/* {collapsed && organizationLogo}
             {!collapsed && organizationLogo} */}
-              {/* {this.state.collapsed && organizationLogo}
+                {/* {this.state.collapsed && organizationLogo}
                             {!this.state.collapsed && organizationLogo}
                             {!this.state.collapsed && <span style={{ color: 'white', fontWeight: 'bold', fontSize: 20 }} >{organization.organizationName}</span>} */}
 
-              {/* {collapsed && (
+                {/* {collapsed && (
               <img
                 className="small-logo"
                 src={FWShortLogo}
@@ -300,23 +301,24 @@ function MainApp(props) {
                 style={{ height: "40px", marginLeft: "28px" }}
               />
             )} */}
-            </div>
-            <NavMenu
-              collapsed={collapsed}
-              toggleCollapsed={toggle}
-              toggleTheme={toggleTheme}
-              theme={theme}
-              selectedLanguage={selectedLanguage}
-            />
-          </Sider>
+              </div>
+              <NavMenu
+                collapsed={collapsed}
+                toggleCollapsed={toggle}
+                toggleTheme={toggleTheme}
+                theme={theme}
+                selectedLanguage={selectedLanguage}
+              />
+            </Sider>
           </div>
           <LayoutWrapper>
-            <NavbarWrapper style={{ padding: 0, height: 50, alignItems: "center", position: "sticky", zIndex: "999",top:" 0.15rem",
-  
- 
- }}>
+            <NavbarWrapper style={{
+              padding: 0, height: 50, alignItems: "center", position: "sticky", zIndex: "999", top: " 0.15rem",
+
+
+            }}>
               <Header>
-              <div class="md:hidden"><Navmenu2  selectedLanguage={selectedLanguage}/></div>
+                <div class="md:hidden"><Navmenu2 selectedLanguage={selectedLanguage} /></div>
                 <div
                   style={{
                     height: "100%",
@@ -326,9 +328,9 @@ function MainApp(props) {
                   }}
                 >
                   &nbsp;&nbsp;
-        
+
                 </div>
-                <StartStop/>
+                <StartStop />
                 {/* <Popconfirm
                 title="Stop"
                 visible={visible}
@@ -468,7 +470,7 @@ function MainApp(props) {
                                         </FlexContainer>
                                     </Link> */}
                   {/* <Subscription /> */}
-                 
+
                   <div class="max-sm:hidden"
                     style={{
                       backgroundColor: "#ff7158bf",
@@ -478,7 +480,7 @@ function MainApp(props) {
                       borderRadius: "5px",
                       position: "relative",
                       height: "27px",
-                      fontFamily:"Poppins",
+                      fontFamily: "Poppins",
                       textAlign: "center",
                       lineHeight: "24px",
                       padding: "0px 10px",
@@ -497,7 +499,7 @@ function MainApp(props) {
                       borderRadius: "5px",
                       position: "relative",
                       height: "27px",
-                      fontFamily:"Poppins",
+                      fontFamily: "Poppins",
                       textAlign: "center",
                       lineHeight: "24px",
                       padding: "0px 10px",
@@ -509,11 +511,11 @@ function MainApp(props) {
                   </div>
                   {/* <Subscription /> */}
                   {user.settingsAccessInd === true ?
-                  <IsAuthorized>
-                  
-                    <SettingsDropdown />
-                  
-                  </IsAuthorized>
+                    <IsAuthorized>
+
+                      <SettingsDropdown />
+
+                    </IsAuthorized>
                     : null}
                   {/* <a href="#" style={{ height: 45, marginRight: 20 }}>
                                         <FlexContainer alignItems='center' style={{ height: '100%' }}>
@@ -548,8 +550,8 @@ function MainApp(props) {
                       </FlexContainer>
                     </Tooltip>
                   </Link> */}
-                 
-                   <RepositoryData />
+
+                  <RepositoryData />
                   <ProfileDropdown />
                   {/* <Theme /> */}
                 </div>
@@ -574,8 +576,8 @@ function MainApp(props) {
                       <Route exact path="/expense" component={Expense} />
                       <Route exact path="/supplies" component={Supplies} />
                       <Route exact path="/order" component={Order} />
-                      <Route exact path="/account"component={Account}/>
-                      <Route exact path="/refurbish " component={Refurbish } />
+                      <Route exact path="/account" component={Account} />
+                      <Route exact path="/refurbish " component={Refurbish} />
                       <Route exact path="/location" component={Location} />
                       <Route exact path="/plant" component={Plant} />
                       {/* <Route exact path="/suppliers" component={Suppliers} /> */}
@@ -614,7 +616,12 @@ function MainApp(props) {
                         path="/employee/:id"
                         component={EmployeeDetails}
                       />
-                        <Route
+                      <Route
+                        exact
+                        path="/distributor/:distributorId"
+                        component={AccountDetails}
+                      />
+                      <Route
                         exact
                         path="/hour/candidate/hour-details/project/:candidateId/:projectId"
                         component={CandidateTotalBilling}
@@ -671,19 +678,19 @@ function MainApp(props) {
                       /> */}
 
 
-<Route
-  exact
-  path="/candidate"
-  render={(props) => <Candidate {...props}  selectedLanguage={selectedLanguage} />}
-/>
+                      <Route
+                        exact
+                        path="/candidate"
+                        render={(props) => <Candidate {...props} selectedLanguage={selectedLanguage} />}
+                      />
                       <Route exact path="/message" component={LiveMessage} />
-                     
 
-<Route
-  exact
-  path="/candidate/:candidateId"
-  render={(props) => <CandidateDetails {...props}  selectedLanguage={selectedLanguage} />}
-/>
+
+                      <Route
+                        exact
+                        path="/candidate/:candidateId"
+                        render={(props) => <CandidateDetails {...props} selectedLanguage={selectedLanguage} />}
+                      />
                       <Route
                         exact
                         path="/customer/:customerId"
@@ -700,7 +707,7 @@ function MainApp(props) {
                         component={ShipperDetails}
                       />
 
-<Route
+                      <Route
                         exact
                         path="/pitch/:investorLeadsId"
                         component={PitchDetails}
@@ -733,13 +740,13 @@ function MainApp(props) {
                       />
                       <Route exact path="/demand" component={Demand} />
 
-                      <Route exact path="/pitch" component={Pitch}/>
-                      <Route exact path="/deal" component={Deal}/>
-                      <Route exact path="/contactInvest" component={ContactInvest}/>
-                      <Route exact path="/investor" component={Investor}/>
-                      <Route exact path="/investor/:investorId"  component={InvestorDetail} />
-                      <Route exact path="/contactinvest/:contactId"  component={ContactInvestDetail} />
-                      <Route exact path="/dealDetails/:invOpportunityId" component={DealDetail}/>
+                      <Route exact path="/pitch" component={Pitch} />
+                      <Route exact path="/deal" component={Deal} />
+                      <Route exact path="/contactInvest" component={ContactInvest} />
+                      <Route exact path="/investor" component={Investor} />
+                      <Route exact path="/investor/:investorId" component={InvestorDetail} />
+                      <Route exact path="/contactinvest/:contactId" component={ContactInvestDetail} />
+                      <Route exact path="/dealDetails/:invOpportunityId" component={DealDetail} />
 
                       <Route path="**" component={PageNotFound} />
                     </Switch>
@@ -775,8 +782,8 @@ function MainApp(props) {
       <AddCandidateResumeModal
         addCandidateResumeModal={props.addCandidateResumeModal}
         handleCandidateResumeModal={props.handleCandidateResumeModal}
-        // handleResponseData={this.handleResponseData}
-        // responseData={this.state.responseData}
+      // handleResponseData={this.handleResponseData}
+      // responseData={this.state.responseData}
       />
 
       <AddCallModal
