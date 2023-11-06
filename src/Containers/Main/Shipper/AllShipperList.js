@@ -222,6 +222,7 @@ import UpdateShipperModal from "./UpdateShipperModal";
 import AddShipperOrderModal from "./AddShipperOrderModal";
 import Highlighter from "react-highlight-words";
 import { OnlyWrapCard } from "../../../Components/UI/Layout";
+import { Link } from "../../../Components/Common";
 
 function AllShipperList(props) {
   useEffect(() => {
@@ -358,7 +359,11 @@ Name
 
 
 <div class=" font-normal text-[0.82rem] text-cardBody font-poppins">
-{item.shipperName}
+{/* {item.shipperName} */}
+<Link
+          toUrl={`shipper/${item.shipperId}`}
+          title={`${item.shipperName}`}
+        >{item.shipperName}</Link>&
 </div>
 
 </div>
