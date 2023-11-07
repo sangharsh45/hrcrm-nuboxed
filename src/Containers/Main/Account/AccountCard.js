@@ -21,7 +21,6 @@ import Highlighter from "react-highlight-words";
 import moment from "moment";
 import AccountDetailsView from "./AccountDetailsView";
 import UpdateAccountModal from "./UpdateAccountModal";
-import AddAccountOrderModal from "./AddAccountOrderModal";
 import AddAccountActivityModal from "./AddAccountActivityModal";
 import { OnlyWrapCard } from "../../../Components/UI/Layout";
 // import BillingAddressModal from "../DistributorBillingAddress/BillingAddressModal";
@@ -131,203 +130,203 @@ function AccountTable(props) {
     clearFilters();
     setSearchText("");
   }
-  return(
+  return (
     <>
-    <OnlyWrapCard style={{height:"80vh"}}>
-    {props.distributorsByUserId.map((item) => {
-      return (
-        <>
-         <div className="flex justify-between mt-2 "
-                      // style={hrStyle}
-                      style={{
-                        borderBottom: "3px dotted #515050"
-                      }}
-                    >
-     <div class=" flex flex-row justify-evenly w-wk max-sm:flex-col">
-     <div className=" flex font-medium flex-col md:w-44 max-sm:justify-between w-full max-sm:flex-row ">
-    
-    <div class=" text-sm text-cardBody font-medium font-poppins">
-    
-    Name
-    
-    </div> 
-    
-    
-    <div class=" font-normal text-[0.82rem] text-cardBody font-poppins">
-    <AccountDetailsView
-              distributorId={item.distributorId}
-              name={item.name}
-            />
-    </div>
-    
-    </div>
-    <div className=" flex font-medium flex-col md:w-44 max-sm:justify-between w-full max-sm:flex-row ">
-    
-    <div class=" text-sm text-cardBody font-medium font-poppins">
-    
-    Work
-    
-    </div> 
-    
-    
-    <div class=" font-normal text-[0.82rem] text-cardBody font-poppins">
-    {item.dialCode} {item.phoneNo}
-    </div>
-    
-    </div>
-    <div className=" flex font-medium flex-col md:w-44 max-sm:justify-between w-full max-sm:flex-row ">
-    
-    <div class=" text-sm text-cardBody font-medium font-poppins">
-    
-    Website
-    
-    </div> 
-    
-    
-    <div class=" font-normal text-[0.82rem] text-cardBody font-poppins">
-    {item.url} 
-    </div>
-    
-    </div>
-    
-    <div className=" flex font-medium flex-col md:w-44 max-sm:justify-between w-full max-sm:flex-row ">
-    
-    <div class=" text-sm text-cardBody font-medium font-poppins">
-    
-    Type
-    
-    </div> 
-    
-    
-    <div class=" font-normal text-[0.82rem] text-cardBody font-poppins">
-    {item.clientName} 
-    </div>
-    
-    </div>
-    <div className=" flex font-medium flex-col md:w-44 max-sm:justify-between w-full max-sm:flex-row ">
-    
-    <div class=" text-sm text-cardBody font-medium font-poppins">
-    
-    Payment
-    
-    </div> 
-    
-    
-    <div class=" font-normal text-[0.82rem] text-cardBody font-poppins">
-    {item.payment} 
-    </div>
-    
-    </div>
-    <div className=" flex font-medium flex-col md:w-44 max-sm:justify-between w-full max-sm:flex-row ">
-    
-    <div class=" text-sm text-cardBody font-medium font-poppins">
-    
-    VAT
-    
-    </div> 
-    
-    
-    <div class=" font-normal text-[0.82rem] text-cardBody font-poppins">
-    {item.countryName}
-    </div>
-    
-    </div>
-    <div className=" flex font-medium flex-col md:w-44 max-sm:justify-between w-full max-sm:flex-row ">
-    
-    <div class=" text-sm text-cardBody font-medium font-poppins">
-    
-    Invoice Address
-    
-    </div> 
-    
-    
-    <div class=" font-normal text-[0.82rem] text-cardBody font-poppins">
-    {item.addresses[0].address1 || ""} ${item.addresses[0]
-          .address2 || ""} ${item.addresses[0].street || ""} ${item.addresses[0].city || ""}`;
-      
-    </div>
-    
-    </div>
-    <div className=" flex font-medium flex-col md:w-44 max-sm:justify-between w-full max-sm:flex-row ">
-    
-    <div class=" text-sm text-cardBody font-medium font-poppins">
-    
-    Pin Code
-    
-    </div> 
-    
-    
-    <div class=" font-normal text-[0.82rem] text-cardBody font-poppins">
-    {item.addresses[0].pinCode || ""}
-    </div>
-    
-    </div>
-    <div class="flex flex-col">
-    <Tooltip title="Contacts">
-            <div
-              onClick={() => {
-                handleBillingAddressModal(true)
-                handleSetCurrentDistributorId(item.distributorId);
-              }}>
-            </div>
-          </Tooltip>
-          <Tooltip title="Order">
-
-<div
-  onClick={() => {
-    props.handleDistributorOrderModal(true);
-    handleSetCurrentDistributorId(item.distributorId);
-  }}
-/>
-</Tooltip>
-    
-            </div>
-            <div class="flex flex-col">
-            <Tooltip title="Activity">
-            <span>
-              <i
-                class="fab fa-connectdevelop"
-                style={{ cursor: "pointer" }}
-                onClick={() => {
-                  props.handleDistributorActivityTableModal(true);
-                  handleSetCurrentDistributorId(item.distributorId);
+      <OnlyWrapCard style={{ height: "80vh" }}>
+        {props.distributorsByUserId.map((item) => {
+          return (
+            <>
+              <div className="flex justify-between mt-2 "
+                // style={hrStyle}
+                style={{
+                  borderBottom: "3px dotted #515050"
                 }}
-              ></i>
-            </span>
-          </Tooltip>
-          <Tooltip title="Edit">
-            <div
-              style={{ cursor: "pointer" }}
-              onClick={() => {
-                props.setEditDistributor(item);
-                handleUpdateDistributorModal(true);
-                handleSetCurrentDistributorId(item.distributorId);
-              }}
-            />
-          </Tooltip>
-          <Tooltip title="Delete Client">
-              <Popconfirm
-                title="Do you want to delete?"
-                onConfirm={() => props.deleteDistributorData(item.distributorId)}
               >
-                <DeleteOutlined
+                <div class=" flex flex-row justify-evenly w-wk max-sm:flex-col">
+                  <div className=" flex font-medium flex-col md:w-44 max-sm:justify-between w-full max-sm:flex-row ">
 
-                  style={{ cursor: "pointer", color: "red" }}
-                />
-              </Popconfirm>
-            </Tooltip>
-            </div>
-    
-     </div>
-    
-    
-    
-    
+                    <div class=" text-sm text-cardBody font-medium font-poppins">
+
+                      Name
+
                     </div>
-        </>
-      )
-    })}
-    
+
+
+                    <div class=" font-normal text-[0.82rem] text-cardBody font-poppins">
+                      <AccountDetailsView
+                        distributorId={item.distributorId}
+                        name={item.name}
+                      />
+                    </div>
+
+                  </div>
+                  <div className=" flex font-medium flex-col md:w-44 max-sm:justify-between w-full max-sm:flex-row ">
+
+                    <div class=" text-sm text-cardBody font-medium font-poppins">
+
+                      Work
+
+                    </div>
+
+
+                    <div class=" font-normal text-[0.82rem] text-cardBody font-poppins">
+                      {item.dialCode} {item.phoneNo}
+                    </div>
+
+                  </div>
+                  <div className=" flex font-medium flex-col md:w-44 max-sm:justify-between w-full max-sm:flex-row ">
+
+                    <div class=" text-sm text-cardBody font-medium font-poppins">
+
+                      Website
+
+                    </div>
+
+
+                    <div class=" font-normal text-[0.82rem] text-cardBody font-poppins">
+                      {item.url}
+                    </div>
+
+                  </div>
+
+                  <div className=" flex font-medium flex-col md:w-44 max-sm:justify-between w-full max-sm:flex-row ">
+
+                    <div class=" text-sm text-cardBody font-medium font-poppins">
+
+                      Type
+
+                    </div>
+
+
+                    <div class=" font-normal text-[0.82rem] text-cardBody font-poppins">
+                      {item.clientName}
+                    </div>
+
+                  </div>
+                  <div className=" flex font-medium flex-col md:w-44 max-sm:justify-between w-full max-sm:flex-row ">
+
+                    <div class=" text-sm text-cardBody font-medium font-poppins">
+
+                      Payment
+
+                    </div>
+
+
+                    <div class=" font-normal text-[0.82rem] text-cardBody font-poppins">
+                      {item.payment}
+                    </div>
+
+                  </div>
+                  <div className=" flex font-medium flex-col md:w-44 max-sm:justify-between w-full max-sm:flex-row ">
+
+                    <div class=" text-sm text-cardBody font-medium font-poppins">
+
+                      VAT
+
+                    </div>
+
+
+                    <div class=" font-normal text-[0.82rem] text-cardBody font-poppins">
+                      {item.countryName}
+                    </div>
+
+                  </div>
+                  <div className=" flex font-medium flex-col md:w-44 max-sm:justify-between w-full max-sm:flex-row ">
+
+                    <div class=" text-sm text-cardBody font-medium font-poppins">
+
+                      Invoice Address
+
+                    </div>
+
+
+                    <div class=" font-normal text-[0.82rem] text-cardBody font-poppins">
+                      {item.addresses[0].address1 || ""} ${item.addresses[0]
+                        .address2 || ""} ${item.addresses[0].street || ""} ${item.addresses[0].city || ""}`;
+
+                    </div>
+
+                  </div>
+                  <div className=" flex font-medium flex-col md:w-44 max-sm:justify-between w-full max-sm:flex-row ">
+
+                    <div class=" text-sm text-cardBody font-medium font-poppins">
+
+                      Pin Code
+
+                    </div>
+
+
+                    <div class=" font-normal text-[0.82rem] text-cardBody font-poppins">
+                      {item.addresses[0].pinCode || ""}
+                    </div>
+
+                  </div>
+                  <div class="flex flex-col">
+                    <Tooltip title="Contacts">
+                      <div
+                        onClick={() => {
+                          handleBillingAddressModal(true)
+                          handleSetCurrentDistributorId(item.distributorId);
+                        }}>
+                      </div>
+                    </Tooltip>
+                    <Tooltip title="Order">
+
+                      <div
+                        onClick={() => {
+                          props.handleDistributorOrderModal(true);
+                          handleSetCurrentDistributorId(item.distributorId);
+                        }}
+                      />
+                    </Tooltip>
+
+                  </div>
+                  <div class="flex flex-col">
+                    <Tooltip title="Activity">
+                      <span>
+                        <i
+                          class="fab fa-connectdevelop"
+                          style={{ cursor: "pointer" }}
+                          onClick={() => {
+                            props.handleDistributorActivityTableModal(true);
+                            handleSetCurrentDistributorId(item.distributorId);
+                          }}
+                        ></i>
+                      </span>
+                    </Tooltip>
+                    <Tooltip title="Edit">
+                      <div
+                        style={{ cursor: "pointer" }}
+                        onClick={() => {
+                          props.setEditDistributor(item);
+                          handleUpdateDistributorModal(true);
+                          handleSetCurrentDistributorId(item.distributorId);
+                        }}
+                      />
+                    </Tooltip>
+                    <Tooltip title="Delete Client">
+                      <Popconfirm
+                        title="Do you want to delete?"
+                        onConfirm={() => props.deleteDistributorData(item.distributorId)}
+                      >
+                        <DeleteOutlined
+
+                          style={{ cursor: "pointer", color: "red" }}
+                        />
+                      </Popconfirm>
+                    </Tooltip>
+                  </div>
+
+                </div>
+
+
+
+
+              </div>
+            </>
+          )
+        })}
+
       </OnlyWrapCard>
       <UpdateAccountModal
         distributorId={currentDistributorId}
@@ -335,12 +334,7 @@ function AccountTable(props) {
         handleSetCurrentDistributorId={handleSetCurrentDistributorId}
         handleUpdateDistributorModal={handleUpdateDistributorModal}
       />
-      <AddAccountOrderModal
-        addDistributorOrderModal={props.addDistributorOrderModal}
-        handleDistributorOrderModal={props.handleDistributorOrderModal}
-        distributorId={currentDistributorId}
-        handleSetCurrentDistributorId={handleSetCurrentDistributorId}
-      />
+
       <AddAccountActivityModal
         addDistributorActivityTableModal={
           props.addDistributorActivityTableModal
@@ -352,34 +346,33 @@ function AccountTable(props) {
         handleSetCurrentDistributorId={handleSetCurrentDistributorId}
       />
     </>
-    )
-  }
-  const mapStateToProps = ({ distributor, auth }) => ({
-    distributorsByUserId: distributor.distributorsByUserId,
-    fetchingDistributorsByUserId: distributor.fetchingDistributorsByUserId,
-    fetchingDistributorsByUserIdError:
-      distributor.fetchingDistributorsByUserIdError,
-    userId: auth.userDetails.userId,
-    updateDistributorModal: distributor.updateDistributorModal,
-    addDistributorOrderModal: distributor.addDistributorOrderModal,
-    addDistributorActivityTableModal:
-      distributor.addDistributorActivityTableModal,
-    addBillToAddress: distributor.addBillToAddress
-  });
-  
-  const mapDispatchToProps = (dispatch) =>
-    bindActionCreators(
-      {
-        handleUpdateDistributorModal,
-        getDistributorsByUserId,
-        setEditDistributor,
-        handleDistributorOrderModal,
-        handleDistributorActivityTableModal,
-        deleteDistributorData,
-        handleBillingAddressModal
-      },
-      dispatch
-    );
-  
-  export default connect(mapStateToProps, mapDispatchToProps)(AccountTable);
-  
+  )
+}
+const mapStateToProps = ({ distributor, auth }) => ({
+  distributorsByUserId: distributor.distributorsByUserId,
+  fetchingDistributorsByUserId: distributor.fetchingDistributorsByUserId,
+  fetchingDistributorsByUserIdError:
+    distributor.fetchingDistributorsByUserIdError,
+  userId: auth.userDetails.userId,
+  updateDistributorModal: distributor.updateDistributorModal,
+  addDistributorOrderModal: distributor.addDistributorOrderModal,
+  addDistributorActivityTableModal:
+    distributor.addDistributorActivityTableModal,
+  addBillToAddress: distributor.addBillToAddress
+});
+
+const mapDispatchToProps = (dispatch) =>
+  bindActionCreators(
+    {
+      handleUpdateDistributorModal,
+      getDistributorsByUserId,
+      setEditDistributor,
+      handleDistributorOrderModal,
+      handleDistributorActivityTableModal,
+      deleteDistributorData,
+      handleBillingAddressModal
+    },
+    dispatch
+  );
+
+export default connect(mapStateToProps, mapDispatchToProps)(AccountTable);

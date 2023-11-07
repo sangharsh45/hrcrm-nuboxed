@@ -1,10 +1,22 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { StyledTable } from '../../../../../Components/UI/Antd';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import moment from 'moment/moment';
+import { getDistributorOrderByDistributorId, handleInventoryLocationInOrder } from "../../AccountAction"
+import { Button, Tooltip } from 'antd';
+import AddLocationInOrder from './AddLocationInOrder';
 
-const AccountOrderTable = () => {
+const AccountOrderTable = (props) => {
+
+    useEffect(() => {
+        props.getDistributorOrderByDistributorId(props.distributorId)
+    }, [])
+    const [particularRowData, setParticularRowData] = useState({});
+
+    function handleSetParticularOrderData(item) {
+        setParticularRowData(item);
+    }
 
     const columns = [
         {
@@ -238,32 +250,32 @@ const AccountOrderTable = () => {
         //         )
         //     }
         // },
-        // {
-        //     title: "",
-        //     width: "16%",
-        //     render: (name, item, i) => {
-        //         //debugger
-        //         return (
-        //             <>
-        //                 {item.transferInd === 0 ? (
-        //                     <Tooltip title="Add Inventory Location">
-        //                         <Button
-        //                             style={{ cursor: "pointer", fontSize: "13px", backgroundColor: "#3096e9", color: "white" }}
-        //                         //   onClick={() => {
-        //                         //     handleSetParticularOrderData(item);
-        //                         //     props.handleInventoryLocationInOrder(true);
-        //                         //   }}
-        //                         >
-        //                             Order Pickup
-        //                         </Button>
-        //                     </Tooltip>
+        {
+            title: "",
+            width: "16%",
+            render: (name, item, i) => {
+                //debugger
+                return (
+                    <>
+                        {item.transferInd === 0 ? (
+                            <Tooltip title="Add Inventory Location">
+                                <Button
+                                    style={{ cursor: "pointer", fontSize: "13px", backgroundColor: "#3096e9", color: "white" }}
+                                    onClick={() => {
+                                        handleSetParticularOrderData(item);
+                                        props.handleInventoryLocationInOrder(true);
+                                    }}
+                                >
+                                    Order Pickup
+                                </Button>
+                            </Tooltip>
 
-        //                 ) : null
-        //                 }
-        //             </>
-        //         );
-        //     },
-        // },
+                        ) : null
+                        }
+                    </>
+                );
+            },
+        },
         // {
         //     width: "5%",
         //     render: (text, item) => {
@@ -294,12 +306,23 @@ const AccountOrderTable = () => {
             <StyledTable
                 columns={columns}
                 pagination={false}
-            //   dataSource={}
+                dataSource={props.distributorOrder}
+            />
+            <AddLocationInOrder
+                particularRowData={particularRowData}
+                addInventoryInOrder={props.addInventoryInOrder}
+                handleInventoryLocationInOrder={props.handleInventoryLocationInOrder}
             />
         </>
     )
 }
-const mapStateToProps = ({ }) => ({});
-const mapDispatchToProps = dispatch => bindActionCreators({}, dispatch);
+const mapStateToProps = ({ distributor }) => ({
+    distributorOrder: distributor.distributorOrder,
+    addInventoryInOrder: distributor.addInventoryInOrder,
+});
+const mapDispatchToProps = dispatch => bindActionCreators({
+    getDistributorOrderByDistributorId,
+    handleInventoryLocationInOrder
+}, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(AccountOrderTable);

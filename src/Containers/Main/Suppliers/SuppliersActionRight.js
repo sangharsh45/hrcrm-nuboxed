@@ -9,29 +9,28 @@ import { FlexContainer } from "../../../Components/UI/Layout";
 import { Tooltip } from "antd";
 import { handleSuppliersModal } from "../SuppliersAction";
 import AddSuppliersModal from "./AddSuppliersModal";
-import {solid} from '@fortawesome/fontawesome-svg-core/import.macro';
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 
 class SuppliersActionRight extends React.Component {
   render() {
-    const { handleSuppliersModal, addSuppliersModal ,user,viewType} = this.props;
+    const { handleSuppliersModal, addSuppliersModal, user, viewType } = this.props;
 
     return (
       <>
-      {user.functionName === "Production" && user.designation === "Manager" && 
-      viewType === "grid" ?
+        {user.functionName === "Production" && user.designation === "Manager" &&
+          viewType === "grid" ?
           <Tooltip title="Export Supplier">
             <Button
               //type="primary"
               className="export"
               href={`${base_url}/export/supplier/${user.userId}`}
             >
-              <FontAwesomeIcon icon={solid("file-excel")}/>
-              {/* <i class="fas fa-download"></i> */}
+
+              <i class="fas fa-download"></i>
             </Button>
           </Tooltip>
-          :null}
-       {/* {user.functionName === "Production" && user.designation === "Manager" && viewType === "all" ?
+          : null}
+        {/* {user.functionName === "Production" && user.designation === "Manager" && viewType === "all" ?
           <Tooltip title="Download Suppliers Library">
             <Button
               type="primary"
@@ -60,7 +59,7 @@ class SuppliersActionRight extends React.Component {
   }
 }
 
-const mapStateToProps = ({ suppliers,auth }) => ({
+const mapStateToProps = ({ suppliers, auth }) => ({
   addSuppliersModal: suppliers.addSuppliersModal,
   user: auth.userDetails,
   //   role: auth.userDetails.role,

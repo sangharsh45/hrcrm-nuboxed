@@ -41,14 +41,14 @@ class AccountStepper extends Component {
             {
                 title: 'Order',
                 icon: <UserOutlined />,
-                content: <AddOrderInAccount />,
+                content: <AddOrderInAccount distributorId={this.props.distributorId} />,
             },
             {
                 title: 'Add Phone details',
                 icon: <PhoneOutlined
                     style={{ color: "blue" }}
                 />,
-                content: <AddPhoneExcel />,
+                content: <AddPhoneExcel distributorId={this.props.distributorId} />,
             },
 
 

@@ -24,7 +24,7 @@ class AddAccountModal extends Component {
                     onClose={() => handleLinkDistributorOrderConfigureModal(false)}
                     footer={null}
                 >
-                    <AccountStepper />
+                    <AccountStepper distributorId={this.props.distributorId} />
 
                 </StyledDrawer>
             </div>
