@@ -54,7 +54,7 @@ function SuppliesTable(props) {
       width: "2%",
     },
     {
-      title: "Hsn",
+      title: "HSN",
       dataIndex: "hsn",
       width: "8%",
     },

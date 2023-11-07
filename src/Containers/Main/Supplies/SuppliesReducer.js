@@ -58,7 +58,11 @@ const initialState = {
 
     fetchingMaterialPriceById: false,
     fetchingMaterialPriceByIdError: false,
-    materialPrice: []
+    materialPrice: [],
+
+    fetchingBrandModel: false,
+    fetchingBrandModelError: false,
+    brandModel: [],
 };
 
 export const suppliesReducer = (state = initialState, action) => {
@@ -300,6 +304,14 @@ export const suppliesReducer = (state = initialState, action) => {
                 fetchingTaggedBrandById: false,
                 fetchingTaggedBrandByIdError: true,
             };
+
+            case types.GET_BRAND_MODEL_REQUEST:
+                return { ...state, fetchingBrandModel: true };
+            case types.GET_BRAND_MODEL_SUCCESS:
+                return { ...state, fetchingBrandModel: false, brandModel: action.payload };
+            case types.GET_BRAND_MODEL_FAILURE:
+                return { ...state, fetchingBrandModel: false, fetchingBrandModelError: true };
+
         default:
             return state;
     }

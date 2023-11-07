@@ -1,12 +1,12 @@
 import React, { Component, lazy, Suspense } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { StyledTabs } from "../../../Components/UI/Antd";
+import { StyledTabs } from "../../../../../Components/UI/Antd";
 import {
   FlexContainer,
   TabsWrapper,
-} from "../../../Components/UI/Layout";
-import { Breadcrumb, Button, message, Tooltip } from "antd";
+} from "../../../../../Components/UI/Layout";
+import { message, Tooltip } from "antd";
 import {
   handleLinkShipperOrderConfigureModal,
   handleShipperSubscriptionConfigureModal,
@@ -15,14 +15,58 @@ import {
   getShipperOrderByShipperId,
   handleShipperDocumentUploadModal,
   handleShipperContactModal,
-} from "./ShipperAction";
+} from "../../ShipperAction";
 import moment from "moment";
 import {
   PlusOutlined,
   ShoppingCartOutlined,
   DeleteOutlined,
 } from "@ant-design/icons";
-import ContactShipperTable from "./ContactShipperTable";
+
+// const ShipperDeletedOrderTable = lazy(() =>
+//   import("./ShipperOrderTab/ShipperDeletedOrderTable")
+// );
+const ShipperDocumentTable = lazy(() =>
+  import("./ShipperDocumentTab/ShipperDocumentTable")
+);
+// const ShipperActivityTable = lazy(() =>
+//   import("./ShipperActivitytab/ShipperActivityTable")
+// );
+
+// const LinkShipperOrderConfigureModal = lazy(() =>
+//   import("./ShipperOrderTab/LinkShipperOrderConfigureModal")
+// );
+
+const AddContactModal = lazy(() =>
+  import("./ShipperContactTab/AddContactModal")
+);
+const ContactShipperTable = lazy(() =>
+  import("./ShipperContactTab/ContactShipperTable")
+);
+// const AddShipperDocumentModal = lazy(() =>
+//   import("./ShipperDocumentTab/AddShipperDocumentModal")
+// );
+const ShipperHistoryTable = lazy(() =>
+  import("./ShipperHistorytab/ShipperHistoryTable")
+);
+const LinkedShipperNotes = lazy(() =>
+  import("../ShipperDetailsTab/ShipperNotetab/LinkedShipperNotes")
+);
+// const AddShipperActivityModal = lazy(() =>import(
+//     "../ShipperDetailsTab/ShipperActivitytab/AddShipperActivityModal"
+//   )
+// );
+// const ShipperSubscriptionConfigureModal = lazy(() =>
+//   import(
+//     "../ShipperDetailsTab/ShipperOrderTab/ShipperSubscriptionConfigureModal"
+//   )
+// );
+// const ShipperOrderGeneratorTable = lazy(() =>
+//   import("../ShipperDetailsTab/ShipperOrderTab/ShipperOrderGeneratorTable")
+// );
+const ShipperDispatchTable = lazy(() =>
+  import("./ShipperOrderTab/ShipperDispatchTable")
+);
 
 const TabPane = StyledTabs.TabPane;
 
@@ -106,26 +150,101 @@ class ShipperDetailsTab extends Component {
       <>
         <TabsWrapper>
           <StyledTabs defaultActiveKey="1" onChange={this.handleTabChange}>
-            {/* <TabPane
+            <TabPane
               tab={
                 <>
-                  
+                  {/* <span onClick={() => this.handleOrderCreateClick(false)}> */}
                   <i class="far fa-share-square"></i>&nbsp; Dispatch
-                 
+                  {/* </span> */}
+                  {/* {activeKey === "1" && (
+                    <>
+                      <Tooltip title="Create">
+                        <PlusOutlined
+                          onClick={() => this.handleOrderCreateClick(true)}
+                          size="14px"
+                          style={{ verticalAlign: "center", marginLeft: "5px" }}
+                        />
+                      </Tooltip>
+                      <Tooltip title="Delete">
+                        <DeleteOutlined
+                          onClick={() => this.handleDeleteOrderClick(true)}
+                          size="14px"
+                          style={{
+                            verticalAlign: "center",
+                            color: this.state.showDel ? "red" : "#1890ff",
+                          }}
+                        />
+                      </Tooltip>
+                    </>
+                  )} */}
                 </>
               }
               key="1"
             >
-              
+              {/* {this.state.breadCumb ? (
+                <>
+                  <Breadcrumb
+                    style={{
+                      marginBottom: "10px",
+                      marginTop: "10px",
+                      marginLeft: "10px",
+                    }}
+                  >
+                    <Breadcrumb.Item>
+                      Click on Cart to add items from Catalogue
+                      <Tooltip title="Create">
+                        <ShoppingCartOutlined
+                          // type="shopping-cart"
+                          // tooltipTitle="Create"
+                          onClick={() => {
+                            this.props.handleLinkShipperOrderConfigureModal(
+                              true
+                            );
+                          }}
+                          size="14px"
+                          style={{
+                            marginLeft: "6px",
+                            verticalAlign: "center",
+                            color: "tomato",
+                          }}
+                        />
+                      </Tooltip>
+                    </Breadcrumb.Item>
+                  </Breadcrumb>
+
+                  <ShipperOrderGeneratorTable />
+
+                  <FlexContainer
+                    justifyContent="flex-end"
+                    style={{ marginTop: "5px" }}
+                  >
+                    <Button
+                      type="primary"
+                      disabled={!this.props.orderForGenerating.length}
+                      onClick={() =>
+                        this.props.handleShipperSubscriptionConfigureModal(true)
+                      }
+                    >
+                      Generate Order
+                    </Button>
+                  </FlexContainer>
+                </>
+              ) : this.state.breadCumb1 ? (
+                <Suspense fallback={"Loading ..."}>
+                  <ShipperDeletedOrderTable
+                    shipperId={this.props.shipper.shipperId}
+                  />
+                </Suspense>
+              ) : ( */}
               <Suspense fallback={"Loading ..."}>
                 <ShipperDispatchTable
                   shipperId={this.props.shipper.shipperId}
                 />
               </Suspense>
-              
-            </TabPane> */}
+              {/* )} */}
+            </TabPane>
 
-            {/* <TabPane
+            <TabPane
               tab={
                 <>
                   <span>
@@ -149,13 +268,13 @@ class ShipperDetailsTab extends Component {
               key="2"
             >
               <Suspense fallback={"Loading ..."}>
-                <ShipperActivityTable
+                {/* <ShipperActivityTable
                   shipperId={this.props.shipper.shipperId}
-                />
+                /> */}
               </Suspense>
-            </TabPane> */}
+            </TabPane>
 
-            {/* <TabPane
+            <TabPane
               tab={
                 <>
                   <span>
@@ -170,8 +289,8 @@ class ShipperDetailsTab extends Component {
                 {" "}
                 <LinkedShipperNotes />
               </Suspense>
-            </TabPane> */}
-            {/* <TabPane
+            </TabPane>
+            <TabPane
               tab={
                 <>
                   <span>
@@ -186,8 +305,8 @@ class ShipperDetailsTab extends Component {
                 {" "}
                 <ShipperHistoryTable />
               </Suspense>
-            </TabPane> */}
-            {/* <TabPane
+            </TabPane>
+            <TabPane
               tab={
                 <>
                   <span>
@@ -219,7 +338,7 @@ class ShipperDetailsTab extends Component {
                   shipperId={this.props.shipper.shipperId}
                 />
               </Suspense>
-            </TabPane> */}
+            </TabPane>
 
             <TabPane
               tab={
@@ -262,8 +381,8 @@ class ShipperDetailsTab extends Component {
             handleLinkShipperOrderConfigureModal={
               this.props.handleLinkShipperOrderConfigureModal
             }
-          /> */}
-          {/* <ShipperSubscriptionConfigureModal
+          />
+          <ShipperSubscriptionConfigureModal
             onChange={this.onChange}
             value={this.state.value}
             onChangeCustom={this.onChangeCustom}
@@ -275,21 +394,21 @@ class ShipperDetailsTab extends Component {
               this.props.handleShipperSubscriptionConfigureModal
             }
             handleGenerateOrderInShipper={this.handleGenerateOrderInShipper}
-          /> */}
-          {/* <AddShipperActivityModal
+          />
+          <AddShipperActivityModal
             addShipperActivityModal={this.props.addShipperActivityModal}
             handleShipperActivityModal={this.props.handleShipperActivityModal}
-          /> */}
-          {/* <AddShipperDocumentModal
+          />
+          <AddShipperDocumentModal
             shipperDocumentUploadModal={this.props.shipperDocumentUploadModal}
             handleShipperDocumentUploadModal={
               this.props.handleShipperDocumentUploadModal
             }
           /> */}
-          {/* <AddContactModal
+          <AddContactModal
             shipperContactModal={this.props.shipperContactModal}
             handleShipperContactModal={this.props.handleShipperContactModal}
-          /> */}
+          />
         </Suspense>
       </>
     );

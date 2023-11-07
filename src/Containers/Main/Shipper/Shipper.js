@@ -10,11 +10,10 @@ import {
   getAllShipperList,
 } from "./ShipperAction";
 import AddShipperModal from "./AddShipperModal";
-import ShipperTable from "./ShipperTable";
 import AllShipperList from "./AllShipperList";
 import ShipperDeleteTable from "./ShipperDeleteTable";
 import ShipperDashboard from "./ShipperDashboard";
-
+const ShipperTable =lazy(()=>import("./ShipperTable"));
 
 
 class Shipper extends Component {

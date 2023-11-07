@@ -1161,21 +1161,8 @@ export const shipperReducer = (state = initialState, action) => {
         deletingShipperDataError: true,
       };
 
-    //get all shipper
-    case types.GET_ALL_SHIPPER_REQUEST:
-      return { ...state, fetchingAllShipper: true };
-    case types.GET_ALL_SHIPPER_SUCCESS:
-      return {
-        ...state,
-        fetchingAllShipper: false,
-        allShipper: action.payload,
-      };
-    case types.GET_ALL_SHIPPER_FAILURE:
-      return {
-        ...state,
-        fetchingAllShipper: false,
-        fetchingAllShipperError: true,
-      };
+
+
 
     ///handle contact shipper
     case types.HANDLE_SHIPPER_CONTACT_MODAL:

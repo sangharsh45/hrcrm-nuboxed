@@ -165,6 +165,7 @@ const Investor = lazy(() => import("../Investor/Investor"));
 const InvestorDetail = lazy(() => import("../Investor/Child/InvestorDetail/InvestorDetail"));
 const ContactInvestDetail = lazy(() => import("../ContactInvest/Child/ContactInvestDetail/ContactInvestDetail"));
 const DealDetail = lazy(() => import("../Deal/Child/DealDetail/DealDetail"));
+const Catalogue = lazy(() => import("../Catalogue/Catalogue"));
 
 function MainApp(props) {
   const [visible, setVisible] = useState(false);
@@ -683,7 +684,6 @@ function MainApp(props) {
                       component={Candidate}   
                       /> */}
 
-
                       <Route
                         exact
                         path="/candidate"
@@ -753,7 +753,7 @@ function MainApp(props) {
                       <Route exact path="/investor/:investorId" component={InvestorDetail} />
                       <Route exact path="/contactinvest/:contactId" component={ContactInvestDetail} />
                       <Route exact path="/dealDetails/:invOpportunityId" component={DealDetail} />
-
+                      <Route exact path="/catalogue" component={Catalogue} />
                       <Route path="**" component={PageNotFound} />
                     </Switch>
                   </Suspense>
