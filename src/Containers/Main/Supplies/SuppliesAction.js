@@ -360,3 +360,28 @@ export const getTaggedBrandById = (suppliesId) => (dispatch) => {
       });
     });
 };
+export const getBrandModel = () => (dispatch) => {
+  dispatch({
+      type: types.GET_BRAND_MODEL_REQUEST,
+  });
+  axios
+      .get(`${base_url2}/masterlist/masterList`, {
+          headers: {
+              Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+          },
+      })
+      .then((res) => {
+          console.log(res);
+          dispatch({
+              type: types.GET_BRAND_MODEL_SUCCESS,
+              payload: res.data,
+          });
+      })
+      .catch((err) => {
+          console.log(err);
+          dispatch({
+              type: types.GET_BRAND_MODEL_FAILURE,
+              payload: err,
+          });
+      });
+};

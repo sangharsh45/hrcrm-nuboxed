@@ -1,17 +1,17 @@
 import React, { Component, lazy, Suspense } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-// import { getShipperByShipperId } from "./ShipperAction";
+import { getShipperByShipperId } from "./ShipperAction";
 import { FlexContainer, MainWrapper } from "../../../Components/UI/Layout";
 import { withRouter } from "react-router";
 import { BundleLoader } from "../../../Components/Placeholder";
 import ShipperDetailsHeader from "./ShipperDetailsHeader";
-import ShipperDetailsRight from "./ShipperDetailsRight";
-import ShipperDetailsLeft from "./ShipperDetailsLeft";
+import ShipperDetailsRight from "./ShipperDetails/ShipperDetailsTab/ShipperDetailsRight";
+import ShipperDetailsLeft from "./ShipperDetails/ShipperDetailsLeft";
 
 class ShipperDetails extends Component {
   componentDidMount() {
-   // this.props.getShipperByShipperId(this.props.match.params.shipperId);
+   this.props.getShipperByShipperId(this.props.match.params.shipperId);
   }
   render() {
     const { shipper, fetchingShipperDetailsByShipperId } = this.props;
@@ -49,7 +49,7 @@ const mapStateToProps = ({ shipper }) => ({
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
-     // getShipperByShipperId,
+     getShipperByShipperId,
     },
     dispatch
   );

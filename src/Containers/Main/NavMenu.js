@@ -38,6 +38,8 @@ import NewspaperIcon from '@mui/icons-material/Newspaper';
 import TextSnippetIcon from '@mui/icons-material/TextSnippet';
 import ComputerIcon from '@mui/icons-material/Computer';
 import LibraryBooksIcon from '@mui/icons-material/LibraryBooks';
+import ViewInArIcon from '@mui/icons-material/ViewInAr';
+
 const SubMenu = Menu.SubMenu;
 
 function NavMenu (props) {
@@ -855,6 +857,18 @@ function NavMenu (props) {
                  </Link> 
                 </Menu.Item>
                 )}
+                 <Menu.Item key="/catalogue" style={{height:"27px",paddingLeft:"1rem"}}>
+                <Link to="/catalogue">
+                 <ViewInArIcon
+                style={{ fontSize: "large" }}
+                  />
+                  <span class="text-white text-ls ml-1"><FormattedMessage 
+                    id="app.catalogue"
+                   defaultMessage="Catalogue"
+               />
+                   </span>
+                 </Link> 
+                </Menu.Item>
                     { user.refurbishWorkshopInd === true && user.erpInd === true  && (
                
                <Menu.Item key="/refurbish" style={{height:"27px",paddingLeft:"1rem"}}>

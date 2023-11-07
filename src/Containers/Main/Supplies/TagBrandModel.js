@@ -22,7 +22,7 @@ function TagBrandModel(props) {
                 maskClosable={false}
                 // maskStyle={{transition: '0.5s filter linear', filter: 'blur(20px)', width: '100%', height: '100%', padding: '50px', backgroundColor: 'rgba(49, 56, 66,0.7)'}}
                 maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}
-                style={{ top: 40 }}
+                style={{marginTop:"5rem" }}
                 onClose={() => handleBrandModel(false)}
                 footer={null}
             >

@@ -165,7 +165,7 @@ class Suppliesform extends Component {
                     <div style={{ width: "47%" }}>
                       <Field
                         name="hsn"
-                        label="Hsn"
+                        label="HSN"
                         isColumn
                         width={"100%"}
                         inlineLabel

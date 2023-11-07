@@ -9,7 +9,7 @@ import {
   handleShipperActivityTableModal,
 } from "./ShipperAction";
 import ShipperDetailsView from "./ShipperDetailsView";
-import AddShipperActivityModal from "./AddShipperActivityModal";
+// import AddShipperActivityModal from "./AddShipperActivityModal";
 import APIFailed from "../../../Helpers/ErrorBoundary/APIFailed";
 
 function ShipperDeleteTable(props) {
@@ -174,12 +174,12 @@ function ShipperDeleteTable(props) {
         pagination={false}
         scroll={{ y: 320 }}
       />
-      <AddShipperActivityModal
+      {/* <AddShipperActivityModal
         addShipperActivityTableModal={props.addShipperActivityTableModal}
         handleShipperActivityTableModal={props.handleShipperActivityTableModal}
         shipperId={currentShipperId}
         handleSetCurrentShipperId={handleSetCurrentShipperId}
-      />
+      /> */}
       <Spacer />
     </>
   );

@@ -1,10 +1,10 @@
 import React, { lazy, Suspense } from "react";
-import { BundleLoader } from "../../../Components/Placeholder";
-import { StyledModal } from "../../../Components/UI/Antd";
-import { StyledTabs } from "../../../Components/UI/Antd";
-// const ShipperActivityTable = lazy(() =>
-//   import("./ShipperActivitytab/ShipperActivityTable")
-// );
+import { BundleLoader } from "../../../../../Components/Placeholder";
+import { StyledModal } from "../../../../../Components/UI/Antd";
+import { StyledTabs } from "../../../../../Components/UI/Antd";
+const ShipperActivityTable = lazy(() =>
+  import("./ShipperActivitytab/ShipperActivityTable")
+);
 
 const TabPane = StyledTabs.TabPane;
 
@@ -23,7 +23,7 @@ const AddShipperActivityModal = (props) => {
         footer={null}
       >
         <Suspense fallback={<BundleLoader />}></Suspense>
-        {/* <ShipperActivityTable shipperId={props.shipperId} /> */}
+        <ShipperActivityTable shipperId={props.shipperId} />
       </StyledModal>
     </div>
   );

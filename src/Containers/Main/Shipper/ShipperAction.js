@@ -60,7 +60,7 @@ export const getShipperByUserId = (userId) => (dispatch) => {
     type: types.GET_SHIPPER_BY_USER_ID_REQUEST,
   });
   axios
-    .get(`${base_url2}/shipper/all-shipper`,
+    .get(`${base_url2}/shipper/user/${userId}`,
       {
         headers: {
           Authorization: "Bearer " + sessionStorage.getItem("token") || "",
@@ -89,7 +89,11 @@ export const getShipperByShipperId = (id) => (dispatch) => {
     type: types.GET_SHIPPER_BY_SHIPPER_ID_REQUEST,
   });
   axios
-    .get(`${base_url}/shipper/${id}`)
+    .get(`${base_url2}/shipper/${id}`,{
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
     .then((res) => {
       console.log(res);
       dispatch({
@@ -139,7 +143,11 @@ export const getRecords = (userId) => (dispatch) => {
     type: types.GET_RECORDS_REQUEST,
   });
   axios
-    .get(`${base_url}/user/record/count/${userId}`, {})
+    .get(`${base_url2}/user/record/count/${userId}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
     .then((res) => {
       console.log(res);
       dispatch({
@@ -161,7 +169,11 @@ export const getAllRecords = () => (dispatch) => {
     type: types.GET_ALL_RECORDS_REQUEST,
   });
   axios
-    .get(`${base_url}/user/record/count`, {})
+    .get(`${base_url2}/user/record/count`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
     .then((res) => {
       console.log(res);
       dispatch({
@@ -482,7 +494,11 @@ export const getShipperHistory = (shipperId) => (dispatch) => {
     type: types.GET_SHIPPER_HISTORY_REQUEST,
   });
   axios
-    .get(`${base_url}/shipper/history/${shipperId}`)
+    .get(`${base_url2}/shipper/history/${shipperId}`,{
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
     .then((res) => {
       console.log(res);
       dispatch({
@@ -540,7 +556,7 @@ export const addShipperDocument = (data, cb) => (dispatch) => {
 export const getShipperDocument = (shipperId) => (dispatch) => {
   dispatch({ type: types.GET_SHIPPER_DOCUMENTS_REQUEST });
   axios
-    .get(`${base_url}/shipper/documentList/${shipperId}`, {
+    .get(`${base_url2}/shipper/documentList/${shipperId}`, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },
@@ -573,7 +589,11 @@ export const getShipperOrderByShipperId = (shipperId) => (dispatch) => {
     type: types.GET_SHIPPER_ORDER_BY_SHIPPER_ID_REQUEST,
   });
   axios
-    .get(`${base_url}/order/shipper/${shipperId}`)
+    .get(`${base_url2}/order/shipper/${shipperId}`,{
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
     .then((res) => {
       console.log(res);
       dispatch({
@@ -597,7 +617,11 @@ export const fetchingNewShipperOrder = (shipperId) => (dispatch) => {
     type: types.FETCHING_NEW_SHIPPER_ORDER_REQUEST,
   });
   axios
-    .get(`${base_url}/shipper/dispatch/${shipperId}`)
+    .get(`${base_url2}/shipper/dispatch/${shipperId}`,{
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
     .then((res) => {
       console.log(res);
       dispatch({
@@ -777,7 +801,7 @@ export const getOrderDetailsById = (orderId) => (dispatch) => {
 /**
  * get all the Shipper
  */
-export const getAllShipperList = (userId) => (dispatch) => {
+export const getAllShipperList = () => (dispatch) => {
   dispatch({
     type: types.GET_ALL_SHIPPER_LIST_REQUEST,
   });
@@ -950,7 +974,11 @@ export const getShipperOrderPayment = (orderId) => (dispatch) => {
     type: types.FETCHING_SHIPPER_PAYMENT_HISTORY_REQUEST,
   });
   axios
-    .get(`${base_url}/order/order-payment/${orderId}`, {})
+    .get(`${base_url2}/order/order-payment/${orderId}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
     .then((res) => {
       console.log(res);
       dispatch({
@@ -1150,31 +1178,6 @@ export const deleteShipperData = (id) => (dispatch, getState) => {
     });
 };
 //get all shipper
-export const getAllShipper = () => (dispatch) => {
-  dispatch({
-    type: types.GET_ALL_SHIPPER_REQUEST,
-  });
-  axios
-    .get(`${base_url}/shipper/all-shipper`, {
-      headers: {
-        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
-      },
-    })
-    .then((res) => {
-      console.log(res);
-      dispatch({
-        type: types.GET_ALL_SHIPPER_SUCCESS,
-        payload: res.data,
-      });
-    })
-    .catch((err) => {
-      console.log(err);
-      dispatch({
-        type: types.GET_ALL_SHIPPER_FAILURE,
-        payload: err,
-      });
-    });
-};
 
 //Contact
 
@@ -1194,7 +1197,11 @@ export const addContactShipper = (contact, shipperId) => (dispatch) => {
   });
 
   axios
-    .post(`${base_url}/contactPerson`, contact, {})
+    .post(`${base_url2}/contactPerson`, contact, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
     .then((res) => {
       console.log(res);
       dispatch(getContactShipperList(shipperId));
@@ -1221,7 +1228,11 @@ export const getContactShipperList = (shipperId) => (dispatch) => {
     type: types.GET_CONTACT_SHIPPER_LIST_BY_ID_REQUEST,
   });
   axios
-    .get(`${base_url}/shipper/contactPerson/${shipperId}`, {})
+    .get(`${base_url2}/shipper/contactPerson/${shipperId}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
     .then((res) => {
       console.log(res);
       dispatch({
@@ -1237,29 +1248,6 @@ export const getContactShipperList = (shipperId) => (dispatch) => {
       });
     });
 };
-
-//get contacts of shipper
-// export const getContactsOfShipper = (shipperId) => (dispatch) => {
-//   dispatch({
-//     type: types.GET_CONTACTS_OF_SHIPPER_REQUEST,
-//   });
-//   axios
-//     .get(`${base_url}/shipper/contactPerson/${shipperId}`)
-//     .then((res) => {
-//       console.log(res);
-//       dispatch({
-//         type: types.GET_CONTACTS_OF_SHIPPER_SUCCESS,
-//         payload: res.data,
-//       });
-//     })
-//     .catch((err) => {
-//       console.log(err);
-//       dispatch({
-//         type: types.GET_CONTACTS_OF_SHIPPER_FAILURE,
-//         payload: err,
-//       });
-//     });
-// };
 
 //SEARCH CONTACTS OF SHIPPER
 
@@ -1361,7 +1349,11 @@ export const getShipperDispatch = (shipperId) => (dispatch) => {
     type: types.GET_SHIPPER_DISPATCH_REQUEST,
   });
   axios
-    .get(`${base_url}/shipper/dispatch/${shipperId}`)
+    .get(`${base_url2}/shipper/dispatch/${shipperId}`,{
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
     .then((res) => {
       console.log(res);
       dispatch({

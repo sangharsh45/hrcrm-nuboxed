@@ -13,7 +13,7 @@ class SuppliesAddModal extends Component {
         return (
             <div>
                 <StyledDrawer
-                    title="Purchase"
+                    title="Material"
                     width="55vw"                   
                     visible={addSuppliesModal}
                     destroyOnClose
