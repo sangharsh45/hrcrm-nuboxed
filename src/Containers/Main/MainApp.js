@@ -684,7 +684,6 @@ function MainApp(props) {
                       component={Candidate}   
                       /> */}
 
-
                       <Route
                         exact
                         path="/candidate"
