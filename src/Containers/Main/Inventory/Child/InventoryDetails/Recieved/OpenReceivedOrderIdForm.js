@@ -2,19 +2,20 @@ import React, { useState, useEffect, useMemo } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { StyledTable } from "../../../../../../Components/UI/Antd";
-// import { getPhonelistById } from "../../../../Distributor/DistributorAction";
+import { getPhonelistById } from "../../../../Account/AccountAction";
 import NoteAltIcon from "@mui/icons-material/NoteAlt";
 import { Button, Switch, Tooltip } from "antd";
 import { handleReceivedOrderIdPhoneNoteModal, updateInspection, setEditPhoneData, handlereceivePhoneModal } from "../../../InventoryAction";
 import { EditOutlined, FileDoneOutlined } from "@ant-design/icons";
 import * as Yup from "yup";
-// import DistributorPhoneTaskTable from "../../../../Distributor/Child/DistributorDetail/DistributorDetailsTab/DistributorOrderTab/DistributorPhoneTaskTable";
 import ReceivedOrderIdPhoneNoteModal from "./ReceivedOrderIdPhoneNoteModal";
 import QRCodeModal from "../../../../../../Components/UI/Elements/QRCodeModal";
 import { SubTitle } from "../../../../../../Components/UI/Elements";
 import ReceiveValidationToggle from "./ReceiveValidationToggle";
 import ReceivedModal from "./ReceivedPhoneModal";
 import moment from "moment";
+import AccountPhoneTaskTable from "../../../../Account/AccountDetailsTab/AccountOrderTab/AccountPhoneTaskTable";
+
 
 const FormSchema = Yup.object().shape({
   pauseNoOfDays: Yup.string().required("Input required!"),
@@ -24,7 +25,7 @@ const FormSchema = Yup.object().shape({
 
 function OpenReceivedOrderIdForm(props) {
   useEffect(() => {
-    // props.getPhonelistById(props.rowData.orderPhoneId)
+    props.getPhonelistById(props.rowData.orderPhoneId)
   }, [])
   const [pause, setpause] = useState(false)
   function handlePauseResume() {
@@ -239,11 +240,11 @@ function OpenReceivedOrderIdForm(props) {
       </div>
       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      {/* {expand && (
-        <DistributorPhoneTaskTable
+      {expand && (
+        <AccountPhoneTaskTable
           phoneId={phoneId}
           RowData={particularRowData} />
-      )} */}
+      )}
       <ReceivedOrderIdPhoneNoteModal
         particularRowData={particularRowData}
         phoNoteReceivedOrderIdModal={props.phoNoteReceivedOrderIdModal}
@@ -271,7 +272,7 @@ const mapStateToProps = ({ inventory, distributor, auth }) => ({
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
-    //   getPhonelistById,
+      getPhonelistById,
       handleReceivedOrderIdPhoneNoteModal,
       updateInspection,
       setEditPhoneData,
