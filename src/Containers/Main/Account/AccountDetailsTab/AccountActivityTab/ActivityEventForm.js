@@ -1,277 +1,391 @@
-import React, { Component } from "react";
+import React, { Component, useState, useMemo, useEffect } from "react";
 import { connect } from "react-redux";
+import { FormattedMessage } from "react-intl";
 import { bindActionCreators } from "redux";
-import { Button, Icon } from "antd";
+import { Button, Switch } from "antd";
 import { Formik, Form, Field, FieldArray } from "formik";
-import moment from "moment";
-import { Spacer } from "../../../../../Components/UI/Elements";
+import * as Yup from "yup";
+import { getAllCustomerData } from "../../../../Customer/CustomerAction"
+import { getFilteredEmailContact } from "../../../../Candidate/CandidateAction";
+import dayjs from "dayjs";
+import { Spacer, StyledLabel } from "../../../../../Components/UI/Elements";
+import SearchSelect from "../../../../../Components/Forms/Formik/SearchSelect";
 import { InputComponent } from "../../../../../Components/Forms/Formik/InputComponent";
+import AddressFieldArray from "../../../../../Components/Forms/Formik/AddressFieldArray";
 import { SelectComponent } from "../../../../../Components/Forms/Formik/SelectComponent";
 import { DatePicker } from "../../../../../Components/Forms/Formik/DatePicker";
 import { TimePicker } from "../../../../../Components/Forms/Formik/TimePicker";
 import {
-    addDistributorActivityEvent,
-    getActivityListByDistributorId,
-} from "../../../../DistributorAction";
-import { FlexContainer } from "../../../../../Components/UI/Layout";
+    addEvent,
+    deleteEvent,
+    updateEvent,
+    handleEventModal,
+} from "../../../../Event/EventAction";
+import { getAllOpportunityData } from "../../../../Opportunity/OpportunityAction"
+import { handleChooserModal } from "../../../../Planner/PlannerAction";
 import { TextareaComponent } from "../../../../../Components/Forms/Formik/TextareaComponent";
 import { StyledPopconfirm } from "../../../../../Components/UI/Antd";
-import * as Yup from "yup";
-import { getEvents } from "../../../../../Settings/Event/EventSettingAction";
+import { getEmployeelist } from "../../../../Employees/EmployeeAction";
+import { getEvents } from "../../../../Settings/Event/EventAction";
+// import CandidateClearbit from "../../../Components/Forms/Autocomplete/CandidateClearbit";
+import { setClearbitCandidateData } from "../../../../Candidate/CandidateAction";
+import { Listbox, Transition } from '@headlessui/react'
+import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid';
+// yup validation scheme for creating a opportunity
+const EventSchema = Yup.object().shape({
+    eventTypeId: Yup.string().required("Select event type"),
+    eventSubject: Yup.string().required("This field is required !"),
+    timeZone: Yup.string().required("Input required !"),
+    // endDate: Yup.string()
+    //   .nullable()
+    //   .required("Input required !"),
+    startTime: Yup.string().nullable().required("Input required !"),
+    endTime: Yup.string().nullable().required("Input required !"),
+    startDate: Yup.string().nullable().required("Input required !"),
+});
 
-const FormSchema = Yup.object().shape({
-    startTime: Yup.string().nullable().required("Input needed!"),
-    endTime: Yup.string().nullable().required("Input needed!"),
-    topic: Yup.string().nullable().required("Input needed!"),
-})
+function ActivityEventForm(props) {
 
-class ActivityEventForm extends Component {
-    handleCallback = (resetForm) => {
-        const { callback } = this.props;
-        this.props.getActivityListByDistributorId(
-            this.props.distributorDistributorId
-        );
+    const [reminder, setRemider] = useState(true);
+    const [defaultOption, setDefaultOption] = useState(props.fullName);
+    const [selected, setSelected] = useState(defaultOption);
+
+    function handleCallback() {
+        const { handleChooserModal, handleEventModal, callback } = props;
+        handleChooserModal(false);
+        handleEventModal(false);
         callback && callback();
-        resetForm();
     };
+    const handleReminderChange = (checked) => {
+        setRemider(checked);
+    };
+    useEffect(() => {
+        props.getEmployeelist();
+        props.getEvents();
+        props.getAllCustomerData(userId)
+        props.getAllOpportunityData(userId)
+        props.getFilteredEmailContact(userId);
+    }, [])
 
-    componentDidMount() {
-        this.props.getEvents();
-    }
-
-    render() {
-        const {
-            user: { userId, firstName, middleName, lastName, timeZone },
-            isEditing,
-            prefillEvent,
-            addingEvent,
-            addEvent,
-            deletingEvent,
-            deleteEvent,
-            startDate,
-            endDate,
-            startTime,
-            endTime,
-            defaultContacts,
-            ownerId,
-            defaultAccounts,
-            updateEvent,
-            updatingEvent,
-            defaultOpportunities,
-            creatorId,
-            events
-        } = this.props;
-
-        const typeOption = events.map((item) => {
-            return {
-                label: item.eventTypeName || "",
-                value: item.eventTypeId,
+    const employeesData = props.employees.map((item) => {
+        return {
+            label: `${item.fullName}`,
+            // label: `${item.salutation || ""} ${item.firstName ||
+            //   ""} ${item.middleName || ""} ${item.lastName || ""}`,
+            value: item.employeeId,
+        };
+    });
+    const opportunityNameOption = props.allOpportunityData.map((item) => {
+        return {
+            label: `${item.opportunityName}`,
+            value: item.opportunityId,
+        };
+    });
+    const ContactData = props.filteredContact.map((item) => {
+        return {
+            label: `${item.fullName}`,
+            value: item.contactId,
+        };
+    });
+    const customerNameOption = props.allCustomerData
+        .sort((a, b) => {
+            const libraryNameA = a.name && a.name.toLowerCase();
+            const libraryNameB = b.name && b.name.toLowerCase();
+            if (libraryNameA < libraryNameB) {
+                return -1;
             }
+            if (libraryNameA > libraryNameB) {
+                return 1;
+            }
+
+            // names must be equal
+            return 0;
         })
+        .map((item) => {
+            return {
+                label: `${item.name || ""}`,
+                value: item.customerId,
+            };
+        });
+    const selectedOption = props.employees.find((item) => item.fullName === selected);
 
-        return (
-            <>
-                <Formik
-                    enableReinitialize
-                    initialValues={{
-                        distributorId: this.props.distributorDistributorId,
-                        userId: this.props.userId,
-                        eventTypeId: "",
-                        topic: "",
-                        category: "",
-                        timeZone: timeZone,
-                        startDate: startDate || moment(),
-                        startTime: startDate || null,
-                        endDate: endDate || null,
-                        endTime: endDate || null,
-                        location: "",
-                        description: "",
-                    }}
-                    validationSchema={FormSchema}
-                    onSubmit={(values, { resetForm }) => {
-                        console.log(values);
-                        console.log(values);
-                        let timeZoneFirst = "GMT+05:30";
-
-                        let mytimeZone = timeZoneFirst.substring(4, 10);
-                        console.log(mytimeZone);
-
-                        var a = mytimeZone.split(":");
-                        console.log(a);
-                        var timeZoneminutes = +a[0] * 60 + +a[1];
-                        console.log(timeZoneminutes);
-                        if (!values.endDate) {
-                            values.endDate = values.startDate;
+    const {
+        user: { userId, firstName, fullName, middleName, lastName, timeZone },
+        isEditing,
+        prefillEvent,
+        addingEvent,
+        addEvent,
+        deletingEvent,
+        deleteEvent,
+        startDate,
+        endDate,
+        contactId,
+        startTime,
+        endTime,
+        defaultContacts,
+        ownerId,
+        defaultAccounts,
+        eventType,
+        updateEvent,
+        updatingEvent,
+        defaultOpportunities,
+        creatorId,
+        employeeId,
+    } = props;
+    return (
+        <>
+            <Formik
+                enableReinitialize
+                initialValues={
+                    isEditing
+                        ? prefillEvent
+                        : {
+                            eventType: "",
+                            eventTypeId: "",
+                            eventSubject: "",
+                            eventVenue: "",
+                            remindAt: "",
+                            notificationEmail: false,
+                            eventDescription: "",
+                            timeZone: timeZone,
+                            startDate: startDate || dayjs(),
+                            startTime: startDate || null,
+                            endDate: endDate || null,
+                            endTime: endDate || null,
+                            assignedTo: selectedOption ? selectedOption.employeeId : userId,
+                            note: "",
+                            eventStatus: "",
+                            allDayInd: true,
+                            candidateId: "",
+                            included: [],
+                            fullName: "",
+                            contactId: "",
+                            repeatStartDate: "",
+                            complitionInd: "Incomplete",
+                            repeatEndDate: "",
+                            repeat_ind: false,
+                            address: [
+                                {
+                                    addressType: "",
+                                    address1: "",
+                                    address2: "",
+                                    town: "",
+                                    street: "",
+                                    city: "",
+                                    postalCode: "",
+                                    country: "",
+                                    latitude: "",
+                                    longitude: "",
+                                },
+                            ],
+                            employeesIds: [],
+                            ownerIds: [],
                         }
-                        let newStartDate = moment(values.startDate).format("YYYY-MM-DD");
-                        console.log(newStartDate);
-                        //Time calculation
-                        let firstStartTime = moment(values.startTime).format(
-                            "HH:mm:ss.SSS[Z]"
-                        ); // getting start time from form input
-                        console.log(firstStartTime);
+                }
+                validationSchema={EventSchema}
+                onSubmit={(values, { resetForm }) => {
+                    console.log(values);
+                    let timeZoneFirst = values.timeZone;
+                    console.log(timeZone);
 
-                        let firstStartHours = firstStartTime.substring(0, 5); // getting only hours and minutes
-                        console.log(firstStartHours);
+                    let mytimeZone = timeZoneFirst.substring(4, 10);
+                    console.log(mytimeZone);
+                    var a = mytimeZone.split(":");
+                    console.log(a);
+                    var timeZoneminutes = +a[0] * 60 + +a[1];
+                    console.log(timeZoneminutes);
+                    if (!values.endDate) {
+                        values.endDate = values.startDate;
+                    }
+                    let newStartDate = dayjs(values.startDate).format("YYYY-MM-DD");
+                    console.log(newStartDate);
+                    //Time calculation
+                    let firstStartTime = dayjs(values.startTime).format(
+                        "HH:mm:ss.SSS[Z]"
+                    ); // getting start time from form input
+                    console.log(firstStartTime);
+                    let firstStartHours = firstStartTime.substring(0, 5); // getting only hours and minutes
+                    console.log(firstStartHours);
 
-                        let timeEndPart = firstStartTime.substring(5, 13); // getting seconds and rest
-                        console.log(timeEndPart);
+                    let timeEndPart = firstStartTime.substring(5, 13); // getting seconds and rest
+                    console.log(timeEndPart);
 
-                        var firstStartTimeSplit = firstStartHours.split(":"); // removing the colon
-                        console.log(firstStartTimeSplit);
+                    var firstStartTimeSplit = firstStartHours.split(":"); // removing the colon
+                    console.log(firstStartTimeSplit);
+                    var minutes =
+                        +firstStartTimeSplit[0] * 60 + +firstStartTimeSplit[1]; // converting hours into minutes
+                    console.log(minutes);
 
-                        var minutes =
-                            +firstStartTimeSplit[0] * 60 + +firstStartTimeSplit[1]; // converting hours into minutes
-                        console.log(minutes);
+                    var firstStartTimeminutes = minutes - timeZoneminutes; // start time + time zone
+                    console.log(firstStartTimeminutes);
 
-                        var firstStartTimeminutes = minutes - timeZoneminutes; // start time + time zone
-                        console.log(firstStartTimeminutes);
+                    let h = Math.floor(firstStartTimeminutes / 60); // converting to hours
+                    let m = firstStartTimeminutes % 60;
+                    h = h < 10 ? "0" + h : h;
+                    m = m < 10 ? "0" + m : m;
+                    let finalStartTime = `${h}:${m}`;
 
-                        let h = Math.floor(firstStartTimeminutes / 60); // converting to hours
-                        let m = firstStartTimeminutes % 60;
-                        h = h < 10 ? "0" + h : h;
-                        m = m < 10 ? "0" + m : m;
-                        let finalStartTime = `${h}:${m}`;
-                        console.log(finalStartTime);
+                    let newStartTime = `${finalStartTime}${timeEndPart}`;
 
-                        let newStartTime = `${finalStartTime}${timeEndPart}`;
-                        console.log(newStartTime);
+                    let newEndDate = dayjs(values.endDate).format("YYYY-MM-DD");
+                    let firstEndTime = dayjs(values.endTime).format("HH:mm:ss.SSS[Z]"); // getting start time from form input
+                    let firstEndHours = firstEndTime.substring(0, 5); // getting only hours and minutes
+                    var firstEndTimeSplit = firstEndHours.split(":"); // removing the colon
+                    var endMinutes = +firstEndTimeSplit[0] * 60 + +firstEndTimeSplit[1]; // converting hours into minutes
+                    console.log(endMinutes);
+                    var firstEndTimeminutes = Math.abs(endMinutes - timeZoneminutes); // start time + time zone
+                    console.log(firstEndTimeminutes);
+                    let hr = Math.floor(firstEndTimeminutes / 60); // converting to hours
+                    let mi = firstEndTimeminutes % 60;
+                    hr = hr < 10 ? "0" + hr : hr;
+                    mi = mi < 10 ? "0" + mi : mi;
+                    let finalEndTime = `${hr}:${mi}`;
 
-                        let newEndDate = moment(values.endDate).format("YYYY-MM-DD");
-                        let firstEndTime = moment(values.endTime).format("HH:mm:ss.SSS[Z]"); // getting start time from form input
-                        console.log(firstEndTime);
-                        let firstEndHours = firstEndTime.substring(0, 5); // getting only hours and minutes
-                        console.log(firstEndHours);
+                    let newEndTime = `${finalEndTime}${timeEndPart}`;
 
-                        var firstEndTimeSplit = firstEndHours.split(":"); // removing the colon
-                        console.log(firstEndTimeSplit);
-                        var endMinutes = +firstEndTimeSplit[0] * 60 + +firstEndTimeSplit[1]; // converting hours into minutes
-                        console.log(endMinutes);
-                        var firstEndTimeminutes = Math.abs(endMinutes - timeZoneminutes); // start time + time zone
-                        console.log(firstEndTimeminutes);
-                        let hr = Math.floor(firstEndTimeminutes / 60); // converting to hours
-                        console.log(hr);
-                        let mi = firstEndTimeminutes % 60;
-                        console.log(hr);
-                        hr = hr < 10 ? "0" + hr : hr;
-                        mi = mi < 10 ? "0" + mi : mi;
-                        let finalEndTime = `${hr}:${mi}`;
-                        console.log(finalEndTime);
-                        console.log(timeEndPart);
-                        console.log(`${finalEndTime}${timeEndPart}`);
-
-                        let newEndTime = `${finalEndTime}${timeEndPart}`;
-
-                        this.props.addDistributorActivityEvent(
+                    isEditing
+                        ? updateEvent(
+                            prefillEvent.eventId,
                             {
                                 ...values,
-                                // category: this.state.category,
-                                // type: this.state.Type,
-
                                 startDate: `${newStartDate}T${newStartTime}`,
                                 endDate: `${newEndDate}T${newEndTime}`,
-
                                 startTime: 0,
                                 endTime: 0,
+                                assignedTo: selectedOption ? selectedOption.employeeId : userId,
                             },
-                            () => this.handleCallback(resetForm)
+                            handleCallback
+                        )
+                        : addEvent(
+                            {
+                                ...values,
+                                ownerIds: userId === userId ? [userId] : [],
+                                startDate: `${newStartDate}T${newStartTime}`,
+                                endDate: `${newEndDate}T${newEndTime}`,
+                                startTime: 0,
+                                endTime: 0,
+                                remindInd: reminder ? true : false,
+                                assignedTo: selectedOption ? selectedOption.employeeId : userId,
+                            },
+                            handleCallback
                         );
-                    }}
-                >
-                    {({
-                        errors,
-                        touched,
-                        isSubmitting,
-                        setFieldValue,
-                        setFieldTouched,
-                        values,
-                        ...rest
-                    }) => (
-                        <Form class="form-background">
-                            <div style={{ display: "flex", justifyContent: "space-between" }}>
-                                <div
-                                    style={{
-                                        height: "100%",
-                                        width: "45%",
-                                    }}
-                                >
+                    !isEditing && resetForm();
+                }}
+            >
+                {({
+                    errors,
+                    touched,
+                    isSubmitting,
+                    setFieldValue,
+                    setFieldTouched,
+                    values,
+                    ...rest
+                }) => (
+                    <div class="overflow-y-auto h-[34rem] overflow-x-hidden max-sm:h-[30rem]">
+                        <Form className="form-background">
+                            <div class=" flex justify-around max-sm:flex-col">
+                                <div class=" h-full w-w47.5 max-sm:w-wk">
+                                    <Spacer />
                                     <Field
                                         isRequired
                                         name="eventTypeId"
-                                        label="Type"
-                                        placeholder={"Select"}
-                                        component={SelectComponent}
+                                        //label="Type"
+                                        label={
+                                            <FormattedMessage id="app.type" defaultMessage="Type" />
+                                        }
+                                        component={SearchSelect}
+                                        isColumnWithoutNoCreate
+                                        selectType="eventType"
+                                        value={values.eventTypeId}
                                         isColumn
-                                        options={Array.isArray(typeOption) ? typeOption : []}
                                         inlineLabel
                                     />
                                     <Field
                                         isRequired
-                                        name="topic"
-                                        label="Topic"
+                                        name="eventSubject"
+                                        //label="Topic"
+                                        label={
+                                            <FormattedMessage
+                                                id="app.subject"
+                                                defaultMessage="Subject"
+                                            />
+                                        }
                                         isColumn
                                         width={"100%"}
                                         component={InputComponent}
                                         inlineLabel
                                     />
-                                    <FlexContainer justifyContent="space-between">
-                                        <div style={{ width: "47%" }}>
-                                            <Field
-                                                isRequired
-                                                name="startDate"
-                                                label="Start "
-                                                isColumn
-                                                component={DatePicker}
-                                                value={values.startDate}
-                                                inlineLabel
-                                                style={{
-                                                    flexBasis: "80%",
-                                                    height: "29px",
-                                                    marginTop: "0px",
-                                                    width: "100%",
-                                                }}
-                                            />
+                                    <Spacer />
+                                    <div>
+                                        <div class=" flex justify-between">
+                                            <div class=" w-1/2">
+                                                <Field
+                                                    isRequired
+                                                    name="startDate"
+                                                    //label="Start "
+                                                    label={
+                                                        <FormattedMessage
+                                                            id="app.startDate"
+                                                            defaultMessage="Start Date"
+                                                        />
+                                                    }
+                                                    isColumn
+                                                    component={DatePicker}
+                                                    value={values.startDate}
+                                                    inlineLabel
+                                                    style={{
+                                                        width: "100%",
+                                                    }}
+                                                />
+                                            </div>
+                                            <div class=" w-5/12">
+                                                <Field
+                                                    isRequired
+                                                    name="startTime"
+                                                    // label="Start Time"
+                                                    label={
+                                                        <FormattedMessage
+                                                            id="app.startTime"
+                                                            defaultMessage="Start Time"
+                                                        />
+                                                    }
+                                                    isColumn
+                                                    component={TimePicker}
+                                                    use12Hours
+                                                    value={values.startTime}
+                                                    inlineLabel
+                                                    style={{
+                                                        width: "100%",
+                                                    }}
+                                                />
+                                            </div>
                                         </div>
-                                        <div style={{ width: "47%" }}>
-                                            <Field
-                                                isRequired
-                                                name="startTime"
-                                                label="Start Time"
-                                                isColumn
-                                                component={TimePicker}
-                                                use12Hours
-                                                value={values.startTime}
-                                                inlineLabel
-                                                style={{
-                                                    flexBasis: "80%",
-                                                    marginTop: "0px",
-                                                    width: "100%",
-                                                }}
-                                            />
-                                        </div>
-                                    </FlexContainer>
-                                    <FlexContainer justifyContent="space-between">
-                                        <div style={{ width: "47%" }}>
+                                    </div>
+                                    <div class=" flex justify-between">
+                                        <div class=" w-1/2">
                                             <Field
                                                 isRequired
                                                 name="endDate"
-                                                label="End "
+                                                // label="End "
+                                                label={
+                                                    <FormattedMessage
+                                                        id="app.enddate"
+                                                        defaultMessage="End Date"
+                                                    />
+                                                }
                                                 component={DatePicker}
                                                 isColumn
                                                 value={values.endDate || values.startDate}
-                                                defaultValue={moment("2015-01-01")}
+                                                defaultValue={dayjs("2015-01-01")}
                                                 inlineLabel
                                                 style={{
-                                                    flexBasis: "80%",
-                                                    height: "29px",
-                                                    marginTop: "0px",
                                                     width: "100%",
                                                 }}
                                                 disabledDate={(currentDate) => {
                                                     if (values.startDate) {
                                                         if (
-                                                            moment(currentDate).isBefore(
-                                                                moment(values.startDate)
+                                                            dayjs(currentDate).isBefore(
+                                                                dayjs(values.startDate)
                                                             )
                                                         ) {
                                                             return true;
@@ -282,69 +396,339 @@ class ActivityEventForm extends Component {
                                                 }}
                                             />
                                         </div>
-                                        <div style={{ width: "47%" }}>
+                                        <div class=" w-5/12">
                                             <Field
                                                 isRequired
                                                 name="endTime"
-                                                label="End Time"
+                                                //label="End Time"
+                                                label={
+                                                    <FormattedMessage
+                                                        id="app.endtime"
+                                                        defaultMessage="End Time"
+                                                    />
+                                                }
                                                 isColumn
                                                 component={TimePicker}
                                                 use12Hours
                                                 value={values.endTime}
                                                 inlineLabel
                                                 style={{
-                                                    flexBasis: "80%",
-                                                    marginTop: "0px",
                                                     width: "100%",
                                                 }}
                                             />
                                         </div>
-                                    </FlexContainer>
-                                    <Spacer />
-                                    {startDate ? (
-                                        <span>
-                                            {moment(startDate).isBefore(moment()) && (
-                                                <span style={{ marginLeft: 10 }}>
-                                                    <b>This Event occurs in the past !</b>
-                                                </span>
-                                            )}
-                                        </span>
-                                    ) : (
-                                        <span>
-                                            {moment(values.startDate).isBefore(moment()) && (
-                                                <span style={{ marginLeft: 10 }}>
-                                                    <b>This Event occurs in the past !</b>
-                                                </span>
-                                            )}
-                                        </span>
-                                    )}
-                                </div>
-                                <div
-                                    style={{
-                                        height: "100%",
-                                        width: "45%",
-                                    }}
-                                >
+                                    </div>
                                     <Field
-                                        name="description"
-                                        label="Description"
+                                        isRequired
+                                        defaultValue={{ label: timeZone, value: userId }}
+                                        isColumnWithoutNoCreate
+                                        name="timeZone"
+                                        //label="TimeZone "
+                                        label={
+                                            <FormattedMessage
+                                                id="app.timeZone"
+                                                defaultMessage="Time Zone"
+                                            />
+                                        }
+                                        selectType="timeZone"
+                                        isColumn
+                                        value={values.timeZone}
+                                        component={SearchSelect}
+                                        inlineLabel
+                                    />
+                                    <Spacer />
+                                    <Spacer />
+
+                                    {/* <Field
+                      name="employeesId"
+                      isColumnWithoutNoCreate
+                      selectType="employee"
+                      // label="Assigned to"
+                      label={
+                        <FormattedMessage
+                          id="app.assignedto"
+                          defaultMessage="Assigned to"
+                        />
+                      }
+                      component={SearchSelect}
+                      isColumn
+                      value={values.employeeId}
+                      defaultValue={{
+                        label: `${firstName || ""} ${middleName || ""} ${
+                          lastName || ""
+                        }`,
+                        value: employeeId,
+                      }}
+                      inlineLabel
+                    /> */}
+                                    <Listbox value={selected} onChange={setSelected}>
+                                        {({ open }) => (
+                                            <>
+                                                <Listbox.Label className="block text-sm font-semibold text-gray-700">
+                                                    Assigned to
+                                                </Listbox.Label>
+                                                <div className="relative mt-1">
+                                                    <Listbox.Button className="relative w-full leading-4 cursor-default border border-gray-300 bg-white py-0.5 pl-3 pr-10 text-left shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm" style={{ boxShadow: "rgb(170, 170, 170) 0px 0.25em 0.62em" }}>
+                                                        {selected}
+                                                    </Listbox.Button>
+                                                    {open && (
+                                                        <Listbox.Options
+                                                            static
+                                                            className="absolute z-10 mt-1 max-h-56 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
+                                                        >
+                                                            {props.employees.map((item) => (
+                                                                <Listbox.Option
+                                                                    key={item.employeeId}
+                                                                    className={({ active }) =>
+                                                                        `relative cursor-default select-none py-2 pl-3 pr-9 ${active ? "text-white bg-indigo-600" : "text-gray-900"
+                                                                        }`
+                                                                    }
+                                                                    value={item.fullName}
+                                                                >
+                                                                    {({ selected, active }) => (
+                                                                        <>
+                                                                            <div className="flex items-center">
+                                                                                <span
+                                                                                    className={`ml-3 block truncate ${selected ? "font-semibold" : "font-normal"
+                                                                                        }`}
+                                                                                >
+                                                                                    {item.fullName}
+                                                                                </span>
+                                                                            </div>
+                                                                            {selected && (
+                                                                                <span
+                                                                                    className={`absolute inset-y-0 right-0 flex items-center pr-4 ${active ? "text-white" : "text-indigo-600"
+                                                                                        }`}
+                                                                                >
+
+                                                                                    <svg
+                                                                                        xmlns="http://www.w3.org/2000/svg"
+                                                                                        className="h-5 w-5"
+                                                                                        viewBox="0 0 20 20"
+                                                                                        fill="currentColor"
+                                                                                        aria-hidden="true"
+                                                                                    >
+                                                                                        <path
+                                                                                            fillRule="evenodd"
+                                                                                            d="M6.293 9.293a1 1 0 011.414 0L10 11.586l2.293-2.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z"
+                                                                                            clipRule="evenodd"
+                                                                                        />
+                                                                                    </svg>
+                                                                                </span>
+                                                                            )}
+                                                                        </>
+                                                                    )}
+                                                                </Listbox.Option>
+                                                            ))}
+                                                        </Listbox.Options>
+                                                    )}
+                                                </div>
+                                            </>
+                                        )}
+                                    </Listbox>
+                                    <Spacer />
+                                    <Field
+                                        name="included"
+                                        // label="Include"
+                                        label={
+                                            <FormattedMessage
+                                                id="app.include"
+                                                defaultMessage="Include"
+                                            />
+                                        }
+                                        mode
+                                        placeholder="Select"
+                                        component={SelectComponent}
+                                        options={Array.isArray(employeesData) ? employeesData : []}
+                                        value={values.included}
+                                        defaultValue={{
+                                            label: `${fullName || ""} `,
+                                            value: employeeId,
+                                        }}
+                                    />
+                                    <Spacer />
+                                    <div>
+                                        {props.user.crmInd === true && (
+                                            <Field
+                                                name="contactId"
+                                                //selectType="contactList"
+                                                isColumnWithoutNoCreate
+                                                // label="Contact"
+                                                label={
+                                                    <FormattedMessage
+                                                        id="app.contact"
+                                                        defaultMessage="Contact"
+                                                    />
+                                                }
+                                                component={SelectComponent}
+                                                isColumn
+                                                options={Array.isArray(ContactData) ? ContactData : []}
+                                                value={values.contactId}
+                                                // isDisabled={defaultContacts}
+                                                defaultValue={{
+                                                    label: `${fullName || ""} `,
+                                                    value: contactId,
+                                                }}
+                                                inlineLabel
+                                            />
+                                        )}
+                                    </div>
+                                    <Spacer />
+                                    <div>
+                                        {props.user.crmInd === true && (
+                                            <Field
+                                                name="customerId"
+                                                // selectType="customerList"
+                                                isColumnWithoutNoCreate
+                                                label={
+                                                    <FormattedMessage
+                                                        id="app.customer"
+                                                        defaultMessage="Customer"
+                                                    />
+                                                }
+                                                //component={SearchSelect}
+                                                component={SelectComponent}
+                                                options={
+                                                    Array.isArray(customerNameOption)
+                                                        ? customerNameOption
+                                                        : []
+                                                }
+                                                isColumn
+                                                margintop={"0"}
+                                                value={values.customerId}
+                                                inlineLabel
+                                            />
+                                        )}
+                                    </div>
+                                    <Spacer />
+                                    <div>
+                                        {props.user.crmInd === true && (
+                                            <Field
+                                                name="opportunityId"
+                                                // selectType="customerList"
+                                                isColumnWithoutNoCreate
+                                                label={
+                                                    <FormattedMessage
+                                                        id="app.opportunity"
+                                                        defaultMessage="Opportunity"
+                                                    />
+                                                }
+                                                //component={SearchSelect}
+                                                component={SelectComponent}
+                                                options={
+                                                    Array.isArray(opportunityNameOption)
+                                                        ? opportunityNameOption
+                                                        : []
+                                                }
+                                                isColumn
+                                                margintop={"0"}
+                                                value={values.opportunityId}
+                                                inlineLabel
+                                            />
+                                        )}
+                                    </div>
+                                    <Spacer />
+                                    {/* <Field
+                    disabled="true"
+                    isRequired
+                    name="candidateId"
+                    // type="text"
+                    label="Team"
+                    placeholder="Start typing to search..."
+                    isColumnWithoutNoCreate
+                    setClearbitCandidateData={
+                      props.setClearbitCandidateData
+                    }
+                    component={CandidateClearbit}
+                    inlineLabel
+                  /> */}
+                                    {/* {startDate ? (
+                    <span>
+                      {dayjs(startDate).isBefore(dayjs()) && (
+                        <span>
+                          <b>This Event occurs in the past !</b>
+                        </span>
+                      )}
+                    </span>
+                  ) : (
+                    <span>
+                      {dayjs(values.startDate).isBefore(dayjs()) && (
+                        <span>
+                          <b>This Event occurs in the past !</b>
+                        </span>
+                      )}
+                    </span>
+                  )} */}
+                                </div>
+                                <div class=" h-full w-w47.5 max-sm:w-wk ">
+                                    <Spacer />
+                                    <FieldArray
+                                        name="address"
+                                        render={(arrayHelpers) => (
+                                            <AddressFieldArray
+                                                singleAddress
+                                                arrayHelpers={arrayHelpers}
+                                                values={values}
+                                            />
+                                        )}
+                                    />
+                                    <Spacer />
+                                    <Field
+                                        name="eventDescription"
+                                        //label="Notes"
+                                        label={
+                                            <FormattedMessage id="app.notes" defaultMessage="Notes" />
+                                        }
                                         isColumn
                                         width={"100%"}
                                         component={TextareaComponent}
                                         inlineLabel
                                     />
-                                    <Field
-                                        name="location"
-                                        label="Location"
-                                        isColumn
-                                        width={"100%"}
-                                        component={InputComponent}
-                                        inlineLabel
-                                    />
+                                    <Spacer />
+                                    {/* <div class=" flex justify-between">
+                    <div class=" w-1/2 font-bold">
+                      <div class=" flex justify-between">
+                        <div>
+                          <StyledLabel>Set Reminder </StyledLabel>
+                        </div>
+                        <div>
+                          <Switch
+                            onChange={handleReminderChange}
+                            checked={reminder}
+                            checkedChildren="Yes"
+                            unCheckedChildren="No"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                    <div class=" w-1/3 font-bold">
+                      {reminder ? (
+                        <div>
+                          <Field
+                            // isRequired
+                            name="remindTime"
+                            label="Reminder"
+                            width={"100%"}
+                            component={SelectComponent}
+                            options={[
+                              "15 min",
+                              "30 min",
+                              "45 min",
+                              "1 hour",
+                              "2 hour",
+                            ]}
+                            defaultValue="30 min"
+                            isColumn
+                            inlineLabel
+                          />
+                        </div>
+                      ) : null}
+                    </div>
+                  </div> */}
                                 </div>
                             </div>
                             <Spacer />
-                            <FlexContainer justifyContent="flex-end">
+                            <div class=" flex justify-end">
                                 {isEditing && (
                                     <>
                                         <StyledPopconfirm
@@ -354,9 +738,12 @@ class ActivityEventForm extends Component {
                                             <Button
                                                 type="danger"
                                                 htmlType="submit"
-                                                loading={deletingEvent}
+                                                Loading={deletingEvent}
                                             >
-                                                Delete
+                                                <FormattedMessage
+                                                    id="app.delete"
+                                                    defaultMessage="Delete"
+                                                />
                                             </Button>
                                         </StyledPopconfirm>
                                     </>
@@ -365,39 +752,53 @@ class ActivityEventForm extends Component {
                                 <Button
                                     type="primary"
                                     htmlType="submit"
-                                    loading={this.props.addingDistributorActivityEvent}
+                                    Loading={isEditing ? updatingEvent : addingEvent}
                                 >
-                                    Create
+                                    {isEditing ? (
+                                        "Update"
+                                    ) : (
+                                        // "Create"
+                                        <FormattedMessage id="app.create" defaultMessage="Create" />
+                                    )}
                                 </Button>
-                            </FlexContainer>
+                            </div>
                         </Form>
-                    )}
-                </Formik>
-            </>
-        );
-    }
+                    </div>
+                )}
+            </Formik>
+        </>
+    );
 }
-
-const mapStateToProps = ({ auth, distributor, events }) => ({
+const mapStateToProps = ({ auth, event, opportunity, customer, employee, events, candidate }) => ({
+    addingEvent: event.addingEvent,
+    allCustomerData: customer.allCustomerData,
+    updatingEvent: event.updatingEvent,
     user: auth.userDetails,
-    userId: auth.userDetails.userId,
-    addingDistributorActivityEvent: distributor.addingDistributorActivityEvent,
-    distributorDistributorId:
-        distributor.distributorDetailsByDistributorId.distributorId,
+    allOpportunityData: opportunity.allOpportunityData,
+    filteredContact: candidate.filteredContact,
+    deletingEvent: event.deleteEvent,
+    employees: employee.employees,
     events: events.events,
+    candidateId: candidate.clearbitCandidate.candidateId,
+    fullName: auth.userDetails.fullName
 });
 
 const mapDispatchToProps = (dispatch) =>
     bindActionCreators(
         {
-            addDistributorActivityEvent,
-            getActivityListByDistributorId,
-            getEvents
+            addEvent,
+            deleteEvent,
+            updateEvent,
+            handleChooserModal,
+            handleEventModal,
+            getEmployeelist,
+            getEvents,
+            getAllOpportunityData,
+            getAllCustomerData,
+            getFilteredEmailContact,
+            setClearbitCandidateData,
         },
         dispatch
     );
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(ActivityEventForm);
+export default connect(mapStateToProps, mapDispatchToProps)(ActivityEventForm);

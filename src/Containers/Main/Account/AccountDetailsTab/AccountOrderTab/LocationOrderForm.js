@@ -5,12 +5,12 @@ import { Button, Switch } from "antd";
 import { Formik, Form, Field } from "formik";
 import moment from "moment";
 import { SelectComponent } from "../../../../../Components/Forms/Formik/SelectComponent";
-import { addLocationInOrder } from "../../AccountAction"
+import { addLocationInOrder, getLocationList } from "../../AccountAction"
 
 function LocationOrderForm(props) {
-    // useEffect(() => {
-    //     props.getInventory(props.userId);
-    // }, []);
+    useEffect(() => {
+        props.getLocationList(props.orgId);
+    }, []);
     moment.addRealYear = function addRealYear(y) {
         var fm = moment(y).add(10, "Y");
         var fmEnd = moment(fm).endOf("year");
@@ -18,12 +18,12 @@ function LocationOrderForm(props) {
             ? fm.add(10, "y")
             : fm;
     };
-    // const locationsName = props.inventory.map((item) => {
-    //     return {
-    //         label: item.name || "",
-    //         value: item.locationDetailsId,
-    //     };
-    // });
+    const locationsName = props.locationlist.map((item) => {
+        return {
+            label: item.locationName || "",
+            value: item.locationDetailsId,
+        };
+    });
     return (
         <>
             <Formik
@@ -68,8 +68,7 @@ function LocationOrderForm(props) {
                                     label="Location"
                                     isRequired
                                     component={SelectComponent}
-                                    options={["1"]}
-                                // options={Array.isArray(locationsName) ? locationsName : []}
+                                    options={Array.isArray(locationsName) ? locationsName : []}
                                 />
                             </div>
                             <div style={{ marginTop: "15px", marginLeft: "14px" }}>
@@ -84,14 +83,14 @@ function LocationOrderForm(props) {
         </>
     );
 }
-const mapStateToProps = ({ inventory, plant, auth }) => ({
-    // userId: auth.userDetails.userId,
-    // inventory: inventory.inventory
+const mapStateToProps = ({ distributor, plant, auth }) => ({
+    orgId: auth.userDetails.organizationId,
+    locationlist: distributor.locationlist,
 });
 
 const mapDispatchToProps = (dispatch) =>
     bindActionCreators({
-        // getInventory,
+        getLocationList,
         addLocationInOrder
     }, dispatch);
 

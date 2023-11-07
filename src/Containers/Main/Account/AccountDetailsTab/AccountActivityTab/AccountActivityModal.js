@@ -5,8 +5,8 @@ import { BundleLoader } from "../../../../../Components/Placeholder";
 import { StyledDrawer } from "../../../../../Components/UI/Antd";
 import { StyledTabs } from "../../../../../Components/UI/Antd";
 const AcitivityCallForm = lazy(() => import("./AcitivityCallForm"));
-// const ActivityEventForm = lazy(() => import("./ActivityEventForm"));
-// const ActivityTaskForm = lazy(() => import("./ActivityTaskForm"));
+const ActivityEventForm = lazy(() => import("./ActivityEventForm"));
+const ActivityTaskForm = lazy(() => import("./ActivityTaskForm"));
 
 const TabPane = StyledTabs.TabPane;
 class AccountActivityModal extends Component {
@@ -35,7 +35,7 @@ class AccountActivityModal extends Component {
                                     <AcitivityCallForm />
                                 </div>
                             </TabPane>
-                            {/* <TabPane tab={`Event`} key="2">
+                            <TabPane tab={`Event`} key="2">
                                 <div style={{ marginTop: 20 }}>
                                     <ActivityEventForm />
                                 </div>
@@ -44,7 +44,7 @@ class AccountActivityModal extends Component {
                                 <div style={{ marginTop: 20 }}>
                                     <ActivityTaskForm />
                                 </div>
-                            </TabPane> */}
+                            </TabPane>
                         </StyledTabs>
                     </Suspense>
                 </StyledDrawer>

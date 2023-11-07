@@ -12,6 +12,7 @@ import {
 import { Tooltip } from "antd";
 import AddAccountModal from "./AccountOrderTab/AddAccountModal";
 import AddIcon from '@mui/icons-material/Add';
+import NotesForm from "./AccountNoteTab/NoteForm"
 import AccountActivityTable from "./AccountActivityTab/AccountActivityTable";
 import AccountActivityModal from "./AccountActivityTab/AccountActivityModal";
 const AccountContactTable = lazy(() => import("./AccountContactTab/AccountContactTable"))
@@ -145,7 +146,7 @@ function AccountDetailsTab(props) {
                         key="4"
                     >
                         <Suspense fallback={"Loading ..."}>
-
+                            <NotesForm />
                         </Suspense>
                     </TabPane>
 
