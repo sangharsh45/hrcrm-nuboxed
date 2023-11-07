@@ -4,6 +4,7 @@ import { bindActionCreators } from "redux";
 import { Input, Space, Button, Tooltip } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
 import moment from "moment";
+import { Link } from "../../../Components/Common";
 import { getInventory, handleInventoryRoomRackModal } from "./InventoryAction";
 import Highlighter from "react-highlight-words";
 import InventoryDetailView from "./InventoryDetailView";
@@ -138,10 +139,12 @@ const InventoryTable = (props) => {
         return (
           <>
             {" "}
-            <InventoryDetailView
+            <Link toUrl={`locationDetails/${item.locationDetailsId}`} title={`${item.locationName}`} />
+            &nbsp;&nbsp;
+            {/* <InventoryDetailView
               locationDetailsId={item.locationDetailsId}
               inventoryName={item.locationName}
-            />
+            /> */}
             {date === currentdate ? (
               <span
                 style={{
