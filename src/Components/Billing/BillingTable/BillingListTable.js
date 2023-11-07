@@ -5,14 +5,12 @@ import { bindActionCreators } from "redux";
 import { MultiAvatar, Spacer } from "../../../Components/UI/Elements";
 import { SearchOutlined } from "@ant-design/icons";
 import { CurrencySymbol } from "../../../Components/Common";
-import {getCustomerTask} from "../../../Containers/Task/TaskAction"
+import { getCustomerTask } from "../../../Containers/Task/TaskAction"
 // import { getLeadsTabData,getLeadsDateWise,paidIndicatorLeads,handleStripeModal } from '../LeadsAction';
 import moment from "moment";
-import { Tooltip, Button, Input ,Space} from "antd";
+import { Tooltip, Button, Input, Space } from "antd";
 import SearchIcon from '@mui/icons-material/Search';
 import Highlighter from 'react-highlight-words';
-// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-// import { solid } from "@fortawesome/fontawesome-svg-core/import.macro";
 import jsPDF from "jspdf";
 import "jspdf-autotable";
 import { base_url } from "../../../Config/Auth";
@@ -59,7 +57,7 @@ function BillingListTable(props) {
   const handleRowData = (data) => {
     setrowData(data);
   };
-  
+
   const [searchText, setSearchText] = useState("");
   const [searchedColumn, setSearchedColumn] = useState("");
   function getColumnSearchProps(dataIndex) {
@@ -172,9 +170,9 @@ function BillingListTable(props) {
     },
     {
       title: "Customer",
-       dataIndex: "customerName",
+      dataIndex: "customerName",
       width: "10%",
-      filters:customerlistType,
+      filters: customerlistType,
       onFilter: (value, record) => {
         return record.customerName === value;
       },
@@ -182,15 +180,15 @@ function BillingListTable(props) {
         return (
           <>
             <Tooltip title={item.customerName}>
-            <span>
-              <MultiAvatar
-                primaryTitle={item.customerName}
-                // imageId={item.ownerImageId}
-                // imageURL={item.imageURL}
-                imgWidth={"2.1em"}
-                imgHeight={"2.1em"}
-              />
-            </span>
+              <span>
+                <MultiAvatar
+                  primaryTitle={item.customerName}
+                  // imageId={item.ownerImageId}
+                  // imageURL={item.imageURL}
+                  imgWidth={"2.1em"}
+                  imgHeight={"2.1em"}
+                />
+              </span>
             </Tooltip>
           </>
         );
@@ -198,19 +196,19 @@ function BillingListTable(props) {
     },
     {
       title: "Project",
-       dataIndex: "projectName",
+      dataIndex: "projectName",
       width: "10%",
       render: (name, item, i) => {
         return (
           <>
             <Tooltip title={item.projectName}>
-            <span>
-              <MultiAvatar
-                primaryTitle={item.projectName}
-                imgWidth={"2.1em"}
-                imgHeight={"2.1em"}
-              />
-            </span>
+              <span>
+                <MultiAvatar
+                  primaryTitle={item.projectName}
+                  imgWidth={"2.1em"}
+                  imgHeight={"2.1em"}
+                />
+              </span>
             </Tooltip>
           </>
         );
@@ -223,10 +221,10 @@ function BillingListTable(props) {
         return (
           <>
             <span>
-            <CurrencySymbol currencyType={item.billableCurency} />
-            &nbsp;
-           { `${Number(item.billingAmount).toFixed(2)}`}
-              </span>
+              <CurrencySymbol currencyType={item.billableCurency} />
+              &nbsp;
+              {`${Number(item.billingAmount).toFixed(2)}`}
+            </span>
           </>
         )
       },
@@ -247,11 +245,11 @@ function BillingListTable(props) {
       render: (text, item) => {
         return (
           <>
-                  <span>
-            <CurrencySymbol currencyType={item.billableCurency} />
-            &nbsp;
-           { `${Number(item.finalBillableAmount).toFixed(2)} `}
-           </span>
+            <span>
+              <CurrencySymbol currencyType={item.billableCurency} />
+              &nbsp;
+              {`${Number(item.finalBillableAmount).toFixed(2)} `}
+            </span>
           </>
         )
       },
@@ -269,11 +267,11 @@ function BillingListTable(props) {
       render: (text, item) => {
         return (
           <>
-                   <span>
-            <CurrencySymbol currencyType={item.billableCurency} />
-            &nbsp;
-         { `${Number(item.actualBillableAmount).toFixed(2)}  `}
-         </span>
+            <span>
+              <CurrencySymbol currencyType={item.billableCurency} />
+              &nbsp;
+              {`${Number(item.actualBillableAmount).toFixed(2)}  `}
+            </span>
           </>
         )
       },
@@ -282,48 +280,48 @@ function BillingListTable(props) {
     {
       title: "Deviation Hour (Total)",
       width: "10%",
-     dataIndex:"deviationBillableHour",
-     render: (text, item) => {
-      const deviationBillableHr=Number(item.deviationBillableHour)
-      // const amt = item.actualBillableAmount - item.finalBillableAmount
-      // const devAmt=Number(amt).toFixed(2)
-      return (
-        <>
-           <div
+      dataIndex: "deviationBillableHour",
+      render: (text, item) => {
+        const deviationBillableHr = Number(item.deviationBillableHour)
+        // const amt = item.actualBillableAmount - item.finalBillableAmount
+        // const devAmt=Number(amt).toFixed(2)
+        return (
+          <>
+            <div
               style={{
                 color:
-                deviationBillableHr < 0
+                  deviationBillableHr < 0
                     ? "green"
                     : "red"
-                   
+
               }}
             >
-       
-       {deviationBillableHr} 
-         </div>
-        </>
-      )
-    },
+
+              {deviationBillableHr}
+            </div>
+          </>
+        )
+      },
     },
     {
       title: "Deviation Amount(Total)",
-      dataIndex:"deviationBillableAmount",
+      dataIndex: "deviationBillableAmount",
       render: (text, item) => {
         return (
           <>
-             <div
-                style={{
-                  color:
+            <div
+              style={{
+                color:
                   item.deviationBillableAmount < 0
-                      ? "green"
-                      : "red"
-                     
-                }}
-              >
-            <CurrencySymbol currencyType={item.billableCurency} />
-            &nbsp;
-         { `${Number(item.deviationBillableAmount).toFixed(2)}  `}
-           </div>
+                    ? "green"
+                    : "red"
+
+              }}
+            >
+              <CurrencySymbol currencyType={item.billableCurency} />
+              &nbsp;
+              {`${Number(item.deviationBillableAmount).toFixed(2)}  `}
+            </div>
           </>
         )
       },
@@ -347,7 +345,7 @@ function BillingListTable(props) {
   )
 }
 
-const mapStateToProps = ({ billings, auth,task }) => ({
+const mapStateToProps = ({ billings, auth, task }) => ({
   billingByDesignation: billings.billingByDesignation,
   startDate: billings.startDate,
   endDate: billings.endDate,

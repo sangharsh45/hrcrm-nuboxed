@@ -1,13 +1,21 @@
-import React, { Component, lazy, Suspense, useState } from "react";
+import React, { lazy, Suspense, useState } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { StyledTabs } from "../../../../Components/UI/Antd";
 import { TabsWrapper } from "../../../../Components/UI/Layout";
 import AccountOrderTable from "./AccountOrderTab/AccountOrderTable";
-import { handleLinkDistributorOrderConfigureModal } from "../AccountAction"
+import {
+    handleLinkDistributorOrderConfigureModal,
+    handleDistributorContactModal,
+    handleDistributorActivityModal
+} from "../AccountAction"
 import { Tooltip } from "antd";
 import AddAccountModal from "./AccountOrderTab/AddAccountModal";
 import AddIcon from '@mui/icons-material/Add';
+import AccountActivityTable from "./AccountActivityTab/AccountActivityTable";
+import AccountActivityModal from "./AccountActivityTab/AccountActivityModal";
+const AccountContactTable = lazy(() => import("./AccountContactTab/AccountContactTable"))
+const AddAccountContact = lazy(() => import("./AccountContactTab/AddAccountContact"))
 
 
 const TabPane = StyledTabs.TabPane;
@@ -16,16 +24,16 @@ function AccountDetailsTab(props) {
 
     const [activeKey, setactiveKey] = useState("1")
 
-    const handleTabChange = (key) => this.setState({ activeKey: key });
+    const handleTabChange = (key) => setactiveKey(key);
 
     return (
         <>
             <TabsWrapper>
-                <StyledTabs defaultActiveKey="1" >
+                <StyledTabs defaultActiveKey="1" onChange={handleTabChange}>
                     <TabPane
                         tab={
                             <>
-                                <span defaultActiveKey="1" onClick={handleTabChange}>
+                                <span >
                                     <i class="fas fa-shopping-bag"></i>
                                     <span style={{ marginLeft: "0.25em" }}>Order</span>
                                 </span>
@@ -54,10 +62,42 @@ function AccountDetailsTab(props) {
                     >
 
                         <Suspense fallback={"Loading ..."}>
-                            <AccountOrderTable />
+                            <AccountOrderTable distributorId={props.distributorData.distributorId} />
                         </Suspense>
                     </TabPane>
-
+                    <TabPane
+                        tab={
+                            <>
+                                <span>
+                                    <i class="fas fa-file-contract"></i>
+                                    &nbsp; Contact
+                                </span>
+                                {activeKey === "2" && (
+                                    <>
+                                        <Tooltip title="Add Contact">
+                                            <AddIcon
+                                                type="plus"
+                                                tooltipTitle="Create"
+                                                onClick={() => {
+                                                    props.handleDistributorContactModal(true);
+                                                }}
+                                                size="14px"
+                                                style={{
+                                                    verticalAlign: "center",
+                                                    marginLeft: "5px",
+                                                }}
+                                            />
+                                        </Tooltip>
+                                    </>
+                                )}
+                            </>
+                        }
+                        key="2"
+                    >
+                        <Suspense fallback={"Loading ..."}>
+                            <AccountContactTable distributorId={props.distributorData.distributorId} />
+                        </Suspense>
+                    </TabPane>
                     <TabPane
                         tab={
                             <>
@@ -65,13 +105,31 @@ function AccountDetailsTab(props) {
                                     <i class="fab fa-connectdevelop"></i>
                                     <span style={{ marginLeft: "0.25em" }}>Activity</span>
                                 </span>
+                                {activeKey === "3" && (
+                                    <>
+                                        <Tooltip title="Create">
+                                            <AddIcon
+                                                type="plus"
+                                                tooltipTitle="Create"
+                                                onClick={() => {
+                                                    props.handleDistributorActivityModal(true);
+                                                }}
+                                                size="14px"
+                                                style={{
+                                                    verticalAlign: "center",
+                                                    marginLeft: "5px",
+                                                }}
 
+                                            />
+                                        </Tooltip>
+                                    </>
+                                )}
                             </>
                         }
-                        key="6"
+                        key="3"
                     >
                         <Suspense fallback={"Loading ..."}>
-
+                            <AccountActivityTable distributorId={props.distributorData.distributorId} />
                         </Suspense>
                     </TabPane>
 
@@ -84,14 +142,14 @@ function AccountDetailsTab(props) {
                                 </span>
                             </>
                         }
-                        key="3"
+                        key="4"
                     >
                         <Suspense fallback={"Loading ..."}>
 
                         </Suspense>
                     </TabPane>
 
-                    <TabPane
+                    {/* <TabPane
                         tab={
                             <>
                                 <span>
@@ -100,12 +158,12 @@ function AccountDetailsTab(props) {
                                 </span>
                             </>
                         }
-                        key="4"
+                        key="5"
                     >
                         <Suspense fallback={"Loading ..."}>
 
                         </Suspense>
-                    </TabPane>
+                    </TabPane> */}
                     <TabPane
                         tab={
                             <>
@@ -122,42 +180,38 @@ function AccountDetailsTab(props) {
 
                         </Suspense>
                     </TabPane>
-                    <TabPane
-                        tab={
-                            <>
-                                <span>
-                                    <i class="fas fa-file-contract"></i>
-                                    &nbsp; Contact
-                                </span>
 
-                            </>
-                        }
-                        key="2"
-                    >
-                        <Suspense fallback={"Loading ..."}>
-                            {" "}
-                            {/* <ContactShipperTable shipperId={this.props.shipper.shipperId} /> */}
-                        </Suspense>
-                    </TabPane>
                 </StyledTabs>
             </TabsWrapper>
             <AddAccountModal
                 handleLinkDistributorOrderConfigureModal={props.handleLinkDistributorOrderConfigureModal}
                 addLinkDistributorOrderConfigureModal={props.addLinkDistributorOrderConfigureModal}
+                distributorId={props.distributorData.distributorId}
             />
-
+            <AddAccountContact
+                handleDistributorContactModal={props.handleDistributorContactModal}
+                distributorContactModal={props.distributorContactModal}
+                distributorId={props.distributorData.distributorId}
+            />
+            <AccountActivityModal
+                addDistributorActivityModal={props.addDistributorActivityModal}
+                handleDistributorActivityModal={props.handleDistributorActivityModal} />
         </>
     );
 }
 
 const mapStateToProps = ({ distributor, auth }) => ({
-    addLinkDistributorOrderConfigureModal: distributor.addLinkDistributorOrderConfigureModal
+    addLinkDistributorOrderConfigureModal: distributor.addLinkDistributorOrderConfigureModal,
+    distributorContactModal: distributor.distributorContactModal,
+    addDistributorActivityModal: distributor.addDistributorActivityModal
 });
 
 const mapDispatchToProps = (dispatch) =>
     bindActionCreators(
         {
-            handleLinkDistributorOrderConfigureModal
+            handleLinkDistributorOrderConfigureModal,
+            handleDistributorContactModal,
+            handleDistributorActivityModal
         },
         dispatch
     );
