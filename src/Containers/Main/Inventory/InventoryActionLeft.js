@@ -24,7 +24,7 @@ class InventoryActionLeft extends React.Component {
               <i class="fas fa-globe"></i>
             </span>
           </Tooltip>
-          <Tooltip title="Catalogue">
+          {/* <Tooltip title="Catalogue">
             <span
               onClick={() => setInventoryViewType("table1")}
               style={{
@@ -45,7 +45,7 @@ class InventoryActionLeft extends React.Component {
             >
               <i class="fas fa-cookie-bite"></i>
             </span>
-          </Tooltip>
+          </Tooltip> */}
         </FlexContainer>
       </>
     );
