@@ -1,6 +1,7 @@
 import * as types from "./PlantActionTypes";
 import { base_url } from "../../../Config/Auth";
 import axios from "axios";
+import {base_url2  } from "../../../Config/Auth";
 import moment from "moment";
 import { message } from "antd";
 
@@ -69,7 +70,7 @@ export const getPlant = () => (dispatch) => {
     type: types.GET_PLANT_REQUEST,
   });
   axios
-    .get(`${base_url}/locationDetails/getProductionList`, {
+    .get(`${base_url2}/locationDetails/getProductionList`, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },
