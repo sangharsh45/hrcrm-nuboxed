@@ -12,7 +12,8 @@ class InventoryDetailView extends Component {
     return (
       <>
         <Link
-          toUrl={`/inventory/${this.props.locationDetailsId}`}
+     
+          toUrl={`/locationDetails/${this.props.locationDetailsId}`}
           title={`${this.props.inventoryName}`}
         />
       </>

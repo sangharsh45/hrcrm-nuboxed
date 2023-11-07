@@ -20,9 +20,7 @@ import {
 import Highlighter from "react-highlight-words";
 import moment from "moment";
 import AccountDetailsView from "./AccountDetailsView";
-import UpdateAccountModal from "./UpdateAccountModal";
-import AddAccountOrderModal from "./AddAccountOrderModal";
-import AddAccountActivityModal from "./AddAccountActivityModal";
+
 
 function AccountTable(props) {
   useEffect(() => {

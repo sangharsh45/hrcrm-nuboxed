@@ -228,6 +228,10 @@ const initialState = {
   fetchingContactDistributorsByIdError: false,
   contactDistributor: [],
 
+  fetchingLocationList: false,
+  fetchingLocationListError: false,
+  locationlist: [],
+
   setEditingDistributorContact: {},
 
   updateDistributorContactModal: false,
@@ -312,7 +316,7 @@ const initialState = {
   fetchingPhoTasklist: false,
   phoTasklist: [],
 
-  orderCartDrawer:false,
+  orderCartDrawer: false,
 };
 
 export const distributorReducer = (state = initialState, action) => {
@@ -1750,9 +1754,23 @@ export const distributorReducer = (state = initialState, action) => {
         receivingTaskCompletionByDispatchError: true,
       };
 
-      case types.HANDLE_ORDER_CART_MODAL:
-        return { ...state, orderCartDrawer: action.payload };
-  
+    case types.HANDLE_ORDER_CART_MODAL:
+      return { ...state, orderCartDrawer: action.payload };
+
+    case types.GET_LOCATION_LIST_REQUEST:
+      return { ...state, fetchingLocationList: true };
+    case types.GET_LOCATION_LIST_SUCCESS:
+      return {
+        ...state,
+        fetchingLocationList: false,
+        locationlist: action.payload,
+      };
+    case types.GET_LOCATION_LIST_FAILURE:
+      return {
+        ...state,
+        fetchingLocationList: false,
+        fetchingLocationListError: true,
+      };
 
     default:
       return state;

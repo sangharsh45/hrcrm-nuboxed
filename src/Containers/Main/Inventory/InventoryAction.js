@@ -1,5 +1,7 @@
 import * as types from "./InventoryActionType";
 import { base_url } from "../../../Config/Auth";
+import {base_url2  } from "../../../Config/Auth";
+
 import axios from "axios";
 import moment from "moment";
 import { message } from "antd";
@@ -46,12 +48,12 @@ export const addInventory = (data) => (dispatch) => {
 
 //get inventory data
 
-export const getInventory = () => (dispatch) => {
+export const getInventory = (orgId) => (dispatch) => {
   dispatch({
     type: types.GET_INVENTORY_REQUEST,
   });
   axios
-    .get(`${base_url}/locationDetails/getInventoryList`, {
+    .get(`${base_url}/locationDetails/getLocationDetailsList/${orgId}`, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },
@@ -256,7 +258,7 @@ export const getReceivedUserList = (locationDetailsId) => (dispatch) => {
     type: types.GET_RECEIVED_REQUEST,
   });
   axios
-    .get(`${base_url}/orderInventoryLocationLink/get-all/${locationDetailsId}`, {
+    .get(`${base_url2 }/orderInventoryLocationLink/get-all/${locationDetailsId}`, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },
@@ -467,7 +469,7 @@ export const addReceivedItem = (data) => (dispatch) => {
     type: types.ADD_TOTAL_RECEIVED_ITEM_REQUEST,
   });
   axios
-    .post(`${base_url}/recieved`, data)
+    .post(`${base_url2}/recieved`, data)
     .then((res) => {
       dispatch({
         type: types.ADD_TOTAL_RECEIVED_ITEM_SUCCESS,
@@ -739,7 +741,7 @@ export const addDeliveryDate = (data, locationDetailsId) => (dispatch) => {
     type: types.ADD_DELIVERY_DATE_REQUEST,
   });
   axios
-    .post(`${base_url}/orderProductionLocationLink/save`, data, {
+    .post(`${base_url2}/orderProductionLocationLink/save`, data, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },
@@ -1043,7 +1045,7 @@ export const addRoomAndRackInInventory = (data) => (dispatch) => {
 export const updateValidationInReceive = (data, phoneId, id) => (dispatch) => {
   dispatch({ type: types.UPDATE_VALIDATION_IN_RECEIVE_REQUEST });
   axios
-    .put(`${base_url}/phone/receivePhoneToggle/${phoneId}`, data, {
+    .put(`${base_url2}/phone/receivePhoneToggle/${phoneId}`, data, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },
@@ -1082,7 +1084,7 @@ export const handleDispatchreceivePhoneModal = (modalProps) => (dispatch) => {
 export const updateInspection = (data, orderPhoneId, locationId) => (dispatch) => {
   dispatch({ type: types.UPDATE_INSPECTION_REQUEST });
   axios
-    .put(`${base_url}/phoneOrder/inspectionIndStatus/${orderPhoneId}`, data, {
+    .put(`${base_url2}/phoneOrder/inspectionIndStatus/${orderPhoneId}`, data, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },

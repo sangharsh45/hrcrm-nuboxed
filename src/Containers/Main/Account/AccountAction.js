@@ -1,6 +1,6 @@
 import * as types from "./AccountActionType";
 import axios from "axios";
-import { base_url2 } from "../../../Config/Auth";
+import { base_url2, base_url } from "../../../Config/Auth";
 import { message } from "antd";
 
 /**
@@ -2319,4 +2319,29 @@ export const handleOrderCartDrawer = (modalProps) => (dispatch) => {
     type: types.HANDLE_ORDER_CART_MODAL,
     payload: modalProps,
   });
+};
+export const getLocationList = (orgId) => (dispatch) => {
+  dispatch({
+    type: types.GET_LOCATION_LIST_REQUEST,
+  });
+  axios
+    .get(`${base_url}/locationDetails/getLocationDetailsList/${orgId}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.GET_LOCATION_LIST_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.GET_LOCATION_LIST_FAILURE,
+        payload: err,
+      });
+    });
 };

@@ -16,12 +16,12 @@ function Inventory(props) {
       <Suspense fallback={<BundleLoader />}>
         {props.viewType === "table" ? <InventoryTable /> : null}
       </Suspense>
-      <Suspense fallback={<BundleLoader />}>
+      {/* <Suspense fallback={<BundleLoader />}>
         {props.viewType === "table1" ? <InventoryTable /> : null}
       </Suspense>
       <Suspense fallback={<BundleLoader />}>
         {props.viewType === "table2" ? <InventoryTable /> : null}
-      </Suspense>
+      </Suspense> */}
     </div>
   );
 }

@@ -54,7 +54,7 @@ const CustomerBusinessCard = (props) => {
         >
           <FlexContainer style={{ flexBasis: "25%", marginRight: "0.2rem" }}>
             <MultiAvatar
-               primaryTitle={primaryTitle}
+              primaryTitle={primaryTitle}
               // imageId={imageId}
               // imageURL={imageURL}
               imgHeight={40}
@@ -71,19 +71,19 @@ const CustomerBusinessCard = (props) => {
               overflow="hidden"
               textOverflow="ellipsis"
               style={{ color: "#337df4", cursor: "pointer", fontSize: "1em" }}
-              // onClick={handleClick || null}
+            // onClick={handleClick || null}
             >
               {primaryTitle || ""}
             </Title>
 
-          
-                
-            
+
+
+
           </FlexContainer>
-        
+
         </FlexContainer>
-     
-        
+
+
         <FlexContainer
           style={{
             width: "100%",
@@ -109,18 +109,18 @@ const CustomerBusinessCard = (props) => {
                   borderColor: "transparent",
                   alignSelf: "flex-end",
                 }}
-                // onClick={handlePreview}
-              > {user.pulseAccessInd ===true && ( 
-              <MonitorHeartIcon 
-              // icon={solid("heartbeat")}
-               />
+              // onClick={handlePreview}
+              > {user.pulseAccessInd === true && (
+                <MonitorHeartIcon
+                // icon={solid("heartbeat")}
+                />
               )}
                 {/* <PulseIcon></PulseIcon> */}
                 {/* <PulseIcon class="fas fa-heartbeat" style={{ fontSize: '145%' }}></PulseIcon> */}
               </Button>
             </div>
           </Tooltip>
-         
+
 
           <div style={{ marginTop: "4%" }}>
             {/* <Tooltip placement="right" title="Contact"> */}
@@ -129,19 +129,19 @@ const CustomerBusinessCard = (props) => {
               defaultMessage="Contact"
             />}>
               {/* <i class="far fa-address-book"></i> */}
-              <FontAwesomeIcon icon={solid("address-book")} />
-            
+
+
               <PlusOutlined
                 style={{ fontSize: "0.56em", cursor: "pointer" }}
-                // type="plus"
-                //onClick={handleContactModal}
+              // type="plus"
+              //onClick={handleContactModal}
               // handleIconClick={handleContactModal}
               />
             </Tooltip>
           </div>
         </FlexContainer>
-     
-      
+
+
       </MainWrapper>
     </ResponsiveCard>
   );

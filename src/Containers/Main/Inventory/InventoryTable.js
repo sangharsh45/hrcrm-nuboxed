@@ -4,6 +4,7 @@ import { bindActionCreators } from "redux";
 import { Input, Space, Button, Tooltip } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
 import moment from "moment";
+import { Link } from "../../../Components/Common";
 import { getInventory, handleInventoryRoomRackModal } from "./InventoryAction";
 import Highlighter from "react-highlight-words";
 import InventoryDetailView from "./InventoryDetailView";
@@ -18,13 +19,13 @@ const InventoryTable = (props) => {
     handleInventoryRoomRackModal,
     inventory,
     locationsType,
-    userId,
+    orgId,
     addroomrackininventory,
   } = props;
 
   useEffect(() => {
-    getInventory(userId);
-  }, [getInventory, userId]);
+    getInventory(orgId);
+  }, [getInventory, orgId]);
 
   const [searchText, setSearchText] = useState("");
   const [searchedColumn, setSearchedColumn] = useState("");
@@ -110,12 +111,15 @@ const InventoryTable = (props) => {
     setSearchText("");
   };
 
-  const locationsTypeOption = locationsType.map((item) => ({
-    text: item.locationType || "",
-    value: item.locationType,
-  }));
+  // const locationsTypeOption = locationsType.map((item) => ({
+  //   text: item.locationType || "",
+  //   value: item.locationType,
+  // }));
   const tab = document.querySelector(".ant-layout-sider-children");
   const tableHeight = tab && tab.offsetHeight - 200;
+  const { inventoryInd } = props;
+
+  const filteredData = inventory.filter((item) => item.inventoryInd === true);
   const columns = [
     {
       title: "",
@@ -124,53 +128,69 @@ const InventoryTable = (props) => {
     },
     {
       title: "Name",
-      dataIndex: "name",
-      ...getColumnSearchProps("name"),
+      // width: "15%",
+      dataIndex: "locationName",
+      // ...this.getColumnSearchProps("locationName"),
       render: (name, item, i) => {
         const currentdate = moment().format("DD/MM/YYYY");
         const date = moment(item.creationDate).format("DD/MM/YYYY");
+        // const plantName = `${item.salutation || ""} ${item.firstName ||
+        //   ""} ${item.middleName || ""} ${item.lastName || ""} `;
         return (
           <>
-            <InventoryDetailView locationDetailsId={item.locationDetailsId} inventoryName={item.name} />
+            {" "}
+            <Link toUrl={`locationDetails/${item.locationDetailsId}`} title={`${item.locationName}`} />
+            &nbsp;&nbsp;
+            {/* <InventoryDetailView
+              locationDetailsId={item.locationDetailsId}
+              inventoryName={item.locationName}
+            /> */}
             {date === currentdate ? (
-              <span style={{ color: "tomato", fontWeight: "bold" }}>New</span>
+              <span
+                style={{
+                  color: "tomato",
+                  fontWeight: "bold",
+                }}
+              >
+                New
+              </span>
             ) : null}
           </>
         );
       },
     },
     {
-      title: "Management",
+      title: "Supervisor",
       dataIndex: "management",
-      render: (name, item, i) => ({
-        children: `${item.managementDetails.firstName || ""} ${item.managementDetails.lastName || ""}`,
-      }),
-      sorter: (a, b) => {
-        const nameA = a.managementDetails.firstName.toLowerCase();
-        const nameB = b.managementDetails.firstName.toLowerCase();
-        if (nameA < nameB) {
-          return -1;
-        }
-        if (nameA > nameB) {
-          return 1;
-        }
-        return 0;
-      },
+      // render: (name, item, i) => ({
+      //   children: `${item.managementDetails.firstName || ""} ${item.managementDetails.lastName || ""}`,
+      // }),
+      // sorter: (a, b) => {
+      //   const nameA = a.managementDetails.firstName.toLowerCase();
+      //   const nameB = b.managementDetails.firstName.toLowerCase();
+      //   if (nameA < nameB) {
+      //     return -1;
+      //   }
+      //   if (nameA > nameB) {
+      //     return 1;
+      //   }
+      //   return 0;
+      // },
     },
-    {
-      title: "Type",
-      dataIndex: "type",
-      width: "8%",
-      filters: locationsTypeOption,
-      onFilter: (value, record) => record.type === value,
-    },
+    // {
+    //   title: "Type",
+    //   dataIndex: "type",
+    //   width: "8%",
+    //   // filters: locationsTypeOption,
+    //   onFilter: (value, record) => record.type === value,
+    // },
     {
       title: "Country",
-      dataIndex: "country",
-      ...getColumnSearchProps("country"),
+      dataIndex: "country_name",
+      ...getColumnSearchProps("country_name"),
       defaultSortOrder: "descend",
       render: (name, item, i) => (
-        <span>{(item.addresses && item.addresses[0].country) || ""}</span>
+        <span>{(item.address && item.address[0].country) || ""}</span>
       ),
     },
     {
@@ -179,17 +199,17 @@ const InventoryTable = (props) => {
       width: "18%",
       render: (name, item, i) => (
         <span>
-          {`${(item.addresses && item.addresses[0].city) || ""} ${" "}${(item.addresses && item.addresses[0].state) || ""
+          {`${(item.address && item.address[0].city) || ""} ${" "}${(item.address && item.address[0].state) || ""
           }`}
         </span>
       ),
     },
     {
       title: "Pin Code",
-      dataIndex: "pinCode",
+      dataIndex: "postalCode",
       width: "8%",
       render: (name, item, i) => (
-        <span>{(item.addresses && item.addresses[0].pinCode) || ""}</span>
+        <span>{(item.address && item.address[0].postalCode) || ""}</span>
       ),
     },
     {
@@ -215,7 +235,7 @@ const InventoryTable = (props) => {
     <>
       <StyledTable
         columns={columns}
-        dataSource={inventory}
+        dataSource={filteredData}
         loading={props.fetchingInventoryList || props.fetchingInventoryListError}
         onChange={() => console.log("task onChangeHere...")}
         scroll={{ y: tableHeight }}
@@ -232,9 +252,10 @@ const InventoryTable = (props) => {
 
 const mapStateToProps = ({ inventory, auth, locations }) => ({
   userId: auth.userDetails.userId,
+  orgId:auth.userDetails.organizationId,
   fetchingInventoryList: inventory.fetchingInventoryList,
   inventory: inventory.inventory,
-  locationsType: locations.locationsType,
+  // locationsType: locations.locationsType,
   addroomrackininventory: inventory.addroomrackininventory,
 });
 
