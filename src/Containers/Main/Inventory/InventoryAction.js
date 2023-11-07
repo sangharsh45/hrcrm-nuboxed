@@ -46,12 +46,12 @@ export const addInventory = (data) => (dispatch) => {
 
 //get inventory data
 
-export const getInventory = () => (dispatch) => {
+export const getInventory = (orgId) => (dispatch) => {
   dispatch({
     type: types.GET_INVENTORY_REQUEST,
   });
   axios
-    .get(`${base_url}/locationDetails/getInventoryList`, {
+    .get(`${base_url}/locationDetails/getLocationDetailsList/${orgId}`, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },
