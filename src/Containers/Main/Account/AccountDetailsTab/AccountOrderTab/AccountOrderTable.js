@@ -125,11 +125,11 @@ const AccountOrderTable = (props) => {
         {
             title: "Location",
             width: "12%",
-            //   render: (text, item) => {
-            //     return (
-            //       <>{item.locationDetailsViewDTO && item.locationDetailsViewDTO.name || ""}</>
-            //     )
-            //   }
+            render: (text, item) => {
+                return (
+                    <>{item.locationDetailsViewDTO && item.locationDetailsViewDTO.name || ""}</>
+                )
+            }
         },
         {
             title: "Phones#",
