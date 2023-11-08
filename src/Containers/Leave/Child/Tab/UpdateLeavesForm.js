@@ -295,22 +295,20 @@ class UpdateLeaveForm extends Component {
                       />
                       
                     </div>
-                  <Field
-                    name="coverDetails"
-                    //label="Cover"
-                    label={<FormattedMessage
-                      id="app.coverDetails"
-                      defaultMessage="Cover"
-                    />}
-                    width={"100%"}
-                    component={InputComponent}
-                    inlineLabel
-                    style={{
-                      flexBasis: "140%",
-                      height: "2.0625em",
-                      // marginTop: "0.25em",
-                    }}
-                  />
+                    <Spacer />
+              
+              <Field
+                name="coverDetails"
+                //label="Cover"
+                label={<FormattedMessage
+                  id="app.coverDetails"
+                  defaultMessage="Cover"
+                />}
+                width={"100%"}
+                component={InputComponent}
+                inlineLabel
+              />
+            
                   <Spacer />
                   <Field
                     isRequired

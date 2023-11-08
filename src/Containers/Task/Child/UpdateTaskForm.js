@@ -2,11 +2,14 @@ import React, { Component, useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import dayjs from "dayjs";
+import{getAllOpportunityData} from "../../Opportunity/OpportunityAction"
+import {getAllCustomerData} from "../../Customer/CustomerAction"
 import { Button, Tooltip, Switch } from "antd";
 import { getEmployeelist } from "../../../Containers/Employees/EmployeeAction";
 import { FormattedMessage } from "react-intl";
 import { Formik, Form, Field, FastField } from "formik";
 import moment from "moment";
+import { getFilteredEmailContact } from "../../Candidate/CandidateAction";
 import { Spacer } from "../../../Components/UI/Elements";
 import { ExclamationCircleOutlined } from "@ant-design/icons";
 import { InputComponent } from "../../../Components/Forms/Formik/InputComponent";
@@ -145,8 +148,11 @@ function UpdateTaskForm(props) {
   useEffect(() => {
     //props.getEmployeelist();
     props.getCustomerTask(props.orgId);
+    props.getFilteredEmailContact(props.userId);
+    props.getAllOpportunityData(props.userId)
     props.getProjectTaskList(props.orgId);
     props.getTasks();
+    props.getAllCustomerData(props.userId)
     props.getUnits(props.orgId);
     props.getCandidateTaskList(props.orgId);
     props.getTaskForRecruit(props.orgId);
@@ -194,6 +200,32 @@ function UpdateTaskForm(props) {
       value: item.taskTypeId,
     };
   });
+  const customerNameOption = props.allCustomerData
+  .sort((a, b) => {
+    const libraryNameA = a.name && a.name.toLowerCase();
+    const libraryNameB = b.name && b.name.toLowerCase();
+    if (libraryNameA < libraryNameB) {
+      return -1;
+    }
+    if (libraryNameA > libraryNameB) {
+      return 1;
+    }
+
+    // names must be equal
+    return 0;
+  })
+  .map((item) => {
+    return {
+      label: `${item.name || ""}`,
+      value: item.customerId,
+    };
+  });
+  const ContactData = props.filteredContact.map((item) => {
+    return {
+      label: `${item.fullName}`,
+      value: item.contactId,
+    };
+  });
 
   const candidateOption = props.candidateTaskList.map((item) => {
     return {
@@ -206,6 +238,13 @@ function UpdateTaskForm(props) {
     return {
       label: item.fullName,
       value: item.employeeId,
+    };
+  });
+
+  const opportunityNameOption = props.allOpportunityData.map((item) => {
+    return {
+      label: `${item.opportunityName}`,
+      value: item.opportunityId,
     };
   });
 
@@ -934,6 +973,87 @@ function UpdateTaskForm(props) {
                             inlineLabel
                           />
                       </div>
+                      <Spacer />
+                  <div>
+                  {props.user.crmInd === true &&(
+                 <Field
+                 name="customerId"
+                 // selectType="customerList"
+                 isColumnWithoutNoCreate
+                 label={
+                   <FormattedMessage
+                     id="app.customer"
+                     defaultMessage="Customer"
+                   />
+                 }
+                 //component={SearchSelect}
+                 component={SelectComponent}
+                 options={
+                   Array.isArray(customerNameOption)
+                     ? customerNameOption
+                     : []
+                 }
+                 isColumn
+                 margintop={"0"}
+                 value={values.customerId}
+                 inlineLabel
+               />
+                  )} 
+                  </div>
+                  <Spacer />
+                  <div>
+                  {props.user.crmInd === true &&(
+                  <Field
+                    name="contactId"
+                    //selectType="contactList"
+                    isColumnWithoutNoCreate
+                    // label="Contact"
+                    label={
+                      <FormattedMessage
+                        id="app.contact"
+                        defaultMessage="Contact"
+                      />
+                    }
+                    component={SelectComponent}
+                    isColumn
+                    options={Array.isArray(ContactData) ? ContactData : []}
+                    value={values.contactId}
+                    // isDisabled={defaultContacts}
+                    defaultValue={{
+                      label: `${props.fullName || ""} `,
+                      value: props.contactId,
+                    }}
+                    inlineLabel
+                  />
+                  )} 
+                  </div>
+                  <Spacer/>
+                  <div>
+                  {props.user.crmInd === true &&(
+                 <Field
+                 name="opportunityId"
+                 // selectType="customerList"
+                 isColumnWithoutNoCreate
+                 label={
+                   <FormattedMessage
+                     id="app.opportunity"
+                     defaultMessage="Opportunity"
+                   />
+                 }
+                 //component={SearchSelect}
+                 component={SelectComponent}
+                 options={
+                   Array.isArray(opportunityNameOption)
+                     ? opportunityNameOption
+                     : []
+                 }
+                 isColumn
+                 margintop={"0"}
+                 value={values.opportunityId}
+                 inlineLabel
+               />
+                  )} 
+                  </div>
                 <div class=" flex justify-between">
                   {values.taskTypeId === "TSK52434477391272022" && (
                     <div class=" w-1/2 font-bold">
@@ -1029,9 +1149,11 @@ function UpdateTaskForm(props) {
   );
 }
 
-const mapStateToProps = ({ auth, task,settings, unit, tasks, employee }) => ({
+const mapStateToProps = ({ auth,candidate, opportunity,task,customer,settings, unit, tasks, employee }) => ({
   // addingTask: task.addingTask,
   user: auth.userDetails,
+  allOpportunityData:opportunity.allOpportunityData,
+  allCustomerData:customer.allCustomerData,
   userId: auth.userDetails.userId,
   recruitTask: settings.recruitTask,
   orgId: auth.userDetails.organizationId,
@@ -1043,10 +1165,7 @@ const mapStateToProps = ({ auth, task,settings, unit, tasks, employee }) => ({
   units: unit.units,
   candidateTaskList: task.candidateTaskList,
   tasks: tasks.tasks,
-
-  // deletingTask: task.deleteTask,
-  // oppoStages: settings.oppoStages,
-  // employees: employee.employees,
+  filteredContact: candidate.filteredContact,
   setEditingTask: task.setEditingTask,
 });
 
@@ -1054,11 +1173,14 @@ const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
       // addTask,
+      getAllCustomerData,
+      getFilteredEmailContact,
       handleChooserModal,
       updateTask,
       getProjectTaskList,
       getUnits,
       getTasks,
+      getAllOpportunityData,
       getCustomerTask,
       getCandidateTaskFilterList,
       getCandidateTaskList,

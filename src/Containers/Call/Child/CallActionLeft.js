@@ -7,7 +7,7 @@ const CallActionLeft = (props) => {
     return (
         <div class=" flex items-center" >
                <Tooltip
-        title={<FormattedMessage id="app.myTasks" defaultMessage="calls" />}
+        title={<FormattedMessage id="app.calls" defaultMessage="calls" />}
       >
         <span class=" mr-2 cursor-pointer text-xs"
           onClick={() => props.setCallViewType("table")}

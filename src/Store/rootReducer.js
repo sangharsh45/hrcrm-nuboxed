@@ -78,6 +78,8 @@ import { orderReducer } from "../Containers/Main/Order/OrderReducer";
 import { shipByReducer } from "../Containers/Settings/Category/ShipBy/ShipByReducer";
 import { catgCustomerReducer } from "../Containers/Settings/Category/Customer/CustomerReducer";
 import { distributorReducer } from "../Containers/Main/Account/AccountReducer";
+import { suppliersReducer } from "../Containers/Main/Suppliers/SuppliersReducer";
+import { collectionReducer } from "../Containers/Collection/CollectionReducer";
 
 const appReducer = combineReducers({
   dashboard: dashboardReducer,
@@ -151,6 +153,8 @@ const appReducer = combineReducers({
   catgCustomer: catgCustomerReducer,
   brandmodel: brandmodelReducer,
   distributor: distributorReducer,
+  suppliers:suppliersReducer,
+  collection:collectionReducer,
 });
 
 const rootReducer = (state, action) => {

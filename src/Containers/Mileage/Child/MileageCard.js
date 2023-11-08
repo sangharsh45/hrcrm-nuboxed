@@ -135,7 +135,7 @@ this.handleExpand(item.voucherId)
 
 }}
 >
-                 <Tooltip  title={"status"}>
+                 <Tooltip  title={"Status"}>
                  <AssistantIcon
 style={{ color: "grey",fontSize:"1.2rem",padding:"2px" }}/>
    </Tooltip> 
@@ -232,7 +232,7 @@ border-radius: 0.35rem;
     color: rgb(68,68,68);
     margin: 1em;
     padding: 0.2rem;
-    width: 20vw;
+    width: 19vw;
     display: flex;
     flex-direction: column;
   @media only screen and (max-width: 600px) {
