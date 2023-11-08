@@ -185,10 +185,10 @@ function ContactCardList(props) {
           <div class="max-sm:w-full">
                                         <Tooltip>
                                           <div class=" flex max-sm:w-full justify-between flex-row md:flex-col">
-                                            <div class="text-[0.875rem] text-cardBody font-poppins max-sm:hidden">
+                                            <div class="text-xs text-cardBody font-poppins max-sm:hidden">
                                             Name
                                             </div>
-                                            <div class="text-[0.82rem] text-blue-500 text-cardBody font-poppins font-semibold  cursor-pointer">
+                                            <div class="text-sm text-blue-500 text-cardBody font-poppins font-semibold  cursor-pointer">
                                                 
          <Link
           toUrl={`contact/${item.contactId}`}
@@ -214,42 +214,42 @@ function ContactCardList(props) {
                                 <div class="flex">
 
                                 <div className=" flex font-medium flex-col  md:w-52 max-sm:flex-row w-full max-sm:justify-between ">
-                                    <div class=" text-[0.875rem] text-cardBody font-[0.875rem] font-poppins max-sm:hidden"> Company </div>
-                                    <div class=" text-[0.82rem] text-cardBody font-poppins">   
+                                    <div class=" text-xs text-cardBody font-xs font-poppins max-sm:hidden"> Company </div>
+                                    <div class=" text-sm text-cardBody font-poppins">   
                                     {item.tagWithCompany}
                                     </div>
                                 </div>
                                 <div className=" flex font-medium flex-col md:w-36 max-sm:flex-row w-full max-sm:justify-between ">
-                                    <div class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden">Designation</div>
-                                    <div class="text-[0.82rem] text-cardBody font-poppins">
+                                    <div class=" text-xs text-cardBody font-poppins max-sm:hidden">Designation</div>
+                                    <div class="text-sm text-cardBody font-poppins">
                                          {item.designation}
                                     </div>
                                 </div>
                                 <div className=" flex font-medium flex-col md:w-36  max-sm:flex-row w-full max-sm:justify-between">
-                                  <div class="text-[0.875rem] text-cardBody font-poppins max-sm:hidden">Department</div>
-                                  <div class="text-[0.82rem] text-cardBody font-poppins">
+                                  <div class="text-xs text-cardBody font-poppins max-sm:hidden">Department</div>
+                                  <div class="text-sm text-cardBody font-poppins">
                                        {item.department}
                                   </div>
                               </div>
                               </div>
                               <div className="flex font-medium flex-col md:w-32 max-sm:flex-row w-full max-sm:justify-between ">
-  <div className="text-[0.875rem] text-cardBody font-poppins max-sm:hidden"># Opportunity</div>
-  <div className="text-[0.82rem] text-cardBody font-poppins text-center">
+  <div className="text-xs text-cardBody font-poppins max-sm:hidden"># Opportunity</div>
+  <div className="text-sm text-cardBody font-poppins text-center">
     {item.oppNo}
   </div>
 </div>
 <div className=" flex font-medium flex-col md:w-36 max-sm:flex-row w-full max-sm:justify-between ">
-                                    <h4 class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden">Pipeline Value</h4>
+                                    <h4 class=" text-xs text-cardBody font-poppins max-sm:hidden">Pipeline Value</h4>
 
-                                    <div class=" text-[0.82rem] text-cardBody font-poppins text-center">
+                                    <div class=" text-sm text-cardBody font-poppins text-center">
                                     {item.totalProposalValue}
 
                                     </div>
                                 </div>
                                 <div className="flex font-medium flex-col md:w-32 max-sm:flex-row w-full max-sm:justify-between ">
-                                    <div class="text-[0.875rem] text-cardBody font-poppins max-sm:hidden">Portal Acess</div>
+                                    <div class="text-xs text-cardBody font-poppins max-sm:hidden">Portal Acess</div>
 
-                                    <div class="text-[0.82rem] text-cardBody font-poppins">
+                                    <div class="text-sm text-cardBody font-poppins">
 
                                     {item.thirdPartyAccessInd 
     ? `${item.thirdPartyAccessInd}`
@@ -260,7 +260,7 @@ function ContactCardList(props) {
                                 <div class="flex">
                                 <div className="flex font-medium flex-col md:w-20  max-sm:flex-row w-full max-sm:justify-between">
                        
-                       <div class="text-[0.875rem] text-cardBody font-poppins max-sm:hidden">Owner</div>
+                       <div class="text-xs text-cardBody font-poppins max-sm:hidden">Owner</div>
 
                    
               <Tooltip title={item.ownerName}>
@@ -278,7 +278,8 @@ function ContactCardList(props) {
           </Tooltip>
 
                    </div>
-                   <div class="flex flex-col justify-evenly  ">
+                   <div class="flex flex-col w-[5%] max-sm:flex-row max-sm:w-[10%]">
+                    <div>
                     <Tooltip title="Notes">
        <NoteAltIcon
                 onClick={() => {
@@ -288,10 +289,21 @@ function ContactCardList(props) {
                 style={{ color: "green", cursor: "pointer", fontSize: "1rem" }}
               />
            </Tooltip>
+           </div>
+           <div>
+           <Tooltip title="Pulse">
+       <MonitorHeartIcon
+                onClick={() => {
+                  handleContactPulseDrawerModal(true);
+                  handleSetCurrentContact(item);
+                }}
+                style={{ fontSize: "0.8rem", color: "#df9697" }}
+              />
+           </Tooltip>
 
+</div>
             </div>
-                   
-                                <div class="flex flex-col  max-sm:flex-row w-full max-sm:justify-evenly items-center">
+                                <div class="flex flex-col  max-sm:flex-row w-[40%] max-sm:justify-evenly items-center">
                     <div class="rounded-full bg-white w-5 h-5 cursor-pointer">
                     <Tooltip title={item.mobileNo} >
             {item.doNotCallInd !== true && (
@@ -329,18 +341,7 @@ function ContactCardList(props) {
             />
            </Tooltip>
                         </div>
-                        <div >
-                    <Tooltip title="Pulse">
-       <MonitorHeartIcon
-                onClick={() => {
-                  handleContactPulseDrawerModal(true);
-                  handleSetCurrentContact(item);
-                }}
-                style={{ fontSize: "0.8rem", color: "#df9697" }}
-              />
-           </Tooltip>
 
-            </div> 
                       &nbsp;&nbsp;
                         <div>
                         <span

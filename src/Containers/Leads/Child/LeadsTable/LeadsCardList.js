@@ -115,10 +115,10 @@ const LeadsCardList = (props) => {
                                         <div class="max-sm:w-full" >
                                         <Tooltip>
                                           <div class="max-sm:w-full justify-between flex md:flex-col">
-                                            <h4 class=" text-[0.75rem] text-cardBody  font-poppins max-sm:hidden">
+                                            <h4 class=" text-sm text-cardBody  font-poppins max-sm:hidden">
                                             Name
                                             </h4>
-                                            <h4 class="text-[0.875rem] text-cardBody font-semibold  font-poppins cursor-pointer">
+                                            <h4 class="text-xs text-cardBody font-semibold  font-poppins cursor-pointer">
                                             {item.name}
                                             {/* <span>
               {item.name === null ? (
@@ -214,8 +214,8 @@ const LeadsCardList = (props) => {
 </div>
 <div class="flex"> 
                                 <div className=" flex font-medium flex-col  md:w-32 max-sm:flex-row w-full max-sm:justify-between ">
-                           <h4 class=" text-[0.75rem] text-cardBody font-poppins max-sm:hidden"> Phone # </h4>
-                           <h4 class=" text-[0.875rem] text-cardBody font-poppins">  
+                           <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden"> Phone # </h4>
+                           <h4 class=" text-xs text-cardBody font-poppins">  
                            {item.countryDialCode && item.phoneNumber ? (
     `${item.countryDialCode} ${item.phoneNumber}`
   ) : (
@@ -227,8 +227,8 @@ const LeadsCardList = (props) => {
                        <div className=" flex font-medium flex-col md:w-32 max-sm:flex-row w-full max-sm:justify-between ">
                                   
 
-                                  <h4 class=" text-[0.75rem] text-cardBody font-poppins max-sm:hidden">Country</h4>
-                                  <h4 class=" text-[0.875rem] text-cardBody font-poppins">
+                                  <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden">Country</h4>
+                                  <h4 class=" text-xs text-cardBody font-poppins">
                                   <ReactCountryFlag
                         countryCode={item.countryAlpha2Code}
                         svg
@@ -246,8 +246,8 @@ const LeadsCardList = (props) => {
                        </div>
                        <div class="flex"> 
                        <div className=" flex font-medium flex-col  md:w-[12rem] max-sm:flex-row w-full max-sm:justify-between ">
-                           <h4 class=" text-[0.75rem] text-cardBody font-poppins max-sm:hidden"> Company </h4>
-                           <h4 class=" text-[0.875rem] text-cardBody font-semibold  font-poppins">   
+                           <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden"> Company </h4>
+                           <h4 class=" text-xs text-cardBody font-semibold  font-poppins">   
 
   {item.companyName || "Not Available"}
 
@@ -275,17 +275,17 @@ const LeadsCardList = (props) => {
                        
                                 <div className=" flex font-medium flex-col  md:w-28 max-sm:flex-row w-full max-sm:justify-between ">
                            
-                                    <h4 class=" text-[0.75rem] text-cardBody font-poppins max-sm:hidden"> Sector </h4>
-                                    <h4 class=" text-[0.875rem] text-cardBody font-poppins">   
+                                    <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden"> Sector </h4>
+                                    <h4 class=" text-xs text-cardBody font-poppins">   
                                     {item.sector}
                                     </h4>
                                 </div>
                                 </div>
                                 <div class="flex mb-1"> 
                                 <div className=" flex font-medium flex-col md:w-32 max-sm:flex-row w-full max-sm:justify-between ">
-                                    <h4 class=" text-[0.75rem] text-cardBody font-poppins max-sm:hidden">Assigned to</h4>
+                                    <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden">Assigned to</h4>
 
-                                    <div class=" text-[0.875rem] text-cardBody font-poppins">
+                                    <div class=" text-xs text-cardBody font-poppins">
                                     
                                     <span>
               {item.assignedTo === null ? (
@@ -303,7 +303,7 @@ const LeadsCardList = (props) => {
                                 </div>
                                 <div className=" flex font-medium flex-col md:w-20  max-sm:flex-row w-full max-sm:justify-between">
                        
-                       <h4 class=" text-[0.75rem] text-cardBody font-poppins max-sm:hidden">Owner</h4>
+                       <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden">Owner</h4>
 
                        <span>
               <MultiAvatar
@@ -316,9 +316,9 @@ const LeadsCardList = (props) => {
             </span>
                    </div>
                    <div className=" flex font-medium flex-col md:w-[6rem] max-sm:flex-row w-full max-sm:justify-between ">
-                                    <h4 class=" text-[0.75rem] text-cardBody font-poppins max-sm:hidden">Qualify</h4>
+                                    <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden">Qualify</h4>
 
-                                    <div class=" text-[0.875rem] text-cardBody font-poppins">
+                                    <div class=" text-xs text-cardBody font-poppins">
                 {/* qual */}
                                     </div>
                                     <div>

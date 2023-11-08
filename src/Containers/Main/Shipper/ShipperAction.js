@@ -232,7 +232,11 @@ export const getActivityListByShipperId = (shipperId) => (dispatch) => {
     type: types.GET_ACTIVITY_LIST_BY_SHIPPERID_REQUEST,
   });
   axios
-    .get(`${base_url}/activity/shipper/${shipperId}`, {})
+    .get(`${base_url2}/activity/shipper/${shipperId}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
     .then((res) => {
       console.log(res);
       dispatch({
