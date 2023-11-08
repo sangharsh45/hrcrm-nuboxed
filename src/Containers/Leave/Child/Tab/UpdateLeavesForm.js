@@ -296,7 +296,7 @@ class UpdateLeaveForm extends Component {
                       
                     </div>
                     <Spacer />
-              
+                    <div class=" w-1/2 max-sm:w-wk">
               <Field
                 name="coverDetails"
                 //label="Cover"
@@ -306,9 +306,9 @@ class UpdateLeaveForm extends Component {
                 />}
                 width={"100%"}
                 component={InputComponent}
-                inlineLabel
+                isColumn
               />
-            
+            </div>
                   <Spacer />
                   <Field
                     isRequired

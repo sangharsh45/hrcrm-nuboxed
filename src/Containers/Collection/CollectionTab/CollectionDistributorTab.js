@@ -138,12 +138,12 @@ function CollectionDistributorTab(props) {
           >
             <Suspense fallback={"Loading ..."}>
               {" "}
-              {/* <DistributorCollectionTableToday
+              <DistributorCollectionTableToday
                 rowSelectionTodayForDistributor={
                   rowSelectionTodayForDistributor
                 }
                 handleClearCheck={handleClearCheck}
-              /> */}
+              />
             </Suspense>
           </TabPane>
 

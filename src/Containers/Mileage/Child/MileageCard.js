@@ -9,12 +9,14 @@ import { getMileageByUserId,
   handleMileageVoucherIdDrwer
  } from "../MileageAction";
 import styled from 'styled-components'
+import { StyledPopconfirm } from "../../../Components/UI/Antd";
 import AssistantIcon from '@mui/icons-material/Assistant';
 import APIFailed from "../../../Helpers/ErrorBoundary/APIFailed";
 import { DeleteOutlined, } from "@ant-design/icons";
 import MileageVoucherIdDrawer from "./MileageVoucherIdDrawer";
 import StatusMileageDrawer from "./StatusMileageDrawer";
 import { BundleLoader } from "../../../Components/Placeholder";
+import { FormattedMessage } from "react-intl";
 
 
 class MileageCard extends React.Component {
@@ -144,16 +146,25 @@ style={{ color: "grey",fontSize:"1.2rem",padding:"2px" }}/>
         
                         
                            {item.status === "Pending" && (
-            <Tooltip title="Delete">
+              <StyledPopconfirm
+              // title="Do you want to delete?"
+              title={
+                <FormattedMessage
+                  id="app.doyouwanttodelete?"
+                  defaultMessage="Do you want to delete?"
+                />
+              }
+              onConfirm={() =>   this.props.deleteMileageVoucher(item.voucherId)}
+            >
               <DeleteOutlined
                 type="delete"
                 style={{ cursor: "pointer" }}
-                onClick={() => {
-                this.props.deleteMileageVoucher(item.voucherId);
+                // onClick={() => {
+                // this.props.deleteMileageVoucher(item.voucherId);
                   
-                }}
+                // }}
               />
-            </Tooltip>
+              </StyledPopconfirm>
             )}
              {item.status==="Rejected" && (
             <Button type="primary"
