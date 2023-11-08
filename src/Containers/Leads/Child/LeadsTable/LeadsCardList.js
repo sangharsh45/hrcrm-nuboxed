@@ -103,8 +103,8 @@ const LeadsCardList = (props) => {
               primaryTitle={item.name}
               imageId={item.imageId}
               imageURL={item.imageURL}
-              imgWidth={"1.8em"}
-              imgHeight={"1.8em"}
+              imgWidth={"1.8rem"}
+              imgHeight={"1.8rem"}
             />
           </SubTitle>
 </div>
@@ -115,10 +115,10 @@ const LeadsCardList = (props) => {
                                         <div class="max-sm:w-full" >
                                         <Tooltip>
                                           <div class="max-sm:w-full justify-between flex md:flex-col">
-                                            <h4 class=" text-[0.875rem] text-cardBody  font-poppins max-sm:hidden">
+                                            <h4 class=" text-[0.75rem] text-cardBody  font-poppins max-sm:hidden">
                                             Name
                                             </h4>
-                                            <h4 class="text-[0.82rem] text-cardBody font-semibold  font-poppins cursor-pointer">
+                                            <h4 class="text-[0.875rem] text-cardBody font-semibold  font-poppins cursor-pointer">
                                             {item.name}
                                             {/* <span>
               {item.name === null ? (
@@ -209,28 +209,13 @@ const LeadsCardList = (props) => {
 />
 </ButtonGroup>
 </div>
-<div>
-<Tooltip
-        title={
-          <FormattedMessage id="app.activity" defaultMessage="Activity" />
-        }
-      >
-<AddchartIcon
 
-style={{fontSize: "1rem",cursor: 'pointer',}}
-onClick={()=>{
-  props.handleCETmodal(true)
-  handleRowData(item)
-  }}
-/>
-</Tooltip>
-</div>
      </div>  
 </div>
 <div class="flex"> 
                                 <div className=" flex font-medium flex-col  md:w-32 max-sm:flex-row w-full max-sm:justify-between ">
-                           <h4 class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden"> Phone # </h4>
-                           <h4 class=" text-[0.82rem] text-cardBody font-poppins">  
+                           <h4 class=" text-[0.75rem] text-cardBody font-poppins max-sm:hidden"> Phone # </h4>
+                           <h4 class=" text-[0.875rem] text-cardBody font-poppins">  
                            {item.countryDialCode && item.phoneNumber ? (
     `${item.countryDialCode} ${item.phoneNumber}`
   ) : (
@@ -242,8 +227,8 @@ onClick={()=>{
                        <div className=" flex font-medium flex-col md:w-32 max-sm:flex-row w-full max-sm:justify-between ">
                                   
 
-                                  <h4 class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden">Country</h4>
-                                  <h4 class=" text-[0.82rem] text-cardBody font-poppins">
+                                  <h4 class=" text-[0.75rem] text-cardBody font-poppins max-sm:hidden">Country</h4>
+                                  <h4 class=" text-[0.875rem] text-cardBody font-poppins">
                                   <ReactCountryFlag
                         countryCode={item.countryAlpha2Code}
                         svg
@@ -260,16 +245,16 @@ onClick={()=>{
                      
                        </div>
                        <div class="flex"> 
-                       <div className=" flex font-medium flex-col  md:w-40 max-sm:flex-row w-full max-sm:justify-between ">
-                           <h4 class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden"> Company </h4>
-                           <h4 class=" text-[0.82rem] text-cardBody font-semibold  font-poppins">   
+                       <div className=" flex font-medium flex-col  md:w-[12rem] max-sm:flex-row w-full max-sm:justify-between ">
+                           <h4 class=" text-[0.75rem] text-cardBody font-poppins max-sm:hidden"> Company </h4>
+                           <h4 class=" text-[0.875rem] text-cardBody font-semibold  font-poppins">   
 
   {item.companyName || "Not Available"}
 
 
                            </h4>
                        </div>
-                       <div class="rounded-full bg-white  h-5 cursor-pointer w-8">
+                       <div class="rounded-full bg-white  h-5 cursor-pointer w-8 justify-cente">
                     {item.url !== null ? (
               <Tooltip title={item.url}>
                 <span
@@ -280,7 +265,7 @@ onClick={()=>{
                   {" "}
                   <a href={`item.url`} target="_blank">
                     <OpenInBrowserIcon
-                      style={{ cursor: "pointer", color: "green" ,fontSize: "0.8rem",}}
+                      style={{ cursor: "pointer", color: "green" ,fontSize: "1rem",}}
                     />
                   </a>
                 </span>
@@ -290,17 +275,17 @@ onClick={()=>{
                        
                                 <div className=" flex font-medium flex-col  md:w-28 max-sm:flex-row w-full max-sm:justify-between ">
                            
-                                    <h4 class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden"> Sector </h4>
-                                    <h4 class=" text-[0.82rem] text-cardBody font-poppins">   
+                                    <h4 class=" text-[0.75rem] text-cardBody font-poppins max-sm:hidden"> Sector </h4>
+                                    <h4 class=" text-[0.875rem] text-cardBody font-poppins">   
                                     {item.sector}
                                     </h4>
                                 </div>
                                 </div>
                                 <div class="flex mb-1"> 
                                 <div className=" flex font-medium flex-col md:w-32 max-sm:flex-row w-full max-sm:justify-between ">
-                                    <h4 class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden">Assigned to</h4>
+                                    <h4 class=" text-[0.75rem] text-cardBody font-poppins max-sm:hidden">Assigned to</h4>
 
-                                    <div class=" text-[0.82rem] text-cardBody font-poppins">
+                                    <div class=" text-[0.875rem] text-cardBody font-poppins">
                                     
                                     <span>
               {item.assignedTo === null ? (
@@ -308,8 +293,8 @@ onClick={()=>{
               ) : (
                 <MultiAvatar
                   primaryTitle={item.assignedTo}
-                  imgWidth={"1.8em"}
-                  imgHeight={"1.8em"}
+                  imgWidth={"1.8rem"}
+                  imgHeight={"1.8rem"}
                 />
               )}
             </span>
@@ -318,7 +303,7 @@ onClick={()=>{
                                 </div>
                                 <div className=" flex font-medium flex-col md:w-20  max-sm:flex-row w-full max-sm:justify-between">
                        
-                       <h4 class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden">Owner</h4>
+                       <h4 class=" text-[0.75rem] text-cardBody font-poppins max-sm:hidden">Owner</h4>
 
                        <span>
               <MultiAvatar
@@ -330,10 +315,10 @@ onClick={()=>{
               />
             </span>
                    </div>
-                   <div className=" flex font-medium flex-col md:w-32 max-sm:flex-row w-full max-sm:justify-between ">
-                                    <h4 class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden">Qualified</h4>
+                   <div className=" flex font-medium flex-col md:w-[6rem] max-sm:flex-row w-full max-sm:justify-between ">
+                                    <h4 class=" text-[0.75rem] text-cardBody font-poppins max-sm:hidden">Qualify</h4>
 
-                                    <div class=" text-[0.82rem] text-cardBody font-poppins">
+                                    <div class=" text-[0.875rem] text-cardBody font-poppins">
                 {/* qual */}
                                     </div>
                                     <div>
@@ -344,7 +329,8 @@ onClick={()=>{
           />
 </div>
                                 </div>
-                                <div class="flex flex-col justify-evenly  ">
+                                <div class="flex flex-col w-[5%] max-sm:flex-row max-sm:w-[10%]">
+                    <div>
                     <Tooltip title="Notes">
        <NoteAltIcon
                 onClick={() => {
@@ -354,14 +340,30 @@ onClick={()=>{
                 style={{ color: "green", cursor: "pointer", fontSize: "1rem" }}
               />
            </Tooltip>
+           </div>
+           <div>
+<Tooltip
+        title={
+          <FormattedMessage id="app.activity" defaultMessage="Activity" />
+        }
+      >
+<AddchartIcon
 
+style={{fontSize: "1rem",cursor: 'pointer',}}
+onClick={()=>{
+  props.handleCETmodal(true)
+  handleRowData(item)
+  }}
+/>
+</Tooltip>
+</div>
             </div>
                                 {/* <div class="flex max-sm:flex-row w-full justify-between md:flex-col"> */}
                                 <div class="flex flex-col w-[5%] max-sm:flex-row max-sm:w-[10%]">
                                 <div>
             <Tooltip title="Edit">
               <BorderColorIcon
-                style={{ cursor: "pointer",fontSize: "0.8rem" }}
+                style={{ cursor: "pointer",fontSize: "1rem" }}
                 onClick={() => {
                    props.setEditLeads(item);
                 handleUpdateLeadsModal(true);
@@ -380,7 +382,7 @@ onClick={()=>{
             {/* {user.opportunityDeleteInd ===true && ( */}
             <DeleteIcon
               type="delete"
-              style={{ cursor: "pointer", color: "red" ,fontSize: "0.8rem",}}
+              style={{ cursor: "pointer", color: "red" ,fontSize: "1rem",}}
             />
             {/* )} */}
           </StyledPopconfirm>
@@ -402,7 +404,7 @@ onClick={()=>{
             >
             <LocationOnIcon   style={{
                 cursor: "pointer",
-                fontSize: "0.8rem"
+                fontSize: "1rem"
               }}/>
             </span>
           </Tooltip>
@@ -411,7 +413,7 @@ onClick={()=>{
           <Tooltip title={item.email}>
               <MailOutlineIcon
                 type="mail"
-                style={{ cursor: "pointer",fontSize:"0.8rem"  }}
+                style={{ cursor: "pointer",fontSize:"1rem"  }}
                 onClick={() => {
                   handleSetCurrentLeadsId(item);
                   props.handleLeadsEmailDrawerModal(true);

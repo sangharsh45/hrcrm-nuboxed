@@ -1,5 +1,5 @@
 import * as types from "./OrderActionTypes";
-import { base_url } from "../../../Config/Auth";
+import { base_url, base_url2} from "../../../Config/Auth";
 import axios from "axios";
 import moment from "moment";
 
@@ -179,7 +179,7 @@ export const getAllOrderList = () => (dispatch) => {
     type: types.GET_ALL_ORDER_LIST_REQUEST,
   });
   axios
-    .get(`${base_url}/phoneOrder/allphoneOrders`, {
+    .get(`${base_url2}/phoneOrder/allphoneOrders`, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },

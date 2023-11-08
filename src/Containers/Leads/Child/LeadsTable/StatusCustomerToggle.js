@@ -8,7 +8,6 @@ import {
 } from "../../LeadsAction";
 
 function CustomerStatusToggle(props) {
-    console.log("abc",props.leadsId);
     const [toggle, setToggle] = React.useState(props.convertInd)
 
     function handleToggleCollection(item) {
@@ -46,7 +45,7 @@ function CustomerStatusToggle(props) {
         <>
             <div>
                 <Popconfirm
-                    title="Qualifying the Lead will move to Customer Contact section!"
+                    title="Qualify? Lead will move to Customer section!"
                     onConfirm={() => handleToggleCollection()}
                     onCancel={handleCancel}
                     okText="Ok"

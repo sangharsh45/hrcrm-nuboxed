@@ -13,7 +13,7 @@ import {
   handleShipperDocumentUploadModal,
   addShipperDocument,
   getShipperDocument,
-} from "../../../../ShipperAction";
+} from "../../../ShipperAction";
 import * as Yup from "yup";
 
 const FormSchema = Yup.object().shape({});
