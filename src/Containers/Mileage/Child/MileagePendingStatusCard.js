@@ -14,6 +14,7 @@ import { DeleteOutlined,UpCircleOutlined } from "@ant-design/icons";
 import MileageVoucherIdDrawer from "./MileageVoucherIdDrawer";
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
+import { FormattedMessage } from "react-intl";
 
 
 class MileagePendingStatusCard extends React.Component {
@@ -127,16 +128,25 @@ class MileagePendingStatusCard extends React.Component {
                         <div >
                         <div >
                            {item.status === "Pending" ? (
-            <Tooltip title="Delete">
+                     <StyledPopconfirm
+                     // title="Do you want to delete?"
+                     title={
+                       <FormattedMessage
+                         id="app.doyouwanttodelete?"
+                         defaultMessage="Do you want to delete?"
+                       />
+                     }
+                     onConfirm={() =>   this.props.deleteMileageVoucher(item.voucherId)}
+                   >
               <DeleteOutlined
                 type="delete"
                 style={{ cursor: "pointer" }}
-                onClick={() => {
-                this.props.deleteMileageVoucher(item.voucherId);
+                // onClick={() => {
+                // this.props.deleteMileageVoucher(item.voucherId);
                   
-                }}
+                // }}
               />
-            </Tooltip>
+           </StyledPopconfirm>
             ):null}
              {/* {item.status==="Rejected" && (
             <Button type="primary"

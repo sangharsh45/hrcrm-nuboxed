@@ -8,6 +8,8 @@ import { OnlyWrapCard } from '../../../Components/UI/Layout'
 import dayjs from "dayjs";
 import Expense from "../Expense";
 import { BundleLoader } from "../../../Components/Placeholder";
+import { FormattedMessage } from "react-intl";
+import { StyledPopconfirm } from "../../../Components/UI/Antd";
 
 const PExpenseVoucherIdDrawer =lazy(()=>import("./PExpenseVoucherIdDrawer"));
 
@@ -119,16 +121,25 @@ return <BundleLoader/>
                                       € {item.amount}
                                   </h4>
                               </div>
-                              <Tooltip title="Delete">
+                              <StyledPopconfirm
+           // title="Do you want to delete?"
+           title={
+             <FormattedMessage
+               id="app.doyouwanttodelete?"
+               defaultMessage="Do you want to delete?"
+             />
+           }
+           onConfirm={() =>   props.deleteExpense(item.voucherId)}
+         >
               <DeleteOutlined
                 type="delete"
                 style={{ cursor: "pointer" }}
-                onClick={() => {
-                props.deleteExpense(item.voucherId);
+                // onClick={() => {
+                // props.deleteExpense(item.voucherId);
                   
-                }}
+                // }}
               />
-            </Tooltip>
+           </StyledPopconfirm>
                         </div>
               
                         </div>

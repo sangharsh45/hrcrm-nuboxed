@@ -11,8 +11,8 @@ class DealSelectStages extends Component {
   //   const { getStages } = this.props;
   //   getStages();
   // }
-  handleStageClick = (opportunityStagesId) => {
-    this.props.stageClick(opportunityStagesId);
+  handleStageClick = (investorOppStagesId) => {
+    this.props.stageClick(investorOppStagesId);
   };
 
   render() {
@@ -27,7 +27,7 @@ class DealSelectStages extends Component {
             ? -1
             : 0
         )
-        .findIndex((stage) => stage.opportunityStagesId === this.props.opportunityStagesId);
+        .findIndex((stage) => stage.investorOppStagesId === this.props.investorOppStagesId);
 
     return (
       <FlexContainer justifyContent="space-between">
@@ -54,7 +54,7 @@ class DealSelectStages extends Component {
                 //     : this.props.candidateName
                 //     ? this.handleStageClick(item.stageId)
                 //     : null
-                this.handleStageClick(item.opportunityStagesId)
+                this.handleStageClick(item.investorOppStagesId)
                 }
               >
                 <Tooltip title={item.stageName}>

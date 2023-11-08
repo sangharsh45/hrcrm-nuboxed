@@ -91,12 +91,14 @@ class Collection extends Component {
               handleTabChange1={this.handleTabChange1}
               activeKey1={activeKey1}
             />
-          ) : viewType === "customer" ? (
+          )
+           : viewType === "customer" ? (
             <CollectionCustomerTab
               handleTabChange={this.handleTabChange}
               activeKey={activeKey}
             />
-          ) : null}
+          ) 
+          : null}
         </Suspense> */}
 
       </>
