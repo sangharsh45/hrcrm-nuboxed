@@ -171,10 +171,10 @@ function CustomerCardList(props) {
                                    
                                         <Tooltip>
                                           <div class="flex max-sm:flex-row justify-between w-full md:flex-col">
-                                            <h4 class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden">
+                                            <h4 class=" text-[0.75rem] text-cardBody font-poppins max-sm:hidden">
                                             Name
                                             </h4>
-                                            <h4 class=" text-[0.82rem] text-blue-500 text-cardBody font-poppins font-semibold  cursor-pointer">
+                                            <h4 class=" text-[0.875rem] text-blue-500 text-cardBody font-poppins font-semibold  cursor-pointer">
                                                 
          <Link
           toUrl={`customer/${item.customerId}`}
@@ -199,8 +199,8 @@ function CustomerCardList(props) {
 
                                 <div className=" flex font-medium flex-col  md:w-40 max-sm:flex-row w-full max-sm:justify-between  ">
                            
-                                    <h4 class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden"> Sector </h4>
-                                    <h4 class=" text-[0.82rem] text-cardBody font-poppins">   
+                                    <h4 class=" text-[0.75rem] text-cardBody font-poppins max-sm:hidden"> Sector </h4>
+                                    <h4 class=" text-[0.875rem] text-cardBody font-poppins">   
                                     {item.sector}
                                     </h4>
                                 
@@ -208,8 +208,8 @@ function CustomerCardList(props) {
                                 <div className=" flex font-medium flex-col md:w-28 max-sm:flex-row w-full max-sm:justify-between ">
                                   
 
-                                    <h4 class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden">Country</h4>
-                                    <h4 class=" text-[0.82rem] text-cardBody font-poppins">
+                                    <h4 class=" text-[0.75rem] text-cardBody font-poppins max-sm:hidden">Country</h4>
+                                    <h4 class=" text-[0.875rem] text-cardBody font-poppins">
                                     <ReactCountryFlag
                           countryCode={item.countryAlpha2Code}
                           svg
@@ -224,33 +224,33 @@ function CustomerCardList(props) {
                                 </div>
                                 </div>
                                 <div className=" flex font-medium flex-col md:w-36 max-sm:flex-row w-full max-sm:justify-between ">
-                                    <h4 class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden"># Opportunity</h4>
+                                    <h4 class=" text-[0.75rem] text-cardBody font-poppins max-sm:hidden"># Opportunity</h4>
 
-                                    <div class=" text-[0.82rem] text-cardBody font-poppins text-center">
+                                    <div class=" text-[0.875rem] text-cardBody font-poppins text-center">
                                     {item.oppNo}
 
                                     </div>
                                 </div>
                                 <div className=" flex font-medium flex-col md:w-36 max-sm:flex-row w-full max-sm:justify-between ">
-                                    <h4 class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden">Pipeline Value</h4>
+                                    <h4 class=" text-[0.75rem] text-cardBody font-poppins max-sm:hidden">Pipeline Value</h4>
 
-                                    <div class=" text-[0.82rem] text-cardBody font-poppins text-center">
+                                    <div class=" text-[0.875rem] text-cardBody font-poppins text-center">
                                     {item.totalProposalValue}
 
                                     </div>
                                 </div>
                                 <div className=" flex font-medium flex-col md:w-36 max-sm:flex-row w-full max-sm:justify-between ">
-                                    <h4 class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden">Weighted Value</h4>
+                                    <h4 class=" text-[0.75rem] text-cardBody font-poppins max-sm:hidden">Weighted Value</h4>
 
-                                    <div class=" text-[0.82rem] text-cardBody font-poppins text-center">
+                                    <div class=" text-[0.875rem] text-cardBody font-poppins text-center">
                                     {item.weight}
 
                                     </div>
                                 </div>
                                 <div className=" flex font-medium  flex-col md:w-24 max-sm:max-sm:flex-row w-full max-sm:justify-between ">
-                                    <h4 class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden">Assigned to</h4>
+                                    <h4 class=" text-[0.75rem] text-cardBody font-poppins max-sm:hidden">Assigned to</h4>
 
-                                    <div class=" text-[0.82rem] text-cardBody font-poppins">
+                                    <div class=" text-[0.875rem] text-cardBody font-poppins">
                                     
                                     <span>
               {item.assignedTo === null ? (
@@ -269,7 +269,7 @@ function CustomerCardList(props) {
                                 <div class="flex"> 
                                 <div className=" flex font-medium flex-col md:w-20 max-sm:flex-row w-full max-sm:justify-between mb-2 ">
                        
-                       <h4 class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden">Owner</h4>
+                       <h4 class=" text-[0.75rem] text-cardBody font-poppins max-sm:hidden">Owner</h4>
 
                        <span>
               <MultiAvatar
@@ -283,15 +283,15 @@ function CustomerCardList(props) {
                    </div>
                    <div className=" flex font-medium justify-center flex-col max-sm:flex-row  ">
                        
-                       <h4 class=" text-[0.875rem] text-cardBody font-poppins"></h4>
+                       <h4 class=" text-[0.75rem] text-cardBody font-poppins"></h4>
 
                        <Button type="primary">
                      <span class="text-[0.75rem]" >Convert to Account</span>
                         </Button>
                    </div>
-                                <div class="flex flex-col md:w-[10%] ">
-                    <div class="rounded-full bg-white w-5 h-5 cursor-pointer">
-                    <Tooltip title={item.url}>
+                   <div class="flex flex-col w-[6%] max-sm:flex-row max-sm:w-[10%]">
+                                <div>
+                                <Tooltip title={item.url}>
               {item.url !== "" && (
                 <span
                   //type="edit"
@@ -301,14 +301,14 @@ function CustomerCardList(props) {
                   {" "}
                   <a href={`https://${item.url}`} target="_blank">
                     <ExploreIcon
-                      style={{ cursor: "pointer", color: "green" }}
+                      style={{ cursor: "pointer", color: "green",fontSize: "1rem", }}
                     />
                   </a>
                 </span>
               )}
             </Tooltip>
-                        </div>
-                      &nbsp;&nbsp;
+        
+            </div>
                         <div>
                         <span
               style={{ cursor: "pointer" ,fontSize: "0.8rem"}}
@@ -323,7 +323,7 @@ function CustomerCardList(props) {
               {" "}
               {user.pulseAccessInd === true && <MonitorHeartIcon  style={{
                 cursor: "pointer",
-                fontSize: "0.8rem",
+                fontSize: "1rem",
                 color: "#df9697"}}/>}
             </span> 
                         </div>
@@ -332,22 +332,21 @@ function CustomerCardList(props) {
 
                     </div>
                     </div>
-              
-                    <div class="flex flex-col md:w-[2%]  max-sm:flex-row w-full max-sm:justify-evenly">
-                    <div >
-                    <Tooltip title="Pulse">
+                                <div class="flex flex-col w-[6%] max-sm:flex-row max-sm:w-[10%] ">
+      
+                        <div>
+                        <Tooltip title="Pulse">
        <MonitorHeartIcon
                 onClick={() => {
                   handleCustomerPulseDrawerModal(true);
                   handleSetCurrentCustomer(item);
                 }}
-                style={{ fontSize: "0.8rem", color: "#df9697" }}
+                style={{ fontSize: "1rem", color: "#df9697" }}
               />
            </Tooltip>
-
-            </div> 
-                    <div >
-                    <Tooltip title="Notes">
+                        </div>
+                        <div>
+                        <Tooltip title="Notes">
        <NoteAltIcon
                 onClick={() => {
                   handleCustomerNotesDrawerModal(true);
@@ -357,38 +356,25 @@ function CustomerCardList(props) {
               />
            </Tooltip>
 
-            </div> 
-                      <div>
+                    </div>
+                    </div>
+              
+                    <div class="flex flex-col w-[6%] max-sm:flex-row max-sm:w-[10%]">
+                    <div >
                     <Tooltip overlayStyle={{ maxWidth: "300px" }} title={dataLoc}>
-            <span
-              style={{
-                // color:
-                //   showRes && item.orderId === orderId ? "orange" : "#1890ff",
-                cursor: "pointer",
-              }}
-            >
-            <LocationOnIcon   style={{
-                cursor: "pointer",
-                fontSize: "0.8rem"
-              }}/>
-            </span>
-          </Tooltip>
-          </div>
-          {/* <div><Tooltip title={item.email}>
-              <MailOutlineIcon
-                type="mail"
-                style={{ cursor: "pointer",fontSize: "0.8rem" }}
-                onClick={() => {
-                  props.getCustomerById(item.customerId);
-                  props.handleCustomerEmailDrawerModal(true);
-                }}
-              />
-            </Tooltip> </div> */}
-            <div>
-            {props.user.customerUpdateInd === true && (
+
+<LocationOnIcon   style={{
+    cursor: "pointer",
+    fontSize: "1rem"
+  }}/>
+
+</Tooltip>
+</div>
+<div>
+{props.user.customerUpdateInd === true && (
             <Tooltip title="Edit">
               <BorderColorIcon
-                style={{ cursor: "pointer",fontSize: "0.8rem" }}
+                style={{ cursor: "pointer",fontSize: "1rem" }}
                 onClick={() => {
                     props.setEditCustomer(item);
                     handleUpdateCustomerModal(true);
@@ -398,10 +384,19 @@ function CustomerCardList(props) {
               />
             </Tooltip>
             )}
-            </div>
-                      </div>  
-           
-                      <div class="w-[2%]"></div> 
+{/* <Tooltip title={item.email}>
+              <MailOutlineIcon
+                type="mail"
+                style={{ cursor: "pointer",fontSize: "1rem" }}
+                onClick={() => {
+                  props.getCustomerById(item.customerId);
+                  props.handleCustomerEmailDrawerModal(true);
+                }}
+              />
+            </Tooltip> */}
+</div>
+            </div> 
+
                       </div>
                             </div>
                         </div>
