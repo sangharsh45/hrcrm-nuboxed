@@ -17,13 +17,13 @@ import ReceivedTable from "../Recieved/ReceivedTable";
 // const InventoryOutputTable = lazy(() =>
 //   import("../Output/InventoryOutputTable")
 // );
-// const InventoryConsumptionForm = lazy(() =>
-//   import("../Consumption/InventoryConsumptionForm")
-// );
-// const InventoryConsumptionTable = lazy(() =>
-//   import("../Consumption/InventoryConsumptionTable")
-// );
-// const DispatchTable = lazy(() => import("../Dispatch/DispatchTable"));
+const InventoryConsumptionForm = lazy(() =>
+  import("../Consumption/InventoryConsumptionForm")
+);
+const InventoryConsumptionTable = lazy(() =>
+  import("../Consumption/InventoryConsumptionTable")
+);
+const DispatchTable = lazy(() => import("../Dispatch/DispatchTable"));
 // const AddDispatchModal = lazy(() =>
 //   import("../Dispatch/AddDispatch/AddDispatchModal")
 // );
@@ -137,7 +137,7 @@ class InventoryDetailTab extends PureComponent {
               key="2"
             >
               {" "}
-              {/* <Suspense fallback={"Loading..."}>
+              <Suspense fallback={"Loading..."}>
                 {(user.functionName === "Management" ||
                   user.functionName === "Production") &&
                   user.designation === "Manager" ? (
@@ -146,7 +146,7 @@ class InventoryDetailTab extends PureComponent {
 
                 <Spacer />
                 <InventoryConsumptionTable />
-              </Suspense> */}
+              </Suspense>
             </TabPane>
             <TabPane
               tab={
@@ -171,7 +171,7 @@ class InventoryDetailTab extends PureComponent {
               key="3"
             >
               <Suspense fallback={"Loading..."}>
-                {/* <DispatchTable /> */}
+                <DispatchTable />
               </Suspense>
             </TabPane>
 

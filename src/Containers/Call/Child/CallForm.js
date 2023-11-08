@@ -50,6 +50,7 @@ const yellow = "#FFD712";
 const CallSchema = Yup.object().shape({
   callType: Yup.string().required("Select call type"),
   callCategory: Yup.string().required("Input required !"),
+  callPurpose: Yup.string().required("Input required !"),
 
   startDate: Yup.string()
     .nullable()
@@ -498,7 +499,7 @@ function CallForm(props) {
                         inlineLabel
                       />
                     </div>
-                    <div class=" w-2/5 max-sm:w-wk">
+                    <div class=" w-2/5 mt-[0.9rem] max-sm:w-wk">
                       <FastField
                         type="text"
                         name="modeLink"
@@ -513,7 +514,7 @@ function CallForm(props) {
                     </div>
                   </div>
                   <Field
-                    isRequired
+                    // isRequired
                     name="callPurpose"
                     // label="Topic"
                     label={
@@ -605,7 +606,7 @@ function CallForm(props) {
                     inlineLabel
                   />
                   <Spacer />
-                  {startDate ? (
+                  {/* {startDate ? (
                     <span>
                       {dayjs(startDate).isBefore(dayjs()) && (
                         <span>
@@ -632,17 +633,16 @@ function CallForm(props) {
                         </span>
                       )}
                     </span>
-                  )}
+                  )} */}
                 </div>
-                <div class=" h-full w-w47.5 max-sm:w-wk"   >
+                <div class=" h-3/4 w-w47.5 max-sm:w-wk " 
+                >
                 <Listbox value={selected} onChange={setSelected}>
-        {({ open }) => (
-          <>
-            <Listbox.Label className="block text-sm font-semibold text-gray-700">
-              Assigned to
-            </Listbox.Label>
-            <div className="relative mt-1">
-              <Listbox.Button className="relative w-full leading-4 cursor-default rounded-md border border-gray-300 bg-white py-1 pl-3 pr-10 text-left shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm">
+      {({ open }) => (
+        <>
+          <Listbox.Label className="block font-semibold text-[0.75rem]">Assigned to</Listbox.Label>
+          <div className="relative mt-1">
+              <Listbox.Button  style={{boxShadow: "rgb(170, 170, 170) 0px 0.25em 0.62em"}} className="relative w-full leading-4 cursor-default border border-gray-300 bg-white py-0.5 pl-3 pr-10 text-left shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm">
                 {selected}
               </Listbox.Button>
               {open && (
@@ -700,9 +700,9 @@ function CallForm(props) {
                 </Listbox.Options>
               )}
             </div>
-          </>
-        )}
-      </Listbox>
+        </>
+      )}
+    </Listbox>
                       <Spacer />
                   <Field
                     name="included"
@@ -723,33 +723,7 @@ function CallForm(props) {
                       value: employeeId,
                     }}
                   />
-                  <Spacer />
-                  <div>
-                  {props.user.crmInd === true &&(
-                  <Field
-                    name="contactId"
-                    //selectType="contactList"
-                    isColumnWithoutNoCreate
-                    // label="Contact"
-                    label={
-                      <FormattedMessage
-                        id="app.contact"
-                        defaultMessage="Contact"
-                      />
-                    }
-                    component={SelectComponent}
-                    isColumn
-                    options={Array.isArray(ContactData) ? ContactData : []}
-                    value={values.contactId}
-                    // isDisabled={defaultContacts}
-                    defaultValue={{
-                      label: `${fullName || ""} `,
-                      value: contactId,
-                    }}
-                    inlineLabel
-                  />
-                  )} 
-                  </div>
+                 
                   <Spacer />
                   <div>
                   {props.user.crmInd === true &&(
@@ -775,6 +749,33 @@ function CallForm(props) {
                  value={values.customerId}
                  inlineLabel
                />
+                  )} 
+                  </div>
+                  <Spacer />
+                  <div>
+                  {props.user.crmInd === true &&(
+                  <Field
+                    name="contactId"
+                    //selectType="contactList"
+                    isColumnWithoutNoCreate
+                    // label="Contact"
+                    label={
+                      <FormattedMessage
+                        id="app.contact"
+                        defaultMessage="Contact"
+                      />
+                    }
+                    component={SelectComponent}
+                    isColumn
+                    options={Array.isArray(ContactData) ? ContactData : []}
+                    value={values.contactId}
+                    // isDisabled={defaultContacts}
+                    defaultValue={{
+                      label: `${fullName || ""} `,
+                      value: contactId,
+                    }}
+                    inlineLabel
+                  />
                   )} 
                   </div>
                   <Spacer/>

@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import EmployeesHeader from "./Child/EmployeesHeader";
 import AddEmploymentModal from "./Child/AddEmployeeModal";
-import { setEmployeeViewType, handleEmployeeModal, getEmployeelist,getEmployeeFilterlist } from "./EmployeeAction";
+import { setEmployeeViewType, handleEmployeeModal, getEmployeelist} from "./EmployeeAction";
 import EmployeeCardView from "./Child/EmployeeCard/EmployeeCardView";
 import EmployeeCardList from "./Child/EmployeeCard/EmployeeCardList";
 const EmployeeTable = lazy(() => import("./Child/EmployeeTable/EmployeeTable"));
@@ -28,7 +28,7 @@ class Employees extends Component {
   };
   handleFilterChange=(data)=>{
     this.setState({filter:data})
-    this.props.getEmployeeFilterlist(data)
+    this.props.getEmployeelist(data)
   }
   handleClear = () => {
     this.setState({ currentData: "" });
@@ -104,7 +104,7 @@ const mapDispatchToProps = (dispatch) =>
       setEmployeeViewType,
       handleEmployeeModal,
       getEmployeelist,
-      getEmployeeFilterlist
+      
     },
     dispatch
   );

@@ -86,6 +86,10 @@ const initialState = {
   fetchingAllShipperError: false,
   allShipper: false,
 
+  fetchingAllShipper: false,
+  fetchingAllShipperError: false,
+  allShipper: [],
+
   setEditingOrder: {},
   setEditingOrderDetail: {},
 
@@ -1323,6 +1327,22 @@ export const shipperReducer = (state = initialState, action) => {
         fetchingShipperDispatchError: true,
       };
 
+
+          //get all shipper
+    case types.GET_ALL_SHIPPER_REQUEST:
+      return { ...state, fetchingAllShipper: true };
+    case types.GET_ALL_SHIPPER_SUCCESS:
+      return {
+        ...state,
+        fetchingAllShipper: false,
+        allShipper: action.payload,
+      };
+    case types.GET_ALL_SHIPPER_FAILURE:
+      return {
+        ...state,
+        fetchingAllShipper: false,
+        fetchingAllShipperError: true,
+      };
 
 
     default:

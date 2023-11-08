@@ -18,11 +18,11 @@ class Call extends Component {
           handleCallModal={handleCallModal}
         />
         <Suspense fallback={<BundleLoader />}>
-        {this.props.viewType === "table" ?
-          // <TaskTable />
+        {/* {this.props.viewType === "table" ? */}
+        
           <CallTable />
-          :
-          null}
+        
+          {/* null} */}
         </Suspense>
       </React.Fragment>
     );

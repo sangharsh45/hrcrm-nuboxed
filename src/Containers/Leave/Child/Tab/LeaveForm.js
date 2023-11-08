@@ -295,7 +295,7 @@ console.log(this.state.firstCase)
          
                   </FlexContainer>
                   <Spacer />
-                 <div class="max-sm:flex flex-col">
+              
                   <Field
                     name="coverDetails"
                     //label="Cover"
@@ -307,7 +307,7 @@ console.log(this.state.firstCase)
                     component={InputComponent}
                     inlineLabel
                   />
-                  </div>
+                
                   <Spacer />
                   <Field
                     isRequired

@@ -1293,33 +1293,7 @@ const [priority,setpriority]=useState(props.selectedTask
                     }}
                   /> */}
               
-                  <Spacer />
-                  <div>
-                  {props.user.crmInd === true &&(
-                  <Field
-                    name="contactId"
-                    //selectType="contactList"
-                    isColumnWithoutNoCreate
-                    // label="Contact"
-                    label={
-                      <FormattedMessage
-                        id="app.contact"
-                        defaultMessage="Contact"
-                      />
-                    }
-                    component={SelectComponent}
-                    isColumn
-                    options={Array.isArray(ContactData) ? ContactData : []}
-                    value={values.contactId}
-                    // isDisabled={defaultContacts}
-                    defaultValue={{
-                      label: `${fullName || ""} `,
-                      value: contactId,
-                    }}
-                    inlineLabel
-                  />
-                  )} 
-                  </div>
+                 
                   <Spacer />
                   <div>
                   {props.user.crmInd === true &&(
@@ -1345,6 +1319,33 @@ const [priority,setpriority]=useState(props.selectedTask
                  value={values.customerId}
                  inlineLabel
                />
+                  )} 
+                  </div>
+                  <Spacer />
+                  <div>
+                  {props.user.crmInd === true &&(
+                  <Field
+                    name="contactId"
+                    //selectType="contactList"
+                    isColumnWithoutNoCreate
+                    // label="Contact"
+                    label={
+                      <FormattedMessage
+                        id="app.contact"
+                        defaultMessage="Contact"
+                      />
+                    }
+                    component={SelectComponent}
+                    isColumn
+                    options={Array.isArray(ContactData) ? ContactData : []}
+                    value={values.contactId}
+                    // isDisabled={defaultContacts}
+                    defaultValue={{
+                      label: `${fullName || ""} `,
+                      value: contactId,
+                    }}
+                    inlineLabel
+                  />
                   )} 
                   </div>
                   <Spacer/>

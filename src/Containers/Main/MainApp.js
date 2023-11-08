@@ -8,6 +8,7 @@ import AddTaskModal from "../Task/Child/AddTaskModal";
 import {
   handleCandidateResumeModal,
 } from "../Candidate/CandidateAction";
+
 import StartStop from "./Start&Stop/StartStop";
 import { bindActionCreators } from "redux";
 import AddCandidateResumeModal from "../Candidate/Child/AddCandidateResumeModal";
@@ -166,6 +167,7 @@ const InvestorDetail = lazy(() => import("../Investor/Child/InvestorDetail/Inves
 const ContactInvestDetail = lazy(() => import("../ContactInvest/Child/ContactInvestDetail/ContactInvestDetail"));
 const DealDetail = lazy(() => import("../Deal/Child/DealDetail/DealDetail"));
 const Catalogue = lazy(() => import("../Catalogue/Catalogue"));
+const Collection = lazy(() => import("../Collection/Collection"));
 
 function MainApp(props) {
   const [visible, setVisible] = useState(false);
@@ -611,6 +613,7 @@ function MainApp(props) {
                       <Route exact path="/reports" component={Reports} />
                       <Route exact path="/partner" component={Partner} />
                       <Route exact path="/call" component={Call} />
+                      <Route exact path="/collection" component={Collection} />
                       <Route exact path="/task" component={Task} />
                       <Route exact path="/event" component={Event} />
                       <Route

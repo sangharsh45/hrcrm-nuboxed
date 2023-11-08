@@ -349,7 +349,7 @@ export const LinkStageDeal = (data, cb) => (dispatch) => {
   dispatch({ type: types.LINK_DEAL_REQUEST });
 
   axios
-    .put(`${base_url}/opportunity/update/stage `, data, {
+    .put(`${base_url}/InvestorOpportunity/update/stage`, data, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },
