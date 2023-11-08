@@ -127,6 +127,7 @@ function OpportunityTable(props) {
     console.log(opportunityId);
   }
   const {
+    customer: { customerId, name },
     user,
     handleUpdateCustomerOpportunityModal,
     fetchingCustomerOpportunity,
@@ -368,6 +369,8 @@ width: "7%",
       />
       <AddCustomerUpdateOpportunityModal
       opportunityId={currentOpportunityId}
+      defaultCustomers={[{ label: name, value: customerId }]}
+      customerId={{ value: customerId }}
        addUpdateCustomerOpportunityModal={addUpdateCustomerOpportunityModal}
         handleUpdateCustomerOpportunityModal={handleUpdateCustomerOpportunityModal}
         handleSetCurrentOpportunityId={handleSetCurrentOpportunityId}

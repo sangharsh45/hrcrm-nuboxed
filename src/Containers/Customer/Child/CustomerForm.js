@@ -28,7 +28,7 @@ const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2
 const CustomerSchema = Yup.object().shape({
   name: Yup.string().required("Input needed!"),
   // email: Yup.string().required("Input needed!").email("Enter a valid Email"),
-  phoneNumber: Yup.string().matches(phoneRegExp, 'Phone number is not valid').min(8,"Minimum 8 digits").max(10,"Number is too long")
+  // phoneNumber: Yup.string().required("Input needed!").matches(phoneRegExp, 'Phone number is not valid').min(8,"Minimum 8 digits").max(10,"Number is too long")
 });
 
 function CustomerForm(props) {
@@ -118,7 +118,7 @@ function CustomerForm(props) {
             ],
             category: whiteblue ? "White" : "Blue" || "Both",
           }}
-          // validationSchema={CustomerSchema}
+          validationSchema={CustomerSchema}
           onSubmit={(values, { resetForm }) => {
             console.log(values);
             addCustomer(
@@ -229,7 +229,6 @@ function CustomerForm(props) {
                     </div>
                     <div class=" w-8/12">
                       <FastField
-                        type="text"
                         name="phoneNumber"
                         label="Phone No"
                         isColumn
@@ -243,7 +242,8 @@ function CustomerForm(props) {
                   <Spacer/>
                   <div class=" flex justify-between">
                   <div class="w-w47.5 max-sm:w-w47.5">
-                  <FastField                     
+                  <Field             
+                  placeholder="Sector"        
                             name="sectorId"
                             label={
                               <FormattedMessage
@@ -252,7 +252,6 @@ function CustomerForm(props) {
                               />
                             }
                             isColumn
-                            placeholder="Sector"
                             component={SelectComponent}
                             value={values.sectorId}
                             options={

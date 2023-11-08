@@ -186,7 +186,7 @@ class ContactDetailTab extends Component {
             >
               <Suspense fallback={"Loading ..."}>
                 {" "}
-                <LinkedOpportunity />
+                <LinkedOpportunity customer={this.props.customer} />
               </Suspense>
             </TabPane>
             <TabPane
@@ -344,7 +344,7 @@ class ContactDetailTab extends Component {
                   </span>
                   {activeKey === "7" && (
                     <>
-                      <PlusOutlined
+                      {/* <PlusOutlined
                         type="plus"
                         title={
                           <FormattedMessage
@@ -358,7 +358,7 @@ class ContactDetailTab extends Component {
                           marginLeft: "0.3125em",
                           verticalAlign: "center",
                         }}
-                      />
+                      /> */}
                     </>
                   )}
                 </>
