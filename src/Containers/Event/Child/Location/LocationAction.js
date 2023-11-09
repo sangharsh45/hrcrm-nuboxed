@@ -73,3 +73,36 @@ export const setLocationViewType = (viewType) => (dispatch) => {
   export const handleLocationShiftDrawer = (modalProps) => (dispatch) => {
     dispatch({ type: types.HANDLE_LOCATION_SHIFT_DRAWER, payload: modalProps });
   };
+  
+  export const handleUpdateLocationDrawer = (modalProps) => (dispatch) => {
+    dispatch({ type: types.HANDLE_UPDATE_LOCATION_DRAWER, payload: modalProps });
+  };
+
+  
+  // export const updateLocation = (locationDetailsId, data, cb) => (dispatch) => {
+  //   dispatch({ type: types.UPDATE_EVENT_BY_ID_REQUEST });
+  //   axios
+  //     .put(
+  //       `${base_url}/locationDetails/${locationDetailsId}`,data,
+  //       {
+  //         headers: {
+  //           Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+  //         },
+  //       }
+  //     )
+  //     .then((res) => {
+  //       console.log(res);
+  //       dispatch({
+  //         type: types.UPDATE_EVENT_BY_ID_SUCCESS,
+  //         payload: res.data,
+  //       });
+  //       cb();
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //       dispatch({
+  //         type: types.UPDATE_EVENT_BY_ID_FAILURE,
+  //         payload: err,
+  //       });
+  //     });
+  // };

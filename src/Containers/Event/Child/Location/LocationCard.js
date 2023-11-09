@@ -1,7 +1,7 @@
-import React, { useEffect, lazy } from "react";
+import React, { useEffect,useState, lazy } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { getlocation, handleLocationShiftDrawer } from "./LocationAction";
+import { getlocation, handleLocationShiftDrawer,handleUpdateLocationDrawer } from "./LocationAction";
 import styled from "styled-components";
 import { Switch, Tooltip } from "antd";
 import { BundleLoader } from "../../../../Components/Placeholder";
@@ -10,11 +10,18 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
 import FilterTiltShiftIcon from "@mui/icons-material/FilterTiltShift";
 const LocationShiftDrawer = lazy(() => import("./LocationShiftDrawer"));
+const LocationUpdateDrawer=lazy(()=>import("./LocationUpdateDrawer"));
 
 const LocationCard = (props) => {
   useEffect(() => {
     props.getlocation(props.orgId);
   }, []);
+
+  const [storedLoc,setStoredLoc]=useState({});
+const handleStoredLocations=(locs)=>{
+  setStoredLoc(locs);
+}
+
   if (props.fetchingLocationData) return <BundleLoader />;
   return (
     <>
@@ -179,11 +186,10 @@ const LocationCard = (props) => {
                         <Tooltip title="Edit">
                           <BorderColorIcon
                             style={{ cursor: "pointer", fontSize: "1rem" }}
-                            // onClick={() => {
-                            //    props.setEditLeads(item);
-                            // handleUpdateLeadsModal(true);
-                            // handleSetCurrentLeadsId(item);
-                            // }}
+                            onClick={() => {
+                               handleStoredLocations(item);
+                            props.handleUpdateLocationDrawer(true);
+                            }}
                           />
                         </Tooltip>
                       </div>
@@ -215,6 +221,11 @@ const LocationCard = (props) => {
         locShiftDrawer={props.locShiftDrawer}
         handleLocationShiftDrawer={props.handleLocationShiftDrawer}
       />
+      <LocationUpdateDrawer
+      storedLoc={storedLoc}
+      locationUpdatedrawr={props.locationUpdatedrawr}
+      handleUpdateLocationDrawer={props.handleUpdateLocationDrawer}
+      />
     </>
   );
 };
@@ -222,12 +233,14 @@ const mapStateToProps = ({ location, auth }) => ({
   showLocation: location.showLocation,
   orgId: auth.userDetails.organizationId,
   locShiftDrawer: location.locShiftDrawer,
+  locationUpdatedrawr:location.locationUpdatedrawr
 });
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
       getlocation,
       handleLocationShiftDrawer,
+      handleUpdateLocationDrawer
     },
     dispatch
   );

@@ -277,8 +277,9 @@ Owner
 </div>
 
 </div>
-
-<Tooltip title="Edit">
+<div class="flex flex-col w-[3%] max-sm:flex-row max-sm:w-[10%]">
+ <div>
+ <Tooltip title="Edit">
             <EditOutlined
               style={{ cursor: "pointer" }}
               onClick={() => {
@@ -289,7 +290,9 @@ Owner
               }}
             />
           </Tooltip>
-          <Popconfirm
+ </div>
+ <div>
+ <Popconfirm
               title="Do you want to delete?"
              onConfirm={() => props.deleteShipperData(item.shipperId)}
             >
@@ -298,6 +301,10 @@ Owner
                 style={{ cursor: "pointer", color: "red" }}
               />
             </Popconfirm>
+ </div>
+  </div>
+
+        
 
 
 
