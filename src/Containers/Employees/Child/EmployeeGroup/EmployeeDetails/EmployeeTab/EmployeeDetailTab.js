@@ -94,6 +94,7 @@ componentDidMount(){
       documentUploadModal,
       addContractModal,
       handleContractModal,
+      user
     } = this.props;
     console.log(this.props.employeeId);
 
@@ -110,7 +111,7 @@ componentDidMount(){
                     
                   Education
                   </span>
-                  {activeKey === "1" && (
+                  {activeKey === "1" && user.userCreateInd === true &&(
                     <>
                        <PlusOutlined
                         type="plus"
@@ -139,7 +140,7 @@ componentDidMount(){
                   <span class=" font-poppins" style={{ marginLeft: "0.25em" }}>Training
                     
                   </span>
-                  {activeKey === "2" && (
+                  {activeKey === "2" &&  user.userCreateInd === true && (
                     <>
                       <PlusOutlined
                         type="plus"
@@ -171,7 +172,7 @@ componentDidMount(){
                       defaultMessage="Employment"
                     />
                   </span>
-                  {activeKey === "3" && (
+                  {activeKey === "3" && user.userCreateInd === true &&(
                     <>
                       <PlusOutlined
                         type="plus"
@@ -206,7 +207,7 @@ componentDidMount(){
                       defaultMessage="Emergency"
                     />
                   </span>
-                  {activeKey === "4" && (
+                  {activeKey === "4" && user.userCreateInd === true && (
                     <>
                        <PlusOutlined
                         type="plus"
@@ -227,7 +228,7 @@ componentDidMount(){
                 <PersonalTable2 />
               </Suspense>
             </TabPane>
-
+{user.userAccessInd === true ?(
             <TabPane
               tab={
                 <>
@@ -235,7 +236,7 @@ componentDidMount(){
                   <span class=" font-poppins" style={{ marginLeft: "0.25em" }}>Bank Details
                    {/*  &nbsp;*/} 
                   </span>
-                  {activeKey === "5" && (
+                  {activeKey === "5" && user.userCreateInd === true && (
                     <>
                        <PlusOutlined
                         type="plus"
@@ -255,14 +256,15 @@ componentDidMount(){
                 <BankTable />
               </Suspense>
             </TabPane>
-
+):null}
+{user.userAccessInd === true ?(
             <TabPane
               tab={
                 <>
                 <RecentActorsIcon  style={{fontSize:"1.1rem"}}/>
                   <span class=" font-poppins" style={{ marginLeft: "0.25em" }}>Personal Details
                   </span>
-                  {activeKey === "6" && (
+                  {activeKey === "6" && user.userCreateInd === true && (
                     <>
                        <PlusOutlined
                         type="plus"
@@ -282,6 +284,7 @@ componentDidMount(){
                 <PersonalDetailsTable />
               </Suspense>
             </TabPane>
+            ):null}
             <TabPane
               tab={
                 <>
@@ -313,7 +316,7 @@ componentDidMount(){
                  <PaymentIcon  style={{fontSize:"1.1rem"}}/>
                   <span class=" font-poppins" style={{ marginLeft: "0.25em" }}>Salary
                   </span>
-                  {activeKey === "8" && (
+                  {activeKey === "8" && user.userCreateInd === true && (
                     <>
                        <PlusOutlined
                         type="plus"
@@ -333,6 +336,7 @@ componentDidMount(){
                 <SalaryTable />
               </Suspense>
             </TabPane>
+            {user.userAccessPlusInd === true ? (
             <TabPane
               tab={
                 <>
@@ -344,7 +348,7 @@ componentDidMount(){
                       defaultMessage="Documents"
                     />
                   </span>
-                  {/* {activeKey === "9" && (
+                  {/* {activeKey === "9" && user.userCreateInd === true && (
                     <>
                         <PlusOutlined
                         type="plus"
@@ -367,7 +371,7 @@ componentDidMount(){
                 <LinkedDocuments />
               </Suspense>
             </TabPane>
-
+            ):null}
             <TabPane
               tab={
                 <>
@@ -380,7 +384,7 @@ componentDidMount(){
                       defaultMessage="Contract"
                     />
                   </span>
-                  {activeKey === "10" && (
+                  {activeKey === "10" && user.userCreateInd === true && (
                     <>
                       <PlusOutlined
                         type="plus"
@@ -589,7 +593,7 @@ componentDidMount(){
                     
                  Visa
                   </span>
-                  {activeKey === "17" && (
+                  {activeKey === "17" && user.userCreateInd === true && (
                     <>
                        <PlusOutlined
                         type="plus"
@@ -663,9 +667,10 @@ componentDidMount(){
     );
   }
 }
-const mapStateToProps = ({ profile,employee }) => ({
+const mapStateToProps = ({ profile,employee,auth }) => ({
   addEducationModal: profile.addEducationModal,
   addVisaModal:profile.addVisaModal,
+  user:auth.userDetails,
   addTrainingModal: profile.addTrainingModal,
   addEmploymentModal: profile.addEmploymentModal,
   addPersonalModal: profile.addPersonalModal,

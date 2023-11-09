@@ -9,6 +9,7 @@ class InventoryDetailHeader extends Component {
         <ActionHeader
           leftComponent={
             <InventoryDetailActionLeft
+            inventory={this.props.inventory}
               handleResetTab={this.props.handleResetTab}
             />
           }

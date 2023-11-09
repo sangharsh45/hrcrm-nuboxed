@@ -32,6 +32,7 @@ class EmploymentTable extends Component {
       fetchingEmploymentDetails,
       fetchingEmploymentDetailsError,
       employment,
+      user,
       handleUpdateEmploymentModal,
       updateEmploymentModal,
       setEditEmployment,
@@ -112,11 +113,13 @@ class EmploymentTable extends Component {
                   href={`${base_url}/document/${item.documentId}`}
                   target="_blank"
                 >
+                  {user.userAccessInd === true ? (
                   <DownloadIcon
                     type="download"
                     // onClick={() => startDownload()}
                     style={{ cursor: "pointer" }}
                   />
+                  ):null}
                 </a>
               ) : null}
             </>
@@ -186,8 +189,9 @@ class EmploymentTable extends Component {
   }
 }
 
-const mapStateToProps = ({ profile, employee }) => ({
+const mapStateToProps = ({ profile, employee,auth }) => ({
   employment: profile.employmentDetails,
+  user:auth.userDetails,
   fetchingEmploymentDetails: profile.fetchingEmploymentDetails,
   fetchingEmploymentDetailsError: profile.fetchingEmploymentDetailsError,
   updateEmploymentModal: profile.updateEmploymentModal,

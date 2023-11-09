@@ -29,7 +29,7 @@ function InventoryDetail(props) {
   const { inventory = { inventory }, fetchingInventoryById } = props;
   return (
     <>
-      <InventoryDetailHeader handleResetTab={handleResetTab} />
+      <InventoryDetailHeader inventory={inventory} handleResetTab={handleResetTab} />
       {fetchingInventoryById ? (
         <MainWrapper>
           <BundleLoader />
@@ -38,10 +38,10 @@ function InventoryDetail(props) {
         <FlexContainer>
           <Suspense fallback={"Loading..."}>
             <FlexContainer flexWrap="no-wrap" style={{ width: "100%" }}>
-              <div style={{ width: "22%" }}>
+              {/* <div style={{ width: "22%" }}>
                 <InventoryDetailLeft inventory={inventory} />
-              </div>
-              <div style={{ width: "78%" }}>
+              </div> */}
+              <div style={{ width: "100%" }}>
                 <InventoryDetailRight inventory={inventory} 
                 tabData={tabData}
                  />

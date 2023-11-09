@@ -36,6 +36,7 @@ class TrainingTable extends Component {
       handleUpdateTrainingModal,
       updateTrainingModal,
       setEditTraining,
+      user,
       deleteTrainingTable,
     } = this.props;
 
@@ -132,11 +133,13 @@ class TrainingTable extends Component {
                   href={`${base_url}/document/${item.documentId}`}
                   target="_blank"
                 >
+                    {user.userAccessInd === true ? (
                   <DownloadIcon
                     type="download"
                     // onClick={() => startDownload()}
                     style={{ cursor: "pointer" }}
                   />
+                    ):null}
                 </a>
               ) : null}
             </>
@@ -203,8 +206,9 @@ class TrainingTable extends Component {
   }
 }
 
-const mapStateToProps = ({ profile, employee }) => ({
+const mapStateToProps = ({ profile,auth, employee }) => ({
   training: profile.trainingDetails,
+  user:auth.userDetails,
   fetchingTrainingDetails: profile.fetchingTrainingDetails,
   fetchingTrainingDetailsError: profile.fetchingTrainingDetailsError,
   employeeId: employee.singleEmployee.employeeId,

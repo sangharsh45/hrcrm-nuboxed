@@ -4,6 +4,8 @@ import * as types from "./AccountActionType";
 const initialState = {
   viewType: "list",
 
+  clearbit1:{},
+
   addDistributorModal: false,
   setEditingDistributor: {},
 
@@ -1771,6 +1773,9 @@ export const distributorReducer = (state = initialState, action) => {
         fetchingLocationList: false,
         fetchingLocationListError: true,
       };
+
+      case types.SET_CLEARBIT_DATA1:
+        return { ...state, clearbit1: action.payload };
 
     default:
       return state;

@@ -39,6 +39,7 @@ class EducationTable extends Component {
       handleUpdateEducationModal,
       updateEducationModal,
       singleEmployee,
+      user,
       setEditEducation,
       employeeId,
       deleteEducationTable,
@@ -119,11 +120,13 @@ class EducationTable extends Component {
                   href={`${base_url}/document/${item.documentId}`}
                   target="_blank"
                 >
+                  {user.userAccessInd ? (
                   <DownloadIcon
                     type="download"
                     // onClick={() => startDownload()}
                     style={{ cursor: "pointer" }}
                   />
+                  ):null}
                 </a>
               ) : null}
             </>
@@ -202,8 +205,9 @@ class EducationTable extends Component {
   }
 }
 
-const mapStateToProps = ({ profile, employee }) => ({
+const mapStateToProps = ({ profile,auth, employee }) => ({
   eduDetails: profile.eduDetails,
+  user:auth.userDetails,
   updateEducationModal: profile.updateEducationModal,
   fetchingEducationDetails: profile.fetchingEducationDetails,
   fetchingEducationDetailsError: profile.fetchingEducationDetailsError,
