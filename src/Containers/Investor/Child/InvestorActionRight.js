@@ -12,13 +12,13 @@ const Option = StyledSelect.Option;
 function InvestorActionRight (props) {
  
     const {
-      userId,
+      user,
       handleInvestorModal
     } = props;
     return (
       <div class=" flex  items-center">
         
-      
+        {user.imInd === true  &&  user.inventoryCreateInd === true &&  (
         <Tooltip placement="left" title="Create">
           <Button
             type="primary"
@@ -27,6 +27,7 @@ function InvestorActionRight (props) {
             Add
           </Button>
      </Tooltip>
+        )}
       </div>
     );
 }

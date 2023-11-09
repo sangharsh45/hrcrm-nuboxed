@@ -171,10 +171,10 @@ function CustomerCardList(props) {
                                    
                                         <Tooltip>
                                           <div class="flex max-sm:flex-row justify-between w-full md:flex-col">
-                                            <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden">
+                                            <h4 class=" text-xs text-cardBody font-poppins max-sm:hidden">
                                             Name
                                             </h4>
-                                            <h4 class=" text-xs text-blue-500 text-cardBody font-poppins font-semibold  cursor-pointer">
+                                            <h4 class=" text-sm text-blue-500 text-cardBody font-poppins font-semibold  cursor-pointer">
                                                 
          <Link
           toUrl={`customer/${item.customerId}`}
@@ -208,8 +208,8 @@ function CustomerCardList(props) {
                                 <div className=" flex font-medium flex-col md:w-28 max-sm:flex-row w-full max-sm:justify-between ">
                                   
 
-                                    <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden">Country</h4>
-                                    <h4 class=" text-xs text-cardBody font-poppins">
+                                    <h4 class=" text-xs text-cardBody font-poppins max-sm:hidden">Country</h4>
+                                    <h4 class=" text-sm text-cardBody font-poppins">
                                     <ReactCountryFlag
                           countryCode={item.countryAlpha2Code}
                           svg
@@ -231,7 +231,7 @@ function CustomerCardList(props) {
 
                                     </div>
                                 </div>
-                                <div className=" flex font-medium flex-col md:w-36 max-sm:flex-row w-full max-sm:justify-between ">
+                                <div className=" flex font-medium flex-col md:w-28 max-sm:flex-row w-full max-sm:justify-between ">
                                     <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden">Pipeline Value</h4>
 
                                     <div class=" text-xs text-cardBody font-poppins text-center">
@@ -247,7 +247,7 @@ function CustomerCardList(props) {
 
                                     </div>
                                 </div>
-                                <div className=" flex font-medium  flex-col md:w-24 max-sm:max-sm:flex-row w-full max-sm:justify-between ">
+                                <div className=" flex font-medium items-center  flex-col md:w-24 max-sm:max-sm:flex-row w-full max-sm:justify-between ">
                                     <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden">Assigned to</h4>
 
                                     <div class=" text-xs text-cardBody font-poppins">
@@ -267,7 +267,7 @@ function CustomerCardList(props) {
                                     </div>
                                 </div>
                                 <div class="flex"> 
-                                <div className=" flex font-medium flex-col md:w-20 max-sm:flex-row w-full max-sm:justify-between mb-2 ">
+                                <div className=" flex font-medium items-center flex-col md:w-20 max-sm:flex-row w-full max-sm:justify-between mb-2 ">
                        
                        <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden">Owner</h4>
 
@@ -290,7 +290,7 @@ function CustomerCardList(props) {
                         </Button>
                    </div>
                    
-                   <div class="flex flex-col w-[6%] max-sm:flex-row max-sm:w-[10%]">
+                   <div class="flex flex-col w-[8%] max-sm:flex-row max-sm:w-[10%]">
                                 <div>
                                 <Tooltip title={item.url}>
               {item.url !== "" ? (
@@ -375,10 +375,10 @@ function CustomerCardList(props) {
 </Tooltip>
 </div>
 <div>
-{props.user.customerUpdateInd === true && (
+{props.user.customerUpdateInd === true && user.crmInd === true && (
             <Tooltip title="Edit">
               <BorderColorIcon
-                style={{ cursor: "pointer",fontSize: "1rem" }}
+                style={{ cursor: "pointer",fontSize: "1rem",color: "grey", }}
                 onClick={() => {
                     props.setEditCustomer(item);
                     handleUpdateCustomerModal(true);

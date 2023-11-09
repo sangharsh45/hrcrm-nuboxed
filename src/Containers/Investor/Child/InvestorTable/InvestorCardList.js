@@ -2,6 +2,7 @@ import React, { useEffect, useState, useMemo, lazy } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
+import AssistantIcon from '@mui/icons-material/Assistant';
 import MonitorHeartIcon from "@mui/icons-material/MonitorHeart";
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import ExploreIcon from "@mui/icons-material/Explore";
@@ -365,10 +366,10 @@ function InvestorCardList(props) {
               />
             </Tooltip> </div> */}
             <div>
-            {props.user.customerUpdateInd === true && (
+            {user.imInd === true  &&  user.inventoryUpdateInd === true &&  (
             <Tooltip title="Edit">
               <BorderColorIcon
-                style={{ cursor: "pointer",fontSize: "0.8rem" }}
+                style={{ color: "grey",fontSize:"0.8rem",padding:"2px" }}
                 onClick={() => {
                     handleUpdateInvestorModal(true);
                     handleCurrentRowData(item);

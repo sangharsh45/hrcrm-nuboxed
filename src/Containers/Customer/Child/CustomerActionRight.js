@@ -39,7 +39,7 @@ class CustomerActionRight extends React.Component {
       )}
       
         <Tooltip placement="left" title="Create">
-          {this.props.user.customerCreateInd ===true && (
+          {this.props.user.customerCreateInd ===true && user.crmInd === true &&(
           <Button
             type="primary"
             onClick={() => handleCustomerModal(true)}

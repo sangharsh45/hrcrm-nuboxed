@@ -335,7 +335,7 @@ function ContactInvestCardList(props) {
               />
             </Tooltip> </div> */}
             <div>
-           
+            {user.imInd === true  && user.investorContactUpdateInd === true &&  (
             <Tooltip title="Edit">
               <BorderColorIcon
                 style={{ cursor: "pointer",fontSize: "0.8rem" }}
@@ -346,7 +346,7 @@ function ContactInvestCardList(props) {
                 }}
               />
             </Tooltip>
-      
+            )}
             </div>
                       </div>  
                       <div class="w-[2%]"></div>

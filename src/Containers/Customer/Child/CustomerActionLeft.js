@@ -2,6 +2,7 @@ import React, { useEffect,useState } from "react";
 import { FormattedMessage } from "react-intl";
 import GridViewIcon from '@mui/icons-material/GridView';
 import TocIcon from '@mui/icons-material/Toc';
+import PeopleIcon from '@mui/icons-material/People';
 import LanguageIcon from "@mui/icons-material/Language";
 import {getCustomerListByUserId} from "../CustomerAction"
 import { StyledSelect } from "../../../Components/UI/Antd";
@@ -101,7 +102,40 @@ function  handleFilterChange(data){
           </span>
         </Badge>
       </Tooltip>
-   
+      <Tooltip>
+        <Badge
+          size="All"
+          count={(props.viewType === "all" && props.recordData.customer) || 0}
+          overflowCount={999}
+        >
+          <span
+            class=" mr-2 text-sm cursor-pointer"
+            onClick={() => props.setCustomerViewType("all")}
+            style={{
+              color: props.viewType === "all" && "#1890ff",
+            }}
+          >
+           ALL
+          </span>
+        </Badge>
+      </Tooltip>
+      <Tooltip>
+        <Badge
+          size="Teams"
+          count={(props.viewType === "teams" && props.recordData.customer) || 0}
+          overflowCount={999}
+        >
+          <span
+            class=" mr-2 text-sm cursor-pointer"
+            onClick={() => props.setCustomerViewType("teams")}
+            style={{
+              color: props.viewType === "teams" && "#1890ff",
+            }}
+          >
+           <PeopleIcon/>
+          </span>
+        </Badge>
+      </Tooltip>
       {/* <Tooltip
         title={<FormattedMessage id="app.mapview" defaultMessage="Map View" />}
       >
@@ -148,7 +182,7 @@ function  handleFilterChange(data){
           <FormattedMessage id="app.clear" defaultMessage="Clear" />
           {/* Clear */}
         </Button>
-        <div style={{ width: "15%" }}>
+        <div class="w-[22%] mt-1">
           <StyledSelect placeholder="Sort"  onChange={(e)  => props.handleFilterChange(e)}>
           <Option value="CreationDate">Creation Date</Option>
             <Option value="ascending">A To Z</Option>

@@ -17,6 +17,7 @@ import {
   getlostRecords,
   getWonRecords
 } from "../OpportunityAction";
+import PeopleIcon from '@mui/icons-material/People';
 import { StopTwoTone, TableOutlined } from "@ant-design/icons";
 import { Input } from "antd";
 
@@ -110,7 +111,38 @@ const OpportunityActionLeft = (props) => {
           </span>
         </Tooltip>
       </Badge>
-  
+  <div class="ml-2">
+  <Tooltip
+          title="All list"
+        >
+          <span
+            class=" mr-2 text-sm "
+            onClick={() => props.setOpportunityViewType("all")}
+            style={{
+              color: props.viewType === "all" && "#1890ff",cursor:"pointer"
+            }}
+          >
+            {" "}
+           ALL
+          </span>
+        </Tooltip>
+  </div>
+  <div class="ml-2">
+  <Tooltip
+          title="Teams"
+        >
+          <span
+            class=" mr-2 text-sm "
+            onClick={() => props.setOpportunityViewType("teams")}
+            style={{
+              color: props.viewType === "teams" && "#1890ff",cursor:"pointer"
+            }}
+          >
+            {" "}
+            <PeopleIcon/>
+          </span>
+        </Tooltip>
+  </div>
       <Tooltip title={"Close"}>
         {" "}
         <Badge

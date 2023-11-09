@@ -28,9 +28,10 @@ class PitchActionRight extends React.Component {
     });
   };
   render() {
-    const { handleLeadsModal, userId } = this.props;
+    const { handleLeadsModal, user } = this.props;
     return (
       <>
+        {user.imInd === true  &&  user.pitchCreateInd === true && (
         <div class=" flex  items-center">
           {/* {user.customerFullListInd === true &&(  */}
         {/* <LeadShareForm
@@ -44,12 +45,13 @@ class PitchActionRight extends React.Component {
             Add
           </Button>
         </div>
+        )}
       </>
     );
   }
 }
 
-const mapStateToProps = ({ auth, team, account }) => ({});
+const mapStateToProps = ({ auth, team, account }) => ({ user: auth.userDetails,});
 const mapDispatchToProps = (dispatch) => bindActionCreators({}, dispatch);
 export default withRouter(
   connect(mapStateToProps, mapDispatchToProps)(PitchActionRight)

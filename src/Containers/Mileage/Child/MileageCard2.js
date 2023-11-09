@@ -181,7 +181,7 @@ class MileageCard2 extends React.Component {
          >
               <DeleteOutlined
                 type="delete"
-                style={{ cursor: "pointer" }}
+                style={{ cursor: "pointer",color:"red" }}
                 // onClick={() => {
                 // this.props.deleteMileageVoucher(item.voucherId);
                   

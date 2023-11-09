@@ -11,21 +11,17 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { StyledTabs } from "../../../Components/UI/Antd";
 import { TabsWrapper } from "../../../Components/UI/Layout";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {solid, regular} from '@fortawesome/fontawesome-svg-core/import.macro';
-const DistributorCreditMemoTable = lazy(() =>
-  import("../Child/Distributor/DistributorCreditMemoTable")
-);
 
-const DistributorCollectionTableToday = lazy(() =>
-  import("../Child/Distributor/DistributorCollectionTableToday")
-);
-const DistributorCollectionArchive = lazy(() =>
-  import("../Child/Distributor/DistributorCollectionArchive")
-);
-const DistributorCollectionTableAll = lazy(() =>
-  import("../Child/Distributor/DistributorCollectionTableAll")
-);
+
+// const DistributorCollectionTableToday = lazy(() =>
+//   import("../Child/Distributor/DistributorCollectionTableToday")
+// );
+// const DistributorCollectionArchive = lazy(() =>
+//   import("../Child/Distributor/DistributorCollectionArchive")
+// );
+// const DistributorCollectionTableAll = lazy(() =>
+//   import("../Child/Distributor/DistributorCollectionTableAll")
+// );
 
 const TabPane = StyledTabs.TabPane;
 
@@ -138,12 +134,12 @@ function CollectionDistributorTab(props) {
           >
             <Suspense fallback={"Loading ..."}>
               {" "}
-              <DistributorCollectionTableToday
+              {/* <DistributorCollectionTableToday
                 rowSelectionTodayForDistributor={
                   rowSelectionTodayForDistributor
                 }
                 handleClearCheck={handleClearCheck}
-              />
+              /> */}
             </Suspense>
           </TabPane>
 

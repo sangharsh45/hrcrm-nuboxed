@@ -7,7 +7,7 @@ import EventAvailableIcon from '@mui/icons-material/EventAvailable';
 import ActionNotification from "../Dashboard/ActionNotification";
 import UpcomingIcon from '@mui/icons-material/Upcoming';
 import TipsAndUpdatesIcon from "@mui/icons-material/TipsAndUpdates";
-import {getTodosCount} from "./DashboardAction";
+// import {getTodosCount} from "./DashboardAction";
 import DashboardTodo from "./Child/DashboardTodo";
 import UpcomingEvents from "./Child/UpcomingEvents";
 import { Badge } from "antd";
@@ -40,8 +40,8 @@ class TaskDashboardTab extends Component {
   }
 
   componentDidMount() {
-    const { getTodosCount, userId, startDate, endDate } = this.props;
-    getTodosCount(userId, startDate, endDate);
+    // const { getTodosCount, userId, startDate, endDate } = this.props;
+    // getTodosCount(userId, startDate, endDate);
   }
   handleContactPopoverVisibleChange = () =>
     this.setState({ contactPopover: !this.state.contactPopover });
@@ -117,7 +117,9 @@ const mapStateToProps = ({dashboard,auth,customer}) => ({
   startDate: dashboard.startDate,
 });
 const mapDispatchToProps = (dispatch) => bindActionCreators(
-  {getTodosCount},
+  {
+    // getTodosCount
+  },
    dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(TaskDashboardTab);
