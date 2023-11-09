@@ -18,7 +18,7 @@ import ConfigureModal from "./ConfigureModal";
 import CategoryImageModal from "./CategoryImageModal";
 import UploadProduct from "./UploadProduct";
 
-class CatalogueActionRight extends React.Component {
+class ProductActionRight extends React.Component {
   render() {
     const {
       handleConfigureModal,
@@ -96,5 +96,5 @@ const mapDispatchToProps = (dispatch) =>
     dispatch
   );
 export default withRouter(
-  connect(mapStateToProps, mapDispatchToProps)(CatalogueActionRight)
+  connect(mapStateToProps, mapDispatchToProps)(ProductActionRight)
 );

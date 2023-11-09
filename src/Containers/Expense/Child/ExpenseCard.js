@@ -155,7 +155,7 @@ style={{ color: "grey",fontSize:"1.2rem",padding:"2px" }}/>
         >
               <DeleteOutlined
                 type="delete"
-                style={{ cursor: "pointer" }}
+                style={{ cursor: "pointer",color:"red" }}
                 // onClick={() => {
                 // props.deleteExpense(item.voucherId);
                   

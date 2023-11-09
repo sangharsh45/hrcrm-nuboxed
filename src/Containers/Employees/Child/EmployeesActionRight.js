@@ -20,7 +20,7 @@ class EmployeesActionRight extends React.Component {
     });
   };
   render() {
-    const { handleEmployeeModal, userId } = this.props;
+    const { handleEmployeeModal, userId,user } = this.props;
     return (
       <>
         <div class=" flex items-center">
@@ -33,7 +33,7 @@ class EmployeesActionRight extends React.Component {
               </a>
             </Tooltip>
           )}
-
+{user.userCreateInd === true && (
           <Button
             type="primary"
          
@@ -41,6 +41,7 @@ class EmployeesActionRight extends React.Component {
           >
             Add
           </Button>
+           )}
         </div>
       </>
     );
@@ -50,6 +51,7 @@ class EmployeesActionRight extends React.Component {
 const mapStateToProps = ({ auth, team, account }) => ({
   userId: auth.userDetails.userId,
   role: auth.userDetails.role,
+  user: auth.userDetails,
 });
 const mapDispatchToProps = (dispatch) => bindActionCreators({}, dispatch);
 export default withRouter(

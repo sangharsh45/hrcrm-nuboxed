@@ -1,14 +1,16 @@
 import React, { Suspense, lazy } from "react";
-import { BundleLoader } from "../../../Components/Placeholder";
-import PlantTable from "./PlantTable";
-import PlantHeader from "./PlantHeader";
+import PlantHeader from "./Child/PlantHeader";
+import { BundleLoader } from "../../Components/Placeholder";
+const PlantTable = lazy(() => import("./Child/PlantTable/PlantTable"));
+
 function Plant() {
   return (
     <div>
       <PlantHeader />
       <Suspense fallback={<BundleLoader />}>
         {" "}
-        {/* <PlantTable /> */}hello
+        <PlantTable />
+
       </Suspense>
     </div>
   );

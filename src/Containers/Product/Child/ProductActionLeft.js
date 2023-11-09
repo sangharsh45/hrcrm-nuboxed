@@ -12,7 +12,7 @@ import { GlobalOutlined, TableOutlined } from "@ant-design/icons";
 
 const Option = StyledSelect.Option;
 
-const CatalogueActionLeft = (props) => {
+const ProductActionLeft = (props) => {
 
   useEffect(() => {
     // props.getRecords(props.userId);
@@ -114,4 +114,4 @@ const mapDispatchToProps = (dispatch) =>
     },
     dispatch
   );
-export default connect(mapStateToProps, mapDispatchToProps)(CatalogueActionLeft);
+export default connect(mapStateToProps, mapDispatchToProps)(ProductActionLeft);

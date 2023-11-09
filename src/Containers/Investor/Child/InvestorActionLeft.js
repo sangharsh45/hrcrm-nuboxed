@@ -7,6 +7,7 @@ import { StyledSelect } from "../../../Components/UI/Antd";
 import { Button, Tooltip, Badge } from "antd";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
+import PeopleIcon from '@mui/icons-material/People';
 import { withRouter } from "react-router-dom";
 import { AudioOutlined } from "@ant-design/icons";
 import SpeechRecognition, {
@@ -84,6 +85,41 @@ useEffect(() => {
             }}
           >
             <TocIcon />
+          </span>
+        </Badge>
+      </Tooltip>
+
+      <Tooltip title={<FormattedMessage id="app.all" defaultMessage="All" />}>
+        <Badge
+          size="small"
+        count={(props.viewType === "all" && props.investorRecord.investor) || 0}
+          overflowCount={999}
+        >
+          <span
+            class=" mr-2 text-sm cursor-pointer"
+            onClick={() => props.setInvestorViewType("all")}
+            style={{
+              color: props.viewType === "all" && "#1890ff",
+            }}
+          >
+          ALL
+          </span>
+        </Badge>
+      </Tooltip>
+      <Tooltip title="Teams">
+        <Badge
+          size="small"
+        count={(props.viewType === "teams" && props.investorRecord.investor) || 0}
+          overflowCount={999}
+        >
+          <span
+            class=" mr-2 text-sm cursor-pointer"
+            onClick={() => props.setInvestorViewType("teams")}
+            style={{
+              color: props.viewType === "teams" && "#1890ff",
+            }}
+          >
+          <PeopleIcon/>
           </span>
         </Badge>
       </Tooltip>

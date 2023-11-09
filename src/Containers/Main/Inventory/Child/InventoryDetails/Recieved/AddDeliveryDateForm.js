@@ -70,7 +70,7 @@ function OrderInventoryForm(props) {
                   placeholder="Location"
                   label="Location"
                   isRequired
-                  component={SelectComponent}
+                  // component={SelectComponent}
                   options={Array.isArray(locationsName) ? locationsName : []}
                 />
               </div>

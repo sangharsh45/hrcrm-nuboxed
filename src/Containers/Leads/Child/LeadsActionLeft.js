@@ -5,6 +5,7 @@ import { withRouter } from "react-router-dom";
 import TableViewIcon from '@mui/icons-material/TableView';
 import { AudioOutlined } from '@ant-design/icons';
 import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
+import PeopleIcon from '@mui/icons-material/People';
 import { Button, Input, Tooltip,Tag,Badge } from "antd";
 import { FormattedMessage } from "react-intl";
 import TocIcon from '@mui/icons-material/Toc';
@@ -56,6 +57,34 @@ const LeadsActionLeft = (props) => {
         </span>
       </Tooltip>
       </Badge>
+      <div class="ml-2">
+      <Tooltip
+        title= "All"
+      >
+        <span   class=" mr-2 text-sm cursor-pointer"
+        onClick={() => props.setLeadsViewType("all")}
+          style={{
+           color: props.viewType === "all" && "#1890ff",
+          }}
+        >
+        ALL
+        </span>
+      </Tooltip>
+      </div>
+      <div class="ml-2">
+      <Tooltip
+        title= "Teams"
+      >
+        <span   class=" mr-2 text-sm cursor-pointer"
+        onClick={() => props.setLeadsViewType("teams")}
+          style={{
+           color: props.viewType === "teams" && "#1890ff",
+          }}
+        >
+       <PeopleIcon/>
+        </span>
+      </Tooltip>
+      </div>
       <div class="ml-2">
       <Badge
         size="small"

@@ -69,3 +69,40 @@ export const setLocationViewType = (viewType) => (dispatch) => {
         //cb && cb("error");
       });
   };
+
+  export const handleLocationShiftDrawer = (modalProps) => (dispatch) => {
+    dispatch({ type: types.HANDLE_LOCATION_SHIFT_DRAWER, payload: modalProps });
+  };
+  
+  export const handleUpdateLocationDrawer = (modalProps) => (dispatch) => {
+    dispatch({ type: types.HANDLE_UPDATE_LOCATION_DRAWER, payload: modalProps });
+  };
+
+  
+  export const updateLocation = (data,locationDetailsId, cb) => (dispatch) => {
+    dispatch({ type: types.UPDATE_LOCATIONS_REQUEST });
+    axios
+      .put(
+        `${base_url}/locationDetails/${locationDetailsId}`,data,
+        {
+          headers: {
+            Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+          },
+        }
+      )
+      .then((res) => {
+        console.log(res);
+        dispatch({
+          type: types.UPDATE_LOCATIONS_SUCCESS,
+          payload: res.data,
+        });
+        cb();
+      })
+      .catch((err) => {
+        console.log(err);
+        dispatch({
+          type: types.UPDATE_LOCATIONS_FAILURE,
+          payload: err,
+        });
+      });
+  };

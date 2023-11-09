@@ -71,7 +71,7 @@ import { contactInvestReducer } from "../Containers/ContactInvest/ContactInvestR
 import { dealReducer } from "../Containers/Deal/DealReducer";
 import { suppliesReducer } from "../Containers/Main/Supplies/SuppliesReducer";
 import { shipperReducer } from "../Containers/Main/Shipper/ShipperReducer";
-import { plantReducer } from "../Containers/Main/Plant/PlantReducer";
+import { plantReducer } from "../Containers/Plant/PlantReducer";
 import { teamsReducer } from "../Containers/Main/Teams/TeamsReducer";
 import { inventoryReducer } from "../Containers/Main/Inventory/InventoryReducer";
 import { orderReducer } from "../Containers/Main/Order/OrderReducer";
@@ -80,6 +80,7 @@ import { catgCustomerReducer } from "../Containers/Settings/Category/Customer/Cu
 import { distributorReducer } from "../Containers/Main/Account/AccountReducer";
 import { suppliersReducer } from "../Containers/Main/Suppliers/SuppliersReducer";
 import { collectionReducer } from "../Containers/Collection/CollectionReducer";
+import { productReducer } from "../Containers/Product/ProductReducer";
 
 const appReducer = combineReducers({
   dashboard: dashboardReducer,
@@ -155,7 +156,8 @@ const appReducer = combineReducers({
   distributor: distributorReducer,
   suppliers: suppliersReducer,
   collection: collectionReducer,
-  refurbish: refurbishReducer
+  refurbish: refurbishReducer,
+  product: productReducer,
 });
 
 const rootReducer = (state, action) => {

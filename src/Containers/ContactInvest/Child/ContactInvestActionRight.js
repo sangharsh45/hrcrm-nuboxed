@@ -60,7 +60,7 @@ class ContactInvestActionRight extends React.Component {
           Import
         </Button>
         )}
-        
+        {user.imInd === true  && user.investorContactCreateInd === true &&  (
         <Tooltip placement="left" title="Create">
           <Button 
            type="primary"
@@ -69,7 +69,7 @@ class ContactInvestActionRight extends React.Component {
             Add
           </Button>
         </Tooltip>
-     
+        )}
       </div>
     );
   }

@@ -12,6 +12,7 @@ import moment from "moment";
 import SearchIcon from "@mui/icons-material/Search";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
 import LockIcon from "@mui/icons-material/Lock";
+import { DeleteOutlined } from "@ant-design/icons";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { StyledTable, StyledPopconfirm } from "../../../../Components/UI/Antd";
 import {
@@ -278,7 +279,7 @@ function OpportunityLostCard(props) {
             {user.opportunityUpdateInd ===true && (
               
             <span
-              style={{ cursor: "pointer", color: "blue" }}
+              style={{ cursor: "pointer",  color: "grey" }}
               onClick={() => {
                 props.setEditOpportunity(item);
                 handleUpdateOpportunityModal(true);
@@ -296,7 +297,7 @@ function OpportunityLostCard(props) {
           >
              {/* {user.userType !== "USER" && user.department !== "Recruiter" && (  */}
              {user.opportunityDeleteInd ===true && (
-            <DeleteIcon
+            <DeleteOutlined
             type="delete" style={{ cursor: "pointer", color: "red",fontSize:"0.8rem"  }} />
              )}
           </StyledPopconfirm>

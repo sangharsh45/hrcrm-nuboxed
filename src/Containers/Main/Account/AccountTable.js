@@ -119,7 +119,7 @@ function AccountTable(props) {
     },
 
     {
-      title: "Invoice Address",
+      title: "Billing Address",
       // render: (name, item, i) => {
       //   return `${item.addresses[0].address1 || ""} ${item.addresses[0]
       //     .address2 || ""} ${item.addresses[0].street || ""} ${item.addresses[0].city || ""}`;

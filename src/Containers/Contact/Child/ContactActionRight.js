@@ -62,14 +62,19 @@ class ContactActionRight extends React.Component {
           Import
         </Button>
         )} */}
+        
         {this.props.viewType === "table" ? (
+          
         <Tooltip placement="left" title="Create">
+            {user.contactCreateInd === true &&  user.crmInd === true && (
           <Button 
            type="primary"
            onClick={() => handleContactModal(true)}>
             Add
           </Button>
+             )}
         </Tooltip>
+         
         ): null}
       </div>
     );

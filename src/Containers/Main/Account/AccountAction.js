@@ -2353,3 +2353,10 @@ export const getLocationList = (orgId) => (dispatch) => {
       });
     });
 };
+
+export const setClearbitData1 = (data) => (dispatch) => {
+  dispatch({
+    type: types.SET_CLEARBIT_DATA1,
+    payload: data,
+  });
+};

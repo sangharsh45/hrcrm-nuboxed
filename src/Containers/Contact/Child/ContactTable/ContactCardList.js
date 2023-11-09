@@ -387,11 +387,12 @@ function ContactCardList(props) {
                 }}
               />
             </Tooltip> </div> */}
+              {user.contactUpdateInd === true &&  user.crmInd === true && (
             <div>
            
             <Tooltip title="Edit">
               <BorderColorIcon
-                style={{ cursor: "pointer",fontSize: "0.8rem" }}
+                style={{ cursor: "pointer",fontSize: "0.8rem", color: "grey", }}
                 onClick={() => {
                   props.setEditContact(item);
                   handleUpdateContactModal(true);
@@ -402,6 +403,7 @@ function ContactCardList(props) {
             </Tooltip>
       
             </div>
+              )}
                       </div>    
                      <div class="w-[1%]"></div>
                       </div>

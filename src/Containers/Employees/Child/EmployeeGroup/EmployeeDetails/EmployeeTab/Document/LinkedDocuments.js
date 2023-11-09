@@ -31,6 +31,7 @@ class LinkedDocuments extends Component {
       fetchingDocumentsByEmployeeId,
       fetchingDocumentsByEmployeeIdError,
       deleteDocument,
+      user,
     } = this.props;
     // const {
     //   employee: { employeeId },
@@ -142,11 +143,13 @@ class LinkedDocuments extends Component {
               href={`${base_url}/document/${item.documentId}`}
             // target="_blank"
             >
+              {user.userAccessInd === true ? (
               <DownloadIcon
                 type="download"
                 // onClick={() => startDownload()}
                 style={{ cursor: "pointer" }}
               />
+              ):null}
             </a>
           );
         },
@@ -199,8 +202,9 @@ class LinkedDocuments extends Component {
   }
 }
 
-const mapStateToProps = ({ employee }) => ({
+const mapStateToProps = ({ employee,auth }) => ({
   employee: employee.employee,
+  user:auth.userDetails,
   employeeId: employee.singleEmployee.employeeId,
   fetchingDocumentsByEmployeeId: employee.fetchingDocumentsByEmployeeId,
   fetchingDocumentsByEmployeeIdError:

@@ -7,21 +7,24 @@ import { Spacer, StyledLabel } from "../../../Components/UI/Elements";
 import { InputComponent } from "../../../Components/Forms/Formik/InputComponent";
 import { TextareaComponent } from "../../../Components/Forms/Formik/TextareaComponent";
 import * as Yup from "yup";
+import {getCountry } from "../../../Containers/Settings/Category/Country/CountryAction"
+import {
+    getCustomer,
+} from "../../Settings/Category/Customer/CustomerAction";
+import ClearbitImage from "../../../Components/Forms/Autocomplete/ClearbitImage";
 import AddressFieldArray from "../../../Components/Forms/Formik/AddressFieldArray";
 import { FlexContainer } from "../../../Components/UI/Layout";
 import SearchSelect from "../../../Components/Forms/Formik/SearchSelect";
-import { addDistributor } from "./AccountAction";
+import { addDistributor,setClearbitData1 } from "./AccountAction";
 import { SelectComponent } from "../../../Components/Forms/Formik/SelectComponent";
-// import { getVat } from "../../../Rules/RulesAction"
 import { getCurrency } from "../../Auth/AuthAction"
-// import { getCustomer } from "../../../../Settings/Category/CategoryAction"
-// import { getUserById } from "../../../Groups/GroupAction"
+import { ProgressiveImage } from "../../../Components/Utils";
 const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-])|(\\([0-9]{2,3}\\)[ \\-])|([0-9]{2,4})[ \\-])?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
 const CustomerSchema = Yup.object().shape({
     name: Yup.string().required("Input needed!"),
     country: Yup.string().required("Input needed!"),
-    dialCode: Yup.string().required("Input needed!"),
-    phoneNo: Yup.string().required("Input needed!"),
+    // dialCode: Yup.string().required("Input needed!"),
+    // phoneNo: Yup.string().required("Input needed!"),
     // assignTo: Yup.string().required("Input needed!"),
 });
 class AddAccountForm extends Component {
@@ -35,6 +38,8 @@ class AddAccountForm extends Component {
     componentDidMount() {
         // this.props.getCustomer();
         // this.props.getVat();
+        this.props.getCountry();
+        this.props.getCustomer(this.props.orgId);
         this.props.getCurrency();
         // this.props.getUserById(this.props.groupId)
     }
@@ -48,6 +53,20 @@ class AddAccountForm extends Component {
         //         label: item.country
         //     }
         // })
+
+          
+  const CountryOptions = this.props.country.map((item) => {
+    return {
+      label: `${item.country_name || ""}`,
+      value: item.country_id,
+    };
+  });
+  const CustomerTypeOptions = this.props.customerListData.map((item) => {
+    return {
+      label: `${item.name || ""}`,
+      value: item.customerTypeId,
+    };
+  });
         const currencyOption = this.props.currencies.map((item) => {
             return {
                 label: item.currencyName || "",
@@ -67,6 +86,7 @@ class AddAccountForm extends Component {
         //         value: item.userId,
         //     };
         // })
+        const {accounts,clearbit1}=this.props;
         return (
             <>
                 <Formik
@@ -84,23 +104,38 @@ class AddAccountForm extends Component {
                         vatInd: this.state.vatInd,
                         address: [
                             {
-                                addressType: "",
-                                address1: "",
-                                address2: "",
-                                addressId: "",
-                                town: "",
-                                street: "",
-                                city: "",
-                                pinCode: "",
-                                country: "",
-                                county: "",
-                                latitude: "",
-                                longitude: "",
-                                location: "",
-                                pinCode: "",
-                                state: "",
+                              addressType: "",
+                              address1: "",
+                              address2: "",
+                              town: "",
+                              street: "",
+                              city: "",
+                              postalCode: "",
+                              country: this.props.user.countryName,
+                              latitude: "",
+                              state: "",
+                              longitude: "",
                             },
-                        ],
+                          ],
+                        // address: [
+                        //     {
+                        //         addressType: "",
+                        //         address1: "",
+                        //         address2: "",
+                        //         addressId: "",
+                        //         town: "",
+                        //         street: "",
+                        //         city: "",
+                        //         pinCode: "",
+                        //         country: "",
+                        //         county: "",
+                        //         latitude: "",
+                        //         longitude: "",
+                        //         location: "",
+                        //         pinCode: "",
+                        //         state: "",
+                        //     },
+                        // ],
                     }}
                     validationSchema={CustomerSchema}
                     onSubmit={(values, { resetForm }) => {
@@ -131,14 +166,41 @@ class AddAccountForm extends Component {
                                         width: "45%",
                                     }}
                                 >
+                                     <div>
+                    {clearbit1 && clearbit1.hasOwnProperty("logo") && (
+                      <ProgressiveImage
+                        preview={
+                          "http://pluspng.com/img-png/twitter-logo-png-twitter-logo-png-256.png"
+                        }
+                        image={clearbit1.logo}
+                        width={140}
+                        height={150}
+                        borderRadius={25}
+                        padding={15}
+
+                      />
+                    )}
+                    {clearbit1 && clearbit1.hasOwnProperty("logo") ? (
+                      <a
+                        href="https://clearbit.com"
+                        target="_blank"
+                        style={{ fontSize: 13, marginLeft: 5 }}
+                      >
+                        Logos provided by Clearbit
+                      </a>
+                    ) : null}
+                  </div>
+                  <Spacer />
                                     <Field
                                         isRequired
                                         name="name"
                                         type="text"
                                         label="Name"
                                         width={"100%"}
-                                        component={InputComponent}
-                                        // placeholder="Start typing..."
+                                        // component={InputComponent}
+                                        setClearbitData1={this.props.setClearbitData1}
+                    component={ClearbitImage}
+                    accounts={accounts}
                                         isColumn
                                         inlineLabel
                                     />
@@ -196,9 +258,12 @@ class AddAccountForm extends Component {
                                                 name="country"
                                                 label="Country"
                                                 isColumn
+                                                placeholder="Select"
                                                 inlineLabel
                                                 component={SelectComponent}
-                                                options={["India", "Netherland"]}
+                                                options={
+                                                    Array.isArray(CountryOptions) ? CountryOptions : []
+                                                  }
                                             />
                                         </div>
                                         <div style={{ width: "47%" }}>
@@ -251,9 +316,9 @@ class AddAccountForm extends Component {
                                     <FlexContainer justifyContent="space-between">
                                         <div style={{ width: "47%" }}>
                                             <FastField
-                                                label="Payment Terms"
+                                                label="Payment Terms (in Days)"
                                                 name="payment"
-                                                placeholder="Price"
+                                                placeholder="Select"
                                                 component={SelectComponent}
                                                 options={["7", "15", "21", "30", "45", "60", "75", "90"]}
                                                 inlineLabel
@@ -268,7 +333,11 @@ class AddAccountForm extends Component {
                                                 isColumn
                                                 inlineLabel
                                                 component={SelectComponent}
-                                                options={["Marketplace", "Customer", "Distributor"]}
+                                                options={
+                                                    Array.isArray(CustomerTypeOptions) ? CustomerTypeOptions : []
+                                                  }
+                                                // component={SelectComponent}
+                                                // options={["Marketplace", "Customer", "Distributor"]}
                                             />
                                         </div>
                                     </FlexContainer>
@@ -288,7 +357,7 @@ class AddAccountForm extends Component {
                                     }}
                                 >
                                     <div>
-                                        <FastField
+                                        {/* <FastField
                                             name="assignTo"
                                             label="Assigned To"
                                             isColumn
@@ -297,7 +366,7 @@ class AddAccountForm extends Component {
                                             inlineLabel
                                         // component={SelectComponent}
                                         // options={Array.isArray(assignToOption) ? assignToOption : []}
-                                        />
+                                        /> */}
                                     </div>
                                     <Spacer />
                                     <StyledLabel >Invoice Address</StyledLabel>
@@ -333,11 +402,17 @@ class AddAccountForm extends Component {
     }
 }
 
-const mapStateToProps = ({ auth, distributor, rule, groups, category }) => ({
+const mapStateToProps = ({ auth,countrys,catgCustomer, distributor, rule, groups, category }) => ({
     userId: auth.userDetails.userId,
     groupId: auth.userDetails.groupId,
     vat: rule.vat,
+    user: auth.userDetails,
+    orgId:auth.userDetails.organizationId,
+    customerListData: catgCustomer.customerListData,
+    countries:auth.countries,
+    clearbit1: distributor.clearbit1,
     currencies: auth.currencies,
+    country: countrys.country,
     //  groupUsers: groups.groupUsers,
     // customer: category.customer,
     addingDistributor: distributor.addingDistributor
@@ -347,6 +422,9 @@ const mapDispatchToProps = (dispatch) =>
     bindActionCreators(
         {
             addDistributor,
+            setClearbitData1,
+            getCountry,
+            getCustomer,
             //  getVat,
             getCurrency,
             // getUserById,

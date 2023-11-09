@@ -23,6 +23,7 @@ import UpdateShipperModal from "./UpdateShipperModal";
 import AddShipperOrderModal from "./AddShipperOrderModal";
 import Highlighter from "react-highlight-words";
 import { OnlyWrapCard } from "../../../Components/UI/Layout";
+import { Link } from "../../../Components/Common";
 
 function ShipperTable(props) {
   useEffect(() => {
@@ -159,7 +160,10 @@ Name
 
 
 <div class=" font-normal text-[0.82rem] text-cardBody font-poppins">
-{item.shipperName}
+<Link
+          toUrl={`shipper/${item.shipperId}`}
+          title={`${item.shipperName}`}
+        >{item.shipperName}</Link>
 </div>
 
 </div>
@@ -258,7 +262,8 @@ PinCode
 </div>
 
 </div>
-
+<div class="flex flex-col w-[3%] max-sm:flex-row max-sm:w-[10%]">
+ <div>
 <Tooltip title="Edit">
             <EditOutlined
               style={{ cursor: "pointer" }}
@@ -270,6 +275,8 @@ PinCode
               }}
             />
           </Tooltip>
+          </div>
+          <div>
           <Popconfirm
               title="Do you want to delete?"
              onConfirm={() => props.deleteShipperData(item.shipperId)}
@@ -279,7 +286,8 @@ PinCode
                 style={{ cursor: "pointer", color: "red" }}
               />
             </Popconfirm>
-
+            </div>
+            </div>
 
 
  </div>

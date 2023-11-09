@@ -45,7 +45,7 @@ class OpportunityActionRight extends React.Component {
                 defaultMessage="Create"
               />}>
            {/* {user.userType !== "USER" && user.department !== "Recruiter" && (  */}
-           {user.opportunityCreateInd ===true && (
+           {user.opportunityCreateInd ===true && user.crmInd === true && (
           <Button
             type="primary"
             // ghost

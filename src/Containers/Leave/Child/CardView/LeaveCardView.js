@@ -220,7 +220,7 @@ style={{ color: "grey",fontSize:"1.2rem",padding:"2px" }}/>
 >
 <DeleteOutlined
 type="delete"
-style={{ cursor: "pointer" }}></DeleteOutlined>
+style={{ cursor: "pointer",color:"red" }}></DeleteOutlined>
 </div>
 :""}
      </span>

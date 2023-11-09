@@ -8,8 +8,12 @@ const initialState = {
     showLocation:[],
 
     addingLocation: false, 
-    addingLocationError: false 
+    addingLocationError: false,
 
+    locShiftDrawer:false,
+    locationUpdatedrawr:false,
+
+    updatingLocations: false, updatingLocationsError: false
   };
 
   export const locationReducer = (state = initialState, action) => {
@@ -45,8 +49,28 @@ const initialState = {
                     return { ...state, addingLocation: false, 
                                     addingLocationError: true };
 
+            case types.HANDLE_LOCATION_SHIFT_DRAWER:
+                return { ...state, locShiftDrawer: action.payload }; 
+               
+          case types.HANDLE_UPDATE_LOCATION_DRAWER:
+            return { ...state, locationUpdatedrawr: action.payload }; 
 
-
+            case types.UPDATE_LOCATIONS_REQUEST:
+              return { ...state, updatingLocations: true };
+            case types.UPDATE_LOCATIONS_SUCCESS:
+              return {
+                ...state,
+                updatingLocations: false,
+                locationUpdatedrawr: false,
+                showLocation: state.showLocation.map((LOCS) =>
+                LOCS.locationDetailsId === action.payload.locationDetailsId
+                  ? action.payload
+                  : LOCS
+              ),
+              };
+            case types.UPDATE_LOCATIONS_FAILURE:
+              return { ...state, updatingLocations: false, updatingLocationsError: true };         
+                
         default:
     return state;
       }

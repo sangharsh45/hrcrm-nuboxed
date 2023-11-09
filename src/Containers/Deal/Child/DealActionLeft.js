@@ -8,6 +8,7 @@ import { withRouter } from "react-router-dom";
 import LightbulbIcon from "@mui/icons-material/Lightbulb";
 import DeleteIcon from "@mui/icons-material/Delete";
 import LockOpenIcon from "@mui/icons-material/LockOpen";
+import PeopleIcon from '@mui/icons-material/People';
 import {getdealsRecord} from "../DealAction";
 import { StopTwoTone, TableOutlined } from "@ant-design/icons";
 import { Input } from "antd";
@@ -87,6 +88,40 @@ useEffect(() => {
             onClick={() => props.setDealViewType("stage")}
           >
            <TableOutlined/>
+          </span>
+        </Tooltip>
+        <Tooltip
+          title="All"
+        >
+          {/*<TableOutlined*/}
+          <span
+            style={{
+              fontSize: "1.56em",
+              marginRight: "0.3rem",
+              color: viewType === "all" && "#1890ff",
+            }}
+            // iconType="table"
+            tooltipTitle="All"
+            onClick={() => props.setDealViewType("all")}
+          >
+          ALL
+          </span>
+        </Tooltip>
+        <Tooltip
+          title="Teams"
+        >
+          {/*<TableOutlined*/}
+          <span
+            style={{
+              fontSize: "1.56em",
+              marginRight: "0.3rem",
+              color: viewType === "teams" && "#1890ff",
+            }}
+            // iconType="table"
+            tooltipTitle="Teams"
+            onClick={() => props.setDealViewType("teams")}
+          >
+         <PeopleIcon/>
           </span>
         </Tooltip>
       <Tooltip title={"Close"}>

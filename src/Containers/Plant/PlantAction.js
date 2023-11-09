@@ -1,7 +1,6 @@
 import * as types from "./PlantActionTypes";
-import { base_url } from "../../../Config/Auth";
+import { base_url,base_url2 } from "../../Config/Auth";
 import axios from "axios";
-import {base_url2  } from "../../../Config/Auth";
 import moment from "moment";
 import { message } from "antd";
 
@@ -18,7 +17,7 @@ export const getProductionManager = () => (dispatch) => {
   });
   console.log("inside team action get users");
   axios
-    .get(`${base_url}/user/production`, {
+    .get(`${base_url2}/user/production`, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },
@@ -47,7 +46,7 @@ export const addPlant = (plant) => (dispatch) => {
   });
 
   axios
-    .post(`${base_url}/plant/savePlant`, plant, {})
+    .post(`${base_url2}/plant/savePlant`, plant, {})
     .then((res) => {
       console.log(res);
       dispatch(getPlant());
@@ -92,14 +91,12 @@ export const getPlant = () => (dispatch) => {
 };
 
 //Plant Details
-export const getPlantById = (locationDetailsId) => (dispatch, getState) => {
-  // const locationDetailsId = getState().plant.locationDetailsId;
-  console.log(locationDetailsId);
+export const getPlantById = (locationDetailsId) => (dispatch) => {
   dispatch({
     type: types.GET_PLANT_BY_ID_REQUEST,
   });
   axios
-    .get(`${base_url}/locationDetails/${locationDetailsId}`, {
+    .get(`${base_url2}/locationDetails/${locationDetailsId}`, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },

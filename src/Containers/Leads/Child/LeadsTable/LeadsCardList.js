@@ -12,6 +12,7 @@ import { OnlyWrapCard } from '../../../../Components/UI/Layout'
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import DeleteIcon from "@mui/icons-material/Delete";
+import { DeleteOutlined } from "@ant-design/icons";
 import { getCountries } from "../../../Auth/AuthAction";
 import { Link } from "../../../../Components/Common";
 import {
@@ -56,7 +57,7 @@ const LeadsCardList = (props) => {
   function handleSetCurrentLeadsId(item) {
     setCurrentLeadsId(item);
   }
-  const { deleteLeadsData, handleUpdateLeadsModal,handleLeadsNotesDrawerModal, updateLeadsModal,fetchingLeads,leadsAllData  } = props;
+  const { deleteLeadsData, handleUpdateLeadsModal,handleLeadsNotesDrawerModal, updateLeadsModal,fetchingLeads,leadsAllData,user  } = props;
 
   if (fetchingLeads) {
     return <BundleLoader />;
@@ -360,10 +361,11 @@ onClick={()=>{
             </div>
                                 {/* <div class="flex max-sm:flex-row w-full justify-between md:flex-col"> */}
                                 <div class="flex flex-col w-[5%] max-sm:flex-row max-sm:w-[10%]">
+                                {user.leadsUpdateInd === true && user.crmInd === true &&(
                                 <div>
             <Tooltip title="Edit">
               <BorderColorIcon
-                style={{ cursor: "pointer",fontSize: "1rem" }}
+                style={{ color: "grey", cursor: "pointer",fontSize: "1rem" }}
                 onClick={() => {
                    props.setEditLeads(item);
                 handleUpdateLeadsModal(true);
@@ -374,19 +376,22 @@ onClick={()=>{
             </Tooltip>
         
             </div>
+                                )}
+                                  {user.leadsDeleteInd === true && user.crmInd === true &&(
                         <div>
                         <StyledPopconfirm
             title="Do you want to delete?"
             onConfirm={() => deleteLeadsData(item.leadsId)}
           >
             {/* {user.opportunityDeleteInd ===true && ( */}
-            <DeleteIcon
+            <DeleteOutlined
               type="delete"
               style={{ cursor: "pointer", color: "red" ,fontSize: "1rem",}}
             />
             {/* )} */}
           </StyledPopconfirm>
                         </div>
+                                  )}
                         <div>
             
 
@@ -462,6 +467,7 @@ const mapStateToProps = ({ auth, leads, sector }) => ({
   leadsAllData: leads.leadsAllData,
   userId: auth.userDetails.userId,
   lead: leads.lead,
+  user: auth.userDetails,
   countries: auth.countries,
   sectors: sector.sectors,
   updateLeadsModal: leads.updateLeadsModal,

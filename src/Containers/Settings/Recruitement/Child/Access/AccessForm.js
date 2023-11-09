@@ -13,6 +13,7 @@ import { getDepartmentAccess, addDepartmentAccess } from "../../../SettingsActio
 
 const CheckboxGroup = Checkbox.Group;
 const plainOptions = ['Access', 'Create', 'Update', 'Delete','Full List'];
+const userOptions = ['Access', 'Create', 'Update', 'Delete','Access Plus'];
  const defaultCheckedList=['Full List'];
  const dashboardCheckedList=['Access','Full List'];
  const refurbishCheckedList=['Workshop','Adminview','Adminassign'];
@@ -473,12 +474,12 @@ const AccessForm = (props) => {
                                   
                                     const onUserChange = (list) => {
                                       setCheckedUserList(list);
-                                      setIndeterminateUser(!!list.length && list.length < plainOptions.length);
-                                      setCheckAllUser(list.length === plainOptions.length);
+                                      setIndeterminateUser(!!list.length && list.length < userOptions.length);
+                                      setCheckAllUser(list.length === userOptions.length);
                                     };
                                   
                                     const onCheckAllUserChange = (e) => {
-                                      setCheckedUserList(e.target.checked ? plainOptions : []);
+                                      setCheckedUserList(e.target.checked ? userOptions : []);
                                       setIndeterminateUser(false);
                                       setCheckAllUser(e.target.checked);
                                     };
@@ -902,7 +903,7 @@ const AccessForm = (props) => {
                  <label class="text-xs"> Check all</label>
                 </Checkbox>
                 <Divider />
-                <CheckboxGroup options={plainOptions} value={checkedUserList} onChange={onUserChange} />
+                <CheckboxGroup options={userOptions} value={checkedUserList} onChange={onUserChange} />
 
               </div>
                   <Spacer />

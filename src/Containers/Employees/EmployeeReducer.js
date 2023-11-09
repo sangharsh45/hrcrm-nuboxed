@@ -5,6 +5,10 @@ const initialState = {
 
   addEmployeeModal: false,
 
+  updateEmployeeModal:false,
+
+  setEditingEmployee:{},
+
   addingEmployee: false,
   addingEmployeeError: false,
 
@@ -86,6 +90,9 @@ const initialState = {
   fetchingPermissionsList: false,
   fetchingPermissionsListError: false,
   permissionsDataList: [],
+
+  updateEmployee: false,
+  updateEmployeeError: false,
 
   fetchingallCustomerEmployeeList:false,
   fetchingallCustomerEmployeeListError:false,
@@ -659,9 +666,36 @@ export const EmployeeReducer = (state = initialState, action) => {
                                     fetchingAllDocumentsByEmployeeId: false,
                                     fetchingAllDocumentsByEmployeeIdError: true,
                                   };
+
+                                  case types.HANDLE_UPDATE_EMPLOYEE_MODAL:
+                                    return { ...state, updateEmployeeModal: action.payload };
+
+
+                                    case types.SET_EMPLOYEE_EDIT:
+      return { ...state, setEditingEmployee: action.payload };
                             
 
-
+      case types.UPDATE_EMPLOYEE_REQUEST:
+        return { ...state, updateEmployee: true };
+      case types.UPDATE_EMPLOYEE_SUCCESS:
+        return {
+          ...state,
+          updateEmployee: false,
+          updateEmployeeModal: false,
+          employees: state.employees.map((item) => {
+            if (item.employeeId === action.payload.employeeId) {
+              return action.payload;
+            } else {
+              return item;
+            }
+          }),
+        };
+      case types.UPDATE_EMPLOYEE_FAILURE:
+        return {
+          ...state,
+          updateEmployee: false,
+          updateEmployeeError: true,
+        };
 
     default:
       return state;

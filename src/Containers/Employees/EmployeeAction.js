@@ -960,3 +960,41 @@ export const getEmployeeAllDocument = (candidateId) => (dispatch) => {
     });
 };
 
+export const handleUpdateEmployeeModal = (modalProps) => (dispatch) => {
+  dispatch({
+    type: types.HANDLE_UPDATE_EMPLOYEE_MODAL,
+    payload: modalProps,
+  });
+};
+
+export const setEditEmployee = (name) => (dispatch) => {
+  dispatch({
+    type: types.SET_EMPLOYEE_EDIT,
+    payload: name,
+  });
+};
+
+export const updateEmployee = (data, employeeId) => (dispatch) => {
+  dispatch({ type: types.UPDATE_EMPLOYEE_REQUEST });
+  axios
+    .put(`${base_url}/employee/update/${employeeId}`, data, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.UPDATE_EMPLOYEE_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.UPDATE_EMPLOYEE_FAILURE,
+        payload: err,
+      });
+    });
+};
+

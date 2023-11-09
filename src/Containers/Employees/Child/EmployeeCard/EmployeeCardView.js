@@ -5,6 +5,7 @@ import {  Tooltip,Button, Badge } from 'antd'
 import { connect } from 'react-redux'
 import MonitorHeartIcon from "@mui/icons-material/MonitorHeart";
 import { bindActionCreators } from 'redux'
+import BorderColorIcon from "@mui/icons-material/BorderColor";
 import CellTowerIcon from '@mui/icons-material/CellTower';
 import { Select } from "antd";
 import PlaceIcon from '@mui/icons-material/Place';
@@ -16,16 +17,19 @@ import styled from 'styled-components'
 import { BundleLoader } from "../../../../Components/Placeholder";
 import {
     getEmployeelist,
+    setEditEmployee,
     handleEmployeeDrawerForAdmin,
     handleEmployeePulseDrawerModal,
     getEmployeeTreeMap,
     handleEmployeeDocumentDrawerModal,
-    getEmployeeDocument
+    getEmployeeDocument,
+    handleUpdateEmployeeModal
   } from "../../EmployeeAction";
 import EmployeeDetailsView from "../EmployeeGroup/EmployeeDetails/EmployeeDetailsView";
 import EmployeeDrawerForAdmin from "../EmployeeTable/EmployeeDrawer/EmployeeDrawerForAdmin";
 import EmployeePulseDrawerModal from "../EmployeeTable/EmployeePulseDrawerModal";
 import EmployeeDocumentDrawerModal from "./EmployeeDocumentDrawerModal";
+import UpdateEmployeeModal from "./UpdateEmployeeModal";
 
 const { Option } = Select;
 function EmployeeCardView (props) {
@@ -146,6 +150,7 @@ function handleSetCurrentEmployeeId(employeeId,) {
      </span>
            </div>
            <div class=" font-normal text-xs text-cardBody font-poppins ">
+            {/* {user.userAccessPlusInd === true ?( */}
           <span
               style={{ cursor: "pointer" }}
               onClick={() => {
@@ -162,6 +167,7 @@ function handleSetCurrentEmployeeId(employeeId,) {
               <InsertDriveFileIcon  style={{ fontSize: "1rem", }}/>
               </Badge>
      </span>
+            {/* ):null} */}
            </div>
            <div class=" font-normal text-xs text-cardBody font-poppins ">
            <Tooltip 
@@ -176,6 +182,21 @@ function handleSetCurrentEmployeeId(employeeId,) {
          
      </span>
      </Tooltip>
+           </div>
+           <div class=" font-normal text-xs text-cardBody font-poppins ">
+           {user.userUpdateInd === true && (
+            <Tooltip title="Edit">
+              <BorderColorIcon
+                style={{ cursor: "pointer",fontSize: "1rem" }}
+                onClick={() => {
+                    props.setEditEmployee(item);
+                    props.handleUpdateEmployeeModal(true);
+                    handleSetCurrentEmployeeId(item);
+                  
+                }}
+              />
+            </Tooltip>
+            )}
            </div>
            </div>
          
@@ -234,6 +255,13 @@ function handleSetCurrentEmployeeId(employeeId,) {
             })}
               </CardWrapper>
               </div>
+              <UpdateEmployeeModal
+               singleEmployee={props.singleEmployee}
+       employeeName={currentEmployeeId}
+        updateEmployeeModal={props.updateEmployeeModal}
+        handleUpdateEmployeeModal={props.handleUpdateEmployeeModal}
+        handleSetCurrentEmployeeId={props.handleSetCurrentEmployeeId}
+      />
               <EmployeeDrawerForAdmin
       employeeId={currentEmployeeId}
         handleEmployeeDrawerForAdmin={handleEmployeeDrawerForAdmin}
@@ -264,6 +292,7 @@ function handleSetCurrentEmployeeId(employeeId,) {
 
 const mapStateToProps = ({ auth,role, employee,designations,departments }) => ({
     userId: auth.userDetails.userId,
+    updateEmployeeModal:employee.updateEmployeeModal,
     employees: employee.employees,
     user: auth.userDetails,
     roles: role.roles,
@@ -283,9 +312,11 @@ const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
         getEmployeelist,
+        setEditEmployee,
         handleEmployeeDrawerForAdmin,
         handleEmployeePulseDrawerModal,
         handleEmployeeDocumentDrawerModal,
+        handleUpdateEmployeeModal,
         getEmployeeTreeMap,
         getEmployeeDocument
     },

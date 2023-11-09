@@ -15,6 +15,7 @@ import {
   addCustomer,
   setClearbitData
 } from "../CustomerAction";
+import { getCrm} from "../../Leads/LeadsAction";
 import { getAllSalesList } from "../../Opportunity/OpportunityAction"
 import { Listbox, Transition } from '@headlessui/react'
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid'
@@ -52,6 +53,7 @@ function CustomerForm(props) {
     props.getAllCustomerEmployeelist();
     props.getSectors();
     props.getAllSalesList();
+    props. getCrm();
   }, []);
 
     const {
@@ -259,7 +261,7 @@ function CustomerForm(props) {
                             }
                           />
                     </div>
-                    <div class=" w-2/5 max-sm:w-w47.5">
+                    <div class="w-w47.5">
                     <FastField
                             name="source"
                             type="text"
@@ -296,12 +298,12 @@ function CustomerForm(props) {
                 <div class=" h-3/4 w-w47.5 max-sm:w-wk "  
                 >
                  <Spacer/>
-                 <div class=" flex justify-between">
+                 <div class=" flex justify-between mb-[0.35rem]">
                     <div class=" h-full w-full">
                     <Listbox value={selected} onChange={setSelected}>
         {({ open }) => (
           <>
-            <Listbox.Label className="block font-semibold text-[0.75rem] mb-1 leading-lh1.2  "
+            <Listbox.Label className="block font-semibold text-[0.75rem]  leading-lh1.2  "
             // style={{boxShadow:"0em 0.25em 0.625em -0.25em" }}
             >
               Assigned to
@@ -315,7 +317,7 @@ function CustomerForm(props) {
                   static
                   className="absolute z-10 max-h-56 w-full overflow-auto mt-1  bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
                 >
-                  {props.allCustomerEmployeeList.map((item) => (
+                  {props.crmAllData.map((item) => (
                     <Listbox.Option
                       key={item.employeeId}
                       className={({ active }) =>
@@ -323,7 +325,7 @@ function CustomerForm(props) {
                           active ? "text-white bg-indigo-600" : "text-gray-900"
                         }`
                       }
-                      value={item.fullName}
+                      value={item.empName}
                     >
                       {({ selected, active }) => (
                         <>
@@ -333,7 +335,7 @@ function CustomerForm(props) {
                                 selected ? "font-semibold" : "font-normal"
                               }`}
                             >
-                              {item.fullName}
+                              {item.empName}
                             </span>
                           </div>
                           {selected && (
@@ -430,8 +432,8 @@ function CustomerForm(props) {
                       />
                     </div>
                   </div>
-                  <Spacer/>
-                  <div style={{ width: "100%",backgroundImage: "linear-gradient(-90deg, #00162994, #94b3e4)" }}>
+                  
+                  <div class="mt-8" style={{ width: "100%",backgroundImage: "linear-gradient(-90deg, #00162994, #94b3e4)" }}>
                       <div>
                   <HeaderLabel style={{color:"white"}} >Corporate Address</HeaderLabel>
                   </div>
@@ -494,7 +496,7 @@ function CustomerForm(props) {
   }
 
 
-const mapStateToProps = ({ auth, customer,employee ,opportunity,sector}) => ({
+const mapStateToProps = ({ auth, customer,employee ,opportunity,sector,leads}) => ({
   addingCustomer: customer.addingCustomer,
   addingCustomerError: customer.addingCustomerError,
   clearbit: customer.clearbit,
@@ -503,7 +505,8 @@ const mapStateToProps = ({ auth, customer,employee ,opportunity,sector}) => ({
   allCustomerEmployeeList:employee.allCustomerEmployeeList,
   userId: auth.userDetails.userId,
   sectors: sector.sectors,
-  fullName: auth.userDetails.fullName
+  fullName: auth.userDetails.fullName,
+  crmAllData:leads.crmAllData,
 });
 
 const mapDispatchToProps = (dispatch) =>
@@ -514,6 +517,7 @@ const mapDispatchToProps = (dispatch) =>
       getSectors,
       getAllSalesList,
       getAllCustomerEmployeelist,
+      getCrm,
     },
     dispatch
   );
