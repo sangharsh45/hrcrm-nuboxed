@@ -375,10 +375,10 @@ function CustomerCardList(props) {
 </Tooltip>
 </div>
 <div>
-{props.user.customerUpdateInd === true && (
+{props.user.customerUpdateInd === true && user.crmInd === true && (
             <Tooltip title="Edit">
               <BorderColorIcon
-                style={{ cursor: "pointer",fontSize: "1rem" }}
+                style={{ cursor: "pointer",fontSize: "1rem",color: "grey", }}
                 onClick={() => {
                     props.setEditCustomer(item);
                     handleUpdateCustomerModal(true);

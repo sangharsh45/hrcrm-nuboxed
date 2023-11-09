@@ -13,6 +13,7 @@ import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { withRouter } from "react-router-dom";
+import PeopleIcon from '@mui/icons-material/People';
 import TableViewIcon from '@mui/icons-material/TableView';
 import { AudioOutlined } from '@ant-design/icons';
 import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
@@ -65,6 +66,31 @@ const PitchActionLeft = (props) => {
         </span>
       </Tooltip>
       </Badge>
+
+      <Tooltip
+        title= "All"
+      >
+        <span   class=" mr-2 text-sm cursor-pointer"
+        onClick={() => props.setLeadsViewType("all")}
+          style={{
+           color: props.viewType === "all" && "#1890ff",
+          }}
+        >
+        ALL
+        </span>
+      </Tooltip>
+      <Tooltip
+        title= "Teams"
+      >
+        <span   class=" mr-2 text-sm cursor-pointer"
+        onClick={() => props.setLeadsViewType("teams")}
+          style={{
+           color: props.viewType === "teams" && "#1890ff",
+          }}
+        >
+         <PeopleIcon/>
+        </span>
+      </Tooltip>
       {/* <Badge
         size="small"
         count={(props.viewType === "list" && props.leadsCountJunked.junkedList) || 0}

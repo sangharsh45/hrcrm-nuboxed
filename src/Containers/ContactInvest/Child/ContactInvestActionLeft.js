@@ -7,6 +7,7 @@ import AccountBalanceIcon from "@mui/icons-material/AccountBalance";
 import SpeechRecognition, {
   useSpeechRecognition,
 } from "react-speech-recognition";
+import PeopleIcon from '@mui/icons-material/People';
 import HandshakeIcon from "@mui/icons-material/Handshake";
 import { Input, Menu, Tooltip, Radio } from "antd";
 import { StyledSelect } from "../../../Components/UI/Antd";
@@ -71,6 +72,52 @@ const ContactInvestActionLeft = (props) => {
             }}
           >
             <AccountBalanceIcon />
+          </span>
+        </Badge>
+      </Tooltip>
+      <Tooltip
+        title="All"
+      >
+        <Badge
+          size="small"
+          count={
+            (props.viewType === "all" &&
+              props.contactInvest.contactDetails) ||
+            0
+          }
+          overflowCount={5000}
+        >
+          <span
+            class=" mr-2 text-sm cursor-pointer"
+            onClick={() => props.setContactInvetViewType("all")}
+            style={{
+              color: props.viewType === "all" && "#1890ff",
+            }}
+          >
+            ALL
+          </span>
+        </Badge>
+      </Tooltip>
+      <Tooltip
+        title="Teams"
+      >
+        <Badge
+          size="small"
+          count={
+            (props.viewType === "teams" &&
+              props.contactInvest.contactDetails) ||
+            0
+          }
+          overflowCount={5000}
+        >
+          <span
+            class=" mr-2 text-sm cursor-pointer"
+            onClick={() => props.setContactInvetViewType("teams")}
+            style={{
+              color: props.viewType === "teams" && "#1890ff",
+            }}
+          >
+           <PeopleIcon/>
           </span>
         </Badge>
       </Tooltip>
