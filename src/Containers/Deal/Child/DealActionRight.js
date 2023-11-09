@@ -45,7 +45,7 @@ class DealActionRight extends React.Component {
                 defaultMessage="Create"
               />}>
            {/* {user.userType !== "USER" && user.department !== "Recruiter" && (  */}
-           {user.opportunityCreateInd ===true && (
+           {user.imInd === true  && user.opportunityCreateInd ===true && (
           <Button
             type="primary"
             // ghost

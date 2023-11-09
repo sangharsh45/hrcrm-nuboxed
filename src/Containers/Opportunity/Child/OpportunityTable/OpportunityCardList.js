@@ -2,6 +2,7 @@ import React, { useEffect, useState ,useMemo} from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import moment from "moment";
+import { DeleteOutlined } from "@ant-design/icons";
 import MonitorHeartIcon from '@mui/icons-material/MonitorHeart';
 import InfiniteScroll from "react-infinite-scroll-component"
 import { FormattedMessage } from "react-intl";
@@ -409,10 +410,10 @@ imgHeight={"1.8em"}
             />
           }
         >
-            {user.opportunityUpdateInd ===true && (
+            {user.opportunityUpdateInd ===true && user.crmInd === true && (
               
             <span
-              style={{ cursor: "pointer", color: "blue" }}
+              style={{ cursor: "pointer", color: "grey" }}
               onClick={() => {
                 props.setEditOpportunity(item);
                 handleUpdateOpportunityModal(true);
@@ -429,8 +430,8 @@ imgHeight={"1.8em"}
             onConfirm={() => deleteOpportunityData(item.opportunityId)}
           >
            
-             {user.opportunityDeleteInd ===true && (
-            <DeleteIcon
+             {user.opportunityDeleteInd ===true && user.crmInd === true && (
+            <DeleteOutlined
             type="delete" style={{ cursor: "pointer", color: "red",fontSize:"1rem"  }} />
              )}
           </StyledPopconfirm>

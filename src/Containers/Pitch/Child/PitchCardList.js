@@ -6,6 +6,7 @@ import { bindActionCreators } from "redux";
 import moment from "moment";
 import UpdateLPitchModal from "../Child/UpdateLPitchModal"
 import ExploreIcon from "@mui/icons-material/Explore";
+import { DeleteOutlined } from "@ant-design/icons";
 import { MultiAvatar, SubTitle } from "../../../Components/UI/Elements";
 import "jspdf-autotable";
 import { OnlyWrapCard } from '../../../Components/UI/Layout'
@@ -51,7 +52,7 @@ const PitchCardList = (props) => {
   function handleSetCurrentLeadsId(item) {
     setCurrentLeadsId(item);
   }
-   const { deleteLeadsData, handleUpdateLeadsModal, updateLeadsModal,fetchingPitch,leadsAllData  } = props;
+   const { user,deleteLeadsData, handleUpdateLeadsModal, updateLeadsModal,fetchingPitch,leadsAllData  } = props;
 
   if (fetchingPitch) {
     return <BundleLoader />;
@@ -351,10 +352,11 @@ onClick={()=>{
                                 <div class="flex max-sm:flex-row  justify-evenly md:w-20 max-sm:w-[25%] ">
                                
                                 <div class="flex flex-col w-[5%] max-sm:flex-row">
+                                {user.imInd === true  &&  user.pitchUpdateInd === true && (  
                                 <div>
             <Tooltip title="Edit">
               <BorderColorIcon
-                style={{ cursor: "pointer",fontSize: "1rem" }}
+                style={{  color: "grey",cursor: "pointer",fontSize: "1rem" }}
                 onClick={() => {
                    props.setEditPitch(item);
                    props.handleUpdatePitchModal(true);
@@ -365,19 +367,22 @@ onClick={()=>{
             </Tooltip>
         
             </div>
+                                )}
+                               
                         <div>
                         <StyledPopconfirm
             title="Do you want to delete?"
             onConfirm={() => deletePitchData(item.investorleadsId)}
           >
-            {/* {user.opportunityDeleteInd ===true && ( */}
-            <DeleteIcon
+             {user.imInd === true  &&  user.plantDeleteInd === true && ( 
+            <DeleteOutlined
               type="delete"
               style={{ cursor: "pointer", color: "red" ,fontSize: "1rem",}}
             />
-            {/* )} */}
+             )} 
           </StyledPopconfirm>
                         </div>
+                            
                         <div>
             
 
@@ -453,6 +458,7 @@ onClick={()=>{
 
 const mapStateToProps = ({ auth, leads, sector,pitch }) => ({
 //   leadsAllData: leads.leadsAllData,
+user: auth.userDetails,
   userId: auth.userDetails.userId,
   fetchingPitch:pitch.fetchingPitch,
   addDrawerPitchNotesModal:pitch.addDrawerPitchNotesModal,

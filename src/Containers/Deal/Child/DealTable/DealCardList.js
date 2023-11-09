@@ -5,6 +5,7 @@ import NoteAltIcon from "@mui/icons-material/NoteAlt";
 import InfiniteScroll from "react-infinite-scroll-component"
 import { FormattedMessage } from "react-intl";
 import styled from 'styled-components';
+import { EditOutlined,DeleteOutlined } from "@ant-design/icons";
 import BorderColorIcon from '@mui/icons-material/BorderColor';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { Tooltip, Select, Menu, Dropdown, Progress } from "antd";
@@ -377,7 +378,7 @@ imgHeight={"1.8em"}
             />
           }
         >
-            {user.opportunityUpdateInd ===true && (
+           {user.imInd === true  && user.dealUpdateInd === true && (
               
             <span
               style={{ cursor: "pointer", color: "blue" }}
@@ -386,7 +387,7 @@ imgHeight={"1.8em"}
                 handleSetCurrentItem(item);
               }}
             >
-                 <BorderColorIcon  style={{fontSize:"1rem" }}/>
+                 <BorderColorIcon  style={{color: "grey",fontSize:"1rem" }}/>
               </span>
            )}
           </Tooltip>
@@ -395,8 +396,8 @@ imgHeight={"1.8em"}
             onConfirm={() => deleteOpportunityData(item.opportunityId)}
           >
            
-             {user.opportunityDeleteInd ===true && (
-            <DeleteIcon
+           {user.imInd === true  && user.dealDeleteInd === true && (
+            <DeleteOutlined
             type="delete" style={{ cursor: "pointer", color: "red",fontSize:"1rem"  }} />
              )}
           </StyledPopconfirm>
