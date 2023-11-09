@@ -23,6 +23,7 @@ import { getOppLinkedWorkflow, getOppLinkedStages } from "../../OpportunityActio
 import { getCustomerData } from "../../../Customer/CustomerAction";
 import { getContactData } from "../../../Contact/ContactAction";
 import { Listbox } from "@headlessui/react";
+import { getCrm} from "../../../Leads/LeadsAction";
 /**
  * yup validation scheme for creating a opportunity
  */
@@ -44,6 +45,7 @@ function UpdateOpportunityForm (props) {
     props.getContactData(props.userId);
     props.getOppLinkedWorkflow(props.orgId);
     props.getOppLinkedStages(props.orgId);
+    props. getCrm();
   },[]);
 
 
@@ -453,7 +455,7 @@ function UpdateOpportunityForm (props) {
                   static
                   className="absolute z-10 mt-1 max-h-56 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
                 >
-                  {props.sales.map((item) => (
+                  {props.crmAllData.map((item) => (
                     <Listbox.Option
                       key={item.employeeId}
                       className={({ active }) =>
@@ -461,7 +463,7 @@ function UpdateOpportunityForm (props) {
                           active ? "text-white bg-indigo-600" : "text-gray-900"
                         }`
                       }
-                      value={item.fullName}
+                      value={item.empName}
                     >
                       {({ selected, active }) => (
                         <>
@@ -471,7 +473,7 @@ function UpdateOpportunityForm (props) {
                                 selected ? "font-semibold" : "font-normal"
                               }`}
                             >
-                              {item.fullName}
+                              {item.empName}
                             </span>
                           </div>
                           {selected && (
@@ -646,7 +648,7 @@ function UpdateOpportunityForm (props) {
     );
 }
 
-const mapStateToProps = ({ auth, opportunity, customer, contact }) => ({
+const mapStateToProps = ({ auth, opportunity, customer,leads, contact }) => ({
   user: auth.userDetails,
   userId: auth.userDetails.userId,
   organizationId: auth.userDetails.organizationId,
@@ -657,6 +659,7 @@ const mapStateToProps = ({ auth, opportunity, customer, contact }) => ({
   oppLinkStages: opportunity.oppLinkStages,
   contactData: contact.contactData,
   customerData: customer.customerData,
+  crmAllData:leads.crmAllData,
   orgId: auth.userDetails.organizationId,
 });
 
@@ -669,6 +672,7 @@ const mapDispatchToProps = (dispatch) =>
       getOppLinkedStages,
       getContactData,
       getCustomerData,
+      getCrm,
     },
     dispatch
   );

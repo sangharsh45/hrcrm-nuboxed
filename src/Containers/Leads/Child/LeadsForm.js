@@ -12,7 +12,8 @@ import SearchSelect from "../../../Components/Forms/Formik/SearchSelect";
 import AddressFieldArray from "../../../Components/Forms/Formik/AddressFieldArray";
 import {
   addLeads,
-  setClearbitData
+  setClearbitData,
+  getCrm
 } from "../../Leads/LeadsAction";
 import PostImageUpld from "../../../Components/Forms/Formik/PostImageUpld";
 import { TextareaComponent } from "../../../Components/Forms/Formik/TextareaComponent";
@@ -37,6 +38,7 @@ function LeadsForm (props) {
  
   useEffect(()=> {
 props.getAllCustomerEmployeelist();
+props. getCrm();
   },[]);
 
     const {
@@ -433,7 +435,7 @@ props.getAllCustomerEmployeelist();
                   static
                   className="absolute z-10 mt-1 max-h-56 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
                 >
-                  {props.allCustomerEmployeeList.map((item) => (
+                  {props.crmAllData.map((item) => (
                     <Listbox.Option
                       key={item.employeeId}
                       className={({ active }) =>
@@ -441,7 +443,7 @@ props.getAllCustomerEmployeelist();
                           active ? "text-white bg-indigo-600" : "text-gray-900"
                         }`
                       }
-                      value={item.fullName}
+                      value={item.empName}
                     >
                       {({ selected, active }) => (
                         <>
@@ -451,7 +453,7 @@ props.getAllCustomerEmployeelist();
                                 selected ? "font-semibold" : "font-normal"
                               }`}
                             >
-                              {item.fullName}
+                              {item.empName}
                             </span>
                           </div>
                           {selected && (
@@ -535,6 +537,7 @@ props.getAllCustomerEmployeelist();
 
 const mapStateToProps = ({ auth, leads,employee }) => ({
   addingLeads: leads.addingLeads,
+  crmAllData:leads.crmAllData,
   addingLeadsError: leads.addingLeadsError,
    clearbit: leads.clearbit,
   user: auth.userDetails,
@@ -547,6 +550,7 @@ const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
        addLeads,
+       getCrm,
       setClearbitData,
        getAllCustomerEmployeelist,
     },

@@ -148,7 +148,7 @@ function  handleFilterChange(data){
           <FormattedMessage id="app.clear" defaultMessage="Clear" />
           {/* Clear */}
         </Button>
-        <div style={{ width: "15%" }}>
+        <div class="w-[22%] mt-1">
           <StyledSelect placeholder="Sort"  onChange={(e)  => props.handleFilterChange(e)}>
           <Option value="CreationDate">Creation Date</Option>
             <Option value="ascending">A To Z</Option>

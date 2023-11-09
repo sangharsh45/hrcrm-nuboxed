@@ -88,6 +88,34 @@ export const setLeadsViewType = (viewType) => (dispatch) => {
       });
   };
 
+
+  export const getCrm = () => (dispatch) => {
+ 
+    dispatch({
+      type: types.GET_CRM_REQUEST,
+    });
+    axios
+      .get(`${base_url}/employee/user-list/drop-down/crm`, {
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+        },
+      })
+      .then((res) => {
+        console.log(res);
+        dispatch({
+          type: types.GET_CRM_SUCCESS,
+          payload: res.data,
+        });
+      })
+      .catch((err) => {
+        console.log(err.response);
+        dispatch({
+          type: types.GET_CRM_FAILURE,
+          payload: err,
+        });
+      });
+  };
+
   export const setClearbitData = (data) => (dispatch) => {
     dispatch({
       type: types.SET_CLEARBIT_DATA,

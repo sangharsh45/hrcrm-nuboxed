@@ -26,7 +26,9 @@ import {
   // getWorkflow
   getOppLinkedWorkflow,
   getOppLinkedStages,
+  
 } from "../OpportunityAction";
+import { getCrm} from "../../Leads/LeadsAction";
 import PlayCircleFilledIcon from "@mui/icons-material/PlayCircleFilled";
 import RotateRightIcon from "@mui/icons-material/RotateRight";
 import StopCircleIcon from "@mui/icons-material/StopCircle";
@@ -58,6 +60,7 @@ function OpportunityForm(props) {
     props.getInitiative(props.userId);
      props.getOppLinkedStages(props.orgId);
      props.getOppLinkedWorkflow(props.orgId);
+     props. getCrm();
   }, []);
 
   const [defaultOption, setDefaultOption] = useState(props.fullName);
@@ -523,7 +526,7 @@ function OpportunityForm(props) {
                   static
                   className="absolute z-10 mt-1 max-h-56 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
                 >
-                  {props.sales.map((item) => (
+                  {props.crmAllData.map((item) => (
                     <Listbox.Option
                       key={item.employeeId}
                       className={({ active }) =>
@@ -531,7 +534,7 @@ function OpportunityForm(props) {
                           active ? "text-white bg-indigo-600" : "text-gray-900"
                         }`
                       }
-                      value={item.fullName}
+                      value={item.empName}
                     >
                       {({ selected, active }) => (
                         <>
@@ -541,7 +544,7 @@ function OpportunityForm(props) {
                                 selected ? "font-semibold" : "font-normal"
                               }`}
                             >
-                              {item.fullName}
+                              {item.empName}
                             </span>
                           </div>
                           {selected && (
@@ -753,8 +756,9 @@ function OpportunityForm(props) {
   );
 }
 
-const mapStateToProps = ({ auth, opportunity, contact, customer }) => ({
+const mapStateToProps = ({ auth, opportunity, contact, customer,leads }) => ({
   user: auth.userDetails,
+  crmAllData:leads.crmAllData,
   userId: auth.userDetails.userId,
   organizationId: auth.userDetails.organizationId,
   contactId: contact.contactByUserId.contactId,
@@ -792,7 +796,8 @@ const mapDispatchToProps = (dispatch) =>
       getInitiative,
       getOppLinkedWorkflow,
       // getOpportunitySKill
-      getOppLinkedStages
+      getOppLinkedStages,
+      getCrm,
     },
     dispatch
   );
