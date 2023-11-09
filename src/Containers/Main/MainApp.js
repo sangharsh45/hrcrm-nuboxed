@@ -85,7 +85,6 @@ import Location from "../Event/Child/Location/Location";
 import MobileNavMenu from "./Mobilemenu";
 import PitchDetails from "../Pitch/Child/PitchDetails/PitchDetails"
 import Navmenu2 from "./Navmenu2";
-import Plant from "./Plant/Plant";
 import Teams from "./Teams/Teams";
 import RepositoryData from "./RepositoryData";
 import Inventory from "./Inventory/Inventory";
@@ -168,6 +167,7 @@ const ContactInvestDetail = lazy(() => import("../ContactInvest/Child/ContactInv
 const DealDetail = lazy(() => import("../Deal/Child/DealDetail/DealDetail"));
 const Catalogue = lazy(() => import("../Catalogue/Catalogue"));
 const Collection = lazy(() => import("../Collection/Collection"));
+const Plant =lazy(()=>import("../Plant/Plant"));
 
 function MainApp(props) {
   const [visible, setVisible] = useState(false);

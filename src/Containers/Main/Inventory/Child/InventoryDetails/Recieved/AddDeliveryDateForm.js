@@ -5,7 +5,7 @@ import { Button, Switch } from "antd";
 import { Formik, Form, Field } from "formik";
 import moment from "moment";
 import { SelectComponent } from "../../../../../../Components/Forms/Formik/SelectComponent";
-import { getPlant } from "../../../../Plant/PlantAction";
+import { getPlant } from "../../../../../Plant/PlantAction";
 import { addDeliveryDate } from "../../../InventoryAction"
 
 function OrderInventoryForm(props) {

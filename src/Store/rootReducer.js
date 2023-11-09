@@ -71,7 +71,7 @@ import { contactInvestReducer } from "../Containers/ContactInvest/ContactInvestR
 import { dealReducer } from "../Containers/Deal/DealReducer";
 import { suppliesReducer } from "../Containers/Main/Supplies/SuppliesReducer";
 import { shipperReducer } from "../Containers/Main/Shipper/ShipperReducer";
-import { plantReducer } from "../Containers/Main/Plant/PlantReducer";
+import { plantReducer } from "../Containers/Plant/PlantReducer";
 import { teamsReducer } from "../Containers/Main/Teams/TeamsReducer";
 import { inventoryReducer } from "../Containers/Main/Inventory/InventoryReducer";
 import { orderReducer } from "../Containers/Main/Order/OrderReducer";
