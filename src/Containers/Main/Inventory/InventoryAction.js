@@ -1,6 +1,6 @@
 import * as types from "./InventoryActionType";
 import { base_url } from "../../../Config/Auth";
-import {base_url2  } from "../../../Config/Auth";
+import { base_url2 } from "../../../Config/Auth";
 
 import axios from "axios";
 import moment from "moment";
@@ -193,7 +193,7 @@ export const getInventoryConsumptionList = (locationDetailsId) => (
     type: types.GET_ALL_INVENTORY_CONSUMPTION_LIST_REQUEST,
   });
   axios
-    .get(`${base_url2 }/inventory/supplies/${locationDetailsId}`, {
+    .get(`${base_url2}/inventory/supplies/${locationDetailsId}`, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },
@@ -258,7 +258,7 @@ export const getReceivedUserList = (locationDetailsId) => (dispatch) => {
     type: types.GET_RECEIVED_REQUEST,
   });
   axios
-    .get(`${base_url2 }/orderInventoryLocationLink/get-all/${locationDetailsId}`, {
+    .get(`${base_url2}/orderInventoryLocationLink/get-all/${locationDetailsId}`, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },
@@ -1111,7 +1111,7 @@ export const getPhonelistByOrderId = (orderPhoneId) => (dispatch) => {
     type: types.GET_PHONE_LIST_BY_ID_REQUEST,
   });
   axios
-    .get(`${base_url}/phone/phoneDetail/${orderPhoneId}`, {
+    .get(`${base_url2}/phone/phoneDetail/${orderPhoneId}`, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },

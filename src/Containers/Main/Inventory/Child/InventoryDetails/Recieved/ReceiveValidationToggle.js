@@ -30,9 +30,7 @@ function ReceiveValidationToggle(props) {
                     cancelText="No"
                 >
                     <Switch
-                        disabled={props.inspectionInd === 0 ||
-                            props.inspectionInd === 2 ||
-                            props.inspectionInd === 3}
+                        disabled={props.inspectionInd !== 1}
                         checked={props.receivePhoneInd}
                         checkedChildren="Yes"
                         unCheckedChildren="No"

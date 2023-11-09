@@ -129,12 +129,12 @@ function ProductionOrderListById(props) {
     );
 }
 
-const mapStateToProps = ({ production, auth }) => ({
+const mapStateToProps = ({ refurbish, auth }) => ({
     locationDetailsId: auth.userDetails.locationDetailsId,
     userId: auth.userDetails.userId,
-    orderByUser: production.orderByUser,
-    showPhoneList: production.showPhoneList,
-    fetchingOrderByUser: production.fetchingOrderByUser
+    orderByUser: refurbish.orderByUser,
+    showPhoneList: refurbish.showPhoneList,
+    fetchingOrderByUser: refurbish.fetchingOrderByUser
 });
 
 const mapDispatchToProps = (dispatch) =>

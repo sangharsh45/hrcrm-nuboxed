@@ -75,7 +75,7 @@ function OrderPhoneListById(props) {
             phoneId: item.phoneId,
             qcInspectionInd: type === "Complete" ? 2 : 1
         }
-       // props.updateQCStatus(data, item.phoneId, props.rowData.orderPhoneId, handleCallBack)
+        // props.updateQCStatus(data, item.phoneId, props.rowData.orderPhoneId, handleCallBack)
     }
     const handleCallBack = () => {
         props.getPhoneOrderIdByUser(props.rowData.orderPhoneId, props.userId)
@@ -264,7 +264,7 @@ function OrderPhoneListById(props) {
                 //debugger
                 return (
                     <Tooltip title="Notes">
-                        <FileDoneOutlined 
+                        <FileDoneOutlined
                             style={{ cursor: "pointer", fontSize: "13px" }}
                             onClick={() => {
                                 handleSetRowData(item);
@@ -314,10 +314,10 @@ function OrderPhoneListById(props) {
     );
 }
 
-const mapStateToProps = ({ production, auth }) => ({
-    orderPhoneList: production.orderPhoneList,
+const mapStateToProps = ({ refurbish, auth }) => ({
+    orderPhoneList: refurbish.orderPhoneList,
     userId: auth.userDetails.userId,
-    phoNotesQCOrderModal: production.phoNotesQCOrderModal,
+    phoNotesQCOrderModal: refurbish.phoNotesQCOrderModal,
     locationDetailsId: auth.userDetails.locationDetailsId,
 });
 
@@ -325,7 +325,7 @@ const mapDispatchToProps = (dispatch) =>
     bindActionCreators(
         {
             getPhoneOrderIdByUser,
-           // updateQCStatus,
+            // updateQCStatus,
             handleQCPhoneNotesOrderModal,
             getOrderByUser
         },

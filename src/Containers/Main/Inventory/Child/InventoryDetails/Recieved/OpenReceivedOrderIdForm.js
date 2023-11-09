@@ -2,7 +2,7 @@ import React, { useState, useEffect, useMemo } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { StyledTable } from "../../../../../../Components/UI/Antd";
-import { getPhonelistById } from "../../../../Account/AccountAction";
+import { getPhonelistByOrderId } from "../../../InventoryAction";
 import NoteAltIcon from "@mui/icons-material/NoteAlt";
 import { Button, Switch, Tooltip } from "antd";
 import { handleReceivedOrderIdPhoneNoteModal, updateInspection, setEditPhoneData, handlereceivePhoneModal } from "../../../InventoryAction";
@@ -25,7 +25,7 @@ const FormSchema = Yup.object().shape({
 
 function OpenReceivedOrderIdForm(props) {
   useEffect(() => {
-    props.getPhonelistById(props.rowData.orderPhoneId)
+    props.getPhonelistByOrderId(props.rowData.orderPhoneId)
   }, [])
   const [pause, setpause] = useState(false)
   function handlePauseResume() {
@@ -174,7 +174,7 @@ function OpenReceivedOrderIdForm(props) {
         //debugger
         return (
           <Tooltip>
-            {item.inspectionInd === 1 &&
+            {item.inspectionInd === 1 && item.receivePhoneInd && (
               <EditOutlined
                 style={{ color: "orange" }}
                 onClick={() => {
@@ -184,6 +184,7 @@ function OpenReceivedOrderIdForm(props) {
                 }
                 }
               />
+            )
             }
           </Tooltip>
         );
@@ -272,7 +273,7 @@ const mapStateToProps = ({ inventory, distributor, auth }) => ({
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
-      getPhonelistById,
+      getPhonelistByOrderId,
       handleReceivedOrderIdPhoneNoteModal,
       updateInspection,
       setEditPhoneData,

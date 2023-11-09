@@ -5,12 +5,11 @@ import { Button, Switch } from "antd";
 import { Formik, Form, Field } from "formik";
 import moment from "moment";
 import { SelectComponent } from "../../../../../../Components/Forms/Formik/SelectComponent";
-import { getPlant } from "../../../../Plant/PlantAction";
-import { addDeliveryDate } from "../../../InventoryAction"
+import { addDeliveryDate, getInventory } from "../../../InventoryAction"
 
 function OrderInventoryForm(props) {
   useEffect(() => {
-    props.getPlant(props.userId);
+    props.getInventory(props.orgId)
   }, []);
   moment.addRealYear = function addRealYear(y) {
     var fm = moment(y).add(10, "Y");
@@ -19,9 +18,12 @@ function OrderInventoryForm(props) {
       ? fm.add(10, "y")
       : fm;
   };
-  const locationsName = props.plant.map((item) => {
+
+  const locationsName = props.inventory.filter((item) => {
+    return item.productionInd === true
+  }).map((item) => {
     return {
-      label: item.name || "",
+      label: item.locationName || "",
       value: item.locationDetailsId,
     };
   });
@@ -84,15 +86,16 @@ function OrderInventoryForm(props) {
     </>
   );
 }
-const mapStateToProps = ({ plant, auth }) => ({
+const mapStateToProps = ({ plant, auth, inventory }) => ({
   userId: auth.userDetails.userId,
-  plant: plant.plant
+  orgId: auth.userDetails.organizationId,
+  inventory: inventory.inventory,
 });
 
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators({
-    getPlant,
-    addDeliveryDate
+    addDeliveryDate,
+    getInventory
   }, dispatch);
 
 export default connect(

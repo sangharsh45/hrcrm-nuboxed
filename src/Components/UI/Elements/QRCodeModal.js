@@ -1,7 +1,7 @@
 import React from "react";
 import Avatar from "antd/lib/avatar";
 import { ProgressiveImage } from "../../Utils";
-import { base_url } from "../../../Config/Auth";
+import { base_url2 } from "../../../Config/Auth";
 import ProfilePreview from "../../../Assets/Images/ProfilePreview.png";
 const QRCodeModal = ({
     qrCodeId,
@@ -29,7 +29,7 @@ const QRCodeModal = ({
                     <div style={{ borderRadius: 24 }}>
                         <ProgressiveImage
                             preview={ProfilePreview}
-                            image={`${base_url}/qrcode/img/${qrCodeId}`}
+                            image={`${base_url2}/qrcode/img/${qrCodeId}`}
                             width={imgWidth || "55px"}
                             height={imgHeight || "55px"}
                             borderRadius={imgRadius}

@@ -18,7 +18,9 @@ function LocationOrderForm(props) {
             ? fm.add(10, "y")
             : fm;
     };
-    const locationsName = props.locationlist.map((item) => {
+    const locationsName = props.locationlist.filter((item) => {
+        return item.inventoryInd === true
+    }).map((item) => {
         return {
             label: item.locationName || "",
             value: item.locationDetailsId,

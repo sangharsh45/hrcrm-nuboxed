@@ -130,12 +130,12 @@ function ProductionRepairOrder(props) {
     );
 }
 
-const mapStateToProps = ({ production, auth }) => ({
+const mapStateToProps = ({ refurbish, auth }) => ({
     locationDetailsId: auth.userDetails.locationDetailsId,
     userId: auth.userDetails.userId,
-    repairOrder: production.repairOrder,
-    fetchingRepairorderById: production.fetchingRepairorderById,
-    showRepairPhoneList: production.showRepairPhoneList,
+    repairOrder: refurbish.repairOrder,
+    fetchingRepairorderById: refurbish.fetchingRepairorderById,
+    showRepairPhoneList: refurbish.showRepairPhoneList,
 });
 
 const mapDispatchToProps = (dispatch) =>

@@ -93,11 +93,10 @@ import Order from "./Order/Order";
 import Supplies from "./Supplies/Supplies";
 import Shipper from "./Shipper/Shipper";
 import Account from "./Account/Account";
-import Refurbish from "./Refurbish/Refurbish";
 import ShipperDetails from "./Shipper/ShipperDetails";
 import AccountDetails from "./Account/AccountDetailsTab/AccountDetails";
 import InventoryDetail from "./Inventory/Child/InventoryDetails/InventoryDetail";
-
+import Refurbish from "./Refurbish/Refurbish";
 const OpportunityDetail = lazy(() =>
   import("../Opportunity/Child/OpportunityDetail/OpportunityDetail")
 );
@@ -581,11 +580,11 @@ function MainApp(props) {
                       <Route exact path="/supplies" component={Supplies} />
                       <Route exact path="/order" component={Order} />
                       <Route exact path="/account" component={Account} />
-                      <Route exact path="/refurbish " component={Refurbish} />
                       <Route exact path="/location" component={Location} />
                       <Route exact path="/plant" component={Plant} />
                       {/* <Route exact path="/suppliers" component={Suppliers} /> */}
                       <Route exact path="/inventory" component={Inventory} />
+                      <Route exact path="/refurbish" component={Refurbish} />
                       <Route exact path="/teams" component={Teams} />
                       <Route exact path="/employees" component={Employees} />
                       <Route exact path="/leads" component={Leads} />
@@ -631,7 +630,7 @@ function MainApp(props) {
                         path="/hour/candidate/hour-details/project/:candidateId/:projectId"
                         component={CandidateTotalBilling}
                       />
-                         <Route
+                      <Route
                         exact
                         path="/locationDetails/:locationDetailsId/:data?"
                         component={InventoryDetail}

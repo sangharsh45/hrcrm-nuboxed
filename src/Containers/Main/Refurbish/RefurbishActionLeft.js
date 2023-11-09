@@ -40,30 +40,29 @@ class RefurbishActionLeft extends Component {
               // iconType="book"
               // tooltipTitle="All"
               onClick={() => setProductionViewType("list")}
-            ><AppstoreOutlined/></span>
+            ><AppstoreOutlined /></span>
           </Tooltip>
-          {user.designation === "Manager" &&
-            <Tooltip title="All">
-              <AppstoreOutlined
-                style={{
-                  marginRight: "0.3rem",
-                  color: viewType === "all" && "#1890ff",
-                }}
-                // iconType="appstore-o"
-                // tooltipTitle="Supplies Library"
-                onClick={() => setProductionViewType("all")}
-              />
-            </Tooltip>}
+          {/* {user.designation === "Manager" && */}
+          <Tooltip title="All">
+            <AppstoreOutlined
+              style={{
+                marginRight: "0.3rem",
+                color: viewType === "all" && "#1890ff",
+              }}
+              // iconType="appstore-o"
+              // tooltipTitle="Supplies Library"
+              onClick={() => setProductionViewType("all")}
+            />
+          </Tooltip>
+          {/* } */}
 
         </FlexContainer>
-       
+
       </>
     );
   }
 }
 const mapStateToProps = ({ auth, production }) => ({
-  shiftsData: production.shiftsData,
-  shiftId: production.shiftsData.shiftId,
   userId: auth.userDetails.userId,
   user: auth.userDetails
 });

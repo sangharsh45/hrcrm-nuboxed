@@ -10,7 +10,7 @@ import { dashboardReducer } from "../Containers/Dashboard/DashboardReducer";
 import { brandmodelReducer } from "../Containers/Settings/Category/Brand&Model/BrandModelReducer"
 import { plannerReducer } from "../Containers/Planner/PlannerReducer";
 import { settingsReducer } from "../Containers/Settings/SettingsReducer";
-
+import { refurbishReducer } from "../Containers/Main/Refurbish/RefurbishReducer";
 import { themeReducer } from "../Containers/Settings/Theme/ThemeReducer";
 
 import { ruleReducer } from "../Containers/Rules/RulesReducer";
@@ -153,8 +153,9 @@ const appReducer = combineReducers({
   catgCustomer: catgCustomerReducer,
   brandmodel: brandmodelReducer,
   distributor: distributorReducer,
-  suppliers:suppliersReducer,
-  collection:collectionReducer,
+  suppliers: suppliersReducer,
+  collection: collectionReducer,
+  refurbish: refurbishReducer
 });
 
 const rootReducer = (state, action) => {
