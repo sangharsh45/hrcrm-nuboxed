@@ -165,9 +165,10 @@ const Investor = lazy(() => import("../Investor/Investor"));
 const InvestorDetail = lazy(() => import("../Investor/Child/InvestorDetail/InvestorDetail"));
 const ContactInvestDetail = lazy(() => import("../ContactInvest/Child/ContactInvestDetail/ContactInvestDetail"));
 const DealDetail = lazy(() => import("../Deal/Child/DealDetail/DealDetail"));
-const Catalogue = lazy(() => import("../Catalogue/Catalogue"));
+const Product = lazy(() => import("../Product/Product"));
 const Collection = lazy(() => import("../Collection/Collection"));
 const Plant =lazy(()=>import("../Plant/Plant"));
+const PlantDetail =lazy(()=>import("../Plant/Child/PlantDetail/PlantDetail"));
 
 function MainApp(props) {
   const [visible, setVisible] = useState(false);
@@ -584,6 +585,7 @@ function MainApp(props) {
                       <Route exact path="/refurbish " component={Refurbish} />
                       <Route exact path="/location" component={Location} />
                       <Route exact path="/plant" component={Plant} />
+                      <Route exact path="/plant/:plantId" component={PlantDetail}/>
                       {/* <Route exact path="/suppliers" component={Suppliers} /> */}
                       <Route exact path="/inventory" component={Inventory} />
                       <Route exact path="/teams" component={Teams} />
@@ -756,7 +758,7 @@ function MainApp(props) {
                       <Route exact path="/investor/:investorId" component={InvestorDetail} />
                       <Route exact path="/contactinvest/:contactId" component={ContactInvestDetail} />
                       <Route exact path="/dealDetails/:invOpportunityId" component={DealDetail} />
-                      <Route exact path="/catalogue" component={Catalogue} />
+                      <Route exact path="/product" component={Product} />
                       <Route path="**" component={PageNotFound} />
                     </Switch>
                   </Suspense>

@@ -8,8 +8,10 @@ const initialState = {
     showLocation:[],
 
     addingLocation: false, 
-    addingLocationError: false 
+    addingLocationError: false,
 
+    locShiftDrawer:false,
+    locationUpdatedrawr:false,
   };
 
   export const locationReducer = (state = initialState, action) => {
@@ -45,8 +47,12 @@ const initialState = {
                     return { ...state, addingLocation: false, 
                                     addingLocationError: true };
 
-
-
+            case types.HANDLE_LOCATION_SHIFT_DRAWER:
+                return { ...state, locShiftDrawer: action.payload }; 
+               
+          case types.HANDLE_UPDATE_LOCATION_DRAWER:
+            return { ...state, locationUpdatedrawr: action.payload }; 
+                
         default:
     return state;
       }

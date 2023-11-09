@@ -29,8 +29,7 @@ class ShipperActionRight extends React.Component {
           </Tooltip>
           :null}
         <Tooltip title="Create">
-          <Button type="primary" ghost onClick={() => handleShipperModal(true)}>Add
-            {/* <PlusOutlined /> */}
+          <Button type="primary" onClick={() => handleShipperModal(true)}>Add
           </Button>
         </Tooltip>
         <AddShipperModal

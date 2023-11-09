@@ -9,13 +9,13 @@ const AddShipperModal = (props) => {
         <>
             <StyledDrawer
                 title="Shipper"
-                width="60%"
+                width="55%"
                 visible={addShipperModal}
                 closable
                 // maskClosable={false}
                 destroyOnClose
                 maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}
-                style={{ top: 40 }}
+                style={{marginTop:"5rem"}}
                 onClose={() => handleShipperModal(false)}
                 footer={null}
             >

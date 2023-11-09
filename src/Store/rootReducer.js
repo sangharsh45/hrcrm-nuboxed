@@ -80,6 +80,7 @@ import { catgCustomerReducer } from "../Containers/Settings/Category/Customer/Cu
 import { distributorReducer } from "../Containers/Main/Account/AccountReducer";
 import { suppliersReducer } from "../Containers/Main/Suppliers/SuppliersReducer";
 import { collectionReducer } from "../Containers/Collection/CollectionReducer";
+import {productReducer} from "../Containers/Product/ProductReducer";
 
 const appReducer = combineReducers({
   dashboard: dashboardReducer,
@@ -155,6 +156,7 @@ const appReducer = combineReducers({
   distributor: distributorReducer,
   suppliers:suppliersReducer,
   collection:collectionReducer,
+  product:productReducer,
 });
 
 const rootReducer = (state, action) => {
