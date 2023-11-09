@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import DynamicFeedIcon from '@mui/icons-material/DynamicFeed'; 
-import FactoryIcon from '@mui/icons-material/Factory'; 
 import GroupsIcon from '@mui/icons-material/Groups'; 
 import InventoryIcon from '@mui/icons-material/Inventory'; 
 import { Menu, Icon, Popover, Badge } from "antd";
@@ -11,7 +10,6 @@ import LocalShippingIcon from '@mui/icons-material/LocalShipping';
 import { translateText, getSupportedLanguages } from '../Translate/TranslateService';
 import CurrencyExchangeIcon from '@mui/icons-material/CurrencyExchange';
 import PermContactCalendarIcon from '@mui/icons-material/PermContactCalendar'; 
-import HandshakeIcon from '@mui/icons-material/Handshake';
 import FilePresentIcon from '@mui/icons-material/FilePresent'
 import CellTowerIcon from '@mui/icons-material/CellTower';
 import DashboardIcon from '@mui/icons-material/Dashboard';
@@ -30,15 +28,9 @@ import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import { Link } from "react-router-dom";
 import VolumeUpIcon from '@mui/icons-material/VolumeUp';
 import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
-import { TeamOutlined } from "@ant-design/icons";
 import CategoryIcon from '@mui/icons-material/Category'
-import AccessAlarmIcon from '@mui/icons-material/AccessAlarm';
-import PortraitIcon from '@mui/icons-material/Portrait';
-import NewspaperIcon from '@mui/icons-material/Newspaper';
-import TextSnippetIcon from '@mui/icons-material/TextSnippet';
-import ComputerIcon from '@mui/icons-material/Computer';
-import LibraryBooksIcon from '@mui/icons-material/LibraryBooks';
 import ViewInArIcon from '@mui/icons-material/ViewInAr';
+import FactoryIcon from '@mui/icons-material/Factory';
 
 const SubMenu = Menu.SubMenu;
 
@@ -737,6 +729,18 @@ function NavMenu (props) {
                     </Link>
                   </Menu.Item>
                 )}
+                <Menu.Item key="/plant" style={{height:"27px",paddingLeft:"1rem"}}>
+                 <Link to="/plant">
+                  <FactoryIcon 
+                                   style={{ fontSize: "large" }}
+                   />
+                   <span class="text-white text-ls ml-1"><FormattedMessage 
+                     id="app.plant"
+                    defaultMessage="Plant"
+                />
+                    </span>
+                  </Link> 
+                 </Menu.Item>
                  { user.locationAccessInd === true   && (
                
                 <Menu.Item key="/location" style={{height:"27px",paddingLeft:"1rem"}}>
@@ -782,22 +786,8 @@ function NavMenu (props) {
                  </Link> 
                 </Menu.Item>
                 )}
-                  { user.plantsAccessInd === true && user.erpInd === true  && (
-               
-               <Menu.Item key="/plant" style={{height:"27px",paddingLeft:"1rem"}}>
-                <Link to="/plant">
-                 <FactoryIcon
-                style={{ fontSize: "large" }}
-                  />
-                  <span class="text-white text-ls ml-1"><FormattedMessage 
-                    id="app.facility"
-                   defaultMessage="Facility"
-               />
-                   </span>
-                 </Link> 
-                </Menu.Item>
-                )}
-                  { user.teamsAccessInd === true && user.erpInd === true  && (
+
+             { user.teamsAccessInd === true && user.erpInd === true  && (
                
                <Menu.Item key="/teams" style={{height:"27px",paddingLeft:"1rem"}}>
                 <Link to="/teams">
