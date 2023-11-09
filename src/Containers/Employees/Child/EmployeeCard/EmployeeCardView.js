@@ -150,7 +150,7 @@ function handleSetCurrentEmployeeId(employeeId,) {
      </span>
            </div>
            <div class=" font-normal text-xs text-cardBody font-poppins ">
-            {user.userAccessPlusInd === true ?(
+            {/* {user.userAccessPlusInd === true ?( */}
           <span
               style={{ cursor: "pointer" }}
               onClick={() => {
@@ -167,7 +167,7 @@ function handleSetCurrentEmployeeId(employeeId,) {
               <InsertDriveFileIcon  style={{ fontSize: "1rem", }}/>
               </Badge>
      </span>
-            ):null}
+            {/* ):null} */}
            </div>
            <div class=" font-normal text-xs text-cardBody font-poppins ">
            <Tooltip 
