@@ -156,8 +156,8 @@ const appReducer = combineReducers({
   distributor: distributorReducer,
   suppliers: suppliersReducer,
   collection: collectionReducer,
-  refurbish: refurbishReducer,
   product: productReducer,
+  refurbish: refurbishReducer,
 });
 
 const rootReducer = (state, action) => {
