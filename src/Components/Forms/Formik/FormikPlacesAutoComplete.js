@@ -12,7 +12,7 @@ const StyledInput = styled.input.attrs({
   type: "text",
   size: (props) => (props.small ? 4 : undefined),
 })`
-  border: 0.0625em solid ${(props) => props.theme.inputBorderColor};
+ // border: 0.0625em solid ${(props) => props.theme.inputBorderColor};
   background-color: ${(props) => props.theme.backgroundColor};
   color: ${(props) => props.theme.color};
   display: block;
