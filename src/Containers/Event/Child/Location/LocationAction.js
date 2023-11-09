@@ -79,30 +79,30 @@ export const setLocationViewType = (viewType) => (dispatch) => {
   };
 
   
-  // export const updateLocation = (locationDetailsId, data, cb) => (dispatch) => {
-  //   dispatch({ type: types.UPDATE_EVENT_BY_ID_REQUEST });
-  //   axios
-  //     .put(
-  //       `${base_url}/locationDetails/${locationDetailsId}`,data,
-  //       {
-  //         headers: {
-  //           Authorization: "Bearer " + sessionStorage.getItem("token") || "",
-  //         },
-  //       }
-  //     )
-  //     .then((res) => {
-  //       console.log(res);
-  //       dispatch({
-  //         type: types.UPDATE_EVENT_BY_ID_SUCCESS,
-  //         payload: res.data,
-  //       });
-  //       cb();
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //       dispatch({
-  //         type: types.UPDATE_EVENT_BY_ID_FAILURE,
-  //         payload: err,
-  //       });
-  //     });
-  // };
+  export const updateLocation = (data,locationDetailsId, cb) => (dispatch) => {
+    dispatch({ type: types.UPDATE_LOCATIONS_REQUEST });
+    axios
+      .put(
+        `${base_url}/locationDetails/${locationDetailsId}`,data,
+        {
+          headers: {
+            Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+          },
+        }
+      )
+      .then((res) => {
+        console.log(res);
+        dispatch({
+          type: types.UPDATE_LOCATIONS_SUCCESS,
+          payload: res.data,
+        });
+        cb();
+      })
+      .catch((err) => {
+        console.log(err);
+        dispatch({
+          type: types.UPDATE_LOCATIONS_FAILURE,
+          payload: err,
+        });
+      });
+  };

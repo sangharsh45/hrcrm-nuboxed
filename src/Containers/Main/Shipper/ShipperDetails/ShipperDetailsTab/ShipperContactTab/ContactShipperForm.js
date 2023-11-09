@@ -143,7 +143,7 @@ class ContactShipperForm extends Component {
                             }}
                           />
                         </div>
-                        <div style={{ width: "63%" }}>
+                        <div style={{ width: "55%" }}>
                           <FastField
                             isRequired
                             name="firstName"
@@ -201,7 +201,7 @@ class ContactShipperForm extends Component {
                     <div style={{ width: "47%" }}>
                       <FastField
                         name="dialCode1"
-                        label="Mobile #"
+                        label="Dial Code"
                         isColumn
                         margintop={"0.25em"}
                         selectType="dialCode"
@@ -212,12 +212,13 @@ class ContactShipperForm extends Component {
                         value={values.countryDialCode}
                         inlineLabel
                         style={{ flexBasis: "80%" }}
+                        isColumnWithoutNoCreate
                       />
                     </div>
                     <div style={{ width: "47%" }}>
                       <FastField
-                        type="text"
                         name="mobileNo"
+                        label="Mobile #"
                         placeholder="Mobile #"
                         component={InputComponent}
                         inlineLabel
@@ -236,7 +237,7 @@ class ContactShipperForm extends Component {
                       <FastField
                         name="dialCode2"
                         selectType="dialCode"
-                        label="Phone #"
+                        label="Dial Code"
                         isColumn
                         margintop={"0.25em"}
                         component={SearchSelect}
@@ -246,12 +247,13 @@ class ContactShipperForm extends Component {
                         value={values.countryDialCode1}
                         inlineLabel
                         style={{ flexBasis: "80%" }}
+                        isColumnWithoutNoCreate
                       />
                     </div>
                     <div style={{ width: "47%" }}>
                       <FastField
-                        type="text"
                         name="phoneNo"
+                        label="Phone #"
                         placeholder="Phone #"
                         isColumn
                         component={InputComponent}
@@ -262,6 +264,7 @@ class ContactShipperForm extends Component {
                           height: "2.0625em",
                           marginTop: "0.25em",
                         }}
+                        
                       />
                     </div>
                   </FlexContainer>
@@ -339,6 +342,7 @@ class ContactShipperForm extends Component {
                         isColumn
                         value={values.shipById}
                         inlineLabel
+                        isColumnWithoutNoCreate
                       />
                     </div>
                   </FlexContainer>
