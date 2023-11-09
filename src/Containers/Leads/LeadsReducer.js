@@ -34,6 +34,11 @@ const initialState = {
   fetchingLeadsError: false,
   leadsAllData:[],
 
+  fetchingCrm: false,
+  fetchingCrmError: false,
+  crmAllData:[],
+
+
   addLeadsOpportunityModal:false,
 
   clearbit: {},
@@ -193,6 +198,20 @@ case types.HANDLE_LEADS_MODAL:
             fetchingLeadsError: true,
           };
 
+          case types.GET_CRM_REQUEST:
+            return { ...state, fetchingCrm: true };
+          case types.GET_CRM_SUCCESS:
+            return {
+              ...state,
+              fetchingCrm: false,
+              crmAllData: action.payload,           
+            };
+          case types.GET_CRM_FAILURE:
+            return {
+              ...state,
+              fetchingCrm: false,
+              fetchingCrmError: true,
+            };
 
           case types.SET_CLEARBIT_DATA:
       return { ...state, clearbit: action.payload };

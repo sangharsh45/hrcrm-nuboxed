@@ -15,6 +15,7 @@ import {
     updateLeads,
     setEditLeads,
     setClearbitData,
+    getCrm
 } from "../../../Leads/LeadsAction";
 import PostImageUpld from "../../../../Components/Forms/Formik/PostImageUpld";
 import { FlexContainer } from "../../../../Components/UI/Layout";
@@ -44,6 +45,7 @@ function UpdateLeadsForm (props) {
   useEffect (()=>{
     props.getAllCustomerEmployeelist();
     props.getSources(props.orgId)
+    props. getCrm();
   },[])
  
 
@@ -394,7 +396,7 @@ function UpdateLeadsForm (props) {
                   static
                   className="absolute z-10 mt-1 max-h-56 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
                 >
-                  {props.allCustomerEmployeeList.map((item) => (
+                  {props.crmAllData.map((item) => (
                     <Listbox.Option
                       key={item.employeeId}
                       className={({ active }) =>
@@ -402,7 +404,7 @@ function UpdateLeadsForm (props) {
                           active ? "text-white bg-indigo-600" : "text-gray-900"
                         }`
                       }
-                      value={item.fullName}
+                      value={item.empName}
                     >
                       {({ selected, active }) => (
                         <>
@@ -412,7 +414,7 @@ function UpdateLeadsForm (props) {
                                 selected ? "font-semibold" : "font-normal"
                               }`}
                             >
-                              {item.fullName}
+                              {item.empName}
                             </span>
                           </div>
                           {selected && (
@@ -508,6 +510,7 @@ const mapStateToProps = ({ auth, leads,employee,source }) => ({
     employees: employee.employees,
     leadsAllData:leads.leadsAllData,
     allCustomerEmployeeList:employee.allCustomerEmployeeList,
+    crmAllData:leads.crmAllData,
 });
 
 const mapDispatchToProps = (dispatch) =>
@@ -517,7 +520,8 @@ const mapDispatchToProps = (dispatch) =>
         setEditLeads,
       getAllCustomerEmployeelist,
       setClearbitData,
-      getSources
+      getSources,
+      getCrm
     },
     dispatch
   );

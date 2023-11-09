@@ -19,6 +19,7 @@ import { TextareaComponent } from "../../../../Components/Forms/Formik/TextareaC
 import { InputComponent } from "../../../../Components/Forms/Formik/InputComponent";
 import { SelectComponent } from "../../../../Components/Forms/Formik/SelectComponent";
 import { Listbox, Transition } from '@headlessui/react'
+import { getCrm} from "../../../Leads/LeadsAction";
 
 //yup validation scheme for creating a account
 const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
@@ -35,6 +36,7 @@ function UpdateCustomerForm (props) {
     props.getSectors();
     props.getSources(props.orgId)
     props.getAllSalesList();
+    props. getCrm();
   }, []);
 
 
@@ -267,7 +269,7 @@ function UpdateCustomerForm (props) {
                   static
                   className="absolute z-10 mt-1 max-h-56 w-full overflow-auto  bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
                 >
-                  {props.allCustomerEmployeeList.map((item) => (
+                  {props.crmAllData.map((item) => (
                     <Listbox.Option
                       key={item.employeeId}
                       className={({ active }) =>
@@ -275,7 +277,7 @@ function UpdateCustomerForm (props) {
                           active ? "text-white bg-indigo-600" : "text-gray-900"
                         }`
                       }
-                      value={item.fullName}
+                      value={item.empName}
                     >
                       {({ selected, active }) => (
                         <>
@@ -285,7 +287,7 @@ function UpdateCustomerForm (props) {
                                 selected ? "font-semibold" : "font-normal"
                               }`}
                             >
-                              {item.fullName}
+                              {item.empName}
                             </span>
                           </div>
                           {selected && (
@@ -427,7 +429,7 @@ function UpdateCustomerForm (props) {
 
 }
 
-const mapStateToProps = ({ auth, customer,source,employee }) => ({
+const mapStateToProps = ({ auth, customer,source,employee,leads }) => ({
   setEditingCustomer: customer.setEditingCustomer,
   updateCustomerById: customer.updateCustomerById,
   updateCustomerByIdError: customer.updateCustomerByIdError,
@@ -437,6 +439,7 @@ const mapStateToProps = ({ auth, customer,source,employee }) => ({
   allCustomerEmployeeList:employee.allCustomerEmployeeList,
   organizationId: auth.userDetails.organizationId,
   employees: employee.employees,
+  crmAllData:leads.crmAllData,
 });
 
 const mapDispatchToProps = (dispatch) =>
@@ -448,6 +451,7 @@ const mapDispatchToProps = (dispatch) =>
       getSources,
       getAllSalesList,
       getAllCustomerEmployeelist,
+      getCrm,
     },
     dispatch
   );
