@@ -2,6 +2,7 @@ import { Button, DatePicker, Icon, message, Select } from "antd";
 import React, { useState, useEffect } from "react";
 import { Spacer, TextInput } from "../../../Components/UI/Elements";
 import dayjs from "dayjs";
+import moment from "moment";
 import { getExpenses } from "../../Settings/Expense/ExpenseAction";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
@@ -36,7 +37,7 @@ function ExpenseForm(props) {
       return value.map((data) => {
         if (`${data.id}date` === id) {
           console.log(dateString);
-          return { ...data, expenseDate: dayjs(dateString).toISOString() };
+          return { ...data, expenseDate: moment(dateString).toISOString() };
         } else {
           return data;
         }
