@@ -16,16 +16,15 @@ import {
   addContactShipper,
   getShipperByShipperId,
 } from "../../../ShipperAction";
+
 import { getDesignations } from "../../../../../Settings/Designation/DesignationAction";
 import { getDepartments } from "../../../../../Settings/Department/DepartmentAction";
 const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-])|(\\([0-9]{2,3}\\)[ \\-])|([0-9]{2,4})[ \\-])?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
 const DistributorSchema = Yup.object().shape({
-  name: Yup.string().required("Input needed!"),
   emailId: Yup.string()
-  .email("Enter a valid Email")
-  .required("Input needed!"),
+  .email("Enter a valid Email").required("Input needed!"),
 firstName: Yup.string().required("Input needed!"),
-phoneNo: Yup.string().matches(phoneRegExp, 'Mobile number is not valid').min(10,"Too Short").max(10,"Too Large")
+phoneNo: Yup.string().matches(phoneRegExp, 'Mobile number is not valid').min(8,"Too Short").max(10,"Too Large")
 });
 const { Option } = Select;
 
@@ -48,8 +47,8 @@ class ContactShipperForm extends Component {
     // });
     const designation = this.props.designations.map((item) => {
       return {
-        label: item.designationName || "",
-        value: item.designationId,
+        label: item.designationType || "",
+        value: item.designationTypeId,
       };
     });
 
@@ -376,14 +375,14 @@ class ContactShipperForm extends Component {
     );
   }
 }
-const mapStateToProps = ({ auth, shipper, designation, department }) => ({
+const mapStateToProps = ({ auth, shipper, designations, departments }) => ({
   addingContactShipper: shipper.addingContactShipper,
   user: auth.userDetails,
   userId: auth.userDetails.userId,
   shipperId: shipper.shipperDetailsByShipperId.shipperId,
   shipperDetailsByShipperId: shipper.shipperDetailsByShipperId,
-  designations: designation.designations,
-  departments: department.departments,
+  designations: designations.designations,
+  departments: departments.departments,
 });
 
 const mapDispatchToProps = (dispatch) =>

@@ -15,6 +15,7 @@ import MileageVoucherIdDrawer from "./MileageVoucherIdDrawer";
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import { BundleLoader } from "../../../Components/Placeholder";
+import { FormattedMessage } from "react-intl";
 const MileageTable2=lazy(()=>import("./MileageTable2"));
 
 class MileageCard2 extends React.Component {
@@ -168,16 +169,25 @@ class MileageCard2 extends React.Component {
                         <div >
                         <div >
                            {item.status === "Pending" ? (
-            <Tooltip title="Delete">
+           <StyledPopconfirm
+           // title="Do you want to delete?"
+           title={
+             <FormattedMessage
+               id="app.doyouwanttodelete?"
+               defaultMessage="Do you want to delete?"
+             />
+           }
+           onConfirm={() =>   this.props.deleteMileageVoucher(item.voucherId)}
+         >
               <DeleteOutlined
                 type="delete"
                 style={{ cursor: "pointer" }}
-                onClick={() => {
-                this.props.deleteMileageVoucher(item.voucherId);
+                // onClick={() => {
+                // this.props.deleteMileageVoucher(item.voucherId);
                   
-                }}
+                // }}
               />
-            </Tooltip>
+             </StyledPopconfirm>
             ):null}
              {item.status==="Rejected" && (
             <Button type="primary"

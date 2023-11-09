@@ -7,6 +7,7 @@ import MonitorHeartIcon from "@mui/icons-material/MonitorHeart";
 import { bindActionCreators } from 'redux'
 import CellTowerIcon from '@mui/icons-material/CellTower';
 import { Select } from "antd";
+import PlaceIcon from '@mui/icons-material/Place';
 import InsertDriveFileIcon from '@mui/icons-material/InsertDriveFile';
 import DraftsIcon from '@mui/icons-material/Drafts';
 import CircleIcon from '@mui/icons-material/Circle';
@@ -141,7 +142,7 @@ function handleSetCurrentEmployeeId(employeeId,) {
                 handleSetCurrentEmployeeId(item)
               }}
             >
-              <MonitorHeartIcon  style={{ fontSize: "0.8rem", color: "#df9697" }}/>
+              <MonitorHeartIcon  style={{ fontSize: "1rem", color: "#df9697" }}/>
      </span>
            </div>
            <div class=" font-normal text-xs text-cardBody font-poppins ">
@@ -171,7 +172,7 @@ function handleSetCurrentEmployeeId(employeeId,) {
             
             >
               
-              <InsertDriveFileIcon  style={{ fontSize: "1rem", }}/>
+              <PlaceIcon  style={{ fontSize: "1rem", }}/>
          
      </span>
      </Tooltip>

@@ -85,7 +85,7 @@ function InvesterForm(props) {
             // sectorName:"",
             partnerName: "",
             // sectorDescription:"",
-           
+            name: "",
             url: "",
             gst:"",
             sectorId: "",

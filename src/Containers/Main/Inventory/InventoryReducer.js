@@ -984,6 +984,9 @@ export const inventoryReducer = (state = initialState, action) => {
 
     case types.HANDLE_DISPATCH_RECEIVE_PHONE_MODAL:
       return { ...state, dispatchMismatchData: action.payload };
+
+      case types.HANDLE_PICKUP_MODAL:
+        return { ...state, pickUpModal: action.payload };
     default:
       return state;
   }

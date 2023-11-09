@@ -28,7 +28,7 @@ import {
 import { elipsize } from "../../../../../../Helpers/Function/Functions";
 import { FormattedMessage } from "react-intl";
 import { DeleteOutlined } from "@ant-design/icons";
-
+import moment from "moment";
 class LinkedDocuments extends Component {
   constructor(props) {
     super(props);
@@ -155,7 +155,7 @@ class LinkedDocuments extends Component {
           return 0;
         },
         render: (name, item, i) => {
-          return <span>{` ${dayjs(item.creationDate).format("ll")}`}</span>;
+          return <span>{` ${moment(item.creationDate).format("ll")}`}</span>;
         },
       },
       {

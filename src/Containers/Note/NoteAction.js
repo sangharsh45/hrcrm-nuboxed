@@ -1,4 +1,5 @@
-import { base_url } from "../../Config/Auth";
+import { base_url, base_url2 } from "../../Config/Auth";
+
 import axios from "axios";
 
 /**
@@ -6,7 +7,7 @@ import axios from "axios";
  */
 export const addNote = (note, cb) => (dispatch) => {
   axios
-    .post(`${base_url}/notes`, note, {
+    .post(`${base_url2}/notes`, note, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },

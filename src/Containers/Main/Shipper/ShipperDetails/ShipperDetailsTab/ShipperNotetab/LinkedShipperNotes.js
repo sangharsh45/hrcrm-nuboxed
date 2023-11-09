@@ -5,7 +5,7 @@ import { Timeline } from "antd";
 import { BorderBox } from "../../../../../../Components/UI/Layout";
 import { BundleLoader } from "../../../../../../Components/Placeholder";
 import { getNotesListByShipperId } from "../../../ShipperAction";
-import NoteForm from "../../../../../Note/NoteForm";
+import ShipperNoteForm from "./ShipperNoteForm";
 import { SingleNote } from "../../../../../../Components/Common";
 
 class LinkedShipperNotes extends Component {
@@ -19,7 +19,7 @@ class LinkedShipperNotes extends Component {
         return (
             <>
                 <div style={{ backgroundColor: "#dcdcdc", height: "275px" }}>
-                    <NoteForm
+                    <ShipperNoteForm
                         type={"shipper"}
                         shipperId={this.props.shipperShipperId}
                         callback={() =>

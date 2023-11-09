@@ -165,7 +165,7 @@ export const addInventoryConsumption = (data, locationDetailsId) => (
   });
 
   axios
-    .post(`${base_url}/inventory/inventorySuppliesLink`, data)
+    .post(`${base_url2}/inventory/inventorySuppliesLink`, data)
     .then((res) => {
       console.log(res);
 
@@ -193,7 +193,7 @@ export const getInventoryConsumptionList = (locationDetailsId) => (
     type: types.GET_ALL_INVENTORY_CONSUMPTION_LIST_REQUEST,
   });
   axios
-    .get(`${base_url}/inventory/supplies/${locationDetailsId}`, {
+    .get(`${base_url2 }/inventory/supplies/${locationDetailsId}`, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },
@@ -376,7 +376,7 @@ export const getDispatchList = (locationId) => (dispatch) => {
     type: types.GET_DISPATCH_LIST_REQUEST,
   });
   axios
-    .get(`${base_url}/orderInventoryLocationLink/get-dispatchData/${locationId}`, {
+    .get(`${base_url2}/orderInventoryLocationLink/get-dispatchData/${locationId}`, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },
@@ -436,7 +436,7 @@ export const getDispatchUpdateList = (orderPhoneId) => (dispatch, getState) => {
     type: types.GET_DISPATCH_UPDATE_REQUEST,
   });
   axios
-    .get(`${base_url}/phone/dispatchPhoneDetail/${orderPhoneId}`, {
+    .get(`${base_url2}/phone/dispatchPhoneDetail/${orderPhoneId}`, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },
@@ -518,7 +518,7 @@ export const addFinalDispatchData = (data, orderId, locationDetailsId) => (dispa
     type: types.ADD_FINAL_DATA_IN_THIRDSTEP_REQUEST,
   });
   axios
-    .put(`${base_url}/dispatchData/${orderId}`, data, {
+    .put(`${base_url2}/dispatchData/${orderId}`, data, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },
@@ -617,7 +617,7 @@ export const addConsumptionReason = (data) => (dispatch) => {
     type: types.ADD_CONSUMPTION_REASON_REQUEST,
   });
   axios
-    .post(`${base_url}/inventory/saveConsumptionSale`, data)
+    .post(`${base_url2}/inventory/saveConsumptionSale`, data)
     .then((res) => {
       dispatch({
         type: types.ADD_CONSUMPTION_REASON_SUCCESS,
@@ -638,7 +638,7 @@ export const getConsumptionReasonList = () => (dispatch) => {
     type: types.GET_CONSUMPTION_REASON_LIST_REQUEST,
   });
   axios
-    .get(`${base_url}/inventory/consumptionReason`)
+    .get(`${base_url2}/inventory/consumptionReason`)
     .then((res) => {
       console.log(res);
       dispatch({
@@ -712,7 +712,7 @@ export const addPickupDate = (data) => (dispatch) => {
     type: types.ADD_PICKUP_DATE_REQUEST,
   });
   axios
-    .put(`${base_url}/dispatch/confirm/pickup`, data)
+    .put(`${base_url2}/dispatch/confirm/pickup`, data)
     .then((res) => {
       console.log(res);
       dispatch({
@@ -866,7 +866,7 @@ export const getDispatchShipperList = (dispatchId) => (dispatch) => {
     type: types.GET_DISPATCH_SHIPPER_REQUEST,
   });
   axios
-    .get(`${base_url}/dispatch/dispatchShipper/${dispatchId} `)
+    .get(`${base_url2}/dispatch/dispatchShipper/${dispatchId} `)
     .then((res) => {
       console.log(res);
       dispatch({
@@ -956,7 +956,7 @@ export const getDispatchShipperListInUpdate = (dispatchId) => (dispatch) => {
     type: types.GET_DISPATCH_SHIPPER_UPDATE_REQUEST,
   });
   axios
-    .get(`${base_url}/dispatch/dispatchShipper/${dispatchId} `)
+    .get(`${base_url2}/dispatch/dispatchShipper/${dispatchId} `)
     .then((res) => {
       console.log(res);
       dispatch({
@@ -1148,7 +1148,7 @@ export const setEditDispacthPhoneData = (name) => (dispatch) => {
 export const updateDispatchInspectionButton = (data, orderPhoneId, locationId) => (dispatch) => {
   dispatch({ type: types.UPDATE_DISPATCH_INSPECTION_BUTTON_REQUEST });
   axios
-    .put(`${base_url}/phoneOrder/dispatchInspectionIndStatus/${orderPhoneId}`, data, {
+    .put(`${base_url2}/phoneOrder/dispatchInspectionIndStatus/${orderPhoneId}`, data, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },
@@ -1173,7 +1173,7 @@ export const updateDispatchInspectionButton = (data, orderPhoneId, locationId) =
 export const updateDispatchReceivePhone = (data, phoneId, orderPhoneId) => (dispatch) => {
   dispatch({ type: types.UPDATE_DISPATCH_RECEIVE_PHONE_REQUEST });
   axios
-    .put(`${base_url}/phone/dispatchPhoneToggle/${phoneId} `, data, {
+    .put(`${base_url2}/phone/dispatchPhoneToggle/${phoneId} `, data, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },
@@ -1193,4 +1193,11 @@ export const updateDispatchReceivePhone = (data, phoneId, orderPhoneId) => (disp
         payload: err,
       });
     });
+};
+
+export const handlePickupModal = (modalProps) => (dispatch) => {
+  dispatch({
+    type: types.HANDLE_PICKUP_MODAL,
+    payload: modalProps,
+  });
 };

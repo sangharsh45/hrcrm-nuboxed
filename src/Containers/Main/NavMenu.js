@@ -842,6 +842,15 @@ function NavMenu (props) {
                  </Link> 
                 </Menu.Item>
                 )}
+
+<Menu.Item key="/collection" style={{height:"27px",paddingLeft:"1rem"}}>
+              <Link to="/collection">
+                <ReceiptIcon     style={{ fontSize: "large" }}/>
+                <span class="text-white text-ls ml-1">
+                  Collections
+                </span>
+              </Link>
+            </Menu.Item>
                   { user.accountAccessInd === true && user.erpInd === true  && (
                
                <Menu.Item key="/account" style={{height:"27px",paddingLeft:"1rem"}}>

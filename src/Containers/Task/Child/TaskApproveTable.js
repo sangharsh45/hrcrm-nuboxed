@@ -206,17 +206,23 @@ const TaskApproveTable = (props) => {
             </FloatButton.Group>
           </div> : null}
           <OnlyWrapCard style={{height:"81vh"}}>
-      {approvalTaskTable.map((item) => { 
-        
-         console.log("item",item.taskId)
+          {approvalTaskTable.map((item) => { 
+        const currentDate = moment();
+        const completionDate = moment(item.completionDate);
+        const endDate = moment(item.endDate);
+        const difference = currentDate.diff(endDate, 'days');
+        const incompleteDeviationDate = endDate.diff(currentDate, 'days');
+        const completeDeviation = endDate.diff(completionDate, 'days');
+         console.log("difference",difference)
+         console.log("deviationDate",incompleteDeviationDate)
                     return (
                         <div>
-                            <div className="flex justify-between mt-4 max-sm:flex-col"
+                            <div className="flex justify-between mt-1 max-sm:flex-col"
                                 style={{
                                     borderBottom: "3px dotted #515050"
                                 }}>
                                      <div class="flex">
-                                <div className=" flex font-medium flex-col md:w-52 max-sm:flex-row w-full justify-between  ">
+                                <div className=" flex font-medium flex-col md:w-36 max-sm:flex-row justify-between w-full ">
 <div className="flex max-sm:w-full"> 
 {item.priority === "High" && (
                       <div
@@ -249,28 +255,28 @@ const TaskApproveTable = (props) => {
                       ></div>
                     )}
                     <div class=" w-1"></div>
-          <div class="max-sm:w-full">
+          <div class=" w-[10rem] max-sm:w-full">
                                         <Tooltip>
                                         <div class=" flex max-sm:justify-between flex-row w-full md:flex-col">
-                                            <div class="text-[0.875rem] text-cardBody font-poppins max-sm:hidden">
+                                            <div class="text-sm text-cardBody font-poppins max-sm:hidden">
                                             Type
                                             </div>
-                                            <div class="text-[0.75rem] text-cardBody font-poppins cursor-pointer">                                       
+                                            <div class="text-xs text-cardBody font-poppins cursor-pointer">                                       
                                             {item.taskType}
        
                                             </div>
-                                        </div>
+                                         </div>
                                         </Tooltip>
                                         </div>
                                         </div>
                                 </div>
 
-                                <div className=" flex font-medium flex-col  md:w-36 max-sm:flex-row w-full justify-between ">
-                                    <div class=" text-[0.875rem] text-cardBody font-[0.875rem] font-poppins max-sm:hidden"> Name </div>
-                                    <div class=" text-[0.75rem] text-cardBody font-poppins">   
+                                <div className=" flex font-medium flex-col  md:w-32 max-sm:flex-row w-full ">
+                                    <div class=" text-sm text-cardBody  font-poppins max-sm:hidden"> Name </div>
+                                    <div class=" text-xs text-cardBody font-semibold  font-poppins">   
                                     <span   
                 onClick={() => {
-                  // props.handleTaskopenModal(true);               
+                  props.handleTaskopenModal(true);               
                   handleSetCurrentProcessName(item)
                   // this.props.setCurrentOpportunityRecruitMentData(item);
                 }}
@@ -286,130 +292,141 @@ const TaskApproveTable = (props) => {
                </span>
                                     </div>
                                 </div>
-                                <div className=" flex font-medium flex-col md:w-32 max-sm:flex-row w-full justify-between ">
-                                    <div class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden">Customer</div>
-                                    <div class="text-[0.75rem] text-cardBody font-poppins">
-                                    {item.customerName === null ? (
-              ""
-            ) : (
-                                    <MultiAvatar
-                  primaryTitle={item.customerName}
-                  imgWidth={"1.8rem"}
-                  imgHeight={"1.8rem"}
-                />
-                )}
-                                    </div>
                                 </div>
-                                </div>
-                                <div class="flex">
-                                <div className=" flex font-medium flex-col md:w-32 max-sm:flex-row w-full justify-between ">
-                                    <div class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden">Submitted By</div>
-                                    <div class="text-[0.75rem] text-cardBody font-poppins">
+               
+                   
+                        
+                    <div class="flex max-sm:mt-4 w-28">
+                                <div className=" flex font-medium flex-col  md:w-24 max-sm:flex-row justify-between w-full ">
+                                    <div class=" text-sm text-cardBody font-poppins max-sm:hidden">Submitted By</div>
+                                    <div class="text-xs text-cardBody font-poppins mb-2">
                                     <MultiAvatar
+                                    // style={{marginBottom:"0.25rem"}}
                   primaryTitle={item.submittedBy}
                   imgWidth={"1.8rem"}
                   imgHeight={"1.8rem"}
                 />
                                     </div>
                                 </div>
-                                {/* <div className=" flex font-medium flex-col md:w-32 max-sm:flex-row w-full justify-between ">
-                                  <div class="text-[0.875rem] text-cardBody font-poppins">Assigned To</div>
-                                  <div class="text-[0.75rem] text-cardBody font-poppins">
-                                  {item.assignedToName === null ? (
-              ""
-            ) : (
-              <MultiAvatar
-                primaryTitle={item.assignedToName}
-                imgWidth={"1.8em"}
-                imgHeight={"1.8em"}
-              />
-            )}
-                                  </div>
-                              </div> */}
-                              <div className=" flex font-medium flex-col md:w-32 max-sm:flex-row w-full justify-between ">
-                                  <div class="text-[0.875rem] text-cardBody font-poppins max-sm:hidden">Assigned On</div>
-                                  <div class="text-[0.75rem] text-cardBody font-poppins">
-                                  <span>{` ${moment(item.assignedOn).format("ll")}`}</span>
-                                  </div>
-                              </div>
-                              </div>
-                              <div class="flex">
-                              <div className=" flex font-medium flex-col md:w-32 max-sm:flex-row w-full justify-between ">
-                              
-                                  <div class="text-[0.75rem] text-cardBody font-poppins">
-                                  <span>
-            {item.filterTaskInd === true && item.approvedInd === "Pending"  ? (
-              <>
-                <div>
-                  <Button
-                    onClick={() => approveTaskByTaskId(item.taskId)}
-                    style={{ backgroundColor: "teal", color: "white" }}
-                  >
-                    {/* Approve */}
-                    <FormattedMessage
-                      id="app.approve"
-                      defaultMessage="Approve"
-                    />
-                  </Button>
-                  <Button
-                    style={{
-                      backgroundColor: "rgb(233, 79, 79)",
-                      color: "white",
-                    }}
-                    onClick={() => rejectTaskByTaskId(item.taskId)}
-                  >
-                    {/* Reject */}
-                    <FormattedMessage
-                      id="app.reject"
-                      defaultMessage="Reject"
-                    />
-                  </Button>
-                </div>
-              </>
-            ) :  (
-              <>
-                {  item.filterTaskInd === true && item.approvedInd === "Approved" ? (
-                  <CheckCircleOutlined
-                    type="check-circle"
-                    theme="twoTone"
-                    twoToneColor="#52c41a"
-                    size={140}
-                    style={{ fontSize: "1rem" }}
-                  />
-                ) : item.filterTaskInd === true && item.approvedInd === "Rejected" ? (
-                  <CloseCircleOutlined
-                    type="close-circle"
-                    theme="twoTone"
-                    twoToneColor="red"
-                    size={140}
-                    style={{ fontSize: "1rem" }}
-                  />
-                ) : (
-                  <></>
-                )}
-              </>
-            )}
-          </span>
-                                  </div>
-                              </div>
-   
+                               
+                               
+                                {/* <div className=" flex font-medium flex-col w-32 ">
+                                    <div class=" text-sm text-cardBody font-poppins">Team</div>
 
-               
-                    <div class="flex flex-col w-[2%]">
-       <div>
+                                    <div class=" text-sm text-cardBody font-poppins">
+                                    <Avatar.Group
+  maxCount={2}
+  maxStyle={{ color: "#f56a00", backgroundColor: "#fde3cf" }}
+>
+  {item.owner &&
+    item.owner.map((candidate, i) => {
+      if (candidate && candidate.fullName) {
+        const data1 = candidate.fullName.slice(0, 2);
+        console.log("datas", data1);
+        return (
+          <Tooltip title={candidate.fullName} key={i}>
+            <Avatar style={{ backgroundColor: "#94b3e4" }}>
+              {data1}
+            </Avatar>
+          </Tooltip>
+        );
+      } else {
+        return null; 
+      }
+    })}
+</Avatar.Group>
+                                    </div>
+                                </div> */}
+                     
+                       
+
+
+        
+     
+  
+                   </div>
+                   <div class="flex max-sm:mt-4 w-28">
+                                <div className=" flex font-medium flex-col  md:w-24 max-sm:flex-row w-full ">
+                                    <div class=" text-sm text-cardBody font-poppins max-sm:hidden">Assigned On</div>
+                                    <div class="text-xs text-cardBody font-poppins mb-2">
+                                    <span>{` ${moment(item.assignedOn).format("ll")}`}</span>
+                                    </div>
+                                </div>
+                               
+                         
+                       
+
+
+        
+     
+  
+                   </div>
+                   <div class="flex w-44 ">
+                   <div class="flex flex-col md:w-40 justify-center  max-sm:flex-row w-full">
+                    <div class=" w-36">
+                    {item.filterTaskInd === true && item.approvedInd === "Pending"  ? (
+    <>
+      <div>
+        <Button
+        onClick={() => approveTaskByTaskId(item.taskId, props.employeeId)}
+          style={{ backgroundColor: "teal", color: "white" }}
+        >
+          <FormattedMessage id="app.approve" defaultMessage="Approve" />
+        </Button>
+        <Button
+          style={{
+            backgroundColor: "rgb(233, 79, 79)",
+            color: "white",
+          }}
+          onClick={() => rejectTaskByTaskId(item.taskId)}
+        >
+          <FormattedMessage id="app.reject" defaultMessage="Reject" />
+        </Button>
+      </div>
+    </>
+  ) : (
+    <>
+       {  item.filterTaskInd === true && item.approvedInd === "Approved" ? (
+        <CheckCircleOutlined
+          type="check-circle"
+          theme="twoTone"
+          twoToneColor="#52c41a"
+          size={140}
+          style={{ fontSize: "1rem" }}
+        />
+        ) : item.filterTaskInd === true && item.approvedInd === "Rejected" ? (
+        <CloseCircleOutlined
+          type="close-circle"
+          theme="twoTone"
+          twoToneColor="red"
+          size={140}
+          style={{ fontSize: "1rem" }}
+        />
+      ) : (
+        <></>
+      )}
+    </>
+  )}
+  </div>
+</div>
+
+                          
+                    <div class=" ml-2"></div>
+                    <div class="flex flex-col justify-evenly  ">
+                    <Tooltip title="Notes">
        <NoteAltIcon
                 onClick={() => {
                   handleTaskNotesDrawerModal(true);
                   handleSetTaskNameId(item);
                 }}
-                style={{ color: "green", cursor: "pointer", fontSize: "0.8rem" }}
+                style={{ color: "green", cursor: "pointer", fontSize: "1rem" }}
               />
-       </div>
-       
-          
-        
-                      </div>    
-                      </div>
+           </Tooltip>
+  
+            </div>
+                   
+                      </div> 
+
                             </div>
                         </div>
 
@@ -543,3 +560,215 @@ handleSetTaskNameId={handleSetTaskNameId}
           color: blue;
         }
       `;
+
+
+    //   {approvalTaskTable.map((item) => { 
+        
+    //     console.log("item",item.taskId)
+    //                return (
+    //                    <div>
+    //                        <div className="flex justify-between mt-4 max-sm:flex-col"
+    //                            style={{
+    //                                borderBottom: "3px dotted #515050"
+    //                            }}>
+    //                                 <div class="flex">
+    //                            <div className=" flex font-medium flex-col md:w-52 max-sm:flex-row w-full justify-between  ">
+    // <div className="flex max-sm:w-full"> 
+    // {item.priority === "High" && (
+    //                  <div
+    //                    style={{
+    //                      borderRadius: "50%",
+    //                      height: "2.1875em",
+    //                      width: "2.1875em",
+    //                      backgroundColor: "red",
+    //                    }}
+    //                  ></div>
+    //                )}
+    //                {item.priority === "Medium" && (
+    //                  <div
+    //                    style={{
+    //                      borderRadius: "50%",
+    //                      height: "2.1875em",
+    //                      width: "2.1875em",
+    //                      backgroundColor: "orange",
+    //                    }}
+    //                  ></div>
+    //                )}
+    //                {item.priority === "Low" && (
+    //                  <div
+    //                    style={{
+    //                      borderRadius: "50%",
+    //                      height: "2.1875em",
+    //                      width: "2.1875em",
+    //                      backgroundColor: "teal",
+    //                    }}
+    //                  ></div>
+    //                )}
+    //                <div class=" w-1"></div>
+    //      <div class="max-sm:w-full">
+    //                                    <Tooltip>
+    //                                    <div class=" flex max-sm:justify-between flex-row w-full md:flex-col">
+    //                                        <div class="text-[0.875rem] text-cardBody font-poppins max-sm:hidden">
+    //                                        Type
+    //                                        </div>
+    //                                        <div class="text-[sm] text-cardBody font-poppins cursor-pointer">                                       
+    //                                        {item.taskType}
+      
+    //                                        </div>
+    //                                    </div>
+    //                                    </Tooltip>
+    //                                    </div>
+    //                                    </div>
+    //                            </div>
+    
+    //                            <div className=" flex font-medium flex-col  md:w-36 max-sm:flex-row w-full justify-between ">
+    //                                <div class=" text-[0.875rem] text-cardBody font-[0.875rem] font-poppins max-sm:hidden"> Name </div>
+    //                                <div class=" text-[sm] text-cardBody font-poppins">   
+    //                                <span   
+    //            onClick={() => {
+    //              // props.handleTaskopenModal(true);               
+    //              handleSetCurrentProcessName(item)
+    //              // this.props.setCurrentOpportunityRecruitMentData(item);
+    //            }}
+    //            style={{
+    //              cursor: "pointer",
+    //              color: "#042E8A",
+    //            }}          
+    //           >
+    
+    //             {`${item.taskName} `} &nbsp;
+    
+    
+    //           </span>
+    //                                </div>
+    //                            </div>
+    //                            {/* <div className=" flex font-medium flex-col md:w-32 max-sm:flex-row w-full justify-between ">
+    //                                <div class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden">Customer</div>
+    //                                <div class="text-[sm] text-cardBody font-poppins">
+    //                                {item.customerName === null ? (
+    //          ""
+    //        ) : (
+    //                                <MultiAvatar
+    //              primaryTitle={item.customerName}
+    //              imgWidth={"1.8rem"}
+    //              imgHeight={"1.8rem"}
+    //            />
+    //            )}
+    //                                </div>
+    //                            </div> */}
+    //                            </div>
+    //                            <div class="flex">
+    //                            <div className=" flex font-medium flex-col md:w-32 max-sm:flex-row w-full justify-between ">
+    //                                <div class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden">Submitted By</div>
+    //                                <div class="text-[sm] text-cardBody font-poppins">
+    //                                <MultiAvatar
+    //              primaryTitle={item.submittedBy}
+    //              imgWidth={"1.8rem"}
+    //              imgHeight={"1.8rem"}
+    //            />
+    //                                </div>
+    //                            </div>
+    //                            {/* <div className=" flex font-medium flex-col md:w-32 max-sm:flex-row w-full justify-between ">
+    //                              <div class="text-[0.875rem] text-cardBody font-poppins">Assigned To</div>
+    //                              <div class="text-[sm] text-cardBody font-poppins">
+    //                              {item.assignedToName === null ? (
+    //          ""
+    //        ) : (
+    //          <MultiAvatar
+    //            primaryTitle={item.assignedToName}
+    //            imgWidth={"1.8em"}
+    //            imgHeight={"1.8em"}
+    //          />
+    //        )}
+    //                              </div>
+    //                          </div> */}
+    //                          <div className=" flex font-medium flex-col md:w-32 max-sm:flex-row w-full justify-between ">
+    //                              <div class="text-[0.875rem] text-cardBody font-poppins max-sm:hidden">Assigned On</div>
+    //                              <div class="text-[sm] text-cardBody font-poppins">
+    //                              <span>{` ${moment(item.assignedOn).format("ll")}`}</span>
+    //                              </div>
+    //                          </div>
+    //                          </div>
+    //                          <div class="flex">
+    //                          <div className=" flex font-medium flex-col md:w-32 max-sm:flex-row w-full justify-between ">
+                             
+    //                              <div class="text-[sm] text-cardBody font-poppins">
+    //                              <span>
+    //        {item.filterTaskInd === true && item.approvedInd === "Pending"  ? (
+    //          <>
+    //            <div>
+    //              <Button
+    //                onClick={() => approveTaskByTaskId(item.taskId)}
+    //                style={{ backgroundColor: "teal", color: "white" }}
+    //              >
+    //                {/* Approve */}
+    //                <FormattedMessage
+    //                  id="app.approve"
+    //                  defaultMessage="Approve"
+    //                />
+    //              </Button>
+    //              <Button
+    //                style={{
+    //                  backgroundColor: "rgb(233, 79, 79)",
+    //                  color: "white",
+    //                }}
+    //                onClick={() => rejectTaskByTaskId(item.taskId)}
+    //              >
+    //                {/* Reject */}
+    //                <FormattedMessage
+    //                  id="app.reject"
+    //                  defaultMessage="Reject"
+    //                />
+    //              </Button>
+    //            </div>
+    //          </>
+    //        ) :  (
+    //          <>
+    //            {  item.filterTaskInd === true && item.approvedInd === "Approved" ? (
+    //              <CheckCircleOutlined
+    //                type="check-circle"
+    //                theme="twoTone"
+    //                twoToneColor="#52c41a"
+    //                size={140}
+    //                style={{ fontSize: "1rem" }}
+    //              />
+    //            ) : item.filterTaskInd === true && item.approvedInd === "Rejected" ? (
+    //              <CloseCircleOutlined
+    //                type="close-circle"
+    //                theme="twoTone"
+    //                twoToneColor="red"
+    //                size={140}
+    //                style={{ fontSize: "1rem" }}
+    //              />
+    //            ) : (
+    //              <></>
+    //            )}
+    //          </>
+    //        )}
+    //      </span>
+    //                              </div>
+    //                          </div>
+    
+    
+              
+    //                <div class="flex flex-col w-[2%]">
+    //   <div>
+    //   <NoteAltIcon
+    //            onClick={() => {
+    //              handleTaskNotesDrawerModal(true);
+    //              handleSetTaskNameId(item);
+    //            }}
+    //            style={{ color: "green", cursor: "pointer", fontSize: "0.8rem" }}
+    //          />
+    //   </div>
+      
+         
+       
+    //                  </div>    
+    //                  </div>
+    //                        </div>
+    //                    </div>
+    
+    
+    //                )
+    //            })}

@@ -149,7 +149,7 @@ export const expenseReducer = (state = initialState, action) => {
                 ...state,
                 deleteExpense: false,
                 expVoucherId: state.expVoucherId.filter(
-                  (item) => item.expenseId !== action.payload
+                  (item) => item.voucherId !== action.payload
                 ),
               };
             case types.DELETE_EXPENSE_FAILURE:

@@ -105,14 +105,12 @@ function UpdateCustomerOpportunityForm(props) {
     const [defaultOption, setDefaultOption] = useState(props.setEditingCustomerOpportunity.assignedTo);
   const [selected, setSelected] = useState(defaultOption);
     const selectedOption = props.sales.find((item) => item.fullName === selected);
-
+console.log("hh",customerId)
     return (
       <>
         <Formik
           initialValues={{
             opportunityName: props.setEditingCustomerOpportunity.opportunityName || "",
-            // startDate: "",
-            // endDate: "",
             startDate: dayjs(props.setEditingCustomerOpportunity.startDate) || "",
             endDate: props.setEditingCustomerOpportunity.endDate || null,
             endDate: dayjs(props.setEditingCustomerOpportunity.endDate) || "",
@@ -121,7 +119,10 @@ function UpdateCustomerOpportunityForm(props) {
             salesUserIds:selectedOption ? selectedOption.employeeId:props.setEditingCustomerOpportunity.salesUserIds,
             orgId: props.organizationId,
             customerId: customerId ? customerId.value : "",
-            contact: customerId ? customerId.value : "",
+            contactId: props.setEditingCustomerOpportunity.contactId || "",
+            description:props.setEditingCustomerOpportunity.description || "",
+            oppWorkflow: props.setEditingCustomerOpportunity.oppWorkflow || "",
+            oppStage: props.setEditingCustomerOpportunity.oppStage || "",
           }}
           validationSchema={OpportunitySchema}
           onSubmit={(values, { resetForm }) => {

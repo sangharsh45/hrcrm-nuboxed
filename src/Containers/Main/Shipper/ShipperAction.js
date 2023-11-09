@@ -232,7 +232,11 @@ export const getActivityListByShipperId = (shipperId) => (dispatch) => {
     type: types.GET_ACTIVITY_LIST_BY_SHIPPERID_REQUEST,
   });
   axios
-    .get(`${base_url}/activity/shipper/${shipperId}`, {})
+    .get(`${base_url2}/activity/shipper/${shipperId}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
     .then((res) => {
       console.log(res);
       dispatch({
@@ -471,7 +475,11 @@ export const getNotesListByShipperId = (shipperId) => (dispatch) => {
     type: types.GET_NOTES_LIST_BY_SHIPPER_ID_REQUEST,
   });
   axios
-    .get(`${base_url}/shipper/notes/${shipperId}`, {})
+    .get(`${base_url2}/shipper/notes/${shipperId}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
     .then((res) => {
       console.log(res);
       dispatch({
@@ -529,7 +537,7 @@ export const addShipperDocument = (data, cb) => (dispatch) => {
   console.log(data);
   dispatch({ type: types.ADD_SHIPPER_DOCUMENT_REQUEST });
   axios
-    .post(`${base_url}/document/submit`, data, {
+    .post(`${base_url2}/document/submit`, data, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },
@@ -1365,6 +1373,32 @@ export const getShipperDispatch = (shipperId) => (dispatch) => {
       console.log(err);
       dispatch({
         type: types.GET_SHIPPER_DISPATCH_FAILURE,
+        payload: err,
+      });
+    });
+};
+
+export const getAllShipper = () => (dispatch) => {
+  dispatch({
+    type: types.GET_ALL_SHIPPER_REQUEST,
+  });
+  axios
+    .get(`${base_url2}/shipper/all-shipper`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.GET_ALL_SHIPPER_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.GET_ALL_SHIPPER_FAILURE,
         payload: err,
       });
     });

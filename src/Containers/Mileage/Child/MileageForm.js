@@ -266,7 +266,7 @@ function MileageForm(props) {
         {row.map((item) => {
           return (
             <tr>
-              <td style={{ width: "14%" }}>
+              <td style={{ width: "15%" }}>
                 <DatePicker
                   style={{ width: "93%" }}
                   onChange={(date, dateString) =>
@@ -301,12 +301,12 @@ function MileageForm(props) {
                 />
               </td>
 
-              <td style={{ width: "12%" }}>
+              <td style={{ width: "10%" }}>
                 <TextInput
                   name={`${item.id}distances`}
                   value={`${item.distances}`}
                   onChange={handleChangedistances}
-                  style={{ width: "90%" }}
+                  style={{ width: "80%" }}
                   isRequired
                 />
               </td>

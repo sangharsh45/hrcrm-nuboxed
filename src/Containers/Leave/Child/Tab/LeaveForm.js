@@ -61,7 +61,7 @@ class LeaveForm extends Component {
       Project: false,   
       day:"",
       firstCase:false,
-      isAccepted:true
+      isAccepted:false
     };
   }
   
@@ -116,7 +116,8 @@ console.log(this.state.firstCase)
                 endDate: endDate || dayjs(),
                 
                 employeeId: this.props.userId,
-                halfDay: this.state.day,
+                halfDayType: this.state.firstCase ? "true" : "false",
+                halfDayInd: this.state.isAccepted ? "true" : "false",
                 reason: "",
                 coverDetails: "",
               }
@@ -128,10 +129,11 @@ console.log(this.state.firstCase)
             this.props.addLeaves(
               {
                 ...values,
-                halfDay: this.state.day,
+                halfDayType: this.state.firstCase ? "true" : "false",
+                halfDayInd: this.state.isAccepted ? "true" : "false",
                 startDate: dayjs(values.startDate).toISOString(),
                 endDate: dayjs(values.endDate).toISOString(),
-                halfDayType:this.state.firstCase?"0":"1",
+                // halfDayType:this.state.firstCase?"0":"1",
               },
               this.props.userId,
 
@@ -287,15 +289,15 @@ console.log(this.state.firstCase)
                       <Switch
                          onChange={this.radioClick}
                         checked={this.state.isAccepted}
-                        checkedChildren="No"
-                        unCheckedChildren="Yes"
+                        checkedChildren="Yes"
+                        unCheckedChildren="No"
                       />
                       
                     </div>
          
                   </FlexContainer>
                   <Spacer />
-                 <div class="max-sm:flex flex-col">
+                  <div class=" w-1/2 max-sm:w-wk">
                   <Field
                     name="coverDetails"
                     //label="Cover"
@@ -305,9 +307,9 @@ console.log(this.state.firstCase)
                     />}
                     width={"100%"}
                     component={InputComponent}
-                    inlineLabel
+                    isColumn
                   />
-                  </div>
+                </div>
                   <Spacer />
                   <Field
                     isRequired

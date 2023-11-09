@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { FormattedMessage } from "react-intl";
-import { StyledTable } from "../../../Components/UI/Antd";
+import { StyledPopconfirm, StyledTable } from "../../../Components/UI/Antd";
 import { Icon, Tooltip } from "antd";
 import AssistantIcon from '@mui/icons-material/Assistant';
 import { getExpenseById,
@@ -136,23 +136,32 @@ handleExpand(item.voucherId);
 
 }}
 >
-                 <Tooltip  title={"status"}>
+                 <Tooltip  title={"Status"}>
                  <AssistantIcon
 style={{ color: "grey",fontSize:"1.2rem",padding:"2px" }}/>
    </Tooltip> 
 
    </div>
                {item.status === "Pending" && (
-        <Tooltip title="Delete">
+          <StyledPopconfirm
+          // title="Do you want to delete?"
+          title={
+            <FormattedMessage
+              id="app.doyouwanttodelete?"
+              defaultMessage="Do you want to delete?"
+            />
+          }
+          onConfirm={() => props.deleteExpense(item.voucherId)}
+        >
               <DeleteOutlined
                 type="delete"
                 style={{ cursor: "pointer" }}
-                onClick={() => {
-                props.deleteExpense(item.voucherId);
+                // onClick={() => {
+                // props.deleteExpense(item.voucherId);
                   
-                }}
+                // }}
               />
-            </Tooltip>
+           </StyledPopconfirm>
                )}          
                 </div> 
                      
@@ -226,7 +235,7 @@ border-radius: 0.35rem;
     color: rgb(68,68,68);
     margin: 1em;
     padding: 0.2rem;
-    width: 20vw;
+    width: 19vw;
     display: flex;
     flex-direction: column;
   @media only screen and (max-width: 600px) {
