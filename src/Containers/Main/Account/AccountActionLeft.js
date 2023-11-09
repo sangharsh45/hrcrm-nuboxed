@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { FlexContainer } from "../../../Components/UI/Layout";
 import { Input, Button, Tooltip, Badge } from "antd";
+import ListAltIcon from '@mui/icons-material/ListAlt';
 import TocIcon from '@mui/icons-material/Toc';
 import GridViewIcon from '@mui/icons-material/GridView';
 import { inputDataSearch, getRecords, getAllRecords } from "./AccountAction";
@@ -63,11 +64,11 @@ const AccountActionLeft = (props) => {
                         style={{
                             marginRight: "0.5rem",
                             color: props.viewType === "list" && "#1890ff",
-                            fontSize: "17px",
+                            // fontSize: "17px",
                             cursor: "pointer",
                         }}
                         onClick={() => props.setDistributorViewType("list")}>
-                               <GridViewIcon style={{fontSize:"1.4rem"}}  />
+                               <ListAltIcon  />
                         </span>
                     </Badge>
                 </Tooltip>

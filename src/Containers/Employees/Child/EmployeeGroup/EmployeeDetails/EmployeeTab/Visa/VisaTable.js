@@ -37,6 +37,7 @@ class VisaTable extends Component {
       handleUpdateVisaModal,
       updateVisaModal,
       singleEmployee,
+      user,
       setEditVisa,
       employeeId,
       deleteVisa,
@@ -104,11 +105,13 @@ class VisaTable extends Component {
                 href={`${base_url}/document/${item.documentId}`}
                 target="_blank"
               >
+                {user.userAccessInd === true ? (
                 <DownloadIcon
                   type="download"
                   // onClick={() => startDownload()}
                   style={{ cursor: "pointer",fontSize: "0.8rem" }}
                 />
+                ):null}
               </a>
             {/* ) : null} */}
           </>
@@ -189,6 +192,7 @@ class VisaTable extends Component {
 const mapStateToProps = ({ profile,auth, employee }) => ({
   visaDetails:profile.visaDetails,
   userId:auth.userDetails.userId,
+  user:auth.userDetails,
   updateVisaModal:profile.updateVisaModal,
   fetchingVisaDetails:profile.fetchingVisaDetails,
   fetchingVisaDetailsError:profile.fetchingVisaDetailsError,

@@ -19,12 +19,12 @@ function OrderInventoryForm(props) {
       ? fm.add(10, "y")
       : fm;
   };
-  const locationsName = props.plant.map((item) => {
-    return {
-      label: item.name || "",
-      value: item.locationDetailsId,
-    };
-  });
+  // const locationsName = props.plant.map((item) => {
+  //   return {
+  //     label: item.name || "",
+  //     value: item.locationDetailsId,
+  //   };
+  // });
   return (
     <>
       <Formik
@@ -68,8 +68,8 @@ function OrderInventoryForm(props) {
                   placeholder="Location"
                   label="Location"
                   isRequired
-                  component={SelectComponent}
-                  options={Array.isArray(locationsName) ? locationsName : []}
+                  // component={SelectComponent}
+                  // options={Array.isArray(locationsName) ? locationsName : []}
                 />
               </div>
               <div style={{ marginTop: "15px", marginLeft: "14px" }}>

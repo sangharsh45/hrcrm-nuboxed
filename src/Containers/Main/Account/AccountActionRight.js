@@ -13,7 +13,7 @@ class AccountActionRight extends React.Component {
                 {viewType === "list" ? (
                     <Tooltip title="Create">
                         <Button
-                            type="primary" ghost onClick={() => handleDistributorModal(true)}>
+                            type="primary"  onClick={() => handleDistributorModal(true)}>
                             Add {/* <PlusOutlined /> */}
                         </Button>
                     </Tooltip>

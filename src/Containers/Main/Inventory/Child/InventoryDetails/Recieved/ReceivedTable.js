@@ -201,7 +201,7 @@ const ReceivedTable = (props) => {
     },
 
     {
-      title: "Location",
+      title: "Pick Up",
       width: "10%",
       render: (text, item) => {
         return (
