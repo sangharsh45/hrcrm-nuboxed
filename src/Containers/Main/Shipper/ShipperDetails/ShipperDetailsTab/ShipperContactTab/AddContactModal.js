@@ -1,7 +1,7 @@
 import React, { lazy, Suspense, Component } from "react";
 import { Button } from "antd";
 
-import { StyledModal } from "../../../../../../Components/UI/Antd";
+import { StyledDrawer } from "../../../../../../Components/UI/Antd";
 import { BundleLoader } from "../../../../../../Components/Placeholder";
 
 const ContactShipperForm = lazy(() => import("./ContactShipperForm"));
@@ -13,21 +13,21 @@ class AddContactModal extends Component {
     const { shipperContactModal, handleShipperContactModal } = this.props;
     return (
       <>
-        <StyledModal
+        <StyledDrawer
           title="Contact"
-          width="65vw"
+          width="55vw"
           visible={shipperContactModal}
+          closable
           destroyOnClose
-          maskClosable={false}
           maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}
-          style={{ top: 40 }}
-          onCancel={() => handleShipperContactModal(false)}
+          style={{marginTop:"5rem"}}
+          onClose={() => handleShipperContactModal(false)}
           footer={null}
         >
           <Suspense fallback={<BundleLoader />}>
             <ContactShipperForm />
           </Suspense>
-        </StyledModal>
+        </StyledDrawer>
       </>
     );
   }

@@ -9,7 +9,7 @@ import { InputComponent } from "../../../../Components/Forms/Formik/InputCompone
 import { FlexContainer } from "../../../../Components/UI/Layout";
  import { SelectComponent } from "../../../../Components/Forms/Formik/SelectComponent";
 import AddressFieldArray from "../../../../Components/Forms/Formik/AddressFieldArray";
-// import { updateLocation } from "../../../Event/Child/Location/LocationAction";
+import { updateLocation } from "../../../Event/Child/Location/LocationAction";
 
 import { getTimeZone } from "../../../Auth/AuthAction";
 
@@ -31,7 +31,7 @@ class LocationUpdateForm extends Component {
     this.setState({ production: checked });
   };
   handleBilling = (checked) => {
-    this.setState({ billing: checked });
+    this.setState({ billing: checked });    
   };
   handleCorporate = (checked) => {
     this.setState({ corporate: checked });
@@ -104,7 +104,7 @@ class LocationUpdateForm extends Component {
             groupId: this.props.groupId,
             locationtypeId: undefined,
             productionInd: this.state.production ? "true" : "false",
-            billingInd: this.state.billing ? "true" : "false",
+            billingInd:this.props.storedLoc.billingInd ? this.props.storedLoc.billingInd: this.state.billing ? "true" : "false",
             inventoryInd: this.state.inventory ? "true" : "false",
             projectInd: this.state.project ? "true" : "false",
             corporateInd: this.state.corporate ? "true" : "false",
@@ -132,11 +132,11 @@ class LocationUpdateForm extends Component {
           onSubmit={(values, { resetForm }) => {
             //debugger;
             console.log(values);
-            this.props.addLocation(
+            this.props.updateLocation(
               {
                 ...values,
                 productionInd: this.state.production ? "true" : "false",
-                billingInd: this.state.billing ? "true" : "false",
+                billingInd:this.props.storedLoc.billingInd ?this.props.storedLoc.billingInd: this.state.billing ? "true" : "false",
                 inventoryInd: this.state.inventory ? "true" : "false",
                 projectInd: this.state.project ? "true" : "false",
                 corporateInd: this.state.corporate ? "true" : "false",
@@ -145,7 +145,7 @@ class LocationUpdateForm extends Component {
                 userId: this.props.userId,
                 // locationtypeId: this.props.locationtypeId,
               },
-              this.props.orgId,
+              this.props.storedLoc.locationDetailsId,
               // () => this.callback(resetForm)
             );
           }}
@@ -208,7 +208,7 @@ class LocationUpdateForm extends Component {
                       <div>
                         <Switch
                           style={{ width: "6.25em" }}
-                          checked={this.state.billing}
+                          checked={this.state.billing || this.props.storedLoc.billingInd}
                           onChange={this.handleBilling}
                           checkedChildren="Yes"
                           unCheckedChildren="No"
@@ -288,7 +288,7 @@ class LocationUpdateForm extends Component {
                 <Button
                   type="primary"
                   htmlType="submit"
-                  loading={this.props.addingLocation}
+                  loading={this.props.updatingLocations}
                 >
                  Update
                 </Button>
@@ -302,7 +302,7 @@ class LocationUpdateForm extends Component {
   }
 }
 const mapStateToProps = ({ location, auth, teams, plant }) => ({
-  addingLocation: location.addingLocation,
+  updatingLocations: location.updatingLocations,
   timeZone: auth.timeZone,
   userId:auth.userDetails.userId,
   orgId:auth.userDetails.organizationId,
@@ -311,7 +311,7 @@ const mapStateToProps = ({ location, auth, teams, plant }) => ({
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
-    //   addLocation,
+      updateLocation,
       getTimeZone,
  
     },

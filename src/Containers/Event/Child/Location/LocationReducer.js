@@ -12,6 +12,8 @@ const initialState = {
 
     locShiftDrawer:false,
     locationUpdatedrawr:false,
+
+    updatingLocations: false, updatingLocationsError: false
   };
 
   export const locationReducer = (state = initialState, action) => {
@@ -52,6 +54,22 @@ const initialState = {
                
           case types.HANDLE_UPDATE_LOCATION_DRAWER:
             return { ...state, locationUpdatedrawr: action.payload }; 
+
+            case types.UPDATE_LOCATIONS_REQUEST:
+              return { ...state, updatingLocations: true };
+            case types.UPDATE_LOCATIONS_SUCCESS:
+              return {
+                ...state,
+                updatingLocations: false,
+                locationUpdatedrawr: false,
+                showLocation: state.showLocation.map((LOCS) =>
+                LOCS.locationDetailsId === action.payload.locationDetailsId
+                  ? action.payload
+                  : LOCS
+              ),
+              };
+            case types.UPDATE_LOCATIONS_FAILURE:
+              return { ...state, updatingLocations: false, updatingLocationsError: true };         
                 
         default:
     return state;
