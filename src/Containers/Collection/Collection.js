@@ -14,9 +14,9 @@ import { BundleLoader } from "../../Components/Placeholder";
 // const CollectionCustomerTab = lazy(() =>
 //   import("./CollectionTab/CollectionCustomerTab")
 // );
-// const CollectionDistributorTab = lazy(() =>
-//   import("./CollectionTab/CollectionDistributorTab")
-// );
+const CollectionDistributorTab = lazy(() =>
+  import("./CollectionTab/CollectionDistributorTab")
+);
 
 class Collection extends Component {
   constructor(props) {
@@ -85,21 +85,21 @@ class Collection extends Component {
           currentData1={this.state.currentData1}
           setCurrentData1={this.setCurrentData1}
         />
-        {/* <Suspense fallback={<BundleLoader />}>
-          {viewType === "distributor" ? (
-            <CollectionDistributorTab
+      <Suspense fallback={<BundleLoader />}>
+          {/* {viewType === "distributor" ? ( */}
+            {/* <CollectionDistributorTab
               handleTabChange1={this.handleTabChange1}
               activeKey1={activeKey1}
-            />
-          )
-           : viewType === "customer" ? (
-            <CollectionCustomerTab
+            /> */}
+          {/* )
+           : viewType === "customer" ? ( */}
+            {/* <CollectionCustomerTab
               handleTabChange={this.handleTabChange}
               activeKey={activeKey}
             />
           ) 
-          : null}
-        </Suspense> */}
+          : null} */}
+        </Suspense>
 
       </>
     );

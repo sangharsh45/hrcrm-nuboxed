@@ -211,7 +211,7 @@ overlay={
           {
             invOpportunityId: item.invOpportunityId,
            
-            investorOppStagesId:investorOppStagesId
+            invOpportunityStagesId:investorOppStagesId
          
           },
          

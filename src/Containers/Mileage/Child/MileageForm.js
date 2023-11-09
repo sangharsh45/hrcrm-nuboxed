@@ -21,7 +21,7 @@ import {
 } from '@ant-design/icons';
 import { addMileage, getMileageByUserId } from "../MileageAction";
 import { getCurrency } from "../../Auth/AuthAction";
-import dayjs from "dayjs";
+import moment from "moment";
 import * as Yup from "yup";
 import { Select } from "antd";
 
@@ -63,7 +63,7 @@ function MileageForm(props) {
       return value.map((data) => {
         if (`${data.id}date` === id) {
           console.log(dateString);
-          return { ...data, mileageDate: dayjs(dateString).toISOString() };
+          return { ...data, mileageDate: moment(dateString).toISOString() };
         } else {
           return data;
         }
