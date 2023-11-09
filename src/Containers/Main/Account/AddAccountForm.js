@@ -18,6 +18,7 @@ import SearchSelect from "../../../Components/Forms/Formik/SearchSelect";
 import { addDistributor,setClearbitData1 } from "./AccountAction";
 import { SelectComponent } from "../../../Components/Forms/Formik/SelectComponent";
 import { getCurrency } from "../../Auth/AuthAction"
+import { ProgressiveImage } from "../../../Components/Utils";
 const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-])|(\\([0-9]{2,3}\\)[ \\-])|([0-9]{2,4})[ \\-])?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
 const CustomerSchema = Yup.object().shape({
     name: Yup.string().required("Input needed!"),
@@ -165,7 +166,7 @@ class AddAccountForm extends Component {
                                         width: "45%",
                                     }}
                                 >
-                                      {/* <div>
+                                     <div>
                     {clearbit1 && clearbit1.hasOwnProperty("logo") && (
                       <ProgressiveImage
                         preview={
@@ -188,7 +189,7 @@ class AddAccountForm extends Component {
                         Logos provided by Clearbit
                       </a>
                     ) : null}
-                  </div> */}
+                  </div>
                   <Spacer />
                                     <Field
                                         isRequired
@@ -196,10 +197,10 @@ class AddAccountForm extends Component {
                                         type="text"
                                         label="Name"
                                         width={"100%"}
-                                        component={InputComponent}
-                    //                     setClearbitData1={this.props.setClearbitData1}
-                    // component={ClearbitImage}
-                    // accounts={accounts}
+                                        // component={InputComponent}
+                                        setClearbitData1={this.props.setClearbitData1}
+                    component={ClearbitImage}
+                    accounts={accounts}
                                         isColumn
                                         inlineLabel
                                     />
