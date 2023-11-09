@@ -22,7 +22,7 @@ function OpenQcTable(props) {
             title: "Order",
             dataIndex: "newOrderNo",
             width: "30%",
-          
+
         },
 
         {
@@ -65,10 +65,10 @@ function OpenQcTable(props) {
     );
 }
 
-const mapStateToProps = ({ production, auth }) => ({
-    fetchingOpenQc: production.fetchingOpenQc,
+const mapStateToProps = ({ refurbish, auth }) => ({
+    fetchingOpenQc: refurbish.fetchingOpenQc,
     userId: auth.userDetails.userId,
-    openQc: production.openQc,
+    openQc: refurbish.openQc,
     locationDetailsId: auth.userDetails.locationDetailsId,
 });
 

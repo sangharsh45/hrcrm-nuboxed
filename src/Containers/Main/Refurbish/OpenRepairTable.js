@@ -68,11 +68,11 @@ function OpenRepairTable(props) {
     );
 }
 
-const mapStateToProps = ({ production, auth }) => ({
-    fetchingOpenQc: production.fetchingOpenQc,
+const mapStateToProps = ({ refurbish, auth }) => ({
+    fetchingOpenQc: refurbish.fetchingOpenQc,
     userId: auth.userDetails.userId,
-    openRepair: production.openRepair,
-    fetchingOpenRepairByUser: production.fetchingOpenRepairByUser,
+    openRepair: refurbish.openRepair,
+    fetchingOpenRepairByUser: refurbish.fetchingOpenRepairByUser,
     locationDetailsId: auth.userDetails.locationDetailsId,
 });
 

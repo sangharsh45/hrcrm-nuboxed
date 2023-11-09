@@ -10,7 +10,7 @@ import { dashboardReducer } from "../Containers/Dashboard/DashboardReducer";
 import { brandmodelReducer } from "../Containers/Settings/Category/Brand&Model/BrandModelReducer"
 import { plannerReducer } from "../Containers/Planner/PlannerReducer";
 import { settingsReducer } from "../Containers/Settings/SettingsReducer";
-
+import { refurbishReducer } from "../Containers/Main/Refurbish/RefurbishReducer";
 import { themeReducer } from "../Containers/Settings/Theme/ThemeReducer";
 
 import { ruleReducer } from "../Containers/Rules/RulesReducer";
@@ -80,7 +80,7 @@ import { catgCustomerReducer } from "../Containers/Settings/Category/Customer/Cu
 import { distributorReducer } from "../Containers/Main/Account/AccountReducer";
 import { suppliersReducer } from "../Containers/Main/Suppliers/SuppliersReducer";
 import { collectionReducer } from "../Containers/Collection/CollectionReducer";
-import {productReducer} from "../Containers/Product/ProductReducer";
+import { productReducer } from "../Containers/Product/ProductReducer";
 
 const appReducer = combineReducers({
   dashboard: dashboardReducer,
@@ -154,9 +154,10 @@ const appReducer = combineReducers({
   catgCustomer: catgCustomerReducer,
   brandmodel: brandmodelReducer,
   distributor: distributorReducer,
-  suppliers:suppliersReducer,
-  collection:collectionReducer,
-  product:productReducer,
+  suppliers: suppliersReducer,
+  collection: collectionReducer,
+  product: productReducer,
+  refurbish: refurbishReducer,
 });
 
 const rootReducer = (state, action) => {

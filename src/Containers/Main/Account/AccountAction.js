@@ -218,9 +218,11 @@ export const getActivityListByDistributorId = (distributorId) => (dispatch) => {
     type: types.GET_ACTIVITY_LIST_BY_DISTRIBUTORID_REQUEST,
   });
   axios
-    .get(`${base_url2}/activity/distributor/${distributorId}`, { headers: {
-      Authorization: "Bearer " + sessionStorage.getItem("token") || "",
-    },})
+    .get(`${base_url2}/activity/distributor/${distributorId}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
     .then((res) => {
       console.log(res);
       dispatch({
@@ -344,9 +346,11 @@ export const addDistributorActivityTask = (task, cb) => (dispatch) => {
     type: types.ADD_DISTRIBUTOR_ACTIVITY_TASK_REQUEST,
   });
   axios
-    .post(`${base_url2}/task`, task, { headers: {
-      Authorization: "Bearer " + sessionStorage.getItem("token") || "",
-    },})
+    .post(`${base_url2}/task`, task, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
     .then((res) => {
       console.log(res);
       // dispatch(getActivityListByDistributorId(distributorId));
@@ -467,7 +471,7 @@ export const handleRenewalButtonModal = (modalProps) => (dispatch) => {
 /**
  * pause button
  */
-export const handlePauseButtonModal = (modalProps) => (dispatch) => {
+export const handleOrderDetailsModal = (modalProps) => (dispatch) => {
   dispatch({
     type: types.HANDLE_PAUSE_BUTTON_MODAL,
     payload: modalProps,

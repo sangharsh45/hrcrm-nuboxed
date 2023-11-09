@@ -1,45 +1,21 @@
-import React, { useState, Suspense, useEffect, lazy } from "react";
-import { StyledTabs } from "../../../Components/UI/Antd";
+import React, { useEffect } from 'react'
+import RefurbishHeader from './RefurbishHeader'
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { setProductionViewType, getShifts } from "./RefurbishAction";
-import RefurbishHeader from "./RefurbishHeader";
-import RefurbishOrderList from "./RefurbishOrderList";
-import OrderPhoneTab from "./OrderPhoneTab";
+import OrderPhoneTab from './OrderPhoneTab';
+import RefurbishMainTable from './RefurbishMainTable';
 
-
-const TabPane = StyledTabs.TabPane;
-function Refurbish(props) {
+const Refurbish = (props) => {
   useEffect(() => {
     props.getShifts(props.userId);
   }, []);
-  useEffect(() => {
-    if (props.shiftsData.length) {
-      setCurrentShift(props.shiftsData[0]);
-    }
-  }, [props.shiftsData]);
-
-  const [activeKey, setActiveKey] = useState("1");
-  const [currentShift, setCurrentShift] = useState({});
-  function handlesetCurrentShift(data) {
-    setCurrentShift(data);
-  }
-
-  const { shiftsData } = props;
-  function handleTabChange(key) {
-    setActiveKey(key);
-    if (activeKey === "1") {
-    } else if (activeKey === "2") {
-    } else if (activeKey === "3") {
-    } else if (activeKey === "4") {
-    }
-  }
   return (
     <div>
       <RefurbishHeader
-        shiftsData={shiftsData}
-        shiftId={shiftsData.shiftId}
-        handlesetCurrentShift={handlesetCurrentShift}
+        // shiftsData={shiftsData}
+        // shiftId={shiftsData.shiftId}
+        // handlesetCurrentShift={handlesetCurrentShift}
         setProductionViewType={props.setProductionViewType}
         viewType={props.viewType}
       />
@@ -47,18 +23,17 @@ function Refurbish(props) {
         <OrderPhoneTab />
       ) : props.viewType === "all" ?
         (
-          <RefurbishOrderList />
+          <RefurbishMainTable />
         ) : null}
     </div>
-  );
+  )
 }
-
-const mapStateToProps = ({ production, auth }) => ({
+const mapStateToProps = ({ refurbish, auth }) => ({
   user: auth.userDetails,
   userId: auth.userDetails.userId,
-  shiftId: production.shiftsData.shiftId,
-  shiftsData: production.shiftsData,
-  viewType: production.viewType
+  shiftId: refurbish.shiftsData.shiftId,
+  shiftsData: refurbish.shiftsData,
+  viewType: refurbish.viewType
 });
 
 const mapDispatchToProps = (dispatch) =>
@@ -70,3 +45,4 @@ const mapDispatchToProps = (dispatch) =>
     dispatch
   );
 export default connect(mapStateToProps, mapDispatchToProps)(Refurbish);
+

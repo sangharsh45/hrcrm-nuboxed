@@ -70,7 +70,7 @@ const initialState = {
 
   addRenewalButtonModal: false,
 
-  addPauseButtonModal: false,
+  addOrderDetailsModal: false,
 
   updateDistributorModal: false,
 
@@ -587,7 +587,7 @@ export const distributorReducer = (state = initialState, action) => {
      * Pause modal
      */
     case types.HANDLE_PAUSE_BUTTON_MODAL:
-      return { ...state, addPauseButtonModal: action.payload };
+      return { ...state, addOrderDetailsModal: action.payload };
 
     /**
      * post renwal form
@@ -632,7 +632,7 @@ export const distributorReducer = (state = initialState, action) => {
       return {
         ...state,
         linkingPauseByDistributorId: false,
-        addPauseButtonModal: false,
+        addOrderDetailsModal: false,
         distributorOrder: state.distributorOrder.map((item) => {
           if (item.orderId == action.payload.orderId) {
             return action.payload;
@@ -646,7 +646,7 @@ export const distributorReducer = (state = initialState, action) => {
         ...state,
         linkingPauseByDistributorId: false,
         linkingPauseByDistributorIdError: true,
-        addPauseButtonModal: false,
+        addOrderDetailsModal: false,
       };
 
     /**

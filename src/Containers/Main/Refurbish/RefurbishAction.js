@@ -1,5 +1,5 @@
 import * as types from "./RefurbishActionTypes";
-import { base_url } from "../../../Config/Auth";
+import { base_url2 } from "../../../Config/Auth";
 import axios from "axios";
 import { message } from "antd";
 
@@ -11,7 +11,7 @@ export const getTodayProduction = (date) => (dispatch) => {
     type: types.GET_TODAY_PRODUCTION_REQUEST,
   });
   axios
-    .get(`${base_url}/report/today-orderList/${date}`)
+    .get(`${base_url2}/report/today-orderList/${date}`)
     .then((res) => {
       console.log(res);
       dispatch({
@@ -33,7 +33,7 @@ export const getTomorrowProduction = () => (dispatch) => {
     type: types.GET_TOMORROW_PRODUCTION_REQUEST,
   });
   axios
-    .get(`${base_url}/report/tomorrow-orderList`)
+    .get(`${base_url2}/report/tomorrow-orderList`)
     .then((res) => {
       console.log(res);
       dispatch({
@@ -55,7 +55,7 @@ export const linkDateToProduction = (data) => (dispatch) => {
     type: types.LINK_DATE_TO_PRODUCTION_REQUEST,
   });
   axios
-    .post(`${base_url}/report/today-orderList`, { data })
+    .post(`${base_url2}/report/today-orderList`, { data })
     .then((res) => {
       console.log(res);
       // dispatch(getTaskListRangeByUserId(userId));
@@ -86,7 +86,7 @@ export const addProductionConsumption = (data, locationDetailsId) => (
   });
 
   axios
-    .post(`${base_url}/production/productionSuppliesLink`, data)
+    .post(`${base_url2}/production/productionSuppliesLink`, data)
     .then((res) => {
       console.log(res);
 
@@ -118,7 +118,7 @@ export const addProductionOutput = (data, locationDetailsId) => (
   });
 
   axios
-    .post(`${base_url}/production/inventoryProductLink`, data)
+    .post(`${base_url2}/production/inventoryProductLink`, data)
     .then((res) => {
       console.log(res);
 
@@ -144,7 +144,7 @@ export const getConsumptionList = (locationDetailsId) => (dispatch) => {
     type: types.GET_ALL_PRODUCTION_CONSUMPTION_LIST_REQUEST,
   });
   axios
-    .get(`${base_url}/production/supplies/${locationDetailsId}`)
+    .get(`${base_url2}/production/supplies/${locationDetailsId}`)
     .then((res) => {
       console.log(res);
       dispatch({
@@ -166,7 +166,7 @@ export const getProductionOutputList = (locationDetailsId) => (dispatch) => {
     type: types.GET_ALL_PRODUCTION_OUTPUT_LIST_REQUEST,
   });
   axios
-    .get(`${base_url}/production/product/${locationDetailsId}`, {})
+    .get(`${base_url2}/production/product/${locationDetailsId}`, {})
     .then((res) => {
       console.log(res);
       dispatch({
@@ -189,7 +189,7 @@ export const getShifts = (userId) => (dispatch) => {
     type: types.GET_SHIFTS_REQUEST,
   });
   axios
-    .get(`${base_url}/shift/getShiftList/${userId}`, {
+    .get(`${base_url2}/shift/getShiftList/${userId}`, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },
@@ -216,7 +216,7 @@ export const transferOutput = (data, locationDetailsId) => (dispatch) => {
     type: types.TRANSFER_PRODUCTION_OUTPUT_TO_INVENTORY_REQUEST,
   });
   axios
-    .put(`${base_url}/production/moveToInventory`, data)
+    .put(`${base_url2}/production/moveToInventory`, data)
     .then((res) => {
       dispatch(getProductionOutputList(locationDetailsId));
       dispatch({
@@ -240,7 +240,7 @@ export const addSplit = (data, locationDetailsId) => (dispatch) => {
     type: types.ADD_SPLIT_PRODUCTION_OUTPUT_REQUEST,
   });
   axios
-    .post(`${base_url}/production/split`, data)
+    .post(`${base_url2}/production/split`, data)
     .then((res) => {
       console.log(res);
       dispatch(getProductionOutputList(locationDetailsId));
@@ -264,7 +264,7 @@ export const deleteProductionOutput = (productionProductId) => (dispatch) => {
     type: types.DELETE_PRODUCTION_OUTPUT_REQUEST,
   });
   axios
-    .delete(`${base_url}/production/${productionProductId}`, {
+    .delete(`${base_url2}/production/${productionProductId}`, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },
@@ -304,7 +304,7 @@ export const getProductionOrderId = (locationId) => (dispatch) => {
     type: types.GET_PRODUCTION_ORDER_ID_REQUEST,
   });
   axios
-    .get(`${base_url}/orderProductionLocationLink/get-all/${locationId}`, {
+    .get(`${base_url2}/orderProductionLocationLink/get-all/${locationId}`, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },
@@ -336,7 +336,7 @@ export const getProductionUsersById = (locationDetailsId) => (dispatch) => {
     type: types.GET_PRODUCTION_USER_BYID_REQUEST,
   });
   axios
-    .get(`${base_url}/locationDetails/getUserList/${locationDetailsId}`, {
+    .get(`${base_url2}/locationDetails/getUserList/${locationDetailsId}`, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },
@@ -382,7 +382,7 @@ export const UpdateTechnicianByPhone = (data, id, locationDetailsId) => (dispatc
     type: types.UPDATE_TECHNICIAN_BY_PHONE_REQUEST,
   });
   axios
-    .post(`${base_url}/orderProductionLocationLink/productionDispatch`, data, {
+    .post(`${base_url2}/orderProductionLocationLink/productionDispatch`, data, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },
@@ -411,7 +411,7 @@ export const UpdateTechnicianForRepairPhone = (data, id, locationDetailsId) => (
     type: types.UPDATE_TECHNICIAN_FOR_REPAIR_PHONE_REQUEST,
   });
   axios
-    .post(`${base_url}/orderProductionLocationLink/Repair/productionDispatch`, data, {
+    .post(`${base_url2}/orderProductionLocationLink/Repair/productionDispatch`, data, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },
@@ -439,7 +439,7 @@ export const getNoOfPhoneById = (orderPhoneId) => (dispatch) => {
     type: types.GET_NO_OF_PHONE_BY_ID_REQUEST,
   });
   axios
-    .get(`${base_url}/phoneOrder/phone/${orderPhoneId}`, {
+    .get(`${base_url2}/phoneOrder/phone/${orderPhoneId}`, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },
@@ -464,7 +464,7 @@ export const getRepairPhoneById = (orderPhoneId) => (dispatch) => {
     type: types.GET_REPAIR_PHONE_BY_ID_REQUEST,
   });
   axios
-    .get(`${base_url}/phoneOrder/phonesss/${orderPhoneId}`, {
+    .get(`${base_url2}/phoneOrder/phonesss/${orderPhoneId}`, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },
@@ -497,7 +497,7 @@ export const getNoOfTechnicianById = (orderPhoneId) => (dispatch) => {
     type: types.GET_NO_OF_TECHNICIAN_BY_ID_REQUEST,
   });
   axios
-    .get(`${base_url}/AllPhoneList/${orderPhoneId}`, {
+    .get(`${base_url2}/AllPhoneList/${orderPhoneId}`, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },
@@ -530,7 +530,7 @@ export const getphoneListByUser = (orderPhoneId, technicianId) => (dispatch) => 
     type: types.GET_PHONE_LIST_BY_USER_REQUEST,
   });
   axios
-    .get(`${base_url}/TechnicianPhoneList/${orderPhoneId}/${technicianId}`, {
+    .get(`${base_url2}/TechnicianPhoneList/${orderPhoneId}/${technicianId}`, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },
@@ -564,7 +564,7 @@ export const updateFinalPrice = (data, orderPhoneId, locationDetailsId, cb) => (
     type: types.UPDATE_FINAL_PRICE_REQUEST,
   });
   axios
-    .put(`${base_url}/phoneOrder/updatePrice/${orderPhoneId}`, data, {
+    .put(`${base_url2}/phoneOrder/updatePrice/${orderPhoneId}`, data, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },
@@ -593,7 +593,7 @@ export const getProductionNotesInOrder = (id) => (dispatch) => {
     type: types.GET_PRODUCTION_NOTES_LIST_IN_ORDER_REQUEST,
   });
   axios
-    .get(`${base_url}/phoneOrder/notes/${id}`, {
+    .get(`${base_url2}/phoneOrder/notes/${id}`, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },
@@ -626,7 +626,7 @@ export const getOrderByUser = (locationId, userId) => (dispatch) => {
     type: types.GET_ORDER_BY_USER_REQUEST,
   });
   axios
-    .get(`${base_url}/orderProductionLocationLink/get-allOrder/${locationId}/${userId}`, {
+    .get(`${base_url2}/orderProductionLocationLink/get-allOrder/${locationId}/${userId}`, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },
@@ -652,7 +652,7 @@ export const getRepairOrderByUser = (locationId, userId) => (dispatch) => {
     type: types.GET_REPAIR_ORDER_BY_USER_REQUEST,
   });
   axios
-    .get(`${base_url}/get-allRepairPhoneOrder/${locationId}/${userId}`, {
+    .get(`${base_url2}/get-allRepairPhoneOrder/${locationId}/${userId}`, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },
@@ -692,7 +692,7 @@ export const getPhoneOrderIdByUser = (orderPhoneId, technicianId) => (dispatch) 
     type: types.GET_ORDERID_BY_USER_REQUEST,
   });
   axios
-    .get(`${base_url}/TechnicianPhoneList/${orderPhoneId}/${technicianId}`, {
+    .get(`${base_url2}/TechnicianPhoneList/${orderPhoneId}/${technicianId}`, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },
@@ -717,7 +717,7 @@ export const getRepairPhoneByUser = (orderPhoneId, technicianId) => (dispatch) =
     type: types.GET_REPAIR_PHONE_BY_USER_REQUEST,
   });
   axios
-    .get(`${base_url}/RepairPhoneList/${orderPhoneId}/${technicianId}`, {
+    .get(`${base_url2}/RepairPhoneList/${orderPhoneId}/${technicianId}`, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },
@@ -741,7 +741,7 @@ export const updaterepairStatus = (data, phoneId, orderPhoneId, locationDetailsI
   // debugger;
   dispatch({ type: types.UPDATE_REPAIR_STATUS_REQUEST });
   axios
-    .put(`${base_url}/phone/repairStatus/${phoneId}`, data, {
+    .put(`${base_url2}/phone/repairStatus/${phoneId}`, data, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },
@@ -784,7 +784,7 @@ export const qcInspectionButton = (data, orderPhoneId, locationDetailsId, userId
     type: types.UPDATE_QC_INSPECTION_BUTTON_REQUEST,
   });
   axios
-    .put(`${base_url}/qcInspectionInd/${orderPhoneId}`, data, {
+    .put(`${base_url2}/qcInspectionInd/${orderPhoneId}`, data, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },
@@ -814,7 +814,7 @@ export const repairInspectionButton = (data, orderPhoneId, locationDetailsId, us
     type: types.UPDATE_REPAIR_INSPECTION_BUTTON_REQUEST,
   });
   axios
-    .put(`${base_url}/repairInspectionInd/${orderPhoneId}`, data, {
+    .put(`${base_url2}/repairInspectionInd/${orderPhoneId}`, data, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },
@@ -843,7 +843,7 @@ export const getOpenQcByUser = (locationId, userId) => (dispatch) => {
     type: types.GET_OPEN_QC_BY_USER_REQUEST,
   });
   axios
-    .get(`${base_url}/orderProduction/get-allInCompleteQcOrder/${locationId}/${userId} `, {
+    .get(`${base_url2}/orderProduction/get-allInCompleteQcOrder/${locationId}/${userId} `, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },
@@ -869,7 +869,7 @@ export const getOpenRepair = (locationId, userId) => (dispatch) => {
     type: types.GET_OPEN_USER_BY_USER_REQUEST,
   });
   axios
-    .get(`${base_url}/get-allRepairIncompletePhoneOrder/${locationId}/${userId}`, {
+    .get(`${base_url2}/get-allRepairIncompletePhoneOrder/${locationId}/${userId}`, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },

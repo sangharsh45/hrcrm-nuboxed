@@ -137,7 +137,7 @@ const initialState = {
   phoNotesQCOrderModal: false,
 };
 
-export const productionReducer = (state = initialState, action) => {
+export const refurbishReducer = (state = initialState, action) => {
   switch (action.type) {
     case types.SET_PRODUCTION_VIEW_TYPE:
       return { ...state, viewType: action.payload };

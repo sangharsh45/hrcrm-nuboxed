@@ -3,9 +3,10 @@ import { StyledTable } from '../../../../../Components/UI/Antd';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import moment from 'moment/moment';
-import { getDistributorOrderByDistributorId, handleInventoryLocationInOrder } from "../../AccountAction"
+import { getDistributorOrderByDistributorId, handleInventoryLocationInOrder, handleOrderDetailsModal } from "../../AccountAction"
 import { Button, Tooltip } from 'antd';
 import AddLocationInOrder from './AddLocationInOrder';
+import AccountOrderDetailsModal from './AccountOrderDetailsModal';
 
 const AccountOrderTable = (props) => {
 
@@ -73,10 +74,10 @@ const AccountOrderTable = (props) => {
                     <>
                         <span
                             style={{ textDecoration: "underline", cursor: "pointer", color: "#1890ff" }}
-                        //   onClick={() => {
-                        //     handleSetParticularOrderData(item);
-                        //     props.handlePauseButtonModal(true);
-                        //   }}
+                            onClick={() => {
+                                handleSetParticularOrderData(item);
+                                props.handleOrderDetailsModal(true);
+                            }}
                         >{item.newOrderNo}</span>
                         &nbsp;&nbsp;
                         {date === currentdate ? (
@@ -125,11 +126,11 @@ const AccountOrderTable = (props) => {
         {
             title: "Location",
             width: "12%",
-            //   render: (text, item) => {
-            //     return (
-            //       <>{item.locationDetailsViewDTO && item.locationDetailsViewDTO.name || ""}</>
-            //     )
-            //   }
+            render: (text, item) => {
+                return (
+                    <>{item.locationDetailsViewDTO && item.locationDetailsViewDTO.name || ""}</>
+                )
+            }
         },
         {
             title: "Phones#",
@@ -313,16 +314,22 @@ const AccountOrderTable = (props) => {
                 addInventoryInOrder={props.addInventoryInOrder}
                 handleInventoryLocationInOrder={props.handleInventoryLocationInOrder}
             />
+            <AccountOrderDetailsModal
+                particularRowData={particularRowData}
+                handleOrderDetailsModal={props.handleOrderDetailsModal}
+                addOrderDetailsModal={props.addOrderDetailsModal} />
         </>
     )
 }
 const mapStateToProps = ({ distributor }) => ({
     distributorOrder: distributor.distributorOrder,
     addInventoryInOrder: distributor.addInventoryInOrder,
+    addOrderDetailsModal: distributor.addOrderDetailsModal
 });
 const mapDispatchToProps = dispatch => bindActionCreators({
     getDistributorOrderByDistributorId,
-    handleInventoryLocationInOrder
+    handleInventoryLocationInOrder,
+    handleOrderDetailsModal
 }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(AccountOrderTable);
