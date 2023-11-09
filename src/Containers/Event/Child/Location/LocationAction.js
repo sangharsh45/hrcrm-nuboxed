@@ -69,3 +69,7 @@ export const setLocationViewType = (viewType) => (dispatch) => {
         //cb && cb("error");
       });
   };
+
+  export const handleLocationShiftDrawer = (modalProps) => (dispatch) => {
+    dispatch({ type: types.HANDLE_LOCATION_SHIFT_DRAWER, payload: modalProps });
+  };

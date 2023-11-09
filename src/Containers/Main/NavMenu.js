@@ -856,8 +856,8 @@ function NavMenu (props) {
                  </Link> 
                 </Menu.Item>
                 )}
-                 <Menu.Item key="/catalogue" style={{height:"27px",paddingLeft:"1rem"}}>
-                <Link to="/catalogue">
+                 <Menu.Item key="/product" style={{height:"27px",paddingLeft:"1rem"}}>
+                <Link to="/product">
                  <ViewInArIcon
                 style={{ fontSize: "large" }}
                   />

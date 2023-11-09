@@ -8,7 +8,9 @@ const initialState = {
     showLocation:[],
 
     addingLocation: false, 
-    addingLocationError: false 
+    addingLocationError: false,
+
+    locShiftDrawer:false,
 
   };
 
@@ -45,8 +47,9 @@ const initialState = {
                     return { ...state, addingLocation: false, 
                                     addingLocationError: true };
 
-
-
+            case types.HANDLE_LOCATION_SHIFT_DRAWER:
+                return { ...state, locShiftDrawer: action.payload }; 
+                
         default:
     return state;
       }
