@@ -212,7 +212,7 @@ function UpdateCustomerForm (props) {
                         component={SearchSelect}
                       />
                     </div>
-                    <div class=" w-2/5">
+                    <div class=" w-w47.5">
                     <Field
                           name="source"
                           isColumnWithoutNoCreate
@@ -252,7 +252,7 @@ function UpdateCustomerForm (props) {
                  <div class=" h-3/4 w-w47.5 max-sm:w-wk "
                 >
                    <Spacer/>
-                   <div class=" flex justify-between">
+                   <div class=" flex justify-between mb-[0.35rem]">
                    <div class=" h-full w-full">
                    <Listbox value={selected} onChange={setSelected}>
         {({ open }) => (
@@ -361,8 +361,8 @@ function UpdateCustomerForm (props) {
                       />
                     </div>                    
                     </div>
-                   <Spacer/>
-                  <div style={{ width: "100%",backgroundImage: "linear-gradient(-90deg, #00162994, #94b3e4)" }}>
+                 
+                  <div class="mt-8" style={{ width: "100%",backgroundImage: "linear-gradient(-90deg, #00162994, #94b3e4)" }}>
                       <div>
                   <HeaderLabel style={{color:"white"}} >Corporate Address</HeaderLabel>
                   </div>

@@ -261,7 +261,7 @@ function CustomerForm(props) {
                             }
                           />
                     </div>
-                    <div class=" w-2/5 max-sm:w-w47.5">
+                    <div class="w-w47.5">
                     <FastField
                             name="source"
                             type="text"
@@ -298,12 +298,12 @@ function CustomerForm(props) {
                 <div class=" h-3/4 w-w47.5 max-sm:w-wk "  
                 >
                  <Spacer/>
-                 <div class=" flex justify-between">
+                 <div class=" flex justify-between mb-[0.35rem]">
                     <div class=" h-full w-full">
                     <Listbox value={selected} onChange={setSelected}>
         {({ open }) => (
           <>
-            <Listbox.Label className="block font-semibold text-[0.75rem] mb-1 leading-lh1.2  "
+            <Listbox.Label className="block font-semibold text-[0.75rem]  leading-lh1.2  "
             // style={{boxShadow:"0em 0.25em 0.625em -0.25em" }}
             >
               Assigned to
@@ -432,8 +432,8 @@ function CustomerForm(props) {
                       />
                     </div>
                   </div>
-                  <Spacer/>
-                  <div style={{ width: "100%",backgroundImage: "linear-gradient(-90deg, #00162994, #94b3e4)" }}>
+                  
+                  <div class="mt-8" style={{ width: "100%",backgroundImage: "linear-gradient(-90deg, #00162994, #94b3e4)" }}>
                       <div>
                   <HeaderLabel style={{color:"white"}} >Corporate Address</HeaderLabel>
                   </div>

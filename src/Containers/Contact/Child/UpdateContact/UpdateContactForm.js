@@ -199,7 +199,7 @@ class UpdateContactForm extends Component {
               >
                 <div class=" h-full w-w47.5 max-sm:w-wk"
                 >
-                 <div class=" flex  flex-nowrap">
+                 <div class=" flex  flex-nowrap justify-between">
                     <FastField name="imageId" component={Upload} />
                     <div>
                     <div class=" flex justify-between max-sm:flex-col">
@@ -498,8 +498,8 @@ class UpdateContactForm extends Component {
                 </div>
                  </div>
                  
-                  <Spacer style={{ marginTop: "1.25em" }} />
-                  <div style={{ width: "100%",backgroundImage: "linear-gradient(-90deg, #00162994, #94b3e4)" }}>
+               
+                  <div class="mt-8" style={{ width: "100%",backgroundImage: "linear-gradient(-90deg, #00162994, #94b3e4)" }}>
                       <div>
                   <HeaderLabel style={{color:"white"}} > Address</HeaderLabel>
                   </div>
