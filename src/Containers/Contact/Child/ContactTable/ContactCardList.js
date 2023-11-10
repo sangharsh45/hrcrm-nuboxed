@@ -128,14 +128,7 @@ function ContactCardList(props) {
       
      
           <OnlyWrapCard style={{backgroundColor:"#E3E8EE"}}>
-          <InfiniteScroll
-        dataLength={contactByUserId.length}
-        next={handleLoadMore}
-        hasMore={hasMore}
-        loader={fetchingContacts?<h4 style={{ textAlign: 'center' }}>Loading...</h4>:null}
-        height={"70vh"}
-      >
-        <div className=" flex justify-between w-[98%] p-2 bg-transparent font-bold sticky top-0 z-10">
+          <div className=" flex justify-between w-[98%] p-2 bg-transparent font-bold sticky top-0 z-10">
         <div className=" md:w-[12rem]">Name</div>
         <div className=" md:w-40">Company</div>
         <div className=" md:w-28 ">Designation</div>
@@ -143,10 +136,18 @@ function ContactCardList(props) {
         <div className="md:w-28"># Opportunity</div>
         <div className="md:w-28">Pipeline Value</div>
         <div className="md:w-20">Portal Acess</div>
-        <div className="md:w-20">Owner</div>
+        <div className="md:w-16">Owner</div>
         <div className="w-12">Action</div>
 
       </div>
+          <InfiniteScroll
+        dataLength={contactByUserId.length}
+        next={handleLoadMore}
+        hasMore={hasMore}
+        loader={fetchingContacts?<h4 style={{ textAlign: 'center' }}>Loading...</h4>:null}
+        height={"70vh"}
+      >
+        
       {filterData.map((item) => { 
         
          const currentdate = moment().format("DD/MM/YYYY");
@@ -171,7 +172,7 @@ function ContactCardList(props) {
             item.address[0].postalCode} `;
                     return (
                         <div>
-                            <div className="flex rounded-xl justify-between mt-4 bg-white h-12 items-center p-1"
+                            <div className="flex rounded-xl justify-between mt-4 bg-white h-12 items-center p-3"
                                 // style={{
                                 //     borderBottom: "3px dotted #515050"
                                 // }}
@@ -221,7 +222,7 @@ function ContactCardList(props) {
                                 </div>
                                 <div class="flex">
 
-                                <div className=" flex font-medium flex-col  md:w-52 max-sm:flex-row w-full max-sm:justify-between ">
+                                <div className=" flex font-medium flex-col  md:w-48 max-sm:flex-row w-full max-sm:justify-between ">
                                     {/* <div class=" text-xs text-cardBody font-xs font-poppins max-sm:hidden"> Company </div> */}
                                     <div class=" text-sm text-cardBody font-poppins">   
                                     {item.tagWithCompany}
@@ -265,10 +266,10 @@ function ContactCardList(props) {
 
                                     </div>
                                 </div>
-                                <div class="flex">
-                                <div className="flex font-medium flex-col md:w-20  max-sm:flex-row w-full max-sm:justify-between">
+                                <div class="flex md:items-center">
+                                <div className="flex font-medium  md:w-20  max-sm:flex-row w-full max-sm:justify-between">
                        
-                       <div class="text-xs text-cardBody font-poppins max-sm:hidden">Owner</div>
+                       {/* <div class="text-xs text-cardBody font-poppins max-sm:hidden">Owner</div> */}
 
                    
               <Tooltip title={item.ownerName}>
@@ -312,7 +313,7 @@ function ContactCardList(props) {
 </div>
             </div>
                                 <div class="flex flex-col  max-sm:flex-row w-[40%] max-sm:justify-evenly items-center">
-                    <div class="rounded-full bg-white w-5 h-5 cursor-pointer">
+                    <div class="rounded-full bg-white w-5 h-5 cursor-pointer md:mt-4">
                     <Tooltip title={item.mobileNo} >
             {item.doNotCallInd !== true && (
               <span class=" mr-2 text-xs cursor-pointer"

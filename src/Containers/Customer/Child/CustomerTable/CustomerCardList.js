@@ -130,6 +130,18 @@ function CustomerCardList(props) {
  
          <div className=' flex justify-end sticky top-28 z-auto'>
         <OnlyWrapCard style={{backgroundColor:"#E3E8EE"}}>
+        <div className=" flex justify-between w-[97.5%] p-2 bg-transparent font-bold sticky top-0 z-10">
+        <div className=" md:w-40">Name</div>
+        <div className=" md:w-32">Sector</div>
+        <div className=" md:w-28 ">Country</div>
+        <div className="md:w-24"># Opportunity</div>
+        <div className="md:w-36">Pipeline Value</div>
+        <div className="md:w-36">Weighted Value</div>
+        <div className="md:w-24">Assigned to</div>
+        <div className="md:w-20">Owner</div>
+        <div className="w-12">Action</div>
+
+      </div>
         <InfiniteScroll
         dataLength={customerByUserId.length}
         next={handleLoadMore}
@@ -137,18 +149,7 @@ function CustomerCardList(props) {
         loader={fetchingCustomers?<h4 style={{ textAlign: 'center' }}>Loading...</h4>:null}
         height={"70vh"}
       >
-        <div className=" flex justify-between w-[98%] p-2 bg-transparent font-bold sticky top-0 z-10">
-        <div className=" md:w-40">Name</div>
-        <div className=" md:w-40">Sector</div>
-        <div className=" md:w-28 ">Country</div>
-        <div className="md:w-36"># Opportunity</div>
-        <div className="md:w-28">Pipeline Value</div>
-        <div className="md:w-36">Weighted Value</div>
-        <div className="md:w-24">Assigned to</div>
-        <div className="md:w-20">Owner</div>
-        <div className="w-12">Action</div>
-
-      </div>
+      
       {customerByUserId.map((item) => { 
          const currentdate = moment().format("DD/MM/YYYY");
          const date = moment(item.creationDate).format("DD/MM/YYYY");
@@ -170,7 +171,7 @@ function CustomerCardList(props) {
            } `;
                     return (
                         <div>
-                            <div className="flex rounded-xl justify-between mt-4 bg-white h-12 items-center p-1 "
+                            <div className="flex rounded-xl justify-between mt-4 bg-white h-12 items-center p-3 "
                                 // style={{
                                 //     borderBottom: "3px dotted #515050"
                                 // }}
@@ -276,7 +277,7 @@ function CustomerCardList(props) {
              
                                     </div>
                                 </div>
-                                <div class="flex"> 
+                                <div class="flex md:items-center"> 
                                 <div className=" flex font-medium items-center flex-col md:w-20 max-sm:flex-row w-full max-sm:justify-between mb-2 ">
                        
                        {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden">Owner</h4> */}
