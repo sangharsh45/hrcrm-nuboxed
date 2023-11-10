@@ -13,7 +13,12 @@ const initialState = {
     locShiftDrawer:false,
     locationUpdatedrawr:false,
 
-    updatingLocations: false, updatingLocationsError: false
+    updatingLocations: false, updatingLocationsError: false,
+    deletingLocations: false, deletingLocationsError: false,
+
+    fetchingShoftlocs: false,
+    fetchingShoftlocsError: false,
+    shiftLocs:[],
   };
 
   export const locationReducer = (state = initialState, action) => {
@@ -70,7 +75,31 @@ const initialState = {
               };
             case types.UPDATE_LOCATIONS_FAILURE:
               return { ...state, updatingLocations: false, updatingLocationsError: true };         
-                
+               
+              case types.DELETE_LOCATIONS_REQUEST:
+                return { ...state, deletingLocations: true };
+              case types.DELETE_LOCATIONS_SUCCESS:
+                return {
+                  ...state,
+                  deletingLocations: false,
+                  showLocation: state.showLocation.filter(
+                    (item) => item.locationDetailsId !== action.payload
+                  ),
+                };
+              case types.DELETE_LOCATIONS_FAILURE:
+                return { ...state, deletingLocations: false, deletingLocationsError: false };
+
+                case types.GET_SHIFT_LOCATION_REQUEST:
+                  return { ...state, fetchingShoftlocs: true };
+                case types.GET_SHIFT_LOCATION_SUCCESS:
+                  return { ...state, fetchingShoftlocs: false, shiftLocs: action.payload };
+                case types.GET_SHIFT_LOCATION_FAILURE:
+                  return {
+                    ...state,
+                    fetchingShoftlocs: false,
+                    fetchingShoftlocsError: true,
+                  };
+
         default:
     return state;
       }

@@ -6,7 +6,8 @@ import ListAltIcon from "@mui/icons-material/ListAlt";
 import {  StyledTabs } from "../../../../Components/UI/Antd";
 import TabsWrapper1 from "../../../../Components/UI/Layout/TabsWrapper1";
 
-
+const ShftLocsTable =lazy(()=>import("./ShftLocsTable"));
+const ALoctionTable=lazy(()=>import("./ALoctionTable"));
 const TabPane = StyledTabs.TabPane;
 
 class LocationShiftDrawerTab extends Component {
@@ -48,7 +49,7 @@ class LocationShiftDrawerTab extends Component {
             >
               <Suspense fallback={"Loading ..."}>
                 {" "}
-               Shift
+               <ShftLocsTable/>
               </Suspense>
             </TabPane>
             <TabPane
@@ -69,7 +70,7 @@ class LocationShiftDrawerTab extends Component {
             >
               <Suspense fallback={"Loading ..."}>
                 {" "}
-               Alloc
+                <ALoctionTable/>
               </Suspense>
             </TabPane>
           </StyledTabs>

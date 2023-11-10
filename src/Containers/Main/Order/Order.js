@@ -4,10 +4,9 @@ import { bindActionCreators } from "redux";
 import { setOrderViewType } from "./OrderAction";
 import OrderHeader from "./OrderHeader";
 import { BundleLoader } from "../../../Components/Placeholder";
-import AllOrderList from "./AllOrderList";
 
-// const AllOrderTab = lazy(() => import("./AllOrderTab/AllOrderTab"));
-// const AllListTab = lazy(() => import("./AllOrderTab/AllListTab"));
+const AllOrderList = lazy(() => import("./AllOrderList"));
+const OrderTableByUserID = lazy(() => import("./OrderTableByUserID"));
 class Order extends Component {
   constructor(props) {
     super(props);
@@ -32,24 +31,15 @@ class Order extends Component {
           activeKey={activeKey}
           activeKey1={activeKey1}
         />
-        {this.props.viewType === "all" &&
-          <Suspense fallback={<BundleLoader />}>
+
+        <Suspense fallback={<BundleLoader />}>
+          {this.props.viewType === "list" ? (
+            <OrderTableByUserID
+            />
+          ) : this.props.viewType === "all" ? (
             <AllOrderList />
-          </Suspense>
-        }
-        {/* <Suspense fallback={<BundleLoader />}>
-          {this.props.viewType === "dashboard" ? (
-            <AllOrderTab
-              handleTabChange={this.handleTabChange}
-              activeKey={activeKey}
-            />
-          ) : this.props.viewType === "grid" ? (
-            <AllListTab
-              handleTabChange1={this.handleTabChange1}
-              activeKey1={activeKey1}
-            />
           ) : null}
-        </Suspense> */}
+        </Suspense>
       </React.Fragment>
     );
   }

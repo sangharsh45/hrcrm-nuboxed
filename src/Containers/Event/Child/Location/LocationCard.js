@@ -1,7 +1,7 @@
 import React, { useEffect,useState, lazy } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { getlocation, handleLocationShiftDrawer,handleUpdateLocationDrawer } from "./LocationAction";
+import { getlocation, handleLocationShiftDrawer,handleUpdateLocationDrawer,deleteLocation } from "./LocationAction";
 import styled from "styled-components";
 import { Switch, Tooltip } from "antd";
 import { BundleLoader } from "../../../../Components/Placeholder";
@@ -196,7 +196,7 @@ const handleStoredLocations=(locs)=>{
                       <div>
                         <StyledPopconfirm
                           title="Do you want to delete?"
-                          // onConfirm={() => props.deleteLocation(item.leadsId)}
+                          onConfirm={() => props.deleteLocation(item.locationDetailsId)}
                         >
                           <DeleteIcon
                             type="delete"
@@ -241,6 +241,7 @@ const mapDispatchToProps = (dispatch) =>
       getlocation,
       handleLocationShiftDrawer,
       handleUpdateLocationDrawer,
+      deleteLocation
     },
     dispatch
   );

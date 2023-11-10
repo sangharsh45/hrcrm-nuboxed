@@ -2,7 +2,7 @@ import * as types from "./OrderActionTypes";
 import moment from "moment";
 
 const initialState = {
-  viewType: "all",
+  viewType: "list",
 
   addOrderModal: false,
 
@@ -39,11 +39,12 @@ const initialState = {
 
   fetchingAllOrderList: false,
   fetchingAllOrderListError: false,
-  allOrderList: []
+  allOrderList: [],
+
+  fetchingOrderById: false,
+  fetchingOrderByIdError: false,
+  orderShowById:[],
 };
-
-
-
 
 export const orderReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -187,6 +188,21 @@ export const orderReducer = (state = initialState, action) => {
         fetchingAllOrderList: false,
         fetchingAllOrderListError: true,
       };
+      case types.GET_ORDER_BY_ID_REQUEST:
+        return { ...state, fetchingOrderById: true };
+      case types.GET_ORDER_BY_ID_SUCCESS:
+        return {
+          ...state,
+          fetchingOrderById: false,
+          orderShowById: action.payload,
+        };
+      case types.GET_ORDER_BY_ID_FAILURE:
+        return {
+          ...state,
+          fetchingOrderById: false,
+          fetchingOrderByIdError: true,
+        };
+
     default:
       return state;
   }
