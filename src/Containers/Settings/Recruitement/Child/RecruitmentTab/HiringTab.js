@@ -337,6 +337,7 @@ class HiringTab extends Component {
                 <Button
                   type="primary"
                   htmlType="submit"
+                  disabled={!this.state.workflowName} 
                   // disabled={!values.taskChecklistName}
                   loading={addingProcessForOpportunity}
                   onClick={this.handleAddWorkflow}
@@ -358,6 +359,7 @@ class HiringTab extends Component {
                     type="primary"
 
                     htmlType="button"
+                 
                      Loading={addingProcessForOpportunity}
                     onClick={this.toggleInput1}
                   >
