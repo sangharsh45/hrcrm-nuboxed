@@ -12,8 +12,8 @@ import moment from "moment";
 
 function OpenRepairTable(props) {
     useEffect(() => {
-        props.getOpenRepair(props.locationDetailsId, props.userId)
-    }, [props.locationDetailsId, props.userId])
+        props.getOpenRepair(props.locationId, props.userId)
+    }, [props.locationId, props.userId])
 
     const columns = [
         {
@@ -73,7 +73,7 @@ const mapStateToProps = ({ refurbish, auth }) => ({
     userId: auth.userDetails.userId,
     openRepair: refurbish.openRepair,
     fetchingOpenRepairByUser: refurbish.fetchingOpenRepairByUser,
-    locationDetailsId: auth.userDetails.locationDetailsId,
+    locationId: auth.userDetails.locationId,
 });
 
 const mapDispatchToProps = (dispatch) =>

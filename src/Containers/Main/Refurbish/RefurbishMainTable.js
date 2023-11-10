@@ -18,7 +18,7 @@ import {
 import { withRouter } from "react-router";
 import moment from "moment";
 // import ProductionNotesModal from "./ProductionNotesModal";
-// import AssignOrderModal from "./child/ProductionModal/AssignOrderModal";
+import AssignOrderModal from "./AssignOrderModal";
 import { EditFilled, HistoryOutlined, PhoneFilled } from "@ant-design/icons";
 // import TechnicianModal from "./child/ProductionModal/TechnicianModal";
 // import UserPhoneModal from "./child/ProductionModal/UserPhoneModal";
@@ -64,7 +64,7 @@ const EditableCell = ({
 const ProductionOrderList = (props) => {
 
     useEffect(() => {
-        props.getProductionOrderId(props.locationDetailsId)
+        props.getProductionOrderId(props.locationId)
     }, [])
 
     const [rowData, setRowData] = useState({})
@@ -113,7 +113,7 @@ const ProductionOrderList = (props) => {
                         expectedPrice: 0
                     },
                     a.orderPhoneId,
-                    props.locationDetailsId
+                    props.locationId
                 );
                 setEditingKey('');
             } else {
@@ -385,7 +385,11 @@ const ProductionOrderList = (props) => {
                         rowClassName="editable-row"
                     />
                 </Form>)}
-
+            <AssignOrderModal
+                handleAssignOrderById={props.handleAssignOrderById}
+                assignOrderById={props.assignOrderById}
+                rowData={rowData}
+            />
             {/* <UserPhoneModal
                 handlePhoneByTechnician={props.handlePhoneByTechnician}
                 phoneByTechnician={props.phoneByTechnician}
@@ -397,11 +401,7 @@ const ProductionOrderList = (props) => {
                 handleProductionNotesModal={props.handleProductionNotesModal}
 
             />
-            <AssignOrderModal
-                handleAssignOrderById={props.handleAssignOrderById}
-                assignOrderById={props.assignOrderById}
-                rowData={rowData}
-            />
+          
             <AddAssignRepairModal
                 handleAssignRepairModal={props.handleAssignRepairModal}
                 showAssignRepairModal={props.showAssignRepairModal}
@@ -425,14 +425,14 @@ const ProductionOrderList = (props) => {
 
 const mapStateToProps = ({ refurbish, auth }) => ({
     showTechnicianModal: refurbish.showTechnicianModal,
-    locationDetailsId: auth.userDetails.locationDetailsId,
     productionOrder: refurbish.productionOrder,
     addOrderPhone: refurbish.addOrderPhone,
     fetchingProductionOrederId: refurbish.fetchingProductionOrederId,
     productioNoteModal: refurbish.productioNoteModal,
     assignOrderById: refurbish.assignOrderById,
     phoneByTechnician: refurbish.phoneByTechnician,
-    showAssignRepairModal: refurbish.showAssignRepairModal
+    showAssignRepairModal: refurbish.showAssignRepairModal,
+    locationId: auth.userDetails.locationId,
 
 });
 

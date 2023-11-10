@@ -2,7 +2,7 @@ import React, { Component, useState } from "react";
 import { Switch, Checkbox, Popconfirm, message, Select } from "antd";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { updateValidationInReceive, handlereceivePhoneModal } from "../../../InventoryAction"
+import { updateValidationInReceive } from "../../../InventoryAction"
 import moment from "moment";
 
 function ReceiveValidationToggle(props) {

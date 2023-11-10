@@ -1,5 +1,5 @@
 import * as types from "./RefurbishActionTypes";
-import { base_url2 } from "../../../Config/Auth";
+import { base_url2, base_url } from "../../../Config/Auth";
 import axios from "axios";
 import { message } from "antd";
 
@@ -331,12 +331,12 @@ export const handleProductionNotesModal = (modalProps) => (dispatch) => {
   });
 };
 
-export const getProductionUsersById = (locationDetailsId) => (dispatch) => {
+export const getProductionUsersById = (departmentId, locationId) => (dispatch) => {
   dispatch({
     type: types.GET_PRODUCTION_USER_BYID_REQUEST,
   });
   axios
-    .get(`${base_url2}/locationDetails/getUserList/${locationDetailsId}`, {
+    .get(`${base_url}/employee/user-list/drop-down/${departmentId}/${locationId}`, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },

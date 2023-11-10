@@ -9,8 +9,8 @@ import moment from "moment";
 
 function OpenQcTable(props) {
     useEffect(() => {
-        props.getOpenQcByUser(props.locationDetailsId, props.userId)
-    }, [props.locationDetailsId, props.userId])
+        props.getOpenQcByUser(props.locationId, props.userId)
+    }, [props.locationId, props.userId])
 
 
     const columns = [
@@ -69,7 +69,7 @@ const mapStateToProps = ({ refurbish, auth }) => ({
     fetchingOpenQc: refurbish.fetchingOpenQc,
     userId: auth.userDetails.userId,
     openQc: refurbish.openQc,
-    locationDetailsId: auth.userDetails.locationDetailsId,
+    locationId: auth.userDetails.locationId,
 });
 
 const mapDispatchToProps = (dispatch) =>
