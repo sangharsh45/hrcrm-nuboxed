@@ -46,6 +46,8 @@ function onChange(pagination, filters, sorter) {
 }
 
 function InvestorCardList(props) {
+
+  const [hasMore, setHasMore] = useState(true);
   const [page, setPage] = useState(0);
 
   useEffect(() => {
@@ -83,14 +85,13 @@ function InvestorCardList(props) {
   }
 
   const handleLoadMore = () => {
-    setTimeout(() => {
+
       setPage(page + 1);
       props.getInvestorsbyId(
         props.currentUser ? props.currentUser : props.userId,
         page,
         props.filter?props.filter:"creationdate"
       );
-    }, 100);
   };
 
   const {
@@ -105,25 +106,33 @@ function InvestorCardList(props) {
   } = props;
   console.log("ee");
  
-  if (fetchingInvestors) {
-    return <BundleLoader />;
-  }
+  // if (fetchingInvestors) {
+  //   return <BundleLoader />;
+  // }
 
   return (
     <>
-  <InfiniteScroll
+  
+        <OnlyWrapCard style={{backgroundColor:"#E3E8EE"}}>
+        <InfiniteScroll
         dataLength={investorsbyId.length}
         next={handleLoadMore}
-        hasMore={true}
-        // loader={<h4 style={{ textAlign: 'center' }}>Loading...</h4>}
-        endMessage={
-          <p style={{ textAlign: "center" }}>
-            <b>Yay! You have seen it all</b>
-          </p>
-        }
-        height={600}
+        hasMore={hasMore}
+        loader={fetchingInvestors?<h4 style={{ textAlign: 'center' }}>Loading...</h4>:null}
+        height={"70vh"}
       >
-        <OnlyWrapCard>
+        <div className=" flex justify-between w-[98%] p-2 bg-transparent font-bold sticky top-0 z-10">
+        <div className=" md:w-[12rem]">Name</div>
+        <div className=" md:w-40">Sector</div>
+        <div className=" md:w-28 ">Country</div>
+        <div className="md:w-36"># Deals</div>
+        <div className="md:w-28">Pipeline Value</div>
+        <div className="md:w-24">Assigned to</div>
+        <div className="md:w-20">Owner</div>
+        <div className="md:w-20">Source</div>
+        <div className="w-12">Action</div>
+
+      </div>
       {investorsbyId.map((item) => { 
          const currentdate = moment().format("DD/MM/YYYY");
          const date = moment(item.creationDate).format("DD/MM/YYYY");
@@ -145,12 +154,13 @@ function InvestorCardList(props) {
            } `;
                     return (
                         <div>
-                            <div className="flex justify-between mt-1 max-sm:flex-col"
-                                style={{
-                                    borderBottom: "3px dotted #515050"
-                                }}>
+                            <div className="flex rounded-xl justify-between mt-4 bg-white h-12 items-center p-1"
+                                // style={{
+                                //     borderBottom: "3px dotted #515050"
+                                // }}
+                                >
                                      <div class="flex">
-                                <div className=" flex font-medium  md:w-60 max-sm:flex-row w-full ">
+                                <div className=" flex font-medium  md:w-[12rem] max-sm:flex-row w-full ">
                                 <div>
 <SubTitle>
             <MultiAvatar
@@ -168,9 +178,9 @@ function InvestorCardList(props) {
                                    
                                         <Tooltip>
                                         <div class=" flex max-sm:w-full  flex-row md:flex-col">
-                                            <h4 class=" text-xs text-cardBody font-poppins max-sm:hidden">
+                                            {/* <h4 class=" text-xs text-cardBody font-poppins max-sm:hidden">
                                             Name
-                                            </h4>
+                                            </h4> */}
                                             <h4 class=" text-sm text-blue-500 text-cardBody font-poppins font-semibold cursor-pointer">
                                                 
          <Link
@@ -194,9 +204,9 @@ function InvestorCardList(props) {
                               
                                 </div>
 
-                                <div className=" flex font-medium flex-col  md:w-52 max-sm:flex-row w-full max-sm:justify-between ">
+                                <div className=" flex font-medium flex-col  md:w-40 max-sm:flex-row w-full max-sm:justify-between ">
                            
-                                    <h4 class=" text-xs text-cardBody font-poppins max-sm:hidden"> Sector </h4>
+                                    {/* <h4 class=" text-xs text-cardBody font-poppins max-sm:hidden"> Sector </h4> */}
                                     <h4 class=" text-sm text-cardBody font-poppins">   
                                     {item.sector}
                                     </h4>
@@ -205,7 +215,7 @@ function InvestorCardList(props) {
                                 <div className=" flex font-medium flex-col md:w-36 max-sm:flex-row w-full max-sm:justify-between ">
                                   
 
-                                    <h4 class=" text-xs text-cardBody font-poppins max-sm:hidden">Country</h4>
+                                    {/* <h4 class=" text-xs text-cardBody font-poppins max-sm:hidden">Country</h4> */}
                                     <h4 class=" text-sm text-cardBody font-poppins">
                                     <ReactCountryFlag
                           countryCode={item.countryAlpha2Code}
@@ -222,7 +232,7 @@ function InvestorCardList(props) {
                                 </div>
                                 <div class="flex">
                                 <div className=" flex font-medium flex-col md:w-36 max-sm:flex-row w-full max-sm:justify-between ">
-                                    <h4 class=" text-xs text-cardBody font-poppins max-sm:hidden"># Deals</h4>
+                                    {/* <h4 class=" text-xs text-cardBody font-poppins max-sm:hidden"># Deals</h4> */}
 
                                     <div class=" text-sm justify-center text-cardBody font-poppins">
                                     {item.oppNo}
@@ -230,7 +240,7 @@ function InvestorCardList(props) {
                                 </div>
                              
                                 <div className=" flex font-medium flex-col md:w-36 max-sm:flex-row w-full max-sm:justify-between ">
-                                    <h4 class=" text-xs text-cardBody font-poppins max-sm:hidden">Pipeline Value</h4>
+                                    {/* <h4 class=" text-xs text-cardBody font-poppins max-sm:hidden">Pipeline Value</h4> */}
 
                                     <div class=" text-sm text-cardBody font-poppins text-center">
                                     {item.totalProposalValue}
@@ -238,7 +248,7 @@ function InvestorCardList(props) {
                                     </div>
                                 </div>
                                 <div className=" flex font-medium flex-col md:w-32 max-sm:flex-row w-full max-sm:justify-between ">
-                                    <h4 class=" text-xs text-cardBody font-poppins max-sm:hidden">Assigned to</h4>
+                                    {/* <h4 class=" text-xs text-cardBody font-poppins max-sm:hidden">Assigned to</h4> */}
 
                                     <div class=" text-sm text-cardBody font-poppins">
                                     
@@ -258,7 +268,7 @@ function InvestorCardList(props) {
                                 </div>
                                 <div className=" flex font-medium flex-col md:w-20 max-sm:flex-row w-full mb-1 max-sm:justify-between ">
                        
-                       <h4 class=" text-xs text-cardBody font-poppins max-sm:hidden">Owner</h4>
+                       {/* <h4 class=" text-xs text-cardBody font-poppins max-sm:hidden">Owner</h4> */}
 
                        <span>
               <MultiAvatar
@@ -273,7 +283,7 @@ function InvestorCardList(props) {
                    </div>
                    <div class="flex max-sm:justify-between">
                    <div className=" flex font-medium flex-col md:w-36 max-sm:flex-row w-full max-sm:justify-between ">
-                                    <h4 class=" text-xs text-cardBody font-poppins max-sm:hidden">Source</h4>
+                                    {/* <h4 class=" text-xs text-cardBody font-poppins max-sm:hidden">Source</h4> */}
 
                                     <div class=" text-sm text-cardBody font-poppins">
                                     {item.source}
@@ -388,8 +398,9 @@ function InvestorCardList(props) {
 
                     )
                 })}
-      </OnlyWrapCard>
-      </InfiniteScroll>
+     </InfiniteScroll> 
+     </OnlyWrapCard>
+     
 
       <UpdateInvestorModal
         RowData={RowData}

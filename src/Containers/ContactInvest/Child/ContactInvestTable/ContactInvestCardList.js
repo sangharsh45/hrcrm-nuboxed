@@ -43,6 +43,8 @@ const Option = Select;
 
 
 function ContactInvestCardList(props) {
+
+  const [hasMore, setHasMore] = useState(true);
   const [pageNo, setPage] = useState(0);
   useEffect(() => {
     window.addEventListener('error', e => {
@@ -77,10 +79,8 @@ function ContactInvestCardList(props) {
   }
 
   const handleLoadMore = () => {
-    setTimeout(() => {
             setPage(pageNo + 1);
-            props.getContactInvestByUserId(props.currentUser?props.currentUser:props.userId,pageNo);
-    }, 100);
+        props.getContactInvestByUserId(props.currentUser?props.currentUser:props.userId,pageNo);
   
   }
   const {
@@ -98,25 +98,34 @@ function ContactInvestCardList(props) {
     handleContactInvestNotesDrawerModal
   } = props;
 
- if(fetchingContactsInvest){
-  return <BundleLoader/>
- }
+//  if(fetchingContactsInvest){
+//   return <BundleLoader/>
+//  }
 
   return (
     <>
       
-      <InfiniteScroll
+
+          <OnlyWrapCard style={{backgroundColor:"#E3E8EE"}}>
+          <InfiniteScroll
         dataLength={contactByUserId.length}
         next={handleLoadMore}
-        hasMore={true}
-        endMessage={
-          <p style={{ textAlign: "center" }}>
-            <b>Yay! You have seen it all</b>
-          </p>
-        }
-        height={600}
+        hasMore={hasMore}
+        loader={fetchingContactsInvest?<h4 style={{ textAlign: 'center' }}>Loading...</h4>:null}
+        height={"70vh"}
       >
-          <OnlyWrapCard>
+         <div className=" flex justify-between w-[98%] p-2 bg-transparent font-bold sticky top-0 z-10">
+        <div className=" md:w-[12rem]">Name</div>
+        <div className=" md:w-40">Company</div>
+        <div className=" md:w-28 ">Designation</div>
+        <div className="md:w-36">Department</div>
+        <div className="md:w-28"># Deals</div>
+        <div className="md:w-28">Deal Value</div>
+        <div className="md:w-20">Source</div>
+        <div className="md:w-20">Owner</div>
+        <div className="w-12">Action</div>
+
+      </div>
       {filterData.map((item) => { 
         
          const currentdate = moment().format("DD/MM/YYYY");
@@ -141,10 +150,11 @@ function ContactInvestCardList(props) {
             item.address[0].postalCode} `;
                     return (
                         <div>
-                            <div className="flex justify-between mt-1 max-sm:flex-col"
-                                style={{
-                                    borderBottom: "3px dotted #515050"
-                                }}>
+                            <div className="flex rounded-xl justify-between mt-4 bg-white h-12 items-center p-1"
+                                // style={{
+                                //     borderBottom: "3px dotted #515050"
+                                // }}
+                                >
                                      <div class="flex">
                                 <div className=" flex font-medium flex-col md:w-52 max-sm:flex-row w-full max-sm:justify-between  ">
 <div className="flex max-sm:w-full"> 
@@ -162,9 +172,9 @@ function ContactInvestCardList(props) {
           <div class="max-sm:w-full md:w-40">
                                         <Tooltip>
                                           <div class=" flex max-sm:w-full justify-between flex-row md:flex-col">
-                                            <div class="text-[0.875rem] text-cardBody font-poppins max-sm:hidden">
+                                            {/* <div class="text-[0.875rem] text-cardBody font-poppins max-sm:hidden">
                                             Name
-                                            </div>
+                                            </div> */}
                                             <div class="text-[0.82rem] text-blue-500 text-cardBody font-poppins font-semibold  cursor-pointer">
                                                 
          <Link
@@ -189,13 +199,13 @@ function ContactInvestCardList(props) {
                                         </div>
                                 </div>
                                 <div className="  flex max-sm:w-full max-sm:justify-between  flex-row md:flex-col w-52">
-                                    <div class=" text-[0.875rem] text-cardBody font-[0.875rem] font-poppins max-sm:hidden"> Company </div>
+                                    {/* <div class=" text-[0.875rem] text-cardBody font-[0.875rem] font-poppins max-sm:hidden"> Company </div> */}
                                     <div class=" text-[0.82rem] text-cardBody font-poppins">   
                                     {item.tagWithCompany}
                                     </div>
                                 </div>
                                 <div className=" flex max-sm:w-full max-sm:justify-between  flex-row md:flex-col w-40 ">
-                                    <div class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden">Designation</div>
+                                    {/* <div class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden">Designation</div> */}
                                     <div class="text-[0.82rem] text-cardBody font-poppins">
                                          {item.designation}
                                     </div>
@@ -203,27 +213,27 @@ function ContactInvestCardList(props) {
                                 </div>
                                 <div class="flex">
                                 <div className=" flex max-sm:w-full max-sm:justify-between  flex-row md:flex-col w-40">
-                                  <div class="text-[0.875rem] text-cardBody font-poppins max-sm:hidden">Department</div>
+                                  {/* <div class="text-[0.875rem] text-cardBody font-poppins max-sm:hidden">Department</div> */}
                                   <div class="text-[0.82rem] text-cardBody font-poppins">
                                        {item.department}
                                   </div>
                               </div>
                                 <div className=" flex font-medium flex-col md:w-32 max-sm:flex-row w-full  ">
-                                    <div class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden"># Deals</div>
+                                    {/* <div class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden"># Deals</div> */}
 
                                     <div class=" text-[0.82rem] text-cardBody font-poppins">
                                      {item.oppNo}
                                     </div>
                                 </div>
                                 <div className=" flex font-medium flex-col md:w-32 max-sm:flex-row w-full  ">
-                                    <div class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden">Deal Value</div>
+                                    {/* <div class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden">Deal Value</div> */}
 
                                     <div class=" text-[0.82rem] text-cardBody font-poppins">
                                      {item.totalProposalValue}
                                     </div>
                                 </div>
                                 <div className="flex font-medium max-sm:justify-between flex-col md:w-32 max-sm:flex-row w-full ">
-                                    <div class="text-[0.875rem] text-cardBody font-poppins max-sm:hidden"> Source</div>
+                                    {/* <div class="text-[0.875rem] text-cardBody font-poppins max-sm:hidden"> Source</div> */}
 
                                     <div class="text-[0.82rem] text-cardBody font-poppins">
 
@@ -233,7 +243,7 @@ function ContactInvestCardList(props) {
                                 <div class="flex">
                                 <div className="flex font-medium  flex-col md:w-20  max-sm:flex-row w-full max-sm:justify-between">
                        
-                       <div class="text-[0.875rem] text-cardBody font-poppins max-sm:hidden">Owner</div>
+                       {/* <div class="text-[0.875rem] text-cardBody font-poppins max-sm:hidden">Owner</div> */}
 
                    
               <Tooltip title={item.ownerName}>
@@ -369,8 +379,9 @@ function ContactInvestCardList(props) {
 
                     )
                 })}
+       </InfiniteScroll>
       </OnlyWrapCard>
-      </InfiniteScroll>
+     
 
       <UpdateContactInvestModal
         contactiData={contactiData}

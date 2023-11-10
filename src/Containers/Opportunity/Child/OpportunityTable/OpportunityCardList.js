@@ -52,6 +52,7 @@ const Option =Select;
 
 function OpportunityCardList(props) {
   const { item } = props;
+  const [hasMore, setHasMore] = useState(true);
   const [page, setPage] = useState(0);
   useEffect(() => {
     if(props.role==="USER"&&user.department==="Recruiter"){
@@ -64,22 +65,14 @@ function OpportunityCardList(props) {
   }, []);
 
   const handleLoadMore = () => {
-    setTimeout(() => {
-     
-        if(props.role==="USER"&&user.department==="Recruiter"){
-          props.getRecruiterList(props.recruiterId);     
-        }else{
-          props.getOpportunityListByUserId(props.userId,page);
           setPage(page + 1);
-        } 
-        props.getAllSalesList();  
-    }, 100);
+          props.getOpportunityListByUserId(props.userId,page);   
+};
   
-  }
+  
 
 
   const [currentOpportunityId, setCurrentOpportunityId] = useState("");
-;
   const [currentItem, setCurrentItem] = useState("");
 
 
@@ -126,10 +119,10 @@ function OpportunityCardList(props) {
     history,
     fetchingOpportunity
   } = props;
-  if (fetchingOpportunity) {
-    return <BundleLoader />;
-  }
-console.log("currentOpportunityId",currentOpportunityId)
+  // if (fetchingOpportunity) {
+  //   return <BundleLoader />;
+  // }
+
   return (
     <>
     
@@ -137,14 +130,9 @@ console.log("currentOpportunityId",currentOpportunityId)
 <InfiniteScroll
                 dataLength={opportunityByUserId.length}
                 next={handleLoadMore}
-                hasMore={true}
-                // loader={<h4 style={{ textAlign: 'center' }}>Loading...</h4>}
-                endMessage={
-                    <p style={{ textAlign: 'center' }}>
-                        <b>Yay! You have seen it all</b>
-                    </p>
-                }
-                height={"87vh"}
+                hasMore={hasMore}
+                loader={fetchingOpportunity?<h4 style={{ textAlign: 'center' }}>Loading...</h4> :null}
+                height={"70vh"}
             >
 
     <CardWrapper>

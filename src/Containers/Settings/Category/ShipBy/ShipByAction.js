@@ -12,7 +12,7 @@ import { message } from "antd"
       type: types.GET_SHIPBY_REQUEST,
     });
     axios
-    .get(`${base_url}/shipBy/organisation/${orgId}`, {
+    .get(`${base_url}/shipBy/All/${orgId}`, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },

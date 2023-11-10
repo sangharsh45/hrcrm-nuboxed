@@ -42,6 +42,7 @@ import UpdateOpportunityModal from "../UpdateOpportunity/UpdateOpportunityModal"
 import APIFailed from "../../../../Helpers/ErrorBoundary/APIFailed";
 
 function OpportunityCloseCard(props) {
+  const [hasMore, setHasMore] = useState(true);
     const [page, setPage] = useState(0);
     useEffect(() => {
       if (props.role === "USER" && user.department === "Recruiter") {
@@ -54,27 +55,20 @@ function OpportunityCloseCard(props) {
     }, []);
   
     const handleLoadMore = () => {
-      setTimeout(() => {
-        if (props.role === "USER" && user.department === "Recruiter") {
-          props.getRecruiterList(props.recruiterId);
-        } else {
-        }
-        props.getAllSalesList();
+      setPage(page + 1);
         props.getCloseOpportunity(props.userId, page);
-        setPage(page + 1);
-      }, 100);
     };
     const [currentOpportunityId, setCurrentOpportunityId] = useState("");
     function handleSetCurrentOpportunityId(opportunityId, opportunityName) {
         setCurrentOpportunityId(opportunityId, opportunityName);
-        console.log("opp", opportunityId);
+        
       }
     const {
         user,
         closeOpportunity,
         handleUpdateOpportunityModal,
         updateOpportunityModal,
-     
+        fetchingCloseOpportunity
       } = props;
       return (    
   <>
@@ -82,14 +76,9 @@ function OpportunityCloseCard(props) {
       <InfiniteScroll
         dataLength={closeOpportunity.length}
         next={handleLoadMore}
-        hasMore={true}
-        // loader={<h4 style={{ textAlign: 'center' }}>Loading...</h4>}
-        endMessage={
-          <p style={{ textAlign: "center" }}>
-            <b>Yay! You have seen it all</b>
-          </p>
-        }
-        height={600}
+        hasMore={hasMore}
+        loader={fetchingCloseOpportunity?<h4 style={{ textAlign: 'center' }}>Loading...</h4> :null}
+        height={"70vh"}
       >
  <CardWrapper>      
               {closeOpportunity.map((item) => {

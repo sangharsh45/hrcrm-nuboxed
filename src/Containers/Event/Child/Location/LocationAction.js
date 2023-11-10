@@ -106,3 +106,28 @@ export const setLocationViewType = (viewType) => (dispatch) => {
         });
       });
   };
+  // export const deleteLocation = (locationDetailsId) => (dispatch) => {
+  //   dispatch({
+  //     type: types.DELETE_LEADS_DATA_REQUEST,
+  //   });
+  //   axios
+  //     .delete(`${base_url}/locationDetails/deleteLocationDetails/${locationDetailsId}`, {
+  //       headers: {
+  //         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+  //       },
+  //     })
+  //     .then((res) => {
+  //       console.log(res);
+  //       dispatch({
+  //         type: types.DELETE_LEADS_DATA_SUCCESS,
+  //         payload: leadsId,
+  //       });
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //       dispatch({
+  //         type: types.DELETE_LEADS_DATA_FAILURE,
+  //         payload: err,
+  //       });
+  //     });
+  // };
