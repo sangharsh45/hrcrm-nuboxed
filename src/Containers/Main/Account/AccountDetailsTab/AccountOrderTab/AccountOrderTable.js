@@ -3,20 +3,65 @@ import { StyledTable } from '../../../../../Components/UI/Antd';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import moment from 'moment/moment';
+import PaidIcon from '@mui/icons-material/Paid';
+import FeedbackIcon from '@mui/icons-material/Feedback';
+import NoteAltIcon from "@mui/icons-material/NoteAlt";
+import StarBorderIcon from '@mui/icons-material/StarBorder';
+import EventRepeatIcon from '@mui/icons-material/EventRepeat';
+import BorderColorIcon from "@mui/icons-material/BorderColor";
 import {
     getDistributorOrderByDistributorId,
     handleInventoryLocationInOrder,
     handleOrderDetailsModal,
+    handleNotesModalInOrder,
+    handlePaidModal,
     handleStatusOfOrder
 } from "../../AccountAction"
-import { Button, Tooltip } from 'antd';
+import { Button, Popconfirm, Tooltip,Typography,Input,Form } from 'antd';
 import AddLocationInOrder from './AddLocationInOrder';
 import AccountOrderDetailsModal from './AccountOrderDetailsModal';
 import StatusOfOrderModal from './StatusOfOrderModal';
 import { StepForwardFilled } from '@ant-design/icons';
+import AddNotesOrderModal from './AddNotesOrderModal';
+import PaidButtonModal from './PaidButtonModal';
+const EditableCell = ({
+    editing,
+    dataIndex,
+    title,
+    inputType,
+    record,
+    index,
+    children,
+    ...restProps
+  }) => {
+    const inputNode = <Input />;
+    return (
+      <td {...restProps}>
+        {editing ? (
+          <Form.Item
+            name={dataIndex}
+            style={{
+              margin: 0,
+            }}
+            rules={[
+              {
+                required: true,
+                message: `Please Input ${title}!`,
+              },
+            ]}
+          >
+            {inputNode}
+          </Form.Item>
+        ) : (
+          children
+        )}
+      </td>
+    );
+  };
 
 const AccountOrderTable = (props) => {
-
+    const [editingKey, setEditingKey] = useState('');
+    const [form] = Form.useForm();
     useEffect(() => {
         props.getDistributorOrderByDistributorId(props.distributorId)
     }, [])
@@ -25,7 +70,19 @@ const AccountOrderTable = (props) => {
     function handleSetParticularOrderData(item) {
         setParticularRowData(item);
     }
+    const isEditing = (record) => record.orderId === editingKey;
 
+    const edit = (record) => {
+        form.setFieldsValue({
+          offerPrice: "",
+          ...record,
+        });
+        setEditingKey(record.orderId);
+      };
+    
+      const cancel = () => {
+        setEditingKey('');
+      };
     const columns = [
         {
             width: "1%"
@@ -171,55 +228,57 @@ const AccountOrderTable = (props) => {
             editable: true,
             width: "12%",
         },
-        // {
-        //     title: '',
-        //     width: "7%",
-        //     dataIndex: 'operation',
-        //     render: (_, record) => {
-        //         const editable = isEditing(record);
-        //         return editable ? (
-        //             <span>
-        //                 <Typography.Link
-        //                     //   onClick={() =>
-        //                     //     save(record.orderId)
+        {
+            title: '',
+            width: "7%",
+            dataIndex: 'operation',
+            render: (_, record) => {
+                const editable = isEditing(record);
+                return editable ? (
+                    <span>
+                        <Typography.Link
+                            //   onClick={() =>
+                            //     save(record.orderId)
 
-        //                     //   }
-        //                     style={{
-        //                         marginRight: 8,
-        //                     }}
-        //                 >
-        //                     Save
-        //                 </Typography.Link>
-        //                 <Popconfirm title="Sure to cancel?" onConfirm={cancel}>
-        //                     <a>Cancel</a>
-        //                 </Popconfirm>
-        //             </span>
-        //         ) : record.qcStartInd === 3 ?
-        //             (<Typography.Link disabled={editingKey !== ''} onClick={() => edit(record)}>
-        //                 <FontAwesomeIcon icon={solid('pen-to-square')} />
-        //             </Typography.Link>)
-        //             : null
-        //     },
-        // },
-        // {
-        //     title: "",
-        //     width: "3%",
-        //     render: (name, item, i) => {
-        //         //debugger
-        //         return (
-        //             <Tooltip title="Notes">
-        //                 <FontAwesomeIcon icon={solid('sticky-note')}
-        //                     style={{ cursor: "pointer", fontSize: "13px" }}
-        //                 //   onClick={() => {
-        //                 //     handleSetParticularOrderData(item);
-        //                 //     props.handleNotesModalInOrder(true);
-        //                 //   }}
-        //                 />
+                            //   }
+                            style={{
+                                marginRight: 8,
+                            }}
+                        >
+                            Save
+                        </Typography.Link>
+                        <Popconfirm title="Sure to cancel?" onConfirm={cancel}>
+                            <a>Cancel</a>
+                        </Popconfirm>
+                    </span>
+                ) : record.qcStartInd === 3 ?
+                    (<Typography.Link disabled={editingKey !== ''} onClick={() => edit(record)}>
+                        <BorderColorIcon 
+                          style={{ cursor: "pointer", fontSize: "1rem" }} />
+                    </Typography.Link>)
+                    : null
+            },
+        },
+        {
+            title: "",
+            width: "3%",
+            render: (name, item, i) => {
+                //debugger
+                return (
+                    <Tooltip title="Notes">
+                        <NoteAltIcon 
+                            style={{ cursor: "pointer", fontSize: "1rem" }}
+                          onClick={() => {
+                         
+                            props.handleNotesModalInOrder(true);
+                            handleSetParticularOrderData(item);
+                          }}
+                        />
 
-        //             </Tooltip>
-        //         );
-        //     },
-        // },
+                    </Tooltip>
+                );
+            },
+        },
         {
             title: "",
             width: "3%",
@@ -228,7 +287,8 @@ const AccountOrderTable = (props) => {
                     <>
                         {/* <FontAwesomeIcon icon="fas fa-stream" /> */}
                         <Tooltip title="Status">
-                            <StepForwardFilled
+                            <EventRepeatIcon
+                              style={{ cursor: "pointer",fontSize: "1rem", }}
                                 onClick={() => {
                                     props.handleStatusOfOrder(true);
                                     handleSetParticularOrderData(item);
@@ -239,25 +299,26 @@ const AccountOrderTable = (props) => {
                 )
             }
         },
-        // {
-        //     title: "",
-        //     width: "3%",
-        //     render: (text, item) => {
-        //         return (
-        //             <>
-        //                 <Tooltip title="Payment">
-        //                     <EuroCircleFilled
-        //                     // onClick={() => {
-        //                     //   props.handlePaidModal(true);
-        //                     //   handleSetParticularOrderData(item);
-        //                     // }}
-        //                     // style={{ color: "blue" }}
-        //                     />
-        //                 </Tooltip>
-        //             </>
-        //         )
-        //     }
-        // },
+         {
+            title: "",
+            width: "3%",
+            render: (text, item) => {
+                return (
+                    <>
+                        <Tooltip title="Collection">
+                            <PaidIcon
+                               style={{ cursor: "pointer",fontSize: "1rem", }}
+                            onClick={() => {
+                              props.handlePaidModal(true);
+                              handleSetParticularOrderData(item);
+                            }}
+                            // style={{ color: "blue" }}
+                            />
+                        </Tooltip>
+                    </>
+                )
+            }
+        },
         {
             title: "",
             width: "16%",
@@ -284,30 +345,32 @@ const AccountOrderTable = (props) => {
                 );
             },
         },
-        // {
-        //     width: "5%",
-        //     render: (text, item) => {
-        //         return (
-        //             <>
-        //                 <Tooltip title="Rating">
-        //                     <StarTwoTone />
-        //                 </Tooltip>
-        //             </>
-        //         )
-        //     }
-        // },
-        // {
-        //     width: "5%",
-        //     render: (text, item) => {
-        //         return (
-        //             <>
-        //                 <Tooltip title="Feedback">
-        //                     <FontAwesomeIcon icon={solid('sticky-note')} />
-        //                 </Tooltip>
-        //             </>
-        //         )
-        //     }
-        // },
+        {
+            width: "5%",
+            render: (text, item) => {
+                return (
+                    <>
+                        <Tooltip title="Rating">
+                            <StarBorderIcon 
+                                style={{ cursor: "pointer",fontSize: "1rem", }}/>
+                        </Tooltip>
+                    </>
+                )
+            }
+        },
+        {
+            width: "5%",
+            render: (text, item) => {
+                return (
+                    <>
+                        <Tooltip title="Feedback">
+                            <FeedbackIcon 
+                                style={{ cursor: "pointer",fontSize: "1rem", }} />
+                        </Tooltip>
+                    </>
+                )
+            }
+        },
     ];
     return (
         <>
@@ -321,6 +384,11 @@ const AccountOrderTable = (props) => {
                 addInventoryInOrder={props.addInventoryInOrder}
                 handleInventoryLocationInOrder={props.handleInventoryLocationInOrder}
             />
+              <AddNotesOrderModal
+        particularRowData={particularRowData}
+        addNotesInOrder={props.addNotesInOrder}
+        handleNotesModalInOrder={props.handleNotesModalInOrder}
+      />
             <AccountOrderDetailsModal
                 particularRowData={particularRowData}
                 handleOrderDetailsModal={props.handleOrderDetailsModal}
@@ -330,20 +398,29 @@ const AccountOrderTable = (props) => {
                 addStatusOfOrder={props.addStatusOfOrder}
                 particularRowData={particularRowData}
             />
+              <PaidButtonModal
+        addPaidButtonModal={props.addPaidButtonModal}
+        handlePaidModal={props.handlePaidModal}
+        particularRowData={particularRowData}
+      />
         </>
     )
 }
 const mapStateToProps = ({ distributor }) => ({
     distributorOrder: distributor.distributorOrder,
+    addNotesInOrder:distributor.addNotesInOrder,
     addInventoryInOrder: distributor.addInventoryInOrder,
     addOrderDetailsModal: distributor.addOrderDetailsModal,
-    addStatusOfOrder: distributor.addStatusOfOrder
+    addStatusOfOrder: distributor.addStatusOfOrder,
+    addPaidButtonModal:distributor.addPaidButtonModal,
 });
 const mapDispatchToProps = dispatch => bindActionCreators({
     getDistributorOrderByDistributorId,
     handleInventoryLocationInOrder,
     handleOrderDetailsModal,
-    handleStatusOfOrder
+    handleStatusOfOrder,
+    handlePaidModal,
+    handleNotesModalInOrder
 }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(AccountOrderTable);

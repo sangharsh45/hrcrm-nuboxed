@@ -215,12 +215,12 @@ class NoteForm extends Component {
       phoneId
     } = this.props;
     const { editorState, placeholder } = this.state;
-    const departmentOption = this.props.functionById.map((item) => {
-      return {
-        label: item.functionName,
-        value: item.functionId
-      }
-    })
+    // const departmentOption = this.props.functionById.map((item) => {
+    //   return {
+    //     label: item.functionName,
+    //     value: item.functionId
+    //   }
+    // })
     return (
       <>
         <Formik
@@ -316,7 +316,7 @@ const mapStateToProps = ({ auth, user, leads }) => ({
   user: auth.userDetails,
   fetchingNotesListByLeadsId: leads.fetchingNotesListByLeadsId,
   userId: auth.userDetails.userId,
-  functionById: user.functionById,
+  // functionById: user.functionById,
 });
 
 const mapDispatchToProps = (dispatch) =>
