@@ -304,6 +304,52 @@ function NavMenu(props) {
         {user.opportunityAccessInd === true && user.crmInd === true && (
           <Menu.Item key="/opportunity" style={{ height: "27px", paddingLeft: "1rem" }}>
             <Link to="/opportunity">
+            <LightbulbIcon
+                style={{ fontSize: "large" }}
+              />
+              <span class="text-white text-ls ml-1">
+
+                {translatedMenuItems[7]}
+                &nbsp;&nbsp;&nbsp;
+                <Badge
+                  count={props.opportunityRecord.opportunityList}
+                  overflowCount={999}
+                ></Badge>
+              </span>
+            </Link>
+          </Menu.Item>
+        )}
+
+        {/* Contact */}
+        {user.contactAccessInd === true && user.crmInd === true && (
+          <Menu.Item key="/contact" style={{ height: "27px", paddingLeft: "1rem" }}>
+            <Link to="/contact">
+
+              <ContactsIcon
+                style={{ fontSize: "large" }}
+              />
+              <span class="text-white text-ls ml-1">
+
+                {translatedMenuItems[8]}
+                &nbsp;&nbsp;&nbsp;
+                <Badge
+                  count={props.opportunityRecord.customerContact}
+                  overflowCount={999}
+                ></Badge>
+              </span>
+            </Link>
+          </Menu.Item>
+        )}
+
+        {/* Customer */}
+        {user.customerAccessInd === true && user.crmInd === true && (
+          <Menu.Item key="/customer" style={{ height: "27px", paddingLeft: "1rem" }}>
+            <Link to="/customer">
+
+              <ApartmentIcon
+
+                style={{ fontSize: "large" }}
+              />
               <span class="text-white text-ls ml-1">
 
                 {translatedMenuItems[9]}
