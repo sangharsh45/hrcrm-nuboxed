@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { StyledTable } from '../../../Components/UI/Antd'
-// import { getTaggedBrandById } from "./SuppliesAction"
+import { getTaggedBrandById } from "./SuppliesAction"
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
 const TaggedBrandTable = (props) => {
-    // useEffect(() => {
-    //     props.getTaggedBrandById(props.particularDiscountData.suppliesId)
-    // }, [])
+    useEffect(() => {
+        props.getTaggedBrandById(props.particularDiscountData.suppliesId)
+    }, [])
 
     const columns = [
         {
@@ -34,13 +34,13 @@ const TaggedBrandTable = (props) => {
     )
 }
 const mapStateToProps = ({ auth, brandmodel, supplies }) => ({
-    // taggedBrand: supplies.taggedBrand
+    taggedBrand: supplies.taggedBrand
 });
 
 const mapDispatchToProps = (dispatch) =>
     bindActionCreators(
         {
-            // getTaggedBrandById
+            getTaggedBrandById
         },
         dispatch
     );
