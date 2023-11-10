@@ -1,7 +1,8 @@
 import * as types from "./LocationActionType";
 import axios from "axios";
 import dayjs from "dayjs";
-import { base_url } from "../../../../Config/Auth";
+import { base_url,base_url2 } from "../../../../Config/Auth";
+import Swal from 'sweetalert2';
 
 export const handleLocationModal = (modalProps) => (dispatch) => {
   dispatch({ type: types.HANDLE_LOCATION_MODAL, payload: modalProps });
@@ -106,28 +107,61 @@ export const setLocationViewType = (viewType) => (dispatch) => {
         });
       });
   };
-  // export const deleteLocation = (locationDetailsId) => (dispatch) => {
-  //   dispatch({
-  //     type: types.DELETE_LEADS_DATA_REQUEST,
-  //   });
-  //   axios
-  //     .delete(`${base_url}/locationDetails/deleteLocationDetails/${locationDetailsId}`, {
-  //       headers: {
-  //         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
-  //       },
-  //     })
-  //     .then((res) => {
-  //       console.log(res);
-  //       dispatch({
-  //         type: types.DELETE_LEADS_DATA_SUCCESS,
-  //         payload: leadsId,
-  //       });
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //       dispatch({
-  //         type: types.DELETE_LEADS_DATA_FAILURE,
-  //         payload: err,
-  //       });
-  //     });
-  // };
+  export const deleteLocation = (locationDetailsId) => (dispatch) => {
+    dispatch({
+      type: types.DELETE_LOCATIONS_REQUEST,
+    });
+    axios
+      .delete(`${base_url}/locationDetails/deleteLocationDetails/${locationDetailsId}`, {
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+        },
+      })
+      .then((res) => {
+        console.log(res);
+        dispatch({
+          type: types.DELETE_LOCATIONS_SUCCESS,
+          payload: locationDetailsId,
+        });
+        Swal.fire({
+          icon: 'success',
+          title: 'Deleted Successfully',
+          showConfirmButton: false,
+          timer: 4000
+        })
+      })
+      .catch((err) => {
+        console.log(err);
+        dispatch({
+          type: types.DELETE_LOCATIONS_FAILURE,
+          payload: err,
+        });
+      });
+  };
+
+  export const getShiftlocs = () => (dispatch) => {
+    dispatch({
+      type: types.GET_SHIFT_LOCATION_REQUEST,
+    });
+    axios
+      .get(`${base_url2}/shift/all-shift`,
+      {
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+        },
+      })
+      .then((res) => {
+       
+        dispatch({
+          type: types.GET_SHIFT_LOCATION_SUCCESS,
+          payload: res.data,
+        });
+      })
+      .catch((err) => {
+        dispatch({
+          type: types.GET_SHIFT_LOCATION_FAILURE,
+          payload: err,
+        });
+      });
+  };
+  

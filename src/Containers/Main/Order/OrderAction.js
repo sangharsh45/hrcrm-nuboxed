@@ -199,3 +199,29 @@ export const getAllOrderList = () => (dispatch) => {
       });
     });
 };
+
+export const getOrderById = (userId) => (dispatch) => {
+  dispatch({
+    type: types.GET_ORDER_BY_ID_REQUEST,
+  });
+  axios
+    .get(`${base_url2}/phoneOrder/phoneOrders/${userId}`,{
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.GET_ORDER_BY_ID_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.GET_ORDER_BY_ID_FAILURE,
+        payload: err,
+      });
+    });
+};
