@@ -1,29 +1,31 @@
 import React, { lazy, Suspense, Component } from "react";
 import { BundleLoader } from "../../../../../Components/Placeholder";
 import { StyledDrawer, StyledModal } from "../../../../../Components/UI/Antd";
-const StatusOfOrder = lazy(() => import("./StatusOfOrder"));
-class StatusOfOrderModal extends Component {
+import OrderPaymentTable from "./OrderPaymentTable";
+const DistributorPaidForm = lazy(() => import("./DistributorPaidForm"));
+class PaidButtonModal extends Component {
     render() {
         const {
-            addStatusOfOrder,
-            handleStatusOfOrder,
+            addPaidButtonModal,
+            handlePaidModal,
             ...formProps
         } = this.props;
         return (
             <>
                 <StyledDrawer
-                    title="Status of Order"
-                    width="70%"
-                    visible={addStatusOfOrder}
+                    title="Collection"
+                    width="50%"
+                    visible={addPaidButtonModal}
                     destroyOnClose
                     maskClosable={false}
                     maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}
                     style={{marginTop:"5rem"}}
-                    onClose={() => handleStatusOfOrder(false)}
+                    onClose={() => handlePaidModal(false)}
                     footer={null}
                 >
                     <Suspense fallback={<BundleLoader />}>
-                        <StatusOfOrder particularRowData={this.props.particularRowData} />
+                        <DistributorPaidForm particularRowData={this.props.particularRowData} />
+                        <OrderPaymentTable particularRowData={this.props.particularRowData} />
                     </Suspense>
                 </StyledDrawer>
             </>
@@ -31,4 +33,4 @@ class StatusOfOrderModal extends Component {
     }
 }
 
-export default StatusOfOrderModal;
+export default PaidButtonModal;
