@@ -11,11 +11,10 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { StyledTabs } from "../../../Components/UI/Antd";
 import { TabsWrapper } from "../../../Components/UI/Layout";
+import DistributorCollectionTableToday from "../Distributor/DistributorCollectionTableToday";
 
 
-// const DistributorCollectionTableToday = lazy(() =>
-//   import("../Child/Distributor/DistributorCollectionTableToday")
-// );
+
 // const DistributorCollectionArchive = lazy(() =>
 //   import("../Child/Distributor/DistributorCollectionArchive")
 // );
@@ -134,12 +133,12 @@ function CollectionDistributorTab(props) {
           >
             <Suspense fallback={"Loading ..."}>
               {" "}
-              {/* <DistributorCollectionTableToday
+              <DistributorCollectionTableToday
                 rowSelectionTodayForDistributor={
                   rowSelectionTodayForDistributor
                 }
                 handleClearCheck={handleClearCheck}
-              /> */}
+              />
             </Suspense>
           </TabPane>
 

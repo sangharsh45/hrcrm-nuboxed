@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import {
     linkDistributorPaymentByFinance
-} from "../../CollectionAction";
+} from "../CollectionAction";
 
 function DistributorPaymentToggle(props) {
     const [paymentCollection, setPaymentCollection] = React.useState(false)

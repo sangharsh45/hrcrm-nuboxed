@@ -201,45 +201,45 @@ function AllAccountList(props) {
     },
     {
       title: "Address",
-      render: (name, item, i) => {
-        return `${item.addresses[0].address1 || ""} ${item.addresses[0]
-          .address2 || ""} ${item.addresses[0].street || ""} 
-                ${item.addresses[0].city || ""}
-                    `;
-      },
+      // render: (name, item, i) => {
+      //   return `${item.address[0].address1 || ""} ${item.address[0]
+      //     .address2 || ""} ${item.address[0].street || ""} 
+      //           ${item.address[0].city || ""}
+      //               `;
+      // },
       width: "18%",
     },
 
     {
       title: "City",
-      render: (name, item, i) => {
-        return <>
-          {item.addresses[0].city === "Null" ? "" :
-            <span>
-              {item.addresses[0].city || ""}
-            </span>
-          }
-        </>
-      },
-      sorter: (a, b) => {
-        var nameA = a.addresses && a.addresses.length && a.addresses[0].city; // ignore upper and lowercase
-        var nameB = b.addresses && b.addresses.length && b.addresses[0].city; // ignore upper and lowercase
-        if (nameA < nameB) {
-          return -1;
-        }
-        if (nameA > nameB) {
-          return 1;
-        }
+      // render: (name, item, i) => {
+      //   return <>
+      //     {item.address[0].city === "Null" ? "" :
+      //       <span>
+      //         {item.address[0].city || ""}
+      //       </span>
+      //     }
+      //   </>
+      // },
+      // sorter: (a, b) => {
+      //   var nameA = a.address && a.address.length && a.address[0].city; // ignore upper and lowercase
+      //   var nameB = b.address && b.address.length && b.address[0].city; // ignore upper and lowercase
+      //   if (nameA < nameB) {
+      //     return -1;
+      //   }
+      //   if (nameA > nameB) {
+      //     return 1;
+      //   }
 
-        return 0;
-      },
+      //   return 0;
+      // },
       width: "8%",
     },
     {
       title: "Pin Code",
-      render: (name, item, i) => {
-        return `${item.addresses[0].pinCode || ""}`;
-      },
+      // render: (name, item, i) => {
+      //   return `${item.address[0].pinCode || ""}`;
+      // },
       width: "6%",
     },
     {

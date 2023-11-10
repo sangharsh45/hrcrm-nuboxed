@@ -1,24 +1,24 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { StyledTable } from "../../../../Components/UI/Antd";
+import { StyledTable } from "../../../Components/UI/Antd";
 import * as Yup from "yup";
 import { Button, Empty, Input, Space, Tooltip } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
 import Highlighter from "react-highlight-words";
 import { Formik, Form, Field } from "formik";
-import { FlexContainer } from "../../../../Components/UI/Layout";
-import { DatePicker } from "../../../../Components/Forms/Formik/DatePicker";
-import APIFailed from "../../../../Helpers/ErrorBoundary/APIFailed";
+import { FlexContainer } from "../../../Components/UI/Layout";
+import { DatePicker } from "../../../Components/Forms/Formik/DatePicker";
+import APIFailed from "../../../Helpers/ErrorBoundary/APIFailed";
 import {
   getTodayDistributor,
   DistributorCollectionReceivableToday,
   handleDistributorProductModal
-} from "../../CollectionAction";
+} from "../CollectionAction";
 import moment from "moment";
 // import { getAllSalesUser } from "../../../Leads/LeadsAction";
 import DistributorPaymentToggle from "./DistributorPaymentToggle";
-import { CurrencySymbol } from "../../../../Components/Common";
+import { CurrencySymbol } from "../../../Components/Common";
 import DistributorProductHistory from "./DistributorProductHistory";
 
 function DistributorColletcionArchive(props) {
@@ -321,7 +321,7 @@ function DistributorColletcionArchive(props) {
           <>
             {user.designation === "Manager" &&
               user.functionName === "Sales" ? null : (
-              <DistributorPaymentToggle paymentId={item.paymentId} />
+               <DistributorPaymentToggle paymentId={item.paymentId} />
             )}
           </>
         );
