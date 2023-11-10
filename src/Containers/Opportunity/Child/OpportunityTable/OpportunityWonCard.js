@@ -42,6 +42,7 @@ import UpdateOpportunityModal from "../UpdateOpportunity/UpdateOpportunityModal"
 import ReinstateToggleForLost from "../../Child/OpportunityTable/ReinstateToggleForLost"
 
 function OpportunityWonCard(props) {
+  const [hasMore, setHasMore] = useState(true);
   const [page, setPage] = useState(0);
   useEffect(() => {
     if(props.role==="USER"&&user.department==="Recruiter"){
@@ -55,18 +56,8 @@ function OpportunityWonCard(props) {
   }, []);
 
   const handleLoadMore = () => {
-    setTimeout(() => {
-     
-      if(props.role==="USER"&&user.department==="Recruiter"){
-        props.getRecruiterList(props.recruiterId);     
-      }else{
-       
-      } 
-      props.getAllSalesList();
-      props. getWonOpportunity(props.userId,page);
-      setPage(page + 1);
-    }, 100);
-  
+    setPage(page + 1);
+      props. getWonOpportunity(props.userId,page);    
   }
     const [currentOpportunityId, setCurrentOpportunityId] = useState("");
     function handleSetCurrentOpportunityId(opportunityId,opportunityName) {
@@ -74,9 +65,7 @@ function OpportunityWonCard(props) {
     }
     const {
         user,
-        fetchinglostOpportunity,
-    fetchinglostOpportunityError,
-    deleteLostOpportunity,
+        fetchingWonOpportunity,
     handleUpdateOpportunityModal,
     updateOpportunityModal,
     deleteOpportunityData,
@@ -90,14 +79,9 @@ function OpportunityWonCard(props) {
       <InfiniteScroll
          dataLength={wonOpportunity.length}
         next={handleLoadMore}
-        hasMore={true}
-        // loader={<h4 style={{ textAlign: 'center' }}>Loading...</h4>}
-        endMessage={
-          <p style={{ textAlign: "center" }}>
-            <b>Yay! You have seen it all</b>
-          </p>
-        }
-        height={600}
+        hasMore={hasMore}
+        loader={fetchingWonOpportunity ?<h4 style={{ textAlign: 'center' }}>Loading...</h4>:null}
+        height={"70vh"}
       >
  <CardWrapper>      
               {wonOpportunity.map((item) => {

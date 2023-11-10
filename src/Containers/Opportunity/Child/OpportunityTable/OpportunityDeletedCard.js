@@ -26,6 +26,7 @@ import UpdateOpportunityModal from "../UpdateOpportunity/UpdateOpportunityModal"
 import ReinstateToggle from "../../Child/ReinstateToggle"
 
 function OpportunityDeletedCard(props) {
+  const [hasMore, setHasMore] = useState(true);
   const [page, setPage] = useState(0);
   useEffect(() => {
     props.getDeletedOpportunity(page);
@@ -34,12 +35,8 @@ function OpportunityDeletedCard(props) {
 
 
   const handleLoadMore = () => {
-    setTimeout(() => {
-     
+    setPage(page + 1); 
       props.getDeletedOpportunity(page);
-      setPage(page + 1); 
-    }, 100);
-  
   }
     const [currentOpportunityId, setCurrentOpportunityId] = useState("");
     function handleSetCurrentOpportunityId(opportunityId,opportunityName) {
@@ -56,14 +53,9 @@ function OpportunityDeletedCard(props) {
       <InfiniteScroll
         dataLength={deletedOpportunity.length}
         next={handleLoadMore}
-        hasMore={true}
-        // loader={<h4 style={{ textAlign: 'center' }}>Loading...</h4>}
-        endMessage={
-          <p style={{ textAlign: "center" }}>
-            <b>Yay! You have seen it all</b>
-          </p>
-        }
-        height={600}
+        hasMore={hasMore}
+        loader={fetchingDeletedOpportunity?<h4 style={{ textAlign: 'center' }}>Loading...</h4>:null}
+        height={"70vh"}
       >
  <CardWrapper>      
               {deletedOpportunity.map((item) => {

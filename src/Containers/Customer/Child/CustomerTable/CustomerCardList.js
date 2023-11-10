@@ -53,7 +53,7 @@ function onChange(pagination, filters, sorter) {
 function CustomerCardList(props) {
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
 
-
+  const [hasMore, setHasMore] = useState(true);
  
   const [page, setPage] = useState(0);
   useEffect(() => {
@@ -73,9 +73,9 @@ function CustomerCardList(props) {
         }
       }
     })
-    props.getCustomerListByUserId(props.userId, page,"creationdate");
     setPage(page + 1);
-    props.getSectors();
+    props.getCustomerListByUserId(props.userId, page,"creationdate");
+      props.getSectors();
     props.getCountries();
     props.getAllCustomerEmployeelist();
   }, []);
@@ -95,14 +95,13 @@ function CustomerCardList(props) {
   }
 
   const handleLoadMore = () => {
-    setTimeout(() => {
+   
       setPage(page + 1);
       props.getCustomerListByUserId(
         props.currentUser ? props.currentUser : props.userId,
         page,
         props.filter?props.filter:"creationdate"
       );
-    }, 100);
   };
 
   const {
@@ -121,25 +120,35 @@ function CustomerCardList(props) {
   } = props;
   console.log("ee");
  
-  if (fetchingCustomers) {
-    return <BundleLoader />;
-  }
+  // if (fetchingCustomers) {
+  //   return <BundleLoader />;
+  // }
 
   return (
     <>
-  <InfiniteScroll
+    
+ 
+         <div className=' flex justify-end sticky top-28 z-auto'>
+        <OnlyWrapCard style={{backgroundColor:"#E3E8EE"}}>
+        <InfiniteScroll
         dataLength={customerByUserId.length}
         next={handleLoadMore}
-        hasMore={true}
-        // loader={<h4 style={{ textAlign: 'center' }}>Loading...</h4>}
-        endMessage={
-          <p style={{ textAlign: "center" }}>
-            <b>Yay! You have seen it all</b>
-          </p>
-        }
-        height={600}
+        hasMore={hasMore}
+        loader={fetchingCustomers?<h4 style={{ textAlign: 'center' }}>Loading...</h4>:null}
+        height={"70vh"}
       >
-        <OnlyWrapCard>
+        <div className=" flex justify-between w-[98%] p-2 bg-transparent font-bold sticky top-0 z-10">
+        <div className=" md:w-40">Name</div>
+        <div className=" md:w-40">Sector</div>
+        <div className=" md:w-28 ">Country</div>
+        <div className="md:w-36"># Opportunity</div>
+        <div className="md:w-28">Pipeline Value</div>
+        <div className="md:w-36">Weighted Value</div>
+        <div className="md:w-24">Assigned to</div>
+        <div className="md:w-20">Owner</div>
+        <div className="w-12">Action</div>
+
+      </div>
       {customerByUserId.map((item) => { 
          const currentdate = moment().format("DD/MM/YYYY");
          const date = moment(item.creationDate).format("DD/MM/YYYY");
@@ -161,19 +170,20 @@ function CustomerCardList(props) {
            } `;
                     return (
                         <div>
-                            <div className="flex justify-between mt-1 max-sm:flex-col"
-                                style={{
-                                    borderBottom: "3px dotted #515050"
-                                }}>
+                            <div className="flex rounded-xl justify-between mt-4 bg-white h-12 items-center p-1 "
+                                // style={{
+                                //     borderBottom: "3px dotted #515050"
+                                // }}
+                                >
                                    <div class="flex">
-                                <div className=" flex font-medium flex-col md:w-52 max-sm:w-full  ">
+                                <div className=" flex font-medium flex-col md:w-40 max-sm:w-full  ">
 
                                    
                                         <Tooltip>
                                           <div class="flex max-sm:flex-row justify-between w-full md:flex-col">
-                                            <h4 class=" text-xs text-cardBody font-poppins max-sm:hidden">
+                                            {/* <h4 class=" text-xs text-cardBody font-poppins max-sm:hidden">
                                             Name
-                                            </h4>
+                                            </h4> */}
                                             <h4 class=" text-sm text-blue-500 text-cardBody font-poppins font-semibold  cursor-pointer">
                                                 
          <Link
@@ -199,7 +209,7 @@ function CustomerCardList(props) {
 
                                 <div className=" flex font-medium flex-col  md:w-40 max-sm:flex-row w-full max-sm:justify-between  ">
                            
-                                    <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden"> Sector </h4>
+                                    {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden"> Sector </h4> */}
                                     <h4 class=" text-xs text-cardBody font-poppins">   
                                     {item.sector}
                                     </h4>
@@ -208,7 +218,7 @@ function CustomerCardList(props) {
                                 <div className=" flex font-medium flex-col md:w-28 max-sm:flex-row w-full max-sm:justify-between ">
                                   
 
-                                    <h4 class=" text-xs text-cardBody font-poppins max-sm:hidden">Country</h4>
+                                    {/* <h4 class=" text-xs text-cardBody font-poppins max-sm:hidden">Country</h4> */}
                                     <h4 class=" text-sm text-cardBody font-poppins">
                                     <ReactCountryFlag
                           countryCode={item.countryAlpha2Code}
@@ -224,7 +234,7 @@ function CustomerCardList(props) {
                                 </div>
                                 </div>
                                 <div className=" flex font-medium flex-col md:w-36 max-sm:flex-row w-full max-sm:justify-between ">
-                                    <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden"># Opportunity</h4>
+                                    {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden"># Opportunity</h4> */}
 
                                     <div class=" text-xs text-cardBody font-poppins text-center">
                                     {item.oppNo}
@@ -232,7 +242,7 @@ function CustomerCardList(props) {
                                     </div>
                                 </div>
                                 <div className=" flex font-medium flex-col md:w-28 max-sm:flex-row w-full max-sm:justify-between ">
-                                    <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden">Pipeline Value</h4>
+                                    {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden">Pipeline Value</h4> */}
 
                                     <div class=" text-xs text-cardBody font-poppins text-center">
                                     {item.totalProposalValue}
@@ -240,7 +250,7 @@ function CustomerCardList(props) {
                                     </div>
                                 </div>
                                 <div className=" flex font-medium flex-col md:w-36 max-sm:flex-row w-full max-sm:justify-between ">
-                                    <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden">Weighted Value</h4>
+                                    {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden">Weighted Value</h4> */}
 
                                     <div class=" text-xs text-cardBody font-poppins text-center">
                                     {item.weight}
@@ -248,7 +258,7 @@ function CustomerCardList(props) {
                                     </div>
                                 </div>
                                 <div className=" flex font-medium items-center  flex-col md:w-24 max-sm:max-sm:flex-row w-full max-sm:justify-between ">
-                                    <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden">Assigned to</h4>
+                                    {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden">Assigned to</h4> */}
 
                                     <div class=" text-xs text-cardBody font-poppins">
                                     
@@ -269,7 +279,7 @@ function CustomerCardList(props) {
                                 <div class="flex"> 
                                 <div className=" flex font-medium items-center flex-col md:w-20 max-sm:flex-row w-full max-sm:justify-between mb-2 ">
                        
-                       <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden">Owner</h4>
+                       {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden">Owner</h4> */}
 
                        <span>
               <MultiAvatar
@@ -408,8 +418,11 @@ function CustomerCardList(props) {
 
                     )
                 })}
+                </InfiniteScroll>
       </OnlyWrapCard>
-      </InfiniteScroll>
+      </div>
+      
+  
       <AddCustomerDrawerModal
         addDrawerCustomerModal={props.addDrawerCustomerModal}
         handleCustomerDrawerModal={props.handleCustomerDrawerModal}

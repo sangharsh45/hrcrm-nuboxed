@@ -196,7 +196,7 @@ const handleStoredLocations=(locs)=>{
                       <div>
                         <StyledPopconfirm
                           title="Do you want to delete?"
-                          // onConfirm={() => deleteLeadsData(item.leadsId)}
+                          // onConfirm={() => props.deleteLocation(item.leadsId)}
                         >
                           <DeleteIcon
                             type="delete"
@@ -240,7 +240,7 @@ const mapDispatchToProps = (dispatch) =>
     {
       getlocation,
       handleLocationShiftDrawer,
-      handleUpdateLocationDrawer
+      handleUpdateLocationDrawer,
     },
     dispatch
   );

@@ -10,7 +10,6 @@ import { FlexContainer } from "../../../../Components/UI/Layout";
  import { SelectComponent } from "../../../../Components/Forms/Formik/SelectComponent";
 import AddressFieldArray from "../../../../Components/Forms/Formik/AddressFieldArray";
 import { updateLocation } from "../../../Event/Child/Location/LocationAction";
-
 import { getTimeZone } from "../../../Auth/AuthAction";
 
 
@@ -18,32 +17,55 @@ class LocationUpdateForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      production: false,
-      billing: false,
-      corporate: false,
-      inventory: false,
-      project: false,
-      retail: false,
+      production: this.props.storedLoc.productionInd,
+      billing: this.props.storedLoc.billingInd,
+      corporate: this.props.storedLoc.corporateInd,
+      inventory: this.props.storedLoc.inventoryInd,
+      project: this.props.storedLoc.projectInd,
+      retail: this.props.storedLoc.retailInd,
     };
   }
 
-  handleProduction = (checked) => {
-    this.setState({ production: checked });
+  handleProduction = () => {
+    if (this.props.storedLoc.productionInd) {
+      this.setState({ production: false });
+    }
+    else{
+      this.setState({ production: true });
+    }
+  
   };
-  handleBilling = (checked) => {
-    this.setState({ billing: checked });    
+  handleBilling = () => {
+    if (this.props.storedLoc.billingInd){
+this.setState({billing:false})
+    }
+    else{
+      this.setState({ billing: true });  
+    }
+  
   };
-  handleCorporate = (checked) => {
-    this.setState({ corporate: checked });
+  handleCorporate = () => {
+    if (this.props.storedLoc.corporateInd){
+    this.setState({ corporate: false });}
+else{
+  this.setState({ corporate: true });}
   };
-  handleInventory = (checked) => {
-    this.setState({ inventory: checked });
+  handleInventory = () => {
+    if(this.props.storedLoc.inventoryInd){
+    this.setState({ inventory: false });}
+    else{this.setState({ inventory: true });}
   };
-  handleProject = (checked) => {
-    this.setState({ project: checked });
+  handleProject = () => {
+    if(this.props.storedLoc.projectInd){
+    this.setState({ project: false });}
+    else{ this.setState({ project: true });}
   };
-  handleRetail = (checked) => {
-    this.setState({ retail: checked });
+  handleRetail = () => {
+    if(this.props.storedLoc.retailInd){
+  this.setState({ retail: false });}
+  else {
+    this.setState({ retail: true });}
+
   };
   componentDidMount() {
     // this.props.getSalesManagerUser();
@@ -104,7 +126,7 @@ class LocationUpdateForm extends Component {
             groupId: this.props.groupId,
             locationtypeId: undefined,
             productionInd: this.state.production ? "true" : "false",
-            billingInd:this.props.storedLoc.billingInd ? this.props.storedLoc.billingInd: this.state.billing ? "true" : "false",
+            billingInd: this.state.billing  ? "true" :"false",
             inventoryInd: this.state.inventory ? "true" : "false",
             projectInd: this.state.project ? "true" : "false",
             corporateInd: this.state.corporate ? "true" : "false",
@@ -136,7 +158,7 @@ class LocationUpdateForm extends Component {
               {
                 ...values,
                 productionInd: this.state.production ? "true" : "false",
-                billingInd:this.props.storedLoc.billingInd ?this.props.storedLoc.billingInd: this.state.billing ? "true" : "false",
+                billingInd:this.state.billing  ? "true" :"false",
                 inventoryInd: this.state.inventory ? "true" : "false",
                 projectInd: this.state.project ? "true" : "false",
                 corporateInd: this.state.corporate ? "true" : "false",
@@ -208,7 +230,7 @@ class LocationUpdateForm extends Component {
                       <div>
                         <Switch
                           style={{ width: "6.25em" }}
-                          checked={this.state.billing || this.props.storedLoc.billingInd}
+                          checked={this.state.billing}
                           onChange={this.handleBilling}
                           checkedChildren="Yes"
                           unCheckedChildren="No"

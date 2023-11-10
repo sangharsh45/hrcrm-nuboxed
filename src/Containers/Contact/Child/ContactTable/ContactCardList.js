@@ -49,6 +49,7 @@ const UpdateContactModal = lazy(() =>
 );
 
 function ContactCardList(props) {
+  const [hasMore, setHasMore] = useState(true);
   const [page, setPage] = useState(0);
   useEffect(() => {
     window.addEventListener('error', e => {
@@ -89,13 +90,10 @@ function ContactCardList(props) {
   }
 
   const handleLoadMore = () => {
-    setTimeout(() => {
             setPage(page + 1);
             props.getContactListByUserId(props.currentUser?props.currentUser:props.userId,page,
               props.filter?props.filter:"creationdate"
               );
-    }, 100);
-  
   }
 
   function handleSetCurrentContactId(item) {
@@ -121,25 +119,34 @@ function ContactCardList(props) {
     updateContactModal,
   } = props;
 
- if(fetchingContacts){
-  return <BundleLoader/>
- }
+//  if(fetchingContacts){
+//   return <BundleLoader/>
+//  }
 
   return (
     <>
       
-      <InfiniteScroll
+     
+          <OnlyWrapCard style={{backgroundColor:"#E3E8EE"}}>
+          <InfiniteScroll
         dataLength={contactByUserId.length}
         next={handleLoadMore}
-        hasMore={true}
-        endMessage={
-          <p style={{ textAlign: "center" }}>
-            <b>Yay! You have seen it all</b>
-          </p>
-        }
-        height={600}
+        hasMore={hasMore}
+        loader={fetchingContacts?<h4 style={{ textAlign: 'center' }}>Loading...</h4>:null}
+        height={"70vh"}
       >
-          <OnlyWrapCard>
+        <div className=" flex justify-between w-[98%] p-2 bg-transparent font-bold sticky top-0 z-10">
+        <div className=" md:w-[12rem]">Name</div>
+        <div className=" md:w-40">Company</div>
+        <div className=" md:w-28 ">Designation</div>
+        <div className="md:w-36">Department</div>
+        <div className="md:w-28"># Opportunity</div>
+        <div className="md:w-28">Pipeline Value</div>
+        <div className="md:w-20">Portal Acess</div>
+        <div className="md:w-20">Owner</div>
+        <div className="w-12">Action</div>
+
+      </div>
       {filterData.map((item) => { 
         
          const currentdate = moment().format("DD/MM/YYYY");
@@ -164,10 +171,11 @@ function ContactCardList(props) {
             item.address[0].postalCode} `;
                     return (
                         <div>
-                            <div className="flex justify-between mt-1 max-sm:flex-col"
-                                style={{
-                                    borderBottom: "3px dotted #515050"
-                                }}>
+                            <div className="flex rounded-xl justify-between mt-4 bg-white h-12 items-center p-1"
+                                // style={{
+                                //     borderBottom: "3px dotted #515050"
+                                // }}
+                                >
                                      
                                 <div className=" flex font-medium flex-col md:w-52 max-sm:flex-row w-full max-sm:justify-between  ">
 <div className="flex max-sm:w-full"> 
@@ -185,9 +193,9 @@ function ContactCardList(props) {
           <div class="max-sm:w-full">
                                         <Tooltip>
                                           <div class=" flex max-sm:w-full justify-between flex-row md:flex-col">
-                                            <div class="text-xs text-cardBody font-poppins max-sm:hidden">
+                                            {/* <div class="text-xs text-cardBody font-poppins max-sm:hidden">
                                             Name
-                                            </div>
+                                            </div> */}
                                             <div class="text-sm text-blue-500 text-cardBody font-poppins font-semibold  cursor-pointer">
                                                 
          <Link
@@ -214,32 +222,32 @@ function ContactCardList(props) {
                                 <div class="flex">
 
                                 <div className=" flex font-medium flex-col  md:w-52 max-sm:flex-row w-full max-sm:justify-between ">
-                                    <div class=" text-xs text-cardBody font-xs font-poppins max-sm:hidden"> Company </div>
+                                    {/* <div class=" text-xs text-cardBody font-xs font-poppins max-sm:hidden"> Company </div> */}
                                     <div class=" text-sm text-cardBody font-poppins">   
                                     {item.tagWithCompany}
                                     </div>
                                 </div>
                                 <div className=" flex font-medium flex-col md:w-36 max-sm:flex-row w-full max-sm:justify-between ">
-                                    <div class=" text-xs text-cardBody font-poppins max-sm:hidden">Designation</div>
+                                    {/* <div class=" text-xs text-cardBody font-poppins max-sm:hidden">Designation</div> */}
                                     <div class="text-sm text-cardBody font-poppins">
                                          {item.designation}
                                     </div>
                                 </div>
                                 <div className=" flex font-medium flex-col md:w-36  max-sm:flex-row w-full max-sm:justify-between">
-                                  <div class="text-xs text-cardBody font-poppins max-sm:hidden">Department</div>
+                                  {/* <div class="text-xs text-cardBody font-poppins max-sm:hidden">Department</div> */}
                                   <div class="text-sm text-cardBody font-poppins">
                                        {item.department}
                                   </div>
                               </div>
                               </div>
                               <div className="flex font-medium flex-col md:w-32 max-sm:flex-row w-full max-sm:justify-between ">
-  <div className="text-xs text-cardBody font-poppins max-sm:hidden"># Opportunity</div>
+  {/* <div className="text-xs text-cardBody font-poppins max-sm:hidden"># Opportunity</div> */}
   <div className="text-sm text-cardBody font-poppins text-center">
     {item.oppNo}
   </div>
 </div>
 <div className=" flex font-medium flex-col md:w-36 max-sm:flex-row w-full max-sm:justify-between ">
-                                    <h4 class=" text-xs text-cardBody font-poppins max-sm:hidden">Pipeline Value</h4>
+                                    {/* <h4 class=" text-xs text-cardBody font-poppins max-sm:hidden">Pipeline Value</h4> */}
 
                                     <div class=" text-sm text-cardBody font-poppins text-center">
                                     {item.totalProposalValue}
@@ -247,7 +255,7 @@ function ContactCardList(props) {
                                     </div>
                                 </div>
                                 <div className="flex font-medium flex-col md:w-32 max-sm:flex-row w-full max-sm:justify-between ">
-                                    <div class="text-xs text-cardBody font-poppins max-sm:hidden">Portal Acess</div>
+                                    {/* <div class="text-xs text-cardBody font-poppins max-sm:hidden">Portal Acess</div> */}
 
                                     <div class="text-sm text-cardBody font-poppins">
 
@@ -413,8 +421,9 @@ function ContactCardList(props) {
 
                     )
                 })}
+                      </InfiniteScroll>
       </OnlyWrapCard>
-      </InfiniteScroll>
+
 
       <UpdateContactModal
         contactData={currentContactId}
