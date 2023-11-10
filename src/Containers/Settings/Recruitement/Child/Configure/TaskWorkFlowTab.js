@@ -361,7 +361,7 @@ class TaskWorkflowTab extends Component {
                 <Button
                   type="primary"
                   htmlType="submit"
-                  // disabled={!values.taskChecklistName}
+                  disabled={!this.state.taskChecklistName}
                   loading={addingTaskForRecruit}
                   onClick={this.handleAddWorkflow}
                 >

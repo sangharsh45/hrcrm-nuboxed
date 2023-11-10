@@ -160,8 +160,8 @@ getLocationNameOption(filterOptionKey, filterOptionValue) {
       initialValues={{
         salutation: setEditingEmployee.salutation || "",
         firstName: setEditingEmployee.firstName || "",
-        lastName: setEditingEmployee.emailId || "",
-        emailId:  setEditingEmployee.salutation || "",
+        lastName: setEditingEmployee.lastName || "",
+        emailId:  setEditingEmployee.emailId || "",
         countryDialCode:  setEditingEmployee.countryDialCode || "",
         countryDialCode1: setEditingEmployee.countryDialCode1 || "",
         phoneNo:  setEditingEmployee.phoneNo || "",
@@ -250,7 +250,7 @@ getLocationNameOption(filterOptionKey, filterOptionValue) {
                   {/* <FastField name="imageId" component={Upload} /> */}
                   <div>
                   <div class=" flex justify-between max-sm:flex-col" >
-                    {/* <div class=" w-1/3 max-sm:w-full">
+                    <div class=" w-1/3 max-sm:w-full">
                       <FastField
                         name="salutation"
                         placeholder="Select"
@@ -263,7 +263,7 @@ getLocationNameOption(filterOptionKey, filterOptionValue) {
                         />}
                         isColumn
                         />
-                    </div> */}
+                    </div>
                     <div class=" w-2/4 max-sm:w-full">
                       <Field
                         isRequired

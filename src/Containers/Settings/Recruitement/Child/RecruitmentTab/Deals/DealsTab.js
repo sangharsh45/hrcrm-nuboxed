@@ -324,7 +324,8 @@ handleStagePublishClick = (investorOppStagesId, publishInd) => {
                 <Button
                   type="primary"
                   htmlType="submit"
-                  // disabled={!values.taskChecklistName}
+                   disabled={!this.state.workflowName} 
+                  //  disabled={!values.workflowName}
                   loading={addingProcessForDeals}
                   onClick={this.handleAddWorkflow}
                 >
