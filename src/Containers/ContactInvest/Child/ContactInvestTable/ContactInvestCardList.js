@@ -107,14 +107,7 @@ function ContactInvestCardList(props) {
       
 
           <OnlyWrapCard style={{backgroundColor:"#E3E8EE"}}>
-          <InfiniteScroll
-        dataLength={contactByUserId.length}
-        next={handleLoadMore}
-        hasMore={hasMore}
-        loader={fetchingContactsInvest?<h4 style={{ textAlign: 'center' }}>Loading...</h4>:null}
-        height={"70vh"}
-      >
-         <div className=" flex justify-between w-[98%] p-2 bg-transparent font-bold sticky top-0 z-10">
+          <div className=" flex justify-between w-[99%] p-2 bg-transparent font-bold sticky top-0 z-10">
         <div className=" md:w-[12rem]">Name</div>
         <div className=" md:w-40">Company</div>
         <div className=" md:w-28 ">Designation</div>
@@ -126,6 +119,14 @@ function ContactInvestCardList(props) {
         <div className="w-12">Action</div>
 
       </div>
+          <InfiniteScroll
+        dataLength={contactByUserId.length}
+        next={handleLoadMore}
+        hasMore={hasMore}
+        loader={fetchingContactsInvest?<h4 style={{ textAlign: 'center' }}>Loading...</h4>:null}
+        height={"70vh"}
+      >
+       
       {filterData.map((item) => { 
         
          const currentdate = moment().format("DD/MM/YYYY");
@@ -150,13 +151,13 @@ function ContactInvestCardList(props) {
             item.address[0].postalCode} `;
                     return (
                         <div>
-                            <div className="flex rounded-xl justify-between mt-4 bg-white h-12 items-center p-1"
+                            <div className="flex rounded-xl justify-between mt-4 bg-white h-12 items-center p-3"
                                 // style={{
                                 //     borderBottom: "3px dotted #515050"
                                 // }}
                                 >
                                      <div class="flex">
-                                <div className=" flex font-medium flex-col md:w-52 max-sm:flex-row w-full max-sm:justify-between  ">
+                                <div className=" flex font-medium flex-col md:w-56 max-sm:flex-row w-full max-sm:justify-between  ">
 <div className="flex max-sm:w-full"> 
 <div>
                                 <SubTitle>
@@ -198,7 +199,7 @@ function ContactInvestCardList(props) {
                                         </div>
                                         </div>
                                 </div>
-                                <div className="  flex max-sm:w-full max-sm:justify-between  flex-row md:flex-col w-52">
+                                <div className="  flex max-sm:w-full max-sm:justify-between  flex-row md:flex-col w-48">
                                     {/* <div class=" text-[0.875rem] text-cardBody font-[0.875rem] font-poppins max-sm:hidden"> Company </div> */}
                                     <div class=" text-[0.82rem] text-cardBody font-poppins">   
                                     {item.tagWithCompany}

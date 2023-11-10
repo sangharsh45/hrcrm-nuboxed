@@ -73,12 +73,12 @@ const LeadsCardList = (props) => {
   return (
     <>
       <OnlyWrapCard style={{backgroundColor:"#E3E8EE"}}>
-      <div className=" flex justify-between w-[98%] p-2 bg-transparent font-bold sticky top-0 z-10">
+      <div className=" flex justify-between w-full p-2 bg-transparent font-bold sticky top-0 z-10">
         <div className=" md:w-[12rem]">Name</div>
-        <div className=" md:w-[11%]"></div>
-        <div className=" md:w-28 ">Phone #</div>
-        <div className="md:w-36">Country</div>
-        <div className="md:w-28">Company</div>
+        <div className=" md:w-20"></div>
+        <div className=" md:w-32 ">Phone #</div>
+        <div className="md:w-32">Country</div>
+        <div className="md:w-52">Company</div>
         <div className="md:w-20">Sector</div> 
         <div className="md:w-24">Assigned to</div>
         <div className="md:w-20">Owner</div>
@@ -116,13 +116,13 @@ const LeadsCardList = (props) => {
           return (
             <div>
               <div
-                className="flex rounded-xl justify-between mt-4 bg-white h-12 items-center p-1"
+                className="flex rounded-xl justify-between mt-4 bg-white h-12 items-center p-3"
                 // style={{
                 //   borderBottom: "3px dotted #515050",
                 // }}
               >
                 <div class="flex">
-                  <div className=" flex font-medium flex-col w-[13rem] mb-4  max-sm:w-full">
+                  <div className=" flex font-medium flex-col w-[13rem]   max-sm:w-full">
                     <div className="flex max-sm:w-full">
                       <div>
                         <SubTitle>
@@ -262,7 +262,7 @@ const LeadsCardList = (props) => {
                   </div>
                 </div>
                 <div class="flex">
-                  <div className=" flex font-medium flex-col  md:w-[12rem] max-sm:flex-row w-full max-sm:justify-between ">
+                  <div className=" flex font-medium flex-col  md:w-[10rem] max-sm:flex-row w-full max-sm:justify-between ">
                     {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden">
                       {" "}
                       Company{" "}
@@ -294,7 +294,7 @@ const LeadsCardList = (props) => {
                     ) : null}
                   </div>
 
-                  <div className=" flex font-medium flex-col  md:w-28 max-sm:flex-row w-full max-sm:justify-between ">
+                  <div className=" flex font-medium flex-col  md:w-32 max-sm:flex-row w-full max-sm:justify-between ">
                     {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden">
                       {" "}
                       Sector{" "}
@@ -304,7 +304,7 @@ const LeadsCardList = (props) => {
                     </h4>
                   </div>
                 </div>
-                <div class="flex mb-1">
+                <div class="flex ">
                   <div className=" flex font-medium flex-col md:w-32 max-sm:flex-row w-full max-sm:justify-between ">
                     {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden">
                       Assigned to

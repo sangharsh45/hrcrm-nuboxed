@@ -62,10 +62,10 @@ const PitchCardList = (props) => {
     <>
    <OnlyWrapCard style={{backgroundColor:"#E3E8EE"}}><div className=" flex justify-between w-[98%] p-2 bg-transparent font-bold sticky top-0 z-10">
         <div className=" md:w-[12rem]">Name</div>
-        <div className=" md:w-[11%]"></div>
-        <div className=" md:w-28 ">Phone #</div>
-        <div className="md:w-36">Country</div>
-        <div className="md:w-28">Company</div>
+        <div className=" md:w-[5.5rem]"></div>
+        <div className=" md:w-32 ">Phone #</div>
+        <div className="md:w-32">Country</div>
+        <div className="md:w-52">Company</div>
         {/* <div className="md:w-20">Sector</div>  */}
         <div className="md:w-24">Assigned to</div>
         <div className="md:w-20">Owner</div>
@@ -233,7 +233,7 @@ onClick={()=>{
 </div>  
      </div>  
                                 <div class="flex justify-between md:ml-4">
-                                <div className=" flex font-medium flex-col  md:w-28 max-sm:flex-row w-full max-sm:justify-between ">
+                                <div className=" flex font-medium flex-col  md:w-44 max-sm:flex-row w-full max-sm:justify-between ">
                            {/* <h4 class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden"> Phone # </h4> */}
 
                            <h4 class="text-[0.82rem] text-cardBody font-poppins">
