@@ -10,7 +10,7 @@ import moment from "moment";
 
 function ProductionOrderListById(props) {
     useEffect(() => {
-        props.getOrderByUser(props.locationDetailsId, props.userId)
+        props.getOrderByUser(props.locationId, props.userId)
     }, [])
     const [rowData, setRowData] = useState({})
     const handleRowData = (item) => {
@@ -91,7 +91,7 @@ function ProductionOrderListById(props) {
                                     productionDispatchId: item.productionDispatchId,
                                     orderPhoneId: item.orderPhoneId,
                                     qcInspectionInd: 1
-                                }, item.orderPhoneId, props.locationDetailsId, props.userId)
+                                }, item.orderPhoneId, props.locationId, props.userId)
                             }}
                         >Start Inspection</Button> : item.qcInspectionInd === 1 ?
                             <Button onClick={handlePauseResume}>{hide ? "Pause Inspection" : "Resume Inspection"}</Button> : "Inspection Completed"}
@@ -130,7 +130,7 @@ function ProductionOrderListById(props) {
 }
 
 const mapStateToProps = ({ refurbish, auth }) => ({
-    locationDetailsId: auth.userDetails.locationDetailsId,
+    locationId: auth.userDetails.locationId,
     userId: auth.userDetails.userId,
     orderByUser: refurbish.orderByUser,
     showPhoneList: refurbish.showPhoneList,

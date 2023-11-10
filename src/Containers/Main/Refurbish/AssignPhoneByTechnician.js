@@ -3,12 +3,14 @@ import React, { useEffect, useState } from 'react'
 import { StyledTable } from '../../../Components/UI/Antd'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
+import { getDepartments } from "../../Settings/Department/DepartmentAction"
 import { getProductionUsersById, UpdateTechnicianByPhone, getNoOfPhoneById } from "./RefurbishAction"
 const { Option } = Select;
 
 const AssignPhoneByTechnician = (props) => {
     const [user, setUser] = useState("")
     const [technician, setTechnician] = useState("")
+    const [department, setDepartment] = useState("")
     const [selectedRow, setselectedRow] = useState([]);
 
 
@@ -29,11 +31,16 @@ const AssignPhoneByTechnician = (props) => {
     const handleTechnician = (val) => {
         setTechnician(val)
     }
+    const handleDepartment = (val) => {
+        setDepartment(val)
+        props.getProductionUsersById(val, props.locationId);
+    }
     console.log(user)
 
     useEffect(() => {
-        props.getProductionUsersById(props.locationDetailsId);
-        props.getNoOfPhoneById(props.rowData.orderPhoneId)
+        props.getProductionUsersById(props.rowData.departmentId, props.locationId);
+        props.getNoOfPhoneById(props.rowData.orderPhoneId);
+        props.getDepartments()
     }, [])
 
     const [dueDate, setDueDate] = useState("")
@@ -72,6 +79,24 @@ const AssignPhoneByTechnician = (props) => {
                         fontSize: "15px",
                         fontWeight: "600",
                         margin: "10px",
+                    }}>Department</label>
+                    <Select
+                        style={{
+                            width: 250,
+                        }}
+                        value={department}
+                        onChange={(value) => handleDepartment(value)}
+                    >
+                        {props.departments.map((a) => {
+                            return <Option value={a.departmentId}>{a.departmentName}</Option>;
+                        })}
+                    </Select>
+                </div>
+                <div>
+                    <label style={{
+                        fontSize: "15px",
+                        fontWeight: "600",
+                        margin: "10px",
                     }}>Technician</label>
                     <Select
                         style={{
@@ -81,7 +106,7 @@ const AssignPhoneByTechnician = (props) => {
                         onChange={(value) => handleTechnician(value)}
                     >
                         {props.productionUser.map((a) => {
-                            return <Option value={a.userId}>{a.productionManagerName}</Option>;
+                            return <Option value={a.employeeId}>{a.empName}</Option>;
                         })}
                     </Select>
                 </div>
@@ -123,7 +148,7 @@ const AssignPhoneByTechnician = (props) => {
                         dueDate: dueDate
                     },
                         props.rowData.orderPhoneId,
-                        props.locationDetailsId
+                        props.locationId
                     )}>
                     Submit
                 </Button>
@@ -133,13 +158,13 @@ const AssignPhoneByTechnician = (props) => {
 }
 
 
-const mapStateToProps = ({ auth, production }) => ({
-    productionUser: production.productionUser,
-    noOfPhoneById: production.noOfPhoneById,
-    locationDetailsId: auth.userDetails.locationDetailsId,
-    fetchingNoOfPhonesById: production.fetchingNoOfPhonesById,
+const mapStateToProps = ({ auth, refurbish, departments }) => ({
+    productionUser: refurbish.productionUser,
+    noOfPhoneById: refurbish.noOfPhoneById,
+    fetchingNoOfPhonesById: refurbish.fetchingNoOfPhonesById,
     userId: auth.userDetails.userId,
-
+    departments: departments.departments,
+    locationId: auth.userDetails.locationId,
 });
 
 const mapDispatchToProps = (dispatch) =>
@@ -148,7 +173,7 @@ const mapDispatchToProps = (dispatch) =>
             getProductionUsersById,
             UpdateTechnicianByPhone,
             getNoOfPhoneById,
-
+            getDepartments
         },
         dispatch
     );

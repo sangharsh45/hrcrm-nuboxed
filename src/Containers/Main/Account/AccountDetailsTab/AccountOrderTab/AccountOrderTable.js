@@ -3,10 +3,17 @@ import { StyledTable } from '../../../../../Components/UI/Antd';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import moment from 'moment/moment';
-import { getDistributorOrderByDistributorId, handleInventoryLocationInOrder, handleOrderDetailsModal } from "../../AccountAction"
+import {
+    getDistributorOrderByDistributorId,
+    handleInventoryLocationInOrder,
+    handleOrderDetailsModal,
+    handleStatusOfOrder
+} from "../../AccountAction"
 import { Button, Tooltip } from 'antd';
 import AddLocationInOrder from './AddLocationInOrder';
 import AccountOrderDetailsModal from './AccountOrderDetailsModal';
+import StatusOfOrderModal from './StatusOfOrderModal';
+import { StepForwardFilled } from '@ant-design/icons';
 
 const AccountOrderTable = (props) => {
 
@@ -213,25 +220,25 @@ const AccountOrderTable = (props) => {
         //         );
         //     },
         // },
-        // {
-        //     title: "",
-        //     width: "3%",
-        //     render: (text, item) => {
-        //         return (
-        //             <>
-        //                 {/* <FontAwesomeIcon icon="fas fa-stream" /> */}
-        //                 <Tooltip title="Status">
-        //                     <StepForwardFilled
-        //                     // onClick={() => {
-        //                     //   props.handleStatusOfOrder(true);
-        //                     //   handleSetParticularOrderData(item);
-        //                     // }}
-        //                     />
-        //                 </Tooltip>
-        //             </>
-        //         )
-        //     }
-        // },
+        {
+            title: "",
+            width: "3%",
+            render: (text, item) => {
+                return (
+                    <>
+                        {/* <FontAwesomeIcon icon="fas fa-stream" /> */}
+                        <Tooltip title="Status">
+                            <StepForwardFilled
+                                onClick={() => {
+                                    props.handleStatusOfOrder(true);
+                                    handleSetParticularOrderData(item);
+                                }}
+                            />
+                        </Tooltip>
+                    </>
+                )
+            }
+        },
         // {
         //     title: "",
         //     width: "3%",
@@ -318,18 +325,25 @@ const AccountOrderTable = (props) => {
                 particularRowData={particularRowData}
                 handleOrderDetailsModal={props.handleOrderDetailsModal}
                 addOrderDetailsModal={props.addOrderDetailsModal} />
+            <StatusOfOrderModal
+                handleStatusOfOrder={props.handleStatusOfOrder}
+                addStatusOfOrder={props.addStatusOfOrder}
+                particularRowData={particularRowData}
+            />
         </>
     )
 }
 const mapStateToProps = ({ distributor }) => ({
     distributorOrder: distributor.distributorOrder,
     addInventoryInOrder: distributor.addInventoryInOrder,
-    addOrderDetailsModal: distributor.addOrderDetailsModal
+    addOrderDetailsModal: distributor.addOrderDetailsModal,
+    addStatusOfOrder: distributor.addStatusOfOrder
 });
 const mapDispatchToProps = dispatch => bindActionCreators({
     getDistributorOrderByDistributorId,
     handleInventoryLocationInOrder,
-    handleOrderDetailsModal
+    handleOrderDetailsModal,
+    handleStatusOfOrder
 }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(AccountOrderTable);
