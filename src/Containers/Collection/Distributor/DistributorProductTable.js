@@ -2,10 +2,10 @@ import React, { Component } from "react";
 import { Tooltip } from "antd";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { StyledTable } from "../../../../Components/UI/Antd";
+import { StyledTable } from "../../../Components/UI/Antd";
 import { getOrderDetailsById } from "../../Main/Account/AccountAction";
-import { CurrencySymbol } from "../../../../Components/Common";
-import APIFailed from "../../../../Helpers/ErrorBoundary/APIFailed";
+import { CurrencySymbol } from "../../../Components/Common";
+import APIFailed from "../../../Helpers/ErrorBoundary/APIFailed";
 
 
 class DistributorProductTable extends Component {

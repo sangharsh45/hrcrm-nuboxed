@@ -81,12 +81,12 @@ function APIFailed() {
           <Spacer />
           <Button
             type="primary"
-            icon="reload"
+            // icon="reload"
             onClick={() => handleRefreshPage()}
           >
             <FormattedMessage
-              id="app.retry"
-              defaultMessage="Retry"
+              id="app.refresh"
+              defaultMessage="Refresh"
             />
             {/* Retry */}
           </Button>

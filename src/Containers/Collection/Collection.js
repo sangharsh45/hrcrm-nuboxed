@@ -87,10 +87,10 @@ class Collection extends Component {
         />
       <Suspense fallback={<BundleLoader />}>
           {/* {viewType === "distributor" ? ( */}
-            {/* <CollectionDistributorTab
+           <CollectionDistributorTab
               handleTabChange1={this.handleTabChange1}
-              activeKey1={activeKey1}
-            /> */}
+             activeKey1={activeKey1}
+           /> 
           {/* )
            : viewType === "customer" ? ( */}
             {/* <CollectionCustomerTab

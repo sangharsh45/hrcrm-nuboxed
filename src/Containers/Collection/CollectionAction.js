@@ -1,5 +1,5 @@
 import * as types from "./CollectionActionTypes";
-import { base_url } from "../../Config/Auth";
+import { base_url,base_url2 } from "../../Config/Auth";
 import { message } from "antd";
 import axios from "axios";
 import moment from "moment";
@@ -68,7 +68,11 @@ export const getTodayDistributor = () => (dispatch) => {
     type: types.GET_TODAY_DISTRIBUTOR_REQUEST,
   });
   axios
-    .get(`${base_url}/order/payment/distributor`)
+    .get(`${base_url2}/order/payment/distributor`,{
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
     .then((res) => {
       console.log(res);
       dispatch({
@@ -511,7 +515,7 @@ export const DistributorCollectionReceivableToday = (payment) => (dispatch) => {
     type: types.DISTRIBUTOR_COLLECTION_RECEIVABLE_REQUEST,
   });
   axios
-    .post(`${base_url}/report/orderPaymentList/notApperovedByFinance`, payment)
+    .post(`${base_url2}/report/orderPaymentList/notApperovedByFinance`, payment)
     .then((res) => {
       console.log(res);
       dispatch({
