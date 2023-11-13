@@ -4,15 +4,16 @@ import { bindActionCreators } from "redux";
 import { StyledTable } from "../../../Components/UI/Antd";
 import { getPhoneOrderIdByUser, handleQCPhoneNotesOrderModal, getOrderByUser } from "./RefurbishAction";
 import { Button, Tooltip } from "antd";
-import { FileDoneOutlined, IeOutlined } from "@ant-design/icons";
-// import QRCodeModal from "../../../Components/UI/Elements/QRCodeModal";
+import { FileDoneOutlined } from "@ant-design/icons";
+import QRCodeModal from "../../../Components/UI/Elements/QRCodeModal";
 import { SubTitle } from "../../../Components/UI/Elements";
 import ButtonGroup from "antd/lib/button/button-group";
-// import { updateQCStatus } from "../../../Distributor/DistributorAction"
-import DistributorPhoneTaskTable from "./DistributorPhoneTaskTable";
+import { updateQCStatus } from "../Account/AccountAction"
 import moment from "moment";
-// import QCPhoneNotesOrderModal from "./QCNotes/QCPhoneNotesOrderModal";
-// import AddingQCSpareList from "./QCSpare/AddingQCSpareList";
+import QCPhoneNotesOrderModal from "./QCPhoneNotesOrderModal";
+import AddingQCSpareList from "./AddingQCSpareList";
+import { NoteAddOutlined } from "@mui/icons-material";
+import DistributorPhoneTaskTable from "./DistributorPhoneTaskTable";
 
 function OrderPhoneListById(props) {
     useEffect(() => {
@@ -73,13 +74,14 @@ function OrderPhoneListById(props) {
             qcStatus: type,
             orderPhoneId: props.rowData.orderId,
             phoneId: item.phoneId,
+            qcTechnicianId: props.userId,
             qcInspectionInd: type === "Complete" ? 2 : 1
         }
-        // props.updateQCStatus(data, item.phoneId, props.rowData.orderPhoneId, handleCallBack)
+        props.updateQCStatus(data, item.phoneId, props.rowData.orderPhoneId, handleCallBack)
     }
     const handleCallBack = () => {
         props.getPhoneOrderIdByUser(props.rowData.orderPhoneId, props.userId)
-        props.getOrderByUser(props.locationDetailsId, props.userId)
+        props.getOrderByUser(props.locationId, props.userId)
     }
     const [hide, setHide] = useState(false);
 
@@ -114,7 +116,7 @@ function OrderPhoneListById(props) {
             render: (name, item, i) => {
                 return (
                     <SubTitle>
-                        {/* {item.qrCodeId ? (
+                        {item.qrCodeId ? (
                             <QRCodeModal
                                 qrCodeId={item.qrCodeId ? item.qrCodeId : ''}
                                 imgHeight={"2.8em"}
@@ -125,7 +127,7 @@ function OrderPhoneListById(props) {
                             <span style={{ fontSize: "0.6em", fontWeight: "bold" }}>
                                 No QR
                             </span>
-                        )} */}
+                        )}
                     </SubTitle>
                 );
             },
@@ -136,7 +138,7 @@ function OrderPhoneListById(props) {
                 return (
                     <>
                         {props.rowData.qcInspectionInd === 1 && <ButtonGroup>
-                            <StatusIcon
+                            {/* <StatusIcon
                                 color="blue"
                                 type="To Start"
                                 iconType="fa-hourglass-start"
@@ -148,7 +150,7 @@ function OrderPhoneListById(props) {
                                 onClick={() => {
                                     handleQCStatus("To Start", item);
                                 }}
-                            />
+                            /> */}
                             <StatusIcon
                                 type="In Progress"
                                 iconType="fa-hourglass-half"
@@ -202,7 +204,7 @@ function OrderPhoneListById(props) {
         },
 
         {
-            title: "Estimated Time",
+            title: "Actual Effort",
             width: "10%",
             render: (text, item) => {
                 return (
@@ -211,8 +213,8 @@ function OrderPhoneListById(props) {
             }
         },
         {
-            title: "Hour",
-            width: "7%",
+            title: "Estimated Hours",
+            width: "10%",
             dataIndex: "totalhours"
         },
 
@@ -264,7 +266,7 @@ function OrderPhoneListById(props) {
                 //debugger
                 return (
                     <Tooltip title="Notes">
-                        <FileDoneOutlined
+                        <NoteAddOutlined
                             style={{ cursor: "pointer", fontSize: "13px" }}
                             onClick={() => {
                                 handleSetRowData(item);
@@ -293,39 +295,39 @@ function OrderPhoneListById(props) {
                     onClick={handlePuaseButton}>{hide ? "Resume" : "Pause"}
                 </Button> : null}
             </div>
-            {/* {spares && (
+            {spares && (
                 <AddingQCSpareList
                     phoneId={phoneId}
                     RowData={RowData}
                 />
-            )} */}
+            )}
             {expand && (
                 <DistributorPhoneTaskTable
                     phoneId={phoneId}
                     RowData={RowData} />
             )}
 
-            {/* <QCPhoneNotesOrderModal
+            <QCPhoneNotesOrderModal
                 RowData={RowData}
                 phoNotesQCOrderModal={props.phoNotesQCOrderModal}
                 handleQCPhoneNotesOrderModal={props.handleQCPhoneNotesOrderModal}
-            /> */}
+            />
         </>
     );
 }
 
 const mapStateToProps = ({ refurbish, auth }) => ({
     orderPhoneList: refurbish.orderPhoneList,
+    locationId: auth.userDetails.locationId,
     userId: auth.userDetails.userId,
     phoNotesQCOrderModal: refurbish.phoNotesQCOrderModal,
-    locationDetailsId: auth.userDetails.locationDetailsId,
 });
 
 const mapDispatchToProps = (dispatch) =>
     bindActionCreators(
         {
             getPhoneOrderIdByUser,
-            // updateQCStatus,
+            updateQCStatus,
             handleQCPhoneNotesOrderModal,
             getOrderByUser
         },

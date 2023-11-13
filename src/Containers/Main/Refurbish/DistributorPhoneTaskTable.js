@@ -1,13 +1,13 @@
 import React, { useState, useEffect, useMemo } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-// import { getPhoneTasklist } from "../../../../DistributorAction";
+import { getPhoneTasklist } from "../Account/AccountAction";
 import { MainWrapper } from "../../../Components/UI/Elements";
 import { Checkbox, Switch } from "antd";
 
 function DistributorPhoneTaskTable(props) {
     useEffect(() => {
-        //props.getPhoneTasklist(props.phoneId)
+        props.getPhoneTasklist(props.phoneId)
         settask1Ind(props.phoTasklist.task1Ind)
         settask2Ind(props.phoTasklist.task2Ind)
         settask3Ind(props.phoTasklist.task3Ind)
@@ -51,7 +51,7 @@ const mapStateToProps = ({ distributor }) => ({
 const mapDispatchToProps = (dispatch) =>
     bindActionCreators(
         {
-            //getPhoneTasklist
+            getPhoneTasklist
         },
         dispatch
     );
