@@ -133,7 +133,7 @@ class MileageApproveForm extends Component {
                             <div
                                 style={{
                                     minHeight: "40vh",
-                                    width: "70%"
+                                    width: "71%"
                                 }}>
 
                                 <div>

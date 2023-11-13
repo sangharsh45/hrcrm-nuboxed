@@ -835,9 +835,9 @@ function NavMenu(props) {
 
 
 
-        <hr />
+        
         {/* {user.imInd === true  && ( */}
-        <Menu.Item key="/report" style={{ height: "27px", paddingLeft: "1rem" }}>
+        {/* <Menu.Item key="/report" style={{ height: "27px", paddingLeft: "1rem" }}>
           <Link to="/leave">
             <i class="fas fa-luggage-cart"></i>
             <span class="text-white text-ls ml-1"><FormattedMessage
@@ -851,10 +851,10 @@ function NavMenu(props) {
               ></Badge>
             </span>
           </Link>
-        </Menu.Item>
+        </Menu.Item> */}
         {/* )} */}
         {/* {user.userType !== "USER" && user.imInd === true  && user.department !== "VENDOR" && (  */}
-        <Menu.Item key="/mileage" style={{ height: "27px", paddingLeft: "1rem" }}>
+        {/* <Menu.Item key="/mileage" style={{ height: "27px", paddingLeft: "1rem" }}>
           <Link to="/mileage">
 
             <i class="fas fa-tachometer-alt"></i>
@@ -869,7 +869,7 @@ function NavMenu(props) {
               ></Badge>
             </span>
           </Link>
-        </Menu.Item>
+        </Menu.Item> */}
         <hr />
         {/* {user.imInd === true  && ( */}
         <Menu.Item key="/report" style={{ height: "27px", paddingLeft: "1rem" }}>

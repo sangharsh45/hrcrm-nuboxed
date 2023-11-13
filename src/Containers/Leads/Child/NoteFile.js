@@ -140,7 +140,7 @@ class NoteFile extends Component {
                   editorStyle={{
                     height: 100,
                     overflow: "auto",
-                     border:"solid grey 2px"
+                     border:"solid lightgrey 2px"
                   }}
                   onEditorStateChange={this.onEditorStateChange}
                   placeholder={placeholder || "Type here"}
