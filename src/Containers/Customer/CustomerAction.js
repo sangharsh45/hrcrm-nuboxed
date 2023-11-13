@@ -533,7 +533,7 @@ export const getCustomerDocument = (customerId) => (dispatch) => {
 };
 
 /*request for adding a customer  opportunity */
-export const addCustomerOpportunity = (opportunity, cb) => (
+export const addCustomerOpportunity = (opportunity,userId, cb) => (
   dispatch,
   getState
 ) => {
@@ -557,6 +557,7 @@ export const addCustomerOpportunity = (opportunity, cb) => (
         .endOf("month")
         .toISOString();
       dispatch(getOpportunityListByCustomerId(customerId));
+      dispatch(getOpportunityRecord(userId));
       // dispatch(getLatestOpportunities(userId, startDate, endDate));
       // dispatch(getOpportunitiesByPrice(userId));
       dispatch({
@@ -632,7 +633,7 @@ export const updateCustomerOpportunity = (data, opportunityId) => (dispatch) => 
 /**
  * request for adding a contact
  */
-export const addCustomerContact = (contact) => (dispatch, getState) => {
+export const addCustomerContact = (contact,userId) => (dispatch, getState) => {
   // const userId = getState().auth.userDetails.userId;
   const customerId = getState().customer.customer.customerId;
   // const opportunityId = getState().opportunity.opportunity.opportunityId;
@@ -658,7 +659,7 @@ export const addCustomerContact = (contact) => (dispatch, getState) => {
       const endDate = dayjs()
         .endOf("month")
         .toISOString();
-      // dispatch(getContactById(contactId));
+      dispatch(getOpportunityRecord(userId));
       // dispatch(getLatestContacts(userId, startDate, endDate));
       // dispatch(getContactListByCustomerId(customerId));
 
@@ -1975,6 +1976,32 @@ export const getAllCustomerByCloser = (userId, startDate, endDate) => (
       type: types.HANDLE_CUSTOMER_PULSE_DRAWER_MODAL,
       payload: modalProps,
     });
+  };
+
+  export const getOpportunityRecord = (userId) => (dispatch) => {
+    dispatch({
+      type: types.GET_OPPORTUNITY_RECORD_REQUEST,
+    });
+    axios
+      .get(`${base_url}/candidate/record/today/${userId}`,{
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+        },
+      })
+      .then((res) => {
+        console.log(res);
+        dispatch({
+          type: types.GET_OPPORTUNITY_RECORD_SUCCESS,
+          payload: res.data,
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+        dispatch({
+          type: types.GET_OPPORTUNITY_RECORD_FAILURE,
+          payload: err,
+        });
+      });
   };
 
 
