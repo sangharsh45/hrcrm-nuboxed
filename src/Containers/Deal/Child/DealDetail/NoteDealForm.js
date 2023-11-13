@@ -8,7 +8,7 @@ import * as Yup from "yup";
 import { Editor } from "react-draft-wysiwyg";
 import { EditorState, convertToRaw } from "draft-js";
 import draftToHtml from "draftjs-to-html";
-import { addNote } from "../../../Contact/ContactAction";
+import { addDealsNote } from "../../DealAction";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import { FlexContainer } from "../../../../Components/UI/Layout";
 
@@ -61,7 +61,7 @@ class NoteDealForm extends Component {
   render() {
     const {
       user: { userId, firstName, lastName },
-      addNote,
+      addDealsNote,
       invOpportunityId,
       notes,
       collectionDTO,
@@ -92,7 +92,7 @@ class NoteDealForm extends Component {
           initialValues={{
             notes: "",
             invOpportunityId:invOpportunityId ? invOpportunityId : "",
-            type: type ? type : "",
+            // type: type ? type : "",
           }}
           onSubmit={(values, { resetForm }) => {
             console.log(
@@ -104,7 +104,7 @@ class NoteDealForm extends Component {
             // const htmlBody = 'draftToHtml(convertToRaw(editorState.getCurrentContent()))'
 
             console.log({ ...values, notes: htmlBody });
-            addNote({ ...values, notes: htmlBody }, this.createCallback);
+            addDealsNote({ ...values, notes: htmlBody }, this.createCallback);
             resetForm();
           }}
         >
@@ -176,7 +176,7 @@ const mapStateToProps = ({ auth, team, contact }) => ({
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
-      addNote,
+      addDealsNote,
     },
     dispatch
   );

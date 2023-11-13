@@ -555,7 +555,9 @@ export const setEditOpportunity = (name) => (dispatch) => {
 /**
  * update a opportunity using put request
  */
-export const updateOpportunity = (data, opportunityId) => (
+
+
+ export const updateOpportunity = (data, opportunityId) => (
   dispatch,
   getState
 ) => {
@@ -583,6 +585,7 @@ export const updateOpportunity = (data, opportunityId) => (
       });
     });
 };
+
 
 /**
  * add document to a opportunity

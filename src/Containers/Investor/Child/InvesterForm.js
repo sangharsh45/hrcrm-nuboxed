@@ -13,7 +13,7 @@ import SearchSelect from "../../../Components/Forms/Formik/SearchSelect";
 import AddressFieldArray from "../../../Components/Forms/Formik/AddressFieldArray";
 import {AddInvestor} from "../InvestorAction";
 import {setClearbitData} from "../../Customer/CustomerAction";
-import { getAllSalesList } from "../../Opportunity/OpportunityAction"
+// import { getAllSalesList } from "../../Opportunity/OpportunityAction"
 import { Listbox} from '@headlessui/react'
 import { TextareaComponent } from "../../../Components/Forms/Formik/TextareaComponent";
 import { InputComponent } from "../../../Components/Forms/Formik/InputComponent";
@@ -48,7 +48,7 @@ function InvesterForm(props) {
   useEffect(() => {
     props.getAllCustomerEmployeelist();
     props.getSectors();
-    props.getAllSalesList();
+    // props.getAllSalesList();
   }, []);
 
     const {
@@ -443,7 +443,7 @@ const mapStateToProps = ({ auth,investor, customer,employee ,opportunity,sector}
   addingInvestor: investor.addingInvestor,
   clearbit: customer.clearbit,
   user: auth.userDetails,
-  sales: opportunity.sales,
+  // sales: opportunity.sales,
   allCustomerEmployeeList:employee.allCustomerEmployeeList,
   userId: auth.userDetails.userId,
   sectors: sector.sectors,
@@ -456,7 +456,7 @@ const mapDispatchToProps = (dispatch) =>
         AddInvestor,
       setClearbitData,
       getSectors,
-      getAllSalesList,
+      // getAllSalesList,
       getAllCustomerEmployeelist,
     },
     dispatch

@@ -372,3 +372,56 @@ export const LinkStageDeal = (data, cb) => (dispatch) => {
       cb && cb("failure");
     });
 };
+
+export const addDealsNote = (note, cb) => (dispatch) => {
+  dispatch({ type: types.ADD_DEALS_NOTES_REQUEST });
+  axios
+    .post(`${base_url}/investorOpportunity/notes`, note, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      dispatch({
+        type: types.ADD_DEALS_NOTES_SUCCESS,
+        payload: res.note,
+      });
+      console.log(res);
+      cb && cb();
+    })
+    .catch((err) => {
+      dispatch({
+        type: types.ADD_DEALS_NOTES_FAILURE,
+        payload: err,
+      });
+      console.log(err);
+      cb && cb();
+    });
+    
+};
+
+export const getNotesListByDealId = (invOpportunityId) => (dispatch) => {
+  dispatch({
+    type: types.GET_NOTES_LIST_BY_DEAL_ID_REQUEST,
+  });
+  axios
+    .get(`${base_url}/notes/investorOpportunity/${invOpportunityId}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.GET_NOTES_LIST_BY_DEAL_ID_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.GET_NOTES_LIST_BY_DEAL_ID_FAILURE,
+        payload: err,
+      });
+    });
+};

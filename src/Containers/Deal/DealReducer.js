@@ -8,6 +8,10 @@ const initialState = {
   fetchingDealError:false,
   dealsByuserId:[],
 
+  fetchingNotesListByDealId: false,
+  fetchingNotesListByDealIdError: false,
+  notesListByDealId:[],
+
   addDrawerDealsNotesModal:false,
 
   fetchingDealLinkedWorkflow: false,
@@ -17,6 +21,9 @@ const initialState = {
   fetchingDealLinkedStages: false,
   fetchingDealLinkedStagesError: false,
   dealLinkStages:[],
+
+  addingNotesByDealsId: false,
+  addingNotesByDealsIdError: false,
 
   linkingDeal: false,
   linkingDealError: false,
@@ -268,6 +275,41 @@ export const dealReducer = (state = initialState, action) => {
                linkingDeal: false,
                linkingDealError: true,
              };
+
+             case types.ADD_DEALS_NOTES_REQUEST:
+              return {
+                ...state,
+                addingNotesByDealsId: true,          
+              };
+            case types.ADD_DEALS_NOTES_SUCCESS:
+              return {
+                ...state,
+                addingNotesByDealsId: false,
+                addingNotesByDealsId: false,
+                // addDrawerDealsNotesModal:false,
+              };
+            case types.ADD_DEALS_NOTES_FAILURE:
+              return {
+                ...state,
+                addingNotesByDealsId: false,
+                addingNotesByDealsIdError: true,
+              }; 
+
+
+              case types.GET_NOTES_LIST_BY_DEAL_ID_REQUEST:
+                return { ...state, fetchingNotesListByDealId: true };
+              case types.GET_NOTES_LIST_BY_DEAL_ID_SUCCESS:
+                return {
+                  ...state,
+                  fetchingNotesListByDealId: false,
+                  notesListByDealId: action.payload,
+                };
+              case types.GET_NOTES_LIST_BY_DEAL_ID_FAILURE:
+                return {
+                  ...state,
+                  fetchingNotesListByDealId: false,
+                  fetchingNotesListByDealIdError: true,
+                };
                        
                             
     default:

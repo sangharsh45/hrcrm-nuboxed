@@ -4,27 +4,27 @@ import { bindActionCreators } from "redux";
 import { Timeline } from "antd";
 import { BorderBox } from "../../../../Components/UI/Layout";
 import { BundleLoader } from "../../../../Components/Placeholder";
-import { getNotesListByContactId } from "../../../Contact/ContactAction";
+import { getNotesListByDealId } from "../../DealAction";
 
-import { SingleNote } from "../../../../Components/Common";
 import NoteDealForm from "./NoteDealForm";
+import SingleNote from "./SingleNote";
 
 class LinkedDealNotes extends Component {
   componentDidMount() {
-    this.props.getNotesListByContactId(this.props.invOpportunityId);
+    this.props.getNotesListByDealId(this.props.invOpportunityId);
   }
 
   render() {
-    const { fetchingNotesListByContactId, notesListByContactId } = this.props;
+    const { fetchingNotesListByDealId, notesListByDealId } = this.props;
     console.log("data5", this.props.invOpportunityId);
     return (
       <>
         <div style={{ backgroundColor: "#dcdcdc", height: "14.375em" }}>
           <NoteDealForm
-            type={"contact"}
+            type={"deals"}
             invOpportunityId={this.props.invOpportunityId}
             callback={() =>
-              this.props.getNotesListByContactId(this.props.invOpportunityId)
+              this.props.getNotesListByDealId(this.props.invOpportunityId)
             }
           />
         </div>
@@ -33,12 +33,12 @@ class LinkedDealNotes extends Component {
         <BorderBox>
           <div 
            style={{ height: 200, overflow: "auto", padding: "0.3rem" }}>
-            {fetchingNotesListByContactId ? (
+            {fetchingNotesListByDealId ? (
               <BundleLoader />
             ) : (
                 <Timeline>
-                  {notesListByContactId &&
-                    notesListByContactId.map((item, index) => (
+                  {notesListByDealId &&
+                    notesListByDealId.map((item, index) => (
                       <Timeline.Item
                         key={index}
                         style={{ paddingBottom: "0.625em" }}
@@ -55,17 +55,17 @@ class LinkedDealNotes extends Component {
   }
 }
 
-const mapStateToProps = ({ auth, contact,contactinvest }) => ({
+const mapStateToProps = ({ auth, contact,deal,contactinvest }) => ({
   userId: auth.userDetails.userId,
-  notesListByContactId: contact.notesListByContactId,
-  fetchingNotesListByContactId: contact.fetchingNotesListByContactId,
+  notesListByDealId: deal.notesListByDealId,
+  fetchingNotesListByDealId: deal.fetchingNotesListByDealId,
   contactId: contactinvest.contactInVestDetail.contactId,
 });
 
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
-      getNotesListByContactId,
+      getNotesListByDealId,
     },
     dispatch
   );

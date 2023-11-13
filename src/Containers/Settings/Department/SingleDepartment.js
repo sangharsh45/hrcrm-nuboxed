@@ -14,6 +14,7 @@ import DepartmentStatusToggle from "./DepartmentStatusToggle";
 import ERPStatusToggle from "./ERPStatusToggle";
 import CRMStatusToggle from "./CRMStatusToggle";
 import IMStatusToggle from "./IMStatusToggle";
+import AccountingStatusToggle from "./AccountingStatusToggle";
 const { Option } = Select;
 
 class SingleDepartment extends Component {
@@ -93,6 +94,14 @@ class SingleDepartment extends Component {
                     <h1>IM</h1>
                     <div style={{width:"16%"}}>
                     <IMStatusToggle
+                      imInd={imInd}
+                      departmentName={departmentName}
+                      departmentId={departmentId}
+                    />  
+                    </div>
+                    <h1>Accounting</h1>
+                    <div style={{width:"15%"}}>
+                    <AccountingStatusToggle
                       imInd={imInd}
                       departmentName={departmentName}
                       departmentId={departmentId}
