@@ -38,6 +38,7 @@ class EmployeeForm extends Component {
       active: false,
       checked: true,
       typeInd:false,
+      
       selectedCountry: '',
       locations: [],
       selectedLocation: "",
@@ -669,52 +670,51 @@ getEmployeesbyDepartment (filterOptionKey, filterOptionValue) {
 
                   <div class=" flex justify-between max-sm:flex-col" >
                       <div class=" w-w48 max-sm:w-wk">
-                  <Field
-                    name="departmentId"
-                    label={<FormattedMessage
-                      id="app.department"
-                      defaultMessage="Department"
-                    />}
-                    isColumnWithoutNoCreate
-                    component={SelectComponent}
-                    // value={values.departmentId}
-                    width={"100%"}
-                    options={
-                      Array.isArray(WorkflowOptions) ? WorkflowOptions : []
-                    }
-                    isColumn
-                    inlineLabel
-                     />
+                      <Field
+  isRequired
+  name="departmentId"
+  label={<FormattedMessage id="app.department" defaultMessage="Department" />}
+  isColumnWithoutNoCreate
+  component={SearchSelect}
+  value={values.departmentId}
+  selectType="departmentName"
+  isColumn
+  inlineLabel
+  onChange={(selectedDepartment) => {
+    setFieldValue("departmentId", selectedDepartment);
+    // Handle other updates here, if needed
+  }}
+/>
                      </div>
                      <Spacer/>
                      <div class="w-w47.5 max-sm:w-wk">
                      <Field
-                    name="reportingManager"
-                    isColumnWithoutNoCreate
-                    label={<FormattedMessage
-                      id="app.reportingManager"
-                      defaultMessage="Reporting Manager"
-                    />}
-                    component={SelectComponent}
-                    options={
-                      Array.isArray(
-                        this.getEmployeesbyDepartment("departmentId", values.departmentId)
-                      )
-                        ? this.getEmployeesbyDepartment(
-                            "departmentId",
-                            values.departmentId
-                          )
-                        : []
-                    }
-                    isColumn
-                    value={values.reportingManager}
-                    filterOption={{
-                      filterType: "departmentId",
-                      filterValue: values.departmentId,
-                    }}
-                    disabled={!values.departmentId}
-                    inlineLabel
-                   />
+  name="reportingManager"
+  isColumnWithoutNoCreate
+  label={<FormattedMessage id="app.reportingManager" defaultMessage="Reporting Manager" />}
+  component={SelectComponent}
+  options={
+    values.departmentId
+      ? (Array.isArray(
+          this.getEmployeesbyDepartment("departmentId", values.departmentId)
+        )
+          ? this.getEmployeesbyDepartment(
+              "departmentId",
+              values.departmentId
+            )
+          : [])
+      : [] // Set it to an empty array or a default value when department is not selected
+  }
+  isColumn
+  value={values.reportingManager}
+  filterOption={{
+    filterType: "departmentId",
+    filterValue: values.departmentId,
+  }}
+  disabled={!values.departmentId}
+  inlineLabel
+/>
+
               </div>
               </div>
                   {/* <Field

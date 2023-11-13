@@ -35,9 +35,9 @@ class Employees extends Component {
     // this.props.emptyCustomer();
     this.props.getEmployeelist();
   };
-  componentDidMount(){
-    this.props.getEmployeelist("cretiondate");
-  }
+  // componentDidMount(){
+  //   this.props.getEmployeelist("cretiondate");
+  // }
   render() {
     const filteredData = this.props.employees.filter((item) =>
       this.state.selectedLocation === '' || item.location === this.state.selectedLocation

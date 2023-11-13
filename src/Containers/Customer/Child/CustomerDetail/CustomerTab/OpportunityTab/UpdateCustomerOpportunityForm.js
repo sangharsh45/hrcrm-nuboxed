@@ -59,9 +59,17 @@ function UpdateCustomerOpportunityForm(props) {
             return option;
           }
         })
-        
+        .sort((a, b) => {
+          if (a.probability < b.probability) {
+            return -1; // Sort in increasing order
+          } else if (a.probability > b.probability) {
+            return 1;
+          } else {
+            return 0;
+          }
+        })
         .map((option) => ({
-          label: option.stageName || "",
+          label: `${option.stageName}  ${option.probability}`,
           value: option.opportunityStagesId,
         }));
 

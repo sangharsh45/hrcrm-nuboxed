@@ -7,7 +7,8 @@ import AccountOrderTable from "./AccountOrderTab/AccountOrderTable";
 import {
     handleLinkDistributorOrderConfigureModal,
     handleDistributorContactModal,
-    handleDistributorActivityModal
+    handleDistributorActivityModal,
+    handleDistributorDocumentUploadModal
 } from "../AccountAction"
 import { Tooltip } from "antd";
 import AddAccountModal from "./AccountOrderTab/AddAccountModal";
@@ -15,6 +16,9 @@ import AddIcon from '@mui/icons-material/Add';
 import NotesForm from "./AccountNoteTab/NoteForm"
 import AccountActivityTable from "./AccountActivityTab/AccountActivityTable";
 import AccountActivityModal from "./AccountActivityTab/AccountActivityModal";
+import AddDistributorDocumentModal from "./AccountDocumentTab/AddDistributorDocumentModal";
+import DistributorDocumentTable from "./AccountDocumentTab/DistributorDocumentTable";
+import LinkedDistributorNotes from "./AccountNoteTab/LinkedDistributorNotes";
 const AccountContactTable = lazy(() => import("./AccountContactTab/AccountContactTable"))
 const AddAccountContact = lazy(() => import("./AccountContactTab/AddAccountContact"))
 
@@ -146,7 +150,7 @@ function AccountDetailsTab(props) {
                         key="4"
                     >
                         <Suspense fallback={"Loading ..."}>
-                            <NotesForm />
+                            <LinkedDistributorNotes />
                         </Suspense>
                     </TabPane>
 
@@ -165,25 +169,56 @@ function AccountDetailsTab(props) {
 
                         </Suspense>
                     </TabPane> */}
-                    <TabPane
-                        tab={
-                            <>
-                                <span>
+
+<TabPane
+              tab={
+                <>
+                     <span>
                                     <i class="far fa-file"></i>
                                     <span style={{ marginLeft: "0.25em" }}>Documents</span>
                                 </span>
-
-                            </>
-                        }
-                        key="5"
-                    >
-                        <Suspense fallback={"Loading ..."}>
-
-                        </Suspense>
-                    </TabPane>
+                  {activeKey === "5" && (
+                    <>
+                      <Tooltip title="Create">
+                        <AddIcon
+                          // type="plus"
+                          // tooltipTitle="Create"
+                          onClick={() =>
+                            props.handleDistributorDocumentUploadModal(
+                              true
+                            )
+                          }
+                          size="0.875em"
+                          style={{
+                            verticalAlign: "center",
+                            marginLeft: "0.25em",
+                          }}
+                        />
+                      </Tooltip>
+                    </>
+                  )}
+                </>
+              }
+              key="5"
+            >
+              <Suspense fallback={"Loading ..."}>
+                <DistributorDocumentTable
+                 distributorId={props.distributorData.distributorId}
+                />
+              </Suspense>
+            </TabPane>
+                   
 
                 </StyledTabs>
             </TabsWrapper>
+            <AddDistributorDocumentModal
+            distributorDocumentUploadModal={
+              props.distributorDocumentUploadModal
+            }
+            handleDistributorDocumentUploadModal={
+              props.handleDistributorDocumentUploadModal
+            }
+          />
             <AddAccountModal
                 handleLinkDistributorOrderConfigureModal={props.handleLinkDistributorOrderConfigureModal}
                 addLinkDistributorOrderConfigureModal={props.addLinkDistributorOrderConfigureModal}
@@ -204,6 +239,7 @@ function AccountDetailsTab(props) {
 const mapStateToProps = ({ distributor, auth }) => ({
     addLinkDistributorOrderConfigureModal: distributor.addLinkDistributorOrderConfigureModal,
     distributorContactModal: distributor.distributorContactModal,
+    distributorDocumentUploadModal: distributor.distributorDocumentUploadModal,
     addDistributorActivityModal: distributor.addDistributorActivityModal
 });
 
@@ -212,7 +248,8 @@ const mapDispatchToProps = (dispatch) =>
         {
             handleLinkDistributorOrderConfigureModal,
             handleDistributorContactModal,
-            handleDistributorActivityModal
+            handleDistributorActivityModal,
+            handleDistributorDocumentUploadModal
         },
         dispatch
     );
