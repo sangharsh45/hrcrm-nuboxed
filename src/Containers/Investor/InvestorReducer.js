@@ -112,6 +112,7 @@ export const investorReducer = (state = initialState, action) => {
         addingInvestor: false,
         addInvestorModal: false,
         investorsbyId: [action.payload, ...state.investorsbyId],
+        clearbit: null
       };
     case types.ADD_INVESTOR_FAILURE:
       return { ...state, addingInvestor: false, addInvestorModal: false };

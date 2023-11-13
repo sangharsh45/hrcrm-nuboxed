@@ -118,7 +118,7 @@ function MileageLevelApproveForm(props) {
                   <p>{`Level ${index + 1}`}</p>
                 </div>
                 
-                <div style={{ width: "47%" }}>
+                <div class="w-[83rem]">
                   <Select
                     name={`level_${index}`}
                     value={row.level}
