@@ -102,23 +102,7 @@ function  handleFilterChange(data){
           </span>
         </Badge>
       </Tooltip>
-      <Tooltip>
-        <Badge
-          size="All"
-          count={(props.viewType === "all" && props.recordData.customer) || 0}
-          overflowCount={999}
-        >
-          <span
-            class=" mr-2 text-sm cursor-pointer"
-            onClick={() => props.setCustomerViewType("all")}
-            style={{
-              color: props.viewType === "all" && "#1890ff",
-            }}
-          >
-           ALL
-          </span>
-        </Badge>
-      </Tooltip>
+      
       <Tooltip>
         <Badge
           size="Teams"
@@ -133,6 +117,23 @@ function  handleFilterChange(data){
             }}
           >
            <PeopleIcon/>
+          </span>
+        </Badge>
+      </Tooltip>
+      <Tooltip>
+        <Badge
+          size="All"
+          count={(props.viewType === "all" && props.recordData.customer) || 0}
+          overflowCount={999}
+        >
+          <span
+            class=" mr-2 text-sm cursor-pointer"
+            onClick={() => props.setCustomerViewType("all")}
+            style={{
+              color: props.viewType === "all" && "#1890ff",
+            }}
+          >
+           ALL
           </span>
         </Badge>
       </Tooltip>

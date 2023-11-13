@@ -84,6 +84,9 @@ function CustomerCardList(props) {
     return () => props.emptyCustomer();
   }, []);
 
+
+
+const [rowdata, setrowdata] = useState("");
   const [currentCustomerId, setCurrentCustomerId] = useState("");
   const [currentCustomer, setCurrentCustomer] = useState("");
   function handleSetCurrentCustomerId(customerId) {
@@ -93,7 +96,9 @@ function CustomerCardList(props) {
   function handleSetCurrentCustomer(item) {
     setCurrentCustomer(item);
   }
-
+  const handleRowData = (data) => {
+    setrowdata(data);
+  };
   const handleLoadMore = () => {
    
       setPage(page + 1);
@@ -132,7 +137,7 @@ function CustomerCardList(props) {
         <OnlyWrapCard style={{backgroundColor:"#E3E8EE"}}>
         <div className=" flex justify-between w-[97.5%] p-2 bg-transparent font-bold sticky top-0 z-10">
         <div className=" md:w-[8.1rem]">Name</div>
-        <div className=" md:w-[4.1rem]">Sector</div>
+        <div className=" md:w-[5.1rem]">Sector</div>
         <div className=" md:w-[6.8rem] ">Country</div>
         <div className="md:w-[5.9rem]"># Opportunity</div>
         <div className="md:w-[7.8rem]">Pipeline Value</div>
@@ -177,7 +182,7 @@ function CustomerCardList(props) {
                                 // }}
                                 >
                                    <div class="flex">
-                                <div className=" flex font-medium flex-col md:w-36 max-sm:w-full  ">
+                                <div className=" flex font-medium flex-col md:w-40 max-sm:w-full  ">
 
                                    
                                         <Tooltip>
@@ -192,7 +197,7 @@ function CustomerCardList(props) {
           title={`${item.name}`}
         >{item.name}</Link>&nbsp;&nbsp;
         {date === currentdate ? (
-          <span
+          <span class="text-xs"
             style={{
               color: "tomato",
               fontWeight: "bold",
@@ -234,7 +239,7 @@ function CustomerCardList(props) {
                                     </h4>
                                 </div>
                                 </div>
-                                <div className=" flex font-medium flex-col md:w-[51rem] max-sm:flex-row w-full max-sm:justify-between ">
+                                <div className=" flex font-medium flex-col md:w-full max-sm:flex-row w-full max-sm:justify-between ">
                                     {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden"># Opportunity</h4> */}
 
                                     <div class=" text-xs text-cardBody font-poppins text-center">
@@ -242,7 +247,7 @@ function CustomerCardList(props) {
 
                                     </div>
                                 </div>
-                                <div className=" flex font-medium flex-col md:w-24 max-sm:flex-row w-full max-sm:justify-between ">
+                                <div className=" flex font-medium flex-col md:w-0 max-sm:flex-row w-full max-sm:justify-between ">
                                     {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden">Pipeline Value</h4> */}
 
                                     <div class=" text-xs text-cardBody font-poppins text-center">
@@ -258,7 +263,7 @@ function CustomerCardList(props) {
 
                                     </div>
                                 </div>
-                                <div className=" flex font-medium items-center  flex-col md:w-36 max-sm:max-sm:flex-row w-full max-sm:justify-between ">
+                                <div className=" flex font-medium items-center  flex-col md:w-72 max-sm:max-sm:flex-row w-full max-sm:justify-between ">
                                     {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden">Assigned to</h4> */}
 
                                     <div class=" text-xs text-cardBody font-poppins">
@@ -278,7 +283,7 @@ function CustomerCardList(props) {
                                     </div>
                                 </div>
                                 <div class="flex md:items-center"> 
-                                <div className=" flex font-medium items-center flex-col md:w-36 max-sm:flex-row w-full max-sm:justify-between mb-2 ">
+                                <div className=" flex font-medium items-center flex-col md:w-28 max-sm:flex-row w-full max-sm:justify-between mb-2 ">
                        
                        {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden">Owner</h4> */}
 
@@ -366,6 +371,7 @@ function CustomerCardList(props) {
                 onClick={() => {
                   handleCustomerNotesDrawerModal(true);
                   handleSetCurrentCustomer(item);
+                  handleRowData(item);
                 }}
                 style={{ color: "green", cursor: "pointer", fontSize: "1rem" }}
               />
@@ -450,6 +456,7 @@ function CustomerCardList(props) {
       
 <AddCustomerNotesDrawerModal
         customer={currentCustomer}
+        rowdata={rowdata}
         addDrawerCustomerNotesModal={addDrawerCustomerNotesModal}
         handleCustomerNotesDrawerModal={handleCustomerNotesDrawerModal}
         handleSetCurrentCustomer={handleSetCurrentCustomer}

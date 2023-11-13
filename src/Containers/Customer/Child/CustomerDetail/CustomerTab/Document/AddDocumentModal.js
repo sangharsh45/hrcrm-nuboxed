@@ -91,7 +91,7 @@ class AddDocumentModal extends Component {
           title={
             <FormattedMessage id="app.document" defaultMessage="Document" />
           }
-          width="65vw"
+          width="55%"
           visible={documentUploadModal}
           destroyOnClose
           maskClosable={false}

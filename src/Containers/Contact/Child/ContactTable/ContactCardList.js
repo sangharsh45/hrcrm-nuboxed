@@ -204,7 +204,7 @@ function ContactCardList(props) {
           title={`${item.fullName}`}
         >{item.fullName}</Link>&nbsp;&nbsp;
         {date === currentdate ? (
-          <span
+          <span class="text-xs"
             style={{
               color: "tomato",
               fontWeight: "bold",

@@ -109,29 +109,7 @@ const ContactActionLeft = (props) => {
           </span>
         </Badge>
       </Tooltip>
-      <Tooltip
-        title="All"
-      >
-        <Badge
-          size="small"
-          count={
-            (props.viewType === "all" &&
-              props.contactRecord.customerContactCount) ||
-            0
-          }
-          overflowCount={5000}
-        >
-          <span
-            class=" mr-2 text-sm cursor-pointer"
-            onClick={() => props.setContactsViewType("all")}
-            style={{
-              color: props.viewType === "all" && "#1890ff",
-            }}
-          >
-           ALL
-          </span>
-        </Badge>
-      </Tooltip>
+   
       <Tooltip
         title="Teams"
       >
@@ -152,6 +130,29 @@ const ContactActionLeft = (props) => {
             }}
           >
          <PeopleIcon/>
+          </span>
+        </Badge>
+      </Tooltip>
+      <Tooltip
+        title="All"
+      >
+        <Badge
+          size="small"
+          count={
+            (props.viewType === "all" &&
+              props.contactRecord.customerContactCount) ||
+            0
+          }
+          overflowCount={5000}
+        >
+          <span
+            class=" mr-2 text-sm cursor-pointer"
+            onClick={() => props.setContactsViewType("all")}
+            style={{
+              color: props.viewType === "all" && "#1890ff",
+            }}
+          >
+           ALL
           </span>
         </Badge>
       </Tooltip>
