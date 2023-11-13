@@ -304,7 +304,7 @@ const LeadsCardList = (props) => {
                     </h4>
                   </div>
                 </div>
-                <div class="flex ">
+                <div class="flex md:items-center ">
                   <div className=" flex font-medium flex-col md:w-32 max-sm:flex-row w-full max-sm:justify-between ">
                     {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden">
                       Assigned to

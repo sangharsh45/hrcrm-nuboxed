@@ -8,7 +8,7 @@ class OpportunityAboutViewCard extends Component {
     const { opportunity } = this.props;
     return (
       <div>
-        <ViewEditCard>
+        <ViewEditCard >
           {({ viewType }, toggleViewType) =>
             viewType === "view" ? (
               <OpportunityRecruiterDetails

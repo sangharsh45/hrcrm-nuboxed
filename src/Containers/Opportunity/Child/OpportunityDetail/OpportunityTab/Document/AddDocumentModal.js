@@ -34,6 +34,8 @@ const ButtonGroup = Button.Group;
 const documentSchema = Yup.object().shape({
 
 documentId: Yup.string().required("Input needed!"),
+documentTypeId: Yup.string().required("Input needed!"),
+documentTitle: Yup.string().required("Input needed!"),
 });
 class AddDocumentModal extends Component {
   constructor(props) {

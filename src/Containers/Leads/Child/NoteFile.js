@@ -140,6 +140,7 @@ class NoteFile extends Component {
                   editorStyle={{
                     height: 100,
                     overflow: "auto",
+                     border:"solid grey 2px"
                   }}
                   onEditorStateChange={this.onEditorStateChange}
                   placeholder={placeholder || "Type here"}
@@ -152,9 +153,8 @@ class NoteFile extends Component {
                     htmlType="submit"
                     disabled={this.state.edit}
                     style={{
-                      marginTop: "3.8125em",
-                      marginBottom: "0.3125em",
-                      marginRight: "0.3125em",
+                      marginTop: "2rem",
+                     
                     }}
                   >
                     <FormattedMessage

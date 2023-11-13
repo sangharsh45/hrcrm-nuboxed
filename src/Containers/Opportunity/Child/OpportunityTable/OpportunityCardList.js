@@ -132,7 +132,7 @@ function OpportunityCardList(props) {
                 next={handleLoadMore}
                 hasMore={hasMore}
                 loader={fetchingOpportunity?<h4 style={{ textAlign: 'center' }}>Loading...</h4> :null}
-                height={"70vh"}
+                height={"87vh"}
             >
 
     <CardWrapper>
@@ -573,7 +573,7 @@ border-radius: 0.35rem;
 border: 3px solid #EEEEEE;
 background-color: rgb(255,255,255);
 box-shadow: 0 0.25em 0.62em #aaa;
-height: 8rem;
+height: 7rem;
 color: rgb(68,68,68);
 margin: 1em;
 padding: 0.2rem;
