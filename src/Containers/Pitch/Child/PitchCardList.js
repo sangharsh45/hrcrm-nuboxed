@@ -298,7 +298,7 @@ onClick={()=>{
                                
           
      <div class="md:w-[1%]"></div>
-     <div class="flex justify-between max-sm:mb-1">
+     <div class="flex justify-between max-sm:mb-1 md:items-center">
      <div class="flex justify-between max-sm:w-[50%] ">
      <div className=" flex font-medium flex-col md:w-32 max-sm:flex-row w-full max-sm:justify-between ">
                                     {/* <h4 class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden">Assigned to</h4> */}

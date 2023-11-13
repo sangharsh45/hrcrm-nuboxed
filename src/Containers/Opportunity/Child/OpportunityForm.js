@@ -360,7 +360,7 @@ function OpportunityForm(props) {
           <div class="overflow-y-auto h-[34rem] overflow-x-hidden max-sm:h-[30rem]">
           <Form className="form-background">
             <div class=" flex justify-between max-sm:flex-col">
-              <div class=" h-full w-[24rem] max-sm:w-wk">
+              <div class=" h-full w-w47.5 max-sm:w-wk">
                 <Spacer />
                 <Field
                   isRequired
@@ -510,7 +510,7 @@ function OpportunityForm(props) {
                 </div>
               </div>
             <div
-               class=" h-full w-[24rem] max-sm:w-wk">
+               class=" h-full w-w47.5 max-sm:w-wk">
               <Listbox value={selected} onChange={setSelected}>
         {({ open }) => (
           <>

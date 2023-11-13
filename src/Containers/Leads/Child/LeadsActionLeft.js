@@ -85,7 +85,7 @@ const LeadsActionLeft = (props) => {
         </span>
       </Tooltip>
       </div>
-      <div class="ml-2">
+      <div class="ml-2 mr-2">
       <Badge
         size="small"
         count={(props.viewType === "list" && props.leadsCountJunked.junkedList) || 0}
