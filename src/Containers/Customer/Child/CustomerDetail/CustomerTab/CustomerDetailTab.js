@@ -36,6 +36,8 @@ import RecruitmentFileTable from "./Recruitment/Child/RecruitmentFileTable";
 import InitiativeForm from "./Initiative/InitiativeForm";
 import AddProjectDrawer from "./ProjectTab/AddProjectDrawer";
 import LinkedProject from "./ProjectTab/LinkedProject";
+import AddCustomerActivityModal from "../AddCustomerActivityModal";
+import CustomerActivityTable from "../CustomerActivityTable";
 const LinkedDocuments = lazy(() => import("./Document/LinkedDocuments"));
 const AddDocumentModal = lazy(() => import("./Document/AddDocumentModal"));
 const AddCustomerContactModal = lazy(() =>
@@ -409,7 +411,9 @@ class ContactDetailTab extends Component {
             >
               <Suspense fallback={"Loading ..."}>
                 {" "}
-                {/* <LinkedInvoice /> */}
+                <CustomerActivityTable
+                 customer={this.props.customer}
+                />
               </Suspense>
             </TabPane>
            
@@ -460,11 +464,11 @@ class ContactDetailTab extends Component {
             addCustomerProjectDrawer={addCustomerProjectDrawer}
             handleCustomerProjectDrawer={handleCustomerProjectDrawer}
           />
-{/*           
+          
           <AddCustomerActivityModal
             callActivityModal={callActivityModal}
-            handleInvoiceModal={handleInvoiceModal}
-          /> */}
+            handleCallActivityModal={handleCallActivityModal}
+          /> 
         </Suspense>
       </>
     );
@@ -476,6 +480,7 @@ const mapStateToProps = ({ auth, customer, contact, opportunity }) => ({
   addCustomerOpportunityModal: customer.addCustomerOpportunityModal,
   customerId: customer.customer.customerId,
   user: auth.userDetails,
+  callActivityModal:customer.callActivityModal,
   addCustomerProjectDrawer:customer.addCustomerProjectDrawer,
   userId: auth.userDetails.userId,
   addCustomerSpeechModal: customer.addCustomerSpeechModal,

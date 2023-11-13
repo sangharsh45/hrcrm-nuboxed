@@ -179,6 +179,10 @@ const initialState = {
   fetchingDocumentsByCustomerIdError: false,
   documentsByCustomerId: [],
 
+  fetchingCusActivityTimelineStatus: false,
+  fetchingCusActivityTimelineStatusError: false,
+  customerActivityTimeline:[],
+
   deleteDocument: false,
   deleteDocumentError: false,
 
@@ -1575,6 +1579,22 @@ export const customerReducer = (state = initialState, action) => {
                                                 fetchingOpportunityRecord: false,
                                                 fetchingOpportunityRecordError: true,
                                               };
+
+
+                                              case types.GET_CUSTOMER_ACTIVITY_TIMELINE_REQUEST:
+                                                return { ...state, fetchingCusActivityTimelineStatus: true };
+                                            case types.GET_CUSTOMER_ACTIVITY_TIMELINE_SUCCESS:
+                                                return {
+                                                    ...state,
+                                                    fetchingCusActivityTimelineStatus: false,
+                                                    customerActivityTimeline: action.payload,
+                                                };
+                                            case types.GET_CUSTOMER_ACTIVITY_TIMELINE_FAILURE:
+                                                return {
+                                                    ...state,
+                                                    fetchingCusActivityTimelineStatus: false,
+                                                    fetchingCusActivityTimelineStatusError: true,
+                                                };
 
     default:
       return state;

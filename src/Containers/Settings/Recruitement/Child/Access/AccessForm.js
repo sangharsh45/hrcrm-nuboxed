@@ -71,6 +71,9 @@ const AccessForm = (props) => {
     setCheckedShipperList(props.departmentAcces.shipper)
     setCheckedPlantList(props.departmentAcces.plant)
     setCheckedTeamsList(props.departmentAcces.teams)
+    setCheckedPaymentsList(props.departmentAcces.payment)
+    setCheckedCollectionList(props.departmentAcces.collection)
+    setCheckedCatalogList(props.departmentAcces.catalog)
     
   }, [props.departmentAcces.vendor,
   props.departmentAcces.customer,
@@ -112,6 +115,10 @@ const AccessForm = (props) => {
   props.departmentAcces.shipper,
   props.departmentAcces.plant,
   props.departmentAcces.teams,
+  props.departmentAcces.payment,
+  props.departmentAcces.collection,
+  props.departmentAcces.catalog,
+  
   
 ])
   //Vendor
@@ -810,23 +817,79 @@ const AccessForm = (props) => {
                    setCheckAllPlant(e.target.checked);
                  };
 
-                   // Teams
+            // Teams
 
-                   const [checkedTeamsList, setCheckedTeamsList] = useState(props.departmentAcces.teams              );
-                   const [indeterminateTeams, setIndeterminateTeams] = useState(true);
-                   const [checkAllTeams, setCheckAllTeams] = useState(false);
-                 
-                   const onTeamsChange = (list) => {
-                     setCheckedTeamsList(list);
-                     setIndeterminateTeams(!!list.length && list.length < plainOptions.length);
-                     setCheckAllTeams(list.length === plainOptions.length);
-                   };
-                 
-                   const onCheckAllTeamsChange = (e) => {
-                     setCheckedTeamsList(e.target.checked ? plainOptions : []);
-                     setIndeterminateTeams(false);
-                     setCheckAllTeams(e.target.checked);
-                   };
+const [checkedTeamsList, setCheckedTeamsList] = useState(props.departmentAcces.teams              );
+const [indeterminateTeams, setIndeterminateTeams] = useState(true);
+const [checkAllTeams, setCheckAllTeams] = useState(false);
+
+const onTeamsChange = (list) => {
+  setCheckedTeamsList(list);
+  setIndeterminateTeams(!!list.length && list.length < plainOptions.length);
+  setCheckAllTeams(list.length === plainOptions.length);
+};
+
+const onCheckAllTeamsChange = (e) => {
+  setCheckedTeamsList(e.target.checked ? plainOptions : []);
+  setIndeterminateTeams(false);
+  setCheckAllTeams(e.target.checked);
+};
+
+
+                              // Payments
+
+                              const [checkedPaymentsList, setCheckedPaymentsList] = useState(props.departmentAcces.payment              );
+                              const [indeterminatePayments, setIndeterminatePayments] = useState(true);
+                              const [checkAllPayments, setCheckAllPayments] = useState(false);
+                            
+                              const onPaymentsChange = (list) => {
+                                setCheckedPaymentsList(list);
+                                setIndeterminatePayments(!!list.length && list.length < accountingCheckedList.length);
+                                setCheckAllPayments(list.length === accountingCheckedList.length);
+                              };
+                            
+                              const onCheckAllPaymentsChange = (e) => {
+                                setCheckedPaymentsList(e.target.checked ? accountingCheckedList : []);
+                                setIndeterminatePayments(false);
+                                setCheckAllPayments(e.target.checked);
+                              };
+
+
+                                  // Collections
+
+                                  const [checkedCollectionList, setCheckedCollectionList] = useState(props.departmentAcces.collection              );
+                                  const [indeterminateCollection, setIndeterminateCollection] = useState(true);
+                                  const [checkAllCollection, setCheckAllCollection] = useState(false);
+                                
+                                  const onCollectionChange = (list) => {
+                                    setCheckedCollectionList(list);
+                                    setIndeterminateCollection(!!list.length && list.length < accountingCheckedList.length);
+                                    setCheckAllCollection(list.length === accountingCheckedList.length);
+                                  };
+                                
+                                  const onCheckAllCollectionChange = (e) => {
+                                    setCheckedCollectionList(e.target.checked ? accountingCheckedList : []);
+                                    setIndeterminateCollection(false);
+                                    setCheckAllCollection(e.target.checked);
+                                  };
+
+                                      // Catalog
+
+                                      const [checkedCatalogList, setCheckedCatalogList] = useState(props.departmentAcces.catalog              );
+                                      const [indeterminateCatalog, setIndeterminateCatalog] = useState(true);
+                                      const [checkAllCatalog, setCheckAllCatalog] = useState(false);
+                                    
+                                      const onCatalogChange = (list) => {
+                                        setCheckedCatalogList(list);
+                                        setIndeterminateCatalog(!!list.length && list.length < plainOptions.length);
+                                        setCheckAllCatalog(list.length === plainOptions.length);
+                                      };
+                                    
+                                      const onCheckAllCatalogChange = (e) => {
+                                        setCheckedCatalogList(e.target.checked ? plainOptions : []);
+                                        setIndeterminateCatalog(false);
+                                        setCheckAllCatalog(e.target.checked);
+                                      };
 
 
 
@@ -872,6 +935,9 @@ const AccessForm = (props) => {
       shipper:checkedShipperList || [],
       plant:checkedPlantList || [],
       teams:checkedTeamsList || [],
+      payment:checkedPaymentsList || [],
+      collection:checkedCollectionList || [],
+      catalog:checkedCatalogList || [],
       
       departmentId: props.departmentId,
       roleTypeId:props.roleTypeId,
@@ -1156,6 +1222,9 @@ const AccessForm = (props) => {
                 </div>
                 <Spacer />
              
+                </FlexContainer>
+                <Spacer />
+                <FlexContainer justifyContent="space-around">
                 <div >
                   <h1 class="text-sm">Order</h1>
                   <Checkbox indeterminate={indeterminateOrder} onChange={onCheckAllOrderChange} checked={checkAllOrder}>
@@ -1165,8 +1234,17 @@ const AccessForm = (props) => {
                   <CheckboxGroup options={plainOptions} value={checkedOrderList} onChange={onOrderChange} />
 
                 </div>
-                </FlexContainer>
                 <Spacer />
+               <div >
+    <h1 class="text-sm">Catalog</h1>
+    <Checkbox indeterminate={indeterminateCatalog} onChange={onCheckAllCatalogChange} checked={checkAllCatalog}>
+    <label class="text-xs">  Check all </label>
+    </Checkbox>
+    <Divider />
+    <CheckboxGroup options={plainOptions} value={checkedCatalogList} onChange={onCatalogChange} />
+
+  </div> 
+                </FlexContainer>
                 <FlexContainer justifyContent="space-around">
          
                <div >
@@ -1292,27 +1370,27 @@ const AccessForm = (props) => {
               
                 <div >
                   <h1 class="text-sm">Payments</h1>
-                  <Checkbox indeterminate={indeterminateInvestor} onChange={onCheckAllInvestorChange} checked={checkAllInvestor}>
+                  <Checkbox indeterminate={indeterminatePayments} onChange={onCheckAllPaymentsChange} checked={checkAllPayments}>
                   <label class="text-xs">  Check all  </label>
                   </Checkbox>
                   <Divider />
-                  <CheckboxGroup options={accountingCheckedList} value={checkedInvestorList} onChange={onInvestorChange} />
+                  <CheckboxGroup options={accountingCheckedList} value={checkedPaymentsList} onChange={onPaymentsChange} />
                 </div>
                 <Spacer />
                     {/* Contact */}
                     <div >
                   <h1 class="text-sm">Collections</h1>
-                  <Checkbox indeterminate={indeterminateInvestorContact} onChange={onCheckAllInvestorContactChange} checked={checkAllInvestorContact}>
+                  <Checkbox indeterminate={indeterminateCollection} onChange={onCheckAllCollectionChange} checked={checkAllCollection}>
                   <label class="text-xs"> Check all</label>
                   </Checkbox>
                   <Divider />
-                  <CheckboxGroup options={accountingCheckedList} value={checkedInvestorContactList} onChange={onInvestorContactChange} />
+                  <CheckboxGroup options={accountingCheckedList} value={checkedCollectionList} onChange={onCollectionChange} />
 
                 </div>
                 <Spacer />
             
 
-<div >
+{/* <div >
     <h1 class="text-sm">Invoices</h1>
     <Checkbox indeterminate={indeterminateDeal} onChange={onCheckAllDealChange} checked={checkAllDeal}>
     <label class="text-xs">  Check all </label>
@@ -1320,7 +1398,7 @@ const AccessForm = (props) => {
     <Divider />
     <CheckboxGroup options={accountingCheckedList} value={checkedDealList} onChange={onDealChange} />
 
-  </div>
+  </div> */}
 
               </FlexContainer>
             
