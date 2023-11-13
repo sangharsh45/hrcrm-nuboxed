@@ -377,6 +377,7 @@ class ContactForm extends Component {
                         className="field"
                         isColumn
                         width={"100%"}
+                        isRequired
                         component={InputComponent}
                         inlineLabel
                       />
@@ -422,9 +423,11 @@ class ContactForm extends Component {
                           isColumn
                           value={values.customerId}
                           isDisabled={defaultCustomers}
-                          defaultValue={
-                            defaultCustomers ? defaultCustomers : null
-                          }
+                        
+                          defaultValue={defaultCustomers ? defaultCustomers : null}
+                          // defaultValue={
+                          //   defaultCustomers ? defaultCustomers : null
+                          // }
                           inlineLabel
                         />
                       </>

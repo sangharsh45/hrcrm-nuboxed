@@ -301,6 +301,10 @@ const initialState = {
   fetchingCustomersDataError:false,
   customerData:[],
 
+  fetchingOpportunityRecord: false,
+  fetchingOpportunityRecordError: false,
+  opportunityRecord:[],
+
   fetchingInvestorData: false,
   fetchingInvestorDataError: false,
   investorData:[],
@@ -1557,7 +1561,20 @@ export const customerReducer = (state = initialState, action) => {
                                           return { ...state, addDrawerCustomerNotesModal: action.payload };
                   
                                           case types.HANDLE_CUSTOMER_PULSE_DRAWER_MODAL:
-                                            return { ...state, addDrawerCustomerPulseModal: action.payload };                   
+                                            return { ...state, addDrawerCustomerPulseModal: action.payload }; 
+                                            
+                                            
+                                            case types.GET_OPPORTUNITY_RECORD_REQUEST:
+                                              return { ...state, fetchingOpportunityRecord: true };
+                                            case types.GET_OPPORTUNITY_RECORD_SUCCESS:
+                                              return { ...state, fetchingOpportunityRecord: false, 
+                                                opportunityRecord: action.payload };
+                                            case types.GET_OPPORTUNITY_RECORD_FAILURE:
+                                              return {
+                                                ...state,
+                                                fetchingOpportunityRecord: false,
+                                                fetchingOpportunityRecordError: true,
+                                              };
 
     default:
       return state;

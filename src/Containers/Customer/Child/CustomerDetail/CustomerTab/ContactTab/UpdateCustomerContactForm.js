@@ -115,13 +115,14 @@ class UpdateCustomerContactForm extends Component {
           initialValues={{
             salutation: this.props.setEditingCustomerContact.salutation || "",
             // designation: undefined,
+            customerId: customerId ? customerId.value : "",
             designationTypeId:this.props.setEditingCustomerContact.designationTypeId || "",
             description:this.props.setEditingCustomerContact.description || "",
             // department: undefined,
             departmentDetails: this.props.setEditingCustomerContact.departmentDetails || "",
             departmentId:this.props.setEditingCustomerContact.departmentId || "",
             userId: this.props.userId,
-            // tagWithCompany: tagWithCompany ? tagWithCompany : "",
+            tagWithCompany: tagWithCompany ? tagWithCompany : "",
             tagWithCompany: this.props.setEditingCustomerContact.tagWithCompany || "",
             firstName: this.props.setEditingCustomerContact.firstName || "",
             middleName:this.props.setEditingCustomerContact.middleName || "",
@@ -130,7 +131,7 @@ class UpdateCustomerContactForm extends Component {
             this.props.user.countryDialCode,
             countryDialCode1:  this.props.setEditingCustomerContact.countryDialCode1 ||
             this.props.user.countryDialCode,
-            phoneNumber: this.props.setEditingCustomerContact.phoneNumber || "",
+            whatsappNumber: this.props.setEditingCustomerContact.whatsappNumber || "",
             mobileNumber: this.props.setEditingCustomerContact.mobileNumber || "",
             customerId:this.props.setEditingCustomerContact.customerId||"",
             email:this.props.setEditingCustomerContact.email || "",
@@ -325,12 +326,12 @@ class UpdateCustomerContactForm extends Component {
                       <div class=" w-2/4">
                         <FastField
                           type="text"
-                          name="phoneNumber"
+                          name="whatsappNumber"
                           // placeholder="Phone #"
                           label={
                             <FormattedMessage
                               id="app.phoneNumber"
-                              defaultMessage="Phone #"
+                              defaultMessage="Whatsapp #"
                             />
                           }
                           isColumn
@@ -401,8 +402,10 @@ class UpdateCustomerContactForm extends Component {
                     }
                     component={SearchSelect}
                     isColumn
-                    value={values.tagWithCompany}
-                    // defaultValue={{ label: firstName, value: documentId }}
+                    value={values.customerId}
+                    isDisabled={defaultCustomers}
+                    defaultValue={defaultCustomers ? defaultCustomers : null}
+                    // defaultValue={{ label: tagWithCompany, value: customerId }}
                     inlineLabel
                   />
                         </>
