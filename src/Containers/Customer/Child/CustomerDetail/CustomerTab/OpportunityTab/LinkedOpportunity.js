@@ -5,6 +5,7 @@ import { FormattedMessage } from "react-intl";
 import Highlighter from "react-highlight-words";
 import { Link } from "../../../../../../Components/Common";
 import moment from "moment";
+import InfoIcon from '@mui/icons-material/Info';
 import { StyledTable } from "../../../../../../Components/UI/Antd";
 import {
   MultiAvatar,
@@ -243,7 +244,7 @@ function OpportunityTable(props) {
             {/* {item.proposalAmount} {item.currency} */}
             <span>
             <CurrencySymbol currencyType={item.currency} />
-            {item.proposalAmount}
+            &nbsp;&nbsp;{item.proposalAmount}
           </span>
           </>
         );
@@ -323,6 +324,30 @@ width: "7%",
       },
     },
     {
+      title: "",
+      // dataIndex: "documentId",
+      width:"2%",
+      render: (name, item, i) => {
+        return (
+          <Tooltip title={item.description}>
+           
+          <InfoIcon 
+          
+              // type="edit"
+              style={{ cursor: "pointer",fontSize:"1rem" }}
+             
+            />
+          
+          </Tooltip>
+        );
+      },
+    },
+    {
+      title: "",
+      width: "1%",
+    },
+    {
+
       title: "",
       dataIndex: "documentId",
       width:"2%",
