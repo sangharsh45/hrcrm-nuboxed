@@ -24,6 +24,7 @@ import StatusOfOrderModal from './StatusOfOrderModal';
 import { StepForwardFilled } from '@ant-design/icons';
 import AddNotesOrderModal from './AddNotesOrderModal';
 import PaidButtonModal from './PaidButtonModal';
+import { MultiAvatar2 } from '../../../../../Components/UI/Elements';
 const EditableCell = ({
     editing,
     dataIndex,
@@ -183,7 +184,14 @@ const AccountOrderTable = (props) => {
                             fontWeight: item.orderStatus === "Completed" ? "bold" : null,
                         },
                     },
-                    children: `${item.userName} on ${moment(item.creationDate).format("DD-MM-YY")}`,
+                    children:   <MultiAvatar2
+                    primaryTitle={item.userName}
+                    // imageId={item.ownerImageId}
+                    imageURL={item.imageURL}
+                    imgWidth={"1.8em"}
+                    imgHeight={"1.8em"}
+                  />
+                    // children: `${item.userName} on ${moment(item.creationDate).format("DD-MM-YY")}`,
                 };
             },
         },
@@ -211,6 +219,19 @@ const AccountOrderTable = (props) => {
             title: "Contact",
             dataIndex: "contactPersonName",
             width: "10%",
+            render: (text, item) => {
+                return (
+                    <>
+                    <MultiAvatar2
+                    primaryTitle={item.contactPersonName}
+                    // imageId={item.ownerImageId}
+                    imageURL={item.imageURL}
+                    imgWidth={"1.8em"}
+                    imgHeight={"1.8em"}
+                  />
+                    </>
+                )
+            }
         },
         {
             title: "Expected Price",

@@ -26,6 +26,9 @@ const initialState = {
     addingImToggle: false,
     addingImToggleError: false,
 
+    addingAccountingToggle: false,
+    addingAccountingToggleError: false,
+
     addingErpToggle: false,
     addingErpToggleError: false,
 
@@ -179,6 +182,28 @@ export const departmentsReducer = (state = initialState, action) => {
                   addingImToggle: false,
                   addingImToggleError: true,
                 };
+
+                case types.LINK_ACCOUNTING_TOGGLE_REQUEST:
+                  return { ...state, addingAccountingToggle: true };
+                case types.LINK_ACCOUNTING_TOGGLE_SUCCESS:
+                  return {
+                    ...state,
+                    addingAccountingToggle: false,
+                        departments:action.payload,
+                    // departments: state.departments.map((item) => {
+                    //   if (item.departmentId === action.payload.departmentId) {
+                    //     return action.payload;
+                    //   } else {
+                    //     return item;
+                    //   }
+                    // }),
+                  };
+                case types.LINK_ACCOUNTING_TOGGLE_FAILURE:
+                  return {
+                    ...state,
+                    addingAccountingToggle: false,
+                    addingAccountingToggleError: true,
+                  };
 
               case types.LINK_ERP_TOGGLE_REQUEST:
                 return { ...state, addingErpToggle: true };
