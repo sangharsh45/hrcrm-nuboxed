@@ -102,7 +102,8 @@ function UpdateLeadsForm (props) {
                 street:  props.setEditingLeads.address.length ? props.setEditingLeads.address[0].street : "",
                 city:  props.setEditingLeads.address.length ? props.setEditingLeads.address[0].city : "",
                 state:  props.setEditingLeads.address.length ? props.setEditingLeads.address[0].state : "",
-                postalCode:  props.setEditingLeads.address.length ? props.setEditingLeads.address[0].postalCode : "",             
+                postalCode:  props.setEditingLeads.address.length ? props.setEditingLeads.address[0].postalCode : "",  
+                country:  props.setEditingLeads.address.length ? props.setEditingLeads.address[0].country : "",            
               },
             ],
             
