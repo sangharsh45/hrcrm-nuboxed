@@ -57,20 +57,7 @@ const LeadsActionLeft = (props) => {
         </span>
       </Tooltip>
       </Badge>
-      <div class="ml-2">
-      <Tooltip
-        title= "All"
-      >
-        <span   class=" mr-2 text-sm cursor-pointer"
-        onClick={() => props.setLeadsViewType("all")}
-          style={{
-           color: props.viewType === "all" && "#1890ff",
-          }}
-        >
-        ALL
-        </span>
-      </Tooltip>
-      </div>
+    
       <div class="ml-2">
       <Tooltip
         title= "Teams"
@@ -82,6 +69,20 @@ const LeadsActionLeft = (props) => {
           }}
         >
        <PeopleIcon/>
+        </span>
+      </Tooltip>
+      </div>
+      <div class="ml-2">
+      <Tooltip
+        title= "All"
+      >
+        <span   class=" mr-2 text-sm cursor-pointer"
+        onClick={() => props.setLeadsViewType("all")}
+          style={{
+           color: props.viewType === "all" && "#1890ff",
+          }}
+        >
+        ALL
         </span>
       </Tooltip>
       </div>

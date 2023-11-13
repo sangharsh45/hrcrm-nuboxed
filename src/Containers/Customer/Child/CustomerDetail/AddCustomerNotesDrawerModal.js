@@ -12,7 +12,7 @@ import LinkedNotes from "./CustomerTab/Notes/LinkedNotes";
 class AddCustomerNotesDrawerModal extends Component {
   render() {
     //  console.log("data5", this.props.currentNameId.taskName);
-
+console.log(this.props.rowdata)
     return (
       <div>
         <StyledDrawer
@@ -30,6 +30,7 @@ class AddCustomerNotesDrawerModal extends Component {
           <Suspense fallback={<BundleLoader />}>
             <LinkedNotes customer={this.props.customer} 
             customerId={this.props.customer.customerId} 
+            rowdata={this.props.rowdata}
             />
           </Suspense>
         </StyledDrawer>

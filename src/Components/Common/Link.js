@@ -6,7 +6,7 @@ import styled from "styled-components";
 const StyledLink = styled(Link)`
     color: #042E8A;
     cursor: pointer;
-    font-size: 0.75rem;
+    font-size: 0.85rem;
     font-family: poppins;
     &:hover{
         color: #0073a8;

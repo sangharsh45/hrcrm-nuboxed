@@ -12,7 +12,7 @@ class CustomerOverView extends Component {
     return (
       <>
         <div class=" flex justify-between">
-          <div class=" flex justify-start flex-nowrap w-4/6"
+          <div class=" flex justify-start flex-nowrap w-wk items-center"
           >
             <div style={{ width: "15%" }}>
               <MultiAvatar

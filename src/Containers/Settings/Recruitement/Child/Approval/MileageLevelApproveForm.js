@@ -113,8 +113,8 @@ function MileageLevelApproveForm(props) {
         <div className="InputBox">
           {rows.map((row, index) => (
             <div key={index}>
-              <div className="w-full flex font-bold mt-4">
-                <div className="w-20">
+              <div className="w-full flex font-bold mt-4 items-center">
+                <div className="w-wk">
                   <p>{`Level ${index + 1}`}</p>
                 </div>
                 
@@ -129,11 +129,11 @@ function MileageLevelApproveForm(props) {
                     <option value="Management">Management</option>
                   </Select>
                 </div>
-                <div className="w-full flex font-bold mt-4">
-                <div style={{ width:"9rem"}}>
+                <div className="w-full flex font-bold mb-4 ">
+                <div style={{ width:"5rem"}}>
                 
                 </div>
-                <div style={{ width: "47%" }}>
+                <div style={{ width: "100%" }}>
                      <Field
                                                             name="roleTypeId"
                                                              label="Role"
@@ -148,7 +148,7 @@ function MileageLevelApproveForm(props) {
                                                         </div>
                                                         </div>
                                                       
-                <div className="w-24 ml-4">
+                <div className="w-24 ml-4 mr-4">
                   <p>Threshold</p>
                 </div>
                 <div style={{ width: "47%" }}>

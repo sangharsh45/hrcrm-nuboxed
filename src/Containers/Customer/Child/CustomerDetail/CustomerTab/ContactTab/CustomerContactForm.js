@@ -183,10 +183,9 @@ class ContactForm extends Component {
           }) => (
             <Form className="form-background">
               <div class=" flex justify-between">
-                <div class=" h-full w-2/4"
-                >
+                <div class=" h-full w-w47.5" >
                   <Spacer />
-                  <div class=" flex flex-nowrap">
+                  <div class=" flex flex-nowrap justify-between">
                     <FastField name="imageId" component={Upload} />
                     <div>
                       <div class=" flex justify-between">
@@ -470,8 +469,7 @@ class ContactForm extends Component {
                     />
                   </div>
                 </div>
-                <div class=" h-4/6 w-2/5"
-                >
+                <div class=" h-4/6 w-w47.5">
                   <Spacer />
                   <FieldArray
                     name="address"

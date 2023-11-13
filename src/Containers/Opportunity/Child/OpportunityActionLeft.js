@@ -111,22 +111,7 @@ const OpportunityActionLeft = (props) => {
           </span>
         </Tooltip>
       </Badge>
-  <div class="ml-2">
-  <Tooltip
-          title="All list"
-        >
-          <span
-            class=" mr-2 text-sm "
-            onClick={() => props.setOpportunityViewType("all")}
-            style={{
-              color: props.viewType === "all" && "#1890ff",cursor:"pointer"
-            }}
-          >
-            {" "}
-           ALL
-          </span>
-        </Tooltip>
-  </div>
+ 
   <div class="ml-2">
   <Tooltip
           title="Teams"
@@ -140,6 +125,22 @@ const OpportunityActionLeft = (props) => {
           >
             {" "}
             <PeopleIcon/>
+          </span>
+        </Tooltip>
+  </div>
+  <div class="ml-2">
+  <Tooltip
+          title="All list"
+        >
+          <span
+            class=" mr-2 text-sm "
+            onClick={() => props.setOpportunityViewType("all")}
+            style={{
+              color: props.viewType === "all" && "#1890ff",cursor:"pointer"
+            }}
+          >
+            {" "}
+           ALL
           </span>
         </Tooltip>
   </div>
