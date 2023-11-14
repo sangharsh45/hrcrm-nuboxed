@@ -38,9 +38,10 @@ class EmployeeForm extends Component {
       active: false,
       checked: true,
       typeInd:false,
-      
+      selectedDept:"",
       selectedCountry: '',
       locations: [],
+      role:[],
       selectedLocation: "",
       workType: "employee",
     };
@@ -59,6 +60,15 @@ class EmployeeForm extends Component {
   };
   handleType = (checked) => {
     this.setState({ typeInd: checked });
+  };
+  handleDeptChange = (event) => {
+    const selectedDept = event.target.value;
+    const filteredRoles = this.props.roles.filter((item) => item.departmentName === selectedDept);
+    this.setState({ selectedDept, role: filteredRoles });
+  };
+  handleRoleChange = (event) => {
+    const selectedRole = event.target.value;
+    this.setState({ selectedRole });
   };
   handleCountryChange = (event) => {
     const selectedCountry = event.target.value;
@@ -509,7 +519,17 @@ getEmployeesbyDepartment (filterOptionKey, filterOptionValue) {
 
 <div class=" flex justify-between max-sm:flex-col" >
                       <div class=" w-w48 max-sm:w-wk">
-                      <Field
+                      <select 
+                        style={{ border: "0.06em solid #aaa" }}
+                      onChange={this.handleDeptChange}>
+          <option value="">Select Department</option>
+          {this.props.departments.map((item, index) => (
+            <option key={index} value={item.departmentName}>
+              {item.departmentName}
+            </option>
+          ))}
+        </select>
+                      {/* <Field
   isRequired  // This makes the field mandatory
   name="departmentId"
   label={<FormattedMessage
@@ -522,7 +542,7 @@ getEmployeesbyDepartment (filterOptionKey, filterOptionValue) {
   selectType="departmentName"
   isColumn
   inlineLabel
-/>
+/> */}
                     </div>
                     <div class="w-w47.5 max-sm:w-wk">
                     <FastField
@@ -541,7 +561,21 @@ getEmployeesbyDepartment (filterOptionKey, filterOptionValue) {
                     </div>
                   </div>
 
-<Field
+                  <select
+                 style={{ border: "0.06em solid #aaa" }}
+                      onChange={this.handleRoleChange}
+                    >
+          <option value="">Select Role</option>
+          {this.state.role.map((item, index) => (
+            <option key={index}
+            // disabled={!values.country_name}
+             value={item.roleTypeId}>
+              {item.roleType}
+            </option>
+          ))}
+        </select>
+
+{/* <Field
                     name="roleType"
                     label={<FormattedMessage
                       id="app.role"
@@ -576,7 +610,7 @@ getEmployeesbyDepartment (filterOptionKey, filterOptionValue) {
                     // width={"100%"}
                     // isColumn
                     // selectType="roleType"
-                     />
+                     /> */}
                          <Spacer/>
                       <div class=" flex justify-between max-sm:flex-col" >
                       <div class=" w-w48 max-sm:w-wk">

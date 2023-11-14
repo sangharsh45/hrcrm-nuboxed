@@ -11,7 +11,8 @@ const EmployeeGroup = lazy(() => import("./Child/EmployeeGroup/EmployeeGroup"));
 
 class Employees extends Component {
 
-  state = { currentData: "", filter:"cretiondate", currentUser: '',selectedLocation:"" };
+  state = { currentData: "", filter:"cretiondate", currentUser: '',selectedLocation:"",
+  filteredData: this.props.employees };
   handleClear = () => {
     this.setState({ currentData: "" });
     this.props.getEmployeelist();
@@ -23,8 +24,18 @@ class Employees extends Component {
     this.setState({ currentData: e.target.value })
    
   };
-  handleDropdownChange = (e) => {
-    this.setState({ selectedLocation: e.target.value });
+  // handleDropdownChange = (e) => {
+  //   this.setState({ selectedLocation: e.target.value });
+  // };
+  handleLocationChange = (event) => {
+    const locationName = event.target.value;
+    this.setState({ selectedLocation: locationName });
+    this.filterData(locationName, this.state.selectedDepartment);
+  };
+  handleDepartmentChange = (event) => {
+    const departmentName = event.target.value;
+    this.setState({ selectedDepartment: departmentName });
+    this.filterData(this.state.selectedLocation, departmentName);
   };
   handleFilterChange=(data)=>{
     this.setState({filter:data})
@@ -35,13 +46,32 @@ class Employees extends Component {
     // this.props.emptyCustomer();
     this.props.getEmployeelist();
   };
-  // componentDidMount(){
-  //   this.props.getEmployeelist("cretiondate");
-  // }
+  filterData = (locationName, departmentName) => {
+   
+
+    if (locationName && departmentName) {
+      const filtered = this.props.employees.filter((employee) => (
+        employee.location === locationName && employee.department === departmentName
+      ));
+      this.setState({ filteredData: filtered });
+    } else {
+      // If either location or department is not selected, show all data
+      this.setState({ filteredData: this.props.employees });
+    }
+  };
+  componentDidUpdate(prevProps) {
+    if (this.props.employees !== prevProps.employees) {
+    
+      this.setState({ filteredData: this.props.employees });
+    }
+  }
+  componentDidMount(){
+    this.props.getEmployeelist("cretiondate");
+  }
   render() {
-    const filteredData = this.props.employees.filter((item) =>
-      this.state.selectedLocation === '' || item.location === this.state.selectedLocation
-    );
+    // const filteredData = this.props.employees.filter((item) =>
+    //   this.state.selectedLocation === '' || item.location === this.state.selectedLocation
+    // );
     const {
       setEmployeeViewType,
       addEmployeeModal,
@@ -54,7 +84,10 @@ class Employees extends Component {
           handleEmployeeModal={handleEmployeeModal}
           setEmployeeViewType={setEmployeeViewType}
           viewType={viewType}
+          selectedDepartment={this.state.selectedDepartment}
           selectedLocation={this.state.selectedLocation}
+          handleLocationChange={this.handleLocationChange}
+          handleDepartmentChange={this.handleDepartmentChange}
           handleDropdownChange={this.handleDropdownChange}
           handleFilterChange={this.handleFilterChange}
           filter={this.state.filter}
@@ -71,18 +104,19 @@ class Employees extends Component {
         {/* <EmployeeTable /> */}
         { this.props.viewType==="tile"?
         <EmployeeCardView
-        filteredData={filteredData}
+        // filteredData={filteredData}
+        filteredData={this.state.filteredData}
         filter={this.state.filter}
            viewType={viewType}
         />:
         this.props.viewType === "table" ?
         <EmployeeTable 
-        filteredData={filteredData}
+        // filteredData={filteredData}
         viewType={viewType}
         />:
         this.props.viewType === "card" ?
         <EmployeeCardList 
-        filteredData={filteredData}
+        // filteredData={filteredData}
         filter={this.state.filter}
         viewType={viewType}
         />:

@@ -24,6 +24,8 @@ const AddCustomerUpdateContactModal = (props) => {
       >
         <Suspense fallback={<BundleLoader />}>
           <UpdateCustomerContactForm 
+            defaultCustomers={props.defaultCustomers}
+            customerId={props.customerId}
            contactId={props.contactId} 
           /> {" "}
         </Suspense>

@@ -22,6 +22,9 @@ class EmployeesHeader extends Component {
                 currentData={currentData}
                 handleClear={handleClear}
                 handleChange={handleChange}
+                handleLocationChange={this.props.handleLocationChange}
+                handleDepartmentChange={this.props.handleDepartmentChange}
+                selectedDepartment={this.props.selectedDepartment}
                 selectedLocation={this.props.selectedLocation}
                 handleDropdownChange={this.props.handleDropdownChange}
                 handleFilterChange={this.props.handleFilterChange}

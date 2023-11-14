@@ -130,7 +130,7 @@ console.log("hh",customerId)
             contactId: props.setEditingCustomerOpportunity.contactId || "",
             description:props.setEditingCustomerOpportunity.description || "",
             oppWorkflow: props.setEditingCustomerOpportunity.oppWorkflow || "",
-            oppStage: props.setEditingCustomerOpportunity.oppStage || "",
+            oppStage: props.setEditingCustomerOpportunity.oppStage ,
           }}
           validationSchema={OpportunitySchema}
           onSubmit={(values, { resetForm }) => {
@@ -214,6 +214,10 @@ console.log("hh",customerId)
                 startDate: `${newStartDate}T00:00:00Z`,
                 endDate: `${newEndDate}T00:00:00Z`,
                 customerId: props.customerId,
+                oppStage: props.setEditingCustomerOpportunity.opportunityStagesId || "" ,
+                oppWorkflow: props.setEditingCustomerOpportunity.opportunityWorkflowDetailsId || "" ,
+                // oppStage:props.opportunityStagesId,
+                // oppWorkflow:props.opportunityWorkflowDetailsId,
                 salesUserIds:selectedOption ? selectedOption.employeeId:props.setEditingCustomerOpportunity.salesUserIds,
  
               },

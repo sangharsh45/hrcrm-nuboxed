@@ -433,6 +433,8 @@ class LinkedContact extends Component {
         <AddCustomerUpdateContactModal
           addUpdateCustomerContactModal={addUpdateCustomerContactModal}
           contactId={this.state.contactId}
+          defaultCustomers={this.props.defaultCustomers}
+          customerId={this.props.customerId}
           handleUpdateCustomerContactModal={handleUpdateCustomerContactModal}
         />
       </>

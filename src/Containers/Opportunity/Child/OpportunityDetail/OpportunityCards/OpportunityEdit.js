@@ -20,9 +20,10 @@ class OpportunityOverviewEdit extends Component {
   }
   handleUpdate = () => {
     this.props.updateOpportunity(
-      this.props.opportunity.opportunityId,
       this.state.fields,
-      // this.callback
+      this.props.opportunity.opportunityId,
+     
+       this.callback
     );
   };
   callback = () => {
@@ -58,8 +59,8 @@ class OpportunityOverviewEdit extends Component {
           <Button
             type="primary"
             Loading={updateOpportunityById}
-            // onClick={this.handleUpdate}
-             onClick={() => this.handleUpdate(this.props.opportunity.opportunityId)}
+            onClick={this.handleUpdate}
+            //  onClick={() => this.handleUpdate(this.props.opportunity.opportunityId)}
   >
           
           
