@@ -4,18 +4,23 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { StyledTable } from "../../../Components/UI/Antd";
 import { getRepairOrderByUser, handleRepairPhone, repairInspectionButton } from "./RefurbishAction"
-// import OrderPhoneRepairModal from "./OrderPhoneRepairModal";
+import OrderPhoneRepairModal from "./OrderPhoneRepairModal";
 import { Button } from "antd";
 import moment from "moment";
 function ProductionRepairOrder(props) {
     useEffect(() => {
-        props.getRepairOrderByUser(props.locationId, props.userId)
+        props.getRepairOrderByUser(props.locationDetailsId, props.userId)
     }, [])
     const [rowData, setRowData] = useState({})
     const handleRowData = (item) => {
         setRowData(item)
     }
     console.log(props.orderByUser)
+
+    const [hide, sethide] = useState(true)
+    const handlePauseResume = () => {
+        sethide(!hide)
+    }
 
     const columns = [
         {
@@ -90,12 +95,12 @@ function ProductionRepairOrder(props) {
                                         productionRepairDispatchId: item.productionRepairDispatchId
                                     },
                                         item.orderPhoneId,
-                                        props.locationId,
+                                        props.locationDetailsId,
                                         props.userId)
                                 }}
-                            >Start Inspection</Button> :
+                            >Repair Start</Button> :
                             item.repairInspectionInd === 1 ?
-                                <Button>Pause Inspection</Button> : "Repair Completed"}
+                                <Button onClick={handlePauseResume}>{hide ? "Pause" : "Resume"}</Button> : "Repair Completed"}
 
                     </>
                 )
@@ -121,17 +126,17 @@ function ProductionRepairOrder(props) {
                     loading={props.fetchingRepairorderById}
                 />
             )}
-            {/* <OrderPhoneRepairModal
+            <OrderPhoneRepairModal
                 showRepairPhoneList={props.showRepairPhoneList}
                 handleRepairPhone={props.handleRepairPhone}
                 rowData={rowData}
-            /> */}
+            />
         </>
     );
 }
 
 const mapStateToProps = ({ refurbish, auth }) => ({
-    locationId: auth.userDetails.locationId,
+    locationDetailsId: auth.userDetails.locationDetailsId,
     userId: auth.userDetails.userId,
     repairOrder: refurbish.repairOrder,
     fetchingRepairorderById: refurbish.fetchingRepairorderById,

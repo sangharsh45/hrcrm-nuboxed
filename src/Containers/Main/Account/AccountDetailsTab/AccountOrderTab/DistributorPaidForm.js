@@ -26,12 +26,12 @@ function DistributorPaidForm(props) {
           date: moment(),
           paymentAmount: "",
           paymentMode: "",
-          reason: "",
-          documentId: "",
+          remarks: "",
+          docId: "",
           userId: props.userId,
           transactionNumber: "",
           approveByFinanceInd: false,
-          orderPhoneId: props.particularRowData.orderId,
+          orderId: props.particularRowData.orderId,
         }}
 
         onSubmit={(values, { resetForm }) => {
@@ -41,7 +41,6 @@ function DistributorPaidForm(props) {
               ...values,
               date: `${newEndDate}T00:00:00Z`,
             },
-            values.documentId,
             props.particularRowData.orderId,
             props.distributorId,
           );
@@ -138,30 +137,30 @@ function DistributorPaidForm(props) {
                 </FlexContainer>
                 <Spacer style={{ marginTop: "1em" }} />
                 <FlexContainer justifyContent="space-between">
-                
-                <div style={{ width: "47%" }}>
-                  <Field
-                    name="reason"
-                    label="Reason"
-                    component={TextareaComponent}
 
-                  />
-                </div>
                   <div style={{ width: "47%" }}>
-                  <Field
-                    name="documentId"
-                    label={
-                      <FormattedMessage
-                        id="app.documentId"
-                        defaultMessage="Document Id"
-                      />
-                    }
-                    isRequired
-                    component={DragableUpload}
-                  />
+                    <Field
+                      name="remarks"
+                      label="Reason"
+                      component={TextareaComponent}
+
+                    />
+                  </div>
+                  <div style={{ width: "47%" }}>
+                    <Field
+                      name="docId"
+                      label={
+                        <FormattedMessage
+                          id="app.documentId"
+                          defaultMessage="Document Id"
+                        />
+                      }
+                      isRequired
+                      component={DragableUpload}
+                    />
                   </div>
                 </FlexContainer>
-             
+
               </div>
             </div>
             <Spacer style={{ marginTop: "1.25em" }} />

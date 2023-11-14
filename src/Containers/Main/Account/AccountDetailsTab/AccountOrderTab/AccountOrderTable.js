@@ -15,9 +15,10 @@ import {
     handleOrderDetailsModal,
     handleNotesModalInOrder,
     handlePaidModal,
-    handleStatusOfOrder
+    handleStatusOfOrder,
+    updateOfferPrice
 } from "../../AccountAction"
-import { Button, Popconfirm, Tooltip,Typography,Input,Form } from 'antd';
+import { Button, Popconfirm, Tooltip, Typography, Input, Form } from 'antd';
 import AddLocationInOrder from './AddLocationInOrder';
 import AccountOrderDetailsModal from './AccountOrderDetailsModal';
 import StatusOfOrderModal from './StatusOfOrderModal';
@@ -25,6 +26,7 @@ import { StepForwardFilled } from '@ant-design/icons';
 import AddNotesOrderModal from './AddNotesOrderModal';
 import PaidButtonModal from './PaidButtonModal';
 import { MultiAvatar2 } from '../../../../../Components/UI/Elements';
+import { BorderAllRounded, BorderColorOutlined } from '@mui/icons-material';
 const EditableCell = ({
     editing,
     dataIndex,
@@ -34,35 +36,34 @@ const EditableCell = ({
     index,
     children,
     ...restProps
-  }) => {
+}) => {
     const inputNode = <Input />;
     return (
-      <td {...restProps}>
-        {editing ? (
-          <Form.Item
-            name={dataIndex}
-            style={{
-              margin: 0,
-            }}
-            rules={[
-              {
-                required: true,
-                message: `Please Input ${title}!`,
-              },
-            ]}
-          >
-            {inputNode}
-          </Form.Item>
-        ) : (
-          children
-        )}
-      </td>
+        <td {...restProps}>
+            {editing ? (
+                <Form.Item
+                    name={dataIndex}
+                    style={{
+                        margin: 0,
+                    }}
+                    rules={[
+                        {
+                            required: true,
+                            message: `Please Input ${title}!`,
+                        },
+                    ]}
+                >
+                    {inputNode}
+                </Form.Item>
+            ) : (
+                children
+            )}
+        </td>
     );
-  };
+};
 
 const AccountOrderTable = (props) => {
-    const [editingKey, setEditingKey] = useState('');
-    const [form] = Form.useForm();
+
     useEffect(() => {
         props.getDistributorOrderByDistributorId(props.distributorId)
     }, [])
@@ -71,19 +72,61 @@ const AccountOrderTable = (props) => {
     function handleSetParticularOrderData(item) {
         setParticularRowData(item);
     }
+    const [form] = Form.useForm();
+    const [data, setData] = useState([]);
+    const [editingKey, setEditingKey] = useState('');
+
+    useEffect(() => {
+        setData(props.distributorOrder)
+    }, [props.distributorOrder])
+
     const isEditing = (record) => record.orderId === editingKey;
 
     const edit = (record) => {
         form.setFieldsValue({
-          offerPrice: "",
-          ...record,
+            offerPrice: "",
+            ...record,
         });
         setEditingKey(record.orderId);
-      };
-    
-      const cancel = () => {
+    };
+
+    const cancel = () => {
         setEditingKey('');
-      };
+    };
+
+    const save = async (key) => {
+        try {
+            const row = await form.validateFields();
+            const newData = [...data];
+            const index = newData.findIndex((item) => key === item.orderId);
+            if (index > -1) {
+                // alert("if");
+                const item = newData[index];
+                console.log(item)
+                newData.splice(index, 1, { ...item, ...row });
+                const a = newData[index];
+                console.log(props.quotationId);
+                props.updateOfferPrice(
+                    {
+                        offerPrice: a.offerPrice,
+                        orderPhoneId: a.orderId,
+                        expectedPrice: 0,
+                        customerPriceInd: true
+                    },
+                    a.orderId,
+                    props.distributorId,
+                );
+                setEditingKey('');
+            } else {
+                alert("else");
+                newData.push(row);
+                // setData(newData);
+                setEditingKey('');
+            }
+        } catch (errInfo) {
+            console.log('Validate Failed:', errInfo);
+        }
+    };
     const columns = [
         {
             width: "1%"
@@ -184,13 +227,13 @@ const AccountOrderTable = (props) => {
                             fontWeight: item.orderStatus === "Completed" ? "bold" : null,
                         },
                     },
-                    children:   <MultiAvatar2
-                    primaryTitle={item.userName}
-                    // imageId={item.ownerImageId}
-                    imageURL={item.imageURL}
-                    imgWidth={"1.8em"}
-                    imgHeight={"1.8em"}
-                  />
+                    children: <MultiAvatar2
+                        primaryTitle={item.userName}
+                        // imageId={item.ownerImageId}
+                        imageURL={item.imageURL}
+                        imgWidth={"1.8em"}
+                        imgHeight={"1.8em"}
+                    />
                     // children: `${item.userName} on ${moment(item.creationDate).format("DD-MM-YY")}`,
                 };
             },
@@ -222,13 +265,13 @@ const AccountOrderTable = (props) => {
             render: (text, item) => {
                 return (
                     <>
-                    <MultiAvatar2
-                    primaryTitle={item.contactPersonName}
-                    // imageId={item.ownerImageId}
-                    imageURL={item.imageURL}
-                    imgWidth={"1.8em"}
-                    imgHeight={"1.8em"}
-                  />
+                        <MultiAvatar2
+                            primaryTitle={item.contactPersonName}
+                            // imageId={item.ownerImageId}
+                            imageURL={item.imageURL}
+                            imgWidth={"1.8em"}
+                            imgHeight={"1.8em"}
+                        />
                     </>
                 )
             }
@@ -251,17 +294,17 @@ const AccountOrderTable = (props) => {
         },
         {
             title: '',
-            width: "7%",
+            width: "6%",
             dataIndex: 'operation',
             render: (_, record) => {
                 const editable = isEditing(record);
                 return editable ? (
                     <span>
                         <Typography.Link
-                            //   onClick={() =>
-                            //     save(record.orderId)
+                            onClick={() =>
+                                save(record.orderId)
 
-                            //   }
+                            }
                             style={{
                                 marginRight: 8,
                             }}
@@ -274,8 +317,9 @@ const AccountOrderTable = (props) => {
                     </span>
                 ) : record.qcStartInd === 3 ?
                     (<Typography.Link disabled={editingKey !== ''} onClick={() => edit(record)}>
-                        <BorderColorIcon 
-                          style={{ cursor: "pointer", fontSize: "1rem" }} />
+                        <BorderColorOutlined
+                            style={{ cursor: "pointer", color: "blue" }}
+                        />
                     </Typography.Link>)
                     : null
             },
@@ -287,13 +331,13 @@ const AccountOrderTable = (props) => {
                 //debugger
                 return (
                     <Tooltip title="Notes">
-                        <NoteAltIcon 
+                        <NoteAltIcon
                             style={{ cursor: "pointer", fontSize: "1rem" }}
-                          onClick={() => {
-                         
-                            props.handleNotesModalInOrder(true);
-                            handleSetParticularOrderData(item);
-                          }}
+                            onClick={() => {
+
+                                props.handleNotesModalInOrder(true);
+                                handleSetParticularOrderData(item);
+                            }}
                         />
 
                     </Tooltip>
@@ -309,7 +353,7 @@ const AccountOrderTable = (props) => {
                         {/* <FontAwesomeIcon icon="fas fa-stream" /> */}
                         <Tooltip title="Status">
                             <EventRepeatIcon
-                              style={{ cursor: "pointer",fontSize: "1rem", }}
+                                style={{ cursor: "pointer", fontSize: "1rem", }}
                                 onClick={() => {
                                     props.handleStatusOfOrder(true);
                                     handleSetParticularOrderData(item);
@@ -320,7 +364,7 @@ const AccountOrderTable = (props) => {
                 )
             }
         },
-         {
+        {
             title: "",
             width: "3%",
             render: (text, item) => {
@@ -328,11 +372,11 @@ const AccountOrderTable = (props) => {
                     <>
                         <Tooltip title="Collection">
                             <PaidIcon
-                               style={{ cursor: "pointer",fontSize: "1rem", }}
-                            onClick={() => {
-                              props.handlePaidModal(true);
-                              handleSetParticularOrderData(item);
-                            }}
+                                style={{ cursor: "pointer", fontSize: "1rem", }}
+                                onClick={() => {
+                                    props.handlePaidModal(true);
+                                    handleSetParticularOrderData(item);
+                                }}
                             // style={{ color: "blue" }}
                             />
                         </Tooltip>
@@ -372,8 +416,8 @@ const AccountOrderTable = (props) => {
                 return (
                     <>
                         <Tooltip title="Rating">
-                            <StarBorderIcon 
-                                style={{ cursor: "pointer",fontSize: "1rem", }}/>
+                            <StarBorderIcon
+                                style={{ cursor: "pointer", fontSize: "1rem", }} />
                         </Tooltip>
                     </>
                 )
@@ -385,31 +429,61 @@ const AccountOrderTable = (props) => {
                 return (
                     <>
                         <Tooltip title="Feedback">
-                            <FeedbackIcon 
-                                style={{ cursor: "pointer",fontSize: "1rem", }} />
+                            <FeedbackIcon
+                                style={{ cursor: "pointer", fontSize: "1rem", }} />
                         </Tooltip>
                     </>
                 )
             }
         },
     ];
+    const mergedColumns = columns.map((col) => {
+        if (!col.editable) {
+            return col;
+        }
+
+        return {
+            ...col,
+            onCell: (record) => ({
+                record,
+                inputType: col.dataIndex === 'remark' ? 'text' : 'number',
+                dataIndex: col.dataIndex,
+                title: col.title,
+                editing: isEditing(record),
+            }),
+        };
+    });
+
     return (
         <>
-            <StyledTable
-                columns={columns}
-                pagination={false}
-                dataSource={props.distributorOrder}
-            />
+            {true && (
+                <Form form={form} component={false}>
+                    <StyledTable
+                        rowKey="orderId"
+                        dataSource={data}
+                        scroll={{ y: 320 }}
+                        pagination={false}
+                        components={{
+                            body: {
+                                cell: EditableCell,
+                            },
+                        }}
+                        loading={props.fetchingDistributorByDistributorId}
+                        columns={mergedColumns}
+                        sticky={true}
+                        rowClassName="editable-row"
+                    />
+                </Form>)}
             <AddLocationInOrder
                 particularRowData={particularRowData}
                 addInventoryInOrder={props.addInventoryInOrder}
                 handleInventoryLocationInOrder={props.handleInventoryLocationInOrder}
             />
-              <AddNotesOrderModal
-        particularRowData={particularRowData}
-        addNotesInOrder={props.addNotesInOrder}
-        handleNotesModalInOrder={props.handleNotesModalInOrder}
-      />
+            <AddNotesOrderModal
+                particularRowData={particularRowData}
+                addNotesInOrder={props.addNotesInOrder}
+                handleNotesModalInOrder={props.handleNotesModalInOrder}
+            />
             <AccountOrderDetailsModal
                 particularRowData={particularRowData}
                 handleOrderDetailsModal={props.handleOrderDetailsModal}
@@ -419,21 +493,22 @@ const AccountOrderTable = (props) => {
                 addStatusOfOrder={props.addStatusOfOrder}
                 particularRowData={particularRowData}
             />
-              <PaidButtonModal
-        addPaidButtonModal={props.addPaidButtonModal}
-        handlePaidModal={props.handlePaidModal}
-        particularRowData={particularRowData}
-      />
+            <PaidButtonModal
+                addPaidButtonModal={props.addPaidButtonModal}
+                handlePaidModal={props.handlePaidModal}
+                particularRowData={particularRowData}
+            />
         </>
     )
 }
 const mapStateToProps = ({ distributor }) => ({
     distributorOrder: distributor.distributorOrder,
-    addNotesInOrder:distributor.addNotesInOrder,
+    addNotesInOrder: distributor.addNotesInOrder,
     addInventoryInOrder: distributor.addInventoryInOrder,
     addOrderDetailsModal: distributor.addOrderDetailsModal,
     addStatusOfOrder: distributor.addStatusOfOrder,
-    addPaidButtonModal:distributor.addPaidButtonModal,
+    addPaidButtonModal: distributor.addPaidButtonModal,
+    fetchingDistributorByDistributorId: distributor.fetchingDistributorByDistributorId,
 });
 const mapDispatchToProps = dispatch => bindActionCreators({
     getDistributorOrderByDistributorId,
@@ -441,7 +516,8 @@ const mapDispatchToProps = dispatch => bindActionCreators({
     handleOrderDetailsModal,
     handleStatusOfOrder,
     handlePaidModal,
-    handleNotesModalInOrder
+    handleNotesModalInOrder,
+    updateOfferPrice
 }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(AccountOrderTable);
