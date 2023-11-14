@@ -14,37 +14,38 @@ import {
     deleteProductData,
     handleCatalogueWipModal,
 } from "../../ProductAction";
-import UpdateProductModal from "../../Child/UpdateProductModal";
-import ProductDiscountModal from "./ProductDiscountModal";
-import CustomerDiscountHistory from "./CustomerDiscountHistory";
-import APIFailed from "../../../../Helpers/ErrorBoundary/APIFailed";
-import ProductHistoryModal from "./ProductHistoryModal";
-import CatalogueConfigureModal from "../Configure/CatalogueConfigureModal";
-import SuspendToggleProduct from "../ProductTable/SuspendToggleProduct";
-import DistributorDiscountHistory from "./DistributorDiscountHistory";
-import ProductOfferModal from "./ProductOfferModal";
-import CustomerOfferHistory from "./CustomerOfferHistory";
-import DistributorOfferHistory from "./DistributorOfferHistory";
-import CatalogueWipModal from "../Wip/CatalogueWipModal";
+// import UpdateProductModal from "../../Child/UpdateProductModal";
+// import ProductDiscountModal from "./ProductDiscountModal";
+// import CustomerDiscountHistory from "./CustomerDiscountHistory";
+// import APIFailed from "../../../../Helpers/ErrorBoundary/APIFailed";
+// import ProductHistoryModal from "./ProductHistoryModal";
+// import CatalogueConfigureModal from "../Configure/CatalogueConfigureModal";
+// import SuspendToggleProduct from "../ProductTable/SuspendToggleProduct";
+// import DistributorDiscountHistory from "./DistributorDiscountHistory";
+// import ProductOfferModal from "./ProductOfferModal";
+// import CustomerOfferHistory from "./CustomerOfferHistory";
+// import DistributorOfferHistory from "./DistributorOfferHistory";
+// import CatalogueWipModal from "../Wip/CatalogueWipModal";
 import ProductPublishToggle from "./ProductPublishToggle";
 import moment from "moment";
 import { CurrencySymbol } from "../../../../Components/Common";
-import { handleCurrencyPriceModal } from "../../../Supplies/SuppliesAction"
+// import { handleCurrencyPriceModal } from "../../../Supplies/SuppliesAction"
 import {
     EditOutlined,
     HistoryOutlined,
     DeleteOutlined,
     MoneyCollectOutlined,
 } from "@ant-design/icons";
-import CurrencyPriceModal from "../../../Supplies/Child/CurrencyPriceModal";
+// import CurrencyPriceModal from "../../../Supplies/Child/CurrencyPriceModal";
 import { StyledModal, StyledTable } from "../../../../Components/UI/Antd";
 import { getProductByGroup } from "../../ProductAction";
 import { MultiAvatar, SubTitle } from "../../../../Components/UI/Elements";
 import { Empty, Icon, Tooltip, Button, Popconfirm, Switch } from "antd";
 import AddToSuppliesToggle from "./AddToSuppliesToggle";
-import { solid } from "@fortawesome/fontawesome-svg-core/import.macro";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
+import WebhookIcon from '@mui/icons-material/Webhook';
+import NetworkCellIcon from '@mui/icons-material/NetworkCell';
+import ContactMailIcon from '@mui/icons-material/ContactMail';
+import ApartmentIcon from '@mui/icons-material/Apartment';
 
 function ProductHistoryTable(props) {
     useEffect(() => {
@@ -451,7 +452,7 @@ function ProductHistoryTable(props) {
                                 <Tooltip title="WIP">
                                     <span onClick={() => handleCatalogueWipModal(true)}>
 
-                                        <FontAwesomeIcon icon={solid('server')} />
+                                  <WebhookIcon/>
                                     </span>
                                 </Tooltip>
                             ) : null}
@@ -488,7 +489,7 @@ function ProductHistoryTable(props) {
                                     user.designation === "Manager") ? (
                                 <Tooltip title="Configure">
                                     <span onClick={() => handleCatalogueConfigureModal(true)}>
-                                        <FontAwesomeIcon icon={solid('network-wired')} />
+                                 <NetworkCellIcon/>
                                     </span>
                                 </Tooltip>
                             ) : null}
@@ -586,7 +587,7 @@ function ProductHistoryTable(props) {
                                                 : "black",
                                         cursor: "pointer",
                                     }}
-                                ><FontAwesomeIcon icon={solid('address-card')} />
+                                > <ContactMailIcon/>
 
                                 </span>
                             </Tooltip>
@@ -624,7 +625,7 @@ function ProductHistoryTable(props) {
                                                 : "black",
                                         cursor: "pointer",
                                     }}
-                                ><FontAwesomeIcon icon={solid('building')} />
+                                ><ApartmentIcon/>
 
                                 </span>
                             </Tooltip>
@@ -720,7 +721,7 @@ function ProductHistoryTable(props) {
                                                 : "black",
                                         cursor: "pointer",
                                     }}
-                                ><FontAwesomeIcon icon={solid('address-card')} />
+                                ><ContactMailIcon/>
 
                                 </span>
                             </Tooltip>
@@ -758,7 +759,7 @@ function ProductHistoryTable(props) {
                                                 : "black",
                                         cursor: "pointer",
                                     }}
-                                ><FontAwesomeIcon icon={solid('building')} />
+                                ><ApartmentIcon/>
 
                                 </span>
                             </Tooltip>
@@ -839,8 +840,8 @@ function ProductHistoryTable(props) {
                                 (user.functionName !== "Sales" ||
                                     user.designation !== "Manager") && (
                                     <Tooltip title="Edit">
-                                        <FontAwesomeIcon icon={solid('pen-to-square')}
-                                            style={{ cursor: "pointer", fontSize: "12px" }}
+                                        <EditOutlined
+                                    style={{ cursor: "pointer", fontSize: "12px" }}
                                             onClick={() => {
                                                 props.setEditProducts(item);
                                                 handleUpdateProductModal(true);
@@ -881,7 +882,7 @@ function ProductHistoryTable(props) {
                                             title="Do you want to delete?"
                                             onConfirm={() => props.deleteProductData(item.productId)}
                                         >
-                                            <FontAwesomeIcon icon={solid('trash')}
+                                            <DeleteOutlined
                                                 style={{ cursor: "pointer", color: "red" }}
                                             />
                                         </Popconfirm>
@@ -911,10 +912,8 @@ function ProductHistoryTable(props) {
                     // pageSizeOptions: ["25", "40", "50"],
                 }
             />
-            <UpdateProductModal
-                // leadsId={currentLeadsId}
+            {/* <UpdateProductModal
                 updateProductModal={updateProductModal}
-                // handleSetCurrentLeadsId={handleSetCurrentLeadsId}
                 handleUpdateProductModal={handleUpdateProductModal}
             />
             <ProductDiscountModal
@@ -956,7 +955,7 @@ function ProductHistoryTable(props) {
             {customerOfferHistory && <CustomerOfferHistory productId={productId} />}
             {distributorOfferHistory && (
                 <DistributorOfferHistory productId={productId} />
-            )}
+            )} */}
         </>
     );
 }
@@ -997,7 +996,7 @@ const mapDispatchToProps = (dispatch) =>
             getAllProductCatagory,
             handleOfferModal,
             handleCatalogueWipModal,
-            handleCurrencyPriceModal
+            // handleCurrencyPriceModal
         },
         dispatch
     );

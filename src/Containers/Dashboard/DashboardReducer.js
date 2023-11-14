@@ -7,14 +7,14 @@ const initialState = {
   fetchingSkillsCloudError: false,
   skillsCloud: [],
 
-  fetchingThisMonthTaskGantt:false,
-  fetchingThisMonthTaskGanttError:false,
+  fetchingThisMonthTaskGantt: false,
+  fetchingThisMonthTaskGanttError: false,
 
-  thisMonthTaskGant:[],
+  thisMonthTaskGant: [],
 
   fetchingDashboardTasks: false,
   fetchingDashboardTasksError: false,
-  dashboardTasks:[],
+  dashboardTasks: [],
 
   fetchingdashboardTable: false,
   fetchingdashboardTableError: false,
@@ -99,10 +99,9 @@ const initialState = {
   fetchingActionNotificationsError: false,
   actionNotifications: [],
 
-
-  fetchingTaskDashboardGantt:false,
-  fetchingTaskDashboardGanttError:false,
-  tasksdashboardGantt:[],
+  fetchingTaskDashboardGantt: false,
+  fetchingTaskDashboardGanttError: false,
+  tasksdashboardGantt: [],
 
   fetchingTaskper: false,
   fetchingTaskperError: false,
@@ -118,11 +117,10 @@ const initialState = {
   fetchingallDashBoardFunnelError: false,
   alldashboardFunnel: [],
 
+  fetchingLeavesGantt: false,
+  fetchingLeavesGanttError: false,
 
-  fetchingLeavesGantt:false,
-  fetchingLeavesGanttError:false,
-
-  leavesGantt:[],
+  leavesGantt: [],
 
   // updatingReqStage:false,
   fetchingDetails: false,
@@ -142,7 +140,7 @@ const initialState = {
   startDate: dayjs().toISOString(),
   endDate: dayjs().toISOString(),
 
-    fetchingOrderListByOrderId: false,
+  fetchingOrderListByOrderId: false,
   fetchingOrderListByOrderIdError: false,
   showDatelist: [],
 
@@ -158,7 +156,6 @@ const initialState = {
 
   updatingTodoEvent: false,
   updatingTodoEventError: false,
-
 
   selectedReportType: "dashboard",
   selectedSubReportType: "dashboard",
@@ -234,26 +231,26 @@ const initialState = {
 
   fetchingJumpstartCustolist: false,
   fetchingJumpstartCustolistError: false,
-  jumpstrtCUSTOCount:{},
+  jumpstrtCUSTOCount: {},
   fetchingJumpstartCusto2list: false,
   fetchingJumpstartCusto2listError: false,
-  jumpstrtCUSTO2Count:{},
+  jumpstrtCUSTO2Count: {},
 
   fetchingdashCustoLeadsAdded: false,
   fetchingdashCustoLeadsAddedError: false,
-  dashCustoLeadsAdded:[],
+  dashCustoLeadsAdded: [],
 
   fetchingJumpstartTasklist: false,
   fetchingJumpstartTasklistError: false,
-  jumpstartTasklistCount:{},
+  jumpstartTasklistCount: {},
 
   fetchingdashCustoContactsAdded: false,
   fetchingdashCustoContactsAddedError: false,
-  dashCustoContactsAdded:[],
+  dashCustoContactsAdded: [],
 
   fetchingJumpstartTask2list: false,
   fetchingJumpstartTask2listError: false,
-  jumpstartTask2listCount:{},
+  jumpstartTask2listCount: {},
 
   fetchingJumpstartInvestor: false,
   fetchingJumpstartInvestorError: false,
@@ -266,83 +263,87 @@ const initialState = {
   fetchingJumpstartInvestor3: false,
   fetchingJumpstartInvestor3Error: false,
   jumpstartInvestor3Count: {},
-  
+
   fetchingJumpstartInvestor4: false,
   fetchingJumpstartInvestor4Error: false,
   jumpstartInvestor4Count: {},
 
   gettingInvHotColdWarm: false,
-  gettingInvHotColdWarmError: false, 
-  investorHotColdWarm:{}, 
+  gettingInvHotColdWarmError: false,
+  investorHotColdWarm: {},
 
   fetchingdashInvstPitchAdded: false,
   fetchingdashInvstPitchAddedError: false,
- dashInvstPitchAdded: [],
- fetchingdashInvstContactAdded: false,
- fetchingdashInvstContactAddedError:false,
-dashInvstContactAdded:[],
+  dashInvstPitchAdded: [],
+  fetchingdashInvstContactAdded: false,
+  fetchingdashInvstContactAddedError: false,
+  dashInvstContactAdded: [],
 
-openLeadQualified:false,
-fetchingLeadsQualified: false,
-fetchingLeadsQualifiedError: false,
-showQualifiedLeads:[],
+  openLeadQualified: false,
+  fetchingLeadsQualified: false,
+  fetchingLeadsQualifiedError: false,
+  showQualifiedLeads: [],
 
-openLeadAdded:false,
-fetchingLeadsAdded: false,
-fetchingLeadsAddedError: false,
-showAddedLeads:[],
+  openLeadAdded: false,
+  fetchingLeadsAdded: false,
+  fetchingLeadsAddedError: false,
+  showAddedLeads: [],
 
-openOppoAdded:false,
-fetchingOppoAdded: false,
-fetchingOppoAddedError: false,
-showAddedOppo:[],
+  openOppoAdded: false,
+  fetchingOppoAdded: false,
+  fetchingOppoAddedError: false,
+  showAddedOppo: [],
 
-clickOppoClosed:false,
-fetchingOppoClosed: false,
-fetchingOppoClosedError:false,
-showClosedOppo:[],
+  clickOppoClosed: false,
+  fetchingOppoClosed: false,
+  fetchingOppoClosedError: false,
+  showClosedOppo: [],
 
-openPitchQualified:false,
-fetchingPitchQualified: false,
-fetchingPitchQualifiedError:false,
-showQualifiedPitch:[],
+  openPitchQualified: false,
+  fetchingPitchQualified: false,
+  fetchingPitchQualifiedError: false,
+  showQualifiedPitch: [],
 
-openDealAdded:false,
-fetchingDealAdded: false,
-fetchingDealAddedError: false,
-showAddedDeal:[],
+  openDealAdded: false,
+  fetchingDealAdded: false,
+  fetchingDealAddedError: false,
+  showAddedDeal: [],
 
-openDealClosed:false,
-fetchingDealClosed: false,
-fetchingDealClosedError: false,
-showClosedDeal:[],
+  openDealClosed: false,
+  fetchingDealClosed: false,
+  fetchingDealClosedError: false,
+  showClosedDeal: [],
 
-openLeadHCWdrawer:false,
-fetchingHottestLeads: false,
-fetchingHottestLeadsError: false,
-showHottestLeads:[],
+  openLeadHCWdrawer: false,
+  fetchingHottestLeads: false,
+  fetchingHottestLeadsError: false,
+  showHottestLeads: [],
 
-fetchingColdestLeads: false,
-fetchingColdestLeadsError: false,
-showColdestLeads:[],
+  fetchingColdestLeads: false,
+  fetchingColdestLeadsError: false,
+  showColdestLeads: [],
 
-fetchingWarmedLeads: false,
-fetchingWarmedLeadsError: false,
-showWarmedLeads:[],
+  fetchingWarmedLeads: false,
+  fetchingWarmedLeadsError: false,
+  showWarmedLeads: [],
 
-openPitchHCWdrawer:false,
-fetchingHottestPitch: false,
-fetchingHottestPitchError:false,
-showHottestPitch:[],
+  openPitchHCWdrawer: false,
+  fetchingHottestPitch: false,
+  fetchingHottestPitchError: false,
+  showHottestPitch: [],
 
-fetchingColdestPitch: false,
-fetchingColdestPitchError: false,
-showColdestPitch:[],
+  fetchingColdestPitch: false,
+  fetchingColdestPitchError: false,
+  showColdestPitch: [],
 
-fetchingWarmedPitch: false,
-fetchingWarmedPitchError: false,
-showWarmedPitch:[],
+  fetchingWarmedPitch: false,
+  fetchingWarmedPitchError: false,
+  showWarmedPitch: [],
 
+  taskNameDrwr: false,
+  fetchingTaskNamedrwr: false,
+  fetchingTaskNamedrwrError:false,
+  taskInameDrwr:[],
 };
 
 export const dashboardReducer = (state = initialState, action) => {
@@ -627,54 +628,50 @@ export const dashboardReducer = (state = initialState, action) => {
         // selectedReportType: "dashboard",
       };
 
+    case types.GET_THIS_MONTH_TASK_GANTT_REQUEST:
+      return { ...state, fetchingThisMonthTaskGantt: true };
+    case types.GET_THIS_MONTH_TASK_GANTT_SUCCESS:
+      return {
+        ...state,
+        fetchingThisMonthTaskGantt: false,
+        thisMonthTaskGant: action.payload,
+      };
+    case types.GET_THIS_MONTH_TASK_GANTT_FAILURE:
+      return {
+        ...state,
+        fetchingThisMonthTaskGantt: false,
+        fetchingThisMonthTaskGanttError: true,
+      };
 
-      case types.GET_THIS_MONTH_TASK_GANTT_REQUEST:
-        return { ...state, fetchingThisMonthTaskGantt: true };
-      case types.GET_THIS_MONTH_TASK_GANTT_SUCCESS:
-        return {
-          ...state,
-          fetchingThisMonthTaskGantt: false,
-           thisMonthTaskGant: action.payload,
-        };
-      case types.GET_THIS_MONTH_TASK_GANTT_FAILURE:
-        return {
-          ...state,
-          fetchingThisMonthTaskGantt: false,
-          fetchingThisMonthTaskGanttError: true,
-        };
+    case types.GET_LEAVES_GANTT_REQUEST:
+      return { ...state, fetchingLeavesGantt: true };
+    case types.GET_LEAVES_GANTT_SUCCESS:
+      return {
+        ...state,
+        fetchingLeavesGantt: false,
+        leavesGantt: action.payload,
+      };
+    case types.GET_LEAVES_GANTT_FAILURE:
+      return {
+        ...state,
+        fetchingLeavesGantt: false,
+        fetchingLeavesGanttError: true,
+      };
 
-
-      case types.GET_LEAVES_GANTT_REQUEST:
-        return { ...state, fetchingLeavesGantt: true };
-      case types.GET_LEAVES_GANTT_SUCCESS:
-        return {
-          ...state,
-          fetchingLeavesGantt: false,
-           leavesGantt: action.payload,
-        };
-      case types.GET_LEAVES_GANTT_FAILURE:
-        return {
-          ...state,
-          fetchingLeavesGantt: false,
-          fetchingLeavesGanttError: true,
-        };
-
-
-        case types.GET_TASKS_DASHBOARD_GANTT_REQUEST:
-          return { ...state, fetchingTaskDashboardGantt: true };
-        case types.GET_TASKS_DASHBOARD_GANTT_SUCCESS:
-          return {
-            ...state,
-            fetchingTaskDashboardGantt: false,
-             tasksdashboardGantt: action.payload,
-          };
-        case types.GET_TASKS_DASHBOARD_GANTT_FAILURE:
-          return {
-            ...state,
-            fetchingTaskDashboardGantt: false,
-            fetchingTaskDashboardGanttError: true,
-          };
-
+    case types.GET_TASKS_DASHBOARD_GANTT_REQUEST:
+      return { ...state, fetchingTaskDashboardGantt: true };
+    case types.GET_TASKS_DASHBOARD_GANTT_SUCCESS:
+      return {
+        ...state,
+        fetchingTaskDashboardGantt: false,
+        tasksdashboardGantt: action.payload,
+      };
+    case types.GET_TASKS_DASHBOARD_GANTT_FAILURE:
+      return {
+        ...state,
+        fetchingTaskDashboardGantt: false,
+        fetchingTaskDashboardGanttError: true,
+      };
 
     case types.UPDATE_TODO_CALL_BY_ID_REQUEST:
       return { ...state, updatingTodoCall: true };
@@ -1074,269 +1071,279 @@ export const dashboardReducer = (state = initialState, action) => {
         gettingHotColdWarmError: true,
       };
 
-      case types.GET_JUMPSTART_CUSTOMER_LIST_REQUEST:
-        return { ...state, fetchingJumpstartCustolist: true,
-          fetchingJumpstartCustolistError: false };
-      case types.GET_JUMPSTART_CUSTOMER_LIST_SUCCESS:
-        return {
-          ...state,
-          fetchingJumpstartCustolist: false,
-          fetchingJumpstartCustolistError: false,
-          jumpstrtCUSTOCount: action.payload,
-        };
-      case types.GET_JUMPSTART_CUSTOMER_LIST_FAILURE:
-        return { ...state,
-          fetchingJumpstartCustolist: false,
-          fetchingJumpstartCustolistError: true };
+    case types.GET_JUMPSTART_CUSTOMER_LIST_REQUEST:
+      return {
+        ...state,
+        fetchingJumpstartCustolist: true,
+        fetchingJumpstartCustolistError: false,
+      };
+    case types.GET_JUMPSTART_CUSTOMER_LIST_SUCCESS:
+      return {
+        ...state,
+        fetchingJumpstartCustolist: false,
+        fetchingJumpstartCustolistError: false,
+        jumpstrtCUSTOCount: action.payload,
+      };
+    case types.GET_JUMPSTART_CUSTOMER_LIST_FAILURE:
+      return {
+        ...state,
+        fetchingJumpstartCustolist: false,
+        fetchingJumpstartCustolistError: true,
+      };
 
-case types.GET_JUMPSTART_CUSTOMER2_LIST_REQUEST:
-        return { ...state, fetchingJumpstartCusto2list: true,
-          fetchingJumpstartCusto2listError: false };
-      case types.GET_JUMPSTART_CUSTOMER2_LIST_SUCCESS:
-        return {
-          ...state,
-          fetchingJumpstartCusto2list: false,
-          fetchingJumpstartCusto2listError: false,
-          jumpstrtCUSTO2Count: action.payload,
-        };
-      case types.GET_JUMPSTART_CUSTOMER2_LIST_FAILURE:
-        return { ...state,
-          fetchingJumpstartCusto2list: false,
-          fetchingJumpstartCusto2listError: true };
+    case types.GET_JUMPSTART_CUSTOMER2_LIST_REQUEST:
+      return {
+        ...state,
+        fetchingJumpstartCusto2list: true,
+        fetchingJumpstartCusto2listError: false,
+      };
+    case types.GET_JUMPSTART_CUSTOMER2_LIST_SUCCESS:
+      return {
+        ...state,
+        fetchingJumpstartCusto2list: false,
+        fetchingJumpstartCusto2listError: false,
+        jumpstrtCUSTO2Count: action.payload,
+      };
+    case types.GET_JUMPSTART_CUSTOMER2_LIST_FAILURE:
+      return {
+        ...state,
+        fetchingJumpstartCusto2list: false,
+        fetchingJumpstartCusto2listError: true,
+      };
 
-          case types.GET_DASH_CUSTOMER_ADDED_LEADS_REQUEST:
-            return { ...state, fetchingdashCustoLeadsAdded: true };
-          case types.GET_DASH_CUSTOMER_ADDED_LEADS_SUCCESS:
-            return {
-              ...state,
-              fetchingdashCustoLeadsAdded: false,
-              dashCustoLeadsAdded: action.payload,
-            };
-          case types.GET_DASH_CUSTOMER_ADDED_LEADS_FAILURE:
-            return {
-              ...state,
-              fetchingdashCustoLeadsAdded: false,
-              fetchingdashCustoLeadsAddedError: true,
-            };
+    case types.GET_DASH_CUSTOMER_ADDED_LEADS_REQUEST:
+      return { ...state, fetchingdashCustoLeadsAdded: true };
+    case types.GET_DASH_CUSTOMER_ADDED_LEADS_SUCCESS:
+      return {
+        ...state,
+        fetchingdashCustoLeadsAdded: false,
+        dashCustoLeadsAdded: action.payload,
+      };
+    case types.GET_DASH_CUSTOMER_ADDED_LEADS_FAILURE:
+      return {
+        ...state,
+        fetchingdashCustoLeadsAdded: false,
+        fetchingdashCustoLeadsAddedError: true,
+      };
 
-            case types.GET_JUMPSTART_TASK_LIST_REQUEST:
-              return {
-                ...state,
-                fetchingJumpstartTasklist: true,
-                fetchingJumpstartTasklistError: false,
-              };
-            case types.GET_JUMPSTART_TASK_LIST_SUCCESS:
-              return {
-                ...state,
-                fetchingJumpstartTasklist: false,
-                fetchingJumpstartTasklistError: false,
-                jumpstartTasklistCount: action.payload,
-              };
-            case types.GET_JUMPSTART_TASK_LIST_FAILURE:
-              return {
-                ...state,
-                fetchingJumpstartTasklist: false,
-                fetchingJumpstartTasklistError: true,
-              };
+    case types.GET_JUMPSTART_TASK_LIST_REQUEST:
+      return {
+        ...state,
+        fetchingJumpstartTasklist: true,
+        fetchingJumpstartTasklistError: false,
+      };
+    case types.GET_JUMPSTART_TASK_LIST_SUCCESS:
+      return {
+        ...state,
+        fetchingJumpstartTasklist: false,
+        fetchingJumpstartTasklistError: false,
+        jumpstartTasklistCount: action.payload,
+      };
+    case types.GET_JUMPSTART_TASK_LIST_FAILURE:
+      return {
+        ...state,
+        fetchingJumpstartTasklist: false,
+        fetchingJumpstartTasklistError: true,
+      };
 
-              case types.GET_DASHBOARD_TASK_REQUEST:
-    return { ...state, fetchingDashboardTasks: true };
-  case types.GET_DASHBOARD_TASK_SUCCESS:
-    return {
-      ...state,
-      fetchingDashboardTasks: false,
-      dashboardTasks: action.payload,
-    };
-  case types.GET_DASHBOARD_TASK_FAILURE:
-    return {
-      ...state,
-      fetchingDashboardTasks: false,
-      fetchingDashboardTasksError: true,
-    };
+    case types.GET_DASHBOARD_TASK_REQUEST:
+      return { ...state, fetchingDashboardTasks: true };
+    case types.GET_DASHBOARD_TASK_SUCCESS:
+      return {
+        ...state,
+        fetchingDashboardTasks: false,
+        dashboardTasks: action.payload,
+      };
+    case types.GET_DASHBOARD_TASK_FAILURE:
+      return {
+        ...state,
+        fetchingDashboardTasks: false,
+        fetchingDashboardTasksError: true,
+      };
 
-              case types.GET_DASH_CUSTOMER_ADDED_CONTACTS_REQUEST:
-                return { ...state, fetchingdashCustoContactsAdded: true };
-              case types.GET_DASH_CUSTOMER_ADDED_CONTACTS_SUCCESS:
-                return {
-                  ...state,
-                  fetchingdashCustoContactsAdded: false,
-                  dashCustoContactsAdded: action.payload,
-                };
-              case types.GET_DASH_CUSTOMER_ADDED_CONTACTS_FAILURE:
-                return {
-                  ...state,
-                  fetchingdashCustoContactsAdded: false,
-                  fetchingdashCustoContactsAddedError: true,
-                };
+    case types.GET_DASH_CUSTOMER_ADDED_CONTACTS_REQUEST:
+      return { ...state, fetchingdashCustoContactsAdded: true };
+    case types.GET_DASH_CUSTOMER_ADDED_CONTACTS_SUCCESS:
+      return {
+        ...state,
+        fetchingdashCustoContactsAdded: false,
+        dashCustoContactsAdded: action.payload,
+      };
+    case types.GET_DASH_CUSTOMER_ADDED_CONTACTS_FAILURE:
+      return {
+        ...state,
+        fetchingdashCustoContactsAdded: false,
+        fetchingdashCustoContactsAddedError: true,
+      };
 
-                case types.GET_JUMPSTART_TASK_2_LIST_REQUEST:
-                  return {
-                    ...state,
-                    fetchingJumpstartTask2list: true,
-                    fetchingJumpstartTask2listError: false,
-                  };
-                case types.GET_JUMPSTART_TASK_2_LIST_SUCCESS:
-                  return {
-                    ...state,
-                    fetchingJumpstartTask2list: false,
-                    fetchingJumpstartTask2listError: false,
-                    jumpstartTask2listCount: action.payload,
-                  };
-                case types.GET_JUMPSTART_TASK_2_LIST_FAILURE:
-                  return {
-                    ...state,
-                    fetchingJumpstartTask2list: false,
-                    fetchingJumpstartTask2listError: true,
-                  };
+    case types.GET_JUMPSTART_TASK_2_LIST_REQUEST:
+      return {
+        ...state,
+        fetchingJumpstartTask2list: true,
+        fetchingJumpstartTask2listError: false,
+      };
+    case types.GET_JUMPSTART_TASK_2_LIST_SUCCESS:
+      return {
+        ...state,
+        fetchingJumpstartTask2list: false,
+        fetchingJumpstartTask2listError: false,
+        jumpstartTask2listCount: action.payload,
+      };
+    case types.GET_JUMPSTART_TASK_2_LIST_FAILURE:
+      return {
+        ...state,
+        fetchingJumpstartTask2list: false,
+        fetchingJumpstartTask2listError: true,
+      };
 
-                  case types.GET_JUMPSTART_INVESTOR_REQUEST:
-                    return {
-                      ...state,
-                      fetchingJumpstartInvestor: true,
-                      fetchingJumpstartInvestorError: false,
-                    };
-                  case types.GET_JUMPSTART_INVESTOR_SUCCESS:
-                    return {
-                      ...state,
-                      fetchingJumpstartInvestor: false,
-                      fetchingJumpstartInvestorError: false,
-                      jumpstartInvestorCount: action.payload,
-                    };
-                  case types.GET_JUMPSTART_INVESTOR_FAILURE:
-                    return {
-                      ...state,
-                      fetchingJumpstartInvestor: false,
-                      fetchingJumpstartInvestorError: true,
-                    };
+    case types.GET_JUMPSTART_INVESTOR_REQUEST:
+      return {
+        ...state,
+        fetchingJumpstartInvestor: true,
+        fetchingJumpstartInvestorError: false,
+      };
+    case types.GET_JUMPSTART_INVESTOR_SUCCESS:
+      return {
+        ...state,
+        fetchingJumpstartInvestor: false,
+        fetchingJumpstartInvestorError: false,
+        jumpstartInvestorCount: action.payload,
+      };
+    case types.GET_JUMPSTART_INVESTOR_FAILURE:
+      return {
+        ...state,
+        fetchingJumpstartInvestor: false,
+        fetchingJumpstartInvestorError: true,
+      };
 
-                    case types.GET_JUMPSTART_INVESTOR_2_REQUEST:
-                      return {
-                        ...state,
-                        fetchingJumpstartInvestor2: true,
-                        fetchingJumpstartInvestor2Error: false,
-                      };
-                    case types.GET_JUMPSTART_INVESTOR_2_SUCCESS:
-                      return {
-                        ...state,
-                        fetchingJumpstartInvestor2: false,
-                        fetchingJumpstartInvestor2Error: false,
-                        jumpstartInvestor2Count: action.payload,
-                      };
-                    case types.GET_JUMPSTART_INVESTOR_2_FAILURE:
-                      return {
-                        ...state,
-                        fetchingJumpstartInvestor2: false,
-                        fetchingJumpstartInvestor2Error: true,
-                      };
+    case types.GET_JUMPSTART_INVESTOR_2_REQUEST:
+      return {
+        ...state,
+        fetchingJumpstartInvestor2: true,
+        fetchingJumpstartInvestor2Error: false,
+      };
+    case types.GET_JUMPSTART_INVESTOR_2_SUCCESS:
+      return {
+        ...state,
+        fetchingJumpstartInvestor2: false,
+        fetchingJumpstartInvestor2Error: false,
+        jumpstartInvestor2Count: action.payload,
+      };
+    case types.GET_JUMPSTART_INVESTOR_2_FAILURE:
+      return {
+        ...state,
+        fetchingJumpstartInvestor2: false,
+        fetchingJumpstartInvestor2Error: true,
+      };
 
-                      case types.GET_JUMPSTART_INVESTOR_3_REQUEST:
-                      return {
-                        ...state,
-                        fetchingJumpstartInvestor3: true,
-                        fetchingJumpstartInvestor3Error: false,
-                      };
-                    case types.GET_JUMPSTART_INVESTOR_3_SUCCESS:
-                      return {
-                        ...state,
-                        fetchingJumpstartInvestor3: false,
-                        fetchingJumpstartInvestor3Error: false,
-                        jumpstartInvestor3Count: action.payload,
-                      };
-                    case types.GET_JUMPSTART_INVESTOR_3_FAILURE:
-                      return {
-                        ...state,
-                        fetchingJumpstartInvestor3: false,
-                        fetchingJumpstartInvestor3Error: true,
-                      };
+    case types.GET_JUMPSTART_INVESTOR_3_REQUEST:
+      return {
+        ...state,
+        fetchingJumpstartInvestor3: true,
+        fetchingJumpstartInvestor3Error: false,
+      };
+    case types.GET_JUMPSTART_INVESTOR_3_SUCCESS:
+      return {
+        ...state,
+        fetchingJumpstartInvestor3: false,
+        fetchingJumpstartInvestor3Error: false,
+        jumpstartInvestor3Count: action.payload,
+      };
+    case types.GET_JUMPSTART_INVESTOR_3_FAILURE:
+      return {
+        ...state,
+        fetchingJumpstartInvestor3: false,
+        fetchingJumpstartInvestor3Error: true,
+      };
 
-                      case types.GET_JUMPSTART_INVESTOR_4_REQUEST:
-                      return {
-                        ...state,
-                        fetchingJumpstartInvestor4: true,
-                        fetchingJumpstartInvestor4Error: false,
-                      };
-                    case types.GET_JUMPSTART_INVESTOR_4_SUCCESS:
-                      return {
-                        ...state,
-                        fetchingJumpstartInvestor4: false,
-                        fetchingJumpstartInvestor4Error: false,
-                        jumpstartInvestor4Count: action.payload,
-                      };
-                    case types.GET_JUMPSTART_INVESTOR_4_FAILURE:
-                      return {
-                        ...state,
-                        fetchingJumpstartInvestor4: false,
-                        fetchingJumpstartInvestor4Error: true,
-                      };
+    case types.GET_JUMPSTART_INVESTOR_4_REQUEST:
+      return {
+        ...state,
+        fetchingJumpstartInvestor4: true,
+        fetchingJumpstartInvestor4Error: false,
+      };
+    case types.GET_JUMPSTART_INVESTOR_4_SUCCESS:
+      return {
+        ...state,
+        fetchingJumpstartInvestor4: false,
+        fetchingJumpstartInvestor4Error: false,
+        jumpstartInvestor4Count: action.payload,
+      };
+    case types.GET_JUMPSTART_INVESTOR_4_FAILURE:
+      return {
+        ...state,
+        fetchingJumpstartInvestor4: false,
+        fetchingJumpstartInvestor4Error: true,
+      };
 
-                      case types.GET_INVSTR_HOT_COLD_WARM_REQUEST:
-                        return { ...state, gettingInvHotColdWarm: true };
-                  
-                      case types.GET_INVSTR_HOT_COLD_WARM_SUCCESS:
-                        return {
-                          ...state,
-                          gettingInvHotColdWarm: false,
-                          investorHotColdWarm: action.payload,
-                        };
-                  
-                      case types.GET_INVSTR_HOT_COLD_WARM_FAILURE:
-                        return {
-                          ...state,
-                          gettingInvHotColdWarm: false,
-                          gettingInvHotColdWarmError: true,
-                        };
+    case types.GET_INVSTR_HOT_COLD_WARM_REQUEST:
+      return { ...state, gettingInvHotColdWarm: true };
 
-                        case types.GET_DASH_INVESTOR_ADDED_PITCH_REQUEST:
-                          return { ...state, fetchingdashInvstPitchAdded: true };
-                        case types.GET_DASH_INVESTOR_ADDED_PITCH_SUCCESS:
-                          return {
-                            ...state,
-                            fetchingdashInvstPitchAdded: false,
-                            dashInvstPitchAdded: action.payload,
-                          };
-                        case types.GET_DASH_INVESTOR_ADDED_PITCH_FAILURE:
-                          return {
-                            ...state,
-                            fetchingdashInvstPitchAdded: false,
-                            fetchingdashInvstPitchAddedError: true,
-                          };
-                          
-                        case types.GET_DASH_INVESTOR_ADDED_CONTACTINVEST_REQUEST:
-                          return { ...state, fetchingdashInvstContactAdded: true };
-                        case types.GET_DASH_INVESTOR_ADDED_CONTACTINVEST_SUCCESS:
-                          return {
-                            ...state,
-                            fetchingdashInvstContactAdded: false,
-                            dashInvstContactAdded: action.payload,
-                          };
-                        case types.GET_DASH_INVESTOR_ADDED_CONTACTINVEST_FAILURE:
-                          return {
-                            ...state,
-                            fetchingdashInvstContactAdded: false,
-                            fetchingdashInvstContactAddedError: true,
-                          };
-                          
-   case types.HANDLE_LEAD_QUALIFIED_DRAWER: 
-  return {...state, openLeadQualified:action.payload};
+    case types.GET_INVSTR_HOT_COLD_WARM_SUCCESS:
+      return {
+        ...state,
+        gettingInvHotColdWarm: false,
+        investorHotColdWarm: action.payload,
+      };
 
-  case types.GET_LEADS_QUALIFIED_REQUEST:
-    return { ...state, fetchingLeadsQualified: true };
-  case types.GET_LEADS_QUALIFIED_SUCCESS:
-    return {
-      ...state,
-      fetchingLeadsQualified: false,
-      showQualifiedLeads: action.payload,
-    };
-  case types.GET_LEADS_QUALIFIED_FAILURE:
-    return {
-      ...state,
-      fetchingLeadsQualified: false,
-      fetchingLeadsQualifiedError: true,
-    };
+    case types.GET_INVSTR_HOT_COLD_WARM_FAILURE:
+      return {
+        ...state,
+        gettingInvHotColdWarm: false,
+        gettingInvHotColdWarmError: true,
+      };
 
-    case types.HANDLE_LEAD_ADDED_DRAWER: 
-    return {...state, openLeadAdded:action.payload};
-  
+    case types.GET_DASH_INVESTOR_ADDED_PITCH_REQUEST:
+      return { ...state, fetchingdashInvstPitchAdded: true };
+    case types.GET_DASH_INVESTOR_ADDED_PITCH_SUCCESS:
+      return {
+        ...state,
+        fetchingdashInvstPitchAdded: false,
+        dashInvstPitchAdded: action.payload,
+      };
+    case types.GET_DASH_INVESTOR_ADDED_PITCH_FAILURE:
+      return {
+        ...state,
+        fetchingdashInvstPitchAdded: false,
+        fetchingdashInvstPitchAddedError: true,
+      };
+
+    case types.GET_DASH_INVESTOR_ADDED_CONTACTINVEST_REQUEST:
+      return { ...state, fetchingdashInvstContactAdded: true };
+    case types.GET_DASH_INVESTOR_ADDED_CONTACTINVEST_SUCCESS:
+      return {
+        ...state,
+        fetchingdashInvstContactAdded: false,
+        dashInvstContactAdded: action.payload,
+      };
+    case types.GET_DASH_INVESTOR_ADDED_CONTACTINVEST_FAILURE:
+      return {
+        ...state,
+        fetchingdashInvstContactAdded: false,
+        fetchingdashInvstContactAddedError: true,
+      };
+
+    case types.HANDLE_LEAD_QUALIFIED_DRAWER:
+      return { ...state, openLeadQualified: action.payload };
+
+    case types.GET_LEADS_QUALIFIED_REQUEST:
+      return { ...state, fetchingLeadsQualified: true };
+    case types.GET_LEADS_QUALIFIED_SUCCESS:
+      return {
+        ...state,
+        fetchingLeadsQualified: false,
+        showQualifiedLeads: action.payload,
+      };
+    case types.GET_LEADS_QUALIFIED_FAILURE:
+      return {
+        ...state,
+        fetchingLeadsQualified: false,
+        fetchingLeadsQualifiedError: true,
+      };
+
+    case types.HANDLE_LEAD_ADDED_DRAWER:
+      return { ...state, openLeadAdded: action.payload };
+
     case types.GET_LEADS_ADDED_REQUEST:
       return { ...state, fetchingLeadsAdded: true };
     case types.GET_LEADS_ADDED_SUCCESS:
@@ -1352,212 +1359,228 @@ case types.GET_JUMPSTART_CUSTOMER2_LIST_REQUEST:
         fetchingLeadsAddedError: true,
       };
 
-      case types.HANDLE_OPPO_ADDED_DRAWER: 
-      return {...state, openOppoAdded:action.payload};
-    
-      case types.GET_OPPO_ADDED_REQUEST:
-        return { ...state, fetchingOppoAdded: true };
-      case types.GET_OPPO_ADDED_SUCCESS:
-        return {
-          ...state,
-          fetchingOppoAdded: false,
-          showAddedOppo: action.payload,
-        };
-      case types.GET_OPPO_ADDED_FAILURE:
-        return {
-          ...state,
-          fetchingOppoAdded: false,
-          fetchingOppoAddedError: true,
-        };
-  
-        case types.HANDLE_OPPO_CLOSED_DRAWER: 
-        return {...state, clickOppoClosed:action.payload};
+    case types.HANDLE_OPPO_ADDED_DRAWER:
+      return { ...state, openOppoAdded: action.payload };
 
-        case types.GET_OPPO_CLOSED_REQUEST:
-          return { ...state, fetchingOppoClosed: true };
-        case types.GET_OPPO_CLOSED_SUCCESS:
-          return {
-            ...state,
-            fetchingOppoClosed: false,
-            showClosedOppo: action.payload,
-          };
-        case types.GET_OPPO_CLOSED_FAILURE:
-          return {
-            ...state,
-            fetchingOppoClosed: false,
-            fetchingOppoClosedError: true,
-          };
+    case types.GET_OPPO_ADDED_REQUEST:
+      return { ...state, fetchingOppoAdded: true };
+    case types.GET_OPPO_ADDED_SUCCESS:
+      return {
+        ...state,
+        fetchingOppoAdded: false,
+        showAddedOppo: action.payload,
+      };
+    case types.GET_OPPO_ADDED_FAILURE:
+      return {
+        ...state,
+        fetchingOppoAdded: false,
+        fetchingOppoAddedError: true,
+      };
 
-          case types.HANDLE_PITCH_QUALIFIED_DRAWER: 
-          return {...state, openPitchQualified:action.payload};
-        
-          case types.GET_PITCH_QUALIFIED_REQUEST:
-            return { ...state, fetchingPitchQualified: true };
-          case types.GET_PITCH_QUALIFIED_SUCCESS:
-            return {
-              ...state,
-              fetchingPitchQualified: false,
-              showQualifiedPitch: action.payload,
-            };
-          case types.GET_PITCH_QUALIFIED_FAILURE:
-            return {
-              ...state,
-              fetchingPitchQualified: false,
-              fetchingPitchQualifiedError: true,
-            };
+    case types.HANDLE_OPPO_CLOSED_DRAWER:
+      return { ...state, clickOppoClosed: action.payload };
 
-            case types.HANDLE_PITCH_ADDED_DRAWER: 
-            return {...state, openPitchAdded:action.payload};
-          
-            case types.GET_PITCH_ADDED_REQUEST:
-              return { ...state, fetchingPitchAdded: true };
-            case types.GET_PITCH_ADDED_SUCCESS:
-              return {
-                ...state,
-                fetchingPitchAdded: false,
-                showAddedPitch: action.payload,
-              };
-            case types.GET_PITCH_ADDED_FAILURE:
-              return {
-                ...state,
-                fetchingPitchAdded: false,
-                fetchingPitchAddedError: true,
-              };
-          
-              case types.HANDLE_DEAL_ADDED_DRAWER: 
-            return {...state, openDealAdded:action.payload};
-          
-            case types.GET_DEAL_ADDED_REQUEST:
-              return { ...state, fetchingDealAdded: true };
-            case types.GET_DEAL_ADDED_SUCCESS:
-              return {
-                ...state,
-                fetchingDealAdded: false,
-                showAddedDeal: action.payload,
-              };
-            case types.GET_DEAL_ADDED_FAILURE:
-              return {
-                ...state,
-                fetchingDealAdded: false,
-                fetchingDealAddedError: true,
-              };
+    case types.GET_OPPO_CLOSED_REQUEST:
+      return { ...state, fetchingOppoClosed: true };
+    case types.GET_OPPO_CLOSED_SUCCESS:
+      return {
+        ...state,
+        fetchingOppoClosed: false,
+        showClosedOppo: action.payload,
+      };
+    case types.GET_OPPO_CLOSED_FAILURE:
+      return {
+        ...state,
+        fetchingOppoClosed: false,
+        fetchingOppoClosedError: true,
+      };
 
-              case types.HANDLE_DEAL_CLOSED_DRAWER: 
-              return {...state, openDealClosed:action.payload};
-            
-              case types.GET_DEAL_CLOSED_REQUEST:
-                return { ...state, fetchingDealClosed: true };
-              case types.GET_DEAL_CLOSED_SUCCESS:
-                return {
-                  ...state,
-                  fetchingDealClosed: false,
-                  showClosedDeal: action.payload,
-                };
-              case types.GET_DEAL_CLOSED_FAILURE:
-                return {
-                  ...state,
-                  fetchingDealClosed: false,
-                  fetchingDealClosedError: true,
-                };         
-    
-                case types.HANDLE_LEAD_HCW_DRAWER: 
-                return {...state, openLeadHCWdrawer:action.payload};
+    case types.HANDLE_PITCH_QUALIFIED_DRAWER:
+      return { ...state, openPitchQualified: action.payload };
 
-                case types.GET_LEAD_HOTLIST_REQUEST:
-                  return { ...state, fetchingHottestLeads: true };
-                case types.GET_LEAD_HOTLIST_SUCCESS:
-                  return {
-                    ...state,
-                    fetchingHottestLeads: false,
-                    showHottestLeads: action.payload,
-                  };
-                case types.GET_LEAD_HOTLIST_FAILURE:
-                  return {
-                    ...state,
-                    fetchingHottestLeads: false,
-                    fetchingHottestLeadsError: true,
-                  };    
+    case types.GET_PITCH_QUALIFIED_REQUEST:
+      return { ...state, fetchingPitchQualified: true };
+    case types.GET_PITCH_QUALIFIED_SUCCESS:
+      return {
+        ...state,
+        fetchingPitchQualified: false,
+        showQualifiedPitch: action.payload,
+      };
+    case types.GET_PITCH_QUALIFIED_FAILURE:
+      return {
+        ...state,
+        fetchingPitchQualified: false,
+        fetchingPitchQualifiedError: true,
+      };
 
-                  case types.GET_LEAD_COLDLIST_REQUEST:
-                    return { ...state, fetchingColdestLeads: true };
-                  case types.GET_LEAD_COLDLIST_SUCCESS:
-                    return {
-                      ...state,
-                      fetchingColdestLeads: false,
-                      showColdestLeads: action.payload,
-                    };
-                  case types.GET_LEAD_COLDLIST_FAILURE:
-                    return {
-                      ...state,
-                      fetchingColdestLeads: false,
-                      fetchingColdestLeadsError: true,
-                    };     
+    case types.HANDLE_PITCH_ADDED_DRAWER:
+      return { ...state, openPitchAdded: action.payload };
 
-                    case types.GET_LEAD_WARMLIST_REQUEST:
-                      return { ...state, fetchingWarmedLeads: true };
-                    case types.GET_LEAD_WARMLIST_SUCCESS:
-                      return {
-                        ...state,
-                        fetchingWarmedLeads: false,
-                        showWarmedLeads: action.payload,
-                      };
-                    case types.GET_LEAD_WARMLIST_FAILURE:
-                      return {
-                        ...state,
-                        fetchingWarmedLeads: false,
-                        fetchingWarmedLeadsError: true,
-                      };                 
-                        
-                      case types.HANDLE_PITCH_HCW_DRAWER: 
-                      return {...state, openPitchHCWdrawer:action.payload};            
+    case types.GET_PITCH_ADDED_REQUEST:
+      return { ...state, fetchingPitchAdded: true };
+    case types.GET_PITCH_ADDED_SUCCESS:
+      return {
+        ...state,
+        fetchingPitchAdded: false,
+        showAddedPitch: action.payload,
+      };
+    case types.GET_PITCH_ADDED_FAILURE:
+      return {
+        ...state,
+        fetchingPitchAdded: false,
+        fetchingPitchAddedError: true,
+      };
 
-                      case types.GET_PITCH_HOTLIST_REQUEST:
-                        return { ...state, fetchingHottestPitch: true };
-                      case types.GET_PITCH_HOTLIST_SUCCESS:
-                        return {
-                          ...state,
-                          fetchingHottestPitch: false,
-                          showHottestPitch: action.payload,
-                        };
-                      case types.GET_PITCH_HOTLIST_FAILURE:
-                        return {
-                          ...state,
-                          fetchingHottestPitch: false,
-                          fetchingHottestPitchError: true,
-                        };    
-      
-                        case types.GET_PITCH_COLDLIST_REQUEST:
-                          return { ...state, fetchingColdestPitch: true };
-                        case types.GET_PITCH_COLDLIST_SUCCESS:
-                          return {
-                            ...state,
-                            fetchingColdestPitch: false,
-                            showColdestPitch: action.payload,
-                          };
-                        case types.GET_PITCH_COLDLIST_FAILURE:
-                          return {
-                            ...state,
-                            fetchingColdestPitch: false,
-                            fetchingColdestPitchError: true,
-                          };     
-      
-                          case types.GET_PITCH_WARMLIST_REQUEST:
-                            return { ...state, fetchingWarmedPitch: true };
-                          case types.GET_PITCH_WARMLIST_SUCCESS:
-                            return {
-                              ...state,
-                              fetchingWarmedPitch: false,
-                              showWarmedPitch: action.payload,
-                            };
-                          case types.GET_PITCH_WARMLIST_FAILURE:
-                            return {
-                              ...state,
-                              fetchingWarmedPitch: false,
-                              fetchingWarmedPitchError: true,
-                            }; 
+    case types.HANDLE_DEAL_ADDED_DRAWER:
+      return { ...state, openDealAdded: action.payload };
 
+    case types.GET_DEAL_ADDED_REQUEST:
+      return { ...state, fetchingDealAdded: true };
+    case types.GET_DEAL_ADDED_SUCCESS:
+      return {
+        ...state,
+        fetchingDealAdded: false,
+        showAddedDeal: action.payload,
+      };
+    case types.GET_DEAL_ADDED_FAILURE:
+      return {
+        ...state,
+        fetchingDealAdded: false,
+        fetchingDealAddedError: true,
+      };
 
-                default:
+    case types.HANDLE_DEAL_CLOSED_DRAWER:
+      return { ...state, openDealClosed: action.payload };
+
+    case types.GET_DEAL_CLOSED_REQUEST:
+      return { ...state, fetchingDealClosed: true };
+    case types.GET_DEAL_CLOSED_SUCCESS:
+      return {
+        ...state,
+        fetchingDealClosed: false,
+        showClosedDeal: action.payload,
+      };
+    case types.GET_DEAL_CLOSED_FAILURE:
+      return {
+        ...state,
+        fetchingDealClosed: false,
+        fetchingDealClosedError: true,
+      };
+
+    case types.HANDLE_LEAD_HCW_DRAWER:
+      return { ...state, openLeadHCWdrawer: action.payload };
+
+    case types.GET_LEAD_HOTLIST_REQUEST:
+      return { ...state, fetchingHottestLeads: true };
+    case types.GET_LEAD_HOTLIST_SUCCESS:
+      return {
+        ...state,
+        fetchingHottestLeads: false,
+        showHottestLeads: action.payload,
+      };
+    case types.GET_LEAD_HOTLIST_FAILURE:
+      return {
+        ...state,
+        fetchingHottestLeads: false,
+        fetchingHottestLeadsError: true,
+      };
+
+    case types.GET_LEAD_COLDLIST_REQUEST:
+      return { ...state, fetchingColdestLeads: true };
+    case types.GET_LEAD_COLDLIST_SUCCESS:
+      return {
+        ...state,
+        fetchingColdestLeads: false,
+        showColdestLeads: action.payload,
+      };
+    case types.GET_LEAD_COLDLIST_FAILURE:
+      return {
+        ...state,
+        fetchingColdestLeads: false,
+        fetchingColdestLeadsError: true,
+      };
+
+    case types.GET_LEAD_WARMLIST_REQUEST:
+      return { ...state, fetchingWarmedLeads: true };
+    case types.GET_LEAD_WARMLIST_SUCCESS:
+      return {
+        ...state,
+        fetchingWarmedLeads: false,
+        showWarmedLeads: action.payload,
+      };
+    case types.GET_LEAD_WARMLIST_FAILURE:
+      return {
+        ...state,
+        fetchingWarmedLeads: false,
+        fetchingWarmedLeadsError: true,
+      };
+
+    case types.HANDLE_PITCH_HCW_DRAWER:
+      return { ...state, openPitchHCWdrawer: action.payload };
+
+    case types.GET_PITCH_HOTLIST_REQUEST:
+      return { ...state, fetchingHottestPitch: true };
+    case types.GET_PITCH_HOTLIST_SUCCESS:
+      return {
+        ...state,
+        fetchingHottestPitch: false,
+        showHottestPitch: action.payload,
+      };
+    case types.GET_PITCH_HOTLIST_FAILURE:
+      return {
+        ...state,
+        fetchingHottestPitch: false,
+        fetchingHottestPitchError: true,
+      };
+
+    case types.GET_PITCH_COLDLIST_REQUEST:
+      return { ...state, fetchingColdestPitch: true };
+    case types.GET_PITCH_COLDLIST_SUCCESS:
+      return {
+        ...state,
+        fetchingColdestPitch: false,
+        showColdestPitch: action.payload,
+      };
+    case types.GET_PITCH_COLDLIST_FAILURE:
+      return {
+        ...state,
+        fetchingColdestPitch: false,
+        fetchingColdestPitchError: true,
+      };
+
+    case types.GET_PITCH_WARMLIST_REQUEST:
+      return { ...state, fetchingWarmedPitch: true };
+    case types.GET_PITCH_WARMLIST_SUCCESS:
+      return {
+        ...state,
+        fetchingWarmedPitch: false,
+        showWarmedPitch: action.payload,
+      };
+    case types.GET_PITCH_WARMLIST_FAILURE:
+      return {
+        ...state,
+        fetchingWarmedPitch: false,
+        fetchingWarmedPitchError: true,
+      };
+
+    case types.HANDLE_TASK_NAME_DRAWER:
+      return { ...state, taskNameDrwr: action.payload };
+
+    case types.GET_TASK_NAME_REQUEST:
+      return { ...state, fetchingTaskNamedrwr: true };
+    case types.GET_TASK_NAME_SUCCESS:
+      return {
+        ...state,
+        fetchingTaskNamedrwr: false,
+        taskInameDrwr: action.payload,
+      };
+    case types.GET_TASK_NAME_FAILURE:
+      return {
+        ...state,
+        fetchingTaskNamedrwr: false,
+        fetchingTaskNamedrwrError: true,
+      };
+    default:
       return state;
   }
 };

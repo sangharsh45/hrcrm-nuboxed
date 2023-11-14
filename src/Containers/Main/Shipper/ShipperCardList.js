@@ -25,10 +25,12 @@ import Highlighter from "react-highlight-words";
 import { OnlyWrapCard } from "../../../Components/UI/Layout";
 import { Link } from "../../../Components/Common";
 
-function ShipperTable(props) {
+function ShipperCardList(props) {
   useEffect(() => {
     props.getShipperByUserId(props.userId);
   }, []);
+
+  const [hasMore, setHasMore] = useState(true);
 
   const { handleUpdateShipperModal, updateShipperModal } = props;
 
@@ -139,24 +141,35 @@ function ShipperTable(props) {
   }
 return(
 <>
-<OnlyWrapCard style={{height:"80vh"}}>
+<div className=' flex justify-end sticky top-28 z-auto'>
+<OnlyWrapCard style={{height:"80vh",backgroundColor:"#E3E8EE"}}>
+<div className=" flex justify-between w-[97.5%] p-2 bg-transparent font-bold sticky top-0 z-10">
+        <div className=" md:w-[8.1rem]">Name</div>
+        <div className=" md:w-[5.1rem]">Phone #</div>
+        <div className=" md:w-[6.8rem] ">Email</div>
+        <div className="md:w-[5.9rem]">Ship By</div>
+        <div className="md:w-[7.8rem]">Address</div>
+        <div className="md:w-[7.9rem]">City</div>
+        <div className="md:w-[5.2rem]">PinCode</div>
+        <div className="w-[3.8rem]">Action</div>
+        </div>
 {props.shipperByUserId.map((item) => {
   return (
     <>
-     <div className="flex justify-between mt-2 "
-                  // style={hrStyle}
+     <div className="flex rounded-xl justify-between mt-4 bg-white h-12 items-center p-3"
+           
                   style={{
-                    borderBottom: "3px dotted #515050"
+                    // borderBottom: "3px dotted #515050"
                   }}
                 >
  <div class=" flex flex-row justify-evenly w-wk max-sm:flex-col">
  <div className=" flex font-medium flex-col md:w-44 max-sm:justify-between w-full max-sm:flex-row ">
 
-<div class=" text-sm text-cardBody font-medium font-poppins">
+{/* <div class=" text-sm text-cardBody font-medium font-poppins">
 
 Name
 
-</div> 
+</div>  */}
 
 
 <div class=" font-normal text-[0.82rem] text-cardBody font-poppins">
@@ -169,11 +182,11 @@ Name
 </div>
 <div className=" flex font-medium flex-col md:w-44 max-sm:justify-between w-full max-sm:flex-row ">
 
-<div class=" text-sm text-cardBody font-medium font-poppins">
+{/* <div class=" text-sm text-cardBody font-medium font-poppins">
 
 Phone #
 
-</div> 
+</div>  */}
 
 
 <div class=" font-normal text-[0.82rem] text-cardBody font-poppins">
@@ -183,11 +196,11 @@ Phone #
 </div>
 <div className=" flex font-medium flex-col md:w-44 max-sm:justify-between w-full max-sm:flex-row ">
 
-<div class=" text-sm text-cardBody font-medium font-poppins">
+{/* <div class=" text-sm text-cardBody font-medium font-poppins">
 
 Email
 
-</div> 
+</div>  */}
 
 
 <div class=" font-normal text-[0.82rem] text-cardBody font-poppins">
@@ -198,11 +211,11 @@ Email
 
 <div className=" flex font-medium flex-col md:w-44 max-sm:justify-between w-full max-sm:flex-row ">
 
-<div class=" text-sm text-cardBody font-medium font-poppins">
+{/* <div class=" text-sm text-cardBody font-medium font-poppins">
 
 Ship By
 
-</div> 
+</div>  */}
 
 
 <div class=" font-normal text-[0.82rem] text-cardBody font-poppins">
@@ -211,12 +224,12 @@ Ship By
 
 </div>
 <div className=" flex font-medium flex-col md:w-44 max-sm:justify-between w-full max-sm:flex-row ">
-
+{/* 
 <div class=" text-sm text-cardBody font-medium font-poppins">
 
 Address
 
-</div> 
+</div>  */}
 
 
 <div class=" font-normal text-[0.82rem] text-cardBody font-poppins">
@@ -230,11 +243,11 @@ Address
 </div>
 <div className=" flex font-medium flex-col md:w-44 max-sm:justify-between w-full max-sm:flex-row ">
 
-<div class=" text-sm text-cardBody font-medium font-poppins">
+{/* <div class=" text-sm text-cardBody font-medium font-poppins">
 
 City
 
-</div> 
+</div>  */}
 
 
 <div class=" font-normal text-[0.82rem] text-cardBody font-poppins">
@@ -247,11 +260,11 @@ City
 </div>
 <div className=" flex font-medium flex-col md:w-44 max-sm:justify-between w-full max-sm:flex-row ">
 
-<div class=" text-sm text-cardBody font-medium font-poppins">
+{/* <div class=" text-sm text-cardBody font-medium font-poppins">
 
 PinCode
 
-</div> 
+</div>  */}
 
 
 <div class=" font-normal text-[0.82rem] text-cardBody font-poppins">
@@ -301,6 +314,7 @@ PinCode
 })}
 
   </OnlyWrapCard>
+  </div>
   <UpdateShipperModal
       rowdata={rowdata}
         shipperId={currentShipperId}
@@ -346,4 +360,4 @@ const mapDispatchToProps = (dispatch) =>
     dispatch
   );
 
-export default connect(mapStateToProps, mapDispatchToProps)(ShipperTable);
+export default connect(mapStateToProps, mapDispatchToProps)(ShipperCardList);

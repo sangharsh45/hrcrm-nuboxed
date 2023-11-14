@@ -5,8 +5,8 @@ import { BundleLoader } from "../../Components/Placeholder";
 import ProductHeader from "./Child/ProductHeader";
 // import SuspendProductList from "./Child/ProductTable/SuspendProductList";
 import { handleConfigureModal, setProductViewType } from "./ProductAction";
-// import ProductListingTable from "./Child/ProductTable/ProductListingTable";
-// import ProductListByGroup from "./Child/ProductTable/ProductListByGroup"
+const ProductListingTable =lazy(()=>import("./Child/ProductTable/ProductListingTable"));
+const ProductListByGroup =lazy(()=>import("./Child/ProductTable/ProductListByGroup"));
 // const ProductGroup = lazy(() => import("./Child/ProductGroup/ProductGroup"));
 // const ProductTable = lazy(() => import("./Child/ProductTable/ProductTable"));
 
@@ -31,17 +31,17 @@ class Product extends Component {
         />
 
 
-        {/* <Suspense fallback={<BundleLoader />}>
+        <Suspense fallback={<BundleLoader />}>
           {this.props.viewType === "all" ?
             (<ProductListingTable />) :
-            this.props.viewType === "dashboard" ? (
-              <SuspendProductList />) :
+            // this.props.viewType === "dashboard" ? (
+            //   <SuspendProductList />) :
               this.props.viewType === "table" ? (
                 <ProductListByGroup />) :
                 null}
 
-        </Suspense> */}
-        <h1>Hiii Caty</h1>
+        </Suspense>
+ 
       </React.Fragment>
     );
   }

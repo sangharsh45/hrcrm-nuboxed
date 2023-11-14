@@ -1,0 +1,60 @@
+import React, { Component } from "react";
+import { Switch, Checkbox, Popconfirm, message, Select } from "antd";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import { productPublishToggle } from "../../ProductAction";
+
+class ProductPublishToggle extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            toggle: false,
+        };
+    }
+
+    onChange = (checked) => {
+        this.setState({ toggle: checked });
+        this.props.productPublishToggle({
+            publishInd: this.props.item.publishInd ? false : true
+        },
+            this.props.item.productId,
+            this.props.groupId);
+    };
+
+    render() {
+        return (
+            <>
+                <div>
+                    <Popconfirm
+                        title="Do you want to publish?"
+                        onConfirm={() => {
+                            this.onChange();
+                        }}
+                        onCancel={null}
+                        okText="Ok"
+                        cancelText="Cancel"
+                    >
+                        <Switch
+                            checked={this.props.item.publishInd}
+                            //   disabled={this.props.collectInd}
+                            checkedChildren="Publish"
+                            unCheckedChildren="UnPublish"
+                        />
+                    </Popconfirm>
+                </div>
+            </>
+        );
+    }
+}
+const mapStateToProps = ({ auth, lead }) => ({
+    userId: auth.userDetails.userId,
+    groupId: auth.userDetails.groupId,
+});
+const mapDispatchToProps = (dispatch) =>
+    bindActionCreators(
+        {
+            productPublishToggle,
+        },
+        dispatch
+    );
+export default connect(mapStateToProps, mapDispatchToProps)(ProductPublishToggle);

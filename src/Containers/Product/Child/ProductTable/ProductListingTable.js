@@ -42,7 +42,7 @@ import APIFailed from "../../../../Helpers/ErrorBoundary/APIFailed";
 // import CustomerOfferHistory from "./CustomerOfferHistory";
 // import DistributorOfferHistory from "./DistributorOfferHistory";
 // import CatalogueWipModal from "../Wip/CatalogueWipModal";
-// import ProductPublishToggle from "./ProductPublishToggle";
+import ProductPublishToggle from "./ProductPublishToggle";
 import moment from "moment";
 // import CurrencyPriceModal from "../../../Supplies/Child/CurrencyPriceModal";
 
@@ -839,7 +839,7 @@ function ProductListingTable(props) {
                 (user.functionName !== "Sales" ||
                   user.designation !== "Manager") && (
                   <Tooltip title="Edit">
-                    <FontAwesomeIcon icon={solid('pen-to-square')}
+                    <EditOutlined
                       style={{ cursor: "pointer", fontSize: "12px" }}
                       onClick={() => {
                         props.setEditProducts(item);
@@ -894,9 +894,9 @@ function ProductListingTable(props) {
     },
   ];
 
-  if (props.fetchingProductsError) {
-    return <APIFailed />;
-  }
+  // if (props.fetchingProductsError) {
+  //   return <APIFailed />;
+  // }
 
   // const tab = document.querySelector(".ant-layout-sider-children");
   // const tableHeight = tab && tab.offsetHeight - 200;

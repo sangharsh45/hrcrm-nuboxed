@@ -26,7 +26,16 @@ const initialState = {
     fetchingLeaveStatus: false,
     fetchingLeaveStatusError: true,
     leaveStatus:[],
-};
+
+    noteLeaveDrawer:false,
+
+    addingLeaveNote: false,
+    addingLeaveNoteError: false,
+
+    fetchingLeavesNotes:false,
+    fetchingLeavesNotesError:false,
+    leavesNotes:[],
+  };
 
 export const LeavesReducer = (state = initialState, action) => {
     switch (action.type) {
@@ -144,11 +153,46 @@ export const LeavesReducer = (state = initialState, action) => {
                                 ...state,
                                 fetchingLeaveStatus: false,
                                 fetchingLeaveStatusError: true,
-                            };
+                              };
+        
+                              case types.HANDLE_LEAVE_NOTE_DRAWER:
+                                return { ...state, noteLeaveDrawer: action.payload };
+
+                                case types.ADD_LEAVE_NOTE_REQUEST:
+                                  return {
+                                      ...state,
+                                      addingLeaveNote: true,
+                                      addingLeaveNoteError: false,
+                                  };
+                              case types.ADD_LEAVE_NOTE_SUCCESS:
+                                  return {
+                                      ...state,
+                                      addingLeaveNote: false,
+                                  };
+                              case types.ADD_LEAVE_NOTE_FAILURE:
+                                  return {
+                                      ...state,
+                                      addingLeaveNote: false,
+                                      addingLeaveNoteError: true,
+                                  };
+
+case types.GET_LEAVE_NOTES_REQUEST:
+      return { ...state, fetchingLeavesNotes: true };
+    case types.GET_LEAVE_NOTES_SUCCESS:
+      return {
+        ...state,
+        fetchingLeavesNotes: false,
+        leavesNotes: action.payload,
+      };
+    case types.GET_LEAVE_NOTES_FAILURE:
+      return {
+        ...state,
+        fetchingLeavesNotes: false,
+        fetchingLeavesNotesError: true,
+      };
 
 
-    }
 
-    
+    } 
     return state;
 };
