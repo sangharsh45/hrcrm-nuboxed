@@ -25,7 +25,7 @@ const AddRecruitModal = (props) => {
         footer={null}
       >
         <Suspense fallback={<BundleLoader />}>
-          <RecruitForm />
+          <RecruitForm opportunity={props.opportunity}/>
         </Suspense>
       </StyledDrawer>
     </>

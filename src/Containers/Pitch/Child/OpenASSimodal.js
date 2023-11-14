@@ -1,30 +1,29 @@
 import React, { lazy, Suspense } from "react";
-
+import { StyledDrawer } from "../../../Components/UI/Antd";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { BundleLoader } from "../../../Components/Placeholder";
 import { StyledTabs } from "../../../Components/UI/Antd";
 import { TabsWrapper } from "../../../Components/UI/Layout";
-import { handleLeadCallModal } from "../../Leads/LeadsAction";
+import {handlePitchActivityModal} from "../PitchAction"
 import { PlusOutlined } from "@ant-design/icons";
+import LightbulbIcon from '@mui/icons-material/Lightbulb';
 import { FormattedMessage } from "react-intl";
 import { Tooltip } from "antd";
-import { StyledDrawer } from "../../../Components/UI/Antd";
-import AddCallTaskModal from "../../Leads/Child/LeadsTable/AddCallTaskModal";
-import EventForm from "../../Event/Child/EventForm";
-import TaskForm from "../../Task/Child/TaskForm";
-import CallLeadsTable from "../../Leads/Child/LeadsTable/CallLeadsTable";
-import PitchTimeline from "./PitchTimeline";
+
+import PitchTimeline from "../../Pitch/Child/PitchTimeline";
+import AddPitchActivityModal from "./PtchActivity/AddPitchActivityModal";
+
 
 
 const TabPane = StyledTabs.TabPane;
 
 function  OpenASSimodal(props)  {
-
+console.log("data",props.rowdata.name)
   return (
     <>
       <StyledDrawer
-        title={"All"}
+        title={props.rowdata.firstName}
         width="60%"
         style={{marginTop:"5rem"}}
         visible={props.openASSImodal}
@@ -37,14 +36,14 @@ function  OpenASSimodal(props)  {
         }}
       >
         <Suspense fallback={<BundleLoader />}>
-          <LeadsCETTab/>
+          <PitchCETTab rowdata={props.rowdata}/>
         </Suspense>
       </StyledDrawer>
     </>
   );
 
- function LeadsCETTab () {
-  const { addCallTaskModal, handleLeadCallModal } = props;
+ function PitchCETTab () {
+  const { addPitchactivityModal, handlePitchActivityModal } = props;
     const { ...formProps } = props;
     console.log(props.rowdata)
     return (
@@ -55,26 +54,13 @@ function  OpenASSimodal(props)  {
             style={{ overflow: "visible", width: "53vw", padding: "15px" }}
             animated={false}
           >
-            {/* <TabPane
-              tab={
-                <span>
-                 <i class="fas fa-phone-square"></i>&nbsp;
-                  Calls
-                </span>
-              }
-              key="1"
-            >
-              <Suspense fallback={"loading ..."}>
-                <CallForm {...formProps} />
-              </Suspense>
-            </TabPane> */}
             <TabPane
               tab={
                 <>
                   <span>
                     
                        <i class="fas fa-phone-square"></i>&nbsp;
-                  Calls
+                  Activity
                   </span>
                 
                     <>
@@ -97,7 +83,7 @@ function  OpenASSimodal(props)  {
                             />
                           }
                           onClick={() => {
-                            handleLeadCallModal(true);
+                            handlePitchActivityModal(true);
                           }}
                           size="0.875em"
                         />
@@ -112,42 +98,20 @@ function  OpenASSimodal(props)  {
               <Suspense fallback={"Loading ..."}>
                 {" "}
                 <PitchTimeline
-                 rowdata={props.rowdata}
+                  rowdata={props.rowdata}
                 />
+                {/* <LeadsActivityTab 
+                 rowdata={props.rowdata}
+                /> */}
               </Suspense>
             </TabPane>
-            <TabPane
-              tab={
-                <span>
-                  <i class="fas fa-tasks"></i>&nbsp;
-                  Events
-                </span>
-              }
-              key="2"
-            >
-              <Suspense fallback={"loading ..."}>
-                <EventForm {...formProps}/>
-              </Suspense>
-            </TabPane>
-            <TabPane
-              tab={
-                <span>
-                  <i class="far fa-calendar-check"></i>&nbsp;
-                  Tasks
-                </span>
-              }
-              key="3"
-            >
-              <Suspense fallback={"loading ..."}>
-                <TaskForm {...formProps}/>
-              </Suspense>
-            </TabPane>
+          
           </StyledTabs>
         </TabsWrapper>
-        <AddCallTaskModal
+        <AddPitchActivityModal
         rowdata={props.rowdata}
-          addCallTaskModal={addCallTaskModal}
-          handleLeadCallModal={handleLeadCallModal}
+        addPitchactivityModal={addPitchactivityModal}
+        handlePitchActivityModal={handlePitchActivityModal}
         />
       </>
     );
@@ -155,14 +119,14 @@ function  OpenASSimodal(props)  {
 
 };
 
-const mapStateToProps = ({ leads }) => ({
-  addCallTaskModal: leads.addCallTaskModal,
+const mapStateToProps = ({ pitch }) => ({
+  addPitchactivityModal: pitch.addPitchactivityModal,
 
 });
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
-      handleLeadCallModal
+      handlePitchActivityModal
      
     },
     dispatch

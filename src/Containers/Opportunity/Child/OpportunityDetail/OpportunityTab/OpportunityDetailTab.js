@@ -444,6 +444,7 @@ return  <BundleLoader />
         <Suspense fallback={null}>
 
           <AddRecruitModal
+           opportunity={this.props.opportunity}
             addRecruitModal={this.props.addRecruitModal}
             handleRecruitModal={this.props.handleRecruitModal}
           />

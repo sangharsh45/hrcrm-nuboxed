@@ -538,3 +538,10 @@ export const getPitch = (userId) => (dispatch) => {
         });
       });
   };
+
+  export const handlePitchActivityModal = (modalProps) => (dispatch) => {
+    dispatch({
+      type: types.HANDLE_PITCH_ACTIVITY_MODAL,
+      payload: modalProps,
+    });
+  };

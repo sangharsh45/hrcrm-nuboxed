@@ -1046,7 +1046,7 @@ class SearchSelect extends Component {
     }
 
     if (selectType === "departmentName") {
-      debugger;
+      // debugger;
       options = departments
         // .sort((a, b) => (a.sourceName < b.sourceName ? -1 : 1))
         .map((item, i) => ({

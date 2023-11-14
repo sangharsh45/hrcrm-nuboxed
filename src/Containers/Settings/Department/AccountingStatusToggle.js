@@ -5,11 +5,7 @@ import { bindActionCreators } from "redux";
  import { linkAccountingToggle,getDepartments } from "../Department/DepartmentAction";
 
 function AccountingStatusToggle(props) {
-  // useEffect(() => {
-  //   props.getDepartments();
-  //   // props.getRequirementsDuration(props.orgId);
-  // }, []);
-  // const { crmInd } = props.departments;
+
   const [account, setAccount] = React.useState(props.accountInd);
 console.log("crrm",props.accountInd);
   function handleAccountToggleCollection(item) {
@@ -35,7 +31,7 @@ console.log("crrm",props.accountInd);
       },
       props.departmentId,
       );
-      // setCrm(props.crmInd ? false : true);
+    
     }
   }
 

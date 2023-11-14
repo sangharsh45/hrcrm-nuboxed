@@ -1,27 +1,14 @@
 import React, { lazy, Suspense } from "react";
 import { StyledDrawer } from "../../../../Components/UI/Antd";
-import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
 import { BundleLoader } from "../../../../Components/Placeholder";
 import { StyledTabs } from "../../../../Components/UI/Antd";
 import { TabsWrapper } from "../../../../Components/UI/Layout";
 import { handleLeadCallModal } from "../../LeadsAction";
-import { PlusOutlined } from "@ant-design/icons";
-import LightbulbIcon from '@mui/icons-material/Lightbulb';
-import LeadsOpportunity from "../LeadsDetailTab/OpportunityTab/LeadsOpportunity";
 import { FormattedMessage } from "react-intl";
-import { Tooltip } from "antd";
-import CallLeadsTable from "./CallLeadsTable";
-import LeadsActivityTab from "./LeadsActivityTab";
-const CallForm = lazy(() =>
-  import("../../../Call/Child/CallForm")
-);
-const EventForm = lazy(() =>
-  import("../../../Event/Child/EventForm")
-);
-const TaskForm = lazy(() =>
-  import("../../../Task/Child/TaskForm")
-);
+import LeadsCallForm from "./LeadsCallForm";
+import LeadsEventForm from "./LeadsEventForm";
+import LeadsTaskForm from "./LeadsTaskForm";
+
 
 const TabPane = StyledTabs.TabPane;
 
@@ -29,12 +16,13 @@ const AddCallTaskModal = (props) => {
   const { addCallTaskModal, handleLeadCallModal, ...formProps } = props;
   const isSmallScreen = window.innerWidth <= 600;
   const drawerWidth = isSmallScreen ? "90%" : "55%";
+  console.log("rowdata",props.rowdata)
   return (
     <>
       <StyledDrawer
         title={<FormattedMessage
           id="app.schedulecall"
-          defaultMessage="Schedule Call"
+          defaultMessage="Schedule"
         />}
         width={drawerWidth}
         visible={addCallTaskModal}
@@ -49,7 +37,7 @@ const AddCallTaskModal = (props) => {
           {/* <CallTaskForm
           rowdata={props.rowdata}
           /> */}
-          <LeadsActivityTab/>
+          <LeadsActivityTab   rowdata={props.rowdata}/>
 
         </Suspense>
       </StyledDrawer>
@@ -77,7 +65,7 @@ const AddCallTaskModal = (props) => {
                 key="1"
               >
                 <Suspense fallback={"loading ..."}>
-                  <CallForm {...formProps} />
+                  <LeadsCallForm  rowdata={props.rowdata} {...formProps} />
                 </Suspense>
               </TabPane>
           
@@ -91,7 +79,7 @@ const AddCallTaskModal = (props) => {
                 key="2"
               >
                 <Suspense fallback={"loading ..."}>
-                  <EventForm {...formProps}/>
+                  <LeadsEventForm rowdata={props.rowdata} {...formProps}/>
                 </Suspense>
               </TabPane>
               <TabPane
@@ -104,7 +92,7 @@ const AddCallTaskModal = (props) => {
                 key="3"
               >
                 <Suspense fallback={"loading ..."}>
-                  <TaskForm {...formProps}/>
+                  <LeadsTaskForm rowdata={props.rowdata} {...formProps}/>
                 </Suspense>
               </TabPane>
             </StyledTabs>

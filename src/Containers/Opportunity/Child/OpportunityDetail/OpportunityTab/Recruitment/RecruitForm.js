@@ -8,6 +8,9 @@ import AddressFieldArray from "../../../../../../Components/Forms/Formik/Address
 import * as Yup from "yup";
 import dayjs from "dayjs";
 import {
+  getTalentRoles,
+} from "../../../../../Settings/Category/Role/RoleAction";
+import {
   HeaderLabel,
   Spacer,
   StyledLabel,
@@ -22,6 +25,9 @@ import {
   getProcessStagesForRecruit,
   //   getAllProcessStagesForRecruit,
 } from "../../../../../Settings/SettingsAction";
+import {
+  getContactListByCustomerId,
+} from "../../../../../Customer/CustomerAction";
 // import { getCurrency } from "../../../../OpportunityAction";
 import { FlexContainer } from "../../../../../../Components/UI/Layout";
 import {
@@ -87,11 +93,24 @@ function RecruitForm(props) {
   //     value: item.currencyName,
   //   };
   // });
+  const roleNameOption = props.talentRoles.map((item) => {
+    return {
+        label: `${item.roleType || ""}`,
+        value: item.roleTypeId,
+    };
+});
 
   const Sponsor = props.contactListByOpportunityId.map((item) => {
     return {
       label: `${item.firstName || ""}  ${item.middleName ||
         ""} ${item.lastName || ""}`,
+      value: item.contactId,
+    };
+  });
+
+  const ContactData = props.contactByCustomerId.map((item) => {
+    return {
+      label: `${item.fullName}`,
       value: item.contactId,
     };
   });
@@ -132,10 +151,11 @@ function RecruitForm(props) {
 
   useEffect(() => {
     props.getProcessForRecruit(props.organizationId);
-    //   props.getCurrency();
+    props.getContactListByCustomerId(props.opportunity.customerId);
     //   props.getAllProcessStagesForRecruit();
     props.getContactListByOpportunityId(props.opportunityId);
     props.getRecruiterName();
+    props.getTalentRoles(props.orgId); 
     props.getAllPartnerListByUserId(props.userId);
   }, []);
   function handleReset(resetForm) {
@@ -507,7 +527,18 @@ function RecruitForm(props) {
                     />
                   </div>
                   <div style={{ width: "47%" }}>
-                    <Field
+                       <Field
+                                                            name="roleTypeId"
+                                                            label="Role"
+                                                            options={Array.isArray(roleNameOption) ? roleNameOption : []}
+                                                            component={SelectComponent}
+                                                            value={values.roleTypeId}
+                                                            placeholder
+                                                            isColumn
+                                                            inlineLabel
+                                                            style={{ flexBasis: "80%", marginTop: "0px", width: "100%" }}
+                                                        /> 
+                    {/* <Field
                       name="role"
                       selectType="roleType"
                       //label="Designation"
@@ -528,7 +559,7 @@ function RecruitForm(props) {
                       component={SearchSelect}
                       // value={values.designationTypeId}
                       inlineLabel
-                    />
+                    /> */}
                   </div>
                 </FlexContainer>
 
@@ -590,7 +621,29 @@ function RecruitForm(props) {
                 <Spacer style={{ marginTop: "1.25em" }} />
                 <FlexContainer justifyContent="space-between">
                   <div style={{ width: "47%" }}>
-                    <Field
+                  <Field
+                    name="contactId"
+                    //selectType="contactList"
+                    isColumnWithoutNoCreate
+                    // label="Contact"
+                    label={
+                      <FormattedMessage
+                        id="app.customercontact"
+                        defaultMessage=" Customer Contact"
+                      />
+                    }
+                    component={SelectComponent}
+                    isColumn
+                    options={Array.isArray(ContactData) ? ContactData : []}
+                    value={values.contactId}
+                    // isDisabled={defaultContacts}
+                    defaultValue={{
+                      label: `${props.fullName || ""} `,
+                      value: props.contactId,
+                    }}
+                    inlineLabel
+                  />
+                    {/* <Field
                       name="sponserId"
                       //  label="Sponsor"
                       label={
@@ -604,7 +657,7 @@ function RecruitForm(props) {
                       inlineLabel
                       component={SelectComponent}
                       options={Array.isArray(Sponsor) ? Sponsor : []}
-                    />
+                    /> */}
                   </div>
                   <div style={{ width: "47%" }}>
                   {" "}
@@ -802,6 +855,8 @@ const mapStateToProps = ({
   auth,
   opportunity,
   team,
+  role,
+  customer,
   contact,
   account,
   settings,
@@ -809,15 +864,18 @@ const mapStateToProps = ({
 }) => ({
   recruitProcess: settings.recruitProcess,
   user: auth.userDetails,
+  orgId: auth.userDetails.organizationId,
   userId: auth.userDetails.userId,
   recruitProcessStages: settings.recruitProcessStages,
   // allProcessStagesForRecruit: settings.allProcessStagesForRecruit,
   organizationId: auth.userDetails.organizationId,
   opportunityId: opportunity.opportunity.opportunityId,
   currencies: auth.currencies,
+  contactByCustomerId: customer.contactByCustomerId,
   linkingRecruitToOpportunity: opportunity.linkingRecruitToOpportunity,
   contactListByOpportunityId: opportunity.contactListByOpportunityId,
   recruiterName: opportunity.recruiterName,
+  talentRoles: role.talentRoles,
   allpartnerByUserId: partner.allpartnerByUserId,
 });
 
@@ -825,9 +883,11 @@ const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
       getProcessForRecruit,
+      getContactListByCustomerId,
       getAllPartnerListByUserId,
       getProcessStagesForRecruit,
       getRecruitByOpportunityId,
+      getTalentRoles,
       // getAllProcessStagesForRecruit,
       addRecruit,
       // getCurrency,

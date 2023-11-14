@@ -33,7 +33,7 @@ class SingleDepartment extends Component {
     this.setState({ sectorId: value });
   render() {
     const {
-       department: { departmentName, departmentId,sectorId,mandetoryInd,sectorName,crmInd,erpInd,imInd },
+       department: { departmentName, departmentId,sectorId,mandetoryInd,sectorName,crmInd,erpInd,imInd ,accountInd},
       handleChange,
       name,
       value,
@@ -75,7 +75,7 @@ class SingleDepartment extends Component {
                     />  
                     </div>
                     <h1 class="ml-4">ERP</h1>
-                    <div style={{width:"15%"}}>
+                    <div    style={{width:"9%"}}>
                     
                     <ERPStatusToggle
                       erpInd={erpInd}
@@ -84,7 +84,7 @@ class SingleDepartment extends Component {
                     />  
                     </div>
                     <h1>CRM</h1>
-                    <div style={{width:"15%"}}>
+                    <div    style={{width:"9%"}}>
                     <CRMStatusToggle
                       crmInd={crmInd}
                       departmentName={departmentName}
@@ -92,7 +92,7 @@ class SingleDepartment extends Component {
                     />  
                     </div>
                     <h1>IM</h1>
-                    <div style={{width:"16%"}}>
+                    <div style={{width:"10%"}}>
                     <IMStatusToggle
                       imInd={imInd}
                       departmentName={departmentName}
@@ -100,9 +100,11 @@ class SingleDepartment extends Component {
                     />  
                     </div>
                     <h1>Accounting</h1>
-                    <div style={{width:"15%"}}>
+                    <div 
+                    style={{width:"9%"}}
+                    >
                     <AccountingStatusToggle
-                      imInd={imInd}
+                      accountInd={accountInd}
                       departmentName={departmentName}
                       departmentId={departmentId}
                     />  

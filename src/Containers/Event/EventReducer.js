@@ -48,6 +48,7 @@ export const EventReducer = (state = initialState, action) => {
       return { ...state, 
         addingEvent: false, 
         addEventModal: false,
+        addPitchactivityModal:false,
         eventListRangeByUserId:[action.payload,...state.eventListRangeByUserId]
        };
     case types.ADD_EVENT_FAILURE:

@@ -413,6 +413,7 @@ class ContactDetailTab extends Component {
               <Suspense fallback={"Loading ..."}>
                 {" "}
                 <CustomerActivityTable
+
                  customer={this.props.customer}
                 />
               </Suspense>
@@ -467,6 +468,10 @@ class ContactDetailTab extends Component {
           />
           
           <AddCustomerActivityModal
+           defaultCustomers={[{ label: name, value: customerId }]}
+            customerId={{ value: customerId }}
+          customer={this.props.customer}
+          callback={() => getContactListByCustomerId(customerId)}
             callActivityModal={callActivityModal}
             handleCallActivityModal={handleCallActivityModal}
           /> 
