@@ -65,7 +65,7 @@ class TaskDashboardTab extends Component {
                 <>
                   <ListAltIcon style={{fontSize:"1.1rem"}}/>
                  
-               <span class=" ml-1">Tasks</span>
+               <span class=" ml-1">Open Tasks</span>
               
 
                   {activeKey === "1" && (
@@ -84,9 +84,10 @@ class TaskDashboardTab extends Component {
             <TabPane
               tab={
                 <>
-                  <EventAvailableIcon style={{fontSize:"1.1rem"}}/>
-
-                  <span class=" ml-1">Events</span>
+                  <ListAltIcon style={{fontSize:"1.1rem"}}/>
+                 
+               <span class=" ml-1">Completed Tasks</span>
+              
 
                   {activeKey === "2" && (
                     <>
@@ -95,6 +96,26 @@ class TaskDashboardTab extends Component {
                 </>
               }
               key="2"
+            >
+              <Suspense fallback={"Loading ..."}>
+                {" "}
+                {/* <TaskNew /> */}Completedtasks
+              </Suspense>
+            </TabPane>
+            <TabPane
+              tab={
+                <>
+                  <EventAvailableIcon style={{fontSize:"1.1rem"}}/>
+
+                  <span class=" ml-1">Events</span>
+
+                  {activeKey === "3" && (
+                    <>
+                    </>
+                  )}
+                </>
+              }
+              key="3"
             >
               <Suspense fallback={"Loading ..."}>
                 {" "}

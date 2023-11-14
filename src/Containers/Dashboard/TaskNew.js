@@ -1,18 +1,13 @@
 
-import React, { Component } from "react";
+import React, { Component,lazy } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import {  message } from "antd";
 import {
   getDashboardTasks,
- 
+  handleTaskNameDrawer
 } from "../Dashboard/DashboardAction";
-
-
-
-// const SectorsSchema = Yup.object().shape({
-//   sectorName: Yup.string().required("Input needed !"),
-// });
+const TaskNameDrawer=lazy(()=>import("./TaskNameDrawer"));
 
 class TaskNew extends Component {
   constructor(props) {
@@ -25,7 +20,8 @@ class TaskNew extends Component {
       type: "",
       singleTask: "",
       editInd:true,
-      currentData: ""
+      currentData: "",
+      particularTaskName:{}
     };
   }
   handleClear = () => {
@@ -82,56 +78,33 @@ class TaskNew extends Component {
     this.props.updateTasks(taskType, taskTypeId,editInd, cb);
     this.setState({ taskType: "", singleTask: "",editInd: true });
   };
-  // getLinkedDocuments = () => {
-  //   axios
-  //     .get(`${base_url}/opportunity/source/linkedSources`, {
-  //       headers: {
-  //         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
-  //       },
-  //     })
-  //     .then((res) => {
-  //       console.log(res);
-  //       this.setState({ linkedSources: res.data });
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // };
   componentDidMount() {
-   
     this.props.getDashboardTasks(this.props.userId);
-    // this.getLinkedSources();
+  }
+  handleParticularTaskName=(taskNme)=>{
+    this.setState({particularTaskName:taskNme})
   }
   render() {
-   console.log("Task1",this.props.tasks)
     return (
       <>
-   {/* <div class="flex">
-        {this.props.tasks.length&&this.props.tasks.map((item) => {
-             return (
-        <div class=" flex w-1/2 flex-row">
-          
-                <div class="flex " >{item.taskType}</div>
-              
-                </div>
-             )
-           
-        })}
-          
-          </div> */}
           <div className="grid grid-cols-5 gap-4 p-4">
   {this.props.dashboardTasks.length &&
     this.props.dashboardTasks.map((item) => {
-      const randomNumber = Math.floor(Math.random() * 100) + 1;
+      // const randomNumber = Math.floor(Math.random() * 100) + 1;
       return (
         <div className="col-span-2 sm:col-span-1">
-          <div className="flex">{item.name}</div>
-          <div class="text-2xl">{item.count}</div>
+          <div className="flex" >{item.name}</div>
+          <div class="text-2xl" onClick={()=>{
+            this.handleParticularTaskName(item);
+            this.props.handleTaskNameDrawer(true)}}>{item.count}</div>
         </div>
       );
     })}
 </div>
-        
+        <TaskNameDrawer 
+        particularTaskName={this.state.particularTaskName}
+        taskNameDrwr={this.props.taskNameDrwr}
+        handleTaskNameDrawer={this.props.handleTaskNameDrawer}/>
       </>
     );
   }
@@ -142,22 +115,19 @@ const mapStateToProps = ({ tasks ,dashboard,auth}) => ({
   addingTasksError: tasks.addingTasksError,
   dashboardTasks: dashboard.dashboardTasks,
   userId:auth.userDetails.userId,
-
-  // removingTasks: tasks.removingTasks,
-  // removingTasksError: tasks.removingTasksError,
-  
   fetchingDashboardTasks:dashboard.fetchingDashboardTasks,
   fetchingDashboardTasksError: dashboard.fetchingDashboardTasksError,
-
   updatingTasks: tasks.updatingTasks,
   updatingTasksError: tasks.updatingTasksError,
+  taskNameDrwr:dashboard.taskNameDrwr,
+
   
 });
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
       getDashboardTasks,
-    
+  handleTaskNameDrawer    
     },
     dispatch
   );

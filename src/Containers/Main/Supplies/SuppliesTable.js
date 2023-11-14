@@ -10,12 +10,20 @@ import {
   setEditSupplies,
   deletePurchaseData,
   handleCurrencyPriceModal,
-  handleBrandModel
+  handleBrandModel,
 } from "./SuppliesAction";
 import { Empty, Icon, Tooltip, Button, Popconfirm, Switch } from "antd";
-import { DeleteFilled, DeleteOutlined, EditOutlined, MoneyCollectOutlined, PhoneFilled, } from "@ant-design/icons";
+import {
+  DeleteFilled,
+  DeleteOutlined,
+  EditOutlined,
+  MoneyCollectOutlined,
+  PhoneFilled,
+} from "@ant-design/icons";
 import moment from "moment";
 import TagBrandModel from "./TagBrandModel";
+import { OnlyWrapCard } from "../../../Components/UI/Layout";
+import { Link } from "../../../Components/Common";
 
 function onChange(pagination, filters, sorter) {
   console.log("params", pagination, filters, sorter);
@@ -43,158 +51,164 @@ function SuppliesTable(props) {
     setSuppliesId(suppliesId);
   }
 
-  const {
-    updateSuppliesModal,
-    handleUpdateSuppliesModal,
-  } = props;
-  const columns = [
-    {
-      title: "",
-      dataIndex: "",
-      width: "2%",
-    },
-    {
-      title: "HSN",
-      dataIndex: "hsn",
-      width: "8%",
-    },
-
-    {
-      title: "Name",
-      dataIndex: "name",
-      width: "10%",
-    },
-    {
-      title: "Category",
-      dataIndex: "categoryName",
-      sorter: (a, b) => {
-        var nameA = a.categoryName.toLowerCase(); // ignore upper and lowercase
-        var nameB = b.categoryName.toLowerCase(); // ignore upper and lowercase
-        if (nameA < nameB) {
-          return -1;
-        }
-        if (nameA > nameB) {
-          return 1;
-        }
-
-        // names must be equal
-        return 0;
-      },
-      width: "8%",
-    },
-    {
-      title: "Sub Category",
-      dataIndex: "subCategoryName",
-      width: "10%",
-    },
-    {
-      title: "Attribute",
-      // dataIndex: "attributeName",
-      width: "7%",
-      render: (text, item) => {
-        return (
-          <>
-            {item.attributeName} {item.subAttributeName}
-          </>
-        )
-      }
-    },
-    {
-      title: "Cost",
-      dataIndex: "cost",
-      width: "7%",
-      render: (text, item) => {
-        return (
-          <>{item.cost} {item.currencyName}</>
-        )
-      }
-    },
-
-    {
-      title: "Re-order level",
-      width: "7%",
-      dataIndex: "reorder",
-    },
-
-    {
-      title: "Created",
-      width: "7%",
-      dataIndex: "transfer",
-      render: (text, item) => {
-        return (
-          <>
-            <b>{item.transfer}</b>
-          </>
-        )
-      }
-    },
-    {
-      title: "",
-      width: "5%",
-      render: (text, item) => {
-        return (
-          <>
-            <PhoneFilled
-              onClick={() => {
-                props.handleBrandModel(true);
-                handleParticularRowData(item)
-              }}
-              style={{ color: "blue" }} />
-          </>
-        )
-      }
-    },
-    {
-      title: "",
-      width: "5%",
-      render: (text, item) => {
-        return (
-          <>
-            <span
-              style={{ color: "red" }}
-              onClick={() => {
-                // props.deletePurchaseData(item.suppliesId)
-              }}>
-              <DeleteFilled />
-            </span>
-          </>
-        )
-      }
-    },
-
-  ];
+  const { updateSuppliesModal, handleUpdateSuppliesModal } = props;
 
   return (
     <>
-      {true && (
-        <StyledTable
-          // rowSelection={rowSelection}
-          rowKey=""
-          columns={columns}
-          loading={props.fetchingPurchaseList}
-          dataSource={props.purchaseList}
-          pagination={false}
-          scroll={{ y: 320 }}
-        />
-      )}
+      <div className=" flex justify-end sticky top-28 z-auto">
+        <OnlyWrapCard style={{ height: "80vh", backgroundColor: "#E3E8EE" }}>
+          <div className=" flex justify-between w-[97.5%] p-2 bg-transparent font-bold sticky top-0 z-10">
+            <div className=" md:w-[6.1rem]">HSN</div>
+            <div className=" md:w-[5.1rem]">Name</div>
+            <div className=" md:w-[6.2rem] ">Category</div>
+            <div className="md:w-[6.1rem]">Sub Category</div>
+            <div className="md:w-[4.8rem]">Attribute</div>
+            <div className="md:w-[4.1rem]">Cost</div>
+            <div className="md:w-[6.1rem]">Re-order level</div>
+            <div className="md:w-[4.2rem]">Created</div>
+            <div className="w-[3.8rem]">Action</div>
+          </div>
+          {props.purchaseList.map((item) => {
+            return (
+              <>
+                <div
+                  className="flex rounded-xl justify-between mt-4 bg-white h-12 items-center p-3"
+                  style={
+                    {
+                      // borderBottom: "3px dotted #515050"
+                    }
+                  }
+                >
+                  <div class=" flex flex-row justify-evenly w-wk max-sm:flex-col">
+                    <div className=" flex font-medium flex-col md:w-44 max-sm:justify-between w-full max-sm:flex-row ">
+                      {/* <div class=" text-sm text-cardBody font-medium font-poppins">
+
+Name
+
+</div>  */}
+
+                      <div class=" font-normal text-[0.82rem] text-cardBody font-poppins">
+                        {/* <Link
+          toUrl={`shipper/${item.shipperId}`}
+          title={`${item.shipperName}`}
+        >{item.shipperName}</Link> */}
+                        {item.hsn}
+                      </div>
+                    </div>
+                    <div className=" flex font-medium flex-col md:w-44 max-sm:justify-between w-full max-sm:flex-row ">
+                      {/* <div class=" text-sm text-cardBody font-medium font-poppins">
+
+Phone #
+
+</div>  */}
+
+                      <div class=" font-normal text-[0.82rem] text-cardBody font-poppins">
+                        {item.name}
+                      </div>
+                    </div>
+                    <div className=" flex font-medium flex-col md:w-44 max-sm:justify-between w-full max-sm:flex-row ">
+                      {/* <div class=" text-sm text-cardBody font-medium font-poppins">
+
+Email
+
+</div>  */}
+
+                      <div class=" font-normal text-[0.82rem] text-cardBody font-poppins">
+                        {item.categoryName}
+                      </div>
+                    </div>
+
+                    <div className=" flex font-medium flex-col md:w-44 max-sm:justify-between w-full max-sm:flex-row ">
+                      {/* <div class=" text-sm text-cardBody font-medium font-poppins">
+
+Ship By
+
+</div>  */}
+
+                      <div class=" font-normal text-[0.82rem] text-cardBody font-poppins">
+                        {item.subCategoryName}
+                      </div>
+                    </div>
+                    <div className=" flex font-medium flex-col md:w-44 max-sm:justify-between w-full max-sm:flex-row ">
+                      {/* 
+<div class=" text-sm text-cardBody font-medium font-poppins">
+
+Address
+
+</div>  */}
+
+                      <div class=" font-normal text-[0.82rem] text-cardBody font-poppins">
+                        {item.attributeName} {item.subAttributeName}
+                      </div>
+                    </div>
+                    <div className=" flex font-medium flex-col md:w-44 max-sm:justify-between w-full max-sm:flex-row ">
+                      {/* <div class=" text-sm text-cardBody font-medium font-poppins">
+
+City
+
+</div>  */}
+
+                      <div class=" font-normal text-[0.82rem] text-cardBody font-poppins">
+                        {item.cost}
+                      </div>
+                    </div>
+                    <div className=" flex font-medium flex-col md:w-44 max-sm:justify-between w-full max-sm:flex-row ">
+                      {/* <div class=" text-sm text-cardBody font-medium font-poppins">
+
+PinCode
+
+</div>  */}
+
+                      <div class=" font-normal text-[0.82rem] text-cardBody font-poppins">
+                        {item.reorder}
+                      </div>
+                    </div>
+                    <div className=" flex font-medium flex-col md:w-44 max-sm:justify-between w-full max-sm:flex-row ">
+                      {/* <div class=" text-sm text-cardBody font-medium font-poppins">
+
+PinCode
+
+</div>  */}
+
+                      <div class=" font-normal text-[0.82rem] text-cardBody font-poppins">
+                        {item.transfer}
+                      </div>
+                    </div>
+                    <div class="flex flex-col w-[3%] max-sm:flex-row max-sm:w-[10%]">
+                      <div>
+                        <Tooltip>
+                          <PhoneFilled
+                            onClick={() => {
+                              props.handleBrandModel(true);
+                              handleParticularRowData(item);
+                            }}
+                            style={{ color: "blue", cursor: "pointer" }}
+                          />
+                        </Tooltip>
+                      </div>
+                      <div>
+                        <Popconfirm
+                          title="Do you want to delete?"
+                          //  onConfirm={() => props.deleteShipperData(item.shipperId)}
+                        >
+                          <DeleteFilled
+                            style={{ cursor: "pointer", color: "red" }}
+                          />
+                        </Popconfirm>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </>
+            );
+          })}
+        </OnlyWrapCard>
+      </div>
       <TagBrandModel
         addBrandModel={props.addBrandModel}
         handleBrandModel={props.handleBrandModel}
         particularDiscountData={particularDiscountData}
       />
-      {/* {showHistory && <SuppliesHistoryTable suppliesId={suppliesId} />} */}
-      {/* 
-      <UpdateSuppliesModal
-        suppliesId={currentSuppliesId}
-        updateSuppliesModal={updateSuppliesModal}
-        handleUpdateSuppliesModal={handleUpdateSuppliesModal}
-        handleSetCurrentSuppliesId={handleSetCurrentSuppliesId}
-      />
-      <CurrencyPriceModal
-        handleCurrencyPriceModal={props.handleCurrencyPriceModal}
-        addCurrencyValue={props.addCurrencyValue}
-        suppliesId={currentSuppliesId}
-      /> */}
     </>
   );
 }
@@ -204,19 +218,18 @@ const mapStateToProps = ({ supplies, auth }) => ({
   purchaseList: supplies.purchaseList,
   updateSuppliesModal: supplies.updateSuppliesModal,
   addCurrencyValue: supplies.addCurrencyValue,
-  addBrandModel: supplies.addBrandModel
+  addBrandModel: supplies.addBrandModel,
 });
 
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
-
       getSuppliesList,
       handleUpdateSuppliesModal,
       setEditSupplies,
       deletePurchaseData,
       handleCurrencyPriceModal,
-      handleBrandModel
+      handleBrandModel,
     },
     dispatch
   );

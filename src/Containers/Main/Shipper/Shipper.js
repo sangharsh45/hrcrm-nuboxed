@@ -13,7 +13,7 @@ import AddShipperModal from "./AddShipperModal";
 import AllShipperList from "./AllShipperList";
 import ShipperDeleteTable from "./ShipperDeleteTable";
 import ShipperDashboard from "./ShipperDashboard";
-const ShipperTable =lazy(()=>import("./ShipperTable"));
+const ShipperCardList =lazy(()=>import("./ShipperCardList"));
 
 
 class Shipper extends Component {
@@ -54,7 +54,7 @@ class Shipper extends Component {
         />
         <Suspense fallback={<BundleLoader />}>
           {this.props.viewType === "table" ? (
-            <ShipperTable />
+            <ShipperCardList />
           ) : this.props.viewType === "all" ? (
             <AllShipperList />
           ) : this.props.viewType === "grid" ? (

@@ -1,5 +1,5 @@
 import * as types from "./ProductActionTypes";
-import { base_url } from "../../Config/Auth";
+import { base_url, base_url2 } from "../../Config/Auth";
 import axios from "axios";
 import moment from "moment";
 import { message } from "antd";
@@ -13,10 +13,10 @@ export const getProducts = () => (dispatch) => {
     type: types.GET_PROFESSIONALDUCTS_REQUEST,
   });
   axios
-    .get(`${base_url}/product/productSuppliesList`, {
-      // headers: {
-      //   Authorization: "Bearer " + sessionStorage.getItem("token") || "",
-      // },
+    .get(`${base_url2}/product/productSuppliesList`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
     })
     .then((res) => {
       console.log(res);
@@ -611,7 +611,7 @@ export const getAllProductCatagory = () => (dispatch) => {
     type: types.GET_ALL_PRODUCT_REQUEST,
   });
   axios
-    .get(`${base_url}/product/allProductCatagory`, {
+    .get(`${base_url2}/product/allProductCatagory`, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },
@@ -929,7 +929,11 @@ export const getProductByGroup = (groupId) => (dispatch) => {
     type: types.GET_PRODUCT_BY_GROUP_REQUEST,
   });
   axios
-    .get(`${base_url}/product/productList/${groupId}`)
+    .get(`${base_url2}/product/productList/${groupId}`,{
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
     .then((res) => {
       console.log(res);
       dispatch({

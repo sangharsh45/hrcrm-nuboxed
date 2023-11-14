@@ -209,3 +209,59 @@ export const handleUpdateLeaveModal = (modalProps) => (dispatch) => {
             });
         });
 };
+
+export const handleLeaveNoteDrawer=(modalProps)=>(dispatch)=>{
+dispatch({
+  type:types.HANDLE_LEAVE_NOTE_DRAWER,
+  payload:modalProps,
+})
+};
+
+export const addLeaveNote = (data) => (dispatch, getState) => {
+  dispatch({ type: types.ADD_LEAVE_NOTE_REQUEST });
+
+  axios
+      .post(`${base_url}/leave/notes`, data, {
+          headers: {
+              Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+          },
+      })
+      .then((res) => {
+          console.log(res);
+          dispatch({
+              type: types.ADD_LEAVE_NOTE_SUCCESS,
+              payload: res.data,
+          });
+      }) 
+      .catch((err) => {
+          console.log(err);
+          dispatch({
+              type: types.ADD_LEAVE_NOTE_FAILURE,
+          });
+      });
+};
+export const getLeaveNotes = (leaveId) => (dispatch) => {
+  dispatch({
+    type: types.GET_LEAVE_NOTES_REQUEST,
+  });
+  axios
+    .get(`${base_url}/leave/note/${leaveId}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+    },
+    })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.GET_LEAVE_NOTES_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.GET_LEAVE_NOTES_FAILURE,
+        payload: err,
+      });
+    });
+};
