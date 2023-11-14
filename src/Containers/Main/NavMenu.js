@@ -23,6 +23,7 @@ import ApartmentIcon from '@mui/icons-material/Apartment';
 import ContactsIcon from '@mui/icons-material/Contacts';
 import ReceiptIcon from '@mui/icons-material/Receipt';
 import AcUnitIcon from '@mui/icons-material/AcUnit';
+import PortraitIcon from "@mui/icons-material/Portrait";
 import OnDeviceTrainingIcon from '@mui/icons-material/OnDeviceTraining';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import { Link } from "react-router-dom";
@@ -455,16 +456,17 @@ function NavMenu(props) {
 
         {/*Contact*/}
         {/* )}  */}
+        <hr/>
         {/* Talent */}
-        {/* {user.talentAccessInd === true && (
-            <Menu.Item key="/candidate" style={{height:"27px"}}>
+       {/* {user.talentAccessInd === true && ( */}
+            <Menu.Item key="/candidate" style={{ height: "27px", paddingLeft: "1rem" }}>
               <Link to="/candidate">
           
                 <PortraitIcon
             
                   style={{ fontSize: "large" }}
                 />
-                <span class="text-white text-ls ml-3">
+                 <span class="text-white text-ls ml-1">
               
                   {translatedMenuItems[10]}
                   &nbsp;&nbsp;&nbsp;
@@ -475,10 +477,10 @@ function NavMenu(props) {
                 </span>
               </Link>
             </Menu.Item>
-          )} */}
+          {/* )}  */}
         {/*Talent*/}
         {/*Requirement*/}
-        {user.requirementAccessInd === true && (
+        {/* {user.requirementAccessInd === true && ( */}
           <Menu.Item key="/requirement" style={{ height: "27px", paddingLeft: "1rem" }}>
             <Link to="/requirement">
 
@@ -496,7 +498,8 @@ function NavMenu(props) {
               </span>
             </Link>
           </Menu.Item>
-        )}
+          <hr/>
+        {/* )} */}
         {/*Demand*/}
         {user.userType === "USER" && user.department === "Customer" && (
           <Menu.Item key="/demand" style={{ height: "27px", paddingLeft: "1rem" }}>
