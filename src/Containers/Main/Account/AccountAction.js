@@ -934,7 +934,7 @@ export const handlePaidModal = (modalProps) => (dispatch) => {
 export const addPaidOrder = (data, orderId, distributorId) => (dispatch) => {
   dispatch({ type: types.ADD_PAID_BY_DISTRIBUTOR_ID_REQUEST });
   axios
-    .put(`${base_url2}/phoneOrder/qcUpdateInd`, data, {
+    .post(`${base_url2}/phoneOrder/payment`, data, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },
@@ -963,7 +963,7 @@ export const getDistributorOrderPayment = (orderPhoneId) => (dispatch) => {
     type: types.FETCHING_DISTRIBUTOR_PAYMENT_HISTORY_REQUEST,
   });
   axios
-    .get(`${base_url2}/phoneOrder/order-payment/${orderPhoneId}`, {
+    .get(`${base_url2}/phoneOrder/orderPayment/process/${orderPhoneId}`, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },

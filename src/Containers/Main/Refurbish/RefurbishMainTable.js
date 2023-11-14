@@ -13,7 +13,8 @@ import {
     handleTechnicianModal,
     handlePhoneByTechnician,
     handleOrderPhone,
-    updateFinalPrice
+    updateFinalPrice,
+    handleAllSpareList
 } from "./RefurbishAction";
 import { withRouter } from "react-router";
 import moment from "moment";
@@ -24,7 +25,8 @@ import { EditFilled, HistoryOutlined, PhoneFilled } from "@ant-design/icons";
 // import UserPhoneModal from "./child/ProductionModal/UserPhoneModal";
 // import ProductionOrderModal from "./child/ProductionModal/ProductionOrderModal";
 // import AddAssignRepairModal from "./child/ProductionModal/AddAssignRepairModal";
-import { BorderAllOutlined } from "@mui/icons-material";
+import { ApprovalOutlined, BorderAllOutlined } from "@mui/icons-material";
+import AllSpareListByOrder from "./AllSpareListByOrder";
 
 const EditableCell = ({
     editing,
@@ -215,34 +217,44 @@ const ProductionOrderList = (props) => {
         {
             title: '',
             width: "8%",
-            dataIndex: 'operation',
-            render: (_, record) => {
-                const editable = isEditing(record);
-                return editable ? (
-                    <span>
-                        <Typography.Link
-                            onClick={() =>
-                                save(record.orderPhoneId)
-
-                            }
-                            style={{
-                                marginRight: 8,
+            render: (text, item) => {
+                return (
+                    <>
+                        <ApprovalOutlined
+                            onClick={() => {
+                                handleRowData(item);
+                                props.handleAllSpareList(true)
                             }}
-                        >
-                            Save
-                        </Typography.Link>
-                        <Popconfirm title="Sure to cancel?" onConfirm={cancel}>
-                            <a>Cancel</a>
-                        </Popconfirm>
-                    </span>
-                ) : record.transferInd === 3 ?
-                    (<Typography.Link disabled={editingKey !== ''} onClick={() => edit(record)}>
-                        <BorderAllOutlined />
-                    </Typography.Link>)
-                    : null
+                        /></>
+                )
+            }
+            // render: (_, record) => {
+            //     const editable = isEditing(record);
+            //     return editable ? (
+            //         <span>
+            //             <Typography.Link
+            //                 onClick={() =>
+            //                     save(record.orderPhoneId)
+
+            //                 }
+            //                 style={{
+            //                     marginRight: 8,
+            //                 }}
+            //             >
+            //                 Save
+            //             </Typography.Link>
+            //             <Popconfirm title="Sure to cancel?" onConfirm={cancel}>
+            //                 <a>Cancel</a>
+            //             </Popconfirm>
+            //         </span>
+            //     ) : record.transferInd === 3 ?
+            //         (<Typography.Link disabled={editingKey !== ''} onClick={() => edit(record)}>
+            //             <BorderAllOutlined />
+            //         </Typography.Link>)
+            //         : null
 
 
-            },
+            // },
         },
 
         {
@@ -390,6 +402,10 @@ const ProductionOrderList = (props) => {
                 assignOrderById={props.assignOrderById}
                 rowData={rowData}
             />
+            <AllSpareListByOrder
+                handleAllSpareList={props.handleAllSpareList}
+                approveSpareModal={props.approveSpareModal}
+                rowData={rowData} />
             {/* <UserPhoneModal
                 handlePhoneByTechnician={props.handlePhoneByTechnician}
                 phoneByTechnician={props.phoneByTechnician}
@@ -433,7 +449,7 @@ const mapStateToProps = ({ refurbish, auth }) => ({
     phoneByTechnician: refurbish.phoneByTechnician,
     showAssignRepairModal: refurbish.showAssignRepairModal,
     locationId: auth.userDetails.locationId,
-
+    approveSpareModal: refurbish.approveSpareModal
 });
 
 const mapDispatchToProps = (dispatch) =>
@@ -446,7 +462,8 @@ const mapDispatchToProps = (dispatch) =>
             handleTechnicianModal,
             handlePhoneByTechnician,
             handleOrderPhone,
-            updateFinalPrice
+            updateFinalPrice,
+            handleAllSpareList
         },
         dispatch
     );

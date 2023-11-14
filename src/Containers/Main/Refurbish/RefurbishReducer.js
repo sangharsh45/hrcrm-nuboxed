@@ -8,6 +8,10 @@ const initialState = {
 
   showAssignRepairModal: false,
 
+  fetchingALlSPareList: false,
+  fetchingALlSPareListError: false,
+  allSpareById: [],
+
   showRepairPhoneList: false,
 
   fetchingRepairorderById: false,
@@ -85,6 +89,8 @@ const initialState = {
   //split output
   splitOutputModal: false,
   setEditingOutputProduction: {},
+
+  approveSpareModal: false,
 
   productioNoteModal: false,
 
@@ -337,6 +343,9 @@ export const refurbishReducer = (state = initialState, action) => {
 
     case types.HANDLE_PRODUCTION_NOTES_MODAL:
       return { ...state, productioNoteModal: action.payload };
+
+    case types.HANDLE_ALL_SPARE_MODAL:
+      return { ...state, approveSpareModal: action.payload };
 
     case types.GET_PRODUCTION_USER_BYID_REQUEST:
       return { ...state, fetchingProductionUserById: true };
@@ -638,6 +647,21 @@ export const refurbishReducer = (state = initialState, action) => {
         ...state,
         fetchingOpenQc: false,
         fetchingOpenQcError: true,
+      };
+
+    case types.GET_ALL_SPARE_LIST_REQUEST:
+      return { ...state, fetchingALlSPareList: true };
+    case types.GET_ALL_SPARE_LIST_SUCCESS:
+      return {
+        ...state,
+        fetchingALlSPareList: false,
+        allSpareById: action.payload,
+      };
+    case types.GET_ALL_SPARE_LIST_FAILURE:
+      return {
+        ...state,
+        fetchingALlSPareList: false,
+        fetchingALlSPareListError: true,
       };
     default:
       return state;

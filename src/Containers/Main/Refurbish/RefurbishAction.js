@@ -621,6 +621,13 @@ export const handleAssignRepairModal = (modalProps) => (dispatch) => {
   })
 }
 
+export const handleAllSpareList = (modalProps) => (dispatch) => {
+  dispatch({
+    type: types.HANDLE_ALL_SPARE_MODAL,
+    payload: modalProps,
+  })
+}
+
 export const getOrderByUser = (locationId, userId) => (dispatch) => {
   dispatch({
     type: types.GET_ORDER_BY_USER_REQUEST,
@@ -885,6 +892,31 @@ export const getOpenRepair = (locationId, userId) => (dispatch) => {
       console.log(err);
       dispatch({
         type: types.GET_OPEN_USER_BY_USER_FAILURE,
+        payload: err,
+      });
+    });
+};
+export const getAllSpareList = (orderId) => (dispatch) => {
+  dispatch({
+    type: types.GET_ALL_SPARE_LIST_REQUEST,
+  });
+  axios
+    .get(`${base_url2}/get-allspare/${orderId}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.GET_ALL_SPARE_LIST_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.GET_ALL_SPARE_LIST_FAILURE,
         payload: err,
       });
     });
