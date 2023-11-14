@@ -154,6 +154,152 @@ return  <BundleLoader />
              <TabPane
               tab={
                 <>
+                  <span onClick={this.handleRecruitClick}>
+                  <TransferWithinAStationIcon 
+                  style={{fontSize:"1.1rem"}}
+                   />
+                    <span style={{ marginLeft: '0.25em' }}>RecruitPro</span>
+                  </span>
+                  {activeKey === "1" && (
+                    <>
+
+                      <>
+                     
+                        <Tooltip title="Add Requirement">
+                        {user.userType !== "USER" && user.department !== "Recruiter" && ( 
+                          <PlusOutlined
+                            type="plus"
+                            tooltipTitle="Add Requirement"
+                            onClick={() =>
+                              this.props.handleRecruitModal(true)
+                            }
+                            size="0.875em"
+                            style={{
+                              marginLeft: "0.125em",
+                              verticalAlign: "center",
+                            }}
+                          />
+                        )}
+                          </Tooltip>
+                        
+                        {/* <Tooltip //title="Tag Position"
+                          title={<FormattedMessage
+                            id="app.tagposition"
+                            defaultMessage="Tag Position"
+                          />}
+
+                        >
+                           {user.userType !== "USER" && user.department !== "Recruiter" && ( 
+                          <Icon
+                            type="link"
+                            onClick={() => {
+                              this.handlepartnerPopoverVisibleChange();
+                              handleTagProfileModal(true);
+                            }}
+                            size="0.875em"
+                            style={{
+                              marginLeft: "-5px",
+                              verticalAlign: "center",
+                            }}
+                          />
+                           )}
+                        </Tooltip> */}
+
+                        <Tooltip title="Summary">
+                      <span
+                       style={{marginLeft:"-4px"}}
+                          type="area-chart"
+                          // tooltipTitle="Summary"
+                          onClick={() => {
+                            this.handleRecriutmentdashboard();
+                          }}
+                          size="0.875em"                         
+                          >
+                          {/* <i class="fas fa-chart-line"></i> */}
+                          {/* <i class="fas-solid fa-chart-pie"></i> */}
+                          <PieChartIcon  style={{fontSize:"1.1rem"}} />
+                          </span>
+                        </Tooltip>
+
+                        <Tooltip title="Close">
+                         <span
+                     
+                      style={{marginLeft:"4px"}}
+                          type="area-chart"
+                          // tooltipTitle="Summary"
+                          onClick={() => {
+                            this.handleClosedPopoverVisibleChange();
+                          }}
+                          size="0.8em"                         
+                          >
+                             <LockIcon style={{fontSize:"1.1rem"}} />
+                            
+                          
+                          </span>
+                      
+                        </Tooltip>
+
+                        <Tooltip title="Close">
+                         <span
+                     
+                      style={{marginLeft:"4px"}}
+                          type="area-chart"
+                          // tooltipTitle="Summary"
+                          // onClick={() => {
+                          //   this.handleClosedPopoverVisibleChange();
+                          // }}
+                          size="0.8em"                         
+                          >
+                            <DeleteIcon  style={{fontSize:"1.1rem"}}
+                            onClick={() => {
+                            this.handledeletedPopoverVisibleChange();
+                          }}
+                            />
+                            
+                          
+                          </span>
+                      
+                        </Tooltip>
+                      
+                       
+                      </>
+                  
+                    </>
+                  )}
+                </>
+              }
+              key="1"
+            >
+               
+              {this.state.recriutmentdashboard ? (
+                <Suspense fallback={"Loading ..."}>
+                  {" "}
+                  <RecruitProJumpstart />
+                  <SummaryTable />
+                </Suspense>
+              ) :this.state.closedPopover ? 
+              (
+                <Suspense fallback={"Loading ..."}>
+                <RecruitmentClosedTable  opportunityId={opportunityId}/>
+                </Suspense>
+              ):this.state.deletePopover ? 
+                 
+                (
+                  <Suspense fallback={"Loading ..."}>
+                  <RecruitmentDeletedTable  opportunityId={opportunityId}/>
+                  </Suspense>
+                ):(
+                  <Suspense fallback={"Loading ..."}>
+                    {" "}
+                    <RecruitmentTable  opportunityId={opportunityId}/>
+                  </Suspense>
+                  
+                )}
+                  
+            </TabPane>
+             <TabPane
+              tab={
+                <>
                   <span>
                     <ContactsIcon   style={{fontSize:"1.1rem"}}/>
                     <span style={{ marginLeft: '0.25em' }}>
