@@ -5,7 +5,7 @@ import { Button, } from "antd";
 import { FormattedMessage } from "react-intl";
 import { Formik, Form, Field, FieldArray, FastField } from "formik";
 import * as Yup from "yup";
-import { getAllCustomerEmployeelist } from "../../Employees/EmployeeAction";
+import {getAllEmployeelist} from "../../Investor/InvestorAction"
 import { StyledLabel } from "../../../Components/UI/Elements";
 import { Spacer } from "../../../Components/UI/Elements";
 import SearchSelect from "../../../Components/Forms/Formik/SearchSelect";
@@ -37,7 +37,7 @@ function UpdatePitchForm (props) {
     resetForm();
   };
   useEffect (()=>{
-    props.getAllCustomerEmployeelist();
+    props.getAllEmployeelist();
     props.getSources(props.orgId)
   },[])
  
@@ -61,7 +61,7 @@ function UpdatePitchForm (props) {
     });
     const [defaultOption, setDefaultOption] = useState(props.setEditingPitch.assignedTo);
     const [selected, setSelected] = useState(defaultOption);
-    const selectedOption = props.allCustomerEmployeeList.find((item) => item.fullName === selected);
+    const selectedOption = props.allEmployeeList.find((item) => item.empName === selected);
     return (
       <>
         <Formik
@@ -388,7 +388,7 @@ function UpdatePitchForm (props) {
                   static
                   className="absolute z-10 mt-1 max-h-56 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
                 >
-                  {props.allCustomerEmployeeList.map((item) => (
+                  {props.allEmployeeList.map((item) => (
                     <Listbox.Option
                       key={item.employeeId}
                       className={({ active }) =>
@@ -396,7 +396,7 @@ function UpdatePitchForm (props) {
                           active ? "text-white bg-indigo-600" : "text-gray-900"
                         }`
                       }
-                      value={item.fullName}
+                      value={item.empName}
                     >
                       {({ selected, active }) => (
                         <>
@@ -406,7 +406,7 @@ function UpdatePitchForm (props) {
                                 selected ? "font-semibold" : "font-normal"
                               }`}
                             >
-                              {item.fullName}
+                              {item.empName}
                             </span>
                           </div>
                           {selected && (
@@ -491,7 +491,7 @@ function UpdatePitchForm (props) {
   
 }
 
-const mapStateToProps = ({ auth, leads,employee,source,pitch }) => ({
+const mapStateToProps = ({ auth,investor, leads,employee,source,pitch }) => ({
     setEditingPitch: leads.setEditingPitch,
     updateLeadsById: leads.updateLeadsById,
     sources: source.sources,
@@ -502,7 +502,7 @@ const mapStateToProps = ({ auth, leads,employee,source,pitch }) => ({
     organizationId: auth.userDetails.organizationId,
     employees: employee.employees,
     leadsAllData:leads.leadsAllData,
-    allCustomerEmployeeList:employee.allCustomerEmployeeList,
+    allEmployeeList:investor.allEmployeeList,
     setEditingPitch:pitch.setEditingPitch
 });
 
@@ -513,7 +513,7 @@ const mapDispatchToProps = (dispatch) =>
         getSources,
         // updateLeads,
         setEditPitch,
-      getAllCustomerEmployeelist,
+        getAllEmployeelist,
     //   setClearbitData,
     },
     dispatch

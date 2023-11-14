@@ -648,13 +648,14 @@ export const OpportunityReducer = (state = initialState, action) => {
         ...state,
         updateOpportunityById: false,
         updateOpportunityModal: false,
-        opportunityByUserId: state.opportunityByUserId.map((item) => {
-          if (item.opportunityId === action.payload.opportunityId) {
-            return action.payload;
-          } else {
-            return item;
-          }
-        }),
+        opportunity:action.payload,
+        // opportunity: state.opportunity.map((item) => {
+        //   if (item.opportunityId === action.payload.opportunityId) {
+        //     return action.payload;
+        //   } else {
+        //     return item;
+        //   }
+        // }),
       };
     case types.UPDATE_OPPORTUNITY_BY_ID_FAILURE:
       return {

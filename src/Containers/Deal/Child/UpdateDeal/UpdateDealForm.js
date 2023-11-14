@@ -2,13 +2,14 @@ import React, { useState,useEffect } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Button } from "antd";
+import {getAllEmployeelist} from "../../../Investor/InvestorAction"
 import { FormattedMessage } from "react-intl";
 import { SelectComponent } from "../../../../Components/Forms/Formik/SelectComponent";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 import { Spacer, StyledLabel } from "../../../../Components/UI/Elements";
 import SearchSelect from "../../../../Components/Forms/Formik/SearchSelect";
-import { getWorkflow, getStages,getAllSalesList } from "../../../Opportunity/OpportunityAction";
+import { getWorkflow, getStages, } from "../../../Opportunity/OpportunityAction";
 import { InputComponent } from "../../../../Components/Forms/Formik/InputComponent";
 import { DatePicker } from "../../../../Components/Forms/Formik/DatePicker";
 import dayjs from "dayjs";
@@ -35,7 +36,7 @@ const UpdateOpportunitySchema = Yup.object().shape({
 });
 function UpdateDealForm (props) {
   useEffect(()=> {
-    props.getAllSalesList();
+    props.getAllEmployeelist();
     props.getInvestorData(props.userId);
     props.getContactData(props.userId);
     props.getDealLinkedStages(props.orgId);
@@ -75,9 +76,9 @@ function UpdateDealForm (props) {
     return StagesOptions;
   }
 
-    const salesNameOption = props.sales.map((item) => {
+    const salesNameOption = props.allEmployeeList.map((item) => {
       return {
-        label: `${item.fullName || ""}`,
+        label: `${item.empName || ""}`,
         value: item.employeeId,
       };
     });
@@ -134,7 +135,7 @@ function UpdateDealForm (props) {
 
       const [defaultOption, setDefaultOption] = useState(props.currentItem.assignedTo);
       const [selected, setSelected] = useState(defaultOption);
-      const selectedOption = props.sales.find((item) => item.fullName === selected);
+      const selectedOption = props.allEmployeeList.find((item) => item.empName === selected);
     return (
       <>
         <Formik
@@ -391,7 +392,7 @@ function UpdateDealForm (props) {
                   static
                   className="absolute z-10 mt-1 max-h-56 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
                 >
-                  {props.sales.map((item) => (
+                  {props.allEmployeeList.map((item) => (
                     <Listbox.Option
                       key={item.employeeId}
                       className={({ active }) =>
@@ -399,7 +400,7 @@ function UpdateDealForm (props) {
                           active ? "text-white bg-indigo-600" : "text-gray-900"
                         }`
                       }
-                      value={item.fullName}
+                      value={item.empName}
                     >
                       {({ selected, active }) => (
                         <>
@@ -409,7 +410,7 @@ function UpdateDealForm (props) {
                                 selected ? "font-semibold" : "font-normal"
                               }`}
                             >
-                              {item.fullName}
+                              {item.empName}
                             </span>
                           </div>
                           {selected && (
@@ -583,8 +584,9 @@ function UpdateDealForm (props) {
     );
 }
 
-const mapStateToProps = ({ auth,deal, opportunity, customer, contact }) => ({
+const mapStateToProps = ({ auth,deal,investor, opportunity, customer, contact }) => ({
   user: auth.userDetails,
+  allEmployeeList:investor.allEmployeeList,
   userId: auth.userDetails.userId,
   organizationId: auth.userDetails.organizationId,
   setEditingOpportunity: opportunity.setEditingOpportunity,
@@ -603,7 +605,7 @@ const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
       updateDeal,
-      getAllSalesList,
+      getAllEmployeelist,
       // getWorkflow,
       // getStages,
       getDealLinkedWorkflow,

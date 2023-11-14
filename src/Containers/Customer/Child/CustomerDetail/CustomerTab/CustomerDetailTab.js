@@ -240,7 +240,8 @@ class ContactDetailTab extends Component {
             >
               <Suspense fallback={"Loading ..."}>
                 {" "}
-                <LinkedContact />
+                <LinkedContact  defaultCustomers={[{ label: name, value: customerId }]}
+            customerId={{ value: customerId }} />
               </Suspense>
             </TabPane>
 

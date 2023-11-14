@@ -7,6 +7,7 @@ import { withRouter } from "react-router-dom";
 import { inputEmployeeDataSearch, getRecords } from "../EmployeeAction";
 import { Button, Input, Tooltip, Badge } from "antd";
 import { FormattedMessage } from "react-intl";
+import {getDepartments} from "../../Settings/Department/DepartmentAction"
 import { getlocation } from "../../Event/Child/Location/LocationAction";
 import GroupsIcon from "@mui/icons-material/Groups";
 import GridViewIcon from '@mui/icons-material/GridView';
@@ -23,6 +24,7 @@ const EmployeesActionLeft = (props) => {
       props.getRecords(props.orgId);
     }
     props.getlocation(props.orgId);
+    props.getDepartments();
   }, [props.viewType]);
   // useEffect(()=>{
   //   props.getCountries();
@@ -140,7 +142,7 @@ const EmployeesActionLeft = (props) => {
                     // placeholder="Select Location"
                     //  defaultValue={partners}
                     style={{ width: "auto",margin:"auto"}}
-                     onChange={props.handleDropdownChange}
+                     onChange={props.handleLocationChange}
                      value={props.selectedLocation}
                   >
                     <option value="">All Locations</option>
@@ -153,14 +155,34 @@ const EmployeesActionLeft = (props) => {
                     })}
                   </select>
                 </div>
+                <div class=" flex items-center ml-4"  style={{border:"0.5px solid lightgray "}} >
+                  <select
+                    // placeholder="Select Location"
+                    //  defaultValue={partners}
+                    style={{ width: "auto",margin:"auto"}}
+                     onChange={props.handleDepartmentChange}
+                     value={props.selectedDepartment}
+                     disabled={!props.selectedLocation}
+                  >
+                    <option value="">All Department</option>
+                    {props.departments.map((item) => {
+                      return (
+                        <option value={item.departmentName}>
+                          {item.departmentName}
+                        </option>
+                      );
+                    })}
+                  </select>
+                </div>
     </div>
   );
 };
 
-const mapStateToProps = ({ auth,location, employee }) => ({
+const mapStateToProps = ({ auth,location,departments, employee }) => ({
   userId: auth.userDetails.userId,
   orgId: auth.userDetails.organizationId,
   showLocation:location.showLocation,
+  departments: departments.departments,
   employeerecordData: employee.employeerecordData,
 });
 const mapDispatchToProps = (dispatch) =>
@@ -169,6 +191,7 @@ const mapDispatchToProps = (dispatch) =>
       inputEmployeeDataSearch,
       getRecords,
       getlocation,
+      getDepartments
     },
     dispatch
   );

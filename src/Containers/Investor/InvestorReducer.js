@@ -29,6 +29,10 @@ const initialState = {
   fetchingInvestorDetailsByIdError: false,
   investorDetails: {},
 
+  fetchingallEmployeeList: false,
+  fetchingallEmployeeListError: false,
+  allEmployeeList:[],
+
   fetchingsInvestorContact: false,
   fetchingsInvestorContactError: false,
   contactsbyInvestorId: [],
@@ -367,6 +371,21 @@ export const investorReducer = (state = initialState, action) => {
                               case types.HANDLE_INVESTOR_NOTES_DRAWER_MODAL:
                                 return { ...state, addDrawerInvestorNotesModal: action.payload };                 
 
+
+                                case types.GET_ALL_EMPLOYEE_LIST_REQUEST:
+                                  return { ...state, fetchingallEmployeeList: true };
+                                case types.GET_ALL_EMPLOYEE_LIST_SUCCESS:
+                                  return {
+                                    ...state,
+                                    fetchingallEmployeeList: false,
+                                    allEmployeeList: action.payload,
+                                  };
+                                case types.GET_ALL_EMPLOYEE_LIST_FAILURE:
+                                  return {
+                                    ...state,
+                                    fetchingallEmployeeList: false,
+                                    fetchingallEmployeeListError: true,
+                                  };
                                     
 default:
       return state;

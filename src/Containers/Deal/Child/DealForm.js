@@ -7,19 +7,14 @@ import { FormattedMessage } from "react-intl";
 import SpeechRecognition, {
   useSpeechRecognition,
 } from "react-speech-recognition";
+import {getAllEmployeelist} from "../../Investor/InvestorAction"
 import { Button, Tooltip } from "antd";
-import { Formik, Form, Field, FieldArray, FastField } from "formik";
+import { Formik, Form, Field, FastField } from "formik";
 import * as Yup from "yup";
-import { base_url } from "../../../Config/Auth";
 import { Spacer, StyledLabel } from "../../../Components/UI/Elements";
-import Clearbit from "../../../Components/Forms/Autocomplete/Clearbit";
-import LazySelect from "../../../Components/Forms/Formik/LazySelect";
 import SearchSelect from "../../../Components/Forms/Formik/SearchSelect";
-import AddressFieldArray from "../../../Components/Forms/Formik/AddressFieldArray";
-import ProgessiveImage from "../../../Components/Utils/ProgressiveImage";
 import {
   getRecruiterName,
-  getAllSalesList,
   getInitiative,
   getStages,
 } from "../../Opportunity/OpportunityAction";
@@ -31,9 +26,7 @@ import { InputComponent } from "../../../Components/Forms/Formik/InputComponent"
 import { SelectComponent } from "../../../Components/Forms/Formik/SelectComponent";
 import { DatePicker } from "../../../Components/Forms/Formik/DatePicker";
 import dayjs from "dayjs";
-import { Fragment } from "react";
 import { Listbox } from "@headlessui/react";
-import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/20/solid";
 import {createDeals,  getAllDealStages,
   getDealLinkedWorkflow,
   getDealLinkedStages
@@ -54,7 +47,7 @@ const OpportunitySchema = Yup.object().shape({
 function DealForm(props) {
   useEffect(() => {
     props.getRecruiterName();
-    props.getAllSalesList();
+    props.getAllEmployeelist();
     props.getSources(props.orgId);
     props.getdealsContactdata(props.userId);
     // props.getCustomerData(props.userId);
@@ -211,9 +204,9 @@ function DealForm(props) {
     };
   });
 
-  const salesNameOption = props.sales.map((item) => {
+  const salesNameOption = props.allEmployeeList.map((item) => {
     return {
-      label: `${item.fullName || ""}`,
+      label: `${item.empName || ""}`,
       value: item.employeeId,
     };
   });
@@ -246,7 +239,7 @@ function DealForm(props) {
     defaultContacts,
     name,
   } = props;
-  const selectedOption = props.sales.find((item) => item.fullName === selected);
+  const selectedOption = props.allEmployeeList.find((item) => item.empName === selected);
   
   return (
     <>
@@ -537,7 +530,7 @@ function DealForm(props) {
                   static
                   className="absolute z-10 mt-1 max-h-56 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
                 >
-                  {props.sales.map((item) => (
+                  {props.allEmployeeList.map((item) => (
                     <Listbox.Option
                       key={item.employeeId}
                       className={({ active }) =>
@@ -545,7 +538,7 @@ function DealForm(props) {
                           active ? "text-white bg-indigo-600" : "text-gray-900"
                         }`
                       }
-                      value={item.fullName}
+                      value={item.empName}
                     >
                       {({ selected, active }) => (
                         <>
@@ -555,7 +548,7 @@ function DealForm(props) {
                                 selected ? "font-semibold" : "font-normal"
                               }`}
                             >
-                              {item.fullName}
+                              {item.empName}
                             </span>
                           </div>
                           {selected && (
@@ -784,7 +777,7 @@ function DealForm(props) {
   );
 }
 
-const mapStateToProps = ({ auth,source, opportunity,deal,settings, contact, customer }) => ({
+const mapStateToProps = ({ auth,source,investor, opportunity,deal,settings, contact, customer }) => ({
   user: auth.userDetails,
   userId: auth.userDetails.userId,
   organizationId: auth.userDetails.organizationId,
@@ -797,6 +790,7 @@ const mapStateToProps = ({ auth,source, opportunity,deal,settings, contact, cust
   orgId: auth.userDetails.organizationId,
   // salesUserIds:auth.userDetails.userId,
   sales: opportunity.sales,
+  allEmployeeList:investor.allEmployeeList,
   dealStages: deal.dealStages,
   currencies: auth.currencies,
   contactByUserId: contact.contactByUserId,
@@ -819,7 +813,7 @@ const mapDispatchToProps = (dispatch) =>
       createDeals,
       getdealsContactdata,
       getRecruiterName,
-      getAllSalesList,
+      getAllEmployeelist,
       // getInitiativeByCustomerId,
       getCustomerData,
       getInvestorData,

@@ -471,4 +471,30 @@ export const getInvestorDetailsById = (investorId) => (dispatch) => {
       payload: modalProps,
     });
   };
+
+  export const getAllEmployeelist = () => (dispatch) => {
+    dispatch({
+      type: types.GET_ALL_EMPLOYEE_LIST_REQUEST,
+    });
+    axios
+       .get(`${base_url}/employee/user-list/drop-down/im`, {
+       headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+      .then((res) => {
+        console.log(res);
+        dispatch({
+          type: types.GET_ALL_EMPLOYEE_LIST_SUCCESS,
+          payload: res.data,
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+        dispatch({
+          type: types.GET_ALL_EMPLOYEE_LIST_FAILURE,
+          payload: err,
+        });
+      });
+  };
   

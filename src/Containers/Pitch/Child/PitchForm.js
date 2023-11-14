@@ -5,7 +5,7 @@ import { Button, Switch, Checkbox } from "antd";
 import { FormattedMessage } from "react-intl";
 import { Formik, Form, Field, FieldArray, FastField } from "formik";
 import * as Yup from "yup";
-import { getAllCustomerEmployeelist } from "../../Employees/EmployeeAction";
+import {getAllEmployeelist} from "../../Investor/InvestorAction"
 import { StyledLabel } from "../../../Components/UI/Elements";
 import { Spacer } from "../../../Components/UI/Elements";
 import SearchSelect from "../../../Components/Forms/Formik/SearchSelect";
@@ -34,7 +34,7 @@ function PitchForm (props) {
   };
  
   useEffect(()=> {
-props.getAllCustomerEmployeelist();
+props.getAllEmployeelist();
   },[]);
 
     const {
@@ -52,7 +52,7 @@ props.getAllCustomerEmployeelist();
 
     const [defaultOption, setDefaultOption] = useState(props.fullName);
     const [selected, setSelected] = useState(defaultOption);
-    const selectedOption = props.allCustomerEmployeeList.find((item) => item.fullName === selected);
+    const selectedOption = props.allEmployeeList.find((item) => item.empName === selected);
 
     return (
       <>
@@ -421,7 +421,7 @@ props.getAllCustomerEmployeelist();
                   static
                   className="absolute z-10 mt-1 max-h-56 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
                 >
-                  {props.allCustomerEmployeeList.map((item) => (
+                  {props.allEmployeeList.map((item) => (
                     <Listbox.Option
                       key={item.employeeId}
                       className={({ active }) =>
@@ -429,7 +429,7 @@ props.getAllCustomerEmployeelist();
                           active ? "text-white bg-indigo-600" : "text-gray-900"
                         }`
                       }
-                      value={item.fullName}
+                      value={item.empName}
                     >
                       {({ selected, active }) => (
                         <>
@@ -439,7 +439,7 @@ props.getAllCustomerEmployeelist();
                                 selected ? "font-semibold" : "font-normal"
                               }`}
                             >
-                              {item.fullName}
+                              {item.empName}
                             </span>
                           </div>
                           {selected && (
@@ -521,12 +521,12 @@ props.getAllCustomerEmployeelist();
     );
 }
 
-const mapStateToProps = ({ auth, leads,employee,pitch,source }) => ({
+const mapStateToProps = ({ auth,investor, leads,employee,pitch,source }) => ({
     addingPitch: pitch.addingPitch,
   addingLeadsError: leads.addingLeadsError,
    clearbit: leads.clearbit,
   user: auth.userDetails,
-  allCustomerEmployeeList:employee.allCustomerEmployeeList,
+  allEmployeeList:investor.allEmployeeList,
   userId: auth.userDetails.userId,
   fullName: auth.userDetails.fullName,
 });
@@ -536,7 +536,7 @@ const mapDispatchToProps = (dispatch) =>
     {
         addPitch,
       setClearbitData,
-       getAllCustomerEmployeelist,
+      getAllEmployeelist,
    
     },
     dispatch

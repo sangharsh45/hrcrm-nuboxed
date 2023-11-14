@@ -6,8 +6,9 @@ import { Button} from "antd";
 import AddressFieldArray from "../../../../Components/Forms/Formik/AddressFieldArray";
 import { Formik, Form, Field, FieldArray, FastField } from "formik";
 import * as Yup from "yup";
-import { getAllSalesList } from "../../../Opportunity/OpportunityAction";
-import { getAllCustomerEmployeelist } from "../../../Employees/EmployeeAction";
+import {getAllEmployeelist} from "../../InvestorAction"
+// import { getAllSalesList } from "../../../Opportunity/OpportunityAction";
+// import { getAllCustomerEmployeelist } from "../../../Employees/EmployeeAction";
 import { getSectors } from "../../../../Containers/Settings/Sectors/SectorsAction";
 import { HeaderLabel, StyledLabel } from "../../../../Components/UI/Elements";
 import { Spacer } from "../../../../Components/UI/Elements";
@@ -28,9 +29,10 @@ const UpdateInvestorSchema = Yup.object().shape({
 function UpdateInvestorForm (props) {
   
   useEffect(() => {
-    props.getAllCustomerEmployeelist();
+    props.getAllEmployeelist();
+    // props.getAllCustomerEmployeelist();
     props.getSectors();
-    props.getAllSalesList();
+    // props.getAllSalesList();
   }, []);
 
 
@@ -46,7 +48,7 @@ function UpdateInvestorForm (props) {
       RowData,
       userId
     } = props;
-    const employeesData = props.allCustomerEmployeeList.map((item) => {
+    const employeesData = props.allEmployeeList.map((item) => {
       return {
         label: `${item.fullName}`,
         value: item.employeeId,
@@ -54,7 +56,7 @@ function UpdateInvestorForm (props) {
     });
     const [defaultOption, setDefaultOption] = useState(RowData.assignedTo);
     const [selected, setSelected] = useState(defaultOption);
-    const selectedOption = props.allCustomerEmployeeList.find((item) => item.fullName === selected);
+    const selectedOption = props.allEmployeeList.find((item) => item.empName === selected);
     console.log(props.RowData)
     return (
       <>
@@ -256,7 +258,7 @@ function UpdateInvestorForm (props) {
                   static
                   className="absolute z-10 mt-1 max-h-56 w-full overflow-auto  bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
                 >
-                  {props.allCustomerEmployeeList.map((item) => (
+                  {props.allEmployeeList.map((item) => (
                     <Listbox.Option
                       key={item.employeeId}
                       className={({ active }) =>
@@ -264,7 +266,7 @@ function UpdateInvestorForm (props) {
                           active ? "text-white bg-indigo-600" : "text-gray-900"
                         }`
                       }
-                      value={item.fullName}
+                      value={item.empName}
                     >
                       {({ selected, active }) => (
                         <>
@@ -274,7 +276,7 @@ function UpdateInvestorForm (props) {
                                 selected ? "font-semibold" : "font-normal"
                               }`}
                             >
-                              {item.fullName}
+                              {item.empName}
                             </span>
                           </div>
                           {selected && (
@@ -391,8 +393,9 @@ const mapStateToProps = ({ auth,investor,customer,employee }) => ({
   updateInvestorById: investor.updateInvestorById,
   updateInvestorByIdError: investor.updateInvestorByIdError,
   user: auth.userDetails,
+  allEmployeeList:investor.allEmployeeList,
   userId: auth.userDetails.userId,
-  allCustomerEmployeeList:employee.allCustomerEmployeeList,
+  // allCustomerEmployeeList:employee.allCustomerEmployeeList,
   organizationId: auth.userDetails.organizationId,
   employees: employee.employees,
 });
@@ -402,8 +405,9 @@ const mapDispatchToProps = (dispatch) =>
     {
       UpdateInvestor,
       getSectors,
-      getAllSalesList,
-      getAllCustomerEmployeelist,
+      getAllEmployeelist
+      // getAllSalesList,
+      // getAllCustomerEmployeelist,
     },
     dispatch
   );
