@@ -20,9 +20,16 @@ const PitchTimeline = (props) => {
           {pitchStatus &&
             pitchStatus.map((status, i) => (
               <Timeline.Item key={i}>
-             {status.employeeName}
-                 
-              </Timeline.Item>
+              <div>
+              <div>{status.category} {status.activityType} {moment.utc(status.startdate).format('YYYY-MM-DD')}</div>
+         
+              </div>
+              <div>
+              
+               
+               
+              </div>
+            </Timeline.Item>
             ))}
         </Timeline>
       </div>

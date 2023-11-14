@@ -69,7 +69,7 @@ const LeadsCardList = (props) => {
   if (fetchingLeads) {
     return <BundleLoader />;
   }
-
+console.log("data",currentLeadsId)
   return (
     <>
       <OnlyWrapCard style={{backgroundColor:"#E3E8EE"}}>
@@ -486,6 +486,8 @@ const LeadsCardList = (props) => {
       />
       <OpenCETmodal
         rowdata={rowdata}
+        // item={currentLeadsId}
+        // handleSetCurrentLeadsId={handleSetCurrentLeadsId}
         openCETmodal={props.openCETmodal}
         handleCETmodal={props.handleCETmodal}
       />

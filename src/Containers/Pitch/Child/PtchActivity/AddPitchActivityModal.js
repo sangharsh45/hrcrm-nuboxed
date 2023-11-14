@@ -6,37 +6,34 @@ import { BundleLoader } from "../../../../Components/Placeholder";
 import { StyledTabs } from "../../../../Components/UI/Antd";
 import { TabsWrapper } from "../../../../Components/UI/Layout";
 import { FormattedMessage } from "react-intl";
-import CustomerCallActivityForm from "../CustomerActivity/CustomerCallActivityForm";
-import CustomerEventActivityForm from "../CustomerActivity/CustomerEventActivityForm";
-import CustomerTaskActivityForm from "../CustomerActivity/CustomerTaskActivityForm";
+import PitchCallForm from "./PitchCallForm";
+import PitchTaskForm from "./PitchTaskForm";
+import PitchEventForm from "./PitchEventForm";
 
 
-const EventForm = lazy(() =>
-  import("../../../Event/Child/EventForm")
-);
-const TaskForm = lazy(() =>
-  import("../../../Task/Child/TaskForm")
-);
+
+
 
 const TabPane = StyledTabs.TabPane;
 
-const AddCustomerActivityModal = (props) => {
-  const { callActivityModal, handleCallActivityModal, ...formProps } = props;
+const AddPitchActivityModal = (props) => {
+  const { addPitchactivityModal, handlePitchActivityModal, ...formProps } = props;
   const isSmallScreen = window.innerWidth <= 600;
   const drawerWidth = isSmallScreen ? "90%" : "55%";
+  console.log("rowdata",props.rowdata)
   return (
     <>
       <StyledDrawer
         title={<FormattedMessage
           id="app.schedulecall"
-          defaultMessage="Schedule Call"
+          defaultMessage="Schedule"
         />}
         width={drawerWidth}
-        visible={callActivityModal}
+        visible={addPitchactivityModal}
         maskClosable={false}
         destroyOnClose
         maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}
-        onClose={() => handleCallActivityModal(false)}
+        onClose={() => handlePitchActivityModal(false)}
         style={{marginTop:"5rem"}}
         footer={null}
       >
@@ -44,17 +41,14 @@ const AddCustomerActivityModal = (props) => {
           {/* <CallTaskForm
           rowdata={props.rowdata}
           /> */}
-          <LeadsActivityTab 
-           defaultCustomers={props.defaultCustomers}
-           customerId={props. customerId }
-          customer={props.customer}/>
+          <LeadsActivityTab   rowdata={props.rowdata}/>
 
         </Suspense>
       </StyledDrawer>
     </>
   );
   function LeadsActivityTab (props) {
-    const { addCallTaskModal, handleLeadCallModal } = props;
+    const { addPitchactivityModal, handlePitchActivityModal } = props;
       const { ...formProps } = props;
       console.log(props.rowdata)
       return (
@@ -75,10 +69,7 @@ const AddCustomerActivityModal = (props) => {
                 key="1"
               >
                 <Suspense fallback={"loading ..."}>
-                  <CustomerCallActivityForm 
-                     defaultCustomers={props.defaultCustomers}
-                     customerId={props. customerId }
-                  customer={props.customer} {...formProps} />
+                  <PitchCallForm  rowdata={props.rowdata} {...formProps} />
                 </Suspense>
               </TabPane>
           
@@ -92,10 +83,7 @@ const AddCustomerActivityModal = (props) => {
                 key="2"
               >
                 <Suspense fallback={"loading ..."}>
-                  <CustomerEventActivityForm 
-                    defaultCustomers={props.defaultCustomers}
-                    customerId={props. customerId }
-                  customer={props.customer} {...formProps}/>
+                  <PitchEventForm rowdata={props.rowdata} {...formProps}/>
                 </Suspense>
               </TabPane>
               <TabPane
@@ -108,22 +96,19 @@ const AddCustomerActivityModal = (props) => {
                 key="3"
               >
                 <Suspense fallback={"loading ..."}>
-                  <CustomerTaskActivityForm 
-                    defaultCustomers={props.defaultCustomers}
-                    customerId={props. customerId }
-                  customer={props.customer} {...formProps}/>
+                  <PitchTaskForm rowdata={props.rowdata} {...formProps}/>
                 </Suspense>
               </TabPane>
             </StyledTabs>
           </TabsWrapper>
-          {/* <AddCallTaskModal
+          <AddPitchActivityModal
           rowdata={props.rowdata}
-            addCallTaskModal={addCallTaskModal}
-            handleLeadCallModal={handleLeadCallModal}
-          /> */}
+          addPitchactivityModal={addPitchactivityModal}
+            handlePitchActivityModal={handlePitchActivityModal}
+          />
         </>
       );
   }
 };
 
-export default AddCustomerActivityModal;
+export default AddPitchActivityModal;

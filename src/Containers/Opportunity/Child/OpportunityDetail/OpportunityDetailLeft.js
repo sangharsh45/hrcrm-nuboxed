@@ -48,6 +48,7 @@ class OpportunityDetailLeft extends Component {
         
           <div style={{ width: "89vw" }}>
          <OpportunityDetailTab
+          opportunity={opportunity}
           />
           </div>
        </FlexContainer>

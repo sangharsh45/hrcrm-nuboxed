@@ -5,11 +5,7 @@ import { bindActionCreators } from "redux";
  import { linkCrmToggle,getDepartments } from "../Department/DepartmentAction";
 
 function CRMStatusToggle(props) {
-  // useEffect(() => {
-  //   props.getDepartments();
-  //   // props.getRequirementsDuration(props.orgId);
-  // }, []);
-  // const { crmInd } = props.departments;
+
   const [crm, setCrm] = React.useState(props.crmInd);
 console.log("crrm",props.crmInd);
   function handleCrmToggleCollection(item) {
@@ -35,7 +31,7 @@ console.log("crrm",props.crmInd);
       },
       props.departmentId,
       );
-      // setCrm(props.crmInd ? false : true);
+      
     }
   }
 

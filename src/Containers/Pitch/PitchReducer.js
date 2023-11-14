@@ -26,6 +26,9 @@ const initialState = {
     pitchStatus:[],
 
 
+    addPitchactivityModal:false,
+
+
     updateTypePitch:false,
     updateTypePitchError:false,
 
@@ -391,7 +394,8 @@ case types.GET_PITCH_REQUEST:
           fetchingNotesListByPitchIdError: true,
         };
               
-                
+        case types.HANDLE_PITCH_ACTIVITY_MODAL:
+          return { ...state, addPitchactivityModal: action.payload };      
 
     default:
 return state;

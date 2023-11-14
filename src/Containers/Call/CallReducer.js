@@ -68,7 +68,11 @@ export const callReducer = (state = initialState, action) => {
     case types.ADD_CALL_REQUEST:
       return { ...state, addingCall: true };
     case types.ADD_CALL_SUCCESS:
-      return { ...state, addingCall: false, addCallModal: false,
+      return { ...state, addingCall: false,
+         addCallModal: false,
+         addCallTaskModal:false,
+         addPitchactivityModal:false,
+        //  openCETmodal:false,
         callListRangeByUserId:[action.payload,...state.callListRangeByUserId]
        };
     case types.ADD_CALL_FAILURE:

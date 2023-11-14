@@ -27,7 +27,7 @@ const TaskForm = lazy(() =>
 const TabPane = StyledTabs.TabPane;
 
 function  OpenCETmodal(props)  {
-
+console.log("data",props.rowdata.name)
   return (
     <>
       <StyledDrawer
@@ -44,7 +44,7 @@ function  OpenCETmodal(props)  {
         }}
       >
         <Suspense fallback={<BundleLoader />}>
-          <LeadsCETTab/>
+          <LeadsCETTab rowdata={props.rowdata}/>
         </Suspense>
       </StyledDrawer>
     </>
