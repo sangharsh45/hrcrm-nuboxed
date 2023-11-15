@@ -2,35 +2,35 @@ import React, { lazy, Suspense } from "react";
 import { FormattedMessage } from "react-intl";
 import { StyledDrawer, StyledModal } from "../../../../Components/UI/Antd";
 import { BundleLoader } from "../../../../Components/Placeholder";
-const LocationShiftDrawerTab=lazy(()=>import("./LocationShiftDrawerTab"));
+const LocationCreateShiftForm=lazy(()=>import("./LocationCreateShiftForm"));
 
 
-const LocationShiftDrawer = (props) => {
-  const { locShiftDrawer, handleLocationShiftDrawer,  storedLoc, ...formProps } = props;
+const LocationCreateShiftDrawer = (props) => {
+  const { createShiftDrawer, handleCreateShiftDrawer,storedLoc, ...formProps } = props;
   const isSmallScreen = window.innerWidth <= 600;
     const drawerWidth = isSmallScreen ? "90%" : "55%";
   return (
     <>
       <StyledDrawer
         title={<FormattedMessage
-          id="app.locationShift"
-          defaultMessage="Location Shift"
+          id="app.create"
+          defaultMessage="Create"
         />}
         width={drawerWidth}
-        visible={locShiftDrawer}
+        visible={createShiftDrawer}
         destroyOnClose
         closable
         placement="right"
         style={{marginTop:"5rem"}}
         maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}
-        onClose={() => handleLocationShiftDrawer(false)}
+        onClose={() => handleCreateShiftDrawer(false)}
       >
         <Suspense fallback={<BundleLoader />}>
-          <LocationShiftDrawerTab   storedLoc={storedLoc}/>
+          <LocationCreateShiftForm storedLoc={storedLoc}/>
         </Suspense>
       </StyledDrawer>
     </>
   );
 };
 
-export default LocationShiftDrawer;
+export default LocationCreateShiftDrawer;

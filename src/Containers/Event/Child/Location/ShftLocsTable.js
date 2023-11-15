@@ -14,7 +14,7 @@ import { CurrencySymbol } from "../../../../Components/Common";
 
 function ShftLocsTable(props) {
     useEffect(() => {
-        props.getShiftlocs();
+        props.getShiftlocs(props.storedLoc.locationDetailsId);
     }, []);
 
     const [show, setshow] = useState(false);
@@ -144,25 +144,25 @@ function ShftLocsTable(props) {
             // },
         },
         {
-            title: "Order Id",
+            title: "Shift Id",
             width: "22%",
-            dataIndex: "newOrderNo",
+            dataIndex: "shiftId",
             defaultSortOrder: "descend",
-            ...getColumnSearchProps("newOrderNo"),
+            ...getColumnSearchProps("shiftId"),
             render: (text, item) => {
                 const currentdate = moment().format("DD/MM/YYYY");
                 const date = moment(item.creationDate).format("DD/MM/YYYY");
                 return {
 
                     children: (
-                        <Badge size="small" count={item.productNum}>
+                        <Badge size="small">
                             <span
                                 onClick={() => {
-                                    handleOrder(item.orderId);
+                                    handleOrder(item.shiftId);
                                     handleSetParticularOrderData(item);
                                 }}
 
-                            >{`${item.newOrderNo} `}
+                            >{`${item.shiftId} `}
 
                                 &nbsp;&nbsp;
                                 {date === currentdate ? (
@@ -181,34 +181,18 @@ function ShftLocsTable(props) {
                 };
             },
         },
+       {
+title:"Name",
+dataIndex:"shiftName",
+width:"12%",
+       },
         {
-            title: "Client",
-            dataIndex: "distributorName",
-            defaultSortOrder: "descend",
-            ...getColumnSearchProps("distributorName"),
-            width: "18%",
-        },
-        {
-            title: "Contact",
-            dataIndex: "contactPersonName",
-            defaultSortOrder: "descend",
-            ...getColumnSearchProps("contactPersonName"),
-            width: "18%",
-        },
-        {
-            title: "#Phone",
-            dataIndex: "noOfPhones",
-            defaultSortOrder: "descend",
-            ...getColumnSearchProps("noOfPhones"),
-            width: "18%",
-        },
-        {
-            title: "Creation Date",
+            title: "Start Date",
             width: "18%",
             defaultSortOrder: "descend",
             sorter: (a, b) => {
-                var nameA = a.creationDate.toLowerCase(); // ignore upper and lowercase
-                var nameB = b.creationDate.toLowerCase(); // ignore upper and lowercase
+                var nameA = a.startDate.toLowerCase(); // ignore upper and lowercase
+                var nameB = b.startDate.toLowerCase(); // ignore upper and lowercase
                 if (nameA < nameB) {
                     return -1;
                 }
@@ -219,7 +203,7 @@ function ShftLocsTable(props) {
                 return 0;
             },
             render: (name, item, i) => {
-                const date = moment(item.creationDate).format("DD/MM/YYYY");
+                const date = moment(item.startDate).format("DD/MM/YYYY");
                 return {
                     props: {
                         // style: {
@@ -235,22 +219,23 @@ function ShftLocsTable(props) {
             },
         },
         {
-            title: "Owner",
-            dataIndex: "noOfownerPhones",
-            width: "8%",
-        },
-        {
-            title: "Status",
+            title: "End Date",
             width: "18%",
-            dataIndex: "orderStatus",
-            filters: [
-                { text: "Pending", value: "Pending" },
-                { text: "Complete", value: "Complete" },
-            ],
-            onFilter: (value, record) => {
-                return record.orderStatus === value;
+            defaultSortOrder: "descend",
+            sorter: (a, b) => {
+                var nameA = a.endDate.toLowerCase(); // ignore upper and lowercase
+                var nameB = b.endDate.toLowerCase(); // ignore upper and lowercase
+                if (nameA < nameB) {
+                    return -1;
+                }
+                if (nameA > nameB) {
+                    return 1;
+                }
+
+                return 0;
             },
             render: (name, item, i) => {
+                const date = moment(item.endDate).format("DD/MM/YYYY");
                 return {
                     props: {
                         // style: {
@@ -261,7 +246,7 @@ function ShftLocsTable(props) {
                         // },
                     },
 
-                    children: <span>{item.orderStatus}</span>,
+                    children: <span>{date}</span>,
                 };
             },
         },

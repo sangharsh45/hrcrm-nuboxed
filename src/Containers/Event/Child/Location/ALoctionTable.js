@@ -7,14 +7,14 @@ import { EditOutlined, SearchOutlined } from "@ant-design/icons";
 import Highlighter from "react-highlight-words";
 import moment from "moment";
 import { Spacer } from "../../../../Components/UI/Elements";
-// import {
-//     getShiftlocs,
-// } from "./LocationAction";
+import {
+    getAlLocshift,
+} from "./LocationAction";
 import { CurrencySymbol } from "../../../../Components/Common";
 
 function ALoctionTable(props) {
     useEffect(() => {
-        // props.getShiftlocs();
+        props.getAlLocshift();
     }, []);
 
     const [show, setshow] = useState(false);
@@ -128,27 +128,19 @@ function ALoctionTable(props) {
         {
             title: "",
             width: "2%",
-            // render: (name, item, i) => {
-            //     return {
-            //         props: {
-            //             style: {
-            //                 background:
-            //                     show && orderId === item.orderId
-            //                         ? "rgb(158 183 223)"
-            //                         : null,
-            //             },
-            //         },
-
-            //         children: <span></span>,
-            //     };
-            // },
         },
         {
-            title: "Order Id",
-            width: "22%",
-            dataIndex: "newOrderNo",
+            title: "Shift Id",
+            width: "12%",
+            dataIndex: "shiftId",
+    
+        },
+        {
+            title: "Name",
+            width: "15%",
+            dataIndex: "shiftName",
             defaultSortOrder: "descend",
-            ...getColumnSearchProps("newOrderNo"),
+            ...getColumnSearchProps("shiftName"),
             render: (text, item) => {
                 const currentdate = moment().format("DD/MM/YYYY");
                 const date = moment(item.creationDate).format("DD/MM/YYYY");
@@ -162,7 +154,7 @@ function ALoctionTable(props) {
                                     handleSetParticularOrderData(item);
                                 }}
 
-                            >{`${item.newOrderNo} `}
+                            >{`${item.shiftName} `}
 
                                 &nbsp;&nbsp;
                                 {date === currentdate ? (
@@ -182,89 +174,20 @@ function ALoctionTable(props) {
             },
         },
         {
-            title: "Client",
-            dataIndex: "distributorName",
+            title: "Shift",
+            dataIndex: "shift",
             defaultSortOrder: "descend",
-            ...getColumnSearchProps("distributorName"),
+            ...getColumnSearchProps("shift"),
             width: "18%",
         },
         {
-            title: "Contact",
+            title: "Effective",
             dataIndex: "contactPersonName",
             defaultSortOrder: "descend",
             ...getColumnSearchProps("contactPersonName"),
             width: "18%",
         },
-        {
-            title: "#Phone",
-            dataIndex: "noOfPhones",
-            defaultSortOrder: "descend",
-            ...getColumnSearchProps("noOfPhones"),
-            width: "18%",
-        },
-        {
-            title: "Creation Date",
-            width: "18%",
-            defaultSortOrder: "descend",
-            sorter: (a, b) => {
-                var nameA = a.creationDate.toLowerCase(); // ignore upper and lowercase
-                var nameB = b.creationDate.toLowerCase(); // ignore upper and lowercase
-                if (nameA < nameB) {
-                    return -1;
-                }
-                if (nameA > nameB) {
-                    return 1;
-                }
-
-                return 0;
-            },
-            render: (name, item, i) => {
-                const date = moment(item.creationDate).format("DD/MM/YYYY");
-                return {
-                    props: {
-                        // style: {
-                        //     background:
-                        //         show && orderId === item.orderId
-                        //             ? "rgb(158 183 223)"
-                        //             : null,
-                        // },
-                    },
-
-                    children: <span>{date}</span>,
-                };
-            },
-        },
-        {
-            title: "Owner",
-            dataIndex: "noOfownerPhones",
-            width: "8%",
-        },
-        {
-            title: "Status",
-            width: "18%",
-            dataIndex: "orderStatus",
-            filters: [
-                { text: "Pending", value: "Pending" },
-                { text: "Complete", value: "Complete" },
-            ],
-            onFilter: (value, record) => {
-                return record.orderStatus === value;
-            },
-            render: (name, item, i) => {
-                return {
-                    props: {
-                        // style: {
-                        //     background:
-                        //         show && orderId === item.orderId
-                        //             ? "rgb(158 183 223)"
-                        //             : null,
-                        // },
-                    },
-
-                    children: <span>{item.orderStatus}</span>,
-                };
-            },
-        },
+       
 
     ];
     //   if (props.fetchingDistributorsByUserIdError) {
@@ -279,8 +202,8 @@ function ALoctionTable(props) {
             <StyledTable
                 rowKey="orderId"
                 columns={columns}
-                dataSource={props.shiftLocs}
-                loading={props.fetchingShoftlocs}
+                dataSource={props.alLocShift}
+                loading={props.fetchingAlLocShift}
                 scroll={{ y: tableHeight }}
                 pagination={false}
                 rowSelection={props.rowSelection}
@@ -292,15 +215,15 @@ function ALoctionTable(props) {
 }
 
 const mapStateToProps = ({ location, auth }) => ({
-    shiftLocs: location.shiftLocs,
-    fetchingShoftlocs: location.fetchingShoftlocs,
+    alLocShift: location.alLocShift,
+    fetchingAlLocShift: location.fetchingAlLocShift,
     userId: auth.userDetails.userId,
 });
 
 const mapDispatchToProps = (dispatch) =>
     bindActionCreators(
         {
-            // getShiftlocs,
+            getAlLocshift,
         },
         dispatch
     );

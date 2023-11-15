@@ -1,17 +1,16 @@
-
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { FormattedMessage } from "react-intl";
 import { bindActionCreators } from "redux";
-import { Button } from "antd";
-import { Formik, Form } from "formik";
+import { Button} from "antd";
+import { Formik, Form} from "formik";
 import * as Yup from "yup";
 import { Editor } from "react-draft-wysiwyg";
-import { EditorState, convertToRaw } from "draft-js";
+import { EditorState, convertToRaw, ContentState } from "draft-js";
 import draftToHtml from "draftjs-to-html";
-import { addLeaveNote } from "../../LeavesAction";
+import { addMileageNote } from "../MileageAction";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
-import { FlexContainer } from "../../../../Components/UI/Layout";
+import { FlexContainer } from "../../../Components/UI/Layout";
 
 
 /**
@@ -39,7 +38,7 @@ const toolbarOption = {
     options: ["bold", "italic", "underline", "strikethrough"],
   },
 };
-class LeaveNoteForm extends Component {
+class MileageNoteForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -63,8 +62,8 @@ class LeaveNoteForm extends Component {
   render() {
     const {
       user: { userId, firstName, lastName },
-      addLeaveNote,
-      leaveId,
+      addMileageNote,
+      mileageId,
     } = this.props;
     const { editorState, placeholder } = this.state;
     return (
@@ -73,7 +72,7 @@ class LeaveNoteForm extends Component {
           enableReinitialize
           initialValues={{
             notes: "",
-             leaveId:  leaveId ?  leaveId : "",
+             mileageId:  mileageId ?  mileageId : "",
              userId:userId ? userId:"",
           }}
           onSubmit={(values, { resetForm }) => {
@@ -86,7 +85,7 @@ class LeaveNoteForm extends Component {
             // const htmlBody = 'draftToHtml(convertToRaw(editorState.getCurrentContent()))'
 
             console.log({ ...values, notes: htmlBody });
-            addLeaveNote({ ...values, notes: htmlBody }, this.createCallback);
+            addMileageNote({ ...values, notes: htmlBody }, this.createCallback);
             resetForm();
           }}
         >
@@ -153,7 +152,6 @@ class LeaveNoteForm extends Component {
 
 const mapStateToProps = ({ auth, investor }) => ({
   user: auth.userDetails,
-  fetchingNoteByInvestorId: investor.fetchingNoteByInvestorId,
   userId: auth.userDetails.userId,
 
 });
@@ -161,9 +159,9 @@ const mapStateToProps = ({ auth, investor }) => ({
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
-        addLeaveNote,
+        addMileageNote,
     },
     dispatch
   );
 
-export default connect(mapStateToProps, mapDispatchToProps)(LeaveNoteForm);
+export default connect(mapStateToProps, mapDispatchToProps)(MileageNoteForm);

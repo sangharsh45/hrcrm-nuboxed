@@ -11,9 +11,12 @@ import {
   handleUpdateMileageModal,
   updateMileage,
   deleteMileage,
+  handleMileageNoteDrawer
 } from "../MileageAction";
+import NoteAltIcon from "@mui/icons-material/NoteAlt";
 
 const UpdateMileageModal = lazy(() => import("../Child/UpdateMileageModal"));
+const MileageNoteDrawer=lazy(()=>import("./MileageNoteDrawer"));
 
 function MileageDrawerCard(props) {
 
@@ -25,7 +28,11 @@ function MileageDrawerCard(props) {
     const { voucherId } = props;
     props.getMileageByVoucherId(voucherId);
   }, []);
-  
+
+  const [ milaegeItems,setMileageItems]=useState({});
+  function handleMileageItems(itc){
+    setMileageItems(itc);
+  }
   useEffect(() => { 
     setInputValues(props.mileageVoucherId);
   }, [props.mileageVoucherId]);
@@ -75,6 +82,8 @@ function MileageDrawerCard(props) {
     mileageVoucherId,
     handleUpdateMileageModal,
     currentMileageId,
+    noteMileageDrawer,
+      handleMileageNoteDrawer
   } = props;
 
   return (
@@ -208,6 +217,15 @@ function MileageDrawerCard(props) {
           )}
                   </h4>
                 </div>
+                <Tooltip title={"Note"}>
+                    <NoteAltIcon 
+                    style={{ cursor: "pointer",padding: "2px",fontSize:"1.2rem" }}
+                    onClick={() => {
+                      handleMileageNoteDrawer(true);
+                      handleMileageItems(item);
+                    }}
+                    />
+                  </Tooltip>
                 {item.status === "Pending" ? (
             <Tooltip title="Delete">
               <DeleteOutlined
@@ -239,11 +257,15 @@ function MileageDrawerCard(props) {
       </OnlyWrapCard>
 
       <UpdateMileageModal
-        // mileageId={currentMileageId}
-        // updateMileageModal={handleUpdateMileageModal}
         mileageId={currentMileageId}
         updateMileageModal={props.updateMileageModal}
         handleUpdateMileageModal={handleUpdateMileageModal}
+      />
+<MileageNoteDrawer
+      milaegeItems={milaegeItems}
+      noteMileageDrawer={noteMileageDrawer}
+      handleMileageNoteDrawer={handleMileageNoteDrawer}
+     
       />
     </>
   );
@@ -254,6 +276,7 @@ const mapStateToProps = ({ auth, mileage }) => ({
   fetchingMileageByVoucherIdError: mileage.fetchingMileageByVoucherIdError,
   mileageVoucherId: mileage.mileageVoucherId,
   updateMileageModal: mileage.updateMileageModal,
+  noteMileageDrawer:mileage.noteMileageDrawer
 });
 
 const mapDispatchToProps = (dispatch) =>
@@ -263,6 +286,7 @@ const mapDispatchToProps = (dispatch) =>
       handleUpdateMileageModal,
       updateMileage,
       deleteMileage,
+      handleMileageNoteDrawer
     },
     dispatch
   );

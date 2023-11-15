@@ -19,6 +19,13 @@ const initialState = {
     fetchingShoftlocs: false,
     fetchingShoftlocsError: false,
     shiftLocs:[],
+    createShiftDrawer:false,
+    creatingShiftLocation: false, 
+   creatingShiftLocationError:false,
+
+   fetchingAlLocShift: false,
+   fetchingAlLocShiftError:false,
+   alLocShift:[],
   };
 
   export const locationReducer = (state = initialState, action) => {
@@ -99,7 +106,32 @@ const initialState = {
                     fetchingShoftlocs: false,
                     fetchingShoftlocsError: true,
                   };
+                  case types.HANDLE_CREATE_SHIFT_DRAWER:
+                    return { ...state, createShiftDrawer: action.payload }; 
 
+                    case types.CREATE_SHIFT_LOCATION_REQUEST:
+                      return { ...state, creatingShiftLocation: true };
+                    case types.CREATE_SHIFT_LOCATION_SUCCESS:
+                      return { ...state, creatingShiftLocation: false, 
+                        createShiftDrawer:false,
+                        shiftLocs:[...state.shiftLocs]
+                      };
+                    case types.CREATE_SHIFT_LOCATION_FAILURE:
+                      return { ...state, creatingShiftLocation: false, 
+                                      creatingShiftLocationError: true };      
+                                    
+                                      case types.GET_ALLOCTION_SHIFT_REQUEST:
+                                        return { ...state, fetchingAlLocShift: true };
+                                      case types.GET_ALLOCTION_SHIFT_SUCCESS:
+                                        return { ...state, fetchingAlLocShift: false, alLocShift: action.payload };
+                                      case types.GET_ALLOCTION_SHIFT_FAILURE:
+                                        return {
+                                          ...state,
+                                          fetchingAlLocShift: false,
+                                          fetchingAlLocShiftError: true,
+                                        };  
+                                                                
+                                      
         default:
     return state;
       }

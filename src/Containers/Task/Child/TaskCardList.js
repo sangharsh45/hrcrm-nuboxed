@@ -53,19 +53,15 @@ const TaskCardList = (props) => {
   const tab = document.querySelector('.ant-layout-sider-children');
   const tableHeight = tab && tab.offsetHeight * 0.75;
 
-  
+  const [hasMore, setHasMore] = useState(true);
   const [page, setPage] = useState(0);
   useEffect(() => {
     setPage(page + 1);
     props.getTaskListRangeByUserId(props.employeeId,page);
-    // props.getProviderCustomerData(props.provider.serviceId, page);
   }, []);
   const handleLoadMore = () => {
-    setTimeout(() => {
       setPage(page + 1);
       props.getTaskListRangeByUserId(props.employeeId,page);
-      // props.getProviderCustomerData(props.provider.serviceId, page);
-    }, 100);
   };
   function handleSetCurrentProcessName(item) {
     setCurrentprocessName(item);
@@ -123,7 +119,20 @@ const TaskCardList = (props) => {
             >Load More</Button>
             </FloatButton.Group>
           </div> : null}
-          <OnlyWrapCard style={{height:"81vh"}}>
+          <OnlyWrapCard style={{height:"81vh",backgroundColor:"#E3E8EE"}}>
+          <div className=" flex justify-between w-[99%] p-2 bg-transparent font-bold sticky top-0 z-10">
+        <div className=" md:w-[12rem]">Type</div>
+        <div className=" md:w-40">Name</div>
+             <div className=" md:w-28 ">End</div>
+             <div className=" md:w-28 "></div>
+        <div className="md:w-36">Deviation</div>
+        <div className="md:w-24">Assigned To</div>
+        <div className="md:w-24">Owner</div>
+        <div className="md:w-24"></div>
+        <div className="md:w-[3%]"></div>
+        <div className="md:w-[5%]"></div>
+        <div className="w-12">Action</div>
+      </div>
       {taskListRangeByUserId.map((item) => { 
         const currentDate = moment();
         const completionDate = moment(item.completionDate);
@@ -131,13 +140,11 @@ const TaskCardList = (props) => {
         const difference = currentDate.diff(endDate, 'days');
         const incompleteDeviationDate = endDate.diff(currentDate, 'days');
         const completeDeviation = endDate.diff(completionDate, 'days');
-         console.log("difference",difference)
-         console.log("deviationDate",incompleteDeviationDate)
+
                     return (
                         <div>
-                            <div className="flex justify-between mt-1 max-sm:flex-col"
+                            <div className="flex rounded-xl justify-between mt-4 bg-white h-12 items-center p-3"
                                 style={{
-                                    borderBottom: "3px dotted #515050"
                                 }}>
                                      <div class="flex">
                                 <div className=" flex font-medium flex-col md:w-36 max-sm:flex-row justify-between w-full ">
@@ -176,9 +183,9 @@ const TaskCardList = (props) => {
           <div class=" w-[10rem] max-sm:w-full">
                                         <Tooltip>
                                         <div class=" flex max-sm:justify-between flex-row w-full md:flex-col">
-                                            <div class="text-sm text-cardBody font-poppins max-sm:hidden">
+                                            {/* <div class="text-sm text-cardBody font-poppins max-sm:hidden">
                                             Type
-                                            </div>
+                                            </div> */}
                                             <div class="text-xs text-cardBody font-poppins cursor-pointer">                                       
                                             {item.taskType}
        
@@ -190,7 +197,7 @@ const TaskCardList = (props) => {
                                 </div>
 
                                 <div className=" flex font-medium flex-col  md:w-32 max-sm:flex-row w-full ">
-                                    <div class=" text-sm text-cardBody font-sm font-poppins max-sm:hidden"> Name </div>
+                                    {/* <div class=" text-sm text-cardBody font-sm font-poppins max-sm:hidden"> Name </div> */}
                                     <div class=" text-xs text-cardBody font-semibold  font-poppins">   
                                     <span   
                 onClick={() => {
@@ -213,7 +220,7 @@ const TaskCardList = (props) => {
                                 </div>
                                 <div className="flex font-medium flex-col md:w-24 max-sm:flex-row  w-full ">
                        
-                       <div class="text-sm text-cardBody font-poppins max-sm:hidden">End</div>
+                       {/* <div class="text-sm text-cardBody font-poppins max-sm:hidden">End</div> */}
                        <div class="text-xs text-cardBody font-poppins"> 
                         {`${moment(item.endDate).format("ll")}`}</div>
                    </div>
@@ -283,14 +290,14 @@ const TaskCardList = (props) => {
                     </div>
                     <div className="flex font-medium flex-col md:w-24 max-sm:flex-row  w-full ">
                        
-                       <div class="text-sm text-cardBody font-poppins max-sm:hidden">Deviation</div>
+                       {/* <div class="text-sm text-cardBody font-poppins max-sm:hidden">Deviation</div> */}
                        <div class="text-xs text-cardBody font-poppins"> 
                        {item.taskStatus === "Completed" ? `${completeDeviation} Days` : `${incompleteDeviationDate} Days`}
                    </div>
                      
                    </div>
                     <div className=" flex font-medium flex-col md:w-24 max-sm:flex-row justify-between w-full ">
-                                  <div class="text-sm text-cardBody font-poppins max-sm:hidden">Assigned To</div>
+                                  {/* <div class="text-sm text-cardBody font-poppins max-sm:hidden">Assigned To</div> */}
                                   <div class="text-xs text-cardBody font-poppins mb-2">
                                   {item.assignedToName === null ? (
               ""
@@ -306,7 +313,7 @@ const TaskCardList = (props) => {
                         
                     <div class="flex max-sm:mt-4 w-28">
                                 <div className=" flex font-medium flex-col  md:w-24 max-sm:flex-row justify-between w-full ">
-                                    <div class=" text-sm text-cardBody font-poppins max-sm:hidden">Owner</div>
+                                    {/* <div class=" text-sm text-cardBody font-poppins max-sm:hidden">Owner</div> */}
                                     <div class="text-xs text-cardBody font-poppins mb-2">
                                     <MultiAvatar
                                     // style={{marginBottom:"0.25rem"}}
