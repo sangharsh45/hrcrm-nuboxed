@@ -6,11 +6,18 @@ import { Input, Tooltip, Space, Button, Form, DatePicker, Badge, Switch, Typogra
 import { getAllShipper } from "../../../../Shipper/ShipperAction";
 import moment from "moment";
 import NoteAltIcon from "@mui/icons-material/NoteAlt";
-import { getDispatchList, addFinalDispatchData, handlePickupDateModal, updateDispatchInspectionButton } from "../../../InventoryAction"
+import {
+  getDispatchList,
+  addFinalDispatchData,
+  handlePickupDateModal,
+  updateDispatchInspectionButton,
+  handleCreateAWB
+} from "../../../InventoryAction"
 import { withRouter } from "react-router";
 import DispatchPhoneListModal from "./DispatchPhoneListModal";
 import DispatchPackedToggle from "./DispatchPackedToggle";
 import DispatchValidationToggle from "./DispatchValidationToggle";
+import DispatchOrderAwbModal from "./DispatchOrderAwbModal";
 // const ShipperDetailsTable = lazy(() =>
 //   import("../Received/child/ShipperDetailsTable")
 // );
@@ -19,7 +26,7 @@ import DispatchValidationToggle from "./DispatchValidationToggle";
 const { Option } = Select;
 function DispatchTable(props) {
   useEffect(() => {
-    // props.getDispatchList(props.locationDetailsId);
+    props.getDispatchList(props.locationDetailsId);
     props.getAllShipper()
   }, []);
 
@@ -279,7 +286,10 @@ function DispatchTable(props) {
         return (
           <>
             {item.dispatchInspectionInd === 4 &&
-              <Button type="primary">Create AWB</Button>
+              <Button type="primary"
+                onClick={() => {
+                  props.handleCreateAWB(true)
+                }}>Create AWB</Button>
             }</>
         )
       }
@@ -449,6 +459,10 @@ function DispatchTable(props) {
         handlePickupDateModal={props.handlePickupDateModal}
         openPickupDateModal={props.openPickupDateModal}
       />
+      <DispatchOrderAwbModal
+        addCreateAwb={props.addCreateAwb}
+        handleCreateAWB={props.handleCreateAWB}
+      />
     </>
   );
 }
@@ -460,6 +474,7 @@ const mapStateToProps = ({ shipper, inventory, auth, dispatch }) => ({
   pickUpModal: inventory.pickUpModal,
   userId: auth.userDetails.userId,
   fetchingDispatchList: inventory.fetchingDispatchList,
+  addCreateAwb: inventory.addCreateAwb,
   locationDetailsId: inventory.inventoryDetailById.locationDetailsId,
 });
 
@@ -471,6 +486,7 @@ const mapDispatchToProps = (dispatch) =>
       handlePickupDateModal,
       updateDispatchInspectionButton,
       addFinalDispatchData,
+      handleCreateAWB
     },
     dispatch
   );
