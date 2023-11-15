@@ -9,7 +9,7 @@ import { Button } from "antd";
 import moment from "moment";
 function ProductionRepairOrder(props) {
     useEffect(() => {
-        props.getRepairOrderByUser(props.locationDetailsId, props.userId)
+        props.getRepairOrderByUser(props.locationId, props.userId)
     }, [])
     const [rowData, setRowData] = useState({})
     const handleRowData = (item) => {
@@ -95,7 +95,7 @@ function ProductionRepairOrder(props) {
                                         productionRepairDispatchId: item.productionRepairDispatchId
                                     },
                                         item.orderPhoneId,
-                                        props.locationDetailsId,
+                                        props.locationId,
                                         props.userId)
                                 }}
                             >Repair Start</Button> :
@@ -136,7 +136,7 @@ function ProductionRepairOrder(props) {
 }
 
 const mapStateToProps = ({ refurbish, auth }) => ({
-    locationDetailsId: auth.userDetails.locationDetailsId,
+    locationId: auth.userDetails.locationId,
     userId: auth.userDetails.userId,
     repairOrder: refurbish.repairOrder,
     fetchingRepairorderById: refurbish.fetchingRepairorderById,

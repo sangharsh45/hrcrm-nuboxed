@@ -24,7 +24,7 @@ import { EditFilled, HistoryOutlined, PhoneFilled } from "@ant-design/icons";
 // import TechnicianModal from "./child/ProductionModal/TechnicianModal";
 // import UserPhoneModal from "./child/ProductionModal/UserPhoneModal";
 // import ProductionOrderModal from "./child/ProductionModal/ProductionOrderModal";
-// import AddAssignRepairModal from "./child/ProductionModal/AddAssignRepairModal";
+import AddAssignRepairModal from "./AddAssignRepairModal";
 import { ApprovalOutlined, BorderAllOutlined } from "@mui/icons-material";
 import AllSpareListByOrder from "./AllSpareListByOrder";
 
@@ -216,7 +216,7 @@ const ProductionOrderList = (props) => {
         },
         {
             title: '',
-            width: "8%",
+            width: "4%",
             render: (text, item) => {
                 return (
                     <>
@@ -259,7 +259,7 @@ const ProductionOrderList = (props) => {
 
         {
             title: "",
-            width: "10%",
+            width: "12%",
             render: (name, item, i) => {
                 //debugger
                 return (
@@ -284,7 +284,7 @@ const ProductionOrderList = (props) => {
         },
         {
             title: "",
-            width: "10%",
+            width: "12%",
             render: (name, item, i) => {
                 //debugger
                 return (
@@ -310,7 +310,7 @@ const ProductionOrderList = (props) => {
         },
         {
             title: "",
-            width: "3%",
+            width: "2%",
             render: (name, item, i) => {
                 //debugger
                 return (
@@ -329,7 +329,7 @@ const ProductionOrderList = (props) => {
         },
         {
             title: "",
-            width: "3%",
+            width: "2%",
             render: (name, item, i) => {
                 //debugger
                 return (
@@ -346,7 +346,7 @@ const ProductionOrderList = (props) => {
         },
         {
             title: "",
-            width: "3%",
+            width: "2%",
             render: (name, item, i) => {
                 //debugger
                 return (
@@ -406,6 +406,11 @@ const ProductionOrderList = (props) => {
                 handleAllSpareList={props.handleAllSpareList}
                 approveSpareModal={props.approveSpareModal}
                 rowData={rowData} />
+            <AddAssignRepairModal
+                handleAssignRepairModal={props.handleAssignRepairModal}
+                showAssignRepairModal={props.showAssignRepairModal}
+                rowData={rowData}
+            />
             {/* <UserPhoneModal
                 handlePhoneByTechnician={props.handlePhoneByTechnician}
                 phoneByTechnician={props.phoneByTechnician}
@@ -418,11 +423,7 @@ const ProductionOrderList = (props) => {
 
             />
           
-            <AddAssignRepairModal
-                handleAssignRepairModal={props.handleAssignRepairModal}
-                showAssignRepairModal={props.showAssignRepairModal}
-                rowData={rowData}
-            />
+            
             <TechnicianModal
                 handleTechnicianModal={props.handleTechnicianModal}
                 showTechnicianModal={props.showTechnicianModal}

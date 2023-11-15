@@ -11,8 +11,6 @@ import { Spacer } from "../../../Components/UI/Elements";
 import { InputComponent } from "../../../Components/Forms/Formik/InputComponent";
 import SearchSelect from "../../../Components/Forms/Formik/SearchSelect";
 import { FormattedMessage } from "react-intl";
-import { InputComponent1 } from "../../../Components/Forms/Formik/InputComponent1";
-import { SelectComponent1 } from "../../../Components/Forms/Formik/SelectComponent1";
 import { SelectComponent } from "../../../Components/Forms/Formik/SelectComponent";
 import { DatePicker1 } from "../../../Components/Forms/Formik/DatePicker1";
 import { FlexContainer } from "../../../Components/UI/Layout";
@@ -152,7 +150,7 @@ class Rules1Form extends Component {
 
                                 >
                                     Add Rule
-                </Button>
+                                </Button>
                             </FlexContainer>
                         </Form>
                     )}

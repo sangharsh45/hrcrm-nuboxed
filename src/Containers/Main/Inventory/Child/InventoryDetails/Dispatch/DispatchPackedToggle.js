@@ -28,7 +28,7 @@ function DispatchPackedToggle(props) {
                         disabled={
                             props.item.dispatchInspectionInd === 3 ||
                             props.item.dispatchInspectionInd === 4}
-                        checked={props.item.dispatchInspectionInd === 3}
+                        checked={props.item.dispatchInspectionInd === 3 || props.item.dispatchInspectionInd === 4}
                         checkedChildren="Yes"
                         unCheckedChildren="No"
                     />

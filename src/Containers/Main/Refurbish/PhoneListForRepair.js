@@ -82,7 +82,7 @@ function PhoneListForRepair(props) {
             repairTechnicianId: props.userId,
             qcInspectionInd: type === "Complete" ? 2 : 1
         }
-        props.updaterepairStatus(data, item.phoneId, props.rowData.orderPhoneId, props.locationDetailsId, props.userId)
+        props.updaterepairStatus(data, item.phoneId, props.rowData.orderPhoneId, props.locationId, props.userId)
     }
     const columns = [
         {
@@ -318,7 +318,7 @@ function PhoneListForRepair(props) {
 const mapStateToProps = ({ refurbish, auth }) => ({
     repairPhone: refurbish.repairPhone,
     userId: auth.userDetails.userId,
-    locationDetailsId: auth.userDetails.locationDetailsId,
+    locationId: auth.userDetails.locationId,
     phoNotesRepairOrderModal: refurbish.phoNotesRepairOrderModal,
 });
 
