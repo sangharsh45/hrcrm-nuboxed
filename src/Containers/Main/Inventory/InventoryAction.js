@@ -227,6 +227,12 @@ export const handleReceivedModal = (modalProps) => (dispatch) => {
     payload: modalProps,
   });
 };
+export const handleCreateAWB = (modalProps) => (dispatch) => {
+  dispatch({
+    type: types.HANDLE_CREATE_AWB_MODAL,
+    payload: modalProps,
+  });
+};
 //add received
 export const addReceivedUser = (data) => (dispatch) => {
   dispatch({

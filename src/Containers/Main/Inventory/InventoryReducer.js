@@ -24,6 +24,8 @@ const initialState = {
   addingInventoryOutput: false,
   addingInventoryOutputError: false,
 
+  addCreateAwb: false,
+
   updatingValidationInRecive: false,
   updatingValidationInReciveError: false,
 
@@ -985,8 +987,11 @@ export const inventoryReducer = (state = initialState, action) => {
     case types.HANDLE_DISPATCH_RECEIVE_PHONE_MODAL:
       return { ...state, dispatchMismatchData: action.payload };
 
-      case types.HANDLE_PICKUP_MODAL:
-        return { ...state, pickUpModal: action.payload };
+    case types.HANDLE_PICKUP_MODAL:
+      return { ...state, pickUpModal: action.payload };
+
+    case types.HANDLE_CREATE_AWB_MODAL:
+      return { ...state, addCreateAwb: action.payload };
     default:
       return state;
   }
