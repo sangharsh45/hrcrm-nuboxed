@@ -8,11 +8,15 @@ import { BundleLoader } from "../../../../Components/Placeholder";
 import { StyledPopconfirm } from "../../../../Components/UI/Antd";
 import DeleteIcon from "@mui/icons-material/Delete";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
+import InfiniteScroll from "react-infinite-scroll-component";
 import FilterTiltShiftIcon from "@mui/icons-material/FilterTiltShift";
+
 const LocationShiftDrawer = lazy(() => import("./LocationShiftDrawer"));
 const LocationUpdateDrawer=lazy(()=>import("./LocationUpdateDrawer"));
 
 const LocationCard = (props) => {
+  const [hasMore, setHasMore] = useState(true);
+  const [page, setPage] = useState(0);
   useEffect(() => {
     props.getlocation(props.orgId);
   }, []);
@@ -21,21 +25,43 @@ const LocationCard = (props) => {
 const handleStoredLocations=(locs)=>{
   setStoredLoc(locs);
 }
-
-  if (props.fetchingLocationData) return <BundleLoader />;
+const handleLoadMore = () => {
+      setPage(page + 1);
+      props.getlocation(props.orgId);
+}
+  // if (props.fetchingLocationData) return <BundleLoader />;
   return (
     <>
-      <div class="overflow-y-auto max-h-[39rem]">
+      <div>
+      <InfiniteScroll
+        dataLength={props.showLocation.length}
+        next={handleLoadMore}
+        hasMore={hasMore}
+        loader={props.fetchingLocationData?<h4 style={{ textAlign: 'center' }}>Loading...</h4>:null}
+        height={"70vh"}
+      >
+      <div className=" flex justify-between w-[99%] p-2 bg-transparent font-bold sticky top-0 z-10">
+        <div className=" md:w-[12rem]">Name</div>
+        <div className=" md:w-40">Country</div>
+        <div className=" md:w-28 ">Address</div>
+        <div className=" md:w-28 ">Refurbish</div>
+        <div className="md:w-36">Inventory</div>
+        <div className="md:w-24">Billing</div>
+        <div className="md:w-24">Corporate</div>
+        <div className="md:w-24">Project</div>
+        <div className="md:w-24">Retail</div>
+        <div className="w-12">Action</div>
+      </div>
         <CardWrapper>
           {props.showLocation.map((item) => {
             return (
-              <CardElement>
-                <div class=" flex flex-row justify-between w-wk max-sm:flex-col">
+              <div class="w-wk">
+                <div class=" flex rounded-xl justify-between mt-4 bg-white h-12 items-center p-3">
                   <div class="flex">
                     <div className=" flex font-medium flex-col md:w-40 max-sm:flex-row w-full max-sm:justify-between ">
-                      <div class=" text-sm text-cardBody font-semibold font-poppins max-sm:hidden">
+                      {/* <div class=" text-sm text-cardBody font-semibold font-poppins max-sm:hidden">
                         Name
-                      </div>
+                      </div> */}
 
                       <div class=" font-normal text-[0.82rem]text-cardBody font-poppins">
                         {item.locationName}
@@ -43,18 +69,18 @@ const handleStoredLocations=(locs)=>{
                     </div>
 
                     <div className=" flex font-medium flex-col md:w-40  max-sm:flex-row w-full mt-1 max-sm:justify-between">
-                      <div class=" text-sm text-cardBody font-semibold font-poppins max-sm:hidden">
+                      {/* <div class=" text-sm text-cardBody font-semibold font-poppins max-sm:hidden">
                         Country
-                      </div>
+                      </div> */}
 
                       <div class=" font-normal text-[0.82rem] text-cardBody font-poppins">
                         {item.country_name}
                       </div>
                     </div>
                     <div className=" flex font-medium flex-col md:w-40 max-sm:flex-row w-full mt-1 max-sm:justify-between">
-                      <div class=" text-sm text-cardBody font-semibold font-poppins max-sm:hidden">
+                      {/* <div class=" text-sm text-cardBody font-semibold font-poppins max-sm:hidden">
                         Address
-                      </div>
+                      </div> */}
 
                       <div class=" font-normal text-[0.82rem] text-cardBody font-poppins">
                         <span>
@@ -67,9 +93,9 @@ const handleStoredLocations=(locs)=>{
                   </div>
                   <div class="flex">
                     <div className=" flex font-medium flex-col md:w-24 max-sm:flex-row w-full mt-1 max-sm:justify-between">
-                      <div class=" text-sm text-cardBody font-semibold font-poppins max-sm:hidden">
+                      {/* <div class=" text-sm text-cardBody font-semibold font-poppins max-sm:hidden">
                         Refurbish
-                      </div>
+                      </div> */}
 
                       <div class=" font-normal text-[0.82rem] text-cardBody font-poppins">
                         <Switch
@@ -82,9 +108,9 @@ const handleStoredLocations=(locs)=>{
                       </div>
                     </div>
                     <div className=" flex font-medium flex-col md:w-24 max-sm:flex-row w-full mt-1 max-sm:justify-between">
-                      <div class=" text-sm text-cardBody font-semibold font-poppins max-sm:hidden">
+                      {/* <div class=" text-sm text-cardBody font-semibold font-poppins max-sm:hidden">
                         Inventory
-                      </div>
+                      </div> */}
 
                       <div class=" font-normal text-[0.82rem] text-cardBody font-poppins">
                         <Switch
@@ -97,9 +123,9 @@ const handleStoredLocations=(locs)=>{
                       </div>
                     </div>
                     <div className=" flex font-medium flex-col md:w-24 max-sm:flex-row w-full mt-1 max-sm:justify-between ">
-                      <div class=" text-sm text-cardBody font-semibold font-poppins max-sm:hidden">
+                      {/* <div class=" text-sm text-cardBody font-semibold font-poppins max-sm:hidden">
                         Billing
-                      </div>
+                      </div> */}
                       <div class=" font-normal text-[0.82rem] text-cardBody font-poppins">
                         <Switch
                           className="toggle-clr"
@@ -113,9 +139,9 @@ const handleStoredLocations=(locs)=>{
                   </div>
                   <div class="flex">
                     <div className=" flex font-medium flex-col md:w-24 max-sm:flex-row w-full mt-1 max-sm:justify-between">
-                      <div class=" text-sm text-cardBody font-semibold font-poppins max-sm:hidden">
+                      {/* <div class=" text-sm text-cardBody font-semibold font-poppins max-sm:hidden">
                         Corporate
-                      </div>
+                      </div> */}
                       <div class=" font-normal text-[0.82rem] text-cardBody font-poppins">
                         <Switch
                           className="toggle-clr"
@@ -127,9 +153,9 @@ const handleStoredLocations=(locs)=>{
                       </div>
                     </div>
                     <div className=" flex font-medium flex-col md:w-24 max-sm:flex-row w-full mt-1 max-sm:justify-between">
-                      <div class=" text-sm text-cardBody font-semibold font-poppins max-sm:hidden">
+                      {/* <div class=" text-sm text-cardBody font-semibold font-poppins max-sm:hidden">
                         Project
-                      </div>
+                      </div> */}
                       <div class=" font-normal text-[0.82rem] text-cardBody font-poppins">
                         <Switch
                           className="toggle-clr"
@@ -141,9 +167,9 @@ const handleStoredLocations=(locs)=>{
                       </div>
                     </div>
                     <div className=" flex font-medium flex-col md:w-24 max-sm:flex-row w-full mt-1 max-sm:justify-between">
-                      <div class=" text-sm text-cardBody font-semibold font-poppins max-sm:hidden">
+                      {/* <div class=" text-sm text-cardBody font-semibold font-poppins max-sm:hidden">
                         Retail
-                      </div>
+                      </div> */}
                       <div class=" font-normal text-[0.82rem] text-cardBody font-poppins">
                         <Switch
                           className="toggle-clr"
@@ -160,7 +186,7 @@ const handleStoredLocations=(locs)=>{
                           <FilterTiltShiftIcon
                             style={{ cursor: "pointer", fontSize: "1rem" }}
                             onClick={() => {
-                              //  props.setEditLeads(item);
+                              handleStoredLocations(item);
                               props.handleLocationShiftDrawer(true);
                               // handleSetCurrentLeadsId(item);
                             }}
@@ -212,14 +238,17 @@ const handleStoredLocations=(locs)=>{
                     </div>
                   </div>
                 </div>
-              </CardElement>
+              </div>
             );
           })}
         </CardWrapper>
+        </InfiniteScroll>
       </div>
       <LocationShiftDrawer
+        storedLoc={storedLoc}
         locShiftDrawer={props.locShiftDrawer}
         handleLocationShiftDrawer={props.handleLocationShiftDrawer}
+        handleStoredLocations={handleStoredLocations}
       />
       <LocationUpdateDrawer
       storedLoc={storedLoc}

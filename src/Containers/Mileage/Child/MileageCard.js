@@ -6,7 +6,7 @@ import { Tooltip,Button } from "antd";
 import { getMileageByUserId,
   deleteMileageVoucher,
   handleStatusMileageModal,
-  handleMileageVoucherIdDrwer
+  handleMileageVoucherIdDrwer,
  } from "../MileageAction";
 import styled from 'styled-components'
 import { StyledPopconfirm } from "../../../Components/UI/Antd";
@@ -34,14 +34,13 @@ class MileageCard extends React.Component {
   componentDidMount() {
     this.props.getMileageByUserId(this.props.userId);
   }
+
   render() {
-    console.log("voucherId",this.state.voucherId)
     const {
       MileageDat,
       fetchingMileageByUserId,
-      handleStatusMileageModal,
-     
-      fetchingMileageByUserIdError,
+      handleMileageItems,
+      
     } = this.props;
     if (fetchingMileageByUserId) return <BundleLoader/>;
     return (
@@ -56,7 +55,6 @@ class MileageCard extends React.Component {
                    <div >
                           
                          </div>
-                      {/* <CardDescription> */}
                       <div class="flex items-center justify-between ">
                       <h4 class="text-sm">Voucher ID</h4>
                         <Header>
@@ -191,14 +189,13 @@ style={{ color: "grey",fontSize:"1.2rem",padding:"2px" }}/>
         mileageVoucherIdDrawer={this.props.mileageVoucherIdDrawer}
         handleMileageVoucherIdDrwer={this.props.handleMileageVoucherIdDrwer}
         />
-
-        
 <StatusMileageDrawer 
 handleExpand={this.handleExpand}
          voucherId={this.state.voucherId}
         updateStatusMileageModal={this.props.updateStatusMileageModal}
         handleStatusMileageModal={this.props.handleStatusMileageModal}
         />
+ 
       </>
     );
   }
@@ -210,6 +207,8 @@ const mapStateToProps = ({ auth, mileage }) => ({
   fetchingMileageByUserId: mileage.fetchingMileageByUserId,
   fetchingMileageByUserIdError: mileage.fetchingMileageByUserIdError,
   mileageVoucherIdDrawer:mileage.mileageVoucherIdDrawer,
+
+
 });
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
@@ -217,7 +216,7 @@ const mapDispatchToProps = (dispatch) =>
       getMileageByUserId,
       deleteMileageVoucher,
       handleMileageVoucherIdDrwer,
-      handleStatusMileageModal
+      handleStatusMileageModal,
     },
     dispatch
   );

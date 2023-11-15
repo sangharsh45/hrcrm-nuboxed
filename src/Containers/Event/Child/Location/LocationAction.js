@@ -139,12 +139,12 @@ export const setLocationViewType = (viewType) => (dispatch) => {
       });
   };
 
-  export const getShiftlocs = () => (dispatch) => {
+  export const getShiftlocs = (locationDetailsId) => (dispatch) => {
     dispatch({
       type: types.GET_SHIFT_LOCATION_REQUEST,
     });
     axios
-      .get(`${base_url2}/shift/all-shift`,
+      .get(`${base_url2}/shift/shiftList/${locationDetailsId}`,
       {
         headers: {
           Authorization: "Bearer " + sessionStorage.getItem("token") || "",
@@ -165,3 +165,62 @@ export const setLocationViewType = (viewType) => (dispatch) => {
       });
   };
   
+  
+  export const handleCreateShiftDrawer = (modalProps) => (dispatch) => {
+    dispatch({ type: types.HANDLE_CREATE_SHIFT_DRAWER, payload: modalProps });
+  };
+
+  export const createShitLocation = (save) => (dispatch) => {
+    dispatch({
+      type: types.CREATE_SHIFT_LOCATION_REQUEST,
+    });
+  
+    axios
+      .post(`${base_url2}/shift`,save,  {
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+        },
+      })
+      .then((res) => {
+        // dispatch(getlocation(orgId));
+        dispatch({
+          type: types.CREATE_SHIFT_LOCATION_SUCCESS,
+          payload: res.data,
+        });
+       // cb && cb("Success");
+        console.log(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+        dispatch({
+          type: types.CREATE_SHIFT_LOCATION_FAILURE,
+          payload: err,
+        });
+        //cb && cb("error");
+      });
+  };
+  export const getAlLocshift = () => (dispatch) => {
+    dispatch({
+      type: types.GET_ALLOCTION_SHIFT_REQUEST,
+    });
+    axios
+      .get(`${base_url2}/shift/all-shift`,
+      {
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+        },
+      })
+      .then((res) => {
+       
+        dispatch({
+          type: types.GET_ALLOCTION_SHIFT_SUCCESS,
+          payload: res.data,
+        });
+      })
+      .catch((err) => {
+        dispatch({
+          type: types.GET_ALLOCTION_SHIFT_FAILURE,
+          payload: err,
+        });
+      });
+  };

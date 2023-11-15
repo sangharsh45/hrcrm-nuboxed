@@ -27,6 +27,7 @@ const UpdateEventModal = lazy(() => import("../UpdateEventModal"));
 
 function EventCardList (props) {
   const [page, setPage] = useState(0);
+  const [hasMore, setHasMore] = useState(true);
   useEffect(() => {
     const {
       getEventListRangeByUserId,
@@ -40,7 +41,6 @@ function EventCardList (props) {
  ;
 
  const handleLoadMore = () => {
-  setTimeout(() => {
     const {
       getEventListRangeByUserId,
           userDetails: { employeeId },
@@ -49,9 +49,6 @@ function EventCardList (props) {
         setPage(page + 1);
         props.getEmployeelist();
     props.getAllSalesList();;
-  
-  }, 100);
-
 }
 
 
@@ -78,31 +75,39 @@ function EventCardList (props) {
           };
         });
   
-if (fetchingEventListRangeByUserId) 
-   {
-    return <BundleLoader/>
-   }
+// if (fetchingEventListRangeByUserId) 
+//    {
+//     return <BundleLoader/>
+//    }
     return (
       <>
-        <InfiniteScroll
-                dataLength={eventListRangeByUserId.length}
-                next={handleLoadMore}
-                hasMore={true}
-               
-                endMessage={
-                    <p style={{ textAlign: 'center' }}>
-                        <b>Yay! You have seen it all</b>
-                    </p>
-                }
-                height={600}
-            >
-        <OnlyWrapCard>
+        <OnlyWrapCard style={{backgroundColor:"#E3E8EE"}}>
+       <InfiniteScroll
+        dataLength={eventListRangeByUserId.length}
+        next={handleLoadMore}
+        hasMore={hasMore}
+        loader={fetchingEventListRangeByUserId?<h4 style={{ textAlign: 'center' }}>Loading...</h4>:null}
+        height={"70vh"}
+      >
+         <div className=" flex justify-between w-[99%] p-2 bg-transparent font-bold sticky top-0 z-10">
+        <div className=" md:w-[12rem]">Type</div>
+        <div className=" md:w-40">Subject</div>
+        <div className=" md:w-28 ">Start</div>
+        <div className=" md:w-28 ">End</div>
+        <div className="md:w-36">Team</div>
+        <div className="md:w-24">Include</div>
+        <div className="md:w-[3%]"></div>
+        <div className="md:w-[5%]">Rating</div>
+        <div className="md:w-24">Assigned To</div>
+        <div className="md:w-24">Owner</div>
+        <div className="w-12">Action</div>
+      </div>
       {eventListRangeByUserId.map((item) => { 
                     return (
                         <div>
-                            <div className="flex justify-between mt-1  max-sm:flex-col"
+                            <div className="flex rounded-xl justify-between mt-4 bg-white h-12 items-center p-3"
                                 style={{
-                                    borderBottom: "3px dotted #515050"
+                                    // borderBottom: "3px dotted #515050"
                                 }}>
                                      <div class="flex">
                                 <div className=" flex font-medium flex-col w-52 max-sm:w-full ">
@@ -110,9 +115,9 @@ if (fetchingEventListRangeByUserId)
           <div class="max-sm:w-full">
                                         <Tooltip>
                                         <div class=" flex max-sm:justify-between flex-row w-full md:flex-col">
-                                            <div class="text-[0.875rem] text-cardBody font-poppins max-sm:hidden">
+                                            {/* <div class="text-[0.875rem] text-cardBody font-poppins max-sm:hidden">
                                             Type
-                                            </div>
+                                            </div> */}
                                             <div class="text-[0.82rem] text-cardBody font-poppins cursor-pointer">                                       
                                             {item.eventType}
        
@@ -124,7 +129,7 @@ if (fetchingEventListRangeByUserId)
                                 </div>
 
                                 <div className=" flex font-medium flex-col  md:w-20 max-sm:flex-row  w-full ">
-                                    <div class=" text-[0.875rem] text-cardBody font-[0.875rem] font-poppins max-sm:hidden"> Subject </div>
+                                    {/* <div class=" text-[0.875rem] text-cardBody font-[0.875rem] font-poppins max-sm:hidden"> Subject </div> */}
                                     <div class=" text-[0.82rem] text-cardBody font-poppins">   
                                     {item.eventSubject}
                                     </div>
@@ -132,37 +137,20 @@ if (fetchingEventListRangeByUserId)
                                 </div>
                                 <div class="flex">
                                 <div className=" flex font-medium flex-col md:w-40 max-sm:flex-row  w-full">
-                                    <div class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden">Start</div>
+                                    {/* <div class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden">Start</div> */}
                                     <div class="text-[0.82rem] text-cardBody font-poppins">
                                     {` ${moment(item.startDate).format("llll")}`}
                                     </div>
                                 </div>
                                 <div className=" flex font-medium flex-col md:w-40 max-sm:flex-row  w-full">
-                                    <div class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden">End</div>
+                                    {/* <div class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden">End</div> */}
                                     <div class="text-[0.82rem] text-cardBody font-poppins">
                                     {` ${moment(item.startDate).format("llll")}`}
                                     </div>
                                 </div>
-                                {/* <div className=" flex font-medium flex-col w-36 ">
-                                  <div class="text-[0.875rem] text-cardBody font-poppins">Team</div>
-                                  <div class="text-[0.82rem] text-cardBody font-poppins">
-                                  <span>
-                {item.candidateName === null ? (
-                ""
-              ) : (
-                  <MultiAvatar2
-                    primaryTitle={item.candidateName}
-                    imageId={item.ownerImageId}
-                    imageURL={item.imageURL}
-                    imgWidth={"1.8em"}
-                    imgHeight={"1.8em"}
-                  />
-              )}
-                </span>
-                                  </div>
-                              </div> */}
+                               
                                 <div className=" flex font-medium flex-col md:w-32 max-sm:flex-row  w-full ">
-                                    <div class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden">Include</div>
+                                    {/* <div class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden">Include</div> */}
 
                                     <div class=" text-[0.82rem] text-cardBody font-poppins">
                                     <Avatar.Group
@@ -190,7 +178,7 @@ if (fetchingEventListRangeByUserId)
                                     </div>
                                 </div>
                                 <div className="flex font-medium flex-col md:w-48 max-sm:flex-row  w-full ">
-                                    <div class="text-[0.875rem] text-cardBody font-poppins max-sm:hidden">Assigned To</div>
+                                    {/* <div class="text-[0.875rem] text-cardBody font-poppins max-sm:hidden">Assigned To</div> */}
 
                                     <div class="text-[0.82rem] text-cardBody font-poppins">
                                     <Tooltip title={item.assignedToName}>
@@ -211,7 +199,7 @@ if (fetchingEventListRangeByUserId)
                                
                                 <div className="flex font-medium flex-col md:w-48 max-sm:flex-row  w-full ">
                        
-                       <div class="text-[0.875rem] text-cardBody font-poppins max-sm:hidden">Owner</div>
+                       {/* <div class="text-[0.875rem] text-cardBody font-poppins max-sm:hidden">Owner</div> */}
 
                    <div class="max-sm:flex justify-end">
               <Tooltip title={item.ownerName}>
@@ -292,8 +280,9 @@ if (fetchingEventListRangeByUserId)
 
                     )
                 })}
+                   </InfiniteScroll>
       </OnlyWrapCard>
-        </InfiniteScroll>
+     
         <UpdateEventModal
           updateEventModal={updateEventModal}
           handleUpdateEventModal={handleUpdateEventModal}

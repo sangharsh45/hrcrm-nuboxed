@@ -19,7 +19,7 @@ const LeaveNoteDrawer = (props) => {
         onClose={() => handleLeaveNoteDrawer(false)}
         footer={null}
       >
-        <Suspense fallback={<BundleLoader />}>hii
+        <Suspense fallback={<BundleLoader />}>
           <LeaveNote leavesItems={leavesItems} />{" "} 
         </Suspense>
       </StyledDrawer>

@@ -3,11 +3,15 @@ import React, { Component, lazy, Suspense } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import ListAltIcon from "@mui/icons-material/ListAlt";
+import { PlusOutlined } from "@ant-design/icons";
 import {  StyledTabs } from "../../../../Components/UI/Antd";
 import TabsWrapper1 from "../../../../Components/UI/Layout/TabsWrapper1";
+import {handleCreateShiftDrawer} from "./LocationAction";
 
 const ShftLocsTable =lazy(()=>import("./ShftLocsTable"));
 const ALoctionTable=lazy(()=>import("./ALoctionTable"));
+const LocationCreateShiftDrawer=lazy(()=>import("./LocationCreateShiftDrawer"));
+
 const TabPane = StyledTabs.TabPane;
 
 class LocationShiftDrawerTab extends Component {
@@ -23,6 +27,7 @@ class LocationShiftDrawerTab extends Component {
   };
   render() {
     const { activeKey } = this.state;
+    const {handleCreateShiftDrawer,createShiftDrawer,  storedLoc}=this.props;
     return (
       <>
         <TabsWrapper1>
@@ -41,6 +46,18 @@ class LocationShiftDrawerTab extends Component {
 
                   {activeKey === "1" && (
                     <>
+                  
+                    <PlusOutlined
+                        type="plus"
+                        title="Create"
+                        onClick={() => handleCreateShiftDrawer(true)}
+                        size="0.875em"
+                        style={{
+                          marginLeft: "0.3125em",
+                          verticalAlign: "center",
+                        }}
+                      />
+                     
                     </>
                   )}
                 </>
@@ -49,7 +66,7 @@ class LocationShiftDrawerTab extends Component {
             >
               <Suspense fallback={"Loading ..."}>
                 {" "}
-               <ShftLocsTable/>
+               <ShftLocsTable   storedLoc={storedLoc}/>
               </Suspense>
             </TabPane>
             <TabPane
@@ -75,20 +92,23 @@ class LocationShiftDrawerTab extends Component {
             </TabPane>
           </StyledTabs>
         </TabsWrapper1>
-        <Suspense fallback={null}></Suspense>
+        <Suspense fallback={null}>
+          <LocationCreateShiftDrawer
+          storedLoc={storedLoc}
+createShiftDrawer={createShiftDrawer}
+          handleCreateShiftDrawer={handleCreateShiftDrawer}
+          />
+        </Suspense>
       </>
     );
   }
 }
-const mapStateToProps = ({dashboard,auth}) => ({
-//   todosCount:dashboard.todosCount,
-//   userId: auth.userDetails.userId,
-//   endDate: dashboard.endDate,
-//   startDate: dashboard.startDate,
+const mapStateToProps = ({location,auth}) => ({
+  createShiftDrawer:location.createShiftDrawer
 });
 const mapDispatchToProps = (dispatch) => bindActionCreators(
   {
-
+    handleCreateShiftDrawer
   },
    dispatch);
 

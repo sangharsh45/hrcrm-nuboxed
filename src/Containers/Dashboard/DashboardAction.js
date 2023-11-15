@@ -2076,7 +2076,7 @@ export const getTaskNameDetails = (name,userId, startDate, endDate) => (dispatch
   });
   axios
     .get(
-      `${base_url}/tasknme/date-range/${name}/${userId}?endDate=${endDate}&startDate=${startDate}`,
+      `${base_url}/task/type/list/{userId}/{taskTypeId}/${name}/${userId}?endDate=${endDate}&startDate=${startDate}`,
       {
         headers: {
           Authorization: "Bearer " + sessionStorage.getItem("token") || "",
