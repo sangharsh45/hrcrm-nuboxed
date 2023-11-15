@@ -9,6 +9,7 @@ import {
   inputDataSearch,
   getRecords,
   getAllRecords,
+  getShipperRecords,
   setShipperDashboardType,
   setSelectedTimeInterval,
   setTimeRange,
@@ -38,7 +39,7 @@ const ShipperActionLeft = (props) => {
   const creationDate = user.creationDate;
   useEffect(() => {
     if (props.viewType === "table") {
-      props.getRecords(props.userId);
+      props.getShipperRecords(props.userId);
     } else if (props.viewType === "all") {
       props.getAllRecords();
     }
@@ -48,7 +49,7 @@ const ShipperActionLeft = (props) => {
     <FlexContainer alignItems="center">
       <Tooltip title="List View">
       <Badge size="small"
-           count={props.recordData.shipper || 0}
+           count={props.shipperRecordData.shipper || 0}
            >         
           <span
           style={{
@@ -162,6 +163,7 @@ const mapStateToProps = ({ auth, shipper }) => ({
   dateRangeList: shipper.dateRangeList,
   startDate: shipper.startDate,
   endDate: shipper.endDate,
+  shipperRecordData:shipper.shipperRecordData,
 });
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
@@ -172,6 +174,8 @@ const mapDispatchToProps = (dispatch) =>
       setShipperDashboardType,
       setSelectedTimeInterval,
       setTimeRange,
+      getShipperRecords
+
     },
     dispatch
   );

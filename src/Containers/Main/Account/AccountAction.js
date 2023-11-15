@@ -2360,3 +2360,54 @@ export const setClearbitData1 = (data) => (dispatch) => {
     payload: data,
   });
 };
+
+export const getAccountRecords = (userId) => (dispatch) => {
+  dispatch({
+    type: types.GET_ACCOUNT_RECORDS_REQUEST,
+  });
+  axios
+    .get(`${base_url2}/distributor/record/count`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.GET_ACCOUNT_RECORDS_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err.response);
+      dispatch({
+        type: types.GET_ACCOUNT_RECORDS_FAILURE,
+        payload: err,
+      });
+    });
+};
+export const getOrderRecords = (distributorId) => (dispatch) => {
+  dispatch({
+    type: types.GET_ORDER_RECORDS_REQUEST,
+  });
+  axios
+    .get(`${base_url2}/phoneOrder/record/count/${distributorId} `, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.GET_ORDER_RECORDS_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err.response);
+      dispatch({
+        type: types.GET_ORDER_RECORDS_FAILURE,
+        payload: err,
+      });
+    });
+};

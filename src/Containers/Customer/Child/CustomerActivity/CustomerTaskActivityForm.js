@@ -355,18 +355,21 @@ const [priority,setpriority]=useState(props.selectedTask
                   fullName: "",
                   assignedDate: assignedDate || dayjs(),
                   customerId: "",
+                  opportunity:"",
+                  contact:"",
                   projectName: "",
                   included: [],
                   taskChecklistId: "",
                   taskDescription: "",
                   timeZone: timeZone,
-                  contactId: "",
+                
                   startDate: startDate || dayjs(),
                   endDate: endDate || null,
                   endDate: dayjs(),
                   taskStatus: active,
-
-                  priority: priority,
+                  // opportunityId:"",
+                  // contactId:"", 
+                 priority: priority,
                   complexity: complexity,
                   unit: "",
 
@@ -484,7 +487,9 @@ const [priority,setpriority]=useState(props.selectedTask
               : addTask(
                   {
                     ...values,
-                    customerId: this.props.customerId,
+                    opportunity:values.opportunity,
+                    contact:values.contact,
+                    customerId: props.customer.customerId,
                     taskTypeId:selectedTaskType,
                     taskChecklistId:selectedWorkflow,
                     taskStatus: active,
@@ -1329,7 +1334,7 @@ const [priority,setpriority]=useState(props.selectedTask
                   <div>
                   {props.user.crmInd === true &&(
                   <Field
-                    name="contactId"
+                    name="contact"
                     //selectType="contactList"
                     isColumnWithoutNoCreate
                     // label="Contact"
@@ -1342,12 +1347,12 @@ const [priority,setpriority]=useState(props.selectedTask
                     component={SelectComponent}
                     isColumn
                     options={Array.isArray(ContactData) ? ContactData : []}
-                    value={values.contactId}
-                    // isDisabled={defaultContacts}
-                    defaultValue={{
-                      label: `${fullName || ""} `,
-                      value: contactId,
-                    }}
+                    // value={values.contactId}
+                    // // isDisabled={defaultContacts}
+                    // defaultValue={{
+                    //   label: `${fullName || ""} `,
+                    //   value: contactId,
+                    // }}
                     inlineLabel
                   />
                   )} 
@@ -1356,7 +1361,7 @@ const [priority,setpriority]=useState(props.selectedTask
                   <div>
                   {props.user.crmInd === true &&(
                  <Field
-                 name="opportunityId"
+                 name="opportunity"
                  // selectType="customerList"
                  isColumnWithoutNoCreate
                  label={
@@ -1374,7 +1379,7 @@ const [priority,setpriority]=useState(props.selectedTask
                  }
                  isColumn
                  margintop={"0"}
-                 value={values.opportunityId}
+                //  value={values.opportunityId}
                  inlineLabel
                />
                   )} 

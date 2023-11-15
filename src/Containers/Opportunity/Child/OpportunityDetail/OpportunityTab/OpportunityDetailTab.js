@@ -151,6 +151,7 @@ return  <BundleLoader />
             onChange={this.handleTabChange}
             forceRender={true}
           >
+            {user.requirementAccessInd === true ? (
              <TabPane
               tab={
                 <>
@@ -297,6 +298,7 @@ return  <BundleLoader />
                 )}
                   
             </TabPane>
+            ):null}
              <TabPane
               tab={
                 <>

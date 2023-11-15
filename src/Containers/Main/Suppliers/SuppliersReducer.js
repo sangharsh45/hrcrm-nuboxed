@@ -77,6 +77,8 @@ const initialState = {
   fetchingSupplierListError: false,
   supplierList: [],
 
+
+
   addLinkSuppliersOrderConfigureModal: false,
 
   clearbitPurchase: {},
@@ -1115,6 +1117,10 @@ export const suppliersReducer = (state = initialState, action) => {
         fetchingPoDetailsList: false,
         fetchingPoDetailsListError: true,
       };
+
+
+      
+    
 
     default:
       return state;

@@ -7,6 +7,8 @@ import ApproveForm from "./ApproveForm";
 import ApproveTable from "./ApproveTable";
 import MileageApproveForm from "./MileageApproveForm";
 import ExpenseApproveForm from "./ExpenseApproveForm";
+import ContactUserForm from "./ContactUserForm";
+import PhonesPairApproveForm from "./PhonesPairApproveForm";
 
 
 const TabPane = StyledTabs.TabPane;
@@ -30,6 +32,16 @@ function ApprovalTab(props) {
                     <TabPane tab={`Expense`} key="3">
                         <div style={{ marginTop: 10 }}>
                         <ExpenseApproveForm/>
+                        </div>
+                    </TabPane>
+                    <TabPane tab={`Contact User`} key="4">
+                        <div style={{ marginTop: 10 }}>
+                        <ContactUserForm/>
+                        </div>
+                    </TabPane>
+                    <TabPane tab={`Phones Pair`} key="5">
+                        <div style={{ marginTop: 10 }}>
+                        <PhonesPairApproveForm/>
                         </div>
                     </TabPane>
                     {/* <TabPane tab={`ApproveList`} key="4">

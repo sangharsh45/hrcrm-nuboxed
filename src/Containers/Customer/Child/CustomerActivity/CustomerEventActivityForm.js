@@ -123,7 +123,7 @@ const {
       deleteEvent,
       startDate,
       endDate,
-      contactId,
+      //  contactId,
       startTime,
       endTime,
       defaultCustomers,
@@ -150,6 +150,8 @@ const {
                   eventSubject: "",
                   eventVenue: "",
                   remindAt: "",
+                  // opportunity:"",
+                  // contact:"",
                   notificationEmail: false,
                   eventDescription: "",
                   timeZone: timeZone,
@@ -164,7 +166,7 @@ const {
                   candidateId: "",
                   included: [],
                   fullName: "",
-                  contactId: "",
+                
                   repeatStartDate: "",
                   complitionInd: "Incomplete",
                   repeatEndDate: "",
@@ -253,7 +255,10 @@ const {
                   prefillEvent.eventId,
                   {
                     ...values,
-                    customerId: this.props.customerId,
+                    contact: values.contact,
+                    // contact: values.contactId,
+                    opportunity: values.opportunity,
+                    customer: props.customer.customerId,
                     startDate: `${newStartDate}T${newStartTime}`,
                     endDate: `${newEndDate}T${newEndTime}`,
                     startTime: 0,
@@ -265,6 +270,10 @@ const {
               : addEvent(
                   {
                     ...values,
+                    contact: values.contact,
+                    // contact: values.contactId,
+                    opportunity: values.opportunity,
+                    customer: props.customer.customerId,
                     ownerIds: userId === userId ? [userId] : [],
                     startDate: `${newStartDate}T${newStartTime}`,
                     endDate: `${newEndDate}T${newEndTime}`,
@@ -287,7 +296,7 @@ const {
             values,
             ...rest
           }) => (
-            <div class="overflow-y-auto h-[34rem] overflow-x-hidden max-sm:h-[30rem]">
+            <div class="overflow-y-auto h-[36rem] overflow-x-hidden max-sm:h-[30rem]">
             <Form className="form-background">
               <div class=" flex justify-around max-sm:flex-col">
                 <div class=" h-full w-w47.5 max-sm:w-wk">
@@ -587,7 +596,7 @@ const {
                   <div>
                   {props.user.crmInd === true &&(
                   <Field
-                    name="contactId"
+                    name="contact"
                     //selectType="contactList"
                     isColumnWithoutNoCreate
                     // label="Contact"
@@ -600,12 +609,12 @@ const {
                     component={SelectComponent}
                     isColumn
                     options={Array.isArray(ContactData) ? ContactData : []}
-                    value={values.contactId}
+                    // value={values.contactId}
                     // isDisabled={defaultContacts}
-                    defaultValue={{
-                      label: `${fullName || ""} `,
-                      value: contactId,
-                    }}
+                    // defaultValue={{
+                    //   label: `${fullName || ""} `,
+                    //   value: contactId,
+                    // }}
                     inlineLabel
                   />
                   )} 
@@ -614,7 +623,7 @@ const {
                   <div>
                   {props.user.crmInd === true &&(
                  <Field
-                 name="opportunityId"
+                 name="opportunity"
                  // selectType="customerList"
                  isColumnWithoutNoCreate
                  label={
@@ -632,7 +641,7 @@ const {
                  }
                  isColumn
                  margintop={"0"}
-                 value={values.opportunityId}
+                //  value={values.opportunityId}
                  inlineLabel
                />
                   )} 

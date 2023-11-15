@@ -16,6 +16,10 @@ const initialState = {
   addingOrderError: false,
   orderDetailsId: {},
 
+  fetchingOrderRecords: false,
+  fetchingOrderRecordsError: false,
+  orderRecordData:{},
+
   addingDistributor: false,
   addingDistributorError: false,
 
@@ -122,6 +126,10 @@ const initialState = {
   fetchingFeedbackByDistributorId: false,
   fetchingFeedbackByDistributorIdError: false,
   feedbacks: [],
+
+  fetchingRecords: false,
+  fetchingRecordsError: false,
+  accountRecordData:{},
 
   addingLocationInOrder: false,
   addingLocationInOrderError: false,
@@ -1776,6 +1784,36 @@ export const distributorReducer = (state = initialState, action) => {
 
       case types.SET_CLEARBIT_DATA1:
         return { ...state, clearbit1: action.payload };
+
+        case types.GET_ACCOUNT_RECORDS_REQUEST:
+          return { ...state, fetchingRecords: true };
+        case types.GET_ACCOUNT_RECORDS_SUCCESS:
+          return {
+            ...state,
+            fetchingRecords: false,
+            accountRecordData: action.payload,
+          };
+        case types.GET_ACCOUNT_RECORDS_FAILURE:
+          return {
+            ...state,
+            fetchingRecords: false,
+            fetchingRecordsError: true,
+          };
+
+          case types.GET_ORDER_RECORDS_REQUEST:
+            return { ...state, fetchingOrderRecords: true };
+          case types.GET_ORDER_RECORDS_SUCCESS:
+            return {
+              ...state,
+              fetchingOrderRecords: false,
+              orderRecordData: action.payload,
+            };
+          case types.GET_ORDER_RECORDS_FAILURE:
+            return {
+              ...state,
+              fetchingOrderRecords: false,
+              fetchingOrderRecordsError: true,
+            };
 
     default:
       return state;

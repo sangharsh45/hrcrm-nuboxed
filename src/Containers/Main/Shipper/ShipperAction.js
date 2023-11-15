@@ -1404,3 +1404,29 @@ export const getAllShipper = () => (dispatch) => {
     });
 };
 
+export const getShipperRecords = (userId) => (dispatch) => {
+  dispatch({
+    type: types.GET_SHIPPER_RECORDS_REQUEST,
+  });
+  axios
+    .get(`${base_url2}/distributor/record/count/${userId}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.GET_SHIPPER_RECORDS_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err.response);
+      dispatch({
+        type: types.GET_SHIPPER_RECORDS_FAILURE,
+        payload: err,
+      });
+    });
+};
+

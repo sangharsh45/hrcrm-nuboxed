@@ -19,6 +19,7 @@ const userOptions = ['Access', 'Create', 'Update', 'Delete','Access Plus'];
  const refurbishCheckedList=['Workshop','Adminview','Adminassign'];
  const settingsCheckedList=['Access'];
  const accountingCheckedList=['Access'];
+ const requirementCheckedList=['Access'];
  const basicCheckedList=['Access'];
  const repositoryCheckedList=['Create'];
  const junkCheckedList=['Access',"Transfer"];
@@ -118,6 +119,7 @@ const AccessForm = (props) => {
   props.departmentAcces.payment,
   props.departmentAcces.collection,
   props.departmentAcces.catalog,
+ 
   
   
 ])
@@ -215,12 +217,12 @@ const AccessForm = (props) => {
 
   const onRequirementChange = (list) => {
     setCheckedRequirementList(list);
-    setIndeterminateRequirement(!!list.length && list.length < plainOptions.length);
-    setCheckAllRequirement(list.length === plainOptions.length);
+    setIndeterminateRequirement(!!list.length && list.length < requirementCheckedList.length);
+    setCheckAllRequirement(list.length === requirementCheckedList.length);
   };
 
   const onCheckAllRequirementChange = (e) => {
-    setCheckedRequirementList(e.target.checked ? plainOptions : []);
+    setCheckedRequirementList(e.target.checked ? requirementCheckedList : []);
     setIndeterminateRequirement(false);
     setCheckAllRequirement(e.target.checked);
   };
@@ -893,6 +895,7 @@ const onCheckAllTeamsChange = (e) => {
 
 
 
+
   function handleUpdateAccess() {
     let data = {
       vendor: checkedVendorList || [],
@@ -938,6 +941,7 @@ const onCheckAllTeamsChange = (e) => {
       payment:checkedPaymentsList || [],
       collection:checkedCollectionList || [],
       catalog:checkedCatalogList || [],
+      
       
       departmentId: props.departmentId,
       roleTypeId:props.roleTypeId,
@@ -1361,6 +1365,7 @@ const onCheckAllTeamsChange = (e) => {
              : null } 
 
 
+{props.departmentData.accountInd === true ? 
     <div>     
             <h1 class=" text-clr font-bold">Accounting</h1>
             <Spacer />
@@ -1404,7 +1409,36 @@ const onCheckAllTeamsChange = (e) => {
             
               <Spacer />
               </div> 
+                  : null } 
+
+{props.departmentData.recruitOppsInd === true ? 
+    <div>     
+            <h1 class=" text-clr font-bold">RecruitPro</h1>
+            <Spacer />
+              <FlexContainer justifyContent="space-around">
+          
+
+              
+                <div >
+                  <h1 class="text-sm">Requirement</h1>
+                  <Checkbox indeterminate={indeterminateRequirement} onChange={onCheckAllRequirementChange} checked={checkAllRequirement}>
+                  <label class="text-xs">  Check all  </label>
+                  </Checkbox>
+                  <Divider />
+                  <CheckboxGroup options={requirementCheckedList} value={checkedRequirementList} onChange={onRequirementChange} />
+                </div>
+                <Spacer />
+                   
+                 
             
+
+
+
+              </FlexContainer>
+            
+              <Spacer />
+              </div> 
+                  : null } 
                
               <h4 class="mt-2">Updated on {dayjs(props.departmentAcces.lastUpdatedOn).format("ll")} by {props.departmentAcces.name}</h4>
               
