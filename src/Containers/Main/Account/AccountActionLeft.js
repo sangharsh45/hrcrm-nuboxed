@@ -6,7 +6,7 @@ import { Input, Button, Tooltip, Badge } from "antd";
 import ListAltIcon from '@mui/icons-material/ListAlt';
 import TocIcon from '@mui/icons-material/Toc';
 import GridViewIcon from '@mui/icons-material/GridView';
-import { inputDataSearch, getRecords, getAllRecords } from "./AccountAction";
+import { inputDataSearch, getRecords,getAccountRecords, getAllRecords } from "./AccountAction";
 import { DeleteOutlined, TableOutlined, BookOutlined, AppstoreOutlined } from "@ant-design/icons";
 import moment from "moment";
 const { Search } = Input;
@@ -15,8 +15,8 @@ const AccountActionLeft = (props) => {
     const { user } = props;
 
     useEffect(() => {
-        if (props.viewType === "table") {
-            props.getRecords(props.userId)
+        if (props.viewType === "list") {
+            props.getAccountRecords()
         } else if (props.viewType === "all") {
             // props.getAllRecords()
         }
@@ -59,7 +59,7 @@ const AccountActionLeft = (props) => {
                 
                 <Tooltip title="List View">
                     <Badge size="small"
-                        count={props.recordData.distributor || 0}
+                        count={props.accountRecordData.distributor || 0}
                     ><span
                         style={{
                             marginRight: "0.5rem",
@@ -181,6 +181,7 @@ const AccountActionLeft = (props) => {
 
 const mapStateToProps = ({ auth, distributor }) => ({
     user: auth.userDetails,
+    accountRecordData:distributor.accountRecordData,
     recordData: distributor.recordData,
     recordAllData: distributor.recordAllData,
     userId: auth.userDetails.userId,
@@ -192,6 +193,7 @@ const mapDispatchToProps = (dispatch) =>
         {
             inputDataSearch,
             getRecords,
+            getAccountRecords,
             getAllRecords,
         },
         dispatch

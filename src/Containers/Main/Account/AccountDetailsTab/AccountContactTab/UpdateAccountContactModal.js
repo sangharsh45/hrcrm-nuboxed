@@ -15,7 +15,7 @@ const UpdateAccountContactModal = (props) => {
                 maskClosable={false}
                 destroyOnClose
                 maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}
-                style={{ top: 40 }}
+                style={{marginTop:"5rem"}}
                 onClose={() => props.handleUpdateDistributorContactModal(false)}
                 footer={null}
             >

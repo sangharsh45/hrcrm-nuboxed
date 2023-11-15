@@ -146,7 +146,7 @@ function CustomerCallActivityForm(props) {
     const employeesData = props.employees.map((item) => {
       return {
         label: `${item.fullName}`,
-        value: item.opportunityId,
+        value: item.employeeId,
       };
     });
     const opportunityNameOption = props.opportunityByCustomerId.map((item) => {
@@ -223,7 +223,7 @@ function CustomerCallActivityForm(props) {
 
                 callResult: "",
                 callDescription: "",
-
+                opportunity:"",
                 included: [],
                 assignedTo: selectedOption ? selectedOption.employeeId:userId,
                 contactId: "",
@@ -307,7 +307,7 @@ function CustomerCallActivityForm(props) {
             let newEndTime = `${finalEndTime}${timeEndPart}`;
             let testVal = {
               ...values,
-              customerId: this.props.customerId,
+              customer: props.customer.customerId,
               callCategory: category,
               callType: Type,
               startDate: `${newStartDate}T${newStartTime}`,
@@ -788,7 +788,7 @@ function CustomerCallActivityForm(props) {
                   <div>
                   {props.user.crmInd === true &&(
                  <Field
-                 name="opportunityId"
+                 name="opportunity"
                  // selectType="customerList"
                  isColumnWithoutNoCreate
                  label={

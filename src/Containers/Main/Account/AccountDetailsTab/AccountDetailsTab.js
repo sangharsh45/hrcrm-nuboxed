@@ -1,4 +1,4 @@
-import React, { lazy, Suspense, useState } from "react";
+import React, { lazy, Suspense,useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { StyledTabs } from "../../../../Components/UI/Antd";
@@ -8,9 +8,10 @@ import {
     handleLinkDistributorOrderConfigureModal,
     handleDistributorContactModal,
     handleDistributorActivityModal,
+    getOrderRecords,
     handleDistributorDocumentUploadModal
 } from "../AccountAction"
-import { Tooltip } from "antd";
+import { Tooltip ,Badge} from "antd";
 import AddAccountModal from "./AccountOrderTab/AddAccountModal";
 import AddIcon from '@mui/icons-material/Add';
 import NotesForm from "./AccountNoteTab/NoteForm"
@@ -26,7 +27,10 @@ const AddAccountContact = lazy(() => import("./AccountContactTab/AddAccountConta
 const TabPane = StyledTabs.TabPane;
 
 function AccountDetailsTab(props) {
-
+    useEffect(() => {
+        props.getOrderRecords(props.distributorData.distributorId);
+       
+      }, []);
     const [activeKey, setactiveKey] = useState("1")
 
     const handleTabChange = (key) => setactiveKey(key);
@@ -38,11 +42,16 @@ function AccountDetailsTab(props) {
                     <TabPane
                         tab={
                             <>
+                              <Badge
+          size="small"
+          count={( props.orderRecordData.order) || 0}
+          overflowCount={999}
+        >
                                 <span >
                                     <i class="fas fa-shopping-bag"></i>
                                     <span style={{ marginLeft: "0.25em" }}>Order</span>
                                 </span>
-
+                                </Badge>
                                 {activeKey === "1" && (
                                     <>
                                         <Tooltip title="Add Order">
@@ -237,6 +246,7 @@ function AccountDetailsTab(props) {
 }
 
 const mapStateToProps = ({ distributor, auth }) => ({
+    orderRecordData:distributor.orderRecordData,
     addLinkDistributorOrderConfigureModal: distributor.addLinkDistributorOrderConfigureModal,
     distributorContactModal: distributor.distributorContactModal,
     distributorDocumentUploadModal: distributor.distributorDocumentUploadModal,
@@ -249,6 +259,7 @@ const mapDispatchToProps = (dispatch) =>
             handleLinkDistributorOrderConfigureModal,
             handleDistributorContactModal,
             handleDistributorActivityModal,
+            getOrderRecords,
             handleDistributorDocumentUploadModal
         },
         dispatch

@@ -1,39 +1,30 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { StyledTable } from "../../../Components/UI/Antd";
-import { Link } from "../../../Components/Common";
-import { Button, Empty, Input, Space, Tooltip } from "antd";
+import {
+  StyledRangePicker,
+  StyledSelect,
+  StyledTable,
+} from "../../../Components/UI/Antd";
+import * as Yup from "yup";
+import { Button, Empty, Input, Space, Select, Switch, Icon, Tooltip } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
 import Highlighter from "react-highlight-words";
-import { OnlyWrapCard } from '../../../Components/UI/Layout'
-import { Formik, Form, Field } from "formik";
-import { FlexContainer } from "../../../Components/UI/Layout";
+import { Formik, Form, Field, FastField } from "formik";
+import { FlexContainer, MainWrapper, OnlyWrapCard } from "../../../Components/UI/Layout";
 import { DatePicker } from "../../../Components/Forms/Formik/DatePicker";
 import APIFailed from "../../../Helpers/ErrorBoundary/APIFailed";
-import {
-  getTodayDistributor,
-  DistributorCollectionReceivableToday,
-  handleDistributorProductModal
-} from "../CollectionAction";
+import { DistributorCollectionArchiveToday } from "../CollectionAction";
+// import { getAllSalesUser } from "../../Leads/LeadsAction";
 import moment from "moment";
-// import { getAllSalesUser } from "../../../Leads/LeadsAction";
-import DistributorPaymentToggle from "./DistributorPaymentToggle";
 import { CurrencySymbol } from "../../../Components/Common";
-import DistributorProductHistory from "./DistributorProductHistory";
 
 function DistributorColletcionArchive(props) {
   useEffect(() => {
     // props.getAllSalesUser();
-    props.getTodayDistributor();
   }, []);
 
-  const [particularRowData, setParticularRowData] = useState({});
 
-  function handleSetParticularOrderData(item) {
-    setParticularRowData(item);
-  }
-  const [selectedRow, setselectedRow] = useState([]);
   const [searchText, setSearchText] = useState("");
   const [searchedColumn, setSearchedColumn] = useState("");
   function getColumnSearchProps(dataIndex) {
@@ -125,58 +116,129 @@ function DistributorColletcionArchive(props) {
     clearFilters();
     setSearchText("");
   }
-  function handleClear() {
-    props.getTodayDistributor();
-  }
+
+  ;
+
+
   const salesOption = useMemo(() => {
     if (!props.allSalesUsers) return [];
     return (
       props.allSalesUsers.length &&
-      props.allSalesUsers
-        .sort(function (a, b) {
-          var nameA = a.salesExecutive.toUpperCase(); // ignore upper and lowercase
-          var nameB = b.salesExecutive.toUpperCase(); // ignore upper and lowercase
-          if (nameA < nameB) {
-            return -1;
-          }
-          if (nameA > nameB) {
-            return 1;
-          }
-          // names must be equal
-          return 0;
-        })
-        .map((allSalesUsers) => {
-          return {
-            text: allSalesUsers.salesExecutive || "",
-            value: allSalesUsers.salesExecutive,
-          };
-        })
+      props.allSalesUsers.sort(function (a, b) {
+        var nameA = a.salesExecutive.toUpperCase(); // ignore upper and lowercase
+        var nameB = b.salesExecutive.toUpperCase(); // ignore upper and lowercase
+        if (nameA < nameB) {
+          return -1;
+        }
+        if (nameA > nameB) {
+          return 1;
+        }
+        // names must be equal
+        return 0;
+      }).map((allSalesUsers) => {
+        return {
+          text: allSalesUsers.salesExecutive || "",
+          value: allSalesUsers.salesExecutive,
+        };
+      })
     );
   }, [props.allSalesUsers]);
 
-  const { user } = props;
 
- 
-  // if (props.DistributorCollectionArchiveError) {
-  //   return <APIFailed />;
-  // }
+  if (props.DistributorCollectionArchiveError) {
+    return <APIFailed />;
+  }
+
   const tab = document.querySelector(".ant-layout-sider-children");
   const tableHeight = tab && tab.offsetHeight - 200;
+
+  const { user, startDate, endDate } = props;
+
   return (
     <>
-
       <Formik
         initialValues={{
-          date: undefined,
+          startDate: startDate || moment(),
+          endDate: endDate || null,
           type: "Distributor",
         }}
         onSubmit={(values, { resetForm }) => {
-          props.handleClearCheck();
-          let newStartDate = moment(values.date).format("YYYY-MM-DD");
+          console.log(values);
+          console.log(values);
+          let timeZoneFirst = "GMT+05:30";
 
-          props.DistributorCollectionReceivableToday({
+          let mytimeZone = timeZoneFirst.substring(4, 10);
+          console.log(mytimeZone);
+
+          var a = mytimeZone.split(":");
+          console.log(a);
+          var timeZoneminutes = +a[0] * 60 + +a[1];
+          console.log(timeZoneminutes);
+          if (!values.endDate) {
+            values.endDate = values.startDate;
+          }
+          let newStartDate = moment(values.startDate).format("YYYY-MM-DD");
+          console.log(newStartDate);
+          //Time calculation
+          let firstStartTime = moment(values.startTime).format(
+            "HH:mm:ss.SSS[Z]"
+          ); // getting start time from form input
+          console.log(firstStartTime);
+
+          let firstStartHours = firstStartTime.substring(0, 5); // getting only hours and minutes
+          console.log(firstStartHours);
+
+          let timeEndPart = firstStartTime.substring(5, 13); // getting seconds and rest
+          console.log(timeEndPart);
+
+          var firstStartTimeSplit = firstStartHours.split(":"); // removing the colon
+          console.log(firstStartTimeSplit);
+
+          var minutes = +firstStartTimeSplit[0] * 60 + +firstStartTimeSplit[1]; // converting hours into minutes
+          console.log(minutes);
+
+          var firstStartTimeminutes = minutes - timeZoneminutes; // start time + time zone
+          console.log(firstStartTimeminutes);
+
+          let h = Math.floor(firstStartTimeminutes / 60); // converting to hours
+          let m = firstStartTimeminutes % 60;
+          h = h < 10 ? "0" + h : h;
+          m = m < 10 ? "0" + m : m;
+          let finalStartTime = `${h}:${m}`;
+          console.log(finalStartTime);
+
+          let newStartTime = `${finalStartTime}${timeEndPart}`;
+          console.log(newStartTime);
+
+          let newEndDate = moment(values.endDate).format("YYYY-MM-DD");
+          let firstEndTime = moment(values.endTime).format("HH:mm:ss.SSS[Z]"); // getting start time from form input
+          console.log(firstEndTime);
+          let firstEndHours = firstEndTime.substring(0, 5); // getting only hours and minutes
+          console.log(firstEndHours);
+
+          var firstEndTimeSplit = firstEndHours.split(":"); // removing the colon
+          console.log(firstEndTimeSplit);
+          var endMinutes = +firstEndTimeSplit[0] * 60 + +firstEndTimeSplit[1]; // converting hours into minutes
+          console.log(endMinutes);
+          var firstEndTimeminutes = Math.abs(endMinutes - timeZoneminutes); // start time + time zone
+          console.log(firstEndTimeminutes);
+          let hr = Math.floor(firstEndTimeminutes / 60); // converting to hours
+          console.log(hr);
+          let mi = firstEndTimeminutes % 60;
+          console.log(hr);
+          hr = hr < 10 ? "0" + hr : hr;
+          mi = mi < 10 ? "0" + mi : mi;
+          let finalEndTime = `${hr}:${mi}`;
+          console.log(finalEndTime);
+          console.log(timeEndPart);
+          console.log(`${finalEndTime}${timeEndPart}`);
+
+          let newEndTime = `${finalEndTime}${timeEndPart}`;
+          props.handleClearReturnCheck()
+          props.DistributorCollectionArchiveToday({
             ...values,
-            date: `${newStartDate}T00:00:00Z`,
+            startDate: `${newStartDate}T00:00:00Z`,
+            endDate: `${newEndDate}T00:00:00Z`,
           });
         }}
       >
@@ -195,72 +257,78 @@ function DistributorColletcionArchive(props) {
                   display: "flex",
                   justifyContent:"space-evenly",
                   height: "100%",
-                  width: "30%",
+                  width: "40%",
                   alignItems: "end"
                 }}
               >
                 <div
                   style={{                  
-                    width: "35%",                  
+                    width: "29%",                  
                   }}>
                   <Field
                     isRequired
-                    name="date"
+                    name="startDate"
                     width={"100%"}
-                    label="Payment Date"
+                    label="Start Date"
                     component={DatePicker}
-                    value={values.date}
+                    value={values.startDate}
                     inlineLabel
                     isColumn
-                    
+                   
                   />
                 </div>
                 <div
                   style={{
-                    width: "25%",                    
-                  }}
-                >
-                  <Button
-                    type="primary"
-                    htmlType="submit"
-                    loading={props.DistributorCollectionReceivable}
-                    disabled={values.date ? false : true}
-                    
-                  >
-                    Submit
-                  </Button>
-                  </div>
-                  <div
-                  style={{
-                    width: "15%",                    
-                  }}
-                >
-                  <Button
-                    type="primary"
-                    disabled={values.date ? false : true}
+                    width: "29%",                    
+                  }}>
+                  <Field
+                    isRequired
+                    width={"100%"}
+                    name="endDate"
+                    label="End Date"
+                    component={DatePicker}
+                    value={values.endDate || values.startDate}
+                    inlineLabel
+                    isColumn
                    
-                    onClick={() => {
-                      setFieldValue("date", undefined);
-                      handleClear();
+                    disabledDate={(currentDate) => {
+                      if (values.startDate) {
+                        if (
+                          moment(currentDate).isBefore(moment(values.startDate))
+                        ) {
+                          return true;
+                        } else {
+                          return false;
+                        }
+                      }
                     }}
+                  />
+                </div>
+                  <div
+                   style={{
+                     width: "10%",                    
+                  }}
+                >
+                    <Button
+                      type="primary"
+                      htmlType="submit"                    
                   >
-                    Clear
-                  </Button>
+                     Submit
+                    </Button>
                   </div>
-                </div>             
-            
+                </div>
 
             {/* <StyledTable
               rowKey="paymentId"
-              rowSelection={props.rowSelectionTodayForDistributor}
+              rowSelection={props.rowSelectionForDistributor}
               columns={columns}
               scroll={{ y: tableHeight }}
               pagination={false}
               loading={
-                props.fetchingTodayDistributor ||
-                props.fetchingTodayDistributorError
+                props.DistributorCollectionArchive ||
+                props.DistributorCollectionArchiveError
               }
-              dataSource={props.todayDistributor}
+              dataSource={props.todayDisArchive}
               locale={{
                 emptyText: (
                   <Empty description={"We couldn't find relevant data"} />
@@ -270,7 +338,6 @@ function DistributorColletcionArchive(props) {
           </Form>
         )}
       </Formik>
-
       <div className=' flex justify-end sticky top-28 z-auto'>
         <OnlyWrapCard style={{backgroundColor:"#E3E8EE"}}>
         <div className=" flex justify-between w-[97.5%] p-2 bg-transparent font-bold sticky top-0 z-10">
@@ -278,8 +345,8 @@ function DistributorColletcionArchive(props) {
         <div className=" md:w-[5.1rem]">Order#</div>
         <div className=" md:w-[5.8rem] ">Transaction ID</div>
         <div className="md:w-[5.9rem]">Type</div>
-        <div className="md:w-[7.8rem]">Payment</div>
-        <div className="md:w-[7.9rem]">Entry</div>
+        <div className="md:w-[7.8rem]">Date</div>
+    
         <div className="md:w-[6.2rem]">Amount</div>
         <div className="md:w-[11.3rem]">Mode</div>
         <div className="w-[3.8rem]">Received?</div>
@@ -294,7 +361,7 @@ function DistributorColletcionArchive(props) {
         height={"70vh"}
       > */}
       
-      {props.todayDistributor.map((item) => { 
+      {props.todayDisArchive.map((item) => { 
          const currentdate = moment().format("DD/MM/YYYY");
          const date = moment(item.creationDate).format("DD/MM/YYYY");
          const diff = Math.abs(
@@ -358,14 +425,7 @@ function DistributorColletcionArchive(props) {
                                     </div>
                                 </div>
                                 </div>
-                                <div className=" flex font-medium flex-col md:w-96 max-sm:flex-row w-full max-sm:justify-between ">
-                                    {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden">Weighted Value</h4> */}
-
-                                    <div class=" text-xs text-cardBody font-poppins text-center">
-                                    {` ${moment(item.date).format("DD-MM-YY")}`}
-
-                                    </div>
-                                </div>
+                               
                              
                                 <div class="flex md:items-center"> 
                                 <div class="flex">
@@ -433,31 +493,19 @@ function DistributorColletcionArchive(props) {
                 {/* </InfiniteScroll> */}
       </OnlyWrapCard>
       </div>
-      <DistributorProductHistory
-        handleDistributorProductModal={props.handleDistributorProductModal}
-        collectionDistributorOrder={props.collectionDistributorOrder}
-        particularRowData={particularRowData}
-      />
-
     </>
   );
 }
-const mapStateToProps = ({ collection, leads, auth }) => ({
-  DistributorCollectionReceivable: collection.DistributorCollectionReceivable,
-  todayDistributor: collection.todayDistributor,
-  fetchingTodayDistributor: collection.fetchingTodayDistributor,
-  userId: auth.userDetails.userId,
-  user: auth.userDetails,
+const mapStateToProps = ({ collection, leads }) => ({
+  todayDisArchive: collection.todayDisArchive,
+  DistributorCollectionArchive: collection.DistributorCollectionArchive,
   allSalesUsers: leads.allSalesUsers,
-  collectionDistributorOrder: collection.collectionDistributorOrder
 });
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
-      getTodayDistributor,
+      DistributorCollectionArchiveToday,
     //   getAllSalesUser,
-      DistributorCollectionReceivableToday,
-      handleDistributorProductModal
     },
     dispatch
   );
@@ -467,72 +515,39 @@ export default connect(
   mapDispatchToProps
 )(DistributorColletcionArchive);
 
-
 // const columns = [
-//   {
-//     title: "",
-//     width: "1%",
-//     render: (name, item) => {
-//       return {
-//         props: {
-//           style: {
-//             backgroundColor: item.color,
-//           },
-//           children: <span></span>,
-//         },
-//       };
-//     },
-//   },
 //   {
 //     title: "Name",
 //     defaultSortOrder: "descend",
 //     ...getColumnSearchProps("orderSourceName"),
 //     dataIndex: "orderSourceName",
-//     width: "16%",
+//     width: "12%",
 //   },
 //   {
 //     title: "Order#",
 //     dataIndex: "orderId",
 //     ...getColumnSearchProps("orderId"),
-//     width: "18%",
-//     render: (text, item) => {
-//       return (
-//         <>
-//           <span
-//             style={{
-//               textDecoration: "underline",
-//               color: "#1890ff",
-//               // fontWeight: item.orderStatus === "Completed" ? "bold" : null,
-//               cursor: "pointer",
-//             }}
-//             onClick={() => {
-//               props.handleDistributorProductModal(true)
-//               handleSetParticularOrderData(item);
-//             }}
-//           >
-//             {item.orderId}
-//           </span>
-//         </>
-//       )
-//     }
+//     width: "14%",
+//     // render: (text, item) => {
+//     //   return (
+//     //     <>
+//     //       <span>
+//     //         {item.orderId}
+//     //       </span>
+//     //     </>
+//     //   )
+//     // }
 //   },
 //   {
 //     title: "Transaction ID",
 //     dataIndex: "transactionNumber",
 //     width: "14%",
 //     ...getColumnSearchProps("transactionNumber"),
-//     render: (text, item, i) => {
-//       return (
-//         <>
-//           {item.transactionNumber === "Nill" ? "" : item.transactionNumber}
-//         </>
-//       )
-//     },
 //   },
 //   {
 //     title: "Type",
 //     dataIndex: "paymentType",
-//     width: "8%",
+//     width: "6%",
 //     filters: [
 //       { text: "Part", value: "Part" },
 //       { text: "Complete", value: "Complete" },
@@ -542,27 +557,12 @@ export default connect(
 //     },
 //   },
 //   {
-//     title: "Payment",
-//     dataIndex: "date",
-//     width: "6%",
-//     sorter: (a, b) => {
-//       var nameA = a.date;
-//       var nameB = b.date;
-//       if (nameA < nameB) {
-//         return -1;
-//       }
-//       if (nameA > nameB) {
-//         return 1;
-//       }
-//       return 0;
-//     },
-//     render: (name, item, i) => {
-//       return <span>{` ${moment(item.date).format("DD-MM-YY")}`}</span>;
-//     },
-//   },
-//   {
-//     title: "Entry",
+//     title: "Date",
 //     dataIndex: "paymentDate",
+//     width: "8%",
+//     render: (name, item, i) => {
+//       return <span>{` ${moment(item.paymentDate).format("DD-MM-YY")}`}</span>;
+//     },
 //     sorter: (a, b) => {
 //       var nameA = a.paymentDate;
 //       var nameB = b.paymentDate;
@@ -575,17 +575,20 @@ export default connect(
 
 //       return 0;
 //     },
-//     width: "8%",
-//     render: (name, item, i) => {
-//       return <span>{` ${moment(item.paymentDate).format("ll")}`}</span>;
-//     },
 //   },
-//   ,
 //   {
 //     title: "Amount",
+//     align: 'right',
 //     dataIndex: "paymentAmount",
-//     align: "left",
 //     width: "7%",
+//     render: (name, item, i) => {
+//       return (
+//         <span>
+//           <CurrencySymbol currencyType={"INR"} />
+//           {item.paymentAmount.toFixed(2)}
+//         </span>
+//       );
+//     },
 //     sorter: (a, b) => {
 //       var nameA = a.paymentAmount;
 //       var nameB = b.paymentAmount;
@@ -598,23 +601,15 @@ export default connect(
 
 //       return 0;
 //     },
-//     render: (name, item, i) => {
-//       return (
-//         <span>
-//           <CurrencySymbol currencyType={"INR"} />
-//           {item.paymentAmount.toFixed(2)}
-//         </span>
-//       );
-//     },
 //   },
-//   // {
-//   //   width: "1%",
-//   // },
+//   {
+//     width: "1%"
+//   },
 //   {
 //     title: "Mode",
-//     align: "left",
 //     dataIndex: "paymentMode",
-//     width: "7%",
+//     align: 'center',
+//     width: "9%",
 //     filters: [
 //       { text: "Cash", value: "Cash" },
 //       { text: "Credit-Card", value: "Credit-Card" },
@@ -629,22 +624,12 @@ export default connect(
 //   {
 //     title: "Received?",
 //     dataIndex: "approveByFinanceInd",
-//     render(name, item) {
-//       return (
-//         <>
-//           {user.designation === "Manager" &&
-//             user.functionName === "Sales" ? null : (
-//              <DistributorPaymentToggle paymentId={item.paymentId} />
-//           )}
-//         </>
-//       );
-//     },
 //     width: "7%",
 //   },
 //   {
 //     title: "Owner",
 //     dataIndex: "salesExecutive",
-//     width: "16%",
+//     width: "15%",
 //     filters: salesOption,
 //     onFilter: (value, record) => {
 //       console.log(value, record);
@@ -666,19 +651,20 @@ export default connect(
 //   {
 //     title: "",
 //     dataIndex: "remarks",
-//     width: "2%",
+//     width: "3%",
 //     render: (text, item, i) => {
 //       return (
 //         <>
-//           {item.remarks ? (
+//           {item.remarks ?
 //             <Tooltip title={item.remarks}>
 //               <span>
 //                 <i className="fa fa-sticky-note"></i>
 //               </span>
 //             </Tooltip>
-//           ) : null}
+//             : null}
 //         </>
-//       );
+
+//       )
 //     },
-//   },
+//   }
 // ];

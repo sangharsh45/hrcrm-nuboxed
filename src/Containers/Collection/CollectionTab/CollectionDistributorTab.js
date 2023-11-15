@@ -5,6 +5,7 @@ import {
   setCustomerSubViewType,
   setDistributorViewType,
 } from "../CollectionAction";
+import GroupsIcon from '@mui/icons-material/Groups';
 import moment from "moment";
 import { getAllDistributorsList } from "../CollectionAction";
 import { connect } from "react-redux";
@@ -12,15 +13,10 @@ import { bindActionCreators } from "redux";
 import { StyledTabs } from "../../../Components/UI/Antd";
 import { TabsWrapper } from "../../../Components/UI/Layout";
 import DistributorCollectionTableToday from "../Distributor/DistributorCollectionTableToday";
+import DistributorColletcionArchive from "../Distributor/DistributorColletcionArchive";
+import DistributorCollectionTableAll from "../Distributor/DistributorCollectionTableAll";
 
 
-
-// const DistributorCollectionArchive = lazy(() =>
-//   import("../Child/Distributor/DistributorCollectionArchive")
-// );
-// const DistributorCollectionTableAll = lazy(() =>
-//   import("../Child/Distributor/DistributorCollectionTableAll")
-// );
 
 const TabPane = StyledTabs.TabPane;
 
@@ -143,7 +139,7 @@ function CollectionDistributorTab(props) {
           </TabPane>
 
    
-{/* 
+
           <TabPane
             tab={
               <>
@@ -157,13 +153,33 @@ function CollectionDistributorTab(props) {
             key="2"
           >
             <Suspense fallback={"Loading ..."}>
-              {" "}
-              <DistributorCollectionArchive
+            
+              <DistributorColletcionArchive
                 rowSelectionForDistributor={rowSelectionForDistributor}
                 handleClearReturnCheck={handleClearReturnCheck}
               />
             </Suspense>
-          </TabPane> */}
+          </TabPane>
+          
+          <TabPane
+            tab={
+              <>
+                <span>
+                <GroupsIcon />All
+                </span>
+                &nbsp;
+                {activeKey === "3" && <></>}
+              </>
+            }
+            key="3"
+          >
+            <Suspense fallback={"Loading ..."}>
+              {" "}
+              <DistributorCollectionTableAll
+              //  rowSelectionForDistributor={rowSelectionForDistributor}
+              />
+            </Suspense>
+          </TabPane>
 
      
         </StyledTabs>

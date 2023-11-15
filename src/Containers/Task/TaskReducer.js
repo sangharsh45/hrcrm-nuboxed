@@ -373,6 +373,7 @@ export const TaskReducer = (state = initialState, action) => {
     case types.ADD_TASK_SUCCESS:
       return { ...state, addingTask: false,
          addTaskModal: false,
+         callActivityModal:false,
          addPitchactivityModal:false, };
     case types.ADD_TASK_FAILURE:
       return {

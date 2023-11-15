@@ -8,6 +8,9 @@ const initialState = {
     fetchingDepartmentsError: false,
     departments: [],
 
+    addingRecruitToggle: false,
+    addingRecruitToggleError: false,
+
     addingDepartments: false,
     addingDepartmentsError: false,
 
@@ -225,6 +228,29 @@ export const departmentsReducer = (state = initialState, action) => {
                   ...state,
                   addingErpToggle: false,
                   addingErpToggleError: true,
+                };
+
+                
+              case types.LINK_RECRUIT_TOGGLE_REQUEST:
+                return { ...state, addingRecruitToggle: true };
+              case types.LINK_RECRUIT_TOGGLE_SUCCESS:
+                return {
+                  ...state,
+                  addingRecruitToggle: false,
+                  departments:action.payload,
+                  // departments: state.departments.map((item) => {
+                  //   if (item.departmentId === action.payload.departmentId) {
+                  //     return action.payload;
+                  //   } else {
+                  //     return item;
+                  //   }
+                  // }),
+                };
+              case types.LINK_RECRUIT_TOGGLE_FAILURE:
+                return {
+                  ...state,
+                  addingRecruitToggle: false,
+                  addingRecruitToggleError: true,
                 };
     
 

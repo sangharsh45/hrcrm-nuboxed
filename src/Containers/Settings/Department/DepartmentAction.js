@@ -319,3 +319,31 @@ export const linkErpToggle = ( data,departmentId,cb) => (dispatch) => {
     })
 };
 
+export const linkRecuitToggle = ( data,departmentId,cb) => (dispatch) => {
+  dispatch({
+    type: types.LINK_RECRUIT_TOGGLE_REQUEST,
+  });
+  axios
+  .put(`${base_url}/department/recruitOppsInd/${departmentId}`, data, {
+    headers: {
+      Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+    },
+  })
+
+    .then((res) => {
+      console.log(res);
+      dispatch(getDepartments())
+      dispatch({
+        type: types.LINK_RECRUIT_TOGGLE_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.LINK_RECRUIT_TOGGLE_FAILURE,
+        payload: err,
+      });
+    })
+};
+

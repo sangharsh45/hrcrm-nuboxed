@@ -68,7 +68,7 @@ export const getTodayDistributor = () => (dispatch) => {
     type: types.GET_TODAY_DISTRIBUTOR_REQUEST,
   });
   axios
-    .get(`${base_url2}/order/payment/distributor`,{
+    .get(`${base_url2}/orderPayment/payment/distributor`,{
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },
@@ -378,7 +378,11 @@ export const DistributorCollectionArchiveToday = (payment) => (dispatch) => {
     type: types.DISTRIBUTOR_COLLECTION_ARCHIVE_REQUEST,
   });
   axios
-    .post(`${base_url}/report/today-orderPaymentList`, payment)
+    .post(`${base_url2}/orderPayment/today-orderPaymentList`, payment,{
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
     .then((res) => {
       console.log(res);
       dispatch({
@@ -403,7 +407,7 @@ export const getAllDistributorsList = (userId) => (dispatch) => {
     type: types.GET_ALL_DISTRIBUTORS_LIST_REQUEST,
   });
   axios
-    .get(`${base_url}/distributor/all-distributors`, {})
+    .get(`${base_url2}/distributor/all-distributors`,)
     .then((res) => {
       console.log(res);
       dispatch({
