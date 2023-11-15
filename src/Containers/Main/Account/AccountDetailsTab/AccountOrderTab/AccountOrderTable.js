@@ -315,7 +315,7 @@ const AccountOrderTable = (props) => {
                             <a>Cancel</a>
                         </Popconfirm>
                     </span>
-                ) : record.qcStartInd === 3 ?
+                ) : record.qcStartInd === 3 && record.priceConfirmInd === false ?
                     (<Typography.Link disabled={editingKey !== ''} onClick={() => edit(record)}>
                         <BorderColorOutlined
                             style={{ cursor: "pointer", color: "blue" }}

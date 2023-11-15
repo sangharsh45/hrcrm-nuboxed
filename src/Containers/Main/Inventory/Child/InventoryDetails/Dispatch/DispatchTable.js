@@ -19,7 +19,7 @@ import DispatchValidationToggle from "./DispatchValidationToggle";
 const { Option } = Select;
 function DispatchTable(props) {
   useEffect(() => {
-    props.getDispatchList(props.locationDetailsId);
+    // props.getDispatchList(props.locationDetailsId);
     props.getAllShipper()
   }, []);
 
@@ -277,7 +277,10 @@ function DispatchTable(props) {
       width: "10%",
       render: (text, item) => {
         return (
-          <><Button type="primary">Create AWB</Button></>
+          <>
+            {item.dispatchInspectionInd === 4 &&
+              <Button type="primary">Create AWB</Button>
+            }</>
         )
       }
     },
@@ -377,7 +380,7 @@ function DispatchTable(props) {
         //debugger
         return (
           <Tooltip title="Notes">
-            <NoteAltIcon 
+            <NoteAltIcon
               style={{ cursor: "pointer", fontSize: "13px" }}
             // onClick={() => {
             //   handleRowData(item);

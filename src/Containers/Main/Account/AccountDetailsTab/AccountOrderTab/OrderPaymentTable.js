@@ -52,7 +52,7 @@ class OrderPaymentTable extends Component {
             },
             {
                 title: "Reason",
-                dataIndex: "reason",
+                dataIndex: "remarks",
                 width: "14%",
             },
 

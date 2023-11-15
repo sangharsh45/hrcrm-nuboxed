@@ -13,6 +13,7 @@ import { Button, Tooltip, message } from 'antd';
 import { addOrderForm, getContactDistributorList } from '../../AccountAction'
 import moment from 'moment';
 import { ExclamationCircleOutlined } from '@ant-design/icons';
+import AddressFieldArray1 from '../../../../../Components/Forms/Formik/AddressFieldArray1';
 const FormSchema = Yup.object().shape({
     advancePayment: Yup.string().required("Input needed!"),
     contactPersonId: Yup.string().required("Input needed!"),
@@ -103,7 +104,7 @@ function AddOrderInAccount(props) {
                     <div>
                         <StyledLabel><h3> Pickup Address</h3></StyledLabel>
 
-                        {/* <FieldArray
+                        <FieldArray
                             name="loadingAddress"
                             render={(arrayHelpers) => (
                                 <AddressFieldArray1
@@ -112,7 +113,7 @@ function AddOrderInAccount(props) {
                                     values={values}
                                 />
                             )}
-                        /> */}
+                        />
                         <div style={{ display: "flex", justifyContent: "space-between" }}>
                             <div style={{ width: "47%" }}>
                                 <Field
