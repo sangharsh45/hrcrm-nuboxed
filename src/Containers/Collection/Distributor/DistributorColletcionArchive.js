@@ -1,29 +1,29 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import {
-  StyledRangePicker,
-  StyledSelect,
-  StyledTable,
-} from "../../../Components/UI/Antd";
+import { DatePicker } from "antd";
 import * as Yup from "yup";
 import { Button, Empty, Input, Space, Select, Switch, Icon, Tooltip } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
 import Highlighter from "react-highlight-words";
 import { Formik, Form, Field, FastField } from "formik";
 import { FlexContainer, MainWrapper, OnlyWrapCard } from "../../../Components/UI/Layout";
-import { DatePicker } from "../../../Components/Forms/Formik/DatePicker";
+// import { DatePicker } from "../../../Components/Forms/Formik/DatePicker";
 import APIFailed from "../../../Helpers/ErrorBoundary/APIFailed";
 import { DistributorCollectionArchiveToday } from "../CollectionAction";
 // import { getAllSalesUser } from "../../Leads/LeadsAction";
 import moment from "moment";
+import dayjs from "dayjs";
 import { CurrencySymbol } from "../../../Components/Common";
+import { FormattedMessage } from "react-intl";
+import { Label } from "recharts";
 
 function DistributorColletcionArchive(props) {
   useEffect(() => {
     // props.getAllSalesUser();
   }, []);
-
+  const [date, setDate] = useState("");
+  const [endate, setEnDate] = useState("");
 
   const [searchText, setSearchText] = useState("");
   const [searchedColumn, setSearchedColumn] = useState("");
@@ -106,6 +106,15 @@ function DistributorColletcionArchive(props) {
     };
   }
 
+  const onChangeDatePicker = (selectedDate, dateString) => {
+    console.log(selectedDate, dateString);
+    setDate(dayjs(dateString));
+  };
+  const onChangeDatePicker2 = (selectedDate, dateString) => {
+    console.log(selectedDate, dateString);
+    setEnDate(dayjs(dateString));
+  };
+
   function handleSearch(selectedKeys, confirm, dataIndex) {
     confirm();
     setSearchText(selectedKeys[0]);
@@ -158,9 +167,11 @@ function DistributorColletcionArchive(props) {
     <>
       <Formik
         initialValues={{
-          startDate: startDate || moment(),
-          endDate: endDate || null,
-          type: "Distributor",
+          // startDate: startDate || moment(),
+          startDate: moment.utc(date),
+          endDate: moment.utc(endate),
+          // endDate: endDate || null,
+          type: "distributor",
         }}
         onSubmit={(values, { resetForm }) => {
           console.log(values);
@@ -210,8 +221,8 @@ function DistributorColletcionArchive(props) {
           let newStartTime = `${finalStartTime}${timeEndPart}`;
           console.log(newStartTime);
 
-          let newEndDate = moment(values.endDate).format("YYYY-MM-DD");
-          let firstEndTime = moment(values.endTime).format("HH:mm:ss.SSS[Z]"); // getting start time from form input
+          let newEndDate = moment.utc(values.endDate).format("YYYY-MM-DD");
+          let firstEndTime = moment.utc(values.endTime).format("HH:mm:ss.SSS[Z]"); // getting start time from form input
           console.log(firstEndTime);
           let firstEndHours = firstEndTime.substring(0, 5); // getting only hours and minutes
           console.log(firstEndHours);
@@ -237,8 +248,10 @@ function DistributorColletcionArchive(props) {
           props.handleClearReturnCheck()
           props.DistributorCollectionArchiveToday({
             ...values,
-            startDate: `${newStartDate}T00:00:00Z`,
-            endDate: `${newEndDate}T00:00:00Z`,
+            startDate: moment.utc(date),
+            endDate: moment.utc(endate),
+            // startDate: `${newStartDate}T00:00:00Z`,
+            // endDate: `${newEndDate}T00:00:00Z`,
           });
         }}
       >
@@ -265,7 +278,12 @@ function DistributorColletcionArchive(props) {
                   style={{                  
                     width: "29%",                  
                   }}>
-                  <Field
+
+<DatePicker
+
+placeholder="Start Date"
+onChange={onChangeDatePicker} />
+                  {/* <Field
                     isRequired
                     name="startDate"
                     width={"100%"}
@@ -275,13 +293,17 @@ function DistributorColletcionArchive(props) {
                     inlineLabel
                     isColumn
                    
-                  />
+                  /> */}
                 </div>
                 <div
                   style={{
                     width: "29%",                    
                   }}>
-                  <Field
+                   
+<DatePicker 
+placeholder="End Date"
+onChange={onChangeDatePicker2} />
+                  {/* <Field
                     isRequired
                     width={"100%"}
                     name="endDate"
@@ -302,7 +324,7 @@ function DistributorColletcionArchive(props) {
                         }
                       }
                     }}
-                  />
+                  /> */}
                 </div>
                   <div
                    style={{

@@ -137,7 +137,7 @@ function handleSetCurrentCandidateId(candidateId) {
   
 </Select> 
             </div> */}
-             
+              <div class=" h-h72 overflow-auto overflow-x-auto">
               <CardWrapper>      
               {props.candidateByUserId.map((item) => {
                 console.log("found",item.skillList);
@@ -350,7 +350,7 @@ function handleSetCurrentCandidateId(candidateId) {
                  )  
             })}
               </CardWrapper>
-
+              </div>
               
               <AddCandidateDrawerModal
               candidate={props.candidate}

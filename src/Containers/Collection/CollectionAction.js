@@ -242,7 +242,11 @@ export const linkDistributorPaymentByFinance = (
     type: types.LINK_DISTRIBUTOR_PAYMENT_BY_FINANCE_REQUEST,
   });
   axios
-    .put(`${base_url2}/order/payment/${paymentId}/${userId}`, data)
+    .put(`${base_url2}/orderPayment/payment/${paymentId}/${userId}`, data,{
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
     .then((res) => {
       dispatch({
         type: types.LINK_DISTRIBUTOR_PAYMENT_BY_FINANCE_SUCCESS,
@@ -407,7 +411,12 @@ export const getAllDistributorsList = (userId) => (dispatch) => {
     type: types.GET_ALL_DISTRIBUTORS_LIST_REQUEST,
   });
   axios
-    .get(`${base_url2}/distributor/all-distributors`,)
+    .get(`${base_url2}/distributor/all-distributors`,
+    {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
     .then((res) => {
       console.log(res);
       dispatch({

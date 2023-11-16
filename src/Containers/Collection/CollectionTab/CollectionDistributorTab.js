@@ -155,7 +155,7 @@ function CollectionDistributorTab(props) {
             <Suspense fallback={"Loading ..."}>
             
               <DistributorColletcionArchive
-                rowSelectionForDistributor={rowSelectionForDistributor}
+                // rowSelectionForDistributor={rowSelectionForDistributor}
                 handleClearReturnCheck={handleClearReturnCheck}
               />
             </Suspense>
