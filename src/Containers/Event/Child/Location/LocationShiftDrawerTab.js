@@ -87,7 +87,7 @@ class LocationShiftDrawerTab extends Component {
             >
               <Suspense fallback={"Loading ..."}>
                 {" "}
-                <ALoctionTable/>
+                <ALoctionTable storedLoc={storedLoc}/>
               </Suspense>
             </TabPane>
           </StyledTabs>

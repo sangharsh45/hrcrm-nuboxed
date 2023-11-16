@@ -37,7 +37,6 @@ import {
   getAllRecruitmentDetailsByOppId,
   LinkClosedOpportunity,
   getOpportunitySKill,
-  StatusRecruit,
   lostStatusRecruit,
   LinkStageOpportunity,
   getOpportunityForecast,
@@ -49,6 +48,7 @@ import {
   emptyDeals,
   handleDealsNotesDrawerModal,
   LinkStageDeal,
+  sendToWon,
 } from "../../DealAction";
 import AddDealsNotesDrawerModal from "../AddDealsNotesDrawerModal";
 import DealSelectStages from "./DealSelectStages";
@@ -309,8 +309,8 @@ function DealCardList(props) {
                               size={140}
                               style={{ fontSize: "1rem" }}
                               onClick={() =>
-                                props.StatusRecruit(
-                                  item.opportunityId,
+                                props.sendToWon(
+                                  item.invOpportunityId,
 
                                   {
                                     wonInd: true,
@@ -504,7 +504,7 @@ const mapDispatchToProps = (dispatch) =>
       getAllRecruitmentPositionFilledByOppId,
       getAllRecruitmentDetailsByOppId,
       LinkClosedOpportunity,
-      StatusRecruit,
+      sendToWon,
       lostStatusRecruit,
       LinkStageOpportunity,
       emptyDeals,

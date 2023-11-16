@@ -12,10 +12,7 @@ const LocationShiftDrawer = (props) => {
   return (
     <>
       <StyledDrawer
-        title={<FormattedMessage
-          id="app.locationShift"
-          defaultMessage="Location Shift"
-        />}
+        title={`${storedLoc.locationName}`}
         width={drawerWidth}
         visible={locShiftDrawer}
         destroyOnClose

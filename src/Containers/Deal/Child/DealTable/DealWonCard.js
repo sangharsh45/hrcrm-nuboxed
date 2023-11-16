@@ -17,6 +17,9 @@ import NoteAltIcon from "@mui/icons-material/NoteAlt";
 import OpenInBrowserIcon from "@mui/icons-material/OpenInBrowser";
 import DeleteIcon from "@mui/icons-material/Delete";
 import UpdateDealModal from "../UpdateDeal/UpdateDealModal";
+import ReactCountryFlag from 'react-country-flag';
+import LocationOnIcon from '@mui/icons-material/LocationOn';
+import ExploreIcon from "@mui/icons-material/Explore";
 import { StyledTable, StyledPopconfirm } from "../../../../Components/UI/Antd";
 import {
   MultiAvatar,
@@ -38,10 +41,10 @@ import {
          getAllRecruitmentPositionFilledByOppId,
          getAllRecruitmentDetailsByOppId,
          getOpportunitySKill,
-         getWonOpportunity,
          LinklostdOpportunity,
          deleteLostOpportunity,
 } from "../../../Opportunity/OpportunityAction";
+import {getWonDeals,handleUpdateDealModal,handleDealsNotesDrawerModal} from "../../DealAction";
 import AddDealsNotesDrawerModal from "../AddDealsNotesDrawerModal";
 import DealSelectStages from "./DealSelectStages"
 
@@ -55,13 +58,13 @@ function DealWonCard(props) {
      
     } 
     props.getAllSalesList();
-    props. getWonOpportunity(props.userId,page);
+    props. getWonDeals(props.userId,page);
     setPage(page + 1);
   }, []);
 
   const handleLoadMore = () => {
     setPage(page + 1);
-      props. getWonOpportunity(props.userId,page);    
+      props. getWonDeals(props.userId,page);    
   }
   const [currentItem, setCurrentItem] = useState("");
 
@@ -71,13 +74,14 @@ function DealWonCard(props) {
 
     const {
         user,
-        fetchingWonOpportunity,
+        fetchingWonDeals,
         handleUpdateDealModal,
         openupdateDealModal,
         deleteOpportunityData,
+        handleDealsNotesDrawerModal,
         history,
         fetchingDeal,
-     wonOpportunity,
+        wonDeals,
      
       } = props;
       return (    
@@ -87,26 +91,31 @@ function DealWonCard(props) {
         <OnlyWrapCard style={{backgroundColor:"#E3E8EE"}}>
       <div className=" flex justify-between w-[99%] p-2 bg-transparent font-bold sticky top-0 z-10">
         <div className=" md:w-[14rem]">Name</div>
-        <div className=" md:w-20"></div>
-        <div className=" md:w-32 ">Phone #</div>
-        <div className="md:w-32">Country</div>
-        <div className="md:w-56">Company</div>
-        <div className="md:w-20">Sector</div> 
-        <div className="md:w-24">Assigned to</div>
+        <div className=" md:w-20">Investor</div>
+        <div className=" md:w-32 ">Sponsor</div>
+        <div className="md:w-32">Start Date</div>
+        <div className="md:w-56">Proposal Amount</div>
+        <div className="md:w-20">Stages</div> 
+        <div className="md:w-24">Sales Rep</div>
         <div className="md:w-20">Owner</div>
-        <div className="md:w-20">Qualify</div>
+        <div className="md:w-20"></div>
         <div className="w-12">Action</div>
       </div>
       <InfiniteScroll
-         dataLength={wonOpportunity.length}
+         dataLength={wonDeals.length}
         next={handleLoadMore}
         hasMore={hasMore}
-        loader={fetchingWonOpportunity ?<h4 style={{ textAlign: 'center' }}>Loading...</h4>:null}
+        loader={fetchingWonDeals ?<h4 style={{ textAlign: 'center' }}>Loading...</h4>:null}
         height={"70vh"}
       >
-         {wonOpportunity.map((item) => {
+         {wonDeals.map((item) => {
                  
-                 var findProbability = 0;
+                 var findProbability = item.probability;
+                 item.stageList.forEach((element) => {
+                   if (element.oppStage === item.oppStage) {
+                     findProbability = element.probability;
+                   }
+                 });
                  return (
                     <div>
                     <div
@@ -116,152 +125,304 @@ function DealWonCard(props) {
                       // }}
                     >
                       <div class="flex ">
-                        <div className=" flex font-medium flex-col w-[14rem]   max-sm:w-full">
-                          <div className="flex max-sm:w-full ">
-                            <div>
-                              <SubTitle>
-                              <MultiAvatar
-                      primaryTitle={item.opportunityName}
-                      imageId={item.imageId}
-                      // imageURL={imageURL}
-                      imgWidth={"1.8rem"}
-                      imgHeight={"1.8rem"}
-                    />
-                              </SubTitle>
-                            </div>
-                            <div class="w-[4%]"></div>
-      
-                            <div class="max-sm:w-full md:flex items-center">
-                              <Tooltip>
-                                <div class="max-sm:w-full justify-between flex md:flex-col">
-                                  {/* <h4 class=" text-sm text-cardBody  font-poppins max-sm:hidden">
-                                    Name
-                                  </h4> */}
-                                  <h4 class="text-sm text-cardBody font-semibold  font-poppins cursor-pointer">
-                                  <Link
+                      <div className=" flex font-medium  md:w-[13rem] max-sm:flex-row w-full ">
+                                <div>
+<SubTitle>
+            <MultiAvatar
+              primaryTitle={item.opportunityName}
+              imageId={item.imageId}
+              // imageURL={imageURL}
+              imgWidth={"1.8rem"}
+              imgHeight={"1.8rem"}
+            />
+          </SubTitle>
+</div>
+                                   <div class="w-[4%]">
+
+                                   </div>
+                                   
+                                        <Tooltip>
+                                        <div class=" flex max-sm:w-full  flex-row md:flex-col">
+                                            {/* <h4 class=" text-xs text-cardBody font-poppins max-sm:hidden">
+                                            Name
+                                            </h4> */}
+                                            <h4 class=" text-sm text-blue-500 text-cardBody font-poppins font-semibold cursor-pointer">
+                                                
+                                            <Link
                         toUrl={`dealDetails/${item.invOpportunityId}`}
                         title={`${item.opportunityName}`}
                       >
                         {item.opportunityName}
-                      </Link>
-                                    {/* &nbsp;&nbsp;
-                                    {date === currentdate ? (
-                                      <span class="text-xs"
-                                        style={{
-                                          color: "tomato",
-                                          fontWeight: "bold",
-                                        }}
-                                      >
-                                        New
-                                      </span>
-                                    ) : null} */}
-                                  </h4>
+                      </Link>&nbsp;&nbsp;
+        {/* {date === currentdate ? (
+          <span
+            style={{
+              color: "tomato",
+              fontWeight: "bold",
+            }}
+          >
+            New
+          </span>
+        ) : null} */}
+       
+                                            </h4>
+</div>
+                                        </Tooltip>
+                              
                                 </div>
-                              </Tooltip>
-                            </div>
-                          </div>
-                          <div className=" flex font-medium flex-col  md:w-32 max-sm:flex-row w-full max-sm:justify-between ">
-                          
-                          <h4 class=" text-xs text-cardBody font-poppins">
-                          {moment(item.startDate).format("ll")}
-                          </h4>
-                        </div>
-                        <div className=" flex font-medium flex-col  md:w-32 max-sm:flex-row w-full max-sm:justify-between ">
-                          
-                        <CurrencySymbol currencyType={item.currency} />
+
+                                <div className=" flex font-medium flex-col  md:w-44 max-sm:flex-row w-full max-sm:justify-between ">
+                           
+                                    {/* <h4 class=" text-xs text-cardBody font-poppins max-sm:hidden"> Sector </h4> */}
+                                    <h4 class=" text-sm text-cardBody font-poppins">   
+                                    
+                        {item.investor}
+                    
+                                    </h4>
+                                </div>
+                               
+                                <div className=" flex font-medium flex-col md:w-44 max-sm:flex-row w-full max-sm:justify-between ">
+                                  
+
+                                    {/* <h4 class=" text-xs text-cardBody font-poppins max-sm:hidden">Country</h4> */}
+                                    <h4 class=" text-sm text-cardBody font-poppins">
+                                    <SubTitle>
+            {item.contactName === null ? "None" :
+              <MultiAvatar2
+                primaryTitle={item.contactName}
+                imageId={item.imageId}
+                 imageURL={item.imageURL}
+                imgWidth={"1.8em"}
+                imgHeight={"1.8em"}
+              />
+            }
+            </SubTitle>
+                                    </h4>
+                                </div>
+                                </div>
+                                <div class="flex">
+                                <div className=" flex font-medium flex-col md:w-36 max-sm:flex-row w-full max-sm:justify-between ">
+                                    {/* <h4 class=" text-xs text-cardBody font-poppins max-sm:hidden"># Deals</h4> */}
+
+                                    <div class=" text-sm justify-center text-cardBody font-poppins">
+                                    {moment(item.startDate).format("ll")}
+                                    </div>
+                                </div>
+                             
+                                <div className=" flex font-medium flex-col md:w-36 max-sm:flex-row w-full max-sm:justify-between ">
+                                    {/* <h4 class=" text-xs text-cardBody font-poppins max-sm:hidden">Pipeline Value</h4> */}
+
+                                    <div class=" text-sm text-cardBody font-poppins text-center">
+                                    <CurrencySymbol currencyType={item.currency} />
             &nbsp;
             {item.proposalAmount}
-                        </div>
-                        <div className=" flex font-medium flex-col  md:w-32 max-sm:flex-row w-full max-sm:justify-between ">
-                        <div>
-                    <span>
-                      <Dropdown
-                        overlay={
-                          <div>
-                            <Menu mode="horizontal">
-                              <Menu.Item
-                                style={{
-                                  paddingLeft: 5,
-                                  paddingRight: 5,
-                                  backgroundColor: "#F5F5F5",
-                                }}
-                              >
-                                <DealSelectStages
-                                  rec={item}
-                                  oppStage={item.oppStage}
-                                  // recruitOwner={item.recruitOwner}
-                                  // candidateName={item.candidateName}
-                                  // approveInd={item.approveInd}
-                                  // rejectInd={item.rejectInd}
-                                  stageClick={(investorOppStagesId) => {
-                                    props.LinkStageDeal({
-                                      invOpportunityId: item.invOpportunityId,
 
-                                      invOpportunityStagesId:
-                                        investorOppStagesId,
-                                    });
-                                  }}
-                                />{" "}
-                              </Menu.Item>
-                            </Menu>
-                          </div>
-                        }
-                        trigger={["click"]}
-                      >
-                        <Tooltip title={item.oppStage}>
-                          {" "}
-                          <Progress
-                            type="circle"
-                            style={{ cursor: "pointer", color: "red" }}
-                            percent={findProbability}
-                            //disable={true}
-                            width={30}
-                            strokeColor={"#005075"}
+                                    </div>
+                                </div>
+                                <div className=" flex font-medium flex-col md:w-36 max-sm:flex-row w-full max-sm:justify-between ">
+                                    {/* <h4 class=" text-xs text-cardBody font-poppins max-sm:hidden">Pipeline Value</h4> */}
+
+                                    <div class=" text-sm text-cardBody font-poppins text-center">
+                                    <Dropdown
+              overlay={
+                <div>
+                  <Menu mode="horizontal">
+                    <Menu.Item
+                      style={{
+                        paddingLeft: 5,
+                        paddingRight: 5,
+                        backgroundColor: "#F5F5F5",
+                      }}
+                    >
+                      
+                    </Menu.Item>
+                  </Menu>
+                </div>
+              }
+              trigger={["click"]}
+            >
+              <Tooltip title={item.stageName}>
+                {" "}
+                <Progress
+                  type="circle"
+                  style={{ cursor: "pointer", color: "red",fontSize:"0.8rem" }}
+                  percent={findProbability}
+                  width={30}
+                  strokeColor={"#005075"}
+                />
+              </Tooltip>
+            </Dropdown>
+
+                                    </div>
+                                </div>
+                                <div className=" flex font-medium flex-col md:w-32 max-sm:flex-row w-full max-sm:justify-between ">
+                                    {/* <h4 class=" text-xs text-cardBody font-poppins max-sm:hidden">Assigned to</h4> */}
+
+                                    <div class=" text-sm text-cardBody font-poppins">
+                                    
+                                    <span>
+                                    <MultiAvatar2
+              primaryTitle={item.assignedTo}
+              imgWidth={"1.8em"}
+              imgHeight={"1.8em"}
+            />
+            </span>
+             
+                                    </div>
+                                </div>
+                                <div className=" flex font-medium flex-col md:w-20 max-sm:flex-row w-full mb-1 max-sm:justify-between ">
+                       
+                       {/* <h4 class=" text-xs text-cardBody font-poppins max-sm:hidden">Owner</h4> */}
+
+              <Tooltip title={item.ownerName}>
+          <span>
+            <MultiAvatar2
+              primaryTitle={item.ownerName}
+              imageId={item.ownerImageId}
+                imageURL={item.imageURL}
+                imgWidth={"1.8rem"}
+                imgHeight={"1.8rem"}
+              />
+            </span>
+            </Tooltip>
+                   </div>
+                   </div>
+                  
+                   <div class="flex flex-col w-[6%] max-sm:flex-row max-sm:w-[10%]">
+                    <div>
+                    <Tooltip title='Click to Open'><span
+          onClick={() => {
+           props.LinkClosedOpportunity(
+             item.opportunityId,
+             {
+               closeInd:false,
+             }
+                  
+           );         
+         }}         
+       
+         >
+          <LockIcon
+                style={{
+                  fontSize: "0.8rem",
+                  cursor: "pointer",
+                }}
+              />
+            </span>
+     </Tooltip> 
+                    </div>
+                    <div>
+                    <Tooltip
+                        placement="right"
+                        title={
+                          <FormattedMessage
+                            id="app.notes"
+                            defaultMessage="Notes"
                           />
-                        </Tooltip>
-                      </Dropdown>
-                    </span>
-                  </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="flex md:items-center ">
-                        <div className=" flex font-medium flex-col md:w-32 max-sm:flex-row w-full max-sm:justify-between ">
-                          {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden">
-                            Assigned to
-                          </h4> */}
-      
-                          <div class=" text-xs text-cardBody font-poppins">
-                            
-                          </div>
-                        </div>
-                        <div className=" flex font-medium flex-col md:w-20  max-sm:flex-row w-full max-sm:justify-between">
-                          {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden">
-                            Owner
-                          </h4> */}
-      
-                          <span>
-                           
-                          </span>
-                        </div>
-                        <div className=" flex font-medium flex-col md:w-[6rem] max-sm:flex-row w-full max-sm:justify-between ">
-                          {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden">
-                            Qualify
-                          </h4> */}
-      
-                          <div class=" text-xs text-cardBody font-poppins"></div>
-                          <div>
-                          
-                          </div>
-                        </div>
-                        <div class="flex flex-col w-[6%] max-sm:flex-row max-sm:w-[10%]">
-                        </div>
-                        <div class="w-[2%]"></div>
-                      </div>
+                        }
+                      >
+                        <span
+                          onClick={() => {
+                            props.handleDealsNotesDrawerModal(true);
+                            handleSetCurrentItem(item);
+                          }}
+                        >
+                          <NoteAltIcon
+                            style={{
+                              color: "green",
+                              cursor: "pointer",
+                              fontSize: "1rem",
+                            }}
+                          />
+                        </span>
+                      </Tooltip>
                     </div>
                   </div>
-                 );
-              })}
+                  <div class="flex flex-col w-[6%] max-sm:flex-row max-sm:w-[10%]">
+                   
+                      <div>
+                         <Tooltip
+                        placement="right"
+                        title={
+                          <FormattedMessage
+                            id="app.edit"
+                            defaultMessage="Edit"
+                          />
+                        }
+                      >
+                        {user.imInd === true && user.dealUpdateInd === true && (
+                          <span
+                            style={{ cursor: "pointer", color: "blue" }}
+                            onClick={() => {
+                              handleUpdateDealModal(true);
+                              handleSetCurrentItem(item);
+                            }}
+                          >
+                            <BorderColorIcon
+                              style={{ color: "grey", fontSize: "1rem" }}
+                            />
+                          </span>
+                        )}
+                      </Tooltip>
+                      </div>
+                    
+                    
+                      <div>
+                      <StyledPopconfirm
+                        title="Do you want to delete?"
+                        onConfirm={() =>
+                          deleteOpportunityData(item.opportunityId)
+                        }
+                      >
+                        {user.imInd === true && user.dealDeleteInd === true && (
+                        
+                          <DeleteOutlined
+                            type="delete"
+                            style={{
+                              cursor: "pointer",
+                              color: "red",
+                              fontSize: "1rem",
+                            }}
+                          />
+                          )}
+                          </StyledPopconfirm>
+                      </div>
+             
+                    <div></div>
+                  </div>   
+                                <div class="flex flex-col w-[6%] max-sm:flex-row max-sm:w-[10%]">
+                   <div>
+                   <span
+         
+         style={{ cursor: "pointer" }}
+         onClick={() => {
+            //  props.getAllRecruitmentByOppId(item.opportunityId);
+            //  props.getAllRecruitmentPositionByOppId(item.opportunityId);
+            //  props.getAllRecruitmentAvgTimeByOppId(item.opportunityId);
+            //  props.getAllRecruitmentPositionFilledByOppId(
+            //    item.opportunityId
+            //  );
+            //  props.getAllRecruitmentDetailsByOppId(item.opportunityId);
+            //  props.handleOpportunityDrawerModal(true);
+            //  props.getOpportunitySKill(item.oppInnitiative);
+            //  handleSetCurrentOpportunityId(item.opportunityName);
+           }}
+         >
+           {user.pulseAccessInd === true && (
+             <MonitorHeartIcon
+               style={{ fontSize: "0.8rem", color: "#df9697" }}
+             />
+           )}
+         </span>
+                        </div>
+            </div>
+                      
+                            </div>
+                        </div>
+
+
+                    )
+                })}
       </InfiniteScroll>
 
       </OnlyWrapCard>
@@ -282,7 +443,7 @@ function DealWonCard(props) {
 }
 
 
-const mapStateToProps = ({ auth, account, opportunity }) => ({
+const mapStateToProps = ({ auth, deal, opportunity }) => ({
   userId: auth.userDetails.userId,
   user: auth.userDetails,
   role: auth.userDetails.role,
@@ -307,7 +468,11 @@ const mapStateToProps = ({ auth, account, opportunity }) => ({
     opportunity.allRecruitmentPositionFilledByOppId,
     allRecruitmentByOppId: opportunity.allRecruitmentByOppId,
     allRecruitmentDetailsByOppId:opportunity.allRecruitmentDetailsByOppId,
-    wonOpportunity:opportunity.wonOpportunity
+
+    fetchingWonDeals:deal.fetchingWonDeals,
+    wonDeals:deal.wonDeals,
+    openupdateDealModal: deal.openupdateDealModal,
+    addDrawerDealsNotesModal: deal.addDrawerDealsNotesModal,
   
 });
 const mapDispatchToProps = (dispatch) =>
@@ -326,9 +491,11 @@ const mapDispatchToProps = (dispatch) =>
           getAllRecruitmentAvgTimeByOppId,
          getAllRecruitmentPositionFilledByOppId,
          getAllRecruitmentDetailsByOppId,
-         getWonOpportunity,
+         getWonDeals,
          LinklostdOpportunity,
          deleteLostOpportunity,
+         handleUpdateDealModal,
+         handleDealsNotesDrawerModal
     },
     dispatch
   );

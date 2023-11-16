@@ -199,12 +199,12 @@ export const setLocationViewType = (viewType) => (dispatch) => {
         //cb && cb("error");
       });
   };
-  export const getAlLocshift = () => (dispatch) => {
+  export const getAlLocshift = (locationDetailsId) => (dispatch) => {
     dispatch({
       type: types.GET_ALLOCTION_SHIFT_REQUEST,
     });
     axios
-      .get(`${base_url2}/shift/all-shift`,
+      .get(`${base_url2}/employee/user-list/${locationDetailsId}`,
       {
         headers: {
           Authorization: "Bearer " + sessionStorage.getItem("token") || "",

@@ -7,14 +7,12 @@ import { FormattedMessage } from "react-intl";
 import { Formik, Form, Field, FieldArray, FastField } from "formik";
 import * as Yup from "yup";
 import {getAllEmployeelist} from "../InvestorAction"
-// import { getAllCustomerEmployeelist } from "../../Employees/EmployeeAction";
 import { HeaderLabel} from "../../../Components/UI/Elements";
 import { Spacer } from "../../../Components/UI/Elements";
 import SearchSelect from "../../../Components/Forms/Formik/SearchSelect";
 import AddressFieldArray from "../../../Components/Forms/Formik/AddressFieldArray";
 import {AddInvestor} from "../InvestorAction";
 import {setClearbitData} from "../../Customer/CustomerAction";
-// import { getAllSalesList } from "../../Opportunity/OpportunityAction"
 import { Listbox} from '@headlessui/react'
 import { TextareaComponent } from "../../../Components/Forms/Formik/TextareaComponent";
 import { InputComponent } from "../../../Components/Forms/Formik/InputComponent";
@@ -47,7 +45,6 @@ function InvesterForm(props) {
     );
   };
   useEffect(() => {
-    // props.getAllCustomerEmployeelist();
     props.getSectors();
      props.getAllEmployeelist();
   }, []);
@@ -56,18 +53,11 @@ function InvesterForm(props) {
       accounts,
       user,
       userId,
-      // user: { userId, firstName },
-      isEditing,
-      prefillAccount,
       addingInvestor,
       AddInvestor,
       clearbit,
-      // setClearbitData,
     } = props;
    
-    function classNames(...classes) {
-      return classes.filter(Boolean).join(' ')
-    }
     const sectorOption = props.sectors.map((item) => {
       return {
         label: item.sectorName || "",
@@ -80,12 +70,8 @@ function InvesterForm(props) {
     return (
       <>
         <Formik
-          // enableReinitialize
           initialValues={{
-            // sectorId:"",
-            // sectorName:"",
             partnerName: "",
-            // sectorDescription:"",
             name: "",
             url: "",
             gst:"",
@@ -121,7 +107,6 @@ function InvesterForm(props) {
             AddInvestor(
               {
                 ...values,
-                name: "",
                 category: checked ? "Both" : whiteblue ? "White" : "Blue",
                 assignedTo: selectedOption ? selectedOption.employeeId:userId,
               },
@@ -169,7 +154,6 @@ function InvesterForm(props) {
                   </div>
                 <div class="mt-[0.7rem]">
                   <Field
-                    isRequired
                     name="name"
                     type="text"
                     //label="Name"
