@@ -254,10 +254,10 @@ class AllDistributorList extends Component {
                                     {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden">Pipeline Value</h4> */}
 
                                     <div class=" text-xs text-cardBody font-poppins text-center">
-                                    { `${item.addresses[0].address1 || ""} ${item.addresses[0]
+                                    {/* { `${item.addresses[0].address1 || ""} ${item.addresses[0]
                                       .address2 || ""} ${item.addresses[0].street || ""} 
                                           ${item.addresses[0].city || ""},
-                                              `}
+                                              `} */}
 
                                     </div>
                                 </div>
@@ -266,11 +266,11 @@ class AllDistributorList extends Component {
                                     {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden">Weighted Value</h4> */}
 
                                     <div class=" text-xs text-cardBody font-poppins text-center">
-                                   {`${(item.addresses &&
+                                   {/* {`${(item.addresses &&
                                     item.addresses.length &&
                                     item.addresses[0].city) ||
                                     ""} 
-                                          `} 
+                                          `}  */}
 
                                     </div>
                                 </div>

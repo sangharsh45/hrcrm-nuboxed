@@ -961,7 +961,7 @@ const onCheckAllTeamsChange = (e) => {
           {props.fetchingDepartmentAccess ? (
             <BundleLoader />
           ) : (
-            <TabsWrapper style={{height:"90rem"}}>
+            <TabsWrapper style={{height:"95rem"}}>
  
 
 <h1 class=" text-clr font-bold">HR</h1>
@@ -1366,7 +1366,7 @@ const onCheckAllTeamsChange = (e) => {
              : null } 
 
 
-{/* {props.departmentData.accountInd === true ?  */}
+ {props.departmentData.accountInd === true ?  
     <div>     
             <h1 class=" text-clr font-bold">Accounting</h1>
             <Spacer />
@@ -1410,7 +1410,7 @@ const onCheckAllTeamsChange = (e) => {
             
               <Spacer />
               </div> 
-                  {/* : null }  */}
+                  : null }  
 
 {props.departmentData.recruitOppsInd === true ? 
     <div>     
@@ -1430,7 +1430,14 @@ const onCheckAllTeamsChange = (e) => {
                 </div>
                 <Spacer />
                    
-                 
+                <div >
+                  <h1 class="text-sm">Talent</h1>
+                  <Checkbox indeterminate={indeterminateTalent} onChange={onCheckAllTalentChange} checked={checkAllTalent}>
+                  <label class="text-xs">  Check all  </label>
+                  </Checkbox>
+                  <Divider />
+                  <CheckboxGroup options={plainOptions} value={checkedTalentList} onChange={onTalentChange} />
+                </div>
             
 
 

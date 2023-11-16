@@ -327,3 +327,4 @@ function NoDataComponent(props) {
     </div>
   );
 }
+

@@ -84,7 +84,7 @@ getLocationNameOption(filterOptionKey, filterOptionValue) {
   }
   handleDeptChange = (event) => {
     const selectedDept = event.target.value;
-    const filteredRoles = this.props.roles.filter((item) => item.departmentName === selectedDept);
+    const filteredRoles = this.props.roles.filter((item) => item.departmentId === selectedDept);
     this.setState({ selectedDept, role: filteredRoles });
   };
   handleRoleChange = (event) => {
@@ -187,8 +187,8 @@ getLocationNameOption(filterOptionKey, filterOptionValue) {
         designationTypeId: setEditingEmployee.designationTypeId || "",
         // departmentId: setEditingEmployee.departmentId || "",
         // roleType: setEditingEmployee.roleType || "",
-        department:this.state.selectedDept,
-        role:this.state.selectedRole,
+        departmentId:this.state.selectedDept,
+        roleType:this.state.selectedRole,
         linkedinPublicUrl: setEditingEmployee.linkedinPublicUrl || "",
         label:  setEditingEmployee.label || "",
 
@@ -221,8 +221,8 @@ getLocationNameOption(filterOptionKey, filterOptionValue) {
             ...values,
             location:this.state.selectedLocation,
             workplace:this.state.selectedCountry,
-            department:this.state.selectedDept,
-            role:this.state.selectedRole,
+            departmentId:this.state.selectedDept,
+            roleType:this.state.selectedRole,
             job_type: this.state.active ? "Full Time" : "Part Time",
             type: this.state.typeInd ? "true" : "false",
             // job_type: this.state.active,
@@ -529,7 +529,7 @@ getLocationNameOption(filterOptionKey, filterOptionValue) {
                       onChange={this.handleDeptChange}>
           <option value="">Select Department</option>
           {this.props.departments.map((item, index) => (
-            <option key={index} value={item.departmentName}>
+            <option key={index} value={item.departmentId}>
               {item.departmentName}
             </option>
           ))}

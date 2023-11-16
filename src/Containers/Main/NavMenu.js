@@ -498,6 +498,19 @@ function NavMenu(props) {
               </span>
             </Link>
           </Menu.Item>
+          {user.requirementAccessInd === true && user.recruitOppsInd === true &&  (
+         <Menu.Item key="/project" style={{ height: "27px", paddingLeft: "1rem" }}>
+              <Link to="/project">
+                <LightbulbIcon
+                  style={{ fontSize: "large" }}
+                />
+                <span class="text-white text-ls ml-1">
+                
+                  {translatedMenuItems[15]}
+                </span>
+              </Link>
+            </Menu.Item> 
+ )}
           <hr/>
         {/* )} */}
         {/*Demand*/}
@@ -536,19 +549,7 @@ function NavMenu(props) {
           </Menu.Item>)}
 
         {/*Publish*/}
-
-        {/* <Menu.Item key="/project" style={{height:"27px"}}>
-              <Link to="/project">
-                <LightbulbIcon
-                  style={{ fontSize: "large" }}
-                />
-                <span class="text-white text-ls ml-3">
-                
-                  {translatedMenuItems[15]}
-                </span>
-              </Link>
-            </Menu.Item> */}
-
+ 
         {/* {user.department === "Management" && ( */}
         {/* <Menu.Item key="/billing" style={{height:"27px"}}>
             <Link to="/Billing">

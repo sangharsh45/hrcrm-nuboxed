@@ -635,35 +635,43 @@ class RecruitmentTable extends Component {
                     : null,
               },
             },
-
             children: (
               <>
-                <Avatar.Group
-                  maxCount={7}
-                  maxStyle={{ color: "#f56a00", backgroundColor: "#fde3cf" }}
-                >
-                  {item.recruiterList &&
-                    item.recruiterList.map((item, i) => {
-                      const recruit = item.fullName
-                        .slice(0, 2)
-                        .split("")[0]
-                        .toUpperCase();
-                      console.log("datas", recruit);
-                      // console.log("datas", data);
-                      return (
-                        <Tooltip title={item.fullName}>
-                          <Avatar style={{ backgroundColor: "#f56a00" }}>
-                            {recruit}
-                          </Avatar>
-                        </Tooltip>
-                      );
-                    })}
-                </Avatar.Group>
+              
+             <Avatar.Group
+  maxCount={7}
+  maxStyle={{ color: "#f56a00", backgroundColor: "#fde3cf" }}
+>
+  {item.recruiterList &&
+    item.recruiterList.map((recruiter, i) => {
+     
+      const recruit =
+        recruiter.fullName &&
+        recruiter.fullName
+        .slice(0, 2)
+        .toUpperCase();
+          // .slice(0, 2)
+          // // .split("")[0]
+          // .toUpperCase();
+
+      console.log("datas", recruit);
+
+      return (
+        <Tooltip title={recruiter.fullName}>
+          <Avatar style={{ backgroundColor: "#f56a00" }}>
+            {recruit}
+          </Avatar>
+        </Tooltip>
+      );
+    })}
+</Avatar.Group>
+
               </>
             ),
           };
         },
       },
+      
 
       {
         //title: "Start",
