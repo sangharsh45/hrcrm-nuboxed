@@ -9,21 +9,20 @@ import { addPickupDate } from "../../../InventoryAction";
 
 function PickUpForm(props) {
 
-
   return (
     <>
       <Formik
         initialValues={{
-          orderPhoneId: props.orderPhoneId,
+          orderId: props.orderPhoneId,
           dispatchReceivedInd: true,
-          dispatchReceivedDate: ""
+          dispatchReceivedDate: "",
         }}
         onSubmit={(values) => {
-          let newPickUpDate = moment(values.dispatchReceivedDate).format("YYYY-MM-DD");
+
           props.addPickupDate({
             ...values,
-            dispatchReceivedDate: `${newPickUpDate}T00:00:00Z`,
-          }, props.orderPhoneId,
+            contactPersonId: props.contactPersonId
+          },
             props.locationDetailsId);
         }}
       >
@@ -49,7 +48,11 @@ function PickUpForm(props) {
                 inlineLabel
               />
             </div>
-            <Button type="primary" htmlType="submit">
+            <Button
+              type="primary"
+              htmlType="submit"
+              loading={props.addingpickupdate}
+            >
               Submit
             </Button>
           </Form>
@@ -61,6 +64,8 @@ function PickUpForm(props) {
 const mapStateToProps = ({ inventory, auth }) => ({
   setEditingInventory: inventory.setEditingInventory,
   userId: auth.userDetails.userId,
+  addingpickupdate: inventory.addingpickupdate,
+  locationDetailsId: inventory.inventoryDetailById.locationDetailsId,
 });
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators({ addPickupDate }, dispatch);

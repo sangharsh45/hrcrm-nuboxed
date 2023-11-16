@@ -3,8 +3,6 @@ import { Switch } from "antd";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { handlePickupModal } from "../../../InventoryAction"
-
-import { InfoCircleOutlined } from "@ant-design/icons";
 import PickUpDateModal from "./PickUpDateModal";
 
 function DispatchValidationToggle(props) {
@@ -21,12 +19,14 @@ function DispatchValidationToggle(props) {
                 // onClick={props.handlePickupModal(true)}
                 /> */}
                 <Switch
-                    checked={checked}
+                    disabled={props.item.dispatchReceivedInd}
+                    checked={props.item.dispatchReceivedInd}
                     checkedChildren="Yes"
                     unCheckedChildren="No"
                     onChange={onChange} />
             </div>
             <PickUpDateModal
+                contactPersonId={props.item.contactPersonId}
                 orderPhoneId={props.orderPhoneId}
                 locationDetailsId={props.locationDetailsId}
                 handlePickupModal={props.handlePickupModal}

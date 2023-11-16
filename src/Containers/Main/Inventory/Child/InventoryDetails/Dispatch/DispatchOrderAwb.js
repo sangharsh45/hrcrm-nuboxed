@@ -1,11 +1,218 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import AddressFieldArray1 from '../../../../../../Components/Forms/Formik/AddressFieldArray1';
+import { Formik, Form, Field, FieldArray } from 'formik';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import { DatePicker } from "../../../../../../Components/Forms/Formik/DatePicker";
+import { Spacer, StyledLabel } from '../../../../../../Components/UI/Elements';
+import { FlexContainer } from '../../../../../../Components/UI/Layout';
+import { InputComponent } from '../../../../../../Components/Forms/Formik/InputComponent';
+import moment from 'moment';
+import { Button } from 'antd';
+import { getAllShipperList } from "../../../../Shipper/ShipperAction"
+import { createAwbNo } from "../../../InventoryAction"
+import { SelectComponent } from '../../../../../../Components/Forms/Formik/SelectComponent';
+import AddressFieldArray2 from '../../../../../../Components/Forms/Formik/AddressFieldArray2';
 
-const DispatchOrderAwb = () => {
+const DispatchOrderAwb = (props) => {
+    console.log(props.rowData.unloadingAddresses)
+    const shipperOption = props.allShipper.map((item) => {
+        return {
+            label: item.shipperName,
+            value: item.shipperId
+        }
+    })
+    useEffect(() => {
+        props.getAllShipperList()
+    }, [])
     return (
-        <div>
-            form
-        </div>
-    )
-}
+        <Formik
+            initialValues={{
+                pickUp: "",
+                shipperId: "",
+                packages: "",
+                weight: "",
+                orderId: props.rowData.orderPhoneId,
+                unloadingAddressId: props.rowData.unloadingAddresses && props.rowData.unloadingAddresses[0].addressId || "",
+                pickUpAddressId: props.rowData.pickUpAddress && props.rowData.pickUpAddress[0].addressId || "",
+                pickUpAddress: [
+                    {
+                        address1: props.rowData.pickUpAddress && props.rowData.pickUpAddress[0].address1 || "",
+                        addressId: props.rowData.pickUpAddress && props.rowData.pickUpAddress[0].addressId || "",
+                        state: props.rowData.pickUpAddress && props.rowData.pickUpAddress[0].state || "",
+                        city: props.rowData.pickUpAddress && props.rowData.pickUpAddress[0].city || "",
+                        street: props.rowData.pickUpAddress && props.rowData.pickUpAddress[0].street || "",
+                        postalCode: props.rowData.pickUpAddress && props.rowData.pickUpAddress[0].postalCode || "",
+                        countryId: props.rowData.pickUpAddress && props.rowData.pickUpAddress[0].countryId || "",
+                        latitude: props.rowData.pickUpAddress && props.rowData.pickUpAddress[0].latitude || "",
+                        longitude: props.rowData.pickUpAddress && props.rowData.pickUpAddress[0].longitude || "",
+                        country: props.rowData.pickUpAddress && props.rowData.pickUpAddress[0].country || "",
+                    },
+                ],
+                loadingAddress: [
+                    {
+                        address1: props.rowData.unloadingAddresses && props.rowData.unloadingAddresses[0].address1 || "",
+                        addressId: props.rowData.unloadingAddresses && props.rowData.unloadingAddresses[0].addressId || "",
+                        state: props.rowData.unloadingAddresses && props.rowData.unloadingAddresses[0].state || "",
+                        city: props.rowData.unloadingAddresses && props.rowData.unloadingAddresses[0].city || "",
+                        street: props.rowData.unloadingAddresses && props.rowData.unloadingAddresses[0].street || "",
+                        postalCode: props.rowData.unloadingAddresses && props.rowData.unloadingAddresses[0].postalCode || "",
+                        countryId: props.rowData.unloadingAddresses && props.rowData.unloadingAddresses[0].countryId || "",
+                        latitude: props.rowData.unloadingAddresses && props.rowData.unloadingAddresses[0].latitude || "",
+                        longitude: props.rowData.unloadingAddresses && props.rowData.unloadingAddresses[0].longitude || "",
+                        country: props.rowData.unloadingAddresses && props.rowData.unloadingAddresses[0].country || "",
+                    },
+                ],
 
-export default DispatchOrderAwb
+            }}
+
+            // validationSchema={FormSchema}
+            onSubmit={(values, { resetForm }) => {
+
+                props.createAwbNo({
+                    ...values,
+                },
+                    props.locationDetailsId
+                )
+            }}
+        >
+            {({ values, handleChange }) => (
+                <Form>
+                    <div>
+                        <FlexContainer justifyContent="space-between">
+                            <div style={{ width: "47%" }}>
+                                <StyledLabel><h3> Pickup Address</h3></StyledLabel>
+                                <FieldArray
+                                    disabled
+                                    name="pickUpAddress"
+                                    render={(arrayHelpers) => (
+                                        <AddressFieldArray2
+                                            singleAddress
+                                            arrayHelpers={arrayHelpers}
+                                            values={values}
+                                        />
+                                    )}
+                                />
+                            </div>
+                            <div style={{ width: "47%" }}>
+                                <StyledLabel><h3> Delivery Address</h3></StyledLabel>
+                                <FieldArray
+                                    name="loadingAddress"
+                                    disabled
+                                    render={(arrayHelpers) => (
+                                        <AddressFieldArray1
+                                            singleAddress
+                                            arrayHelpers={arrayHelpers}
+                                            values={values}
+                                        />
+                                    )}
+                                />
+                            </div>
+                        </FlexContainer>
+                        <Spacer />
+                        <FlexContainer justifyContent="space-between">
+
+                            <div style={{ width: "47%" }}>
+                                <Field
+                                    label="Shipper"
+                                    name="shipperId"
+                                    placeholder="Value"
+                                    component={SelectComponent}
+                                    options={Array.isArray(shipperOption) ? shipperOption : []}
+                                    inlineLabel
+                                    width={"100%"}
+                                    isColumn
+                                />
+                            </div>
+                            <div style={{ width: "47%" }}>
+                                <Field
+                                    name="pickUp"
+                                    label="Available Date "
+                                    isColumn
+                                    inlineLabel
+                                    width={"100%"}
+                                    disabledDate={(currentDate) => {
+                                        const date = new Date()
+                                        if (
+                                            moment(currentDate).isBefore(moment(date).subtract(1, 'days'))
+                                        ) {
+                                            return true;
+                                        } else {
+                                            return false;
+                                        }
+
+                                    }}
+                                    component={DatePicker}
+                                    value={values.pickUp}
+
+                                />
+                            </div>
+                        </FlexContainer>
+                        <Spacer />
+                        <FlexContainer justifyContent="space-between">
+                            <div style={{ width: "47%" }}>
+
+                                <Field
+                                    width={"100%"}
+                                    name="packages"
+                                    label="Package"
+                                    isColumn
+                                    inlineLabel
+                                    component={InputComponent}
+                                />
+                            </div>
+                            <div style={{ width: "47%" }}>
+                                <Field
+                                    label="Weight"
+                                    name="weight"
+                                    component={InputComponent}
+                                    inlineLabel
+                                    width={"100%"}
+                                    isColumn
+                                />
+                            </div>
+
+
+                        </FlexContainer>
+                        <Spacer />
+                        <FlexContainer justifyContent="flex-end">
+
+                            <div style={{ width: "47%", margin: "67px 39px 17px -33px", display: "flex", justifyContent: "flex-end" }}>
+
+                                <Button
+                                    style={{
+                                        backgroundColor: "#3695cd",
+                                        color: "white",
+                                        fontSize: "15px",
+                                        padding: "0px 12px",
+                                    }
+                                    }
+                                    loading={props.addingReceivedUser}
+                                    htmlType="Submit"
+                                >Save</Button>
+                            </div>
+                        </FlexContainer>
+                    </div>
+
+                </Form>
+            )}
+        </Formik>
+    );
+}
+const mapStateToProps = ({ inventory, shipper }) => ({
+    addingReceivedUser: inventory.addingReceivedUser,
+    locationDetailsId: inventory.inventoryDetailById.locationDetailsId,
+    allShipper: shipper.allShipper
+});
+
+const mapDispatchToProps = (dispatch) =>
+    bindActionCreators(
+        {
+            createAwbNo,
+            getAllShipperList
+        },
+        dispatch
+    );
+
+export default connect(mapStateToProps, mapDispatchToProps)(DispatchOrderAwb);
+

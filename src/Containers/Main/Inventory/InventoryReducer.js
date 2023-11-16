@@ -11,6 +11,9 @@ const initialState = {
   fetchingInventoryListError: false,
   inventory: [],
 
+  addingpickupdate: false,
+  addingpickupdateError: false,
+
   fetchingPhoneListById: false,
   fetchingPhoneListByIdError: false,
   phoneListById: [],
@@ -343,14 +346,14 @@ export const inventoryReducer = (state = initialState, action) => {
       return {
         ...state,
         addingReceivedUser: false,
-        receivedModal: false,
+        addCreateAwb: false
       };
     case types.ADD_RECEIVED_FAILURE:
       return {
         ...state,
         addingReceivedUser: false,
         addingReceivedUserError: true,
-        receivedModal: false,
+        addCreateAwb: false,
       };
 
     //get received
@@ -648,19 +651,23 @@ export const inventoryReducer = (state = initialState, action) => {
 
     //pickupDate
     case types.ADD_PICKUP_DATE_REQUEST:
-      return { ...state };
+      return { ...state, addingpickupdate: true };
     case types.ADD_PICKUP_DATE_SUCCESS:
       return {
         ...state,
         allDispatchList: state.allDispatchList.map((item) =>
           item.dispatchId === action.payload.dispatchId ? action.payload : item
         ),
-        openPickupDateModal: false,
+        pickUpModal: false,
+        addingpickupdate: false,
+
       };
     case types.ADD_PICKUP_DATE_FAILURE:
       return {
         ...state,
-        openPickupDateModal: false,
+        pickUpModal: false,
+        addingpickupdate: false,
+        addingpickupdateError: true
       };
 
     //received delivery date
