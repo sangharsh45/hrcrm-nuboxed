@@ -61,13 +61,13 @@ export const setLeadsViewType = (viewType) => (dispatch) => {
       });
   };
  
-  export const getLeads = (userId) => (dispatch) => {
+  export const getLeads = (userId,pageNo,filter) => (dispatch) => {
  
     dispatch({
       type: types.GET_LEADS_REQUEST,
     });
     axios
-      .get(`${base_url}/leads/User/${userId}`, {
+      .get(`${base_url}/leads/User/${userId}/${pageNo}/${filter}`, {
         headers: {
           Authorization: "Bearer " + sessionStorage.getItem("token") || "",
         },

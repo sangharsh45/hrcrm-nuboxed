@@ -24,7 +24,8 @@ class PitchHeader extends Component {
             currentUser={currentUser}
             currentData={currentData}
             handleClear={handleClear}
-     
+            handleFilterChange={this.props.handleFilterChange}
+            filter={this.props.filter}
             handleChange={handleChange}
             handleCurrentData={handleCurrentData}
              

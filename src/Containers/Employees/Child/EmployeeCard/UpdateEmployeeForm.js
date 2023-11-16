@@ -5,7 +5,7 @@ import { FormattedMessage } from "react-intl";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Radio } from "antd";
-// import {getRoles} from "../../../Settings/Category/Role/RoleAction"
+ import {getRoles} from "../../../Settings/Category/Role/RoleAction"
 // import {getDesignations} from "../../../Settings/Designation/DesignationAction";
 // import {getDepartments} from "../../../Settings/Department/DepartmentAction";
  import { updateEmployee,getEmployeelist } from "../../EmployeeAction";
@@ -28,7 +28,10 @@ class UpdateEmployeeForm extends Component {
       active: false,
       checked: true,
       typeInd:false,
+      role:[],
+      selectedRole:"",
       selectedCountry: '',
+      selectedDept:"",
       locations: [],
       selectedLocation: "",
       workType: "employee",
@@ -40,9 +43,9 @@ class UpdateEmployeeForm extends Component {
   
 
   componentDidMount() {
-    // const { getCountries ,getRoles,getlocation,getEmployeelist} = this.props;
+   const { getCountries ,getRoles,getlocation,getEmployeelist} = this.props;
     // console.log();
-    // getRoles(this.props.organizationId);
+    getRoles(this.props.organizationId);
     // getCountries(getCountries);
     // getlocation(this.props.orgId);
     // getEmployeelist();
@@ -79,6 +82,15 @@ getLocationNameOption(filterOptionKey, filterOptionValue) {
   
     return locationOptions;
   }
+  handleDeptChange = (event) => {
+    const selectedDept = event.target.value;
+    const filteredRoles = this.props.roles.filter((item) => item.departmentName === selectedDept);
+    this.setState({ selectedDept, role: filteredRoles });
+  };
+  handleRoleChange = (event) => {
+    const selectedRole = event.target.value;
+    this.setState({ selectedRole });
+  };
 
   getRoleOptions(filterOptionKey, filterOptionValue) {
     const roleOptions =
@@ -173,8 +185,10 @@ getLocationNameOption(filterOptionKey, filterOptionValue) {
         country:  setEditingEmployee.country || "",
         workplace: setEditingEmployee.workplace || "",
         designationTypeId: setEditingEmployee.designationTypeId || "",
-        departmentId: setEditingEmployee.departmentId || "",
-        roleType: setEditingEmployee.roleType || "",
+        // departmentId: setEditingEmployee.departmentId || "",
+        // roleType: setEditingEmployee.roleType || "",
+        department:this.state.selectedDept,
+        role:this.state.selectedRole,
         linkedinPublicUrl: setEditingEmployee.linkedinPublicUrl || "",
         label:  setEditingEmployee.label || "",
 
@@ -207,6 +221,8 @@ getLocationNameOption(filterOptionKey, filterOptionValue) {
             ...values,
             location:this.state.selectedLocation,
             workplace:this.state.selectedCountry,
+            department:this.state.selectedDept,
+            role:this.state.selectedRole,
             job_type: this.state.active ? "Full Time" : "Part Time",
             type: this.state.typeInd ? "true" : "false",
             // job_type: this.state.active,
@@ -507,8 +523,18 @@ getLocationNameOption(filterOptionKey, filterOptionValue) {
                 <div class=" h-3/4 w-5/12 max-sm:w-wk ">
 
 <div class=" flex justify-between max-sm:flex-col" >
-                      <div class=" w-w48 max-sm:w-wk">
-                      <Field
+<div class=" w-w48 max-sm:w-wk">
+<select 
+                        style={{ border: "0.06em solid #aaa" }}
+                      onChange={this.handleDeptChange}>
+          <option value="">Select Department</option>
+          {this.props.departments.map((item, index) => (
+            <option key={index} value={item.departmentName}>
+              {item.departmentName}
+            </option>
+          ))}
+        </select>
+                      {/* <Field
   isRequired  // This makes the field mandatory
   name="departmentId"
   label={<FormattedMessage
@@ -521,7 +547,7 @@ getLocationNameOption(filterOptionKey, filterOptionValue) {
   selectType="departmentName"
   isColumn
   inlineLabel
-/>
+/> */}
                     </div>
                     <div class="w-w47.5 max-sm:w-wk">
                     <FastField
@@ -539,8 +565,21 @@ getLocationNameOption(filterOptionKey, filterOptionValue) {
                     />
                     </div>
                   </div>
+                  <select
+                 style={{ border: "0.06em solid #aaa" }}
+                      onChange={this.handleRoleChange}
+                    >
+          <option value="">Select Role</option>
+          {this.state.role.map((item, index) => (
+            <option key={index}
+            // disabled={!values.country_name}
+             value={item.roleTypeId}>
+              {item.roleType}
+            </option>
+          ))}
+        </select>
 
-<Field
+{/* <Field
                     name="roleType"
                     label={<FormattedMessage
                       id="app.role"
@@ -575,7 +614,7 @@ getLocationNameOption(filterOptionKey, filterOptionValue) {
                     // width={"100%"}
                     // isColumn
                     // selectType="roleType"
-                     />
+                     /> */}
                          <Spacer/>
                       <div class=" flex justify-between max-sm:flex-col" >
                       <div class=" w-w48 max-sm:w-wk">
@@ -781,8 +820,8 @@ const mapStateToProps = ({ auth,role,location, employee,designations,departments
         updateEmployee,
     //    getCountries,
     //    getDesignations,
-    //     getDepartments,
-    //     getRoles,
+        // getDepartments,
+        getRoles,
     //     getlocation,
     //     getEmployeelist,
     }, dispatch);

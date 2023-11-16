@@ -6,11 +6,13 @@ import TableViewIcon from '@mui/icons-material/TableView';
 import { AudioOutlined } from '@ant-design/icons';
 import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
 import PeopleIcon from '@mui/icons-material/People';
+import { StyledSelect } from "../../../Components/UI/Antd";
 import { Button, Input, Tooltip,Tag,Badge } from "antd";
 import { FormattedMessage } from "react-intl";
 import TocIcon from '@mui/icons-material/Toc';
 import {inputLeadsDataSearch,getLeadsRecords,getJunkedLeadsRecords} from "../LeadsAction";
 const { Search } = Input;
+const Option = StyledSelect.Option;
 
 const LeadsActionLeft = (props) => {
   const dummy = ["cloud", "azure", "fgfdg"];
@@ -139,6 +141,13 @@ const LeadsActionLeft = (props) => {
           <FormattedMessage id="app.clear" defaultMessage="Clear" />
           {/* Clear */}
         </Button>
+        <div class="w-[22%] mt-1">
+          <StyledSelect placeholder="Sort"  onChange={(e)  => props.handleFilterChange(e)}>
+           <Option value="CreationDate">Creation Date</Option> 
+            <Option value="ascending">A To Z</Option>
+            <Option value="descending">Z To A</Option>
+          </StyledSelect>
+        </div>
     </div>
   );
 };

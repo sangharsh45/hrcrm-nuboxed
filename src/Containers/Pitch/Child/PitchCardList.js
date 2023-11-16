@@ -30,15 +30,18 @@ import { Button, Tooltip } from "antd";
 import { FormattedMessage } from "react-intl";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
 import OpenASSimodal from "./OpenASSimodal";
+import InfiniteScroll from "react-infinite-scroll-component";
 import AddPitchNotesDrawerModal from "./AddPitchNotesDrawerModal";
 import { BundleLoader } from "../../../Components/Placeholder";
 
 const ButtonGroup = Button.Group;
 
 const PitchCardList = (props) => {
-
+  const [page, setPage] = useState(0);
+  const [hasMore, setHasMore] = useState(true);
   useEffect(() => {
-    props.getPitch(props.userId);
+    props.getPitch(props.userId,page,"creationdate");
+    setPage(page + 1);
     // props.getSectors();
     // props.getCountries();
   }, []);
@@ -49,6 +52,13 @@ const PitchCardList = (props) => {
   const handleRowData = (data) => {
     setrowData(data);
   };
+  const handleLoadMore = () => {
+    setPage(page + 1);
+    props.getPitch(props.currentUser?props.currentUser:props.userId,page,
+      props.filter?props.filter:"creationdate"
+
+      );
+}
   function handleSetCurrentLeadsId(item) {
     setCurrentLeadsId(item);
   }
@@ -73,6 +83,13 @@ const PitchCardList = (props) => {
         <div className="w-12">Action</div>
 
       </div>
+      <InfiniteScroll
+        dataLength={props.pitchData.length}
+        next={handleLoadMore}
+        hasMore={hasMore}
+        loader={fetchingPitch?<h4 style={{ textAlign: 'center' }}>Loading...</h4>:null}
+        height={"70vh"}
+      >
    {props.pitchData.map((item) => { 
  const currentdate = moment().format("DD/MM/YYYY");
  const date = moment(item.creationDate).format("DD/MM/YYYY");
@@ -441,6 +458,7 @@ onClick={()=>{
 
                     )
                 })}
+                  </InfiniteScroll>
       </OnlyWrapCard>
       <UpdateLPitchModal
         item={currentLeadsId}
