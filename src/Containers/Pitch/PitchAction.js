@@ -6,13 +6,13 @@ import { asses_url } from "../../Config/Auth";
 import { message } from "antd";
 import Swal from 'sweetalert2'
 
-export const getPitch = (userId) => (dispatch) => {
+export const getPitch = (userId,pageNo,filter) => (dispatch) => {
  
     dispatch({
       type: types.GET_PITCH_REQUEST,
     });
     axios
-      .get(`${base_url}/investorleads/user/${userId}`, {
+      .get(`${base_url}/investorleads/user/${userId}/${pageNo}/${filter}`, {
         headers: {
           Authorization: "Bearer " + sessionStorage.getItem("token") || "",
         },

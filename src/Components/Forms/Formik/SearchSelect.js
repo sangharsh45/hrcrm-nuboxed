@@ -810,7 +810,7 @@ class SearchSelect extends Component {
       // const customOption = ({ label, value }) => <h3>{`${label}----${value}`}</h3>
     }
     if (selectType === "designationType") {
-      debugger;
+      // debugger;
       options = designations
         // .sort((a, b) => (a.sourceName < b.sourceName ? -1 : 1))
         .sort((a, b) => {

@@ -3277,6 +3277,8 @@ export const addApprove = (data, subProcessName) => (dispatch) => {
       dispatch(getApproveData("Leave"))
       dispatch(getApproveData("Mileage"))
       dispatch(getApproveData("Expense"))
+      dispatch(getApproveData("ContactUser"))
+      dispatch(getApproveData("PhonePair"))
       dispatch({
         type: types.ADD_APPROVE_SUCCESS,
         payload: res.data,

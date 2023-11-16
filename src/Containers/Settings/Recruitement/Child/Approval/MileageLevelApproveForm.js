@@ -39,6 +39,7 @@ function MileageLevelApproveForm(props) {
       level: rows.map((row) => ({
         level: row.level,
         threshold: row.threshold,
+        roleTypeId: row.roleTypeId,
       })),
       approvalIndicator: props.approvalIndicator,
       approvalType: props.approvalType,
@@ -60,6 +61,17 @@ function MileageLevelApproveForm(props) {
       })
     );
   }
+  function handleChangeRoleValue(value, index) {
+    console.log(value)
+    setRows((prevRows) =>
+      prevRows.map((row, i) => {
+        if (i === index) {
+          return { ...row, roleTypeId: value };
+        }
+        return row;
+      })
+    );
+  }
 
   function handleChangeValue1(value, index) {
     setRows((prevRows) =>
@@ -71,16 +83,16 @@ function MileageLevelApproveForm(props) {
       })
     );
   }
-  function handleChangeRoleValue(value, index) {
-    setRows((prevRows) =>
-      prevRows.map((row, i) => {
-        if (i === index) {
-          return { ...row, threshold: value };
-        }
-        return row;
-      })
-    );
-  }
+  // function handleChangeRoleValue(value, index) {
+  //   setRows((prevRows) =>
+  //     prevRows.map((row, i) => {
+  //       if (i === index) {
+  //         return { ...row, threshold: value };
+  //       }
+  //       return row;
+  //     })
+  //   );
+  // }
 
   function handleAddRowClick() {
     const newRow = { level: "", threshold: "" };
@@ -97,7 +109,18 @@ function MileageLevelApproveForm(props) {
   //   return <BundleLoader />;
   // }
   if (isLoading) {
-    return <BundleLoader />;
+    // return <BundleLoader />;
+  }
+  function getRoleOptions(selectedDepartment) {
+    const filteredRoles = props.roles
+      .filter((role) => role.departmentName === selectedDepartment)
+      .filter((option) => option.probability !== 0)
+      .map((option) => ({
+        label: option.roleType,
+        value: option.roleTypeId,
+      }));
+
+    return filteredRoles;
   }
   const roleNameOption = props.roles.map((item) => {
     return {
@@ -134,17 +157,20 @@ function MileageLevelApproveForm(props) {
                 
                 </div>
                 <div style={{ width: "100%" }}>
-                     <Field
-                                                            name="roleTypeId"
-                                                             label="Role"
-                                                            options={Array.isArray(roleNameOption) ? roleNameOption : []}
-                                                            component={SelectComponent}
-                                                            // value={values.roleTypeId}
-                                                            placeholder
-                                                            isColumn
-                                                            inlineLabel
-                                                            style={{ flexBasis: "80%", marginTop: "0px", width: "100%" }}
-                                                        /> 
+                <Field
+                      name="roleTypeId"
+                      isRequired
+                      value={row.roleTypeId}
+                      isColumnWithoutNoCreate
+                      label="Role"
+                      onChange={(value) => handleChangeRoleValue(value, index)}
+                      component={SelectComponent}
+                      options={getRoleOptions(row.level)} 
+                      placeholder
+                      isColumn
+                      inlineLabel
+                      style={{ flexBasis: "80%", marginTop: "0px", width: "100%" }}
+                    /> 
                                                         </div>
                                                         </div>
                                                       

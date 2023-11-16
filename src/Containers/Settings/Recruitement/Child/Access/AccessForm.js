@@ -19,6 +19,7 @@ const userOptions = ['Access', 'Create', 'Update', 'Delete','Access Plus'];
  const refurbishCheckedList=['Workshop','Adminview','Adminassign'];
  const settingsCheckedList=['Access'];
  const accountingCheckedList=['Access'];
+ const collectionCheckedList=['Access','Approve'];
  const requirementCheckedList=['Access'];
  const basicCheckedList=['Access'];
  const repositoryCheckedList=['Create'];
@@ -865,12 +866,12 @@ const onCheckAllTeamsChange = (e) => {
                                 
                                   const onCollectionChange = (list) => {
                                     setCheckedCollectionList(list);
-                                    setIndeterminateCollection(!!list.length && list.length < accountingCheckedList.length);
-                                    setCheckAllCollection(list.length === accountingCheckedList.length);
+                                    setIndeterminateCollection(!!list.length && list.length < collectionCheckedList.length);
+                                    setCheckAllCollection(list.length === collectionCheckedList.length);
                                   };
                                 
                                   const onCheckAllCollectionChange = (e) => {
-                                    setCheckedCollectionList(e.target.checked ? accountingCheckedList : []);
+                                    setCheckedCollectionList(e.target.checked ? collectionCheckedList : []);
                                     setIndeterminateCollection(false);
                                     setCheckAllCollection(e.target.checked);
                                   };
@@ -1365,7 +1366,7 @@ const onCheckAllTeamsChange = (e) => {
              : null } 
 
 
-{props.departmentData.accountInd === true ? 
+{/* {props.departmentData.accountInd === true ?  */}
     <div>     
             <h1 class=" text-clr font-bold">Accounting</h1>
             <Spacer />
@@ -1389,7 +1390,7 @@ const onCheckAllTeamsChange = (e) => {
                   <label class="text-xs"> Check all</label>
                   </Checkbox>
                   <Divider />
-                  <CheckboxGroup options={accountingCheckedList} value={checkedCollectionList} onChange={onCollectionChange} />
+                  <CheckboxGroup options={collectionCheckedList} value={checkedCollectionList} onChange={onCollectionChange} />
 
                 </div>
                 <Spacer />
@@ -1409,7 +1410,7 @@ const onCheckAllTeamsChange = (e) => {
             
               <Spacer />
               </div> 
-                  : null } 
+                  {/* : null }  */}
 
 {props.departmentData.recruitOppsInd === true ? 
     <div>     

@@ -141,6 +141,13 @@ const PitchActionLeft = (props) => {
           <FormattedMessage id="app.clear" defaultMessage="Clear" />
           {/* Clear */}
         </Button>
+        {/* <div class="w-[22%] mt-1">
+          <StyledSelect placeholder="Sort"  onChange={(e)  => props.handleFilterChange(e)}>
+           <Option value="CreationDate">Creation Date</Option>
+            <Option value="ascending">A To Z</Option>
+            <Option value="descending">Z To A</Option>
+          </StyledSelect>
+        </div> */}
     </div>
   );
 };

@@ -182,9 +182,9 @@ getLocationNameOption(filterOptionKey, filterOptionValue) {
         type: this.state.typeInd ? "true" : "false",
         employee_type: this.state.workType,
         // job_type: this.state.active,
-        // reportingManager: this.props.userDetails.userId
-        //   ? this.props.userDetails.userId
-        //   : "",
+        reportingManager: this.props.userDetails.userId
+          ? this.props.userDetails.userId
+          : "",
         // address: [
         //   {
         //     addressId: setEditingEmployee.address.length ? setEditingEmployee.address[0].addressId : "",

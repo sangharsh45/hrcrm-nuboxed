@@ -47,7 +47,7 @@ class PhonesPairApproveForm extends Component {
  componentDidMount() {
          this.props.getDepartments();
          this.props.getRoles(this.props.organizationId);
-     this.props.getApproveData( "Expense");
+     this.props.getApproveData( "PhonePair");
  }
 
 
@@ -99,7 +99,7 @@ class PhonesPairApproveForm extends Component {
                         designationTypeId: this.props.approvalData.designationTypeId || "",
                         jobLevel: this.props.approvalData.jobLevel || 1,
                         // processName: "BOQ",
-                        subProcessName: "Expense",
+                        subProcessName: "PhonePair",
                         approvalType: this.props.approvalData.approvalType === "Standard" ? true : false,
                         approvalIndicator: this.props.approvalData.approvalIndicator ? true : false,
                     

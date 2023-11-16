@@ -242,7 +242,7 @@ export const linkDistributorPaymentByFinance = (
     type: types.LINK_DISTRIBUTOR_PAYMENT_BY_FINANCE_REQUEST,
   });
   axios
-    .put(`${base_url}/order/payment/${paymentId}/${userId}`, data)
+    .put(`${base_url2}/order/payment/${paymentId}/${userId}`, data)
     .then((res) => {
       dispatch({
         type: types.LINK_DISTRIBUTOR_PAYMENT_BY_FINANCE_SUCCESS,

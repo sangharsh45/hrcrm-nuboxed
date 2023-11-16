@@ -20,7 +20,7 @@ const StatusLeavesForm = (props) => {
             leaveStatus.map((status, i) => (
               <Timeline.Item key={i}>
                  {status.approvedStatus === 'Approved' ? (
-                  `Approved By ${status.employeeName} on ${moment(status.approvedDate).format('ll')}`
+                  ` ${moment(status.createdOn).format('ll')} Approved By ${status.employeeName} on ${moment(status.approvedDate).format('ll')}`
                 ) : status.approvedStatus === 'Pending' ? (
                   `Pending With ${status.employeeName}.`
                 ) : null}
