@@ -11,7 +11,7 @@ const LeadsCardList = lazy(()=>import("./Child/LeadsTable/LeadsCardList"));
 const LeadsJunkList=lazy(()=>import ("./Child/LeadsTable/LeadsJunkList"));
 class Leads extends Component {
 
-  state = { currentData: "",currentUser:"" };
+  state = { currentData: "",currentUser:"", filter:"creationdate", };
   handleClear = () => {
     this.setState({ currentData: "" });
     this.props.getLeads(this.props.userId);
@@ -20,6 +20,10 @@ class Leads extends Component {
     this.setState({ currentData: e.target.value })
    
   };
+  handleFilterChange=(data)=>{
+    this.setState({filter:data})
+    this.props.getLeads(this.props.userId,0,data)
+  }
   setCurrentData = (value) => {
     this.setState({ currentData: value });
   };
@@ -38,6 +42,8 @@ class Leads extends Component {
     return (
       <React.Fragment>
         <LeadsHeader
+          handleFilterChange={this.handleFilterChange}
+          filter={this.state.filter}
         handleDropChange={this.handleDropChange}
         currentUser={this.state.currentUser}
             handleLeadsModal={handleLeadsModal}
@@ -56,7 +62,7 @@ class Leads extends Component {
         {/* <LeadsTable/>  */}
         <Suspense fallback={<BundleLoader />}>
           {viewType==="card" ? (
- <LeadsCardList/>
+ <LeadsCardList  filter={this.state.filter}/>
           ):viewType==="list" ? (<LeadsJunkList/>)
         :null}
        

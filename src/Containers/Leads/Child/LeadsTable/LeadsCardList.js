@@ -26,6 +26,7 @@ import {
   updateTypeForLead,
   handleCETmodal,
 } from "../../../Leads/LeadsAction";
+import InfiniteScroll from "react-infinite-scroll-component";
 import ReactCountryFlag from "react-country-flag";
 import AddchartIcon from "@mui/icons-material/Addchart";
 import { Button, Tooltip } from "antd";
@@ -41,8 +42,12 @@ import AddLeadsNotesDrawerModal from "../AddLeadsNotesDrawerModal";
 const ButtonGroup = Button.Group;
 
 const LeadsCardList = (props) => {
+  const [page, setPage] = useState(0);
+  const [hasMore, setHasMore] = useState(true);
   useEffect(() => {
-    props.getLeads(props.userId);
+  
+    props.getLeads(props.userId, page,"creationdate");
+    setPage(page + 1);
     props.getSectors();
     props.getCountries();
   }, []);
@@ -53,6 +58,15 @@ const LeadsCardList = (props) => {
   const handleRowData = (data) => {
     setrowData(data);
   };
+  const handleLoadMore = () => {
+   
+    setPage(page + 1);
+    props.getLeads(
+      props.currentUser ? props.currentUser : props.userId,
+      page,
+      props.filter?props.filter:"creationdate"
+    );
+};
   function handleSetCurrentLeadsId(item) {
     setCurrentLeadsId(item);
   }
@@ -86,6 +100,13 @@ console.log("data",currentLeadsId)
         <div className="w-12">Action</div>
 
       </div>
+      <InfiniteScroll
+        dataLength={leadsAllData.length}
+        next={handleLoadMore}
+        hasMore={hasMore}
+        loader={fetchingLeads?<h4 style={{ textAlign: 'center' }}>Loading...</h4>:null}
+        height={"70vh"}
+      >
         {leadsAllData.map((item) => {
           const currentdate = moment().format("DD/MM/YYYY");
           const date = moment(item.creationDate).format("DD/MM/YYYY");
@@ -471,6 +492,7 @@ console.log("data",currentLeadsId)
             // </div>
           );
         })}
+         </InfiniteScroll>
       </OnlyWrapCard>
       <UpdateLeadsModal
         item={currentLeadsId}

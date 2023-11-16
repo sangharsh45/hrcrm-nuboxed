@@ -12,12 +12,17 @@ function Pitch (props) {
   const [currentData,setcurrentData]=useState("");
   const [currentUser,setcurrentUser]=useState("");
   const [filter, setFilter] = useState("creationdate");
+  // const [filter, setFilter] = useState("creationdate");
   const handleClear = () => {
     setcurrentData("");
     props.getPitch(currentUser || props.userId);
   };
   const handleChange = (e) => {
     setcurrentData(e.target.value)
+  };
+  const handleFilterChange = (data) => {
+    setFilter(data);
+    props.getPitch(props.userId, 0, data);
   };
   function handleCurrentData (value){
     setcurrentData(value)
@@ -27,7 +32,8 @@ function Pitch (props) {
             <PitchHeader
             // handleDropChange={this.handleDropChange}
             // currentUser={this.state.currentUser}
-              
+            handleFilterChange={handleFilterChange}
+            filter={filter}
                  handlePitchModal={props.handlePitchModal}
                  currentUser={currentUser}
                  currentData={currentData}
@@ -49,7 +55,7 @@ function Pitch (props) {
      <LeadsCardList/>
               ):viewType==="list" ? (<LeadsJunkList/>)
             :null} */}
-            <PitchCardList/>
+            <PitchCardList   filter={filter}/>
            
             </Suspense>
      

@@ -11,6 +11,7 @@
 
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
+import { StyledSelect } from "../../../Components/UI/Antd";
 import { bindActionCreators } from "redux";
 import { withRouter } from "react-router-dom";
 import PeopleIcon from '@mui/icons-material/People';
@@ -23,6 +24,7 @@ import TocIcon from '@mui/icons-material/Toc';
 import {getPitchRecords,searchPitchName} from "../PitchAction";
 //import {inputLeadsDataSearch,getLeadsRecords,getJunkedLeadsRecords} from "../LeadsAction";
 const { Search } = Input;
+const Option = StyledSelect.Option;
 
 const PitchActionLeft = (props) => {
   const dummy = ["cloud", "azure", "fgfdg"];
@@ -141,13 +143,13 @@ const PitchActionLeft = (props) => {
           <FormattedMessage id="app.clear" defaultMessage="Clear" />
           {/* Clear */}
         </Button>
-        {/* <div class="w-[22%] mt-1">
+        <div class="w-[22%] mt-1">
           <StyledSelect placeholder="Sort"  onChange={(e)  => props.handleFilterChange(e)}>
-           <Option value="CreationDate">Creation Date</Option>
+           <Option value="CreationDate">Creation Date</Option> 
             <Option value="ascending">A To Z</Option>
             <Option value="descending">Z To A</Option>
           </StyledSelect>
-        </div> */}
+        </div>
     </div>
   );
 };

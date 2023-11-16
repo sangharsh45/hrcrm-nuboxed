@@ -42,6 +42,7 @@ class EmployeeForm extends Component {
       selectedCountry: '',
       locations: [],
       role:[],
+      selectedRole:"",
       selectedLocation: "",
       workType: "employee",
     };
