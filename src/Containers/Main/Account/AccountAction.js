@@ -308,7 +308,7 @@ export const addDistributorActivityEvent = (event, cb) => (dispatch) => {
  */
 
 
-export const addOrderForm = (customer) => (dispatch, getState) => {
+export const addOrderForm = (customer,distributorId) => (dispatch, getState) => {
 
   dispatch({
     type: types.ADD_ORDER_REQUEST,
@@ -323,7 +323,7 @@ export const addOrderForm = (customer) => (dispatch, getState) => {
     .then((res) => {
       console.log(res);
 
-
+      dispatch(getOrderRecords(distributorId));
       dispatch({
         type: types.ADD_ORDER_SUCCESS,
         payload: res.data,

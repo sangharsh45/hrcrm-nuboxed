@@ -93,7 +93,7 @@ function AddOrderInAccount(props) {
                         priority: priority || "",
                         // deliveryDate: `${date1}T20:00:00Z`,
                         // availabilityDate: `${date2}T20:00:00Z`,
-                    });
+                    },props.distributorId);
                 } else {
                     message.success("Advance payment should be less than 100")
                 }
