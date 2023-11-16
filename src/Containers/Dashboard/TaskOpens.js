@@ -1,16 +1,15 @@
-
 import React, { Component,lazy } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import {  message } from "antd";
 import {
-  getDashboardTasks,
+  getDashbrdOpenTasks,
   handleTaskNameDrawer
 } from "../Dashboard/DashboardAction";
 import { BundleLoader } from "../../Components/Placeholder";
 const TaskNameDrawer=lazy(()=>import("./TaskNameDrawer"));
 
-class TaskNew extends Component {
+class TaskOpens extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -20,31 +19,30 @@ class TaskNew extends Component {
  
   
   componentDidMount() {
-    this.props.getDashboardTasks(this.props.userId);
+    this.props.getDashbrdOpenTasks(this.props.userId);
   }
   handleParticularTaskName=(taskNme)=>{
     this.setState({particularTaskName:taskNme})
   }
 
   render() {
-    if (this.props.fetchingDashboardTasks) {
+    if (this.props.fetchingDashboardoPENTasks) {
       return <BundleLoader/>
     }
     return (
       <>
           <div className="grid grid-cols-5 gap-4 p-4">
-  {this.props.dashboardTasks.length &&
-    this.props.dashboardTasks.map((item) => {
-      // const randomNumber = Math.floor(Math.random() * 100) + 1;
-      return (
+  {/* {this.props.dashbOpenTasks.length &&
+    this.props.dashbOpenTasks.map((item) => { */}
+      {/* return ( */}
         <div className="col-span-2 sm:col-span-1">
-          <div className="flex" >{item.name}</div>
+          <div className="flex" >0</div>
           <div class="text-2xl cursor-pointer" onClick={()=>{
-            this.handleParticularTaskName(item);
-            this.props.handleTaskNameDrawer(true)}}>{item.count}</div>
+            // this.handleParticularTaskName(item);
+            this.props.handleTaskNameDrawer(true)}}>0</div>
         </div>
-      );
-    })}
+      {/* ); */}
+    {/* })} */}
 </div>
         <TaskNameDrawer 
         particularTaskName={this.state.particularTaskName}
@@ -56,25 +54,20 @@ class TaskNew extends Component {
 }
 
 const mapStateToProps = ({ tasks ,dashboard,auth}) => ({
-  addingTasks: tasks.addingTasks,
-  addingTasksError: tasks.addingTasksError,
-  dashboardTasks: dashboard.dashboardTasks,
+  dashbOpenTasks: dashboard.dashbOpenTasks,
   userId:auth.userDetails.userId,
-  fetchingDashboardTasks:dashboard.fetchingDashboardTasks,
-  fetchingDashboardTasksError: dashboard.fetchingDashboardTasksError,
-  updatingTasks: tasks.updatingTasks,
-  updatingTasksError: tasks.updatingTasksError,
   taskNameDrwr:dashboard.taskNameDrwr,
+  fetchingDashboardoPENTasks:dashboard.fetchingDashboardoPENTasks
 });
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
-      getDashboardTasks,
+      getDashbrdOpenTasks,
   handleTaskNameDrawer    
     },
     dispatch
   );
-export default connect(mapStateToProps, mapDispatchToProps)(TaskNew);
+export default connect(mapStateToProps, mapDispatchToProps)(TaskOpens);
 
 
 // import React from 'react'

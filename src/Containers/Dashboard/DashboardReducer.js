@@ -344,6 +344,10 @@ const initialState = {
   fetchingTaskNamedrwr: false,
   fetchingTaskNamedrwrError:false,
   taskInameDrwr:[],
+
+  fetchingDashboardoPENTasks: false,
+  fetchingDashboardoPENTasksError:false,
+  dashbOpenTasks:[],
 };
 
 export const dashboardReducer = (state = initialState, action) => {
@@ -1580,6 +1584,24 @@ export const dashboardReducer = (state = initialState, action) => {
         fetchingTaskNamedrwr: false,
         fetchingTaskNamedrwrError: true,
       };
+
+      case types.GET_DASHBOARD_OPEN_TASK_REQUEST:
+        return { ...state, fetchingDashboardoPENTasks: true };
+      case types.GET_DASHBOARD_OPEN_TASK_SUCCESS:
+        return {
+          ...state,
+          fetchingDashboardoPENTasks: false,
+          dashbOpenTasks: action.payload,
+        };
+      case types.GET_DASHBOARD_OPEN_TASK_FAILURE:
+        return {
+          ...state,
+          fetchingDashboardoPENTasks: false,
+          fetchingDashboardoPENTasksError: true,
+        };
+
+
+
     default:
       return state;
   }
