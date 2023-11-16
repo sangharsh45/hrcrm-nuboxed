@@ -234,16 +234,20 @@ export const handleCreateAWB = (modalProps) => (dispatch) => {
   });
 };
 //add received
-export const addReceivedUser = (data) => (dispatch) => {
+export const createAwbNo = (data, id) => (dispatch) => {
   dispatch({
     type: types.ADD_RECEIVED_REQUEST,
   });
 
   axios
-    .post(`${base_url}/`, data, {})
+    .post(`${base_url2}/orderAwb/save`, data, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
     .then((res) => {
       console.log(res);
-
+      dispatch(getDispatchList(id))
       dispatch({
         type: types.ADD_RECEIVED_SUCCESS,
         payload: res.data,
@@ -713,14 +717,21 @@ export const getOutputPlusReasonList = () => (dispatch) => {
 
 //pickup date
 
-export const addPickupDate = (data) => (dispatch) => {
+export const addPickupDate = (data, id) => (dispatch) => {
   dispatch({
     type: types.ADD_PICKUP_DATE_REQUEST,
   });
   axios
-    .put(`${base_url2}/dispatch/confirm/pickup`, data)
+    .put(`${base_url2}/phoneOrder/dispatch/confirm/receive`, data,
+      {
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+        },
+      }
+    )
     .then((res) => {
       console.log(res);
+      dispatch(getDispatchList(id))
       dispatch({
         type: types.ADD_PICKUP_DATE_SUCCESS,
         payload: res.data,

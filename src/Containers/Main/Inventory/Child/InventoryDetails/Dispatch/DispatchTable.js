@@ -285,59 +285,62 @@ function DispatchTable(props) {
       render: (text, item) => {
         return (
           <>
-            {item.dispatchInspectionInd === 4 &&
+            {item.dispatchInspectionInd === 4 && !item.newAwbNo ?
+
               <Button type="primary"
                 onClick={() => {
+                  handleRowData(item);
                   props.handleCreateAWB(true)
                 }}>Create AWB</Button>
+              : item.dispatchInspectionInd === 4 && item.newAwbNo ? <b>Awb Created</b> : null
             }</>
         )
       }
     },
     {
       title: "Shipper",
-      width: "14%",
+      width: "12%",
       dataIndex: "shipperName",
       render: (text, item) => {
         return (
           <>{item.shipperName === "null" ? "" : item.shipperName}</>
         )
       },
-      editable: true
+
     },
     {
       title: "Delivery",
       width: "12%",
-      dataIndex: "dispatchDate",
+      dataIndex: "pickUp",
       render: (text, item) => {
         return (
-          <>{item.dispatchDate === "null" ? "" : moment(item.dispatchDate).format("DD-MM-YYYY")}</>
+          <>{item.pickUp === "null" ? "" : moment(item.pickUp).format("DD-MM-YYYY")}</>
         )
       },
       // editable: true
     },
     {
       title: "AWB",
-      width: "10%",
-      dataIndex: "dispatchAwbNo",
+      width: "12%",
+      dataIndex: "newAwbNo",
       render: (text, item) => {
         return (
-          <>{item.dispatchAwbNo === "null" ? "" : item.dispatchAwbNo}</>
+          <>{item.newAwbNo === "null" ? "" : item.newAwbNo}</>
         )
       },
-      editable: true
+
     },
 
     {
       title: "Status",
       width: "10%",
-      dataIndex: "dispatchAwbNo",
+      dataIndex: "status",
       render: (text, item) => {
         return (
-          <>{item.dispatchAwbNo === "null" ? "" : item.dispatchAwbNo}</>
+          <>{item.status === "null" ? "" : item.status}</>
         )
       },
-      editable: true
+
     },
     // {
     //   title: '',
@@ -376,9 +379,12 @@ function DispatchTable(props) {
       render: (text, item) => {
         return (
           <>
-            {item.dispatchInspectionInd === 4 && <DispatchValidationToggle
+            {item.dispatchInspectionInd === 4 && item.newAwbNo && <DispatchValidationToggle
               locationDetailsId={props.locationDetailsId}
-              orderPhoneId={item.orderPhoneId} />}
+              orderPhoneId={item.orderPhoneId}
+              item={item}
+            />}
+
           </>
         )
       }
@@ -460,6 +466,7 @@ function DispatchTable(props) {
         openPickupDateModal={props.openPickupDateModal}
       />
       <DispatchOrderAwbModal
+        rowData={rowData}
         addCreateAwb={props.addCreateAwb}
         handleCreateAWB={props.handleCreateAWB}
       />

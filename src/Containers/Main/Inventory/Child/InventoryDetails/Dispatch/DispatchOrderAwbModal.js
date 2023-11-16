@@ -14,7 +14,7 @@ class DispatchOrderAwbModal extends Component {
             <>
                 <StyledDrawer
                     title="Create AWB"
-                    width="65%"
+                    width="60%"
                     height="45%"
                     visible={addCreateAwb}
                     destroyOnClose

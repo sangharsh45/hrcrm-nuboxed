@@ -27,7 +27,9 @@ class PickUpDateModal extends Component {
           footer={null}
         >
           <Suspense fallback={<BundleLoader />}>
-            <PickUpForm orderPhoneId={this.props.orderPhoneId}
+            <PickUpForm
+              contactPersonId={this.props.contactPersonId}
+              orderPhoneId={this.props.orderPhoneId}
               locationDetailsId={this.props.locationDetailsId} />
           </Suspense>
         </StyledDrawer>
