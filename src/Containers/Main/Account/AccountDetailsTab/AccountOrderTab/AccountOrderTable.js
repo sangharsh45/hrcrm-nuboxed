@@ -256,7 +256,7 @@ const AccountOrderTable = (props) => {
                              
                                 </div>
                                 <div class="flex">
-                                <div className=" flex font-medium flex-col md:w-full max-sm:flex-row w-full max-sm:justify-between ">
+                                <div className=" flex font-medium flex-col md:w-[6rem] max-sm:flex-row w-full max-sm:justify-between ">
                                     {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden"># Opportunity</h4> */}
 
                                     <div class=" text-xs text-cardBody font-poppins text-center">
