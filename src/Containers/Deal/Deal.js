@@ -57,7 +57,7 @@ function Deal (props) {
              viewType === "stage" ?
              <DealsBoard/>
              :
-             this.props.viewType === "won" ?
+        viewType === "won" ?
         
             <DealWonCard/>
              :

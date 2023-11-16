@@ -425,3 +425,55 @@ export const getNotesListByDealId = (invOpportunityId) => (dispatch) => {
       });
     });
 };
+
+export const getWonDeals = (userId,pageNo) => (dispatch) => {
+  dispatch({
+    type: types.GET_WON_DEALS_REQUEST,
+  });
+  axios
+    .get(`${base_url}/investorOpportunity/WonInd/${userId}/${pageNo}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.GET_WON_DEALS_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.GET_WON_DEALS_FAILURE,
+        payload: err,
+      });
+    });
+};
+export const sendToWon = ( invOpportunityId,data ) => (dispatch) => {
+  dispatch({ type: types.SEND_WON_TO_REQUEST });
+
+  axios
+    .put(`${base_url}/investorOpportunities/update/wonInd/${invOpportunityId} `, data, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+
+    .then((res) => {
+      message.success("Congratulations on this Win.Wish you success!");
+      console.log(res);
+      dispatch({
+        type: types.SEND_WON_TO_SUCCESS,
+        payload: invOpportunityId,
+      });
+    })
+    .catch((err) => {
+     
+      console.log(err);
+      dispatch({
+        type: types.SEND_WON_TO_FAILURE,
+      });
+    });
+};

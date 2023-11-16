@@ -61,6 +61,13 @@ const initialState = {
   dealContactList:[],
 
   addingDealContact: false, 
+
+  fetchingWonDeals: false,
+  fetchingWonDealsError:false,
+   wonDeals:[],
+
+   sendingToWon: false,
+sendingToWonError:false,
 };
 export const dealReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -310,7 +317,45 @@ export const dealReducer = (state = initialState, action) => {
                   fetchingNotesListByDealId: false,
                   fetchingNotesListByDealIdError: true,
                 };
-                       
+
+                case types.GET_WON_DEALS_REQUEST:
+                  return { ...state, fetchingWonDeals: true };
+                case types.GET_WON_DEALS_SUCCESS:
+                  return {
+                    ...state,
+                    fetchingWonDeals: false,
+                    wonDeals: [
+                      ...state.wonDeals,
+                      ...action.payload],
+                  };
+                case types.GET_WON_DEALS_FAILURE:
+                  return {
+                    ...state,
+                    fetchingWonDeals: false,
+                    fetchingWonDealsError: true,
+                  };
+                  case types.SEND_WON_TO_REQUEST:
+                    return {
+                      ...state,
+                      sendingToWon: true,
+                    };
+                  case types.SEND_WON_TO_SUCCESS:
+                    return {
+                      ...state,
+                      sendingToWon: false,
+                      dealsByuserId: state.dealsByuserId.map((opp) =>
+                      opp.invOpportunityId === action.payload.invOpportunityId
+                        ? action.payload
+                        : opp
+                    ),
+                    };
+                  case types.SEND_WON_TO_FAILURE:
+                    return {
+                      ...state,
+                      sendingToWon: false,
+                      sendingToWonError: true,
+                    };
+
                             
     default:
       return state;

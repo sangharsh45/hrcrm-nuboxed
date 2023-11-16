@@ -9,6 +9,7 @@ import LightbulbIcon from "@mui/icons-material/Lightbulb";
 import DeleteIcon from "@mui/icons-material/Delete";
 import LockOpenIcon from "@mui/icons-material/LockOpen";
 import PeopleIcon from '@mui/icons-material/People';
+import { CheckCircleTwoTone } from "@ant-design/icons";
 import {getdealsRecord} from "../DealAction";
 import { StopTwoTone, TableOutlined } from "@ant-design/icons";
 import { Input } from "antd";
@@ -169,7 +170,29 @@ useEffect(() => {
           </span>
         </Badge>
       </Tooltip>
-
+      <Tooltip title={"Won"}>
+      <Badge
+          size="small"
+          // count={
+          //   (viewType === "won" &&
+          //   wonOpportunityData.OpportunityDetailsbyWonInd) ||
+          //   0
+          // }
+          overflowCount={999}
+        >
+          <span
+            class=" mr-2 text-sm cursor-pointer"
+            onClick={() => props.setDealViewType("won")}
+            style={{
+              cursor:"pointer",
+              color: props.viewType === "won" && "#1890ff",
+            }}
+          >
+            {" "}
+            <CheckCircleTwoTone type="check-circle" theme="twoTone" twoToneColor="#24D8A7" />
+          </span>
+          </Badge>
+      </Tooltip>
       <Tooltip
         title={
           <FormattedMessage
