@@ -319,6 +319,7 @@ function RecruitForm(props) {
           values,
           ...rest
         }) => (
+          <div class="overflow-y-auto h-[32rem] overflow-x-hidden max-sm:h-[30rem]">
           <Form className="form-background">
             <div style={{ display: "flex", justifyContent: "space-between" }}>
               <div
@@ -845,6 +846,7 @@ function RecruitForm(props) {
               </Button>
             </FlexContainer>
           </Form>
+          </div>
         )}
       </Formik>
     </>

@@ -399,7 +399,10 @@ function DistributorColletcionArchive(props) {
                            
                            {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden"> Sector </h4> */}
                            <h4 class=" text-xs text-cardBody font-poppins">   
-                           {item.approveByFinanceInd}
+                                    {user.designation === "Manager" &&
+            user.functionName === "Sales" ? null : (
+              <DistributorPaymentToggle paymentId={item.paymentId} />
+           )}
                            </h4>
                        
                        </div> 
