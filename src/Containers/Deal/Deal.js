@@ -7,6 +7,8 @@ import DealsBoard from "./Child/DealsBoard"
 const DealHeader = lazy(()=>import("./Child/DealHeader"));
 const DealCardList = lazy(()=>import("./Child/DealTable/DealCardList"));
 const CreateDealModal = lazy(() => import("./Child/CreateDealModal"));
+const DealWonCard=lazy(()=>import ("./Child/DealTable/DealWonCard"));
+
 
 function Deal (props) {
  
@@ -55,7 +57,10 @@ function Deal (props) {
              viewType === "stage" ?
              <DealsBoard/>
              :
-
+             this.props.viewType === "won" ?
+        
+            <DealWonCard/>
+             :
             null}
                  </Suspense>
             </React.Fragment>

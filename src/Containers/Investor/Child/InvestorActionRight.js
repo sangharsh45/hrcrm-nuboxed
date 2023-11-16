@@ -18,7 +18,7 @@ function InvestorActionRight (props) {
     return (
       <div class=" flex  items-center">
         
-        {user.imInd === true  &&  user.inventoryCreateInd === true &&  (
+        {user.imInd === true  &&  user.investorCreateInd === true &&  (
         <Tooltip placement="left" title="Create">
           <Button
             type="primary"

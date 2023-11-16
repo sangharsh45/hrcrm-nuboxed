@@ -1377,7 +1377,6 @@ export const getJumpTask2list = (userId, startDate, endDate) => (dispatch) => {
       });
     });
 };
-
 export const getDashboardTasks = (userId) => (dispatch) => {
   dispatch({
     type: types.GET_DASHBOARD_TASK_REQUEST,
@@ -2070,13 +2069,13 @@ export const handleTaskNameDrawer = (modalProps) => (dispatch) => {
     payload: modalProps,
   });
 };
-export const getTaskNameDetails = (name,userId, startDate, endDate) => (dispatch) => {
+export const getTaskNameDetails = (userId, name,startDate, endDate) => (dispatch) => {
   dispatch({
     type: types.GET_TASK_NAME_REQUEST,
   });
   axios
     .get(
-      `${base_url}/task/type/list/{userId}/{taskTypeId}/${name}/${userId}?endDate=${endDate}&startDate=${startDate}`,
+      `${base_url}/task/type/list/${userId}/${name}?endDate=${endDate}&startDate=${startDate}`,
       {
         headers: {
           Authorization: "Bearer " + sessionStorage.getItem("token") || "",
@@ -2092,6 +2091,33 @@ export const getTaskNameDetails = (name,userId, startDate, endDate) => (dispatch
     .catch((err) => {
       dispatch({
         type: types.GET_TASK_NAME_FAILURE,
+        payload: err,
+      });
+    });
+};
+
+export const getDashbrdOpenTasks = (userId) => (dispatch) => {
+  dispatch({
+    type: types.GET_DASHBOARD_OPEN_TASK_REQUEST,
+  });
+  axios
+    .get(`${base_url}/task/type/count/${userId}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.GET_DASHBOARD_OPEN_TASK_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.GET_DASHBOARD_OPEN_TASK_FAILURE,
         payload: err,
       });
     });
