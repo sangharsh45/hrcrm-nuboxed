@@ -345,9 +345,14 @@ const initialState = {
   fetchingTaskNamedrwrError:false,
   taskInameDrwr:[],
 
-  fetchingDashboardoPENTasks: false,
-  fetchingDashboardoPENTasksError:false,
-  dashbOpenTasks:[],
+  fetchingDashboardCompletedTasks: false,
+  fetchingDashboardCompletedTasksError:false,
+  dashbCompletedTasks:[],
+  completedtaskDrwr:false,
+
+  fetchingCompletedTaskTypes: false,
+  fetchingCompletedTaskTypesError:false,
+  completedtypeTasks:[],
 };
 
 export const dashboardReducer = (state = initialState, action) => {
@@ -1585,22 +1590,38 @@ export const dashboardReducer = (state = initialState, action) => {
         fetchingTaskNamedrwrError: true,
       };
 
-      case types.GET_DASHBOARD_OPEN_TASK_REQUEST:
-        return { ...state, fetchingDashboardoPENTasks: true };
-      case types.GET_DASHBOARD_OPEN_TASK_SUCCESS:
+      case types.GET_DASHBOARD_COMPLETED_TASK_REQUEST:
+        return { ...state, fetchingDashboardCompletedTasks: true };
+      case types.GET_DASHBOARD_COMPLETED_TASK_SUCCESS:
         return {
           ...state,
-          fetchingDashboardoPENTasks: false,
-          dashbOpenTasks: action.payload,
+          fetchingDashboardCompletedTasks: false,
+          dashbCompletedTasks: action.payload,
         };
-      case types.GET_DASHBOARD_OPEN_TASK_FAILURE:
+      case types.GET_DASHBOARD_COMPLETED_TASK_FAILURE:
         return {
           ...state,
-          fetchingDashboardoPENTasks: false,
-          fetchingDashboardoPENTasksError: true,
+          fetchingDashboardCompletedTasks: false,
+          fetchingDashboardCompletedTasksError: true,
         };
 
+        case types.HANDLE_COMPLETED_TASK_TYPE_DRAWER:
+          return { ...state, completedtaskDrwr: action.payload };
 
+          case types.GET_COMPLETED_TASK_TYPE_REQUEST:
+            return { ...state, fetchingCompletedTaskTypes: true };
+          case types.GET_COMPLETED_TASK_TYPE_SUCCESS:
+            return {
+              ...state,
+              fetchingCompletedTaskTypes: false,
+              completedtypeTasks: action.payload,
+            };
+          case types.GET_COMPLETED_TASK_TYPE_FAILURE:
+            return {
+              ...state,
+              fetchingCompletedTaskTypes: false,
+              fetchingCompletedTaskTypesError: true,
+            };  
 
     default:
       return state;

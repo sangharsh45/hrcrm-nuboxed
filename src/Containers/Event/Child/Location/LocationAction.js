@@ -204,7 +204,7 @@ export const setLocationViewType = (viewType) => (dispatch) => {
       type: types.GET_ALLOCTION_SHIFT_REQUEST,
     });
     axios
-      .get(`${base_url2}/employee/user-list/${locationDetailsId}`,
+      .get(`${base_url}/employee/user-list/${locationDetailsId}`,
       {
         headers: {
           Authorization: "Bearer " + sessionStorage.getItem("token") || "",

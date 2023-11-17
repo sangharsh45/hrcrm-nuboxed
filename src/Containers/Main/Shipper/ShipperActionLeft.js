@@ -49,7 +49,7 @@ const ShipperActionLeft = (props) => {
     <FlexContainer alignItems="center">
       <Tooltip title="List View">
       <Badge size="small"
-           count={props.shipperRecordData.shipper || 0}
+           count={props.shippeRecordCount.shipper || 0}
            >         
           <span
           style={{
@@ -163,7 +163,7 @@ const mapStateToProps = ({ auth, shipper }) => ({
   dateRangeList: shipper.dateRangeList,
   startDate: shipper.startDate,
   endDate: shipper.endDate,
-  shipperRecordData:shipper.shipperRecordData,
+  shippeRecordCount:shipper.shippeRecordCount,
 });
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(

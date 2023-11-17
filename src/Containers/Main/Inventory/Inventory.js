@@ -6,6 +6,8 @@ import { BundleLoader } from "../../../Components/Placeholder";
 import { setInventoryViewType } from "./InventoryAction";
 import InventoryTable from "./InventoryTable";
 
+const InventoryCard =lazy(()=>import("./InventoryCard"));
+
 function Inventory(props) {
   return (
     <div>
@@ -14,7 +16,7 @@ function Inventory(props) {
         viewType={props.viewType}
       />
       <Suspense fallback={<BundleLoader />}>
-        {props.viewType === "table" ? <InventoryTable /> : null}
+        {props.viewType === "table" ? <InventoryCard /> : null}
       </Suspense>
       {/* <Suspense fallback={<BundleLoader />}>
         {props.viewType === "table1" ? <InventoryTable /> : null}
