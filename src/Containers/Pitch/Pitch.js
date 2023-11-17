@@ -65,7 +65,7 @@ function Pitch (props) {
               ):viewType==="list" ? (<LeadsJunkList/>)
             :null} */}
             
-            {  props.viewType === "card" ?
+            {  viewType === "card" ?
           <PitchCardList/> 
  
 //   :viewType==="card" ?
@@ -80,6 +80,7 @@ function Pitch (props) {
 
 const mapStateToProps = ({ pitch,auth }) => ({
     addPitchModal:pitch.addPitchModal,
+    viewType:pitch.viewType,
     userId: auth.userDetails.userId,
 })
 
