@@ -42,12 +42,12 @@ const InventoryCard = (props) => {
         <div className=' flex justify-end sticky top-28 z-auto'>
         <OnlyWrapCard style={{backgroundColor:"#E3E8EE"}}>
         <div className=" flex justify-between w-[97.5%] p-2 bg-transparent font-bold sticky top-0 z-10">
-        <div className=" md:w-[8.1rem]">Name</div>
-        <div className=" md:w-[5.1rem]">Supervisor</div>
-        <div className=" md:w-[6.8rem] ">Country</div>
-        <div className="md:w-[5.9rem]">Address</div>
-        <div className="md:w-[7.8rem]">Pin Code</div>
-        <div className="md:w-[11.3rem]"></div>
+        <div className=" md:w-[4.1rem]">Name</div>
+        <div className=" md:w-[1.1rem]">Supervisor</div>
+        <div className=" md:w-[9.8rem] ">Country</div>
+        <div className="md:w-[6.6rem]">Address</div>
+        <div className="md:w-[5.8rem]">Pin Code</div>
+        <div className="md:w-[4.3rem]"></div>
       </div>
         <InfiniteScroll
         dataLength={filteredData.length}
@@ -68,7 +68,7 @@ const InventoryCard = (props) => {
                                 // }}
                                 >
                                    <div class="flex">
-                                <div className=" flex font-medium flex-col md:w-40 max-sm:w-full  ">
+                                <div className=" flex font-medium flex-col md:w-[11.2rem] max-sm:w-full  ">
 
                                    
                                         <Tooltip>
@@ -99,7 +99,7 @@ const InventoryCard = (props) => {
                               
                                 </div>
 
-                                <div className=" flex font-medium flex-col  md:w-28 max-sm:flex-row w-full max-sm:justify-between  ">
+                                <div className=" flex font-medium flex-col  md:w-[9.2rem] max-sm:flex-row w-full max-sm:justify-between  ">
                            
                                     {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden"> Sector </h4> */}
                                     <h4 class=" text-xs text-cardBody font-poppins">   
@@ -107,7 +107,7 @@ const InventoryCard = (props) => {
                                     </h4>
                                 
                                 </div> 
-                                <div className=" flex font-medium flex-col md:w-28 max-sm:flex-row w-full max-sm:justify-between ">
+                                <div className=" flex font-medium flex-col md:w-[8.2rem] max-sm:flex-row w-full max-sm:justify-between ">
                                   
 
                                     {/* <h4 class=" text-xs text-cardBody font-poppins max-sm:hidden">Country</h4> */}
@@ -116,7 +116,7 @@ const InventoryCard = (props) => {
                                     </h4>
                                 </div>
                                 </div>
-                                <div className=" flex font-medium flex-col md:w-full max-sm:flex-row w-full max-sm:justify-between ">
+                                <div className=" flex font-medium flex-col md:w-[10.5rem] max-sm:flex-row w-full max-sm:justify-between ">
                                     {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden"># Opportunity</h4> */}
 
                                     <div class=" text-xs text-cardBody font-poppins text-center">
@@ -124,7 +124,7 @@ const InventoryCard = (props) => {
 
                                     </div>
                                 </div>
-                                <div className=" flex font-medium flex-col md:w-0 max-sm:flex-row w-full max-sm:justify-between ">
+                                <div className=" flex font-medium flex-col md:w-[6.2rem] max-sm:flex-row w-full max-sm:justify-between ">
                                     {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden">Pipeline Value</h4> */}
 
                                     <div class=" text-xs text-cardBody font-poppins text-center">

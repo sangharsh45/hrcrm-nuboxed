@@ -274,16 +274,16 @@ function DistributorColletcionArchive(props) {
       <div className=' flex justify-end sticky top-28 z-auto'>
         <OnlyWrapCard style={{backgroundColor:"#E3E8EE"}}>
         <div className=" flex justify-between w-[97.5%] p-2 bg-transparent font-bold sticky top-0 z-10">
-        <div className=" md:w-[8.1rem]">Name</div>
-        <div className=" md:w-[5.1rem]">Order#</div>
+        <div className=" md:w-[9.1rem]">Name</div>
+        <div className=" md:w-[8.2rem]">Order#</div>
         <div className=" md:w-[5.8rem] ">Transaction ID</div>
-        <div className="md:w-[5.9rem]">Type</div>
-        <div className="md:w-[7.8rem]">Payment</div>
-        <div className="md:w-[7.9rem]">Entry</div>
-        <div className="md:w-[6.2rem]">Amount</div>
-        <div className="md:w-[11.3rem]">Mode</div>
-        <div className="w-[3.8rem]">Received?</div>
-        <div className="w-[3.8rem]">Owner</div>
+        <div className="md:w-[1.9rem]">Type</div>
+        <div className="md:w-[5.8rem]">Payment</div>
+        <div className="md:w-[3.9rem]">Entry</div>
+        <div className="md:w-[5.2rem]">Amount</div>
+        <div className="md:w-[3.3rem]">Mode</div>
+        <div className="w-[4.8rem]">Received?</div>
+        <div className="w-[4.9rem]">Owner</div>
 
       </div>
         {/* <InfiniteScroll
@@ -321,7 +321,7 @@ function DistributorColletcionArchive(props) {
                                 // }}
                                 >
                                    <div class="flex">
-                                   <div className=" flex font-medium flex-col  md:w-28 max-sm:flex-row w-full max-sm:justify-between  ">
+                                   <div className=" flex font-medium flex-col  md:w-[9.1rem] max-sm:flex-row w-full max-sm:justify-between  ">
                            
                            {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden"> Sector </h4> */}
                            <h4 class=" text-xs text-cardBody font-poppins">   
@@ -330,7 +330,7 @@ function DistributorColletcionArchive(props) {
                        
                        </div> 
 
-                                <div className=" flex font-medium flex-col  md:w-28 max-sm:flex-row w-full max-sm:justify-between  ">
+                                <div className=" flex font-medium flex-col  md:w-[9rem] max-sm:flex-row w-full max-sm:justify-between  ">
                            
                                     {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden"> Sector </h4> */}
                                     <h4 class=" text-xs text-cardBody font-poppins">   
@@ -341,7 +341,7 @@ function DistributorColletcionArchive(props) {
                              
                                 </div>
                                 <div class="flex">
-                                <div className=" flex font-medium flex-col md:w-full max-sm:flex-row w-full max-sm:justify-between ">
+                                <div className=" flex font-medium flex-col md:w-[10.1rem] max-sm:flex-row w-full max-sm:justify-between ">
                                     {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden"># Opportunity</h4> */}
 
                                     <div class=" text-xs text-cardBody font-poppins text-center">
@@ -387,7 +387,7 @@ function DistributorColletcionArchive(props) {
                        </div> 
                        </div>
                        <div class="flex">
-                                <div className=" flex font-medium flex-col  md:w-28 max-sm:flex-row w-full max-sm:justify-between  ">
+                                <div className=" flex font-medium flex-col  md:w-[5.6rem] max-sm:flex-row w-full max-sm:justify-between  ">
                            
                            {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden"> Sector </h4> */}
                            <h4 class=" text-xs text-cardBody font-poppins">   
@@ -395,7 +395,7 @@ function DistributorColletcionArchive(props) {
                            </h4>
                        
                        </div> 
-                       <div className=" flex font-medium flex-col  md:w-28 max-sm:flex-row w-full max-sm:justify-between  ">
+                       <div className=" flex font-medium flex-col  md:w-[5.5rem] max-sm:flex-row w-full max-sm:justify-between  ">
                            
                            {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden"> Sector </h4> */}
                            <h4 class=" text-xs text-cardBody font-poppins">   
@@ -409,7 +409,7 @@ function DistributorColletcionArchive(props) {
                        </div> 
                        </div>
                        <div class="flex">
-                                <div className=" flex font-medium flex-col  md:w-28 max-sm:flex-row w-full max-sm:justify-between  ">
+                                <div className=" flex font-medium flex-col  md:w-[6.3rem] max-sm:flex-row w-full max-sm:justify-between  ">
                            
                            {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden"> Sector </h4> */}
                            <h4 class=" text-xs text-cardBody font-poppins">   
@@ -417,14 +417,7 @@ function DistributorColletcionArchive(props) {
                            </h4>
                        
                        </div> 
-                       <div className=" flex font-medium flex-col  md:w-28 max-sm:flex-row w-full max-sm:justify-between  ">
-                           
-                           {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden"> Sector </h4> */}
-                           <h4 class=" text-xs text-cardBody font-poppins">   
-                           {/* {item.approveByFinanceInd} */}
-                           </h4>
-                       
-                       </div> 
+                      
                        </div>
 
                       </div>
