@@ -379,11 +379,11 @@ function DispatchTable(props) {
       render: (text, item) => {
         return (
           <>
-            {item.dispatchInspectionInd === 4 && item.newAwbNo && <DispatchValidationToggle
-              locationDetailsId={props.locationDetailsId}
-              orderPhoneId={item.orderPhoneId}
-              item={item}
-            />}
+            {item.dispatchInspectionInd === 4 && item.newAwbNo &&
+              <DispatchValidationToggle
+                locationDetailsId={props.locationDetailsId}
+                item={item}
+              />}
 
           </>
         )

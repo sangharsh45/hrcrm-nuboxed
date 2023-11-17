@@ -380,14 +380,14 @@ const AccountOrderTable = (props) => {
                                                             <Button onClick={() => handleUpdateRevisePrice(false)}>Cancel</Button>
                                                         </div>
                                                     </>
-                                                ) : <Tooltip title="Update Revised Price">
+                                                ) : item.qcStartInd === 3 && item.priceConfirmInd === false ? <Tooltip title="Update Revised Price">
                                                     <BorderColorOutlined
                                                         onClick={() => {
                                                             handleUpdateRevisePrice()
                                                             handleSetParticularOrderData(item)
                                                         }}
                                                         style={{ cursor: "pointer", fontSize: "1rem", }} />
-                                                </Tooltip>}
+                                                </Tooltip> : null}
 
                                             </h4>
 

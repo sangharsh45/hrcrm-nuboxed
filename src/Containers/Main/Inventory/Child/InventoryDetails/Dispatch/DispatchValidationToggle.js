@@ -27,7 +27,7 @@ function DispatchValidationToggle(props) {
             </div>
             <PickUpDateModal
                 contactPersonId={props.item.contactPersonId}
-                orderPhoneId={props.orderPhoneId}
+                orderPhoneId={props.item.orderPhoneId}
                 locationDetailsId={props.locationDetailsId}
                 handlePickupModal={props.handlePickupModal}
                 pickUpModal={props.pickUpModal}
