@@ -129,348 +129,383 @@ const AccountOrderTable = (props) => {
             console.log('Validate Failed:', errInfo);
         }
     };
-  
+    const [visible, setVisible] = useState(false)
+    const handleUpdateRevisePrice = () => {
+        setVisible(!visible)
+    }
+    const [price, setPrice] = useState(particularRowData.offerPrice)
+
+    const handleChange = (val) => {
+        setPrice(val)
+    }
+    const handleSubmitPrice = () => {
+        props.updateOfferPrice(
+            {
+                offerPrice: price,
+                orderPhoneId: particularRowData.orderId,
+                customerPriceInd: true
+            },
+            particularRowData.orderId,
+            props.distributorId,
+        );
+        setVisible(false)
+    }
 
     return (
         <>
-                       <div className=' flex justify-end sticky top-28 z-auto'>
-        <OnlyWrapCard style={{backgroundColor:"#E3E8EE"}}>
-        <div className=" flex justify-between w-3/4 pl-9 bg-transparent font-bold sticky top-0 z-10">
-        {/* <div className=" md:w-[8.1rem]"></div> */}
-        <div className=" md:w-[6.4rem]">Order No</div>
-        <div className=" md:w-[5.1rem]">Created</div>
-        <div className=" md:w-[5.8rem] ">Location</div>
-        <div className="md:w-[4.9rem]">Phones#</div>
-        <div className="md:w-[3.8rem]">AWB</div>
-        <div className="md:w-[2.9rem]">Contact</div>
-        <div className="md:w-[6.12rem]">Expected Price </div>
-        <div className="md:w-[4.3rem]">Final Price</div>
-       <div className="w-[5.8rem]">Revised Price</div>
+            <div className=' flex justify-end sticky top-28 z-auto'>
+                <OnlyWrapCard style={{ backgroundColor: "#E3E8EE" }}>
+                    <div className=" flex justify-between w-3/4 pl-9 bg-transparent font-bold sticky top-0 z-10">
+                        {/* <div className=" md:w-[8.1rem]"></div> */}
+                        <div className=" md:w-[6.4rem]">Order No</div>
+                        <div className=" md:w-[5.1rem]">Created</div>
+                        <div className=" md:w-[5.8rem] ">Location</div>
+                        <div className="md:w-[4.9rem]">Phones#</div>
+                        <div className="md:w-[3.8rem]">AWB</div>
+                        <div className="md:w-[2.9rem]">Contact</div>
+                        <div className="md:w-[6.12rem]">Expected Price </div>
+                        <div className="md:w-[4.3rem]">Final Price</div>
+                        <div className="w-[5.8rem]">Revised Price</div>
 
-      </div>
-        {/* <InfiniteScroll
+                    </div>
+                    {/* <InfiniteScroll
         dataLength={customerByUserId.length}
         next={handleLoadMore}
         hasMore={hasMore}
         loader={fetchingCustomers?<h4 style={{ textAlign: 'center' }}>Loading...</h4>:null}
         height={"70vh"}
       > */}
-      <div class="overflow-x-auto h-[64vh]">
-      {props.distributorOrder.map((item) => { 
-         const currentdate = moment().format("DD/MM/YYYY");
-         const date = moment(item.creationDate).format("DD/MM/YYYY");
-         const diff = Math.abs(
-            moment().diff(moment(item.lastRequirementOn), "days")
-          );
-          const dataLoc = ` Address : ${
-            item.address && item.address.length && item.address[0].address1
-          } 
-           Street : ${
-             item.address && item.address.length && item.address[0].street
-           }   
+                    <div class="overflow-x-auto h-[64vh]">
+                        {props.distributorOrder.map((item) => {
+                            const currentdate = moment().format("DD/MM/YYYY");
+                            const date = moment(item.creationDate).format("DD/MM/YYYY");
+                            const diff = Math.abs(
+                                moment().diff(moment(item.lastRequirementOn), "days")
+                            );
+                            const dataLoc = ` Address : ${item.address && item.address.length && item.address[0].address1
+                                } 
+           Street : ${item.address && item.address.length && item.address[0].street
+                                }   
           State : ${item.address && item.address.length && item.address[0].state}
-         Country : ${
-           (item.address && item.address.length && item.address[0].country) || ""
-         } 
-           PostalCode : ${
-             item.address && item.address.length && item.address[0].postalCode
-           } `;
-                    return (
-                        <div >
-                            <div className="flex rounded-xl justify-between mt-2 bg-white h-12 items-center p-3 "
-                                // style={{
-                                //     borderBottom: "3px dotted #515050"
-                                // }}
-                                >
-                                <div class="flex w-3/4">
-                                <div className=" flex font-medium flex-col md:w-[1.56rem] max-sm:w-full  ">
+         Country : ${(item.address && item.address.length && item.address[0].country) || ""
+                                } 
+           PostalCode : ${item.address && item.address.length && item.address[0].postalCode
+                                } `;
+                            return (
+                                <div >
+                                    <div className="flex rounded-xl justify-between mt-2 bg-white h-12 items-center p-3 "
+                                    // style={{
+                                    //     borderBottom: "3px dotted #515050"
+                                    // }}
+                                    >
+                                        <div class="flex w-3/4">
+                                            <div className=" flex font-medium flex-col md:w-[1.56rem] max-sm:w-full  ">
 
-                                   
-                                        <Tooltip>
-                                          <div class="flex max-sm:flex-row justify-between w-full md:flex-col">
-                                            {/* <h4 class=" text-xs text-cardBody font-poppins max-sm:hidden">
+
+                                                <Tooltip>
+                                                    <div class="flex max-sm:flex-row justify-between w-full md:flex-col">
+                                                        {/* <h4 class=" text-xs text-cardBody font-poppins max-sm:hidden">
                                             Name
                                             </h4> */}
-                                            <h4 class=" text-sm text-blue-500 text-cardBody font-poppins font-semibold  cursor-pointer">
-                                                
-                                            {item.priority === "High" && (
-                        <div
-                            style={{
-                                borderRadius: "50%",
-                                height: "1.5625em",
-                                width: "1.5625em",
-                                backgroundColor: "red",
-                            }}
-                        ></div>
-                    )}
-                    {item.priority === "Medium" && (
-                        <div
-                            style={{
-                                borderRadius: "50%",
-                                height: "1.5625em",
-                                width: "1.5625em",
-                                backgroundColor: "orange",
-                            }}
-                        ></div>)}
-                    {item.priority === "Low" && (
-                        <div
-                            style={{
-                                borderRadius: "50%",
-                                height: "1.5625em",
-                                width: "1.5625em",
-                                backgroundColor: "teal",
-                            }}
-                        ></div>)}
-       
-                                            </h4>
+                                                        <h4 class=" text-sm text-blue-500 text-cardBody font-poppins font-semibold  cursor-pointer">
+
+                                                            {item.priority === "High" && (
+                                                                <div
+                                                                    style={{
+                                                                        borderRadius: "50%",
+                                                                        height: "1.5625em",
+                                                                        width: "1.5625em",
+                                                                        backgroundColor: "red",
+                                                                    }}
+                                                                ></div>
+                                                            )}
+                                                            {item.priority === "Medium" && (
+                                                                <div
+                                                                    style={{
+                                                                        borderRadius: "50%",
+                                                                        height: "1.5625em",
+                                                                        width: "1.5625em",
+                                                                        backgroundColor: "orange",
+                                                                    }}
+                                                                ></div>)}
+                                                            {item.priority === "Low" && (
+                                                                <div
+                                                                    style={{
+                                                                        borderRadius: "50%",
+                                                                        height: "1.5625em",
+                                                                        width: "1.5625em",
+                                                                        backgroundColor: "teal",
+                                                                    }}
+                                                                ></div>)}
+
+                                                        </h4>
+                                                    </div>
+                                                </Tooltip>
+
                                             </div>
-                                        </Tooltip>
-                              
-                                </div>
 
-                                <div className=" flex font-medium flex-col  md:w-[5.4rem] max-sm:flex-row w-full max-sm:justify-between  ">
-                           
-                                    {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden"> Sector </h4> */}
-                                    <h4 class=" text-xs text-cardBody font-poppins">   
-                                    <span
-                        style={{ textDecoration: "underline", cursor: "pointer", color: "#1890ff" }}
-                        // onClick={() => {
-                        //     handleSetParticularOrderData(item);
-                        //     props.handleOrderDetailsModal(true);
-                        // }}
-                    >{item.newOrderNo}</span>
-                    &nbsp;&nbsp;
-                    {date === currentdate ? (
-                        <span
-                            style={{
-                                color: "tomato",
-                                fontWeight: "bold",
-                            }}
-                        >
-                            New
-                        </span>
-                    ) : null}
-                                    </h4>
-                                
-                                </div> 
-                             
-                              
-                             
-                                <div className=" flex font-medium flex-col md:w-[6.2rem] max-sm:flex-row w-full max-sm:justify-between ">
-                                    {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden"># Opportunity</h4> */}
+                                            <div className=" flex font-medium flex-col  md:w-[5.4rem] max-sm:flex-row w-full max-sm:justify-between  ">
 
-                                    <div class=" text-xs text-cardBody font-poppins text-center">
-                                    <MultiAvatar2
-                    primaryTitle={item.userName}
-                    // imageId={item.ownerImageId}
-                    imageURL={item.imageURL}
-                    imgWidth={"1.8em"}
-                    imgHeight={"1.8em"}
-                />
+                                                {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden"> Sector </h4> */}
+                                                <h4 class=" text-xs text-cardBody font-poppins">
+                                                    <span
+                                                        style={{ textDecoration: "underline", cursor: "pointer", color: "#1890ff" }}
+                                                    // onClick={() => {
+                                                    //     handleSetParticularOrderData(item);
+                                                    //     props.handleOrderDetailsModal(true);
+                                                    // }}
+                                                    >{item.newOrderNo}</span>
+                                                    &nbsp;&nbsp;
+                                                    {date === currentdate ? (
+                                                        <span
+                                                            style={{
+                                                                color: "tomato",
+                                                                fontWeight: "bold",
+                                                            }}
+                                                        >
+                                                            New
+                                                        </span>
+                                                    ) : null}
+                                                </h4>
+
+                                            </div>
+
+
+
+                                            <div className=" flex font-medium flex-col md:w-[6.2rem] max-sm:flex-row w-full max-sm:justify-between ">
+                                                {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden"># Opportunity</h4> */}
+
+                                                <div class=" text-xs text-cardBody font-poppins text-center">
+                                                    <MultiAvatar2
+                                                        primaryTitle={item.userName}
+                                                        // imageId={item.ownerImageId}
+                                                        imageURL={item.imageURL}
+                                                        imgWidth={"1.8em"}
+                                                        imgHeight={"1.8em"}
+                                                    />
+
+                                                </div>
+                                            </div>
+                                            <div className=" flex font-medium flex-col md:w-[7.1rem] max-sm:flex-row w-full max-sm:justify-between ">
+                                                {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden">Pipeline Value</h4> */}
+
+                                                <div class=" text-xs text-cardBody font-poppins text-center">
+                                                    {item.locationDetailsViewDTO && item.locationDetailsViewDTO.name || ""}
+                                                </div>
+                                            </div>
+
+                                            <div className=" flex font-medium flex-col md:w-[6.5rem] max-sm:flex-row w-full max-sm:justify-between ">
+                                                {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden">Weighted Value</h4> */}
+
+                                                <div class=" text-xs text-cardBody font-poppins text-center">
+                                                    {item.count}
+
+                                                </div>
+                                            </div>
+
+
+
+                                            <div className=" flex font-medium flex-col  md:w-[5.5rem] max-sm:flex-row w-full max-sm:justify-between  ">
+
+                                                {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden"> Sector </h4> */}
+                                                <h4 class=" text-xs text-cardBody font-poppins">
+                                                    {item.awbNo}
+                                                </h4>
+
+                                            </div>
+                                            <div className=" flex font-medium flex-col  md:w-[4.3rem] max-sm:flex-row w-full max-sm:justify-between  ">
+
+                                                {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden"> Sector </h4> */}
+                                                <h4 class=" text-xs text-cardBody font-poppins">
+                                                    <MultiAvatar2
+                                                        primaryTitle={item.contactPersonName}
+                                                        // imageId={item.ownerImageId}
+                                                        imageURL={item.imageURL}
+                                                        imgWidth={"1.8em"}
+                                                        imgHeight={"1.8em"}
+                                                    />
+                                                </h4>
+
+                                            </div>
+
+
+                                            <div className=" flex font-medium flex-col  md:w-[3.5rem] max-sm:flex-row w-full max-sm:justify-between  ">
+
+                                                {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden"> Sector </h4> */}
+                                                <h4 class=" text-xs text-cardBody font-poppins">
+                                                    {item.expectedPrice}
+                                                </h4>
+
+                                            </div>
+                                            <div className=" flex font-medium flex-col  md:w-[7.7rem] max-sm:flex-row w-full max-sm:justify-between  ">
+
+                                                {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden"> Sector </h4> */}
+                                                <h4 class=" text-xs text-cardBody font-poppins">
+                                                    {item.suggestedPrice}
+                                                </h4>
+
+                                            </div>
+
+
+                                            <div className=" flex font-medium flex-col  md:w-[3.9rem] max-sm:flex-row w-full max-sm:justify-between  ">
+
+                                                {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden"> Sector </h4> */}
+                                                <h4 class=" text-xs text-cardBody font-poppins">
+                                                    {visible && (item.orderId === particularRowData.orderId) ?
+                                                        <Input
+                                                            type='text'
+                                                            value={price}
+                                                            onChange={(e) => handleChange(e.target.value)}
+                                                        />
+                                                        : item.offerPrice}
+                                                </h4>
+
+                                            </div>
+                                        </div>
+                                        <div className=" flex font-medium flex-col  md:w-[3.4rem] max-sm:flex-row w-full max-sm:justify-between  ">
+
+
+                                            <h4 class=" text-xs text-cardBody font-poppins">
+
+                                                {visible && (item.orderId === particularRowData.orderId) ? (
+                                                    <>
+                                                        <div className=" flex justify-between flex-col">
+                                                            <Button onClick={() => {
+                                                                handleSubmitPrice()
+                                                            }} >Save</Button>
+                                                            <Button onClick={() => handleUpdateRevisePrice(false)}>Cancel</Button>
+                                                        </div>
+                                                    </>
+                                                ) : <Tooltip title="Update Revised Price">
+                                                    <BorderColorOutlined
+                                                        onClick={() => {
+                                                            handleUpdateRevisePrice()
+                                                            handleSetParticularOrderData(item)
+                                                        }}
+                                                        style={{ cursor: "pointer", fontSize: "1rem", }} />
+                                                </Tooltip>}
+
+                                            </h4>
+
+                                        </div>
+                                        <div className=" flex font-medium flex-col  md:w-[1rem] max-sm:flex-row w-full max-sm:justify-between  ">
+
+                                            {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden"> Sector </h4> */}
+                                            <h4 class=" text-xs text-cardBody font-poppins">
+                                                <Tooltip title="Notes">
+                                                    <NoteAltIcon
+                                                        style={{ cursor: "pointer", color: "green", fontSize: "1rem" }}
+                                                        onClick={() => {
+
+                                                            props.handleNotesModalInOrder(true);
+                                                            handleSetParticularOrderData(item);
+                                                        }}
+                                                    />
+
+                                                </Tooltip>
+                                            </h4>
+
+                                        </div>
+
+
+                                        <div className=" flex font-medium flex-col  md:w-[1rem] max-sm:flex-row w-full max-sm:justify-between  ">
+
+                                            {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden"> Sector </h4> */}
+                                            <h4 class=" text-xs text-cardBody font-poppins">
+                                                <Tooltip title="Status">
+                                                    <EventRepeatIcon
+                                                        style={{ cursor: "pointer", fontSize: "1rem", }}
+                                                        onClick={() => {
+                                                            props.handleStatusOfOrder(true);
+                                                            handleSetParticularOrderData(item);
+                                                        }}
+                                                    />
+                                                </Tooltip>
+                                            </h4>
+
+                                        </div>
+                                        <div className=" flex font-medium flex-col  md:w-[1rem] max-sm:flex-row w-full max-sm:justify-between  ">
+
+                                            {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden"> Sector </h4> */}
+                                            <h4 class=" text-xs text-cardBody font-poppins">
+                                                <Tooltip title="Collection">
+                                                    <PaidIcon
+                                                        style={{ cursor: "pointer", fontSize: "1rem", }}
+                                                        onClick={() => {
+                                                            props.handlePaidModal(true);
+                                                            handleSetParticularOrderData(item);
+                                                        }}
+                                                    // style={{ color: "blue" }}
+                                                    />
+                                                </Tooltip>
+
+                                            </h4>
+
+                                        </div>
+
+
+                                        <div className=" flex font-medium flex-col  md:w-[6.7rem] max-sm:flex-row w-full max-sm:justify-between  ">
+
+                                            {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden"> Sector </h4> */}
+                                            <h4 class=" text-xs text-cardBody font-poppins">
+                                                {item.transferInd === 0 ? (
+                                                    <Tooltip title="Add Inventory Location">
+                                                        <Button
+                                                            style={{ cursor: "pointer", fontSize: "13px", backgroundColor: "#3096e9", color: "white" }}
+                                                            onClick={() => {
+                                                                handleSetParticularOrderData(item);
+                                                                props.handleInventoryLocationInOrder(true);
+                                                            }}
+                                                        >
+                                                            Order Pickup
+                                                        </Button>
+                                                    </Tooltip>
+
+                                                ) : null
+                                                }
+                                            </h4>
+
+                                        </div>
+                                        <div className=" flex font-medium flex-col  md:w-[1rem] max-sm:flex-row w-full max-sm:justify-between  ">
+
+                                            {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden"> Sector </h4> */}
+                                            <h4 class=" text-xs text-cardBody font-poppins">
+                                                <Tooltip title="Rating">
+                                                    <StarBorderIcon
+                                                        style={{ cursor: "pointer", fontSize: "1rem", }} />
+                                                </Tooltip>
+
+                                            </h4>
+
+                                        </div>
+                                        <div className=" flex font-medium flex-col  md:w-[1rem] max-sm:flex-row w-full max-sm:justify-between  ">
+
+                                            {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden"> Sector </h4> */}
+                                            <h4 class=" text-xs text-cardBody font-poppins">
+                                                <Tooltip title="Feedback">
+                                                    <FeedbackIcon
+                                                        style={{ cursor: "pointer", fontSize: "1rem", }} />
+                                                </Tooltip>
+
+                                            </h4>
+
+                                        </div>
+
+
 
                                     </div>
                                 </div>
-                                <div className=" flex font-medium flex-col md:w-[7.1rem] max-sm:flex-row w-full max-sm:justify-between ">
-                                    {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden">Pipeline Value</h4> */}
-
-                                    <div class=" text-xs text-cardBody font-poppins text-center">
-                                    {item.locationDetailsViewDTO && item.locationDetailsViewDTO.name || ""}
-                                    </div>
-                                </div>
-                                
-                                <div className=" flex font-medium flex-col md:w-[6.5rem] max-sm:flex-row w-full max-sm:justify-between ">
-                                    {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden">Weighted Value</h4> */}
-
-                                    <div class=" text-xs text-cardBody font-poppins text-center">
-                                    {item.count}
-
-                                    </div>
-                                </div>
-                             
-                               
-                              
-                                <div className=" flex font-medium flex-col  md:w-[5.5rem] max-sm:flex-row w-full max-sm:justify-between  ">
-                           
-                           {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden"> Sector </h4> */}
-                           <h4 class=" text-xs text-cardBody font-poppins">   
-                           {item.awbNo}
-                           </h4>
-                       
-                       </div> 
-                       <div className=" flex font-medium flex-col  md:w-[4.3rem] max-sm:flex-row w-full max-sm:justify-between  ">
-                           
-                           {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden"> Sector </h4> */}
-                           <h4 class=" text-xs text-cardBody font-poppins">   
-                           <MultiAvatar2
-                        primaryTitle={item.contactPersonName}
-                        // imageId={item.ownerImageId}
-                        imageURL={item.imageURL}
-                        imgWidth={"1.8em"}
-                        imgHeight={"1.8em"}
-                    />
-                           </h4>
-                       
-                       </div> 
-                     
-                      
-                                <div className=" flex font-medium flex-col  md:w-[3.5rem] max-sm:flex-row w-full max-sm:justify-between  ">
-                           
-                           {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden"> Sector </h4> */}
-                           <h4 class=" text-xs text-cardBody font-poppins">   
-                           {item.expectedPrice}
-                           </h4>
-                       
-                       </div> 
-                       <div className=" flex font-medium flex-col  md:w-[7.7rem] max-sm:flex-row w-full max-sm:justify-between  ">
-                           
-                           {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden"> Sector </h4> */}
-                           <h4 class=" text-xs text-cardBody font-poppins">   
-                 {item.suggestedPrice}
-                           </h4>
-                       
-                       </div> 
-                      
-                     
-                                <div className=" flex font-medium flex-col  md:w-[3.9rem] max-sm:flex-row w-full max-sm:justify-between  ">
-                           
-                           {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden"> Sector </h4> */}
-                           <h4 class=" text-xs text-cardBody font-poppins">   
-                           {item.offerPrice}
-                           </h4>
-                       
-                       </div> 
-                       </div>
-                       <div className=" flex font-medium flex-col  md:w-[1.9rem] max-sm:flex-row w-full max-sm:justify-between  ">
-                           
-                          
-                           <h4 class=" text-xs text-cardBody font-poppins">   
-                           <Tooltip title="Edit">
-                    <BorderColorIcon
-                      style={{fontSize:"1rem"}}
-                    />
-
-                </Tooltip>
-                           </h4>
-                       
-                       </div> 
-                       <div className=" flex font-medium flex-col  md:w-[1.9rem] max-sm:flex-row w-full max-sm:justify-between  ">
-                           
-                           {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden"> Sector </h4> */}
-                           <h4 class=" text-xs text-cardBody font-poppins">   
-                           <Tooltip title="Notes">
-                    <NoteAltIcon
-                        style={{ cursor: "pointer",color:"green", fontSize: "1rem" }}
-                        onClick={() => {
-
-                            props.handleNotesModalInOrder(true);
-                            handleSetParticularOrderData(item);
-                        }}
-                    />
-
-                </Tooltip>
-                           </h4>
-                       
-                       </div> 
-                       
-                      
-                                <div className=" flex font-medium flex-col  md:w-[1.8rem] max-sm:flex-row w-full max-sm:justify-between  ">
-                           
-                           {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden"> Sector </h4> */}
-                           <h4 class=" text-xs text-cardBody font-poppins">   
-                           <Tooltip title="Status">
-                        <EventRepeatIcon
-                            style={{ cursor: "pointer", fontSize: "1rem", }}
-                            onClick={() => {
-                                props.handleStatusOfOrder(true);
-                                handleSetParticularOrderData(item);
-                            }}
-                        />
-                    </Tooltip>
-                           </h4>
-                       
-                       </div> 
-                       <div className=" flex font-medium flex-col  md:w-[1.5rem] max-sm:flex-row w-full max-sm:justify-between  ">
-                           
-                           {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden"> Sector </h4> */}
-                           <h4 class=" text-xs text-cardBody font-poppins">   
-                           <Tooltip title="Collection">
-                        <PaidIcon
-                            style={{ cursor: "pointer", fontSize: "1rem", }}
-                            onClick={() => {
-                                props.handlePaidModal(true);
-                                handleSetParticularOrderData(item);
-                            }}
-                        // style={{ color: "blue" }}
-                        />
-                    </Tooltip>
-               
-                           </h4>
-                       
-                       </div> 
-                     
-                      
-                                <div className=" flex font-medium flex-col  md:w-[6.9rem] max-sm:flex-row w-full max-sm:justify-between  ">
-                           
-                           {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden"> Sector </h4> */}
-                           <h4 class=" text-xs text-cardBody font-poppins">   
-                           {item.transferInd === 0 ? (
-                        <Tooltip title="Add Inventory Location">
-                            <Button
-                                style={{ cursor: "pointer", fontSize: "13px", backgroundColor: "#3096e9", color: "white" }}
-                                onClick={() => {
-                                    handleSetParticularOrderData(item);
-                                    props.handleInventoryLocationInOrder(true);
-                                }}
-                            >
-                                Order Pickup
-                            </Button>
-                        </Tooltip>
-
-                    ) : null
-                    }
-                           </h4>
-                       
-                       </div> 
-                       <div className=" flex font-medium flex-col  md:w-[1.7rem] max-sm:flex-row w-full max-sm:justify-between  ">
-                           
-                           {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden"> Sector </h4> */}
-                           <h4 class=" text-xs text-cardBody font-poppins">   
-                           <Tooltip title="Rating">
-                        <StarBorderIcon
-                            style={{ cursor: "pointer", fontSize: "1rem", }} />
-                    </Tooltip>
-               
-                           </h4>
-                       
-                       </div>
-                       <div className=" flex font-medium flex-col  md:w-[1.6rem] max-sm:flex-row w-full max-sm:justify-between  ">
-                           
-                           {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden"> Sector </h4> */}
-                           <h4 class=" text-xs text-cardBody font-poppins">   
-                           <Tooltip title="Feedback">
-                        <FeedbackIcon
-                            style={{ cursor: "pointer", fontSize: "1rem", }} />
-                    </Tooltip>
-               
-                           </h4>
-                       
-                       </div>  
-                       
-
-                    
-                            </div>
-                        </div>
 
 
-                    )
-                })}
-                </div>
-                {/* </InfiniteScroll> */}
-      </OnlyWrapCard>
-      </div>
+                            )
+                        })}
+                    </div>
+                    {/* </InfiniteScroll> */}
+                </OnlyWrapCard>
+            </div>
             {true && (
                 <Form form={form} component={false}>
-       
+
                     {/* <StyledTable
                         rowKey="orderId"
                         dataSource={data}

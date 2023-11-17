@@ -4,16 +4,16 @@ import { bindActionCreators } from "redux";
 import { Link, withRouter } from "react-router-dom";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
-import { AuthContainer, FormWrapper, Input } from "./styled";
+import { FormWrapper, Input } from "./styled";
 import { ValidationError, Spacer } from "../../Components/UI/Elements";
 import { FlexContainer } from "../../Components/UI/Layout";
 import Button from "antd/lib/button";
 import { login, generateOtpByEmail, validateOtp } from "./AuthAction";
 import { EyeInvisibleOutlined, EyeOutlined,
 } from "@ant-design/icons";
-   import FWLogo from "../../Assets/Images/Unboxed.jpeg";
-   import FWLogo1 from "../../Assets/Images/unboxcover.jpeg";
-import { InputComponent } from "../../Components/Forms/Formik/InputComponent";
+   import FWLogo from "../../Assets/Images/logo_22 copy.png";
+   import FWLogo1 from "../../Assets/Images/Screenshot (251).png";
+
 
 /**
  * yup validation scheme for set Password
@@ -82,7 +82,7 @@ class Login extends Component {
     console.log(this.props);
     return (
       <>
-       <div class="flex justify-between p-2">
+       <div class="flex justify-between ">
           <div class=" flex justify-center w-1/2 items-center md:min-h-screen max-sm:w-wk h-[80vh] "
             style={{
               backgroundColor: "#F5F5F5",
