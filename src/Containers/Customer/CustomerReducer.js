@@ -244,6 +244,10 @@ const initialState = {
   addingInvoice: false,
   addingInvoiceError: false,
 
+
+  convertingCustomerToAccount: false,
+  convertingCustomerToAccountError: false,
+  
   fetchingInvoiceByCustomer: false,
   fetchingInvoiceByCustomerError: false,
   invoiceByCustomerId: [],
@@ -1595,6 +1599,28 @@ export const customerReducer = (state = initialState, action) => {
                                                     fetchingCusActivityTimelineStatus: false,
                                                     fetchingCusActivityTimelineStatusError: true,
                                                 };
+
+
+                                                case types.CUSTOMER_TO_ACCOUNT_CONVERT_REQUEST:
+                                                  return {
+                                                    ...state,
+                                                    convertingCustomerToAccount: true,
+                                                  };
+                                                case types.CUSTOMER_TO_ACCOUNT_CONVERT_SUCCESS:
+                                                  return {
+                                                    ...state,
+                                                    convertingCustomerToAccount: false,
+                                                    customerByUserId: state.customerByUserId.filter(
+                                                      (item) => item.customerId !== action.payload
+                                                    ),
+                                                
+                                                  };
+                                                case types.CUSTOMER_TO_ACCOUNT_CONVERT_FAILURE:
+                                                  return {
+                                                    ...state,
+                                                    convertingCustomerToAccount: false,
+                                                    convertingCustomerToAccountError: true,
+                                                  };
 
     default:
       return state;

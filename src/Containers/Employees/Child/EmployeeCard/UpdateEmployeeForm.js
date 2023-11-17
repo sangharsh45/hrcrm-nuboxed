@@ -6,18 +6,14 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Radio } from "antd";
  import {getRoles} from "../../../Settings/Category/Role/RoleAction"
-// import {getDesignations} from "../../../Settings/Designation/DesignationAction";
-// import {getDepartments} from "../../../Settings/Department/DepartmentAction";
- import { updateEmployee,getEmployeelist } from "../../EmployeeAction";
-// import { getlocation } from "../../../Event/Child/Location/LocationAction";
-// import {getCountries} from "../../../Auth/AuthAction"
+ import { updateEmployee } from "../../EmployeeAction";
+
 import { Formik, Form, Field,FieldArray, FastField } from "formik";
 import { HeaderLabel, Spacer, StyledLabel } from "../../../../Components/UI/Elements";
 import { InputComponent } from "../../../../Components/Forms/Formik/InputComponent";
 import SearchSelect from "../../../../Components/Forms/Formik/SearchSelect";
 import { SelectComponent } from "../../../../Components/Forms/Formik/SelectComponent";
 import { DatePicker } from "../../../../Components/Forms/Formik/DatePicker";
-import AddressFieldArray from "../../../../Components/Forms/Formik/AddressFieldArray";
 import moment from "moment";
 
 
@@ -29,6 +25,7 @@ class UpdateEmployeeForm extends Component {
       checked: true,
       typeInd:false,
       role:[],
+      
       selectedRole:"",
       selectedCountry: '',
       selectedDept:"",
@@ -185,9 +182,9 @@ getLocationNameOption(filterOptionKey, filterOptionValue) {
         country:  setEditingEmployee.country || "",
         workplace: setEditingEmployee.workplace || "",
         designationTypeId: setEditingEmployee.designationTypeId || "",
-        // departmentId: setEditingEmployee.departmentId || "",
-        // roleType: setEditingEmployee.roleType || "",
-        departmentId:this.state.selectedDept,
+         departmentId: setEditingEmployee.departmentId || "",
+        roleType: setEditingEmployee.roleType || "",
+        // departmentId:this.state.selectedDept,
         roleType:this.state.selectedRole,
         linkedinPublicUrl: setEditingEmployee.linkedinPublicUrl || "",
         label:  setEditingEmployee.label || "",

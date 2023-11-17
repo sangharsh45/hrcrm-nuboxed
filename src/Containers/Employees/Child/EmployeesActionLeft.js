@@ -54,7 +54,7 @@ const EmployeesActionLeft = (props) => {
           </span>
           </Badge> 
       </Tooltip>
-      <Tooltip title={<FormattedMessage id="app.tableView" defaultMessage="Table View" />}>
+      {/* <Tooltip title={<FormattedMessage id="app.tableView" defaultMessage="Table View" />}>
         <Badge
           size="small"
           count={
@@ -74,12 +74,12 @@ const EmployeesActionLeft = (props) => {
             <GroupsIcon />
           </span>
         </Badge>
-      </Tooltip>
-      <Tooltip title={<FormattedMessage id="app.cardView" defaultMessage="Card View" />}>
+      </Tooltip> */}
+      <Tooltip title={<FormattedMessage id="app.tableView" defaultMessage="Table View" />}>
       <Badge
           size="small"
           count={
-            (props.viewType === "card" &&
+            (props.viewType === "table" &&
               props.employeerecordData.EmployeeListByLiveInd) ||
             0
           }
@@ -87,9 +87,9 @@ const EmployeesActionLeft = (props) => {
         >
           <span
             class=" mr-2 text-sm cursor-pointer"
-            onClick={() => props.setEmployeeViewType("card")}
+            onClick={() => props.setEmployeeViewType("table")}
             style={{
-              color: props.viewType === "card" && "#1890ff",
+              color: props.viewType === "table" && "#1890ff",
             }}
           >
             <TocIcon />

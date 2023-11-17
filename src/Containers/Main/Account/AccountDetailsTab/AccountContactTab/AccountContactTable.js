@@ -15,6 +15,7 @@ import { Button, Tooltip } from "antd";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
 import moment from "moment";
 import { OnlyWrapCard } from "../../../../../Components/UI/Layout";
+import { BundleLoader } from "../../../../../Components/Placeholder";
 class AccountContactTable extends Component {
 
     componentDidMount() {
@@ -23,10 +24,12 @@ class AccountContactTable extends Component {
 
     render() {
         const {
-
+            fetchingContactDistributorsById
 
         } = this.props;
-      
+      if (fetchingContactDistributorsById) {
+      return <BundleLoader />;
+    }
         const tab = document.querySelector(".ant-layout-sider-children");
         const tableHeight = tab && tab.offsetHeight * 1.2;
         return (
@@ -34,11 +37,11 @@ class AccountContactTable extends Component {
              <div className=' flex justify-end sticky top-28 z-auto'>
         <OnlyWrapCard style={{backgroundColor:"#E3E8EE"}}>
         <div className=" flex justify-between w-[97.5%] px-2 bg-transparent font-bold sticky top-0 z-10">
-        <div className=" md:w-[0.1rem]">Name</div>
-        <div className=" md:w-[0.1rem]">Email</div>
-        <div className=" md:w-[6.8rem] ">Mobile No</div>
-        <div className="md:w-[5.9rem]">Designation</div>
-        <div className="md:w-[7.8rem]">Department</div>
+        <div className=" md:w-[3.1rem]">Name</div>
+        <div className=" md:w-[3.1rem]">Email</div>
+        <div className=" md:w-[4.8rem] ">Mobile No</div>
+        <div className="md:w-[2.9rem]">Designation</div>
+        <div className="md:w-[27.8rem]">Department</div>
         
 
       </div>

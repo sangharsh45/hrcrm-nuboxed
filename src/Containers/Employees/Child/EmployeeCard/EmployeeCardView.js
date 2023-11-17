@@ -1,6 +1,5 @@
 import React, { Component, useEffect, useState, useMemo, lazy } from "react";
 import { MultiAvatar2, StyledLabel, } from '../../../../Components/UI/Elements'
-import { FlexContainer } from '../../../../Components/UI/Layout'
 import {  Tooltip,Button, Badge } from 'antd'
 import { connect } from 'react-redux'
 import MonitorHeartIcon from "@mui/icons-material/MonitorHeart";
@@ -133,8 +132,9 @@ function handleSetCurrentEmployeeId(employeeId,) {
                       </div> 
                    
                        <div class=" font-normal text-xs text-cardBody font-poppins mt-2 "><VolumeUpIcon style={{fontSize:"0.75rem"}}/> {`${item.countryDialCode} ${item.mobileNo}`}</div>
-          <div class=" font-normal text-xs text-cardBody font-poppins "><DraftsIcon style={{fontSize:"0.75rem"}} /> {item.emailId}</div>
-          <div class=" flex flex-row justify-evenly  w-full items-end">
+          <div class=" font-normal text-xs  mt-2 text-cardBody font-poppins "><DraftsIcon style={{fontSize:"0.75rem"}} /> {item.emailId}</div>
+          <div class=" font-normal text-xs mt-2 text-cardBody font-poppins ">Reporting {item.reportingManagerName}</div>
+          <div class=" flex flex-row justify-evenly mt-[0.3rem] w-full items-end">
           <div class=" font-normal text-xs text-cardBody font-poppins ">
           <span
               style={{ cursor: "pointer" }}
@@ -348,7 +348,7 @@ border-radius: 0.35rem;
     border: 3px solid #EEEEEE;
     background-color: rgb(255,255,255);
     box-shadow: 0 0.25em 0.62em #aaa;
-    height: 7rem;
+    height: 9.5rem;
     color: rgb(68,68,68);
     margin: 1rem;
     padding: 0.2rem;

@@ -9,7 +9,7 @@ import moment from "moment";
 import { OnlyWrapCard } from '../../../../Components/UI/Layout'
 import { getCountries } from "../../../Auth/AuthAction";
 import InfiniteScroll from "react-infinite-scroll-component";
-import { Tooltip, Select,Button } from "antd";
+import { Tooltip, Select,Button ,Popconfirm} from "antd";
 import MonitorHeartIcon from "@mui/icons-material/MonitorHeart";
 import {
   MultiAvatar,
@@ -30,6 +30,7 @@ import {
   handleCustomerNotesDrawerModal,
   getCustomerById,
   emptyCustomer,
+  customerToAccount,
   handleCustomerPulseDrawerModal,
 } from "../../CustomerAction";
 import NoteAltIcon from "@mui/icons-material/NoteAlt";
@@ -98,6 +99,10 @@ const [rowdata, setrowdata] = useState("");
   }
   const handleRowData = (data) => {
     setrowdata(data);
+  };
+  const handleConfirm = (customerId) => {
+    // Call the function to change the status to "Lost" here
+    props.customerToAccount(customerId);
   };
   const handleLoadMore = () => {
    
@@ -300,10 +305,16 @@ const [rowdata, setrowdata] = useState("");
                    <div className=" flex font-medium justify-center flex-col max-sm:flex-row  ">
                        
                        <h4 class=" text-sm text-cardBody font-poppins"></h4>
-
+                       <Popconfirm
+  title="Change status to Account?"
+  onConfirm={() => handleConfirm(item.customerId)}
+  okText="Yes"
+  cancelText="No"
+>
                        <Button type="primary">
                      <span class="text-sm" >Convert to Account</span>
                         </Button>
+                        </Popconfirm>
                    </div>
                    
                    <div class="flex flex-col w-[8%] max-sm:flex-row max-sm:w-[10%]">
@@ -497,6 +508,7 @@ const mapDispatchToProps = (dispatch) =>
       handleCustomerPulseDrawerModal,
       setEditCustomer,
       getSectors,
+      customerToAccount,
       emptyCustomer,
       updateOwnercustomerById,
       handleCustomerDrawerModal,

@@ -29,6 +29,7 @@ import { MultiAvatar2 } from '../../../../../Components/UI/Elements';
 import { BorderAllRounded, BorderColorOutlined } from '@mui/icons-material';
 import { OnlyWrapCard } from '../../../../../Components/UI/Layout';
 import { Link } from '../../../../../Components/Common';
+import { BundleLoader } from '../../../../../Components/Placeholder';
 const EditableCell = ({
     editing,
     dataIndex,
@@ -150,6 +151,9 @@ const AccountOrderTable = (props) => {
         );
         setVisible(false)
     }
+    if (props.fetchingDistributorByDistributorId) {
+        return <BundleLoader />;
+      }
 
     return (
         <>

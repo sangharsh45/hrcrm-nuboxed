@@ -8,6 +8,8 @@ class PitchHeader extends Component {
     const {
       handleLeadsModal,
       viewType,
+      setPitchViewType,
+   
       currentUser,
       setLeadsViewType,
       handleChange,
@@ -20,6 +22,8 @@ class PitchHeader extends Component {
         <ActionHeader
           leftComponent={
             <PitchActionLeft
+            setPitchViewType={setPitchViewType}
+            viewType={viewType}
             // viewType={viewType}
             currentUser={currentUser}
             currentData={currentData}

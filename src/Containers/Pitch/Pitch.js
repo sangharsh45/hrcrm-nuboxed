@@ -4,7 +4,7 @@ import { bindActionCreators } from "redux";
 import PitchHeader from "./Child/PitchHeader"
 import PitchCardList from "./Child/PitchCardList"
 import AddPitchModal from "../Pitch/Child/AddPitchModal"
-import {handlePitchModal,getPitch } from "../Pitch/PitchAction";
+import {handlePitchModal,getPitch,setPitchViewType } from "../Pitch/PitchAction";
 import { BundleLoader, GridLoader } from "../../Components/Placeholder";
 
 
@@ -27,9 +27,18 @@ function Pitch (props) {
   function handleCurrentData (value){
     setcurrentData(value)
   }
+  const {
+    addInvestorModal,
+    handleInvestorModal,
+    viewType,
+    setPitchViewType,
+
+  } = props;
         return (
             <React.Fragment>
             <PitchHeader
+            setPitchViewType={setPitchViewType}
+            viewType={viewType}
             // handleDropChange={this.handleDropChange}
             // currentUser={this.state.currentUser}
             handleFilterChange={handleFilterChange}
@@ -55,8 +64,14 @@ function Pitch (props) {
      <LeadsCardList/>
               ):viewType==="list" ? (<LeadsJunkList/>)
             :null} */}
-            <PitchCardList   filter={filter}/>
-           
+            
+            {  props.viewType === "card" ?
+          <PitchCardList/> 
+ 
+//   :viewType==="card" ?
+//  <InvestorCardView/> 
+// <CustomerCardView/>  
+          :null}
             </Suspense>
      
           </React.Fragment>
@@ -70,6 +85,7 @@ const mapStateToProps = ({ pitch,auth }) => ({
 
 const mapDispatchToProps = dispatch => bindActionCreators({
     handlePitchModal,
+    setPitchViewType,
     getPitch
 }, dispatch)
 export default connect(mapStateToProps, mapDispatchToProps)(Pitch);
