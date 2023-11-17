@@ -5,7 +5,9 @@ import { StyledDrawer } from "../../../Components/UI/Antd";
 const ResumeForm = lazy(() => import("./ResumeForm"));
 
 const AddCandidateResumeModal = (props) => {
-  const { addCandidateResumeModal, handleCandidateResumeModal, ...formProps } =
+  const { addCandidateResumeModal, handleCandidateResumeModal,
+    //  ...formProps 
+    } =
     props;
 
   return (
@@ -27,7 +29,7 @@ const AddCandidateResumeModal = (props) => {
             addCandidateResumeModal={props.addCandidateResumeModal}
             handleResponseData={props.handleResponseData}
             responseData={props.responseData}
-            {...formProps}
+            // {...formProps}
           />{" "}
         </Suspense>
       </StyledDrawer>

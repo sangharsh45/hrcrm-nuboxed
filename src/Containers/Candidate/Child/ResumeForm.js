@@ -15,7 +15,7 @@ class ResumeForm extends PureComponent {
   state = {
     fileData: null,
     selectedFile: null,
-    responseData: null,
+     responseData: null,
   };
   handleSetFileData = (file) => {
     this.setState({ fileData: file });
@@ -55,11 +55,12 @@ class ResumeForm extends PureComponent {
       })
       .then((res) => {
         ////debugger;
-        console.log(res);
-
+         console.log("data45",res.data);
+         this.props.handleResponseData(res.data);
         this.props.handleCandidateModal(true);
         this.props.handleCandidateResumeModal(false);
-        this.props.handleResponseData(res.data);
+ 
+     
       })
       .catch((err) => {
         console.log(err);
@@ -72,6 +73,7 @@ class ResumeForm extends PureComponent {
     getLibrarys(organizationId);
   }
   render() {
+    console.log("formch",this.props)
     console.log("FormRender", this.state.fileData);
     console.log("parsing",this.props.parsingForm)
     const {
@@ -108,7 +110,7 @@ class ResumeForm extends PureComponent {
               ghost
               onClick={() => {
                 handleCandidateModal(true);
-                //this.props.handleResponseData(null);
+                this.props.handleResponseData(null);
               }}
             >
               Don't have resume handy

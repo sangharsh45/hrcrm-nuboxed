@@ -30,14 +30,18 @@ const CandidateTable = lazy(() =>
 const CandidateCardView = lazy(() => import("./CandidateCardView"));
 
 class Candidate extends Component {
-  state = {
+  constructor(props) {
+    super(props);
+  this.state = {
     currentData: undefined,
     responseData: null,
     text: undefined,
     currentSkillData: "",
   };
+}
 
   handleResponseData = (data) => {
+    console.log("functioncalled")
     this.setState({ responseData: data });
   };
 
@@ -98,7 +102,7 @@ class Candidate extends Component {
       fetchingContacts,
     } = this.props;
 
-    console.log("statue", this.state.currentUser);
+    console.log("statue", this.state.responseData);
     return (
       <React.Fragment>
         <CandidateHeader

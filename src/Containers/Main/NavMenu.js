@@ -730,6 +730,7 @@ function NavMenu(props) {
             </Link>
           </Menu.Item>
         )}
+        {user.catalogAccessInd === true && user.erpInd === true && (
         <Menu.Item key="/product" style={{ height: "27px", paddingLeft: "1rem" }}>
           <Link to="/product">
             <ViewInArIcon
@@ -742,6 +743,7 @@ function NavMenu(props) {
             </span>
           </Link>
         </Menu.Item>
+        )}
         <hr />
         {user.refurbishWorkshopInd === true && user.erpInd === true && (
 

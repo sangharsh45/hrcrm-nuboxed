@@ -9,6 +9,7 @@ import { FormattedMessage } from "react-intl";
 import {
   setDashboardViewType,
 } from "../DashboardAction";
+import PersonPinIcon from '@mui/icons-material/PersonPin';
 import { Button, Icon, Tooltip,Badge } from "antd";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
@@ -71,6 +72,8 @@ const DashboardActionLeft = (props) => {
         > <PersonIcon/>
         
         </span>
+
+      
            
 {user.crmInd===true && (
 

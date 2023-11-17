@@ -66,6 +66,7 @@ class EmployeeForm extends Component {
     const selectedDept = event.target.value;
     const filteredRoles = this.props.roles.filter((item) => item.departmentName === selectedDept);
     this.setState({ selectedDept, role: filteredRoles });
+    
   };
   handleRoleChange = (event) => {
     const selectedRole = event.target.value;
@@ -520,12 +521,15 @@ getEmployeesbyDepartment (filterOptionKey, filterOptionValue) {
 
 <div class=" flex justify-between max-sm:flex-col" >
                       <div class=" w-w48 max-sm:w-wk">
+                   <label style={{color:"#444",fontWeight:"bold",fontSize:" 0.75rem"}}>Department</label>
                       <select 
                         style={{ border: "0.06em solid #aaa" }}
                       onChange={this.handleDeptChange}>
           <option value="">Select Department</option>
           {this.props.departments.map((item, index) => (
-            <option key={index} value={item.departmentName}>
+            <option 
+           
+            key={index} value={item.departmentName}>
               {item.departmentName}
             </option>
           ))}
@@ -561,8 +565,13 @@ getEmployeesbyDepartment (filterOptionKey, filterOptionValue) {
                     />
                     </div>
                   </div>
-
+                  <div class=" flex justify-between mt-2" >
+                  <div class=" w-full">
+                  <label style={{color:"#444",fontWeight:"bold",fontSize:" 0.75rem"}}>Role</label>
+                  &nbsp;&nbsp;
                   <select
+                      isColumn
+                      inlineLabel
                  style={{ border: "0.06em solid #aaa" }}
                       onChange={this.handleRoleChange}
                     >
@@ -575,6 +584,8 @@ getEmployeesbyDepartment (filterOptionKey, filterOptionValue) {
             </option>
           ))}
         </select>
+        </div>
+        </div>
 
 {/* <Field
                     name="roleType"
@@ -615,6 +626,7 @@ getEmployeesbyDepartment (filterOptionKey, filterOptionValue) {
                          <Spacer/>
                       <div class=" flex justify-between max-sm:flex-col" >
                       <div class=" w-w48 max-sm:w-wk">
+                      <label style={{color:"#444",fontWeight:"bold",fontSize:" 0.75rem"}}>WorkPlace</label>
                       <select 
                         style={{ border: "0.06em solid #aaa" }}
                       onChange={this.handleCountryChange}>
@@ -644,8 +656,9 @@ getEmployeesbyDepartment (filterOptionKey, filterOptionValue) {
                         inlineLabel
                       /> */}
                     </div>
-             
+                    <Spacer/>
                     <div class="w-w47.5">
+                    <label style={{color:"#444",fontWeight:"bold",fontSize:" 0.75rem"}}>Location</label>
                     <select
                  style={{ border: "0.06em solid #aaa" }}
                       onChange={this.handleLocationChange}
@@ -703,7 +716,7 @@ getEmployeesbyDepartment (filterOptionKey, filterOptionValue) {
                   </div>
 
 
-                  <div class=" flex justify-between max-sm:flex-col" >
+                  <div class=" flex justify-between mt-2 max-sm:flex-col" >
                       <div class=" w-w48 max-sm:w-wk">
                       <Field
   isRequired

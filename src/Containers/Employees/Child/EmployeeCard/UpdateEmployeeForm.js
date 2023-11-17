@@ -524,6 +524,7 @@ getLocationNameOption(filterOptionKey, filterOptionValue) {
 
 <div class=" flex justify-between max-sm:flex-col" >
 <div class=" w-w48 max-sm:w-wk">
+<label style={{color:"#444",fontWeight:"bold",fontSize:" 0.75rem"}}>Department</label>
 <select 
                         style={{ border: "0.06em solid #aaa" }}
                       onChange={this.handleDeptChange}>
@@ -565,6 +566,10 @@ getLocationNameOption(filterOptionKey, filterOptionValue) {
                     />
                     </div>
                   </div>
+                  <div class=" flex justify-between mt-2" >
+                  <div class=" w-full">
+                  <label style={{color:"#444",fontWeight:"bold",fontSize:" 0.75rem"}}>Role</label>
+                  &nbsp;&nbsp;
                   <select
                  style={{ border: "0.06em solid #aaa" }}
                       onChange={this.handleRoleChange}
@@ -578,6 +583,8 @@ getLocationNameOption(filterOptionKey, filterOptionValue) {
             </option>
           ))}
         </select>
+        </div>
+        </div>
 
 {/* <Field
                     name="roleType"
@@ -618,6 +625,7 @@ getLocationNameOption(filterOptionKey, filterOptionValue) {
                          <Spacer/>
                       <div class=" flex justify-between max-sm:flex-col" >
                       <div class=" w-w48 max-sm:w-wk">
+                      <label style={{color:"#444",fontWeight:"bold",fontSize:" 0.75rem"}}>WorkPlace</label>
                       <select 
                         style={{ border: "0.06em solid #aaa" }}
                       onChange={this.handleCountryChange}>
@@ -631,6 +639,7 @@ getLocationNameOption(filterOptionKey, filterOptionValue) {
                       </div>
              
                     <div class="w-w47.5">
+                    <label style={{color:"#444",fontWeight:"bold",fontSize:" 0.75rem"}}>Location</label>
                     <select
                  style={{ border: "0.06em solid #aaa" }}
                       onChange={this.handleLocationChange}
@@ -653,7 +662,7 @@ getLocationNameOption(filterOptionKey, filterOptionValue) {
                   </div>
 
 
-                  <div class=" flex justify-between max-sm:flex-col" >
+                  <div class=" flex justify-between mt-2 max-sm:flex-col" >
                       <div class=" w-w48 max-sm:w-wk">
                   <Field
                     name="departmentId"

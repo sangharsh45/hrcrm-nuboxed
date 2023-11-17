@@ -5,7 +5,7 @@ import { BundleLoader } from "../../../Components/Placeholder";
 const CandidateForm = lazy(() => import("./CandidateForm"));
 
 const AddCandidateModal = props => {
-  const { addCandidateModal, handleCandidateModal,responseData, ...formProps } = props;
+  const { addCandidateModal, handleCandidateModal,responseData, } = props;
   return (
     <>
       <StyledDrawer
@@ -25,7 +25,8 @@ const AddCandidateModal = props => {
         footer={null}
       >
         <Suspense fallback={<BundleLoader />}>
-          <CandidateForm {...formProps} responseData={responseData} />
+          <CandidateForm
+           responseData={responseData} />
         </Suspense>
       </StyledDrawer>
     </>
