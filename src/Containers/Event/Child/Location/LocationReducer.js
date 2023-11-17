@@ -21,6 +21,7 @@ const initialState = {
     shiftLocs:[],
     createShiftDrawer:false,
     creatingShiftLocation: false, 
+  
    creatingShiftLocationError:false,
 
    fetchingAlLocShift: false,
@@ -96,10 +97,26 @@ const initialState = {
               case types.DELETE_LOCATIONS_FAILURE:
                 return { ...state, deletingLocations: false, deletingLocationsError: false };
 
+
+                case types.CREATE_SHIFT_LOCATION_REQUEST:
+                  return { ...state, creatingShiftLocation: true };
+                case types.CREATE_SHIFT_LOCATION_SUCCESS:
+                  return { ...state, creatingShiftLocation: false, 
+                    createShiftDrawer:false,
+                    // shiftLocs:action.payload, 
+                   
+                  };
+                case types.CREATE_SHIFT_LOCATION_FAILURE:
+                  return { ...state, creatingShiftLocation: false, 
+
+                                  creatingShiftLocationError: true };      
+
                 case types.GET_SHIFT_LOCATION_REQUEST:
                   return { ...state, fetchingShoftlocs: true };
                 case types.GET_SHIFT_LOCATION_SUCCESS:
-                  return { ...state, fetchingShoftlocs: false, shiftLocs: action.payload };
+                  return { ...state, fetchingShoftlocs: false, 
+                    shiftLocs:action.payload, 
+                   };
                 case types.GET_SHIFT_LOCATION_FAILURE:
                   return {
                     ...state,
@@ -109,16 +126,7 @@ const initialState = {
                   case types.HANDLE_CREATE_SHIFT_DRAWER:
                     return { ...state, createShiftDrawer: action.payload }; 
 
-                    case types.CREATE_SHIFT_LOCATION_REQUEST:
-                      return { ...state, creatingShiftLocation: true };
-                    case types.CREATE_SHIFT_LOCATION_SUCCESS:
-                      return { ...state, creatingShiftLocation: false, 
-                        createShiftDrawer:false,
-                        shiftLocs:[...state.shiftLocs]
-                      };
-                    case types.CREATE_SHIFT_LOCATION_FAILURE:
-                      return { ...state, creatingShiftLocation: false, 
-                                      creatingShiftLocationError: true };      
+                   
                                     
                                       case types.GET_ALLOCTION_SHIFT_REQUEST:
                                         return { ...state, fetchingAlLocShift: true };

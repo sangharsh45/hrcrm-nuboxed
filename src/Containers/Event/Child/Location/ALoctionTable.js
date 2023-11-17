@@ -9,6 +9,8 @@ import moment from "moment";
 import { Spacer } from "../../../../Components/UI/Elements";
 import {
     getAlLocshift,
+    getShiftlocs,
+    updateLocation,
 } from "./LocationAction";
 import { CurrencySymbol } from "../../../../Components/Common";
 import { Select } from "../../../../Components/UI/Elements";
@@ -19,6 +21,7 @@ const ButtonGroup = Button.Group;
 function ALoctionTable(props) {
     useEffect(() => {
         props.getAlLocshift(props.storedLoc.locationDetailsId);
+        props.getShiftlocs(props.storedLoc.locationDetailsId);
     }, []);
 
     const [show, setshow] = useState(false);
@@ -130,11 +133,16 @@ function ALoctionTable(props) {
     const [form] = Form.useForm();
     const [data, setData] = useState([]);
     const [editingKey, setEditingKey] = useState('');
-    const isEditing = (record) => record.skillSetDetailsId === editingKey;
+    const [creationDate,setcreationDate]=useState(undefined)
+    const isEditing = (record) => record.shiftId === editingKey;
   
     useEffect(() => {
-      setData(dataSourcef)
-    }, [dataSourcef])
+      setData(props.alLocShift)
+    }, [props.alLocShift])
+
+    function handleDatePickerCahnge(date,dateString){
+      setcreationDate(moment(dateString).format("YYYY-MM-DDTHH:mm:ss.SSSS[Z]"))
+    }
     const EditableCell = ({
       editing,
       dataIndex,
@@ -145,6 +153,7 @@ function ALoctionTable(props) {
       children,
       ...restProps
     }) => {
+      const dateFormat = "MM/DD/YYYY";
       const inputNode = <Input />;
       return (
         <td {...restProps}>
@@ -164,29 +173,31 @@ function ALoctionTable(props) {
                   ]}
                 >
                   <Select>
-                    {/* {props.topicsByCandidateId.map((item) => { */}
-                      {/* return */}
-                       {/* <Option value={item.skillSetDetailsId}>{item.skillName} </Option>; */}
-                       <Option value="xyz">XYZ</Option>;
-                    {/* })} */}
+                    {props.shiftLocs.map((item) => {
+                      return (
+                       <Option value={item.shiftName}>{item.shiftName} </Option>
+                       )
+                    })}
                   </Select>
                 </Form.Item>
                 ) :editing && inputType === "picker" ?(
-                  <Form.Item
-                  name={dataIndex}
-                  style={{
-                    margin: 0
-                  }}
-                  rules={[
-                    {
-                      required: true,
-                      message: `Please Input ${title}!`
-                    }
-                  ]}
-                >
+                //   <Form.Item
+                //   name={dataIndex}
+                //   style={{
+                //     margin: 0
+                //   }}
+                //   rules={[
+                //     {
+                //       required: true,
+                //       message: `Please Input ${title}!`
+                //     }
+                //   ]}
+                // >
                   
-                {inputNode}
-                  </Form.Item>
+                // {inputNode}
+                //   </Form.Item>
+                <DatePicker format={dateFormat} 
+                onChange={(date,dateString)=>handleDatePickerCahnge(date,dateString)}/>
                         ) :(
                             children
                           )}
@@ -195,11 +206,11 @@ function ALoctionTable(props) {
                   };
                   const edit = (record) => {
                     form.setFieldsValue({
-                      skillSetDetailsId: "",
                       shiftName: "",
+                      creationDate: "",
                       ...record,
                     });
-                    setEditingKey(record.skillSetDetailsId);
+                    setEditingKey(record.shiftId);
                   };
                 
                   const cancel = () => {
@@ -211,23 +222,24 @@ function ALoctionTable(props) {
                       // alert("Try")
                       const row = await form.validateFields();
                       const newData = [...data];
-                      const index = newData.findIndex((item) => key === item.skillSetDetailsId);
+                      const index = newData.findIndex((item) => key === item.shiftId);
                       // //console.log(item.orderId)
                       // //console.log(newData)
                       if (index > -1) {
                         // alert("if");
                         const item = newData[index];
                         //console.log(item)
-                        newData.splice(index, 1, { ...item, ...row });
+                        newData.splice(index, 1, { ...item,creationDate, ...row });
                         const a = newData[index];          
-                        props.updateExperienceByCandidateId(
+                        props.updateLocation(
                           {
-                            skillSetDetailsId: a.skillSetDetailsId,
-                            shiftName: a.shiftName,
+                            shiftId: a.shiftId,
+                            shiftName:a.shiftName,
+                            creationDate: a.creationDate,
                             // candidateId: a.candidateId,
                           },
                           key,
-                          a.skillSetDetailsId
+                          props.storedLoc.locationDetailsId
                         );
                         setEditingKey('');
                 
@@ -242,20 +254,7 @@ function ALoctionTable(props) {
                      
                     }
                   };
-                  const dataSourcef = [
-                    {
-                      key: '1',
-                      userName: 'Mike',
-                      age: 32,
-                      shiftName: '10 Downing Street',
-                    },
-                    {
-                      key: '2',
-                      userName: 'John',
-                      age: 42,
-                      shiftName: '10 Downing Street',
-                    },
-                  ];
+                 
     const columns = [
         {
             title: "",
@@ -264,54 +263,22 @@ function ALoctionTable(props) {
         {
             title: "Name",
             width: "15%",
-            dataIndex: "fullName",
-            // defaultSortOrder: "descend",
-            // ...getColumnSearchProps("shiftName"),
-            // render: (text, item) => {
-            //     const currentdate = moment().format("DD/MM/YYYY");
-            //     const date = moment(item.creationDate).format("DD/MM/YYYY");
-            //     return {
-
-            //         children: (
-            //             <Badge size="small" count={item.productNum}>
-            //                 <span
-            //                     onClick={() => {
-            //                         handleOrder(item.orderId);
-            //                         handleSetParticularOrderData(item);
-            //                     }}
-
-            //                 >{`${item.shiftName} `}
-
-            //                     &nbsp;&nbsp;
-            //                     {date === currentdate ? (
-            //                         <span
-            //                             style={{
-            //                                 color: "tomato",
-            //                                 fontWeight: "bold",
-            //                             }}
-            //                         >
-            //                             New
-            //                         </span>
-            //                     ) : null}
-            //                 </span>
-            //             </Badge>
-            //         ),
-            //     };
-            // },
+            dataIndex: "fullName", 
         },
         {
             title: "Shift",
             dataIndex: "shiftName",
-            defaultSortOrder: "descend",
-            ...getColumnSearchProps("shift"),
             width: "18%",
+            editable: true,
         },
         {
             title: "Effective",
-            dataIndex: "contactPersonName",
-            defaultSortOrder: "descend",
-            ...getColumnSearchProps("contactPersonName"),
+            dataIndex: "creationDate",
             width: "18%",
+            render: (name, item, i) => {
+              return <span>{` ${moment(item.creationDate).format("ll")}`}</span>;
+            },
+            editable: true,
         },
        
         {
@@ -324,7 +291,8 @@ function ALoctionTable(props) {
                 <span>
                   <Typography.Link
                     onClick={() =>
-                      save(record.skillSetDetailsId)
+                      save(record.shiftId)
+                      // alert("Save success")
                     }
                     style={{
                       marginRight: 8,
@@ -368,7 +336,7 @@ function ALoctionTable(props) {
         <>
          <Form form={form} component={false}>
             <StyledTable
-                rowKey="orderId"
+                rowKey="shiftId"
                 // columns={columns}
                 dataSource={props.alLocShift}
                 loading={props.fetchingAlLocShift}
@@ -393,12 +361,15 @@ const mapStateToProps = ({ location, auth }) => ({
     alLocShift: location.alLocShift,
     fetchingAlLocShift: location.fetchingAlLocShift,
     userId: auth.userDetails.userId,
+    shiftLocs: location.shiftLocs,
 });
 
 const mapDispatchToProps = (dispatch) =>
     bindActionCreators(
         {
             getAlLocshift,
+            getShiftlocs,
+            updateLocation
         },
         dispatch
     );

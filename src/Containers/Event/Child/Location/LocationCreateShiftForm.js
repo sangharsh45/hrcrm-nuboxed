@@ -35,7 +35,7 @@ function LocationCreateShiftForm(props) {
       <Formik
         enableReinitialize
         initialValues={{  
-            locationName:"",
+            shiftName:"",
             startDate: startDate || dayjs(),
             endDate: endDate || null,
             timeZone: timeZone,
@@ -140,7 +140,7 @@ function LocationCreateShiftForm(props) {
                 <div class="flex justify-between">
                 <div class="w-wk">
                     <Field
-                      name="locationName"
+                      name="shiftName"
                       label="Name"
                       type="text"
                       width={"100%"}

@@ -146,9 +146,9 @@ export const setLocationViewType = (viewType) => (dispatch) => {
     axios
       .get(`${base_url2}/shift/shiftList/${locationDetailsId}`,
       {
-        headers: {
-          Authorization: "Bearer " + sessionStorage.getItem("token") || "",
-        },
+        // headers: {
+        //   Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+        // },
       })
       .then((res) => {
        
@@ -170,25 +170,26 @@ export const setLocationViewType = (viewType) => (dispatch) => {
     dispatch({ type: types.HANDLE_CREATE_SHIFT_DRAWER, payload: modalProps });
   };
 
-  export const createShitLocation = (save) => (dispatch) => {
+  export const createShitLocation = (save) => (dispatch,getState) => {
+    // const locationDetailsId = getState().storedLoc.locationDetailsId;
+  
     dispatch({
       type: types.CREATE_SHIFT_LOCATION_REQUEST,
     });
-  
     axios
       .post(`${base_url2}/shift`,save,  {
-        headers: {
-          Authorization: "Bearer " + sessionStorage.getItem("token") || "",
-        },
+        // headers: {
+        //   Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+        // },
       })
       .then((res) => {
-        // dispatch(getlocation(orgId));
+        // dispatch(getShiftlocs(locationDetailsId));
         dispatch({
           type: types.CREATE_SHIFT_LOCATION_SUCCESS,
           payload: res.data,
         });
        // cb && cb("Success");
-        console.log(res.data);
+  window.reload()
       })
       .catch((err) => {
         console.log(err);
