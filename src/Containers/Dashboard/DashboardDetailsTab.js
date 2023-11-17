@@ -66,7 +66,7 @@ class DashboardDetailsTab extends Component {
     }=this.props;
     return (
       <>
-        <TabsWrapper>
+        <TabsWrapper style={{height:"70vh",overflow: "scroll"}}>
           <StyledTabs
             defaultActiveKey="1"
             onChange={this.handleTabChange}
@@ -102,7 +102,7 @@ class DashboardDetailsTab extends Component {
           )}
               </Suspense>
     </TabPane>
-            <TabPane
+            {/* <TabPane
               tab={
                 <>
                  
@@ -120,15 +120,15 @@ class DashboardDetailsTab extends Component {
               }
               key="2"
             >
-              {/* <Suspense fallback={"Loading ..."}>
+             <Suspense fallback={"Loading ..."}>
                 {" "}
                 <DashboardTable 
                 />
-              </Suspense> */}
-            </TabPane>
+              </Suspense> 
+            </TabPane> */}
            
 
-            <TabPane
+            {/* <TabPane
               tab={
                 <>
                   <DnsIcon 
@@ -139,8 +139,7 @@ class DashboardDetailsTab extends Component {
                   {activeKey === "3" && (
                      <>
                      <AddIcon
-                      //  type="plus"
-                      //  tooltipTitle=" Document"
+                   
                        onClick={() => handleBillableCandidateModal(true)}
                        size="0.875em"
                        style={{
@@ -158,14 +157,14 @@ class DashboardDetailsTab extends Component {
                 {" "}
                 
             
-                   {/* <DashboardAllTable2/> */}
+                   <DashboardAllTable2/>
      
           
          
     
        
               </Suspense>
-    </TabPane>
+    </TabPane> */}
             {/* <TabPane
               tab={
                 <>

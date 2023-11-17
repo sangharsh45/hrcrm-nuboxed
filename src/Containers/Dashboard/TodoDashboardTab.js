@@ -4,6 +4,7 @@ import { bindActionCreators } from "redux";
 import ListAltIcon from "@mui/icons-material/ListAlt";
 import {  StyledTabs } from "../../Components/UI/Antd";
 import { TabsWrapper } from "../../Components/UI/Layout";
+import DnsIcon from '@mui/icons-material/Dns';
 import ActionNotification from "../Dashboard/ActionNotification";
 import UpcomingIcon from '@mui/icons-material/Upcoming';
 import TipsAndUpdatesIcon from "@mui/icons-material/TipsAndUpdates";
@@ -11,6 +12,9 @@ import {getTodosCount} from "./DashboardAction";
 import DashboardTodo from "./Child/DashboardTodo";
 import UpcomingEvents from "./Child/UpcomingEvents";
 import { Badge } from "antd";
+import DashboardTable2 from "./Child/DashboardTable2";
+import DashboardDetailsTab from "./DashboardDetailsTab";
+import DashboardAllTable2 from "./DashboardAllTable2";
 
 const TabPane = StyledTabs.TabPane;
 function handleRefreshPage() {
@@ -51,7 +55,7 @@ class TodoDashboardTab extends Component {
     const { activeKey } = this.state;
     return (
       <>
-        <TabsWrapper>
+        <TabsWrapper style={{overflow: "scroll"}}>
           <StyledTabs
             defaultActiveKey="1"
             onChange={this.handleTabChange}
@@ -82,6 +86,40 @@ class TodoDashboardTab extends Component {
                 <DashboardTodo style={{ overflow: "scroll" }} />
               </Suspense>
             </TabPane>
+            {this.props.user.dashboardrecruitDashInd === true &&(
+            <TabPane
+              tab={
+                <>
+                  <DnsIcon 
+                   style={{fontSize:"1.1rem"}}
+                  />
+                    <span class=" ml-1">Open Requirements</span>
+                  
+                  {activeKey === "2" && (
+                    <>
+                    </>
+                  )}
+                </>
+              }
+              key="3"
+            >
+              <Suspense fallback={"Loading ..."}>
+                {" "}
+                    {/* {this.props.user.dashboardrecruitDashInd === true &&(
+                   <DashboardTable2/>
+                    )} */}
+                                  
+                                                   {this.props.viewType==="ME"  ?(
+                   <DashboardAllTable2/>
+     
+          
+            ) : (
+              <DashboardTable2
+      />
+          )} 
+              </Suspense>
+    </TabPane>
+            )}
             {/* <TabPane
               tab={
                 <>
@@ -151,7 +189,9 @@ class TodoDashboardTab extends Component {
             {/* )} */}
           </StyledTabs>
         </TabsWrapper>
-        <Suspense fallback={null}></Suspense>
+        <Suspense fallback={null}>
+ 
+        </Suspense>
       </>
     );
   }
@@ -160,6 +200,7 @@ const mapStateToProps = ({dashboard,auth,customer}) => ({
   todosCount:dashboard.todosCount,
   userId: auth.userDetails.userId,
   endDate: dashboard.endDate,
+  user: auth.userDetails,
   startDate: dashboard.startDate,
 });
 const mapDispatchToProps = (dispatch) => bindActionCreators(

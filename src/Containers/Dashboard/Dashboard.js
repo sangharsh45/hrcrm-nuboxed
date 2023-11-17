@@ -24,6 +24,7 @@ import InvestorsPitchTab from "./InvestorsPitchTab";
 import GantChartTab from "./Child/GantChartTab"
 import DashInvestorsChartTab from "./DashInvestorsChartTab";
 import FunnelTab from "./Child/FunnelTab";
+import DashboardTable2 from "./Child/DashboardTable2";
 
 
 class Dashboard extends Component {
@@ -79,7 +80,7 @@ class Dashboard extends Component {
         activeButton={this.state.activeButton}
         />
         <Suspense fallback={<BundleLoader />}>
-          <div class="max-sm:h-[34rem] max-sm:overflow-x-auto">
+          <div class="max-sm:h-[44rem] max-sm:overflow-x-auto">
          <div class="flex justify-between max-sm:flex-col">
            <div class="w-[53%] max-sm:w-wk">
            <FlexContainer flexDirection="column" style={{ display: "block" }}>
@@ -141,6 +142,7 @@ class Dashboard extends Component {
             />
              )
              :viewType==="bulb" ? (<SourceChart/>)
+            
              :null
             }
              {this.state.activeButton==="Tasks"&&

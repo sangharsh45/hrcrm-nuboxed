@@ -258,7 +258,7 @@ class CandidateForm extends Component {
       };
     });
 
-    // console.log("sector",sectorOption)
+    console.log("sector",this.props.responseData)
 
     return (
       <>
