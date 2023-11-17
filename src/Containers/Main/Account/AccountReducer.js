@@ -4,7 +4,7 @@ import * as types from "./AccountActionType";
 const initialState = {
   viewType: "list",
 
-  clearbit1:{},
+  clearbit1: {},
 
   addDistributorModal: false,
   setEditingDistributor: {},
@@ -18,7 +18,7 @@ const initialState = {
 
   fetchingOrderRecords: false,
   fetchingOrderRecordsError: false,
-  orderRecordData:{},
+  orderRecordData: {},
 
   addingDistributor: false,
   addingDistributorError: false,
@@ -129,7 +129,7 @@ const initialState = {
 
   fetchingRecords: false,
   fetchingRecordsError: false,
-  accountRecordData:{},
+  accountRecordData: {},
 
   addingLocationInOrder: false,
   addingLocationInOrderError: false,
@@ -228,6 +228,10 @@ const initialState = {
   fetchingRenewOrderByOrderId: false,
   fetchingRenewOrderByOrderIdError: false,
   RenewOrder: [],
+
+  showRepairReasonModal: false,
+
+  showPaymentHistoryModal: false,
 
   distributorContactModal: false,
 
@@ -1284,6 +1288,7 @@ export const distributorReducer = (state = initialState, action) => {
         ...state,
         startRepairingInStatus: false,
         addStatusOfOrder: false,
+        showRepairReasonModal: false,
       };
     case types.START_REPAIR_IN_STATUS_FAILURE:
       return {
@@ -1782,39 +1787,44 @@ export const distributorReducer = (state = initialState, action) => {
         fetchingLocationListError: true,
       };
 
-      case types.SET_CLEARBIT_DATA1:
-        return { ...state, clearbit1: action.payload };
+    case types.SET_CLEARBIT_DATA1:
+      return { ...state, clearbit1: action.payload };
 
-        case types.GET_ACCOUNT_RECORDS_REQUEST:
-          return { ...state, fetchingRecords: true };
-        case types.GET_ACCOUNT_RECORDS_SUCCESS:
-          return {
-            ...state,
-            fetchingRecords: false,
-            accountRecordData: action.payload,
-          };
-        case types.GET_ACCOUNT_RECORDS_FAILURE:
-          return {
-            ...state,
-            fetchingRecords: false,
-            fetchingRecordsError: true,
-          };
+    case types.GET_ACCOUNT_RECORDS_REQUEST:
+      return { ...state, fetchingRecords: true };
+    case types.GET_ACCOUNT_RECORDS_SUCCESS:
+      return {
+        ...state,
+        fetchingRecords: false,
+        accountRecordData: action.payload,
+      };
+    case types.GET_ACCOUNT_RECORDS_FAILURE:
+      return {
+        ...state,
+        fetchingRecords: false,
+        fetchingRecordsError: true,
+      };
 
-          case types.GET_ORDER_RECORDS_REQUEST:
-            return { ...state, fetchingOrderRecords: true };
-          case types.GET_ORDER_RECORDS_SUCCESS:
-            return {
-              ...state,
-              fetchingOrderRecords: false,
-              orderRecordData: action.payload,
-            };
-          case types.GET_ORDER_RECORDS_FAILURE:
-            return {
-              ...state,
-              fetchingOrderRecords: false,
-              fetchingOrderRecordsError: true,
-            };
+    case types.GET_ORDER_RECORDS_REQUEST:
+      return { ...state, fetchingOrderRecords: true };
+    case types.GET_ORDER_RECORDS_SUCCESS:
+      return {
+        ...state,
+        fetchingOrderRecords: false,
+        orderRecordData: action.payload,
+      };
+    case types.GET_ORDER_RECORDS_FAILURE:
+      return {
+        ...state,
+        fetchingOrderRecords: false,
+        fetchingOrderRecordsError: true,
+      };
 
+    case types.HANDLE_REPAIR_REASON_MODAL:
+      return { ...state, showRepairReasonModal: action.payload };
+
+    case types.HANDLE_PAYMENT_HISTORY_MODAL:
+      return { ...state, showPaymentHistoryModal: action.payload };
     default:
       return state;
   }

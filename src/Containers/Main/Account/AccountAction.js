@@ -308,7 +308,7 @@ export const addDistributorActivityEvent = (event, cb) => (dispatch) => {
  */
 
 
-export const addOrderForm = (customer,distributorId) => (dispatch, getState) => {
+export const addOrderForm = (customer, distributorId) => (dispatch, getState) => {
 
   dispatch({
     type: types.ADD_ORDER_REQUEST,
@@ -2410,4 +2410,18 @@ export const getOrderRecords = (distributorId) => (dispatch) => {
         payload: err,
       });
     });
+};
+
+export const handleRepairReason = (modalProps) => (dispatch) => {
+  dispatch({
+    type: types.HANDLE_REPAIR_REASON_MODAL,
+    payload: modalProps,
+  });
+};
+
+export const handlePaymentHistory = (modalProps) => (dispatch) => {
+  dispatch({
+    type: types.HANDLE_PAYMENT_HISTORY_MODAL,
+    payload: modalProps,
+  });
 };

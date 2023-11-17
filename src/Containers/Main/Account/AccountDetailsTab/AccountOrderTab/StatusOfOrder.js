@@ -1,9 +1,16 @@
 import { Button, Steps } from 'antd';
 import React from 'react';
-import { startQCStatus, startRepairInStatus } from "../../AccountAction"
+import {
+    startQCStatus,
+    startRepairInStatus,
+    handlePaymentHistory,
+    handleRepairReason
+} from "../../AccountAction"
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import moment from 'moment';
+import StartRepairReasonModal from './StartRepairReasonModal';
+import ShowPaymentHistoryModal from './ShowPaymentHistoryModal';
 const StatusOfOrder = (props) => (
     <div style={{ backgroundColor: "white" }}>
         <Steps
@@ -104,6 +111,12 @@ const StatusOfOrder = (props) => (
                         <>
                             {props.particularRowData.priceConfirmInd && <b>
                                 Confirmed on {moment(props.particularRowData.orderConfirmedDate).format("DD-MM-YYYY")} by {props.particularRowData.orderConfirmedUser || " "}
+                                <Button
+                                    type='primary'
+                                    onClick={() => {
+                                        props.handlePaymentHistory(true)
+                                    }}
+                                >Show Payment</Button>
                             </b>
                             }
                             {/* props.particularRowData.qcRepairInd === 1 && props.particularRowData.qcRepairInd === 2 ?
@@ -126,19 +139,37 @@ const StatusOfOrder = (props) => (
                                         onClick={() => props.startRepairInStatus({
                                             qcRepairInd: 1,
                                             orderPhoneId: props.particularRowData.orderId || "",
-                                            qcRepairUserId: props.userId
+                                            qcRepairUserId: props.userId,
+                                            repairReason: "",
+                                            repairReasonInd: true
                                         }, props.distributorId)}
                                     >
                                         Start Repair</Button>)
-                                    :
-                                    <b>{(props.particularRowData.qcRepairInd === 2 || props.particularRowData.qcRepairInd === 3) &&
-                                        (<>
-                                            Assigned by {props.particularRowData.orderRepairAssignUser} on {moment(props.particularRowData.orderRepairAssignDate).format("DD-MM-YYYY")}
-                                        </>)}
-                                        &nbsp;   {props.particularRowData.qcRepairInd === 3 &&
-                                            (<> | Started on {moment(props.particularRowData.orderRepairStartTime).format("DD-MM-YYYY")} | Completed on {moment(props.particularRowData.orderRepairEndTime).format("DD-MM-YYYY")}
+                                    : !props.particularRowData.repairReasonInd && props.particularRowData.qcRepairInd === 0 && props.particularRowData.qcStartInd === 3 ?
+                                        (<Button
+                                            type='primary'
+                                            onClick={() => {
+                                                props.handleRepairReason(true)
+                                            }}
+                                        // onClick={() => props.startRepairInStatus({
+                                        //     qcRepairInd: 1,
+                                        //     repairReason: "",
+                                        //     repairReasonInd: true,
+                                        //     orderPhoneId: props.particularRowData.orderId || "",
+                                        //     qcRepairUserId: props.userId
+                                        // }, props.distributorId)}
+                                        >
+                                            Start Repair Without Approve
+                                        </Button>
+                                        ) :
+                                        <b>{(props.particularRowData.qcRepairInd === 2 || props.particularRowData.qcRepairInd === 3) &&
+                                            (<>
+                                                Assigned by {props.particularRowData.orderRepairAssignUser} on {moment(props.particularRowData.orderRepairAssignDate).format("DD-MM-YYYY")}
                                             </>)}
-                                    </b>
+                                            &nbsp;   {props.particularRowData.qcRepairInd === 3 &&
+                                                (<> | Started on {moment(props.particularRowData.orderRepairStartTime).format("DD-MM-YYYY")} | Completed on {moment(props.particularRowData.orderRepairEndTime).format("DD-MM-YYYY")}
+                                                </>)}
+                                        </b>
                             }
 
                         </>
@@ -176,10 +207,22 @@ const StatusOfOrder = (props) => (
                 },
             ]}
         />
+        <StartRepairReasonModal
+            particularRowData={props.particularRowData}
+            handleRepairReason={props.handleRepairReason}
+            showRepairReasonModal={props.showRepairReasonModal} />
+        <ShowPaymentHistoryModal
+            particularRowData={props.particularRowData}
+            handlePaymentHistory={props.handlePaymentHistory}
+            showPaymentHistoryModal={props.showPaymentHistoryModal}
+        />
+
     </div>
 );
 const mapStateToProps = ({ distributor, auth }) => ({
     userId: auth.userDetails.userId,
+    showRepairReasonModal: distributor.showRepairReasonModal,
+    showPaymentHistoryModal: distributor.showPaymentHistoryModal,
     distributorId: distributor.distributorDetailsByDistributorId.distributorId,
 });
 
@@ -187,7 +230,9 @@ const mapDispatchToProps = (dispatch) =>
     bindActionCreators(
         {
             startQCStatus,
-            startRepairInStatus
+            startRepairInStatus,
+            handlePaymentHistory,
+            handleRepairReason
         },
         dispatch
     );
