@@ -68,7 +68,7 @@ const AccountActionLeft = (props) => {
                             cursor: "pointer",
                         }}
                         onClick={() => props.setDistributorViewType("list")}>
-                               <ListAltIcon  />
+                               <TocIcon  />
                         </span>
                     </Badge>
                 </Tooltip>
@@ -101,7 +101,7 @@ const AccountActionLeft = (props) => {
                                     cursor: "pointer",
                                 }}
                                 onClick={() => props.setDistributorViewType("card")}
-                            > <TocIcon style={{fontSize:"1.4rem"}}   />
+                            > <GridViewIcon style={{fontSize:"1.4rem"}}   />
                             </span>
                         </Badge>
                     </Tooltip>

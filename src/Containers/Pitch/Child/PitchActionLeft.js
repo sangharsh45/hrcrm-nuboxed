@@ -21,18 +21,24 @@ import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognitio
 import { Button, Input, Tooltip,Tag,Badge } from "antd";
 import { FormattedMessage } from "react-intl";
 import TocIcon from '@mui/icons-material/Toc';
-import {getPitchRecords,searchPitchName} from "../PitchAction";
+import {getPitchRecords,getPitchCount,searchPitchName} from "../PitchAction";
 //import {inputLeadsDataSearch,getLeadsRecords,getJunkedLeadsRecords} from "../LeadsAction";
 const { Search } = Input;
 const Option = StyledSelect.Option;
 
 const PitchActionLeft = (props) => {
   const dummy = ["cloud", "azure", "fgfdg"];
-  
-
+  // useEffect(() => {
+  //   if (props.viewType === "card") {
+  //     props.getPitchRecords(props.userId);
+  //   } else if (props.viewType === "all") {
+  //     props.getPitchRecords(props.userId);
+  //   }
+  // }, [props.viewType, props.userId]);
   useEffect(() => {
-    props.getPitchRecords(props.userId)
+    props.getPitchCount(props.userId)
     }, [props.userId]);
+ 
   function handleChange(data) {
     
   }
@@ -46,52 +52,63 @@ const PitchActionLeft = (props) => {
 
     />
   );
-  console.log(props.pitchRecord)
+  console.log( props.pitchCount.InvestorLeadsDetails)
   return (
     <div class=" flex  items-center">
-<Badge
-        size="small"
-        count={(props.viewType === "card" && props.pitchRecord.InvestorLeadsDetails) || 0}
-        overflowCount={999}
-      >
+
 
     <Tooltip
         title= "Card View"
       >
+  <Badge
+        size="small"
+        count={(props.viewType === "card" && props.pitchCount.InvestorLeadsDetails) || 0}
+        
+        overflowCount={999}
+      >
         <span   class=" mr-2 text-sm cursor-pointer"
-        onClick={() => props.setLeadsViewType("card")}
+        onClick={() => props.setPitchViewType("card")}
           style={{
            color: props.viewType === "card" && "#1890ff",
           }}
         >
         <TocIcon />
         </span>
+        </Badge>
       </Tooltip>
-      </Badge>
+    
+     
 
-      <Tooltip
-        title= "All"
-      >
-        <span   class=" mr-2 text-sm cursor-pointer"
-        onClick={() => props.setLeadsViewType("all")}
-          style={{
-           color: props.viewType === "all" && "#1890ff",
-          }}
-        >
-        ALL
-        </span>
-      </Tooltip>
+   
       <Tooltip
         title= "Teams"
       >
         <span   class=" mr-2 text-sm cursor-pointer"
-        onClick={() => props.setLeadsViewType("teams")}
+        onClick={() => props.setPitchViewType("teams")}
           style={{
            color: props.viewType === "teams" && "#1890ff",
           }}
         >
          <PeopleIcon/>
         </span>
+      </Tooltip>
+      <Tooltip
+        title= "All"
+      >
+             <Badge
+        size="small"
+        count={(props.viewType === "all" && props.pitchCount.InvestorLeadsDetails) || 0}
+        overflowCount={999}
+      >
+        <span   class=" mr-2 text-sm cursor-pointer"
+        onClick={() => props.setPitchViewType("all")}
+          style={{
+           color: props.viewType === "all" && "#1890ff",
+          }}
+        >
+        ALL
+        </span>
+        </Badge>
       </Tooltip>
       {/* <Badge
         size="small"
@@ -107,7 +124,7 @@ const PitchActionLeft = (props) => {
                   fontFamily:"poppins",
                   borderColor: "orange",
                 }}
-                onClick={() => props.setLeadsViewType("list")}
+                onClick={() => props.setPitchViewType("list")}
               >
                 Junked
               </Tag>
@@ -156,11 +173,13 @@ const PitchActionLeft = (props) => {
 
 const mapStateToProps = ({pitch,auth}) => ({
   pitchRecord:pitch.pitchRecord,
+  pitchCount:pitch.pitchCount,
   userId: auth.userDetails.userId,
 
 });
 const mapDispatchToProps = (dispatch) => bindActionCreators({
   getPitchRecords,
+  getPitchCount,
   searchPitchName
 }, dispatch);
 export default withRouter(

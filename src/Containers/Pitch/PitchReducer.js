@@ -3,6 +3,7 @@ import * as types from "./PitchActionTypes";
 import dayjs from "dayjs"; 
 
 const initialState = {
+  viewType: "card",
     fetchingPitch:false,
     fetchingPitchError:false,
     pitchData:[],
@@ -20,6 +21,10 @@ const initialState = {
     fetchingPitchRecords: false,
     fetchingPitchRecordsError: false,
     pitchRecord:[],
+
+    fetchingPitchCount: false,
+    fetchingPitchCountError: false,
+    pitchCount:{},
 
     fetchingPitchStatus: false,
     fetchingPitchStatusError: false,
@@ -395,7 +400,26 @@ case types.GET_PITCH_REQUEST:
         };
               
         case types.HANDLE_PITCH_ACTIVITY_MODAL:
-          return { ...state, addPitchactivityModal: action.payload };      
+          return { ...state, addPitchactivityModal: action.payload };  
+          
+          
+          case types.GET_PITCH_COUNT_REQUEST:
+            return { ...state, fetchingPitchCount: true };
+          case types.GET_PITCH_COUNT_SUCCESS:
+            return {
+              ...state,
+              fetchingPitchCount: false,
+              pitchCount: action.payload,
+            };
+          case types.GET_PITCH_COUNT_FAILURE:
+            return {
+              ...state,
+              fetchingPitchCount: false,
+              fetchingPitchCountError: true,
+            };
+
+            case types.SET_PITCH_VIEW_TYPE:
+              return { ...state, viewType: action.payload };
 
     default:
 return state;

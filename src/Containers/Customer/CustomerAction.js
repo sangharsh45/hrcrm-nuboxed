@@ -1,7 +1,7 @@
 import * as types from "./CustomerActionTypes";
 import axios from "axios";
 import dayjs from "dayjs";
-import { base_url } from "../../Config/Auth";
+import { base_url,base_url2 } from "../../Config/Auth";
 import { message } from "antd";
 
 
@@ -2029,6 +2029,35 @@ export const getAllCustomerByCloser = (userId, startDate, endDate) => (
                 payload: err,
             });
         });
+  };
+
+  export const customerToAccount = ( customerId,data,userId ) => (dispatch) => {
+    dispatch({ type: types.CUSTOMER_TO_ACCOUNT_CONVERT_REQUEST });
+  
+    axios
+      .put(`${base_url2}/api/v1/customer/convert/account/${customerId} `, data, {
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+        },
+      })
+  
+      .then((res) => {
+       
+        message.success("Customer move to Account");
+        console.log(res);
+        dispatch({
+          type: types.CUSTOMER_TO_ACCOUNT_CONVERT_SUCCESS,
+          payload: customerId,
+        });
+        // cb && cb("success");
+      })
+      .catch((err) => {
+        console.log(err);
+        dispatch({
+          type: types.CUSTOMER_TO_ACCOUNT_CONVERT_FAILURE,
+        });
+        // cb && cb("failure");
+      });
   };
 
 

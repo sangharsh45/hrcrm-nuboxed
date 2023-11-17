@@ -109,13 +109,14 @@ class Employees extends Component {
         filter={this.state.filter}
            viewType={viewType}
         />:
+        // this.props.viewType === "table" ?
+        // <EmployeeTable 
+        // // filteredData={filteredData}
+        // viewType={viewType}
+        // />:
         this.props.viewType === "table" ?
         <EmployeeTable 
-        // filteredData={filteredData}
-        viewType={viewType}
-        />:
-        this.props.viewType === "card" ?
-        <EmployeeCardList 
+        filteredData={this.state.filteredData}
         // filteredData={filteredData}
         filter={this.state.filter}
         viewType={viewType}

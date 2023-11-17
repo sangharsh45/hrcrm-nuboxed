@@ -121,7 +121,7 @@ const PitchCardList = (props) => {
                                 // }}
                                 >
                                      <div class="flex justify-between">
-                                <div className=" flex font-medium flex-col w-[12rem] mb-4  max-sm:w-full">
+                                <div className=" flex font-medium flex-col w-[12rem]   max-sm:w-full">
                                 <div className="flex max-sm:w-full"> 
 <div>
 <SubTitle>
@@ -232,21 +232,7 @@ const PitchCardList = (props) => {
 />
 </ButtonGroup>
 </div>
-<div>
-<Tooltip
-        title={
-          <FormattedMessage id="app.activity" defaultMessage="Activity" />
-        }
-      >
-<AddchartIcon
-style={{fontSize: "1rem",cursor: 'pointer',}}
-onClick={()=>{
-  props.handleAssimodal(true)
-  handleRowData(item)
-  }}
-/>
-</Tooltip>
-</div>
+
 </div>  
      </div>  
                                 <div class="flex justify-between md:ml-4">
@@ -366,7 +352,8 @@ onClick={()=>{
           />
 </div>
                                 </div>
-                                <div class="flex flex-col justify-evenly  ">
+                                <div class="flex flex-col justify-evenly w-[6%] max-sm:flex-row max-sm:w-[10%]">
+                                <div >
                     <Tooltip title="Notes">
        <NoteAltIcon
                 onClick={() => {
@@ -378,6 +365,22 @@ onClick={()=>{
            </Tooltip>
 
             </div>
+            <div>
+<Tooltip
+        title={
+          <FormattedMessage id="app.activity" defaultMessage="Activity" />
+        }
+      >
+<AddchartIcon
+style={{fontSize: "1rem",cursor: 'pointer',}}
+onClick={()=>{
+  props.handleAssimodal(true)
+  handleRowData(item)
+  }}
+/>
+</Tooltip>
+</div>
+</div>
                                 </div>
                                 <div class="flex max-sm:flex-row  justify-evenly md:w-20 max-sm:w-[25%] ">
                                

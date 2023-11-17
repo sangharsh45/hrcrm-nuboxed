@@ -1,7 +1,4 @@
-import React, { Component, useEffect, useState, useMemo, lazy } from "react";
-import { MultiAvatar2, StyledLabel, } from '../../../../Components/UI/Elements'
-import { FlexContainer } from '../../../../Components/UI/Layout'
-import {  Tooltip,Button } from 'antd'
+import React, { useEffect, useState, } from "react";
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import moment from "moment";

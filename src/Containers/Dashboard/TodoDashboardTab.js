@@ -5,15 +5,12 @@ import ListAltIcon from "@mui/icons-material/ListAlt";
 import {  StyledTabs } from "../../Components/UI/Antd";
 import { TabsWrapper } from "../../Components/UI/Layout";
 import DnsIcon from '@mui/icons-material/Dns';
-import ActionNotification from "../Dashboard/ActionNotification";
 import UpcomingIcon from '@mui/icons-material/Upcoming';
-import TipsAndUpdatesIcon from "@mui/icons-material/TipsAndUpdates";
 import {getTodosCount} from "./DashboardAction";
 import DashboardTodo from "./Child/DashboardTodo";
 import UpcomingEvents from "./Child/UpcomingEvents";
 import { Badge } from "antd";
 import DashboardTable2 from "./Child/DashboardTable2";
-import DashboardDetailsTab from "./DashboardDetailsTab";
 import DashboardAllTable2 from "./DashboardAllTable2";
 
 const TabPane = StyledTabs.TabPane;

@@ -7,15 +7,17 @@ import { Button, Icon, Tooltip } from "antd";
 
 class AccountActionRight extends React.Component {
     render() {
-        const { handleDistributorModal, viewType } = this.props;
+        const { handleDistributorModal, viewType,user } = this.props;
         return (
             <FlexContainer alignItems="center">
                 {viewType === "list" ? (
                     <Tooltip title="Create">
+                        {user.accountCreateInd === true && user.erpInd === true &&(
                         <Button
                             type="primary"  onClick={() => handleDistributorModal(true)}>
                             Add {/* <PlusOutlined /> */}
                         </Button>
+                        )}
                     </Tooltip>
                 ) : null}
             </FlexContainer>
@@ -23,7 +25,9 @@ class AccountActionRight extends React.Component {
     }
 }
 
-const mapStateToProps = ({ }) => ({});
+const mapStateToProps = ({auth }) => ({
+    user: auth.userDetails,
+});
 const mapDispatchToProps = (dispatch) => bindActionCreators({}, dispatch);
 
 export default connect(

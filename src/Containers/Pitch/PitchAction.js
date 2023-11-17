@@ -545,3 +545,36 @@ export const getPitch = (userId,pageNo,filter) => (dispatch) => {
       payload: modalProps,
     });
   };
+
+  export const getPitchCount = (userId) => (dispatch) => {
+    dispatch({
+      type: types.GET_PITCH_COUNT_REQUEST,
+    });
+    axios
+      .get(`${base_url}/investorLeads/record/count/${userId}`, {
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+        },
+      })
+      .then((res) => {
+        console.log(res);
+        dispatch({
+          type: types.GET_PITCH_COUNT_SUCCESS,
+          payload: res.data,
+        });
+      })
+      .catch((err) => {
+        console.log(err.response);
+        dispatch({
+          type: types.GET_PITCH_COUNT_FAILURE,
+          payload: err,
+        });
+      });
+  };
+  export const setPitchViewType = (viewType) => (dispatch) => {
+    dispatch({
+      type: types.SET_PITCH_VIEW_TYPE,
+      payload: viewType,
+    });
+};
+  
