@@ -277,6 +277,9 @@ const initialState = {
   gettingCountRecordShipperError:false,
   shippeRecordCount:{},
 
+  fetchingEmployeeAsErp: false,
+  fetchingEmployeeAsErpError:false,
+  employeeAsErp:[],
 };
 const newDateRange = (dateRange, newDate) =>
   dateRange.map((range) => {
@@ -1365,6 +1368,23 @@ export const shipperReducer = (state = initialState, action) => {
           gettingCountRecordShipper: false,
           gettingCountRecordShipperError: true,
         };
+
+        case types.GET_EMPLOYEE_LIST_AS_ERP_REQUEST:
+          return { ...state, fetchingEmployeeAsErp: true };
+        case types.GET_EMPLOYEE_LIST_AS_ERP_SUCCESS:
+          return {
+            ...state,
+            fetchingEmployeeAsErp: false,
+            employeeAsErp: action.payload,
+          };
+        case types.GET_EMPLOYEE_LIST_AS_ERP_FAILURE:
+          return {
+            ...state,
+            fetchingEmployeeAsErp: false,
+            fetchingEmployeeAsErpError: true,
+          };
+    
+
     default:
       return state;
   }

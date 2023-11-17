@@ -9,9 +9,8 @@ import * as Yup from "yup";
 import AddressFieldArray from "../../../Components/Forms/Formik/AddressFieldArray";
 import { FlexContainer } from "../../../Components/UI/Layout";
 import SearchSelect from "../../../Components/Forms/Formik/SearchSelect";
-import { updateShipper } from "./ShipperAction";
+import { updateShipper,getEmployeelistAsErp } from "./ShipperAction";
 import {getShipByData} from "../../Settings/Category/ShipBy/ShipByAction";
-import { getAllCustomerEmployeelist } from "../../Employees/EmployeeAction";
 import { SelectComponent } from "../../../Components/Forms/Formik/SelectComponent";
 import { Listbox } from '@headlessui/react';
 
@@ -25,20 +24,20 @@ const CustomerSchema = Yup.object().shape({
 });
 function UpdateShipperForm(props) {
   useEffect(() => {
-    props.getAllCustomerEmployeelist();
+    props.getEmployeelistAsErp();
     props.getShipByData(props.orgId);
   }, []);
 
   const shipByOptions = props.ShipByData.map((item) => {
     return {
-      label: item.sectorName || "",
-      value: item.sectorId,
+      label: item.name || "",
+      value: item.shipById,
     };
   });
 
   const [defaultOption, setDefaultOption] = useState(props.setEditingShipper.assignedTo);
   const [selected, setSelected] = useState(defaultOption);
-  const selectedOption = props.allCustomerEmployeeList.find((item) => item.fullName === selected);
+  const selectedOption = props.employeeAsErp.find((item) => item.empName === selected);
   
   return (
     <>
@@ -198,7 +197,7 @@ function UpdateShipperForm(props) {
                   static
                   className="absolute z-10 max-h-56 w-full overflow-auto mt-1  bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
                 >
-                  {props.allCustomerEmployeeList.map((item) => (
+                  {props.employeeAsErp.map((item) => (
                     <Listbox.Option
                       key={item.employeeId}
                       className={({ active }) =>
@@ -290,9 +289,10 @@ const mapStateToProps = ({ auth, shipper,shipBy,employee }) => ({
   setEditingShipper: shipper.setEditingShipper,
   updateShipperById: shipper.updateShipperById,
   ShipByData:shipBy.ShipByData,
-  allCustomerEmployeeList:employee.allCustomerEmployeeList,
+  employeeAsErp:shipper.employeeAsErp,
   fullName: auth.userDetails.fullName,
   orgId:auth.userDetails.organizationId,
+
 });
 
 const mapDispatchToProps = (dispatch) =>
@@ -300,7 +300,7 @@ const mapDispatchToProps = (dispatch) =>
     {
       updateShipper,
       getShipByData,
-      getAllCustomerEmployeelist
+      getEmployeelistAsErp
     },
     dispatch
   );

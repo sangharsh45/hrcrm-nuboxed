@@ -2075,7 +2075,7 @@ export const getTaskNameDetails = (userId, Typeame,) => (dispatch) => {
   });
   axios
     .get(
-      `${base_url}/task/type/list/${userId}/${Typeame}`,
+      `${base_url}/task/open/type/list/${userId}/${Typeame}`,
       {
         headers: {
           Authorization: "Bearer " + sessionStorage.getItem("token") || "",

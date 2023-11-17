@@ -36,10 +36,10 @@ class TaskOpens extends Component {
     this.props.dashbCompletedTasks.map((item) => {
       return ( 
         <div className="col-span-2 sm:col-span-1">
-          <div className="flex" >{item.type}</div>
+          <div className="flex" >{item.name}</div>
           <div class="text-2xl cursor-pointer" onClick={()=>{
             this.handleParticularTaskName(item);
-            this.props.handleCompletedTaskTypeDrawer(true)}}>0</div>
+            this.props.handleCompletedTaskTypeDrawer(true)}}>{item.count}</div>
         </div>
       ); 
   })} 
