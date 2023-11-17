@@ -14,7 +14,7 @@ import { Badge } from "antd";
 import Task from "../Settings/Task/Task";
 import TabsWrapper1 from "../../Components/UI/Layout/TabsWrapper1";
 const TaskNew =lazy(()=>import("./TaskNew"));
-const TaskOpens=lazy(()=>import("./TaskOpens"));
+const TaskCompleted=lazy(()=>import("./TaskCompleted"));
 
 const TabPane = StyledTabs.TabPane;
 function handleRefreshPage() {
@@ -100,7 +100,7 @@ class TaskDashboardTab extends Component {
             >
               <Suspense fallback={"Loading ..."}>
                 {" "}
-                <TaskOpens/>
+                <TaskCompleted/>
               </Suspense>
             </TabPane>
             <TabPane

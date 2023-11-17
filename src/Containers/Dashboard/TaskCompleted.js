@@ -3,11 +3,11 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import {  message } from "antd";
 import {
-  getDashbrdOpenTasks,
-  handleTaskNameDrawer
-} from "../Dashboard/DashboardAction";
+  getDashbrdCompletedTasks,
+  handleCompletedTaskTypeDrawer
+} from "./DashboardAction";
 import { BundleLoader } from "../../Components/Placeholder";
-const TaskNameDrawer=lazy(()=>import("./TaskNameDrawer"));
+const CompletedTaskTypeDrawer=lazy(()=>import("./CompletedTaskTypeDrawer"));
 
 class TaskOpens extends Component {
   constructor(props) {
@@ -19,51 +19,51 @@ class TaskOpens extends Component {
  
   
   componentDidMount() {
-    this.props.getDashbrdOpenTasks(this.props.userId);
+    this.props.getDashbrdCompletedTasks(this.props.userId);
   }
   handleParticularTaskName=(taskNme)=>{
     this.setState({particularTaskName:taskNme})
   }
 
   render() {
-    if (this.props.fetchingDashboardoPENTasks) {
+    if (this.props.fetchingDashboardCompletedTasks) {
       return <BundleLoader/>
     }
     return (
       <>
           <div className="grid grid-cols-5 gap-4 p-4">
-  {/* {this.props.dashbOpenTasks.length &&
-    this.props.dashbOpenTasks.map((item) => { */}
-      {/* return ( */}
+  {this.props.dashbCompletedTasks.length &&
+    this.props.dashbCompletedTasks.map((item) => {
+      return ( 
         <div className="col-span-2 sm:col-span-1">
-          <div className="flex" >0</div>
+          <div className="flex" >{item.type}</div>
           <div class="text-2xl cursor-pointer" onClick={()=>{
-            // this.handleParticularTaskName(item);
-            this.props.handleTaskNameDrawer(true)}}>0</div>
+            this.handleParticularTaskName(item);
+            this.props.handleCompletedTaskTypeDrawer(true)}}>0</div>
         </div>
-      {/* ); */}
-    {/* })} */}
+      ); 
+  })} 
 </div>
-        <TaskNameDrawer 
+        <CompletedTaskTypeDrawer 
         particularTaskName={this.state.particularTaskName}
-        taskNameDrwr={this.props.taskNameDrwr}
-        handleTaskNameDrawer={this.props.handleTaskNameDrawer}/>
+        completedtaskDrwr={this.props.completedtaskDrwr}
+        handleCompletedTaskTypeDrawer={this.props.handleCompletedTaskTypeDrawer}/>
       </>
     );
   }
 }
 
 const mapStateToProps = ({ tasks ,dashboard,auth}) => ({
-  dashbOpenTasks: dashboard.dashbOpenTasks,
+  dashbCompletedTasks: dashboard.dashbCompletedTasks,
   userId:auth.userDetails.userId,
-  taskNameDrwr:dashboard.taskNameDrwr,
-  fetchingDashboardoPENTasks:dashboard.fetchingDashboardoPENTasks
+  completedtaskDrwr:dashboard.completedtaskDrwr,
+  fetchingDashboardCompletedTasks:dashboard.fetchingDashboardCompletedTasks
 });
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
-      getDashbrdOpenTasks,
-  handleTaskNameDrawer    
+      getDashbrdCompletedTasks,
+      handleCompletedTaskTypeDrawer    
     },
     dispatch
   );

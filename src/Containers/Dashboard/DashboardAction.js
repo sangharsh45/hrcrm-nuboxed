@@ -2069,13 +2069,13 @@ export const handleTaskNameDrawer = (modalProps) => (dispatch) => {
     payload: modalProps,
   });
 };
-export const getTaskNameDetails = (userId, name,startDate, endDate) => (dispatch) => {
+export const getTaskNameDetails = (userId, Typeame,) => (dispatch) => {
   dispatch({
     type: types.GET_TASK_NAME_REQUEST,
   });
   axios
     .get(
-      `${base_url}/task/type/list/${userId}/${name}?endDate=${endDate}&startDate=${startDate}`,
+      `${base_url}/task/type/list/${userId}/${Typeame}`,
       {
         headers: {
           Authorization: "Bearer " + sessionStorage.getItem("token") || "",
@@ -2096,12 +2096,12 @@ export const getTaskNameDetails = (userId, name,startDate, endDate) => (dispatch
     });
 };
 
-export const getDashbrdOpenTasks = (userId) => (dispatch) => {
+export const getDashbrdCompletedTasks = (userId) => (dispatch) => {
   dispatch({
-    type: types.GET_DASHBOARD_OPEN_TASK_REQUEST,
+    type: types.GET_DASHBOARD_COMPLETED_TASK_REQUEST,
   });
   axios
-    .get(`${base_url}/task/type/count/${userId}`, {
+    .get(`${base_url}/task/type/completed/count/${userId}`, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },
@@ -2110,14 +2110,47 @@ export const getDashbrdOpenTasks = (userId) => (dispatch) => {
     .then((res) => {
       console.log(res);
       dispatch({
-        type: types.GET_DASHBOARD_OPEN_TASK_SUCCESS,
+        type: types.GET_DASHBOARD_COMPLETED_TASK_SUCCESS,
         payload: res.data,
       });
     })
     .catch((err) => {
       console.log(err);
       dispatch({
-        type: types.GET_DASHBOARD_OPEN_TASK_FAILURE,
+        type: types.GET_DASHBOARD_COMPLETED_TASK_FAILURE,
+        payload: err,
+      });
+    });
+};
+
+export const handleCompletedTaskTypeDrawer = (modalProps) => (dispatch) => {
+  dispatch({
+    type: types.HANDLE_COMPLETED_TASK_TYPE_DRAWER,
+    payload: modalProps,
+  });
+};
+export const getCompletedTaskTypeDetails = (userId, name) => (dispatch) => {
+  dispatch({
+    type: types.GET_COMPLETED_TASK_TYPE_REQUEST,
+  });
+  axios
+    .get(
+      `${base_url}/task/type/completed/Lists/${userId}/${name}`,
+      {
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+        },
+      }
+    )
+    .then((res) => {
+      dispatch({
+        type: types.GET_COMPLETED_TASK_TYPE_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      dispatch({
+        type: types.GET_COMPLETED_TASK_TYPE_FAILURE,
         payload: err,
       });
     });

@@ -264,7 +264,7 @@ function ALoctionTable(props) {
         {
             title: "Name",
             width: "15%",
-            dataIndex: "userName",
+            dataIndex: "fullName",
             // defaultSortOrder: "descend",
             // ...getColumnSearchProps("shiftName"),
             // render: (text, item) => {
@@ -370,7 +370,7 @@ function ALoctionTable(props) {
             <StyledTable
                 rowKey="orderId"
                 // columns={columns}
-                dataSource={dataSourcef}
+                dataSource={props.alLocShift}
                 loading={props.fetchingAlLocShift}
                 scroll={{ y: tableHeight }}
                 pagination={false}

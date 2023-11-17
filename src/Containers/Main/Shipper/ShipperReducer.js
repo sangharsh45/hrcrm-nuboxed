@@ -273,6 +273,10 @@ const initialState = {
   fetchingShipperDispatchError: false,
   shipperDispatch: [],
 
+  gettingCountRecordShipper: false,
+  gettingCountRecordShipperError:false,
+  shippeRecordCount:{},
+
 };
 const newDateRange = (dateRange, newDate) =>
   dateRange.map((range) => {
@@ -1344,7 +1348,23 @@ export const shipperReducer = (state = initialState, action) => {
         fetchingAllShipperError: true,
       };
 
-
+      case types.GET_SHIPPER_RECORDS_REQUEST:
+        return {
+          ...state,
+          gettingCountRecordShipper: true,
+        };
+      case types.GET_SHIPPER_RECORDS_SUCCESS:
+        return {
+          ...state,
+          gettingCountRecordShipper: false,
+          shippeRecordCount: action.payload,
+        };
+      case types.GET_SHIPPER_RECORDS_FAILURE:
+        return {
+          ...state,
+          gettingCountRecordShipper: false,
+          gettingCountRecordShipperError: true,
+        };
     default:
       return state;
   }
