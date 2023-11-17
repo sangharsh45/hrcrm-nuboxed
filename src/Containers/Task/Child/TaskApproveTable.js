@@ -207,16 +207,14 @@ const TaskApproveTable = (props) => {
           </div> : null}
           <OnlyWrapCard style={{height:"81vh",backgroundColor:"#E3E8EE"}}>
           <div className=" flex justify-between w-[99%] p-2 bg-transparent font-bold sticky top-0 z-10">
-          <div className=" md:w-[12rem]">Type</div>
-        <div className=" md:w-40">Name</div>
+          <div className=" md:w-[14rem]">Type</div>
+        <div className=" md:w-44">Name</div>
              <div className=" md:w-28 ">Submitted By</div>
-        <div className="md:w-36">Deviation</div>
-        <div className="md:w-24">Assigned On</div>
-        <div className="md:w-24">Owner</div>
-        <div className="md:w-24"></div>
+        <div className="md:w-16">Deviation</div>
+        <div className="md:w-28">Assigned On</div>
+        <div className="md:w-28"></div>
         <div className="md:w-[3%]"></div>
         <div className="md:w-[5%]"></div>
-        <div className="w-12">Action</div>
 </div>
           {approvalTaskTable.map((item) => { 
         const currentDate = moment();
@@ -234,7 +232,7 @@ const TaskApproveTable = (props) => {
                                  
                                 }}>
                                      <div class="flex">
-                                <div className=" flex font-medium flex-col md:w-36 max-sm:flex-row justify-between w-full ">
+                                <div className=" flex font-medium flex-col md:w-[12.1rem] max-sm:flex-row justify-between w-full ">
 <div className="flex max-sm:w-full"> 
 {item.priority === "High" && (
                       <div
@@ -267,7 +265,7 @@ const TaskApproveTable = (props) => {
                       ></div>
                     )}
                     <div class=" w-1"></div>
-          <div class=" w-[10rem] max-sm:w-full">
+          <div class=" w-[7.1rem] max-sm:w-full">
                                         <Tooltip>
                                         <div class=" flex max-sm:justify-between flex-row w-full md:flex-col">
                                             {/* <div class="text-sm text-cardBody font-poppins max-sm:hidden">
@@ -283,7 +281,7 @@ const TaskApproveTable = (props) => {
                                         </div>
                                 </div>
 
-                                <div className=" flex font-medium flex-col  md:w-32 max-sm:flex-row w-full ">
+                                <div className=" flex font-medium flex-col  md:w-[10.3rem] max-sm:flex-row w-full ">
                                     {/* <div class=" text-sm text-cardBody  font-poppins max-sm:hidden"> Name </div> */}
                                     <div class=" text-xs text-cardBody font-semibold  font-poppins">   
                                     <span   
@@ -359,7 +357,7 @@ const TaskApproveTable = (props) => {
                    </div>
                    <div class="flex max-sm:mt-4 w-28">
                                 <div className=" flex font-medium flex-col  md:w-24 max-sm:flex-row w-full ">
-                                    <div class=" text-sm text-cardBody font-poppins max-sm:hidden">Assigned On</div>
+                                    {/* <div class=" text-sm text-cardBody font-poppins max-sm:hidden">Assigned On</div> */}
                                     <div class="text-xs text-cardBody font-poppins mb-2">
                                     <span>{` ${moment(item.assignedOn).format("ll")}`}</span>
                                     </div>

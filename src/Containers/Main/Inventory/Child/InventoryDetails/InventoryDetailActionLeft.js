@@ -36,13 +36,13 @@ class InventoryDetailActionLeft extends React.Component {
         </Tooltip>
         <FlexContainer justifyContent="space-between">
        
-            <FlexContainer flexDirection="row" style={{ width: "30rem" }}>
+            <FlexContainer flexDirection="row" style={{ width: "30rem",display:"flex",alignItems:"center" }}>
             <Title width="25%">
-              {` ${locationName || ""} `}
+             <label class="text-lg"> {` ${locationName || ""} `}</label>
             </Title>
            
           <div style={{ width: "70%",justifyContent:"center",marginLeft:"1rem" }}>
-          {`${addressdata1 || ""}, ${addressdata2 || ""}, ${addressdata3 || ""} ${addressdata4 || ""} ${addressdata5 || ""}`} 
+          {`${addressdata1 || ""} ${addressdata2 || ""} ${addressdata3 || ""} ${addressdata4 || ""} ${addressdata5 || ""}`} 
           </div>
         
           
