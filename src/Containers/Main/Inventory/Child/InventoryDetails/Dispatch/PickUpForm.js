@@ -8,7 +8,7 @@ import { bindActionCreators } from "redux";
 import { addPickupDate } from "../../../InventoryAction";
 
 function PickUpForm(props) {
-
+  console.log(props.orderPhoneId)
   return (
     <>
       <Formik
