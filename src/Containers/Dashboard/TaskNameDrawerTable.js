@@ -5,16 +5,14 @@ import { connect } from "react-redux";
 import { BundleLoader } from "../../Components/Placeholder";
 import { StyledTable } from "../../Components/UI/Antd";
 import {getTaskNameDetails} from "./DashboardAction";
+import moment from "moment";
 
 function TaskNameDrawerTable (props) {
     useEffect(()=>{
-      if (props.timeRangeType === "today"){
-        props.getTaskNameDetails(props.particularTaskName.name,props.userId,props.startDate,props.endDate);
-      }
-      else {
-        props.getTaskNameDetails(props.particularTaskName.name,props.userId,props.startDate,props.endDate);
-      }
-    }, [props.particularTaskName.name,props.userId,props.startDate,props.endDate]);
+      
+        props.getTaskNameDetails(props.userId,props.particularTaskName.name,);
+    
+    }, [props.userId,props.particularTaskName.name]);
     const columns = [
       {
         title: <FormattedMessage
@@ -22,7 +20,7 @@ function TaskNameDrawerTable (props) {
           defaultMessage="Name"
         />,
         width: "30%",
-        dataIndex: "name",
+        dataIndex: "taskType",
       },
      
       {
@@ -30,19 +28,14 @@ function TaskNameDrawerTable (props) {
           id="app.startDate"
           defaultMessage="Start Date"
         />,
-        width: "22%",
-        dataIndex: "email",
-        defaultSortOrder: 'descend',
-        // sorter: (a, b) => a.proposalAmount - b.proposalAmount,
-  
-        // render: (name, item, i) => {
-        //   return (
-        //     <span>
-        //       <CurrencySymbol currencyType={this.props.currency} />{" "}
-        //       {`${item.proposalAmount}`}
-        //     </span>
-        //   );
-        // },
+        width: "12%",
+        render: (name, item, i) => {
+          return (
+            <span>
+              {` ${moment(item.startDate).format("ll")}`}
+            </span>
+          );
+        },
       },
       {
         // title: "Status",
@@ -50,8 +43,14 @@ function TaskNameDrawerTable (props) {
           id="app.endDate"
           defaultMessage="End Date"
         />,
-        width: "25%",
-        dataIndex: "companyName",
+        width: "12%",
+        render: (name, item, i) => {
+          return (
+            <span>
+              {` ${moment(item.endDate).format("ll")}`}
+            </span>
+          );
+        },
 
       },
     ];

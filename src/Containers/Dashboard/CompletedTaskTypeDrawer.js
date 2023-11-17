@@ -8,7 +8,7 @@ const CompletedTaskTypeDrawer = (props) => {
   return (
     <>
       <StyledDrawer
-        title= {`${props.particularTaskName.type}`}
+        title= {`${props.particularTaskName.name}`}
         width="45%"
         visible={props.completedtaskDrwr}
         maskClosable={false}

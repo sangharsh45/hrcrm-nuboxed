@@ -1430,3 +1430,28 @@ export const getShipperRecords = (userId) => (dispatch) => {
     });
 };
 
+export const getEmployeelistAsErp = () => (dispatch) => {
+  dispatch({
+    type: types.GET_EMPLOYEE_LIST_AS_ERP_REQUEST,
+  });
+  axios
+     .get(`${base_url}/employee/user-list/drop-down/erp`, {
+     headers: {
+      Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+    },
+  })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.GET_EMPLOYEE_LIST_AS_ERP_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.GET_EMPLOYEE_LIST_AS_ERP_FAILURE,
+        payload: err,
+      });
+    });
+};
