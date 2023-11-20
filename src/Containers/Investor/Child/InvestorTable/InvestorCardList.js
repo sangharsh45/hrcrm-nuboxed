@@ -155,7 +155,7 @@ function InvestorCardList(props) {
            } `;
                     return (
                         <div>
-                            <div className="flex rounded-xl justify-between mt-4 bg-white h-12 items-center p-3"
+                            <div className="flex rounded-xl justify-between mt-2 bg-white h-11 items-center p-3"
                                 // style={{
                                 //     borderBottom: "3px dotted #515050"
                                 // }}

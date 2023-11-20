@@ -69,7 +69,7 @@ function DealForm(props) {
       props.dealsContactData
         .filter((option) => {
           if (
-            option.customerId === filterOptionValue &&
+            option.investorId === filterOptionValue &&
             option.probability !== 0
           ) {
             return option;
@@ -79,9 +79,10 @@ function DealForm(props) {
           label: option.fullName || "",
           value: option.contactId,
         }));
-
+  
     return contactOptions;
   }
+  
 
 
 
@@ -186,7 +187,7 @@ function DealForm(props) {
     .map((item) => {
       return {
         label: `${item.name || ""}`,
-        value: item.customerId,
+        value: item.investorId,
       };
     });
 
@@ -240,7 +241,8 @@ function DealForm(props) {
     name,
   } = props;
   const selectedOption = props.allEmployeeList.find((item) => item.empName === selected);
-  
+  console.log(props.dealsContactData)
+  console.log( props.dealLinkStages)
   return (
     <>
       <Formik
@@ -589,7 +591,7 @@ function DealForm(props) {
 <div class=" w-w47.5 max-sm:w-wk">
                <StyledLabel>
                   <Field
-                    name="customerId"
+                    name="investorId"
                     // selectType="customerList"
                     isColumnWithoutNoCreate
                     label={
@@ -607,7 +609,7 @@ function DealForm(props) {
                     }
                     isColumn
                     margintop={"0"}
-                    value={values.customerId}
+                    value={values.investorId}
                     inlineLabel
                   />
                 </StyledLabel>
@@ -648,17 +650,17 @@ function DealForm(props) {
                     component={SelectComponent}
                     options={
                       Array.isArray(
-                        getAreaOptions("customerId", values.customerId)
+                        getAreaOptions("investorId", values.investorId)
                       )
-                        ? getAreaOptions("customerId", values.customerId)
+                        ? getAreaOptions("investorId", values.investorId)
                         : []
                     }
                     value={values.contactId}
                     filterOption={{
-                      filterType: "customerId",
-                      filterValue: values.customerId,
+                      filterType: "investorId",
+                      filterValue: values.investorId,
                     }}
-                    disabled={!values.customerId}
+                    disabled={!values.investorId}
                     isColumn
                     inlineLabel
                   />

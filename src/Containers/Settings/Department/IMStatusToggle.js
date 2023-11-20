@@ -61,7 +61,7 @@ console.log("crrm",props.imInd);
             checked={props.imInd || im}
             // disabled={props.status}
             isLoading={true}
-            style={{width: "4rem"}}
+            style={{width: "7%"}}
             checkedChildren="Yes"
             unCheckedChildren="No"
           />

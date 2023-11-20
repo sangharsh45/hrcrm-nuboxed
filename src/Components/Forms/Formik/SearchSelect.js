@@ -1062,7 +1062,7 @@ class SearchSelect extends Component {
       return (
         <>
           {!noLabel && (
-            <StyledLabel style={{ flexBasis: "20%" }}>{label}</StyledLabel>
+            <StyledLabel style={{ flexBasis: "32%" }}>{label}</StyledLabel>
           )}
           <StyledCreatable
             classNamePrefix="sales"
@@ -1143,7 +1143,7 @@ class SearchSelect extends Component {
         <FlexContainer>
           <FlexContainer alignItems="center" flexWrap={inlineLabel && "nowrap"}>
             {!noLabel && (
-              <StyledLabel style={{ flexBasis: "20%" }}>{label}</StyledLabel>
+              <StyledLabel style={{ flexBasis: "32%" }}>{label}</StyledLabel>
             )}
             <StyledCreatable
               classNamePrefix="sales"

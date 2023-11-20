@@ -16,13 +16,13 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import StatusPitchToggle from "../Child/StatusPitchToggle"
 import NoteAltIcon from "@mui/icons-material/NoteAlt";
 import {
-  getPitch,
-  deletePitchData,
-  handleUpdatePitchModal,
-  setEditPitch,
-  handlePitchNotesDrawerModal,
-  updateTypeForPitch,
-  handleAssimodal
+    getAllPitch
+//   deletePitchData,
+//   handleUpdatePitchModal,
+//   setEditPitch,
+//   handlePitchNotesDrawerModal,
+//   updateTypeForPitch,
+//   handleAssimodal
 } from "../PitchAction";
 import ReactCountryFlag from 'react-country-flag';
 import AddchartIcon from '@mui/icons-material/Addchart';  
@@ -36,11 +36,11 @@ import { BundleLoader } from "../../../Components/Placeholder";
 
 const ButtonGroup = Button.Group;
 
-const PitchCardList = (props) => {
+const PitchAllCardList = (props) => {
   const [page, setPage] = useState(0);
   const [hasMore, setHasMore] = useState(true);
   useEffect(() => {
-    props.getPitch(props.userId,page,"creationdate");
+    props.getAllPitch(page);
     setPage(page + 1);
     // props.getSectors();
     // props.getCountries();
@@ -54,17 +54,18 @@ const PitchCardList = (props) => {
   };
   const handleLoadMore = () => {
     setPage(page + 1);
-    props.getPitch(props.currentUser?props.currentUser:props.userId,page,
-      props.filter?props.filter:"creationdate"
+    props.getAllPitch(page
+    //   props.filter?props.filter:"creationdate"
 
       );
+      setPage(page + 1);
 }
   function handleSetCurrentLeadsId(item) {
     setCurrentLeadsId(item);
   }
-   const { user,deleteLeadsData, handleUpdateLeadsModal, updateLeadsModal,fetchingPitch,leadsAllData  } = props;
+   const { user,deleteLeadsData, handleUpdateLeadsModal, updateLeadsModal,fetchingAllPitch,leadsAllData  } = props;
 
-  if (fetchingPitch) {
+  if (fetchingAllPitch) {
     return <BundleLoader />;
   }
 
@@ -84,13 +85,13 @@ const PitchCardList = (props) => {
 
       </div>
       <InfiniteScroll
-        dataLength={props.pitchData.length}
+        dataLength={props.allPitchData.length}
         next={handleLoadMore}
         hasMore={hasMore}
-        loader={fetchingPitch?<h4 style={{ textAlign: 'center' }}>Loading...</h4>:null}
+        loader={fetchingAllPitch?<h4 style={{ textAlign: 'center' }}>Loading...</h4>:null}
         height={"70vh"}
       >
-   {props.pitchData.map((item) => { 
+   {props.allPitchData.map((item) => { 
  const currentdate = moment().format("DD/MM/YYYY");
  const date = moment(item.creationDate).format("DD/MM/YYYY");
        
@@ -405,7 +406,7 @@ onClick={()=>{
                         <div>
                         <StyledPopconfirm
             title="Do you want to delete?"
-            onConfirm={() => deletePitchData(item.investorleadsId)}
+            // onConfirm={() => deletePitchData(item.investorleadsId)}
           >
              {user.imInd === true  &&  user.plantDeleteInd === true && ( 
             <DeleteOutlined
@@ -494,37 +495,28 @@ const mapStateToProps = ({ auth, leads, sector,pitch }) => ({
 //   leadsAllData: leads.leadsAllData,
 user: auth.userDetails,
   userId: auth.userDetails.userId,
-  fetchingPitch:pitch.fetchingPitch,
+  fetchingAllPitch:pitch.fetchingAllPitch,
   addDrawerPitchNotesModal:pitch.addDrawerPitchNotesModal,
   updatePitchModal:pitch.updatePitchModal,
   openASSImodal:pitch.openASSImodal,
-  pitchData:pitch.pitchData
+  allPitchData:pitch.allPitchData
 });
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
-        getPitch,
-        deletePitchData,
-        handleUpdatePitchModal,
-        setEditPitch,
-        updateTypeForPitch,
-        handlePitchNotesDrawerModal,
-        handleAssimodal
-    //   getLeads,
-    //   getSectors,
-    //   deleteLeadsData,
-    //   setEditLeads,
-    //   handleUpdateLeadsModal,
-    //   handleLeadsEmailDrawerModal,
-    //   getLeadDetailsById,
-    //   getCountries,
-    //   updateTypeForLead,
-    //   handleCETmodal
+        getAllPitch,
+        // deletePitchData,
+        // handleUpdatePitchModal,
+        // setEditPitch,
+        // updateTypeForPitch,
+        // handlePitchNotesDrawerModal,
+        // handleAssimodal
+ 
     },
     dispatch
   );
 
-export default connect(mapStateToProps, mapDispatchToProps)(PitchCardList);
+export default connect(mapStateToProps, mapDispatchToProps)(PitchAllCardList);
 function RoleButton({ type, iconType, tooltip, role, size, onClick }) {
   console.log(role);
   console.log(type);

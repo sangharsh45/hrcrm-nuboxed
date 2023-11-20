@@ -4,6 +4,7 @@ import { bindActionCreators } from "redux";
 import { BundleLoader, GridLoader } from "../../Components/Placeholder";
 import {setDealViewType,handleDealModal}from "./DealAction";
 import DealsBoard from "./Child/DealsBoard"
+import DealsAllCardList from './Child/DealDetail/Dealcards/DealsAllCardList';
 const DealHeader = lazy(()=>import("./Child/DealHeader"));
 const DealCardList = lazy(()=>import("./Child/DealTable/DealCardList"));
 const CreateDealModal = lazy(() => import("./Child/CreateDealModal"));
@@ -56,6 +57,9 @@ function Deal (props) {
         //      <OpportunityCardView/> :
              viewType === "stage" ?
              <DealsBoard/>
+             :
+             viewType === "all" ?
+             <DealsAllCardList/>
              :
         viewType === "won" ?
         

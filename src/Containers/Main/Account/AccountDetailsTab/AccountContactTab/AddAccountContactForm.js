@@ -15,6 +15,7 @@ import { TextareaComponent } from "../../../../../Components/Forms/Formik/Textar
 import { addContactDistributor } from "../../AccountAction";
 import { getDesignations } from "../../../../Settings/Designation/DesignationAction"
 import { getDepartments } from "../../../../Settings/Department/DepartmentAction"
+import { FormattedMessage } from "react-intl";
 
 const DistributorSchema = Yup.object().shape({
     firstName: Yup.string().required("Input required"),
@@ -180,7 +181,11 @@ class AddAccountContactForm extends Component {
                                         <div style={{ width: "47%" }}>
                                             <FastField
                                                 name="dialCode1"
-                                                label="Mobile #"
+                                                // style={{flexBasis:"33%"}}
+                                                label={
+                                                    <FormattedMessage id="app.mobile #" defaultMessage="Mobile #" />
+                                                  }
+                                                // label="Mobile #"
                                                 isColumn
                                                 selectType="dialCode"
                                                 component={SearchSelect}
@@ -206,6 +211,7 @@ class AddAccountContactForm extends Component {
                                         <div style={{ width: "47%" }}>
                                             <FastField
                                                 name="dialCode2"
+                                                // style={{flexBasis:"33%"}}
                                                 selectType="dialCode"
                                                 label="Phone #"
                                                 isColumn

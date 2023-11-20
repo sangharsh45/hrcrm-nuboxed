@@ -183,7 +183,7 @@ class UpdateContactInvestForm extends Component {
             <Form className="form-background">
               <div class=" flex justify-around max-sm:flex-col  ">
                 <div class=" h-full w-w47.5 max-sm:w-wk" >
-                 <div class=" flex  flex-nowrap">
+                 <div class=" flex justify-between  flex-nowrap">
                     <FastField name="imageId" component={Upload} />
                     <div>
                     <div class=" flex justify-between max-sm:flex-col">

@@ -14,13 +14,13 @@ class AddAccountModal extends Component {
             <div>
                 <StyledDrawer
                     title="Add Order"
-                    width="60vw"
+                    width="55%"
                     visible={addLinkDistributorOrderConfigureModal}
                     destroyOnClose
                     maskClosable={false}
                     // maskStyle={{transition: '0.5s filter linear', filter: 'blur(20px)', width: '100%', height: '100%', padding: '50px', backgroundColor: 'rgba(49, 56, 66,0.7)'}}
                     maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}
-
+                    style={{marginTop:"5rem"}}
                     onClose={() => handleLinkDistributorOrderConfigureModal(false)}
                     footer={null}
                 >

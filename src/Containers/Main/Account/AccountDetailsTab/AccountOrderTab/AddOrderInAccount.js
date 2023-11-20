@@ -100,6 +100,7 @@ function AddOrderInAccount(props) {
             }}
         >
             {({ values, handleChange }) => (
+                  <div class="overflow-y-auto h-[40rem] overflow-x-hidden max-sm:h-[30rem]">
                 <Form>
                     <div>
                         <StyledLabel><h3> Pickup Address</h3></StyledLabel>
@@ -168,7 +169,7 @@ function AddOrderInAccount(props) {
                             <div style={{ width: "47%" }}>
                                 <Field
                                     name="paymentInTerms"
-                                    label="Payment Terms"
+                                    label="Payment Terms (in Days)"
                                     isColumn
                                     inlineLabel
                                     component={SelectComponent}
@@ -226,6 +227,9 @@ function AddOrderInAccount(props) {
                                                         priority === "High"
                                                             ? "red"
                                                             : "white",
+                                                            borderRadius: "50%", 
+                                                            width: "31px", 
+                                                            height: "31px"
                                                 }}
                                             />
                                         </Tooltip>
@@ -241,6 +245,9 @@ function AddOrderInAccount(props) {
                                                         priority === "Medium"
                                                             ? "Orange"
                                                             : "white",
+                                                            borderRadius: "50%", 
+                                                            width: "31px", 
+                                                            height: "31px"
                                                 }}
                                             />
                                         </Tooltip>
@@ -256,6 +263,9 @@ function AddOrderInAccount(props) {
                                                         priority === "Low"
                                                             ? "teal"
                                                             : "white",
+                                                            borderRadius: "50%", 
+                                                            width: "31px", 
+                                                            height: "31px"
                                                 }}
                                             ></Button>
                                         </Tooltip>
@@ -277,22 +287,30 @@ function AddOrderInAccount(props) {
                             </div>
 
                             <div style={{ width: "47%", margin: "67px 39px 17px -33px", display: "flex", justifyContent: "flex-end" }}>
-
-                                <Button
-                                    style={{
-                                        backgroundColor: "#3695cd",
-                                        color: "white",
-                                        fontSize: "15px",
-                                        padding: "0px 12px",
-                                    }
-                                    }
-                                    htmlType="Submit"
-                                >Save</Button>
-                            </div>
+    <Button
+        style={{
+            backgroundColor: "#3695cd",
+            color: "white",
+            fontSize: "15px",
+            padding: "0px 12px",
+        }}
+        htmlType="Submit"
+    >
+        Save
+    </Button>
+    {/* <Button
+        type="primary"
+        onClick={() => this.next()}
+        style={{ marginLeft: "10px" }}
+    >
+        Proceed
+    </Button> */}
+</div>
                         </FlexContainer>
                     </div>
 
                 </Form>
+                </div>
             )}
         </Formik>
     );
