@@ -8,6 +8,9 @@ const initialState = {
   fetchingDealError:false,
   dealsByuserId:[],
 
+  updatingDealName: false,
+  updatingDealNameError: false,
+
   fetchingNotesListByDealId: false,
   fetchingNotesListByDealIdError: false,
   notesListByDealId:[],
@@ -17,6 +20,10 @@ const initialState = {
   fetchingDealLinkedWorkflow: false,
   fetchingDealLinkedWorkflowError: false,
   dealLinkWorkflow:[],
+
+  fetchingAllDealsData: false,
+  fetchingAllDealsDataError: false,
+  allDealsData:[],
 
   fetchingDealLinkedStages: false,
   fetchingDealLinkedStagesError: false,
@@ -355,6 +362,46 @@ export const dealReducer = (state = initialState, action) => {
                       sendingToWon: false,
                       sendingToWonError: true,
                     };
+
+                    case types.UPDATE_DEAL_NAME_REQUEST:
+                      return { ...state, updatingDealName: true };
+                    case types.UPDATE_DEAL_NAME_SUCCESS:
+                      return {
+                        ...state,
+                        updatingDealName: false,
+                        updateOpportunityModal: false,
+                        dealDetailsbyID:action.payload,
+                        // opportunity: state.opportunity.map((item) => {
+                        //   if (item.opportunityId === action.payload.opportunityId) {
+                        //     return action.payload;
+                        //   } else {
+                        //     return item;
+                        //   }
+                        // }),
+                      };
+                    case types.UPDATE_DEAL_NAME_FAILURE:
+                      return {
+                        ...state,
+                        updatingDealName: false,
+                        updatingDealNameError: true,
+                      };
+
+
+                      case types.GET_ALL_DEALS_DATA_REQUEST:
+
+                        return { ...state, fetchingAllDealsData: true };
+                      case types.GET_ALL_DEALS_DATA_SUCCESS:
+                        return {
+                          ...state,
+                          fetchingAllDealsData: false,
+                          allDealsData: action.payload,
+                        };
+                      case types.GET_ALL_DEALS_DATA_FAILURE:
+                        return {
+                          ...state,
+                          fetchingAllDealsData: false,
+                          fetchingAllDealsDataError: true,
+                        };
 
                             
     default:

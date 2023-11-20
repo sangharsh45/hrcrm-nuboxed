@@ -477,3 +477,60 @@ export const sendToWon = ( invOpportunityId,data ) => (dispatch) => {
       });
     });
 };
+
+export const updateDealName = (data, invOpportunityId) => (
+  dispatch,
+  getState
+) => {
+   const userId = getState().auth.userDetails.userId;
+  dispatch({ type: types.UPDATE_DEAL_NAME_REQUEST });
+  axios
+    .put(`${base_url}/investorOpportunity/${invOpportunityId}`, data, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      //  dispatch(getOpportunityListByUserId(userId,0));
+      dispatch({
+        type: types.UPDATE_DEAL_NAME_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.UPDATE_DEAL_NAME_FAILURE,
+        payload: err,
+      });
+    });
+};
+
+
+export const getAllDeals = (userId,pageNo) => (dispatch) => {
+ 
+  dispatch({
+    type: types.GET_ALL_DEALS_DATA_REQUEST,
+  });
+  axios
+    .get(`${base_url}/investorOpportunity/user/${userId}/${pageNo}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.GET_ALL_DEALS_DATA_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err.response);
+      dispatch({
+        type: types.GET_ALL_DEALS_DATA_FAILURE,
+        payload: err,
+      });
+    });
+};

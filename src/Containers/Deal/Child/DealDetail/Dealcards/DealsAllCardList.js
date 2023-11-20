@@ -1,46 +1,39 @@
 
 import React, { useEffect, useState} from "react";
-import { StyledPopconfirm} from "../../../Components/UI/Antd";
+import { StyledPopconfirm} from "../../../../../Components/UI/Antd";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import moment from "moment";
-import UpdateLPitchModal from "../Child/UpdateLPitchModal"
 import ExploreIcon from "@mui/icons-material/Explore";
 import { DeleteOutlined } from "@ant-design/icons";
-import { MultiAvatar, SubTitle } from "../../../Components/UI/Elements";
+import { MultiAvatar, SubTitle } from "../../../../../Components/UI/Elements";
 import "jspdf-autotable";
-import { OnlyWrapCard } from '../../../Components/UI/Layout'
-import MailOutlineIcon from '@mui/icons-material/MailOutline';
-import LocationOnIcon from '@mui/icons-material/LocationOn';
-import DeleteIcon from "@mui/icons-material/Delete";
-import StatusPitchToggle from "../Child/StatusPitchToggle"
-import NoteAltIcon from "@mui/icons-material/NoteAlt";
+import { OnlyWrapCard } from '../../../../../Components/UI/Layout'
 import {
-  getPitch,
-  deletePitchData,
-  handleUpdatePitchModal,
-  setEditPitch,
-  handlePitchNotesDrawerModal,
-  updateTypeForPitch,
-  handleAssimodal
-} from "../PitchAction";
+    getAllDeals
+//   deletePitchData,
+//   handleUpdatePitchModal,
+//   setEditPitch,
+//   handlePitchNotesDrawerModal,
+//   updateTypeForPitch,
+//   handleAssimodal
+} from "../../../DealAction";
 import ReactCountryFlag from 'react-country-flag';
 import AddchartIcon from '@mui/icons-material/Addchart';  
 import { Button, Tooltip } from "antd";
 import { FormattedMessage } from "react-intl";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
-import OpenASSimodal from "./OpenASSimodal";
 import InfiniteScroll from "react-infinite-scroll-component";
-import AddPitchNotesDrawerModal from "./AddPitchNotesDrawerModal";
-import { BundleLoader } from "../../../Components/Placeholder";
+// import AddPitchNotesDrawerModal from "./AddPitchNotesDrawerModal";
+import { BundleLoader } from "../../../../../Components/Placeholder";
 
 const ButtonGroup = Button.Group;
 
-const PitchCardList = (props) => {
+const DealsAllCardList = (props) => {
   const [page, setPage] = useState(0);
   const [hasMore, setHasMore] = useState(true);
   useEffect(() => {
-    props.getPitch(props.userId,page,"creationdate");
+    props.getAllDeals("all",page);
     setPage(page + 1);
     // props.getSectors();
     // props.getCountries();
@@ -54,17 +47,15 @@ const PitchCardList = (props) => {
   };
   const handleLoadMore = () => {
     setPage(page + 1);
-    props.getPitch(props.currentUser?props.currentUser:props.userId,page,
-      props.filter?props.filter:"creationdate"
-
-      );
+    props.getAllDeals("all",page);
+      setPage(page + 1);
 }
   function handleSetCurrentLeadsId(item) {
     setCurrentLeadsId(item);
   }
-   const { user,deleteLeadsData, handleUpdateLeadsModal, updateLeadsModal,fetchingPitch,leadsAllData  } = props;
+   const { user,deleteLeadsData, handleUpdateLeadsModal, updateLeadsModal,fetchingAllDealsData,leadsAllData  } = props;
 
-  if (fetchingPitch) {
+  if (fetchingAllDealsData) {
     return <BundleLoader />;
   }
 
@@ -84,13 +75,13 @@ const PitchCardList = (props) => {
 
       </div>
       <InfiniteScroll
-        dataLength={props.pitchData.length}
+        dataLength={props.allDealsData.length}
         next={handleLoadMore}
         hasMore={hasMore}
-        loader={fetchingPitch?<h4 style={{ textAlign: 'center' }}>Loading...</h4>:null}
+        loader={fetchingAllDealsData?<h4 style={{ textAlign: 'center' }}>Loading...</h4>:null}
         height={"70vh"}
       >
-   {props.pitchData.map((item) => { 
+   {props.allDealsData.map((item) => { 
  const currentdate = moment().format("DD/MM/YYYY");
  const date = moment(item.creationDate).format("DD/MM/YYYY");
        
@@ -337,122 +328,10 @@ const PitchCardList = (props) => {
             </span>
                    </div>
                                
-                         
-                   <div className=" flex font-medium flex-col md:w-24 max-sm:flex-row w-full max-sm:justify-between ">
-                                    {/* <h4 class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden">Qualify</h4> */}
-
-                                    <div class=" text-[0.82rem] text-cardBody font-poppins">
-                {/* qual */}
-                                    </div>
-                                    <div>
-<StatusPitchToggle
-            type={props.convertInd ? "primary" : "danger"}
-            investorLeadsId={item.investorLeadsId}
-            convertInd={item.convertInd}
-          />
-</div>
+              
+ 
                                 </div>
-                                <div class="flex flex-col justify-evenly w-[6%] max-sm:flex-row max-sm:w-[10%]">
-                                <div >
-                    <Tooltip title="Notes">
-       <NoteAltIcon
-                onClick={() => {
-                  props.handlePitchNotesDrawerModal(true);
-                  handleSetCurrentLeadsId(item);
-                }}
-                style={{ color: "green", cursor: "pointer", fontSize: "1rem" }}
-              />
-           </Tooltip>
-
-            </div>
-            <div>
-<Tooltip
-        title={
-          <FormattedMessage id="app.activity" defaultMessage="Activity" />
-        }
-      >
-<AddchartIcon
-style={{fontSize: "1rem",cursor: 'pointer',}}
-onClick={()=>{
-  props.handleAssimodal(true)
-  handleRowData(item)
-  }}
-/>
-</Tooltip>
-</div>
-</div>
-                                </div>
-                                <div class="flex max-sm:flex-row  justify-evenly md:w-20 max-sm:w-[25%] ">
-                               
-                                <div class="flex flex-col w-[5%] max-sm:flex-row">
-                                {user.imInd === true  &&  user.pitchUpdateInd === true && (  
-                                <div>
-            <Tooltip title="Edit">
-              <BorderColorIcon
-                style={{  color: "grey",cursor: "pointer",fontSize: "1rem" }}
-                onClick={() => {
-                   props.setEditPitch(item);
-                   props.handleUpdatePitchModal(true);
-                handleSetCurrentLeadsId(item);
-                  
-                }}
-              />
-            </Tooltip>
-        
-            </div>
-                                )}
-                               
-                        <div>
-                        <StyledPopconfirm
-            title="Do you want to delete?"
-            onConfirm={() => deletePitchData(item.investorleadsId)}
-          >
-             {user.imInd === true  &&  user.plantDeleteInd === true && ( 
-            <DeleteOutlined
-              type="delete"
-              style={{ cursor: "pointer", color: "red" ,fontSize: "1rem",}}
-            />
-             )} 
-          </StyledPopconfirm>
-                        </div>
-                            
-                        <div>
-            
-
-                    </div>
-                    </div>
-                    <div class="flex flex-col w-[2%] max-sm:flex-row">
-                      <div>
-                    <Tooltip overlayStyle={{ maxWidth: "300px" }} title={dataLoc}>
-            <span
-              style={{
-                // color:
-                //   showRes && item.orderId === orderId ? "orange" : "#1890ff",
-                cursor: "pointer",
-              }}
-            >
-            <LocationOnIcon   style={{
-                cursor: "pointer",
-                fontSize: "1rem"
-              }}/>
-            </span>
-          </Tooltip>
-          </div>
-          <div>
-          <Tooltip title={item.email}>
-              <MailOutlineIcon
-                type="mail"
-                style={{ cursor: "pointer",fontSize:"1rem"  }}
-                // onClick={() => {
-                //   handleSetCurrentLeadsId(item);
-                //   props.handleLeadsEmailDrawerModal(true);
-                // }}
-              />
-            </Tooltip> </div>
-           
-                      </div> 
-                      <div class="md:w-[2%]"></div>   
-                    </div>
+                   
                     </div>
                       </div>
                             </div>
@@ -463,20 +342,20 @@ onClick={()=>{
                 })}
                   </InfiniteScroll>
       </OnlyWrapCard>
-      <UpdateLPitchModal
+      {/* <UpdateLPitchModal
         item={currentLeadsId}
         updatePitchModal={props.updatePitchModal}
         // updateLeadsModal={updateLeadsModal}
         handleUpdatePitchModal={props.handleUpdatePitchModal}
         // handleSetCurrentLeadsId={handleSetCurrentLeadsId}
-      />
+      /> */}
       {/* <AddLeadsEmailDrawerModal
         item={currentLeadsId}
         handleSetCurrentLeadsId={handleSetCurrentLeadsId}
         addDrawerLeadsEmailModal={props.addDrawerLeadsEmailModal}
         handleLeadsEmailDrawerModal={props.handleLeadsEmailDrawerModal}
       /> */}
-      <OpenASSimodal 
+      {/* <OpenASSimodal 
         rowdata={rowdata}
         openASSImodal={props.openASSImodal}
       handleAssimodal={props.handleAssimodal}
@@ -485,46 +364,37 @@ onClick={()=>{
        item={currentLeadsId}
         addDrawerPitchNotesModal={props.addDrawerPitchNotesModal}
         handlePitchNotesDrawerModal={props.handlePitchNotesDrawerModal}
-      />
+      /> */}
     </>
   );
 };
 
-const mapStateToProps = ({ auth, leads, sector,pitch }) => ({
+const mapStateToProps = ({ auth, leads,deal, sector,pitch }) => ({
 //   leadsAllData: leads.leadsAllData,
 user: auth.userDetails,
   userId: auth.userDetails.userId,
-  fetchingPitch:pitch.fetchingPitch,
+  fetchingAllDealsData:deal.fetchingAllDealsData,
   addDrawerPitchNotesModal:pitch.addDrawerPitchNotesModal,
   updatePitchModal:pitch.updatePitchModal,
   openASSImodal:pitch.openASSImodal,
-  pitchData:pitch.pitchData
+  allDealsData:deal.allDealsData
 });
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
-        getPitch,
-        deletePitchData,
-        handleUpdatePitchModal,
-        setEditPitch,
-        updateTypeForPitch,
-        handlePitchNotesDrawerModal,
-        handleAssimodal
-    //   getLeads,
-    //   getSectors,
-    //   deleteLeadsData,
-    //   setEditLeads,
-    //   handleUpdateLeadsModal,
-    //   handleLeadsEmailDrawerModal,
-    //   getLeadDetailsById,
-    //   getCountries,
-    //   updateTypeForLead,
-    //   handleCETmodal
+        getAllDeals,
+        // deletePitchData,
+        // handleUpdatePitchModal,
+        // setEditPitch,
+        // updateTypeForPitch,
+        // handlePitchNotesDrawerModal,
+        // handleAssimodal
+ 
     },
     dispatch
   );
 
-export default connect(mapStateToProps, mapDispatchToProps)(PitchCardList);
+export default connect(mapStateToProps, mapDispatchToProps)(DealsAllCardList);
 function RoleButton({ type, iconType, tooltip, role, size, onClick }) {
   console.log(role);
   console.log(type);

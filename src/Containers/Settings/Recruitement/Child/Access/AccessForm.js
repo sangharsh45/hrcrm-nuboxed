@@ -964,7 +964,7 @@ const onCheckAllTeamsChange = (e) => {
             <TabsWrapper style={{height:"95rem"}}>
  
 
-<h1 class=" text-clr font-bold">HR</h1>
+<h1 class=" text-clr font-bold">General, HR & Self Service</h1>
 <Spacer />
               <FlexContainer justifyContent="space-around">
             
@@ -1038,15 +1038,7 @@ const onCheckAllTeamsChange = (e) => {
 
             </div>
 
-            <div >
-              <h1 class="text-sm">Junk</h1>
-              <Checkbox indeterminate={indeterminateJunk} onChange={onCheckAllJunkChange} checked={checkAllJunk}>
-              <label class="text-xs"> Check all</label>
-              </Checkbox>
-              <Divider />
-              <CheckboxGroup options={junkCheckedList} value={checkedJunkList} onChange={onJunkChange} />
-
-            </div>
+        
         
                 <div >
                 <h1 class="text-sm">Repository</h1>
@@ -1137,7 +1129,16 @@ const onCheckAllTeamsChange = (e) => {
                
                 /> */}
              
+             <div >
+              <h1 class="text-sm">Junk</h1>
+              <Checkbox indeterminate={indeterminateJunk} onChange={onCheckAllJunkChange} checked={checkAllJunk}>
+              <label class="text-xs"> Check all</label>
+              </Checkbox>
+              <Divider />
+              <CheckboxGroup options={junkCheckedList} value={checkedJunkList} onChange={onJunkChange} />
 
+            </div>
+            <Spacer/>
               
                 <div >
                   <h1 class="text-sm">Customer</h1>
@@ -1147,6 +1148,7 @@ const onCheckAllTeamsChange = (e) => {
                   <Divider />
                   <CheckboxGroup options={plainOptions} value={checkedCustomerList} onChange={onCustomerChange} />
                 </div>
+                <Spacer />
                     {/* Contact */}
                     <div >
                   <h1 class="text-sm">Contact</h1>

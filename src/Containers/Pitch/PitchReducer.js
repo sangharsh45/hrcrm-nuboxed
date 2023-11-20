@@ -8,6 +8,10 @@ const initialState = {
     fetchingPitchError:false,
     pitchData:[],
 
+    fetchingAllPitch: false,
+      fetchingAllPitchError: false,
+      allPitchData:[],
+
     fetchingNotesListByPitchId: false,
           fetchingNotesListByPitchIdError: false,
           notesListByPitchId:[],
@@ -420,6 +424,22 @@ case types.GET_PITCH_REQUEST:
 
             case types.SET_PITCH_VIEW_TYPE:
               return { ...state, viewType: action.payload };
+
+              case types.GET_ALL_PITCH_REQUEST:
+
+    return { ...state, fetchingAllPitch: true };
+  case types.GET_ALL_PITCH_SUCCESS:
+    return {
+      ...state,
+      fetchingAllPitch: false,
+      allPitchData: action.payload,
+    };
+  case types.GET_ALL_PITCH_FAILURE:
+    return {
+      ...state,
+      fetchingAllPitch: false,
+      fetchingAllPitchError: true,
+    };
 
     default:
 return state;

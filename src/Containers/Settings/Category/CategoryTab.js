@@ -12,6 +12,7 @@ import OthersTab from "./OthersTab";
 import Sector from "../Sectors/Sectors";
 import AssessmentTab from "./Assessment/AssessmentTab";
 import CustomerSectorTab from "./CustomerSectorTab";
+import InvestorTab from "./InvestorTab/InvestorTab";
 const TabPane = StyledTabs.TabPane;
 
 function CategoryTab (props) {
@@ -37,6 +38,11 @@ function CategoryTab (props) {
               rulesName: "Customer",
               ruleId: "4",
               component:<CustomerSectorTab />,
+            },
+            {
+              rulesName: "Investor",
+              ruleId: "5",
+              component:<InvestorTab />,
             },
             // {
             //   rulesName: "Assessment",

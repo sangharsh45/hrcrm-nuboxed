@@ -577,4 +577,31 @@ export const getPitch = (userId,pageNo,filter) => (dispatch) => {
       payload: viewType,
     });
 };
+
+export const getAllPitch = (pageNo,filter) => (dispatch) => {
+ 
+  dispatch({
+    type: types.GET_ALL_PITCH_REQUEST,
+  });
+  axios
+    .get(`${base_url}/investorleads/all/${pageNo}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.GET_ALL_PITCH_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err.response);
+      dispatch({
+        type: types.GET_ALL_PITCH_FAILURE,
+        payload: err,
+      });
+    });
+};
   

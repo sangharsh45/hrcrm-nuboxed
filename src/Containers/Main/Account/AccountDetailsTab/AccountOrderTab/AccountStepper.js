@@ -66,12 +66,12 @@ class AccountStepper extends Component {
                     <Step
                         title={<UserOutlined style={{ fontSize: "1.37em" }} />}
                         // type="user"
-                        description="Other item"
+                        description="Order details"
                     />
 
                 </StyledSteps>
                 <div
-                    style={{ minHeight: "40vh" }}
+                    style={{ minHeight: "50vh" }}
                 >{steps[current].content}</div>
                 <FlexContainer justifyContent="flex-end">
                     <div className="steps-action">

@@ -76,7 +76,7 @@ class SingleDepartment extends Component {
                     />  
                     </div>
                     <h1 class="ml-4">ERP</h1>
-                    <div    style={{width:"12%"}}>
+                    <div    style={{width:"8%"}}>
                     
                     <ERPStatusToggle
                       erpInd={erpInd}
@@ -93,7 +93,7 @@ class SingleDepartment extends Component {
                     />  
                     </div>
                     <h1>IM</h1>
-                    <div style={{width:"5%"}}>
+                    <div style={{width:"7%"}}>
                     <IMStatusToggle
                       imInd={imInd}
                       departmentName={departmentName}

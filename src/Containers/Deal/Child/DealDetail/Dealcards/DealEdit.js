@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { FormattedMessage } from "react-intl";
 import { bindActionCreators } from "redux";
-// import { updateOpportunity } from "../../../OpportunityAction";
+import { updateDealName } from "../../../DealAction";
 import { Button } from "antd";
 import { FlexContainer } from "../../../../../Components/UI/Layout";
 import {
@@ -18,6 +18,14 @@ class DealEdit extends Component {
       fields: {}
     };
   }
+  handleUpdate = () => {
+    this.props.updateDealName(
+      this.state.fields,
+      this.props.dealDetailsbyID.invOpportunityId,
+     
+       this.callback
+    );
+  };
 
   callback = () => {
     this.props.toggleViewType();
@@ -33,7 +41,7 @@ class DealEdit extends Component {
     });
   };
   render() {
-    const { dealDetailsbyID, toggleViewType, updateOpportunityById } = this.props;
+    const { dealDetailsbyID, toggleViewType, updatingDealName } = this.props;
     return (
       <>
         <FlexContainer
@@ -51,8 +59,8 @@ class DealEdit extends Component {
         <FlexContainer justifyContent="flex-end" marginRight="1.25em">
           <Button
             type="primary"
-            Loading={updateOpportunityById}
-          // onClick={this.handleUpdate}
+            Loading={updatingDealName}
+          onClick={this.handleUpdate}
           >
             <FormattedMessage
               id="app.save"
@@ -74,13 +82,13 @@ class DealEdit extends Component {
   }
 }
 
-const mapStateToProps = ({ opportunity }) => ({
-  // updateOpportunityById: opportunity.updateOpportunityById,
-  // updateOpportunityByIdFailure: opportunity.updateOpportunityByIdFailure
+const mapStateToProps = ({ deal }) => ({
+  updatingDealName: deal.updatingDealName,
+  updatingDealNameError: deal.updatingDealNameError
 });
 const mapDispatchToProps = dispatch =>
   bindActionCreators({
-    // updateOpportunity 
+    updateDealName 
   }, dispatch);
 export default connect(
   mapStateToProps,

@@ -27,7 +27,7 @@ import { Listbox } from "@headlessui/react";
 
 const UpdateOpportunitySchema = Yup.object().shape({
   opportunityName: Yup.string().required("Please provide Opportunity name"),
-  customerId:Yup.string().required("Input needed!"),
+  investorId:Yup.string().required("Input needed!"),
   currency: Yup.string().required("Currency needed!"),
   startDate: Yup.string().required("Input needed!"),
   endDate: Yup.string().required("Input needed!"),
@@ -100,7 +100,7 @@ function UpdateDealForm (props) {
       .map((item) => {
         return {
           label: `${item.name || ""}`,
-          value: item.customerId,
+          value: item.investorId,
         };
       });
 
@@ -110,7 +110,7 @@ function UpdateDealForm (props) {
         props.contactData
           .filter((option) => {
             if (
-              option.customerId === filterOptionValue &&
+              option.investorId === filterOptionValue &&
               option.probability !== 0
             ) {
               return option;
@@ -153,7 +153,7 @@ function UpdateDealForm (props) {
               props.currentItem.proposalAmount || "",
             currency: props.currentItem.currency || "",
             salesUserIds: selectedOption ? selectedOption.employeeId:props.currentItem.salesUserIds,
-            customerId: props.currentItem.customerId || "",
+            investorId: props.currentItem.investorId || "",
             contactId: props.currentItem.contactId || "",
           }}
           validationSchema={UpdateOpportunitySchema}
@@ -236,7 +236,7 @@ function UpdateDealForm (props) {
                 ...values,
                 invOpportunityId: props.currentItem.invOpportunityId,
                 orgId: props.organizationId,
-                 customerId: props.customerId,
+                investorId: props.investorId,
                 userId: props.userId,
                 startDate: `${newStartDate}T00:00:00Z`,
                 endDate: `${newEndDate}T00:00:00Z`,
@@ -448,7 +448,7 @@ function UpdateDealForm (props) {
                   <Spacer />
 
                   <Field
-                    name="customerId"
+                    name="investorId"
                     isColumnWithoutNoCreate
                     label={
                       <FormattedMessage
@@ -464,7 +464,7 @@ function UpdateDealForm (props) {
                         ? customerNameOption
                         : []
                     }
-                    value={values.customerId}
+                    value={values.investorId}
                     inlineLabel
                   />
 
@@ -483,16 +483,16 @@ function UpdateDealForm (props) {
                     isColumn
                     options={
                       Array.isArray(
-                        getAreaOptions("customerId", values.customerId)
+                        getAreaOptions("investorId", values.investorId)
                       )
-                        ? getAreaOptions("customerId", values.customerId)
+                        ? getAreaOptions("investorId", values.investorId)
                         : []
                     }
                     filterOption={{
-                      filterType: "customerId",
-                      filterValue: values.customerId,
+                      filterType: "investorId",
+                      filterValue: values.investorId,
                     }}
-                    disabled={!values.customerId}
+                    disabled={!values.investorId}
                     value={values.contactId}
                     inlineLabel
                   />
