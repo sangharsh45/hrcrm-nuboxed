@@ -163,7 +163,7 @@ const {
                   note: "",
                   eventStatus: "",
                   allDayInd: true,
-                  candidateId: "",
+                  // candidateId: "",
                   included: [],
                   fullName: "",
                 
@@ -185,8 +185,8 @@ const {
                       longitude: "",
                     },
                   ],
-                  employeesIds: [],
-                  ownerIds: [],
+                  // employeesIds: [],
+                  // ownerIds: [],
                 }
           }
           validationSchema={EventSchema}
@@ -274,11 +274,11 @@ const {
                     // contact: values.contactId,
                     opportunity: values.opportunity,
                     customer: props.customer.customerId,
-                    ownerIds: userId === userId ? [userId] : [],
+                    // ownerIds: userId === userId ? [userId] : [],
                     startDate: `${newStartDate}T${newStartTime}`,
                     endDate: `${newEndDate}T${newEndTime}`,
-                    // startTime: 0,
-                    // endTime: 0,
+                    startTime: 0,
+                    endTime: 0,
                     remindInd: reminder ? true : false,
                     assignedTo: selectedOption ? selectedOption.employeeId:userId,
                   },

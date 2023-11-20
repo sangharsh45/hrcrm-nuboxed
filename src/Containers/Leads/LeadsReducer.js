@@ -188,7 +188,7 @@ case types.HANDLE_LEADS_MODAL:
           return {
             ...state,
             fetchingLeads: false,
-            leadsAllData: action.payload,
+            leadsAllData: [...state.leadsAllData, ...action.payload],
             clearbit:null
           };
         case types.GET_LEADS_FAILURE:

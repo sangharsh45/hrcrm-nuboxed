@@ -65,10 +65,12 @@ function  handleFilterChange(data){
       props.setCurrentData(transcript);
     }
   }, [props.viewType, props.userId, transcript]);
+   
+  const {user}=props;
   return (
     <div class=" flex items-center"
     >
-         <Tooltip title={<FormattedMessage id="app.all" defaultMessage="All" />}>
+         <Tooltip title={<FormattedMessage id="app.list" defaultMessage="List" />}>
         <Badge
           size="small"
           count={(props.viewType === "table" && props.recordData.customer) || 0}
@@ -120,10 +122,11 @@ function  handleFilterChange(data){
           </span>
         </Badge>
       </Tooltip>
+      {user.crmInd=== true && user.customerFullListInd===true && ( 
       <Tooltip>
         <Badge
           size="All"
-          count={(props.viewType === "all" && props.recordData.customer) || 0}
+          // count={(props.viewType === "all" && props.recordData.customer) || 0}
           overflowCount={999}
         >
           <span
@@ -137,6 +140,7 @@ function  handleFilterChange(data){
           </span>
         </Badge>
       </Tooltip>
+      )}
       {/* <Tooltip
         title={<FormattedMessage id="app.mapview" defaultMessage="Map View" />}
       >
@@ -183,7 +187,7 @@ function  handleFilterChange(data){
           <FormattedMessage id="app.clear" defaultMessage="Clear" />
           {/* Clear */}
         </Button>
-        <div class="w-[22%] mt-1">
+        <div class="w-[30%] mt-1">
           <StyledSelect placeholder="Sort"  onChange={(e)  => props.handleFilterChange(e)}>
           <Option value="CreationDate">Creation Date</Option>
             <Option value="ascending">A To Z</Option>

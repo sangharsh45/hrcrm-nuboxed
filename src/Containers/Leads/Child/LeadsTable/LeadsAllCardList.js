@@ -41,15 +41,15 @@ import AddLeadsNotesDrawerModal from "../AddLeadsNotesDrawerModal";
 
 const ButtonGroup = Button.Group;
 
-const LeadsCardList = (props) => {
+const LeadsAllCardList = (props) => {
   const [page, setPage] = useState(0);
   const [hasMore, setHasMore] = useState(true);
-  useEffect(() => {
-    setPage(page + 1);
-    props.getLeads(props.userId, page,"creationdate");
-    props.getSectors();
-    props.getCountries();
-  }, []);
+//   useEffect(() => {
+//     setPage(page + 1);
+//     props.getLeads(props.userId, page,"creationdate");
+//     props.getSectors();
+//     props.getCountries();
+//   }, []);
 
   const [currentLeadsId, setCurrentLeadsId] = useState("");
   const [rowdata, setrowData] = useState({});
@@ -60,11 +60,11 @@ const LeadsCardList = (props) => {
   const handleLoadMore = () => {
    
     setPage(page + 1);
-    props.getLeads(
-      props.currentUser ? props.currentUser : props.userId,
-      page,
-      props.filter?props.filter:"creationdate"
-    );
+    // props.getLeads(
+    //   props.currentUser ? props.currentUser : props.userId,
+    //   page,
+    //   props.filter?props.filter:"creationdate"
+    // );
 };
   function handleSetCurrentLeadsId(item) {
     setCurrentLeadsId(item);
@@ -107,7 +107,7 @@ console.log("data",currentLeadsId)
         loader={fetchingLeads?<h4 style={{ textAlign: 'center' }}>Loading...</h4>:null}
         height={"75vh"}
       >
-        {leadsAllData.map((item) => {
+        {/* {leadsAllData.map((item) => {
           const currentdate = moment().format("DD/MM/YYYY");
           const date = moment(item.creationDate).format("DD/MM/YYYY");
 
@@ -158,9 +158,7 @@ console.log("data",currentLeadsId)
                       <div class="max-sm:w-full md:flex items-center">
                         <Tooltip>
                           <div class="max-sm:w-full justify-between flex md:flex-col">
-                            {/* <h4 class=" text-sm text-cardBody  font-poppins max-sm:hidden">
-                              Name
-                            </h4> */}
+                           
                             <h4 class="text-sm text-cardBody font-semibold  font-poppins cursor-pointer">
                               {item.name}
                               &nbsp;&nbsp;
@@ -187,7 +185,7 @@ console.log("data",currentLeadsId)
                         <RoleButton
                           type="Warm"
                           iconType="	fas fa-burn"
-                          // tooltip="Warm"
+                     
                           tooltip={
                             <FormattedMessage
                               id="app.warm"
@@ -208,7 +206,7 @@ console.log("data",currentLeadsId)
                         <RoleButton
                           type="Hot"
                           iconType="fas fa-mug-hot"
-                          // tooltip="Hot"
+                         
                           tooltip={
                             <FormattedMessage
                               id="app.hot"
@@ -228,7 +226,7 @@ console.log("data",currentLeadsId)
                         <RoleButton
                           type="Cold"
                           iconType="far fa-snowflake"
-                          // tooltip="Cold"
+                    
                           tooltip={
                             <FormattedMessage
                               id="app.cold"
@@ -247,21 +245,16 @@ console.log("data",currentLeadsId)
                 </div>
                 <div class="flex">
                   <div className=" flex font-medium flex-col  md:w-32 max-sm:flex-row w-full max-sm:justify-between ">
-                    {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden">
-                      {" "}
-                      Phone #{" "}
-                    </h4> */}
+           
                     <h4 class=" text-xs text-cardBody font-poppins">
                       {item.countryDialCode && item.phoneNumber
                         ? `${item.countryDialCode} ${item.phoneNumber}`
                         : "Not Available"}
-                      {/* {`${item.countryDialCode} ${item.phoneNumber}`} */}
+                     
                     </h4>
                   </div>
                   <div className=" flex font-medium flex-col md:w-36 max-sm:flex-row w-full max-sm:justify-between ">
-                    {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden">
-                      Country
-                    </h4> */}
+                   
                     <h4 class=" text-xs text-cardBody font-poppins">
                       <ReactCountryFlag
                         countryCode={item.countryAlpha2Code}
@@ -281,10 +274,7 @@ console.log("data",currentLeadsId)
                 </div>
                 <div class="flex">
                   <div className=" flex font-medium flex-col  md:w-[10rem] max-sm:flex-row w-full max-sm:justify-between ">
-                    {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden">
-                      {" "}
-                      Company{" "}
-                    </h4> */}
+                  
                     <h4 class=" text-xs text-cardBody font-semibold  font-poppins">
                       {item.companyName || "Not Available"}
                     </h4>
@@ -293,7 +283,7 @@ console.log("data",currentLeadsId)
                     {item.url !== null ? (
                       <Tooltip title={item.url}>
                         <span
-                          //type="edit"
+                       
                           style={{ cursor: "pointer" }}
                           onClick={() => {}}
                         >
@@ -313,10 +303,7 @@ console.log("data",currentLeadsId)
                   </div>
 
                   <div className=" flex font-medium flex-col  md:w-32 max-sm:flex-row w-full max-sm:justify-between ">
-                    {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden">
-                      {" "}
-                      Sector{" "}
-                    </h4> */}
+                   
                     <h4 class=" text-xs text-cardBody font-poppins">
                       {item.sector}
                     </h4>
@@ -324,9 +311,7 @@ console.log("data",currentLeadsId)
                 </div>
                 <div class="flex md:items-center ">
                   <div className=" flex font-medium flex-col md:w-32 max-sm:flex-row w-full max-sm:justify-between ">
-                    {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden">
-                      Assigned to
-                    </h4> */}
+                  
 
                     <div class=" text-xs text-cardBody font-poppins">
                       <span>
@@ -343,9 +328,7 @@ console.log("data",currentLeadsId)
                     </div>
                   </div>
                   <div className=" flex font-medium flex-col md:w-20  max-sm:flex-row w-full max-sm:justify-between">
-                    {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden">
-                      Owner
-                    </h4> */}
+                   
 
                     <span>
                       <MultiAvatar
@@ -358,9 +341,7 @@ console.log("data",currentLeadsId)
                     </span>
                   </div>
                   <div className=" flex font-medium flex-col md:w-[6rem] max-sm:flex-row w-full max-sm:justify-between ">
-                    {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden">
-                      Qualify
-                    </h4> */}
+                   
 
                     <div class=" text-xs text-cardBody font-poppins"></div>
                     <div>
@@ -432,7 +413,7 @@ console.log("data",currentLeadsId)
                           title="Do you want to delete?"
                           onConfirm={() => deleteLeadsData(item.leadsId)}
                         >
-                          {/* {user.opportunityDeleteInd ===true && ( */}
+                        
                           <DeleteOutlined
                             type="delete"
                             style={{
@@ -441,7 +422,7 @@ console.log("data",currentLeadsId)
                               fontSize: "1rem",
                             }}
                           />
-                          {/* )} */}
+                     
                         </StyledPopconfirm>
                       </div>
                     )}
@@ -455,8 +436,7 @@ console.log("data",currentLeadsId)
                       >
                         <span
                           style={{
-                            // color:
-                            //   showRes && item.orderId === orderId ? "orange" : "#1890ff",
+                          
                             cursor: "pointer",
                           }}
                         >
@@ -486,9 +466,9 @@ console.log("data",currentLeadsId)
                 </div>
               </div>
             </div>
-            // </div>
+
           );
-        })}
+        })} */}
          </InfiniteScroll>
       </OnlyWrapCard>
       </div>
@@ -525,33 +505,33 @@ const mapStateToProps = ({ auth, leads, sector }) => ({
   userId: auth.userDetails.userId,
   lead: leads.lead,
   user: auth.userDetails,
-  countries: auth.countries,
-  sectors: sector.sectors,
-  updateLeadsModal: leads.updateLeadsModal,
-  addDrawerLeadsEmailModal: leads.addDrawerLeadsEmailModal,
-  fetchingLeads: leads.fetchingLeads,
-  openCETmodal: leads.openCETmodal,
-  addDrawerLeadsNotesModal: leads.addDrawerLeadsNotesModal,
+//   countries: auth.countries,
+//   sectors: sector.sectors,
+//   updateLeadsModal: leads.updateLeadsModal,
+//   addDrawerLeadsEmailModal: leads.addDrawerLeadsEmailModal,
+//   fetchingLeads: leads.fetchingLeads,
+//   openCETmodal: leads.openCETmodal,
+//   addDrawerLeadsNotesModal: leads.addDrawerLeadsNotesModal,
 });
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
-      getLeads,
-      getSectors,
-      deleteLeadsData,
-      setEditLeads,
-      handleUpdateLeadsModal,
-      handleLeadsNotesDrawerModal,
-      handleLeadsEmailDrawerModal,
-      getLeadDetailsById,
-      getCountries,
-      updateTypeForLead,
-      handleCETmodal,
+    //   getLeads,
+    //   getSectors,
+    //   deleteLeadsData,
+    //   setEditLeads,
+    //   handleUpdateLeadsModal,
+    //   handleLeadsNotesDrawerModal,
+    //   handleLeadsEmailDrawerModal,
+    //   getLeadDetailsById,
+    //   getCountries,
+    //   updateTypeForLead,
+    //   handleCETmodal,
     },
     dispatch
   );
 
-export default connect(mapStateToProps, mapDispatchToProps)(LeadsCardList);
+export default connect(mapStateToProps, mapDispatchToProps)(LeadsAllCardList);
 function RoleButton({ type, iconType, tooltip, role, size, onClick }) {
   console.log(role);
   console.log(type);

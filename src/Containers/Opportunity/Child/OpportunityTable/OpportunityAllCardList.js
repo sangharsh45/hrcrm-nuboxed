@@ -42,22 +42,22 @@ import AddOpportunityDrawerModal from "./AddOpportunityDrawerModal";
 import UpdateOpportunityModal from "../UpdateOpportunity/UpdateOpportunityModal";
 import ReinstateToggleForLost from "../../Child/OpportunityTable/ReinstateToggleForLost"
 
-function OpportunityLostCard(props) {
+function OpportunityAllCardList(props) {
   const [hasMore, setHasMore] = useState(true);
   const [page, setPage] = useState(0);
-  useEffect(() => {
-    if(props.role==="USER"&&user.department==="Recruiter"){
-      props.getRecruiterList(props.recruiterId);     
-    }else{
+//   useEffect(() => {
+//     if(props.role==="USER"&&user.department==="Recruiter"){
+//       props.getRecruiterList(props.recruiterId);     
+//     }else{
      
-    } 
-    props. getlostOpportunity(props.userId,page);
-    setPage(page + 1);
-  }, []);
+//     } 
+//     props. getlostOpportunity(props.userId,page);
+//     setPage(page + 1);
+//   }, []);
 
   const handleLoadMore = () => {
     setPage(page + 1);
-      props. getlostOpportunity(props.userId,page);
+    //   props. getlostOpportunity(props.userId,page);
   }
     const [currentOpportunityId, setCurrentOpportunityId] = useState("");
     function handleSetCurrentOpportunityId(opportunityId,opportunityName) {
@@ -98,7 +98,7 @@ function OpportunityLostCard(props) {
         loader={fetchinglostOpportunity?<h4 style={{ textAlign: 'center' }}>Loading...</h4> :null}
         height={"75vh"}
       >
- <CardWrapper>      
+ {/* <CardWrapper>      
               {lostOpportunity.map((item) => {
                  
                  var findProbability = item.probability;
@@ -112,9 +112,6 @@ function OpportunityLostCard(props) {
                   <div>
                   <div
                     className="flex rounded-xl justify-between bg-white mt-[0.5rem] h-[2.75rem] items-center p-3"
-                    // style={{
-                    //   borderBottom: "3px dotted #515050",
-                    // }}
                   >
                     <div class="flex ">
                     <div className=" flex font-medium  md:w-[13rem] max-sm:flex-row w-full ">
@@ -123,7 +120,6 @@ function OpportunityLostCard(props) {
           <MultiAvatar
             primaryTitle={item.opportunityName}
             imageId={item.imageId}
-            // imageURL={imageURL}
             imgWidth={"1.8rem"}
             imgHeight={"1.8rem"}
           />
@@ -135,9 +131,7 @@ function OpportunityLostCard(props) {
                                  
                                       <Tooltip>
                                       <div class=" flex max-sm:w-full  flex-row md:flex-col">
-                                          {/* <h4 class=" text-xs text-cardBody font-poppins max-sm:hidden">
-                                          Name
-                                          </h4> */}
+        
                                           <h4 class=" text-sm text-blue-500 text-cardBody font-poppins font-semibold cursor-pointer">
                                               
                                           <Link
@@ -145,16 +139,6 @@ function OpportunityLostCard(props) {
         title={`${item.opportunityName}`}>
        {item.opportunityName}
        </Link>&nbsp;&nbsp;
-      {/* {date === currentdate ? (
-        <span
-          style={{
-            color: "tomato",
-            fontWeight: "bold",
-          }}
-        >
-          New
-        </span>
-      ) : null} */}
      
                                           </h4>
 </div>
@@ -163,8 +147,7 @@ function OpportunityLostCard(props) {
                               </div>
 
                               <div className=" flex font-medium flex-col  md:w-44 max-sm:flex-row w-full max-sm:justify-between ">
-                         
-                                  {/* <h4 class=" text-xs text-cardBody font-poppins max-sm:hidden"> Sector </h4> */}
+
                                   <h4 class=" text-sm text-cardBody font-poppins">   
                                   
                                   {item.customer}
@@ -175,7 +158,6 @@ function OpportunityLostCard(props) {
                               <div className=" flex font-medium flex-col md:w-44 max-sm:flex-row w-full max-sm:justify-between ">
                                 
 
-                                  {/* <h4 class=" text-xs text-cardBody font-poppins max-sm:hidden">Country</h4> */}
                                   <h4 class=" text-sm text-cardBody font-poppins">
                                   <SubTitle>
                                   {item.contactName === null ? "None" :
@@ -193,7 +175,7 @@ function OpportunityLostCard(props) {
                               </div>
                               <div class="flex">
                               <div className=" flex font-medium flex-col md:w-36 max-sm:flex-row w-full max-sm:justify-between ">
-                                  {/* <h4 class=" text-xs text-cardBody font-poppins max-sm:hidden"># Deals</h4> */}
+
 
                                   <div class=" text-sm justify-center text-cardBody font-poppins">
                                   {moment(item.startDate).format("ll")}
@@ -201,7 +183,7 @@ function OpportunityLostCard(props) {
                               </div>
                            
                               <div className=" flex font-medium flex-col md:w-36 max-sm:flex-row w-full max-sm:justify-between ">
-                                  {/* <h4 class=" text-xs text-cardBody font-poppins max-sm:hidden">Pipeline Value</h4> */}
+   
 
                                   <div class=" text-sm text-cardBody font-poppins text-center">
                                   <CurrencySymbol currencyType={item.currency} />
@@ -211,7 +193,7 @@ function OpportunityLostCard(props) {
                                   </div>
                               </div>
                               <div className=" flex font-medium flex-col md:w-36 max-sm:flex-row w-full max-sm:justify-between ">
-                                  {/* <h4 class=" text-xs text-cardBody font-poppins max-sm:hidden">Pipeline Value</h4> */}
+           
 
                                   <div class=" text-sm text-cardBody font-poppins text-center">
                                   <Dropdown
@@ -247,7 +229,7 @@ strokeColor={"#005075"}
                                   </div>
                               </div>
                               <div className=" flex font-medium flex-col md:w-32 max-sm:flex-row w-full max-sm:justify-between ">
-                                  {/* <h4 class=" text-xs text-cardBody font-poppins max-sm:hidden">Assigned to</h4> */}
+                    
 
                                   <div class=" text-sm text-cardBody font-poppins">
                                   
@@ -263,7 +245,7 @@ strokeColor={"#005075"}
                               </div>
                               <div className=" flex font-medium flex-col md:w-20 max-sm:flex-row w-full mb-1 max-sm:justify-between ">
                      
-                     {/* <h4 class=" text-xs text-cardBody font-poppins max-sm:hidden">Owner</h4> */}
+
 
             <Tooltip title={item.ownerName}>
         <span>
@@ -396,7 +378,7 @@ handleSetCurrentOpportunityId(item.opportunityName);
 
                  )  
             })}
-              </CardWrapper>
+              </CardWrapper> */}
   
 
       </InfiniteScroll>
@@ -431,56 +413,56 @@ allRecruitmentDetailsByOppId={props.allRecruitmentDetailsByOppId}
 const mapStateToProps = ({ auth, account, opportunity }) => ({
   userId: auth.userDetails.userId,
   user: auth.userDetails,
-  role: auth.userDetails.role,
-  opportunitySkills:opportunity.opportunitySkills,
-  sales: opportunity.sales,
-  recruiterName: opportunity.recruiterName,
-  recruiterList:opportunity.recruiterList,
+//   role: auth.userDetails.role,
+//   opportunitySkills:opportunity.opportunitySkills,
+//   sales: opportunity.sales,
+//   recruiterName: opportunity.recruiterName,
+//   recruiterList:opportunity.recruiterList,
   fetchinglostOpportunity:opportunity.fetchinglostOpportunity,
   fetchinglostOpportunityError:opportunity.fetchinglostOpportunityError,
-  fetchingRecruiterList:opportunity.fetchingRecruiterList,
-  fetchingRecruiterListError:opportunity.fetchingRecruiterListError,
-  fetchingOpportunity: opportunity.fetchingOpportunity,
-  fetchingOpportunityError: opportunity.fetchingOpportunityError,
-  fetchingAllOpportunities:opportunity.fetchingAllOpportunities,
-  opportunityByUserId: opportunity.opportunityByUserId,
-  updateOpportunityModal: opportunity.updateOpportunityModal,
-  recruiterId:auth.userDetails.userId,
-  addDrawerOpportunityModal:opportunity.addDrawerOpportunityModal,
-  allRecruitmentPositionByOppId: opportunity.allRecruitmentPositionByOppId,
-  allRecruitmentAvgTimeByOppId: opportunity.allRecruitmentAvgTimeByOppId,
-  allRecruitmentPositionFilledByOppId:
-    opportunity.allRecruitmentPositionFilledByOppId,
-    allRecruitmentByOppId: opportunity.allRecruitmentByOppId,
-    allRecruitmentDetailsByOppId:opportunity.allRecruitmentDetailsByOppId,
+//   fetchingRecruiterList:opportunity.fetchingRecruiterList,
+//   fetchingRecruiterListError:opportunity.fetchingRecruiterListError,
+//   fetchingOpportunity: opportunity.fetchingOpportunity,
+//   fetchingOpportunityError: opportunity.fetchingOpportunityError,
+//   fetchingAllOpportunities:opportunity.fetchingAllOpportunities,
+//   opportunityByUserId: opportunity.opportunityByUserId,
+//   updateOpportunityModal: opportunity.updateOpportunityModal,
+//   recruiterId:auth.userDetails.userId,
+//   addDrawerOpportunityModal:opportunity.addDrawerOpportunityModal,
+//   allRecruitmentPositionByOppId: opportunity.allRecruitmentPositionByOppId,
+//   allRecruitmentAvgTimeByOppId: opportunity.allRecruitmentAvgTimeByOppId,
+//   allRecruitmentPositionFilledByOppId:
+//     opportunity.allRecruitmentPositionFilledByOppId,
+//     allRecruitmentByOppId: opportunity.allRecruitmentByOppId,
+//     allRecruitmentDetailsByOppId:opportunity.allRecruitmentDetailsByOppId,
     lostOpportunity:opportunity.lostOpportunity
   
 });
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
-      getRecruiterList,
-      getOpportunitySKill,
-      handleUpdateOpportunityModal,
-      handleOpportunityDrawerModal,
-      setEditOpportunity,
-      deleteOpportunityData,
-      updateOwneroppById,
-      getAllRecruitmentByOppId,
-         getAllRecruitmentPositionByOppId,
-          getAllRecruitmentAvgTimeByOppId,
-         getAllRecruitmentPositionFilledByOppId,
-         getAllRecruitmentDetailsByOppId,
-         getlostOpportunity,
-         LinklostdOpportunity,
-         deleteLostOpportunity,
+    //   getRecruiterList,
+    //   getOpportunitySKill,
+    //   handleUpdateOpportunityModal,
+    //   handleOpportunityDrawerModal,
+    //   setEditOpportunity,
+    //   deleteOpportunityData,
+    //   updateOwneroppById,
+    //   getAllRecruitmentByOppId,
+    //      getAllRecruitmentPositionByOppId,
+    //       getAllRecruitmentAvgTimeByOppId,
+    //      getAllRecruitmentPositionFilledByOppId,
+    //      getAllRecruitmentDetailsByOppId,
+    //      getlostOpportunity,
+    //      LinklostdOpportunity,
+    //      deleteLostOpportunity,
     },
     dispatch
   );
 export default connect(
 mapStateToProps,
 mapDispatchToProps
-)(OpportunityLostCard);
+)(OpportunityAllCardList);
 
 const Header = styled.div`
   text-overflow: ellipsis;

@@ -48,7 +48,7 @@ const UpdateContactModal = lazy(() =>
   import("../UpdateContact/UpdateContactModal")
 );
 
-function ContactCardList(props) {
+function ContactAllCardList(props) {
   const [hasMore, setHasMore] = useState(true);
   const [page, setPage] = useState(0);
   useEffect(() => {
@@ -68,15 +68,15 @@ function ContactCardList(props) {
         }
       }
     })
-    props.getContactListByUserId(props.userId, page,"creationdate");
-    setPage(page + 1);
-    props.getAllSalesList();
-    props.getRecruiterName();
+    // props.getContactListByUserId(props.userId, page,"creationdate");
+    // setPage(page + 1);
+    // props.getAllSalesList();
+    // props.getRecruiterName();
   }, []);
 
-  useEffect(()=>{
-    return()=>props.emptyContact();
-  },[] );
+//   useEffect(()=>{
+//     return()=>props.emptyContact();
+//   },[] );
   const [currentContactId, setCurrentContactId] = useState("");
   const [currentContact, setCurrentContact] = useState("");
 
@@ -91,9 +91,9 @@ function ContactCardList(props) {
 
   const handleLoadMore = () => {
             setPage(page + 1);
-            props.getContactListByUserId(props.currentUser?props.currentUser:props.userId,page,
-              props.filter?props.filter:"creationdate"
-              );
+            // props.getContactListByUserId(props.currentUser?props.currentUser:props.userId,page,
+            //   props.filter?props.filter:"creationdate"
+            //   );
   }
 
   function handleSetCurrentContactId(item) {
@@ -148,7 +148,7 @@ function ContactCardList(props) {
         height={"70vh"}
       >
         
-      {filterData.map((item) => { 
+      {/* {filterData.map((item) => { 
         
          const currentdate = moment().format("DD/MM/YYYY");
          const date = moment(item.creationDate).format("DD/MM/YYYY");
@@ -173,9 +173,6 @@ function ContactCardList(props) {
                     return (
                         <div>
                             <div className="flex rounded-xl justify-between bg-white mt-[0.5rem] h-[2.75rem] items-center p-3"
-                                // style={{
-                                //     borderBottom: "3px dotted #515050"
-                                // }}
                                 >
                                      
                                 <div className=" flex font-medium flex-col md:w-52 max-sm:flex-row w-full max-sm:justify-between  ">
@@ -194,9 +191,6 @@ function ContactCardList(props) {
           <div class="max-sm:w-full">
                                         <Tooltip>
                                           <div class=" flex max-sm:w-full justify-between flex-row md:flex-col">
-                                            {/* <div class="text-xs text-cardBody font-poppins max-sm:hidden">
-                                            Name
-                                            </div> */}
                                             <div class="text-sm text-blue-500 text-cardBody font-poppins font-semibold  cursor-pointer">
                                                 
          <Link
@@ -223,32 +217,32 @@ function ContactCardList(props) {
                                 <div class="flex">
 
                                 <div className=" flex font-medium flex-col  md:w-48 max-sm:flex-row w-full max-sm:justify-between ">
-                                    {/* <div class=" text-xs text-cardBody font-xs font-poppins max-sm:hidden"> Company </div> */}
+                                    
                                     <div class=" text-sm text-cardBody font-poppins">   
                                     {item.tagWithCompany}
                                     </div>
                                 </div>
                                 <div className=" flex font-medium flex-col md:w-36 max-sm:flex-row w-full max-sm:justify-between ">
-                                    {/* <div class=" text-xs text-cardBody font-poppins max-sm:hidden">Designation</div> */}
+                               
                                     <div class="text-sm text-cardBody font-poppins">
                                          {item.designation}
                                     </div>
                                 </div>
                                 <div className=" flex font-medium flex-col md:w-36  max-sm:flex-row w-full max-sm:justify-between">
-                                  {/* <div class="text-xs text-cardBody font-poppins max-sm:hidden">Department</div> */}
+                                
                                   <div class="text-sm text-cardBody font-poppins">
                                        {item.department}
                                   </div>
                               </div>
                               </div>
                               <div className="flex font-medium flex-col md:w-32 max-sm:flex-row w-full max-sm:justify-between ">
-  {/* <div className="text-xs text-cardBody font-poppins max-sm:hidden"># Opportunity</div> */}
+
   <div className="text-sm text-cardBody font-poppins text-center">
     {item.oppNo}
   </div>
 </div>
 <div className=" flex font-medium flex-col md:w-36 max-sm:flex-row w-full max-sm:justify-between ">
-                                    {/* <h4 class=" text-xs text-cardBody font-poppins max-sm:hidden">Pipeline Value</h4> */}
+                      
 
                                     <div class=" text-sm text-cardBody font-poppins text-center">
                                     {item.totalProposalValue}
@@ -256,7 +250,7 @@ function ContactCardList(props) {
                                     </div>
                                 </div>
                                 <div className="flex font-medium flex-col md:w-32 max-sm:flex-row w-full max-sm:justify-between ">
-                                    {/* <div class="text-xs text-cardBody font-poppins max-sm:hidden">Portal Acess</div> */}
+               
 
                                     <div class="text-sm text-cardBody font-poppins">
 
@@ -269,7 +263,7 @@ function ContactCardList(props) {
                                 <div class="flex md:items-center">
                                 <div className="flex font-medium  md:w-20  max-sm:flex-row w-full max-sm:justify-between">
                        
-                       {/* <div class="text-xs text-cardBody font-poppins max-sm:hidden">Owner</div> */}
+
 
                    
               <Tooltip title={item.ownerName}>
@@ -374,8 +368,7 @@ function ContactCardList(props) {
                     <Tooltip overlayStyle={{ maxWidth: "300px" }} title={dataLoc}>
             <span
               style={{
-                // color:
-                //   showRes && item.orderId === orderId ? "orange" : "#1890ff",
+
                 cursor: "pointer",
               }}
             >
@@ -386,16 +379,7 @@ function ContactCardList(props) {
             </span>
           </Tooltip>
           </div>
-          {/* <div><Tooltip title={item.email}>
-              <MailOutlineIcon
-                type="mail"
-                style={{ cursor: "pointer",fontSize: "0.8rem" }}
-                onClick={() => {
-                  props.getCustomerById(item.customerId);
-                  props.handleCustomerEmailDrawerModal(true);
-                }}
-              />
-            </Tooltip> </div> */}
+    
               {user.contactUpdateInd === true &&  user.crmInd === true && (
             <div>
            
@@ -421,7 +405,7 @@ function ContactCardList(props) {
 
 
                     )
-                })}
+                })} */}
                       </InfiniteScroll>
       </OnlyWrapCard>
 
@@ -481,41 +465,41 @@ const mapStateToProps = ({
   departments,
   opportunity,
 }) => ({
-  userId: auth.userDetails.userId,
+//   userId: auth.userDetails.userId,
   contactByUserId: contact.contactByUserId,
-  sales: opportunity.sales,
-  user: auth.userDetails,
-  addDrawerContactPulseModal:contact.addDrawerContactPulseModal,
-  recruiterName: opportunity.recruiterName,
-  fetchingContacts: contact.fetchingContacts,
-  fetchingContactsError: contact.fetchingContactsError,
-  updateContactModal: contact.updateContactModal,
-  addDrawerContactNotesModal:contact.addDrawerContactNotesModal,
-  designations: designations.designations,
-  departments: departments.departments,
-  addDrawerContactEmailModal: contact.addDrawerContactEmailModal,
-  addContactSpeechModal: contact.addContactSpeechModal,
-  addDrawerContactModal: contact.addDrawerContactModal,
+//   sales: opportunity.sales,
+//   user: auth.userDetails,
+//   addDrawerContactPulseModal:contact.addDrawerContactPulseModal,
+//   recruiterName: opportunity.recruiterName,
+//   fetchingContacts: contact.fetchingContacts,
+//   fetchingContactsError: contact.fetchingContactsError,
+//   updateContactModal: contact.updateContactModal,
+//   addDrawerContactNotesModal:contact.addDrawerContactNotesModal,
+//   designations: designations.designations,
+//   departments: departments.departments,
+//   addDrawerContactEmailModal: contact.addDrawerContactEmailModal,
+//   addContactSpeechModal: contact.addContactSpeechModal,
+//   addDrawerContactModal: contact.addDrawerContactModal,
 });
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
-      getContactListByUserId,
-      handleUpdateContactModal,
-      handleDonotCallModal,
-      setEditContact,
-      getDesignations,
-      updateOwnercontactById,
-      getRecruiterName,
-      getAllSalesList,
-      handleContactReactSpeechModal,
-      handleContactDrawerModal,
-      getContactById,
-      handleContactNotesDrawerModal,
-      handleContactPulseDrawerModal,
-      handleContactEmailDrawerModal,
-      emptyContact
+    //   getContactListByUserId,
+    //   handleUpdateContactModal,
+    //   handleDonotCallModal,
+    //   setEditContact,
+    //   getDesignations,
+    //   updateOwnercontactById,
+    //   getRecruiterName,
+    //   getAllSalesList,
+    //   handleContactReactSpeechModal,
+    //   handleContactDrawerModal,
+    //   getContactById,
+    //   handleContactNotesDrawerModal,
+    //   handleContactPulseDrawerModal,
+    //   handleContactEmailDrawerModal,
+    //   emptyContact
     },
     dispatch
   );
-export default connect(mapStateToProps, mapDispatchToProps)(ContactCardList);
+export default connect(mapStateToProps, mapDispatchToProps)(ContactAllCardList);

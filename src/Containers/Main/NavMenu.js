@@ -115,22 +115,7 @@ function NavMenu(props) {
           </Menu.Item>
 
         )}
-        {/* dashboard */}
-        {/* <Menu.Item key="/dashboard">
-            <Link to="/dashboard">
-             
-              <i class="fas fa-chart-line"></i>&nbsp;&nbsp;&nbsp;
-              <span style={{ color: "white", paddingleft: "0em" }}>
-                <FormattedMessage
-                  id="app.recruitproboard"
-                  defaultMessage="RecruitProBoard"
-                />
-               
-              </span>
-            </Link>
-          </Menu.Item> */}
-        {/* {user.userType !== "USER" && user.department !== "VENDOR" && ( */}
-        {/*planner*/}
+      
         {user.imInd === true && user.basicAccessInd === true && (
           <Menu.Item key="/planner" style={{ height: "27px", paddingLeft: "1rem" }}>
             <Link to="/planner">
@@ -147,47 +132,9 @@ function NavMenu(props) {
             </Link>
           </Menu.Item>
         )}
-        {/*planner*/}
-        {/* )} */}
-        {/* <Menu.Item key="/planner">
-            <Link to="/planner">
-             
-              <i class="far fa-calendar-alt"></i>&nbsp;&nbsp;&nbsp;&nbsp;
-              <span style={{ color: "white" }}>
-                <FormattedMessage
-                  id="app.planner"
-                  defaultMessage="Planner"
-                />
-             
-              </span>
-            </Link>
-          </Menu.Item> */}
+     
 
-        {/*Activity*/}
-
-        {/* {user.userType !== "USER" &&
-            user.department !== "VENDOR" &&
-            user.department != "Customer" && (
-              <SubMenu
-                key="sub1"
-                style={{ marginBottom: "-0.75em", background: "#38445E" }}
-                title={
-                  <span>
-                    <Icon type="mail" style={{ color: "white" }} />
-                    <FontAwesomeIcon
-                      icon={solid("bars-progress")}
-                      style={{ fontSize: "small" }}
-                    />
-                    &nbsp;&nbsp;&nbsp;
-                    <span style={{ color: "white" }}>
-                      <FormattedMessage
-                        id="app.activity"
-                        defaultMessage="Activity"
-                      />
-                    </span>
-                  </span>
-                }
-              > */}
+        
         {user.basicAccessInd === true && (
           <Menu.Item key="/call" style={{ height: "27px", paddingLeft: "1rem" }}>
             <Link to="/call">
@@ -252,17 +199,7 @@ function NavMenu(props) {
             </Link>
           </Menu.Item>
         )}
-        {/* <Menu.Item key="/mileage">
-              <Link to="/mileage">
-                <Icon type="dashboard" style={{ color: "white" }} />
-                <span style={{ color: "white" }}>Leaves</span>
-              </Link>
-            </Menu.Item> */}
-        {/* </SubMenu>
-            )} */}
 
-        {/*Activity*/}
-        {/*Reports*/}
         {user.basicAccessInd === true && (
           <Menu.Item key="/reports" style={{ height: "27px", paddingLeft: "1rem" }}>
             <Link to="/reports">
@@ -277,7 +214,7 @@ function NavMenu(props) {
             </Link>
           </Menu.Item>
         )}
-        {/*Reports*/}
+
 
 
 
@@ -301,7 +238,7 @@ function NavMenu(props) {
             </Link>
           </Menu.Item>
         )}
-        {/*Opportunity*/}
+
         {user.opportunityAccessInd === true && user.crmInd === true && (
           <Menu.Item key="/opportunity" style={{ height: "27px", paddingLeft: "1rem" }}>
             <Link to="/opportunity">
@@ -321,7 +258,7 @@ function NavMenu(props) {
           </Menu.Item>
         )}
 
-        {/* Contact */}
+
         {user.contactAccessInd === true && user.crmInd === true && (
           <Menu.Item key="/contact" style={{ height: "27px", paddingLeft: "1rem" }}>
             <Link to="/contact">
@@ -353,7 +290,7 @@ function NavMenu(props) {
               />
               <span class="text-white text-ls ml-1">
 
-                {translatedMenuItems[9]}
+                Prospect
                 &nbsp;&nbsp;&nbsp;
                 <Badge
                   count={props.opportunityRecord.CustomerNo}
@@ -723,8 +660,8 @@ function NavMenu(props) {
                 style={{ fontSize: "large" }}
               />
               <span class="text-white text-ls ml-1"><FormattedMessage
-                id="app.account"
-                defaultMessage="Account"
+                id="app.customer"
+                defaultMessage="Customer"
               />
               </span>
             </Link>

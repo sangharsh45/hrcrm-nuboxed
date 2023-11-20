@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import { FormattedMessage } from "react-intl";
 import { bindActionCreators } from "redux";
 import { Button ,Switch,Checkbox} from "antd";
-import {getSources} from "../../../Settings/Category/Source/SourceAction"
 import AddressFieldArray from "../../../../Components/Forms/Formik/AddressFieldArray";
 import { Formik, Form, Field, FieldArray, FastField } from "formik";
 import * as Yup from "yup";
@@ -34,7 +33,6 @@ function UpdateCustomerForm (props) {
   useEffect(() => {
     props.getAllCustomerEmployeelist();
     props.getSectors();
-    props.getSources(props.orgId)
     props.getAllSalesList();
     props. getCrm();
   }, []);
@@ -52,12 +50,7 @@ function UpdateCustomerForm (props) {
       setEditingCustomer,
       userId
     } = props;
-    const SourceOptions = props.sources.map((item) => {
-      return {
-        label: `${item.name || ""}`,
-        value: item.sourceId,
-      };
-    });
+
     const employeesData = props.allCustomerEmployeeList.map((item) => {
       return {
         label: `${item.fullName}`,
@@ -67,6 +60,9 @@ function UpdateCustomerForm (props) {
     const [defaultOption, setDefaultOption] = useState(setEditingCustomer.assignedTo);
     const [selected, setSelected] = useState(defaultOption);
     const selectedOption = props.allCustomerEmployeeList.find((item) => item.fullName === selected);
+    
+    const srcnme=setEditingCustomer.source
+    console.log("ssrcc",srcnme)
     return (
       <>
         <Formik
@@ -82,7 +78,7 @@ function UpdateCustomerForm (props) {
             countryDialCode: setEditingCustomer.countryDialCode || user.countryDialCode,
             phoneNumber: setEditingCustomer.phoneNumber || "",
             userId: userId,
-            source:setEditingCustomer.source  ,
+            source:setEditingCustomer.source  || "",
           
             assignedTo:selectedOption ? selectedOption.employeeId:props.setEditingCustomer.employeeId,
             notes: setEditingCustomer.notes || "",
@@ -213,7 +209,7 @@ function UpdateCustomerForm (props) {
                       />
                     </div>
                     <div class=" w-w47.5">
-                    <Field
+                    <FastField
                           name="source"
                           isColumnWithoutNoCreate
                           label={
@@ -222,15 +218,13 @@ function UpdateCustomerForm (props) {
                               defaultMessage="Source"
                             />
                           }
-                          component={SelectComponent}
-                          options={
-                            Array.isArray(SourceOptions)
-                              ? SourceOptions
-                              : []
-                          }
-                          value={values.source}
+                          selectType="sourceName"
+                          component={SearchSelect}
+                          defaultValue={{
+                            label:srcnme,
+                            // value: d,
+                          }}
                           isColumn
-                          margintop={"0"}
                           inlineLabel
                         />
            </div>
@@ -429,12 +423,11 @@ function UpdateCustomerForm (props) {
 
 }
 
-const mapStateToProps = ({ auth, customer,source,employee,leads }) => ({
+const mapStateToProps = ({ auth, customer,employee,leads }) => ({
   setEditingCustomer: customer.setEditingCustomer,
   updateCustomerById: customer.updateCustomerById,
   updateCustomerByIdError: customer.updateCustomerByIdError,
   user: auth.userDetails,
-  sources: source.sources,
   userId: auth.userDetails.userId,
   allCustomerEmployeeList:employee.allCustomerEmployeeList,
   organizationId: auth.userDetails.organizationId,
@@ -448,7 +441,6 @@ const mapDispatchToProps = (dispatch) =>
       updateCustomer,
       setEditCustomer,
       getSectors,
-      getSources,
       getAllSalesList,
       getAllCustomerEmployeelist,
       getCrm,

@@ -486,7 +486,6 @@ const mapStateToProps = ({ auth, customer, contact, opportunity }) => ({
   addCustomerOpportunityModal: customer.addCustomerOpportunityModal,
   customerId: customer.customer.customerId,
   user: auth.userDetails,
-  callActivityModal:customer.callActivityModal,
   addCustomerProjectDrawer:customer.addCustomerProjectDrawer,
   userId: auth.userDetails.userId,
   addCustomerSpeechModal: customer.addCustomerSpeechModal,

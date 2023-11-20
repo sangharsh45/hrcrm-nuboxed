@@ -113,16 +113,17 @@ const ContactActionLeft = (props) => {
           </span>
         </Badge>
       </Tooltip>
+      {user.crmInd=== true && user.contactFullListInd===true && ( 
       <Tooltip
         title="All"
       >
         <Badge
           size="small"
-          count={
-            (props.viewType === "all" &&
-              props.contactRecord.customerContactCount) ||
-            0
-          }
+          // count={
+          //   (props.viewType === "all" &&
+          //     props.contactRecord.customerContactCount) ||
+          //   0
+          // }
           overflowCount={5000}
         >
           <span
@@ -136,6 +137,7 @@ const ContactActionLeft = (props) => {
           </span>
         </Badge>
       </Tooltip>
+      )}
       {/* <Tooltip
         title={<FormattedMessage id="app.vendor" defaultMessage="Vendor" />}
       >

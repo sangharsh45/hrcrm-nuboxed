@@ -23,6 +23,7 @@ const OpportunityCardList = lazy(() => import("./Child/OpportunityTable/Opportun
 const OpportunityCloseCard=lazy(()=>import("./Child/OpportunityTable/OpportunityCloseCard"));
 const OpportunityLostCard=lazy(()=>import("./Child/OpportunityTable/OpportunityLostCard"));
 const OpportunityDeletedCard=lazy(()=>import("./Child/OpportunityTable/OpportunityDeletedCard"));
+const OpportunityAllCardList = lazy(() => import("./Child/OpportunityTable/OpportunityAllCardList"));
 
 class Opportunity extends Component {
   state = { currentData: "" };
@@ -80,9 +81,10 @@ class Opportunity extends Component {
        
              this.props.viewType === "won" ?
              // <OpportunitylostTable/>
-            <OpportunityWonCard/>
-             :
-            null}
+            <OpportunityWonCard/> 
+            : this.props.viewType==="all" ? 
+            <OpportunityAllCardList/>
+             : null}
         </Suspense>
       </React.Fragment>
     );
