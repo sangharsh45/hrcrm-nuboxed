@@ -14,7 +14,7 @@ const AddOpportunityModal = (props) => {
           id="app.opportunity"
           defaultMessage="Opportunity"
         />}
-        width="60%"
+        width="55%"
         style={{marginTop:"5rem"}}
         visible={props.addOpportunityModal}
         maskClosable={false}

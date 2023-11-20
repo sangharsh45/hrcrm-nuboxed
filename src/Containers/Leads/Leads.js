@@ -9,6 +9,7 @@ import {getLeads} from "../Leads/LeadsAction"
 import { setLeadsViewType, handleLeadsModal, getEmployeelist, } from "./LeadsAction";
 const LeadsCardList = lazy(()=>import("./Child/LeadsTable/LeadsCardList"));
 const LeadsJunkList=lazy(()=>import ("./Child/LeadsTable/LeadsJunkList"));
+const LeadsAllCardList = lazy(()=>import("./Child/LeadsTable/LeadsAllCardList"));
 class Leads extends Component {
 
   state = { currentData: "",currentUser:"", filter:"creationdate", };
@@ -64,6 +65,7 @@ class Leads extends Component {
           {viewType==="card" ? (
  <LeadsCardList  filter={this.state.filter}/>
           ):viewType==="list" ? (<LeadsJunkList/>)
+        :viewType==="all" ? (<LeadsAllCardList/>)
         :null}
        
         </Suspense>

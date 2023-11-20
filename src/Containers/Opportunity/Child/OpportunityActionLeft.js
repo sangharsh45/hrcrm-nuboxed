@@ -111,39 +111,29 @@ const OpportunityActionLeft = (props) => {
           </span>
         </Tooltip>
       </Badge>
- 
-  <div class="ml-2">
-  <Tooltip
-          title="Teams"
+      <Tooltip title={"Won"}>
+      <Badge
+          size="small"
+          count={
+            (viewType === "won" &&
+            wonOpportunityData.OpportunityDetailsbyWonInd) ||
+            0
+          }
+          overflowCount={999}
         >
           <span
-            class=" mr-2 text-sm "
-            onClick={() => props.setOpportunityViewType("teams")}
+            class=" mr-2 text-sm cursor-pointer"
+            onClick={() => props.setOpportunityViewType("won")}
             style={{
-              color: props.viewType === "teams" && "#1890ff",cursor:"pointer"
+              cursor:"pointer",
+              color: props.viewType === "won" && "#1890ff",
             }}
           >
             {" "}
-            <PeopleIcon/>
+            <CheckCircleTwoTone type="check-circle" theme="twoTone" twoToneColor="#24D8A7" />
           </span>
-        </Tooltip>
-  </div>
-  <div class="ml-2">
-  <Tooltip
-          title="All list"
-        >
-          <span
-            class=" mr-2 text-sm "
-            onClick={() => props.setOpportunityViewType("all")}
-            style={{
-              color: props.viewType === "all" && "#1890ff",cursor:"pointer"
-            }}
-          >
-            {" "}
-           ALL
-          </span>
-        </Tooltip>
-  </div>
+          </Badge>
+      </Tooltip>
       <Tooltip title={"Close"}>
         {" "}
         <Badge
@@ -191,6 +181,42 @@ const OpportunityActionLeft = (props) => {
           </span>
         </Badge>
       </Tooltip>
+    
+  <div class="ml-2">
+  <Tooltip
+          title="Teams"
+        >
+          <span
+            class=" mr-2 text-sm "
+            onClick={() => props.setOpportunityViewType("teams")}
+            style={{
+              color: props.viewType === "teams" && "#1890ff",cursor:"pointer"
+            }}
+          >
+            {" "}
+            <PeopleIcon/>
+          </span>
+        </Tooltip>
+  </div>
+  <div class="ml-2">
+    {user.crmInd=== true && user.opportunityFullListInd===true && ( 
+  <Tooltip
+          title="All list"
+        >
+          <span
+            class=" mr-2 text-sm "
+            onClick={() => props.setOpportunityViewType("all")}
+            style={{
+              color: props.viewType === "all" && "#1890ff",cursor:"pointer"
+            }}
+          >
+            {" "}
+           ALL
+          </span>
+        </Tooltip>
+    )}
+  </div>
+     
 
       <Tooltip
         title={
@@ -223,29 +249,7 @@ const OpportunityActionLeft = (props) => {
         </Badge>
       </Tooltip>
 
-      <Tooltip title={"Won"}>
-      <Badge
-          size="small"
-          count={
-            (viewType === "won" &&
-            wonOpportunityData.OpportunityDetailsbyWonInd) ||
-            0
-          }
-          overflowCount={999}
-        >
-          <span
-            class=" mr-2 text-sm cursor-pointer"
-            onClick={() => props.setOpportunityViewType("won")}
-            style={{
-              cursor:"pointer",
-              color: props.viewType === "won" && "#1890ff",
-            }}
-          >
-            {" "}
-            <CheckCircleTwoTone type="check-circle" theme="twoTone" twoToneColor="#24D8A7" />
-          </span>
-          </Badge>
-      </Tooltip>
+      
       {/* <Tooltip
         title={
           <FormattedMessage

@@ -38,17 +38,19 @@ const LeadsActionLeft = (props) => {
 
     />
   );
+  const {user}=props;
   return (
     <div class=" flex  items-center">
+         <Tooltip
+        title= "Card View"
+      >
 <Badge
         size="small"
         count={(props.viewType === "card" && props.leadsCountData.LeadsDetails) || 0}
         overflowCount={999}
       >
 
-    <Tooltip
-        title= "Card View"
-      >
+ 
         <span   class=" mr-2 text-sm cursor-pointer"
         onClick={() => props.setLeadsViewType("card")}
           style={{
@@ -57,13 +59,15 @@ const LeadsActionLeft = (props) => {
         >
         <TocIcon />
         </span>
+        </Badge>
       </Tooltip>
-      </Badge>
+   
     
       <div class="ml-2">
       <Tooltip
         title= "Teams"
       >
+        <Badge>
         <span   class=" mr-2 text-sm cursor-pointer"
         onClick={() => props.setLeadsViewType("teams")}
           style={{
@@ -72,12 +76,15 @@ const LeadsActionLeft = (props) => {
         >
        <PeopleIcon/>
         </span>
+        </Badge>
       </Tooltip>
       </div>
       <div class="ml-2">
+      {user.crmInd === true && user.leadsFullListInd===true && ( 
       <Tooltip
         title= "All"
       >
+        <Badge>
         <span   class=" mr-2 text-sm cursor-pointer"
         onClick={() => props.setLeadsViewType("all")}
           style={{
@@ -86,7 +93,9 @@ const LeadsActionLeft = (props) => {
         >
         ALL
         </span>
+        </Badge>
       </Tooltip>
+      )}
       </div>
       <div class="ml-2 mr-2">
       <Badge
@@ -157,6 +166,7 @@ const mapStateToProps = ({leads,auth}) => ({
   leadsCountData:leads.leadsCountData,
   leadsCountJunked:leads.leadsCountJunked,
   userId: auth.userDetails.userId,
+  user: auth.userDetails,
 
 });
 const mapDispatchToProps = (dispatch) => bindActionCreators({

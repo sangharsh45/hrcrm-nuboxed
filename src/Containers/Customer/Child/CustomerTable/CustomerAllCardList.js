@@ -51,38 +51,38 @@ function onChange(pagination, filters, sorter) {
   console.log("params", pagination, filters, sorter);
 }
 
-function CustomerCardList(props) {
+function CustomerAllCardList(props) {
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
 
   const [hasMore, setHasMore] = useState(true);
  
   const [page, setPage] = useState(0);
   useEffect(() => {
-    window.addEventListener('error', e => {
-      if (e.message === 'ResizeObserver loop limit exceeded' || e.message === 'Script error.') {
-        const resizeObserverErrDiv = document.getElementById(
-          'webpack-dev-server-client-overlay-div'
-        )
-        const resizeObserverErr = document.getElementById(
-          'webpack-dev-server-client-overlay'
-        )
-        if (resizeObserverErr) {
-          resizeObserverErr.setAttribute('style', 'display: none');
-        }
-        if (resizeObserverErrDiv) {
-          resizeObserverErrDiv.setAttribute('style', 'display: none');
-        }
-      }
-    })
-    setPage(page + 1);
-    props.getCustomerListByUserId(props.userId, page,"creationdate");
-      props.getSectors();
-    props.getCountries();
-    props.getAllCustomerEmployeelist();
+    // window.addEventListener('error', e => {
+    //   if (e.message === 'ResizeObserver loop limit exceeded' || e.message === 'Script error.') {
+    //     const resizeObserverErrDiv = document.getElementById(
+    //       'webpack-dev-server-client-overlay-div'
+    //     )
+    //     const resizeObserverErr = document.getElementById(
+    //       'webpack-dev-server-client-overlay'
+    //     )
+    //     if (resizeObserverErr) {
+    //       resizeObserverErr.setAttribute('style', 'display: none');
+    //     }
+    //     if (resizeObserverErrDiv) {
+    //       resizeObserverErrDiv.setAttribute('style', 'display: none');
+    //     }
+    //   }
+    // })
+    // setPage(page + 1);
+    // props.getCustomerListByUserId(props.userId, page,"creationdate");
+    //   props.getSectors();
+    // props.getCountries();
+    // props.getAllCustomerEmployeelist();
   }, []);
 
   useEffect(() => {
-    return () => props.emptyCustomer();
+    // return () => props.emptyCustomer();
   }, []);
 
 
@@ -107,11 +107,11 @@ const [rowdata, setrowdata] = useState("");
   const handleLoadMore = () => {
    
       setPage(page + 1);
-      props.getCustomerListByUserId(
-        props.currentUser ? props.currentUser : props.userId,
-        page,
-        props.filter?props.filter:"creationdate"
-      );
+    //   props.getCustomerListByUserId(
+    //     props.currentUser ? props.currentUser : props.userId,
+    //     page,
+    //     props.filter?props.filter:"creationdate"
+    //   );
   };
 
   const {
@@ -160,7 +160,7 @@ const [rowdata, setrowdata] = useState("");
         height={"75vh"}
       >
       
-      {customerByUserId.map((item) => { 
+      {/* {customerByUserId.map((item) => { 
          const currentdate = moment().format("DD/MM/YYYY");
          const date = moment(item.creationDate).format("DD/MM/YYYY");
          const diff = Math.abs(
@@ -182,9 +182,6 @@ const [rowdata, setrowdata] = useState("");
                     return (
                         <div>
                             <div className="flex rounded-xl justify-between bg-white mt-[0.5rem] h-[2.75rem] items-center p-3 "
-                                // style={{
-                                //     borderBottom: "3px dotted #515050"
-                                // }}
                                 >
                                    <div class="flex">
                                    <div className=" flex font-medium flex-col w-[14rem]   max-sm:w-full">
@@ -230,7 +227,7 @@ const [rowdata, setrowdata] = useState("");
                                     </div> 
                                 <div className=" flex font-medium flex-col  md:w-28 max-sm:flex-row w-full max-sm:justify-between  ">
                            
-                                    {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden"> Sector </h4> */}
+                                   
                                     <h4 class=" text-xs text-cardBody font-poppins">   
                                     {item.sector}
                                     </h4>
@@ -239,7 +236,7 @@ const [rowdata, setrowdata] = useState("");
                                 <div className=" flex font-medium flex-col md:w-28 max-sm:flex-row w-full max-sm:justify-between ">
                                   
 
-                                    {/* <h4 class=" text-xs text-cardBody font-poppins max-sm:hidden">Country</h4> */}
+                                    
                                     <h4 class=" text-sm text-cardBody font-poppins">
                                     <ReactCountryFlag
                           countryCode={item.countryAlpha2Code}
@@ -255,7 +252,7 @@ const [rowdata, setrowdata] = useState("");
                                 </div>
                                 </div>
                                 <div className=" flex font-medium flex-col md:w-full max-sm:flex-row w-full max-sm:justify-between ">
-                                    {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden"># Opportunity</h4> */}
+                                   
 
                                     <div class=" text-xs text-cardBody font-poppins text-center">
                                     {item.oppNo}
@@ -263,7 +260,7 @@ const [rowdata, setrowdata] = useState("");
                                     </div>
                                 </div>
                                 <div className=" flex font-medium flex-col md:w-0 max-sm:flex-row w-full max-sm:justify-between ">
-                                    {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden">Pipeline Value</h4> */}
+                                  
 
                                     <div class=" text-xs text-cardBody font-poppins text-center">
                                     {item.totalProposalValue}
@@ -271,7 +268,7 @@ const [rowdata, setrowdata] = useState("");
                                     </div>
                                 </div>
                                 <div className=" flex font-medium flex-col md:w-96 max-sm:flex-row w-full max-sm:justify-between ">
-                                    {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden">Weighted Value</h4> */}
+                                    
 
                                     <div class=" text-xs text-cardBody font-poppins text-center">
                                     {item.weight}
@@ -279,7 +276,7 @@ const [rowdata, setrowdata] = useState("");
                                     </div>
                                 </div>
                                 <div className=" flex font-medium items-center  flex-col md:w-72 max-sm:max-sm:flex-row w-full max-sm:justify-between ">
-                                    {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden">Assigned to</h4> */}
+                                  
 
                                     <div class=" text-xs text-cardBody font-poppins">
                                     
@@ -300,7 +297,7 @@ const [rowdata, setrowdata] = useState("");
                                 <div class="flex md:items-center"> 
                                 <div className=" flex font-medium items-center flex-col md:w-28 max-sm:flex-row w-full max-sm:justify-between mb-2 ">
                        
-                       {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden">Owner</h4> */}
+                     
 
                        <span>
               <MultiAvatar
@@ -332,7 +329,7 @@ const [rowdata, setrowdata] = useState("");
                                 <Tooltip title={item.url}>
               {item.url !== "" ? (
                 <span
-                  //type="edit"
+                  
                   style={{ cursor: "pointer" }}
                   onClick={() => {}}
                 >
@@ -357,7 +354,7 @@ const [rowdata, setrowdata] = useState("");
               onClick={() => {
                 props.getCustomerDetailsById(item.customerId);
                 props.getCustomerKeySkill(item.customerId);
-                //   this.props.getCustomerDocument(item.customerId );
+                
 
                 props.handleCustomerDrawerModal(item, true);
               }}
@@ -426,16 +423,6 @@ const [rowdata, setrowdata] = useState("");
               />
             </Tooltip>
             )}
-{/* <Tooltip title={item.email}>
-              <MailOutlineIcon
-                type="mail"
-                style={{ cursor: "pointer",fontSize: "1rem" }}
-                onClick={() => {
-                  props.getCustomerById(item.customerId);
-                  props.handleCustomerEmailDrawerModal(true);
-                }}
-              />
-            </Tooltip> */}
 </div>
             </div> 
 
@@ -445,13 +432,13 @@ const [rowdata, setrowdata] = useState("");
 
 
                     )
-                })}
+                })} */}
                 </InfiniteScroll>
       </OnlyWrapCard>
       </div>
       
   
-      <AddCustomerDrawerModal
+      {/* <AddCustomerDrawerModal
         addDrawerCustomerModal={props.addDrawerCustomerModal}
         handleCustomerDrawerModal={props.handleCustomerDrawerModal}
       />
@@ -481,7 +468,7 @@ const [rowdata, setrowdata] = useState("");
         addDrawerCustomerNotesModal={addDrawerCustomerNotesModal}
         handleCustomerNotesDrawerModal={handleCustomerNotesDrawerModal}
         handleSetCurrentCustomer={handleSetCurrentCustomer}
-      />
+      /> */}
     </>
   );
 }
@@ -493,44 +480,44 @@ const mapStateToProps = ({
   opportunity,
   employee,
 }) => ({
-  userId: auth.userDetails.userId,
-  addDrawerCustomerNotesModal:customer.addDrawerCustomerNotesModal,
+//   userId: auth.userDetails.userId,
+//   addDrawerCustomerNotesModal:customer.addDrawerCustomerNotesModal,
   customerByUserId: customer.customerByUserId,
-  sales: opportunity.sales,
-  addDrawerCustomerPulseModal:customer.addDrawerCustomerPulseModal,
-  recruiterName: opportunity.recruiterName,
-  fetchingAllCustomers: customer.fetchingAllCustomers,
-  sectors: sector.sectors,
-  fetchingCustomers: customer.fetchingCustomers,
-  fetchingCustomersError: customer.fetchingCustomersError,
-  updateCustomerModal: customer.updateCustomerModal,
-  user: auth.userDetails,
-  employees: employee.employees,
-  countries: auth.countries,
-  allCustomerEmployeeList: employee.allCustomerEmployeeList,
-  addDrawerCustomerEmailModal: customer.addDrawerCustomerEmailModal,
+//   sales: opportunity.sales,
+//   addDrawerCustomerPulseModal:customer.addDrawerCustomerPulseModal,
+//   recruiterName: opportunity.recruiterName,
+//   fetchingAllCustomers: customer.fetchingAllCustomers,
+//   sectors: sector.sectors,
+//   fetchingCustomers: customer.fetchingCustomers,
+//   fetchingCustomersError: customer.fetchingCustomersError,
+//   updateCustomerModal: customer.updateCustomerModal,
+//   user: auth.userDetails,
+//   employees: employee.employees,
+//   countries: auth.countries,
+//   allCustomerEmployeeList: employee.allCustomerEmployeeList,
+//   addDrawerCustomerEmailModal: customer.addDrawerCustomerEmailModal,
 });
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
-      getCustomerListByUserId,
-      handleUpdateCustomerModal,
-      handleCustomerPulseDrawerModal,
-      setEditCustomer,
-      getSectors,
-      customerToAccount,
-      emptyCustomer,
-      updateOwnercustomerById,
-      handleCustomerDrawerModal,
-      getCustomerDetailsById,
-      getCustomerKeySkill,
-      handleCustomerEmailDrawerModal,
-      handleCustomerNotesDrawerModal,
-      getCustomerById,
-      getCountries,
-      getAllCustomerEmployeelist,
+    //   getCustomerListByUserId,
+    //   handleUpdateCustomerModal,
+    //   handleCustomerPulseDrawerModal,
+    //   setEditCustomer,
+    //   getSectors,
+    //   customerToAccount,
+    //   emptyCustomer,
+    //   updateOwnercustomerById,
+    //   handleCustomerDrawerModal,
+    //   getCustomerDetailsById,
+    //   getCustomerKeySkill,
+    //   handleCustomerEmailDrawerModal,
+    //   handleCustomerNotesDrawerModal,
+    //   getCustomerById,
+    //   getCountries,
+    //   getAllCustomerEmployeelist,
     },
     dispatch
   );
-export default connect(mapStateToProps, mapDispatchToProps)(CustomerCardList);
+export default connect(mapStateToProps, mapDispatchToProps)(CustomerAllCardList);
 

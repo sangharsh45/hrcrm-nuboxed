@@ -27,7 +27,6 @@ import {
   setEditOpportunity,
   deleteOpportunityData,
   updateOwneroppById,
-      getAllSalesList,
       handleOpportunityDrawerModal,
       getAllRecruitmentByOppId,
         getAllRecruitmentPositionByOppId,
@@ -52,7 +51,6 @@ function OpportunityWonCard(props) {
     }else{
      
     } 
-    props.getAllSalesList();
     props. getWonOpportunity(props.userId,page);
     setPage(page + 1);
   }, []);
@@ -80,7 +78,7 @@ function OpportunityWonCard(props) {
  <OnlyWrapCard style={{backgroundColor:"#E3E8EE"}}>
       <div className=" flex justify-between w-[99%] p-2 bg-transparent font-bold sticky top-0 z-10">
         <div className=" md:w-[14rem]">Name</div>
-        <div className=" md:w-20">Customer</div>
+        <div className=" md:w-20">Prospect</div>
         <div className=" md:w-32 ">Sponsor</div>
         <div className="md:w-32">Start Date</div>
         <div className="md:w-56">Proposal Amount</div>
@@ -88,14 +86,14 @@ function OpportunityWonCard(props) {
         <div className="md:w-24">Sales Rep</div>
         <div className="md:w-20">Owner</div>
         <div className="md:w-20"></div>
-        <div className="w-12">Action</div>
+        <div className="w-12"></div>
       </div>
       <InfiniteScroll
          dataLength={wonOpportunity.length}
         next={handleLoadMore}
         hasMore={hasMore}
         loader={fetchingWonOpportunity ?<h4 style={{ textAlign: 'center' }}>Loading...</h4>:null}
-        height={"70vh"}
+        height={"75vh"}
       >
 {wonOpportunity.map((item) => {
                  
@@ -458,7 +456,6 @@ const mapDispatchToProps = (dispatch) =>
     {
       getRecruiterList,
       getOpportunitySKill,
-      getAllSalesList,
       handleUpdateOpportunityModal,
       handleOpportunityDrawerModal,
       setEditOpportunity,

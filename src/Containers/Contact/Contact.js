@@ -18,6 +18,7 @@ const ContactHeader = lazy(() => import("./Child/ContactHeader"));
 const ContactTable = lazy(() => import("./Child/ContactTable/ContactTable"));
 const PartnerTable = lazy(() => import("./Child/PartnerTable/PartnerTable"));
 const ContactCardList = lazy(() => import("./Child/ContactTable/ContactCardList"));
+const ContactAllCardList = lazy(() => import("./Child/ContactTable/ContactAllCardList"));
 
 function Contact(props) {
   const [currentData, setCurrentData] = useState(undefined);
@@ -164,7 +165,10 @@ const filterData = filteredData.filter(item =>
         currentUser={currentUser} 
         filter={filter}
          filterData={filterData}
-         /> : null}
+         /> :
+         props.viewType ==="all" ? <ContactAllCardList/>
+
+        : null}
       </Suspense>
     </React.Fragment>
   );

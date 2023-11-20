@@ -119,9 +119,10 @@ function OpportunityCardList(props) {
     history,
     fetchingOpportunity
   } = props;
-  if (fetchingOpportunity) {
-    return <BundleLoader />;
-  }
+  
+  // if (fetchingOpportunity) {
+  //   return <BundleLoader />;
+  // }
 
   return (
     <>

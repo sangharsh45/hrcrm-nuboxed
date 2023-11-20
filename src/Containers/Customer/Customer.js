@@ -17,15 +17,14 @@ import {
     getCustomerFilterData,
     
   } from "./CustomerAction";
-import CustomerCardView from "./CustomerCardView";
+
 import CustomerMap from "./CustomerMap"
 import moment from "moment";
-  
+const CustomerCardView =lazy(()=> import("./CustomerCardView"));
 const AddCustomerModal = lazy(() => import( "./Child/AddCustomerModal"));
 const CustomerHeader = lazy(() => import("./Child/CustomerHeader"));
-const CustomerTable = lazy(() => import("./Child/CustomerTable/CustomerTable"));
 const CustomerCardList=lazy(() => import("./Child/CustomerTable/CustomerCardList"));
-
+const CustomerAllCardList=lazy(() => import("./Child/CustomerTable/CustomerAllCardList"));
 class Customer extends Component {
   state = { currentData: "",
   filter:"creationdate",
@@ -100,8 +99,12 @@ class Customer extends Component {
              /> :
           this.props.viewType==="map"?
           <CustomerMap/>:
-            
-            null} 
+          this.props.viewType==="all" ?
+            <CustomerAllCardList 
+            filter={this.state.filter}
+             currentUser={this.state.currentUser} 
+            />
+            : null} 
         </Suspense> 
         {/* <FloatButton.Group
       trigger="click"
