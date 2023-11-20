@@ -11,6 +11,7 @@ import Template from "../../Template/Template"
 import ReportScheduler from "./Child/ReportScheduler/ReportScheduler";
 import Access from "./Child/Access/Access";
 import General from "./Child/General/General";
+import Form from "./Child/RecruitmentTab/FormTab"
  import WorkFlow from "./Child/RecruitmentTab/WorkFlowTab";
 import SkillsTab from "../Library/SkillsTab";
 import NotificationsTab from "./Child/Notification/NotificationsTab";
@@ -83,6 +84,11 @@ function Recruitment(props) {
       rulesName: "Workflow",
       ruleId: "1",
        component: <WorkFlow/>,
+    },
+    {
+      rulesName: "Form",
+      ruleId: "24",
+      component: <Form/>,
     },
     // {
     //   rulesName: "Automation",
