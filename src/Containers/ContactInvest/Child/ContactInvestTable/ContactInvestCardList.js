@@ -116,7 +116,7 @@ function ContactInvestCardList(props) {
         <div className="md:w-28">Deal Value</div>
         <div className="md:w-20">Source</div>
         <div className="md:w-20">Owner</div>
-        <div className="w-12">Action</div>
+        {/* <div className="w-12">Action</div> */}
 
       </div>
           <InfiniteScroll

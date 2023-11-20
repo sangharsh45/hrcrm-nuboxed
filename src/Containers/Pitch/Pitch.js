@@ -67,10 +67,10 @@ function Pitch (props) {
             :null} */}
             
             {  viewType === "card" ?
-          <PitchCardList/> 
+          <PitchCardList       filter={filter}/> 
  
   :viewType==="all" ?
- <PitchAllCardList/> 
+ <PitchAllCardList       filter={filter}/> 
 // <CustomerCardView/>  
           :null}
             </Suspense>

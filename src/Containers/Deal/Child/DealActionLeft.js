@@ -55,8 +55,8 @@ useEffect(() => {
         <Tooltip
           title={
             <FormattedMessage
-              id="app.listOpportunity"
-              defaultMessage="Deal List"
+              id="app.listView"
+              defaultMessage="List View"
             />
           }
         >
@@ -65,6 +65,7 @@ useEffect(() => {
             onClick={() => setDealViewType("table")}
             style={{
               color: viewType === "table" && "#1890ff",
+              cursor:"pointer"
             }}
           >
             {" "}
@@ -91,41 +92,31 @@ useEffect(() => {
            <TableOutlined/>
           </span>
         </Tooltip>
-        <Tooltip
-          title="All"
+        <Tooltip title={"Won"}>
+      <Badge
+          size="small"
+          // count={
+          //   (viewType === "won" &&
+          //   wonOpportunityData.OpportunityDetailsbyWonInd) ||
+          //   0
+          // }
+          overflowCount={999}
         >
-          {/*<TableOutlined*/}
           <span
+            class=" mr-2 text-sm cursor-pointer"
+            onClick={() => props.setDealViewType("won")}
             style={{
-              fontSize: "1.56em",
-              marginRight: "0.3rem",
-              color: viewType === "all" && "#1890ff",
+              cursor:"pointer",
+              color: props.viewType === "won" && "#1890ff",
+              cursor:"pointer"
             }}
-            // iconType="table"
-            tooltipTitle="All"
-            onClick={() => props.setDealViewType("all")}
           >
-          ALL
+            {" "}
+            <CheckCircleTwoTone type="check-circle" theme="twoTone" twoToneColor="#24D8A7" />
           </span>
-        </Tooltip>
-        <Tooltip
-          title="Teams"
-        >
-          {/*<TableOutlined*/}
-          <span
-            style={{
-              fontSize: "1.56em",
-              marginRight: "0.3rem",
-              color: viewType === "teams" && "#1890ff",
-            }}
-            // iconType="table"
-            tooltipTitle="Teams"
-            onClick={() => props.setDealViewType("teams")}
-          >
-         <PeopleIcon/>
-          </span>
-        </Tooltip>
-      <Tooltip title={"Close"}>
+          </Badge>
+      </Tooltip>
+        <Tooltip title={"Close"}>
         {" "}
         <Badge
           size="small"
@@ -141,6 +132,7 @@ useEffect(() => {
             // onClick={() => props.setOpportunityViewType("close")}
             style={{
               color: props.viewType === "close" && "#1890ff",
+              cursor:"pointer"
             }}
           >
             {" "}
@@ -163,6 +155,7 @@ useEffect(() => {
             // onClick={() => props.setOpportunityViewType("lost")}
             style={{
               color: props.viewType === "lost" && "#1890ff",
+              cursor:"pointer"
             }}
           >
             {" "}
@@ -170,29 +163,45 @@ useEffect(() => {
           </span>
         </Badge>
       </Tooltip>
-      <Tooltip title={"Won"}>
-      <Badge
-          size="small"
-          // count={
-          //   (viewType === "won" &&
-          //   wonOpportunityData.OpportunityDetailsbyWonInd) ||
-          //   0
-          // }
-          overflowCount={999}
+   
+      
+        <Tooltip
+          title="Teams"
         >
+          {/*<TableOutlined*/}
           <span
-            class=" mr-2 text-sm cursor-pointer"
-            onClick={() => props.setDealViewType("won")}
             style={{
-              cursor:"pointer",
-              color: props.viewType === "won" && "#1890ff",
+              fontSize: "1.56em",
+              marginRight: "0.3rem",
+              color: viewType === "teams" && "#1890ff",
+              cursor:"pointer"
             }}
+            // iconType="table"
+            tooltipTitle="Teams"
+            onClick={() => props.setDealViewType("teams")}
           >
-            {" "}
-            <CheckCircleTwoTone type="check-circle" theme="twoTone" twoToneColor="#24D8A7" />
+         <PeopleIcon/>
           </span>
-          </Badge>
-      </Tooltip>
+        </Tooltip>
+        <Tooltip
+          title="All"
+        >
+          {/*<TableOutlined*/}
+          <span
+            style={{
+              fontSize: "1.56em",
+              marginRight: "0.3rem",
+              color: viewType === "all" && "#1890ff",
+              cursor:"pointer"
+            }}
+            // iconType="table"
+            tooltipTitle="All"
+            onClick={() => props.setDealViewType("all")}
+          >
+          ALL
+          </span>
+        </Tooltip>
+     
       <Tooltip
         title={
           <FormattedMessage
@@ -215,6 +224,7 @@ useEffect(() => {
             class=" mr-2 text-sm cursor-pointer"
             // onClick={() => props.setOpportunityViewType("dashboard")}
             style={{
+              cursor:"pointer"
               //color: props.viewType === "dashboard" && "#1890ff",
             }}
           >

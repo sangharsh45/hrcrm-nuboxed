@@ -40,7 +40,7 @@ const PitchAllCardList = (props) => {
   const [page, setPage] = useState(0);
   const [hasMore, setHasMore] = useState(true);
   useEffect(() => {
-    props.getAllPitch(page);
+    props.getAllPitch(page,"creationdate");
     setPage(page + 1);
     // props.getSectors();
     // props.getCountries();
@@ -54,8 +54,9 @@ const PitchAllCardList = (props) => {
   };
   const handleLoadMore = () => {
     setPage(page + 1);
-    props.getAllPitch(page
-    //   props.filter?props.filter:"creationdate"
+    props.getAllPitch(props.currentUser?props.currentUser:page,
+      props.filter?props.filter:"creationdate"
+ 
 
       );
       setPage(page + 1);
@@ -81,7 +82,7 @@ const PitchAllCardList = (props) => {
         <div className="md:w-24">Assigned to</div>
         <div className="md:w-20">Owner</div>
         <div className="md:w-20">Qualify</div>
-        <div className="w-12">Action</div>
+        {/* <div className="w-12">Action</div> */}
 
       </div>
       <InfiniteScroll
@@ -89,7 +90,7 @@ const PitchAllCardList = (props) => {
         next={handleLoadMore}
         hasMore={hasMore}
         loader={fetchingAllPitch?<h4 style={{ textAlign: 'center' }}>Loading...</h4>:null}
-        height={"70vh"}
+        height={"75vh"}
       >
    {props.allPitchData.map((item) => { 
  const currentdate = moment().format("DD/MM/YYYY");
