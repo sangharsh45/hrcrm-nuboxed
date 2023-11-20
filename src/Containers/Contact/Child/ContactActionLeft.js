@@ -18,6 +18,7 @@ import {
   getCustomerRecords,
   getContactRecord,
 } from "../ContactAction";
+import {getDepartments} from "../../Settings/Department/DepartmentAction";
 
 const Option = StyledSelect.Option;
 const item = [{ type: "Hot" }, { type: "Warm" }, { type: "Cold" }];
@@ -40,7 +41,8 @@ const ContactActionLeft = (props) => {
   } = useSpeechRecognition();
   console.log(transcript);
   useEffect(() => {
-    props.getContactRecord(props.userId)
+    props.getContactRecord(props.userId);
+    props.getDepartments();
     }, [props.userId]);
   // useEffect(() => {
   //   if (props.viewType === "table") {
@@ -55,35 +57,13 @@ const ContactActionLeft = (props) => {
   // }, [props.userId, props.viewType, props.name, transcript]);
   console.log(props.customerRecordData);
   const { user } = props;
+  const countryNameOption = props.departments.map((item)=>{
+  return {
+    label: `${item.departmentName || ""}`,
+    value: item.departmentId,
+  };});
   
-  const data2 = [
-    // {
-    //   workpreference: "All",
-    // },
-    {
-      workpreference: "Management",
-    },
-    {
-      workpreference: "hiring",
-    },
-    {
-      workpreference: "Customer",
-    },
-  ];
-  const countryNameOption = [
-    // {
-    //   workpreference: "All",
-    // },
-    {
-      department: "Management",
-    },
-    {
-      department: "Project",
-    },
-    {
-      department: "engineerings",
-    },
-  ];
+
   return (
     <div class=" flex  items-center">
       <Tooltip
@@ -208,8 +188,8 @@ const ContactActionLeft = (props) => {
         <option value="" disabled>Department</option>
         <option value="">All</option>
         {countryNameOption.map((countryOption, index) => (
-          <option key={index} value={countryOption.department}>
-            {countryOption.department}
+          <option key={index} value={countryOption.value}>
+            {countryOption.label}
           </option>
         ))}
       </select>
@@ -226,7 +206,7 @@ const ContactActionLeft = (props) => {
   );
 };
 
-const mapStateToProps = ({ auth, contact }) => ({
+const mapStateToProps = ({ auth, contact,departments }) => ({
   userId: auth.userDetails.userId,
   user: auth.userDetails,
   recordData: contact.recordData,
@@ -234,6 +214,7 @@ const mapStateToProps = ({ auth, contact }) => ({
   customerRecordData: contact.customerRecordData,
   contactByUserId: contact.contactByUserId,
   fetchingContactInputSearchData: contact.fetchingContactInputSearchData,
+  departments: departments.departments,
 });
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
@@ -242,6 +223,7 @@ const mapDispatchToProps = (dispatch) =>
       getRecords,
       getCustomerRecords,
       getContactRecord,
+      getDepartments
     },
     dispatch
   );

@@ -176,7 +176,7 @@ case types.HANDLE_LEADS_MODAL:
         return { ...state, 
           addingLeads: false, 
           addLeadsModal: false ,
-          // customerByUserId:[action.payload,...state.customerByUserId]
+          leadsAllData:[action.payload,...state.leadsAllData]
         };
       case types.ADD_LEADS_FAILURE:
         return { ...state, addingLeads: false, addLeadsModal: false };    

@@ -16,9 +16,11 @@ import { DeleteOutlined } from "@ant-design/icons";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { StyledTable, StyledPopconfirm } from "../../../../Components/UI/Antd";
 import {
+  MultiAvatar,
   MultiAvatar2,
   SubTitle,
 } from "../../../../Components/UI/Elements";
+import { OnlyWrapCard } from "../../../../Components/UI/Layout";
 import {
   getRecruiterList,
   handleUpdateOpportunityModal,
@@ -77,6 +79,19 @@ function OpportunityLostCard(props) {
       } = props;
       return (    
   <>
+ <OnlyWrapCard style={{backgroundColor:"#E3E8EE"}}>
+ <div className=" flex justify-between w-[99%] p-2 bg-transparent font-bold sticky top-0 z-10">
+        <div className=" md:w-[14rem]">Name</div>
+        <div className=" md:w-20">Customer</div>
+        <div className=" md:w-32 ">Sponsor</div>
+        <div className="md:w-32">Start Date</div>
+        <div className="md:w-56">Proposal Amount</div>
+        <div className="md:w-20">Stages</div> 
+        <div className="md:w-24">Sales Rep</div>
+        <div className="md:w-20">Owner</div>
+        <div className="md:w-20"></div>
+        <div className="w-12">Action</div>
+      </div>
 
       <InfiniteScroll
         dataLength={lostOpportunity.length}
@@ -88,223 +103,306 @@ function OpportunityLostCard(props) {
  <CardWrapper>      
               {lostOpportunity.map((item) => {
                  
-                 var findProbability = 0;
+                 var findProbability = item.probability;
+                 item.stageList.forEach((element) => {
+                   if (element.oppStage === item.oppStage) {
+                     findProbability = element.probability;
+                   }
+                 });
                  return (
 
-                    <CardElement>
+                  <div>
+                  <div
+                    className="flex rounded-xl justify-between bg-white mt-[0.5rem] h-[2.75rem] items-center p-3"
+                    // style={{
+                    //   borderBottom: "3px dotted #515050",
+                    // }}
+                  >
+                    <div class="flex ">
+                    <div className=" flex font-medium  md:w-[13rem] max-sm:flex-row w-full ">
+                              <div>
+<SubTitle>
+          <MultiAvatar
+            primaryTitle={item.opportunityName}
+            imageId={item.imageId}
+            // imageURL={imageURL}
+            imgWidth={"1.8rem"}
+            imgHeight={"1.8rem"}
+          />
+        </SubTitle>
+</div>
+                                 <div class="w-[4%]">
 
-                      <div class="flex items-center justify-between ">
-                      <h4>Name</h4>
-                        <Header>
-                        <Link
-          toUrl={`opportunity/${item.opportunityId}`}
-          title={`${item.opportunityName}`}>
-         {item.opportunityName}
-         </Link>
-                        </Header> 
-                       
-               
-            
-                          
-            
-          </div>                  
-                 
-                     
-           
-                        <div class="flex  justify-between">
-                            <h3>Customer</h3>
-                            <h4>{item.customer}</h4>
-                        </div>
-                        <div class="flex justify-between">
-                            <div>
-                    <h4>Sponsor</h4> 
-                    </div>
-                    <div>
-                    <SubTitle>
-            {item.contactName === null ? "None" :
-              <MultiAvatar2
-                primaryTitle={item.contactName}
-                imageId={item.imageId}
-                 imageURL={item.imageURL}
-                imgWidth={"1.8em"}
-                imgHeight={"1.8em"}
-              />
-            }
-            </SubTitle>
-            </div>
-                    </div>
-                    <div class="flex justify-between">
-                    <h4>Start Date</h4> 
-            <h4>{moment(item.startDate).format("ll")}</h4>
-                    </div>
-                    <div class="flex justify-between">
-                    <h4>Proposal Amount</h4> 
-            <h4><span>
-            <CurrencySymbol currencyType={item.currency} />
-            &nbsp;
-            {item.proposalAmount}
-          </span></h4>
-                    </div>
-                    <div class="flex justify-between">
-                    <h4>Stages</h4> 
-            <h4><span>
-            <Dropdown
-              overlay={
-                <div>
-                  <Menu mode="horizontal">
-                    <Menu.Item
-                      style={{
-                        paddingLeft: 5,
-                        paddingRight: 5,
-                        backgroundColor: "#F5F5F5",
-                      }}
-                    >
-                      
-                    </Menu.Item>
-                  </Menu>
-                </div>
-              }
-              trigger={["click"]}
-            >
-              <Tooltip title={item.stageName}>
-                {" "}
-                <Progress
-                  type="circle"
-                  style={{ cursor: "pointer", color: "red",fontSize:"0.8rem" }}
-                  percent={findProbability}
-                  width={30}
-                  strokeColor={"#005075"}
-                />
-              </Tooltip>
-            </Dropdown>
-          </span></h4>
-                    </div>  
-                    <div class="flex  justify-between" >
-    <h4>
-    Sales Rep
-    </h4>
-    <span>
+                                 </div>
+                                 
+                                      <Tooltip>
+                                      <div class=" flex max-sm:w-full  flex-row md:flex-col">
+                                          {/* <h4 class=" text-xs text-cardBody font-poppins max-sm:hidden">
+                                          Name
+                                          </h4> */}
+                                          <h4 class=" text-sm text-blue-500 text-cardBody font-poppins font-semibold cursor-pointer">
+                                              
+                                          <Link
+        toUrl={`opportunity/${item.opportunityId}`}
+        title={`${item.opportunityName}`}>
+       {item.opportunityName}
+       </Link>&nbsp;&nbsp;
+      {/* {date === currentdate ? (
+        <span
+          style={{
+            color: "tomato",
+            fontWeight: "bold",
+          }}
+        >
+          New
+        </span>
+      ) : null} */}
+     
+                                          </h4>
+</div>
+                                      </Tooltip>
+                            
+                              </div>
+
+                              <div className=" flex font-medium flex-col  md:w-44 max-sm:flex-row w-full max-sm:justify-between ">
+                         
+                                  {/* <h4 class=" text-xs text-cardBody font-poppins max-sm:hidden"> Sector </h4> */}
+                                  <h4 class=" text-sm text-cardBody font-poppins">   
+                                  
+                                  {item.customer}
+                  
+                                  </h4>
+                              </div>
+                             
+                              <div className=" flex font-medium flex-col md:w-44 max-sm:flex-row w-full max-sm:justify-between ">
+                                
+
+                                  {/* <h4 class=" text-xs text-cardBody font-poppins max-sm:hidden">Country</h4> */}
+                                  <h4 class=" text-sm text-cardBody font-poppins">
+                                  <SubTitle>
+                                  {item.contactName === null ? "None" :
             <MultiAvatar2
-              primaryTitle={item.assignedTo}
+              primaryTitle={item.contactName}
+              imageId={item.imageId}
+               imageURL={item.imageURL}
               imgWidth={"1.8em"}
               imgHeight={"1.8em"}
             />
-            </span>
-</div>
-<div class="flex  justify-between" >
-    <h4>
-    Owner
-    </h4>
-    <Tooltip title={item.ownerName}>
-          <span>
-            <MultiAvatar2
-              primaryTitle={item.ownerName}
-              imageId={item.ownerImageId}
-               imageURL={item.imageURL}
-              imgWidth={"2.1em"}
-              imgHeight={"2.1em"}
-            />
-            </span>
-           </Tooltip>
-</div>
-<div class="flex  justify-between" >
-                           <div>
-                           <Tooltip title='Click to Open'><span
-          onClick={() => {
-           props.LinkClosedOpportunity(
-             item.opportunityId,
-             {
-               closeInd:false,
-             }
-                  
-           );         
-         }}         
-       
-         >
-          <LockIcon
-                style={{
-                  fontSize: "0.8rem",
-                  cursor: "pointer",
-                }}
-              />
-            </span>
-     </Tooltip> 
-     &nbsp;
-     <span
-         
-            style={{ cursor: "pointer" }}
-            onClick={() => {
-                props.getAllRecruitmentByOppId(item.opportunityId);
-                props.getAllRecruitmentPositionByOppId(item.opportunityId);
-                props.getAllRecruitmentAvgTimeByOppId(item.opportunityId);
-                props.getAllRecruitmentPositionFilledByOppId(
-                  item.opportunityId
-                );
-                props.getAllRecruitmentDetailsByOppId(item.opportunityId);
-                props.handleOpportunityDrawerModal(true);
-                props.getOpportunitySKill(item.oppInnitiative);
-                handleSetCurrentOpportunityId(item.opportunityName);
-              }}
-            >
-              {user.pulseAccessInd === true && (
-                <MonitorHeartIcon
-                  style={{ fontSize: "0.8rem", color: "#df9697" }}
-                />
-              )}
-            </span>
-                           </div>
-                           <div>
-                           <Tooltip
-          title={
-            <FormattedMessage
-              id="app.edit"
-              defaultMessage="Edit"
-            />
           }
-        >
-            {user.opportunityUpdateInd ===true && (
-              
+          </SubTitle>
+                                  </h4>
+                              </div>
+                              </div>
+                              <div class="flex">
+                              <div className=" flex font-medium flex-col md:w-36 max-sm:flex-row w-full max-sm:justify-between ">
+                                  {/* <h4 class=" text-xs text-cardBody font-poppins max-sm:hidden"># Deals</h4> */}
+
+                                  <div class=" text-sm justify-center text-cardBody font-poppins">
+                                  {moment(item.startDate).format("ll")}
+                                  </div>
+                              </div>
+                           
+                              <div className=" flex font-medium flex-col md:w-36 max-sm:flex-row w-full max-sm:justify-between ">
+                                  {/* <h4 class=" text-xs text-cardBody font-poppins max-sm:hidden">Pipeline Value</h4> */}
+
+                                  <div class=" text-sm text-cardBody font-poppins text-center">
+                                  <CurrencySymbol currencyType={item.currency} />
+          &nbsp;
+          {item.proposalAmount}
+
+                                  </div>
+                              </div>
+                              <div className=" flex font-medium flex-col md:w-36 max-sm:flex-row w-full max-sm:justify-between ">
+                                  {/* <h4 class=" text-xs text-cardBody font-poppins max-sm:hidden">Pipeline Value</h4> */}
+
+                                  <div class=" text-sm text-cardBody font-poppins text-center">
+                                  <Dropdown
+overlay={
+<div>
+<Menu mode="horizontal">
+<Menu.Item
+  style={{
+    paddingLeft: 5,
+    paddingRight: 5,
+    backgroundColor: "#F5F5F5",
+  }}
+>
+  
+</Menu.Item>
+</Menu>
+</div>
+}
+trigger={["click"]}
+>
+<Tooltip title={item.stageName}>
+{" "}
+<Progress
+type="circle"
+style={{ cursor: "pointer", color: "red",fontSize:"0.8rem" }}
+percent={findProbability}
+width={30}
+strokeColor={"#005075"}
+/>
+</Tooltip>
+</Dropdown>
+
+                                  </div>
+                              </div>
+                              <div className=" flex font-medium flex-col md:w-32 max-sm:flex-row w-full max-sm:justify-between ">
+                                  {/* <h4 class=" text-xs text-cardBody font-poppins max-sm:hidden">Assigned to</h4> */}
+
+                                  <div class=" text-sm text-cardBody font-poppins">
+                                  
+                                  <span>
+                                  <MultiAvatar2
+            primaryTitle={item.assignedTo}
+            imgWidth={"1.8rem"}
+            imgHeight={"1.8rem"}
+          />
+          </span>
+           
+                                  </div>
+                              </div>
+                              <div className=" flex font-medium flex-col md:w-20 max-sm:flex-row w-full mb-1 max-sm:justify-between ">
+                     
+                     {/* <h4 class=" text-xs text-cardBody font-poppins max-sm:hidden">Owner</h4> */}
+
+            <Tooltip title={item.ownerName}>
+        <span>
+          <MultiAvatar2
+             primaryTitle={item.ownerName}
+             imageId={item.ownerImageId}
+              imageURL={item.imageURL}
+              imgWidth={"1.8rem"}
+              imgHeight={"1.8rem"}
+            />
+          </span>
+          </Tooltip>
+                 </div>
+                 </div>
+                 <div class="flex flex-col w-[6%] max-sm:flex-row max-sm:w-[10%]">
+                 <div>
+                 <span
+       
+       style={{ cursor: "pointer" }}
+onClick={() => {
+props.getAllRecruitmentByOppId(item.opportunityId);
+props.getAllRecruitmentPositionByOppId(item.opportunityId);
+props.getAllRecruitmentAvgTimeByOppId(item.opportunityId);
+props.getAllRecruitmentPositionFilledByOppId(
+item.opportunityId
+);
+props.getAllRecruitmentDetailsByOppId(item.opportunityId);
+props.handleOpportunityDrawerModal(true);
+props.getOpportunitySKill(item.oppInnitiative);
+handleSetCurrentOpportunityId(item.opportunityName);
+}}
+>
+         {user.pulseAccessInd === true && (
+           <MonitorHeartIcon
+             style={{ fontSize: "0.8rem", color: "#df9697" }}
+           />
+         )}
+       </span>
+                      </div>
+          </div>
+                 <div class="flex flex-col w-[6%] max-sm:flex-row max-sm:w-[10%]">
+                  <div>
+                  <Tooltip title='Click to Open'><span
+       onClick={() => {
+        props.LinkClosedOpportunity(
+          item.opportunityId,
+          {
+            closeInd:false,
+          }
+               
+        );         
+      }}         
+     
+       >
+        <LockIcon
+              style={{
+                fontSize: "0.8rem",
+                cursor: "pointer",
+              }}
+            />
+          </span>
+   </Tooltip> 
+                  </div>
+                  <div>
+                  <ReinstateToggleForLost 
+          opportunityId={item.opportunityId} 
+          
+          
+          />
+                  </div>
+                </div>
+                <div class="flex flex-col w-[6%] max-sm:flex-row max-sm:w-[10%]">
+                 
+                    <div>
+                       <Tooltip
+                      placement="right"
+                      title={
+                        <FormattedMessage
+                          id="app.edit"
+                          defaultMessage="Edit"
+                        />
+                      }
+                    >
+                      {user.opportunityUpdateInd ===true && (
+            
             <span
-              style={{ cursor: "pointer",  color: "grey" }}
+              style={{ cursor: "pointer", color: "grey" }}
               onClick={() => {
                 props.setEditOpportunity(item);
                 handleUpdateOpportunityModal(true);
                 handleSetCurrentOpportunityId(item);
               }}
             >
-                 <BorderColorIcon  style={{fontSize:"0.8rem" }}/>
-              </span>
-           )}
-          </Tooltip>
-          &nbsp;
-          <StyledPopconfirm
-            title="Do you want to delete?"
-            onConfirm={() => deleteLostOpportunity(item.opportunityId)}
-          >
-             {/* {user.userType !== "USER" && user.department !== "Recruiter" && (  */}
-             {user.opportunityDeleteInd ===true && (
-            <DeleteOutlined
-            type="delete" style={{ cursor: "pointer", color: "red",fontSize:"0.8rem"  }} />
-             )}
-          </StyledPopconfirm>
-                           </div>
-                           &nbsp;
-                           <ReinstateToggleForLost 
-            opportunityId={item.opportunityId} 
-            
-            
-            />
-              </div>           
+                          <BorderColorIcon
+                            style={{ color: "grey", fontSize: "1rem" }}
+                          />
+                        </span>
+                      )}
+                    </Tooltip>
+                    </div>
+                  
+                  
+                    <div>
+                    <StyledPopconfirm
+                      title="Do you want to delete?"
+                      onConfirm={() =>
+                        deleteLostOpportunity(item.opportunityId)
+                      }
+                    >
+                        {user.opportunityDeleteInd ===true && (
                       
-                       
-                        
-                    </CardElement>
+                        <DeleteOutlined
+                          type="delete"
+                          style={{
+                            cursor: "pointer",
+                            color: "red",
+                            fontSize: "1rem",
+                          }}
+                        />
+                        )}
+                        </StyledPopconfirm>
+                    </div>
+           
+                  <div></div>
+                </div>   
+                            
+                    
+                          </div>
+                      </div>
+
                  )  
             })}
               </CardWrapper>
   
 
       </InfiniteScroll>
+      </OnlyWrapCard>
       <UpdateOpportunityModal
         opportunityId={currentOpportunityId}
         opportunityName={currentOpportunityId}

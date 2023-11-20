@@ -9,7 +9,7 @@ const TaskNameDrawer = (props) => {
     <>
       <StyledDrawer
         title= {`${props.particularTaskName.name}`}
-        width="45%"
+        width="50%"
         visible={props.taskNameDrwr}
         maskClosable={false}
         closable

@@ -102,9 +102,7 @@ props. getCrm();
                 assignedTo: selectedOption ? selectedOption.employeeId:userId,
               },
               props.userId,
-              
-              () =>{ handleReset(resetForm);
-              window.location.reload();
+          () =>{ handleReset(resetForm);
               }
             );
           }}

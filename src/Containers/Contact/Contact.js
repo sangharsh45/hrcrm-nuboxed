@@ -37,7 +37,7 @@ const handleCountryChange = (event) => {
   if (country === '') {
     setFilteredData(props.contactByUserId);
   } else {
-    const filteredJobs = props.contactByUserId.filter((job) => job.department ===country );
+    const filteredJobs = props.contactByUserId.filter((job) => job.departmentId ===country );
     setFilteredData(filteredJobs);
   }
   // const filteredJobs = props.contactByUserId.filter((job) => {
@@ -71,7 +71,7 @@ const filterData = filteredData.filter(item =>
   const handleClear = () => {
     setCurrentData(undefined);
     props.emptyContact();
-    props.getContactListByUserId(currentUser ? currentUser : props.userId, 0);
+    props.getContactListByUserId(currentUser ? currentUser : props.userId, 0,filter?filter:"creationdate");
   };
   // const handleFilterChange=(data)=>{
   //   setFilter({filter:data})
