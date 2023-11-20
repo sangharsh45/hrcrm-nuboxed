@@ -8,8 +8,7 @@ import SpeechRecognition, {
   useSpeechRecognition,
 } from "react-speech-recognition";
 import PeopleIcon from '@mui/icons-material/People';
-import HandshakeIcon from "@mui/icons-material/Handshake";
-import { Input, Menu, Tooltip, Radio } from "antd";
+import { Input, Tooltip, } from "antd";
 import { StyledSelect } from "../../../Components/UI/Antd";
 import { Button, Badge } from "antd";
 import {

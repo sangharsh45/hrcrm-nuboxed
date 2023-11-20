@@ -65,7 +65,7 @@ useEffect(() => {
             onClick={() => setDealViewType("table")}
             style={{
               color: viewType === "table" && "#1890ff",
-              cursor:"pointer"
+              // cursor:"pointer"
             }}
           >
             {" "}
@@ -106,9 +106,9 @@ useEffect(() => {
             class=" mr-2 text-sm cursor-pointer"
             onClick={() => props.setDealViewType("won")}
             style={{
-              cursor:"pointer",
+           
               color: props.viewType === "won" && "#1890ff",
-              cursor:"pointer"
+              // cursor:"pointer"
             }}
           >
             {" "}
@@ -132,7 +132,7 @@ useEffect(() => {
             // onClick={() => props.setOpportunityViewType("close")}
             style={{
               color: props.viewType === "close" && "#1890ff",
-              cursor:"pointer"
+           
             }}
           >
             {" "}
@@ -155,7 +155,7 @@ useEffect(() => {
             // onClick={() => props.setOpportunityViewType("lost")}
             style={{
               color: props.viewType === "lost" && "#1890ff",
-              cursor:"pointer"
+            
             }}
           >
             {" "}
@@ -174,7 +174,7 @@ useEffect(() => {
               fontSize: "1.56em",
               marginRight: "0.3rem",
               color: viewType === "teams" && "#1890ff",
-              cursor:"pointer"
+           
             }}
             // iconType="table"
             tooltipTitle="Teams"
@@ -224,7 +224,7 @@ useEffect(() => {
             class=" mr-2 text-sm cursor-pointer"
             // onClick={() => props.setOpportunityViewType("dashboard")}
             style={{
-              cursor:"pointer"
+              // cursor:"pointer"
               //color: props.viewType === "dashboard" && "#1890ff",
             }}
           >

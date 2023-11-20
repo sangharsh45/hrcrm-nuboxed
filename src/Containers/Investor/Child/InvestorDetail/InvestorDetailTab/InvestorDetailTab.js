@@ -176,7 +176,7 @@ getContactListByInvestorId(this.props.investorDetails.investorId);
                       />
                     </span>
                   </span>
-                  {activeKey === "2" && (
+                  {activeKey === "1" && (
                     <>
                       <Tooltip 
                         title={
@@ -207,7 +207,7 @@ getContactListByInvestorId(this.props.investorDetails.investorId);
                   )}
                 </>
               }
-              key="2"
+              key="1"
             >
               <Suspense fallback={"Loading ..."}>
                 {" "}
@@ -242,7 +242,7 @@ getContactListByInvestorId(this.props.investorDetails.investorId);
                     />
                     {/* Documents */}
                   </span>
-                  {activeKey === "5" && (
+                  {activeKey === "2" && (
                     <>
                       <PlusOutlined
                         type="plus"
@@ -263,11 +263,56 @@ getContactListByInvestorId(this.props.investorDetails.investorId);
                   )}
                 </>
               }
-              key="5"
+              key="2"
             >
               <Suspense fallback={"Loading ..."}>
                 {" "}
                 <InvestorLinkedDocuments investorDetails={this.props.investorDetails}/>
+              </Suspense>
+            </TabPane>
+            <TabPane
+              tab={
+                <>
+                  <ReceiptIcon style={{fontSize:"1.1rem"}}/>
+                  <span class=" ml-1">
+                    {
+                      <FormattedMessage
+                        id="app.activity"
+                        defaultMessage="Activity"
+                      />
+                    }
+                    {/* Documents */}
+                  </span>
+                  {activeKey === "3" && (
+                    <>
+                      <PlusOutlined
+                        type="plus"
+                        title={
+                          <FormattedMessage
+                            id="app.create"
+                            defaultMessage="Create"
+                          />
+                        }
+                        // onClick={() => handleCallActivityModal(true)}
+                        size="0.875em"
+                        style={{
+                          marginLeft: "0.3125em",
+                          verticalAlign: "center",
+                        }}
+                      />
+                    </>
+                  )}
+                
+                </>
+              }
+              key="3"
+            >
+              <Suspense fallback={"Loading ..."}>
+                {" "}
+                {/* <CustomerActivityTable
+
+                 customer={this.props.customer}
+                /> */}
               </Suspense>
             </TabPane>
             {/* <TabPane

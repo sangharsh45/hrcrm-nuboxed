@@ -11,6 +11,8 @@ const initialState = {
   updatingDealName: false,
   updatingDealNameError: false,
 
+  updatingDealDragStage:false,
+
   fetchingNotesListByDealId: false,
   fetchingNotesListByDealIdError: false,
   notesListByDealId:[],
@@ -75,6 +77,18 @@ const initialState = {
 
    sendingToWon: false,
 sendingToWonError:false,
+};
+
+const updateDragdDeal = (item, newProps) => {
+  return item.map((opp, index) => {
+    console.log("Author7",opp);
+    console.log("Author8",newProps);
+    if (opp.invOpportunityId === newProps.invOpportunityId) {
+      console.log("inside opp");
+      opp.invOpportunityStagesId = newProps.invOpportunityStagesId;
+    }
+    return opp;
+  });
 };
 export const dealReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -402,6 +416,23 @@ export const dealReducer = (state = initialState, action) => {
                           fetchingAllDealsData: false,
                           fetchingAllDealsDataError: true,
                         };
+
+                        case types.UPDATE_DEAL_DRAG_STAGE_REQUEST:
+                          return {
+                            ...state,
+                            updatingDealDragStage: true,
+                          
+                            // candidateRequirement: action.payload,
+                          };
+                        case types.UPDATE_DEAL_DRAG_STAGE_SUCCESS:
+                          return { ...state, 
+                            updatingDealDragStage: false ,
+                            dealsByuserId: updateDragdDeal(state.dealsByuserId, action.payload),
+                           // candidateRequirement: [action.payload]
+
+                          };
+                        case types.UPDATE_DEAL_DRAG_STAGE_FAILURE:
+                          return { ...state };  
 
                             
     default:
