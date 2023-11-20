@@ -35,7 +35,7 @@ export const setLeadsViewType = (viewType) => (dispatch) => {
         },
       })
       .then((res) => {
-        dispatch(getLeads(userId));
+        // dispatch(getLeads(userId));
         console.log(res);
         const startDate = dayjs()
           .startOf("month")

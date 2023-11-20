@@ -35,10 +35,14 @@ import UpdateLeadsModal from "../UpdateLeads/UpdateLeadsModal";
 import AddLeadsEmailDrawerModal from "../UpdateLeads/AddLeadsEmailDrawerModal";
 import { BundleLoader } from "../../../../Components/Placeholder";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
+import InfiniteScroll from "react-infinite-scroll-component";
 
 const ButtonGroup = Button.Group;
 
 const LeadsJunkList = (props) => {
+
+  const [page, setPage] = useState(0);
+  const [hasMore, setHasMore] = useState(true);
 
   useEffect(() => {
     props.getJunkedLeads(props.userId);
@@ -51,15 +55,38 @@ const LeadsJunkList = (props) => {
   function handleSetCurrentLeadsId(item) {
     setCurrentLeadsId(item);
   }
-  const { deleteLeadsData, handleUpdateLeadsModal, updateLeadsModal,fetchingLeads,junkedLeadsData  } = props;
+  const { deleteLeadsData, handleUpdateLeadsModal, updateLeadsModal,fetchingJunkedLeads,junkedLeadsData  } = props;
 
-  if (fetchingLeads) {
-    return <BundleLoader />;
-  }
-
+  // if (fetchingJunkedLeads) {
+  //   return <BundleLoader />;
+  // }
+  const handleLoadMore = () => {
+      setPage(page + 1);
+      props.getJunkedLeads(props.userId);
+};
   return (
     <>
- <OnlyWrapCard>
+ <OnlyWrapCard style={{backgroundColor:"#E3E8EE"}}>
+ <div className=" flex justify-between w-[99%] p-2 bg-transparent font-bold sticky top-0 z-10">
+        <div className=" md:w-[14rem]">Name</div>
+        <div className=" md:w-20"></div>
+        <div className=" md:w-32 ">Phone #</div>
+        <div className="md:w-32">Country</div>
+        <div className="md:w-56">Company</div>
+        <div className="md:w-20">Sector</div> 
+        <div className="md:w-24">Assigned to</div>
+        <div className="md:w-20">Owner</div>
+        <div className="md:w-20">Reinstate</div>
+        <div className="w-12">Action</div>
+
+      </div>
+      <InfiniteScroll
+        dataLength={junkedLeadsData.length}
+        next={handleLoadMore}
+        hasMore={hasMore}
+        loader={fetchingJunkedLeads?<h4 style={{ textAlign: 'center' }}>Loading...</h4>:null}
+        height={"70vh"}
+      >
       {junkedLeadsData.map((item) => { 
          const currentdate = moment().format("DD/MM/YYYY");
          const date = moment(item.creationDate).format("DD/MM/YYYY");
@@ -85,10 +112,7 @@ const LeadsJunkList = (props) => {
                } `;
                     return (
                       <div>
-                      <div className="flex justify-between mt-1 max-sm:flex-col"
-                          style={{
-                              borderBottom: "3px dotted #515050"
-                          }}>
+                      <div className="flex rounded-xl justify-between bg-white mt-[0.5rem] h-[2.75rem] items-center p-3">
                               <div class="flex"> 
                           <div className=" flex font-medium flex-col w-[13rem] mb-4  max-sm:w-full">
                           <div className="flex max-sm:w-full"> 
@@ -110,18 +134,9 @@ const LeadsJunkList = (props) => {
                                   <div class="max-sm:w-full" >
                                   <Tooltip>
                                     <div class="max-sm:w-full justify-between flex md:flex-col">
-                                      <h4 class=" text-[0.875rem] text-cardBody  font-poppins max-sm:hidden">
-                                      Name
-                                      </h4>
+                                     
                                       <h4 class="text-[0.82rem] text-cardBody font-semibold  font-poppins cursor-pointer">
                                       {item.name}
-                                      {/* <span>
-        {item.name === null ? (
-          "None"
-        ) : (
-     `${item.name}`
-        )}
-      </span>                   */}
                                      &nbsp;&nbsp;
                                      {date === currentdate ? (
     <span
@@ -133,11 +148,7 @@ const LeadsJunkList = (props) => {
       New
     </span>
   ) : null}   
-   {/* <Link
-     toUrl={`leads/${item.leadsId}`}
-    title={`${item.name}`}
-  >{item.name}</Link>&nbsp;&nbsp;
-   */}
+
  
                                       </h4>
                                       </div>
@@ -204,40 +215,20 @@ props.updateTypeForLead(item.leadsId,typ)
 />
 </ButtonGroup>
 </div>
-{/* <div>
-<Tooltip
-  title={
-    <FormattedMessage id="app.activity" defaultMessage="Activity" />
-  }
->
-<AddchartIcon
-
-style={{fontSize: "1rem",cursor: 'pointer',}}
-onClick={()=>{
-props.handleCETmodal(true)
-handleRowData(item)
-}}
-/>
-</Tooltip>
-</div> */}
 </div>  
 </div>
 <div class="flex"> 
                           <div className=" flex font-medium flex-col  md:w-32 max-sm:flex-row w-full max-sm:justify-between ">
-                     <h4 class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden"> Phone # </h4>
                      <h4 class=" text-[0.82rem] text-cardBody font-poppins">  
                      {item.countryDialCode && item.phoneNumber ? (
 `${item.countryDialCode} ${item.phoneNumber}`
 ) : (
 "Not Available"
 )} 
-                     {/* {`${item.countryDialCode} ${item.phoneNumber}`} */}
+                    
                      </h4>
                  </div>
                  <div className=" flex font-medium flex-col md:w-32 max-sm:flex-row w-full max-sm:justify-between ">
-                            
-
-                            <h4 class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden">Country</h4>
                             <h4 class=" text-[0.82rem] text-cardBody font-poppins">
                             <ReactCountryFlag
                   countryCode={item.countryAlpha2Code}
@@ -256,7 +247,6 @@ handleRowData(item)
                  </div>
                  <div class="flex"> 
                  <div className=" flex font-medium flex-col  md:w-40 max-sm:flex-row w-full max-sm:justify-between ">
-                     <h4 class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden"> Company </h4>
                      <h4 class=" text-[0.82rem] text-cardBody font-semibold  font-poppins">   
                      <Link to={`leads/${item.leadsId}`} title={item.companyName || "Not Available"}>
 {item.companyName || "Not Available"}
@@ -273,7 +263,7 @@ handleRowData(item)
             onClick={() => {}}
           >
             {" "}
-            <a href={`item.url`} target="_blank">
+            <a href={`https://www.${item.url}`} target="_blank">
               <OpenInBrowserIcon
                 style={{ cursor: "pointer", color: "green" ,fontSize: "0.8rem",}}
               />
@@ -284,8 +274,6 @@ handleRowData(item)
                   </div>
                  
                           <div className=" flex font-medium flex-col  md:w-28 max-sm:flex-row w-full max-sm:justify-between ">
-                     
-                              <h4 class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden"> Sector </h4>
                               <h4 class=" text-[0.82rem] text-cardBody font-poppins">   
                               {item.sector}
                               </h4>
@@ -293,7 +281,6 @@ handleRowData(item)
                           </div>
                           <div class="flex mb-1"> 
                           <div className=" flex font-medium flex-col md:w-32 max-sm:flex-row w-full max-sm:justify-between ">
-                              <h4 class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden">Assigned to</h4>
 
                               <div class=" text-[0.82rem] text-cardBody font-poppins">
                               
@@ -313,8 +300,6 @@ handleRowData(item)
                           </div>
                           <div className=" flex font-medium flex-col md:w-20  max-sm:flex-row w-full max-sm:justify-between">
                  
-                 <h4 class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden">Owner</h4>
-
                  <span>
         <MultiAvatar
           primaryTitle={item.ownerName}
@@ -326,10 +311,8 @@ handleRowData(item)
       </span>
              </div>
              <div className=" flex font-medium flex-col md:w-32 max-sm:flex-row w-full justify-between ">
-                              <h4 class=" text-[0.875rem] text-cardBody font-poppins">Reinstate</h4>
-
                               <div class=" text-[0.75rem] text-cardBody font-poppins">
-          {/* qual */}
+
                               </div>
                               <div>
 <Button type="primary"
@@ -339,7 +322,7 @@ Resinstate
 </Button>
 </div>
                           </div>
-                          {/* <div class="flex max-sm:flex-row w-full justify-between md:flex-col"> */}
+                         
                           <div class="flex flex-col w-[5%] max-sm:flex-row max-sm:w-[10%]">
                           <div>
       <Tooltip title="Edit">
@@ -360,12 +343,10 @@ Resinstate
       title="Do you want to delete?"
       onConfirm={() => deleteLeadsData(item.leadsId)}
     >
-      {/* {user.opportunityDeleteInd ===true && ( */}
       <DeleteIcon
         type="delete"
         style={{ cursor: "pointer", color: "red" ,fontSize: "0.8rem",}}
       />
-      {/* )} */}
     </StyledPopconfirm>
                   </div>
                   <div>
@@ -378,8 +359,6 @@ Resinstate
               <Tooltip overlayStyle={{ maxWidth: "300px" }} title={dataLoc}>
       <span
         style={{
-          // color:
-          //   showRes && item.orderId === orderId ? "orange" : "#1890ff",
           cursor: "pointer",
         }}
       >
@@ -407,12 +386,9 @@ Resinstate
                 </div>  
                 </div>
                       </div>
-                          
-                        // </div>
-
-
                     )
                 })}
+                </InfiniteScroll>
       </OnlyWrapCard>
       <UpdateLeadsModal
         item={currentLeadsId}
@@ -438,7 +414,7 @@ const mapStateToProps = ({ auth, leads, sector }) => ({
   sectors: sector.sectors,
   updateLeadsModal: leads.updateLeadsModal,
   addDrawerLeadsEmailModal: leads.addDrawerLeadsEmailModal,
-  fetchingLeads:leads.fetchingLeads
+  fetchingJunkedLeads:leads.fetchingJunkedLeads
 });
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(

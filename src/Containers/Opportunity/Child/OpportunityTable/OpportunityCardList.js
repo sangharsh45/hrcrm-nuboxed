@@ -119,9 +119,9 @@ function OpportunityCardList(props) {
     history,
     fetchingOpportunity
   } = props;
-  // if (fetchingOpportunity) {
-  //   return <BundleLoader />;
-  // }
+  if (fetchingOpportunity) {
+    return <BundleLoader />;
+  }
 
   return (
     <>
@@ -162,7 +162,7 @@ function OpportunityCardList(props) {
           &nbsp;
           <FlexContainer
             flexDirection="column"
-            style={{ flexBasis: "85%", overflow: "hidden" }}
+            style={{ flexBasis: "100%", overflow: "hidden" }}
           >
             <div class="font-semibold " style={{ color: "#337df4", cursor: "pointer", fontSize: "1em" }}>
           <Link

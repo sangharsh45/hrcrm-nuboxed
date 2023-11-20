@@ -119,9 +119,9 @@ function ContactCardList(props) {
     updateContactModal,
   } = props;
 
-//  if(fetchingContacts){
-//   return <BundleLoader/>
-//  }
+ if(fetchingContacts){
+  return <BundleLoader/>
+ }
 
   return (
     <>
@@ -172,7 +172,7 @@ function ContactCardList(props) {
             item.address[0].postalCode} `;
                     return (
                         <div>
-                            <div className="flex rounded-xl justify-between mt-4 bg-white h-12 items-center p-3"
+                            <div className="flex rounded-xl justify-between bg-white mt-[0.5rem] h-[2.75rem] items-center p-3"
                                 // style={{
                                 //     borderBottom: "3px dotted #515050"
                                 // }}

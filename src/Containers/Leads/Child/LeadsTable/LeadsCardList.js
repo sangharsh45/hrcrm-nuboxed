@@ -137,10 +137,7 @@ console.log("data",currentLeadsId)
           return (
             <div>
               <div
-                className="flex rounded-xl justify-between mt-4 bg-white h-12 items-center p-3"
-                // style={{
-                //   borderBottom: "3px dotted #515050",
-                // }}
+                className="flex rounded-xl justify-between bg-white mt-[0.5rem] h-[2.75rem] items-center p-3"
               >
                 <div class="flex ">
                   <div className=" flex font-medium flex-col w-[14rem]   max-sm:w-full">
@@ -301,7 +298,7 @@ console.log("data",currentLeadsId)
                           onClick={() => {}}
                         >
                           {" "}
-                          <a href={`item.url`} target="_blank">
+                          <a href={`https://www.${item.url}`} target="_blank">
                             <OpenInBrowserIcon
                               style={{
                                 cursor: "pointer",

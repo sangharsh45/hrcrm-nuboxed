@@ -278,7 +278,7 @@ function UpdateOpportunityForm (props) {
             <div class="overflow-y-auto h-[34rem] overflow-x-hidden max-sm:h-[30rem]">
             <Form className="form-background">
               <div class=" flex justify-between max-sm:flex-col">
-                <div class=" h-full w-1/2 max-sm:w-wk">
+                <div class=" h-full w-[55%] max-sm:w-wk">
                   <Spacer />
                   <StyledLabel>
                     <Field
@@ -441,7 +441,7 @@ function UpdateOpportunityForm (props) {
                   </div>
                 </div> */}
                 </div>
-                <div class=" h-full w-2/5 max-sm:w-wk">
+                <div class=" h-full w-[55%] max-sm:w-wk">
                 <Listbox value={selected} onChange={setSelected}>
       {({ open }) => (
         <>
