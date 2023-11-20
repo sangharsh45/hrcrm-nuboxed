@@ -534,3 +534,59 @@ export const getAllDeals = (userId,pageNo) => (dispatch) => {
       });
     });
 };
+
+export const updateDealdragstage = (
+  data,
+    
+  sourceStageId,
+  destinationStageId,
+  invOpportunityId,
+  cb
+) => (dispatch) => {
+  console.log(sourceStageId, destinationStageId, invOpportunityId);
+  if (destinationStageId === "won") {
+    message.success("stage is won");
+  }
+  if (destinationStageId === "loss") {
+    message.error("stage is loss");
+  }
+  dispatch({
+    type: types.UPDATE_DEAL_DRAG_STAGE_REQUEST,
+    payload: {
+      sourceStageId,
+      destinationStageId,
+      invOpportunityId,
+    },
+  });
+  axios
+    .put(
+      `${base_url}/investorOpportunity/${invOpportunityId}`,data, {
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+        },
+      }
+    )
+    .then((res) => {
+      console.log(res);
+      // if (res.data.stageName === "Won") {
+      //   message.error("Won");
+      // } else {
+      //   message.error("Loss");
+      // }
+
+      dispatch({
+        type: types.UPDATE_DEAL_DRAG_STAGE_SUCCESS,
+        payload: res.data,
+      });
+      cb && cb(res.data);
+    })
+    .catch((err) => {
+      console.log(err);
+
+      dispatch({
+        type: types.UPDATE_DEAL_DRAG_STAGE_FAILURE,
+        payload: err,
+      });
+      cb && cb("failure");
+    });
+};

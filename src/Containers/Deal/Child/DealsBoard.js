@@ -11,7 +11,7 @@ import {
     getProcessForDeals,
     getProcessStagesForDeals,
 } from "../../Settings/SettingsAction";
-import {getAllOpportunityListByUserId,updateOpportunitydragstage} from "../../Opportunity/OpportunityAction";
+import {updateDealdragstage} from "../DealAction";
 import { Spin, message, notification, Button } from "antd";
 import { BundleLoader } from "../../../Components/Placeholder";
 import { CurrencySymbol } from "../../../Components/Common";
@@ -170,7 +170,7 @@ function DealsBoard(props) {
     }
 
     const {
-      updateOpportunitydragstage,
+      updateDealdragstage,
       getOpportunityRelatedData,
       userId,
       startDate,
@@ -180,7 +180,7 @@ function DealsBoard(props) {
         investorOppStagesId:destination.droppableId,
         invOpportunityId:result.draggableId,
     }
-    updateOpportunitydragstage(data,
+    updateDealdragstage(data,
       source.droppableId,
       destination.droppableId,
       draggableId,
@@ -347,7 +347,7 @@ const mapDispatchToProps = (dispatch) =>
         getProcessForDeals,
         getProcessStagesForDeals,
         getAllDealsbyUserId,
-        updateOpportunitydragstage
+        updateDealdragstage
     //   updateOpportunityStage,
     //   getOpportunityRelatedData,
     //   getOpportunities,
