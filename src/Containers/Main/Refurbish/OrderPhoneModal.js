@@ -9,12 +9,12 @@ const OrderPhoneModal = (props) => {
         <>
             <StyledDrawer
                 title="QC"
-                width="60%"
+                width="85%"              
                 visible={showPhoneList}
                 closable
                 destroyOnClose
                 maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}
-                style={{ top: 40 }}
+                style={{marginTop:"5rem" }}
                 onClose={() => handleOrderPhoneModal(false)}
                 footer={null}
             >
