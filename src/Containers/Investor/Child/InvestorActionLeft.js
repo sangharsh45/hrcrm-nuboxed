@@ -1,8 +1,6 @@
 import React, { useEffect,useState } from "react";
 import { FormattedMessage } from "react-intl";
-import GridViewIcon from '@mui/icons-material/GridView';
 import TocIcon from '@mui/icons-material/Toc';
-import LanguageIcon from "@mui/icons-material/Language";
 import { StyledSelect } from "../../../Components/UI/Antd";
 import { Button, Tooltip, Badge } from "antd";
 import { connect } from "react-redux";
@@ -13,11 +11,6 @@ import { AudioOutlined } from "@ant-design/icons";
 import SpeechRecognition, {
   useSpeechRecognition,
 } from "react-speech-recognition";
-// import {
-//   inputCustomerDataSearch,
-//   getRecords,
-//   getCategoryRecords,
-// } from "../CustomerAction";
 import {getInvestor,searchInvestorName} from "../InvestorAction";
 import { Input } from "antd";
 
@@ -50,20 +43,7 @@ const InvestorActionLeft = (props) => {
     props.getInvestorsbyId(props.userId, page,data);
     setPage(page + 1);
   }
-//   useEffect(() => {
-//     if (props.viewType === "card") {
-//       props.getRecords(props.userId);
-//     } else if (props.viewType === "list") {
-//       props.getCategoryRecords("White");
-//     } else if (props.viewType === "dashboard") {
-//       props.getCategoryRecords("blue");
-//     }
 
-//     if (transcript) {
-//       console.log(">>>>>>>", transcript);
-//       props.setCurrentData(transcript);
-//     }
-//   }, [props.viewType, props.userId, transcript]);
 useEffect(() => {
   props.getInvestor(props.userId)
   }, [props.userId]);
@@ -89,23 +69,7 @@ useEffect(() => {
         </Badge>
       </Tooltip>
 
-      <Tooltip title={<FormattedMessage id="app.all" defaultMessage="All" />}>
-        <Badge
-          size="small"
-        count={(props.viewType === "all" && props.investorRecord.investor) || 0}
-          overflowCount={999}
-        >
-          <span
-            class=" mr-2 text-sm cursor-pointer"
-            onClick={() => props.setInvestorViewType("all")}
-            style={{
-              color: props.viewType === "all" && "#1890ff",
-            }}
-          >
-          ALL
-          </span>
-        </Badge>
-      </Tooltip>
+      
       <Tooltip title="Teams">
         <Badge
           size="small"
@@ -120,6 +84,23 @@ useEffect(() => {
             }}
           >
           <PeopleIcon/>
+          </span>
+        </Badge>
+      </Tooltip>
+      <Tooltip title={<FormattedMessage id="app.all" defaultMessage="All" />}>
+        <Badge
+          size="small"
+        count={(props.viewType === "all" && props.investorRecord.investor) || 0}
+          overflowCount={999}
+        >
+          <span
+            class=" mr-2 text-sm cursor-pointer"
+            onClick={() => props.setInvestorViewType("all")}
+            style={{
+              color: props.viewType === "all" && "#1890ff",
+            }}
+          >
+          ALL
           </span>
         </Badge>
       </Tooltip>

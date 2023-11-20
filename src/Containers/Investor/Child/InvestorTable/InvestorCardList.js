@@ -123,7 +123,7 @@ function InvestorCardList(props) {
         <div className="md:w-28">Assigned to</div>
         <div className="md:w-24">Owner</div>
         <div className="md:w-24">Source</div>
-        <div className="w-12">Action</div>
+        {/* <div className="w-12">Action</div> */}
 
       </div>
         <InfiniteScroll
@@ -131,7 +131,7 @@ function InvestorCardList(props) {
         next={handleLoadMore}
         hasMore={hasMore}
         loader={fetchingInvestors?<h4 style={{ textAlign: 'center' }}>Loading...</h4>:null}
-        height={"70vh"}
+        height={"75vh"}
       >
         
       {investorsbyId.map((item) => { 

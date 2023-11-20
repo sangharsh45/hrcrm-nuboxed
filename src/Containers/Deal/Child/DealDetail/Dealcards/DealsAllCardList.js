@@ -79,7 +79,7 @@ const DealsAllCardList = (props) => {
         next={handleLoadMore}
         hasMore={hasMore}
         loader={fetchingAllDealsData?<h4 style={{ textAlign: 'center' }}>Loading...</h4>:null}
-        height={"70vh"}
+        height={"75vh"}
       >
    {props.allDealsData.map((item) => { 
  const currentdate = moment().format("DD/MM/YYYY");

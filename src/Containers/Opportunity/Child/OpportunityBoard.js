@@ -8,18 +8,14 @@ import styled from "styled-components";
 import StageColumns1 from "./StageColumns1";
 import { elipsize } from "../../../Helpers/Function/Functions";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
-import { StyledTabs, StyledModal } from "../../../Components/UI/Antd";
-import { SmileOutlined, MehOutlined } from '@ant-design/icons';
+import { StyledTabs, } from "../../../Components/UI/Antd";
 import { MainWrapper, FlexContainer } from "../../../Components/UI/Layout";
 import {
     getProcessForOpportunity,
     getProcessStagesForOpportunity,
 } from "../../Settings/SettingsAction";
 import {getAllOpportunityListByUserId,updateOpportunitydragstage} from "../OpportunityAction"
-import { Spin, message, notification, Button } from "antd";
-import { BundleLoader } from "../../../Components/Placeholder";
-import { CurrencySymbol } from "../../../Components/Common";
-import { wrap } from "lodash";
+import { Spin, notification } from "antd";
 const TabPane = StyledTabs.TabPane;
 
 const ParentContainer = styled.div`

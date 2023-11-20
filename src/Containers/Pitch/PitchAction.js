@@ -584,7 +584,7 @@ export const getAllPitch = (pageNo,filter) => (dispatch) => {
     type: types.GET_ALL_PITCH_REQUEST,
   });
   axios
-    .get(`${base_url}/investorleads/all/${pageNo}`, {
+    .get(`${base_url}/investorleads/all/${pageNo}/${filter}`, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },

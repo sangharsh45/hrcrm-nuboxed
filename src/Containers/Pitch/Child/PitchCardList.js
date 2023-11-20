@@ -80,7 +80,7 @@ const PitchCardList = (props) => {
         <div className="md:w-24">Assigned to</div>
         <div className="md:w-20">Owner</div>
         <div className="md:w-20">Qualify</div>
-        <div className="w-12">Action</div>
+        {/* <div className="w-12">Action</div> */}
 
       </div>
       <InfiniteScroll
@@ -88,7 +88,7 @@ const PitchCardList = (props) => {
         next={handleLoadMore}
         hasMore={hasMore}
         loader={fetchingPitch?<h4 style={{ textAlign: 'center' }}>Loading...</h4>:null}
-        height={"70vh"}
+        height={"75vh"}
       >
    {props.pitchData.map((item) => { 
  const currentdate = moment().format("DD/MM/YYYY");
