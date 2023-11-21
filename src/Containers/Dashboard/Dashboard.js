@@ -90,10 +90,11 @@ class Dashboard extends Component {
              : 
                this.state.activeButton==="Tasks" ?
              (<DashboardTaskOrganizationJumpstart/>)
-             : this.state.activeButton==="Customer" ?
-             (<DashboardCustomerOrgJumpstart/>)
-             :this.state.activeButton==="Investors" ?
+             : this.state.activeButton==="Investors" ?
              (<DashboardInvestorsOrgJumpstart/>)
+             :viewType==="ALL" || this.state.activeButton==="Customer" ?
+             (<DashboardCustomerOrgJumpstart/>)
+            
              :
              (
               <DashboardJumpstart />
@@ -101,12 +102,12 @@ class Dashboard extends Component {
              <div style={{ width: "-webkit-fill-available" }}>
           <FlexContainer flexDirection="column" style={{ display: "block" }}>
        <FlexContainer justifyContent="space-between" >
-       {this.state.activeButton==="Tasks" ?(
+       {this.state.activeButton==="Tasks" ? (
        <TaskOrganizationTab/>)
-       : this.state.activeButton==="Customer" ?(
+       :this.state.activeButton==="Investors" ?(
+        <InvestorsPitchTab/>)
+       : viewType==="ALL" || this.state.activeButton==="Customer" ?(
         <CustomerLeadsTab/>)
-        :this.state.activeButton==="Investors" ?(
-          <InvestorsPitchTab/>)
         :
        <TaskDashboardTab
       viewType={viewType}
@@ -119,12 +120,12 @@ class Dashboard extends Component {
        <FlexContainer justifyContent="space-between" >
                 
                  {viewType==="ME"?(
-                   <StackedClosureChartAll/>
-          
-            ) : this.state.activeButton==="Customer" ? (<DashCustomerChartTab/>)
+                   <StackedClosureChartAll/> )
+                   :this.state.activeButton==="Investors" ?
+                   (<DashInvestorsChartTab/>)
+                   : viewType==="ALL" || this.state.activeButton==="Customer" ? (<DashCustomerChartTab/>)
             
-            :this.state.activeButton==="Investors" ?
-             (<DashInvestorsChartTab/>)
+           
             :(
               <StackedClosureChart/>
           )}
@@ -149,7 +150,7 @@ class Dashboard extends Component {
        <GantChartTab/>
              }
 
-{this.state.activeButton==="Customer"&&
+{viewType==="ALL"  &&
        <FunnelTab/>
              }
    

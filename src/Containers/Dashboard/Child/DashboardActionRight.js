@@ -28,7 +28,7 @@ const HeaderActionRight = (props) => {
     <>
       <FlexContainer alignItems="center" >
         
-        {viewType==="ALL"  && (
+        
         <span 
         onClick={() => handleButtonClick("Tasks")} 
         style={{
@@ -38,23 +38,21 @@ const HeaderActionRight = (props) => {
         >
           Tasks
         </span>
-        )}
+  
         &nbsp;
-        {viewType==="ALL" && (
+    {user.crmInd === true && (
         <span 
-        onClick={() => handleButtonClick("Customer")} 
+        onClick={() =>  handleButtonClick("Customer")} 
         style={{
-          color:activeButton === "Customer" && "#1890ff",
+          color:activeButton ==="Customer" ? activeButton === "Customer" && "#1890ff" && viewType === "ALL" && "#444" : viewType === "ALL" && "#1890ff" ,
           cursor:"pointer"
         }}
         >
-
-          
-           Customer
+           Prospect
         </span>
-        )}
+)}
         &nbsp;
-        {viewType==="ALL" && (
+    {user.imInd ==true  && (
         <span 
         onClick={() => handleButtonClick("Investors")} 
         style={{
@@ -64,9 +62,9 @@ const HeaderActionRight = (props) => {
         >     
            Investors
         </span>
-        )}
+)}
     &nbsp;
-    {viewType==="ALL" && (
+    {user.erpInd === true && (
         <span 
         onClick={() => handleButtonClick("Accounts")} 
         style={{
@@ -74,11 +72,11 @@ const HeaderActionRight = (props) => {
           cursor:"pointer"
         }}
         >
-          Accounts
+          Customer
         </span>
-        )}
+    )}
     &nbsp;
-    {viewType==="ALL" && (
+   
       <>
       <div class="">
     <TimeInterval
@@ -98,7 +96,7 @@ const HeaderActionRight = (props) => {
           />
         </Popover>
         </>
-    )}
+
       </FlexContainer>
     </>
   );
@@ -106,7 +104,7 @@ const HeaderActionRight = (props) => {
 
 
 const mapStateToProps = ({ auth, dashboard }) => ({
-  user: auth.user,
+  user: auth.userDetails,
   userId: auth.userDetails.userId,
   dateRangeList: dashboard.dateRangeList,
 

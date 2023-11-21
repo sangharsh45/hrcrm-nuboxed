@@ -228,7 +228,9 @@ addingNotesByContactId:false,
   updatingContactOwenership:false,
   updatingContactOwenershipError:false,
 
-  
+  fetchingAllContacts: false,
+  fetchingAllContactsError:false,
+   allContacts:[],
 };
 
 export const contactReducer = (state = initialState, action) => {
@@ -810,7 +812,22 @@ export const contactReducer = (state = initialState, action) => {
                       case types.HANDLE_CONTACT_PULSE_DRAWER_MODAL:
                         return { ...state, addDrawerContactPulseModal: action.payload };                   
 
-    default:
+    
+                        case types.GET_ALL_CONTACT_REQUEST:
+                          return { ...state, fetchingAllContacts: true };
+                        case types.GET_ALL_CONTACT_SUCCESS:
+                          return {
+                            ...state,
+                            fetchingAllContacts: false,
+                            allContacts: [
+                              ...state.allContacts,
+                              ...action.payload],
+                          
+                          };
+                        case types.GET_ALL_CONTACT_FAILURE:
+                          return { ...state, fetchingAllContacts: false, fetchingAllContactsError: true }; 
+
+   default:
       return state;
 
 

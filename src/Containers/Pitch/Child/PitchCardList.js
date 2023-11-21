@@ -64,9 +64,9 @@ const PitchCardList = (props) => {
   }
    const { user,deleteLeadsData, handleUpdateLeadsModal, updateLeadsModal,fetchingPitch,leadsAllData  } = props;
 
-  if (fetchingPitch) {
-    return <BundleLoader />;
-  }
+  // if (fetchingPitch) {
+  //   return <BundleLoader />;
+  // }
 
   return (
     <>

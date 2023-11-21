@@ -382,9 +382,11 @@ const initialState = {
   recordCategoryDataBlue: "",
 
   updatingCustomerOwenership: false,
-  updatingCustomerOwenershipError: false
+  updatingCustomerOwenershipError: false,
 
-
+  fetchingAllCustomerList: false,
+  fetchingAllCustomerListError:false,
+  allCustomers:[],
 };
 
 export const customerReducer = (state = initialState, action) => {
@@ -1622,7 +1624,22 @@ export const customerReducer = (state = initialState, action) => {
                                                     convertingCustomerToAccountError: true,
                                                   };
 
-    default:
+   
+                                                  case types.GET_ALL_CUSTOMERS_LIST_REQUEST:
+                                                    return { ...state, fetchingAllCustomerList: true };
+                                                  case types.GET_ALL_CUSTOMERS_LIST_SUCCESS:
+                                                    return {
+                                                      ...state,
+                                                      fetchingAllCustomerList: false,
+                                                      allCustomers: action.payload,
+                                                    };
+                                                  case types.GET_ALL_CUSTOMERS_LIST_FAILURE:
+                                                    return {
+                                                      ...state,
+                                                      fetchingAllCustomerList: false,
+                                                      fetchingAllCustomerListError: true,
+                                                    };
+       default:
       return state;
   }
 };

@@ -520,10 +520,13 @@ import APIFailed from "../../../../Helpers/ErrorBoundary/APIFailed";
 import Highlighter from "react-highlight-words";
 import { MultiAvatar2, } from "../../../../Components/UI/Elements";
 import AddCallNotesDrawerModal from "../AddCallNotesDrawerModal";
+import { BundleLoader } from "../../../../Components/Placeholder";
 
 function CallTable(props) {
   const [page, setPage] = useState(0);
-  const [currentNameId, setCurrentNameId] = useState("");
+  const [hasMore, setHasMore] = useState(true);
+const [currentNameId, setCurrentNameId] = useState("");
+
   useEffect(() => {
     const {
       getCallListRangeByUserId,
@@ -549,96 +552,6 @@ function CallTable(props) {
     setCurrentNameId(item);
   }
 
-  const [searchText, setSearchText] = useState("");
-  const [searchedColumn, setSearchedColumn] = useState("");
-
-  function getColumnSearchProps(dataIndex) {
-    return {
-      filterDropdown: ({
-        setSelectedKeys,
-        selectedKeys,
-        confirm,
-        clearFilters,
-      }) => (
-        <div style={{ padding: 8 }}>
-          <Input
-            placeholder={`Search ${dataIndex}`}
-            value={selectedKeys[0]}
-            onChange={(e) =>
-              setSelectedKeys(e.target.value ? [e.target.value] : [])
-            }
-            onPressEnter={() => handleSearch(selectedKeys, confirm, dataIndex)}
-            style={{ width: 240, marginBottom: 8, display: "block" }}
-          />
-
-          <Button
-            type="primary"
-            onClick={() => handleSearch(selectedKeys, confirm, dataIndex)}
-            icon={<SearchOutlined />}
-            size="small"
-            style={{ width: 90 }}
-          >
-            Search
-          </Button>
-          <Button
-            onClick={() => handleReset(clearFilters)}
-            size="small"
-            style={{ width: 90 }}
-          >
-            Reset
-          </Button>
-          <Button
-            type="link"
-            size="small"
-            onClick={() => {
-              confirm({ closeDropdown: false });
-              setSearchText(selectedKeys[0]);
-              setSearchedColumn(dataIndex);
-            }}
-          >
-            Filter
-          </Button>
-        </div>
-      ),
-      filterIcon: (filtered) => (
-        <SearchOutlined
-          type="search"
-          style={{ color: filtered ? "#1890ff" : undefined }}
-        />
-      ),
-      onFilter: (value, record) =>
-        record[dataIndex]
-          .toString()
-          .toLowerCase()
-          .includes(value.toLowerCase()),
-      onFilterDropdownVisibleChange: (visible) => {
-        if (visible) {
-        }
-      },
-      render: (text) =>
-        searchedColumn === dataIndex ? (
-          <Highlighter
-            highlightStyle={{ backgroundColor: "#ffc069", padding: 0 }}
-            searchWords={[searchText]}
-            autoEscape
-            textToHighlight={text.toString()}
-          />
-        ) : (
-          text
-        ),
-    };
-  }
-
-  function handleSearch(selectedKeys, confirm, dataIndex) {
-    confirm();
-    setSearchText(selectedKeys[0]);
-    setSearchedColumn(dataIndex);
-  }
-
-  function handleReset(clearFilters) {
-    clearFilters();
-    setSearchText("");
-  }
 
   const {
     fetchingCallListRangeByUserId,
@@ -656,41 +569,58 @@ function CallTable(props) {
   //   };
   // });
 
-  if (fetchingCallListRangeByUserIdError) {
-    return <APIFailed />;
+  if (fetchingCallListRangeByUserId) {
+    return <BundleLoader />;
   }
 
   return (
     <>
+       <div className=' flex justify-end sticky top-28 z-auto'>
+       <OnlyWrapCard style={{backgroundColor:"#E3E8EE"}}>
+       <div className=" flex justify-between w-[99%] p-2 bg-transparent font-bold sticky top-0 z-10">
+        <div className=" md:w-[7rem]">Type</div>
+        <div className=" md:w-40">Subject</div>
+        <div className=" md:w-28 ">Contact</div>
+        <div className=" md:w-28 ">Date</div>
+        <div className="md:w-24">Include</div>
+        <div className="md:w-24">Assigned To</div>
+        <div className="md:w-36">Completed</div>
+        <div className="md:w-24">Owner</div>
+        <div className="w-12"></div>
+      </div>
       <InfiniteScroll
         dataLength={callListRangeByUserId.length}
         next={handleLoadMore}
         hasMore={true}
-        endMessage={
-          <p style={{ textAlign: "center" }}>
-            <b>Yay! You have seen it all</b>
-          </p>
-        }
-        height={600}
+        loader={fetchingCallListRangeByUserId?<h4 style={{ textAlign: 'center' }}>Loading...</h4>:null}
+        height={"75vh"}
       >
-         <OnlyWrapCard>   
-          {callListRangeByUserId.map((item) => (
-            <div className="flex justify-between mt-4 max-sm:flex-col"
-            style={{
-                borderBottom: "3px dotted #515050"
-            }}>
+      
+          {callListRangeByUserId.map((item) => {
+            const incdata =item.included
+            const findEmp = incdata.map(item => ({
+              empName: item.empName
+                ? item.empName
+                    .split(' ')
+                    .map(word => (word ? word.charAt(0).toUpperCase() : '')) 
+                    .slice(0,1)
+                : ''
+            }));
+             return (
+              <div>
+            <div className="flex rounded-xl justify-between bg-white mt-[0.5rem] h-[2.75rem] items-center p-3"
+           >
               <div class="flex">
               <div class="flex  flex-col md:w-28 max-sm:flex-row max-sm:justify-between w-full">
-              <div class="max-sm:hidden" >Type</div>
             <div> {item.callType}</div>
             </div>
             <div class="flex  flex-col md:w-40 max-sm:flex-row max-sm:justify-between w-full">
-              <p class="max-sm:hidden" >Subject</p><p> {item.callPurpose}</p>
+            <p> {item.callPurpose}</p>
               </div>
               </div>
               <div class="flex">
               <div class="flex  flex-col md:w-48 max-sm:flex-row max-sm:justify-between w-full">
-              <p class="max-sm:hidden" >Contact</p>
+      
               <MultiAvatar2
                     primaryTitle={item.contactName}
                     // imageId={item.ownerImageId}
@@ -699,48 +629,35 @@ function CallTable(props) {
                     imgHeight={"1.8em"}
                   />
               
-              {/* <p> {item.contactName}</p> */}
+   
               </div>
               <div class="flex  flex-col md:w-48 max-sm:flex-row max-sm:justify-between w-full">
-              <p class="max-sm:hidden" >Date</p><p> {moment(item.startDate).format("llll")}</p>
+              <p> {moment(item.startDate).format("llll")}</p>
               </div>
               <div class="flex  flex-col md:w-16 max-sm:flex-row max-sm:justify-between w-full">
-              <p class="max-sm:hidden" >Included</p>
-              <div>
-                {item.included &&
-                  item.included.map((candidate, i) => {
-                    const data1 = candidate.fullName.slice(0, 2).toUpperCase();
-                    console.log("datas", data1);
-                    return (
-                      <Tooltip key={i} title={candidate.fullName}>
-                        <Avatar
-                          style={{
-                            backgroundColor: "#f56a00",
-                            fontFamily: "poppins",
-                          }}
-                        >
-                          {data1}
-                        </Avatar>
-                      </Tooltip>
-                    );
-                  })}
-              </div>
-              </div>
-              </div>
-              {/* <div class="flex  flex-col w-16">
-              <p>Team </p>
-              <MultiAvatar2
-                    primaryTitle={item.candidateName}
-                    //imageId={item.ownerImageId}
-                    imageURL={item.imageURL}
-                    imgWidth={"1.8em"}
-                    imgHeight={"1.8em"}
-                  />
              
-              </div> */}
+              <div>
+                
+              <Avatar.Group
+                   maxCount={7}
+                  maxStyle={{ color: "#f56a00", backgroundColor: "#fde3cf" }}
+                >
+                   {findEmp.map((item, index) => {
+return (
+  <Avatar style={{ backgroundColor: "#f56a00" }}>
+              <p key={index}>{item.empName}</p>
+              </Avatar>
+                     );
+                   })}
+            </Avatar.Group>
+        
+              </div>
+              </div>
+              </div>
+              
               <div class="flex items-center">
              <div class="flex  flex-col md:w-24 max-sm:flex-row max-sm:justify-between w-full">
-              <p class="max-sm:hidden" >Assigned To</p>
+          
               <MultiAvatar2
                     primaryTitle={item.assignedTo}
                    // imageId={item.ownerImageId}
@@ -751,15 +668,13 @@ function CallTable(props) {
               {/* <p> {item.assignedTo || "Unassigned"}</p> */}
               </div>
               <div class="flex  flex-col md:w-36 max-sm:flex-row max-sm:justify-between w-full">
-              <p class="max-sm:hidden" >Completed</p>
+           
               <p> {item.completionInd ? "Yes" : "No"}</p>
               </div>
-              {/* <div class="flex  flex-col w-16">
-              <p>Rating</p><p> {item.rating > 0 ? item.rating : "Not Rated"}</p>
-              </div> */}
+            
               
               <div class="flex  flex-col md:w-16 max-sm:flex-row max-sm:justify-between w-full mt-1 mb-1">
-              <p class="max-sm:hidden" >Owner</p>
+             
               <MultiAvatar2
                     primaryTitle={item.woner}
                     //imageId={item.ownerImageId}
@@ -767,9 +682,10 @@ function CallTable(props) {
                     imgWidth={"1.8em"}
                     imgHeight={"1.8em"}
                   />
-              {/* <p> {item.woner || "Unknown"}</p> */}
+             
               </div>
-              <div class="flex flex-col justify-evenly  ">
+              <div class="flex flex-col w-[6%] max-sm:flex-row max-sm:w-[10%]">
+                    <div>
                     <Tooltip title="Notes">
        <NoteAltIcon
                 onClick={() => {
@@ -779,17 +695,22 @@ function CallTable(props) {
                 style={{ color: "green", cursor: "pointer", fontSize: "1rem" }}
               />
            </Tooltip>
-
-            </div>
-              
-              <DeleteIcon  type="delete" style={{ cursor: "pointer",color:"red",fontSize:"1rem" }} 
+                    </div>
+                    <div>
+                    <DeleteIcon  type="delete" style={{ cursor: "pointer",color:"red",fontSize:"1rem" }} 
                 onClick={() => deleteCall(item.callId, employeeId)}
               />
+                    </div>
+                  </div>
               </div>
             </div>
-          ))}
-        </OnlyWrapCard>
+            </div>
+           )
+          })}
+   
       </InfiniteScroll>
+      </OnlyWrapCard>
+      </div>
       <AddCallNotesDrawerModal
 handleSetCallNameId={handleSetCallNameId}
 handleCallNotesDrawerModal={props.handleCallNotesDrawerModal}

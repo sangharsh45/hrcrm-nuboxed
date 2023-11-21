@@ -1127,3 +1127,29 @@ export const handleContactPulseDrawerModal = (modalProps) => (dispatch) => {
     payload: modalProps,
   });
 };
+
+export const getAllContact = (pageNo,filter) => (dispatch) => {
+  dispatch({
+    type: types.GET_ALL_CONTACT_REQUEST,
+  });
+  axios
+    .get(`${base_url}/contact/${pageNo}/${filter}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.GET_ALL_CONTACT_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err.response);
+      dispatch({
+        type: types.GET_ALL_CONTACT_FAILURE,
+        payload: err,
+      });
+    });
+};

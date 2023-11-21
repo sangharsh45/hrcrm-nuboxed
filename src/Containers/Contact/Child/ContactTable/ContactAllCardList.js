@@ -12,7 +12,7 @@ import {  Tooltip, Select } from "antd";
 import { OnlyWrapCard } from '../../../../Components/UI/Layout'
 import { MultiAvatar, MultiAvatar2, SubTitle } from "../../../../Components/UI/Elements";
 import {
-  getContactListByUserId,
+  getAllContact,
   handleUpdateContactModal,
   handleContactReactSpeechModal,
   setEditContact,
@@ -68,15 +68,15 @@ function ContactAllCardList(props) {
         }
       }
     })
-    // props.getContactListByUserId(props.userId, page,"creationdate");
-    // setPage(page + 1);
-    // props.getAllSalesList();
-    // props.getRecruiterName();
+    props.getAllContact(page,"creationdate");
+    setPage(page + 1);
+    props.getAllSalesList();
+    props.getRecruiterName();
   }, []);
 
-//   useEffect(()=>{
-//     return()=>props.emptyContact();
-//   },[] );
+  useEffect(()=>{
+    return()=>props.emptyContact();
+  },[] );
   const [currentContactId, setCurrentContactId] = useState("");
   const [currentContact, setCurrentContact] = useState("");
 
@@ -91,14 +91,13 @@ function ContactAllCardList(props) {
 
   const handleLoadMore = () => {
             setPage(page + 1);
-            // props.getContactListByUserId(props.currentUser?props.currentUser:props.userId,page,
-            //   props.filter?props.filter:"creationdate"
-            //   );
+            props.getAllContact(page,
+              props.filter?props.filter:"creationdate"
+              );
   }
 
   function handleSetCurrentContactId(item) {
     setCurrentContactId(item);
-    // console.log("Current2", item);
   }
 
  
@@ -117,6 +116,8 @@ function ContactAllCardList(props) {
     handleContactReactSpeechModal,
     addContactSpeechModal,
     updateContactModal,
+    fetchingAllContacts,
+    allContacts
   } = props;
 
 //  if(fetchingContacts){
@@ -141,14 +142,14 @@ function ContactAllCardList(props) {
 
       </div>
           <InfiniteScroll
-        dataLength={contactByUserId.length}
+        dataLength={allContacts.length}
         next={handleLoadMore}
         hasMore={hasMore}
-        loader={fetchingContacts?<h4 style={{ textAlign: 'center' }}>Loading...</h4>:null}
+        loader={fetchingAllContacts?<h4 style={{ textAlign: 'center' }}>Loading...</h4>:null}
         height={"75vh"}
       >
         
-      {/* {filterData.map((item) => { 
+      {/* {allContacts.map((item) => { 
         
          const currentdate = moment().format("DD/MM/YYYY");
          const date = moment(item.creationDate).format("DD/MM/YYYY");
@@ -465,40 +466,40 @@ const mapStateToProps = ({
   departments,
   opportunity,
 }) => ({
-//   userId: auth.userDetails.userId,
-  contactByUserId: contact.contactByUserId,
-//   sales: opportunity.sales,
-//   user: auth.userDetails,
-//   addDrawerContactPulseModal:contact.addDrawerContactPulseModal,
-//   recruiterName: opportunity.recruiterName,
-//   fetchingContacts: contact.fetchingContacts,
-//   fetchingContactsError: contact.fetchingContactsError,
-//   updateContactModal: contact.updateContactModal,
-//   addDrawerContactNotesModal:contact.addDrawerContactNotesModal,
-//   designations: designations.designations,
-//   departments: departments.departments,
-//   addDrawerContactEmailModal: contact.addDrawerContactEmailModal,
-//   addContactSpeechModal: contact.addContactSpeechModal,
-//   addDrawerContactModal: contact.addDrawerContactModal,
+  userId: auth.userDetails.userId,
+  allContacts: contact.allContacts,
+  sales: opportunity.sales,
+  user: auth.userDetails,
+  addDrawerContactPulseModal:contact.addDrawerContactPulseModal,
+  recruiterName: opportunity.recruiterName,
+  fetchingContacts: contact.fetchingContacts,
+  fetchingContactsError: contact.fetchingContactsError,
+  updateContactModal: contact.updateContactModal,
+  addDrawerContactNotesModal:contact.addDrawerContactNotesModal,
+  designations: designations.designations,
+  departments: departments.departments,
+  addDrawerContactEmailModal: contact.addDrawerContactEmailModal,
+  addContactSpeechModal: contact.addContactSpeechModal,
+  addDrawerContactModal: contact.addDrawerContactModal,
 });
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
-    //   getContactListByUserId,
-    //   handleUpdateContactModal,
-    //   handleDonotCallModal,
-    //   setEditContact,
-    //   getDesignations,
-    //   updateOwnercontactById,
-    //   getRecruiterName,
-    //   getAllSalesList,
-    //   handleContactReactSpeechModal,
-    //   handleContactDrawerModal,
-    //   getContactById,
-    //   handleContactNotesDrawerModal,
-    //   handleContactPulseDrawerModal,
-    //   handleContactEmailDrawerModal,
-    //   emptyContact
+      getAllContact,
+      handleUpdateContactModal,
+      handleDonotCallModal,
+      setEditContact,
+      getDesignations,
+      updateOwnercontactById,
+      getRecruiterName,
+      getAllSalesList,
+      handleContactReactSpeechModal,
+      handleContactDrawerModal,
+      getContactById,
+      handleContactNotesDrawerModal,
+      handleContactPulseDrawerModal,
+      handleContactEmailDrawerModal,
+      emptyContact
     },
     dispatch
   );
