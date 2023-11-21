@@ -3090,3 +3090,30 @@ export const handleOpportunityNotesDrawerModal = (modalProps) => (dispatch) => {
     payload: modalProps,
   });
 };
+
+export const getFullOpportunity = (pageNo) => (dispatch) => {
+ 
+  dispatch({
+    type: types.GET_ALL_OPPORTUNITY_REQUEST,
+  });
+  axios
+    .get(`${base_url}/opportunity/all/${pageNo}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.GET_ALL_OPPORTUNITY_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err.response);
+      dispatch({
+        type: types.GET_ALL_OPPORTUNITY_FAILURE,
+        payload: err,
+      });
+    });
+};

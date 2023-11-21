@@ -24,18 +24,6 @@ class TaskOrganizationTab extends Component {
     super(props);
     this.state = {
       activeKey: "1",
-      contactPopover: false,
-      partnerPopover: false,
-      quotProPopover: false,
-      deliveryProPopover: false,
-      breadCumb: false,
-      visibleModal: false,
-      recriutmentdashboard: false,
-      currentTabName: "",
-      currentTabId: "",
-      customField: [],
-      ganttChart: false,
-      costId: "",
     };
   }
 
@@ -43,10 +31,7 @@ class TaskOrganizationTab extends Component {
     // const { getTodosCount, userId, startDate, endDate } = this.props;
     // getTodosCount(userId, startDate, endDate);
   }
-  handleContactPopoverVisibleChange = () =>
-    this.setState({ contactPopover: !this.state.contactPopover });
-  handlepartnerPopoverVisibleChange = () =>
-    this.setState({ partnerPopover: !this.state.partnerPopover });
+
   handleTabChange = (key) => {
     this.setState({ activeKey: key });
   };
@@ -78,46 +63,25 @@ class TaskOrganizationTab extends Component {
             >
               <Suspense fallback={"Loading ..."}>
                 {" "}
-                <TaskOrganizationNew />
+                <TaskOrganizationNew /> 
               </Suspense>
             </TabPane>
-            {/* <TabPane
-              tab={
-                <>
-                  <EventAvailableIcon style={{fontSize:"1.1rem"}}/>
-
-                  <span class=" ml-1">Events</span>
-
-                  {activeKey === "2" && (
-                    <>
-                    </>
-                  )}
-                </>
-              }
-              key="2"
-            >
-              <Suspense fallback={"Loading ..."}>
-                {" "}
-               
-              </Suspense>
-            </TabPane> */}
-     
-          
           </StyledTabs>
         </TabsWrapper1>
+     
         <Suspense fallback={null}></Suspense>
       </>
     );
   }
 }
 const mapStateToProps = ({dashboard,auth}) => ({
-  todosCount:dashboard.todosCount,
   userId: auth.userDetails.userId,
-  endDate: dashboard.endDate,
-  startDate: dashboard.startDate,
 });
-const mapDispatchToProps = (dispatch) => bindActionCreators(
-  // {getTodosCount},
-   dispatch);
+ const mapDispatchToProps = (dispatch) =>
+  bindActionCreators(
+    {
 
+    },
+    dispatch
+  );
 export default connect(mapStateToProps, mapDispatchToProps)(TaskOrganizationTab);

@@ -494,6 +494,12 @@ const initialState = {
           // endDate: dayjs().toISOString(),
       },
   ],
+
+
+allOpportunity:[],
+fetchingAllOpportunity:false,
+fetchingAllOpportunityError:false,
+  
 };
 
 const updatedOpportunity = (item, newProps) => {
@@ -2449,6 +2455,20 @@ case types.REINSTATE_TOGGLE_FOR_OPPORTUNITY_FAILURE:
                                         case types.HANDLE_OPPORTUNITY_NOTES_DRAWER_MODAL:
                                           return { ...state, addDrawerOpportunityNotesModal: action.payload };
                                                                               
+                                          case types.GET_ALL_OPPORTUNITY_REQUEST:
+                                            return { ...state, fetchingAllOpportunity: true };
+                                          case types.GET_ALL_OPPORTUNITY_SUCCESS:
+                                            return {
+                                              ...state,
+                                              fetchingAllOpportunity: false,
+                                              allOpportunity: action.payload,
+                                            };
+                                          case types.GET_ALL_OPPORTUNITY_FAILURE:
+                                            return {
+                                              ...state,
+                                              fetchingAllOpportunity: false,
+                                              fetchingAllOpportunityError: true,
+                                            };
 
                                             default:
                                             return state;

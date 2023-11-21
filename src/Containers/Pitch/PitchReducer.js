@@ -110,7 +110,7 @@ case types.GET_PITCH_REQUEST:
     return {
       ...state,
       fetchingPitch: false,
-      pitchData: action.payload,
+      pitchData: [...state.pitchData, ...action.payload],
     };
   case types.GET_PITCH_FAILURE:
     return {

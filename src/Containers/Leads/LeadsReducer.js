@@ -157,7 +157,11 @@ const initialState = {
   leadsCountJunked:[],
 
   openCETmodal:false,
+
   
+  fetchingAllLeads:false,
+  fetchingAllLeadsError:false,
+  allleadsInfo:[],
 };
 export const leadsReducer = (state = initialState, action) => {
     switch (action.type) {
@@ -791,6 +795,21 @@ case types.HANDLE_LEADS_MODAL:
                           case types.HANDLE_LEADS_NOTES_DRAWER_MODAL:
     return { ...state, addDrawerLeadsNotesModal: action.payload };
 
+    case types.GET_ALL_LEADS_REQUEST:
+      return { ...state, fetchingAllLeads: true };
+    case types.GET_ALL_LEADS_SUCCESS:
+      return {
+        ...state,
+        fetchingAllLeads: false,
+       allleadsInfo: [...state.allleadsInfo, ...action.payload],
+        clearbit:null
+      };
+    case types.GET_ALL_LEADS_FAILURE:
+      return {
+        ...state,
+        fetchingAllLeads: false,
+        fetchingAllLeadsError: true,
+      };
 
 default:
 return state;

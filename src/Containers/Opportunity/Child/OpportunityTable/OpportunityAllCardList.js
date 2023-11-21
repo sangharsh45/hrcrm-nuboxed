@@ -34,7 +34,7 @@ import {
          getAllRecruitmentPositionFilledByOppId,
          getAllRecruitmentDetailsByOppId,
          getOpportunitySKill,
-         getlostOpportunity,
+         getFullOpportunity,
          LinklostdOpportunity,
          deleteLostOpportunity,
 } from "../../OpportunityAction";
@@ -45,19 +45,19 @@ import ReinstateToggleForLost from "../../Child/OpportunityTable/ReinstateToggle
 function OpportunityAllCardList(props) {
   const [hasMore, setHasMore] = useState(true);
   const [page, setPage] = useState(0);
-//   useEffect(() => {
-//     if(props.role==="USER"&&user.department==="Recruiter"){
-//       props.getRecruiterList(props.recruiterId);     
-//     }else{
+  useEffect(() => {
+    if(props.role==="USER"&&user.department==="Recruiter"){
+      props.getRecruiterList(props.recruiterId);     
+    }else{
      
-//     } 
-//     props. getlostOpportunity(props.userId,page);
-//     setPage(page + 1);
-//   }, []);
+    } 
+    props. getFullOpportunity(page);
+    setPage(page + 1);
+  },[]);
 
   const handleLoadMore = () => {
     setPage(page + 1);
-    //   props. getlostOpportunity(props.userId,page);
+      props. getFullOpportunity(page);
   }
     const [currentOpportunityId, setCurrentOpportunityId] = useState("");
     function handleSetCurrentOpportunityId(opportunityId,opportunityName) {
@@ -71,14 +71,14 @@ function OpportunityAllCardList(props) {
     handleUpdateOpportunityModal,
     updateOpportunityModal,
     deleteOpportunityData,
-     fetchingAllOpportunities,
-     lostOpportunity,
+    fetchingAllOpportunity,
+    allOpportunity,
      
       } = props;
       return (    
   <>
  <OnlyWrapCard style={{backgroundColor:"#E3E8EE"}}>
- <div className=" flex justify-between w-[99%] p-2 bg-transparent font-bold sticky top-0 z-10">
+ <div className="flex justify-between w-[99%] p-2 bg-transparent font-bold sticky top-0 z-10">
         <div className=" md:w-[14rem]">Name</div>
         <div className=" md:w-20">Prospect</div>
         <div className=" md:w-32 ">Sponsor</div>
@@ -92,14 +92,14 @@ function OpportunityAllCardList(props) {
       </div>
 
       <InfiniteScroll
-        dataLength={lostOpportunity.length}
+        dataLength={allOpportunity.length}
         next={handleLoadMore}
         hasMore={hasMore}
-        loader={fetchinglostOpportunity?<h4 style={{ textAlign: 'center' }}>Loading...</h4> :null}
+        loader={fetchingAllOpportunity?<h4 style={{ textAlign: 'center' }}>Loading...</h4> :null}
         height={"75vh"}
       >
- {/* <CardWrapper>      
-              {lostOpportunity.map((item) => {
+ <CardWrapper>      
+              {allOpportunity.map((item) => {
                  
                  var findProbability = item.probability;
                  item.stageList.forEach((element) => {
@@ -378,7 +378,7 @@ handleSetCurrentOpportunityId(item.opportunityName);
 
                  )  
             })}
-              </CardWrapper> */}
+              </CardWrapper>
   
 
       </InfiniteScroll>
@@ -413,47 +413,47 @@ allRecruitmentDetailsByOppId={props.allRecruitmentDetailsByOppId}
 const mapStateToProps = ({ auth, account, opportunity }) => ({
   userId: auth.userDetails.userId,
   user: auth.userDetails,
-//   role: auth.userDetails.role,
-//   opportunitySkills:opportunity.opportunitySkills,
-//   sales: opportunity.sales,
-//   recruiterName: opportunity.recruiterName,
-//   recruiterList:opportunity.recruiterList,
-  fetchinglostOpportunity:opportunity.fetchinglostOpportunity,
-  fetchinglostOpportunityError:opportunity.fetchinglostOpportunityError,
-//   fetchingRecruiterList:opportunity.fetchingRecruiterList,
-//   fetchingRecruiterListError:opportunity.fetchingRecruiterListError,
-//   fetchingOpportunity: opportunity.fetchingOpportunity,
-//   fetchingOpportunityError: opportunity.fetchingOpportunityError,
-//   fetchingAllOpportunities:opportunity.fetchingAllOpportunities,
-//   opportunityByUserId: opportunity.opportunityByUserId,
-//   updateOpportunityModal: opportunity.updateOpportunityModal,
-//   recruiterId:auth.userDetails.userId,
-//   addDrawerOpportunityModal:opportunity.addDrawerOpportunityModal,
-//   allRecruitmentPositionByOppId: opportunity.allRecruitmentPositionByOppId,
-//   allRecruitmentAvgTimeByOppId: opportunity.allRecruitmentAvgTimeByOppId,
-//   allRecruitmentPositionFilledByOppId:
-//     opportunity.allRecruitmentPositionFilledByOppId,
-//     allRecruitmentByOppId: opportunity.allRecruitmentByOppId,
-//     allRecruitmentDetailsByOppId:opportunity.allRecruitmentDetailsByOppId,
-    lostOpportunity:opportunity.lostOpportunity
+  role: auth.userDetails.role,
+  opportunitySkills:opportunity.opportunitySkills,
+  sales: opportunity.sales,
+  recruiterName: opportunity.recruiterName,
+  recruiterList:opportunity.recruiterList,
+  fetchingAllOpportunity:opportunity.fetchingAllOpportunity,
+  fetchingAllOpportunityError:opportunity.fetchingAllOpportunityError,
+  fetchingRecruiterList:opportunity.fetchingRecruiterList,
+  fetchingRecruiterListError:opportunity.fetchingRecruiterListError,
+  fetchingOpportunity: opportunity.fetchingOpportunity,
+  fetchingOpportunityError: opportunity.fetchingOpportunityError,
+  fetchingAllOpportunities:opportunity.fetchingAllOpportunities,
+  opportunityByUserId: opportunity.opportunityByUserId,
+  updateOpportunityModal: opportunity.updateOpportunityModal,
+  recruiterId:auth.userDetails.userId,
+  addDrawerOpportunityModal:opportunity.addDrawerOpportunityModal,
+  allRecruitmentPositionByOppId: opportunity.allRecruitmentPositionByOppId,
+  allRecruitmentAvgTimeByOppId: opportunity.allRecruitmentAvgTimeByOppId,
+  allRecruitmentPositionFilledByOppId:
+    opportunity.allRecruitmentPositionFilledByOppId,
+    allRecruitmentByOppId: opportunity.allRecruitmentByOppId,
+    allRecruitmentDetailsByOppId:opportunity.allRecruitmentDetailsByOppId,
+    allOpportunity:opportunity.allOpportunity
   
 });
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
-    //   getRecruiterList,
-    //   getOpportunitySKill,
-    //   handleUpdateOpportunityModal,
-    //   handleOpportunityDrawerModal,
-    //   setEditOpportunity,
-    //   deleteOpportunityData,
-    //   updateOwneroppById,
-    //   getAllRecruitmentByOppId,
-    //      getAllRecruitmentPositionByOppId,
-    //       getAllRecruitmentAvgTimeByOppId,
-    //      getAllRecruitmentPositionFilledByOppId,
-    //      getAllRecruitmentDetailsByOppId,
-    //      getlostOpportunity,
+      getRecruiterList,
+      getOpportunitySKill,
+      handleUpdateOpportunityModal,
+      handleOpportunityDrawerModal,
+      setEditOpportunity,
+      deleteOpportunityData,
+      updateOwneroppById,
+      getAllRecruitmentByOppId,
+         getAllRecruitmentPositionByOppId,
+          getAllRecruitmentAvgTimeByOppId,
+         getAllRecruitmentPositionFilledByOppId,
+         getAllRecruitmentDetailsByOppId,
+         getFullOpportunity,
     //      LinklostdOpportunity,
     //      deleteLostOpportunity,
     },

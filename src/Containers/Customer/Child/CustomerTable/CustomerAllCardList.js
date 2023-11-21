@@ -19,7 +19,7 @@ import {
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import { Link } from "../../../../Components/Common";
 import {
-  getCustomerListByUserId,
+  getAllCustomerlIST,
   handleUpdateCustomerModal,
   setEditCustomer,
   updateOwnercustomerById,
@@ -58,31 +58,31 @@ function CustomerAllCardList(props) {
  
   const [page, setPage] = useState(0);
   useEffect(() => {
-    // window.addEventListener('error', e => {
-    //   if (e.message === 'ResizeObserver loop limit exceeded' || e.message === 'Script error.') {
-    //     const resizeObserverErrDiv = document.getElementById(
-    //       'webpack-dev-server-client-overlay-div'
-    //     )
-    //     const resizeObserverErr = document.getElementById(
-    //       'webpack-dev-server-client-overlay'
-    //     )
-    //     if (resizeObserverErr) {
-    //       resizeObserverErr.setAttribute('style', 'display: none');
-    //     }
-    //     if (resizeObserverErrDiv) {
-    //       resizeObserverErrDiv.setAttribute('style', 'display: none');
-    //     }
-    //   }
-    // })
-    // setPage(page + 1);
-    // props.getCustomerListByUserId(props.userId, page,"creationdate");
-    //   props.getSectors();
-    // props.getCountries();
-    // props.getAllCustomerEmployeelist();
+    window.addEventListener('error', e => {
+      if (e.message === 'ResizeObserver loop limit exceeded' || e.message === 'Script error.') {
+        const resizeObserverErrDiv = document.getElementById(
+          'webpack-dev-server-client-overlay-div'
+        )
+        const resizeObserverErr = document.getElementById(
+          'webpack-dev-server-client-overlay'
+        )
+        if (resizeObserverErr) {
+          resizeObserverErr.setAttribute('style', 'display: none');
+        }
+        if (resizeObserverErrDiv) {
+          resizeObserverErrDiv.setAttribute('style', 'display: none');
+        }
+      }
+    })
+    setPage(page + 1);
+    props.getAllCustomerlIST(page,props.filter?props.filter:"creationdate");
+      props.getSectors();
+    props.getCountries();
+    props.getAllCustomerEmployeelist();
   }, []);
 
   useEffect(() => {
-    // return () => props.emptyCustomer();
+    return () => props.emptyCustomer();
   }, []);
 
 
@@ -107,30 +107,27 @@ const [rowdata, setrowdata] = useState("");
   const handleLoadMore = () => {
    
       setPage(page + 1);
-    //   props.getCustomerListByUserId(
-    //     props.currentUser ? props.currentUser : props.userId,
-    //     page,
-    //     props.filter?props.filter:"creationdate"
-    //   );
+      props.getAllCustomerlIST( page,
+        props.filter?props.filter:"creationdate"
+      );
   };
 
   const {
-    fetchingCustomers,
-    customerByUserId,
+    fetchingAllCustomerList,
+    allCustomers,
     handleUpdateCustomerModal,
     addDrawerCustomerPulseModal,
     handleCustomerPulseDrawerModal,
     updateCustomerModal,
-    fetchingCustomersError,
+    fetchingAllCustomerListError,
     fetchingAllCustomers,
     user,
     addDrawerCustomerNotesModal,
     handleCustomerNotesDrawerModal,
     IconShowhover,
   } = props;
-  console.log("ee");
  
-  // if (fetchingCustomers) {
+  // if (fetchingAllCustomerList) {
   //   return <BundleLoader />;
   // }
 
@@ -153,14 +150,14 @@ const [rowdata, setrowdata] = useState("");
 
       </div>
         <InfiniteScroll
-        dataLength={customerByUserId.length}
+        dataLength={allCustomers.length}
         next={handleLoadMore}
         hasMore={hasMore}
-        loader={fetchingCustomers?<h4 style={{ textAlign: 'center' }}>Loading...</h4>:null}
+        loader={fetchingAllCustomerList?<h4 style={{ textAlign: 'center' }}>Loading...</h4>:null}
         height={"75vh"}
       >
       
-      {/* {customerByUserId.map((item) => { 
+      {allCustomers.map((item) => { 
          const currentdate = moment().format("DD/MM/YYYY");
          const date = moment(item.creationDate).format("DD/MM/YYYY");
          const diff = Math.abs(
@@ -432,13 +429,13 @@ const [rowdata, setrowdata] = useState("");
 
 
                     )
-                })} */}
+                })}
                 </InfiniteScroll>
       </OnlyWrapCard>
       </div>
       
   
-      {/* <AddCustomerDrawerModal
+      <AddCustomerDrawerModal
         addDrawerCustomerModal={props.addDrawerCustomerModal}
         handleCustomerDrawerModal={props.handleCustomerDrawerModal}
       />
@@ -468,7 +465,7 @@ const [rowdata, setrowdata] = useState("");
         addDrawerCustomerNotesModal={addDrawerCustomerNotesModal}
         handleCustomerNotesDrawerModal={handleCustomerNotesDrawerModal}
         handleSetCurrentCustomer={handleSetCurrentCustomer}
-      /> */}
+      /> 
     </>
   );
 }
@@ -480,42 +477,42 @@ const mapStateToProps = ({
   opportunity,
   employee,
 }) => ({
-//   userId: auth.userDetails.userId,
-//   addDrawerCustomerNotesModal:customer.addDrawerCustomerNotesModal,
-  customerByUserId: customer.customerByUserId,
-//   sales: opportunity.sales,
-//   addDrawerCustomerPulseModal:customer.addDrawerCustomerPulseModal,
-//   recruiterName: opportunity.recruiterName,
-//   fetchingAllCustomers: customer.fetchingAllCustomers,
-//   sectors: sector.sectors,
-//   fetchingCustomers: customer.fetchingCustomers,
-//   fetchingCustomersError: customer.fetchingCustomersError,
-//   updateCustomerModal: customer.updateCustomerModal,
-//   user: auth.userDetails,
-//   employees: employee.employees,
-//   countries: auth.countries,
-//   allCustomerEmployeeList: employee.allCustomerEmployeeList,
-//   addDrawerCustomerEmailModal: customer.addDrawerCustomerEmailModal,
+  userId: auth.userDetails.userId,
+  addDrawerCustomerNotesModal:customer.addDrawerCustomerNotesModal,
+  allCustomers: customer.allCustomers,
+  sales: opportunity.sales,
+  addDrawerCustomerPulseModal:customer.addDrawerCustomerPulseModal,
+  recruiterName: opportunity.recruiterName,
+  fetchingAllCustomers: customer.fetchingAllCustomers,
+  sectors: sector.sectors,
+  fetchingAllCustomerList: customer.fetchingAllCustomerList,
+  fetchingAllCustomerListError: customer.fetchingAllCustomerListError,
+  updateCustomerModal: customer.updateCustomerModal,
+  user: auth.userDetails,
+  employees: employee.employees,
+  countries: auth.countries,
+  allCustomerEmployeeList: employee.allCustomerEmployeeList,
+  addDrawerCustomerEmailModal: customer.addDrawerCustomerEmailModal,
 });
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
-    //   getCustomerListByUserId,
-    //   handleUpdateCustomerModal,
-    //   handleCustomerPulseDrawerModal,
-    //   setEditCustomer,
-    //   getSectors,
-    //   customerToAccount,
-    //   emptyCustomer,
-    //   updateOwnercustomerById,
-    //   handleCustomerDrawerModal,
-    //   getCustomerDetailsById,
-    //   getCustomerKeySkill,
-    //   handleCustomerEmailDrawerModal,
-    //   handleCustomerNotesDrawerModal,
-    //   getCustomerById,
-    //   getCountries,
-    //   getAllCustomerEmployeelist,
+      getAllCustomerlIST,
+      handleUpdateCustomerModal,
+      handleCustomerPulseDrawerModal,
+      setEditCustomer,
+      getSectors,
+      customerToAccount,
+      emptyCustomer,
+      updateOwnercustomerById,
+      handleCustomerDrawerModal,
+      getCustomerDetailsById,
+      getCustomerKeySkill,
+      handleCustomerEmailDrawerModal,
+      handleCustomerNotesDrawerModal,
+      getCustomerById,
+      getCountries,
+      getAllCustomerEmployeelist,
     },
     dispatch
   );

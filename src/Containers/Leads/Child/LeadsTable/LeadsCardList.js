@@ -79,11 +79,7 @@ const LeadsCardList = (props) => {
     user,
   } = props;
 
-  // if (fetchingLeads) {
-  //   return <BundleLoader />;
-  // }
-console.log("data",currentLeadsId)
-  return (
+   return (
     <>
      <div className=' flex justify-end sticky top-28 z-auto'>
       <OnlyWrapCard style={{backgroundColor:"#E3E8EE"}}>

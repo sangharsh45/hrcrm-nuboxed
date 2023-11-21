@@ -16,7 +16,7 @@ import { DeleteOutlined } from "@ant-design/icons";
 import { getCountries } from "../../../Auth/AuthAction";
 import { Link } from "../../../../Components/Common";
 import {
-  getLeads,
+  getAllLeads,
   deleteLeadsData,
   setEditLeads,
   handleLeadsNotesDrawerModal,
@@ -44,12 +44,12 @@ const ButtonGroup = Button.Group;
 const LeadsAllCardList = (props) => {
   const [page, setPage] = useState(0);
   const [hasMore, setHasMore] = useState(true);
-//   useEffect(() => {
-//     setPage(page + 1);
-//     props.getLeads(props.userId, page,"creationdate");
-//     props.getSectors();
-//     props.getCountries();
-//   }, []);
+  useEffect(() => {
+    setPage(page + 1);
+    props.getAllLeads(page,"creationdate");
+    props.getSectors();
+    props.getCountries();
+  }, []);
 
   const [currentLeadsId, setCurrentLeadsId] = useState("");
   const [rowdata, setrowData] = useState({});
@@ -58,13 +58,8 @@ const LeadsAllCardList = (props) => {
     setrowData(data);
   };
   const handleLoadMore = () => {
-   
     setPage(page + 1);
-    // props.getLeads(
-    //   props.currentUser ? props.currentUser : props.userId,
-    //   page,
-    //   props.filter?props.filter:"creationdate"
-    // );
+    props.getAllLeads(page,props.filter?props.filter:"creationdate");
 };
   function handleSetCurrentLeadsId(item) {
     setCurrentLeadsId(item);
@@ -74,15 +69,11 @@ const LeadsAllCardList = (props) => {
     handleUpdateLeadsModal,
     handleLeadsNotesDrawerModal,
     updateLeadsModal,
-    fetchingLeads,
-    leadsAllData,
+    fetchingAllLeads,
+    allleadsInfo,
     user,
   } = props;
 
-  // if (fetchingLeads) {
-  //   return <BundleLoader />;
-  // }
-console.log("data",currentLeadsId)
   return (
     <>
      <div className=' flex justify-end sticky top-28 z-auto'>
@@ -101,13 +92,13 @@ console.log("data",currentLeadsId)
 
       </div>
       <InfiniteScroll
-        dataLength={leadsAllData.length}
+        dataLength={allleadsInfo.length}
         next={handleLoadMore}
         hasMore={hasMore}
-        loader={fetchingLeads?<h4 style={{ textAlign: 'center' }}>Loading...</h4>:null}
+        loader={fetchingAllLeads?<h4 style={{ textAlign: 'center' }}>Loading...</h4>:null}
         height={"75vh"}
       >
-        {/* {leadsAllData.map((item) => {
+        {allleadsInfo.map((item) => {
           const currentdate = moment().format("DD/MM/YYYY");
           const date = moment(item.creationDate).format("DD/MM/YYYY");
 
@@ -468,7 +459,7 @@ console.log("data",currentLeadsId)
             </div>
 
           );
-        })} */}
+        })}
          </InfiniteScroll>
       </OnlyWrapCard>
       </div>
@@ -501,32 +492,32 @@ console.log("data",currentLeadsId)
 };
 
 const mapStateToProps = ({ auth, leads, sector }) => ({
-  leadsAllData: leads.leadsAllData,
+  allleadsInfo: leads.allleadsInfo,
   userId: auth.userDetails.userId,
   lead: leads.lead,
   user: auth.userDetails,
-//   countries: auth.countries,
-//   sectors: sector.sectors,
-//   updateLeadsModal: leads.updateLeadsModal,
-//   addDrawerLeadsEmailModal: leads.addDrawerLeadsEmailModal,
-//   fetchingLeads: leads.fetchingLeads,
-//   openCETmodal: leads.openCETmodal,
-//   addDrawerLeadsNotesModal: leads.addDrawerLeadsNotesModal,
+  countries: auth.countries,
+  sectors: sector.sectors,
+  updateLeadsModal: leads.updateLeadsModal,
+  addDrawerLeadsEmailModal: leads.addDrawerLeadsEmailModal,
+  fetchingAllLeads: leads.fetchingAllLeads,
+  openCETmodal: leads.openCETmodal,
+  addDrawerLeadsNotesModal: leads.addDrawerLeadsNotesModal,
 });
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
-    //   getLeads,
-    //   getSectors,
-    //   deleteLeadsData,
-    //   setEditLeads,
-    //   handleUpdateLeadsModal,
-    //   handleLeadsNotesDrawerModal,
-    //   handleLeadsEmailDrawerModal,
-    //   getLeadDetailsById,
-    //   getCountries,
-    //   updateTypeForLead,
-    //   handleCETmodal,
+      getAllLeads,
+      getSectors,
+      deleteLeadsData,
+      setEditLeads,
+      handleUpdateLeadsModal,
+      handleLeadsNotesDrawerModal,
+      handleLeadsEmailDrawerModal,
+      getLeadDetailsById,
+      getCountries,
+      updateTypeForLead,
+      handleCETmodal,
     },
     dispatch
   );

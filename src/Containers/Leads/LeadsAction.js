@@ -1100,3 +1100,30 @@ export const setLeadsViewType = (viewType) => (dispatch) => {
     });
   };
 
+  export const getAllLeads = (pageNo,filter) => (dispatch) => {
+ 
+    dispatch({
+      type: types.GET_ALL_LEADS_REQUEST,
+    });
+    axios
+      .get(`${base_url}/leads/all/${pageNo}/${filter}`, {
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+        },
+      })
+      .then((res) => {
+        console.log(res);
+        dispatch({
+          type: types.GET_ALL_LEADS_SUCCESS,
+          payload: res.data,
+        });
+      })
+      .catch((err) => {
+        console.log(err.response);
+        dispatch({
+          type: types.GET_ALL_LEADS_FAILURE,
+          payload: err,
+        });
+      });
+  };
+
