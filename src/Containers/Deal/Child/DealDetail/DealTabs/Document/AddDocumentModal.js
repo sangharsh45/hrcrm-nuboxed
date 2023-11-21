@@ -12,9 +12,9 @@ import { TextareaComponent } from "../../../../../../Components/Forms/Formik/Tex
 import * as Yup from "yup";
 import {
   handleDocumentUploadModal,
-  addContactDocument,
-  getContactDocument,
-} from "../../../../ContactAction";
+  addDealDocument,
+  getDealDocument
+} from "../../../../DealAction";
 // import { getOppoStages, getLevels } from "../../Settings/SettingsAction";
 import DragableUpload from "../../../../../../Components/Forms/Formik/DragableUpload";
 
@@ -63,9 +63,9 @@ class AddDocumentModal extends Component {
     );
   };
   callback = () => {
-    const { contactInVestDetail, getContactDocument, handleDocumentUploadModal } =
+    const { dealDetailsbyID, getDealDocument, handleDocumentUploadModal } =
       this.props;
-    getContactDocument(contactInVestDetail.contactId);
+      getDealDocument(dealDetailsbyID.invOpportunityId);
     handleDocumentUploadModal(false);
   };
   //   componentDidMount() {
@@ -83,8 +83,8 @@ class AddDocumentModal extends Component {
       opportunity,
       documentUploadModal,
       handleDocumentUploadModal,
-      addContactDocument,
-      addingDocumentByContactId,
+      addDealDocument,
+      addingDocumentByDealId,
       documentContentType,
       documentTypeName,
       documentTypeId,
@@ -114,7 +114,7 @@ class AddDocumentModal extends Component {
               // enableReinitialize
               initialValues={{
                 documentTypeId: "",
-                contactId: this.props.contactInVestDetail.contactId,
+                invOpportunityId: this.props.dealDetailsbyID.invOpportunityId,
                 documentTitle: "", //input
                 documentDescription: "",
                 // levelType:
@@ -126,7 +126,7 @@ class AddDocumentModal extends Component {
               validationSchema={documentSchema}
               onSubmit={(values, { resetForm }) => {
                 console.log(values);
-                addContactDocument(
+                addDealDocument(
                   // values.documentId,
                   {
                     ...values,
@@ -216,7 +216,7 @@ class AddDocumentModal extends Component {
                     <Button
                       htmlType="submit"
                       type="primary"
-                      Loading={addingDocumentByContactId}
+                      Loading={addingDocumentByDealId}
                     >
                       <FormattedMessage
                         id="app.submit"
@@ -235,10 +235,10 @@ class AddDocumentModal extends Component {
   }
 }
 
-const mapStateToProps = ({ contact, settings, auth }) => ({
+const mapStateToProps = ({ contact, settings,deal, auth }) => ({
   contact: contact.contact,
   documentUploadModal: contact.documentUploadModal,
-  addingDocumentByContactId: contact.addingDocumentByContactId,
+  addingDocumentByDealId: deal.addingDocumentByDealId,
   organization:
     auth.userDetails &&
     auth.userDetails.metaData &&
@@ -246,13 +246,13 @@ const mapStateToProps = ({ contact, settings, auth }) => ({
   organization:
     auth.userDetails.metaData && auth.userDetails.metaData.organization,
 });
-
+// documentsByInnOppId
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
       handleDocumentUploadModal,
-      addContactDocument,
-      getContactDocument,
+      addDealDocument,
+      getDealDocument,
     },
     dispatch
   );

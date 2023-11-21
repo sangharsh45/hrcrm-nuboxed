@@ -7,7 +7,7 @@ import {
   DeleteOutlined,
   SearchOutlined,
 } from "@ant-design/icons";
-import { Spacer } from "../../../Components/UI/Elements";
+import InfiniteScroll from "react-infinite-scroll-component";
 import {
   getDistributorsByUserId,
   setEditDistributor,
@@ -27,9 +27,20 @@ import { OnlyWrapCard } from "../../../Components/UI/Layout";
 // import BillingAddressLocation from "../DistributorBillingAddress/BillingAddressLocation";
 
 function AccountTable(props) {
+  const [page, setPage] = useState(0);
+  const [hasMore, setHasMore] = useState(true);
   useEffect(() => {
-    props.getDistributorsByUserId(props.userId);
+    props.getDistributorsByUserId(props.userId,page);
+    setPage(page + 1);
   }, []);
+
+  const handleLoadMore = () => {
+    setPage(page + 1);
+    props.getDistributorsByUserId(props.currentUser?props.currentUser:props.userId,page,
+
+
+      );
+}
 
   const { handleUpdateDistributorModal, updateDistributorModal, addBillToAddress, handleBillingAddressModal } = props;
 
@@ -133,6 +144,13 @@ function AccountTable(props) {
   return (
     <>
       <OnlyWrapCard style={{ height: "80vh" }}>
+      <InfiniteScroll
+        dataLength={props.distributorsByUserId.length}
+        next={handleLoadMore}
+        hasMore={hasMore}
+        loader={props.fetchingDistributorsByUserId?<h4 style={{ textAlign: 'center' }}>Loading...</h4>:null}
+        height={"75vh"}
+      >
         {props.distributorsByUserId.map((item) => {
           return (
             <>
@@ -241,8 +259,8 @@ function AccountTable(props) {
 
 
                     <div class=" font-normal text-[0.82rem] text-cardBody font-poppins">
-                      {item.addresses[0].address1 || ""} ${item.addresses[0]
-                        .address2 || ""} ${item.addresses[0].street || ""} ${item.addresses[0].city || ""}`;
+                      {/* {item.addresses[0].address1 || ""} ${item.addresses[0]
+                        .address2 || ""} ${item.addresses[0].street || ""} ${item.addresses[0].city || ""}`; */}
 
                     </div>
 
@@ -257,7 +275,7 @@ function AccountTable(props) {
 
 
                     <div class=" font-normal text-[0.82rem] text-cardBody font-poppins">
-                      {item.addresses[0].pinCode || ""}
+                      {/* {item.addresses[0].pinCode || ""} */}
                     </div>
 
                   </div>
@@ -326,7 +344,7 @@ function AccountTable(props) {
             </>
           )
         })}
-
+   </InfiniteScroll>
       </OnlyWrapCard>
       <UpdateAccountModal
         distributorId={currentDistributorId}

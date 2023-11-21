@@ -10,6 +10,7 @@ import {
 } from "../Customer/CustomerAction";
 import moment from "moment";
 import CustomerCardView from '../Customer/CustomerCardView';
+import InvestorAllCardList from './Child/InvestorTable/InvestorAllCardList';
 const InvestorHeader = lazy(() => import("./Child/InvestorHeader"));
 const InvestorCardList=lazy(() => import("./Child/InvestorTable/InvestorCardList"));
 const AddInvestorModal=lazy(()=>import("./Child/AddInvestorModal"));
@@ -78,8 +79,8 @@ const handleChange = (e) => {
  {  viewType === "list" ?
           <InvestorCardList/> 
  
-//   :viewType==="card" ?
-//  <InvestorCardView/> 
+  :viewType==="all" ?
+ <InvestorAllCardList  filter={filter}/> 
 // <CustomerCardView/>  
           :null}
  </Suspense>

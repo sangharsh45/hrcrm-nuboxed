@@ -2,6 +2,7 @@ import React, { useState,useEffect,Suspense, lazy } from 'react';
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { BundleLoader, GridLoader } from "../../Components/Placeholder";
+import ContactInvestAllCardList from './Child/ContactInvestTable/ContactInvestAllCardList';
 import {handleContactInvestModal,setContactInvetViewType,
   getContactInvestByUserId,
   getContactInvestFilterData} from "./ContactInvestAction";
@@ -126,7 +127,12 @@ const{handleContactInvestModal,addContactInvestModal,
         handleContactInvestModal={handleContactInvestModal}
       />
        <Suspense fallback={<BundleLoader />}>
-        {viewType === "card" ? <ContactInvestCardList currentUser={currentUser}  filterData={filterData}/> : null}
+        {viewType === "card" ?
+          <ContactInvestCardList currentUser={currentUser}  filterData={filterData}/> 
+
+         :viewType === "all" ?
+         <ContactInvestAllCardList     /> 
+         : null}
       </Suspense>
             </React.Fragment>
         )

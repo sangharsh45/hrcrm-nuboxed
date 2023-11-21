@@ -58,12 +58,12 @@ export const addDistributor = (distributor, userId) => (dispatch) => {
 /**
  * get all the distributor of the user
  */
-export const getDistributorsByUserId = (userId) => (dispatch) => {
+export const getDistributorsByUserId = (userId,pageNo) => (dispatch) => {
   dispatch({
     type: types.GET_DISTRIBUTORS_BY_USER_ID_REQUEST,
   });
   axios
-    .get(`${base_url2}/distributor/${userId}`,
+    .get(`${base_url2}/distributor/user/${userId}/${pageNo}`,
       {
         headers: {
           Authorization: "Bearer " + sessionStorage.getItem("token") || "",
@@ -429,14 +429,14 @@ export const generateOrderByDistributorId = (data, cb) => (dispatch) => {
     });
 };
 
-export const getDistributorOrderByDistributorId = (distributorId) => (
+export const getDistributorOrderByDistributorId = (distributorId,pageNo) => (
   dispatch
 ) => {
   dispatch({
     type: types.GET_DISTRIBUTOR_ORDER_BY_DISTRIBUTOR_ID_REQUEST,
   });
   axios
-    .get(`${base_url2}/phoneOrder/all-phoneOrders/${distributorId}`,
+    .get(`${base_url2}/phoneOrder/all-phoneOrders/${distributorId}/${pageNo}`,
       {
         headers: {
           Authorization: "Bearer " + sessionStorage.getItem("token") || "",
@@ -671,12 +671,12 @@ export const getOrderDetailsById = (orderId) => (dispatch) => {
 /**
  * get all the distributor
  */
-export const getAllDistributorsList = (userId) => (dispatch) => {
+export const getAllDistributorsList = (pageNo) => (dispatch) => {
   dispatch({
     type: types.GET_ALL_DISTRIBUTORS_LIST_REQUEST,
   });
   axios
-    .get(`${base_url2}/distributor/all-distributors`,
+    .get(`${base_url2}/distributor/all-distributors/${pageNo}`,
       {
         headers: {
           Authorization: "Bearer " + sessionStorage.getItem("token") || "",
@@ -2422,6 +2422,39 @@ export const handleRepairReason = (modalProps) => (dispatch) => {
 export const handlePaymentHistory = (modalProps) => (dispatch) => {
   dispatch({
     type: types.HANDLE_PAYMENT_HISTORY_MODAL,
+    payload: modalProps,
+  });
+};
+
+export const getDistributorCount = (userId) => (dispatch) => {
+  dispatch({
+    type: types.GET_DISTRIBUTOR_COUNT_REQUEST,
+  });
+  axios
+    .get(`${base_url2}/distributor/record/count/${userId}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.GET_DISTRIBUTOR_COUNT_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err.response);
+      dispatch({
+        type: types.GET_DISTRIBUTOR_COUNT_FAILURE,
+        payload: err,
+      });
+    });
+};
+
+export const handleUpdateAccountModal=(modalProps) => (dispatch) => {
+  dispatch({
+    type: types.HANDLE_ACCOUNT_UPDATE_MODAL,
     payload: modalProps,
   });
 };

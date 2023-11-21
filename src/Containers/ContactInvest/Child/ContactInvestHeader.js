@@ -9,7 +9,7 @@ class ContactInvestHeader extends Component {
       addContactInvestModal,
       handleContactInvestModal,
       viewType,
-      setContactsViewType,
+      setContactInvetViewType,
       handleChange,
       currentData,
       handleClear,
@@ -26,7 +26,7 @@ class ContactInvestHeader extends Component {
             handleFilterChange={this.props.handleFilterChange}
             filter={this.props.filter}
               viewType={viewType}
-              setContactsViewType={setContactsViewType}
+              setContactInvetViewType={setContactInvetViewType}
               currentUser={currentUser}
             currentData={currentData}
             handleClear={handleClear}

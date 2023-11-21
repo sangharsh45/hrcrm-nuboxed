@@ -217,3 +217,38 @@ export const handleContactInvestNotesDrawerModal = (modalProps) => (dispatch) =>
     payload: modalProps,
   });
 };
+
+
+export const getAllContactInvest = (pageNo,filter) => (dispatch) => {
+ 
+  dispatch({
+    type: types.GET_ALL_CONTACT_INVEST_REQUEST,
+  });
+  axios
+    .get(`${base_url}/investor/contact/${pageNo}/${filter}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.GET_ALL_CONTACT_INVEST_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err.response);
+      dispatch({
+        type: types.GET_ALL_CONTACT_INVEST_FAILURE,
+        payload: err,
+      });
+    });
+};
+
+export const handleContactInvestActivityModal = (modalProps) => (dispatch) => {
+  dispatch({
+    type: types.HANDLE_CONTACT_INVEST_ACTIVITY_MODAL,
+    payload: modalProps,
+  });
+};

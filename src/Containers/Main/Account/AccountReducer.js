@@ -6,6 +6,8 @@ const initialState = {
 
   clearbit1: {},
 
+  updateAccountModal:false,
+
   addDistributorModal: false,
   setEditingDistributor: {},
 
@@ -87,6 +89,10 @@ const initialState = {
   updateEventModal: false,
   updateCallModal: false,
   updateTaskModal: false,
+
+  fetchingAllDistributorCount: false,
+  fetchingAllDistributorCountError: false,
+  allDistributorCount:{},
 
   updateDisributorById: false,
   updateDisributorByIdError: false,
@@ -891,6 +897,10 @@ export const distributorReducer = (state = initialState, action) => {
     /**
      * paid modal
      */
+
+     case types.HANDLE_ACCOUNT_UPDATE_MODAL:
+      return { ...state, updateAccountModal: action.payload };
+
     case types.HANDLE_PAID_BUTTON_MODAL:
       return { ...state, addPaidButtonModal: action.payload };
 
@@ -1825,6 +1835,21 @@ export const distributorReducer = (state = initialState, action) => {
 
     case types.HANDLE_PAYMENT_HISTORY_MODAL:
       return { ...state, showPaymentHistoryModal: action.payload };
+
+      case types.GET_DISTRIBUTOR_COUNT_REQUEST:
+        return { ...state, fetchingAllDistributorCount: true };
+      case types.GET_DISTRIBUTOR_COUNT_SUCCESS:
+        return {
+          ...state,
+          fetchingAllDistributorCount: false,
+          allDistributorCount: action.payload,
+        };
+      case types.GET_DISTRIBUTOR_COUNT_FAILURE:
+        return {
+          ...state,
+          fetchingAllDistributorCount: false,
+          fetchingAllDistributorCountError: true,
+        };
     default:
       return state;
   }

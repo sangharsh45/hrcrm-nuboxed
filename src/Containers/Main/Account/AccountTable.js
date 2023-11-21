@@ -1,11 +1,12 @@
 import React, { Component, useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { StyledTable } from "../../../Components/UI/Antd";
+import BorderColorIcon from "@mui/icons-material/BorderColor";
 import { Tooltip, Input, Button, Space, Popconfirm } from "antd";
 import { OnlyWrapCard } from '../../../Components/UI/Layout'
 import { Spacer } from "../../../Components/UI/Elements";
 import { Link } from "../../../Components/Common";
+import InfiniteScroll from "react-infinite-scroll-component";
 import {
   getAllDistributorsList,
   setEditDistributor,
@@ -13,7 +14,8 @@ import {
   handleDistributorOrderModal,
   handleDistributorActivityTableModal,
   deleteDistributorData,
-  handleBillingAddressModal
+  handleBillingAddressModal,
+  handleUpdateAccountModal
 } from "./AccountAction";
 import Highlighter from "react-highlight-words";
 import moment from "moment";
@@ -21,10 +23,35 @@ import AccountDetailsView from "./AccountDetailsView";
 
 
 function AccountTable(props) {
+  const [page, setPage] = useState(0);
+  const [RowData, setRowData] = useState("");
+  const [hasMore, setHasMore] = useState(true);
   useEffect(() => {
-    props.getAllDistributorsList();
+    props.getAllDistributorsList(page);
+    setPage(page + 1);
   }, []);
+  function handleCurrentRowData(datas) {
+    setRowData(datas);
+  }
 
+  const handleLoadMore = () => {
+    setPage(page + 1);
+    props.getAllDistributorsList(props.currentUser?props.currentUser:page,
+
+
+      );
+}
+
+const {
+  fetchingInvestors,
+  investorsbyId,
+  handleUpdateAccountModal,
+  updateInvestorModal,
+  fetchingInvestorsError,
+  fetchingAllCustomers,
+  user,
+  IconShowhover,
+} = props;
  
   const tab = document.querySelector(".ant-layout-sider-children");
   const tableHeight = tab && tab.offsetHeight * 1.2;
@@ -44,13 +71,13 @@ function AccountTable(props) {
         {/* <div className="w-[3.8rem]">Action</div> */}
 
       </div>
-        {/* <InfiniteScroll
-        dataLength={customerByUserId.length}
+        <InfiniteScroll
+        dataLength={props.allDistributors.length}
         next={handleLoadMore}
         hasMore={hasMore}
-        loader={fetchingCustomers?<h4 style={{ textAlign: 'center' }}>Loading...</h4>:null}
+        loader={props.fetchingAllDistributors?<h4 style={{ textAlign: 'center' }}>Loading...</h4>:null}
         height={"75vh"}
-      > */}
+      >
       
       {props.allDistributors.map((item) => { 
          const currentdate = moment().format("DD/MM/YYYY");
@@ -168,13 +195,31 @@ function AccountTable(props) {
                        
 
                       </div>
+                      <div className=" flex font-medium flex-col w-[2rem] md:w-[1rem] max-sm:flex-row w-full max-sm:justify-between  ">
+
+{/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden"> Sector </h4> */}
+<h4 class=" text-xs text-cardBody font-poppins">
+    <Tooltip title="Notes">
+        <BorderColorIcon
+            style={{ color: "grey",fontSize:"0.8rem",padding:"2px",fontSize:"1rem" }}
+            // onClick={() => {
+            //   handleUpdateAccountModal(true);
+            //   handleCurrentRowData(item);
+            // }}
+        />
+
+    </Tooltip>
+</h4>
+
+
+</div>
                             </div>
                         </div>
 
 
                     )
                 })}
-                {/* </InfiniteScroll> */}
+                </InfiniteScroll>
       </OnlyWrapCard>
       </div>
       {/* <StyledTable
@@ -192,7 +237,8 @@ function AccountTable(props) {
         updateDistributorModal={updateDistributorModal}
         handleSetCurrentDistributorId={handleSetCurrentDistributorId}
         handleUpdateDistributorModal={handleUpdateDistributorModal}
-      />
+      /> */}
+       {/*
       <AddAccountOrderModal
         addDistributorOrderModal={props.addDistributorOrderModal}
         handleDistributorOrderModal={props.handleDistributorOrderModal}

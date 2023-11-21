@@ -8,6 +8,10 @@ const initialState = {
   fetchingInvestorsError: false,
   investorsbyId: [],
 
+  fetchingAllInvestors: false,
+  fetchingAllInvestorsError: false,
+  allInvestorsbyId: [],
+
   fetchingInvestorRecords: false,
   fetchingInvestorRecordsError: false,
   investorRecord:[],
@@ -90,6 +94,22 @@ export const investorReducer = (state = initialState, action) => {
         fetchingInvestors: false,
         fetchingInvestorsError: true,
       };
+
+      case types.GET_ALL_INVESTORS_BY_ID_REQUEST:
+        return { ...state, fetchingAllInvestors: true };
+      case types.GET_ALL_INVESTORS_BY_ID_SUCCESS:
+        return {
+          ...state,
+          fetchingAllInvestors: false,
+          allInvestorsbyId: [...state.investorsbyId, ...action.payload],
+          clearbit:null
+        };
+      case types.GET_ALL_INVESTORS_BY_ID_FAILURE:
+        return {
+          ...state,
+          fetchingAllInvestors: false,
+          fetchingAllInvestorsError: true,
+        };
 
       case types.GET_INVESTORS_FILTER_DATA_REQUEST:
         return { ...state, fetchingInvestorsfilterdata: true };

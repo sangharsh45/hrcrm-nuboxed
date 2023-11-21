@@ -6,9 +6,21 @@ const initialState = {
 
   addOrderModal: false,
 
+  addNotesInOrder:false,
+
+  addStatusOfOrder:false,
+
+  fetchingOrderCount: false,
+  fetchingOrderCountError: false,
+  orderCount:{},
+
   fetchingOrderList: false,
   fetchingOrderListError: false,
   orderList: [],
+
+  fetchingAllOrderCount: false,
+  fetchingAllOrderCountError: false,
+  allOrderCount:{},
 
 
   fetchingCustomerList: false,
@@ -18,6 +30,8 @@ const initialState = {
   fetchingDistributorList: false,
   fetchingDistributorListError: false,
   distributorList: [],
+
+  addPaidButtonModal:false,
 
 
   fetchingDistributorOrderList: false,
@@ -203,6 +217,46 @@ export const orderReducer = (state = initialState, action) => {
           fetchingOrderByIdError: true,
         };
 
+
+        case types.GET_ORDER_COUNT_REQUEST:
+          return { ...state, fetchingOrderCount: true };
+        case types.GET_ORDER_COUNT_SUCCESS:
+          return {
+            ...state,
+            fetchingOrderCount: false,
+            orderCount: action.payload,
+          };
+        case types.GET_ORDER_COUNT_FAILURE:
+          return {
+            ...state,
+            fetchingOrderCount: false,
+            fetchingOrderCountError: true,
+          };
+
+
+          case types.GET_ALL_ORDER_COUNT_REQUEST:
+            return { ...state, fetchingAllOrderCount: true };
+          case types.GET_ALL_ORDER_COUNT_SUCCESS:
+            return {
+              ...state,
+              fetchingAllOrderCount: false,
+              allOrderCount: action.payload,
+            };
+          case types.GET_ALL_ORDER_COUNT_FAILURE:
+            return {
+              ...state,
+              fetchingAllOrderCount: false,
+              fetchingAllOrderCountError: true,
+            };
+
+            case types.HANDLE_NOTES_MODAL_IN_ORDER:
+      return { ...state, addNotesInOrder: action.payload };
+
+      case types.HANDLE_STATUS_OF_ORDER_MODAL:
+      return { ...state, addStatusOfOrder: action.payload };
+
+      case types.HANDLE_PAID_BUTTON_MODAL:
+      return { ...state, addPaidButtonModal: action.payload };
     default:
       return state;
   }

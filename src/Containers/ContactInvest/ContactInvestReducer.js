@@ -6,6 +6,12 @@ const initialState = {
     addingContactInvest: false, 
     addContactInvestModal: false,
 
+    fetchingAllContactInvest: false,
+    fetchingAllContactInvestError: false,
+    allContactInvestData:[],
+
+    contactInvestorActivityModal:false,
+
     addDrawerContactInvestNotesModal:false,
 
     fetchingInvestorContactSearchData:false,
@@ -154,7 +160,25 @@ export const contactInvestReducer = (state = initialState, action) => {
               return { ...state, addDrawerContactInvestNotesModal: action.payload };
 
 
+              
+              case types.GET_ALL_CONTACT_INVEST_REQUEST:
+
+    return { ...state, fetchingAllContactInvest: true };
+  case types.GET_ALL_CONTACT_INVEST_SUCCESS:
+    return {
+      ...state,
+      fetchingAllContactInvest: false,
+      allContactInvestData: action.payload,
+    };
+  case types.GET_ALL_CONTACT_INVEST_FAILURE:
+    return {
+      ...state,
+      fetchingAllContactInvest: false,
+      fetchingAllContactInvestError: true,
+    };
   
+    case types.HANDLE_CONTACT_INVEST_ACTIVITY_MODAL:
+      return { ...state, contactInvestorActivityModal: action.payload };
    
       default:
       return state;

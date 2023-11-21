@@ -590,3 +590,62 @@ export const updateDealdragstage = (
       cb && cb("failure");
     });
 };
+
+export const handleDocumentUploadModal = (modalProps) => (dispatch) => {
+  dispatch({
+    type: types.HANDLE_DOCUMENT_UPLOAD_MODAL,
+    payload: modalProps,
+  });
+};
+
+export const addDealDocument = (data, cb) => (dispatch) => {
+  console.log(data);
+  dispatch({ type: types.ADD_DEAL_DOCUMENT_REQUEST });
+  axios
+    .post(`${base_url}/investorOpportunity/document`, data, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.ADD_DEAL_DOCUMENT_SUCCESS,
+        payload: res.data,
+      });
+      // dispatch(getCandidateDocument(candidateId));
+      cb();
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.ADD_DEAL_DOCUMENT_FAILURE,
+        payload: err,
+      });
+    });
+};
+
+export const getDealDocument = (invOpportunityId) => (dispatch) => {
+  dispatch({ type: types.GET_DEAL_DOCUMENTS_REQUEST });
+  axios
+    .get(`${base_url}/investorOpportunity/document/${invOpportunityId}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.GET_DEAL_DOCUMENTS_SUCCESS,
+        payload: res.data,
+      });
+      // cb();
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.GET_DEAL_DOCUMENTS_FAILURE,
+        payload: err,
+      });
+    });
+};

@@ -8,6 +8,9 @@ const initialState = {
     fetchingDepartmentsError: false,
     departments: [],
 
+    addingHrToggle: false,
+    addingHrToggleError: false,
+
     addingRecruitToggle: false,
     addingRecruitToggleError: false,
 
@@ -185,6 +188,22 @@ export const departmentsReducer = (state = initialState, action) => {
                   addingImToggle: false,
                   addingImToggleError: true,
                 };
+
+                case types.LINK_HR_TOGGLE_REQUEST:
+                  return { ...state, addingHrToggle: true };
+                case types.LINK_HR_TOGGLE_SUCCESS:
+                  return {
+                    ...state,
+                    addingHrToggle: false,
+                        departments:action.payload,
+                   
+                  };
+                case types.LINK_HR_TOGGLE_FAILURE:
+                  return {
+                    ...state,
+                    addingHrToggle: false,
+                    addingHrToggleError: true,
+                  };
 
                 case types.LINK_ACCOUNTING_TOGGLE_REQUEST:
                   return { ...state, addingAccountingToggle: true };
