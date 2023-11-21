@@ -814,7 +814,7 @@ function NavMenu(props) {
           </Link>
         </Menu.Item> */}
         <hr />
-        {/* {user.imInd === true  && ( */}
+        {user.leaveAccessInd === true   && ( 
         <Menu.Item key="/report" style={{ height: "27px", paddingLeft: "1rem" }}>
           <Link to="/leave">
             <i class="fas fa-luggage-cart"></i>
@@ -830,8 +830,8 @@ function NavMenu(props) {
             </span>
           </Link>
         </Menu.Item>
-        {/* )} */}
-        {/* {user.userType !== "USER" && user.imInd === true  && user.department !== "VENDOR" && (  */}
+       )} 
+        {user.mileageAccessInd === true   && ( 
         <Menu.Item key="/mileage" style={{ height: "27px", paddingLeft: "1rem" }}>
           <Link to="/mileage">
 
@@ -848,8 +848,8 @@ function NavMenu(props) {
             </span>
           </Link>
         </Menu.Item>
-        {/* )} */}
-        {/* {user.imInd === true  && ( */}
+        )}
+     {user.expenseAccessInd === true   && ( 
         <Menu.Item key="/expense" style={{ height: "27px", paddingLeft: "1rem" }}>
           <Link to="/expense">
             <ReceiptIcon
@@ -867,10 +867,10 @@ function NavMenu(props) {
             </span>
           </Link>
         </Menu.Item>
-        {/* )} */}
+        )} 
 
 
-        {/* {user.imInd === true  && ( */}
+{user.holidayAccessInd === true   && ( 
         <Menu.Item key="/holiday" style={{ height: "27px", paddingLeft: "1rem" }}>
           <Link to="/holiday">
 
@@ -884,7 +884,7 @@ function NavMenu(props) {
             </span>
           </Link>
         </Menu.Item>
-        {/* )} */}
+       )} 
 
         {/* 
            </SubMenu> 

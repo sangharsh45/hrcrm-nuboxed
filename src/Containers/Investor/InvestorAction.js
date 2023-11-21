@@ -504,4 +504,30 @@ export const getInvestorDetailsById = (investorId) => (dispatch) => {
       payload: modalProps,
     });
   };
+
+  export const getAllInvestorsbyId = (pageNo,filter) => (dispatch) => {
+    dispatch({
+      type: types.GET_ALL_INVESTORS_BY_ID_REQUEST,
+    });
+    axios
+      .get(`${base_url}/investor/list/${pageNo}/${filter}`, {
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+        },
+      })
+      .then((res) => {
+        console.log(res);
+        dispatch({
+          type: types.GET_ALL_INVESTORS_BY_ID_SUCCESS,
+          payload: res.data,
+        });
+      })
+      .catch((err) => {
+        console.log(err.response);
+        dispatch({
+          type: types.GET_ALL_INVESTORS_BY_ID_FAILURE,
+          payload: err,
+        });
+      });
+  };
   

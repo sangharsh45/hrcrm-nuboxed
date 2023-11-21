@@ -35,7 +35,8 @@ import MicIcon from '@mui/icons-material/Mic';
 import LockIcon from '@mui/icons-material/Lock';
 import { BundleLoader } from "../../../../../Components/Placeholder";
 import NoteAltIcon from "@mui/icons-material/NoteAlt";
-import {handleDealContactModal} from "../../../DealAction";
+import {handleDealContactModal,handleDocumentUploadModal} from "../../../DealAction";
+import LinkedDocuments from "./Document/LinkedDocuments";
 // import ReactSpeechModal from "./ReactSpeechModal";
 // const RecruitmentTable = lazy(() => import("./Recruitment/RecruitmentTable"));
 // const AddRecruitModal = lazy(() => import("./Recruitment/AddRecruitModal"));
@@ -43,7 +44,7 @@ import {handleDealContactModal} from "../../../DealAction";
 // const RecruitProJumpstart = lazy(() => import("../../RecruitProJumpstart/RecruitProJumpstart"));
 // const SummaryTable = lazy(() => import("./Recruitment/Child/SummaryTable"));
 // const LinkedNotes = lazy(() => import("./LinkedNotes"));
-// const AddDocumentModal = lazy(() => import("./Document/AddDocumentModal"));
+const AddDocumentModal = lazy(() => import("./Document/AddDocumentModal"));
 const LinkedDealContact = lazy(() => import("./DealContact/LinkedDealContact"));
 const DealContactModal = lazy(() => import("./DealContact/DealContactModal"));
 // const LinkContactModal = lazy(() => import("../../../../Contact/Child/LinkContactModal"));
@@ -130,11 +131,12 @@ class DealDetailTab extends Component {
       fetchDealdetails,
       openDealContactModal,
       handleDealContactModal,
+      handleDocumentUploadModal,
       linkContactsCheckToOpportunity,
       getContactListByOpportunityId,
       handleLinkContactModal,
       linkContactsToOpportunity,
-      handleDocumentUploadModal,
+  
       handleReactSpeechModal,
       dealDetailsbyID,
       addSpeechModal,
@@ -257,7 +259,7 @@ return  <BundleLoader />
             >
               <Suspense fallback={"Loading ..."}>
                 {" "}
-                {/* <LinkedDocuments opportunity={opportunity} /> */}
+                <LinkedDocuments dealDetailsbyID={this.props.dealDetailsbyID} />
               </Suspense>
             </TabPane>
 
@@ -321,16 +323,18 @@ return  <BundleLoader />
             ]}
             linkType="opportunity"
           />
-
-          <AddDocumentModal
-            documentUploadModal={documentUploadModal}
-            handleDocumentUploadModal={handleDocumentUploadModal}
-          />
-          <ReactSpeechModal
+            <ReactSpeechModal
           opportunityId={opportunityId}
           handleReactSpeechModal={handleReactSpeechModal}
           addSpeechModal={addSpeechModal}
-          /> */}
+          />
+*/}
+          <AddDocumentModal
+          dealDetailsbyID={this.props.dealDetailsbyID}
+            documentUploadModal={documentUploadModal}
+            handleDocumentUploadModal={handleDocumentUploadModal}
+          />
+         
       
         </Suspense>
       </>
@@ -354,12 +358,13 @@ const mapStateToProps = ({
   addSpeechModal:opportunity.addSpeechModal, 
   addRecruitModal: opportunity.addRecruitModal,
   addTagProfileModal: opportunity.addTagProfileModal,
-  documentUploadModal: opportunity.documentUploadModal,
+  documentUploadModal: deal.documentUploadModal,
 });
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
-      handleDealContactModal
+      handleDealContactModal,
+      handleDocumentUploadModal
     },
     dispatch
   );

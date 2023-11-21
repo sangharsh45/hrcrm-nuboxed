@@ -14,10 +14,20 @@ import moment from "moment";
 import AccountDetailsView from "./AccountDetailsView";
 
 function AllAccountList(props) {
+  const [page, setPage] = useState(0);
+  const [hasMore, setHasMore] = useState(true);
   useEffect(() => {
-    props.getAllDistributorsList();
+    props.getAllDistributorsList(page);
+    setPage(page + 1);
    // props.getAllSalesUser();
   }, []);
+  const handleLoadMore = () => {
+    setPage(page + 1);
+    props.getAllDistributorsList(props.currentUser?props.currentUser:page,
+
+
+      );
+}
 
   const [searchText, setSearchText] = useState("");
   const [searchedColumn, setSearchedColumn] = useState("");

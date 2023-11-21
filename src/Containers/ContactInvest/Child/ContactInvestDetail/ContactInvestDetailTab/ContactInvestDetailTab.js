@@ -2,26 +2,23 @@ import React, { Component, lazy, Suspense } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { FormattedMessage } from "react-intl";
-import { Tooltip } from "antd";
-import NoteAltIcon from "@mui/icons-material/NoteAlt";
-import MicIcon from "@mui/icons-material/Mic";
+import AddchartIcon from '@mui/icons-material/Addchart'; 
+import {handleContactInvestActivityModal} from "../../../ContactInvestAction"
 import { PlusOutlined } from "@ant-design/icons";
 import InsertDriveFileIcon from "@mui/icons-material/InsertDriveFile";
-// import ReactContactSpeechModal from "../ReactContactSpeechModal"
 import { StyledTabs } from "../../../../../Components/UI/Antd";
 import { TabsWrapper } from "../../../../../Components/UI/Layout";
 import AddDocumentModal from "../../../../Contact/Child/ContactDetail/ContactTab/Document/AddDocumentModal";
-// import OpportunityTable from "./Opportunity/LinkedOpportunity";
 import WorkIcon from "@mui/icons-material/Work";
-// import AddContactOpportunityModal from "../../../Child/ContactDetail/ContactTab/Opportunity/AddContactOpportunityModal";
 import {
   handleContactOpportunityModal,
   handleContactReactSpeechModal,
   getOpportunityListByContactId,
   handleDocumentUploadModal,
+  
 } from "../../../../Contact/ContactAction";
-import LinkedContactInvestNotes from "./ContactInvestNotes/LinkedContactInvestNotes";
 import LinkedContactInvestDocuments from "./ContactInvestDocument/LinkedContactInvestDocuments";
+import ContactInvestorActivityModal from "../Activity/ContactInvestorActivityModal";
 
 const LinkedDealTable =lazy(()=>import("./ContactInvestDeal/LinkedDealTable"));
  
@@ -42,6 +39,8 @@ class ContactInvestDetailTab extends Component {
       contactInVestDetail: { contactId, firstName, middleName, lastName },
       handleDocumentUploadModal,
       documentUploadModal,
+      handleContactInvestActivityModal,
+      contactInvestorActivityModal,
       handleContactOpportunityModal,
       addContactOpportunityModal,
       handleContactReactSpeechModal,
@@ -135,7 +134,7 @@ class ContactInvestDetailTab extends Component {
                     />
                     {/* Documents */}
                   </span>
-                  {activeKey === "3" && (
+                  {activeKey === "2" && (
                     <>
                       <PlusOutlined
                         type="plus"
@@ -157,20 +156,71 @@ class ContactInvestDetailTab extends Component {
                   )}
                 </>
               }
-              key="3"
+              key="2"
             >
               <Suspense fallback={"Loading ..."}>
                 {" "}
                 <LinkedContactInvestDocuments contactInVestDetail={this.props.contactInVestDetail}/>
               </Suspense>
             </TabPane>
+            <TabPane
+              tab={
+                <>
+                  <AddchartIcon style={{fontSize:"1.1rem"}}/>
+                  <span class=" ml-1">
+                    {
+                      <FormattedMessage
+                        id="app.activity"
+                        defaultMessage="Activity"
+                      />
+                    }
+                    {/* Documents */}
+                  </span>
+                  {activeKey === "3" && (
+                    <>
+                      <PlusOutlined
+                        type="plus"
+                        title={
+                          <FormattedMessage
+                            id="app.create"
+                            defaultMessage="Create"
+                          />
+                        }
+                         onClick={() => handleContactInvestActivityModal(true)}
+                        size="0.875em"
+                        style={{
+                          marginLeft: "0.3125em",
+                          verticalAlign: "center",
+                        }}
+                      />
+                    </>
+                  )}
+                
+                </>
+              }
+              key="3"
+            >
+              <Suspense fallback={"Loading ..."}>
+                {" "}
+                {/* <CustomerActivityTable
+
+                 customer={this.props.customer}
+                /> */}
+              </Suspense>
+            </TabPane>
           </StyledTabs>
         </TabsWrapper>
         <Suspense fallback={"Loading..."}>
            <AddDocumentModal
+           contactInVestDetail={this.props.contactInVestDetail}
             documentUploadModal={documentUploadModal}
             handleDocumentUploadModal={handleDocumentUploadModal}
           />
+               <ContactInvestorActivityModal
+             contactInVestDetail={this.props.contactInVestDetail}
+             contactInvestorActivityModal={contactInvestorActivityModal}
+       handleContactInvestActivityModal={handleContactInvestActivityModal}
+        />
         {/*  <AddContactOpportunityModal
             addContactOpportunityModal={addContactOpportunityModal}
             handleContactOpportunityModal={handleContactOpportunityModal}
@@ -194,9 +244,10 @@ class ContactInvestDetailTab extends Component {
     );
   }
 }
-const mapStateToProps = ({ contact }) => ({
+const mapStateToProps = ({ contact,contactinvest }) => ({
   //   addContactSpeechModal:contact.addContactSpeechModal,
     documentUploadModal: contact.documentUploadModal,
+    contactInvestorActivityModal:contactinvest.contactInvestorActivityModal,
   //   addContactOpportunityModal: contact.addContactOpportunityModal,
 });
 const mapDispatchToProps = (dispatch) =>
@@ -204,6 +255,7 @@ const mapDispatchToProps = (dispatch) =>
     {
       handleDocumentUploadModal,
       handleContactOpportunityModal,
+      handleContactInvestActivityModal,
       getOpportunityListByContactId,
       handleContactReactSpeechModal,
     },

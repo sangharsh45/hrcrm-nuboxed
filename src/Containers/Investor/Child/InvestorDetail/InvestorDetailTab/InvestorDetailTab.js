@@ -2,12 +2,9 @@ import React, { Component, lazy, Suspense } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Tooltip } from "antd";
-import ReceiptIcon from '@mui/icons-material/Receipt';
-import TransferWithinAStationIcon from '@mui/icons-material/TransferWithinAStation';
+import AddchartIcon from '@mui/icons-material/Addchart'; 
 import { FormattedMessage } from "react-intl";
-import LightbulbIcon from '@mui/icons-material/Lightbulb';
 import { PlusOutlined } from "@ant-design/icons";
-import NoteAltIcon from "@mui/icons-material/NoteAlt";
 import { StyledTabs } from "../../../../../Components/UI/Antd";
 import { TabsWrapper } from "../../../../../Components/UI/Layout";
 import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
@@ -15,17 +12,6 @@ import InsertDriveFileIcon from '@mui/icons-material/InsertDriveFile';
 import MicIcon from '@mui/icons-material/Mic';
 import PieChartIcon from '@mui/icons-material/PieChart';
 import ContactsIcon from '@mui/icons-material/Contacts';
-// import {
-//   getOpportunityListByCustomerId,
-//   handleCustomerOpportunityModal,
-//   handleCustomerProjectDrawer,
-//   //handleCustomerCommercialsModal,
-//   handleRecruitModal,
-//   handlefileRecruitModal,
-//   handleTagProfileModal,
-//   handleInvoiceModal,
-//   handleCustomerReactSpeechModal,
-// } from "../../../../Customer/CustomerAction";
 import {getContactListByInvestorId,handleInvestorContactModal,
   handleInvestorDocumentUploadModal,
   handleActivityModal
@@ -33,8 +19,6 @@ import {getContactListByInvestorId,handleInvestorContactModal,
 import InvestorActivityModal from "../InvestorActivity/InvestorActivityModal";
 const InvestorLinkedContact =lazy(()=>import("./InvestorContact/InvestorLinkedContact"));
 const InvestorLinkedDocuments =lazy(()=>import("./InvestorDoc/InvestorLinkedDocuments"));
-const InvestorLinkedNotes=lazy(()=>import ("./InvestorNote/InvestorLinkedNotes"));
-const InvestorLinkedInvoice=lazy(()=>import("./InvestorInvoice/InvestorLinkedInvoice"));
 const AddInvestorContactModal=lazy(()=>import("./InvestorContact/AddInvestorContactModal"));
 const InvestorDocumentModal=lazy(()=>import("./InvestorDoc/InvestorDocumentModal"));
 
@@ -277,7 +261,7 @@ getContactListByInvestorId(this.props.investorDetails.investorId);
             <TabPane
               tab={
                 <>
-                  <ReceiptIcon style={{fontSize:"1.1rem"}}/>
+                  <AddchartIcon style={{fontSize:"1.1rem"}}/>
                   <span class=" ml-1">
                     {
                       <FormattedMessage

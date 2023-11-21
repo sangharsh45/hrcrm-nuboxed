@@ -66,9 +66,10 @@ const EditableCell = ({
 };
 
 const AccountOrderTable = (props) => {
-
+    const [page, setPage] = useState(0);
     useEffect(() => {
-        props.getDistributorOrderByDistributorId(props.distributorId)
+        setPage(page + 1);
+        props.getDistributorOrderByDistributorId(props.distributorId,page)
     }, [])
     const [particularRowData, setParticularRowData] = useState({});
 

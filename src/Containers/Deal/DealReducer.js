@@ -8,6 +8,15 @@ const initialState = {
   fetchingDealError:false,
   dealsByuserId:[],
 
+  fetchingDocumentsByDealId: false,
+  fetchingDocumentsByDealIdError: false,
+  documentsByInnOppId: [],
+
+  addingDocumentByDealId: false,
+  addingDocumentByDealIdError: false,
+
+  documentUploadModal:false,
+
   updatingDealName: false,
   updatingDealNameError: false,
 
@@ -434,7 +443,50 @@ export const dealReducer = (state = initialState, action) => {
                         case types.UPDATE_DEAL_DRAG_STAGE_FAILURE:
                           return { ...state };  
 
-                            
+                          case types.HANDLE_DOCUMENT_UPLOAD_MODAL:
+      return { ...state, documentUploadModal: action.payload };
+
+      
+      
+      case types.ADD_DEAL_DOCUMENT_REQUEST:
+        return {
+          ...state,
+          addingDocumentByDealId: true,
+          addingDocumentByDealIdError: false,
+        };
+      case types.ADD_DEAL_DOCUMENT_SUCCESS:
+        return {
+          ...state,
+          addingDocumentByDealId: false,
+          addingDocumentByDealIdError: false,
+          documentUploadModal:false,
+        };
+      case types.ADD_DEAL_DOCUMENT_FAILURE:
+        return {
+          ...state,
+          addingDocumentByDealId: false,
+          addingDocumentByDealIdError: true,
+        };
+
+        case types.GET_DEAL_DOCUMENTS_REQUEST:
+          return {
+            ...state,
+            fetchingDocumentsByDealId: true,
+            fetchingDocumentsByDealIdError: false,
+          };
+        case types.GET_DEAL_DOCUMENTS_SUCCESS:
+          return {
+            ...state,
+            fetchingDocumentsByDealId: false,
+            fetchingDocumentsByDealIdError: false,
+            documentsByInnOppId: action.payload,
+          };
+        case types.GET_DEAL_DOCUMENTS_FAILURE:
+          return {
+            ...state,
+            fetchingDocumentsByDealId: false,
+            fetchingDocumentsByDealIdError: true,
+          };
     default:
       return state;
   }

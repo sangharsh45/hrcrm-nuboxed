@@ -6,21 +6,21 @@ import { Input, Button, Tooltip, Badge } from "antd";
 import ListAltIcon from '@mui/icons-material/ListAlt';
 import TocIcon from '@mui/icons-material/Toc';
 import GridViewIcon from '@mui/icons-material/GridView';
-import { inputDataSearch, getRecords,getAccountRecords, getAllRecords } from "./AccountAction";
+import { inputDataSearch, getRecords,getAccountRecords, getAllRecords,getDistributorCount } from "./AccountAction";
 import { DeleteOutlined, TableOutlined, BookOutlined, AppstoreOutlined } from "@ant-design/icons";
 import moment from "moment";
 const { Search } = Input;
 
 const AccountActionLeft = (props) => {
     const { user } = props;
-
     useEffect(() => {
         if (props.viewType === "list") {
-            props.getAccountRecords()
-        } else if (props.viewType === "all") {
-            // props.getAllRecords()
+            props.getAccountRecords();
+        } else if (props.viewType === "card") {
+            props.getDistributorCount(props.userId);
         }
-    }, [props.viewType, props.userId]);
+      }, [props.viewType, props.userId]);
+
 
     const { distributorsByUserId } = props;
     var total =
@@ -92,7 +92,7 @@ const AccountActionLeft = (props) => {
                 {/* )} */}
                 <Tooltip title="card Distributor">
                         <Badge size="small"
-                            count={props.recordAllData.distributor || 0}>
+                            count={props.allDistributorCount.distributor || 0}>
                             <span
                                 style={{
                                     marginRight: "0.5rem",
@@ -181,6 +181,7 @@ const AccountActionLeft = (props) => {
 
 const mapStateToProps = ({ auth, distributor }) => ({
     user: auth.userDetails,
+    allDistributorCount:distributor.allDistributorCount,
     accountRecordData:distributor.accountRecordData,
     recordData: distributor.recordData,
     recordAllData: distributor.recordAllData,
@@ -195,6 +196,7 @@ const mapDispatchToProps = (dispatch) =>
             getRecords,
             getAccountRecords,
             getAllRecords,
+            getDistributorCount,
         },
         dispatch
     );

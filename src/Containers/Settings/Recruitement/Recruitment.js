@@ -37,7 +37,16 @@ function Recruitment(props) {
       ruleId: "19",
       component: <ApprovalTab />,
     },
-
+    {
+      rulesName: "Distribution",
+      ruleId: "25",
+      // component: <DistributionTab />,
+    },
+    {
+      rulesName: "Form",
+      ruleId: "24",
+      component: <Form/>,
+    },
     
     {
       rulesName: "General",
@@ -85,11 +94,7 @@ function Recruitment(props) {
       ruleId: "1",
        component: <WorkFlow/>,
     },
-    {
-      rulesName: "Form",
-      ruleId: "24",
-      component: <Form/>,
-    },
+   
     // {
     //   rulesName: "Automation",
     //   ruleId: "2",

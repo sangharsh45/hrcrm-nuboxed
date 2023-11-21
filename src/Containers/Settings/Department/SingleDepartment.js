@@ -16,6 +16,7 @@ import CRMStatusToggle from "./CRMStatusToggle";
 import IMStatusToggle from "./IMStatusToggle";
 import AccountingStatusToggle from "./AccountingStatusToggle";
 import RecruitProStatusToggle from "./RecruitProStatusToggle";
+import HrStatusToggle from "./HrStatusToggle";
 const { Option } = Select;
 
 class SingleDepartment extends Component {
@@ -34,7 +35,7 @@ class SingleDepartment extends Component {
     this.setState({ sectorId: value });
   render() {
     const {
-       department: { departmentName,recruitOppsInd, departmentId,sectorId,mandetoryInd,sectorName,crmInd,erpInd,imInd ,accountInd},
+       department: { departmentName,recruitOppsInd,hrInd, departmentId,sectorId,mandetoryInd,sectorName,crmInd,erpInd,imInd ,accountInd},
       handleChange,
       name,
       value,
@@ -76,7 +77,7 @@ class SingleDepartment extends Component {
                     />  
                     </div>
                     <h1 class="ml-4">ERP</h1>
-                    <div    style={{width:"8%"}}>
+                    <div    style={{width:"6%"}}>
                     
                     <ERPStatusToggle
                       erpInd={erpInd}
@@ -85,7 +86,7 @@ class SingleDepartment extends Component {
                     />  
                     </div>
                     <h1>CRM</h1>
-                    <div    style={{width:"9%"}}>
+                    <div    style={{width:"6%"}}>
                     <CRMStatusToggle
                       crmInd={crmInd}
                       departmentName={departmentName}
@@ -93,7 +94,7 @@ class SingleDepartment extends Component {
                     />  
                     </div>
                     <h1>IM</h1>
-                    <div style={{width:"7%"}}>
+                    <div style={{width:"6%"}}>
                     <IMStatusToggle
                       imInd={imInd}
                       departmentName={departmentName}
@@ -102,7 +103,7 @@ class SingleDepartment extends Component {
                     </div>
                     <h1>Accounting</h1>
                     <div 
-                    style={{width:"9%"}}
+                    style={{width:"7%"}}
                     >
                     <AccountingStatusToggle
                       accountInd={accountInd}
@@ -113,10 +114,20 @@ class SingleDepartment extends Component {
 
                     <h1>RecruitPro</h1>
                     <div 
-                    style={{width:"9%"}}
+                    style={{width:"7%"}}
                     >
                     <RecruitProStatusToggle
                       recruitOppsInd={recruitOppsInd}
+                      departmentName={departmentName}
+                      departmentId={departmentId}
+                    />  
+                    </div>
+                    <h1>HR</h1>
+                    <div 
+                    style={{width:"7%"}}
+                    >
+                    <HrStatusToggle
+                      hrInd={hrInd}
                       departmentName={departmentName}
                       departmentId={departmentId}
                     />  

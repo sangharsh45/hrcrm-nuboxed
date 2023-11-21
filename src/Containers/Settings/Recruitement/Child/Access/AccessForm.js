@@ -15,6 +15,7 @@ const CheckboxGroup = Checkbox.Group;
 const plainOptions = ['Access', 'Create', 'Update', 'Delete','Full List'];
 const userOptions = ['Access', 'Create', 'Update', 'Delete','Access Plus'];
  const defaultCheckedList=['Full List'];
+ const melCheckedList=['Full List','Access'];
  const dashboardCheckedList=['Access','Full List','Recruit Dash'];
  const refurbishCheckedList=['Workshop','Adminview','Adminassign'];
  const settingsCheckedList=['Access'];
@@ -76,6 +77,7 @@ const AccessForm = (props) => {
     setCheckedPaymentsList(props.departmentAcces.payment)
     setCheckedCollectionList(props.departmentAcces.collection)
     setCheckedCatalogList(props.departmentAcces.catalog)
+    setCheckedHolidayList(props.departmentAcces.holiday)
     
   }, [props.departmentAcces.vendor,
   props.departmentAcces.customer,
@@ -120,6 +122,7 @@ const AccessForm = (props) => {
   props.departmentAcces.payment,
   props.departmentAcces.collection,
   props.departmentAcces.catalog,
+  props.departmentAcces.holiday,
  
   
   
@@ -429,12 +432,12 @@ const AccessForm = (props) => {
                      
                        const onMileageChange = (list) => {
                          setCheckedMileageList(list);
-                         setIndeterminateMileage(!!list.length && list.length < defaultCheckedList.length);
-                         setCheckAllMileage(list.length === defaultCheckedList.length);
+                         setIndeterminateMileage(!!list.length && list.length < melCheckedList.length);
+                         setCheckAllMileage(list.length === melCheckedList.length);
                        };
                      
                        const onCheckAllMileageChange = (e) => {
-                         setCheckedMileageList(e.target.checked ? defaultCheckedList : []);
+                         setCheckedMileageList(e.target.checked ? melCheckedList : []);
                          setIndeterminateMileage(false);
                          setCheckAllMileage(e.target.checked);
                        };
@@ -447,12 +450,12 @@ const AccessForm = (props) => {
                          
                            const onExpenseChange = (list) => {
                              setCheckedExpenseList(list);
-                             setIndeterminateExpense(!!list.length && list.length < defaultCheckedList.length);
-                             setCheckAllExpense(list.length === defaultCheckedList.length);
+                             setIndeterminateExpense(!!list.length && list.length < melCheckedList.length);
+                             setCheckAllExpense(list.length === melCheckedList.length);
                            };
                          
                            const onCheckAllExpenseChange = (e) => {
-                             setCheckedExpenseList(e.target.checked ? defaultCheckedList : []);
+                             setCheckedExpenseList(e.target.checked ? melCheckedList : []);
                              setIndeterminateExpense(false);
                              setCheckAllExpense(e.target.checked);
                            };
@@ -465,12 +468,12 @@ const AccessForm = (props) => {
                               
                                 const onLeavesChange = (list) => {
                                   setCheckedLeavesList(list);
-                                  setIndeterminateLeaves(!!list.length && list.length < defaultCheckedList.length);
-                                  setCheckAllLeaves(list.length === defaultCheckedList.length);
+                                  setIndeterminateLeaves(!!list.length && list.length < melCheckedList.length);
+                                  setCheckAllLeaves(list.length === melCheckedList.length);
                                 };
                               
                                 const onCheckAllLeavesChange = (e) => {
-                                  setCheckedLeavesList(e.target.checked ? defaultCheckedList : []);
+                                  setCheckedLeavesList(e.target.checked ? melCheckedList : []);
                                   setIndeterminateLeaves(false);
                                   setCheckAllLeaves(e.target.checked);
                                 };
@@ -659,6 +662,23 @@ const AccessForm = (props) => {
                                   setIndeterminateBasic(false);
                                   setCheckAllBasic(e.target.checked);
                                 };
+                                   // Holiday
+
+                                   const [checkedHolidayList, setCheckedHolidayList] = useState(props.departmentAcces.holiday              );
+                                   const [indeterminateHoliday, setIndeterminateHoliday] = useState(true);
+                                   const [checkAllHoliday, setCheckAllHoliday] = useState(false);
+                                 
+                                   const onHolidayChange = (list) => {
+                                     setCheckedHolidayList(list);
+                                     setIndeterminateHoliday(!!list.length && list.length < basicCheckedList.length);
+                                     setCheckAllHoliday(list.length === basicCheckedList.length);
+                                   };
+                                 
+                                   const onCheckAllHolidayChange = (e) => {
+                                     setCheckedHolidayList(e.target.checked ? basicCheckedList : []);
+                                     setIndeterminateHoliday(false);
+                                     setCheckAllHoliday(e.target.checked);
+                                   };
                                 // Tasks
 
                                 const [checkedTasksList, setCheckedTasksList] = useState(props.departmentAcces.task);
@@ -942,6 +962,7 @@ const onCheckAllTeamsChange = (e) => {
       payment:checkedPaymentsList || [],
       collection:checkedCollectionList || [],
       catalog:checkedCatalogList || [],
+      holiday:checkedHolidayList || [],
       
       
       departmentId: props.departmentId,
@@ -963,7 +984,8 @@ const onCheckAllTeamsChange = (e) => {
           ) : (
             <TabsWrapper style={{height:"95rem"}}>
  
-
+ {props.departmentData.hrInd === true ? 
+ <div>
 <h1 class=" text-clr font-bold">General, HR & Self Service</h1>
 <Spacer />
               <FlexContainer justifyContent="space-around">
@@ -1037,8 +1059,17 @@ const onCheckAllTeamsChange = (e) => {
               <CheckboxGroup options={dashboardCheckedList} value={checkedDashboardList} onChange={onDashboardChange} />
 
             </div>
+            <Spacer />
+            <div >
+                <h1 class="text-sm">Holiday</h1>
+                <Checkbox indeterminate={indeterminateHoliday} onChange={onCheckAllHolidayChange} checked={checkAllHoliday}>
+                <label class="text-xs">  Check all</label>
+                </Checkbox>
+                <Divider />
+                <CheckboxGroup options={basicCheckedList} value={checkedHolidayList} onChange={onHolidayChange} />
 
-        
+              </div>
+              <Spacer />
         
                 <div >
                 <h1 class="text-sm">Repository</h1>
@@ -1074,7 +1105,7 @@ const onCheckAllTeamsChange = (e) => {
                 <label class="text-xs">  Check all</label>
                 </Checkbox>
                 <Divider />
-                <CheckboxGroup options={defaultCheckedList} value={checkedMileageList} onChange={onMileageChange} />
+                <CheckboxGroup options={melCheckedList} value={checkedMileageList} onChange={onMileageChange} />
 
               </div>
               <Spacer />
@@ -1084,7 +1115,7 @@ const onCheckAllTeamsChange = (e) => {
                 <label class="text-xs">  Check all</label>
                 </Checkbox>
                 <Divider />
-                <CheckboxGroup options={defaultCheckedList} value={checkedExpenseList} onChange={onExpenseChange} />
+                <CheckboxGroup options={melCheckedList} value={checkedExpenseList} onChange={onExpenseChange} />
 
               </div>
               <Spacer />
@@ -1094,7 +1125,7 @@ const onCheckAllTeamsChange = (e) => {
                 <label class="text-xs">Check all</label>
                 </Checkbox>
                 <Divider />
-                <CheckboxGroup options={defaultCheckedList} value={checkedLeavesList} onChange={onLeavesChange} />
+                <CheckboxGroup options={melCheckedList} value={checkedLeavesList} onChange={onLeavesChange} />
 
               </div>
               <Spacer />
@@ -1110,7 +1141,8 @@ const onCheckAllTeamsChange = (e) => {
               <Spacer />
             </FlexContainer>
             <Spacer />
-              
+            </div>
+            :null}
      
     {props.departmentData.crmInd === true ? 
     <div>     

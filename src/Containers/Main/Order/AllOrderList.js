@@ -308,22 +308,33 @@
 import React, { Component, useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { StyledTable } from "../../../Components/UI/Antd";
 import { Tooltip, Input, Popconfirm, Space, Button, Badge } from "antd";
 import { EditOutlined, SearchOutlined } from "@ant-design/icons";
 import Highlighter from "react-highlight-words";
 import moment from "moment";
-import { Spacer } from "../../../Components/UI/Elements";
+import AddNotesOrderDrawer from "./AddNotesOrderDrawer";
+import StatusOfOrderDrawer from "./StatusOfOrderDrawer";
+import PaidButtonDrawer from "./PaidButtonDrawer";
+import InfiniteScroll from "react-infinite-scroll-component";
 import {
     getAllOrderList,
+    handleNotesModalInOrder,
+    handleStatusOfOrder,
+    handlePaidModal
 } from "./OrderAction";
+import PaidIcon from '@mui/icons-material/Paid';
+import NoteAltIcon from "@mui/icons-material/NoteAlt";
+import EventRepeatIcon from '@mui/icons-material/EventRepeat';
 // import OrderDetailsTable from "../../Customer/Child/CustomerDetail/CustomerDetailsTab/OrderDetailsTable";
 import { CurrencySymbol } from "../../../Components/Common";
 import { OnlyWrapCard } from "../../../Components/UI/Layout";
 
 function AllOrderList(props) {
+  const [page, setPage] = useState(0);
+  const [hasMore, setHasMore] = useState(true);
     useEffect(() => {
-        props.getAllOrderList();
+        props.getAllOrderList(page);
+        setPage(page + 1);
     }, []);
 
     const [show, setshow] = useState(false);
@@ -336,6 +347,13 @@ function AllOrderList(props) {
         setshow(true);
         setorderId(orderId);
     }
+    const handleLoadMore = () => {
+      setPage(page + 1);
+      props.getAllOrderList(props.currentUser?props.currentUser:page,
+
+  
+        );
+  }
 
     function handleSetParticularOrderData(item, data) {
         console.log(item);
@@ -440,15 +458,22 @@ function AllOrderList(props) {
         <>
           <OnlyWrapCard style={{backgroundColor:"#E3E8EE"}}>
           <div className=" flex justify-between w-full p-2 bg-transparent font-bold sticky top-0 z-10">
-            <div className=" md:w-[12rem]">Order Id</div>
-            <div className=" md:w-28">Client</div>
+            <div className=" md:w-[12rem]">Order ID</div>
+            <div className=" md:w-28">Customer</div>
             <div className=" md:w-28 ">Contact</div>
             <div className="md:w-32">#Phone</div>
-            <div className="md:w-60">Creation Date</div> 
-            <div className="md:w-24">Status</div>
+            <div className="md:w-[16rem]">Creation Date</div> 
+            <div className="md:w-24"></div>
            
     
           </div>
+          <InfiniteScroll
+        dataLength={props.allOrderList.length}
+        next={handleLoadMore}
+        hasMore={hasMore}
+        loader={props.fetchingAllOrderList?<h4 style={{ textAlign: 'center' }}>Loading...</h4>:null}
+        height={"75vh"}
+      >
             {props.allOrderList.map((item) => {
               const currentdate = moment().format("DD/MM/YYYY");
               const date = moment(item.creationDate).format("DD/MM/YYYY");
@@ -555,6 +580,61 @@ function AllOrderList(props) {
                       <div class="rounded-full bg-white  h-5 cursor-pointer w-8 justify-cente">
                        {item.orderStatus}
                       </div>
+                      <div className=" flex font-medium flex-col w-[2rem] md:w-[1rem] max-sm:flex-row w-full max-sm:justify-between  ">
+
+{/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden"> Sector </h4> */}
+<h4 class=" text-xs text-cardBody font-poppins">
+    <Tooltip title="Notes">
+        <NoteAltIcon
+            style={{ cursor: "pointer", color: "green", fontSize: "1rem" }}
+            onClick={() => {
+
+                props.handleNotesModalInOrder(true);
+                handleSetParticularOrderData(item);
+            }}
+        />
+
+    </Tooltip>
+</h4>
+
+
+</div>
+
+
+<div className=" flex font-medium flex-col w-[2rem] md:w-[1rem] max-sm:flex-row w-full max-sm:justify-between  ">
+<h4 class=" text-xs text-cardBody font-poppins">
+    <Tooltip title="Status">
+        <EventRepeatIcon
+            style={{ cursor: "pointer", fontSize: "1rem", }}
+            onClick={() => {
+                props.handleStatusOfOrder(true);
+                handleSetParticularOrderData(item);
+            }}
+        />
+    </Tooltip>
+</h4>
+{/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden"> Sector </h4> */}
+
+
+</div>
+<div className=" flex font-medium flex-col w-[2rem] md:w-[1rem] max-sm:flex-row w-full max-sm:justify-between  ">
+<h4 class=" text-xs text-cardBody font-poppins">
+    <Tooltip title="Collection">
+        <PaidIcon
+            style={{ cursor: "pointer", fontSize: "1rem", }}
+            onClick={() => {
+                props.handlePaidModal(true);
+                handleSetParticularOrderData(item);
+            }}
+        // style={{ color: "blue" }}
+        />
+    </Tooltip>
+
+</h4>
+{/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden"> Sector </h4> */}
+
+
+</div>
     
                     
                     </div>
@@ -564,8 +644,23 @@ function AllOrderList(props) {
                 // </div>
               );
             })}
+             </InfiniteScroll>
           </OnlyWrapCard>
-         
+          <AddNotesOrderDrawer
+                particularRowData={particularRowData}
+                addNotesInOrder={props.addNotesInOrder}
+                handleNotesModalInOrder={props.handleNotesModalInOrder}
+            />
+              <StatusOfOrderDrawer
+                handleStatusOfOrder={props.handleStatusOfOrder}
+                addStatusOfOrder={props.addStatusOfOrder}
+                particularRowData={particularRowData}
+            />
+               <PaidButtonDrawer
+                addPaidButtonModal={props.addPaidButtonModal}
+                handlePaidModal={props.handlePaidModal}
+                particularRowData={particularRowData}
+            />
         </>
       );
     
@@ -573,6 +668,9 @@ function AllOrderList(props) {
 
 const mapStateToProps = ({ order, auth }) => ({
     allOrderList: order.allOrderList,
+    addPaidButtonModal:order.addPaidButtonModal,
+    addStatusOfOrder:order.addStatusOfOrder,
+    addNotesInOrder:order.addNotesInOrder,
     fetchingAllOrderList: order.fetchingAllOrderList,
     userId: auth.userDetails.userId,
 });
@@ -581,6 +679,9 @@ const mapDispatchToProps = (dispatch) =>
     bindActionCreators(
         {
             getAllOrderList,
+            handleNotesModalInOrder,
+            handleStatusOfOrder,
+            handlePaidModal
         },
         dispatch
     );
