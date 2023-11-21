@@ -106,7 +106,7 @@ function DealWonCard(props) {
         next={handleLoadMore}
         hasMore={hasMore}
         loader={fetchingWonDeals ?<h4 style={{ textAlign: 'center' }}>Loading...</h4>:null}
-        height={"70vh"}
+        height={"75vh"}
       >
          {wonDeals.map((item) => {
                  

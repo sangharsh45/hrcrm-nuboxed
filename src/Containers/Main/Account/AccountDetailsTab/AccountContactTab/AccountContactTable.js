@@ -50,7 +50,7 @@ class AccountContactTable extends Component {
         next={handleLoadMore}
         hasMore={hasMore}
         loader={fetchingCustomers?<h4 style={{ textAlign: 'center' }}>Loading...</h4>:null}
-        height={"70vh"}
+        height={"75vh"}
       > */}
       
       {this.props.contactDistributor.map((item) => { 

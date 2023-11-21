@@ -145,7 +145,7 @@ function ContactAllCardList(props) {
         next={handleLoadMore}
         hasMore={hasMore}
         loader={fetchingContacts?<h4 style={{ textAlign: 'center' }}>Loading...</h4>:null}
-        height={"70vh"}
+        height={"75vh"}
       >
         
       {/* {filterData.map((item) => { 

@@ -166,13 +166,13 @@ class UpdateInvestorContactForm extends Component {
           }) => (
               <Form className="form-background">
                 <div  class=" flex justify-between">
-                  <div class=" h-full w-2/4"
+                  <div class=" h-full w-w47.5"
                   ><Spacer />
-                    <div  class=" flex flex-nowrap">
+                    <div  class=" flex flex-nowrap justify-between">
                       <FastField name="imageId" component={Upload} />
                       <div>
                       <div class=" flex justify-between">
-                          <div class =" w-2/6">
+                          <div class =" w-2/5">
                             <FastField
                               name="salutation"
                               type="text"
@@ -190,7 +190,7 @@ class UpdateInvestorContactForm extends Component {
                               isColumn
                             />
                           </div>
-                          <div class=" w-3/5">
+                          <div class=" w-2/4">
                             <FastField
                               isRequired
                               name="firstName"
@@ -228,7 +228,7 @@ class UpdateInvestorContactForm extends Component {
                               inlineLabel
                               />
                           </div>
-                          <div class=" w-7/12">
+                          <div class=" w-2/4">
                             <FastField
                               name="lastName"
                               //label="Last Name"
@@ -436,7 +436,7 @@ class UpdateInvestorContactForm extends Component {
                     <div class=" flex justify-between"></div>
                   </div>
                 &nbsp;
-                <div class=" h-2/3 w-2/5"
+                <div class=" h-2/3 w-w47.5"
                   >                  
                     <Spacer/>
                     <FieldArray

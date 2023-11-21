@@ -150,7 +150,7 @@ return(
         <div className="md:w-[7.9rem]">City</div>
         <div className="md:w-[5.2rem]">PinCode</div>
         <div className="md:w-[5.2rem]">Owner</div>
-        <div className="w-[3.8rem]">Action</div>
+        {/* <div className="w-[3.8rem]">Action</div> */}
         </div>
 {props.allShipper.map((item) => {
   return (

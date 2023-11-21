@@ -78,7 +78,7 @@ function OpportunityCloseCard(props) {
         next={handleLoadMore}
         hasMore={hasMore}
         loader={fetchingCloseOpportunity?<h4 style={{ textAlign: 'center' }}>Loading...</h4> :null}
-        height={"70vh"}
+        height={"75vh"}
       >
  <CardWrapper>      
               {closeOpportunity.map((item) => {

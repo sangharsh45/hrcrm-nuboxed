@@ -45,7 +45,7 @@ function TaskNameDrawerTable (props) {
         next={handleLoadMore}
         hasMore={hasMore}
         loader={props.fetchingTaskNamedrwr?<h4 style={{ textAlign: 'center' }}>Loading...</h4>:null}
-        height={"70vh"}
+        height={"75vh"}
       >
       {props.taskInameDrwr.map((item) => { 
         const currentDate = moment();

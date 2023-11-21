@@ -55,7 +55,7 @@ function OpportunityDeletedCard(props) {
         next={handleLoadMore}
         hasMore={hasMore}
         loader={fetchingDeletedOpportunity?<h4 style={{ textAlign: 'center' }}>Loading...</h4>:null}
-        height={"70vh"}
+        height={"75vh"}
       >
  <CardWrapper>      
               {deletedOpportunity.map((item) => {

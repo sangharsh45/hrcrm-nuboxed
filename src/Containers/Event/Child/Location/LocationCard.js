@@ -38,7 +38,7 @@ const handleLoadMore = () => {
         next={handleLoadMore}
         hasMore={hasMore}
         loader={props.fetchingLocationData?<h4 style={{ textAlign: 'center' }}>Loading...</h4>:null}
-        height={"70vh"}
+        height={"75vh"}
       >
       <div className=" flex justify-between w-[99%] p-2 bg-transparent font-bold sticky top-0 z-10">
         <div className=" md:w-[12rem]">Name</div>
