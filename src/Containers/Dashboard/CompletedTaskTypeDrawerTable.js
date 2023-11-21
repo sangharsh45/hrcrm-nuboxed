@@ -44,7 +44,7 @@ function CompletedTaskTypeDrawerTable (props) {
         next={handleLoadMore}
         hasMore={hasMore}
         loader={props.fetchingCompletedTaskTypes?<h4 style={{ textAlign: 'center' }}>Loading...</h4>:null}
-        height={"70vh"}
+        height={"75vh"}
       >
       {/* {props.completedtypeTasks.map((item) => { 
         const currentDate = moment();

@@ -18,6 +18,8 @@ const initialState = {
   fetchingInvestorsfilterdata: false,
   fetchingInvestorsfilterdataError: false,
 
+  investorActivityModal:false,
+
   addingInvestor: false,
   addInvestorModal: false,
   updateInvestorModal: false,
@@ -386,6 +388,9 @@ export const investorReducer = (state = initialState, action) => {
                                     fetchingallEmployeeList: false,
                                     fetchingallEmployeeListError: true,
                                   };
+
+                                  case types.HANDLE_ACTIVITY_MODAL:
+        return { ...state, investorActivityModal: action.payload };
                                     
 default:
       return state;

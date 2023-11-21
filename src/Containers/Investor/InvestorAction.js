@@ -497,4 +497,11 @@ export const getInvestorDetailsById = (investorId) => (dispatch) => {
         });
       });
   };
+
+  export const handleActivityModal = (modalProps) => (dispatch) => {
+    dispatch({
+      type: types.HANDLE_ACTIVITY_MODAL,
+      payload: modalProps,
+    });
+  };
   

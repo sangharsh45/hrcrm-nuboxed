@@ -27,8 +27,10 @@ import ContactsIcon from '@mui/icons-material/Contacts';
 //   handleCustomerReactSpeechModal,
 // } from "../../../../Customer/CustomerAction";
 import {getContactListByInvestorId,handleInvestorContactModal,
-  handleInvestorDocumentUploadModal
+  handleInvestorDocumentUploadModal,
+  handleActivityModal
 } from "../../../InvestorAction";
+import InvestorActivityModal from "../InvestorActivity/InvestorActivityModal";
 const InvestorLinkedContact =lazy(()=>import("./InvestorContact/InvestorLinkedContact"));
 const InvestorLinkedDocuments =lazy(()=>import("./InvestorDoc/InvestorLinkedDocuments"));
 const InvestorLinkedNotes=lazy(()=>import ("./InvestorNote/InvestorLinkedNotes"));
@@ -93,7 +95,9 @@ getContactListByInvestorId(this.props.investorDetails.investorId);
     const {
       investorDetails: { investorId, name },
       handleInvestorDocumentUploadModal,
+      handleActivityModal,
       opendocumentUploadModal,
+      investorActivityModal,
       handleCustomerReactSpeechModal,
       addCustomerSpeechModal,
       handleInvestorContactModal,
@@ -293,7 +297,7 @@ getContactListByInvestorId(this.props.investorDetails.investorId);
                             defaultMessage="Create"
                           />
                         }
-                        // onClick={() => handleCallActivityModal(true)}
+                         onClick={() => handleActivityModal(true)}
                         size="0.875em"
                         style={{
                           marginLeft: "0.3125em",
@@ -403,6 +407,16 @@ getContactListByInvestorId(this.props.investorDetails.investorId);
             opendocumentUploadModal={opendocumentUploadModal}
             handleInvestorDocumentUploadModal={handleInvestorDocumentUploadModal}
           />
+             <InvestorActivityModal
+            
+              customerId={this.props. customerId }
+              customer={this.props.customer}
+               defaultInvestor={[{ label: name, value: investorId }]}
+               investorId={{ value: investorId }}
+         investorDetails={this.props.investorDetails}
+         investorActivityModal={investorActivityModal}
+            handleActivityModal={handleActivityModal}
+          />
 
           {/* <AddRecruitModal
             addRecruitModal={this.props.addRecruitModal}
@@ -441,18 +455,14 @@ const mapStateToProps = ({ auth, investor, contact, opportunity }) => ({
   opendocumentUploadModal: investor.opendocumentUploadModal,
   user: auth.userDetails,
   userId: auth.userDetails.userId,
-  // addCustomerSpeechModal: customer.addCustomerSpeechModal,
-  // customer: customer.customer,
-  // addRecruitModal: customer.addRecruitModal,
-  // addFileRecruitModal: customer.addFileRecruitModal,
-  // addTagProfileModal: customer.addTagProfileModal,
-  // addInvoiceModal: customer.addInvoiceModal,
+  investorActivityModal:investor.investorActivityModal,
 contactsbyInvestorId:investor.contactsbyInvestorId,
 });
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
       handleInvestorDocumentUploadModal,
+      handleActivityModal,
       handleInvestorContactModal,
       // handleCustomerOpportunityModal,
 getContactListByInvestorId,
