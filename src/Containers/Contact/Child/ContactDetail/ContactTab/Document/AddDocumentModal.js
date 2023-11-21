@@ -114,7 +114,7 @@ class AddDocumentModal extends Component {
               // enableReinitialize
               initialValues={{
                 documentTypeId: "",
-                contactId: this.props.contactInVestDetail.contactId,
+                // contactId: this.props.contactInVestDetail.contactId,
                 documentTitle: "", //input
                 documentDescription: "",
                 // levelType:

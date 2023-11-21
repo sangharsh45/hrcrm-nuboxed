@@ -19,6 +19,7 @@ import {
 } from "../../../../Contact/ContactAction";
 import LinkedContactInvestDocuments from "./ContactInvestDocument/LinkedContactInvestDocuments";
 import ContactInvestorActivityModal from "../Activity/ContactInvestorActivityModal";
+import ContactInvestTimeLine from "../Activity/ContactInvestTimeLine";
 
 const LinkedDealTable =lazy(()=>import("./ContactInvestDeal/LinkedDealTable"));
  
@@ -202,10 +203,10 @@ class ContactInvestDetailTab extends Component {
             >
               <Suspense fallback={"Loading ..."}>
                 {" "}
-                {/* <CustomerActivityTable
+                <ContactInvestTimeLine
 
-                 customer={this.props.customer}
-                /> */}
+contactInVestDetail={this.props.contactInVestDetail}
+                />
               </Suspense>
             </TabPane>
           </StyledTabs>

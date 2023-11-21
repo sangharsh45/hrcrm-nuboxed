@@ -35,6 +35,10 @@ const initialState = {
   fetchingInvestorDetailsByIdError: false,
   investorDetails: {},
 
+  fetchingInvestStatus: false,
+  fetchingInvestStatusError: false,
+  InvestorStatus:[],
+
   fetchingallEmployeeList: false,
   fetchingallEmployeeListError: false,
   allEmployeeList:[],
@@ -411,7 +415,20 @@ export const investorReducer = (state = initialState, action) => {
 
                                   case types.HANDLE_ACTIVITY_MODAL:
         return { ...state, investorActivityModal: action.payload };
-                                    
+        case types.GET_INVEST_TIMELINE_REQUEST:
+          return { ...state, fetchingInvestStatus: true };
+      case types.GET_INVEST_TIMELINE_SUCCESS:
+          return {
+              ...state,
+              fetchingInvestStatus: false,
+              InvestorStatus: action.payload,
+          };
+      case types.GET_INVEST_TIMELINE_FAILURE:
+          return {
+              ...state,
+              fetchingInvestStatus: false,
+              fetchingInvestStatusError: true,
+          };                                 
 default:
       return state;
   }
