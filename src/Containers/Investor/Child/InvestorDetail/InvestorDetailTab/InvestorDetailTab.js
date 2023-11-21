@@ -17,6 +17,7 @@ import {getContactListByInvestorId,handleInvestorContactModal,
   handleActivityModal
 } from "../../../InvestorAction";
 import InvestorActivityModal from "../InvestorActivity/InvestorActivityModal";
+import InvestorTimeLine from "../InvestorActivity/InvestorTimeLine";
 const InvestorLinkedContact =lazy(()=>import("./InvestorContact/InvestorLinkedContact"));
 const InvestorLinkedDocuments =lazy(()=>import("./InvestorDoc/InvestorLinkedDocuments"));
 const AddInvestorContactModal=lazy(()=>import("./InvestorContact/AddInvestorContactModal"));
@@ -297,10 +298,10 @@ getContactListByInvestorId(this.props.investorDetails.investorId);
             >
               <Suspense fallback={"Loading ..."}>
                 {" "}
-                {/* <CustomerActivityTable
+                <InvestorTimeLine
 
-                 customer={this.props.customer}
-                /> */}
+investorDetails={this.props.investorDetails}
+                />
               </Suspense>
             </TabPane>
             {/* <TabPane

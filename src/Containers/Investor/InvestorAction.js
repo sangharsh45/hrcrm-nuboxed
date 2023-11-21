@@ -530,4 +530,31 @@ export const getInvestorDetailsById = (investorId) => (dispatch) => {
         });
       });
   };
+
+  export const getInvestorTimeline = (contactId) => (dispatch) => {
+    dispatch({
+        type: types.GET_INVEST_TIMELINE_REQUEST,
+    });
+  
+    axios
+        .get(`${base_url}/contact/activity/list/${contactId}`, {
+            headers: {
+                Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+            },
+        })
+        .then((res) => {
+            console.log(res);
+            dispatch({
+                type: types.GET_INVEST_TIMELINE_SUCCESS,
+                payload: res.data,
+            });
+        })
+        .catch((err) => {
+            console.log(err);
+            dispatch({
+                type: types.GET_INVEST_TIMELINE_FAILURE,
+                payload: err,
+            });
+        });
+  };
   
