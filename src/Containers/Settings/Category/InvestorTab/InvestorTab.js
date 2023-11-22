@@ -43,7 +43,7 @@ class InvestorTab extends Component {
                   key="0"
                 >
                   <Suspense>
-                    {/* <InvestorList /> */}
+                    <InvestorList />
                   </Suspense>
                 </TabPane>
                

@@ -10,7 +10,7 @@ import { TextInput } from "../../../../Components/UI/Elements";
 
 import ViewEditCard from "../../../../Components/UI/Elements/ViewEditCard";
 
-class SingleCustomer extends Component {
+class SingleInvestorList extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -21,14 +21,14 @@ class SingleCustomer extends Component {
   }
   render() {
     const {
-      customer: { name, customerTypeId, EditInd },
+      investor: { name, investorCategoryId, EditInd },
       handleChange,
       name1,
       value,
       linkedSectors,
-      updatingCustomer,
-      handleupdateCustomer,
-      handleDeleteCustomer,
+      updatingInvestor,
+      handleupdateInvestor,
+      handleDeleteInvestor,
     } = this.props;
     console.log(linkedSectors);
     console.log("name", name);
@@ -55,7 +55,7 @@ class SingleCustomer extends Component {
                   &nbsp;
                   <Tooltip title="Delete">
                     <DeleteIcon
-                        onClick={() => handleDeleteCustomer(customerTypeId)}
+                        onClick={() => handleDeleteInvestor(investorCategoryId)}
                       size="14px"
                       style={{
                         verticalAlign: "center",
@@ -89,11 +89,11 @@ class SingleCustomer extends Component {
                   <Button
                     type="primary"
                     htmlType="submit"
-                    loading={updatingCustomer}
+                    loading={updatingInvestor}
                     // disabled={!value}
                     onClick={() => {
                       console.log(value); 
-                      handleupdateCustomer(customerTypeId, value, toggleViewType());
+                      handleupdateInvestor(investorCategoryId, value, toggleViewType());
                     }}>
 
                   
@@ -115,7 +115,7 @@ class SingleCustomer extends Component {
   }
 }
 
-export default SingleCustomer;
+export default SingleInvestorList;
 
 const SectorWrapper = styled.div`
   width: 100%;

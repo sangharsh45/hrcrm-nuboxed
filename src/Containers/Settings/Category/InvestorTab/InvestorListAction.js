@@ -7,12 +7,12 @@ import { message } from "antd"
 /**
  * get all the Sector
  */
- export const getCustomer = (orgId) => (dispatch) => {
+ export const getInvestorList = (orgId) => (dispatch) => {
     dispatch({
-      type: types.GET_CUSTOMER_REQUEST,
+      type: types.GET_INVESTOR_LIST_REQUEST,
     });
     axios
-    .get(`${base_url}/customerType/${orgId}`, {
+    .get(`${base_url}/investorCategory/All/${orgId}`, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },
@@ -21,14 +21,14 @@ import { message } from "antd"
       .then((res) => {
         console.log(res);
         dispatch({
-          type: types.GET_CUSTOMER_SUCCESS,
+          type: types.GET_INVESTOR_LIST_SUCCESS,
           payload: res.data,
         });
       })
       .catch((err) => {
         console.log(err);
         dispatch({
-          type: types.GET_CUSTOMER_FAILURE,
+          type: types.GET_INVESTOR_LIST_FAILURE,
           payload: err,
         });
       });
@@ -37,26 +37,26 @@ import { message } from "antd"
   // /**
 //  * add a new sector 
 //  */
-export const addCustomer = (sectors,orgId, cb) => (dispatch) => {
+export const addInvestorData = (sectors,orgId, cb) => (dispatch) => {
     console.log(sectors);
     dispatch({
-      type: types.ADD_CUSTOMER_REQUEST,
+      type: types.ADD_INVESTOR_DATA_REQUEST,
     });
     axios
-      .post(`${base_url}/customerType`, sectors, {
+      .post(`${base_url}/investorCategory`, sectors, {
         headers: {
           Authorization: "Bearer " + sessionStorage.getItem("token") || "",
         },
       })
       .then((res) => {
-        dispatch(getCustomer(orgId));
+        dispatch(getInvestorList(orgId));
         {res.data.message?  
           message.success(res.data.message):
-        message.success("CUSTOMER has been added successfully!");
+        message.success("INVESTOR_ has been added successfully!");
         }
         console.log(res);
         dispatch({
-          type: types.ADD_CUSTOMER_SUCCESS,
+          type: types.ADD_INVESTOR_DATA_SUCCESS,
           payload: { ...sectors, },
         });
         cb();
@@ -65,7 +65,7 @@ export const addCustomer = (sectors,orgId, cb) => (dispatch) => {
         console.log(err);
      
         dispatch({
-          type: types.ADD_CUSTOMER_FAILURE,
+          type: types.ADD_INVESTOR_DATA_FAILURE,
         });
         // message.success(res.data.message);
         cb();
@@ -75,29 +75,29 @@ export const addCustomer = (sectors,orgId, cb) => (dispatch) => {
   /**
  * remove a new sector
  */
-export const removeCustomer = ( customerTypeId) => (dispatch) => {
+export const removeInvestor = ( investorCategoryId) => (dispatch) => {
     // console.log(typeId);
     dispatch({
-      type: types.REMOVE_CUSTOMER_REQUEST,
+      type: types.REMOVE_INVESTOR_REQUEST,
     });
     axios
-      .delete(`${base_url}/customerType/${customerTypeId}`, {
+      .delete(`${base_url}/investorCategory/${investorCategoryId}`, {
         headers: {
           Authorization: "Bearer " + sessionStorage.getItem("token") || "",
         },
       })
       .then((res) => {
-        message.success("CUSTOMER has been deleted successfully!");
+        message.success("INVESTOR has been deleted successfully!");
         console.log(res);
         dispatch({
-          type: types.REMOVE_CUSTOMER_SUCCESS,
-          payload:customerTypeId,
+          type: types.REMOVE_INVESTOR_SUCCESS,
+          payload:investorCategoryId,
         });
       })
       .catch((err) => {
         console.log(err);
         dispatch({
-          type: types.REMOVE_CUSTOMER_FAILURE,
+          type: types.REMOVE_INVESTOR_FAILURE,
         });
       });
   };
@@ -105,15 +105,15 @@ export const removeCustomer = ( customerTypeId) => (dispatch) => {
   /**
  *update label of sector
  */
-export const updateCustomer = ( customerTypeId,name,cb) => (dispatch) => {
+export const updateInvestor = ( investorCategoryId,name,cb) => (dispatch) => {
     
     dispatch({
-      type: types.UPDATE_CUSTOMER_REQUEST,
+      type: types.UPDATE_INVESTOR_REQUEST,
     });
     axios
       .put(
-        `${base_url}/customerType/${customerTypeId}`,
-        { name,customerTypeId,editInd:true },
+        `${base_url}/investorCategory/${investorCategoryId}`,
+        { name,investorCategoryId,editInd:true },
         {
           headers: {
             Authorization: "Bearer " + sessionStorage.getItem("token") || "",
@@ -122,17 +122,17 @@ export const updateCustomer = ( customerTypeId,name,cb) => (dispatch) => {
       )
       .then((res) => {
         
-        message.success("CUSTOMER has been updated successfully!");
+        message.success("INVESTOR has been updated successfully!");
         console.log(res);
         dispatch({
-          type: types.UPDATE_CUSTOMER_SUCCESS,
+          type: types.UPDATE_INVESTOR_SUCCESS,
           payload: res.data,
         });
       })
       .catch((err) => {
         console.log(err);
         dispatch({
-          type: types.UPDATE_CUSTOMER_FAILURE,
+          type: types.UPDATE_INVESTOR_FAILURE,
         });
       });
   };

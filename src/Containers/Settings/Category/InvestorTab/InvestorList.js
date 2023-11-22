@@ -7,13 +7,14 @@ import moment from "moment";
 import { BundleLoader } from "../../../../Components/Placeholder";
 import { MainWrapper, FlexContainer } from "../../../../Components/UI/Layout";
 import { TextInput, Title } from "../../../../Components/UI/Elements";
-// import {
-//     getCustomer,
-//     addCustomer,
-//   removeCustomer,
-//   updateCustomer
-// } from "./CustomerAction";
-// import SingleCustomer from "./SingleCustomer";
+import {
+  getInvestorList,
+    addInvestorData,
+    removeInvestor,
+  updateInvestor
+} from "../InvestorTab/InvestorListAction";
+import SingleInvestorList from "./SingleInvestorList";
+
 
 class InvestorList extends Component {
   constructor(props) {
@@ -21,17 +22,17 @@ class InvestorList extends Component {
     this.state = {
       linkedSectors: [],
       isTextInputOpen: false,
-      addingCustomer: false,
+      addingInvestorData: false,
       name: "",
       type: "",
-      singleCustomer: "",
+      singleInvestor: "",
       editInd: true,
       currentData: "",
     };
   }
   handleClear = () => {
     this.setState({ currentData: "" });
-    this.props.  getCustomer(this.props.orgId);
+    this.props.  getInvestorList(this.props.orgId);
   };
   setCurrentData = (value) => {
     this.setState({ currentData: value });
@@ -48,63 +49,63 @@ class InvestorList extends Component {
     }));
   handleChange = ({ target: { name, value } }) =>
     this.setState({ [name]: value });
-    handleAddCustomer = () => {
-      const {   addCustomer, customers } = this.props;
-      const { name, editInd, addingCustomer, isTextInputOpen } = this.state;
+    handleAddInvestor = () => {
+      const {   addInvestorData, investors } = this.props;
+      const { name, editInd, addingInvestorData, isTextInputOpen } = this.state;
       let customer = { name,
         orgId: this.props.orgId,
         userId:this.props.userId,
          editInd };
     
       let exist =
-      customers && customers.some((element) => element.name === name);
+      investors && investors.some((element) => element.name === name);
     
       // if (exist) {
       //   message.error(
       //     "Can't create as another source type exists with the same name!"
       //   );
       // } else {
-           addCustomer(customer,this.props.orgId ,() => console.log("add sector callback"));
+        addInvestorData(customer,this.props.orgId ,() => console.log("add sector callback"));
         this.setState({
           name: "",
-          singleCustomer: "",
+          singleInvestor: "",
           isTextInputOpen: false,
           editInd: true,
         });
       // }
     };
     
-  handleDeleteCustomer = (customerTypeId = { customerTypeId }) => {
-     this.props.removeCustomer(customerTypeId);
-    // this.setState({ name: "", singleCustomer: "" });
+  handleDeleteInvestor = (investorCategoryId = { investorCategoryId }) => {
+     this.props.removeInvestor(investorCategoryId);
+    // this.setState({ name: "", singleInvestor: "" });
   };
-  handleupdateCustomer = (name, customerTypeId, editInd, cb) => {
-     this.props.updateCustomer(name, customerTypeId, editInd, cb);
-    this.setState({ name: "", singleCustomer: "",customerTypeId:"", editInd: true });
+  handleupdateInvestor = (name, investorCategoryId, editInd, cb) => {
+     this.props.updateInvestor(name, investorCategoryId, editInd, cb);
+    this.setState({ name: "", singleInvestor: "",investorCategoryId:"", editInd: true });
   };
 
   componentDidMount() {
-    const {   getCustomer,orgId } = this.props;
+    const {   getInvestorList,orgId } = this.props;
     console.log();
-       getCustomer(orgId);
+    getInvestorList(orgId);
     // this.getLinkedSources();
   }
   render() {
     const {
-      fetchingCustomer,
-      fetchingCustomerError,
-      customerListData,
-      addingCustomer,
-      updatingCustomer,
+      fetchingInvestorList,
+      fetchingInvestorListError,
+      investorListData,
+      addingInvestorData,
+      updatingInvestor,
     } = this.props;
     const {
       isTextInputOpen,
       type,
       name,
-      singleCustomer,
+      singleInvestor,
       linkedSectors,
     } = this.state;
-    if (fetchingCustomer) return <BundleLoader/>;
+    if (fetchingInvestorList) return <BundleLoader/>;
     //if (fetchingSectorsError) return <p>We are unable to load data</p>;
     return (
       <>
@@ -150,26 +151,26 @@ class InvestorList extends Component {
 
             <FlexContainer flexDirection="column">
               {/* <Title style={{ padding: 8 }}>Types Of Documents</Title> */}
-             {/* <MainWrapper style={{ height: "30em", marginTop: "0.625em" }}>
-                {customerListData.length &&
-                  customerListData.map((customer, i) => (
-                    <SingleCustomer
+             <MainWrapper style={{ height: "30em", marginTop: "0.625em" }}>
+                {investorListData.length &&
+                  investorListData.map((investor, i) => (
+                    <SingleInvestorList
                       key={i}
-                      value={singleCustomer}
-                      name1="singleCustomer"
-                      customer={customer}
+                      value={singleInvestor}
+                      name1="singleInvestor"
+                      investor={investor}
                       linkedSectors={linkedSectors}
-                      updatingCustomer={updatingCustomer}
+                      updatingInvestor={updatingInvestor}
                       handleChange={this.handleChange}
-                      handleupdateCustomer={this.handleupdateCustomer}
-                      handleDeleteCustomer={this.handleDeleteCustomer}
+                      handleupdateInvestor={this.handleupdateInvestor}
+                      handleDeleteInvestor={this.handleDeleteInvestor}
                       handleClear={this.handleClear}
                       handleSearchChange={this.handleSearchChange}
                       currentData={this.state.currentData}
                       setCurrentData={this.setCurrentData}
                     />
                   ))}
-              </MainWrapper> */}
+              </MainWrapper>
             </FlexContainer>
             {isTextInputOpen ? (
               <FlexContainer
@@ -179,7 +180,7 @@ class InvestorList extends Component {
                 <br />
                 <br />
                 <TextInput
-                  placeholder="Add Customer"
+                  placeholder="Add Investor"
                   name="name"
                   value={name}
                   onChange={this.handleChange}
@@ -191,8 +192,8 @@ class InvestorList extends Component {
                   type="primary"
                   htmlType="submit"
                   disabled={!name}
-                  Loading={addingCustomer}
-                  onClick={this.handleAddCustomer}
+                  Loading={addingInvestorData}
+                  onClick={this.handleAddInvestor}
                   style={{ marginRight: "0.125em" }}
                 >
                   {/* Save */}
@@ -212,7 +213,7 @@ class InvestorList extends Component {
                     type="primary"
                     ghost
                     htmlType="button"
-                    loading={addingCustomer}
+                    loading={addingInvestorData}
                     onClick={this.toggleInput}
                   >
                     {/* Add More */}
@@ -229,34 +230,34 @@ class InvestorList extends Component {
       
        
         </FlexContainer>
-        <h4>Updated on {moment(this.props.customerListData && this.props.customerListData.length && this.props.customerListData[0].updationDate).format("ll")} by {this.props.customerListData && this.props.customerListData.length && this.props.customerListData[0].updatedBy}</h4>
+        <h4>Updated on {moment(this.props.investorListData && this.props.investorListData.length && this.props.investorListData[0].updationDate).format("ll")} by {this.props.investorListData && this.props.investorListData.length && this.props.investorListData[0].updatedBy}</h4>
       </>
     );
   }
 }
 
-const mapStateToProps = ({ catgCustomer,auth }) => ({
-  addingCustomer: catgCustomer.addingCustomer,
-  addingCustomerError: catgCustomer.addingCustomerError,
-  customerListData: catgCustomer.customerListData,
+const mapStateToProps = ({ investorList,auth }) => ({
+  addingInvestorData: investorList.addingInvestorData,
+  addingInvestorDataError: investorList.addingInvestorDataError,
+  investorListData: investorList.investorListData,
 orgId:auth.userDetails.organizationId,
 userId:auth.userDetails.userId,
-removingCustomer: catgCustomer.removingCustomer,
-removingCustomerError: catgCustomer.removingCustomerError,
-fetchingCustomer: catgCustomer.fetchingCustomer,
-fetchingCustomerError: catgCustomer.fetchingCustomerError,
+removingInvestor: investorList.removingInvestor,
+removingInvestorError: investorList.removingInvestorError,
+fetchingInvestorList: investorList.fetchingInvestorList,
+fetchingInvestorListError: investorList.fetchingInvestorListError,
 
-updatingCustomer: catgCustomer.updatingCustomer,
-updatingCustomerError: catgCustomer.updatingCustomerError,
+updatingInvestor: investorList.updatingInvestor,
+updatingInvestorError: investorList.updatingInvestorError,
 
 });
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
-    //     getCustomer,
-    //     addCustomer,
-    //   removeCustomer,
-    //   updateCustomer,
+      getInvestorList,
+        addInvestorData,
+        removeInvestor,
+      updateInvestor,
 
     },
     dispatch

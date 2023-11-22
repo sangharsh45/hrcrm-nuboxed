@@ -8,6 +8,10 @@ const initialState = {
   addProcessTaskModal: false,
   candidateSequenceModal: false,
 
+  fetchingDepartmentWiseUser: false, 
+  fetchingDepartmentWiseUserError: false,
+  departmentwiseUser:[],
+
   fetchingAllVat: false,
   fetchingAllVatError: false,
   allVat: [],
@@ -84,6 +88,10 @@ const initialState = {
   fetchingProcess: false,
   fetchingProcessError: false,
   Process: [],
+
+  fetchingDistributionAutomation: true,
+  fetchingDistributionAutomationError: true,
+  distributionAutomation:[],
 
   updatingTask: false,
   updatingTaskError: false,
@@ -198,6 +206,9 @@ const initialState = {
 
   addingLeaves: false,
   addingLeavesError: false,
+
+  updateWebsiteSingle: false,
+  updateWebsiteSingleError: false,
 
   addingProcessForDeals: false,
   addingProcessForDealsError: false,
@@ -2833,6 +2844,49 @@ export const settingsReducer = (state = initialState, action) => {
         fetchingAllVat: false,
         fetchingAllVatError: true,
       };
+
+       case types.UPDATE_WEBSITE_SINGLE_REQUEST:
+      return { ...state, updateWebsiteSingle: true };
+    case types.UPDATE_WEBSITE_SINGLE_SUCCESS:
+      // return { ...state, updatingStages: false, states: [...state.states, action.payload] };
+      return {
+        ...state,
+        updateWebsiteSingle: false,
+        // Process: state.Process.map((state) =>
+        //   state.processId === action.payload.processId ? action.payload : state
+        // ),
+      };
+    case types.UPDATE_WEBSITE_SINGLE_FAILURE:
+      return {
+        ...state,
+        updateWebsiteSingle: false,
+        updateWebsiteSingleError: true,
+      };
+
+
+      
+    case types.GET_DISTRIBUTION_AUTOMATION_REQUEST:
+      return { ...state, fetchingDistributionAutomation: true };
+    case types.GET_DISTRIBUTION_AUTOMATION_SUCCESS:
+      return {
+        ...state,
+        fetchingDistributionAutomation: false,
+        distributionAutomation: action.payload,
+      };
+    case types.GET_DISTRIBUTION_AUTOMATION_FAILURE:
+      return {
+        ...state,
+        fetchingDistributionAutomation: true,
+        fetchingDistributionAutomationError: false,
+      };
+
+      case types.GET_DEPARTMENTWISE_USER_REQUEST:
+        return { ...state, fetchingDepartmentWiseUser: true };
+      case types.GET_DEPARTMENTWISE_USER_SUCCESS:
+        return { ...state, fetchingDepartmentWiseUser: false, departmentwiseUser: action.payload };
+      case types.GET_DEPARTMENTWISE_USER_FAILURE:
+        return { ...state, fetchingDepartmentWiseUser: false, fetchingDepartmentWiseUserError: true };
+
 
     default:
       return state;
