@@ -38,7 +38,8 @@ export const setDealViewType = (viewType) => (dispatch) => {
       });
   };
 
-  export const createDeals = (deal, cb) => (dispatch) => {
+  export const createDeals = (deal, cb) => (dispatch,getState) => {
+    const userId = getState().auth.userDetails.userId;
     dispatch({
       type: types.CREATE_DEAL_REQUEST,
     });
@@ -56,7 +57,7 @@ export const setDealViewType = (viewType) => (dispatch) => {
         const endDate = dayjs()
           .endOf("month")
           .toISOString();
-        // dispatch(getOpportunityListByUserId(userId));
+        dispatch(getdealsRecord(userId));
         // dispatch(getLatestOpportunities(userId, startDate, endDate));
         // dispatch(getOpportunitiesByPrice(userId));
         dispatch({
@@ -333,6 +334,32 @@ export const getdealsRecord = (userId) => (dispatch) => {
       console.log(err.response);
       dispatch({
         type: types.GET_DEALS_RECORDS_FAILURE,
+        payload: err,
+      });
+    });
+};
+
+export const getdealsAllRecord = (userId) => (dispatch) => {
+  dispatch({
+    type: types.GET_DEALS_ALL_RECORDS_REQUEST,
+  });
+  axios
+    .get(`${base_url}/investorOpportunity/record/count/${userId}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.GET_DEALS_ALL_RECORDS_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err.response);
+      dispatch({
+        type: types.GET_DEALS_ALL_RECORDS_FAILURE,
         payload: err,
       });
     });

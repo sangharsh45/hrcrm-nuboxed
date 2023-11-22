@@ -67,7 +67,7 @@ export const getPitch = (userId,pageNo,filter) => (dispatch) => {
         const endDate = dayjs()
           .endOf("month")
           .toISOString();
-        // dispatch(getRecords(userId));
+        dispatch(getPitchCount(userId));
   
         dispatch({
           type: types.ADD_PITCH_SUCCESS,

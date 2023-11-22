@@ -2,8 +2,7 @@ import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { FlexContainer } from "../../../Components/UI/Layout";
-import { Input, Button, Tooltip, Badge } from "antd";
-import ListAltIcon from '@mui/icons-material/ListAlt';
+import { Input, Tooltip, Badge } from "antd";
 import TocIcon from '@mui/icons-material/Toc';
 import GridViewIcon from '@mui/icons-material/GridView';
 import { inputDataSearch, getRecords,getAccountRecords, getAllRecords,getDistributorCount } from "./AccountAction";
@@ -18,6 +17,9 @@ const AccountActionLeft = (props) => {
             props.getAccountRecords();
         } else if (props.viewType === "card") {
             props.getDistributorCount(props.userId);
+        }
+        else if (props.viewType === "all") {
+            props.getAccountRecords();
         }
       }, [props.viewType, props.userId]);
 
@@ -107,8 +109,9 @@ const AccountActionLeft = (props) => {
                     </Tooltip>
                     {user.accountFullListInd === true && user.erpInd === true &&(
                     <Tooltip title="All Distributor">
-                        <Badge size="small"
-                            count={props.recordAllData.distributor || 0}>
+                         <Badge size="small"
+                        count={props.accountRecordData.distributor || 0}
+                    >
                             <span
                                 style={{
                                     marginRight: "0.5rem",

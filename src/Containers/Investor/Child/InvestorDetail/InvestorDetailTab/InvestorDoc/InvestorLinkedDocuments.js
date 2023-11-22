@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import dayjs from 'dayjs';
+import moment from 'moment';
 import DownloadIcon from '@mui/icons-material/Download';
 import Highlighter from "react-highlight-words";
 import { base_url } from "../../../../../../Config/Auth";
@@ -151,7 +151,7 @@ class InvestorLinkedDocuments extends Component {
           return 0;
         },
         render: (name, item, i) => {
-          return <span>{` ${dayjs(item.creationDate).format("ll")}`}</span>;
+          return <span>{` ${moment(item.creationDate).format("ll")}`}</span>;
         },
       },
       {

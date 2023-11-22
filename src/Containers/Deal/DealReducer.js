@@ -4,6 +4,10 @@ import dayjs from "dayjs";
 const initialState = {
   viewType: "table",
 
+  fetchingAllDelasRecords: false,
+  fetchingAllDelasRecordsError: false,
+  dealsAllRecord:{},
+
   fetchingDeal: false,
   fetchingDealError:false,
   dealsByuserId:[],
@@ -282,6 +286,23 @@ export const dealReducer = (state = initialState, action) => {
             fetchingDelasRecords: false,
             fetchingDelasRecordsError: true,
           };
+
+
+          
+          case types.GET_DEALS_ALL_RECORDS_REQUEST:
+            return { ...state, fetchingAllDelasRecords: true };
+          case types.GET_DEALS_ALL_RECORDS_SUCCESS:
+            return {
+              ...state,
+              fetchingAllDelasRecords: false,
+              dealsAllRecord: action.payload,
+            };
+          case types.GET_DEALS_ALL_RECORDS_FAILURE:
+            return {
+              ...state,
+              fetchingAllDelasRecords: false,
+              fetchingAllDelasRecordsError: true,
+            };
           case types.HANDLE_DEALS_NOTES_DRAWER_MODAL:
             return { ...state, addDrawerDealsNotesModal: action.payload };
 

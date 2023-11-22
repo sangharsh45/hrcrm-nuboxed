@@ -10,7 +10,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import LockOpenIcon from "@mui/icons-material/LockOpen";
 import PeopleIcon from '@mui/icons-material/People';
 import { CheckCircleTwoTone } from "@ant-design/icons";
-import {getdealsRecord} from "../DealAction";
+import {getdealsRecord,getdealsAllRecord} from "../DealAction";
 import { StopTwoTone, TableOutlined } from "@ant-design/icons";
 import { Input } from "antd";
 
@@ -20,20 +20,16 @@ const { Search } = Input;
 const DealActionLeft = (props) => {
   const dummy = ["cloud", "azure", "fgfdg"];
 
-//   useEffect(() => {
-//     if (props.viewType === "table") {
-//       props.getRecords(props.userId);
-//     } else if (props.viewType === "dashboard") {
-//       props.getDeleteRecords(props.userId);
-//     } else if (props.viewType === "close") {
-//       props.getcloseRecords(props.userId);
-//     } else if (props.viewType === "lost") {
-//       props.getlostRecords(props.userId);
-//     }
-//   }, [props.viewType, props.userId]);
-useEffect(() => {
-  props.getdealsRecord(props.userId)
-  }, [props.userId]);
+  useEffect(() => {
+    if (props.viewType === "table") {
+      props.getdealsRecord(props.userId);
+    } else if (props.viewType === "all") {
+      props.getdealsAllRecord(props.userId);
+    } 
+  }, [props.viewType, props.userId]);
+// useEffect(() => {
+//   props.getdealsRecord(props.userId)
+//   }, [props.userId]);
 
   const {
     viewType,
@@ -186,7 +182,11 @@ useEffect(() => {
         <Tooltip
           title="All"
         >
-          {/*<TableOutlined*/}
+     <Badge
+        size="small"
+         count={(viewType === "all" &&   props.dealsAllRecord.opportunityDetails) || 0}
+        overflowCount={999}
+      >
           <span
             style={{
               fontSize: "1.56em",
@@ -200,6 +200,7 @@ useEffect(() => {
           >
           ALL
           </span>
+          </Badge>
         </Tooltip>
      
       <Tooltip
@@ -259,6 +260,7 @@ useEffect(() => {
 const mapStateToProps = ({ deal, auth, opportunity }) => ({
   user: auth.userDetails,
   recordData: opportunity.recordData,
+  dealsAllRecord:deal.dealsAllRecord,
   userId: auth.userDetails.userId,
   dealsRecord:deal.dealsRecord,
   recorddeleteOpportunityData: opportunity.recorddeleteOpportunityData,
@@ -268,7 +270,8 @@ const mapStateToProps = ({ deal, auth, opportunity }) => ({
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
-      getdealsRecord
+      getdealsRecord,
+      getdealsAllRecord
     },
     dispatch
   );

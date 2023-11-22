@@ -228,7 +228,7 @@ function DealForm(props) {
 
   const {
     user: { userId },
-    addingOpportunity,
+    creatingDeal,
     employeeId,
     salesUserIds,
     fullName,
@@ -265,7 +265,7 @@ function DealForm(props) {
           source:"",
           salesUserIds: selectedOption ? selectedOption.employeeId:props.userId,
         }}
-        validationSchema={OpportunitySchema}
+        // validationSchema={OpportunitySchema}
         onSubmit={(values, { resetForm }) => {
           console.log(values);
           console.log(values);
@@ -765,7 +765,7 @@ function DealForm(props) {
               <Button
                 type="primary"
                 htmlType="submit"
-                Loading={addingOpportunity}
+                loading={creatingDeal}
               >
                 <FormattedMessage id="app.create" defaultMessage="Create" />
                 {/* Create */}
@@ -806,6 +806,7 @@ const mapStateToProps = ({ auth,source,investor, opportunity,deal,settings, cont
   dealsContactData: contact.dealsContactData,
   fullName: auth.userDetails.fullName,
   sources: source.sources,
+  creatingDeal:deal.creatingDeal,
   // opportunitySkills:opportunity.opportunitySkills
 });
 
