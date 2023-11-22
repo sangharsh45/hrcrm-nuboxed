@@ -3,18 +3,18 @@ import dayjs from "dayjs";
 
 const initialState = {
 
-     fetchingCustomer: false,
-     fetchingCustomerError: false,
-    customerListData: [],
+  fetchingInvestorList: false,
+  fetchingInvestorListError: false,
+  investorListData: [],
 
-     addingCustomer: false,
-     addingCustomerError: false,
+  addingInvestorData: false,
+  addingInvestorDataError: false,
 
-     removingCustomer: false,
-     removingCustomerError: false,
+  removingInvestor: false,
+  removingInvestorError: false,
 
-      updatingCustomer: false,
-      updatingCustomerError: false,
+  updatingInvestor: false,
+  updatingInvestorError: false,
 
      fetchingCustomerearchData:false,
      fetchingCustomerearchDataError:false,
@@ -26,78 +26,78 @@ export const investorListReducer = (state = initialState, action) => {
 
  //get opportunity customer
 
- case types.GET_CUSTOMER_REQUEST:
-    return { ...state,  fetchingCustomer: true };
-  case types.GET_CUSTOMER_SUCCESS:
+ case types.GET_INVESTOR_LIST_REQUEST:
+    return { ...state,  fetchingInvestorList: true };
+  case types.GET_INVESTOR_LIST_SUCCESS:
     return {
       ...state,
-       fetchingCustomer: false,
-       customerListData: action.payload,
+      fetchingInvestorList: false,
+       investorListData: action.payload,
     };
-  case types.GET_CUSTOMER_FAILURE:
+  case types.GET_INVESTOR_LIST_FAILURE:
     return {
       ...state,
-       fetchingCustomer: false,
-       fetchingCustomerError: true,
+      fetchingInvestorList: false,
+      fetchingInvestorListError: true,
     };
 
  // add sector
 
- case types.ADD_CUSTOMER_REQUEST:
-    return { ...state,  addingCustomer: true };
-  case types.ADD_CUSTOMER_SUCCESS:
+ case types.ADD_INVESTOR_DATA_REQUEST:
+    return { ...state,  addingInvestorData: true };
+  case types.ADD_INVESTOR_DATA_SUCCESS:
     return {
       ...state,
-       addingCustomer: false,
-       customerListData: [...state.customerListData, action.payload],
+      addingInvestorData: false,
+      investorListData: [...state.investorListData, action.payload],
       
     };
-  case types.ADD_CUSTOMER_FAILURE:
+  case types.ADD_INVESTOR_DATA_FAILURE:
     return {
       ...state,
-       addingCustomer: false,
-       addingCustomerError: true,
+      addingInvestorData: false,
+      addingInvestorDataError: true,
     };
 
      // remove sector
 
-     case types.REMOVE_CUSTOMER_REQUEST:
-        return { ...state,  removingCustomer: true };
-      case types.REMOVE_CUSTOMER_SUCCESS:
+     case types.REMOVE_INVESTOR_REQUEST:
+        return { ...state,  removingInvestor: true };
+      case types.REMOVE_INVESTOR_SUCCESS:
         return {
           ...state,
-           removingCustomer: false,
-           customerListData: state.customerListData.filter(
-            (item) => item.customerTypeId !== action.payload
+          removingInvestor: false,
+          investorListData: state.investorListData.filter(
+            (item) => item.investorCategoryId !== action.payload
         ), 
         };
-      case types.REMOVE_CUSTOMER_FAILURE:
+      case types.REMOVE_INVESTOR_FAILURE:
         return {
           ...state,
-           removingCustomer: false,
-           removingCustomerError: true,
+          removingInvestor: false,
+          removingInvestorError: true,
         };
 
       //   update an existing SECTOR 
 
-      case types.UPDATE_CUSTOMER_REQUEST:
-        return { ...state,   updatingCustomer: true };
-      case types.UPDATE_CUSTOMER_SUCCESS:
+      case types.UPDATE_INVESTOR_REQUEST:
+        return { ...state,   updatingInvestor: true };
+      case types.UPDATE_INVESTOR_SUCCESS:
         // return { ...state, updatingCustomers: false, sources: [...state.sources, action.payload] };
         return {
           ...state,
-            updatingCustomer: false,
-            customerListData: state.customerListData.map((sector) =>
-            sector.customerTypeId === action.payload.customerTypeId
+          updatingInvestor: false,
+          investorListData: state.investorListData.map((sector) =>
+            sector.investorCategoryId === action.payload.investorCategoryId
               ? action.payload
               : sector
           ),
         };
-      case types.UPDATE_CUSTOMER_FAILURE:
+      case types.UPDATE_INVESTOR_FAILURE:
         return {
           ...state,
-            updatingCustomer: false,
-            updatingCustomerError: true,
+          updatingInvestor: false,
+          updatingInvestorError: true,
         };
 
         case types.GET_CUSTOMER_SEARCH_REQUEST:

@@ -21,6 +21,7 @@ import Rules from "../../Rules/Rules";
 import ConfigureTab from "./Child/Configure/ConfigureTab";
 import LeadsTab from "../../Rules/Child/RulesTab/LeadsTab";
 import LeadsConfigTab from "../LeadsConfig/LeadsConfigTab";
+import DistributionTab from "./Child/DistributionTab/DistributionTab";
 
 const RecruitmentActionLeft = lazy(() => import("./RecruitmentActionLeft"));
 
@@ -40,7 +41,7 @@ function Recruitment(props) {
     {
       rulesName: "Distribution",
       ruleId: "25",
-      // component: <DistributionTab />,
+      component: <DistributionTab />,
     },
     {
       rulesName: "Form",

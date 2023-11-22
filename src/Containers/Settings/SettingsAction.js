@@ -3865,3 +3865,78 @@ export const getAllVat = () => (
     });
 };
 
+export const websiteSingleMultiple = (process, cb) => (dispatch) => {
+  dispatch({ type: types.UPDATE_WEBSITE_SINGLE_REQUEST });
+
+  axios
+    .put(`${base_url}/distributionAutomation/save`, process, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.UPDATE_WEBSITE_SINGLE_SUCCESS,
+        payload: res.data,
+      });
+
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.UPDATE_WEBSITE_SINGLE_FAILURE,
+      });
+
+    });
+};
+
+
+export const getDistributionAutomation = (orgId,type) => (dispath) => {
+  dispath({ type: types.GET_DISTRIBUTION_AUTOMATION_REQUEST });
+  axios
+    .get(`${base_url}/distributionAutomation/${orgId}/${type}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      dispath({
+        type: types.GET_DISTRIBUTION_AUTOMATION_SUCCESS,
+        payload: res.data,
+      });
+
+    })
+    .catch((err) => {
+      dispath({
+        type: types.GET_DISTRIBUTION_AUTOMATION_FAILURE,
+        payload: err,
+      });
+    });
+};
+
+export const getDepartmentwiserUser = (departmentId) => (dispatch) => {
+  dispatch({
+    type: types.GET_DEPARTMENTWISE_USER_REQUEST,
+  });
+  axios
+    .get(`${base_url}/employee/list/${departmentId}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.GET_DEPARTMENTWISE_USER_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.GET_DEPARTMENTWISE_USER_FAILURE,
+        payload: err,
+      });
+    });
+};

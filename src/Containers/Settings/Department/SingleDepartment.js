@@ -101,6 +101,16 @@ class SingleDepartment extends Component {
                       departmentId={departmentId}
                     />  
                     </div>
+                    <h1>HR</h1>
+                    <div 
+                    style={{width:"7%"}}
+                    >
+                    <HrStatusToggle
+                      hrInd={hrInd}
+                      departmentName={departmentName}
+                      departmentId={departmentId}
+                    />  
+                    </div>
                     <h1>Accounting</h1>
                     <div 
                     style={{width:"7%"}}
@@ -122,16 +132,7 @@ class SingleDepartment extends Component {
                       departmentId={departmentId}
                     />  
                     </div>
-                    <h1>HR</h1>
-                    <div 
-                    style={{width:"7%"}}
-                    >
-                    <HrStatusToggle
-                      hrInd={hrInd}
-                      departmentName={departmentName}
-                      departmentId={departmentId}
-                    />  
-                    </div>
+                   
                 
               </FlexContainer>
               </div>
