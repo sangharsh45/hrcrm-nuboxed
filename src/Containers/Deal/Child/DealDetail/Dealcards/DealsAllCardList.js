@@ -117,7 +117,7 @@ const DealsAllCardList = (props) => {
 <div>
 <SubTitle>
             <MultiAvatar
-              primaryTitle={item.name}
+              primaryTitle={item.opportunityName}
               imageId={item.imageId}
               imageURL={item.imageURL}
               imgWidth={"1.8em"}
@@ -141,11 +141,7 @@ const DealsAllCardList = (props) => {
                                                  toUrl={`customer/${item.customerId}`}
                                                  title={`${item.name}`} 
                                                > */}
-                                               {item.firstName}
-                                               &nbsp;
-                                               {item.middleName}
-                                               &nbsp;
-                                               {item.lastName}
+                                              {item.opportunityName}
                                                {/* </Link> */}
                                                &nbsp;&nbsp;
                                                {date === currentdate ? (

@@ -41,7 +41,7 @@ export const addDistributor = (distributor, userId) => (dispatch) => {
     .then((res) => {
       console.log(res);
       dispatch(getDistributorsByUserId(userId));
-      dispatch(getRecords(userId))
+      dispatch(getAccountRecords())
       dispatch({
         type: types.ADD_DISTRIBUTOR_SUCCESS,
         payload: res.data,

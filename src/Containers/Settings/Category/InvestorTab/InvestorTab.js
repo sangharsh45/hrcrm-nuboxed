@@ -5,6 +5,7 @@ import { TabsWrapper } from "../../../../Components/UI/Layout";
 import { FlexContainer } from "../../../../Components/UI/Layout";
 import { connect } from "react-redux";
 import FactoryIcon from '@mui/icons-material/Factory';
+import InvestorList from "./InvestorList";
 const TabPane = StyledTabs.TabPane;
 
 class InvestorTab extends Component {
@@ -42,7 +43,7 @@ class InvestorTab extends Component {
                   key="0"
                 >
                   <Suspense>
-                    {/* <Sectors /> */}
+                    {/* <InvestorList /> */}
                   </Suspense>
                 </TabPane>
                

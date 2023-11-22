@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { FormattedMessage } from "react-intl";
-import dayjs from 'dayjs';
+import moment from 'moment';
 import { base_url } from "../../../../../../Config/Auth";
 import {
   StyledTable,
@@ -40,7 +40,7 @@ class LinkedContactInvestDocuments extends Component {
         />,
         dataIndex: "creationDate",
         render: (name, item, i) => {
-          return <span>{` ${dayjs(item.creationDate).format("ll")}`}</span>;
+          return <span>{` ${moment(item.creationDate).format("ll")}`}</span>;
         },
       },
       {

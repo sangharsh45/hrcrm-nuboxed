@@ -1,16 +1,13 @@
-import React, { lazy, Suspense, useState, useEffect, useMemo } from "react";
+import React, { Suspense, useState} from "react";
 import { bindActionCreators } from "redux";
 import { StyledTabs } from "../../../Components/UI/Antd";
-import { TabsWrapper } from "../../../Components/UI/Layout";
-import { MainWrapper, FlexContainer } from "../../../Components/UI/Layout";
+import {  FlexContainer } from "../../../Components/UI/Layout";
 import { connect } from "react-redux";
 import CategoryActivity from "./CategoryActivity";
 import Category from "./Category";
 import CategoryActionLeft from "./CategoryActionLeft";
 import CategoryActionRight from "./CategoryActionRight";
 import OthersTab from "./OthersTab";
-import Sector from "../Sectors/Sectors";
-import AssessmentTab from "./Assessment/AssessmentTab";
 import CustomerSectorTab from "./CustomerSectorTab";
 import InvestorTab from "./InvestorTab/InvestorTab";
 const TabPane = StyledTabs.TabPane;

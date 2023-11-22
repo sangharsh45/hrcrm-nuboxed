@@ -214,7 +214,7 @@ class DealContactForm extends Component {
               >
                 <div class=" h-full w-1/2 max-sm:w-wk"
                 >
-                  <div class=" flex  flex-nowrap">
+                  <div class=" flex  flex-nowrap justify-between">
                     <FastField name="imageId" component={Upload} />
                     <div>
                       <div class=" flex justify-between max-sm:flex-col">

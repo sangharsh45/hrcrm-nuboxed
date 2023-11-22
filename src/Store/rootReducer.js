@@ -81,6 +81,7 @@ import { distributorReducer } from "../Containers/Main/Account/AccountReducer";
 import { suppliersReducer } from "../Containers/Main/Suppliers/SuppliersReducer";
 import { collectionReducer } from "../Containers/Collection/CollectionReducer";
 import { productReducer } from "../Containers/Product/ProductReducer";
+import { investorListReducer } from "../Containers/Settings/Category/InvestorTab/InvestorListReducer";
 
 const appReducer = combineReducers({
   dashboard: dashboardReducer,
@@ -158,6 +159,7 @@ const appReducer = combineReducers({
   collection: collectionReducer,
   product: productReducer,
   refurbish: refurbishReducer,
+  investorList:investorListReducer,
 });
 
 const rootReducer = (state, action) => {

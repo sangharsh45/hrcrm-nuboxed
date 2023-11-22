@@ -21,6 +21,7 @@ import { addDistributor, setClearbitData1 } from "./AccountAction";
 import { SelectComponent } from "../../../Components/Forms/Formik/SelectComponent";
 import { getCurrency } from "../../Auth/AuthAction";
 import { ProgressiveImage } from "../../../Components/Utils";
+import { FormattedMessage } from "react-intl";
 
 const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-])|(\\([0-9]{2,3}\\)[ \\-])|([0-9]{2,4})[ \\-])?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
 const CustomerSchema = Yup.object().shape({
@@ -140,14 +141,10 @@ const AddAccountForm = ({
           values,
           ...rest
         }) => (
+          <div class="overflow-y-auto h-[34rem] overflow-x-hidden max-sm:h-[30rem]">
             <Form class="form-background">
-            <div style={{ display: "flex", justifyContent: "space-between" }}>
-                <div
-                    style={{
-                        height: "100%",
-                        width: "45%",
-                    }}
-                >
+            <div class=" flex justify-around max-sm:flex-col ">
+            <div class=" h-full w-w47.5 max-sm:w-wk">
                      <div>
     {clearbit1 && clearbit1.hasOwnProperty("logo") && (
       <ProgressiveImage
@@ -187,19 +184,25 @@ const AddAccountForm = ({
                         inlineLabel
                     />
                     <Spacer />
-                    <FlexContainer justifyContent="space-between">
-                        <div style={{ width: "50%" }}>
+                    <div class=" flex justify-between">
+                    <div class=" w-2/6">
                             <FastField
                                 name="dialCode"
-                                label="Dial Code"
+                                isColumnWithoutNoCreate
+                                label={
+                                  <FormattedMessage
+                                    id="app.countryDialCode"
+                                    defaultMessage="Dial Code"
+                                  />
+                                }
                                 isColumn
-                                width={"100%"}
+                                // width={"100%"}
                                 selectType="dialCode"
                                 component={SearchSelect}
                                 inlineLabel
                             />
                         </div>
-                        <div style={{ width: "47%" }}>
+                        <div class=" w-[60%]">
                             <FastField
                                 type="text"
                                 // isRequired
@@ -212,7 +215,7 @@ const AddAccountForm = ({
                                 isColumn
                             />
                         </div>
-                    </FlexContainer>
+                        </div>
                     <Field
                         // isRequired
                         name="url"
@@ -332,12 +335,7 @@ const AddAccountForm = ({
                         component={TextareaComponent}
                     />
                 </div>
-                <div
-                    style={{
-                        height: "100%",
-                        width: "45%",
-                    }}
-                >
+                <div class=" h-full w-w47.5 max-sm:w-wk">
                     <div class=" h-full w-full mt-2">
                     <Listbox value={selected} onChange={setSelected}>
         {({ open }) => (
@@ -435,6 +433,7 @@ const AddAccountForm = ({
                 </Button>
             </FlexContainer>
         </Form>
+        </div>
         )}
       </Formik>
     </>

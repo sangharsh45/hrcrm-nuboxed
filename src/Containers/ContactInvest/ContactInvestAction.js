@@ -32,7 +32,7 @@ export const handleContactInvestModal = (modalProps) => (dispatch) => {
         const endDate = dayjs()
           .endOf("month")
           .toISOString();
-        // dispatch(getRecords(userId,0));
+        dispatch(getContactInvest(userId));
         dispatch({
           type: types.ADD_CONTACT_INVEST_SUCCESS,
           payload: res.data,

@@ -83,7 +83,7 @@ export const getInvestorsbyId = (userId,pageNo,filter) => (dispatch) => {
       })
       .then((res) => {
         console.log(res);
-        // dispatch(getRecords(userId));
+        dispatch(getInvestor(userId));
         dispatch({
           type: types.ADD_INVESTOR_SUCCESS,
           payload: res.data,
