@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { ActionHeader } from "../../../Components/Utils";
 import ProductActionLeft from "./ProductActionLeft";
-// import ProductActionRight from "./ProductActionRight";
+import ProductActionRight from "./ProductActionRight";
 
 class ProductHeader extends Component {
   render() {
@@ -13,10 +13,13 @@ class ProductHeader extends Component {
             <ProductActionLeft
               viewType={viewType}
               setProductViewType={setProductViewType}
+
             />
           }
-          rightComponent={"Right"
-        //   <ProductActionRight />
+          rightComponent={
+          <ProductActionRight 
+          handleConfigureModal={handleConfigureModal}
+          />
         }
         />
       </div>

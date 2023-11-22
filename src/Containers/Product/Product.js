@@ -9,7 +9,7 @@ const ProductListingTable =lazy(()=>import("./Child/ProductTable/ProductListingT
 const ProductListByGroup =lazy(()=>import("./Child/ProductTable/ProductListByGroup"));
 // const ProductGroup = lazy(() => import("./Child/ProductGroup/ProductGroup"));
 // const ProductTable = lazy(() => import("./Child/ProductTable/ProductTable"));
-
+const ConfigureModal=lazy(()=>import("./Child/ConfigureModal"));
 
 class Product extends Component {
   render() {
@@ -27,6 +27,10 @@ class Product extends Component {
         <ProductHeader
           setProductViewType={setProductViewType}
           viewType={viewType}
+          handleConfigureModal={handleConfigureModal}
+        />
+        <ConfigureModal
+          addConfigureModal={addConfigureModal}
           handleConfigureModal={handleConfigureModal}
         />
 

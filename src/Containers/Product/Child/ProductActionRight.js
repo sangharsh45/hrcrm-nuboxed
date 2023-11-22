@@ -1,4 +1,4 @@
-import React, { useReducer } from "react";
+import React, { Suspense } from "react";
 import Button from "antd/lib/button";
 import Icon from "antd/lib/icon";
 import { connect } from "react-redux";
@@ -12,12 +12,10 @@ import {
   handleCategoryImageModal,
   handleUploadProductModal
 } from "../ProductAction";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { solid } from '@fortawesome/fontawesome-svg-core/import.macro';
-import ConfigureModal from "./ConfigureModal";
-import CategoryImageModal from "./CategoryImageModal";
-import UploadProduct from "./UploadProduct";
-
+// import ConfigureModal from "./ConfigureModal";
+// import CategoryImageModal from "./CategoryImageModal";
+// import UploadProduct from "./UploadProduct";
+import {FileExcelOutlined} from  "@ant-design/icons";
 class ProductActionRight extends React.Component {
   render() {
     const {
@@ -55,7 +53,7 @@ class ProductActionRight extends React.Component {
                   className="export"
                   default
                   href={`${base_url}/export/product?orgId=${organizationId}`}
-                ><FontAwesomeIcon icon={solid("file-excel")} />
+                ><FileExcelOutlined />
                 </Button>
               </Tooltip>
               &nbsp;
@@ -64,7 +62,6 @@ class ProductActionRight extends React.Component {
               <Tooltip placement="left" title="Create">
                 <Button
                   type="primary"
-                  ghost
                   onClick={() => handleConfigureModal(true)}
                 >Add
      
