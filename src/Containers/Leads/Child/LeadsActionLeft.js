@@ -61,8 +61,9 @@ const LeadsActionLeft = (props) => {
         </Badge>
       </Tooltip>
    
-    
+      {user.teamsAccessInd === true && (
       <div class="ml-2">
+      
       <Tooltip
         title= "Teams"
       >
@@ -77,7 +78,9 @@ const LeadsActionLeft = (props) => {
         </span>
         </Badge>
       </Tooltip>
+   
       </div>
+         )}
       <div class="ml-2">
       {user.crmInd === true && user.leadsFullListInd===true && ( 
       <Tooltip

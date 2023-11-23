@@ -4,8 +4,10 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import {
     convertCustomerStatus,
-    getLeads
+    getLeads,
+    
 } from "../../LeadsAction";
+
 
 function CustomerStatusToggle(props) {
     const [toggle, setToggle] = React.useState(props.convertInd)
@@ -59,19 +61,23 @@ function CustomerStatusToggle(props) {
                     />
                 </Popconfirm>
             </div>
+        
         </>
+          
     );
 }
 
-const mapStateToProps = ({ auth, provider }) => ({
+const mapStateToProps = ({ auth,leads, provider }) => ({
     userId: auth.userDetails.userId,
+  
 });
 
 const mapDispatchToProps = (dispatch) =>
     bindActionCreators(
         {
             convertCustomerStatus,
-            getLeads
+            getLeads,
+            
         },
         dispatch
     );

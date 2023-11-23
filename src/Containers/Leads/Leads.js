@@ -7,6 +7,7 @@ import { BundleLoader } from "../../Components/Placeholder";
 import LeadsTable from "./Child/LeadsTable/LeadsTable";
 import {getLeads} from "../Leads/LeadsAction"
 import { setLeadsViewType, handleLeadsModal, getEmployeelist, } from "./LeadsAction";
+import LeadsTeamCardList from "./Child/LeadsTable/LeadsTeamCardList";
 const LeadsCardList = lazy(()=>import("./Child/LeadsTable/LeadsCardList"));
 const LeadsJunkList=lazy(()=>import ("./Child/LeadsTable/LeadsJunkList"));
 const LeadsAllCardList = lazy(()=>import("./Child/LeadsTable/LeadsAllCardList"));
@@ -66,6 +67,8 @@ class Leads extends Component {
  <LeadsCardList  filter={this.state.filter}/>
           ):viewType==="list" ? (<LeadsJunkList/>)
         :viewType==="all" ? (<LeadsAllCardList/>)
+        :viewType==="teams" ? (<LeadsTeamCardList/>)
+        
         :null}
        
         </Suspense>

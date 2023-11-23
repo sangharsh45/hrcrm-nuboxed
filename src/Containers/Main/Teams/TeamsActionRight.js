@@ -17,7 +17,7 @@ class TeamsActionRight extends React.Component {
         {this.props.viewType === "order" || this.props.viewType === "table" ?
           <Button
             type="primary"
-            ghost
+            // ghost
             onClick={() => handleTeamsModal(true)}
           >Add
             {/* <i class="fas fa-plus"></i> */}

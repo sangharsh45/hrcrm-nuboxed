@@ -7,6 +7,10 @@ const initialState = {
 
   addCallTaskModal:false,
 
+  fetchingTeamLeads: false,
+            fetchingTeamLeadsError: false,
+            teamLeads:[],
+
   fetchingCallTimelineStatus: false,
   fetchingCallTimelineStatusError: false,
   callTimeline:[],
@@ -16,6 +20,9 @@ const initialState = {
   documentsByLeadsId: [],
 
   addDrawerLeadsNotesModal:false,
+
+  linkingLeads: false,
+  linkingLeadsError: false,
 
 
   fetchingDocumentsByLeadsId: false,
@@ -59,6 +66,8 @@ const initialState = {
   addingDocumentByLeadsIdError: false,
 
   addLeadsSpeechModal:false,
+
+  addLeadsConfirmationModal:false,
 
   updateLeadsInitiativeModal:false,
 
@@ -172,6 +181,9 @@ return { ...state, viewType: action.payload };
 case types.HANDLE_LEADS_MODAL:
       return { ...state, addLeadsModal: action.payload };
 
+      case types.HANDLE_LEADS_CONFIRMATION_MODAL:
+      return { ...state, addLeadsConfirmationModal: action.payload };
+
      
 
       case types.ADD_LEADS_REQUEST:
@@ -226,7 +238,7 @@ case types.HANDLE_LEADS_MODAL:
         return {
           ...state,
           linkingCustomerStatus: false,
-         
+          addLeadsConfirmationModal:true,
         };
       case types.CONVERT_CUSTOMER_STATUS_FAILURE:
         return {
@@ -810,6 +822,36 @@ case types.HANDLE_LEADS_MODAL:
         fetchingAllLeads: false,
         fetchingAllLeadsError: true,
       };
+
+      case types.CONVERT_LEADS_REQUEST:
+        return { ...state, linkingLeads: true };
+      case types.CONVERT_LEADS_SUCCESS:
+        return {
+          ...state,
+          linkingLeads: false,
+          addLeadsConfirmationModal:false,
+        };
+      case types.CONVERT_LEADS_FAILURE:
+        return {
+          ...state,
+          linkingLeads: false,
+          linkingLeadsError: true,
+        };
+
+        case types.GET_TEAM_LEADS_REQUEST:
+          return { ...state, fetchingTeamLeads: true };
+        case types.GET_TEAM_LEADS_SUCCESS:
+          return {
+            ...state,
+            fetchingTeamLeads: false,
+        teamLeads:action.payload,
+          };
+        case types.GET_TEAM_LEADS_FAILURE:
+          return {
+            ...state,
+            fetchingTeamLeads: false,
+            fetchingTeamLeadsError: true,
+          };
 
 default:
 return state;

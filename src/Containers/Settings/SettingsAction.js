@@ -3865,7 +3865,7 @@ export const getAllVat = () => (
     });
 };
 
-export const websiteSingleMultiple = (process, cb) => (dispatch) => {
+export const websiteSingleMultiple = (process,orgId,type, cb) => (dispatch) => {
   dispatch({ type: types.UPDATE_WEBSITE_SINGLE_REQUEST });
 
   axios
@@ -3875,6 +3875,7 @@ export const websiteSingleMultiple = (process, cb) => (dispatch) => {
       },
     })
     .then((res) => {
+      dispatch(getDistributionAutomation(orgId,"lead"));
       console.log(res);
       dispatch({
         type: types.UPDATE_WEBSITE_SINGLE_SUCCESS,

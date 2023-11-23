@@ -88,7 +88,7 @@ const ContactActionLeft = (props) => {
           </span>
         </Badge>
       </Tooltip>
-   
+      {user.teamsAccessInd === true && (
       <Tooltip
         title="Teams"
       >
@@ -112,6 +112,7 @@ const ContactActionLeft = (props) => {
           </span>
         </Badge>
       </Tooltip>
+      )}
       {user.crmInd=== true && user.contactFullListInd===true && ( 
       <Tooltip
         title="All"

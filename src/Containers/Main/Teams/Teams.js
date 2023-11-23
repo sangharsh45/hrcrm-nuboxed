@@ -9,6 +9,7 @@ import TeamsTable from "./TeamsTable";
 import TeamsAllocationTable from "./TeamsAllocationTable";
 import TeamsClientTable from "./TeamsClientTable";
 import TeamsInventoryTable from "./TeamsInventoryTable";
+import TeamsCardList from "./TeamsCard.js/TeamsCardList";
 
 class Teams extends Component {
   render() {
@@ -31,21 +32,16 @@ class Teams extends Component {
           addTeamsModal={addTeamsModal}
           handleTeamsModal={handleTeamsModal}
         />
-        {/* <Suspense fallback={<BundleLoader />}>
-          {
-           
-            viewType === "table" && user.functionName !== "Customer Care" ? (
-              <TeamsTable />
-            ) : viewType === "partner" && user.functionName !== "Customer Care" ? (
-              <TeamsAllocationTable />
-            ) :
-              viewType === "client" ? (
-                <TeamsClientTable />
-              ) : viewType === "inventory" ? (
-                <TeamsInventoryTable />
-              ) :
-                null}
-        </Suspense> */}
+        <Suspense fallback={<BundleLoader />}>
+        {  viewType === "table" ?
+         <TeamsCardList/>
+ 
+  // :viewType==="all" ?
+//  <TeamsAllCardList  /> 
+
+          :null}
+      
+        </Suspense>
       </React.Fragment>
     );
   }

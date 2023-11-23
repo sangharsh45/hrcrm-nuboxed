@@ -1153,3 +1153,30 @@ export const getAllContact = (pageNo,filter) => (dispatch) => {
       });
     });
 };
+
+export const getTeamContact = (userId,pageNo,filter) => (dispatch) => {
+ 
+  dispatch({
+    type: types.GET_TEAM_CONTACT_REQUEST,
+  });
+  axios
+    .get(`${base_url}/contact/team/${userId}/${pageNo}/${filter}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.GET_TEAM_CONTACT_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err.response);
+      dispatch({
+        type: types.GET_TEAM_CONTACT_FAILURE,
+        payload: err,
+      });
+    });
+};

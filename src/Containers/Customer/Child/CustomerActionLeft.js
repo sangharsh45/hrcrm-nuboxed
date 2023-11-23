@@ -104,7 +104,7 @@ function  handleFilterChange(data){
           </span>
         </Badge>
       </Tooltip>
-      
+      {user.teamsAccessInd === true && (
       <Tooltip>
         <Badge
           size="Teams"
@@ -122,6 +122,7 @@ function  handleFilterChange(data){
           </span>
         </Badge>
       </Tooltip>
+      )}
       {user.crmInd=== true && user.customerFullListInd===true && ( 
       <Tooltip>
         <Badge

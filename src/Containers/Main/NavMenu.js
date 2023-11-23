@@ -750,7 +750,7 @@ function NavMenu(props) {
 
 
 
-        {/* { user.teamsAccessInd === true && user.erpInd === true  && (
+        { user.teamsAccessInd === true &&  (
                
                <Menu.Item key="/teams" style={{height:"27px",paddingLeft:"1rem"}}>
                 <Link to="/teams">
@@ -764,7 +764,7 @@ function NavMenu(props) {
                    </span>
                  </Link> 
                 </Menu.Item>
-                )} */}
+                )} 
 
 
         <Menu.Item key="/collection" style={{ height: "27px", paddingLeft: "1rem" }}>

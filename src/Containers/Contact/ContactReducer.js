@@ -24,6 +24,10 @@ const initialState = {
   fetchingDelasContactDataError: false,
   dealsContactData:[],
 
+  fetchingTeamContact: false,
+  fetchingTeamContactError: false,
+  teamContact:[],
+
   fetchingVendorContactData: false,
   fetchingVendorContactDataError: false,
   vendorContactData:[],
@@ -825,8 +829,26 @@ export const contactReducer = (state = initialState, action) => {
                           
                           };
                         case types.GET_ALL_CONTACT_FAILURE:
-                          return { ...state, fetchingAllContacts: false, fetchingAllContactsError: true }; 
+    
+    
+                        return { ...state, fetchingAllContacts: false, fetchingAllContactsError: true }; 
 
+
+
+                        case types.GET_TEAM_CONTACT_REQUEST:
+                          return { ...state, fetchingTeamContact: true };
+                        case types.GET_TEAM_CONTACT_SUCCESS:
+                          return {
+                            ...state,
+                            fetchingTeamContact: false,
+                        teamContact:action.payload,
+                          };
+                        case types.GET_TEAM_CONTACT_FAILURE:
+                          return {
+                            ...state,
+                            fetchingTeamContact: false,
+                            fetchingTeamContactError: true,
+                          };
    default:
       return state;
 
