@@ -5,6 +5,10 @@ const initialState = {
 
   viewType: "table",
 
+  fetchingEmployeeList: false, 
+  fetchingEmployeeListError: false ,
+  teamEmployeeList:[],
+
 
   addTeamMemberModal: false,
 
@@ -366,6 +370,27 @@ export const teamsReducer = (state = initialState, action) => {
         fetchingInventoryInTeam: false,
         fetchingInventoryInTeamError: true,
       };
+
+
+      case types.GET_TEAM_MEMBER_LIST_REQUEST:
+        return { ...state, fetchingEmployeeList: true };
+      case types.GET_TEAM_MEMBER_LIST_SUCCESS:
+        return { ...state, fetchingEmployeeList: false, teamEmployeeList: action.payload };
+      case types.GET_TEAM_MEMBER_LIST_FAILURE:
+        return { ...state, fetchingEmployeeList: false, fetchingEmployeeListError: true };
+  
+        case types.ADD_TEAMS_REQUEST:
+          return { ...state, addingTeam: true };
+        case types.ADD_TEAMS_SUCCESS:
+          return { ...state, 
+            addingTeam: false, 
+            addTeamsModal: false ,
+            // customerByUserId:[action.payload,...state.customerByUserId]
+        
+          };
+        case types.ADD_TEAMS_FAILURE:
+          return { ...state, addingTeam: false, addTeamsModal: false };
+    
 
     default:
       return state;

@@ -6,21 +6,21 @@ import {
   TextInput,
   Select,
   StyledLabel,
-} from "../../../../../Components/UI/Elements";
-import { MainWrapper, Spacer } from "../../../../../Components/UI/Elements";
+} from "../../../../Components/UI/Elements";
+import { MainWrapper, Spacer } from "../../../../Components/UI/Elements";
 import { FormattedMessage } from "react-intl";
-import { SelectComponent } from "../../../../../Components/Forms/Formik/SelectComponent";
+import { SelectComponent } from "../../../../Components/Forms/Formik/SelectComponent";
 import { Button, Popconfirm, Switch } from "antd";
 import {
-    websiteSingleMultiple,
-    getDistributionAutomation,
+    // websiteSingleMultiple,
     getDepartmentwiserUser,
-} from "../../../../Settings/SettingsAction";
-import { FlexContainer } from "../../../../../Components/UI/Layout";
-import {getDepartments} from "../../../Department/DepartmentAction"
+} from "../../../Settings/SettingsAction";
+import {convertCustomerStatus} from "../../LeadsAction";
+import { FlexContainer } from "../../../../Components/UI/Layout";
+import {getDepartments} from "../../../Settings/Department/DepartmentAction"
 import moment from "moment";
 const { Option } = Select;
-function WebsiteForm(props) {
+function LeadsConfirmStatusForm(props) {
 
     const [single, setSingle] = useState(false);
     const [selectedDept, setSelectedDept] = useState('');
@@ -30,17 +30,11 @@ console.log("single",single)
         setSingle(checked)
     }
   useEffect(() => {
-    props.getDistributionAutomation(props.orgId,"lead");
+  
     props.getDepartments();
     
   }, []);
 
-  const departmentNameOption = props.departments.map((item) => {
-    return {
-        label: `${item.departmentName || ""}`,
-        value: item.departmentId,
-    };
-});
 
 const handleDeptChange = (event) => {
     const selectedDept = event.target.value;
@@ -64,9 +58,8 @@ const handleDeptChange = (event) => {
       <Formik
         enableReinitialize
         initialValues={{
-          multyAsignedTOId:single === false ? [selectedUser] : [],
+          multyAsignedTOId: [],
           type:"lead",
-          departmentId:props.distributionAutomation.departmentId || "",
         //   timePeriod: props.distributionAutomation.timePeriod === 0 ? "Not Applicable" :props.distributionAutomation.timePeriod|| "",
         //   orderTimePeriod: props.distributionAutomation.orderTimePeriod === 0 ? "Not Applicable" :props.distributionAutomation.orderTimePeriod || "",
           userId: props.userId,
@@ -75,13 +68,14 @@ const handleDeptChange = (event) => {
         onSubmit={(values) => {
           console.log(values)
        
-          props.websiteSingleMultiple(
+          props.convertCustomerStatus(
             {
               ...values,
               departmentId: selectedDept,
-              singleMultiInd: single ? true : false,
+              // singleMultiInd: single ? true : false,
             },
-            props.orgId,"lead",
+            props.rowdata.leadsId,
+            props.rowdata.userId,
           );
         }}
       >
@@ -123,13 +117,14 @@ const handleDeptChange = (event) => {
                           style={{ width: "5em" }}
                           onChange={handleSingleMultiple}
                           checked={single}
-                          checkedChildren="Multiple"
-                          unCheckedChildren="Single"
+                          checkedChildren="Self"
+                          unCheckedChildren="Select"
                         />
                       {/* </Popconfirm> */}
                     </div>
               </div>
               <Spacer />
+              {single === false &&(
               <FlexContainer justifyContent="space-between">
                                                     <div style={{ width: "35%" }}>
                                                     <label style={{color:"#444",fontWeight:"bold",fontSize:" 0.75rem"}}>Department</label>
@@ -148,7 +143,7 @@ const handleDeptChange = (event) => {
         </div>
         {selectedDept && (
           <>                                           
-{single === false?(
+
             <div style={{ width: "35%" }}>
             <label style={{color:"#444",fontWeight:"bold",fontSize:" 0.75rem"}}>User</label>
             <select
@@ -167,39 +162,22 @@ const handleDeptChange = (event) => {
   </select>
   </div> 
 
-):(   
-  <div style={{ width: "35%" }}>
-   <Field
-               name="multyAsignedTOId"
-               // label="Include"
-               label={
-                 <FormattedMessage
-                   id="app.multyAsignedTOId"
-                   defaultMessage="User"
-                 />
-               }
-               mode
-               placeholder="Select"
-               component={SelectComponent}
-               options={Array.isArray(employeesData) ? employeesData : []}
-               value={values.multyAsignedTOId}
-             
-             />
-   </div>   
-)}                        
+
+                       
 </> 
         )}                                                  
                                                 </FlexContainer>
-             
+                                           
+                                           )}
             </div>
           </FlexContainer>
-       
+        
               <Spacer style={{ marginTop: "1.25em" }} />
               <FlexContainer justifyContent="flex-end">
                 <Button
                   type="primary"
                   htmlType="submit"
-                  Loading={props.updateRequirement}
+                  Loading={props.linkingLeads}
                 >
                   <FormattedMessage id="app.update" defaultMessage="Update" />
                   {/* Update */}
@@ -214,25 +192,25 @@ const handleDeptChange = (event) => {
   );
 }
 
-const mapStateToProps = ({ settings, departments, auth }) => ({
+const mapStateToProps = ({ settings,leads, departments, auth }) => ({
   userId: auth.userDetails.userId,
   departmentwiseUser:settings.departmentwiseUser,
   distributionAutomation: settings.distributionAutomation,
   orgId: auth.userDetails.organizationId,
   departments:departments.departments,
-  updateWebsiteSingle: settings.updateWebsiteSingle,
+  linkingLeads:leads.linkingLeads,
   updateWebsiteSingleError: settings.updateWebsiteSingleError,
 });
 
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
-        websiteSingleMultiple,
+      convertCustomerStatus,
         getDepartments,
         getDepartmentwiserUser,
-        getDistributionAutomation,
+        // getDistributionAutomation,
     },
     dispatch
   );
 
-export default connect(mapStateToProps, mapDispatchToProps)(WebsiteForm);
+export default connect(mapStateToProps, mapDispatchToProps)(LeadsConfirmStatusForm);

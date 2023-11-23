@@ -142,7 +142,7 @@ function CallForm(props) {
     const employeesData = props.employees.map((item) => {
       return {
         label: `${item.fullName}`,
-        value: item.opportunityId,
+        value: item.employeeId,
       };
     });
     const opportunityNameOption = props.allOpportunityData.map((item) => {

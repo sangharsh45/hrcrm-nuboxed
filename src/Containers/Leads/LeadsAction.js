@@ -19,6 +19,13 @@ export const setLeadsViewType = (viewType) => (dispatch) => {
     });
   };
 
+  export const handleLeadsConfirmationModal = (modalProps) => (dispatch) => {
+    dispatch({
+      type: types.HANDLE_LEADS_CONFIRMATION_MODAL,
+      payload: modalProps,
+    });
+  };
+
   export const addLeads = (leads) => (dispatch, getState) => {
     const userId = getState().auth.userDetails.userId;
   
@@ -122,7 +129,7 @@ export const setLeadsViewType = (viewType) => (dispatch) => {
       payload: data,
     });
   };
-  export const convertCustomerStatus = (data, leadsId) => (
+  export const convertCustomerStatus = (data, leadsId,assignedToId) => (
     dispatch,
     getState
   ) => {
@@ -132,25 +139,25 @@ export const setLeadsViewType = (viewType) => (dispatch) => {
       type: types.CONVERT_CUSTOMER_STATUS_REQUEST,
     });
     axios
-      .put(`${base_url}/leads/convert/${leadsId}`, data, {
+      .put(`${base_url}/leads/convert/${leadsId}/${assignedToId}`, data, {
         headers: {
           Authorization: "Bearer " + sessionStorage.getItem("token") || "",
         },
       })
       .then((res) => {
         dispatch(getLeads(userId));
-        dispatch(getLeadsRecords(userId));
+        // dispatch(getLeadsRecords(userId));
         dispatch({
           type: types.CONVERT_CUSTOMER_STATUS_SUCCESS,
           payload: res.data,
         });
-        Swal.fire({
-          icon: 'success',
-          fontSize:"2rem",
-          title: 'Lead Qualified Succefully!',
-          showConfirmButton: false,
-          timer: 4000
-        })
+        // Swal.fire({
+        //   icon: 'success',
+        //   fontSize:"2rem",
+        //   title: 'Lead Qualified Succefully!',
+        //   showConfirmButton: false,
+        //   timer: 4000
+        // })
         // cb && cb("success");
       })
       .catch((err) => {
@@ -1122,6 +1129,67 @@ export const setLeadsViewType = (viewType) => (dispatch) => {
         console.log(err.response);
         dispatch({
           type: types.GET_ALL_LEADS_FAILURE,
+          payload: err,
+        });
+      });
+  };
+
+  export const convertLeads = (data,leadsId,assignedToId) => (
+    dispatch,
+    getState
+  ) => {
+    // debugger;
+    const { userId } = getState("auth").auth.userDetails;
+    dispatch({
+      type: types.CONVERT_LEADS_REQUEST,
+    });
+    axios
+      .put(`${base_url}/leads/convert/${leadsId}/${assignedToId}`, data, {
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+        },
+      })
+      .then((res) => {
+        dispatch(getLeads(userId));
+        dispatch(getLeadsRecords(userId));
+        dispatch({
+          type: types.CONVERT_LEADS_SUCCESS,
+          payload: res.data,
+        });
+       
+      })
+      .catch((err) => {
+        console.log(err);
+        dispatch({
+          type: types.CONVERT_LEADS_FAILURE,
+          payload: err,
+        });
+        // cb && cb("failuer");
+      });
+  };
+
+  export const getTeamLeads = (userId,pageNo,filter) => (dispatch) => {
+ 
+    dispatch({
+      type: types.GET_TEAM_LEADS_REQUEST,
+    });
+    axios
+      .get(`${base_url}/leads/team/${userId}/${pageNo}/${filter}`, {
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+        },
+      })
+      .then((res) => {
+        console.log(res);
+        dispatch({
+          type: types.GET_TEAM_LEADS_SUCCESS,
+          payload: res.data,
+        });
+      })
+      .catch((err) => {
+        console.log(err.response);
+        dispatch({
+          type: types.GET_TEAM_LEADS_FAILURE,
           payload: err,
         });
       });

@@ -2,6 +2,7 @@ import React, { useState, useEffect, Suspense, lazy } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { BundleLoader } from "../../Components/Placeholder";
+import ContactTeamCardList from "./Child/ContactTable/ContactTeamCardList";
 import {
   handleContactModal,
   setContactsViewType,
@@ -167,6 +168,7 @@ const filterData = filteredData.filter(item =>
          filterData={filterData}
          /> :
          props.viewType ==="all" ? <ContactAllCardList/>
+         :viewType==="teams" ? (<ContactTeamCardList/>)
 
         : null}
       </Suspense>

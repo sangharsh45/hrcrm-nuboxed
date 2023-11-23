@@ -11,12 +11,12 @@ class TeamsHeader extends Component {
     return (
       <>
         <ActionHeader
-        //   leftComponent={
-        //     <TeamsActionLeft
-        //       viewType={viewType}
-        //       setTeamsViewType={setTeamsViewType}
-        //     />
-        //   }
+          leftComponent={
+            <TeamsActionLeft
+              viewType={viewType}
+              setTeamsViewType={setTeamsViewType}
+            />
+          }
           rightComponent={
             <TeamsActionRight 
             viewType={viewType}

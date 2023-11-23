@@ -6,7 +6,7 @@ import { bindActionCreators } from "redux";
 import moment from "moment";
 import ExploreIcon from "@mui/icons-material/Explore";
 import { DeleteOutlined } from "@ant-design/icons";
-import { MultiAvatar, SubTitle } from "../../../../../Components/UI/Elements";
+import { MultiAvatar,MultiAvatar2, SubTitle } from "../../../../../Components/UI/Elements";
 import "jspdf-autotable";
 import { OnlyWrapCard } from '../../../../../Components/UI/Layout'
 import {
@@ -18,9 +18,8 @@ import {
 //   updateTypeForPitch,
 //   handleAssimodal
 } from "../../../DealAction";
-import ReactCountryFlag from 'react-country-flag';
-import AddchartIcon from '@mui/icons-material/Addchart';  
-import { Button, Tooltip } from "antd";
+import { CurrencySymbol,Link } from "../../../../../Components/Common"; 
+import { Button, Tooltip,Dropdown ,Menu,Progress} from "antd";
 import { FormattedMessage } from "react-intl";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
 import InfiniteScroll from "react-infinite-scroll-component";
@@ -63,15 +62,15 @@ const DealsAllCardList = (props) => {
     <>
    <OnlyWrapCard style={{backgroundColor:"#E3E8EE"}}><div className=" flex justify-between w-[98%] p-2 bg-transparent font-bold sticky top-0 z-10">
         <div className=" md:w-[12rem]">Name</div>
-        <div className=" md:w-[5.5rem]"></div>
-        <div className=" md:w-32 ">Phone #</div>
-        <div className="md:w-32">Country</div>
-        <div className="md:w-52">Company</div>
-        {/* <div className="md:w-20">Sector</div>  */}
-        <div className="md:w-24">Assigned to</div>
+        <div className=" md:w-20">Investor</div>
+        <div className=" md:w-32 ">Sponsor</div>
+        <div className="md:w-32">Start Date</div>
+        <div className="md:w-56">Proposal Amount</div>
+        <div className="md:w-20">Stages</div> 
+        <div className="md:w-24">Sales Rep</div>
         <div className="md:w-20">Owner</div>
-        <div className="md:w-20">Qualify</div>
-        <div className="w-12">Action</div>
+        <div className="md:w-20"></div>
+        <div className="w-12"></div>
 
       </div>
       <InfiniteScroll
@@ -82,6 +81,12 @@ const DealsAllCardList = (props) => {
         height={"75vh"}
       >
    {props.allDealsData.map((item) => { 
+       var findProbability = item.probability;
+       item.stageList.forEach((element) => {
+         if (element.oppStage === item.oppStage) {
+           findProbability = element.probability;
+         }
+       });
  const currentdate = moment().format("DD/MM/YYYY");
  const date = moment(item.creationDate).format("DD/MM/YYYY");
        
@@ -161,174 +166,120 @@ const DealsAllCardList = (props) => {
                                         </div>
                                         </div>
                                 </div>
-                                <div class="flex flex-row items-center md:w-3/12 max-sm:flex-row w-full max-sm:justify-between">
-
-<div><ButtonGroup>
-<RoleButton
- type="Warm"
- iconType="	fas fa-burn"
- // tooltip="Warm"
- tooltip={<FormattedMessage
-   id="app.warm"
-   defaultMessage="Warm"
- />}
- role={item.type}
- onClick={() =>{
- const typ="Warm"
-   props.updateTypeForPitch(item.investorLeadsId,typ)
- }}
-/>
-</ButtonGroup></div>
-
-  
-
-
-     <div>
-     <ButtonGroup>
-<RoleButton
- type="Hot"
- iconType="fas fa-mug-hot"
- // tooltip="Hot"
- tooltip={<FormattedMessage
-   id="app.hot"
-   defaultMessage="Hot"
- />}
- role={item.type}
- onClick={() =>{
-  const typ="Hot"
-   props.updateTypeForPitch(item.investorLeadsId,typ)
- }}
-/>
-</ButtonGroup>
-</div>
-     <div>
-<ButtonGroup>
-<RoleButton
- type="Cold"
- iconType="far fa-snowflake"
- // tooltip="Cold"
- tooltip={<FormattedMessage
-   id="app.cold"
-   defaultMessage="Cold"
- />}
- role={item.type}
- onClick={() => {
-  const typ="Cold"
-   props.updateTypeForPitch(item.investorLeadsId,typ)
- }}
-/>
-</ButtonGroup>
-</div>
-
-</div>  
-     </div>  
-                                <div class="flex justify-between md:ml-4">
                                 <div className=" flex font-medium flex-col  md:w-44 max-sm:flex-row w-full max-sm:justify-between ">
-                           {/* <h4 class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden"> Phone # </h4> */}
 
-                           <h4 class="text-[0.82rem] text-cardBody font-poppins">
-  {item.countryDialCode && item.phoneNumber
-    ? `${item.countryDialCode} ${item.phoneNumber}`
-    : 'Not available'}
+<h4 class=" text-sm text-cardBody font-poppins">   
+
+{item.investor}
+
 </h4>
+</div>
 
-                       </div>
-                       <div className=" flex font-medium flex-col md:w-[7rem] max-sm:flex-row w-full max-sm:justify-between ">
-                                  
+<div className=" flex font-medium flex-col md:w-44 max-sm:flex-row w-full max-sm:justify-between ">
 
-                                  {/* <h4 class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden">Country</h4> */}
-                                  <h4 class=" text-[0.82rem] text-cardBody font-poppins">
-                                    <ReactCountryFlag
-                          countryCode={item.countryAlpha2Code}
-                          svg
-                          style={{
-                            width: '1em',
-                            height: '1em',
-                          }}
-                        />
-                        &nbsp;
-                       {item.address && item.address.length && item.address[0].country}
-                                    </h4>
-                              </div>
-                              </div>
-                       <div class="flex justify-between  max-sm:mb-2 ">
-                       <div className=" flex font-medium flex-col  md:w-[9rem] max-sm:flex-row w-full max-sm:justify-between ">
-                           {/* <h4 class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden"> Company </h4> */}
-                           <h4 className="text-[0.82rem] text-cardBody font-poppins">
-                           {item.companyName || "Not Available"}
+
+<h4 class=" text-sm text-cardBody font-poppins">
+<SubTitle>
+{item.contactName === null ? "None" :
+<MultiAvatar2
+primaryTitle={item.contactName}
+imageId={item.imageId}
+imageURL={item.imageURL}
+imgWidth={"1.8em"}
+imgHeight={"1.8em"}
+/>
+}
+</SubTitle>
 </h4>
+</div>
+</div>
+<div class="flex">
+<div className=" flex font-medium flex-col md:w-36 max-sm:flex-row w-full max-sm:justify-between ">
 
-                       </div>
-                       <div class="rounded-full bg-white  h-5 cursor-pointer w-8">
-                    {item.url !== null ? (
-              <Tooltip title={item.url}>
-                <span
-                  //type="edit"
-                  style={{ cursor: "pointer" }}
-                  onClick={() => {}}
-                >
-                  {" "}
-                  <a href={`item.url`} target="_blank">
-                    <ExploreIcon
-                      style={{ cursor: "pointer", color: "green" ,fontSize: "1rem",}}
-                    />
-                  </a>
-                </span>
-              </Tooltip>
-            ) : null}
-                        </div>
-                                {/* <div className=" flex font-medium flex-col  md:w-[6rem] max-sm:flex-row w-full max-sm:justify-between ">
-                           
-                                    <h4 class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden"> Sector </h4>
-                                    <h4 class=" text-[0.82rem] text-cardBody font-poppins">   
-                                    {item.sector}
-                                    </h4>
-                                </div> */}
-                                </div>
-                               
-          
-     <div class="md:w-[1%]"></div>
-     <div class="flex justify-between max-sm:mb-1 md:items-center">
-     <div class="flex justify-between max-sm:w-[50%] ">
-     <div className=" flex font-medium flex-col md:w-32 max-sm:flex-row w-full max-sm:justify-between ">
-                                    {/* <h4 class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden">Assigned to</h4> */}
 
-                                    <div class=" text-[0.82rem] text-cardBody font-poppins">
-                                    
-                                    <span>
-              {item.assignedTo === null ? (
-                "None"
-              ) : (
-                <MultiAvatar
-                  primaryTitle={item.assignedTo}
-                  imgWidth={"1.8em"}
-                  imgHeight={"1.8em"}
-                />
-              )}
-            </span>
-             
-                                    </div>
-                                </div>
-     <div className=" flex font-medium flex-col md:w-20  max-sm:flex-row w-full max-sm:justify-between">
-                       
-                       {/* <h4 class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden">Owner</h4> */}
+<div class=" text-sm justify-center text-cardBody font-poppins">
+{moment(item.startDate).format("ll")}
+</div>
+</div>
 
-                       <span>
-              <MultiAvatar
-                primaryTitle={item.ownerName}
-                imageId={item.ownerImageId}
-                imageURL={item.imageURL}
-                imgWidth={"1.8rem"}
-                imgHeight={"1.8rem"}
-              />
-            </span>
-                   </div>
-                               
-              
- 
-                                </div>
-                   
-                    </div>
+<div className=" flex font-medium flex-col md:w-36 max-sm:flex-row w-full max-sm:justify-between ">
+
+
+<div class=" text-sm text-cardBody font-poppins text-center">
+<CurrencySymbol currencyType={item.currency} />
+&nbsp;
+{item.proposalAmount}
+
+</div>
+</div>
+<div className=" flex font-medium flex-col md:w-36 max-sm:flex-row w-full max-sm:justify-between ">
+
+
+<div class=" text-sm text-cardBody font-poppins text-center">
+<Dropdown
+overlay={
+<div>
+<Menu mode="horizontal">
+<Menu.Item
+style={{
+paddingLeft: 5,
+paddingRight: 5,
+backgroundColor: "#F5F5F5",
+}}
+>
+
+</Menu.Item>
+</Menu>
+</div>
+}
+trigger={["click"]}
+>
+<Tooltip title={item.stageName}>
+{" "}
+<Progress
+type="circle"
+style={{ cursor: "pointer", color: "red",fontSize:"0.8rem" }}
+percent={findProbability}
+width={30}
+strokeColor={"#005075"}
+/>
+</Tooltip>
+</Dropdown>
+
+</div>
+</div>
+<div className=" flex font-medium flex-col md:w-32 max-sm:flex-row w-full max-sm:justify-between ">
+
+
+<div class=" text-sm text-cardBody font-poppins">
+
+<span>
+<MultiAvatar2
+primaryTitle={item.assignedTo}
+imgWidth={"1.8rem"}
+imgHeight={"1.8rem"}
+/>
+</span>
+
+</div>
+</div>
+<div className=" flex font-medium flex-col md:w-20 max-sm:flex-row w-full mb-1 max-sm:justify-between ">
+
+
+
+<Tooltip title={item.ownerName}>
+<span>
+<MultiAvatar2
+primaryTitle={item.ownerName}
+imageId={item.ownerImageId}
+imageURL={item.imageURL}
+imgWidth={"1.8rem"}
+imgHeight={"1.8rem"}
+/>
+</span>
+</Tooltip>
+</div>
+</div>
                       </div>
                             </div>
                          

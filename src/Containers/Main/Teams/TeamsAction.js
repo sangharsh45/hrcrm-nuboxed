@@ -125,12 +125,12 @@ export const addTeamsContact = (team) => (dispatch) => {
 };
 
 //get list of team
-export const getTeamList = () => (dispatch) => {
+export const getTeamList = (userId) => (dispatch) => {
   dispatch({
     type: types.GET_TEAM_REQUEST,
   });
   axios
-    .get(`${base_url}/team`, {
+    .get(`${base_url}/team/${userId}`, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },
@@ -527,3 +527,66 @@ export const getInventoryInTeam = () => (dispatch) => {
       });
     });
 };
+
+export const getTeamMemberlist = (filter) => (dispatch) => {
+  dispatch({
+    type: types.GET_TEAM_MEMBER_LIST_REQUEST,
+  });
+
+  axios
+  .get(`${base_url}/employee/user-list/drop-down/crm`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.GET_TEAM_MEMBER_LIST_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.GET_TEAM_MEMBER_LIST_FAILURE,
+        payload: err,
+      });
+    });
+};
+
+export const addTeams = (customer) => (dispatch, getState) => {
+  const userId = getState().auth.userDetails.userId;
+
+  // const opportunityId = getState().opportunity.opportunity.opportunityId;
+  console.log("inside add customer");
+  dispatch({
+    type: types.ADD_TEAMS_REQUEST,
+  });
+
+  axios
+    .post(`${base_url}/team`, customer, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      
+    
+      dispatch({
+        type: types.ADD_TEAMS_SUCCESS,
+        payload: res.data,
+      });
+      // cb && cb();
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.ADD_TEAMS_FAILURE,
+        payload: err,
+      });
+      // cb && cb();
+    });
+};
+

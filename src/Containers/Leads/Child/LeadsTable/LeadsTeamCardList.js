@@ -16,7 +16,7 @@ import { DeleteOutlined } from "@ant-design/icons";
 import { getCountries } from "../../../Auth/AuthAction";
 import { Link } from "../../../../Components/Common";
 import {
-  getLeads,
+    getTeamLeads,
   deleteLeadsData,
   setEditLeads,
   handleLeadsNotesDrawerModal,
@@ -43,12 +43,12 @@ import AddConfirmLedsStatusModal from "./AddConfirmLedsStatusModal";
 
 const ButtonGroup = Button.Group;
 
-const LeadsCardList = (props) => {
+const LeadsTeamCardList = (props) => {
   const [page, setPage] = useState(0);
   const [hasMore, setHasMore] = useState(true);
   useEffect(() => {
     setPage(page + 1);
-    props.getLeads(props.userId, page,"creationdate");
+    props.getTeamLeads(props.userId, page,"creationdate");
     props.getSectors();
     props.getCountries();
   }, []);
@@ -62,7 +62,7 @@ const LeadsCardList = (props) => {
   const handleLoadMore = () => {
    
     setPage(page + 1);
-    props.getLeads(
+    props.getTeamLeads(
       props.currentUser ? props.currentUser : props.userId,
       page,
       props.filter?props.filter:"creationdate"
@@ -77,7 +77,7 @@ const LeadsCardList = (props) => {
     handleLeadsNotesDrawerModal,
     updateLeadsModal,
     fetchingLeads,
-    leadsAllData,
+    teamLeads,
     user,
   } = props;
 
@@ -99,13 +99,13 @@ const LeadsCardList = (props) => {
 
       </div>
       <InfiniteScroll
-        dataLength={leadsAllData.length}
+        dataLength={teamLeads.length}
         next={handleLoadMore}
         hasMore={hasMore}
         loader={fetchingLeads?<h4 style={{ textAlign: 'center' }}>Loading...</h4>:null}
         height={"75vh"}
       >
-        {leadsAllData.map((item) => {
+        {teamLeads.map((item) => {
           const currentdate = moment().format("DD/MM/YYYY");
           const date = moment(item.creationDate).format("DD/MM/YYYY");
 
@@ -515,8 +515,6 @@ const LeadsCardList = (props) => {
         handleLeadsNotesDrawerModal={props.handleLeadsNotesDrawerModal}
       />
           <AddConfirmLedsStatusModal
-           rowdata={rowdata}
-           handleRowData={handleRowData}
            addLeadsConfirmationModal={props.addLeadsConfirmationModal}
            handleLeadsConfirmationModal={props.handleLeadsConfirmationModal}
            />
@@ -525,7 +523,7 @@ const LeadsCardList = (props) => {
 };
 
 const mapStateToProps = ({ auth, leads, sector }) => ({
-  leadsAllData: leads.leadsAllData,
+    teamLeads: leads.teamLeads,
   userId: auth.userDetails.userId,
   lead: leads.lead,
   user: auth.userDetails,
@@ -541,7 +539,7 @@ const mapStateToProps = ({ auth, leads, sector }) => ({
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
-      getLeads,
+        getTeamLeads,
       handleLeadsConfirmationModal,
       getSectors,
       deleteLeadsData,
@@ -557,7 +555,7 @@ const mapDispatchToProps = (dispatch) =>
     dispatch
   );
 
-export default connect(mapStateToProps, mapDispatchToProps)(LeadsCardList);
+export default connect(mapStateToProps, mapDispatchToProps)(LeadsTeamCardList);
 function RoleButton({ type, iconType, tooltip, role, size, onClick }) {
   console.log(role);
   console.log(type);
