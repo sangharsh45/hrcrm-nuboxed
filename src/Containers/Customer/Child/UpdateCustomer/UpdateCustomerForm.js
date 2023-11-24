@@ -3,10 +3,12 @@ import { connect } from "react-redux";
 import { FormattedMessage } from "react-intl";
 import { bindActionCreators } from "redux";
 import { Button ,Switch,Checkbox} from "antd";
+import ProgressiveImage from "../../../../Components/Utils/ProgressiveImage";
+import ClearbitImage from "../../../../Components/Forms/Autocomplete/ClearbitImage";
 import AddressFieldArray from "../../../../Components/Forms/Formik/AddressFieldArray";
 import { Formik, Form, Field, FieldArray, FastField } from "formik";
 import * as Yup from "yup";
-import { updateCustomer,setEditCustomer } from "../../CustomerAction";
+import { updateCustomer,setEditCustomer ,setClearbitData} from "../../CustomerAction";
 import { getAllSalesList } from "../../../Opportunity/OpportunityAction";
 import { getAllCustomerEmployeelist } from "../../../Employees/EmployeeAction";
 import { getSectors } from "../../../../Containers/Settings/Sectors/SectorsAction";
@@ -45,6 +47,7 @@ function UpdateCustomerForm (props) {
     const {
       accounts,
       user,
+      clearbit,
       updateCustomerById,
       updateCustomer,
       setEditingCustomer,
@@ -84,12 +87,14 @@ function UpdateCustomerForm (props) {
             notes: setEditingCustomer.notes || "",
             address: [
               {
+                // country:setEditingCustomer.country || "",
                 addressId: setEditingCustomer.address.length ? setEditingCustomer.address[0].addressId : "",
                 address1: setEditingCustomer.address.length ? setEditingCustomer.address[0].address1 : "",
                 address2:  setEditingCustomer.address.length ? setEditingCustomer.address[0].address2 : "",
                 street:  setEditingCustomer.address.length ? setEditingCustomer.address[0].street : "",
                 city:  setEditingCustomer.address.length ? setEditingCustomer.address[0].city : "",
                 state:  setEditingCustomer.address.length ? setEditingCustomer.address[0].state : "",
+                country: setEditingCustomer.address.length ? setEditingCustomer.address[0].country : "",
                 postalCode:  setEditingCustomer.address.length ? setEditingCustomer.address[0].postalCode : "",             
               },
             ],
@@ -121,7 +126,31 @@ function UpdateCustomerForm (props) {
             <Form className="form-background">
               <div class=" flex justify-around max-sm:flex-col">
                 <div class=" w-w47.5 max-sm:w-wk" >
-                    <Spacer/>
+                <div>
+                    {clearbit && clearbit.hasOwnProperty("logo") && (
+                      <ProgressiveImage
+                        preview={
+                          "http://pluspng.com/img-png/twitter-logo-png-twitter-logo-png-256.png"
+                        }
+                        image={clearbit.logo}
+                        width={140}
+                        height={150}
+                        borderRadius={25}
+                        padding={15}
+
+                      />
+                    )}
+                    {clearbit && clearbit.hasOwnProperty("logo") ? (
+                      <a
+                        href="https://clearbit.com"
+                        target="_blank"
+                        style={{ fontSize: 13, marginLeft: 5 }}
+                      >
+                        Logos provided by Clearbit
+                      </a>
+                    ) : null}
+                  </div>
+                  <Spacer />
                    <StyledLabel><FormattedMessage id="app.name" defaultMessage="Name" /></StyledLabel>
                   <Field
                     isRequired
@@ -129,7 +158,9 @@ function UpdateCustomerForm (props) {
                     type="text"
                     isColumn
                     width={"100%"}
-                    component={InputComponent}
+                    setClearbitData={props.setClearbitData}
+                    component={ClearbitImage}
+                    // component={InputComponent}
                     accounts={accounts}
                     inlineLabel
                     />
@@ -425,6 +456,7 @@ function UpdateCustomerForm (props) {
 
 const mapStateToProps = ({ auth, customer,employee,leads }) => ({
   setEditingCustomer: customer.setEditingCustomer,
+  clearbit: customer.clearbit,
   updateCustomerById: customer.updateCustomerById,
   updateCustomerByIdError: customer.updateCustomerByIdError,
   user: auth.userDetails,
@@ -439,6 +471,7 @@ const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
       updateCustomer,
+      setClearbitData,
       setEditCustomer,
       getSectors,
       getAllSalesList,

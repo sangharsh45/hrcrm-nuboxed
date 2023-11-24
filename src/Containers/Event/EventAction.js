@@ -66,6 +66,7 @@ export const addEvent = (event, cb) => (dispatch, getState) => {
     .then((res) => {
       message.success("Meeting has been added successfully!");
       console.log(res);
+      dispatch(getOpportunityRecord(userId));
       // dispatch(getEventsListByUserId(userId));
       // dispatch(getEventListRangeByUserId(userId,0));
       dispatch({
@@ -339,6 +340,31 @@ export const addHour = (opportunity, cb) => (dispatch, getState) => {
       console.log(err);
       dispatch({
         type: types.ADD_PLANNER_HOUR_FAILURE,
+        payload: err,
+      });
+    });
+};
+export const getOpportunityRecord = (userId) => (dispatch) => {
+  dispatch({
+    type: types.GET_OPPORTUNITY_RECORD_REQUEST,
+  });
+  axios
+    .get(`${base_url}/candidate/record/today/${userId}`,{
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.GET_OPPORTUNITY_RECORD_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.GET_OPPORTUNITY_RECORD_FAILURE,
         payload: err,
       });
     });

@@ -8,6 +8,17 @@ const initialState = {
   fetchingInvestorsError: false,
   investorsbyId: [],
 
+   
+
+  addinginvestActivityTask: false,
+  addinginvestActivityTaskError: false,
+
+  addinginvestActivityCall: false,
+  addinginvestActivityCallError: false,
+
+  addinginvestActivityEvent:false,
+  addinginvestActivityEventError:false,
+
   fetchingAllInvestors: false,
   fetchingAllInvestorsError: false,
   allInvestorsbyId: [],
@@ -23,6 +34,10 @@ const initialState = {
   fetchingInvestorsfilterdataError: false,
 
   investorActivityModal:false,
+
+  fetchingOpportunityRecord: false,
+  fetchingOpportunityRecordError: false,
+  opportunityRecord:[],
 
   addingInvestor: false,
   addInvestorModal: false,
@@ -46,6 +61,10 @@ const initialState = {
   fetchingsInvestorContact: false,
   fetchingsInvestorContactError: false,
   contactsbyInvestorId: [],
+
+  fetchingTeamInvestor: false,
+  fetchingTeamInvestorError: false,
+  teamInvestor:[],
 
   addDrawerInvestorNotesModal:false,
 
@@ -428,7 +447,79 @@ export const investorReducer = (state = initialState, action) => {
               ...state,
               fetchingInvestStatus: false,
               fetchingInvestStatusError: true,
-          };                                 
+          };   
+          
+               
+          case types.GET_OPPORTUNITY_RECORD_REQUEST:
+            return { ...state, fetchingOpportunityRecord: true };
+          case types.GET_OPPORTUNITY_RECORD_SUCCESS:
+            return { ...state, fetchingOpportunityRecord: false, 
+              opportunityRecord: action.payload };
+          case types.GET_OPPORTUNITY_RECORD_FAILURE:
+            return {
+              ...state,
+              fetchingOpportunityRecord: false,
+              fetchingOpportunityRecordError: true,
+            };
+
+
+            case types.ADD_INVEST_ACTIVITY_CALL_REQUEST:
+              return { ...state, addinginvestActivityCall: true };
+            case types.ADD_INVEST_ACTIVITY_CALL_SUCCESS:
+              return { ...state, addinginvestActivityCall: false,
+                investorActivityModal: false,
+                InvestorStatus:[action.payload,...state.InvestorStatus]
+               };
+            case types.ADD_INVEST_ACTIVITY_CALL_FAILURE:
+              return {
+                ...state,
+                addinginvestActivityCall: false,
+                investorActivityModal: false,
+              };
+
+              case types.ADD_INVEST_ACTIVITY_EVENT_REQUEST:
+                return { ...state, addinginvestActivityEvent: true };
+              case types.ADD_INVEST_ACTIVITY_EVENT_SUCCESS:
+                return { ...state, addinginvestActivityEvent: false,
+                  investorActivityModal: false,
+                  InvestorStatus:[action.payload,...state.InvestorStatus]
+                 };
+              case types.ADD_INVEST_ACTIVITY_EVENT_FAILURE:
+                return {
+                  ...state,
+                  addinginvestActivityEvent: false,
+                  investorActivityModal: false,
+                };  
+  
+                case types.ADD_INVEST_ACTIVITY_TASK_REQUEST:
+                  return { ...state, addinginvestActivityTask: true };
+                case types.ADD_INVEST_ACTIVITY_TASK_SUCCESS:
+                  return { ...state, addinginvestActivityTask: false,
+                    investorActivityModal: false,
+                    InvestorStatus:[action.payload,...state.InvestorStatus]
+                   };
+                case types.ADD_INVEST_ACTIVITY_TASK_FAILURE:
+                  return {
+                    ...state,
+                    addinginvestActivityTask: false,
+                    investorActivityModal: false,
+                  }; 
+                  
+                  
+                  case types.GET_TEAM_INVESTOR_REQUEST:
+                    return { ...state, fetchingTeamInvestor: true };
+                  case types.GET_TEAM_INVESTOR_SUCCESS:
+                    return {
+                      ...state,
+                      fetchingTeamInvestor: false,
+                  teamInvestor:action.payload,
+                    };
+                  case types.GET_TEAM_INVESTOR_FAILURE:
+                    return {
+                      ...state,
+                      fetchingTeamInvestor: false,
+                      fetchingTeamInvestorError: true,
+                    };
 default:
       return state;
   }

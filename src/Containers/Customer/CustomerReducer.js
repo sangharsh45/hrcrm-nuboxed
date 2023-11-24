@@ -4,6 +4,9 @@ const initialState = {
   viewType: "table",
   addCustomerModal: false,
 
+  addingCustomerActivityEvent:false,
+  addingCustomerActivityEventError:false,
+
   addingCustomer: false,
   addingCustomerError: false,
 
@@ -18,6 +21,9 @@ const initialState = {
 
   fetchingFilterCustomers: false,
   fetchingFilterCustomersError: false,
+
+  addingCustomerActivityCall: false,
+  addingCustomerActivityCallError: false,
  
 
   addingAttendence: false,
@@ -270,6 +276,9 @@ const initialState = {
   addSharingCustomer: false,
   addSharingCustomerError: false,
 
+  addingCustomerActivityTask:false,
+  addingCustomerActivityTaskError:false,
+
   fetchingPermissionsListCustomer: false,
   fetchingPermissionsListCustomerError: false,
   permissionsDataListCustomer: [],
@@ -361,6 +370,10 @@ const initialState = {
   addUpdateCustomerOpportunityModal: false,
   setEditingCustomerOpportunity: {},
   setEditingCustomerInitiative:{},
+
+  fetchingTeamCustomer: false,
+  fetchingTeamCustomerError: false,
+  teamCustomer:[],
 
   setEditingCustomerContact:{},
   addUpdateCustomerContactModal:false,
@@ -1639,6 +1652,64 @@ export const customerReducer = (state = initialState, action) => {
                                                       fetchingAllCustomerList: false,
                                                       fetchingAllCustomerListError: true,
                                                     };
+
+                                                    case types.ADD_CUSTOMER_ACTIVITY_CALL_REQUEST:
+                                                      return { ...state, addingCustomerActivityCall: true };
+                                                    case types.ADD_CUSTOMER_ACTIVITY_CALL_SUCCESS:
+                                                      return { ...state, addingCustomerActivityCall: false,
+                                                        callActivityModal: false,
+                                                        customerActivityTimeline:[action.payload,...state.customerActivityTimeline]
+                                                       };
+                                                    case types.ADD_CUSTOMER_ACTIVITY_CALL_FAILURE:
+                                                      return {
+                                                        ...state,
+                                                        addingCustomerActivityCall: false,
+                                                        callActivityModal: false,
+                                                      };
+
+
+                                                      case types.ADD_CUSTOMER_ACTIVITY_EVENT_REQUEST:
+                                                        return { ...state, addingCustomerActivityEvent: true };
+                                                      case types.ADD_CUSTOMER_ACTIVITY_EVENT_SUCCESS:
+                                                        return { ...state, addingCustomerActivityEvent: false,
+                                                          callActivityModal: false,
+                                                          customerActivityTimeline:[action.payload,...state.customerActivityTimeline]
+                                                         };
+                                                      case types.ADD_CUSTOMER_ACTIVITY_EVENT_FAILURE:
+                                                        return {
+                                                          ...state,
+                                                          addingCustomerActivityEvent: false,
+                                                          callActivityModal: false,
+                                                        };  
+                                                        case types.ADD_CUSTOMER_ACTIVITY_TASK_REQUEST:
+                                                          return { ...state, addingCustomerActivityTask: true };
+                                                        case types.ADD_CUSTOMER_ACTIVITY_TASK_SUCCESS:
+                                                          return { ...state, addingCustomerActivityTask: false,
+                                                            callActivityModal: false,
+                                                            customerActivityTimeline:[action.payload,...state.customerActivityTimeline]
+                                                           };
+                                                        case types.ADD_CUSTOMER_ACTIVITY_TASK_FAILURE:
+                                                          return {
+                                                            ...state,
+                                                            addingCustomerActivityTask: false,
+                                                            callActivityModal: false,
+                                                          }; 
+                                                          
+                                                          case types.GET_TEAM_CUSTOMER_REQUEST:
+                                                            return { ...state, fetchingTeamCustomer: true };
+                                                          case types.GET_TEAM_CUSTOMER_SUCCESS:
+                                                            return {
+                                                              ...state,
+                                                              fetchingTeamCustomer: false,
+                                                          teamCustomer:action.payload,
+                                                            };
+                                                          case types.GET_TEAM_CUSTOMER_FAILURE:
+                                                            return {
+                                                              ...state,
+                                                              fetchingTeamCustomer: false,
+                                                              fetchingTeamCustomerError: true,
+                                                            };
+
        default:
       return state;
   }

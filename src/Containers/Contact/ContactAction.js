@@ -76,6 +76,9 @@ export const addContact = (contact) => (dispatch, getState) => {
     })
     .then((res) => {
       console.log(res);
+      dispatch(getOpportunityRecord(userId));
+      dispatch(getContactRecord(userId));
+      
       // dispatch(
       //   linkContactsToOpportunity(opportunityId, { contactIds: [res.data] }, cb)
       // );
@@ -1176,6 +1179,32 @@ export const getTeamContact = (userId,pageNo,filter) => (dispatch) => {
       console.log(err.response);
       dispatch({
         type: types.GET_TEAM_CONTACT_FAILURE,
+        payload: err,
+      });
+    });
+};
+
+export const getOpportunityRecord = (userId) => (dispatch) => {
+  dispatch({
+    type: types.GET_OPPORTUNITY_RECORD_REQUEST,
+  });
+  axios
+    .get(`${base_url}/candidate/record/today/${userId}`,{
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.GET_OPPORTUNITY_RECORD_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.GET_OPPORTUNITY_RECORD_FAILURE,
         payload: err,
       });
     });

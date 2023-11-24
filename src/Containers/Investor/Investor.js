@@ -11,6 +11,7 @@ import {
 import moment from "moment";
 import CustomerCardView from '../Customer/CustomerCardView';
 import InvestorAllCardList from './Child/InvestorTable/InvestorAllCardList';
+import InvestorTeamCardList from './Child/InvestorTable/InvestorTeamCardList';
 const InvestorHeader = lazy(() => import("./Child/InvestorHeader"));
 const InvestorCardList=lazy(() => import("./Child/InvestorTable/InvestorCardList"));
 const AddInvestorModal=lazy(()=>import("./Child/AddInvestorModal"));
@@ -81,7 +82,9 @@ const handleChange = (e) => {
  
   :viewType==="all" ?
  <InvestorAllCardList  filter={filter}/> 
+ :viewType==="teams" ? (<InvestorTeamCardList/>)
 // <CustomerCardView/>  
+
           :null}
  </Suspense>
             </React.Fragment>

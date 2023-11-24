@@ -6,10 +6,6 @@ import { Button, Switch } from "antd";
 import { Formik, Form, Field, FieldArray } from "formik";
 import * as Yup from "yup";
 import {getAllCustomerData} from "../../../../Customer/CustomerAction"
-// import {
-//     getContactListByCustomerId,
-//     getOpportunityListByCustomerId,
-//   } from "../../../../Customer/CustomerAction";
 import dayjs from "dayjs";
 import { Spacer, StyledLabel } from "../../../../../Components/UI/Elements";
 import SearchSelect from "../../../../../Components/Forms/Formik/SearchSelect";
@@ -19,12 +15,11 @@ import { SelectComponent } from "../../../../../Components/Forms/Formik/SelectCo
 import { DatePicker } from "../../../../../Components/Forms/Formik/DatePicker";
 import { TimePicker } from "../../../../../Components/Forms/Formik/TimePicker";
 import {
-  addEvent,
   deleteEvent,
   updateEvent,
   handleEventModal,
 } from "../../../../Event/EventAction";
-
+import {addinvestActivityEvent} from "../../../InvestorAction"
 import { handleChooserModal } from "../../../../Planner/PlannerAction";
 import { TextareaComponent } from "../../../../../Components/Forms/Formik/TextareaComponent";
 import { StyledPopconfirm } from "../../../../../Components/UI/Antd";
@@ -118,7 +113,7 @@ const {
       isEditing,
       prefillEvent,
       addingEvent,
-      addEvent,
+      addinvestActivityEvent,
       deletingEvent,
       deleteEvent,
       startDate,
@@ -267,7 +262,7 @@ const {
                   },
                   handleCallback
                 )
-              : addEvent(
+              : addinvestActivityEvent(
                   {
                     ...values,
                     contact: values.contact,
@@ -566,87 +561,7 @@ const {
                   />
                   
                   <Spacer />
-                  <div>
-                  {props.user.crmInd === true &&(
-                <Field
-                name="customerId"
-                isColumnWithoutNoCreate
-                selectType="customerList"
-                // label="Tag Company"
-                label={
-                  <FormattedMessage
-                    id="app.tagcompany"
-                    defaultMessage="Tag Company"
-                  />
-                }
-                component={SearchSelect}
-                isColumn
-                value={values.customerId}
-                isDisabled={defaultCustomers}
-              
-                defaultValue={defaultCustomers ? defaultCustomers : null}
-                // defaultValue={
-                //   defaultCustomers ? defaultCustomers : null
-                // }
-                inlineLabel
-              />
-                  )} 
-                  </div>
-                  <Spacer />
-                  <div>
-                  {props.user.crmInd === true &&(
-                  <Field
-                    name="contact"
-                    //selectType="contactList"
-                    isColumnWithoutNoCreate
-                    // label="Contact"
-                    label={
-                      <FormattedMessage
-                        id="app.contact"
-                        defaultMessage="Contact"
-                      />
-                    }
-                    component={SelectComponent}
-                    isColumn
-                    options={Array.isArray(ContactData) ? ContactData : []}
-                    // value={values.contactId}
-                    // isDisabled={defaultContacts}
-                    // defaultValue={{
-                    //   label: `${fullName || ""} `,
-                    //   value: contactId,
-                    // }}
-                    inlineLabel
-                  />
-                  )} 
-                  </div>
-                  <Spacer/>
-                  <div>
-                  {props.user.crmInd === true &&(
-                 <Field
-                 name="opportunity"
-                 // selectType="customerList"
-                 isColumnWithoutNoCreate
-                 label={
-                   <FormattedMessage
-                     id="app.opportunity"
-                     defaultMessage="Opportunity"
-                   />
-                 }
-                 //component={SearchSelect}
-                 component={SelectComponent}
-                 options={
-                   Array.isArray(opportunityNameOption)
-                     ? opportunityNameOption
-                     : []
-                 }
-                 isColumn
-                 margintop={"0"}
-                //  value={values.opportunityId}
-                 inlineLabel
-               />
-                  )} 
-                  </div>
-                  <Spacer />
+            
                   {/* <Field
                     disabled="true"
                     isRequired
@@ -805,7 +720,7 @@ const mapStateToProps = ({ auth, event,opportunity,customer, employee, events, c
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
-      addEvent,
+      addinvestActivityEvent,
       deleteEvent,
       updateEvent,
       handleChooserModal,

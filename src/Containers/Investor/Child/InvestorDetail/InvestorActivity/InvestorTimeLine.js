@@ -8,11 +8,11 @@ import {getInvestorTimeline} from "../../../InvestorAction";
 
 const InvestorTimeline = (props) => {
   useEffect(() => {
-    // props.getInvestorTimeline(props.investorDetails.contactId);
+     props.getInvestorTimeline(props.investorDetails.investorId);
   }, []);
 
   const { InvestorStatus, ratingValue } = props;
-  console.log(props.investorDetails.investorLeadsId)
+  console.log(props.investorDetails.investorId)
   return (
     <>
       <div className="mt-4">
@@ -21,7 +21,7 @@ const InvestorTimeline = (props) => {
             InvestorStatus.map((status, i) => (
               <Timeline.Item key={i}>
               <div>
-              <div>{status.category} {status.activityType} {moment((status.startdate, 'YYYY-MM-DD')).format('YYYY-MM-DD')}</div>
+              <div>{status.category} {status.activityType} {moment.utc(status.startDate).format('ll')}</div>
          
               </div>
               <div>

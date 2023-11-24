@@ -6,10 +6,6 @@ import { getTasks } from "../../../../../Containers/Settings/Task/TaskAction";
 import { FormattedMessage } from "react-intl";
 import { Formik, Form, Field, FastField } from "formik";
 import dayjs from "dayjs";
-// import {
-//     getContactListByCustomerId,
-//     getOpportunityListByCustomerId,
-//   } from "../../../../Customer/CustomerAction";
 import {getAllCustomerData} from "../../../../Customer/CustomerAction"
 import { ExclamationCircleOutlined } from "@ant-design/icons";
 import { Spacer } from "../../../../../Components/UI/Elements";
@@ -20,7 +16,6 @@ import { SelectComponent } from "../../../../../Components/Forms/Formik/SelectCo
 import { DatePicker } from "../../../../../Components/Forms/Formik/DatePicker";
 import { TimePicker } from "../../../../../Components/Forms/Formik/TimePicker";
 import {
-  addTask,
   updateTask,
   handleTaskModal,
   getCustomerTask,
@@ -30,6 +25,7 @@ import {
   getCandidateTaskFilterList,
   deleteTask,
 } from "../../../../Task/TaskAction";
+import {addinvestActivityTask} from "../../../InvestorAction"
 import { getTaskForRecruit,
   getTaskForStages,
   getTaskForWorkflow,
@@ -291,7 +287,7 @@ const [priority,setpriority]=useState(props.selectedTask
       addingTask,
       isEditing,
       prefillTask,
-      addTask,
+      addinvestActivityTask,
       startDate,
       endDate,
       deleteTask,
@@ -484,7 +480,7 @@ const [priority,setpriority]=useState(props.selectedTask
                   },
                 handleCallback
                 )
-              : addTask(
+              : addinvestActivityTask(
                   {
                     ...values,
                     opportunity:values.opportunity,
@@ -1304,86 +1300,7 @@ const [priority,setpriority]=useState(props.selectedTask
               
                  
                   <Spacer />
-                  <div>
-                  {props.user.crmInd === true &&(
-                 <Field
-                 name="customerId"
-                 isColumnWithoutNoCreate
-                 selectType="customerList"
-                 // label="Tag Company"
-                 label={
-                   <FormattedMessage
-                     id="app.tagcompany"
-                     defaultMessage="Tag Company"
-                   />
-                 }
-                 component={SearchSelect}
-                 isColumn
-                 value={values.customerId}
-                 isDisabled={defaultCustomers}
-               
-                 defaultValue={defaultCustomers ? defaultCustomers : null}
-                 // defaultValue={
-                 //   defaultCustomers ? defaultCustomers : null
-                 // }
-                 inlineLabel
-               />
-                  )} 
-                  </div>
-                  <Spacer />
-                  <div>
-                  {props.user.crmInd === true &&(
-                  <Field
-                    name="contact"
-                    //selectType="contactList"
-                    isColumnWithoutNoCreate
-                    // label="Contact"
-                    label={
-                      <FormattedMessage
-                        id="app.contact"
-                        defaultMessage="Contact"
-                      />
-                    }
-                    component={SelectComponent}
-                    isColumn
-                    options={Array.isArray(ContactData) ? ContactData : []}
-                    // value={values.contactId}
-                    // // isDisabled={defaultContacts}
-                    // defaultValue={{
-                    //   label: `${fullName || ""} `,
-                    //   value: contactId,
-                    // }}
-                    inlineLabel
-                  />
-                  )} 
-                  </div>
-                  <Spacer/>
-                  <div>
-                  {props.user.crmInd === true &&(
-                 <Field
-                 name="opportunity"
-                 // selectType="customerList"
-                 isColumnWithoutNoCreate
-                 label={
-                   <FormattedMessage
-                     id="app.opportunity"
-                     defaultMessage="Opportunity"
-                   />
-                 }
-                 //component={SearchSelect}
-                 component={SelectComponent}
-                 options={
-                   Array.isArray(opportunityNameOption)
-                     ? opportunityNameOption
-                     : []
-                 }
-                 isColumn
-                 margintop={"0"}
-                //  value={values.opportunityId}
-                 inlineLabel
-               />
-                  )} 
-                  </div>
+            
                   <Field
                     name="taskDescription"
                     //label="Notes"
@@ -1551,7 +1468,7 @@ const mapStateToProps = ({
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
-      addTask,
+      addinvestActivityTask,
       getAllCustomerData,
     //   getOpportunityListByCustomerId,
     //   getContactListByCustomerId,

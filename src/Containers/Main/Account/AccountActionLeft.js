@@ -126,6 +126,9 @@ const AccountActionLeft = (props) => {
                     </Tooltip>
 )}
             <Tooltip title="Deleted Distributor">
+            <Badge size="small"
+                        // count={props.accountRecordData.distributor || 0}
+                    >
                 <DeleteOutlined
                     style={{
                         marginRight: "0.5rem",
@@ -133,6 +136,7 @@ const AccountActionLeft = (props) => {
                     }}
                     onClick={() => props.setDistributorViewType("dashboard")}
                 />
+                </Badge>
             </Tooltip>
 
 

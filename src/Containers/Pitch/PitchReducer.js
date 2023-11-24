@@ -7,10 +7,16 @@ const initialState = {
     fetchingPitch:false,
     fetchingPitchError:false,
     pitchData:[],
+    fetchingOpportunityRecord: false,
+    fetchingOpportunityRecordError: false,
+    opportunityRecord:[],
 
     fetchingAllPitch: false,
       fetchingAllPitchError: false,
       allPitchData:[],
+
+      addingPitchActivityEvent: false,
+      addingPitchActivityEventError: false,
 
     fetchingNotesListByPitchId: false,
           fetchingNotesListByPitchIdError: false,
@@ -18,6 +24,9 @@ const initialState = {
 
     addingDocumentByPitchId:false,
     addingDocumentByPitchIdError:false,
+
+    addingPitchActivityTask: false,
+    addingPitchActivityTaskError: false,
 
     linkingPitchStatus:false,
     linkingPitchStatusError:false,
@@ -30,9 +39,16 @@ const initialState = {
     fetchingPitchCountError: false,
     pitchCount:{},
 
+    fetchingTeamPitch: false,
+    fetchingTeamPitchError: false,
+    teamPitch:[],
+
     fetchingPitchStatus: false,
     fetchingPitchStatusError: false,
     pitchStatus:[],
+
+    addingPitchActivityCall: false,
+    addingPitchActivityCallError: false,
 
 
     addPitchactivityModal:false,
@@ -440,6 +456,76 @@ case types.GET_PITCH_REQUEST:
       fetchingAllPitch: false,
       fetchingAllPitchError: true,
     };
+
+    case types.GET_OPPORTUNITY_RECORD_REQUEST:
+      return { ...state, fetchingOpportunityRecord: true };
+    case types.GET_OPPORTUNITY_RECORD_SUCCESS:
+      return { ...state, fetchingOpportunityRecord: false, 
+        opportunityRecord: action.payload };
+    case types.GET_OPPORTUNITY_RECORD_FAILURE:
+      return {
+        ...state,
+        fetchingOpportunityRecord: false,
+        fetchingOpportunityRecordError: true,
+      };
+
+      case types.ADD_PITCH_ACTIVITY_CALL_REQUEST:
+        return { ...state, addingPitchActivityCall: true };
+      case types.ADD_PITCH_ACTIVITY_CALL_SUCCESS:
+        return { ...state, addingPitchActivityCall: false,
+          addPitchactivityModal: false,
+          pitchStatus:[action.payload,...state.pitchStatus]
+         };
+      case types.ADD_PITCH_ACTIVITY_CALL_FAILURE:
+        return {
+          ...state,
+          addingPitchActivityCall: false,
+          addPitchactivityModal: false,
+        };
+
+
+        case types.ADD_PITCH_ACTIVITY_EVENT_REQUEST:
+          return { ...state, addingPitchActivityEvent: true };
+        case types.ADD_PITCH_ACTIVITY_EVENT_SUCCESS:
+          return { ...state, addingPitchActivityEvent: false,
+            addPitchactivityModal: false,
+            pitchStatus:[action.payload,...state.pitchStatus]
+           };
+        case types.ADD_PITCH_ACTIVITY_EVENT_FAILURE:
+          return {
+            ...state,
+            addingPitchActivityEvent: false,
+            addPitchactivityModal: false,
+          };
+
+          case types.ADD_PITCH_ACTIVITY_TASK_REQUEST:
+            return { ...state, addingPitchActivityTask: true };
+          case types.ADD_PITCH_ACTIVITY_TASK_SUCCESS:
+            return { ...state, addingPitchActivityTask: false,
+              addPitchactivityModal: false,
+              pitchStatus:[action.payload,...state.pitchStatus]
+             };
+          case types.ADD_PITCH_ACTIVITY_TASK_FAILURE:
+            return {
+              ...state,
+              addingPitchActivityTask: false,
+              addPitchactivityModal: false,
+            };
+
+            case types.GET_TEAM_PITCH_REQUEST:
+              return { ...state, fetchingTeamPitch: true };
+            case types.GET_TEAM_PITCH_SUCCESS:
+              return {
+                ...state,
+                fetchingTeamPitch: false,
+            teamPitch:action.payload,
+              };
+            case types.GET_TEAM_PITCH_FAILURE:
+              return {
+                ...state,
+                fetchingTeamPitch: false,
+                fetchingTeamPitchError: true,
+              };
 
     default:
 return state;

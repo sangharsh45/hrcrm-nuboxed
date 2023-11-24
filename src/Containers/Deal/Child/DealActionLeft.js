@@ -74,7 +74,11 @@ const DealActionLeft = (props) => {
             <FormattedMessage id="app.stageview" defaultMessage="Stage View" />
           }
         >
-          {/*<TableOutlined*/}
+        <Badge
+        size="small"
+        //  count={(viewType === "table" &&   props.dealsRecord.opportunityDetails) || 0}
+        overflowCount={999}
+      >
           <span
             style={{
               fontSize: "1.56em",
@@ -87,6 +91,7 @@ const DealActionLeft = (props) => {
           >
            <TableOutlined/>
           </span>
+          </Badge>
         </Tooltip>
         <Tooltip title={"Won"}>
       <Badge
@@ -164,7 +169,15 @@ const DealActionLeft = (props) => {
         <Tooltip
           title="Teams"
         >
-          {/*<TableOutlined*/}
+           <Badge
+          size="small"
+        //   count={
+        //     (viewType === "close" &&
+        //       closeOpportunityData.OpportunityDetailsByCloseInd) ||
+        //     0
+        //   }
+          overflowCount={999}
+        >
           <span
             style={{
               fontSize: "1.56em",
@@ -178,6 +191,7 @@ const DealActionLeft = (props) => {
           >
          <PeopleIcon/>
           </span>
+          </Badge>
         </Tooltip>
         <Tooltip
           title="All"

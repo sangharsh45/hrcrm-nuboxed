@@ -18,7 +18,7 @@ import { SelectComponent } from "../../../../Components/Forms/Formik/SelectCompo
 import { DatePicker } from "../../../../Components/Forms/Formik/DatePicker";
 import { TimePicker } from "../../../../Components/Forms/Formik/TimePicker";
 import {
-  addTask,
+  // addTask,
   updateTask,
   handleTaskModal,
   getCustomerTask,
@@ -28,6 +28,7 @@ import {
   getCandidateTaskFilterList,
   deleteTask,
 } from "../../../Task/TaskAction";
+import {addPitchActivityTask} from "../../PitchAction"
 import { getTaskForRecruit,
   getTaskForStages,
   getTaskForWorkflow,
@@ -289,7 +290,7 @@ const [priority,setpriority]=useState(props.selectedTask
       addingTask,
       isEditing,
       prefillTask,
-      addTask,
+      addPitchActivityTask,
       startDate,
       endDate,
       deleteTask,
@@ -478,7 +479,7 @@ const [priority,setpriority]=useState(props.selectedTask
                   },
                 handleCallback
                 )
-              : addTask(
+              : addPitchActivityTask(
                   {
                     ...values,
                     investorLeadsId:props.rowdata.investorLeadsId,
@@ -1462,7 +1463,7 @@ const mapStateToProps = ({
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
-      addTask,
+      addPitchActivityTask,
       getAllCustomerData,
       getAllOpportunityData,
       getFilteredEmailContact,

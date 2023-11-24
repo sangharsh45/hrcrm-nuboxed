@@ -40,6 +40,7 @@ export const addDistributor = (distributor, userId) => (dispatch) => {
       })
     .then((res) => {
       console.log(res);
+      dispatch(getOpportunityRecord(userId));
       dispatch(getDistributorsByUserId(userId));
       dispatch(getAccountRecords())
       dispatch({
@@ -2457,4 +2458,30 @@ export const handleUpdateAccountModal=(modalProps) => (dispatch) => {
     type: types.HANDLE_ACCOUNT_UPDATE_MODAL,
     payload: modalProps,
   });
+};
+
+export const getOpportunityRecord = (userId) => (dispatch) => {
+  dispatch({
+    type: types.GET_OPPORTUNITY_RECORD_REQUEST,
+  });
+  axios
+    .get(`${base_url}/candidate/record/today/${userId}`,{
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.GET_OPPORTUNITY_RECORD_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.GET_OPPORTUNITY_RECORD_FAILURE,
+        payload: err,
+      });
+    });
 };

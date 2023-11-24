@@ -58,6 +58,7 @@ export const setDealViewType = (viewType) => (dispatch) => {
           .endOf("month")
           .toISOString();
         dispatch(getdealsRecord(userId));
+        dispatch(getOpportunityRecord(userId));
         // dispatch(getLatestOpportunities(userId, startDate, endDate));
         // dispatch(getOpportunitiesByPrice(userId));
         dispatch({
@@ -672,6 +673,32 @@ export const getDealDocument = (invOpportunityId) => (dispatch) => {
       console.log(err);
       dispatch({
         type: types.GET_DEAL_DOCUMENTS_FAILURE,
+        payload: err,
+      });
+    });
+};
+
+export const getOpportunityRecord = (userId) => (dispatch) => {
+  dispatch({
+    type: types.GET_OPPORTUNITY_RECORD_REQUEST,
+  });
+  axios
+    .get(`${base_url}/candidate/record/today/${userId}`,{
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.GET_OPPORTUNITY_RECORD_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.GET_OPPORTUNITY_RECORD_FAILURE,
         payload: err,
       });
     });

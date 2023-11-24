@@ -20,11 +20,12 @@ import { SelectComponent } from "../../../../../Components/Forms/Formik/SelectCo
 import { DatePicker } from "../../../../../Components/Forms/Formik/DatePicker";
 import { TimePicker } from "../../../../../Components/Forms/Formik/TimePicker";
 import {
-  addCall,
+  // addCall,
   updateCall,
   deleteCall,
   handleCallModal,
 } from "../../../../Call/CallAction";
+import {addContactInvestActivityCall} from "../../../ContactInvestAction"
 import {getAllCustomerData} from "../../../../Customer/CustomerAction"
 import { handleChooserModal } from "../../../../Planner/PlannerAction";
 import { TextareaComponent } from "../../../../../Components/Forms/Formik/TextareaComponent";
@@ -176,7 +177,7 @@ function ContactInvestorCallActivityForm(props) {
       addingCall,
       deleteCall,
       deletingCall,
-      addCall,
+      addContactInvestActivityCall,
       startDate,
       endDate,
       startTime,
@@ -333,7 +334,7 @@ function ContactInvestorCallActivityForm(props) {
                 },
                 () => handleCallback(resetForm)
               )
-              : addCall(testVal,
+              : addContactInvestActivityCall(testVal,
                 () => handleCallback(resetForm));
           }}
         >
@@ -731,87 +732,7 @@ function ContactInvestorCallActivityForm(props) {
                   />
                  
                   <Spacer />
-                  <div>
-                  {props.user.crmInd === true &&(
-               <Field
-               name="customerId"
-               isColumnWithoutNoCreate
-               selectType="customerList"
-               // label="Tag Company"
-               label={
-                 <FormattedMessage
-                   id="app.tagcompany"
-                   defaultMessage="Tag Company"
-                 />
-               }
-               component={SearchSelect}
-               isColumn
-               value={values.customerId}
-               isDisabled={defaultCustomers}
-             
-               defaultValue={defaultCustomers ? defaultCustomers : null}
-               // defaultValue={
-               //   defaultCustomers ? defaultCustomers : null
-               // }
-               inlineLabel
-             />
-                  )} 
-                  </div>
-                  <Spacer />
-                  <div>
-                  {props.user.crmInd === true &&(
-                  <Field
-                    name="contactId"
-                    //selectType="contactList"
-                    isColumnWithoutNoCreate
-                    // label="Contact"
-                    label={
-                      <FormattedMessage
-                        id="app.contact"
-                        defaultMessage="Contact"
-                      />
-                    }
-                    component={SelectComponent}
-                    isColumn
-                    options={Array.isArray(ContactData) ? ContactData : []}
-                    value={values.contactId}
-                    // isDisabled={defaultContacts}
-                    defaultValue={{
-                      label: `${fullName || ""} `,
-                      value: contactId,
-                    }}
-                    inlineLabel
-                  />
-                  )} 
-                  </div>
-                  <Spacer/>
-                  <div>
-                  {props.user.crmInd === true &&(
-                 <Field
-                 name="opportunity"
-                 // selectType="customerList"
-                 isColumnWithoutNoCreate
-                 label={
-                   <FormattedMessage
-                     id="app.opportunity"
-                     defaultMessage="Opportunity"
-                   />
-                 }
-                 //component={SearchSelect}
-                 component={SelectComponent}
-                 options={
-                   Array.isArray(opportunityNameOption)
-                     ? opportunityNameOption
-                     : []
-                 }
-                 isColumn
-                 margintop={"0"}
-                 value={values.opportunityId}
-                 inlineLabel
-               />
-                  )} 
-                  </div>
-                  <Spacer/>
+                
                   {/* <div >
                   <Field
                     disabled="true"
@@ -963,7 +884,7 @@ const mapStateToProps = ({ auth, call, employee,customer, opportunity, candidate
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
-      addCall,
+      addContactInvestActivityCall,
       getAllCustomerData,
       handleChooserModal,
       getAllSalesList,

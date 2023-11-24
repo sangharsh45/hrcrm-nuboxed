@@ -16,11 +16,11 @@ import { SelectComponent } from "../../../../Components/Forms/Formik/SelectCompo
 import { DatePicker } from "../../../../Components/Forms/Formik/DatePicker";
 import { TimePicker } from "../../../../Components/Forms/Formik/TimePicker";
 import {
-  addEvent,
   deleteEvent,
   updateEvent,
   handleEventModal,
 } from "../../../Event/EventAction";
+import {addLeadsActivityEvent} from "../../LeadsAction"
 import{getAllOpportunityData} from "../../../Opportunity/OpportunityAction"
 import { handleChooserModal } from "../../../Planner/PlannerAction";
 import { TextareaComponent } from "../../../../Components/Forms/Formik/TextareaComponent";
@@ -115,7 +115,7 @@ const {
       isEditing,
       prefillEvent,
       addingEvent,
-      addEvent,
+      addLeadsActivityEvent,
       deletingEvent,
       deleteEvent,
       startDate,
@@ -257,7 +257,7 @@ const {
                   },
                   handleCallback
                 )
-              : addEvent(
+              : addLeadsActivityEvent(
                   {
                     ...values,
                     leadsId:props.rowdata.leadsId,
@@ -712,7 +712,7 @@ const mapStateToProps = ({ auth, event,opportunity,customer, employee, events, c
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
-      addEvent,
+      addLeadsActivityEvent,
       deleteEvent,
       updateEvent,
       handleChooserModal,

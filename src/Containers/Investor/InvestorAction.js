@@ -84,6 +84,7 @@ export const getInvestorsbyId = (userId,pageNo,filter) => (dispatch) => {
       .then((res) => {
         console.log(res);
         dispatch(getInvestor(userId));
+        dispatch(getOpportunityRecord(userId));
         dispatch({
           type: types.ADD_INVESTOR_SUCCESS,
           payload: res.data,
@@ -531,13 +532,13 @@ export const getInvestorDetailsById = (investorId) => (dispatch) => {
       });
   };
 
-  export const getInvestorTimeline = (contactId) => (dispatch) => {
+  export const getInvestorTimeline = (investorId) => (dispatch) => {
     dispatch({
         type: types.GET_INVEST_TIMELINE_REQUEST,
     });
   
     axios
-        .get(`${base_url}/contact/activity/list/${contactId}`, {
+        .get(`${base_url}/investor/activity/list/${investorId}`, {
             headers: {
                 Authorization: "Bearer " + sessionStorage.getItem("token") || "",
             },
@@ -556,5 +557,164 @@ export const getInvestorDetailsById = (investorId) => (dispatch) => {
                 payload: err,
             });
         });
+  };
+
+  
+  export const getOpportunityRecord = (userId) => (dispatch) => {
+    dispatch({
+      type: types.GET_OPPORTUNITY_RECORD_REQUEST,
+    });
+    axios
+      .get(`${base_url}/candidate/record/today/${userId}`,{
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+        },
+      })
+      .then((res) => {
+        console.log(res);
+        dispatch({
+          type: types.GET_OPPORTUNITY_RECORD_SUCCESS,
+          payload: res.data,
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+        dispatch({
+          type: types.GET_OPPORTUNITY_RECORD_FAILURE,
+          payload: err,
+        });
+      });
+  };
+
+  export const addInvestActivityCall = (call,contactId, cb) => (dispatch, getState) => {
+    ////debugger;
+    console.log("inside addCall");
+    const { userId } = getState("auth").auth.userDetails;
+    // const { startDate, endDate } = getState("dashboard").dashboard;
+    dispatch({
+      type: types.ADD_INVEST_ACTIVITY_CALL_REQUEST,
+    });
+  
+    axios
+      .post(`${base_url}/activity/call/save`, call, {
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+        },
+      })
+      .then((res) => {
+        message.success("Call has been added successfully!");
+        ////debugger;
+        console.log(res);
+        //  dispatch(getContactInvestTimeline(contactId));
+        dispatch({
+          type: types.ADD_INVEST_ACTIVITY_CALL_SUCCESS,
+          payload: res.data,
+        });
+        // cb();
+      })
+      .catch((err) => {
+        console.log(err);
+        dispatch({
+          type: types.ADD_INVEST_ACTIVITY_CALL_FAILURE,
+          payload: err,
+        });
+        // cb();
+      });
+  };
+  
+  export const addinvestActivityEvent = (event,contactId, cb) => (dispatch, getState) => {
+    const { userId } = getState("auth").auth.userDetails;
+    // const { startDate, endDate } = getState("dashboard").dashboard;
+    console.log("inside addEvent");
+    dispatch({
+      type: types.ADD_INVEST_ACTIVITY_EVENT_REQUEST,
+    });
+  
+    axios
+      .post(`${base_url}/activity/event/save`, event, {
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+        },
+      })
+      .then((res) => {
+        message.success("Meeting has been added successfully!");
+        console.log(res);
+        // dispatch(getContactInvestTimeline(contactId));
+        // dispatch(getEventListRangeByUserId(userId,0));
+        dispatch({
+          type: types.ADD_INVEST_ACTIVITY_EVENT_SUCCESS,
+          payload: res.data,
+        });
+        // cb();
+      })
+      .catch((err) => {
+        console.log(err);
+        dispatch({
+          type: types.ADD_INVEST_ACTIVITY_EVENT_FAILURE,
+          payload: err,
+        });
+        // cb();
+      });
+  };
+  
+  export const addinvestActivityTask = (task,contactId, cb) => (dispatch, getState) => {
+    const { userId } = getState("auth").auth.userDetails;
+    // const { startDate, endDate } = getState("dashboard").dashboard;
+    console.log("inside addEvent");
+    dispatch({
+      type: types.ADD_INVEST_ACTIVITY_TASK_REQUEST,
+    });
+  
+    axios
+      .post(`${base_url}/activity/task/create`, task, {
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+        },
+      })
+      .then((res) => {
+        message.success("Task has been added successfully!");
+        console.log(res);
+        // dispatch(getContactInvestTimeline(contactId));
+        dispatch({
+          type: types.ADD_INVEST_ACTIVITY_TASK_SUCCESS,
+          payload: res.data,
+        });
+        // cb();
+      })
+      .catch((err) => {
+        console.log(err);
+        dispatch({
+          type: types.ADD_INVEST_ACTIVITY_TASK_FAILURE,
+          payload: err,
+        });
+        // cb();
+      });
+  };
+
+  export const getTeamInvestor = (userId,pageNo,filter) => (dispatch) => {
+ 
+    dispatch({
+      type: types.GET_TEAM_INVESTOR_REQUEST,
+    });
+    axios
+      .get(`${base_url}/investor/team/${userId}/${pageNo}/${filter}`, {
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+        },
+      })
+      .then((res) => {
+        console.log(res);
+        dispatch({
+          type: types.GET_TEAM_INVESTOR_SUCCESS,
+          payload: res.data,
+        });
+      })
+      .catch((err) => {
+        console.log(err.response);
+        dispatch({
+          type: types.GET_TEAM_INVESTOR_FAILURE,
+          payload: err,
+        });
+      });
   };
   

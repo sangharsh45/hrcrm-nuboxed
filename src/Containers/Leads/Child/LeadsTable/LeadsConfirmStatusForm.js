@@ -58,7 +58,7 @@ const handleDeptChange = (event) => {
       <Formik
         enableReinitialize
         initialValues={{
-          multyAsignedTOId: [],
+          // multyAsignedTOId: [],
           type:"lead",
         //   timePeriod: props.distributionAutomation.timePeriod === 0 ? "Not Applicable" :props.distributionAutomation.timePeriod|| "",
         //   orderTimePeriod: props.distributionAutomation.orderTimePeriod === 0 ? "Not Applicable" :props.distributionAutomation.orderTimePeriod || "",

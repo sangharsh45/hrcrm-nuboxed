@@ -17,6 +17,10 @@ const initialState = {
   fetchingEventListRangeByTypeError: false,
   eventListRangeByType: [],
 
+  fetchingOpportunityRecord: false,
+  fetchingOpportunityRecordError: false,
+  opportunityRecord:[],
+
   fetchingEventListRangeOfAllUsers: false,
   fetchingEventListRangeOfAllUsersError: false,
   eventListRangeOfAllUsers: [],
@@ -220,6 +224,18 @@ export const EventReducer = (state = initialState, action) => {
           addingPlannerHourError: true,
           // addOpportunityModal: false,
         };
+
+        case types.GET_OPPORTUNITY_RECORD_REQUEST:
+          return { ...state, fetchingOpportunityRecord: true };
+        case types.GET_OPPORTUNITY_RECORD_SUCCESS:
+          return { ...state, fetchingOpportunityRecord: false, 
+            opportunityRecord: action.payload };
+        case types.GET_OPPORTUNITY_RECORD_FAILURE:
+          return {
+            ...state,
+            fetchingOpportunityRecord: false,
+            fetchingOpportunityRecordError: true,
+          };
   
       default:
       return state;

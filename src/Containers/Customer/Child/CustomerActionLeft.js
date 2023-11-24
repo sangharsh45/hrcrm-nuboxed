@@ -105,7 +105,7 @@ function  handleFilterChange(data){
         </Badge>
       </Tooltip>
       {user.teamsAccessInd === true && (
-      <Tooltip>
+      <Tooltip title="Teams">
         <Badge
           size="Teams"
           count={(props.viewType === "teams" && props.recordData.customer) || 0}

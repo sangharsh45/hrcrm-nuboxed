@@ -19,12 +19,12 @@ import { SelectComponent } from "../../../../Components/Forms/Formik/SelectCompo
 import { DatePicker } from "../../../../Components/Forms/Formik/DatePicker";
 import { TimePicker } from "../../../../Components/Forms/Formik/TimePicker";
 import {
-  addEvent,
+  // addEvent,
   deleteEvent,
   updateEvent,
   handleEventModal,
 } from "../../../Event/EventAction";
-
+import {addCustomerActivityEvent} from "../../../Customer/CustomerAction"
 import { handleChooserModal } from "../../../Planner/PlannerAction";
 import { TextareaComponent } from "../../../../Components/Forms/Formik/TextareaComponent";
 import { StyledPopconfirm } from "../../../../Components/UI/Antd";
@@ -118,7 +118,7 @@ const {
       isEditing,
       prefillEvent,
       addingEvent,
-      addEvent,
+      addCustomerActivityEvent,
       deletingEvent,
       deleteEvent,
       startDate,
@@ -267,7 +267,7 @@ const {
                   },
                   handleCallback
                 )
-              : addEvent(
+              : addCustomerActivityEvent(
                   {
                     ...values,
                     contact: values.contact,
@@ -805,7 +805,7 @@ const mapStateToProps = ({ auth, event,opportunity,customer, employee, events, c
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
-      addEvent,
+      addCustomerActivityEvent,
       deleteEvent,
       updateEvent,
       handleChooserModal,
