@@ -49,7 +49,8 @@ import ApartmentIcon from '@mui/icons-material/Apartment';
 
 function ProductHistoryTable(props) {
     useEffect(() => {
-        props.getProductByGroup(props.groupId);
+        // props.getProductByGroup(props.groupId);
+        props.getAllProductCatagory();
     }, []);
 
     const [showHistory, setshowHistory] = useState(false);
@@ -901,9 +902,9 @@ function ProductHistoryTable(props) {
             <StyledTable
                 rowKey=""
                 columns={columns}
-                dataSource={props.productByGroup}
+                dataSource={props.allproducts}
                 loading={
-                    props.fetchingProductByGroup
+                    props.fetchingAllProducts
                 }
                 scroll={{ y: 320 }}
                 pagination={false

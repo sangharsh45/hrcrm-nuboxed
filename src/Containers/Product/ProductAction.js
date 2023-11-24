@@ -113,29 +113,30 @@ export const getServiceById = (serviceId) => (dispatch) => {
 /**
  * request for adding a product
  */
-export const addProduct = (product, cb, groupId) => (dispatch) => {
+export const addProductCategory = (product) => (dispatch) => {
   console.log("inside add product");
-  dispatch({ type: types.ADD_PROFESSIONALDUCT_REQUEST });
+  dispatch({ type: types.ADD_PRODUCT_CATEGORY_REQUEST });
   axios
-    .post(`${base_url}/product`, product, {
+    .post(`${base_url2}/product/saveProductCategory`, product, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
     })
     .then((res) => {
       console.log(res);
-      dispatch(getProducts());
-      dispatch(getProductByGroup(groupId))
+      // dispatch(getProducts());
+      // dispatch(getProductByGroup(groupId))
       dispatch({
-        type: types.ADD_PROFESSIONALDUCT_SUCCESS,
+        type: types.ADD_PRODUCT_CATEGORY_SUCCESS,
         payload: res.data,
       });
-      cb();
     })
     .catch((err) => {
       console.log(err);
       dispatch({
-        type: types.ADD_PROFESSIONALDUCT_FAILURE,
+        type: types.ADD_PRODUCT_CATEGORY_FAILURE,
         payload: err,
       });
-      cb();
     });
 };
 

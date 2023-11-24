@@ -66,8 +66,8 @@ const initialState = {
   addConfigureModal: false,
   addDetailsProductModal: false,
 
-  addingProduct: false,
-  addingProductError: false,
+  addingProductCategory: false,
+  addingProductCategoryError: false,
 
   addingService: false,
   addingServiceError: false,
@@ -322,17 +322,6 @@ export const productReducer = (state = initialState, action) => {
     case types.GET_SERVICE_FAILURE:
       return { ...state, fetchingService: false, fetchingServiceError: true };
 
-    case types.ADD_PROFESSIONALDUCT_REQUEST:
-      return { ...state, addingProduct: true };
-    case types.ADD_PROFESSIONALDUCT_SUCCESS:
-      return { ...state, addingProduct: false, addConfigureModal: false };
-    case types.ADD_PROFESSIONALDUCT_FAILURE:
-      return {
-        ...state,
-        addingProduct: false,
-        addingProductError: true,
-        addConfigureModal: false,
-      };
 
     case types.ADD_SERVICE_REQUEST:
       return { ...state, addingService: true, addingServiceError: false };
@@ -369,8 +358,7 @@ export const productReducer = (state = initialState, action) => {
       return { ...state, addConfigureModal: action.payload };
     case types.HANDLE_DETAILSFORM_MODAL:
       return { ...state, addDetailsProductModal: action.payload };
-    case types.ADD_PROFESSIONALDUCT_FAILURE:
-      return { ...state, viewType: action.payload };
+
     case types.SET_PROFESSIONALDUCT_VIEW_TYPE:
       return { ...state, viewType: action.payload };
     case types.CHANGE_SELECTED_TIME_INTERVAL_CATALOGUE:
@@ -822,6 +810,20 @@ export const productReducer = (state = initialState, action) => {
         uploadingProductList: false,
         uploadingProductListError: true,
       };
+
+      case types.ADD_PRODUCT_CATEGORY_REQUEST:
+        return { ...state, addingProductCategory: true, addingProductCategoryError: false };
+      case types.ADD_PRODUCT_CATEGORY_SUCCESS:
+        return { ...state, addingProductCategory: false, addConfigureModal: false,
+          allproducts: [action.payload,...state.allproducts]
+        };
+      case types.ADD_PRODUCT_CATEGORY_FAILURE:
+        return {
+          ...state,
+          addingProductCategory: false,
+          addingProductCategoryError: true,
+        };
+
     default:
       return state;
   }

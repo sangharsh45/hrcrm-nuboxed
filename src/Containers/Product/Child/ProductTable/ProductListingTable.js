@@ -53,7 +53,7 @@ function onChange(pagination, filters, sorter) {
 function ProductListingTable(props) {
   useEffect(() => {
     props.getProducts();
-    props.getAllProductCatagory();
+    // props.getAllProductCatagory();
   }, []);
 
   const [showHistory, setshowHistory] = useState(false);
