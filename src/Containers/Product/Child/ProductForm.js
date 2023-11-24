@@ -3,13 +3,13 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Button, Switch } from "antd";
 import { Formik, Form, Field } from "formik";
-import { base_url } from "../../../Config/Auth";
+import { base_url, base_url2 } from "../../../Config/Auth";
 import { Spacer, StyledLabel } from "../../../Components/UI/Elements";
 import SearchSelect from "../../../Components/Forms/Formik/SearchSelect";
 import { DatePicker } from "../../../Components/Forms/Formik/DatePicker";
 import { InputComponent } from "../../../Components/Forms/Formik/InputComponent";
 import Upload from "../../../Components/Forms/Formik/Upload";
-import { addProduct } from "../ProductAction";
+import { addProductCategory } from "../ProductAction";
 import LazySelect from "../../../Components/Forms/Formik/LazySelect";
 import { FlexContainer } from "../../../Components/UI/Layout";
 import { TextareaComponent } from "../../../Components/Forms/Formik/TextareaComponent";
@@ -18,20 +18,20 @@ import { SelectComponent } from "../../../Components/Forms/Formik/SelectComponen
 import { CurrencySymbol } from "../../../Components/Common";
 import * as Yup from "yup";
 
-const ProductSchema = Yup.object().shape({
-  categoryName: Yup.string()
-    .nullable()
-    .required("Input required!"),
-  subCategoryName: Yup.string()
-    .nullable()
-    .required("Input required!"),
-  subAttributeName: Yup.string()
-    .nullable()
-    .required("Input required!"),
-  attributeName: Yup.string()
-    .nullable()
-    .required("Input required!"),
-});
+// const ProductSchema = Yup.object().shape({
+//   categoryName: Yup.string()
+//     .nullable()
+//     .required("Input required!"),
+//   subCategoryName: Yup.string()
+//     .nullable()
+//     .required("Input required!"),
+//   subAttributeName: Yup.string()
+//     .nullable()
+//     .required("Input required!"),
+//   attributeName: Yup.string()
+//     .nullable()
+//     .required("Input required!"),
+// });
 
 class Productform extends Component {
   constructor(props) {
@@ -102,7 +102,7 @@ class Productform extends Component {
     this.props.getCurrency()
   }
   render() {
-    const { addingProduct, addProduct } = this.props;
+    const { addingProductCategory, addProductCategory } = this.props;
 
     const currencyType = this.props.currencies.map((item) => {
       return {
@@ -122,7 +122,7 @@ class Productform extends Component {
         <Formik
           initialValues={{
             userId: this.props.userId,
-            groupId: this.props.groupId,
+            // groupId: this.props.groupId,
             attribute: "",
             attributeName: "",
             currencyName: "",
@@ -152,11 +152,11 @@ class Productform extends Component {
             distributorMarginInd: this.state.marginDistributor ? true : false,
             subscriptionInd: this.state.subscriptionAvailable ? true : false,
           }}
-          validationSchema={ProductSchema}
+          // validationSchema={ProductSchema}
           onSubmit={(values, { resetForm }) => {
             //debugger;
             console.log(values);
-            addProduct(
+            addProductCategory(
               {
                 ...values,
                 marginType: this.state.percentage ? "Percentage" : "Amount",
@@ -210,8 +210,9 @@ class Productform extends Component {
                         placeholder="Search or Create"
                         optionLabel="categoryName"
                         optionValue="categoryName"
-                        url={`${base_url}/supplies/category`}
+                        url={`${base_url2}/product/category`}
                         component={LazySelect}
+                        // component={InputComponent}
                         isColumn
                         inlineLabel
                       />
@@ -223,7 +224,7 @@ class Productform extends Component {
                         placeholder="Search or Create"
                         optionLabel="subCategoryName"
                         optionValue="subCategoryName"
-                        url={`${base_url}/supplies/subcategory`}
+                        url={`${base_url2}/product/subcategory`}
                         component={LazySelect}
                         isColumn
                         inlineLabel
@@ -246,7 +247,7 @@ class Productform extends Component {
                         placeholder="Search or Create"
                         optionLabel="attributeName"
                         optionValue="attributeName"
-                        url={`${base_url}/supplies/attribute`}
+                        url={`${base_url2}/product/attribute`}
                         component={LazySelect}
                         isColumn
                         inlineLabel
@@ -259,7 +260,7 @@ class Productform extends Component {
                         placeholder="Search or Create"
                         optionLabel="subAttributeName"
                         optionValue="subAttributeName"
-                        url={`${base_url}/supplies/subattribute`}
+                        url={`${base_url2}/product/subattribute`}
                         component={LazySelect}
                         isColumn
                         inlineLabel
@@ -528,7 +529,7 @@ class Productform extends Component {
                 <Button
                   type="primary"
                   htmlType="submit"
-                  loading={addingProduct}
+                  loading={addingProductCategory}
                 >
                   Create
                 </Button>
@@ -542,8 +543,8 @@ class Productform extends Component {
 }
 
 const mapStateToProps = ({ auth, product }) => ({
-  addingProduct: product.addingProduct,
-  addingProductError: product.addingProductError,
+  addingProductCategory: product.addingProductCategory,
+  addingProductCategoryError: product.addingProductCategoryError,
   addProductModal: product.addProductModal,
   user: auth.userDetails,
   userId: auth.userDetails.userId,
@@ -554,7 +555,7 @@ const mapStateToProps = ({ auth, product }) => ({
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
-      addProduct,
+      addProductCategory,
       getCurrency,
     },
     dispatch
