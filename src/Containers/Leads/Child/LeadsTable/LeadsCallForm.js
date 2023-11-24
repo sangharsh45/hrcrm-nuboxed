@@ -16,12 +16,12 @@ import { SelectComponent } from "../../../../Components/Forms/Formik/SelectCompo
 import { DatePicker } from "../../../../Components/Forms/Formik/DatePicker";
 import { TimePicker } from "../../../../Components/Forms/Formik/TimePicker";
 import {
-  addCall,
   updateCall,
   deleteCall,
   handleCallModal,
   handleCallNotesModal,
 } from "../../../Call/CallAction";
+import {addLeadsActivityCall} from "../../LeadsAction"
 import {getAllCustomerData} from "../../../Customer/CustomerAction"
 import { handleChooserModal } from "../../../Planner/PlannerAction";
 import { TextareaComponent } from "../../../../Components/Forms/Formik/TextareaComponent";
@@ -172,7 +172,7 @@ function LeadsCallForm(props) {
       addingCall,
       deleteCall,
       deletingCall,
-      addCall,
+      addLeadsActivityCall,
       startDate,
       endDate,
       startTime,
@@ -329,7 +329,7 @@ function LeadsCallForm(props) {
                 },
                 () => handleCallback(resetForm)
               )
-              : addCall(testVal,
+              : addLeadsActivityCall(testVal,
                 () => handleCallback(resetForm));
           }}
         >
@@ -877,7 +877,7 @@ const mapStateToProps = ({ auth, call, employee,customer, opportunity, candidate
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
-      addCall,
+      addLeadsActivityCall,
       getAllCustomerData,
       handleChooserModal,
       getAllSalesList,

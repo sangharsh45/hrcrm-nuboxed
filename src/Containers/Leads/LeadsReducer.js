@@ -5,6 +5,9 @@ const initialState = {
 
   addLeadsModal:false,
 
+  addingLeadsActivityCall: false,
+  addingLeadsActivityCallError: false,
+
   addCallTaskModal:false,
 
   fetchingTeamLeads: false,
@@ -36,6 +39,10 @@ const initialState = {
 
   addingLeads:false,
   addingLeadsError:false,
+
+  fetchingOpportunityRecord: false,
+  fetchingOpportunityRecordError: false,
+  opportunityRecord:[],
 
   fetchingLeads: false,
   fetchingLeadsError: false,
@@ -79,6 +86,9 @@ const initialState = {
 
   addDrawerLeadsEmailModal:false,
 
+  addingLeadsActivityTask: false,
+  addingLeadsActivityTaskError: false,
+
   addingLeadsContact: false,
   addingLeadsContactError: false,
   addLeadsContactModal: false,
@@ -86,6 +96,9 @@ const initialState = {
   fetchingLeadsContact: false,
   fetchingLeadsContactError: false,
   contactByLeadsId: [],
+
+  addingLeadsActivityEvent: false,
+  addingLeadsActivityEventError: false,
 
 
   deleteLeadsDocument: false,
@@ -852,6 +865,62 @@ case types.HANDLE_LEADS_MODAL:
             fetchingTeamLeads: false,
             fetchingTeamLeadsError: true,
           };
+
+
+          case types.ADD_LEADS_ACTIVITY_EVENT_REQUEST:
+            return { ...state, addingLeadsActivityEvent: true };
+          case types.ADD_LEADS_ACTIVITY_EVENT_SUCCESS:
+            return { ...state, addingLeadsActivityEvent: false,
+              addCallTaskModal: false,
+              callTimeline:[action.payload,...state.callTimeline]
+             };
+          case types.ADD_LEADS_ACTIVITY_EVENT_FAILURE:
+            return {
+              ...state,
+              addingLeadsActivityEvent: false,
+              addCallTaskModal: false,
+            }; 
+
+            case types.ADD_LEADS_ACTIVITY_TASK_REQUEST:
+              return { ...state, addingLeadsActivityTask: true };
+            case types.ADD_LEADS_ACTIVITY_TASK_SUCCESS:
+              return { ...state, addingLeadsActivityTask: false,
+                addCallTaskModal: false,
+                callTimeline:[action.payload,...state.callTimeline]
+               };
+            case types.ADD_LEADS_ACTIVITY_TASK_FAILURE:
+              return {
+                ...state,
+                addingLeadsActivityTask: false,
+                addCallTaskModal: false,
+              };  
+              
+              
+              case types.ADD_LEADS_ACTIVITY_CALL_REQUEST:
+                return { ...state, addingLeadsActivityCall: true };
+              case types.ADD_LEADS_ACTIVITY_CALL_SUCCESS:
+                return { ...state, addingLeadsActivityCall: false,
+                  addCallTaskModal: false,
+                  callTimeline:[action.payload,...state.callTimeline]
+                 };
+              case types.ADD_LEADS_ACTIVITY_CALL_FAILURE:
+                return {
+                  ...state,
+                  addingLeadsActivityCall: false,
+                  addCallTaskModal: false,
+                };
+
+                case types.GET_OPPORTUNITY_RECORD_REQUEST:
+                  return { ...state, fetchingOpportunityRecord: true };
+                case types.GET_OPPORTUNITY_RECORD_SUCCESS:
+                  return { ...state, fetchingOpportunityRecord: false, 
+                    opportunityRecord: action.payload };
+                case types.GET_OPPORTUNITY_RECORD_FAILURE:
+                  return {
+                    ...state,
+                    fetchingOpportunityRecord: false,
+                    fetchingOpportunityRecordError: true,
+                  };
 
 default:
 return state;

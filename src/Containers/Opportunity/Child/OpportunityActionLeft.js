@@ -186,6 +186,11 @@ const OpportunityActionLeft = (props) => {
   <Tooltip
           title="Teams"
         >
+                 <Badge
+        size="small"
+        // count={(viewType === "stage" && recordData.opportunityDetails) || 0}
+        overflowCount={999}
+      >
           <span
             class=" mr-2 text-sm "
             onClick={() => props.setOpportunityViewType("teams")}
@@ -196,6 +201,7 @@ const OpportunityActionLeft = (props) => {
             {" "}
             <PeopleIcon/>
           </span>
+          </Badge>
         </Tooltip>
   </div>
   <div class="ml-2">
@@ -203,6 +209,11 @@ const OpportunityActionLeft = (props) => {
   <Tooltip
           title="All list"
         >
+                       <Badge
+        size="small"
+        // count={(viewType === "stage" && recordData.opportunityDetails) || 0}
+        overflowCount={999}
+      >
           <span
             class=" mr-2 text-sm "
             onClick={() => props.setOpportunityViewType("all")}
@@ -213,6 +224,7 @@ const OpportunityActionLeft = (props) => {
             {" "}
            ALL
           </span>
+          </Badge>
         </Tooltip>
     )}
   </div>

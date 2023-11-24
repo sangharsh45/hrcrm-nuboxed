@@ -20,6 +20,7 @@ import {
 
 import CustomerMap from "./CustomerMap"
 import moment from "moment";
+import CustomerTeamCardList from "./Child/CustomerTable/CustomerTeamCardList";
 const CustomerCardView =lazy(()=> import("./CustomerCardView"));
 const AddCustomerModal = lazy(() => import( "./Child/AddCustomerModal"));
 const CustomerHeader = lazy(() => import("./Child/CustomerHeader"));
@@ -104,6 +105,7 @@ class Customer extends Component {
             filter={this.state.filter}
              currentUser={this.state.currentUser} 
             />
+            :this.props.viewType==="teams" ? (<CustomerTeamCardList/>)
             : null} 
         </Suspense> 
         {/* <FloatButton.Group

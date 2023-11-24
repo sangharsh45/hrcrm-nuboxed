@@ -48,6 +48,7 @@ export const addCall = (call, cb) => (dispatch, getState) => {
       message.success("Call has been added successfully!");
       ////debugger;
       console.log(res);
+      dispatch(getOpportunityRecord(userId));
       // dispatch(getCallsListByUserId(userId));
       dispatch(getCallListRangeByUserId(userId,0));
       dispatch({
@@ -341,6 +342,32 @@ export const addNote = (note, cb) => (dispatch) => {
       });
       console.log(err);
       cb && cb();
+    });
+};
+
+export const getOpportunityRecord = (userId) => (dispatch) => {
+  dispatch({
+    type: types.GET_OPPORTUNITY_RECORD_REQUEST,
+  });
+  axios
+    .get(`${base_url}/candidate/record/today/${userId}`,{
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.GET_OPPORTUNITY_RECORD_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.GET_OPPORTUNITY_RECORD_FAILURE,
+        payload: err,
+      });
     });
 };
 

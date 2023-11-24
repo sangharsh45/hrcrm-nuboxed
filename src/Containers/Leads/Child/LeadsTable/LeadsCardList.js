@@ -363,6 +363,7 @@ const LeadsCardList = (props) => {
                     <div class=" text-xs text-cardBody font-poppins"></div>
                     <div>
                       <StatusCustomerToggle
+                        rowdata={rowdata}
                         type={props.convertInd ? "primary" : "danger"}
                         leadsId={item.leadsId}
                         convertInd={item.convertInd}

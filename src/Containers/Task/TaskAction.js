@@ -364,6 +364,7 @@ export const addTask = (task, cb) => (dispatch, getState) => {
     .then((res) => {
       message.success("Task has been added successfully!");
       console.log(res);
+      dispatch(getOpportunityRecord(userId));
       // dispatch(getTasksListByUserId(userId));
       dispatch(getTaskListRangeByUserId(employeeId,0));
       dispatch({
@@ -1285,6 +1286,32 @@ export const deleteDocumentTask = (documentId, employeeId) => (dispatch, getStat
       console.log(err);
       dispatch({
         type: types.DELETE_DOCUMENT_TASK_FAILURE,
+        payload: err,
+      });
+    });
+};
+
+export const getOpportunityRecord = (userId) => (dispatch) => {
+  dispatch({
+    type: types.GET_OPPORTUNITY_RECORD_REQUEST,
+  });
+  axios
+    .get(`${base_url}/candidate/record/today/${userId}`,{
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.GET_OPPORTUNITY_RECORD_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.GET_OPPORTUNITY_RECORD_FAILURE,
         payload: err,
       });
     });

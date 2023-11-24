@@ -1,13 +1,3 @@
-// import React from 'react'
-
-// function PitchActionLeft() {
-//   return (
-//     <div>PitchActionLeft</div>
-//   )
-// }
-
-// export default PitchActionLeft
-
 
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
@@ -83,6 +73,12 @@ const PitchActionLeft = (props) => {
       <Tooltip
         title= "Teams"
       >
+          <Badge
+        size="small"
+        // count={(props.viewType === "card" && props.pitchCount.InvestorLeadsDetails) || 0}
+        
+        overflowCount={999}
+      >
         <span   class=" mr-2 text-sm cursor-pointer"
         onClick={() => props.setPitchViewType("teams")}
           style={{
@@ -91,6 +87,7 @@ const PitchActionLeft = (props) => {
         >
          <PeopleIcon/>
         </span>
+        </Badge>
       </Tooltip>
       <Tooltip
         title= "All"

@@ -350,9 +350,9 @@ export const addOpportunity = (opportunity, cb) => (dispatch, getState) => {
       const endDate = dayjs()
         .endOf("month")
         .toISOString();
-      // dispatch(getOpportunityListByUserId(userId));
+        dispatch(getOpportunityRecord(userId));
       // dispatch(getLatestOpportunities(userId, startDate, endDate));
-      // dispatch(getOpportunitiesByPrice(userId));
+      dispatch(getRecords(userId));
       dispatch({
         type: types.ADD_OPPORTUNITY_SUCCESS,
         payload: res.data,
@@ -3117,3 +3117,4 @@ export const getFullOpportunity = (pageNo) => (dispatch) => {
       });
     });
 };
+

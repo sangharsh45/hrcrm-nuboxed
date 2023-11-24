@@ -7,6 +7,7 @@ import AddPitchModal from "../Pitch/Child/AddPitchModal"
 import {handlePitchModal,getPitch,setPitchViewType } from "../Pitch/PitchAction";
 import { BundleLoader, GridLoader } from "../../Components/Placeholder";
 import PitchAllCardList from './Child/PitchAllCardList';
+import PitchTeamCardlist from './Child/PitchTeamCardlist';
 
 
 function Pitch (props) {
@@ -71,6 +72,7 @@ function Pitch (props) {
  
   :viewType==="all" ?
  <PitchAllCardList       filter={filter}/> 
+ :viewType==="teams" ? (<PitchTeamCardlist/>)
 // <CustomerCardView/>  
           :null}
             </Suspense>

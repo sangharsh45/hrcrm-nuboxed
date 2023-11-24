@@ -298,6 +298,10 @@ const initialState = {
   fetchingProductByCurrencyError: false,
   currencyWiseProduct: [],
 
+  fetchingOpportunityRecord: false,
+  fetchingOpportunityRecordError: false,
+  opportunityRecord:[],
+
   receivingTaskCompletionByDispatch: false,
   receivingTaskCompletionByDispatchError: false,
 
@@ -1850,6 +1854,18 @@ export const distributorReducer = (state = initialState, action) => {
           fetchingAllDistributorCount: false,
           fetchingAllDistributorCountError: true,
         };
+
+        case types.GET_OPPORTUNITY_RECORD_REQUEST:
+          return { ...state, fetchingOpportunityRecord: true };
+        case types.GET_OPPORTUNITY_RECORD_SUCCESS:
+          return { ...state, fetchingOpportunityRecord: false, 
+            opportunityRecord: action.payload };
+        case types.GET_OPPORTUNITY_RECORD_FAILURE:
+          return {
+            ...state,
+            fetchingOpportunityRecord: false,
+            fetchingOpportunityRecordError: true,
+          };
     default:
       return state;
   }

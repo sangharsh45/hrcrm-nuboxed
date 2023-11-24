@@ -13,6 +13,10 @@ const initialState = {
   patchingTask: false,
   patchingTaskError: false,
 
+  fetchingOpportunityRecord: false,
+  fetchingOpportunityRecordError: false,
+  opportunityRecord:[],
+
   rejectApprove: false,
   rejectApproveError: false,
 
@@ -882,7 +886,19 @@ export const TaskReducer = (state = initialState, action) => {
                             };
                           case types.DELETE_DOCUMENT_TASK_FAILURE:
                             return { ...state, deleteDocumentTask: false, deleteDocumentTaskError: false };
-                
+
+                            
+                            case types.GET_OPPORTUNITY_RECORD_REQUEST:
+                              return { ...state, fetchingOpportunityRecord: true };
+                            case types.GET_OPPORTUNITY_RECORD_SUCCESS:
+                              return { ...state, fetchingOpportunityRecord: false, 
+                                opportunityRecord: action.payload };
+                            case types.GET_OPPORTUNITY_RECORD_FAILURE:
+                              return {
+                                ...state,
+                                fetchingOpportunityRecord: false,
+                                fetchingOpportunityRecordError: true,
+                              };            
 
         default:
       return state;

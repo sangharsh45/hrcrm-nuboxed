@@ -84,6 +84,7 @@ export const addCustomer = (customer) => (dispatch, getState) => {
         .endOf("month")
         .toISOString();
       dispatch(getRecords(userId));
+      dispatch(getOpportunityRecord(userId));
       // dispatch(getLatestCustomers(userId, startDate, endDate));
       // dispatch(getCustomerListByUserId(userId));
 
@@ -2085,4 +2086,138 @@ export const getAllCustomerByCloser = (userId, startDate, endDate) => (
         });
       });
   };
+
+  export const addCustomerActivityCall = (call,customerId, cb) => (dispatch, getState) => {
+    ////debugger;
+    console.log("inside addCall");
+    const { userId } = getState("auth").auth.userDetails;
+    // const { startDate, endDate } = getState("dashboard").dashboard;
+    dispatch({
+      type: types.ADD_CUSTOMER_ACTIVITY_CALL_REQUEST,
+    });
+  
+    axios
+      .post(`${base_url}/activity/call/save`, call, {
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+        },
+      })
+      .then((res) => {
+        message.success("Call has been added successfully!");
+        ////debugger;
+        console.log(res);
+         dispatch(getCustomerActivityTimeline(customerId));
+        dispatch({
+          type: types.ADD_CUSTOMER_ACTIVITY_CALL_SUCCESS,
+          payload: res.data,
+        });
+        // cb();
+      })
+      .catch((err) => {
+        console.log(err);
+        dispatch({
+          type: types.ADD_CUSTOMER_ACTIVITY_CALL_FAILURE,
+          payload: err,
+        });
+        // cb();
+      });
+  };
+
+  export const addCustomerActivityEvent = (event,customerId, cb) => (dispatch, getState) => {
+    const { userId } = getState("auth").auth.userDetails;
+    // const { startDate, endDate } = getState("dashboard").dashboard;
+    console.log("inside addEvent");
+    dispatch({
+      type: types.ADD_CUSTOMER_ACTIVITY_EVENT_REQUEST,
+    });
+  
+    axios
+      .post(`${base_url}/activity/event/save`, event, {
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+        },
+      })
+      .then((res) => {
+        message.success("Meeting has been added successfully!");
+        console.log(res);
+        dispatch(getCustomerActivityTimeline(customerId));
+        // dispatch(getEventListRangeByUserId(userId,0));
+        dispatch({
+          type: types.ADD_CUSTOMER_ACTIVITY_EVENT_SUCCESS,
+          payload: res.data,
+        });
+        // cb();
+      })
+      .catch((err) => {
+        console.log(err);
+        dispatch({
+          type: types.ADD_CUSTOMER_ACTIVITY_EVENT_FAILURE,
+          payload: err,
+        });
+        // cb();
+      });
+  };
+
+  export const addCustomerActivityTask = (event,customerId, cb) => (dispatch, getState) => {
+    const { userId } = getState("auth").auth.userDetails;
+    // const { startDate, endDate } = getState("dashboard").dashboard;
+    console.log("inside addEvent");
+    dispatch({
+      type: types.ADD_CUSTOMER_ACTIVITY_TASK_REQUEST,
+    });
+  
+    axios
+      .post(`${base_url}/activity/task/create`, event, {
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+        },
+      })
+      .then((res) => {
+        message.success("Task has been added successfully!");
+        console.log(res);
+        dispatch(getCustomerActivityTimeline(customerId));
+        dispatch({
+          type: types.ADD_CUSTOMER_ACTIVITY_TASK_SUCCESS,
+          payload: res.data,
+        });
+        // cb();
+      })
+      .catch((err) => {
+        console.log(err);
+        dispatch({
+          type: types.ADD_CUSTOMER_ACTIVITY_TASK_FAILURE,
+          payload: err,
+        });
+        // cb();
+      });
+  };
+
+  export const getTeamCustomer = (userId,pageNo,filter) => (dispatch) => {
+ 
+    dispatch({
+      type: types.GET_TEAM_CUSTOMER_REQUEST,
+    });
+    axios
+      .get(`${base_url}/customer/team/${userId}/${pageNo}/${filter}`, {
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+        },
+      })
+      .then((res) => {
+        console.log(res);
+        dispatch({
+          type: types.GET_TEAM_CUSTOMER_SUCCESS,
+          payload: res.data,
+        });
+      })
+      .catch((err) => {
+        console.log(err.response);
+        dispatch({
+          type: types.GET_TEAM_CUSTOMER_FAILURE,
+          payload: err,
+        });
+      });
+  };
+
+  
  

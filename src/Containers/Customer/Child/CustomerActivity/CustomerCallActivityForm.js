@@ -20,11 +20,12 @@ import { SelectComponent } from "../../../../Components/Forms/Formik/SelectCompo
 import { DatePicker } from "../../../../Components/Forms/Formik/DatePicker";
 import { TimePicker } from "../../../../Components/Forms/Formik/TimePicker";
 import {
-  addCall,
+  // addCall,
   updateCall,
   deleteCall,
   handleCallModal,
 } from "../../../Call/CallAction";
+import {addCustomerActivityCall} from "../../../Customer/CustomerAction"
 import {getAllCustomerData} from "../../../Customer/CustomerAction"
 import { handleChooserModal } from "../../../Planner/PlannerAction";
 import { TextareaComponent } from "../../../../Components/Forms/Formik/TextareaComponent";
@@ -176,7 +177,7 @@ function CustomerCallActivityForm(props) {
       addingCall,
       deleteCall,
       deletingCall,
-      addCall,
+      addCustomerActivityCall,
       startDate,
       endDate,
       startTime,
@@ -333,7 +334,7 @@ function CustomerCallActivityForm(props) {
                 },
                 () => handleCallback(resetForm)
               )
-              : addCall(testVal,
+              : addCustomerActivityCall(testVal,
                 () => handleCallback(resetForm));
           }}
         >
@@ -963,7 +964,7 @@ const mapStateToProps = ({ auth, call, employee,customer, opportunity, candidate
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
-      addCall,
+      addCustomerActivityCall,
       getAllCustomerData,
       handleChooserModal,
       getAllSalesList,

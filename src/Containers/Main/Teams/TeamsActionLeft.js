@@ -31,6 +31,7 @@ class TeamsActionLeft extends React.Component {
           {/* )} */}
           {/* {user.functionName !== "Customer Care" && ( */}
             <Tooltip title="Teams">
+            <Badge size="small">
               <span
                 onClick={() => setTeamsViewType("team")}
                 style={{
@@ -40,6 +41,7 @@ class TeamsActionLeft extends React.Component {
               >
              <PeopleIcon/>
               </span>
+            </Badge>
             </Tooltip>
           {/* )} */}
 

@@ -12,6 +12,10 @@ const initialState = {
   fetchingDealError:false,
   dealsByuserId:[],
 
+  fetchingOpportunityRecord: false,
+  fetchingOpportunityRecordError: false,
+  opportunityRecord:[],
+
   fetchingDocumentsByDealId: false,
   fetchingDocumentsByDealIdError: false,
   documentsByInnOppId: [],
@@ -508,6 +512,18 @@ export const dealReducer = (state = initialState, action) => {
             fetchingDocumentsByDealId: false,
             fetchingDocumentsByDealIdError: true,
           };
+
+          case types.GET_OPPORTUNITY_RECORD_REQUEST:
+            return { ...state, fetchingOpportunityRecord: true };
+          case types.GET_OPPORTUNITY_RECORD_SUCCESS:
+            return { ...state, fetchingOpportunityRecord: false, 
+              opportunityRecord: action.payload };
+          case types.GET_OPPORTUNITY_RECORD_FAILURE:
+            return {
+              ...state,
+              fetchingOpportunityRecord: false,
+              fetchingOpportunityRecordError: true,
+            };
     default:
       return state;
   }

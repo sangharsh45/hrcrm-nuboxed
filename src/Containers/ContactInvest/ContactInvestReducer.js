@@ -6,6 +6,19 @@ const initialState = {
     addingContactInvest: false, 
     addContactInvestModal: false,
 
+    addingContactinvestActivityEvent: false,
+    addingContactinvestActivityEventError: false,
+
+
+    addingContactinvestActivityCall:false,
+    addingContactinvestActivityCallError:false,
+
+    addingContactinvestActivityTask: false,
+    addingContactinvestActivityTaskError: false,
+
+    fetchingOpportunityRecord: false,
+    fetchingOpportunityRecordError: false,
+    opportunityRecord:[],
     fetchingContactInvestStatus: false,
     fetchingContactInvestStatusError: false,
     contactInvestStatus:[],
@@ -197,6 +210,64 @@ export const contactInvestReducer = (state = initialState, action) => {
             fetchingContactInvestStatus: false,
             fetchingContactInvestStatusError: true,
         };
+
+                   
+        case types.GET_OPPORTUNITY_RECORD_REQUEST:
+          return { ...state, fetchingOpportunityRecord: true };
+        case types.GET_OPPORTUNITY_RECORD_SUCCESS:
+          return { ...state, fetchingOpportunityRecord: false, 
+            opportunityRecord: action.payload };
+        case types.GET_OPPORTUNITY_RECORD_FAILURE:
+          return {
+            ...state,
+            fetchingOpportunityRecord: false,
+            fetchingOpportunityRecordError: true,
+          };
+
+
+          case types.ADD_CONTACT_INVEST_ACTIVITY_CALL_REQUEST:
+            return { ...state, addingContactinvestActivityCall: true };
+          case types.ADD_CONTACT_INVEST_ACTIVITY_CALL_SUCCESS:
+            return { ...state, addingContactinvestActivityCall: false,
+              contactInvestorActivityModal: false,
+              contactInvestStatus:[action.payload,...state.contactInvestStatus]
+             };
+          case types.ADD_CONTACT_INVEST_ACTIVITY_CALL_FAILURE:
+            return {
+              ...state,
+              addingContactinvestActivityCall: false,
+              contactInvestorActivityModal: false,
+            };
+
+            case types.ADD_CONTACT_INVEST_ACTIVITY_EVENT_REQUEST:
+              return { ...state, addingContactinvestActivityEvent: true };
+            case types.ADD_CONTACT_INVEST_ACTIVITY_EVENT_SUCCESS:
+              return { ...state, addingContactinvestActivityEvent: false,
+                contactInvestorActivityModal: false,
+                contactInvestStatus:[action.payload,...state.contactInvestStatus]
+               };
+            case types.ADD_CONTACT_INVEST_ACTIVITY_EVENT_FAILURE:
+              return {
+                ...state,
+                addingContactinvestActivityEvent: false,
+                contactInvestorActivityModal: false,
+              };  
+
+              case types.ADD_CONTACT_INVEST_ACTIVITY_TASK_REQUEST:
+                return { ...state, addingContactinvestActivityTask: true };
+              case types.ADD_CONTACT_INVEST_ACTIVITY_TASK_SUCCESS:
+                return { ...state, addingContactinvestActivityTask: false,
+                  contactInvestorActivityModal: false,
+                  contactInvestStatus:[action.payload,...state.contactInvestStatus]
+                 };
+              case types.ADD_CONTACT_INVEST_ACTIVITY_TASK_FAILURE:
+                return {
+                  ...state,
+                  addingContactinvestActivityTask: false,
+                  contactInvestorActivityModal: false,
+                };  
+     
+      
       default:
       return state;
   }
