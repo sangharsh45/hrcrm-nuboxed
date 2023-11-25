@@ -212,6 +212,8 @@ const initialState = {
   updateMaterialById: false,
   updateMaterialByIdError: true,
 
+  addingProduct: false,
+  addingProductError:false,
 };
 const newDateRange = (dateRange, newDate) =>
   dateRange.map((range) => {
@@ -823,6 +825,20 @@ export const productReducer = (state = initialState, action) => {
           addingProductCategory: false,
           addingProductCategoryError: true,
         };
+
+        case types.ADD_PROFESSIONALDUCT_REQUEST:
+          return { ...state, addingProduct: true };
+        case types.ADD_PROFESSIONALDUCT_SUCCESS:
+          return { ...state, addingProduct: false, addConfigureModal: false,
+            products: [action.payload,...state.products]
+          };
+        case types.ADD_PROFESSIONALDUCT_FAILURE:
+          return {
+            ...state,
+            addingProduct: false,
+            addingProductError: true,
+            addConfigureModal: false,
+          };
 
     default:
       return state;

@@ -13,7 +13,9 @@ export const getProducts = () => (dispatch) => {
     type: types.GET_PROFESSIONALDUCTS_REQUEST,
   });
   axios
-    .get(`${base_url2}/product/productSuppliesList`, {
+  .get(`${base_url2}/product`,
+    // .get(`${base_url2}/product/productList/pagewise/${pageNo}`, 
+    {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },
@@ -541,7 +543,7 @@ export const addDiscountDistributor = (discount) => (dispatch) => {
   console.log("inside add discount");
   dispatch({ type: types.ADD_DISCOUNT_DISTRIBUTOR_REQUEST });
   axios
-    .post(`${base_url}/distributor/distributorDiscount`, discount)
+    .post(`${base_url2}/distributor/distributorDiscount`, discount)
     .then((res) => {
       console.log(res);
       // dispatch(getProducts());
@@ -718,7 +720,11 @@ export const getDistributorOfferHistory = (productId) => (dispatch) => {
     type: types.GET_DISTRIBUTOR_OFFER_HISTORY_REQUEST,
   });
   axios
-    .get(`${base_url}/offer/distributor/offer/${productId}`)
+    .get(`${base_url2}/offer/distributor/offer/${productId}`,{
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
     .then((res) => {
       console.log(res);
       dispatch({
@@ -995,5 +1001,31 @@ export const uploadproductlist = (product, groupId) => (dispatch) => {
         type: types.UPLOAD_PRODUCT_LISTS_FAILURE,
         payload: err,
       });
+    });
+};
+export const addProduct = (product, cb) => (dispatch) => {
+  console.log("inside add product");
+  dispatch({ type: types.ADD_PROFESSIONALDUCT_REQUEST });
+  axios
+    .post(`${base_url2}/product`, product, {
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+        },
+    })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.ADD_PROFESSIONALDUCT_SUCCESS,
+        payload: res.data,
+      });
+      cb();
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.ADD_PROFESSIONALDUCT_FAILURE,
+        payload: err,
+      });
+      cb();
     });
 };

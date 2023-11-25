@@ -9,7 +9,7 @@ import SearchSelect from "../../../Components/Forms/Formik/SearchSelect";
 import { DatePicker } from "../../../Components/Forms/Formik/DatePicker";
 import { InputComponent } from "../../../Components/Forms/Formik/InputComponent";
 import Upload from "../../../Components/Forms/Formik/Upload";
-import { addProductCategory } from "../ProductAction";
+import { addProduct } from "../ProductAction";
 import LazySelect from "../../../Components/Forms/Formik/LazySelect";
 import { FlexContainer } from "../../../Components/UI/Layout";
 import { TextareaComponent } from "../../../Components/Forms/Formik/TextareaComponent";
@@ -102,7 +102,7 @@ class Productform extends Component {
     this.props.getCurrency()
   }
   render() {
-    const { addingProductCategory, addProductCategory } = this.props;
+    const { addingProduct, addProduct} = this.props;
 
     const currencyType = this.props.currencies.map((item) => {
       return {
@@ -121,11 +121,10 @@ class Productform extends Component {
       <>
         <Formik
           initialValues={{
+            active: true,
             userId: this.props.userId,
-            // groupId: this.props.groupId,
             attribute: "",
             attributeName: "",
-            currencyName: "",
             category: "",
             categoryName: "",
             description: "",
@@ -133,11 +132,13 @@ class Productform extends Component {
             imageId: "",
             name: "",
             price: 0,
+            distributorAllowedMargin:0,
             distributorMaxMargin: 0,
+            consumerAllowedMargin:0,
             consumerMaxMargin: 0,
             subAttribute: "",
             subAttributeName: "",
-            articleNo: "",
+            articleNo:"",
             subCategory: "",
             subCategoryName: "",
             tax: 0,
@@ -145,6 +146,9 @@ class Productform extends Component {
             expireDays: "",
             bestBefore: "",
             alert: "",
+            maxDiscount:0,
+            maxDiscountValidDate:"",
+            publishInd: true,
             marginType: this.state.percentage ? "Percentage" : "Amount",
             consumerMarginType: this.state.amount ? "Amount" : "Percentage",
             gstIncludeInd: this.state.priceGst ? true : false,
@@ -156,7 +160,7 @@ class Productform extends Component {
           onSubmit={(values, { resetForm }) => {
             //debugger;
             console.log(values);
-            addProductCategory(
+            addProduct(
               {
                 ...values,
                 marginType: this.state.percentage ? "Percentage" : "Amount",
@@ -171,7 +175,6 @@ class Productform extends Component {
                   : false,
               },
               () => this.callback(resetForm),
-              this.props.groupId,
             );
           }}
         >
@@ -184,357 +187,318 @@ class Productform extends Component {
             values,
             ...rest
           }) => (
-            <Form class="form-background">
-              <div style={{ display: "flex", justifyContent: "space-between" }}>
-                <div
-                  style={{
-                    height: "100%",
-                    width: "45%",
-                  }}
-                >
-                  <FlexContainer flexWrap="no-wrap">
-                    <div
-                      style={{
-                        width: "40%",
-                      }}
-                    ><Spacer />
-                      <Field name="imageId" component={Upload} />
-                    </div>
-                  </FlexContainer>
-                  <FlexContainer justifyContent="space-between">
-                    <div style={{ width: "48%" }}>
-                      <Field
-                        isRequired
-                        name="categoryName"
-                        label="Category"
-                        placeholder="Search or Create"
-                        optionLabel="categoryName"
-                        optionValue="categoryName"
-                        url={`${base_url2}/product/category`}
-                        component={LazySelect}
-                        // component={InputComponent}
-                        isColumn
-                        inlineLabel
-                      />
-                    </div>
-                    <div style={{ width: "47%" }}>
-                      <Field
-                        name="subCategoryName"
-                        label="Sub Category"
-                        placeholder="Search or Create"
-                        optionLabel="subCategoryName"
-                        optionValue="subCategoryName"
-                        url={`${base_url2}/product/subcategory`}
-                        component={LazySelect}
-                        isColumn
-                        inlineLabel
-                      />
-                    </div>
-                  </FlexContainer>
-                  <Field
-                    name="name"
-                    label="Name"
-                    isColumn
-                    width={"100%"}
-                    inlineLabel
-                    component={InputComponent}
-                  />
-                  <FlexContainer justifyContent="space-between">
-                    <div style={{ width: "48%" }}>
-                      <Field
-                        name="attributeName"
-                        label="Attribute"
-                        placeholder="Search or Create"
-                        optionLabel="attributeName"
-                        optionValue="attributeName"
-                        url={`${base_url2}/product/attribute`}
-                        component={LazySelect}
-                        isColumn
-                        inlineLabel
-                      />
-                    </div>
-                    <div style={{ width: "47%" }}>
-                      <Field
-                        name="subAttributeName"
-                        label="Sub Attribute"
-                        placeholder="Search or Create"
-                        optionLabel="subAttributeName"
-                        optionValue="subAttributeName"
-                        url={`${base_url2}/product/subattribute`}
-                        component={LazySelect}
-                        isColumn
-                        inlineLabel
-                      />
-                    </div>
-                  </FlexContainer>
-                  <FlexContainer justifyContent="space-between">
-                    <div style={{ width: "47%" }}>
-                      <Field
-                        name="netWeight"
-                        label="Net Weight"
-                        isColumn
-                        width={"100%"}
-                        inlineLabel
-                        component={InputComponent}
-                      />
-                    </div>
-                    <div style={{ width: "47%" }}>
-                      <Field
-                        name="netUnit"
-                        label="Units"
-                        isColumn
-                        inlineLabel
-                        component={SelectComponent}
-                        options={["g", "kg"]}
-                        style={{
-                          width: "100%",
-                        }}
-                      />
-                    </div>
-                  </FlexContainer>
-                  <FlexContainer justifyContent="space-between">
-                    <div style={{ width: "47%" }}>
-                      <Field
-                        name="grossWeight"
-                        label="Gross Weight"
-                        isColumn
-                        width={"100%"}
-                        inlineLabel
-                        component={InputComponent}
-                      />
-                    </div>
-                    <div style={{ width: "47%" }}>
-                      <Field
-                        name="grossUnit"
-                        label="Units"
-                        isColumn
-                        width={"100%"}
-                        inlineLabel
-                        component={SelectComponent}
-                        options={["g", "kg"]}
-                      />
-                    </div>
-                  </FlexContainer>
-                  <FlexContainer justifyContent="space-between">
-                    <div style={{ width: "47%" }}>
-                      <Field
-                        name="palette"
-                        label="Pallet"
-                        isColumn
-                        width={"100%"}
-                        inlineLabel
-                        component={SelectComponent}
-                        options={["Euro", "Block"]}
-                      />
-                    </div>
-                    <div style={{ width: "47%" }}>
-                      <Field
-                        name="dateOfManufacture"
-                        label="Date of manufacture"
-                        isColumn
-                        inlineLabel
-                        component={DatePicker}
-                        style={{
-                          width: "100%",
-                        }}
-                      />
-                    </div>
-                  </FlexContainer>
-                  <FlexContainer justifyContent="space-between">
-                    <div style={{ width: "47%" }}>
-                      <Field
-                        name="cost"
-                        label="Cost"
-                        isColumn
-                        width={"100%"}
-                        inlineLabel
-                        component={InputComponent}
-                      />
-                    </div>
-                    <div style={{ width: "47%" }}>
-                      <Field
-                        name="currencyName"
-                        label="Currency"
-                        isColumn
-                        width={"100%"}
-                        inlineLabel
-                        component={SelectComponent}
-                        options={Array.isArray(currencyType) ? currencyType : []}
-                      />
-                    </div>
-                  </FlexContainer>
+            <Form>
+            <div style={{ display: "flex", justifyContent: "space-between" }}>
+              <div
+                style={{
+                  height: "100%",
+                  width: "45%",
+                }}
+              >
+                <FlexContainer flexWrap="no-wrap">
+                  <div
+                    style={{
+                      width: "40%",
+                    }}
+                  >
+                    <Field name="imageId" component={Upload} />
+                  </div>
+                </FlexContainer>
+                <Spacer style={{ marginTop: "1.25em" }} />
+                <FlexContainer justifyContent="space-between">
+                 <div style={{ width: "48%" }}>
+                <Field
+                  isRequired
+                  name="categoryName"
+                  label="Category"
+                  placeholder="Search or Create"
+                  optionLabel="categoryName"
+                  optionValue="categoryName"
+                  url={`${base_url2}/product/category`}
+                  component={LazySelect}
+                  isColumn
+                  inlineLabel
+                  
+                />
                 </div>
-                <div
-                  style={{
-                    height: "100%",
-                    width: "45%",
-                  }}
-                >
-                  <FlexContainer justifyContent="space-between">
-                    <div style={{ width: "30%" }}>
-                      <Field
-                        name="expireDays"
-                        label="Expiry"
-                        width={"100%"}
-                        component={InputComponent}
-                        isColumn
-                        inlineLabel
-                      />
-                    </div>
-                    <Spacer />
-                    <div style={{ width: "30%" }}>
-                      <Field
-                        name="bestBefore"
-                        label="Best Before"
-                        width={"100%"}
-                        component={InputComponent}
-                        isColumn
-                        inlineLabel
-                      />
-                    </div>
-                    <div style={{ width: "30%" }}>
-                      <Field
-                        name="alert"
-                        label="Alert(in days)"
-                        width={"100%"}
-                        component={InputComponent}
-                        isColumn
-                        inlineLabel
+                
+                {/* <Spacer style={{ marginBottom: "1.875em" }} /> */}
+                <div style={{ width: "47%" }}>
+                <Field
+                  name="subCategoryName"
+                  label="Sub Category"
+                  placeholder="Search or Create"
+                  optionLabel="subCategoryName"
+                  optionValue="subCategoryName"
+                  url={`${base_url2}/product/subcategory`}
+                  component={LazySelect}
+                  isColumn
+                  inlineLabel
+                  
+                />
+                </div>
+                </FlexContainer>
 
-                      />
-                    </div>
-                  </FlexContainer>
+                <Spacer />
+                <Field
+                  name="name"
+                  label="Name"
+                  isColumn
+                  width={"100%"}
+                  inlineLabel
+                  component={InputComponent}
+                  
+                />
+                <Spacer />
+                <FlexContainer justifyContent="space-between">
+                  <div style={{ width: "48%" }}>
+                    <Field
+                      name="attributeName"
+                      label="Attribute"
+                      placeholder="Search or Create"
+                      optionLabel="attributeName"
+                      optionValue="attributeName"
+                      url={`${base_url2}/product/attribute`}
+                      component={LazySelect}
+                      isColumn
+                      inlineLabel
+                      
+                    />
+                  </div>
                   <Spacer />
-                  <StyledLabel>Subscription Available ?</StyledLabel> &nbsp;
+                  <div style={{ width: "47%" }}>
+                    <Field
+                      name="subAttributeName"
+                      label="Sub Attribute"
+                      placeholder="Search or Create"
+                      optionLabel="subAttributeName"
+                      optionValue="subAttributeName"
+                      url={`${base_url2}/product/subattribute`}
+                      component={LazySelect}
+                      isColumn
+                      inlineLabel
+                     
+                    />
+                  </div>
+                </FlexContainer>
+                <Spacer style={{ marginTop: "1.25em" }} />
+                <div style={{ width: "47%" }}>
+                <Field
+                  name="articleNo"
+                  label="Article #"
+                  placeholder="Article No"
+                  isColumn
+                  width={"100%"}
+                  inlineLabel
+                  component={InputComponent}
+                  
+                />
+                </div>
+                <Spacer style={{ marginTop: "1.25em" }} />
+                <FlexContainer justifyContent="space-between">
+                  <div style={{ width: "30%" }}>
+                    <Field
+                      name="expireDays"
+                      label="Expiry"
+                      width={"100%"}
+                      component={InputComponent}
+                      isColumn
+                      inlineLabel
+                      
+                    />
+                  </div>
+                  <Spacer />
+                  <div style={{ width: "30%" }}>
+                    <Field
+                      name="bestBefore"
+                      label="Best Before"
+                      width={"100%"}
+                      component={InputComponent}
+                      isColumn
+                      inlineLabel
+                      
+                    />
+                  </div>
+                  <div style={{ width: "30%" }}>
+                    <Field
+                      name="alert"
+                      label="Alert(in days)"
+                      width={"100%"}
+                      component={InputComponent}
+                      isColumn
+                      inlineLabel
+                      
+                    />
+                  </div>
+                </FlexContainer>
+                <Spacer style={{ marginTop: "1.25em" }} />
+                <StyledLabel>Subscription Available ?</StyledLabel> &nbsp;
+                <Switch
+                  checkedChildren="Yes"
+                  unCheckedChildren="No"
+                  checked={this.state.subscriptionAvailable}
+                  onChange={this.handleSubscriptionAvailableChange}
+                />
+              </div>
+              <div
+                style={{
+                  height: "100%",
+                  width: "45%",
+                }}
+              >
+                <Spacer style={{ marginTop: "0.625em" }} />
+                <FlexContainer justifyContent="space-between">
+                  <div style={{ width: "29%" }}>
+                    <Field
+                      name="price"
+                      label={currencySymbol}
+                      component={InputComponent}
+                      inlineLabel
+                      isColumn
+                      width={"100%"}
+                     
+                    />
+                  </div>
+
+                  <div style={{ width: "29%" }}>
+                    <Field
+                      name="tax"
+                      label="GST %"
+                      width={"100%"}
+                      component={InputComponent}
+                      isColumn
+                      inlineLabel
+                     
+                    />
+                  </div>
+                  <div
+                    style={{
+                      width: "39%",
+                      fontWeight: "bold",
+                     // marginTop: "2px",
+                    }}
+                  >
+                    Price Includes GST
+                    <Switch
+                      style={{                      
+                      marginLeft: "0.3125em"
+                     }}
+                      onChange={this.handlePriceGstChange}
+                      checked={this.state.priceGst}
+                      checkedChildren="Yes"
+                      unCheckedChildren="No"
+                    />
+                  </div>
+                </FlexContainer>
+                <Spacer style={{ marginTop: "0.625em" }} />
+                <FlexContainer justifyContent="space-between">
+                  <div style={{ width: "47%" }}>
+                    <Switch
+                      style={{ marginTop: "1.875em" }}
+                      onChange={this.handleAmountChange}
+                      checked={this.state.percentage}
+                      checkedChildren="Percentage"
+                      unCheckedChildren="Amount"
+                    />
+                  </div>
+
+                  <div style={{ width: "47%" }}>
+                    <Field
+                      // isRequired
+                      name="distributorMaxMargin"
+                      label="Margin(Max)"
+                      type="number"
+                      isColumn
+                      component={InputComponent}
+                      use12Hours
+                      inlineLabel
+                      width={"100%"}
+                    />
+                  </div>
+                </FlexContainer>
+                <Spacer style={{ marginTop: "0.75em" }} />
+                <div style={{ width: "100%" }}>
+                <StyledLabel>Margin applicable for B2C</StyledLabel>&nbsp;&nbsp;&nbsp;
                   <Switch
+                    style={{marginLeft: "0.3125em" }}
+                    onChange={this.handleCustomerMarginChange}
+                    checked={this.state.marginCustomer}
                     checkedChildren="Yes"
                     unCheckedChildren="No"
-                    checked={this.state.subscriptionAvailable}
-                    onChange={this.handleSubscriptionAvailableChange}
                   />
-                  <Spacer />
-                  <FlexContainer justifyContent="space-between">
-                    <div style={{ width: "30%" }}>
-                      <Field
-                        name="tax"
-                        label="GST %"
-                        width={"100%"}
-                        component={InputComponent}
-                        isColumn
-                        inlineLabel
-
-                      />
-                    </div>
-                    <div
-                      style={{
-                        width: "39%",
-                        fontWeight: "bold",
-                      }}
-                    >
-                      Price Includes GST
-                      <Switch
-                        onChange={this.handlePriceGstChange}
-                        checked={this.state.priceGst}
-                        checkedChildren="Yes"
-                        unCheckedChildren="No"
-                      />
-                    </div>
-                  </FlexContainer>
-                  <FlexContainer justifyContent="space-between">
-                    <div style={{ width: "47%", marginTop: "1.875em" }}>
-                      <Switch
-                        onChange={this.handleAmountChange}
-                        checked={this.state.percentage}
-                        checkedChildren="Percentage"
-                        unCheckedChildren="Amount"
-                      />
-                    </div>
-                    <div style={{ width: "47%" }}>
-                      <Field
-                        // isRequired
-                        name="distributorMaxMargin"
-                        label="Margin(Max)"
-                        type="number"
-                        isColumn
-                        component={InputComponent}
-                        use12Hours
-                        inlineLabel
-                        width={"100%"}
-                      />
-                    </div>
-                  </FlexContainer>
-                  <Spacer />
-                  <div style={{ width: "100%" }}>
-                    <StyledLabel>Margin applicable for B2C</StyledLabel>&nbsp;&nbsp;&nbsp;
-                    <Switch
-                      onChange={this.handleCustomerMarginChange}
-                      checked={this.state.marginCustomer}
-                      checkedChildren="Yes"
-                      unCheckedChildren="No"
-                    />
-                  </div>
-                  <Spacer />
-                  <div style={{ width: "100%" }}>
-                    <StyledLabel>Margin applicable for B2B</StyledLabel>&nbsp;
-                    <Switch
-                      onChange={this.handleDistributorMarginChange}
-                      checked={this.state.marginDistributor}
-                      checkedChildren="Yes"
-                      unCheckedChildren="No"
-                    />
-                  </div>
-                  <Spacer />
-                  <div style={{ fontWeight: "bold" }}>
-                    Applicable for B2C ONLY
-                  </div>
-                  <FlexContainer justifyContent="space-between">
-                    <div style={{ width: "47%", marginTop: "1em" }}>
-                      <Switch
-                        onChange={this.handleConsumerMarginChange}
-                        checked={this.state.amount}
-                        checkedChildren="Amount"
-                        unCheckedChildren="Percentage"
-                      />
-                    </div>
-                    <div style={{ width: "47%" }}>
-                      <Field
-                        // isRequired
-                        name="consumerMaxMargin"
-                        label="B2C Margin(Max)"
-                        type="number"
-                        isColumn
-                        width={"100%"}
-                        component={InputComponent}
-                        use12Hours
-                        inlineLabel
-                      />
-                    </div>
-                  </FlexContainer>
-                  <FlexContainer justifyContent="space-between">
-                    <div style={{ width: "100%" }}>
-                      <Field
-                        name="description"
-                        label="Description"
-                        isColumn
-                        width={"33.125em"}
-                        component={TextareaComponent}
-                        inlineLabel
-                      />
-                    </div>
-                  </FlexContainer>
-                  <Spacer />
                 </div>
+                <Spacer style={{ marginTop: "0.75em" }} />
+                <div style={{ width: "100%" }}>
+                <StyledLabel>Margin applicable for B2B</StyledLabel>&nbsp;
+                  <Switch
+                    style={{marginLeft: "0.3125em" }}
+                    onChange={this.handleDistributorMarginChange}
+                    checked={this.state.marginDistributor}
+                    checkedChildren="Yes"
+                    unCheckedChildren="No"
+                  />
+                </div>
+                <Spacer style={{ marginTop: "0.75em" }} />
+                <div style={{ fontWeight: "bold" }}>
+                  Applicable for B2C ONLY
+                </div>
+                <FlexContainer justifyContent="space-between">
+                  <div style={{ width: "47%" }}>
+                    <Switch
+                      style={{ marginTop: "1.875em" }}
+                      onChange={this.handleConsumerMarginChange}
+                      checked={this.state.amount}
+                      checkedChildren="Amount"
+                      unCheckedChildren="Percentage"
+                    />
+                  </div>
+
+                  <div style={{ width: "47%" }}>
+                    <Field
+                      // isRequired
+                      name="consumerMaxMargin"
+                      label="B2C Margin(Max)"
+                      type="number"
+                      isColumn
+                      width={"100%"}
+                      component={InputComponent}
+                      use12Hours
+                      inlineLabel
+                     
+                    />
+                  </div>
+                </FlexContainer>
+                <Spacer style={{ marginTop: "1.25em" }} />
+
+                <FlexContainer justifyContent="space-between">
+                  <div style={{ width: "100%" }}>
+                    <Field
+                      name="description"
+                      label="Description"
+                      isColumn
+                      width={"33.125em"}
+                      component={TextareaComponent}
+                      inlineLabel
+                      
+                    />
+                  </div>
+                </FlexContainer>
+
+                <Spacer style={{ marginTop: "1.25em" }} />
+                {/* <StyledLabel>Additional Info</StyledLabel> */}
               </div>
-              <FlexContainer justifyContent="flex-end">
-                <Button
-                  type="primary"
-                  htmlType="submit"
-                  loading={addingProductCategory}
-                >
-                  Create
-                </Button>
-              </FlexContainer>
-            </Form>
+            </div>
+
+            <FlexContainer justifyContent="flex-end">
+              <Button
+                type="primary"
+                htmlType="submit"
+                loading={addingProduct}
+              >
+                Create
+              </Button>
+            </FlexContainer>
+          </Form>
           )}
         </Formik>
       </>
@@ -543,8 +507,8 @@ class Productform extends Component {
 }
 
 const mapStateToProps = ({ auth, product }) => ({
-  addingProductCategory: product.addingProductCategory,
-  addingProductCategoryError: product.addingProductCategoryError,
+  addingProduct: product.addingProduct,
+  addingProductError: product.addingProductError,
   addProductModal: product.addProductModal,
   user: auth.userDetails,
   userId: auth.userDetails.userId,
@@ -555,7 +519,7 @@ const mapStateToProps = ({ auth, product }) => ({
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
-      addProductCategory,
+      addProduct,
       getCurrency,
     },
     dispatch

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect,useState } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { FormattedMessage } from "react-intl";
@@ -56,12 +56,27 @@ const ContactActionLeft = (props) => {
   // }, [props.userId, props.viewType, props.name, transcript]);
   console.log(props.customerRecordData);
   const { user } = props;
-  const countryNameOption = props.departments.map((item)=>{
-  return {
-    label: `${item.departmentName || ""}`,
-    value: item.departmentId,
-  };});
+
+  const sortedDepartments =props.departments.sort((a, b) => {
+      const nameA = a.departmentName.toLowerCase();
+      const nameB = b.departmentName.toLowerCase();
+      // Compare department names
+      if (nameA < nameB) {
+        return -1;
+      }
+      if (nameA > nameB) {
+        return 1;
+      }
+      return 0;
+    });
   
+  console.log("srtt",sortedDepartments)
+
+  const countryNameOption = sortedDepartments.map((item)=>{
+    return {
+      label: `${item.departmentName || ""}`,
+      value: item.departmentId,
+    };});
 
   return (
     <div class=" flex  items-center">
