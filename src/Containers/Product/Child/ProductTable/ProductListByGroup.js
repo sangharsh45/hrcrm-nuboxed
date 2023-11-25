@@ -15,7 +15,7 @@ import {
     handleCatalogueWipModal,
 } from "../../ProductAction";
 // import UpdateProductModal from "../../Child/UpdateProductModal";
-// import ProductDiscountModal from "./ProductDiscountModal";
+import ProductDiscountModal from "./ProductDiscountModal";
 // import CustomerDiscountHistory from "./CustomerDiscountHistory";
 // import APIFailed from "../../../../Helpers/ErrorBoundary/APIFailed";
 // import ProductHistoryModal from "./ProductHistoryModal";
@@ -24,7 +24,7 @@ import {
 // import DistributorDiscountHistory from "./DistributorDiscountHistory";
 // import ProductOfferModal from "./ProductOfferModal";
 // import CustomerOfferHistory from "./CustomerOfferHistory";
-// import DistributorOfferHistory from "./DistributorOfferHistory";
+import DistributorOfferHistory from "./DistributorOfferHistory";
 // import CatalogueWipModal from "../Wip/CatalogueWipModal";
 import ProductPublishToggle from "./ProductPublishToggle";
 import moment from "moment";
@@ -46,11 +46,18 @@ import WebhookIcon from '@mui/icons-material/Webhook';
 import NetworkCellIcon from '@mui/icons-material/NetworkCell';
 import ContactMailIcon from '@mui/icons-material/ContactMail';
 import ApartmentIcon from '@mui/icons-material/Apartment';
+import InfiniteScroll from "react-infinite-scroll-component";
 
 function ProductHistoryTable(props) {
+
+    const [page, setPage] = useState(0);
+    const [hasMore, setHasMore] = useState(true);
+
     useEffect(() => {
-        // props.getProductByGroup(props.groupId);
-        props.getAllProductCatagory();
+        // setPage(page + 1);
+        // props.getProducts(page);
+        props.getProducts();
+        // props.getAllProductCatagory();
     }, []);
 
     const [showHistory, setshowHistory] = useState(false);
@@ -107,6 +114,11 @@ function ProductHistoryTable(props) {
         );
     }, [props.allproducts]);
 
+    const handleLoadMore = () => {
+        setPage(page + 1);
+        // props.getProducts(page);
+    };
+
     const {
         fetchingProducts,
         fetchingProductsError,
@@ -126,6 +138,7 @@ function ProductHistoryTable(props) {
         addCatalogueWipModal,
         handleCatalogueWipModal,
     } = props;
+
     const columns = [
         {
             title: "",
@@ -518,41 +531,22 @@ function ProductHistoryTable(props) {
                     },
                     children: (
                         <span>
-                            {user.designation === "Manager" &&
-                                user.functionName === "Management" ? (
-                                <Button
-                                    type="primary"
-                                    shape="round"
-                                    style={{
-                                        backgroundColor: "teal",
-                                        // backgroundColor: "Yellow",
-                                        fontSize: "11px",
-                                    }}
-                                    onClick={() => {
-                                        handleDiscountModal(true);
-                                        handleParticularRowData(item);
-                                    }}
-                                >
-                                    Discount
-                                </Button>
-                            ) : (
-                                <Button
-                                    disabled
-                                    type="primary"
-                                    shape="round"
-                                    style={{
-                                        backgroundColor: "teal",
-                                        color: "white",
-                                        fontSize: "11px",
-                                    }}
-                                    onClick={() => {
-                                        handleDiscountModal(true);
-                                        handleParticularRowData(item);
-                                    }}
-                                >
-                                    Discount
-                                </Button>
-                            )}
+                                  <Button
+                  type="primary"
+                  shape="round"
+                  style={{
+                    backgroundColor: "teal",
+                    // backgroundColor: "Yellow",
+                    fontSize: "11px",
+                  }}
+                  onClick={() => {
+                    handleDiscountModal(true);
+                    handleParticularRowData(item);
+                  }}
+                >
+                  Discount
+                </Button>
+                            
                         </span>
                     ),
                 };
@@ -898,30 +892,38 @@ function ProductHistoryTable(props) {
 
     return (
         <>
-
+        <InfiniteScroll
+        dataLength={products.length}
+        next={handleLoadMore}
+        hasMore={hasMore}
+        loader={fetchingProducts?<h4 style={{ textAlign: 'center' }}>Loading...</h4>:null}
+        height={"75vh"}
+      >
             <StyledTable
                 rowKey=""
                 columns={columns}
-                dataSource={props.allproducts}
-                loading={
-                    props.fetchingAllProducts
-                }
-                scroll={{ y: 320 }}
-                pagination={false
+                dataSource={products}
+                // loading={
+                //     fetchingProducts
+                // }
+                // scroll={{ y: 320 }}
+                // pagination={false
                     // defaultPageSize: 30,
                     // showSizeChanger: true,
                     // pageSizeOptions: ["25", "40", "50"],
-                }
+                
+            />
+              </InfiniteScroll> 
+              <ProductDiscountModal
+                addDiscountModal={addDiscountModal}
+                handleDiscountModal={handleDiscountModal}
+                particularDiscountData={particularDiscountData}
             />
             {/* <UpdateProductModal
                 updateProductModal={updateProductModal}
                 handleUpdateProductModal={handleUpdateProductModal}
             />
-            <ProductDiscountModal
-                addDiscountModal={addDiscountModal}
-                handleDiscountModal={handleDiscountModal}
-                particularDiscountData={particularDiscountData}
-            />
+
             <ProductHistoryModal
                 addHistoryModal={addHistoryModal}
                 handleHistoryModal={handleHistoryModal}
@@ -954,9 +956,10 @@ function ProductHistoryTable(props) {
                 <DistributorDiscountHistory productId={productId} />
             )}
             {customerOfferHistory && <CustomerOfferHistory productId={productId} />}
+            */}
             {distributorOfferHistory && (
                 <DistributorOfferHistory productId={productId} />
-            )} */}
+            )} 
         </>
     );
 }
@@ -997,6 +1000,7 @@ const mapDispatchToProps = (dispatch) =>
             getAllProductCatagory,
             handleOfferModal,
             handleCatalogueWipModal,
+            getProducts
             // handleCurrencyPriceModal
         },
         dispatch

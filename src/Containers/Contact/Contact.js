@@ -49,18 +49,7 @@ const handleCountryChange = (event) => {
 
   // setFilteredData(filteredJobs);
 };
-const handleRoleChange = (event) => {
-  const role = event.target.value;
-  setSelectedRole(role);
 
-  const filteredJobs = props.contactByUserId.filter((job) => {
-    // console.log(job.address.length && job.address[0].country);
-    const roleMatch = role === '' || job.designation === role;
-    return roleMatch;
-  });
-
-  setFilteredData(filteredJobs);
-};
 // useEffect(()=>{
 // props.getContactListByUserId(props.userId,0)
 // },[])
