@@ -54,9 +54,9 @@ function ProductHistoryTable(props) {
     const [hasMore, setHasMore] = useState(true);
 
     useEffect(() => {
-        // setPage(page + 1);
-        // props.getProducts(page);
-        props.getProducts();
+        setPage(page + 1);
+        props.getProducts(page);
+        // props.getProducts();
         // props.getAllProductCatagory();
     }, []);
 
@@ -116,7 +116,7 @@ function ProductHistoryTable(props) {
 
     const handleLoadMore = () => {
         setPage(page + 1);
-        // props.getProducts(page);
+        props.getProducts(page);
     };
 
     const {
@@ -907,7 +907,7 @@ function ProductHistoryTable(props) {
                 //     fetchingProducts
                 // }
                 // scroll={{ y: 320 }}
-                // pagination={false
+                pagination={false}
                     // defaultPageSize: 30,
                     // showSizeChanger: true,
                     // pageSizeOptions: ["25", "40", "50"],
