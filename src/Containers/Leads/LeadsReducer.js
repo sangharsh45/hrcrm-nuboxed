@@ -251,7 +251,10 @@ case types.HANDLE_LEADS_MODAL:
         return {
           ...state,
           linkingCustomerStatus: false,
-          addLeadsConfirmationModal:true,
+          addLeadsConfirmationModal:false,
+          leadsAllData: state.leadsAllData.filter(
+            (item) => item.leadsId !== action.payload
+          ),
         };
       case types.CONVERT_CUSTOMER_STATUS_FAILURE:
         return {

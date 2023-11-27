@@ -149,7 +149,7 @@ export const setLeadsViewType = (viewType) => (dispatch) => {
         // dispatch(getLeadsRecords(userId));
         dispatch({
           type: types.CONVERT_CUSTOMER_STATUS_SUCCESS,
-          payload: res.data,
+          payload: leadsId,
         });
         // Swal.fire({
         //   icon: 'success',
