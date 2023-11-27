@@ -53,6 +53,7 @@ const handleDeptChange = (event) => {
       value: item.employeeId,
     };
   });
+  console.log(props.rowdata)
   return (
     <>
       <Formik
@@ -75,7 +76,7 @@ const handleDeptChange = (event) => {
               // singleMultiInd: single ? true : false,
             },
             props.rowdata.leadsId,
-            props.rowdata.userId,
+          single === false?selectedUser:props.userId,
           );
         }}
       >

@@ -3,6 +3,7 @@ import { StyledPopconfirm } from "../../../../Components/UI/Antd";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import moment from "moment";
+import ConnectWithoutContactIcon from '@mui/icons-material/ConnectWithoutContact';
 import NoteAltIcon from "@mui/icons-material/NoteAlt";
 import OpenInBrowserIcon from "@mui/icons-material/OpenInBrowser";
 import { getSectors } from "../../../Settings/Sectors/SectorsAction";
@@ -54,7 +55,7 @@ const LeadsCardList = (props) => {
   }, []);
 
   const [currentLeadsId, setCurrentLeadsId] = useState("");
-  const [rowdata, setrowData] = useState({});
+  const [rowdata, setrowData] = useState("");
 
   const handleRowData = (data) => {
     setrowData(data);
@@ -71,6 +72,11 @@ const LeadsCardList = (props) => {
   function handleSetCurrentLeadsId(item) {
     setCurrentLeadsId(item);
   }
+  const handleToggleCollection=(checked)=>{
+    if(checked ){
+        props.handleLeadsConfirmationModal(true)
+    }
+    }
   const {
     deleteLeadsData,
     handleUpdateLeadsModal,
@@ -362,12 +368,28 @@ const LeadsCardList = (props) => {
 
                     <div class=" text-xs text-cardBody font-poppins"></div>
                     <div>
-                      <StatusCustomerToggle
+                    <Tooltip title="Qualify? Lead will move to Customer section!">
+                        <ConnectWithoutContactIcon
+                          onClick={() => {
+                            handleRowData(item);
+                            props.handleLeadsConfirmationModal(true);
+                         
+                          }}
+                          style={{
+                            // color: "green",
+                            cursor: "pointer",
+                            fontSize: "1rem",
+                          }}
+                        />
+                      </Tooltip>
+                      {/* <StatusCustomerToggle
                         rowdata={rowdata}
+                        handleToggleCollection={handleToggleCollection}
+                        // handleLeadsConfirmationModal={props.handleLeadsConfirmationModal}
                         type={props.convertInd ? "primary" : "danger"}
                         leadsId={item.leadsId}
                         convertInd={item.convertInd}
-                      />
+                      /> */}
                     </div>
                   </div>
                   <div class="flex flex-col w-[6%] max-sm:flex-row max-sm:w-[10%]">
@@ -375,8 +397,9 @@ const LeadsCardList = (props) => {
                       <Tooltip title="Notes">
                         <NoteAltIcon
                           onClick={() => {
-                            handleLeadsNotesDrawerModal(true);
                             handleRowData(item);
+                            handleLeadsNotesDrawerModal(true);
+                         
                           }}
                           style={{
                             color: "green",
@@ -398,8 +421,9 @@ const LeadsCardList = (props) => {
                         <AddchartIcon
                           style={{ fontSize: "1rem", cursor: "pointer" }}
                           onClick={() => {
+                                handleRowData(item);
                             props.handleCETmodal(true);
-                            handleRowData(item);
+                        
                           }}
                         />
                       </Tooltip>
