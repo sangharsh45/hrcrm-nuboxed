@@ -997,6 +997,8 @@ export const inventoryReducer = (state = initialState, action) => {
     case types.HANDLE_PICKUP_MODAL:
       return { ...state, pickUpModal: action.payload };
 
+
+
     case types.HANDLE_CREATE_AWB_MODAL:
       return { ...state, addCreateAwb: action.payload };
     default:

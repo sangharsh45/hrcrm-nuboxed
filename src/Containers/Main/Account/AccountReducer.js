@@ -6,7 +6,7 @@ const initialState = {
 
   clearbit1: {},
 
-  updateAccountModal:false,
+  updateAccountModal: false,
 
   addDistributorModal: false,
   setEditingDistributor: {},
@@ -92,7 +92,7 @@ const initialState = {
 
   fetchingAllDistributorCount: false,
   fetchingAllDistributorCountError: false,
-  allDistributorCount:{},
+  allDistributorCount: {},
 
   updateDisributorById: false,
   updateDisributorByIdError: false,
@@ -158,6 +158,10 @@ const initialState = {
   fetchingPaymentHistory: false,
   fetchingPaymentHistoryError: false,
   paymentHistory: [],
+
+  addCatalogueOrderModal: false,
+
+  generateOrderModal: false,
 
   updatingOfferPriceOfOrder: false,
   updatingOfferPriceOfOrderError: false,
@@ -300,7 +304,7 @@ const initialState = {
 
   fetchingOpportunityRecord: false,
   fetchingOpportunityRecordError: false,
-  opportunityRecord:[],
+  opportunityRecord: [],
 
   receivingTaskCompletionByDispatch: false,
   receivingTaskCompletionByDispatchError: false,
@@ -902,7 +906,7 @@ export const distributorReducer = (state = initialState, action) => {
      * paid modal
      */
 
-     case types.HANDLE_ACCOUNT_UPDATE_MODAL:
+    case types.HANDLE_ACCOUNT_UPDATE_MODAL:
       return { ...state, updateAccountModal: action.payload };
 
     case types.HANDLE_PAID_BUTTON_MODAL:
@@ -1840,32 +1844,39 @@ export const distributorReducer = (state = initialState, action) => {
     case types.HANDLE_PAYMENT_HISTORY_MODAL:
       return { ...state, showPaymentHistoryModal: action.payload };
 
-      case types.GET_DISTRIBUTOR_COUNT_REQUEST:
-        return { ...state, fetchingAllDistributorCount: true };
-      case types.GET_DISTRIBUTOR_COUNT_SUCCESS:
-        return {
-          ...state,
-          fetchingAllDistributorCount: false,
-          allDistributorCount: action.payload,
-        };
-      case types.GET_DISTRIBUTOR_COUNT_FAILURE:
-        return {
-          ...state,
-          fetchingAllDistributorCount: false,
-          fetchingAllDistributorCountError: true,
-        };
+    case types.GET_DISTRIBUTOR_COUNT_REQUEST:
+      return { ...state, fetchingAllDistributorCount: true };
+    case types.GET_DISTRIBUTOR_COUNT_SUCCESS:
+      return {
+        ...state,
+        fetchingAllDistributorCount: false,
+        allDistributorCount: action.payload,
+      };
+    case types.GET_DISTRIBUTOR_COUNT_FAILURE:
+      return {
+        ...state,
+        fetchingAllDistributorCount: false,
+        fetchingAllDistributorCountError: true,
+      };
 
-        case types.GET_OPPORTUNITY_RECORD_REQUEST:
-          return { ...state, fetchingOpportunityRecord: true };
-        case types.GET_OPPORTUNITY_RECORD_SUCCESS:
-          return { ...state, fetchingOpportunityRecord: false, 
-            opportunityRecord: action.payload };
-        case types.GET_OPPORTUNITY_RECORD_FAILURE:
-          return {
-            ...state,
-            fetchingOpportunityRecord: false,
-            fetchingOpportunityRecordError: true,
-          };
+    case types.GET_OPPORTUNITY_RECORD_REQUEST:
+      return { ...state, fetchingOpportunityRecord: true };
+    case types.GET_OPPORTUNITY_RECORD_SUCCESS:
+      return {
+        ...state, fetchingOpportunityRecord: false,
+        opportunityRecord: action.payload
+      };
+    case types.GET_OPPORTUNITY_RECORD_FAILURE:
+      return {
+        ...state,
+        fetchingOpportunityRecord: false,
+        fetchingOpportunityRecordError: true,
+      };
+    case types.HANDLE_ADD_ORDER_MODAL:
+      return { ...state, addCatalogueOrderModal: action.payload };
+
+    case types.HANDLE_ORDER_GENERATE_MODAL:
+      return { ...state, generateOrderModal: action.payload };
     default:
       return state;
   }

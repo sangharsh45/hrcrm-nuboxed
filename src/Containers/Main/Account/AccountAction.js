@@ -59,7 +59,7 @@ export const addDistributor = (distributor, userId) => (dispatch) => {
 /**
  * get all the distributor of the user
  */
-export const getDistributorsByUserId = (userId,pageNo) => (dispatch) => {
+export const getDistributorsByUserId = (userId, pageNo) => (dispatch) => {
   dispatch({
     type: types.GET_DISTRIBUTORS_BY_USER_ID_REQUEST,
   });
@@ -430,7 +430,7 @@ export const generateOrderByDistributorId = (data, cb) => (dispatch) => {
     });
 };
 
-export const getDistributorOrderByDistributorId = (distributorId,pageNo) => (
+export const getDistributorOrderByDistributorId = (distributorId, pageNo) => (
   dispatch
 ) => {
   dispatch({
@@ -2453,7 +2453,7 @@ export const getDistributorCount = (userId) => (dispatch) => {
     });
 };
 
-export const handleUpdateAccountModal=(modalProps) => (dispatch) => {
+export const handleUpdateAccountModal = (modalProps) => (dispatch) => {
   dispatch({
     type: types.HANDLE_ACCOUNT_UPDATE_MODAL,
     payload: modalProps,
@@ -2465,7 +2465,7 @@ export const getOpportunityRecord = (userId) => (dispatch) => {
     type: types.GET_OPPORTUNITY_RECORD_REQUEST,
   });
   axios
-    .get(`${base_url}/candidate/record/today/${userId}`,{
+    .get(`${base_url}/candidate/record/today/${userId}`, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },
@@ -2484,4 +2484,18 @@ export const getOpportunityRecord = (userId) => (dispatch) => {
         payload: err,
       });
     });
+};
+
+export const handleOrderGenerateModal = (modalProps) => (dispatch) => {
+  dispatch({
+    type: types.HANDLE_ORDER_GENERATE_MODAL,
+    payload: modalProps,
+  });
+};
+
+export const handleAddOrderModal = (modalProps) => (dispatch) => {
+  dispatch({
+    type: types.HANDLE_ADD_ORDER_MODAL,
+    payload: modalProps,
+  });
 };
