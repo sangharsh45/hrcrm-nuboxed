@@ -92,15 +92,15 @@ const LeadsCardList = (props) => {
      <div className=' flex justify-end sticky top-28 z-auto'>
       <OnlyWrapCard style={{backgroundColor:"#E3E8EE"}}>
       <div className=" flex justify-between w-[99%] p-2 bg-transparent font-bold sticky top-0 z-10">
-        <div className=" md:w-[14rem]">Name</div>
-        <div className=" md:w-20"></div>
-        <div className=" md:w-32 ">Phone #</div>
-        <div className="md:w-32">Country</div>
-        <div className="md:w-56">Company</div>
-        <div className="md:w-20">Sector</div> 
-        <div className="md:w-24">Assigned to</div>
-        <div className="md:w-20">Owner</div>
-        <div className="md:w-20">Qualify</div>
+        <div className=" md:w-[8.1rem]">Name</div>
+        <div className=" md:w-[5.1rem]"></div>
+        <div className=" md:w-[4.2rem] ">Phone #</div>
+        <div className="md:w-[5.8rem]">Country</div>
+        <div className="md:w-[8.5rem]">Company</div>
+        <div className="md:w-[3.8rem]">Sector</div> 
+        <div className="md:w-[5.2rem]">Assigned to</div>
+        <div className="md:w-[1.5rem]">Owner</div>
+        <div className="md:w-[3.3rem]">Qualify</div>
         <div className="w-12"></div>
 
       </div>
