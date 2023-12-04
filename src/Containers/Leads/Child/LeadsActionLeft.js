@@ -9,7 +9,7 @@ import { StyledSelect } from "../../../Components/UI/Antd";
 import { Button, Input, Tooltip,Tag,Badge } from "antd";
 import { FormattedMessage } from "react-intl";
 import TocIcon from '@mui/icons-material/Toc';
-import {inputLeadsDataSearch,getLeadsRecords,getJunkedLeadsRecords} from "../LeadsAction";
+import {inputLeadsDataSearch,getLeadsRecords,getLeadsTeamRecords,getJunkedLeadsRecords} from "../LeadsAction";
 const { Search } = Input;
 const Option = StyledSelect.Option;
 
@@ -21,6 +21,8 @@ const LeadsActionLeft = (props) => {
       props.getLeadsRecords(props.userId);
     } else if (props.viewType === "list") {
       props.getJunkedLeadsRecords(props.userId);
+    }else if (props.viewType === "teams") {
+      props.getLeadsTeamRecords(props.userId);
     }
   }, [props.viewType, props.userId]);
 
@@ -67,7 +69,11 @@ const LeadsActionLeft = (props) => {
       <Tooltip
         title= "Teams"
       >
-        <Badge>
+   <Badge
+        size="small"
+        count={(props.viewType === "teams" && props.leadsTeamCountData.LeadsTeam) || 0}
+        overflowCount={999}
+      >
         <span   class=" mr-2 text-sm cursor-pointer"
         onClick={() => props.setLeadsViewType("teams")}
           style={{
@@ -166,6 +172,7 @@ const LeadsActionLeft = (props) => {
 const mapStateToProps = ({leads,auth}) => ({
   fetchingLeadsInputSearchData:leads.fetchingLeadsInputSearchData,
   leadsCountData:leads.leadsCountData,
+  leadsTeamCountData:leads.leadsTeamCountData,
   leadsCountJunked:leads.leadsCountJunked,
   userId: auth.userDetails.userId,
   user: auth.userDetails,
@@ -173,7 +180,9 @@ const mapStateToProps = ({leads,auth}) => ({
 });
 const mapDispatchToProps = (dispatch) => bindActionCreators({
   inputLeadsDataSearch,
-  getLeadsRecords,getJunkedLeadsRecords
+  getLeadsRecords,
+  getJunkedLeadsRecords,
+  getLeadsTeamRecords
 }, dispatch);
 export default withRouter(
   connect(mapStateToProps, mapDispatchToProps)(LeadsActionLeft));

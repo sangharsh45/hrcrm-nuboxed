@@ -71,6 +71,10 @@ const initialState = {
    fetchingJobBoardNameError: false,
    jobBoardName:[],
 
+   fetchingOpportunityTeamRecordsByUserId: false,
+   fetchingOpportunityTeamRecordsByUserIdError: false,
+   opportunityTeamRecordData:{},
+
    linkingtagCustomerOpportunity: false,
    linkingtagCustomerOpportunityError: false,
    
@@ -1075,6 +1079,21 @@ case types.GET_DELETED_OPPORTUNITY_FAILURE:
                             fetchingRecordsByUserId: false,
                             fetchingRecordsByUserIdError: true,
                           };
+
+                          case types.GET_OPPORTUNITY_TEAM_RECORDS_REQUEST:
+                            return { ...state, fetchingOpportunityTeamRecordsByUserId: true };
+                          case types.GET_OPPORTUNITY_TEAM_RECORDS_SUCCESS:
+                            return {
+                              ...state,
+                              fetchingOpportunityTeamRecordsByUserId: false,
+                              opportunityTeamRecordData: action.payload,
+                            };
+                          case types.GET_OPPORTUNITY_TEAM_RECORDS_FAILURE:
+                            return {
+                              ...state,
+                              fetchingOpportunityTeamRecordsByUserId: false,
+                              fetchingOpportunityTeamRecordsByUserIdError: true,
+                            };
 
 
    case types.DELETE_DOCUMENT_REQUEST:

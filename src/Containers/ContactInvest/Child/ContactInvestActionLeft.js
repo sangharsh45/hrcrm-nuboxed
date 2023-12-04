@@ -14,6 +14,7 @@ import { StyledSelect } from "../../../Components/UI/Antd";
 import { Button, Badge } from "antd";
 import {
   getContactInvest,
+  getTeamContactInvest,
   searchInvestorContactName
 } from "../ContactInvestAction";
 
@@ -44,9 +45,23 @@ const ContactInvestActionLeft = (props) => {
     props.getContactInvestByUserId(props.userId, page,data);
     setPage(page + 1);
   }
+  // useEffect(() => {
+  // props.getContactInvest(props.userId)
+  // }, [props.userId]);
+
   useEffect(() => {
-  props.getContactInvest(props.userId)
-  }, [props.userId]);
+    if (props.viewType === "card") {
+      props.getContactInvest(props.userId);
+    } else if (props.viewType === "teams") {
+      props.getTeamContactInvest(props.userId);
+    } 
+   
+    if (transcript) {
+      console.log(">>>>>>>", transcript);
+      props.setCurrentData(transcript);
+    }
+  }, [props.viewType, props.userId, transcript]);
+   
  
   const { user } = props;
   
@@ -101,11 +116,12 @@ const ContactInvestActionLeft = (props) => {
       <Tooltip
         title="Teams"
       >
-        <Badge
+      <Badge
           size="small"
           count={
             (props.viewType === "teams" &&
-              props.contactInvest.contactDetails) ||
+              props.teamContactInvest.InvestorContactTeam
+              ) ||
             0
           }
           overflowCount={5000}
@@ -162,13 +178,15 @@ const ContactInvestActionLeft = (props) => {
 
 const mapStateToProps = ({ auth, contactinvest }) => ({
   userId: auth.userDetails.userId,
-  contactInvest:contactinvest.contactInvest
+  contactInvest:contactinvest.contactInvest,
+  teamContactInvest:contactinvest.teamContactInvest,
   
 });
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
       getContactInvest,
+      getTeamContactInvest,
       searchInvestorContactName
     },
     dispatch

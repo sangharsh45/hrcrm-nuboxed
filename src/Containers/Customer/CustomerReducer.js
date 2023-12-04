@@ -287,6 +287,10 @@ const initialState = {
   fetchingRecordsByUserIdError: false,
   recordData: {},
 
+  fetchingCustomerTeamRecordsByUserId: false,
+  fetchingCustomerTeamRecordsByUserIdError: false,
+  customerTeamRecordData:{},
+
   addingInitiativeByCustomerId:false,
   addingInitiativeByCustomerIdError:false,
 
@@ -779,6 +783,22 @@ export const customerReducer = (state = initialState, action) => {
         ...state,
         fetchingRecordsByUserId: false,
         fetchingRecordsByUserIdError: true,
+      };
+
+      
+    case types.GET_CUSTOMER_TEAM_RECORDS_REQUEST:
+      return { ...state, fetchingCustomerTeamRecordsByUserId: true };
+    case types.GET_CUSTOMER_TEAM_RECORDS_SUCCESS:
+      return {
+        ...state,
+        fetchingCustomerTeamRecordsByUserId: false,
+        customerTeamRecordData: action.payload,
+      };
+    case types.GET_CUSTOMER_TEAM_RECORDS_FAILURE:
+      return {
+        ...state,
+        fetchingCustomerTeamRecordsByUserId: false,
+        fetchingCustomerTeamRecordsByUserIdError: true,
       };
 
     // Add Recruit Modal

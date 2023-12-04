@@ -4,6 +4,7 @@ import { StyledPopconfirm} from "../../../Components/UI/Antd";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import moment from "moment";
+import ConnectWithoutContactIcon from '@mui/icons-material/ConnectWithoutContact';
 import UpdateLPitchModal from "../Child/UpdateLPitchModal"
 import ExploreIcon from "@mui/icons-material/Explore";
 import { DeleteOutlined } from "@ant-design/icons";
@@ -22,7 +23,8 @@ import {
   setEditPitch,
   handlePitchNotesDrawerModal,
   updateTypeForPitch,
-  handleAssimodal
+  handleAssimodal,
+  handlePitchConvertModal
 } from "../PitchAction";
 import ReactCountryFlag from 'react-country-flag';
 import AddchartIcon from '@mui/icons-material/Addchart';  
@@ -33,6 +35,7 @@ import OpenASSimodal from "./OpenASSimodal";
 import InfiniteScroll from "react-infinite-scroll-component";
 import AddPitchNotesDrawerModal from "./AddPitchNotesDrawerModal";
 import { BundleLoader } from "../../../Components/Placeholder";
+import AddConvertPitchStatusModal from "./PitchDetails/AddConvertPitchStatusModal";
 
 const ButtonGroup = Button.Group;
 
@@ -345,11 +348,25 @@ const PitchCardList = (props) => {
                 {/* qual */}
                                     </div>
                                     <div>
-<StatusPitchToggle
+                                    <Tooltip title="Qualify? Pitch will move to Investor section!">
+                        <ConnectWithoutContactIcon
+                          onClick={() => {
+                            handleRowData(item);
+                            props.handlePitchConvertModal(true);
+                         
+                          }}
+                          style={{
+                            // color: "green",
+                            cursor: "pointer",
+                            fontSize: "1rem",
+                          }}
+                        />
+                      </Tooltip>
+{/* <StatusPitchToggle
             type={props.convertInd ? "primary" : "danger"}
             investorLeadsId={item.investorLeadsId}
             convertInd={item.convertInd}
-          />
+          /> */}
 </div>
                                 </div>
                                 <div class="flex flex-col justify-evenly w-[6%] max-sm:flex-row max-sm:w-[10%]">
@@ -486,6 +503,12 @@ onClick={()=>{
         addDrawerPitchNotesModal={props.addDrawerPitchNotesModal}
         handlePitchNotesDrawerModal={props.handlePitchNotesDrawerModal}
       />
+          <AddConvertPitchStatusModal
+           rowdata={rowdata}
+          //  handleRowData={handleRowData}
+           addPitchConvertModal={props.addPitchConvertModal}
+           handlePitchConvertModal={props.handlePitchConvertModal}
+           />
     </>
   );
 };
@@ -493,6 +516,7 @@ onClick={()=>{
 const mapStateToProps = ({ auth, leads, sector,pitch }) => ({
 //   leadsAllData: leads.leadsAllData,
 user: auth.userDetails,
+addPitchConvertModal:pitch.addPitchConvertModal,
   userId: auth.userDetails.userId,
   fetchingPitch:pitch.fetchingPitch,
   addDrawerPitchNotesModal:pitch.addDrawerPitchNotesModal,
@@ -509,17 +533,8 @@ const mapDispatchToProps = (dispatch) =>
         setEditPitch,
         updateTypeForPitch,
         handlePitchNotesDrawerModal,
-        handleAssimodal
-    //   getLeads,
-    //   getSectors,
-    //   deleteLeadsData,
-    //   setEditLeads,
-    //   handleUpdateLeadsModal,
-    //   handleLeadsEmailDrawerModal,
-    //   getLeadDetailsById,
-    //   getCountries,
-    //   updateTypeForLead,
-    //   handleCETmodal
+        handleAssimodal,
+        handlePitchConvertModal
     },
     dispatch
   );

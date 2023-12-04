@@ -42,8 +42,12 @@ const initialState = {
     contactiNVESTbyId:[],
 
     fetchingContactInvestRecords: false,
-            fetchingContactInvestRecordsError: true,
+            fetchingContactInvestRecordsError: false,
             contactInvest:[],
+
+            fetchingTeamContactInvestRecords: false,
+            fetchingTeamContactInvestRecordsError: false,
+            teamContactInvest:{},
 
     updateContactInvestModal:false,
     updateContactInvestById: false,
@@ -158,6 +162,21 @@ export const contactInvestReducer = (state = initialState, action) => {
             fetchingContactInvestRecords: false,
             fetchingContactInvestRecordsError: true,
           };
+
+          case types.GET_TEAM_CONTACTINVEST_RECORDS_REQUEST:
+            return { ...state, fetchingTeamContactInvestRecords: true };
+          case types.GET_TEAM_CONTACTINVEST_RECORDS_SUCCESS:
+            return {
+              ...state,
+              fetchingTeamContactInvestRecords: false,
+              teamContactInvest: action.payload,
+            };
+          case types.GET_TEAM_CONTACTINVEST_RECORDS_FAILURE:
+            return {
+              ...state,
+              fetchingTeamContactInvestRecords: false,
+              fetchingTeamContactInvestRecordsError: true,
+            };
 
 
           case types.GET_INVESTOR_CONTACT_SEARCH_REQUEST:

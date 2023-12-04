@@ -1202,6 +1202,32 @@ export const getRecords = (userId) => (dispatch) => {
     });
 };
 
+export const getOpportunityTeamRecords = (userId) => (dispatch) => {
+  dispatch({
+    type: types.GET_OPPORTUNITY_TEAM_RECORDS_REQUEST,
+  });
+  axios
+    .get(`${base_url}/oppertunity/contact/team/count/${userId}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.GET_OPPORTUNITY_TEAM_RECORDS_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err.response);
+      dispatch({
+        type: types.GET_OPPORTUNITY_TEAM_RECORDS_FAILURE,
+        payload: err,
+      });
+    });
+};
+
 export const getskillsetList = () => (dispatch) => {
   dispatch({
     type: types.SKILL_SET_LIST_REQUEST,

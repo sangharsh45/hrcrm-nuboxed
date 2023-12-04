@@ -340,6 +340,32 @@ export const getdealsRecord = (userId) => (dispatch) => {
     });
 };
 
+export const getdealsTeamRecord = (userId) => (dispatch) => {
+  dispatch({
+    type: types.GET_DEALS_TEAM_RECORDS_REQUEST,
+  });
+  axios
+    .get(`${base_url}/investorOpportunit/contact/team/count/${userId}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.GET_DEALS_TEAM_RECORDS_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err.response);
+      dispatch({
+        type: types.GET_DEALS_TEAM_RECORDS_FAILURE,
+        payload: err,
+      });
+    });
+};
+
 export const getdealsAllRecord = (userId) => (dispatch) => {
   dispatch({
     type: types.GET_DEALS_ALL_RECORDS_REQUEST,

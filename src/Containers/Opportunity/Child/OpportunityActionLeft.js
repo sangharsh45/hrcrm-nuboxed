@@ -12,6 +12,7 @@ import LockOpenIcon from "@mui/icons-material/LockOpen";
 import {
   inputOpportunityDataSearch,
   getRecords,
+  getOpportunityTeamRecords,
   getDeleteRecords,
   getcloseRecords,
   getlostRecords,
@@ -38,6 +39,8 @@ const OpportunityActionLeft = (props) => {
       props.getlostRecords(props.userId);
     } else if (props.viewType === "won") {
       props.getWonRecords(props.userId);
+    } else if (props.viewType === "teams") {
+      props.getOpportunityTeamRecords(props.userId);
     }
     else if (props.viewType === "stage") {
       props.getRecords(props.userId);
@@ -50,6 +53,7 @@ const OpportunityActionLeft = (props) => {
     setAccountViewType,
     recorddeleteOpportunityData,
     user,
+    opportunityTeamRecordData,
     lostOpportunityData,
     wonOpportunityData,
     closeOpportunityData,
@@ -188,7 +192,7 @@ const OpportunityActionLeft = (props) => {
         >
                  <Badge
         size="small"
-        // count={(viewType === "stage" && recordData.opportunityDetails) || 0}
+        count={(viewType === "teams" && opportunityTeamRecordData.OpportunityTeam) || 0}
         overflowCount={999}
       >
           <span
@@ -288,6 +292,7 @@ const mapStateToProps = ({ account, auth, opportunity }) => ({
   user: auth.userDetails,
   recordData: opportunity.recordData,
   userId: auth.userDetails.userId,
+  opportunityTeamRecordData:opportunity.opportunityTeamRecordData,
   recorddeleteOpportunityData: opportunity.recorddeleteOpportunityData,
   closeOpportunityData: opportunity.closeOpportunityData,
   lostOpportunityData: opportunity.lostOpportunityData,
@@ -302,6 +307,7 @@ const mapDispatchToProps = (dispatch) =>
       getlostRecords,
       getWonRecords,
       getRecords,
+      getOpportunityTeamRecords,
     },
     dispatch
   );

@@ -14,6 +14,7 @@ import { Button, Badge } from "antd";
 import {
   inputContactDataSearch,
   getRecords,
+  getContactTeamRecord,
   getCustomerRecords,
   getContactRecord,
 } from "../ContactAction";
@@ -40,20 +41,21 @@ const ContactActionLeft = (props) => {
   } = useSpeechRecognition();
   console.log(transcript);
   useEffect(() => {
-    props.getContactRecord(props.userId);
+    // props.getContactRecord(props.userId);
     props.getDepartments();
     }, [props.userId]);
-  // useEffect(() => {
-  //   if (props.viewType === "table") {
-  //     props.getContactRecord(props.userId);
-  //   } else if (props.viewType === "dashboard") {
-  //     props.getRecords(props.userId, "partner");
-  //   }
-  //   if (transcript) {
-  //     console.log(">>>>>>>", transcript);
-  //     props.setCurrentData(transcript);
-  //   }
-  // }, [props.userId, props.viewType, props.name, transcript]);
+    useEffect(() => {
+      if (props.viewType === "table") {
+        props.getContactRecord(props.userId);
+      } else if (props.viewType === "teams") {
+        props.getContactTeamRecord(props.userId);
+      } 
+     
+      if (transcript) {
+        console.log(">>>>>>>", transcript);
+        props.setCurrentData(transcript);
+      }
+    }, [props.viewType, props.userId, transcript]);
   console.log(props.customerRecordData);
   const { user } = props;
 
@@ -111,7 +113,7 @@ const ContactActionLeft = (props) => {
           size="small"
           count={
             (props.viewType === "teams" &&
-              props.contactRecord.customerContactCount) ||
+              props.contactTeamRecord.ContactTeam) ||
             0
           }
           overflowCount={5000}
@@ -228,6 +230,7 @@ const mapStateToProps = ({ auth, contact,departments }) => ({
   user: auth.userDetails,
   recordData: contact.recordData,
   contactRecord:contact.contactRecord,
+  contactTeamRecord:contact.contactTeamRecord,
   customerRecordData: contact.customerRecordData,
   contactByUserId: contact.contactByUserId,
   fetchingContactInputSearchData: contact.fetchingContactInputSearchData,
@@ -238,6 +241,7 @@ const mapDispatchToProps = (dispatch) =>
     {
       inputContactDataSearch,
       getRecords,
+      getContactTeamRecord,
       getCustomerRecords,
       getContactRecord,
       getDepartments

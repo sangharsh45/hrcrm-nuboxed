@@ -27,6 +27,10 @@ const initialState = {
   fetchingInvestorRecordsError: false,
   investorRecord:[],
 
+  fetchingInvestorTeamRecords: false,
+  fetchingInvestorTeamRecordsError: false,
+  investorTeamRecord:{},
+
   fetchingInvestorSearchData: false,
   fetchingInvestorSearchDataError: false,
 
@@ -399,6 +403,22 @@ export const investorReducer = (state = initialState, action) => {
                               ...state,
                               fetchingInvestorRecords: false,
                               fetchingInvestorRecordsError: true,
+                            };
+
+                            
+                          case types.GET_INVESTOR_TEAM_RECORDS_REQUEST:
+                            return { ...state, fetchingInvestorTeamRecords: true };
+                          case types.GET_INVESTOR_TEAM_RECORDS_SUCCESS:
+                            return {
+                              ...state,
+                              fetchingInvestorTeamRecords: false,
+                              investorTeamRecord: action.payload,
+                            };
+                          case types.GET_INVESTOR_TEAM_RECORDS_FAILURE:
+                            return {
+                              ...state,
+                              fetchingInvestorTeamRecords: false,
+                              fetchingInvestorTeamRecordsError: true,
                             };
 
                             case types.GET_INVESTOR_SEARCH_REQUEST:

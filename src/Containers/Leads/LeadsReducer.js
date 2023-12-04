@@ -40,6 +40,10 @@ const initialState = {
   addingLeads:false,
   addingLeadsError:false,
 
+  fetchingLeadsTeamRecords: false,
+  fetchingLeadsTeamRecordsError: false,
+  leadsTeamCountData:{},
+
   fetchingOpportunityRecord: false,
   fetchingOpportunityRecordError: false,
   opportunityRecord:[],
@@ -746,6 +750,21 @@ case types.HANDLE_LEADS_MODAL:
                   fetchingLeadsRecords: false,
                   fetchingLeadsRecordsError: true,
                 };
+
+                case types.GET_LEADS_TEAM_RECORDS_REQUEST:
+                  return { ...state, fetchingLeadsTeamRecords: true };
+                case types.GET_LEADS_TEAM_RECORDS_SUCCESS:
+                  return {
+                    ...state,
+                    fetchingLeadsTeamRecords: false,
+                    leadsTeamCountData: action.payload,
+                  };
+                case types.GET_LEADS_TEAM_RECORDS_FAILURE:
+                  return {
+                    ...state,
+                    fetchingLeadsTeamRecords: false,
+                    fetchingLeadsTeamRecordsError: true,
+                  };
 
                 case types.GET_JUNKED_LEADS_RECORDS_REQUEST:
                 return { ...state, fetchingJunkedLeadsRecords: true };

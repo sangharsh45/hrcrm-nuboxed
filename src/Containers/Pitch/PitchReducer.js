@@ -22,6 +22,8 @@ const initialState = {
           fetchingNotesListByPitchIdError: false,
           notesListByPitchId:[],
 
+          addPitchConvertModal:false,
+
     addingDocumentByPitchId:false,
     addingDocumentByPitchIdError:false,
 
@@ -213,6 +215,10 @@ case types.GET_PITCH_REQUEST:
                   return {
                     ...state,
                     linkingPitchStatus: false,
+                    addPitchConvertModal:false,
+                    pitchData: state.pitchData.filter(
+                      (item) => item.investorLeadsId !== action.payload
+                    ),
                    
                   };
                 case types.CONVERT_PITCH_STATUS_FAILURE:
@@ -526,6 +532,9 @@ case types.GET_PITCH_REQUEST:
                 fetchingTeamPitch: false,
                 fetchingTeamPitchError: true,
               };
+
+              case types.HANDLE_PITCH_CONVERT_MODAL:
+                return { ...state, addPitchConvertModal: action.payload };
 
     default:
 return state;
