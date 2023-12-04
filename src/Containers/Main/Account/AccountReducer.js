@@ -761,7 +761,9 @@ export const distributorReducer = (state = initialState, action) => {
       return {
         ...state,
         fetchingAllDistributors: false,
-        allDistributors: action.payload,
+        allDistributors: [...state.allDistributors, ...action.payload],
+       
+        // allDistributors: action.payload,
       };
     case types.GET_ALL_DISTRIBUTORS_LIST_FAILURE:
       return {
