@@ -434,6 +434,32 @@ export const getInvestorDetailsById = (investorId) => (dispatch) => {
       });
   };
 
+  export const getInvestorTeam = (userId) => (dispatch) => {
+    dispatch({
+      type: types.GET_INVESTOR_TEAM_RECORDS_REQUEST,
+    });
+    axios
+      .get(`${base_url}/investor/team/count/${userId}`, {
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+        },
+      })
+      .then((res) => {
+        console.log(res);
+        dispatch({
+          type: types.GET_INVESTOR_TEAM_RECORDS_SUCCESS,
+          payload: res.data,
+        });
+      })
+      .catch((err) => {
+        console.log(err.response);
+        dispatch({
+          type: types.GET_INVESTOR_TEAM_RECORDS_FAILURE,
+          payload: err,
+        });
+      });
+  };
+
   export const searchInvestorName = (name) => (dispatch) => {
     dispatch({
       type: types.GET_INVESTOR_SEARCH_REQUEST,

@@ -164,7 +164,7 @@ export const getPitch = (userId,pageNo,filter) => (dispatch) => {
   };
 
 
-  export const convertPitchStatus = (data, investorLeadsId) => (
+  export const convertPitchStatus = (data, investorLeadsId,assignedToId) => (
     dispatch,
     getState
   ) => {
@@ -174,16 +174,16 @@ export const getPitch = (userId,pageNo,filter) => (dispatch) => {
       type: types.CONVERT_PITCH_STATUS_REQUEST,
     });
     axios
-      .put(`${base_url}/investorLeads/convert/${investorLeadsId}`, data, {
+      .put(`${base_url}/investorLeads/convert/${investorLeadsId}/${assignedToId}`, data, {
         headers: {
           Authorization: "Bearer " + sessionStorage.getItem("token") || "",
         },
       })
       .then((res) => {
-         dispatch(getPitch(userId));
+        //  dispatch(getPitch(userId));
         dispatch({
           type: types.CONVERT_PITCH_STATUS_SUCCESS,
-          payload: res.data,
+          payload: investorLeadsId,
         });
         Swal.fire({
           icon: 'success',
@@ -764,4 +764,11 @@ export const getTeamPitch = (userId,pageNo,filter) => (dispatch) => {
         payload: err,
       });
     });
+};
+
+export const handlePitchConvertModal = (modalProps) => (dispatch) => {
+  dispatch({
+    type: types.HANDLE_PITCH_CONVERT_MODAL,
+    payload: modalProps,
+  });
 };

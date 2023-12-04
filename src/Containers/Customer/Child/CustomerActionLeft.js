@@ -17,6 +17,7 @@ import SpeechRecognition, {
 import {
   inputCustomerDataSearch,
   getRecords,
+  getCustomerTeamRecords,
   getCategoryRecords,
 } from "../CustomerAction";
 import { Input } from "antd";
@@ -54,7 +55,10 @@ function  handleFilterChange(data){
   useEffect(() => {
     if (props.viewType === "card") {
       props.getRecords(props.userId);
-    } else if (props.viewType === "table") {
+    } else if (props.viewType === "teams") {
+      props.getCustomerTeamRecords(props.userId);
+    } 
+    else if (props.viewType === "table") {
       props.getRecords(props.userId);
     } else if (props.viewType === "dashboard") {
       props.getCategoryRecords("blue");
@@ -106,9 +110,9 @@ function  handleFilterChange(data){
       </Tooltip>
       {user.teamsAccessInd === true && (
       <Tooltip title="Teams">
-        <Badge
-          size="Teams"
-          count={(props.viewType === "teams" && props.recordData.customer) || 0}
+         <Badge
+          size="small"
+          count={(props.viewType === "teams" && props.customerTeamRecordData.CustomerTeam) || 0}
           overflowCount={999}
         >
           <span
@@ -202,6 +206,7 @@ function  handleFilterChange(data){
 const mapStateToProps = ({ customer, auth, candidate }) => ({
   user: auth.userDetails,
   recordData: customer.recordData,
+  customerTeamRecordData:customer.customerTeamRecordData,
   recordCategoryData: customer.recordCategoryData,
   recordCategoryDataBlue: customer.recordCategoryDataBlue,
   Candidatesort: candidate.Candidatesort,
@@ -212,6 +217,7 @@ const mapDispatchToProps = (dispatch) =>
     {
       inputCustomerDataSearch,
       getRecords,
+      getCustomerTeamRecords,
       getCategoryRecords,
       getCustomerListByUserId
     },

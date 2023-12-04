@@ -20,6 +20,10 @@ const initialState = {
   fetchingDocumentsByDealIdError: false,
   documentsByInnOppId: [],
 
+  fetchingDelasTeamRecords: false,
+  fetchingDelasTeamRecordsError: false,
+  dealsTeamRecord:{},
+
   addingDocumentByDealId: false,
   addingDocumentByDealIdError: false,
 
@@ -290,6 +294,21 @@ export const dealReducer = (state = initialState, action) => {
             fetchingDelasRecords: false,
             fetchingDelasRecordsError: true,
           };
+
+          case types.GET_DEALS_TEAM_RECORDS_REQUEST:
+            return { ...state, fetchingDelasTeamRecords: true };
+          case types.GET_DEALS_TEAM_RECORDS_SUCCESS:
+            return {
+              ...state,
+              fetchingDelasTeamRecords: false,
+              dealsTeamRecord: action.payload,
+            };
+          case types.GET_DEALS_TEAM_RECORDS_FAILURE:
+            return {
+              ...state,
+              fetchingDelasTeamRecords: false,
+              fetchingDelasTeamRecordsError: true,
+            };
 
 
           

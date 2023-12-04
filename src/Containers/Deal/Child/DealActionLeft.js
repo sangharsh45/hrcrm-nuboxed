@@ -10,7 +10,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import LockOpenIcon from "@mui/icons-material/LockOpen";
 import PeopleIcon from '@mui/icons-material/People';
 import { CheckCircleTwoTone } from "@ant-design/icons";
-import {getdealsRecord,getdealsAllRecord} from "../DealAction";
+import {getdealsRecord,getdealsAllRecord,getdealsTeamRecord} from "../DealAction";
 import { StopTwoTone, TableOutlined } from "@ant-design/icons";
 import { Input } from "antd";
 
@@ -25,8 +25,11 @@ const DealActionLeft = (props) => {
       props.getdealsRecord(props.userId);
     } else if (props.viewType === "all") {
       props.getdealsAllRecord(props.userId);
+    } else if (props.viewType === "teams") {
+      props.getdealsTeamRecord(props.userId);
     } 
   }, [props.viewType, props.userId]);
+  
 // useEffect(() => {
 //   props.getdealsRecord(props.userId)
 //   }, [props.userId]);
@@ -38,6 +41,7 @@ const DealActionLeft = (props) => {
     user,
     lostOpportunityData,
     closeOpportunityData,
+    dealsTeamRecord,
     recordData,
   } = props;
 
@@ -171,11 +175,11 @@ const DealActionLeft = (props) => {
         >
            <Badge
           size="small"
-        //   count={
-        //     (viewType === "close" &&
-        //       closeOpportunityData.OpportunityDetailsByCloseInd) ||
-        //     0
-        //   }
+          count={
+            (viewType === "teams" &&
+            dealsTeamRecord.InvestorOpportunityTeam) ||
+            0
+          }
           overflowCount={999}
         >
           <span
@@ -274,6 +278,7 @@ const DealActionLeft = (props) => {
 const mapStateToProps = ({ deal, auth, opportunity }) => ({
   user: auth.userDetails,
   recordData: opportunity.recordData,
+  dealsTeamRecord:deal.dealsTeamRecord,
   dealsAllRecord:deal.dealsAllRecord,
   userId: auth.userDetails.userId,
   dealsRecord:deal.dealsRecord,
@@ -285,6 +290,7 @@ const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
       getdealsRecord,
+      getdealsTeamRecord,
       getdealsAllRecord
     },
     dispatch

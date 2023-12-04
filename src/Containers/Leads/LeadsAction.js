@@ -1326,3 +1326,29 @@ export const setLeadsViewType = (viewType) => (dispatch) => {
       });
   };
 
+  export const getLeadsTeamRecords = (userId) => (dispatch) => {
+    dispatch({
+      type: types.GET_LEADS_TEAM_RECORDS_REQUEST,
+    });
+    axios
+      .get(`${base_url}/leads/team/count/${userId}`, {
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+        },
+      })
+      .then((res) => {
+        console.log(res);
+        dispatch({
+          type: types.GET_LEADS_TEAM_RECORDS_SUCCESS,
+          payload: res.data,
+        });
+      })
+      .catch((err) => {
+        console.log(err.response);
+        dispatch({
+          type: types.GET_LEADS_TEAM_RECORDS_FAILURE,
+          payload: err,
+        });
+      });
+  };
+

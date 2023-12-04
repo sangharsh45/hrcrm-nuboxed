@@ -11,7 +11,7 @@ import { AudioOutlined } from "@ant-design/icons";
 import SpeechRecognition, {
   useSpeechRecognition,
 } from "react-speech-recognition";
-import {getInvestor,searchInvestorName} from "../InvestorAction";
+import {getInvestor,getInvestorTeam,searchInvestorName} from "../InvestorAction";
 import { Input } from "antd";
 
 const Option = StyledSelect.Option;
@@ -44,9 +44,22 @@ const InvestorActionLeft = (props) => {
     setPage(page + 1);
   }
 
-useEffect(() => {
-  props.getInvestor(props.userId)
-  }, [props.userId]);
+// useEffect(() => {
+//   props.getInvestor(props.userId)
+//   }, [props.userId]);
+
+  useEffect(() => {
+    if (props.viewType === "list") {
+      props.getInvestor(props.userId);
+    } else if (props.viewType === "teams") {
+      props.getInvestorTeam(props.userId);
+    } 
+   
+    if (transcript) {
+      console.log(">>>>>>>", transcript);
+      props.setCurrentData(transcript);
+    }
+  }, [props.viewType, props.userId, transcript]);
 
   return (
     <div class=" flex items-center"
@@ -73,7 +86,7 @@ useEffect(() => {
       <Tooltip title="Teams">
         <Badge
           size="small"
-        count={(props.viewType === "teams" && props.investorRecord.investor) || 0}
+        count={(props.viewType === "teams" && props.investorTeamRecord.InvestorTeam) || 0}
           overflowCount={999}
         >
           <span
@@ -184,6 +197,7 @@ useEffect(() => {
 const mapStateToProps = ({ investor, auth, candidate }) => ({
   user: auth.userDetails,
   investorRecord:investor.investorRecord,
+  investorTeamRecord:investor.investorTeamRecord,
 //   recordData: customer.recordData,
 //   recordCategoryData: customer.recordCategoryData,
 //   recordCategoryDataBlue: customer.recordCategoryDataBlue,
@@ -194,6 +208,7 @@ const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
       getInvestor,
+      getInvestorTeam,
       searchInvestorName
     },
     dispatch

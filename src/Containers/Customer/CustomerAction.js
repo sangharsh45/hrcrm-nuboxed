@@ -863,6 +863,32 @@ export const getRecords = (userId) => (dispatch) => {
     });
 };
 
+export const getCustomerTeamRecords = (userId) => (dispatch) => {
+  dispatch({
+    type: types.GET_CUSTOMER_TEAM_RECORDS_REQUEST,
+  });
+  axios
+    .get(`${base_url}/customer/team/count/${userId}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.GET_CUSTOMER_TEAM_RECORDS_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err.response);
+      dispatch({
+        type: types.GET_CUSTOMER_TEAM_RECORDS_FAILURE,
+        payload: err,
+      });
+    });
+};
+
 // Add Recruit Modal
 export const handleRecruitModal = (modalProps) => (dispatch) => {
   dispatch({
