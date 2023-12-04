@@ -68,15 +68,15 @@ const LeadsJunkList = (props) => {
     <>
  <OnlyWrapCard style={{backgroundColor:"#E3E8EE"}}>
  <div className=" flex justify-between w-[99%] p-2 bg-transparent font-bold sticky top-0 z-10">
-        <div className=" md:w-[14rem]">Name</div>
-        <div className=" md:w-20"></div>
-        <div className=" md:w-32 ">Phone #</div>
-        <div className="md:w-32">Country</div>
-        <div className="md:w-56">Company</div>
-        <div className="md:w-20">Sector</div> 
-        <div className="md:w-24">Assigned to</div>
-        <div className="md:w-20">Owner</div>
-        <div className="md:w-20">Reinstate</div>
+        <div className=" md:w-[9.1rem]">Name</div>
+        <div className=" md:w-[5.1rem]"></div>
+        <div className=" md:w-[4.2rem] ">Phone #</div>
+        <div className="md:w-[5.8rem]">Country</div>
+        <div className="md:w-[8.5rem]">Company</div>
+        <div className="md:w-[3.8rem]">Sector</div> 
+        <div className="md:w-[5.2rem]">Assigned to</div>
+        <div className="md:w-[1.5rem]">Owner</div>
+        <div className="md:w-[3.3rem]">Reinstate</div>
         <div className="w-12">Action</div>
 
       </div>
@@ -114,7 +114,7 @@ const LeadsJunkList = (props) => {
                       <div>
                       <div className="flex rounded-xl justify-between bg-white mt-[0.5rem] h-[2.75rem] items-center p-3">
                               <div class="flex"> 
-                          <div className=" flex font-medium flex-col w-[13rem] mb-4  max-sm:w-full">
+                          <div className=" flex font-medium flex-col w-[13rem]   max-sm:w-full">
                           <div className="flex max-sm:w-full"> 
 <div>
 <SubTitle>
@@ -228,7 +228,7 @@ props.updateTypeForLead(item.leadsId,typ)
                     
                      </h4>
                  </div>
-                 <div className=" flex font-medium flex-col md:w-32 max-sm:flex-row w-full max-sm:justify-between ">
+                 <div className=" flex font-medium flex-col justify-center md:w-32 max-sm:flex-row w-full max-sm:justify-between ">
                             <h4 class=" text-[0.82rem] text-cardBody font-poppins">
                             <ReactCountryFlag
                   countryCode={item.countryAlpha2Code}
@@ -246,7 +246,7 @@ props.updateTypeForLead(item.leadsId,typ)
                
                  </div>
                  <div class="flex"> 
-                 <div className=" flex font-medium flex-col  md:w-40 max-sm:flex-row w-full max-sm:justify-between ">
+                 <div className=" flex font-medium flex-col justify-center  md:w-40 max-sm:flex-row w-full max-sm:justify-between ">
                      <h4 class=" text-[0.82rem] text-cardBody font-semibold  font-poppins">   
                      <Link to={`leads/${item.leadsId}`} title={item.companyName || "Not Available"}>
 {item.companyName || "Not Available"}
@@ -280,7 +280,7 @@ props.updateTypeForLead(item.leadsId,typ)
                           </div>
                           </div>
                           <div class="flex mb-1"> 
-                          <div className=" flex font-medium flex-col md:w-32 max-sm:flex-row w-full max-sm:justify-between ">
+                          <div className=" flex font-medium flex-col justify-center md:w-32 max-sm:flex-row w-full max-sm:justify-between ">
 
                               <div class=" text-[0.82rem] text-cardBody font-poppins">
                               
@@ -298,7 +298,7 @@ props.updateTypeForLead(item.leadsId,typ)
        
                               </div>
                           </div>
-                          <div className=" flex font-medium flex-col md:w-20  max-sm:flex-row w-full max-sm:justify-between">
+                          <div className=" flex font-medium flex-col justify-center md:w-20  max-sm:flex-row w-full max-sm:justify-between">
                  
                  <span>
         <MultiAvatar
