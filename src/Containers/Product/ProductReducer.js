@@ -214,6 +214,13 @@ const initialState = {
 
   addingProduct: false,
   addingProductError:false,
+
+  proBuilderDrawer:false,
+
+  fetchingProductBuilder: false,
+  fetchingProductBuilderError: false,
+  productBuilder:[],
+
 };
 const newDateRange = (dateRange, newDate) =>
   dateRange.map((range) => {
@@ -839,6 +846,28 @@ export const productReducer = (state = initialState, action) => {
             addingProductError: true,
             addConfigureModal: false,
           };
+
+          case types.HANDLE_PRODUCT_BUILDER_DRAWER:
+            return { ...state, proBuilderDrawer: action.payload };
+          
+            case types.GET_PRODUCT_BUILDER_REQUEST:
+              return {
+                ...state,
+                fetchingProductBuilder: true,
+                fetchingProductBuilderError: false,
+              };
+            case types.GET_PRODUCT_BUILDER_SUCCESS:
+              return {
+                ...state,
+                fetchingProductBuilder: false,
+                productBuilder: action.payload,
+              };
+            case types.GET_PRODUCT_BUILDER_FAILURE:
+              return {
+                ...state,
+                fetchingProductBuilder: false,
+                fetchingProductBuilderError: true,
+              };
 
     default:
       return state;

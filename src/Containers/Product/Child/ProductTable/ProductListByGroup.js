@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect, useMemo,lazy } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import {
@@ -13,6 +13,7 @@ import {
     handleCatalogueConfigureModal,
     deleteProductData,
     handleCatalogueWipModal,
+    handleProductBuilderDrawer
 } from "../../ProductAction";
 // import UpdateProductModal from "../../Child/UpdateProductModal";
 import ProductDiscountModal from "./ProductDiscountModal";
@@ -47,6 +48,9 @@ import NetworkCellIcon from '@mui/icons-material/NetworkCell';
 import ContactMailIcon from '@mui/icons-material/ContactMail';
 import ApartmentIcon from '@mui/icons-material/Apartment';
 import InfiniteScroll from "react-infinite-scroll-component";
+import CameraIndoorIcon from '@mui/icons-material/CameraIndoor';
+
+const ProductBuilderDrawer =lazy(()=>import("./ProductBuilderDrawer"));
 
 function ProductHistoryTable(props) {
 
@@ -137,6 +141,8 @@ function ProductHistoryTable(props) {
         handleCatalogueConfigureModal,
         addCatalogueWipModal,
         handleCatalogueWipModal,
+        proBuilderDrawer,
+        handleProductBuilderDrawer
     } = props;
 
     const columns = [
@@ -430,6 +436,25 @@ function ProductHistoryTable(props) {
 
                                 onClick={() => {
                                     props.handleCurrencyPriceModal(true);
+                                    handleParticularRowData(item);
+                                }}
+                            />
+                        </Tooltip>
+                    </>
+                )
+            }
+        },
+        {
+            title: "",
+            width: "2%",
+            render: (text, item) => {
+                return (
+                    <>
+                        <Tooltip title="">
+                            <CameraIndoorIcon
+                            style={{cursor:"pointer" }}
+                                onClick={() => {
+                                    props.handleProductBuilderDrawer(true);
                                     handleParticularRowData(item);
                                 }}
                             />
@@ -919,6 +944,12 @@ function ProductHistoryTable(props) {
                 handleDiscountModal={handleDiscountModal}
                 particularDiscountData={particularDiscountData}
             />
+            <ProductBuilderDrawer
+            particularDiscountData={particularDiscountData}
+            proBuilderDrawer={proBuilderDrawer}
+            handleProductBuilderDrawer={handleProductBuilderDrawer}
+            />
+
             {/* <UpdateProductModal
                 updateProductModal={updateProductModal}
                 handleUpdateProductModal={handleUpdateProductModal}
@@ -984,7 +1015,8 @@ const mapStateToProps = ({ product, auth, supplies }) => ({
     role: auth.userDetails.role,
     department: auth.userDetails.department,
     user: auth.userDetails,
-    addCurrencyValue: supplies.addCurrencyValue
+    addCurrencyValue: supplies.addCurrencyValue,
+    proBuilderDrawer:product.proBuilderDrawer
 });
 
 const mapDispatchToProps = (dispatch) =>
@@ -1000,8 +1032,8 @@ const mapDispatchToProps = (dispatch) =>
             getAllProductCatagory,
             handleOfferModal,
             handleCatalogueWipModal,
-            getProducts
-            // handleCurrencyPriceModal
+            getProducts,
+            handleProductBuilderDrawer
         },
         dispatch
     );
