@@ -1029,3 +1029,36 @@ export const addProduct = (product, cb) => (dispatch) => {
       cb();
     });
 };
+
+export const handleProductBuilderDrawer = (modalProps) => (dispatch) => {
+  dispatch({
+    type: types.HANDLE_PRODUCT_BUILDER_DRAWER,
+    payload: modalProps,
+  });
+};
+
+export const getProductbuilder = () => (dispatch) => {
+  dispatch({
+    type: types.GET_PRODUCT_BUILDER_REQUEST,
+  });
+  axios
+    .get(`${base_url2}/supplies`,{
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.GET_PRODUCT_BUILDER_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.GET_PRODUCT_BUILDER_FAILURE,
+        payload: err,
+      });
+    });
+};
