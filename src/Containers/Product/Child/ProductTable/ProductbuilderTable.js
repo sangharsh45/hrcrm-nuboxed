@@ -52,40 +52,7 @@ const columns = [
         dataIndex: "unit",
         width: "10%",
       },
-      {
-        title: "",
-        width: "2%",
-        render: (name, item) => {
-          return (
-            <>
-             
-                <Tooltip title="Delete">
-                  <Popconfirm
-                    title="Do you want to delete ?"
-                    // onConfirm={() => {
-                    //   let data = { suppliesId: item.suppliesId, userId: props.userId }
-                    //   props.deletePurchaseData(data, item.suppliesId)
-                    // }
-                    // }
-                    onCancel={null}
-                    okText="Ok"
-                    cancelText="Cancel"
-                  >
-                    <DeleteOutlined 
-                      size="14px"
-                      style={{
-                        verticalAlign: "center",
-                        marginLeft: "5px",
-                        color: "red",
-                      }}
-                    />
-                  </Popconfirm>
-                </Tooltip>
-            
-            </>
-          );
-        },
-      },
+     
       {
         title: "",
         dataIndex: "documentId",
