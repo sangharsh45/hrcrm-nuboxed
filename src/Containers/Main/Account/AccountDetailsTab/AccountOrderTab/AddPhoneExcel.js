@@ -27,6 +27,7 @@ function AddPhoneExcel(props) {
 
                         {
                             ...values,
+                            type: props.toggle ? "Catalogue" : "Non-Catalogue"
                         },
                         props.distributorId
                     );
@@ -43,33 +44,33 @@ function AddPhoneExcel(props) {
                     ...rest
                 }) => (
                     <div class="overflow-y-auto h-[32rem] overflow-x-hidden max-sm:h-[30rem]">
-                    <Form class="form-background">
-                        <div style={{ display: "flex", justifyContent: "space-between" }}>
-                            <div
-                                style={{
-                                    height: "100%",
-                                    width: "47%",
-                                }}
-                            ><Spacer />
-                                <Field
-                                    name="excelId"
-                                    isRequired
-                                    component={DraggableUpload1}
-                                />
-                            </div>
+                        <Form class="form-background">
+                            <div style={{ display: "flex", justifyContent: "space-between" }}>
+                                <div
+                                    style={{
+                                        height: "100%",
+                                        width: "47%",
+                                    }}
+                                ><Spacer />
+                                    <Field
+                                        name="excelId"
+                                        isRequired
+                                        component={DraggableUpload1}
+                                    />
+                                </div>
 
-                        </div>
-                        <Spacer />
-                        <FlexContainer justifyContent="flex-end">
-                            <Button
-                                type="primary"
-                                htmlType="submit"
-                            // loading={props.uploadDocumentById}
-                            >
-                                Finish
-                            </Button>
-                        </FlexContainer>
-                    </Form>
+                            </div>
+                            <Spacer />
+                            <FlexContainer justifyContent="flex-end">
+                                <Button
+                                    type="primary"
+                                    htmlType="submit"
+                                // loading={props.uploadDocumentById}
+                                >
+                                    Finish
+                                </Button>
+                            </FlexContainer>
+                        </Form>
                     </div>
                 )}
             </Formik>

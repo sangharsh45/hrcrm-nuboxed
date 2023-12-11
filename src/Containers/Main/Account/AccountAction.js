@@ -2499,3 +2499,54 @@ export const handleAddOrderModal = (modalProps) => (dispatch) => {
     payload: modalProps,
   });
 };
+
+export const getAllProductList = () => (dispatch) => {
+  dispatch({
+    type: types.GET_ALL_PRODUCT_LIST_REQUEST,
+  });
+  axios
+    .get(`${base_url}/product/all-product`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.GET_ALL_PRODUCT_LIST_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.GET_ALL_PRODUCT_LIST_FAILURE,
+        payload: err,
+      });
+    });
+};
+
+export const saveUnitForCatalogueItem = (data, id) => (dispatch) => {
+  // debugger;
+  dispatch({ type: types.SAVE_UNIT_FOR_CATALOGUE_ITEM_REQUEST });
+  axios
+    .post(`${base_url2}/catalgoe/qcRepair`, data, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      // dispatch(getDistributorOrderByDistributorId(id));
+      dispatch({
+        type: types.SAVE_UNIT_FOR_CATALOGUE_ITEM_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.SAVE_UNIT_FOR_CATALOGUE_ITEM_FAILURE,
+      });
+    });
+};

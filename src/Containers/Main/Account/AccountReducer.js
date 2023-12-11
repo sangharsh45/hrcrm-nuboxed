@@ -67,6 +67,10 @@ const initialState = {
   fetchingNotesListByDistributorIdError: false,
   notesListByDistributorId: [],
 
+  fetchingAllProductList: false,
+  fetchingAllProductListError: false,
+  allProduct: [],
+
   generatingOrderByDistributorId: false,
   generatingOrderByDistributorIdError: false,
 
@@ -255,6 +259,9 @@ const initialState = {
   fetchingLocationList: false,
   fetchingLocationListError: false,
   locationlist: [],
+
+  addingUnitForCatalogueItem: false,
+  addingUnitForCatalogueItemError: false,
 
   setEditingDistributorContact: {},
 
@@ -762,7 +769,7 @@ export const distributorReducer = (state = initialState, action) => {
         ...state,
         fetchingAllDistributors: false,
         allDistributors: [...state.allDistributors, ...action.payload],
-       
+
         // allDistributors: action.payload,
       };
     case types.GET_ALL_DISTRIBUTORS_LIST_FAILURE:
@@ -1879,6 +1886,33 @@ export const distributorReducer = (state = initialState, action) => {
 
     case types.HANDLE_ORDER_GENERATE_MODAL:
       return { ...state, generateOrderModal: action.payload };
+
+    case types.GET_ALL_PRODUCT_LIST_REQUEST:
+      return { ...state, fetchingAllProductList: true };
+    case types.GET_ALL_PRODUCT_LIST_SUCCESS:
+      return {
+        ...state, fetchingAllProductList: false,
+        allProduct: action.payload
+      };
+    case types.GET_ALL_PRODUCT_LIST_FAILURE:
+      return {
+        ...state,
+        fetchingAllProductList: false,
+        fetchingAllProductListError: true,
+      };
+
+    case types.SAVE_UNIT_FOR_CATALOGUE_ITEM_REQUEST:
+      return { ...state, addingUnitForCatalogueItem: true };
+    case types.SAVE_UNIT_FOR_CATALOGUE_ITEM_SUCCESS:
+      return {
+        ...state, addingUnitForCatalogueItem: false,
+      };
+    case types.SAVE_UNIT_FOR_CATALOGUE_ITEM_FAILURE:
+      return {
+        ...state,
+        addingUnitForCatalogueItem: false,
+        addingUnitForCatalogueItemError: true,
+      };
     default:
       return state;
   }
