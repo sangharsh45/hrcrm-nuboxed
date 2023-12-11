@@ -7,6 +7,7 @@ import {
   Select,
   StyledLabel,
 } from "../../../../../Components/UI/Elements";
+import { SwitchComponent } from "../../../../../Components/Forms/Formik/SwitchComponent";
 import { MainWrapper, Spacer } from "../../../../../Components/UI/Elements";
 import { FormattedMessage } from "react-intl";
 import { SelectComponent } from "../../../../../Components/Forms/Formik/SelectComponent";
@@ -27,15 +28,17 @@ function General(props) {
     props.getRequirementsDuration(props.orgId);
   }, []);
 
+
   return (
     <>
       <Formik
         enableReinitialize
         initialValues={{
-          timePeriod: props.requirementDuration.timePeriod === 0 ? "Not Applicable" :props.requirementDuration.timePeriod|| "",
-          orderTimePeriod: props.requirementDuration.orderTimePeriod === 0 ? "Not Applicable" :props.requirementDuration.orderTimePeriod || "",
+          timePeriod: props.requirementDuration.timePeriod === 0 ? "Not Applicable" : props.requirementDuration.timePeriod || "",
+          orderTimePeriod: props.requirementDuration.orderTimePeriod === 0 ? "Not Applicable" : props.requirementDuration.orderTimePeriod || "",
           userId: props.userId,
           orgId: props.organizationId,
+          inspectionRequiredInd: props.requirementDuration.inspectionRequiredInd,
         }}
         onSubmit={(values) => {
           console.log(values)
@@ -48,80 +51,80 @@ function General(props) {
           props.updateRequirement(
             {
               ...values,
-            
-              timePeriod:values.timePeriod === "Not Applicable" ? "0" :values.timePeriod,
-              orderTimePeriod:values.orderTimePeriod === "Not Applicable" ? "0" :values.orderTimePeriod,
+
+              timePeriod: values.timePeriod === "Not Applicable" ? "0" : values.timePeriod,
+              orderTimePeriod: values.orderTimePeriod === "Not Applicable" ? "0" : values.orderTimePeriod,
             },
             props.orgId
           );
         }}
       >
         {({ values }) => (
-        <MainWrapper style={{ height: "446px", width: "", overflow: "auto" }}>
-        <Form className="form-background">
-          <FlexContainer
-            justifyContent="space-between"
-            style={{ width: "100%" }}
-          >
-            <div
-              style={{
-                width: "44%",
+          <MainWrapper style={{ height: "446px", width: "", overflow: "auto" }}>
+            <Form className="form-background">
+              <FlexContainer
+                justifyContent="space-between"
+                style={{ width: "100%" }}
+              >
+                <div
+                  style={{
+                    width: "44%",
 
-                marginTop: "0.625em",
-                marginLeft: "1em",
-              }}
-            >
-            
-              <div
-                style={{
-                  width: "74%",
-                  display: "flex",
-                  justifyContent: "space-between",
-                }}
-              >
-                <p style={{ minWidth:"-webkit-fill-available"}}>Auto drop Open Orders (in months)</p>
-                <div>
-                <Field
-                style={{width:"10rem"}}
-                    name="timePeriod"
-                 
-                    component={SelectComponent}
-                    options={["1", "2", "3", "4", "5","Not Applicable"]}
-                    isColumn
-                    //  inlineLabel
-                  />
-                </div>
-              </div>
-              <Spacer />
-              <div
-                style={{
-                  width: "74%",
-                  display: "flex",
-                  justifyContent: "space-between",
-                }}
-              >
-                <p style={{ minWidth:"-webkit-fill-available"}}>Auto drop Open Opportunities (in months)</p>
-                <div>
-                <Field
-                    name="orderTimePeriod"
-                    style={{width:"10rem"}}
-                    component={SelectComponent}
-                    options={["1", "2", "3", "4", "5","Not Applicable"]}
-                    isColumn
-                    // inlineLabel
-                  />
-                </div>
-              </div>
-              <Spacer />
-              <div
-                style={{
-                  width: "74%",
-                  display: "flex",
-                  justifyContent: "space-between",
-                }}
-              >
-                <p style={{ minWidth:"-webkit-fill-available"}}>Auto Send Job Anniversary Email</p>
-                <div>
+                    marginTop: "0.625em",
+                    marginLeft: "1em",
+                  }}
+                >
+
+                  <div
+                    style={{
+                      width: "74%",
+                      display: "flex",
+                      justifyContent: "space-between",
+                    }}
+                  >
+                    <p style={{ minWidth: "-webkit-fill-available" }}>Auto drop Open Orders (in months)</p>
+                    <div>
+                      <Field
+                        style={{ width: "10rem" }}
+                        name="timePeriod"
+
+                        component={SelectComponent}
+                        options={["1", "2", "3", "4", "5", "Not Applicable"]}
+                        isColumn
+                      //  inlineLabel
+                      />
+                    </div>
+                  </div>
+                  <Spacer />
+                  <div
+                    style={{
+                      width: "74%",
+                      display: "flex",
+                      justifyContent: "space-between",
+                    }}
+                  >
+                    <p style={{ minWidth: "-webkit-fill-available" }}>Auto drop Open Opportunities (in months)</p>
+                    <div>
+                      <Field
+                        name="orderTimePeriod"
+                        style={{ width: "10rem" }}
+                        component={SelectComponent}
+                        options={["1", "2", "3", "4", "5", "Not Applicable"]}
+                        isColumn
+                      // inlineLabel
+                      />
+                    </div>
+                  </div>
+                  <Spacer />
+                  <div
+                    style={{
+                      width: "74%",
+                      display: "flex",
+                      justifyContent: "space-between",
+                    }}
+                  >
+                    <p style={{ minWidth: "-webkit-fill-available" }}>Auto Send Job Anniversary Email</p>
+                    <div>
                       <Popconfirm
                         title="Do you wish to change Status ? "
                         // onConfirm={handleAppClick}
@@ -137,17 +140,17 @@ function General(props) {
                         />
                       </Popconfirm>
                     </div>
-              </div>
-              <Spacer />
-              <div
-                style={{
-                  width: "74%",
-                  display: "flex",
-                  justifyContent: "space-between",
-                }}
-              >
-                <p style={{ minWidth:"-webkit-fill-available"}}>Auto Send BirthDay Email</p>
-                <div>
+                  </div>
+                  <Spacer />
+                  <div
+                    style={{
+                      width: "74%",
+                      display: "flex",
+                      justifyContent: "space-between",
+                    }}
+                  >
+                    <p style={{ minWidth: "-webkit-fill-available" }}>Auto Send BirthDay Email</p>
+                    <div>
                       <Popconfirm
                         title="Do you wish to change Status ? "
                         // onConfirm={handleAppClick}
@@ -163,11 +166,31 @@ function General(props) {
                         />
                       </Popconfirm>
                     </div>
-              </div>
-              <Spacer />
-            </div>
-          </FlexContainer>
-          <h4>
+                  </div>
+                  <Spacer />
+                  <div
+                    style={{
+                      width: "74%",
+                      display: "flex",
+                      justifyContent: "space-between",
+                    }}
+                  >
+                    <p style={{ minWidth: "-webkit-fill-available" }}>Production Process Only</p>
+                    <div>
+                      <Field
+                        name="inspectionRequiredInd"
+                        component={SwitchComponent}
+                        data={values.inspectionRequiredInd}
+                        checkedChildren={"Yes"}
+                        unCheckedChildren={"No"}
+                        width={"5em"}
+                      />
+                    </div>
+                  </div>
+                  <Spacer />
+                </div>
+              </FlexContainer>
+              <h4>
                 Updated on{" "}
                 {moment(props.requirementDuration.creationDate).format("ll")} by{" "}
                 {props.requirementDuration.ownerName}
@@ -184,8 +207,8 @@ function General(props) {
                 </Button>
               </FlexContainer>
               <Notifications />
-        </Form>
-      </MainWrapper>
+            </Form>
+          </MainWrapper>
         )}
       </Formik>
     </>

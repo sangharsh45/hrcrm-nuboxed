@@ -54,11 +54,11 @@ class Category extends Component {
                     <Sector />
                   </Suspense>
                 </TabPane> */}
-               <TabPane
+                <TabPane
                   tab={
                     <>
                       <i class="fas fa-building"></i>
-                      <span 
+                      <span
                         style={{ marginLeft: "0.25em" }} >Department</span>
                     </>
                   }
@@ -72,12 +72,12 @@ class Category extends Component {
                 <TabPane
                   tab={
                     <>
-                      <AccessibilityIcon 
+                      <AccessibilityIcon
                       // icon={solid("user-tie")}
-                       />
+                      />
 
-                      <span 
-                      style={{ marginLeft: "0.25em" }}>Role (Internal)</span>
+                      <span
+                        style={{ marginLeft: "0.25em" }}>Role (Internal)</span>
                     </>
                   }
                   key="5"
@@ -87,27 +87,27 @@ class Category extends Component {
                   </Suspense>
                 </TabPane>
                 <TabPane
-                tab={
-                  <>
-                   <AccessibilityIcon 
+                  tab={
+                    <>
+                      <AccessibilityIcon
                       // icon={solid("user-tie")}
-                       />
+                      />
 
-                    <span style={{ marginLeft: "0.25em" }}>Role (External)</span>
-                  </>
-                }
-                key="6"
-              >
-                <Suspense>
-                  <RoleTalent />
-                </Suspense>
-              </TabPane>
+                      <span style={{ marginLeft: "0.25em" }}>Role (External)</span>
+                    </>
+                  }
+                  key="6"
+                >
+                  <Suspense>
+                    <RoleTalent />
+                  </Suspense>
+                </TabPane>
                 <TabPane
                   tab={
                     <>
                       <i class="fab fa-artstation"></i>
                       <span
-                      style={{ marginLeft: "0.25em" }} >Designation</span>
+                        style={{ marginLeft: "0.25em" }} >Designation</span>
                     </>
                   }
                   key="7"
@@ -116,7 +116,7 @@ class Category extends Component {
                     <Designation />
                   </Suspense>
                 </TabPane>
-                
+
               </StyledTabs>
             </TabsWrapper>
           </div>
@@ -125,7 +125,7 @@ class Category extends Component {
     );
   }
 }
-const mapStateToProps = ({}) => ({});
+const mapStateToProps = ({ }) => ({});
 const mapDispatchToProps = (dispatch) => bindActionCreators({}, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(Category);

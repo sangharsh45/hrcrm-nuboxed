@@ -7,7 +7,7 @@ import { StyledSteps } from "../../../../../Components/UI/Antd";
 import { PhoneOutlined, UserOutlined } from "@ant-design/icons";
 import { FlexContainer } from "../../../../../Components/UI/Layout";
 import AddOrderInAccount from "./AddOrderInAccount";
-import AddPhoneExcel from "./AddPhoneExcel";
+import AccountOrderSecondStep from "./AccountOrderSecondStep";
 
 const Step = StyledSteps.Step;
 
@@ -48,7 +48,7 @@ class AccountStepper extends Component {
                 icon: <PhoneOutlined
                     style={{ color: "blue" }}
                 />,
-                content: <AddPhoneExcel distributorId={this.props.distributorId} />,
+                content: <AccountOrderSecondStep distributorId={this.props.distributorId} />,
             },
 
 
