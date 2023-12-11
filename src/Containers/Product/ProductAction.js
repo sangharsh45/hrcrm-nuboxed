@@ -1062,3 +1062,53 @@ export const getProductbuilder = () => (dispatch) => {
       });
     });
 };
+export const addProductBuilder = (data,productId) => (dispatch) => {
+  dispatch({ type: types.ADD_PRODUCT_BUILDER_REQUEST });
+  axios
+    .post(`${base_url2}/productionBuilder/supplies`, data, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      // dispatch(getBuilderByProId(productId))
+      console.log(res);
+      dispatch({
+        type: types.ADD_PRODUCT_BUILDER_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.ADD_PRODUCT_BUILDER_FAILURE,
+        payload: err,
+      });
+    });
+};
+
+export const getBuilderByProId = (productId) => (dispatch) => {
+  dispatch({
+    type: types.GET_BUILDER_BY_PRODUCT_ID_REQUEST,
+  });
+  axios
+    .get(`${base_url2}/productionBuilder/supplies/${productId}`,{
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.GET_BUILDER_BY_PRODUCT_ID_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.GET_BUILDER_BY_PRODUCT_ID_FAILURE,
+        payload: err,
+      });
+    });
+};
