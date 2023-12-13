@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect ,useState} from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { withRouter } from "react-router-dom";
@@ -9,11 +9,13 @@ import { StyledSelect } from "../../../Components/UI/Antd";
 import { Button, Input, Tooltip,Tag,Badge } from "antd";
 import { FormattedMessage } from "react-intl";
 import TocIcon from '@mui/icons-material/Toc';
-import {inputLeadsDataSearch,getLeadsRecords,getLeadsTeamRecords,getJunkedLeadsRecords} from "../LeadsAction";
+import {inputLeadsDataSearch,ClearReducerDataOfLead,getLeads,getLeadsRecords,getLeadsTeamRecords,getJunkedLeadsRecords} from "../LeadsAction";
 const { Search } = Input;
 const Option = StyledSelect.Option;
 
 const LeadsActionLeft = (props) => {
+  const [currentData, setCurrentData] = useState("");
+  const [pageNo, setPage] = useState(0);
   const dummy = ["cloud", "azure", "fgfdg"];
   
   useEffect(() => {
@@ -26,9 +28,23 @@ const LeadsActionLeft = (props) => {
     }
   }, [props.viewType, props.userId]);
 
-  function handleChange(data) {
-    
-  }
+  const handleChange = (e) => {
+    setCurrentData(e.target.value);
+
+    if (e.target.value.trim() === "") {
+      setPage(pageNo + 1);
+      props.getLeads(props.userId, pageNo,"creationdate");
+      props.ClearReducerDataOfLead()
+    }
+  };
+  const handleSearch = () => {
+    if (currentData.trim() !== "") {
+      // Perform the search
+      props.inputLeadsDataSearch(currentData);
+    } else {
+      console.error("Input is empty. Please provide a value.");
+    }
+  };
   const suffix = (
     <AudioOutlined
       onClick={SpeechRecognition.startListening}
@@ -40,6 +56,7 @@ const LeadsActionLeft = (props) => {
     />
   );
   const {user}=props;
+
   return (
     <div class=" flex  items-center">
          <Tooltip
@@ -127,7 +144,15 @@ const LeadsActionLeft = (props) => {
               </Badge>
               </div>
       <div class=" w-72 max-sm:w-28">
-          <Input
+      <Input
+      placeholder="Search by Name or Sector"
+      width={"100%"}
+            suffix={suffix}
+            onPressEnter={handleSearch}  
+            onChange={handleChange}
+            // value={currentData}
+          />
+          {/* <Input
             placeholder="Search by Name or Sector"
             width={"100%"}
              suffix={suffix}
@@ -138,26 +163,10 @@ const LeadsActionLeft = (props) => {
             }}
             onChange={(e) => props.handleChange(e)}
             value={props.currentData}
-          />
+          /> */}
         </div>
-      <Button
-          type={props.currentData ? "primary" : "danger"}
-          onClick={() => {
-            props.inputLeadsDataSearch(props.currentData);
-
-          }}
-        >
-          Submit
-        </Button>
-        <Button
-          type={props.currentData ? "primary" : "danger"}
-          onClick={() => {
-            props.handleClear();
-          }}
-        >
-          <FormattedMessage id="app.clear" defaultMessage="Clear" />
-          {/* Clear */}
-        </Button>
+     
+      
         <div class="w-[22%] mt-1">
           <StyledSelect placeholder="Sort"  onChange={(e)  => props.handleFilterChange(e)}>
            <Option value="CreationDate">Creation Date</Option> 
@@ -181,6 +190,8 @@ const mapStateToProps = ({leads,auth}) => ({
 const mapDispatchToProps = (dispatch) => bindActionCreators({
   inputLeadsDataSearch,
   getLeadsRecords,
+  ClearReducerDataOfLead,
+  getLeads,
   getJunkedLeadsRecords,
   getLeadsTeamRecords
 }, dispatch);

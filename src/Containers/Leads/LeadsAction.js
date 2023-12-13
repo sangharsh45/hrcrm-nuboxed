@@ -1352,3 +1352,9 @@ export const setLeadsViewType = (viewType) => (dispatch) => {
       });
   };
 
+  export const ClearReducerDataOfLead = () => (dispatch) => {
+    dispatch({
+      type: types.HANDLE_CLAER_REDUCER_DATA_LEAD,
+    });
+  };
+

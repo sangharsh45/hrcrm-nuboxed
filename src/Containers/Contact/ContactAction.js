@@ -1235,3 +1235,9 @@ export const getOpportunityRecord = (userId) => (dispatch) => {
       });
     });
 };
+
+export const ClearReducerDataOfContact = () => (dispatch) => {
+  dispatch({
+    type: types.HANDLE_CLAER_REDUCER_DATA_CONTACT,
+  });
+};

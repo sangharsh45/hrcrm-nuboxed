@@ -14,6 +14,8 @@ import { Button, Badge } from "antd";
 import {
   inputContactDataSearch,
   getRecords,
+  ClearReducerDataOfContact,
+  getContactListByUserId,
   getContactTeamRecord,
   getCustomerRecords,
   getContactRecord,
@@ -24,6 +26,25 @@ const Option = StyledSelect.Option;
 const item = [{ type: "Hot" }, { type: "Warm" }, { type: "Cold" }];
 const { Search } = Input;
 const ContactActionLeft = (props) => {
+  const [currentData, setCurrentData] = useState("");
+  const [pageNo, setPage] = useState(0);
+  const handleChange = (e) => {
+    setCurrentData(e.target.value);
+
+    if (e.target.value.trim() === "") {
+      setPage(pageNo + 1);
+      props.getContactListByUserId(props.userId, pageNo,"creationdate");
+      props.ClearReducerDataOfContact()
+    }
+  };
+  const handleSearch = () => {
+    if (currentData.trim() !== "") {
+      // Perform the search
+      props.inputContactDataSearch(currentData);
+    } else {
+      console.error("Input is empty. Please provide a value.");
+    }
+  };
   const suffix = (
     <AudioOutlined
       onClick={SpeechRecognition.startListening}
@@ -175,7 +196,15 @@ const ContactActionLeft = (props) => {
         </Badge>
       </Tooltip> */}
       <div class=" w-72 md:ml-4 max-sm:w-16 ml-0">
-        <Input
+      <Input
+       placeholder="Search by Name, Company"
+       class="w-96"
+            suffix={suffix}
+            onPressEnter={handleSearch}  
+            onChange={handleChange}
+            // value={currentData}
+          />
+        {/* <Input
           placeholder="Search by Name, Company"
           class="w-96"
           suffix={suffix}
@@ -183,25 +212,9 @@ const ContactActionLeft = (props) => {
           enterButton
           onChange={(e) => props.handleChange(e)}
           value={props.currentData}
-        />
+        /> */}
       </div>
-      <Button
-        type={props.currentData ? "primary" : "danger"}
-        onClick={() => {
-          props.inputContactDataSearch(props.currentData);
-        }}
-      >
-        Submit
-      </Button>
-      &nbsp;
-      <Button
-        type={props.currentData ? "primary" : "danger"}
-        onClick={() => {
-          props.handleClear();
-        }}
-      >
-        <FormattedMessage id="app.clear" defaultMessage="Clear" />
-      </Button>
+    
 <div class="w-32 max-sm:w-12">
       <select value={props.selectedCountry} onChange={props.handleCountryChange} >
         <option value="" disabled>Department</option>
@@ -241,6 +254,8 @@ const mapDispatchToProps = (dispatch) =>
     {
       inputContactDataSearch,
       getRecords,
+      ClearReducerDataOfContact,
+      getContactListByUserId,
       getContactTeamRecord,
       getCustomerRecords,
       getContactRecord,

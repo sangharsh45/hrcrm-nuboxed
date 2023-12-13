@@ -944,6 +944,12 @@ case types.HANDLE_LEADS_MODAL:
                     fetchingOpportunityRecordError: true,
                   };
 
+                  case types.HANDLE_CLAER_REDUCER_DATA_LEAD:
+                    return { ...state, 
+                      leadsAllData: [], 
+                      // deletedTruck: [] 
+                    };
+
 default:
 return state;
 }

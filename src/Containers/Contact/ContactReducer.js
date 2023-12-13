@@ -885,6 +885,12 @@ export const contactReducer = (state = initialState, action) => {
               fetchingOpportunityRecord: false,
               fetchingOpportunityRecordError: true,
             };
+
+            case types.HANDLE_CLAER_REDUCER_DATA_CONTACT:
+              return { ...state, 
+                contactByUserId: [], 
+                // deletedTruck: [] 
+              };
    default:
       return state;
 
