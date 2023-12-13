@@ -1,7 +1,7 @@
 import { Switch } from 'antd'
 import React, { useState } from 'react'
 import AddPhoneExcel from './AddPhoneExcel'
-import AddCatalogueTable from './AddCatalogueTable'
+import AddCatalogueForm from './AddCatalogueForm'
 
 const AccountOrderSecondStep = () => {
 
@@ -23,7 +23,7 @@ const AccountOrderSecondStep = () => {
             </div>
             <div>
                 {toggle ?
-                    <AddCatalogueTable toggle={toggle} /> :
+                    <AddCatalogueForm toggle={toggle} /> :
                     <AddPhoneExcel toggle={toggle} />
                 }
             </div>

@@ -16,8 +16,9 @@ import {
     handleNotesModalInOrder,
     handlePaidModal,
     handleStatusOfOrder,
-    updateOfferPrice
+    updateOfferPrice,
 } from "../../AccountAction"
+import { handleDeliveryDateModal } from "../../../Inventory/InventoryAction"
 import { Button, Popconfirm, Tooltip, Typography, Input, Form } from 'antd';
 import AddLocationInOrder from './AddLocationInOrder';
 import AccountOrderDetailsModal from './AccountOrderDetailsModal';
@@ -30,6 +31,7 @@ import { BorderAllRounded, BorderColorOutlined } from '@mui/icons-material';
 import { OnlyWrapCard } from '../../../../../Components/UI/Layout';
 import { Link } from '../../../../../Components/Common';
 import { BundleLoader } from '../../../../../Components/Placeholder';
+import DeliveryDateModal from '../../../Inventory/Child/InventoryDetails/Recieved/DeliveryDateModal';
 const EditableCell = ({
     editing,
     dataIndex,
@@ -69,7 +71,7 @@ const AccountOrderTable = (props) => {
     const [page, setPage] = useState(0);
     useEffect(() => {
         setPage(page + 1);
-        props.getDistributorOrderByDistributorId(props.distributorId,page)
+        props.getDistributorOrderByDistributorId(props.distributorId, page)
     }, [])
     const [particularRowData, setParticularRowData] = useState({});
 
@@ -154,7 +156,7 @@ const AccountOrderTable = (props) => {
     }
     if (props.fetchingDistributorByDistributorId) {
         return <BundleLoader />;
-      }
+    }
 
     return (
         <>
@@ -452,23 +454,43 @@ const AccountOrderTable = (props) => {
                                         <div className=" flex font-medium flex-col  md:w-[6.7rem] max-sm:flex-row w-full max-sm:justify-between  ">
 
                                             {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden"> Sector </h4> */}
-                                            <h4 class=" text-xs text-cardBody font-poppins">
-                                                {item.transferInd === 0 ? (
-                                                    <Tooltip title="Add Inventory Location">
-                                                        <Button
-                                                            style={{ cursor: "pointer", fontSize: "13px", backgroundColor: "#3096e9", color: "white" }}
-                                                            onClick={() => {
-                                                                handleSetParticularOrderData(item);
-                                                                props.handleInventoryLocationInOrder(true);
-                                                            }}
-                                                        >
-                                                            Order Pickup
-                                                        </Button>
-                                                    </Tooltip>
+                                            {props.inspectionRequiredInd ?
+                                                <h4 class=" text-xs text-cardBody font-poppins">
+                                                    {item.transferInd === 0 ? (
+                                                        <Tooltip title="Send To Refurbish">
+                                                            <Button
+                                                                style={{ cursor: "pointer", fontSize: "13px", backgroundColor: "#3096e9", color: "white" }}
+                                                                onClick={() => {
+                                                                    handleSetParticularOrderData(item);
+                                                                    props.handleDeliveryDateModal(true);
+                                                                }}
+                                                            >
+                                                                Send To Store
+                                                            </Button>
+                                                        </Tooltip>
 
-                                                ) : null
-                                                }
-                                            </h4>
+                                                    ) : null
+                                                    }
+                                                </h4>
+                                                :
+                                                <h4 class=" text-xs text-cardBody font-poppins">
+                                                    {item.transferInd === 0 ? (
+                                                        <Tooltip title="Add Inventory Location">
+                                                            <Button
+                                                                style={{ cursor: "pointer", fontSize: "13px", backgroundColor: "#3096e9", color: "white" }}
+                                                                onClick={() => {
+                                                                    handleSetParticularOrderData(item);
+                                                                    props.handleInventoryLocationInOrder(true);
+                                                                }}
+                                                            >
+                                                                Order Pickup
+                                                            </Button>
+                                                        </Tooltip>
+
+                                                    ) : null
+                                                    }
+                                                </h4>}
+
 
                                         </div>
                                         <div className=" flex font-medium flex-col  md:w-[1rem] max-sm:flex-row w-full max-sm:justify-between  ">
@@ -551,12 +573,19 @@ const AccountOrderTable = (props) => {
                 handlePaidModal={props.handlePaidModal}
                 particularRowData={particularRowData}
             />
+            <DeliveryDateModal
+                particularRowData={particularRowData}
+                addDeliverDate={props.addDeliverDate}
+                handleDeliveryDateModal={props.handleDeliveryDateModal}
+            />
         </>
     )
 }
-const mapStateToProps = ({ distributor }) => ({
+const mapStateToProps = ({ distributor, auth, inventory }) => ({
+    addDeliverDate: inventory.addDeliverDate,
     distributorOrder: distributor.distributorOrder,
     addNotesInOrder: distributor.addNotesInOrder,
+    inspectionRequiredInd: auth.userDetails.inspectionRequiredInd,
     addInventoryInOrder: distributor.addInventoryInOrder,
     addOrderDetailsModal: distributor.addOrderDetailsModal,
     addStatusOfOrder: distributor.addStatusOfOrder,
@@ -570,7 +599,8 @@ const mapDispatchToProps = dispatch => bindActionCreators({
     handleStatusOfOrder,
     handlePaidModal,
     handleNotesModalInOrder,
-    updateOfferPrice
+    updateOfferPrice,
+    handleDeliveryDateModal
 }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(AccountOrderTable);
