@@ -17,12 +17,16 @@
 
 
 // Hr/InnoverenIt
-const login_url = "https://develop.tekorero.com/employeePortal";
-const base_url = "https://develop.tekorero.com/employeePortal/api/v1";
-const base_url2 = "https://develop.tekorero.com/ERP";
+// const login_url = "http://develop.tekorero.com/employeePortal";
+// const base_url = "https://develop.tekorero.com/employeePortal/api/v1";
+// const base_url2 = "http://develop.tekorero.com/ERP";
+
+const base_url = "http://Hrnubox-env.eba-us3qmm3j.ap-south-1.elasticbeanstalk.com/api/v1";
+const login_url = "http://Hrnubox-env.eba-us3qmm3j.ap-south-1.elasticbeanstalk.com";
+const base_url2 = "http://Erpnubox-env.eba-x6x8mtth.ap-south-1.elasticbeanstalk.com";
 
 
-const asses_url = "https://develop.tekorero.com/Assessment-0.0.1-SNAPSHOT";
+const asses_url = "http://develop.tekorero.com/Assessment-0.0.1-SNAPSHOT";
 
 //HrPilot/InnoverenIt
 // const login_url = "https://develop.tekorero.com/hrPilot";

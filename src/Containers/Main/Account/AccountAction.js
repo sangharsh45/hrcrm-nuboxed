@@ -2526,18 +2526,43 @@ export const getAllProductList = () => (dispatch) => {
     });
 };
 
-export const saveUnitForCatalogueItem = (data, id) => (dispatch) => {
-  // debugger;
-  dispatch({ type: types.SAVE_UNIT_FOR_CATALOGUE_ITEM_REQUEST });
+export const getProductListByDistributor = (distributorId) => (dispatch) => {
+  dispatch({
+    type: types.GET_PRODUCT_BY_DISTRIBUTOR_REQUEST,
+  });
   axios
-    .post(`${base_url2}/catalgoe/qcRepair`, data, {
+    .get(`${base_url}/distributor/product/${distributorId}`, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },
     })
     .then((res) => {
       console.log(res);
-      // dispatch(getDistributorOrderByDistributorId(id));
+      dispatch({
+        type: types.GET_PRODUCT_BY_DISTRIBUTOR_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.GET_PRODUCT_BY_DISTRIBUTOR_FAILURE,
+        payload: err,
+      });
+    });
+};
+export const saveUnitForCatalogueItem = (data, id) => (dispatch) => {
+  // debugger;
+  dispatch({ type: types.SAVE_UNIT_FOR_CATALOGUE_ITEM_REQUEST });
+  axios
+    .post(`${base_url2}/distributor/product`, data, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      dispatch(getProductListByDistributor(id));
       dispatch({
         type: types.SAVE_UNIT_FOR_CATALOGUE_ITEM_SUCCESS,
         payload: res.data,
@@ -2547,6 +2572,31 @@ export const saveUnitForCatalogueItem = (data, id) => (dispatch) => {
       console.log(err);
       dispatch({
         type: types.SAVE_UNIT_FOR_CATALOGUE_ITEM_FAILURE,
+      });
+    });
+};
+
+export const addAllProductInOrder = (data, id) => (dispatch) => {
+  // debugger;
+  dispatch({ type: types.ADD_ALL_PRODUCT_FOR_ORDER_REQUEST });
+  axios
+    .post(`${base_url2}/order/distributor`, data, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      // dispatch(getProductListByDistributor(id));
+      dispatch({
+        type: types.ADD_ALL_PRODUCT_FOR_ORDER_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.ADD_ALL_PRODUCT_FOR_ORDER_FAILURE,
       });
     });
 };

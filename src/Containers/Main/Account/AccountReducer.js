@@ -154,6 +154,10 @@ const initialState = {
   fetchingDistributorHistoryError: true,
   distributorHistory: [],
 
+  fetchingProductByDistributor: false,
+  fetchingProductByDistributorError: false,
+  productByDistributor: [],
+
   addPaidButtonModal: false,
 
   addingPaidByDistributorId: false,
@@ -350,6 +354,9 @@ const initialState = {
   fetchingPhoTasklist: false,
   fetchingPhoTasklist: false,
   phoTasklist: [],
+
+  addingAllProductForOrder: false,
+  addingAllProductForOrderError: false,
 
   orderCartDrawer: false,
 };
@@ -1912,6 +1919,34 @@ export const distributorReducer = (state = initialState, action) => {
         ...state,
         addingUnitForCatalogueItem: false,
         addingUnitForCatalogueItemError: true,
+      };
+
+    case types.GET_PRODUCT_BY_DISTRIBUTOR_REQUEST:
+      return { ...state, fetchingProductByDistributor: true };
+    case types.GET_PRODUCT_BY_DISTRIBUTOR_SUCCESS:
+      return {
+        ...state, fetchingProductByDistributor: false,
+        productByDistributor: action.payload
+      };
+    case types.GET_PRODUCT_BY_DISTRIBUTOR_FAILURE:
+      return {
+        ...state,
+        fetchingProductByDistributor: false,
+        fetchingProductByDistributorError: true,
+      };
+
+    case types.ADD_ALL_PRODUCT_FOR_ORDER_REQUEST:
+      return { ...state, addingAllProductForOrder: true };
+    case types.ADD_ALL_PRODUCT_FOR_ORDER_SUCCESS:
+      return {
+        ...state,
+        addingAllProductForOrder: false,
+      };
+    case types.ADD_ALL_PRODUCT_FOR_ORDER_FAILURE:
+      return {
+        ...state,
+        addingAllProductForOrder: false,
+        addingAllProductForOrderError: true,
       };
     default:
       return state;
