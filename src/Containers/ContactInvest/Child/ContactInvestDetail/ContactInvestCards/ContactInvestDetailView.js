@@ -16,19 +16,19 @@ class ContactInvestDetailView extends Component {
     } = this.props;
     return (
       <>
-        <ContactInvestItemRow //label="Company" 
+        <ContactInvestItemRow 
           label={<FormattedMessage
             id="app.company"
             defaultMessage="Company"
           />}
           value={tagWithCompany} />
-        <ContactInvestItemRow //label="Department" 
+        <ContactInvestItemRow 
           label={<FormattedMessage
             id="app.department"
             defaultMessage="Department"
           />}
           value={department} />
-        <ContactInvestItemRow //label="Designation" 
+        <ContactInvestItemRow  
           label={<FormattedMessage
             id="app.designation"
             defaultMessage="Designation"

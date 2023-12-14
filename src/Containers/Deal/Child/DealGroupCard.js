@@ -1,8 +1,7 @@
-import React, { Component } from "react";
-import { Avatar, Divider, Button, Menu, Dropdown, Tooltip, Popconfirm } from "antd";
-import { UserOutlined } from '@ant-design/icons';
+import React from "react";
+import {  Button,Tooltip, Popconfirm } from "antd";
 import { FormattedMessage } from "react-intl";
-import { StopTwoTone, TableOutlined } from "@ant-design/icons";
+import { StopTwoTone} from "@ant-design/icons";
 import { FlexContainer, MainWrapper } from "../../../Components/UI/Layout";
 import {
   MultiAvatar,
@@ -16,15 +15,10 @@ import { CurrencySymbol } from "../../../Components/Common";
 const DealGroupCard = (props) => {
   const {
     handleClick,
-    handlePreview,
-    imageId,
     imageURL,
     primaryTitle,
     secondaryTitle,
-    subtitle1,
-    subtitle2,
     currencyType,
-    currency,
   } = props;
   console.log("...>>>>>>>>>>>.......<<<<<<<<<<<<<<", imageURL);
   return (
@@ -38,8 +32,6 @@ const DealGroupCard = (props) => {
           <FlexContainer style={{ flexBasis: "20%", margin: "0.3rem" }}>
             <MultiAvatar
               primaryTitle={primaryTitle}
-            //   imageId={imageId}
-            //   imageURL={imageURL}
               imgHeight={"1.56em"}
               imgWidth={"1.56em"}
             />
@@ -58,15 +50,12 @@ const DealGroupCard = (props) => {
               {primaryTitle || ""}
             </Title>
             <SubTitle>
-              {/* <UserOutlined theme="filled" /> */}
-              {/* <i class="far fa-address-book"></i> */}
               &nbsp;&nbsp;
               {currencyType && <CurrencySymbol currencyType={currencyType} />}
               &nbsp;
               {secondaryTitle || ""} 
               <Popconfirm
   title="Change status to Won?"
-  // onConfirm={() => handleWon(opportunityId)}
   okText="Yes"
   cancelText="No"
 >
@@ -93,7 +82,6 @@ const DealGroupCard = (props) => {
               &nbsp;    
               <Popconfirm
   title="Change status to Lost?"
-  // onConfirm={() => handleConfirm(opportunityId)}
   okText="Yes"
   cancelText="No"
 >

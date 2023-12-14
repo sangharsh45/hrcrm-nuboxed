@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import moment from "moment";
 import { Link } from "../../../../../../Components/Common";
 import { FormattedMessage } from "react-intl";
-import { CurrencySymbol } from "../../../../../../Components/Common";
 import { bindActionCreators } from "redux";
 import { StyledTable } from "../../../../../../Components/UI/Antd";
 import {
@@ -142,27 +141,6 @@ function LinkedDealTable(props) {
         );
       },
     },
-    // {
-    //   // title: "Proposal Amount",
-    //   title: <FormattedMessage
-    //     id="app.proposalAmount"
-    //     defaultMessage="Proposal Amount"
-    //   />,
-    //   dataIndex: "proposalAmount",
-    //   width: "15%",
-    //   onFilter: (value, record) => record.proposalAmount.indexOf(value) === 0,
-    //   render: (name, item, i) => {        
-    //     return (
-    //       <>
-    //         {/* {item.billing} {item.currency} */}
-    //         <span>
-    //         <CurrencySymbol currencyType={item.currency} />
-    //         {item.proposalAmount}
-    //       </span>
-    //       </>
-    //     );
-    //   },
-    // },
   
   ];
   const tab = document.querySelector(".ant-layout-sider-children");
@@ -171,7 +149,6 @@ function LinkedDealTable(props) {
   return (
     <>
       <StyledTable
-        // rowSelection={rowSelection}
         rowKey="opportunityId"
         columns={columns}
         dataSource={opportunityByContactId}
@@ -183,14 +160,12 @@ function LinkedDealTable(props) {
     </>
   );
 }
-// }
+
 const mapStateToProps = ({ auth, contact, opportunity }) => ({
   userId: auth.userDetails.userId,
   fetchingContactOpportunity: contact.fetchingContactOpportunity,
-  // accounts: accountSelector(account),
   opportunityByContactId: contact.opportunityByContactId,
   contactId: contact.contact.contactId,
-  // opportunityId: opportunity.opportunityId,
 });
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(

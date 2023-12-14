@@ -1,19 +1,11 @@
-import React,{lazy} from "react";
+import React from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { FormattedMessage } from "react-intl";
 import { withRouter } from "react-router-dom";
 import { base_url } from "../../../Config/Auth";
-import { Button, Tooltip, } from "antd";
-import { StyledSelect } from "../../../Components/UI/Antd";
+import { Button, Tooltip,} from "antd";
 import InsertDriveFileIcon from '@mui/icons-material/InsertDriveFile';
-// const ContactSharePartnerForm = lazy(()=>import("./ContactSharePartnerForm"));
-// const ContactShareCustomerForm = lazy(()=>import("./ContactShareCustomerForm"));
 
-
-const Option = StyledSelect.Option;
-
-const dataSource = ["Burns Bay Road", "Downing Street", "Wall Street"];
 class ContactInvestActionRight extends React.Component {
 
   render() {

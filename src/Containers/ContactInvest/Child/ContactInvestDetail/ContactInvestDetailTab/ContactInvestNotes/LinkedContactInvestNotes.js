@@ -15,7 +15,6 @@ class LinkedContactNotes extends Component {
 
   render() {
     const { fetchingNotesListByContactId, notesListByContactId } = this.props;
-    console.log("data5", this.props.contactiData.contactId);
     return (
       <>
         <div style={{ backgroundColor: "#dcdcdc", height: "14.375em" }}>

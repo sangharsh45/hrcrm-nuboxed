@@ -14,7 +14,6 @@ class AddDealsNotesDrawerModal extends Component {
     return (
       <div>
         <StyledDrawer
-        // title="Notes"
           title={this.props.currentItem.opportunityName}
           width="64%"
           style={{ marginTop: "5rem" }}

@@ -1,4 +1,4 @@
-import React, { Component, useState, useMemo, useEffect } from "react";
+import React,{ useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { getCustomerData,getInvestorData } from "../../Customer/CustomerAction";
@@ -50,10 +50,7 @@ function DealForm(props) {
     props.getAllEmployeelist();
     props.getSources(props.orgId);
     props.getdealsContactdata(props.userId);
-    // props.getCustomerData(props.userId);
     props.getInvestorData(props.userId)
-    // props.getInitiative(props.userId);
-    // props.getWorkflow(props.orgId);
      props.getDealLinkedStages(props.orgId);
     props.getDealLinkedWorkflow(props.orgId);
     props.getAllDealStages(props.orgId);

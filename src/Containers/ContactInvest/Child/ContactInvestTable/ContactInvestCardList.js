@@ -7,8 +7,7 @@ import { Link } from "../../../../Components/Common";
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import PhoneDisabledIcon from '@mui/icons-material/PhoneDisabled';
-import { StyledTable, } from "../../../../Components/UI/Antd";
-import {  Tooltip, Select } from "antd";
+import {  Tooltip } from "antd";
 import { OnlyWrapCard } from '../../../../Components/UI/Layout'
 import { MultiAvatar, MultiAvatar2, SubTitle } from "../../../../Components/UI/Elements";
 import {
@@ -29,9 +28,7 @@ import NoteAltIcon from "@mui/icons-material/NoteAlt";
 import PhoneInTalkIcon from '@mui/icons-material/PhoneInTalk';
 import { getDesignations } from "../../../Settings/Designation/DesignationAction";
 import MonitorHeartIcon from '@mui/icons-material/MonitorHeart';
-import APIFailed from "../../../../Helpers/ErrorBoundary/APIFailed";
 import BorderColorIcon from '@mui/icons-material/BorderColor';
-import { BundleLoader } from "../../../../Components/Placeholder";
 import {getContactInvestByUserId,
   handleContactInvestNotesDrawerModal,
   emptyContactInvest,handleUpdateContactInvestModal} from "../../ContactInvestAction";
@@ -39,8 +36,6 @@ import AddContactInvestNotesDrawerModal from "../AddContactInvestNotesDrawerModa
 const UpdateContactInvestModal = lazy(() =>
   import("../UpdateContactInvest/UpdateContactInvestModal")
 );
-const Option = Select;
-
 
 function ContactInvestCardList(props) {
 
@@ -86,21 +81,14 @@ function ContactInvestCardList(props) {
   const {
     user,
     fetchingContactsInvest,
-    newFiltersdata,
     contactByUserId,
     filterData,
-    handleUpdateContactModal,
-    handleContactReactSpeechModal,
-    addContactSpeechModal,
     updateContactInvestModal,
     addDrawerContactInvestNotesModal,
     handleUpdateContactInvestModal,
     handleContactInvestNotesDrawerModal
   } = props;
 
-//  if(fetchingContactsInvest){
-//   return <BundleLoader/>
-//  }
 
   return (
     <>

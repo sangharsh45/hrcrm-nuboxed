@@ -10,12 +10,7 @@ import EditableInput from "../../../../../Components/Forms/Edit/EditableInput";
 import EditableTextArea from "../../../../../Components/Forms/Edit/EditableTextArea";
 import EditableDatePicker from "../../../../../Components/Forms/Edit/EditableDatePicker";
 import EditableSelect from "../../../../../Components/Forms/Edit/EditableSelect";
-import { SelectComponent } from "../../../../../Components/Forms/Formik/SelectComponent";
 import { FormattedMessage } from "react-intl";
-// import {
-//   updateOpportunity,
-//   getHistoricalProposalAmount,
-// } from "../../../OpportunityAction";
 class DealAboutEdit extends Component {
   constructor(props) {
     super(props);

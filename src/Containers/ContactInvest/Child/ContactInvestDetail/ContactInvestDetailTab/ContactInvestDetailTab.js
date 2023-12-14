@@ -42,11 +42,6 @@ class ContactInvestDetailTab extends Component {
       documentUploadModal,
       handleContactInvestActivityModal,
       contactInvestorActivityModal,
-      handleContactOpportunityModal,
-      addContactOpportunityModal,
-      handleContactReactSpeechModal,
-      addContactSpeechModal,
-      getOpportunityListByContactId,
     } = this.props;
 
     return (

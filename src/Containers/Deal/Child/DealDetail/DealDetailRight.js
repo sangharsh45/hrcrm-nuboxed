@@ -2,7 +2,6 @@ import React, { Component, lazy, Suspense } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import DealReportCard from "./Dealcards/DealReportCard.js";
-// import OpportunityAboutCard from "./OpportunityCards/OpportunityAboutCard";
 import DealAboutViewCard from "./Dealcards/DealAboutViewCard";
 import DealAboutCard from "./Dealcards/DealAboutCard";
 

@@ -5,7 +5,6 @@ import { Timeline } from "antd";
 import { BorderBox } from "../../../../Components/UI/Layout";
 import { BundleLoader } from "../../../../Components/Placeholder";
 import { getNotesListByDealId } from "../../DealAction";
-
 import NoteDealForm from "./NoteDealForm";
 import SingleNote from "./SingleNote";
 

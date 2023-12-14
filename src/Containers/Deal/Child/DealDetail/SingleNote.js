@@ -1,10 +1,8 @@
 import React from "react";
 import styled from "styled-components";
-import dayjs from "dayjs";
-// import { SubTitle } from "../UI/Elements";
-
 import moment from "moment";
 import { Spacer,SubTitle } from "../../../../Components/UI/Elements";
+
 const NotesWrapper = styled.div``;
 export default function SingleNote(props) {
   console.log(creationDate);
@@ -13,9 +11,7 @@ export default function SingleNote(props) {
     creationDate,
     userId,
     creatorId,
-    // metaData: {
-    //   creatorDetails: { firstName, lastName }
-    // }
+
   } = props;
   return (
     <NotesWrapper>
