@@ -1,23 +1,12 @@
-import React, { Component ,useState,useEffect} from "react";
+import React, { useState,useEffect} from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { opportunityMapSelector } from "../../../../OpportunitySelector";
-import { Map, TileLayer, Marker, Popup } from "react-leaflet";
-import { FlexContainer } from "../../../../../../Components/UI/Layout";
-import {
-  MultiAvatar,
-  SubTitle,
-  Title,
-} from "../../../../../../Components/UI/Elements";
-import { Tooltip, Icon, Button, Input, } from "antd";
-import { AddressComponent } from "../../../../../../Components/Common";
+import {  Button, } from "antd";
 import Leaflet from "../../../../../../Components/Utils/Leaflet";
-//import { accountMapSelector } from "../../AccountSelector";
-//import { getAccountsMapOnDashboard } from "../../AccountAction";
 import L from "leaflet";
 import RecruitmentMapPopUpmarker from "./RecruitmentMapPopUpmarker"
 import { getSkillsCount, } from "../../../../OpportunityAction";
-//import AccountMapPopupmarker from "../../Util/AccountMapPopupmarker";
 import APIFailed from "../../../../../../Helpers/ErrorBoundary/APIFailed";
 delete L.Icon.Default.prototype._getIconUrl;
 L.Icon.Default.mergeOptions({

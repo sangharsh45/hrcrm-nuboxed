@@ -1,9 +1,7 @@
 import React, { Component,lazy, Suspense } from "react";
 import { BundleLoader } from "../../../../Components/Placeholder";
-
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-
 import { StyledDrawer } from "../../../../Components/UI/Antd";
 const LinkedNotes = lazy(() => import("../OpportunityDetail/OpportunityTab/LinkedNotes"));
 

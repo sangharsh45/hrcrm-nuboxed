@@ -2,23 +2,10 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import styled from "styled-components";
-import {
-  EyeInvisibleOutlined, ReadOutlined,
-
-  
+import { ReadOutlined, 
 } from '@ant-design/icons';
-import { message, Tooltip, Popover, Switch, Icon } from "antd";
-// import { ReadOutlined} from '@ant-design/icons';
-import dayjs from "dayjs";
+import { message, Tooltip, Popover, } from "antd";
 import { FlexContainer } from "../../../../../Components/UI/Layout";
-// import SingleOpportunity from "../../OpportunityList/SingleOpportunity";
-// import {
-//   updateOpportunityStageByParticularOpportunity,
-//   getOpportunityById,
-//   handlePlaybookModal,
-// } from "../../../OpportunityAction";
-import { BussinessCard, Spacer } from "../../../../../Components/UI/Elements";
-// import OpportunityPlaybookModal from "../../../../../Components/UI/Elements/OpportunityPlaybook/OpportunityPlaybookModal";
 import StagesSwitch from "./StagesSwitch";
 
 class OpportunityStatsCard extends Component {

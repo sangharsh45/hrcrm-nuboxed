@@ -2,8 +2,6 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import styled from "styled-components";
 import { bindActionCreators } from "redux";
-import { FormattedMessage } from "react-intl";
-import dayjs from "dayjs";
 import { JumpStartBox } from "../../../../Components/UI/Elements";
 import { FlexContainer } from "../../../../Components/UI/Layout";
 class OpportunityJumpstartBox extends Component {

@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import { StyledSelect } from "../../../Components/UI/Antd";
 import { FormattedMessage } from "react-intl";
 import { Tooltip, Badge } from "antd";
 import { connect } from "react-redux";
@@ -20,10 +19,7 @@ import {
 } from "../OpportunityAction";
 import PeopleIcon from '@mui/icons-material/People';
 import { StopTwoTone, TableOutlined } from "@ant-design/icons";
-import { Input } from "antd";
 
-const Option = StyledSelect.Option;
-const { Search } = Input;
 
 const OpportunityActionLeft = (props) => {
   const dummy = ["cloud", "azure", "fgfdg"];

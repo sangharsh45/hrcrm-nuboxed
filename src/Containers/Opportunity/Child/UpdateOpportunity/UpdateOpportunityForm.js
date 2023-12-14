@@ -3,13 +3,6 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Button } from "antd";
 import { FormattedMessage } from "react-intl";
-import SpeechRecognition, {
-  useSpeechRecognition,
-} from "react-speech-recognition";
-import PlayCircleFilledIcon from "@mui/icons-material/PlayCircleFilled";
-import RotateRightIcon from "@mui/icons-material/RotateRight";
-import StopCircleIcon from "@mui/icons-material/StopCircle";
-import { Tooltip } from "antd";
 import { SelectComponent } from "../../../../Components/Forms/Formik/SelectComponent";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";

@@ -1,13 +1,8 @@
-import React, { useEffect } from "react";
+import React, { } from "react";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
-import { FormattedMessage } from "react-intl";
 import { bindActionCreators } from "redux";
-import ActionIcon from "../../../../Components/Utils/ActionIcon";
 import { FlexContainer } from "../../../../Components/UI/Layout";
-// import { dropOpportunity } from "../../OpportunityAction";
-import { Spin, Button } from "antd";
-import { StyledPopconfirm } from "../../../../Components/UI/Antd";
 
 function OpportunityDetailActionRight(props) {
   // useEffect(() => {

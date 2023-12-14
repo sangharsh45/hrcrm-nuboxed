@@ -1,9 +1,7 @@
-import React, { Component, lazy, Suspense } from "react";
+import React, { Component, Suspense } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { Icon } from "antd";
 import { StyledTabs } from "../../../../../../Components/UI/Antd";
-import { TabsWrapper } from "../../../../../../Components/UI/Layout";
 import RecruiterTable from "./RecruiterTable"
 import RecruitmentMap from "./RecruitmentMap";
 import TableViewIcon from '@mui/icons-material/TableView';

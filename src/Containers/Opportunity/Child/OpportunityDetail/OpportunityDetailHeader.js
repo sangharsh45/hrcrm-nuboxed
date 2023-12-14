@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { ActionHeader } from "../../../../Components/Utils";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import OpportunityStatsCard from "./OpportunityCards/OpportunityStatsCard";
 import OpportunityDetailActionLeft from "./OpportunityDetailActionLeft";
 import OpportunityDetailActionRight from "./OpportunityDetailActionRight";
 

@@ -1,4 +1,4 @@
-import React, { Suspense, Component } from "react";
+import React, { Component } from "react";
 import { MultiAvatar } from "../../Components/UI/Elements";
 import { getOpportunityListByUserId } from "../Opportunity/OpportunityAction";
 import { connect } from "react-redux";

@@ -1,24 +1,17 @@
-import React, { useEffect, useState,useMemo } from "react";
+import React, { } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { Map, TileLayer, Marker, Popup } from "react-leaflet";
+import { Marker, Popup } from "react-leaflet";
 import { FlexContainer } from "../../../../../../Components/UI/Layout";
-import { Avatar ,Checkbox} from "antd";
-//import SkillsLoadMore from "../Candidate/Child/CandidateTable/SkillsLoadMore"
+import {Checkbox} from "antd";
 import dayjs from "dayjs";
 import { Link } from "../../../../../../Components/Common";
 import {
-  MultiAvatar,
   Title,
-  SubTitle,
-  JumpStartBox,
   Spacer,
 } from "../../../../../../Components/UI/Elements";
-import { LinkCandidateRecruit,LinkRecruitCandidate,getSkillsCount,getRecruiter } from "../../../../OpportunityAction";
-import { AddressComponent, CurrencySymbol } from "../../../../../../Components/Common";
+import { LinkCandidateRecruit,LinkRecruitCandidate } from "../../../../OpportunityAction";
 import L from "leaflet";
-import CurrencyCompressor from "../../../../../../Components/Common/CurrencyCompressor";
-import { CompassOutlined } from "@ant-design/icons";
 
 delete L.Icon.Default.prototype._getIconUrl;
 L.Icon.Default.mergeOptions({

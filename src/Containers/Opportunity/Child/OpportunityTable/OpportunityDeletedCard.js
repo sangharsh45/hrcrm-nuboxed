@@ -1,19 +1,11 @@
-import React, { useEffect, useState, useMemo } from "react";
+import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import InfiniteScroll from "react-infinite-scroll-component";
-import { FormattedMessage } from "react-intl";
 import styled from "styled-components";
-import MonitorHeartIcon from "@mui/icons-material/MonitorHeart";
-import { Tooltip, Input, Button, Select, Menu, Dropdown, Progress } from "antd";
-import Highlighter from "react-highlight-words";
+import { Tooltip, Menu, Dropdown, Progress } from "antd";
 import { CurrencySymbol,Link } from "../../../../Components/Common";
 import moment from "moment";
-import SearchIcon from "@mui/icons-material/Search";
-import BorderColorIcon from "@mui/icons-material/BorderColor";
-import LockIcon from "@mui/icons-material/Lock";
-import DeleteIcon from "@mui/icons-material/Delete";
-import { StyledTable, StyledPopconfirm } from "../../../../Components/UI/Antd";
 import {
   MultiAvatar,
   SubTitle,
@@ -21,8 +13,6 @@ import {
 import {
   getDeletedOpportunity,
 } from "../../OpportunityAction";
-import AddOpportunityDrawerModal from "./AddOpportunityDrawerModal";
-import UpdateOpportunityModal from "../UpdateOpportunity/UpdateOpportunityModal";
 import ReinstateToggle from "../../Child/ReinstateToggle"
 
 function OpportunityDeletedCard(props) {
