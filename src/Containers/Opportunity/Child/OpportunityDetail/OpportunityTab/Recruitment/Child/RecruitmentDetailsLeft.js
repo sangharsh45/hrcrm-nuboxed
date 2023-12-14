@@ -1,15 +1,8 @@
 import React, { Component } from "react";
 import { FlexContainer } from "../../../../../../../Components/UI/Layout";
- import CandidateAvailibityCard from "./RecruitmentCard/CandidateAvailibityCard";
-
  import CandidateCatagoryCard from "./RecruitmentCard/CandidateCatagoryCard";
  import RecruitmentDocumentCard from "./RecruitmentCard/RecruitmentDocumentCard"
-
-import RecruitmentCandidateCard from "./RecruitmentCard/RecruitmentCandidateCard";
 import RecruitmentDetailsRight from "./RecruitmentDetailsRight"
-// import TaskOppCard from "./TaskOppCard/TaskOppCard";
-// import TaskOppStatsCard from "./TaskOppCard/TaskOppStatsCard";
-// import TaskOppAboutCard from "./TaskOppCard/TaskOppAboutCard";
 
 class RecruitmentDetailsLeft extends Component {
   render() {

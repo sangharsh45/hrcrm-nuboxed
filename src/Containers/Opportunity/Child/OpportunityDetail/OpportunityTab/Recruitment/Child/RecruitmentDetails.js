@@ -6,9 +6,7 @@ import {
   FlexContainer,
   MainWrapper,
 } from "../../../../../../../Components/UI/Layout";
-
 const RecruitmentDetailsLeft = lazy(() => import("./RecruitmentDetailsLeft"));
-const RecruitmentDetailsRight = lazy(() => import("./RecruitmentDetailsRight"));
 
 class RecruitmentDetails extends Component {
   render() {

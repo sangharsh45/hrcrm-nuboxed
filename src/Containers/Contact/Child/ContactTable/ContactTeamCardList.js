@@ -7,7 +7,6 @@ import { Link } from "../../../../Components/Common";
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import PhoneDisabledIcon from '@mui/icons-material/PhoneDisabled';
-import { StyledTable, } from "../../../../Components/UI/Antd";
 import {  Tooltip, Select } from "antd";
 import { OnlyWrapCard } from '../../../../Components/UI/Layout'
 import { MultiAvatar, MultiAvatar2, SubTitle } from "../../../../Components/UI/Elements";
@@ -33,13 +32,10 @@ import NoteAltIcon from "@mui/icons-material/NoteAlt";
 import PhoneInTalkIcon from '@mui/icons-material/PhoneInTalk';
 import { getDesignations } from "../../../Settings/Designation/DesignationAction";
 import MonitorHeartIcon from '@mui/icons-material/MonitorHeart';
-import ContactDetailView from "./ContactDetailView";
-import APIFailed from "../../../../Helpers/ErrorBoundary/APIFailed";
 import ReactContactSpeechModal from "../ContactDetail/ReactContactSpeechModal";
 import AddContactDrawerModal from "../UpdateContact/AddContactDrawerModal";
 import AddContactEmailDrawerModal from "../UpdateContact/AddContactEmailDrawerModal";
 import BorderColorIcon from '@mui/icons-material/BorderColor';
-import { BundleLoader } from "../../../../Components/Placeholder";
 import AddContactNotesDrawerModal from "../AddContactNotesDrawerModal";
 import AddContactPulseDrawerModal from "./AddContactPulseDrawerModal";
 

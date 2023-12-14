@@ -5,7 +5,6 @@ import OpportunityDetailHeader from "./OpportunityDetailHeader";
 import { FlexContainer, MainWrapper } from "../../../../Components/UI/Layout";
 import { BundleLoader } from "../../../../Components/Placeholder";
 import { getOpportunityById } from "../../OpportunityAction";
-
 const OpportunityDetailLeft = lazy(() => import("./OpportunityDetailLeft"));
 const OpportunityDetailRight = lazy(() => import("./OpportunityDetailRight"));
 

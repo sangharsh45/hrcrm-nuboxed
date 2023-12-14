@@ -3,20 +3,17 @@ import { connect } from "react-redux";
 import TransferWithinAStationIcon from '@mui/icons-material/TransferWithinAStation';
 import { bindActionCreators } from "redux";
 import RecruitmentDeletedTable from "../../OpportunityDetail/OpportunityTab/Recruitment/RecruitmentDeletedTable"
-import { Button, message, Tooltip, Popover, Icon } from "antd";
+import {Tooltip, } from "antd";
 import { FormattedMessage } from "react-intl";
 import PieChartIcon from '@mui/icons-material/PieChart';
 import { StyledTabs } from "../../../../../Components/UI/Antd";
 import {
-  FlexContainer,
   TabsWrapper,
 } from "../../../../../Components/UI/Layout";
 import DeleteIcon from '@mui/icons-material/Delete';
 import InsertDriveFileIcon from '@mui/icons-material/InsertDriveFile';
 import ContactsIcon from '@mui/icons-material/Contacts';
-import {
-  DeleteOutlined,
-  EyeInvisibleOutlined, LinkOutlined, PlusOutlined, 
+import { LinkOutlined, PlusOutlined, 
 } from '@ant-design/icons';
 import { handleContactModal,handleLinkContactModal } from "../../../../Contact/ContactAction";
 import RecruitmentClosedTable from "../OpportunityTab/RecruitmentClosedTable"
@@ -31,17 +28,14 @@ import {
   getRecruitByOpportunityId,
   
 } from "../../../OpportunityAction";
-import MicIcon from '@mui/icons-material/Mic';
 import LockIcon from '@mui/icons-material/Lock';
 import { BundleLoader } from "../../../../../Components/Placeholder";
-import NoteAltIcon from "@mui/icons-material/NoteAlt";
 import ReactSpeechModal from "./ReactSpeechModal";
 const RecruitmentTable = lazy(() => import("./Recruitment/RecruitmentTable"));
 const AddRecruitModal = lazy(() => import("./Recruitment/AddRecruitModal"));
 const AddTagProfileModal = lazy(() => import("./Recruitment/AddTagProfileModal"));
 const RecruitProJumpstart = lazy(() => import("../../RecruitProJumpstart/RecruitProJumpstart"));
 const SummaryTable = lazy(() => import("./Recruitment/Child/SummaryTable"));
-const LinkedNotes = lazy(() => import("./LinkedNotes"));
 const AddDocumentModal = lazy(() => import("./Document/AddDocumentModal"));
 const LinkedContact = lazy(() => import("./LinkedContact"));
 const LinkedDocuments = lazy(() => import("./Document/LinkedDocuments"));

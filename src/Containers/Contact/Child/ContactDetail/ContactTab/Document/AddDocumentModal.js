@@ -1,4 +1,4 @@
-import React, { lazy, Suspense, Component } from "react";
+import React, {  Suspense, Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { FormattedMessage } from "react-intl";
@@ -15,7 +15,6 @@ import {
   addContactDocument,
   getContactDocument,
 } from "../../../../ContactAction";
-// import { getOppoStages, getLevels } from "../../Settings/SettingsAction";
 import DragableUpload from "../../../../../../Components/Forms/Formik/DragableUpload";
 
 const ButtonGroup = Button.Group;

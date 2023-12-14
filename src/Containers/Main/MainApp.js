@@ -514,13 +514,20 @@ function MainApp(props) {
                     {props.roleType}
                   </div>
                   {/* <Subscription /> */}
-                  {user.settingsAccessInd === true ?
+                  {user.role === "ADMIN" ?
+                  
+
+                      <SettingsDropdown />
+
+                  
+                   : null} 
+                  {/* {user.role === "ADMIN" ?
                     <IsAuthorized>
 
                       <SettingsDropdown />
 
-                    </IsAuthorized>
-                    : null}
+                    </IsAuthorized> 
+                   : null}  */}
                   {/* <a href="#" style={{ height: 45, marginRight: 20 }}>
                                         <FlexContainer alignItems='center' style={{ height: '100%' }}>
                                             <Badge count={5} >

@@ -1,11 +1,10 @@
-import React, { lazy, Suspense, Component } from "react";
+import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { Button, Switch, Tooltip, Icon } from "antd";
-import { Formik, Form, Field, FieldArray, FastField } from "formik";
+import { Button, } from "antd";
+import { Formik, Form, Field, FastField } from "formik";
 import {
   Spacer,
-  StyledLabel,
 } from "../../../../../../../Components/UI/Elements";
 import { InputComponent } from "../../../../../../../Components/Forms/Formik/InputComponent";
 import { TextareaComponent } from "../../../../../../../Components/Forms/Formik/TextareaComponent";
@@ -18,7 +17,6 @@ import { DatePicker } from "../../../../../../../Components/Forms/Formik/DatePic
 import { addCandidateEmploymentDetails } from "../../../../../CandidateAction";
 import dayjs from "dayjs";
 import {getSequence} from "../../../../../../Settings/SettingsAction"
-// import { getCurrency } from "../../../../../Auth/AuthAction";
 import { FormattedMessage } from "react-intl";
 import { getDesignations } from "../../../../../../Settings/Designation/DesignationAction";
 

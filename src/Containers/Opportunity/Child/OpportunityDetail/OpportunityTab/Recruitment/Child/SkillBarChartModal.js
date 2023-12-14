@@ -1,9 +1,6 @@
-import React, { lazy, Suspense } from "react";
-
+import React, { Suspense } from "react";
 import { BundleLoader } from "../../../../../../../Components/Placeholder";
 import { StyledDrawer } from "../../../../../../../Components/UI/Antd";
-import { Spacer } from "../../../../../../../Components/UI/Elements";
-// import OrderJumpStart from "../OrderJumpStart";
  import SkillBarChartForm from "../../../OpportunityTab/Recruitment/Child/SkillBarChartForm";
 
 const SkillBarChartModal = (props) => {

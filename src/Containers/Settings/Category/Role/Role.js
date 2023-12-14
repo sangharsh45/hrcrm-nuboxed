@@ -82,7 +82,7 @@ class Department extends Component {
       editInd,
     };
   
-    let exist = roles && roles.some((element) => element.roleType == roleType);
+    // let exist = roles && roles.some((element) => element.roleType == roleType);
   
     // if (exist) {
     //   message.error("Can't create as same Role exists!");

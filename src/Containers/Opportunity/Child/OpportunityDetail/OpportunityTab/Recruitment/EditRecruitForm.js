@@ -1,4 +1,4 @@
-import React, { useState, useEffect, } from "react";
+import React, { useEffect, } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Button, } from "antd";
@@ -12,9 +12,7 @@ import {
   getCurrency,
 } from "../../../../OpportunityAction";
 import { FlexContainer } from "../../../../../../Components/UI/Layout";
-// import { addRecruit } from "../../../../OpportunityAction";
 import { DatePicker } from "../../../../../../Components/Forms/Formik/DatePicker";
-
 import { TextareaComponent } from "../../../../../../Components/Forms/Formik/TextareaComponent";
 
 /**

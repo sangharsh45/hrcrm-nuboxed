@@ -13,11 +13,8 @@ import {
   getContactPagination,
   getFilterContactList
 } from "./ContactAction";
-
 const AddContactModal = lazy(() => import("./Child/AddContactModal"));
 const ContactHeader = lazy(() => import("./Child/ContactHeader"));
-const ContactTable = lazy(() => import("./Child/ContactTable/ContactTable"));
-const PartnerTable = lazy(() => import("./Child/PartnerTable/PartnerTable"));
 const ContactCardList = lazy(() => import("./Child/ContactTable/ContactCardList"));
 const ContactAllCardList = lazy(() => import("./Child/ContactTable/ContactAllCardList"));
 

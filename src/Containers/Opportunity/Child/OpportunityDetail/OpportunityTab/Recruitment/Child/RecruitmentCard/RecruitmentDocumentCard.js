@@ -1,34 +1,13 @@
-import React, { Suspense, Component } from 'react'
+import React, {  Component } from 'react'
 import { base_url } from "../../../../../../../../Config/Auth";
-import { Route, Switch } from 'react-router-dom'
-import { MultiAvatar, } from '../../../../../../../../Components/UI/Elements'
-import { BundleLoader } from '../../../../../../../../Components/Placeholder'
-
-import Item from 'antd/lib/list/Item'
 import FileCopyIcon from '@mui/icons-material/FileCopy';
-//import { FlexContainer, MainWrapper, ResponsiveCard } from "../Layout";
-import { FlexContainer,MainWrapper } from '../../../../../../../../Components/UI/Layout'
-import { Button, Menu, Dropdown, Radio, Space, Tooltip } from 'antd'
-// import {
-//   getCustomerProductList,
-//   LinkProductInfo,
-//   getShopName,
-//   getSortBy,
-// } from '../Customer/CustomerAction'
+import { MainWrapper } from '../../../../../../../../Components/UI/Layout'
 import {
-    getCandidateDocument,
-  
-    
+    getCandidateDocument,  
   } from "../../../../../../../Candidate/CandidateAction";
-//import APIFailed from '../../Helpers/ErrorBoundary/APIFailed'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { AlignCenterOutlined, DownOutlined } from '@ant-design/icons'
 import styled from 'styled-components'
-//import AddCandidateDrawerModal from "../Candidate/AddCandidateDrawerModal"
-import { StyledModal } from '../../../../../../../../Components/UI/Antd'
-import { sortedLastIndex } from 'lodash'
-// import CustomerSplashScreen from './CustomerSplashScreen'
 
 class RecruitmentDocumentCard extends Component {
     componentDidMount() {

@@ -1,14 +1,11 @@
-import React, { lazy, Suspense, Component } from "react";
+import React, { Suspense, Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { Button, Switch, Tooltip, Icon } from "antd";
-// import { RightSquareOutlined, ToTopOutlined } from '@ant-design/icons';
-import { Formik, Form, Field, FieldArray } from "formik";
-import { StyledDrawer, StyledModal } from "../../../../../../Components/UI/Antd";
+import { Button, Tooltip,  } from "antd";
+import { Formik, Form, Field,  } from "formik";
+import { StyledDrawer,  } from "../../../../../../Components/UI/Antd";
 import { Spacer, StyledLabel } from "../../../../../../Components/UI/Elements";
 import SearchSelect from "../../../../../../Components/Forms/Formik/SearchSelect";
-import { SelectComponent } from "../../../../../../Components/Forms/Formik/SelectComponent";
-import DocumentUpload from "../../../../../../Components/Forms/Formik/DocumentUpload";
 import { InputComponent } from "../../../../../../Components/Forms/Formik/InputComponent";
 import { TextareaComponent } from "../../../../../../Components/Forms/Formik/TextareaComponent";
 import * as Yup from "yup";
@@ -17,11 +14,8 @@ import {
   addOpportunityDocument,
   getOpportunityDocument,
 } from "../../../../OpportunityAction";
-// import { getOppoStages, getLevels } from "../../Settings/SettingsAction";
 import { FlexContainer } from "../../../../../../Components/UI/Layout";
 import DragableUpload from "../../../../../../Components/Forms/Formik/DragableUpload";
-import LazySelect from "../../../../../../Components/Forms/Formik/LazySelect";
-import { base_url } from "../../../../../../Config/Auth";
 import { FormattedMessage } from "react-intl";
 import { RightSquareOutlined, ToTopOutlined } from "@ant-design/icons";
 const ButtonGroup = Button.Group;

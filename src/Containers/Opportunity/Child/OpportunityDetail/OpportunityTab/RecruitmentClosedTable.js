@@ -1,4 +1,4 @@
-import React, { Component, lazy } from "react";
+import React, { Component, } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { FormattedMessage } from "react-intl";
@@ -7,35 +7,27 @@ import ContactSupportIcon from '@mui/icons-material/ContactSupport';
 import AddRequirementModal from "../OpportunityTab/Recruitment/AddRequirementModal";
 import {
   MultiAvatar,
-  Spacer,
   SubTitle,
-  StyledLabel,
 } from "../../../../../Components/UI/Elements";
 import AddRequirementDetailModal from "../OpportunityTab/Recruitment/AddRequirementDetailModal";
-import { Link } from "../../../../../Components/Common";
 import {
   StyledTable,
-  StyledPopconfirm,
   StyledModal,
 } from "../../../../../Components/UI/Antd";
 import { FlexContainer } from "../../../../../Components/UI/Layout";
 import RecruitmentFilter from "../OpportunityTab/Recruitment/RecruitmentFilter";
 import AddRecruiterModal from "../OpportunityTab/Recruitment/AddRecruiterModal";
-//import RecruitmentContact from "./RecruitmentContact";
 import {
-  getRecruitByOpportunityId,
   LinkSkillsRecruit,
   LinkOpenedRequirement,
   getskillsetList,
   getRecruiter,
   getSkillsCount,
-  //   LinkCandidateRecruit,
   LinkStageRecruit,
   LinkStatusRecruit,
   setCurrentOpportunityRecruitMentData,
   getCandidateRequirement,
   setCurrentRecruiterData,
-  //  emailSendRecruitment,
   handleSponsorModal,
   handleRecruiterModal,
   handleAddRequirementModal,
@@ -44,32 +36,18 @@ import {
   handleAddRequiremenDetailtModal,
   LinkClosedRequirement,
   getClosedRequirement,
-
-  // handleRecruiterModal,
-  // handleRecruitModal
   emailSendStage,
 } from "../../../OpportunityAction";
 import HelpIcon from '@mui/icons-material/Help';
 import { BundleLoader } from "../../../../../Components/Placeholder";
 import {
-  Popconfirm,
   Tooltip,
-  Dropdown,
-  Menu,
-  Progress,
-  Table,
-  Input,
-  Button,
-  message,
-  Icon,
   Badge,
 } from "antd";
-import Highlighter from "react-highlight-words";
 import RecruitmentDetails from "../OpportunityTab/Recruitment/Child/RecruitmentDetails";
 import {
   getCandidateById,
   getTopicsByCandidateId,
-  //   getContactDocument,
 } from "../../../../Candidate/CandidateAction";
 import moment from "moment";
 import EditRecruitForm from "../OpportunityTab/Recruitment/EditRecruitForm";
@@ -81,14 +59,12 @@ import {
   addRecruitProProfile,
   deleteRequirementData,
 } from "../../../OpportunityAction";
-import { map } from "lodash";
 import SubTableClickCandidate from "../OpportunityTab/Recruitment/SubTableClickCandidate";
 import {
   EyeInvisibleOutlined,
   EyeOutlined,
 } from "@ant-design/icons";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
-// const CandidateDetailsView =lazy(()=>import("../../../../../Candidate/Child/CandidateTable/CandidateDetails/CandidateDetailsView"));
 class RecruitmentClosedTable extends Component {
   constructor(props) {
     super(props);

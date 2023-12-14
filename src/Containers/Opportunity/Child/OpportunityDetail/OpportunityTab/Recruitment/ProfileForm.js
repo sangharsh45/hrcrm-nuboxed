@@ -1,22 +1,18 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useEffect,  } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { Button, message, Input, Switch } from "antd";
+import { Button,  } from "antd";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
-import dayjs from "dayjs";
 import { Spacer } from "../../../../../../Components/UI/Elements";
 import { FormattedMessage } from "react-intl";
 import { SelectComponent } from "../../../../../../Components/Forms/Formik/SelectComponent";
-import { InputComponent } from "../../../../../../Components/Forms/Formik/InputComponent";
-
 import {
   getProcessForRecruit,
   getProcessStagesForRecruit,
    getAllProcessStagesForRecruit,
 } from "../../../../../Settings/SettingsAction";
 import {
-  //   getCurrency,
   addRecruitProProfile,
   getRecruitByOpportunityId,
 } from "../../../../OpportunityAction";

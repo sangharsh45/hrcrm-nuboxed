@@ -1,4 +1,4 @@
-import React,{useEffect} from 'react';
+import React,{} from 'react';
 import ReactWordcloud from 'react-wordcloud';
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";

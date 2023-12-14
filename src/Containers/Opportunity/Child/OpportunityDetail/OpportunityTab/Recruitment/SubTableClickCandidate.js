@@ -1,4 +1,4 @@
-import React,{useEffect,Component,useMemo} from "react";
+import React,{Component,} from "react";
 import { connect } from "react-redux";
 import { FormattedMessage } from "react-intl";
 import { Suspense } from "react";
@@ -7,38 +7,27 @@ import {
   getCandidateById,
   getTopicsByCandidateId,
   handleRecruiterDrawerModal,
-  //   getContactDocument,
 } from "../../../../../Candidate/CandidateAction";
 import SettingsAccessibilityIcon from '@mui/icons-material/SettingsAccessibility';
-import AddRecruiterDrawerModal from "./AddRecruiterDrawerModal"
 import { Link } from "../../../../../../Components/Common";
 import dayjs from "dayjs";
 import AddCandidateDateModal from "../Recruitment/AddCandidateDateModal"
-import RecruitmentSwitch from "./RecruitmentSwitch";
 import RecruitmentDetails from "./Child/RecruitmentDetails";
 import RecruitmentStages from "./RecruitmentStages";
 import { SearchOutlined } from '@ant-design/icons';
 import Highlighter from 'react-highlight-words';
 import moment from "moment"
 import {
-
-  Popconfirm,
   Tooltip,
   Dropdown,
   Menu,
   Progress,
-
-  Table, Input, Button,
-  message,
-  Icon,
-  DatePicker,
-  Badge
+ Input, Button,
 } from "antd";
 import { bindActionCreators } from "redux";
-import { withRouter } from "react-router-dom";
 import { StyledTable } from "../../../../../../Components/UI/Antd";
  import {getCandidateRequirement,LinkStatusRecruit,LinkStageRecruit,handleCandidateDateModal} from "../../../../OpportunityAction"
-import { CheckCircleTwoTone, CompassOutlined, EyeInvisibleTwoTone, EyeOutlined, StopTwoTone } from "@ant-design/icons";
+import { CheckCircleTwoTone, EyeInvisibleTwoTone,  StopTwoTone } from "@ant-design/icons";
 import { BundleLoader } from "../../../../../../Components/Placeholder";
 import { MultiAvatar } from "../../../../../../Components/UI/Elements";
 import DocumentsLoadMore from "../DocumentsLoadMore";

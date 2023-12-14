@@ -1,27 +1,16 @@
 import React, { Component, lazy, Suspense } from "react";
-import { Icon } from "antd";
-// import { FileOutlined, PlusOutlined} from '@ant-design/icons';
 import { StyledTabs } from "../../../../../../../Components/UI/Antd";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { handleCandidateEducationModal,handleCandidateTrainingModal,handleCandidateEmploymentModal } from "../../../../../../Candidate/CandidateAction";
-import { ActionIcon } from "../../../../../../../Components/Utils";
 import { TabsWrapper } from "../../../../../../../Components/UI/Layout";
- import LinkedDocuments from "../../../../../../Candidate/Child/CandidateTable/CandidateDetails/CandidateDetailTab/Document/LinkedDocuments";
 import RemarksTable from "../Child/RemarksTable";
 import AddSentimentModal from "../Child/AddSentimentModal" 
  import { handleRemarksModal,handleDocumentUploadModal ,handleSentimentModal} from "../../../../../OpportunityAction";
 import AddRemarksModal from "../Child/AddRemarksModal";
-import AddDocumentModal from "../Child/AddDocumentModal";
-import { Tooltip } from "antd";
-import { FormattedMessage } from "react-intl";
-import { BankOutlined, CustomerServiceOutlined, PlusOutlined } from "@ant-design/icons";
+import {  PlusOutlined } from "@ant-design/icons";
 const AddCandidateEducationModal = lazy(()=>import("../../../../../../Candidate/Child/CandidateTable/CandidateDetails/CandidateDetailTab/Education/AddCandidateEducationModal"));
-const CandidateEducationTable = lazy(()=>import("../../../../../../Candidate/Child/CandidateTable/CandidateDetails/CandidateDetailTab/Education/CandidateEducationTable"));
-const CandidateTrainingTable =lazy(()=>import("../../../../../../Candidate/Child/CandidateTable/CandidateDetails/CandidateDetailTab/Training/CandidateTrainingTable"));
 const AddCandidateTrainingModal =lazy(()=>import("../../../../../../Candidate/Child/CandidateTable/CandidateDetails/CandidateDetailTab/Training/AddCandidateTrainingModal"));
-const CandidateEmploymentTable =lazy(()=>import("../../../../../../Candidate/Child/CandidateTable/CandidateDetails/CandidateDetailTab/Employment/CandidateEmploymentTable"));
-
 const AddCandidateEmploymentModal =lazy(()=>import("../../../../../../Candidate/Child/CandidateTable/CandidateDetails/CandidateDetailTab/Employment/AddCandidateEmploymentModal"));
 const TabPane = StyledTabs.TabPane;
 
