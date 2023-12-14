@@ -743,4 +743,9 @@ export const getInvestorDetailsById = (investorId) => (dispatch) => {
         });
       });
   };
+  export const ClearReducerDataOfInvestor = () => (dispatch) => {
+    dispatch({
+      type: types.HANDLE_CLAER_REDUCER_DATA_INVESTOR,
+    });
+  };
   

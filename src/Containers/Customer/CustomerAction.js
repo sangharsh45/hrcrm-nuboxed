@@ -2245,5 +2245,11 @@ export const getAllCustomerByCloser = (userId, startDate, endDate) => (
       });
   };
 
+  export const ClearReducerDataOfCustomer = () => (dispatch) => {
+    dispatch({
+      type: types.HANDLE_CLAER_REDUCER_DATA_CUSTOMER,
+    });
+  };
+
   
  

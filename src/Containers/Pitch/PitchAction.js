@@ -772,3 +772,9 @@ export const handlePitchConvertModal = (modalProps) => (dispatch) => {
     payload: modalProps,
   });
 };
+
+export const ClearReducerDataOfPitch = () => (dispatch) => {
+  dispatch({
+    type: types.HANDLE_CLAER_REDUCER_DATA_PITCH,
+  });
+};
