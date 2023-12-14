@@ -1,16 +1,13 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import ReactSpeech from "../../../../../../../Components/ReactSpeech/ReactSpeech";
-import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
-
-import { Button ,Tooltip} from "antd";
+import  { useSpeechRecognition } from 'react-speech-recognition';
+import { Button } from "antd";
 import { Formik, Form, Field } from "formik";
 import { FormattedMessage } from "react-intl";
 import { Spacer } from "../../../../../../../Components/UI/Elements";
 import { FlexContainer } from "../../../../../../../Components/UI/Layout";
 import { SelectComponent } from "../../../../../../../Components/Forms/Formik/SelectComponent";
-import { TextareaComponent } from "../../../../../../../Components/Forms/Formik/TextareaComponent";
 import { InputComponent } from "../../../../../../../Components/Forms/Formik/InputComponent";
 import { addRemark } from "../../../../../OpportunityAction";
 import * as Yup from "yup";

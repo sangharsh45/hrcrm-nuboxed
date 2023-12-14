@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import { FlexContainer } from "../../../../../Components/UI/Layout";
 import { SubTitle } from "../../../../../Components/UI/Elements";
-import { Tooltip} from "antd";
-import { ActionIcon } from "../../../../../Components/Utils";
 class OpportunityReportDetails extends Component {
   render() {
     console.log(this.props.opportunity);

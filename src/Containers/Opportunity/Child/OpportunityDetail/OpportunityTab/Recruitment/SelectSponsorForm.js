@@ -1,18 +1,12 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React, { } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { Button, message, Input, Switch } from "antd";
+import { Button, message,  } from "antd";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 import { FormattedMessage } from "react-intl";
-import dayjs from "dayjs";
-import { Spacer, StyledLabel } from "../../../../../../Components/UI/Elements";
+import { Spacer, } from "../../../../../../Components/UI/Elements";
 import { SelectComponent } from "../../../../../../Components/Forms/Formik/SelectComponent";
-import {
-  getContactListByOpportunityId,
-  updateRecruitment,
-  sponsorSwitch,
-} from "../../../../OpportunityAction";
 import { FlexContainer } from "../../../../../../Components/UI/Layout";
 
 /**

@@ -1,10 +1,4 @@
 import React, { Component } from "react";
-import {
-  Title,
-  SubTitle,
-  MultiAvatar,
-} from "../../../../../../../../Components/UI/Elements";
-
  import CandidateCatagory from "./CandidateCatagory";
 class CandidateCatagoryView extends Component {
   render() {

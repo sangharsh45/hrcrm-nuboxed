@@ -1,13 +1,13 @@
 import React, { Component, lazy, Suspense } from "react";
 import { connect } from "react-redux";
-import { Route, Switch, Redirect } from "react-router-dom";
-import axios from "axios";
+import { Route, Switch } from "react-router-dom";
 import "./App.css";
 import { BundleLoader } from "./Components/Placeholder";
 import PrivateRoute from "./Helpers/Auth/PrivateRoute";
 import AppErrorBoundary from "./Helpers/ErrorBoundary/AppErrorBoundary";
-import { Offline, Online } from "react-detect-offline";
 import AppLoginMessage from "./Containers/Auth/AppLoginMessage";
+import OnBoardOrganizationPage from "./Containers/Auth/OnBoardOrganizationPage";
+import OnBoardUserPage from "./Containers/Auth/OnBoardUserPage";
 
 
 /**
@@ -54,6 +54,8 @@ class App extends Component {
                 component={ForgotPasswordVerification}
               />
               <Route exact path="/setPassword" component={SetPassword} />
+              {/* <Route exact path="/onboardUser" component={OnBoardUserPage}  /> */}
+              <Route exact path="/onboard" component={OnBoardOrganizationPage} />
               <Route exact path="/forgotPassword" component={ForgotPassword} />
               
               {fetchingUserDetails ? (

@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { Icon } from "antd";
 import { FormattedMessage } from "react-intl";
 import DownloadIcon from '@mui/icons-material/Download';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -13,18 +12,10 @@ import {
   StyledPopconfirm,
 } from "../../../../../../Components/UI/Antd";
 import {
-  MultiAvatar,
-  SubTitle,
-} from "../../../../../../Components/UI/Elements";
-import { Link } from "../../../../../../Components/Common";
-import {
   getOpportunityDocument,
   deleteDocument,
 } from "../../../../OpportunityAction";
-
 import { elipsize } from "../../../../../../Helpers/Function/Functions";
-import APIFailed from "../../../../../../Helpers/ErrorBoundary/APIFailed";
-import { DeleteOutlined, DownloadOutlined } from "@ant-design/icons";
 
 class LinkedDocuments extends Component {
   componentDidMount() {

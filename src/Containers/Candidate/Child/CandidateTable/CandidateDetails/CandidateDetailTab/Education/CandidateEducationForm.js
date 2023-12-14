@@ -1,21 +1,18 @@
-import React, { lazy, Suspense, Component } from "react";
+import React, {  Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { Button, Switch, Tooltip, Icon } from "antd";
-import { Formik, Form, Field, FieldArray, FastField } from "formik";
+import { Button, Tooltip,  } from "antd";
+import { Formik, Form, Field,  FastField } from "formik";
 import {
   Spacer,
   StyledLabel,
 } from "../../../../../../../Components/UI/Elements";
 import { InputComponent } from "../../../../../../../Components/Forms/Formik/InputComponent";
-import { TextareaComponent } from "../../../../../../../Components/Forms/Formik/TextareaComponent";
 import * as Yup from "yup";
 import { FlexContainer } from "../../../../../../../Components/UI/Layout";
 import DragableUpload from "../../../../../../../Components/Forms/Formik/DragableUpload";
 import { SelectComponent } from "../../../../../../../Components/Forms/Formik/SelectComponent";
-import { DatePicker } from "../../../../../../../Components/Forms/Formik/DatePicker";
 import ButtonGroup from "antd/lib/button/button-group";
-import dayjs from "dayjs";
 import { FormattedMessage } from "react-intl";
 import { addCandidateEducationDetails } from "../../../../../CandidateAction";
 import SearchSelect from "../../../../../../../Components/Forms/Formik/SearchSelect";

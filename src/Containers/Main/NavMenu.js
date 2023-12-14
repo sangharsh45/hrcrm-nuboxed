@@ -395,7 +395,7 @@ function NavMenu(props) {
         {/* )}  */}
         <hr/>
         {/* Talent */}
-       {/* {user.talentAccessInd === true && ( */}
+       {user.talentAccessInd === true && user.recruitOppsInd === true &&  (
             <Menu.Item key="/candidate" style={{ height: "27px", paddingLeft: "1rem" }}>
               <Link to="/candidate">
           
@@ -414,10 +414,10 @@ function NavMenu(props) {
                 </span>
               </Link>
             </Menu.Item>
-          {/* )}  */}
+          )}  
         {/*Talent*/}
         {/*Requirement*/}
-        {/* {user.requirementAccessInd === true && ( */}
+        {user.requirementAccessInd === true && user.recruitOppsInd === true &&  (
           <Menu.Item key="/requirement" style={{ height: "27px", paddingLeft: "1rem" }}>
             <Link to="/requirement">
 
@@ -435,6 +435,7 @@ function NavMenu(props) {
               </span>
             </Link>
           </Menu.Item>
+           )}
           {user.requirementAccessInd === true && user.recruitOppsInd === true &&  (
          <Menu.Item key="/project" style={{ height: "27px", paddingLeft: "1rem" }}>
               <Link to="/project">
@@ -765,7 +766,7 @@ function NavMenu(props) {
                  </Link> 
                 </Menu.Item>
                 )} 
-
+  {user.collectionAccessInd === true && user.recruitOppsInd === true &&  (
 
         <Menu.Item key="/collection" style={{ height: "27px", paddingLeft: "1rem" }}>
           <Link to="/collection">
@@ -776,7 +777,7 @@ function NavMenu(props) {
           </Link>
         </Menu.Item>
 
-
+  )}
 
         
         {/* {user.imInd === true  && ( */}
@@ -890,7 +891,7 @@ function NavMenu(props) {
            </SubMenu> 
      )}  */}
         <hr />
-        {user.userAccessInd === true && (
+        {user.userAccessInd === true || user.role === "ADMIN"  && (
 
           <Menu.Item key="/employees" style={{ height: "27px", paddingLeft: "1rem" }}>
             <Link to="/Employees">
@@ -912,7 +913,7 @@ function NavMenu(props) {
           </Menu.Item>
         )}
 
-        <Menu.Item key="/plant" style={{ height: "27px", paddingLeft: "1rem" }}>
+        {/* <Menu.Item key="/plant" style={{ height: "27px", paddingLeft: "1rem" }}>
           <Link to="/plant">
             <FactoryIcon
               style={{ fontSize: "large" }}
@@ -923,7 +924,7 @@ function NavMenu(props) {
             />
             </span>
           </Link>
-        </Menu.Item>
+        </Menu.Item> */}
         {user.locationAccessInd === true && (
 
           <Menu.Item key="/location" style={{ height: "27px", paddingLeft: "1rem" }}>

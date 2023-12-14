@@ -1,15 +1,13 @@
-import React, { Component, lazy } from "react";
+import React, { Component, } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { FormattedMessage } from "react-intl";
 import HelpIcon from "@mui/icons-material/Help";
 import SkillBarChatModal from "../../OpportunityTab/Recruitment/Child/SkillBarChartModal";
 import AddRequirementModal from "./AddRequirementModal";
-import RecruitmentStages from "./RecruitmentStages";
 import DeleteIcon from '@mui/icons-material/Delete';
 import { MultiAvatar2 } from "../../../../../../Components/UI/Elements";
 import AddRequirementDetailModal from "../Recruitment/AddRequirementDetailModal";
-import { Link } from "../../../../../../Components/Common";
 import {
   StyledTable,
   StyledPopconfirm,
@@ -54,19 +52,14 @@ import { CurrencySymbol } from "../../../../../../Components/Common";
 import EditRecruitForm from "./EditRecruitForm";
 import { Suspense } from "react";
 import { elipsize } from "../../../../../../Helpers/Function/Functions";
-import RecruitmentSwitch from "./RecruitmentSwitch";
-import RecruitmentSwitchSponsor from "./RecruitmentSwitchSponsor";
 import SelectSponsorForm from "./SelectSponsorForm";
 import {
   addRecruitProProfile,
   deleteRequirementData,
 } from "../../../../OpportunityAction";
-import { map } from "lodash";
 import PsychologyAltIcon from "@mui/icons-material/PsychologyAlt";
 import SubTableClickCandidate from "../Recruitment/SubTableClickCandidate";
 import {
-  DeleteOutlined,
-  EditOutlined,
   EyeInvisibleOutlined,
   EyeOutlined,
   SearchOutlined,
@@ -74,7 +67,6 @@ import {
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import Highlighter from "react-highlight-words";
 import LockOpenIcon from "@mui/icons-material/LockOpen";
-import { getNotesListByPartnerId } from "../../../../../Partner/PartnerAction";
 import RecruitmentEmailDrawerModal from "./Child/RecruitmentEmailDrawerModal";
 
 // const CandidateDetailsView =lazy(()=>import("../../../../../Candidate/Child/CandidateTable/CandidateDetails/CandidateDetailsView"));

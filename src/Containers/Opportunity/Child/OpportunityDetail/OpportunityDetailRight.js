@@ -2,12 +2,9 @@ import React, { Component, lazy, Suspense } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import OpportunityReportCard from "./OpportunityCards/OpportunityReportCard"
-// import OpportunityAboutCard from "./OpportunityCards/OpportunityAboutCard";
 import OpportunityAboutViewCard from "./OpportunityCards/OpportunityAboutViewCard";
 import OpportunityAboutCard from "./OpportunityCards/OpportunityAboutCard";
-const OpportunityDetailTab = lazy(() =>
-  import("./OpportunityTab/OpportunityDetailTab")
-);
+
 
 class OpportunityDetailRight extends Component {
   render() {
