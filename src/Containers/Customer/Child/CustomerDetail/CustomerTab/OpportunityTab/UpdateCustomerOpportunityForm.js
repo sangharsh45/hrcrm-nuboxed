@@ -1,17 +1,12 @@
-import React, { Component,useState, useMemo ,useEffect} from "react";
+import React, {useState ,useEffect} from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { FormattedMessage } from "react-intl";
 import { Button } from "antd";
-import { Formik, Form, Field, FieldArray, FastField } from "formik";
+import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
-import { base_url } from "../../../../../../Config/Auth";
 import { Spacer,StyledLabel } from "../../../../../../Components/UI/Elements";
-import Clearbit from "../../../../../../Components/Forms/Autocomplete/Clearbit";
-import LazySelect from "../../../../../../Components/Forms/Formik/LazySelect";
 import SearchSelect from "../../../../../../Components/Forms/Formik/SearchSelect";
-import AddressFieldArray from "../../../../../../Components/Forms/Formik/AddressFieldArray";
-import ProgessiveImage from "../../../../../../Components/Utils/ProgressiveImage";
 import { updateCustomerOpportunity } from "../../../../CustomerAction";
 import { FlexContainer } from "../../../../../../Components/UI/Layout";
 import { TextareaComponent } from "../../../../../../Components/Forms/Formik/TextareaComponent";
@@ -20,8 +15,7 @@ import { SelectComponent } from "../../../../../../Components/Forms/Formik/Selec
 import { DatePicker } from "../../../../../../Components/Forms/Formik/DatePicker";
 import dayjs from "dayjs";
 import { Fragment } from 'react'
-import { Listbox, Transition } from '@headlessui/react'
-import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid'
+import { Listbox } from '@headlessui/react'
 import {
   getAllSalesList, getWorkflow, getStages,
 } from "../../../../../Opportunity/OpportunityAction";

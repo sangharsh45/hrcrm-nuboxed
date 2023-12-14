@@ -4,12 +4,9 @@ import { bindActionCreators } from "redux";
 import { Button } from "antd";
 import SearchSelect from "../../../../../../Components/Forms/Formik/SearchSelect";
 import { FormattedMessage } from "react-intl";
-import { FlexContainer } from "../../../../../../Components/UI/Layout";
-import { MainWrapper, Spacer } from "../../../../../../Components/UI/Elements";
+import {  Spacer } from "../../../../../../Components/UI/Elements";
 import { Formik, Form, Field, FastField } from "formik";
-import { SelectComponent } from "../../../../../../Components/Forms/Formik/SelectComponent";
 import { InputComponent } from "../../../../../../Components/Forms/Formik/InputComponent";
-import dayjs from "dayjs";
 import { DatePicker } from "../../../../../../Components/Forms/Formik/DatePicker";
 
 import * as Yup from "yup";

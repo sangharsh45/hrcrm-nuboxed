@@ -3,17 +3,12 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Tooltip } from "antd";
 import ReceiptIcon from '@mui/icons-material/Receipt';
-import TransferWithinAStationIcon from '@mui/icons-material/TransferWithinAStation';
 import { FormattedMessage } from "react-intl";
 import LightbulbIcon from '@mui/icons-material/Lightbulb';
 import { PlusOutlined } from "@ant-design/icons";
-import NoteAltIcon from "@mui/icons-material/NoteAlt";
 import { StyledTabs } from "../../../../../Components/UI/Antd";
 import { TabsWrapper } from "../../../../../Components/UI/Layout";
-import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
 import InsertDriveFileIcon from '@mui/icons-material/InsertDriveFile';
-import MicIcon from '@mui/icons-material/Mic';
-import PieChartIcon from '@mui/icons-material/PieChart';
 import ContactsIcon from '@mui/icons-material/Contacts';
 import {
   handleDocumentUploadModal,
@@ -22,7 +17,6 @@ import {
   handleCustomerOpportunityModal,
   handleCustomerProjectDrawer,
   handleCustomerContactModal,
-  //handleCustomerCommercialsModal,
   handleRecruitModal,
   handlefileRecruitModal,
   handleTagProfileModal,
@@ -31,11 +25,7 @@ import {
   handleCustomerReactSpeechModal,
 } from "../../../CustomerAction";
 import ReactCustomerSpeechModal from "../ReactCustomerSpeechModal";
-import CommercialsForm from "./Commercials/CommercialsForm";
-import RecruitmentFileTable from "./Recruitment/Child/RecruitmentFileTable";
-import InitiativeForm from "./Initiative/InitiativeForm";
 import AddProjectDrawer from "./ProjectTab/AddProjectDrawer";
-import LinkedProject from "./ProjectTab/LinkedProject";
 import AddCustomerActivityModal from "../AddCustomerActivityModal";
 import CustomerActivityTable from "../CustomerActivityTable";
 const LinkedDocuments = lazy(() => import("./Document/LinkedDocuments"));
@@ -46,20 +36,11 @@ const AddCustomerContactModal = lazy(() =>
 const AddCustomerOpportunityModal = lazy(() =>
   import("./OpportunityTab/AddCustomerOpportunityModal")
 );
-const LinkedNotes = lazy(() => import("./Notes/LinkedNotes"));
 const LinkedOpportunity = lazy(() =>
   import("./OpportunityTab/LinkedOpportunity")
 );
 const LinkedContact = lazy(() => import("./ContactTab/LinkedContact"));
-const RecruitmentTable = lazy(() => import("./Recruitment/RecruitmentTable"));
-const RecruitProJumpstart = lazy(() =>
-  import("../../RecruitProJumpstart/RecruitProJumpstart")
-);
-const SummaryTable = lazy(() => import("./Recruitment/Child/SummaryTable"));
 const AddRecruitModal = lazy(() => import("./Recruitment/AddRecruitModal"));
-const AddFileRecruitModal = lazy(() =>
-  import("./Recruitment/Child/AddFileRecruitModal")
-);
 const AddTagProfileModal = lazy(() =>
   import("./Recruitment/AddTagProfileModal")
 );

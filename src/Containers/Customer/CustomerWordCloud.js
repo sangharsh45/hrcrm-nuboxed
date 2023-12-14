@@ -1,16 +1,10 @@
-import Item from "antd/lib/list/Item";
-import React, { useEffect, useState ,useMemo} from "react";
+
+import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import {
-  //   getCustomerDetailsById,
-  // getCustomerDocument,
   getCustomerKeySkill,
-
-    // handleCustomerDrawerModal
-
   } from "../Customer/CustomerAction";
-// import { StyledSelect } from "../../../../../../Components/UI/Antd";
 
 function CustomerWordCloud(props) {
   useEffect(() => {

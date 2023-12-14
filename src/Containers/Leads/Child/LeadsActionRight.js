@@ -4,7 +4,6 @@ import { bindActionCreators } from "redux";
 import { withRouter } from "react-router-dom";
 import { Button } from "antd";
 import { StyledSelect } from "../../../Components/UI/Antd";
-const LeadShareForm=lazy(()=> import("../Child/LeadShareForm"));
 const Option = StyledSelect.Option;
 
 class LeadsActionRight extends React.Component {

@@ -18,14 +18,11 @@ import SearchSelect from "../../../../Components/Forms/Formik/SearchSelect";
 import { InputComponent } from "../../../../Components/Forms/Formik/InputComponent";
 import { SelectComponent } from "../../../../Components/Forms/Formik/SelectComponent";
 import { DatePicker } from "../../../../Components/Forms/Formik/DatePicker";
-import { TimePicker } from "../../../../Components/Forms/Formik/TimePicker";
 import {
-  // addTask,
   updateTask,
   handleTaskModal,
   getCustomerTask,
   getProjectTaskList,
-
   getCandidateTaskList,
   getCandidateTaskFilterList,
   deleteTask,
@@ -45,7 +42,7 @@ import Upload from "../../../../Components/Forms/Formik/Upload";
 import DragableUpload from "../../../../Components/Forms/Formik/DragableUpload";
 import { Select } from "antd";
 import moment from "moment";
-import { Listbox, Transition } from '@headlessui/react';
+import { Listbox, } from '@headlessui/react';
 
 const { Option } = Select;
 

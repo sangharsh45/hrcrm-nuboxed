@@ -1,17 +1,15 @@
-import React, { useEffect, useState, useMemo } from "react";
-import { StyledPopconfirm, StyledTable } from "../../../../Components/UI/Antd";
+import React, { useEffect, useState, } from "react";
+import { StyledPopconfirm, } from "../../../../Components/UI/Antd";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import moment from "moment";
 import OpenInBrowserIcon from '@mui/icons-material/OpenInBrowser';
-import ExploreIcon from "@mui/icons-material/Explore";
 import { getSectors } from "../../../Settings/Sectors/SectorsAction";
 import { MultiAvatar, SubTitle } from "../../../../Components/UI/Elements";
 import "jspdf-autotable";
 import { OnlyWrapCard } from '../../../../Components/UI/Layout'
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
-import Highlighter from "react-highlight-words";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { getCountries } from "../../../Auth/AuthAction";
 import { Link } from "../../../../Components/Common";
@@ -26,14 +24,10 @@ import {
   reInstateJunkLeads
 } from "../../../Leads/LeadsAction";
 import ReactCountryFlag from 'react-country-flag';
-import { MailOutlined, SearchOutlined } from "@ant-design/icons";
-import { Button, Tooltip, Input } from "antd";
+import { Button, Tooltip,  } from "antd";
 import { FormattedMessage } from "react-intl";
-import styled from "styled-components";
-import LeadsDetailView from "./LeadsDetailView";
 import UpdateLeadsModal from "../UpdateLeads/UpdateLeadsModal";
 import AddLeadsEmailDrawerModal from "../UpdateLeads/AddLeadsEmailDrawerModal";
-import { BundleLoader } from "../../../../Components/Placeholder";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
 import InfiniteScroll from "react-infinite-scroll-component";
 

@@ -1,6 +1,5 @@
 import React from "react";
 import { get } from "lodash";
-//import dayjs from "dayjs";
 
 import { StyledDatePicker } from "../../UI/Antd";
 import { ValidationError, StyledLabel } from "../../UI/Elements";

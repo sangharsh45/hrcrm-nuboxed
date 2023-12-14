@@ -1,8 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import dayjs from "dayjs";
 import { SubTitle, Spacer } from "../UI/Elements";
-import Link from "./Link";
 import moment from "moment";
 const NotesWrapper = styled.div``;
 export default function SingleNote(props) {

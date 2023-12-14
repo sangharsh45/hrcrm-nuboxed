@@ -1,5 +1,4 @@
-import React, { Component, lazy, Suspense, useEffect } from "react";
-import { BellOutlined, FilterOutlined } from "@ant-design/icons";
+import React, { lazy, } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
@@ -11,7 +10,6 @@ import { ResponsiveCard } from "../Layout";
 import { handleUpdateCustomerModal } from "../../../Containers/Customer/CustomerAction";
 import { MultiAvatar1 } from "../Elements";
 import { Title,  } from "./";
-import CustomerDetailView from "../../../Containers/Customer/Child/CustomerDetail/CustomerCards/CustomerDetailView";
 const UpdateCustomerModal = lazy(() =>
   import(
     "../../../Containers/Customer/Child/UpdateCustomer/UpdateCustomerModal"

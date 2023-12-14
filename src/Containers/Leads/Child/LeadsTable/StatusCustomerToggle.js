@@ -1,14 +1,12 @@
-import React, { Component } from "react";
+import React, { } from "react";
 import { Switch, Popconfirm, } from "antd";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import {
     convertCustomerStatus,
     getLeads,
-    handleLeadsConfirmationModal
-    
+    handleLeadsConfirmationModal    
 } from "../../LeadsAction";
-import AddConfirmLedsStatusModal from "./AddConfirmLedsStatusModal";
 
 
 

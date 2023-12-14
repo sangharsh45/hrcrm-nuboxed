@@ -3,11 +3,10 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import {
   getFunctions,
-
 } from "../../../Containers/Settings/Function/FunctionAction";
 import { StyledCreatable, StyledLabel } from "../../UI/Elements";
 import { FlexContainer } from "../../UI/Layout";
-import { functions, get, uniqBy } from "lodash";
+import { get, uniqBy } from "lodash";
 import ValidationError from "../../UI/Elements/ValidationError";
 import {
   getContactListByUserId,
@@ -17,7 +16,6 @@ import { getAllCandidateListByUserId } from "../../../Containers/Candidate/Candi
 import { getAllUsersByOrganizationId } from "../../../Containers/Call/CallAction";
 import { getCountries, getCurrency } from "../../../Containers/Auth/AuthAction";
 import { getTimeZone } from "../../../Containers/Auth/AuthAction";
-import { callReducer } from "../../../Containers/Call/CallReducer";
 import { getDocuments } from "../../../Containers/Settings/Documents/DocumentsAction";
 import { getSectors } from "../../../Containers/Settings/Sectors/SectorsAction";
 import { getCustomerListByUserId } from "../../../Containers/Customer/CustomerAction";
@@ -26,7 +24,6 @@ import { getPartnerListByUserId, getAllPartnerListByUserId } from "../../../Cont
 import {
   getDesignations,
 } from "../../../Containers/Settings/Designation/DesignationAction";
-import { candidateReducer } from "../../../Containers/Candidate/CandidateReducer";
 import { getTasks } from "../../../Containers/Settings/Task/TaskAction";
 import { getExpenses } from "../../../Containers/Settings/Expense/ExpenseAction";
 import { getEvents } from "../../../Containers/Settings/Event/EventAction";

@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useMemo, lazy } from "react";
+import React, { useEffect, useState, lazy } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
@@ -16,7 +16,6 @@ import {
   MultiAvatar2,
   SubTitle,
 } from "../../../../Components/UI/Elements";
-import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import { Link } from "../../../../Components/Common";
 import {
   getCustomerListByUserId,
@@ -36,10 +35,8 @@ import {
 import NoteAltIcon from "@mui/icons-material/NoteAlt";
 import AddCustomerDrawerModal from "../../AddCustomerDrawerModal";
 import { getAllCustomerEmployeelist } from "../../../Employees/EmployeeAction";
-import APIFailed from "../../../../Helpers/ErrorBoundary/APIFailed";
 import AddCustomerEmailDrawerModal from "../UpdateCustomer/AddCustomerEmailDrawerModal";
 import ReactCountryFlag from 'react-country-flag';
-import { BundleLoader } from "../../../../Components/Placeholder";
 import AddCustomerNotesDrawerModal from "../CustomerDetail/AddCustomerNotesDrawerModal";
 import CustomerPulseDrawerModal from "./CustomerPulseDrawerModal";
 

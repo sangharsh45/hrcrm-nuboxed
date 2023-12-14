@@ -1,9 +1,6 @@
-import React, { Component, Suspense } from "react";
-import { BundleLoader } from "../../../../Components/Placeholder";
-
+import React, { Component, } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-// import LinkedContactNotes from "../Child/ContactDetail/ContactTab/LinkedContactNotes";
 import { StyledDrawer } from "../../../../Components/UI/Antd";
 
 

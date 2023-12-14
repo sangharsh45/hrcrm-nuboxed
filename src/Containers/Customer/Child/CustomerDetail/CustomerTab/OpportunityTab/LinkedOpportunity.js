@@ -9,7 +9,6 @@ import InfoIcon from '@mui/icons-material/Info';
 import { StyledTable } from "../../../../../../Components/UI/Antd";
 import {
   MultiAvatar,
-  SubTitle,
 } from "../../../../../../Components/UI/Elements";
 import BorderColorIcon from '@mui/icons-material/BorderColor';
 import {

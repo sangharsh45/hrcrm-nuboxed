@@ -1,14 +1,11 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { Button, Timeline } from "antd";
-//import { BorderBox } from "../../../../Components/UI/Layout";
+import { Timeline } from "antd";
 import { getNotesListByLeadsId } from "../LeadsAction";
-
  import NoteFile from "./NoteFile";
 import { BundleLoader } from "../../../Components/Placeholder";
 import SingleNote from "./SingleNote";
-import { FormattedMessage } from "react-intl";
 
 class NotesForm extends Component {
   componentDidMount() {

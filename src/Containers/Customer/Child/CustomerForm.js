@@ -1,13 +1,13 @@
-import React, { Component,useState, useMemo ,useEffect} from "react";
+import React, {useState ,useEffect} from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { Button, Switch, Checkbox } from "antd";
+import { Button } from "antd";
 import { getSectors } from "../../../Containers/Settings/Sectors/SectorsAction";
 import { FormattedMessage } from "react-intl";
 import { Formik, Form, Field, FieldArray, FastField } from "formik";
 import * as Yup from "yup";
 import { getAllCustomerEmployeelist } from "../../Employees/EmployeeAction";
-import { HeaderLabel, StyledLabel } from "../../../Components/UI/Elements";
+import { HeaderLabel, } from "../../../Components/UI/Elements";
 import { Spacer } from "../../../Components/UI/Elements";
 import SearchSelect from "../../../Components/Forms/Formik/SearchSelect";
 import AddressFieldArray from "../../../Components/Forms/Formik/AddressFieldArray";
@@ -17,8 +17,7 @@ import {
 } from "../CustomerAction";
 import { getCrm} from "../../Leads/LeadsAction";
 import { getAllSalesList } from "../../Opportunity/OpportunityAction"
-import { Listbox, Transition } from '@headlessui/react'
-import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid'
+import { Listbox } from '@headlessui/react'
 import { TextareaComponent } from "../../../Components/Forms/Formik/TextareaComponent";
 import { InputComponent } from "../../../Components/Forms/Formik/InputComponent";
 import { SelectComponent } from "../../../Components/Forms/Formik/SelectComponent";

@@ -1,8 +1,8 @@
-import React, { Component,useState,useEffect } from "react";
+import React, {useState,useEffect } from "react";
 import { connect } from "react-redux";
 import { FormattedMessage } from "react-intl";
 import { bindActionCreators } from "redux";
-import { Button ,Switch,Checkbox} from "antd";
+import { Button} from "antd";
 import ProgressiveImage from "../../../../Components/Utils/ProgressiveImage";
 import ClearbitImage from "../../../../Components/Forms/Autocomplete/ClearbitImage";
 import AddressFieldArray from "../../../../Components/Forms/Formik/AddressFieldArray";
@@ -15,11 +15,9 @@ import { getSectors } from "../../../../Containers/Settings/Sectors/SectorsActio
 import { HeaderLabel, StyledLabel } from "../../../../Components/UI/Elements";
 import { Spacer } from "../../../../Components/UI/Elements";
 import SearchSelect from "../../../../Components/Forms/Formik/SearchSelect";
-import { FlexContainer } from "../../../../Components/UI/Layout";
 import { TextareaComponent } from "../../../../Components/Forms/Formik/TextareaComponent";
 import { InputComponent } from "../../../../Components/Forms/Formik/InputComponent";
-import { SelectComponent } from "../../../../Components/Forms/Formik/SelectComponent";
-import { Listbox, Transition } from '@headlessui/react'
+import { Listbox, } from '@headlessui/react'
 import { getCrm} from "../../../Leads/LeadsAction";
 
 //yup validation scheme for creating a account
