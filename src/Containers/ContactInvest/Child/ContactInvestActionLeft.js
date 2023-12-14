@@ -8,14 +8,15 @@ import SpeechRecognition, {
   useSpeechRecognition,
 } from "react-speech-recognition";
 import PeopleIcon from '@mui/icons-material/People';
-import HandshakeIcon from "@mui/icons-material/Handshake";
 import { Input, Menu, Tooltip, Radio } from "antd";
 import { StyledSelect } from "../../../Components/UI/Antd";
 import { Button, Badge } from "antd";
 import {
   getContactInvest,
   getTeamContactInvest,
-  searchInvestorContactName
+  searchInvestorContactName,
+  getContactInvestByUserId,
+  ClearReducerDataOfContactInvest
 } from "../ContactInvestAction";
 
 const Option = StyledSelect.Option;
@@ -24,6 +25,25 @@ const { Search } = Input;
 const ContactInvestActionLeft = (props) => {
   const[filter,setFilter]=useState("creationdate")
   const [page, setPage] = useState(0);
+  const [currentData, setCurrentData] = useState("");
+  const handleChange = (e) => {
+    setCurrentData(e.target.value);
+
+    if (e.target.value.trim() === "") {
+      setPage(page + 1);
+      props.getContactInvestByUserId(props.userId,page,"creationdate");
+      props.ClearReducerDataOfContactInvest()
+    }
+  };
+  const handleSearch = () => {
+    if (currentData.trim() !== "") {
+      // Perform the search
+      props.searchInvestorContactName(currentData);
+    } else {
+      console.error("Input is empty. Please provide a value.");
+    }
+  };
+
   const suffix = (
     <AudioOutlined
       onClick={SpeechRecognition.startListening}
@@ -139,16 +159,17 @@ const ContactInvestActionLeft = (props) => {
       </Tooltip>
    
       <div class=" w-72 md:ml-4 max-sm:w-16 ml-0">
-        <Input
-          placeholder="Search by Name or Company"
-          class="w-96"
-          suffix={suffix}
-       
-          onChange={(e) => props.handleChange(e)}
-          value={props.currentData}
-        />
+   
+          <Input
+       placeholder="Search by Name or Company"
+       class="w-96"
+            suffix={suffix}
+            onPressEnter={handleSearch}  
+            onChange={handleChange}
+            // value={currentData}
+          />
       </div>
-      <Button
+      {/* <Button
         type={props.currentData ? "primary" : "danger"}
         onClick={() => {
           props.searchInvestorContactName(props.currentData);
@@ -164,7 +185,7 @@ const ContactInvestActionLeft = (props) => {
         }}
       >
         <FormattedMessage id="app.clear" defaultMessage="Clear" />
-      </Button>
+      </Button> */}
       <div style={{ width: "15%" }}>
           <StyledSelect placeholder="Sort"  onChange={(e)  => props.handleFilterChange(e)}>
           <Option value="CreationDate">CreationDate</Option>
@@ -186,6 +207,8 @@ const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
       getContactInvest,
+      getContactInvestByUserId,
+      ClearReducerDataOfContactInvest,
       getTeamContactInvest,
       searchInvestorContactName
     },

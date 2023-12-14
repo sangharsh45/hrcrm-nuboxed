@@ -284,7 +284,13 @@ export const contactInvestReducer = (state = initialState, action) => {
                   ...state,
                   addingContactinvestActivityTask: false,
                   contactInvestorActivityModal: false,
-                };  
+                }; 
+                
+                case types.HANDLE_CLAER_REDUCER_DATA_CONTACT_INVEST:
+                  return { ...state, 
+                    contactiNVESTbyId: [], 
+                    // deletedTruck: [] 
+                  };
      
       
       default:

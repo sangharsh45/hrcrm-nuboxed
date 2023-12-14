@@ -536,6 +536,12 @@ case types.GET_PITCH_REQUEST:
               case types.HANDLE_PITCH_CONVERT_MODAL:
                 return { ...state, addPitchConvertModal: action.payload };
 
+                case types.HANDLE_CLAER_REDUCER_DATA_PITCH:
+                  return { ...state, 
+                    pitchData: [], 
+                    // deletedTruck: [] 
+                  };
+
     default:
 return state;
 }

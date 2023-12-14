@@ -54,6 +54,11 @@ export const requirementReducer = (state = initialState, action) => {
             fetchingAllRequirementTableError: true,
           };
         
+          case types.HANDLE_CLAER_REDUCER_DATA_REQUIREMENT:
+            return { ...state, 
+              requirementTable: [], 
+              // deletedTruck: [] 
+            };
       default:
         return state;
     }

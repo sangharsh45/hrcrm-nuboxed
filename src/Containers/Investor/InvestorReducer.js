@@ -540,6 +540,12 @@ export const investorReducer = (state = initialState, action) => {
                       fetchingTeamInvestor: false,
                       fetchingTeamInvestorError: true,
                     };
+
+                    case types.HANDLE_CLAER_REDUCER_DATA_INVESTOR:
+                      return { ...state, 
+                        investorsbyId: [], 
+                        // deletedTruck: [] 
+                      };
 default:
       return state;
   }

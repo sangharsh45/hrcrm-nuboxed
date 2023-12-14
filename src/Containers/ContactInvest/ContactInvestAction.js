@@ -436,3 +436,9 @@ export const addContactinvestActivityTask = (task,contactId, cb) => (dispatch, g
       // cb();
     });
 };
+
+export const ClearReducerDataOfContactInvest = () => (dispatch) => {
+  dispatch({
+    type: types.HANDLE_CLAER_REDUCER_DATA_CONTACT_INVEST,
+  });
+};

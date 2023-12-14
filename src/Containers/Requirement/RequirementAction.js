@@ -66,3 +66,9 @@ export const setRequirementViewType = (viewType) => (dispatch) => {
         });
       });
   };
+
+  export const ClearReducerDataOfRequirement = () => (dispatch) => {
+    dispatch({
+      type: types.HANDLE_CLAER_REDUCER_DATA_REQUIREMENT,
+    });
+  };

@@ -2416,6 +2416,12 @@ export const getFilteredEmailContact = (userId) => (dispatch) => {
       });
   };
 
+  export const ClearReducerDataOfCandidate = () => (dispatch) => {
+    dispatch({
+      type: types.HANDLE_CLAER_REDUCER_DATA_CANDIDATE,
+    });
+  };
+
 
 
  

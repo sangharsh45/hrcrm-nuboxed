@@ -1729,7 +1729,11 @@ export const customerReducer = (state = initialState, action) => {
                                                               fetchingTeamCustomer: false,
                                                               fetchingTeamCustomerError: true,
                                                             };
-
+                                                            case types.HANDLE_CLAER_REDUCER_DATA_CUSTOMER:
+                                                              return { ...state, 
+                                                                customerByUserId: [], 
+                                                                // deletedTruck: [] 
+                                                              };
        default:
       return state;
   }

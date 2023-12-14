@@ -1,25 +1,39 @@
-import React, { useEffect } from "react";
+import React, { useEffect,useState } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { FlexContainer } from "../../Components/UI/Layout";
 import { Input } from "antd";
-import { FormattedMessage } from "react-intl";
 import {
 
     inputJobOrderSearch,
-    // inputCandidateSkillDataSearch,
-    // getRecords,
-    //  getAllRecords,
   } from "../Opportunity/OpportunityAction";
+  import {getAllRequirementTable,ClearReducerDataOfRequirement} from "../Requirement/RequirementAction"
+
 import { StyledSelect } from "../../Components/UI/Antd";
-import { AudioOutlined } from '@ant-design/icons';
-import { Button,Tooltip } from "antd";
 const Option = StyledSelect.Option;
 const item = [{ type: "Hot" }, { type: "Warm" }, { type: "Cold" }];
 const { Search } = Input;
 
 const RequirementActionLeft = (props) => {
+  const [currentData, setCurrentData] = useState("");
+  const [pageNo, setPage] = useState(0);
+  const handleChange = (e) => {
+    setCurrentData(e.target.value);
 
+    if (e.target.value.trim() === "") {
+      setPage(pageNo + 1);
+      props.getAllRequirementTable(props.orgId)
+      props.ClearReducerDataOfRequirement()
+    }
+  };
+  const handleSearch = () => {
+    if (currentData.trim() !== "") {
+      // Perform the search
+      props.inputJobOrderSearch(currentData);
+    } else {
+      console.error("Input is empty. Please provide a value.");
+    }
+  };
     useEffect(() => {
         // props.getRecords(props.userId);
         // if (transcript) {
@@ -31,15 +45,23 @@ const RequirementActionLeft = (props) => {
 const{user}=props;
 return (
 <FlexContainer alignItems="center">
-<div style={{ marginLeft: "3px", width:"50%"}}>
-        <Search
+<div class=" w-72 md:ml-4 max-sm:w-16 ml-0">
+<Input
+      placeholder="Search By Job ID"
+       class="w-96"
+            // suffix={suffix}
+            onPressEnter={handleSearch}  
+            onChange={handleChange}
+            // value={currentData}
+          />
+        {/* <Search
           placeholder="Search By Job ID"
           onChange={(e)=>props.handleChange(e)}
           value={props.currentData}
-        />
+        /> */}
       </div>
       &nbsp; 
-      <Button
+      {/* <Button
         type={ props.currentData? "primary" : "danger"}
         onClick={()=> {
           props.inputJobOrderSearch( props.currentData );      
@@ -53,8 +75,8 @@ return (
         onClick={props.handleClear}
       >
         <FormattedMessage id="app.clear" defaultMessage="Clear" />
-        {/* Clear */}
-      </Button>
+      
+      </Button> */}
       
 
 </FlexContainer>
@@ -63,6 +85,7 @@ return (
 
 const mapStateToProps = ({ auth, requirement }) => ({
 //   user: auth.userDetails,
+orgId:auth.userDetails.organizationId,
 //   recordData: candidate.recordData,
 //   userId: auth.userDetails.userId,
 //   recordAllData: candidate.recordAllData,
@@ -72,6 +95,8 @@ const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
       inputJobOrderSearch,
+      getAllRequirementTable,
+      ClearReducerDataOfRequirement
     
       
     },

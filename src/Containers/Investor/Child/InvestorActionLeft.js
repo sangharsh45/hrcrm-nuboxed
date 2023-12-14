@@ -11,7 +11,7 @@ import { AudioOutlined } from "@ant-design/icons";
 import SpeechRecognition, {
   useSpeechRecognition,
 } from "react-speech-recognition";
-import {getInvestor,getInvestorTeam,searchInvestorName} from "../InvestorAction";
+import {getInvestor,ClearReducerDataOfInvestor,getInvestorsbyId,getInvestorTeam,searchInvestorName} from "../InvestorAction";
 import { Input } from "antd";
 
 const Option = StyledSelect.Option;
@@ -19,9 +19,26 @@ const { Search } = Input;
 
 const InvestorActionLeft = (props) => {
   const[filter,setFilter]=useState("creationdate")
-  const [page, setPage] = useState(0);
+  const [currentData, setCurrentData] = useState("");
+  const [pageNo, setPage] = useState(0);
+  const handleChange = (e) => {
+    setCurrentData(e.target.value);
+
+    if (e.target.value.trim() === "") {
+      setPage(pageNo + 1);
+      props.getInvestorsbyId(props.userId, pageNo,"creationdate");
+      props.ClearReducerDataOfInvestor()
+    }
+  };
+  const handleSearch = () => {
+    if (currentData.trim() !== "") {
+      // Perform the search
+      props.searchInvestorName(currentData);
+    } else {
+      console.error("Input is empty. Please provide a value.");
+    }
+  };
   const dummy = ["cloud", "azure", "fgfdg"];
-  function handleChange(data) {}
   const suffix = (
     <AudioOutlined
       onClick={SpeechRecognition.startListening}
@@ -40,8 +57,8 @@ const InvestorActionLeft = (props) => {
   console.log(transcript);
   function  handleFilterChange(data){
     setFilter(data)
-    props.getInvestorsbyId(props.userId, page,data);
-    setPage(page + 1);
+    props.getInvestorsbyId(props.userId, pageNo,data);
+    setPage(pageNo + 1);
   }
 
 // useEffect(() => {
@@ -161,13 +178,12 @@ const InvestorActionLeft = (props) => {
           placeholder="Search by Name, Company"
           class="w-96"
           suffix={suffix}
-          // allowClear
-          // enterButton
-          onChange={(e) => props.handleChange(e)}
-          value={props.currentData}
+            onPressEnter={handleSearch}  
+            onChange={handleChange}
+            // value={currentData}
         />
         </div>
-        <Button
+        {/* <Button
           type={props.currentData ? "primary" : "danger"}
           onClick={() => {
              props.searchInvestorName(props.currentData);
@@ -182,7 +198,7 @@ const InvestorActionLeft = (props) => {
           }}
         >
           <FormattedMessage id="app.clear" defaultMessage="Clear" />
-        </Button>
+        </Button> */}
         <div style={{ width: "25%",marginTop:"0.5rem" }}>
           <StyledSelect placeholder="Sort"  onChange={(e)  => props.handleFilterChange(e)}>
           <Option value="CreationDate">Creation Date</Option>
@@ -198,9 +214,6 @@ const mapStateToProps = ({ investor, auth, candidate }) => ({
   user: auth.userDetails,
   investorRecord:investor.investorRecord,
   investorTeamRecord:investor.investorTeamRecord,
-//   recordData: customer.recordData,
-//   recordCategoryData: customer.recordCategoryData,
-//   recordCategoryDataBlue: customer.recordCategoryDataBlue,
   Candidatesort: candidate.Candidatesort,
   userId: auth.userDetails.userId,
 });
@@ -208,6 +221,8 @@ const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
       getInvestor,
+      ClearReducerDataOfInvestor,
+      getInvestorsbyId,
       getInvestorTeam,
       searchInvestorName
     },

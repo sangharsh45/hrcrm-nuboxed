@@ -1,22 +1,38 @@
 
-import React, { useEffect } from "react";
+import React, { useEffect,useState } from "react";
 import { connect } from "react-redux";
 import { StyledSelect } from "../../../Components/UI/Antd";
 import { bindActionCreators } from "redux";
 import { withRouter } from "react-router-dom";
 import PeopleIcon from '@mui/icons-material/People';
-import TableViewIcon from '@mui/icons-material/TableView';
 import { AudioOutlined } from '@ant-design/icons';
 import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
 import { Button, Input, Tooltip,Tag,Badge } from "antd";
-import { FormattedMessage } from "react-intl";
 import TocIcon from '@mui/icons-material/Toc';
-import {getPitchRecords,getPitchCount,searchPitchName} from "../PitchAction";
-//import {inputLeadsDataSearch,getLeadsRecords,getJunkedLeadsRecords} from "../LeadsAction";
+import {getPitchRecords,getPitch,ClearReducerDataOfPitch,getPitchCount,searchPitchName} from "../PitchAction";
 const { Search } = Input;
 const Option = StyledSelect.Option;
 
 const PitchActionLeft = (props) => {
+  const [currentData, setCurrentData] = useState("");
+  const [pageNo, setPage] = useState(0);
+  const handleChange = (e) => {
+    setCurrentData(e.target.value);
+
+    if (e.target.value.trim() === "") {
+      setPage(pageNo + 1);
+      props.getPitch(props.userId,pageNo,"creationdate");
+      props.ClearReducerDataOfPitch()
+    }
+  };
+  const handleSearch = () => {
+    if (currentData.trim() !== "") {
+      // Perform the search
+      props.searchPitchName(currentData);
+    } else {
+      console.error("Input is empty. Please provide a value.");
+    }
+  };
   const dummy = ["cloud", "azure", "fgfdg"];
   // useEffect(() => {
   //   if (props.viewType === "card") {
@@ -29,9 +45,7 @@ const PitchActionLeft = (props) => {
     props.getPitchCount(props.userId)
     }, [props.userId]);
  
-  function handleChange(data) {
-    
-  }
+ 
   const suffix = (
     <AudioOutlined
       onClick={SpeechRecognition.startListening}
@@ -132,14 +146,13 @@ const PitchActionLeft = (props) => {
             placeholder="Search by Name or Company"
             width={"100%"}
             suffix={suffix}
-            // allowClear
-            // enterButton
-            onChange={(e) => props.handleChange(e)}
-            value={props.currentData}
+            onPressEnter={handleSearch}  
+            onChange={handleChange}
+            // value={currentData}
         
           />
         </div>
-      <Button
+      {/* <Button
           type={props.currentData ? "primary" : "danger"}
           onClick={() => {
             props.searchPitchName(props.currentData);
@@ -155,8 +168,8 @@ const PitchActionLeft = (props) => {
           }}
         >
           <FormattedMessage id="app.clear" defaultMessage="Clear" />
-          {/* Clear */}
-        </Button>
+      
+        </Button> */}
         <div class="w-[22%] mt-1">
           <StyledSelect placeholder="Sort"  onChange={(e)  => props.handleFilterChange(e)}>
            <Option value="CreationDate">Creation Date</Option> 
@@ -176,6 +189,8 @@ const mapStateToProps = ({pitch,auth}) => ({
 });
 const mapDispatchToProps = (dispatch) => bindActionCreators({
   getPitchRecords,
+  ClearReducerDataOfPitch,
+  getPitch,
   getPitchCount,
   searchPitchName
 }, dispatch);

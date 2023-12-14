@@ -17,6 +17,7 @@ import SpeechRecognition, {
 import {
   inputCustomerDataSearch,
   getRecords,
+  ClearReducerDataOfCustomer,
   getCustomerTeamRecords,
   getCategoryRecords,
 } from "../CustomerAction";
@@ -28,8 +29,25 @@ const { Search } = Input;
 const CustomerActionLeft = (props) => {
   const[filter,setFilter]=useState("creationdate")
   const [page, setPage] = useState(0);
+  const [currentData, setCurrentData] = useState("");
   const dummy = ["cloud", "azure", "fgfdg"];
-  function handleChange(data) {}
+  const handleChange = (e) => {
+    setCurrentData(e.target.value);
+
+    if (e.target.value.trim() === "") {
+      setPage(page + 1);
+      props.getCustomerListByUserId(props.userId, page,"creationdate");
+      props.ClearReducerDataOfCustomer()
+    }
+  };
+  const handleSearch = () => {
+    if (currentData.trim() !== "") {
+      // Perform the search
+      props.inputCustomerDataSearch(currentData);
+    } else {
+      console.error("Input is empty. Please provide a value.");
+    }
+  };
   const suffix = (
     <AudioOutlined
       onClick={SpeechRecognition.startListening}
@@ -167,13 +185,21 @@ function  handleFilterChange(data){
       <div class=" flex items-center justify-between"
       >
         <div class=" w-72 max-sm:w-32">
-          <Input
+        <Input
+        placeholder="Search by Name or Sector"
+        width={"100%"}
+            suffix={suffix}
+            onPressEnter={handleSearch}  
+            onChange={handleChange}
+            // value={currentData}
+          />
+          {/* <Input
             placeholder="Search by Name or Sector"
             width={"100%"}
             suffix={suffix}
             onChange={(e) => props.handleChange(e)}
             value={props.currentData}
-          />
+          /> */}
         </div>
         <Button
           type={props.currentData ? "primary" : "danger"}
@@ -183,15 +209,15 @@ function  handleFilterChange(data){
         >
           Submit
         </Button>
-        <Button
+        {/* <Button
           type={props.currentData ? "primary" : "danger"}
           onClick={() => {
             props.handleClear();
           }}
         >
           <FormattedMessage id="app.clear" defaultMessage="Clear" />
-          {/* Clear */}
-        </Button>
+          
+        </Button> */}
         <div class="w-[30%] mt-1">
           <StyledSelect placeholder="Sort"  onChange={(e)  => props.handleFilterChange(e)}>
           <Option value="CreationDate">Creation Date</Option>
@@ -217,6 +243,7 @@ const mapDispatchToProps = (dispatch) =>
     {
       inputCustomerDataSearch,
       getRecords,
+      ClearReducerDataOfCustomer,
       getCustomerTeamRecords,
       getCategoryRecords,
       getCustomerListByUserId
