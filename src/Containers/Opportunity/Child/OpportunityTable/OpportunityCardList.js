@@ -1,25 +1,19 @@
-import React, { useEffect, useState ,useMemo} from "react";
+import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import moment from "moment";
 import { DeleteOutlined } from "@ant-design/icons";
-import MonitorHeartIcon from '@mui/icons-material/MonitorHeart';
 import InfiniteScroll from "react-infinite-scroll-component"
 import { FormattedMessage } from "react-intl";
 import OpportunitySelectStages from "../OpportunityTable/OpportunitySelectStages"
 import styled from 'styled-components';
 import BorderColorIcon from '@mui/icons-material/BorderColor';
-import SearchIcon from '@mui/icons-material/Search';
 import NoteAltIcon from "@mui/icons-material/NoteAlt";
-import LockOpenIcon from '@mui/icons-material/LockOpen';
-import DeleteIcon from '@mui/icons-material/Delete';
-import { Tooltip, Input, Button, Select, Menu, Dropdown, Progress ,Popconfirm} from "antd";
-import { FlexContainer, MainWrapper, ResponsiveCard } from "../../../../Components/UI/Layout";
+import { Tooltip, Select, Menu, Dropdown, Progress ,Popconfirm} from "antd";
+import { FlexContainer, } from "../../../../Components/UI/Layout";
 import { CurrencySymbol,Link } from "../../../../Components/Common";
 import { CheckCircleTwoTone, StopTwoTone } from "@ant-design/icons";
-import { BundleLoader } from "../../../../Components/Placeholder";
-import { StyledTable, StyledPopconfirm } from "../../../../Components/UI/Antd";
-import { MultiAvatar, MultiAvatar2, SubTitle,Title } from "../../../../Components/UI/Elements";
+import { StyledPopconfirm } from "../../../../Components/UI/Antd";
+import { MultiAvatar, MultiAvatar2, SubTitle, } from "../../../../Components/UI/Elements";
 import {
   getOpportunityListByUserId,
   getRecruiterList,
@@ -44,9 +38,7 @@ import {
          getOpportunityForecast
 } from "../../OpportunityAction";
 import AddOpportunityDrawerModal from "../../Child/OpportunityTable/AddOpportunityDrawerModal"
-import OpportunityDetailView from "./OpportunityDetailView";
 import UpdateOpportunityModal from "../UpdateOpportunity/UpdateOpportunityModal";
-import APIFailed from "../../../../Helpers/ErrorBoundary/APIFailed";
 import AddOpportunityNotesDrawerModal from "./AddOpportunityNotesDrawerModal";
 const Option =Select;
 

@@ -14,10 +14,8 @@ import { bindActionCreators } from "redux";
 import AddRecruiterModal from "../OpportunityDetail/OpportunityTab/Recruitment/AddRecruiterModal";
 import AddMonsterModal from "../OpportunityDetail/OpportunityTab/Recruitment/AddMonsterModal";
 import { BundleLoader } from "../../../../Components/Placeholder";
-import { Button, Progress, Tooltip, Icon, Avatar, Input, Badge } from "antd";
+import { Button, Progress, Tooltip, Avatar, Input, Badge } from "antd";
 import {
-  FileExcelOutlined,
-  FilePdfOutlined,
   SearchOutlined,
 } from "@ant-design/icons";
 import { FlexContainer } from "../../../../Components/UI/Layout";

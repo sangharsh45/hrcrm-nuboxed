@@ -2,23 +2,17 @@ import React, { Component, Suspense, lazy } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { BundleLoader } from "../../Components/Placeholder";
-import OpportunityDeletedTable from "./Child/OpportunityTable/OpportunityDeletedTable";
-import OpportunitylostTable from "./Child/OpportunityTable/OpportunitylostTable";
-import OpportunityCloseTable from "./Child/OpportunityTable/OpportunityCloseTable";
 import {
   handleOpportunityModal,
   getOpportunityListByUserId,
   setOpportunityViewType,
 } from "./OpportunityAction";
-
 import OpportunityBoard from "./Child/OpportunityBoard"
 import OpportunityWonCard from "./Child/OpportunityTable/OpportunityWonCard";
-
 const OpportunityCardView = lazy(() => import("./OpportunityCardView"));
 const OpportunityMap = lazy(() => import("./OpportunityMap"));
 const OpportunityHeader = lazy(() => import("./Child/OpportunityHeader"));
 const AddOpportunityModal = lazy(() => import("./Child/AddOpportunityModal"));
-const OpportunityTable = lazy(() => import("./Child/OpportunityTable/OpportunityTable"));
 const OpportunityCardList = lazy(() => import("./Child/OpportunityTable/OpportunityCardList"));
 const OpportunityCloseCard=lazy(()=>import("./Child/OpportunityTable/OpportunityCloseCard"));
 const OpportunityLostCard=lazy(()=>import("./Child/OpportunityTable/OpportunityLostCard"));

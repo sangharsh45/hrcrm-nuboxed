@@ -1,4 +1,4 @@
-import React, { Component, useState, useMemo, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { getCustomerData } from "../../Customer/CustomerAction";
@@ -8,22 +8,15 @@ import SpeechRecognition, {
   useSpeechRecognition,
 } from "react-speech-recognition";
 import { Button, Tooltip } from "antd";
-import { Formik, Form, Field, FieldArray, FastField } from "formik";
+import { Formik, Form, Field, } from "formik";
 import * as Yup from "yup";
-import { base_url } from "../../../Config/Auth";
 import { Spacer, StyledLabel } from "../../../Components/UI/Elements";
-import Clearbit from "../../../Components/Forms/Autocomplete/Clearbit";
-import LazySelect from "../../../Components/Forms/Formik/LazySelect";
 import SearchSelect from "../../../Components/Forms/Formik/SearchSelect";
-import AddressFieldArray from "../../../Components/Forms/Formik/AddressFieldArray";
-import ProgessiveImage from "../../../Components/Utils/ProgressiveImage";
 import {
   addOpportunity,
   getRecruiterName,
   getAllSalesList,
   getInitiative,
-  // getStages,
-  // getWorkflow
   getOppLinkedWorkflow,
   getOppLinkedStages,
   
@@ -38,7 +31,6 @@ import { DatePicker } from "../../../Components/Forms/Formik/DatePicker";
 import dayjs from "dayjs";
 import { Fragment } from "react";
 import { Listbox } from "@headlessui/react";
-import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/20/solid";
 
 /**
  * yup validation scheme for creating a opportunity

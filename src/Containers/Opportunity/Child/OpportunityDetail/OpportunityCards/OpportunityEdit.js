@@ -6,10 +6,7 @@ import { bindActionCreators } from "redux";
 import { Button } from "antd";
 import { FlexContainer } from "../../../../../Components/UI/Layout";
 import {
-  Title,
-  SubTitle,
   TextInput,
-  Spacer
 } from "../../../../../Components/UI/Elements";
 class OpportunityOverviewEdit extends Component {
   constructor(props) {

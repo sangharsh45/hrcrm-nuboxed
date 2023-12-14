@@ -1,21 +1,14 @@
 import React from "react";
-import { Icon, Select, message, Tooltip } from "antd";
+import { Select, Tooltip } from "antd";
 import styled from "styled-components";
 import ContentLoader from "react-content-loader";
 import {
   CaretDownOutlined,
   CaretUpOutlined,
-  EditOutlined,
-  EyeInvisibleOutlined, InfoCircleOutlined,
-  
-  
+  EditOutlined, InfoCircleOutlined,
 } from '@ant-design/icons';
 
-import { CurrencySymbol, cu } from "../../Common";
-import CurrencyCompressor from "../../Common/CurrencyCompressor";
-import { renderTooltip } from "../../../Helpers/Function/UIFunctions";
-import { ActionIcon } from "../../Utils";
-import { TextInput } from ".";
+import { CurrencySymbol, } from "../../Common";
 const { Option } = Select;
 const JumpStartWrapper = styled.div`
   margin: 0.2rem 0.4rem;

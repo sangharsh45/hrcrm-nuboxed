@@ -1,6 +1,5 @@
-import Item from "antd/lib/list/Item";
+
 import React, { lazy, Suspense } from "react";
-import { FormattedMessage } from "react-intl";
 import { BundleLoader } from "../../../../Components/Placeholder";
 import { StyledDrawer } from "../../../../Components/UI/Antd";
 const UpdateOpportunityForm = lazy(() => import("./UpdateOpportunityForm"));

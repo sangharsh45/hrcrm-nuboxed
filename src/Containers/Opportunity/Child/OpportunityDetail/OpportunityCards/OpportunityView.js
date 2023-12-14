@@ -1,12 +1,10 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { Button, Tooltip, Icon } from "antd";
+import { Tooltip, } from "antd";
 import { FormattedMessage } from "react-intl";
 import LinkTagCustomerModal from "./LinkTagCustomerModal"
-import { Formik, Form, Field } from "formik";
 import {
-  StyledModal,
   StyledPopconfirm,
 } from "../../../../../Components/UI/Antd";
 import {
@@ -17,11 +15,8 @@ import {
 import BorderColorIcon from '@mui/icons-material/BorderColor';
 import {linktagCustomer} from "../../../OpportunityAction";
 import { FlexContainer } from "../../../../../Components/UI/Layout";
-import { ActionIcon } from "../../../../../Components/Utils";
-import { EditOutlined, LinkOutlined } from "@ant-design/icons";
-import { SelectComponent } from "../../../../../Components/Forms/Formik/SelectComponent";
+import {  LinkOutlined } from "@ant-design/icons";
 import styled from "styled-components";
-import { lineHeight } from "@mui/system";
 
 class OpportunityView extends Component {
   constructor(props) {

@@ -1,6 +1,5 @@
-import React, { Component } from "react";
-import { Map, TileLayer, withLeaflet, MapControl } from "react-leaflet";
-import MapInfo from "./MapInfo";
+import React, {  } from "react";
+import { Map, TileLayer, } from "react-leaflet";
 import Routing from "./RoutingMachine";
 
 class MapComponent extends React.Component {

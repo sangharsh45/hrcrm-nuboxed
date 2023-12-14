@@ -1,13 +1,12 @@
 import React, { useEffect, useState,useMemo } from "react";
 import { connect } from "react-redux";
-import { FlexContainer } from "../../../../../../Components/UI/Layout";
 import SkillsLoadMore from "../../../../../Candidate/Child/CandidateTable/SkillsLoadMore";
 import { bindActionCreators } from "redux";
 import moment from "moment";
 import { getCountries } from "../../../../../Auth/AuthAction";
 import { LinkCandidateRecruit,LinkRecruitCandidate,getSkillsCount,getRecruiter } from "../../../../OpportunityAction";
 import { StyledTable } from "../../../../../../Components/UI/Antd";
-import { Tooltip, Icon, Button, Input, } from "antd";
+import { Tooltip, Button, Input, } from "antd";
 import Highlighter from 'react-highlight-words';
 import { MultiAvatar, SubTitle } from "../../../../../../Components/UI/Elements";
 import RecruiterSkillLoadMore from "./RecruiterSkillLoadMore";
