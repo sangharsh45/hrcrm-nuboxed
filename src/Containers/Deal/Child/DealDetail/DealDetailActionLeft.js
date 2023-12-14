@@ -1,17 +1,13 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { FormattedMessage } from "react-intl";
 import { bindActionCreators } from "redux";
-import ActionIcon from "../../../../Components/Utils/ActionIcon";
 import { FlexContainer } from "../../../../Components/UI/Layout";
-// import { getStageCheckByStageId } from "../../OpportunityAction";
-// import DealStatsCard from "./Dealcards/DealStatsCard";
-import { Spin, Tooltip, Icon } from "antd";
+import {  Tooltip } from "antd";
 import { RollbackOutlined } from "@ant-design/icons";
 
 const DealDetailActionLeft = (props) => {
-  const { dealDetailsbyID, fetchDealdetails } = props;
 
   return (
     <FlexContainer alignItems="center">

@@ -94,19 +94,10 @@ class DealContactForm extends Component {
   render() {
     const {
       user: { userId, firstName, lastName },
-      addContact,
       addingDealContact,
       customerId,
       designationTypeId,
       departmentId,
-      users,
-      accountId,
-      defaultAccounts,
-      defaultOpportunities,
-      callback,
-      user,
-      creatorId,
-      accountIdTag,
       linkContact,
       opportunityId,
       addLinkContactByOpportunityId,
@@ -114,11 +105,7 @@ class DealContactForm extends Component {
 
       // tagWithCompany,
     } = this.props;
-    console.log(linkContact);
-    console.log(opportunityId);
-    console.log(customerId);
-    console.log(departmentId);
-    console.log(designationTypeId);
+  
     const customerNameOption = this.props.customerData
     .sort((a, b) => {
       const libraryNameA = a.name && a.name.toLowerCase();

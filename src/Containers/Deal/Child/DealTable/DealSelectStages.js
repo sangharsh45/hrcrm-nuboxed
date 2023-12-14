@@ -1,9 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import styled from "styled-components";
 import { Tooltip } from "antd";
-
 import { FlexContainer } from "../../../../Components/UI/Layout";
 
 class DealSelectStages extends Component {

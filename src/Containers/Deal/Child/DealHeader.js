@@ -7,9 +7,6 @@ class DealHeader extends Component {
   render() {
     const {
       handleDealModal,
-      handleChange,
-      currentData,
-      handleClear,
       viewType,
       setDealViewType,
       opencreateDealModal
@@ -23,9 +20,6 @@ class DealHeader extends Component {
             <DealActionLeft
               viewType={viewType}
               setDealViewType={setDealViewType}
-            //   currentData={currentData}
-            //   handleClear={handleClear}
-            //   setCurrentData={this.props.setCurrentData}
             />
           }
           rightComponent={

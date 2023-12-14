@@ -15,7 +15,6 @@ import {
   addDealDocument,
   getDealDocument
 } from "../../../../DealAction";
-// import { getOppoStages, getLevels } from "../../Settings/SettingsAction";
 import DragableUpload from "../../../../../../Components/Forms/Formik/DragableUpload";
 
 const ButtonGroup = Button.Group;

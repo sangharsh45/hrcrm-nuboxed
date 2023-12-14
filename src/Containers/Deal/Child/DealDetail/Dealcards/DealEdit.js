@@ -5,12 +5,7 @@ import { bindActionCreators } from "redux";
 import { updateDealName } from "../../../DealAction";
 import { Button } from "antd";
 import { FlexContainer } from "../../../../../Components/UI/Layout";
-import {
-  Title,
-  SubTitle,
-  TextInput,
-  Spacer
-} from "../../../../../Components/UI/Elements";
+import { TextInput} from "../../../../../Components/UI/Elements";
 class DealEdit extends Component {
   constructor(props) {
     super(props);

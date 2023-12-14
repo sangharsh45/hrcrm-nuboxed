@@ -3,14 +3,13 @@ import axios from "axios";
 import dayjs from "dayjs";
 import { base_url } from "../../Config/Auth";
 import { message } from "antd";
-import { ActionHeader } from "../../Components/Utils";
 
 export const setDealViewType = (viewType) => (dispatch) => {
     dispatch({
       type: types.SET_DEAL_VIEW_TYPE,
       payload: viewType,
     });
-  };
+};
   
   export const getDealListbyUserId = (userId,page) => (dispatch) => {
     dispatch({

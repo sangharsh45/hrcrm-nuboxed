@@ -6,12 +6,7 @@ import { FormattedMessage } from "react-intl";
 import { Button, Icon, Switch, Tooltip } from "antd";
 import { Formik, Form, Field, FastField } from "formik";
 import * as Yup from "yup";
-
 import { handleCallNotesModal } from "../../../../Call/CallAction";
-// import {
-//     getContactListByCustomerId,
-//     getOpportunityListByCustomerId,
-//   } from "../../../../Customer/CustomerAction";
 import dayjs from "dayjs";
 import { Spacer, StyledLabel } from "../../../../../Components/UI/Elements";
 import SearchSelect from "../../../../../Components/Forms/Formik/SearchSelect";
@@ -20,7 +15,6 @@ import { SelectComponent } from "../../../../../Components/Forms/Formik/SelectCo
 import { DatePicker } from "../../../../../Components/Forms/Formik/DatePicker";
 import { TimePicker } from "../../../../../Components/Forms/Formik/TimePicker";
 import {
-  // addCall,
   updateCall,
   deleteCall,
   handleCallModal,
@@ -37,7 +31,8 @@ import SpeechRecognition, { } from 'react-speech-recognition';
 import { AudioOutlined } from '@ant-design/icons';
 import { Fragment } from 'react'
 import { Listbox, Transition } from '@headlessui/react'
-import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid'
+import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid';
+
 const ButtonGroup = Button.Group;
 const suffix = (
   <AudioOutlined

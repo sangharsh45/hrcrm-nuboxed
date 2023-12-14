@@ -2,13 +2,8 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { FormattedMessage } from "react-intl";
 import { bindActionCreators } from "redux";
-import { Icon, Tooltip, Button,Input} from "antd";
+import { Tooltip, Button,Input} from "antd";
 import { BundleLoader } from "../../../../../../Components/Placeholder";
-// import {
-//   getContactListByOpportunityId,
-//   //   unlinkContactFromOpportunity,
-//      setContactRoleForOpportunity,
-// } from "../../../OpportunityAction";
 import { FlexContainer } from "../../../../../../Components/UI/Layout";
 import {
   StyledTable,

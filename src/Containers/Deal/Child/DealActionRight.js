@@ -5,23 +5,13 @@ import { FormattedMessage } from "react-intl";
 import { withRouter } from "react-router-dom";
 import { base_url } from "../../../Config/Auth";
 import { Button, Tooltip, } from "antd";
-import { StyledSelect } from "../../../Components/UI/Antd";
-// import OpportunityShareForm from "./OpportunityShareForm";
-
-const Option = StyledSelect.Option;
 
 class DealActionRight extends React.Component {
   render() {
     const {
       userId,
-      subscriptionType,
-      users,
       user,
-      department,
-      accountFilterText,
       handleDealModal,
-      setAccountFilterText,
-      setAccountFilterUser,
     } = this.props;
     return (
       <div class=" flex items-center">

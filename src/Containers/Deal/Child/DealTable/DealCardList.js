@@ -1,29 +1,24 @@
-import React, { useEffect, useState, useMemo } from "react";
+import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import NoteAltIcon from "@mui/icons-material/NoteAlt";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { FormattedMessage } from "react-intl";
 import styled from "styled-components";
-import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
+import {  DeleteOutlined } from "@ant-design/icons";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
-import DeleteIcon from "@mui/icons-material/Delete";
-import { Tooltip, Select, Menu, Dropdown, Progress } from "antd";
+import { Tooltip,  Menu, Dropdown, Progress } from "antd";
 import { FlexContainer } from "../../../../Components/UI/Layout";
 import { CurrencySymbol, Link } from "../../../../Components/Common";
 import { CheckCircleTwoTone, StopTwoTone } from "@ant-design/icons";
-import { BundleLoader } from "../../../../Components/Placeholder";
 import { StyledPopconfirm } from "../../../../Components/UI/Antd";
 import {
   MultiAvatar,
   MultiAvatar2,
   SubTitle,
-  Title,
-} from "../../../../Components/UI/Elements";
+ } from "../../../../Components/UI/Elements";
 import {
-  getOpportunityListByUserId,
   getRecruiterList,
-  handleUpdateOpportunityModal,
   setEditOpportunity,
   deleteOpportunityData,
   getOpportunityInitiativeSKillDetails,
@@ -52,8 +47,6 @@ import {
 } from "../../DealAction";
 import AddDealsNotesDrawerModal from "../AddDealsNotesDrawerModal";
 import DealSelectStages from "./DealSelectStages";
-
-const Option = Select;
 
 function DealCardList(props) {
   const [hasMore, setHasMore] = useState(true);
@@ -92,9 +85,6 @@ function DealCardList(props) {
     history,
     fetchingDeal,
   } = props;
-  // if (fetchingDeal) {
-  //   return <BundleLoader />;
-  // }
 
   return (
     <>

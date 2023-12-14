@@ -1,7 +1,7 @@
 import React, { useState,useEffect,Suspense, lazy } from 'react';
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { BundleLoader, GridLoader } from "../../Components/Placeholder";
+import { BundleLoader} from "../../Components/Placeholder";
 import ContactInvestAllCardList from './Child/ContactInvestTable/ContactInvestAllCardList';
 import {handleContactInvestModal,setContactInvetViewType,
   getContactInvestByUserId,
@@ -90,8 +90,6 @@ function handleCurrentData (value){
       if (indA > indB) {
         return -1;
       }
-  
-      // ind must be equal
       return 0;
     });
     setFilteredData(filteredJobs);
@@ -118,7 +116,6 @@ const{handleContactInvestModal,addContactInvestModal,
              
                 handleChange={handleChange}
                 handleCurrentData={handleCurrentData}
-                // setCurrentData={setCurrentData}
                 handleFilterChange={handleFilterChange}
                 filter={filter}
               />

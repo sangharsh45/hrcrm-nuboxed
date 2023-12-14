@@ -1,7 +1,7 @@
-import React, {useState, Suspense, lazy } from 'react';
+import React, {Suspense, lazy } from 'react';
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { BundleLoader, GridLoader } from "../../Components/Placeholder";
+import { BundleLoader} from "../../Components/Placeholder";
 import {setDealViewType,handleDealModal}from "./DealAction";
 import DealsBoard from "./Child/DealsBoard"
 import DealsAllCardList from './Child/DealDetail/Dealcards/DealsAllCardList';
@@ -12,8 +12,6 @@ const DealWonCard=lazy(()=>import ("./Child/DealTable/DealWonCard"));
 
 
 function Deal (props) {
- 
-    const [currentData,SetcurrentData]=useState("");
 
    const {
     opencreateDealModal,
@@ -39,22 +37,6 @@ function Deal (props) {
 
           <DealCardList/>
            :
-        //   viewType === "dashboard" ?
-       
-        //     <OpportunityDeletedCard/>
-        //      :
-        //      viewType === "close" ?
-                  
-        //             <OpportunityCloseCard/>
-        //              :
-        //      viewType === "lost" ?
-
-        //            <OpportunityLostCard/>
-        //             :
-        //             viewType === "Map" ?
-        //             <OpportunityMap/> :
-        //      viewType === "card" ?
-        //      <OpportunityCardView/> :
              viewType === "stage" ?
              <DealsBoard/>
              :

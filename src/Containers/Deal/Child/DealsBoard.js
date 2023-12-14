@@ -4,30 +4,19 @@ import { bindActionCreators } from "redux";
 import { withRouter } from "react-router-dom";
 import styled from "styled-components"; 
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
-import { StyledTabs, StyledModal } from "../../../Components/UI/Antd";
-import { SmileOutlined, MehOutlined } from '@ant-design/icons';
+import { StyledTabs} from "../../../Components/UI/Antd";
 import { MainWrapper, FlexContainer } from "../../../Components/UI/Layout";
 import {
     getProcessForDeals,
     getProcessStagesForDeals,
 } from "../../Settings/SettingsAction";
 import {updateDealdragstage} from "../DealAction";
-import { Spin, message, notification, Button } from "antd";
-import { BundleLoader } from "../../../Components/Placeholder";
-import { CurrencySymbol } from "../../../Components/Common";
-import { wrap } from "lodash";
+import { Spin } from "antd";
 import DealStageColumn from "./DealStageColumn"
 import {getAllDealsbyUserId} from "../DealAction";
 
 const TabPane = StyledTabs.TabPane;
 
-const ParentContainer = styled.div`
-  background-color: ${(props) => props.theme.backgroundColor};
-  color: ${(props) => props.theme.color};
-  height: ${({ height }) => height};
-  overflow-x: hidden;
-  overflow-y: auto;
-`;
 
 const Container = styled.div`
   background-color: ${(props) => props.theme.backgroundColor};
@@ -74,20 +63,6 @@ const WonColumn = styled.div`
   margin-bottom:2.5em;
 `;
 
-const LossColumn = styled.div`
-  position: fixed;
-  bottom: 0;
-  right: 0;
-  display: ${(props) => (props.isDraggingOver ? "flex" : "flex")};
-  /* width: 43.12em; */
-  height: 5em;
-  /* background-color: tomato; */
-  color: #fff;
-  margin-right:0.62em;
-  /* border: 0.06em solid ${(props) => props.theme.backgroundColor}; */
-  transition: 0.3s all linear;
-  margin-bottom:2.5em;
-`;
 
 const StageHeader = styled.div`
   background-color: rgb(214, 144, 149);

@@ -14,7 +14,7 @@ import {
   deleteDocument 
 } from "../../../../../Contact/ContactAction";
 import { elipsize } from "../../../../../../Helpers/Function/Functions";
-import { DeleteOutlined, DownloadOutlined } from "@ant-design/icons";
+import { DeleteOutlined} from "@ant-design/icons";
 
 class LinkedContactInvestDocuments extends Component {
   componentDidMount() {

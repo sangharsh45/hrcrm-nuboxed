@@ -40,11 +40,6 @@ class ContactInvestHeader extends Component {
             <ContactInvestActionRight 
             addContactInvestModal={addContactInvestModal}
             handleContactInvestModal={handleContactInvestModal}
-            // viewType={viewType}
-            // currentUser={this.props.currentUser} 
-            // handleDropChange={this.props.handleDropChange}
-            // currentPartnerUser={this.props.currentPartnerUser}
-            // handlePartnerDropChange={this.props.handlePartnerDropChange}
             />
           }
         />

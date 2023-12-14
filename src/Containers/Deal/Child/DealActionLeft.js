@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import { StyledSelect } from "../../../Components/UI/Antd";
 import { FormattedMessage } from "react-intl";
 import { Tooltip, Badge } from "antd";
 import { connect } from "react-redux";
@@ -12,13 +11,8 @@ import PeopleIcon from '@mui/icons-material/People';
 import { CheckCircleTwoTone } from "@ant-design/icons";
 import {getdealsRecord,getdealsAllRecord,getdealsTeamRecord} from "../DealAction";
 import { StopTwoTone, TableOutlined } from "@ant-design/icons";
-import { Input } from "antd";
-
-const Option = StyledSelect.Option;
-const { Search } = Input;
 
 const DealActionLeft = (props) => {
-  const dummy = ["cloud", "azure", "fgfdg"];
 
   useEffect(() => {
     if (props.viewType === "table") {
@@ -30,19 +24,10 @@ const DealActionLeft = (props) => {
     } 
   }, [props.viewType, props.userId]);
   
-// useEffect(() => {
-//   props.getdealsRecord(props.userId)
-//   }, [props.userId]);
-
   const {
     viewType,
    setDealViewType,
-    recorddeleteOpportunityData,
-    user,
-    lostOpportunityData,
-    closeOpportunityData,
     dealsTeamRecord,
-    recordData,
   } = props;
 
   return (
@@ -65,7 +50,6 @@ const DealActionLeft = (props) => {
             onClick={() => setDealViewType("table")}
             style={{
               color: viewType === "table" && "#1890ff",
-              // cursor:"pointer"
             }}
           >
             {" "}
