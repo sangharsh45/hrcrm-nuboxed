@@ -1,4 +1,4 @@
-import React, { Component,lazy } from "react";
+import React, { Component } from "react";
 import { ViewEditCard } from "../../../../Components/UI/Elements";
 import LeadsOverView from "./LeadsOverView";
 

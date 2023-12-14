@@ -4,7 +4,6 @@ import { bindActionCreators } from "redux";
 import moment from "moment";
 import { FlexContainer } from "../../Components/UI/Layout";
 import { GroupView } from "../../Components/Common";
-import { NoData } from "../../Components/UI/Elements";
 import {
   getCustomerRequirement,
   getLatestCustomer,
@@ -16,7 +15,6 @@ import {
   handleUpdateCustomerDrawerModal,
   setEditCustomer,
 } from "../Customer/CustomerAction";
-
 import SingleCardView from "./SingleCardView";
 import AddCustomerDrawerModal from "./AddCustomerDrawerModal";
 import UpdateCustomerDrawerModal from "./Child/CustomerTable/UpdateCustomerDrawerModal";

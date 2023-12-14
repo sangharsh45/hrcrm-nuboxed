@@ -1,5 +1,4 @@
 import React, { lazy, Suspense } from "react";
-import { FormattedMessage } from "react-intl";
 import { connect } from "react-redux";
 import { StyledDrawer } from "../../../../Components/UI/Antd";
 import { bindActionCreators } from "redux";

@@ -1,11 +1,8 @@
 import React, { Component } from "react";
-import AsyncSelect from "react-select/lib/Async";
 import axios from "axios";
 import { get } from "lodash";
 import { ValidationError, StyledLabel, StyledAsync } from "../../UI/Elements";
-
 import { FlexContainer } from "../../UI/Layout";
-import { message } from "antd";
 
 class ClearbitImage extends Component {
     loadOptions = (value) => {

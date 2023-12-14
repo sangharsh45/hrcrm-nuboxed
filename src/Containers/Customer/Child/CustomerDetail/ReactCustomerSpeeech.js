@@ -2,7 +2,6 @@ import { Button, Tooltip } from 'antd';
 import React from 'react';
 import { connect } from "react-redux";
 import styled from 'styled-components';
-
 import { bindActionCreators } from "redux";
 import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
 import { FlexContainer } from '../../../../Components/UI/Layout';

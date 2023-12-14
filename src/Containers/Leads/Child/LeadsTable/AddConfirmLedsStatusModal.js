@@ -1,11 +1,8 @@
-import React, { lazy, Suspense } from "react";
+import React, { Suspense } from "react";
 import { FormattedMessage } from "react-intl";
 import { StyledDrawer } from "../../../../Components/UI/Antd";
 import { BundleLoader } from "../../../../Components/Placeholder";
-
 import LeadsConfirmStatusForm from "./LeadsConfirmStatusForm";
-import { bindActionCreators } from "redux";
-import { connect } from "formik";
 
 const AddConfirmLedsStatusModal = (props) => {
   const isSmallScreen = window.innerWidth <= 600;

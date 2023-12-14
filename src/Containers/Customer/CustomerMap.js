@@ -1,26 +1,19 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-//import CustomerLeaflet from "../../Components/Utils/CustomerLeaflet"
 import { customerMapSelector } from "../Customer/CustomerSelector";
-import { Map, TileLayer, Marker, Popup } from "react-leaflet";
+import { Marker, Popup } from "react-leaflet";
 import { FlexContainer } from "../../Components/UI/Layout";
 import {
   MultiAvatar,
-  SubTitle,
   Title,
 } from "../../Components/UI/Elements";
-//import { AddressComponent } from "../../../../Components/Common";
 import Leaflet from "../../Components/Utils/Leaflet";
-//import { getCandidateListByUserId } from "../Candidate/CandidateAction";
-//import { getAccountsMapOnDashboard } from "../../AccountAction";
 import L from "leaflet";
 import {
     getCustomerListByUserId,
- 
   } from "../Customer/CustomerAction";
 import CustomerMapPopUpMarker from "../Customer/CustomerMapPopUpMarker";
-//import APIFailed from "../../../../Helpers/ErrorBoundary/APIFailed";
 delete L.Icon.Default.prototype._getIconUrl;
 L.Icon.Default.mergeOptions({
   iconRetinaUrl: require("leaflet/dist/images/marker-icon-2x.png"),

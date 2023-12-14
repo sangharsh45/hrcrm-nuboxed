@@ -11,10 +11,8 @@ import "jspdf-autotable";
 import { OnlyWrapCard } from "../../../../Components/UI/Layout";
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
-import DeleteIcon from "@mui/icons-material/Delete";
 import { DeleteOutlined } from "@ant-design/icons";
 import { getCountries } from "../../../Auth/AuthAction";
-import { Link } from "../../../../Components/Common";
 import {
     getTeamLeads,
   deleteLeadsData,
@@ -35,7 +33,6 @@ import StatusCustomerToggle from "./StatusCustomerToggle";
 import { FormattedMessage } from "react-intl";
 import UpdateLeadsModal from "../UpdateLeads/UpdateLeadsModal";
 import AddLeadsEmailDrawerModal from "../UpdateLeads/AddLeadsEmailDrawerModal";
-import { BundleLoader } from "../../../../Components/Placeholder";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
 import OpenCETmodal from "./OpenCETmodal";
 import AddLeadsNotesDrawerModal from "../AddLeadsNotesDrawerModal";

@@ -1,10 +1,9 @@
-import React, { Component, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { FormattedMessage } from "react-intl";
-import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
 import { Button } from "antd";
-import { Formik, Form, Field, FieldArray, FastField } from "formik";
+import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 import { Spacer, StyledLabel } from "../../../../../../Components/UI/Elements";
 import SearchSelect from "../../../../../../Components/Forms/Formik/SearchSelect";
@@ -17,10 +16,8 @@ import { InputComponent } from "../../../../../../Components/Forms/Formik/InputC
 import { SelectComponent } from "../../../../../../Components/Forms/Formik/SelectComponent";
 import { DatePicker } from "../../../../../../Components/Forms/Formik/DatePicker";
 import dayjs from "dayjs";
-import { Fragment } from 'react'
 import { getCrm} from "../../../../../Leads/LeadsAction";
-import { Listbox, Transition } from '@headlessui/react'
-import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid'
+import { Listbox, } from '@headlessui/react'
 /**
  * yup validation scheme for creating a opportunity
  */

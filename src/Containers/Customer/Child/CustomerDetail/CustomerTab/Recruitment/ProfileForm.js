@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Button, } from "antd";
@@ -12,7 +12,6 @@ import {
   getAllProcessStagesForRecruit,
 } from "../../../../../Settings/SettingsAction";
 import {
-  // getCurrency,
   addRecruitProProfile,
    getRecruitByCustomerId,
 } from "../../../../CustomerAction";

@@ -1,4 +1,4 @@
-import React, { useEffect, useState,useMemo,lazy } from "react";
+import React, {lazy } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { withRouter } from "react-router-dom";

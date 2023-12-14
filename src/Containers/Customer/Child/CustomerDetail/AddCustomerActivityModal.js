@@ -1,7 +1,5 @@
 import React, { lazy, Suspense } from "react";
 import { StyledDrawer } from "../../../../Components/UI/Antd";
-import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
 import { BundleLoader } from "../../../../Components/Placeholder";
 import { StyledTabs } from "../../../../Components/UI/Antd";
 import { TabsWrapper } from "../../../../Components/UI/Layout";

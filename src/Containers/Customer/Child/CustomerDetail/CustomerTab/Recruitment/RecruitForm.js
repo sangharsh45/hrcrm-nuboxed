@@ -1,14 +1,13 @@
 import React, { useState, useEffect, useMemo } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { Button, message, Input, Switch } from "antd";
+import { Button, Switch } from "antd";
 import { FormattedMessage } from "react-intl";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 import {
   Spacer,
   StyledLabel,
-  TextInput,
 } from "../../../../../../Components/UI/Elements";
 import { SelectComponent } from "../../../../../../Components/Forms/Formik/SelectComponent";
 import { InputComponent } from "../../../../../../Components/Forms/Formik/InputComponent";
@@ -16,15 +15,12 @@ import { InputComponent } from "../../../../../../Components/Forms/Formik/InputC
 import {
   getProcessForRecruit,
   getProcessStagesForRecruit,
-//   getAllProcessStagesForRecruit,
 } from "../../../../../Settings/SettingsAction";
-// import { getCurrency } from "../../../../OpportunityAction";
 import {
   addRecruit,
   getContactListByCustomerId,
 } from "../../../../CustomerAction";
 import { DatePicker } from "../../../../../../Components/Forms/Formik/DatePicker";
-// import { opportunityReducer } from "../../../../OpportunityReducer";
 import { TextareaComponent } from "../../../../../../Components/Forms/Formik/TextareaComponent";
 import SearchSelect from "../../../../../../Components/Forms/Formik/SearchSelect";
 

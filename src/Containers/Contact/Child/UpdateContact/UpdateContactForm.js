@@ -1,13 +1,12 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { Button, Select, Icon, Tag, Switch } from "antd";
+import { Button, Select, } from "antd";
 import { FormattedMessage } from "react-intl";
 import { Formik, Form, FastField, Field, FieldArray } from "formik";
 import * as Yup from "yup";
 import { HeaderLabel, Spacer } from "../../../../Components/UI/Elements";
 import AddressFieldArray from "../../../../Components/Forms/Formik/AddressFieldArray";
-import { ShowOrCollapse } from "../../../../Components/Common";
 import SearchSelect from "../../../../Components/Forms/Formik/SearchSelect";
 import { InputComponent } from "../../../../Components/Forms/Formik/InputComponent";
 import { SelectComponent } from "../../../../Components/Forms/Formik/SelectComponent";

@@ -1,9 +1,7 @@
 import React, { Component, Suspense, lazy } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { CommentOutlined, CustomerServiceOutlined } from '@ant-design/icons';
-import { FloatButton } from 'antd';
-import { BundleLoader, GridLoader } from "../../Components/Placeholder";
+import { BundleLoader } from "../../Components/Placeholder";
 import CustomerWhiteTable from "../Customer/Child/CustomerTable/CustomerWhiteTable";
 import CustomerBlueTable from "../Customer/Child/CustomerTable/CustomerBlueTable";
 import {
@@ -14,10 +12,8 @@ import {
     emptyCustomer,
     getLatestCustomer,
     getCustomerCloser,
-    getCustomerFilterData,
-    
+    getCustomerFilterData,   
   } from "./CustomerAction";
-
 import CustomerMap from "./CustomerMap"
 import moment from "moment";
 import CustomerTeamCardList from "./Child/CustomerTable/CustomerTeamCardList";

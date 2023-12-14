@@ -5,7 +5,6 @@ import PlacesAutocomplete, {
 } from "react-places-autocomplete";
 import _ from "lodash";
 import styled from "styled-components";
-import { ValidationError, StyledLabel } from "../../UI/Elements";
 import { FlexContainer } from "../../UI/Layout";
 
 const StyledInput = styled.input.attrs({

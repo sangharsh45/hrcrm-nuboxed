@@ -1,10 +1,8 @@
 import React from "react";
-import { Icon, message,Upload } from "antd";
-import {  StyledModal } from "../../UI/Antd";
-
+import { message,Upload } from "antd";
 import { base_url } from "../../../Config/Auth";
 import axios from "axios";
-import { PlusOutlined, UploadOutlined } from "@ant-design/icons";
+import { UploadOutlined } from "@ant-design/icons";
 const token = sessionStorage.getItem("token");
 
 class Upload1 extends React.Component {
