@@ -31,7 +31,10 @@ import UpdateEmployeeModal from "./UpdateEmployeeModal";
 const { Option } = Select;
 function EmployeeCardView (props) {
   const [page, setPage] = useState(0);
-
+  const [storedData,setStoredData]=useState({});
+const handleStoredData=(locs)=>{
+  setStoredData(locs);
+}
 useEffect(() => {
   props.getEmployeelist("cretiondate");
  
@@ -200,6 +203,7 @@ function handleSetCurrentEmployeeId(employeeId,) {
                 style={{ cursor: "pointer",fontSize: "1rem" }}
                 onClick={() => {
                     props.setEditEmployee(item);
+                    handleStoredData(item);
                     props.handleUpdateEmployeeModal(true);
                     handleSetCurrentEmployeeId(item);
                   
@@ -266,6 +270,7 @@ function handleSetCurrentEmployeeId(employeeId,) {
               </CardWrapper>
               </div>
               <UpdateEmployeeModal
+                storedData={storedData}
                singleEmployee={props.singleEmployee}
        employeeName={currentEmployeeId}
         updateEmployeeModal={props.updateEmployeeModal}

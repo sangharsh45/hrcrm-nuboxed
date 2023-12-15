@@ -3,7 +3,7 @@ import { FlexContainer } from '../../../../Components/UI/Layout'
 import LanguageIcon from '@mui/icons-material/Language';
 import TocIcon from '@mui/icons-material/Toc';
 import { FormattedMessage } from "react-intl";
-import { Tooltip } from "antd";
+import { Badge, Tooltip } from "antd";
 
 const LocationActionLeft = (props) => {
     return (
@@ -11,7 +11,11 @@ const LocationActionLeft = (props) => {
           <Tooltip
         title={<FormattedMessage id="app.listView" defaultMessage="List View" />}
       >
-       
+         <Badge
+          size="small"
+          // count={(props.viewType === "card" && props.recordData.customer) || 0}
+          overflowCount={999}
+        >
           <span
             onClick={() => props.setLocationViewType("card")}
             style={{
@@ -23,13 +27,17 @@ const LocationActionLeft = (props) => {
           >
             <TocIcon style={{fontSize:"1.4rem"}}  />
           </span>
-       
+          </Badge>
       </Tooltip>
 
       <Tooltip
         title={<FormattedMessage id="app.mapView" defaultMessage="Map View" />}
       >
-       
+           <Badge
+          size="small"
+          // count={(props.viewType === "card" && props.recordData.customer) || 0}
+          overflowCount={999}
+        >
           <span
             onClick={() => props.setLocationViewType("map")}
             style={{
@@ -44,7 +52,7 @@ const LocationActionLeft = (props) => {
             // icon={solid('users')}
              />
           </span>
-    
+          </Badge>
       </Tooltip>
         </FlexContainer>
     )

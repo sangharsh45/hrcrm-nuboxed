@@ -129,13 +129,14 @@ export const departmentsReducer = (state = initialState, action) => {
             return {
               ...state,
               addingDepartmentDocumentToggle: false,
-              departments: state.departments.map((item) => {
-                if (item.departmentId === action.payload.departmentId) {
-                  return action.payload;
-                } else {
-                  return item;
-                }
-              }),
+              departments:action.payload,
+              // departments: state.departments.map((item) => {
+              //   if (item.departmentId === action.payload.departmentId) {
+              //     return action.payload;
+              //   } else {
+              //     return item;
+              //   }
+              // }),
             };
           case types.LINK_DEPARTMENT_DOCUMENT_TOGGLE_FAILURE:
             return {

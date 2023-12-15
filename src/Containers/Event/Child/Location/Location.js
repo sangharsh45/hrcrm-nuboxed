@@ -29,10 +29,10 @@ class Location extends Component {
              viewType={viewType}
            />
           ) 
-          // :this.props.viewType === "map" ? (
+          :this.props.viewType === "map" ? (
             
-          //   <LocationMap/>
-          //    )
+            <LocationMap/>
+             )
           :this.props.viewType === "tile" ? (
             
             <LocationCard2/>
