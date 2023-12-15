@@ -23,7 +23,7 @@
 
 const base_url = "http://Hrnubox-env.eba-us3qmm3j.ap-south-1.elasticbeanstalk.com/api/v1";
 const login_url = "http://Hrnubox-env.eba-us3qmm3j.ap-south-1.elasticbeanstalk.com";
-const base_url2 = "http://Erpnubox-env.eba-x6x8mtth.ap-south-1.elasticbeanstalk.com";
+const base_url2 = "http://ERP-env.eba-evpabvq7.ap-south-1.elasticbeanstalk.com";
 
 
 const asses_url = "http://develop.tekorero.com/Assessment-0.0.1-SNAPSHOT";

@@ -27,7 +27,7 @@ export const setDistributorViewType = (viewType) => (dispatch) => {
 /**
  * request for adding a distributor
  */
-export const addDistributor = (distributor, userId) => (dispatch) => {
+export const addDistributor = (distributor) => (dispatch) => {
   dispatch({
     type: types.ADD_DISTRIBUTOR_REQUEST,
   });
@@ -40,9 +40,9 @@ export const addDistributor = (distributor, userId) => (dispatch) => {
       })
     .then((res) => {
       console.log(res);
-      dispatch(getOpportunityRecord(userId));
-      dispatch(getDistributorsByUserId(userId));
-      dispatch(getAccountRecords())
+      // dispatch(getOpportunityRecord(userId));
+      // dispatch(getDistributorsByUserId(userId));
+      // dispatch(getAccountRecords())
       dispatch({
         type: types.ADD_DISTRIBUTOR_SUCCESS,
         payload: res.data,
@@ -2355,9 +2355,9 @@ export const getLocationList = (orgId) => (dispatch) => {
     });
 };
 
-export const setClearbitData1 = (data) => (dispatch) => {
+export const setClearbitData = (data) => (dispatch) => {
   dispatch({
-    type: types.SET_CLEARBIT_DATA1,
+    type: types.SET_CLEARBIT_DATA,
     payload: data,
   });
 };
