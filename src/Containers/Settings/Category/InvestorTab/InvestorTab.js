@@ -36,7 +36,7 @@ class InvestorTab extends Component {
                     <>
                       <FactoryIcon />
                       <span style={{ marginLeft: "0.25em" }}>
-                        Investor
+                        Type
                       </span>
                     </>
                   }
