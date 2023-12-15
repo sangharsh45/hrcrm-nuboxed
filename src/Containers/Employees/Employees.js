@@ -1,13 +1,11 @@
-import React, { Component, Suspense, lazy } from "react";
+import React, { Component, lazy } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import EmployeesHeader from "./Child/EmployeesHeader";
 import AddEmploymentModal from "./Child/AddEmployeeModal";
 import { setEmployeeViewType, handleEmployeeModal, getEmployeelist} from "./EmployeeAction";
 import EmployeeCardView from "./Child/EmployeeCard/EmployeeCardView";
-import EmployeeCardList from "./Child/EmployeeCard/EmployeeCardList";
 const EmployeeTable = lazy(() => import("./Child/EmployeeTable/EmployeeTable"));
-const EmployeeGroup = lazy(() => import("./Child/EmployeeGroup/EmployeeGroup"));
 
 class Employees extends Component {
 

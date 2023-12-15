@@ -50,7 +50,6 @@ const handleLoadMore = () => {
         <div className="md:w-24">Corporate</div>
         <div className="md:w-24">Project</div>
         <div className="md:w-24">Retail</div>
-        <div className="w-12">Action</div>
       </div>
         <CardWrapper>
           {props.showLocation.map((item) => {

@@ -990,7 +990,7 @@ const onCheckAllTeamsChange = (e) => {
 <Spacer />
               <FlexContainer justifyContent="space-around">
             
-              <div >
+              {/* <div >
                 <h1 class="text-sm">Users</h1>
                 <Checkbox indeterminate={indeterminateUser} onChange={onCheckAllUserChange} checked={checkAllUser}>
                  <label class="text-xs"> Check all</label>
@@ -999,7 +999,7 @@ const onCheckAllTeamsChange = (e) => {
                 <CheckboxGroup options={userOptions} value={checkedUserList} onChange={onUserChange} />
 
               </div>
-                  <Spacer />
+                  <Spacer /> */}
                 <div >
                   <h1 class="text-sm">Locations</h1>
                   <Checkbox indeterminate={indeterminateLocation} onChange={onCheckAllLocationChange} checked={checkAllLocation}>

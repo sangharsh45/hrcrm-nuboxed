@@ -1,6 +1,6 @@
 import React from 'react'
 import { FlexContainer } from '../../../../Components/UI/Layout'
-import GridViewIcon from '@mui/icons-material/GridView';
+import LanguageIcon from '@mui/icons-material/Language';
 import TocIcon from '@mui/icons-material/Toc';
 import { FormattedMessage } from "react-intl";
 import { Tooltip } from "antd";
@@ -9,7 +9,7 @@ const LocationActionLeft = (props) => {
     return (
         <FlexContainer alignItems='center'>
           <Tooltip
-        title={<FormattedMessage id="app.card" defaultMessage="Card" />}
+        title={<FormattedMessage id="app.listView" defaultMessage="List View" />}
       >
        
           <span
@@ -26,26 +26,26 @@ const LocationActionLeft = (props) => {
        
       </Tooltip>
 
-      {/* <Tooltip
-        title={<FormattedMessage id="app.list" defaultMessage="List" />}
+      <Tooltip
+        title={<FormattedMessage id="app.mapView" defaultMessage="Map View" />}
       >
        
           <span
-            onClick={() => props.setExpenseViewType("tile")}
+            onClick={() => props.setLocationViewType("map")}
             style={{
               marginRight: "0.5rem",
-              color: props.viewType === "tile" && "#1890ff",
+              color: props.viewType === "map" && "#1890ff",
               fontSize: "1.0625em",
               cursor: "pointer",
             }}
           >
             
-            <TocIcon  
+            <LanguageIcon  
             // icon={solid('users')}
              />
           </span>
     
-      </Tooltip> */}
+      </Tooltip>
         </FlexContainer>
     )
 }

@@ -1,13 +1,11 @@
 import React, { Component } from "react";
-
-import { Button, Tooltip,Switch } from "antd";
+import { Button,Switch } from "antd";
 import { FormattedMessage } from "react-intl";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Radio } from "antd";
  import {getRoles} from "../../../Settings/Category/Role/RoleAction"
  import { updateEmployee } from "../../EmployeeAction";
-
 import { Formik, Form, Field,FieldArray, FastField } from "formik";
 import { HeaderLabel, Spacer, StyledLabel } from "../../../../Components/UI/Elements";
 import { InputComponent } from "../../../../Components/Forms/Formik/InputComponent";
@@ -15,6 +13,7 @@ import SearchSelect from "../../../../Components/Forms/Formik/SearchSelect";
 import { SelectComponent } from "../../../../Components/Forms/Formik/SelectComponent";
 import { DatePicker } from "../../../../Components/Forms/Formik/DatePicker";
 import moment from "moment";
+import AddressFieldArray from "../../../../Components/Forms/Formik/AddressFieldArray";
 
 
 class UpdateEmployeeForm extends Component {
@@ -196,17 +195,17 @@ getLocationNameOption(filterOptionKey, filterOptionValue) {
         reportingManager: this.props.userDetails.userId
           ? this.props.userDetails.userId
           : "",
-        // address: [
-        //   {
-        //     addressId: setEditingEmployee.address.length ? setEditingEmployee.address[0].addressId : "",
-        //     address1: setEditingEmployee.address.length ? setEditingEmployee.address[0].address1 : "",
-        //     address2:  setEditingEmployee.address.length ? setEditingEmployee.address[0].address2 : "",
-        //     street:  setEditingEmployee.address.length ? setEditingEmployee.address[0].street : "",
-        //     city:  setEditingEmployee.address.length ? setEditingEmployee.address[0].city : "",
-        //     state:  setEditingEmployee.address.length ? setEditingEmployee.address[0].state : "",
-        //     postalCode:  setEditingEmployee.address.length ? setEditingEmployee.address[0].postalCode : "",  
-        //   },           
-        // ],
+        address: [
+          {
+            addressId: setEditingEmployee.address.length ? setEditingEmployee.address[0].addressId : "",
+            address1: setEditingEmployee.address.length ? setEditingEmployee.address[0].address1 : "",
+            address2:  setEditingEmployee.address.length ? setEditingEmployee.address[0].address2 : "",
+            street:  setEditingEmployee.address.length ? setEditingEmployee.address[0].street : "",
+            city:  setEditingEmployee.address.length ? setEditingEmployee.address[0].city : "",
+            state:  setEditingEmployee.address.length ? setEditingEmployee.address[0].state : "",
+            postalCode:  setEditingEmployee.address.length ? setEditingEmployee.address[0].postalCode : "",  
+          },           
+        ],
 
       }}
     //   validationSchema={documentSchema}
@@ -505,7 +504,7 @@ getLocationNameOption(filterOptionKey, filterOptionValue) {
                   </div>
                     </div>
                         {/* <Spacer /> */}
-                  {/* <FieldArray
+                  <FieldArray
                     name="address"
                     label="Address"
                     render={(arrayHelpers) => (
@@ -514,7 +513,7 @@ getLocationNameOption(filterOptionKey, filterOptionValue) {
                         values={values}
                       />
                     )}
-                  /> */}
+                  />
  
                 </div>
                 <div class=" h-3/4 w-5/12 max-sm:w-wk ">

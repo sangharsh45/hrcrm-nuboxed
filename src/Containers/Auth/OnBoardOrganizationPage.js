@@ -105,6 +105,7 @@ class OnBoardOrganizationPage extends Component {
                     />
                     <Spacer />
                       <FastField
+                      label="Industry"
     name="industry"
     placeholder="Select Industry" 
     isColumn
@@ -164,6 +165,22 @@ class OnBoardOrganizationPage extends Component {
                       name="emailId"
                       type="email"
                       placeholder="Email Id"
+                      component={this.InputComponent}
+                    />
+                     <Spacer />
+                    <Field
+                      className="gvbmIs"
+                      name="password"
+                      type="password"
+                      placeholder="Password"
+                      component={this.InputComponent}
+                    />
+                        <Spacer />
+                    <Field
+                      className="gvbmIs"
+                      name="confirmPassword"
+                      type="password"
+                      placeholder="Confirm Password"
                       component={this.InputComponent}
                     />
                   <Spacer />

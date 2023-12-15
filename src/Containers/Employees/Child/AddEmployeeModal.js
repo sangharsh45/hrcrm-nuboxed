@@ -1,9 +1,7 @@
-import React, { lazy, Suspense, Component } from "react";
-import { StyledDrawer, StyledTabs } from "../../../Components/UI/Antd";
+import React, { lazy, Component } from "react";
+import { StyledDrawer, } from "../../../Components/UI/Antd";
 import { FormattedMessage } from "react-intl";
-const EducationDocumentForm = lazy(() => import("../../Profile/Child/ProfileTabs/ProfileBoost/Education/EducationDocumentForm"));
 const EmployeeForm = lazy(() => import("../Child/EmployeeForm"));
-const TabPane = StyledTabs.TabPane;
 
 class AddEmployeeModal extends Component {
   render() {

@@ -13,7 +13,6 @@ import SearchSelect from "../../../Components/Forms/Formik/SearchSelect";
 import Upload from "../../../Components/Forms/Formik/Upload";
 import { Radio } from "antd";
 import { addEmployee,getEmployeelist } from "../EmployeeAction";
-import * as Yup from "yup";
 import { DatePicker } from "../../../Components/Forms/Formik/DatePicker";
 import dayjs from "dayjs";
 import {getRoles} from "../../Settings/Category/Role/RoleAction"
@@ -21,14 +20,15 @@ import {getDesignations} from "../../Settings/Designation/DesignationAction";
 import {getDepartments} from "../../Settings/Department/DepartmentAction";
 import AddressFieldArray from "../../../Components/Forms/Formik/AddressFieldArray";
 
-const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
-const documentSchema = Yup.object().shape({
-  mobileNo: Yup.string().matches(phoneRegExp, 'Mobile number is not valid').min(5,"Number is too short").max(10,"Number is too long"),
-  phoneNo: Yup.string().matches(phoneRegExp, 'Phone number is not valid').min(5,"Number is too short").max(10,"Number is too long"),
-  departmentId: Yup.string().required("Input needed!"),
-  roleType: Yup.string().required("Input needed!"),
-  reportingManager: Yup.string().required("Input needed!"),
-});
+
+// const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
+// const documentSchema = Yup.object().shape({
+//   mobileNo: Yup.string().matches(phoneRegExp, 'Mobile number is not valid').min(5,"Number is too short").max(10,"Number is too long"),
+//   phoneNo: Yup.string().matches(phoneRegExp, 'Phone number is not valid').min(5,"Number is too short").max(10,"Number is too long"),
+//   departmentId: Yup.string().required("Input needed!"),
+//   roleType: Yup.string().required("Input needed!"),
+//   reportingManager: Yup.string().required("Input needed!"),
+// });
 
 
 class EmployeeForm extends Component {
@@ -229,7 +229,7 @@ getEmployeesbyDepartment (filterOptionKey, filterOptionValue) {
               },
             ],
           }}
-          validationSchema={documentSchema}
+          // validationSchema={documentSchema}
           onSubmit={(values, { resetForm }) => {
             // console.log({ ...values, job_type: this.state.active });
             this.props.addEmployee({
@@ -262,7 +262,7 @@ getEmployeesbyDepartment (filterOptionKey, filterOptionValue) {
                   <FastField name="imageId" component={Upload} />
                   <div>
                   <div class=" flex justify-between max-sm:flex-col" >
-                    <div class=" w-1/3 max-sm:w-full">
+                    {/* <div class=" w-1/3 max-sm:w-full">
                       <FastField
                         name="salutation"
                         placeholder="Select"
@@ -275,8 +275,8 @@ getEmployeesbyDepartment (filterOptionKey, filterOptionValue) {
                         />}
                         isColumn
                         />
-                    </div>
-                    <div class=" w-2/4 max-sm:w-full">
+                    </div> */}
+                    <div class=" w-wk max-sm:w-full">
                       <Field
                         isRequired
                         name="firstName"
@@ -361,7 +361,7 @@ getEmployeesbyDepartment (filterOptionKey, filterOptionValue) {
                     </div>
                   </div>
                   <div class="flex justify-between max-sm:flex-col">
-                  <div class=" flex  w-w47.5 justify-between max-sm:flex-col max-sm:w-wk " >
+                  <div class=" flex  w-w47.5 justify-between mt-4 max-sm:flex-col max-sm:w-wk " >
                     <div class=" w-w47.5 max-sm:w-wk ">
                       <Field
                         name="countryDialCode"
@@ -371,6 +371,7 @@ getEmployeesbyDepartment (filterOptionKey, filterOptionValue) {
                           id="app.personal"
                           defaultMessage="Personal"
                         />}
+                        placeholder="Select"
                         isColumn
                         options={
                           Array.isArray(dialCodeNameOption)
@@ -396,7 +397,7 @@ getEmployeesbyDepartment (filterOptionKey, filterOptionValue) {
                     </div>
                    
                   </div>
-                  <div class=" flex  w-w47.5 justify-between max-sm:flex-col max-sm:w-wk" >
+                  <div class=" flex  w-w47.5 justify-between mt-4 max-sm:flex-col max-sm:w-wk" >
                     <div class="w-w47.5 max-sm:w-wk">
                       <Field
                         name="countryDialCode1"
@@ -405,6 +406,7 @@ getEmployeesbyDepartment (filterOptionKey, filterOptionValue) {
                           id="app.countryDialCode1"
                           defaultMessage="Work #"
                         />}
+                        placeholder="Select"
                         isColumn
                         options={
                           Array.isArray(dialCodeNameOption)
@@ -525,7 +527,7 @@ getEmployeesbyDepartment (filterOptionKey, filterOptionValue) {
                       <select 
                         style={{ border: "0.06em solid #aaa" }}
                       onChange={this.handleDeptChange}>
-          <option value="">Select Department</option>
+          <option value="">Select </option>
           {this.props.departments.map((item, index) => (
             <option 
            
@@ -553,6 +555,7 @@ getEmployeesbyDepartment (filterOptionKey, filterOptionValue) {
                     <FastField
                     name="label"
                     type="level"
+                    placeholder="Select"
                     label={<FormattedMessage
                       id="app.level"
                       defaultMessage="Level"
@@ -566,16 +569,15 @@ getEmployeesbyDepartment (filterOptionKey, filterOptionValue) {
                     </div>
                   </div>
                   <div class=" flex justify-between mt-2" >
-                  <div class=" w-full">
+                  <div class=" w-w48 flex flex-col max-sm:w-wk">
                   <label style={{color:"#444",fontWeight:"bold",fontSize:" 0.75rem"}}>Role</label>
-                  &nbsp;&nbsp;
+                
                   <select
-                      isColumn
-                      inlineLabel
+                 
                  style={{ border: "0.06em solid #aaa" }}
                       onChange={this.handleRoleChange}
                     >
-          <option value="">Select Role</option>
+          <option value="">Select </option>
           {this.state.role.map((item, index) => (
             <option key={index}
             // disabled={!values.country_name}
@@ -630,7 +632,7 @@ getEmployeesbyDepartment (filterOptionKey, filterOptionValue) {
                       <select 
                         style={{ border: "0.06em solid #aaa" }}
                       onChange={this.handleCountryChange}>
-          <option value="">Select Work Place</option>
+          <option value="">Select </option>
           {this.props.countries.map((item, index) => (
             <option key={index} value={item.country_name}>
               {item.country_name}
@@ -656,14 +658,14 @@ getEmployeesbyDepartment (filterOptionKey, filterOptionValue) {
                         inlineLabel
                       /> */}
                     </div>
-                    <Spacer/>
-                    <div class="w-w47.5">
+               
+                    <div class=" w-w48 flex flex-col max-sm:w-wk">
                     <label style={{color:"#444",fontWeight:"bold",fontSize:" 0.75rem"}}>Location</label>
                     <select
                  style={{ border: "0.06em solid #aaa" }}
                       onChange={this.handleLocationChange}
                     >
-          <option value="">Select location</option>
+          <option value="">Select </option>
           {this.state.locations.map((item, index) => (
             <option key={index}
             // disabled={!values.country_name}
@@ -714,6 +716,7 @@ getEmployeesbyDepartment (filterOptionKey, filterOptionValue) {
                       /> */}
                     </div>
                   </div>
+                  <div class="mt-2"><label style={{color:"#444",fontWeight:"bold",fontSize:" 0.75rem"}}>Reports To</label></div>
 
 
                   <div class=" flex justify-between mt-2 max-sm:flex-col" >

@@ -1,4 +1,4 @@
-import { render } from "enzyme";
+import {  } from "enzyme";
 import React, { Component } from "react";
 import { Link } from "../../../../../Components/Common";
 
