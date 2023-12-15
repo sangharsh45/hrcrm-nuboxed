@@ -13,8 +13,13 @@ const AddCatalogueTable = (props) => {
 
     const handleFinalSubmit = () => {
         props.addAllProductInOrder({
-            products: props.productByDistributor
-        })
+            type: props.toggle ? "Catalogue" : "Non-Catalogue",
+            distributorId: props.distributorId,
+            orderId: props.orderDetailsId,
+            products: props.productByDistributor,
+            userId: props.userId,
+            createdBy: props.userId,
+        }, props.distributorId)
     }
     const column = [
         {
@@ -60,6 +65,7 @@ const AddCatalogueTable = (props) => {
             />
             <div style={{ display: "flex", justifyContent: "flex-end" }}>
                 <Button
+                    disabled={!props.productByDistributor.length}
                     type="primary"
                     onClick={handleFinalSubmit}
                 >
@@ -70,8 +76,9 @@ const AddCatalogueTable = (props) => {
     )
 }
 
-const mapStateToProps = ({ distributor }) => ({
-    productByDistributor: distributor.productByDistributor
+const mapStateToProps = ({ distributor, auth }) => ({
+    productByDistributor: distributor.productByDistributor,
+    userId: auth.userDetails.userId,
 });
 const mapDispatchToProps = dispatch =>
     bindActionCreators({

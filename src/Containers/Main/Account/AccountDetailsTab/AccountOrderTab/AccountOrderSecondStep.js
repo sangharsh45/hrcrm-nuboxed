@@ -3,14 +3,12 @@ import React, { useState } from 'react'
 import AddPhoneExcel from './AddPhoneExcel'
 import AddCatalogueForm from './AddCatalogueForm'
 
-const AccountOrderSecondStep = () => {
+const AccountOrderSecondStep = (props) => {
 
     const [toggle, setToggle] = useState(true)
-
     const handleChange = () => {
         setToggle(!toggle)
     }
-
     return (
         <div>
             <div>
@@ -23,13 +21,12 @@ const AccountOrderSecondStep = () => {
             </div>
             <div>
                 {toggle ?
-                    <AddCatalogueForm toggle={toggle} /> :
-                    <AddPhoneExcel toggle={toggle} />
+                    <AddCatalogueForm toggle={toggle} distributorId={props.distributorId} /> :
+                    <AddPhoneExcel toggle={toggle} distributorId={props.distributorId} />
                 }
             </div>
 
         </div>
     )
 }
-
 export default AccountOrderSecondStep
