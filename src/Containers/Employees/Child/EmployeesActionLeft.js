@@ -9,7 +9,6 @@ import { Button, Input, Tooltip, Badge } from "antd";
 import { FormattedMessage } from "react-intl";
 import {getDepartments} from "../../Settings/Department/DepartmentAction"
 import { getlocation } from "../../Event/Child/Location/LocationAction";
-import GroupsIcon from "@mui/icons-material/Groups";
 import GridViewIcon from '@mui/icons-material/GridView';
 const { Search } = Input;
 const Option = StyledSelect.Option;

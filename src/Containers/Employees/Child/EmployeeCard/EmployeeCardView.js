@@ -1,16 +1,14 @@
-import React, { Component, useEffect, useState, useMemo, lazy } from "react";
-import { MultiAvatar2, StyledLabel, } from '../../../../Components/UI/Elements'
-import {  Tooltip,Button, Badge } from 'antd'
+import React, {  useEffect, useState, } from "react";
+import { MultiAvatar2, } from '../../../../Components/UI/Elements'
+import {  Tooltip, Badge } from 'antd'
 import { connect } from 'react-redux'
 import MonitorHeartIcon from "@mui/icons-material/MonitorHeart";
 import { bindActionCreators } from 'redux'
 import BorderColorIcon from "@mui/icons-material/BorderColor";
-import CellTowerIcon from '@mui/icons-material/CellTower';
 import { Select } from "antd";
 import PlaceIcon from '@mui/icons-material/Place';
 import InsertDriveFileIcon from '@mui/icons-material/InsertDriveFile';
 import DraftsIcon from '@mui/icons-material/Drafts';
-import CircleIcon from '@mui/icons-material/Circle';
 import VolumeUpIcon from '@mui/icons-material/VolumeUp';
 import styled from 'styled-components'
 import { BundleLoader } from "../../../../Components/Placeholder";
@@ -184,7 +182,7 @@ function handleSetCurrentEmployeeId(employeeId,) {
      </Tooltip>
            </div>
            <div class=" font-normal text-xs text-cardBody font-poppins ">
-           {user.userUpdateInd === true && (
+           {user.userUpdateInd === true || user.role === "ADMIN"  && (
             <Tooltip title="Edit">
               <BorderColorIcon
                 style={{ cursor: "pointer",fontSize: "1rem" }}

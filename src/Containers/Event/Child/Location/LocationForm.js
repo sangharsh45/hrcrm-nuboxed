@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Button, Switch } from "antd";
 import { Formik, Form, Field, FieldArray } from "formik";
-import * as Yup from "yup";
+import PrecisionManufacturingIcon from '@mui/icons-material/PrecisionManufacturing';
 import { Spacer, StyledLabel } from "../../../../Components/UI/Elements";
 import { InputComponent } from "../../../../Components/Forms/Formik/InputComponent";
 import { FlexContainer } from "../../../../Components/UI/Layout";
@@ -332,6 +332,33 @@ class LocationForm extends Component {
                         />
                       </div>
                     </div>
+                  
+                  </FlexContainer>
+                  <FlexContainer>
+                  <div style={{ width: "47%" }} class="mt-2">
+                      <div class="font-bold text-xs">Production &nbsp;<PrecisionManufacturingIcon/></div>
+                      <div>
+                        <Switch
+                          style={{ width: "6.25em" }}
+                          // checked={this.state.retail}
+                          // onChange={this.handleRetail}
+                          checkedChildren="Yes"
+                          unCheckedChildren="No"
+                        />
+                      </div>
+                    </div>
+                    {/* <div style={{ width: "47%" }} class="mt-2">
+                      <div class="font-bold text-xs">Project &nbsp;<i class="fas fa-project-diagram text-base"></i></div>
+                      <div>
+                        <Switch
+                          style={{ width: "6.25em" }}
+                          checked={this.state.project}
+                          onChange={this.handleProject}
+                          checkedChildren="Yes"
+                          unCheckedChildren="No"
+                        />
+                      </div>
+                    </div> */}
                   
                   </FlexContainer>
                 </div>

@@ -1,4 +1,4 @@
-import React, { lazy } from "react";
+import React, { } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { withRouter } from "react-router-dom";
@@ -33,7 +33,7 @@ class EmployeesActionRight extends React.Component {
               </a>
             </Tooltip>
           )}
-{user.userCreateInd === true && (
+{user.userCreateInd === true || user.role === "ADMIN"  && (
           <Button
             type="primary"
          
@@ -41,7 +41,7 @@ class EmployeesActionRight extends React.Component {
           >
             Add
           </Button>
-           )}
+         )} 
         </div>
       </>
     );
