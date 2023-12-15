@@ -10,8 +10,6 @@ import { FlexContainer } from "../../../../Components/UI/Layout";
  import { SelectComponent } from "../../../../Components/Forms/Formik/SelectComponent";
 import AddressFieldArray from "../../../../Components/Forms/Formik/AddressFieldArray";
 import { addLocation, } from "../../../Event/Child/Location/LocationAction";
-// import { getSalesManagerUser } from "../../Teams/TeamsAction";
-// import { getProductionManager } from "../../Plant/PlantAction";
 import { getTimeZone } from "../../../Auth/AuthAction";
 // const FormSchema = Yup.object().shape({
 //   name: Yup.string().required("Input required!"),
@@ -28,6 +26,7 @@ class LocationForm extends Component {
       corporate: false,
       inventory: false,
       project: false,
+      prodmanuf:false,
       retail: false,
     };
   }
@@ -46,6 +45,9 @@ class LocationForm extends Component {
   };
   handleProject = (checked) => {
     this.setState({ project: checked });
+  };
+  handleProdManuf = (checked) => {
+    this.setState({ prodmanuf: checked });
   };
   handleRetail = (checked) => {
     this.setState({ retail: checked });
@@ -112,6 +114,7 @@ class LocationForm extends Component {
             billingInd: this.state.billing ? "true" : "false",
             inventoryInd: this.state.inventory ? "true" : "false",
             projectInd: this.state.project ? "true" : "false",
+            prodmanufInd: this.state.prodmanuf ? "true" : "false",
             corporateInd: this.state.corporate ? "true" : "false",
             retailInd: this.state.retail ? "true" : "false",
             timeZone: "",
@@ -145,6 +148,7 @@ class LocationForm extends Component {
                 billingInd: this.state.billing ? "true" : "false",
                 inventoryInd: this.state.inventory ? "true" : "false",
                 projectInd: this.state.project ? "true" : "false",
+                prodmanufInd: this.state.prodmanuf ? "true" : "false",
                 corporateInd: this.state.corporate ? "true" : "false",
                 retailInd: this.state.retail ? "true" : "false",
                 orgId: this.props.orgId,
@@ -340,8 +344,8 @@ class LocationForm extends Component {
                       <div>
                         <Switch
                           style={{ width: "6.25em" }}
-                          // checked={this.state.retail}
-                          // onChange={this.handleRetail}
+                          checked={this.state.prodmanuf}
+                          onChange={this.handleProdManuf}
                           checkedChildren="Yes"
                           unCheckedChildren="No"
                         />
