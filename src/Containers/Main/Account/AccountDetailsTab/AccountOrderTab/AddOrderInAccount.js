@@ -93,29 +93,29 @@ function AddOrderInAccount(props) {
                         priority: priority || "",
                         // deliveryDate: `${date1}T20:00:00Z`,
                         // availabilityDate: `${date2}T20:00:00Z`,
-                    },props.distributorId);
+                    }, props.distributorId);
                 } else {
                     message.success("Advance payment should be less than 100")
                 }
             }}
         >
             {({ values, handleChange }) => (
-                  <div class="overflow-y-auto h-[40rem] overflow-x-hidden max-sm:h-[30rem]">
-                <Form>
-                    <div>
-                        <StyledLabel><h3> Pickup Address</h3></StyledLabel>
+                <div class="overflow-y-auto h-[40rem] overflow-x-hidden max-sm:h-[30rem]">
+                    <Form>
+                        <div>
+                            <StyledLabel><h3> Pickup Address</h3></StyledLabel>
 
-                        <FieldArray
-                            name="loadingAddress"
-                            render={(arrayHelpers) => (
-                                <AddressFieldArray1
-                                    singleAddress
-                                    arrayHelpers={arrayHelpers}
-                                    values={values}
-                                />
-                            )}
-                        />
-                        <div style={{ display: "flex", justifyContent: "space-between" }}>
+                            <FieldArray
+                                name="loadingAddress"
+                                render={(arrayHelpers) => (
+                                    <AddressFieldArray1
+                                        singleAddress
+                                        arrayHelpers={arrayHelpers}
+                                        values={values}
+                                    />
+                                )}
+                            />
+                            {/* <div style={{ display: "flex", justifyContent: "space-between" }}>
                             <div style={{ width: "47%" }}>
                                 <Field
                                     name="availabilityDate"
@@ -163,46 +163,70 @@ function AddOrderInAccount(props) {
                                     }}
                                 />
                             </div>
-                        </div>
-                        <Spacer />
-                        <FlexContainer justifyContent="space-between">
-                            <div style={{ width: "47%" }}>
-                                <Field
-                                    name="paymentInTerms"
-                                    label="Payment Terms (in Days)"
-                                    isColumn
-                                    inlineLabel
-                                    component={SelectComponent}
-                                    options={["7", "15", "30"]}
-                                />
-                            </div>
-                            <div style={{ width: "47%" }}>
-                                <Field
-                                    label="Contact Person"
-                                    name="contactPersonId"
-                                    placeholder="Value"
-                                    component={SelectComponent}
-                                    options={Array.isArray(contactOption) ? contactOption : []}
-                                    inlineLabel
-                                    width={"100%"}
-                                    isColumn
-                                />
-                            </div>
-                        </FlexContainer>
-                        <Spacer />
-                        <FlexContainer justifyContent="space-between">
-                            <div style={{ width: "30%" }}>
+                        </div> */}
+                            <Spacer />
+                            <FlexContainer justifyContent="space-between">
+                                <div style={{ width: "47%" }}>
+                                    <Field
+                                        name="paymentInTerms"
+                                        label="Payment Terms (in Days)"
+                                        isColumn
+                                        inlineLabel
+                                        component={SelectComponent}
+                                        options={["7", "15", "30"]}
+                                    />
+                                </div>
+                                <div style={{ width: "47%" }}>
+                                    <Field
+                                        label="Contact Person"
+                                        name="contactPersonId"
+                                        placeholder="Value"
+                                        component={SelectComponent}
+                                        options={Array.isArray(contactOption) ? contactOption : []}
+                                        inlineLabel
+                                        width={"100%"}
+                                        isColumn
+                                    />
+                                </div>
+                            </FlexContainer>
+                            <Spacer />
+                            <FlexContainer justifyContent="space-between">
+                                <div style={{ width: "30%" }}>
 
-                                <Field
-                                    width={"100%"}
-                                    name="advancePayment"
-                                    label="Advance Payment(%)"
-                                    isColumn
-                                    inlineLabel
-                                    component={InputComponent}
-                                />
-                            </div>
-                            <div style={{ width: "30%" }}>
+                                    <Field
+                                        width={"100%"}
+                                        name="advancePayment"
+                                        label="Advance Payment(%)"
+                                        isColumn
+                                        inlineLabel
+                                        component={InputComponent}
+                                    />
+                                </div>
+                                <div style={{ width: "30%" }}>
+                                    <Field
+                                        name="deliveryDate"
+                                        label="Delivery Date "
+                                        isColumn
+                                        inlineLabel
+                                        width={"100%"}
+                                        component={DatePicker}
+                                        value={values.deliveryDate}
+                                    // disabledDate={(currentDate) => {
+                                    //     if (values.availabilityDate) {
+                                    //         if (
+                                    //             moment(currentDate).isBefore(
+                                    //                 moment(values.availabilityDate)
+                                    //             )
+                                    //         ) {
+                                    //             return true;
+                                    //         } else {
+                                    //             return false;
+                                    //         }
+                                    //     }
+                                    // }}
+                                    />
+                                </div>
+                                {/* <div style={{ width: "30%" }}>
                                 <Field
                                     label="Air Way Bill"
                                     name="awbNo"
@@ -211,105 +235,105 @@ function AddOrderInAccount(props) {
                                     width={"100%"}
                                     isColumn
                                 />
-                            </div>
-                            <div style={{ width: "30%", marginTop: "2%" }}>
-                                <StyledLabel>Priority</StyledLabel>
-                                <FlexContainer justifyContent="spcae-between">
-                                    <FlexContainer>
-                                        <Tooltip title="High">
-                                            <Button
-                                                type="primary"
-                                                shape="circle"
-                                                icon={<ExclamationCircleOutlined style={{ fontSize: '0.1875em' }} />}
-                                                onClick={() => handleButtonClick("High")}
-                                                style={{
-                                                    backgroundColor:
-                                                        priority === "High"
-                                                            ? "red"
-                                                            : "white",
-                                                            borderRadius: "50%", 
-                                                            width: "31px", 
-                                                            height: "31px"
-                                                }}
-                                            />
-                                        </Tooltip>
-                                        &nbsp;
-                                        <Tooltip title="Medium">
-                                            <Button
-                                                type="primary"
-                                                shape="circle"
-                                                icon={<ExclamationCircleOutlined style={{ fontSize: '0.1875em' }} />}
-                                                onClick={() => handleButtonClick("Medium")}
-                                                style={{
-                                                    backgroundColor:
-                                                        priority === "Medium"
-                                                            ? "Orange"
-                                                            : "white",
-                                                            borderRadius: "50%", 
-                                                            width: "31px", 
-                                                            height: "31px"
-                                                }}
-                                            />
-                                        </Tooltip>
-                                        &nbsp;
-                                        <Tooltip title="Low">
-                                            <Button
-                                                type="primary"
-                                                shape="circle"
-                                                icon={<ExclamationCircleOutlined style={{ fontSize: '0.1875em' }} />}
-                                                onClick={() => handleButtonClick("Low")}
-                                                style={{
-                                                    backgroundColor:
-                                                        priority === "Low"
-                                                            ? "teal"
-                                                            : "white",
-                                                            borderRadius: "50%", 
-                                                            width: "31px", 
-                                                            height: "31px"
-                                                }}
-                                            ></Button>
-                                        </Tooltip>
+                            </div> */}
+                                <div style={{ width: "30%", marginTop: "0%" }}>
+                                    <StyledLabel>Priority</StyledLabel>
+                                    <FlexContainer justifyContent="spcae-between">
+                                        <FlexContainer>
+                                            <Tooltip title="High">
+                                                <Button
+                                                    type="primary"
+                                                    shape="circle"
+                                                    icon={<ExclamationCircleOutlined style={{ fontSize: '0.1875em' }} />}
+                                                    onClick={() => handleButtonClick("High")}
+                                                    style={{
+                                                        backgroundColor:
+                                                            priority === "High"
+                                                                ? "red"
+                                                                : "white",
+                                                        borderRadius: "50%",
+                                                        width: "31px",
+                                                        height: "31px"
+                                                    }}
+                                                />
+                                            </Tooltip>
+                                            &nbsp;
+                                            <Tooltip title="Medium">
+                                                <Button
+                                                    type="primary"
+                                                    shape="circle"
+                                                    icon={<ExclamationCircleOutlined style={{ fontSize: '0.1875em' }} />}
+                                                    onClick={() => handleButtonClick("Medium")}
+                                                    style={{
+                                                        backgroundColor:
+                                                            priority === "Medium"
+                                                                ? "Orange"
+                                                                : "white",
+                                                        borderRadius: "50%",
+                                                        width: "31px",
+                                                        height: "31px"
+                                                    }}
+                                                />
+                                            </Tooltip>
+                                            &nbsp;
+                                            <Tooltip title="Low">
+                                                <Button
+                                                    type="primary"
+                                                    shape="circle"
+                                                    icon={<ExclamationCircleOutlined style={{ fontSize: '0.1875em' }} />}
+                                                    onClick={() => handleButtonClick("Low")}
+                                                    style={{
+                                                        backgroundColor:
+                                                            priority === "Low"
+                                                                ? "teal"
+                                                                : "white",
+                                                        borderRadius: "50%",
+                                                        width: "31px",
+                                                        height: "31px"
+                                                    }}
+                                                ></Button>
+                                            </Tooltip>
+                                        </FlexContainer>
                                     </FlexContainer>
-                                </FlexContainer>
-                            </div>
+                                </div>
 
-                        </FlexContainer>
-                        <Spacer />
-                        <FlexContainer justifyContent="space-between">
-                            <div style={{ width: "47%" }}>
-                                <Field
-                                    name="comments"
-                                    label="Comment"
-                                    width={"100%"}
-                                    isColumn
-                                    component={TextareaComponent}
-                                />
-                            </div>
+                            </FlexContainer>
+                            <Spacer />
+                            <FlexContainer justifyContent="space-between">
+                                <div style={{ width: "47%" }}>
+                                    <Field
+                                        name="comments"
+                                        label="Comment"
+                                        width={"100%"}
+                                        isColumn
+                                        component={TextareaComponent}
+                                    />
+                                </div>
 
-                            <div style={{ width: "47%", margin: "67px 39px 17px -33px", display: "flex", justifyContent: "flex-end" }}>
-    <Button
-        style={{
-            backgroundColor: "#3695cd",
-            color: "white",
-            fontSize: "15px",
-            padding: "0px 12px",
-        }}
-        htmlType="Submit"
-    >
-        Save
-    </Button>
-    {/* <Button
+                                <div style={{ width: "47%", margin: "67px 39px 17px -33px", display: "flex", justifyContent: "flex-end" }}>
+                                    <Button
+                                        style={{
+                                            backgroundColor: "#3695cd",
+                                            color: "white",
+                                            fontSize: "15px",
+                                            padding: "0px 12px",
+                                        }}
+                                        htmlType="Submit"
+                                    >
+                                        Save
+                                    </Button>
+                                    {/* <Button
         type="primary"
         onClick={() => this.next()}
         style={{ marginLeft: "10px" }}
     >
         Proceed
     </Button> */}
-</div>
-                        </FlexContainer>
-                    </div>
+                                </div>
+                            </FlexContainer>
+                        </div>
 
-                </Form>
+                    </Form>
                 </div>
             )}
         </Formik>
