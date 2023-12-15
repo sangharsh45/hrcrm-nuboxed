@@ -4,7 +4,7 @@ import * as types from "./AccountActionType";
 const initialState = {
   viewType: "list",
 
-  clearbit1: {},
+  clearbit: {},
 
   updateAccountModal: false,
 
@@ -379,7 +379,8 @@ export const distributorReducer = (state = initialState, action) => {
       return {
         ...state,
         addingDistributor: false,
-        addDistributorModal: false,
+        addDistributorModal: false, 
+        allDistributors:[action.payload,...state.allDistributors]
       };
     case types.ADD_DISTRIBUTOR_FAILURE:
       return {
@@ -776,7 +777,7 @@ export const distributorReducer = (state = initialState, action) => {
         ...state,
         fetchingAllDistributors: false,
         allDistributors: [...state.allDistributors, ...action.payload],
-
+        clearbit:null
         // allDistributors: action.payload,
       };
     case types.GET_ALL_DISTRIBUTORS_LIST_FAILURE:
@@ -1821,8 +1822,8 @@ export const distributorReducer = (state = initialState, action) => {
         fetchingLocationListError: true,
       };
 
-    case types.SET_CLEARBIT_DATA1:
-      return { ...state, clearbit1: action.payload };
+    case types.SET_CLEARBIT_DATA:
+      return { ...state, clearbit: action.payload };
 
     case types.GET_ACCOUNT_RECORDS_REQUEST:
       return { ...state, fetchingRecords: true };

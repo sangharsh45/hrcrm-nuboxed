@@ -11,13 +11,14 @@ import { getAllCustomerEmployeelist } from "../../Employees/EmployeeAction";
 import { getCountry } from "../../../Containers/Settings/Category/Country/CountryAction";
 import {
   getCustomer,
+
 } from "../../Settings/Category/Customer/CustomerAction";
 import { Listbox, Transition } from '@headlessui/react'
 import ClearbitImage from "../../../Components/Forms/Autocomplete/ClearbitImage";
 import AddressFieldArray from "../../../Components/Forms/Formik/AddressFieldArray";
 import { FlexContainer } from "../../../Components/UI/Layout";
 import SearchSelect from "../../../Components/Forms/Formik/SearchSelect";
-import { addDistributor, setClearbitData1 } from "./AccountAction";
+import { addDistributor, setClearbitData } from "./AccountAction";
 import { SelectComponent } from "../../../Components/Forms/Formik/SelectComponent";
 import { getCurrency } from "../../Auth/AuthAction";
 import { ProgressiveImage } from "../../../Components/Utils";
@@ -38,12 +39,12 @@ const AddAccountForm = ({
   vat,
   user,
   orgId,
-  accounts,clearbit1,fullName,allCustomerEmployeeList,
+  accounts,clearbit,fullName,allCustomerEmployeeList,
   customerListData,
   countries,
   currencies,
   country,
-  setClearbitData1,
+  setClearbitData,
   addingDistributor,
   addDistributor,
 
@@ -146,12 +147,12 @@ const AddAccountForm = ({
             <div class=" flex justify-around max-sm:flex-col ">
             <div class=" h-full w-w47.5 max-sm:w-wk">
                      <div>
-    {clearbit1 && clearbit1.hasOwnProperty("logo") && (
+    {clearbit && clearbit.hasOwnProperty("logo") && (
       <ProgressiveImage
         preview={
           "http://pluspng.com/img-png/twitter-logo-png-twitter-logo-png-256.png"
         }
-        image={clearbit1.logo}
+        image={clearbit.logo}
         width={140}
         height={150}
         borderRadius={25}
@@ -159,7 +160,7 @@ const AddAccountForm = ({
 
       />
     )}
-    {clearbit1 && clearbit1.hasOwnProperty("logo") ? (
+    {clearbit && clearbit.hasOwnProperty("logo") ? (
       <a
         href="https://clearbit.com"
         target="_blank"
@@ -177,7 +178,7 @@ const AddAccountForm = ({
                         label="Name"
                         width={"100%"}
                         // component={InputComponent}
-                        setClearbitData1={setClearbitData1}
+                        setClearbitData={setClearbitData}
     component={ClearbitImage}
     accounts={accounts}
                         isColumn
@@ -450,7 +451,7 @@ const mapStateToProps = ({ auth, countrys,employee, catgCustomer, distributor, r
   orgId: auth.userDetails.organizationId,
   customerListData: catgCustomer.customerListData,
   countries: auth.countries,
-  clearbit1: distributor.clearbit1,
+  clearbit: distributor.clearbit,
   currencies: auth.currencies,
   country: countrys.country,
   addingDistributor: distributor.addingDistributor,
@@ -460,7 +461,7 @@ const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
       addDistributor,
-      setClearbitData1,
+      setClearbitData,
       getCountry,
       getCustomer,
       getAllCustomerEmployeelist,
