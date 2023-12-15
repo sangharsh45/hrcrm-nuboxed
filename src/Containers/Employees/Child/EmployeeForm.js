@@ -64,7 +64,7 @@ class EmployeeForm extends Component {
   };
   handleDeptChange = (event) => {
     const selectedDept = event.target.value;
-    const filteredRoles = this.props.roles.filter((item) => item.departmentName === selectedDept);
+    const filteredRoles = this.props.roles.filter((item) => item.departmentId === selectedDept);
     this.setState({ selectedDept, role: filteredRoles });
     
   };
@@ -196,6 +196,8 @@ getEmployeesbyDepartment (filterOptionKey, filterOptionValue) {
             phoneNo: "",
             location:this.state.selectedLocation,
             workplace:this.state.selectedCountry,
+            roleType:this.state.selectedRole,
+            departmentId:this.state.selectedDept,
             dateOfJoining:dayjs(),
             dob:dayjs(),
             mobileNo: "",
@@ -236,6 +238,8 @@ getEmployeesbyDepartment (filterOptionKey, filterOptionValue) {
               ...values,
               location:this.state.selectedLocation,
               workplace:this.state.selectedCountry,
+              roleType:this.state.selectedRole,
+              departmentId:this.state.selectedDept,
               job_type: this.state.active ? "Full Time" : "Part Time",
               type: this.state.typeInd ? "true" : "false",
               // job_type: this.state.active,
@@ -531,7 +535,7 @@ getEmployeesbyDepartment (filterOptionKey, filterOptionValue) {
           {this.props.departments.map((item, index) => (
             <option 
            
-            key={index} value={item.departmentName}>
+            key={index} value={item.departmentId}>
               {item.departmentName}
             </option>
           ))}
