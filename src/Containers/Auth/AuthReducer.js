@@ -36,6 +36,10 @@ const initialState = {
   loginError: false,
   token: sessionStorage.getItem("token"),
 
+  addingOnboard: false,
+   addingOnboardError: false ,
+   token: sessionStorage.getItem("token"),
+
   updatingUserById: false,
   updatingUserByIdError: false,
   userDetails: JSON.parse(sessionStorage.getItem("userDetails")) || {},
@@ -808,6 +812,19 @@ export const authReducer = (state = initialState, action) => {
               linkingOrgDocsPrivate: false,
               linkingOrgDocsPrivateError: true,
             };
+            case types.ADD_ONBOARD_REQUEST:
+              return { ...state, addingOnboard: true };
+            case types.ADD_ONBOARD_SUCCESS:
+              return {
+                ...state,
+                addingOnboard: false,
+                token: action.payload.token || sessionStorage.getItem("token"),
+              };
+            case types.ADD_ONBOARD_FAILURE:
+              return { ...state, addingOnboard: false, addingOnboardError: true };
+        
+
+        
 
     
 

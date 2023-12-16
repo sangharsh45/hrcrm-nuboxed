@@ -253,16 +253,16 @@ getLocationNameOption(filterOptionKey, filterOptionValue) {
             values,
             ...rest
           }) => (
-            <div class="overflow-y-auto h-[32rem] overflow-x-hidden max-sm:h-[30rem]">
+            <div class=" h-[32rem] max-sm:h-[30rem]">
             <Form className="form-background">
                   <div class="flex justify-between  pr-2 max-sm:flex-col">
-                <div class=" w-1/2 max-sm:w-wk">
+                <div class="  w-[47.5%] max-sm:w-wk">
                   <Spacer />
-                  <div class=" flex flex-nowrap" >
+                  <div class=" flex flex-nowrap justify-between" >
                   {/* <FastField name="imageId" component={Upload} /> */}
                   <div>
                   <div class=" flex justify-between max-sm:flex-col" >
-                    <div class=" w-1/3 max-sm:w-full">
+                    {/* <div class=" w-1/3 max-sm:w-full">
                       <FastField
                         name="salutation"
                         placeholder="Select"
@@ -275,7 +275,7 @@ getLocationNameOption(filterOptionKey, filterOptionValue) {
                         />}
                         isColumn
                         />
-                    </div>
+                    </div> */}
                     <div class=" w-2/4 max-sm:w-full">
                       <Field
                         isRequired
@@ -497,7 +497,7 @@ getLocationNameOption(filterOptionKey, filterOptionValue) {
                     </div>
                  
                   </div>
-                  <div style={{ width: "100%",backgroundImage: "linear-gradient(-90deg, #00162994, #94b3e4)" }}>
+                  <div style={{ width: "100%",backgroundImage: "linear-gradient(-90deg, #00162994, #94b3e4)",marginTop:"0.5rem" }}>
                       <div>
                   <HeaderLabel style={{color:"white"}}>
                   Address for  Correspondence</HeaderLabel>
@@ -516,15 +516,15 @@ getLocationNameOption(filterOptionKey, filterOptionValue) {
                   />
  
                 </div>
-                <div class=" h-3/4 w-5/12 max-sm:w-wk ">
+                <div class="  w-[47.5%] max-sm:w-wk ">
 
 <div class=" flex justify-between max-sm:flex-col" >
-<div class=" w-w48 max-sm:w-wk">
+<div class=" w-w48 flex flex-col max-sm:w-wk">
 <label style={{color:"#444",fontWeight:"bold",fontSize:" 0.75rem"}}>Department</label>
 <select 
                         style={{ border: "0.06em solid #aaa" }}
                       onChange={this.handleDeptChange}>
-          <option value="">Select Department</option>
+          <option value="">Select </option>
           {this.props.departments.map((item, index) => (
             <option key={index} value={item.departmentId}>
               {item.departmentName}
@@ -563,14 +563,14 @@ getLocationNameOption(filterOptionKey, filterOptionValue) {
                     </div>
                   </div>
                   <div class=" flex justify-between mt-2" >
-                  <div class=" w-full">
+                  <div class=" w-w48 flex flex-col max-sm:w-wk">
                   <label style={{color:"#444",fontWeight:"bold",fontSize:" 0.75rem"}}>Role</label>
-                  &nbsp;&nbsp;
+       
                   <select
                  style={{ border: "0.06em solid #aaa" }}
                       onChange={this.handleRoleChange}
                     >
-          <option value="">Select Role</option>
+          <option value="">Select </option>
           {this.state.role.map((item, index) => (
             <option key={index}
             // disabled={!values.country_name}
@@ -625,7 +625,7 @@ getLocationNameOption(filterOptionKey, filterOptionValue) {
                       <select 
                         style={{ border: "0.06em solid #aaa" }}
                       onChange={this.handleCountryChange}>
-          <option value="">Select Work Place</option>
+          <option value="">Select </option>
           {this.props.countries.map((item, index) => (
             <option key={index} value={item.country_name}>
               {item.country_name}
@@ -634,13 +634,13 @@ getLocationNameOption(filterOptionKey, filterOptionValue) {
         </select>
                       </div>
              
-                    <div class="w-w47.5">
+                    <div class="w-w47.5 flex flex-col">
                     <label style={{color:"#444",fontWeight:"bold",fontSize:" 0.75rem"}}>Location</label>
                     <select
                  style={{ border: "0.06em solid #aaa" }}
                       onChange={this.handleLocationChange}
                     >
-          <option value="">Select location</option>
+          <option value="">Select </option>
           {this.state.locations.map((item, index) => (
             <option key={index}
             // disabled={!values.country_name}
@@ -657,7 +657,7 @@ getLocationNameOption(filterOptionKey, filterOptionValue) {
                     </div>
                   </div>
 
-
+                  <div class="mt-2"><label style={{color:"#444",fontWeight:"bold",fontSize:" 0.75rem"}}>Reports To</label></div>
                   <div class=" flex justify-between mt-2 max-sm:flex-col" >
                       <div class=" w-w48 max-sm:w-wk">
                   <Field

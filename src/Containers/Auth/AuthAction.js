@@ -1167,3 +1167,35 @@ export const LinkOrgDocPrivate = (data, cb,) => (dispatch) => {
       cb && cb("Failure");
     });
 };
+
+export const addOnboard = (userName, password ) => (dispatch, getState) => {
+  const userId = getState().auth.userDetails.userId;
+  dispatch({
+    type: types.ADD_ONBOARD_REQUEST,
+  });
+
+  axios
+    .post(`${base_url}/registration`, {
+      username: userName,
+      password: password,
+    })
+    .then((res) => {
+      console.log(res);
+      sessionStorage.setItem("token", res.data.token);
+
+      dispatch(getUserDetails(res.data.token));
+
+      dispatch({
+        type: types.ADD_ONBOARD_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.ADD_ONBOARD_FAILURE,
+        payload: err,
+      });
+  
+    });
+};

@@ -225,3 +225,12 @@ export const setLocationViewType = (viewType) => (dispatch) => {
         });
       });
   };
+
+  export const handleLocationCustomerDrawer = (modalProps) => (dispatch) => {
+    dispatch({ type: types.HANDLE_LOCATION_CUSTOMER_DRAWER, payload: modalProps });
+  };
+
+  
+  export const handleLocationSupplierDrawer = (modalProps) => (dispatch) => {
+    dispatch({ type: types.HANDLE_LOCATION_SUPPLER_DRAWER, payload: modalProps });
+  };

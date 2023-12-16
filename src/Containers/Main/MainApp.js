@@ -8,18 +8,14 @@ import AddTaskModal from "../Task/Child/AddTaskModal";
 import {
   handleCandidateResumeModal,
 } from "../Candidate/CandidateAction";
-
 import StartStop from "./Start&Stop/StartStop";
 import { bindActionCreators } from "redux";
 import AddCandidateResumeModal from "../Candidate/Child/AddCandidateResumeModal";
-import ApartmentIcon from "@mui/icons-material/Apartment";
 import {
   Layout,
   message,
-  Popconfirm,
 } from "antd";
 import { ThemeProvider } from "styled-components";
-import Button from "antd/lib/button";
 import {
   ApplicationWrapper,
   LayoutWrapper,
@@ -27,29 +23,19 @@ import {
   FlexContainer,
 } from "../../Components/UI/Layout";
 import { handlePartnerModal } from "../Partner/PartnerAction";
-import HandshakeIcon from "@mui/icons-material/Handshake";
-import LightbulbIcon from "@mui/icons-material/Lightbulb";
-import { CustomerServiceOutlined } from "@ant-design/icons";
-import { FloatButton } from "antd";
 import { BundleLoader } from "../../Components/Placeholder";
 import AppErrorBoundary from "../../Helpers/ErrorBoundary/AppErrorBoundary";
-import PotectedRoute from "../../Helpers/Auth/PotectedRoute";
 import NavMenu from "./NavMenu";
 import ProfileDropdown from "./ProfileDropdown";
 import SettingsDropdown from "../Settings/SettingsDropdown";
-import PortraitIcon from "@mui/icons-material/Portrait";
-import IsAuthorized from "../../Helpers/Auth/IsAuthorized";
 import Rules from "../Rules/Rules";
 import Template from "../Template/Template";
-import Theme from "../Settings/Theme/Theme";
 import { getPresentNotifications } from "../Notification/NotificationAction";
-import VolumeUpIcon from "@mui/icons-material/VolumeUp";
 import { MultiAvatar } from "../../Components/UI/Elements";
 import Call from "../Call/Call";
 import Holiday from "../Holiday/Holiday";
 import Reports from "../Reports/Reports";
 import Partner from "../Partner/Partner";
-import ContactsIcon from "@mui/icons-material/Contacts";
 import Category from "../Settings/Category/Category";
 import { handleContactModal } from "../Contact/ContactAction";
 import Recruitment from "../Settings/Recruitement/Recruitment";
@@ -64,7 +50,6 @@ import LiveMesssageModal from "../LiveMessages/LiveMesssageModal";
 import AssessmentDetails from "../Accessment/Child/AssessmentDetails/AssessmentDetails";
 import Leads from "../Leads/Leads";
 import LeadDetails from "../Leads/Child/LeadsDetailTab/LeadDetails";
-import Subscription from "./Subscription";
 import Program from "../Program/Program";
 import Course from "../Course/Course";
 import Billing from "../../Components/Billing/Billing";
@@ -72,8 +57,6 @@ import AddCallModal from "../Call/Child/AddCallModal";
 import { handleCallModal } from "../Call/CallAction";
 import { handleEventModal } from "../Event/EventAction";
 import AddEventModal from "../Event/Child/AddEventModal";
-import FactCheckIcon from "@mui/icons-material/FactCheck";
-import EventAvailableIcon from "@mui/icons-material/EventAvailable";
 import CourseDetails from "../Course/Child/CourseDetailsTab/CourseDetails";
 import ProgramDetails from "../Program/Child/ProgramDetails/ProgramDetails";
 import Projects from "../Projects/Projects";
@@ -82,7 +65,6 @@ import Invoice from "../Invoice/Invoice";
 import CandidateTotalBilling from "../Projects/Child/ProjectDetailsTab/CandidateTotalBilling";
 import { getSupportedLanguages } from '../Translate/TranslateService';
 import Location from "../Event/Child/Location/Location";
-import MobileNavMenu from "./Mobilemenu";
 import PitchDetails from "../Pitch/Child/PitchDetails/PitchDetails"
 import Navmenu2 from "./Navmenu2";
 import Teams from "./Teams/Teams";
@@ -96,6 +78,8 @@ import ShipperDetails from "./Shipper/ShipperDetails";
 import AccountDetails from "./Account/AccountDetailsTab/AccountDetails";
 import InventoryDetail from "./Inventory/Child/InventoryDetails/InventoryDetail";
 import Refurbish from "./Refurbish/Refurbish";
+import Suppliers from "./Suppliers/Suppliers";
+
 const OpportunityDetail = lazy(() =>
   import("../Opportunity/Child/OpportunityDetail/OpportunityDetail")
 );
@@ -358,14 +342,7 @@ function MainApp(props) {
 
               </Popconfirm>  */}
 
-                <div
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    alignSelf: "flex-end",
-                    marginRight: 20,
-                    height: 45,
-                  }}
+                <div class="mr-3 flex items-center h-[2.5rem]"
                 >
                   {/* <ReactChat /> */}
 
@@ -475,40 +452,22 @@ function MainApp(props) {
                                     </Link> */}
                   {/* <Subscription /> */}
 
-                  <div class="max-sm:hidden"
+                  <div class=" text-white bg-mainclr h-[1.75rem] mr-3 max-sm:hidden"
                     style={{
-                      backgroundColor: "#ff7158bf",
-                      color: "white",
-                      // borderColor: "rgb(251, 133, 0)",
                       border: "1px solid tomato",
                       borderRadius: "5px",
-                      position: "relative",
-                      height: "27px",
-                      fontFamily: "Poppins",
-                      textAlign: "center",
                       lineHeight: "24px",
                       padding: "0px 10px",
-                      marginLeft: "auto",
-                      marginRight: "20px",
                     }}
                   >
                     {props.department}
                   </div>
-                  <div class="max-sm:hidden"
+                  <div class=" text-white bg-mainclr h-[1.75rem] mr-3 max-sm:hidden"
                     style={{
-                      backgroundColor: "#ff7158bf",
-                      color: "white",
-                      // borderColor: "rgb(251, 133, 0)",
                       border: "1px solid tomato",
                       borderRadius: "5px",
-                      position: "relative",
-                      height: "27px",
-                      fontFamily: "Poppins",
-                      textAlign: "center",
                       lineHeight: "24px",
                       padding: "0px 10px",
-                      marginLeft: "auto",
-                      marginRight: "20px",
                     }}
                   >
                     {props.roleType}
@@ -535,13 +494,11 @@ function MainApp(props) {
                                             </Badge>
                                         </FlexContainer>
                                     </a> */}
-                  <a href="#" style={{ height: 45, marginRight: 20 }}>
-                    <FlexContainer
-                      alignItems="center"
-                      style={{ height: "100%" }}
+                  <a href="#" style={{ height: 45, marginRight: 10 }}>
+                    <div  class=" flex items-center h-full"
                     >
                       <NotificationPopover />
-                    </FlexContainer>
+                    </div>
                   </a>
                   {/* <Link to="/help" style={{ height: 45, marginRight: 20 }}>
                     <Tooltip title="Knowledge Hub">
@@ -586,12 +543,13 @@ function MainApp(props) {
                       <Route exact path="/shipper" component={Shipper} />
                       <Route exact path="/expense" component={Expense} />
                       <Route exact path="/supplies" component={Supplies} />
+                      {/* <Route exact path="/supplier" component={Supplier} /> */}
                       <Route exact path="/order" component={Order} />
                       <Route exact path="/account" component={Account} />
                       <Route exact path="/location" component={Location} />
                       <Route exact path="/plant" component={Plant} />
                       <Route exact path="/plant/:plantId" component={PlantDetail}/>
-                      {/* <Route exact path="/suppliers" component={Suppliers} /> */}
+                      <Route exact path="/suppliers" component={Suppliers} />
                       <Route exact path="/inventory" component={Inventory} />
                       <Route exact path="/refurbish" component={Refurbish} />
                       <Route exact path="/teams" component={Teams} />

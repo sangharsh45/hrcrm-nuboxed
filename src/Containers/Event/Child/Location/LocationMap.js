@@ -70,7 +70,7 @@ const lng =
         <Leaflet
            markers={locationAdresses}
            MyPopupMarker={LocationMapPopUpMarker}
-          zoom={lat && lng && 6}
+          zoom={lat && lng && 3}
           centerPosition={lat && lng && [lat, lng]}
         />
       </>

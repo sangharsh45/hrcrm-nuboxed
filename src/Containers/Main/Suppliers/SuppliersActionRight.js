@@ -7,8 +7,9 @@ import { bindActionCreators } from "redux";
 import { withRouter } from "react-router";
 import { FlexContainer } from "../../../Components/UI/Layout";
 import { Tooltip } from "antd";
-import { handleSuppliersModal } from "../SuppliersAction";
-import AddSuppliersModal from "./AddSuppliersModal";
+import { handleSuppliersModal } from "../../Main/Suppliers/SuppliersAction";
+import AddSuppliersModal from "./Child/AddSuppliersModal";
+
 
 
 class SuppliersActionRight extends React.Component {
@@ -43,7 +44,7 @@ class SuppliersActionRight extends React.Component {
         <Tooltip placement="left" title="Create">
           <Button
             type="primary"
-            ghost
+            // ghost
             onClick={() => handleSuppliersModal(true)}
           >Add
             {/* <i class="fas fa-plus"></i> */}

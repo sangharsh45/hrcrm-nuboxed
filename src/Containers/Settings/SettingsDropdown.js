@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Menu, Icon, Badge } from "antd";
+import { Menu,  } from "antd";
 import { FormattedMessage } from "react-intl";
 import { withRouter } from "react-router-dom";
 import {
@@ -9,12 +9,10 @@ import {
 } from "../../Components/UI/Antd";
 import {
  SettingOutlined
-  
 } from '@ant-design/icons';
 import {
   ApplicationWrapper,
   MainWrapper,
-  FlexContainer,
 } from "../../Components/UI/Layout";
 let path = window.location.href.split("/")[3];
 const SettingsMenu = ({ history, pathName, recruitmentInd }) => (
@@ -169,8 +167,8 @@ class SettingsDropdown extends Component {
           />
         }
       >
-        <a href="#" style={{ height: 45, marginRight: 20 }}>
-          <FlexContainer alignItems="center" style={{ height: "100%" }}>
+        <a href="#" style={{ height: 45, marginRight: 10 }}>
+          <div class=" flex items-center h-full" >
             <SettingOutlined 
               type="setting"
               style={{
@@ -196,7 +194,7 @@ class SettingsDropdown extends Component {
                     : "#1890ff",
               }}
             />
-          </FlexContainer>
+          </div>
         </a>
       </StyledDropdown>
     );

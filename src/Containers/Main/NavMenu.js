@@ -714,6 +714,21 @@ function NavMenu(props) {
             </Link>
           </Menu.Item>
         )}
+         {/* {user.materialAccessInd === true && user.erpInd === true && ( */}
+
+<Menu.Item key="/suppliers" style={{ height: "27px", paddingLeft: "1rem" }}>
+  <Link to="/suppliers">
+    <CategoryIcon
+      style={{ fontSize: "large" }}
+    />
+    <span class="text-white text-ls ml-1"><FormattedMessage
+      id="app.suppliers"
+      defaultMessage="Suppliers"
+    />
+    </span>
+  </Link>
+</Menu.Item>
+{/* )} */}
         <hr />
         {user.inventoryAccessInd === true && user.erpInd === true && (
 
