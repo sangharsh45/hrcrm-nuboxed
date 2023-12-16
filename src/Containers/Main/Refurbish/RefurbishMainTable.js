@@ -422,8 +422,8 @@
 //                 handleProductionNotesModal={props.handleProductionNotesModal}
 
 //             />
-          
-            
+
+
 //             <TechnicianModal
 //                 handleTechnicianModal={props.handleTechnicianModal}
 //                 showTechnicianModal={props.showTechnicianModal}
@@ -490,6 +490,7 @@ import {
     handlePhoneByTechnician,
     handleOrderPhone,
     updateFinalPrice,
+    handleProductBuilder,
     handleAllSpareList
 } from "./RefurbishAction";
 import { withRouter } from "react-router";
@@ -504,6 +505,7 @@ import AddAssignRepairModal from "./AddAssignRepairModal";
 import { ApprovalOutlined, BorderAllOutlined } from "@mui/icons-material";
 import AllSpareListByOrder from "./AllSpareListByOrder";
 import { OnlyWrapCard } from "../../../Components/UI/Layout";
+import ShowProductBuilderModal from "./ShowProductBuilderModal";
 
 const EditableCell = ({
     editing,
@@ -605,200 +607,213 @@ const ProductionOrderList = (props) => {
             console.log('Validate Failed:', errInfo);
         }
     };
-    
+
     return (
         <>
-    <div className=' flex justify-end sticky top-28 z-auto'>
-<OnlyWrapCard style={{backgroundColor:"#E3E8EE"}}>
-<div className=" flex justify-between w-[97.5%] p-2 bg-transparent font-bold sticky top-0 z-10">
-    <div className=" md:w-[6.1rem]">Order Id</div>
-    <div className=" md:w-[5.1rem]">Customer</div>
-    <div className=" md:w-[1.8rem] ">Contact</div>
-    <div className="md:w-[4.6rem]">Phones #</div>
-    <div className="md:w-[4.8rem]">Remaining</div>
-    <div className="md:w-[6.2rem]">Expected Price</div>
-    <div className="md:w-[5.9rem]">Delivery Date</div>
-    <div className="md:w-[4.7rem]">Final Price</div>
-    <div className="md:w-[7.2rem]"></div>
-  </div>
-{data.map((item) => { 
-    const currentdate = moment().format("DD/MM/YYYY");
-    const date = moment(item.creationDate).format("DD/MM/YYYY");
-               return (
-                   <div>
-                       <div className="flex rounded-xl justify-between mt-4 bg-white h-12 items-center p-3 "
-                           
-                           >
-                              <div class="flex">
-                           <div className=" flex font-medium  md:w-[7.9rem] max-sm:w-full  ">
-                           <span
-                            style={{ textDecoration: "underline", color: "#1890ff", cursor: "pointer" }}
-                            onClick={() => {
-                                handleRowData(item);
-                                props.handleOrderPhone(true)
-                            }}>
-                            {item.newOrderNo}
-                        </span>
-                        &nbsp;&nbsp;
-                        {date === currentdate ? (
-                            <span
-                                style={{
-                                    color: "tomato",
-                                    fontWeight: "bold",
-                                }}
-                            >
-                                New
-                            </span>
-                        ) : null}
-                           </div>
+            <div className=' flex justify-end sticky top-28 z-auto'>
+                <OnlyWrapCard style={{ backgroundColor: "#E3E8EE" }}>
+                    <div className=" flex justify-between w-[97.5%] p-2 bg-transparent font-bold sticky top-0 z-10">
+                        <div className=" md:w-[6.1rem]">Order Id</div>
+                        <div className=" md:w-[5.1rem]">Customer</div>
+                        <div className=" md:w-[1.8rem] ">Contact</div>
+                        <div className="md:w-[4.6rem]">Units #</div>
+                        <div className="md:w-[4.8rem]">Remaining</div>
+                        <div className="md:w-[6.2rem]">Expected Price</div>
+                        <div className="md:w-[5.9rem]">Delivery Date</div>
+                        <div className="md:w-[4.7rem]">Final Price</div>
+                        <div className="md:w-[7.2rem]"></div>
+                    </div>
+                    {data.map((item) => {
+                        const currentdate = moment().format("DD/MM/YYYY");
+                        const date = moment(item.creationDate).format("DD/MM/YYYY");
+                        return (
+                            <div>
+                                <div className="flex rounded-xl justify-between mt-4 bg-white h-12 items-center p-3 "
 
-                           <div className=" flex font-medium   md:w-[9.2rem] max-sm:flex-row w-full max-sm:justify-between  ">
-                               <h4 class=" text-xs text-cardBody font-poppins">   
-                               {item.distributorName}
-                               </h4>
-                           
-                           </div> 
-                           <div className=" flex font-medium  md:w-[8.2rem] max-sm:flex-row w-full max-sm:justify-between ">
-                             
+                                >
+                                    <div class="flex">
+                                        <div className=" flex font-medium  md:w-[7.9rem] max-sm:w-full  ">
+                                            <span
+                                                style={{ textDecoration: "underline", color: "#1890ff", cursor: "pointer" }}
+                                                onClick={() => {
+                                                    handleRowData(item);
+                                                    props.handleProductBuilder(true)
+                                                }}>
+                                                {item.newOrderNo}
+                                            </span>
+                                            &nbsp;&nbsp;
+                                            {date === currentdate ? (
+                                                <span
+                                                    style={{
+                                                        color: "tomato",
+                                                        fontWeight: "bold",
+                                                    }}
+                                                >
+                                                    New
+                                                </span>
+                                            ) : null}
+                                        </div>
 
-                            
-                               <h4 class=" text-sm text-cardBody font-poppins">
-                               {item.contactPersonName}
-                               </h4>
-                           </div>
-                           </div>
-                         
-                           <div className=" flex font-medium  md:w-[15.2rem] max-sm:flex-row w-full max-sm:justify-between ">                           
-                               <div class=" text-xs text-cardBody font-poppins text-center">
-                               {item.totalReceiveQuantity}/{item.phoneCount}
-                               </div>
-                           </div>
-                         
-                           <div className=" flex font-medium  md:w-[8.2rem] max-sm:flex-row w-full max-sm:justify-between ">                           
-                               <div class=" text-xs text-cardBody font-poppins text-center">
-                               {item.receiveRemainingQuantity}
-                               </div>
-                           </div>
-                           <div className=" flex font-medium  md:w-[18.2rem] max-sm:flex-row w-full max-sm:justify-between ">                           
-                               <div class=" text-xs text-cardBody font-poppins text-center">
-                               {item.expectedPrice}
-                               </div>
-                           </div>
-                           <div className=" flex font-medium  md:w-[8.2rem] max-sm:flex-row w-full max-sm:justify-between ">                           
-                               <div class=" text-xs text-cardBody font-poppins text-center">
-                               {moment(item.deliveryDate).format("DD-MM-YYYY")}
-                               </div>
-                           </div>
-                           <div className=" flex font-medium  md:w-[9.2rem] max-sm:flex-row w-full max-sm:justify-between ">                           
-                               <div class=" text-xs text-cardBody font-poppins text-center">
-                               {item.suggestedPrice}
-                               </div>
-                           </div>
-                           <div className=" flex font-medium  md:w-[2.2rem] max-sm:flex-row w-full max-sm:justify-between ">                           
-                               <div class=" text-xs text-cardBody font-poppins text-center">
-                               <ApprovalOutlined
-                            onClick={() => {
-                                handleRowData(item);
-                                props.handleAllSpareList(true)
-                            }}
-                        />
-                               </div>
-                           </div>
-                           <div className=" flex font-medium  md:w-[7.2rem] max-sm:flex-row w-full max-sm:justify-between ">                           
-                               <div class=" text-xs text-cardBody font-poppins text-center">
-                               {item.qcStartInd === 1 ?
-                            <Tooltip title="Assign For QC">
-                                <Button
-                                    style={{
-                                        backgroundColor: "#1685e6",
-                                        color: "white",
-                                    }}
-                                    onClick={() => {
-                                        props.handleAssignOrderById(true);
-                                        handleRowData(item);
-                                    }}
-                                >Assign For QC </Button>
-                            </Tooltip> : item.qcStartInd === 2 ? <b>Assigned To Technician</b> : item.qcStartInd === 3 ? <b>QC Completed on {moment(item.qcEndTime).format("DD-MM-YYYY")}</b> : null}
-                               </div>
-                           </div>
-                           <div className=" flex font-medium  md:w-[6.2rem] max-sm:flex-row w-full max-sm:justify-between ">                           
-                               <div class=" text-xs text-cardBody font-poppins text-center">
-                               {item.qcRepairInd === 1 ?
-                            <Tooltip title="Assign For Repair">
-                                <Button
-                                    style={{
-                                        backgroundColor: "#1685e6",
-                                        color: "white",
-                                    }}
-                                    onClick={() => {
-                                        props.handleAssignRepairModal(true);
-                                        handleRowData(item);
-                                    }}
-                                >Assign For Repair</Button>
-                            </Tooltip>
-                            : item.qcRepairInd === 3 ? <b>Repair Completed on {moment(item.repairEndTime).format("DD-MM-YYYY")}</b> : null}
-                               </div>
-                           </div>
-                           <div className=" flex font-medium  md:w-[2rem] max-sm:flex-row w-full max-sm:justify-between ">                           
-                               <div class=" text-xs text-cardBody font-poppins text-center">
-                               <Tooltip title="Notes">
-                        <NoteAltIcon
-                            style={{ cursor: "pointer", fontSize: "13px" }}
-                            onClick={() => {
-                                handleRowData(item);
-                                props.handleProductionNotesModal(true);
-                            }}
-                        />
+                                        <div className=" flex font-medium   md:w-[9.2rem] max-sm:flex-row w-full max-sm:justify-between  ">
+                                            <h4 class=" text-xs text-cardBody font-poppins">
+                                                {item.distributorName}
+                                            </h4>
 
-                    </Tooltip>
-                               </div>
-                           </div>
-                           <div className=" flex font-medium  md:w-[2rem] max-sm:flex-row w-full max-sm:justify-between ">                           
-                               <div class=" text-xs text-cardBody font-poppins text-center">
-                               <Tooltip title="History">
-                        <HistoryOutlined
-                            onClick={() => {
-                                props.handleTechnicianModal(true)
-                                handleRowData(item);
-                            }}
-                        />
-                    </Tooltip>
-                               </div>
-                           </div>
-                           <div className=" flex font-medium  md:w-[2rem] max-sm:flex-row w-full max-sm:justify-between ">                           
-                               <div class=" text-xs text-cardBody font-poppins text-center">
-                               <Tooltip title="Phone List">
-                        <PhoneFilled
-                            onClick={() => {
-                                props.handlePhoneByTechnician(true)
-                                handleRowData(item);
-                            }}
-                        />
-                    </Tooltip>
-                               </div>
-                           </div>
-                       </div>
-                   </div>
-)})}
-</OnlyWrapCard>
-<AssignOrderModal
-                handleAssignOrderById={props.handleAssignOrderById}
-                assignOrderById={props.assignOrderById}
-                rowData={rowData}
-            />
-            <AllSpareListByOrder
-                handleAllSpareList={props.handleAllSpareList}
-                approveSpareModal={props.approveSpareModal}
-                rowData={rowData} />
-            <AddAssignRepairModal
-                handleAssignRepairModal={props.handleAssignRepairModal}
-                showAssignRepairModal={props.showAssignRepairModal}
-                rowData={rowData}
-            />
-</div>
-</>
-  ) 
-    
+                                        </div>
+                                        <div className=" flex font-medium  md:w-[8.2rem] max-sm:flex-row w-full max-sm:justify-between ">
+
+
+
+                                            <h4 class=" text-sm text-cardBody font-poppins">
+                                                {item.contactPersonName}
+                                            </h4>
+                                        </div>
+                                    </div>
+
+                                    <div className=" flex font-medium  md:w-[15.2rem] max-sm:flex-row w-full max-sm:justify-between ">
+                                        <div class=" text-xs text-cardBody font-poppins text-center">
+                                            {/* <span
+                                                style={{ textDecoration: "underline", color: "#1890ff", cursor: "pointer" }}
+                                                onClick={() => {
+                                                    handleRowData(item)
+                                                    props.handleProductBuilder(true)
+                                                }}> */}
+                                            {item.totalReceiveQuantity}/{item.phoneCount}
+                                            {/* </span> */}
+
+                                        </div>
+                                    </div>
+
+                                    <div className=" flex font-medium  md:w-[8.2rem] max-sm:flex-row w-full max-sm:justify-between ">
+                                        <div class=" text-xs text-cardBody font-poppins text-center">
+                                            {item.receiveRemainingQuantity}
+                                        </div>
+                                    </div>
+                                    <div className=" flex font-medium  md:w-[18.2rem] max-sm:flex-row w-full max-sm:justify-between ">
+                                        <div class=" text-xs text-cardBody font-poppins text-center">
+                                            {item.expectedPrice}
+                                        </div>
+                                    </div>
+                                    <div className=" flex font-medium  md:w-[8.2rem] max-sm:flex-row w-full max-sm:justify-between ">
+                                        <div class=" text-xs text-cardBody font-poppins text-center">
+                                            {moment(item.deliveryDate).format("DD-MM-YYYY")}
+                                        </div>
+                                    </div>
+                                    <div className=" flex font-medium  md:w-[9.2rem] max-sm:flex-row w-full max-sm:justify-between ">
+                                        <div class=" text-xs text-cardBody font-poppins text-center">
+                                            {item.suggestedPrice}
+                                        </div>
+                                    </div>
+                                    <div className=" flex font-medium  md:w-[2.2rem] max-sm:flex-row w-full max-sm:justify-between ">
+                                        <div class=" text-xs text-cardBody font-poppins text-center">
+                                            <ApprovalOutlined
+                                                onClick={() => {
+                                                    handleRowData(item);
+                                                    props.handleAllSpareList(true)
+                                                }}
+                                            />
+                                        </div>
+                                    </div>
+                                    <div className=" flex font-medium  md:w-[7.2rem] max-sm:flex-row w-full max-sm:justify-between ">
+                                        <div class=" text-xs text-cardBody font-poppins text-center">
+                                            {item.qcStartInd === 1 ?
+                                                <Tooltip title="Assign For QC">
+                                                    <Button
+                                                        style={{
+                                                            backgroundColor: "#1685e6",
+                                                            color: "white",
+                                                        }}
+                                                        onClick={() => {
+                                                            props.handleAssignOrderById(true);
+                                                            handleRowData(item);
+                                                        }}
+                                                    >Assign For QC </Button>
+                                                </Tooltip> : item.qcStartInd === 2 ? <b>Assigned To Technician</b> : item.qcStartInd === 3 ? <b>QC Completed on {moment(item.qcEndTime).format("DD-MM-YYYY")}</b> : null}
+                                        </div>
+                                    </div>
+                                    <div className=" flex font-medium  md:w-[6.2rem] max-sm:flex-row w-full max-sm:justify-between ">
+                                        <div class=" text-xs text-cardBody font-poppins text-center">
+                                            {item.qcRepairInd === 1 ?
+                                                <Tooltip title="Assign For Repair">
+                                                    <Button
+                                                        style={{
+                                                            backgroundColor: "#1685e6",
+                                                            color: "white",
+                                                        }}
+                                                        onClick={() => {
+                                                            props.handleAssignRepairModal(true);
+                                                            handleRowData(item);
+                                                        }}
+                                                    >Assign For Repair</Button>
+                                                </Tooltip>
+                                                : item.qcRepairInd === 3 ? <b>Repair Completed on {moment(item.repairEndTime).format("DD-MM-YYYY")}</b> : null}
+                                        </div>
+                                    </div>
+                                    <div className=" flex font-medium  md:w-[2rem] max-sm:flex-row w-full max-sm:justify-between ">
+                                        <div class=" text-xs text-cardBody font-poppins text-center">
+                                            <Tooltip title="Notes">
+                                                <NoteAltIcon
+                                                    style={{ cursor: "pointer", fontSize: "13px" }}
+                                                    onClick={() => {
+                                                        handleRowData(item);
+                                                        props.handleProductionNotesModal(true);
+                                                    }}
+                                                />
+
+                                            </Tooltip>
+                                        </div>
+                                    </div>
+                                    <div className=" flex font-medium  md:w-[2rem] max-sm:flex-row w-full max-sm:justify-between ">
+                                        <div class=" text-xs text-cardBody font-poppins text-center">
+                                            <Tooltip title="History">
+                                                <HistoryOutlined
+                                                    onClick={() => {
+                                                        props.handleTechnicianModal(true)
+                                                        handleRowData(item);
+                                                    }}
+                                                />
+                                            </Tooltip>
+                                        </div>
+                                    </div>
+                                    <div className=" flex font-medium  md:w-[2rem] max-sm:flex-row w-full max-sm:justify-between ">
+                                        <div class=" text-xs text-cardBody font-poppins text-center">
+                                            <Tooltip title="Phone List">
+                                                <PhoneFilled
+                                                    onClick={() => {
+                                                        props.handlePhoneByTechnician(true)
+                                                        handleRowData(item);
+                                                    }}
+                                                />
+                                            </Tooltip>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        )
+                    })}
+                </OnlyWrapCard>
+                <AssignOrderModal
+                    handleAssignOrderById={props.handleAssignOrderById}
+                    assignOrderById={props.assignOrderById}
+                    rowData={rowData}
+                />
+                <AllSpareListByOrder
+                    handleAllSpareList={props.handleAllSpareList}
+                    approveSpareModal={props.approveSpareModal}
+                    rowData={rowData} />
+                <AddAssignRepairModal
+                    handleAssignRepairModal={props.handleAssignRepairModal}
+                    showAssignRepairModal={props.showAssignRepairModal}
+                    rowData={rowData}
+                />
+                <ShowProductBuilderModal
+                    rowData={rowData}
+                    productBuilderList={props.productBuilderList}
+                    handleProductBuilder={props.handleProductBuilder} />
+            </div>
+        </>
+    )
+
 }
 
 
@@ -812,7 +827,8 @@ const mapStateToProps = ({ refurbish, auth }) => ({
     phoneByTechnician: refurbish.phoneByTechnician,
     showAssignRepairModal: refurbish.showAssignRepairModal,
     locationId: auth.userDetails.locationId,
-    approveSpareModal: refurbish.approveSpareModal
+    approveSpareModal: refurbish.approveSpareModal,
+    productBuilderList: refurbish.productBuilderList
 });
 
 const mapDispatchToProps = (dispatch) =>
@@ -823,6 +839,7 @@ const mapDispatchToProps = (dispatch) =>
             handleAssignOrderById,
             handleAssignRepairModal,
             handleTechnicianModal,
+            handleProductBuilder,
             handlePhoneByTechnician,
             handleOrderPhone,
             updateFinalPrice,

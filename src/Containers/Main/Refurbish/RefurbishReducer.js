@@ -106,6 +106,7 @@ const initialState = {
 
   phoneByTechnician: false,
 
+  productBuilderList: false,
   addOrderPhone: false,
 
   fetchingRepairPhoneByUser: false,
@@ -663,6 +664,9 @@ export const refurbishReducer = (state = initialState, action) => {
         fetchingALlSPareList: false,
         fetchingALlSPareListError: true,
       };
+
+    case types.HANDLE_PRODUCT_BUILDER_MODAL:
+      return { ...state, productBuilderList: action.payload };
     default:
       return state;
   }

@@ -4,53 +4,68 @@ import { getProductListByDistributor, addAllProductInOrder } from "../../Account
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { Button } from 'antd'
+import moment from 'moment'
 
 const AddCatalogueTable = (props) => {
 
     useEffect(() => {
-        props.getProductListByDistributor(props.distributorId)
+        props.getProductListByDistributor(props.distributorId, props.orderId)
     }, [])
 
     const handleFinalSubmit = () => {
         props.addAllProductInOrder({
             type: props.toggle ? "Catalogue" : "Non-Catalogue",
             distributorId: props.distributorId,
-            orderId: props.orderDetailsId,
+            orderId: props.orderId,
             products: props.productByDistributor,
             userId: props.userId,
             createdBy: props.userId,
-        }, props.distributorId)
+            subscriptionType: "Onetime",
+            deliveryType: "Daily",
+            deliveryUnit: "Instance",
+            noOfDays: 1,
+            deliveryStartDate: moment(),
+            deliveryEndDate: moment(),
+            subscriptionStartDate: moment()
+        }, props.distributorId, props.orderId)
     }
     const column = [
         {
             title: "",
             width: "1%"
         },
-        {
-            title: "Article",
-            width: "12%"
-        },
+
         {
             title: "Name",
-            width: "15%"
+            width: "15%",
+            dataIndex: 'name'
         },
 
         {
             title: "Category",
-            width: "18%"
+            width: "18%",
+            dataIndex: "categoryName"
+        },
+        {
+            title: "Sub Category",
+            width: "18%",
+            dataIndex: "subCategoryName"
         },
         {
             title: "Attribute",
-            width: "10%"
+            width: "10%",
+            dataIndex: "attributeName"
         },
         {
-            title: "Sub-Attribute",
-            width: "10%"
+            title: "Sub Attribute",
+            width: "10%",
+            dataIndex: "subAttributeName"
         },
         {
             title: "Units",
             width: "13%",
-            dataIndex: "unit"
+            dataIndex: "quantity",
+
         },
 
 

@@ -2,6 +2,7 @@ import React, { lazy, Suspense, Component } from "react";
 import { BundleLoader } from "../../../../../Components/Placeholder";
 import { StyledDrawer } from "../../../../../Components/UI/Antd";
 import AccountOrderDetails from "./AccountOrderDetails";
+import OrderCatalogueDetails from "./OrderCatalogueDetails"
 
 
 class AccountOrderDetailsModal extends Component {
@@ -15,7 +16,7 @@ class AccountOrderDetailsModal extends Component {
             <>
                 {/* - ${this.props.particularRowData.orderId} */}
                 <StyledDrawer
-                    title={`Phone List `}
+                    title="List"
                     width="75%"
                     visible={addOrderDetailsModal}
                     destroyOnClose
@@ -26,7 +27,11 @@ class AccountOrderDetailsModal extends Component {
                     footer={null}
                 >
                     <Suspense fallback={<BundleLoader />}>
-                        <AccountOrderDetails particularRowData={this.props.particularRowData} />
+                        {this.props.particularRowData.type === "Catalogue" ?
+                            <OrderCatalogueDetails particularRowData={this.props.particularRowData} />
+                            : <AccountOrderDetails particularRowData={this.props.particularRowData} />
+                        }
+
                     </Suspense>
                 </StyledDrawer>
             </>

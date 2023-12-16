@@ -7,6 +7,8 @@ import OpenQcTable from './OpenQcTable'
 import { FolderOpenFilled, FolderOpenTwoTone } from '@ant-design/icons'
 import OpenRepairTable from './OpenRepairTable'
 import BorderColorIcon from '@mui/icons-material/BorderColor';
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
 
 const OrderPhoneTab = (props) => {
 
@@ -36,27 +38,28 @@ const OrderPhoneTab = (props) => {
     return (
         <div>
             <StyledTabs>
-                <TabPane
-                    tab={
-                        <>
-                            <span onClick={handleMainQc}>
-                                <BorderColorIcon />&nbsp; QC
-                            </span>
-                            &nbsp;&nbsp;
-                            <span onClick={handleOpenQc}>
-                                <FolderOpenTwoTone />
-                            </span>
+                {!props.inspectionRequiredInd &&
+                    <TabPane
+                        tab={
+                            <>
+                                <span onClick={handleMainQc}>
+                                    <BorderColorIcon />&nbsp; QC
+                                </span>
+                                &nbsp;&nbsp;
+                                <span onClick={handleOpenQc}>
+                                    <FolderOpenTwoTone />
+                                </span>
 
-                        </>
-                    }
-                    key="1">
-                    {openQc ? <OpenQcTable /> : qcMain ? <ProductionOrderListById /> : null}
-                </TabPane>
+                            </>
+                        }
+                        key="1">
+                        {openQc ? <OpenQcTable /> : qcMain ? <ProductionOrderListById /> : null}
+                    </TabPane>}
                 <TabPane
                     tab={
                         <>
                             <span onClick={handleMainRepair}>
-                                <BorderColorIcon/>&nbsp; Repair
+                                <BorderColorIcon />&nbsp; Process
                             </span>
                             &nbsp;&nbsp;
                             <span onClick={handleOpenRepair}> <FolderOpenTwoTone /></span>
@@ -73,5 +76,17 @@ const OrderPhoneTab = (props) => {
     )
 }
 
-export default OrderPhoneTab
+const mapStateToProps = ({ auth }) => ({
+    inspectionRequiredInd: auth.userDetails.inspectionRequiredInd,
+});
+
+const mapDispatchToProps = (dispatch) =>
+    bindActionCreators(
+        {
+
+        },
+        dispatch
+    );
+
+export default connect(mapStateToProps, mapDispatchToProps)(OrderPhoneTab);
 

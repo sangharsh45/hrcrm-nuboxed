@@ -13,12 +13,37 @@ const AddCatalogueForm = (props) => {
         props.getAllProductList()
     }, [])
 
-    const catalogueOption = props.allProduct.map((item) => {
-        return {
-            label: item.name,
-            value: item.productId
-        }
-    })
+    const catalogueOption = props.allProduct.length && props.allProduct
+        .sort(function (a, b) {
+            var nameA = a.projectName; // ignore upper and lowercase
+            var nameB = b.projectName; // ignore upper and lowercase
+            if (nameA < nameB) {
+                return -1;
+            }
+            if (nameA > nameB) {
+                return 1;
+            }
+            // names must be equal
+            return 0;
+        }).map((item) => {
+            return {
+                label: item.name,
+                value: item.productId
+            }
+        })
+
+    function handleProductList(a, setFieldValue) {
+        return props.allProduct.map((item) => {
+            if (item.productId === a) {
+                setFieldValue("productId", item.productId);
+                setFieldValue("name", item.name);
+                setFieldValue("categoryName", item.categoryName);
+                setFieldValue("subCategoryName", item.subCategoryName);
+                setFieldValue("attributeName", item.attributeName);
+                setFieldValue("subAttributeName", item.subAttributeName)
+            }
+        });
+    }
     return (
         <>
             <Formik
@@ -27,18 +52,26 @@ const AddCatalogueForm = (props) => {
                     type: props.toggle ? "Catalogue" : "Non-Catalogue",
                     productId: "",
                     quantity: "",
-                    DistributorDiscountSubType: "amount",
+                    productName: "",
+                    categoryName: "",
+                    subCategoryName: "",
+                    attributeName: "",
+                    subAttributeName: "",
+                    distributorDiscountSubType: "amount",
                     marginType: "amount",
                     distributorDiscountType: "cash"
                 }}
 
                 onSubmit={(values, { resetForm }) => {
+                    console.log(values)
                     props.saveUnitForCatalogueItem(
                         {
                             ...values,
                             distributorId: props.distributorId,
                             orderId: props.orderDetailsId
                         },
+                        props.distributorId,
+                        props.orderDetailsId
                     );
                     resetForm();
                 }}
@@ -54,7 +87,7 @@ const AddCatalogueForm = (props) => {
                 }) => (
                     <Form>
                         <div style={{ display: "flex", justifyContent: "space-between" }}>
-                            <div style={{ width: "50%" }}>
+                            <div style={{ width: "33%" }}>
                                 <Field
                                     name="productId"
                                     label="Items"
@@ -63,10 +96,60 @@ const AddCatalogueForm = (props) => {
                                     inlineLabel
                                     width={"100%"}
                                     component={SelectComponent}
+                                    onSelect={(e) => {
+                                        console.log(e);
+                                        handleProductList(e, setFieldValue);
+                                    }}
                                     options={Array.isArray(catalogueOption) ? catalogueOption : []}
                                     style={{
                                         borderRight: "0.18em solid red",
                                     }}
+                                />
+                            </div>
+                            <div style={{ width: "30%" }}>
+                                <Field
+                                    name="categoryName"
+                                    label="Category"
+                                    disabled
+                                    isColumn
+                                    inlineLabel
+                                    width={"100%"}
+                                    component={InputComponent}
+                                />
+                            </div>
+                            <div style={{ width: "30%" }}>
+                                <Field
+                                    name="subCategoryName"
+                                    label="Sub Category"
+                                    disabled
+                                    isColumn
+                                    inlineLabel
+                                    width={"100%"}
+                                    component={InputComponent}
+                                />
+                            </div>
+                        </div>
+                        <div style={{ display: "flex", justifyContent: "space-between" }}>
+                            <div style={{ width: "27%" }}>
+                                <Field
+                                    name="attributeName"
+                                    label="Attribute"
+                                    disabled
+                                    isColumn
+                                    inlineLabel
+                                    width={"100%"}
+                                    component={InputComponent}
+                                />
+                            </div>
+                            <div style={{ width: "27%" }}>
+                                <Field
+                                    name="subAttributeName"
+                                    label="Sub Attribute"
+                                    disabled
+                                    isColumn
+                                    inlineLabel
+                                    width={"100%"}
+                                    component={InputComponent}
                                 />
                             </div>
                             <div style={{ width: "27%" }}>
@@ -80,7 +163,7 @@ const AddCatalogueForm = (props) => {
                                     component={InputComponent}
                                 />
                             </div>
-                            <div style={{ width: "17%" }}>
+                            <div style={{ width: "10%", marginTop: "15px" }}>
                                 <Button
                                     type="primary"
                                     htmlType="submit"
@@ -90,6 +173,7 @@ const AddCatalogueForm = (props) => {
                                 </Button>
                             </div>
                         </div>
+
                     </Form>
                 )}
                 {/*  */}
