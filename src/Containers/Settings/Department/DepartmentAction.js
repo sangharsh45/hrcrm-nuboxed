@@ -186,7 +186,7 @@ export const linkDepartmentDocumentToggle = ( data,departmentId,cb) => (dispatch
 
     .then((res) => {
       console.log(res);
-      // dispatch(getThirdPartyAccess(orgId))
+      dispatch(getDepartments())
       dispatch({
         type: types.LINK_DEPARTMENT_DOCUMENT_TOGGLE_SUCCESS,
         payload: res.data,

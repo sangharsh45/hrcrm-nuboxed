@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Button, Switch } from "antd";
+import PrecisionManufacturingIcon from '@mui/icons-material/PrecisionManufacturing';
 import { Formik, Form, Field, FieldArray } from "formik";
 import { Spacer, StyledLabel } from "../../../../Components/UI/Elements";
 import { InputComponent } from "../../../../Components/Forms/Formik/InputComponent";
@@ -21,43 +22,66 @@ class LocationUpdateForm extends Component {
       corporate: this.props.storedLoc.corporateInd,
       inventory: this.props.storedLoc.inventoryInd,
       project: this.props.storedLoc.projectInd,
+      productionManufac: this.props.storedLoc.prodmanufInd,
       retail: this.props.storedLoc.retailInd,
     };
   }
-
   handleProduction = () => {
-    if (this.props.storedLoc.productionInd) {
-      this.setState({ production: false });
-    }
-    else{
-      this.setState({ production: true });
-    }
-  
+    this.setState((prevState) => ({
+      production: !prevState.production,
+    }));
   };
   handleBilling = () => {
-    if (this.props.storedLoc.billingInd){
-this.setState({billing:false})
-    }
-    else{
-      this.setState({ billing: true });  
-    }
-  
+    this.setState((prevState) => ({
+      billing: !prevState.billing,
+    }));
   };
+  // handleBilling = () => {
+  //   const { setFieldValue, storedLoc } = this.props;
+  //   const newBillingValue = !this.state.billing;
+  //   setFieldValue('billingInd', newBillingValue);
+  // };
   handleCorporate = () => {
-    if (this.props.storedLoc.corporateInd){
-    this.setState({ corporate: false });}
-else{
-  this.setState({ corporate: true });}
+    this.setState((prevState) => ({
+      corporate: !prevState.corporate,
+    }));
   };
-  handleInventory = () => {
-    if(this.props.storedLoc.inventoryInd){
-    this.setState({ inventory: false });}
-    else{this.setState({ inventory: true });}
-  };
+  
+//   handleCorporate = () => {
+//     if (this.props.storedLoc.corporateInd){
+//     this.setState({ corporate: false });}
+// else{
+//   this.setState({ corporate: true });}
+//   };
+handleInventory = () => {
+  this.setState((prevState) => ({
+    inventory: !prevState.inventory,
+  }));
+};
+  // handleInventory = () => {
+  //   if(this.props.storedLoc.inventoryInd){
+  //   this.setState({ inventory: false });}
+  //   else{this.setState({ inventory: true });}
+  // };
   handleProject = () => {
-    if(this.props.storedLoc.projectInd){
-    this.setState({ project: false });}
-    else{ this.setState({ project: true });}
+    this.setState((prevState) => ({
+      project: !prevState.project,
+    }));
+  };
+  // handleProject = () => {
+  //   if(this.props.storedLoc.projectInd){
+  //   this.setState({ project: false });}
+  //   else{ this.setState({ project: true });}
+  // };
+  handleProdManuf = () => {
+    this.setState((prevState) => ({
+      prodmanuf: !prevState.prodmanuf,
+    }));
+  };
+  handleRetail = () => {
+    this.setState((prevState) => ({
+      retail: !prevState.retail,
+    }));
   };
   handleRetail = () => {
     if(this.props.storedLoc.retailInd){
@@ -128,6 +152,7 @@ else{
             billingInd: this.state.billing  ? "true" :"false",
             inventoryInd: this.state.inventory ? "true" : "false",
             projectInd: this.state.project ? "true" : "false",
+            prodmanufInd: this.state.prodmanuf ? "true" : "false",
             corporateInd: this.state.corporate ? "true" : "false",
             retailInd: this.state.retail ? "true" : "false",
             timeZone:this.props.storedLoc.timeZone || "",
@@ -160,6 +185,7 @@ else{
                 billingInd:this.state.billing  ? "true" :"false",
                 inventoryInd: this.state.inventory ? "true" : "false",
                 projectInd: this.state.project ? "true" : "false",
+                prodmanufInd: this.state.prodmanuf ? "true" : "false",
                 corporateInd: this.state.corporate ? "true" : "false",
                 retailInd: this.state.retail ? "true" : "false",
                 orgId: this.props.orgId,
@@ -269,6 +295,18 @@ else{
                           style={{ width: "6.25em" }}
                           checked={this.state.project}
                           onChange={this.handleProject}
+                          checkedChildren="Yes"
+                          unCheckedChildren="No"
+                        />
+                      </div>
+                    </div>
+                      <div style={{ width: "47%" }} class="mt-2">
+                      <div class="font-bold text-xs">Production &nbsp;<PrecisionManufacturingIcon/></div>
+                      <div>
+                        <Switch
+                          style={{ width: "6.25em" }}
+                          checked={this.state.prodmanuf}
+                          onChange={this.handleProdManuf}
                           checkedChildren="Yes"
                           unCheckedChildren="No"
                         />

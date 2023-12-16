@@ -5,7 +5,7 @@ import { Button, Switch } from "antd";
 import * as Yup from "yup";
 import { DatePicker } from "../../../Components/Forms/Formik/DatePicker";
 import { Formik, Form, Field } from "formik";
-import { base_url } from "../../../Config/Auth";
+import { base_url2 } from "../../../Config/Auth";
 import { Spacer, StyledLabel } from "../../../Components/UI/Elements";
 import Upload from "../../../Components/Forms/Formik/Upload";
 import { FlexContainer } from "../../../Components/UI/Layout";
@@ -19,7 +19,7 @@ import { SelectComponent } from "../../../Components/Forms/Formik/SelectComponen
 const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-])|(\\([0-9]{2,3}\\)[ \\-])|([0-9]{2,4})[ \\-])?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
 const SuppliesSchema = Yup.object().shape({
   name: Yup.string().required("Input needed!"),
-  cost: Yup.string().required("Input needed!"),
+  // cost: Yup.string().required("Input needed!"),
   hsn: Yup.string().required("Input needed!"),
 });
 class Suppliesform extends Component {
@@ -100,7 +100,7 @@ class Suppliesform extends Component {
                     placeholder="Start typing to search or create..."
                     optionLabel="categoryName"
                     optionValue="categoryName"
-                    url={`${base_url}/supplies/category`}
+                    url={`${base_url2}/supplies/category`}
                     component={LazySelect}
                     isColumn
                     inlineLabel
@@ -112,7 +112,7 @@ class Suppliesform extends Component {
                     placeholder="Start typing to search or create..."
                     optionLabel="subCategoryName"
                     optionValue="subCategoryName"
-                    url={`${base_url}/supplies/subcategory`}
+                    url={`${base_url2}/supplies/subcategory`}
                     component={LazySelect}
                     isColumn
                     inlineLabel
@@ -125,7 +125,7 @@ class Suppliesform extends Component {
                         placeholder="Start typing to search or create..."
                         optionLabel="attributeName"
                         optionValue="attributeName"
-                        url={`${base_url}/supplies/attribute`}
+                        url={`${base_url2}/supplies/attribute`}
                         component={LazySelect}
                         isColumn
                         inlineLabel
@@ -136,7 +136,7 @@ class Suppliesform extends Component {
                         placeholder="Start typing to search or create..."
                         optionLabel="subAttributeName"
                         optionValue="subAttributeName"
-                        url={`${base_url}/supplies/subattribute`}
+                        url={`${base_url2}/supplies/subattribute`}
                         component={LazySelect}
                         isColumn
                         inlineLabel
@@ -261,18 +261,7 @@ class Suppliesform extends Component {
                         component={InputComponent}
                       />
                     </div>
-                    <div style={{ width: "47%" }}>
-                      <Field
-                        name="dateOfManufacture"
-                        label="Date of manufacture"
-                        isColumn
-                        inlineLabel
-                        component={DatePicker}
-                        style={{
-                          width: "100%",
-                        }}
-                      />
-                    </div>
+
                   </FlexContainer>
                   <FlexContainer justifyContent="space-between">
                     <div style={{ width: "100%" }}>

@@ -820,7 +820,7 @@ export const addCarDetails = (customer, id, cb) => (dispatch, getState) => {
       },
     })
     .then((res) => {
-      dispatch(getDistributorOrderByDistributorId(id))
+      dispatch(getDistributorOrderByDistributorId(id, 0))
       dispatch({
         type: types.ADD_CAR_SUCCESS,
         payload: res.data,
@@ -943,7 +943,7 @@ export const addPaidOrder = (data, orderId, distributorId) => (dispatch) => {
     .then((res) => {
       console.log(res);
       dispatch(getDistributorOrderPayment(orderId));
-      dispatch(getDistributorOrderByDistributorId(distributorId))
+      dispatch(getDistributorOrderByDistributorId(distributorId, 0))
       dispatch({
         type: types.ADD_PAID_BY_DISTRIBUTOR_ID_SUCCESS,
         payload: res.data,
@@ -1550,7 +1550,7 @@ export const deleteOrderPaymentData = (paymentId, distributorId) => (dispatch) =
       },
     })
     .then((res) => {
-      dispatch(getDistributorOrderByDistributorId(distributorId))
+      dispatch(getDistributorOrderByDistributorId(distributorId, 0))
       console.log(res);
       dispatch({
         type: types.DELETE_ORDER_PAYMENT_DATA_SUCCESS,
@@ -1596,7 +1596,7 @@ export const updateOrderDetails = (data, orderId, distributorId) => (
     })
     .then((res) => {
       console.log(res);
-      dispatch(getDistributorOrderByDistributorId(distributorId));
+      dispatch(getDistributorOrderByDistributorId(distributorId, 0));
       dispatch({
         type: types.UPDATE_ORDER_DETAILS_SUCCESS,
         payload: res.data,
@@ -1936,7 +1936,7 @@ export const addLocationInOrder = (data, distributorId) => (dispatch) => {
     })
     .then((res) => {
       console.log(res);
-      dispatch(getDistributorOrderByDistributorId(distributorId));
+      dispatch(getDistributorOrderByDistributorId(distributorId, 0));
       dispatch({
         type: types.ADD_LOCATION_IN_ORDER_SUCCESS,
         payload: res.data,
@@ -2199,7 +2199,7 @@ export const startQCStatus = (data, distributorId, cb) => (dispatch) => {
     })
     .then((res) => {
       console.log(res);
-      dispatch(getDistributorOrderByDistributorId(distributorId))
+      dispatch(getDistributorOrderByDistributorId(distributorId, 0))
 
       dispatch({
         type: types.START_QC_STATUS_SUCCESS,
@@ -2227,7 +2227,7 @@ export const startRepairInStatus = (data, id) => (dispatch) => {
     })
     .then((res) => {
       console.log(res);
-      dispatch(getDistributorOrderByDistributorId(id));
+      dispatch(getDistributorOrderByDistributorId(id, 0));
       dispatch({
         type: types.START_REPAIR_IN_STATUS_SUCCESS,
         payload: res.data,
@@ -2253,7 +2253,7 @@ export const updateOfferPrice = (data, orderPhoneId, id, cb) => (dispatch) => {
       },
     })
     .then((res) => {
-      dispatch(getDistributorOrderByDistributorId(id));
+      dispatch(getDistributorOrderByDistributorId(id, 0));
       dispatch({
         type: types.UPDATE_OFFER_PRICE_SUCCESS,
         payload: res.data,
@@ -2505,7 +2505,7 @@ export const getAllProductList = () => (dispatch) => {
     type: types.GET_ALL_PRODUCT_LIST_REQUEST,
   });
   axios
-    .get(`${base_url}/product/all-product`, {
+    .get(`${base_url2}/product/all-product`, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },
@@ -2531,7 +2531,7 @@ export const getProductListByDistributor = (distributorId) => (dispatch) => {
     type: types.GET_PRODUCT_BY_DISTRIBUTOR_REQUEST,
   });
   axios
-    .get(`${base_url}/distributor/product/${distributorId}`, {
+    .get(`${base_url2}/distributor/product/${distributorId}`, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },
@@ -2587,7 +2587,8 @@ export const addAllProductInOrder = (data, id) => (dispatch) => {
     })
     .then((res) => {
       console.log(res);
-      // dispatch(getProductListByDistributor(id));
+      dispatch(getProductListByDistributor(id));
+      dispatch(getDistributorOrderByDistributorId(id, 0))
       dispatch({
         type: types.ADD_ALL_PRODUCT_FOR_ORDER_SUCCESS,
         payload: res.data,

@@ -24,13 +24,20 @@ const AddCatalogueForm = (props) => {
             <Formik
                 enableReinitialize
                 initialValues={{
-                    type: props.toggle ? "Catalogue" : "Non-Catalogue"
+                    type: props.toggle ? "Catalogue" : "Non-Catalogue",
+                    productId: "",
+                    quantity: "",
+                    DistributorDiscountSubType: "amount",
+                    marginType: "amount",
+                    distributorDiscountType: "cash"
                 }}
 
                 onSubmit={(values, { resetForm }) => {
                     props.saveUnitForCatalogueItem(
                         {
                             ...values,
+                            distributorId: props.distributorId,
+                            orderId: props.orderDetailsId
                         },
                     );
                     resetForm();
@@ -49,7 +56,7 @@ const AddCatalogueForm = (props) => {
                         <div style={{ display: "flex", justifyContent: "space-between" }}>
                             <div style={{ width: "50%" }}>
                                 <Field
-                                    name="paymentMode"
+                                    name="productId"
                                     label="Items"
                                     isRequired
                                     isColumn
@@ -64,7 +71,7 @@ const AddCatalogueForm = (props) => {
                             </div>
                             <div style={{ width: "27%" }}>
                                 <Field
-                                    name="unit"
+                                    name="quantity"
                                     label="Unit"
                                     isRequired
                                     isColumn
@@ -87,13 +94,17 @@ const AddCatalogueForm = (props) => {
                 )}
                 {/*  */}
             </Formik>
-            <AddCatalogueTable />
+            <AddCatalogueTable
+                distributorId={props.distributorId}
+                orderId={props.orderDetailsId}
+                toggle={props.toggle} />
 
         </>
     )
 }
 const mapStateToProps = ({ distributor }) => ({
-    allProduct: distributor.allProduct
+    allProduct: distributor.allProduct,
+    orderDetailsId: distributor.orderDetailsId,
 });
 const mapDispatchToProps = dispatch => bindActionCreators({
     getAllProductList,
