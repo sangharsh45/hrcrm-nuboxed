@@ -921,3 +921,10 @@ export const getAllSpareList = (orderId) => (dispatch) => {
       });
     });
 };
+
+export const handleProductBuilder = (modalProps) => (dispatch) => {
+  dispatch({
+    type: types.HANDLE_PRODUCT_BUILDER_MODAL,
+    payload: modalProps,
+  })
+}

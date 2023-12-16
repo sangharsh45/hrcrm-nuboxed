@@ -17,8 +17,8 @@ import {
     handlePaidModal,
     handleStatusOfOrder,
     updateOfferPrice,
+    handleAccountProduction
 } from "../../AccountAction"
-import { handleDeliveryDateModal } from "../../../Inventory/InventoryAction"
 import { Button, Popconfirm, Tooltip, Typography, Input, Form } from 'antd';
 import AddLocationInOrder from './AddLocationInOrder';
 import AccountOrderDetailsModal from './AccountOrderDetailsModal';
@@ -32,6 +32,7 @@ import { OnlyWrapCard } from '../../../../../Components/UI/Layout';
 import { Link } from '../../../../../Components/Common';
 import { BundleLoader } from '../../../../../Components/Placeholder';
 import DeliveryDateModal from '../../../Inventory/Child/InventoryDetails/Recieved/DeliveryDateModal';
+import AccountproductionModal from './AccountProductionModal';
 const EditableCell = ({
     editing,
     dataIndex,
@@ -257,10 +258,10 @@ const AccountOrderTable = (props) => {
                                                 <h4 class=" text-xs text-cardBody font-poppins">
                                                     <span
                                                         style={{ textDecoration: "underline", cursor: "pointer", color: "#1890ff" }}
-                                                    // onClick={() => {
-                                                    //     handleSetParticularOrderData(item);
-                                                    //     props.handleOrderDetailsModal(true);
-                                                    // }}
+                                                        onClick={() => {
+                                                            handleSetParticularOrderData(item);
+                                                            props.handleOrderDetailsModal(true);
+                                                        }}
                                                     >{item.newOrderNo}</span>
                                                     &nbsp;&nbsp;
                                                     {date === currentdate ? (
@@ -297,7 +298,9 @@ const AccountOrderTable = (props) => {
                                                 {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden">Pipeline Value</h4> */}
 
                                                 <div class=" text-xs text-cardBody font-poppins text-center">
-                                                    {item.locationDetailsViewDTO && item.locationDetailsViewDTO.name || ""}
+                                                    {item.type === "Catalogue" ?
+                                                        item.productionLocationDetailsViewDTO && item.productionLocationDetailsViewDTO.name || "" :
+                                                        item.locationDetailsViewDTO && item.locationDetailsViewDTO.name || ""}
                                                 </div>
                                             </div>
 
@@ -462,7 +465,7 @@ const AccountOrderTable = (props) => {
                                                                 style={{ cursor: "pointer", fontSize: "13px", backgroundColor: "#3096e9", color: "white" }}
                                                                 onClick={() => {
                                                                     handleSetParticularOrderData(item);
-                                                                    props.handleDeliveryDateModal(true);
+                                                                    props.handleAccountProduction(true);
                                                                 }}
                                                             >
                                                                 Send To Store
@@ -573,16 +576,16 @@ const AccountOrderTable = (props) => {
                 handlePaidModal={props.handlePaidModal}
                 particularRowData={particularRowData}
             />
-            <DeliveryDateModal
+            <AccountproductionModal
                 particularRowData={particularRowData}
-                addDeliverDate={props.addDeliverDate}
-                handleDeliveryDateModal={props.handleDeliveryDateModal}
+                accountOrderProduction={props.accountOrderProduction}
+                handleAccountProduction={props.handleAccountProduction}
             />
         </>
     )
 }
 const mapStateToProps = ({ distributor, auth, inventory }) => ({
-    addDeliverDate: inventory.addDeliverDate,
+    accountOrderProduction: distributor.accountOrderProduction,
     distributorOrder: distributor.distributorOrder,
     addNotesInOrder: distributor.addNotesInOrder,
     inspectionRequiredInd: auth.userDetails.inspectionRequiredInd,
@@ -600,7 +603,7 @@ const mapDispatchToProps = dispatch => bindActionCreators({
     handlePaidModal,
     handleNotesModalInOrder,
     updateOfferPrice,
-    handleDeliveryDateModal
+    handleAccountProduction
 }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(AccountOrderTable);

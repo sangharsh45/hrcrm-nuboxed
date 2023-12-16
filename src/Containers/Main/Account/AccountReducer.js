@@ -46,6 +46,8 @@ const initialState = {
   fetchingDistributorOrderError: false,
   orderForGenerating: [],
 
+  accountOrderProduction: false,
+
   addDistributorSubscriptionConfigureModal: false,
 
   fetchingActivityDistributor: false,
@@ -77,6 +79,9 @@ const initialState = {
   fetchingDistributorByDistributorId: false,
   fetchingDistributorByDistributorIdError: false,
   distributorOrder: [],
+
+  addingProductionLocationInOrder: false,
+  addingProductionLocationInOrderError: false,
 
   addRenewalButtonModal: false,
 
@@ -345,6 +350,10 @@ const initialState = {
   fetchingNotesInOrdersError: false,
   notesInOrders: [],
 
+  fetchingProductById: false,
+  fetchingProductByIdError: false,
+  catalogueById: [],
+
   addStatusOfOrder: false,
   fetchingPhoNotesOrder: false,
   fetchingPhoNotesOrderError: false,
@@ -379,8 +388,8 @@ export const distributorReducer = (state = initialState, action) => {
       return {
         ...state,
         addingDistributor: false,
-        addDistributorModal: false, 
-        allDistributors:[action.payload,...state.allDistributors]
+        addDistributorModal: false,
+        allDistributors: [action.payload, ...state.allDistributors]
       };
     case types.ADD_DISTRIBUTOR_FAILURE:
       return {
@@ -610,7 +619,7 @@ export const distributorReducer = (state = initialState, action) => {
       return {
         ...state,
         fetchingDistributorByDistributorId: false,
-        distributorOrder: action.payload,
+        distributorOrder: [...state.distributorOrder, ...action.payload]
       };
     case types.GET_DISTRIBUTOR_ORDER_BY_DISTRIBUTOR_ID_FAILURE:
       return {
@@ -777,7 +786,7 @@ export const distributorReducer = (state = initialState, action) => {
         ...state,
         fetchingAllDistributors: false,
         allDistributors: [...state.allDistributors, ...action.payload],
-        clearbit:null
+        clearbit: null
         // allDistributors: action.payload,
       };
     case types.GET_ALL_DISTRIBUTORS_LIST_FAILURE:
@@ -1948,6 +1957,40 @@ export const distributorReducer = (state = initialState, action) => {
         ...state,
         addingAllProductForOrder: false,
         addingAllProductForOrderError: true,
+      };
+
+    case types.HANDLE_ACCOUNT_PRODUCTION_MODAL:
+      return { ...state, accountOrderProduction: action.payload };
+
+    case types.ADD_PRODUCTION_LOCATION_IN_ORDER_REQUEST:
+      return { ...state, addingProductionLocationInOrder: true };
+    case types.ADD_PRODUCTION_LOCATION_IN_ORDER_SUCCESS:
+      return {
+        ...state,
+        addingProductionLocationInOrder: false,
+        accountOrderProduction: false
+      };
+    case types.ADD_PRODUCTION_LOCATION_IN_ORDER_FAILURE:
+      return {
+        ...state,
+        addingProductionLocationInOrder: false,
+        addingProductionLocationInOrderError: true,
+        accountOrderProduction: false
+      };
+
+    case types.GET_PRODUCT_LIST_BY_ID_REQUEST:
+      return { ...state, fetchingProductById: true };
+    case types.GET_PRODUCT_LIST_BY_ID_SUCCESS:
+      return {
+        ...state,
+        fetchingProductById: false,
+        catalogueById: action.payload
+      };
+    case types.GET_PRODUCT_LIST_BY_ID_FAILURE:
+      return {
+        ...state,
+        fetchingProductById: false,
+        fetchingProductByIdError: true,
       };
     default:
       return state;

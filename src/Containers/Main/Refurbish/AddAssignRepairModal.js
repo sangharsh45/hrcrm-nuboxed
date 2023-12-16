@@ -1,6 +1,7 @@
 import React, { Suspense, lazy } from "react";
 import { StyledDrawer } from "../../../Components/UI/Antd";
 import { BundleLoader } from "../../../Components/Placeholder";
+import AssignCatalogueRepairForm from "./AssignCatalogueRepairForm";
 const AssignRepairForm = lazy(() => import("./AssignRepairForm"));
 
 const AddAssignRepairModal = (props) => {
@@ -19,7 +20,10 @@ const AddAssignRepairModal = (props) => {
                 footer={null}
             >
                 <Suspense fallback={<BundleLoader />}>
-                    <AssignRepairForm rowData={props.rowData} />
+                    {props.rowData.type === "Catalogue" ?
+                        <AssignCatalogueRepairForm rowData={props.rowData} />
+                        : <AssignRepairForm rowData={props.rowData} />
+                    }
                 </Suspense>
             </StyledDrawer>
         </>

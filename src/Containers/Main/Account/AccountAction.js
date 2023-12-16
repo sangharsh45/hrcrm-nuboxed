@@ -2499,7 +2499,12 @@ export const handleAddOrderModal = (modalProps) => (dispatch) => {
     payload: modalProps,
   });
 };
-
+export const handleAccountProduction = (modalProps) => (dispatch) => {
+  dispatch({
+    type: types.HANDLE_ACCOUNT_PRODUCTION_MODAL,
+    payload: modalProps,
+  });
+};
 export const getAllProductList = () => (dispatch) => {
   dispatch({
     type: types.GET_ALL_PRODUCT_LIST_REQUEST,
@@ -2526,12 +2531,12 @@ export const getAllProductList = () => (dispatch) => {
     });
 };
 
-export const getProductListByDistributor = (distributorId) => (dispatch) => {
+export const getProductListByDistributor = (distributorId, orderId) => (dispatch) => {
   dispatch({
     type: types.GET_PRODUCT_BY_DISTRIBUTOR_REQUEST,
   });
   axios
-    .get(`${base_url2}/distributor/product/${distributorId}`, {
+    .get(`${base_url2}/distributor/product/${distributorId}/${orderId}`, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },
@@ -2551,7 +2556,7 @@ export const getProductListByDistributor = (distributorId) => (dispatch) => {
       });
     });
 };
-export const saveUnitForCatalogueItem = (data, id) => (dispatch) => {
+export const saveUnitForCatalogueItem = (data, id, orderId) => (dispatch) => {
   // debugger;
   dispatch({ type: types.SAVE_UNIT_FOR_CATALOGUE_ITEM_REQUEST });
   axios
@@ -2562,7 +2567,7 @@ export const saveUnitForCatalogueItem = (data, id) => (dispatch) => {
     })
     .then((res) => {
       console.log(res);
-      dispatch(getProductListByDistributor(id));
+      dispatch(getProductListByDistributor(id, orderId));
       dispatch({
         type: types.SAVE_UNIT_FOR_CATALOGUE_ITEM_SUCCESS,
         payload: res.data,
@@ -2576,7 +2581,7 @@ export const saveUnitForCatalogueItem = (data, id) => (dispatch) => {
     });
 };
 
-export const addAllProductInOrder = (data, id) => (dispatch) => {
+export const addAllProductInOrder = (data, id, orderId) => (dispatch) => {
   // debugger;
   dispatch({ type: types.ADD_ALL_PRODUCT_FOR_ORDER_REQUEST });
   axios
@@ -2587,7 +2592,7 @@ export const addAllProductInOrder = (data, id) => (dispatch) => {
     })
     .then((res) => {
       console.log(res);
-      dispatch(getProductListByDistributor(id));
+      dispatch(getProductListByDistributor(id, orderId));
       dispatch(getDistributorOrderByDistributorId(id, 0))
       dispatch({
         type: types.ADD_ALL_PRODUCT_FOR_ORDER_SUCCESS,
@@ -2598,6 +2603,60 @@ export const addAllProductInOrder = (data, id) => (dispatch) => {
       console.log(err);
       dispatch({
         type: types.ADD_ALL_PRODUCT_FOR_ORDER_FAILURE,
+      });
+    });
+};
+
+export const addProductionLocationInOrder = (data, id, cb) => (dispatch) => {
+  dispatch({
+    type: types.ADD_PRODUCTION_LOCATION_IN_ORDER_REQUEST,
+  });
+  axios
+    .post(`${base_url2}/orderProductionLocationLink/save`, data, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      dispatch(getDistributorOrderByDistributorId(id, 0))
+
+      dispatch({
+        type: types.ADD_PRODUCTION_LOCATION_IN_ORDER_SUCCESS,
+        payload: res.data,
+      });
+      cb && cb()
+      message.success("This order has been moved to production !")
+    })
+    .catch((err) => {
+      dispatch({
+        type: types.ADD_PRODUCTION_LOCATION_IN_ORDER_FAILURE,
+      });
+    });
+};
+
+export const getCatalogueListById = (orderId) => (dispatch) => {
+  dispatch({
+    type: types.GET_PRODUCT_LIST_BY_ID_REQUEST,
+  });
+  axios
+    .get(`${base_url2}/order/product/${orderId}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.GET_PRODUCT_LIST_BY_ID_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.GET_PRODUCT_LIST_BY_ID_FAILURE,
+        payload: err,
       });
     });
 };
