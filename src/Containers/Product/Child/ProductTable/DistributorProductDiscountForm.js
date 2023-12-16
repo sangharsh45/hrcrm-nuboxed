@@ -1,20 +1,18 @@
-import React, { useState, useEffect, useMemo, Component } from "react";
+import React, {Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import {
     Button, Switch,
 } from "antd";
-import { SelectComponent } from "../../../../Components/Forms/Formik/SelectComponent";
-import { Formik, Form, Field, FastField } from "formik";
+import { Formik, Form, Field} from "formik";
 import { FlexContainer } from "../../../../Components/UI/Layout";
 import { Spacer } from "../../../../Components/UI/Elements";
 import { InputComponent } from "../../../../Components/Forms/Formik/InputComponent";
 import { setClearbitOrderData } from "../../../Main/Account/AccountAction";
-import * as Yup from "yup";
 import { DatePicker } from "../../../../Components/Forms/Formik/DatePicker";
 import moment from "moment";
 import OrderClearbit from "../../../../Components/Forms/Autocomplete/OrderClearbit";
-import { addDiscountDistributor } from "../../ProductAction"
+import { addDiscountDistributor } from "../../ProductAction";
 
 class DistributorProductDiscountForm extends Component {
     constructor(props) {
@@ -61,7 +59,7 @@ class DistributorProductDiscountForm extends Component {
                         distributorEndDate: moment(),
                         distributorEndDate: distributorEndDate || null,
                         distributorDiscountName: "",
-                        productId: this.props.particularDiscountData.productId,
+                        // productId: this.props.particularDiscountData.productId,
                         userId: this.props.userId,
                     }}
                     onSubmit={(values, { resetForm }) => {

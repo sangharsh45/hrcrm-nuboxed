@@ -1,9 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { StyledTable } from "../../../Components/UI/Antd";
-import { MultiAvatar, SubTitle } from "../../../Components/UI/Elements";
-import { BundleLoader } from "../../../Components/Placeholder";
 import {
   getSuppliesList,
   handleUpdateSuppliesModal,
@@ -12,18 +9,16 @@ import {
   handleCurrencyPriceModal,
   handleBrandModel,
 } from "./SuppliesAction";
-import { Empty, Icon, Tooltip, Button, Popconfirm, Switch } from "antd";
+import BorderColorIcon from "@mui/icons-material/BorderColor";
+import { Tooltip, Popconfirm } from "antd";
 import {
   DeleteFilled,
-  DeleteOutlined,
-  EditOutlined,
-  MoneyCollectOutlined,
   PhoneFilled,
 } from "@ant-design/icons";
 import moment from "moment";
 import TagBrandModel from "./TagBrandModel";
 import { OnlyWrapCard } from "../../../Components/UI/Layout";
-import { Link } from "../../../Components/Common";
+import InventoryIcon from '@mui/icons-material/Inventory';
 
 function onChange(pagination, filters, sorter) {
   console.log("params", pagination, filters, sorter);
@@ -63,115 +58,50 @@ function SuppliesTable(props) {
             <div className=" md:w-[6.2rem] ">Category</div>
             <div className="md:w-[6.1rem]">Sub Category</div>
             <div className="md:w-[4.8rem]">Attribute</div>
-            <div className="md:w-[4.1rem]">Cost</div>
             <div className="md:w-[6.1rem]">Re-order level</div>
             <div className="md:w-[4.2rem]">Created</div>
-            <div className="w-[3.8rem]">Action</div>
+            <div className="w-[3.8rem]"></div>
           </div>
           {props.purchaseList.map((item) => {
             return (
               <>
                 <div
-                  className="flex rounded-xl justify-between mt-4 bg-white h-12 items-center p-3"
-                  style={
-                    {
-                      // borderBottom: "3px dotted #515050"
-                    }
-                  }
-                >
+                  className="flex rounded-xl justify-between mt-4 bg-white h-12 items-center p-3">
                   <div class=" flex flex-row justify-evenly w-wk max-sm:flex-col">
                     <div className=" flex font-medium flex-col md:w-44 max-sm:justify-between w-full max-sm:flex-row ">
-                      {/* <div class=" text-sm text-cardBody font-medium font-poppins">
-
-Name
-
-</div>  */}
-
                       <div class=" font-normal text-[0.82rem] text-cardBody font-poppins">
-                        {/* <Link
-          toUrl={`shipper/${item.shipperId}`}
-          title={`${item.shipperName}`}
-        >{item.shipperName}</Link> */}
                         {item.hsn}
                       </div>
                     </div>
                     <div className=" flex font-medium flex-col md:w-44 max-sm:justify-between w-full max-sm:flex-row ">
-                      {/* <div class=" text-sm text-cardBody font-medium font-poppins">
-
-Phone #
-
-</div>  */}
-
                       <div class=" font-normal text-[0.82rem] text-cardBody font-poppins">
                         {item.name}
                       </div>
                     </div>
                     <div className=" flex font-medium flex-col md:w-44 max-sm:justify-between w-full max-sm:flex-row ">
-                      {/* <div class=" text-sm text-cardBody font-medium font-poppins">
-
-Email
-
-</div>  */}
-
                       <div class=" font-normal text-[0.82rem] text-cardBody font-poppins">
                         {item.categoryName}
                       </div>
                     </div>
 
                     <div className=" flex font-medium flex-col md:w-44 max-sm:justify-between w-full max-sm:flex-row ">
-                      {/* <div class=" text-sm text-cardBody font-medium font-poppins">
-
-Ship By
-
-</div>  */}
-
                       <div class=" font-normal text-[0.82rem] text-cardBody font-poppins">
                         {item.subCategoryName}
                       </div>
                     </div>
                     <div className=" flex font-medium flex-col md:w-44 max-sm:justify-between w-full max-sm:flex-row ">
-                      {/* 
-<div class=" text-sm text-cardBody font-medium font-poppins">
-
-Address
-
-</div>  */}
-
                       <div class=" font-normal text-[0.82rem] text-cardBody font-poppins">
                         {item.attributeName} {item.subAttributeName}
                       </div>
                     </div>
                     <div className=" flex font-medium flex-col md:w-44 max-sm:justify-between w-full max-sm:flex-row ">
-                      {/* <div class=" text-sm text-cardBody font-medium font-poppins">
-
-City
-
-</div>  */}
-
-                      <div class=" font-normal text-[0.82rem] text-cardBody font-poppins">
-                        {item.cost}
-                      </div>
-                    </div>
-                    <div className=" flex font-medium flex-col md:w-44 max-sm:justify-between w-full max-sm:flex-row ">
-                      {/* <div class=" text-sm text-cardBody font-medium font-poppins">
-
-PinCode
-
-</div>  */}
-
                       <div class=" font-normal text-[0.82rem] text-cardBody font-poppins">
                         {item.reorder}
                       </div>
                     </div>
                     <div className=" flex font-medium flex-col md:w-44 max-sm:justify-between w-full max-sm:flex-row ">
-                      {/* <div class=" text-sm text-cardBody font-medium font-poppins">
-
-PinCode
-
-</div>  */}
-
                       <div class=" font-normal text-[0.82rem] text-cardBody font-poppins">
-                        {item.transfer}
+                      {`${moment(item.creationDate).format("ll")}`}
                       </div>
                     </div>
                     <div class="flex flex-col w-[3%] max-sm:flex-row max-sm:w-[10%]">
@@ -183,6 +113,30 @@ PinCode
                               handleParticularRowData(item);
                             }}
                             style={{ color: "blue", cursor: "pointer" }}
+                          />
+                        </Tooltip>
+                      </div>
+                      <div>
+                       
+                          <InventoryIcon
+                            style={{ cursor: "pointer", fontSize: "1rem",}}
+                          />
+                      
+                      </div>
+                    </div>
+                    <div class="flex flex-col w-[3%] max-sm:flex-row max-sm:w-[10%]">
+                      <div>
+                      <Tooltip title="Edit">
+                          <BorderColorIcon
+                            onClick={() => {
+                              props.updateSupplies(item.suppliesId);
+                              handleParticularRowData(item);
+                            }}
+                            style={{
+                              color: "grey",
+                              cursor: "pointer",
+                              fontSize: "1rem",
+                            }}
                           />
                         </Tooltip>
                       </div>

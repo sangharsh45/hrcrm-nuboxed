@@ -1112,3 +1112,10 @@ export const getBuilderByProId = (productId) => (dispatch) => {
       });
     });
 };
+
+export const handlePriceDrawer = (modalProps) => (dispatch) => {
+  dispatch({
+    type: types.HANDLE_PRICE_DRAWER,
+    payload: modalProps,
+  });
+};

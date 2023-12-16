@@ -15,8 +15,10 @@ import { Spacer } from "../../../../Components/UI/Elements";
 import SearchSelect from "../../../../Components/Forms/Formik/SearchSelect";
 import { TextareaComponent } from "../../../../Components/Forms/Formik/TextareaComponent";
 import { InputComponent } from "../../../../Components/Forms/Formik/InputComponent";
+import { SelectComponent } from "../../../../Components/Forms/Formik/SelectComponent";
 import { Listbox } from '@headlessui/react'
 import {UpdateInvestor} from "../../InvestorAction";
+import {getInvestorList} from "../../../Settings/Category/InvestorTab/InvestorListAction";
 
 //yup validation scheme for creating a account
 const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
@@ -32,7 +34,7 @@ function UpdateInvestorForm (props) {
     props.getAllEmployeelist();
     // props.getAllCustomerEmployeelist();
     props.getSectors();
-    // props.getAllSalesList();
+    props.getInvestorList(props.orgId)
   }, []);
 
 
@@ -54,6 +56,12 @@ function UpdateInvestorForm (props) {
         value: item.employeeId,
       };
     });
+    const investorType = props.investorListData.map((item) => {
+      return {
+        label: item.name || "",
+        value: item.investorCategoryId,
+      };
+    });
     const [defaultOption, setDefaultOption] = useState(RowData.assignedTo);
     const [selected, setSelected] = useState(defaultOption);
     const selectedOption = props.allEmployeeList.find((item) => item.empName === selected);
@@ -66,6 +74,7 @@ function UpdateInvestorForm (props) {
             name: RowData.name || "",
             url: RowData.url || "",
             sectorId: RowData.sectorId || "",
+            investorCategoryId:RowData.investorCategoryId || "",
             source: RowData.source || "" ,
             vatNo:RowData.vatNo  ,
             businessRegistration:RowData.businessRegistration ||"",
@@ -224,7 +233,25 @@ function UpdateInvestorForm (props) {
 
                       </div>
                  </div>
-                
+                 <div class=" flex justify-between">
+                  <div class=" w-w47.5">
+                  <FastField                     
+                            name="investorCategoryId"
+                            label={
+                              <FormattedMessage
+                                id="app.type"
+                                defaultMessage="Type"
+                              />
+                            }
+                            isColumn
+                            placeholder="Type"
+                            component={SelectComponent}
+                            options={
+                              Array.isArray(investorType) ? investorType : []
+                            }
+                          />
+                    </div>
+                    </div> 
                  <Spacer/>
                   <Field
                     name="notes"
@@ -389,15 +416,15 @@ function UpdateInvestorForm (props) {
 
 }
 
-const mapStateToProps = ({ auth,investor,customer,employee }) => ({
+const mapStateToProps = ({ auth,investor,investorList,employee }) => ({
   updateInvestorById: investor.updateInvestorById,
   updateInvestorByIdError: investor.updateInvestorByIdError,
   user: auth.userDetails,
   allEmployeeList:investor.allEmployeeList,
   userId: auth.userDetails.userId,
-  // allCustomerEmployeeList:employee.allCustomerEmployeeList,
-  organizationId: auth.userDetails.organizationId,
   employees: employee.employees,
+  investorListData:investorList.investorListData,
+  orgId:auth.userDetails.organizationId,
 });
 
 const mapDispatchToProps = (dispatch) =>
@@ -405,9 +432,8 @@ const mapDispatchToProps = (dispatch) =>
     {
       UpdateInvestor,
       getSectors,
-      getAllEmployeelist
-      // getAllSalesList,
-      // getAllCustomerEmployeelist,
+      getAllEmployeelist,
+      getInvestorList
     },
     dispatch
   );

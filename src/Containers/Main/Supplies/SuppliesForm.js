@@ -53,7 +53,6 @@ class Suppliesform extends Component {
             subCategoryName: "",
             price: 0,
             tax: 0,
-            cost: "",
             groupId: this.props.groupId,
             userId: this.props.userId,
             currencyName: ""
@@ -175,10 +174,20 @@ class Suppliesform extends Component {
                   </FlexContainer>
 
                   <FlexContainer justifyContent="space-between">
-                    <div style={{ width: "47%" }}>
+                    {/* <div style={{ width: "47%" }}>
                       <Field
                         name="cost"
                         label="Cost"
+                        isColumn
+                        width={"100%"}
+                        inlineLabel
+                        component={InputComponent}
+                      />
+                    </div> */}
+                    <div style={{ width: "47%" }}>
+                      <Field
+                        name="reorder"
+                        label="Re-order"
                         isColumn
                         width={"100%"}
                         inlineLabel
@@ -250,19 +259,7 @@ class Suppliesform extends Component {
                     </div>
                   </FlexContainer>
                   <Spacer />
-                  <FlexContainer justifyContent="space-between">
-                    <div style={{ width: "47%" }}>
-                      <Field
-                        name="reorder"
-                        label="Re-order"
-                        isColumn
-                        width={"100%"}
-                        inlineLabel
-                        component={InputComponent}
-                      />
-                    </div>
-
-                  </FlexContainer>
+        
                   <FlexContainer justifyContent="space-between">
                     <div style={{ width: "100%" }}>
                       <Field

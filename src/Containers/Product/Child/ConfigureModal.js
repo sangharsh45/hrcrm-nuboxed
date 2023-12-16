@@ -14,13 +14,13 @@ class ConfigureModal extends Component {
     return (
       <div>
         <StyledDrawer
-          title="Configure"
-          width="55vw"
+          title="Add Product"
+          width="60%"
           visible={addConfigureModal}
           destroyOnClose
           maskClosable={false}
           maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}
-          style={{ marginTop:"5rem" }}
+          style={{ marginTop:"3rem" }}
           onClose={() => handleConfigureModal(false)}
           footer={null}
         >

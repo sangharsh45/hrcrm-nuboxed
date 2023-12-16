@@ -19,12 +19,14 @@ import { InputComponent } from "../../../Components/Forms/Formik/InputComponent"
 import { SelectComponent } from "../../../Components/Forms/Formik/SelectComponent";
 import ProgressiveImage from "../../../Components/Utils/ProgressiveImage";
 import ClearbitImage from "../../../Components/Forms/Autocomplete/ClearbitImage";
+import {getInvestorList} from "../../Settings/Category/InvestorTab/InvestorListAction";
+
 // yup validation scheme for creating a account
 const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
 const InvestorSchema = Yup.object().shape({
   name: Yup.string().required("Input needed!"),
  // email: Yup.string().required("Input needed!").email("Enter a valid Email"),
-  phoneNumber: Yup.string().required("Input needed!").matches(phoneRegExp, 'Phone number is not valid').min(8,"Minimum 8 digits").max(10,"Number is too long")
+  // phoneNumber: Yup.string().required("Input needed!").matches(phoneRegExp, 'Phone number is not valid').min(8,"Minimum 8 digits").max(10,"Number is too long")
 });
 
 function InvesterForm(props) {
@@ -47,6 +49,7 @@ function InvesterForm(props) {
   useEffect(() => {
     props.getSectors();
      props.getAllEmployeelist();
+     props.getInvestorList(props.orgId)
   }, []);
 
     const {
@@ -64,6 +67,12 @@ function InvesterForm(props) {
         value: item.sectorId,
       };
     });
+    const investorType = props.investorListData.map((item) => {
+      return {
+        label: item.name || "",
+        value: item.investorCategoryId,
+      };
+    });
     const [defaultOption, setDefaultOption] = useState(props.fullName);
     const [selected, setSelected] = useState(defaultOption);
     const selectedOption = props.allEmployeeList.find((item) => item.empName === selected);
@@ -75,6 +84,7 @@ function InvesterForm(props) {
             name: "",
             url: "",
             gst:"",
+            investorCategoryId:"",
             sectorId: "",
             country: props.user.country,
             email: "",
@@ -260,7 +270,26 @@ function InvesterForm(props) {
                           />
                         </div>
                   </div>
-
+                  <div class=" flex justify-between">
+                  <div class=" w-w47.5">
+                  <FastField                     
+                            name="investorCategoryId"
+                            label={
+                              <FormattedMessage
+                                id="app.type"
+                                defaultMessage="Type"
+                              />
+                            }
+                            isColumn
+                            placeholder="Type"
+                            component={SelectComponent}
+                            value={values.investorCategoryId}
+                            options={
+                              Array.isArray(investorType) ? investorType : []
+                            }
+                          />
+                    </div>
+                    </div> 
                  
                   <Spacer />
                   <Field
@@ -424,16 +453,17 @@ function InvesterForm(props) {
   }
 
 
-const mapStateToProps = ({ auth,investor, customer,employee ,opportunity,sector}) => ({
+const mapStateToProps = ({ auth,investor, customer,employee ,investorList,sector}) => ({
   addingInvestor: investor.addingInvestor,
   clearbit: customer.clearbit,
   user: auth.userDetails,
-  // sales: opportunity.sales,
   allEmployeeList:investor.allEmployeeList,
   allCustomerEmployeeList:employee.allCustomerEmployeeList,
   userId: auth.userDetails.userId,
   sectors: sector.sectors,
-  fullName: auth.userDetails.fullName
+  fullName: auth.userDetails.fullName,
+  investorListData:investorList.investorListData,
+  orgId:auth.userDetails.organizationId,
 });
 
 const mapDispatchToProps = (dispatch) =>
@@ -442,9 +472,8 @@ const mapDispatchToProps = (dispatch) =>
         AddInvestor,
       setClearbitData,
       getSectors,
-      getAllEmployeelist
-      // getAllSalesList,
-      // getAllCustomerEmployeelist,
+      getAllEmployeelist,
+      getInvestorList
     },
     dispatch
   );
