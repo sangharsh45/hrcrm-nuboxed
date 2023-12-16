@@ -286,13 +286,13 @@ class LocationForm extends Component {
                     </div>
                   </FlexContainer>
                   <FlexContainer>
-                    <div style={{ width: "47%" }} class="mt-2">
-                      <div class="font-bold text-xs">Billing &nbsp;<i class="far fa-money-bill-alt text-base"></i></div>
+                  <div style={{ width: "47%" }} class="mt-2">
+                      <div class="font-bold text-xs">Production &nbsp;<PrecisionManufacturingIcon/></div>
                       <div>
                         <Switch
                           style={{ width: "6.25em" }}
-                          checked={this.state.billing}
-                          onChange={this.handleBilling}
+                          checked={this.state.prodmanuf}
+                          onChange={this.handleProdManuf}
                           checkedChildren="Yes"
                           unCheckedChildren="No"
                         />
@@ -340,17 +340,18 @@ class LocationForm extends Component {
                   </FlexContainer>
                   <FlexContainer>
                   <div style={{ width: "47%" }} class="mt-2">
-                      <div class="font-bold text-xs">Production &nbsp;<PrecisionManufacturingIcon/></div>
+                      <div class="font-bold text-xs">Billing &nbsp;<i class="far fa-money-bill-alt text-base"></i></div>
                       <div>
                         <Switch
                           style={{ width: "6.25em" }}
-                          checked={this.state.prodmanuf}
-                          onChange={this.handleProdManuf}
+                          checked={this.state.billing}
+                          onChange={this.handleBilling}
                           checkedChildren="Yes"
                           unCheckedChildren="No"
                         />
                       </div>
                     </div>
+               
                     {/* <div style={{ width: "47%" }} class="mt-2">
                       <div class="font-bold text-xs">Project &nbsp;<i class="fas fa-project-diagram text-base"></i></div>
                       <div>

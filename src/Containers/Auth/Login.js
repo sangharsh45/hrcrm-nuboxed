@@ -18,12 +18,12 @@ import { EyeInvisibleOutlined, EyeOutlined,
 /**
  * yup validation scheme for set Password
  */
-const LoginSchema = Yup.object().shape({
-  userName: Yup.string()
-    .email("Enter a valid email")
-    .required("Input needed !"),
-  password: Yup.string().required("Enter password"),
-});
+// const LoginSchema = Yup.object().shape({
+//   userName: Yup.string()
+//     .email("Enter a valid email")
+//     .required("Input needed !"),
+//   password: Yup.string().required("Enter password"),
+// });
 class Login extends Component {
   constructor(props) {
     super(props);
@@ -106,7 +106,7 @@ class Login extends Component {
                   userName: this.state.username || "",
                   password: this.state.password || "",
                 }}
-                validationSchema={LoginSchema}
+                // validationSchema={LoginSchema}
                 onSubmit={(values) => {
                   // same shape as initial values
                   this.submit(values);

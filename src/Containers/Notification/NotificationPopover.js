@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Badge, Icon, Tooltip, Popover } from "antd";
-// import { StyledPopover } from "../../Components/UI/Antd";
+import { Badge, Tooltip, Popover } from "antd";
 import NotificationTab from "./NotificationTab";
 import {
   BellOutlined

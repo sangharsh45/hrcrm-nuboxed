@@ -5,9 +5,10 @@ import { withRouter } from "react-router-dom";
 import { Formik, Form, Field, FastField } from "formik";
 import { FormWrapper, Input } from "./styled";
 import { ValidationError, Spacer } from "../../Components/UI/Elements";
-import { FlexContainer } from "../../Components/UI/Layout";
+import { EyeInvisibleOutlined, EyeOutlined,
+} from "@ant-design/icons";
 import Button from "antd/lib/button";
-import { login, generateOtpByEmail, validateOtp } from "./AuthAction";
+import { addOnboard, generateOtpByEmail, validateOtp } from "./AuthAction";
 import { SelectComponent } from "../../Components/Forms/Formik/SelectComponent";
    import FWLogo from "../../Assets/Images/logo_22 copy.png";
 import { FormattedMessage } from "react-intl";
@@ -21,15 +22,19 @@ class OnBoardOrganizationPage extends Component {
       industry: "",
       Loading: false,
       render: false,
-      // type: "password",
+      type: "password",
       show: Boolean(),
     };
   }
 
-
+  handleClick = () =>
+    this.setState(({ type, prevState }) => ({
+      type: type === "text" ? "password" : "text",
+      show: !this.state.show,
+    }));
   submit = (values) => {
     // this.enterLoading();
-    this.props.login(values, this.props.history);
+    this.props.addOnboard(values, this.props.history);
   };
   InputComponent = ({ field, form: { touched, errors }, ...props }) => (
     <div>
@@ -116,6 +121,8 @@ class OnBoardOrganizationPage extends Component {
                 
                     <Spacer />
                     <h2>Fiscal</h2>
+                    <Spacer />
+                    <div class=" flex flex-row justify-between">
                     <FastField
                             name="date"
                             placeholder="Select Date"
@@ -133,8 +140,10 @@ class OnBoardOrganizationPage extends Component {
     component={SelectComponent}
     inlineLabel
 />
+</div>
                     <Spacer />
                     <h2>User Details</h2>
+                    <Spacer />
                      <Field
                       className="gvbmIs"
                       name="firstName"
@@ -168,21 +177,57 @@ class OnBoardOrganizationPage extends Component {
                       component={this.InputComponent}
                     />
                      <Spacer />
-                    <Field
-                      className="gvbmIs"
-                      name="password"
-                      type="password"
-                      placeholder="Password"
-                      component={this.InputComponent}
-                    />
+                     <div className="login_password">
+                      <div style={{width:"100%"}}>
+                        <Field
+                          name="password"
+                          placeholder="Password"
+                          type={this.state.type}
+                          component={this.InputComponent}
+                        />
+                      </div>
+                      {this.state.show ? (
+                        <EyeOutlined
+                          type="eye"
+                          onClick={this.handleClick}
+                          style={{ alignSelf:"center" }}
+                          size="24"
+                        />
+                      ) : (
+                        <EyeInvisibleOutlined
+                          type="eye-invisible"
+                          onClick={this.handleClick}
+                          size="24"
+                          style={{ alignSelf:"center" }}
+                        />
+                      )}
+                      </div>
                         <Spacer />
-                    <Field
-                      className="gvbmIs"
-                      name="confirmPassword"
-                      type="password"
-                      placeholder="Confirm Password"
-                      component={this.InputComponent}
-                    />
+                        <div className="login_password">
+                      <div style={{width:"100%"}}>
+                        <Field
+                          name="confirmpassword"
+                          placeholder="Confirm Password"
+                          type={this.state.type}
+                          component={this.InputComponent}
+                        />
+                      </div>
+                      {this.state.show ? (
+                        <EyeOutlined
+                          type="eye"
+                          onClick={this.handleClick}
+                          style={{ alignSelf:"center" }}
+                          size="24"
+                        />
+                      ) : (
+                        <EyeInvisibleOutlined
+                          type="eye-invisible"
+                          onClick={this.handleClick}
+                          size="24"
+                          style={{ alignSelf:"center" }}
+                        />
+                      )}
+                      </div>
                   <Spacer />
                     <Button
                       type="primary"
@@ -216,7 +261,7 @@ const mapStateToProps = ({ auth }) => ({
 });
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators({
-    login,
+    addOnboard,
     generateOtpByEmail,
     validateOtp
   }, dispatch);

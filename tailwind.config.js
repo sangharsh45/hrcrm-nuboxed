@@ -26,6 +26,11 @@ module.exports = {
             },
             colors: {
               "clr": "tomato",
+           
+      
+            },
+            backgroundColor: {
+              "mainclr":"#ff7158bf"
       
             },
             fontFamily: {

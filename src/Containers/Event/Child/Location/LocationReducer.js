@@ -7,6 +7,10 @@ const initialState = {
     fetchingLocationDataError: false,
     showLocation:[],
 
+    locationCustomerdrawr:false,
+
+    locationSupplierdrawr:false,
+
     addingLocation: false, 
     addingLocationError: false,
 
@@ -137,8 +141,14 @@ const initialState = {
                                           ...state,
                                           fetchingAlLocShift: false,
                                           fetchingAlLocShiftError: true,
-                                        };  
-                                                                
+                                        }; 
+                                        
+                                        case types.HANDLE_LOCATION_CUSTOMER_DRAWER:
+                                          return { ...state, locationCustomerdrawr: action.payload }; 
+                              
+                                          case types.HANDLE_LOCATION_SUPPLER_DRAWER:
+                                            return { ...state, locationSupplierdrawr: action.payload }; 
+                                                                                   
                                       
         default:
     return state;

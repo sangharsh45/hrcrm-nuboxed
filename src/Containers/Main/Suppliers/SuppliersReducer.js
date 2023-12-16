@@ -65,7 +65,7 @@ const initialState = {
     .endOf("year")
     .toISOString(),
 
-  viewType: "grid",
+  viewType: "card",
   suppliersDashboardType: "All",
 
   addSuppliersModal: false,

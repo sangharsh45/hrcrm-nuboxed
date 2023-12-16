@@ -697,6 +697,12 @@ export const EmployeeReducer = (state = initialState, action) => {
           updateEmployeeError: true,
         };
 
+        case types.HANDLE_CLAER_REDUCER_DATA_EMPLOYEE:
+          return { ...state, 
+            employees: [], 
+            // deletedTruck: [] 
+          };
+
     default:
       return state;
   }

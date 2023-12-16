@@ -1,15 +1,22 @@
 import React, { useEffect,useState, lazy } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { getlocation, handleLocationShiftDrawer,handleUpdateLocationDrawer,deleteLocation } from "./LocationAction";
+import { getlocation, handleLocationShiftDrawer,
+  handleUpdateLocationDrawer,
+  handleLocationCustomerDrawer,
+  handleLocationSupplierDrawer,
+  deleteLocation } from "./LocationAction";
 import styled from "styled-components";
 import { Switch, Tooltip } from "antd";
-import { BundleLoader } from "../../../../Components/Placeholder";
+import AcUnitIcon from '@mui/icons-material/AcUnit';
+import InventoryIcon from '@mui/icons-material/Inventory';
 import { StyledPopconfirm } from "../../../../Components/UI/Antd";
 import DeleteIcon from "@mui/icons-material/Delete";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
 import InfiniteScroll from "react-infinite-scroll-component";
 import FilterTiltShiftIcon from "@mui/icons-material/FilterTiltShift";
+import LocationCustomerDrawer from "./LocationCustomerDrawer";
+import LocationSupplierDrawer from "./LocationSupplierDrawer";
 
 const LocationShiftDrawer = lazy(() => import("./LocationShiftDrawer"));
 const LocationUpdateDrawer=lazy(()=>import("./LocationUpdateDrawer"));
@@ -224,6 +231,31 @@ const handleLoadMore = () => {
                     </div>
                     <div class="flex flex-col w-[5%] max-sm:flex-row max-sm:w-[10%]">
                       <div>
+                        <Tooltip title="Customer">
+                          <AcUnitIcon
+                            style={{ cursor: "pointer", fontSize: "1rem" }}
+                            onClick={() => {
+                               handleStoredLocations(item);
+                            props.handleLocationCustomerDrawer(true);
+                            }}
+                          />
+                        </Tooltip>
+                      </div>
+                      <div>
+                      <Tooltip title="Supplier">
+                          <InventoryIcon
+                            style={{ cursor: "pointer", fontSize: "1rem" }}
+                            onClick={() => {
+                               handleStoredLocations(item);
+                            props.handleLocationSupplierDrawer(true);
+                            }}
+                          />
+                         </Tooltip>
+                      </div>
+                      <div></div>
+                    </div>
+                    <div class="flex flex-col w-[5%] max-sm:flex-row max-sm:w-[10%]">
+                      <div>
                         <Tooltip title="Edit">
                           <BorderColorIcon
                             style={{ cursor: "pointer", fontSize: "1rem" }}
@@ -270,11 +302,23 @@ const handleLoadMore = () => {
       locationUpdatedrawr={props.locationUpdatedrawr}
       handleUpdateLocationDrawer={props.handleUpdateLocationDrawer}
       />
+           <LocationCustomerDrawer
+      storedLoc={storedLoc}
+      locationCustomerdrawr={props.locationCustomerdrawr}
+      handleLocationCustomerDrawer={props.handleLocationCustomerDrawer}
+      />
+                 <LocationSupplierDrawer
+      storedLoc={storedLoc}
+      locationSupplierdrawr={props.locationSupplierdrawr}
+      handleLocationSupplierDrawer={props.handleLocationSupplierDrawer}
+      />
     </>
   );
 };
 const mapStateToProps = ({ location, auth }) => ({
   showLocation: location.showLocation,
+  locationSupplierdrawr:location.locationSupplierdrawr,
+  locationCustomerdrawr:location.locationCustomerdrawr,
   orgId: auth.userDetails.organizationId,
   locShiftDrawer: location.locShiftDrawer,
   locationUpdatedrawr:location.locationUpdatedrawr
@@ -285,7 +329,9 @@ const mapDispatchToProps = (dispatch) =>
       getlocation,
       handleLocationShiftDrawer,
       handleUpdateLocationDrawer,
-      deleteLocation
+      deleteLocation,
+      handleLocationCustomerDrawer,
+      handleLocationSupplierDrawer
     },
     dispatch
   );

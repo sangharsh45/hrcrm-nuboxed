@@ -1,5 +1,5 @@
 import React from "react";
-import { ActionIcon } from "../../../Components/Utils";
+import GridViewIcon from '@mui/icons-material/GridView';
 import { FlexContainer } from "../../../Components/UI/Layout";
 import { StyledRangePicker, StyledSelect } from "../../../Components/UI/Antd";
 import { bindActionCreators } from "redux";
@@ -33,18 +33,18 @@ class SuppliersActionLeft extends React.Component {
         const creationDate = user.creationDate;
         return (
             <FlexContainer alignItems="center">
-                <Tooltip title="Suppliers Library">
-                    <AppstoreOutlined
+                <Tooltip title="Suppliers List">
+                    <GridViewIcon
                         style={{
                             marginRight: "0.3rem",
-                            color: viewType === "grid" && "#1890ff",
+                            color: viewType === "card" && "#1890ff",
                         }}
                         // iconType="appstore-o"
                         // tooltipTitle="Suppliers Library"
-                        onClick={() => setSuppliersViewType("grid")}
+                        onClick={() => setSuppliersViewType("card")}
                     />
                 </Tooltip>
-                <Tooltip title="ALL Suppliers">
+                {/* <Tooltip title="ALL Suppliers">
                 <Badge size="small">
                     <span
                         style={{
@@ -55,7 +55,7 @@ class SuppliersActionLeft extends React.Component {
                     >All
                     </span>
                     </Badge>
-                </Tooltip>
+                </Tooltip> */}
                 {/* <Tooltip title="Dashboard View">
                     <AreaChartOutlined
                         style={{
@@ -92,25 +92,19 @@ class SuppliersActionLeft extends React.Component {
                     </FlexContainer>
                 )} */}
                 &nbsp;&nbsp;
-                <div style={{ marginLeft: "30px" }}>
-                    <Search
-                        placeholder="Search By Name"
-                        onSearch={(value) => {
-                            this.props.inputDataSearch(value);
-                            this.props.setCurrentData(value);
-                        }}
-                        allowClear
-                        enterButton
-                    />
-                </div>
+                <div class=" ml-6 h-6 w-60">
+      <Input
+     placeholder="Search By Name"
+      width={"100%"}
+            // suffix={suffix}
+            // onPressEnter={handleSearch}  
+            // onChange={handleChange}
+            // value={currentData}
+          />
+   
+      </div>
                 &nbsp;
                 &nbsp;
-                <Button
-                    type={this.props.currentData ? "primary" : "default"}
-                    onClick={this.props.handleClear}
-                >
-                    Clear
-                </Button>
 
             </FlexContainer>
         );

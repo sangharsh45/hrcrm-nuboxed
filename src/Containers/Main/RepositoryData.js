@@ -1,9 +1,7 @@
 import LibraryBooksIcon from '@mui/icons-material/LibraryBooks'; 
 import React from 'react'
 import { connect } from "react-redux";
-
 import { bindActionCreators } from "redux";
-import AddUploadOrganizationModal from "./AddUploadOrganizationModal"
 import {handleRepositoryOrganizationModal} from "../Auth/AuthAction"
 import RepositoryOrganizationModal from './RepositoryOrganizationModal';
 import { Tooltip } from 'antd';
@@ -14,7 +12,7 @@ function RepositoryData(props) {
     <div>
     <Tooltip title="Repository">
         <LibraryBooksIcon
-        style={{fontSize:"1.2rem",marginLeft:"0.5rem"}}
+        style={{fontSize:"1.2rem",marginRight:10}}
           onClick={() => {
           
             props.handleRepositoryOrganizationModal(true);

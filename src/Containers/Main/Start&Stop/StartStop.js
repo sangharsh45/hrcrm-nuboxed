@@ -428,7 +428,9 @@ useEffect(()=>{
      cancelText="No"
      > */}
      <div>
-       <Button style={{backgroundColor:!startInd?"#77dd77" : "#ff7158bf"}} onClick={handleClick}>
+       <Button 
+        type="primary"
+       style={{backgroundColor:!startInd?"#77dd77" : "#ff7158bf"}} onClick={handleClick}>
         {!startInd ? "Start" : "Stop"}
       </Button>
       </div>

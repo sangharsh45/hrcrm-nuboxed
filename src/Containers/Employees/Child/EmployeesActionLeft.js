@@ -1,11 +1,13 @@
-import React, { useEffect } from "react";
+import React, { useEffect,useState } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import TocIcon from '@mui/icons-material/Toc';
 import { StyledSelect } from "../../../Components/UI/Antd";
 import { withRouter } from "react-router-dom";
-import { inputEmployeeDataSearch, getRecords } from "../EmployeeAction";
-import { Button, Input, Tooltip, Badge } from "antd";
+import { inputEmployeeDataSearch,getEmployeelist,ClearReducerDataOfEmployee, getRecords } from "../EmployeeAction";
+import {  Input, Tooltip, Badge } from "antd";
+import { AudioOutlined } from '@ant-design/icons';
+import SpeechRecognition, {  } from 'react-speech-recognition';
 import { FormattedMessage } from "react-intl";
 import {getDepartments} from "../../Settings/Department/DepartmentAction"
 import { getlocation } from "../../Event/Child/Location/LocationAction";
@@ -14,6 +16,25 @@ const { Search } = Input;
 const Option = StyledSelect.Option;
 
 const EmployeesActionLeft = (props) => {
+  const [currentData, setCurrentData] = useState("");
+  const [pageNo, setPage] = useState(0);
+  const handleChange = (e) => {
+    setCurrentData(e.target.value);
+
+    if (e.target.value.trim() === "") {
+      setPage(pageNo + 1);
+      props.getEmployeelist("cretiondate");
+      props.ClearReducerDataOfEmployee()
+    }
+  };
+  const handleSearch = () => {
+    if (currentData.trim() !== "") {
+      // Perform the search
+      props.inputEmployeeDataSearch(currentData);
+    } else {
+      console.error("Input is empty. Please provide a value.");
+    }
+  };
   useEffect(() => {
     if (props.viewType === "tile") {
       props.getRecords(props.orgId);
@@ -28,6 +49,17 @@ const EmployeesActionLeft = (props) => {
   // useEffect(()=>{
   //   props.getCountries();
   // })
+  const suffix = (
+    <AudioOutlined
+      onClick={SpeechRecognition.startListening}
+      style={{
+        fontSize: 16,
+        color: '#1890ff',
+      }}
+
+    />
+  );
+  const {user}=props;
   return (
     <div class=" flex items-center">
       <Tooltip
@@ -97,38 +129,18 @@ const EmployeesActionLeft = (props) => {
       </Tooltip>
 
       <div class=" ml-6 h-6 w-60">
-        <Input
-          placeholder="Search By Name"
-          width={"100%"}
-          // suffix={suffix}
-          onChange={(e) => props.handleChange(e)}
-          value={props.currentData}
-          // onSearch={(value) => {
-          //   props.inputEmployeeDataSearch(value);
-          //   props.setCurrentData(value);
-          // }}
-          // allowClear
-          // enterButton
-        />
+      <Input
+     placeholder="Search By Name"
+      width={"100%"}
+            suffix={suffix}
+            onPressEnter={handleSearch}  
+            onChange={handleChange}
+            // value={currentData}
+          />
+   
       </div>
-      <Button
-          type={props.currentData ? "primary" : "danger"}
-          onClick={() => {
-            props.inputEmployeeDataSearch(props.currentData);
-          }}
-        >
-          Submit
-        </Button>
-        <Button
-          type={props.currentData ? "primary" : "danger"}
-          onClick={() => {
-            props.handleClear();
-          }}
-        >
-          <FormattedMessage id="app.clear" defaultMessage="Clear" />
-          {/* Clear */}
-        </Button>
-        <div style={{ width: "35%" ,marginTop:"0.55rem"}}>
+   
+        <div  class=" w-[35%] mt-2 ml-2">
           <StyledSelect placeholder="Sort"  onChange={(e)  => props.handleFilterChange(e)}>
           <Option value="cretiondate">Creation Date</Option>
           <Option value="AtoZ">A To Z</Option>
@@ -189,8 +201,10 @@ const mapDispatchToProps = (dispatch) =>
     {
       inputEmployeeDataSearch,
       getRecords,
+      getEmployeelist,
       getlocation,
-      getDepartments
+      getDepartments,
+      ClearReducerDataOfEmployee
     },
     dispatch
   );

@@ -998,3 +998,8 @@ export const updateEmployee = (data, employeeId) => (dispatch) => {
     });
 };
 
+export const ClearReducerDataOfEmployee = () => (dispatch) => {
+  dispatch({
+    type: types.HANDLE_CLAER_REDUCER_DATA_EMPLOYEE,
+  });
+};

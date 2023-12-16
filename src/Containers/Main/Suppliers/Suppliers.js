@@ -2,26 +2,15 @@ import React, { Component, Suspense, lazy } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { setSuppliersViewType } from "./SuppliersAction";
-import SuppliersHeader from "./Child/SuppliersHeader";
-import AllSupplierTable from "./Child/AllSupplierTable";
-import { BundleLoader } from "../../Components/Placeholder";
+import SuppliersHeader from "../../Main/Suppliers/SuppliersHeader";
+import { BundleLoader } from "../../../Components/Placeholder";
 import { getSuppliersList, getAllSuppliersList } from "./SuppliersAction";
-const SuppliersDashboard = lazy(() =>
-  import("./Child/SuppliersDashboard/SuppliersDashboard")
-);
+import SuppliersCardList from "./Child/SuppliersCardList";
 
-const SuppliersTable = lazy(() => import("./Child/SuppliersTable"));
 
 class Suppliers extends Component {
   state = { currentData: "" };
-  handleClear = () => {
-    this.setState({ currentData: "" });
-    if (this.props.viewType === "grid") {
-      this.props.getSuppliersList(this.props.userId);
-    } else if (this.props.viewType === "table") {
-      this.props.getAllSuppliersList();
-    }
-  };
+
   setCurrentData = (value) => {
     this.setState({ currentData: value });
   };
@@ -39,13 +28,15 @@ class Suppliers extends Component {
         />
 
         <Suspense fallback={<BundleLoader />}>
-          {this.props.viewType === "grid" ? (
-            <SuppliersTable />
-          ) : this.props.viewType === "all" ? (
-            <AllSupplierTable />
-          ) : this.props.viewType === "dashboard" ? (
-            <SuppliersDashboard />
-          ) : null}
+          {this.props.viewType === "card" ? (
+            <SuppliersCardList />
+          ) 
+          //  this.props.viewType === "all" ? (
+          //   <AllSupplierTable />
+          // ) : this.props.viewType === "dashboard" ? (
+          //   <SuppliersDashboard />
+          // ) 
+          : null}
         </Suspense>
       </React.Fragment>
     );
