@@ -8,7 +8,7 @@ const ProductbuilderTable2=lazy(()=>import("./ProductbuilderTable2"));
 const ProductBuilderDrawer = (props) => {
   const { proBuilderDrawer, handleProductBuilderDrawer,  particularDiscountData, ...formProps } = props;
   const isSmallScreen = window.innerWidth <= 600;
-    const drawerWidth = isSmallScreen ? "90%" : "55%";
+    const drawerWidth = isSmallScreen ? "90%" : "60%";
   return (
     <>
       <StyledDrawer
@@ -18,7 +18,7 @@ const ProductBuilderDrawer = (props) => {
         destroyOnClose
         closable
         placement="right"
-        style={{marginTop:"5rem"}}
+        style={{marginTop:"3rem"}}
         maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}
         onClose={() => handleProductBuilderDrawer(false)}
       >

@@ -62,42 +62,6 @@ const ProductActionLeft = (props) => {
           onClick={() => props.setProductViewType("dashboard")}
         />
       </Tooltip>
-
-
-
-      <Tooltip title="IMAGECATEGORY">
-        <span
-
-          style={{
-            marginRight: "0.5rem",
-            color: viewType === "grid" && "#1890ff",
-          }}
-          onClick={() => setProductViewType("grid")}
-        >
-          <i class="far fa-images"></i>
-        </span>
-      </Tooltip>
-
-      <Tooltip title="ImageGallery">
-        <span
-
-          style={{
-            marginRight: "0.5rem",
-            color: viewType === "list" && "#1890ff",
-          }}
-          onClick={() => setProductViewType("list")}
-        >
-          <i class="fab fa-envira"></i>
-        </span>
-      </Tooltip>
-
-      &nbsp; &nbsp;
-      {props.viewType === "table" ?
-        <div style={{ fontSize: "15px", fontWeight: "bold", color: "tomato" }}>
-          # Records -{" "}
-          {/* {props.recordData.product || 0}{" "} */}
-        </div>
-        : null}
     </FlexContainer>
   );
 

@@ -33,12 +33,7 @@ class ProductActionRight extends React.Component {
       <>
         
             <FlexContainer alignItems="center">
-              <Tooltip title="CategoryImage">
-                <span onClick={() => handleCategoryImageModal(true)}>
-                  <i class="fas fa-chevron-circle-down"></i>
-                </span>
-              </Tooltip>
-              &nbsp; &nbsp;
+             
               <Button
                 type="primary"
                 ghost

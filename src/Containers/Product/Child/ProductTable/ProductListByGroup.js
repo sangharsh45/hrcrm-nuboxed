@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import {
     getProducts,
+    getProductByGroup,
     getAllProductCatagory,
     setEditProducts,
     handleUpdateProductModal,
@@ -13,42 +14,30 @@ import {
     handleCatalogueConfigureModal,
     deleteProductData,
     handleCatalogueWipModal,
-    handleProductBuilderDrawer
+    handleProductBuilderDrawer,
+    handlePriceDrawer
 } from "../../ProductAction";
-// import UpdateProductModal from "../../Child/UpdateProductModal";
 import ProductDiscountModal from "./ProductDiscountModal";
-// import CustomerDiscountHistory from "./CustomerDiscountHistory";
-// import APIFailed from "../../../../Helpers/ErrorBoundary/APIFailed";
-// import ProductHistoryModal from "./ProductHistoryModal";
-// import CatalogueConfigureModal from "../Configure/CatalogueConfigureModal";
-// import SuspendToggleProduct from "../ProductTable/SuspendToggleProduct";
-// import DistributorDiscountHistory from "./DistributorDiscountHistory";
-// import ProductOfferModal from "./ProductOfferModal";
-// import CustomerOfferHistory from "./CustomerOfferHistory";
 import DistributorOfferHistory from "./DistributorOfferHistory";
-// import CatalogueWipModal from "../Wip/CatalogueWipModal";
 import ProductPublishToggle from "./ProductPublishToggle";
-import moment from "moment";
 import { CurrencySymbol } from "../../../../Components/Common";
-// import { handleCurrencyPriceModal } from "../../../Supplies/SuppliesAction"
 import {
     EditOutlined,
     HistoryOutlined,
     DeleteOutlined,
-    MoneyCollectOutlined,
 } from "@ant-design/icons";
-// import CurrencyPriceModal from "../../../Supplies/Child/CurrencyPriceModal";
-import { StyledModal, StyledTable } from "../../../../Components/UI/Antd";
-import { getProductByGroup } from "../../ProductAction";
+import PriceDrawer from "./PriceDrawer";
+import { StyledTable } from "../../../../Components/UI/Antd";
 import { MultiAvatar, SubTitle } from "../../../../Components/UI/Elements";
-import { Empty, Icon, Tooltip, Button, Popconfirm, Switch } from "antd";
+import { Tooltip, Button, Popconfirm } from "antd";
 import AddToSuppliesToggle from "./AddToSuppliesToggle";
 import WebhookIcon from '@mui/icons-material/Webhook';
 import NetworkCellIcon from '@mui/icons-material/NetworkCell';
 import ContactMailIcon from '@mui/icons-material/ContactMail';
 import ApartmentIcon from '@mui/icons-material/Apartment';
 import InfiniteScroll from "react-infinite-scroll-component";
-import CameraIndoorIcon from '@mui/icons-material/CameraIndoor';
+import ViewQuiltIcon from '@mui/icons-material/ViewQuilt';
+import EuroIcon from '@mui/icons-material/Euro';
 
 const ProductBuilderDrawer =lazy(()=>import("./ProductBuilderDrawer"));
 
@@ -125,24 +114,19 @@ function ProductHistoryTable(props) {
 
     const {
         fetchingProducts,
-        fetchingProductsError,
-        fetchingAllProductsError,
         products,
-        updateProductModal,
         handleUpdateProductModal,
         handleDiscountModal,
         addDiscountModal,
         user,
         handleHistoryModal,
-        addProductOfferModal,
         handleOfferModal,
-        addHistoryModal,
-        addCatalogueConfigureModal,
         handleCatalogueConfigureModal,
-        addCatalogueWipModal,
         handleCatalogueWipModal,
         proBuilderDrawer,
-        handleProductBuilderDrawer
+        handleProductBuilderDrawer,
+        handlePriceDrawer,
+        priceOpenDrawer
     } = props;
 
     const columns = [
@@ -301,30 +285,6 @@ function ProductHistoryTable(props) {
             width: "6%",
             dataIndex: "palette",
         },
-        // {
-        //     title: "Manufacture Date",
-        //     width: "10%",
-        //     dataIndex: "dateOfManufacture",
-        //     render: (text, item) => {
-        //         return (
-        //             <>
-        //                 {moment(item.dateOfManufacture).format("DD-MM-YY")}
-        //             </>
-        //         )
-        //     }
-        // },
-        // {
-        //     title: "Created",
-        //     width: "7%",
-        //     dataIndex: "transfer",
-        //     render: (text, item) => {
-        //         return (
-        //             <>
-        //                 <b>{item.transfer}</b>
-        //             </>
-        //         )
-        //     }
-        // },
         {
             title: "GST%",
             dataIndex: "tax",
@@ -431,11 +391,11 @@ function ProductHistoryTable(props) {
             render: (text, item) => {
                 return (
                     <>
-                        <Tooltip title="Add price">
-                            <MoneyCollectOutlined
-
+                        <Tooltip title="Add Price">
+                            <EuroIcon
+                            style={{cursor:"pointer" }}
                                 onClick={() => {
-                                    props.handleCurrencyPriceModal(true);
+                                    props.handlePriceDrawer(true);
                                     handleParticularRowData(item);
                                 }}
                             />
@@ -450,8 +410,8 @@ function ProductHistoryTable(props) {
             render: (text, item) => {
                 return (
                     <>
-                        <Tooltip title="">
-                            <CameraIndoorIcon
+                        <Tooltip title="Product Builder">
+                            <ViewQuiltIcon
                             style={{cursor:"pointer" }}
                                 onClick={() => {
                                     props.handleProductBuilderDrawer(true);
@@ -537,46 +497,46 @@ function ProductHistoryTable(props) {
                 };
             },
         },
-        {
-            title: "",
-            width: "7%",
-            render: (name, item, i) => {
-                return {
-                    props: {
-                        style: {
-                            background:
-                                (distributorOfferHistory ||
-                                    showHistory ||
-                                    showDistributorHistory ||
-                                    customerOfferHistory) &&
-                                    productId === item.productId
-                                    ? "rgb(158 183 223)"
-                                    : null,
-                        },
-                    },
-                    children: (
-                        <span>
-                                  <Button
-                  type="primary"
-                  shape="round"
-                  style={{
-                    backgroundColor: "teal",
-                    // backgroundColor: "Yellow",
-                    fontSize: "11px",
-                  }}
-                  onClick={() => {
-                    handleDiscountModal(true);
-                    handleParticularRowData(item);
-                  }}
-                >
-                  Discount
-                </Button>
+        // {
+        //     title: "",
+        //     width: "7%",
+        //     render: (name, item, i) => {
+        //         return {
+        //             props: {
+        //                 style: {
+        //                     background:
+        //                         (distributorOfferHistory ||
+        //                             showHistory ||
+        //                             showDistributorHistory ||
+        //                             customerOfferHistory) &&
+        //                             productId === item.productId
+        //                             ? "rgb(158 183 223)"
+        //                             : null,
+        //                 },
+        //             },
+        //             children: (
+        //                 <span>
+        //                           <Button
+        //           type="primary"
+        //           shape="round"
+        //           style={{
+        //             backgroundColor: "teal",
+        //             // backgroundColor: "Yellow",
+        //             fontSize: "11px",
+        //           }}
+        //           onClick={() => {
+        //             handleDiscountModal(true);
+        //             handleParticularRowData(item);
+        //           }}
+        //         >
+        //           Discount
+        //         </Button>
                             
-                        </span>
-                    ),
-                };
-            },
-        },
+        //                 </span>
+        //             ),
+        //         };
+        //     },
+        // },
 
         {
             title: "",
@@ -654,64 +614,64 @@ function ProductHistoryTable(props) {
                 };
             },
         },
-        {
-            title: "",
-            width: "5%",
-            render: (name, item, i) => {
-                return {
-                    props: {
-                        style: {
-                            background:
-                                (distributorOfferHistory ||
-                                    showHistory ||
-                                    showDistributorHistory ||
-                                    customerOfferHistory) &&
-                                    productId === item.productId
-                                    ? "rgb(158 183 223)"
-                                    : null,
-                        },
-                    },
-                    children: (
-                        <span>
-                            {user.designation === "Manager" &&
-                                user.functionName === "Management" ? (
-                                <Button
-                                    type="primary"
-                                    shape="round"
-                                    style={{
-                                        backgroundColor: "Tomato",
-                                        fontSize: "11px",
-                                    }}
-                                    onClick={() => {
-                                        handleOfferModal(true);
-                                        handleParticularRowData(item);
-                                    }}
-                                >
-                                    Offer
-                                </Button>
-                            ) : (
-                                <Button
-                                    type="primary"
-                                    shape="round"
-                                    disabled
-                                    style={{
-                                        backgroundColor: "Tomato",
-                                        color: "white",
-                                        fontSize: "11px",
-                                    }}
-                                    onClick={() => {
-                                        handleOfferModal(true);
-                                        handleParticularRowData(item);
-                                    }}
-                                >
-                                    Offer
-                                </Button>
-                            )}
-                        </span>
-                    ),
-                };
-            },
-        },
+        // {
+        //     title: "",
+        //     width: "5%",
+        //     render: (name, item, i) => {
+        //         return {
+        //             props: {
+        //                 style: {
+        //                     background:
+        //                         (distributorOfferHistory ||
+        //                             showHistory ||
+        //                             showDistributorHistory ||
+        //                             customerOfferHistory) &&
+        //                             productId === item.productId
+        //                             ? "rgb(158 183 223)"
+        //                             : null,
+        //                 },
+        //             },
+        //             children: (
+        //                 <span>
+        //                     {user.designation === "Manager" &&
+        //                         user.functionName === "Management" ? (
+        //                         <Button
+        //                             type="primary"
+        //                             shape="round"
+        //                             style={{
+        //                                 backgroundColor: "Tomato",
+        //                                 fontSize: "11px",
+        //                             }}
+        //                             onClick={() => {
+        //                                 handleOfferModal(true);
+        //                                 handleParticularRowData(item);
+        //                             }}
+        //                         >
+        //                             Offer
+        //                         </Button>
+        //                     ) : (
+        //                         <Button
+        //                             type="primary"
+        //                             shape="round"
+        //                             disabled
+        //                             style={{
+        //                                 backgroundColor: "Tomato",
+        //                                 color: "white",
+        //                                 fontSize: "11px",
+        //                             }}
+        //                             onClick={() => {
+        //                                 handleOfferModal(true);
+        //                                 handleParticularRowData(item);
+        //                             }}
+        //                         >
+        //                             Offer
+        //                         </Button>
+        //                     )}
+        //                 </span>
+        //             ),
+        //         };
+        //     },
+        // },
         {
             title: "",
             width: "2%",
@@ -939,55 +899,23 @@ function ProductHistoryTable(props) {
                 
             />
               </InfiniteScroll> 
-              <ProductDiscountModal
+              
+              {/* <ProductDiscountModal
                 addDiscountModal={addDiscountModal}
                 handleDiscountModal={handleDiscountModal}
                 particularDiscountData={particularDiscountData}
-            />
+            /> */}
+
             <ProductBuilderDrawer
             particularDiscountData={particularDiscountData}
             proBuilderDrawer={proBuilderDrawer}
             handleProductBuilderDrawer={handleProductBuilderDrawer}
             />
-
-            {/* <UpdateProductModal
-                updateProductModal={updateProductModal}
-                handleUpdateProductModal={handleUpdateProductModal}
-            />
-
-            <ProductHistoryModal
-                addHistoryModal={addHistoryModal}
-                handleHistoryModal={handleHistoryModal}
-                particularDiscountData={particularDiscountData}
-            />
-            <CatalogueConfigureModal
-                addCatalogueConfigureModal={addCatalogueConfigureModal}
-                handleCatalogueConfigureModal={handleCatalogueConfigureModal}
-                particularDiscountData={particularDiscountData}
-            />
-
-            <CatalogueWipModal
-                addCatalogueWipModal={addCatalogueWipModal}
-                handleCatalogueWipModal={handleCatalogueWipModal}
-                particularDiscountData={particularDiscountData}
-            />
-
-            <ProductOfferModal
-                addProductOfferModal={addProductOfferModal}
-                handleOfferModal={handleOfferModal}
-                particularDiscountData={particularDiscountData}
-            />
-            <CurrencyPriceModal
-                handleCurrencyPriceModal={props.handleCurrencyPriceModal}
-                addCurrencyValue={props.addCurrencyValue}
-                manufactureId={particularDiscountData.manufactureId}
-            />
-            {showHistory && <CustomerDiscountHistory productId={productId} />}
-            {showDistributorHistory && (
-                <DistributorDiscountHistory productId={productId} />
-            )}
-            {customerOfferHistory && <CustomerOfferHistory productId={productId} />}
-            */}
+<PriceDrawer
+handlePriceDrawer={handlePriceDrawer}
+priceOpenDrawer={priceOpenDrawer}
+/>
+            
             {distributorOfferHistory && (
                 <DistributorOfferHistory productId={productId} />
             )} 
@@ -1001,14 +929,13 @@ const mapStateToProps = ({ product, auth, supplies }) => ({
     fetchingProductByGroup: product.fetchingProductByGroup,
     groupId: auth.userDetails.groupId,
     fetchingProducts: product.fetchingProducts,
-    fetchingProductsError: product.fetchingProductsError,
     fetchingAllProducts: product.fetchingAllProducts,
     fetchingAllProductsError: product.fetchingAllProductsError,
     products: product.products,
     allproducts: product.allproducts,
     updateProductModal: product.updateProductModal,
-    addDiscountModal: product.addDiscountModal,
-    addProductOfferModal: product.addProductOfferModal,
+    // addDiscountModal: product.addDiscountModal,
+    // addProductOfferModal: product.addProductOfferModal,
     addHistoryModal: product.addHistoryModal,
     addCatalogueConfigureModal: product.addCatalogueConfigureModal,
     addCatalogueWipModal: product.addCatalogueWipModal,
@@ -1016,7 +943,8 @@ const mapStateToProps = ({ product, auth, supplies }) => ({
     department: auth.userDetails.department,
     user: auth.userDetails,
     addCurrencyValue: supplies.addCurrencyValue,
-    proBuilderDrawer:product.proBuilderDrawer
+    proBuilderDrawer:product.proBuilderDrawer,
+    priceOpenDrawer:product.priceOpenDrawer,
 });
 
 const mapDispatchToProps = (dispatch) =>
@@ -1025,15 +953,16 @@ const mapDispatchToProps = (dispatch) =>
             getProductByGroup,
             setEditProducts,
             handleUpdateProductModal,
-            handleDiscountModal,
+            // handleDiscountModal,
             handleHistoryModal,
             deleteProductData,
             handleCatalogueConfigureModal,
             getAllProductCatagory,
-            handleOfferModal,
+            // handleOfferModal,
             handleCatalogueWipModal,
             getProducts,
-            handleProductBuilderDrawer
+            handleProductBuilderDrawer,
+            handlePriceDrawer
         },
         dispatch
     );

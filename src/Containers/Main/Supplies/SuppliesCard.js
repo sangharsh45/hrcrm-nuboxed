@@ -137,20 +137,6 @@ function SuppliesCard(props) {
     
     <div class=" text-sm text-cardBody font-medium font-poppins">
     
-    Cost
-    
-    </div> 
-    
-    
-    <div class=" font-normal text-[0.82rem] text-cardBody font-poppins">
-    {item.cost} {item.currencyName}
-    </div>
-    
-    </div>
-    <div className=" flex font-medium flex-col md:w-44 max-sm:justify-between w-full max-sm:flex-row ">
-    
-    <div class=" text-sm text-cardBody font-medium font-poppins">
-    
     Re-order level
     
     </div> 
@@ -164,14 +150,11 @@ function SuppliesCard(props) {
     <div className=" flex font-medium flex-col md:w-44 max-sm:justify-between w-full max-sm:flex-row ">
     
     <div class=" text-sm text-cardBody font-medium font-poppins">
-    
     Created
-    
     </div> 
     
-    
     <div class=" font-normal text-[0.82rem] text-cardBody font-poppins">
-    {item.transfer}
+    {`${moment(item.creationDate).format("ll")}`}
     </div>
     
     </div>

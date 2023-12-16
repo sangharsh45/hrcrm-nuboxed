@@ -22,6 +22,7 @@ import ConfigureTab from "./Child/Configure/ConfigureTab";
 import LeadsTab from "../../Rules/Child/RulesTab/LeadsTab";
 import LeadsConfigTab from "../LeadsConfig/LeadsConfigTab";
 import DistributionTab from "./Child/DistributionTab/DistributionTab";
+import FinanceTab from "./Child/FinanceTab/FinanceTab";
 
 const RecruitmentActionLeft = lazy(() => import("./RecruitmentActionLeft"));
 
@@ -94,6 +95,11 @@ function Recruitment(props) {
       rulesName: "Workflow",
       ruleId: "1",
        component: <WorkFlow/>,
+    },
+    {
+      rulesName: "Finance",
+      ruleId: "16",
+      component: <FinanceTab/>,
     },
    
     // {

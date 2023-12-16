@@ -227,6 +227,8 @@ const initialState = {
   fetchingBuilderByProductId: false,
   fetchingBuilderByProductIdError:false,
   builderbyProductId:[],
+
+  priceOpenDrawer:false,
 };
 const newDateRange = (dateRange, newDate) =>
   dateRange.map((range) => {
@@ -907,7 +909,11 @@ export const productReducer = (state = initialState, action) => {
                     fetchingBuilderByProductId: false,
                     fetchingBuilderByProductIdError: true,
                   };
-                
+       
+                                 
+                  case types.HANDLE_PRICE_DRAWER:
+                    return { ...state, priceOpenDrawer: action.payload };
+                  
     default:
       return state;
   }
