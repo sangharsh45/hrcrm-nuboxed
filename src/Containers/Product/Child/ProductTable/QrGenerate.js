@@ -1,14 +1,16 @@
 import React, { useState } from 'react';
-import { Modal, Button, Input } from 'antd';
+import { Modal, Button, Checkbox } from 'antd';
 import QRCode from 'qrcode.react';
 
-const QRCodeGenerator = ({ rowData }) => {
-  const [text, setText] = useState('');
+const QRCodeGenerator = () => {
+  const data={
+    category:"Windmill",
+    subcategory:"Axex",
+    Attribute:"1 Unit",
+   
+}
+  const [selectedValues, setSelectedValues] = useState({});
   const [modalVisible, setModalVisible] = useState(false);
-
-  const handleInputChange = (event) => {
-    setText(event.target.value);
-  };
 
   const showModal = () => {
     setModalVisible(true);
@@ -22,22 +24,31 @@ const QRCodeGenerator = ({ rowData }) => {
     setModalVisible(false);
   };
 
+  const handleCheckboxChange = (key, value) => {
+    setSelectedValues((prev) => ({ ...prev, [key]: value }));
+  };
+
+  const checkboxKeys = Object.keys(data);
+
   return (
     <div>
       <Button type="primary" onClick={showModal}>
         Open QR Code
       </Button>
       <Modal title="QR Code" visible={modalVisible} onOk={handleOk} onCancel={handleCancel}>
-        <Input
-          type="text"
-          style={{border:"2px solid black"}}
-          placeholder="Enter text for QR code"
-          value={text}
-          onChange={handleInputChange}
-        />
-        <div style={{marginTop:"20px"}}>
-        <QRCode value={text} />
+        <div>
+          {checkboxKeys.map((key) => (
+            <Checkbox
+              key={key}
+              onChange={() => handleCheckboxChange(key, data[key])}
+              checked={selectedValues[key]}
+            >
+              {key}
+            </Checkbox>
+          ))}
         </div>
+       
+        <QRCode value={Object.values(selectedValues).join(', ')} />
       </Modal>
     </div>
   );
