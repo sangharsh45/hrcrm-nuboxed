@@ -394,7 +394,7 @@ function CandidateTable(props) {
       width: "1%",
     },
     {
-       title:  translatedContent[0],
+       title:"Name",
       // title: <FormattedMessage id="app.name" defaultMessage="Name" />,
       dataIndex: "fullName",
       width: "13%",
@@ -476,14 +476,14 @@ function CandidateTable(props) {
     },
 
     {
-       title:translatedContent[1],
+       title:"Vendor",
       // title: <FormattedMessage id="app.vendor" defaultMessage="Vendor" />,
       dataIndex: "partnerName",
       width: "10%",
       ...getColumnSearchProps("partnerName"),
     },
     {
-       title:translatedContent[2],
+       title:"Role",
       // title: <FormattedMessage id="app.role" defaultMessage="Role" />,
       dataIndex: "roleType",
       width: "8%",
@@ -499,7 +499,7 @@ function CandidateTable(props) {
       width: "1%",
     },
     {
-       title:translatedContent[3],
+       title:"Country",
       // title: <FormattedMessage id="app.country" defaultMessage="Country" />,
       dataIndex: "country",
       align: "left",
@@ -521,7 +521,7 @@ function CandidateTable(props) {
       },
     },
     {
-       title:translatedContent[4],
+       title:"Skills",
       // title: <FormattedMessage id="app.skills" defaultMessage="Skills" />,
       // dataIndex: "skillList",
       width: "17%",
@@ -536,13 +536,13 @@ function CandidateTable(props) {
 
         return (
           <>
-            {item.skillList === [] ? (
+            {/* {item.skillList === [] ? (
               "No Data"
-            ) : (
+            ) : ( */}
               <span>
                 <SkillsLoadMore skillList={data} />
               </span>
-            )}
+            {/* )} */}
           </>
         );
       },
@@ -596,7 +596,7 @@ function CandidateTable(props) {
       },
     },
     {
-       title:translatedContent[5],
+       title:"Expectation",
       // title: (
       //   <FormattedMessage id="app.expectation" defaultMessage="Expectation" />
       // ),
@@ -618,7 +618,7 @@ function CandidateTable(props) {
       },
     },
     {
-       title:translatedContent[6],
+       title:"Available",
       // title: <FormattedMessage id="app.available" defaultMessage="Available" />,
       dataIndex: "availableDate",
       width: "7%",
@@ -636,7 +636,7 @@ function CandidateTable(props) {
       },
     },
     {
-       title:translatedContent[7],
+       title:"Owner",
       // title: <FormattedMessage id="app.owner" defaultMessage="Owner" />,
       // dataIndex: "ownerName",
       width: "6%",
@@ -663,7 +663,7 @@ function CandidateTable(props) {
       },
     },
     {
-      title:translatedContent[8],
+      title:"Active",
       // title: <FormattedMessage id="app.active" defaultMessage="Active" />,
       // dataIndex: "active",
       width: "6%",

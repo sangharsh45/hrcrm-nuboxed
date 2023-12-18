@@ -38,42 +38,42 @@ const SubMenu = Menu.SubMenu;
 function NavMenu(props) {
   const [translatedMenuItems, setTranslatedMenuItems] = useState([]);
   console.log("abv", props.selectedLanguage)
-  useEffect(() => {
-    const fetchMenuTranslations = async () => {
-      try {
-        const translations = await Promise.all([
-          translateText('Dashboard', props.selectedLanguage),
-          translateText('Planner', props.selectedLanguage),
-          translateText('Calls', props.selectedLanguage),
-          translateText('Tasks', props.selectedLanguage),
-          translateText('Events', props.selectedLanguage),
-          translateText('Reports', props.selectedLanguage),
-          translateText('Users', props.selectedLanguage),
-          translateText('Opportunity', props.selectedLanguage),
-          translateText('Contact', props.selectedLanguage),
-          translateText('Customer', props.selectedLanguage),
-          translateText('Talent', props.selectedLanguage),
-          translateText('Requirement', props.selectedLanguage),
-          translateText('Demand', props.selectedLanguage),
-          translateText('Leads', props.selectedLanguage),
-          translateText('Post', props.selectedLanguage),
-          translateText('Project', props.selectedLanguage),
-          translateText('Hours', props.selectedLanguage),
-          translateText('Invoice', props.selectedLanguage),
-          translateText('Vendor', props.selectedLanguage),
-          translateText('Test', props.selectedLanguage),
-          translateText('Courses', props.selectedLanguage),
-          translateText('Program', props.selectedLanguage),
-        ]);
+  // useEffect(() => {
+  //   const fetchMenuTranslations = async () => {
+  //     try {
+  //       const translations = await Promise.all([
+  //         translateText('Dashboard', props.selectedLanguage),
+  //         translateText('Planner', props.selectedLanguage),
+  //         translateText('Calls', props.selectedLanguage),
+  //         translateText('Tasks', props.selectedLanguage),
+  //         translateText('Events', props.selectedLanguage),
+  //         translateText('Reports', props.selectedLanguage),
+  //         translateText('Users', props.selectedLanguage),
+  //         translateText('Opportunity', props.selectedLanguage),
+  //         translateText('Contact', props.selectedLanguage),
+  //         translateText('Customer', props.selectedLanguage),
+  //         translateText('Talent', props.selectedLanguage),
+  //         translateText('Requirement', props.selectedLanguage),
+  //         translateText('Demand', props.selectedLanguage),
+  //         translateText('Leads', props.selectedLanguage),
+  //         translateText('Post', props.selectedLanguage),
+  //         translateText('Project', props.selectedLanguage),
+  //         translateText('Hours', props.selectedLanguage),
+  //         translateText('Invoice', props.selectedLanguage),
+  //         translateText('Vendor', props.selectedLanguage),
+  //         translateText('Test', props.selectedLanguage),
+  //         translateText('Courses', props.selectedLanguage),
+  //         translateText('Program', props.selectedLanguage),
+  //       ]);
 
-        setTranslatedMenuItems(translations);
-      } catch (error) {
-        console.error('Error translating menu items:', error);
-      }
-    };
+  //       setTranslatedMenuItems(translations);
+  //     } catch (error) {
+  //       console.error('Error translating menu items:', error);
+  //     }
+  //   };
 
-    fetchMenuTranslations();
-  }, [props.selectedLanguage]);
+  //   fetchMenuTranslations();
+  // }, [props.selectedLanguage]);
 
 
   console.log("Oppo", props.opportunityRecord);
@@ -108,7 +108,8 @@ function NavMenu(props) {
                     id="app.recruitproboard"
                     defaultMessage="RecruitProBoard"
                   /> */}
-                {translatedMenuItems[0]}
+                {/* {translatedMenuItems[0]} */}
+                Dashboard
                 {/* RecruitProBoard */}
               </span>
             </Link>
@@ -126,8 +127,8 @@ function NavMenu(props) {
 
               <span class="text-white text-ls ml-1">
                 {/* <FormattedMessage id="app.planner" defaultMessage="Planner" /> */}
-                {/* Planner */}
-                {translatedMenuItems[1]}
+                Planner
+                {/* {translatedMenuItems[1]} */}
               </span>
             </Link>
           </Menu.Item>
@@ -145,8 +146,8 @@ function NavMenu(props) {
               />
               <span class="text-white text-ls ml-1">
                 {/* <FormattedMessage id="app.calls" defaultMessage="Calls" /> */}
-                {/* Calls */}
-                {translatedMenuItems[2]}
+                Calls
+                {/* {translatedMenuItems[2]} */}
               </span>
               &nbsp;&nbsp;&nbsp;
               <Badge
@@ -165,8 +166,8 @@ function NavMenu(props) {
               />
               <span class="text-white text-ls ml-1">
                 {/* <FormattedMessage id="app.tasks" defaultMessage="Tasks" /> */}
-                {/* Task */}
-                {translatedMenuItems[3]}
+                Task
+                {/* {translatedMenuItems[3]} */}
               </span>
               &nbsp;&nbsp;&nbsp;
               <Badge
@@ -188,8 +189,8 @@ function NavMenu(props) {
                   id="app.events"
                   defaultMessage="Events"
                 /> */}
-                {/* Event */}
-                {translatedMenuItems[4]}
+                Event
+                {/* {translatedMenuItems[4]} */}
               </span>
               &nbsp;&nbsp;&nbsp;
               <Badge
@@ -208,8 +209,8 @@ function NavMenu(props) {
               />
               <span class="text-white text-ls ml-1">
                 {/* <FormattedMessage id="app.reports" defaultMessage="Reports" /> */}
-                {/* Reports */}
-                {translatedMenuItems[5]}
+                Reports
+                {/* {translatedMenuItems[5]} */}
               </span>
             </Link>
           </Menu.Item>
@@ -228,7 +229,8 @@ function NavMenu(props) {
               />
               <span class="text-white text-ls ml-1">
 
-                {translatedMenuItems[13]}
+                {/* {translatedMenuItems[13]} */}
+                Leads
                 &nbsp;&nbsp;&nbsp;
                 <Badge
                   count={props.opportunityRecord.leads}
@@ -247,7 +249,9 @@ function NavMenu(props) {
               />
               <span class="text-white text-ls ml-1">
 
-                {translatedMenuItems[7]}
+                {/* {translatedMenuItems[7]} */}
+                Opportunity
+
                 &nbsp;&nbsp;&nbsp;
                 <Badge
                   count={props.opportunityRecord.opportunityList}
@@ -268,7 +272,8 @@ function NavMenu(props) {
               />
               <span class="text-white text-ls ml-1">
 
-                {translatedMenuItems[8]}
+                {/* {translatedMenuItems[8]} */}
+                Contact
                 &nbsp;&nbsp;&nbsp;
                 <Badge
                   count={props.opportunityRecord.customerContact}
@@ -404,8 +409,8 @@ function NavMenu(props) {
                   style={{ fontSize: "large" }}
                 />
                  <span class="text-white text-ls ml-1">
-              
-                  {translatedMenuItems[10]}
+              Candidate
+                  {/* {translatedMenuItems[10]} */}
                   &nbsp;&nbsp;&nbsp;
                   <Badge
                     count={props.opportunityRecord.CandidateNo}
@@ -425,8 +430,8 @@ function NavMenu(props) {
                 style={{ fontSize: "large" }} />
 
               <span class="text-white text-ls ml-1">
-
-                {translatedMenuItems[11]}
+Requirement
+                {/* {translatedMenuItems[11]} */}
                 &nbsp;&nbsp;
                 <Badge
                   count={props.opportunityRecord.RecruitmentList}
@@ -443,8 +448,8 @@ function NavMenu(props) {
                   style={{ fontSize: "large" }}
                 />
                 <span class="text-white text-ls ml-1">
-                
-                  {translatedMenuItems[15]}
+                Project
+                  {/* {translatedMenuItems[15]} */}
                 </span>
               </Link>
             </Menu.Item> 
@@ -461,7 +466,7 @@ function NavMenu(props) {
 
               <span class="text-white text-ls ml-1">
 
-                {translatedMenuItems[12]}
+              Demand
                 &nbsp;&nbsp;&nbsp;&nbsp;
               </span>
             </Link>
@@ -916,8 +921,8 @@ function NavMenu(props) {
               />
               <span class="text-white text-ls ml-1">
                 {/* <FormattedMessage id="app.users" defaultMessage="Users" /> */}
-                {/* Users */}
-                {translatedMenuItems[6]}
+                Users
+                {/* {translatedMenuItems[6]} */}
               </span>
               &nbsp;&nbsp;&nbsp;
               <Badge
