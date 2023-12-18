@@ -202,7 +202,7 @@ class UpdateContactForm extends Component {
                     <FastField name="imageId" component={Upload} />
                     <div>
                     <div class=" flex justify-between max-sm:flex-col">
-                        <div class=" w-2/5 max-sm:w-full">
+                        {/* <div class=" w-w47.5 max-sm:w-full">
                           <FastField
                             name="salutation"
                             type="text"
@@ -219,8 +219,8 @@ class UpdateContactForm extends Component {
                             className="field"
                             isColumn
                           />
-                        </div>
-                        <div class=" w-1/2 max-sm:w-full">
+                        </div> */}
+                        <div class=" w-wk max-sm:w-full">
                           <FastField
                             isRequired
                             name="firstName"
