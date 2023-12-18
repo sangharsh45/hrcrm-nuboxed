@@ -8,6 +8,8 @@ const initialState = {
 
   showAssignRepairModal: false,
 
+  showProductBuilderList: false,
+
   fetchingCatalogueByUser: false,
   fetchingCatalogueByUserError: false,
   catalogueByUser: [],
@@ -36,6 +38,13 @@ const initialState = {
   fetchingAllProductionConsumption: false,
   fetchingAllProductionConsumptionError: false,
   allConsumption: [],
+
+  addingProductBuilderById: false,
+  addingProductBuilderByIdError: false,
+
+  fetchingProductBuilderById: false,
+  fetchingProductBuilderByIdError: false,
+  builderByManufatureId: [],
 
   //get output
   fetchingAllProductionOutput: false,
@@ -155,7 +164,7 @@ const initialState = {
 
   fetchingChoosenCatalogue: false,
   fetchingChoosenCatalogueError: false,
-  choosenCatalogue: [],
+  choosenOrderCatalogue: [],
 
   fetchingCatalogueListInReurbish: false,
   fetchingCatalogueListInReurbishError: false,
@@ -441,7 +450,7 @@ export const refurbishReducer = (state = initialState, action) => {
       return { ...state, phoneByTechnician: action.payload };
 
     case types.HANDLE_ASSIGN_REPAIR_MODAL:
-      return { ...state, showAssignRepairModal: action.payload };
+      return { ...state, showAssignRepairModal: action.payload, catalogueInRefurbish: [] };
 
     case types.GET_PHONE_LIST_BY_USER_REQUEST:
       return { ...state, fetchingPhoneListByUser: true };
@@ -686,6 +695,9 @@ export const refurbishReducer = (state = initialState, action) => {
     case types.HANDLE_PRODUCT_BUILDER_MODAL:
       return { ...state, productBuilderList: action.payload };
 
+    case types.HANDLE_PRODUCT_BUILDER_IN_PROCESS_MODAL:
+      return { ...state, showProductBuilderList: action.payload };
+
     case types.GET_CATALOGUE_LIST_IN_REFURBISH_REQUEST:
       return { ...state, fetchingCatalogueListInReurbish: true };
     case types.GET_CATALOGUE_LIST_IN_REFURBISH_SUCCESS:
@@ -750,13 +762,43 @@ export const refurbishReducer = (state = initialState, action) => {
       return {
         ...state,
         fetchingChoosenCatalogue: false,
-        choosenCatalogue: action.payload,
+        choosenOrderCatalogue: action.payload,
       };
     case types.GET_CHOOSEN_CATALOGUE_ITEM_FAILURE:
       return {
         ...state,
         fetchingChoosenCatalogue: false,
         fetchingChoosenCatalogueError: true,
+      };
+
+    case types.ADD_PRODUCT_BUILDER_BYID_REQUEST:
+      return { ...state, addingProductBuilderById: true };
+    case types.ADD_PRODUCT_BUILDER_BYID_SUCCESS:
+      return {
+        ...state,
+        addingProductBuilderById: false,
+      };
+    case types.ADD_PRODUCT_BUILDER_BYID_FAILURE:
+      return {
+        ...state,
+        addingProductBuilderById: false,
+        addingProductBuilderByIdError: true,
+
+      };
+
+    case types.GET_PRODUCT_BUILDER_BYID_REQUEST:
+      return { ...state, fetchingProductBuilderById: true };
+    case types.GET_PRODUCT_BUILDER_BYID_SUCCESS:
+      return {
+        ...state,
+        fetchingProductBuilderById: false,
+        builderByManufatureId: action.payload,
+      };
+    case types.GET_PRODUCT_BUILDER_BYID_FAILURE:
+      return {
+        ...state,
+        fetchingProductBuilderById: false,
+        fetchingProductBuilderByIdError: true,
       };
     default:
       return state;

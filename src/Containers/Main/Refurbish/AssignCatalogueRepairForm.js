@@ -62,7 +62,12 @@ const AssignCatalogueRepairForm = (props) => {
             title: "",
             dataIndex: "",
             width: "1%",
+        }, {
+            title: "ID #",
+            dataIndex: "productManufacturingId",
+            width: "10%",
         },
+
         {
             title: "Name",
             dataIndex: "name",
@@ -72,23 +77,23 @@ const AssignCatalogueRepairForm = (props) => {
         {
             title: "Category",
             dataIndex: "categoryName",
-            width: "15%",
+            width: "10%",
         },
         {
             title: "Sub Category",
             dataIndex: "subCategoryName",
-            width: "15%",
+            width: "10%",
         },
         {
             title: "Attribute",
             dataIndex: "attributeName",
-            width: "15%",
+            width: "10%",
 
         },
         {
             title: "Sub Attribute",
             dataIndex: "subAttributeName",
-            width: "15%",
+            width: "10%",
         },
     ];
     return (
