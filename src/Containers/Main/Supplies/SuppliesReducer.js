@@ -117,6 +117,13 @@ export const suppliesReducer = (state = initialState, action) => {
                 ...state,
                 updateSuppliesById: false,
                 updateSuppliesDrawer: false,
+                purchaseList: state.purchaseList.map((item) => {
+                    if (item.suppliesId == action.payload.suppliesId) {
+                        return action.payload;
+                    } else {
+                        return item;
+                    }
+                }),
                 materialByGroup: state.materialByGroup.map((item) => {
                     if (item.suppliesId == action.payload.suppliesId) {
                         return action.payload;

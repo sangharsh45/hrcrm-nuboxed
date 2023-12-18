@@ -33,27 +33,27 @@ class UpdateAccountForm extends Component {
     }
 
     componentDidMount() {
-        this.props.getVat();
-        this.props.getCurrency()
-        this.props.getCustomer()
+        // this.props.getVat();
+        // this.props.getCurrency()
+        // this.props.getCustomer()
     }
     handleVatCheckBox() {
         this.setState({ vatInd: true })
     }
 
     render() {
-        const vatOption = this.props.vat.map((item) => {
-            return {
-                value: item.country,
-                label: item.country
-            }
-        })
-        const customerOption = this.props.customer.map((item) => {
-            return {
-                label: item.clientName || "",
-                value: item.clientId,
-            };
-        })
+        // const vatOption = this.props.vat.map((item) => {
+        //     return {
+        //         value: item.country,
+        //         label: item.country
+        //     }
+        // })
+        // const customerOption = this.props.customer.map((item) => {
+        //     return {
+        //         label: item.clientName || "",
+        //         value: item.clientId,
+        //     };
+        // })
         const currencyOption = this.props.currencies.map((item) => {
             return {
                 label: item.currencyName || "",
@@ -81,19 +81,19 @@ class UpdateAccountForm extends Component {
                         clientId: this.props.setEditingDistributor.clientId || "",
                         address: [
                             {
-                                addressId: this.props.setEditingDistributor.addresses.length ? this.props.setEditingDistributor.addresses[0].addressId : "",
-                                addressType: this.props.setEditingDistributor.addresses.length ? this.props.setEditingDistributor.addresses[0].addressType : "",
-                                address1: this.props.setEditingDistributor.addresses.length ? this.props.setEditingDistributor.addresses[0].address1 : "",
-                                address2: this.props.setEditingDistributor.addresses.length ? this.props.setEditingDistributor.addresses[0].address2 : "",
-                                town: this.props.setEditingDistributor.addresses.length ? this.props.setEditingDistributor.addresses[0].town : "",
-                                street: this.props.setEditingDistributor.addresses.length ? this.props.setEditingDistributor.addresses[0].street : "",
-                                city: this.props.setEditingDistributor.addresses.length ? this.props.setEditingDistributor.addresses[0].city : "Null",
-                                state: this.props.setEditingDistributor.addresses.length ? this.props.setEditingDistributor.addresses[0].state : "",
-                                pinCode: this.props.setEditingDistributor.addresses.length ? this.props.setEditingDistributor.addresses[0].pinCode : "",
-                                country: this.props.setEditingDistributor.addresses.length ? this.props.setEditingDistributor.addresses[0].country : "",
-                                dialCode: this.props.setEditingDistributor.addresses.length ? this.props.setEditingDistributor.addresses[0].dialCode : "",
-                                latitude: this.props.setEditingDistributor.addresses.length ? this.props.setEditingDistributor.addresses[0].latitude : "",
-                                longitude: this.props.setEditingDistributor.addresses.length ? this.props.setEditingDistributor.addresses[0].longitude : "",
+                                // addressId: this.props.setEditingDistributor.addresses.length ? this.props.setEditingDistributor.addresses[0].addressId : "",
+                                // addressType: this.props.setEditingDistributor.addresses.length ? this.props.setEditingDistributor.addresses[0].addressType : "",
+                                // address1: this.props.setEditingDistributor.addresses.length ? this.props.setEditingDistributor.addresses[0].address1 : "",
+                                // address2: this.props.setEditingDistributor.addresses.length ? this.props.setEditingDistributor.addresses[0].address2 : "",
+                                // town: this.props.setEditingDistributor.addresses.length ? this.props.setEditingDistributor.addresses[0].town : "",
+                                // street: this.props.setEditingDistributor.addresses.length ? this.props.setEditingDistributor.addresses[0].street : "",
+                                // city: this.props.setEditingDistributor.addresses.length ? this.props.setEditingDistributor.addresses[0].city : "Null",
+                                // state: this.props.setEditingDistributor.addresses.length ? this.props.setEditingDistributor.addresses[0].state : "",
+                                // pinCode: this.props.setEditingDistributor.addresses.length ? this.props.setEditingDistributor.addresses[0].pinCode : "",
+                                // country: this.props.setEditingDistributor.addresses.length ? this.props.setEditingDistributor.addresses[0].country : "",
+                                // dialCode: this.props.setEditingDistributor.addresses.length ? this.props.setEditingDistributor.addresses[0].dialCode : "",
+                                // latitude: this.props.setEditingDistributor.addresses.length ? this.props.setEditingDistributor.addresses[0].latitude : "",
+                                // longitude: this.props.setEditingDistributor.addresses.length ? this.props.setEditingDistributor.addresses[0].longitude : "",
                             },
                         ],
                     }}
@@ -195,7 +195,8 @@ class UpdateAccountForm extends Component {
                                                 isColumn
                                                 inlineLabel
                                                 component={SelectComponent}
-                                                options={Array.isArray(vatOption) ? vatOption : []}
+                                                options={[]}
+                                                // options={Array.isArray(vatOption) ? vatOption : []}
                                             />
                                         </div>
                                         <div style={{ width: "47%" }}>
@@ -238,7 +239,8 @@ class UpdateAccountForm extends Component {
                                                 isColumn
                                                 inlineLabel
                                                 component={SelectComponent}
-                                                options={Array.isArray(currencyOption) ? currencyOption : []}
+                                                options={[]}
+                                                // options={Array.isArray(currencyOption) ? currencyOption : []}
                                             />
                                         </div>
                                     </FlexContainer>
@@ -263,7 +265,8 @@ class UpdateAccountForm extends Component {
                                                 isColumn
                                                 inlineLabel
                                                 component={SelectComponent}
-                                                options={Array.isArray(customerOption) ? customerOption : []}
+                                                options={[]}
+                                                // options={Array.isArray(customerOption) ? customerOption : []}
                                             // options={["Marketplace", "Customer", "Distributor"]}
                                             />
                                         </div>
@@ -322,7 +325,7 @@ const mapStateToProps = ({ auth, distributor, rule, category }) => ({
     currencies: auth.currencies,
     setEditingDistributor: distributor.setEditingDistributor,
     updateDisributorById: distributor.updateDisributorById,
-    customer: category.customer,
+    // customer: category.customer,
 });
 
 const mapDispatchToProps = (dispatch) =>
