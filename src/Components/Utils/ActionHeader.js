@@ -7,7 +7,7 @@ const StyledActionHeader = styled.div`
     color: ${props => props.theme.color}
     height: 2.1em;
     margin:  0.2rem;
-    padding: 0.3rem 1rem;
+    padding: 0.25rem 0.25rem 0.35rem 0.25rem;
     display: flex;
     justify-content: space-between;
     align-items: center;

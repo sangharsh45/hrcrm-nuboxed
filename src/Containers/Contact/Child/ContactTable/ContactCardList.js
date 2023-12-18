@@ -125,15 +125,15 @@ function ContactCardList(props) {
      
           <OnlyWrapCard style={{backgroundColor:"#E3E8EE"}}>
           <div className=" flex justify-between w-[98%] p-2 bg-transparent font-bold sticky top-0 z-10">
-        <div className=" md:w-[12rem]">Name</div>
-        <div className=" md:w-40">Company</div>
-        <div className=" md:w-28 ">Designation</div>
-        <div className="md:w-36">Department</div>
-        <div className="md:w-28"># Opportunity</div>
-        <div className="md:w-28">Pipeline</div>
-        <div className="md:w-20">Portal Acess</div>
-        <div className="md:w-16">Owner</div>
-        <div className="w-12"></div>
+        <div className=" md:w-[13.5rem]">Name</div>
+        <div className=" md:w-[11.1rem]">Company</div>
+        <div className=" md:w-[8.1rem] ">Designation</div>
+        <div className="md:w-[10.1rem]">Department</div>
+        <div className="md:w-[7.2rem]"># Opportunity</div>
+        <div className="md:w-[5.3rem]">Pipeline</div>
+        <div className="md:w-[5.1rem]">Portal Acess</div>
+        <div className="md:w-[2.1rem]">Owner</div>
+        <div className="w-[4.2rem]"></div>
 
       </div>
           <InfiniteScroll
@@ -174,8 +174,8 @@ function ContactCardList(props) {
                                 // }}
                                 >
                                      
-                                <div className=" flex font-medium flex-col md:w-52 max-sm:flex-row w-full max-sm:justify-between  ">
-<div className="flex max-sm:w-full"> 
+                                <div className=" flex font-medium flex-col md:w-[14rem] max-sm:flex-row w-full max-sm:justify-between  ">
+<div className="flex max-sm:w-full items-center"> 
 <div>
                                 <SubTitle>
             <MultiAvatar2
@@ -218,19 +218,19 @@ function ContactCardList(props) {
                                 </div>
                                 <div class="flex">
 
-                                <div className=" flex font-medium flex-col  md:w-48 max-sm:flex-row w-full max-sm:justify-between ">
+                                <div className=" flex font-medium flex-col  md:w-[14.01rem] max-sm:flex-row w-full max-sm:justify-between ">
                                     {/* <div class=" text-xs text-cardBody font-xs font-poppins max-sm:hidden"> Company </div> */}
                                     <div class=" text-sm text-cardBody font-poppins">   
                                     {item.tagWithCompany}
                                     </div>
                                 </div>
-                                <div className=" flex font-medium flex-col md:w-36 max-sm:flex-row w-full max-sm:justify-between ">
+                                <div className=" flex font-medium flex-col md:w-[8.2rem] max-sm:flex-row w-full max-sm:justify-between ">
                                     {/* <div class=" text-xs text-cardBody font-poppins max-sm:hidden">Designation</div> */}
                                     <div class="text-sm text-cardBody font-poppins">
                                          {item.designation}
                                     </div>
                                 </div>
-                                <div className=" flex font-medium flex-col md:w-36  max-sm:flex-row w-full max-sm:justify-between">
+                                <div className=" flex font-medium flex-col md:w-[8.3rem]  max-sm:flex-row w-full max-sm:justify-between">
                                   {/* <div class="text-xs text-cardBody font-poppins max-sm:hidden">Department</div> */}
                                   <div class="text-sm text-cardBody font-poppins">
                                        {item.department}
@@ -251,7 +251,7 @@ function ContactCardList(props) {
 
                                     </div>
                                 </div>
-                                <div className="flex font-medium flex-col md:w-32 max-sm:flex-row w-full max-sm:justify-between ">
+                                <div className="flex font-medium flex-col md:w-[7.1rem] max-sm:flex-row w-full max-sm:justify-between ">
                                     {/* <div class="text-xs text-cardBody font-poppins max-sm:hidden">Portal Acess</div> */}
 
                                     <div class="text-sm text-cardBody font-poppins">
@@ -308,7 +308,7 @@ function ContactCardList(props) {
 
 </div>
             </div>
-                                <div class="flex flex-col  max-sm:flex-row w-[40%] max-sm:justify-evenly items-center">
+                                <div class="flex flex-col  max-sm:flex-row w-[40%] ml-2 max-sm:justify-evenly items-center">
                     <div class="rounded-full bg-white w-5 h-5 cursor-pointer md:mt-4">
                     <Tooltip title={item.mobileNo} >
             {item.doNotCallInd !== true && (
@@ -333,7 +333,7 @@ function ContactCardList(props) {
             )}
           </Tooltip>
                         </div>
-                        <div class=" max-sm:flex justify-end max-sm:w-full">
+                        <div class=" max-sm:flex justify-end mt-1 max-sm:w-full">
                         <Tooltip title={item.emailId}>
            
             <MailOutlineIcon
