@@ -74,15 +74,15 @@ const PitchCardList = (props) => {
   return (
     <>
    <OnlyWrapCard style={{backgroundColor:"#E3E8EE"}}><div className=" flex justify-between w-[98%] p-2 bg-transparent font-bold sticky top-0 z-10">
-        <div className=" md:w-[12rem]">Name</div>
-        <div className=" md:w-[5.5rem]"></div>
-        <div className=" md:w-32 ">Phone #</div>
-        <div className="md:w-32">Country</div>
-        <div className="md:w-52">Company</div>
+        <div className=" md:w-[12.1rem]">Name</div>
+        <div className=" md:w-[6.5rem]"></div>
+        <div className=" md:w-[8.1rem] ">Phone #</div>
+        <div className="md:w-[8.2rem]">Country</div>
+        <div className="md:w-[13.1rem]">Company</div>
         {/* <div className="md:w-20">Sector</div>  */}
-        <div className="md:w-24">Assigned to</div>
-        <div className="md:w-20">Owner</div>
-        <div className="md:w-20">Qualify</div>
+        <div className="md:w-[7.1rem]">Assigned to</div>
+        <div className="md:w-[6.2rem]">Owner</div>
+        <div className="md:w-[4.3rem]">Qualify</div>
         {/* <div className="w-12">Action</div> */}
 
       </div>
@@ -124,7 +124,7 @@ const PitchCardList = (props) => {
                                 // }}
                                 >
                                      <div class="flex justify-between">
-                                <div className=" flex font-medium flex-col w-[12rem]   max-sm:w-full">
+                                <div className=" flex font-medium flex-col w-[13.5rem]   max-sm:w-full">
                                 <div className="flex max-sm:w-full"> 
 <div>
 <SubTitle>
@@ -239,7 +239,7 @@ const PitchCardList = (props) => {
 </div>  
      </div>  
                                 <div class="flex justify-between md:ml-4">
-                                <div className=" flex font-medium flex-col  md:w-44 max-sm:flex-row w-full max-sm:justify-between ">
+                                <div className=" flex font-medium flex-col  md:w-[9.1rem] max-sm:flex-row w-full max-sm:justify-between ">
                            {/* <h4 class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden"> Phone # </h4> */}
 
                            <h4 class="text-[0.82rem] text-cardBody font-poppins">
@@ -268,7 +268,7 @@ const PitchCardList = (props) => {
                               </div>
                               </div>
                        <div class="flex justify-between  max-sm:mb-2 ">
-                       <div className=" flex font-medium flex-col  md:w-[9rem] max-sm:flex-row w-full max-sm:justify-between ">
+                       <div className=" flex font-medium flex-col  md:w-[11.1rem] max-sm:flex-row w-full max-sm:justify-between ">
                            {/* <h4 class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden"> Company </h4> */}
                            <h4 className="text-[0.82rem] text-cardBody font-poppins">
                            {item.companyName || "Not Available"}
@@ -305,8 +305,8 @@ const PitchCardList = (props) => {
           
      <div class="md:w-[1%]"></div>
      <div class="flex justify-between max-sm:mb-1 md:items-center">
-     <div class="flex justify-between max-sm:w-[50%] ">
-     <div className=" flex font-medium flex-col md:w-32 max-sm:flex-row w-full max-sm:justify-between ">
+     <div class="flex justify-between items-center max-sm:w-[50%] ">
+     <div className=" flex font-medium flex-col md:w-[7.2rem] max-sm:flex-row w-full max-sm:justify-between ">
                                     {/* <h4 class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden">Assigned to</h4> */}
 
                                     <div class=" text-[0.82rem] text-cardBody font-poppins">
@@ -325,7 +325,7 @@ const PitchCardList = (props) => {
              
                                     </div>
                                 </div>
-     <div className=" flex font-medium flex-col md:w-20  max-sm:flex-row w-full max-sm:justify-between">
+     <div className=" flex font-medium flex-col md:w-[2.5rem]  max-sm:flex-row w-full max-sm:justify-between">
                        
                        {/* <h4 class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden">Owner</h4> */}
 

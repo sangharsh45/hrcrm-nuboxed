@@ -215,7 +215,7 @@ const ContactActionLeft = (props) => {
         /> */}
       </div>
     
-<div class="w-32 max-sm:w-12">
+<div class="w-32 ml-4 max-sm:w-12">
       <select value={props.selectedCountry} onChange={props.handleCountryChange} >
         <option value="" disabled>Department</option>
         <option value="">All</option>
@@ -227,7 +227,7 @@ const ContactActionLeft = (props) => {
       </select>
       </div>
 
-      <div style={{ width: "22%" }}>
+      <div class="w-[22%] mt-2">
           <StyledSelect placeholder="Sort"  onChange={(e)  => props.handleFilterChange(e)}>
           <Option value="CreationDate">Creation Date</Option>
             <Option value="ascending">A To Z</Option>

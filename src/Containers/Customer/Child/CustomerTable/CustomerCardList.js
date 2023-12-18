@@ -138,14 +138,14 @@ const [rowdata, setrowdata] = useState("");
          <div className=' flex justify-end sticky top-28 z-auto'>
         <OnlyWrapCard style={{backgroundColor:"#E3E8EE"}}>
         <div className=" flex justify-between w-[97.5%] p-2 bg-transparent font-bold sticky top-0 z-10">
-        <div className=" md:w-[8.1rem]">Name</div>
-        <div className=" md:w-[8.1rem]">Sector</div>
-        <div className=" md:w-[6.8rem] ">Country</div>
+        <div className=" md:w-[17.7rem]">Name</div>
+        <div className=" md:w-[5.1rem]">Sector</div>
+        <div className=" md:w-[5.8rem] ">Country</div>
         <div className="md:w-[5.9rem]"># Opportunity</div>
-        <div className="md:w-[6.8rem]">Pipeline</div>
+        <div className="md:w-[7.8rem]">Pipeline</div>
         <div className="md:w-[6.9rem]">Weighted</div>
         <div className="md:w-[5.2rem]">Assigned to</div>
-        <div className="md:w-[11.3rem]">Owner</div>
+        <div className="md:w-[11.8rem]">Owner</div>
         <div className="w-[3.8rem]"></div>
 
       </div>
@@ -184,7 +184,7 @@ const [rowdata, setrowdata] = useState("");
                                 // }}
                                 >
                                    <div class="flex">
-                                   <div className=" flex font-medium flex-col w-[14rem]   max-sm:w-full">
+                                   <div className=" flex font-medium flex-col w-[17rem]   max-sm:w-full">
                                    <div className="flex max-sm:w-full">
                       <div>
                         <SubTitle>
@@ -225,7 +225,7 @@ const [rowdata, setrowdata] = useState("");
                       </div>
                     </div>
                                     </div> 
-                                <div className=" flex font-medium flex-col  md:w-28 max-sm:flex-row w-full max-sm:justify-between  ">
+                                <div className=" flex font-medium  items-center  md:w-28 max-sm:flex-row w-full max-sm:justify-between  ">
                            
                                     {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden"> Sector </h4> */}
                                     <h4 class=" text-xs text-cardBody font-poppins">   

@@ -74,32 +74,18 @@ function LeadsAgingForm(props) {
                 </StyledLabel>
                 <Spacer />
 
-                <div className="flex ">
-                  <div class="flex justify-evenly">
-                    <div
-                      style={{
-                      
-                        width: "24%",
-                        display: "flex",
-                      }}
-                    >
+                <div className="flex flex-col ">
+                  <div >
+                    <div class="flex justify-between w-[18rem]" >
                       <i
                         className="fas fa-mug-hot"
                         style={{ fontSize: "1.12em" }}
-                      />
-                      &nbsp;&nbsp;
-                      <StyledLabel>
+                      />                 
+                      <label class="font-semibold ml-8">
                         Hot
                         
-                      </StyledLabel>
-                      &nbsp;&nbsp;
-                    </div>
-
-                    <FlexContainer
-                      justifyContent="space-between"
-                      style={{ width: "30%" }}
-                    >
-                      <div style={{ width: "22%" }}>
+                        </label>      
+                      <div class="flex">
                         <Field
                           name="hot"
                           // label="To Start"
@@ -110,15 +96,14 @@ function LeadsAgingForm(props) {
                           component={InputComponent}
                           inlineLabel
                           style={{
-                            flexBasis: "80%",
+                            width:"11rem",
                             marginTop: "0em",
                             height: "2em",
                             textAlign: "center",
                             backgroundColor:"#f5f3f3"
                           }}
                         />
-                      </div>
-                      <div style={{ width: "75%", marginTop: "20.5em" }}>
+                        <div >
                         <StyledLabel>
                           {/* Days */}
                           <FormattedMessage
@@ -127,31 +112,23 @@ function LeadsAgingForm(props) {
                           />
                         </StyledLabel>
                       </div>
-                      <FlexContainer
-                    justifyContent="space-between"
-                    style={{ marginTop: "-1.25em" }}
-                  >
-                    <div
-                      style={{
-                     
-                        width: "24%",
-                        display: "flex",
-                      }}
-                    >
-                      <i className="	fas fa-burn" style={{ fontSize: "1.12em" }} />
-                      &nbsp;&nbsp;
-                      <StyledLabel>
-                        Warm
-                        
-                      </StyledLabel>
-                      &nbsp;&nbsp;
+                      </div>
+                      
                     </div>
 
-                    <FlexContainer
-                      justifyContent="space-between"
+                    <div  class="flex justify-between">
                       
-                    >
-                      <div style={{ width: "22%" }}>
+                      <div  class="flex justify-between" >
+                    <div>
+                      <i className="	fas fa-burn" style={{ fontSize: "1.12em",marginRight:"2rem" }} />
+                     <label class="mr-[0.7rem] font-semibold">
+                        Warm
+                        
+                        </label>
+                    </div>
+
+                    <div>
+                      <div class="flex" >
                         <Field
                           name="worm"
                      
@@ -163,68 +140,50 @@ function LeadsAgingForm(props) {
                           style={{
                             flexBasis: "80%",
                             marginTop: "0em",
+                            width:"10rem",
                             height: "2em",
                             textAlign: "center",
                             backgroundColor:"#f5f3f3"
                        
                           }}
                         />
+                         <div >
+                        <StyledLabel>
+                          {/* Days */}
+                          <FormattedMessage
+                            id="app.days"
+                            defaultMessage="Days"
+                          />
+                        </StyledLabel>
                       </div>
-                      <div style={{ width: "75%", marginTop: "1.87em" }}>
+                      </div>
+                     
+                      <div >
                         {/* <StyledLabel>
                           Days
                         </StyledLabel> */}
                       </div>
-                    </FlexContainer>
-                  </FlexContainer>
-                    </FlexContainer>
+                    </div>
                   </div>
-
-                 
-                </div>
-              </div>
-
-              <div
-                style={{
-                  height: "100%",
-                  width: "45%",
-                  marginRight: "0.62em",
-                }}
-              >
-                <StyledLabel style={{ color: "white" }}>.</StyledLabel>
-                <Spacer />
-                <StyledLabel style={{ color: "white" }}>.</StyledLabel>
-                <Spacer style={{ marginBottom: "1.87em" }} />
-                <StyledLabel style={{ color: "white" }}>.</StyledLabel>
-                <Spacer />
-
-                <div style={{ marginLeft: "0%" }}>
-                  <FlexContainer justifyContent="space-between">
-                    <div
-                      style={{
-                       
-                        width: "24%",
-                        display: "flex",
-                      }}
-                    >
+                    </div>
+                  </div>
+                  <div class="flex justify-between w-[18rem]">
+                    <div>
                       <i
                         className="far fa-snowflake"
-                        style={{ fontSize: "1.12em" }}
+                        style={{ fontSize: "1.12em",marginRight:"2rem" }}
                       />
-                      &nbsp;&nbsp;
-                      <StyledLabel>
+                    
+                      <label class="font-semibold">
                         {/* Cold */}
                         <FormattedMessage
                           id="app.cold"
                           defaultMessage="Cold"
                         />
-                      </StyledLabel>
+                      </label>
                     </div>
-                    <FlexContainer
-                      justifyContent="space-between"
-                      style={{ width: "30%" }}
-                    >
-                      <div style={{ width: "20%" }}>
+                    <div class="flex justify-between">
+                      <div >
                         <Field
                           name="cold"
                           // label="To Start"
@@ -245,7 +204,7 @@ function LeadsAgingForm(props) {
                           }}
                         />
                       </div>
-                      <div style={{ width: "75%", marginTop: "20.5em" }}>
+                      <div >
                         <StyledLabel>
                           {/* Days */}
                           <FormattedMessage
@@ -254,27 +213,16 @@ function LeadsAgingForm(props) {
                           />
                         </StyledLabel>
                       </div>
-                    </FlexContainer>
-                  </FlexContainer>
-
-                  <FlexContainer
-                    justifyContent="space-between"
-                    style={{ marginTop: "-1.25em" }}
-                  >
-                    <div
-                      style={{
-                       
-                        width: "24%",
-                        display: "flex",
-                      }}
-                    >
-                      <StyledLabel>Not Defined</StyledLabel>
                     </div>
-                    <FlexContainer
-                      justifyContent="space-between"
-                      style={{ width: "30%" }}
-                    >
-                      <div style={{ width: "20%" }}>
+                  </div>
+
+                  <div class="flex justify-between w-[18rem]">
+                  
+                    <div >
+                    <label class="font-semibold">Not Defined</label>
+                    </div>
+                    <div class="flex justify-between">
+                      <div >
                         <Field
                           name="notDefined"
                           isColumn
@@ -290,7 +238,7 @@ function LeadsAgingForm(props) {
                           }}
                         />
                       </div>
-                      <div style={{ width: "75%", marginTop: "1.87em" }}>
+                      <div >
                         <StyledLabel>
                           <FormattedMessage
                             id="app.days"
@@ -298,8 +246,28 @@ function LeadsAgingForm(props) {
                           />
                         </StyledLabel>
                       </div>
-                    </FlexContainer>
-                  </FlexContainer>
+                    </div>
+                  </div>
+                 
+                </div>
+              </div>
+
+              <div
+                style={{
+                  height: "100%",
+                  width: "45%",
+                  marginRight: "0.62em",
+                }}
+              >
+                <StyledLabel style={{ color: "white" }}>.</StyledLabel>
+                <Spacer />
+                <StyledLabel style={{ color: "white" }}>.</StyledLabel>
+                <Spacer style={{ marginBottom: "1.87em" }} />
+                <StyledLabel style={{ color: "white" }}>.</StyledLabel>
+                <Spacer />
+
+                <div style={{ marginLeft: "0%" }}>
+                  
                 </div>
               </div>
             </div>
