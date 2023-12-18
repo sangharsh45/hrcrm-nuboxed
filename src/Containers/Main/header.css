@@ -20,6 +20,10 @@
     width: 45px;
     height: 45px;
   }
+  .logo1 {
+    width: 60px;
+    height: 55px;
+  }
   .nav-options {
     padding-left: 25px;
     display: flex;

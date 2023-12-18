@@ -1,15 +1,13 @@
-import React, { useState, useEffect, useMemo, Component } from "react";
+import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Button } from "antd";
 import { Formik, Form, Field } from "formik";
-import { InputComponent } from "../../../../../Components/Forms/Formik/InputComponent";
 import { SwitchComponent } from "../../../../../Components/Forms/Formik/SwitchComponent";
 import { FlexContainer } from "../../../../../Components/UI/Layout";
 import { StyledLabel } from "../../../../../Components/UI/Elements";
 import { Spacer } from "../../../../../Components/UI/Elements";
 import { SelectComponent } from "../../../../../Components/Forms/Formik/SelectComponent";
-import LevelApproveForm from "./LevelApproveForm";
  import { addApprove, getApproveData } from "../../../../Settings/SettingsAction";
 import {getDepartments} from "../../../Department/DepartmentAction"
 import {
@@ -17,7 +15,6 @@ import {
   } from "../../../../Settings/Category/Role/RoleAction";
 import { FormattedMessage } from "react-intl";
 import MileageLevelApproveForm from "./MileageLevelApproveForm";
-// import {getDesignations} from "../../../Designation/DesignationAction";
 class MileageApproveForm extends Component {
     constructor(props) {
         super(props);
@@ -94,7 +91,7 @@ class MileageApproveForm extends Component {
                         // reportingTo: this.props.approvalData.reportingTo || "",
                         threshold: this.props.approvalData.threshold || "",
                         departmentId: this.props.approvalData.departmentId || "",
-                        designationTypeId: this.props.approvalData.designationTypeId || "",
+                        roleTypeId: this.props.approvalData.roleTypeId || "",
                         jobLevel: this.props.approvalData.jobLevel || 1,
                         // processName: "BOQ",
                         levelCount:"1",

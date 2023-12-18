@@ -95,7 +95,7 @@ function MileageLevelApproveForm(props) {
   // }
 
   function handleAddRowClick() {
-    const newRow = { level: "", threshold: "" };
+    const newRow = { level: "", threshold: "",roleTypeId:"" };
     setRows((prevRows) => [...prevRows, newRow]);
   }
 
@@ -112,6 +112,10 @@ function MileageLevelApproveForm(props) {
     // return <BundleLoader />;
   }
   function getRoleOptions(selectedDepartment) {
+    if (!selectedDepartment || props.roles.length === 0) {
+      return [];
+    }
+  
     const filteredRoles = props.roles
       .filter((role) => role.departmentName === selectedDepartment)
       .filter((option) => option.probability !== 0)
@@ -119,9 +123,10 @@ function MileageLevelApproveForm(props) {
         label: option.roleType,
         value: option.roleTypeId,
       }));
-
+  
     return filteredRoles;
   }
+  
   const roleNameOption = props.roles.map((item) => {
     return {
         label: `${item.roleType || ""}`,
@@ -157,10 +162,22 @@ function MileageLevelApproveForm(props) {
                 
                 </div>
                 <div style={{ width: "100%" }}>
+               {/*  <Select
+                    name={`level_${index}`}
+                    value={row.roleTypeId}
+                    onChange={(value) => handleChangeRoleValue(value, index)}
+                  >
+                    {row.level === "Management" ?
+       props.roles.filter((role) => role.departmentName === selectedDepartment)
+       .filter((option) => option.probability !== 0).map((item) => (
+       <Option key={item.roleType} value={item.roleTypeId}>
+         {item.roleType}       </Option>
+     ))
+     :null}
+                  </Select> */}
                 <Field
                       name="roleTypeId"
-                      isRequired
-                      value={row.roleTypeId}
+                    value={row.roleTypeId}
                       isColumnWithoutNoCreate
                       label="Role"
                       onChange={(value) => handleChangeRoleValue(value, index)}
@@ -170,7 +187,7 @@ function MileageLevelApproveForm(props) {
                       isColumn
                       inlineLabel
                       style={{ flexBasis: "80%", marginTop: "0px", width: "100%" }}
-                    /> 
+                    />  
                                                         </div>
                                                         </div>
                                                       

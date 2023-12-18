@@ -17,6 +17,7 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import FilterTiltShiftIcon from "@mui/icons-material/FilterTiltShift";
 import LocationCustomerDrawer from "./LocationCustomerDrawer";
 import LocationSupplierDrawer from "./LocationSupplierDrawer";
+import CountryFlag1 from "../../../Settings/Category/Country/CountryFlag1";
 
 const LocationShiftDrawer = lazy(() => import("./LocationShiftDrawer"));
 const LocationUpdateDrawer=lazy(()=>import("./LocationUpdateDrawer"));
@@ -48,11 +49,11 @@ const handleLoadMore = () => {
         height={"75vh"}
       >
       <div className=" flex justify-between w-[99%] p-2 bg-transparent font-bold sticky top-0 z-10">
-        <div className=" md:w-[9rem]">Name</div>
-        <div className=" md:w-[13rem]">Country</div>
-        <div className=" md:w-28 ">Address</div>
+        <div className=" md:w-[7rem]">Name</div>
+        <div className=" md:w-[4rem]">Country</div>
+        <div className=" md:w-[13rem] ">Address</div>
         <div className=" md:w-28 ">Refurbish</div>
-        <div className=" md:w-28 ">Producation</div>
+        <div className=" md:w-28 ">Production</div>
         <div className="md:w-36">Inventory</div>
         <div className="md:w-[6.5rem]">Billing</div>
         <div className="md:w-24">Corporate</div>
@@ -65,7 +66,7 @@ const handleLoadMore = () => {
               <div class="w-wk">
                 <div class=" flex rounded-xl justify-between bg-white mt-[0.5rem]  h-[2.75rem] items-center p-3">
                   <div class="flex">
-                    <div className=" flex font-medium flex-col md:w-40 max-sm:flex-row w-full max-sm:justify-between ">
+                    <div className=" flex font-medium flex-row md:w-[7rem] max-sm:flex-row w-full max-sm:justify-between ">
                       {/* <div class=" text-sm text-cardBody font-semibold font-poppins max-sm:hidden">
                         Name
                       </div> */}
@@ -73,18 +74,20 @@ const handleLoadMore = () => {
                       <div class=" font-normal text-[0.82rem]text-cardBody font-poppins">
                         {item.locationName}
                       </div>
-                    </div>
+                   
 
-                    <div className=" flex font-medium flex-col md:w-40  max-sm:flex-row w-full mt-1 max-sm:justify-between">
+                    <div className=" flex font-medium flex-col md:w-[7rem]  max-sm:flex-row w-full mt-1 max-sm:justify-between">
                       {/* <div class=" text-sm text-cardBody font-semibold font-poppins max-sm:hidden">
                         Country
                       </div> */}
 
                       <div class=" font-normal text-[0.82rem] text-cardBody font-poppins">
-                        {item.country_name}
+                      <CountryFlag1 countryCode={item.countryAlpha2Code} />
+  &nbsp;
+                        {item.countryAlpha2Code}
                       </div>
                     </div>
-                    <div className=" flex font-medium flex-col md:w-40 max-sm:flex-row w-full mt-1 max-sm:justify-between">
+                    <div className=" flex font-medium flex-col md:w-[13rem] max-sm:flex-row w-full mt-1 max-sm:justify-between">
                       {/* <div class=" text-sm text-cardBody font-semibold font-poppins max-sm:hidden">
                         Address
                       </div> */}
@@ -98,8 +101,8 @@ const handleLoadMore = () => {
                       </div>
                     </div>
                   </div>
-                  <div class="flex">
-                    <div className=" flex font-medium flex-col md:w-[7rem] max-sm:flex-row w-full mt-1 max-sm:justify-between">
+                
+                    <div className=" flex font-medium flex-row md:w-[7rem] max-sm:flex-row w-full mt-1 max-sm:justify-between">
                       {/* <div class=" text-sm text-cardBody font-semibold font-poppins max-sm:hidden">
                         Refurbish
                       </div> */}
@@ -114,7 +117,7 @@ const handleLoadMore = () => {
                         />
                       </div>
                     </div>
-                    <div className=" flex font-medium flex-col md:w-24 max-sm:flex-row w-full mt-1 max-sm:justify-between">
+                    <div className=" flex font-medium flex-row md:w-24 max-sm:flex-row w-full mt-1 max-sm:justify-between">
                       {/* <div class=" text-sm text-cardBody font-semibold font-poppins max-sm:hidden">
                         Inventory
                       </div> */}
@@ -129,7 +132,7 @@ const handleLoadMore = () => {
                         />
                       </div>
                     </div>
-                    <div className=" flex font-medium flex-col md:w-24 max-sm:flex-row w-full mt-1 max-sm:justify-between">
+                    <div className=" flex font-medium flex-row md:w-24 max-sm:flex-row w-full mt-1 max-sm:justify-between">
                       {/* <div class=" text-sm text-cardBody font-semibold font-poppins max-sm:hidden">
                         Inventory
                       </div> */}
@@ -144,7 +147,7 @@ const handleLoadMore = () => {
                         />
                       </div>
                     </div>
-                    <div className=" flex font-medium flex-col md:w-[1rem] max-sm:flex-row w-full mt-1 max-sm:justify-between ">
+                    <div className=" flex font-medium flex-row md:w-[1rem] max-sm:flex-row w-full mt-1 max-sm:justify-between ">
                       {/* <div class=" text-sm text-cardBody font-semibold font-poppins max-sm:hidden">
                         Billing
                       </div> */}
@@ -158,9 +161,9 @@ const handleLoadMore = () => {
                         />
                       </div>
                     </div>
-                  </div>
-                  <div class="flex">
-                    <div className=" flex font-medium flex-col md:w-24 max-sm:flex-row w-full mt-1 max-sm:justify-between">
+              
+               
+                    <div className=" flex font-medium flex-row md:w-24 max-sm:flex-row w-full mt-1 max-sm:justify-between">
                       {/* <div class=" text-sm text-cardBody font-semibold font-poppins max-sm:hidden">
                         Corporate
                       </div> */}
@@ -174,7 +177,7 @@ const handleLoadMore = () => {
                         />
                       </div>
                     </div>
-                    <div className=" flex font-medium flex-col md:w-24 max-sm:flex-row w-full mt-1 max-sm:justify-between">
+                    <div className=" flex font-medium flex-row md:w-24 max-sm:flex-row w-full mt-1 max-sm:justify-between">
                       {/* <div class=" text-sm text-cardBody font-semibold font-poppins max-sm:hidden">
                         Project
                       </div> */}
@@ -188,7 +191,7 @@ const handleLoadMore = () => {
                         />
                       </div>
                     </div>
-                    <div className=" flex font-medium flex-col md:w-24 max-sm:flex-row w-full mt-1 max-sm:justify-between">
+                    <div className=" flex font-medium flex-row md:w-24 max-sm:flex-row w-full mt-1 max-sm:justify-between">
                       {/* <div class=" text-sm text-cardBody font-semibold font-poppins max-sm:hidden">
                         Retail
                       </div> */}
@@ -202,7 +205,7 @@ const handleLoadMore = () => {
                         />
                       </div>
                     </div>
-                    <div class="flex flex-col w-[5%] max-sm:flex-row max-sm:w-[10%]">
+                    <div class="flex flex-row w-[5%] max-sm:flex-row max-sm:w-[10%]">
                       <div>
                         <Tooltip title="Shift">
                           <FilterTiltShiftIcon
@@ -229,7 +232,7 @@ const handleLoadMore = () => {
                         </div> */}
                       <div></div>
                     </div>
-                    <div class="flex flex-col w-[5%] max-sm:flex-row max-sm:w-[10%]">
+                    <div class="flex flex-row w-[5%] max-sm:flex-row max-sm:w-[10%]">
                       <div>
                         <Tooltip title="Customer">
                           <AcUnitIcon
@@ -254,7 +257,7 @@ const handleLoadMore = () => {
                       </div>
                       <div></div>
                     </div>
-                    <div class="flex flex-col w-[5%] max-sm:flex-row max-sm:w-[10%]">
+                    <div class="flex flex-row w-[5%] max-sm:flex-row max-sm:w-[10%]">
                       <div>
                         <Tooltip title="Edit">
                           <BorderColorIcon
@@ -283,7 +286,7 @@ const handleLoadMore = () => {
                       </div>
                       <div></div>
                     </div>
-                  </div>
+                    </div>
                 </div>
               </div>
             );
