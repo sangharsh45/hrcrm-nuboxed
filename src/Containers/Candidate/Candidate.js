@@ -128,12 +128,7 @@ class Candidate extends Component {
           handleCandidateModal={handleCandidateModal}
           responseData={this.state.responseData}
         />
-        <AddCandidateResumeModal
-          addCandidateResumeModal={addCandidateResumeModal}
-          handleCandidateResumeModal={handleCandidateResumeModal}
-          handleResponseData={this.handleResponseData}
-          responseData={this.state.responseData}
-        />
+       
         <AddCandidateFilterModal
           addCandidateFilterModal={addCandidateFilterModal}
           handleCandidateFilterModal={handleCandidateFilterModal}
@@ -175,6 +170,13 @@ class Candidate extends Component {
             <CandidateMap />
           ) : null}
         </Suspense>
+
+        <AddCandidateResumeModal
+          addCandidateResumeModal={addCandidateResumeModal}
+          handleCandidateResumeModal={handleCandidateResumeModal}
+          handleResponseData={this.handleResponseData}
+          responseData={this.state.responseData}
+        />
       </React.Fragment>
     );
   }
