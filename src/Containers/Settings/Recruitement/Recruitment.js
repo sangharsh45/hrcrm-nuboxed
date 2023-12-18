@@ -5,6 +5,7 @@ import {
    getProcessForRecruit,
     dataClear,
 } from "../SettingsAction";
+import Matrix from "../Recruitement/Child/RecruitmentTab/Matrix"
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import Template from "../../Template/Template"
@@ -100,6 +101,11 @@ function Recruitment(props) {
       rulesName: "Finance",
       ruleId: "16",
       component: <FinanceTab/>,
+    },
+    {
+      rulesName: "Matrix",
+      ruleId: "28",
+      component: <Matrix/>,
     },
    
     // {
