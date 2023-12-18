@@ -341,7 +341,7 @@ import React, { useState, useEffect, useMemo } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { StyledTable } from "../../../Components/UI/Antd";
-import { getRepairPhoneByUser, updaterepairStatus, handleRepairPhoneNotesOrderModal } from "./RefurbishAction";
+import { getRepairPhoneByUser, updaterepairStatus, getCatalogueByUser, handleRepairPhoneNotesOrderModal } from "./RefurbishAction";
 import { Button, Tooltip } from "antd";
 import { FileDoneOutlined, IeOutlined } from "@ant-design/icons";
 import QRCodeModal from "../../../Components/UI/Elements/QRCodeModal";
@@ -424,249 +424,250 @@ function PhoneListForRepair(props) {
         }
         props.updaterepairStatus(data, item.phoneId, props.rowData.orderPhoneId, props.locationId, props.userId)
     }
-    
+
     return (
         <>
-    <div className=' flex justify-end sticky flex-col z-auto overflow-x-auto h-[30rem]'>
-<OnlyWrapCard style={{backgroundColor:"#E3E8EE"}}>
-<div className=" flex justify-between w-[97.5%] p-2 bg-transparent font-bold sticky top-0 z-10">
-    <div className=" md:w-[3.1rem]">Company</div>
-    <div className=" md:w-[3.2rem]">Model</div>
-    <div className=" md:w-[3.8rem] ">IMEI</div>
-    <div className="md:w-[3.6rem]">QR Code</div>
-    <div className="md:w-[4.8rem]">Repair</div>
-    <div className="md:w-[4.8rem]">Start Time</div>
-    <div className="md:w-[4.3rem]">End Time</div>
-    <div className="md:w-[7.2rem]">Estimated Time</div>
-    <div className="md:w-[6.5rem]">Hour</div>
-    <div className="md:w-[6.9rem]"></div>
-  </div>
-{props.repairPhone.map((item) => { 
-    const currentdate = moment().format("DD/MM/YYYY");
-    const date = moment(item.creationDate).format("DD/MM/YYYY");
-    const starttimme = moment(item.qcStartTime).add(5, 'hours').add(30, 'minutes');
-  //  const endtimme = moment(item.qcEndTime).add(5, 'hours').add(30, 'minutes');
-    const time = moment(item.qcEndTime).add(5, 'hours').add(30, 'minutes');
-    const endtimme = time.format('YYYY-MM-DDTHH:mm:ss.SSSZ'); // Using ISO 8601 format
-               return (
-                   <div>
-                       <div className="flex rounded-xl  justify-between mt-4 bg-white h-12 items-center p-3 "
-                           
-                           >
-                              <div class="flex">
-                           <div className=" flex font-medium  md:w-[6.6rem] max-sm:w-full  ">
-                         {item.company}
-                           </div>
+            <div className=' flex justify-end sticky flex-col z-auto overflow-x-auto h-[30rem]'>
+                <OnlyWrapCard style={{ backgroundColor: "#E3E8EE" }}>
+                    <div className=" flex justify-between w-[97.5%] p-2 bg-transparent font-bold sticky top-0 z-10">
+                        <div className=" md:w-[3.1rem]">Company</div>
+                        <div className=" md:w-[3.2rem]">Model</div>
+                        <div className=" md:w-[3.8rem] ">IMEI</div>
+                        <div className="md:w-[3.6rem]">QR Code</div>
+                        <div className="md:w-[4.8rem]">Repair</div>
+                        <div className="md:w-[4.8rem]">Start Time</div>
+                        <div className="md:w-[4.3rem]">End Time</div>
+                        <div className="md:w-[7.2rem]">Estimated Time</div>
+                        <div className="md:w-[6.5rem]">Hour</div>
+                        <div className="md:w-[6.9rem]"></div>
+                    </div>
+                    {props.repairPhone.map((item) => {
+                        const currentdate = moment().format("DD/MM/YYYY");
+                        const date = moment(item.creationDate).format("DD/MM/YYYY");
+                        const starttimme = moment(item.qcStartTime).add(5, 'hours').add(30, 'minutes');
+                        //  const endtimme = moment(item.qcEndTime).add(5, 'hours').add(30, 'minutes');
+                        const time = moment(item.qcEndTime).add(5, 'hours').add(30, 'minutes');
+                        const endtimme = time.format('YYYY-MM-DDTHH:mm:ss.SSSZ'); // Using ISO 8601 format
+                        return (
+                            <div>
+                                <div className="flex rounded-xl  justify-between mt-4 bg-white h-12 items-center p-3 "
 
-                           <div className=" flex font-medium   md:w-[4.2rem] max-sm:flex-row w-full max-sm:justify-between  ">
-                               <h4 class=" text-xs text-cardBody font-poppins">   
-                              {item.model}
-                               </h4>
-                           
-                           </div> 
-                           <div className=" flex font-medium  md:w-[8.2rem] max-sm:flex-row w-full max-sm:justify-between ">
-                             
+                                >
+                                    <div class="flex">
+                                        <div className=" flex font-medium  md:w-[6.6rem] max-sm:w-full  ">
+                                            {item.company}
+                                        </div>
 
-                            
-                               <h4 class=" text-sm text-cardBody font-poppins">
-                              {item.imei}
-                               </h4>
-                           </div>
-                           </div>
-                           <div className=" flex font-medium  md:w-[2.5rem] max-sm:flex-row w-full max-sm:justify-between ">
-                              
+                                        <div className=" flex font-medium   md:w-[4.2rem] max-sm:flex-row w-full max-sm:justify-between  ">
+                                            <h4 class=" text-xs text-cardBody font-poppins">
+                                                {item.model}
+                                            </h4>
 
-                               <div class=" text-xs text-cardBody font-poppins text-center">
-                               <SubTitle>
-                        {item.qrCodeId ? (
-                            <QRCodeModal
-                                qrCodeId={item.qrCodeId ? item.qrCodeId : ''}
-                                imgHeight={"2.8em"}
-                                imgWidth={"2.8em"}
-                                imgRadius={20}
-                            />
-                        ) : (
-                            <span style={{ fontSize: "0.6em", fontWeight: "bold" }}>
-                                No QR
-                            </span>
-                        )}
-                    </SubTitle>
-
-                               </div>
-                           </div>
-                           <div className=" flex font-medium  md:w-[7.2rem] max-sm:flex-row w-full max-sm:justify-between ">                           
-                               <div class=" text-xs text-cardBody font-poppins text-center">
-                               {props.rowData.repairInspectionInd === 1 && <ButtonGroup>
-                           
-                            <StatusIcon
-                                type="In Progress"
-                                iconType="fa-hourglass-half"
-                                tooltip="In Progress"
-                                id={item.phoneId}
-                                indStatus={item.repairStatus}
-                                phoneId={RowData.phoneId}
-                                status={active}
-                                onClick={() => {
-                                    handleQCRepairStatus("In Progress", item);
-                                    handleSetRowData(item)
-                                }}
-                            />
-                            <StatusIcon
-                                type="Complete"
-                                iconType="fa-hourglass"
-                                tooltip="Complete"
-                                status={active}
-                                id={item.phoneId}
-                                indStatus={item.repairStatus}
-                                phoneId={RowData.phoneId}
-                                onClick={() => {
-                                    handleQCRepairStatus("Complete", item);
-                                    handleSetRowData(item)
-                                }}
-                            />
-                        </ButtonGroup>}
-
-                               </div>
-                           </div>
-                           <div className=" flex font-medium  md:w-[6.6rem] max-sm:flex-row w-full max-sm:justify-between ">                           
-                               <div class=" text-xs text-cardBody font-poppins text-center">
-                               {props.rowData.repairInspectionInd === 1 && <ButtonGroup>
-                            
-                            <StatusIcon
-                                type="In Progress"
-                                iconType="fa-hourglass-half"
-                                tooltip="In Progress"
-                                id={item.phoneId}
-                                indStatus={item.repairStatus}
-                                phoneId={RowData.phoneId}
-                                status={active}
-                                onClick={() => {
-                                    handleQCRepairStatus("In Progress", item);
-                                    handleSetRowData(item)
-                                }}
-                            />
-                            <StatusIcon
-                                type="Complete"
-                                iconType="fa-hourglass"
-                                tooltip="Complete"
-                                status={active}
-                                id={item.phoneId}
-                                indStatus={item.repairStatus}
-                                phoneId={RowData.phoneId}
-                                onClick={() => {
-                                    handleQCRepairStatus("Complete", item);
-                                    handleSetRowData(item)
-                                }}
-                            />
-                        </ButtonGroup>}
-
-                               </div>
-                           </div>
-                           <div className=" flex font-medium  md:w-[5.1rem] max-sm:flex-row w-full max-sm:justify-between ">                           
-                               <div class=" text-xs text-cardBody font-poppins text-center">
-                               {item.qcStartTime === null ? "" : moment(starttimme).format('LT')}
-
-                               </div>
-                           </div>
-                         
-                           <div className=" flex font-medium  md:w-[6.3rem] max-sm:flex-row w-full max-sm:justify-between ">                           
-                               <div class=" text-xs text-cardBody font-poppins text-center">
-                               <>{item.qcStartTime === null ? "" : moment(starttimme).format('LT')}</>
-
-                               </div>
-                           </div>
-                           <div className=" flex font-medium  md:w-[8.3rem] max-sm:flex-row w-full max-sm:justify-between ">                           
-                               <div class=" text-xs text-cardBody font-poppins text-center">
-                               {item.estimateRepairTimeHours || "0"}H:{item.estimateRepairTimeMinutes || "0"}M:{item.estimateRepairTimeSeconds || "0"}S
-
-                               </div>
-                           </div>
-                           <div className=" flex font-medium  md:w-[11.3rem] max-sm:flex-row w-full max-sm:justify-between ">                           
-                               <div class=" text-xs text-cardBody font-poppins text-center">
-                            {item.totalhours}
-
-                               </div>
-                           </div>
-                           <div className=" flex font-medium  md:w-[1.5rem] max-sm:flex-row w-full max-sm:justify-between ">                           
-                               <div class=" text-xs text-cardBody font-poppins text-center">
-                               <Tooltip title="Spare">
-                        <span style={{ color: spares && item.phoneId === RowData.phoneId ? "red" : "black" }}
-
-                            onClick={() => {
-                                handleSetRowData(item);
-                                hanldeSpare();
-                            }}>
-                            <i class="fab fa-linode"></i>
-                        </span>
-
-
-                    </Tooltip>
-
-                               </div>
-                           </div>
-                           <div className=" flex font-medium  md:w-[1.5rem] max-sm:flex-row w-full max-sm:justify-between ">                           
-                               <div class=" text-xs text-cardBody font-poppins text-center">
-                               <Tooltip title="Task">
-                        <FileDoneOutlined
-                            style={{ color: expand && item.phoneId === RowData.phoneId ? "red" : "black" }}
-                            type="file-done"
-                            onClick={() => {
-                                handleSetRowData(item);
-                                handleExpand(item.phoneId);
-                            }}
-                        />
-
-                    </Tooltip>
-
-                               </div>
-                           </div>
-                           <div className=" flex font-medium  md:w-[1.5rem] max-sm:flex-row w-full max-sm:justify-between ">                           
-                               <div class=" text-xs text-cardBody font-poppins text-center">
-                               <Tooltip title="Notes">
-                        <NoteAddOutlined
-                            style={{ cursor: "pointer", fontSize: "13px" }}
-                            onClick={() => {
-                                handleSetRowData(item);
-                                props.handleRepairPhoneNotesOrderModal(true);
-                            }}
-                        />
-
-                    </Tooltip>
-
-                               </div>
-                           </div>
+                                        </div>
+                                        <div className=" flex font-medium  md:w-[8.2rem] max-sm:flex-row w-full max-sm:justify-between ">
 
 
 
-                       </div>
-                   </div>
-)})}
-</OnlyWrapCard>
-<div style={{ display: "flex", justifyContent: "flex-end" }}>
-                <Button
-                    type="primary"
-                    onClick={handlePuaseButton}>{hide ? "Resume" : "Pause"}</Button>
-            </div>
-            {spares && (
-                <AddingRepairSpareList
-                    phoneId={phoneId}
+                                            <h4 class=" text-sm text-cardBody font-poppins">
+                                                {item.imei}
+                                            </h4>
+                                        </div>
+                                    </div>
+                                    <div className=" flex font-medium  md:w-[2.5rem] max-sm:flex-row w-full max-sm:justify-between ">
+
+
+                                        <div class=" text-xs text-cardBody font-poppins text-center">
+                                            <SubTitle>
+                                                {item.qrCodeId ? (
+                                                    <QRCodeModal
+                                                        qrCodeId={item.qrCodeId ? item.qrCodeId : ''}
+                                                        imgHeight={"2.8em"}
+                                                        imgWidth={"2.8em"}
+                                                        imgRadius={20}
+                                                    />
+                                                ) : (
+                                                    <span style={{ fontSize: "0.6em", fontWeight: "bold" }}>
+                                                        No QR
+                                                    </span>
+                                                )}
+                                            </SubTitle>
+
+                                        </div>
+                                    </div>
+                                    <div className=" flex font-medium  md:w-[7.2rem] max-sm:flex-row w-full max-sm:justify-between ">
+                                        <div class=" text-xs text-cardBody font-poppins text-center">
+                                            {props.rowData.repairInspectionInd === 1 && <ButtonGroup>
+
+                                                <StatusIcon
+                                                    type="In Progress"
+                                                    iconType="fa-hourglass-half"
+                                                    tooltip="In Progress"
+                                                    id={item.phoneId}
+                                                    indStatus={item.repairStatus}
+                                                    phoneId={RowData.phoneId}
+                                                    status={active}
+                                                    onClick={() => {
+                                                        handleQCRepairStatus("In Progress", item);
+                                                        handleSetRowData(item)
+                                                    }}
+                                                />
+                                                <StatusIcon
+                                                    type="Complete"
+                                                    iconType="fa-hourglass"
+                                                    tooltip="Complete"
+                                                    status={active}
+                                                    id={item.phoneId}
+                                                    indStatus={item.repairStatus}
+                                                    phoneId={RowData.phoneId}
+                                                    onClick={() => {
+                                                        handleQCRepairStatus("Complete", item);
+                                                        handleSetRowData(item)
+                                                    }}
+                                                />
+                                            </ButtonGroup>}
+
+                                        </div>
+                                    </div>
+                                    <div className=" flex font-medium  md:w-[6.6rem] max-sm:flex-row w-full max-sm:justify-between ">
+                                        <div class=" text-xs text-cardBody font-poppins text-center">
+                                            {props.rowData.repairInspectionInd === 1 && <ButtonGroup>
+
+                                                <StatusIcon
+                                                    type="In Progress"
+                                                    iconType="fa-hourglass-half"
+                                                    tooltip="In Progress"
+                                                    id={item.phoneId}
+                                                    indStatus={item.repairStatus}
+                                                    phoneId={RowData.phoneId}
+                                                    status={active}
+                                                    onClick={() => {
+                                                        handleQCRepairStatus("In Progress", item);
+                                                        handleSetRowData(item)
+                                                    }}
+                                                />
+                                                <StatusIcon
+                                                    type="Complete"
+                                                    iconType="fa-hourglass"
+                                                    tooltip="Complete"
+                                                    status={active}
+                                                    id={item.phoneId}
+                                                    indStatus={item.repairStatus}
+                                                    phoneId={RowData.phoneId}
+                                                    onClick={() => {
+                                                        handleQCRepairStatus("Complete", item);
+                                                        handleSetRowData(item)
+                                                    }}
+                                                />
+                                            </ButtonGroup>}
+
+                                        </div>
+                                    </div>
+                                    <div className=" flex font-medium  md:w-[5.1rem] max-sm:flex-row w-full max-sm:justify-between ">
+                                        <div class=" text-xs text-cardBody font-poppins text-center">
+                                            {item.qcStartTime === null ? "" : moment(starttimme).format('LT')}
+
+                                        </div>
+                                    </div>
+
+                                    <div className=" flex font-medium  md:w-[6.3rem] max-sm:flex-row w-full max-sm:justify-between ">
+                                        <div class=" text-xs text-cardBody font-poppins text-center">
+                                            <>{item.qcStartTime === null ? "" : moment(starttimme).format('LT')}</>
+
+                                        </div>
+                                    </div>
+                                    <div className=" flex font-medium  md:w-[8.3rem] max-sm:flex-row w-full max-sm:justify-between ">
+                                        <div class=" text-xs text-cardBody font-poppins text-center">
+                                            {item.estimateRepairTimeHours || "0"}H:{item.estimateRepairTimeMinutes || "0"}M:{item.estimateRepairTimeSeconds || "0"}S
+
+                                        </div>
+                                    </div>
+                                    <div className=" flex font-medium  md:w-[11.3rem] max-sm:flex-row w-full max-sm:justify-between ">
+                                        <div class=" text-xs text-cardBody font-poppins text-center">
+                                            {item.totalhours}
+
+                                        </div>
+                                    </div>
+                                    <div className=" flex font-medium  md:w-[1.5rem] max-sm:flex-row w-full max-sm:justify-between ">
+                                        <div class=" text-xs text-cardBody font-poppins text-center">
+                                            <Tooltip title="Spare">
+                                                <span style={{ color: spares && item.phoneId === RowData.phoneId ? "red" : "black" }}
+
+                                                    onClick={() => {
+                                                        handleSetRowData(item);
+                                                        hanldeSpare();
+                                                    }}>
+                                                    <i class="fab fa-linode"></i>
+                                                </span>
+
+
+                                            </Tooltip>
+
+                                        </div>
+                                    </div>
+                                    <div className=" flex font-medium  md:w-[1.5rem] max-sm:flex-row w-full max-sm:justify-between ">
+                                        <div class=" text-xs text-cardBody font-poppins text-center">
+                                            <Tooltip title="Task">
+                                                <FileDoneOutlined
+                                                    style={{ color: expand && item.phoneId === RowData.phoneId ? "red" : "black" }}
+                                                    type="file-done"
+                                                    onClick={() => {
+                                                        handleSetRowData(item);
+                                                        handleExpand(item.phoneId);
+                                                    }}
+                                                />
+
+                                            </Tooltip>
+
+                                        </div>
+                                    </div>
+                                    <div className=" flex font-medium  md:w-[1.5rem] max-sm:flex-row w-full max-sm:justify-between ">
+                                        <div class=" text-xs text-cardBody font-poppins text-center">
+                                            <Tooltip title="Notes">
+                                                <NoteAddOutlined
+                                                    style={{ cursor: "pointer", fontSize: "13px" }}
+                                                    onClick={() => {
+                                                        handleSetRowData(item);
+                                                        props.handleRepairPhoneNotesOrderModal(true);
+                                                    }}
+                                                />
+
+                                            </Tooltip>
+
+                                        </div>
+                                    </div>
+
+
+
+                                </div>
+                            </div>
+                        )
+                    })}
+                </OnlyWrapCard>
+                <div style={{ display: "flex", justifyContent: "flex-end" }}>
+                    <Button
+                        type="primary"
+                        onClick={handlePuaseButton}>{hide ? "Resume" : "Pause"}</Button>
+                </div>
+                {spares && (
+                    <AddingRepairSpareList
+                        phoneId={phoneId}
+                        RowData={RowData}
+                    />
+                )}
+                {expand && (
+                    <RepairTaskTable
+                        phoneId={phoneId}
+                        RowData={RowData} />
+                )}
+
+                <RepairPhoneNotesOrderModal
                     RowData={RowData}
+                    phoNotesRepairOrderModal={props.phoNotesRepairOrderModal}
+                    handleRepairPhoneNotesOrderModal={props.handleRepairPhoneNotesOrderModal}
                 />
-            )}
-            {expand && (
-                <RepairTaskTable
-                    phoneId={phoneId}
-                    RowData={RowData} />
-            )}
-
-<RepairPhoneNotesOrderModal
-                RowData={RowData}
-                phoNotesRepairOrderModal={props.phoNotesRepairOrderModal}
-                handleRepairPhoneNotesOrderModal={props.handleRepairPhoneNotesOrderModal}
-            />
-</div>
-</>
-  ) 
+            </div>
+        </>
+    )
 
 }
 
@@ -682,6 +683,7 @@ const mapDispatchToProps = (dispatch) =>
         {
             getRepairPhoneByUser,
             updaterepairStatus,
+            getCatalogueByUser,
             handleRepairPhoneNotesOrderModal
         },
         dispatch

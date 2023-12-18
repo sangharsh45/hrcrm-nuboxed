@@ -4,13 +4,20 @@ import { StyledTable } from '../../../Components/UI/Antd'
 import { getDepartments } from "../../Settings/Department/DepartmentAction"
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { getProductionUsersById, getRepairPhoneById, UpdateTechnicianForRepairPhone } from "./RefurbishAction"
+import {
+    getProductionUsersById,
+    getCatalogueListInRefurbish,
+    updateCatalogueInRefurbish,
+} from "./RefurbishAction"
+import { getCatalogueListById } from "../Account/AccountAction"
+
 const { Option } = Select;
 const AssignCatalogueRepairForm = (props) => {
     const [user, setUser] = useState("")
     const [technician, setTechnician] = useState("")
     const [department, setDepartment] = useState("")
     const [selectedRow, setselectedRow] = useState([]);
+    const [catalogue, setCatalogue] = useState("")
 
     const rowSelection = {
         onChange: (selectedRowKeys, selectedRows) => {
@@ -23,10 +30,14 @@ const AssignCatalogueRepairForm = (props) => {
         },
     };
     const checkedValue = selectedRow.map(function (item) {
-        return item['phoneId'];
+        return item['productManufacturingId'];
     });
     const handleTechnician = (val) => {
         setTechnician(val)
+    }
+    const handleCatalogue = (val) => {
+        setCatalogue(val)
+        props.getCatalogueListInRefurbish(props.rowData.orderPhoneId, val)
     }
     const handleDepartment = (val) => {
         setDepartment(val)
@@ -37,8 +48,8 @@ const AssignCatalogueRepairForm = (props) => {
 
     useEffect(() => {
         props.getProductionUsersById(props.rowData.departmentId, props.locationId);
-        props.getRepairPhoneById(props.rowData.orderPhoneId)
         props.getDepartments()
+        props.getCatalogueListById(props.rowData.orderPhoneId)
     }, [])
 
     const [dueDate, setDueDate] = useState("")
@@ -61,28 +72,28 @@ const AssignCatalogueRepairForm = (props) => {
         {
             title: "Category",
             dataIndex: "category",
-            width: "9%",
+            width: "15%",
         },
         {
             title: "Sub Category",
             dataIndex: "subCategory",
-            width: "9%",
+            width: "15%",
         },
         {
             title: "Attribute",
             dataIndex: "attribute",
-            width: "9%",
+            width: "15%",
 
         },
         {
             title: "Sub Attribute",
             dataIndex: "subAttribute",
-            width: "9%",
+            width: "15%",
         },
         {
             title: "Quantity",
             dataIndex: "quantity",
-            width: "9%",
+            width: "15%",
         },
 
 
@@ -95,11 +106,11 @@ const AssignCatalogueRepairForm = (props) => {
                     <label style={{
                         fontSize: "15px",
                         fontWeight: "600",
-                        margin: "10px",
+                        margin: "8px",
                     }}>Department</label>
                     <Select
                         style={{
-                            width: 250,
+                            width: 170,
                         }}
                         value={department}
                         onChange={(value) => handleDepartment(value)}
@@ -113,11 +124,11 @@ const AssignCatalogueRepairForm = (props) => {
                     <label style={{
                         fontSize: "15px",
                         fontWeight: "600",
-                        margin: "10px",
+                        margin: "8px",
                     }}>Technician</label>
                     <Select
                         style={{
-                            width: 250,
+                            width: 170,
                         }}
                         value={technician}
                         onChange={(value) => handleTechnician(value)}
@@ -131,11 +142,30 @@ const AssignCatalogueRepairForm = (props) => {
                     <label style={{
                         fontSize: "15px",
                         fontWeight: "600",
-                        margin: "10px",
+                        margin: "8px",
+                    }}>Catalogue</label>
+                    <Select
+                        style={{
+                            width: 200,
+                        }}
+                        disabled={!technician}
+                        value={catalogue}
+                        onChange={(value) => handleCatalogue(value)}
+                    >
+                        {props.catalogueById.map((a) => {
+                            return <Option value={a.productId}>{a.name}</Option>;
+                        })}
+                    </Select>
+                </div>
+                <div>
+                    <label style={{
+                        fontSize: "15px",
+                        fontWeight: "600",
+                        margin: "8px",
                     }}>Due Date</label>
                     <DatePicker
                         style={{
-                            width: 250,
+                            width: 150,
                         }}
                         value={dueDate}
                         onChange={(value) => hanldeOnChange(value)}
@@ -143,8 +173,8 @@ const AssignCatalogueRepairForm = (props) => {
                 </div>
             </div>
             <StyledTable
-                rowKey="phoneId"
-                dataSource={props.repairPhoneByOrder}
+                rowKey="productManufacturingId"
+                dataSource={props.catalogueInRefurbish}
                 pagination={false}
                 columns={column}
                 rowSelection={rowSelection}
@@ -153,16 +183,16 @@ const AssignCatalogueRepairForm = (props) => {
             <div style={{ display: "flex", justifyContent: "flex-end", marginTop: "5px" }}>
                 <Button
                     type='primary'
-                    onClick={() => props.UpdateTechnicianForRepairPhone({
-                        phoneDetailsList: checkedValue,
+                    disabled={!rowSelection}
+                    onClick={() => props.updateCatalogueInRefurbish({
+                        productDetailsList: checkedValue,
                         orderPhoneId: props.rowData.orderPhoneId,
-                        productionRepairDispatchId: "",
                         technicianId: technician,
                         userId: props.userId,
                         repairDueDate: dueDate
                     },
                         props.rowData.orderPhoneId,
-                        props.locationId
+                        catalogue,
                     )}>
                     Submit
                 </Button>
@@ -172,23 +202,25 @@ const AssignCatalogueRepairForm = (props) => {
 }
 
 
-const mapStateToProps = ({ auth, refurbish, departments }) => ({
+const mapStateToProps = ({ auth, refurbish, departments, distributor }) => ({
     productionUser: refurbish.productionUser,
-    repairPhoneByOrder: refurbish.repairPhoneByOrder,
-    noOfPhoneById: refurbish.noOfPhoneById,
     locationId: auth.userDetails.locationId,
     fetchingNoOfPhonesById: refurbish.fetchingNoOfPhonesById,
     userId: auth.userDetails.userId,
     departments: departments.departments,
+    catalogueInRefurbish: refurbish.catalogueInRefurbish,
+    catalogueById: distributor.catalogueById
 });
 
 const mapDispatchToProps = (dispatch) =>
     bindActionCreators(
         {
+
             getProductionUsersById,
-            getRepairPhoneById,
-            UpdateTechnicianForRepairPhone,
-            getDepartments
+            getCatalogueListInRefurbish,
+            updateCatalogueInRefurbish,
+            getDepartments,
+            getCatalogueListById,
         },
         dispatch
     );
