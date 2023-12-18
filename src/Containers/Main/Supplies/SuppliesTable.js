@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import {
   getSuppliesList,
-  handleUpdateSuppliesModal,
+  handleUpdateSupplieDrawer,
   setEditSupplies,
   deletePurchaseData,
   handleCurrencyPriceModal,
@@ -19,6 +19,7 @@ import moment from "moment";
 import TagBrandModel from "./TagBrandModel";
 import { OnlyWrapCard } from "../../../Components/UI/Layout";
 import InventoryIcon from '@mui/icons-material/Inventory';
+import UpdateSuppliesFormDrawer from "./UpdateSuppliesFormDrawer";
 
 function onChange(pagination, filters, sorter) {
   console.log("params", pagination, filters, sorter);
@@ -46,7 +47,7 @@ function SuppliesTable(props) {
     setSuppliesId(suppliesId);
   }
 
-  const { updateSuppliesModal, handleUpdateSuppliesModal } = props;
+  const { updateSuppliesDrawer, handleUpdateSupplieDrawer } = props;
 
   return (
     <>
@@ -66,7 +67,7 @@ function SuppliesTable(props) {
             return (
               <>
                 <div
-                  className="flex rounded-xl justify-between mt-4 bg-white h-12 items-center p-3">
+                  className="flex rounded-xl justify-between bg-white mt-[0.5rem]  h-[2.75rem] items-center p-3">
                   <div class=" flex flex-row justify-evenly w-wk max-sm:flex-col">
                     <div className=" flex font-medium flex-col md:w-44 max-sm:justify-between w-full max-sm:flex-row ">
                       <div class=" font-normal text-[0.82rem] text-cardBody font-poppins">
@@ -129,7 +130,7 @@ function SuppliesTable(props) {
                       <Tooltip title="Edit">
                           <BorderColorIcon
                             onClick={() => {
-                              props.updateSupplies(item.suppliesId);
+                              handleUpdateSupplieDrawer(true);
                               handleParticularRowData(item);
                             }}
                             style={{
@@ -163,6 +164,11 @@ function SuppliesTable(props) {
         handleBrandModel={props.handleBrandModel}
         particularDiscountData={particularDiscountData}
       />
+      <UpdateSuppliesFormDrawer
+       particularDiscountData={particularDiscountData}
+      updateSuppliesDrawer={updateSuppliesDrawer}
+      handleUpdateSupplieDrawer={handleUpdateSupplieDrawer}
+      />
     </>
   );
 }
@@ -170,7 +176,7 @@ function SuppliesTable(props) {
 const mapStateToProps = ({ supplies, auth }) => ({
   fetchingPurchaseList: supplies.fetchingPurchaseList,
   purchaseList: supplies.purchaseList,
-  updateSuppliesModal: supplies.updateSuppliesModal,
+  updateSuppliesDrawer: supplies.updateSuppliesDrawer,
   addCurrencyValue: supplies.addCurrencyValue,
   addBrandModel: supplies.addBrandModel,
 });
@@ -179,7 +185,7 @@ const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
       getSuppliesList,
-      handleUpdateSuppliesModal,
+      handleUpdateSupplieDrawer,
       setEditSupplies,
       deletePurchaseData,
       handleCurrencyPriceModal,

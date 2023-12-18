@@ -1,9 +1,8 @@
 import React, { Component } from "react";
-import { Tabs, Icon, Button } from "antd";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import SuppliesForm from "./SuppliesForm";
-import { StyledDrawer, StyledModal } from "../../../Components/UI/Antd";
+import { StyledDrawer } from "../../../Components/UI/Antd";
 import { StyledTabs } from "../../../Components/UI/Antd";
 
 const TabPane = StyledTabs.TabPane;
@@ -14,13 +13,13 @@ class SuppliesAddModal extends Component {
             <div>
                 <StyledDrawer
                     title="Material"
-                    width="55vw"                   
+                    width="60%"                   
                     visible={addSuppliesModal}
                     destroyOnClose
                     maskClosable={false}
                     // maskStyle={{transition: '0.5s filter linear', filter: 'blur(20px)', width: '100%', height: '100%', padding: '50px', backgroundColor: 'rgba(49, 56, 66,0.7)'}}
                     maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}
-                    style={{marginTop:"5rem" }}
+                    style={{marginTop:"3rem" }}
                     onClose={() => handleSuppliesModal(false)}
                     footer={null}
                 >
