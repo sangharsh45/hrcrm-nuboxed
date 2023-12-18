@@ -928,3 +928,193 @@ export const handleProductBuilder = (modalProps) => (dispatch) => {
     payload: modalProps,
   })
 }
+export const handleProductBuilderInProcess = (modalProps) => (dispatch) => {
+  dispatch({
+    type: types.HANDLE_PRODUCT_BUILDER_IN_PROCESS_MODAL,
+    payload: modalProps,
+  })
+}
+// get url in assign modal table
+export const getCatalogueListInRefurbish = (orderId, productId) => (dispatch) => {
+  dispatch({
+    type: types.GET_CATALOGUE_LIST_IN_REFURBISH_REQUEST,
+  });
+  axios
+    .get(`${base_url2}/order/product/${orderId}/${productId}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.GET_CATALOGUE_LIST_IN_REFURBISH_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.GET_CATALOGUE_LIST_IN_REFURBISH_FAILURE,
+        payload: err,
+      });
+    });
+};
+// final submit in assign modal
+export const updateCatalogueInRefurbish = (data, orderPhoneId, productId, cb) => (dispatch) => {
+  dispatch({
+    type: types.UPDATE_CATALOGUE_IN_REFURBISH_REQUEST,
+  });
+  axios
+    .post(`${base_url2}/order/productAssign`, data, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      dispatch(getCatalogueListInRefurbish(orderPhoneId, productId))
+      dispatch({
+        type: types.UPDATE_CATALOGUE_IN_REFURBISH_SUCCESS,
+        payload: res.data,
+      });
+      cb && cb();
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.UPDATE_CATALOGUE_IN_REFURBISH_FAILURE,
+        payload: err,
+      });
+    });
+};
+
+//  choose product in dropdown can use for time start and end
+
+export const chooseCatalogueItem = (data, orderId, productId) => (dispatch) => {
+  dispatch({
+    type: types.CHOOSE_CATALOGUE_ITEM_REQUEST,
+  });
+  axios
+    .put(`${base_url2}/chooseCatalogue/${orderId}`, data, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      dispatch(getCatalogueListInRefurbish(orderId, productId))
+      dispatch({
+        type: types.CHOOSE_CATALOGUE_ITEM_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      dispatch({
+        type: types.CHOOSE_CATALOGUE_ITEM_FAILURE,
+        payload: err,
+      });
+    });
+};
+// get order id in process tab
+export const getOrderIdForCatalogueItem = (technicianId) => (dispatch) => {
+  dispatch({
+    type: types.GET_CHOOSEN_CATALOGUE_ITEM_REQUEST,
+  });
+  axios
+    .get(`${base_url2}/order/assignOrder/${technicianId}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.GET_CHOOSEN_CATALOGUE_ITEM_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.GET_CHOOSEN_CATALOGUE_ITEM_FAILURE,
+        payload: err,
+      });
+    });
+};
+
+//in process tab after order id click
+export const getCatalogueByUser = (orderId, technicianId) => (dispatch) => {
+  dispatch({
+    type: types.GET_CATALOGUE_BY_USER_REQUEST,
+  });
+  axios
+    .get(`${base_url2}/order/assignProduct/${orderId}/${technicianId}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.GET_CATALOGUE_BY_USER_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.GET_CATALOGUE_BY_USER_FAILURE,
+        payload: err,
+      });
+    });
+};
+//add product builder by id
+export const addProductBuilderInProcess = (data, id) => (dispatch) => {
+  dispatch({
+    type: types.ADD_PRODUCT_BUILDER_BYID_REQUEST,
+  });
+  axios
+    .post(`${base_url2}/order/assignBuilderProduct`, data, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      dispatch(getProductBuilderById(id))
+      dispatch({
+        type: types.ADD_PRODUCT_BUILDER_BYID_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      dispatch({
+        type: types.ADD_PRODUCT_BUILDER_BYID_FAILURE,
+        payload: err,
+      });
+    });
+};
+// get builder list and part no
+export const getProductBuilderById = (productManufacturingId) => (dispatch) => {
+  dispatch({
+    type: types.GET_PRODUCT_BUILDER_BYID_REQUEST,
+  });
+  axios
+    .get(`${base_url2}/order/getAssignBuilder/${productManufacturingId}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.GET_PRODUCT_BUILDER_BYID_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.GET_PRODUCT_BUILDER_BYID_FAILURE,
+        payload: err,
+      });
+    });
+};

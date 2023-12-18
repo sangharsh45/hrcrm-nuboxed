@@ -67,7 +67,7 @@ const OrderPhoneTab = (props) => {
                         </>
                     }
                     key="2">
-                    {repairMain ? <ProductionRepairOrder /> :
+                    {repairMain ? <ProductionRepairOrder inspectionRequiredInd={props.inspectionRequiredInd} /> :
                         openRepair ? <OpenRepairTable /> : null}
 
                 </TabPane>

@@ -8,6 +8,12 @@ const initialState = {
 
   showAssignRepairModal: false,
 
+  showProductBuilderList: false,
+
+  fetchingCatalogueByUser: false,
+  fetchingCatalogueByUserError: false,
+  catalogueByUser: [],
+
   fetchingALlSPareList: false,
   fetchingALlSPareListError: false,
   allSpareById: [],
@@ -33,6 +39,13 @@ const initialState = {
   fetchingAllProductionConsumptionError: false,
   allConsumption: [],
 
+  addingProductBuilderById: false,
+  addingProductBuilderByIdError: false,
+
+  fetchingProductBuilderById: false,
+  fetchingProductBuilderByIdError: false,
+  builderByManufatureId: [],
+
   //get output
   fetchingAllProductionOutput: false,
   fetchingAllProductionOutputError: false,
@@ -44,6 +57,9 @@ const initialState = {
   fetchingShiftsByUserId: false,
   fetchingShiftsByUserIdError: false,
   shiftsData: [],
+
+  choosingCatalogueItem: false,
+  choosingCatalogueItemError: false,
 
   updatingQcInspectionButton: false,
   updatingQcInspectionButtonError: false,
@@ -100,6 +116,9 @@ const initialState = {
   productionOrderIdModal: false,
   phoNoteProductionModal: false,
 
+  updatingCatalogueInRefurbish: false,
+  updatingCatalogueInRefurbishError: false,
+
   fetchingNoOfPhonesById: false,
   fetchingNoOfPhonesByIdError: false,
   noOfPhoneById: [],
@@ -142,6 +161,14 @@ const initialState = {
 
   phoNotesRepairOrderModal: false,
   phoNotesQCOrderModal: false,
+
+  fetchingChoosenCatalogue: false,
+  fetchingChoosenCatalogueError: false,
+  choosenOrderCatalogue: [],
+
+  fetchingCatalogueListInReurbish: false,
+  fetchingCatalogueListInReurbishError: false,
+  catalogueInRefurbish: []
 };
 
 export const refurbishReducer = (state = initialState, action) => {
@@ -423,7 +450,7 @@ export const refurbishReducer = (state = initialState, action) => {
       return { ...state, phoneByTechnician: action.payload };
 
     case types.HANDLE_ASSIGN_REPAIR_MODAL:
-      return { ...state, showAssignRepairModal: action.payload };
+      return { ...state, showAssignRepairModal: action.payload, catalogueInRefurbish: [] };
 
     case types.GET_PHONE_LIST_BY_USER_REQUEST:
       return { ...state, fetchingPhoneListByUser: true };
@@ -667,6 +694,112 @@ export const refurbishReducer = (state = initialState, action) => {
 
     case types.HANDLE_PRODUCT_BUILDER_MODAL:
       return { ...state, productBuilderList: action.payload };
+
+    case types.HANDLE_PRODUCT_BUILDER_IN_PROCESS_MODAL:
+      return { ...state, showProductBuilderList: action.payload };
+
+    case types.GET_CATALOGUE_LIST_IN_REFURBISH_REQUEST:
+      return { ...state, fetchingCatalogueListInReurbish: true };
+    case types.GET_CATALOGUE_LIST_IN_REFURBISH_SUCCESS:
+      return {
+        ...state,
+        fetchingCatalogueListInReurbish: false,
+        catalogueInRefurbish: action.payload,
+      };
+    case types.GET_CATALOGUE_LIST_IN_REFURBISH_FAILURE:
+      return {
+        ...state,
+        fetchingCatalogueListInReurbish: false,
+        fetchingCatalogueListInReurbishError: true,
+      };
+
+    case types.UPDATE_CATALOGUE_IN_REFURBISH_REQUEST:
+      return { ...state, updatingCatalogueInRefurbish: true };
+    case types.UPDATE_CATALOGUE_IN_REFURBISH_SUCCESS:
+      return {
+        ...state,
+        updatingCatalogueInRefurbish: false,
+      };
+    case types.UPDATE_CATALOGUE_IN_REFURBISH_FAILURE:
+      return {
+        ...state,
+        updatingCatalogueInRefurbish: false,
+        updatingCatalogueInRefurbishError: true,
+      };
+
+    case types.GET_CATALOGUE_BY_USER_REQUEST:
+      return { ...state, fetchingCatalogueByUser: true };
+    case types.GET_CATALOGUE_BY_USER_SUCCESS:
+      return {
+        ...state,
+        fetchingCatalogueByUser: false,
+        catalogueByUser: action.payload,
+      };
+    case types.GET_CATALOGUE_BY_USER_FAILURE:
+      return {
+        ...state,
+        fetchingCatalogueByUser: false,
+        fetchingCatalogueByUserError: true,
+      };
+
+    case types.CHOOSE_CATALOGUE_ITEM_REQUEST:
+      return { ...state, choosingCatalogueItem: true };
+    case types.CHOOSE_CATALOGUE_ITEM_SUCCESS:
+      return {
+        ...state,
+        choosingCatalogueItem: false,
+      };
+    case types.CHOOSE_CATALOGUE_ITEM_FAILURE:
+      return {
+        ...state,
+        choosingCatalogueItem: false,
+        choosingCatalogueItemError: true,
+      };
+
+    case types.GET_CHOOSEN_CATALOGUE_ITEM_REQUEST:
+      return { ...state, fetchingChoosenCatalogue: true };
+    case types.GET_CHOOSEN_CATALOGUE_ITEM_SUCCESS:
+      return {
+        ...state,
+        fetchingChoosenCatalogue: false,
+        choosenOrderCatalogue: action.payload,
+      };
+    case types.GET_CHOOSEN_CATALOGUE_ITEM_FAILURE:
+      return {
+        ...state,
+        fetchingChoosenCatalogue: false,
+        fetchingChoosenCatalogueError: true,
+      };
+
+    case types.ADD_PRODUCT_BUILDER_BYID_REQUEST:
+      return { ...state, addingProductBuilderById: true };
+    case types.ADD_PRODUCT_BUILDER_BYID_SUCCESS:
+      return {
+        ...state,
+        addingProductBuilderById: false,
+      };
+    case types.ADD_PRODUCT_BUILDER_BYID_FAILURE:
+      return {
+        ...state,
+        addingProductBuilderById: false,
+        addingProductBuilderByIdError: true,
+
+      };
+
+    case types.GET_PRODUCT_BUILDER_BYID_REQUEST:
+      return { ...state, fetchingProductBuilderById: true };
+    case types.GET_PRODUCT_BUILDER_BYID_SUCCESS:
+      return {
+        ...state,
+        fetchingProductBuilderById: false,
+        builderByManufatureId: action.payload,
+      };
+    case types.GET_PRODUCT_BUILDER_BYID_FAILURE:
+      return {
+        ...state,
+        fetchingProductBuilderById: false,
+        fetchingProductBuilderByIdError: true,
+      };
     default:
       return state;
   }
