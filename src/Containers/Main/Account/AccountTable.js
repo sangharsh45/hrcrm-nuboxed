@@ -20,6 +20,7 @@ import {
 import Highlighter from "react-highlight-words";
 import moment from "moment";
 import AccountDetailsView from "./AccountDetailsView";
+import UpdateAccountModal from "./UpdateAccountModal";
 
 
 function AccountTable(props) {
@@ -199,13 +200,13 @@ const {
 
 {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden"> Sector </h4> */}
 <h4 class=" text-xs text-cardBody font-poppins">
-    <Tooltip title="Notes">
+    <Tooltip title="Edit">
         <BorderColorIcon
             style={{ color: "grey",fontSize:"0.8rem",padding:"2px",fontSize:"1rem" }}
-            // onClick={() => {
-            //   handleUpdateAccountModal(true);
-            //   handleCurrentRowData(item);
-            // }}
+            onClick={() => {
+              handleUpdateAccountModal(true);
+              handleCurrentRowData(item);
+            }}
         />
 
     </Tooltip>
@@ -232,12 +233,11 @@ const {
         scroll={{ y: tableHeight }}
         pagination={false}
       /> */}
-      {/* <UpdateAccountModal
-        distributorId={currentDistributorId}
-        updateDistributorModal={updateDistributorModal}
-        handleSetCurrentDistributorId={handleSetCurrentDistributorId}
-        handleUpdateDistributorModal={handleUpdateDistributorModal}
-      /> */}
+      <UpdateAccountModal
+        RowData={RowData}
+        updateAccountModal={props.updateAccountModal}
+        handleUpdateAccountModal={handleUpdateAccountModal}
+      />
        {/*
       <AddAccountOrderModal
         addDistributorOrderModal={props.addDistributorOrderModal}
@@ -271,7 +271,7 @@ const mapStateToProps = ({ distributor, auth }) => ({
   fetchingDistributorsByUserIdError:
     distributor.fetchingDistributorsByUserIdError,
   userId: auth.userDetails.userId,
-  updateDistributorModal: distributor.updateDistributorModal,
+  updateAccountModal: distributor.updateAccountModal,
   addDistributorOrderModal: distributor.addDistributorOrderModal,
   addDistributorActivityTableModal:
     distributor.addDistributorActivityTableModal,
@@ -287,7 +287,8 @@ const mapDispatchToProps = (dispatch) =>
       handleDistributorOrderModal,
       handleDistributorActivityTableModal,
       deleteDistributorData,
-      handleBillingAddressModal
+      handleBillingAddressModal,
+      handleUpdateAccountModal
     },
     dispatch
   );

@@ -1,26 +1,26 @@
-import React, { lazy, Suspense } from "react";
+import React, { Suspense } from "react";
 import { BundleLoader } from "../../../Components/Placeholder";
-import { StyledDrawer, StyledModal } from "../../../Components/UI/Antd";
+import { StyledDrawer } from "../../../Components/UI/Antd";
 import UpdateAccountForm from "./UpdateAccountForm";
 
 
 const UpdateAccountModal = (props) => {
-    const { ...formProps } = props;
+    const {RowData, ...formProps } = props;
     return (
         <>
             <StyledDrawer
-                title="Distributor"
-                width="55vw"
-                visible={props.updateDistributorModal}
+                title="Account"
+                width="60%"
+                visible={props.updateAccountModal}
                 maskClosable={false}
                 destroyOnClose
                 maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}
                 style={{ top: 40 }}
-                onClose={() => props.handleUpdateDistributorModal(false)}
+                onClose={() => props.handleUpdateAccountModal(false)}
                 footer={null}
             >
                 <Suspense fallback={<BundleLoader />}>
-                    <UpdateAccountForm distributorId={props.distributorId} />
+                    <UpdateAccountForm RowData={RowData} />
                 </Suspense>
             </StyledDrawer>
         </>

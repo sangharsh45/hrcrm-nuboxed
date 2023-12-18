@@ -175,6 +175,11 @@ function ProductHistoryTable(props) {
             },
         },
         {
+            title: "Name",
+            dataIndex: "name",
+            width: "7%",
+        },
+        {
             title: "Category",
             dataIndex: "categoryName",
             render: (name, item, i) => {
@@ -259,128 +264,128 @@ function ProductHistoryTable(props) {
                 };
             },
         },
-        {
-            title: "Gross Wt.",
-            width: "6%",
-            render: (text, item) => {
-                return (
-                    <>{item.grossWeight} {item.grossUnit}</>
-                )
-            }
-        },
-        {
-            title: "Net Wt.",
-            width: "6%",
-            render: (text, item) => {
-                return (
-                    <>{item.netWeight} {item.netUnit}</>
-                )
-            }
-        },
-        {
-            title: "Pallet",
-            width: "6%",
-            dataIndex: "palette",
-        },
-        {
-            title: "GST%",
-            dataIndex: "tax",
-            width: "4%",
-            render: (name, item, i) => {
-                return {
-                    props: {
-                        style: {
-                            background:
-                                (distributorOfferHistory ||
-                                    showHistory ||
-                                    showDistributorHistory ||
-                                    customerOfferHistory) &&
-                                    productId === item.productId
-                                    ? "rgb(158 183 223)"
-                                    : null,
-                        },
-                    },
-                    children: <span> {item.tax}</span>,
-                };
-            },
-        },
+        // {
+        //     title: "Gross Wt.",
+        //     width: "6%",
+        //     render: (text, item) => {
+        //         return (
+        //             <>{item.grossWeight} {item.grossUnit}</>
+        //         )
+        //     }
+        // },
+        // {
+        //     title: "Net Wt.",
+        //     width: "6%",
+        //     render: (text, item) => {
+        //         return (
+        //             <>{item.netWeight} {item.netUnit}</>
+        //         )
+        //     }
+        // },
+        // {
+        //     title: "Pallet",
+        //     width: "6%",
+        //     dataIndex: "palette",
+        // },
+        // {
+        //     title: "GST%",
+        //     dataIndex: "tax",
+        //     width: "4%",
+        //     render: (name, item, i) => {
+        //         return {
+        //             props: {
+        //                 style: {
+        //                     background:
+        //                         (distributorOfferHistory ||
+        //                             showHistory ||
+        //                             showDistributorHistory ||
+        //                             customerOfferHistory) &&
+        //                             productId === item.productId
+        //                             ? "rgb(158 183 223)"
+        //                             : null,
+        //                 },
+        //             },
+        //             children: <span> {item.tax}</span>,
+        //         };
+        //     },
+        // },
 
-        {
-            title: "Margin(Max)",
-            dataIndex: "distributorMaxMargin",
-            width: "8%",
-            render: (name, item, i) => {
-                return {
-                    props: {
-                        style: {
-                            background:
-                                (distributorOfferHistory ||
-                                    showHistory ||
-                                    showDistributorHistory ||
-                                    customerOfferHistory) &&
-                                    productId === item.productId
-                                    ? "rgb(158 183 223)"
-                                    : null,
-                        },
-                    },
-                    children: (
-                        <span>
-                            {item.marginType === "Amount" ? (
-                                <CurrencySymbol currencyType={"INR"} />
-                            ) : (
-                                "%"
-                            )}
-                            &nbsp;
-                            {item.distributorMaxMargin}
-                        </span>
-                    ),
-                };
-            },
-        },
-        {
-            title: "B2C Margin",
-            width: "8%",
-            dataIndex: "consumerMaxMargin",
-            render: (name, item, i) => {
-                return {
-                    props: {
-                        style: {
-                            background:
-                                (distributorOfferHistory ||
-                                    showHistory ||
-                                    showDistributorHistory ||
-                                    customerOfferHistory) &&
-                                    productId === item.productId
-                                    ? "rgb(158 183 223)"
-                                    : null,
-                        },
-                    },
-                    children: (
-                        <span>
-                            {item.consumerMarginType === "Amount" ? (
-                                <CurrencySymbol currencyType={"INR"} />
-                            ) : (
-                                "%"
-                            )}
-                            &nbsp;
-                            {item.consumerMaxMargin}
-                        </span>
-                    ),
-                };
-            },
-        },
-        {
-            title: "Add to Material",
-            width: "8%",
-            render: (text, item) => {
-                return (
-                    <>
-                        <AddToSuppliesToggle item={item} />
+        // {
+        //     title: "Margin(Max)",
+        //     dataIndex: "distributorMaxMargin",
+        //     width: "8%",
+        //     render: (name, item, i) => {
+        //         return {
+        //             props: {
+        //                 style: {
+        //                     background:
+        //                         (distributorOfferHistory ||
+        //                             showHistory ||
+        //                             showDistributorHistory ||
+        //                             customerOfferHistory) &&
+        //                             productId === item.productId
+        //                             ? "rgb(158 183 223)"
+        //                             : null,
+        //                 },
+        //             },
+        //             children: (
+        //                 <span>
+        //                     {item.marginType === "Amount" ? (
+        //                         <CurrencySymbol currencyType={"INR"} />
+        //                     ) : (
+        //                         "%"
+        //                     )}
+        //                     &nbsp;
+        //                     {item.distributorMaxMargin}
+        //                 </span>
+        //             ),
+        //         };
+        //     },
+        // },
+        // {
+        //     title: "B2C Margin",
+        //     width: "8%",
+        //     dataIndex: "consumerMaxMargin",
+        //     render: (name, item, i) => {
+        //         return {
+        //             props: {
+        //                 style: {
+        //                     background:
+        //                         (distributorOfferHistory ||
+        //                             showHistory ||
+        //                             showDistributorHistory ||
+        //                             customerOfferHistory) &&
+        //                             productId === item.productId
+        //                             ? "rgb(158 183 223)"
+        //                             : null,
+        //                 },
+        //             },
+        //             children: (
+        //                 <span>
+        //                     {item.consumerMarginType === "Amount" ? (
+        //                         <CurrencySymbol currencyType={"INR"} />
+        //                     ) : (
+        //                         "%"
+        //                     )}
+        //                     &nbsp;
+        //                     {item.consumerMaxMargin}
+        //                 </span>
+        //             ),
+        //         };
+        //     },
+        // },
+        // {
+        //     title: "Add to Material",
+        //     width: "8%",
+        //     render: (text, item) => {
+        //         return (
+        //             <>
+        //                 <AddToSuppliesToggle item={item} />
 
-                    </>
-                )
-            }
-        },
+        //             </>
+        //         )
+        //     }
+        // },
 
         {
             title: "",
@@ -766,45 +771,45 @@ function ProductHistoryTable(props) {
             },
         },
 
-        {
-            title: "",
-            width: "2%",
-            render: (name, item, i) => {
-                return {
-                    props: {
-                        style: {
-                            background:
-                                (distributorOfferHistory ||
-                                    showHistory ||
-                                    showDistributorHistory ||
-                                    customerOfferHistory) &&
-                                    productId === item.productId
-                                    ? "rgb(158 183 223)"
-                                    : null,
-                        },
-                    },
-                    children: (
-                        <span>
-                            <Tooltip title="Product History">
-                                <HistoryOutlined
-                                    onClick={() => {
-                                        handleHistoryModal(true);
-                                        handleParticularRowData(item);
-                                    }}
-                                    style={
-                                        {
-                                            // color:
-                                            //   showHis && item.orderId === orderId ? "orange" : "#1890ff",
-                                            // cursor: "pointer",
-                                        }
-                                    }
-                                />
-                            </Tooltip>
-                        </span>
-                    ),
-                };
-            },
-        },
+        // {
+        //     title: "",
+        //     width: "2%",
+        //     render: (name, item, i) => {
+        //         return {
+        //             props: {
+        //                 style: {
+        //                     background:
+        //                         (distributorOfferHistory ||
+        //                             showHistory ||
+        //                             showDistributorHistory ||
+        //                             customerOfferHistory) &&
+        //                             productId === item.productId
+        //                             ? "rgb(158 183 223)"
+        //                             : null,
+        //                 },
+        //             },
+        //             children: (
+        //                 <span>
+        //                     <Tooltip title="Product History">
+        //                         <HistoryOutlined
+        //                             onClick={() => {
+        //                                 handleHistoryModal(true);
+        //                                 handleParticularRowData(item);
+        //                             }}
+        //                             style={
+        //                                 {
+        //                                     // color:
+        //                                     //   showHis && item.orderId === orderId ? "orange" : "#1890ff",
+        //                                     // cursor: "pointer",
+        //                                 }
+        //                             }
+        //                         />
+        //                     </Tooltip>
+        //                 </span>
+        //             ),
+        //         };
+        //     },
+        // },
 
         {
             title: "",
