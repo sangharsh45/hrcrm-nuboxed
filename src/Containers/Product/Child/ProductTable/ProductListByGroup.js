@@ -2,6 +2,7 @@
 import React, { useState, useEffect, useMemo,lazy } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
+import QrGenerate from "../ProductTable/QrGenerate"
 import {
     getProducts,
     getProductByGroup,
@@ -375,6 +376,19 @@ function ProductHistoryTable(props) {
                 return (
                     <>
                         <AddToSuppliesToggle item={item} />
+
+                    </>
+                )
+            }
+        },
+
+        {
+            title: "",
+            width: "8%",
+            render: (text, item) => {
+                return (
+                    <>
+                       <QrGenerate/>
 
                     </>
                 )

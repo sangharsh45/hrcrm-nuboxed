@@ -125,8 +125,8 @@ function CandidateDetailTab (props) {
                   style={{fontSize:"1.1rem"}}
                    />
                     <span style={{ marginLeft: "0.25em" }}>
-                      {/* RecruitPro */}
-                      {translatedContent[0]}
+                      RecruitPro
+                      {/* {translatedContent[0]} */}
                       </span>
                   
                   {activeKey === "1" && (
@@ -149,7 +149,8 @@ function CandidateDetailTab (props) {
                 
                <WorkspacePremiumIcon style={{fontSize:"1.1rem"}}/>
                   <span style={{ marginLeft: "0.25em" }}>                  
-                  {translatedContent[1]}
+                  {/* {translatedContent[1]} */}
+                  Experience
                   </span>                 
                 </>
               }
@@ -168,8 +169,8 @@ function CandidateDetailTab (props) {
                   <span>
                     <LocalActivityIcon style={{fontSize:"1.1rem"}}/>
                     <span style={{ marginLeft: "0.25em" }}>
-                      {/* Activity */}
-                      {translatedContent[2]}
+                      Activity
+                      {/* {translatedContent[2]} */}
                       </span>
                   </span>
                   {activeKey === "2" && (
@@ -201,8 +202,8 @@ function CandidateDetailTab (props) {
                 <>
                   <FileCopyIcon style={{fontSize:"1.1rem"}} />
                   <span style={{ marginLeft: "0.25em" }}>
-                    {/* Documents */}
-                    {translatedContent[3]}
+                    Documents
+                    {/* {translatedContent[3]} */}
                   </span>
                   {activeKey === "3" && (
                     <>
@@ -233,11 +234,11 @@ function CandidateDetailTab (props) {
                 <span>
                 <NoteAltIcon style={{fontSize:"1.1rem"}}/>
                 &nbsp;
-                    {/* <FormattedMessage
+                    <FormattedMessage
                       id="app.notes"
                       defaultMessage="Notes"
-                    /> */}
-                      {translatedContent[4]}
+                    />
+                      {/* {translatedContent[4]} */}
                     &nbsp; 
                     {activeKey === "4" && (
                       <>
@@ -266,8 +267,8 @@ function CandidateDetailTab (props) {
                 <>
                 <SchoolIcon style={{fontSize:"1.1rem"}}/>
                   <span style={{ marginLeft: "0.25em" }}>
-                    {/* Education */}
-                    {translatedContent[5]}
+                    Education
+                    {/* {translatedContent[5]} */}
                   </span>
                   {activeKey === "5" && (
                     <>
@@ -305,8 +306,8 @@ function CandidateDetailTab (props) {
                 <>
                 <AccountBalanceIcon style={{fontSize:"1.1rem"}}/>
                   <span style={{ marginLeft: "0.25em" }}>
-                    {/* Employment */}
-                    {translatedContent[6]}
+                    Employment
+                    {/* {translatedContent[6]} */}
                   </span>
                   {activeKey === "7" && (
                     <>
@@ -335,8 +336,8 @@ function CandidateDetailTab (props) {
                 <>
                   <HeadphonesIcon style={{fontSize:"1.1rem"}} />
                   <span style={{ marginLeft: "0.25em" }}>
-                    {/* Training */}
-                    {translatedContent[7]}
+                    Training
+                    {/* {translatedContent[7]} */}
                   </span>
                   {activeKey === "6" && (
                     <>
@@ -368,8 +369,8 @@ function CandidateDetailTab (props) {
                 <>
                 <AccountBalanceIcon style={{fontSize:"1.1rem"}}/>
                   <span style={{ marginLeft: "0.25em" }}>
-                     {/* Bank Details */}
-                     {translatedContent[8]}
+                     Bank Details
+                     {/* {translatedContent[8]} */}
                   </span>
                   {activeKey === "8" && (
                     <>

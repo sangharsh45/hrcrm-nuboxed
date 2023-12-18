@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
+import QrCode from "./QrCode"
 import {
   getSuppliesList,
   handleUpdateSupplieDrawer,
@@ -61,6 +62,7 @@ function SuppliesTable(props) {
             <div className="md:w-[4.8rem]">Attribute</div>
             <div className="md:w-[6.1rem]">Re-order level</div>
             <div className="md:w-[4.2rem]">Created</div>
+            <div className="md:w-[4.2rem]">Scan</div>
             <div className="w-[3.8rem]"></div>
           </div>
           {props.purchaseList.map((item) => {
@@ -103,6 +105,11 @@ function SuppliesTable(props) {
                     <div className=" flex font-medium flex-col md:w-44 max-sm:justify-between w-full max-sm:flex-row ">
                       <div class=" font-normal text-[0.82rem] text-cardBody font-poppins">
                       {`${moment(item.creationDate).format("ll")}`}
+                      </div>
+                    </div>
+                    <div className=" flex font-medium flex-col md:w-44 max-sm:justify-between w-full max-sm:flex-row ">
+                      <div class=" font-normal text-[0.82rem] text-cardBody font-poppins">
+                    <QrCode/>
                       </div>
                     </div>
                     <div class="flex flex-col w-[3%] max-sm:flex-row max-sm:w-[10%]">
