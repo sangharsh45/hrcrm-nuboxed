@@ -1,5 +1,5 @@
 import * as types from "./SuppliersActionType";
-import { base_url } from "../../../Config/Auth";
+import { base_url, base_url2 } from "../../../Config/Auth";
 import axios from "axios";
 import moment from "moment";
 
@@ -19,7 +19,7 @@ export const addSuppliers = (data, userId) => (dispatch) => {
   console.log("inside add purchase");
   dispatch({ type: types.ADD_SUPPLIERS_REQUEST });
   axios
-    .post(`${base_url}/supplier`, data, {})
+    .post(`${base_url2}/supplier `, data, {})
     .then((res) => {
       console.log(res);
       dispatch(getSuppliersList(userId));
@@ -46,7 +46,7 @@ export const getSuppliersList = (userId) => (dispatch) => {
     type: types.GET_SUPPLIERS_LIST_REQUEST,
   });
   axios
-    .get(`${base_url}/supplier/user/${userId}`, {
+    .get(`${base_url2}/supplier/user/${userId}`, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },
@@ -75,7 +75,7 @@ export const getSupplierBySupplierId = (supplierId) => (dispatch) => {
     type: types.GET_SUPPLIER_BY_SUPPLIER_ID_REQUEST,
   });
   axios
-    .get(`${base_url}/supplier/${supplierId}`)
+    .get(`${base_url2}/supplier/${supplierId}`)
     .then((res) => {
       console.log(res);
       dispatch({

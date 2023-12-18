@@ -274,61 +274,7 @@ function LocationCustomerList(props) {
                     </div>
 
                   </div>
-                  <div class="flex flex-col">
-                    <Tooltip title="Contacts">
-                      <div
-                        onClick={() => {
-                          handleBillingAddressModal(true)
-                          handleSetCurrentDistributorId(item.distributorId);
-                        }}>
-                      </div>
-                    </Tooltip>
-                    <Tooltip title="Order">
-
-                      <div
-                        onClick={() => {
-                          props.handleDistributorOrderModal(true);
-                          handleSetCurrentDistributorId(item.distributorId);
-                        }}
-                      />
-                    </Tooltip>
-
-                  </div>
-                  <div class="flex flex-col">
-                    <Tooltip title="Activity">
-                      <span>
-                        <i
-                          class="fab fa-connectdevelop"
-                          style={{ cursor: "pointer" }}
-                          onClick={() => {
-                            props.handleDistributorActivityTableModal(true);
-                            handleSetCurrentDistributorId(item.distributorId);
-                          }}
-                        ></i>
-                      </span>
-                    </Tooltip>
-                    <Tooltip title="Edit">
-                      <div
-                        style={{ cursor: "pointer" }}
-                        onClick={() => {
-                          props.setEditDistributor(item);
-                          handleUpdateDistributorModal(true);
-                          handleSetCurrentDistributorId(item.distributorId);
-                        }}
-                      />
-                    </Tooltip>
-                    <Tooltip title="Delete Client">
-                      <Popconfirm
-                        title="Do you want to delete?"
-                        onConfirm={() => props.deleteDistributorData(item.distributorId)}
-                      >
-                        <DeleteOutlined
-
-                          style={{ cursor: "pointer", color: "red" }}
-                        />
-                      </Popconfirm>
-                    </Tooltip>
-                  </div>
+                
 
                 </div>
 

@@ -79,6 +79,7 @@ import AccountDetails from "./Account/AccountDetailsTab/AccountDetails";
 import InventoryDetail from "./Inventory/Child/InventoryDetails/InventoryDetail";
 import Refurbish from "./Refurbish/Refurbish";
 import Suppliers from "./Suppliers/Suppliers";
+import SupplierDetails from "./Suppliers/Child/SupplierDetails/SupplierDetails";
 
 const OpportunityDetail = lazy(() =>
   import("../Opportunity/Child/OpportunityDetail/OpportunityDetail")
@@ -680,6 +681,11 @@ function MainApp(props) {
                         exact
                         path="/shipper/:shipperId"
                         component={ShipperDetails}
+                      />
+                       <Route
+                        exact
+                        path="/supplier/:supplierId"
+                        component={SupplierDetails}
                       />
 
                       <Route
