@@ -371,7 +371,7 @@ function OpportunityForm(props) {
                 />
                 <Spacer />
                 <div class="flex justify-between max-sm:flex-col">
-                <div class=" w-1/2 max-sm:w-wk">
+                <div class=" w-w47.5 max-sm:w-wk">
                     <Field
                       name="startDate"
                       //label="Start "
@@ -387,7 +387,7 @@ function OpportunityForm(props) {
                       inlineLabel
                     />
                   </div>
-                  <div class=" w-2/5 max-sm:w-wk">
+                  <div class=" w-w47.5 max-sm:w-wk">
                     <Field
                       // isRequired
                       name="endDate"
@@ -418,7 +418,7 @@ function OpportunityForm(props) {
                 </div>
                 <Spacer />
                 <div class="flex justify-between max-sm:flex-col">
-                <div class=" w-1/2 max-sm:w-wk">
+                <div class=" w-w47.5 max-sm:w-wk">
                     <Field
                       name="proposalAmount"
                       //label="Proposal Amount"
@@ -434,7 +434,7 @@ function OpportunityForm(props) {
                       component={InputComponent}
                     />
                   </div>
-                  <div class=" w-2/5 max-sm:w-wk">
+                  <div class=" w-w47.5 max-sm:w-wk">
                     <Field
                       name="currency"
                       isColumnWithoutNoCreate
@@ -574,7 +574,7 @@ function OpportunityForm(props) {
 
                
 <div class="flex justify-between max-sm:flex-col mt-[0.85rem]">
-<div class=" w-2/5 max-sm:w-wk">
+<div class=" w-w47.5 max-sm:w-wk">
                   <Field
                     name="customerId"
                     // selectType="customerList"
@@ -599,7 +599,7 @@ function OpportunityForm(props) {
                   />
           
             </div>
-            <div class=" w-2/5 max-sm:w-wk">
+            <div class=" w-w47.5 max-sm:w-wk">
             <StyledLabel>
                   <Field
                     name="contactId"
@@ -665,7 +665,7 @@ function OpportunityForm(props) {
                 <Spacer />
 
                 <div class="flex justify-between max-sm:flex-col">
-                  <div class=" w-1/2 max-sm:w-wk">
+                  <div class=" w-w47.5 max-sm:w-wk">
                     <StyledLabel>
                       <Field
                         name="oppWorkflow"
@@ -691,7 +691,7 @@ function OpportunityForm(props) {
                     </StyledLabel>
                   </div>
                   <Spacer />
-                  <div class=" w-2/5 max-sm:w-wk">
+                  <div class=" w-w47.5 max-sm:w-wk">
                     <StyledLabel>
                       <Field
                         name="oppStage"

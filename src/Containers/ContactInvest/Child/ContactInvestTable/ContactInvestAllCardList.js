@@ -105,14 +105,14 @@ function ContactInvestAllCardList(props) {
 
           <OnlyWrapCard style={{backgroundColor:"#E3E8EE"}}>
           <div className=" flex justify-between w-[99%] p-2 bg-transparent font-bold sticky top-0 z-10">
-        <div className=" md:w-[12rem]">Name</div>
-        <div className=" md:w-40">Company</div>
-        <div className=" md:w-28 ">Designation</div>
-        <div className="md:w-36">Department</div>
-        <div className="md:w-28"># Deals</div>
-        <div className="md:w-28">Deal Value</div>
-        <div className="md:w-20">Source</div>
-        <div className="md:w-20">Owner</div>
+        <div className=" md:w-[13.1rem]">Name</div>
+        <div className=" md:w-[10.1rem]">Company</div>
+        <div className=" md:w-[7.6rem] ">Designation</div>
+        <div className="md:w-[9.1rem]">Department</div>
+        <div className="md:w-[7.1rem]"># Deals</div>
+        <div className="md:w-[7.2rem]">Deal Value</div>
+        <div className="md:w-[5.2rem]">Source</div>
+        <div className="md:w-[4.2rem]">Owner</div>
         {/* <div className="w-12">Action</div> */}
 
       </div>
@@ -154,7 +154,7 @@ function ContactInvestAllCardList(props) {
                                 // }}
                                 >
                                      <div class="flex">
-                                <div className=" flex font-medium flex-col md:w-56 max-sm:flex-row w-full max-sm:justify-between  ">
+                                <div className=" flex font-medium flex-col md:w-[15.1rem] max-sm:flex-row w-full max-sm:justify-between  ">
 <div className="flex max-sm:w-full"> 
 <div>
                                 <SubTitle>
@@ -167,7 +167,7 @@ function ContactInvestAllCardList(props) {
             />
           </SubTitle></div>
           &nbsp;
-          <div class="max-sm:w-full md:w-40">
+          <div class="max-sm:w-full md:w-[12.1rem]">
                                         <Tooltip>
                                           <div class=" flex max-sm:w-full justify-between flex-row md:flex-col">
                                             {/* <div class="text-[0.875rem] text-cardBody font-poppins max-sm:hidden">
@@ -202,7 +202,7 @@ function ContactInvestAllCardList(props) {
                                     {item.tagWithCompany}
                                     </div>
                                 </div>
-                                <div className=" flex max-sm:w-full max-sm:justify-between  flex-row md:flex-col w-40 ">
+                                <div className=" flex max-sm:w-full max-sm:justify-between  flex-row md:flex-col w-[7.3rem] ">
                                     {/* <div class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden">Designation</div> */}
                                     <div class="text-[0.82rem] text-cardBody font-poppins">
                                          {item.designation}
@@ -210,27 +210,27 @@ function ContactInvestAllCardList(props) {
                                 </div>
                                 </div>
                                 <div class="flex">
-                                <div className=" flex max-sm:w-full max-sm:justify-between  flex-row md:flex-col w-40">
+                                <div className=" flex max-sm:w-full max-sm:justify-between  flex-row md:flex-col w-[12.2rem]">
                                   {/* <div class="text-[0.875rem] text-cardBody font-poppins max-sm:hidden">Department</div> */}
                                   <div class="text-[0.82rem] text-cardBody font-poppins">
                                        {item.department}
                                   </div>
                               </div>
-                                <div className=" flex font-medium flex-col md:w-32 max-sm:flex-row w-full  ">
+                                <div className=" flex font-medium flex-col md:w-[7.2rem] max-sm:flex-row w-full  ">
                                     {/* <div class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden"># Deals</div> */}
 
                                     <div class=" text-[0.82rem] text-cardBody font-poppins">
                                      {item.oppNo}
                                     </div>
                                 </div>
-                                <div className=" flex font-medium flex-col md:w-32 max-sm:flex-row w-full  ">
+                                <div className=" flex font-medium flex-col md:w-[8.05rem] max-sm:flex-row w-full  ">
                                     {/* <div class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden">Deal Value</div> */}
 
                                     <div class=" text-[0.82rem] text-cardBody font-poppins">
                                      {item.totalProposalValue}
                                     </div>
                                 </div>
-                                <div className="flex font-medium max-sm:justify-between flex-col md:w-32 max-sm:flex-row w-full ">
+                                <div className="flex font-medium max-sm:justify-between flex-col md:w-[6.2rem] max-sm:flex-row w-full ">
                                     {/* <div class="text-[0.875rem] text-cardBody font-poppins max-sm:hidden"> Source</div> */}
 
                                     <div class="text-[0.82rem] text-cardBody font-poppins">
@@ -239,7 +239,7 @@ function ContactInvestAllCardList(props) {
                                 </div>
                                 </div>
                                 <div class="flex">
-                                <div className="flex font-medium  flex-col md:w-20  max-sm:flex-row w-full max-sm:justify-between">
+                                <div className="flex font-medium  flex-col md:w-[5.2rem]  max-sm:flex-row w-full max-sm:justify-between">
                        
                        {/* <div class="text-[0.875rem] text-cardBody font-poppins max-sm:hidden">Owner</div> */}
 

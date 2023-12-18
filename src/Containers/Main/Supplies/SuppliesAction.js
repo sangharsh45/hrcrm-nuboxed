@@ -71,9 +71,9 @@ export const getSuppliesList = () => (dispatch) => {
     });
 };
 
-export const handleUpdateSuppliesModal = (modalProps) => (dispatch) => {
+export const handleUpdateSupplieDrawer = (modalProps) => (dispatch) => {
   dispatch({
-    type: types.HANDLE_UPDATE_SUPPLIES_MODAL,
+    type: types.HANDLE_UPDATE_SUPPLIES_DRAWER,
     payload: modalProps,
   });
 };
@@ -85,7 +85,7 @@ export const setEditSupplies = (name) => (dispatch) => {
   });
 };
 
-export const updateSupplies = (suppliesId, data, cb) => (dispatch) => {
+export const updateSupplies = (data, suppliesId,cb) => (dispatch) => {
   console.log(data);
   dispatch({ type: types.UPDATE_SUPPLIES_BY_ID_REQUEST });
   axios

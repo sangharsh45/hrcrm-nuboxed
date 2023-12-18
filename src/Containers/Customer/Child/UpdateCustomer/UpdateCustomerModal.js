@@ -8,7 +8,7 @@ const UpdateCustomerForm = lazy(() => import("./UpdateCustomerForm"));
 
 const UpdateCustomerModal = (props) => {
   const isSmallScreen = window.innerWidth <= 600;
-    const drawerWidth = isSmallScreen ? "90%" : "55%";
+    const drawerWidth = isSmallScreen ? "90%" : "60%";
   const { updateCustomerModal, handleUpdateCustomerModal, ...formProps } = props;
   return (
     <>
@@ -20,7 +20,7 @@ const UpdateCustomerModal = (props) => {
         closable
         destroyOnClose
         maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}
-        style={{marginTop:"5rem"}}
+        style={{marginTop:"3rem"}}
         onClose={() => props.handleUpdateCustomerModal(false)}
         footer={null}
       >

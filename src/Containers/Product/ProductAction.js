@@ -3,6 +3,7 @@ import { base_url, base_url2 } from "../../Config/Auth";
 import axios from "axios";
 import moment from "moment";
 import { message } from "antd";
+import Swal from 'sweetalert2'
 
 /**
  * get all the product of the user
@@ -147,13 +148,12 @@ export const updateProduct = (id, data, cb) => (dispatch) => {
   dispatch({ type: types.UPDATE_PRODUCT_BY_ID_REQUEST });
   axios
     .put(
-      `${base_url}/product/${id}`,
-      { ...data }
-      // {
-      //   headers: {
-      //     Authorization: "Bearer " + sessionStorage.getItem("token") || "",
-      //   },
-      // }
+      `${base_url2}/product/${id}`, { ...data },
+      {
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+        },
+      }
     )
     .then((res) => {
       console.log(res);
@@ -161,6 +161,12 @@ export const updateProduct = (id, data, cb) => (dispatch) => {
         type: types.UPDATE_PRODUCT_BY_ID_SUCCESS,
         payload: res.data,
       });
+      Swal.fire({
+        icon: 'success',
+        title: 'Updated Succefully',
+        showConfirmButton: false,
+        timer: 1500
+      })
       cb && cb();
     })
     .catch((err) => {

@@ -63,7 +63,7 @@ const handleLoadMore = () => {
           {props.showLocation.map((item) => {
             return (
               <div class="w-wk">
-                <div class=" flex rounded-xl justify-between mt-4 bg-white h-12 items-center p-3">
+                <div class=" flex rounded-xl justify-between bg-white mt-[0.5rem]  h-[2.75rem] items-center p-3">
                   <div class="flex">
                     <div className=" flex font-medium flex-col md:w-40 max-sm:flex-row w-full max-sm:justify-between ">
                       {/* <div class=" text-sm text-cardBody font-semibold font-poppins max-sm:hidden">

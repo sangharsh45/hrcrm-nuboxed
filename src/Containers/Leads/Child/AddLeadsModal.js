@@ -10,7 +10,7 @@ class AddLeadsModal extends Component {
   render() {
     const { addLeadsModal, handleLeadsModal, ...formProps } = this.props;
     const isSmallScreen = window.innerWidth <= 600;
-    const drawerWidth = isSmallScreen ? "90%" : "55%";
+    const drawerWidth = isSmallScreen ? "90%" : "60%";
     return (
       <>
         <StyledDrawer
@@ -24,7 +24,7 @@ class AddLeadsModal extends Component {
           destroyOnClose
           maskClosable={false}
           maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}
-          style={{ marginTop:"5rem"}}
+          style={{ marginTop:"3rem"}}
           onClose={() => handleLeadsModal(false)}
           footer={null}
         >

@@ -200,14 +200,14 @@ function  handleFilterChange(data){
             value={props.currentData}
           /> */}
         </div>
-        <Button
+        {/* <Button
           type={props.currentData ? "primary" : "danger"}
           onClick={() => {
             props.inputCustomerDataSearch(props.currentData);
           }}
         >
           Submit
-        </Button>
+        </Button> */}
         {/* <Button
           type={props.currentData ? "primary" : "danger"}
           onClick={() => {
@@ -217,7 +217,7 @@ function  handleFilterChange(data){
           <FormattedMessage id="app.clear" defaultMessage="Clear" />
           
         </Button> */}
-        <div class="w-[30%] mt-1">
+        <div class="w-[22%] mt-2 ml-2">
           <StyledSelect placeholder="Sort"  onChange={(e)  => props.handleFilterChange(e)}>
           <Option value="CreationDate">Creation Date</Option>
             <Option value="ascending">A To Z</Option>

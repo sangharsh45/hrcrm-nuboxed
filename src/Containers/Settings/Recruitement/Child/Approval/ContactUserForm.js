@@ -95,7 +95,7 @@ class ContactUserForm extends Component {
                         // reportingTo: this.props.approvalData.reportingTo || "",
                         threshold: this.props.approvalData.threshold || "",
                         departmentId: this.props.approvalData.departmentId || "",
-                        designationTypeId: this.props.approvalData.designationTypeId || "",
+                        roleTypeId: this.props.approvalData.roleTypeId || "",
                         jobLevel: this.props.approvalData.jobLevel || 1,
                         // processName: "BOQ",
                         subProcessName: "ContactUser",

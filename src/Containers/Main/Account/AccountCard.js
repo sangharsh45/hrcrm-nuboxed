@@ -279,7 +279,7 @@ function AccountTable(props) {
                     </div>
 
                   </div>
-                  <div class="flex flex-col">
+                  {/* <div class="flex flex-col">
                     <Tooltip title="Contacts">
                       <div
                         onClick={() => {
@@ -333,7 +333,7 @@ function AccountTable(props) {
                         />
                       </Popconfirm>
                     </Tooltip>
-                  </div>
+                  </div> */}
 
                 </div>
 

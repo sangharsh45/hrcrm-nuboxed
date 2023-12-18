@@ -852,3 +852,37 @@ h1{
   border-radius: 50%;
 }
 
+
+
+.matrix-table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.matrix-table th, .matrix-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: center;
+}
+
+.matrix-table th {
+  background-color: #f2f2f2;
+}
+
+.matrix-table input {
+  width: 50px; /* Adjust the width as needed */
+  text-align: center;
+}
+
+.matrix-table button {
+  padding: 5px 10px;
+  background-color: #4caf50;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+.matrix-table button:hover {
+  background-color: #45a049;
+}
+

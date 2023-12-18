@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { StyledTable } from "../../../../Components/UI/Antd";
 import { DeleteOutlined,EditOutlined } from "@ant-design/icons";
-import { Tooltip, Input, Button, Space, Popconfirm } from "antd";
+import { Tooltip, Popconfirm } from "antd";
+import {getSuppliersList } from "../SuppliersAction"
 import { OnlyWrapCard } from "../../../../Components/UI/Layout";
 import { Link } from "../../../../Components/Common";
 import InfiniteScroll from "react-infinite-scroll-component";
 
 function SuppliersCardList(props) {
-//   useEffect(() => {
-//     props.getShipperByUserId(props.userId);
-//   }, []);
+  useEffect(() => {
+    props.getSuppliersList(props.userId);
+  }, []);
 
   const [hasMore, setHasMore] = useState(true);
  
@@ -52,13 +52,13 @@ return(
         <div className="w-[3.8rem]">Action</div>
         </div>
         <InfiniteScroll
-        dataLength={props.shipperByUserId.length}
+        dataLength={props.supplierList.length}
         next={handleLoadMore}
         hasMore={hasMore}
-        loader={props.fetchingShipperByUserId?<h4 style={{ textAlign: 'center' }}>Loading...</h4>:null}
+        loader={props.fetchingSupplierList?<h4 style={{ textAlign: 'center' }}>Loading...</h4>:null}
         height={"75vh"}
       >
-{props.shipperByUserId.map((item) => {
+{props.supplierList.map((item) => {
   return (
     <>
      <div className="flex rounded-xl justify-between mt-[0.5rem] bg-white h-[2.75rem] items-center p-3"
@@ -79,9 +79,9 @@ Name
 
 <div class=" font-normal text-[0.82rem] text-cardBody font-poppins">
 <Link
-          toUrl={`shipper/${item.shipperId}`}
-          title={`${item.shipperName}`}
-        >{item.shipperName}</Link>
+          toUrl={`supplier/${item.supplierId}`}
+          title={`${item.supplierName}`}
+        >{item.supplierName}</Link>
 </div>
 
 </div>
@@ -212,11 +212,11 @@ PinCode
 </>
 )
 }
-const mapStateToProps = ({ shipper, auth }) => ({
-  shipperByUserId: shipper.shipperByUserId,
+const mapStateToProps = ({ shipper, suppliers,auth }) => ({
+  supplierList: suppliers.supplierList,
   userId: auth.userDetails.userId,
-  fetchingShipperByUserId: shipper.fetchingShipperByUserId,
-  fetchingShipperByUserIdError: shipper.fetchingShipperByUserIdError,
+  fetchingSupplierList: suppliers.fetchingSupplierList,
+  fetchingSupplierListError: suppliers.fetchingSupplierListError,
   updateShipperModal: shipper.updateShipperModal,
   addShipperActivityTableModal: shipper.addShipperActivityTableModal,
   addShipperOrderModal: shipper.addShipperOrderModal,
@@ -225,7 +225,7 @@ const mapStateToProps = ({ shipper, auth }) => ({
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
-  
+      getSuppliersList
     },
     dispatch
   );

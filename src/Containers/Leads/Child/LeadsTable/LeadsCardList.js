@@ -89,7 +89,7 @@ const LeadsCardList = (props) => {
       <OnlyWrapCard style={{backgroundColor:"#E3E8EE"}}>
       <div className=" flex justify-between w-[99%] p-2 bg-transparent font-bold sticky top-0 z-10">
         <div className=" md:w-[8.1rem]">Name</div>
-        <div className=" md:w-[5.1rem]"></div>
+        <div className=" md:w-[6.1rem]"></div>
         <div className=" md:w-[4.2rem] ">Phone #</div>
         <div className="md:w-[5.8rem]">Country</div>
         <div className="md:w-[8.5rem]">Company</div>
@@ -388,7 +388,7 @@ const LeadsCardList = (props) => {
                       /> */}
                     </div>
                   </div>
-                  <div class="flex flex-col w-[6%] max-sm:flex-row max-sm:w-[10%]">
+                  <div class="flex flex-col w-[10%] max-sm:flex-row max-sm:w-[10%]">
                     <div>
                       <Tooltip title="Notes">
                         <NoteAltIcon
@@ -426,7 +426,7 @@ const LeadsCardList = (props) => {
                     </div>
                   </div>
 
-                  <div class="flex flex-col w-[6%] max-sm:flex-row max-sm:w-[10%]">
+                  <div class="flex flex-col w-[10%] max-sm:flex-row max-sm:w-[10%]">
                     {user.leadsUpdateInd === true && user.crmInd === true && (
                       <div>
                         <Tooltip title="Edit">
@@ -466,7 +466,7 @@ const LeadsCardList = (props) => {
                     )}
                     <div></div>
                   </div>
-                  <div class="flex flex-col w-[4%] max-sm:flex-row max-sm:w-[10%]">
+                  <div class="flex flex-col w-[2%] max-sm:flex-row max-sm:w-[10%]">
                     <div>
                       <Tooltip
                         overlayStyle={{ maxWidth: "300px" }}

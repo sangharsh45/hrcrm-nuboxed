@@ -5,13 +5,13 @@ import { withRouter } from "react-router-dom";
 import { Formik, Form, Field, FastField } from "formik";
 import { FormWrapper, Input } from "./styled";
 import { ValidationError, Spacer } from "../../Components/UI/Elements";
-import { EyeInvisibleOutlined, EyeOutlined,
+import { EyeInvisibleOutlined,CheckCircleOutlined, EyeOutlined,
 } from "@ant-design/icons";
 import Button from "antd/lib/button";
 import { addOnboard, generateOtpByEmail, validateOtp } from "./AuthAction";
 import { SelectComponent } from "../../Components/Forms/Formik/SelectComponent";
    import FWLogo from "../../Assets/Images/logo_22 copy.png";
-import { FormattedMessage } from "react-intl";
+import { FlexContainer } from "../../Components/UI/Layout";
 
 
 class OnBoardOrganizationPage extends Component {
@@ -19,11 +19,19 @@ class OnBoardOrganizationPage extends Component {
     super(props);
     this.state = {
       organizationName: "",
+      date:"",
+      month:"",
+      firstName:"",
+      middleName:"",
+      lastName:"",
       industry: "",
+      confirmPassword:"",
       Loading: false,
       render: false,
       type: "password",
+      type1: "password",
       show: Boolean(),
+      show1: Boolean(),
     };
   }
 
@@ -31,6 +39,11 @@ class OnBoardOrganizationPage extends Component {
     this.setState(({ type, prevState }) => ({
       type: type === "text" ? "password" : "text",
       show: !this.state.show,
+    }));
+    handleClick1 = () =>
+    this.setState(({ type1, prevState }) => ({
+      type1: type1 === "text" ? "password" : "text",
+      show1: !this.state.show1,
     }));
   submit = (values) => {
     // this.enterLoading();
@@ -91,6 +104,7 @@ class OnBoardOrganizationPage extends Component {
                 initialValues={{
                   organizationName: this.state.organizationName || "",
                   industry: this.state.industry || "",
+                  
                 }}
              
                 onSubmit={(values) => {
@@ -177,20 +191,21 @@ class OnBoardOrganizationPage extends Component {
                       component={this.InputComponent}
                     />
                      <Spacer />
-                     <div className="login_password">
-                      <div style={{width:"100%"}}>
+                     <div className="set_password">
+                      <div style={{ width: "100%" }}>
                         <Field
                           name="password"
-                          placeholder="Password"
                           type={this.state.type}
+                          placeholder=" New password"
                           component={this.InputComponent}
+                          style={{ border: "1px solid lightgrey", boxShadow: "rgb(220 216 216) 2px 2px 2px" }}
                         />
                       </div>
                       {this.state.show ? (
                         <EyeOutlined
                           type="eye"
                           onClick={this.handleClick}
-                          style={{ alignSelf:"center" }}
+                          style={{ marginLeft: "-1.25em",  }}
                           size="24"
                         />
                       ) : (
@@ -198,36 +213,75 @@ class OnBoardOrganizationPage extends Component {
                           type="eye-invisible"
                           onClick={this.handleClick}
                           size="24"
-                          style={{ alignSelf:"center" }}
+                          style={{ marginLeft: "-1.25em",  }}
                         />
                       )}
-                      </div>
+                    </div>
                         <Spacer />
-                        <div className="login_password">
-                      <div style={{width:"100%"}}>
-                        <Field
-                          name="confirmpassword"
-                          placeholder="Confirm Password"
-                          type={this.state.type}
-                          component={this.InputComponent}
+                        <div className="set_password">
+                      <FlexContainer justifyContent="space-between">
+                        <div style={{ width: "100%" }}>
+                          <Field
+                            name="confirmPassword"
+                            type={this.state.type1}
+                            placeholder="Confirm new password"
+                            component={this.InputComponent}
+                            style={{ border: "1px solid lightgrey", boxShadow: "rgb(220 216 216) 2px 2px 2px" }}
+
+                          />
+                        </div>
+                        {this.state.show1 ? (
+                          <EyeOutlined
+                            type="eye"
+                            onClick={this.handleClick1}
+                            style={{
+                              marginLeft: "-1.25em",
+                              marginTop: "1.25em",
+                            }}
+                          // style={{ size: 24 }}
+                          />
+                        ) : (
+                          <EyeInvisibleOutlined
+                            type="eye-invisible"
+                            onClick={this.handleClick1}
+                            style={{
+                              marginLeft: "-7.25em",
+                              marginTop: "1em",
+                            }}
+                          // style={{ size: 24 }}
+                          />
+                        )}
+                        {/* <div >
+                          <Button
+                            type="primary"
+                            onClick={() => {
+                              this.props.generateOtpByEmail({
+                                emailId: this.props.emailId
+                              })
+                              // this.handleOtpField()
+                            }}
+                            style={{ marginLeft: "-6.25em", marginTop: "0.4em" }}
+
+                          >
+                            <ArrowRightOutlined />
+                          </Button>
+                        </div> */}
+                      </FlexContainer>
+                      {/* {values.password.length &&
+                        values.password === values.confirmPassword ? (
+                        <CheckCircleOutlined
+                          type="check-circle"
+                          theme="twoTone"
+                          twoToneColor="#52c41a"
+                          size={80}
+                          style={{
+                            marginLeft: "1.25em",
+                            marginTop: "0.875em",
+                            fontSize: "1.5625em",
+                          }}
                         />
-                      </div>
-                      {this.state.show ? (
-                        <EyeOutlined
-                          type="eye"
-                          onClick={this.handleClick}
-                          style={{ alignSelf:"center" }}
-                          size="24"
-                        />
-                      ) : (
-                        <EyeInvisibleOutlined
-                          type="eye-invisible"
-                          onClick={this.handleClick}
-                          size="24"
-                          style={{ alignSelf:"center" }}
-                        />
-                      )}
-                      </div>
+                      ) : null}  */}
+                    </div>
                   <Spacer />
                     <Button
                       type="primary"

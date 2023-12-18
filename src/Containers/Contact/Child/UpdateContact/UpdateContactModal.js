@@ -5,7 +5,7 @@ const UpdateContactForm = lazy(() => import("./UpdateContactForm"));
 
 const UpdateContactModal = props => {
   const isSmallScreen = window.innerWidth <= 600;
-  const drawerWidth = isSmallScreen ? "90%" : "55%";
+  const drawerWidth = isSmallScreen ? "90%" : "60%";
   const { updateContactModal, handleUpdateContactModal, ...formProps } = props;
   return (
     <>
@@ -20,7 +20,7 @@ const UpdateContactModal = props => {
         closable
         destroyOnClose
         maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}
-        style={{marginTop:"5rem"}}
+        style={{marginTop:"3rem"}}
         onClose={() => handleUpdateContactModal(false)}
         footer={null}
       >
