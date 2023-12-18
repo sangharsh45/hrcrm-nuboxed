@@ -17,7 +17,7 @@ const initialState = {
     fetchingPurchaseListError: false,
     purchaseList: [],
 
-    updateSuppliesModal: false,
+    updateSuppliesDrawer: false,
 
     setEditingSupplies: {},
 
@@ -104,8 +104,8 @@ export const suppliesReducer = (state = initialState, action) => {
                 fetchingPurchaseListError: true,
             };
 
-        case types.HANDLE_UPDATE_SUPPLIES_MODAL:
-            return { ...state, updateSuppliesModal: action.payload };
+        case types.HANDLE_UPDATE_SUPPLIES_DRAWER:
+            return { ...state, updateSuppliesDrawer: action.payload };
 
         case types.SET_EDIT_SUPPLIES:
             return { ...state, setEditingSupplies: action.payload };
@@ -116,7 +116,7 @@ export const suppliesReducer = (state = initialState, action) => {
             return {
                 ...state,
                 updateSuppliesById: false,
-                updateSuppliesModal: false,
+                updateSuppliesDrawer: false,
                 materialByGroup: state.materialByGroup.map((item) => {
                     if (item.suppliesId == action.payload.suppliesId) {
                         return action.payload;
@@ -192,7 +192,7 @@ export const suppliesReducer = (state = initialState, action) => {
             return {
                 ...state,
                 reInstatedSuppliesById: false,
-                // updateSuppliesModal: false,
+                // updateSuppliesDrawer: false,
                 // purchaseList: state.purchaseList.map((item) => {
                 //     if (item.suppliesId == action.payload.suppliesId) {
                 //         return action.payload;

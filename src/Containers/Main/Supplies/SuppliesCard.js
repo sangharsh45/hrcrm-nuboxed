@@ -7,7 +7,7 @@ import { MultiAvatar, SubTitle } from "../../../Components/UI/Elements";
 import { BundleLoader } from "../../../Components/Placeholder";
 import {
   getSuppliesList,
-  handleUpdateSuppliesModal,
+  handleUpdateSupplieDrawer,
   setEditSupplies,
   deletePurchaseData,
   handleCurrencyPriceModal,
@@ -47,7 +47,7 @@ function SuppliesCard(props) {
 
   const {
     updateSuppliesModal,
-    handleUpdateSuppliesModal,
+    handleUpdateSupplieDrawer,
   } = props;
   return(
     <>
@@ -211,7 +211,7 @@ function SuppliesCard(props) {
       {
   
         getSuppliesList,
-        handleUpdateSuppliesModal,
+        handleUpdateSupplieDrawer,
         setEditSupplies,
         deletePurchaseData,
         handleCurrencyPriceModal,
