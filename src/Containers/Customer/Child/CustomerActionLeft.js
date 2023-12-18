@@ -200,14 +200,14 @@ function  handleFilterChange(data){
             value={props.currentData}
           /> */}
         </div>
-        <Button
+        {/* <Button
           type={props.currentData ? "primary" : "danger"}
           onClick={() => {
             props.inputCustomerDataSearch(props.currentData);
           }}
         >
           Submit
-        </Button>
+        </Button> */}
         {/* <Button
           type={props.currentData ? "primary" : "danger"}
           onClick={() => {

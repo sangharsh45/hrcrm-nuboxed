@@ -150,7 +150,7 @@ props. getCrm();
                    
                     <div>
                       <div class=" flex justify-between max-sm:flex-col">
-                        <div class=" w-2/5 max-sm:w-full">
+                        {/* <div class=" w-2/5 max-sm:w-full">
                           <Field
                             name="salutation"
                             label={
@@ -164,8 +164,8 @@ props. getCrm();
                             inlineLabel
                             isColumn
                           />
-                        </div>
-                        <div class=" w-1/2 max-sm:w-full ">
+                        </div> */}
+                        <div class=" w-wk max-sm:w-full ">
                           <FastField
                             isRequired
                             name="firstName"
@@ -300,7 +300,7 @@ props. getCrm();
                          
                   <Spacer />
                   <div class=" flex justify-between">
-                   <div class=" w-1/2">
+                   <div class=" w-w47.5">
                
                       <FastField
                         name="sectorId"
@@ -318,7 +318,7 @@ props. getCrm();
                       />
                     
                     </div>
-                    <div class=" w-2/5">
+                    <div class=" w-w47.5">
                           <FastField
                             name="source"
                             type="text"
@@ -341,7 +341,7 @@ props. getCrm();
                   <Spacer/>
                  
                     <div class=" flex justify-between max-sm:flex-col">
-                    <div class=" w-1/2 max-sm:w-wk">
+                    <div class=" w-w47.5 max-sm:w-wk">
                     <StyledLabel>
                       <Field
                         name="vatNo"
@@ -359,7 +359,7 @@ props. getCrm();
                       />
                       </StyledLabel>
                     </div>
-                    <div class="">
+                    <div class="w-w47.5">
                     <StyledLabel>
                       <Field
                         name="businessRegistration"

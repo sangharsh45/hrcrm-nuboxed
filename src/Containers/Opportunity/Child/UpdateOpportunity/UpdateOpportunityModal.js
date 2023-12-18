@@ -9,8 +9,8 @@ const UpdateOpportunityModal = (props) => {
     <>
       <StyledDrawer
         title={props.opportunityData.opportunityName}
-        width="55%"
-        style={{marginTop:"5rem"}}
+        width="60%"
+        style={{marginTop:"3rem"}}
         visible={props.updateOpportunityModal}
         maskClosable={false}
         destroyOnClose

@@ -136,7 +136,7 @@ function UpdateLeadsForm (props) {
                     <FastField name="imageId" component={PostImageUpld} />
                     <div>
                       <div class=" flex justify-between max-sm:flex-col">
-                        <div class=" w-2/5 max-sm:w-full">
+                        {/* <div class=" w-2/5 max-sm:w-full">
                           <FastField
                             name="salutation"
                             type="text"
@@ -152,8 +152,8 @@ function UpdateLeadsForm (props) {
                             className="field"
                             isColumn
                           />
-                        </div>
-                        <div class=" w-1/2 max-sm:w-full">
+                        </div> */}
+                        <div class=" w-wk max-sm:w-full">
                           <FastField
                             isRequired
                             name="firstName"

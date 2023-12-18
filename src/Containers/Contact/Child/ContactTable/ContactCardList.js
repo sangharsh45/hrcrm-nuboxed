@@ -309,7 +309,7 @@ function ContactCardList(props) {
 </div>
             </div>
                                 <div class="flex flex-col  max-sm:flex-row w-[40%] ml-2 max-sm:justify-evenly items-center">
-                    <div class="rounded-full bg-white w-5 h-5 cursor-pointer md:mt-4">
+                    <div class="rounded-full w-5 h-5 cursor-pointer md:mt-4">
                     <Tooltip title={item.mobileNo} >
             {item.doNotCallInd !== true && (
               <span class=" mr-2 text-xs cursor-pointer"
