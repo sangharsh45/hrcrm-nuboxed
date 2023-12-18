@@ -79,6 +79,7 @@ const lng =
 }
 const mapStateToProps = ({ auth, account,location }) => ({
   user: auth.userDetails,
+  orgId: auth.userDetails.organizationId,
   showLocation: location.showLocation,
 //   candidateByUserId: candidate.candidateByUserId,
 locationAdresses: locationMapSelector(location),
