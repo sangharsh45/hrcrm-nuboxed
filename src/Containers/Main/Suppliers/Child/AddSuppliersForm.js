@@ -9,7 +9,8 @@ import * as Yup from "yup";
 import AddressFieldArray from "../../../../Components/Forms/Formik/AddressFieldArray";
 import { FlexContainer } from "../../../../Components/UI/Layout";
 import SearchSelect from "../../../../Components/Forms/Formik/SearchSelect";
-// import { addShipper,getEmployeelistAsErp } from "../SuppliersAction";
+import { addSuppliers } from "../SuppliersAction";
+import {getEmployeelistAsErp} from "../../Shipper/ShipperAction"
 import { Listbox } from '@headlessui/react';
 import { SelectComponent } from "../../../../Components/Forms/Formik/SelectComponent";
 
@@ -25,7 +26,7 @@ const CustomerSchema = Yup.object().shape({
 
 function AddSuppliersForm (props) {
   useEffect(() => {
-    // props.getEmployeelistAsErp();
+    props.getEmployeelistAsErp();
     // props.getShipByData(props.orgId);
     // props.getAllSalesList();
   }, []);
@@ -52,7 +53,6 @@ function AddSuppliersForm (props) {
             phoneNo: "",
             emailId: "",
             assignedTo: selectedOption ? selectedOption.employeeId:props.userId,
-            shipById: "",
             address: [
               {
                 addressId: "",
@@ -72,17 +72,17 @@ function AddSuppliersForm (props) {
             // address: "",
           }}
           validationSchema={CustomerSchema}
-        //   onSubmit={(values, { resetForm }) => {
-        //    props.addShipper(
-        //       {
-        //         ...values,
-        //         assignedTo: selectedOption ? selectedOption.employeeId:props.userId,
-        //       },
-        //      props.userId,
+          onSubmit={(values, { resetForm }) => {
+           props.addSuppliers(
+              {
+                ...values,
+                assignedTo: selectedOption ? selectedOption.employeeId:props.userId,
+              },
+             props.userId,
 
-        //       resetForm()
-        //     );
-        //   }}
+              resetForm()
+            );
+          }}
         >
           {({
             errors,
@@ -247,7 +247,7 @@ function AddSuppliersForm (props) {
                 <Button
                   type="primary"
                   htmlType="submit"
-                  loading={props.addingShipper}
+                  loading={props.addingSuppliers}
                 >
                   Create
                 </Button>
@@ -261,10 +261,10 @@ function AddSuppliersForm (props) {
   
 }
 
-const mapStateToProps = ({ auth, shipper,employee,shipBy }) => ({
+const mapStateToProps = ({ auth, shipper,employee,suppliers,shipBy }) => ({
   userId: auth.userDetails.userId,
   user: auth.userDetails,
-  addingShipper: shipper.addingShipper,
+  addingSuppliers: suppliers.addingSuppliers,
   allCustomerEmployeeList:employee.allCustomerEmployeeList,
   fullName: auth.userDetails.fullName,
   orgId:auth.userDetails.organizationId,
@@ -275,8 +275,8 @@ const mapStateToProps = ({ auth, shipper,employee,shipBy }) => ({
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
-    //   addShipper,
-    //   getEmployeelistAsErp,
+      addSuppliers,
+      getEmployeelistAsErp,
   
     },
     dispatch

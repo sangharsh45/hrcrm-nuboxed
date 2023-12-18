@@ -1168,17 +1168,15 @@ export const LinkOrgDocPrivate = (data, cb,) => (dispatch) => {
     });
 };
 
-export const addOnboard = (userName, password ) => (dispatch, getState) => {
+export const addOnboard = (data,cb ) => (dispatch, getState) => {
   const userId = getState().auth.userDetails.userId;
   dispatch({
     type: types.ADD_ONBOARD_REQUEST,
   });
 
   axios
-    .post(`${base_url}/registration`, {
-      username: userName,
-      password: password,
-    })
+    .post(`${base_url}/registration`,data, 
+    )
     .then((res) => {
       console.log(res);
       sessionStorage.setItem("token", res.data.token);
