@@ -71,32 +71,25 @@ const AssignCatalogueRepairForm = (props) => {
         },
         {
             title: "Category",
-            dataIndex: "category",
+            dataIndex: "categoryName",
             width: "15%",
         },
         {
             title: "Sub Category",
-            dataIndex: "subCategory",
+            dataIndex: "subCategoryName",
             width: "15%",
         },
         {
             title: "Attribute",
-            dataIndex: "attribute",
+            dataIndex: "attributeName",
             width: "15%",
 
         },
         {
             title: "Sub Attribute",
-            dataIndex: "subAttribute",
+            dataIndex: "subAttributeName",
             width: "15%",
         },
-        {
-            title: "Quantity",
-            dataIndex: "quantity",
-            width: "15%",
-        },
-
-
     ];
     return (
         <div>
