@@ -8,8 +8,6 @@ import {
     getAllProductCatagory,
     setEditProducts,
     handleUpdateProductModal,
-    handleDiscountModal,
-    handleOfferModal,
     handleHistoryModal,
     handleCatalogueConfigureModal,
     deleteProductData,
@@ -17,7 +15,6 @@ import {
     handleProductBuilderDrawer,
     handlePriceDrawer
 } from "../../ProductAction";
-import ProductDiscountModal from "./ProductDiscountModal";
 import DistributorOfferHistory from "./DistributorOfferHistory";
 import ProductPublishToggle from "./ProductPublishToggle";
 import { CurrencySymbol } from "../../../../Components/Common";
@@ -38,6 +35,7 @@ import ApartmentIcon from '@mui/icons-material/Apartment';
 import InfiniteScroll from "react-infinite-scroll-component";
 import ViewQuiltIcon from '@mui/icons-material/ViewQuilt';
 import EuroIcon from '@mui/icons-material/Euro';
+import UpdateProductModal from "../../Child/UpdateProductModal";
 
 const ProductBuilderDrawer =lazy(()=>import("./ProductBuilderDrawer"));
 
@@ -116,11 +114,9 @@ function ProductHistoryTable(props) {
         fetchingProducts,
         products,
         handleUpdateProductModal,
-        handleDiscountModal,
-        addDiscountModal,
+        updateProductModal,
         user,
         handleHistoryModal,
-        handleOfferModal,
         handleCatalogueConfigureModal,
         handleCatalogueWipModal,
         proBuilderDrawer,
@@ -801,39 +797,20 @@ function ProductHistoryTable(props) {
             dataIndex: "documentId",
             width: "2%",
             render: (name, item, i) => {
-                return {
-                    props: {
-                        style: {
-                            background:
-                                (distributorOfferHistory ||
-                                    showHistory ||
-                                    showDistributorHistory ||
-                                    customerOfferHistory) &&
-                                    productId === item.productId
-                                    ? "rgb(158 183 223)"
-                                    : null,
-                        },
-                    },
-                    children: (
-                        <span>
-                            {user.designation === "Manager" &&
-                                (user.functionName !== "Sales" ||
-                                    user.designation !== "Manager") && (
+                return (
+                   
                                     <Tooltip title="Edit">
                                         <EditOutlined
                                     style={{ cursor: "pointer", fontSize: "12px" }}
                                             onClick={() => {
                                                 props.setEditProducts(item);
                                                 handleUpdateProductModal(true);
-                                                // handleSetCurrentLeadsId(item.leadsId);
                                             }}
                                         />
                                     </Tooltip>
-                                )}
-                        </span>
-                    ),
-                };
-            },
+      );
+                
+            }
         },
 
         {
@@ -900,11 +877,10 @@ function ProductHistoryTable(props) {
             />
               </InfiniteScroll> 
               
-              {/* <ProductDiscountModal
-                addDiscountModal={addDiscountModal}
-                handleDiscountModal={handleDiscountModal}
-                particularDiscountData={particularDiscountData}
-            /> */}
+              <UpdateProductModal
+        updateProductModal={updateProductModal}
+        handleUpdateProductModal={handleUpdateProductModal}
+      />
 
             <ProductBuilderDrawer
             particularDiscountData={particularDiscountData}
