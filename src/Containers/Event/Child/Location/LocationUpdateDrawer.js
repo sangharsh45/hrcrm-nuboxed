@@ -8,7 +8,7 @@ const LocationUpdateForm=lazy(()=>import("./LocationUpdateForm"));
 const LocationUpdateDrawer = (props) => {
   const { locationUpdatedrawr, handleUpdateLocationDrawer,storedLoc, ...formProps } = props;
   const isSmallScreen = window.innerWidth <= 600;
-    const drawerWidth = isSmallScreen ? "90%" : "55%";
+    const drawerWidth = isSmallScreen ? "90%" : "60%";
   return (
     <>
       <StyledDrawer
@@ -21,7 +21,7 @@ const LocationUpdateDrawer = (props) => {
         destroyOnClose
         closable
         placement="right"
-        style={{marginTop:"5rem"}}
+        style={{marginTop:"3rem"}}
         maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}
         onClose={() => handleUpdateLocationDrawer(false)}
       >

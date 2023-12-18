@@ -229,6 +229,7 @@ function MainApp(props) {
 
   const organizationLogo = (
     <MultiAvatar
+    // style={{width:"8rem"}}
       imageId={imageId}
     //marginLeft="30px"
     // primaryTitle={organizationName}
@@ -260,8 +261,8 @@ function MainApp(props) {
               height: 50,
             }}
           > */}
-              <div
-                className="logo"
+              <div 
+                 className="logo1"
                 style={{
                   justifyContent: !collapsed ? "center" : "center",
                   height: 50,

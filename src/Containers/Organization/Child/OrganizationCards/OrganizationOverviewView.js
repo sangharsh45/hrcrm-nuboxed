@@ -19,6 +19,7 @@ class OrganizationOverviewView extends Component {
           <FlexContainer justifyContent="flex-start" flexWrap="nowrap">
             <div style={{ width: "3.75em" }}>
               <MultiAvatar
+              style={{width:"5rem"}}
                 primaryTitle={organizationName}
                 imageId={imageId}
                 imageURL={imageURL}
