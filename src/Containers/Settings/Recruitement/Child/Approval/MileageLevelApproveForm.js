@@ -91,11 +91,15 @@ function MileageLevelApproveForm(props) {
   //     })
   //   );
   // }
-
   function handleAddRowClick() {
-    const newRow = { level: "", threshold: "",roleTypeId:"" };
-    setRows((prevRows) => [...prevRows, newRow]);
+    // Disable adding more than 3 levels
+    if (rows.length < 3) {
+      const newRow = { level: "", threshold: "",roleTypeId:"" };
+      setRows((prevRows) => [...prevRows, newRow]);
+    }
   }
+
+
 
   function handleDelete(index) {
     setRows((prevRows) =>
@@ -155,7 +159,7 @@ function MileageLevelApproveForm(props) {
                     <option value="Management">Management</option>
                   </Select>
                 </div>
-                <div className="w-full flex font-bold mb-4 ">
+                <div className="w-full flex font-bold ">
                 <div style={{ width:"5rem"}}>
                 
                 </div>
@@ -181,11 +185,11 @@ function MileageLevelApproveForm(props) {
                       onChange={(value) => handleChangeRoleValue(value, index)}
                       value={row.roleTypeId}
                       isColumnWithoutNoCreate
-                      label="Role"
+                     
                       // disabled={!row.level.ReportingManager}
                       component={SelectComponent}
                       options={getRoleOptions(row.level)} 
-                      placeholder
+                      placeholder="Role"
                       isColumn
                       inlineLabel
                       style={{ flexBasis: "80%", marginTop: "0px", width: "100%" }}
@@ -209,13 +213,15 @@ function MileageLevelApproveForm(props) {
                     }
                   />
                 </div> */}
+                 <div class=" ml-4">
                 {rows.length > 1 ? (
                   <CloseOutlined onClick={() => handleDelete(index)} />
                 ) : null}
+                </div>
               </div>
             </div>
           ))}
-          <div class=" flex justify-end">
+          <div class=" flex justify-end mt-4">
                   
                   <div className="button">
                       <Button type="primary" onClick={handleAddRowClick}>

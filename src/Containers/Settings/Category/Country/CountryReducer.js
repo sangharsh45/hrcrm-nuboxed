@@ -10,6 +10,9 @@ const initialState = {
     addingCountryToggle: false,
     addingCountryToggleError: false,
 
+    addingCountrySalesToggle: false,
+    addingCountrySalesToggleError: false,
+
     addingMandatoryCountry: false,
     addingMandatoryCountryError: false,
 
@@ -55,6 +58,27 @@ export const countryReducer = (state = initialState, action) => {
               addingCountryToggle: false,
               addingCountryToggleError: true,
             };
+
+            case types.LINK_COUNTRY_SALES_TOGGLE_REQUEST:
+              return { ...state, addingCountrySalesToggle: true };
+            case types.LINK_COUNTRY_SALES_TOGGLE_SUCCESS:
+              return {
+                ...state,
+                addingCountrySalesToggle: false,
+                country: state.country.map((item) => {
+                  if (item.country_id === action.payload.country_id) {
+                    return action.payload;
+                  } else {
+                    return item;
+                  }
+                }),
+              };
+            case types.LINK_COUNTRY_SALES_TOGGLE_FAILURE:
+              return {
+                ...state,
+                addingCountrySalesToggle: false,
+                addingCountrySalesToggleError: true,
+              };
 
 
             case types.ALL_COUNTRY_MANDATORY_REQUEST:

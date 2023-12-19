@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Formik, Form, Field } from "formik";
 import {
+
   Select,
 } from "../../../../../Components/UI/Elements";
 import { MainWrapper, Spacer } from "../../../../../Components/UI/Elements";
@@ -21,8 +22,8 @@ const { Option } = Select;
 function WebsiteForm(props) {
 
     const [single, setSingle] = useState(false);
-    const [selectedDept, setSelectedDept] = useState(props.distributionAutomation.departmentId);
-  const [selectedUser, setSelectedUser] = useState(props.distributionAutomation.asignedTO);
+    const [selectedDept, setSelectedDept] = useState("");
+  const [selectedUser, setSelectedUser] = useState("");
 console.log("single",single)
     const handleSingleMultiple = (checked) =>{
         setSingle(checked)

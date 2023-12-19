@@ -92,9 +92,11 @@ function LevelApproveForm(props) {
     //     });
     // }
     function handleAddRowClick() {
-        const newRow = { level: "", };
+      if (rows.length < 3) {
+        const newRow = { level: "", threshold: "",roleTypeId:"" };
         setRows((prevRows) => [...prevRows, newRow]);
       }
+    }
 
       function handleDelete(index) {
         setRows((prevRows) =>
