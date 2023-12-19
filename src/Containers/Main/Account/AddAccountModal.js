@@ -10,13 +10,13 @@ const AddAccountModal = (props) => {
         <>
             <StyledDrawer
                 title="Account"
-                width="55%"
+                width="60%"
                 visible={addDistributorModal}
                 closable
                 // maskClosable={false}
                 destroyOnClose
                 maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}
-                style={{marginTop:"5rem"}}
+                style={{marginTop:"3rem"}}
                 onClose={() => handleDistributorModal(false)}
                 footer={null}
             >

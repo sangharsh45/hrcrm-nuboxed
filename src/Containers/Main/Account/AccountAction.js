@@ -2,6 +2,7 @@ import * as types from "./AccountActionType";
 import axios from "axios";
 import { base_url2, base_url } from "../../../Config/Auth";
 import { message } from "antd";
+import Swal from 'sweetalert2'
 
 /**
  * handle Distributor modal action
@@ -602,6 +603,12 @@ export const updateDistributor = (data, distributorId, userId) => (
         type: types.UPDATE_DISTRIBUTOR_BY_ID_SUCCESS,
         payload: res.data,
       });
+      Swal.fire({
+        icon: 'success',
+        title: 'Updated Succefully',
+        showConfirmButton: false,
+        timer: 1500
+      })
     })
     .catch((err) => {
       console.log(err);
@@ -668,7 +675,11 @@ export const getOrderDetailsById = (orderId) => (dispatch) => {
       });
     });
 };
-
+export const emptyDistributor = () => (dispatch) => {
+  dispatch({
+    type: types.EMPTY_DISTRIBUTOR_LIST, 
+  });
+};
 /**
  * get all the distributor
  */
