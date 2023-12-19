@@ -199,13 +199,13 @@ class UpdateAccountContactForm extends Component {
                                         </div>
                                     </FlexContainer>
                                     <Spacer style={{ marginTop: "1.25em" }} />
-                                    <FlexContainer justifyContent="space-between">
+                                    <FlexContainer justifyContent="space-between" style={{alignItems:"end"}}>
                                         <div style={{ width: "47%" }}>
                                             <FastField
                                                 name="dialCode1"
                                                 label="Mobile #"
                                                 isColumn
-                                                // margintop={"0.25em"}
+                                                isColumnWithoutNoCreate
                                                 selectType="dialCode"
                                                 component={SearchSelect}
                                                 value={values.countryDialCode}
@@ -226,14 +226,14 @@ class UpdateAccountContactForm extends Component {
                                         </div>
                                     </FlexContainer>
                                     <Spacer />
-                                    <FlexContainer justifyContent="space-between">
+                                    <FlexContainer justifyContent="space-between" style={{alignItems:"end"}}>
                                         <div style={{ width: "47%" }}>
                                             <FastField
                                                 name="dialCode2"
                                                 selectType="dialCode"
                                                 label="Phone #"
                                                 isColumn
-                                                //  margintop={"0.25em"}
+                                                isColumnWithoutNoCreate
                                                 component={SearchSelect}
                                                 value={values.countryDialCode1}
                                                 inlineLabel

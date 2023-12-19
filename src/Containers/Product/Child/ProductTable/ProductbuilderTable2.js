@@ -1,11 +1,10 @@
 
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { Tooltip,  Button, Form, } from "antd";
+import { Tooltip } from "antd";
 import { StyledTable } from "../../../../Components/UI/Antd";
 import { getBuilderByProId } from "../../ProductAction";
-import { EditOutlined } from "@ant-design/icons";
 import { elipsize } from "../../../../Helpers/Function/Functions";
 
 function ProductbuilderTable2 (props) {

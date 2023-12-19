@@ -883,7 +883,7 @@ export const productReducer = (state = initialState, action) => {
                 return {
                   ...state,
                   addingProductBuilder: false,
-                  builderbyProductId: [...state.builderbyProductId, action.payload],
+                  builderbyProductId:[action.payload]
                 };
               case types.ADD_PRODUCT_BUILDER_FAILURE:
                 return {
