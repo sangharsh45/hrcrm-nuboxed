@@ -13,11 +13,11 @@ class AddAccountContact extends Component {
             <>
                 <StyledDrawer
                     title="Add Contact"
-                    width="55%"
+                    width="60%"
                     visible={distributorContactModal}
                     destroyOnClose
                     maskClosable={false}
-                    style={{ marginTop: "5rem" }}
+                    style={{ marginTop: "3rem" }}
                     maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}
                     onClose={() => handleDistributorContactModal(false)}
                     footer={null}

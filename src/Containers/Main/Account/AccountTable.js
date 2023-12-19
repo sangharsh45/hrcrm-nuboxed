@@ -90,19 +90,18 @@ useEffect(() => {
          const diff = Math.abs(
             moment().diff(moment(item.lastRequirementOn), "days")
           );
-          const dataLoc = ` Address : ${
+          const dataLoc = `${
             item.address && item.address.length && item.address[0].address1
           } 
-           Street : ${
+            ${
              item.address && item.address.length && item.address[0].street
            }   
-          State : ${item.address && item.address.length && item.address[0].state}
-         Country : ${
+           ${item.address && item.address.length && item.address[0].state}
+          ${
            (item.address && item.address.length && item.address[0].country) || ""
          } 
-           PostalCode : ${
-             item.address && item.address.length && item.address[0].postalCode
-           } `;
+           
+            `;
                     return (
                         <div>
                             <div className="flex rounded-xl justify-between mt-2 bg-white h-12 items-center p-3 "
@@ -193,14 +192,21 @@ useEffect(() => {
                            
                            {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden"> Sector </h4> */}
                            <h4 class=" text-xs text-cardBody font-poppins">   
-                           {/* {item.countryName} */}
+                           {dataLoc}
                            </h4>
                        
                        </div> 
                        
-
+                       <div className=" flex font-medium flex-col  md:w-[6.9rem] max-sm:flex-row w-full max-sm:justify-between  ">
+                           
+                           {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden"> Sector </h4> */}
+                           <h4 class=" text-xs text-cardBody font-poppins">   
+                           { item.address && item.address.length && item.address[0].postalCode}
+                           </h4>
+                       
+                       </div> 
                       </div>
-                      <div className=" flex font-medium flex-col w-[2rem] md:w-[1rem] max-sm:flex-row w-full max-sm:justify-between  ">
+                      <div className=" flex font-medium flex-col md:w-[1rem] max-sm:flex-row w-full max-sm:justify-between  ">
 
 {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden"> Sector </h4> */}
 <h4 class=" text-xs text-cardBody font-poppins">
