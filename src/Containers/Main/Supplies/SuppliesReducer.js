@@ -63,6 +63,10 @@ const initialState = {
     fetchingBrandModel: false,
     fetchingBrandModelError: false,
     brandModel: [],
+
+    fetchingSuppliescount:false,
+    fetchingSuppliescountError:false,
+    suppliesCount:{},
 };
 
 export const suppliesReducer = (state = initialState, action) => {
@@ -318,6 +322,14 @@ export const suppliesReducer = (state = initialState, action) => {
                 return { ...state, fetchingBrandModel: false, brandModel: action.payload };
             case types.GET_BRAND_MODEL_FAILURE:
                 return { ...state, fetchingBrandModel: false, fetchingBrandModelError: true };
+
+                case types.GET_SUPPLIES_COUNT_REQUEST:
+                    return { ...state, fetchingSuppliescount: true };
+                case types.GET_SUPPLIES_COUNT_SUCCESS:
+                    return { ...state, fetchingSuppliescount: false, suppliesCount: action.payload };
+                case types.GET_SUPPLIES_COUNT_FAILURE:
+                    return { ...state, fetchingSuppliescount: false, fetchingSuppliescountError: true };
+    
 
         default:
             return state;

@@ -1119,12 +1119,12 @@ export const getProductBuilderById = (productManufacturingId) => (dispatch) => {
     });
 };
 // get all manufatureid by product and order id
-export const getAllManufatureIdById = (productManufacturingId) => (dispatch) => {
+export const getAllManufatureIdById = (orderId, productId) => (dispatch) => {
   dispatch({
     type: types.GET_ALL_MANUFATUREID_REQUEST,
   });
   axios
-    .get(`${base_url2}/order//${productManufacturingId}`, {
+    .get(`${base_url2}/order/orderProductList/${orderId}/${productId}`, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },

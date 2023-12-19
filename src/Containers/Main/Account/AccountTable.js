@@ -15,7 +15,8 @@ import {
   handleDistributorActivityTableModal,
   deleteDistributorData,
   handleBillingAddressModal,
-  handleUpdateAccountModal
+  handleUpdateAccountModal,
+  emptyDistributor
 } from "./AccountAction";
 import Highlighter from "react-highlight-words";
 import moment from "moment";
@@ -53,7 +54,10 @@ const {
   user,
   IconShowhover,
 } = props;
- 
+useEffect(() => {
+  return () => props.emptyDistributor();
+}, []);
+
   const tab = document.querySelector(".ant-layout-sider-children");
   const tableHeight = tab && tab.offsetHeight * 1.2;
   return (
@@ -204,6 +208,7 @@ const {
         <BorderColorIcon
             style={{ color: "grey",fontSize:"0.8rem",padding:"2px",fontSize:"1rem" }}
             onClick={() => {
+              props.setEditDistributor(item)
               handleUpdateAccountModal(true);
               handleCurrentRowData(item);
             }}
@@ -288,7 +293,8 @@ const mapDispatchToProps = (dispatch) =>
       handleDistributorActivityTableModal,
       deleteDistributorData,
       handleBillingAddressModal,
-      handleUpdateAccountModal
+      handleUpdateAccountModal,
+      emptyDistributor
     },
     dispatch
   );

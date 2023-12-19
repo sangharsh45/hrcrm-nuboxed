@@ -1,20 +1,20 @@
 import React from "react";
-import { ActionIcon } from "../../../Components/Utils";
 import { FlexContainer } from "../../../Components/UI/Layout";
-import { StyledRangePicker, StyledSelect } from "../../../Components/UI/Antd";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-import { AliyunOutlined, AppstoreOutlined, DeleteOutlined } from "@ant-design/icons";
-import { Tooltip } from "antd";
-
-const Option = StyledSelect.Option;
-
+import {  AppstoreOutlined, DeleteOutlined } from "@ant-design/icons";
+import { Tooltip,Badge } from "antd";
+import { getSuppliesCount } from "./SuppliesAction";
 class SuppliesActionLeft extends React.Component {
+   
+    componentDidMount(){
+        this.props.getSuppliesCount();
+    }
     render() {
         const {
             viewType,
             setSuppliesViewType,
-
+            suppliesCount,
         } = this.props;
 
         return (
@@ -22,6 +22,11 @@ class SuppliesActionLeft extends React.Component {
 
 
                 <Tooltip title="All Materials">
+                <Badge
+        size="small"
+        count={(viewType === "all" && suppliesCount.count) || 0}
+        overflowCount={999}
+      >
                     <AppstoreOutlined
                         style={{
                             marginRight: "0.3rem",
@@ -31,10 +36,17 @@ class SuppliesActionLeft extends React.Component {
                         // tooltipTitle="Supplies Library"
                         onClick={() => setSuppliesViewType("all")}
                     />
+                       </Badge>
                 </Tooltip>
 
                 <Tooltip title="Deleted Materials">
-                    <DeleteOutlined
+                <Badge
+        size="small"
+        // count={(props.viewType === "card" && props.pitchCount.InvestorLeadsDetails) || 0}
+        
+        overflowCount={999}
+      >
+                                        <DeleteOutlined
                         style={{
                             marginRight: "0.5rem",
                             color: viewType === "dashboard" && "red",
@@ -43,19 +55,20 @@ class SuppliesActionLeft extends React.Component {
                         // tooltipTitle="All"
                         onClick={() => setSuppliesViewType("dashboard")}
                     />
+                       </Badge>
                 </Tooltip>
 
             </FlexContainer>
         );
     }
 }
-const mapStateToProps = ({ }) => ({
-
+const mapStateToProps = ({supplies }) => ({
+    suppliesCount:supplies.suppliesCount
 });
 const mapDispatchToProps = (dispatch) =>
     bindActionCreators(
         {
-
+            getSuppliesCount
         },
         dispatch
     );

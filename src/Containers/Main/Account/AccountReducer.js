@@ -398,6 +398,8 @@ export const distributorReducer = (state = initialState, action) => {
         addingDistributorError: true,
         addDistributorModal: false,
       };
+      case types.EMPTY_DISTRIBUTOR_LIST:
+        return { ...state, allDistributors: [] }; 
 
     /**
      * get the list of all distributors
@@ -734,7 +736,14 @@ export const distributorReducer = (state = initialState, action) => {
       return {
         ...state,
         updateDisributorById: false,
-        updateDistributorModal: false,
+        updateAccountModal: false,
+        allDistributors: state.allDistributors.map((item) => {
+          if (item.distributorId == action.payload.distributorId) {
+            return action.payload;
+          } else {
+            return item;
+          }
+        }),
         distributorsByUserId: state.distributorsByUserId.map((item) => {
           if (item.distributorId == action.payload.distributorId) {
             return action.payload;

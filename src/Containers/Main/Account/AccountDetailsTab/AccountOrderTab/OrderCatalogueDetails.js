@@ -33,7 +33,11 @@ function OrderCatalogueDetails(props) {
                     <>
                         <span
                             onClick={() => handleNameClick(item)}
-                            style={{ textDecoration: "underline", color: "blue" }}>
+                            style={{
+                                cursor: "pointer",
+                                textDecoration: "underline",
+                                color: show && data.productId === item.productId ? "red" : "green"
+                            }}>
                             {item.name}</span>
                     </>
                 )
@@ -80,7 +84,11 @@ function OrderCatalogueDetails(props) {
             />
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            {show && <CatalogueTableByProductId data={data} />}
+            {show &&
+                <CatalogueTableByProductId
+                    data={data}
+                    orderId={props.particularRowData.orderId}
+                />}
             {/* {expand && (
                 <DistributorPhoneTaskTable
                     phoneId={phoneId}

@@ -7,7 +7,7 @@ import { Spacer, StyledLabel } from "../../../Components/UI/Elements";
 import { InputComponent } from "../../../Components/Forms/Formik/InputComponent";
 import { TextareaComponent } from "../../../Components/Forms/Formik/TextareaComponent";
 import * as Yup from "yup";
-// import { getVat } from "../../../Rules/RulesAction"
+import { getCountry } from "../../../Containers/Settings/Category/Country/CountryAction";
 // import { getCurrency } from "../../../Auth/AuthAction"
 import AddressFieldArray from "../../../Components/Forms/Formik/AddressFieldArray";
 import { FlexContainer } from "../../../Components/UI/Layout";
@@ -33,7 +33,7 @@ class UpdateAccountForm extends Component {
     }
 
     componentDidMount() {
-        // this.props.getVat();
+        this.props.getCountry();
         // this.props.getCurrency()
         // this.props.getCustomer()
     }
@@ -42,14 +42,14 @@ class UpdateAccountForm extends Component {
     }
 
     render() {
-        // const vatOption = this.props.vat.map((item) => {
-        //     return {
-        //         value: item.country,
-        //         label: item.country
-        //     }
-        // })
+        const CountryOptions = this.props.countries.map((item) => {
+            return {
+              label: `${item.country_name || ""}`,
+              value: item.country_id,
+            };
+          });
         // const customerOption = this.props.customer.map((item) => {
-        //     return {
+        //     return { 
         //         label: item.clientName || "",
         //         value: item.clientId,
         //     };
@@ -60,7 +60,6 @@ class UpdateAccountForm extends Component {
                 value: item.currencyName,
             };
         })
-
         return (
             <>
                 <Formik
@@ -79,37 +78,37 @@ class UpdateAccountForm extends Component {
                         notes: this.props.setEditingDistributor.notes || "",
                         dialCode: this.props.setEditingDistributor.dialCode || "",
                         clientId: this.props.setEditingDistributor.clientId || "",
-                        address: [
-                            {
+                        // address: [
+                            // {
                               // country:setEditingCustomer.country || "",
                             //   addressId: this.props.setEditingDistributor.address.address[0].addressId || "",
                             //   address1: this.props.setEditingDistributor.address.length ? this.props.setEditingDistributor.address[0].address1 : "",
                             //   address2:  this.props.setEditingDistributor.address.length ? this.props.setEditingDistributor.address[0].address2 : "",
                             //   street:  this.props.setEditingDistributor.address.length ? this.props.setEditingDistributor.address[0].street : "",
                             //   city:  this.props.setEditingDistributor.address.length ? this.props.setEditingDistributor.address[0].city : "",
-                              state:  this.props.setEditingDistributor.address.address[0].state || "",
+                            //   state:  this.props.setEditingDistributor.address.address[0].state || "",
                             //   country: this.props.setEditingDistributor.address.length ? this.props.setEditingDistributor.address[0].country : "",
                             //   postalCode:  this.props.setEditingDistributor.address.length ? this.props.setEditingDistributor.address[0].postalCode : "",             
-                            },
-                          ],
+                            // },
+                        //   ],
                        
-                        // address: [
-                        //     {
-                        //         // addressId: this.props.setEditingDistributor.addresses.length ? this.props.setEditingDistributor.addresses[0].addressId : "",
-                        //         // addressType: this.props.setEditingDistributor.addresses.length ? this.props.setEditingDistributor.addresses[0].addressType : "",
-                        //         // address1: this.props.setEditingDistributor.addresses.length ? this.props.setEditingDistributor.addresses[0].address1 : "",
-                        //         // address2: this.props.setEditingDistributor.addresses.length ? this.props.setEditingDistributor.addresses[0].address2 : "",
-                        //         // town: this.props.setEditingDistributor.addresses.length ? this.props.setEditingDistributor.addresses[0].town : "",
-                        //         // street: this.props.setEditingDistributor.addresses.length ? this.props.setEditingDistributor.addresses[0].street : "",
-                        //         // city: this.props.setEditingDistributor.addresses.length ? this.props.setEditingDistributor.addresses[0].city : "Null",
-                        //         // state: this.props.setEditingDistributor.addresses.length ? this.props.setEditingDistributor.addresses[0].state : "",
-                        //         // pinCode: this.props.setEditingDistributor.addresses.length ? this.props.setEditingDistributor.addresses[0].pinCode : "",
-                        //         // country: this.props.setEditingDistributor.addresses.length ? this.props.setEditingDistributor.addresses[0].country : "",
-                        //         // dialCode: this.props.setEditingDistributor.addresses.length ? this.props.setEditingDistributor.addresses[0].dialCode : "",
-                        //         // latitude: this.props.setEditingDistributor.addresses.length ? this.props.setEditingDistributor.addresses[0].latitude : "",
-                        //         // longitude: this.props.setEditingDistributor.addresses.length ? this.props.setEditingDistributor.addresses[0].longitude : "",
-                        //     },
-                        // ],
+                        address: [
+                            {
+                                addressId: this.props.setEditingDistributor.address.length ? this.props.setEditingDistributor.address[0].addressId : "",
+                                addressType: this.props.setEditingDistributor.address.length ? this.props.setEditingDistributor.address[0].addressType : "",
+                                address1: this.props.setEditingDistributor.address.length ? this.props.setEditingDistributor.address[0].address1 : "",
+                                address2: this.props.setEditingDistributor.address.length ? this.props.setEditingDistributor.address[0].address2 : "",
+                                town: this.props.setEditingDistributor.address.length ? this.props.setEditingDistributor.address[0].town : "",
+                                street: this.props.setEditingDistributor.address.length ? this.props.setEditingDistributor.address[0].street : "",
+                                city: this.props.setEditingDistributor.address.length ? this.props.setEditingDistributor.address[0].city : "Null",
+                                state: this.props.setEditingDistributor.address.length ? this.props.setEditingDistributor.address[0].state : "",
+                                pinCode: this.props.setEditingDistributor.address.length ? this.props.setEditingDistributor.address[0].pinCode : "",
+                                country: this.props.setEditingDistributor.address.length ? this.props.setEditingDistributor.address[0].country : "",
+                                dialCode: this.props.setEditingDistributor.address.length ? this.props.setEditingDistributor.address[0].dialCode : "",
+                                latitude: this.props.setEditingDistributor.address.length ? this.props.setEditingDistributor.address[0].latitude : "",
+                                longitude: this.props.setEditingDistributor.address.length ? this.props.setEditingDistributor.address[0].longitude : "",
+                            },
+                        ],
                     }}
                     validationSchema={DistributorSchema}
                     onSubmit={(values, { resetForm }) => {
@@ -118,8 +117,8 @@ class UpdateAccountForm extends Component {
                             {
                                 ...values,
                             },
-                            this.props.distributorId,
-                            this.props.userId,
+                            this.props.setEditingDistributor.distributorId,
+                            
                         );
                     }}
                 >
@@ -209,8 +208,8 @@ class UpdateAccountForm extends Component {
                                                 isColumn
                                                 inlineLabel
                                                 component={SelectComponent}
-                                                options={[]}
-                                                // options={Array.isArray(vatOption) ? vatOption : []}
+                                                // options={[]}
+                                                options={Array.isArray(CountryOptions) ? CountryOptions : []}
                                             />
                                         </div>
                                         <div style={{ width: "47%" }}>
@@ -339,13 +338,13 @@ const mapStateToProps = ({ auth, distributor, rule, category }) => ({
     currencies: auth.currencies,
     setEditingDistributor: distributor.setEditingDistributor,
     updateDisributorById: distributor.updateDisributorById,
-    // customer: category.customer,
+    countries: auth.countries,
 });
 
 const mapDispatchToProps = (dispatch) =>
     bindActionCreators(
         {
-           // getVat,
+            getCountry,
            // getCurrency,
             updateDistributor,
             //getCustomer
