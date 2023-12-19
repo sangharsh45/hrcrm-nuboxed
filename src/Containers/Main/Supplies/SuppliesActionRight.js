@@ -33,7 +33,7 @@ class SuppliesActionRight extends React.Component {
           <Tooltip placement="left" title="Create">
             <Button
               type="primary"
-              ghost
+              //ghost
               onClick={() => handleSuppliesModal(true)}
             >Add
               {/* <i class="fas fa-plus"></i> */}

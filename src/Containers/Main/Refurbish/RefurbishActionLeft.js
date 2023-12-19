@@ -5,6 +5,8 @@ import { StyledTabs } from "../../../Components/UI/Antd";
 import { Tooltip } from "antd";
 import { FlexContainer } from "../../../Components/UI/Layout";
 import { AppstoreOutlined } from "@ant-design/icons";
+import TocIcon from '@mui/icons-material/Toc';
+import GridViewIcon from '@mui/icons-material/GridView';
 
 const TabPane = StyledTabs.TabPane;
 
@@ -40,13 +42,13 @@ class RefurbishActionLeft extends Component {
               // iconType="book"
               // tooltipTitle="All"
               onClick={() => setProductionViewType("list")}
-            ><AppstoreOutlined /></span>
+            ><GridViewIcon style={{fontSize:"1.4rem"}}  /></span>
           </Tooltip>
           {/* {user.designation === "Manager" && */}
           <Tooltip title="All">
-            <AppstoreOutlined
+            <TocIcon
               style={{
-                marginRight: "0.3rem",
+                marginRight: "1.4rem",
                 color: viewType === "all" && "#1890ff",
               }}
               // iconType="appstore-o"
