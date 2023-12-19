@@ -1,6 +1,5 @@
 import React from "react";
 import { FlexContainer } from "../../../Components/UI/Layout";
-import {  StyledSelect } from "../../../Components/UI/Antd";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import {  AppstoreOutlined, DeleteOutlined } from "@ant-design/icons";
@@ -26,7 +25,6 @@ class SuppliesActionLeft extends React.Component {
                 <Badge
         size="small"
         count={(viewType === "all" && suppliesCount.count) || 0}
-        
         overflowCount={999}
       >
                     <AppstoreOutlined
