@@ -163,16 +163,16 @@ const AccountOrderTable = (props) => {
         <>
             <div className=' flex justify-end sticky top-28 z-auto'>
                 <OnlyWrapCard style={{ backgroundColor: "#E3E8EE" }}>
-                    <div className=" flex justify-between w-3/4 pl-9 bg-transparent font-bold sticky top-0 z-10">
+                    <div className=" flex justify-between w-[80%] pl-9 bg-transparent font-bold sticky top-0 z-10">
                         {/* <div className=" md:w-[8.1rem]"></div> */}
-                        <div className=" md:w-[6.4rem]">Order No</div>
+                        <div className=" md:w-[7.4rem]">Order No</div>
                         <div className=" md:w-[5.1rem]">Created</div>
-                        <div className=" md:w-[5.8rem] ">Location</div>
-                        <div className="md:w-[4.9rem]">Units</div>
+                        <div className=" md:w-[8.8rem] ">Location</div>
+                        <div className="md:w-[3.8rem]">Units</div>
                         {/* <div className="md:w-[3.8rem]">AWB</div> */}
                         <div className="md:w-[2.9rem]">Contact</div>
                         <div className="md:w-[6.12rem]">Expected Price </div>
-                        <div className="md:w-[4.3rem]">Final Price</div>
+                        <div className="md:w-[4.31rem]">Final Price</div>
                         <div className="w-[5.8rem]">Revised Price</div>
 
                     </div>
@@ -201,7 +201,7 @@ const AccountOrderTable = (props) => {
                                 } `;
                             return (
                                 <div >
-                                    <div className="flex rounded-xl justify-between mt-2 bg-white h-[2.75rem] items-center p-3 "
+                                    <div className="flex rounded-xl  mt-2 bg-white h-[2.75rem] items-center p-3 "
                                     // style={{
                                     //     borderBottom: "3px dotted #515050"
                                     // }}
@@ -252,7 +252,7 @@ const AccountOrderTable = (props) => {
 
                                             </div>
 
-                                            <div className=" flex font-medium flex-col  md:w-[6.4rem] max-sm:flex-row w-full max-sm:justify-between  ">
+                                            <div className=" flex font-medium flex-col  md:w-[7.4rem] max-sm:flex-row w-full max-sm:justify-between  ">
 
                                                 {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden"> Sector </h4> */}
                                                 <h4 class=" text-xs text-cardBody font-poppins">
@@ -294,7 +294,7 @@ const AccountOrderTable = (props) => {
 
                                                 </div>
                                             </div>
-                                            <div className=" flex font-medium flex-col md:w-[7.1rem] max-sm:flex-row w-full max-sm:justify-between ">
+                                            <div className=" flex font-medium flex-col md:w-[10.1rem] max-sm:flex-row w-full max-sm:justify-between ">
                                                 {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden">Pipeline Value</h4> */}
 
                                                 <div class=" text-xs text-cardBody font-poppins text-center">
@@ -304,7 +304,7 @@ const AccountOrderTable = (props) => {
                                                 </div>
                                             </div>
 
-                                            <div className=" flex font-medium flex-col md:w-[6.5rem] max-sm:flex-row w-full max-sm:justify-between ">
+                                            <div className=" flex font-medium flex-col md:w-[11.5rem] max-sm:flex-row w-full max-sm:justify-between ">
                                                 {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden">Weighted Value</h4> */}
 
                                                 <div class=" text-xs text-cardBody font-poppins text-center">
@@ -321,7 +321,7 @@ const AccountOrderTable = (props) => {
                                                 </h4>
 
                                             </div> */}
-                                            <div className=" flex font-medium flex-col  md:w-[4.3rem] max-sm:flex-row w-full max-sm:justify-between  ">
+                                            <div className=" flex font-medium flex-col  md:w-[7.3rem] max-sm:flex-row w-full max-sm:justify-between  ">
 
                                                 {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden"> Sector </h4> */}
                                                 <h4 class=" text-xs text-cardBody font-poppins">
@@ -370,7 +370,7 @@ const AccountOrderTable = (props) => {
 
                                             </div>
                                         </div>
-                                        <div className=" flex font-medium flex-col  md:w-[3.4rem] max-sm:flex-row w-full max-sm:justify-between  ">
+                                        <div className=" flex font-medium flex-col  md:w-[5.4rem] max-sm:flex-row w-full max-sm:justify-between  ">
 
 
                                             <h4 class=" text-xs text-cardBody font-poppins">
