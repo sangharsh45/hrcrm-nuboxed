@@ -1,3 +1,4 @@
+
 // import React, { useState, useEffect } from 'react';
 // import { Modal, Button } from 'antd';
 // import { QrReader } from 'react-qr-reader';
@@ -9,15 +10,6 @@
 //   const [shouldRenderCamera, setShouldRenderCamera] = useState(false);
 //   const [modalVisible, setModalVisible] = useState(false);
 
-//   // const handleScan = async (result, error) => {
-//   //   if (!!result) {
-//   //     setData(result?.text);
-//   //   }
-
-//   //   if (!!error) {
-//   //     console.error(error);
-//   //   }
-//   // };
 //   const handleScan = async (result, error) => {
 //     try {
 //       if (result && result.text) {
@@ -25,22 +17,21 @@
 //       } else if (result instanceof MediaStream) {
 //         // Do something with the MediaStream object if needed
 //       }
-  
+
 //       if (error) {
 //         throw new Error(error);
 //       }
 //     } catch (error) {
 //       console.error('Error in QR code scanner:', error);
-  
+
 //       // Additional handling based on the error, if needed
 //     }
 //   };
-  
-  
 
 //   const handleError = (error) => {
 //     console.error('Error with the QR scanner:', error);
 //     setScanning(false);
+//     setShouldRenderCamera(false);
 //     setModalVisible(false);
 //   };
 
@@ -53,6 +44,7 @@
 
 //   const stopScanning = () => {
 //     setScanning(false);
+//     setShouldRenderCamera(false);
 //     setModalVisible(false);
 //   };
 
@@ -67,13 +59,6 @@
 //     }
 //   };
 
-//   useEffect(() => {
-//     // Cleanup when the component is unmounted
-//     return () => {
-//       stopScanning();
-//     };
-//   }, []);
-
 //   return (
 //     <>
 //       <Button onClick={startScanning}>Open Scanner</Button>
@@ -82,6 +67,7 @@
 //         title="QR Code Scanner"
 //         visible={modalVisible}
 //         onCancel={stopScanning}
+//         destroyOnClose={true}
 //         footer={[
 //           <Button key="send" type="primary" onClick={sendToApi}>
 //             Send
@@ -100,10 +86,13 @@
 // };
 
 // export default QRCodeScanner;
+
+
 import React, { useState, useEffect } from 'react';
 import { Modal, Button } from 'antd';
 import { QrReader } from 'react-qr-reader';
 import axios from 'axios';
+import 'webrtc-adapter'; // Import the webrtc-adapter package
 
 const QRCodeScanner = () => {
   const [data, setData] = useState('No result');
@@ -187,6 +176,7 @@ const QRCodeScanner = () => {
 };
 
 export default QRCodeScanner;
+
 
 
 
