@@ -6,10 +6,8 @@ import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 import { Spacer } from "../../../../Components/UI/Elements";
 import { InputComponent } from "../../../../Components/Forms/Formik/InputComponent";
-import { addEmailCredentials } from "../Email/EmailAction";
 import { updateEmailCredentials } from "./EmailAction";
 import { FlexContainer } from "../../../../Components/UI/Layout";
-import { settingsReducer } from "../../../Settings/SettingsReducer";
 /**
  * yup validation scheme for creating a Team
  */

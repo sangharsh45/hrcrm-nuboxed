@@ -1,11 +1,10 @@
 
 
-import { Button, Input } from "antd";
-import React, { Component, lazy, PureComponent, Suspense, useEffect, useState } from "react";
+import {} from "antd";
+import React, {  PureComponent, Suspense,  } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { StyledTabs } from "../../../../../Components/UI/Antd";
-import { StyledLabel } from "../../../../../Components/UI/Elements";
 import { TabsWrapper } from "../../../../../Components/UI/Layout";
 import {getCountries} from "../../../../Auth/AuthAction"
 import SettingsHoliday from "./SettingsHoliday";

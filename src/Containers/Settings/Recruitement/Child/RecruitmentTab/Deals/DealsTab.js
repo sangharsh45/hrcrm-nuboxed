@@ -1,13 +1,10 @@
-import React, { Component, lazy, Suspense, useEffect } from "react";
+import React, { Component,} from "react";
 import { connect } from "react-redux";
 import BorderColorIcon from '@mui/icons-material/BorderColor';
 import { FormattedMessage } from "react-intl";
-import dayjs from "dayjs";
-import { Formik, Form, Field, FastField } from "formik";
 import DeleteIcon from '@mui/icons-material/Delete';
-import { SwitchComponent } from "../../../../../../Components/Forms/Formik/SwitchComponent";
 import { bindActionCreators } from "redux";
-import { Button, Icon, Tag, message, Tooltip, Switch, Popconfirm } from "antd";
+import { Button,  message, Popconfirm } from "antd";
 import styled from "styled-components";
 import {
   MainWrapper,
@@ -25,7 +22,7 @@ import {addProcessForDeals,
   updateStageForDeals
  } from "../../../../SettingsAction"
 import { FlexContainer } from "../../../../../../Components/UI/Layout";
-import { StyledPopconfirm, StyledTabs } from "../../../../../../Components/UI/Antd";
+import {  StyledTabs } from "../../../../../../Components/UI/Antd";
 import {  Select } from "../../../../../../Components/UI/Elements";
 import { elipsize } from "../../../../../../Helpers/Function/Functions";
 import SingleDealsStages from "./SingleDealsStages";

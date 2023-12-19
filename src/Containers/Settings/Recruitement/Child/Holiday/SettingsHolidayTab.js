@@ -1,12 +1,10 @@
-import React, { Component, lazy, Suspense, useEffect,useState } from "react";
+import React, { Suspense, useState } from "react";
 import { StyledTabs } from "../../../../../Components/UI/Antd";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { TabsWrapper } from "../../../../../Components/UI/Layout";
-import Weekend from "../../../../Settings/Recruitement/Child/Weekend/Weekend";
 import CountryList from "./CountryList";
  import {getCountries} from "../../../../Auth/AuthAction"
-import SettingsHoliday from "./SettingsHoliday";
 import WeekendCountryList from "./WeekendCountryList";
 
 const TabPane = StyledTabs.TabPane;

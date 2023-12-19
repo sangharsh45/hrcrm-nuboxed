@@ -120,22 +120,12 @@
 // export default connect(mapStateToProps, mapDispatchToProps)(TemplateTab);
 
 
-import React, { Component, lazy, Suspense } from "react";
+import React, { Component,  Suspense } from "react";
 import { connect } from "react-redux";
-import {
-  EyeInvisibleOutlined, PlusOutlined,
- 
-  
-} from '@ant-design/icons';
 import CustomerConfigureForm from "./CustomerConfigureForm"
 import { bindActionCreators } from "redux";
 import { StyledTabs } from "../../../../../Components/UI/Antd";
 import { TabsWrapper } from "../../../../../Components/UI/Layout";
-import { ActionIcon } from "../../../../../Components/Utils";
-
-import { Button, Icon,Tooltip } from "antd";
-import MessageIcon from '@mui/icons-material/Message';
-import DraftsIcon from '@mui/icons-material/Drafts';
 
 const TabPane = StyledTabs.TabPane;
 

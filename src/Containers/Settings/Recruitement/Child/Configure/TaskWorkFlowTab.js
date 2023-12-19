@@ -3,10 +3,8 @@ import { connect } from "react-redux";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
 import { FormattedMessage } from "react-intl";
 import { bindActionCreators } from "redux";
-import AssignmentIcon from "@mui/icons-material/Assignment";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { Button, message, Popconfirm } from "antd";
-import { DatePicker } from "antd";
 import dayjs from "dayjs";
 import styled from "styled-components";
 import {
@@ -30,7 +28,6 @@ import { FlexContainer } from "../../../../../Components/UI/Layout";
 import { StyledTabs } from "../../../../../Components/UI/Antd";
 import { Select } from "../../../../../Components/UI/Elements";
 import { elipsize } from "../../../../../Helpers/Function/Functions";
-// import AddRecruitmentDrawerModal from "../RecruitmentTab/AddRecruitmentDrawerModal";
 import AddTaskModal from "./AddTaskModal";
 import SingleTaskStages from "./SingleTaskStages";
 const { Option } = Select;

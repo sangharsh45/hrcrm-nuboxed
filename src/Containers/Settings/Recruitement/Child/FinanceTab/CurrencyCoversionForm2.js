@@ -5,7 +5,6 @@ import { Button } from "antd";
 import { SelectComponent } from "../../../../../Components/Forms/Formik/SelectComponent";
 import { Formik, Form, Field,} from "formik";
 import { InputComponent } from "../../../../../Components/Forms/Formik/InputComponent";
-// import { addDistributorOffer } from "../../ProductAction";
 
 function CurrencyCoversionForm2(props)  {
 

@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { ViewEditCard } from "../../../../Components/UI/Elements";
 import OrganizationAboutView from "./OrganizationAboutView";
 import OrganizationAboutEdit from "./OrganizationAboutEdit";
-import OrganizationAddressView from "./OrganizationAddressView";
 class OrganizationAboutCard extends Component {
   render() {
     const { organization } = this.props;

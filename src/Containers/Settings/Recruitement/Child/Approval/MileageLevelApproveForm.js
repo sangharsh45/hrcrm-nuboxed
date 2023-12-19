@@ -92,14 +92,16 @@ function MileageLevelApproveForm(props) {
   //   );
   // }
   function handleAddRowClick() {
-    // Disable adding more than 3 levels
+
     if (rows.length < 3) {
-      const newRow = { level: "", threshold: "",roleTypeId:"" };
+      const newRow = { level: "", threshold: "" };
       setRows((prevRows) => [...prevRows, newRow]);
     }
   }
-
-
+  // function handleAddRowClick() {
+  //   const newRow = { level: "", threshold: "" };
+  //   setRows((prevRows) => [...prevRows, newRow]);
+  // }
 
   function handleDelete(index) {
     setRows((prevRows) =>
@@ -114,10 +116,6 @@ function MileageLevelApproveForm(props) {
     // return <BundleLoader />;
   }
   function getRoleOptions(selectedDepartment) {
-    if (!selectedDepartment || props.roles.length === 0) {
-      return [];
-    }
-  
     const filteredRoles = props.roles
       .filter((role) => role.departmentName === selectedDepartment)
       .filter((option) => option.probability !== 0)
@@ -125,10 +123,9 @@ function MileageLevelApproveForm(props) {
         label: option.roleType,
         value: option.roleTypeId,
       }));
-  
+
     return filteredRoles;
   }
-  
   const roleNameOption = props.roles.map((item) => {
     return {
         label: `${item.roleType || ""}`,
@@ -165,40 +162,24 @@ function MileageLevelApproveForm(props) {
                 </div>
                 { row.level === "Management" ?
                 <div style={{ width: "100%" }}>
-               {/*  <Select
-                    name={`level_${index}`}
-                    value={row.roleTypeId}
-                    onChange={(value) => handleChangeRoleValue(value, index)}
-                  >
-                    {row.level === "Management" ?
-       props.roles.filter((role) => role.departmentName === selectedDepartment)
-       .filter((option) => option.probability !== 0).map((item) => (
-       <Option key={item.roleType} value={item.roleTypeId}>
-         {item.roleType}       </Option>
-     ))
-     :null}
-                  </Select> */}
-             
-              <Field
+                <Field
                       name="roleTypeId"
                       isRequired
-                      onChange={(value) => handleChangeRoleValue(value, index)}
+                      placeholder="Role"
                       value={row.roleTypeId}
                       isColumnWithoutNoCreate
-                     
-                      // disabled={!row.level.ReportingManager}
+                      // label="Role"
+                      onChange={(value) => handleChangeRoleValue(value, index)}
                       component={SelectComponent}
                       options={getRoleOptions(row.level)} 
-                      placeholder="Role"
+                   
                       isColumn
                       inlineLabel
                       style={{ flexBasis: "80%", marginTop: "0px", width: "100%" }}
-                    />  
-               
+                    /> 
                                                         </div>
-                                                         :null}
+                                                        :null}
                                                         </div>
-                                                       
                                                       
                 {/* <div className="w-24 ml-4 mr-4">
                   <p>Threshold</p>
@@ -213,7 +194,7 @@ function MileageLevelApproveForm(props) {
                     }
                   />
                 </div> */}
-                 <div class=" ml-4">
+ <div class=" ml-4">
                 {rows.length > 1 ? (
                   <CloseOutlined onClick={() => handleDelete(index)} />
                 ) : null}

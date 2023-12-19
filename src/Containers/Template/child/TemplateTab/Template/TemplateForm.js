@@ -1,7 +1,7 @@
-import React, { Component, useState, useEffect } from "react";
+import React, {  useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { Button,Switch } from "antd";
+import { Button, } from "antd";
 import { FormattedMessage } from "react-intl";
 import SearchSelect from "../../../../../Components/Forms/Formik/SearchSelect";
 import { Formik, Form, Field } from "formik";

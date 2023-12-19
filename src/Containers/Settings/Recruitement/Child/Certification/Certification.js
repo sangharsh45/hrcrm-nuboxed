@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { Button, Divider, message,Input } from "antd";
+import { Button, Input } from "antd";
 import { MainWrapper, FlexContainer } from "../../../../../Components/UI/Layout";
-import { TextInput, Title } from "../../../../../Components/UI/Elements";
+import { TextInput,} from "../../../../../Components/UI/Elements";
 import SingleCertification from "./SingleCertification";
 import {
   getCertification,
@@ -12,8 +12,6 @@ import {
   updateCertification,
   searchCertificationName,
 } from "../Certification/CertificationAction";
-import axios from "axios";
-import { base_url } from "../../../../../Config/Auth";
 import moment from "moment";
 
 class Certification extends Component {
@@ -176,7 +174,7 @@ class Certification extends Component {
             <FlexContainer flexDirection="column">
              
               <MainWrapper style={{ height: "30em"}}>
-                {certifications.length &&
+                {certifications.length ? (
                   certifications.map((certification, i) => (
                     <SingleCertification
                       key={i}
@@ -193,7 +191,10 @@ class Certification extends Component {
                       currentData={this.state.currentData}
                       setCurrentData={this.setCurrentData}
                     />
-                   ))} 
+                   ))
+                   ) : (
+                    <p>No Data Available</p>
+                  )}
               </MainWrapper>
             </FlexContainer>
             {isTextInputOpen ? (

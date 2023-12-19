@@ -7,8 +7,6 @@ import OrganizationAboutCard from "./OrganizationCards/OrganizationAboutCard";
 import OrganizationStatsCard from "./OrganizationCards/OrganizationStatsCard";
 import OrganizationDetailMap from "./OrganizationCards/OrganizationDetailMap";
 import OrganizationAddress from "./OrganizationCards/OrganizationAddress";
-// import OrganizationTopicOfIntrest from "./OrganizationCards/OrganizationTopicOfIntrest";
-// import OrgannizationTermsCard from "./OrganizationCards/OrganizationTermsCard";
 
 class OrganizationDetailLeft extends Component {
   render() {

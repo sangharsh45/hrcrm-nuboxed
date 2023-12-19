@@ -6,7 +6,7 @@ import { StyledTabs } from "../../../../../Components/UI/Antd";
 
 const TabPane = StyledTabs.TabPane;
 const TemplateForm = lazy(() => import("./TemplateForm"));
-const NotificationForm = lazy(() => import("./NotificationForm"));
+
 
 const AddTemplateModal = (props) => {
   return (

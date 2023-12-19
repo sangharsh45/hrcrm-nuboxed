@@ -1,11 +1,9 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 import { Button, Tooltip } from "antd";
-import EditableInput from "../../../Components/Forms/Edit/EditableInput";
 import { FlexContainer } from "../../../Components/UI/Layout";
 import { FormattedMessage } from "react-intl";
 import { TextInput } from "../../../Components/UI/Elements";
-import { ActionIcon } from "../../../Components/Utils";
 import DeleteIcon from '@mui/icons-material/Delete';
 import BorderColorIcon from '@mui/icons-material/BorderColor';
 import ViewEditCard from "../../../Components/UI/Elements/ViewEditCard";

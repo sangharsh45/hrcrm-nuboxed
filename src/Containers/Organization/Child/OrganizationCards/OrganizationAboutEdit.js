@@ -9,8 +9,6 @@ import { Spacer } from "../../../../Components/UI/Elements";
 import EditableInput from "../../../../Components/Forms/Edit/EditableInput";
 import EditableSelect from "../../../../Components/Forms/Edit/EditableSelect";
 import EditSearchSelect from "../../../../Components/Forms/Edit/EditSearchSelect";
-import EditLazySelect from "../../../../Components/Forms/Edit/EditLazySelect";
-import { base_url } from "../../../../Config/Auth";
 class OrganizationAboutEdit extends Component {
   constructor(props) {
     super(props);

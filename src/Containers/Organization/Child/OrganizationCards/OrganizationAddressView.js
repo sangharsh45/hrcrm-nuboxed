@@ -1,15 +1,7 @@
-import React, { Component,connect } from "react";
-import { Tooltip } from "antd";
-import { bindActionCreators } from "redux";
-import {
-  EditOutlined
-} from '@ant-design/icons';
+import React, { Component } from "react";
 import BorderColorIcon from '@mui/icons-material/Edit';
-import { ViewEditCard } from "../../../../Components/UI/Elements";
-import { FlexContainer,MainWrapper } from "../../../../Components/UI/Layout";
-import { Button } from "antd";
+import { FlexContainer, } from "../../../../Components/UI/Layout";
 import { SubTitle } from "../../../../Components/UI/Elements";
-import { FormattedMessage } from "react-intl";
 class OrganizationAddressView extends Component {
   render() {
     console.log(this.props.organization);

@@ -120,26 +120,19 @@
 // export default connect(mapStateToProps, mapDispatchToProps)(TemplateTab);
 
 
-import React, { Component, lazy, Suspense } from "react";
+import React, { Component, Suspense } from "react";
 import { connect } from "react-redux";
-import {
-  EyeInvisibleOutlined, PlusOutlined,
- 
-  
+import { PlusOutlined,  
 } from '@ant-design/icons';
 import { bindActionCreators } from "redux";
 import { StyledTabs } from "../../../../../Components/UI/Antd";
 import { TabsWrapper } from "../../../../../Components/UI/Layout";
-import { ActionIcon } from "../../../../../Components/Utils";
 import AddTemplateModal from "./AddTemplateModal";
 import AddTemplateNotificatonModal from "../AddTemplateNotificatonModal";
 import { handleTemplateModal,handleTemplateNotificatonModal } from "../../../../Rules/RulesAction";
 import TemplateTable from "./TemplateTable";
-import EmailandNotificationPanel from "./EmailandNotificationPanel";
-import NotificationTable from "./NotificationTable";
-import ActionTable from "./ActionTable";
-import { Button, Icon,Tooltip } from "antd";
-import MessageIcon from '@mui/icons-material/Message';
+import { Tooltip } from "antd";
+
 import DraftsIcon from '@mui/icons-material/Drafts';
 
 const TabPane = StyledTabs.TabPane;

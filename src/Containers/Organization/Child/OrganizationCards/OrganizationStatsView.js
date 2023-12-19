@@ -1,10 +1,6 @@
 import React, { Component } from "react";
-import { Divider } from "antd";
 import {
-  Title,
   SubTitle,
-  MultiAvatar,
-  StyledLabel,
 } from "../../../../Components/UI/Elements";
 import { FlexContainer } from "../../../../Components/UI/Layout";
 import BorderColorIcon from '@mui/icons-material/BorderColor';

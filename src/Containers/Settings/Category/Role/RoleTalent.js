@@ -1,21 +1,17 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { Button, Divider, message } from "antd";
+import { Button, } from "antd";
 import { MainWrapper, FlexContainer } from "../../../../Components/UI/Layout";
-import { TextInput, Title } from "../../../../Components/UI/Elements";
- import SingleRole from "./SingleRole";
+import { TextInput, } from "../../../../Components/UI/Elements";
  import { BundleLoader } from "../../../../Components/Placeholder";
 import {
     getTalentRoles,
     addTalentRoles,
     updateTalentRoles,
     removeTalentRole
-//   updateDepartments,
 } from "./RoleAction";
 
-import axios from "axios";
-// import { base_url } from "../../../Config/Auth";
 import { Select } from "../../../../Components/UI/Elements";
 import SingleRoleTalent from "./SingleRoleTalent";
 const { Option } = Select;
@@ -122,7 +118,7 @@ class RoleTalent extends Component {
             <FlexContainer flexDirection="column">
               {/* <Title style={{ padding: 8 }}>Designation</Title> */}
              <MainWrapper style={{ height: "30em", marginTop: "0.625em" }}>
-                {talentRoles.length &&
+                {talentRoles.length ? (
                   talentRoles.map((talentRole, i) => (
                     <SingleRoleTalent
                       key={i}
@@ -136,7 +132,10 @@ class RoleTalent extends Component {
                        handleUpdateTalentRole={this.handleUpdateTalentRole}
                       
                     />
-                  ))}
+                  ))
+                  ) : (
+                    <p>No Data Available</p>
+                  )}
               </MainWrapper> 
             </FlexContainer>
             {isTextInputOpen ? (

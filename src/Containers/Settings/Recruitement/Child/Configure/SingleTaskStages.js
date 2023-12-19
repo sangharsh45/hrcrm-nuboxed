@@ -14,8 +14,6 @@ import { connect } from "react-redux";
 import { deleteTaskStagesData } from "../../../../Settings/SettingsAction";
 import { bindActionCreators } from "redux";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { StyledPopconfirm } from "../../../../../Components/UI/Antd";
-import moment from "moment";
 const { Option } = Select;
 
 class SingleTaskStages extends Component {

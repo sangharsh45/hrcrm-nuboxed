@@ -4,7 +4,6 @@ import { bindActionCreators } from "redux";
 import { Button } from "antd";
 import { Formik, Form, Field } from "formik";
 import { SwitchComponent } from "../../../../../Components/Forms/Formik/SwitchComponent";
-import { FlexContainer } from "../../../../../Components/UI/Layout";
 import { StyledLabel } from "../../../../../Components/UI/Elements";
 import { SelectComponent } from "../../../../../Components/Forms/Formik/SelectComponent";
 import LevelApproveForm from "./LevelApproveForm";
@@ -174,7 +173,7 @@ import { FormattedMessage } from "react-intl";class ApproveForm extends Componen
                                                 <div class=" flex justify-between w-[30%]"
                                         
                                         >
-                                                    <div class=" w-[30%]">
+                                                    <div class=" w-[40%]">
 
                                                         <Field
                                                             name="approvalType"

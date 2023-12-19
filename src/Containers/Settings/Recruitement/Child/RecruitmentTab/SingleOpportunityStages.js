@@ -4,19 +4,14 @@ import { FormattedMessage } from "react-intl";
 import DeleteIcon from '@mui/icons-material/Delete';
 import BorderColorIcon from '@mui/icons-material/BorderColor';
 import {deleteOpportunityStagesData} from "../../../../Settings/SettingsAction";
-import { Button, Tooltip,Switch, Divider, Popconfirm } from "antd";
+import { Button, Tooltip, Popconfirm } from "antd";
 import { FlexContainer } from "../../../../../Components/UI/Layout";
-import { Formik, Form, Field,FastField } from "formik";
-import { TextInput, Spacer, Select } from "../../../../../Components/UI/Elements";
-import { ActionIcon } from "../../../../../Components/Utils";
+import { TextInput, Select } from "../../../../../Components/UI/Elements";
 import { elipsize } from "../../../../../Helpers/Function/Functions";
 import { ViewEditCard } from "../../../../../Components/UI/Elements";
-import { EditOutlined } from "@ant-design/icons";
-import AddApprovalModal from "./AddApprovalModal";
 import {handleApprovalModal,} from "../../../SettingsAction";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { StyledPopconfirm } from "../../../../../Components/UI/Antd";
 const { Option } = Select;
 
 class SingleOpportunityStages extends Component {

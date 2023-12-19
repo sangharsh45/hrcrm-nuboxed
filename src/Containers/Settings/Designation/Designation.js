@@ -2,10 +2,10 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { FormattedMessage } from "react-intl";
-import { Button, Divider, message,Input } from "antd";
+import { Button,Input } from "antd";
 import { BundleLoader } from "../../../Components/Placeholder";
 import { MainWrapper, FlexContainer } from "../../../Components/UI/Layout";
-import { TextInput, Title } from "../../../Components/UI/Elements";
+import { TextInput, } from "../../../Components/UI/Elements";
 import SingleDesignation from "./Child/SingleDesignation";
 import moment from "moment";
 import {
@@ -15,9 +15,6 @@ import {
   updateDesignations,
   searchDesignationName
 } from "./DesignationAction";
-import axios from "axios";
-import { base_url } from "../../../Config/Auth";
-import dayjs from "dayjs";
 
 class Designation extends Component {
   constructor(props) {

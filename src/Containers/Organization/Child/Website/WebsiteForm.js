@@ -7,7 +7,6 @@ import * as Yup from "yup";
 import { Spacer } from "../../../../Components/UI/Elements";
 import { InputComponent } from "../../../../Components/Forms/Formik/InputComponent";
 import { addWebsiteCredentials } from "../Website/WebsiteAction";
-// import { addEmailCredentialsForAdmin } from "../EmailAction";
 import { FlexContainer } from "../../../../Components/UI/Layout";
 /**
  * yup validation scheme for creating a Team

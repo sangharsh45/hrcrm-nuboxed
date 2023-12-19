@@ -3,10 +3,10 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { FormattedMessage } from "react-intl";
 import moment from "moment";
-import { Button, Divider, message,Input } from "antd";
+import { Button,Input } from "antd";
 import { BundleLoader } from "../../../Components/Placeholder";
 import { MainWrapper, FlexContainer } from "../../../Components/UI/Layout";
-import { TextInput, Title } from "../../../Components/UI/Elements";
+import { TextInput, } from "../../../Components/UI/Elements";
 import SingleDocuments from "./Child/SingleDocuments";
 import {
   getDocuments,
@@ -15,9 +15,7 @@ import {
   updateDocuments,
   searchDocumentsName,
 } from "./DocumentsAction";
-import axios from "axios";
-import { base_url } from "../../../Config/Auth";
-import dayjs from "dayjs";
+
 
 class Documents extends Component {
   constructor(props) {
@@ -143,7 +141,7 @@ class Documents extends Component {
         </div>
             <FlexContainer flexDirection="column">
               <MainWrapper style={{ height: "30em", marginTop: "0.62em" }}>
-                {documents.length &&
+                {documents.length ? (
                   documents.map((document, i) => (
                     <SingleDocuments
                       key={i}
@@ -160,7 +158,10 @@ class Documents extends Component {
                       currentData={this.state.currentData}
                       setCurrentData={this.setCurrentData}
                     />
-                  ))}
+                  ))
+                  ) : (
+                    <p>No Data Available</p>
+                  )}
               </MainWrapper>
             </FlexContainer>
             {isTextInputOpen ? (

@@ -539,7 +539,6 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Switch, Popconfirm } from "antd";
 import { FlexContainer, MainWrapper } from "../../../../../Components/UI/Layout";
-import { Spacer } from "../../../../../Components/UI/Elements";
 import { addingWeekendAccess, getWeekendAccess } from "../../../SettingsAction";
 import moment from "moment";
 

@@ -2,10 +2,10 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { FormattedMessage } from "react-intl";
-import { Button, Divider, message, Input } from "antd";
+import { Button, message, Input } from "antd";
 import { BundleLoader } from "../../../../Components/Placeholder";
 import { MainWrapper, FlexContainer } from "../../../../Components/UI/Layout";
-import { TextInput, Title } from "../../../../Components/UI/Elements";
+import { TextInput, } from "../../../../Components/UI/Elements";
 import {
     getBrandModel,
     addBrandModel,
@@ -138,7 +138,7 @@ class BrandModel extends Component {
                         <FlexContainer flexDirection="column">
                             {/* <Title style={{ padding: 8 }}>Types Of Documents</Title> */}
                             <MainWrapper style={{ height: "30em", marginTop: "0.625em" }}>
-                                {brandModel.length &&
+                                {brandModel.length ? (
                                     brandModel.map((brandmodel, i) => (
                                         <SingleBrandModel
                                             key={i}
@@ -153,7 +153,10 @@ class BrandModel extends Component {
                                             currentData={this.state.currentData}
                                             setCurrentData={this.setCurrentData}
                                         />
-                                    ))}
+                                    ))
+                                    ) : (
+                                        <p>No Data Available</p>
+                                      )}
                             </MainWrapper>
                         </FlexContainer>
                         {isTextInputOpen ? (

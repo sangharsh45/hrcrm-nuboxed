@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import styled from "styled-components";
-import { Button, Tooltip, Input } from "antd";
-import EditableInput from "../../../../Components/Forms/Edit/EditableInput";
+import { Button, Tooltip, } from "antd";
 import { FlexContainer } from "../../../../Components/UI/Layout";
 import { FormattedMessage } from "react-intl";
 import DeleteIcon from '@mui/icons-material/Delete';

@@ -2,17 +2,16 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { FormattedMessage } from "react-intl";
-import { Button, Divider, message, Input } from "antd";
+import { Button, Input } from "antd";
 import moment from "moment";
 import { BundleLoader } from "../../../../Components/Placeholder";
 import { MainWrapper, FlexContainer } from "../../../../Components/UI/Layout";
-import { TextInput, Title } from "../../../../Components/UI/Elements";
+import { TextInput, } from "../../../../Components/UI/Elements";
 import {
   getSources,
   addSources,
   removeSource,
   updateSource
-  // searchSectorName,
 } from "./SourceAction";
 import SingleSource from "./SingleSource";
 
@@ -166,7 +165,7 @@ class Source extends Component {
             <FlexContainer flexDirection="column">
               {/* <Title style={{ padding: 8 }}>Types Of Documents</Title> */}
              <MainWrapper style={{ height: "30em", marginTop: "0.625em" }}>
-                {sources.length &&
+                {sources.length ? (
                   sources.map((source, i) => (
                     <SingleSource
                       key={i}
@@ -183,7 +182,10 @@ class Source extends Component {
                       currentData={this.state.currentData}
                       setCurrentData={this.setCurrentData}
                     />
-                  ))}
+                  ))
+                  ) : (
+                    <p>No Data Available</p>
+                  )}
               </MainWrapper>
             </FlexContainer>
             {isTextInputOpen ? (

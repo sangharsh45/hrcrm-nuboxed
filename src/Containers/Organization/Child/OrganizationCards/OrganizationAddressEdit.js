@@ -7,8 +7,6 @@ import { editOrganizationDetails } from "../../../Auth/AuthAction";
 import { FlexContainer } from "../../../../Components/UI/Layout";
 import { Spacer } from "../../../../Components/UI/Elements";
 import EditableInput from "../../../../Components/Forms/Edit/EditableInput";
-import EditLazySelect from "../../../../Components/Forms/Edit/EditLazySelect";
-import { base_url } from "../../../../Config/Auth";
 class OrganizationAddressEdit extends Component {
   constructor(props) {
     super(props);

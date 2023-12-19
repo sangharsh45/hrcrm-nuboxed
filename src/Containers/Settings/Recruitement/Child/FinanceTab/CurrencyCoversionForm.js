@@ -1,14 +1,9 @@
-import React, { useState, useEffect, useMemo, Component } from "react";
+import React, {  } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Button } from "antd";
 import { SelectComponent } from "../../../../../Components/Forms/Formik/SelectComponent";
 import { Formik, Form, Field,} from "formik";
-import { FlexContainer } from "../../../../../Components/UI/Layout";
-import { Spacer } from "../../../../../Components/UI/Elements";
-import { InputComponent } from "../../../../../Components/Forms/Formik/InputComponent";
-import moment from "moment";
-// import { addDistributorOffer } from "../../ProductAction";
 
 function CurrencyCoversionForm(props)  {
 

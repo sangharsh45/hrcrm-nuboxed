@@ -9,17 +9,13 @@ import Matrix from "../Recruitement/Child/RecruitmentTab/Matrix"
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import Template from "../../Template/Template"
-import ReportScheduler from "./Child/ReportScheduler/ReportScheduler";
 import Access from "./Child/Access/Access";
 import General from "./Child/General/General";
 import Form from "./Child/RecruitmentTab/FormTab"
  import WorkFlow from "./Child/RecruitmentTab/WorkFlowTab";
 import SkillsTab from "../Library/SkillsTab";
-import NotificationsTab from "./Child/Notification/NotificationsTab";
 import ApprovalTab from "./Child/Approval/ApprovalTab";
 import SettingsHolidayTab from "./Child/Holiday/SettingsHolidayTab";
-import Rules from "../../Rules/Rules";
-import ConfigureTab from "./Child/Configure/ConfigureTab";
 import LeadsTab from "../../Rules/Child/RulesTab/LeadsTab";
 import LeadsConfigTab from "../LeadsConfig/LeadsConfigTab";
 import DistributionTab from "./Child/DistributionTab/DistributionTab";

@@ -6,9 +6,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import BorderColorIcon from '@mui/icons-material/BorderColor';
 import { FlexContainer } from "../../../Components/UI/Layout";
 import { TextInput } from "../../../Components/UI/Elements";
-import { ActionIcon } from "../../../Components/Utils";
 import ViewEditCard from "../../../Components/UI/Elements/ViewEditCard";
-import { EditOutlined } from "@ant-design/icons";
 
 class SingleLibrary extends Component {
   constructor(props) {

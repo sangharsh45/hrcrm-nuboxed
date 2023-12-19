@@ -1,18 +1,14 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
-import { FormattedMessage } from "react-intl";
 import { bindActionCreators } from "redux";
 import dayjs from "dayjs";
 import styled from "styled-components";
 import {
   MainWrapper,
-  Spacer,
-  TextInput,
 } from "../../../../../Components/UI/Elements";
 import {
   getTaskForRecruit,
-  // getTaskStagesForRecruit
 } from "../../../SettingsAction";
 import { FlexContainer } from "../../../../../Components/UI/Layout";
 import { StyledTabs } from "../../../../../Components/UI/Antd";

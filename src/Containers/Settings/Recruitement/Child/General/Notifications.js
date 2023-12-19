@@ -1,20 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { Formik, Form, Field } from "formik";
+import { Formik, Form,  } from "formik";
 import {
-  TextInput,
   Select,
   StyledLabel,
 } from "../../../../../Components/UI/Elements";
 import { MainWrapper, Spacer } from "../../../../../Components/UI/Elements";
-import { FormattedMessage } from "react-intl";
-import { SelectComponent } from "../../../../../Components/Forms/Formik/SelectComponent";
-import { Button, Popconfirm, Switch } from "antd";
-import { getRequirementsDuration } from "../../../../Settings/SettingsAction";
+import {  Popconfirm, Switch } from "antd";
 import { FlexContainer } from "../../../../../Components/UI/Layout";
 import { addingNotifications, getNotifications } from "../../../SettingsAction";
-import dayjs from "dayjs";
 import moment from "moment";
 const { Option } = Select;
 function Notifications(props) {

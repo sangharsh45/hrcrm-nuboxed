@@ -5,7 +5,7 @@ import { MainWrapper } from "../../../../Components/UI/Layout";
 import SingleCountry from "./SingleCountry";
 import { getCountry ,
   allCountryMandatory} from "../Country/CountryAction";
-import { Button, Input } from "antd";
+import { Button, } from "antd";
 import { BundleLoader } from "../../../../Components/Placeholder";
 
 
@@ -131,7 +131,7 @@ class Country extends Component {
                   ))}  */}
 
 {
-  country.length &&
+  country.length ? (
   [...country] 
     .sort((a, b) => a.country_name.localeCompare(b.country_name)) // Sort by the "name" property
     .map((singleCountry, i) => (
@@ -143,7 +143,9 @@ class Country extends Component {
         handleChange={this.handleChange}
       />
     ))
-}
+    ) : (
+      <p>No Data Available</p>
+    )}
 
 
 
