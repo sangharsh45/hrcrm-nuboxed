@@ -69,7 +69,7 @@ function SuppliesTable(props) {
             return (
               <>
                 <div
-                  className="flex rounded-xl justify-between bg-white mt-[0.5rem]  h-[2.75rem] items-center p-3">
+                  className="flex rounded-xl justify-center bg-white mt-[0.5rem]  h-[2.75rem]  p-3">
                   <div class=" flex flex-row justify-evenly w-wk max-sm:flex-col">
                     <div className=" flex font-medium flex-col md:w-44 max-sm:justify-between w-full max-sm:flex-row ">
                       <div class=" font-normal text-[0.82rem] text-cardBody font-poppins">
@@ -112,7 +112,7 @@ function SuppliesTable(props) {
                     <QrCode/>
                       </div>
                     </div>
-                    <div class="flex flex-col w-[3%] max-sm:flex-row max-sm:w-[10%]">
+                    <div class="flex flex-col w-[3%] justify-center max-sm:flex-row max-sm:w-[10%]">
                       <div>
                         <Tooltip>
                           <PhoneFilled
@@ -132,7 +132,7 @@ function SuppliesTable(props) {
                       
                       </div>
                     </div>
-                    <div class="flex flex-col w-[3%] max-sm:flex-row max-sm:w-[10%]">
+                    <div class="flex flex-col justify-center w-[3%] max-sm:flex-row max-sm:w-[10%]">
                       <div>
                       <Tooltip title="Edit">
                           <BorderColorIcon

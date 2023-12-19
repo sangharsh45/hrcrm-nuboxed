@@ -206,13 +206,16 @@ useEffect(() => {
                        
                        </div> 
                       </div>
+
                       <div className=" flex font-medium flex-col md:w-[1rem] max-sm:flex-row w-full max-sm:justify-between  ">
+                
+
 
 {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden"> Sector </h4> */}
 <h4 class=" text-xs text-cardBody font-poppins">
     <Tooltip title="Edit">
         <BorderColorIcon
-            style={{ color: "grey",fontSize:"0.8rem",padding:"2px",fontSize:"1rem" }}
+            style={{ color: "grey",fontSize:"0.8rem",padding:"2px",fontSize:"1rem",cursor:"pointer"}}
             onClick={() => {
               props.setEditDistributor(item)
               handleUpdateAccountModal(true);

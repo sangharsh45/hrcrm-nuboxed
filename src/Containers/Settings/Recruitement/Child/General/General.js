@@ -19,8 +19,8 @@ import Notifications from "./Notifications";
 import moment from "moment";
 const { Option } = Select;
 function General(props) {
-  const [anniversary, setAnniversary] = useState(false);
-  const [birthday, setBirthday] = useState(false);
+  const [anniversary, setAnniversary] = useState(props.requirementDuration.jobAniEmailInd);
+  const [birthday, setBirthday] = useState(props.requirementDuration.birthdayEmailInd);
 
   const handleAnniversay = (checked) => {
     setAnniversary(checked);
@@ -38,10 +38,13 @@ function General(props) {
       <Formik
         enableReinitialize
         initialValues={{
+          // jobAniEmailInd:props.requirementDuration.jobAniEmailInd,
           timePeriod: props.requirementDuration.timePeriod === 0 ? "Not Applicable" : props.requirementDuration.timePeriod || "",
           oppTimePeriod: props.requirementDuration.oppTimePeriod === 0 ? "Not Applicable" : props.requirementDuration.oppTimePeriod || "",
           userId: props.userId,
           orgId: props.organizationId,
+          jobAniEmailInd: props.requirementDuration.jobAniEmailInd,
+          birthdayEmailInd: props.requirementDuration.birthdayEmailInd,
           inspectionRequiredInd: props.requirementDuration.inspectionRequiredInd,
         }}
         onSubmit={(values) => {
@@ -55,8 +58,8 @@ function General(props) {
           props.updateRequirement(
             {
               ...values,
-              jobAniEmailInd:  anniversary ? true : false,
-              birthdayEmailInd:  birthday ? true : false,
+              // jobAniEmailInd:  anniversary ? true : false,
+              // birthdayEmailInd:  birthday ? true : false,
               timePeriod: values.timePeriod === "Not Applicable" ? "0" : values.timePeriod,
               oppTimePeriod: values.oppTimePeriod === "Not Applicable" ? "0" : values.oppTimePeriod,
             },
@@ -130,19 +133,21 @@ function General(props) {
                   >
                     <p style={{ minWidth: "-webkit-fill-available" }}>Auto Send Job Anniversary Email</p>
                     <div>
-    <Popconfirm
+    {/* <Popconfirm
       title="Do you wish to change the status?"
       onConfirm={() => handleAnniversay(!anniversary)}
       okText="Yes"
       cancelText="No"
-    >
-      <Switch
-        onChange={() => {}} 
-        checked={anniversary}
-        checkedChildren="Yes"
-        unCheckedChildren="No"
-      />
-    </Popconfirm>
+    > */}
+   <Field
+                        name="jobAniEmailInd"
+                        component={SwitchComponent}
+                        data={values.jobAniEmailInd}
+                        checkedChildren={"Yes"}
+                        unCheckedChildren={"No"}
+                        width={"5em"}
+                      />
+    {/* </Popconfirm> */}
   </div>
                   </div>
                   <Spacer />
@@ -155,19 +160,17 @@ function General(props) {
                   >
                     <p style={{ minWidth: "-webkit-fill-available" }}>Auto Send BirthDay Email</p>
                     <div>
-    <Popconfirm
-      title="Do you wish to change the status?"
-      onConfirm={() => handleBirthday(!birthday)}
-      okText="Yes"
-      cancelText="No"
-    >
-      <Switch
-        onChange={() => {}} 
-        checked={birthday}
-        checkedChildren="Yes"
-        unCheckedChildren="No"
-      />
-    </Popconfirm>
+
+                    <Field
+                        name="birthdayEmailInd"
+                        component={SwitchComponent}
+                        data={values.birthdayEmailInd}
+                        checkedChildren={"Yes"}
+                        unCheckedChildren={"No"}
+                        width={"5em"}
+                      />
+ 
+  
   </div>
                   </div>
                   <Spacer />
