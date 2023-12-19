@@ -91,7 +91,7 @@ function AccountDetailsTab(props) {
                             <AccountOrderTable distributorId={props.distributorData.distributorId} />
                         </Suspense>
                     </TabPane>
-                    <TabPane
+                    {/* <TabPane
                         tab={
                             <>
                                 <span onClick={() => handleOrderCreateClick(false)}>
@@ -168,7 +168,7 @@ function AccountDetailsTab(props) {
                                 <AccountOrder1Table />
                             </Suspense>
                         )}
-                    </TabPane>
+                    </TabPane> */}
                     <TabPane
                         tab={
                             <>

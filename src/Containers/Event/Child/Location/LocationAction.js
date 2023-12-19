@@ -240,7 +240,7 @@ export const setLocationViewType = (viewType) => (dispatch) => {
       type: types.GET_LOCATION_RECORDS_REQUEST,
     });
     axios
-      .get(`${base_url}/employee/count/${orgId}`, {
+      .get(`${base_url}/locationCount/${orgId}`, {
         headers: {
           Authorization: "Bearer " + sessionStorage.getItem("token") || "",
         },

@@ -22,7 +22,7 @@ const LocationActionLeft = (props) => {
       >
          <Badge
           size="small"
-           count={(props.viewType === "card" && props.recordData.locationCount) || 0}
+           count={(props.viewType === "card" && props.recordData.locCount) || 0}
           overflowCount={999}
         >
           <span
@@ -48,7 +48,7 @@ const LocationActionLeft = (props) => {
           <span
             onClick={() => props.setLocationViewType("map")}
             style={{
-              marginRight: "0.5rem",
+              marginLeft: "0.5rem",
               color: props.viewType === "map" && "#1890ff",
               fontSize: "1.0625em",
               cursor: "pointer",

@@ -440,7 +440,7 @@ useEffect(()=>{
       value={drop1}
       onChange={handleDrop1}
       disabled={!startInd}
-      style={{border:"0.5px solid lightgray "}}
+      style={{border:"0.5px solid lightgray ",height:"1.59rem"}}
       >
          {/* <option value="">Select</option> */}
         <option value="In Office">In Office</option>
