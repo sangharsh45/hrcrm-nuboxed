@@ -129,7 +129,7 @@ class Certification extends Component {
       linkedCertification,
     } = this.state;
     if (fetchingCertifications) return <p>Loading ...</p>;
-    if (fetchingCertificationsError) return <p>Error ...</p>;
+    // if (fetchingCertificationsError) return <p>Error ...</p>;
     return (
       <>
         <FlexContainer flexWrap="nowrap">
