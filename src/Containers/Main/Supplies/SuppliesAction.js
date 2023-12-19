@@ -385,3 +385,28 @@ export const getBrandModel = () => (dispatch) => {
           });
       });
 };
+export const getSuppliesCount = () => (dispatch) => {
+  dispatch({
+    type: types.GET_SUPPLIES_COUNT_REQUEST,
+  });
+  axios
+    .get(`${base_url2}/supplies/count`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.GET_SUPPLIES_COUNT_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err.response);
+      dispatch({
+        type: types.GET_SUPPLIES_COUNT_FAILURE,
+        payload: err,
+      });
+    });
+};

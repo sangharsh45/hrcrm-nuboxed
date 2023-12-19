@@ -15,12 +15,12 @@ class PaidButtonDrawer extends Component {
             <>
                 <StyledDrawer
                     title="Collection"
-                    width="50%"
+                    width="60%"
                     visible={addPaidButtonModal}
                     destroyOnClose
                     maskClosable={false}
                     maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}
-                    style={{marginTop:"5rem"}}
+                    style={{marginTop:"3rem"}}
                     onClose={() => handlePaidModal(false)}
                     footer={null}
                 >

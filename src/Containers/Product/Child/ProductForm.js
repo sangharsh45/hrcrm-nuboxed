@@ -346,7 +346,7 @@ class Productform extends Component {
                   width: "45%",
                 }}
               >
-                <Spacer style={{ marginTop: "0.625em" }} />
+                {/* <Spacer style={{ marginTop: "0.625em" }} />
                 <FlexContainer justifyContent="space-between">
                   <div style={{ width: "29%" }}>
                     <Field
@@ -468,7 +468,7 @@ class Productform extends Component {
                     />
                   </div>
                 </FlexContainer>
-                <Spacer style={{ marginTop: "1.25em" }} />
+                <Spacer style={{ marginTop: "1.25em" }} /> */}
 
                 <FlexContainer justifyContent="space-between">
                   <div style={{ width: "100%" }}>

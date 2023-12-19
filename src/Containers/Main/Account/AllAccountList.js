@@ -6,7 +6,7 @@ import { Tooltip, Input, Button, Space } from "antd";
 import { MainWrapper, Spacer } from "../../../Components/UI/Elements";
 import { SearchOutlined } from "@ant-design/icons";
 import Highlighter from "react-highlight-words";
-import { getAllDistributorsList } from "./AccountAction";
+import { getAllDistributorsList,emptyDistributor } from "./AccountAction";
 import APIFailed from "../../../Helpers/ErrorBoundary/APIFailed";
 import { CurrencySymbol } from "../../../Components/Common";
 // import { getAllSalesUser } from "../../../Leads/LeadsAction";
@@ -160,6 +160,9 @@ function AllAccountList(props) {
   function handleDistributorCheck() {
     setselectedRow([]);
   }
+  useEffect(() => {
+    return () => props.emptyDistributor();
+  }, []);
 
   const result = selectedRow.reduce((acc, item) => {
     acc = acc + item.totalPayableAmount;
@@ -382,7 +385,7 @@ const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
       getAllDistributorsList,
-      //getAllSalesUser,
+      emptyDistributor,
     },
     dispatch
   );
