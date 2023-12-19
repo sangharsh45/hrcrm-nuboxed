@@ -553,82 +553,82 @@ function ProductHistoryTable(props) {
         //     },
         // },
 
-        {
-            title: "",
-            width: "2%",
-            render: (name, item, i) => {
-                return {
-                    props: {
-                        style: {
-                            background:
-                                (distributorOfferHistory ||
-                                    showHistory ||
-                                    showDistributorHistory ||
-                                    customerOfferHistory) &&
-                                    productId === item.productId
-                                    ? "rgb(158 183 223)"
-                                    : null,
-                        },
-                    },
-                    children: (
-                        <span>
-                            <Tooltip title="Customer Discount History">
-                                <span
-                                    onClick={() => handleProductHistory(item.productId)}
-                                    style={{
-                                        color:
-                                            showHistory && item.productId === productId
-                                                ? "orange"
-                                                : "black",
-                                        cursor: "pointer",
-                                    }}
-                                > <ContactMailIcon/>
+        // {
+        //     title: "",
+        //     width: "2%",
+        //     render: (name, item, i) => {
+        //         return {
+        //             props: {
+        //                 style: {
+        //                     background:
+        //                         (distributorOfferHistory ||
+        //                             showHistory ||
+        //                             showDistributorHistory ||
+        //                             customerOfferHistory) &&
+        //                             productId === item.productId
+        //                             ? "rgb(158 183 223)"
+        //                             : null,
+        //                 },
+        //             },
+        //             children: (
+        //                 <span>
+        //                     <Tooltip title="Customer Discount History">
+        //                         <span
+        //                             onClick={() => handleProductHistory(item.productId)}
+        //                             style={{
+        //                                 color:
+        //                                     showHistory && item.productId === productId
+        //                                         ? "orange"
+        //                                         : "black",
+        //                                 cursor: "pointer",
+        //                             }}
+        //                         > <ContactMailIcon/>
 
-                                </span>
-                            </Tooltip>
-                        </span>
-                    ),
-                };
-            },
-        },
-        {
-            title: "",
-            width: "2%",
-            render: (name, item, i) => {
-                return {
-                    props: {
-                        style: {
-                            background:
-                                (distributorOfferHistory ||
-                                    showHistory ||
-                                    showDistributorHistory ||
-                                    customerOfferHistory) &&
-                                    productId === item.productId
-                                    ? "rgb(158 183 223)"
-                                    : null,
-                        },
-                    },
-                    children: (
-                        <span>
-                            <Tooltip title="Distributor Discount History">
-                                <span
-                                    onClick={() => handleDistributorHistory(item.productId)}
-                                    style={{
-                                        color:
-                                            showDistributorHistory && item.productId === productId
-                                                ? "orange"
-                                                : "black",
-                                        cursor: "pointer",
-                                    }}
-                                ><ApartmentIcon/>
+        //                         </span>
+        //                     </Tooltip>
+        //                 </span>
+        //             ),
+        //         };
+        //     },
+        // },
+        // {
+        //     title: "",
+        //     width: "2%",
+        //     render: (name, item, i) => {
+        //         return {
+        //             props: {
+        //                 style: {
+        //                     background:
+        //                         (distributorOfferHistory ||
+        //                             showHistory ||
+        //                             showDistributorHistory ||
+        //                             customerOfferHistory) &&
+        //                             productId === item.productId
+        //                             ? "rgb(158 183 223)"
+        //                             : null,
+        //                 },
+        //             },
+        //             children: (
+        //                 <span>
+        //                     <Tooltip title="Distributor Discount History">
+        //                         <span
+        //                             onClick={() => handleDistributorHistory(item.productId)}
+        //                             style={{
+        //                                 color:
+        //                                     showDistributorHistory && item.productId === productId
+        //                                         ? "orange"
+        //                                         : "black",
+        //                                 cursor: "pointer",
+        //                             }}
+        //                         ><ApartmentIcon/>
 
-                                </span>
-                            </Tooltip>
-                        </span>
-                    ),
-                };
-            },
-        },
+        //                         </span>
+        //                     </Tooltip>
+        //                 </span>
+        //             ),
+        //         };
+        //     },
+        // },
         // {
         //     title: "",
         //     width: "5%",
@@ -687,82 +687,82 @@ function ProductHistoryTable(props) {
         //         };
         //     },
         // },
-        {
-            title: "",
-            width: "2%",
-            render: (name, item, i) => {
-                return {
-                    props: {
-                        style: {
-                            background:
-                                (distributorOfferHistory ||
-                                    showHistory ||
-                                    showDistributorHistory ||
-                                    customerOfferHistory) &&
-                                    productId === item.productId
-                                    ? "rgb(158 183 223)"
-                                    : null,
-                        },
-                    },
-                    children: (
-                        <span>
-                            <Tooltip title="Customer Offer History">
-                                <span
-                                    onClick={() => handleCustomerOfferHistory(item.productId)}
-                                    style={{
-                                        color:
-                                            customerOfferHistory && item.productId === productId
-                                                ? "orange"
-                                                : "black",
-                                        cursor: "pointer",
-                                    }}
-                                ><ContactMailIcon/>
+        // {
+        //     title: "",
+        //     width: "2%",
+        //     render: (name, item, i) => {
+        //         return {
+        //             props: {
+        //                 style: {
+        //                     background:
+        //                         (distributorOfferHistory ||
+        //                             showHistory ||
+        //                             showDistributorHistory ||
+        //                             customerOfferHistory) &&
+        //                             productId === item.productId
+        //                             ? "rgb(158 183 223)"
+        //                             : null,
+        //                 },
+        //             },
+        //             children: (
+        //                 <span>
+        //                     <Tooltip title="Customer Offer History">
+        //                         <span
+        //                             onClick={() => handleCustomerOfferHistory(item.productId)}
+        //                             style={{
+        //                                 color:
+        //                                     customerOfferHistory && item.productId === productId
+        //                                         ? "orange"
+        //                                         : "black",
+        //                                 cursor: "pointer",
+        //                             }}
+        //                         ><ContactMailIcon/>
 
-                                </span>
-                            </Tooltip>
-                        </span>
-                    ),
-                };
-            },
-        },
-        {
-            title: "",
-            width: "2%",
-            render: (name, item, i) => {
-                return {
-                    props: {
-                        style: {
-                            background:
-                                (distributorOfferHistory ||
-                                    showHistory ||
-                                    showDistributorHistory ||
-                                    customerOfferHistory) &&
-                                    productId === item.productId
-                                    ? "rgb(158 183 223)"
-                                    : null,
-                        },
-                    },
-                    children: (
-                        <span>
-                            <Tooltip title="Distributor Offer History">
-                                <span
-                                    onClick={() => handleDistributorOfferHistory(item.productId)}
-                                    style={{
-                                        color:
-                                            distributorOfferHistory && item.productId === productId
-                                                ? "orange"
-                                                : "black",
-                                        cursor: "pointer",
-                                    }}
-                                ><ApartmentIcon/>
+        //                         </span>
+        //                     </Tooltip>
+        //                 </span>
+        //             ),
+        //         };
+        //     },
+        // },
+        // {
+        //     title: "",
+        //     width: "2%",
+        //     render: (name, item, i) => {
+        //         return {
+        //             props: {
+        //                 style: {
+        //                     background:
+        //                         (distributorOfferHistory ||
+        //                             showHistory ||
+        //                             showDistributorHistory ||
+        //                             customerOfferHistory) &&
+        //                             productId === item.productId
+        //                             ? "rgb(158 183 223)"
+        //                             : null,
+        //                 },
+        //             },
+        //             children: (
+        //                 <span>
+        //                     <Tooltip title="Distributor Offer History">
+        //                         <span
+        //                             onClick={() => handleDistributorOfferHistory(item.productId)}
+        //                             style={{
+        //                                 color:
+        //                                     distributorOfferHistory && item.productId === productId
+        //                                         ? "orange"
+        //                                         : "black",
+        //                                 cursor: "pointer",
+        //                             }}
+        //                         ><ApartmentIcon/>
 
-                                </span>
-                            </Tooltip>
-                        </span>
-                    ),
-                };
-            },
-        },
+        //                         </span>
+        //                     </Tooltip>
+        //                 </span>
+        //             ),
+        //         };
+        //     },
+        // },
         {
             title: "Website",
             width: "9%",

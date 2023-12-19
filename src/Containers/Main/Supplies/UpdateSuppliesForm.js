@@ -48,12 +48,17 @@ class UpdateSuppliesForm extends Component {
             subAttribute: "",
             subAttributeName:this.props.particularDiscountData.subAttributeName || "",
             subCategory: "",
-            subCategoryName: "",
+            subCategoryName: this.props.particularDiscountData.subCategoryName || "",
             price: 0,
             tax: 0,
             groupId: this.props.groupId,
             userId: this.props.userId,
-            currencyName: ""
+            currencyName: "",
+            grossWeight:this.props.particularDiscountData.grossWeight || "",
+            grossUnit:this.props.particularDiscountData.grossUnit || "",
+            netUnit:this.props.particularDiscountData.netUnit || "",
+            netWeight:this.props.particularDiscountData.netWeight || "",
+            reorder:this.props.particularDiscountData.reorder || "",
           }}
           validationSchema={SuppliesSchema}
           onSubmit={(values, { resetForm }) => {
@@ -92,6 +97,10 @@ class UpdateSuppliesForm extends Component {
                   </FlexContainer>
                   <Field
                     isRequired
+                    defaultValue={{
+                      label: this.props.particularDiscountData.categoryName,
+                      value: this.props.particularDiscountData.categoryName,
+                    }}
                     name="categoryName"
                     label="Category"
                     placeholder="Start typing to search or create..."
@@ -104,6 +113,10 @@ class UpdateSuppliesForm extends Component {
                     style={{ flexBasis: "80%" }}
                   />
                   <Field
+                  defaultValue={{
+                    label: this.props.particularDiscountData.subCategoryName,
+                    value: this.props.particularDiscountData.subCategoryName,
+                  }}
                     name="subCategoryName"
                     label="Sub Category"
                     placeholder="Start typing to search or create..."
@@ -117,6 +130,10 @@ class UpdateSuppliesForm extends Component {
                   <FlexContainer justifyContent="space-between">
                     <div style={{ width: "100%" }}>
                       <Field
+                       defaultValue={{
+                        label: this.props.particularDiscountData.attributeName,
+                        value: this.props.particularDiscountData.attributeName,
+                      }}
                         name="attributeName"
                         label="Attribute"
                         placeholder="Start typing to search or create..."
@@ -128,6 +145,10 @@ class UpdateSuppliesForm extends Component {
                         inlineLabel
                       />
                       <Field
+                          defaultValue={{
+                            label: this.props.particularDiscountData.subAttributeName,
+                            value: this.props.particularDiscountData.subAttributeName,
+                          }}
                         name="subAttributeName"
                         label="Sub Attribute"
                         placeholder="Start typing to search or create..."
