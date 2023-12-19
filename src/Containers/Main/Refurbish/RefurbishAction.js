@@ -1118,3 +1118,29 @@ export const getProductBuilderById = (productManufacturingId) => (dispatch) => {
       });
     });
 };
+// get all manufatureid by product and order id
+export const getAllManufatureIdById = (productManufacturingId) => (dispatch) => {
+  dispatch({
+    type: types.GET_ALL_MANUFATUREID_REQUEST,
+  });
+  axios
+    .get(`${base_url2}/order//${productManufacturingId}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.GET_ALL_MANUFATUREID_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.GET_ALL_MANUFATUREID_FAILURE,
+        payload: err,
+      });
+    });
+};

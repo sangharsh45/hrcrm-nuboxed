@@ -140,6 +140,10 @@ const initialState = {
   fetchingOrderByUserError: false,
   orderByUser: [],
 
+  fetchingAllManufaturedId: false,
+  fetchingAllManufaturedIdError: false,
+  allProductsByOrder: [],
+
   addingProduction: false,
   addingProductionError: false,
 
@@ -799,6 +803,21 @@ export const refurbishReducer = (state = initialState, action) => {
         ...state,
         fetchingProductBuilderById: false,
         fetchingProductBuilderByIdError: true,
+      };
+
+    case types.GET_ALL_MANUFATUREID_REQUEST:
+      return { ...state, fetchingAllManufaturedId: true };
+    case types.GET_ALL_MANUFATUREID_SUCCESS:
+      return {
+        ...state,
+        fetchingAllManufaturedId: false,
+        allProductsByOrder: action.payload,
+      };
+    case types.GET_ALL_MANUFATUREID_FAILURE:
+      return {
+        ...state,
+        fetchingAllManufaturedId: false,
+        fetchingAllManufaturedIdError: true,
       };
     default:
       return state;
