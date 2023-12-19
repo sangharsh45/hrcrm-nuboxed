@@ -5,15 +5,20 @@ import { connect } from 'react-redux'
 import { Button, Tooltip } from 'antd'
 import { StyledTable } from '../../../Components/UI/Antd'
 import TagBuilderInCatalogueProcess from "./TagBuilderInCatalogueProcess"
+import TaggedBuilderList from './TaggedBuilderList'
 
 const CatalogueListForOrder = (props) => {
     useEffect(() => {
         props.getCatalogueByUser(props.rowData.orderId, props.userId)
     }, [])
     const [row, setRow] = useState({})
+    const [show, setShow] = useState(false)
 
     const handleCatalogueList = (data) => {
         setRow(data)
+    }
+    const handleShowBuilder = () => {
+        setShow(!show)
     }
     const columns = [
         {
@@ -62,11 +67,12 @@ const CatalogueListForOrder = (props) => {
                             <Button
                                 style={{ backgroundColor: item.productManufacturingId === row.productManufacturingId ? "orange" : "green", color: "white" }}
                                 onClick={() => {
-                                    props.handleProductBuilderInProcess(true)
+                                    handleShowBuilder()
+                                    // props.handleProductBuilderInProcess(true)
                                     handleCatalogueList(item)
                                 }}
                             >
-                                Tag
+                                Tag Parts
                             </Button>
                         </Tooltip>
 
@@ -85,11 +91,12 @@ const CatalogueListForOrder = (props) => {
                 pagination={false}
                 scroll={{ y: 600 }}
             />
-            <TagBuilderInCatalogueProcess
+            {show && <TaggedBuilderList row={row} />}
+            {/* <TagBuilderInCatalogueProcess
                 handleProductBuilderInProcess={props.handleProductBuilderInProcess}
                 showProductBuilderList={props.showProductBuilderList}
                 row={row}
-            />
+            /> */}
         </>
     );
 }

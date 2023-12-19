@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { StyledTable } from "../../../../../Components/UI/Antd";
 import { getCatalogueListById } from "../../AccountAction";
+import CatalogueTableByProductId from "./CatalogueTableByProductId";
 
 
 function OrderCatalogueDetails(props) {
@@ -10,6 +11,13 @@ function OrderCatalogueDetails(props) {
         props.getCatalogueListById(props.particularRowData.orderId)
     }, [])
 
+    const [show, setShow] = useState(false)
+    const [data, setData] = useState({})
+
+    const handleNameClick = (item) => {
+        setShow(!show)
+        setData(item)
+    }
     const columns = [
         {
             title: "",
@@ -20,6 +28,16 @@ function OrderCatalogueDetails(props) {
             title: "Name",
             dataIndex: "name",
             width: "15%",
+            render: (text, item) => {
+                return (
+                    <>
+                        <span
+                            onClick={() => handleNameClick(item)}
+                            style={{ textDecoration: "underline", color: "blue" }}>
+                            {item.name}</span>
+                    </>
+                )
+            }
 
         },
         {
@@ -62,6 +80,7 @@ function OrderCatalogueDetails(props) {
             />
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            {show && <CatalogueTableByProductId data={data} />}
             {/* {expand && (
                 <DistributorPhoneTaskTable
                     phoneId={phoneId}
