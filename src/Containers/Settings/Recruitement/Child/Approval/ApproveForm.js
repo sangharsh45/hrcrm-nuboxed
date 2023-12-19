@@ -6,7 +6,6 @@ import { Formik, Form, Field } from "formik";
 import { SwitchComponent } from "../../../../../Components/Forms/Formik/SwitchComponent";
 import { FlexContainer } from "../../../../../Components/UI/Layout";
 import { StyledLabel } from "../../../../../Components/UI/Elements";
-import { Spacer } from "../../../../../Components/UI/Elements";
 import { SelectComponent } from "../../../../../Components/Forms/Formik/SelectComponent";
 import LevelApproveForm from "./LevelApproveForm";
  import { addApprove, getApproveData } from "../../../../Settings/SettingsAction";
@@ -132,23 +131,18 @@ import { FormattedMessage } from "react-intl";class ApproveForm extends Componen
                                 }}>
 
                                 <div>
-                                    <FlexContainer justifyContent="space-between">
-                                        <div
-                                            style={{
-                                                // marginTop: "35px",
-                                                width: "20%",
-                                                display: "flex",
-                                            }}
+                                    <div class=" flex justify-between">
+                                        <div class=" flex w-[20%]"
+                                     
                                         >
                                             <StyledLabel>Approval Needed</StyledLabel>
                                             &nbsp;&nbsp;
                                         </div>
 
-                                        <FlexContainer
-                                            justifyContent="space-between"
-                                            style={{ width: "30%" }}
+                                        <div class=" flex justify-between w-[30%]"
+                                        
                                         >
-                                            <div style={{ width: "30%" }}>
+                                            <div class=" w-[30%]">
 
                                                 <Field
                                                     name="approvalIndicator"
@@ -159,31 +153,28 @@ import { FormattedMessage } from "react-intl";class ApproveForm extends Componen
                                                     width={"5em"}
                                                 />
                                             </div>
-                                        </FlexContainer>
-                                    </FlexContainer>
+                                        </div>
+                                    </div>
                                 </div>
                                 {values.approvalIndicator ? (
-                                    <div>
-                                        <Spacer style={{ marginTop: "4%" }} />
+                                    <div class=" mt-4">
+                                     
                                      
                                         <div>
-                                            <FlexContainer justifyContent="space-between">
-                                                <div
-                                                    style={{
-                                                        marginBottom: "2%",
-                                                        width: "20%",
-                                                        display: "flex",
-                                                    }}
+                                        <div class=" flex justify-between "
+                                        
+                                        >
+                                                <div class=" flex w-[20%] mb-[2%]"
+                                              
                                                 >
                                                     <StyledLabel>Type</StyledLabel>
 
                                                 </div>
 
-                                                <FlexContainer
-                                                    justifyContent="space-between"
-                                                    style={{ width: "30%" }}
-                                                >
-                                                    <div style={{ width: "30%" }}>
+                                                <div class=" flex justify-between w-[30%]"
+                                        
+                                        >
+                                                    <div class=" w-[30%]">
 
                                                         <Field
                                                             name="approvalType"
@@ -191,15 +182,15 @@ import { FormattedMessage } from "react-intl";class ApproveForm extends Componen
                                                              data={values.approvalType}
                                                             checkedChildren={"Standard"}
                                                             unCheckedChildren={"Exception"}
-                                                            width={"6em"}
+                                                            width={"8em"}
                                                         />
 
                                                     </div>
-                                                </FlexContainer>
-                                            </FlexContainer>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <Spacer />
-                                        <div style={{ marginTop: "2%" }}>
+                          
+                                        <div class=" mt-4" >
                                             {values.approvalType ? (
                                                 <LevelApproveForm
                                                   
@@ -207,8 +198,8 @@ import { FormattedMessage } from "react-intl";class ApproveForm extends Componen
                                                     approvalType={values.approvalType ? "Standard" : "Exception"}
                                                 />
                                             ) : ( 
-                                                <FlexContainer justifyContent="space-between">
-                                                    <div style={{ width: "32%" }}>
+                                                <div class=" flex justify-between" >
+                                                    <div class=" w-[32%]">
                                                         <Field
                                                             name="departmentId"
                                                             label="Department"
@@ -222,7 +213,7 @@ import { FormattedMessage } from "react-intl";class ApproveForm extends Componen
                                                         />
                                                     </div>
 
-                                                    <div style={{ width: "32%" }}>
+                                                    <div class=" w-[32%]">
                                                     {/* <Field
                                                             name="roleTypeId"
                                                             label="Role"
@@ -271,7 +262,7 @@ import { FormattedMessage } from "react-intl";class ApproveForm extends Componen
                     // selectType="roleType"
                      />
                                                     </div>
-                                                    <div style={{ width: "32%" }}>
+                                                    {/* <div style={{ width: "32%" }}>
                                                         <Field
                                                             name="jobLevel"
                                                             label="Job Level"
@@ -282,16 +273,16 @@ import { FormattedMessage } from "react-intl";class ApproveForm extends Componen
                                                             inlineLabel
                                                             style={{ flexBasis: "80%", marginTop: "0px", width: "100%" }}
                                                         />
-                                                    </div>
-                                                </FlexContainer>
+                                                    </div> */}
+                                                </div>
                                             )} 
                                         </div>
 
-                                        <Spacer />
-                                        <Spacer />
+
                                         {!values.approvalType ?
-                                            <FlexContainer justifyContent="flex-end"
-                                                style={{ marginLeft: "104%", marginTop: "52px" }}>
+                                            <div class=" flex justify-end " 
+                                                // style={{ marginLeft: "104%", marginTop: "52px" }}
+                                                >
                                                 <Button
                                                     type="primary"
                                                     htmlType="submit"
@@ -304,7 +295,7 @@ import { FormattedMessage } from "react-intl";class ApproveForm extends Componen
                                                 >
                                                     Update
                                                 </Button>
-                                            </FlexContainer>
+                                            </div>
                                            : null}
                                     </div>
                                  ) : (null)} 

@@ -4,9 +4,7 @@ import { bindActionCreators } from "redux";
 import { Button } from "antd";
 import { Formik, Form, Field } from "formik";
 import { SwitchComponent } from "../../../../../Components/Forms/Formik/SwitchComponent";
-import { FlexContainer } from "../../../../../Components/UI/Layout";
 import { StyledLabel } from "../../../../../Components/UI/Elements";
-import { Spacer } from "../../../../../Components/UI/Elements";
 import { SelectComponent } from "../../../../../Components/Forms/Formik/SelectComponent";
  import { addApprove, getApproveData } from "../../../../Settings/SettingsAction";
 import {getDepartments} from "../../../Department/DepartmentAction"
@@ -134,23 +132,18 @@ class MileageApproveForm extends Component {
                                 }}>
 
                                 <div>
-                                    <FlexContainer justifyContent="space-between">
-                                        <div
-                                            style={{
-                                                // marginTop: "35px",
-                                                width: "20%",
-                                                display: "flex",
-                                            }}
+                                <div class=" flex justify-between">
+                                        <div class=" flex w-[20%]"
+                                     
                                         >
                                             <StyledLabel>Approval Needed</StyledLabel>
                                             &nbsp;&nbsp;
                                         </div>
 
-                                        <FlexContainer
-                                            justifyContent="space-between"
-                                            style={{ width: "30%" }}
+                                        <div class=" flex justify-between w-[30%]"
+                                        
                                         >
-                                            <div style={{ width: "30%" }}>
+                                            <div class=" w-[30%]">
 
                                                 <Field
                                                     name="approvalIndicator"
@@ -161,31 +154,28 @@ class MileageApproveForm extends Component {
                                                     width={"5em"}
                                                 />
                                             </div>
-                                        </FlexContainer>
-                                    </FlexContainer>
+                                        </div>
+                                    </div>
                                 </div>
                                 {values.approvalIndicator ? (
-                                    <div>
-                                        <Spacer style={{ marginTop: "4%" }} />
+                                     <div class=" mt-4">
+                                       
                                      
                                         <div>
-                                            <FlexContainer justifyContent="space-between">
-                                                <div
-                                                    style={{
-                                                        marginBottom: "2%",
-                                                        width: "20%",
-                                                        display: "flex",
-                                                    }}
+                                        <div class=" flex justify-between "
+                                        
+                                        >
+                                                <div class=" flex w-[20%] mb-[2%]"
+                                              
                                                 >
                                                     <StyledLabel>Type</StyledLabel>
 
                                                 </div>
 
-                                                <FlexContainer
-                                                    justifyContent="space-between"
-                                                    style={{ width: "30%" }}
-                                                >
-                                                    <div style={{ width: "30%" }}>
+                                                <div class=" flex justify-between w-[30%]"
+                                        
+                                        >
+                                                    <div class=" w-[30%]">
 
                                                         <Field
                                                             name="approvalType"
@@ -193,15 +183,15 @@ class MileageApproveForm extends Component {
                                                              data={values.approvalType}
                                                             checkedChildren={"Standard"}
                                                             unCheckedChildren={"Exception"}
-                                                            width={"6em"}
+                                                            width={"8em"}
                                                         />
 
                                                     </div>
-                                                </FlexContainer>
-                                            </FlexContainer>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <Spacer />
-                                        <div style={{ marginTop: "2%" }}>
+                                    
+                                        <div class=" mt-4" >
                                             {values.approvalType ? (
                                                 <MileageLevelApproveForm
                                                   
@@ -209,8 +199,8 @@ class MileageApproveForm extends Component {
                                                     approvalType={values.approvalType ? "Standard" : "Exception"}
                                                 />
                                             ) : ( 
-                                                <FlexContainer justifyContent="space-between">
-                                                    <div style={{ width: "32%" }}>
+                                                <div class=" flex justify-between" >
+                                                    <div class=" w-[32%]">
                                                         <Field
                                                             name="departmentId"
                                                             label="Department"
@@ -225,7 +215,7 @@ class MileageApproveForm extends Component {
                                                         />
                                                     </div>
 
-                                                    <div style={{ width: "32%" }}>
+                                                    <div class=" w-[32%]">
                                                     {/* <Field
                                                             name="roleTypeId"
                                                             label="Role"
@@ -274,27 +264,16 @@ class MileageApproveForm extends Component {
                     // selectType="roleType"
                      />
                                                     </div>
-                                                    <div style={{ width: "32%" }}>
-                                                        <Field
-                                                            name="jobLevel"
-                                                            label="Job Level"
-                                                            options={["1", "2", "3", "4", "5", "7", "8", "9", "10", "11", "12", "13", "14"]}
-                                                            component={SelectComponent}
-                                                            // placeholder
-                                                            isColumn
-                                                            inlineLabel
-                                                            style={{ flexBasis: "80%", marginTop: "0px", width: "100%" }}
-                                                        />
-                                                    </div>
-                                                </FlexContainer>
+                                                 
+                                                </div>
                                             )} 
                                         </div>
 
-                                        <Spacer />
-                                        <Spacer />
+                                   
                                         {!values.approvalType ?
-                                            <FlexContainer justifyContent="flex-end"
-                                                style={{ marginLeft: "104%", marginTop: "52px" }}>
+                                              <div class=" flex justify-end " 
+                                              // style={{ marginLeft: "104%", marginTop: "52px" }}
+                                              >
                                                 <Button
                                                     type="primary"
                                                     htmlType="submit"
@@ -307,7 +286,7 @@ class MileageApproveForm extends Component {
                                                 >
                                                     Update
                                                 </Button>
-                                            </FlexContainer>
+                                            </div>
                                            : null}
                                     </div>
                                  ) : (null)} 

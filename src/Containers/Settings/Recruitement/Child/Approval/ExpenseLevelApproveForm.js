@@ -10,8 +10,6 @@ import {
   addApprove,
   getApproveData,
 } from "../../../SettingsAction";
-import { InputComponent } from "../../../../../Components/Forms/Formik/InputComponent";
-import { BundleLoader } from "../../../../../Components/Placeholder";
 import { SelectComponent } from "../../../../../Components/Forms/Formik/SelectComponent";
 import { Field } from "formik";
 const { Option } = Select;
@@ -145,6 +143,7 @@ function ExpenseLevelApproveForm(props) {
                 <div style={{ width:"5rem"}}>
                 
                 </div>
+                { row.level === "Management" ?
                 <div style={{ width: "100%" }}>
                 <Field
                       name="roleTypeId"
@@ -161,6 +160,7 @@ function ExpenseLevelApproveForm(props) {
                       style={{ flexBasis: "80%", marginTop: "0px", width: "100%" }}
                     /> 
                                                         </div>
+                                                          :null}
                                                         </div>
                                                       
                 <div className="w-24 ml-4 mr-4">
