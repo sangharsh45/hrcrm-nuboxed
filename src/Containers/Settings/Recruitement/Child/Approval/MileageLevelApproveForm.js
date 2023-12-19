@@ -10,8 +10,6 @@ import {
   addApprove,
   getApproveData,
 } from "../../../SettingsAction";
-import { InputComponent } from "../../../../../Components/Forms/Formik/InputComponent";
-import { BundleLoader } from "../../../../../Components/Placeholder";
 import { SelectComponent } from "../../../../../Components/Forms/Formik/SelectComponent";
 import { Field } from "formik";
 const { Option } = Select;
@@ -161,6 +159,7 @@ function MileageLevelApproveForm(props) {
                 <div style={{ width:"5rem"}}>
                 
                 </div>
+                { row.level === "Management" ?
                 <div style={{ width: "100%" }}>
                {/*  <Select
                     name={`level_${index}`}
@@ -175,12 +174,15 @@ function MileageLevelApproveForm(props) {
      ))
      :null}
                   </Select> */}
-                <Field
+             
+              <Field
                       name="roleTypeId"
-                    value={row.roleTypeId}
+                      isRequired
+                      onChange={(value) => handleChangeRoleValue(value, index)}
+                      value={row.roleTypeId}
                       isColumnWithoutNoCreate
                       label="Role"
-                      onChange={(value) => handleChangeRoleValue(value, index)}
+                      // disabled={!row.level.ReportingManager}
                       component={SelectComponent}
                       options={getRoleOptions(row.level)} 
                       placeholder
@@ -188,10 +190,13 @@ function MileageLevelApproveForm(props) {
                       inlineLabel
                       style={{ flexBasis: "80%", marginTop: "0px", width: "100%" }}
                     />  
+               
                                                         </div>
+                                                         :null}
                                                         </div>
+                                                       
                                                       
-                <div className="w-24 ml-4 mr-4">
+                {/* <div className="w-24 ml-4 mr-4">
                   <p>Threshold</p>
                 </div>
                 <div style={{ width: "47%" }}>
@@ -203,7 +208,7 @@ function MileageLevelApproveForm(props) {
                       handleChangeValue1(e.target.value, index)
                     }
                   />
-                </div>
+                </div> */}
                 {rows.length > 1 ? (
                   <CloseOutlined onClick={() => handleDelete(index)} />
                 ) : null}

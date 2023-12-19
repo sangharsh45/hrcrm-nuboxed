@@ -108,6 +108,7 @@
     "video-react": "^0.13.6",
     "webpack": "^5.76.0",
     "webpack-dev-server": "^4.11.1",
+    "webrtc-adapter": "^8.2.3",
     "yup": "^1.0.2"
   },
   "scripts": {

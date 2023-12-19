@@ -1,10 +1,9 @@
-import React, { Component, lazy, useEffect } from "react";
+import React, { } from "react";
 import { StyledTabs } from "../../../../../Components/UI/Antd";
 import { TabsWrapper } from "../../../../../Components/UI/Layout";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import ApproveForm from "./ApproveForm";
-import ApproveTable from "./ApproveTable";
 import MileageApproveForm from "./MileageApproveForm";
 import ExpenseApproveForm from "./ExpenseApproveForm";
 import ContactUserForm from "./ContactUserForm";

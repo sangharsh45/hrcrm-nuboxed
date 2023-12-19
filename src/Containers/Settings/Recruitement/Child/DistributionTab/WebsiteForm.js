@@ -3,14 +3,12 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Formik, Form, Field } from "formik";
 import {
-  TextInput,
   Select,
-  StyledLabel,
 } from "../../../../../Components/UI/Elements";
 import { MainWrapper, Spacer } from "../../../../../Components/UI/Elements";
 import { FormattedMessage } from "react-intl";
 import { SelectComponent } from "../../../../../Components/Forms/Formik/SelectComponent";
-import { Button, Popconfirm, Switch } from "antd";
+import { Button, Switch } from "antd";
 import {
     websiteSingleMultiple,
     getDistributionAutomation,
@@ -23,8 +21,8 @@ const { Option } = Select;
 function WebsiteForm(props) {
 
     const [single, setSingle] = useState(false);
-    const [selectedDept, setSelectedDept] = useState('');
-  const [selectedUser, setSelectedUser] = useState('');
+    const [selectedDept, setSelectedDept] = useState(props.distributionAutomation.departmentId);
+  const [selectedUser, setSelectedUser] = useState(props.distributionAutomation.asignedTO);
 console.log("single",single)
     const handleSingleMultiple = (checked) =>{
         setSingle(checked)
@@ -205,7 +203,11 @@ const handleDeptChange = (event) => {
                   {/* Update */}
                 </Button>
               </FlexContainer>
-  
+              <h4 class="mt-4">
+                Updated on{" "}
+                {moment(props.distributionAutomation.updationDate).format("ll")} by{" "}
+                {props.distributionAutomation.updatedBy}
+              </h4>
         </Form>
       </MainWrapper>
         )}

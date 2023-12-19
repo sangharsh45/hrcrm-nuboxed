@@ -3,9 +3,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Formik, Form, Field } from "formik";
 import {
-  TextInput,
   Select,
-  StyledLabel,
 } from "../../../../../Components/UI/Elements";
 import { SwitchComponent } from "../../../../../Components/Forms/Formik/SwitchComponent";
 import { MainWrapper, Spacer } from "../../../../../Components/UI/Elements";
@@ -15,15 +13,21 @@ import { Button, Popconfirm, Switch } from "antd";
 import {
   updateRequirement,
   getRequirementsDuration,
-  // updateOpportunity,
-  // getRequirementsDuration,
 } from "../../../../Settings/SettingsAction";
 import { FlexContainer } from "../../../../../Components/UI/Layout";
 import Notifications from "./Notifications";
-import dayjs from "dayjs";
 import moment from "moment";
 const { Option } = Select;
 function General(props) {
+  const [anniversary, setAnniversary] = useState(false);
+  const [birthday, setBirthday] = useState(false);
+
+  const handleAnniversay = (checked) => {
+    setAnniversary(checked);
+  };
+  const handleBirthday = (checked) => {
+    setBirthday(checked);
+  };
   useEffect(() => {
     props.getRequirementsDuration(props.orgId);
   }, []);
@@ -35,7 +39,7 @@ function General(props) {
         enableReinitialize
         initialValues={{
           timePeriod: props.requirementDuration.timePeriod === 0 ? "Not Applicable" : props.requirementDuration.timePeriod || "",
-          orderTimePeriod: props.requirementDuration.orderTimePeriod === 0 ? "Not Applicable" : props.requirementDuration.orderTimePeriod || "",
+          oppTimePeriod: props.requirementDuration.oppTimePeriod === 0 ? "Not Applicable" : props.requirementDuration.oppTimePeriod || "",
           userId: props.userId,
           orgId: props.organizationId,
           inspectionRequiredInd: props.requirementDuration.inspectionRequiredInd,
@@ -51,16 +55,17 @@ function General(props) {
           props.updateRequirement(
             {
               ...values,
-
+              jobAniEmailInd:  anniversary ? true : false,
+              birthdayEmailInd:  birthday ? true : false,
               timePeriod: values.timePeriod === "Not Applicable" ? "0" : values.timePeriod,
-              orderTimePeriod: values.orderTimePeriod === "Not Applicable" ? "0" : values.orderTimePeriod,
+              oppTimePeriod: values.oppTimePeriod === "Not Applicable" ? "0" : values.oppTimePeriod,
             },
             props.orgId
           );
         }}
       >
         {({ values }) => (
-          <MainWrapper style={{ height: "446px", width: "", overflow: "auto" }}>
+          <MainWrapper style={{ height: "525px", width: "", overflow: "auto" }}>
             <Form className="form-background">
               <FlexContainer
                 justifyContent="space-between"
@@ -106,7 +111,7 @@ function General(props) {
                     <p style={{ minWidth: "-webkit-fill-available" }}>Auto drop Open Opportunities (in months)</p>
                     <div>
                       <Field
-                        name="orderTimePeriod"
+                        name="oppTimePeriod"
                         style={{ width: "10rem" }}
                         component={SelectComponent}
                         options={["1", "2", "3", "4", "5", "Not Applicable"]}
@@ -125,21 +130,20 @@ function General(props) {
                   >
                     <p style={{ minWidth: "-webkit-fill-available" }}>Auto Send Job Anniversary Email</p>
                     <div>
-                      <Popconfirm
-                        title="Do you wish to change Status ? "
-                        // onConfirm={handleAppClick}
-                        // onCancel={handleCancel}
-                        okText="Yes"
-                        cancelText="No"
-                      >
-                        <Switch
-                          style={{ width: "5em" }}
-                          // checked={toggle || inappInd}
-                          checkedChildren="Yes"
-                          unCheckedChildren="No"
-                        />
-                      </Popconfirm>
-                    </div>
+    <Popconfirm
+      title="Do you wish to change the status?"
+      onConfirm={() => handleAnniversay(!anniversary)}
+      okText="Yes"
+      cancelText="No"
+    >
+      <Switch
+        onChange={() => {}} 
+        checked={anniversary}
+        checkedChildren="Yes"
+        unCheckedChildren="No"
+      />
+    </Popconfirm>
+  </div>
                   </div>
                   <Spacer />
                   <div
@@ -151,21 +155,20 @@ function General(props) {
                   >
                     <p style={{ minWidth: "-webkit-fill-available" }}>Auto Send BirthDay Email</p>
                     <div>
-                      <Popconfirm
-                        title="Do you wish to change Status ? "
-                        // onConfirm={handleAppClick}
-                        // onCancel={handleCancel}
-                        okText="Yes"
-                        cancelText="No"
-                      >
-                        <Switch
-                          style={{ width: "5em" }}
-                          // checked={toggle || inappInd}
-                          checkedChildren="Yes"
-                          unCheckedChildren="No"
-                        />
-                      </Popconfirm>
-                    </div>
+    <Popconfirm
+      title="Do you wish to change the status?"
+      onConfirm={() => handleBirthday(!birthday)}
+      okText="Yes"
+      cancelText="No"
+    >
+      <Switch
+        onChange={() => {}} 
+        checked={birthday}
+        checkedChildren="Yes"
+        unCheckedChildren="No"
+      />
+    </Popconfirm>
+  </div>
                   </div>
                   <Spacer />
                   <div
@@ -190,7 +193,7 @@ function General(props) {
                   <Spacer />
                 </div>
               </FlexContainer>
-              <h4>
+              <h4 class="mt-4">
                 Updated on{" "}
                 {moment(props.requirementDuration.creationDate).format("ll")} by{" "}
                 {props.requirementDuration.ownerName}
