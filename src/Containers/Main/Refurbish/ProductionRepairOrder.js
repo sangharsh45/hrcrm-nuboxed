@@ -202,7 +202,7 @@ function ProductionRepairOrder(props) {
                         const date = moment(item.creationDate).format("DD/MM/YYYY");
                         return (
                             <div>
-                                <div className="flex rounded-xl justify-between mt-4 bg-white h-12 items-center p-3 "
+                                <div className="flex rounded-xl justify-between mt-2 bg-white h-[2.75rem] items-center p-3 "
 
                                 >
                                     <div class="flex">

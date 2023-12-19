@@ -11,12 +11,12 @@ const TaggedBuilderListModal = (props) => {
         <>
             <StyledDrawer
                 title={`Tagged Parts- ${props.row.productManufacturingId}`}
-                width="60vw"
+                width="60%"
                 visible={props.showProductBuilderList}
                 closable
                 destroyOnClose
                 maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}
-                style={{ top: 40 }}
+                style={{marginTop:"3rem" }}
                 onClose={() => props.handleProductBuilderInProcess(false)}
                 footer={null}
             >

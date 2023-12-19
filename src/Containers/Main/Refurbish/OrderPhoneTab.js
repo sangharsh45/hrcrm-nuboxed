@@ -59,10 +59,13 @@ const OrderPhoneTab = (props) => {
                     tab={
                         <>
                             <span onClick={handleMainRepair}>
-                                <BorderColorIcon />&nbsp; Process
+                                {/* <BorderColorIcon />&nbsp; */}
+                                 Process
                             </span>
                             &nbsp;&nbsp;
-                            <span onClick={handleOpenRepair}> <FolderOpenTwoTone /></span>
+                            <span onClick={handleOpenRepair}> 
+                            {/* <FolderOpenTwoTone /> */}
+                            </span>
 
                         </>
                     }

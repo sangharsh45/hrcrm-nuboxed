@@ -4,6 +4,7 @@ import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import {  AppstoreOutlined, DeleteOutlined } from "@ant-design/icons";
 import { Tooltip,Badge } from "antd";
+import TocIcon from '@mui/icons-material/Toc';
 import { getSuppliesCount } from "./SuppliesAction";
 class SuppliesActionLeft extends React.Component {
    
@@ -27,9 +28,9 @@ class SuppliesActionLeft extends React.Component {
         count={(viewType === "all" && suppliesCount.count) || 0}
         overflowCount={999}
       >
-                    <AppstoreOutlined
+                    <TocIcon
                         style={{
-                            marginRight: "0.3rem",
+                            fontSize: "1.4rem",
                             color: viewType === "all" && "#1890ff",
                         }}
                         // iconType="appstore-o"
