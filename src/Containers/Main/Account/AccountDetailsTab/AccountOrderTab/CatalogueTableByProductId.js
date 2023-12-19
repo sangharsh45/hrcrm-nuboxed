@@ -1,13 +1,20 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { StyledTable } from "../../../../../Components/UI/Antd";
 import { getAllManufatureIdById } from "../../../Refurbish/RefurbishAction"
+import { handleProductBuilderInProcess } from "../../../Refurbish/RefurbishAction"
+import TaggedBuilderListModal from './TaggedBuilderListModal';
 
 const CatalogueTableByProductId = (props) => {
     useEffect(() => {
-        props.getAllManufatureIdById(props.data.productId)
+        props.getAllManufatureIdById(props.orderId, props.data.productId)
     }, [])
+    const [row, setRow] = useState({})
+
+    const handleIDClick = (item) => {
+        setRow(item)
+    }
     const columns = [
         {
             title: "",
@@ -15,20 +22,37 @@ const CatalogueTableByProductId = (props) => {
             width: "1%",
         },
         {
-            title: "Name",
-            dataIndex: "name",
+            title: "ID #",
+            dataIndex: "productManufacturingId",
             width: "15%",
             render: (text, item) => {
                 return (
                     <>
                         <span
-                            // onClick={handleNameClick}
-                            style={{ textDecoration: "underline", color: "blue" }}>
-                            {item.name}</span>
+                            onClick={() => {
+                                handleIDClick(item);
+                                props.handleProductBuilderInProcess(true)
+                            }}
+                            style={{
+                                textDecoration: "underline",
+                                color: row.productManufacturingId === item.productManufacturingId ? "red" : "blue",
+                                cursor: "pointer"
+                            }}>
+                            {item.productManufacturingId}</span>
                     </>
                 )
             }
 
+        },
+        {
+            title: "Name",
+            dataIndex: "name",
+            width: "12%",
+        },
+        {
+            title: "Technician",
+            dataIndex: "technicianName",
+            width: "10%",
         },
         {
             title: "Category",
@@ -61,17 +85,24 @@ const CatalogueTableByProductId = (props) => {
                 pagination={false}
                 scroll={{ y: 600 }}
             />
+            <TaggedBuilderListModal
+                row={row}
+                handleProductBuilderInProcess={props.handleProductBuilderInProcess}
+                showProductBuilderList={props.showProductBuilderList}
+            />
         </>
     );
 }
 const mapStateToProps = ({ refurbish }) => ({
-    allProductsByOrder: refurbish.allProductsByOrder
+    allProductsByOrder: refurbish.allProductsByOrder,
+    showProductBuilderList: refurbish.showProductBuilderList
 });
 
 const mapDispatchToProps = (dispatch) =>
     bindActionCreators(
         {
-            getAllManufatureIdById
+            getAllManufatureIdById,
+            handleProductBuilderInProcess
         },
         dispatch
     );

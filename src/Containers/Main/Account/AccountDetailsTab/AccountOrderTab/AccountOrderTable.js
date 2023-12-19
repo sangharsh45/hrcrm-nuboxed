@@ -168,8 +168,8 @@ const AccountOrderTable = (props) => {
                         <div className=" md:w-[6.4rem]">Order No</div>
                         <div className=" md:w-[5.1rem]">Created</div>
                         <div className=" md:w-[5.8rem] ">Location</div>
-                        <div className="md:w-[4.9rem]">Phones#</div>
-                        <div className="md:w-[3.8rem]">AWB</div>
+                        <div className="md:w-[4.9rem]">Units</div>
+                        {/* <div className="md:w-[3.8rem]">AWB</div> */}
                         <div className="md:w-[2.9rem]">Contact</div>
                         <div className="md:w-[6.12rem]">Expected Price </div>
                         <div className="md:w-[4.3rem]">Final Price</div>
@@ -315,14 +315,12 @@ const AccountOrderTable = (props) => {
 
 
 
-                                            <div className=" flex font-medium flex-col  md:w-[5.5rem] max-sm:flex-row w-full max-sm:justify-between  ">
-
-                                                {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden"> Sector </h4> */}
-                                                <h4 class=" text-xs text-cardBody font-poppins">
+                                            {/* <div className=" flex font-medium flex-col  md:w-[5.5rem] max-sm:flex-row w-full max-sm:justify-between  ">
+                                          <h4 class=" text-xs text-cardBody font-poppins">
                                                     {item.awbNo}
                                                 </h4>
 
-                                            </div>
+                                            </div> */}
                                             <div className=" flex font-medium flex-col  md:w-[4.3rem] max-sm:flex-row w-full max-sm:justify-between  ">
 
                                                 {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden"> Sector </h4> */}

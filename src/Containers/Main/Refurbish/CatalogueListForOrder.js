@@ -4,7 +4,6 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { Button, Tooltip } from 'antd'
 import { StyledTable } from '../../../Components/UI/Antd'
-import TagBuilderInCatalogueProcess from "./TagBuilderInCatalogueProcess"
 import TaggedBuilderList from './TaggedBuilderList'
 
 const CatalogueListForOrder = (props) => {
@@ -37,11 +36,13 @@ const CatalogueListForOrder = (props) => {
             width: "12%",
 
         },
+
         {
             title: "Category",
             dataIndex: "categoryName",
             width: "7%",
         },
+
         {
             title: "Sub Category",
             dataIndex: "subCategoryName",
