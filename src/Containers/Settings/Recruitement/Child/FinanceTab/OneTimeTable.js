@@ -1,10 +1,9 @@
 import { EditOutlined } from "@ant-design/icons";
-import { Tooltip,Input, Popconfirm, Space ,Button, Form,Typography } from "antd";
+import { Input, Popconfirm ,Button, Form,Typography } from "antd";
 import React, { useState,useEffect } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { StyledModal, StyledTable } from "../../../../../Components/UI/Antd";
-// import { getOneTimeDeliveryCharge,addOneTimeDeliveryCharge } from "../../../RulesAction";
+import { StyledTable } from "../../../../../Components/UI/Antd";
 import { Select } from "../../../../../Components/UI/Elements";
 const { Option } = Select;
 const ButtonGroup = Button.Group;

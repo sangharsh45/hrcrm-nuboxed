@@ -2,10 +2,10 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { FormattedMessage } from "react-intl";
 import { bindActionCreators } from "redux";
-import { Button, Divider, message,Input } from "antd";
+import { Button,Input } from "antd";
 import { BundleLoader } from "../../../Components/Placeholder";
 import { MainWrapper, FlexContainer } from "../../../Components/UI/Layout";
-import { TextInput, Title } from "../../../Components/UI/Elements";
+import { TextInput, } from "../../../Components/UI/Elements";
 import SingleEvent from "./SingleEvent";
 import moment from "moment";
 import {
@@ -15,9 +15,6 @@ import {
   updateEvents,
   searchEventName,
 } from "./EventAction";
-import axios from "axios";
-import { base_url } from "../../../Config/Auth";
-import dayjs from "dayjs";
 
 class Event extends Component {
   constructor(props) {
@@ -167,7 +164,7 @@ class Event extends Component {
             <FlexContainer flexDirection="column">
               {/* <Title style={{ padding: 8 }}>Designation</Title> */}
               <MainWrapper style={{ height: "30em", marginTop: "0.625em" }}>
-                {events.length &&
+                {events.length ? (
                   events.map((event, i) => (
                     <SingleEvent
                       key={i}
@@ -184,7 +181,10 @@ class Event extends Component {
                       setCurrentData={this.setCurrentData}
                      handleDeleteEvent={this.handleDeleteEvent}
                     />
-                  ))}
+                  ))
+                  ) : (
+                    <p>No Data Available</p>
+                  )}
               </MainWrapper>
             </FlexContainer>
             {isTextInputOpen ? (

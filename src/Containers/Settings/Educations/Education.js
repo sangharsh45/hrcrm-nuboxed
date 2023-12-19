@@ -2,12 +2,11 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { FormattedMessage } from "react-intl";
-import { Button, Divider, message,Input } from "antd";
+import { Button, message,Input } from "antd";
 import { MainWrapper, FlexContainer } from "../../../Components/UI/Layout";
 import { TextInput, Title } from "../../../Components/UI/Elements";
 import SingleEducations from "./SingleEducation";
 import { BundleLoader } from "../../../Components/Placeholder";
-// import * as Yup from "yup";
 import {
   getEducations,
   addEducations,
@@ -15,10 +14,7 @@ import {
   updateEducations,
   searchEducationsName
 } from "./EducationAction";
-import axios from "axios";
-import { base_url } from "../../../Config/Auth";
 import moment from "moment";
-import dayjs from "dayjs";
 
 // const SectorsSchema = Yup.object().shape({
 //   sectorName: Yup.string().required("Input needed !"),
@@ -170,7 +166,7 @@ class Education extends Component {
         </div>
             <FlexContainer flexDirection="column">
               <MainWrapper style={{ height: "30em", marginTop: "0.625em" }}>
-                {educations.length &&
+                {educations.length ? (
                   educations.map((education, i) => (
                     <SingleEducations
                       key={i}
@@ -187,7 +183,10 @@ class Education extends Component {
                       setCurrentData={this.setCurrentData}
                       handleDeleteEducation={this.handleDeleteEducation}
                     />
-                  ))}
+                  ))
+                  ) : (
+                    <p>No Data Available</p>
+                  )}
               </MainWrapper>
             </FlexContainer>
             {isTextInputOpen ? (

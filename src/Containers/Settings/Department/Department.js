@@ -2,10 +2,10 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { FormattedMessage } from "react-intl";
 import { bindActionCreators } from "redux";
-import { Button, message,Input } from "antd";
+import { Button,Input } from "antd";
 import { BundleLoader } from "../../../Components/Placeholder";
 import { MainWrapper, FlexContainer } from "../../../Components/UI/Layout";
-import { TextInput, Title } from "../../../Components/UI/Elements";
+import { TextInput,  } from "../../../Components/UI/Elements";
 import SingleDepartment from "./SingleDepartment";
 import {
   getDepartments,
@@ -184,7 +184,7 @@ class Department extends Component {
             <FlexContainer flexDirection="column">
               {/* <Title style={{ padding: 8 }}>Designation</Title> */}
               <MainWrapper style={{ height: "30em", marginTop: "0.625em" }}>
-                {departments.length &&
+                {departments.length ? (
                   departments.map((department, i) => (
                     <SingleDepartment
                       key={i}
@@ -203,7 +203,11 @@ class Department extends Component {
                       setCurrentData={this.setCurrentData}
                      handleDeleteDepartment={this.handleDeleteDepartment}
                     />
-                  ))}
+                  ))
+                  ) : (
+                    <p>No Data Available</p>
+                  )}
+
               </MainWrapper>
             </FlexContainer>
             {isTextInputOpen ? (

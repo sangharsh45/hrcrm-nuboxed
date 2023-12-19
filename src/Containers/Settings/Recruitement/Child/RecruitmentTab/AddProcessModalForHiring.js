@@ -1,4 +1,4 @@
-import React, { lazy, Suspense } from "react";
+import React, {  Suspense } from "react";
 import { connect } from "react-redux";
 import { FormattedMessage } from "react-intl";
 import { bindActionCreators } from "redux";

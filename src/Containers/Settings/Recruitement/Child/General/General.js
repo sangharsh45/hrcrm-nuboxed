@@ -9,7 +9,7 @@ import { SwitchComponent } from "../../../../../Components/Forms/Formik/SwitchCo
 import { MainWrapper, Spacer } from "../../../../../Components/UI/Elements";
 import { FormattedMessage } from "react-intl";
 import { SelectComponent } from "../../../../../Components/Forms/Formik/SelectComponent";
-import { Button, Popconfirm, Switch } from "antd";
+import { Button,  } from "antd";
 import {
   updateRequirement,
   getRequirementsDuration,

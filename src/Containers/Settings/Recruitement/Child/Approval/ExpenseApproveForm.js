@@ -172,7 +172,7 @@ import ExpenseLevelApproveForm from "./ExpenseLevelApproveForm";class ExpenseApp
                                                 <div class=" flex justify-between w-[30%]"
                                         
                                         >
-                                                    <div class=" w-[30%]">
+                                                       <div class=" w-[40%]">
 
                                                         <Field
                                                             name="approvalType"

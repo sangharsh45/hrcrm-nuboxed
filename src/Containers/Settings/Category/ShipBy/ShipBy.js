@@ -12,7 +12,6 @@ import {
   addShipBy,
   removeShipBy,
   updateShipBy
-  // searchSectorName,
 } from "../ShipBy/ShipByAction";
 import SingleShipBy from "./SingleShipBy";
 
@@ -152,7 +151,7 @@ class ShipBy extends Component {
             <FlexContainer flexDirection="column">
               {/* <Title style={{ padding: 8 }}>Types Of Documents</Title> */}
              <MainWrapper style={{ height: "30em", marginTop: "0.625em" }}>
-                {ShipByData.length &&
+                {ShipByData.length ? (
                   ShipByData.map((ship, i) => (
                     <SingleShipBy
                       key={i}
@@ -169,7 +168,10 @@ class ShipBy extends Component {
                       currentData={this.state.currentData}
                       setCurrentData={this.setCurrentData}
                     />
-                  ))}
+                  ))
+                  ) : (
+                    <p>No Data Available</p>
+                  )}
               </MainWrapper>
             </FlexContainer>
             {isTextInputOpen ? (

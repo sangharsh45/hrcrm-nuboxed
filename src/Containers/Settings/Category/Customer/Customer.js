@@ -2,17 +2,16 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { FormattedMessage } from "react-intl";
-import { Button, Divider, message, Input } from "antd";
+import { Button, Input } from "antd";
 import moment from "moment";
 import { BundleLoader } from "../../../../Components/Placeholder";
 import { MainWrapper, FlexContainer } from "../../../../Components/UI/Layout";
-import { TextInput, Title } from "../../../../Components/UI/Elements";
+import { TextInput, } from "../../../../Components/UI/Elements";
 import {
     getCustomer,
     addCustomer,
   removeCustomer,
   updateCustomer
-  // searchSectorName,
 } from "./CustomerAction";
 import SingleCustomer from "./SingleCustomer";
 
@@ -152,7 +151,7 @@ class Customer extends Component {
             <FlexContainer flexDirection="column">
               {/* <Title style={{ padding: 8 }}>Types Of Documents</Title> */}
              <MainWrapper style={{ height: "30em", marginTop: "0.625em" }}>
-                {customerListData.length &&
+                {customerListData.length ? (
                   customerListData.map((customer, i) => (
                     <SingleCustomer
                       key={i}
@@ -169,7 +168,10 @@ class Customer extends Component {
                       currentData={this.state.currentData}
                       setCurrentData={this.setCurrentData}
                     />
-                  ))}
+                  ))
+                  ) : (
+                    <p>No Data Available</p>
+                  )}
               </MainWrapper>
             </FlexContainer>
             {isTextInputOpen ? (

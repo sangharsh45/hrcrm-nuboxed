@@ -12,8 +12,8 @@ import { bindActionCreators } from "redux";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import { Editor } from "react-draft-wysiwyg";
 import { getOrganizationSignatureByOrgId } from "../../../Auth/AuthAction";
-import { Button, Icon } from "antd";
-import { Spacer, TextInput } from "../../../../Components/UI/Elements";
+import { Button,  } from "antd";
+import { Spacer,  } from "../../../../Components/UI/Elements";
 import { StyledPopconfirm } from "../../../../Components/UI/Antd";
 import { addOrganizationSignatureByOrgId } from "../../../Auth/AuthAction";
 function SignatureView(props) {

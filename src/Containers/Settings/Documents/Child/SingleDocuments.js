@@ -1,13 +1,12 @@
-import React, { Component, useMemo } from "react";
+import React, { Component, } from "react";
 import styled from "styled-components";
 import { FormattedMessage } from "react-intl";
 import BorderColorIcon from '@mui/icons-material/BorderColor';
-import SearchIcon from '@mui/icons-material/Search';
 import DeleteIcon from '@mui/icons-material/Delete';
 import {linkTypeToggle} from "../DocumentsAction";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { Button, Popconfirm,Tooltip, Switch, Select } from "antd";
+import { Button,Tooltip, Select } from "antd";
 import { FlexContainer } from "../../../../Components/UI/Layout";
 import { TextInput } from "../../../../Components/UI/Elements";
 import ViewEditCard from "../../../../Components/UI/Elements/ViewEditCard";

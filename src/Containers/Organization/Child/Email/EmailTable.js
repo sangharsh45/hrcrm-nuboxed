@@ -1,17 +1,10 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-// import { getEmailCredentials } from "../../../../../Settings/Email/EmailAction";
-import { StyledTable, StyledModal } from "../../../../Components/UI/Antd";
+import { StyledTable, } from "../../../../Components/UI/Antd";
 import { BundleLoader } from "../../../../Components/Placeholder";
-import { Icon,Switch } from "antd";
+import { Switch } from "antd";
 import { getEmailCredentials } from "../Email/EmailAction";
-// import { handleBankModal } from "../../../../ProfileAction";
-// import AddBankModal from "./AddBankModal";
-// import UpdateBankModal from "../../ProfileBoost/Bank/UpdateBankModal";
-// import { handleUpdateBankModal, setEditBank } from "../../../../ProfileAction";
-// import { getBankDetails } from "../../../../ProfileAction";
-// import EditEmailForm from "../../../../../Settings/Email/Child/EditEmailForm"
 import UpdateEmailModal from "./UpdateEmailModal";
 import { handleUpdateEmailModal } from "../../../Settings/SettingsAction";
 import { setEditEmail } from "../../../Settings/SettingsAction";

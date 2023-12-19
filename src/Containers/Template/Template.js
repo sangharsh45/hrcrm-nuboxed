@@ -4,8 +4,7 @@ import { BundleLoader } from "../../Components/Placeholder";
 import { FlexContainer } from "../../Components/UI/Layout";
 import TemplateActionRight from "./TemplateActionRight";
 import TemplateTab from "./child/TemplateTab/Template/TemplateTab";
-
-// const TemplateActionLeft = lazy(() => import("./TemplateActionLeft"));
+;
 
 function Template() {
   const name = [

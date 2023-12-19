@@ -30,6 +30,7 @@ function PhonesPairLevelApproveForm(props) {
       setIsLoading(false);
     }
   }, [props.approvalData.level]);
+
   function buttonOnClick() {
     const data = {
       levelCount: rows.length,
@@ -37,17 +38,15 @@ function PhonesPairLevelApproveForm(props) {
         level: row.level,
         threshold: row.threshold,
         roleTypeId: row.roleTypeId,
-        selectedRoleTypeId: row.selectedRoleTypeId, // Include the selected role type ID in the payload
       })),
       approvalIndicator: props.approvalIndicator,
       approvalType: props.approvalType,
       subProcessName: "PhonePair",
     };
-  
+
     console.log(data);
     props.addApprove(data);
   }
-  
 
   function handleChangeValue(value, index) {
     console.log(value)
@@ -61,10 +60,11 @@ function PhonesPairLevelApproveForm(props) {
     );
   }
   function handleChangeRoleValue(value, index) {
+    console.log(value)
     setRows((prevRows) =>
       prevRows.map((row, i) => {
         if (i === index) {
-          return { ...row, roleTypeId: value, selectedRoleTypeId: value };
+          return { ...row, roleTypeId: value };
         }
         return row;
       })
@@ -91,13 +91,17 @@ function PhonesPairLevelApproveForm(props) {
   //     })
   //   );
   // }
-
   function handleAddRowClick() {
+
     if (rows.length < 3) {
-      const newRow = { level: "", threshold: "",roleTypeId:"" };
+      const newRow = { level: "", threshold: "" };
       setRows((prevRows) => [...prevRows, newRow]);
     }
   }
+  // function handleAddRowClick() {
+  //   const newRow = { level: "", threshold: "" };
+  //   setRows((prevRows) => [...prevRows, newRow]);
+  // }
 
   function handleDelete(index) {
     setRows((prevRows) =>
@@ -152,7 +156,7 @@ function PhonesPairLevelApproveForm(props) {
                     <option value="Management">Management</option>
                   </Select>
                 </div>
-                <div className="w-full flex font-bold  ">
+                <div className="w-full flex font-bold ">
                 <div style={{ width:"5rem"}}>
                 
                 </div>
@@ -161,13 +165,14 @@ function PhonesPairLevelApproveForm(props) {
                 <Field
                       name="roleTypeId"
                       isRequired
+                      placeholder="Role"
                       value={row.roleTypeId}
                       isColumnWithoutNoCreate
-                      placeholder="Role"
+                      // label="Role"
                       onChange={(value) => handleChangeRoleValue(value, index)}
                       component={SelectComponent}
                       options={getRoleOptions(row.level)} 
-                     
+                   
                       isColumn
                       inlineLabel
                       style={{ flexBasis: "80%", marginTop: "0px", width: "100%" }}
@@ -189,7 +194,7 @@ function PhonesPairLevelApproveForm(props) {
                     }
                   />
                 </div> */}
-                 <div class=" ml-4">
+ <div class=" ml-4">
                 {rows.length > 1 ? (
                   <CloseOutlined onClick={() => handleDelete(index)} />
                 ) : null}

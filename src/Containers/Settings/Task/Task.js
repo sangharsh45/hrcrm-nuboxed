@@ -3,13 +3,12 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { FormattedMessage } from "react-intl";
-import { Button, Divider, message ,Input} from "antd";
+import { Button,Input} from "antd";
 import { BundleLoader } from "../../../Components/Placeholder";
 import { MainWrapper, FlexContainer } from "../../../Components/UI/Layout";
-import { TextInput, Title } from "../../../Components/UI/Elements";
+import { TextInput, } from "../../../Components/UI/Elements";
 import SingleTasks from "./SingleTasks";
 import moment from "moment";
-// import * as Yup from "yup";
 import {
   getTasks,
   addTasks,
@@ -17,9 +16,6 @@ import {
   updateTasks,
   searchTaskName
 } from "./TaskAction";
-import axios from "axios";
-import { base_url } from "../../../Config/Auth";
-import dayjs from "dayjs";
 
 // const SectorsSchema = Yup.object().shape({
 //   sectorName: Yup.string().required("Input needed !"),
@@ -176,7 +172,7 @@ class Task extends Component {
         </div>
             <FlexContainer flexDirection="column">
               <MainWrapper style={{ height: "30em", marginTop: "0.625em" }}>
-                {tasks.length &&
+              {tasks.length ? (
                   tasks.map((task, i) => (
                     <SingleTasks
                       key={i}
@@ -189,7 +185,10 @@ class Task extends Component {
                       handleUpdateTask={this.handleUpdateTask}
                          handleDeleteTask={this.handleDeleteTask}
                     />
-                  ))}
+                  ))
+                  ) : (
+                    <p>No Data Available</p>
+                  )}
               </MainWrapper>
             </FlexContainer>
             {isTextInputOpen ? (

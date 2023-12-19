@@ -5,7 +5,7 @@ import { bindActionCreators } from "redux";
 import { updateOrganizationDetails } from "../../../Auth/AuthAction";
 import { Button } from "antd";
 import { FlexContainer } from "../../../../Components/UI/Layout";
-import { TextInput, Spacer } from "../../../../Components/UI/Elements";
+import { TextInput, } from "../../../../Components/UI/Elements";
 import EditUpload from "../../../../Components/Forms/Edit/EditUpload";
 class OrganizationDetailEdit extends Component {
   constructor(props) {

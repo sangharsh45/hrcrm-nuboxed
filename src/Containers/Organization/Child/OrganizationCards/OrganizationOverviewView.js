@@ -1,12 +1,10 @@
 import React, { Component } from "react";
 import {
   Title,
-  SubTitle,
   MultiAvatar,
 } from "../../../../Components/UI/Elements";
 import BorderColorIcon from '@mui/icons-material/BorderColor';
 import { FlexContainer } from "../../../../Components/UI/Layout";
-import { ActionIcon } from "../../../../Components/Utils";
 class OrganizationOverviewView extends Component {
   render() {
     const {

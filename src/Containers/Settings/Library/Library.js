@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { Button, Divider, message,Input } from "antd";
+import { Button,Input } from "antd";
 import { MainWrapper, FlexContainer } from "../../../Components/UI/Layout";
-import { TextInput, Title } from "../../../Components/UI/Elements";
+import { TextInput,  } from "../../../Components/UI/Elements";
 import SingleLibrary from "./SingleLibrary";
 import moment from "moment";
 import {
@@ -13,8 +13,6 @@ import {
   updateLibrarys,
   searchLibraryName,
 } from "./LibraryAction";
-import axios from "axios";
-import { base_url } from "../../../Config/Auth";
 
 class Library extends Component {
   constructor(props) {
@@ -171,7 +169,7 @@ class Library extends Component {
             <FlexContainer flexDirection="column">
              
               <MainWrapper style={{ height: "30em" }}>
-                {librarys.length &&
+                {librarys.length ? (
                   librarys.map((library, i) => (
                     <SingleLibrary
                       key={i}
@@ -189,7 +187,10 @@ class Library extends Component {
                       currentData={this.state.currentData}
                       setCurrentData={this.setCurrentData}
                     />
-                   ))} 
+                   ))
+                   ) : (
+                    <p>No Data Available</p>
+                  )}
                    
               </MainWrapper>
               {/* <h4>Updated on {dayjs(props.librarys && props.librarys.length && props.librarys[0].updationDate).format("ll")} by {props.librarys && props.librarys.length && props.librarys[0].name}</h4>              */}

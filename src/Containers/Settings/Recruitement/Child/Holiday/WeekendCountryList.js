@@ -3,7 +3,7 @@
 
 
 
-import React, { Component, lazy, PureComponent, Suspense, useEffect, useState } from "react";
+import React, {  PureComponent, Suspense,  } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { StyledTabs } from "../../../../../Components/UI/Antd";

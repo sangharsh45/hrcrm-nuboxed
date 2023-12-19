@@ -1,16 +1,12 @@
-import React, { Component, lazy, Suspense } from "react";
+import React, { Component,  Suspense } from "react";
 import { bindActionCreators } from "redux";
-import { FormattedMessage } from "react-intl";
 import { StyledTabs } from "../../../Components/UI/Antd";
 import { TabsWrapper } from "../../../Components/UI/Layout";
-import { MainWrapper, FlexContainer } from "../../../Components/UI/Layout";
+import { FlexContainer } from "../../../Components/UI/Layout";
 import { connect } from "react-redux";
 import AccessibilityIcon from '@mui/icons-material/Accessibility';
-
-import { FileOutlined } from "@ant-design/icons";
 import Designation from "../Designation/Designation";
 import Department from "../Department/Department";
-import FactoryIcon from '@mui/icons-material/Factory';
 import Role from "./Role/Role";
 import RoleTalent from "./Role/RoleTalent";
 // import IdProof from "../Id Proof/IdProof";

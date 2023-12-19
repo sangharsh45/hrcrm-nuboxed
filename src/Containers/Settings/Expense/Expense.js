@@ -2,12 +2,11 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { FormattedMessage } from "react-intl";
-import { Button, Divider, message,Input } from "antd";
+import { Button,Input } from "antd";
 import { MainWrapper, FlexContainer } from "../../../Components/UI/Layout";
-import { TextInput, Title } from "../../../Components/UI/Elements";
+import { TextInput,  } from "../../../Components/UI/Elements";
 import SingleExpenses from "./SingleExpenses";
 import { BundleLoader } from "../../../Components/Placeholder";
-// import * as Yup from "yup";
 import {
   getExpenses,
   addExpenses,
@@ -15,9 +14,6 @@ import {
   updateExpenses,
   searchExpenseName
 } from "./ExpenseAction";
-import axios from "axios";
-import { base_url } from "../../../Config/Auth";
-import dayjs from "dayjs";
 import moment from "moment";
 
 // const SectorsSchema = Yup.object().shape({
@@ -175,7 +171,7 @@ class Expense extends Component {
         </div>
             <FlexContainer flexDirection="column">
               <MainWrapper style={{ height: "30em", marginTop: "0.625em" }}>
-                {expenses.length &&
+                {expenses.length ? (
                   expenses.map((expense, i) => (
                     <SingleExpenses
                       key={i}
@@ -188,7 +184,10 @@ class Expense extends Component {
                       handleUpdateExpense={this.handleUpdateExpense}
                          handleDeleteExpense={this.handleDeleteExpense}
                     />
-                  ))}
+                  ))
+                  ) : (
+                    <p>No Data Available</p>
+                  )}
               </MainWrapper>
             </FlexContainer>
             {isTextInputOpen ? (

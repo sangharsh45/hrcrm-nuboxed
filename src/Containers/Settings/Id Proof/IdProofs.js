@@ -2,9 +2,9 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import moment from "moment";
 import { bindActionCreators } from "redux";
-import { Button, Divider, message,Input } from "antd";
+import { Button,Input } from "antd";
 import { MainWrapper, FlexContainer } from "../../../Components/UI/Layout";
-import { TextInput, Title } from "../../../Components/UI/Elements";
+import { TextInput, } from "../../../Components/UI/Elements";
 import SingleIdProof from "./SingleIdProof";
 import { BundleLoader } from "../../../Components/Placeholder";
 import {
@@ -14,9 +14,6 @@ import {
   updateIdProofs,
   searchIdProofName
 } from "./IdProofAction";
-import axios from "axios";
-import { base_url } from "../../../Config/Auth";
-import dayjs from "dayjs";
 
 class IdProofs extends Component {
   constructor(props) {
@@ -147,7 +144,7 @@ class IdProofs extends Component {
         </div>
             <FlexContainer flexDirection="column">             
               <MainWrapper style={{ height: "30em", marginTop: "0.625em" }}>
-                {idProofs.length &&
+                {idProofs.length ? (
                   idProofs.map((idProof, i) => (
                     <SingleIdProof
                       key={i}
@@ -164,7 +161,10 @@ class IdProofs extends Component {
                       currentData={this.state.currentData}
                       setCurrentData={this.setCurrentData}
                     />
-                  ))}
+                  ))
+                  ) : (
+                    <p>No Data Available</p>
+                  )}
               </MainWrapper>
             </FlexContainer>
             {isTextInputOpen ? (

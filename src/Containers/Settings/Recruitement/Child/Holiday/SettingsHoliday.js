@@ -1,11 +1,9 @@
-import React, { Component, lazy, Suspense } from "react";
+import React, { Component,  } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { handleHolidayModal } from "../../../../Holiday/HolidayAction";
 import SettingsHolidayPage from "../../../../Settings/Recruitement/Child/Holiday/SettingsHolidayPage";
-// const HolidayPage = lazy(() => import("./Child/HolidayPage"));
-// const HolidayTable = lazy(() => import("./Child/HolidayTable"));
-// const  AddHolidayModal= lazy(() =>import("./Child/AddHolidayModal"));
+
 
 class SettingsHoliday extends Component {
   componentDidMount() {

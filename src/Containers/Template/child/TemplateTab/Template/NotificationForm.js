@@ -1,4 +1,4 @@
-import React, { Component, useState } from "react";
+import React, {  useState } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { FormattedMessage } from "react-intl";
@@ -12,7 +12,6 @@ import draftToHtml from "draftjs-to-html";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import { Editor } from "react-draft-wysiwyg";
 import { addNotificationTemplate } from "../../../../Rules/RulesAction";
-import CustomOption from "../../../../Rules/Child/RulesTab/CustomOption";
 import * as Yup from "yup";
 import { TextareaComponent } from "../../../../../Components/Forms/Formik/TextareaComponent";
 import CustomOptionForNotification from "../../../../Rules/Child/RulesTab/CustomOptionForNotification";

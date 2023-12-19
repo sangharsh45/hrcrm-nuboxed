@@ -7,7 +7,6 @@ import { updateOrganizationDetails } from "../../../Auth/AuthAction";
 import { FlexContainer } from "../../../../Components/UI/Layout";
 import { Spacer } from "../../../../Components/UI/Elements";
 import EditableInput from "../../../../Components/Forms/Edit/EditableInput";
-import EditableSearcSelect from "../../../../Components/Forms/Edit/EditSearchSelect";
 
 class OrganizationStatsEdit extends Component {
   constructor(props) {

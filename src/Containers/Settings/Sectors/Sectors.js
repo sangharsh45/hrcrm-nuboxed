@@ -2,13 +2,12 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { FormattedMessage } from "react-intl";
-import { Button, Divider, message, Input } from "antd";
+import { Button, Input } from "antd";
 import moment from "moment";
 import { MainWrapper, FlexContainer } from "../../../Components/UI/Layout";
-import { TextInput, Title } from "../../../Components/UI/Elements";
+import { TextInput, } from "../../../Components/UI/Elements";
 import SingleSectors from "./SingleSector";
 import { BundleLoader } from "../../../Components/Placeholder";
-import dayjs from "dayjs";
 import {
   getSectors,
   addSectors,
@@ -16,8 +15,6 @@ import {
   updateSectors,
   searchSectorName,
 } from "./SectorsAction";
-import axios from "axios";
-import { base_url } from "../../../Config/Auth";
 
 class Sectors extends Component {
   constructor(props) {
@@ -166,7 +163,7 @@ class Sectors extends Component {
             <FlexContainer flexDirection="column">
               {/* <Title style={{ padding: 8 }}>Types Of Documents</Title> */}
               <MainWrapper style={{ height: "30em", marginTop: "0.625em" }}>
-                {sectors.length &&
+                {sectors.length ? (
                   sectors.map((sector, i) => (
                     <SingleSectors
                       key={i}
@@ -183,7 +180,10 @@ class Sectors extends Component {
                       currentData={this.state.currentData}
                       setCurrentData={this.setCurrentData}
                     />
-                  ))}
+                  ))
+                  ) : (
+                    <p>No Data Available</p>
+                  )}
               </MainWrapper>
             </FlexContainer>
             {isTextInputOpen ? (

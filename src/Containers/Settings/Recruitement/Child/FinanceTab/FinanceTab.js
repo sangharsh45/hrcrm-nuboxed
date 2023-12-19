@@ -1,4 +1,4 @@
-import React,{ lazy, useEffect } from "react";
+import React,{ } from "react";
 import { StyledTabs } from "../../../../../Components/UI/Antd";
 import { TabsWrapper } from "../../../../../Components/UI/Layout";
 import { connect } from "react-redux";
