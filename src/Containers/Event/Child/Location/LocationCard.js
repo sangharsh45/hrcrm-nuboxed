@@ -48,17 +48,17 @@ const handleLoadMore = () => {
         loader={props.fetchingLocationData?<h4 style={{ textAlign: 'center' }}>Loading...</h4>:null}
         height={"75vh"}
       >
-      <div className=" flex justify-between w-[99%] p-2 bg-transparent font-bold sticky top-0 z-10">
-        <div className=" md:w-[7rem]">Name</div>
-        <div className=" md:w-[4rem]">Country</div>
-        <div className=" md:w-[13rem] ">Address</div>
-        <div className=" md:w-28 ">Refurbish</div>
-        <div className=" md:w-28 ">Production</div>
-        <div className="md:w-36">Inventory</div>
-        <div className="md:w-[6.5rem]">Billing</div>
-        <div className="md:w-24">Corporate</div>
-        <div className="md:w-24">Project</div>
-        <div className="md:w-24">Retail</div>
+      <div className=" flex justify-between w-[84%] p-2 bg-transparent font-bold sticky top-0 z-10">
+        <div className=" md:w-[10.5rem]">Name</div>
+        <div className=" md:w-[9.1rem]">Country</div>
+        <div className=" md:w-[13.1rem] ">Address</div>
+        <div className=" md:w-[8.5rem] ">Refurbish</div>
+        <div className=" md:w-[8.2rem] ">Production</div>
+        <div className="md:w-[8.5rem]">Inventory</div>
+        <div className="md:w-[7.5rem]">Billing</div>
+        <div className="md:w-[8.51rem]">Corporate</div>
+        <div className="md:w-[8.3rem]">Project</div>
+        <div className="md:w-[7.9rem]">Retail</div>
       </div>
         <CardWrapper>
           {props.showLocation.map((item) => {
@@ -66,17 +66,17 @@ const handleLoadMore = () => {
               <div class="w-wk">
                 <div class=" flex rounded-xl justify-between bg-white mt-[0.5rem]  h-[2.75rem] items-center p-3">
                   <div class="flex">
-                    <div className=" flex font-medium flex-row md:w-[7rem] max-sm:flex-row w-full max-sm:justify-between ">
+                    <div className=" flex font-medium flex-row md:w-[25.12rem] max-sm:flex-row w-full max-sm:justify-between ">
                       {/* <div class=" text-sm text-cardBody font-semibold font-poppins max-sm:hidden">
                         Name
                       </div> */}
 
-                      <div class=" font-normal text-[0.82rem]text-cardBody font-poppins">
+                      <div class=" font-normal text-[0.82rem]text-cardBody font-poppins md:w-[10.1rem]">
                         {item.locationName}
                       </div>
                    
 
-                    <div className=" flex font-medium flex-col md:w-[7rem]  max-sm:flex-row w-full mt-1 max-sm:justify-between">
+                    <div className=" flex font-medium flex-col md:w-[7.25rem]  max-sm:flex-row w-full mt-1 max-sm:justify-between">
                       {/* <div class=" text-sm text-cardBody font-semibold font-poppins max-sm:hidden">
                         Country
                       </div> */}
@@ -93,16 +93,19 @@ const handleLoadMore = () => {
                       </div> */}
 
                       <div class=" font-normal text-[0.82rem] text-cardBody font-poppins">
-                        <span>
+                        {/* <span>
                           {`${(item.address && item.address[0].city) || ""}` +
                             " " +
-                            `${(item.address && item.address[0].state) || ""}`}
-                        </span>
+                            `${(item.address && item.address[0].state) || ""}`.slice(0, 20)}
+                        </span> */}
+                        <span>
+  {`${(item.address && item.address[0].city) || ""} ${ (item.address && item.address[0].state) || ""}`.slice(0, 20)}
+</span>
                       </div>
                     </div>
                   </div>
                 
-                    <div className=" flex font-medium flex-row md:w-[7rem] max-sm:flex-row w-full mt-1 max-sm:justify-between">
+                    <div className=" flex font-medium flex-row md:w-[7.21rem] max-sm:flex-row w-full mt-1 max-sm:justify-between">
                       {/* <div class=" text-sm text-cardBody font-semibold font-poppins max-sm:hidden">
                         Refurbish
                       </div> */}
@@ -117,7 +120,7 @@ const handleLoadMore = () => {
                         />
                       </div>
                     </div>
-                    <div className=" flex font-medium flex-row md:w-24 max-sm:flex-row w-full mt-1 max-sm:justify-between">
+                    <div className=" flex font-medium flex-row md:w-[7.22rem] max-sm:flex-row w-full mt-1 max-sm:justify-between">
                       {/* <div class=" text-sm text-cardBody font-semibold font-poppins max-sm:hidden">
                         Inventory
                       </div> */}
@@ -132,7 +135,7 @@ const handleLoadMore = () => {
                         />
                       </div>
                     </div>
-                    <div className=" flex font-medium flex-row md:w-24 max-sm:flex-row w-full mt-1 max-sm:justify-between">
+                    <div className=" flex font-medium flex-row md:w-[7.12rem] max-sm:flex-row w-full mt-1 max-sm:justify-between">
                       {/* <div class=" text-sm text-cardBody font-semibold font-poppins max-sm:hidden">
                         Inventory
                       </div> */}
@@ -147,7 +150,7 @@ const handleLoadMore = () => {
                         />
                       </div>
                     </div>
-                    <div className=" flex font-medium flex-row md:w-[1rem] max-sm:flex-row w-full mt-1 max-sm:justify-between ">
+                    <div className=" flex font-medium flex-row md:w-[7.1rem] max-sm:flex-row w-full mt-1 max-sm:justify-between ">
                       {/* <div class=" text-sm text-cardBody font-semibold font-poppins max-sm:hidden">
                         Billing
                       </div> */}
@@ -163,7 +166,7 @@ const handleLoadMore = () => {
                     </div>
               
                
-                    <div className=" flex font-medium flex-row md:w-24 max-sm:flex-row w-full mt-1 max-sm:justify-between">
+                    <div className=" flex font-medium flex-row md:w-[7.11rem] max-sm:flex-row w-full mt-1 max-sm:justify-between">
                       {/* <div class=" text-sm text-cardBody font-semibold font-poppins max-sm:hidden">
                         Corporate
                       </div> */}
@@ -177,7 +180,7 @@ const handleLoadMore = () => {
                         />
                       </div>
                     </div>
-                    <div className=" flex font-medium flex-row md:w-24 max-sm:flex-row w-full mt-1 max-sm:justify-between">
+                    <div className=" flex font-medium flex-row md:w-[7.23rem] max-sm:flex-row w-full mt-1 max-sm:justify-between">
                       {/* <div class=" text-sm text-cardBody font-semibold font-poppins max-sm:hidden">
                         Project
                       </div> */}
@@ -191,7 +194,7 @@ const handleLoadMore = () => {
                         />
                       </div>
                     </div>
-                    <div className=" flex font-medium flex-row md:w-24 max-sm:flex-row w-full mt-1 max-sm:justify-between">
+                    <div className=" flex font-medium flex-row md:w-[7.41rem] max-sm:flex-row w-full mt-1 max-sm:justify-between">
                       {/* <div class=" text-sm text-cardBody font-semibold font-poppins max-sm:hidden">
                         Retail
                       </div> */}

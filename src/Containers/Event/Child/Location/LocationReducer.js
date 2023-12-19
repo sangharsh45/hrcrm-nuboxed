@@ -31,6 +31,12 @@ const initialState = {
    fetchingAlLocShift: false,
    fetchingAlLocShiftError:false,
    alLocShift:[],
+
+   fetchingLocationRecords: false,
+   fetchingLocationRecordsError: false,
+   recordData:{},
+
+
   };
 
   export const locationReducer = (state = initialState, action) => {
@@ -148,6 +154,24 @@ const initialState = {
                               
                                           case types.HANDLE_LOCATION_SUPPLER_DRAWER:
                                             return { ...state, locationSupplierdrawr: action.payload }; 
+
+
+
+                                            case types.GET_LOCATION_RECORDS_REQUEST:
+                                              return { ...state, fetchingLocationRecords: true };
+                                            case types.GET_LOCATION_RECORDS_SUCCESS:
+                                              return {
+                                                ...state,
+                                                fetchingLocationRecords: false,
+                                                recordData: action.payload,
+                                              };
+                                            case types.GET_LOCATION_RECORDS_FAILURE:
+                                              return {
+                                                ...state,
+                                                fetchingLocationRecords: false,
+                                                fetchingLocationRecordsError: true,
+                                              };
+
                                                                                    
                                       
         default:
