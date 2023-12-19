@@ -3,6 +3,7 @@ import BuilderWithPartIdTable from './BuilderWithPartIdTable'
 import { Button, Input, Select } from 'antd';
 import { addProductBuilderInProcess } from "./RefurbishAction"
 import { bindActionCreators } from 'redux';
+import QRCodeList from "./QrCodeList"
 import { getBuilderByProId } from "../../Product/ProductAction";
 import { connect } from 'react-redux';
 const { Option } = Select;
@@ -13,12 +14,17 @@ const TaggedBuilderList = (props) => {
 
     const [partName, setPartName] = useState("")
     const [partNo, setPartNo] = useState("")
+    const [data, setData] = useState('');
+    const [scanning, setScanning] = useState(false);
+    const [shouldRenderCamera, setShouldRenderCamera] = useState(false);
+    const [modalVisible, setModalVisible] = useState(false);
 
     const handlePartName = (value) => {
         setPartName(value)
     }
     const handlePartNo = (e) => {
         setPartNo(e.target.value)
+        setData("")
     }
     const handleClick = () => {
         props.addProductBuilderInProcess({
@@ -26,12 +32,52 @@ const TaggedBuilderList = (props) => {
             productId: props.row.productId,
             orderId: props.row.orderId,
             suppliesId: partName,
-            cartNo: partNo,
+            cartNo: data?data:partNo,
             userId: props.userId
         }, props.row.productManufacturingId)
         setPartName("")
         setPartNo("")
     }
+
+    const handleScan = async (result, error) => {
+        try {
+          if (result && result.text) {
+            setData(result.text);
+          } else if (result instanceof MediaStream) {
+            // Do something with the MediaStream object if needed
+          }
+    
+          if (error) {
+            throw new Error(error);
+          }
+        } catch (error) {
+          console.error('Error in QR code scanner:', error);
+    
+          // Additional handling based on the error, if needed
+        
+        }
+      };
+    
+      const handleError = (error) => {
+        console.error('Error with the QR scanner:', error);
+        setScanning(false);
+        setShouldRenderCamera(false);
+        setModalVisible(false);
+      };
+    
+      const startScanning = () => {
+        setData('');
+        setScanning(true);
+        setShouldRenderCamera(true);
+        setModalVisible(true);
+      };
+    
+      const stopScanning = () => {
+        setScanning(false);
+        setShouldRenderCamera(false);
+        setModalVisible(false);
+      };
+      console.log("Datex",data)
     return (
         <>
             <div style={{ margin: "10px 0", display: "flex", justifyContent: "space-between" }}>
@@ -53,15 +99,29 @@ const TaggedBuilderList = (props) => {
                         })}
                     </Select>
                 </div>
+                <div style={{marginTop:"21px",marginLeft:"12px"}}>
+                <QRCodeList
+                handleScan={handleScan}
+                stopScanning={stopScanning}
+                startScanning={startScanning}
+                handleError={handleError}
+                modalVisible={modalVisible}
+                scanning={scanning}
+                data={data}
+                shouldRenderCamera={shouldRenderCamera}
+                />
+                </div>
                 <div style={{
                     width: "35%",
+                    marginLeft:"10px"
                 }}>
                     <label style={{
                         fontSize: "15px",
                         fontWeight: "600",
                         margin: "10px",
                     }}>Part No</label>
-                    <Input value={partNo}
+                    <Input 
+                    value={data?data:partNo}
                         // width={250}
                         type='text' onChange={(value) => handlePartNo(value)} />
                 </div>
