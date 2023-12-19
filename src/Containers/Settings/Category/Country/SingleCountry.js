@@ -19,7 +19,7 @@ class SingleCountry extends Component {
   render() {
     const {
       country: { country_name,editInd,country_dial_code,country_alpha2_code,country_flag,country_currency_name
-,        mandatoryInd, country_id },
+,        mandatoryInd,salesInd, country_id },
       handleChange,
       name,
       value,
@@ -122,8 +122,8 @@ Sales
 <div class=" font-normal text-[0.82rem] text-cardBody font-poppins">
 <div class=" w-2/6">
 <CountrySalesToggle
-// editInd={editInd}
-// mandatoryInd={mandatoryInd}
+editInd={editInd}
+salesInd={salesInd}
 country_name={country_name}
 country_id={country_id}
 />  

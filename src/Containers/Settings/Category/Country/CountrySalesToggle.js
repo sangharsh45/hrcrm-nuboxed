@@ -2,36 +2,36 @@ import React, { useEffect,useState } from "react";
 import { Switch, Popconfirm, } from "antd";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { linkCountryToggle } from "../Country/CountryAction";
+import { linkCountrySalesToggle } from "../Country/CountryAction";
 
 function CountrySalesToggle(props) {
   const[data,setData]=useState(props.country)
   useEffect(()=>{
     setData(props.country)
   },[props.country])
-  const [toggle, setToggle] = React.useState(props.mandatoryInd);
-  console.log(props.mandatoryInd)
+  const [toggle, setToggle] = React.useState(props.salesInd);
+  console.log(props.salesInd)
 
   function handleToggleCollection(item) {
-    if (props.mandatoryInd) {
-      props.linkCountryToggle({
+    if (props.salesInd) {
+      props.linkCountrySalesToggle({
         country_id: props.country_id,
-        mandatoryInd: props.mandatoryInd ? false : true,
+        salesInd: props.salesInd ? false : true,
          
       },props.country_id);
-      setToggle( props.mandatoryInd ? false : true);
+      setToggle( props.salesInd ? false : true);
  
     } else {
-      props.linkCountryToggle({
+      props.linkCountrySalesToggle({
         country_id: props.country_id,
-        mandatoryInd: props.mandatoryInd ? false : true,
+        salesInd: props.salesInd ? false : true,
       },props.country_id);
-      setToggle( props.mandatoryInd ? false : true);
+      setToggle( props.salesInd ? false : true);
     }
   }
 
   function handleCancel() {
-    if (props.mandatoryInd) {
+    if (props.salesInd) {
       setToggle(true);
     } else {
       setToggle(false);
@@ -49,7 +49,7 @@ function CountrySalesToggle(props) {
         >
           <Switch
             className="toggle-clr"
-            // checked={props.mandatoryInd || toggle}
+            checked={props.salesInd || toggle}
             // disabled={props.status}
             isLoading={true}
             style={{width: "5em"}}
@@ -71,7 +71,7 @@ const mapStateToProps = ({ auth, countrys }) => ({
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
-        linkCountryToggle,
+      linkCountrySalesToggle,
     },
     dispatch
   );
