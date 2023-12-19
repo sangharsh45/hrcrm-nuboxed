@@ -201,7 +201,7 @@ const AccountOrderTable = (props) => {
                                 } `;
                             return (
                                 <div >
-                                    <div className="flex rounded-xl justify-between mt-2 bg-white h-12 items-center p-3 "
+                                    <div className="flex rounded-xl justify-between mt-2 bg-white h-[2.75rem] items-center p-3 "
                                     // style={{
                                     //     borderBottom: "3px dotted #515050"
                                     // }}
@@ -252,7 +252,7 @@ const AccountOrderTable = (props) => {
 
                                             </div>
 
-                                            <div className=" flex font-medium flex-col  md:w-[5.4rem] max-sm:flex-row w-full max-sm:justify-between  ">
+                                            <div className=" flex font-medium flex-col  md:w-[6.4rem] max-sm:flex-row w-full max-sm:justify-between  ">
 
                                                 {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden"> Sector </h4> */}
                                                 <h4 class=" text-xs text-cardBody font-poppins">
@@ -345,7 +345,7 @@ const AccountOrderTable = (props) => {
                                                 </h4>
 
                                             </div>
-                                            <div className=" flex font-medium flex-col  md:w-[7.7rem] max-sm:flex-row w-full max-sm:justify-between  ">
+                                            <div className=" flex font-medium flex-col  md:w-[4.7rem] max-sm:flex-row w-full max-sm:justify-between  ">
 
                                                 {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden"> Sector </h4> */}
                                                 <h4 class=" text-xs text-cardBody font-poppins">

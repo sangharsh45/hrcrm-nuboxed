@@ -18,6 +18,7 @@ import { DeleteFilled, DeleteOutlined, EditOutlined, MoneyCollectOutlined, Phone
 import moment from "moment";
 import TagBrandModel from "./TagBrandModel";
 import { OnlyWrapCard } from "../../../Components/UI/Layout";
+import QrCode from "./QrCode"
 
 function onChange(pagination, filters, sorter) {
   console.log("params", pagination, filters, sorter);
@@ -158,6 +159,18 @@ function SuppliesCard(props) {
     </div>
     
     </div>
+    <div className=" flex font-medium flex-col md:w-44 max-sm:justify-between w-full max-sm:flex-row ">
+    
+    <div class=" text-sm text-cardBody font-medium font-poppins">
+    Scan
+    </div> 
+    
+    <div class=" font-normal text-[0.82rem] text-cardBody font-poppins">
+    <QrCode/>
+    </div>
+    
+    </div>
+
     <div class="flex flex-col">
     <Tooltip title="Edit">
                 <PhoneFilled
