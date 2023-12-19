@@ -87,12 +87,12 @@
 
 // export default QRCodeScanner;
 
-
+import 'webrtc-adapter'; 
 import React, { useState, useEffect } from 'react';
 import { Modal, Button } from 'antd';
 import { QrReader } from 'react-qr-reader';
 import axios from 'axios';
-import 'webrtc-adapter'; // Import the webrtc-adapter package
+
 
 const QRCodeScanner = () => {
   const [data, setData] = useState('No result');
