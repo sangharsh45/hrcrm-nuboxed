@@ -1,16 +1,16 @@
 import React, { lazy, Suspense, useEffect } from "react";
-import { StyledDrawer } from "../../../Components/UI/Antd";
-import { BundleLoader } from "../../../Components/Placeholder";
+import { StyledDrawer } from "../../../../../Components/UI/Antd";
+import { BundleLoader } from "../../../../../Components/Placeholder";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import TaggedBuilderList from "./TaggedBuilderList";
+import BuilderWithPartIdTable from "../../../Refurbish/BuilderWithPartIdTable";
 
-const TagBuilderInCatalogueProcess = (props) => {
+const TaggedBuilderListModal = (props) => {
     const { RowData, ...formProps } = props;
     return (
         <>
             <StyledDrawer
-                title={`Builder`}
+                title={`Tagged Parts- ${props.row.productManufacturingId}`}
                 width="60vw"
                 visible={props.showProductBuilderList}
                 closable
@@ -21,7 +21,7 @@ const TagBuilderInCatalogueProcess = (props) => {
                 footer={null}
             >
                 <Suspense fallback={<BundleLoader />}>
-                    <TaggedBuilderList row={props.row} />
+                    <BuilderWithPartIdTable row={props.row} />
                 </Suspense>
             </StyledDrawer>
         </>
@@ -44,5 +44,5 @@ const mapDispatchToProps = (dispatch) =>
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(TagBuilderInCatalogueProcess);
+)(TaggedBuilderListModal);
 
