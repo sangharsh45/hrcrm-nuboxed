@@ -151,6 +151,10 @@ function UpdateCustomerForm (props) {
                   <Spacer />
                    <StyledLabel><FormattedMessage id="app.name" defaultMessage="Name" /></StyledLabel>
                   <Field
+                      defaultValue={{
+                        label: setEditingCustomer.name,
+                        value: setEditingCustomer.name,
+                      }}
                     isRequired
                     name="name"
                     type="text"
@@ -158,7 +162,6 @@ function UpdateCustomerForm (props) {
                     width={"100%"}
                     setClearbitData={props.setClearbitData}
                     component={ClearbitImage}
-                    // component={InputComponent}
                     accounts={accounts}
                     inlineLabel
                     />
