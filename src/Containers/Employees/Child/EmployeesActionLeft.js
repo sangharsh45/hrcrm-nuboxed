@@ -173,7 +173,7 @@ const EmployeesActionLeft = (props) => {
                     style={{ width: "auto",margin:"auto"}}
                      onChange={props.handleDepartmentChange}
                      value={props.selectedDepartment}
-                     disabled={!props.selectedLocation}
+                    //  disabled={!props.selectedLocation}
                   >
                     <option value="">All Department</option>
                     {props.departments.map((item) => {

@@ -44,18 +44,25 @@ class Employees extends Component {
     // this.props.emptyCustomer();
     this.props.getEmployeelist();
   };
-  filterData = (locationName, departmentName) => {
+  // filterData = (locationName, departmentName) => {
    
 
-    if (locationName && departmentName) {
-      const filtered = this.props.employees.filter((employee) => (
-        employee.location === locationName && employee.department === departmentName
-      ));
-      this.setState({ filteredData: filtered });
-    } else {
-      // If either location or department is not selected, show all data
-      this.setState({ filteredData: this.props.employees });
-    }
+  //   if (locationName && departmentName) {
+  //     const filtered = this.props.employees.filter((employee) => (
+  //       employee.location === locationName && employee.department === departmentName
+  //     ));
+  //     this.setState({ filteredData: filtered });
+  //   } else {
+  //     // If either location or department is not selected, show all data
+  //     this.setState({ filteredData: this.props.employees });
+  //   }
+  // };
+  filterData = (locationName, departmentName) => {
+    const filtered = this.props.employees.filter((employee) => (
+      (!locationName || employee.location === locationName) &&
+      (!departmentName || employee.department === departmentName)
+    ));
+    this.setState({ filteredData: filtered });
   };
   componentDidUpdate(prevProps) {
     if (this.props.employees !== prevProps.employees) {
