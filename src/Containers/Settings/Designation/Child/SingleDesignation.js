@@ -4,7 +4,6 @@ import { FormattedMessage } from "react-intl";
 import { Button,Tooltip } from "antd";
 import DeleteIcon from '@mui/icons-material/Delete';
 import BorderColorIcon from '@mui/icons-material/BorderColor';
-import { FlexContainer } from "../../../../Components/UI/Layout";
 import { TextInput } from "../../../../Components/UI/Elements";
 import ViewEditCard from "../../../../Components/UI/Elements/ViewEditCard";
 
@@ -35,7 +34,7 @@ class SingleDesignation extends Component {
         <ViewEditCard>
           {({ viewType }, toggleViewType) =>
             viewType === "view" ? (
-              <FlexContainer justifyContent="space-between">
+              <div class=" flex justify-between" >
                 <DesignationName style={{ flexBasis: "85%" }}>
                   {designationType}
                 </DesignationName>
@@ -79,9 +78,9 @@ class SingleDesignation extends Component {
                     style={{ color: "#666" }}
                   />*/}
                 </div>
-              </FlexContainer>
+              </div>
             ) : (
-              <FlexContainer>
+              <div class=" flex">
                 <TextInput
                   name={name}
                   // value={value || designationType}
@@ -91,7 +90,7 @@ class SingleDesignation extends Component {
                 />
                 <br />
                 <br />
-                <FlexContainer justifyContent="flex-end">
+                <div class=" flex justify-end" >
                   <Button
                     type="primary"
                     htmlType="submit"
@@ -113,8 +112,8 @@ class SingleDesignation extends Component {
                     {/* Cancel */}
                     <FormattedMessage id="app.cancel" defaultMessage="Cancel" />
                   </Button>
-                </FlexContainer>
-              </FlexContainer>
+                </div>
+              </div>
             )
           }
         </ViewEditCard>

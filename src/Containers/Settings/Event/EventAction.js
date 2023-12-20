@@ -161,4 +161,10 @@ export const removeEvents = (eventTypeId) => (dispatch) => {
           payload: err,
         });
       });
-  }; 
+  };
+  
+  export const ClearReducerDataOfEvent = () => (dispatch) => {
+    dispatch({
+      type: types.HANDLE_CLAER_REDUCER_DATA_EVENT,
+    });
+  };

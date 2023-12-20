@@ -102,6 +102,12 @@ export const eventsReducer = (state = initialState, action) => {
         case types.GET_EVENT_SEARCH_FAILURE:
           return { ...state, fetchingEventInputSearchDataError: true };
 
+          case types.HANDLE_CLAER_REDUCER_DATA_EVENT:
+            return { ...state, 
+              events: [], 
+              // deletedTruck: [] 
+            };
+
         default:
             return state;
         }

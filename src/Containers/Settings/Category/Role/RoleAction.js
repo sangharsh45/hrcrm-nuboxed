@@ -283,3 +283,10 @@ export const removeTalentRole = (roleTypeExternalId, cb) => (dispatch) => {
       });
 };
 
+export const ClearReducerDataOfRole = () => (dispatch) => {
+  dispatch({
+    type: types.HANDLE_CLAER_REDUCER_DATA_ROLE,
+  });
+};
+
+

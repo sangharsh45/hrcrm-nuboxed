@@ -272,6 +272,13 @@ export const departmentsReducer = (state = initialState, action) => {
                   addingRecruitToggle: false,
                   addingRecruitToggleError: true,
                 };
+
+                
+              case types.HANDLE_CLAER_REDUCER_DATA_DEPARTMENT:
+                return { ...state, 
+                  departments: [], 
+                  // deletedTruck: [] 
+                };
     
 
         default:
