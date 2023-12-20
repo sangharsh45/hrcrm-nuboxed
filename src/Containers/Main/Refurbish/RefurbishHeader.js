@@ -18,12 +18,10 @@ class RefurbishHeader extends Component {
               viewType={this.props.viewType}
             />
           }
-        // rightComponent={
-        //   <RefurbishActionRight
-        //     // handleProductionModal={this.props.handleProductionModal}
-        //     shiftsData={shiftsData}
-        //   />
-        // }
+          rightComponent={
+            <RefurbishActionRight
+            />
+          }
         />
       </>
     );
