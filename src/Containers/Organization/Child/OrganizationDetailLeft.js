@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { FlexContainer } from "../../../Components/UI/Layout";
 import OrganizationOverviewCard from "./OrganizationCards/OrganizationOverviewCard";
 import OrganizationAboutCard from "./OrganizationCards/OrganizationAboutCard";
 import OrganizationStatsCard from "./OrganizationCards/OrganizationStatsCard";
@@ -13,7 +12,7 @@ class OrganizationDetailLeft extends Component {
     const { organizationDetails } = this.props;
     console.log(organizationDetails);
     return (
-      <FlexContainer flexDirection="column" style={{ display: "block" }}>
+      <div class=" flex flex-col block">
         <OrganizationOverviewCard organization={organizationDetails} />
         {/* <OrganizationTopicOfIntrest organizationDetails={organizationDetails} /> */}
         <OrganizationAboutCard organization={organizationDetails} />
@@ -21,7 +20,7 @@ class OrganizationDetailLeft extends Component {
         <OrganizationAddress organization={organizationDetails} />
         {/* <OrgannizationTermsCard organizationDetails={organizationDetails} /> */}
         <OrganizationDetailMap organization={organizationDetails} />
-      </FlexContainer>
+      </div>
     );
   }
 }

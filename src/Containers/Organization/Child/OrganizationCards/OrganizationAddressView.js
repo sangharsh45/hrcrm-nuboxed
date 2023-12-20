@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import BorderColorIcon from '@mui/icons-material/Edit';
-import { FlexContainer, } from "../../../../Components/UI/Layout";
 import { SubTitle } from "../../../../Components/UI/Elements";
 class OrganizationAddressView extends Component {
   render() {
@@ -19,14 +18,18 @@ class OrganizationAddressView extends Component {
 
        
       <>
-      <FlexContainer justifyContent="flex-end">
+      <div class=" flex justify-end">
       <BorderColorIcon 
               // tooltipTitle="Edit"
               // iconType="edit"
               onClick={toggleViewType}
-              size="1em"
+              style={{
+                color: "grey",
+                cursor: "pointer",
+                fontSize: "1rem",
+              }}
             />
-        </FlexContainer>
+        </div>
 
 <OrganizationItemRow label="Address" value={addressdata||""} />
         <OrganizationItemRow label="Street" value={addressdata1||""} />
@@ -42,15 +45,13 @@ class OrganizationAddressView extends Component {
 export default OrganizationAddressView;
 const OrganizationItemRow = ({ label, value }) => {
   return (    
-    <FlexContainer
-      alignItems="center"
-      flexWrap="nowrap"
+    <div class=" items-center flex flex-no-wrap"
       style={{ margin: "0.4rem" }}
     >
       <SubTitle style={{ color: "#444", fontWeight: 600 }}>{label}</SubTitle>
       <SubTitle style={{
          //marginLeft: "-1.875em" 
          }}>{value}</SubTitle>
-    </FlexContainer>
+    </div>
   );
 };

@@ -4,10 +4,8 @@ import { bindActionCreators } from "redux";
 import { Button } from "antd";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
-import { Spacer } from "../../../../Components/UI/Elements";
 import { InputComponent } from "../../../../Components/Forms/Formik/InputComponent";
 import { addEmailCredentials } from "../Email/EmailAction";
-import { FlexContainer } from "../../../../Components/UI/Layout";
 import { FormattedMessage } from "react-intl";
 /**
  * yup validation scheme for creating a Team
@@ -55,12 +53,9 @@ class EmailForm extends Component {
             ...rest
           }) => (
               <Form className="form-background">
-                <div style={{ display: "flex", justifyContent: "space-between" }}>
-                  <div
-                    style={{
-                      height: "100%",
-                      width: "75%",
-                    }}
+                <div class=" flex justify-between" >
+                  <div class=" w-[75%] h-full"
+                  
                   >
                     <Field
                       name="email"
@@ -70,7 +65,7 @@ class EmailForm extends Component {
                       component={InputComponent}
                       width={"100%"}
                     />
-                    <Spacer />
+                  <div class=" mt-4">
                     <Field
                       type="password"
                       isRequired
@@ -80,7 +75,8 @@ class EmailForm extends Component {
                       width={"100%"}
                       component={InputComponent}
                     />
-                    <Spacer />
+                    </div>
+                    {/* <div class=" mt-4"> */}
                     
                     <Field
                       isMulti
@@ -110,7 +106,7 @@ class EmailForm extends Component {
                     >
                       Example for other webmail host - mail.example.com{" "}
                     </span>
-                    <Spacer />
+                    <div class=" mt-4">
                     <Field
                       name="port"
                       label={
@@ -124,10 +120,11 @@ class EmailForm extends Component {
                       width={"100%"}
                       component={InputComponent}
                     />
-                    <Spacer />
+                    </div>
+                  
                   </div>
                 </div>
-                <FlexContainer justifyContent="flex-end">
+                <div class=" flex justify-end" >
                   <Button
                     type="primary"
                     htmlType="submit"
@@ -136,7 +133,7 @@ class EmailForm extends Component {
                   >
                     Create
                 </Button>
-                </FlexContainer>
+                </div>
               </Form>
             )}
         </Formik>

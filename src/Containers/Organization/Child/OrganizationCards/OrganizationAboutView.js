@@ -3,7 +3,7 @@ import {
   SubTitle,
 } from "../../../../Components/UI/Elements";
 import BorderColorIcon from '@mui/icons-material/Edit';
-import { FlexContainer } from "../../../../Components/UI/Layout";
+
 class OrganizationAboutView extends Component {
   render() {
     const {
@@ -13,14 +13,18 @@ class OrganizationAboutView extends Component {
     // console.log(highestLevel);
     return (
       <>
-        <FlexContainer justifyContent="flex-end">
+        <div class=" flex justify-end" >
           <BorderColorIcon
             // tooltipTitle="Edit"
             // iconType="edit"
             onClick={toggleViewType}
-            size="1em"
+            style={{
+              color: "grey",
+              cursor: "pointer",
+              fontSize: "1rem",
+            }}
           />
-        </FlexContainer>
+        </div>
         <OrganizationItemRow
           label="Fiscal Year"
           value={`${fiscalStartDate} ${fiscalStartMonth}`}
@@ -39,9 +43,7 @@ export default OrganizationAboutView;
 
 const OrganizationItemRow = ({ label, value }) => {
   return (
-    <FlexContainer
-      alignItems="center"
-      flexWrap="nowrap"
+    <div class=" items-center flex flex-no-wrap"
       style={{ margin: "0.4rem" }}
     >
       <SubTitle style={{ color: "#444", fontWeight: 600, width: 300 }}>
@@ -54,6 +56,6 @@ const OrganizationItemRow = ({ label, value }) => {
       >
         {value}
       </SubTitle>
-    </FlexContainer>
+    </div>
   );
 };

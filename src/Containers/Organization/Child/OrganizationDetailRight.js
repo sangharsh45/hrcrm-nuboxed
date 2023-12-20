@@ -1,16 +1,15 @@
 import React, { Component, lazy } from 'react';
 import { connect } from "react-redux";
 import { bindActionCreators } from 'redux';
-import { FlexContainer } from "../../../Components/UI/Layout";
 
 const OrganizationDetailTab = lazy(() => import('./OrganizationTabs/OrganizationDetailTab'))
 class OrganizationDetailRight extends Component {
     render() {
 
         return (
-            <FlexContainer flexDirection='column' style={{ display: 'block' }}>
+            <div class=" flex flex-col block" >
                 <OrganizationDetailTab userDetails={this.props.userDetails} />
-            </FlexContainer>
+            </div>
         )
     }
 }

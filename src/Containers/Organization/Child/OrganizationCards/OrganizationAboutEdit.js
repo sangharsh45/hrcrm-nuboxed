@@ -3,9 +3,8 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { FormattedMessage } from "react-intl";
 import { Button } from "antd";
-import { updateOrganizationDetails } from "../../../Auth/AuthAction";
-import { FlexContainer } from "../../../../Components/UI/Layout";
 import { Spacer } from "../../../../Components/UI/Elements";
+import { updateOrganizationDetails } from "../../../Auth/AuthAction";
 import EditableInput from "../../../../Components/Forms/Edit/EditableInput";
 import EditableSelect from "../../../../Components/Forms/Edit/EditableSelect";
 import EditSearchSelect from "../../../../Components/Forms/Edit/EditSearchSelect";
@@ -49,8 +48,7 @@ class OrganizationAboutEdit extends Component {
 
     return (
       <>
-        <FlexContainer
-          flexDirection="column"
+       <div class=" flex flex-col"
           style={{ padding: "0.625em 1.25em 0.625em 1.25em" }}
         >
           <EditableSelect
@@ -145,9 +143,9 @@ class OrganizationAboutEdit extends Component {
                         name={'role'}
                         placeholder={'Role'}
                         value={this.state.fields.role} /> */}
-        </FlexContainer>
+        </div>
 
-        <FlexContainer justifyContent="flex-end" marginRight="1.25em">
+        <div class=" flex justify-end mr-[1.25em]" >
           <Button
             type="primary"
             Loading={this.props.updatingOrganizationDetails}
@@ -167,7 +165,7 @@ class OrganizationAboutEdit extends Component {
                  defaultMessage="Cancel"
                 />
           </Button>
-        </FlexContainer>
+        </div>
       </>
     );
   }

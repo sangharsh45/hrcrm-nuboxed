@@ -4,7 +4,6 @@ import { bindActionCreators } from "redux";
 import { FormattedMessage } from "react-intl";
 import { Button } from "antd";
 import { editOrganizationDetails } from "../../../Auth/AuthAction";
-import { FlexContainer } from "../../../../Components/UI/Layout";
 import { Spacer } from "../../../../Components/UI/Elements";
 import EditableInput from "../../../../Components/Forms/Edit/EditableInput";
 class OrganizationAddressEdit extends Component {
@@ -64,8 +63,7 @@ class OrganizationAddressEdit extends Component {
 
     return (
       <>
-        <FlexContainer
-          flexDirection="column"
+   <div class=" flex flex-col"
           style={{ padding: "10px 20px 10px 20px" }}
         >
          
@@ -115,9 +113,9 @@ class OrganizationAddressEdit extends Component {
           />
         
          
-        </FlexContainer>
+        </div>
 
-        <FlexContainer justifyContent="flex-end" marginRight="20px">
+        <div class=" flex justify-end mr-[20px]" >
           <Button
             type="primary"
              loading={this.props.editingOrganizationDetails}
@@ -135,7 +133,7 @@ class OrganizationAddressEdit extends Component {
                  defaultMessage="Cancel"
                 />
           </Button>
-        </FlexContainer>
+        </div>
       </>
     );
   }

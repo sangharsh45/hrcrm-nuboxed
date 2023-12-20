@@ -4,7 +4,6 @@ import { FormattedMessage } from "react-intl";
 import { bindActionCreators } from "redux";
 import { updateOrganizationDetails } from "../../../Auth/AuthAction";
 import { Button } from "antd";
-import { FlexContainer } from "../../../../Components/UI/Layout";
 import { TextInput, } from "../../../../Components/UI/Elements";
 import EditUpload from "../../../../Components/Forms/Edit/EditUpload";
 class OrganizationDetailEdit extends Component {
@@ -47,8 +46,8 @@ class OrganizationDetailEdit extends Component {
     } = this.props;
     return (
       <>
-        <FlexContainer
-          flexDirection="column"
+        <div class=" flex flex-col"
+      
           style={{ padding: "0.625em 1.25em 0.625em 1.25em" }}
         >
           <EditUpload
@@ -66,8 +65,8 @@ class OrganizationDetailEdit extends Component {
             value={this.state.fields.organizationName}
             width="100%"
           />
-        </FlexContainer>
-        <FlexContainer justifyContent="flex-end" marginRight="1.25em">
+        </div>
+        <div class=" flex justify-end mr-[1.25em]" >
           <Button
             type="primary"
             Loading={updatingOrganizationDetails}
@@ -87,7 +86,7 @@ class OrganizationDetailEdit extends Component {
                  defaultMessage="Cancel"
                 />
           </Button>
-        </FlexContainer>
+        </div>
       </>
     );
   }
