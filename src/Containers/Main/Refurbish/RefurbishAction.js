@@ -1144,3 +1144,81 @@ export const getAllManufatureIdById = (orderId, productId) => (dispatch) => {
       });
     });
 };
+
+//add catalogue in production
+export const addCatalogueByTechnician = (data, id) => (dispatch) => {
+  dispatch({
+    type: types.ADD_CATALOGUE_BY_TECHNICIAN_REQUEST,
+  });
+  axios
+    .post(`${base_url2}/inventory/productRepurbish`, data, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      dispatch(getCatalogueByTechnician(id))
+      dispatch({
+        type: types.ADD_CATALOGUE_BY_TECHNICIAN_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      dispatch({
+        type: types.ADD_CATALOGUE_BY_TECHNICIAN_FAILURE,
+        payload: err,
+      });
+    });
+};
+// get catalogue in production
+export const getCatalogueByTechnician = (userId) => (dispatch) => {
+  dispatch({
+    type: types.GET_CATALOGUE_BY_TECHNICIAN_REQUEST,
+  });
+  axios
+    .get(`${base_url2}/inventory/productRepurbish/${userId}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.GET_CATALOGUE_BY_TECHNICIAN_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.GET_CATALOGUE_BY_TECHNICIAN_FAILURE,
+        payload: err,
+      });
+    });
+};
+
+export const updateFarGlassInProduction = (data, productRepurbishId) => (dispatch) => {
+  // debugger;
+  dispatch({
+    type: types.UPDATE_FAR_GLASS_IN_PRODUCTION_REQUEST,
+  });
+  axios
+    .put(`${base_url2}/inventory/${productRepurbishId}`, data, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      // dispatch(getRepairOrderByUser(locationDetailsId, userId))
+      dispatch({
+        type: types.UPDATE_FAR_GLASS_IN_PRODUCTION_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      dispatch({
+        type: types.UPDATE_FAR_GLASS_IN_PRODUCTION_FAILURE,
+        payload: err,
+      });
+    });
+};
