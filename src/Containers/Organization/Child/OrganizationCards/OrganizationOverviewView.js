@@ -4,7 +4,6 @@ import {
   MultiAvatar,
 } from "../../../../Components/UI/Elements";
 import BorderColorIcon from '@mui/icons-material/BorderColor';
-import { FlexContainer } from "../../../../Components/UI/Layout";
 class OrganizationOverviewView extends Component {
   render() {
     const {
@@ -13,9 +12,9 @@ class OrganizationOverviewView extends Component {
     } = this.props;
     return (
       <>
-        <FlexContainer justifyContent="space-between">
-          <FlexContainer justifyContent="flex-start" flexWrap="nowrap">
-            <div style={{ width: "3.75em" }}>
+        <div class=" flex justify-between" >
+          <div class=" flex flex-start flex-no-wrap" >
+            <div  class="w-[3.75em]">
               <MultiAvatar
               style={{width:"5rem"}}
                 primaryTitle={organizationName}
@@ -23,18 +22,22 @@ class OrganizationOverviewView extends Component {
                 imageURL={imageURL}
               />
             </div>
-            <FlexContainer flexDirection="row">
+            <div class=" flex flex-row" >
               <Title fontSize={"1.375em"}>{organizationName}</Title>
               {/* <SubTitle>{designation}</SubTitle> */}
-            </FlexContainer>
-          </FlexContainer>
+            </div>
+          </div>
           <BorderColorIcon
             tooltipTitle="Edit"
             iconType="edit"
             onClick={toggleViewType}
-            size="1em"
+            style={{
+              color: "grey",
+              cursor: "pointer",
+              fontSize: "1rem",
+            }}
           />
-        </FlexContainer>
+        </div>
 
         {/* <SubTitle>{email}</SubTitle> */}
         {/* <SubTitle>{designation}</SubTitle> */}

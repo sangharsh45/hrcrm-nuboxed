@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import {
   SubTitle,
 } from "../../../../Components/UI/Elements";
-import { FlexContainer } from "../../../../Components/UI/Layout";
 import BorderColorIcon from '@mui/icons-material/BorderColor';
 class OrganizationStatsView extends Component {
   render() {
@@ -20,14 +19,18 @@ class OrganizationStatsView extends Component {
     // const phon = `${countryDialCode1 || ""} ${phoneNo || ""}`;
     return (
       <>
-        <FlexContainer justifyContent="flex-end">
+          <div class=" flex justify-end">
           <BorderColorIcon
             tooltipTitle="Edit"
             iconType="edit"
             onClick={toggleViewType}
-            size="1em"
+            style={{
+              color: "grey",
+              cursor: "pointer",
+              fontSize: "1rem",
+            }}
           />
-        </FlexContainer>
+        </div>
         <OrganizationItemRow label="Website" value={organizationUrl} isLink />
         {/* <OrganizationItemRow label="Mobile #" value={""} />
         <OrganizationItemRow label="Phone #" value={""} /> */}
@@ -43,9 +46,7 @@ export default OrganizationStatsView;
 
 const OrganizationItemRow = ({ label, value, isLink }) => {
   return (
-    <FlexContainer
-      alignItems="center"
-      flexWrap="nowrap"
+    <div class=" items-center flex flex-no-wrap"
       style={{ margin: "0.4rem" }}
     >
       <SubTitle style={{ color: "#444", fontWeight: 600, width: 300 }}>
@@ -70,6 +71,6 @@ const OrganizationItemRow = ({ label, value, isLink }) => {
             {value}
           </SubTitle>
         )}
-    </FlexContainer>
+    </div>
   );
 };

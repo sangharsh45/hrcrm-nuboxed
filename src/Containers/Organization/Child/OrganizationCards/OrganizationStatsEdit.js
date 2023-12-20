@@ -3,9 +3,8 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { FormattedMessage } from "react-intl";
 import { Button } from "antd";
-import { updateOrganizationDetails } from "../../../Auth/AuthAction";
-import { FlexContainer } from "../../../../Components/UI/Layout";
 import { Spacer } from "../../../../Components/UI/Elements";
+import { updateOrganizationDetails } from "../../../Auth/AuthAction";
 import EditableInput from "../../../../Components/Forms/Edit/EditableInput";
 
 class OrganizationStatsEdit extends Component {
@@ -44,8 +43,7 @@ class OrganizationStatsEdit extends Component {
     } = this.props;
     return (
       <>
-        <FlexContainer
-          flexDirection="column"
+           <div class=" flex flex-col"
           style={{ padding: "0.625em 1.25em 0.625em 1.25em" }}
         >
           <EditableInput
@@ -57,9 +55,8 @@ class OrganizationStatsEdit extends Component {
             width="100%"
           />
           <Spacer style={{ margin: "0.125em" }} />
-          <FlexContainer
-            justifyContent="space-between"
-            style={{ width: "100%" }}
+          <div class=" flex justify-between w-full "
+          
           >
             {/* <div style={{ width: "37%" }}>
               <EditableSearcSelect
@@ -85,7 +82,7 @@ class OrganizationStatsEdit extends Component {
                 value={this.state.fields.mobileNo}
               />
             </div> */}
-          </FlexContainer>
+          </div>
           <Spacer style={{ margin: "0.125em" }} />
           {/* <FlexContainer justifyContent="space-between" style={{ width: "100%" }}>
 
@@ -142,9 +139,9 @@ class OrganizationStatsEdit extends Component {
             value={this.state.fields.facebook}
             width="100%"
           />
-        </FlexContainer>
+        </div>
 
-        <FlexContainer justifyContent="flex-end" marginRight="1.25em">
+        <div class=" flex justify-end mr-[1.25em]" >
           <Button
             type="primary"
             Loading={updatingOrganizationDetails}
@@ -164,7 +161,7 @@ class OrganizationStatsEdit extends Component {
             />
             {/* Cancel */}
           </Button>
-        </FlexContainer>
+        </div>
       </>
     );
   }
