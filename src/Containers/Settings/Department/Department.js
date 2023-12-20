@@ -13,6 +13,7 @@ import {
   searchDepartmentName,
   removeDepartments,
   updateDepartments,
+  ClearReducerDataOfDepartment
 } from "./DepartmentAction";
 import {
   getSectors,
@@ -37,6 +38,24 @@ class Department extends Component {
 
     };
   }
+
+  handleChangeDes = (e) => {
+    this.setState({ currentData: e.target.value });
+  
+    if (e.target.value.trim() === "") {
+      this.setState((prevState) => ({ pageNo: prevState.pageNo + 1 }));
+      this.props.getDepartments();
+      this.props.ClearReducerDataOfDepartment();
+    }
+  };
+  handleSearch = () => {
+    if (this.state.currentData.trim() !== "") {
+      // Perform the search
+      this.props.searchDepartmentName(this.state.currentData);
+    } else {
+      console.error("Input is empty. Please provide a value.");
+    }
+  };
   handleClear = () => {
     this.setState({ currentData: "" });
     this.props.getDepartments();
@@ -150,36 +169,14 @@ class Department extends Component {
             }}
           >
                        <div class=" flex w-[18vw]" >
-          <Input
-            placeholder="Search by Name"
-            width={"100%"}
-            // onSearch={(value) => {
-            //   props.inputCandidateDataSearch(value);
-            //   props.setCurrentData(value);
-
-            // }}
-            onChange={(e) => this.handleSearchChange(e)}
-            value={this.props.currentData}
+                       <Input
+         placeholder="Search by Name"
+        style={{width:"100%",marginLeft:"0.5rem"}}
+            // suffix={suffix}
+            onPressEnter={this.handleSearch}  
+            onChange={this.handleChangeDes}
+            // value={currentData}
           />
-           <Button
-          type={this.props.currentData ? "primary" : "danger"}
-          onClick={() => {
-            this.props.searchDepartmentName(this.state.currentData);
-
-          }}
-        >
-          Submit
-        </Button>
-        &nbsp;
-        <Button
-          type={this.props.currentData ? "primary" : "danger"}
-          onClick={() => {
-            this.handleClear();
-          }}
-        >
-          <FormattedMessage id="app.clear" defaultMessage="Clear" />
-      
-        </Button>
         </div>
             <div class=" flex flex-col" >
               {/* <Title style={{ padding: 8 }}>Designation</Title> */}
@@ -321,6 +318,7 @@ const mapDispatchToProps = (dispatch) =>
        removeDepartments,
       updateDepartments,
       getSectors,
+      ClearReducerDataOfDepartment,
       searchDepartmentName
     },
     dispatch

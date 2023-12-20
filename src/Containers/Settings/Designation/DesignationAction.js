@@ -163,3 +163,9 @@ export const removeDesignations = (designationTypeId) => (dispatch) => {
       });
   }; 
 
+  export const ClearReducerDataOfDesignation = () => (dispatch) => {
+    dispatch({
+      type: types.HANDLE_CLAER_REDUCER_DATA_DESIGNATION,
+    });
+  };
+

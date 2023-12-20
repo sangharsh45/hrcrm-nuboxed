@@ -376,3 +376,9 @@ export const linkHrToggle = ( data,departmentId,cb) => (dispatch, getState) => {
       });
     })
 };
+
+export const ClearReducerDataOfDepartment = () => (dispatch) => {
+  dispatch({
+    type: types.HANDLE_CLAER_REDUCER_DATA_DEPARTMENT,
+  });
+};

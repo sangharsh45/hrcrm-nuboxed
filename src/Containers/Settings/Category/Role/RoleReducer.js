@@ -146,7 +146,11 @@ export const rolesReducer = (state = initialState, action) => {
               };
 
 
-
+              case types.HANDLE_CLAER_REDUCER_DATA_ROLE:
+                return { ...state, 
+                  roles: [], 
+                  // deletedTruck: [] 
+                };
    
 
     default:

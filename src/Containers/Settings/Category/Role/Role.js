@@ -11,7 +11,7 @@ import {
   getRoles,
   addRoles,
   updateRoles,
-  searchRoleName,removeRole
+  searchRoleName,removeRole,ClearReducerDataOfRole
 } from "./RoleAction";
 import { BundleLoader } from "../../../../Components/Placeholder";
 import * as Yup from "yup";
@@ -46,6 +46,25 @@ class Department extends Component {
       error: "", // Add error field for validation error message
     };
   }
+
+    handleChangeDes = (e) => {
+    this.setState({ currentData: e.target.value });
+  
+    if (e.target.value.trim() === "") {
+      this.setState((prevState) => ({ pageNo: prevState.pageNo + 1 }));
+      this.props.getRoles(this.props.organizationId);
+      this.props.ClearReducerDataOfRole();
+    }
+  };
+  handleSearch = () => {
+    if (this.state.currentData.trim() !== "") {
+      // Perform the search
+      this.props.searchRoleName(this.state.currentData);
+    } else {
+      console.error("Input is empty. Please provide a value.");
+    }
+  };
+
   
   toggleInput = () =>
     this.setState((prevState) => ({
@@ -191,40 +210,19 @@ class Department extends Component {
           <MainWrapper
             style={{
               flexBasis: "100%",
-              // height: "30.625em",
               overflow: "auto",
               color: "#FFFAFA",
             }}
           >
             <div class=" flex w-[18vw]" >
-              <Input
-                placeholder="Search by Name"
-                width={"100%"}
-                // onSearch={(value) => {
-                //   props.inputCandidateDataSearch(value);
-                //   props.setCurrentData(value);
-
-                // }}
-                onChange={(e) => this.handleSearchChange(e)}
-                value={this.props.currentData}
-              />
-              <Button
-                type={this.props.currentData ? "primary" : "danger"}
-                onClick={() => {
-                  this.props.searchRoleName(this.state.currentData);
-                }}
-              >
-                Submit
-              </Button>
-              &nbsp;
-              <Button
-                type={this.props.currentData ? "primary" : "danger"}
-                onClick={() => {
-                  this.handleClear();
-                }}
-              >
-                <FormattedMessage id="app.clear" defaultMessage="Clear" />
-              </Button>
+            <Input
+         placeholder="Search by Name"
+        style={{width:"100%",marginLeft:"0.5rem"}}
+            // suffix={suffix}
+            onPressEnter={this.handleSearch}  
+            onChange={this.handleChangeDes}
+            // value={currentData}
+          />
             </div>
             <div class=" flex flex-col" >
               {/* <Title style={{ padding: 8 }}>Designation</Title> */}
@@ -373,7 +371,8 @@ const mapDispatchToProps = (dispatch) =>
       updateRoles,
       getDepartments,
       searchRoleName,
-      removeRole
+      removeRole,
+      ClearReducerDataOfRole
     },
     dispatch
   );
