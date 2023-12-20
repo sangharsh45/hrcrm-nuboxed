@@ -2,14 +2,12 @@ import React, { Component,  Suspense } from "react";
 import { bindActionCreators } from "redux";
 import { StyledTabs } from "../../../Components/UI/Antd";
 import { TabsWrapper } from "../../../Components/UI/Layout";
-import { FlexContainer } from "../../../Components/UI/Layout";
 import { connect } from "react-redux";
 import AccessibilityIcon from '@mui/icons-material/Accessibility';
 import Designation from "../Designation/Designation";
 import Department from "../Department/Department";
 import Role from "./Role/Role";
 import RoleTalent from "./Role/RoleTalent";
-// import IdProof from "../Id Proof/IdProof";
 const TabPane = StyledTabs.TabPane;
 
 class Category extends Component {
@@ -31,8 +29,8 @@ class Category extends Component {
   render() {
     return (
       <>
-        <FlexContainer flexWrap="nowrap">
-          <div style={{ width: "100%" }}>
+        <div flexWrap="nowrap">
+          <div class=" w-full">
             <TabsWrapper>
               <StyledTabs defaultActiveKey="0" onChange={this.handleTabChange}>
                 {/* <TabPane
@@ -54,8 +52,8 @@ class Category extends Component {
                   tab={
                     <>
                       <i class="fas fa-building"></i>
-                      <span
-                        style={{ marginLeft: "0.25em" }} >Department</span>
+                      <span class=" ml-[0.25em]"
+                       >Department</span>
                     </>
                   }
                   key="4"
@@ -72,8 +70,8 @@ class Category extends Component {
                       // icon={solid("user-tie")}
                       />
 
-                      <span
-                        style={{ marginLeft: "0.25em" }}>Role (Internal)</span>
+                      <span class=" ml-[0.25em]"
+                       >Role (Internal)</span>
                     </>
                   }
                   key="5"
@@ -89,7 +87,7 @@ class Category extends Component {
                       // icon={solid("user-tie")}
                       />
 
-                      <span style={{ marginLeft: "0.25em" }}>Role (External)</span>
+                      <span class=" ml-[0.25em]">Role (External)</span>
                     </>
                   }
                   key="6"
@@ -103,7 +101,7 @@ class Category extends Component {
                     <>
                       <i class="fab fa-artstation"></i>
                       <span
-                        style={{ marginLeft: "0.25em" }} >Designation</span>
+                       class=" ml-[0.25em]" >Designation</span>
                     </>
                   }
                   key="7"
@@ -116,7 +114,7 @@ class Category extends Component {
               </StyledTabs>
             </TabsWrapper>
           </div>
-        </FlexContainer>
+        </div>
       </>
     );
   }

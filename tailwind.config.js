@@ -26,6 +26,7 @@ module.exports = {
             },
             colors: {
               "clr": "tomato",
+              "catClr":"#40A9FF"
            
       
             },

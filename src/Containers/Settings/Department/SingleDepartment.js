@@ -54,7 +54,7 @@ class SingleDepartment extends Component {
             viewType === "view" ? (
               <div class="flex" >
                 <div class="w-11/12 flex-row">
-              <FlexContainer justifyContent="space-between">
+              <div class=" flex justify-between" >
                 {/* <div class=" flex w-1/2"> */}
                <div class=" w-[5rem]">
                 <DepartmentName >
@@ -75,7 +75,7 @@ class SingleDepartment extends Component {
                     />  
                     </div>
                     <h1 class="ml-4">ERP</h1>
-                    <div    style={{width:"6%"}}>
+                    <div class=" w-[6%]"   >
                     
                     <ERPStatusToggle
                       erpInd={erpInd}
@@ -84,7 +84,7 @@ class SingleDepartment extends Component {
                     />  
                     </div>
                     <h1>CRM</h1>
-                    <div    style={{width:"6%"}}>
+                    <div   class=" w-[6%]">
                     <CRMStatusToggle
                       crmInd={crmInd}
                       departmentName={departmentName}
@@ -92,7 +92,7 @@ class SingleDepartment extends Component {
                     />  
                     </div>
                     <h1>IM</h1>
-                    <div style={{width:"6%"}}>
+                    <div class=" w-[6%]">
                     <IMStatusToggle
                       imInd={imInd}
                       departmentName={departmentName}
@@ -101,7 +101,7 @@ class SingleDepartment extends Component {
                     </div>
                     <h1>HR</h1>
                     <div 
-                    style={{width:"7%"}}
+                   class=" w-[7%]"
                     >
                     <HrStatusToggle
                       hrInd={hrInd}
@@ -111,7 +111,7 @@ class SingleDepartment extends Component {
                     </div>
                     <h1>Accounting</h1>
                     <div 
-                    style={{width:"7%"}}
+                   class=" w-[7%]"
                     >
                     <AccountingStatusToggle
                       accountInd={accountInd}
@@ -122,7 +122,7 @@ class SingleDepartment extends Component {
 
                     <h1>RecruitPro</h1>
                     <div 
-                    style={{width:"7%"}}
+                  class=" w-[7%]"
                     >
                     <RecruitProStatusToggle
                       recruitOppsInd={recruitOppsInd}
@@ -132,7 +132,7 @@ class SingleDepartment extends Component {
                     </div>
                    
                 
-              </FlexContainer>
+              </div>
               </div>
               <div>
                 
@@ -187,7 +187,7 @@ class SingleDepartment extends Component {
                </Select>
                   <br />
                   <br />
-                  <FlexContainer justifyContent="flex-end">
+                  <div class=" flex justify-end" >
                   <Button
                     type="primary"
                     htmlType="submit"
@@ -209,7 +209,7 @@ class SingleDepartment extends Component {
               defaultMessage="Cancel"
             />
                 </Button>
-                </FlexContainer>
+                </div>
                 </FlexContainer>
               )
           }

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Button, } from "antd";
-import { MainWrapper, FlexContainer } from "../../../../Components/UI/Layout";
+import { MainWrapper, } from "../../../../Components/UI/Layout";
 import { TextInput, } from "../../../../Components/UI/Elements";
  import { BundleLoader } from "../../../../Components/Placeholder";
 import {
@@ -106,7 +106,7 @@ class RoleTalent extends Component {
     if (fetchingTalentRolesError) return <p>Error ...</p>;
     return (
       <>
-        <FlexContainer flexWrap="nowrap">
+        <div class =" flex flex-nowrap" >
           <MainWrapper
             style={{
               flexBasis: "100%",
@@ -115,7 +115,7 @@ class RoleTalent extends Component {
               color: "#FFFAFA",
             }}
           >
-            <FlexContainer flexDirection="column">
+            <div class=" flex flex-col" >
               {/* <Title style={{ padding: 8 }}>Designation</Title> */}
              <MainWrapper style={{ height: "30em", marginTop: "0.625em" }}>
                 {talentRoles.length ? (
@@ -137,11 +137,10 @@ class RoleTalent extends Component {
                     <p>No Data Available</p>
                   )}
               </MainWrapper> 
-            </FlexContainer>
+            </div>
             {isTextInputOpen ? (
-              <FlexContainer
-                alignItems="center"
-                style={{ marginLeft: "0.3125em", marginTop: "0.3125em" }}
+              <div class=" flex items-center ml-[0.3125em] mt-[0.3125em]"
+            
               >
                 <br />
                 <br />
@@ -169,11 +168,11 @@ class RoleTalent extends Component {
                 <Button type="primary" ghost onClick={this.toggleInput}>
                   Cancel
                 </Button>
-              </FlexContainer>
+              </div>
             ) : (
               <>
                 <br />
-                <FlexContainer justifyContent="flex-end">
+                <div class=" flex justify-end" >
                   <Button
                     type="primary"
                     ghost
@@ -183,13 +182,13 @@ class RoleTalent extends Component {
                   >
                     Add Type
                   </Button>
-                </FlexContainer>
+                </div>
               </>
             )}
           </MainWrapper>
      
    
-        </FlexContainer>
+        </div>
       </>
     );
   }

@@ -3,7 +3,6 @@ import styled from "styled-components";
 import { Button ,Tooltip} from "antd";
 import BorderColorIcon from '@mui/icons-material/BorderColor';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { FlexContainer } from "../../../../Components/UI/Layout";
 import { TextInput } from "../../../../Components/UI/Elements";
 import ViewEditCard from "../../../../Components/UI/Elements/ViewEditCard";
 import { Select } from "../../../../Components/UI/Elements";
@@ -40,7 +39,7 @@ class SingleRoleTalent extends Component {
         <ViewEditCard>
           {({ viewType }, toggleViewType) =>
             viewType === "view" ? (
-              <FlexContainer justifyContent="space-between">
+              <div class=" flex justify-between" >
                 <RoleType style={{ flexBasis: "43%" }}>
                   {roleType}
                 </RoleType>
@@ -69,9 +68,9 @@ class SingleRoleTalent extends Component {
                     />
                   </Tooltip>
                 </div>
-              </FlexContainer>
+              </div>
             ) : (
-                <FlexContainer>
+              <div class=" flex">
                   <TextInput
                     name={name}
                     // value={value || departmentName}
@@ -82,7 +81,7 @@ class SingleRoleTalent extends Component {
              
              
                   <br />
-                  <FlexContainer justifyContent="flex-end">
+                  <div class=" flex justify-end" >
                   <Button
                     type="primary"
                     htmlType="submit"
@@ -98,8 +97,8 @@ class SingleRoleTalent extends Component {
                      Cancel 
             
                 </Button>
-                </FlexContainer>
-                </FlexContainer>
+                </div>
+                </div>
               )
           }
         </ViewEditCard>

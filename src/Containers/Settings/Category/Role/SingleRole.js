@@ -42,7 +42,7 @@ class SingleRole extends Component {
         <ViewEditCard>
           {({ viewType }, toggleViewType) =>
             viewType === "view" ? (
-              <FlexContainer justifyContent="space-between">
+              <div class=" flex justify-between" >
                 <RoleType style={{ flexBasis: "43%" }}>{roleType}</RoleType>
                 <RoleType style={{ flexBasis: "42%" }}>
                   {departmentName}
@@ -71,9 +71,9 @@ class SingleRole extends Component {
                     />
                   </Tooltip>
                 </div>
-              </FlexContainer>
+              </div>
             ) : (
-              <FlexContainer>
+              <div class=" flex">
                 <TextInput
                   name={name}
                   // value={value || departmentName}
@@ -96,7 +96,7 @@ class SingleRole extends Component {
                   })}
                 </Select>
                 <Spacer />
-                <FlexContainer justifyContent="flex-end">
+                <div class=" flex justify-end" >
                   <Button
                     type="primary"
                     htmlType="submit"
@@ -118,8 +118,8 @@ class SingleRole extends Component {
                   <Button type="primary" ghost onClick={() => toggleViewType()}>
                     Cancel
                   </Button>
-                </FlexContainer>
-              </FlexContainer>
+                </div>
+              </div>
             )
           }
         </ViewEditCard>
