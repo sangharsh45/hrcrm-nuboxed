@@ -174,3 +174,9 @@ export const linkTaskWorkflowToggle = ( data,cb) => (dispatch) => {
       });
     })
 };
+
+export const ClearReducerDataOfTask = () => (dispatch) => {
+  dispatch({
+    type: types.HANDLE_CLAER_REDUCER_DATA_TASK,
+  });
+};

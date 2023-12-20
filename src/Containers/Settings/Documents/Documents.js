@@ -5,7 +5,7 @@ import { FormattedMessage } from "react-intl";
 import moment from "moment";
 import { Button,Input } from "antd";
 import { BundleLoader } from "../../../Components/Placeholder";
-import { MainWrapper, FlexContainer } from "../../../Components/UI/Layout";
+import { MainWrapper } from "../../../Components/UI/Layout";
 import { TextInput, } from "../../../Components/UI/Elements";
 import SingleDocuments from "./Child/SingleDocuments";
 import {
@@ -14,6 +14,7 @@ import {
   removeDocuments,
   updateDocuments,
   searchDocumentsName,
+  ClearReducerDataOfDocument
 } from "./DocumentsAction";
 
 
@@ -30,6 +31,24 @@ class Documents extends Component {
       currentData: ""
     };
   }
+
+  handleChangeDes = (e) => {
+    this.setState({ currentData: e.target.value });
+  
+    if (e.target.value.trim() === "") {
+      this.setState((prevState) => ({ pageNo: prevState.pageNo + 1 }));
+      this.props.getDocuments();
+      this.props.ClearReducerDataOfDocument();
+    }
+  };
+  handleSearch = () => {
+    if (this.state.currentData.trim() !== "") {
+      // Perform the search
+      this.props.searchDocumentsName(this.state.currentData);
+    } else {
+      console.error("Input is empty. Please provide a value.");
+    }
+  };
   handleClear = () => {
     this.setState({ currentData: "" });
     this.props.getDocuments();
@@ -104,7 +123,7 @@ class Documents extends Component {
     if (fetchingDocumentsError) return <p>Error ...</p>;
     return (
       <>
-        <FlexContainer flexWrap="nowrap">
+      <div class="flex flex-nowrap" >
           <MainWrapper
             style={{
               flexBasis: "100%",
@@ -112,34 +131,17 @@ class Documents extends Component {
               color: "#FFFAFA",
             }}
           >
-             <div style={ {width: "18vw",display:"flex"}} >
-          <Input
-            placeholder="Search by Name"
-            width={"100%"}
-            onChange={(e) => this.handleSearchChange(e)}
-            value={this.props.currentData}
+     <div class=" flex w-[18vw]" >
+            <Input
+         placeholder="Search by Name"
+        style={{width:"100%",marginLeft:"0.5rem"}}
+            // suffix={suffix}
+            onPressEnter={this.handleSearch}  
+            onChange={this.handleChangeDes}
+            // value={currentData}
           />
-           <Button
-          type={this.props.currentData ? "primary" : "danger"}
-          onClick={() => {
-            this.props.searchDocumentsName(this.state.currentData);
-
-          }}
-        >
-          Submit
-        </Button>
-        &nbsp;
-        <Button
-          type={this.props.currentData ? "primary" : "danger"}
-          onClick={() => {
-            this.handleClear();
-          }}
-        >
-          <FormattedMessage id="app.clear" defaultMessage="Clear" />
-      
-        </Button>
-        </div>
-            <FlexContainer flexDirection="column">
+            </div>
+            <div class=" flex flex-col" >
               <MainWrapper style={{ height: "30em", marginTop: "0.62em" }}>
                 {documents.length ? (
                   documents.map((document, i) => (
@@ -163,12 +165,11 @@ class Documents extends Component {
                     <p>No Data Available</p>
                   )}
               </MainWrapper>
-            </FlexContainer>
+            </div>
             {isTextInputOpen ? (
-              <FlexContainer
-                alignItems="center"
-                style={{ marginLeft: "0.3125em", marginTop: "0.3125em" }}
-              >
+               <div class=" flex items-center ml-[0.3125em] mt-[0.3125em]"
+            
+               >
                 <br />
                 <br />
                 <TextInput
@@ -202,11 +203,11 @@ class Documents extends Component {
                     defaultMessage="Cancel"
                   />
                 </Button>
-              </FlexContainer>
+              </div>
             ) : (
               <>
                 <br />
-                <FlexContainer justifyContent="flex-end">
+                <div class=" flex justify-end" >
                   <Button
                     type="primary"
                     ghost
@@ -216,12 +217,12 @@ class Documents extends Component {
                   >
                    Add More 
                   </Button>
-                </FlexContainer>
+                </div>
                
               </>
             )}
           </MainWrapper>
-        </FlexContainer>
+        </div>
         <h4>Updated on {moment(this.props.documents && this.props.documents.length && this.props.documents[0].updationDate).format("ll")} by {this.props.documents && this.props.documents.length && this.props.documents[0].name}</h4>
       </>
     );
@@ -246,6 +247,7 @@ const mapDispatchToProps = (dispatch) =>
       addDocuments,
       removeDocuments,
       updateDocuments,
+      ClearReducerDataOfDocument,
       searchDocumentsName,
     },
     dispatch

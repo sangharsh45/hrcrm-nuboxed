@@ -167,3 +167,9 @@ export const updateSectors = ( sectorId,sectorName,cb) => (dispatch) => {
         });
       });
   }; 
+
+  export const ClearReducerDataOfSector = () => (dispatch) => {
+    dispatch({
+      type: types.HANDLE_CLAER_REDUCER_DATA_SECTOR,
+    });
+  };

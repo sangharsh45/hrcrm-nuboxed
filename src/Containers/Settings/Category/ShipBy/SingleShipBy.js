@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 import { Button, Tooltip, } from "antd";
-import { FlexContainer } from "../../../../Components/UI/Layout";
 import { FormattedMessage } from "react-intl";
 import DeleteIcon from '@mui/icons-material/Delete';
 import BorderColorIcon from '@mui/icons-material/BorderColor';
@@ -37,7 +36,7 @@ class SingleShipBy extends Component {
         <ViewEditCard>
           {({ viewType }, toggleViewType) =>
             viewType === "view" ? (
-              <FlexContainer justifyContent="space-between">
+              <div class=" flex justify-between" >
                 <SectorName style={{ flexBasis: "85%" }}>
                   {name}
                 </SectorName>
@@ -72,9 +71,9 @@ class SingleShipBy extends Component {
                                style={{ color: "#666" }}
                                  /> */}
                 </div>
-              </FlexContainer>
+              </div>
             ) : (
-              <FlexContainer>
+              <div class=" flex">
                 <TextInput
                   name={name1}
                   // value={value || sectorName}
@@ -84,7 +83,7 @@ class SingleShipBy extends Component {
                 />
                 <br />
                 <br />
-                <div style={{ marginLeft: "auto" }}>
+                <div class=" ml-auto" >
                   <Button
                     type="primary"
                     htmlType="submit"
@@ -105,7 +104,7 @@ class SingleShipBy extends Component {
                     <FormattedMessage id="app.cancel" defaultMessage="Cancel" />
                   </Button>
                 </div>
-              </FlexContainer>
+              </div>
             )
           }
         </ViewEditCard>

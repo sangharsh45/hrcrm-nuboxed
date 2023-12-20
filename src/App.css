@@ -864,6 +864,9 @@ h1{
   padding: 8px;
   text-align: center;
 }
+.toggle-clr{
+  background-color:rgb(119, 221, 119),
+}
 
 .matrix-table th {
   background-color: #f2f2f2;

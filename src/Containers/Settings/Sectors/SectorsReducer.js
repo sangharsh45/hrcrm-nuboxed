@@ -111,6 +111,12 @@ export const sectorsReducer = (state = initialState, action) => {
           };
         case types.GET_SECTOR_SEARCH_FAILURE:
           return { ...state, fetchingSectorSearchDataError: true };
+
+          case types.HANDLE_CLAER_REDUCER_DATA_SECTOR:
+            return { ...state, 
+              sectors: [], 
+              // deletedTruck: [] 
+            };
     
     default:
         return state;

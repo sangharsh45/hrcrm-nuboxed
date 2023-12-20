@@ -4,7 +4,7 @@ import { bindActionCreators } from "redux";
 import { FormattedMessage } from "react-intl";
 import { Button, message, Input } from "antd";
 import { BundleLoader } from "../../../../Components/Placeholder";
-import { MainWrapper, FlexContainer } from "../../../../Components/UI/Layout";
+import { MainWrapper } from "../../../../Components/UI/Layout";
 import { TextInput, } from "../../../../Components/UI/Elements";
 import {
     getBrandModel,
@@ -95,47 +95,25 @@ class BrandModel extends Component {
         //if (fetchingSectorsError) return <p>We are unable to load data</p>;
         return (
             <>
-                <FlexContainer flexWrap="nowrap">
+            <div class="flex flex-nowrap" >
                     <MainWrapper
                         style={{
                             flexBasis: "100%",
-                            // height: "30.625em",
                             overflow: "auto",
                             color: "#FFFAFA",
                         }}
                     >
-                        <div style={{ width: "18vw", display: "flex" }}>
-                            <Input
-                                placeholder="Search by Name"
-                                width={"100%"}
-                                // onSearch={(value) => {
-                                //   props.inputCandidateDataSearch(value);
-                                //   props.setCurrentData(value);
-
-                                // }}
-                                onChange={(e) => this.handleSearchChange(e)}
-                                value={this.props.currentData}
-                            />
-                            <Button
-                                type={this.props.currentData ? "primary" : "danger"}
-                            // onClick={() => {
-                            //   this.props.searchSectorName(this.state.currentData);
-                            // }}
-                            >
-                                Submit
-                            </Button>
-                            &nbsp;
-                            <Button
-                                type={this.props.currentData ? "primary" : "danger"}
-                                onClick={() => {
-                                    this.handleClear();
-                                }}
-                            >
-                                <FormattedMessage id="app.clear" defaultMessage="Clear" />
-                            </Button>
-                        </div>
-
-                        <FlexContainer flexDirection="column">
+               <div class=" flex w-[18vw]" >
+            <Input
+         placeholder="Search by Name"
+        style={{width:"100%",marginLeft:"0.5rem"}}
+            // suffix={suffix}
+            onPressEnter={this.handleSearch}  
+            onChange={this.handleChangeDes}
+            // value={currentData}
+          />
+            </div>
+            <div class=" flex flex-col" >
                             {/* <Title style={{ padding: 8 }}>Types Of Documents</Title> */}
                             <MainWrapper style={{ height: "30em", marginTop: "0.625em" }}>
                                 {brandModel.length ? (
@@ -158,12 +136,11 @@ class BrandModel extends Component {
                                         <p>No Data Available</p>
                                       )}
                             </MainWrapper>
-                        </FlexContainer>
+                        </div>
                         {isTextInputOpen ? (
-                            <FlexContainer
-                                alignItems="center"
-                                style={{ marginLeft: "0.3125em", marginTop: "0.3125em" }}
-                            >
+                           <div class=" flex items-center ml-[0.3125em] mt-[0.3125em]"
+            
+                           >
                                 <br />
                                 <br />
 
@@ -201,11 +178,11 @@ class BrandModel extends Component {
                                     {/* Cancel */}
                                     <FormattedMessage id="app.cancel" defaultMessage="Cancel" />
                                 </Button>
-                            </FlexContainer>
+                            </div>
                         ) : (
                             <>
                                 <br />
-                                <FlexContainer justifyContent="flex-end">
+                                <div class=" flex justify-end" >
                                     <Button
                                         type="primary"
                                         ghost
@@ -219,12 +196,12 @@ class BrandModel extends Component {
                       defaultMessage="Add More"
                     /> */}
                                     </Button>
-                                </FlexContainer>
+                                </div>
                                 {/* <h4>Updated on {moment(this.props.sectors && this.props.sectors.length && this.props.sectors[0].updationDate).format("ll")} by {this.props.sectors && this.props.sectors.length && this.props.sectors[0].name}</h4> */}
                             </>
                         )}
                     </MainWrapper>
-                </FlexContainer>
+                </div>
 
             </>
         );

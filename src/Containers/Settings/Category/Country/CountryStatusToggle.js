@@ -52,7 +52,10 @@ function CountryStatusToggle(props) {
             checked={props.mandatoryInd || toggle}
             // disabled={props.status}
             isLoading={true}
-            style={{width: "9em"}}
+            style={{
+              width: "9em",
+              backgroundColor: props.mandatoryInd || toggle ? "rgb(119, 221, 119)" : "#E6E6E6",
+            }}
             checkedChildren="Required"
             unCheckedChildren="Not Required"
           />

@@ -47,7 +47,10 @@ function DocumentStatusToggle(props) {
             checked={props.editInd || toggle}
             // disabled={props.status}
             isLoading={true}
-            style={{width: "9em"}}
+            style={{
+              width: "9em",
+              backgroundColor: props.editInd || toggle ? "rgb(119, 221, 119)" : "#E6E6E6",
+            }}
             checkedChildren="Not Mandatory"
             unCheckedChildren="Mandatory"
           />

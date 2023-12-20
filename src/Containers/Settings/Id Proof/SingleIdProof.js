@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 import { Button, Tooltip } from "antd";
-import { FlexContainer } from "../../../Components/UI/Layout";
 import { FormattedMessage } from "react-intl";
 import { TextInput } from "../../../Components/UI/Elements";
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -35,7 +34,7 @@ class SingleIdProof extends Component {
         <ViewEditCard>
           {({ viewType }, toggleViewType) =>
             viewType === "view" ? (
-              <FlexContainer justifyContent="space-between">
+              <div class=" flex justify-between" >
                 <IdProofName style={{ flexBasis: "85%" }}>
                   {IdProofType}
                 </IdProofName>
@@ -71,9 +70,9 @@ class SingleIdProof extends Component {
                                style={{ color: "#666" }}
                                  /> */}
                 </div>
-              </FlexContainer>
+              </div>
             ) : (
-              <FlexContainer>
+              <div class=" flex">
                 <TextInput
                   name={name}
                   // value={value || idProofType}
@@ -83,7 +82,7 @@ class SingleIdProof extends Component {
                 />
                 <br />
                 <br />
-                <div style={{ marginLeft: "auto" }}>
+                <div class=" ml-auto" >
                   <Button
                     type="primary"
                     htmlType="submit"
@@ -106,7 +105,7 @@ class SingleIdProof extends Component {
                     <FormattedMessage id="app.cancel" defaultMessage="Cancel" />
                   </Button>
                 </div>
-              </FlexContainer>
+              </div>
             )
           }
         </ViewEditCard>

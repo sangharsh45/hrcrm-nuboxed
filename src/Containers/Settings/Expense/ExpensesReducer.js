@@ -98,6 +98,12 @@ export const expensesReducer = (state = initialState, action) => {
         removingExpensesError: true,
       };
 
+      case types.HANDLE_CLAER_REDUCER_DATA_EXPENSE:
+        return { ...state, 
+          expenses: [], 
+          // deletedTruck: [] 
+        };
+
     default:
       return state;
   }

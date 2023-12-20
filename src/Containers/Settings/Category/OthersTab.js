@@ -1,8 +1,7 @@
-import React, { Component, lazy, Suspense } from "react";
+import React, { Component, Suspense } from "react";
 import { bindActionCreators } from "redux";
 import { StyledTabs } from "../../../Components/UI/Antd";
 import { TabsWrapper } from "../../../Components/UI/Layout";
-import {  FlexContainer } from "../../../Components/UI/Layout";
 import { connect } from "react-redux";
 import LanguageIcon from '@mui/icons-material/Language';
 import ReceiptIcon from '@mui/icons-material/Receipt';
@@ -32,8 +31,8 @@ class OthersTab extends Component {
   render() {
     return (
       <>
-        <FlexContainer flexWrap="nowrap">
-        <div style= {{width:"100%"}}>
+  <div class="flex flex-nowrap" >
+        <div class=" w-full">
           <TabsWrapper>
             <StyledTabs defaultActiveKey="0" onChange={this.handleTabChange}>
              
@@ -41,7 +40,7 @@ class OthersTab extends Component {
                 tab={
                   <>
                   <InsertDriveFileIcon/>
-                    <span style={{ marginLeft: "0.25em" }}>Documents</span>
+                    <span class=" ml-[0.25em]">Documents</span>
                   </>
                 }
                 key="1"
@@ -57,7 +56,7 @@ class OthersTab extends Component {
                     <RememberMeIcon 
                     // icon={solid('id-card-clip')}
                      />
-                    <span style={{ marginLeft: "0.25em" }}>Identity</span>
+                    <span class=" ml-[0.25em]" >Identity</span>
                   </>
                 }
                 key="2"
@@ -70,7 +69,7 @@ class OthersTab extends Component {
                 tab={
                   <>
                     <i class="fa fa-graduation-cap"></i>
-                    <span style={{ marginLeft: "0.25em" }}>Education</span>
+                    <span class=" ml-[0.25em]">Education</span>
                   </>
                 }
                 key="3"
@@ -84,7 +83,7 @@ class OthersTab extends Component {
                 tab={
                   <>  
                   <ReceiptIcon  />
-                    <span style={{ marginLeft: "0.25em" }} >
+                    <span class=" ml-[0.25em]" >
                     Expense
                      </span>
                   </>
@@ -99,7 +98,7 @@ class OthersTab extends Component {
                 tab={
                   <>
                  <LanguageIcon/>
-                    <span style={{ marginLeft: "0.25em" }}>Country</span>
+                    <span class=" ml-[0.25em]">Country</span>
                   </>
                 }
                 key="5"
@@ -111,7 +110,7 @@ class OthersTab extends Component {
             </StyledTabs>
           </TabsWrapper>
           </div>
-        </FlexContainer>
+        </div>
       </>
     );
   }

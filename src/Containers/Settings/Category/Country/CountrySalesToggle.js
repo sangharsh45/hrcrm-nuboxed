@@ -52,7 +52,10 @@ function CountrySalesToggle(props) {
             checked={props.salesInd || toggle}
             // disabled={props.status}
             isLoading={true}
-            style={{width: "5em"}}
+            style={{
+              width: "5em",
+              backgroundColor: props.salesInd || toggle ? "rgb(119, 221, 119)" : "#E6E6E6",
+            }}
             checkedChildren="Yes"
             unCheckedChildren="No"
           />

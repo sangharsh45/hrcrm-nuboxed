@@ -1,4 +1,4 @@
-import React, { useEffect,useState } from "react";
+import React, {  } from "react";
 import { Switch, Popconfirm, } from "antd";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
@@ -51,7 +51,10 @@ function TaskConnetToggle(props) {
             // className="toggle-clr"
             checked={props.taskCheckListInd || toggle}
             isLoading={true}
-            style={{width: "9em"}}
+            style={{
+              width: "9em",
+              backgroundColor: props.taskCheckListInd || toggle ? "rgb(119, 221, 119)" : "#E6E6E6",
+            }}
             checkedChildren="Enabled"
             unCheckedChildren="Disabled"
           />
