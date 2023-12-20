@@ -153,3 +153,9 @@ export const addIdProofs = (idProofs, cb) => (dispatch) => {
         });
       });
   };
+
+  export const ClearReducerDataOfIdproof = () => (dispatch) => {
+    dispatch({
+      type: types.HANDLE_CLAER_REDUCER_DATA_ID_PROOF,
+    });
+  };

@@ -146,3 +146,9 @@ export const removeExpense = ( expenseTypeId) => (dispatch) => {
       });
     });
 };
+
+export const ClearReducerDataOfExpense = () => (dispatch) => {
+  dispatch({
+    type: types.HANDLE_CLAER_REDUCER_DATA_EXPENSE,
+  });
+};

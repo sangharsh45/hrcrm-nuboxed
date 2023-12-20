@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 import { Button,Tooltip } from "antd";
-import { FlexContainer } from "../../../../Components/UI/Layout";
-import { Spacer, TextInput } from "../../../../Components/UI/Elements";
+import {  TextInput } from "../../../../Components/UI/Elements";
 import ViewEditCard from "../../../../Components/UI/Elements/ViewEditCard";
 import { Select } from "../../../../Components/UI/Elements";
 import BorderColorIcon from '@mui/icons-material/BorderColor';
@@ -95,7 +94,7 @@ class SingleRole extends Component {
                     );
                   })}
                 </Select>
-                <Spacer />
+             
                 <div class=" flex justify-end" >
                   <Button
                     type="primary"

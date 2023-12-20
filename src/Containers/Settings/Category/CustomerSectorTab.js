@@ -2,7 +2,6 @@ import React, { Component, Suspense } from "react";
 import { bindActionCreators } from "redux";
 import { StyledTabs } from "../../../Components/UI/Antd";
 import { TabsWrapper } from "../../../Components/UI/Layout";
-import { FlexContainer } from "../../../Components/UI/Layout";
 import { connect } from "react-redux";
 import SourceIcon from '@mui/icons-material/Source';
 import FactoryIcon from '@mui/icons-material/Factory';
@@ -33,15 +32,15 @@ class CustomerSectorTab extends Component {
   render() {
     return (
       <>
-        <FlexContainer flexWrap="nowrap">
-          <div style={{ width: "70%" }}>
+         <div class="flex flex-nowrap" >
+          <div class=" w-[70%]" >
             <TabsWrapper>
               <StyledTabs defaultActiveKey="0" onChange={this.handleTabChange}>
                 <TabPane
                   tab={
                     <>
                       <FactoryIcon />
-                      <span style={{ marginLeft: "0.25em" }}>
+                      <span class=" ml-[0.25em]">
                         Sector
                       </span>
                     </>
@@ -56,7 +55,7 @@ class CustomerSectorTab extends Component {
                   tab={
                     <>
                       <SourceIcon />
-                      <span style={{ marginLeft: "0.25em" }}>
+                      <span class=" ml-[0.25em]">
                         Source
                       </span>
                     </>
@@ -71,7 +70,7 @@ class CustomerSectorTab extends Component {
                   tab={
                     <>
                       <SourceIcon />
-                      <span style={{ marginLeft: "0.25em" }}>
+                      <span class=" ml-[0.25em]">
                         Ship By
                       </span>
                     </>
@@ -86,8 +85,8 @@ class CustomerSectorTab extends Component {
                   tab={
                     <>
                       <SourceIcon />
-                      <span style={{ marginLeft: "0.25em" }}>
-                        Customer
+                      <span class=" ml-[0.25em]">
+                      Type
                       </span>
                     </>
                   }
@@ -102,7 +101,7 @@ class CustomerSectorTab extends Component {
                   tab={
                     <>
                       <SourceIcon />
-                      <span style={{ marginLeft: "0.25em" }}>
+                      <span class=" ml-[0.25em]">
                         BrandModel
                       </span>
                     </>
@@ -117,7 +116,7 @@ class CustomerSectorTab extends Component {
                   tab={
                     <>
                       <SourceIcon />
-                      <span style={{ marginLeft: "0.25em" }}>
+                      <span class=" ml-[0.25em]">
                         Vat
                       </span>
                     </>
@@ -131,7 +130,7 @@ class CustomerSectorTab extends Component {
               </StyledTabs>
             </TabsWrapper>
           </div>
-        </FlexContainer>
+        </div>
       </>
     );
   }

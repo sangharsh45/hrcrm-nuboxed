@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 import { Button, Tooltip } from "antd";
-import { FlexContainer } from "../../../../Components/UI/Layout";
 import DeleteIcon from '@mui/icons-material/Delete';
 import BorderColorIcon from '@mui/icons-material/BorderColor';
 import { TextInput } from "../../../../Components/UI/Elements";
@@ -32,7 +31,7 @@ class SingleBrandModel extends Component {
                 <ViewEditCard>
                     {({ viewType }, toggleViewType) =>
                         viewType === "view" ? (
-                            <FlexContainer justifyContent="space-between">
+                            <div class=" flex justify-between" >
                                 <SectorName style={{ flexBasis: "90%" }}>
                                     {brand} {model}
                                 </SectorName>
@@ -58,9 +57,9 @@ class SingleBrandModel extends Component {
                                         />
                                     </Tooltip>
                                 </div>
-                            </FlexContainer>
+                            </div>
                         ) : (
-                            <FlexContainer>
+                            <div class=" flex">
                                 <TextInput
                                     name={name}
                                     value={value || brand}
@@ -78,7 +77,7 @@ class SingleBrandModel extends Component {
                                     width="36%"
                                 />
                                 <br />
-                                <FlexContainer justifyContent="flex-end">
+                                <div class=" flex justify-end" >
                                     <Button
                                         type="primary"
                                         htmlType="submit"
@@ -99,8 +98,8 @@ class SingleBrandModel extends Component {
                                         Cancel
                                         {/* <FormattedMessage id="app.cancel" defaultMessage="Cancel" /> */}
                                     </Button>
-                                </FlexContainer>
-                            </FlexContainer>
+                                </div>
+                            </div>
                         )
                     }
                 </ViewEditCard>

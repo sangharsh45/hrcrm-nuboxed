@@ -53,10 +53,10 @@ class SingleDepartment extends Component {
           {({ viewType }, toggleViewType) =>
             viewType === "view" ? (
               <div class="flex" >
-                <div class="w-11/12 flex-row">
+                <div class="w-full flex-row">
               <div class=" flex justify-between" >
                 {/* <div class=" flex w-1/2"> */}
-               <div class=" w-[5rem]">
+               <div class=" w-[9rem]">
                 <DepartmentName >
                   {departmentName}
                 </DepartmentName>
@@ -75,7 +75,7 @@ class SingleDepartment extends Component {
                     />  
                     </div>
                     <h1 class="ml-4">ERP</h1>
-                    <div class=" w-[6%]"   >
+                    <div class=" w-[7%]"   >
                     
                     <ERPStatusToggle
                       erpInd={erpInd}
@@ -84,7 +84,7 @@ class SingleDepartment extends Component {
                     />  
                     </div>
                     <h1>CRM</h1>
-                    <div   class=" w-[6%]">
+                    <div   class=" w-[7%]">
                     <CRMStatusToggle
                       crmInd={crmInd}
                       departmentName={departmentName}
@@ -92,7 +92,7 @@ class SingleDepartment extends Component {
                     />  
                     </div>
                     <h1>IM</h1>
-                    <div class=" w-[6%]">
+                    <div class=" w-[7%]">
                     <IMStatusToggle
                       imInd={imInd}
                       departmentName={departmentName}
@@ -101,7 +101,7 @@ class SingleDepartment extends Component {
                     </div>
                     <h1>HR</h1>
                     <div 
-                   class=" w-[7%]"
+                   class=" w-[8%]"
                     >
                     <HrStatusToggle
                       hrInd={hrInd}
@@ -111,7 +111,7 @@ class SingleDepartment extends Component {
                     </div>
                     <h1>Accounting</h1>
                     <div 
-                   class=" w-[7%]"
+                   class=" w-[8%]"
                     >
                     <AccountingStatusToggle
                       accountInd={accountInd}
@@ -122,7 +122,7 @@ class SingleDepartment extends Component {
 
                     <h1>RecruitPro</h1>
                     <div 
-                  class=" w-[7%]"
+                  class=" w-[8%]"
                     >
                     <RecruitProStatusToggle
                       recruitOppsInd={recruitOppsInd}

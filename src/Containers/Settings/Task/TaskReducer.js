@@ -134,6 +134,13 @@ case types.GET_TASK_REQUEST:
               addingTaskWorkflowToggleError: true,
             };
 
+            
+            case types.HANDLE_CLAER_REDUCER_DATA_TASK:
+              return { ...state, 
+                tasks: [], 
+                // deletedTruck: [] 
+              };
+
     default:
         return state;
     }

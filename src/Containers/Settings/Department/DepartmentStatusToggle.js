@@ -54,7 +54,11 @@ console.log("mndtry",props.mandetoryInd);
             checked={props.mandetoryInd || toggle}
             // disabled={props.status}
             isLoading={true}
-            style={{width: "9em"}}
+            style={{
+              width: "9em",
+              backgroundColor: props.mandetoryInd || toggle ? "rgb(119, 221, 119)" : "#E6E6E6",
+            }}
+          
             checkedChildren="Mandatory"
             unCheckedChildren="Not Mandatory"
           />

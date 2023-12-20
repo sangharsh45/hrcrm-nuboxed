@@ -194,6 +194,12 @@ export const documentsReducer = (state = initialState, action) => {
                 addingTypeToggle: false,
              addingTypeToggleError: true,
               };
+
+              case types.HANDLE_CLAER_REDUCER_DATA_DOCUMENT:
+                return { ...state, 
+                  documents: [], 
+                  // deletedTruck: [] 
+                };
       
 
     default:

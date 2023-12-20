@@ -284,5 +284,11 @@ export const removeDocuments = (documentTypeId) => (dispatch) => {
       })
   };
 
+  export const ClearReducerDataOfDocument = () => (dispatch) => {
+    dispatch({
+      type: types.HANDLE_CLAER_REDUCER_DATA_DOCUMENT,
+    });
+  };
+
 
  

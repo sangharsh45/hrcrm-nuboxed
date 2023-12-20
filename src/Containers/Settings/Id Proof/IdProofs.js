@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import moment from "moment";
 import { bindActionCreators } from "redux";
 import { Button,Input } from "antd";
-import { MainWrapper, FlexContainer } from "../../../Components/UI/Layout";
+import { MainWrapper, } from "../../../Components/UI/Layout";
 import { TextInput, } from "../../../Components/UI/Elements";
 import SingleIdProof from "./SingleIdProof";
 import { BundleLoader } from "../../../Components/Placeholder";
@@ -12,7 +12,8 @@ import {
   addIdProofs,
   removeIdProof,
   updateIdProofs,
-  searchIdProofName
+  searchIdProofName,
+  ClearReducerDataOfIdproof
 } from "./IdProofAction";
 
 class IdProofs extends Component {
@@ -29,6 +30,23 @@ class IdProofs extends Component {
       currentData: ""
     };
   }
+  handleChangeDes = (e) => {
+    this.setState({ currentData: e.target.value });
+  
+    if (e.target.value.trim() === "") {
+      this.setState((prevState) => ({ pageNo: prevState.pageNo + 1 }));
+      this.props.getIdProofs();
+      this.props.ClearReducerDataOfIdproof();
+    }
+  };
+  handleSearch = () => {
+    if (this.state.currentData.trim() !== "") {
+      // Perform the search
+      this.props.searchIdProofName(this.state.currentData);
+    } else {
+      console.error("Input is empty. Please provide a value.");
+    }
+  };
   handleClear = () => {
     this.setState({ currentData: "" });
     this.props.getIdProofs();
@@ -102,47 +120,25 @@ class IdProofs extends Component {
     // if (fetchingIdProofsError) return <p>We are unable to load data</p>;
     return (
       <>
-        <FlexContainer flexWrap="nowrap">
+           <div class="flex flex-nowrap" >
           <MainWrapper
             style={{
               flexBasis: "100%",
-              // height: "30.625em",
               overflow: "auto",
               color: "#FFFAFA",
             }}
           >
-            <div style={ {width: "18vw",display:"flex"}} >
-          <Input
-            placeholder="Search by Name"
-            width={"100%"}
-            // onSearch={(value) => {
-            //   props.inputCandidateDataSearch(value);
-            //   props.setCurrentData(value);
-
-            // }}
-            onChange={(e) => this.handleSearchChange(e)}
-            value={this.props.currentData}
+         <div class=" flex w-[18vw]" >
+            <Input
+         placeholder="Search by Name"
+        style={{width:"100%",marginLeft:"0.5rem"}}
+            // suffix={suffix}
+            onPressEnter={this.handleSearch}  
+            onChange={this.handleChangeDes}
+            // value={currentData}
           />
-           <Button
-          type={this.props.currentData ? "primary" : "danger"}
-          onClick={() => {
-            this.props.searchIdProofName(this.state.currentData);
-
-          }}
-        >
-          Submit
-        </Button>
-        &nbsp;
-        <Button
-          type={this.props.currentData ? "primary" : "danger"}
-          onClick={() => {
-            this.handleClear();
-          }}
-        >
-          Clear
-        </Button>
-        </div>
-            <FlexContainer flexDirection="column">             
+            </div>
+            <div class=" flex flex-col" >           
               <MainWrapper style={{ height: "30em", marginTop: "0.625em" }}>
                 {idProofs.length ? (
                   idProofs.map((idProof, i) => (
@@ -166,11 +162,10 @@ class IdProofs extends Component {
                     <p>No Data Available</p>
                   )}
               </MainWrapper>
-            </FlexContainer>
+            </div>
             {isTextInputOpen ? (
-              <FlexContainer
-                alignItems="center"
-                style={{ marginLeft: "0.3125em", marginTop: "0.3125em" }}
+              <div class=" flex items-center ml-[0.3125em] mt-[0.3125em]"
+            
               >
                 <br />
                 <br />
@@ -196,11 +191,11 @@ class IdProofs extends Component {
                 <Button type="primary" ghost onClick={this.toggleInput}>
                   Cancel
                 </Button>
-              </FlexContainer>
+              </div>
             ) : (
               <>
                 <br />
-                <FlexContainer justifyContent="flex-end">
+                <div class=" flex justify-end" >
                   <Button
                     type="primary"
                     ghost
@@ -210,11 +205,11 @@ class IdProofs extends Component {
                   >
                     Add More
                   </Button>
-                </FlexContainer>
+                </div>
               </>
             )}
           </MainWrapper>         
-        </FlexContainer>
+        </div>
         <h4>Updated on {moment(this.props.idProofs && this.props.idProofs.length && this.props.idProofs[0].updationDate).format("ll")} by {this.props.idProofs && this.props.idProofs.length && this.props.idProofs[0].name}</h4>
       </>
     );
@@ -237,7 +232,8 @@ const mapDispatchToProps = (dispatch) =>
       addIdProofs ,
       updateIdProofs,
       searchIdProofName,
-      removeIdProof
+      removeIdProof,
+      ClearReducerDataOfIdproof
     },
     dispatch
   );

@@ -7,7 +7,6 @@ import {linkTypeToggle} from "../DocumentsAction";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Button,Tooltip, Select } from "antd";
-import { FlexContainer } from "../../../../Components/UI/Layout";
 import { TextInput } from "../../../../Components/UI/Elements";
 import ViewEditCard from "../../../../Components/UI/Elements/ViewEditCard";
 import DocumentStatusToggle from "./DocumentStatusToggle";
@@ -53,7 +52,7 @@ class SingleDocuments extends Component {
           {({ viewType }, toggleViewType) =>
             viewType === "view" ? (
               <div>
-                <FlexContainer >
+                <div class=" flex" >
                   <div class=" w-60">
                   <DocumentName style={{ flexBasis: "90%" }}>
                     {documentTypeName}
@@ -109,11 +108,11 @@ class SingleDocuments extends Component {
                       ) }                
                   </div>
                   </div>
-                </FlexContainer>
+                </div>
                 {/* </FlexContainer> */}
               </div>
             ) : (
-              <FlexContainer>
+              <div class=" flex" >
                 <TextInput
                   name={name}
                   // value={value || documentTypeName}
@@ -123,7 +122,7 @@ class SingleDocuments extends Component {
                 />
                 {/* <br />
                 <br /> */}
-                <FlexContainer justifyContent="flex-end">
+              <div class=" flex justify-end" >
                   <Button
                     type="primary"
                     htmlType="submit"
@@ -145,8 +144,8 @@ class SingleDocuments extends Component {
                     {/* Cancel */}
                     <FormattedMessage id="app.cancel" defaultMessage="Cancel" />
                   </Button>
-                </FlexContainer>
-              </FlexContainer>
+                </div>
+              </div>
             )
           }
         </ViewEditCard>

@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import styled from 'styled-components';
 import { Button, Tooltip } from "antd";
-import { FlexContainer } from "../../../Components/UI/Layout";
 import { FormattedMessage } from "react-intl";
 import { TextInput } from "../../../Components/UI/Elements";
 import BorderColorIcon from '@mui/icons-material/BorderColor';
@@ -28,7 +27,7 @@ class SingleExpenses extends Component {
                     {({ viewType }, toggleViewType) => (
                         viewType === 'view'
                             ?
-                            <FlexContainer justifyContent='space-between'>
+                            <div class=" flex justify-between" >
                                 <ExpenseName style={{ flexBasis: '85%' }}>
                                     {expenseType}
                                 </ExpenseName>
@@ -64,9 +63,9 @@ class SingleExpenses extends Component {
                                     
                                   
                                 </div>
-                            </FlexContainer>
+                            </div>
                             :
-                            <FlexContainer >
+                            <div class=" flex">
                                 <TextInput
                                     name={name}
                                     // value={value || expenseType}
@@ -76,7 +75,7 @@ class SingleExpenses extends Component {
                                 />
                                 <br />
                                 <br />
-                                <div style={{ marginLeft:"auto" }}>
+                                <div class=" ml-auto" >
                                 <Button
                                     type='primary'
                                     htmlType='submit'
@@ -102,7 +101,7 @@ class SingleExpenses extends Component {
                                     />
                                 </Button>
                                 </div>
-                            </FlexContainer>
+                            </div>
                     )}
                 </ViewEditCard>
             </ExpenseWrapper>
