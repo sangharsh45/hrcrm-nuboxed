@@ -55,22 +55,22 @@ function CategoryTab (props) {
           };
         return (
           <div>
-          <FlexContainer>
+          <div>
             <Suspense fallback={"Loading..."}>
               <FlexContainer flexWrap="no-wrap" style={{ width: "100%" }}>
-                <div style={{ width: "20%" }}>
+                <div class=" w-[20%]" >
                   <CategoryActionLeft
                     handleRuleClick={handleRuleClick}
                     rules={rules}
                     currentRulesOpen={currentRulesOpen}
                   />
                 </div>
-                <div style={{ width: "80%" }}>
+                <div class=" w-[80%]" >
                   <CategoryActionRight current={currentRulesOpen} />
                 </div>
               </FlexContainer>
             </Suspense>
-          </FlexContainer>
+          </div>
         </div>
       );
     }

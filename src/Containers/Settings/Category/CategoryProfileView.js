@@ -1,23 +1,16 @@
 import React from "react";
-import { Icon, Tooltip, Switch } from "antd";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import styled from "styled-components";
 import { ViewEditCard } from "../../../Components/UI/Elements";
-import { FlexContainer } from "../../../Components/UI/Layout";
 
 function CategoryProfileView(props) {
   return (
     <>
-      <div style={{ display: "flex", justifyContent: "space-around" }}>
-        <h1
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            textAlign: "center",
-            fontSize: "1.25em",
-            color: "#40A9FF",
-          }}
+      <div class=" flex justify-around"
+      // style={{ display: "flex", justifyContent: "space-around" }}
+      >
+        <h1 class=" flex justify-center items-center text-[catClr] text-[1.25em] "
         >
          Category
         </h1>
@@ -29,9 +22,9 @@ function CategoryProfileView(props) {
             <ViewEditCard>
               {({ viewType }, toggleViewType) =>
                 viewType === "view" ? (
-                  <FlexContainer
-                    justifyContent="center"
-                    alignItems="center"
+                  <div class=" flex justify-center items-center"
+                    // justifyContent="center"
+                    // alignItems="center"
                     onClick={
                       () => props.handleRuleClick(item)
                     }
@@ -55,7 +48,7 @@ function CategoryProfileView(props) {
                       
                       }
                     </StageName>
-                  </FlexContainer>
+                  </div>
                 ) : null
               }
             </ViewEditCard>

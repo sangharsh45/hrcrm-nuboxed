@@ -4,7 +4,7 @@ import { FormattedMessage } from "react-intl";
 import { bindActionCreators } from "redux";
 import { Button,Input } from "antd";
 import { BundleLoader } from "../../../Components/Placeholder";
-import { MainWrapper, FlexContainer } from "../../../Components/UI/Layout";
+import { MainWrapper } from "../../../Components/UI/Layout";
 import { TextInput,  } from "../../../Components/UI/Elements";
 import SingleDepartment from "./SingleDepartment";
 import {
@@ -140,7 +140,7 @@ class Department extends Component {
 
     return (
       <>
-        <FlexContainer flexWrap="nowrap">
+        <div flexWrap="nowrap">
           <MainWrapper
             style={{
               flexBasis: "100%",
@@ -149,7 +149,7 @@ class Department extends Component {
               color: "#FFFAFA",
             }}
           >
-                       <div style={ {width: "18vw",display:"flex"}} >
+                       <div class=" flex w-[18vw]" >
           <Input
             placeholder="Search by Name"
             width={"100%"}
@@ -181,7 +181,7 @@ class Department extends Component {
       
         </Button>
         </div>
-            <FlexContainer flexDirection="column">
+            <div class=" flex flex-col" >
               {/* <Title style={{ padding: 8 }}>Designation</Title> */}
               <MainWrapper style={{ height: "30em", marginTop: "0.625em" }}>
                 {departments.length ? (
@@ -209,11 +209,11 @@ class Department extends Component {
                   )}
 
               </MainWrapper>
-            </FlexContainer>
+            </div>
             {isTextInputOpen ? (
-              <FlexContainer alignItems="center"
-              style={{ marginLeft: "0.3125em", marginTop: "0.3125em" }}
-              >
+            <div class=" flex items-center ml-[0.3125em] mt-[0.3125em]"
+            
+            >
                 <br />
                 <br />
                   <TextInput
@@ -249,11 +249,11 @@ class Department extends Component {
                   <Button type="primary" ghost onClick={this.toggleInput}>
                     Cancel
                   </Button>
-              </FlexContainer>
+              </div>
             ) : (
               <>
                <br />
-                <FlexContainer justifyContent="flex-end">
+               <div class=" flex justify-end" >
                   <Button
                     type="primary"
                     ghost
@@ -263,7 +263,7 @@ class Department extends Component {
                   >
                     Add More
                   </Button>
-                </FlexContainer>
+                </div>
                
               </>
             )}
@@ -293,7 +293,7 @@ class Department extends Component {
               </p>
             </FlexContainer>
           </MainWrapper> */}
-        </FlexContainer>
+        </div>
         <h4>Updated on {moment(this.props.departments && this.props.departments.length && this.props.departments[0].updationDate).format("ll")} by {this.props.departments && this.props.departments.length && this.props.departments[0].name}</h4>
       </>
     );
