@@ -9,6 +9,7 @@ import OpenRepairTable from './OpenRepairTable'
 import BorderColorIcon from '@mui/icons-material/BorderColor';
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
+import AddCatalogueInProduction from './ProductionTab/AddCatalogueInProduction'
 
 const OrderPhoneTab = (props) => {
 
@@ -60,11 +61,11 @@ const OrderPhoneTab = (props) => {
                         <>
                             <span onClick={handleMainRepair}>
                                 {/* <BorderColorIcon />&nbsp; */}
-                                 Process
+                                Process
                             </span>
                             &nbsp;&nbsp;
-                            <span onClick={handleOpenRepair}> 
-                            {/* <FolderOpenTwoTone /> */}
+                            <span onClick={handleOpenRepair}>
+                                {/* <FolderOpenTwoTone /> */}
                             </span>
 
                         </>
@@ -72,6 +73,19 @@ const OrderPhoneTab = (props) => {
                     key="2">
                     {repairMain ? <ProductionRepairOrder inspectionRequiredInd={props.inspectionRequiredInd} /> :
                         openRepair ? <OpenRepairTable /> : null}
+
+                </TabPane>
+                <TabPane
+                    tab={
+                        <>
+                            <span>
+                                {/* <BorderColorIcon />&nbsp; */}
+                                Production
+                            </span>
+                        </>
+                    }
+                    key="3">
+                    <AddCatalogueInProduction />
 
                 </TabPane>
             </StyledTabs>

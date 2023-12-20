@@ -85,6 +85,9 @@ const initialState = {
   fetchingProductionUserByIdError: false,
   productionUser: [],
 
+  updatingFarGlassInProduction: false,
+  updatingFarGlassInProductionError: false,
+
   updatingtechnicianByPhone: false,
   updatingtechnicianByPhoneError: false,
 
@@ -172,7 +175,14 @@ const initialState = {
 
   fetchingCatalogueListInReurbish: false,
   fetchingCatalogueListInReurbishError: false,
-  catalogueInRefurbish: []
+  catalogueInRefurbish: [],
+
+  fetchingCatalogueByTechnician: false,
+  fetchingCatalogueByTechnicianError: false,
+  catalogueByTechnician: [],
+
+  addingCatalogueByTechnician: false,
+  addingCatalogueByTechnicianError: false,
 };
 
 export const refurbishReducer = (state = initialState, action) => {
@@ -819,6 +829,57 @@ export const refurbishReducer = (state = initialState, action) => {
         fetchingAllManufaturedId: false,
         fetchingAllManufaturedIdError: true,
       };
+
+    case types.ADD_CATALOGUE_BY_TECHNICIAN_REQUEST:
+      return { ...state, addingCatalogueByTechnician: true };
+    case types.ADD_CATALOGUE_BY_TECHNICIAN_SUCCESS:
+      return {
+        ...state,
+        addingCatalogueByTechnician: false,
+      };
+    case types.ADD_CATALOGUE_BY_TECHNICIAN_FAILURE:
+      return {
+        ...state,
+        addingCatalogueByTechnician: false,
+        addingCatalogueByTechnicianError: true,
+
+      };
+
+    case types.GET_CATALOGUE_BY_TECHNICIAN_REQUEST:
+      return { ...state, fetchingCatalogueByTechnician: true };
+    case types.GET_CATALOGUE_BY_TECHNICIAN_SUCCESS:
+      return {
+        ...state,
+        fetchingCatalogueByTechnician: false,
+        catalogueByTechnician: action.payload,
+      };
+    case types.GET_CATALOGUE_BY_TECHNICIAN_FAILURE:
+      return {
+        ...state,
+        fetchingCatalogueByTechnician: false,
+        fetchingCatalogueByTechnicianError: true,
+
+      };
+    case types.UPDATE_FAR_GLASS_IN_PRODUCTION_REQUEST:
+      return { ...state, updatingFarGlassInProduction: true };
+    case types.UPDATE_FAR_GLASS_IN_PRODUCTION_SUCCESS:
+      return {
+        ...state,
+        catalogueByTechnician: state.catalogueByTechnician.map((item) =>
+          item.productRepurbishId === action.payload.productRepurbishId
+            ? action.payload
+            : item
+        ),
+        updatingFarGlassInProduction: false,
+      };
+    case types.UPDATE_FAR_GLASS_IN_PRODUCTION_FAILURE:
+      return {
+        ...state,
+        updatingFarGlassInProduction: false,
+        updatingFarGlassInProductionError: true,
+
+      };
+
     default:
       return state;
   }
