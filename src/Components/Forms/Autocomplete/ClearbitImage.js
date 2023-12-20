@@ -44,6 +44,7 @@ class ClearbitImage extends Component {
             isRequired,
             inlineLabel,
             isColumn,
+            defaultValue,
             form: { touched, errors, setFieldValue, setFieldTouched },
             field,
             ...rest
@@ -58,6 +59,7 @@ class ClearbitImage extends Component {
                         placeholder={placeholder}
                         cacheOptions
                         loadOptions={this.loadOptions}
+                        defaultValue={defaultValue}
                         defaultOptions
                         onInputChange={this.handleInputChange}
                         onBlur={this.handleBlur}
@@ -84,6 +86,7 @@ class ClearbitImage extends Component {
                             placeholder={placeholder}
                             cacheOptions
                             loadOptions={this.loadOptions}
+                            defaultValue={defaultValue}
                             defaultOptions
                             onInputChange={this.handleInputChange}
                             onBlur={this.handleBlur}
