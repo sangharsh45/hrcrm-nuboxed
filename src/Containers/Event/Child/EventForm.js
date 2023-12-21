@@ -30,7 +30,7 @@ import { getEvents } from "../../Settings/Event/EventAction";
 import CandidateClearbit from "../../../Components/Forms/Autocomplete/CandidateClearbit";
 import { setClearbitCandidateData } from "../../Candidate/CandidateAction";
 import { Listbox, Transition } from '@headlessui/react'
-import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid';
+
 
 // yup validation scheme for creating a opportunity
 const EventSchema = Yup.object().shape({
@@ -261,8 +261,8 @@ const {
                   {
                     ...values,
                     ownerIds: userId === userId ? [userId] : [],
-                    startDate: `${newStartDate}T${newStartTime}`,
-                    endDate: `${newEndDate}T${newEndTime}`,
+                    startDate: `${newStartDate}T20:00:00Z`,
+                    endDate: `${newEndDate}T20:00:00Z`,
                     startTime: 0,
                     endTime: 0,
                     remindInd: reminder ? true : false,
@@ -292,7 +292,7 @@ const {
                     name="eventTypeId"
                     //label="Type"
                     label={
-                      <FormattedMessage id="app.type" defaultMessage="Type" />
+                      <FormattedMessage id="app.type" defaultMessage="type" />
                     }
                     component={SearchSelect}
                     isColumnWithoutNoCreate
@@ -308,7 +308,7 @@ const {
                     label={
                       <FormattedMessage
                         id="app.subject"
-                        defaultMessage="Subject"
+                        defaultMessage="subject"
                       />
                     }
                     isColumn
@@ -371,7 +371,7 @@ const {
                         label={
                           <FormattedMessage
                             id="app.enddate"
-                            defaultMessage="End Date"
+                            defaultMessage="enddate"
                           />
                         }
                         component={DatePicker}
@@ -405,7 +405,7 @@ const {
                         label={
                           <FormattedMessage
                             id="app.endtime"
-                            defaultMessage="End Time"
+                            defaultMessage="endtime"
                           />
                         }
                         isColumn
@@ -428,7 +428,7 @@ const {
                     label={
                       <FormattedMessage
                         id="app.timeZone"
-                        defaultMessage="Time Zone"
+                        defaultMessage="timeZone"
                       />
                     }
                     selectType="timeZone"
@@ -465,8 +465,11 @@ const {
                  <Listbox value={selected} onChange={setSelected}>
         {({ open }) => (
           <>
-            <Listbox.Label className="block text-sm font-semibold text-gray-700">
-              Assigned to
+            <Listbox.Label className="block text-sm font-semibold text-gray-700">            
+              <FormattedMessage
+                        id="app.assignedto"
+                        defaultMessage="assignedto"
+                      />
             </Listbox.Label>
             <div className="relative mt-1">
             <Listbox.Button className="relative w-full leading-4 cursor-default border border-gray-300 bg-white py-0.5 pl-3 pr-10 text-left shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm" style={{boxShadow: "rgb(170, 170, 170) 0px 0.25em 0.62em"}}>
@@ -537,7 +540,7 @@ const {
                     label={
                       <FormattedMessage
                         id="app.include"
-                        defaultMessage="Include"
+                        defaultMessage="include"
                       />
                     }
                     mode
@@ -561,7 +564,7 @@ const {
                  label={
                    <FormattedMessage
                      id="app.customer"
-                     defaultMessage="Customer"
+                     defaultMessage="customer"
                    />
                  }
                  //component={SearchSelect}
@@ -589,7 +592,7 @@ const {
                     label={
                       <FormattedMessage
                         id="app.contact"
-                        defaultMessage="Contact"
+                        defaultMessage="contact"
                       />
                     }
                     component={SelectComponent}
@@ -615,7 +618,7 @@ const {
                  label={
                    <FormattedMessage
                      id="app.opportunity"
-                     defaultMessage="Opportunity"
+                     defaultMessage="opportunity"
                    />
                  }
                  //component={SearchSelect}
@@ -682,7 +685,7 @@ const {
                     name="eventDescription"
                     //label="Notes"
                     label={
-                      <FormattedMessage id="app.notes" defaultMessage="Notes" />
+                      <FormattedMessage id="app.notes" defaultMessage="notes" />
                     }
                     isColumn
                     width={"100%"}
@@ -747,7 +750,7 @@ const {
                       >
                         <FormattedMessage
                           id="app.delete"
-                          defaultMessage="Delete"
+                          defaultMessage="delete"
                         />
                       </Button>
                     </StyledPopconfirm>
@@ -763,7 +766,7 @@ const {
                     "Update"
                   ) : (
                     // "Create"
-                    <FormattedMessage id="app.create" defaultMessage="Create" />
+                    <FormattedMessage id="app.create" defaultMessage="create" />
                   )}
                 </Button>
               </div>

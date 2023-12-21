@@ -90,17 +90,47 @@ function EventCardList (props) {
         height={"75vh"}
       >
          <div className=" flex justify-between w-[99%] p-2 bg-transparent font-bold sticky top-0 z-10">
-        <div className=" md:w-[12rem]">Type</div>
-        <div className=" md:w-40">Subject</div>
-        <div className=" md:w-28 ">Start</div>
-        <div className=" md:w-28 ">End</div>
-        <div className="md:w-36">Team</div>
-        <div className="md:w-24">Include</div>
-        <div className="md:w-[3%]"></div>
-        <div className="md:w-[5%]">Rating</div>
-        <div className="md:w-24">Assigned To</div>
-        <div className="md:w-24">Owner</div>
-        <div className="w-12">Action</div>
+        <div className=" md:w-[6.2rem]"><FormattedMessage
+                  id="app.type"
+                  defaultMessage="type"
+                /></div>
+        <div className=" md:w-[6.23rem]"><FormattedMessage
+                  id="app.subject"
+                  defaultMessage="subject"
+                /></div>
+        <div className=" md:w-[7.25rem] "><FormattedMessage
+                  id="app.start"
+                  defaultMessage="start"
+                /></div>
+        <div className=" md:w-[7.43rem] "><FormattedMessage
+                  id="app.end"
+                  defaultMessage="end"
+                /></div>
+        <div className="md:w-[4.2rem]"><FormattedMessage
+                  id="app.team"
+                  defaultMessage="team"
+                /></div>
+        <div className="md:w-[4.32rem]"><FormattedMessage
+                  id="app.include"
+                  defaultMessage="include"
+                /></div>
+     
+        <div className="md:w-[5.15rem]"><FormattedMessage
+                  id="app.assignedto"
+                  defaultMessage="assignedto"
+                /></div>
+        <div className="md:w-24"><FormattedMessage
+                  id="app.owner"
+                  defaultMessage="owner"
+                /></div>
+                   <div className="md:w-[5%]"><FormattedMessage
+                  id="app.rating"
+                  defaultMessage="rating"
+                /></div>
+        <div className="w-12"><FormattedMessage
+                  id="app.action"
+                  defaultMessage="action"
+                /></div>
       </div>
       {eventListRangeByUserId.map((item) => { 
                     return (
@@ -109,8 +139,8 @@ function EventCardList (props) {
                                 style={{
                                     // borderBottom: "3px dotted #515050"
                                 }}>
-                                     <div class="flex">
-                                <div className=" flex font-medium flex-col w-52 max-sm:w-full ">
+                                     <div class="flex md:w-[22rem]">
+                                <div className=" flex font-medium flex-col w-[8.98rem] max-sm:w-full ">
 <div className="flex max-sm:w-full"> 
           <div class="max-sm:w-full">
                                         <Tooltip>
@@ -128,28 +158,28 @@ function EventCardList (props) {
                                         </div>
                                 </div>
 
-                                <div className=" flex font-medium flex-col  md:w-20 max-sm:flex-row  w-full ">
+                                <div className=" flex font-medium flex-col  md:w-[5.26rem] max-sm:flex-row  w-full ">
                                     {/* <div class=" text-[0.875rem] text-cardBody font-[0.875rem] font-poppins max-sm:hidden"> Subject </div> */}
                                     <div class=" text-[0.82rem] text-cardBody font-poppins">   
                                     {item.eventSubject}
                                     </div>
                                 </div>
                                 </div>
-                                <div class="flex">
-                                <div className=" flex font-medium flex-col md:w-40 max-sm:flex-row  w-full">
+                                <div class="flex  items-center md:w-[55rem]">
+                                <div className=" flex font-medium flex-col md:w-[11.23rem] max-sm:flex-row  w-full">
                                     {/* <div class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden">Start</div> */}
                                     <div class="text-[0.82rem] text-cardBody font-poppins">
                                     {` ${moment(item.startDate).format("llll")}`}
                                     </div>
                                 </div>
-                                <div className=" flex font-medium flex-col md:w-40 max-sm:flex-row  w-full">
+                                <div className=" flex font-medium flex-col md:w-[12.32rem] max-sm:flex-row  w-full">
                                     {/* <div class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden">End</div> */}
                                     <div class="text-[0.82rem] text-cardBody font-poppins">
                                     {` ${moment(item.startDate).format("llll")}`}
                                     </div>
                                 </div>
                                
-                                <div className=" flex font-medium flex-col md:w-32 max-sm:flex-row  w-full ">
+                                <div className=" flex font-medium flex-col md:w-[7.31rem] max-sm:flex-row  w-full ">
                                     {/* <div class=" text-[0.875rem] text-cardBody font-poppins max-sm:hidden">Include</div> */}
 
                                     <div class=" text-[0.82rem] text-cardBody font-poppins">
@@ -177,7 +207,7 @@ function EventCardList (props) {
             </Avatar.Group>
                                     </div>
                                 </div>
-                                <div className="flex font-medium flex-col md:w-48 max-sm:flex-row  w-full ">
+                                <div className="flex font-medium flex-col md:w-[3.69rem] max-sm:flex-row  w-full ">
                                     {/* <div class="text-[0.875rem] text-cardBody font-poppins max-sm:hidden">Assigned To</div> */}
 
                                     <div class="text-[0.82rem] text-cardBody font-poppins">
@@ -195,9 +225,9 @@ function EventCardList (props) {
                                     </div>
                                 </div>
                                 </div>
-                                <div class="flex">
+                                <div class="flex md:w-[24rem]">
                                
-                                <div className="flex font-medium flex-col md:w-48 max-sm:flex-row  w-full ">
+                                <div className="flex font-medium flex-col md:w-[4.12rem] max-sm:flex-row  w-full ">
                        
                        {/* <div class="text-[0.875rem] text-cardBody font-poppins max-sm:hidden">Owner</div> */}
 
@@ -215,7 +245,10 @@ function EventCardList (props) {
           </Tooltip>
           </div>
                    </div>
-                                <div class="flex  md: max-sm:flex-row items-center justify-between w-full">
+                             
+                      </div>
+                      <div class="flex md:w-[14rem]">
+                      <div class="flex  md: max-sm:flex-row items-center justify-between w-full">
                     <div class="">
                     {item.rating === 0 ? (<StarBorderIcon
                 style={{ color: "#eeeedd", fontSize: "1.5em" }} />)
@@ -273,7 +306,7 @@ function EventCardList (props) {
       
             </div>
                       </div>   
-                      </div> 
+                      </div>
                             </div>
                         </div>
 

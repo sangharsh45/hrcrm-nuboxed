@@ -14,7 +14,6 @@ import StarBorderIcon from '@mui/icons-material/StarBorder';
 import DownloadForOfflineIcon from '@mui/icons-material/DownloadForOffline';
 import { OnlyWrapCard } from '../../../Components/UI/Layout';
 import NoteAltIcon from "@mui/icons-material/NoteAlt";
-import MonitorHeartIcon from "@mui/icons-material/MonitorHeart";
 import AddTaskProjectDrawerModal from "../Child/AddTaskProjectDrawerModal";
 import { Tooltip, Input, Button, Avatar,FloatButton } from "antd";
 import moment from "moment";
@@ -121,17 +120,38 @@ const TaskCardList = (props) => {
           </div> : null}
           <OnlyWrapCard style={{height:"81vh",backgroundColor:"#E3E8EE"}}>
           <div className=" flex justify-between w-[99%] p-2 bg-transparent font-bold sticky top-0 z-10">
-        <div className=" md:w-[12rem]">Type</div>
-        <div className=" md:w-40">Name</div>
-             <div className=" md:w-28 ">End</div>
+        <div className=" md:w-[8.5rem]"><FormattedMessage
+                          id="app.type"
+                          defaultMessage="type"
+                        /></div>
+        <div className=" md:w-[12rem]"><FormattedMessage
+                          id="app.name"
+                          defaultMessage="name"
+                        /></div>
+             <div className=" md:w-28 "><FormattedMessage
+                          id="app.end"
+                          defaultMessage="end"
+                        /></div>
              <div className=" md:w-28 "></div>
-        <div className="md:w-36">Deviation</div>
-        <div className="md:w-24">Assigned To</div>
-        <div className="md:w-24">Owner</div>
+        <div className="md:w-36"><FormattedMessage
+                          id="app.deviation"
+                          defaultMessage="deviation"
+                        /></div>
+        <div className="md:w-[7.2rem]"><FormattedMessage
+                          id="app.assignedto"
+                          defaultMessage="assignedto"
+                        /></div>
+        <div className="md:w-24"><FormattedMessage
+                          id="app.owner"
+                          defaultMessage="owner"
+                        /></div>
         <div className="md:w-24"></div>
         <div className="md:w-[3%]"></div>
         <div className="md:w-[5%]"></div>
-        <div className="w-12">Action</div>
+        <div className="w-12"><FormattedMessage
+                          id="app.action"
+                          defaultMessage="action"
+                        /></div>
       </div>
       {taskListRangeByUserId.map((item) => { 
         const currentDate = moment();
@@ -296,7 +316,7 @@ const TaskCardList = (props) => {
                    </div>
                      
                    </div>
-                    <div className=" flex font-medium flex-col md:w-24 max-sm:flex-row justify-between w-full ">
+                    <div className=" flex font-medium flex-col md:w-[4.2rem] max-sm:flex-row justify-between w-full ">
                                   {/* <div class="text-sm text-cardBody font-poppins max-sm:hidden">Assigned To</div> */}
                                   <div class="text-xs text-cardBody font-poppins mb-2">
                                   {item.assignedToName === null ? (
@@ -311,7 +331,7 @@ const TaskCardList = (props) => {
                                   </div>
                               </div>
                         
-                    <div class="flex max-sm:mt-4 w-28">
+                    <div class="flex max-sm:mt-4 w-[10rem]">
                                 <div className=" flex font-medium flex-col  md:w-24 max-sm:flex-row justify-between w-full ">
                                     {/* <div class=" text-sm text-cardBody font-poppins max-sm:hidden">Owner</div> */}
                                     <div class="text-xs text-cardBody font-poppins mb-2">
@@ -400,7 +420,7 @@ const TaskCardList = (props) => {
   
                    </div>
                    <div class="flex w-44 ">
-                   <div class="flex flex-col md:w-40 justify-center  max-sm:flex-row w-full">
+                   <div class="flex flex-col md:w-[7.2rem] justify-center  max-sm:flex-row w-full">
                     <div class=" w-36">
   {item.taskStatus === "Completed" && !item.approvedInd && item.assignedToName !== item.submittedBy ? (
     <>

@@ -207,11 +207,26 @@ const TaskApproveTable = (props) => {
           </div> : null}
           <OnlyWrapCard style={{height:"81vh",backgroundColor:"#E3E8EE"}}>
           <div className=" flex justify-between w-[99%] p-2 bg-transparent font-bold sticky top-0 z-10">
-          <div className=" md:w-[14rem]">Type</div>
-        <div className=" md:w-44">Name</div>
-             <div className=" md:w-28 ">Submitted By</div>
-        <div className="md:w-16">Deviation</div>
-        <div className="md:w-28">Assigned On</div>
+          <div className=" md:w-[14rem]"><FormattedMessage
+                          id="app.type"
+                          defaultMessage="type"
+                        /></div>
+        <div className=" md:w-44"><FormattedMessage
+                          id="app.name"
+                          defaultMessage="name"
+                        /></div>
+             <div className=" md:w-28 "><FormattedMessage
+                          id="app.submittedby"
+                          defaultMessage="submittedby"
+                        /></div>
+        <div className="md:w-16"><FormattedMessage
+                          id="app.deviation"
+                          defaultMessage="deviation"
+                        /></div>
+        <div className="md:w-28"><FormattedMessage
+                          id="app.assignedto"
+                          defaultMessage="assignedto"
+                        /></div>
         <div className="md:w-28"></div>
         <div className="md:w-[3%]"></div>
         <div className="md:w-[5%]"></div>

@@ -1414,7 +1414,7 @@ const [priority,setpriority]=useState(props.selectedTask
                     name="taskDescription"
                     //label="Notes"
                     label={
-                      <FormattedMessage id="app.description" defaultMessage="Description" />
+                      <FormattedMessage id="app.description" defaultMessage="description" />
                     }
                     width={"21.875em"}
                     isColumn

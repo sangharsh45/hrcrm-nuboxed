@@ -243,5 +243,10 @@
   "app.complexity":"Complexity",
   "app.assignedDate":"Assigned Date",
   "app.link":"Link",
-  "app.setReminder":"Set Reminder"
+  "app.setReminder":"Set Reminder",
+  "app.deviation":"Deviation",
+  "app.action":"Action",
+  "app.taskList":"Task CheckList",
+  "app.team":"Team",
+  "app.rating":"Rating"
 }
