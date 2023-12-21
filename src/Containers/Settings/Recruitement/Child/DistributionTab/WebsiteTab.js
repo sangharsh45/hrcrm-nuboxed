@@ -1,4 +1,4 @@
-import React, { Component, lazy, useEffect } from "react";
+import React, {  } from "react";
 import { StyledTabs } from "../../../../../Components/UI/Antd";
 import { TabsWrapper } from "../../../../../Components/UI/Layout";
 import { connect } from "react-redux";
@@ -17,7 +17,7 @@ function WebsiteTab(props) {
             <TabsWrapper>
                 <StyledTabs defaultActiveKey="1" type="card">
                     <TabPane tab={`Website`} key="1">
-                        <div style={{ marginTop: 10 }}>
+                        <div class=" mt-[10px]" >
                         <WebsiteForm/>
                         </div>
                     </TabPane>

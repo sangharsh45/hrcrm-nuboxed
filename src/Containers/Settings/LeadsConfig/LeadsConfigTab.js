@@ -1,5 +1,4 @@
-import React, { Component, lazy, useEffect } from "react";
-import { Icon, Tooltip, Popover } from "antd";
+import React, { } from "react";
 import { StyledTabs } from "../../../Components/UI/Antd";
 import { TabsWrapper } from "../../../Components/UI/Layout";
 import { connect } from "react-redux";
@@ -14,7 +13,7 @@ function LeadsConfigTab(props) {
       <TabsWrapper>
         <StyledTabs defaultActiveKey="1" type="card">
           <TabPane tab={`Ageing`} key="1">
-            <div style={{ marginTop: 10 }}>
+            <div class=" mt-[10px]" >
               <LeadsAgingForm />
             </div>
           </TabPane>

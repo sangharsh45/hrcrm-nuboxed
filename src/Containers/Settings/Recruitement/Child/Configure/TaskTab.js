@@ -10,7 +10,6 @@ import {
 import {
   getTaskForRecruit,
 } from "../../../SettingsAction";
-import { FlexContainer } from "../../../../../Components/UI/Layout";
 import { StyledTabs } from "../../../../../Components/UI/Antd";
 import { Select } from "../../../../../Components/UI/Elements";
 import { elipsize } from "../../../../../Helpers/Function/Functions";
@@ -136,7 +135,7 @@ class TaskTab extends Component {
           <MainWrapper>
           
 
-            <FlexContainer>
+          <div class=" flex">
               <StyledTabs
                 style={{ width: "80%" }}
                 defaultActiveKey={this.state.activeKey}
@@ -157,7 +156,7 @@ class TaskTab extends Component {
                 })}
               </StyledTabs>
 
-            </FlexContainer>
+            </div>
             {this.state.subTable && (
              <TaskWorkFlowTab
              taskTypeId={this.state.currentProcess.taskTypeId}

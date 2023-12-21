@@ -4,8 +4,6 @@ import { bindActionCreators } from "redux";
 import { FormattedMessage } from "react-intl";
 import { Button } from "antd";
 import { Formik, Form, Field } from "formik";
-import { Spacer } from "../../../../../Components/UI/Elements";
-import { FlexContainer } from "../../../../../Components/UI/Layout";
 import { InputComponent } from "../../../../../Components/Forms/Formik/InputComponent";
 import { EditorState, convertToRaw } from "draft-js";
 import draftToHtml from "draftjs-to-html";
@@ -59,12 +57,9 @@ function NotificationForm(props) {
           ...rest
         }) => (
           <Form className="form-background">
-            <div style={{ display: "flex", justifyContent: "space-between" }}>
-              <div
-                style={{
-                  height: "100%",
-                  width: "100%",
-                }}
+            <div class=" flex justify-between" >
+              <div class=" w-full h-full"
+           
               >
                 <Field
                   isRequired
@@ -87,7 +82,7 @@ function NotificationForm(props) {
                     marginTop: "0.25em",
                   }}
                 />
-                <Spacer />
+                 <div class=" mt-4">
                 <Field
                   name="description"
                   //label="Description"
@@ -108,7 +103,8 @@ function NotificationForm(props) {
                     marginTop: "0.25em",
                   }}
                 />
-                <Spacer />
+                </div>
+             <div class=" mt-4">
                 <Editor
                   editorState={editorState}
                   //   toolbarHidden
@@ -144,10 +140,11 @@ function NotificationForm(props) {
                   onEditorStateChange={onEditorStateChange}
                   placeholder={"Type here"}
                 />
+                </div>
               </div>
             </div>
-            <Spacer />
-            <FlexContainer justifyContent="flex-end">
+    
+            <div class=" flex justify-end" >
               <Button
                 type="primary"
                 htmlType="submit"
@@ -158,7 +155,7 @@ function NotificationForm(props) {
 
                 {/* Create */}
               </Button>
-            </FlexContainer>
+            </div>
           </Form>
         )}
       </Formik>

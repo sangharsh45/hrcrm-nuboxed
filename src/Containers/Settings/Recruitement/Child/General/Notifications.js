@@ -6,9 +6,8 @@ import {
   Select,
   StyledLabel,
 } from "../../../../../Components/UI/Elements";
-import { MainWrapper, Spacer } from "../../../../../Components/UI/Elements";
+import { MainWrapper, } from "../../../../../Components/UI/Elements";
 import {  Popconfirm, Switch } from "antd";
-import { FlexContainer } from "../../../../../Components/UI/Layout";
 import { addingNotifications, getNotifications } from "../../../SettingsAction";
 import moment from "moment";
 const { Option } = Select;
@@ -164,17 +163,10 @@ function Notifications(props) {
         {({ values }) => (
           <MainWrapper style={{ height: "446px", width: "", overflow: "auto" }}>
             <Form className="form-background">
-              <FlexContainer
-                justifyContent="space-between"
-                style={{ width: "100%" }}
+              <div class=" flex justify-between w-full"
+             
               >
-                <div
-                  style={{
-                    width: "44%",
-
-                    marginTop: "0.625em",
-                    marginLeft: "1em",
-                  }}
+               <div class=" w-[44%] mt-[0.625em] ml-[1em]"
                 >
                   <div>
                     <StyledLabel
@@ -189,12 +181,9 @@ function Notifications(props) {
                     </StyledLabel>
                   </div>
 
-                  <Spacer />
-                  <div
-                    style={{
-                      display: "flex",
-                      justifyContent: "space-between",
-                    }}
+              
+                  <div class=" flex justify-between mt-4"
+               
                   >
                     <p>In app</p>
                     <div>
@@ -214,12 +203,8 @@ function Notifications(props) {
                       </Popconfirm>
                     </div>
                   </div>
-                  <Spacer />
-                  <div
-                    style={{
-                      display: "flex",
-                      justifyContent: "space-between",
-                    }}
+                  <div class=" flex justify-between mt-4"
+                
                   >
                     <p>In SMS</p>
                     <div>
@@ -239,13 +224,9 @@ function Notifications(props) {
                       </Popconfirm>
                     </div>
                   </div>
-                  <Spacer />
-                  <div
-                    style={{
-                      display: "flex",
-                      justifyContent: "space-between",
-                    }}
-                  >
+                  <div class=" flex justify-between mt-4"
+                
+                >
                     <p>In Email</p>
                     <div>
                       <Popconfirm
@@ -264,12 +245,9 @@ function Notifications(props) {
                       </Popconfirm>
                     </div>
                   </div>
-                  <Spacer />
-                  <div
-                    style={{
-                      display: "flex",
-                      justifyContent: "space-between",
-                    }}
+              
+                  <div class=" flex justify-between mt-4"
+                
                   >
                     <p>In Whatsapp</p>
                     <div>
@@ -315,7 +293,7 @@ function Notifications(props) {
                     </div>
                   </div> */}
                 </div>
-              </FlexContainer>
+              </div>
               <h4>Updated on {moment(props.notifications.updatedDate).format("ll")} by {props.notifications.ownerName}</h4>
             </Form>
           </MainWrapper>

@@ -1,21 +1,17 @@
 import React from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { Icon, Tooltip, Button, message } from "antd";
+import { Tooltip, Button, } from "antd";
 import {
   StyledTable,
-  StyledPopconfirm,
 } from "../../../../../Components/UI/Antd";
 import AddTemplateViewModal from "../Template/AddTemplateViewModal"
 import { withRouter } from "react-router-dom";
-import TemplateView from "./TemplateView";
 import { getTemplate } from "../../../../Rules/RulesAction";
 import moment from "moment";
 import { setCurrentEmail,handleTemplateViewModal } from "../../../../Rules/RulesAction";
 import { FormattedMessage } from "react-intl";
-import { template } from "lodash";
 import { EyeInvisibleOutlined } from "@ant-design/icons";
-import { FlexContainer } from "../../../../../Components/UI/Layout";
 const ButtonGroup = Button.Group;
 
 // const data = [{ templateName: "Birthday", date: "29-10-20" }];
@@ -55,7 +51,7 @@ class EmployeeTable extends React.Component {
       width: "40%",
       render: (name, item, i) => {
         return (
-          <FlexContainer justifyContect="space-evenly">
+          <div class=" flex justify-evenly" >
           <ButtonGroup >
           <Button
         //  onClick={handleAdd}
@@ -88,7 +84,7 @@ class EmployeeTable extends React.Component {
             
           </ButtonGroup>
         
-        </FlexContainer>
+        </div>
               
         )
       },

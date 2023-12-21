@@ -1,17 +1,13 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React, {  useEffect,  } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { Button, Switch, Tooltip, Popconfirm, Popover } from "antd";
+import { Button, Popconfirm,  } from "antd";
 import { FormattedMessage } from "react-intl";
-import { YoutubeOutlined } from '@ant-design/icons';
-import { Formik, Form, Field, FastField } from "formik";
+import { Formik, Form, Field, } from "formik";
 import { InputComponent } from "../../../Components/Forms/Formik/InputComponent";
-import { SelectComponent } from "../../../Components/Forms/Formik/SelectComponent";
-import { FlexContainer } from "../../../Components/UI/Layout";
 import { StyledLabel } from "../../../Components/UI/Elements";
 import { Spacer } from "../../../Components/UI/Elements";
 import { addLeadsaging, getLeadAging } from "../SettingsAction";
-import { StyledTabs } from "../../../Components/UI/Antd";
 
 function LeadsAgingForm(props) {
   useEffect(() => {
@@ -274,9 +270,7 @@ function LeadsAgingForm(props) {
             <Spacer />
 
               <>
-                <FlexContainer
-                  justifyContent="flex-end"
-                  style={{ marginRight: "0.62em" }}
+                <div class=" flex justify-end mr-[0.62em]"
                 >
                   <Popconfirm
                     // title="Do you wish to proceed?"
@@ -310,7 +304,7 @@ function LeadsAgingForm(props) {
                       />
                     </Button>
                   </Popconfirm>
-                </FlexContainer>
+                </div>
               </>
        
           </Form>

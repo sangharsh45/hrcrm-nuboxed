@@ -24,7 +24,6 @@ import {
   deleteTaskData,
   updateTaskNameForRecruit
 } from "../../../SettingsAction";
-import { FlexContainer } from "../../../../../Components/UI/Layout";
 import { StyledTabs } from "../../../../../Components/UI/Antd";
 import { Select } from "../../../../../Components/UI/Elements";
 import { elipsize } from "../../../../../Helpers/Function/Functions";
@@ -314,7 +313,7 @@ class TaskWorkflowTab extends Component {
               <FormattedMessage id="app.workFlow" defaultMessage="WorkFlow" />
             </h1>
 
-            <FlexContainer>
+            <div class=" flex">
               <StyledTabs
                 style={{ width: "80%" }}
                 defaultActiveKey={this.state.activeKey}
@@ -336,10 +335,8 @@ class TaskWorkflowTab extends Component {
               </StyledTabs>
 
               {this.state.isTextOpen ? (
-              <FlexContainer
-                alignItems="center"
-                style={{ marginLeft: "0.3125em", marginTop: "0.3125em" }}
-              >
+            <div class=" flex items-center ml-[0.3125em] mt-[0.3125em]"
+            >
                 <br />
                 <br />
               
@@ -370,11 +367,11 @@ class TaskWorkflowTab extends Component {
                   Cancel
                
                 </Button>
-              </FlexContainer>
+              </div>
             ) : (
               <>
                 <br />
-                <FlexContainer justifyContent="flex-end">
+                <div class=" flex justify-end" >
                   <Button
                     type="primary"
 
@@ -385,27 +382,23 @@ class TaskWorkflowTab extends Component {
                     Add
                  
                   </Button>
-                </FlexContainer>
+                </div>
               </>
             )}
            
 
-              <Spacer />
-              <FlexContainer
-                flexDirection="column"
-                className="stages"
-                justifyContent="center"
-                style={{
-                  width: "100%",
-                  alignContent: "center",
-                  alignItems: "center",
-                }}
-              >
+         <div class=" flex flex-col justify-center"  className="stages"
+       
+              style={{
+                width: "100%",
+                alignContent: "center",
+                alignItems:"center"
+              }}
+            >
                 {this.state.isProcessTextInputOpen ? (
                   <div>
-                    <FlexContainer
-                      alignItems="center"
-                      justifyContent={"center"}
+                    <div class=" items-center flex justify-center"
+                  
                     >
                       <TextInput
                         placeholder="Task Name"
@@ -417,7 +410,7 @@ class TaskWorkflowTab extends Component {
                         width={"100%"}
                       />
 
-                      <FlexContainer justifyContent="flex-end">
+                      <div class=" flex justify-end" >
                         <Button
                           type="primary"
                           htmlType="submit"
@@ -434,12 +427,12 @@ class TaskWorkflowTab extends Component {
                             defaultMessage="Cancel"
                           />
                         </Button>
-                      </FlexContainer>
-                    </FlexContainer>
+                      </div>
+                    </div>
                   </div>
                 ) : (
                   <>
-                    <FlexContainer>
+                    <div class=" flex">
                       <h1 style={{ color: "white" }}>
                         {this.state.currentProcess.taskChecklistName ||
                           `${"Select Workflow"}`}{" "}
@@ -468,11 +461,11 @@ class TaskWorkflowTab extends Component {
                           </span>
                         )}
                       </h1>
-                    </FlexContainer>
+                    </div>
                   </>
                 )}
-              </FlexContainer>
-            </FlexContainer>
+              </div>
+            </div>
 
             {this.props.recruitTaskStages.map((recruitTaskStages, i) => (
               <SingleTaskStages
@@ -504,7 +497,7 @@ class TaskWorkflowTab extends Component {
                   justifyContent: "center",
                 }}
               >
-                <FlexContainer justifyContent="space-between">
+                <div class=" flex justify-between" >
                   <TextInput
                     placeholder="Stage name"
                     name="taskChecklistStageName"
@@ -539,7 +532,7 @@ class TaskWorkflowTab extends Component {
                   onChange={this.onChangeEndDatePicker} />
                   </div> */}
               
-                </FlexContainer>
+                </div>
                 <div>
                   <Button
                     type="primary"
@@ -558,7 +551,7 @@ class TaskWorkflowTab extends Component {
               </div>
             ) : this.state.currentProcess.taskChecklistName ? (
               <>
-                <FlexContainer justifyContent="flex-end">
+                <div class=" flex justify-end" >
                   <Button
                     type="primary"
                     ghost
@@ -571,7 +564,7 @@ class TaskWorkflowTab extends Component {
                       defaultMessage="Add Stage"
                     />
                   </Button>
-                </FlexContainer>
+                </div>
               </>
             ) : null}
           </MainWrapper>

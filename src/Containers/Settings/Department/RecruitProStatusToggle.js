@@ -57,7 +57,10 @@ console.log("crrm",props.recruitOppsInd);
             checked={props.recruitOppsInd || recruitPro}
            
             isLoading={true}
-            style={{width: "7%"}}
+            style={{
+              width: "7%",
+              backgroundColor: props.recruitOppsInd || recruitPro ? "rgb(119, 221, 119)" : "#E6E6E6",
+            }}
             checkedChildren="Yes"
             unCheckedChildren="No"
           />

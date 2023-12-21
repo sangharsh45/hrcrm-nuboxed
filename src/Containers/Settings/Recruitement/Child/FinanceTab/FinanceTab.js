@@ -16,7 +16,7 @@ function DistributionTab(props) {
             <TabsWrapper>
                 <StyledTabs defaultActiveKey="1" type="card">
                     <TabPane tab={`Currency`} key="1">
-                        <div style={{ marginTop: 10 }}>
+                        <div class=" mt-[10px]">
                         <CurrencyCoversionForm/>
                         <CurrencyCoversionForm2/>
                         <OneTimeTable/>

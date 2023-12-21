@@ -17,12 +17,12 @@ function DistributionTab(props) {
             <TabsWrapper>
                 <StyledTabs defaultActiveKey="1" type="card">
                     <TabPane tab={`Leads`} key="1">
-                        <div style={{ marginTop: 10 }}>
+                    <div class=" mt-[10px]" >
                         <WebsiteTab/>
                         </div>
                     </TabPane>
                     <TabPane tab={`Order`} key="2">
-                        <div style={{ marginTop: 10 }}>
+                    <div class=" mt-[10px]" >
                         {/* <MileageApproveForm/> */}
                         </div>
                     </TabPane>

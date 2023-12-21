@@ -117,6 +117,12 @@ export const librarysReducer = (state = initialState, action) => {
               removingSkillsError: true,
             };
 
+            case types.HANDLE_CLAER_REDUCER_DATA_LIBRARY:
+              return { ...state, 
+                librarys: [], 
+                // deletedTruck: [] 
+              };
+
 
 
         default:

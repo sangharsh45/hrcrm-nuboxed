@@ -5,8 +5,6 @@ import { bindActionCreators } from "redux";
 import { Button,  } from "antd";
 import { Formik, Form, Field,  } from "formik";
 import { InputComponent } from "../../../../Components/Forms/Formik/InputComponent";
-import { FlexContainer } from "../../../../Components/UI/Layout";
-import { Spacer } from "../../../../Components/UI/Elements";
 import { addLeaves, getLeavesDetails } from "../../../Settings/SettingsAction";
 import moment from "moment";
 
@@ -60,12 +58,9 @@ country:props.countryId,
       >
         {({ values }) => (
           <Form className="form-background">
-            <div style={{ display: "flex", justifyContent: "space-between" }}>
-              <div
-                style={{
-                  height: "100%",
-                  width: "100%",
-                }}
+            <div class=" flex justify-between">
+              <div class=" h-full w-full"
+           
               >
                 <Field
                   isRequired
@@ -84,7 +79,7 @@ country:props.countryId,
                 //   height: "2.0625em",
                 // }}
                 />
-                <Spacer />
+            <div class=" mt-4">
                 <Field
                   isRequired
                   name="carryForward"
@@ -103,7 +98,8 @@ country:props.countryId,
                 //   height: "2.0625em",
                 // }}
                 />
-                <Spacer />
+                </div>
+                <div class=" mt-4">
                 <Field
                   isRequired
                   name="leavesCappedTimesAnnualy"
@@ -122,7 +118,8 @@ country:props.countryId,
                 //   height: "2.0625em",
                 // }}
                 />
-                <Spacer />
+                   </div>
+                   <div class=" mt-4">
                 <Field
                   isRequired
                   name="mileageRate"
@@ -140,7 +137,7 @@ country:props.countryId,
                 //   height: "2.0625em",
                 // }}
                 />
-
+</div>
                 {/* <FlexContainer justifyContent="space-between">
                   <div style={{ width: "50%", marginTop: "0.625em" }}>
                     <StyledLabel>Assign To</StyledLabel>
@@ -154,7 +151,7 @@ country:props.countryId,
                   </div>
                 </FlexContainer> */}
 
-                <Spacer />
+           
                 {/* <Field
                   name="userId"
                   label="Sales User"
@@ -168,8 +165,8 @@ country:props.countryId,
                   component={SelectComponent}
                   options={Array.isArray(teamOption) ? teamOption : []}
                 /> */}
-                <Spacer />
-                <FlexContainer justifyContent="flex-end">
+         
+                <div class=" flex justify-end" >
                   <Button
                     type="primary"
                     htmlType="submit"
@@ -177,10 +174,10 @@ country:props.countryId,
                   >
                     Submit
                   </Button>
-                </FlexContainer>
+                </div>
                 
                 <h4>Updated on {moment(props.leaveData.updationDate).format("ll")} by {props.leaveData.updatedBy}</h4> 
-                <Spacer />
+           
               </div>
             </div>
           </Form>

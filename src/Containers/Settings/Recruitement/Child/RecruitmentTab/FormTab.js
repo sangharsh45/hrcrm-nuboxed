@@ -171,7 +171,7 @@ class Form extends Component {
                 <>
                   <span onClick={this.handleRecruitClick}>
                   {/* <DraftsIcon  /> */}
-                    <span style={{ marginLeft: '0.25em' }}>Customer</span>
+                    <span class=" ml-[0.25em]" >Customer</span>
                   </span>
                   {}
                  

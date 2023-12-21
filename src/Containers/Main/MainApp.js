@@ -20,7 +20,6 @@ import {
   ApplicationWrapper,
   LayoutWrapper,
   NavbarWrapper,
-  FlexContainer,
 } from "../../Components/UI/Layout";
 import { handlePartnerModal } from "../Partner/PartnerAction";
 import { BundleLoader } from "../../Components/Placeholder";

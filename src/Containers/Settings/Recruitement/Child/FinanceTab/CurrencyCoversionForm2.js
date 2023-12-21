@@ -35,16 +35,13 @@ function CurrencyCoversionForm2(props)  {
                         ...rest
                     }) => (
                         <Form>
-                            <div style={{ display: "flex", justifyContent: "space-between" }}>
-                                <div
-                                    style={{
-                                        height: "100%",
-                                        width: "100%",
-                                    }}
+                            <div class=" flex justify-between" >
+                                <div class=" w-full h-full"
+                                
                                 >
 
                                     <div class="flex justify-between">
-                                        <div style={{ width: "18%" }}>
+                                        <div class=" w-[18%]" >
                                             <Field
                                                 isRequired
                                                 name="currency2"
@@ -58,7 +55,7 @@ function CurrencyCoversionForm2(props)  {
                                                 }}
                                             />
                                         </div>
-                                        <div style={{ width: "18%" }}>
+                                        <div class=" w-[18%]" >
                                             <Field
                                                 isRequired
                                                 name="currency2"

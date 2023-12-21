@@ -31,7 +31,8 @@ module.exports = {
       
             },
             backgroundColor: {
-              "mainclr":"#ff7158bf"
+              "mainclr":"#ff7158bf",
+              "bgClrHoliday":"#40A9FF"
       
             },
             fontFamily: {
