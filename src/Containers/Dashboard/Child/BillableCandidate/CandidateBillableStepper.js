@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Button, message } from "antd";
+import { Button, } from "antd";
 import { bindActionCreators } from "redux";
 import { StyledSteps } from "../../../../Components/UI/Antd";
 import FirstCandidateBillablePage from "./FirstCandidateBillablePage";

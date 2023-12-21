@@ -371,6 +371,12 @@ export const getOpportunityRecord = (userId) => (dispatch) => {
     });
 };
 
+export const emptyCall = () => (dispatch) => {
+  dispatch({
+    type: types.EMPTY_CALL_LIST, 
+  });
+};
+
 
 
 

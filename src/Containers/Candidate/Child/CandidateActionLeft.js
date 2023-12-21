@@ -10,9 +10,8 @@ import FilterAltIcon from '@mui/icons-material/FilterAlt';
 import LanguageIcon from '@mui/icons-material/Language';
 import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
 import { FormattedMessage } from "react-intl";
-import { FlexContainer } from "../../../Components/UI/Layout";
 import PermIdentityIcon from '@mui/icons-material/PermIdentity';
-import { Input, Menu, Dropdown, Button, Tooltip, Radio, Space, Badge } from "antd";
+import { Input, Menu, Button, Tooltip, Radio,  Badge } from "antd";
 import {
   inputCandidateDataSearch,
   inputCandidateSkillDataSearch,
@@ -131,12 +130,12 @@ const CandidateActionLeft = (props) => {
 
   return (
 
-    <FlexContainer alignItems="center" 
+    <div class=" flex items-center" 
     // style={{ width: "39rem" }}
     >
       
       {user.userType !== "USER" && user.department == "Vendor" && (
-        <div style={{ width: "45%" }}>
+        <div class =" w-[45%]" >
           <Search
             placeholder="Search By Job ID"
             // onSearch={(value) => {
@@ -436,7 +435,7 @@ const CandidateActionLeft = (props) => {
               ) : (
               "Loading..."
                 )} */}
-       <div  style={{width:"15%"}} alignItems="centre">
+       <div class=" w-[15%] items-center" >
                <StyledSelect
   
   //style={{ width: '100%' }}
@@ -454,7 +453,7 @@ const CandidateActionLeft = (props) => {
             </div>
      
             </div>
-    </FlexContainer>
+    </div>
   );
 };
 

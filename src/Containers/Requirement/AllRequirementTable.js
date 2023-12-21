@@ -2,62 +2,13 @@ import React, { Component, lazy } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { FormattedMessage } from "react-intl";
-
-import {getAllRequirementTable} from "../Requirement/RequirementAction"
-
-
-
-
-
-import {
-  MultiAvatar,
-  Spacer,
-  SubTitle,
-  StyledLabel,
-} from "../../Components/UI/Elements";
-
-import { Link } from "../../Components/Common";
-import {
-  StyledTable,
-  StyledPopconfirm,
-  StyledModal,
-} from "../../Components/UI/Antd";
-import { FlexContainer } from "../../Components/UI/Layout";
-
-
-
-
-
-import { BundleLoader } from "../../Components/Placeholder";
-import {
-
-  Popconfirm,
-  Tooltip,
-  Dropdown,
-  Menu,
-  Progress,
-  Table, Input, Button,
-  message,
-  Icon,
-  Badge
-} from "antd";
-
-// import { Table, Input, Button, Icon } from 'antd';
-import Highlighter from 'react-highlight-words';
-
-
 import moment from "moment";
-import { CurrencySymbol } from "../../Components/Common";
-
-
-import { Suspense } from "react";
-import { elipsize } from "../../Helpers/Function/Functions";
+import { OnlyWrapCard } from "../../Components/UI/Layout";
+import {getAllRequirementTable} from "../Requirement/RequirementAction"
+import InfiniteScroll from "react-infinite-scroll-component";
 
 
 
-import { map } from "lodash";
-
-// const CandidateDetailsView =lazy(()=>import("../../../../../Candidate/Child/CandidateTable/CandidateDetails/CandidateDetailsView"));
 class AllRequirementTable extends Component {
  
   constructor(props) {
@@ -177,6 +128,7 @@ class AllRequirementTable extends Component {
 
 
   render() {
+    const{requirementTable,fetchingAllRequirementTable} =this.props;
    
 // console.log(this.props.requirementTable)
     
@@ -184,399 +136,7 @@ class AllRequirementTable extends Component {
     // console.log("?>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<<<<", this.state.stageList);
    
     
-    const columns = [
-      {
-        title: "",
-        width: "2%",
-        // render: (name, item, i) => {
-        //   const data = ` Profile ID : ${item.profileId}  Recruitment ID : ${item.recruitmentId}`
-        //   return {
-        //     props: {
-        //       style: {
-        //         background:
-        //            this.state.subTableVisible&&this.state.recruitmentId === item.recruitmentId
-        //             ? "rgb(158 183 223)"
-        //             : null,
-
-        //       },
-        //     },
-        //     children: (
-        //       <Tooltip
-        //       // className="ant-tooltip-inner"
-        //       // placement="rightTop" 
-        //       overlayStyle={{ maxWidth: '300px', }}
-
-        //       title={data}
-        //     >
-        //       <span
-        //         // onClick={() => handleReasonOfDelete(item.orderId)}
-        //         style={{
-        //           // color:
-        //           //   showRes && item.orderId === orderId ? "orange" : "#1890ff",
-        //           cursor: "pointer",
-        //         }}
-        //       >
-        //         <i class="fa fa-info-circle"></i>
-        //       </span>
-        //     </Tooltip>
-        //     ),
-        //   };
-         
-        // },
-      },
-      {
-        title: "Job ID",
-        width: "9%",
-        dataIndex: "jobOrder",
-        // render: (name, item, i) => {
-        //   return {
-        //     props: {
-        //       style: {
-        //         background:
-        //            this.state.subTableVisible&&this.state.recruitmentId === item.recruitmentId
-        //             ? "rgb(158 183 223)"
-        //             : null,
-
-        //       },
-        //     },
-        //     children: (
-        //       <>
-        //         <Badge count={item.number} style={{ right: "1px" }}>
-        //           <span             
-        //           >
-
-        //             {`${item.jobOrder} `} &nbsp;
-
-
-        //           </span>
-        //         </Badge>
-        //       </>
-        //     ),
-        //   };
-         
-        // },
-
-      },
-
-      // {
-      //   title:"",
-      //     width: "8%",
-      //   dataIndex:"number",
-
-      // },
-      {
-        //title: "Requirement",
-        title: <FormattedMessage
-          id="app.requirementName"
-          defaultMessage="Requirement"
-        />,
-        dataIndex: "requirementName",
-        width: "13%",
-      
-      },
-      {
-        title: "Category",
-        dataIndex: "category",
-        width: "9%",
-   
-
-      },
-      {
-        title: "Customer",
-        dataIndex: "customerName",
-        width: "9%",
-   
-
-      },
-     
-
-      {
-        title:"Created",
-        width: "7%",
-         dataIndex: "recruitOwner",
-        //  render: (text, item) => {
-        //  return <>
-        //  {/* {item.assignedTo === item.ownerName ? "" : item.assignedTo}  */}
-        //  <Tooltip title={item.recruitOwner}>
-        //     <span>
-        //       <MultiAvatar
-        //         primaryTitle={item.recruitOwner}
-        //         // imageId={item.ownerImageId}
-        //         //  imageURL={item.imageURL}
-        //         imgWidth={"2.1em"}
-        //         imgHeight={"2.1em"}
-        //       />
-        //       </span>
-        //      </Tooltip>      
-         
-        //  </>
-        // },
-         
-      },
-      {
-        title: "Recruiter",
-        width: "7%",
-        // render: (name, item, i) => {
-        //   return {
-        //     props: {
-        //       style: {
-        //         background:
-        //            this.state.subTableVisible&&this.state.recruitmentId === item.recruitmentId
-        //             ? "rgb(158 183 223)"
-        //             : null,
-
-        //       },
-        //     },
-  
-        //     children: 
-            
-        //       <>
-        
-              
-        //        <FlexContainer justifyContect="space-evenly">
-        //        {item.recruiterList && item.recruiterList.map((item, i) => {
-        //          return (
-        //           <Tooltip
-        //           title={item.fullName}
-        //        >
-        //           <div style={{ margin: "2px", borderRadius: "50%",cursor:"pointer" }}>
-        //         <MultiAvatar
-        //          primaryTitle={item.fullName||""}
-        //           // imageId={item.imageId}
-        //           // imageURL={item.imageURL}
-        //           imgWidth={"2.1em"}
-        //           imgHeight={"2.1em"}
-        //         />
-        //         </div>
-        //       </Tooltip>
-        //          );
-        //     })} 
-        //     </FlexContainer>
-        //     </>
-            
-              
-           
-        //   };
-        
-        // },
-      },
-      {
-        title: "On",
-        width: "10%",
-        dataIndex: "creationDate",
-        // render: (text, item) => {
-        //   const creationDate = moment(item.creationDate).format("ll");
-
-        //   return {
-        //     props: {
-        //       style: {
-        //         background:
-        //            this.state.subTableVisible&&this.state.recruitmentId === item.recruitmentId
-        //             ? "rgb(158 183 223)"
-        //             : null,
-
-        //       },
-        //     },
-  
-        //     children: <span>
-              
-        //    {creationDate}
-        //     </span>,
-        //   };
-        
-          
-        // },
-      },
-
-
-
-
-
-      {
-        //title: "Start",
-        title: <FormattedMessage
-          id="app.processName"
-          defaultMessage="Start"
-        />,
-        width: "9%",
-        // render: (name, item, i) => {
-        //   console.log(item);
-        //   return {
-        //     props: {
-        //       style: {
-        //         background:
-        //            this.state.subTableVisible&&this.state.recruitmentId === item.recruitmentId
-        //             ? "rgb(158 183 223)"
-        //             : null,
-
-        //       },
-        //     },
-  
-        //     children:<span>{moment(item.avilableDate).format("ll")}</span>
-        //   };
-        
-        // },
-        // sorter: (a, b) => {
-        //   if (a.avilableDate < b.avilableDate) {
-        //     return -1;
-        //   }
-        //   if (a.avilableDate > b.avilableDate) {
-        //     return 1;
-        //   }
-        //   return 0;
-        // },
-      },
-      {
-        title:"Duration",
-        width: "8%",
-//         render: (text, item) => {
-//           //const getDate = (date) => moment(date, 'DD/MM/YYYY').startOf('month')
-// const diff = Math.abs(moment(item.availableDate).diff(moment(item.endDate), 'months'));
-// const date=diff+1
-//          // const availableDate = moment(item.availableDate).subtract(item.endDate);
-//           return <>
-//           {/* {item.availableDate === null ? "No Data" : */}
-//             <span>
-//               {/* {moment(item.availableDate).subtract(item.endDate).month()} */}
-//               {date} months
-//             </span>
-//           {/* } */}
-//         </>
-//         },
-        
-      },
-      {
-        //title: "Rate/hr",
-        title: <FormattedMessage
-          id="app.billing"
-          defaultMessage="Billing"
-        />,
-        dataIndex: "billing",
-        width: "8%",
-        //   defaultSortOrder: "descend",
-        // sorter: (a, b) => a.billing - b.billing,
-        // render: (name, item, i) => {
-        //   console.log(item);
-        //   return {
-        //     props: {
-        //       style: {
-        //         background:
-        //            this.state.subTableVisible&&this.state.recruitmentId === item.recruitmentId
-        //             ? "rgb(158 183 223)"
-        //             : null,
-
-        //       },
-        //     },
-  
-        //     children:<span>{item.billing} {item.currency}</span>
-        //   };
-        
-        // },
-      },
-     
-    
-     
-     
-
-  
-
-
-
-      {
-        title: "Talent",
-        dataIndex: "candidatetList",
-        width: "12%",
-        // render: (name, item, i) => {
-        //   return {
-        //     props: {
-        //       style: {
-        //         background:
-        //            this.state.subTableVisible&&this.state.recruitmentId === item.recruitmentId
-        //             ? "rgb(158 183 223)"
-        //             : null,
-
-        //       },
-        //     },
-        //     children: (
-        //       <span>
-            
-            
-        //        <FlexContainer justifyContect="space-evenly">
-        //         {item.candidatetList && item.candidatetList.map((candidate, i) => {
-        //           console.log(candidate)
-        //           return (
-                    
-        //             <Tooltip
-        //             title={candidate.fullName}
-        //         >
-        //             <div style={{ margin: "2px", borderRadius: "50%",cursor:"pointer" }}
-        //             //  onClick={() => {
-        //             //   this.handleClickCandidateName(item.recruitmentId)
-        //             //   this.props.getCandidateRequirement(
-        //             //      item.recruitmentId, 
-    
-        //             //   );
-        //             //   }}
-                 
-        //             >
-                      
-        //                 <MultiAvatar
-        //                    primaryTitle={candidate.fullName||""}
-        //                   // imageId={item.imageId}
-        //                   // imageURL={item.imageURL}
-        //                   imgWidth={"30"}
-        //                   imgHeight={"30"}
-        //                 />
-        //               </div>
-        //                </Tooltip>
-  
-        //           );                 
-        //         })} 
-        //         <div
-        //         // style={{ 
-        //         //   margin: "2px", 
-        //         //   borderRadius: "50%",
-        //         //   cursor:"pointer" ,
-        //         //   background:
-        //         //   this.state.subTableVisible&&this.state.recruitmentId === item.recruitmentId
-        //         //     ? "rgb(158 183 223)"
-        //         //     : null,
-              
-        //         // onClick={() => {
-        //         //   this.handleClickCandidateName(item.recruitmentId)
-        //         //   this.props.getCandidateRequirement(
-        //         //      item.recruitmentId, 
-
-        //         //   );
-        //         //   }}
-        //         >   
-        //        {/* {item.candidateNo}  */}
-        //        </div>           
-        //        </FlexContainer>
-        //     </span>
-        //     ),
-        //   };
-        // },
-       },
-
-      {
-        //title: "Sponsor",
-        title: <FormattedMessage
-          id="app.sponserName"
-          defaultMessage="Sponsor"
-        />,
-        dataIndex: "sponserName",
-        width: "7%",
-       
-      },
-    
-    
-     
-     
-
-     
-
-    ];
+ 
 
 
     // if (this.props.fetchingRecruitToOpportunity) {
@@ -587,26 +147,173 @@ class AllRequirementTable extends Component {
     const tableHeight = tab && tab.offsetHeight - 100;
     return (
       <>
-        {/* {callsListByOpportunityId && ( */}
-        <StyledTable
-          // rowKey={(record) =>record.profileId}
-        //   rowKey="profileId"
-          dataSource={
-            this.props.requirementTable
-             
-          }
+  <div className=' flex justify-end sticky top-28 z-auto'>
+      <OnlyWrapCard style={{backgroundColor:"#E3E8EE"}}>
+      <div className=" flex justify-between w-[99%] p-2 bg-transparent font-bold sticky top-0 z-10">
+        <div className=" md:w-[8.1rem]">Job ID</div>
+        <div className=" md:w-[4.2rem] ">Requirement</div>
+        <div className="md:w-[5.8rem]">Category</div>
+        <div className="md:w-[8.5rem]">Customer</div>
+        <div className="md:w-[3.8rem]">Created</div> 
+        <div className="md:w-[5.2rem]">Recruiter</div>
+        <div className="md:w-[1.5rem]">On</div>
+        <div className="md:w-[3.3rem]">Start</div>
+        <div className="w-12">Duration</div>
+        <div className="w-12">Billing</div>
+        <div className="w-12">Talent</div>
+        <div className="w-12">Sponsor</div>
 
-           loading={
-            this.props.fetchingAllRequirementTable
-          }
+      </div>
+      <InfiniteScroll
+        dataLength={requirementTable.length}
+        // next={handleLoadMore}
+        // hasMore={hasMore}
+        loader={fetchingAllRequirementTable?<h4 style={{ textAlign: 'center' }}>Loading...</h4>:null}
+        height={"75vh"}
+      >
+        {requirementTable.map((item) => {
+          const currentdate = moment().format("DD/MM/YYYY");
+          const date = moment(item.creationDate).format("DD/MM/YYYY");
+
+          const diff = Math.abs(
+            moment().diff(moment(item.lastRequirementOn), "days")
+          );
+          const dataLoc = ` Address : ${
+            item.address && item.address.length && item.address[0].address1
+          } 
+               Street : ${
+                 item.address && item.address.length && item.address[0].street
+               }   
+              State : ${
+                item.address && item.address.length && item.address[0].state
+              }
+             Country : ${
+               (item.address &&
+                 item.address.length &&
+                 item.address[0].country) ||
+               ""
+             } 
+               PostalCode : ${
+                 item.address &&
+                 item.address.length &&
+                 item.address[0].postalCode
+               } `;
+          return (
+            <div>
+                            <div className="flex rounded-xl justify-between mt-2 bg-white h-11 items-center p-3"
+                                // style={{
+                                //     borderBottom: "3px dotted #515050"
+                                // }}
+                                >
+                              
+                                <div class="flex">
+                                <div className=" flex font-medium flex-col md:w-36 max-sm:flex-row w-full max-sm:justify-between ">
+                                    {/* <h4 class=" text-xs text-cardBody font-poppins max-sm:hidden"># Deals</h4> */}
+
+                                    <div class=" text-sm justify-center text-cardBody font-poppins">
+                                    {item.jobOrder}
+                                    </div>
+                                </div>
+                             
+                                <div className=" flex font-medium flex-col md:w-36 max-sm:flex-row w-full max-sm:justify-between ">
+                                    {/* <h4 class=" text-xs text-cardBody font-poppins max-sm:hidden">Pipeline Value</h4> */}
+
+                                    <div class=" text-sm text-cardBody font-poppins text-center">
+                                    {item.requirementName}
+
+                                    </div>
+                                    <div className=" flex font-medium flex-col md:w-36 max-sm:flex-row w-full max-sm:justify-between ">
+                                    {/* <h4 class=" text-xs text-cardBody font-poppins max-sm:hidden">Pipeline Value</h4> */}
+
+                                    <div class=" text-sm text-cardBody font-poppins text-center">
+                                    {item.category}
+
+                                    </div>
+                                </div>
+                                <div className=" flex font-medium flex-col md:w-36 max-sm:flex-row w-full max-sm:justify-between ">
+                                    {/* <h4 class=" text-xs text-cardBody font-poppins max-sm:hidden">Pipeline Value</h4> */}
+
+                                    <div class=" text-sm text-cardBody font-poppins text-center">
+                                    {item.customerName}
+
+                                    </div>
+                                </div>
+                                <div className=" flex font-medium flex-col md:w-36 max-sm:flex-row w-full max-sm:justify-between ">
+                                    {/* <h4 class=" text-xs text-cardBody font-poppins max-sm:hidden">Pipeline Value</h4> */}
+
+                                    <div class=" text-sm text-cardBody font-poppins text-center">
+                                    {item.recruitOwner}
+
+                                    </div>
+                                </div>
+                                <div className=" flex font-medium flex-col md:w-36 max-sm:flex-row w-full max-sm:justify-between ">
+                                    {/* <h4 class=" text-xs text-cardBody font-poppins max-sm:hidden">Pipeline Value</h4> */}
+
+                                    <div class=" text-sm text-cardBody font-poppins text-center">
+                                    {item.creationDate}
+
+                                    </div>
+                                </div>
+                                <div className=" flex font-medium flex-col md:w-36 max-sm:flex-row w-full max-sm:justify-between ">
+                                    {/* <h4 class=" text-xs text-cardBody font-poppins max-sm:hidden">Pipeline Value</h4> */}
+
+                                    <div class=" text-sm text-cardBody font-poppins text-center">
+                                    {/* {item.creationDate} */}
+
+                                    </div>
+                                </div>
+                                <div className=" flex font-medium flex-col md:w-36 max-sm:flex-row w-full max-sm:justify-between ">
+                                    {/* <h4 class=" text-xs text-cardBody font-poppins max-sm:hidden">Pipeline Value</h4> */}
+
+                                    <div class=" text-sm text-cardBody font-poppins text-center">
+                                    {/* {item.creationDate} */}
+
+                                    </div>
+                                </div>
+                                <div className=" flex font-medium flex-col md:w-36 max-sm:flex-row w-full max-sm:justify-between ">
+                                    {/* <h4 class=" text-xs text-cardBody font-poppins max-sm:hidden">Pipeline Value</h4> */}
+
+                                    <div class=" text-sm text-cardBody font-poppins text-center">
+                                    {/* {item.creationDate} */}
+
+                                    </div>
+                                </div>
+                                <div className=" flex font-medium flex-col md:w-36 max-sm:flex-row w-full max-sm:justify-between ">
+                                    {/* <h4 class=" text-xs text-cardBody font-poppins max-sm:hidden">Pipeline Value</h4> */}
+
+                                    <div class=" text-sm text-cardBody font-poppins text-center">
+                                    {item.billing}
+
+                                    </div>
+                                </div>
+                                <div className=" flex font-medium flex-col md:w-36 max-sm:flex-row w-full max-sm:justify-between ">
+                                    {/* <h4 class=" text-xs text-cardBody font-poppins max-sm:hidden">Pipeline Value</h4> */}
+
+                                    <div class=" text-sm text-cardBody font-poppins text-center">
+                                    {item.candidatetList}
+
+                                    </div>
+                                </div>
+                                <div className=" flex font-medium flex-col md:w-36 max-sm:flex-row w-full max-sm:justify-between ">
+                                    {/* <h4 class=" text-xs text-cardBody font-poppins max-sm:hidden">Pipeline Value</h4> */}
+
+                                    <div class=" text-sm text-cardBody font-poppins text-center">
+                                    {item.candidatetList}
+
+                                    </div>
+                                </div>
          
-        //   scroll={{ y: 220 }}
-          scroll={{ y: tableHeight }}
-          columns={columns}
-          pagination={false}
-
-     
-        />
+                   </div>
+             
+                            </div>
+                        </div>
+           </div>
+          );
+        })}
+         </InfiniteScroll>
+      </OnlyWrapCard>
+      </div>
+ 
     
       </>
     );
@@ -631,3 +338,397 @@ const mapDispatchToProps = (dispatch) =>
   );
 
 export default connect(mapStateToProps, mapDispatchToProps)(AllRequirementTable);
+
+// const columns = [
+//   {
+//     title: "",
+//     width: "2%",
+//     // render: (name, item, i) => {
+//     //   const data = ` Profile ID : ${item.profileId}  Recruitment ID : ${item.recruitmentId}`
+//     //   return {
+//     //     props: {
+//     //       style: {
+//     //         background:
+//     //            this.state.subTableVisible&&this.state.recruitmentId === item.recruitmentId
+//     //             ? "rgb(158 183 223)"
+//     //             : null,
+
+//     //       },
+//     //     },
+//     //     children: (
+//     //       <Tooltip
+//     //       // className="ant-tooltip-inner"
+//     //       // placement="rightTop" 
+//     //       overlayStyle={{ maxWidth: '300px', }}
+
+//     //       title={data}
+//     //     >
+//     //       <span
+//     //         // onClick={() => handleReasonOfDelete(item.orderId)}
+//     //         style={{
+//     //           // color:
+//     //           //   showRes && item.orderId === orderId ? "orange" : "#1890ff",
+//     //           cursor: "pointer",
+//     //         }}
+//     //       >
+//     //         <i class="fa fa-info-circle"></i>
+//     //       </span>
+//     //     </Tooltip>
+//     //     ),
+//     //   };
+     
+//     // },
+//   },
+//   {
+//     title: "Job ID",
+//     width: "9%",
+//     dataIndex: "jobOrder",
+//     // render: (name, item, i) => {
+//     //   return {
+//     //     props: {
+//     //       style: {
+//     //         background:
+//     //            this.state.subTableVisible&&this.state.recruitmentId === item.recruitmentId
+//     //             ? "rgb(158 183 223)"
+//     //             : null,
+
+//     //       },
+//     //     },
+//     //     children: (
+//     //       <>
+//     //         <Badge count={item.number} style={{ right: "1px" }}>
+//     //           <span             
+//     //           >
+
+//     //             {`${item.jobOrder} `} &nbsp;
+
+
+//     //           </span>
+//     //         </Badge>
+//     //       </>
+//     //     ),
+//     //   };
+     
+//     // },
+
+//   },
+
+//   // {
+//   //   title:"",
+//   //     width: "8%",
+//   //   dataIndex:"number",
+
+//   // },
+//   {
+//     //title: "Requirement",
+//     title: <FormattedMessage
+//       id="app.requirementName"
+//       defaultMessage="Requirement"
+//     />,
+//     dataIndex: "requirementName",
+//     width: "13%",
+  
+//   },
+//   {
+//     title: "Category",
+//     dataIndex: "category",
+//     width: "9%",
+
+
+//   },
+//   {
+//     title: "Customer",
+//     dataIndex: "customerName",
+//     width: "9%",
+
+
+//   },
+ 
+
+//   {
+//     title:"Created",
+//     width: "7%",
+//      dataIndex: "recruitOwner",
+//     //  render: (text, item) => {
+//     //  return <>
+//     //  {/* {item.assignedTo === item.ownerName ? "" : item.assignedTo}  */}
+//     //  <Tooltip title={item.recruitOwner}>
+//     //     <span>
+//     //       <MultiAvatar
+//     //         primaryTitle={item.recruitOwner}
+//     //         // imageId={item.ownerImageId}
+//     //         //  imageURL={item.imageURL}
+//     //         imgWidth={"2.1em"}
+//     //         imgHeight={"2.1em"}
+//     //       />
+//     //       </span>
+//     //      </Tooltip>      
+     
+//     //  </>
+//     // },
+     
+//   },
+//   {
+//     title: "Recruiter",
+//     width: "7%",
+//     // render: (name, item, i) => {
+//     //   return {
+//     //     props: {
+//     //       style: {
+//     //         background:
+//     //            this.state.subTableVisible&&this.state.recruitmentId === item.recruitmentId
+//     //             ? "rgb(158 183 223)"
+//     //             : null,
+
+//     //       },
+//     //     },
+
+//     //     children: 
+        
+//     //       <>
+    
+          
+//     //        <FlexContainer justifyContect="space-evenly">
+//     //        {item.recruiterList && item.recruiterList.map((item, i) => {
+//     //          return (
+//     //           <Tooltip
+//     //           title={item.fullName}
+//     //        >
+//     //           <div style={{ margin: "2px", borderRadius: "50%",cursor:"pointer" }}>
+//     //         <MultiAvatar
+//     //          primaryTitle={item.fullName||""}
+//     //           // imageId={item.imageId}
+//     //           // imageURL={item.imageURL}
+//     //           imgWidth={"2.1em"}
+//     //           imgHeight={"2.1em"}
+//     //         />
+//     //         </div>
+//     //       </Tooltip>
+//     //          );
+//     //     })} 
+//     //     </FlexContainer>
+//     //     </>
+        
+          
+       
+//     //   };
+    
+//     // },
+//   },
+//   {
+//     title: "On",
+//     width: "10%",
+//     dataIndex: "creationDate",
+//     // render: (text, item) => {
+//     //   const creationDate = moment(item.creationDate).format("ll");
+
+//     //   return {
+//     //     props: {
+//     //       style: {
+//     //         background:
+//     //            this.state.subTableVisible&&this.state.recruitmentId === item.recruitmentId
+//     //             ? "rgb(158 183 223)"
+//     //             : null,
+
+//     //       },
+//     //     },
+
+//     //     children: <span>
+          
+//     //    {creationDate}
+//     //     </span>,
+//     //   };
+    
+      
+//     // },
+//   },
+
+
+
+
+
+//   {
+//     //title: "Start",
+//     title: <FormattedMessage
+//       id="app.processName"
+//       defaultMessage="Start"
+//     />,
+//     width: "9%",
+//     // render: (name, item, i) => {
+//     //   console.log(item);
+//     //   return {
+//     //     props: {
+//     //       style: {
+//     //         background:
+//     //            this.state.subTableVisible&&this.state.recruitmentId === item.recruitmentId
+//     //             ? "rgb(158 183 223)"
+//     //             : null,
+
+//     //       },
+//     //     },
+
+//     //     children:<span>{moment(item.avilableDate).format("ll")}</span>
+//     //   };
+    
+//     // },
+//     // sorter: (a, b) => {
+//     //   if (a.avilableDate < b.avilableDate) {
+//     //     return -1;
+//     //   }
+//     //   if (a.avilableDate > b.avilableDate) {
+//     //     return 1;
+//     //   }
+//     //   return 0;
+//     // },
+//   },
+//   {
+//     title:"Duration",
+//     width: "8%",
+// //         render: (text, item) => {
+// //           //const getDate = (date) => moment(date, 'DD/MM/YYYY').startOf('month')
+// // const diff = Math.abs(moment(item.availableDate).diff(moment(item.endDate), 'months'));
+// // const date=diff+1
+// //          // const availableDate = moment(item.availableDate).subtract(item.endDate);
+// //           return <>
+// //           {/* {item.availableDate === null ? "No Data" : */}
+// //             <span>
+// //               {/* {moment(item.availableDate).subtract(item.endDate).month()} */}
+// //               {date} months
+// //             </span>
+// //           {/* } */}
+// //         </>
+// //         },
+    
+//   },
+//   {
+//     //title: "Rate/hr",
+//     title: <FormattedMessage
+//       id="app.billing"
+//       defaultMessage="Billing"
+//     />,
+//     dataIndex: "billing",
+//     width: "8%",
+//     //   defaultSortOrder: "descend",
+//     // sorter: (a, b) => a.billing - b.billing,
+//     // render: (name, item, i) => {
+//     //   console.log(item);
+//     //   return {
+//     //     props: {
+//     //       style: {
+//     //         background:
+//     //            this.state.subTableVisible&&this.state.recruitmentId === item.recruitmentId
+//     //             ? "rgb(158 183 223)"
+//     //             : null,
+
+//     //       },
+//     //     },
+
+//     //     children:<span>{item.billing} {item.currency}</span>
+//     //   };
+    
+//     // },
+//   },
+ 
+
+ 
+ 
+
+
+
+
+
+//   {
+//     title: "Talent",
+//     dataIndex: "candidatetList",
+//     width: "12%",
+//     // render: (name, item, i) => {
+//     //   return {
+//     //     props: {
+//     //       style: {
+//     //         background:
+//     //            this.state.subTableVisible&&this.state.recruitmentId === item.recruitmentId
+//     //             ? "rgb(158 183 223)"
+//     //             : null,
+
+//     //       },
+//     //     },
+//     //     children: (
+//     //       <span>
+        
+        
+//     //        <FlexContainer justifyContect="space-evenly">
+//     //         {item.candidatetList && item.candidatetList.map((candidate, i) => {
+//     //           console.log(candidate)
+//     //           return (
+                
+//     //             <Tooltip
+//     //             title={candidate.fullName}
+//     //         >
+//     //             <div style={{ margin: "2px", borderRadius: "50%",cursor:"pointer" }}
+//     //             //  onClick={() => {
+//     //             //   this.handleClickCandidateName(item.recruitmentId)
+//     //             //   this.props.getCandidateRequirement(
+//     //             //      item.recruitmentId, 
+
+//     //             //   );
+//     //             //   }}
+             
+//     //             >
+                  
+//     //                 <MultiAvatar
+//     //                    primaryTitle={candidate.fullName||""}
+//     //                   // imageId={item.imageId}
+//     //                   // imageURL={item.imageURL}
+//     //                   imgWidth={"30"}
+//     //                   imgHeight={"30"}
+//     //                 />
+//     //               </div>
+//     //                </Tooltip>
+
+//     //           );                 
+//     //         })} 
+//     //         <div
+//     //         // style={{ 
+//     //         //   margin: "2px", 
+//     //         //   borderRadius: "50%",
+//     //         //   cursor:"pointer" ,
+//     //         //   background:
+//     //         //   this.state.subTableVisible&&this.state.recruitmentId === item.recruitmentId
+//     //         //     ? "rgb(158 183 223)"
+//     //         //     : null,
+          
+//     //         // onClick={() => {
+//     //         //   this.handleClickCandidateName(item.recruitmentId)
+//     //         //   this.props.getCandidateRequirement(
+//     //         //      item.recruitmentId, 
+
+//     //         //   );
+//     //         //   }}
+//     //         >   
+//     //        {/* {item.candidateNo}  */}
+//     //        </div>           
+//     //        </FlexContainer>
+//     //     </span>
+//     //     ),
+//     //   };
+//     // },
+//    },
+
+//   {
+//     //title: "Sponsor",
+//     title: <FormattedMessage
+//       id="app.sponserName"
+//       defaultMessage="Sponsor"
+//     />,
+//     dataIndex: "sponserName",
+//     width: "7%",
+   
+//   },
+
+
+ 
+ 
+
+ 
+
+// ];

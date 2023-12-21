@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import RequirementHeader from "./RequirementHeader";
 import AllRequirementTable from "../Requirement/AllRequirementTable"
-import RequirementTab from "./RequirementTab/RequirementTab";
 
 import {
     getRecruitByOpportunityId,

@@ -79,7 +79,7 @@ function CustomerForm(props) {
     });
     const [defaultOption, setDefaultOption] = useState(props.fullName);
     const [selected, setSelected] = useState(defaultOption);
-    const selectedOption = props.allCustomerEmployeeList.find((item) => item.fullName === selected);
+    const selectedOption = props.crmAllData.find((item) => item.empName === selected);
     return (
       <>
         <Formik

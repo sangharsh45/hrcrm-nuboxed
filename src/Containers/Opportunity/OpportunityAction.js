@@ -3144,3 +3144,9 @@ export const getFullOpportunity = (pageNo) => (dispatch) => {
     });
 };
 
+export const emptyOpportunity = () => (dispatch) => {
+  dispatch({
+    type: types.EMPTY_OPPORTUNITY_LIST, 
+  });
+};
+

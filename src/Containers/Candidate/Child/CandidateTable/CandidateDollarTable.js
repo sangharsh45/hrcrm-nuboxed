@@ -1,4 +1,4 @@
-import React, { Component, useEffect, useState, useMemo, lazy } from "react";
+import React, {  useEffect, useState, useMemo, lazy } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import dayjs from "dayjs";

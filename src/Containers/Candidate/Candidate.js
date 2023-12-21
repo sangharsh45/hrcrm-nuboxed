@@ -20,7 +20,6 @@ import {
 import CandidateMap from "../Candidate/CandidateMap";
 import AddCandidateFilterModal from "../Candidate/Child/AddCandidateFilterModal";
 import CandidateDollarTable from "./Child/CandidateTable/CandidateDollarTable";
-import CandidateBillableTable from "./Child/CandidateTable/CandidateBillableTable";
 import CandidateBillableStepper from "../Dashboard/Child/BillableCandidate/CandidateBillableStepper";
 const AddCandidateModal = lazy(() => import("./Child/AddCandidateModal"));
 const CandidateHeader = lazy(() => import("./Child/CandidateHeader"));

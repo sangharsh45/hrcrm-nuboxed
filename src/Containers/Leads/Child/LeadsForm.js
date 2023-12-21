@@ -5,7 +5,6 @@ import { Button, } from "antd";
 import { FormattedMessage } from "react-intl";
 import { Formik, Form, Field, FieldArray, FastField } from "formik";
 import * as Yup from "yup";
-import { getAllCustomerEmployeelist } from "../../Employees/EmployeeAction";
 import { StyledLabel } from "../../../Components/UI/Elements";
 import { Spacer } from "../../../Components/UI/Elements";
 import SearchSelect from "../../../Components/Forms/Formik/SearchSelect";
@@ -37,7 +36,6 @@ function LeadsForm (props) {
   };
  
   useEffect(()=> {
-props.getAllCustomerEmployeelist();
 props. getCrm();
   },[]);
 
@@ -56,7 +54,7 @@ props. getCrm();
 
     const [defaultOption, setDefaultOption] = useState(props.fullName);
     const [selected, setSelected] = useState(defaultOption);
-    const selectedOption = props.allCustomerEmployeeList.find((item) => item.fullName === selected);
+    const selectedOption = props.crmAllData.find((item) => item.empName === selected);
 
     return (
       <>
@@ -539,7 +537,6 @@ const mapStateToProps = ({ auth, leads,employee }) => ({
   addingLeadsError: leads.addingLeadsError,
    clearbit: leads.clearbit,
   user: auth.userDetails,
-  allCustomerEmployeeList:employee.allCustomerEmployeeList,
   userId: auth.userDetails.userId,
   fullName: auth.userDetails.fullName
 });
@@ -550,7 +547,6 @@ const mapDispatchToProps = (dispatch) =>
        addLeads,
        getCrm,
       setClearbitData,
-       getAllCustomerEmployeelist,
     },
     dispatch
   );
