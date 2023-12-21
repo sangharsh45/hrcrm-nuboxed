@@ -502,7 +502,6 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import moment from "moment";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { SearchOutlined } from "@ant-design/icons";
 import { Tooltip, Button, Input, Avatar } from "antd";
 import NoteAltIcon from "@mui/icons-material/NoteAlt";
 import InfiniteScroll from "react-infinite-scroll-component";
@@ -517,10 +516,10 @@ import {
   getNotesListByCallId,
 } from "../../CallAction";
 import APIFailed from "../../../../Helpers/ErrorBoundary/APIFailed";
-import Highlighter from "react-highlight-words";
 import { MultiAvatar2, } from "../../../../Components/UI/Elements";
 import AddCallNotesDrawerModal from "../AddCallNotesDrawerModal";
 import { BundleLoader } from "../../../../Components/Placeholder";
+import { FormattedMessage } from "react-intl";
 
 function CallTable(props) {
   const [page, setPage] = useState(0);
@@ -578,14 +577,38 @@ const [currentNameId, setCurrentNameId] = useState("");
        <div className=' flex justify-end sticky top-28 z-auto'>
        <OnlyWrapCard style={{backgroundColor:"#E3E8EE"}}>
        <div className=" flex justify-between w-[99%] p-2 bg-transparent font-bold sticky top-0 z-10">
-        <div className=" md:w-[7rem]">Type</div>
-        <div className=" md:w-40">Subject</div>
-        <div className=" md:w-28 ">Contact</div>
-        <div className=" md:w-28 ">Date</div>
-        <div className="md:w-24">Include</div>
-        <div className="md:w-24">Assigned To</div>
-        <div className="md:w-36">Completed</div>
-        <div className="md:w-24">Owner</div>
+        <div className=" md:w-[7rem]"><FormattedMessage
+                  id="app.type"
+                  defaultMessage="type"
+                /></div>
+        <div className=" md:w-40"><FormattedMessage
+                  id="app.subject"
+                  defaultMessage="subject"
+                /></div>
+        <div className=" md:w-28 "><FormattedMessage
+                  id="app.contact"
+                  defaultMessage="contact"
+                /></div>
+        <div className=" md:w-28 "><FormattedMessage
+                  id="app.date"
+                  defaultMessage="date"
+                /></div>
+        <div className="md:w-24"><FormattedMessage
+                  id="app.include"
+                  defaultMessage="include"
+                /></div>
+        <div className="md:w-24"><FormattedMessage
+                  id="app.assignedto"
+                  defaultMessage="assignedto"
+                /></div>
+        <div className="md:w-36"><FormattedMessage
+                  id="app.completed"
+                  defaultMessage="completed"
+                /></div>
+        <div className="md:w-24"><FormattedMessage
+                  id="app.owner"
+                  defaultMessage="owner"
+                /></div>
         <div className="w-12"></div>
       </div>
       <InfiniteScroll

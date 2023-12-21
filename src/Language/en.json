@@ -226,5 +226,22 @@
   "app.intern": "Intern",
   "app.worker": "Worker",
   "app.contractor": "Contractor",
-  "app.label": "Label"
+  "app.label": "Label",
+  "app.include": "Include",
+  "app.owner":"Owner",
+  "app.mode":"Mode",
+  "app.channel":"Channel",
+  "app.introductory":"Introductory",
+  "app.interview":"Interview",
+  "app.closure":"Closure",
+  "app.starttime":"Start Time",
+  "app.endtime":"End Time",
+  "app.timeZone":"Time Zone",
+  "app.doyouwanttodelete":"Do you want to delete",
+  "app.value":"Value",
+  "app.unit":"Unit",
+  "app.complexity":"Complexity",
+  "app.assignedDate":"Assigned Date",
+  "app.link":"Link",
+  "app.setReminder":"Set Reminder"
 }

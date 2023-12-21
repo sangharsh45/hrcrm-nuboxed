@@ -1,4 +1,4 @@
-import React, { Component,useState, useMemo ,useEffect} from "react";
+import React, { Component,useState ,useEffect} from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { getAllSalesList } from "../../Opportunity/OpportunityAction"
@@ -31,9 +31,7 @@ import CandidateClearbit from "../../../Components/Forms/Autocomplete/CandidateC
 import { setClearbitCandidateData } from "../../Candidate/CandidateAction";
 import SpeechRecognition, { } from 'react-speech-recognition';
 import { AudioOutlined } from '@ant-design/icons';
-import { Fragment } from 'react'
 import { Listbox, Transition } from '@headlessui/react'
-import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid'
 const ButtonGroup = Button.Group;
 const suffix = (
   <AudioOutlined
@@ -349,7 +347,7 @@ function CallForm(props) {
                       <Spacer/>
                       <StyledLabel>
                         {/* Type */}
-                        <FormattedMessage id="app.type" defaultMessage="Type" />
+                        <FormattedMessage id="app.type" defaultMessage="type" />
                       </StyledLabel>
                       <div class=" flex justify-between">
                         {/* <Tooltip title="Inbound"> */}
@@ -357,7 +355,7 @@ function CallForm(props) {
                           title={
                             <FormattedMessage
                               id="app.introductory"
-                              defaultMessage="Introductory"
+                              defaultMessage="introductory"
                             />
                           }
                         >
@@ -428,7 +426,7 @@ function CallForm(props) {
                       <StyledLabel>
                         <FormattedMessage
                           id="app.category"
-                          defaultMessage="Category"
+                          defaultMessage="category"
                         />
                       </StyledLabel>
                       
@@ -445,7 +443,7 @@ function CallForm(props) {
                           }}
                         >
                           {/* New */}
-                          <FormattedMessage id="app.new" defaultMessage="New" />
+                          <FormattedMessage id="app.new" defaultMessage="new" />
                         </Button>
                         <Button
                           onClick={() => handleCategoryChange("Follow up")}
@@ -463,7 +461,7 @@ function CallForm(props) {
                           {/* Follow up */}
                           <FormattedMessage
                             id="app.followup"
-                            defaultMessage="Follow up"
+                            defaultMessage="followup"
                           />
                         </Button>
                       </ButtonGroup>
@@ -473,7 +471,10 @@ function CallForm(props) {
                   <div class=" flex justify-between items-end max-sm:flex-col " >
                     <div class=" self-start">
                       <StyledLabel>
-                      Mode
+                      <FormattedMessage
+                            id="app.mode"
+                            defaultMessage="mode"
+                          />
                       </StyledLabel>
                       <Switch
                         // style={{
@@ -487,7 +488,10 @@ function CallForm(props) {
                     <div class=" w-1/3 self-baseline max-sm:w-wk">
                       <FastField
                         name="modeType"
-                        label="Channel"
+                        label={<FormattedMessage
+                            id="app.channel"
+                            defaultMessage="channel"
+                          /> }
                         isColumn
                         options={[
                           "Zoom Call",
@@ -520,7 +524,7 @@ function CallForm(props) {
                     label={
                       <FormattedMessage
                         id="app.subject"
-                        defaultMessage="Subject"
+                        defaultMessage="subject"
                       />
                     }
                     component={InputComponent}
@@ -533,7 +537,7 @@ function CallForm(props) {
                     name="startDate"
                     // label="Date"
                     label={
-                      <FormattedMessage id="app.date" defaultMessage="Date" />
+                      <FormattedMessage id="app.date" defaultMessage="date" />
                     }
                     component={DatePicker}
                     isColumn
@@ -596,7 +600,7 @@ function CallForm(props) {
                     label={
                       <FormattedMessage
                         id="app.timeZone"
-                        defaultMessage="Time Zone"
+                        defaultMessage="timeZone"
                       />
                     }
                     selectType="timeZone"
@@ -640,7 +644,11 @@ function CallForm(props) {
                 <Listbox value={selected} onChange={setSelected}>
       {({ open }) => (
         <>
-          <Listbox.Label className="block font-semibold text-[0.75rem]">Assigned to</Listbox.Label>
+          <Listbox.Label className="block font-semibold text-[0.75rem]"><FormattedMessage
+                        id="app.assignedto"
+                        defaultMessage="assignedto"
+                      />
+            </Listbox.Label>
           <div className="relative mt-1">
               <Listbox.Button  style={{boxShadow: "rgb(170, 170, 170) 0px 0.25em 0.62em"}} className="relative w-full leading-4 cursor-default border border-gray-300 bg-white py-0.5 pl-3 pr-10 text-left shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm">
                 {selected}
@@ -710,7 +718,7 @@ function CallForm(props) {
                     label={
                       <FormattedMessage
                         id="app.include"
-                        defaultMessage="Include"
+                        defaultMessage="include"
                       />
                     }
                     mode
@@ -734,7 +742,7 @@ function CallForm(props) {
                  label={
                    <FormattedMessage
                      id="app.customer"
-                     defaultMessage="Customer"
+                     defaultMessage="customer"
                    />
                  }
                  //component={SearchSelect}
@@ -762,7 +770,7 @@ function CallForm(props) {
                     label={
                       <FormattedMessage
                         id="app.contact"
-                        defaultMessage="Contact"
+                        defaultMessage="contact"
                       />
                     }
                     component={SelectComponent}
@@ -788,7 +796,7 @@ function CallForm(props) {
                  label={
                    <FormattedMessage
                      id="app.opportunity"
-                     defaultMessage="Opportunity"
+                     defaultMessage="opportunity"
                    />
                  }
                  //component={SearchSelect}
@@ -894,7 +902,7 @@ function CallForm(props) {
                       title={
                         <FormattedMessage
                           id="app.doyouwanttodelete?"
-                          defaultMessage="Do you want to delete?"
+                          defaultMessage="doyouwanttodelete?"
                         />
                       }
                       onConfirm={() => deleteCall(prefillCall.callId)}
@@ -907,7 +915,7 @@ function CallForm(props) {
                         {/* Delete */}
                         <FormattedMessage
                           id="app.delete"
-                          defaultMessage="Delete"
+                          defaultMessage="delete"
                         />
                       </Button>
                     </StyledPopconfirm>
@@ -922,7 +930,7 @@ function CallForm(props) {
                     "Update"
                   ) : (
                     // "Create"
-                    <FormattedMessage id="app.create" defaultMessage="Create" />
+                    <FormattedMessage id="app.create" defaultMessage="create" />
                   )}
                 </Button>
               </div>
