@@ -5,7 +5,6 @@ import { withRouter } from "react-router-dom";
 import { base_url } from "../../../Config/Auth";
 import { Button, Tooltip } from "antd";
 import InsertDriveFileIcon from '@mui/icons-material/InsertDriveFile';
-import { FlexContainer } from "../../../Components/UI/Layout";
 import { StyledSelect } from "../../../Components/UI/Antd";
 const CandidateShareForm =lazy(()=>import("./CandidateShareForm"));
 
@@ -25,7 +24,7 @@ class CandidateActionRight extends React.Component {
       viewType
     } = this.props;
     return (
-      <FlexContainer style={{alignItems:"center",justifyContent:"space-between"}} >
+      <div class=" flex justify-between items-center"  >
 
       <div >
         {/* {user.userType !== "USER" && user.department !== "Partner" && user.employee_type !=="External" && (  */}
@@ -87,7 +86,7 @@ class CandidateActionRight extends React.Component {
         </Tooltip>
        )} 
        </div>
-      </FlexContainer>
+      </div>
     );
   }
 }

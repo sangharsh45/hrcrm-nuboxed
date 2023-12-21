@@ -16,6 +16,7 @@ import { StyledPopconfirm } from "../../../../Components/UI/Antd";
 import { MultiAvatar, MultiAvatar2, SubTitle, } from "../../../../Components/UI/Elements";
 import {
   getOpportunityListByUserId,
+  emptyOpportunity,
   getRecruiterList,
   handleOpportunityNotesDrawerModal,
   handleUpdateOpportunityModal,
@@ -54,6 +55,9 @@ function OpportunityCardList(props) {
       setPage(page + 1);
     } 
     props.getAllSalesList();  
+  }, []);
+  useEffect(() => {
+    return () => props.emptyOpportunity();
   }, []);
 
   const handleLoadMore = () => {
@@ -517,6 +521,7 @@ const mapDispatchToProps = (dispatch) =>
          LinkClosedOpportunity,
          StatusRecruit,
          lostStatusRecruit,
+         emptyOpportunity,
          LinkStageOpportunity,
     },
     dispatch

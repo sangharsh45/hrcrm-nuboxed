@@ -1,10 +1,8 @@
-import React, { useEffect, useState,useMemo,lazy } from 'react'
+import React, { useEffect, useState, } from 'react'
 import { StyledTable } from '../../../../Components/UI/Antd';
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import moment from "moment";
-import { FormattedMessage } from 'react-intl';
-import {Button,Input,Tooltip,Checkbox } from "antd";
+import {Button,Input,Tooltip } from "antd";
 import SearchIcon from '@mui/icons-material/Search';
 import Highlighter from 'react-highlight-words';
 import "jspdf-autotable";

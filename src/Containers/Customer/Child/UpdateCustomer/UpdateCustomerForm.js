@@ -9,8 +9,6 @@ import AddressFieldArray from "../../../../Components/Forms/Formik/AddressFieldA
 import { Formik, Form, Field, FieldArray, FastField } from "formik";
 import * as Yup from "yup";
 import { updateCustomer,setEditCustomer ,setClearbitData} from "../../CustomerAction";
-import { getAllSalesList } from "../../../Opportunity/OpportunityAction";
-import { getAllCustomerEmployeelist } from "../../../Employees/EmployeeAction";
 import { getSectors } from "../../../../Containers/Settings/Sectors/SectorsAction";
 import { HeaderLabel, StyledLabel } from "../../../../Components/UI/Elements";
 import { Spacer } from "../../../../Components/UI/Elements";
@@ -31,9 +29,7 @@ const UpdateCustomerSchema = Yup.object().shape({
 function UpdateCustomerForm (props) {
   
   useEffect(() => {
-    props.getAllCustomerEmployeelist();
     props.getSectors();
-    props.getAllSalesList();
     props.getCrm();
   }, []);
 
@@ -471,8 +467,6 @@ const mapDispatchToProps = (dispatch) =>
       setClearbitData,
       setEditCustomer,
       getSectors,
-      getAllSalesList,
-      getAllCustomerEmployeelist,
       getCrm,
     },
     dispatch

@@ -243,7 +243,9 @@ export const callReducer = (state = initialState, action) => {
           fetchingOpportunityRecord: false,
           fetchingOpportunityRecordError: true,
         };
-  
+     
+        case types.EMPTY_CALL_LIST:
+          return { ...state, callListRangeByUserId: [] }; 
 
     default:
       return state;

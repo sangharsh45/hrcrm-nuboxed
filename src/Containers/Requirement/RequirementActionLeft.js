@@ -1,7 +1,6 @@
 import React, { useEffect,useState } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { FlexContainer } from "../../Components/UI/Layout";
 import { Input } from "antd";
 import {
 
@@ -44,7 +43,7 @@ const RequirementActionLeft = (props) => {
 
 const{user}=props;
 return (
-<FlexContainer alignItems="center">
+<div class=" flex items-center" >
 <div class=" w-72 md:ml-4 max-sm:w-16 ml-0">
 <Input
       placeholder="Search By Job ID"
@@ -79,7 +78,7 @@ return (
       </Button> */}
       
 
-</FlexContainer>
+</div>
 );
 };
 

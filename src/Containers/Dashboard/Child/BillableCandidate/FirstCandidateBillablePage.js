@@ -1,18 +1,15 @@
 import { Field, Form, Formik } from 'formik'
 import React, {useEffect,useState} from 'react'
-import moment from "moment";
 import * as Yup from "yup";
 import { FormattedMessage } from "react-intl";
  import {getCandidatesBillableAmount} from "../../DashboardAction"
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { SelectComponent } from "../../../../Components/Forms/Formik/SelectComponent";
-import { Button, Checkbox, Divider, Select } from 'antd';
+import { Button, Checkbox, } from 'antd';
 import { MainWrapper } from "../../../../Components/UI/Elements";
-// import { SelectComponent } from "../../../../AddressFieldArrayComponents/Forms/Formik/SelectComponent";
 import { Spacer } from "../../../../Components/UI/Elements";
 import { InputComponent } from '../../../../Components/Forms/Formik/InputComponent'
-import { dashboardReducer } from '../../DashboardReducer';
 import BillableCandidateListTable from './BillableCandidateListTable';
 
 // yup validation scheme for creating a account

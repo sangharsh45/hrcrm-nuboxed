@@ -14,7 +14,7 @@ import {
     getProcessForOpportunity,
     getProcessStagesForOpportunity,
 } from "../../Settings/SettingsAction";
-import {getAllOpportunityListByUserId,updateOpportunitydragstage} from "../OpportunityAction"
+import {getAllOpportunityListByUserId,updateOpportunitydragstage,emptyOpportunity} from "../OpportunityAction"
 import { Spin, notification } from "antd";
 const TabPane = StyledTabs.TabPane;
 
@@ -142,7 +142,9 @@ function OpportunityBoard(props) {
     props.getProcessStagesForOpportunity(processData.opportunityWorkflowDetailsId);
   }, [processData]);
 
-
+  useEffect(() => {
+    return () => props.emptyOpportunity();
+  }, []);
   const [isDragging, setIsDragging] = useState(false);
   const [currentProcess, setCurrentProcess] = useState({});
   const close = (key) => {
@@ -346,6 +348,7 @@ const mapDispatchToProps = (dispatch) =>
         getProcessForOpportunity,
         getProcessStagesForOpportunity,
         getAllOpportunityListByUserId,
+        emptyOpportunity,
         updateOpportunitydragstage
     },
     dispatch

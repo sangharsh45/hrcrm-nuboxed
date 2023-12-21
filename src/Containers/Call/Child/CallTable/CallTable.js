@@ -514,6 +514,7 @@ import {
   setEditNote,
   handleCallNotesDrawerModal,
   getNotesListByCallId,
+  emptyCall
 } from "../../CallAction";
 import APIFailed from "../../../../Helpers/ErrorBoundary/APIFailed";
 import { MultiAvatar2, } from "../../../../Components/UI/Elements";
@@ -534,6 +535,10 @@ const [currentNameId, setCurrentNameId] = useState("");
     getCallListRangeByUserId(employeeId, page);
     setPage(page + 1);
     props.getEmployeelist();
+  }, []);
+
+  useEffect(() => {
+    return () => props.emptyCall();
   }, []);
 
   const handleLoadMore = () => {
@@ -757,6 +762,7 @@ const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
       getCallListRangeByUserId,
+      emptyCall,
       deleteCall,
       handleCallModal,
       setEditNote,

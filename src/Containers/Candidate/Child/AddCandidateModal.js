@@ -20,7 +20,7 @@ const AddCandidateModal = props => {
         // maskClosable={false}
         destroyOnClose
         maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}
-        style={{marginTop:"5rem"}}
+        style={{marginTop:"3rem"}}
         onClose={() => handleCandidateModal(false)}
         footer={null}
       >

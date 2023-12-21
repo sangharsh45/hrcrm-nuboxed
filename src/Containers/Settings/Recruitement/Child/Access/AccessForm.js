@@ -976,7 +976,7 @@ const onCheckAllTeamsChange = (e) => {
     <>
 
       {/* <Form className="form-background"> */}
-      <div style={{ display: "flex", justifyContent: "space-between", height: "91vh", overflowY: "scroll", paddingRight: "0.6em" }}>
+      <div style={{ display: "flex", justifyContent: "space-between", height: "100vh", overflowY: "scroll", paddingRight: "0.6em" }}>
           {props.fetchingDepartmentAccess ? (
             <BundleLoader />
           ) : (
