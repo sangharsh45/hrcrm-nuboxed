@@ -3,7 +3,6 @@ import styled from "styled-components";
 import { FormattedMessage } from "react-intl";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
 import { Button, Tooltip, Popconfirm, } from "antd";
-import { FlexContainer } from "../../../../../Components/UI/Layout";
 import {
   TextInput,
   Select,
@@ -82,9 +81,7 @@ class SingleTaskStages extends Component {
         <ViewEditCard>
           {({ viewType }, toggleViewType) =>
             viewType === "view" ? (
-              <FlexContainer
-                justifyContent="start"
-                alignItems="center"
+              <div class=" flex justify-start items-center"
                 // onClick={() => handleStageClick(taskChecklistStagelinkId, taskChecklistStageName)}
                 style={{
                   backgroundColor:
@@ -136,9 +133,9 @@ class SingleTaskStages extends Component {
                     </Popconfirm>
                   </>
                 </div>
-              </FlexContainer>
+              </div>
             ) : (
-              <FlexContainer justifyContent="center">
+              <div class=" flex justify-center" >
                 <TextInput
                   name={newStageName}
                   // value={stageValue1 || taskChecklistStageName}
@@ -188,7 +185,7 @@ class SingleTaskStages extends Component {
                   {/* Cancel */}
                   <FormattedMessage id="app.cancel" defaultMessage="Cancel" />
                 </Button>
-              </FlexContainer>
+              </div>
             )
           }
         </ViewEditCard>

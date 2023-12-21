@@ -1,4 +1,4 @@
-import React, { Component, useState, useEffect } from "react";
+import React, {  useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import SearchSelect from "../../../../../Components/Forms/Formik/SearchSelect";
@@ -6,7 +6,6 @@ import { Button, message } from "antd";
 import { Formik, Form, Field } from "formik";
 import { Spacer } from "../../../../../Components/UI/Elements";
 import { FormattedMessage } from "react-intl";
-import { FlexContainer } from "../../../../../Components/UI/Layout";
 import { InputComponent } from "../../../../../Components/Forms/Formik/InputComponent";
 import * as Yup from "yup";
 import {
@@ -135,26 +134,16 @@ function TemplateView(props) {
           ...rest
         }) => (
             <Form className="form-background">
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  height: "50vh",
-                  overflow: "scroll",
-                }}
+              <div class=" flex justify-between h-[50vh] overflow-scroll"
+           
               >
-                <div
-                  style={{
-                    height: "100%",
-                    width: "100%",
-                    marginLeft: "1.25em",
-                    marginRight: "1.25em",
-                  }}
+                <div class=" w-full h-full ml-[1.25em] mr-[1.25em]"
+               
                 >
-                  <div style={{ marginTop: "1.25em" }}></div>
-                  <FlexContainer justifyContent="space-between">
-                    <FlexContainer flexDirection="column">
-                      <div style={{ width: "90%" }}>
+                  <div class=" mt-[1.25em]" ></div>
+                  <div class=" flex justify-between" >
+                    <div class=" flex flex-col" >
+                      <div class=" w-[90%]" >
                         {" "}
                         <Field
                           isRequired
@@ -178,7 +167,7 @@ function TemplateView(props) {
                       </div>
                       <Spacer style={{ marginBottom: "-0.5em" }} />
 
-                      <div style={{ width: "90%" }}>
+                      <div class=" w-[90%]" >
                         <Field
                           name="subject"
                           type="text"
@@ -198,7 +187,7 @@ function TemplateView(props) {
                           }}
                         />
                       </div>
-                      <div style={{ width: "90%" }}>
+                      <div class=" w-[90%]" >
                     <Field
                       name="customerId"
                       isColumnWithoutNoCreate
@@ -224,8 +213,8 @@ function TemplateView(props) {
                       }}
                     />
                   </div>
-                    </FlexContainer>
-                    <div style={{ width: "50%" }}>
+                    </div>
+                    <div class=" w-[50%]" >
                       <Field
                         name="descripion"
                         //label="Description"
@@ -245,11 +234,11 @@ function TemplateView(props) {
                         }}
                       />
                     </div>
-                  </FlexContainer>
+                  </div>
 
-                  <Spacer />
+            
 
-                  <Spacer />
+              <div class=" mt-4">
                   <Editor
                     editorState={editorState}
                     wrapperClassName="demo-wrapper"
@@ -287,10 +276,11 @@ function TemplateView(props) {
                     onEditorStateChange={onEditorStateChange}
                     placeholder={"Type here"}
                   />
+                  </div> 
                 </div>
               </div>
-              <Spacer />
-              <FlexContainer justifyContent="flex-end">
+            
+              <div class=" flex justify-end mt-4" >
                 <Button
                   type="primary"
                   htmlType="submit"
@@ -303,7 +293,7 @@ function TemplateView(props) {
                   />
                   {/* Update */}
                 </Button>
-              </FlexContainer>
+              </div>
             </Form>
           )}
       </Formik>

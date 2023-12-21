@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect,lazy, useState } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Formik, Form, Field } from "formik";
@@ -6,7 +6,7 @@ import {
   Select,
 } from "../../../../../Components/UI/Elements";
 import { SwitchComponent } from "../../../../../Components/Forms/Formik/SwitchComponent";
-import { MainWrapper, Spacer } from "../../../../../Components/UI/Elements";
+import { MainWrapper, } from "../../../../../Components/UI/Elements";
 import { FormattedMessage } from "react-intl";
 import { SelectComponent } from "../../../../../Components/Forms/Formik/SelectComponent";
 import { Button,  } from "antd";
@@ -14,9 +14,10 @@ import {
   updateRequirement,
   getRequirementsDuration,
 } from "../../../../Settings/SettingsAction";
-import { FlexContainer } from "../../../../../Components/UI/Layout";
-import Notifications from "./Notifications";
 import moment from "moment";
+const Notifications = lazy(() => import("../General/Notifications"));
+
+
 const { Option } = Select;
 function General(props) {
   const [anniversary, setAnniversary] = useState(props.requirementDuration.jobAniEmailInd);
@@ -70,26 +71,15 @@ function General(props) {
         {({ values }) => (
           <MainWrapper style={{ height: "525px", width: "", overflow: "auto" }}>
             <Form className="form-background">
-              <FlexContainer
-                justifyContent="space-between"
-                style={{ width: "100%" }}
-              >
-                <div
-                  style={{
-                    width: "44%",
-
-                    marginTop: "0.625em",
-                    marginLeft: "1em",
-                  }}
+            <div class=" flex justify-between w-full"
+             
+             >
+            <div class=" w-[44%] mt-[0.625em] ml-[1em]"
                 >
 
-                  <div
-                    style={{
-                      width: "74%",
-                      display: "flex",
-                      justifyContent: "space-between",
-                    }}
-                  >
+<div class=" flex justify-between w-[74%] "
+               
+               >
                     <p style={{ minWidth: "-webkit-fill-available" }}>Auto drop Open Orders (in months)</p>
                     <div>
                       <Field
@@ -103,13 +93,9 @@ function General(props) {
                       />
                     </div>
                   </div>
-                  <Spacer />
-                  <div
-                    style={{
-                      width: "74%",
-                      display: "flex",
-                      justifyContent: "space-between",
-                    }}
+                
+                  <div class=" flex justify-between w-[74%] mt-4"
+                 
                   >
                     <p style={{ minWidth: "-webkit-fill-available" }}>Auto drop Open Opportunities (in months)</p>
                     <div>
@@ -123,14 +109,9 @@ function General(props) {
                       />
                     </div>
                   </div>
-                  <Spacer />
-                  <div
-                    style={{
-                      width: "74%",
-                      display: "flex",
-                      justifyContent: "space-between",
-                    }}
-                  >
+                  <div class=" flex justify-between w-[74%] mt-4"
+                 
+                 >
                     <p style={{ minWidth: "-webkit-fill-available" }}>Auto Send Job Anniversary Email</p>
                     <div>
     {/* <Popconfirm
@@ -150,14 +131,9 @@ function General(props) {
     {/* </Popconfirm> */}
   </div>
                   </div>
-                  <Spacer />
-                  <div
-                    style={{
-                      width: "74%",
-                      display: "flex",
-                      justifyContent: "space-between",
-                    }}
-                  >
+                  <div class=" flex justify-between w-[74%] mt-4"
+                 
+                 >
                     <p style={{ minWidth: "-webkit-fill-available" }}>Auto Send BirthDay Email</p>
                     <div>
 
@@ -173,14 +149,9 @@ function General(props) {
   
   </div>
                   </div>
-                  <Spacer />
-                  <div
-                    style={{
-                      width: "74%",
-                      display: "flex",
-                      justifyContent: "space-between",
-                    }}
-                  >
+                  <div class=" flex justify-between w-[74%] mt-4"
+                 
+                 >
                     <p style={{ minWidth: "-webkit-fill-available" }}>Production Process Only</p>
                     <div>
                       <Field
@@ -193,16 +164,16 @@ function General(props) {
                       />
                     </div>
                   </div>
-                  <Spacer />
+            
                 </div>
-              </FlexContainer>
+              </div>
               <h4 class="mt-4">
                 Updated on{" "}
                 {moment(props.requirementDuration.creationDate).format("ll")} by{" "}
                 {props.requirementDuration.ownerName}
               </h4>
-              <Spacer style={{ marginTop: "1.25em" }} />
-              <FlexContainer justifyContent="flex-end">
+           
+              <div class=" flex justify-end mt-[1.25em]" >
                 <Button
                   type="primary"
                   htmlType="submit"
@@ -211,7 +182,7 @@ function General(props) {
                   <FormattedMessage id="app.update" defaultMessage="Update" />
                   {/* Update */}
                 </Button>
-              </FlexContainer>
+              </div>
               <Notifications />
             </Form>
           </MainWrapper>

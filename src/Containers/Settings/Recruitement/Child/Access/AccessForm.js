@@ -6,8 +6,7 @@ import dayjs from "dayjs";
 import { FloatButton } from 'antd';
 import { BundleLoader } from "../../../../../Components/Placeholder";
 import { bindActionCreators } from 'redux';
-import { Spacer } from '../../../../../Components/UI/Elements';
-import { FlexContainer, TabsWrapper } from "../../../../../Components/UI/Layout";
+import { TabsWrapper } from "../../../../../Components/UI/Layout";
 import { getDepartmentAccess, addDepartmentAccess } from "../../../SettingsAction"
 
 const CheckboxGroup = Checkbox.Group;
@@ -986,8 +985,8 @@ const onCheckAllTeamsChange = (e) => {
  {props.departmentData.hrInd === true ? 
  <div>
 <h1 class=" text-clr font-bold">General, HR & Self Service</h1>
-<Spacer />
-              <FlexContainer justifyContent="space-around">
+
+              <div class=" flex justify-around mt-4" >
             
               {/* <div >
                 <h1 class="text-sm">Users</h1>
@@ -1009,10 +1008,10 @@ const onCheckAllTeamsChange = (e) => {
 
                 </div>
               
-                </FlexContainer>
+                </div>
               {/* Vendor */}
-              <Spacer />
-              <FlexContainer justifyContent="space-around">
+       
+              <div class=" flex justify-around mt-4" >
             
           
               <div >
@@ -1024,8 +1023,8 @@ const onCheckAllTeamsChange = (e) => {
                 <CheckboxGroup options={plainOptions} value={checkedPlantList} onChange={onPlantChange} />
 
               </div>
-              <Spacer />
-              <div >
+              
+              <div class="mt-4" >
               <h1 class="text-sm">Teams</h1>
               <Checkbox indeterminate={indeterminateTeams} onChange={onCheckAllTeamsChange} checked={checkAllTeams}>
                <label class="text-xs"> Check all</label>
@@ -1036,17 +1035,17 @@ const onCheckAllTeamsChange = (e) => {
             </div>
               
             
-              </FlexContainer>
+              </div>
             {/* Vendor */}
-            <Spacer />
+       
 
-              <FlexContainer justifyContent="space-around">
+            <div class=" flex justify-around mt-4" >
             
          
-              </FlexContainer>
+              </div>
             {/* Vendor */}
-            <Spacer />
-              <FlexContainer justifyContent="space-around">
+         
+            <div class=" flex justify-around mt-4" >
               
               {/* Contact */}
               <div >
@@ -1058,8 +1057,8 @@ const onCheckAllTeamsChange = (e) => {
               <CheckboxGroup options={dashboardCheckedList} value={checkedDashboardList} onChange={onDashboardChange} />
 
             </div>
-            <Spacer />
-            <div >
+         
+            <div class=" mt-4" >
                 <h1 class="text-sm">Holiday</h1>
                 <Checkbox indeterminate={indeterminateHoliday} onChange={onCheckAllHolidayChange} checked={checkAllHoliday}>
                 <label class="text-xs">  Check all</label>
@@ -1068,9 +1067,9 @@ const onCheckAllTeamsChange = (e) => {
                 <CheckboxGroup options={basicCheckedList} value={checkedHolidayList} onChange={onHolidayChange} />
 
               </div>
-              <Spacer />
+           
         
-                <div >
+                <div class="mt-4">
                 <h1 class="text-sm">Repository</h1>
                 <Checkbox indeterminate={indeterminateRepository} onChange={onCheckAllRepositoryChange} checked={checkAllRepository}>
                  <label class="text-xs"> Check all</label>
@@ -1107,8 +1106,8 @@ const onCheckAllTeamsChange = (e) => {
                 <CheckboxGroup options={melCheckedList} value={checkedMileageList} onChange={onMileageChange} />
 
               </div>
-              <Spacer />
-              <div >
+          
+              <div class=" mt-4" >
                 <h1 class="text-sm">Expense</h1>
                 <Checkbox indeterminate={indeterminateExpense} onChange={onCheckAllExpenseChange} checked={checkAllExpense}>
                 <label class="text-xs">  Check all</label>
@@ -1117,8 +1116,8 @@ const onCheckAllTeamsChange = (e) => {
                 <CheckboxGroup options={melCheckedList} value={checkedExpenseList} onChange={onExpenseChange} />
 
               </div>
-              <Spacer />
-              <div >
+            
+              <div  class="mt-4">
                 <h1 class="text-sm">Leaves</h1>
                 <Checkbox indeterminate={indeterminateLeaves} onChange={onCheckAllLeavesChange} checked={checkAllLeaves}>
                 <label class="text-xs">Check all</label>
@@ -1127,8 +1126,8 @@ const onCheckAllTeamsChange = (e) => {
                 <CheckboxGroup options={melCheckedList} value={checkedLeavesList} onChange={onLeavesChange} />
 
               </div>
-              <Spacer />
-              <div >
+                 
+                   <div  class="mt-4">
                 <h1 class="text-sm">Tasks</h1>
                 <Checkbox indeterminate={indeterminateTasks} onChange={onCheckAllTasksChange} checked={checkAllTasks}>
                 <label class="text-xs">Check all</label>
@@ -1137,17 +1136,17 @@ const onCheckAllTeamsChange = (e) => {
                 <CheckboxGroup options={defaultCheckedList} value={checkedTasksList} onChange={onTasksChange} />
 
               </div>
-              <Spacer />
-            </FlexContainer>
-            <Spacer />
+     
+            </div>
+          
             </div>
             :null}
      
     {props.departmentData.crmInd === true ? 
     <div>     
             <h1 class=" text-clr font-bold">CRM</h1>
-            <Spacer />
-              <FlexContainer justifyContent="space-around">
+          
+            <div class=" flex justify-around mt-4" >
                 {/* <div >
                   <h1>Vendor</h1>
                   <Checkbox indeterminate={indeterminateVendor} onChange={onCheckAllVendorChange} checked={checkAllVendor}>
@@ -1169,9 +1168,9 @@ const onCheckAllTeamsChange = (e) => {
               <CheckboxGroup options={junkCheckedList} value={checkedJunkList} onChange={onJunkChange} />
 
             </div>
-            <Spacer/>
+         
               
-                <div >
+            <div  class="mt-4">
                   <h1 class="text-sm">Customer</h1>
                   <Checkbox indeterminate={indeterminateCustomer} onChange={onCheckAllCustomerChange} checked={checkAllCustomer}>
                   <label class="text-xs">  Check all  </label>
@@ -1179,10 +1178,10 @@ const onCheckAllTeamsChange = (e) => {
                   <Divider />
                   <CheckboxGroup options={plainOptions} value={checkedCustomerList} onChange={onCustomerChange} />
                 </div>
-                <Spacer />
+               
                     {/* Contact */}
                     <div >
-                  <h1 class="text-sm">Contact</h1>
+                  <h1 class="text-sm mt-4">Contact</h1>
                   <Checkbox indeterminate={indeterminateContact} onChange={onCheckAllContactChange} checked={checkAllContact}>
                   <label class="text-xs"> Check all</label>
                   </Checkbox>
@@ -1190,12 +1189,12 @@ const onCheckAllTeamsChange = (e) => {
                   <CheckboxGroup options={plainOptions} value={checkedContactList} onChange={onContactChange} />
 
                 </div>
-                <Spacer />
-              </FlexContainer>
-              <Spacer />
+      
+              </div>
+            
 
             
-              <FlexContainer justifyContent="space-around">
+              <div class=" flex justify-around mt-4" >
               <div >
                   <h1 class="text-sm">Opportunity</h1>
                   <Checkbox indeterminate={indeterminateOpportunity} onChange={onCheckAllOpportunityChange} checked={checkAllOpportunity}>
@@ -1205,8 +1204,8 @@ const onCheckAllTeamsChange = (e) => {
                   <CheckboxGroup options={plainOptions} value={checkedOpportunityList} onChange={onOpportunityChange} />
 
                 </div>
-                <Spacer />
-                <div >
+               
+                <div class=" mt-4" >
                   <h1 class="text-sm">Leads</h1>
                   <Checkbox indeterminate={indeterminateLeads} onChange={onCheckAllLeadsChange} checked={checkAllLeads}>
                   <label class="text-xs">  Check all </label>
@@ -1225,8 +1224,8 @@ const onCheckAllTeamsChange = (e) => {
                   <CheckboxGroup options={plainOptions} value={checkedPulseList} onChange={onPulseChange} />
 
                 </div> */}
-              </FlexContainer>
-              <Spacer />
+              </div>
+            
               </div> 
               : null } 
 
@@ -1238,8 +1237,8 @@ const onCheckAllTeamsChange = (e) => {
     <div>            
                 
 <h1 class=" text-clr font-bold">ERP</h1>
-                <Spacer />
-              <FlexContainer justifyContent="space-around">
+          
+                <div class=" flex justify-around mt-4" >
               <div >
               <h1 class="text-sm">Shipper</h1>
               <Checkbox indeterminate={indeterminateShipper} onChange={onCheckAllShipperChange} checked={checkAllShipper}>
@@ -1249,8 +1248,8 @@ const onCheckAllTeamsChange = (e) => {
               <CheckboxGroup options={plainOptions} value={checkedShipperList} onChange={onShipperChange} />
 
             </div>
-                <Spacer />
-               <div >
+             
+               <div class=" mt-4" >
                   <h1 class="text-sm">Account</h1>
                   <Checkbox indeterminate={indeterminateAccount} onChange={onCheckAllAccountChange} checked={checkAllAccount}>
                   <label class="text-xs">   Check all</label>
@@ -1258,11 +1257,11 @@ const onCheckAllTeamsChange = (e) => {
                   <Divider />
                   <CheckboxGroup options={plainOptions} value={checkedAccountList} onChange={onAccountChange} />
                 </div>
-                <Spacer />
              
-                </FlexContainer>
-                <Spacer />
-                <FlexContainer justifyContent="space-around">
+             
+                </div>
+              
+                <div class=" flex justify-around mt-4" >
                 <div >
                   <h1 class="text-sm">Order</h1>
                   <Checkbox indeterminate={indeterminateOrder} onChange={onCheckAllOrderChange} checked={checkAllOrder}>
@@ -1272,8 +1271,8 @@ const onCheckAllTeamsChange = (e) => {
                   <CheckboxGroup options={plainOptions} value={checkedOrderList} onChange={onOrderChange} />
 
                 </div>
-                <Spacer />
-               <div >
+                
+               <div class=" mt-4" >
     <h1 class="text-sm">Catalog</h1>
     <Checkbox indeterminate={indeterminateCatalog} onChange={onCheckAllCatalogChange} checked={checkAllCatalog}>
     <label class="text-xs">  Check all </label>
@@ -1282,8 +1281,8 @@ const onCheckAllTeamsChange = (e) => {
     <CheckboxGroup options={plainOptions} value={checkedCatalogList} onChange={onCatalogChange} />
 
   </div> 
-                </FlexContainer>
-                <FlexContainer justifyContent="space-around">
+                </div>
+                <div class=" flex justify-around" >
          
                <div >
                   <h1 class="text-sm">Materials</h1>
@@ -1293,9 +1292,9 @@ const onCheckAllTeamsChange = (e) => {
                   <Divider />
                   <CheckboxGroup options={plainOptions} value={checkedMaterialsList} onChange={onMaterialsChange} />
                 </div>
-                <Spacer />
+          
              
-                <div >
+                <div class=" mt-4" >
                   <h1 class="text-sm">Supplier</h1>
                   <Checkbox indeterminate={indeterminateSupplier} onChange={onCheckAllSupplierChange} checked={checkAllSupplier}>
                   <label class="text-xs">  Check all </label>
@@ -1304,9 +1303,9 @@ const onCheckAllTeamsChange = (e) => {
                   <CheckboxGroup options={plainOptions} value={checkedSupplierList} onChange={onSupplierChange} />
 
                 </div>
-                </FlexContainer>
-                <Spacer />
-                <FlexContainer justifyContent="space-around">
+                </div>
+          
+                <div class=" flex justify-around mt-4" >
          
          <div >
             <h1 class="text-sm">Inventory</h1>
@@ -1316,9 +1315,9 @@ const onCheckAllTeamsChange = (e) => {
             <Divider />
             <CheckboxGroup options={plainOptions} value={checkedInventoryList} onChange={onInventoryChange} />
           </div>
-          <Spacer />
+      
        
-          <div >
+          <div class=" mt-4">
             <h1 class="text-sm">Refurbish</h1>
             <Checkbox indeterminate={indeterminateRefurbish} onChange={onCheckAllRefurbishChange} checked={checkAllRefurbish}>
             <label class="text-xs"> Check all </label>
@@ -1327,16 +1326,16 @@ const onCheckAllTeamsChange = (e) => {
             <CheckboxGroup options={refurbishCheckedList} value={checkedRefurbishList} onChange={onRefurbishChange} />
 
           </div>
-          </FlexContainer>
-          <Spacer />
+          </div>
+      
           </div>
           : null }
 
 {props.departmentData.imInd === true ? 
     <div>     
             <h1 class=" text-clr font-bold">IM</h1>
-            <Spacer />
-              <FlexContainer justifyContent="space-around">
+       
+            <div class=" flex justify-around mt-4" >
           
 
               
@@ -1358,12 +1357,12 @@ const onCheckAllTeamsChange = (e) => {
                   <CheckboxGroup options={plainOptions} value={checkedInvestorContactList} onChange={onInvestorContactChange} />
 
                 </div>
-                <Spacer />
-              </FlexContainer>
-              <Spacer />
+          
+              </div>
+             
 
             
-              <FlexContainer justifyContent="space-around">
+              <div class=" flex justify-around mt-4" >
               <div >
                   <h1 class="text-sm">Deal</h1>
                   <Checkbox indeterminate={indeterminateDeal} onChange={onCheckAllDealChange} checked={checkAllDeal}>
@@ -1373,8 +1372,8 @@ const onCheckAllTeamsChange = (e) => {
                   <CheckboxGroup options={plainOptions} value={checkedDealList} onChange={onDealChange} />
 
                 </div>
-                <Spacer />
-                <div >
+       
+                <div class=" mt-4" >
                   <h1 class="text-sm">Pitch</h1>
                   <Checkbox indeterminate={indeterminatePitch} onChange={onCheckAllPitchChange} checked={checkAllPitch}>
                   <label class="text-xs">  Check all </label>
@@ -1393,8 +1392,8 @@ const onCheckAllTeamsChange = (e) => {
                   <CheckboxGroup options={plainOptions} value={checkedPulseList} onChange={onPulseChange} />
 
                 </div> */}
-              </FlexContainer>
-              <Spacer />
+              </div>
+             
               </div> 
              : null } 
 
@@ -1402,8 +1401,8 @@ const onCheckAllTeamsChange = (e) => {
  {props.departmentData.accountInd === true ?  
     <div>     
             <h1 class=" text-clr font-bold">Accounting</h1>
-            <Spacer />
-              <FlexContainer justifyContent="space-around">
+        
+            <div class=" flex justify-around mt-4" >
           
 
               
@@ -1415,9 +1414,9 @@ const onCheckAllTeamsChange = (e) => {
                   <Divider />
                   <CheckboxGroup options={accountingCheckedList} value={checkedPaymentsList} onChange={onPaymentsChange} />
                 </div>
-                <Spacer />
+              
                     {/* Contact */}
-                    <div >
+                    <div class=" mt-4">
                   <h1 class="text-sm">Collections</h1>
                   <Checkbox indeterminate={indeterminateCollection} onChange={onCheckAllCollectionChange} checked={checkAllCollection}>
                   <label class="text-xs"> Check all</label>
@@ -1426,7 +1425,7 @@ const onCheckAllTeamsChange = (e) => {
                   <CheckboxGroup options={collectionCheckedList} value={checkedCollectionList} onChange={onCollectionChange} />
 
                 </div>
-                <Spacer />
+         
             
 
 {/* <div >
@@ -1439,17 +1438,17 @@ const onCheckAllTeamsChange = (e) => {
 
   </div> */}
 
-              </FlexContainer>
+              </div>
             
-              <Spacer />
+           
               </div> 
                   : null }  
 
 {props.departmentData.recruitOppsInd === true ? 
     <div>     
             <h1 class=" text-clr font-bold">RecruitPro</h1>
-            <Spacer />
-              <FlexContainer justifyContent="space-around">
+           
+            <div class=" flex justify-around mt-4" >
           
 
               
@@ -1461,9 +1460,9 @@ const onCheckAllTeamsChange = (e) => {
                   <Divider />
                   <CheckboxGroup options={requirementCheckedList} value={checkedRequirementList} onChange={onRequirementChange} />
                 </div>
-                <Spacer />
+   
                    
-                <div >
+                <div class=" mt-4" >
                   <h1 class="text-sm">Talent</h1>
                   <Checkbox indeterminate={indeterminateTalent} onChange={onCheckAllTalentChange} checked={checkAllTalent}>
                   <label class="text-xs">  Check all  </label>
@@ -1475,15 +1474,15 @@ const onCheckAllTeamsChange = (e) => {
 
 
 
-              </FlexContainer>
+              </div>
             
-              <Spacer />
+          
               </div> 
                   : null } 
                
               <h4 class="mt-2">Updated on {dayjs(props.departmentAcces.lastUpdatedOn).format("ll")} by {props.departmentAcces.name}</h4>
               
-              <FlexContainer justifyContent="flex-end" >
+              <div class=" flex justify-end" >
               <FloatButton.Group style={{ width: "3rem", height: "5rem" }} >
                 <Button
                   type="primary"
@@ -1496,7 +1495,7 @@ const onCheckAllTeamsChange = (e) => {
                   <FormattedMessage id="app.Update" defaultMessage="Update" />
                 </Button>
                 </FloatButton.Group>
-              </FlexContainer>
+              </div>
 
 
             </TabsWrapper>

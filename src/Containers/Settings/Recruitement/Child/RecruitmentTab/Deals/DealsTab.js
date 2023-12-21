@@ -21,7 +21,6 @@ import {addProcessForDeals,
   updateProcessNameForDeals,
   updateStageForDeals
  } from "../../../../SettingsAction"
-import { FlexContainer } from "../../../../../../Components/UI/Layout";
 import {  StyledTabs } from "../../../../../../Components/UI/Antd";
 import {  Select } from "../../../../../../Components/UI/Elements";
 import { elipsize } from "../../../../../../Helpers/Function/Functions";
@@ -277,7 +276,7 @@ handleStagePublishClick = (investorOppStagesId, publishInd) => {
               <FormattedMessage id="app.workflow" defaultMessage="Workflow" />
             </h1>
 
-            <FlexContainer>
+            <div class=" flex">
                <StyledTabs
                 style={{ width: "80%" }}
                 defaultActiveKey={this.state.activeKey}
@@ -299,10 +298,8 @@ handleStagePublishClick = (investorOppStagesId, publishInd) => {
               </StyledTabs> 
 
               {this.state.isTextOpen ? (
-              <FlexContainer
-                alignItems="center"
-                style={{ marginLeft: "0.3125em", marginTop: "0.3125em" }}
-              >
+             <div class=" flex items-center ml-[0.3125em] mt-[0.3125em]"
+             >
                 <br />
                 <br />
               
@@ -334,11 +331,11 @@ handleStagePublishClick = (investorOppStagesId, publishInd) => {
                   Cancel
                
                 </Button>
-              </FlexContainer>
+              </div>
             ) : (
               <>
                 <br />
-                <FlexContainer justifyContent="flex-end">
+                <div class=" flex justify-end" >
                   <Button
                     type="primary"
 
@@ -349,25 +346,22 @@ handleStagePublishClick = (investorOppStagesId, publishInd) => {
                     Add
                  
                   </Button>
-                </FlexContainer>
+                </div>
               </>
             )}
            
-            </FlexContainer>
-            <Spacer />
-            <FlexContainer
-              flexDirection="column"
-              className="stages"
-              justifyContent="center"
-              style={{
-                width: "100%",
-                alignContent: "center",
-                alignItems:"center"
-              }}
-            >
+            </div>
+            <div class=" flex mt-4 flex-col justify-center"  className="stages"
+       
+       style={{
+         width: "100%",
+         alignContent: "center",
+         alignItems:"center"
+       }}
+     >
               {this.state.isProcessTextInputOpen ? (
                 <div style={{}}>
-                  <FlexContainer alignItems="center" justifyContent={"center"}>
+                  <div class="flex items-center justify-center" >
                     <TextInput
                       placeholder="Process Name"
                       name="workflowName"
@@ -379,7 +373,7 @@ handleStagePublishClick = (investorOppStagesId, publishInd) => {
                       style={{ marginLeft: "2.81em" }}
                     />
 
-                    <FlexContainer justifyContent="flex-end">
+<div class=" flex justify-end" >
                       <Button
                         style={{
                           border: "0.06em solid white",
@@ -402,8 +396,8 @@ handleStagePublishClick = (investorOppStagesId, publishInd) => {
                           defaultMessage="Cancel"
                         />
                       </Button>
-                    </FlexContainer>
-                  </FlexContainer>
+                    </div>
+                  </div>
                 </div>
               ) : 
               (
@@ -456,7 +450,7 @@ handleStagePublishClick = (investorOppStagesId, publishInd) => {
                   </h1> 
                 </>
               )}
-            </FlexContainer>
+            </div>
 
             {this.props.dealsProcessStages.map((dealsProcessStages, i) => (
               <SingleDealsStages
@@ -540,7 +534,7 @@ handleStagePublishClick = (investorOppStagesId, publishInd) => {
               </div>
             ) : this.state.currentProcess.workflowName? (
               <>
-                <FlexContainer justifyContent="flex-end">
+                <div class=" flex justify-end" >
                   <Button
                     type="primary"
                     ghost
@@ -554,7 +548,7 @@ handleStagePublishClick = (investorOppStagesId, publishInd) => {
                       defaultMessage="Add Stage"
                     />
                   </Button>
-                </FlexContainer>
+                </div>
               </>
             ):null}
           </MainWrapper>

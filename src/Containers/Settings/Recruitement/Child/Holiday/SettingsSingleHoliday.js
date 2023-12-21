@@ -6,10 +6,8 @@ import styled from "styled-components";
 import DeleteIcon from '@mui/icons-material/Delete';
 import { DatePicker } from "antd";
 import BorderColorIcon from '@mui/icons-material/BorderColor';
-import { Button, Tooltip,Popconfirm, Switch } from "antd";
-import { FlexContainer } from "../../../../../Components/UI/Layout";
-import { TextInput, Spacer } from "../../../../../Components/UI/Elements";
-import { ActionIcon } from "../../../../../Components/Utils";
+import { Button, Switch } from "antd";
+import { TextInput } from "../../../../../Components/UI/Elements";
 import ViewEditCard from "../../../../../Components/UI/Elements/ViewEditCard";
 import { elipsize } from "../../../../../Helpers/Function/Functions";
 import moment from "moment";
@@ -68,9 +66,8 @@ class SettingsSingleHoliday extends Component {
         <ViewEditCard>
           {({ viewType }, toggleViewType) =>
             viewType === "view" ? (
-              <FlexContainer
-              justifyContent="space-between"
-                alignItems="center"
+              <div class=" flex justify-between items-center"
+          
               
               // onClick={() => handleStageClick(stageId, stageName)}
               // style={{
@@ -164,10 +161,10 @@ class SettingsSingleHoliday extends Component {
                     />
                   </div>
                   {/* )} */}
-              </FlexContainer>
+              </div>
 
             ) : (
-                <FlexContainer>
+                <div class=" flex">
                   <TextInput
                     name={this.props.newHolidayName}
                     defaultValue={holidayName}
@@ -176,12 +173,13 @@ class SettingsSingleHoliday extends Component {
                   />
                 &nbsp;
                 <DatePicker
+                   width={"48%"}
                   value={dayjs(this.state.date)}
                   onChange={this.onChangeDatePicker}
                 />
                 &nbsp;
                   <Switch
-                    style={{ width: "6.25em", marginLeft: "0.625em" }}
+                    style={{ width: "9rem", }}
                     onChange={this.handleChangeHolidayTime}
                     checked={this.state.holidayType}
                     checkedChildren="Optional"
@@ -207,12 +205,10 @@ class SettingsSingleHoliday extends Component {
                                         placeholder="Days"
                                         width={"24%"}
                                     /> */}
-                  <Spacer />
-                  <Spacer style={{ marginBottom: "0.625em" }} />
-                  <FlexContainer
-                    justifyContent="flex-end"
-                    marginRight="0.3125em"
-                    marginTop="0.625em"
+               
+                 
+                  <div class=" flex justify-end mr-[0.3125em] mt-[0.625em] mb-[0.625em]"
+                
                   >
                     <Button
                       type="primary"
@@ -245,8 +241,8 @@ class SettingsSingleHoliday extends Component {
                  defaultMessage="Cancel"
                 />
                   </Button>
-                  </FlexContainer>
-                </FlexContainer>
+                  </div>
+                </div>
                  
               )
           }

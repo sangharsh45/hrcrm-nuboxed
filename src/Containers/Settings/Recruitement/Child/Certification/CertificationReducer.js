@@ -110,6 +110,12 @@ export const certificationReducer = (state = initialState, action) => {
         case types.GET_CERTIFICATION_SEARCH_FAILURE:
           return { ...state, fetchingCertificationInputSearchDataError: true };
 
+          case types.HANDLE_CLAER_REDUCER_DATA_CERTIFICATION:
+            return { ...state, 
+              certifications: [], 
+              // deletedTruck: [] 
+            };
+
         default:
             return state;
         }

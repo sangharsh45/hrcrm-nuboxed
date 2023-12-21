@@ -4,7 +4,6 @@ import { FormattedMessage } from "react-intl";
 import { Button,Tooltip } from "antd";
 import DeleteIcon from '@mui/icons-material/Delete';
 import BorderColorIcon from '@mui/icons-material/BorderColor';
-import { FlexContainer } from "../../../../../Components/UI/Layout";
 import { TextInput } from "../../../../../Components/UI/Elements";
 import ViewEditCard from "../../../../../Components/UI/Elements/ViewEditCard";
 
@@ -36,7 +35,7 @@ class SingleCertification extends Component {
         <ViewEditCard>
           {({ viewType }, toggleViewType) =>
             viewType === "view" ? (
-              <FlexContainer justifyContent="space-between">
+              <div class=" flex justify-between" >
                 <CertificationName style={{ flexBasis: "85%" }}>{name}</CertificationName>
                 <div>
                   {this.props.certification.editInd ? (
@@ -62,9 +61,9 @@ class SingleCertification extends Component {
                     />
                   </Tooltip>
                 </div>
-              </FlexContainer>
+              </div>
             ) : (
-              <FlexContainer>
+              <div class=" flex">
                 <TextInput
                   name={data}
                   // value={value || libraryType}
@@ -74,7 +73,7 @@ class SingleCertification extends Component {
                 />
                 <br />
              
-                <FlexContainer justifyContent="flex-end">
+                <div class=" flex justify-end" >
                   <Button
                     type="primary"
                     htmlType="submit"
@@ -92,8 +91,8 @@ class SingleCertification extends Component {
                     {/* Cancel */}
                     <FormattedMessage id="app.cancel" defaultMessage="Cancel" />
                   </Button>
-                </FlexContainer>
-              </FlexContainer>
+                </div>
+              </div>
             )
           }
         </ViewEditCard>

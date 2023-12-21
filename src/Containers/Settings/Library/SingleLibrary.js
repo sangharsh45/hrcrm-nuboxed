@@ -4,7 +4,6 @@ import { FormattedMessage } from "react-intl";
 import { Button,Tooltip } from "antd";
 import DeleteIcon from '@mui/icons-material/Delete';
 import BorderColorIcon from '@mui/icons-material/BorderColor';
-import { FlexContainer } from "../../../Components/UI/Layout";
 import { TextInput } from "../../../Components/UI/Elements";
 import ViewEditCard from "../../../Components/UI/Elements/ViewEditCard";
 
@@ -36,7 +35,7 @@ class SingleLibrary extends Component {
         <ViewEditCard>
           {({ viewType }, toggleViewType) =>
             viewType === "view" ? (
-              <FlexContainer justifyContent="space-between">
+              <div class=" flex justify-between" >
                 <LibraryName style={{ flexBasis: "85%" }}>{name}</LibraryName>
                 <div>
                   {this.props.library.editInd ? (
@@ -79,9 +78,9 @@ class SingleLibrary extends Component {
                     style={{ color: "#666" }}
                   />*/}
                 </div>
-              </FlexContainer>
+              </div>
             ) : (
-              <FlexContainer>
+              <div class=" flex">
                 <TextInput
                   name={data}
                   // value={value || libraryType}
@@ -91,7 +90,7 @@ class SingleLibrary extends Component {
                 />
                 <br />
              
-                <FlexContainer justifyContent="flex-end">
+                <div class=" flex justify-end" >
                   <Button
                     type="primary"
                     htmlType="submit"
@@ -109,8 +108,8 @@ class SingleLibrary extends Component {
                     {/* Cancel */}
                     <FormattedMessage id="app.cancel" defaultMessage="Cancel" />
                   </Button>
-                </FlexContainer>
-              </FlexContainer>
+                </div>
+              </div>
             )
           }
         </ViewEditCard>

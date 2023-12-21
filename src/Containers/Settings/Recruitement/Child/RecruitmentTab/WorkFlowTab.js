@@ -20,17 +20,17 @@ function WorkFlow(props) {
             </div>
           </TabPane> */}
           <TabPane tab={`Opportunity`} key="2">
-            <div style={{ marginTop: 10 }}>
+            <div  class=" mt-[10px]" >
               <HiringTab />
             </div>
           </TabPane>
           <TabPane tab={`Task`} key="3">
-            <div style={{ marginTop: 10 }}>
+          <div  class=" mt-[10px]" >
             <TaskTab />
             </div>
           </TabPane>
           <TabPane tab={`Deals`} key="4">
-            <div style={{ marginTop: 10 }}>
+          <div  class=" mt-[10px]" >
             <DealsTab />
             </div>
           </TabPane>

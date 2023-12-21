@@ -1,7 +1,6 @@
-import React, { lazy, Suspense, useState } from "react";
+import React, { Suspense, useState } from "react";
 import { MainWrapper } from "../../Components/UI/Elements";
 import { BundleLoader } from "../../Components/Placeholder";
-import { FlexContainer } from "../../Components/UI/Layout";
 import TemplateActionRight from "./TemplateActionRight";
 import TemplateTab from "./child/TemplateTab/Template/TemplateTab";
 ;
@@ -33,9 +32,9 @@ function Template() {
           <BundleLoader />
         </MainWrapper>
       ) : (
-          <FlexContainer>
+          <div class=" flex">
             <Suspense fallback={"Loading..."}>
-              <FlexContainer flexWrap="no-wrap" style={{ width: "100%" }}>
+              <div class=" flex flex-no-wrap w-full" >
                 <div style={{ width: "0%" }}>
                   {/* <TemplateActionLeft
                     handleRuleClick={handleRuleClick}
@@ -43,12 +42,12 @@ function Template() {
                     currentRulesOpen={currentRulesOpen}
                   /> */}
                 </div>
-                <div style={{ width: "100%" }}>
+                <div class=" w-full" >
                   <TemplateActionRight current={currentRulesOpen} />
                 </div>
-              </FlexContainer>
+              </div>
             </Suspense>
-          </FlexContainer>
+          </div>
         )}
     </div>
   );

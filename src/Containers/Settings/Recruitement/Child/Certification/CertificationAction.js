@@ -144,3 +144,9 @@ export const getCertification = (orgId) => (dispatch) => {
       });
   }; 
 
+  export const ClearReducerDataOfCertification = () => (dispatch) => {
+    dispatch({
+      type: types.HANDLE_CLAER_REDUCER_DATA_CERTIFICATION,
+    });
+  };
+

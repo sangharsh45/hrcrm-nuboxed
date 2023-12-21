@@ -5,7 +5,6 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import BorderColorIcon from '@mui/icons-material/BorderColor';
 import {deleteOpportunityStagesData} from "../../../../Settings/SettingsAction";
 import { Button, Tooltip, Popconfirm } from "antd";
-import { FlexContainer } from "../../../../../Components/UI/Layout";
 import { TextInput, Select } from "../../../../../Components/UI/Elements";
 import { elipsize } from "../../../../../Helpers/Function/Functions";
 import { ViewEditCard } from "../../../../../Components/UI/Elements";
@@ -87,9 +86,8 @@ class SingleOpportunityStages extends Component {
         <ViewEditCard>
           {({ viewType }, toggleViewType) =>
             viewType === "view" ? (
-              <FlexContainer
-                justifyContent="start"
-                alignItems="center"
+              <div class=" flex justify-start items-center"
+            
                 // onClick={() => handleStageClick(stageId, stageName)}
                 // style={{
                 //   backgroundColor:
@@ -184,11 +182,11 @@ class SingleOpportunityStages extends Component {
                    
 
                  
-           </FlexContainer>
+           </div>
             
             ) : (
               
-              <FlexContainer justifyContent="center">
+              <div class=" flex justify-center" >
                 <TextInput
                   name={newStageName}
                   // value={stageValue1 || stageName}
@@ -261,7 +259,7 @@ class SingleOpportunityStages extends Component {
                     defaultMessage="Cancel"
                   />
                 </Button>
-              </FlexContainer>
+              </div>
             )
           }
 

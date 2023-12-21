@@ -1,7 +1,7 @@
 import React, { lazy, Suspense } from "react";
 import { FormattedMessage } from "react-intl";
 import { BundleLoader } from "../../../../Components/Placeholder";
-import { StyledModal } from "../../../../Components/UI/Antd";
+import { StyledDrawer } from "../../../../Components/UI/Antd";
 import { StyledTabs } from "../../../../Components/UI/Antd";
 
 const TabPane = StyledTabs.TabPane;
@@ -10,19 +10,19 @@ const NotificationForm = lazy(() => import("../TemplateTab/Template/Notification
 const AddTemplateNotificatonModal = (props) => {
   return (
     <>
-      <StyledModal
+      <StyledDrawer
         //title="Template"
         title={<FormattedMessage
           id="app.notificaton"
           defaultMessage="Notificaton"
         />}
-        width="55%"
+        width="60%"
         visible={props.addTemplateNotificatonModal}
         maskClosable={false}
         destroyOnClose
         maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}
-        style={{ top: 40 }}
-        onCancel={() => props.handleTemplateNotificatonModal(false)}
+        style={{ marginTop: "3rem" }}
+        onClose={() => props.handleTemplateNotificatonModal(false)}
         footer={null}
       >
          
@@ -33,7 +33,7 @@ const AddTemplateNotificatonModal = (props) => {
           </>
   
   
-      </StyledModal>
+      </StyledDrawer>
     </>
   );
 };

@@ -8,7 +8,6 @@ import { Formik, Form, Field, FieldArray, FastField } from "formik";
 import * as Yup from "yup";
 import { getAllCustomerEmployeelist } from "../../../../Employees/EmployeeAction";
 import { HeaderLabel,  } from "../../../../../Components/UI/Elements";
-import { Spacer } from "../../../../../Components/UI/Elements";
 import SearchSelect from "../../../../../Components/Forms/Formik/SearchSelect";
 import AddressFieldArray from "../../../../../Components/Forms/Formik/AddressFieldArray";
 import {
@@ -220,7 +219,7 @@ function CustomerForm(props) {
                       </a>
                     ) : null}
                   </div>
-                  <Spacer />
+             <div class=" mt-4"></div>
                   <Field
                     isRequired
                     name="name"
@@ -254,7 +253,7 @@ function CustomerForm(props) {
             checkedChildren="Visible"
             unCheckedChildren="Hidden"
           />
-                  <Spacer />
+              
                   {/* <Field
                     name="email"
                     type="text"
@@ -267,7 +266,7 @@ function CustomerForm(props) {
                     component={InputComponent}
                     inlineLabel
                   />                   */}
-                   <div class=" flex justify-between">
+                   <div class=" flex justify-between mt-4">
                     <div class=" w-3/12 max-sm:w-[30%]">
                          {isLastNameVisible?
                       <FastField
@@ -314,8 +313,8 @@ function CustomerForm(props) {
                     </div>
                   </div>
 
-                  <Spacer/>
-                  <div class=" flex justify-between">
+              
+                  <div class=" flex justify-between mt-4">
                   <div class="w-w47.5 max-sm:w-w47.5">
                     {isMobileNumberVisible?
                   <Field             
@@ -372,7 +371,7 @@ function CustomerForm(props) {
                   </div>
 
                  
-                  <Spacer />
+               
                   {isNotesVisible?
                   <Field
                     name="notes"
@@ -393,8 +392,8 @@ function CustomerForm(props) {
                 </div>
                 <div class=" h-3/4 w-w47.5 max-sm:w-wk "  
                 >
-                 <Spacer/>
-                 <div class=" flex justify-between mb-[0.35rem]">
+       
+                 <div class=" flex justify-between mb-[0.35rem] mt-4">
                     <div class=" h-full w-full">
                         {isAssignedVisible?
                     <Listbox value={selected} onChange={setSelected}>
@@ -561,7 +560,7 @@ function CustomerForm(props) {
                   <HeaderLabel style={{color:"white"}} >Corporate Address</HeaderLabel>
                   </div>
                     </div>
-                  <Spacer />
+           
                   {isAddressVisible?
                   <FieldArray
                     name="address"
@@ -605,7 +604,7 @@ function CustomerForm(props) {
                
                 </div>
               </div>
-              <Spacer />
+     
           
             </Form>
             </div>

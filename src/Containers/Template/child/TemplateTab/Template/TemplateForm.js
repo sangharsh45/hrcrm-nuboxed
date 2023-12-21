@@ -6,7 +6,6 @@ import { FormattedMessage } from "react-intl";
 import SearchSelect from "../../../../../Components/Forms/Formik/SearchSelect";
 import { Formik, Form, Field } from "formik";
 import { Spacer } from "../../../../../Components/UI/Elements";
-import { FlexContainer } from "../../../../../Components/UI/Layout";
 import { InputComponent } from "../../../../../Components/Forms/Formik/InputComponent";
 import * as Yup from "yup";
 import { EditorState, convertToRaw } from "draft-js";
@@ -90,21 +89,15 @@ function TemplateForm(props) {
           ...rest
         }) => (
             <Form className="form-background">
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                }}
+              <div class=" flex justify-between"
+             
               >
-                <div
-                  style={{
-                    height: "100%",
-                    width: "100%",
-                  }}
+                <div class=" w-full h-full"
+                
                 >
-                  <FlexContainer justifyContent="space-between">
-                    <FlexContainer flexDirection="column">
-                      <div style={{ width: "90%" }}>
+                  <div class=" flex justify-between" >
+                    <div class=" flex flex-col" >
+                      <div class=" w-[90%]" >
                         <Field
                           isRequired
                           name="name"
@@ -127,7 +120,7 @@ function TemplateForm(props) {
                           }}
                         />
                       </div>
-                      <div style={{ width: "90%" }}>
+                      <div class=" w-[90%]">
                         <Field
                           isRequired
                           name="subject"
@@ -150,7 +143,7 @@ function TemplateForm(props) {
                           }}
                         />
                       </div>
-                      <div style={{ width: "90%" }}>
+                      <div class=" w-[90%]">
                     <Field
                       name="customerId"
                       isColumnWithoutNoCreate
@@ -171,8 +164,8 @@ function TemplateForm(props) {
                       }}
                     />
                   </div>
-                    </FlexContainer>
-                    <div style={{ width: "50%" }}>
+                    </div>
+                    <div class=" w-[50%]">
                       <Field
                         name="description"
                         //label="Description"
@@ -194,7 +187,7 @@ function TemplateForm(props) {
                         }}
                       />
                     </div>
-                  </FlexContainer>
+                  </div>
                   <Spacer />
                   <Editor
                     editorState={editorState}
@@ -243,8 +236,8 @@ function TemplateForm(props) {
                  
                 </div>
               </div>
-              <Spacer />
-              <FlexContainer justifyContent="flex-end">
+            
+              <div class=" flex justify-end mt-4" >
                 <Button
                   type="primary"
                   htmlType="submit"
@@ -254,7 +247,7 @@ function TemplateForm(props) {
                   <FormattedMessage id="app.create" defaultMessage="Create" />
 
                 </Button>
-              </FlexContainer>
+              </div>
             </Form>
           )}
       </Formik>

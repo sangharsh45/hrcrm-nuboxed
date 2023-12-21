@@ -206,7 +206,7 @@ class Department extends Component {
     if (fetchingRolesError) return <p>Error ...</p>;
     return (
       <>
-        <div class="flex flex-nowrap" >
+        <div class="flex flex-no-wrap" >
           <MainWrapper
             style={{
               flexBasis: "100%",

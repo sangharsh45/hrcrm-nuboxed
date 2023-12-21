@@ -75,7 +75,7 @@ class SingleDepartment extends Component {
                     />  
                     </div>
                     <h1 class="ml-4">ERP</h1>
-                    <div class=" w-[7%]"   >
+                    <div class=" w-[7%] ml-2"   >
                     
                     <ERPStatusToggle
                       erpInd={erpInd}
@@ -84,7 +84,7 @@ class SingleDepartment extends Component {
                     />  
                     </div>
                     <h1>CRM</h1>
-                    <div   class=" w-[7%]">
+                    <div   class=" w-[7%] ml-2">
                     <CRMStatusToggle
                       crmInd={crmInd}
                       departmentName={departmentName}
@@ -92,7 +92,7 @@ class SingleDepartment extends Component {
                     />  
                     </div>
                     <h1>IM</h1>
-                    <div class=" w-[7%]">
+                    <div class=" w-[7%] ml-2">
                     <IMStatusToggle
                       imInd={imInd}
                       departmentName={departmentName}
@@ -101,7 +101,7 @@ class SingleDepartment extends Component {
                     </div>
                     <h1>HR</h1>
                     <div 
-                   class=" w-[8%]"
+                   class=" w-[8%] ml-2"
                     >
                     <HrStatusToggle
                       hrInd={hrInd}
@@ -111,7 +111,7 @@ class SingleDepartment extends Component {
                     </div>
                     <h1>Accounting</h1>
                     <div 
-                   class=" w-[8%]"
+                   class=" w-[8%] ml-2"
                     >
                     <AccountingStatusToggle
                       accountInd={accountInd}
@@ -122,7 +122,7 @@ class SingleDepartment extends Component {
 
                     <h1>RecruitPro</h1>
                     <div 
-                  class=" w-[8%]"
+                  class=" w-[8%] ml-2"
                     >
                     <RecruitProStatusToggle
                       recruitOppsInd={recruitOppsInd}
