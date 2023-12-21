@@ -1225,7 +1225,7 @@ export const getProductRepurbish = (locationDetailsId) => (dispatch) => {
     type: types.GET_PRODUCT_REFURBISH_REQUEST,
   });
   axios
-    .get(`${base_url2}/getProductRepurbish/${locationDetailsId}`, {
+    .get(`${base_url2}/inventory/getProductRepurbish/${locationDetailsId}`, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },

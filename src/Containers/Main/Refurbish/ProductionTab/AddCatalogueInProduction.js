@@ -53,7 +53,7 @@ const AddCatalogueInProduction = (props) => {
                 initialValues={{
                     type: props.toggle ? "Catalogue" : "Non-Catalogue",
                     productId: "",
-                    quantity: "",
+                    unit: "",
                     productName: "",
                     categoryName: "",
                     subCategoryName: "",
@@ -155,7 +155,7 @@ const AddCatalogueInProduction = (props) => {
                                 </div>
                                 <div style={{ width: "27%" }}>
                                     <Field
-                                        name="quantity"
+                                        name="unit"
                                         label="Unit"
                                         isRequired
                                         isColumn
