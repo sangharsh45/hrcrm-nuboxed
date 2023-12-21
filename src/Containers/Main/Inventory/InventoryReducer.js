@@ -198,7 +198,11 @@ const initialState = {
 
   dispatchMismatchData: false,
 
-  dispatchPhoneData: false
+  dispatchPhoneData: false,
+
+  fetchingRefurbishProduct:false,
+  fetchingRefurbishProductError:false,
+  refurbishProduct:[],
 };
 
 export const inventoryReducer = (state = initialState, action) => {
@@ -997,10 +1001,24 @@ export const inventoryReducer = (state = initialState, action) => {
     case types.HANDLE_PICKUP_MODAL:
       return { ...state, pickUpModal: action.payload };
 
-
-
-    case types.HANDLE_CREATE_AWB_MODAL:
+      case types.HANDLE_CREATE_AWB_MODAL:
       return { ...state, addCreateAwb: action.payload };
+
+      case types.GET_PRODUCT_REFURBISH_REQUEST:
+        return { ...state, fetchingRefurbishProduct: true };
+      case types.GET_PRODUCT_REFURBISH_SUCCESS:
+        return {
+          ...state,
+          fetchingRefurbishProduct: false,
+          refurbishProduct: action.payload
+        };
+      case types.GET_PRODUCT_REFURBISH_FAILURE:
+        return {
+          ...state,
+          fetchingRefurbishProduct: false,
+          fetchingRefurbishProductError: true,
+        };
+
     default:
       return state;
   }

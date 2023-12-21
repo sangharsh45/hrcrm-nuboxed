@@ -1219,3 +1219,30 @@ export const handlePickupModal = (modalProps) => (dispatch) => {
   });
 };
 
+
+export const getProductRepurbish = (locationDetailsId) => (dispatch) => {
+  dispatch({
+    type: types.GET_PRODUCT_REFURBISH_REQUEST,
+  });
+  axios
+    .get(`${base_url2}/getProductRepurbish/${locationDetailsId}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      // dispatch(getChoosenCurrencyId(contactPersonId));
+      dispatch({
+        type: types.GET_PRODUCT_REFURBISH_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.GET_PRODUCT_REFURBISH_FAILURE,
+        payload: err,
+      });
+    });
+};
