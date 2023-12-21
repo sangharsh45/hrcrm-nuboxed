@@ -6,7 +6,7 @@ import { FormattedMessage } from "react-intl";
 const AddCallModal = (props) => {
   const { addCallModal, handleCallModal, ...formProps } = props;
   const isSmallScreen = window.innerWidth <= 600;
-  const drawerWidth = isSmallScreen ? "90%" : "55%";
+  const drawerWidth = isSmallScreen ? "90%" : "60%";
   return (
     <>
       <StyledDrawer
@@ -20,7 +20,7 @@ const AddCallModal = (props) => {
         destroyOnClose
         maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}
         onClose={() => handleCallModal(false)}
-        style={{marginTop:"5rem"}}
+        style={{marginTop:"3rem"}}
         footer={null}
       >
         <Suspense fallback={<BundleLoader />}>

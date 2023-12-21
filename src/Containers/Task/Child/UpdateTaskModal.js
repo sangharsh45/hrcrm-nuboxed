@@ -7,7 +7,7 @@ import UpdateTaskForm from "./UpdateTaskForm";
 const UpdateTaskModal = (props) => {
     const { updateTaskModal, handleUpdateTaskModal, ...formProps } = props;
     const isSmallScreen = window.innerWidth <= 600;
-    const drawerWidth = isSmallScreen ? "90%" : "55%";
+    const drawerWidth = isSmallScreen ? "90%" : "60%";
     return (
       <>
         <StyledDrawer
@@ -21,7 +21,7 @@ const UpdateTaskModal = (props) => {
           maskClosable={false}
           destroyOnClose
           maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}
-           style={{marginTop:"5rem"}}
+           style={{marginTop:"3rem"}}
           onClose={() => handleUpdateTaskModal(false)}
           footer={null}
         >

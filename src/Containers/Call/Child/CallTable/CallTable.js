@@ -577,35 +577,35 @@ const [currentNameId, setCurrentNameId] = useState("");
        <div className=' flex justify-end sticky top-28 z-auto'>
        <OnlyWrapCard style={{backgroundColor:"#E3E8EE"}}>
        <div className=" flex justify-between w-[99%] p-2 bg-transparent font-bold sticky top-0 z-10">
-        <div className=" md:w-[7rem]"><FormattedMessage
+        <div className=" md:w-[7.1rem]"><FormattedMessage
                   id="app.type"
                   defaultMessage="type"
                 /></div>
-        <div className=" md:w-40"><FormattedMessage
+        <div className=" md:w-[10.1rem]"><FormattedMessage
                   id="app.subject"
                   defaultMessage="subject"
                 /></div>
-        <div className=" md:w-28 "><FormattedMessage
+        <div className=" md:w-[7.11rem] "><FormattedMessage
                   id="app.contact"
                   defaultMessage="contact"
                 /></div>
-        <div className=" md:w-28 "><FormattedMessage
+        <div className=" md:w-[7.2rem]"><FormattedMessage
                   id="app.date"
                   defaultMessage="date"
                 /></div>
-        <div className="md:w-24"><FormattedMessage
+        <div className="md:w-[6.2rem]"><FormattedMessage
                   id="app.include"
                   defaultMessage="include"
                 /></div>
-        <div className="md:w-24"><FormattedMessage
+        <div className="md:w-[6.2rem]"><FormattedMessage
                   id="app.assignedto"
                   defaultMessage="assignedto"
                 /></div>
-        <div className="md:w-36"><FormattedMessage
+        <div className="md:w-[9.2rem]"><FormattedMessage
                   id="app.completed"
                   defaultMessage="completed"
                 /></div>
-        <div className="md:w-24"><FormattedMessage
+        <div className="md:w-[6.21rem]"><FormattedMessage
                   id="app.owner"
                   defaultMessage="owner"
                 /></div>
@@ -634,15 +634,15 @@ const [currentNameId, setCurrentNameId] = useState("");
             <div className="flex rounded-xl justify-between bg-white mt-[0.5rem] h-[2.75rem] items-center p-3"
            >
               <div class="flex">
-              <div class="flex  flex-col md:w-28 max-sm:flex-row max-sm:justify-between w-full">
+              <div class="flex  flex-col md:w-[8.23rem] max-sm:flex-row max-sm:justify-between w-full">
             <div> {item.callType}</div>
             </div>
-            <div class="flex  flex-col md:w-40 max-sm:flex-row max-sm:justify-between w-full">
+            <div class="flex  flex-col md:w-[6.23rem] max-sm:flex-row max-sm:justify-between w-full">
             <p> {item.callPurpose}</p>
               </div>
               </div>
-              <div class="flex">
-              <div class="flex  flex-col md:w-48 max-sm:flex-row max-sm:justify-between w-full">
+              <div class="flex md:w-[21rem]">
+              <div class="flex  flex-col md:w-[5.12rem] max-sm:flex-row max-sm:justify-between w-full">
       
               <MultiAvatar2
                     primaryTitle={item.contactName}
@@ -654,10 +654,10 @@ const [currentNameId, setCurrentNameId] = useState("");
               
    
               </div>
-              <div class="flex  flex-col md:w-48 max-sm:flex-row max-sm:justify-between w-full">
+              <div class="flex  flex-col md:w-[14.35rem] max-sm:flex-row max-sm:justify-between w-full">
               <p> {moment(item.startDate).format("llll")}</p>
               </div>
-              <div class="flex  flex-col md:w-16 max-sm:flex-row max-sm:justify-between w-full">
+              <div class="flex  flex-col md:w-[2.2rem] max-sm:flex-row max-sm:justify-between w-full">
              
               <div>
                 
@@ -678,8 +678,8 @@ return (
               </div>
               </div>
               
-              <div class="flex items-center">
-             <div class="flex  flex-col md:w-24 max-sm:flex-row max-sm:justify-between w-full">
+              <div class="flex items-center md:w-[30rem]">
+             <div class="flex  flex-col md:w-[8.35rem] max-sm:flex-row max-sm:justify-between w-full">
           
               <MultiAvatar2
                     primaryTitle={item.assignedTo}
@@ -690,13 +690,13 @@ return (
                   />
               {/* <p> {item.assignedTo || "Unassigned"}</p> */}
               </div>
-              <div class="flex  flex-col md:w-36 max-sm:flex-row max-sm:justify-between w-full">
+              <div class="flex  flex-col md:w-[10.35rem] max-sm:flex-row max-sm:justify-between w-full">
            
               <p> {item.completionInd ? "Yes" : "No"}</p>
               </div>
             
               
-              <div class="flex  flex-col md:w-16 max-sm:flex-row max-sm:justify-between w-full mt-1 mb-1">
+              <div class="flex  flex-col md:w-[8.38rem] max-sm:flex-row max-sm:justify-between w-full mt-1 mb-1">
              
               <MultiAvatar2
                     primaryTitle={item.woner}

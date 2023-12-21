@@ -304,10 +304,7 @@ function UpdateEventForm (props) {
                     name="eventTypeId"
                     //label="Type"
                     label={
-                      <FormattedMessage
-                        id="app.type"
-                        defaultMessage="Type"
-                      />
+                      <FormattedMessage id="app.type" defaultMessage="type" />
                     }
                     component={SearchSelect}
                     isColumnWithoutNoCreate
@@ -327,9 +324,9 @@ function UpdateEventForm (props) {
                     //label="Topic"
                     label={
                       <FormattedMessage
-                        id="app.subject"
-                        defaultMessage="Subject"
-                      />
+                      id="app.subject"
+                      defaultMessage="subject"
+                    />
                     }
                     isColumn
                     width={"100%"}
@@ -350,9 +347,9 @@ function UpdateEventForm (props) {
                         //label="Start "
                         label={
                           <FormattedMessage
-                            id="app.startDate"
-                            defaultMessage="Start Date"
-                          />
+                          id="app.startDate"
+                          defaultMessage="Start Date"
+                        />
                         }
                         isColumn
                         component={DatePicker}
@@ -371,9 +368,9 @@ function UpdateEventForm (props) {
                         // label="Start Time"
                         label={
                           <FormattedMessage
-                            id="app.startTime"
-                            defaultMessage="Start Time"
-                          />
+                              id="app.startTime"
+                              defaultMessage="Start Time"
+                            />
                         }
                         isColumn
                         component={TimePicker}
@@ -397,7 +394,7 @@ function UpdateEventForm (props) {
                         label={
                           <FormattedMessage
                             id="app.enddate"
-                            defaultMessage="End Date"
+                            defaultMessage="enddate"
                           />
                         }
                         component={DatePicker}
@@ -431,9 +428,9 @@ function UpdateEventForm (props) {
                         //label="End Time"
                         label={
                           <FormattedMessage
-                            id="app.endtime"
-                            defaultMessage="End Time"
-                          />
+                          id="app.endtime"
+                          defaultMessage="endtime"
+                        />
                         }
                         isColumn
                         component={TimePicker}
@@ -458,7 +455,7 @@ function UpdateEventForm (props) {
                     label={
                       <FormattedMessage
                         id="app.timeZone"
-                        defaultMessage="TimeZone"
+                        defaultMessage="timeZone"
                       />
                     }
                     selectType="timeZone"
@@ -476,7 +473,7 @@ function UpdateEventForm (props) {
                     label={
                       <FormattedMessage
                         id="app.notes"
-                        defaultMessage="Notes"
+                        defaultMessage="notes"
                       />
                     }
                     isColumn
@@ -496,9 +493,9 @@ function UpdateEventForm (props) {
                  // selectType="customerList"
                  isColumnWithoutNoCreate
                  label={
-                   <FormattedMessage
+                  <FormattedMessage
                      id="app.customer"
-                     defaultMessage="Customer"
+                     defaultMessage="customer"
                    />
                  }
                  //component={SearchSelect}
@@ -526,7 +523,7 @@ function UpdateEventForm (props) {
                     label={
                       <FormattedMessage
                         id="app.contact"
-                        defaultMessage="Contact"
+                        defaultMessage="contact"
                       />
                     }
                     component={SelectComponent}
@@ -550,9 +547,9 @@ function UpdateEventForm (props) {
                  // selectType="customerList"
                  isColumnWithoutNoCreate
                  label={
-                   <FormattedMessage
+                  <FormattedMessage
                      id="app.opportunity"
-                     defaultMessage="Opportunity"
+                     defaultMessage="opportunity"
                    />
                  }
                  //component={SearchSelect}
@@ -727,7 +724,7 @@ function UpdateEventForm (props) {
 
                   <FormattedMessage
                     id="app.update"
-                    defaultMessage="Update"
+                    defaultMessage="update"
                   />
                 </Button>
               </div>

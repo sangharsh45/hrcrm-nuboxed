@@ -22,7 +22,7 @@ const AddTaskModal = (props) => {
         maskClosable={false}
         destroyOnClose
         maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}
-        style={{marginTop:"5rem"}}
+        style={{marginTop:"3rem"}}
         onClose={() => handleTaskModal(false)}
         footer={null}
       >
