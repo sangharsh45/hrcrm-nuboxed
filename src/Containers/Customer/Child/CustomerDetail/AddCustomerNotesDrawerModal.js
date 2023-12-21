@@ -17,7 +17,7 @@ console.log(this.props.rowdata)
         // title="Notes"
           title={this.props.customer.name}
           width="64%"
-          style={{ marginTop: "5rem" }}
+          style={{ marginTop: "3rem" }}
           visible={this.props.addDrawerCustomerNotesModal}
           closable
           placement="right"

@@ -579,11 +579,11 @@ export const OpportunityReducer = (state = initialState, action) => {
       return {
         ...state,
         fetchingOpportunity: false,
-        // opportunityByUserId: action.payload,
+        opportunityByUserId: action.payload,
 
-        opportunityByUserId: [
-          ...state.opportunityByUserId,
-          ...action.payload],
+        // opportunityByUserId: [
+        //   ...state.opportunityByUserId,
+        //   ...action.payload],
       };
     case types.GET_OPPORTUNITY_FAILURE:
       return {

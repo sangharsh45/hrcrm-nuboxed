@@ -34,7 +34,7 @@ function UpdateCustomerForm (props) {
     props.getAllCustomerEmployeelist();
     props.getSectors();
     props.getAllSalesList();
-    props. getCrm();
+    props.getCrm();
   }, []);
 
 
@@ -52,15 +52,10 @@ function UpdateCustomerForm (props) {
       userId
     } = props;
 
-    const employeesData = props.allCustomerEmployeeList.map((item) => {
-      return {
-        label: `${item.fullName}`,
-        value: item.employeeId,
-      };
-    });
+ 
     const [defaultOption, setDefaultOption] = useState(setEditingCustomer.assignedTo);
     const [selected, setSelected] = useState(defaultOption);
-    const selectedOption = props.allCustomerEmployeeList.find((item) => item.fullName === selected);
+    const selectedOption = props.crmAllData.find((item) => item.empName === selected);
     
     const srcnme=setEditingCustomer.source
     console.log("ssrcc",srcnme)
@@ -105,6 +100,7 @@ function UpdateCustomerForm (props) {
                 ...values,
                 customerId: props.customerId,
                 assignedTo:selectedOption ? selectedOption.employeeId:props.setEditingCustomer.employeeId,
+                
               },
             props.customerId,
               () => handleReset(resetForm)
