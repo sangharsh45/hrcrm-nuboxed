@@ -1,4 +1,6 @@
 import * as types from "./RefurbishActionTypes";
+import dayjs from "dayjs";
+import moment from "moment";
 
 const initialState = {
   viewType: "list",
@@ -183,6 +185,17 @@ const initialState = {
 
   addingCatalogueByTechnician: false,
   addingCatalogueByTechnicianError: false,
+
+  clickTagInDrawr:false,
+  startDate: dayjs().toISOString(),
+  endDate: dayjs().toISOString(),
+
+  addingTagInProcess: false,
+  addingTagInProcessError:false,
+
+  fetchingTagInProcess: false,
+  fetchingTagInProcessError: false,
+   tagInPros:[],
 };
 
 export const refurbishReducer = (state = initialState, action) => {
@@ -879,7 +892,37 @@ export const refurbishReducer = (state = initialState, action) => {
         updatingFarGlassInProductionError: true,
 
       };
-
+      case types.HANDLE_INTAG_MODAL:
+      return { ...state, clickTagInDrawr:action.payload   };
+      
+      case types.ADD_TAGIN_PROCESS_REQUEST:
+        return { ...state, addingTagInProcess: true };
+      case types.ADD_TAGIN_PROCESS_SUCCESS:
+        return {
+          ...state,
+          addingTagInProcess: false,
+        };
+      case types.ADD_TAGIN_PROCESS_FAILURE:
+        return {
+          ...state,
+          addingTagInProcess: false,
+          addingTagInProcessError: true,
+        };  
+        case types.GET_TAGIN_PROCESS_REQUEST:
+          return { ...state, fetchingTagInProcess: true };
+        case types.GET_TAGIN_PROCESS_SUCCESS:
+          return {
+            ...state,
+            fetchingTagInProcess: false,
+            tagInPros: action.payload,
+          };
+        case types.GET_TAGIN_PROCESS_FAILURE:
+          return {
+            ...state,
+            fetchingTagInProcess: false,
+            fetchingTagInProcessError: true,
+          };     
+        
     default:
       return state;
   }

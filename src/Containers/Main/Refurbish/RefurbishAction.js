@@ -1222,3 +1222,59 @@ export const updateFarGlassInProduction = (data, productRepurbishId) => (dispatc
       });
     });
 };
+
+export const handleInTagDrawer = (modalProps) => (dispatch) => {
+  dispatch({
+    type: types.HANDLE_INTAG_MODAL,
+    payload: modalProps,
+  })
+}
+export const addTagInProcess = (data,id) => (dispatch) => {
+  dispatch({
+    type: types.ADD_TAGIN_PROCESS_REQUEST,
+  });
+  axios
+    .post(`${base_url2}/inventory/partBuilder `, data, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      dispatch(getTagInProcess(id))
+      dispatch({
+        type: types.ADD_TAGIN_PROCESS_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      dispatch({
+        type: types.ADD_TAGIN_PROCESS_FAILURE,
+        payload: err,
+      });
+    });
+};
+export const getTagInProcess = (productRepurbishId) => (dispatch) => {
+  dispatch({
+    type: types.GET_TAGIN_PROCESS_REQUEST,
+  });
+  axios
+    .get(`${base_url2}/inventory/getPartBuilder/${productRepurbishId}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.GET_TAGIN_PROCESS_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.GET_TAGIN_PROCESS_FAILURE,
+        payload: err,
+      });
+    });
+};

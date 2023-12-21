@@ -5,7 +5,9 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import ButtonGroup from "antd/lib/button/button-group";
 import { Button, Tooltip } from 'antd'
-import { updateFarGlassInProduction } from "../RefurbishAction"
+import { updateFarGlassInProduction,handleInTagDrawer } from "../RefurbishAction"
+import TagInDrawer from './TagInDrawer';
+import MoveInvenToggle from './MoveInvenToggle'
 
 const ProductionTable = (props) => {
 
@@ -44,20 +46,35 @@ const ProductionTable = (props) => {
             </Tooltip>
         );
     }
-    function handleFarGlass(type, item) {
+    function handleInProgress(type, item) {
         setActive(type)
         console.log(type)
         console.log(item)
         const data = {
             repairStatus: type,
-            // orderPhoneId: props.rowData.orderId,
+            productRepurbishId:item.productRepurbishId,
+            repurbishStartDate:props.startDate,
             phoneId: item.phoneId,
             repairTechnicianId: props.userId,
             qcInspectionInd: type === "Complete" ? 2 : 1
         }
-        // props.updateFarGlassInProduction(data, item.phoneId, props.rowData.orderPhoneId, props.locationId, props.userId)
+        props.updateFarGlassInProduction(data, item.productRepurbishId)
     }
-
+    function handleCompleteglass(type, item) {
+        setActive(type)
+        console.log(type)
+        console.log(item)
+        const data = {
+            repairStatus: type,
+            productRepurbishId:item.productRepurbishId,
+            repurbishStartDate:item.repurbishStartDate,
+            repurbishEndDate:props.endDate,
+            phoneId: item.phoneId,
+            repairTechnicianId: props.userId,
+            qcInspectionInd: type === "Complete" ? 2 : 1
+        }
+        props.updateFarGlassInProduction(data, item.productRepurbishId)
+    }
     const column = [
         {
             title: "",
@@ -93,7 +110,7 @@ const ProductionTable = (props) => {
         {
             title: "Units",
             width: "13%",
-            dataIndex: "quantity",
+            dataIndex: "unit",
         },
         {
             render: (text, item) => {
@@ -110,7 +127,7 @@ const ProductionTable = (props) => {
                                 phoneId={RowData.phoneId}
                                 status={active}
                                 onClick={() => {
-                                    handleFarGlass("In Progress", item);
+                                    handleInProgress("In Progress", item);
                                     handleSetRowData(item)
                                 }}
                             />
@@ -123,11 +140,52 @@ const ProductionTable = (props) => {
                                 indStatus={item.repairStatus}
                                 phoneId={RowData.phoneId}
                                 onClick={() => {
-                                    handleFarGlass("Complete", item);
+                                    handleCompleteglass("Complete", item);
                                     handleSetRowData(item)
                                 }}
                             />
                         </ButtonGroup>
+                    </>
+                )
+            }
+        },
+        {
+            width: "7%",
+            render: (text, item) => {
+                return (
+                    <>
+                    {item.repurbishStartDate===null ?null:
+                        <Tooltip title="">
+                            <Button
+                                style={{ backgroundColor: "orange", color: "white" }}
+                                onClick={() => {
+                                    // handleShowBuilder()
+                                    props.handleInTagDrawer(true)
+                                    handleSetRowData(item)
+                                }}
+                            >
+                                Tag Parts
+                            </Button>
+                        </Tooltip>
+                        } 
+
+                    </>
+                )
+            }
+        },
+        {
+            width: "7%",
+            render: (text, item) => {
+                return (
+                    <>
+                    {item.repurbishEndDate===null ? null:
+                   <MoveInvenToggle
+                   moveToLocationId={item.moveToLocationId}
+                   productRepurbishId={item.productRepurbishId}
+                   repurbishStartDate={item.repurbishStartDate}
+                   repurbishEndDate={item.repurbishEndDate}
+                   />}
+
                     </>
                 )
             }
@@ -142,7 +200,11 @@ const ProductionTable = (props) => {
                 pagination={false}
                 columns={column}
             />
-
+<TagInDrawer
+RowData={RowData}
+clickTagInDrawr={props.clickTagInDrawr}
+handleInTagDrawer={props.handleInTagDrawer}
+/>
         </>
     )
 }
@@ -150,11 +212,15 @@ const ProductionTable = (props) => {
 const mapStateToProps = ({ refurbish, auth }) => ({
     catalogueByTechnician: refurbish.catalogueByTechnician,
     userId: auth.userDetails.userId,
+    clickTagInDrawr:refurbish.clickTagInDrawr,
+    startDate:refurbish.startDate,
+    endDate:refurbish.endDate,
 });
 const mapDispatchToProps = dispatch =>
     bindActionCreators({
         getCatalogueByTechnician,
-        updateFarGlassInProduction
+        updateFarGlassInProduction,
+        handleInTagDrawer
     }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProductionTable);

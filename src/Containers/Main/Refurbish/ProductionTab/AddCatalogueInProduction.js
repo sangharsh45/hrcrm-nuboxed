@@ -53,7 +53,7 @@ const AddCatalogueInProduction = (props) => {
                 initialValues={{
                     type: props.toggle ? "Catalogue" : "Non-Catalogue",
                     productId: "",
-                    quantity: 1,
+                    quantity: "",
                     productName: "",
                     categoryName: "",
                     subCategoryName: "",

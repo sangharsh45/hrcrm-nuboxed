@@ -12,11 +12,8 @@ import {
   handleAddOutputReasonModal,
 } from "../../../InventoryAction";
 import ReceivedTable from "../Recieved/ReceivedTable";
+import ViewInArIcon from '@mui/icons-material/ViewInAr';
 
-// const InventoryOutputForm = lazy(() => import("../Output/InventoryOutputForm"));
-// const InventoryOutputTable = lazy(() =>
-//   import("../Output/InventoryOutputTable")
-// );
 const InventoryConsumptionForm = lazy(() =>
   import("../Consumption/InventoryConsumptionForm")
 );
@@ -24,15 +21,9 @@ const InventoryConsumptionTable = lazy(() =>
   import("../Consumption/InventoryConsumptionTable")
 );
 const DispatchTable = lazy(() => import("../Dispatch/DispatchTable"));
-// const AddDispatchModal = lazy(() =>
-//   import("../Dispatch/AddDispatch/AddDispatchModal")
-// );
-// const AddOutputReasonModal = lazy(() =>
-//   import("../Output/AddReason/AddReasonModal")
-// );
-// const InventoryOutputReportsTable = lazy(() =>
-//   import("../Output/InventoryOutputReportsTable")
-// );
+const CatalogueInventoryTable = lazy(() =>
+  import("../CatalogueInventory/CatalogueInventoryTable")
+);
 const TabPane = StyledTabs.TabPane;
 class InventoryDetailTab extends PureComponent {
   constructor(props) {
@@ -174,7 +165,34 @@ class InventoryDetailTab extends PureComponent {
                 <DispatchTable />
               </Suspense>
             </TabPane>
-
+            <TabPane
+              tab={
+                <>
+                  <span>
+                  <ViewInArIcon
+              // style={{ fontSize: "large" }}
+            />&nbsp;Catalogue
+             
+                  </span>
+                  {/* {activeKey === "2" && (
+                    <>
+                      <Tooltip title="Dispatch">
+                        <PlusOutlined
+                          onClick={() => this.props.handleAddDispatchModal(true)}
+                          size="14px"
+                          style={{ verticalAlign: "center", marginLeft: "5px" }}
+                        />
+                      </Tooltip>{" "}
+                    </>
+                  )} */}
+                </>
+              }
+              key="4"
+            >
+              <Suspense fallback={"Loading..."}>
+                <CatalogueInventoryTable />
+              </Suspense>
+            </TabPane>
           </StyledTabs>
         </TabsWrapper>
         <Suspense fallback={"Loading..."}>
