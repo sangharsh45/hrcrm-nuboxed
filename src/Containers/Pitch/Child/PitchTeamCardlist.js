@@ -1,5 +1,5 @@
 
-import React, { useEffect, useState} from "react";
+import React, { useEffect, useState ,lazy} from "react";
 import { StyledPopconfirm} from "../../../Components/UI/Antd";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
@@ -29,10 +29,9 @@ import AddchartIcon from '@mui/icons-material/Addchart';
 import { Button, Tooltip } from "antd";
 import { FormattedMessage } from "react-intl";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
-import OpenASSimodal from "./OpenASSimodal";
 import InfiniteScroll from "react-infinite-scroll-component";
-import AddPitchNotesDrawerModal from "./AddPitchNotesDrawerModal";
-import { BundleLoader } from "../../../Components/Placeholder";
+const OpenASSimodal =lazy(()=>import("./OpenASSimodal"));
+const AddPitchNotesDrawerModal =lazy(()=>import("./AddPitchNotesDrawerModal"));
 
 const ButtonGroup = Button.Group;
 
@@ -71,15 +70,35 @@ const PitchTeamCardList = (props) => {
   return (
     <>
    <OnlyWrapCard style={{backgroundColor:"#E3E8EE"}}><div className=" flex justify-between w-[98%] p-2 bg-transparent font-bold sticky top-0 z-10">
-        <div className=" md:w-[12rem]">Name</div>
+        <div className=" md:w-[12rem]"><FormattedMessage
+                  id="app.name"
+                  defaultMessage="name"
+                /></div>
         <div className=" md:w-[5.5rem]"></div>
-        <div className=" md:w-32 ">Phone #</div>
-        <div className="md:w-32">Country</div>
-        <div className="md:w-52">Company</div>
-        {/* <div className="md:w-20">Sector</div>  */}
-        <div className="md:w-24">Assigned to</div>
-        <div className="md:w-20">Owner</div>
-        <div className="md:w-20">Qualify</div>
+        <div className=" md:w-32 "><FormattedMessage
+                  id="app.phoneno#"
+                  defaultMessage="phoneno#"
+                /></div>
+        <div className="md:w-32"><FormattedMessage
+                  id="app.country"
+                  defaultMessage="country"
+                /></div>
+        <div className="md:w-52"><FormattedMessage
+                  id="app.company"
+                  defaultMessage="company"
+                /></div>
+        <div className="md:w-24"><FormattedMessage
+                  id="app.assignedto"
+                  defaultMessage="assignedto"
+                /></div>
+        <div className="md:w-20"><FormattedMessage
+                  id="app.owner"
+                  defaultMessage="owner"
+                /></div>
+        <div className="md:w-20"><FormattedMessage
+                  id="app.qualify"
+                  defaultMessage="qualify"
+                /></div>
         {/* <div className="w-12">Action</div> */}
 
       </div>

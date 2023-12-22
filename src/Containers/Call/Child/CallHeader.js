@@ -1,7 +1,8 @@
-import React, { Component } from 'react'
+import React, { Component, Suspense, lazy } from "react";
 import { ActionHeader } from '../../../Components/Utils';
-import CallActionLeft from "./CallActionLeft";
-import CallActionRight from './CallActionRight';
+const CallActionLeft = lazy(() => import("./CallActionLeft"));
+const CallActionRight = lazy(() => import("./CallActionRight"));
+
 class CallHeader extends Component {
     render() {
         const { viewType, setCallViewType } = this.props;

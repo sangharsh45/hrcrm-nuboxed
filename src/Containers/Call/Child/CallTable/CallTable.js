@@ -497,7 +497,7 @@
 
 
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState,lazy } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import moment from "moment";
@@ -516,11 +516,10 @@ import {
   getNotesListByCallId,
   emptyCall
 } from "../../CallAction";
-import APIFailed from "../../../../Helpers/ErrorBoundary/APIFailed";
 import { MultiAvatar2, } from "../../../../Components/UI/Elements";
-import AddCallNotesDrawerModal from "../AddCallNotesDrawerModal";
 import { BundleLoader } from "../../../../Components/Placeholder";
 import { FormattedMessage } from "react-intl";
+const AddCallNotesDrawerModal = lazy(() => import("../AddCallNotesDrawerModal"));
 
 function CallTable(props) {
   const [page, setPage] = useState(0);

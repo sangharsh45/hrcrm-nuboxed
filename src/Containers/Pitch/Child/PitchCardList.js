@@ -1,11 +1,10 @@
 
-import React, { useEffect, useState} from "react";
+import React, { useEffect, useState,lazy} from "react";
 import { StyledPopconfirm} from "../../../Components/UI/Antd";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import moment from "moment";
 import ConnectWithoutContactIcon from '@mui/icons-material/ConnectWithoutContact';
-import UpdateLPitchModal from "../Child/UpdateLPitchModal"
 import ExploreIcon from "@mui/icons-material/Explore";
 import { DeleteOutlined } from "@ant-design/icons";
 import { MultiAvatar, SubTitle } from "../../../Components/UI/Elements";
@@ -13,8 +12,6 @@ import "jspdf-autotable";
 import { OnlyWrapCard } from '../../../Components/UI/Layout'
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
-import DeleteIcon from "@mui/icons-material/Delete";
-import StatusPitchToggle from "../Child/StatusPitchToggle"
 import NoteAltIcon from "@mui/icons-material/NoteAlt";
 import {
   getPitch,
@@ -31,11 +28,12 @@ import AddchartIcon from '@mui/icons-material/Addchart';
 import { Button, Tooltip } from "antd";
 import { FormattedMessage } from "react-intl";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
-import OpenASSimodal from "./OpenASSimodal";
 import InfiniteScroll from "react-infinite-scroll-component";
-import AddPitchNotesDrawerModal from "./AddPitchNotesDrawerModal";
-import { BundleLoader } from "../../../Components/Placeholder";
-import AddConvertPitchStatusModal from "./PitchDetails/AddConvertPitchStatusModal";
+const UpdateLPitchModal =lazy(()=>import("../Child/UpdateLPitchModal"));
+const OpenASSimodal =lazy(()=>import("./OpenASSimodal"));
+const AddPitchNotesDrawerModal =lazy(()=>import("./AddPitchNotesDrawerModal"));
+const AddConvertPitchStatusModal =lazy(()=>import("./PitchDetails/AddConvertPitchStatusModal"));
+
 
 const ButtonGroup = Button.Group;
 
@@ -74,16 +72,36 @@ const PitchCardList = (props) => {
   return (
     <>
    <OnlyWrapCard style={{backgroundColor:"#E3E8EE"}}><div className=" flex justify-between w-[98%] p-2 bg-transparent font-bold sticky top-0 z-10">
-        <div className=" md:w-[12.1rem]">Name</div>
+        <div className=" md:w-[12.1rem]"><FormattedMessage
+                  id="app.name"
+                  defaultMessage="name"
+                /></div>
         <div className=" md:w-[6.5rem]"></div>
-        <div className=" md:w-[8.1rem] ">Phone #</div>
-        <div className="md:w-[8.2rem]">Country</div>
-        <div className="md:w-[13.1rem]">Company</div>
-        {/* <div className="md:w-20">Sector</div>  */}
-        <div className="md:w-[7.1rem]">Assigned to</div>
-        <div className="md:w-[6.2rem]">Owner</div>
-        <div className="md:w-[4.3rem]">Qualify</div>
-        {/* <div className="w-12">Action</div> */}
+        <div className=" md:w-[5.1rem] "><FormattedMessage
+                  id="app.phoneno#"
+                  defaultMessage="phoneno#"
+                /></div>
+        <div className="md:w-[8.2rem]"><FormattedMessage
+                  id="app.country"
+                  defaultMessage="country"
+                /></div>
+        <div className="md:w-[13.1rem]"><FormattedMessage
+                  id="app.company"
+                  defaultMessage="company"
+                /></div>
+        <div className="md:w-[7.1rem]"><FormattedMessage
+                  id="app.assignedto"
+                  defaultMessage="assignedto"
+                /></div>
+        <div className="md:w-[6.2rem]"><FormattedMessage
+                  id="app.owner"
+                  defaultMessage="owner"
+                /></div>
+        <div className="md:w-[4.3rem]"><FormattedMessage
+                  id="app.qualify"
+                  defaultMessage="qualify"
+                /></div>
+
 
       </div>
       <InfiniteScroll

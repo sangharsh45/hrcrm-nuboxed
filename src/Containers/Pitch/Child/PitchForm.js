@@ -151,7 +151,7 @@ props.getAllEmployeelist();
                             label={
                               <FormattedMessage
                                 id="app.salutation"
-                                defaultMessage="Salutation"
+                                defaultMessage="salutation"
                               />
                             }
                             options={["Mr.", "Ms.", "None"]}
@@ -167,8 +167,8 @@ props.getAllEmployeelist();
                             // label="First Name"
                             label={
                               <FormattedMessage
-                                id="app.firstName"
-                                defaultMessage="First Name"
+                                id="app.firstname"
+                                defaultMessage="firstname"
                               />
                             }
                             type="text"
@@ -186,8 +186,8 @@ props.getAllEmployeelist();
                             //label="Middle Name"
                             label={
                               <FormattedMessage
-                                id="app.middleName"
-                                defaultMessage="Middle"
+                                id="app.middle"
+                                defaultMessage="middle"
                               />
                             }
                             type="text"
@@ -203,8 +203,8 @@ props.getAllEmployeelist();
                             //label="Last Name"
                             label={
                               <FormattedMessage
-                                id="app.lastName"
-                                defaultMessage="Last Name"
+                                id="app.lastname"
+                                defaultMessage="lastname"
                               />
                             }
                             type="text"
@@ -239,8 +239,8 @@ props.getAllEmployeelist();
                         isColumnWithoutNoCreate
                         label={
                           <FormattedMessage
-                            id="app.phone"
-                            defaultMessage="Dial Code"
+                            id="app.dialCode"
+                            defaultMessage="dialCode"
                           />
                         }
                         isColumn
@@ -255,7 +255,13 @@ props.getAllEmployeelist();
                       <FastField
                         type="text"
                         name="phoneNumber"
-                        label="Phone No"
+                        label={
+                          <FormattedMessage
+                            id="app.phoneno#"
+                            defaultMessage="phoneno#"
+                          />
+                        }
+                        
                         isColumn
                         component={InputComponent}
                         inlineLabel
@@ -271,7 +277,7 @@ props.getAllEmployeelist();
                     name="companyName"
                     type="text"
                     label={
-                      <FormattedMessage id="app.company" defaultMessage="Company" />
+                      <FormattedMessage id="app.company" defaultMessage="company" />
                     }
                     isColumn
                     width={"100%"}
@@ -285,7 +291,7 @@ props.getAllEmployeelist();
                   <Field
                     name="url"
                     type="text"
-                    label={<FormattedMessage id="app." defaultMessage="URL" />}
+                    label={<FormattedMessage id="app.url" defaultMessage="url" />}
                     isColumn
                     width={"100%"}
                     component={InputComponent}
@@ -301,7 +307,7 @@ props.getAllEmployeelist();
                         label={
                           <FormattedMessage
                             id="app.vatNumber"
-                            defaultMessage="VAT Number"
+                            defaultMessage="vatNumber"
                           />
                         }
                         isColumn
@@ -320,7 +326,7 @@ props.getAllEmployeelist();
                         label={
                           <FormattedMessage
                             id="app.businessregistration"
-                            defaultMessage=" Business Registration#"
+                            defaultMessage=" businessregistration"
                           />
                         }
                         isColumn
@@ -356,7 +362,7 @@ props.getAllEmployeelist();
                              label={
                               <FormattedMessage
                                 id="app.source"
-                                defaultMessage="Source"
+                                defaultMessage="source"
                               />
                             }
                             isColumnWithoutNoCreate
@@ -411,7 +417,11 @@ props.getAllEmployeelist();
                    <Listbox value={selected} onChange={setSelected}>
       {({ open }) => (
         <>
-          <Listbox.Label className="block font-semibold text-[0.75rem]">Assigned to</Listbox.Label>
+          <Listbox.Label className="block font-semibold text-[0.75rem]"><FormattedMessage
+                                id="app.assignedto"
+                                defaultMessage="assignedto"
+                              />
+           </Listbox.Label>
           <div className="relative mt-1">
               <Listbox.Button className="relative w-full leading-4 cursor-default border border-gray-300 bg-white py-0.5 pl-3 pr-10 text-left shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm">
                 {selected}
@@ -493,7 +503,7 @@ props.getAllEmployeelist();
                   <Field
                     name="notes"
                     label={
-                      <FormattedMessage id="app.notes" defaultMessage="Notes" />
+                      <FormattedMessage id="app.notes" defaultMessage="notes" />
                     }
                     width={"100%"}
                     isColumn
@@ -508,7 +518,7 @@ props.getAllEmployeelist();
                   htmlType="submit"
                   loading={props.addingPitch}
                 >
-                  <FormattedMessage id="app.create" defaultMessage="Create" />
+                  <FormattedMessage id="app.create" defaultMessage="create" />
                   {/*                     
                     Create */}
                 </Button>

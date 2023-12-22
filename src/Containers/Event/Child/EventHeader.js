@@ -1,6 +1,5 @@
 import React, { Component,lazy } from 'react'
 import { ActionHeader } from '../../../Components/Utils';
-// import EventActionLeft from "./EventActionLeft";
 const EventActionRight =lazy(()=>import("./EventActionRight"));
 
 class EventHeader extends Component {

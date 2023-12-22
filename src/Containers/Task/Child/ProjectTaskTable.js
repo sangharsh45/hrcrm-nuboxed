@@ -1,16 +1,15 @@
 import React, { useEffect, useState, useMemo, lazy } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import UpdateProjectTaskModal from "./UpdateProjectTaskModal";
 import {
   getProjectTaskTable,
   handleUpdateProjectTaskModal,
   addProjectTask,
 } from "../TaskAction";
 import moment from "moment";
-
 import { StyledTable } from "../../../Components/UI/Antd";
 import { Tooltip, Button, Input, Select } from "antd";
+const UpdateProjectTaskModal = lazy(() => import("./UpdateProjectTaskModal"));
 
 function ProjectTaskTable(props) {
   useEffect(() => {
