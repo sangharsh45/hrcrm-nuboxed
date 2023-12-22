@@ -315,12 +315,12 @@ const [priority,setpriority]=useState(props.selectedTask
       };
     });
 
-    const unitData = props.units.map((item) => {
-      return {
-        label: `${item.unitName}`,
-        value: item.unitId,
-      };
-    });
+    // const unitData = props.units.map((item) => {
+    //   return {
+    //     label: `${item.unitName}`,
+    //     value: item.unitId,
+    //   };
+    // });
 
     // const TaskOptions = this.props.recruitWorkflowTask.map((item) => {
     //   return {
@@ -1037,7 +1037,7 @@ const [priority,setpriority]=useState(props.selectedTask
                           isColumn
                           value={values.unitId}
                           component={SelectComponent}
-                          options={Array.isArray(unitData) ? unitData : []}
+                          // options={Array.isArray(unitData) ? unitData : []}
                           // use12Hours
 
                           inlineLabel

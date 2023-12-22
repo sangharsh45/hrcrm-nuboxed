@@ -19,7 +19,7 @@ const AddCandidateResumeModal = (props) => {
         visible={addCandidateResumeModal}
         maskClosable={false}
         destroyOnClose
-        style={{ marginTop: "5rem" }}
+        style={{ marginTop: "3rem" }}
         maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}
         onClose={() => handleCandidateResumeModal(false)}
         footer={null}

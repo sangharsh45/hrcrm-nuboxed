@@ -1,4 +1,4 @@
-import React, { Component, PureComponent, useMemo } from "react";
+import React, {  PureComponent,  } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import axios from "axios";
@@ -10,7 +10,7 @@ import { getLibrarys } from "../../../Containers/Settings/Library/LibraryAction"
 import { Button } from "antd";
 import { Spacer } from "../../../Components/UI/Elements";
 import { addResumeForm,addParsingForm } from "../CandidateAction";
-import { FlexContainer } from "../../../Components/UI/Layout";
+
 class ResumeForm extends PureComponent {
   state = {
     fileData: null,
@@ -104,7 +104,7 @@ class ResumeForm extends PureComponent {
             </button>
           </div>
 
-          <div style={{ marginLeft: "5px" }}>
+          <div class=" ml-[5px]" >
             <Button
               type="danger"
               ghost

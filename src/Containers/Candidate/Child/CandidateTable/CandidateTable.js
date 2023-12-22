@@ -1,4 +1,4 @@
-import React, { Component, useEffect, useState, useMemo, lazy } from "react";
+import React, {  useEffect, useState, useMemo, lazy } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import moment from "moment";
@@ -6,7 +6,7 @@ import {
   SearchOutlined,
   UpCircleOutlined,
 } from "@ant-design/icons";
-import { translateText, getSupportedLanguages } from '../../../Translate/TranslateService';
+import { translateText, } from '../../../Translate/TranslateService';
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import PhoneInTalkIcon from "@mui/icons-material/PhoneInTalk";
@@ -18,7 +18,6 @@ import PlayCircleIcon from "@mui/icons-material/PlayCircle";
 import CandidateRowEmailModal from "../CandidateRowEmailModal";
 import SkillsLoadMore from "./SkillsLoadMore";
 import AddChoiceCandidateModal from "../CandidateTable/AddChoiceCandidateModal";
-import { FormattedMessage } from "react-intl";
 import WalletIcon from "@mui/icons-material/Wallet";
 import { StyledTable, StyledPopconfirm } from "../../../../Components/UI/Antd";
 import { Button, Select, Tooltip, Input } from "antd";

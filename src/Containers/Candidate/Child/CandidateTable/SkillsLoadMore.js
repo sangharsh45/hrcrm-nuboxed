@@ -22,12 +22,7 @@ function SkillsLoadMore(props) {
   console.log("skill", newSkill);
   return (
     <>
-      <div
-        style={{
-          display: "flex",
-          flexWrap: "wrap",
-          width: "100%",
-        }}
+      <div class=" flex flex-wrap w-full"
       >
         {!isViewAll ? (
           <>

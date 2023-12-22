@@ -1,9 +1,9 @@
-import React, { Component,useState, useMemo ,useEffect} from "react";
+import React, { useState, useEffect} from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { getAllSalesList } from "../../../Opportunity/OpportunityAction"
 import { FormattedMessage } from "react-intl";
-import { Button, Icon, Switch, Tooltip } from "antd";
+import { Button,  Switch, Tooltip } from "antd";
 import { Formik, Form, Field, FastField } from "formik";
 import * as Yup from "yup";
 import{getAllOpportunityData} from "../../../Opportunity/OpportunityAction"
@@ -321,16 +321,31 @@ function LeadsCallForm(props) {
                   callCategory: category,
                   callType: Type,
 
-                  startDate: `${newStartDate}T${newStartTime}`,
-                  endDate: `${newEndDate}T${newEndTime}`,
+                  startDate: `${newStartDate}T20:00:00Z`,
+                  endDate: `${newEndDate}T20:00:00Z`,
                   startTime: 0,
                   endTime: 0,
                   assignedTo: selectedOption ? selectedOption.employeeId:userId,
                 },
-                () => handleCallback(resetForm)
+                 handleCallback
               )
-              : addLeadsActivityCall(testVal,
-                () => handleCallback(resetForm));
+              : addLeadsActivityCall(
+                {
+                  ...values,
+                  ...values,
+                  callCategory: category,
+                  callType: Type,
+                  leadsId:props.rowdata.leadsId,
+                  startDate: `${newStartDate}T20:00:00Z`,
+                  endDate: `${newEndDate}T20:00:00Z`,
+    
+                  startTime: 0,
+                  endTime: 0,
+                  assignedTo: selectedOption ? selectedOption.employeeId:userId,
+                },
+                handleCallback
+              );
+          !isEditing && resetForm();
           }}
         >
           {({

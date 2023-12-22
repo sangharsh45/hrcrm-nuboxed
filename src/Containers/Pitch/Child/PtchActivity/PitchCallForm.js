@@ -307,8 +307,8 @@ function PitchCallForm(props) {
               callCategory: category,
               callType: Type,
               investorLeadsId:props.rowdata.investorLeadsId,
-              startDate: `${newStartDate}T${newStartTime}`,
-              endDate: `${newEndDate}T${newEndTime}`,
+              startDate: `${newStartDate}T20:00:00Z`,
+              endDate: `${newEndDate}T20:00:00Z`,
 
               startTime: 0,
               endTime: 0,
