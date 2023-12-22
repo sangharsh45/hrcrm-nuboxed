@@ -1,4 +1,4 @@
-import React, { useEffect, useState} from "react";
+import React, { useEffect, useState,lazy} from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import InfiniteScroll from "react-infinite-scroll-component";
@@ -37,7 +37,7 @@ import {
          deleteLostOpportunity,
 } from "../../../Opportunity/OpportunityAction";
 import {getWonDeals,handleUpdateDealModal,handleDealsNotesDrawerModal} from "../../DealAction";
-import AddDealsNotesDrawerModal from "../AddDealsNotesDrawerModal";
+const AddDealsNotesDrawerModal =lazy(()=>import("../AddDealsNotesDrawerModal"));
 
 
 function DealWonCard(props) {
@@ -79,16 +79,43 @@ function DealWonCard(props) {
      
         <OnlyWrapCard style={{backgroundColor:"#E3E8EE"}}>
       <div className=" flex justify-between w-[99%] p-2 bg-transparent font-bold sticky top-0 z-10">
-        <div className=" md:w-[14rem]">Name</div>
-        <div className=" md:w-20">Investor</div>
-        <div className=" md:w-32 ">Sponsor</div>
-        <div className="md:w-32">Start Date</div>
-        <div className="md:w-56">Proposal Amount</div>
-        <div className="md:w-20">Stages</div> 
-        <div className="md:w-24">Sales Rep</div>
-        <div className="md:w-20">Owner</div>
-        <div className="md:w-20"></div>
-        <div className="w-12">Action</div>
+        <div className=" md:w-[12.12rem]"><FormattedMessage
+                  id="app.name"
+                  defaultMessage="name"
+                /></div>
+        <div className=" md:w-[6.21rem]"><FormattedMessage
+                  id="app.investor"
+                  defaultMessage="investor"
+                /></div>
+        <div className=" md:w-[9.21rem] "><FormattedMessage
+                  id="app.sponsor"
+                  defaultMessage="sponsor"
+                /></div>
+        <div className="md:w-[7.11rem]"><FormattedMessage
+                  id="app.startdate"
+                  defaultMessage="startdate"
+                /></div>
+        <div className="md:w-[11.16rem]"><FormattedMessage
+                  id="app.proposalamt"
+                  defaultMessage="proposalamt"
+                /></div>
+        <div className="md:w-[5.14rem]"><FormattedMessage
+                  id="app.stages"
+                  defaultMessage="stages"
+                /></div> 
+        <div className="md:w-[7.1rem]"><FormattedMessage
+                  id="app.salesRep"
+                  defaultMessage="salesRep"
+                /></div>
+        <div className="md:w-[3.22rem]"><FormattedMessage
+                  id="app.owner"
+                  defaultMessage="owner"
+                /></div>
+        <div className="md:w-[5.71rem]"></div>
+        <div className="w-12"><FormattedMessage
+                  id="app.action"
+                  defaultMessage="action"
+                /></div>
       </div>
       <InfiniteScroll
          dataLength={wonDeals.length}
@@ -114,7 +141,7 @@ function DealWonCard(props) {
                       // }}
                     >
                       <div class="flex ">
-                      <div className=" flex font-medium  md:w-[13rem] max-sm:flex-row w-full ">
+                      <div className=" flex font-medium  md:w-[13.1rem] max-sm:flex-row w-full ">
                                 <div>
 <SubTitle>
             <MultiAvatar
@@ -160,7 +187,7 @@ function DealWonCard(props) {
                               
                                 </div>
 
-                                <div className=" flex font-medium flex-col  md:w-44 max-sm:flex-row w-full max-sm:justify-between ">
+                                <div className=" flex font-medium flex-col  md:w-[8.1rem] max-sm:flex-row w-full max-sm:justify-between ">
                            
                                     {/* <h4 class=" text-xs text-cardBody font-poppins max-sm:hidden"> Sector </h4> */}
                                     <h4 class=" text-sm text-cardBody font-poppins">   
@@ -170,7 +197,7 @@ function DealWonCard(props) {
                                     </h4>
                                 </div>
                                
-                                <div className=" flex font-medium flex-col md:w-44 max-sm:flex-row w-full max-sm:justify-between ">
+                                <div className=" flex font-medium flex-col md:w-[6.4rem] max-sm:flex-row w-full max-sm:justify-between ">
                                   
 
                                     {/* <h4 class=" text-xs text-cardBody font-poppins max-sm:hidden">Country</h4> */}
@@ -190,7 +217,7 @@ function DealWonCard(props) {
                                 </div>
                                 </div>
                                 <div class="flex">
-                                <div className=" flex font-medium flex-col md:w-36 max-sm:flex-row w-full max-sm:justify-between ">
+                                <div className=" flex font-medium flex-col md:w-[8.2rem] max-sm:flex-row w-full max-sm:justify-between ">
                                     {/* <h4 class=" text-xs text-cardBody font-poppins max-sm:hidden"># Deals</h4> */}
 
                                     <div class=" text-sm justify-center text-cardBody font-poppins">
@@ -198,7 +225,7 @@ function DealWonCard(props) {
                                     </div>
                                 </div>
                              
-                                <div className=" flex font-medium flex-col md:w-36 max-sm:flex-row w-full max-sm:justify-between ">
+                                <div className=" flex font-medium flex-col md:w-[9.2rem] max-sm:flex-row w-full max-sm:justify-between ">
                                     {/* <h4 class=" text-xs text-cardBody font-poppins max-sm:hidden">Pipeline Value</h4> */}
 
                                     <div class=" text-sm text-cardBody font-poppins text-center">
@@ -208,7 +235,7 @@ function DealWonCard(props) {
 
                                     </div>
                                 </div>
-                                <div className=" flex font-medium flex-col md:w-36 max-sm:flex-row w-full max-sm:justify-between ">
+                                <div className=" flex font-medium flex-col md:w-[10.1rem] max-sm:flex-row w-full max-sm:justify-between ">
                                     {/* <h4 class=" text-xs text-cardBody font-poppins max-sm:hidden">Pipeline Value</h4> */}
 
                                     <div class=" text-sm text-cardBody font-poppins text-center">
@@ -244,7 +271,7 @@ function DealWonCard(props) {
 
                                     </div>
                                 </div>
-                                <div className=" flex font-medium flex-col md:w-32 max-sm:flex-row w-full max-sm:justify-between ">
+                                <div className=" flex font-medium flex-col md:w-[8.1rem] max-sm:flex-row w-full max-sm:justify-between ">
                                     {/* <h4 class=" text-xs text-cardBody font-poppins max-sm:hidden">Assigned to</h4> */}
 
                                     <div class=" text-sm text-cardBody font-poppins">
@@ -259,7 +286,7 @@ function DealWonCard(props) {
              
                                     </div>
                                 </div>
-                                <div className=" flex font-medium flex-col md:w-20 max-sm:flex-row w-full mb-1 max-sm:justify-between ">
+                                <div className=" flex font-medium flex-col md:w-[5.1rem] max-sm:flex-row w-full mb-1 max-sm:justify-between ">
                        
                        {/* <h4 class=" text-xs text-cardBody font-poppins max-sm:hidden">Owner</h4> */}
 
@@ -277,7 +304,7 @@ function DealWonCard(props) {
                    </div>
                    </div>
                   
-                   <div class="flex flex-col w-[6%] max-sm:flex-row max-sm:w-[10%]">
+                   <div class="flex flex-col w-[0%] max-sm:flex-row max-sm:w-[10%]">
                     <div>
                     <Tooltip title='Click to Open'><span
           onClick={() => {
@@ -327,7 +354,7 @@ function DealWonCard(props) {
                       </Tooltip>
                     </div>
                   </div>
-                  <div class="flex flex-col w-[6%] max-sm:flex-row max-sm:w-[10%]">
+                  <div class="flex flex-col w-[0%] max-sm:flex-row max-sm:w-[10%]">
                    
                       <div>
                          <Tooltip
@@ -379,7 +406,7 @@ function DealWonCard(props) {
              
                     <div></div>
                   </div>   
-                                <div class="flex flex-col w-[6%] max-sm:flex-row max-sm:w-[10%]">
+                                <div class="flex flex-col w-[0%] max-sm:flex-row max-sm:w-[10%]">
                    <div>
                    <span
          

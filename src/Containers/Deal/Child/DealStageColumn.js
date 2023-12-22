@@ -1,8 +1,10 @@
-import React, { Component } from "react";
+import React, { Component,lazy } from "react";
 import styled from "styled-components";
 import { Draggable } from "react-beautiful-dnd";
 import { MainWrapper, FlexContainer } from "../../../Components/UI/Layout";
-import DealGroupCard from "./DealGroupCard";
+const DealGroupCard =lazy(()=>import("./DealGroupCard"));
+
+
 const StageContainer = styled.div`
   padding: 0.8rem 1.5rem;
   margin: 0.2rem;

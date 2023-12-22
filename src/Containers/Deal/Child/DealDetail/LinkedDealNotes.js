@@ -1,12 +1,12 @@
-import React, { Component } from "react";
+import React, { Component ,lazy } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Timeline } from "antd";
 import { BorderBox } from "../../../../Components/UI/Layout";
 import { BundleLoader } from "../../../../Components/Placeholder";
 import { getNotesListByDealId } from "../../DealAction";
-import NoteDealForm from "./NoteDealForm";
-import SingleNote from "./SingleNote";
+const NoteDealForm =lazy(()=>import("./NoteDealForm"));
+const SingleNote =lazy(()=>import("./SingleNote"));
 
 class LinkedDealNotes extends Component {
   componentDidMount() {

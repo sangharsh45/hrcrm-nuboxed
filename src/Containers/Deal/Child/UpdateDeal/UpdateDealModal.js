@@ -5,13 +5,13 @@ const UpdateDealForm = lazy(() => import("./UpdateDealForm"));
 
 const UpdateDealModal = (props) => {
   const isSmallScreen = window.innerWidth <= 600;
-    const drawerWidth = isSmallScreen ? "90%" : "55%";
+    const drawerWidth = isSmallScreen ? "90%" : "60%";
   return (
     <>
       <StyledDrawer
         title={props.currentItem.opportunityName}
         width={drawerWidth}
-        style={{marginTop:"5rem"}}
+        style={{marginTop:"3rem"}}
         visible={props.openupdateDealModal}
         maskClosable={false}
         destroyOnClose

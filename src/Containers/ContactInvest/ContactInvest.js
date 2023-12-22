@@ -7,7 +7,7 @@ import {handleContactInvestModal,setContactInvetViewType,
   getContactInvestByUserId,
   getContactInvestFilterData} from "./ContactInvestAction";
 
-const ContactInvestHeader = lazy(() => import("./Child/ContactInvestHeader"));
+const ContactInvestHeader = lazy(() => import("./Child/ContactInvestHeader")); 
 const AddContactInvestModal = lazy(() => import("./Child/AddContactInvestModal"));
 const ContactInvestCardList = lazy(() => import("./Child/ContactInvestTable/ContactInvestCardList"));
 

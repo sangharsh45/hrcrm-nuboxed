@@ -193,7 +193,7 @@ class UpdateContactInvestForm extends Component {
                             label={
                               <FormattedMessage
                                 id="app.salutation"
-                                defaultMessage="Salutation"
+                                defaultMessage="salutation"
                               />
                             }
                             options={["Mr.", "Ms.", "None"]}
@@ -210,9 +210,9 @@ class UpdateContactInvestForm extends Component {
                             // label="First Name"
                             label={
                               <FormattedMessage
-                                id="app.firstName"
-                                defaultMessage="First Name"
-                              />
+                              id="app.firstname"
+                              defaultMessage="firstname"
+                            />
                             }
                             type="text"
                             width={"100%"}
@@ -230,7 +230,7 @@ class UpdateContactInvestForm extends Component {
                             label={
                               <FormattedMessage
                                 id="app.middle"
-                                defaultMessage="Middle"
+                                defaultMessage="middle"
                               />
                             }
                             type="text"
@@ -246,8 +246,8 @@ class UpdateContactInvestForm extends Component {
                             //label="Last Name"
                             label={
                               <FormattedMessage
-                                id="app.lastName"
-                                defaultMessage="Last Name"
+                                id="app.lastname"
+                                defaultMessage="lastname"
                               />
                             }
                             type="text"
@@ -268,7 +268,7 @@ class UpdateContactInvestForm extends Component {
                         //label="Email"
                         label={
                           <FormattedMessage
-                            id="app.emailId"
+                            id="app.email"
                             defaultMessage="Email"
                           />
                         }
@@ -289,7 +289,7 @@ class UpdateContactInvestForm extends Component {
                         //label="Mobile #"
                         label={
                           <FormattedMessage
-                            id="app.countryDialCode"
+                            id="app.dialCode"
                             defaultMessage="Dial Code"
                           />
                         }
@@ -309,8 +309,8 @@ class UpdateContactInvestForm extends Component {
                         name="mobileNumber"
                         label={
                           <FormattedMessage
-                            id="app.mobileNumber"
-                            defaultMessage="Mobile #"
+                            id="app.mobile"
+                            defaultMessage="mobile #"
                           />
                         }
                         //placeholder="Mobile #"
@@ -372,9 +372,9 @@ class UpdateContactInvestForm extends Component {
                         //label="Linkedin "
                         label={
                           <FormattedMessage
-                            id="app.linkedinPublicUrl"
-                            defaultMessage="Linkedin"
-                          />
+                          id="app.linkedin"
+                          defaultMessage="linkedin"
+                        />
                         }
                         isColumn
                         width={"100%"}
@@ -406,8 +406,8 @@ class UpdateContactInvestForm extends Component {
                         isColumnWithoutNoCreate
                         label={
                           <FormattedMessage
-                            id="app.tagCompany"
-                            defaultMessage="Tag Company"
+                            id="app.tagcompany"
+                            defaultMessage="tagcompany"
                           />
                         }
                         component={SelectComponent}
@@ -426,9 +426,9 @@ class UpdateContactInvestForm extends Component {
                     //label="Designation"
                     label={
                       <FormattedMessage
-                        id="app.designation"
-                        defaultMessage="Designation"
-                      />
+                      id="app.designation"
+                      defaultMessage="designation"
+                    />
                     }
                     selectType="designationType"
                     // options={[
@@ -457,7 +457,7 @@ class UpdateContactInvestForm extends Component {
                       label={
                         <FormattedMessage
                           id="app.department"
-                          defaultMessage="Department"
+                          defaultMessage="department"
                         />
                       }
                       isColumn
@@ -473,9 +473,9 @@ class UpdateContactInvestForm extends Component {
                             name="sourceId"
                              label={
                               <FormattedMessage
-                                id="app.source"
-                                defaultMessage="Source"
-                              />
+                              id="app.source"
+                              defaultMessage="source"
+                            />
                             }
                             isColumnWithoutNoCreate
                             selectType="sourceName"
@@ -568,7 +568,7 @@ class UpdateContactInvestForm extends Component {
                   htmlType="submit"
                   loading={updateContactInvestById}
                 >
-                  <FormattedMessage id="app.update" defaultMessage="Update" />
+                  <FormattedMessage id="app.update" defaultMessage="update" />
 
                   {/* Update */}
                 </Button>

@@ -1,12 +1,9 @@
-import React, { Component, Suspense } from "react";
+import React, { Component, Suspense,lazy } from "react";
 import { BundleLoader } from "../../../Components/Placeholder";
-
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-
 import { StyledDrawer } from "../../../Components/UI/Antd";
-import LinkedDealNotes from "./DealDetail/LinkedDealNotes";
-
+const LinkedDealNotes =lazy(()=>import("./DealDetail/LinkedDealNotes"));
 class AddDealsNotesDrawerModal extends Component {
   render() {
      
@@ -15,8 +12,8 @@ class AddDealsNotesDrawerModal extends Component {
       <div>
         <StyledDrawer
           title={this.props.currentItem.opportunityName}
-          width="64%"
-          style={{ marginTop: "5rem" }}
+          width="60%"
+          style={{ marginTop: "3rem" }}
           visible={this.props.addDrawerDealsNotesModal}
           closable
           placement="right"

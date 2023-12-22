@@ -254,5 +254,17 @@
   "app.url":"URL",
   "app.vatNumber":"VAT Number",
   "app.businessregistration":"Business Registration#",
-  "app.source":"Source"
+  "app.source":"Source",
+  "app.fundValue":"Fund Value",
+  "app.investor":"Investor",
+  "app.stages":"Stages",
+  "app.won":"Won",
+  "app.lost":"Lost",
+  "app.sponsor":"Sponsor",
+  "app.salesRep":"Sales Rep",
+  "app.contactinvest":"Contact Invest",
+  "app.whatsapp":"Whatsapp",
+  "app.linkedin":"Linkedin",
+  "app.deals":"Deals",
+  "app.dealValue":"Deal Value"
 }

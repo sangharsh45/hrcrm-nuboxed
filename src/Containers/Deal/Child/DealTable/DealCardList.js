@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState ,lazy } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import NoteAltIcon from "@mui/icons-material/NoteAlt";
@@ -36,7 +36,6 @@ import {
   LinkStageOpportunity,
   getOpportunityForecast,
 } from "../../../Opportunity/OpportunityAction";
-import UpdateDealModal from "../UpdateDeal/UpdateDealModal";
 import {
   getDealListbyUserId,
   handleUpdateDealModal,
@@ -45,8 +44,9 @@ import {
   LinkStageDeal,
   sendToWon,
 } from "../../DealAction";
-import AddDealsNotesDrawerModal from "../AddDealsNotesDrawerModal";
-import DealSelectStages from "./DealSelectStages";
+const UpdateDealModal =lazy(()=>import("../UpdateDeal/UpdateDealModal"));
+const AddDealsNotesDrawerModal =lazy(()=>import("../AddDealsNotesDrawerModal"));
+const DealSelectStages =lazy(()=>import("./DealSelectStages"));
 
 function DealCardList(props) {
   const [hasMore, setHasMore] = useState(true);
