@@ -18,21 +18,16 @@ import {
 } from "../../ProductAction";
 import DistributorOfferHistory from "./DistributorOfferHistory";
 import ProductPublishToggle from "./ProductPublishToggle";
-import { CurrencySymbol } from "../../../../Components/Common";
 import {
     EditOutlined,
-    HistoryOutlined,
     DeleteOutlined,
 } from "@ant-design/icons";
 import PriceDrawer from "./PriceDrawer";
 import { StyledTable } from "../../../../Components/UI/Antd";
 import { MultiAvatar, SubTitle } from "../../../../Components/UI/Elements";
 import { Tooltip, Button, Popconfirm } from "antd";
-import AddToSuppliesToggle from "./AddToSuppliesToggle";
 import WebhookIcon from '@mui/icons-material/Webhook';
 import NetworkCellIcon from '@mui/icons-material/NetworkCell';
-import ContactMailIcon from '@mui/icons-material/ContactMail';
-import ApartmentIcon from '@mui/icons-material/Apartment';
 import InfiniteScroll from "react-infinite-scroll-component";
 import ViewQuiltIcon from '@mui/icons-material/ViewQuilt';
 import EuroIcon from '@mui/icons-material/Euro';

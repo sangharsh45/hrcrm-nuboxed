@@ -1,25 +1,18 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { Button, Switch } from "antd";
+import { Button } from "antd";
 import { Formik, Form, Field } from "formik";
 import { base_url2 } from "../../../Config/Auth";
 import * as Yup from "yup";
-import { Spacer, StyledLabel } from "../../../Components/UI/Elements";
-import SearchSelect from "../../../Components/Forms/Formik/SearchSelect";
-import { DatePicker } from "../../../Components/Forms/Formik/DatePicker";
+import { Spacer} from "../../../Components/UI/Elements";
 import { InputComponent } from "../../../Components/Forms/Formik/InputComponent";
 import Upload from "../../../Components/Forms/Formik/Upload";
 import { updateProduct } from "../ProductAction";
 import LazySelect from "../../../Components/Forms/Formik/LazySelect";
 import { FlexContainer } from "../../../Components/UI/Layout";
-import DragableUpload from "../../../Components/Forms/Formik/DragableUpload";
 import { TextareaComponent } from "../../../Components/Forms/Formik/TextareaComponent";
-// import { getCurrency } from "../../Opportunity/OpportunityAction";
-import { SelectComponent } from "../../../Components/Forms/Formik/SelectComponent";
 import { CurrencySymbol } from "../../../Components/Common";
-import { SwitchComponent } from "../../../Components/Forms/Formik/SwitchComponent";
-
 
 const ProductSchema = Yup.object().shape({
   categoryName: Yup.string().required("Please provide First Name"),
@@ -456,7 +449,6 @@ const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
       updateProduct,
-      // getCurrency,
     },
     dispatch
   );

@@ -1,14 +1,15 @@
 import { Field, Form, Formik } from 'formik'
-import React, { useEffect } from 'react'
+import React, { useEffect,lazy,Suspense } from 'react'
 import { SelectComponent } from '../../../../Components/Forms/Formik/SelectComponent';
 import { InputComponent } from '../../../../Components/Forms/Formik/InputComponent';
 import { Button } from 'antd';
 import { getAllProductList } from "../../Account/AccountAction"
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import ProductionTable from './ProductionTable';
 import { addCatalogueByTechnician } from "../RefurbishAction"
 import { MainWrapper } from '../../../../Components/UI/Layout';
+import { BundleLoader } from '../../../../Components/Placeholder';
+const ProductionTable=lazy(()=>import('./ProductionTable'));
 
 const AddCatalogueInProduction = (props) => {
     useEffect(() => {
@@ -180,8 +181,10 @@ const AddCatalogueInProduction = (props) => {
                 )}
                 {/*  */}
             </Formik>
-            <ProductionTable
-            />
+            <Suspense fallback={<BundleLoader/>}>
+            <ProductionTable/>
+      </Suspense>
+    
 
         </>
     )

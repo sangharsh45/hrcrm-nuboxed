@@ -1,11 +1,10 @@
-import React, { Component,Suspense } from "react";
-import { Tabs, Icon, Button } from "antd";
+import React, { Component,Suspense,lazy } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import ProductForm from "../Child/ProductForm";
 import { StyledDrawer } from "../../../Components/UI/Antd";
 import { StyledTabs } from "../../../Components/UI/Antd";
 import { BundleLoader } from "../../../Components/Placeholder";
+const ProductForm=lazy(()=>import("../Child/ProductForm"));
 
 const TabPane = StyledTabs.TabPane;
 class ConfigureModal extends Component {
