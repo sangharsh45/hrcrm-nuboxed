@@ -404,10 +404,6 @@ class CandidateForm extends Component {
             <Form className="form-background">
               <div class=" flex justify-between h-[70vh] overflow-scroll"
                 style={{
-                  // display: "flex",
-                  // justifyContent: "space-between",
-                  // height: "70vh",
-                  // overflow: "scroll",
                   paddingRight: "0.6em",
                 }}
               >

@@ -1,13 +1,6 @@
-import React, { Suspense, Component } from 'react'
+import React, {  Component } from 'react'
 import { base_url } from "../../Config/Auth";
-import { Route, Switch } from 'react-router-dom'
-import { MultiAvatar } from '../../Components/UI/Elements'
-import { BundleLoader } from '../../Components/Placeholder'
-
-import Item from 'antd/lib/list/Item'
 import FileCopyIcon from '@mui/icons-material/FileCopy';
-import { FlexContainer } from '../../Components/UI/Layout'
-import { Button, Menu, Dropdown, Radio, Space, Tooltip } from 'antd'
 // import {
 //   getCustomerProductList,
 //   LinkProductInfo,

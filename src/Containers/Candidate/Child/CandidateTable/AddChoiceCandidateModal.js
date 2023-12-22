@@ -1,6 +1,5 @@
 
 import React, { lazy, Suspense } from "react";
-import { FormattedMessage } from "react-intl";
 import { BundleLoader } from "../../../../Components/Placeholder";
 import { StyledModal } from "../../../../Components/UI/Antd";
 const CandidateChooseForm = lazy(() => import("../CandidateTable/CandidateChooseForm"));
@@ -12,12 +11,12 @@ const AddChoiceCandidateModal = (props) => {
     <>
       <StyledModal
         title="Select talent data to share"
-        width="55%"
+        width="60%"
         visible={props.addCandidateChoiceModal}
         maskClosable={false}
         destroyOnClose
         maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}
-        style={{marginTop:"5rem"}}
+        style={{marginTop:"3rem"}}
         onCancel={() => props.handleChoiceCandidateModal(false)}
         footer={null}
       >

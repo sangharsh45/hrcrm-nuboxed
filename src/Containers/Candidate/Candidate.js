@@ -1,11 +1,7 @@
 import React, { Component, Suspense, lazy } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import CandidateBlackListTable from "../Candidate/CandidateBlackListTable";
 import { BundleLoader } from "../../Components/Placeholder";
-import AddCandidateResumeModal from "../Candidate/Child/AddCandidateResumeModal";
-import CandidateWhiteTable from "../Candidate/Child/CandidateWhiteTable";
-import CandidateBlueTable from "../Candidate/Child/CandidateBlueTable";
 import {
   handleCandidateModal,
   handleCandidateResumeModal,
@@ -17,14 +13,34 @@ import {
   getCandidateWhitePagination,
   getCandidateBluePagination,
 } from "./CandidateAction";
-import CandidateMap from "../Candidate/CandidateMap";
-import AddCandidateFilterModal from "../Candidate/Child/AddCandidateFilterModal";
-import CandidateDollarTable from "./Child/CandidateTable/CandidateDollarTable";
-import CandidateBillableStepper from "../Dashboard/Child/BillableCandidate/CandidateBillableStepper";
 const AddCandidateModal = lazy(() => import("./Child/AddCandidateModal"));
 const CandidateHeader = lazy(() => import("./Child/CandidateHeader"));
+const CandidateWhiteTable = lazy(() =>
+  import("../Candidate/Child/CandidateWhiteTable")
+);
+const CandidateBlackListTable = lazy(() =>
+  import("../Candidate/CandidateBlackListTable")
+);
+const AddCandidateResumeModal = lazy(() =>
+  import("../Candidate/Child/AddCandidateResumeModal")
+);
+const CandidateBlueTable = lazy(() =>
+  import("../Candidate/Child/CandidateBlueTable")
+);
 const CandidateTable = lazy(() =>
   import("./Child/CandidateTable/CandidateTable")
+);
+const CandidateMap = lazy(() =>
+  import("../Candidate/CandidateMap")
+);
+const AddCandidateFilterModal = lazy(() =>
+  import("../Candidate/Child/AddCandidateFilterModal")
+);
+const CandidateDollarTable = lazy(() =>
+  import("../Candidate/Child/CandidateTable/CandidateDollarTable")
+);
+const CandidateBillableStepper = lazy(() =>
+  import("../Dashboard/Child/BillableCandidate/CandidateBillableStepper")
 );
 const CandidateCardView = lazy(() => import("./CandidateCardView"));
 

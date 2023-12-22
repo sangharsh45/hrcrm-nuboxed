@@ -2,13 +2,10 @@ import React, { Component,Suspense } from "react";
 import { BundleLoader } from "../../Components/Placeholder";
 import { connect } from "react-redux";
 import CandidateTreeMap from "../Candidate/CandidateTreeMap"
-import { getCandidateDocument } from "../Candidate/CandidateAction";
 import { bindActionCreators } from "redux";
 import CandidateDocumentView from "../Candidate/CandidateDocumentView"
 import styled from 'styled-components'
 import { StyledDrawer } from "../../Components/UI/Antd";
-import { sortedLastIndex } from "lodash";
-import { MainWrapper } from "../../Components/UI/Elements";
 
 
 
