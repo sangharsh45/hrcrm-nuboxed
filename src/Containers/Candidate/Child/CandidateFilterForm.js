@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,lazy } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { FormattedMessage } from "react-intl";
@@ -6,13 +6,12 @@ import { Select } from "antd";
 import { StyledLabel } from "../../../Components/UI/Elements";
 import { Button, Switch } from "antd";
 import { Formik, Form, Field, FastField } from "formik";
-import { Spacer } from "../../../Components/UI/Elements";
 import SearchSelect from "../../../Components/Forms/Formik/SearchSelect";
 import { getCandidateFilter } from "../CandidateAction";
-import { FlexContainer } from "../../../Components/UI/Layout";
 import { InputComponent } from "../../../Components/Forms/Formik/InputComponent";
 import { SelectComponent } from "../../../Components/Forms/Formik/SelectComponent";
-import CandidateFilterTable from "./CandidateTable/CandidateFilterTable";
+const CandidateFilterTable = lazy(() => import("../Child/CandidateTable/CandidateFilterTable"));
+
 const { Option } = Select;
 
 function CandidateFilterForm(props) {
@@ -59,12 +58,9 @@ function CandidateFilterForm(props) {
           ...rest
         }) => (
           <Form className="form-background">
-            <div style={{ display: "flex", justifyContent: "space-between" }}>
-              <FlexContainer justifyContent="space-evenly">
-                <div
-                  style={{
-                    width: "36%",
-                  }}
+            <div class=" flex justify-between" >
+              <div class=" flex justify-evenly" >
+                <div class=" w-[36%]"
                 >
                   <StyledLabel>Parameter
                   <Select
@@ -76,8 +72,7 @@ function CandidateFilterForm(props) {
                     <Option value="Cost">Cost</Option>
                   </Select>
                   </StyledLabel>
-                  <Spacer/>
-                  <FlexContainer justifyContent="space-between">
+                  <div class=" flex justify-between mt-4" >
                     <div style={{ flexBasis: "100%" }}>
                       {selectType === "Role" ? (
                         <FastField
@@ -104,7 +99,7 @@ function CandidateFilterForm(props) {
                         />
                       ) : null}
                     </div>
-                    <div style={{ width: "53%" }}>
+                    <div class=" w-[53%]" >
                       {selectType === "Cost" && (
                         <Field
                           name="currency"
@@ -126,15 +121,10 @@ function CandidateFilterForm(props) {
                         />
                       )}
                     </div>
-                  </FlexContainer>
+                  </div>
                 </div>
 
-                <div
-                  style={{
-                    width: "22%",
-                    display: "flex",
-                    justifyContent:"center",
-                  }}
+                <div class=" flex justify-center w-[22%]"
                 >
                   <Switch
                    
@@ -144,10 +134,7 @@ function CandidateFilterForm(props) {
                     unCheckedChildren="Or"
                   />
                 </div>
-                <div
-                  style={{
-                    width: "36%",
-                  }}
+                <div class=" w-[36%]"
                 >
                   <StyledLabel>
                     Parameter
@@ -160,8 +147,8 @@ function CandidateFilterForm(props) {
                       <Option value="Location">Location</Option>
                     </Select>
                   </StyledLabel>
-<Spacer/>
-                  <FlexContainer justifyContent="space-between">
+
+                  <div class=" flex justify-between mt-4" >
                     <div style={{ flexBasis: "100%" }}>
                       {selectFilter === "Work Preference" && (
                         <FastField
@@ -193,14 +180,14 @@ function CandidateFilterForm(props) {
                         />
                       )}
                     </div>
-                  </FlexContainer>
+                  </div>
                 </div>
-              </FlexContainer>
+              </div>
             </div>
 
-            <Spacer />
 
-            <FlexContainer justifyContent="flex-end">
+
+            <div class=" flex justify-end mt-4" >
               <Button
                 type="primary"
                 htmlType="submit"
@@ -208,7 +195,7 @@ function CandidateFilterForm(props) {
                 <FormattedMessage id="app.create" defaultMessage="Create" />
                 {/* Create */}
               </Button>
-            </FlexContainer>
+            </div>
           </Form>
           
         )}

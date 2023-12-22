@@ -4,6 +4,7 @@ import { TabsWrapper } from "../../../../../Components/UI/Layout";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import WebsiteForm from "./WebsiteForm";
+import LeadsAgingForm from "../../../LeadsConfig/LeadsAgingForm";
 
 
 
@@ -16,11 +17,17 @@ function WebsiteTab(props) {
         <>
             <TabsWrapper>
                 <StyledTabs defaultActiveKey="1" type="card">
-                    <TabPane tab={`Website`} key="1">
+                    <TabPane tab={`Distribution`} key="1">
                         <div class=" mt-[10px]" >
                         <WebsiteForm/>
                         </div>
+                        
                     </TabPane>
+                    <TabPane tab={`Ageing`} key="2">
+            <div class=" mt-[10px]" >
+              <LeadsAgingForm />
+            </div>
+          </TabPane>
                  
                  
                 </StyledTabs>

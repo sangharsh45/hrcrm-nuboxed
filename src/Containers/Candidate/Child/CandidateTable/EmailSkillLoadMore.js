@@ -1,6 +1,5 @@
-import Item from "antd/lib/list/Item";
+
 import React, { useState } from "react";
-// import { StyledSelect } from "../../../../../../Components/UI/Antd";
 
 function EmailSkillLoadMore(props) {
   const [isViewAll, setIsViewAll] = useState(false);
@@ -56,12 +55,7 @@ function EmailSkillLoadMore(props) {
     //   <SkillsForm topics={item.skill} />
     // </>
     <>
-      <div
-        style={{
-          display: "flex",
-          flexWrap: "wrap",
-          width: "100%",
-        }}
+      <div class=" flex flex-wrap w-full" 
       >
         {/* {item.skillList && item.skillList.map((option, i) => {
                 return (

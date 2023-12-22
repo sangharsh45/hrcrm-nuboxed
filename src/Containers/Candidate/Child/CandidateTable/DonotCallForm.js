@@ -1,30 +1,17 @@
-import React, { Component, useMemo ,useState} from "react";
+import React, { useState} from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { FormattedMessage } from "react-intl";
 import { Button,Select } from "antd";
 import { TimePicker } from "../../../../Components/Forms/Formik/TimePicker";
-// import { StyledLabel } from "../../../Components/UI/Elements";
-import { Formik, Form, Field, FieldArray, FastField } from "formik";
-import * as Yup from "yup";
-//import { base_url } from "../../../../../../Config/Auth";
+import { Formik, Form, Field, } from "formik";
 import { Spacer ,StyledLabel} from "../../../../Components/UI/Elements";
-import Clearbit from "../../../../Components/Forms/Autocomplete/Clearbit";
-import LazySelect from "../../../../Components/Forms/Formik/LazySelect";
-import SearchSelect from "../../../../Components/Forms/Formik/SearchSelect";
-import AddressFieldArray from "../../../../Components/Forms/Formik/AddressFieldArray";
-import ProgessiveImage from "../../../../Components/Utils/ProgressiveImage";
 import {
     addDonotcall
 }
   from "../../CandidateAction";
-import { FlexContainer } from "../../../../Components/UI/Layout";
-import { TextareaComponent } from "../../../../Components/Forms/Formik/TextareaComponent";
-import { InputComponent } from "../../../../Components/Forms/Formik/InputComponent";
-import { SelectComponent } from "../../../../Components/Forms/Formik/SelectComponent";
 import { DatePicker } from "../../../../Components/Forms/Formik/DatePicker";
 import dayjs from "dayjs";
-import { MapComponent } from "react-leaflet";
 const { Option } = Select;
 
 /**
@@ -140,9 +127,9 @@ function DonotCallForm (props){
                          )} 
   </div>
  </FlexContainer> */}
- <FlexContainer justifyContent="space-between">
+ <div class=" flex justify-between" >
                      
-                     <div style={{ width: "47%",flexBasis:"44%" }}>
+                     <div class=" w-[47%]" style={{ flexBasis:"44%" }}>
                      {selectType==="call in 1 week" &&( 
                      <Field
                     name="startDate"
@@ -163,11 +150,11 @@ function DonotCallForm (props){
                      
                    
                    
-                         </FlexContainer>
+                         </div>
                          {selectType==="call in 1 week" &&( 
-                <FlexContainer justifyContent="space-between">
+                <div class=" flex justify-between" >
                   
-                <div style={{ width: "47%" }}>
+                <div class=" w-[47%]" >
                       <Field
                         name="startTime"
                         // label="Start Time"
@@ -189,7 +176,7 @@ function DonotCallForm (props){
                       />
                       </div>
                   
-                  <div style={{ width: "47%" }}>
+                      <div class=" w-[47%]" >
                       <Field
                         name="endTime"
                         // label="End Time"
@@ -212,7 +199,7 @@ function DonotCallForm (props){
                     </div>
                      
                      
-                </FlexContainer>
+                </div>
                          )}
 
            
@@ -220,9 +207,9 @@ function DonotCallForm (props){
                      
                    
                    
-                         <FlexContainer justifyContent="space-between">
+<div class=" flex justify-between" >
                      
-                     <div style={{ width: "47%",flexBasis:"44%" }}>
+<div class=" w-[47%]" style={{ flexBasis:"44%" }}>
                      {selectType==="call in 4 week" &&( 
                      <Field
                     name="startDate"
@@ -244,11 +231,11 @@ function DonotCallForm (props){
                      
                    
                    
-                         </FlexContainer>
+                         </div>
                          {selectType==="call in 4 week" &&( 
-                <FlexContainer justifyContent="space-between">
+               <div class=" flex justify-between" >
                   
-                <div style={{ width: "47%" }}>
+                  <div class=" w-[47%]" >
                       <Field
                         name="startTime"
                         // label="Start Time"
@@ -270,7 +257,7 @@ function DonotCallForm (props){
                       />
                       </div>
                   
-                  <div style={{ width: "47%" }}>
+                      <div class=" w-[47%]" >
                       <Field
                         name="endTime"
                         // label="End Time"
@@ -293,7 +280,7 @@ function DonotCallForm (props){
                     </div>
                      
                      
-                </FlexContainer>
+                </div>
                          )}
                 
                  
@@ -304,7 +291,7 @@ function DonotCallForm (props){
                
               </div>
               <Spacer />
-              <FlexContainer justifyContent="flex-end">
+              <div class=" flex justify-end" >
                 <Button
                   type="primary"
                   htmlType="submit"
@@ -313,7 +300,7 @@ function DonotCallForm (props){
                   <FormattedMessage id="app.update" defaultMessage="Update" />
                
                 </Button>
-              </FlexContainer>
+              </div>
             </Form>
           )}
         </Formik>

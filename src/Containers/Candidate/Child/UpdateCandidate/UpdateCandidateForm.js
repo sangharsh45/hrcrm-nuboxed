@@ -12,7 +12,6 @@ import { SelectComponent } from "../../../../Components/Forms/Formik/SelectCompo
 import { updateCandidate,setEditCandidate } from "../../CandidateAction";
 import Upload from "../../../../Components/Forms/Formik/Upload";
 import { StyledLabel } from "../../../../Components/UI/Elements";
-import { FlexContainer } from "../../../../Components/UI/Layout";
 import { TextareaComponent } from "../../../../Components/Forms/Formik/TextareaComponent";
 import { DatePicker } from "../../../../Components/Forms/Formik/DatePicker";
 import dayjs from "dayjs";
@@ -556,7 +555,7 @@ class UpdateCandidateForm extends Component {
                       />
                     )}
                   />                  
-                  <FlexContainer justifyContent="space-between">
+                  <div class=" flex justify-between" >
                    
                   <div class=" w-[47%]">
                       <Field
@@ -583,7 +582,7 @@ class UpdateCandidateForm extends Component {
                         width="100%"
                       />
                     </div>
-                  </FlexContainer>
+                  </div>
                 </div>
                 
                 <div class=" h-[70%] w-[47.5%]"

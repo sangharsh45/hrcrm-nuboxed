@@ -1,7 +1,6 @@
 import React, { lazy, Suspense } from "react";
 import { StyledModal } from "../../../../Components/UI/Antd";
 import { BundleLoader } from "../../../../Components/Placeholder";
-import { FormattedMessage } from "react-intl";
 const DonotCallForm = lazy(() => import("../CandidateTable/DonotCallForm"));
 
 const AddDonotCallModal = props => {
@@ -16,13 +15,13 @@ const AddDonotCallModal = props => {
         //   id="app.updatecandidate"
         //   defaultMessage="Candidate"
         // />}
-        width="45%"
+        width="60%"
         visible={addDonotCallModal}
         closable
         // maskClosable={false}
         destroyOnClose
         maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}
-        style={{marginTop:"5rem"}}
+        style={{marginTop:"3rem"}}
         onCancel={() => handleDonotCallModal(false)}
         footer={null}
       >

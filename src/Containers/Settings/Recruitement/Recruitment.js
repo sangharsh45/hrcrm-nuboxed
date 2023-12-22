@@ -1,5 +1,4 @@
 import React, { lazy, Suspense, useState, } from "react";
-import { FlexContainer } from "../../../Components/UI/Layout";
 import RecruitmentActionRight from "./RecruitmentActionRight";
 import {
    getProcessForRecruit,
@@ -37,7 +36,7 @@ function Recruitment(props) {
       component: <ApprovalTab />,
     },
     {
-      rulesName: "Distribution",
+      rulesName: "Automation",
       ruleId: "25",
       component: <DistributionTab />,
     },
@@ -57,11 +56,11 @@ function Recruitment(props) {
       ruleId: "17",
       component: <SettingsHolidayTab />,
     },
-    {
-      rulesName: "Leads",
-      ruleId: "21",
-      component: <LeadsConfigTab/>,
-    },
+    // {
+    //   rulesName: "Leads",
+    //   ruleId: "21",
+    //   component: <LeadsConfigTab/>,
+    // },
     // {
     //   rulesName: "Notification",
     //   ruleId: "15",
@@ -173,10 +172,10 @@ function Recruitment(props) {
 
   return (
     <div>
-      <FlexContainer>
+      <div class=" flex ">
         <Suspense fallback={"Loading..."}>
-          <FlexContainer flexWrap="no-wrap" style={{ width: "100%" }}>
-            <div style={{ width: "24%" }}>
+        <div class=" flex flex-no-wrap w-full ">
+            <div class=" w-[24%]">
               <RecruitmentActionLeft
                 handleRuleClick={handleRuleClick}
                 rules={rules}
@@ -185,12 +184,12 @@ function Recruitment(props) {
                 // handleRecruitProAdvance={handleRecruitProAdvance}
               />
             </div>
-            <div style={{ width: "74%" }}>
+            <div class=" w-[74%]" >
               <RecruitmentActionRight current={currentRulesOpen} />
             </div>
-          </FlexContainer>
+          </div>
         </Suspense>
-      </FlexContainer>
+      </div>
       {/* )} */}
     </div>
   );
