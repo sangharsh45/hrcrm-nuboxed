@@ -73,9 +73,9 @@ function CustomerCardList(props) {
     })
     setPage(page + 1);
     props.getCustomerListByUserId(props.userId, page,"creationdate");
-      props.getSectors();
-    props.getCountries();
-    props.getAllCustomerEmployeelist();
+    //   props.getSectors();
+    // props.getCountries();
+    // props.getAllCustomerEmployeelist();
   }, []);
 
   useEffect(() => {
