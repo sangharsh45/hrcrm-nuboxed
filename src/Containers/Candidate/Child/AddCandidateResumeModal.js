@@ -15,7 +15,7 @@ const AddCandidateResumeModal = (props) => {
       <StyledDrawer
         title={<FormattedMessage id="app.resume" defaultMessage="Resume" />}
         lineHeight="1.5em"
-        width="45%"
+        width="60%"
         visible={addCandidateResumeModal}
         maskClosable={false}
         destroyOnClose

@@ -14,12 +14,12 @@ const UpdateCandidateResumeModal = (props) => {
           id="app.updateResume"
           defaultMessage="Update Resume"
         />}
-        width="45%"
+        width="60%"
         visible={updateCandidateResumeModal}
         maskClosable={false}
         destroyOnClose
         maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}
-        style={{marginTop:"5rem"}}
+        style={{marginTop:"3rem"}}
         onClose={() => handleupdateCandidateResumeModal(false)}
         footer={null}
       >

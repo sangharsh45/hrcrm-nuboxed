@@ -4,6 +4,7 @@ import { TabsWrapper } from "../../../../../Components/UI/Layout";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import WebsiteTab from "./WebsiteTab";
+import WebsiteOrderForm from "../DistributionTab/WebsiteOrderForm"
 
 
 
@@ -23,7 +24,7 @@ function DistributionTab(props) {
                     </TabPane>
                     <TabPane tab={`Order`} key="2">
                     <div class=" mt-[10px]" >
-                        {/* <MileageApproveForm/> */}
+                        <WebsiteOrderForm/>
                         </div>
                     </TabPane>
                  

@@ -1,6 +1,5 @@
-import React, { lazy, Suspense, Component } from "react";
-import { BundleLoader } from "../../../../Components/Placeholder";
-import { StyledModal } from "../../../../Components/UI/Antd";
+import React, { Component } from "react";
+import { StyledDrawer } from "../../../../Components/UI/Antd";
 import { FormattedMessage } from "react-intl";
 import { base_url } from "../../../../Config/Auth";
 import { Player } from "video-react";
@@ -36,18 +35,18 @@ class AddPlayerModal extends Component {
     } = this.props;
     return (
       <>
-        <StyledModal
+        <StyledDrawer
           // title="Youtube"
           title={<FormattedMessage
             id="app.youtube"
             defaultMessage="Youtube"
              />}
-          width="45%"
+          width="60%"
           visible={addPlayerModal}
           destroyOnClose
           maskClosable={false}
           maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}
-          style={{marginTop:"5rem"}}
+          style={{marginTop:"3rem"}}
           onCancel={() => handlePlayerModal(false)}
           footer={null}
         >
@@ -64,7 +63,7 @@ class AddPlayerModal extends Component {
               type="video/mp4"
             />
           </Player>
-        </StyledModal>
+        </StyledDrawer>
       </>
     );
   }

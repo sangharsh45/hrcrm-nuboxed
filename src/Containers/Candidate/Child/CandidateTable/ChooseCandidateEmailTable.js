@@ -1,21 +1,12 @@
-import React, { useEffect,useState,lazy } from "react";
+import React, { useEffect,lazy } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { FormattedMessage } from "react-intl";
-import dayjs from "dayjs";
 import moment from "moment";
-import EmailSkillLoadMore from '../CandidateTable/EmailSkillLoadMore'
 import { StyledTable } from "../../../../Components/UI/Antd";
-import {
-  MultiAvatar,
-  SubTitle,
-} from "../../../../Components/UI/Elements";
-
-import { BundleLoader } from "../../../../Components/Placeholder";
-
-
-import { Tooltip, Icon,Button,Input } from "antd";
-import { candidateReducer } from "../../CandidateReducer";
+const EmailSkillLoadMore = lazy(() =>
+  import("../CandidateTable/EmailSkillLoadMore")
+);
 
 
 function onChange(pagination, filters, sorter) {

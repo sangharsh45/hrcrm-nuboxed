@@ -18,7 +18,7 @@ import {
 import {getDepartments} from "../../../Department/DepartmentAction"
 import moment from "moment";
 const { Option } = Select;
-function WebsiteForm(props) {
+function WebsiteOrderForm(props) {
 
     const [single, setSingle] = useState(false);
     const [selectedDept, setSelectedDept] = useState("");
@@ -28,7 +28,7 @@ console.log("single",single)
         setSingle(checked)
     }
   useEffect(() => {
-    props.getDistributionAutomation(props.orgId,"lead");
+    // props.getDistributionAutomation(props.orgId,"lead");
     props.getDepartments();
     
   }, []);
@@ -86,7 +86,7 @@ const handleDeptChange = (event) => {
         {({ values }) => (
         <MainWrapper style={{ height: "446px", width: "", overflow: "auto" }}>
         <Form className="form-background">
-          <div class =" flex  justify-between w-full"
+          <div class =" flex justify-between w-full"
        
           >
             <div class=" w-[44%] flex flex-row mt-[0.625em] ml-[1em]"
@@ -96,7 +96,7 @@ const handleDeptChange = (event) => {
              
               <div class=" flex  w-[74%]"
               >
-              <p class=" w-[6rem]">Assigned To</p>
+                   <p class=" w-[6rem]">Assigned To</p>
                 <div>
                       {/* <Popconfirm
                         title="Do you wish to change Status ? "
@@ -116,7 +116,7 @@ const handleDeptChange = (event) => {
                     </div>
               </div>
       
-              <div class=" flex justify-between ml-4 " >
+              <div class=" flex justify-between ml-4" >
                                                     <div class=" w-[35%]" >
                                                     <label class=" text-[#444] font-bold text-[0.75rem]" >Department</label>
                       <select 
@@ -225,4 +225,4 @@ const mapDispatchToProps = (dispatch) =>
     dispatch
   );
 
-export default connect(mapStateToProps, mapDispatchToProps)(WebsiteForm);
+export default connect(mapStateToProps, mapDispatchToProps)(WebsiteOrderForm);

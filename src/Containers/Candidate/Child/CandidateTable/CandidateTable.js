@@ -15,9 +15,6 @@ import BorderColorIcon from "@mui/icons-material/BorderColor";
 import PhoneDisabledIcon from "@mui/icons-material/PhoneDisabled";
 import BuildCircleIcon from "@mui/icons-material/BuildCircle";
 import PlayCircleIcon from "@mui/icons-material/PlayCircle";
-import CandidateRowEmailModal from "../CandidateRowEmailModal";
-import SkillsLoadMore from "./SkillsLoadMore";
-import AddChoiceCandidateModal from "../CandidateTable/AddChoiceCandidateModal";
 import WalletIcon from "@mui/icons-material/Wallet";
 import { StyledTable, StyledPopconfirm } from "../../../../Components/UI/Antd";
 import { Button, Select, Tooltip, Input } from "antd";
@@ -27,7 +24,6 @@ import {
   MultiAvatar2,
 } from "../../../../Components/UI/Elements";
 import InfiniteScroll from "react-infinite-scroll-component";
-import AddCandidateDrawerModal from "../../AddCandidateDrawerModal";
 import {
   getCandidateListByUserId,
   getCandidateById,
@@ -46,18 +42,37 @@ import {
   handlePlayerModal,
   emptyCandidate,
 } from "../../CandidateAction";
-import AddDonotCallModal from "../CandidateTable/AddDonotCallModal";
-import AddPlayerModal from "../CandidateTable/AddPlayerModal";
 import { getRoles } from "../../../Settings/Category/Role/RoleAction";
 import { getCountries } from "../../../Auth/AuthAction";
-import UpdateCandidateResumeModal from "../CandidateTable/UpdateCandidateResumeModal";
 import StatusToggle from "./StatusToggle";
 import styled from "styled-components";
 import Highlighter from "react-highlight-words";
-import AddEmailCandidateModal from "../CandidateTable/AddEmailCandidateModal";
 import { getAllSalesList } from "../../../Opportunity/OpportunityAction";
 const Option = Select;
-
+const AddEmailCandidateModal = lazy(() =>
+  import("../CandidateTable/AddEmailCandidateModal")
+);
+const SkillsLoadMore = lazy(() =>
+  import("../CandidateTable/SkillsLoadMore")
+);
+const CandidateRowEmailModal = lazy(() =>
+  import("../CandidateRowEmailModal")
+);
+const AddChoiceCandidateModal = lazy(() =>
+  import("../CandidateTable/AddChoiceCandidateModal")
+);
+const AddCandidateDrawerModal = lazy(() =>
+  import("../../AddCandidateDrawerModal")
+);
+const AddPlayerModal = lazy(() =>
+  import("../CandidateTable/AddPlayerModal")
+);
+const AddDonotCallModal = lazy(() =>
+  import("../CandidateTable/AddDonotCallModal")
+);
+const UpdateCandidateResumeModal = lazy(() =>
+  import("../CandidateTable/UpdateCandidateResumeModal")
+);
 const UpdateCandidateModal = lazy(() =>
   import("../UpdateCandidate/UpdateCandidateModal")
 );

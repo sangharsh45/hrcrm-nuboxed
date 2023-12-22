@@ -14,7 +14,7 @@ const AddCandidateModal = props => {
           id="app.candidate"
           defaultMessage="Candidate"
         />}
-        width="90%"
+        width="60%"
         visible={addCandidateModal}
         closable
         // maskClosable={false}

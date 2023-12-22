@@ -76,13 +76,13 @@ class CandidateRowEmailModal extends Component {
           id="app.email"
           defaultMessage="Email"
         />}
-        width={"40%"}
+        width={"60%"}
         visible={this.props.addCandidateRowEmailModal}
         // maskClosable={false}
         closable
         destroyOnClose
          maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}
-         style={{marginTop:"5rem"}}
+         style={{marginTop:"3rem"}}
          onClose={() => this.props.handleCandidateRowEmailModal(false)}
         //  footer={null}
       >
