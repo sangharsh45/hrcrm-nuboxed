@@ -3,13 +3,12 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { BundleLoader} from "../../Components/Placeholder";
 import {setDealViewType,handleDealModal}from "./DealAction";
-import DealsBoard from "./Child/DealsBoard"
-import DealsAllCardList from './Child/DealDetail/Dealcards/DealsAllCardList';
+const DealsBoard=lazy(()=>import ("./Child/DealsBoard"));
 const DealHeader = lazy(()=>import("./Child/DealHeader"));
 const DealCardList = lazy(()=>import("./Child/DealTable/DealCardList"));
 const CreateDealModal = lazy(() => import("./Child/CreateDealModal"));
 const DealWonCard=lazy(()=>import ("./Child/DealTable/DealWonCard"));
-
+const DealsAllCardList = lazy(()=>import("./Child/DealDetail/Dealcards/DealsAllCardList"));
 
 function Deal (props) {
 

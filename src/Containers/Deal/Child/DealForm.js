@@ -372,7 +372,7 @@ function DealForm(props) {
                   //label="Name"
 
                   label={
-                    <FormattedMessage id="app.name" defaultMessage="Name" />
+                    <FormattedMessage id="app.name" defaultMessage="name" />
                   }
                   isColumn
                   width={"100%"}
@@ -388,8 +388,8 @@ function DealForm(props) {
                       //label="Start "
                       label={
                         <FormattedMessage
-                          id="app.startDate"
-                          defaultMessage="Start Date"
+                          id="app.startdate"
+                          defaultMessage="startdate"
                         />
                       }
                       component={DatePicker}
@@ -405,8 +405,8 @@ function DealForm(props) {
                       // label="End Date"
                       label={
                         <FormattedMessage
-                          id="app.endDate"
-                          defaultMessage="End Date"
+                          id="app.enddate"
+                          defaultMessage="enddate"
                         />
                       }
                       isColumn
@@ -437,7 +437,7 @@ function DealForm(props) {
                       label={
                         <FormattedMessage
                           id="app.fundValue"
-                          defaultMessage="Fund Value"
+                          defaultMessage="fundValue"
                         />
                       }
                       isColumn
@@ -455,7 +455,7 @@ function DealForm(props) {
                       label={
                         <FormattedMessage
                           id="app.currency"
-                          defaultMessage="Currency"
+                          defaultMessage="currency"
                         />
                       }
                       width="100%"
@@ -468,7 +468,10 @@ function DealForm(props) {
                   </div>
                 </div>
                 <Spacer />
-                <StyledLabel>Description</StyledLabel>
+                <StyledLabel><FormattedMessage
+                          id="app.description"
+                          defaultMessage="description"
+                        /></StyledLabel>
                 <div>
                   <div>
                     <span onClick={SpeechRecognition.startListening}>
@@ -518,7 +521,10 @@ function DealForm(props) {
         {({ open }) => (
           <>
             <Listbox.Label className="block font-semibold text-[0.75rem] mt-[0.6rem]">
-              Assigned to
+             <FormattedMessage
+                          id="app.assignedto"
+                          defaultMessage="assignedto"
+                        />
             </Listbox.Label>
             <div className="relative mt-1">
               <Listbox.Button className="relative w-full leading-4 cursor-default border border-gray-300 bg-white py-0.5 pl-3 pr-10 text-left shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm"style={{boxShadow: "rgb(170, 170, 170) 0px 0.25em 0.62em"}} >
@@ -593,8 +599,8 @@ function DealForm(props) {
                     isColumnWithoutNoCreate
                     label={
                       <FormattedMessage
-                        id="app.Investor"
-                        defaultMessage="Investor"
+                        id="app.investor"
+                        defaultMessage="investor"
                       />
                     }
                     //component={SearchSelect}
@@ -617,7 +623,7 @@ function DealForm(props) {
                              label={
                               <FormattedMessage
                                 id="app.source"
-                                defaultMessage="Source"
+                                defaultMessage="source"
                               />
                             }
                             isColumnWithoutNoCreate
@@ -640,7 +646,7 @@ function DealForm(props) {
                     label={
                       <FormattedMessage
                         id="app.contact"
-                        defaultMessage="Contact"
+                        defaultMessage="contact"
                       />
                     }
                     // component={SearchSelect}
@@ -705,7 +711,7 @@ function DealForm(props) {
                         label={
                           <FormattedMessage
                             id="app.workflow"
-                            defaultMessage="Workflow"
+                            defaultMessage="workflow"
                           />
                         }
                         // component={SearchSelect}
@@ -729,7 +735,7 @@ function DealForm(props) {
                         label={
                           <FormattedMessage
                             id="app.stages"
-                            defaultMessage="Stages"
+                            defaultMessage="stages"
                           />
                         }
                         component={SelectComponent}
@@ -764,7 +770,7 @@ function DealForm(props) {
                 htmlType="submit"
                 loading={creatingDeal}
               >
-                <FormattedMessage id="app.create" defaultMessage="Create" />
+                <FormattedMessage id="app.create" defaultMessage="create" />
                 {/* Create */}
               </Button>
             </div>

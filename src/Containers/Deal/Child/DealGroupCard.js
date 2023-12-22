@@ -61,7 +61,7 @@ const DealGroupCard = (props) => {
 >
   <Tooltip 
     title={<FormattedMessage
-      id="app.Own"
+      id="app.won"
       defaultMessage="Won"
     />}
 
@@ -87,7 +87,7 @@ const DealGroupCard = (props) => {
 >
  <Tooltip
         title={
-          <FormattedMessage id="app.drop" defaultMessage="Lost" />
+          <FormattedMessage id="app.lost" defaultMessage="lost" />
         }
       >
  

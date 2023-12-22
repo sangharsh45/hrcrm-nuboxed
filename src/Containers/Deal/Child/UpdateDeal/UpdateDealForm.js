@@ -267,10 +267,7 @@ function UpdateDealForm (props) {
                       type="text"
                       //label="Name"
                       label={
-                        <FormattedMessage
-                          id="app.opportunityName"
-                          defaultMessage="Name"
-                        />
+                        <FormattedMessage id="app.name" defaultMessage="name" />
                       }
                       isColumn
                       width={"100%"}
@@ -289,9 +286,9 @@ function UpdateDealForm (props) {
                           //label="Start Date"
                           label={
                             <FormattedMessage
-                              id="app.startDate"
-                              defaultMessage="Start Date"
-                            />
+                          id="app.startdate"
+                          defaultMessage="startdate"
+                        />
                           }
                           component={DatePicker}
                           value={values.startDate}
@@ -308,9 +305,9 @@ function UpdateDealForm (props) {
                           // label="End Date"
                           label={
                             <FormattedMessage
-                              id="app.endDate"
-                              defaultMessage="End Date"
-                            />
+                            id="app.enddate"
+                            defaultMessage="enddate"
+                          />
                           }
                           isColumn
                           component={DatePicker}
@@ -342,9 +339,9 @@ function UpdateDealForm (props) {
                           // label="Proposal Amount"
                           label={
                             <FormattedMessage
-                              id="app.fundValue"
-                              defaultMessage="Fund Value"
-                            />
+                          id="app.fundValue"
+                          defaultMessage="fundValue"
+                        />
                           }
                           isColumn
                           isRequired
@@ -360,9 +357,9 @@ function UpdateDealForm (props) {
                         // label="currencyName"
                         label={
                           <FormattedMessage
-                            id="app.currency"
-                            defaultMessage="Currency"
-                          />
+                          id="app.currency"
+                          defaultMessage="currency"
+                        />
                         }
                         isColumn
                         defaultValue={{
@@ -381,7 +378,10 @@ function UpdateDealForm (props) {
                 <Listbox value={selected} onChange={setSelected}>
       {({ open }) => (
         <>
-          <Listbox.Label className="block font-semibold text-[0.75rem] mt-[0.6rem]">Assigned to</Listbox.Label>
+          <Listbox.Label className="block font-semibold text-[0.75rem] mt-[0.6rem]"><FormattedMessage
+                          id="app.assignedto"
+                          defaultMessage="assignedto"
+                        /></Listbox.Label>
           <div className="relative mt-1">
               <Listbox.Button className="relative w-full leading-4 cursor-default border border-gray-300 bg-white py-0.5 pl-3 pr-10 text-left shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm">
                 {selected}
@@ -451,9 +451,9 @@ function UpdateDealForm (props) {
                     isColumnWithoutNoCreate
                     label={
                       <FormattedMessage
-                        id="app.investor"
-                        defaultMessage="Investor"
-                      />
+                      id="app.investor"
+                      defaultMessage="investor"
+                    />
                     }
                     // isRequired
                     component={SelectComponent}
@@ -474,8 +474,8 @@ function UpdateDealForm (props) {
                     isColumnWithoutNoCreate
                     label={
                       <FormattedMessage
-                        id="app.contactId"
-                        defaultMessage="Contact"
+                        id="app.contact"
+                        defaultMessage="contact"
                       />
                     }
                     component={SelectComponent}
@@ -505,9 +505,9 @@ function UpdateDealForm (props) {
                           isColumnWithoutNoCreate
                           label={
                             <FormattedMessage
-                              id="app.workflow"
-                              defaultMessage="Workflow"
-                            />
+                            id="app.workflow"
+                            defaultMessage="workflow"
+                          />
                           }
                           component={SelectComponent}
                           options={
@@ -530,9 +530,9 @@ function UpdateDealForm (props) {
                           isColumnWithoutNoCreate
                           label={
                             <FormattedMessage
-                              id="app.stages"
-                              defaultMessage="Stages"
-                            />
+                            id="app.stages"
+                            defaultMessage="stages"
+                          />
                           }
                           component={SelectComponent}
                           options={
@@ -571,7 +571,7 @@ function UpdateDealForm (props) {
                   htmlType="submit"
                   Loading={updateOpportunityById}
                 >
-                  <FormattedMessage id="app.update" defaultMessage="Update" />
+                  <FormattedMessage id="app.update" defaultMessage="update" />
                   {/* Update */}
                 </Button>
               </div>

@@ -5,7 +5,7 @@ const UpdateContactInvestForm = lazy(() => import("./UpdateContactInvestForm"));
 
 const UpdateContactInvestModal = props => {
   const isSmallScreen = window.innerWidth <= 600;
-    const drawerWidth = isSmallScreen ? "90%" : "55%";
+    const drawerWidth = isSmallScreen ? "90%" : "60%";
   const { updateContactInvestModal, handleUpdateContactInvestModal,contactiData, ...formProps } = props;
   return (
     <>
@@ -16,7 +16,7 @@ const UpdateContactInvestModal = props => {
         closable
         destroyOnClose
         maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}
-        style={{marginTop:"5rem"}}
+        style={{marginTop:"3rem"}}
         onClose={() => handleUpdateContactInvestModal(false)}
         footer={null}
       >

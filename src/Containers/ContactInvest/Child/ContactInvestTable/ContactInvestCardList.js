@@ -32,7 +32,10 @@ import BorderColorIcon from '@mui/icons-material/BorderColor';
 import {getContactInvestByUserId,
   handleContactInvestNotesDrawerModal,
   emptyContactInvest,handleUpdateContactInvestModal} from "../../ContactInvestAction";
-import AddContactInvestNotesDrawerModal from "../AddContactInvestNotesDrawerModal";
+import { FormattedMessage } from "react-intl";
+const AddContactInvestNotesDrawerModal = lazy(() =>
+  import("../AddContactInvestNotesDrawerModal")
+);
 const UpdateContactInvestModal = lazy(() =>
   import("../UpdateContactInvest/UpdateContactInvestModal")
 );
@@ -96,14 +99,38 @@ function ContactInvestCardList(props) {
 
           <OnlyWrapCard style={{backgroundColor:"#E3E8EE"}}>
           <div className=" flex justify-between w-[93%] p-2 bg-transparent font-bold sticky top-0 z-10">
-        <div className=" md:w-[13.1rem]">Name</div>
-        <div className=" md:w-[10.1rem]">Company</div>
-        <div className=" md:w-[7.6rem] ">Designation</div>
-        <div className="md:w-[9.1rem]">Department</div>
-        <div className="md:w-[7.1rem]"># Deals</div>
-        <div className="md:w-[7.2rem]">Deal Value</div>
-        <div className="md:w-[5.2rem]">Source</div>
-        <div className="md:w-[4.2rem]">Owner</div>
+        <div className=" md:w-[13.1rem]"><FormattedMessage
+                  id="app.name"
+                  defaultMessage="name"
+                /></div>
+        <div className=" md:w-[10.1rem]"><FormattedMessage
+                  id="app.company"
+                  defaultMessage="company"
+                /></div>
+        <div className=" md:w-[7.6rem] "><FormattedMessage
+                  id="app.designation"
+                  defaultMessage="designation"
+                /></div>
+        <div className="md:w-[9.1rem]"><FormattedMessage
+                  id="app.department"
+                  defaultMessage="department"
+                /></div>
+        <div className="md:w-[7.1rem]"># <FormattedMessage
+                  id="app.deals"
+                  defaultMessage="deals"
+                /></div>
+        <div className="md:w-[7.2rem]"> <FormattedMessage
+                  id="app.dealValue"
+                  defaultMessage="dealValue"
+                /></div>
+        <div className="md:w-[5.2rem]"><FormattedMessage
+                  id="app.source"
+                  defaultMessage="source"
+                /></div>
+        <div className="md:w-[4.2rem]"><FormattedMessage
+                  id="app.owner"
+                  defaultMessage="owner"
+                /></div>
         {/* <div className="w-12">Action</div> */}
 
       </div>

@@ -153,7 +153,7 @@ class NoteDealForm extends Component {
                       marginTop: "1.3125em",
                     }}
                   >
-                    <FormattedMessage id="app.post" defaultMessage="Post" />
+                    <FormattedMessage id="app.post" defaultMessage="post" />
                     {/* Post */}
                   </Button>
                 </FlexContainer>

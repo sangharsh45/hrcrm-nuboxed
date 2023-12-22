@@ -4,8 +4,6 @@ import { StyledPopconfirm} from "../../../../../Components/UI/Antd";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import moment from "moment";
-import ExploreIcon from "@mui/icons-material/Explore";
-import { DeleteOutlined } from "@ant-design/icons";
 import { MultiAvatar,MultiAvatar2, SubTitle } from "../../../../../Components/UI/Elements";
 import "jspdf-autotable";
 import { OnlyWrapCard } from '../../../../../Components/UI/Layout'
@@ -21,7 +19,6 @@ import {
 import { CurrencySymbol,Link } from "../../../../../Components/Common"; 
 import { Button, Tooltip,Dropdown ,Menu,Progress} from "antd";
 import { FormattedMessage } from "react-intl";
-import BorderColorIcon from "@mui/icons-material/BorderColor";
 import InfiniteScroll from "react-infinite-scroll-component";
 // import AddPitchNotesDrawerModal from "./AddPitchNotesDrawerModal";
 import { BundleLoader } from "../../../../../Components/Placeholder";
@@ -61,14 +58,38 @@ const DealsAllCardList = (props) => {
   return (
     <>
    <OnlyWrapCard style={{backgroundColor:"#E3E8EE"}}><div className=" flex justify-between w-[98%] p-2 bg-transparent font-bold sticky top-0 z-10">
-        <div className=" md:w-[12rem]">Name</div>
-        <div className=" md:w-20">Investor</div>
-        <div className=" md:w-32 ">Sponsor</div>
-        <div className="md:w-32">Start Date</div>
-        <div className="md:w-56">Proposal Amount</div>
-        <div className="md:w-20">Stages</div> 
-        <div className="md:w-24">Sales Rep</div>
-        <div className="md:w-20">Owner</div>
+        <div className=" md:w-[12rem]"><FormattedMessage
+                  id="app.name"
+                  defaultMessage="name"
+                /></div>
+        <div className=" md:w-20"><FormattedMessage
+                  id="app.investor"
+                  defaultMessage="investor"
+                /></div>
+        <div className=" md:w-32 "><FormattedMessage
+                  id="app.sponsor"
+                  defaultMessage="sponsor"
+                /></div>
+        <div className="md:w-32"><FormattedMessage
+                  id="app.startdate"
+                  defaultMessage="startdate"
+                /></div>
+        <div className="md:w-56"><FormattedMessage
+                  id="app.proposalamt"
+                  defaultMessage="proposalamt"
+                /></div>
+        <div className="md:w-20"><FormattedMessage
+                  id="app.stages"
+                  defaultMessage="stages"
+                /></div> 
+        <div className="md:w-24"><FormattedMessage
+                  id="app.salesRep"
+                  defaultMessage="salesRep"
+                /></div>
+        <div className="md:w-20"><FormattedMessage
+                  id="app.owner"
+                  defaultMessage="owner"
+                /></div>
         <div className="md:w-20"></div>
         <div className="w-12"></div>
 

@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState,lazy } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { withRouter } from "react-router-dom";
@@ -12,8 +12,8 @@ import {
 } from "../../Settings/SettingsAction";
 import {updateDealdragstage} from "../DealAction";
 import { Spin } from "antd";
-import DealStageColumn from "./DealStageColumn"
 import {getAllDealsbyUserId} from "../DealAction";
+const DealStageColumn =lazy(()=>import("./DealStageColumn"));
 
 const TabPane = StyledTabs.TabPane;
 

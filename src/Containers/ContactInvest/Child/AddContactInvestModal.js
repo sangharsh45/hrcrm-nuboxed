@@ -7,20 +7,20 @@ const ContactInvestForm = lazy(() => import("./ContactInvestForm"));
 function AddContactInvestModal (props) {
   const { addContactInvestModal, handleContactInvestModal, ...formProps } = props;
   const isSmallScreen = window.innerWidth <= 600;
-    const drawerWidth = isSmallScreen ? "90%" : "55%";
+    const drawerWidth = isSmallScreen ? "90%" : "60%";
   return (
     <>
       <StyledDrawer
         title={<FormattedMessage
           id="app.contactinvest "
-          defaultMessage="Contact Invest"
+          defaultMessage="contactinvest"
         />}
         width={drawerWidth}
         visible={addContactInvestModal}
         closable
         destroyOnClose
         maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}
-        style={{marginTop:"5rem"}}
+        style={{marginTop:"3rem"}}
         onClose={() => handleContactInvestModal(false)}
         footer={null}
       >

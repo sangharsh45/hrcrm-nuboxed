@@ -215,7 +215,7 @@ class ContactInvestForm extends Component {
                             label={
                               <FormattedMessage
                                 id="app.salutation"
-                                defaultMessage="Salutation"
+                                defaultMessage="salutation"
                               />
                             }
                             options={["Mr.", "Ms.", "None"]}
@@ -232,8 +232,8 @@ class ContactInvestForm extends Component {
                             // label="First Name"
                             label={
                               <FormattedMessage
-                                id="app.firstName"
-                                defaultMessage="First Name"
+                                id="app.firstname"
+                                defaultMessage="firstname"
                               />
                             }
                             type="text"
@@ -251,8 +251,8 @@ class ContactInvestForm extends Component {
                             //label="Middle Name"
                             label={
                               <FormattedMessage
-                                id="app.middleName"
-                                defaultMessage="Middle"
+                                id="app.middle"
+                                defaultMessage="middle"
                               />
                             }
                             type="text"
@@ -268,8 +268,8 @@ class ContactInvestForm extends Component {
                             //label="Last Name"
                             label={
                               <FormattedMessage
-                                id="app.lastName"
-                                defaultMessage="Last Name"
+                                id="app.lastname"
+                                defaultMessage="lastname"
                               />
                             }
                             type="text"
@@ -290,7 +290,7 @@ class ContactInvestForm extends Component {
                         //label="Email"
                         label={
                           <FormattedMessage
-                            id="app.emailId"
+                            id="app.email"
                             defaultMessage="Email"
                           />
                         }
@@ -311,7 +311,7 @@ class ContactInvestForm extends Component {
                         //label="Mobile #"
                         label={
                           <FormattedMessage
-                            id="app.countryDialCode"
+                            id="app.dialCode"
                             defaultMessage="Dial Code"
                           />
                         }
@@ -332,8 +332,8 @@ class ContactInvestForm extends Component {
                         name="mobileNumber"
                         label={
                           <FormattedMessage
-                            id="app.mobileNo"
-                            defaultMessage="Mobile #"
+                            id="app.mobile"
+                            defaultMessage="mobile #"
                           />
                         }
                         //placeholder="Mobile #"
@@ -366,8 +366,8 @@ class ContactInvestForm extends Component {
                           placeholder='+31'
                           label={
                             <FormattedMessage
-                              id="app.#whatsApp"
-                              defaultMessage="Dial Code"
+                              id="app.dialCode"
+                              defaultMessage="dialCode"
 
                             />
                           }
@@ -389,8 +389,8 @@ class ContactInvestForm extends Component {
                           placeholder="Phone #"
                           label={
                             <FormattedMessage
-                              id="app.phoneNumber"
-                              defaultMessage="Whatsapp #"
+                              id="app.whatsapp"
+                              defaultMessage="whatsapp #"
                             />
                           }
                           isColumn
@@ -410,8 +410,8 @@ class ContactInvestForm extends Component {
                         //label="Linkedin "
                         label={
                           <FormattedMessage
-                            id="app.linkedinPublicUrl"
-                            defaultMessage="Linkedin"
+                            id="app.linkedin"
+                            defaultMessage="linkedin"
                           />
                         }
                         isColumn
@@ -443,8 +443,8 @@ class ContactInvestForm extends Component {
                         isColumnWithoutNoCreate
                         label={
                           <FormattedMessage
-                            id="app.tagCompany"
-                            defaultMessage="Tag Company"
+                            id="app.tagcompany"
+                            defaultMessage="tagcompany"
                           />
                         }
                         component={SelectComponent}
@@ -463,7 +463,7 @@ class ContactInvestForm extends Component {
                         label={
                           <FormattedMessage
                             id="app.designation"
-                            defaultMessage="Designation"
+                            defaultMessage="designation"
                           />
                         }
                         selectType="designationType"
@@ -484,7 +484,7 @@ class ContactInvestForm extends Component {
                       label={
                         <FormattedMessage
                           id="app.department"
-                          defaultMessage="Department"
+                          defaultMessage="department"
                         />
                       }
                       isColumn
@@ -501,7 +501,7 @@ class ContactInvestForm extends Component {
                              label={
                               <FormattedMessage
                                 id="app.source"
-                                defaultMessage="Source"
+                                defaultMessage="source"
                               />
                             }
                             isColumnWithoutNoCreate
@@ -620,7 +620,7 @@ class ContactInvestForm extends Component {
                   htmlType="submit"
                   loading={addingContact}
                 >
-                  <FormattedMessage id="app.create" defaultMessage="Create" />
+                  <FormattedMessage id="app.create" defaultMessage="create" />
                   {/*                     
                     Create */}
                 </Button>
