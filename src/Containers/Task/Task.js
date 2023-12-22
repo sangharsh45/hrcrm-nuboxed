@@ -2,12 +2,12 @@ import React, { Component, Suspense, lazy } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { BundleLoader, GridLoader } from "../../Components/Placeholder";
-import AddTaskModal from "./Child/AddTaskModal";
-import TaskDeletedTable from "../Task/Child/TaskDeletedTable"
-import TaskHeader from "./Child/TaskHeader";
 import { handleTaskModal ,setTaskViewType} from "./TaskAction";
-import TaskApproveTable from "./Child/TaskApproveTable";
-import GanttChart from "./Child/GanttChart";
+const AddTaskModal = lazy(() => import("./Child/AddTaskModal"));
+const TaskDeletedTable = lazy(() => import("../Task/Child/TaskDeletedTable"));
+const TaskHeader = lazy(() => import("./Child/TaskHeader"));
+const TaskApproveTable = lazy(() => import("./Child/TaskApproveTable"));
+const GanttChart = lazy(() => import("./Child/GanttChart"));
 const TaskTable = lazy(() => import("./Child/TaskTable"));
 const TaskCardList = lazy(() => import("./Child/TaskCardList"));
 class Task extends Component {

@@ -1,15 +1,11 @@
-import React, { Component } from "react";
+import React, { Component,lazy } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Button, Timeline } from "antd";
-//import { BorderBox } from "../../../../Components/UI/Layout";
  import {getNotesListByTaskId } from "../TaskAction";
-
  import NoteFile from "./NoteFile";
 import { BundleLoader } from "../../../Components/Placeholder";
-import SingleNote from "./SingleNote";
-import { FormattedMessage } from "react-intl";
-
+const SingleNote = lazy(() => import("./SingleNote"));
 class NotesForm extends Component {
   componentDidMount() {
     this.props.getNotesListByTaskId(this.props.currentNameId.taskId);

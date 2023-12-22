@@ -1,4 +1,4 @@
-import React, { lazy, Suspense } from "react";
+import React, {Suspense,lazy } from "react";
 import { StyledDrawer } from "../../../Components/UI/Antd";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
@@ -10,11 +10,8 @@ import { PlusOutlined } from "@ant-design/icons";
 import LightbulbIcon from '@mui/icons-material/Lightbulb';
 import { FormattedMessage } from "react-intl";
 import { Tooltip } from "antd";
-
-import PitchTimeline from "../../Pitch/Child/PitchTimeline";
-import AddPitchActivityModal from "./PtchActivity/AddPitchActivityModal";
-
-
+const PitchTimeline =lazy(()=>import("../../Pitch/Child/PitchTimeline"));
+const AddPitchActivityModal =lazy(()=>import("./PtchActivity/AddPitchActivityModal"));
 
 const TabPane = StyledTabs.TabPane;
 

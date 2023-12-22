@@ -2,9 +2,9 @@ import React, { Suspense, lazy } from 'react';
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { BundleLoader, GridLoader } from "../../Components/Placeholder";
-import AddEventModal from './Child/AddEventModal'
-import EventHeader from "./Child/EventHeader";
 import { handleEventModal } from "./EventAction";
+const AddEventModal = lazy(() => import('./Child/AddEventModal'))
+const EventHeader = lazy(() => import('./Child/EventHeader'))
 const EventTable = lazy(() => import('./Child/EventTable/EventTable'))
 const EventCardList = lazy(() => import('./Child/EventTable/EventCardList'))
 

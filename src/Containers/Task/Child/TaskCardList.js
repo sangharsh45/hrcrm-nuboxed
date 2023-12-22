@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { FormattedMessage } from "react-intl";
 import styled from "styled-components";
-import TaskStatusToggle from "../Child/TaskStatusToggle";
 import {
   CheckCircleOutlined,
   CloseCircleOutlined,
@@ -14,7 +13,6 @@ import StarBorderIcon from '@mui/icons-material/StarBorder';
 import DownloadForOfflineIcon from '@mui/icons-material/DownloadForOffline';
 import { OnlyWrapCard } from '../../../Components/UI/Layout';
 import NoteAltIcon from "@mui/icons-material/NoteAlt";
-import AddTaskProjectDrawerModal from "../Child/AddTaskProjectDrawerModal";
 import { Tooltip, Input, Button, Avatar,FloatButton } from "antd";
 import moment from "moment";
 import { BundleLoader } from "../../../Components/Placeholder";
@@ -36,11 +34,12 @@ import {
 } from "../TaskAction";
 import { MultiAvatar, StyledLabel } from "../../../Components/UI/Elements";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
-import AddTaskNotesDrawerModal from "./AddTaskNotesDrawerModal";
-import OpenTaskModal from "./OpenTaskModal";
-import DownloadTaskModal from "./DownloadTaskModal";
-import AddTaskFeedbackDrawerModal from "./AddTaskFeedbackDrawerModal";
+const AddTaskProjectDrawerModal = lazy(() => import("../Child/AddTaskProjectDrawerModal"));
+const AddTaskNotesDrawerModal = lazy(() => import("./AddTaskNotesDrawerModal"));
+const OpenTaskModal = lazy(() => import("./OpenTaskModal"));
+const DownloadTaskModal = lazy(() => import("./DownloadTaskModal"));
 const UpdateTaskModal = lazy(() => import("./UpdateTaskModal"));
+const AddTaskFeedbackDrawerModal = lazy(() => import("./AddTaskFeedbackDrawerModal"));
 const ButtonGroup = Button.Group;
 
 const TaskCardList = (props) => {

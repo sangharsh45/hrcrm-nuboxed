@@ -1,11 +1,9 @@
-import React, { Component, Suspense } from "react";
+import React, { lazy, Component, Suspense } from "react";
 import { BundleLoader } from "../../../Components/Placeholder";
-
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-
 import { StyledDrawer } from "../../../Components/UI/Antd";
-import NotesForm from "./NotesForm";
+const NotesForm =lazy(()=>import("./NotesForm"));
 
 class AddPitchNotesDrawerModal extends Component {
   render() {

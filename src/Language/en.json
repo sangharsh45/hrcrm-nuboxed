@@ -248,5 +248,11 @@
   "app.action":"Action",
   "app.taskList":"Task CheckList",
   "app.team":"Team",
-  "app.rating":"Rating"
+  "app.rating":"Rating",
+  "app.qualify":"Qualify",
+  "app.dialCode":"Dial Code",
+  "app.url":"URL",
+  "app.vatNumber":"VAT Number",
+  "app.businessregistration":"Business Registration#",
+  "app.source":"Source"
 }

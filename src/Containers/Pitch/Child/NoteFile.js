@@ -4,12 +4,10 @@ import { FormattedMessage } from "react-intl";
 import { bindActionCreators } from "redux";
 import { Button, Icon } from "antd";
 import { Formik, Form, Field } from "formik";
-//  import ReactSpeeech from "../../../../../Components/ReactSpeech/ReactSpeech";
 import * as Yup from "yup";
 import { Editor } from "react-draft-wysiwyg";
 import { EditorState, convertToRaw, ContentState } from "draft-js";
 import draftToHtml from "draftjs-to-html";
-//import { TextareaComponent } from "../../../../../Components/Forms/Formik/TextareaComponent";
 import { addPitchNote } from "../PitchAction";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 

@@ -2,7 +2,7 @@ import React, { lazy, Suspense } from "react";
 import { FormattedMessage } from "react-intl";
 import { StyledDrawer } from "../../../Components/UI/Antd";
 import { BundleLoader } from "../../../Components/Placeholder";
-import UpdateTaskForm from "./UpdateTaskForm";
+const UpdateTaskForm = lazy(() => import("./UpdateTaskForm"));
 
 const UpdateTaskModal = (props) => {
     const { updateTaskModal, handleUpdateTaskModal, ...formProps } = props;

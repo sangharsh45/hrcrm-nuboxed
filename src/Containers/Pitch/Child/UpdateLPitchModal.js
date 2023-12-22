@@ -3,14 +3,13 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { BundleLoader } from "../../../Components/Placeholder";
 import { StyledDrawer } from "../../../Components/UI/Antd";
-// import { setEditLeads } from "../../LeadsAction";
  const UpdatePitchForm = lazy(() => import("./UpdatePitchForm"));
 
 const UpdateLPitchModal = (props) => {
   const { updateCustomerModal, handleUpdateCustomerModal, ...formProps } = props;
 //   console.log("dn",props.setEditingLeads.name)
 const isSmallScreen = window.innerWidth <= 600;
-    const drawerWidth = isSmallScreen ? "90%" : "55%";
+    const drawerWidth = isSmallScreen ? "90%" : "60%";
 console.log(props.item)
 
   return (
@@ -22,7 +21,7 @@ console.log(props.item)
         maskClosable={false}
         destroyOnClose
         maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}
-        style={{ marginTop:"5rem" }}
+        style={{ marginTop:"3rem" }}
         onClose={() => props.handleUpdatePitchModal(false)}
         footer={null}
       >

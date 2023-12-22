@@ -1,10 +1,11 @@
-import React from "react";
+import React, { Component, Suspense, lazy } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import Button from "antd/lib/button";
 import { Tooltip } from "antd";
 import { handleCallModal } from "../CallAction";
-import CallSharedForm from "./CallSharedForm";
+const CallSharedForm = lazy(() => import("./CallSharedForm"));
+
 
 const CallActionRight = (props) => {
   const {

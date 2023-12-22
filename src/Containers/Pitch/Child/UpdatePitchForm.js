@@ -141,7 +141,7 @@ function UpdatePitchForm (props) {
                             label={
                               <FormattedMessage
                                 id="app.salutation"
-                                defaultMessage="Salutation"
+                                defaultMessage="salutation"
                               />
                             }
                             options={["Mr.", "Ms.", "None"]}
@@ -158,9 +158,9 @@ function UpdatePitchForm (props) {
                             // label="First Name"
                             label={
                               <FormattedMessage
-                                id="app.firstName"
-                                defaultMessage="First Name"
-                              />
+                              id="app.firstname"
+                              defaultMessage="firstname"
+                            />
                             }
                             type="text"
                             width={"100%"}
@@ -177,8 +177,8 @@ function UpdatePitchForm (props) {
                             //label="Middle Name"
                             label={
                               <FormattedMessage
-                                id="app.middleName"
-                                defaultMessage="Middle"
+                                id="app.middle"
+                                defaultMessage="middle"
                               />
                             }
                             type="text"
@@ -194,8 +194,8 @@ function UpdatePitchForm (props) {
                             //label="Last Name"
                             label={
                               <FormattedMessage
-                                id="app.lastName"
-                                defaultMessage="Last Name"
+                                id="app.lastname"
+                                defaultMessage="lastname"
                               />
                             }
                             type="text"
@@ -230,8 +230,8 @@ function UpdatePitchForm (props) {
                         isColumnWithoutNoCreate
                         label={
                           <FormattedMessage
-                            id="app.countryDialCode"
-                            defaultMessage="Dial Code "
+                            id="app.dialCode"
+                            defaultMessage="dialCode"
                           />
                         }
                         isColumn
@@ -248,7 +248,12 @@ function UpdatePitchForm (props) {
                         name="phoneNumber"
                         isColumn
                         component={InputComponent}
-                        label="Phone No"
+                        label={
+                          <FormattedMessage
+                            id="app.phoneno#"
+                            defaultMessage="phoneno#"
+                          />
+                        }
                         inlineLabel
                         width={"100%"}
                         />     
@@ -263,7 +268,7 @@ function UpdatePitchForm (props) {
                     type="text"
                     //label="Name"
                     label={
-                      <FormattedMessage id="app.company" defaultMessage="Company" />
+                      <FormattedMessage id="app.company" defaultMessage="company" />
                     }
                     isColumn
                     width={"100%"}
@@ -280,7 +285,7 @@ function UpdatePitchForm (props) {
                     type="text"
                     // label="URL"
                     label={
-                      <FormattedMessage id="app.url" defaultMessage="URL" />
+                      <FormattedMessage id="app.url" defaultMessage="url" />
                     }
                     isColumn
                     width={"100%"}
@@ -297,7 +302,7 @@ function UpdatePitchForm (props) {
                         label={
                           <FormattedMessage
                             id="app.vatNumber"
-                            defaultMessage="VAT Number"
+                            defaultMessage="vatNumber"
                           />
                         }
                         //isRequired
@@ -316,9 +321,9 @@ function UpdatePitchForm (props) {
                         // label="URL"
                         label={
                           <FormattedMessage
-                            id="app.businessregistration"
-                            defaultMessage=" Business Registration#"
-                          />
+                          id="app.businessregistration"
+                          defaultMessage=" businessregistration"
+                        />
                         }
                         isColumn
                         width={"100%"}
@@ -351,9 +356,9 @@ function UpdatePitchForm (props) {
                           isColumnWithoutNoCreate
                           label={
                             <FormattedMessage
-                              id="app.source"
-                              defaultMessage="Source"
-                            />
+                            id="app.source"
+                            defaultMessage="source"
+                          />
                           }
                           component={SelectComponent}
                           options={
@@ -378,7 +383,10 @@ function UpdatePitchForm (props) {
                     <Listbox value={selected} onChange={setSelected}>
       {({ open }) => (
         <>
-          <Listbox.Label className="block font-semibold text-[0.75rem] mt-[0.6rem]">Assigned to</Listbox.Label>
+          <Listbox.Label className="block font-semibold text-[0.75rem] mt-[0.6rem]"><FormattedMessage
+                                id="app.assignedto"
+                                defaultMessage="assignedto"
+                              /></Listbox.Label>
           <div className="relative mt-1">
               <Listbox.Button className="relative w-full leading-4 cursor-default border border-gray-300 bg-white py-0.5 pl-3 pr-10 text-left shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm">
                 {selected}
@@ -462,7 +470,7 @@ function UpdatePitchForm (props) {
                     name="notes"
                     // label="Notes"
                     label={
-                      <FormattedMessage id="app.notes" defaultMessage="Notes" />
+                      <FormattedMessage id="app.notes" defaultMessage="notes" />
                     }
                     width={"100%"}
                     isColumn
@@ -478,7 +486,7 @@ function UpdatePitchForm (props) {
                   htmlType="submit"
                  Loading={props.updatePitchById}
                 >
-                  <FormattedMessage id="app.update" defaultMessage="Update" />
+                  <FormattedMessage id="app.create" defaultMessage="create" />
                   {/* Update */}
                 </Button>
               </div>

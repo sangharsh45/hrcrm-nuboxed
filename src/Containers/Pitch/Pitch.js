@@ -1,14 +1,13 @@
 import React, {useState,Suspense,lazy } from 'react';
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import PitchHeader from "./Child/PitchHeader"
-import PitchCardList from "./Child/PitchCardList"
-import AddPitchModal from "../Pitch/Child/AddPitchModal"
 import {handlePitchModal,getPitch,setPitchViewType } from "../Pitch/PitchAction";
 import { BundleLoader, GridLoader } from "../../Components/Placeholder";
-import PitchAllCardList from './Child/PitchAllCardList';
-import PitchTeamCardlist from './Child/PitchTeamCardlist';
-
+const PitchHeader =lazy(()=>import("./Child/PitchHeader"));
+const PitchCardList =lazy(()=>import("./Child/PitchCardList"));
+const AddPitchModal =lazy(()=>import("../Pitch/Child/AddPitchModal"));
+const PitchAllCardList =lazy(()=>import("./Child/PitchAllCardList"));
+const PitchTeamCardlist =lazy(()=>import("./Child/PitchTeamCardlist"));
 
 function Pitch (props) {
   const [currentData,setcurrentData]=useState("");

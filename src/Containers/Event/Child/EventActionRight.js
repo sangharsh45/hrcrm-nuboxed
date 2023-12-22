@@ -1,10 +1,10 @@
-import React from "react";
+import React, { Component,lazy } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import Button from "antd/lib/button";
 import { Tooltip } from "antd";
 import { handleEventModal } from "../EventAction";
-import EventSharedForm from "./EventSharedForm";
+const EventSharedForm =lazy(()=>import("./EventSharedForm"));
 
 class EventActionRight extends React.Component {
   state = {

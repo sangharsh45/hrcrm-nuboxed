@@ -1,7 +1,7 @@
-import React, { Component } from "react";
+import React, { Component,lazy } from "react";
 import { ActionHeader } from "../../../Components/Utils";
-import TaskActionLeft from "./TaskActionLeft";
-import TaskActionRight from "./TaskActionRight";
+const TaskActionRight = lazy(() => import("./TaskActionRight"));
+const TaskActionLeft = lazy(() => import("./TaskActionLeft"));
 class TaskHeader extends Component {
   render() {
     const { viewType, setTaskViewType } = this.props;

@@ -34,8 +34,8 @@ import Box from "@mui/material/Box";
 import { DataGrid } from "@mui/x-data-grid";
 import { MultiAvatar } from "../../../Components/UI/Elements";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
-import AddTaskNotesDrawerModal from "./AddTaskNotesDrawerModal";
-import OpenTaskModal from "./OpenTaskModal";
+const AddTaskNotesDrawerModal = lazy(() => import("./AddTaskNotesDrawerModal"));
+const OpenTaskModal = lazy(() => import("./OpenTaskModal"));
 const UpdateTaskModal = lazy(() => import("./UpdateTaskModal"));
 const ButtonGroup = Button.Group;
 

@@ -1,10 +1,10 @@
-import React from "react";
+import React, { Component,Suspense,lazy } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import Button from "antd/lib/button";
 import { Tooltip } from "antd";
 import { handleTaskModal, getTaskListRangeByUserId } from "../TaskAction";
-import TaskSharedForm from "./TaskSharedForm";
+const TaskSharedForm = lazy(() => import("./TaskSharedForm"));
 
 const TaskActionRight = (props) => {
   function handleTaskRefresh() {
