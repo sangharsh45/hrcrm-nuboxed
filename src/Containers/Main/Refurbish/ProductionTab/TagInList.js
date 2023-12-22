@@ -1,13 +1,16 @@
-import React, { useEffect, useState } from 'react'
-import TagInListTable from './TagInListTable'
+import React, { useEffect, useState,lazy,Suspense } from 'react'
 import { Button, Input, Select } from 'antd';
 import { addTagInProcess } from "../RefurbishAction";
 import { bindActionCreators } from 'redux';
-// import QRCodeList from "./QrCodeList";
+import QRCodeList from "../QrCodeList";
 import { getBuilderByProId } from "../../../Product/ProductAction";
 import { connect } from 'react-redux';
+import { BundleLoader } from '../../../../Components/Placeholder';
+
+const TagInListTable=lazy(()=>import('./TagInListTable'));
 
 const { Option } = Select;
+
 const TagInList = (props) => {
     useEffect(() => {
         props.getBuilderByProId(props.RowData.productId);
@@ -104,7 +107,7 @@ cartNo: data?data:partNo,
                         })}
                     </Select>
                 </div>
-                {/* <div style={{marginTop:"21px",marginLeft:"12px"}}>
+                <div style={{marginTop:"21px",marginLeft:"12px"}}>
                 <QRCodeList
                 handleScan={handleScan}
                 stopScanning={stopScanning}
@@ -115,7 +118,7 @@ cartNo: data?data:partNo,
                 data={data}
                 shouldRenderCamera={shouldRenderCamera}
                 />
-                </div> */}
+                </div>
                 <div style={{
                     width: "35%",
                     marginLeft:"10px"
@@ -138,7 +141,10 @@ cartNo: data?data:partNo,
                     <Button type='primary' onClick={handleClick}>Add</Button>
                 </div>
             </div>
+            <Suspense fallback={<BundleLoader/>}>
             <TagInListTable RowData={props.RowData} />
+                </Suspense>
+
         </>
     )
 }

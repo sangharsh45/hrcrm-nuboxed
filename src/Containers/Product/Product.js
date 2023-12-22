@@ -7,6 +7,7 @@ import ProductHeader from "./Child/ProductHeader";
 import { handleConfigureModal, setProductViewType } from "./ProductAction";
 const ProductListingTable =lazy(()=>import("./Child/ProductTable/ProductListingTable"));
 const ProductListByGroup =lazy(()=>import("./Child/ProductTable/ProductListByGroup"));
+const ProductCardList =lazy(()=>import("./Child/ProductTable/ProductCardList"));
 // const ProductGroup = lazy(() => import("./Child/ProductGroup/ProductGroup"));
 // const ProductTable = lazy(() => import("./Child/ProductTable/ProductTable"));
 const ConfigureModal=lazy(()=>import("./Child/ConfigureModal"));
@@ -41,7 +42,7 @@ class Product extends Component {
             // this.props.viewType === "dashboard" ? (
             //   <SuspendProductList />) :
               this.props.viewType === "table" ? (
-                <ProductListByGroup />) :
+                <ProductCardList />) :
                 null}
 
         </Suspense>

@@ -1,7 +1,7 @@
 import React, { Suspense, lazy } from "react";
 import { StyledDrawer } from "../../../../Components/UI/Antd";
 import { BundleLoader } from "../../../../Components/Placeholder";
-import TagInList from "./TagInList";
+const TagInList = lazy(()=>import("./TagInList"));
 
 const TagInDrawer = (props) => {
     const { clickTagInDrawr, handleInTagDrawer,RowData, ...formProps } = props;

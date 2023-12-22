@@ -1,37 +1,18 @@
-import React, { Component,Suspense } from "react";
+import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Button, Switch } from "antd";
 import { Formik, Form, Field } from "formik";
-import { base_url, base_url2 } from "../../../Config/Auth";
+import { base_url2 } from "../../../Config/Auth";
 import { Spacer, StyledLabel } from "../../../Components/UI/Elements";
-import SearchSelect from "../../../Components/Forms/Formik/SearchSelect";
-import { DatePicker } from "../../../Components/Forms/Formik/DatePicker";
 import { InputComponent } from "../../../Components/Forms/Formik/InputComponent";
 import Upload from "../../../Components/Forms/Formik/Upload";
 import { addProduct } from "../ProductAction";
 import LazySelect from "../../../Components/Forms/Formik/LazySelect";
 import { FlexContainer } from "../../../Components/UI/Layout";
 import { TextareaComponent } from "../../../Components/Forms/Formik/TextareaComponent";
-import { getCurrency } from "../../Auth/AuthAction"
-import { SelectComponent } from "../../../Components/Forms/Formik/SelectComponent";
+import { getCurrency } from "../../Auth/AuthAction";
 import { CurrencySymbol } from "../../../Components/Common";
-import * as Yup from "yup";
-
-// const ProductSchema = Yup.object().shape({
-//   categoryName: Yup.string()
-//     .nullable()
-//     .required("Input required!"),
-//   subCategoryName: Yup.string()
-//     .nullable()
-//     .required("Input required!"),
-//   subAttributeName: Yup.string()
-//     .nullable()
-//     .required("Input required!"),
-//   attributeName: Yup.string()
-//     .nullable()
-//     .required("Input required!"),
-// });
 
 class Productform extends Component {
   constructor(props) {
