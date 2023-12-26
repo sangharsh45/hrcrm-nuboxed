@@ -4,17 +4,15 @@ import {
   getCertification,
 } from "../../../../../Settings/Recruitement/Child/Certification/CertificationAction";
 import { bindActionCreators } from "redux";
-import { Tag, Input, Tooltip, Icon } from "antd";
-import {
-  EyeInvisibleOutlined, PlusOutlined,
+import { Tag, Input, Tooltip, } from "antd";
+import { PlusOutlined,
 } from '@ant-design/icons';
-import { ViewEditCard, Title, Spacer } from "../../../../../../Components/UI/Elements";
+import { ViewEditCard, Title, } from "../../../../../../Components/UI/Elements";
 import {
   addCertificationByCandidateId,
   getCertificationByCandidateId,
   deleteCertificationByCandidateId,
 } from "../../../../CandidateAction";
-//import { getCertification } from "../../../../../Settings/Recruitement/Child/Certification/CertificationAction";
 import { Select } from "antd";
 import CertificationSelect from "./CertificationSelect";
 
@@ -100,8 +98,8 @@ class certificationLibrary extends React.Component {
       <ViewEditCard>
         {({ viewType }, toggleViewType) =>
           viewType === "view" ? (
-            <div style={{ height: "11em" }}>
-               <div style={{display:"flex"}}>
+            <div class=" h-[11em]" >
+            <div class=" flex " >
               <Title
                 fontSize="0.875em"
                 style={{ fontWeight: 600, marginBottom: "0.2rem" }}

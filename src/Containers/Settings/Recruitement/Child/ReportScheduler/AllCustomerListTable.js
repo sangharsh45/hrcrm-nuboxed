@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { StyledPopconfirm, StyledTable } from "../../../../../Components/UI/Antd";
+import { StyledTable } from "../../../../../Components/UI/Antd";
 import {getScheduler,deleteReportSchedulerInternalData} from "../../../SettingsAction";
 
 import { Popconfirm } from "antd";

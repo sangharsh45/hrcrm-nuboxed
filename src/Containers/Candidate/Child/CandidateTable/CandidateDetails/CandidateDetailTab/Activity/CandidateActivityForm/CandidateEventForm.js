@@ -1,27 +1,18 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { Button, Icon } from "antd";
-import { Formik, Form, Field, FieldArray } from "formik";
-import * as Yup from "yup";
+import { Button, } from "antd";
+import { Formik, Form, Field, } from "formik";
 import dayjs from "dayjs";
-import { Spacer } from "../../../../../../../../Components/UI/Elements";
 import { getEvents } from "../../../../../../../Settings/Event/EventAction";
 import SearchSelect from "../../../../../../../../Components/Forms/Formik/SearchSelect";
 import { InputComponent } from "../../../../../../../../Components/Forms/Formik/InputComponent";
-import AddressFieldArray from "../../../../../../../../Components/Forms/Formik/AddressFieldArray";
-import { SelectComponent } from "../../../../../../../../Components/Forms/Formik/SelectComponent";
 import { DatePicker } from "../../../../../../../../Components/Forms/Formik/DatePicker";
 import { TimePicker } from "../../../../../../../../Components/Forms/Formik/TimePicker";
 import {
   addCandidateEvent,
-  // deleteEvent,
-  // updateEvent,
-  // handleEventModal,
   getActivityListByCandidateId
 } from "../../../../../../CandidateAction";
-// import { handleChooserModal } from "../../../Planner/PlannerAction";
-import { FlexContainer } from "../../../../../../../../Components/UI/Layout";
 import { TextareaComponent } from "../../../../../../../../Components/Forms/Formik/TextareaComponent";
 import { StyledPopconfirm } from "../../../../../../../../Components/UI/Antd";
 /**
@@ -255,12 +246,8 @@ class CandidateEventForm extends Component {
             ...rest
           }) => (
             <Form className="form-background">
-              <div style={{ display: "flex", justifyContent: "space-between" }}>
-                <div
-                  style={{
-                    height: "100%",
-                    width: "45%",
-                  }}
+    <div class=" flex justify-between " >
+    <div class=" h-full w-[45%]"
                 >
                   <Field
                     isRequired
@@ -275,7 +262,8 @@ class CandidateEventForm extends Component {
                     inlineLabel
                   // defaultValue='low'
                   />
-                  <Spacer />
+              
+                  <div class=" mt-4">
                   <Field
                     isRequired
                     name="eventSubject"
@@ -285,9 +273,10 @@ class CandidateEventForm extends Component {
                     component={InputComponent}
                     inlineLabel
                   />
-                  <Spacer />
-                  <FlexContainer justifyContent="space-between">
-                    <div style={{ width: "47%" }}>
+                  </div>
+               
+                  <div class=" flex justify-between mt-4" >
+                    <div class=" w-[47%]" >
                       <Field
                         isRequired
                         name="startDate"
@@ -298,7 +287,7 @@ class CandidateEventForm extends Component {
                         inlineLabel
                       />
                     </div>
-                    <div style={{ width: "47%" }}>
+                    <div class=" w-[47%]" >
                       <Field
                         isRequired
                         name="startTime"
@@ -311,10 +300,9 @@ class CandidateEventForm extends Component {
                         style={{ width: "100%" }}
                       />
                     </div>
-                  </FlexContainer>
-                  <Spacer style={{ marginBottom: "15px" }} />
-                  <FlexContainer justifyContent="space-between">
-                    <div style={{ width: "47%" }}>
+                  </div>
+                  <div class=" flex justify-between mb-[15px] " >
+                  <div class=" w-[47%]" >
                       <Field
                         isRequired
                         name="endDate"
@@ -339,7 +327,7 @@ class CandidateEventForm extends Component {
                         }}
                       />
                     </div>
-                    <div style={{ width: "47%" }}>
+                    <div class=" w-[47%]" >
                       <Field
                         isRequired
                         name="endTime"
@@ -352,7 +340,7 @@ class CandidateEventForm extends Component {
                         style={{ width: "100%" }}
                       />
                     </div>
-                  </FlexContainer>
+                  </div>
 
                   {/* <Spacer style={{ marginBottom: "15px" }} /> */}
                   {/* <Field
@@ -378,7 +366,7 @@ class CandidateEventForm extends Component {
                       />
                     )}
                   /> */}
-                  <Spacer />
+               <div class=" mt-4">
                   {startDate ? (
                     <span>
                       {dayjs(startDate).isBefore(dayjs()) && (
@@ -396,12 +384,9 @@ class CandidateEventForm extends Component {
                       )}
                     </span>
                   )}
+                  </div>
                 </div>
-                <div
-                  style={{
-                    height: "100%",
-                    width: "45%",
-                  }}
+                <div class=" h-full w-[45%]"
                 >
                   {/* {this.props.partnerLogin === "Yes" &&
                   this.props.department === "Partner" ? (
@@ -466,7 +451,7 @@ class CandidateEventForm extends Component {
                 </div>
               </div>
               {/* <Spacer /> */}
-              <FlexContainer justifyContent="flex-end">
+              <div class=" flex justify-end" >
                 {isEditing && (
                   <>
                     <StyledPopconfirm
@@ -492,7 +477,7 @@ class CandidateEventForm extends Component {
                   Create
                   {/* {isEditing ? "Update" : "Create"} */}
                 </Button>
-              </FlexContainer>
+              </div>
             </Form>
           )}
         </Formik>

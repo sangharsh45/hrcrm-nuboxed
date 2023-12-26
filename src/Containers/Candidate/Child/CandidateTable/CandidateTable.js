@@ -52,6 +52,9 @@ const Option = Select;
 const AddEmailCandidateModal = lazy(() =>
   import("../CandidateTable/AddEmailCandidateModal")
 );
+const CountryFlag1 = lazy(() =>
+  import("../../../Settings/Category/Country/CountryFlag1")
+);
 const SkillsLoadMore = lazy(() =>
   import("../CandidateTable/SkillsLoadMore")
 );
@@ -447,7 +450,7 @@ function CandidateTable(props) {
                       ? "bisque"
                       : item.category === "Blue"
                       ? "#00afff"
-                      : item.category === "Both" && "grey",
+                      : item.category === "Both" && "#77dd77",
                 }}
               ></div>
             </Tooltip>
@@ -513,11 +516,11 @@ function CandidateTable(props) {
       width: "1%",
     },
     {
-       title:"Country",
+     
       // title: <FormattedMessage id="app.country" defaultMessage="Country" />,
       dataIndex: "country",
       align: "left",
-      width: "9%",
+      width: "4%",
       filters: CountryTypeOption,
       onFilter: (value, record) => {
         return record.country === value;
@@ -532,6 +535,17 @@ function CandidateTable(props) {
           return 1;
         }
         return 0;
+      },
+      render: (name, item, i) => {
+     
+
+        return (
+          <>
+  <CountryFlag1 countryCode={ item.address && item.address.length && item.address[0].country_alpha2_code} />
+  &nbsp;&nbsp;
+    { item.address && item.address.length && item.address[0].country_name}
+          </>
+        );
       },
     },
     {

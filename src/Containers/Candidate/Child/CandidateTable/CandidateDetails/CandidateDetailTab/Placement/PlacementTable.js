@@ -1,6 +1,6 @@
-import React, { Component,useState } from "react";
+import React, { Component} from "react";
 import { connect } from "react-redux";
-import { FormattedMessage } from "react-intl";
+import { OnlyWrapCard } from "../../../../../../../Components/UI/Layout";
 import RecruitmentStages from "../../../../../../Opportunity/Child/OpportunityDetail/OpportunityTab/Recruitment/RecruitmentStages";
 import { bindActionCreators } from "redux";
 import PlacementDetails from "./PlacementDetails"
@@ -8,19 +8,11 @@ import {  Menu,Dropdown,Button,
   Progress,Tooltip,Input } from "antd";
   import Highlighter from 'react-highlight-words';
 import { SearchOutlined } from '@ant-design/icons';
-import dayjs from "dayjs";
 import moment from "moment";
-import {
-  StyledTable,
-} from "../../../../../../../Components/UI/Antd";
-import { Link } from "../../../../../../../Components/Common";
+import { FormattedMessage } from "react-intl";
 import {
    getPlacement,
 } from "../../../../../CandidateAction";
-
-import { elipsize } from "../../../../../../../Helpers/Function/Functions";
-import APIFailed from "../../../../../../../Helpers/ErrorBoundary/APIFailed";
-import { EyeInvisibleOutlined, EyeOutlined } from "@ant-design/icons";
 import styled from "styled-components";
 import MonitorHeartIcon from '@mui/icons-material/MonitorHeart';
 function onChange(pagination, filters, sorter) {
@@ -131,298 +123,214 @@ class PlacementTable extends Component {
       //   deleteDocument,
     } = this.props;
     console.log(candidateId);
-    const columns = [
-      {
-        title: <FormattedMessage
-          id="app.jobId"
-          defaultMessage="Job ID"
-        />,
-        width: "12%",
-        dataIndex: "jobOrder",
-        ...this.getColumnSearchProps('jobOrder'),
-        sorter: (a, b) => {
-          var jobOrderA = a.jobOrder; // ignore upper and lowercase
-          var jobOrderB = b.jobOrder; // ignore upper and lowercase
-          if (jobOrderA < jobOrderB) {
-            return -1;
-          }
-          if (jobOrderA > jobOrderB) {
-            return 1;
-          }
-  
-          return 0;
-        },
-        // ...getColumnSearchProps('jobOrder'),
-       
-      },
-      {
-        title: <FormattedMessage
-          id="app.requirement"
-          defaultMessage="Requirement"
-        />,
-        dataIndex: "requirementName",
-        ...this.getColumnSearchProps('requirementName'),
-        width: "12%",
-        sorter: (a, b) => {
-          var nameA = a.requirementName; // ignore upper and lowercase
-          var nameB = b.requirementName; // ignore upper and lowercase
-          if (nameA < nameB) {
-            return -1;
-          }
-          if (nameA > nameB) {
-            return 1;
-          }
-  
-          return 0;
-        },
-      },
-      {
-        title: <FormattedMessage
-          id="app.opportunity"
-          defaultMessage="Opportunity"
-        />,
-        dataIndex: "opprtunityName",
-        width: "15%",
-        sorter: (a, b) => {
-          var nameA = a.opprtunityName; // ignore upper and lowercase
-          var nameB = b.opprtunityName; // ignore upper and lowercase
-          if (nameA < nameB) {
-            return -1;
-          }
-          if (nameA > nameB) {
-            return 1;
-          }
-  
-          return 0;
-        },
-        ...this.getColumnSearchProps('opprtunityName'),
-      },
-      {
-        title: <FormattedMessage
-          id="app.customer"
-          defaultMessage="Customer"
-        />,
-        dataIndex: "accountName",
-        width: "15%",
-        sorter: (a, b) => {
-          var nameA = a.accountName; // ignore upper and lowercase
-          var nameB = b.accountName; // ignore upper and lowercase
-          if (nameA < nameB) {
-            return -1;
-          }
-          if (nameA > nameB) {
-            return 1;
-          }
-  
-          return 0;
-        },
-        ...this.getColumnSearchProps('accountName'),
-       
-      },
-      {
-        title: "Start Date",
-        dataIndex: "avilableDate",
-        width: "10%",
-        sorter: (a, b) => {
-          var nameA = a.avilableDate; // ignore upper and lowercase
-          var nameB = b.avilableDate; // ignore upper and lowercase
-          if (nameA < nameB) {
-            return -1;
-          }
-          if (nameA > nameB) {
-            return 1;
-          }
-  
-          return 0;
-        },
-        render: (name, item, i) => {
-          return <span>{` ${moment(item.avilableDate).format("ll")}`}</span>;
-        },       
-      },
-      // {
-      //   title: <FormattedMessage
-      //     id="app.workflow"
-      //     defaultMessage="Workflow"
-      //   />,
-      //   dataIndex: "processName",
-      //   sorter: (a, b) => {
-      //     var nameA = a.processName; // ignore upper and lowercase
-      //     var nameB = b.processName; // ignore upper and lowercase
-      //     if (nameA < nameB) {
-      //       return -1;
-      //     }
-      //     if (nameA > nameB) {
-      //       return 1;
-      //     }
-  
-      //     return 0;
-      //   },
-      //    ...this.getColumnSearchProps('processName'),
-      // },
-      {
-        title: <FormattedMessage
-          id="app.callType"
-          defaultMessage="Stages"
-        />,
-        dataIndex: "callType",
-        // ...getColumnSearchProps('callType'),
-        width: "7%",
-        render: (name, item, i) => {
-          var findProbability = 0;
-          return (
-            <span>
-              <Dropdown
-                overlay={
-                  <div>
-                    <Menu mode="horizontal">
-                      <Menu.Item
-                        style={{
-                          paddingLeft: 5,
-                          paddingRight: 5,
-                          backgroundColor: "#F5F5F5",
-                        }}
-                      >
-                        <RecruitmentStages
-                        />{" "}
-                      </Menu.Item>
-                    </Menu>
-                  </div>
-                }
-                trigger={["click"]}
-              >
-                <Tooltip>
-                  {" "}
-                  <Progress
-                    type="circle"
-                    style={{ cursor: "pointer" }}
-                    width={40}
-                    strokeColor={"#005075"}
-                  />
-                </Tooltip>
-              </Dropdown>
-            </span>
-          );
-        },
-      },
-      {
-        title: "Result",
-        dataIndex: "result",
-        width: "7%",
-        sorter: (a, b) => {
-          var nameA = a.result; // ignore upper and lowercase
-          var nameB = b.result; // ignore upper and lowercase
-          if (nameA < nameB) {
-            return -1;
-          }
-          if (nameA > nameB) {
-            return 1;
-          }
-  
-          return 0;
-        },
-        // ...getColumnSearchProps('callType'),
-        
-        },
-        {
-          title: "End Date",
-          width: "10%",
-          dataIndex:"endDate",
-          sorter: (a, b) => {
-            var nameA = a.endDate; // ignore upper and lowercase
-            var nameB = b.endDate; // ignore upper and lowercase
-            if (nameA < nameB) {
-              return -1;
-            }
-            if (nameA > nameB) {
-              return 1;
-            }
-    
-            return 0;
-          },
-          render: (name, item, i) => {
-            return <span>{` ${moment(item.endDate).format("ll")}`}</span>;
-          },    
-          
-          },
-        {
-          title: "",
-          dataIndex: "callType",
-          width: "2%",
-          render: (name, item, i) => {
-            const close =
-              this.state.show === true 
-  
-            return (
-              <>
-                {/* {item.candidateName ? ( */}
-                  <>
-                    {close ? (
-                      <Tooltip //title="Close Details"
-                        title={<FormattedMessage
-                          id="app.closedetails"
-                          defaultMessage="Close Details"
-                        />}
-                      >
-                          <span
-                          onClick={() => this.handleCloseIconClick()}
-                          style={{
-                            fontSize: "1.125em",
-                            color:
-                            this.state.show === true &&
-                            this.state.profileId === item.profileId &&
-                            "#1890ff",
-                          }}
-                          size="30"
-                        >{user.pulseAccessInd ===true && ( 
-                             <PulseIcon></PulseIcon>
-                             )}
-                             </span>
-                      </Tooltip>
-                    ) :
-                     (
-                        <>
-                          <Tooltip //title="Access Details"
-                            title={<FormattedMessage
-                              id="app.accessdetails"
-                              defaultMessage="Access Details"
-                            />}
-                          >
-                  <span
-                              onClick={() =>
-                                this.handleIconClick(
-                                  item.profileId,
-                                )
-                              }
-                              style={{
-                                fontSize: "1.125em",
-                                color:
-                                  this.state.show === true &&
-                                  this.state.profileId === item.profileId &&
-                                "#1890ff",
-                                 
-                                  
-                              }}
-                              size="30"
-                            >{user.pulseAccessInd ===true && ( 
-                              <MonitorHeartIcon style={{fontSize:"1rem" ,color: "#df9697"}}/>
-                               )}
-                            </span>
-                          </Tooltip>
-                        </>
-                      )}
-                  </>
-                {/* ) : ( */}
-                    <></>
-                  {/* )} */}
-              </>
-            );
-          },
-        },
-    ];
+ 
 
     return (
       <>
-        {true && (
+   <div className=' flex justify-end sticky top-28 z-auto'>
+        <OnlyWrapCard style={{backgroundColor:"#E3E8EE"}}>
+        <div className=" flex justify-between w-[97.5%] px-2 bg-transparent font-bold sticky top-0 z-10">
+        <div className=" md:w-[10.5rem]">Job ID</div>
+       <div className=" md:w-[8.1rem]">Requirement</div>
+       <div className=" md:w-[13.1rem] ">Opportunity</div>
+       <div className=" md:w-[8.5rem] ">Customer</div>
+       <div className=" md:w-[8.2rem] ">Start Date</div>
+       <div className="md:w-[8.5rem]">Stages</div>
+       <div className="md:w-[8.5rem]">Result</div>
+       <div className=" md:w-[8.2rem] ">End Date</div>
+
+      </div>
+
+      
+      {placement.map((item) => { 
+  const close =
+  this.state.show === true 
+                    return (
+
+                      <div class="w-wk">
+                      <div class=" flex rounded-xl justify-between bg-white mt-[0.5rem]  h-[2.75rem] items-center p-3">
+                        <div class="flex">
+                          <div className=" flex font-medium flex-row md:w-[20.12rem] max-sm:flex-row w-full max-sm:justify-between ">
+                            {/* <div class=" text-sm text-cardBody font-semibold font-poppins max-sm:hidden">
+                              Name
+                            </div> */}
+       
+                            <div class=" font-normal text-[0.82rem]text-cardBody font-poppins md:w-[10.1rem]">
+                              {item.jobOrder}
+                            </div>
+                         
+       
+                          <div className=" flex font-medium flex-col md:w-[2.25rem]  max-sm:flex-row w-full mt-1 max-sm:justify-between">
+                            {/* <div class=" text-sm text-cardBody font-semibold font-poppins max-sm:hidden">
+                              Country
+                            </div> */}
+       
+                            <div class=" font-normal text-[0.82rem] text-cardBody font-poppins">
+       {item.requirementName}
+                            </div>
+                          </div>
+                      
+                        </div>
+                      
+                          <div className=" flex font-medium flex-row md:w-[9.21rem] max-sm:flex-row w-full mt-1 max-sm:justify-between">
+                            {/* <div class=" text-sm text-cardBody font-semibold font-poppins max-sm:hidden">
+                              Refurbish
+                            </div> */}
+       
+                            <div class=" font-normal text-[0.82rem] text-cardBody font-poppins">
+                          {item.opprtunityName}
+                            </div>
+                          </div>
+                          <div className=" flex font-medium flex-row md:w-[9.22rem] max-sm:flex-row w-full mt-1 max-sm:justify-between">
+                            {/* <div class=" text-sm text-cardBody font-semibold font-poppins max-sm:hidden">
+                              Inventory
+                            </div> */}
+       
+                            <div class=" font-normal text-[0.82rem] text-cardBody font-poppins">
+                         {item.accountName}
+                            </div>
+                          </div>
+                          <div className=" flex font-medium flex-row md:w-[11.12rem] max-sm:flex-row w-full mt-1 max-sm:justify-between">
+                            {/* <div class=" text-sm text-cardBody font-semibold font-poppins max-sm:hidden">
+                              Inventory
+                            </div> */}
+       
+                            <div class=" font-normal text-[0.82rem] text-cardBody font-poppins">
+                            <span>{` ${moment(item.avilableDate).format("ll")}`}</span>
+                            </div>
+                          </div>
+                          <div className=" flex font-medium flex-row md:w-[7.1rem] max-sm:flex-row w-full mt-1 max-sm:justify-between ">
+                            {/* <div class=" text-sm text-cardBody font-semibold font-poppins max-sm:hidden">
+                              Billing
+                            </div> */}
+                            <div class=" font-normal text-[0.82rem] text-cardBody font-poppins">
+                            <span>
+            <Dropdown
+              overlay={
+                <div>
+                  <Menu mode="horizontal">
+                    <Menu.Item
+                      style={{
+                        paddingLeft: 5,
+                        paddingRight: 5,
+                        backgroundColor: "#F5F5F5",
+                      }}
+                    >
+                      <RecruitmentStages
+                      />{" "}
+                    </Menu.Item>
+                  </Menu>
+                </div>
+              }
+              trigger={["click"]}
+            >
+              <Tooltip>
+                {" "}
+                <Progress
+                  type="circle"
+                  style={{ cursor: "pointer" }}
+                  width={40}
+                  strokeColor={"#005075"}
+                />
+              </Tooltip>
+            </Dropdown>
+          </span>
+                            </div>
+                          </div>
+                          <div className=" flex font-medium flex-row md:w-[7.1rem] max-sm:flex-row w-full mt-1 max-sm:justify-between ">
+                            {/* <div class=" text-sm text-cardBody font-semibold font-poppins max-sm:hidden">
+                              Billing
+                            </div> */}
+                            <div class=" font-normal text-[0.82rem] text-cardBody font-poppins">
+                            <span>
+            
+            {item.result} 
+           </span>
+                            </div>
+                          </div>
+                          <div className=" flex font-medium flex-row md:w-[7.1rem] max-sm:flex-row w-full mt-1 max-sm:justify-between ">
+                            {/* <div class=" text-sm text-cardBody font-semibold font-poppins max-sm:hidden">
+                              Billing
+                            </div> */}
+                            <div class=" font-normal text-[0.82rem] text-cardBody font-poppins">
+                            <span>{` ${moment(item.endDate).format("ll")}`}</span>
+                            </div>
+                          </div>
+                    
+                          <div class="flex flex-row w-[5%] max-sm:flex-row max-sm:w-[10%]">
+                            <div>
+                            {close ? (
+                    <Tooltip //title="Close Details"
+                      title={<FormattedMessage
+                        id="app.closedetails"
+                        defaultMessage="Close Details"
+                      />}
+                    >
+                        <span
+                        onClick={() => this.handleCloseIconClick()}
+                        style={{
+                          fontSize: "1.125em",
+                          color:
+                          this.state.show === true &&
+                          this.state.profileId === item.profileId &&
+                          "#1890ff",
+                        }}
+                        size="30"
+                      >{user.pulseAccessInd ===true && ( 
+                           <PulseIcon></PulseIcon>
+                           )}
+                           </span>
+                    </Tooltip>
+                  ) :
+                   (
+                      <>
+                        <Tooltip //title="Access Details"
+                          title={<FormattedMessage
+                            id="app.accessdetails"
+                            defaultMessage="Access Details"
+                          />}
+                        >
+                <span
+                            onClick={() =>
+                              this.handleIconClick(
+                                item.profileId,
+                              )
+                            }
+                            style={{
+                              fontSize: "1.125em",
+                              color:
+                                this.state.show === true &&
+                                this.state.profileId === item.profileId &&
+                              "#1890ff",
+                               
+                                
+                            }}
+                            size="30"
+                          >{user.pulseAccessInd ===true && ( 
+                            <MonitorHeartIcon style={{fontSize:"1rem" ,color: "#df9697"}}/>
+                             )}
+                          </span>
+                        </Tooltip>
+                      </>
+                    )}
+                            </div>
+            
+                            <div></div>
+                          </div>
+                     
+                      
+                   
+                          </div>
+                      </div>
+                    </div>
+
+
+                    )
+                })}
+      </OnlyWrapCard>
+      </div>
+
+        {/* {true && (
           <StyledTable
             pagination={false}
             scroll={{ y: 280 }}
@@ -436,7 +344,7 @@ class PlacementTable extends Component {
             onChange={console.log("task onChangeHere...")}
           />
         
-        )}
+        )} */}
           {this.state.show && (
             <PlacementDetails
                  candidateId={this.state.candidateId}

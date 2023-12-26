@@ -173,23 +173,7 @@ const CandidateActionLeft = (props) => {
  </Tooltip>  
 
 
- <Tooltip
-        title={<FormattedMessage id="app.dollar" defaultMessage="Dollar" />}
-      >
-       
-          <span
-            onClick={() => props.setCandidateViewType("dollar")}
-            style={{
-              marginRight: "0.5rem",
-              color: props.viewType === "dollar" && "#1890ff",
-              fontSize: "1.0625em",
-              cursor: "pointer",
-            }}
-          >
-            <LocalAtmIcon />
-          </span>
-       
-      </Tooltip>
+
 
       <Tooltip
         title={<FormattedMessage id="app.billableCandidate" defaultMessage="Billable Candidate" />}
@@ -316,6 +300,23 @@ const CandidateActionLeft = (props) => {
        </span>
 
  </Tooltip>
+ <Tooltip
+        title={<FormattedMessage id="app.dollar" defaultMessage="Dollar" />}
+      >
+       
+          <span
+            onClick={() => props.setCandidateViewType("dollar")}
+            style={{
+              marginRight: "0.5rem",
+              color: props.viewType === "dollar" && "#1890ff",
+              fontSize: "1.0625em",
+              cursor: "pointer",
+            }}
+          >
+            <LocalAtmIcon />
+          </span>
+       
+      </Tooltip>
       {/* {user.userType !== "USER" && user.department !== "Vendor" && ( 
         // <div style={{ fontSize: "1em", fontWeight: "bold", color: "tomato" }}>
         //   # Records - {props.recordData.candidateDetails || 0}{" "}

@@ -1,9 +1,8 @@
-import React, { lazy, Suspense, Component } from "react";
+import React, {  Suspense, Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { Button, Switch, Tooltip, Icon,Select } from "antd";
-// import { RightSquareOutlined, ToTopOutlined } from '@ant-design/icons';
-import { Formik, Form, Field, FieldArray } from "formik";
+import { Button, Switch, Tooltip,Select } from "antd";
+import { Formik, Form, Field, } from "formik";
 import { StyledDrawer } from "../../../../../../../Components/UI/Antd";
 import {
   Spacer,
@@ -17,11 +16,7 @@ import {
   addCandidateDocument,
   getCandidateDocument,
 } from "../../../../../CandidateAction";
-// import { getOppoStages, getLevels } from "../../Settings/SettingsAction";
-import { FlexContainer } from "../../../../../../../Components/UI/Layout";
 import DragableUpload from "../../../../../../../Components/Forms/Formik/DragableUpload";
-import LazySelect from "../../../../../../../Components/Forms/Formik/LazySelect";
-import { base_url } from "../../../../../../../Config/Auth";
 import { FormattedMessage } from "react-intl";
 import { getDocuments } from "../../../../../../../Containers/Settings/Documents/DocumentsAction";
 import { RightSquareOutlined, ToTopOutlined } from "@ant-design/icons";
@@ -136,11 +131,11 @@ handleTypeShare=(checked)=>{
           title={
             <FormattedMessage id="app.document" defaultMessage="Document" />
           }
-          width="65vw"
+          width="60%"
           visible={documentUploadModal}
           destroyOnClose
           maskClosable={false}
-          style={{marginTop:"5rem"}}
+          style={{marginTop:"3rem"}}
           maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}
           onClose={() => this.handleClose()}
           footer={null}
@@ -190,14 +185,9 @@ handleTypeShare=(checked)=>{
                 ...rest
               }) => (
                 <Form className="form-background">
-                  <div
-                    style={{ display: "flex", justifyContent: "space-between" }}
+                  <div class=" flex justify-between"
                   >
-                    <div
-                      style={{
-                        height: "100%",
-                        width: "45%",
-                      }}
+                    <div class=" h-full w-[45%]"
                     >
                       <Field
                         name="documentId"
@@ -210,9 +200,10 @@ handleTypeShare=(checked)=>{
                           {errors.documentId}
                         </p>
                       )}
-                      <Spacer />
-                      <FlexContainer justifyContent="space-between">
-                      <div style={{width:"47%"}}>
+               
+                      <div class=" flex justify-between mt-4"
+                  >
+                      <div class=" w-[47%]" >
                       {/* <Field
                         name="documentTypeId"
                         selectType="documentTypeName"
@@ -248,7 +239,7 @@ handleTypeShare=(checked)=>{
                         })}
                       </Select> 
                       </div>
-                      <div style={{width:"47%"}}>
+                      <div class=" w-[47%]" >
                       <Field
                         name="documentTitle"
                         //label="Name"
@@ -264,7 +255,7 @@ handleTypeShare=(checked)=>{
                        
                       />
                       </div>
-                      </FlexContainer>
+                      </div>
                       
                       {/* <StyledLabel >Sharing</StyledLabel> */}
                       {this.state.selectedDocument==="DCTP11891528829122022" && (                     
@@ -277,11 +268,7 @@ handleTypeShare=(checked)=>{
                     />
                       )}
                     </div>
-                    <div
-                      style={{
-                        height: "100%",
-                        width: "45%",
-                      }}
+                    <div class=" h-full w-[45%]"
                     >
                      <Field
                         name="documentDescription"
@@ -297,9 +284,8 @@ handleTypeShare=(checked)=>{
                         width={"100%"}
                         component={TextareaComponent}
                         />
-                      <Spacer style={{ marginBottom: "0.9375em" }} />
 
-                      <FlexContainer>
+                      <div class=" flex mb-[0.9375em]">
                         {/* <StyledLabel>Share</StyledLabel> */}
                         {/* <Switch
                           style={{ width: "6.25em", marginLeft: "0.625em" }}
@@ -308,15 +294,14 @@ handleTypeShare=(checked)=>{
                           checkedChildren="Public"
                           unCheckedChildren="Private"
                         /> */}
-                      </FlexContainer>
+                      </div>
                       <Spacer />
                       {!this.state.documentshare && this.props.testShow && (
                         <p>Will be shared with Opportunity Owner</p>
                       )}
                       <Spacer />
                       {this.state.documentshare && (
-                        <FlexContainer
-                          justifyContent="space-between"                        
+                        <div class=" flex justify-between"                   
                         >
                           {/* {organization &&
                             organization.subscriptionType ===
@@ -342,11 +327,7 @@ handleTypeShare=(checked)=>{
                           {this.state.data.map(() => {
                             return (
                               <>
-                                <div
-                                  style={{
-                                    width: "30%",
-                                   
-                                  }}
+                                <div class=" w-[30%]"
                                 >
                                   <Field
                                     inlineLabel
@@ -372,9 +353,7 @@ handleTypeShare=(checked)=>{
                                     />
                                     ,{/* Level */}
                                   </StyledLabel>
-                                  <FlexContainer
-                                    justifyContent="space-between"
-                                    style={{ marginTop: "0.25em" }}
+                                  <div class=" flex justify-between mt-[0.25em]"
                                   >
                                     <ButtonGroup>
                                       <Tooltip title="Specific">
@@ -426,12 +405,9 @@ handleTypeShare=(checked)=>{
                                         </Button>
                                       </Tooltip>{" "}
                                     </ButtonGroup>
-                                  </FlexContainer>
+                                  </div>
                                 </div>
-                                <div
-                                  style={{
-                                    width: "43%",
-                                    }}
+                                <div class=" w-[43%]"
                                 >
                                   <Field
                                     isRequired
@@ -445,13 +421,11 @@ handleTypeShare=(checked)=>{
                               </>
                             );
                           })}
-                        </FlexContainer>
+                        </div>
                       )}
                     </div>
                   </div>
-
-                  <Spacer />
-                  <FlexContainer justifyContent="flex-end">
+                  <div class=" flex justify-end mt-4" >
                     <Button
                       htmlType="submit"
                       type="primary"
@@ -463,7 +437,7 @@ handleTypeShare=(checked)=>{
                       />
                       {/* Submit */}
                     </Button>
-                  </FlexContainer>
+                  </div>
                 </Form>
               )}
             </Formik>

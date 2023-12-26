@@ -1,13 +1,12 @@
 import React, { Component, lazy, Suspense } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import CandidateDetailHeader from "./CandidateDetailHeader";
 import {
-  FlexContainer,
   MainWrapper,
 } from "../../../../../Components/UI/Layout";
 import { BundleLoader } from "../../../../../Components/Placeholder";
 import { getCandidateById } from "../../../CandidateAction";
+const CandidateDetailHeader = lazy(() => import("../CandidateDetails/CandidateDetailHeader"));
 const CandidateDetailLeft = lazy(() => import("./CandidateDetailLeft"));
 const CandidateDetailRight = lazy(() => import("./CandidateDetailRight"));
 
@@ -27,25 +26,25 @@ class CandidateDetails extends Component {
             <BundleLoader />
           </MainWrapper>
         ) : (
-          <FlexContainer>
+          <div class=" flex ">
             <Suspense fallback={""}>
-              <FlexContainer flexWrap="no-wrap" style={{ width: "100%" }}>
-                <div style={{ width: "25%" }}>
+              <div class=" flex flex-no-wrap w-full" >
+                <div class=" w-[25%]" >
                   <CandidateDetailLeft 
                   candidate ={candidate}
                   selectedLanguage={this.props.selectedLanguage}
                   />
                 </div>
-                <div style={{ width: "75%" }}>
+                <div class=" w-[75%]" >
                   <CandidateDetailRight 
                   candidate={candidate}
                   selectedLanguage={this.props.selectedLanguage}
 
                   />
                 </div>
-              </FlexContainer>
+              </div>
             </Suspense>
-          </FlexContainer>
+          </div>
         )}
       </>
     );

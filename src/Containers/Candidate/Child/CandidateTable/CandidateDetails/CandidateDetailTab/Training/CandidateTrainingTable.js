@@ -1,24 +1,19 @@
 import React, { Component,lazy } from "react";
 import { connect } from "react-redux";
-import { FormattedMessage } from "react-intl";
 import { bindActionCreators } from "redux";
 import DownloadIcon from '@mui/icons-material/Download';
-import {
-  StyledTable,
-  StyledPopconfirm,
-} from "../../../../../../../Components/UI/Antd";
+import { OnlyWrapCard } from "../../../../../../../Components/UI/Layout";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
 import moment from "moment";
+import {  Tooltip } from "antd";
 import {
   getCandidateTrainingDetails,
   setCandidateEditingTraining,
   handleUpdateCandidateTrainingModal,
-  deleteDocument,
   deleteCandidateTrainingTable,
 } from "../../../../../CandidateAction";
 import { base_url } from "../../../../../../../Config/Auth";
 import APIFailed from "../../../../../../../Helpers/ErrorBoundary/APIFailed";
-import { DownloadOutlined, EditOutlined } from "@ant-design/icons";
 const UpdateCandidateTrainingModal = lazy(()=>import("./UpdateCandidateTrainingModal"));
 
 class CandidateTrainingTable extends Component {
@@ -38,119 +33,127 @@ class CandidateTrainingTable extends Component {
       deleteCandidateTrainingTable,
     } = this.props;
 
-    const columns = [
-      {
-        title: "",
-        width: "2%",
-      },
-      {
-        //title: " Course Name",
-        title: (
-          <FormattedMessage id="app.courseName" defaultMessage=" Course Name" />
-        ),
-        dataIndex: "courseName",
-         width: "20%"
-      },
-      {
-        title: (
-          <FormattedMessage id="app.startDate" defaultMessage="Start Date" />
-        ),
-        dataIndex: "startDate",
-        width: "20%",
-        render: (name, item, i) => {
-          return <span>{moment(item.startDate).format("LL")}</span>;
-        },
-      },
-      {
-        title: <FormattedMessage id="app.endDate" defaultMessage="End Date" />,
-        dataIndex: "endDate",
-        width: "20%",
-        render: (name, item, i) => {
-          return <span>{moment(item.endDate).format("LL")}</span>;
-        },
-       },
-      {
-        // title: "Organization/Institution",
-        title: (
-          <FormattedMessage
-            id="app.organization"
-            defaultMessage="Organization/Institution"
-          />
-        ),
-        dataIndex: "organization",
-        width: "20%"
-      },
-      {
-        title: <FormattedMessage id="app.grade" defaultMessage="Grade" />,
-        dataIndex: "grade",
-        width:"10%",
-      },
-      {
-        title: "",
-        dataIndex: "documentId",
-        width: "2%",
-        render: (name, item, i) => {
-          return (
-            <>
-              {/* {item.documentId ? ( */}
-                <a
-                  href={`${base_url}/document/${item.documentId}`}
-                  target="_blank"
-                >
-                  <DownloadIcon
-                    type="download"
-                    style={{ cursor: "pointer",fontSize:"0.8rem" }}
-                  />
-                </a>
-              {/* ) : null} */}
-            </>
-          );
-        },
-      },
-
-      {
-        title: "",
-        dataIndex: "documentId",
-        render: (name, item, i) => {
-          //debugger
-          return (
-            <BorderColorIcon
-              type="edit"
-              style={{ cursor: "pointer" ,fontSize:"0.8rem"}}
-              onClick={() => {
-                setCandidateEditingTraining(item);
-                handleUpdateCandidateTrainingModal(true);
-              }}
-            />
-          );
-        },
-      },
-      
-      // {
-      //   title: "",
-      //   dataIndex: "id",
-      //   width: "2%",
-      //   render: (name, item, i) => {
-      //     return (
-      //       <StyledPopconfirm
-      //         title="Do you want to delete?"
-      //         onConfirm={() => deleteCandidateTrainingTable(item.id)}
-      //       >
-      //         <Icon type="delete" style={{ cursor: "pointer", color: "red" }} />
-      //         {/* <Button type="primary" className='edit_hover_class' icon="delete"  /> */}
-      //       </StyledPopconfirm>
-      //     );
-      //   },
-      // },
-    ];
+  
 
     if (fetchingCandidateTrainingDetailsError) {
       return <APIFailed />;
     }
     return (
       <>
+         <div className=' flex justify-end sticky top-28 z-auto'>
+        <OnlyWrapCard style={{backgroundColor:"#E3E8EE"}}>
+        <div className=" flex justify-between w-[97.5%] px-2 bg-transparent font-bold sticky top-0 z-10">
+        <div className=" md:w-[10.5rem]">Course Name</div>
+       <div className=" md:w-[8.1rem] ">Start Date</div>
+       <div className=" md:w-[8.5rem] ">End Date</div>
+       <div className=" md:w-[8.2rem] ">Organization/Institution</div>
+       <div className="md:w-[8.5rem]">Grade</div>
+
+      </div>
+
+      
+      {training.map((item) => { 
+
+                    return (
+                      <div class="w-wk">
+                      <div class=" flex rounded-xl justify-between bg-white mt-[0.5rem]  h-[2.75rem] items-center p-3">
+                        <div class="flex">
+                          <div className=" flex font-medium flex-row md:w-[12.12rem] max-sm:flex-row w-full max-sm:justify-between ">
+                            {/* <div class=" text-sm text-cardBody font-semibold font-poppins max-sm:hidden">
+                              Name
+                            </div> */}
+       
+                            <div class=" font-normal text-[0.82rem]text-cardBody font-poppins md:w-[10.1rem]">
+                              {item.courseName}
+                            </div>
+                         
+       
+                   
+                      
+                        </div>
+                      
+                          <div className=" flex font-medium flex-row md:w-[9.21rem] max-sm:flex-row w-full mt-1 max-sm:justify-between">
+                            {/* <div class=" text-sm text-cardBody font-semibold font-poppins max-sm:hidden">
+                              Refurbish
+                            </div> */}
+       
+                            <div class=" font-normal text-[0.82rem] text-cardBody font-poppins">
+                            {moment(item.startDate).format("LL")}
+                            </div>
+                          </div>
+                          <div className=" flex font-medium flex-row md:w-[15.22rem] max-sm:flex-row w-full mt-1 max-sm:justify-between">
+                            {/* <div class=" text-sm text-cardBody font-semibold font-poppins max-sm:hidden">
+                              Inventory
+                            </div> */}
+       
+                            <div class=" font-normal text-[0.82rem] text-cardBody font-poppins">
+                            {moment(item.endDate).format("LL")}
+                            </div>
+                          </div>
+                          <div className=" flex font-medium flex-row md:w-[11.12rem] max-sm:flex-row w-full mt-1 max-sm:justify-between">
+                            {/* <div class=" text-sm text-cardBody font-semibold font-poppins max-sm:hidden">
+                              Inventory
+                            </div> */}
+       
+                            <div class=" font-normal text-[0.82rem] text-cardBody font-poppins">
+                        
+                  
+                  {item.organization}
+               
+                            </div>
+                          </div>
+                          <div className=" flex font-medium flex-row md:w-[7.1rem] max-sm:flex-row w-full mt-1 max-sm:justify-between ">
+                            {/* <div class=" text-sm text-cardBody font-semibold font-poppins max-sm:hidden">
+                              Billing
+                            </div> */}
+                            <div class=" font-normal text-[0.82rem] text-cardBody font-poppins">
+                         {item.grade}
+                            </div>
+                          </div>
+                    
+                          <div class="flex flex-row w-[5%] max-sm:flex-row max-sm:w-[10%]">
+                            <div>
+                            <a
+                href={`${base_url}/document/${item.documentId}`}
+                target="_blank"
+              >
+                <DownloadIcon
+                  type="download"
+                  style={{ cursor: "pointer",fontSize:"0.8rem" }}
+                />
+              </a>
+                            </div>
+            
+                            <div></div>
+                          </div>
+                     
+                      
+                          <div class="flex flex-row w-[5%] max-sm:flex-row max-sm:w-[10%]">
+                            <div>
+                              <Tooltip title="Edit">
+                                <BorderColorIcon
+                                  style={{ cursor: "pointer", fontSize: "1rem" }}
+                                  onClick={() => {
+                                    setCandidateEditingTraining(item);
+                                    handleUpdateCandidateTrainingModal(true);
+                                  }}
+                                />
+                              </Tooltip>
+                            </div>
+                       
+                            <div></div>
+                          </div>
+                          </div>
+                      </div>
+                    </div>
+
+
+                    )
+                })}
+      </OnlyWrapCard>
+      </div>
         {/* {emailCredential && ( */}
-        <StyledTable
+        {/* <StyledTable
           columns={columns}
           dataSource={training}
           Loading={
@@ -160,7 +163,7 @@ class CandidateTrainingTable extends Component {
           scroll={{ y: 280 }}
           pagination={false}
           onChange={console.log("task onChangeHere...")}
-        />
+        /> */}
         <UpdateCandidateTrainingModal
           updateCandidateTrainingModal={updateCandidateTrainingModal}
           handleUpdateCandidateTrainingModal={
