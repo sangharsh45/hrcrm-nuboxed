@@ -1,7 +1,7 @@
-import React, { Suspense } from "react";
+import React, { Suspense,lazy } from "react";
 import { BundleLoader } from "../../../Components/Placeholder";
 import { StyledDrawer } from "../../../Components/UI/Antd";
-import UpdateAccountForm from "./UpdateAccountForm";
+const UpdateAccountForm =lazy(()=>import("./UpdateAccountForm"));
 
 
 const UpdateAccountModal = (props) => {

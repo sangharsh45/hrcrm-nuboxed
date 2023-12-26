@@ -1,20 +1,17 @@
-import React, { lazy, Suspense, Component } from "react";
+import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { Button, Switch, Tooltip, Icon, Checkbox } from "antd";
+import { Button,Checkbox } from "antd";
 import { Formik, Form, Field, FieldArray, FastField } from "formik";
 import { Spacer, StyledLabel } from "../../../Components/UI/Elements";
 import { InputComponent } from "../../../Components/Forms/Formik/InputComponent";
 import { TextareaComponent } from "../../../Components/Forms/Formik/TextareaComponent";
 import * as Yup from "yup";
 import { getCountry } from "../../../Containers/Settings/Category/Country/CountryAction";
-// import { getCurrency } from "../../../Auth/AuthAction"
 import AddressFieldArray from "../../../Components/Forms/Formik/AddressFieldArray";
 import { FlexContainer } from "../../../Components/UI/Layout";
-// import { getCustomer } from "../../../Settings/Category/CategoryAction"
 import SearchSelect from "../../../Components/Forms/Formik/SearchSelect";
 import { SelectComponent } from "../../../Components/Forms/Formik/SelectComponent";
-// import Flag from "../../../Components/Forms/Formik/Flag";
 import { updateDistributor } from "./AccountAction";
 const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-])|(\\([0-9]{2,3}\\)[ \\-])|([0-9]{2,4})[ \\-])?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
 const DistributorSchema = Yup.object().shape({

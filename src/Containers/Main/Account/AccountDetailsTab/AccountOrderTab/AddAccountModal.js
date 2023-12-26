@@ -1,12 +1,10 @@
 import React, { Component } from "react";
-import { Tabs, Icon, Button } from "antd";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { StyledDrawer, StyledModal } from "../../../../../Components/UI/Antd";
+import { StyledDrawer } from "../../../../../Components/UI/Antd";
 import { StyledTabs } from "../../../../../Components/UI/Antd";
 import AccountStepper from "./AccountStepper";
 
-const TabPane = StyledTabs.TabPane;
 class AddAccountModal extends Component {
     render() {
         const { addLinkDistributorOrderConfigureModal, handleLinkDistributorOrderConfigureModal } = this.props;

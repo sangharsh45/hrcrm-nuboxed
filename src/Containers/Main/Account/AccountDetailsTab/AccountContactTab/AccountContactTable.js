@@ -1,11 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import {
-    StyledTable,
-} from "../../../../../Components/UI/Antd";
-import {
-    getContactDistributorList,
+import { getContactDistributorList,
     setEditDistributorContact,
     applyForLoginInContact,
     handleUpdateDistributorContactModal
@@ -76,15 +72,11 @@ class AccountContactTable extends Component {
                     return (
                         <div>
                             <div className="flex rounded-xl justify-between mt-2 bg-white h-12 items-center p-3 "
-                                // style={{
-                                //     borderBottom: "3px dotted #515050"
-                                // }}
                                 >
                                    <div class="flex">
                                     
                                 <div className=" flex font-medium flex-col  md:w-[10rem] max-sm:flex-row w-full max-sm:justify-between  ">
                            
-                           {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden"> Sector </h4> */}
                            <h4 class=" text-xs text-cardBody font-poppins">   
                            {`${item.salutation || ""} ${item.firstName || ""} ${
                               item.middleName || ""
@@ -96,7 +88,7 @@ class AccountContactTable extends Component {
 
                                 <div className=" flex font-medium flex-col  md:w-28 max-sm:flex-row w-full max-sm:justify-between  ">
                            
-                                    {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden"> Sector </h4> */}
+                             
                                     <h4 class=" text-xs text-cardBody font-poppins">   
                                     {item.emailId} 
                                     </h4>
@@ -106,15 +98,14 @@ class AccountContactTable extends Component {
                                 </div>
                               
                                 <div className=" flex font-medium flex-col md:w-[16rem] max-sm:flex-row w-full max-sm:justify-between ">
-                                    {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden"># Opportunity</h4> */}
-
+                                  
                                     <div class=" text-xs text-cardBody font-poppins text-center">
                                     {` ${item.dialCode1 || ""} ${item.mobileNo || ""} `}
 
                                     </div>
                                 </div>
                                 <div className=" flex font-medium flex-col md:w-0 max-sm:flex-row w-full max-sm:justify-between ">
-                                    {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden">Pipeline Value</h4> */}
+                                   
 
                                     <div class=" text-xs text-cardBody font-poppins text-center">
                                     {item.designationName}
@@ -123,7 +114,7 @@ class AccountContactTable extends Component {
                                 </div>
                                
                                 <div className=" flex font-medium flex-col md:w-96 max-sm:flex-row w-full max-sm:justify-between ">
-                                    {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden">Weighted Value</h4> */}
+                                   
 
                                     <div class=" text-xs text-cardBody font-poppins text-center">
                                     {item.departmentName}
@@ -135,7 +126,7 @@ class AccountContactTable extends Component {
                                 <div class="flex">
                                 <div className=" flex font-medium flex-col  md:w-28 max-sm:flex-row w-full max-sm:justify-between  ">
                            
-                           {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden"> Sector </h4> */}
+                          
                            <h4 class=" text-xs text-cardBody font-poppins">   
                            <Button
                         onClick={() =>
@@ -152,7 +143,7 @@ class AccountContactTable extends Component {
                        </div> 
                        <div className=" flex font-medium flex-col  md:w-28 max-sm:flex-row w-full max-sm:justify-between  ">
                            
-                           {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden"> Sector </h4> */}
+                          
                            <h4 class=" text-xs text-cardBody font-poppins">   
                            <Tooltip title="Edit">
                     <BorderColorIcon
@@ -175,21 +166,10 @@ class AccountContactTable extends Component {
 
                     )
                 })}
-                {/* </InfiniteScroll> */}
+        
       </OnlyWrapCard>
       </div>
-                {/* {true && (
-                    <StyledTable
-                        rowKey="contactPersonId"
-                        columns={columns}
-                        dataSource={this.props.contactDistributor}
-                        Loading={this.props.fetchingContactDistributorsById}
-                        onChange={console.log("task onChangeHere...")}
-                        scroll={{ y: tableHeight }}
-                        pagination={false}
-
-                    />
-                )} */}
+                
                 <UpdateAccountContactModal
                     handleUpdateDistributorContactModal={this.props.handleUpdateDistributorContactModal}
                     updateDistributorContactModal={this.props.updateDistributorContactModal}
