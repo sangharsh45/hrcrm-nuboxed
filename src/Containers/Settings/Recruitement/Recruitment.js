@@ -16,11 +16,13 @@ import SkillsTab from "../Library/SkillsTab";
 import ApprovalTab from "./Child/Approval/ApprovalTab";
 import SettingsHolidayTab from "./Child/Holiday/SettingsHolidayTab";
 import LeadsTab from "../../Rules/Child/RulesTab/LeadsTab";
-import LeadsConfigTab from "../LeadsConfig/LeadsConfigTab";
 import DistributionTab from "./Child/DistributionTab/DistributionTab";
 import FinanceTab from "./Child/FinanceTab/FinanceTab";
 
 const RecruitmentActionLeft = lazy(() => import("./RecruitmentActionLeft"));
+const ReportScheduler = lazy(() =>
+  import("../Recruitement/Child/ReportScheduler/ReportScheduler")
+);
 
 function Recruitment(props) {
   const name = [
@@ -57,21 +59,16 @@ function Recruitment(props) {
       component: <SettingsHolidayTab />,
     },
     // {
-    //   rulesName: "Leads",
-    //   ruleId: "21",
-    //   component: <LeadsConfigTab/>,
-    // },
-    // {
     //   rulesName: "Notification",
     //   ruleId: "15",
     //   component: <NotificationsTab />,
     // },
     
-    // {
-    //   rulesName: "Report Scheduler",
-    //   ruleId: "8",
-    //   component: <ReportScheduler />,
-    // },
+    {
+      rulesName: "Report Scheduler",
+      ruleId: "8",
+      component: <ReportScheduler />,
+    },
     {
       rulesName: "Rules",
       ruleId: "20",

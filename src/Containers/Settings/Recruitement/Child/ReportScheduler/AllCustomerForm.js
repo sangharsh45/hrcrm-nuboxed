@@ -1,4 +1,4 @@
-import React,{ useEffect } from "react";
+import React,{ } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Button } from "antd";
@@ -44,17 +44,17 @@ function AllCustomerForm(props) {
         }) => (
           <Form className="form-background">
             <MainWrapper>
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "space-evenly",
-                  height: "100%",
-                  width: "100%",
-                  alignItems: "end",
-                }}
+              <div class=" flex justify-evenly h-full w-full items-end"
+                // style={{
+                //   display: "flex",
+                //   justifyContent: "space-evenly",
+                //   height: "100%",
+                //   width: "100%",
+                //   alignItems: "end",
+                // }}
               >
                 
-                <div style={{ width: "20%" }}  >           
+                <div class=" w-[20%]"  >           
                  
                   <Field
                     name="type"                   
@@ -67,7 +67,7 @@ function AllCustomerForm(props) {
                     inlineLabel
                   />
                 </div>
-                <div style={{ width: "20%" }}  > 
+                <div class=" w-[20%]"  >   
                   <Field
                     name="frequency"
                     label="Frequency"
@@ -81,11 +81,7 @@ function AllCustomerForm(props) {
                   
                 </div>  
               
-                <div
-                  style={{               
-                    width: "8%",
-                  }}
-                >
+                <div class=" w-[8%]"  >   
                   <Button
                     type="primary"
                     htmlType="submit"

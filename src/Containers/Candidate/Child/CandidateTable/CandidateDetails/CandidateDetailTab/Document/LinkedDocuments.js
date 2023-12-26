@@ -1,29 +1,20 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { FormattedMessage } from "react-intl";
+import DeleteIcon from '@mui/icons-material/Delete';
 import { bindActionCreators } from "redux";
-import { Icon } from "antd";
 import moment from "moment";
-import dayjs from "dayjs";
 import { base_url } from "../../../../../../../Config/Auth";
-import { BundleLoader } from "../../../../../../../Components/Placeholder";
 import {
-  StyledTable,
   StyledPopconfirm,
 } from "../../../../../../../Components/UI/Antd";
-import {
-  MultiAvatar,
-  SubTitle,
-} from "../../../../../../../Components/UI/Elements";
-import { Link } from "../../../../../../../Components/Common";
+import { OnlyWrapCard } from "../../../../../../../Components/UI/Layout";
 import {
   getCandidateDocument,
   deleteDocument,
 } from "../../../../../CandidateAction";
 import DownloadIcon from '@mui/icons-material/Download';
 import { elipsize } from "../../../../../../../Helpers/Function/Functions";
-import APIFailed from "../../../../../../../Helpers/ErrorBoundary/APIFailed";
-import { DeleteOutlined, DownloadOutlined } from "@ant-design/icons";
+import { DeleteOutlined, } from "@ant-design/icons";
 
 class LinkedDocuments extends Component {
   componentDidMount() {
@@ -40,145 +31,113 @@ class LinkedDocuments extends Component {
       fetchingDocumentsByCandidateIdError,
         deleteDocument,
     } = this.props;
-    const columns = [
-      {
-        //title: "Date",
-        title: <FormattedMessage
-          id="app.date"
-          defaultMessage="Date"
-        />,
-        dataIndex: "creationDate",
-        render: (name, item, i) => {
-          return <span>{` ${moment(item.creationDate).format("ll")}`}</span>;
-        },
-      },
-      {
-        //title: "Name",
-        title: <FormattedMessage
-          id="app.name"
-          defaultMessage="Name"
-        />,
-        dataIndex: "documentTitle",
-        onFilter: (value, record) => record.taskSubject.indexOf(value) === 0,
-        sorter: (a, b) => a.taskSubject.length - b.taskSubject.length,
-      },
-      // {
-      //   title: "Description",
-      //   dataIndex: "documentDescription",
-      //   onFilter: (value, record) => record.taskType.indexOf(value) === 0,
-      //   sorter: (a, b) => a.taskType.length - b.taskType.length
-      // },
-      {
-        //title: "Description",
-        title: <FormattedMessage
-          id="app.type"
-          defaultMessage="Type"
-        />,
-        dataIndex: "documentContentType",
-        width: "20%",
-        render: (name, item, i) => {
-          console.log(item);
-          return <span>{elipsize(item.documentContentType || "", 15)}</span>;
-        },
-        onFilter: (value, record) => record.taskType.indexOf(value) === 0,
-        sorter: (a, b) => a.taskType.length - b.taskType.length,
-      },
-      {
-        //title: "Uploaded By",
-        title: <FormattedMessage
-          id="app.uploadedBy"
-          defaultMessage="Uploaded By"
-        />,
-        dataIndex: "uploadedBy",
-        // onFilter: (value, record) => record.taskType.indexOf(value) === 0,
-        // sorter: (a, b) => a.taskType.length - b.taskType.length
-      },
-      // {
-      //   // title: "Circulation",
-      //   title: <FormattedMessage
-      //     id="app.circulation"
-      //     defaultMessage="Circulation"
-      //   />,
-      //   render: (name, item, i) => {
-      //     debugger;
 
-      //     if (item.levelType && item.levelType === "Above") {
-      //       return (
-      //         <SubTitle style={{ height: "0.3125em", marginBottom: "0.75em" }}>
-      //           {item.type === "confidential"
-      //             ? "Private"
-      //             : `${item.type || ""} (${item.department || ""})
-      //             (${item.documentLevel[0] || ""}
-      //             `}
-      //           <Icon type="to-top" />)
-      //         </SubTitle>
-      //       );
-      //     } else {
-      //       debugger;
-      //       return (
-      //         <SubTitle style={{ height: "0.3125em", marginBottom: "0.75em" }}>
-      //           {item.type === "confidential"
-      //             ? "Private"
-      //             : `${item.type || ""} (${item.department || ""})(${item
-      //               .documentLevel[0] || ""})`}{" "}
-      //           &nbsp;
-      //         </SubTitle>
-      //       );
-      //     }
-      //   },
-
-      //   onFilter: (value, record) => record.taskType.indexOf(value) === 0,
-      //   sorter: (a, b) => a.taskType.length - b.taskType.length,
-      // },
-      // {
-      //     title: 'Stage',
-      //     dataIndex: 'documentDescription',
-      //     onFilter: (value, record) => record.taskType.indexOf(value) === 0,
-      //     sorter: (a, b) => a.taskType.length - b.taskType.length,
-      // },
-      {
-        title: "",
-        // dataIndex: "documentTypeId",
-        width: "5%",
-        render: (name, item, i) => {
-          return (
-            <a
-              href={`${base_url}/document/${item.documentId}`}
-             //target="_blank"
-            >
-              <DownloadIcon
-                type="download"
-                style={{ cursor: "pointer",fontSize:"0.8rem" }}
-              />
-            </a>
-          );
-        },
-      },
-      {
-        title: "",
-        // dataIndex: "documentTypeId",
-        dataIndex: "documentId",
-        width: "5%",
-        render: (name, item, i) => {
-          return (
-            <StyledPopconfirm
-              title="Do you want to delete?"
-            // onConfirm={() => deleteDocument(item.documentTypeId)}
-            onConfirm={() => deleteDocument(item.documentId)}
-           >
-              <DeleteOutlined type="delete" style={{ cursor: "pointer", color: "red" }} />
-            </StyledPopconfirm>
-          );
-        },
-      },
-    ];
 
     // if (fetchingDocumentsByCandidateIdError) {
     //   return <APIFailed />;
     // }
     return (
       <>
-        {true && (
+           <div className=' flex justify-end sticky top-28 z-auto'>
+        <OnlyWrapCard style={{backgroundColor:"#E3E8EE"}}>
+        <div className=" flex justify-between w-[97.5%] px-2 bg-transparent font-bold sticky top-0 z-10">
+        <div className=" md:w-[2.5rem]">Date</div>
+       <div className=" md:w-[1.1rem]">Name</div>
+       <div className=" md:w-[2.1rem] ">Type</div>
+       <div className=" md:w-[25.5rem] ">Uploaded By</div>
+
+      </div>
+
+      
+      {documentsByCandidateId.map((item) => { 
+
+                    return (
+                      <div class="w-wk">
+                      <div class=" flex rounded-xl justify-between bg-white mt-[0.5rem]  h-[2.75rem] items-center p-3">
+                        <div class="flex">
+                          <div className=" flex font-medium flex-row md:w-[20.12rem] max-sm:flex-row w-full max-sm:justify-between ">
+                            {/* <div class=" text-sm text-cardBody font-semibold font-poppins max-sm:hidden">
+                              Name
+                            </div> */}
+       
+                            <div class=" font-normal text-[0.82rem]text-cardBody font-poppins md:w-[10.1rem]">
+                            <span>{` ${moment(item.creationDate).format("ll")}`}</span>
+                            </div>
+                         
+       
+                          <div className=" flex font-medium flex-col md:w-[2.25rem]  max-sm:flex-row w-full mt-1 max-sm:justify-between">
+                            {/* <div class=" text-sm text-cardBody font-semibold font-poppins max-sm:hidden">
+                              Country
+                            </div> */}
+       
+                            <div class=" font-normal text-[0.82rem] text-cardBody font-poppins">
+       {item.documentTitle}
+                            </div>
+                          </div>
+                      
+                        </div>
+                      
+                          <div className=" flex font-medium flex-row md:w-[9.21rem] max-sm:flex-row w-full mt-1 max-sm:justify-between">
+                            {/* <div class=" text-sm text-cardBody font-semibold font-poppins max-sm:hidden">
+                              Refurbish
+                            </div> */}
+       
+                            <div class=" font-normal text-[0.82rem] text-cardBody font-poppins">
+                            <span>{elipsize(item.documentContentType || "", 15)}</span>
+                            </div>
+                          </div>
+                          <div className=" flex font-medium flex-row md:w-[9.22rem] max-sm:flex-row w-full mt-1 max-sm:justify-between">
+                            {/* <div class=" text-sm text-cardBody font-semibold font-poppins max-sm:hidden">
+                              Inventory
+                            </div> */}
+       
+                            <div class=" font-normal text-[0.82rem] text-cardBody font-poppins">
+{item.uploadedBy}
+                            </div>
+                          </div>
+                        
+                    
+                          <div class="flex flex-row w-[5%] max-sm:flex-row max-sm:w-[10%]">
+                            <div>
+                            <a
+            href={`${base_url}/document/${item.documentId}`}
+           //target="_blank"
+          >
+            <DownloadIcon
+              type="download"
+              style={{ cursor: "pointer",fontSize:"0.8rem" }}
+            />
+          </a>
+                            </div>
+            
+                            <div></div>
+                          </div>
+                     
+                      
+                          <div class="flex flex-row w-[5%] max-sm:flex-row max-sm:w-[10%]">
+                          <div>
+                        <StyledPopconfirm
+            title="Do you want to delete?"
+            onConfirm={() => deleteDocument(item.documentId)}
+          >
+            
+      <DeleteIcon type="delete" style={{ cursor: "pointer",fontSize:"1rem", color: "red" }} />
+
+          </StyledPopconfirm>
+                        </div>
+                       
+                            <div></div>
+                          </div>
+                          </div>
+                      </div>
+                    </div>
+
+
+                    )
+                })}
+      </OnlyWrapCard>
+      </div>
+        {/* {true && (
           <StyledTable
             // rowSelection={rowSelection}
             pagination={false}
@@ -196,7 +155,7 @@ class LinkedDocuments extends Component {
             }
             onChange={console.log("task onChangeHere...")}
           />
-        )}
+        )} */}
       </>
     );
   }

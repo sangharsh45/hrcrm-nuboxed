@@ -4,9 +4,8 @@ import {
   getLibrarys,
 } from "../../../../../Settings/Library/LibraryAction";
 import { bindActionCreators } from "redux";
-import { Tag, Input, Tooltip, Icon } from "antd";
-import {
-  EyeInvisibleOutlined, PlusOutlined,
+import { Tag, Input, Tooltip, } from "antd";
+import { PlusOutlined,
 } from '@ant-design/icons';
 import { ViewEditCard, Title, Spacer } from "../../../../../../Components/UI/Elements";
 import {
@@ -129,8 +128,8 @@ class CandidateTopicOfInterest extends React.Component {
       <ViewEditCard>
         {({ viewType }, toggleViewType) =>
           viewType === "view" ? (
-            <div style={{ height: "11em"}}>
-              <div style={{display:"flex"}}>
+            <div class=" h-[11em]" >
+              <div class=" flex " >
               <Title
                 fontSize="0.875em"
                 style={{ fontWeight: 600, marginBottom: "0.2rem" }}

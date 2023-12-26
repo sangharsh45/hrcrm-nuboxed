@@ -1,4 +1,4 @@
-import React, { useEffect,Suspense } from "react";
+import React, { useEffect,Suspense,lazy } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Button } from "antd";
@@ -6,10 +6,9 @@ import { MainWrapper } from "../../../../../../../Components/UI/Elements";
 import { Formik, Form, Field } from "formik";
 import { SelectComponent } from "../../../../../../../Components/Forms/Formik/SelectComponent";
 import { InputComponent } from "../../../../../../../Components/Forms/Formik/InputComponent";
-import dayjs from "dayjs";
-import ExperienceTable from "./ExperienceTable";
 import {getTopicsByCandidateId,addExperienceByCandidateId,updateExperienceByCandidateId} from "../../../../../CandidateAction";
 import * as Yup from "yup";
+const ExperienceTable = lazy(()=>import("../Experience/ExperienceTable"));
 
 const expRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
 const experienceSchema = Yup.object().shape({
@@ -60,19 +59,9 @@ function ExperienceForm(props) {
         }) => (
           <Form className="form-background">
             <MainWrapper>
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "space-evenly",
-                  height: "100%",
-                  width: "100%",
-                  alignItems: "center",
-                }}
+              <div class=" flex justify-evenly h-full w-full items-center"
               >            
-                <div
-                  style={{                  
-                    width: "15%",                   
-                  }}
+                <div class=" w-[15%]"
                 >
                   <Field
                     name="skillSetDetailsId"
@@ -91,10 +80,7 @@ function ExperienceForm(props) {
                     inlineLabel
                   />
                 </div>
-                <div
-                  style={{              
-                    width: "15%",                  
-                  }}
+                <div class=" w-[15%]"
                 >
                   <Field
                     name="experience"
@@ -106,10 +92,7 @@ function ExperienceForm(props) {
                     inlineLabel
                   />
                 </div>
-                <div
-                  style={{                   
-                    width: "8%",
-                  }}
+                <div class=" w-[8%]"
                 >
                   <Button
                     type="primary"

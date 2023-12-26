@@ -2,16 +2,14 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { FormattedMessage } from "react-intl";
 import { bindActionCreators } from "redux";
-import { Button, Icon } from "antd";
-import { Formik, Form, Field } from "formik";
+import { Button, } from "antd";
+import { Formik, Form, } from "formik";
 import * as Yup from "yup";
 import { Editor } from "react-draft-wysiwyg";
-import { EditorState, convertToRaw, ContentState } from "draft-js";
+import { EditorState, convertToRaw, } from "draft-js";
 import draftToHtml from "draftjs-to-html";
-import { TextareaComponent } from "../../../../../../../Components/Forms/Formik/TextareaComponent";
 import { addNote } from "../../../../../CandidateAction";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
-import { FlexContainer } from "../../../../../../../Components/UI/Layout";
 
 /**
  * yup validation scheme for creating a note
@@ -143,7 +141,7 @@ class NoteForm extends Component {
                   // editorState={editorState}
                   toolbar={toolbarOption}
                 />
-                <FlexContainer justifyContent="flex-end">
+                <div class=" flex justify-end" >
                   <Button
                     type="primary"
                     htmlType="submit"
@@ -163,7 +161,7 @@ class NoteForm extends Component {
                     />
                     {/* Post */}
                   </Button>
-                </FlexContainer>
+                </div>
               </Form>
             );
           }}

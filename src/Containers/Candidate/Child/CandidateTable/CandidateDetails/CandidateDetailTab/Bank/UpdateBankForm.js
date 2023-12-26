@@ -1,13 +1,11 @@
-import React, { lazy, Suspense, Component, Profiler } from "react";
+import React, {  Component, } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { Button, Switch, Tooltip, Icon } from "antd";
-import { Formik, Form, Field, FieldArray, FastField } from "formik";
-import { Spacer, StyledLabel } from "../../../../../../../Components/UI/Elements";
+import { Button, Switch, } from "antd";
+import { Formik, Form, FastField } from "formik";
+import { StyledLabel } from "../../../../../../../Components/UI/Elements";
 import { InputComponent } from "../../../../../../../Components/Forms/Formik/InputComponent";
-import { TextareaComponent } from "../../../../../../../Components/Forms/Formik/TextareaComponent";
 import * as Yup from "yup";
-import { FlexContainer } from "../../../../../../../Components/UI/Layout";
 import { updateBankDetails } from "../../../../../CandidateAction";
 import { FormattedMessage } from "react-intl";
 const documentSchema = Yup.object().shape({
@@ -61,41 +59,76 @@ class UpdateBankForm extends Component {
             ...rest
           }) => (
             <Form className="form-background">
-              <div
-                style={{
-                  width: "100%",
-                  // margin: "0.9375em 3.125em",
-                  // border: "0.125em solid green"
-                }}
-              >
-                <FlexContainer>
-                <div style={{ width: "47%" }}>
+            <div class=" w-full"
+            >
+               <div class=" flex justify-between" >
+               <div class=" w-[47%]"
+            >
+                <FastField
+                  name="accountHolderName"
+                  //label="Account Number"
+                  label={
+                    <FormattedMessage
+                      id="app.accountHolderName"
+                      defaultMessage="Account Holder Name"
+                    />
+                  }
+                  isColumn
+                  width={"100%"}
+                  
+                  component={InputComponent}
+                  inlineLabel
+                  />
+              </div>
+              
+              <div class=" w-[47%]"
+            >
+                <FastField
+                  name="accountNo"
+                  //label="Account Number"
+                  label={
+                    <FormattedMessage
+                      id="app.accountNo"
+                      defaultMessage="Account #"
+                    />
+                  }
+                  isColumn
+                  width={"100%"}
+                  selectType="number"
+                  component={InputComponent}
+                  inlineLabel
+                  />
+              </div>
+              </div>
+              <div class=" flex justify-between mt-4" >
+               <div class=" w-[47%]"
+            >
                   <FastField
-                    name="accountNo"
-                    // label="Account Number"
+                    name="ifscCode"
+                    //label="IFSC CODE"
                     label={
                       <FormattedMessage
-                        id="app.accountNo"
-                        defaultMessage="Account #"
+                        id="app.swiftCode"
+                        defaultMessage="SWIFT Code"
                       />
                     }
+                    className="field"
                     isColumn
-                    // margintop={"0.25em"}
-                    selectType="number"
+                    width={"100%"}
                     component={InputComponent}
                     inlineLabel
-                    style={{ flexBasis: "80%", width: "100%" }}
                   />
                 </div>
-                <div style={{ width: "47%" }}>
+                
+                <div class=" w-[47%]"
+            >
                   <FastField
-                    isRequired
-                    name="bankName"
-                    //label="Bank Name"
+                    name="branchName"
+                    // label="Branch Name"
                     label={
                       <FormattedMessage
-                        id="app.bank"
-                        defaultMessage="Bank"
+                        id="app.branch"
+                        defaultMessage="Branch"
                       />
                     }
                     type="text"
@@ -103,86 +136,55 @@ class UpdateBankForm extends Component {
                     isColumn
                     component={InputComponent}
                     inlineLabel
-                    style={{
-                      height: "2.0625em",
-                      flexBasis: "80%",
-                      // marginTop: "0.25em",
-                    }}
-                  />
+                    />
                 </div>
-                </FlexContainer>
-                <Spacer />
-                <FlexContainer>
-                  <div style={{ width: "47%" }}>
-                    <FastField
-                      name="ifscCode"
-                      //label="IFSC CODE"
-                      label={
-                        <FormattedMessage
-                          id="app.ifscCode"
-                          defaultMessage="SWIFT CODE"
-                        />
-                      }
-                      className="field"
-                      isColumn
-                      width={"100%"}
-                      component={InputComponent}
-                      inlineLabel
-                      style={{
-                        flexBasis: "80%",
-                        height: "2.0625em",
-                        // marginTop: "0.25em",
-                      }}
-                    />
-                  </div>
-                  &nbsp;&nbsp;
-                  <div style={{ width: "50%" }}>
-                    <FastField
-                      isRequired
-                      name="branchName"
-                      //label="Branch Name"
-                      label={
-                        <FormattedMessage
-                          id="app.branch"
-                          defaultMessage="Branch "
-                        />
-                      }
-                      type="text"
-                      width={"100%"}
-                      isColumn
-                      component={InputComponent}
-                      inlineLabel
-                      style={{
-                        height: "2.0625em",
-                        flexBasis: "80%",
-                        // marginTop: "0.25em",
-                      }}
-                    />
-                  </div>
-                </FlexContainer>
-                <Spacer />
-                
-                <Spacer style={{marginTop:"1.5625em"}}/>
-                <StyledLabel>Default Bank?</StyledLabel>&nbsp;&nbsp;
-                <Switch
-                  style={{ width: "5em" }}
-                  checked={this.state.defaultBank}
-                  onChange={this.handleDefaultbank}
-                  checkedChildren="Yes"
-                  unCheckedChildren="No"
-                />
               </div>
-              <Spacer />
-              <FlexContainer justifyContent="flex-end">
-                <Button
-                  htmlType="submit"
-                  type="primary"
-                  Loading={updatingBankDetails}
-                >
-                  <FormattedMessage id="app.update" defaultMessage="Update" />
-                </Button>
-              </FlexContainer>
-            </Form>
+              <div class=" flex justify-between mt-4" >
+               <div class=" w-[47%]"
+            >
+                <FastField
+                  isRequired
+                  name="bankName"
+                  //label="Bank Name"
+                  label={
+                    <FormattedMessage
+                      id="app.bank"
+                      defaultMessage="Bank"
+                    />
+                  }
+                  type="text"
+                  width={"100%"}
+                  isColumn
+                  component={InputComponent}
+                  inlineLabel
+                  />
+              </div>
+              
+              <div class=" w-[47%] mt-[1.5em]" style={{margin:"6% 0% 0% 0%"}}>
+              <div class=" flex justify-between" >
+              <StyledLabel>Default Bank?</StyledLabel>
+              <Switch
+               
+                checked={this.state.defaultBank}
+                onChange={this.handleDefaultbank}
+                checkedChildren="Yes"
+                unCheckedChildren="No"
+              />
+              </div>
+            </div>
+            </div>
+
+            <div class=" flex justify-end mt-[1.25em]" >
+              <Button
+                htmlType="submit"
+                type="primary"
+                Loading={updatingBankDetails}
+              >
+                Submit
+              </Button>
+            </div>
+            </div>
+          </Form>
           )}
         </Formik>
       </>

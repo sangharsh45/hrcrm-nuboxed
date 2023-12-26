@@ -47,15 +47,18 @@
 
 
 
-import React, { Component, lazy, PureComponent, Suspense, useEffect, useState } from "react";
+import React, {  PureComponent,lazy, Suspense,  } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { StyledTabs } from "../../../../../Components/UI/Antd";
 import { TabsWrapper } from "../../../../../Components/UI/Layout";
 import { getDepartmentList } from "../../../SettingsAction";
-import AllCustomerForm from "./AllCustomerForm";
- import AllCustomerListTable from "./AllCustomerListTable";
-// import AccessForm from "./AccessForm";
+ const AllCustomerListTable = lazy(() =>
+  import("../ReportScheduler/AllCustomerListTable")
+);
+const AllCustomerForm = lazy(() =>
+import("../ReportScheduler/AllCustomerForm")
+);
 
 const TabPane = StyledTabs.TabPane;
 class SchedulerTab extends PureComponent {
