@@ -6,7 +6,7 @@ import { Formik, Form, Field } from "formik";
 import moment from "moment";
 import { SelectComponent } from "../../../../../Components/Forms/Formik/SelectComponent";
 import { getInventory } from "../../../Inventory/InventoryAction"
-import { getDistributorOrderByDistributorId, addProductionLocationInOrder, startRepairInStatus } from "../../AccountAction"
+import {  addProductionLocationInOrder, startRepairInStatus } from "../../AccountAction"
 
 function AccountProductionForm(props) {
     useEffect(() => {
@@ -111,7 +111,6 @@ const mapDispatchToProps = (dispatch) =>
     bindActionCreators({
         addProductionLocationInOrder,
         getInventory,
-        getDistributorOrderByDistributorId,
         startRepairInStatus
     }, dispatch);
 

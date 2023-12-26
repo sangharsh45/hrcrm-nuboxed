@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from 'react'
-import { StyledTable } from '../../../../../Components/UI/Antd';
+import React, { useEffect, useState,Suspense } from 'react'
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import moment from 'moment/moment';
@@ -8,7 +7,7 @@ import FeedbackIcon from '@mui/icons-material/Feedback';
 import NoteAltIcon from "@mui/icons-material/NoteAlt";
 import StarBorderIcon from '@mui/icons-material/StarBorder';
 import EventRepeatIcon from '@mui/icons-material/EventRepeat';
-import BorderColorIcon from "@mui/icons-material/BorderColor";
+import BorderColorOutlined from "@mui/icons-material/BorderColor";
 import {
     getDistributorOrderByDistributorId,
     handleInventoryLocationInOrder,
@@ -18,55 +17,18 @@ import {
     handleStatusOfOrder,
     updateOfferPrice,
     handleAccountProduction
-} from "../../AccountAction"
-import { Button, Popconfirm, Tooltip, Typography, Input, Form } from 'antd';
+} from "../../AccountAction";
+import {Button,Input, Tooltip} from 'antd';
 import AddLocationInOrder from './AddLocationInOrder';
 import AccountOrderDetailsModal from './AccountOrderDetailsModal';
 import StatusOfOrderModal from './StatusOfOrderModal';
-import { StepForwardFilled } from '@ant-design/icons';
 import AddNotesOrderModal from './AddNotesOrderModal';
 import PaidButtonModal from './PaidButtonModal';
 import { MultiAvatar2 } from '../../../../../Components/UI/Elements';
-import { BorderAllRounded, BorderColorOutlined } from '@mui/icons-material';
 import { OnlyWrapCard } from '../../../../../Components/UI/Layout';
-import { Link } from '../../../../../Components/Common';
-import { BundleLoader } from '../../../../../Components/Placeholder';
-import DeliveryDateModal from '../../../Inventory/Child/InventoryDetails/Recieved/DeliveryDateModal';
 import AccountproductionModal from './AccountProductionModal';
-const EditableCell = ({
-    editing,
-    dataIndex,
-    title,
-    inputType,
-    record,
-    index,
-    children,
-    ...restProps
-}) => {
-    const inputNode = <Input />;
-    return (
-        <td {...restProps}>
-            {editing ? (
-                <Form.Item
-                    name={dataIndex}
-                    style={{
-                        margin: 0,
-                    }}
-                    rules={[
-                        {
-                            required: true,
-                            message: `Please Input ${title}!`,
-                        },
-                    ]}
-                >
-                    {inputNode}
-                </Form.Item>
-            ) : (
-                children
-            )}
-        </td>
-    );
-};
+import { BundleLoader } from '../../../../../Components/Placeholder';
+
 
 const AccountOrderTable = (props) => {
     const [page, setPage] = useState(0);
@@ -79,61 +41,7 @@ const AccountOrderTable = (props) => {
     function handleSetParticularOrderData(item) {
         setParticularRowData(item);
     }
-    const [form] = Form.useForm();
-    const [data, setData] = useState([]);
-    const [editingKey, setEditingKey] = useState('');
 
-    useEffect(() => {
-        setData(props.distributorOrder)
-    }, [props.distributorOrder])
-
-    const isEditing = (record) => record.orderId === editingKey;
-
-    const edit = (record) => {
-        form.setFieldsValue({
-            offerPrice: "",
-            ...record,
-        });
-        setEditingKey(record.orderId);
-    };
-
-    const cancel = () => {
-        setEditingKey('');
-    };
-
-    const save = async (key) => {
-        try {
-            const row = await form.validateFields();
-            const newData = [...data];
-            const index = newData.findIndex((item) => key === item.orderId);
-            if (index > -1) {
-                // alert("if");
-                const item = newData[index];
-                console.log(item)
-                newData.splice(index, 1, { ...item, ...row });
-                const a = newData[index];
-                console.log(props.quotationId);
-                props.updateOfferPrice(
-                    {
-                        offerPrice: a.offerPrice,
-                        orderPhoneId: a.orderId,
-                        expectedPrice: 0,
-                        customerPriceInd: true
-                    },
-                    a.orderId,
-                    props.distributorId,
-                );
-                setEditingKey('');
-            } else {
-                alert("else");
-                newData.push(row);
-                // setData(newData);
-                setEditingKey('');
-            }
-        } catch (errInfo) {
-            console.log('Validate Failed:', errInfo);
-        }
-    };
     const [visible, setVisible] = useState(false)
     const handleUpdateRevisePrice = () => {
         setVisible(!visible)
@@ -531,25 +439,7 @@ const AccountOrderTable = (props) => {
                     {/* </InfiniteScroll> */}
                 </OnlyWrapCard>
             </div>
-            {true && (
-                <Form form={form} component={false}>
-
-                    {/* <StyledTable
-                        rowKey="orderId"
-                        dataSource={data}
-                        scroll={{ y: 320 }}
-                        pagination={false}
-                        components={{
-                            body: {
-                                cell: EditableCell,
-                            },
-                        }}
-                        loading={props.fetchingDistributorByDistributorId}
-                        columns={mergedColumns}
-                        sticky={true}
-                        rowClassName="editable-row"
-                    /> */}
-                </Form>)}
+                <Suspense fallback={<BundleLoader />}>  
             <AddLocationInOrder
                 particularRowData={particularRowData}
                 addInventoryInOrder={props.addInventoryInOrder}
@@ -579,6 +469,7 @@ const AccountOrderTable = (props) => {
                 accountOrderProduction={props.accountOrderProduction}
                 handleAccountProduction={props.handleAccountProduction}
             />
+                      </Suspense>
         </>
     )
 }

@@ -1,7 +1,7 @@
 import React, { lazy, Suspense } from "react";
 import { StyledDrawer } from "../../../Components/UI/Antd";
 import { BundleLoader } from "../../../Components/Placeholder";
-import AddAccountForm from "./AddAccountForm";
+const AddAccountForm =lazy(()=>import("./AddAccountForm"));
 
 
 const AddAccountModal = (props) => {

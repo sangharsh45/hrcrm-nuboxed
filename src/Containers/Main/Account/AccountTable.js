@@ -1,8 +1,8 @@
-import React, { Component, useEffect, useState } from "react";
+import React, { useEffect, useState,lazy } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
-import { Tooltip, Input, Button, Space, Popconfirm } from "antd";
+import { Tooltip } from "antd";
 import { OnlyWrapCard } from '../../../Components/UI/Layout'
 import { Spacer } from "../../../Components/UI/Elements";
 import { Link } from "../../../Components/Common";
@@ -18,10 +18,8 @@ import {
   handleUpdateAccountModal,
   emptyDistributor
 } from "./AccountAction";
-import Highlighter from "react-highlight-words";
 import moment from "moment";
-import AccountDetailsView from "./AccountDetailsView";
-import UpdateAccountModal from "./UpdateAccountModal";
+const UpdateAccountModal =lazy(()=>import("./UpdateAccountModal"));
 
 
 function AccountTable(props) {
@@ -45,14 +43,7 @@ function AccountTable(props) {
 }
 
 const {
-  fetchingInvestors,
-  investorsbyId,
   handleUpdateAccountModal,
-  updateInvestorModal,
-  fetchingInvestorsError,
-  fetchingAllCustomers,
-  user,
-  IconShowhover,
 } = props;
 useEffect(() => {
   return () => props.emptyDistributor();
@@ -73,7 +64,6 @@ useEffect(() => {
         <div className="md:w-[6.9rem]">VAT</div>
         <div className="md:w-[8.2rem]">Billing Address </div>
         <div className="md:w-[4.3rem]">Pin Code</div>
-        {/* <div className="w-[3.8rem]">Action</div> */}
 
       </div>
         <InfiniteScroll
@@ -237,44 +227,12 @@ useEffect(() => {
                 </InfiniteScroll>
       </OnlyWrapCard>
       </div>
-      {/* <StyledTable
-        rowKey=""
-        columns={columns}
-        dataSource={props.allDistributors}
-        loading={
-          props.fetchingAllDistributors
-        }
-        scroll={{ y: tableHeight }}
-        pagination={false}
-      /> */}
       <UpdateAccountModal
         RowData={RowData}
         updateAccountModal={props.updateAccountModal}
         handleUpdateAccountModal={handleUpdateAccountModal}
       />
-       {/*
-      <AddAccountOrderModal
-        addDistributorOrderModal={props.addDistributorOrderModal}
-        handleDistributorOrderModal={props.handleDistributorOrderModal}
-        distributorId={currentDistributorId}
-        handleSetCurrentDistributorId={handleSetCurrentDistributorId}
-      />
-      <AddAccountActivityModal
-        addDistributorActivityTableModal={
-          props.addDistributorActivityTableModal
-        }
-        handleDistributorActivityTableModal={
-          props.handleDistributorActivityTableModal
-        }
-        distributorId={currentDistributorId}
-        handleSetCurrentDistributorId={handleSetCurrentDistributorId}
-      /> */}
-      {/* <BillingAddressModal
-        handleBillingAddressModal={handleBillingAddressModal}
-        addBillToAddress={addBillToAddress}
-        distributorId={currentDistributorId}
-      /> */}
-      {/* {show && <BillingAddressLocation distributorId={currentDistributorId} />} */}
+
       <Spacer />
     </>
   );

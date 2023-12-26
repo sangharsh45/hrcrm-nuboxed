@@ -9,16 +9,15 @@ import {
   getDistributorsByUserId,
   getAllDistributorsList
 } from "./AccountAction";
-import AddAccountModal from "./AddAccountModal";
-import AccountTable from "./AccountTable";
-import AccountDeleteTable from "./AccountDeleteTable";
-import AllAccountList from "./AllAccountList";
-import AccountCard from "./AccountCard";
-import AllAccountCard from "./AllAccountCard";
-import AccountDeleteCard from "./AccountDeleteCard";
+const AddAccountModal =lazy(()=>import("./AddAccountModal"));
+const AccountTable =lazy(()=>import("./AccountTable"));
+const AccountDeleteTable =lazy(()=>import("./AccountDeleteTable"));
+const AllAccountList =lazy(()=>import("./AllAccountList"));
+const AccountCard =lazy(()=>import("./AccountCard"));
+const AllAccountCard =lazy(()=>import("./AllAccountCard"));
+const AccountDeleteCard =lazy(()=>import("./AccountDeleteCard"));
 
 const Account = ({
-  distributor,
   addDistributorModal,
   viewType,
   setDistributorViewType,
