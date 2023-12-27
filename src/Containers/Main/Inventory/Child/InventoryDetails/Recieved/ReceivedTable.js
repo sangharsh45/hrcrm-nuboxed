@@ -1,9 +1,8 @@
-import React, { Component, Suspense, lazy, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { StyledTable } from "../../../../../../Components/UI/Antd";
 import { Spacer } from "../../../../../../Components/UI/Elements";
-import { Input, Tooltip, Space, Button, Badge } from "antd";
+import { Tooltip,  Button,  } from "antd";
 import NoteAltIcon from "@mui/icons-material/NoteAlt";
 import {
   getReceivedUserList,
@@ -15,12 +14,11 @@ import {
   handleInventoryReceivedNoteOrderModal
 } from "../../../InventoryAction";
 import moment from "moment";
-import Highlighter from "react-highlight-words";
-import { SearchOutlined, CheckCircleOutlined } from "@ant-design/icons";
 import DeliveryDateModal from "./DeliveryDateModal";
 import { withRouter } from "react-router";
 import OpenReceivedOrderIdModal from "./OpenReceivedOrderIdModal";
 import { OnlyWrapCard } from '../../../../../../Components/UI/Layout';
+import { FormattedMessage } from "react-intl";
 
 const ReceivedTable = (props) => {
 
@@ -46,13 +44,13 @@ const ReceivedTable = (props) => {
          <OnlyWrapCard style={{backgroundColor:"#E3E8EE"}}>
          <div className=" flex justify-between w-[99%] px-2 bg-transparent font-bold sticky top-0 z-10">
          <div className=""></div>
-         <div className=" md:w-[7%]">Order #</div>
-        <div className=" md:w-[6.1rem]">AWB</div>
-        <div className=" md:w-[4.2rem] ">Customer</div>
-        <div className="md:w-[5.8rem]">Contact</div>
-        <div className="md:w-[8.5rem]">Inspected By</div>
-        <div className="md:w-[5.2rem]">Phones #</div>
-        <div className="md:w-[5.2rem]">Pick Up</div>
+         <div className=" md:w-[7%]"><FormattedMessage id="app.order" defaultMessage="Order #"/></div>
+        <div className=" md:w-[6.1rem]"><FormattedMessage id="app.awb" defaultMessage="AWB"/></div>
+        <div className=" md:w-[4.2rem] "><FormattedMessage id="app.customer" defaultMessage="Customer"/></div>
+        <div className="md:w-[5.8rem]"><FormattedMessage id="app.contact" defaultMessage="Contact"/></div>
+        <div className="md:w-[8.5rem]"><FormattedMessage id="app.inspectedby" defaultMessage="Inspected By"/></div>
+        <div className="md:w-[5.2rem]"><FormattedMessage id="app.phone" defaultMessage="Phones #"/></div>
+        <div className="md:w-[5.2rem]"><FormattedMessage id="app.pickup" defaultMessage="Pick Up"/></div>
        <div className="md:w-[5.2remb]"></div>
         <div className="w-12"></div>
             </div>

@@ -1,14 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { StyledTable } from "../../../Components/UI/Antd";
 import { DeleteOutlined,EditOutlined } from "@ant-design/icons";
-import { Tooltip, Input, Button, Space, Popconfirm } from "antd";
-import {
-  ShoppingCartOutlined,
-  SearchOutlined,
-} from "@ant-design/icons";
-import { Spacer } from "../../../Components/UI/Elements";
+import { Tooltip, Popconfirm } from "antd";
 import {
   getAllShipperList,
   setEditShipper,
@@ -17,13 +11,11 @@ import {
   handleShipperActivityTableModal,
   deleteShipperData,
 } from "./ShipperAction";
-import moment from "moment";
-// import AddShipperActivityModal from "./ShiAddShipperActivityModal";
 import UpdateShipperModal from "./UpdateShipperModal";
 import AddShipperOrderModal from "./AddShipperOrderModal";
-import Highlighter from "react-highlight-words";
 import { OnlyWrapCard } from "../../../Components/UI/Layout";
 import { Link } from "../../../Components/Common";
+import { FormattedMessage } from "react-intl";
 
 function AllShipperList(props) {
   useEffect(() => {
@@ -31,7 +23,6 @@ function AllShipperList(props) {
   }, []);
 
   const { handleUpdateShipperModal, updateShipperModal } = props;
-
   const [currentShipperId, setCurrentShipperId] = useState("");
   const [rowdata, setrowData] = useState({});
     
@@ -39,118 +30,24 @@ function AllShipperList(props) {
     setrowData(data);
   };
 
-
-
   function handleSetCurrentShipperId(shipperId) {
     setCurrentShipperId(shipperId);
   }
 
-  const [searchText, setSearchText] = useState("");
-  const [searchedColumn, setSearchedColumn] = useState("");
-
-  function getColumnSearchProps(dataIndex) {
-    return {
-      filterDropdown: ({
-        setSelectedKeys,
-        selectedKeys,
-        confirm,
-        clearFilters,
-      }) => (
-        <div style={{ padding: 8 }}>
-          <Input
-            // ref={node => {
-            //   this.searchInput = node;
-            // }}
-            placeholder={`Search ${dataIndex}`}
-            value={selectedKeys[0]}
-            onChange={(e) =>
-              setSelectedKeys(e.target.value ? [e.target.value] : [])
-            }
-            onPressEnter={() => handleSearch(selectedKeys, confirm, dataIndex)}
-            style={{ width: 240, marginBottom: 8, display: "block" }}
-          />
-          <Space>
-            <Button
-              type="primary"
-              onClick={() => handleSearch(selectedKeys, confirm, dataIndex)}
-              icon={<SearchOutlined />}
-              size="small"
-              style={{ width: 90 }}
-            >
-              Search
-            </Button>
-            <Button
-              onClick={() => handleReset(clearFilters)}
-              size="small"
-              style={{ width: 90 }}
-            >
-              Reset
-            </Button>
-            <Button
-              type="link"
-              size="small"
-              onClick={() => {
-                confirm({ closeDropdown: false });
-                setSearchText(selectedKeys[0]);
-                setSearchedColumn(dataIndex);
-              }}
-            >
-              Filter
-            </Button>
-          </Space>
-        </div>
-      ),
-      filterIcon: (filtered) => (
-        <SearchOutlined style={{ color: filtered ? "#1890ff" : undefined }} />
-      ),
-      onFilter: (value, record) =>
-        record[dataIndex]
-          .toString()
-          .toLowerCase()
-          .includes(value.toLowerCase()),
-      onFilterDropdownVisibleChange: (visible) => {
-        if (visible) {
-          // setTimeout(() => this.searchInput.select());
-        }
-      },
-      render: (text) =>
-        searchedColumn === dataIndex ? (
-          <Highlighter
-            highlightStyle={{ backgroundColor: "#ffc069", padding: 0 }}
-            searchWords={[searchText]}
-            autoEscape
-            textToHighlight={text.toString()}
-          />
-        ) : (
-          text
-        ),
-    };
-  }
-
-  function handleSearch(selectedKeys, confirm, dataIndex) {
-    confirm();
-    setSearchText(selectedKeys[0]);
-    setSearchedColumn(dataIndex);
-  }
-
-  function handleReset(clearFilters) {
-    clearFilters();
-    setSearchText("");
-  }
 return(
 <>
 <div className=' flex justify-end sticky top-28 z-auto'>
 <OnlyWrapCard style={{height:"70vh",backgroundColor:"#E3E8EE"}}>
 <div className=" flex justify-between w-[97.5%] p-2 bg-transparent font-bold sticky top-0 z-10">
-        <div className=" md:w-[8.1rem]">Name</div>
-        <div className=" md:w-[5.1rem]">Phone #</div>
-        <div className=" md:w-[6.8rem] ">Email</div>
-        <div className="md:w-[5.9rem]">Ship By</div>
-        <div className="md:w-[7.8rem]">Address</div>
-        <div className="md:w-[7.9rem]">City</div>
-        <div className="md:w-[5.2rem]">PinCode</div>
-        <div className="md:w-[5.2rem]">Owner</div>
-        {/* <div className="w-[3.8rem]">Action</div> */}
+<div className=" md:w-[8.1rem]"><FormattedMessage id="app.name" defaultMessage="Name" /></div>
+        <div className=" md:w-[5.1rem]"><FormattedMessage id="app.phones" defaultMessage="Phones #"/></div>
+        <div className=" md:w-[6.8rem] "><FormattedMessage id="app.email" defaultMessage="Email"/></div>
+        <div className="md:w-[5.9rem]"><FormattedMessage id="app.shipby" defaultMessage="Ship By"/></div>
+        <div className="md:w-[7.8rem]"><FormattedMessage id="app.address" defaultMessage="Address"/></div>
+        <div className="md:w-[7.9rem]"><FormattedMessage id="app.city" defaultMessage="City"/></div>
+        <div className="md:w-[5.2rem]"><FormattedMessage id="app.pinCode" defaultMessage="Pin Code"/></div>
+        <div className="md:w-[5.2rem]"><FormattedMessage id="app.owner" defaultMessage="Owner"/></div>
+      
         </div>
 {props.allShipper.map((item) => {
   return (
