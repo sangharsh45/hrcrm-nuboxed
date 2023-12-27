@@ -2,7 +2,7 @@ import React, { lazy, Suspense, Component } from "react";
 import { connect } from "react-redux";
 import { FormattedMessage } from "react-intl";
 import { bindActionCreators } from "redux";
-import { Button, Tooltip } from "antd";
+import { Button, Tooltip,Switch } from "antd";
 import { Formik, Form, Field } from "formik";
 import { StyledDrawer } from "../../../../../../Components/UI/Antd";
 import { Spacer, StyledLabel } from "../../../../../../Components/UI/Elements";
@@ -24,6 +24,7 @@ class InvestorDocumentModal extends Component {
     this.state = {
       documentshare: false,
       approvalAbove: false,
+      contract:false,
       ownerAbove: "Specific",
       selectedownerAbove: "Specific",
       data: [1],
@@ -33,6 +34,9 @@ class InvestorDocumentModal extends Component {
     console.log(length);
     let length = this.state.data.length;
     this.setState({ data: [...this.state.data, length + 1] });
+  };
+  handleContract = (checked) => {
+    this.setState({ contract: checked });
   };
 
   handleChange = (checked) => {
@@ -102,6 +106,7 @@ class InvestorDocumentModal extends Component {
                 documentTypeId: "",
                 documentTitle: "",
                 documentDescription: "",
+                contract: this.state.contract ? "true" : "false",
                 documentId: "",
                 investorId: this.props.investorDetails.investorId,
               }}
@@ -111,6 +116,7 @@ class InvestorDocumentModal extends Component {
                 createInvestorDocument(
                   {
                     ...values,
+                    contract: this.state.contract ? "true" : "false",
                   },
                   this.callback
                 );
@@ -155,6 +161,16 @@ class InvestorDocumentModal extends Component {
                         value={values.documentId}
                         inlineLabel
                       />
+                           <div class=" flex  mt-4">
+                        <StyledLabel>Contract</StyledLabel>
+                        <Switch
+                          style={{ width: "6.25em", marginLeft: "0.625em" }}
+                          onChange={this.handleContract}
+                          checked={this.state.contract}
+                          checkedChildren="Yes"
+                          unCheckedChildren="No"
+                        />
+                      </div>
                     </div>
                     <div class=" h-full w-2/5">
                       <Field
