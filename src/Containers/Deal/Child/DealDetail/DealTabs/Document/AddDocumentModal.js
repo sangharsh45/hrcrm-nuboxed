@@ -2,8 +2,11 @@ import React, { lazy, Suspense, Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { FormattedMessage } from "react-intl";
-import { Button } from "antd";
+import { Button ,Switch} from "antd";
 import { Formik, Form, Field } from "formik";
+import {
+  StyledLabel,
+} from "../../../../../../Components/UI/Elements";
 import { StyledDrawer } from "../../../../../../Components/UI/Antd";
 import { Spacer } from "../../../../../../Components/UI/Elements";
 import SearchSelect from "../../../../../../Components/Forms/Formik/SearchSelect";
@@ -27,6 +30,7 @@ class AddDocumentModal extends Component {
     this.state = {
       documentshare: false,
       approvalAbove: false,
+      contract:false,
       ownerAbove: "Specific",
       selectedownerAbove: "Specific",
       data: [1],
@@ -36,6 +40,9 @@ class AddDocumentModal extends Component {
     console.log(length);
     let length = this.state.data.length;
     this.setState({ data: [...this.state.data, length + 1] });
+  };
+  handleContract = (checked) => {
+    this.setState({ contract: checked });
   };
 
   handleChange = (checked) => {
@@ -116,6 +123,7 @@ class AddDocumentModal extends Component {
                 invOpportunityId: this.props.dealDetailsbyID.invOpportunityId,
                 documentTitle: "", //input
                 documentDescription: "",
+                contract: this.state.contract ? "true" : "false",
                 // levelType:
                 //   this.state.approvalAbove === true ? "Above" : "Specific",
                 // type:
@@ -129,6 +137,7 @@ class AddDocumentModal extends Component {
                   // values.documentId,
                   {
                     ...values,
+                    contract: this.state.contract ? "true" : "false",
                   },
                   this.callback
                 );
@@ -176,6 +185,16 @@ class AddDocumentModal extends Component {
                         value={values.documentId}
                         inlineLabel
                       />
+                           <div class=" flex  mt-4">
+                        <StyledLabel>Contract</StyledLabel>
+                        <Switch
+                          style={{ width: "6.25em", marginLeft: "0.625em" }}
+                          onChange={this.handleContract}
+                          checked={this.state.contract}
+                          checkedChildren="Yes"
+                          unCheckedChildren="No"
+                        />
+                      </div>
                     </div>
                     <div class=" h-full w-5/12">
                       <Field
