@@ -138,8 +138,8 @@ function CallForm(props) {
       };
     });
     const sortedEmployee =props.employees.sort((a, b) => {
-      const nameA = a.departmentName.toLowerCase();
-      const nameB = b.departmentName.toLowerCase();
+      const nameA = a.fullName.toLowerCase();
+      const nameB = b.fullName.toLowerCase();
       // Compare department names
       if (nameA < nameB) {
         return -1;
