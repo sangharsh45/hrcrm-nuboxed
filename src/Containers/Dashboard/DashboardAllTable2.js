@@ -820,7 +820,11 @@ function DashboardAllTable2(props) {
         width: "7%",
      },
      {
-      title:"Ageing",
+      title: <FormattedMessage
+      id="app.ageing"
+      defaultMessage="Ageing"
+    />,
+      // title:"Ageing",
       width: "11%",
        // dataIndex: "sponserName",
        // ...getColumnSearchProps('sponserName'),

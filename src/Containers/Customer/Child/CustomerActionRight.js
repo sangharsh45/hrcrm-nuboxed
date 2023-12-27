@@ -6,6 +6,7 @@ import { base_url } from "../../../Config/Auth";
 import { Button, Tooltip } from "antd";
 import InsertDriveFileIcon from '@mui/icons-material/InsertDriveFile';
 import { StyledSelect } from "../../../Components/UI/Antd";
+import { FormattedMessage } from "react-intl";
 const CustomerShareForm=lazy(()=> import("./CustomerShareForm"));
 
 const Option = StyledSelect.Option;
@@ -44,7 +45,11 @@ class CustomerActionRight extends React.Component {
             type="primary"
             onClick={() => handleCustomerModal(true)}
           >
-            Add
+                             <FormattedMessage
+                        id="app.add"
+                        defaultMessage="Add"
+                      />
+          
           </Button>
            )} 
         </Tooltip>

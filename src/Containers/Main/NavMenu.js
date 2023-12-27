@@ -104,12 +104,12 @@ function NavMenu(props) {
               />
 
               <span class="text-white text-ls ml-1">
-                {/* <FormattedMessage
-                    id="app.recruitproboard"
-                    defaultMessage="RecruitProBoard"
-                  /> */}
+                <FormattedMessage
+                    id="app.dashboard"
+                    defaultMessage="Dashboard"
+                  />
                 {/* {translatedMenuItems[0]} */}
-                Dashboard
+                {/* Dashboard */}
                 {/* RecruitProBoard */}
               </span>
             </Link>
@@ -126,8 +126,8 @@ function NavMenu(props) {
               />
 
               <span class="text-white text-ls ml-1">
-                {/* <FormattedMessage id="app.planner" defaultMessage="Planner" /> */}
-                Planner
+                <FormattedMessage id="app.planner" defaultMessage="Planner" />
+                {/* Planner */}
                 {/* {translatedMenuItems[1]} */}
               </span>
             </Link>
@@ -145,8 +145,8 @@ function NavMenu(props) {
                 style={{ fontSize: "large" }}
               />
               <span class="text-white text-ls ml-1">
-                {/* <FormattedMessage id="app.calls" defaultMessage="Calls" /> */}
-                Calls
+                <FormattedMessage id="app.calls" defaultMessage="Calls" />
+                {/* Calls */}
                 {/* {translatedMenuItems[2]} */}
               </span>
               &nbsp;&nbsp;&nbsp;
@@ -165,8 +165,8 @@ function NavMenu(props) {
                 style={{ fontSize: "large" }}
               />
               <span class="text-white text-ls ml-1">
-                {/* <FormattedMessage id="app.tasks" defaultMessage="Tasks" /> */}
-                Task
+                <FormattedMessage id="app.task" defaultMessage="Task" />
+                {/* Task */}
                 {/* {translatedMenuItems[3]} */}
               </span>
               &nbsp;&nbsp;&nbsp;
@@ -185,11 +185,11 @@ function NavMenu(props) {
                 style={{ fontSize: "large" }}
               />
               <span class="text-white text-ls ml-1">
-                {/* <FormattedMessage
+                <FormattedMessage
                   id="app.events"
                   defaultMessage="Events"
-                /> */}
-                Event
+                />
+                {/* Event */}
                 {/* {translatedMenuItems[4]} */}
               </span>
               &nbsp;&nbsp;&nbsp;
@@ -208,8 +208,8 @@ function NavMenu(props) {
                 style={{ fontSize: "large" }}
               />
               <span class="text-white text-ls ml-1">
-                {/* <FormattedMessage id="app.reports" defaultMessage="Reports" /> */}
-                Reports
+                <FormattedMessage id="app.reports" defaultMessage="Reports" />
+                {/* Reports */}
                 {/* {translatedMenuItems[5]} */}
               </span>
             </Link>
@@ -228,9 +228,9 @@ function NavMenu(props) {
                 style={{ fontSize: "large" }}
               />
               <span class="text-white text-ls ml-1">
-
+              <FormattedMessage id="app.leads" defaultMessage="Leads" />
                 {/* {translatedMenuItems[13]} */}
-                Leads
+                {/* Leads */}
                 &nbsp;&nbsp;&nbsp;
                 <Badge
                   count={props.opportunityRecord.leads}
@@ -248,9 +248,9 @@ function NavMenu(props) {
                 style={{ fontSize: "large" }}
               />
               <span class="text-white text-ls ml-1">
-
+              <FormattedMessage id="app.opportunity" defaultMessage="Opportunity" />
                 {/* {translatedMenuItems[7]} */}
-                Opportunity
+                
 
                 &nbsp;&nbsp;&nbsp;
                 <Badge
@@ -271,9 +271,9 @@ function NavMenu(props) {
                 style={{ fontSize: "large" }}
               />
               <span class="text-white text-ls ml-1">
-
+              <FormattedMessage id="app.contact" defaultMessage="Contact" />
                 {/* {translatedMenuItems[8]} */}
-                Contact
+                
                 &nbsp;&nbsp;&nbsp;
                 <Badge
                   count={props.opportunityRecord.customerContact}
@@ -294,8 +294,8 @@ function NavMenu(props) {
                 style={{ fontSize: "large" }}
               />
               <span class="text-white text-ls ml-1">
-
-                Prospect
+              <FormattedMessage id="app.prospect" defaultMessage="Prospect" />
+                
                 &nbsp;&nbsp;&nbsp;
                 <Badge
                   count={props.opportunityRecord.CustomerNo}
@@ -313,8 +313,8 @@ function NavMenu(props) {
                 style={{ fontSize: "large" }}
               />
               <span class="text-white text-ls ml-1">
-
-                {/* {translatedMenuItems[13]} */}Pitch
+              <FormattedMessage id="app.pitch" defaultMessage="Pitch" />
+                {/* {translatedMenuItems[13]} */}
                 &nbsp;&nbsp;&nbsp;
                 <Badge
                   count={props.opportunityRecord.investorLeads}
@@ -331,8 +331,8 @@ function NavMenu(props) {
                 style={{ fontSize: "large" }}
               />
               <span class="text-white text-ls ml-1">
-
-                {/* {translatedMenuItems[13]} */}Deals
+              <FormattedMessage id="app.deals" defaultMessage="Deals" />
+                {/* {translatedMenuItems[13]} */}
                 <Badge
                   count={props.opportunityRecord.investorOpportunity}
                   overflowCount={999}
@@ -348,8 +348,8 @@ function NavMenu(props) {
                 style={{ fontSize: "large" }}
               />
               <span class="text-white text-ls ml-1">
-
-                {/* {translatedMenuItems[13]} */}Contact Invest
+              <FormattedMessage id="app.contactInvest" defaultMessage="Contact Invest" />
+                {/* {translatedMenuItems[13]} */}
                 <Badge
                   count={props.opportunityRecord.investorcontact}
                   overflowCount={999}
@@ -367,8 +367,8 @@ function NavMenu(props) {
                 style={{ fontSize: "large" }}
               />
               <span class="text-white text-ls ml-1">
-
-                {/* {translatedMenuItems[9]} */}Investor
+              <FormattedMessage id="app.investor" defaultMessage="Investor" />
+                {/* {translatedMenuItems[9]} */}
                 &nbsp;&nbsp;&nbsp;
                 <Badge
                   count={props.opportunityRecord.investor}
@@ -409,7 +409,8 @@ function NavMenu(props) {
                   style={{ fontSize: "large" }}
                 />
                  <span class="text-white text-ls ml-1">
-              Candidate
+                 <FormattedMessage id="app.candidate" defaultMessage="Candidate" />
+              
                   {/* {translatedMenuItems[10]} */}
                   &nbsp;&nbsp;&nbsp;
                   <Badge
@@ -430,7 +431,8 @@ function NavMenu(props) {
                 style={{ fontSize: "large" }} />
 
               <span class="text-white text-ls ml-1">
-Requirement
+              <FormattedMessage id="app.requirement" defaultMessage="Requirement" />
+
                 {/* {translatedMenuItems[11]} */}
                 &nbsp;&nbsp;
                 <Badge
@@ -448,7 +450,8 @@ Requirement
                   style={{ fontSize: "large" }}
                 />
                 <span class="text-white text-ls ml-1">
-                Project
+                <FormattedMessage id="app.project" defaultMessage="Project" />
+                
                   {/* {translatedMenuItems[15]} */}
                 </span>
               </Link>
@@ -465,8 +468,9 @@ Requirement
                 style={{ fontSize: "large" }} />
 
               <span class="text-white text-ls ml-1">
+              <FormattedMessage id="app.demand" defaultMessage="Demand" />
 
-              Demand
+              
                 &nbsp;&nbsp;&nbsp;&nbsp;
               </span>
             </Link>
@@ -792,7 +796,11 @@ Requirement
           <Link to="/collection">
             <ReceiptIcon style={{ fontSize: "large" }} />
             <span class="text-white text-ls ml-1">
-              Collections
+            <FormattedMessage 
+                    id="app.collections"
+                   defaultMessage="Collections"
+               />
+              
             </span>
           </Link>
         </Menu.Item>
@@ -920,8 +928,8 @@ Requirement
                 style={{ fontSize: "large" }}
               />
               <span class="text-white text-ls ml-1">
-                {/* <FormattedMessage id="app.users" defaultMessage="Users" /> */}
-                Users
+                <FormattedMessage id="app.users" defaultMessage="Users" />
+                {/* Users */}
                 {/* {translatedMenuItems[6]} */}
               </span>
               &nbsp;&nbsp;&nbsp;

@@ -6,6 +6,7 @@ import { FlexContainer } from "../../UI/Layout";
 import { Spacer, } from "../../UI/Elements";
 import FormikPlacesAutoComplete from "./FormikPlacesAutoComplete";
 import { InputComponent } from "../Formik/InputComponent";
+import { FormattedMessage } from "react-intl";
 class AddressFieldArray extends Component {
   render() {
     console.log(this.props);
@@ -101,13 +102,24 @@ class AddressFieldArray extends Component {
                     fontStyle: "italic",
                     color: "#1890ff",                   
                   }}
-                >Address input is only allowed using Location feature</p>
+                >
+                        <FormattedMessage
+                        id="app.addressInputLocation"
+                        defaultMessage="Address input is only allowed using Location feature"
+                      />
+                 </p>
                 
                 <div class="flex justify-between max-sm:flex-col">
                 <div class="w-[32%] max-sm:w-wk">     
                  <Field
                   name={`address.${index}.address1`}
-                  label="Address 1"
+                  label={
+                    <FormattedMessage
+                      id="app.address"
+                      defaultMessage="Address 1"
+                    />
+                  }
+                  // label="Address 1"
                   isColumn
                   component={InputComponent}
                   width={"100%"}
@@ -117,7 +129,13 @@ class AddressFieldArray extends Component {
                 <div class="w-[32%] max-sm:w-wk">                         
                 <Field
                   name={`address.${index}.street`}
-                  label="Street"
+                  // label="Street"
+                  label={
+                    <FormattedMessage
+                      id="app.street"
+                      defaultMessage="Street"
+                    />
+                  }
                   component={InputComponent}
                   width={"100%"}
                   isColumn
@@ -128,7 +146,13 @@ class AddressFieldArray extends Component {
                     <Tooltip title="Use Location feature for easy search ">
                       <Field
                         name={`address.${index}.postalCode`}
-                        label="Pin code"
+                        // label="Pin code"
+                        label={
+                          <FormattedMessage
+                            id="app.pincode"
+                            defaultMessage="Pin code"
+                          />
+                        }
                         // disabled
                         component={InputComponent}
                         isColumn
@@ -143,7 +167,13 @@ class AddressFieldArray extends Component {
                     <Tooltip title="Use Location feature for easy search ">
                       <Field
                         name={`address.${index}.city`}
-                        label="City"
+                        // label="City"
+                        label={
+                          <FormattedMessage
+                            id="app.city"
+                            defaultMessage="City"
+                          />
+                        }
                         component={InputComponent}
                         disabled
                         width={"100%"}
@@ -157,7 +187,13 @@ class AddressFieldArray extends Component {
                     <Tooltip title="Use Location feature for easy search ">
                       <Field
                         name={`address.${index}.state`}
-                        label="State/Province"
+                        // label="State/Province"
+                        label={
+                          <FormattedMessage
+                            id="app.stateProvince"
+                            defaultMessage="State/Province"
+                          />
+                        }
                         component={InputComponent}
                         disabled
                         width={"100%"}
@@ -170,7 +206,13 @@ class AddressFieldArray extends Component {
                     <Tooltip title="Use Location feature for easy search ">
                       <Field
                         name={`address.${index}.country`}
-                        label="Country"
+                        // label="Country"
+                        label={
+                          <FormattedMessage
+                            id="app.country"
+                            defaultMessage="Country"
+                          />
+                        }
                         disabled
                         component={InputComponent}
                         isColumn

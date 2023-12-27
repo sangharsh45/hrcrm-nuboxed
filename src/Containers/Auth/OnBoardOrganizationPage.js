@@ -12,6 +12,7 @@ import { addOnboard, generateOtpByEmail, validateOtp } from "./AuthAction";
 import { SelectComponent } from "../../Components/Forms/Formik/SelectComponent";
    import FWLogo from "../../Assets/Images/logo_22 copy.png";
 import { FlexContainer } from "../../Components/UI/Layout";
+import { FormattedMessage } from "react-intl";
 
 
 class OnBoardOrganizationPage extends Component {
@@ -20,6 +21,7 @@ class OnBoardOrganizationPage extends Component {
     this.state = {
       organizationName: "",
       date:"",
+      preferedLanguage:"",
       month:"",
       firstName:"",
       middleName:"",
@@ -119,14 +121,27 @@ class OnBoardOrganizationPage extends Component {
                       className="gvbmIs"
                       name="organizationName"
                       type="text"
-                      placeholder="Organization Name"
+                    placeholder="Organization Name"
+                      // placeholder={
+                      //   <FormattedMessage
+                      //   id="app.organizationName"
+                      //   defaultMessage="Organization Name"
+                      // />
+                      // }
+                    
                       component={this.InputComponent}
                     />
                     <Spacer />
                       <FastField
                       label="Industry"
     name="industry"
-    placeholder="Select Industry" 
+    placeholder={
+      <FormattedMessage
+      id="app.selectedIndustry"
+      defaultMessage="Select Industry"
+    />
+    }
+    // placeholder="Select Industry" 
     isColumn
     options={["E-Waste Recycle", "Manufacturing", "Retail"]}
     component={SelectComponent}
@@ -134,12 +149,33 @@ class OnBoardOrganizationPage extends Component {
 />
                 
                     <Spacer />
+                    <FastField
+                            name="preferedLanguage"
+                            placeholder={
+                              <FormattedMessage
+                              id="app.selectedLanguage"
+                              defaultMessage="Select Language"
+                            />
+                            }
+                            // placeholder="Select Date"
+                            isColumn
+                            options={["English", "Dutch"]}
+                            component={SelectComponent}
+                            inlineLabel
+                          />
+                          <Spacer />
                     <h2>Fiscal</h2>
                     <Spacer />
                     <div class=" flex flex-row justify-between">
                     <FastField
                             name="date"
-                            placeholder="Select Date"
+                            placeholder={
+                              <FormattedMessage
+                              id="app.selectedDate"
+                              defaultMessage="Select Date"
+                            />
+                            }
+                            // placeholder="Select Date"
                             isColumn
                             options={["1", "2","3","4","5", "6","7","8","9", "10","11","12","13", "14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31"]}
                             component={SelectComponent}

@@ -184,6 +184,7 @@ function MainApp(props) {
     setSelectedLanguage(language);
   };
 
+
   const showPopconfirm = () => {
     setVisible(true);
   };
@@ -317,7 +318,16 @@ function MainApp(props) {
                   }}
                 >
                   &nbsp;&nbsp;
-
+                  <div style={{ marginLeft: "0.625em" }}>
+                  <Select
+                    value={props.preferedLanguage}
+                    style={{ width: 120 }}
+                    onChange={(value) => handleLanguageSelect(value)}
+                  >
+                    <Option value="English">English</Option>
+                    <Option value="Dutch">Dutch</Option>
+                  </Select>
+                </div>
                 </div>
                 <StartStop />
                 {/* <Popconfirm

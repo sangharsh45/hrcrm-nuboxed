@@ -137,7 +137,19 @@ function CallForm(props) {
         value: item.customerId,
       };
     });
-    const employeesData = props.employees.map((item) => {
+    const sortedEmployee =props.employees.sort((a, b) => {
+      const nameA = a.departmentName.toLowerCase();
+      const nameB = b.departmentName.toLowerCase();
+      // Compare department names
+      if (nameA < nameB) {
+        return -1;
+      }
+      if (nameA > nameB) {
+        return 1;
+      }
+      return 0;
+    });
+    const employeesData = sortedEmployee.map((item) => {
       return {
         label: `${item.fullName}`,
         value: item.employeeId,
