@@ -24,7 +24,7 @@ class ContactDetailTab extends Component {
     };
   }
 
-  handleTabChange = (key) => this.setState({ activeKey: key });
+  handleTabChange = (key) => this.setState(  key );
   render() {
     const { activeKey } = this.state;
     const {
@@ -118,7 +118,7 @@ class ContactDetailTab extends Component {
                     />
                     {/* Documents */}
                   </span>
-                  {activeKey === "3" && (
+                  {activeKey === "1" && (
                     <>
                       <PlusOutlined
                         type="plus"
@@ -135,7 +135,7 @@ class ContactDetailTab extends Component {
                   )}
                 </>
               }
-              key="3"
+              key="1"
             >
               <Suspense fallback={"Loading ..."}>
                 {" "}

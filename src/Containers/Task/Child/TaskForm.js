@@ -206,12 +206,29 @@ const [priority,setpriority]=useState(props.selectedTask
 
     return candidateOptions;
   };
-  const opportunityNameOption = props.allOpportunityData.map((item) => {
+
+
+  const opportunityNameOption = props.allOpportunityData
+  .sort((a, b) => {
+    const libraryNameA = a.opportunityName && a.opportunityName.toLowerCase();
+    const libraryNameB = b.opportunityName && b.opportunityName.toLowerCase();
+    if (libraryNameA < libraryNameB) {
+      return -1;
+    }
+    if (libraryNameA > libraryNameB) {
+      return 1;
+    }
+
+    // names must be equal
+    return 0;
+  })
+  .map((item) => {
     return {
-      label: `${item.opportunityName}`,
+      label: `${item.opportunityName || ""}`,
       value: item.opportunityId,
     };
   });
+ 
 
   
 
@@ -275,12 +292,28 @@ const [priority,setpriority]=useState(props.selectedTask
         value: item.customerId,
       };
     });
-    const ContactData = props.filteredContact.map((item) => {
+
+    const ContactData = props.filteredContact
+    .sort((a, b) => {
+      const libraryNameA = a.fullName && a.fullName.toLowerCase();
+      const libraryNameB = b.fullName && b.fullName.toLowerCase();
+      if (libraryNameA < libraryNameB) {
+        return -1;
+      }
+      if (libraryNameA > libraryNameB) {
+        return 1;
+      }
+
+      // names must be equal
+      return 0;
+    })
+    .map((item) => {
       return {
-        label: `${item.fullName}`,
+        label: `${item.fullName || ""}`,
         value: item.contactId,
       };
     });
+  
     const today = dayjs();
     var todayDate = new Date();
     console.log(today);

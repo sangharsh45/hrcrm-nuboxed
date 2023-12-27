@@ -155,19 +155,46 @@ function CallForm(props) {
         value: item.employeeId,
       };
     });
-    const opportunityNameOption = props.allOpportunityData.map((item) => {
+    const sortedOpportunity =props.allOpportunityData.sort((a, b) => {
+      const nameA = a.opportunityName.toLowerCase();
+      const nameB = b.opportunityName.toLowerCase();
+      // Compare department names
+      if (nameA < nameB) {
+        return -1;
+      }
+      if (nameA > nameB) {
+        return 1;
+      }
+      return 0;
+    });
+    const opportunityNameOption = sortedOpportunity.map((item) => {
       return {
         label: `${item.opportunityName}`,
         value: item.opportunityId,
       };
     });
+    const ContactData = props.filteredContact
+    .sort((a, b) => {
+      const libraryNameA = a.fullName && a.fullName.toLowerCase();
+      const libraryNameB = b.fullName && b.fullName.toLowerCase();
+      if (libraryNameA < libraryNameB) {
+        return -1;
+      }
+      if (libraryNameA > libraryNameB) {
+        return 1;
+      }
 
-    const ContactData = props.filteredContact.map((item) => {
+      // names must be equal
+      return 0;
+    })
+    .map((item) => {
       return {
-        label: `${item.fullName}`,
+        label: `${item.fullName || ""}`,
         value: item.contactId,
       };
     });
+
+
     const salesNameOption = props.sales.map((item) => {
       return {
         label: `${item.fullName || ""}`,
