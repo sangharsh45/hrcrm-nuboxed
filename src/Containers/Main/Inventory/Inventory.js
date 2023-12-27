@@ -4,7 +4,6 @@ import { connect } from "react-redux";
 import InventoryHeader from "./InventoryHeader";
 import { BundleLoader } from "../../../Components/Placeholder";
 import { setInventoryViewType } from "./InventoryAction";
-import InventoryTable from "./InventoryTable";
 
 const InventoryCard =lazy(()=>import("./InventoryCard"));
 
