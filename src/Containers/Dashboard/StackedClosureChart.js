@@ -17,6 +17,7 @@ import {
 } from "recharts";
 import OpportunityCardView from "../Opportunity/OpportunityCardView";
 import { MainWrapper } from "../../Components/UI/Elements";
+import { FormattedMessage } from "react-intl";
 
 
 // const data = [
@@ -102,7 +103,13 @@ import { MainWrapper } from "../../Components/UI/Elements";
       {/* Recruitment Performance */}
       <FlexContainer justifyContent="space-between">
       {/* <div style={{ width: "47%" }}> */}
-      <span>Hours</span>
+      <span>
+      <FormattedMessage
+                        id="app.hours"
+                        defaultMessage="Hours"
+                      />
+        
+        </span>
       {/* </div> */}
       {/* <div style={{ width: "47%" }}> */}
     <TimeInterval

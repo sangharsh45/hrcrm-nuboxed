@@ -4,14 +4,7 @@ import { bindActionCreators } from "redux";
 import ListAltIcon from "@mui/icons-material/ListAlt";
 import {  StyledTabs } from "../../Components/UI/Antd";
 import EventAvailableIcon from '@mui/icons-material/EventAvailable';
-import ActionNotification from "../Dashboard/ActionNotification";
-import UpcomingIcon from '@mui/icons-material/Upcoming';
-import TipsAndUpdatesIcon from "@mui/icons-material/TipsAndUpdates";
-// import {getTodosCount} from "./DashboardAction";
-import DashboardTodo from "./Child/DashboardTodo";
-import UpcomingEvents from "./Child/UpcomingEvents";
-import { Badge } from "antd";
-import Task from "../Settings/Task/Task";
+import { FormattedMessage } from "react-intl";
 import TabsWrapper1 from "../../Components/UI/Layout/TabsWrapper1";
 const TaskNew =lazy(()=>import("./TaskNew"));
 const TaskCompleted=lazy(()=>import("./TaskCompleted"));
@@ -66,7 +59,12 @@ class TaskDashboardTab extends Component {
                 <>
                   <ListAltIcon style={{fontSize:"1.1rem"}}/>
                  
-               <span class=" ml-1">Open Tasks</span>
+               <span class=" ml-1">
+               <FormattedMessage
+                id="app.openTasks"
+                defaultMessage="Open Tasks"
+              />
+                </span>
               
 
                   {activeKey === "1" && (
@@ -87,7 +85,13 @@ class TaskDashboardTab extends Component {
                 <>
                   <ListAltIcon style={{fontSize:"1.1rem"}}/>
                  
-               <span class=" ml-1">Completed Tasks</span>
+               <span class=" ml-1">
+               <FormattedMessage
+                id="app.completedTasks"
+                defaultMessage="Completed Tasks"
+              />
+                {/* Completed Tasks */}
+                </span>
               
 
                   {activeKey === "2" && (
@@ -108,7 +112,13 @@ class TaskDashboardTab extends Component {
                 <>
                   <EventAvailableIcon style={{fontSize:"1.1rem"}}/>
 
-                  <span class=" ml-1">Events</span>
+                  <span class=" ml-1">
+                  <FormattedMessage
+                id="app.events"
+                defaultMessage="Events"
+              />
+                    {/* Events */}
+                    </span>
 
                   {activeKey === "3" && (
                     <>

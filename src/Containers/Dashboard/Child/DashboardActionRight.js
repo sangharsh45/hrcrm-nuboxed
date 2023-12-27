@@ -12,6 +12,7 @@ import {
 import { Link } from "react-router-dom";
 import { bindActionCreators } from "redux";
 import TimeInterval from "../../../Utils/TimeInterval";
+import { FormattedMessage } from "react-intl";
 
 const HeaderActionRight = (props) => {
   const {
@@ -36,7 +37,11 @@ const HeaderActionRight = (props) => {
           cursor:"pointer"
         }}
         >
-          Tasks
+            <FormattedMessage
+                        id="app.tasks"
+                        defaultMessage="Tasks"
+                      />
+          {/* Tasks */}
         </span>
   
         &nbsp;
@@ -48,7 +53,11 @@ const HeaderActionRight = (props) => {
           cursor:"pointer"
         }}
         >
-           Prospect
+           <FormattedMessage
+                        id="app.prospect"
+                        defaultMessage="Prospect"
+                      />
+           
         </span>
 )}
         &nbsp;
@@ -59,8 +68,12 @@ const HeaderActionRight = (props) => {
           color:activeButton === "Investors" && "#1890ff",
           cursor:"pointer"
         }}
-        >     
-           Investors
+        >  
+          <FormattedMessage
+                        id="app.investors"
+                        defaultMessage="Investors"
+                      />   
+           
         </span>
 )}
     &nbsp;
@@ -72,7 +85,11 @@ const HeaderActionRight = (props) => {
           cursor:"pointer"
         }}
         >
-          Customer
+           <FormattedMessage
+                        id="app.customer"
+                        defaultMessage="Customer"
+                      /> 
+          
         </span>
     )}
     &nbsp;

@@ -39,6 +39,7 @@ import AddCustomerEmailDrawerModal from "../UpdateCustomer/AddCustomerEmailDrawe
 import ReactCountryFlag from 'react-country-flag';
 import AddCustomerNotesDrawerModal from "../CustomerDetail/AddCustomerNotesDrawerModal";
 import CustomerPulseDrawerModal from "./CustomerPulseDrawerModal";
+import { FormattedMessage } from "react-intl";
 
 const UpdateCustomerModal = lazy(() =>
   import("../UpdateCustomer/UpdateCustomerModal")
@@ -138,14 +139,61 @@ const [rowdata, setrowdata] = useState("");
          <div className=' flex justify-end sticky top-28 z-auto'>
         <OnlyWrapCard style={{backgroundColor:"#E3E8EE"}}>
         <div className=" flex justify-between w-[97.5%] p-2 bg-transparent font-bold sticky top-0 z-10">
-        <div className=" md:w-[17.7rem]">Name</div>
-        <div className=" md:w-[5.1rem]">Sector</div>
-        <div className=" md:w-[5.8rem] ">Country</div>
-        <div className="md:w-[5.9rem]"># Opportunity</div>
-        <div className="md:w-[7.8rem]">Pipeline</div>
-        <div className="md:w-[6.9rem]">Weighted</div>
-        <div className="md:w-[5.2rem]">Assigned to</div>
-        <div className="md:w-[11.8rem]">Owner</div>
+        <div className=" md:w-[17.7rem]"> 
+         <FormattedMessage
+                        id="app.name"
+                        defaultMessage="Name"
+                      />
+                      </div>
+        <div className=" md:w-[5.1rem]">
+        <FormattedMessage
+                        id="app.sector"
+                        defaultMessage="Sector"
+                      />
+          
+          </div>
+        <div className=" md:w-[5.8rem] ">
+        <FormattedMessage
+                        id="app.country"
+                        defaultMessage="Country"
+                      />
+          
+          </div>
+        <div className="md:w-[5.9rem]">
+        <FormattedMessage
+                        id="app.opportunity"
+                        defaultMessage="Opportunity"
+                      />
+
+          </div>
+        <div className="md:w-[7.8rem]">
+        <FormattedMessage
+                        id="app.pipeline"
+                        defaultMessage="Pipeline"
+                      />
+          
+          </div>
+        <div className="md:w-[6.9rem]">
+        <FormattedMessage
+                        id="app.weighted"
+                        defaultMessage="Weighted"
+                      />
+          
+          </div>
+        <div className="md:w-[5.2rem]">
+        <FormattedMessage
+                        id="app.assignedTo"
+                        defaultMessage="Assigned to"
+                      />
+   
+          </div>
+        <div className="md:w-[11.8rem]">
+        <FormattedMessage
+                        id="app.owner"
+                        defaultMessage="Owner"
+                      />
+          
+          </div>
         <div className="w-[3.8rem]"></div>
 
       </div>
@@ -319,7 +367,14 @@ const [rowdata, setrowdata] = useState("");
   cancelText="No"
 >
                        <Button type="primary">
-                     <span class="text-sm" >Convert as Customer</span>
+                     <span class="text-sm" >
+                     <FormattedMessage
+                        id="app.convertAsCustomer"
+                        defaultMessage="Convert as Customer"
+                      />
+                     
+                      
+                      </span>
                         </Button>
                         </Popconfirm>
                    </div>

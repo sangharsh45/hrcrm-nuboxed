@@ -12,6 +12,7 @@ import UpcomingEvents from "./Child/UpcomingEvents";
 import { Badge } from "antd";
 import DashboardTable2 from "./Child/DashboardTable2";
 import DashboardAllTable2 from "./DashboardAllTable2";
+import { FormattedMessage } from "react-intl";
 
 const TabPane = StyledTabs.TabPane;
 function handleRefreshPage() {
@@ -67,7 +68,13 @@ class TodoDashboardTab extends Component {
                 count={this.props.todosCount.todo}
                 overflowCount={999}
               > 
-               <span class=" ml-1">ToDo</span>
+               <span class=" ml-1">
+               <FormattedMessage
+                id="app.toDo"
+                defaultMessage="ToDo"
+              />
+                {/* ToDo */}
+                </span>
                </Badge>
 
                   {activeKey === "1" && (
@@ -90,7 +97,13 @@ class TodoDashboardTab extends Component {
                   <DnsIcon 
                    style={{fontSize:"1.1rem"}}
                   />
-                    <span class=" ml-1">Open Requirements</span>
+                    <span class=" ml-1">
+                    <FormattedMessage
+                id="app.openRequirements"
+                defaultMessage="Open Requirements"
+              />
+                      {/* Open Requirements */}
+                      </span>
                   
                   {activeKey === "2" && (
                     <>

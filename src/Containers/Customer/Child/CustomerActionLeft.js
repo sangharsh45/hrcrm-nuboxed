@@ -158,7 +158,11 @@ function  handleFilterChange(data){
               color: props.viewType === "all" && "#1890ff",
             }}
           >
-           ALL
+               <FormattedMessage
+                        id="app.all"
+                        defaultMessage="ALL"
+                      />
+           
           </span>
         </Badge>
       </Tooltip>
@@ -186,6 +190,7 @@ function  handleFilterChange(data){
         <div class=" w-72 max-sm:w-32">
         <Input
         placeholder="Search by Name or Sector"
+
         width={"100%"}
             suffix={suffix}
             onPressEnter={handleSearch}  
@@ -218,7 +223,14 @@ function  handleFilterChange(data){
           
         </Button> */}
         <div class="w-[22%] mt-2 ml-2">
-          <StyledSelect placeholder="Sort"  onChange={(e)  => props.handleFilterChange(e)}>
+          <StyledSelect       placeholder={
+          <span>
+                   <FormattedMessage
+                        id="app.sort"
+                        defaultMessage="Sort"
+                      />
+          </span>
+        } onChange={(e)  => props.handleFilterChange(e)}>
           <Option value="CreationDate">Creation Date</Option>
             <Option value="ascending">A To Z</Option>
             <Option value="descending">Z To A</Option>

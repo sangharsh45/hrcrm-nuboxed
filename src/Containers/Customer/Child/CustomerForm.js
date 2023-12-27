@@ -71,7 +71,19 @@ function CustomerForm(props) {
     function classNames(...classes) {
       return classes.filter(Boolean).join(' ')
     }
-    const sectorOption = props.sectors.map((item) => {
+    const sortedSector =props.sectors.sort((a, b) => {
+      const nameA = a.sectorName.toLowerCase();
+      const nameB = b.sectorName.toLowerCase();
+      // Compare department names
+      if (nameA < nameB) {
+        return -1;
+      }
+      if (nameA > nameB) {
+        return 1;
+      }
+      return 0;
+    });
+    const sectorOption = sortedSector.map((item) => {
       return {
         label: item.sectorName || "",
         value: item.sectorId,
@@ -190,7 +202,7 @@ function CustomerForm(props) {
                     name="url"
                     type="text"
                     // label="URL"
-                    label={<FormattedMessage id="app." defaultMessage="URL" />}
+                    label={<FormattedMessage id="app.url" defaultMessage="URL" />}
                     isColumn
                     width={"100%"}
                     component={InputComponent}
@@ -218,7 +230,7 @@ function CustomerForm(props) {
                         // label="Phone #"
                         label={
                           <FormattedMessage
-                            id="app.phone"
+                            id="app.dialcode"
                             defaultMessage="Dial Code"
                           />
                         }
@@ -231,7 +243,13 @@ function CustomerForm(props) {
                     <div class=" w-8/12">
                       <FastField
                         name="phoneNumber"
-                        label="Phone No"
+                        label={
+                          <FormattedMessage
+                            id="app.phoneno"
+                            defaultMessage="Phone No"
+                          />
+                        }
+                        // label="Phone No"
                         isColumn
                         component={InputComponent}
                         inlineLabel
@@ -305,7 +323,11 @@ function CustomerForm(props) {
             <Listbox.Label className="block font-semibold text-[0.75rem]  leading-lh1.2  "
             // style={{boxShadow:"0em 0.25em 0.625em -0.25em" }}
             >
-              Assigned to
+              <FormattedMessage
+                        id="app.assignedTo"
+                        defaultMessage="Assigned to"
+                      />
+           
             </Listbox.Label>
             <div className="relative ">
               <Listbox.Button style={{boxShadow: "rgb(170, 170, 170) 0px 0.25em 0.62em"}} className="relative w-full leading-4 cursor-default border border-gray-300 bg-white py-0.5 pl-3 pr-10 text-left shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm">
@@ -434,7 +456,13 @@ function CustomerForm(props) {
                   
                   <div class="mt-8" style={{ width: "100%",backgroundImage: "linear-gradient(-90deg, #00162994, #94b3e4)" }}>
                       <div>
-                  <HeaderLabel style={{color:"white"}} >Corporate Address</HeaderLabel>
+                  <HeaderLabel style={{color:"white"}} >
+                  <FormattedMessage
+                        id="app.corporateAddress"
+                        defaultMessage="Corporate Address"
+                      />
+
+                    </HeaderLabel>
                   </div>
                     </div>
                   <Spacer />

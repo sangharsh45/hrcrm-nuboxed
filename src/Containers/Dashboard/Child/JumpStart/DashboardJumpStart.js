@@ -1,6 +1,7 @@
-import React, {useEffect} from "react";
+import React, {} from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
+import { FormattedMessage } from "react-intl";
 import moment from "moment";
 import { JumpStartBox, Spacer } from "../../../../Components/UI/Elements";
 import { FlexContainer } from "../../../../Components/UI/Layout";
@@ -81,26 +82,36 @@ render() {
       <FlexContainer flexDirection="row" style={{ width: "100%"}}>
         <FlexContainer style={{ width: "100%"}}>
         
-          <JumpStartBox
+        <JumpStartBox
             noProgress
-            title="Leave Balance"
-            // bgColor="#da5432"
-            //bgColor="linear-gradient(270deg, #3066BE 0%, #005075 100%);"
+            title={
+              <FormattedMessage
+                id="app.leavebalance"
+                defaultMessage="Leave Balance"
+              />
+            }
             value={
               this.props.user.department === "Recruiter"
-              ?this.props.showDatelist.openRequirement
-              :this.props.showSalesDatelist.openRequirement
+                ? this.props.showDatelist.openRequirement
+                : this.props.showSalesDatelist.openRequirement
             }
             isLoading={
               this.props.user.department === "Recruiter"
-              ?this.props.fetchingDatewiseReport
-              :this.props.fetchingSalesDatewiseReport
+                ? this.props.fetchingDatewiseReport
+                : this.props.fetchingSalesDatewiseReport
             }
           />
+  
        
           <JumpStartBox
             noProgress
-            title="AV hours this month  "
+            title={
+              <FormattedMessage
+                id="app.avHoursThisMonth"
+                defaultMessage="AV hours this month"
+              />
+            }
+            // title="AV hours this month  "
             value={
               // this.props.user.department === "Recruiter"
               // ?this.props.showDatelist.openPosition
@@ -124,7 +135,13 @@ render() {
           /> */}
           <JumpStartBox
             noProgress
-            title="Open Tasks"
+            // title="Open Tasks"
+            title={
+              <FormattedMessage
+                id="app.openTasks"
+                defaultMessage="Open Tasks"
+              />
+            }
             //bgColor="linear-gradient(270deg, #3066BE 0%, #005075 100%);"
             // value={this.props.showDatelist.selectted}
             value={
@@ -143,7 +160,13 @@ render() {
           />
           <JumpStartBox
             noProgress
-            title="Joining Date"
+            title={
+              <FormattedMessage
+                id="app.joiningDate"
+                defaultMessage="Joining Date"
+              />
+            }
+            // title="Joining Date"
            // bgColor="linear-gradient(270deg, #3066BE 0%, #005075 100%);"
            value={formattedDate}
             // value={this.props.showDatelist.onboarded}
