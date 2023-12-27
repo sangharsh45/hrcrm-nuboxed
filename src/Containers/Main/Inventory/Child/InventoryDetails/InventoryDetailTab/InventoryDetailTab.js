@@ -1,19 +1,18 @@
 import React, { Component, lazy, PureComponent, Suspense } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { PlusOutlined } from "@ant-design/icons";
 import { StyledTabs } from "../../../../../../Components/UI/Antd";
 import { Spacer } from "../../../../../../Components/UI/Elements";
 import { TabsWrapper } from "../../../../../../Components/UI/Layout";
-import { Tooltip } from "antd";
 import { withRouter } from "react-router";
 import {
   handleAddDispatchModal,
   handleAddOutputReasonModal,
 } from "../../../InventoryAction";
-import ReceivedTable from "../Recieved/ReceivedTable";
 import ViewInArIcon from '@mui/icons-material/ViewInAr';
 
+const ReceivedTable = lazy(() =>
+import( "../Recieved/ReceivedTable"));
 const InventoryConsumptionForm = lazy(() =>
   import("../Consumption/InventoryConsumptionForm")
 );
@@ -38,7 +37,6 @@ class InventoryDetailTab extends PureComponent {
     };
   }
   componentDidMount() {
-    // alert(this.props.tabData);
     console.log(this.props.tabData.typeOf);
     this.setState({ activeKey: this.props.tabData });
   }

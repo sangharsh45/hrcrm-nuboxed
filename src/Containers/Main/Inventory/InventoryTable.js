@@ -7,7 +7,6 @@ import moment from "moment";
 import { Link } from "../../../Components/Common";
 import { getInventory, handleInventoryRoomRackModal } from "./InventoryAction";
 import Highlighter from "react-highlight-words";
-import InventoryDetailView from "./InventoryDetailView";
 import InventoryRoomRackModal from "./InventoryRoomRackModal";
 import { StyledTable } from "../../../Components/UI/Antd";
 

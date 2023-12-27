@@ -1,15 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { Input, Space, Button, Tooltip } from "antd";
-import { SearchOutlined } from "@ant-design/icons";
+import {Button, Tooltip } from "antd";
 import moment from "moment";
 import { Link } from "../../../Components/Common";
 import { getInventory, handleInventoryRoomRackModal } from "./InventoryAction";
-import Highlighter from "react-highlight-words";
-import InventoryDetailView from "./InventoryDetailView";
 import InventoryRoomRackModal from "./InventoryRoomRackModal";
-import { StyledTable } from "../../../Components/UI/Antd";
 import { OnlyWrapCard } from '../../../Components/UI/Layout';
 import InfiniteScroll from "react-infinite-scroll-component";
 
@@ -22,7 +18,6 @@ const InventoryCard = (props) => {
     getInventory,
     handleInventoryRoomRackModal,
     inventory,
-    locationsType,
     orgId,
     addroomrackininventory,
     fetchingInventoryList
