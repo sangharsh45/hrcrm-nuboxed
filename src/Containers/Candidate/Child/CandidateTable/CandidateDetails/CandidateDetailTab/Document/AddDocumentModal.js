@@ -34,6 +34,7 @@ class AddDocumentModal extends Component {
     super(props);
     this.state = {
       documentshare: false,
+      contract:false,
       approvalAbove: false,
       ownerAbove: "Specific",
       selectedownerAbove: "Specific",
@@ -50,6 +51,9 @@ class AddDocumentModal extends Component {
 handleTypeShare=(checked)=>{
   this.setState({ typeSharing:checked});
 }
+handleContract = (checked) => {
+  this.setState({ contract: checked });
+};
   componentDidMount(){
     this.props.getDocuments();
     const doclistsend = this.props.documents.map((item) => {
@@ -147,6 +151,7 @@ handleTypeShare=(checked)=>{
                 documentTypeId:this.state.selectedDocument,
                 // documentName: "", //input
                 documentDescription: "",
+                contract: this.state.contract ? "true" : "false",
                 typeName:this.state.checked ? "true" : this.state.selectedDocument ? "false":"true",
                 // levelType:
                 //   this.state.approvalAbove === true ? "Above" : "Specific",
@@ -164,6 +169,7 @@ handleTypeShare=(checked)=>{
                   {
                     ...values,
                     documentTypeId:this.state.selectedDocument,
+                    contract: this.state.contract ? "true" : "false",
                     //   this.state.documentshare === true
                     //     ? "Public"
                     //     : "Confidential",
@@ -223,6 +229,7 @@ handleTypeShare=(checked)=>{
                         inlineLabel
                         
                       /> */}
+                    
                       <StyledLabel>Type</StyledLabel> 
                       <Select
                         name="documentTypeId"
@@ -255,6 +262,16 @@ handleTypeShare=(checked)=>{
                        
                       />
                       </div>
+                      </div>
+                      <div class=" flex  mt-4">
+                        <StyledLabel>Contract</StyledLabel>
+                        <Switch
+                          style={{ width: "6.25em", marginLeft: "0.625em" }}
+                          onChange={this.handleContract}
+                          checked={this.state.contract}
+                          checkedChildren="Yes"
+                          unCheckedChildren="No"
+                        />
                       </div>
                       
                       {/* <StyledLabel >Sharing</StyledLabel> */}

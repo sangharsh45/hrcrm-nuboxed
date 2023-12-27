@@ -44,6 +44,7 @@ class LinkedDocuments extends Component {
         <div className=" md:w-[2.5rem]">Date</div>
        <div className=" md:w-[1.1rem]">Name</div>
        <div className=" md:w-[2.1rem] ">Type</div>
+       <div className=" md:w-[2.1rem] ">File Name</div>
        <div className=" md:w-[25.5rem] ">Uploaded By</div>
 
       </div>
@@ -84,6 +85,15 @@ class LinkedDocuments extends Component {
        
                             <div class=" font-normal text-[0.82rem] text-cardBody font-poppins">
                             <span>{elipsize(item.documentContentType || "", 15)}</span>
+                            </div>
+                          </div>
+                          <div className=" flex font-medium flex-row md:w-[9.21rem] max-sm:flex-row w-full mt-1 max-sm:justify-between">
+                            {/* <div class=" text-sm text-cardBody font-semibold font-poppins max-sm:hidden">
+                              Refurbish
+                            </div> */}
+       
+                            <div class=" font-normal text-[0.82rem] text-cardBody font-poppins">
+                            <span>{item.contract}</span>
                             </div>
                           </div>
                           <div className=" flex font-medium flex-row md:w-[9.22rem] max-sm:flex-row w-full mt-1 max-sm:justify-between">

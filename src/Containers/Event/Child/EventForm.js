@@ -67,8 +67,20 @@ function EventForm (props) {
    props.getAllOpportunityData(userId)
    props.getFilteredEmailContact(userId);
   },[])
+  const sortedEmployee =props.employees.sort((a, b) => {
+    const nameA = a.fullName.toLowerCase();
+    const nameB = b.fullName.toLowerCase();
+    // Compare department names
+    if (nameA < nameB) {
+      return -1;
+    }
+    if (nameA > nameB) {
+      return 1;
+    }
+    return 0;
+  });
   
-    const employeesData =props.employees.map((item) => {
+    const employeesData =sortedEmployee.map((item) => {
       return {
         label: `${item.fullName}`,
         // label: `${item.salutation || ""} ${item.firstName ||
@@ -76,13 +88,38 @@ function EventForm (props) {
         value: item.employeeId,
       };
     });
-    const opportunityNameOption = props.allOpportunityData.map((item) => {
+    const sortedOpportunity =props.allOpportunityData.sort((a, b) => {
+      const nameA = a.opportunityName.toLowerCase();
+      const nameB = b.opportunityName.toLowerCase();
+      // Compare department names
+      if (nameA < nameB) {
+        return -1;
+      }
+      if (nameA > nameB) {
+        return 1;
+      }
+      return 0;
+    });
+    const opportunityNameOption = sortedOpportunity.map((item) => {
       return {
         label: `${item.opportunityName}`,
         value: item.opportunityId,
       };
     });
-    const ContactData = props.filteredContact.map((item) => {
+
+    const sortedContact =props.filteredContact.sort((a, b) => {
+      const nameA = a.fullName.toLowerCase();
+      const nameB = b.fullName.toLowerCase();
+      // Compare department names
+      if (nameA < nameB) {
+        return -1;
+      }
+      if (nameA > nameB) {
+        return 1;
+      }
+      return 0;
+    });
+    const ContactData = sortedContact.map((item) => {
       return {
         label: `${item.fullName}`,
         value: item.contactId,

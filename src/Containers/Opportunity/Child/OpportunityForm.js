@@ -60,25 +60,24 @@ function OpportunityForm(props) {
 
 
   function getAreaOptions(filterOptionKey, filterOptionValue) {
-    const contactOptions =
-      props.contactData.length &&
-      props.contactData
-        .filter((option) => {
-          if (
-            option.customerId === filterOptionValue &&
-            option.probability !== 0
-          ) {
-            return option;
-          }
-        })
-        .map((option) => ({
-          label: option.fullName || "",
-          value: option.contactId,
-        }));
-
+    const contactOptions = props.contactData
+      .filter((option) => option.customerId === filterOptionValue && option.probability !== 0)
+      .map((option) => ({
+        label: option.fullName || "",
+        value: option.contactId,
+      }))
+      .sort((a, b) => {
+        // Replace 'propertyToSortBy' with the actual property you want to sort by
+        const propertyToSortByA = a.label.toLowerCase();
+        const propertyToSortByB = b.label.toLowerCase();
+        
+        // Use localeCompare for case-insensitive string comparison
+        return propertyToSortByA.localeCompare(propertyToSortByB);
+      });
+  
     return contactOptions;
   }
-
+  
 
 
   function getInitiativeOptions(filterOptionKey, filterOptionValue) {
@@ -135,8 +134,19 @@ function OpportunityForm(props) {
 
     return StagesOptions;
   }
-
-  const WorkflowOptions = props.oppLinkWorkflow.map((item) => {
+  const sortedWorkflow =props.oppLinkWorkflow.sort((a, b) => {
+    const nameA = a.workflowName.toLowerCase();
+    const nameB = b.workflowName.toLowerCase();
+    // Compare department names
+    if (nameA < nameB) {
+      return -1;
+    }
+    if (nameA > nameB) {
+      return 1;
+    }
+    return 0;
+  });
+  const WorkflowOptions = sortedWorkflow.map((item) => {
     return {
       label: `${item.workflowName || ""}`,
       value: item.opportunityWorkflowDetailsId,

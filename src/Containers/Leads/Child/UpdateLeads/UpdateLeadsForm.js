@@ -503,7 +503,7 @@ const mapStateToProps = ({ auth, leads,employee,source }) => ({
     user: auth.userDetails,
     sources: source.sources,
     userId: auth.userDetails.userId,
-    organizationId: auth.userDetails.organizationId,
+    orgId: auth.userDetails.organizationId,
     employees: employee.employees,
     leadsAllData:leads.leadsAllData,
     allCustomerEmployeeList:employee.allCustomerEmployeeList,
