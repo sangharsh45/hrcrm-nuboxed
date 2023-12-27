@@ -1672,7 +1672,8 @@ case types.ADD_EXPERIENCE_BY_CANDIDATE_ID_REQUEST:
                       candidateByUserId: [], 
                       // deletedTruck: [] 
                     };
-  
+
+                
 
     default:
       return state;

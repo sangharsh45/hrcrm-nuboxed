@@ -1,11 +1,8 @@
-import React, { Component, lazy, Suspense } from "react";
+import React, { Component, lazy, } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-// import { Icon } from "antd";
-
 import { StyledDrawer } from "../../../../../../../Components/UI/Antd";
-import { FlexContainer } from "../../../../../../../Components/UI/Layout";
-import ActivityTab from "./ActivityTab";
+const ActivityTab =lazy(()=>import("../Activity/ActivityTab"));
 
 class ActivityModal extends Component {
   render() {
@@ -20,17 +17,17 @@ class ActivityModal extends Component {
         <StyledDrawer
           title="Activity"
           visible={addCandidateActivityModal}
-          width={"55vw"}
+          width={"60%"}
           bodyStyle={{ padding: 0 }}
-          style={{marginTop:"5rem"}}
+          style={{marginTop:"3rem"}}
           maskClosable={false}
           destroyOnClose
           onClose={() => handleCandidateActivityModal(false)}
           footer={null}
         >
-          <FlexContainer alignItems="center" justifyContent="space-evenly">
+          <div class=" flex justify-evenly items-center" >
             <ActivityTab />
-          </FlexContainer>
+          </div>
         </StyledDrawer>
       </>
     );

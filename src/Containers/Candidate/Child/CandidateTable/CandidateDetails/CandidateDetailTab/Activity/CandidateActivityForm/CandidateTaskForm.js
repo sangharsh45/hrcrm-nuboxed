@@ -1,30 +1,18 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { Button, Icon, Tooltip } from "antd";
-import { Formik, Form, Field, FastField } from "formik";
-import * as Yup from "yup";
+import { Button, Tooltip } from "antd";
+import { Formik, Form, Field, } from "formik";
 import dayjs from "dayjs";
 import { FormattedMessage } from "react-intl";
-import { Spacer } from "../../../../../../../../Components/UI/Elements";
-
 import SearchSelect from "../../../../../../../../Components/Forms/Formik/SearchSelect";
 import { InputComponent } from "../../../../../../../../Components/Forms/Formik/InputComponent";
-
-import { SelectComponent } from "../../../../../../../../Components/Forms/Formik/SelectComponent";
-
 import { DatePicker } from "../../../../../../../../Components/Forms/Formik/DatePicker";
 import {
   addCandidateTask,
-  // updateTask,
-  // handleTaskModal,
   getActivityListByCandidateId
 } from "../../../../../../CandidateAction";
-// import { handleChooserModal } from "../../../Planner/PlannerAction";
-import { ExclamationCircleOutlined } from "@ant-design/icons";
 import { StyledLabel } from "../../../../../../../../Components/UI/Elements";
-// import { getOppoStages } from "../../../Settings/SettingsAction";
-import { FlexContainer } from "../../../../../../../../Components/UI/Layout";
 import { TextareaComponent } from "../../../../../../../../Components/Forms/Formik/TextareaComponent";
 import ButtonGroup from "antd/lib/button/button-group";
 import { getTasks } from "../../../../../../../Settings/Task/TaskAction";
@@ -272,17 +260,11 @@ class CandidateTaskForm extends Component {
             ...rest
           }) => (
             <Form className="form-background">
-              <div style={{ display: "flex", justifyContent: "space-between" }}>
-                <div
-                  style={{
-                    height: "100%",
-                    width: "45%",
-                  }}
+          <div class=" flex justify-between " >
+                <div class=" h-full w-[45%]"
                 >
-                  <div
-                    style={{ display: "flex", justifyContent: "space-between" }}
-                  >
-                    <div style={{ width: "65%" }}>
+    <div class=" flex justify-between " >
+    <div class=" w-[65%] " >
                       <Field
                         isRequired
                         name="taskName"
@@ -294,10 +276,10 @@ class CandidateTaskForm extends Component {
                       />
                     </div>
 
-                    <div style={{ width: "30%" }}>
+                    <div class=" w-[30%] " >
                       <StyledLabel>Status</StyledLabel>
 
-                      <div style={{ width: "100%" }}>
+                      <div class=" w-full " >
                         <ButtonGroup>
                           <StatusIcon
                             color="blue"
@@ -331,20 +313,14 @@ class CandidateTaskForm extends Component {
                       </div>
                     </div>
                   </div>
-                  <Spacer />
-                  <FlexContainer
-                    justifyContent="spcae-between"
-                    style={{ width: "100%" }}
-                  >
-                    <div style={{ width: "45%" }}>
-                      <FlexContainer
-                        justifyContent="spcae-between"
-                        style={{ width: "100%" }}
-                      >
-                        <div style={{ width: "100%" }}>
+                  <div class=" flex justify-between w-full mt-4 " >
+                  <div class=" w-[45%]"
+                >
+                   <div class=" flex justify-between w-full" >
+                        <div class=" w-full" style={{ width: "100%" }}>
                           <StyledLabel>Priority</StyledLabel>
 
-                          <FlexContainer>
+                          <div class=" flex">
                           <Tooltip
                               //title="High"
                               title={
@@ -418,18 +394,15 @@ class CandidateTaskForm extends Component {
                                 }}
                               ></Button>
                             </Tooltip>
-                          </FlexContainer>
+                          </div>
                         </div>
-                      </FlexContainer>
+                      </div>
                     </div>
 
-                    <div style={{ width: "47%", marginLeft: "1.8em" }}>
-                      <FlexContainer
-                        justifyContent="space-between"
-                        style={{ width: "100%" }}
-                      >
+                    <div class=" w-[47%] ml-[1.8em]" >
+                    <div class=" flex justify-between w-full " >
 
-                        <div style={{ width: "100%" }}>
+                        <div class=" w-full" >
                           <StyledLabel>
                             Type
                             {/* <FormattedMessage id="app.type" defaultMessage="Type" /> */}
@@ -565,9 +538,9 @@ class CandidateTaskForm extends Component {
                             </Tooltip> */}
 
                         </div>
-                      </FlexContainer>
+                      </div>
                     </div>
-                  </FlexContainer>
+                  </div>
 
                   {/* <div style={{ width: "50%" }}>
                       <Field
@@ -590,12 +563,8 @@ class CandidateTaskForm extends Component {
                     </div>
                   </FlexContainer> */}
 
-                  <Spacer />
-                  <FlexContainer
-                    justifyContent="space-between"
-                    style={{ width: "100%" }}
-                  >
-                    <div style={{ width: "47%" }}>
+<div class=" flex justify-between mt-4 w-full" >
+                    <div class=" w-[47%]" >
                       <Field
                         isRequired
                         name="startDate"
@@ -606,10 +575,10 @@ class CandidateTaskForm extends Component {
                         isColumn
                         inlineLabel
                       />
-                      <Spacer />
+                 
                     </div>
 
-                    <div style={{ width: "47%" }}>
+                    <div class=" w-[47%]" >
                       <Field
                         isRequired
                         name="endDate"
@@ -633,9 +602,8 @@ class CandidateTaskForm extends Component {
                         }}
                       />
                     </div>
-                  </FlexContainer>
-                  <div>
-                    <Spacer style={{ marginBottom: "18px" }} />
+                  </div>
+                  <div class=" mb-[18px]">
                     {/* <Field
                       isRequired
                       defaultValue={{ label: timeZone, value: userId }}
@@ -669,11 +637,7 @@ class CandidateTaskForm extends Component {
                   </div>
                 </div>
 
-                <div
-                  style={{
-                    height: "100%",
-                    width: "45%",
-                  }}
+                <div class=" h-full w-[45%] "
                 >
                   <Field
                     name="notes"
@@ -713,11 +677,10 @@ class CandidateTaskForm extends Component {
                     style={{ flexBasis: "60%" }}
                   /> */}
 
-                  <Spacer />
+             
                 </div>
               </div>
-              <Spacer />
-              <FlexContainer justifyContent="flex-end">
+              <div class=" flex justify-end mt-4" >
                 <Button
                   type="primary"
                   htmlType="submit"
@@ -726,7 +689,7 @@ class CandidateTaskForm extends Component {
                   Create
                   {/* {isEditing ? "Update" : "Create"} */}
                 </Button>
-              </FlexContainer>
+              </div>
             </Form>
           )}
         </Formik>

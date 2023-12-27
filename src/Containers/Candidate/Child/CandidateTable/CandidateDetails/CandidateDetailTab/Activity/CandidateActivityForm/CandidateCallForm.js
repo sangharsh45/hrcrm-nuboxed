@@ -1,30 +1,21 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { Button, Icon, Switch, Tooltip } from "antd";
+import { Button, Tooltip } from "antd";
 import { Formik, Form, Field } from "formik";
-import * as Yup from "yup";
 import dayjs from "dayjs";
 import {
   Spacer,
   StyledLabel,
 } from "../../../../../../../../Components/UI/Elements";
-import SearchSelect from "../../../../../../../../Components/Forms/Formik/SearchSelect";
 import { InputComponent } from "../../../../../../../../Components/Forms/Formik/InputComponent";
-import { SelectComponent } from "../../../../../../../../Components/Forms/Formik/SelectComponent";
 import { DatePicker } from "../../../../../../../../Components/Forms/Formik/DatePicker";
 import { TimePicker } from "../../../../../../../../Components/Forms/Formik/TimePicker";
 import {
   addCall,
-  // updateCall,
-  // deleteCall,
-  // handleCallModal,
    getActivityListByCandidateId
 } from "../../../../../../CandidateAction";
-// import { handleChooserModal } from "../../../Planner/PlannerAction";
-import { FlexContainer } from "../../../../../../../../Components/UI/Layout";
 import { TextareaComponent } from "../../../../../../../../Components/Forms/Formik/TextareaComponent";
-import { StyledPopconfirm } from "../../../../../../../../Components/UI/Antd";
 const ButtonGroup = Button.Group;
 
 const green = "#39D1B4";
@@ -237,24 +228,14 @@ class CandidateCallForm extends Component {
             ...rest
           }) => (
             <Form className="form-background">
-              <div style={{ display: "flex", justifyContent: "space-between" }}>
-                <div
-                  style={{
-                    height: "100%",
-                    width: "45%",
-                  }}
+              <div class=" flex justify-between " >
+                <div class=" h-full w-[45%]"
                 >
-                  <FlexContainer
-                    justifyContent="space-between"
-                   >
-                      <Spacer style={{ marginBottom: "1.25em" }} />
-                    <div style={{ width: "30%" }}>
+               <div class=" flex justify-between " >
+                    <div class=" w-[30%] mb-[1.25em]" >
                       <StyledLabel>Type</StyledLabel>
-                      <Spacer />
-                      <FlexContainer
-                        justifyContent="space-between"
-
-                      >
+                 
+                      <div class=" flex justify-between mt-4 " >
                         <Tooltip title="Outbound">
                           <div
                             onClick={() => this.handleTypeChange("Outbound")}
@@ -301,9 +282,9 @@ class CandidateCallForm extends Component {
                             <i className="fas fa-network-wired"></i>
                           </div>
                         </Tooltip>
-                      </FlexContainer>
+                      </div>
                     </div>
-                    <div style={{ width: "55%" }}>
+                    <div class=" w-[55%]" >
                       <StyledLabel>Category</StyledLabel>
                       <Spacer />
                       <ButtonGroup>
@@ -338,7 +319,7 @@ class CandidateCallForm extends Component {
                         </Button>
                       </ButtonGroup>
                     </div>
-                  </FlexContainer>
+                  </div>
 
                   <Spacer />
                   <Field
@@ -362,10 +343,10 @@ class CandidateCallForm extends Component {
                           width: "100%",
                           }}
                   />
-                  <Spacer />
+              
 
-                  <FlexContainer justifyContent="space-between">
-                    <div style={{ width: "47%" }}>
+                  <div class=" flex justify-between mt-4" >
+                    <div class=" w-[47%]" >
                       <Field
                         name="startTime"
                         label="Start Time"
@@ -379,7 +360,7 @@ class CandidateCallForm extends Component {
                              }}
                       />
                     </div>
-                    <div style={{ width: "47%" }}>
+                    <div class=" w-[47%]" >
                       <Field
                         name="endTime"
                         label="End Time"
@@ -393,7 +374,7 @@ class CandidateCallForm extends Component {
                             }}
                       />
                     </div>
-                  </FlexContainer>
+                  </div>
                   <Spacer />
 
                   <Spacer />
@@ -415,12 +396,7 @@ class CandidateCallForm extends Component {
                     </span>
                   )}
                 </div>
-                <Spacer/>
-                <div
-                  style={{
-                    height: "100%",
-                    width: "45%",
-                  }}
+                <div class=" h-full w-[45%] mt-4"
                 >
                   <Field
                     name="callDescription"
@@ -451,7 +427,7 @@ class CandidateCallForm extends Component {
                   </>
                 )} */}
                 <Spacer />
-                <FlexContainer justifyContent="flex-end">
+                <div class=" flex justify-end" >
                 <Button
                   type="primary"
                   htmlType="submit"
@@ -460,7 +436,7 @@ class CandidateCallForm extends Component {
                   Create
                   {/* {isEditing ? "Update" : "Create"} */}
                 </Button>
-                </FlexContainer>
+                </div>
               
             </Form>
           )}

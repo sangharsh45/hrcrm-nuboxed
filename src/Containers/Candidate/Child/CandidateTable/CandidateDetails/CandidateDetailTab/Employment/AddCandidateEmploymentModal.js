@@ -20,12 +20,12 @@ class AddCandidateEmploymentModal extends Component {
           title={
             <FormattedMessage id="app.employment" defaultMessage="Employment" />
           }
-          width="55%"
+          width="60%"
           visible={addCandidateEmploymentModal}
           destroyOnClose
           maskClosable={false}
           maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}
-          style={{marginTop:"5rem"}}
+          style={{marginTop:"3rem"}}
           onClose={() => handleCandidateEmploymentModal(false)}
           footer={null}
         >

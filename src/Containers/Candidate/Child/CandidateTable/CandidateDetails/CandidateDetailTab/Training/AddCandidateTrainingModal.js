@@ -21,13 +21,13 @@ class AddCandidateTrainingModal extends Component {
           title={
             <FormattedMessage id="app.training" defaultMessage="Training" />
           }
-          width="55%"
+          width="60%"
           // height="20vh"
           visible={addCandidateTrainingModal}
           destroyOnClose
           maskClosable={false}
           maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}
-          style={{marginTop:"5rem"}}
+          style={{marginTop:"3rem"}}
           onClose={() => handleCandidateTrainingModal(false)}
           footer={null}
         >

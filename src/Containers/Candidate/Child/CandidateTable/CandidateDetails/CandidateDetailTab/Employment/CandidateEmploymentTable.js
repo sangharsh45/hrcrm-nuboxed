@@ -2,19 +2,17 @@ import React, { Component,lazy } from "react";
 import { connect } from "react-redux";
 import { FormattedMessage } from "react-intl";
 import { bindActionCreators } from "redux";
-import {
-  StyledTable,
-} from "../../../../../../../Components/UI/Antd";
-import { Icon,Tooltip } from "antd";
 import BorderColorIcon from '@mui/icons-material/BorderColor';
 import { handleCandidateUpdateEmploymentModal } from "../../../../../CandidateAction";
 import { CurrencySymbol } from "../../../../../../../Components/Common";
 import {
   getCandidateEmploymentDetails,
   setCandidateEditEmployment,
-  deleteDocument,
   deleteCandidateEmploymentTable,
 } from "../../../../../CandidateAction";
+import {  Tooltip } from "antd";
+import { OnlyWrapCard } from "../../../../../../../Components/UI/Layout";
+import styled from "styled-components";
 import DownloadIcon from '@mui/icons-material/Download';
 import moment from "moment";
 import { base_url } from "../../../../../../../Config/Auth";
@@ -173,8 +171,128 @@ class CandidateEmploymentTable extends Component {
     }
     return (
       <>
-        {/* {emailCredential && ( */}
-        <StyledTable
+     <div className=' flex justify-end sticky top-28 z-auto'>
+        <OnlyWrapCard style={{backgroundColor:"#E3E8EE"}}>
+        <div className=" flex justify-between w-[97.5%] px-2 bg-transparent font-bold sticky top-0 z-10">
+        <div className=" md:w-[10.5rem]">Company Name</div>
+       <div className=" md:w-[8.1rem]">Designation</div>
+       <div className=" md:w-[13.1rem] ">Start</div>
+       <div className=" md:w-[8.5rem] ">End</div>
+       <div className=" md:w-[8.2rem] ">Salary</div>
+       <div className="md:w-[8.5rem]">Remarks</div>
+
+      </div>
+
+      
+      {candidateEmploymentDetails.map((item) => { 
+
+                    return (
+                      <div class="w-wk">
+                      <div class=" flex rounded-xl justify-between bg-white mt-[0.5rem]  h-[2.75rem] items-center p-3">
+                        <div class="flex">
+                          <div className=" flex font-medium flex-row md:w-[20.12rem] max-sm:flex-row w-full max-sm:justify-between ">
+                            {/* <div class=" text-sm text-cardBody font-semibold font-poppins max-sm:hidden">
+                              Name
+                            </div> */}
+       
+                            <div class=" font-normal text-[0.82rem]text-cardBody font-poppins md:w-[10.1rem]">
+                              {item.companyName}
+                            </div>
+                         
+       
+                          <div className=" flex font-medium flex-col md:w-[2.25rem]  max-sm:flex-row w-full mt-1 max-sm:justify-between">
+                            {/* <div class=" text-sm text-cardBody font-semibold font-poppins max-sm:hidden">
+                              Country
+                            </div> */}
+       
+                            <div class=" font-normal text-[0.82rem] text-cardBody font-poppins">
+       {item.designationType}
+                            </div>
+                          </div>
+                      
+                        </div>
+                      
+                          <div className=" flex font-medium flex-row md:w-[9.21rem] max-sm:flex-row w-full mt-1 max-sm:justify-between">
+                            {/* <div class=" text-sm text-cardBody font-semibold font-poppins max-sm:hidden">
+                              Refurbish
+                            </div> */}
+       
+                            <div class=" font-normal text-[0.82rem] text-cardBody font-poppins">
+                            {moment(item.startDate).format("LL")}
+                            </div>
+                          </div>
+                          <div className=" flex font-medium flex-row md:w-[9.22rem] max-sm:flex-row w-full mt-1 max-sm:justify-between">
+                            {/* <div class=" text-sm text-cardBody font-semibold font-poppins max-sm:hidden">
+                              Inventory
+                            </div> */}
+       
+                            <div class=" font-normal text-[0.82rem] text-cardBody font-poppins">
+                            {moment(item.endDate).format("LL")}
+                            </div>
+                          </div>
+                          <div className=" flex font-medium flex-row md:w-[11.12rem] max-sm:flex-row w-full mt-1 max-sm:justify-between">
+                            {/* <div class=" text-sm text-cardBody font-semibold font-poppins max-sm:hidden">
+                              Inventory
+                            </div> */}
+       
+                            <div class=" font-normal text-[0.82rem] text-cardBody font-poppins">
+                            <span>
+                   <CurrencySymbol currencyType={item.currency} />
+                   {`${item.salary} ${item.salaryType}`}
+                  </span>
+                            </div>
+                          </div>
+                          <div className=" flex font-medium flex-row md:w-[7.1rem] max-sm:flex-row w-full mt-1 max-sm:justify-between ">
+                            {/* <div class=" text-sm text-cardBody font-semibold font-poppins max-sm:hidden">
+                              Billing
+                            </div> */}
+                            <div class=" font-normal text-[0.82rem] text-cardBody font-poppins">
+                         {item.description}
+                            </div>
+                          </div>
+                    
+                          <div class="flex flex-row w-[5%] max-sm:flex-row max-sm:w-[10%]">
+                            <div>
+                            <a
+                  href={`${base_url}/document/${item.documentId}`}
+                >
+                  <DownloadIcon
+                    type="download"
+                    style={{ cursor: "pointer",fontSize:"0.8rem" }}
+                  />
+                </a>
+                            </div>
+            
+                            <div></div>
+                          </div>
+                     
+                      
+                          <div class="flex flex-row w-[5%] max-sm:flex-row max-sm:w-[10%]">
+                            <div>
+                              <Tooltip title="Edit">
+                                <BorderColorIcon
+                                  style={{ cursor: "pointer", fontSize: "1rem" }}
+                                  onClick={() => {
+                                    setCandidateEditEmployment(item);
+                                    handleCandidateUpdateEmploymentModal(true);
+                                  }}
+                                />
+                              </Tooltip>
+                            </div>
+                       
+                            <div></div>
+                          </div>
+                          </div>
+                      </div>
+                    </div>
+
+
+                    )
+                })}
+      </OnlyWrapCard>
+      </div>
+
+        {/* <StyledTable
           // rowKey="opportunityId"
           columns={columns}
           dataSource={candidateEmploymentDetails}
@@ -185,7 +303,7 @@ class CandidateEmploymentTable extends Component {
           scroll={{ y: 280 }}
           pagination={false}
           onChange={console.log("task onChangeHere...")}
-        />
+        /> */}
 
         <UpdateCandidateEmploymentModal
           updateCandidateEmploymentModal={updateCandidateEmploymentModal}
@@ -237,3 +355,14 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(CandidateEmploymentTable);
+const CardWrapper = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+
+  @media only screen and (max-width: 600px) {
+    -webkit-justify-content: space-between;
+    flex-direction: column;
+    align-items: center;
+  }
+`;

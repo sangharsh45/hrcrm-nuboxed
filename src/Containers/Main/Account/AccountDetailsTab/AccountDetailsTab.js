@@ -2,40 +2,35 @@ import React, { lazy, Suspense, useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { StyledTabs } from "../../../../Components/UI/Antd";
-import { FlexContainer, TabsWrapper } from "../../../../Components/UI/Layout";
-import AccountOrderTable from "./AccountOrderTab/AccountOrderTable";
+import { TabsWrapper } from "../../../../Components/UI/Layout";
 import {
     handleLinkDistributorOrderConfigureModal,
     handleDistributorContactModal,
     handleDistributorActivityModal,
-    getOrderRecords,
     handleDistributorDocumentUploadModal,
     handleOrderGenerateModal,
     handleAddOrderModal
-} from "../AccountAction"
-import { Tooltip, Badge, Breadcrumb, Button } from "antd";
-import AddAccountModal from "./AccountOrderTab/AddAccountModal";
+} from "../AccountAction";
+import { Tooltip, Badge } from "antd";
 import AddIcon from '@mui/icons-material/Add';
-import NotesForm from "./AccountNoteTab/NoteForm"
-import AccountActivityTable from "./AccountActivityTab/AccountActivityTable";
-import AccountActivityModal from "./AccountActivityTab/AccountActivityModal";
-import AddDistributorDocumentModal from "./AccountDocumentTab/AddDistributorDocumentModal";
-import DistributorDocumentTable from "./AccountDocumentTab/DistributorDocumentTable";
-import LinkedDistributorNotes from "./AccountNoteTab/LinkedDistributorNotes";
-import AccountOrderGenerateTable from "./AccountOrder1Tab/AccountOrderGenerateTable";
-import AccountOrder1Table from "./AccountOrder1Tab/AccountOrder1Table";
-import { PlusOutlined, ShoppingCartOutlined } from "@ant-design/icons";
-import OrderGenerateModal from "./AccountOrder1Tab/OrderGenerateModal";
-import CatalogueOrderModal from "./AccountOrder1Tab/CatalogueOrderModal";
+
+const AccountOrderTable = lazy(() => import("./AccountOrderTab/AccountOrderTable"));
+const AddAccountModal = lazy(() => import("./AccountOrderTab/AddAccountModal"));
+const AccountActivityModal = lazy(() => import("./AccountActivityTab/AccountActivityModal"));
+const AddDistributorDocumentModal = lazy(() => import("./AccountDocumentTab/AddDistributorDocumentModal"));
+const DistributorDocumentTable = lazy(() => import("./AccountDocumentTab/DistributorDocumentTable"));
+const LinkedDistributorNotes = lazy(() => import("./AccountNoteTab/LinkedDistributorNotes"));
+const OrderGenerateModal = lazy(() => import("./AccountOrder1Tab/OrderGenerateModal"));
+const CatalogueOrderModal = lazy(() => import("./AccountOrder1Tab/CatalogueOrderModal"));
 const AccountContactTable = lazy(() => import("./AccountContactTab/AccountContactTable"))
 const AddAccountContact = lazy(() => import("./AccountContactTab/AddAccountContact"))
-
+const AccountActivityTable = lazy(() => import("./AccountActivityTab/AccountActivityTable"));
 
 const TabPane = StyledTabs.TabPane;
 
 function AccountDetailsTab(props) {
     useEffect(() => {
-        props.getOrderRecords(props.distributorData.distributorId);
+        // props.getOrderRecords(props.distributorData.distributorId);
 
     }, []);
     const [activeKey, setactiveKey] = useState("1")
@@ -359,7 +354,6 @@ const mapDispatchToProps = (dispatch) =>
             handleLinkDistributorOrderConfigureModal,
             handleDistributorContactModal,
             handleDistributorActivityModal,
-            getOrderRecords,
             handleDistributorDocumentUploadModal,
             handleOrderGenerateModal,
             handleAddOrderModal

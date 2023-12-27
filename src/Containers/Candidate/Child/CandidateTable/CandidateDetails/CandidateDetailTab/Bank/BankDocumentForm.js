@@ -1,12 +1,11 @@
-import React, { lazy, Suspense, Component } from "react";
+import React, {  Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { Button, Switch, Tooltip, Icon } from "antd";
-import { Formik, Form, Field, FieldArray, FastField } from "formik";
-import { Spacer, StyledLabel } from "../../../../../../../Components/UI/Elements";
+import { Button, Switch, } from "antd";
+import { Formik, Form, FastField } from "formik";
+import {StyledLabel } from "../../../../../../../Components/UI/Elements";
 import { InputComponent } from "../../../../../../../Components/Forms/Formik/InputComponent";
 import * as Yup from "yup";
-import { FlexContainer } from "../../../../../../../Components/UI/Layout";
 import { addBankDetails } from "../../../../../CandidateAction";
 import { FormattedMessage } from "react-intl";
 
@@ -61,20 +60,17 @@ class BankDocumentForm extends Component {
             ...rest
           }) => (
             <Form className="form-background">
-              <div
-                style={{
-                  width: "100%",
-                  
-                }}
+              <div class=" w-full"
               >
-                 <FlexContainer justifyContent="space-between">
-                    <div style={{width:"47%"}}>
+                 <div class=" flex justify-between" >
+                 <div class=" w-[47%]"
+              >
                   <FastField
                     name="accountHolderName"
                     //label="Account Number"
                     label={
                       <FormattedMessage
-                        id="app.accountNo"
+                        id="app.accountHolderName"
                         defaultMessage="Account Holder Name"
                       />
                     }
@@ -86,7 +82,8 @@ class BankDocumentForm extends Component {
                     />
                 </div>
                 
-                <div style={{ width: "47%" }}>
+                <div class=" w-[47%]"
+              >
                   <FastField
                     name="accountNo"
                     //label="Account Number"
@@ -103,16 +100,16 @@ class BankDocumentForm extends Component {
                     inlineLabel
                     />
                 </div>
-                </FlexContainer>
-                <Spacer />
-                <FlexContainer justifyContent="space-between">
-                  <div style={{ width: "47%" }}>
+                </div>
+                <div class=" flex justify-between mt-4" >
+                 <div class=" w-[47%]"
+              >
                     <FastField
                       name="ifscCode"
                       //label="IFSC CODE"
                       label={
                         <FormattedMessage
-                          id="app.ifscCode"
+                          id="app.swiftCode"
                           defaultMessage="SWIFT Code"
                         />
                       }
@@ -124,7 +121,8 @@ class BankDocumentForm extends Component {
                     />
                   </div>
                   
-                  <div style={{ width: "47%" }}>
+                  <div class=" w-[47%]"
+              >
                     <FastField
                       name="branchName"
                       // label="Branch Name"
@@ -141,10 +139,10 @@ class BankDocumentForm extends Component {
                       inlineLabel
                       />
                   </div>
-                </FlexContainer>
-                <Spacer />
-                <FlexContainer justifyContent="space-between">
-                    <div style={{width:"47%"}}>
+                </div>
+                <div class=" flex justify-between mt-4" >
+                 <div class=" w-[47%]"
+              >
                   <FastField
                     isRequired
                     name="bankName"
@@ -162,10 +160,9 @@ class BankDocumentForm extends Component {
                     inlineLabel
                     />
                 </div>
-                <Spacer style={{marginTop:"1.5em"}}/>
                 
-                <div style={{width:"47%",margin:"6% 0% 0% 0%"}}>
-                <FlexContainer justifyContent="space-between"> 
+                <div class=" w-[47%] mt-[1.5em]" style={{margin:"6% 0% 0% 0%"}}>
+                <div class=" flex justify-between" >
                 <StyledLabel>Default Bank?</StyledLabel>
                 <Switch
                  
@@ -174,12 +171,11 @@ class BankDocumentForm extends Component {
                   checkedChildren="Yes"
                   unCheckedChildren="No"
                 />
-                </FlexContainer>
+                </div>
               </div>
-              </FlexContainer>
+              </div>
 
-              <Spacer style={{marginTop:"1.25em"}}/>
-              <FlexContainer justifyContent="flex-end">
+              <div class=" flex justify-end mt-[1.25em]" >
                 <Button
                   htmlType="submit"
                   type="primary"
@@ -187,7 +183,7 @@ class BankDocumentForm extends Component {
                 >
                   Submit
                 </Button>
-              </FlexContainer>
+              </div>
               </div>
             </Form>
           )}
