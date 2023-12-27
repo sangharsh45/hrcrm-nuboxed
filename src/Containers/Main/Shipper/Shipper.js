@@ -9,10 +9,11 @@ import {
   getShipperByUserId,
   getAllShipperList,
 } from "./ShipperAction";
-import AddShipperModal from "./AddShipperModal";
-import AllShipperList from "./AllShipperList";
-import ShipperDeleteTable from "./ShipperDeleteTable";
-import ShipperDashboard from "./ShipperDashboard";
+
+const AddShipperModal =lazy(()=>import("./AddShipperModal"));
+const AllShipperList =lazy(()=>import("./AllShipperList"));
+const ShipperDeleteTable =lazy(()=>import("./ShipperDeleteTable"));
+const ShipperDashboard =lazy(()=>import("./ShipperDashboard"));
 const ShipperCardList =lazy(()=>import("./ShipperCardList"));
 
 
@@ -20,7 +21,6 @@ class Shipper extends Component {
   state = { currentData: "" };
   handleClear = () => {
     this.setState({ currentData: "" });
-    //this.props.getShipperByUserId(this.props.userId);
     if (this.props.viewType === "table") {
       this.props.getShipperByUserId(this.props.userId);
     } else if (this.props.viewType === "all") {
@@ -32,12 +32,10 @@ class Shipper extends Component {
   };
   render() {
     const {
-      shipper,
-      addShipperModal,
+   addShipperModal,
       handleShipperModal,
       setShipperViewType,
       viewType,
-      shipperDashboardType,
     } = this.props;
     return (
       <>

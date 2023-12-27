@@ -10,6 +10,7 @@ import {
   handleAddOutputReasonModal,
 } from "../../../InventoryAction";
 import ViewInArIcon from '@mui/icons-material/ViewInAr';
+import { FormattedMessage } from "react-intl";
 
 const ReceivedTable = lazy(() =>
 import( "../Recieved/ReceivedTable"));
@@ -23,6 +24,7 @@ const DispatchTable = lazy(() => import("../Dispatch/DispatchTable"));
 const CatalogueInventoryTable = lazy(() =>
   import("../CatalogueInventory/CatalogueInventoryTable")
 );
+
 const TabPane = StyledTabs.TabPane;
 class InventoryDetailTab extends PureComponent {
   constructor(props) {
@@ -72,13 +74,6 @@ class InventoryDetailTab extends PureComponent {
   render() {
     const { activeKey } = this.state;
     const { user } = this.props;
-    // const {
-    //   history,
-    //   match: {
-    //     params: { inventoryId, data, emailId, organizationId },
-    //   },
-    // } = this.props;
-    console.log(this.props.match);
 
     return (
       <>
@@ -94,7 +89,9 @@ class InventoryDetailTab extends PureComponent {
                   {/* <span
                   //    onClick={() => this.handleOrderCreateClick(false)}
                   > */}
-                  <i class="fas fa-satellite-dish"></i>&nbsp;Receive 
+                  <i class="fas fa-satellite-dish"></i>&nbsp; 
+                  <FormattedMessage id="app.receive" defaultMessage="Receive" />
+                   
                   {/* </span> */}
                   {/* {activeKey === "1" && (
                  
@@ -115,7 +112,8 @@ class InventoryDetailTab extends PureComponent {
                   //    onClick={() => this.handleOrderCreateClick(false)}
                   > */}
                   {/* <i class="fas fa-cookie-bite"></i> */}
-                  <i class="fab fa-linode"></i>  &nbsp; Materials
+                  <i class="fab fa-linode"></i>  &nbsp;
+                  <FormattedMessage id="app.materials" defaultMessage="Materials" /> 
                
                   {/* </span> */}
                   {/* {activeKey === "1" && (
@@ -141,7 +139,9 @@ class InventoryDetailTab extends PureComponent {
               tab={
                 <>
                   <span>
-                    <i class="far fa-share-square"></i>&nbsp;Dispatch
+                    <i class="far fa-share-square"></i>&nbsp;
+                    <FormattedMessage id="app.dispatch" defaultMessage="Dispatch" />
+                    
              
                   </span>
                   {/* {activeKey === "2" && (
@@ -169,7 +169,9 @@ class InventoryDetailTab extends PureComponent {
                   <span>
                   <ViewInArIcon
               // style={{ fontSize: "large" }}
-            />&nbsp;Catalogue
+            />&nbsp;
+                 <FormattedMessage id="app.catalogue" defaultMessage="Catalogue" />
+            
              
                   </span>
                   {/* {activeKey === "2" && (
