@@ -215,7 +215,7 @@ const ContactActionLeft = (props) => {
         /> */}
       </div>
     
-<div class="w-32 ml-4 max-sm:w-12">
+<div class="w-32 md:ml-4 max-sm:w-[6.5rem">
       <select value={props.selectedCountry} onChange={props.handleCountryChange} >
         <option value="" disabled>Department</option>
         <option value="">All</option>

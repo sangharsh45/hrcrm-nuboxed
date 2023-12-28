@@ -6,13 +6,18 @@ import LeadsHeader from "./Child/LeadsHeader";
 import { BundleLoader } from "../../Components/Placeholder";
 import {getLeads} from "../Leads/LeadsAction"
 import { setLeadsViewType, handleLeadsModal, } from "./LeadsAction";
-import LeadsTeamCardList from "./Child/LeadsTable/LeadsTeamCardList";
+const LeadsAllMobileCardList = lazy(()=>import("./Child/LeadsTable/LeadsAllMobileCardList"));
+const LeadsJunkMobileList = lazy(()=>import("./Child/LeadsTable/LeadsJunkMobileList"));
+const LeadsTeamCardList = lazy(()=>import("./Child/LeadsTable/LeadsTeamCardList"));
+const LeadsMobileCard = lazy(()=>import("./Child/LeadsTable/LeadsMobileCard"));
 const LeadsCardList = lazy(()=>import("./Child/LeadsTable/LeadsCardList"));
 const LeadsJunkList=lazy(()=>import ("./Child/LeadsTable/LeadsJunkList"));
 const LeadsAllCardList = lazy(()=>import("./Child/LeadsTable/LeadsAllCardList"));
+const LeadsTeamMobileCardList = lazy(()=>import("./Child/LeadsTable/LeadsTeamMobileCardList"));
+
 class Leads extends Component {
 
-  state = { currentData: "",currentUser:"", filter:"creationdate", };
+  state = { currentData: "",currentUser:"", filter:"creationdate",isMobile: false, };
   handleClear = () => {
     this.setState({ currentData: "" });
     this.props.getLeads(this.props.userId);
@@ -20,6 +25,25 @@ class Leads extends Component {
   handleChange = (e) => {
     this.setState({ currentData: e.target.value })
    
+  };
+  componentDidMount() {
+    // Check if isMobile is stored in localStorage
+    const storedIsMobile = localStorage.getItem('isMobile');
+    this.setState({ isMobile: storedIsMobile ? JSON.parse(storedIsMobile) : window.innerWidth <= 768 });
+  
+    window.addEventListener('resize', this.handleResize);
+  }
+  
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.handleResize);
+  }
+  
+  handleResize = () => {
+    const isMobile = window.innerWidth <= 768;
+    this.setState({ isMobile });
+  
+    // Store isMobile in localStorage
+    localStorage.setItem('isMobile', JSON.stringify(isMobile));
   };
   handleFilterChange=(data)=>{
     this.setState({filter:data})
@@ -34,11 +58,12 @@ class Leads extends Component {
 
   };
   render() {
+    const {isMobile } = this.state;
     const {
       addLeadsModal,
         handleLeadsModal,
         setLeadsViewType,
-      viewType,
+      viewType,     
     } = this.props;
     return (
       <React.Fragment>
@@ -63,10 +88,10 @@ class Leads extends Component {
         {/* <LeadsTable/>  */}
         <Suspense fallback={<BundleLoader />}>
           {viewType==="card" ? (
- <LeadsCardList  filter={this.state.filter}/>
-          ):viewType==="list" ? (<LeadsJunkList/>)
-        :viewType==="all" ? (<LeadsAllCardList/>)
-        :viewType==="teams" ? (<LeadsTeamCardList/>)
+  isMobile ? <LeadsMobileCard /> :<LeadsCardList  filter={this.state.filter}/>
+          ):viewType==="list" ? (isMobile ?<LeadsJunkMobileList/>:<LeadsJunkList/>)
+        :viewType==="all" ? (isMobile ?<LeadsAllMobileCardList/>:<LeadsAllCardList/>)
+        :viewType==="teams" ? (isMobile ?<LeadsTeamMobileCardList/>:<LeadsTeamCardList/>)
         
         :null}
        

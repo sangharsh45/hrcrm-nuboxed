@@ -13,6 +13,8 @@ import {
   getContactPagination,
   getFilterContactList
 } from "./ContactAction";
+import ContactMobileCardList from "./Child/ContactTable/ContactMobileCardList";
+import ContactMobileTeamCardList from "./Child/ContactTable/ContactMobileTeamCardList";
 const AddContactModal = lazy(() => import("./Child/AddContactModal"));
 const ContactHeader = lazy(() => import("./Child/ContactHeader"));
 const ContactCardList = lazy(() => import("./Child/ContactTable/ContactCardList"));
@@ -28,6 +30,7 @@ function Contact(props) {
   const [filterText, setFilterText] = useState('');
   const [filter, setFilter] = useState("creationdate");
 const [filteredData, setFilteredData] = useState(props.contactByUserId);
+const [isMobile, setIsMobile] = useState(() => window.innerWidth <= 768);
 
 const handleCountryChange = (event) => {
   const country = event.target.value;
@@ -46,7 +49,17 @@ const handleCountryChange = (event) => {
 
   // setFilteredData(filteredJobs);
 };
+useEffect(() => {
+  const handleResize = () => {
+    setIsMobile(window.innerWidth <= 768);
+  };
 
+  window.addEventListener('resize', handleResize);
+
+  return () => {
+    window.removeEventListener('resize', handleResize);
+  };
+}, []);
 // useEffect(()=>{
 // props.getContactListByUserId(props.userId,0)
 // },[])
@@ -148,13 +161,27 @@ const filterData = filteredData.filter(item =>
         handleContactModal={handleContactModal}
       />
       <Suspense fallback={<BundleLoader />}>
-        {props.viewType === "table" ? <ContactCardList 
+        {props.viewType === "table" ?(
+        isMobile ? ( 
+           <ContactMobileCardList
+           currentUser={currentUser} 
+        filter={filter}
+         filterData={filterData} />
+        ) : (
+        <ContactCardList
+           
         currentUser={currentUser} 
         filter={filter}
          filterData={filterData}
-         /> :
+         />)) :
          props.viewType ==="all" ? <ContactAllCardList/>
-         :viewType==="teams" ? (<ContactTeamCardList/>)
+         :viewType==="teams" ?(
+          isMobile ? ( 
+             <ContactMobileTeamCardList
+             currentUser={currentUser} 
+          filter={filter}
+           filterData={filterData} />
+          ) : ( <ContactTeamCardList/>))
 
         : null}
       </Suspense>
