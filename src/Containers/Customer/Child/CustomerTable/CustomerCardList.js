@@ -366,6 +366,7 @@ const [rowdata, setrowdata] = useState("");
   okText="Yes"
   cancelText="No"
 >
+{ user.erpInd === true && (
                        <Button type="primary">
                      <span class="text-sm" >
                      <FormattedMessage
@@ -376,6 +377,7 @@ const [rowdata, setrowdata] = useState("");
                       
                       </span>
                         </Button>
+                          )}
                         </Popconfirm>
                    </div>
                    

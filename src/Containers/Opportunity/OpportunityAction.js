@@ -3150,3 +3150,36 @@ export const emptyOpportunity = () => (dispatch) => {
   });
 };
 
+export const linkOpportunityContract = (data, opportunityId) => (
+  dispatch,
+  getState
+) => {
+  // debugger;
+  const { userId } = getState("auth").auth.userDetails;
+  dispatch({
+    type: types.LINK_OPPORTUNITY_CONTRACT_REQUEST,
+  });
+  axios
+    .put(`${base_url}/oppertunity/document/contract/update`, data, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      dispatch(getOpportunityDocument(opportunityId));
+      dispatch({
+        type: types.LINK_OPPORTUNITY_CONTRACT_SUCCESS,
+        payload: res.data,
+      });
+      // cb && cb("success");
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.LINK_OPPORTUNITY_CONTRACT_FAILURE,
+        payload: err,
+      });
+      // cb && cb("failuer");
+    });
+};
+

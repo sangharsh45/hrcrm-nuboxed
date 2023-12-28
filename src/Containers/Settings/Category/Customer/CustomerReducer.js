@@ -111,6 +111,13 @@ export const catgCustomerReducer = (state = initialState, action) => {
           };
         case types.GET_CUSTOMER_SEARCH_FAILURE:
           return { ...state,  fetchingCustomerearchDataError: true };
+
+
+          case types.HANDLE_CLAER_REDUCER_DATA_CUSTOMER:
+            return { ...state, 
+              customerListData: [], 
+              // deletedTruck: [] 
+            };    
     
     default:
         return state;

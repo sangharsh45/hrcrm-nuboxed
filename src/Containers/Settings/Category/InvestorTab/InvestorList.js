@@ -9,6 +9,8 @@ import { MainWrapper, } from "../../../../Components/UI/Layout";
 import { TextInput, } from "../../../../Components/UI/Elements";
 import {
   getInvestorList,
+  searchInvestorTypeName,
+  ClearReducerDataOfInvestorType,
     addInvestorData,
     removeInvestor,
   updateInvestor
@@ -30,9 +32,27 @@ class InvestorList extends Component {
       currentData: "",
     };
   }
+
+  handleChangeDes = (e) => {
+    this.setState({ currentData: e.target.value });
+  
+    if (e.target.value.trim() === "") {
+      this.setState((prevState) => ({ pageNo: prevState.pageNo + 1 }));
+      this.props.getInvestorList(this.props.orgId);
+      this.props.ClearReducerDataOfInvestorType();
+    }
+  };
+  handleSearch = () => {
+    if (this.state.currentData.trim() !== "") {
+      // Perform the search
+      this.props.searchInvestorTypeName(this.state.currentData);
+    } else {
+      console.error("Input is empty. Please provide a value.");
+    }
+  };
   handleClear = () => {
     this.setState({ currentData: "" });
-    this.props.  getInvestorList(this.props.orgId);
+    this.props.getInvestorList(this.props.orgId);
   };
   setCurrentData = (value) => {
     this.setState({ currentData: value });
@@ -236,6 +256,8 @@ const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
       getInvestorList,
+      searchInvestorTypeName,
+      ClearReducerDataOfInvestorType,
         addInvestorData,
         removeInvestor,
       updateInvestor,

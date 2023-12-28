@@ -142,7 +142,7 @@ export const updateShipBy = ( shipById,name,cb) => (dispatch) => {
       type: types.GET_SHIPBY_SEARCH_REQUEST,
     });
     axios
-      .get(`${base_url}/sector/search/${name}`, {
+      .get(`${base_url}/shipBy/search/${name}`, {
         headers: {
           Authorization: "Bearer " + sessionStorage.getItem("token") || "",
         },
@@ -167,3 +167,9 @@ export const updateShipBy = ( shipById,name,cb) => (dispatch) => {
         });
       });
   }; 
+
+  export const ClearReducerDataOfShipBy = () => (dispatch) => {
+    dispatch({
+      type: types.HANDLE_CLAER_REDUCER_DATA_SHIPBY,
+    });
+  };

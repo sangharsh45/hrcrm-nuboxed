@@ -10,6 +10,9 @@ const initialState = {
   addingCustomer: false,
   addingCustomerError: false,
 
+  customerContractStatus: false,
+  customerContractStatusError: false,
+
   addDrawerCustomerPulseModal:false,
 
   addDrawerCustomerNotesModal:false,
@@ -1734,6 +1737,22 @@ export const customerReducer = (state = initialState, action) => {
                                                                 customerByUserId: [], 
                                                                 // deletedTruck: [] 
                                                               };
+
+
+                                                              case types.LINK_CUSTOMER_CONTRACT_REQUEST:
+                                                                return { ...state, customerContractStatus: true };
+                                                              case types.LINK_CUSTOMER_CONTRACT_SUCCESS:
+                                                                return {
+                                                                  ...state,
+                                                                  contractCusStatus: false,
+                                                                  // addTeamTransferModal: false,
+                                                                };
+                                                              case types.LINK_CUSTOMER_CONTRACT_FAILURE:
+                                                                return {
+                                                                  ...state,
+                                                                  customerContractStatus: false,
+                                                                  customerContractStatusError: true,
+                                                                };
        default:
       return state;
   }

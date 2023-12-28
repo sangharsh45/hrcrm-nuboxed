@@ -16,6 +16,7 @@ import {
   deleteDocument,
 } from "../../../../OpportunityAction";
 import { elipsize } from "../../../../../../Helpers/Function/Functions";
+import ContractToggle from "./ContractToggle";
 
 class LinkedDocuments extends Component {
   componentDidMount() {
@@ -81,6 +82,34 @@ class LinkedDocuments extends Component {
         dataIndex: "uploadedBy",
         // onFilter: (value, record) => record.taskType.indexOf(value) === 0,
         // sorter: (a, b) => a.taskType.length - b.taskType.length
+      },
+      {
+        //title: "Name",
+        title: <FormattedMessage
+          id="app.fileName"
+          defaultMessage="File Name"
+        />,
+        dataIndex: "fileName",
+     
+      },
+      {
+        //title: "Description",
+        // title: <FormattedMessage
+        //   id="app.description"
+        //   defaultMessage="Description"
+        // />,
+        // dataIndex: "documentDescription",
+        width: "20%",
+        render: (name, item, i) => {
+          return (
+            <ContractToggle
+            // partnerId={item.partnerId}
+            contractInd={item.contractInd}
+            // assignedIndicator={item.assignedInd}
+            documentId={item.documentId}
+          />
+          );
+        },
       },
       // {
       //   // title: "Circulation",

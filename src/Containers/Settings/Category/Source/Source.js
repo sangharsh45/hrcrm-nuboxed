@@ -9,6 +9,8 @@ import { MainWrapper } from "../../../../Components/UI/Layout";
 import { TextInput, } from "../../../../Components/UI/Elements";
 import {
   getSources,
+  searchSourceName,
+  ClearReducerDataOfSource,
   addSources,
   removeSource,
   updateSource
@@ -34,14 +36,14 @@ class Source extends Component {
   
     if (e.target.value.trim() === "") {
       this.setState((prevState) => ({ pageNo: prevState.pageNo + 1 }));
-      this.props.getSources();
-      // this.props.ClearReducerDataOfRole();
+      this.props.getSources(this.props.orgId);
+      this.props.ClearReducerDataOfSource();
     }
   };
   handleSearch = () => {
     if (this.state.currentData.trim() !== "") {
       // Perform the search
-      // this.props.searchRoleName(this.state.currentData);
+      this.props.searchSourceName(this.state.currentData);
     } else {
       console.error("Input is empty. Please provide a value.");
     }
@@ -269,7 +271,8 @@ const mapDispatchToProps = (dispatch) =>
       addSources,
       removeSource,
       updateSource,
-    //   searchSectorName,
+      ClearReducerDataOfSource,
+      searchSourceName
     },
     dispatch
   );

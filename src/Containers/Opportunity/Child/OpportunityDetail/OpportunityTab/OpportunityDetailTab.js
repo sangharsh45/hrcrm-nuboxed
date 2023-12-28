@@ -4,6 +4,7 @@ import TransferWithinAStationIcon from '@mui/icons-material/TransferWithinAStati
 import { bindActionCreators } from "redux";
 import RecruitmentDeletedTable from "../../OpportunityDetail/OpportunityTab/Recruitment/RecruitmentDeletedTable"
 import {Tooltip, } from "antd";
+import DynamicFeedIcon from '@mui/icons-material/DynamicFeed';
 import { FormattedMessage } from "react-intl";
 import PieChartIcon from '@mui/icons-material/PieChart';
 import { StyledTabs } from "../../../../../Components/UI/Antd";
@@ -399,6 +400,27 @@ return  <BundleLoader />
               <Suspense fallback={"Loading ..."}>
                 {" "}
                 <LinkedDocuments opportunity={opportunity} />
+              </Suspense>
+            </TabPane>
+
+              <TabPane
+              tab={
+                <>
+                  <DynamicFeedIcon   style={{fontSize:"1.1rem"}}/>
+                    <span style={{ marginLeft: "0.25em" }}>
+                      <FormattedMessage
+                        id="app.order"
+                        defaultMessage="Order"
+                      />
+                  </span>
+               
+                </>
+              }
+              key="4"
+            >
+              <Suspense fallback={"Loading ..."}>
+                {" "}
+                {/* <LinkedDocuments opportunity={opportunity} /> */}
               </Suspense>
             </TabPane>
 

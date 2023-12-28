@@ -136,4 +136,35 @@ export const updateSource = ( sourceId,name,cb) => (dispatch) => {
         });
       });
   };
-  
+
+  export const searchSourceName = (name) => (dispatch) => {
+    dispatch({
+      type: types.GET_SOURCE_NAME_REQUEST,
+    });
+    axios
+      .get(`${base_url}/source/search/${name}`, {
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+        },
+      })
+      .then((res) => {
+        message.success(res.data.message);
+        dispatch({
+          type: types.GET_SOURCE_NAME_SUCCESS,
+          payload: res.data,
+        });
+      }
+      )
+      .catch((err) => {
+        dispatch({
+          type: types.GET_SOURCE_NAME_FAILURE,
+          payload: err,
+        });
+      });
+  };
+
+  export const ClearReducerDataOfSource = () => (dispatch) => {
+    dispatch({
+      type: types.HANDLE_CLAER_REDUCER_DATA_SOURCE,
+    });
+  };

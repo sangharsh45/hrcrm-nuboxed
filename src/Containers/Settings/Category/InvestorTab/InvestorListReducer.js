@@ -110,7 +110,26 @@ export const investorListReducer = (state = initialState, action) => {
             // serachedData: action.payload,
           };
         case types.GET_CUSTOMER_SEARCH_FAILURE:
-          return { ...state,  fetchingCustomerearchDataError: true };
+          return { ...state,  fetchingInvestorTypeInputSearchData: true };
+
+
+          case types.GET_INVESTORTYPE_SEARCH_REQUEST:
+            return { ...state, fetchingInvestorTypeInputSearchData: true };
+          case types.GET_INVESTORTYPE_SEARCH_SUCCESS:
+            return {
+              ...state,
+              fetchingInvestorTypeInputSearchData: false,
+              investorListData: action.payload,
+              // serachedData: action.payload,
+            };
+          case types.GET_INVESTORTYPE_SEARCH_FAILURE:
+            return { ...state, fetchingInvestorTypeInputSearchDataError: true };
+
+            case types.HANDLE_CLAER_REDUCER_DATA_INVESTORTYPE:
+              return { ...state, 
+                investorListData: [], 
+                // deletedTruck: [] 
+              };   
     
     default:
         return state;

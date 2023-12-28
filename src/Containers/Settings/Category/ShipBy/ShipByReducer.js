@@ -111,6 +111,12 @@ export const shipByReducer = (state = initialState, action) => {
           };
         case types.GET_SHIPBY_SEARCH_FAILURE:
           return { ...state, fetchingShipBySearchDataError: true };
+
+          case types.HANDLE_CLAER_REDUCER_DATA_SHIPBY:
+            return { ...state, 
+              ShipByData: [], 
+              // deletedTruck: [] 
+            };  
     
     default:
         return state;

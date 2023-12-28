@@ -64,6 +64,9 @@ const initialState = {
   selectingOpportunity: false,
   selectingOpportunityError: false,
 
+  opportunityContractStatus: false,
+  opportunityContractStatusError: false,
+
   reInstateToggleForlost: false,
   reInstateToggleForlostError: false,
 
@@ -2491,6 +2494,22 @@ case types.REINSTATE_TOGGLE_FOR_OPPORTUNITY_FAILURE:
 
                                             case types.EMPTY_OPPORTUNITY_LIST:
         return { ...state, opportunityByUserId: [] }; 
+
+
+        case types.LINK_OPPORTUNITY_CONTRACT_REQUEST:
+          return { ...state, opportunityContractStatus: true };
+        case types.LINK_OPPORTUNITY_CONTRACT_SUCCESS:
+          return {
+            ...state,
+            contractOppStatus: false,
+            // addTeamTransferModal: false,
+          };
+        case types.LINK_OPPORTUNITY_CONTRACT_FAILURE:
+          return {
+            ...state,
+            opportunityContractStatus: false,
+            opportunityContractStatusError: true,
+          };
 
                                             default:
                                             return state;

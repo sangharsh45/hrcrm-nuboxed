@@ -27,6 +27,7 @@ import { elipsize } from "../../../../../../Helpers/Function/Functions";
 import { FormattedMessage } from "react-intl";
 import { DeleteOutlined } from "@ant-design/icons";
 import moment from "moment";
+import ContractToggle from "./ContractToggle";
 class LinkedDocuments extends Component {
   constructor(props) {
     super(props);
@@ -201,6 +202,34 @@ class LinkedDocuments extends Component {
                 />
               </SubTitle>
             </Tooltip>
+          );
+        },
+      },
+      {
+        //title: "Name",
+        title: <FormattedMessage
+          id="app.fileName"
+          defaultMessage="File Name"
+        />,
+        dataIndex: "fileName",
+     
+      },
+      {
+        //title: "Description",
+        // title: <FormattedMessage
+        //   id="app.description"
+        //   defaultMessage="Description"
+        // />,
+        // dataIndex: "documentDescription",
+        width: "20%",
+        render: (name, item, i) => {
+          return (
+            <ContractToggle
+            // partnerId={item.partnerId}
+            contractInd={item.contractInd}
+            // assignedIndicator={item.assignedInd}
+            documentId={item.documentId}
+          />
           );
         },
       },

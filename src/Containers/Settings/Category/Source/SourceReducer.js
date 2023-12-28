@@ -99,6 +99,24 @@ export const sourceReducer = (state = initialState, action) => {
           updatingSourcesError: true,
         };
 
+        case types.GET_SOURCE_NAME_REQUEST:
+          return { ...state, fetchingSourceInputSearchData: true };
+        case types.GET_SOURCE_NAME_SUCCESS:
+          return {
+            ...state,
+            fetchingSourceInputSearchData: false,
+            sources: action.payload,
+            // serachedData: action.payload,
+          };
+        case types.GET_SOURCE_NAME_FAILURE:
+          return { ...state, fetchingRoleTalentInputSearchDataError: true };
+
+          case types.HANDLE_CLAER_REDUCER_DATA_SOURCE:
+            return { ...state, 
+              sources: [], 
+              // deletedTruck: [] 
+            };    
+
     
     default:
         return state;
