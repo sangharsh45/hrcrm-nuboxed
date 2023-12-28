@@ -26,12 +26,12 @@ class CustomerDetail extends Component {
           ) : (
               <div>
                 <Suspense fallback={"Loading..."}>
-                  <div class=" flex flex-nowrap w-full"
+                  <div class=" flex flex-nowrap w-full max-sm:flex-col max-sm:overflow-x-auto max-sm:h-[63vh]"
                 >
-                    <div class=" w-1/4">
+                    <div class=" w-1/4 max-sm:w-full">
                       <CustomerDetailLeft customer={customer} />
                     </div>
-                    <div class=" w-3/4">
+                    <div class=" w-3/4 max-sm:w-full">
                       <CustomerDetailRight customer={customer} />
                     </div>
                   </div>

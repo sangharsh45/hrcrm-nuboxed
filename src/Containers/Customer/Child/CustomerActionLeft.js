@@ -187,7 +187,7 @@ function  handleFilterChange(data){
       </Tooltip> */}
       <div class=" flex items-center justify-between"
       >
-        <div class=" w-72 max-sm:w-32">
+        <div class=" w-72 max-sm:w-24">
         <Input
         placeholder="Search by Name or Sector"
 
@@ -222,7 +222,7 @@ function  handleFilterChange(data){
           <FormattedMessage id="app.clear" defaultMessage="Clear" />
           
         </Button> */}
-        <div class="w-[22%] mt-2 ml-2">
+        <div class="w-[22%] mt-2 ml-2 max-sm:w-[45%]">
           <StyledSelect       placeholder={
           <span>
                    <FormattedMessage
