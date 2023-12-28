@@ -151,7 +151,7 @@ handleContract = (checked) => {
                 documentTypeId:this.state.selectedDocument,
                 // documentName: "", //input
                 documentDescription: "",
-                contract: this.state.contract ? "true" : "false",
+                // contract: this.state.contract ? "true" : "false",
                 typeName:this.state.checked ? "true" : this.state.selectedDocument ? "false":"true",
                 // levelType:
                 //   this.state.approvalAbove === true ? "Above" : "Specific",
@@ -169,7 +169,7 @@ handleContract = (checked) => {
                   {
                     ...values,
                     documentTypeId:this.state.selectedDocument,
-                    contract: this.state.contract ? "true" : "false",
+                    // contract: this.state.contract ? "true" : "false",
                     //   this.state.documentshare === true
                     //     ? "Public"
                     //     : "Confidential",

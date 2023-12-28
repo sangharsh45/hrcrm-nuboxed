@@ -2251,5 +2251,40 @@ export const getAllCustomerByCloser = (userId, startDate, endDate) => (
     });
   };
 
+  export const linkCustomerContract = (data, customerId) => (
+    dispatch,
+    getState
+  ) => {
+    // debugger;
+    const { userId } = getState("auth").auth.userDetails;
+    dispatch({
+      type: types.LINK_CUSTOMER_CONTRACT_REQUEST,
+    });
+    axios
+      .put(`${base_url}/customer/document/contract/update`, data, {
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+        },
+      })
+      .then((res) => {
+        dispatch(getCustomerDocument(customerId));
+        dispatch({
+          type: types.LINK_CUSTOMER_CONTRACT_SUCCESS,
+          payload: res.data,
+        });
+        // cb && cb("success");
+      })
+      .catch((err) => {
+        console.log(err);
+        dispatch({
+          type: types.LINK_CUSTOMER_CONTRACT_FAILURE,
+          payload: err,
+        });
+        // cb && cb("failuer");
+      });
+  };
+
+
+
   
  

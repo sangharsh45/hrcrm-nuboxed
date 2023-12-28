@@ -290,3 +290,35 @@ export const ClearReducerDataOfRole = () => (dispatch) => {
 };
 
 
+export const ClearReducerDataOfRoleTalent = () => (dispatch) => {
+  dispatch({
+    type: types.HANDLE_CLAER_REDUCER_DATA_ROLE_TALENT,
+  });
+};
+export const searchRoleTalentName = (name) => (dispatch) => {
+  dispatch({
+    type: types.GET_ROLE_SEARCH_TALENT_REQUEST,
+  });
+  axios
+    .get(`${base_url}/roleTypeExternal/search/${name}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      message.success(res.data.message);
+      dispatch({
+        type: types.GET_ROLE_SEARCH_TALENT_SUCCESS,
+        payload: res.data,
+      });
+    }
+    )
+    .catch((err) => {
+      dispatch({
+        type: types.GET_ROLE_SEARCH_TALENT_FAILURE,
+        payload: err,
+      });
+    });
+};
+
+

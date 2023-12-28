@@ -10,6 +10,8 @@ import { TextInput } from "../../../../Components/UI/Elements";
 import {
   getShipByData,
   addShipBy,
+  ClearReducerDataOfShipBy,
+  searchShipByName,
   removeShipBy,
   updateShipBy
 } from "../ShipBy/ShipByAction";
@@ -29,6 +31,23 @@ class ShipBy extends Component {
       currentData: "",
     };
   }
+  handleChangeDes = (e) => {
+    this.setState({ currentData: e.target.value });
+  
+    if (e.target.value.trim() === "") {
+      this.setState((prevState) => ({ pageNo: prevState.pageNo + 1 }));
+      this.props.getShipByData(this.props.orgId);
+      this.props.ClearReducerDataOfShipBy();
+    }
+  };
+  handleSearch = () => {
+    if (this.state.currentData.trim() !== "") {
+      // Perform the search
+      this.props.searchShipByName(this.state.currentData);
+    } else {
+      console.error("Input is empty. Please provide a value.");
+    }
+  };
   handleClear = () => {
     this.setState({ currentData: "" });
     this.props.getShipByData(this.props.orgId);
@@ -235,6 +254,8 @@ const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
       getShipByData,
+      ClearReducerDataOfShipBy,
+      searchShipByName,
       addShipBy,
       removeShipBy,
       updateShipBy,

@@ -167,3 +167,34 @@ export const updateInvestor = ( investorCategoryId,name,cb) => (dispatch) => {
         });
       });
   }; 
+
+  export const ClearReducerDataOfInvestorType = () => (dispatch) => {
+    dispatch({
+      type: types.HANDLE_CLAER_REDUCER_DATA_INVESTORTYPE,
+    });
+  };
+  export const searchInvestorTypeName = (name) => (dispatch) => {
+    dispatch({
+      type: types.GET_INVESTORTYPE_SEARCH_REQUEST,
+    });
+    axios
+      .get(`${base_url}/investorCategory/search/${name}`, {
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+        },
+      })
+      .then((res) => {
+        message.success(res.data.message);
+        dispatch({
+          type: types.GET_INVESTORTYPE_SEARCH_SUCCESS,
+          payload: res.data,
+        });
+      }
+      )
+      .catch((err) => {
+        dispatch({
+          type: types.GET_INVESTORTYPE_SEARCH_FAILURE,
+          payload: err,
+        });
+      });
+  };

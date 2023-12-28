@@ -1,7 +1,7 @@
 import React, { Suspense, Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { Button, Tooltip,  } from "antd";
+import { Button, Tooltip,Switch  } from "antd";
 import { Formik, Form, Field,  } from "formik";
 import { StyledDrawer,  } from "../../../../../../Components/UI/Antd";
 import { Spacer, StyledLabel } from "../../../../../../Components/UI/Elements";
@@ -36,6 +36,7 @@ class AddDocumentModal extends Component {
     super(props);
     this.state = {
       documentshare: false,
+      contract:false,
       approvalAbove: false,
       ownerAbove: "Specific",
       selectedownerAbove: "Specific",
@@ -46,6 +47,9 @@ class AddDocumentModal extends Component {
     console.log(length);
     let length = this.state.data.length;
     this.setState({ data: [...this.state.data, length + 1] });
+  };
+  handleContract = (checked) => {
+    this.setState({ contract: checked });
   };
 
   handleChange = (checked) => {
@@ -122,6 +126,7 @@ class AddDocumentModal extends Component {
                 documentTypeId: "",
                 documentName: "", //input
                 documentDescription: "",
+                contract: this.state.contract ? "true" : "false",
                 documentId:"",
                 opportunityId:this.props.opportunity.opportunityId,
               }}
@@ -132,6 +137,7 @@ class AddDocumentModal extends Component {
                   // values.documentId,
                   {
                     ...values,
+                    contract: this.state.contract ? "true" : "false",
                   },
                   this.callback
                 );
@@ -188,6 +194,16 @@ class AddDocumentModal extends Component {
                         inlineLabel
                         style={{ flexBasis: "80%" }}
                       />
+                           <div class=" flex  mt-4">
+                        <StyledLabel>Contract</StyledLabel>
+                        <Switch
+                          style={{ width: "6.25em", marginLeft: "0.625em" }}
+                          onChange={this.handleContract}
+                          checked={this.state.contract}
+                          checkedChildren="Yes"
+                          unCheckedChildren="No"
+                        />
+                      </div>
                     </div>
                     <div
                       style={{

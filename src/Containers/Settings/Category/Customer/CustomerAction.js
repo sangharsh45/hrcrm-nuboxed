@@ -142,7 +142,7 @@ export const updateCustomer = ( customerTypeId,name,cb) => (dispatch) => {
       type: types.GET_CUSTOMER_SEARCH_REQUEST,
     });
     axios
-      .get(`${base_url}/sector/search/${name}`, {
+      .get(`${base_url}/customerType/search/${name}`, {
         headers: {
           Authorization: "Bearer " + sessionStorage.getItem("token") || "",
         },
@@ -167,3 +167,11 @@ export const updateCustomer = ( customerTypeId,name,cb) => (dispatch) => {
         });
       });
   }; 
+
+  export const ClearReducerDataOfCustomer = () => (dispatch) => {
+    dispatch({
+      type: types.HANDLE_CLAER_REDUCER_DATA_CUSTOMER,
+    });
+  };
+
+  

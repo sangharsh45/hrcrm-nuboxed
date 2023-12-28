@@ -9,7 +9,7 @@ const UpdateAccountModal = (props) => {
     return (
         <>
             <StyledDrawer
-                title="Account"
+                title={props.RowData.name}
                 width="60%"
                 visible={props.updateAccountModal}
                 maskClosable={false}

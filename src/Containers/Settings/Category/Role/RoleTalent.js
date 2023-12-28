@@ -1,13 +1,15 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { Button, } from "antd";
+import { Button,Input } from "antd";
 import { MainWrapper, } from "../../../../Components/UI/Layout";
 import { TextInput, } from "../../../../Components/UI/Elements";
  import { BundleLoader } from "../../../../Components/Placeholder";
 import {
     getTalentRoles,
     addTalentRoles,
+    ClearReducerDataOfRoleTalent,
+    searchRoleTalentName,
     updateTalentRoles,
     removeTalentRole
 } from "./RoleAction";
@@ -24,6 +26,7 @@ class RoleTalent extends Component {
       isTextInputOpen: false,
       addingDepartment: false,
       roleType: "",
+      currentData: "",
       singleRole: "",
       userId:"",
       orgId:"",
@@ -32,6 +35,26 @@ class RoleTalent extends Component {
       editInd:true,
     };
   }
+  setCurrentData = (value) => {
+    this.setState({ currentData: value });
+  };
+  handleChangeDes = (e) => {
+    this.setState({ currentData: e.target.value });
+  
+    if (e.target.value.trim() === "") {
+      this.setState((prevState) => ({ pageNo: prevState.pageNo + 1 }));
+      this.props.getTalentRoles(this.props.orgId);
+      this.props.ClearReducerDataOfRoleTalent();
+    }
+  };
+  handleSearch = () => {
+    if (this.state.currentData.trim() !== "") {
+      // Perform the search
+      this.props.searchRoleTalentName(this.state.currentData);
+    } else {
+      console.error("Input is empty. Please provide a value.");
+    }
+  };
   toggleInput = () =>
     this.setState((prevState) => ({
       isTextInputOpen: !prevState.isTextInputOpen,
@@ -115,6 +138,16 @@ class RoleTalent extends Component {
               color: "#FFFAFA",
             }}
           >
+                <div class=" flex w-[18vw]" >
+            <Input
+         placeholder="Search by Name"
+        style={{width:"100%",marginLeft:"0.5rem"}}
+            // suffix={suffix}
+            onPressEnter={this.handleSearch}  
+            onChange={this.handleChangeDes}
+            // value={currentData}
+          />
+            </div>
             <div class=" flex flex-col" >
               {/* <Title style={{ padding: 8 }}>Designation</Title> */}
              <MainWrapper style={{ height: "30em", marginTop: "0.625em" }}>
@@ -211,6 +244,8 @@ const mapDispatchToProps = (dispatch) =>
     {
         getTalentRoles,
         addTalentRoles,
+        ClearReducerDataOfRoleTalent,
+        searchRoleTalentName,
         updateTalentRoles,
          removeTalentRole,
        
