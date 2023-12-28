@@ -1,4 +1,4 @@
-import React, { Component,useState,useEffect } from "react";
+import React, {useState,useEffect } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Button, Tooltip, Switch } from "antd";
@@ -12,18 +12,14 @@ import {getAllCustomerData} from "../../../Customer/CustomerAction"
 import { ExclamationCircleOutlined } from "@ant-design/icons";
 import { Spacer } from "../../../../Components/UI/Elements";
 import { getUnits } from "../../../../Containers/Settings/Unit/UnitAction";
-import SearchSelect from "../../../../Components/Forms/Formik/SearchSelect";
 import { InputComponent } from "../../../../Components/Forms/Formik/InputComponent";
 import { SelectComponent } from "../../../../Components/Forms/Formik/SelectComponent";
 import { DatePicker } from "../../../../Components/Forms/Formik/DatePicker";
-import { TimePicker } from "../../../../Components/Forms/Formik/TimePicker";
 import {
-  // addTask,
   updateTask,
   handleTaskModal,
   getCustomerTask,
   getProjectTaskList,
-
   getCandidateTaskList,
   getCandidateTaskFilterList,
   deleteTask,
@@ -603,7 +599,10 @@ const [priority,setpriority]=useState(props.selectedTask
                  
                     <div class=" w-1/2  max-sm:w-wk ">
                       
-                      <StyledLabel>Type</StyledLabel>
+                      <StyledLabel>   <FormattedMessage
+                  id="app.type"
+                  defaultMessage="Type"
+                /></StyledLabel>
                       <select 
                         style={{ border: "0.06em solid #aaa" }}
                        onChange={handleTaskTypeChange}
@@ -645,7 +644,10 @@ const [priority,setpriority]=useState(props.selectedTask
                     {/* {values.taskTypeId === "TSK42340139329302023" && ( */}
                       <div class=" w-1/2 ml-2 max-sm:w-wk">
                           
-                          <StyledLabel>Workflow</StyledLabel>
+                          <StyledLabel> <FormattedMessage
+                  id="app.workflow"
+                  defaultMessage="Workflow"
+                /></StyledLabel>
                           <select
                  style={{ border: "0.06em solid #aaa" }}
                        onChange={handleWorkflowChange}
@@ -1054,7 +1056,13 @@ const [priority,setpriority]=useState(props.selectedTask
                       <div class=" flex justify-between w-full">
                         {values.taskTypeId === "TSK52434477391272022" && (
                           <div class=" w-full">
-                            <StyledLabel>Complexity</StyledLabel>
+                            <StyledLabel>
+                            <FormattedMessage
+                            id="app.complexity"
+                            defaultMessage="Complexity"
+                          />
+                              
+                              </StyledLabel>
                             <div>
                               <Tooltip title="Easy">
                                 <Button
@@ -1181,7 +1189,11 @@ const [priority,setpriority]=useState(props.selectedTask
         {({ open }) => (
           <>
             <Listbox.Label className="block font-semibold text-[0.75rem] ">
-              Assigned to
+            <FormattedMessage
+                            id="app.assignedto"
+                            defaultMessage="Assigned to"
+                          />
+             
             </Listbox.Label>
             <div className="relative mt-1">
               <Listbox.Button className="relative w-full leading-4 cursor-default border border-gray-300 bg-white py-0.5 pl-3 pr-10 text-left shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm"style={{boxShadow: "rgb(170, 170, 170) 0px 0.25em 0.62em"}}>
@@ -1336,7 +1348,13 @@ const [priority,setpriority]=useState(props.selectedTask
                       <div class=" w-1/2 font-bold">
                         <div class=" flex justify-between">
                           <div>
-                            <StyledLabel>Set Reminder </StyledLabel>
+                            <StyledLabel>
+                            <FormattedMessage
+                            id="app.setReminder"
+                            defaultMessage="Set Reminder"
+                          />
+                             
+                               </StyledLabel>
                           </div>
                           <div>
                             {/* <FlexContainer justifyContent="space-between"> */}

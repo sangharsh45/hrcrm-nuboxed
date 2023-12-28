@@ -123,7 +123,7 @@ class AddDocumentModal extends Component {
                 // contactId: this.props.contactInVestDetail.contactId,
                 documentTitle: "", //input
                 documentDescription: "",
-                contract: this.state.contract ? "true" : "false",
+                // contract: this.state.contract ? "true" : "false",
                 // levelType:
                 //   this.state.approvalAbove === true ? "Above" : "Specific",
                 // type:
@@ -137,7 +137,7 @@ class AddDocumentModal extends Component {
                   // values.documentId,
                   {
                     ...values,
-                    contract: this.state.contract ? "true" : "false",
+                    // contract: this.state.contract ? "true" : "false",
                   },
                   this.callback
                 );
@@ -185,7 +185,7 @@ class AddDocumentModal extends Component {
                         value={values.documentId}
                         inlineLabel
                       />
-                          <div class=" flex  mt-4">
+                          {/* <div class=" flex  mt-4">
                         <StyledLabel>Contract</StyledLabel>
                         <Switch
                           style={{ width: "6.25em", marginLeft: "0.625em" }}
@@ -194,7 +194,7 @@ class AddDocumentModal extends Component {
                           checkedChildren="Yes"
                           unCheckedChildren="No"
                         />
-                      </div>
+                      </div> */}
                     </div>
                 
                     <div class=" h-full w-5/12">

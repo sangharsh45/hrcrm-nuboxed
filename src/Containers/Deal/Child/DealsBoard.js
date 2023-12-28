@@ -5,7 +5,7 @@ import { withRouter } from "react-router-dom";
 import styled from "styled-components"; 
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import { StyledTabs} from "../../../Components/UI/Antd";
-import { MainWrapper, FlexContainer } from "../../../Components/UI/Layout";
+import { MainWrapper, } from "../../../Components/UI/Layout";
 import {
     getProcessForDeals,
     getProcessStagesForDeals,
@@ -183,7 +183,7 @@ function DealsBoard(props) {
 
 
   return (
-    <FlexContainer flexWrap="nowrap">
+    <div class=" flex flex-no-wrap" >
       <MainWrapper
         style={{
           width: "100%",
@@ -191,7 +191,7 @@ function DealsBoard(props) {
           height: "100vh",
         }}
       >
-        <div style={{ display: "flex" }}>
+        <div class=" flex" >
           <StyledTabs
             // defaultActiveKey={this.state.activeKey}
             // onChange={handleTabChange}
@@ -215,7 +215,7 @@ function DealsBoard(props) {
           <BundleLoader />
         ) : ( */}
           
-            <FlexContainer flexWrap="no-wrap" style={{ justifyContent:"center"}}>
+            <div class=" flex flex-no-wrap justify-center" >
               <DragDropContext
                  onDragEnd={onDragEnd}
                 type="stage"
@@ -236,10 +236,7 @@ function DealsBoard(props) {
                           {(provided, snapshot) => (
                             <>
                             
-                                <div
-                                  style={{
-                                    display: "flex",
-                                  }}
+                                <div class=" flex"
                                 >
                                   <StageHeader style={{ position: "absolute" }}>
                                     <div>{stage.stageName}</div>
@@ -284,10 +281,10 @@ function DealsBoard(props) {
                   </>
                 </Container>
               </DragDropContext>
-            </FlexContainer>
+            </div>
           
       </MainWrapper>
-    </FlexContainer>
+    </div>
   );
 }
 

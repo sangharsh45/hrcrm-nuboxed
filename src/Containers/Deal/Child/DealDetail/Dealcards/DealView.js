@@ -1,12 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { Button, Tooltip, Icon } from "antd";
+import {  Tooltip, } from "antd";
 import { FormattedMessage } from "react-intl";
-// import LinkTagCustomerModal from "./LinkTagCustomerModal"
-import { Formik, Form, Field } from "formik";
 import {
-  StyledModal,
   StyledPopconfirm,
 } from "../../../../../Components/UI/Antd";
 import {
@@ -16,10 +13,7 @@ import {
 } from "../../../../../Components/UI/Elements";
 import BorderColorIcon from '@mui/icons-material/BorderColor';
 import {linktagCustomer} from "../../../../Opportunity/OpportunityAction";
-import { FlexContainer } from "../../../../../Components/UI/Layout";
-import { ActionIcon } from "../../../../../Components/Utils";
-import { EditOutlined, LinkOutlined } from "@ant-design/icons";
-import { SelectComponent } from "../../../../../Components/Forms/Formik/SelectComponent";
+import {  LinkOutlined } from "@ant-design/icons";
 import styled from "styled-components";
 
 class DealView extends Component {
@@ -59,13 +53,10 @@ class DealView extends Component {
  
     return (
       <>
-        <FlexContainer justifyContent="space-between">
-          <FlexContainer
-            justifyContent="flex-start"
-            flexWrap="nowrap"
-            style={{ width: "85%",marginTop:"-8px" }}
+        <div class=" flex justify-between" >
+          <div class=" flex flex-no-wrap justify-start w-[85%] mt-[-8px]"
           >
-            <div style={{ width: "20%",marginTop:"4px"  }}>
+            <div class=" w-[20%] mt-[4px]" >
               <MultiAvatar
                 primaryTitle={dealDetailsbyID.opportunityName}
                 imageId={imageId}
@@ -74,7 +65,7 @@ class DealView extends Component {
               {/* )} */}
             </div>
             &nbsp;
-            <FlexContainer flexDirection="column" style={{ width: "80%" }}>
+            <div class=" flex flex-col w-[80%]" >
               <Title
                 overflow="hidden"
                 textOverflow="ellipsis"
@@ -90,16 +81,19 @@ class DealView extends Component {
               >
                 {accountName}
               </SubTitle>
-            </FlexContainer>
-            <FlexContainer flexDirection="column" style={{ width: "20%" }}>
+            </div>
+            <div class=" flex flex-col w-[20%]" >
             {this.props.partnerLogin === "Yes" &&
             this.props.department === "Partner" ? null : (
-              <FlexContainer style={{ placeItems: "center" }} justifyContent="flex-end">
+              <div class=" flex justify-end" style={{ placeItems: "center" }} >
                 {this.props.account &&
                   this.props.account.hasOwnProperty("accountId") ? (
                     <StyledPopconfirm
                       placement="bottom"
-                      title="Do you wish to detach?"
+                      title={<FormattedMessage
+                        id="app.doyouwishtodetach"
+                        defaultMessage="Do you wish to detach?"
+                      />}
                     >
               
                     </StyledPopconfirm>
@@ -135,13 +129,13 @@ class DealView extends Component {
                        <BorderColorIcon  style={{fontSize:"0.8rem"}}/>
               </span>
                 </Tooltip>
-              </FlexContainer>
+              </div>
             )}
-            </FlexContainer>
-          </FlexContainer>
+            </div>
+          </div>
 
           
-        </FlexContainer>
+        </div>
         
         {/* <LinkTagCustomerModal
         invOpportunityId={invOpportunityId}

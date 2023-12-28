@@ -1,9 +1,9 @@
-import React, { Component, lazy, Suspense } from "react";
+import React, { Component, lazy, } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import DealReportCard from "./Dealcards/DealReportCard.js";
-import DealAboutViewCard from "./Dealcards/DealAboutViewCard";
-import DealAboutCard from "./Dealcards/DealAboutCard";
+const DealReportCard = lazy(() => import("./Dealcards/DealReportCard"));
+const DealAboutViewCard = lazy(() => import("./Dealcards/DealAboutViewCard"));
+const DealAboutCard = lazy(() => import("./Dealcards/DealAboutCard"));
 
 class DealDetailRight extends Component {
   render() {
@@ -13,12 +13,12 @@ class DealDetailRight extends Component {
     return (
       <>
       <div style={{display:"flex"}}>
-        <div style={{ width: "30%" }}>
+        <div class=" w-[30%]" >
             <DealAboutViewCard
           dealDetailsbyID={dealDetailsbyID}
         />
         </div>
-        <div style={{ width: "20%" ,}}>
+        <div class=" w-[20%]" >
           <DealAboutCard
           dealDetailsbyID={dealDetailsbyID}
           department={this.props.department}
@@ -26,7 +26,7 @@ class DealDetailRight extends Component {
           tradeCurrency={this.props.tradeCurrency}
         />
         </div>
-         <div style={{width: "26%"}}>
+        <div class=" w-[26%]" >
          <DealReportCard
           dealDetailsbyID={dealDetailsbyID}
         />

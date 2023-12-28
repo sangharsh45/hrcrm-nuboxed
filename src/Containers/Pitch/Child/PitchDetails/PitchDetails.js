@@ -5,9 +5,9 @@ import { bindActionCreators } from "redux";
 import { MainWrapper } from "../../../../Components/UI/Layout";
 import { withRouter } from "react-router";
 import { BundleLoader } from "../../../../Components/Placeholder";
-import PitchDetailHeader from "./PitchDetailHeader";
-import PitchDetailLeft from "./PitchDetailLeft";
-import PitchDetailRight from "./PitchDetailRight";
+const PitchDetailHeader =lazy(()=>import("./PitchDetailHeader"));
+const PitchDetailLeft =lazy(()=>import("./PitchDetailLeft"));
+const PitchDetailRight =lazy(()=>import("./PitchDetailRight"));
 class PitchDetails extends Component {
   componentDidMount() {
     this.props.getPitchDetailsById(this.props.match.params.investorLeadsId);

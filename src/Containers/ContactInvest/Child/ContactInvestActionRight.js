@@ -5,6 +5,7 @@ import { withRouter } from "react-router-dom";
 import { base_url } from "../../../Config/Auth";
 import { Button, Tooltip,} from "antd";
 import InsertDriveFileIcon from '@mui/icons-material/InsertDriveFile';
+import { FormattedMessage } from "react-intl";
 
 class ContactInvestActionRight extends React.Component {
 
@@ -49,7 +50,11 @@ class ContactInvestActionRight extends React.Component {
           default
           onClick={() => this.props.history.push("/import/account")}
         >
-          Import
+           <FormattedMessage
+                        id="app.import"
+                        defaultMessage="Import"
+                      />
+          
         </Button>
         )}
         {user.imInd === true  && user.investorContactCreateInd === true &&  (
@@ -58,7 +63,10 @@ class ContactInvestActionRight extends React.Component {
            type="primary"
          onClick={() => handleContactInvestModal(true)}
         >
-            Add
+         <FormattedMessage
+                        id="app.add"
+                        defaultMessage="Add"
+                      />
           </Button>
         </Tooltip>
         )}

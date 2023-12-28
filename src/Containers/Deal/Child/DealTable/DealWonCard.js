@@ -11,7 +11,6 @@ import BorderColorIcon from "@mui/icons-material/BorderColor";
 import LockIcon from "@mui/icons-material/Lock";
 import { DeleteOutlined } from "@ant-design/icons";
 import NoteAltIcon from "@mui/icons-material/NoteAlt";
-import UpdateDealModal from "../UpdateDeal/UpdateDealModal";
 import { StyledPopconfirm } from "../../../../Components/UI/Antd";
 import {
   MultiAvatar,
@@ -38,6 +37,7 @@ import {
 } from "../../../Opportunity/OpportunityAction";
 import {getWonDeals,handleUpdateDealModal,handleDealsNotesDrawerModal} from "../../DealAction";
 const AddDealsNotesDrawerModal =lazy(()=>import("../AddDealsNotesDrawerModal"));
+const UpdateDealModal =lazy(()=>import("../UpdateDeal/UpdateDealModal"));
 
 
 function DealWonCard(props) {

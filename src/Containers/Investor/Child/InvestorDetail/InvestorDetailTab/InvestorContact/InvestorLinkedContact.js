@@ -1,14 +1,10 @@
-import React, { Component, lazy, useMemo } from "react";
+import React, { Component, lazy, } from "react";
 import { connect } from "react-redux";
 import { FormattedMessage } from "react-intl";
 import { bindActionCreators } from "redux";
 import { Tooltip, Button, Input } from "antd";
 import { getDepartments } from "../../../../../Settings/Department/DepartmentAction";
 import { getDesignations } from "../../../../../Settings/Designation/DesignationAction";
-// import {
-//   getContactListByCustomerId,
-//   setEditCustomerContact,
-// } from "../../../../CustomerAction";
 import {
   StyledTable,
   StyledPopconfirm,
@@ -18,7 +14,6 @@ import Highlighter from "react-highlight-words";
 import { SearchOutlined } from "@ant-design/icons";
 import { Link } from "../../../../../../Components/Common";
 import { ActionIcon } from "../../../../../../Components/Utils";
-// import CustomerContactActiveToggle from "./CustomerContactActiveToggle";
 import styled from "styled-components";
 import {getContactListByInvestorId,handleUpdateInvestorContactModal} from "../../../../InvestorAction";
 

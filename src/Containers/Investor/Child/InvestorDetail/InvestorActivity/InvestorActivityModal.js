@@ -1,14 +1,13 @@
-import React, { lazy, Suspense } from "react";
+import React, { Suspense,lazy } from "react";
 import { StyledDrawer } from "../../../../../Components/UI/Antd";
-import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
 import { BundleLoader } from "../../../../../Components/Placeholder";
 import { StyledTabs } from "../../../../../Components/UI/Antd";
 import { TabsWrapper } from "../../../../../Components/UI/Layout";
 import { FormattedMessage } from "react-intl";
-import InvestorCallActivityForm from "./InvestorCallActivityForm";
-import InvestorEventActivityForm from "./InvestorEventActivityForm";
-import InvestorTaskActivityForm from "./InvestorTaskActivityForm";
+const InvestorCallActivityForm=lazy(()=>import("./InvestorCallActivityForm"));
+const InvestorEventActivityForm=lazy(()=>import("./InvestorEventActivityForm"));
+const InvestorTaskActivityForm=lazy(()=>import("./InvestorTaskActivityForm"));
+
 
 
 

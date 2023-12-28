@@ -6,10 +6,11 @@ import { bindActionCreators } from "redux";
 import { withRouter } from "react-router-dom";
 import PeopleIcon from '@mui/icons-material/People';
 import { AudioOutlined } from '@ant-design/icons';
-import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
-import { Button, Input, Tooltip,Tag,Badge } from "antd";
+import SpeechRecognition, { } from 'react-speech-recognition';
+import { Input, Tooltip,Badge } from "antd";
 import TocIcon from '@mui/icons-material/Toc';
 import {getPitchRecords,getPitch,ClearReducerDataOfPitch,getPitchCount,searchPitchName} from "../PitchAction";
+import { FormattedMessage } from "react-intl";
 const { Search } = Input;
 const Option = StyledSelect.Option;
 
@@ -117,7 +118,11 @@ const PitchActionLeft = (props) => {
            color: props.viewType === "all" && "#1890ff",
           }}
         >
-        ALL
+            <FormattedMessage
+                        id="app.all"
+                        defaultMessage="ALL"
+                      />
+        
         </span>
         </Badge>
       </Tooltip>

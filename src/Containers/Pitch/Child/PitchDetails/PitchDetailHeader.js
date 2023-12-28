@@ -1,6 +1,6 @@
 import React, { Component,lazy } from "react";
 import { ActionHeader } from "../../../../Components/Utils";
-import PitchDetailActionLeft from "./PitchDetailActionLeft";
+const PitchDetailActionLeft =lazy(()=>import("./PitchDetailActionLeft"));
 
 
 class PitchDetailHeader extends Component {

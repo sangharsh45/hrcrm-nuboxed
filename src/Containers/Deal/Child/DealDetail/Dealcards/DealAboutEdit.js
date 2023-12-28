@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Button } from "antd";
 import dayjs from "dayjs";
-import { FlexContainer } from "../../../../../Components/UI/Layout";
 import { Spacer } from "../../../../../Components/UI/Elements";
 import EditSearchSelect from "../../../../../Components/Forms/Edit/EditSearchSelect";
 import EditableInput from "../../../../../Components/Forms/Edit/EditableInput";
@@ -57,15 +56,12 @@ class DealAboutEdit extends Component {
     } = this.props;
     return (
       <>
-        <FlexContainer
-          flexDirection="column"
+        <div class=" flex flex-col"
           style={{ padding: "0.625em 1.25em 0.625em 1.25em" }}
         >
-          <FlexContainer
-            justifyContent="space-between"
-            style={{ width: "100%" }}
+          <div class=" flex justify-between w-full"
           >
-            <div style={{ width: "50%" }}>
+            <div class=" w-[50%]" >
               <EditableInput
                 isRequired
                 defaultValue={proposalAmount}
@@ -82,7 +78,7 @@ class DealAboutEdit extends Component {
               // width="17.625em"
               />
             </div>
-            <div style={{ width: "50%" }}>
+            <div class=" w-[50%]" >
               <EditSearchSelect
                 defaultValue={{
                   value: currency,
@@ -97,14 +93,12 @@ class DealAboutEdit extends Component {
                 style={{ height: "1.25em" }}
               />
             </div>
-          </FlexContainer>
+          </div>
 
           <Spacer style={{ margin: "0.125em" }} />
-          <FlexContainer
-            justifyContent="space-between"
-            style={{ width: "100%" }}
+          <div class=" flex justify-between w-full"
           >
-            <div style={{ width: "50%" }}>
+            <div class=" w-[50%]" >
               <EditableDatePicker
                 // defaultValue={dayjs(endDate).format('ll')}
                 defaultValue={dayjs(endDate)}
@@ -114,7 +108,7 @@ class DealAboutEdit extends Component {
                 value={this.state.fields.endDate}
               />
             </div>
-            <div style={{ width: "46%" }}>
+            <div class=" w-[46%]" >
               <EditableSelect
                 defaultValue={oppType}
                 handleChange={this.handleChange}
@@ -131,10 +125,10 @@ class DealAboutEdit extends Component {
               />
 
             </div>
-          </FlexContainer>
+          </div>
 
           <Spacer style={{ margin: "0.125em" }} />
-          <div style={{ width: "100%" }}>
+          <div class=" w-full" >
             <EditSearchSelect
               defaultValue={{
                 value: sourceId,
@@ -167,8 +161,8 @@ class DealAboutEdit extends Component {
                         placeholder='Source'
                         name={'sourceName'}
                         value={this.state.fields.sourceName} /> */}
-        </FlexContainer>
-        <FlexContainer justifyContent="flex-end" marginRight="1.25em">
+        </div>
+        <div class=" flex justify-end mr-[1.25em]" >
           <Button
             type="primary"
             Loading={updateOpportunityById}
@@ -188,7 +182,7 @@ class DealAboutEdit extends Component {
                  defaultMessage="Cancel"
                 />
           </Button>
-        </FlexContainer>
+        </div>
       </>
     );
   }

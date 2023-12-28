@@ -1,8 +1,7 @@
-import React, { useEffect, useState, useMemo, lazy } from "react";
+import React, { useEffect, useState, lazy } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
-import AssistantIcon from '@mui/icons-material/Assistant';
 import MonitorHeartIcon from "@mui/icons-material/MonitorHeart";
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import ExploreIcon from "@mui/icons-material/Explore";
@@ -12,14 +11,13 @@ import NoteAltIcon from "@mui/icons-material/NoteAlt";
 import { OnlyWrapCard } from '../../../../Components/UI/Layout'
 import { getCountries } from "../../../Auth/AuthAction";
 import InfiniteScroll from "react-infinite-scroll-component";
-import { Tooltip, Select,Button } from "antd";
+import { Tooltip, Select } from "antd";
 
 import {
   MultiAvatar,
   MultiAvatar2,
   SubTitle,
 } from "../../../../Components/UI/Elements";
-import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import { Link } from "../../../../Components/Common";
 import {
   updateOwnercustomerById,
@@ -29,14 +27,12 @@ import {
   handleCustomerEmailDrawerModal,
   getCustomerById,
 } from "../../../Customer/CustomerAction";
-// import AddCustomerDrawerModal from "../../AddCustomerDrawerModal";
 import { getAllCustomerEmployeelist } from "../../../Employees/EmployeeAction";
-import APIFailed from "../../../../Helpers/ErrorBoundary/APIFailed";
-// import AddCustomerEmailDrawerModal from "../UpdateCustomer/AddCustomerEmailDrawerModal";
 import ReactCountryFlag from 'react-country-flag';
-import { BundleLoader } from "../../../../Components/Placeholder";
 import {getTeamInvestor,handleInvestorNotesDrawerModal,emptyInvestor,handleUpdateInvestorModal} from "../../InvestorAction";
-import AddInvestorNotesDrawerModal from "../InvestorDetail/AddInvestorNotesDrawerModal";
+const AddInvestorNotesDrawerModal = lazy(() =>
+  import("../InvestorDetail/AddInvestorNotesDrawerModal")
+);
 const UpdateInvestorModal = lazy(() =>
   import("../UpdateInvestor/UpdateInvestorModal")
 );

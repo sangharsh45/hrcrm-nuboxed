@@ -7,10 +7,7 @@ import { FormattedMessage } from "react-intl";
 import { PlusOutlined } from "@ant-design/icons";
 import { StyledTabs } from "../../../../../Components/UI/Antd";
 import { TabsWrapper } from "../../../../../Components/UI/Layout";
-import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
 import InsertDriveFileIcon from '@mui/icons-material/InsertDriveFile';
-import MicIcon from '@mui/icons-material/Mic';
-import PieChartIcon from '@mui/icons-material/PieChart';
 import ContactsIcon from '@mui/icons-material/Contacts';
 import {getContactListByInvestorId,handleInvestorContactModal,
   handleInvestorDocumentUploadModal,

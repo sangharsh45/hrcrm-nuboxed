@@ -2,7 +2,7 @@ import React, {useState,Suspense,lazy } from 'react';
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import {handlePitchModal,getPitch,setPitchViewType } from "../Pitch/PitchAction";
-import { BundleLoader, GridLoader } from "../../Components/Placeholder";
+import { BundleLoader, } from "../../Components/Placeholder";
 const PitchHeader =lazy(()=>import("./Child/PitchHeader"));
 const PitchCardList =lazy(()=>import("./Child/PitchCardList"));
 const AddPitchModal =lazy(()=>import("../Pitch/Child/AddPitchModal"));

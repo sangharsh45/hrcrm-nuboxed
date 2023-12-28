@@ -4,7 +4,6 @@ import { StyledPopconfirm} from "../../../Components/UI/Antd";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import moment from "moment";
-import UpdateLPitchModal from "../Child/UpdateLPitchModal"
 import ExploreIcon from "@mui/icons-material/Explore";
 import { DeleteOutlined } from "@ant-design/icons";
 import { MultiAvatar, SubTitle } from "../../../Components/UI/Elements";
@@ -12,8 +11,6 @@ import "jspdf-autotable";
 import { OnlyWrapCard } from '../../../Components/UI/Layout'
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
-import DeleteIcon from "@mui/icons-material/Delete";
-import StatusPitchToggle from "../Child/StatusPitchToggle"
 import NoteAltIcon from "@mui/icons-material/NoteAlt";
 import {
     getTeamPitch,
@@ -32,6 +29,8 @@ import BorderColorIcon from "@mui/icons-material/BorderColor";
 import InfiniteScroll from "react-infinite-scroll-component";
 const OpenASSimodal =lazy(()=>import("./OpenASSimodal"));
 const AddPitchNotesDrawerModal =lazy(()=>import("./AddPitchNotesDrawerModal"));
+const UpdateLPitchModal =lazy(()=>import("./UpdateLPitchModal"));
+const StatusPitchToggle =lazy(()=>import("../Child/StatusPitchToggle"));
 
 const ButtonGroup = Button.Group;
 

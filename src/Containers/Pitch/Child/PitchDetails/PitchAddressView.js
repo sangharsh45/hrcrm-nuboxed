@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { FormattedMessage } from "react-intl";
 import { SubTitle } from "../../../../Components/UI/Elements";
 class PitchAddressView extends Component {
   render() {
@@ -16,11 +17,34 @@ class PitchAddressView extends Component {
       <>
         
 
-<PitchItemRow label="Address" value={addressdata||""} />
-        <PitchItemRow label="Street" value={addressdata1||""} />
-        <PitchItemRow label="City" value={addressdata2||""} />
-        <PitchItemRow label="State" value={addressdata3||""} />
-        <PitchItemRow label="Pin Code" value={addressdata4||""} />
+<PitchItemRow label={<FormattedMessage
+                  id="app.address"
+                  defaultMessage="Address"
+                />} value={addressdata||""} />
+        <PitchItemRow
+        label={<FormattedMessage
+          id="app.street"
+          defaultMessage="Street"
+        />}
+         value={addressdata1||""} />
+        <PitchItemRow
+           label={<FormattedMessage
+            id="app.city"
+            defaultMessage="City"
+          />}
+         value={addressdata2||""} />
+        <PitchItemRow 
+            label={<FormattedMessage
+              id="app.state"
+              defaultMessage="State"
+            />}
+     value={addressdata3||""} />
+        <PitchItemRow 
+          label={<FormattedMessage
+            id="app.pincode"
+            defaultMessage="Pin Code"
+          />}
+        value={addressdata4||""} />
       </>
     );
   }

@@ -8,7 +8,6 @@ import styled from "styled-components";
 import {  DeleteOutlined } from "@ant-design/icons";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
 import { Tooltip,  Menu, Dropdown, Progress } from "antd";
-import { FlexContainer } from "../../../../Components/UI/Layout";
 import { CurrencySymbol, Link } from "../../../../Components/Common";
 import { CheckCircleTwoTone, StopTwoTone } from "@ant-design/icons";
 import { StyledPopconfirm } from "../../../../Components/UI/Antd";
@@ -110,13 +109,10 @@ function DealCardList(props) {
             });
             return (
               <CardElement>
-                <FlexContainer
-                  alignItems="center"
-                  flexWrap="no-wrap"
-                  style={{ height: "2.81em" }}
+                <div class=" flex flex-no-wrap items-center h-[2.81em]"
                 >
-                  <FlexContainer
-                    style={{ flexBasis: "15%", marginRight: "0.2rem" }}
+                  <div class=" mr-[0.2rem]"
+                    style={{ flexBasis: "15%",}}
                   >
                     <MultiAvatar
                       primaryTitle={item.opportunityName}
@@ -125,10 +121,9 @@ function DealCardList(props) {
                       imgWidth={"1.8rem"}
                       imgHeight={"1.8rem"}
                     />
-                  </FlexContainer>
+                  </div>
                   &nbsp;
-                  <FlexContainer
-                    flexDirection="column"
+                  <div class=" flex flex-col"
                     style={{ flexBasis: "83%", overflow: "hidden" }}
                   >
                     <div
@@ -146,8 +141,8 @@ function DealCardList(props) {
                         {item.opportunityName}
                       </Link>
                     </div>
-                  </FlexContainer>
-                </FlexContainer>
+                  </div>
+                </div>
                 <div className="flex justify-around">
                   <div>
                     {item.customer && (
@@ -240,7 +235,7 @@ function DealCardList(props) {
                   </span>
                 </div>
 
-                <FlexContainer
+                <div
                   style={{
                     width: "100%",
                     paddingLeft: "0.5em",
@@ -401,7 +396,7 @@ function DealCardList(props) {
                       </StyledPopconfirm>
                     </div>
                   </div>
-                </FlexContainer>
+                </div>
               </CardElement>
             );
           })}

@@ -1,6 +1,5 @@
 
 import React, { useEffect, useState} from "react";
-import { StyledPopconfirm} from "../../../../../Components/UI/Antd";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import moment from "moment";
@@ -9,18 +8,11 @@ import "jspdf-autotable";
 import { OnlyWrapCard } from '../../../../../Components/UI/Layout'
 import {
     getAllDeals
-//   deletePitchData,
-//   handleUpdatePitchModal,
-//   setEditPitch,
-//   handlePitchNotesDrawerModal,
-//   updateTypeForPitch,
-//   handleAssimodal
 } from "../../../DealAction";
-import { CurrencySymbol,Link } from "../../../../../Components/Common"; 
+import { CurrencySymbol } from "../../../../../Components/Common"; 
 import { Button, Tooltip,Dropdown ,Menu,Progress} from "antd";
 import { FormattedMessage } from "react-intl";
 import InfiniteScroll from "react-infinite-scroll-component";
-// import AddPitchNotesDrawerModal from "./AddPitchNotesDrawerModal";
 import { BundleLoader } from "../../../../../Components/Placeholder";
 
 const ButtonGroup = Button.Group;

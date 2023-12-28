@@ -4,7 +4,6 @@ import { FormattedMessage } from "react-intl";
 import { bindActionCreators } from "redux";
 import { Tooltip, Button,Input} from "antd";
 import { BundleLoader } from "../../../../../../Components/Placeholder";
-import { FlexContainer } from "../../../../../../Components/UI/Layout";
 import {
   StyledTable,
   StyledPopconfirm,
@@ -309,7 +308,7 @@ class LinkedDealContact extends Component {
           console.log(name);
           console.log(item);
           return (
-            <FlexContainer justifyContect="space-evenly">
+            <div class=" flex justify-evenly" >
               <ButtonGroup>
                 <RoleButton
                   type="DecisionMaker"
@@ -365,7 +364,7 @@ class LinkedDealContact extends Component {
                 />
               </ButtonGroup>
             
-            </FlexContainer>
+            </div>
           );
         },
         onFilter: (value, record) => record.department.indexOf(value) === 0,

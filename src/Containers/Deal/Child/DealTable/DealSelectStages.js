@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Tooltip } from "antd";
-import { FlexContainer } from "../../../../Components/UI/Layout";
 
 class DealSelectStages extends Component {
   // componentDidMount() {
@@ -28,7 +27,7 @@ class DealSelectStages extends Component {
         .findIndex((stage) => stage.investorOppStagesId === this.props.investorOppStagesId);
 
     return (
-      <FlexContainer justifyContent="space-between">
+      <div class=" flex justify-between" >
         {" "}
         {rec.stageList
           .filter((item) => item.probability !== 0 && item.probability !== 100)
@@ -158,7 +157,7 @@ class DealSelectStages extends Component {
               </div>
             );
           })}
-      </FlexContainer>
+      </div>
     );
   }
 }

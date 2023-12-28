@@ -6,7 +6,7 @@ const InvesterForm = lazy(() => import("./InvesterForm"));
 
 const AddInvestorModal = (props) => {
   const isSmallScreen = window.innerWidth <= 600;
-  const drawerWidth = isSmallScreen ? "90%" : "55%";
+  const drawerWidth = isSmallScreen ? "90%" : "60%";
   return (
     <>
       <StyledDrawer
@@ -15,7 +15,7 @@ const AddInvestorModal = (props) => {
           defaultMessage="Investor"
         />}
         width={drawerWidth}
-        style={{marginTop:"5rem"}}
+        style={{marginTop:"3rem"}}
         visible={props.addInvestorModal}
         closable
         destroyOnClose

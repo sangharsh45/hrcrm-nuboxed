@@ -8,7 +8,6 @@ import { PlusOutlined } from "@ant-design/icons";
 import InsertDriveFileIcon from "@mui/icons-material/InsertDriveFile";
 import { StyledTabs } from "../../../../../Components/UI/Antd";
 import { TabsWrapper } from "../../../../../Components/UI/Layout";
-import AddDocumentModal from "../../../../Contact/Child/ContactDetail/ContactTab/Document/AddDocumentModal";
 import WorkIcon from "@mui/icons-material/Work";
 import {
   handleContactOpportunityModal,
@@ -17,10 +16,10 @@ import {
   handleDocumentUploadModal,
   
 } from "../../../../Contact/ContactAction";
-import LinkedContactInvestDocuments from "./ContactInvestDocument/LinkedContactInvestDocuments";
-import ContactInvestorActivityModal from "../Activity/ContactInvestorActivityModal";
-import ContactInvestTimeLine from "../Activity/ContactInvestTimeLine";
-
+const AddDocumentModal =lazy(()=>import("../../../../Contact/Child/ContactDetail/ContactTab/Document/AddDocumentModal"));
+const ContactInvestTimeLine =lazy(()=>import("../Activity/ContactInvestTimeLine"));
+const LinkedContactInvestDocuments =lazy(()=>import("./ContactInvestDocument/LinkedContactInvestDocuments"));
+const ContactInvestorActivityModal =lazy(()=>import("../Activity/ContactInvestorActivityModal"));
 const LinkedDealTable =lazy(()=>import("./ContactInvestDeal/LinkedDealTable"));
  
 const TabPane = StyledTabs.TabPane;

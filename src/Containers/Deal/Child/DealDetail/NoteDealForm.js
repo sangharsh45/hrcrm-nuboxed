@@ -10,7 +10,6 @@ import { EditorState, convertToRaw } from "draft-js";
 import draftToHtml from "draftjs-to-html";
 import { addDealsNote } from "../../DealAction";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
-import { FlexContainer } from "../../../../Components/UI/Layout";
 
 /**
  * yup validation scheme for creating a note
@@ -140,7 +139,7 @@ class NoteDealForm extends Component {
                  
                   toolbar={toolbarOption}
                 />
-                <FlexContainer justifyContent="flex-end">
+                <div class=" flex justify-end" >
                   <Button
                     type="primary"
                     htmlType="submit"
@@ -156,7 +155,7 @@ class NoteDealForm extends Component {
                     <FormattedMessage id="app.post" defaultMessage="post" />
                     {/* Post */}
                   </Button>
-                </FlexContainer>
+                </div>
               </Form>
             );
           }}

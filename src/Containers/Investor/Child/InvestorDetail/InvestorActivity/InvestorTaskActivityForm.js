@@ -1,4 +1,4 @@
-import React, { Component,useState,useEffect } from "react";
+import React, { useState,useEffect } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Button, Tooltip, Switch } from "antd";
@@ -10,11 +10,9 @@ import {getAllCustomerData} from "../../../../Customer/CustomerAction"
 import { ExclamationCircleOutlined } from "@ant-design/icons";
 import { Spacer } from "../../../../../Components/UI/Elements";
 import { getUnits } from "../../../../../Containers/Settings/Unit/UnitAction";
-import SearchSelect from "../../../../../Components/Forms/Formik/SearchSelect";
 import { InputComponent } from "../../../../../Components/Forms/Formik/InputComponent";
 import { SelectComponent } from "../../../../../Components/Forms/Formik/SelectComponent";
 import { DatePicker } from "../../../../../Components/Forms/Formik/DatePicker";
-import { TimePicker } from "../../../../../Components/Forms/Formik/TimePicker";
 import {
   updateTask,
   handleTaskModal,

@@ -7,7 +7,6 @@ import { StyledTabs } from "../../../Components/UI/Antd";
 import { TabsWrapper } from "../../../Components/UI/Layout";
 import {handlePitchActivityModal} from "../PitchAction"
 import { PlusOutlined } from "@ant-design/icons";
-import LightbulbIcon from '@mui/icons-material/Lightbulb';
 import { FormattedMessage } from "react-intl";
 import { Tooltip } from "antd";
 const PitchTimeline =lazy(()=>import("../../Pitch/Child/PitchTimeline"));
@@ -22,7 +21,7 @@ console.log("data",props.rowdata.name)
       <StyledDrawer
         title={props.rowdata.firstName}
         width="60%"
-        style={{marginTop:"5rem"}}
+        style={{marginTop:"3rem"}}
         visible={props.openASSImodal}
         destroyOnClose
         closable
@@ -57,7 +56,11 @@ console.log("data",props.rowdata.name)
                   <span>
                     
                        <i class="fas fa-phone-square"></i>&nbsp;
-                  Activity
+                       <FormattedMessage
+                        id="app.activity"
+                        defaultMessage="Activity"
+                      />
+                  
                   </span>
                 
                     <>

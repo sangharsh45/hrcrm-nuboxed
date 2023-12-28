@@ -41,7 +41,10 @@ class DealActionRight extends React.Component {
             // ghost
             onClick={() => handleDealModal(true)}
           >
-            Add
+               <FormattedMessage
+                        id="app.add"
+                        defaultMessage="Add"
+                      />
           </Button>
             )}  
         </Tooltip>

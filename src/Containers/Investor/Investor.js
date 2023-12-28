@@ -1,21 +1,18 @@
 import React, {useState,Suspense,lazy } from 'react';
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { BundleLoader, GridLoader } from "../../Components/Placeholder";
+import { BundleLoader, } from "../../Components/Placeholder";
 import {setInvestorViewType,handleInvestorModal} from "./InvestorAction";
 import {getInvestorsbyId,emptyInvestor,getInvestorsFilterData} from "./InvestorAction";
 import {
   getLatestCustomer,
   getCustomerCloser, 
 } from "../Customer/CustomerAction";
-import moment from "moment";
-import CustomerCardView from '../Customer/CustomerCardView';
-import InvestorAllCardList from './Child/InvestorTable/InvestorAllCardList';
-import InvestorTeamCardList from './Child/InvestorTable/InvestorTeamCardList';
 const InvestorHeader = lazy(() => import("./Child/InvestorHeader"));
+const InvestorTeamCardList = lazy(() => import("./Child/InvestorTable/InvestorTeamCardList"));
+const InvestorAllCardList = lazy(() => import("./Child/InvestorTable/InvestorAllCardList"));
 const InvestorCardList=lazy(() => import("./Child/InvestorTable/InvestorCardList"));
 const AddInvestorModal=lazy(()=>import("./Child/AddInvestorModal"));
-const InvestorCardView=lazy(()=>import("./Child/InvestorTable/InvestorCardView"));
 
 function Investor (props) {
 const [currentData,setcurrentData]=useState("");

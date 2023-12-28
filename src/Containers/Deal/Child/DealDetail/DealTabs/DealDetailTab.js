@@ -1,26 +1,17 @@
 import React, { Component, lazy, Suspense } from "react";
 import { connect } from "react-redux";
-import TransferWithinAStationIcon from '@mui/icons-material/TransferWithinAStation';
 import { bindActionCreators } from "redux";
-import { Button, message, Tooltip, Popover, Icon } from "antd";
+import { Tooltip } from "antd";
 import { FormattedMessage } from "react-intl";
-import PieChartIcon from '@mui/icons-material/PieChart';
 import { StyledTabs } from "../../../../../Components/UI/Antd";
 import {
-  FlexContainer,
   TabsWrapper,
 } from "../../../../../Components/UI/Layout";
-import DeleteIcon from '@mui/icons-material/Delete';
 import InsertDriveFileIcon from '@mui/icons-material/InsertDriveFile';
 import ContactsIcon from '@mui/icons-material/Contacts';
-import {
-  DeleteOutlined,
-  EyeInvisibleOutlined, LinkOutlined, PlusOutlined, 
+import { LinkOutlined, PlusOutlined, 
 } from '@ant-design/icons';
-import MicIcon from '@mui/icons-material/Mic';
-import LockIcon from '@mui/icons-material/Lock';
 import { BundleLoader } from "../../../../../Components/Placeholder";
-import NoteAltIcon from "@mui/icons-material/NoteAlt";
 import {handleDealContactModal,handleDocumentUploadModal} from "../../../DealAction";
 import LinkedDocuments from "./Document/LinkedDocuments";
 const AddDocumentModal = lazy(() => import("./Document/AddDocumentModal"));

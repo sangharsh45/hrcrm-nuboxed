@@ -4,7 +4,6 @@ import { StyledPopconfirm} from "../../../Components/UI/Antd";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import moment from "moment";
-import UpdateLPitchModal from "../Child/UpdateLPitchModal"
 import ExploreIcon from "@mui/icons-material/Explore";
 import { DeleteOutlined } from "@ant-design/icons";
 import { MultiAvatar, SubTitle } from "../../../Components/UI/Elements";
@@ -12,17 +11,9 @@ import "jspdf-autotable";
 import { OnlyWrapCard } from '../../../Components/UI/Layout'
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
-import DeleteIcon from "@mui/icons-material/Delete";
-import StatusPitchToggle from "../Child/StatusPitchToggle"
 import NoteAltIcon from "@mui/icons-material/NoteAlt";
 import {
     getAllPitch
-//   deletePitchData,
-//   handleUpdatePitchModal,
-//   setEditPitch,
-//   handlePitchNotesDrawerModal,
-//   updateTypeForPitch,
-//   handleAssimodal
 } from "../PitchAction";
 import ReactCountryFlag from 'react-country-flag';
 import AddchartIcon from '@mui/icons-material/Addchart';  
@@ -31,8 +22,10 @@ import { FormattedMessage } from "react-intl";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { BundleLoader } from "../../../Components/Placeholder";
-const OpenASSimodal =lazy(()=>import("./OpenASSimodal"));
 const AddPitchNotesDrawerModal =lazy(()=>import("./AddPitchNotesDrawerModal"));
+const UpdateLPitchModal =lazy(()=>import("../Child/UpdateLPitchModal"));
+const StatusPitchToggle =lazy(()=>import("../Child/StatusPitchToggle"));
+const OpenASSimodal =lazy(()=>import("./OpenASSimodal"));
 
 const ButtonGroup = Button.Group;
 
