@@ -2,15 +2,11 @@ import React, { lazy, Suspense } from "react";
 import { FormattedMessage } from "react-intl";
 import { StyledDrawer } from "../../../../Components/UI/Antd";
 import { BundleLoader } from "../../../../Components/Placeholder";
-
-// import LeadsConfirmStatusForm from "./LeadsConfirmStatusForm";
-import { bindActionCreators } from "redux";
-import { connect } from "formik";
-import PitchConvertStatusForm from "./PitchConvertStatusForm";
+const PitchConvertStatusForm =lazy(()=>import("./PitchConvertStatusForm"));
 
 const AddConvertPitchStatusModal = (props) => {
   const isSmallScreen = window.innerWidth <= 600;
-    const drawerWidth = isSmallScreen ? "90%" : "55%";
+    const drawerWidth = isSmallScreen ? "90%" : "60%";
   return (
     <>
       <StyledDrawer
@@ -19,7 +15,7 @@ const AddConvertPitchStatusModal = (props) => {
           defaultMessage="Pitch"
         />}
         width={drawerWidth}
-        style={{marginTop:"5rem"}}
+        style={{marginTop:"3rem"}}
         visible={props.addPitchConvertModal}
         closable
         destroyOnClose

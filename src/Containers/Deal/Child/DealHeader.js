@@ -1,7 +1,7 @@
-import React, { Component } from "react";
+import React, { Component,lazy } from "react";
 import { ActionHeader } from "../../../Components/Utils";
-import DealActionLeft from "./DealActionLeft";
-import DealActionRight from "./DealActionRight";
+const DealActionLeft = lazy(()=>import("./DealActionLeft"));
+const DealActionRight = lazy(()=>import("./DealActionRight"));
 
 class DealHeader extends Component {
   render() {

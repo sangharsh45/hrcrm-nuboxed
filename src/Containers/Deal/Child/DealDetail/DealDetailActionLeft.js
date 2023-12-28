@@ -3,15 +3,14 @@ import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { FormattedMessage } from "react-intl";
 import { bindActionCreators } from "redux";
-import { FlexContainer } from "../../../../Components/UI/Layout";
 import {  Tooltip } from "antd";
 import { RollbackOutlined } from "@ant-design/icons";
 
 const DealDetailActionLeft = (props) => {
 
   return (
-    <FlexContainer alignItems="center">
-      <div style={{ width: "21vw" }}>
+    <div class=" flex items-center" >
+      <div class=" w-[21vw]" >
         <Tooltip title="Back">
           <RollbackOutlined
             style={{ marginRight: "0.3rem", color: "#1890ff", fontSize: "1.5625em" }}
@@ -37,7 +36,7 @@ const DealDetailActionLeft = (props) => {
         )} */}
 
 
-    </FlexContainer>
+    </div>
   );
 };
 const mapStateToProps = ({ }) => ({

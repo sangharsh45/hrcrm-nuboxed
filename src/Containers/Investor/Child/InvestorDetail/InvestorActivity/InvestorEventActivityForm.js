@@ -1,13 +1,13 @@
-import React, { Component, useState, useMemo, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { FormattedMessage } from "react-intl";
 import { bindActionCreators } from "redux";
-import { Button, Switch } from "antd";
+import { Button, } from "antd";
 import { Formik, Form, Field, FieldArray } from "formik";
 import * as Yup from "yup";
 import {getAllCustomerData} from "../../../../Customer/CustomerAction"
 import dayjs from "dayjs";
-import { Spacer, StyledLabel } from "../../../../../Components/UI/Elements";
+import { Spacer } from "../../../../../Components/UI/Elements";
 import SearchSelect from "../../../../../Components/Forms/Formik/SearchSelect";
 import { InputComponent } from "../../../../../Components/Forms/Formik/InputComponent";
 import AddressFieldArray from "../../../../../Components/Forms/Formik/AddressFieldArray";
@@ -25,10 +25,8 @@ import { TextareaComponent } from "../../../../../Components/Forms/Formik/Textar
 import { StyledPopconfirm } from "../../../../../Components/UI/Antd";
 import { getEmployeelist } from "../../../../Employees/EmployeeAction";
 import { getEvents } from "../../../../Settings/Event/EventAction";
-import CandidateClearbit from "../../../../../Components/Forms/Autocomplete/CandidateClearbit";
 import { setClearbitCandidateData } from "../../../../Candidate/CandidateAction";
-import { Listbox, Transition } from '@headlessui/react'
-import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid';
+import { Listbox } from '@headlessui/react'
 
 // yup validation scheme for creating a opportunity
 const EventSchema = Yup.object().shape({

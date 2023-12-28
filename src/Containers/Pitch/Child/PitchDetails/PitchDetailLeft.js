@@ -1,9 +1,7 @@
 import React, { Component,lazy} from "react";
-// import LeadDetailCard from "../LeadCards/LeadDetailCard";
-import PitchAddressCard from "./PitchAddressCard";
-import PitchOverViewCard from "./PitchOverViewCard";
-import PitchDetailCard from "./PitchDetailCard"
-// import LeadsTopicOfInterest from "../LeadCards/LeadsTopicOfInterest";
+const PitchAddressCard =lazy(()=>import("./PitchAddressCard"));
+const PitchOverViewCard =lazy(()=>import("./PitchOverViewCard"));
+const PitchDetailCard =lazy(()=>import("./PitchDetailCard"));
 
 class PitchDetailLeft extends Component {
   render() {

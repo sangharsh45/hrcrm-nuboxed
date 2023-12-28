@@ -1,12 +1,14 @@
-import React, { Component, Suspense } from "react";
+import React, { Component,lazy, Suspense } from "react";
 import { BundleLoader } from "../../../../Components/Placeholder";
 
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
 import { StyledDrawer } from "../../../../Components/UI/Antd";
+const InvestorLinkedNotes = lazy(() =>
+  import("./InvestorDetailTab/InvestorNote/InvestorLinkedNotes")
+);
 
-import InvestorLinkedNotes from "./InvestorDetailTab/InvestorNote/InvestorLinkedNotes";
 
 class AddInvestorNotesDrawerModal extends Component {
   render() {
@@ -17,8 +19,8 @@ class AddInvestorNotesDrawerModal extends Component {
         <StyledDrawer
         // title="Notes"
           title={this.props.RowData.name}
-          width="64%"
-          style={{ marginTop: "5rem" }}
+          width="60%"
+          style={{ marginTop: "3rem" }}
           visible={this.props.addDrawerInvestorNotesModal}
           closable
           placement="right"

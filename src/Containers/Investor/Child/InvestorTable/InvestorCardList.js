@@ -1,8 +1,7 @@
-import React, { useEffect, useState, useMemo, lazy } from "react";
+import React, { useEffect, useState, lazy } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
-import AssistantIcon from '@mui/icons-material/Assistant';
 import MonitorHeartIcon from "@mui/icons-material/MonitorHeart";
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import ExploreIcon from "@mui/icons-material/Explore";
@@ -12,14 +11,13 @@ import NoteAltIcon from "@mui/icons-material/NoteAlt";
 import { OnlyWrapCard } from '../../../../Components/UI/Layout'
 import { getCountries } from "../../../Auth/AuthAction";
 import InfiniteScroll from "react-infinite-scroll-component";
-import { Tooltip, Select,Button } from "antd";
+import { Tooltip, Select, } from "antd";
 
 import {
   MultiAvatar,
   MultiAvatar2,
   SubTitle,
 } from "../../../../Components/UI/Elements";
-import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import { Link } from "../../../../Components/Common";
 import {
   updateOwnercustomerById,
@@ -29,14 +27,11 @@ import {
   handleCustomerEmailDrawerModal,
   getCustomerById,
 } from "../../../Customer/CustomerAction";
-// import AddCustomerDrawerModal from "../../AddCustomerDrawerModal";
 import { getAllCustomerEmployeelist } from "../../../Employees/EmployeeAction";
-import APIFailed from "../../../../Helpers/ErrorBoundary/APIFailed";
-// import AddCustomerEmailDrawerModal from "../UpdateCustomer/AddCustomerEmailDrawerModal";
 import ReactCountryFlag from 'react-country-flag';
-import { BundleLoader } from "../../../../Components/Placeholder";
 import {getInvestorsbyId,handleInvestorNotesDrawerModal,emptyInvestor,handleUpdateInvestorModal} from "../../InvestorAction";
 import AddInvestorNotesDrawerModal from "../InvestorDetail/AddInvestorNotesDrawerModal";
+import { FormattedMessage } from "react-intl";
 const UpdateInvestorModal = lazy(() =>
   import("../UpdateInvestor/UpdateInvestorModal")
 );
@@ -115,14 +110,44 @@ function InvestorCardList(props) {
   
         <OnlyWrapCard style={{backgroundColor:"#E3E8EE"}}>
         <div className=" flex justify-between w-[99%] p-2 bg-transparent font-bold sticky top-0 z-10">
-        <div className=" md:w-[12rem]">Name</div>
-        <div className=" md:w-40">Sector</div>
-        <div className=" md:w-28 ">Country</div>
-        <div className="md:w-36"># Deals</div>
-        <div className="md:w-24">Pipeline Value</div>
-        <div className="md:w-28">Assigned to</div>
-        <div className="md:w-24">Owner</div>
-        <div className="md:w-24">Source</div>
+        <div className=" md:w-[12rem]"><FormattedMessage
+                  id="app.name"
+                  defaultMessage="Name"
+                /></div>
+        <div className=" md:w-40"><FormattedMessage
+                  id="app.sector"
+                  defaultMessage="Sector"
+                /></div>
+        <div className=" md:w-28 "><FormattedMessage
+                  id="app.country"
+                  defaultMessage="Country"
+                /></div>
+        <div className="md:w-36"># <FormattedMessage
+                  id="app.deals"
+                  defaultMessage="Deals"
+                /></div>
+        <div className="md:w-24">
+        <FormattedMessage
+                  id="app.pipelineValue"
+                  defaultMessage="Pipeline Value"
+                />
+          </div>
+        <div className="md:w-28">
+        <FormattedMessage
+                  id="app.assignedto"
+                  defaultMessage="Assigned to"
+                />
+         </div>
+        <div className="md:w-24"><FormattedMessage
+                  id="app.owner"
+                  defaultMessage="owner"
+                /></div>
+        <div className="md:w-24">
+        <FormattedMessage
+                  id="app.source"
+                  defaultMessage="Source"
+                />
+          </div>
         {/* <div className="w-12">Action</div> */}
 
       </div>

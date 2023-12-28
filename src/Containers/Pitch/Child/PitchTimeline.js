@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import { ClockCircleOutlined } from '@ant-design/icons';
 import { Timeline } from 'antd';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';

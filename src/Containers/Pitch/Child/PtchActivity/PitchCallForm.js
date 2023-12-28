@@ -1,9 +1,9 @@
-import React, { Component,useState, useMemo ,useEffect} from "react";
+import React, {useState ,useEffect} from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { getAllSalesList } from "../../../Opportunity/OpportunityAction"
 import { FormattedMessage } from "react-intl";
-import { Button, Icon, Switch, Tooltip } from "antd";
+import { Button, Switch, Tooltip } from "antd";
 import { Formik, Form, Field, FastField } from "formik";
 import * as Yup from "yup";
 import{getAllOpportunityData} from "../../../Opportunity/OpportunityAction"
@@ -16,7 +16,6 @@ import { SelectComponent } from "../../../../Components/Forms/Formik/SelectCompo
 import { DatePicker } from "../../../../Components/Forms/Formik/DatePicker";
 import { TimePicker } from "../../../../Components/Forms/Formik/TimePicker";
 import {
-  // addCall,
   updateCall,
   deleteCall,
   handleCallModal,
@@ -28,13 +27,11 @@ import { handleChooserModal } from "../../../Planner/PlannerAction";
 import { TextareaComponent } from "../../../../Components/Forms/Formik/TextareaComponent";
 import { StyledPopconfirm } from "../../../../Components/UI/Antd";
 import { getEmployeelist } from "../../../Employees/EmployeeAction";
-import CandidateClearbit from "../../../../Components/Forms/Autocomplete/CandidateClearbit";
 import { setClearbitCandidateData } from "../../../Candidate/CandidateAction";
 import SpeechRecognition, { } from 'react-speech-recognition';
 import { AudioOutlined } from '@ant-design/icons';
 import { Fragment } from 'react'
-import { Listbox, Transition } from '@headlessui/react'
-import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid'
+import { Listbox, } from '@headlessui/react'
 const ButtonGroup = Button.Group;
 const suffix = (
   <AudioOutlined
@@ -476,7 +473,11 @@ function PitchCallForm(props) {
                   <div class=" flex justify-between items-end max-sm:flex-col " >
                     <div class=" self-start">
                       <StyledLabel>
-                      Mode
+                      <FormattedMessage
+                            id="app.mode"
+                            defaultMessage="Mode"
+                          />
+                      
                       </StyledLabel>
                       <Switch
                         // style={{
@@ -643,7 +644,13 @@ function PitchCallForm(props) {
                 <Listbox value={selected} onChange={setSelected}>
       {({ open }) => (
         <>
-          <Listbox.Label className="block font-semibold text-[0.75rem]">Assigned to</Listbox.Label>
+          <Listbox.Label className="block font-semibold text-[0.75rem]">
+          <FormattedMessage
+                  id="app.assignedTo"
+                  defaultMessage="Assigned to"
+                />
+           
+            </Listbox.Label>
           <div className="relative mt-1">
               <Listbox.Button  style={{boxShadow: "rgb(170, 170, 170) 0px 0.25em 0.62em"}} className="relative w-full leading-4 cursor-default border border-gray-300 bg-white py-0.5 pl-3 pr-10 text-left shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm">
                 {selected}

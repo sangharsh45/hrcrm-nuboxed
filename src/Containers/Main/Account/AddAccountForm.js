@@ -208,7 +208,7 @@ const AddAccountForm = ({
                                 type="text"
                                 // isRequired
                                 name="phoneNo"
-                                label="Telphone"
+                                label="Phone"
                                 placeholder="Phone #"
                                 component={InputComponent}
                                 inlineLabel
@@ -306,7 +306,7 @@ const AddAccountForm = ({
                                 name="payment"
                                 placeholder="Select"
                                 component={SelectComponent}
-                                options={["7", "15", "21", "30", "45", "60", "75", "90"]}
+                                options={["7", "15", "21", "30", "45", "60", "75", "90","Custom"]}
                                 inlineLabel
                                 width={"100%"}
                                 isColumn

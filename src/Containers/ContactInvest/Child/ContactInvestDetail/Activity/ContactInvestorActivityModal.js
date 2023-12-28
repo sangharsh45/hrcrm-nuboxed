@@ -1,14 +1,12 @@
 import React, { lazy, Suspense } from "react";
 import { StyledDrawer } from "../../../../../Components/UI/Antd";
-import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
 import { BundleLoader } from "../../../../../Components/Placeholder";
 import { StyledTabs } from "../../../../../Components/UI/Antd";
 import { TabsWrapper } from "../../../../../Components/UI/Layout";
 import { FormattedMessage } from "react-intl";
-import ContactInvestorCallActivityForm from "./ContactInvestorCallActivityForm";
-import ContactInvestorEventActivityForm from "./ContactInvestorEventActivityForm";
-import ContactInvestorTaskActivityForm from "./ContactInvestorTaskActivityForm";
+const ContactInvestorCallActivityForm =lazy(()=>import("./ContactInvestorCallActivityForm"));
+const ContactInvestorEventActivityForm =lazy(()=>import("./ContactInvestorEventActivityForm"));
+const ContactInvestorTaskActivityForm =lazy(()=>import("./ContactInvestorTaskActivityForm"));
 
 
 
@@ -63,7 +61,10 @@ const ContactInvestorActivityModal = (props) => {
                 tab={
                   <span>
                    <i class="fas fa-phone-square"></i>&nbsp;
-                    Calls
+                   <FormattedMessage
+                        id="app.calls"
+                        defaultMessage="Calls"
+                      />
                   </span>
                 }
                 key="1"
@@ -79,7 +80,10 @@ const ContactInvestorActivityModal = (props) => {
                 tab={
                   <span>
                     <i class="fas fa-tasks"></i>&nbsp;
-                    Events
+                    <FormattedMessage
+                        id="app.events"
+                        defaultMessage="Events"
+                      />
                   </span>
                 }
                 key="2"
@@ -94,7 +98,10 @@ const ContactInvestorActivityModal = (props) => {
                 tab={
                   <span>
                     <i class="far fa-calendar-check"></i>&nbsp;
-                    Tasks
+                    <FormattedMessage
+                        id="app.tasks"
+                        defaultMessage="Tasks"
+                      />
                   </span>
                 }
                 key="3"

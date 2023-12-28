@@ -1,24 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { Formik, Form, Field } from "formik";
+import { Formik, Form, } from "formik";
 import {
-  TextInput,
   Select,
-  StyledLabel,
 } from "../../../../Components/UI/Elements";
-import { MainWrapper, Spacer } from "../../../../Components/UI/Elements";
+import { MainWrapper, } from "../../../../Components/UI/Elements";
 import { FormattedMessage } from "react-intl";
-import { SelectComponent } from "../../../../Components/Forms/Formik/SelectComponent";
-import { Button, Popconfirm, Switch } from "antd";
+import { Button, Switch } from "antd";
 import {
-    // websiteSingleMultiple,
     getDepartmentwiserUser,
 } from "../../../Settings/SettingsAction";
 import {convertPitchStatus} from "../../PitchAction";
-import { FlexContainer } from "../../../../Components/UI/Layout";
 import {getDepartments} from "../../../Settings/Department/DepartmentAction"
-import moment from "moment";
 const { Option } = Select;
 function PitchConvertStatusForm(props) {
 
@@ -83,28 +77,15 @@ const handleDeptChange = (event) => {
         {({ values }) => (
         <MainWrapper style={{ height: "446px", width: "", overflow: "auto" }}>
         <Form className="form-background">
-          <FlexContainer
-            justifyContent="space-between"
-            style={{ width: "100%" }}
+          <div class=" flex justify-between w-full"
           >
-            <div
-              style={{
-                width: "44%",
-
-                marginTop: "0.625em",
-                marginLeft: "1em",
-              }}
+            <div class=" flex w-[44%] mt-[0.625em] ml-[1em]"
             >
             
         
              
-              <div
-                style={{
-                  width: "74%",
-                  display: "flex",
-                  justifyContent: "space-between",
-                }}
-              >
+            <div class=" flex justify-between w-[74%]"
+          >
               
                 <div>
                       {/* <Popconfirm
@@ -124,11 +105,18 @@ const handleDeptChange = (event) => {
                       {/* </Popconfirm> */}
                     </div>
               </div>
-              <Spacer />
+             <div class=" mt-4">
               {single === false &&(
-              <FlexContainer justifyContent="space-between">
-                                                    <div style={{ width: "35%" }}>
-                                                    <label style={{color:"#444",fontWeight:"bold",fontSize:" 0.75rem"}}>Department</label>
+               <div class=" flex justify-between "
+               >
+                                                    <div class=" w-[35%]" >
+                                                    <label style={{color:"#444",fontWeight:"bold",fontSize:" 0.75rem"}}>
+                                                    <FormattedMessage
+                  id="app.department"
+                  defaultMessage="Department"
+                />
+                                                      
+                                                      </label>
                       <select 
                         style={{ border: "0.06em solid #aaa" }}
                       onChange={handleDeptChange}>
@@ -145,8 +133,15 @@ const handleDeptChange = (event) => {
         {selectedDept && (
           <>                                           
 
-            <div style={{ width: "35%" }}>
-            <label style={{color:"#444",fontWeight:"bold",fontSize:" 0.75rem"}}>User</label>
+            <div class=" w-[35%]" >
+            <label style={{color:"#444",fontWeight:"bold",fontSize:" 0.75rem"}}>
+            <FormattedMessage
+                  id="app.user"
+                  defaultMessage="User"
+                />
+                  
+              
+              </label>
             <select
            style={{ border: "0.06em solid #aaa" }}
                  onChange={handleUserChange}
@@ -167,14 +162,14 @@ const handleDeptChange = (event) => {
                        
 </> 
         )}                                                  
-                                                </FlexContainer>
+                                                </div>
                                            
                                            )}
+                                           </div>
             </div>
-          </FlexContainer>
+          </div>
         
-              <Spacer style={{ marginTop: "1.25em" }} />
-              <FlexContainer justifyContent="flex-end">
+              <div class=" flex justify-end mt-[1.25em]" >
                 <Button
                   type="primary"
                   htmlType="submit"
@@ -183,7 +178,7 @@ const handleDeptChange = (event) => {
                   <FormattedMessage id="app.update" defaultMessage="Update" />
                   {/* Update */}
                 </Button>
-              </FlexContainer>
+              </div>
   
         </Form>
       </MainWrapper>

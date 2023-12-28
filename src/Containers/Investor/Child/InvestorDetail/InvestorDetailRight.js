@@ -1,4 +1,4 @@
-import React, { useEffect, lazy } from "react";
+import React, { lazy } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 const InvestorDetailTab = lazy(() => import("./InvestorDetailTab/InvestorDetailTab"));

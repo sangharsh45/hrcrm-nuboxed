@@ -1,7 +1,7 @@
 import React, { Component, lazy } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import PitchDetailTab from "../PitchDetails/PitchDetailTab";
+const PitchDetailTab =lazy(()=>import("../PitchDetails/PitchDetailTab"));
 
 
 class PitchDetailRight extends Component {

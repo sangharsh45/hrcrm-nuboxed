@@ -4,7 +4,6 @@ import { Menu } from "antd";
 import {
   SubTitle,
 } from "../../../../../Components/UI/Elements";
-import { FlexContainer } from "../../../../../Components/UI/Layout";
 import { CurrencySymbol } from "../../../../../Components/Common";
 class DealAboutView extends Component {
   render() {
@@ -28,7 +27,11 @@ class DealAboutView extends Component {
             fontSize: "bold",
           }}
         >
-          Proposal Value is
+          <FormattedMessage
+                id="app.proposalvalueis"
+                defaultMessage=" Proposal Value is"
+              />
+         
         </p>
         <p
           style={{
@@ -173,15 +176,13 @@ export default DealAboutView;
 
 const ProfileItemRow = ({ label, value, ex }) => {
   return (
-    <FlexContainer
-      alignItems="center"
-      flexWrap="nowrap"
+    <div class=" flex flex-no-wrap items-center"
 
     >
       
 <SubTitle style={{ color: "#444", fontWeight: 600 }}>{label}</SubTitle>
       <SubTitle style={{ textAlign:"end" }}>{value}</SubTitle>
       
-    </FlexContainer>
+    </div>
   );
 };

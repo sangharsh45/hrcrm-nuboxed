@@ -1,4 +1,5 @@
-import React, { Component } from "react";
+import React, {  } from "react";
+import { FormattedMessage } from "react-intl";
 import { SubTitle } from "../../../../../Components/UI/Elements";
 
 function InvestorDetailView (props) {   
@@ -15,11 +16,26 @@ function InvestorDetailView (props) {
       <>
         
 
-<InvestorItemRow label="Address" value={addressdata||""} />
-        <InvestorItemRow label="Street" value={addressdata1||""} />
-        <InvestorItemRow label="City" value={addressdata2||""} />
-        <InvestorItemRow label="State" value={addressdata3||""} />
-        <InvestorItemRow label="Pin Code" value={addressdata4||""} />
+<InvestorItemRow label={<FormattedMessage
+                  id="app.address"
+                  defaultMessage="Address"
+                />} value={addressdata||""} />
+        <InvestorItemRow label={<FormattedMessage
+          id="app.street"
+          defaultMessage="Street"
+        />} value={addressdata1||""} />
+        <InvestorItemRow label={<FormattedMessage
+            id="app.city"
+            defaultMessage="City"
+          />} value={addressdata2||""} />
+        <InvestorItemRow  label={<FormattedMessage
+              id="app.state"
+              defaultMessage="State"
+            />} value={addressdata3||""} />
+        <InvestorItemRow label={<FormattedMessage
+            id="app.pincode"
+            defaultMessage="Pin Code"
+          />} value={addressdata4||""} />
       </>
     );
 }

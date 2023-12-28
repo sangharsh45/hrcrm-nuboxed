@@ -2,12 +2,12 @@ import React, { useState,useEffect,Suspense, lazy } from 'react';
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { BundleLoader} from "../../Components/Placeholder";
-import ContactInvestAllCardList from './Child/ContactInvestTable/ContactInvestAllCardList';
 import {handleContactInvestModal,setContactInvetViewType,
   getContactInvestByUserId,
   getContactInvestFilterData} from "./ContactInvestAction";
 
-const ContactInvestHeader = lazy(() => import("./Child/ContactInvestHeader")); 
+const ContactInvestHeader = lazy(() => import("./Child/ContactInvestHeader"));
+const ContactInvestAllCardList = lazy(() => import("./Child/ContactInvestTable/ContactInvestAllCardList"));  
 const AddContactInvestModal = lazy(() => import("./Child/AddContactInvestModal"));
 const ContactInvestCardList = lazy(() => import("./Child/ContactInvestTable/ContactInvestCardList"));
 

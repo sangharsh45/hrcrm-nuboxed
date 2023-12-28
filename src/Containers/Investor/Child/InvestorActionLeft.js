@@ -2,7 +2,7 @@ import React, { useEffect,useState } from "react";
 import { FormattedMessage } from "react-intl";
 import TocIcon from '@mui/icons-material/Toc';
 import { StyledSelect } from "../../../Components/UI/Antd";
-import { Button, Tooltip, Badge } from "antd";
+import { Tooltip, Badge } from "antd";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import PeopleIcon from '@mui/icons-material/People';
@@ -100,7 +100,9 @@ const InvestorActionLeft = (props) => {
       </Tooltip>
 
       
-      <Tooltip title="Teams">
+      <Tooltip 
+      title={<FormattedMessage id="app.teams" defaultMessage="Teams" />}
+>
         <Badge
           size="small"
         count={(props.viewType === "teams" && props.investorTeamRecord.InvestorTeam) || 0}
@@ -130,7 +132,7 @@ const InvestorActionLeft = (props) => {
               color: props.viewType === "all" && "#1890ff",
             }}
           >
-          ALL
+         <FormattedMessage id="app.all" defaultMessage="ALL" />
           </span>
         </Badge>
       </Tooltip>

@@ -4,7 +4,6 @@ import { FormattedMessage } from "react-intl";
 import { bindActionCreators } from "redux";
 import { updateDealName } from "../../../DealAction";
 import { Button } from "antd";
-import { FlexContainer } from "../../../../../Components/UI/Layout";
 import { TextInput} from "../../../../../Components/UI/Elements";
 class DealEdit extends Component {
   constructor(props) {
@@ -39,8 +38,7 @@ class DealEdit extends Component {
     const { dealDetailsbyID, toggleViewType, updatingDealName } = this.props;
     return (
       <>
-        <FlexContainer
-          flexDirection="column"
+        <div class=" flex flex-col"
           style={{ padding: "0.625em 1.25em 0.625em 1.25em" }}
         >
           <EditableInput
@@ -50,8 +48,8 @@ class DealEdit extends Component {
             value={this.state.fields.opportunityName}
             width="100%"
           />
-        </FlexContainer>
-        <FlexContainer justifyContent="flex-end" marginRight="1.25em">
+        </div>
+        <div class=" flex justify-end mr-[1.25em]" >
           <Button
             type="primary"
             Loading={updatingDealName}
@@ -71,7 +69,7 @@ class DealEdit extends Component {
             />
             {/* Cancel */}
           </Button>
-        </FlexContainer>
+        </div>
       </>
     );
   }

@@ -1,4 +1,4 @@
-import React, { lazy, Suspense, Component } from "react";
+import React, {  Suspense, Component } from "react";
 import { connect } from "react-redux";
 import { FormattedMessage } from "react-intl";
 import { bindActionCreators } from "redux";
@@ -11,9 +11,7 @@ import { InputComponent } from "../../../../Components/Forms/Formik/InputCompone
 import { TextareaComponent } from "../../../../Components/Forms/Formik/TextareaComponent";
 import * as Yup from "yup";
 import {
-    // handleLeadsDocumentUploadModal,
     addPitchDocument,
-    // getLeadsDocument,
 } from "../../PitchAction";
 import DragableUpload from "../../../../Components/Forms/Formik/DragableUpload";
 import { RightSquareOutlined, ToTopOutlined } from "@ant-design/icons";
@@ -99,11 +97,11 @@ class AddPitchDocumentModal extends Component {
           title={
             <FormattedMessage id="app.document" defaultMessage="Document" />
           }
-          width="65vw"
+          width="60%"
           visible={this.props.pitchDocumentUploadModal}
           destroyOnClose
           maskClosable={false}
-          style={{ marginTop:"5rem" }}
+          style={{ marginTop:"3rem" }}
           maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}
           onClose={() => this.handleClose()}
           footer={null}
@@ -235,7 +233,7 @@ class AddPitchDocumentModal extends Component {
                                     name="department"
                                     label={
                                       <FormattedMessage
-                                        id="app.department"
+                                        id="app.function"
                                         defaultMessage="Function"
                                       />
                                     }

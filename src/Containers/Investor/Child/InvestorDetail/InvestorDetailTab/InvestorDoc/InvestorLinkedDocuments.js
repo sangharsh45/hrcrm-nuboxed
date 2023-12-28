@@ -13,7 +13,6 @@ import {
 import { SearchOutlined } from "@ant-design/icons";
 import {
   Tooltip,
-  Badge,
   Button,
   Input
 } from "antd";

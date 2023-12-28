@@ -1,8 +1,6 @@
 import React, { Component,lazy } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import axios from "axios";
-import { base_url } from "../../../../Config/Auth";
 import { FlexContainer } from "../../../../Components/UI/Layout";
 
 const DealDetailTab = lazy(() => import("./DealTabs/DealDetailTab"));

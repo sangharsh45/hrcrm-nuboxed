@@ -1,12 +1,9 @@
-import React, { lazy, Suspense, Component } from "react";
+import React, {  Suspense, Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { FormattedMessage } from "react-intl";
-import { Button ,Switch} from "antd";
+import { Button } from "antd";
 import { Formik, Form, Field } from "formik";
-import {
-  StyledLabel,
-} from "../../../../../../Components/UI/Elements";
 import { StyledDrawer } from "../../../../../../Components/UI/Antd";
 import { Spacer } from "../../../../../../Components/UI/Elements";
 import SearchSelect from "../../../../../../Components/Forms/Formik/SearchSelect";
@@ -106,11 +103,11 @@ class AddDocumentModal extends Component {
           title={
             <FormattedMessage id="app.document" defaultMessage="Document" />
           }
-          width="65vw"
+          width="60%"
           visible={documentUploadModal}
           destroyOnClose
           maskClosable={false}
-          style={{ marginTop: "5rem" }}
+          style={{ marginTop: "3rem" }}
           maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}
           onClose={() => this.handleClose()}
           footer={null}
@@ -185,7 +182,7 @@ class AddDocumentModal extends Component {
                         value={values.documentId}
                         inlineLabel
                       />
-                           <div class=" flex  mt-4">
+                           {/* <div class=" flex  mt-4">
                         <StyledLabel>Contract</StyledLabel>
                         <Switch
                           style={{ width: "6.25em", marginLeft: "0.625em" }}
@@ -194,7 +191,7 @@ class AddDocumentModal extends Component {
                           checkedChildren="Yes"
                           unCheckedChildren="No"
                         />
-                      </div>
+                      </div> */}
                     </div>
                     <div class=" h-full w-5/12">
                       <Field

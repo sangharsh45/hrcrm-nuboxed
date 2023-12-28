@@ -14,7 +14,7 @@ function InvestorOverView (props) {
         <div class=" flex justify-between">
           <div class=" flex justify-start flex-nowrap w-4/6"
           >
-            <div style={{ width: "15%" }}>
+            <div class=" w-[15%]" >
               <MultiAvatar
                 primaryTitle={investorDetails.name}
                 imageId={investorDetails.imageId}

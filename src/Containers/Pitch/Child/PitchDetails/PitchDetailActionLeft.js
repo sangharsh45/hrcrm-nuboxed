@@ -1,9 +1,6 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
-import ActionIcon from "../../../../Components/Utils/ActionIcon";
-import { FormattedMessage, IntlProvider } from "react-intl";
-import { FlexContainer } from "../../../../Components/UI/Layout/";
-import { Button } from "antd";
+import { FormattedMessage } from "react-intl";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { RollbackOutlined } from "@ant-design/icons";
@@ -11,7 +8,7 @@ import { RollbackOutlined } from "@ant-design/icons";
 class LeadDetailActionLeft extends React.Component {
   render() {
     return (
-      <FlexContainer alignItems="center">
+      <div class=" flex items-center" >
         <RollbackOutlined
           style={{ marginRight: "0.3rem" }}
           iconType="rollback"
@@ -25,7 +22,7 @@ class LeadDetailActionLeft extends React.Component {
           // style={{ color: "#1890ff" }}
         onClick={() => this.props.history.goBack()}
         />
-      </FlexContainer>
+      </div>
     );
   }
 }

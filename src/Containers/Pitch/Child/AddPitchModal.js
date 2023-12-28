@@ -1,7 +1,7 @@
 import React, { lazy, Suspense, Component } from "react";
+import { FormattedMessage } from "react-intl";
 import { BundleLoader } from "../../../Components/Placeholder";
 import { StyledDrawer, StyledTabs } from "../../../Components/UI/Antd";
-import { FormattedMessage } from "react-intl";
 const PitchForm =lazy(()=>import("../Child/PitchForm"));
 const TabPane = StyledTabs.TabPane;
 
@@ -13,7 +13,13 @@ class AddPitchModal extends Component {
     return (
       <>
         <StyledDrawer
-        title="Pitch"
+        title={
+          <FormattedMessage
+                  id="app.pitch"
+                  defaultMessage="Pitch"
+                />
+        }
+       
 
         width={drawerWidth}
           visible={this.props.addPitchModal}

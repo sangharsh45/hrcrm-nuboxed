@@ -111,7 +111,7 @@ const ContactInvestActionLeft = (props) => {
         </Badge>
       </Tooltip>
       <Tooltip
-        title="All"
+       title={<FormattedMessage id="app.all" defaultMessage="All" />}
       >
         <Badge
           size="small"
@@ -129,12 +129,12 @@ const ContactInvestActionLeft = (props) => {
               color: props.viewType === "all" && "#1890ff",
             }}
           >
-            ALL
+   <FormattedMessage id="app.all" defaultMessage="All" />
           </span>
         </Badge>
       </Tooltip>
       <Tooltip
-        title="Teams"
+       title={<FormattedMessage id="app.teams" defaultMessage="Teams" />}
       >
       <Badge
           size="small"

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { Button, Select, Icon, Tag, Switch } from "antd";
+import { Button, Select,  Switch } from "antd";
 import { FormattedMessage } from "react-intl";
 import { Formik, Form, FastField, Field, FieldArray } from "formik";
 import * as Yup from "yup";
@@ -515,7 +515,10 @@ class DealContactForm extends Component {
                   <Spacer />
                   <div style={{ width: "100%",backgroundImage: "linear-gradient(-90deg, #00162994, #94b3e4)" }}>
                       <div>
-                  <HeaderLabel style={{color:"white"}} > Address</HeaderLabel>
+                  <HeaderLabel style={{color:"white"}} > <FormattedMessage
+                        id="app.address"
+                        defaultMessage="Address"
+                      /> </HeaderLabel>
                   </div>
                     </div>
                   <FieldArray

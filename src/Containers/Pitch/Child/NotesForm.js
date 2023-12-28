@@ -1,10 +1,9 @@
 import React, { lazy,Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { Button, Timeline } from "antd";
+import {  Timeline } from "antd";
 import { getNotesListByPitchId } from "../PitchAction";
 import { BundleLoader } from "../../../Components/Placeholder";
-import { FormattedMessage } from "react-intl";
 const SingleNote =lazy(()=>import("./SingleNote"));
 const NoteFile =lazy(()=>import("./NoteFile"));
 

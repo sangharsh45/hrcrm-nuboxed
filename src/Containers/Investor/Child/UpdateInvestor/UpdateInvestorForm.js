@@ -7,8 +7,6 @@ import AddressFieldArray from "../../../../Components/Forms/Formik/AddressFieldA
 import { Formik, Form, Field, FieldArray, FastField } from "formik";
 import * as Yup from "yup";
 import {getAllEmployeelist} from "../../InvestorAction"
-// import { getAllSalesList } from "../../../Opportunity/OpportunityAction";
-// import { getAllCustomerEmployeelist } from "../../../Employees/EmployeeAction";
 import { getSectors } from "../../../../Containers/Settings/Sectors/SectorsAction";
 import { HeaderLabel, StyledLabel } from "../../../../Components/UI/Elements";
 import { Spacer } from "../../../../Components/UI/Elements";

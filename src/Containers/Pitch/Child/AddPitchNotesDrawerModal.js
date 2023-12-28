@@ -14,8 +14,8 @@ class AddPitchNotesDrawerModal extends Component {
         <StyledDrawer
         // title="Notes"
           title={this.props.item.firstName}
-          width="64%"
-          style={{ marginTop: "5rem" }}
+          width="60%"
+          style={{ marginTop: "3rem" }}
           visible={this.props.addDrawerPitchNotesModal}
           closable
           placement="right"

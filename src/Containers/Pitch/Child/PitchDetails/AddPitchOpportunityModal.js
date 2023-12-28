@@ -2,7 +2,7 @@ import React, { lazy, Suspense } from "react";
 import { FormattedMessage } from "react-intl";
 import { BundleLoader } from "../../../../Components/Placeholder";
 import { StyledDrawer } from "../../../../Components/UI/Antd";
- import PitchOpportunityForm from "./PitchOpportunityForm";
+ const PitchOpportunityForm =lazy(()=>import("./PitchOpportunityForm"));
 
 const AddPitchOpportunityModal = (props) => {
   const { ...formProps } = props;
@@ -13,12 +13,12 @@ const AddPitchOpportunityModal = (props) => {
         title={
           <FormattedMessage id="app.opportunity" defaultMessage="Opportunity" />
         }
-        width="45%"
+        width="60%"
         visible={props.addPitchOpportunityModal}
         maskClosable={false}
         destroyOnClose
         maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}
-        style={{marginTop:"5rem"}}
+        style={{marginTop:"3rem"}}
         onClose={() => props.handlePitchOpportunityModal(false)}
         footer={null}
       >

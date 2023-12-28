@@ -23,13 +23,13 @@ const AddInvestorContactModal = (props) => {
           id="app.contact"
           defaultMessage="Contact"
         />}
-        width="55%"
+        width="60%"
         visible={openInvestorContactModal}
         closable
         maskClosable={false}
         destroyOnClose
         maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }} 
-        style={{marginTop:"5rem"}}
+        style={{marginTop:"3rem"}}
         onClose={() => handleInvestorContactModal(false)}
         footer={null}
       >

@@ -1,12 +1,11 @@
-import React, { Component,useState, useMemo ,useEffect} from "react";
+import React, { useState, useEffect} from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { getAllSalesList } from "../../../../Opportunity/OpportunityAction"
 import { FormattedMessage } from "react-intl";
-import { Button, Icon, Switch, Tooltip } from "antd";
+import { Button, Switch, Tooltip } from "antd";
 import { Formik, Form, Field, FastField } from "formik";
 import * as Yup from "yup";
-
 import { handleCallNotesModal } from "../../../../Call/CallAction";
 import dayjs from "dayjs";
 import { Spacer, StyledLabel } from "../../../../../Components/UI/Elements";
@@ -26,13 +25,11 @@ import { handleChooserModal } from "../../../../Planner/PlannerAction";
 import { TextareaComponent } from "../../../../../Components/Forms/Formik/TextareaComponent";
 import { StyledPopconfirm } from "../../../../../Components/UI/Antd";
 import { getEmployeelist } from "../../../../Employees/EmployeeAction";
-import CandidateClearbit from "../../../../../Components/Forms/Autocomplete/CandidateClearbit";
 import { setClearbitCandidateData } from "../../../../Candidate/CandidateAction";
 import SpeechRecognition, { } from 'react-speech-recognition';
 import { AudioOutlined } from '@ant-design/icons';
 import { Fragment } from 'react'
-import { Listbox, Transition } from '@headlessui/react'
-import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid'
+import { Listbox,  } from '@headlessui/react'
 const ButtonGroup = Button.Group;
 const suffix = (
   <AudioOutlined

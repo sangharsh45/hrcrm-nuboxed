@@ -1,4 +1,4 @@
-import React, { Component,lazy} from "react";
+import React, { lazy} from "react";
 import { ActionHeader } from "../../../Components/Utils";
 const InvestorActionLeft=lazy(()=> import("./InvestorActionLeft"));
 const InvestorActionRight=lazy(()=> import("./InvestorActionRight"));

@@ -1,6 +1,6 @@
 import React, { Component,lazy } from "react";
 import { ViewEditCard } from "../../../../Components/UI/Elements";
-import PitchOverView from "./PitchOverView";
+const PitchOverView =lazy(()=>import("./PitchOverView"));
 
 
 class PitchOverViewCard extends Component {

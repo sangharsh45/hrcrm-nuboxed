@@ -1,10 +1,9 @@
-import React, { useEffect,useState,lazy } from "react";
+import React, { useEffect,useState } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { FormattedMessage } from "react-intl";
 import Highlighter from "react-highlight-words";
 import { Link } from "../../../../Components/Common";
-import dayjs from "dayjs";
 import { StyledTable } from "../../../../Components/UI/Antd";
 import {
   MultiAvatar,
@@ -14,13 +13,8 @@ import {
   SearchOutlined,
 } from "@ant-design/icons";
 import BorderColorIcon from '@mui/icons-material/BorderColor';
-
 import {getOpportunityListByPitchId}  from "../../PitchAction"
-import { CurrencySymbol } from "../../../../Components/Common";
-// import { getOpportunityListByLeadsId,handleUpdateLeadsOpportunityModal,
-//   setEditLeadsOpportunity} from "../../../LeadsAction";
 import { Tooltip,Button,Input } from "antd";
-//import AddLeadsUpdateOpportunityModal from "./AddLeadsUpdateOpportunityModal";
 
 function onChange(pagination, filters, sorter) {
   console.log("params", pagination, filters, sorter);

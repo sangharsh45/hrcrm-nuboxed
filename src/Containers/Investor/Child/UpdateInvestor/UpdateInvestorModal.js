@@ -7,7 +7,7 @@ const UpdateInvestorForm = lazy(() => import("./UpdateInvestorForm.js"));
 
 const UpdateInvestorModal = (props) => {
   const isSmallScreen = window.innerWidth <= 600;
-  const drawerWidth = isSmallScreen ? "90%" : "55%";
+  const drawerWidth = isSmallScreen ? "90%" : "60%";
   const { updateInvestorModal, handleUpdateInvestorModal,RowData, ...formProps } = props;
   return (
     <>
@@ -19,7 +19,7 @@ const UpdateInvestorModal = (props) => {
         closable
         destroyOnClose
         maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}
-        style={{marginTop:"5rem"}}
+        style={{marginTop:"3rem"}}
         onClose={() => handleUpdateInvestorModal(false)}
         footer={null}
       >

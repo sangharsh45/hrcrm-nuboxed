@@ -1,7 +1,7 @@
-import React, { Component, useEffect,useState } from "react";
+import React, {  useEffect,useState } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { Button, Switch, Checkbox } from "antd";
+import { Button, } from "antd";
 import { FormattedMessage } from "react-intl";
 import { Formik, Form, Field, FieldArray, FastField } from "formik";
 import * as Yup from "yup";
@@ -18,7 +18,7 @@ import { InputComponent } from "../../../Components/Forms/Formik/InputComponent"
 import { SelectComponent } from "../../../Components/Forms/Formik/SelectComponent";
 import ProgressiveImage from "../../../Components/Utils/ProgressiveImage";
 import ClearbitImage from "../../../Components/Forms/Autocomplete/ClearbitImage";
-import { Listbox, Transition } from '@headlessui/react'
+import { Listbox, } from '@headlessui/react'
 // yup validation scheme for creating a account
 const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
 const CustomerSchema = Yup.object().shape({

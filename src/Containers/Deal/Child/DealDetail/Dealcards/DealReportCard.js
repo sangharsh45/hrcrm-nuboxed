@@ -1,7 +1,7 @@
-import React, { Component } from "react";
+import React, { Component ,lazy} from "react";
 import { ViewEditCard } from "../../../../../Components/UI/Elements";
-import DealReportDetails from "./DealReportDetails";
-import DealRecruiterDetailsEdit from "./DealRecruiterDetailsEdit";
+const DealRecruiterDetailsEdit = lazy(() => import("./DealRecruiterDetailsEdit"));
+const DealReportDetails = lazy(() => import("./DealReportDetails"));
 
 class DealReportCard extends Component {
   render() {

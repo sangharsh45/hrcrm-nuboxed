@@ -1,20 +1,12 @@
-// import React from 'react'
 
-// function PitchActionRight() {
-//   return (
-//     <div>PitchActionRight</div>
-//   )
-// }
 
-// export default PitchActionRight
-
-import React, { lazy } from "react";
+import React, { } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { withRouter } from "react-router-dom";
 import { Button } from "antd";
 import { StyledSelect } from "../../../Components/UI/Antd";
-//const LeadShareForm=lazy(()=> import("../Child/LeadShareForm"));
+import { FormattedMessage } from "react-intl";
 const Option = StyledSelect.Option;
 
 class PitchActionRight extends React.Component {
@@ -42,7 +34,10 @@ class PitchActionRight extends React.Component {
           <Button type="primary" 
            onClick={() => this.props.handlePitchModal(true)}
           >
-            Add
+                    <FormattedMessage
+                        id="app.add"
+                        defaultMessage="Add"
+                      />
           </Button>
         </div>
         )}

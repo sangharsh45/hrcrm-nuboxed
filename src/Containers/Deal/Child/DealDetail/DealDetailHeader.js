@@ -1,8 +1,8 @@
-import React, { Component } from "react";
+import React, { Component,lazy } from "react";
 import { ActionHeader } from "../../../../Components/Utils";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import DealDetailActionLeft from "./DealDetailActionLeft";
+const DealDetailActionLeft = lazy(() => import("./DealDetailActionLeft"));
 class DealDetailHeader extends Component {
   render() {
     const { opportunity, fetchingOpportunityById } = this.props;

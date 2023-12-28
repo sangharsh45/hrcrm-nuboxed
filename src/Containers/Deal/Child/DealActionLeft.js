@@ -81,7 +81,12 @@ const DealActionLeft = (props) => {
           </span>
           </Badge>
         </Tooltip>
-        <Tooltip title={"Won"}>
+        <Tooltip 
+        title={   <FormattedMessage
+          id="app.won"
+          defaultMessage="Won"
+        />}
+   >
       <Badge
           size="small"
           // count={
@@ -105,7 +110,11 @@ const DealActionLeft = (props) => {
           </span>
           </Badge>
       </Tooltip>
-        <Tooltip title={"Close"}>
+        <Tooltip
+          title={   <FormattedMessage
+            id="app.close"
+            defaultMessage="Close"
+          />}>
         {" "}
         <Badge
           size="small"
@@ -129,7 +138,11 @@ const DealActionLeft = (props) => {
           </span>
         </Badge>
       </Tooltip>
-      <Tooltip title={"Lost"}>
+      <Tooltip 
+        title={   <FormattedMessage
+          id="app.lost"
+          defaultMessage="Lost"
+        />}>
         <Badge
           size="small"
         //   count={
@@ -155,7 +168,10 @@ const DealActionLeft = (props) => {
    
       
         <Tooltip
-          title="Teams"
+          title={   <FormattedMessage
+            id="app.teams"
+            defaultMessage="Teams"
+          />}
         >
            <Badge
           size="small"
@@ -182,7 +198,10 @@ const DealActionLeft = (props) => {
           </Badge>
         </Tooltip>
         <Tooltip
-          title="All"
+          title={   <FormattedMessage
+            id="app.all"
+            defaultMessage="ALL"
+          />}
         >
      <Badge
         size="small"
@@ -200,7 +219,10 @@ const DealActionLeft = (props) => {
             tooltipTitle="All"
             onClick={() => props.setDealViewType("all")}
           >
-          ALL
+            <FormattedMessage
+                        id="app.all"
+                        defaultMessage="ALL"
+                      />
           </span>
           </Badge>
         </Tooltip>

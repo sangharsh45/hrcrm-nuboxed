@@ -1,40 +1,20 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import dayjs from "dayjs";
 import Highlighter from "react-highlight-words";
-import { base_url } from "../../../../Config/Auth";
 import { getDocuments } from "../../../Settings/Documents/DocumentsAction";
 import {
   StyledTable,
-  StyledPopconfirm,
 } from "../../../../Components/UI/Antd";
 import { SearchOutlined } from "@ant-design/icons";
 import {
-  Popconfirm,
-  Tooltip,
-  Dropdown,
-  Menu,
-  Progress,
-  Table,
   Input,
   Button,
-  message,
-  Icon,
-  Badge,
 } from "antd";
 import {
-  MultiAvatar,
-  SubTitle,
-} from "../../../../Components/UI/Elements";
-import {
     getPitchDocument,
-//    deleteLeadsDocument,
 } from "../../PitchAction";
-import DownloadIcon from '@mui/icons-material/Download';
-import { elipsize } from "../../../../Helpers/Function/Functions";
 import { FormattedMessage } from "react-intl";
-import { DeleteOutlined } from "@ant-design/icons";
 
 class PitchDocuments extends Component {
   constructor(props) {
