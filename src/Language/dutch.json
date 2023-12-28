@@ -656,6 +656,8 @@
   "app.supervisor":"Leidinggevende",
   "app.address": "Adres",
   "app.confirgurestore":"Winkel configureren",
-  "app.shipby":"schip door"
+  "app.shipby":"schip door",
+  "app.searchbyname":"Zoek op naam",
+  "app.clickordragfiletothisareatoupload":"Klik of sleep het bestand naar dit gebied om het te uploaden"
 
 }

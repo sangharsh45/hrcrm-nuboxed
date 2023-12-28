@@ -1,20 +1,19 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { Button, Icon, Rate, Select } from "antd";
-import { Formik, Form, Field } from "formik";
+import { Button,  Rate, } from "antd";
+import { Formik, Form, } from "formik";
 import * as Yup from "yup";
 import { Editor } from "react-draft-wysiwyg";
-import { EditorState, convertToRaw, ContentState } from "draft-js";
+import { EditorState, convertToRaw } from "draft-js";
 import draftToHtml from "draftjs-to-html";
-import { TextareaComponent } from "../../Components/Forms/Formik/TextareaComponent";
 import { addFeedbackNote } from "./NoteAction";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import { FlexContainer } from "../../Components/UI/Layout";
 import CustomOption from "./CustomOption";
-import { Option, Spacer } from "../../Components/UI/Elements";
+import { Spacer } from "../../Components/UI/Elements";
 import { BorderBox } from "../../Components/UI/Layout";
-import { FrownOutlined, MehOutlined, SmileOutlined } from '@ant-design/icons';
+import { FormattedMessage } from "react-intl";
 
 const smileIcon = "&#128522";
 
@@ -192,7 +191,8 @@ class NoteFormForFeedBack extends Component {
                       marginRight: "5px",
                     }}
                   >
-                    Submit
+                    {<FormattedMessage id="app.submit" defaultMessage="Submit"/>}
+                    
                   </Button>
                 </FlexContainer>
                 {/* </div> */}

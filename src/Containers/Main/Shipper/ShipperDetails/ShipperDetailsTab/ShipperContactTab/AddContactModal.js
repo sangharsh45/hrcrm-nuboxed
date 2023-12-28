@@ -1,6 +1,6 @@
 import React, { lazy, Suspense, Component } from "react";
 import { Button } from "antd";
-
+import { FormattedMessage } from "react-intl";
 import { StyledDrawer } from "../../../../../../Components/UI/Antd";
 import { BundleLoader } from "../../../../../../Components/Placeholder";
 
@@ -14,8 +14,8 @@ class AddContactModal extends Component {
     return (
       <>
         <StyledDrawer
-          title="Contact"
-          width="55vw"
+          title={<FormattedMessage id="app.contact" defaultMessage="Contact" />}
+          width="60%"
           visible={shipperContactModal}
           closable
           destroyOnClose

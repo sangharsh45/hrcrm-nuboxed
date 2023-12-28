@@ -2,7 +2,7 @@ import React, { Component, lazy, Suspense } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { BundleLoader } from "../../../../../Components/Placeholder";
-import ShipperDetailsTab from "../ShipperDetailsTab/ShipperDetailsTab";
+const ShipperDetailsTab =lazy(()=>import("../ShipperDetailsTab/ShipperDetailsTab"));
 
 
 

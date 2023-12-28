@@ -1,5 +1,6 @@
 import React, { lazy, Suspense } from "react";
 import { StyledDrawer, StyledModal } from "../../../Components/UI/Antd";
+import { FormattedMessage } from "react-intl";
 import { BundleLoader } from "../../../Components/Placeholder";
 const AddShipperForm = lazy(() => import("./AddShipperForm"));
 
@@ -8,7 +9,7 @@ const AddShipperModal = (props) => {
     return (
         <>
             <StyledDrawer
-                title="Shipper"
+                title={<FormattedMessage id="app.shipper" defaultMessage="Shipper"/>}
                 width="55%"
                 visible={addShipperModal}
                 closable

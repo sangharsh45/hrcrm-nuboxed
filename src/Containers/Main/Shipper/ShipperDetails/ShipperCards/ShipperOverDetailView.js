@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { FlexContainer } from "../../../../../Components/UI/Layout";
-
+import { FormattedMessage } from "react-intl";
 class ShipperOverDetailView extends Component {
   render() {
     console.log(this.props.shipper);
@@ -13,17 +13,17 @@ class ShipperOverDetailView extends Component {
     return (
       <>
         <ShipperItemRow
-          label="Street"
+          label={<FormattedMessage id="app.street" defaultMessage="Street"/>}
           value={addresses && addresses[0].street}
         />
-        <ShipperItemRow label="City" value={addresses && addresses[0].city} />
-        <ShipperItemRow label="State" value={addresses && addresses[0].state} />
+        <ShipperItemRow label={<FormattedMessage id="app.city" defaultMessage="City"/>} value={addresses && addresses[0].city} />
+        <ShipperItemRow label={<FormattedMessage id="app.state" defaultMessage="State"/>} value={addresses && addresses[0].state} />
         <ShipperItemRow
-          label="Pincode"
+          label={<FormattedMessage id="app.pincode" defaultMessage="Pincode"/>}
           value={addresses && addresses[0].pinCode}
         />
         <ShipperItemRow
-          label="Country"
+          label={<FormattedMessage id="app.country" defaultMessage="Country"/>}
           value={addresses && addresses[0].country}
         />
       </>

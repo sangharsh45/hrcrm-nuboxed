@@ -2,7 +2,8 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Button } from "antd";
-import { Formik, Form, Field, FastField } from "formik";
+import { Formik, Form, Field } from "formik";
+import { FormattedMessage } from "react-intl";
 import { FlexContainer } from "../../../../../../Components/UI/Layout";
 import { Spacer } from "../../../../../../Components/UI/Elements";
 import { InputComponent } from "../../../../../../Components/Forms/Formik/InputComponent";
@@ -14,6 +15,7 @@ import {
   addShipperDocument,
   getShipperDocument,
 } from "../../../ShipperAction";
+
 import * as Yup from "yup";
 
 const FormSchema = Yup.object().shape({});
@@ -146,7 +148,7 @@ class ShipperDocumentForm extends Component {
                   <Field
                     name="documentTypeId"
                     selectType="documentType"
-                    label="Type"                  
+                    label={<FormattedMessage id="app.Type" defaultMessage="Type" />}                  
                     component={SearchSelect}
                     isColumn
                     margintop={"0.25em"}
@@ -162,14 +164,14 @@ class ShipperDocumentForm extends Component {
                 >
                   <Field
                     name="documentName"
-                    label="Name"                   
+                    label={<FormattedMessage id="app.name" defaultMessage="Name" />}                   
                     width={"100%"}
                     isColumn
                     component={InputComponent}             
                   />               
                   <Field
                     name="documentDescription"
-                    label="Description"                 
+                    label={<FormattedMessage id="app.Description" defaultMessage="Description" />}                 
                     isRequired
                     isColumn
                     width={"100%"}
@@ -184,7 +186,7 @@ class ShipperDocumentForm extends Component {
                   type="primary"
                   Loading={addingDocumentByShipperId}
                 >
-                  Submit
+                       {<FormattedMessage id="app.submit" defaultMessage="Submit"/>}
                 </Button>
               </FlexContainer>
             </Form>
