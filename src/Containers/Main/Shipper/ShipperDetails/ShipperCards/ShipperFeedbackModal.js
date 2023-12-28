@@ -1,5 +1,6 @@
 import React, { lazy, Suspense } from "react";
 import { BundleLoader } from "../../../../../Components/Placeholder";
+import { FormattedMessage } from "react-intl";
 import { StyledModal } from "../../../../../Components/UI/Antd";
 const FeedBackFrom = lazy(() => import("./FeedBackFrom"));
 
@@ -8,7 +9,7 @@ const ShipperFeedbackModal = (props) => {
   return (
     <>
       <StyledModal
-        title="Feedback"
+        title={<FormattedMessage id="app.feedback" defaultMessage="Feedback"/>}
         width="55vw"
         visible={props.feedbackModal}
         maskClosable={false}

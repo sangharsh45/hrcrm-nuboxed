@@ -2,6 +2,7 @@ import React, { useState,useEffect } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Button } from "antd";
+import { FormattedMessage } from "react-intl";
 import { Formik, Form, Field, FieldArray, FastField } from "formik";
 import { Spacer } from "../../../Components/UI/Elements";
 import { InputComponent } from "../../../Components/Forms/Formik/InputComponent";
@@ -103,10 +104,9 @@ function AddShipperForm (props) {
                     isRequired
                     name="name"
                     type="text"
-                    label="Name"
+                    label={<FormattedMessage id="app.name" defaultMessage="Name"/>}
                     width={"100%"}
                     component={InputComponent}
-                    // placeholder="Start typing..."
                     isColumn
                     inlineLabel
                   />
@@ -117,7 +117,7 @@ function AddShipperForm (props) {
                       <FastField
                         name="dialCode2"
                         selectType="dialCode"
-                        label="Dial Code"
+                        label={<FormattedMessage id="app.dialcode" defaultMessage="Dial Code"/>}
                         isColumn
                         component={SearchSelect}
                         defaultValue={{
@@ -132,7 +132,7 @@ function AddShipperForm (props) {
                     <div class="w-[68%] max-sm:w-[50%]">
                       <FastField
                         name="phoneNo"
-                        label="Phone #"
+                        label={<FormattedMessage id="app.phone" defaultMessage="Phone #"/>}
                         placeholder="Phone #"
                         isColumn
                         component={InputComponent}
@@ -145,7 +145,7 @@ function AddShipperForm (props) {
                     <FastField
                       type="email"
                       name="emailId"
-                      label="Email"
+                      label={<FormattedMessage id="app.email" defaultMessage="Email"/>}
                       className="field"
                       isColumn
                       width={"100%"}
@@ -158,7 +158,7 @@ function AddShipperForm (props) {
                    
                     <FastField
                       name="shipById"
-                      label="Ship By"
+                      label={<FormattedMessage id="app.shipby" defaultMessage="Ship By"/>}
                       component={SelectComponent}
                       isColumn
                       value={values.shipById}
@@ -178,7 +178,8 @@ function AddShipperForm (props) {
             <Listbox.Label className="block font-semibold text-[0.75rem] mb-1 leading-lh1.2  "
             // style={{boxShadow:"0em 0.25em 0.625em -0.25em" }}
             >
-              Assigned to
+              
+              {<FormattedMessage id="app.assignedto" defaultMessage="Assigned to"/>}
             </Listbox.Label>
             <div className="relative ">
               <Listbox.Button style={{boxShadow: "rgb(170, 170, 170) 0px 0.25em 0.62em"}} className="relative w-full leading-4 cursor-default border border-gray-300 bg-white py-0.5 pl-3 pr-10 text-left shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm">
@@ -265,7 +266,7 @@ function AddShipperForm (props) {
                   htmlType="submit"
                   loading={props.addingShipper}
                 >
-                  Create
+                                {<FormattedMessage id="app.create" defaultMessage="Create"/>}
                 </Button>
               </FlexContainer>
             </Form>

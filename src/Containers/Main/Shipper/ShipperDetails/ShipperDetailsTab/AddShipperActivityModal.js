@@ -1,10 +1,10 @@
 import React, { lazy, Suspense } from "react";
+import { FormattedMessage } from "react-intl";
 import { BundleLoader } from "../../../../../Components/Placeholder";
 import { StyledModal } from "../../../../../Components/UI/Antd";
 import { StyledTabs } from "../../../../../Components/UI/Antd";
-const ShipperActivityTable = lazy(() =>
-  import("./ShipperActivitytab/ShipperActivityTable")
-);
+
+const ShipperActivityTable = lazy(()=> import ("./ShipperActivityTab/ShipperActivityTable")); 
 
 const TabPane = StyledTabs.TabPane;
 
@@ -12,7 +12,7 @@ const AddShipperActivityModal = (props) => {
   return (
     <div>
       <StyledModal
-        title="Activity"
+        title={<FormattedMessage id="app.activity" defaultMessage="Activity"/>}
         width="68vw"
         visible={props.addShipperActivityTableModal}
         maskClosable={false}

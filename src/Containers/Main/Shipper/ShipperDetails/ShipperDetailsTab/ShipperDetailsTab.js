@@ -1,9 +1,9 @@
 import React, { Component, lazy, Suspense } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
+import { FormattedMessage } from "react-intl";
 import { StyledTabs } from "../../../../../Components/UI/Antd";
 import {
-  FlexContainer,
   TabsWrapper,
 } from "../../../../../Components/UI/Layout";
 import { message, Tooltip } from "antd";
@@ -19,22 +19,13 @@ import {
 import moment from "moment";
 import {
   PlusOutlined,
-  ShoppingCartOutlined,
-  DeleteOutlined,
 } from "@ant-design/icons";
 
-// const ShipperDeletedOrderTable = lazy(() =>
-//   import("./ShipperOrderTab/ShipperDeletedOrderTable")
-// );
 const ShipperDocumentTable = lazy(() =>
   import("./ShipperDocumentTab/ShipperDocumentTable")
 );
 const ShipperActivityTable = lazy(() =>import("./ShipperActivityTab/ShipperActivityTable")
 );
-
-// const LinkShipperOrderConfigureModal = lazy(() =>
-//   import("./ShipperOrderTab/LinkShipperOrderConfigureModal")
-// );
 
 const AddContactModal = lazy(() =>
   import("./ShipperContactTab/AddContactModal")
@@ -45,9 +36,7 @@ const ContactShipperTable = lazy(() =>
 const AddShipperDocumentModal = lazy(() =>
   import("./ShipperDocumentTab/AddShipperDocumentModal")
 );
-const ShipperHistoryTable = lazy(() =>
-  import("./ShipperHistorytab/ShipperHistoryTable")
-);
+
 const LinkedShipperNotes = lazy(() =>
   import("../ShipperDetailsTab/ShipperNotetab/LinkedShipperNotes")
 );
@@ -63,9 +52,7 @@ const LinkedShipperNotes = lazy(() =>
 // const ShipperOrderGeneratorTable = lazy(() =>
 //   import("../ShipperDetailsTab/ShipperOrderTab/ShipperOrderGeneratorTable")
 // );
-const ShipperDispatchTable = lazy(() =>
-  import("./ShipperOrderTab/ShipperDispatchTable")
-);
+
 
 const TabPane = StyledTabs.TabPane;
 
@@ -168,11 +155,13 @@ class ShipperDetailsTab extends Component {
               tab={
                 <>
                   <span>
-                    <i class="fab fa-connectdevelop"></i>&nbsp; Activity
+                    <i class="fab fa-connectdevelop"></i>&nbsp; 
+                    <FormattedMessage id="app.activity" defaultMessage="Activity" />
+                    
                   </span>
                   {activeKey === "2" && (
                     <>
-                      <Tooltip title="Create">
+                      {/* <Tooltip title="Create">
                         <PlusOutlined
                           onClick={() =>
                             this.props.handleShipperActivityModal(true)
@@ -180,7 +169,7 @@ class ShipperDetailsTab extends Component {
                           size="14px"
                           style={{ verticalAlign: "center", marginLeft: "5px" }}
                         />
-                      </Tooltip>
+                      </Tooltip> */}
                     </>
                   )}
                 </>
@@ -199,7 +188,7 @@ class ShipperDetailsTab extends Component {
                 <>
                   <span>
                     <i className="fa fa-sticky-note" aria-hidden="true"></i>
-                    &nbsp; Notes
+                    &nbsp; <FormattedMessage id="app.notes" defaultMessage="Notes" />
                   </span>
                 </>
               }
@@ -231,7 +220,8 @@ class ShipperDetailsTab extends Component {
                 <>
                   <span>
                     <i class="far fa-file"></i>
-                    &nbsp; Documents
+                    &nbsp; 
+                    <FormattedMessage id="app.documents" defaultMessage="Documents" />
                   </span>
                   {activeKey === "5" && (
                     <>
@@ -265,7 +255,9 @@ class ShipperDetailsTab extends Component {
                 <>
                   <span>
                     <i class="fas fa-file-contract"></i>
-                    &nbsp; Contact
+                    &nbsp; 
+                    <FormattedMessage id="app.contact" defaultMessage="Contact" />
+                    
                   </span>
                   {activeKey === "6" && (
                     <>

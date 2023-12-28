@@ -16,12 +16,11 @@ import {
 } from "./ShipperAction";
 import {
   DeleteOutlined,
-  TableOutlined,
-  AreaChartOutlined,
 } from "@ant-design/icons";
 import { StyledRangePicker } from "../../../Components/UI/Antd";
 import { TimeInterval } from "../../../Utils";
 import moment from "moment";
+import { FormattedMessage } from "react-intl";
 
 const { Search } = Input;
 
@@ -139,7 +138,8 @@ const ShipperActionLeft = (props) => {
         type={props.currentData ? "primary" : "default"}
         onClick={props.handleClear}
       >
-        Clear
+        <FormattedMessage id="app.clear" defaultMessage="Clear"/>
+        
       </Button>
       {/* &nbsp; &nbsp;
       {props.viewType === "table" ? (

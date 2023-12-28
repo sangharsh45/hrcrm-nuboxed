@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Button, Select } from "antd";
+import { FormattedMessage } from "react-intl";
 import { Formik, Form, FastField, Field, FieldArray } from "formik";
 import { Spacer } from "../../../../../../Components/UI/Elements";
 import SearchSelect from "../../../../../../Components/Forms/Formik/SearchSelect";
@@ -130,7 +131,7 @@ class ContactShipperForm extends Component {
                           <FastField
                             name="salutation"
                             type="text"
-                            label="Salutation"
+                            label={<FormattedMessage id="app.salutation" defaultMessage="Salutation" />}
                             options={["Mr.", "Ms.", "None"]}
                             component={SelectComponent}
                             inlineLabel
@@ -147,7 +148,7 @@ class ContactShipperForm extends Component {
                           <FastField
                             isRequired
                             name="firstName"
-                            label="First Name"
+                            label={<FormattedMessage id="app.firstname" defaultMessage="First Name" />}
                             type="text"
                             width={"100%"}
                             isColumn
@@ -165,7 +166,7 @@ class ContactShipperForm extends Component {
                         <div style={{ width: "40%" }}>
                           <FastField
                             name="middleName"
-                            label="Middle Name"
+                            label={<FormattedMessage id="app.middlename" defaultMessage="Middle Name" />}
                             type="text"
                             width={"100%"}
                             isColumn
@@ -181,7 +182,7 @@ class ContactShipperForm extends Component {
                         <div style={{ width: "55%" }}>
                           <FastField
                             name="lastName"
-                            label="Last Name"
+                            label={<FormattedMessage id="app.lastname" defaultMessage="Last Name" />}
                             type="text"
                             width={"100%"}
                             isColumn
@@ -201,7 +202,7 @@ class ContactShipperForm extends Component {
                     <div style={{ width: "47%" }}>
                       <FastField
                         name="dialCode1"
-                        label="Dial Code"
+                        label={<FormattedMessage id="app.dialcode" defaultMessage="Dial Code" />}
                         isColumn
                         margintop={"0.25em"}
                         selectType="dialCode"
@@ -218,7 +219,7 @@ class ContactShipperForm extends Component {
                     <div style={{ width: "47%" }}>
                       <FastField
                         name="mobileNo"
-                        label="Mobile #"
+                        label={<FormattedMessage id="app.mobile" defaultMessage="Mobile #" />}
                         placeholder="Mobile #"
                         component={InputComponent}
                         inlineLabel
@@ -237,7 +238,7 @@ class ContactShipperForm extends Component {
                       <FastField
                         name="dialCode2"
                         selectType="dialCode"
-                        label="Dial Code"
+                        label={<FormattedMessage id="app.dialcode" defaultMessage="Dial Code" />}
                         isColumn
                         margintop={"0.25em"}
                         component={SearchSelect}
@@ -253,7 +254,7 @@ class ContactShipperForm extends Component {
                     <div style={{ width: "47%" }}>
                       <FastField
                         name="phoneNo"
-                        label="Phone #"
+                        label={<FormattedMessage id="app.phone" defaultMessage="Phone #" />}
                         placeholder="Phone #"
                         isColumn
                         component={InputComponent}
@@ -273,7 +274,7 @@ class ContactShipperForm extends Component {
                       <FastField
                         type="email"
                         name="emailId"
-                        label="Email"
+                        label={<FormattedMessage id="app.email" defaultMessage="Email" />}
                         className="field"
                         isColumn
                         width={"100%"}
@@ -287,7 +288,7 @@ class ContactShipperForm extends Component {
                       <FastField
                         type="text"
                         name="linkedIn"
-                        label="Linkedin "
+                        label={<FormattedMessage id="app.linkedin" defaultMessage="Linkedin" />}
                         isColumn
                         width={"100%"}
                         component={InputComponent}
@@ -297,7 +298,7 @@ class ContactShipperForm extends Component {
                   </FlexContainer>                
                   <Field
                     name="notes"
-                    label="Notes"
+                    label={<FormattedMessage id="app.notes" defaultMessage="Notes"/>}
                     width={"100%"}
                     isColumn
                     component={TextareaComponent}                 
@@ -315,8 +316,8 @@ class ContactShipperForm extends Component {
                     <div style={{ width: "47%" }}>
                       <Field
                         name="designationId"
-                        placeholder="Designation"
-                        label="Designation"
+                        placeholder={<FormattedMessage id="app.designation" defaultMessage="Designation"/>}
+                        label={<FormattedMessage id="app.designation" defaultMessage="Designation"/>}
                         component={SelectComponent}
                         options={Array.isArray(designation) ? designation : []}                     
                       />
@@ -324,8 +325,7 @@ class ContactShipperForm extends Component {
                     <div style={{ width: "47%" }}>
                       <Field
                         name="departmentId"
-                        // placeholder="Designation"
-                        label="Department"
+                        label={<FormattedMessage id="app.department" defaultMessage="Department"/>}
                         component={SelectComponent}
                         options={Array.isArray(department) ? department : []}                       
                       />
@@ -337,7 +337,7 @@ class ContactShipperForm extends Component {
                       <Field
                         name="shipById"
                         selectType="shipperName"
-                        label="Mode"
+                        label={<FormattedMessage id="app.mode" defaultMessage="Mode"/>}
                         component={SearchSelect}
                         isColumn
                         value={values.shipById}
@@ -369,7 +369,8 @@ class ContactShipperForm extends Component {
                   // icon={<PoweroffOutlined />}
                   loading={this.props.addingContactShipper}
                 >
-                  Create
+                  {<FormattedMessage id="app.create" defaultMessage="Create"/>}
+                  
                 </Button>
               </FlexContainer>
             </Form>

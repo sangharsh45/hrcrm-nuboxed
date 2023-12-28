@@ -2,13 +2,11 @@ import React from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { FlexContainer } from "../../../Components/UI/Layout";
-// import { PlusOutlined } from "@ant-design/icons";
 import { Button, Tooltip } from "antd";
-
-// import { icon } from "leaflet";
 import { handleShipperModal } from "./ShipperAction";
 import AddShipperModal from "./AddShipperModal";
 import {base_url} from "../../../Config/Auth";
+import { FormattedMessage } from "react-intl";
 class ShipperActionRight extends React.Component {
   render() {
     const { handleShipperModal, addShipperModal,user,viewType } = this.props;
@@ -28,8 +26,9 @@ class ShipperActionRight extends React.Component {
             </Button>
           </Tooltip>
           :null}
-        <Tooltip title="Create">
-          <Button type="primary" onClick={() => handleShipperModal(true)}>Add
+        <Tooltip title={<FormattedMessage id="app.create" defaultMessage="Create" />}>
+          <Button type="primary" onClick={() => handleShipperModal(true)}>
+           <FormattedMessage id="app.add" defaultMessage="Add" /> 
           </Button>
         </Tooltip>
         <AddShipperModal
