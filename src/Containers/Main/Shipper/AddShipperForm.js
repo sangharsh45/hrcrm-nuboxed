@@ -133,7 +133,7 @@ function AddShipperForm (props) {
                       <FastField
                         name="phoneNo"
                         label={<FormattedMessage id="app.phone" defaultMessage="Phone #"/>}
-                        placeholder="Phone #"
+                        placeholder={<FormattedMessage id="app.phone" defaultMessage="Phone #"/>}
                         isColumn
                         component={InputComponent}
                         inlineLabel
@@ -266,7 +266,7 @@ function AddShipperForm (props) {
                   htmlType="submit"
                   loading={props.addingShipper}
                 >
-                                {<FormattedMessage id="app.create" defaultMessage="Create"/>}
+                                <FormattedMessage id="app.create" defaultMessage="Create"/>
                 </Button>
               </FlexContainer>
             </Form>

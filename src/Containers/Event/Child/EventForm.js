@@ -1,14 +1,13 @@
-import React, { Component, useState, useMemo, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { FormattedMessage } from "react-intl";
 import { bindActionCreators } from "redux";
-import { Button, Switch } from "antd";
+import { Button } from "antd";
 import { Formik, Form, Field, FieldArray } from "formik";
 import * as Yup from "yup";
 import {getAllCustomerData} from "../../Customer/CustomerAction"
 import { getFilteredEmailContact } from "../../Candidate/CandidateAction";
 import dayjs from "dayjs";
-import { Spacer, StyledLabel } from "../../../Components/UI/Elements";
 import SearchSelect from "../../../Components/Forms/Formik/SearchSelect";
 import { InputComponent } from "../../../Components/Forms/Formik/InputComponent";
 import AddressFieldArray from "../../../Components/Forms/Formik/AddressFieldArray";
@@ -322,8 +321,8 @@ const {
             <div class="overflow-y-auto h-[34rem] overflow-x-hidden max-sm:h-[30rem]">
             <Form className="form-background">
               <div class=" flex justify-around max-sm:flex-col">
-                <div class=" h-full w-w47.5 max-sm:w-wk">
-                  <Spacer />
+                <div class=" h-full w-w47.5  mt-3 max-sm:w-wk">
+                 
                   <Field
                     isRequired
                     name="eventTypeId"
@@ -353,8 +352,8 @@ const {
                     component={InputComponent}
                     inlineLabel
                   />
-                  <Spacer />
-                  <div>
+              
+                  <div class="mt-3">
                     <div class=" flex justify-between">
                       <div class=" w-1/2">
                         <Field
@@ -474,9 +473,8 @@ const {
                     component={SearchSelect}
                     inlineLabel
                   />
-                  <Spacer />
-                  <Spacer />
-                  
+       
+
                     {/* <Field
                       name="employeesId"
                       isColumnWithoutNoCreate
@@ -499,6 +497,122 @@ const {
                       }}
                       inlineLabel
                     /> */}
+                   
+                
+                  <div class="mt-3">
+                  {props.user.crmInd === true &&(
+                 <Field
+                 name="customerId"
+                 // selectType="customerList"
+                 isColumnWithoutNoCreate
+                 label={
+                   <FormattedMessage
+                     id="app.customer"
+                     defaultMessage="customer"
+                   />
+                 }
+                 //component={SearchSelect}
+                 component={SelectComponent}
+                 options={
+                   Array.isArray(customerNameOption)
+                     ? customerNameOption
+                     : []
+                 }
+                 isColumn
+                 margintop={"0"}
+                 value={values.customerId}
+                 inlineLabel
+               />
+                  )} 
+                  </div>
+                  <div class="mt-3">
+                  {props.user.crmInd === true &&(
+                  <Field
+                    name="contactId"
+                    //selectType="contactList"
+                    isColumnWithoutNoCreate
+                    // label="Contact"
+                    label={
+                      <FormattedMessage
+                        id="app.contact"
+                        defaultMessage="contact"
+                      />
+                    }
+                    component={SelectComponent}
+                    isColumn
+                    options={Array.isArray(ContactData) ? ContactData : []}
+                    value={values.contactId}
+                    // isDisabled={defaultContacts}
+                    defaultValue={{
+                      label: `${fullName || ""} `,
+                      value: contactId,
+                    }}
+                    inlineLabel
+                  />
+                  )} 
+                  </div>
+                  <div class="mt-3">
+                  {props.user.crmInd === true &&(
+                 <Field
+                 name="opportunityId"
+                 // selectType="customerList"
+                 isColumnWithoutNoCreate
+                 label={
+                   <FormattedMessage
+                     id="app.opportunity"
+                     defaultMessage="opportunity"
+                   />
+                 }
+                 //component={SearchSelect}
+                 component={SelectComponent}
+                 options={
+                   Array.isArray(opportunityNameOption)
+                     ? opportunityNameOption
+                     : []
+                 }
+                 isColumn
+                 margintop={"0"}
+                 value={values.opportunityId}
+                 inlineLabel
+               />
+                  )} 
+                  </div>
+                
+                  {/* <Field
+                    disabled="true"
+                    isRequired
+                    name="candidateId"
+                    // type="text"
+                    label="Team"
+                    placeholder="Start typing to search..."
+                    isColumnWithoutNoCreate
+                    setClearbitCandidateData={
+                      props.setClearbitCandidateData
+                    }
+                    component={CandidateClearbit}
+                    inlineLabel
+                  /> */}
+                  {/* {startDate ? (
+                    <span>
+                      {dayjs(startDate).isBefore(dayjs()) && (
+                        <span>
+                          <b>This Event occurs in the past !</b>
+                        </span>
+                      )}
+                    </span>
+                  ) : (
+                    <span>
+                      {dayjs(values.startDate).isBefore(dayjs()) && (
+                        <span>
+                          <b>This Event occurs in the past !</b>
+                        </span>
+                      )}
+                    </span>
+                  )} */}
+                  
+                </div>
+                <div class="h-full w-w47.5 max-sm:w-wk ">
+                <div class="mt-3">
                  <Listbox value={selected} onChange={setSelected}>
         {({ open }) => (
           <>
@@ -508,14 +622,14 @@ const {
                         defaultMessage="assignedto"
                       />
             </Listbox.Label>
-            <div className="relative mt-1">
+            <div className="relative ">
             <Listbox.Button className="relative w-full leading-4 cursor-default border border-gray-300 bg-white py-0.5 pl-3 pr-10 text-left shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm" style={{boxShadow: "rgb(170, 170, 170) 0px 0.25em 0.62em"}}>
                 {selected}
               </Listbox.Button>
               {open && (
                 <Listbox.Options
                   static
-                  className="absolute z-10 mt-1 max-h-56 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
+                  className="absolute z-10 max-h-56 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
                 >
                   {props.employees.map((item) => (
                     <Listbox.Option
@@ -570,7 +684,8 @@ const {
           </>
         )}
       </Listbox>
-                       <Spacer />
+      </div>
+      <div class="mt-1">
                   <Field
                     name="included"
                     // label="Include"
@@ -590,123 +705,8 @@ const {
                       value: employeeId,
                     }}
                   />
-                  
-                  <Spacer />
-                  <div>
-                  {props.user.crmInd === true &&(
-                 <Field
-                 name="customerId"
-                 // selectType="customerList"
-                 isColumnWithoutNoCreate
-                 label={
-                   <FormattedMessage
-                     id="app.customer"
-                     defaultMessage="customer"
-                   />
-                 }
-                 //component={SearchSelect}
-                 component={SelectComponent}
-                 options={
-                   Array.isArray(customerNameOption)
-                     ? customerNameOption
-                     : []
-                 }
-                 isColumn
-                 margintop={"0"}
-                 value={values.customerId}
-                 inlineLabel
-               />
-                  )} 
-                  </div>
-                  <Spacer />
-                  <div>
-                  {props.user.crmInd === true &&(
-                  <Field
-                    name="contactId"
-                    //selectType="contactList"
-                    isColumnWithoutNoCreate
-                    // label="Contact"
-                    label={
-                      <FormattedMessage
-                        id="app.contact"
-                        defaultMessage="contact"
-                      />
-                    }
-                    component={SelectComponent}
-                    isColumn
-                    options={Array.isArray(ContactData) ? ContactData : []}
-                    value={values.contactId}
-                    // isDisabled={defaultContacts}
-                    defaultValue={{
-                      label: `${fullName || ""} `,
-                      value: contactId,
-                    }}
-                    inlineLabel
-                  />
-                  )} 
-                  </div>
-                  <Spacer/>
-                  <div>
-                  {props.user.crmInd === true &&(
-                 <Field
-                 name="opportunityId"
-                 // selectType="customerList"
-                 isColumnWithoutNoCreate
-                 label={
-                   <FormattedMessage
-                     id="app.opportunity"
-                     defaultMessage="opportunity"
-                   />
-                 }
-                 //component={SearchSelect}
-                 component={SelectComponent}
-                 options={
-                   Array.isArray(opportunityNameOption)
-                     ? opportunityNameOption
-                     : []
-                 }
-                 isColumn
-                 margintop={"0"}
-                 value={values.opportunityId}
-                 inlineLabel
-               />
-                  )} 
-                  </div>
-                  <Spacer />
-                  {/* <Field
-                    disabled="true"
-                    isRequired
-                    name="candidateId"
-                    // type="text"
-                    label="Team"
-                    placeholder="Start typing to search..."
-                    isColumnWithoutNoCreate
-                    setClearbitCandidateData={
-                      props.setClearbitCandidateData
-                    }
-                    component={CandidateClearbit}
-                    inlineLabel
-                  /> */}
-                  {/* {startDate ? (
-                    <span>
-                      {dayjs(startDate).isBefore(dayjs()) && (
-                        <span>
-                          <b>This Event occurs in the past !</b>
-                        </span>
-                      )}
-                    </span>
-                  ) : (
-                    <span>
-                      {dayjs(values.startDate).isBefore(dayjs()) && (
-                        <span>
-                          <b>This Event occurs in the past !</b>
-                        </span>
-                      )}
-                    </span>
-                  )} */}
-                </div>
-                <div class=" h-full w-w47.5 max-sm:w-wk ">
-                  <Spacer />
+                 </div>
+                 
                   <FieldArray
                     name="address"
                     render={(arrayHelpers) => (
@@ -717,7 +717,7 @@ const {
                       />
                     )}
                   />
-                  <Spacer />
+             <div class="mt-3">
                   <Field
                     name="eventDescription"
                     //label="Notes"
@@ -729,7 +729,8 @@ const {
                     component={TextareaComponent}
                     inlineLabel
                   />
-                  <Spacer />
+                  </div>
+          
                   {/* <div class=" flex justify-between">
                     <div class=" w-1/2 font-bold">
                       <div class=" flex justify-between">
@@ -772,8 +773,8 @@ const {
                   </div> */}
                 </div>
               </div>
-              <Spacer />
-              <div class=" flex justify-end">
+      
+              <div class=" flex mt-3 justify-end">
                 {isEditing && (
                   <>
                     <StyledPopconfirm

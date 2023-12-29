@@ -1,4 +1,4 @@
-import React, { Component, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import dayjs from "dayjs";
@@ -10,8 +10,7 @@ import { FormattedMessage } from "react-intl";
 import { Formik, Form, Field, FastField } from "formik";
 import moment from "moment";
 import { getFilteredEmailContact } from "../../Candidate/CandidateAction";
-import { Spacer } from "../../../Components/UI/Elements";
-import { ExclamationCircleOutlined } from "@ant-design/icons";
+import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
 import { InputComponent } from "../../../Components/Forms/Formik/InputComponent";
 import { SelectComponent } from "../../../Components/Forms/Formik/SelectComponent";
 import { DatePicker } from "../../../Components/Forms/Formik/DatePicker";
@@ -152,7 +151,7 @@ function UpdateTaskForm(props) {
     props.getProjectTaskList(props.orgId);
     props.getTasks();
     props.getAllCustomerData(props.userId)
-    props.getUnits(props.orgId);
+    // props.getUnits(props.orgId);
     props.getCandidateTaskList(props.orgId);
     props.getTaskForRecruit(props.orgId);
     props.getCandidateTaskFilterList(props.orgId);
@@ -186,12 +185,12 @@ function UpdateTaskForm(props) {
     taskTypeId,
   } = props;
 
-  const unitData = props.units.map((item) => {
-    return {
-      label: `${item.unitName}`,
-      value: item.unitId,
-    };
-  });
+  // const unitData = props.units.map((item) => {
+  //   return {
+  //     label: `${item.unitName}`,
+  //     value: item.unitId,
+  //   };
+  // });
 
   const TaskOption = props.tasks.map((item) => {
     return {
@@ -465,7 +464,7 @@ function UpdateTaskForm(props) {
                             <Button
                               type="primary"
                                shape="circle"
-                              // icon={<ExclamationCircleOutlined />}
+                         
                               onClick={() => handleButtonClick("High")}
                               style={{
                                 backgroundColor:
@@ -483,7 +482,7 @@ function UpdateTaskForm(props) {
                             <Button
                               type="primary"
                                shape="circle"
-                              // icon={<ExclamationCircleOutlined />}
+             
                               onClick={() => handleButtonClick("Medium")}
                               style={{
                                 backgroundColor:
@@ -501,7 +500,7 @@ function UpdateTaskForm(props) {
                             <Button
                               type="primary"
                                shape="circle"
-                              // icon={<ExclamationCircleOutlined />}
+                  
                               onClick={() => handleButtonClick("Low")}
                               style={{
                                 backgroundColor:
@@ -588,7 +587,7 @@ function UpdateTaskForm(props) {
                     </div>
                   </div>
                 </div>
-                <Spacer />
+            
                 {/* <div class=" flex justify-between w-full max-sm:flex-col">
                 
                   <div class=" w-5/12 max-sm:w-wk">
@@ -612,9 +611,9 @@ function UpdateTaskForm(props) {
                     </div>
                   </div>
                 </div>
-                <Spacer /> */}
+                */}
                 
-                <div class=" flex justify-between">
+                <div class="mt-3 flex justify-between">
                 {values.taskTypeId === "TSK52434477391272022" && (
                     <div class=" w-1/2 max-sm:w-wk">
                    <StyledLabel>
@@ -802,8 +801,9 @@ function UpdateTaskForm(props) {
                         isColumn
                         value={values.unit}
                         component={SelectComponent}
-                        options={Array.isArray(unitData) ? unitData : []}
-                        // use12Hours
+                        options={[]}
+                        // options={Array.isArray(unitData) ? unitData : []}
+                 
 
                         inlineLabel
                         style={{
@@ -828,7 +828,7 @@ function UpdateTaskForm(props) {
                               <Button
                                 type="primary"
                                 shape="circle"
-                                icon={<ExclamationCircleOutlined />}
+                                icon={<ErrorOutlineIcon />}
                                 onClick={() => handleComplexityClick("Easy")}
                                 style={{
                                   backgroundColor:
@@ -840,7 +840,7 @@ function UpdateTaskForm(props) {
                               <Button
                                 type="primary"
                                 shape="circle"
-                                icon={<ExclamationCircleOutlined />}
+                                icon={<ErrorOutlineIcon />}
                                 onClick={() => handleComplexityClick("Medium")}
                                 style={{
                                   backgroundColor:
@@ -854,7 +854,7 @@ function UpdateTaskForm(props) {
                               <Button
                                 type="primary"
                                 shape="circle"
-                                icon={<ExclamationCircleOutlined />}
+                                icon={<ErrorOutlineIcon />}
                                 onClick={() => handleComplexityClick("Hard")}
                                 style={{
                                   backgroundColor:
@@ -892,7 +892,7 @@ function UpdateTaskForm(props) {
                   </div>
                 </div>
                 <div>
-                  <Spacer />
+           
                   {/* {values.startDate && (
                     <>
                       {dayjs(todayDate).isSameOrBefore(
@@ -933,7 +933,7 @@ function UpdateTaskForm(props) {
                   // }}
                   inlineLabel
                 />
-                <Spacer />
+        
                 {/* {values.taskTypeId === "TSK52434477391272022" && (
                  
 
@@ -970,7 +970,8 @@ function UpdateTaskForm(props) {
                     }
                   />
                 )}
-                <Spacer /> */}
+       */}
+                <div class="mt-3">
                 <Field
                   name="taskDescription"
                   //label="Notes"
@@ -982,8 +983,9 @@ function UpdateTaskForm(props) {
                   component={TextareaComponent}
                   inlineLabel
                 />
-                <Spacer />
-                <div class=" mt-4">
+                </div>
+         
+                <div class=" mt-3">
                       <Field
                             type="text"
                             name="link"
@@ -1001,8 +1003,7 @@ function UpdateTaskForm(props) {
                             inlineLabel
                           />
                       </div>
-                      <Spacer />
-                  <div>
+                      <div class="mt-3">
                   {props.user.crmInd === true &&(
                  <Field
                  name="customerId"
@@ -1028,8 +1029,7 @@ function UpdateTaskForm(props) {
                />
                   )} 
                   </div>
-                  <Spacer />
-                  <div>
+                  <div class="mt-3">
                   {props.user.crmInd === true &&(
                   <Field
                     name="contactId"
@@ -1055,8 +1055,7 @@ function UpdateTaskForm(props) {
                   />
                   )} 
                   </div>
-                  <Spacer/>
-                  <div>
+                  <div class="mt-3">
                   {props.user.crmInd === true &&(
                  <Field
                  name="opportunityId"
@@ -1128,8 +1127,8 @@ function UpdateTaskForm(props) {
                 </div>
               </div>
             </div>
-            <Spacer />
-            <div class=" flex justify-end">
+        
+            <div class="mt-3 flex justify-end">
               {isEditing && (
                 <>
                   <StyledPopconfirm

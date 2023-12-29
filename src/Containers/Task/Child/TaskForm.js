@@ -1,4 +1,4 @@
-import React, { Component,useState,useEffect } from "react";
+import React, {useState,useEffect } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Button, Tooltip, Switch } from "antd";
@@ -9,14 +9,11 @@ import dayjs from "dayjs";
 import{getAllOpportunityData} from "../../Opportunity/OpportunityAction"
 import { getFilteredEmailContact } from "../../Candidate/CandidateAction";
 import {getAllCustomerData} from "../../Customer/CustomerAction"
-import { ExclamationCircleOutlined } from "@ant-design/icons";
-import { Spacer } from "../../../Components/UI/Elements";
+import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
 import { getUnits } from "../../../Containers/Settings/Unit/UnitAction";
-import SearchSelect from "../../../Components/Forms/Formik/SearchSelect";
 import { InputComponent } from "../../../Components/Forms/Formik/InputComponent";
 import { SelectComponent } from "../../../Components/Forms/Formik/SelectComponent";
 import { DatePicker } from "../../../Components/Forms/Formik/DatePicker";
-import { TimePicker } from "../../../Components/Forms/Formik/TimePicker";
 import {
   addTask,
   updateTask,
@@ -42,7 +39,7 @@ import Upload from "../../../Components/Forms/Formik/Upload";
 import DragableUpload from "../../../Components/Forms/Formik/DragableUpload";
 import { Select } from "antd";
 import moment from "moment";
-import { Listbox, Transition } from '@headlessui/react';
+import { Listbox } from '@headlessui/react';
 
 const { Option } = Select;
 
@@ -579,7 +576,6 @@ const [priority,setpriority]=useState(props.selectedTask
                               <Button
                                 type="primary"
                                  shape="circle"
-                                // icon={<ExclamationCircleOutlined />}
                                 onClick={() => handleButtonClick("High")}
                                 style={{
                                   backgroundColor:
@@ -597,7 +593,7 @@ const [priority,setpriority]=useState(props.selectedTask
                               <Button
                                 type="primary"
                                  shape="circle"
-                                // icon={<ExclamationCircleOutlined />}
+                  
                                 onClick={() => handleButtonClick("Medium")}
                                 style={{
                                   backgroundColor:
@@ -615,7 +611,7 @@ const [priority,setpriority]=useState(props.selectedTask
                               <Button
                                 type="primary"
                                  shape="circle"
-                                // icon={<ExclamationCircleOutlined />}
+                        
                                 onClick={() => handleButtonClick("Low")}
                                 style={{
                                   backgroundColor:
@@ -747,7 +743,7 @@ const [priority,setpriority]=useState(props.selectedTask
                       </div>
                     {/* )} */}
                       {/* <div class=" w-1/2">
-                          <Spacer />
+             
                       <StyledLabel>Task Stages</StyledLabel>
                       <Field
                     name="taskChecklistId"
@@ -777,17 +773,17 @@ const [priority,setpriority]=useState(props.selectedTask
 
 
                  
-                    <div style={{ width: "24%" }}>
+                    <div class="w-[24%]">
                      
                       <StyledLabel>
                         <FormattedMessage
                           id="app.status"
                           defaultMessage="status"
                         />
-                        {/* Status */}
+                      
                       </StyledLabel>
 
-                      <div style={{ width: "100%" }}>
+                      <div class="w-[100%]">
                         <ButtonGroup>
                           <StatusIcon
                             color="blue"
@@ -839,8 +835,8 @@ const [priority,setpriority]=useState(props.selectedTask
                       </div>
                     </div>
                   </div>
-                  <Spacer />
-                  <div class=" flex justify-between w-full max-sm:flex-col">
+            
+                  <div class="mt-3 flex justify-between w-full max-sm:flex-col">
                    
                     {/* <div class=" w-5/12 max-sm:w-wk">
                       <div class=" flex justify-between w-full">
@@ -865,7 +861,7 @@ const [priority,setpriority]=useState(props.selectedTask
                       </div>
                     </div> */}
                   </div>
-                  <Spacer />
+               
                   {/* <div class=" flex justify-between">
                     <div class=" w-1/2">
                       <Field
@@ -887,7 +883,7 @@ const [priority,setpriority]=useState(props.selectedTask
                         }}
                       />
                     </div>
-                    <Spacer />
+                
                     <div class=" w-5/12">
                       <Field
                         // isRequired
@@ -910,10 +906,10 @@ const [priority,setpriority]=useState(props.selectedTask
                       />
                     </div>
                   </div>
-                  <Spacer /> */}
+                  */}
 
                
-                  <div class=" flex justify-between">
+                  <div class="mt-3 flex justify-between">
                     <div class=" w-1/2 ">
                       <Field
                         isRequired
@@ -1120,7 +1116,7 @@ const [priority,setpriority]=useState(props.selectedTask
                                 <Button
                                   type="primary"
                                   shape="circle"
-                                  icon={<ExclamationCircleOutlined />}
+                                  icon={<ErrorOutlineIcon />}
                                   onClick={() =>
                                     handleComplexityClick("Easy")
                                   }
@@ -1137,7 +1133,7 @@ const [priority,setpriority]=useState(props.selectedTask
                                 <Button
                                   type="primary"
                                   shape="circle"
-                                  icon={<ExclamationCircleOutlined />}
+                                  icon={<ErrorOutlineIcon />}
                                   onClick={() =>
                                     handleComplexityClick("Medium")
                                   }
@@ -1154,7 +1150,7 @@ const [priority,setpriority]=useState(props.selectedTask
                                 <Button
                                   type="primary"
                                   shape="circle"
-                                  icon={<ExclamationCircleOutlined />}
+                                  icon={<ErrorOutlineIcon />}
                                   onClick={() =>
                                     handleComplexityClick("Hard")
                                   }
@@ -1187,9 +1183,7 @@ const [priority,setpriority]=useState(props.selectedTask
                               value={values.assignedDate}
                               // defaultValue={dayjs("2015-01-01")}
                               inlineLabel
-                              style={{
-                                width: "100%",
-                              }}
+                            
                             />
                           </div>
                         )}
@@ -1197,7 +1191,7 @@ const [priority,setpriority]=useState(props.selectedTask
                     </div>
                   </div>
                   <div>
-                    <Spacer />
+                
                     {/* {values.startDate && (
                       <>
                         {dayjs(todayDate).isSameOrBefore(
@@ -1217,7 +1211,7 @@ const [priority,setpriority]=useState(props.selectedTask
                     )} */}
                   </div>
                 </div>
-                <div class=" h-full w-w47.5 max-sm:w-wk">
+                <div class="h-full w-w47.5 max-sm:w-wk">
                  
                   {/* <Field
                     name="assignedTo"
@@ -1249,14 +1243,14 @@ const [priority,setpriority]=useState(props.selectedTask
                                 defaultMessage="assignedto"
                               />
             </Listbox.Label>
-            <div className="relative mt-1">
+            <div className="relative">
               <Listbox.Button className="relative w-full leading-4 cursor-default border border-gray-300 bg-white py-0.5 pl-3 pr-10 text-left shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm"style={{boxShadow: "rgb(170, 170, 170) 0px 0.25em 0.62em"}}>
                 {selected}
               </Listbox.Button>
               {open && (
                 <Listbox.Options
                   static
-                  className="absolute z-10 mt-1 max-h-56 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
+                  className="absolute z-10 max-h-56 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
                 >
                   {props.employees.map((item) => (
                     <Listbox.Option
@@ -1311,7 +1305,7 @@ const [priority,setpriority]=useState(props.selectedTask
           </>
         )}
       </Listbox>
-                  <Spacer />
+              
                   {/* {values.taskTypeId === "TSK52434477391272022" && (
                     <Field
                       name="included"
@@ -1362,8 +1356,7 @@ const [priority,setpriority]=useState(props.selectedTask
                   /> */}
               
                  
-                  <Spacer />
-                  <div>
+              <div class="mt-3">
                   {props.user.crmInd === true &&(
                  <Field
                  name="customerId"
@@ -1389,8 +1382,7 @@ const [priority,setpriority]=useState(props.selectedTask
                />
                   )} 
                   </div>
-                  <Spacer />
-                  <div>
+                  <div class="mt-3">
                   {props.user.crmInd === true &&(
                   <Field
                     name="contactId"
@@ -1416,8 +1408,8 @@ const [priority,setpriority]=useState(props.selectedTask
                   />
                   )} 
                   </div>
-                  <Spacer/>
-                  <div>
+              
+                  <div class="mt-3">
                   {props.user.crmInd === true &&(
                  <Field
                  name="opportunityId"
@@ -1475,8 +1467,8 @@ const [priority,setpriority]=useState(props.selectedTask
                 
                  
                   
-                  <Spacer />
-                  <div class=" flex justify-between">
+             
+                  <div class="mt-3 flex justify-between">
                     {values.taskTypeId === "TSK52434477391272022" && (
                       <div class=" w-1/2 font-bold">
                         <div class=" flex justify-between">
@@ -1526,8 +1518,8 @@ const [priority,setpriority]=useState(props.selectedTask
                   </div>
                 </div>
               </div>
-              <Spacer />
-              <div class=" flex justify-end">
+            
+              <div class="mt-3 flex justify-end">
                 {isEditing && (
                   <>
                     <StyledPopconfirm

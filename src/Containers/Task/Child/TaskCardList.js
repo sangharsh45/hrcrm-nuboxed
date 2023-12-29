@@ -147,10 +147,7 @@ const TaskCardList = (props) => {
         <div className="md:w-24"></div>
         <div className="md:w-[3%]"></div>
         <div className="md:w-[5%]"></div>
-        <div className="w-12"><FormattedMessage
-                          id="app.action"
-                          defaultMessage="action"
-                        /></div>
+        <div className="w-12"></div>
       </div>
       {taskListRangeByUserId.map((item) => { 
         const currentDate = moment();
@@ -173,7 +170,7 @@ const TaskCardList = (props) => {
                         style={{
                           borderRadius: "50%",
                           height: "2.1875em",
-                          width: "2.1875em",
+                          width: "3.1875em",
                           backgroundColor: "red",
                         }}
                       ></div>

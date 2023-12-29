@@ -1,16 +1,16 @@
-import React, { Component,useState ,useEffect} from "react";
+import React, { useState ,useEffect} from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { getAllSalesList } from "../../Opportunity/OpportunityAction"
 import { FormattedMessage } from "react-intl";
-import { Button, Icon, Switch, Tooltip } from "antd";
+import { Button,  Switch, Tooltip } from "antd";
 import { Formik, Form, Field, FastField } from "formik";
 import * as Yup from "yup";
 import{getAllOpportunityData} from "../../Opportunity/OpportunityAction"
 import { handleCallNotesModal } from "../CallAction";
 import { getFilteredEmailContact } from "../../Candidate/CandidateAction";
 import dayjs from "dayjs";
-import { Spacer, StyledLabel } from "../../../Components/UI/Elements";
+import {  StyledLabel } from "../../../Components/UI/Elements";
 import SearchSelect from "../../../Components/Forms/Formik/SearchSelect";
 import { InputComponent } from "../../../Components/Forms/Formik/InputComponent";
 import { SelectComponent } from "../../../Components/Forms/Formik/SelectComponent";
@@ -382,8 +382,8 @@ function CallForm(props) {
               <div class=" flex justify-around max-sm:flex-col">
               <div class=" h-full w-w47.5 max-sm:w-wk"   >
               <div class=" flex justify-between w-full max-sm:flex-col">
-                    <div class=" w-2/6 max-sm:w-wk">
-                      <Spacer/>
+                    <div class=" w-2/6 mt-3 max-sm:w-wk ">
+                     
                       <StyledLabel>
                         {/* Type */}
                         <FormattedMessage id="app.type" defaultMessage="type" />
@@ -460,8 +460,8 @@ function CallForm(props) {
                         </Tooltip>
                       </div>
                     </div>
-                    <div class=" w-1/2">
-                      <Spacer />
+                    <div class=" w-1/2 mt-3">
+                      
                       <StyledLabel>
                         <FormattedMessage
                           id="app.category"
@@ -506,8 +506,8 @@ function CallForm(props) {
                       </ButtonGroup>
                     </div>
                   </div>
-                  <Spacer/>
-                  <div class=" flex justify-between items-end max-sm:flex-col " >
+                  
+                  <div class=" flex mt-3 justify-between items-end max-sm:flex-col " >
                     <div class=" self-start">
                       <StyledLabel>
                       <FormattedMessage
@@ -571,7 +571,7 @@ function CallForm(props) {
                     width={"100%"}
                     inlineLabel
                   />
-                  <Spacer />
+           <div class="mt-3">
                   <Field
                     name="startDate"
                     // label="Date"
@@ -584,8 +584,8 @@ function CallForm(props) {
                     value={values.startDate}
                     inlineLabel
                   />
-                  <Spacer />
-                  <div class=" flex justify-between max-sm:flex-col">
+                  </div>
+                  <div class=" flex mt-3 justify-between max-sm:flex-col">
                     <div class=" w-1/2 max-sm:w-wk">
                       <Field
                         name="startTime"
@@ -629,7 +629,7 @@ function CallForm(props) {
                       />
                     </div>
                   </div>
-                  <Spacer />
+                  <div class="mt-3">
                   <Field
                     isRequired
                     defaultValue={{ label: timeZone, value: userId }}
@@ -648,7 +648,8 @@ function CallForm(props) {
                     component={SearchSelect}
                     inlineLabel
                   />
-                  <Spacer />
+                  </div>
+                  
                   {/* {startDate ? (
                     <span>
                       {dayjs(startDate).isBefore(dayjs()) && (
@@ -678,7 +679,7 @@ function CallForm(props) {
                     </span>
                   )} */}
                 </div>
-                <div class=" h-3/4 w-w47.5 max-sm:w-wk " 
+                <div class=" mt-3 h-3/4 w-w47.5 max-sm:w-wk " 
                 >
                 <Listbox value={selected} onChange={setSelected}>
       {({ open }) => (
@@ -750,7 +751,7 @@ function CallForm(props) {
         </>
       )}
     </Listbox>
-                      <Spacer />
+    <div class="mt-3">
                   <Field
                     name="included"
                     // label="Include"
@@ -770,9 +771,8 @@ function CallForm(props) {
                       value: employeeId,
                     }}
                   />
-                 
-                  <Spacer />
-                  <div>
+                 </div>
+                 <div class="mt-3">
                   {props.user.crmInd === true &&(
                  <Field
                  name="customerId"
@@ -798,8 +798,8 @@ function CallForm(props) {
                />
                   )} 
                   </div>
-                  <Spacer />
-                  <div>
+                  
+                  <div class="mt-3">
                   {props.user.crmInd === true &&(
                   <Field
                     name="contactId"
@@ -825,8 +825,8 @@ function CallForm(props) {
                   />
                   )} 
                   </div>
-                  <Spacer/>
-                  <div>
+              
+                  <div class="mt-3">
                   {props.user.crmInd === true &&(
                  <Field
                  name="opportunityId"
@@ -852,7 +852,7 @@ function CallForm(props) {
                />
                   )} 
                   </div>
-                  <Spacer/>
+                
                   {/* <div >
                   <Field
                     disabled="true"
@@ -873,8 +873,8 @@ function CallForm(props) {
                     inlineLabel
                   />
                    </div>
-                  <Spacer /> */}
-                  <div>
+                   */}
+                  <div class="mt-3">
                     <div class=" w-full"><Field
                       name="callDescription"
                       // label="Notes"
@@ -888,7 +888,7 @@ function CallForm(props) {
                     /></div>
                   </div>
                  
-                  <Spacer  />
+              
                   {/* <div class=" flex justify-between" >
                     <div 
                     class=" w-1/2 font-bold">
@@ -932,8 +932,8 @@ function CallForm(props) {
                   </div> */}
                 </div>
               </div>
-              <Spacer  />
-              <div class=" flex justify-end">
+             
+              <div class=" flex mt-3 justify-end">
                 {isEditing && (
                   <>
                     <StyledPopconfirm
