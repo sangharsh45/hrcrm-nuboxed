@@ -1,46 +1,39 @@
-import React from "react";
+import React, {lazy,Suspense} from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { Button, Icon } from "antd";
 import { FormattedMessage } from "react-intl";
 import { StyledDrawer } from "../../../Components/UI/Antd";
-import { FlexContainer } from "../../../Components/UI/Layout";
-
 import { handleChooserModal } from "../PlannerAction";
-import { SearchSelect } from "../../../Components/Forms/Formik/SearchSelect";
-import PlannerTab from "./PlannerTab";
+
+const PlannerTab =lazy(()=>import("./PlannerTab"));
 
 class FormChooserModal extends React.Component {
   render() {
     const {
       chooserModal,
       handleChooserModal,
-      handleCallModal,
-      handleEventModal,
-      handleTaskModal,
     } = this.props;
     return (
       <>
         <StyledDrawer
-          //    title="Schedule"
-
           title={<FormattedMessage
             id="app.schedule"
             defaultMessage="Schedule"
           />}
           visible={chooserModal}
-          width={"55vw"}
-          bodyStyle={{ padding: 0 }}
-          style={{ overflow: "visible",marginTop:"5rem"}}
+          width={"60%"}
+          style={{ overflow: "visible",marginTop:"3rem"}}
           maskClosable={false}
           
           destroyOnClose
           onClose={() => handleChooserModal(false)}
           footer={null}
         >
-          <FlexContainer alignItems="center" justifyContent="space-evenly">
+          <div className="flex items-center justify-evenly">
+            <Suspense fallback={"Loading"}>
             <PlannerTab />
-          </FlexContainer>
+            </Suspense>
+          </div>
         </StyledDrawer>
       </>
     );

@@ -1,16 +1,17 @@
 import React, { Component, lazy, Suspense } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import HourForm from "../Child/HourForm"
-import { Icon } from "antd";
 import { StyledTabs } from "../../../Components/UI/Antd";
 import { TabsWrapper } from "../../../Components/UI/Layout";
-import CallForm from "../../Call/Child/CallForm";
-import EventForm from "../../Event/Child/EventForm";
-import TaskForm from "../../Task/Child/TaskForm";
-import LeaveForm from "../../Leave/Child/Tab/LeaveForm";
-import ProjectForm from "../../Project/ProjectForm";
-import { CalendarOutlined, PhoneOutlined, ProjectOutlined } from "@ant-design/icons";
+import PhoneIcon from '@mui/icons-material/Phone';
+import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
+
+const CallForm =lazy(()=>import("../../Call/Child/CallForm"));
+const EventForm =lazy(()=>import("../../Event/Child/EventForm"));
+const TaskForm =lazy(()=>import("../../Task/Child/TaskForm"));
+const LeaveForm =lazy(()=>import("../../Leave/Child/Tab/LeaveForm"));
+const ProjectForm =lazy(()=>import("../../Project/ProjectForm"));
+const HourForm =lazy(()=>import("../Child/HourForm"));
 
 const TabPane = StyledTabs.TabPane;
 
@@ -33,7 +34,7 @@ export class PlannerTab extends Component {
             <TabPane
               tab={
                 <span>
-                  <PhoneOutlined type="phone" />
+                  <PhoneIcon/>
                   Calls
                 </span>
               }
@@ -52,7 +53,7 @@ export class PlannerTab extends Component {
             <TabPane
               tab={
                 <span>
-                  <CalendarOutlined type="calendar" />
+                  <CalendarMonthIcon/>
                   Events
                 </span>
               }
