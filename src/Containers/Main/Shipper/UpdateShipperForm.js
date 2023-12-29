@@ -11,15 +11,13 @@ import { FlexContainer } from "../../../Components/UI/Layout";
 import SearchSelect from "../../../Components/Forms/Formik/SearchSelect";
 import { updateShipper,getEmployeelistAsErp } from "./ShipperAction";
 import {getShipByData} from "../../Settings/Category/ShipBy/ShipByAction";
+import { FormattedMessage } from "react-intl";
 import { SelectComponent } from "../../../Components/Forms/Formik/SelectComponent";
 import { Listbox } from '@headlessui/react';
 
 const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
 const CustomerSchema = Yup.object().shape({
   name: Yup.string().required("Input needed!"),
-  // emailId: Yup.string()
-  //   .email("Enter a valid Email")
-  //   .required("Input needed!"),
   phoneNo: Yup.string().matches(phoneRegExp, 'Mobile number is not valid').min(5, "Too Short").max(10, "Too Large")
 });
 function UpdateShipperForm(props) {
@@ -101,7 +99,7 @@ function UpdateShipperForm(props) {
                   isRequired
                   name="name"
                   type="text"
-                  label="Name"
+                  label={<FormattedMessage id="app.name" defaultMessage="Name"/>}
                   width={"100%"}
                   component={InputComponent}
                   isColumn
@@ -114,7 +112,7 @@ function UpdateShipperForm(props) {
                 <div class="w-[30%] max-sm:w-[40%] ">
                     <FastField
                       name="dialCode"
-                      label="Dial Code"
+                      label={<FormattedMessage id="app.dialcode" defaultMessage="Dial Code"/>}
                       isColumn
                       // margintop={"0.25em"}
                       width={"100%"}
@@ -130,8 +128,8 @@ function UpdateShipperForm(props) {
                     <FastField
                       type="text"
                       name="phoneNo"
-                      label="Phone #"
-                      placeholder="Phone #"
+                      label={<FormattedMessage id="app.phone" defaultMessage="Phone #"/>}
+                      placeholder={<FormattedMessage id="app.phone" defaultMessage="Phone #"/>}
                       component={InputComponent}
                       inlineLabel
                       width={"100%"}
@@ -147,7 +145,7 @@ function UpdateShipperForm(props) {
                   <FastField
                     type="email"
                     name="emailId"
-                    label="Email"
+                    label={<FormattedMessage id="app.email" defaultMessage="Email"/>}
                     className="field"
                     isColumn
                     width={"100%"}
@@ -166,7 +164,7 @@ function UpdateShipperForm(props) {
                 <Field
                   name="shipById"
                   selectType="shipperName"
-                  label="Ship By"
+                  label={<FormattedMessage id="app.shipby" defaultMessage="Ship By"/>}
                   component={SelectComponent}
                   options={
                     Array.isArray(shipByOptions) ? shipByOptions : []
@@ -186,7 +184,7 @@ function UpdateShipperForm(props) {
             <Listbox.Label className="block font-semibold text-[0.75rem] mb-1 leading-lh1.2  "
             // style={{boxShadow:"0em 0.25em 0.625em -0.25em" }}
             >
-              Assigned to
+                 {<FormattedMessage id="app.assignedto" defaultMessage="Assigned to"/>}
             </Listbox.Label>
             <div className="relative ">
               <Listbox.Button style={{boxShadow: "rgb(170, 170, 170) 0px 0.25em 0.62em"}} className="relative w-full leading-4 cursor-default border border-gray-300 bg-white py-0.5 pl-3 pr-10 text-left shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm">
@@ -273,7 +271,7 @@ function UpdateShipperForm(props) {
                 htmlType="submit"
                 loading={props.updateShipperById}
               >
-                Update
+ <FormattedMessage id="app.update" defaultMessage="Update"/>
               </Button>
             </FlexContainer>
           </Form>

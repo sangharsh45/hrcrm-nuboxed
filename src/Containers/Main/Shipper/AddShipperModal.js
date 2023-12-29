@@ -10,13 +10,13 @@ const AddShipperModal = (props) => {
         <>
             <StyledDrawer
                 title={<FormattedMessage id="app.shipper" defaultMessage="Shipper"/>}
-                width="55%"
+                width="60%"
                 visible={addShipperModal}
                 closable
                 // maskClosable={false}
                 destroyOnClose
                 maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}
-                style={{marginTop:"5rem"}}
+                style={{marginTop:"3rem"}}
                 onClose={() => handleShipperModal(false)}
                 footer={null}
             >

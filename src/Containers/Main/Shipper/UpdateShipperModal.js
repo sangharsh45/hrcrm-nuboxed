@@ -1,6 +1,7 @@
 import React, { lazy, Suspense } from "react";
 import { BundleLoader } from "../../../Components/Placeholder";
-import { StyledDrawer, StyledModal } from "../../../Components/UI/Antd";
+import { FormattedMessage } from "react-intl";
+import { StyledDrawer } from "../../../Components/UI/Antd";
  const UpdateShipperForm = lazy(() => import("./UpdateShipperForm"));
 
 const UpdateShipperModal = (props) => {
@@ -8,13 +9,13 @@ const UpdateShipperModal = (props) => {
   return (
     <>
       <StyledDrawer
-        title="Shipper"
-        width="55vw"
+        title={<FormattedMessage id="app.shipper" defaultMessage="Shipper"/>}
+        width="60%"
         visible={props.updateShipperModal}
         maskClosable={false}
         destroyOnClose
         maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}
-        style={{ top: 40 }}
+        style={{marginTop:"3rem"}}
         onClose={() => props.handleUpdateShipperModal(false)}
         footer={null}
       >
