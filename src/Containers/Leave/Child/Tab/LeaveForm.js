@@ -6,14 +6,11 @@ import { Button,Switch } from "antd";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 import dayjs from "dayjs";
-import { Radio } from "antd";
-import { Spacer, StyledLabel } from "../../../../Components/UI/Elements";
+import {  StyledLabel } from "../../../../Components/UI/Elements";
 import { TextareaComponent } from "../../../../Components/Forms/Formik/TextareaComponent";
 import { InputComponent } from "../../../../Components/Forms/Formik/InputComponent";
 import { DatePicker } from "../../../../Components/Forms/Formik/DatePicker";
-
 import { handleChooserModal } from "../../../Planner/PlannerAction";
-import { FlexContainer } from "../../../../Components/UI/Layout";
 import { addLeaves } from "../../LeavesAction";
 
 
@@ -189,12 +186,9 @@ console.log(this.state.firstCase)
                         </Radio>
                                         </Radio.Group> */}
 
-                  <Spacer />
-                  <FlexContainer
-                    justifyContent="space-between"
-                    style={{ width: "100%" }}
-                  >
-                    <div style={{ width: "47%" }}>
+                  
+                  <div class="mt-3 flex justify-between w-[100%]">
+                    <div class="w-[47%]">
                       <Field
                         isRequired
                         name="startDate"
@@ -214,7 +208,7 @@ console.log(this.state.firstCase)
                         }}
                       />
 
-                      <Spacer />
+                     
                     </div>
                     <div>
                     {/* <StyledLabel><FormattedMessage
@@ -277,9 +271,8 @@ console.log(this.state.firstCase)
                   )}
                 
   
-  <Spacer />
                     
-                     <div class="w-3/12 max-sm:w-wk"
+                     <div class="mt-3 w-3/12 max-sm:w-wk"
                       style={{
                        
                         fontWeight: "bold",
@@ -295,9 +288,9 @@ console.log(this.state.firstCase)
                       
                     </div>
          
-                  </FlexContainer>
-                  <Spacer />
-                  <div class=" w-1/2 max-sm:w-wk">
+                  </div>
+           
+                  <div class="mt-3 w-1/2 max-sm:w-wk">
                   <Field
                     name="coverDetails"
                     //label="Cover"
@@ -310,7 +303,9 @@ console.log(this.state.firstCase)
                     isColumn
                   />
                 </div>
-                  <Spacer />
+                <div class="mt-3">
+
+               
                   <Field
                     isRequired
                     name="reason"
@@ -323,12 +318,12 @@ console.log(this.state.firstCase)
                     component={TextareaComponent}
                     inlineLabel
                   />
-
-                  <Spacer />
+</div>
+            
                 </div>
               </div>
-              <Spacer />
-              <div class="flex justify-end w-wk bottom-2 mr-2 md:absolute ">
+              
+              <div class="mt-3 flex justify-end w-wk bottom-2 mr-2 md:absolute ">
                 &nbsp;
                 <Button htmlType="submit" type="primary"
                   Loading={addingLeaves}>
