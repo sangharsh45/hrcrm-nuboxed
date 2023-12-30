@@ -11,7 +11,7 @@ class UploadCatalogue extends Component {
         return (
             <div>
                 <StyledDrawer
-                    title="Upload"
+                    title="Upload Catalogue"
                     width="60%"
                     visible={uploadProductList}
                     destroyOnClose

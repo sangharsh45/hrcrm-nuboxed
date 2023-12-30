@@ -56,7 +56,7 @@ class ProductActionRight extends React.Component {
             <Button
               type="primary"
               ghost
-              onClick={() => handleUploadProductModal(true)}
+              onClick={() => this.props.handleUploadProductModal(true)}
             >
               Upload
             </Button>
