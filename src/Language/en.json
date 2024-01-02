@@ -331,6 +331,7 @@
   "app.confirgurestore": "Confirgure Store",
   "app.shipby":"Ship By",
   "app.searchbyname":"Search By Name",
-  "app.clickordragfiletothisareatoupload":"Click or drag file to this area to upload"
-
+  "app.clickordragfiletothisareatoupload":"Click or drag file to this area to upload",
+  "app.portalacess":"Portal Access",
+  "app.procurement":"Procurement"
 }

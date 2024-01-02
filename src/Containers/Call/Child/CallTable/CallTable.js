@@ -18,7 +18,6 @@ import {
   emptyCall
 } from "../../CallAction";
 import { MultiAvatar2, } from "../../../../Components/UI/Elements";
-import { BundleLoader } from "../../../../Components/Placeholder";
 import { FormattedMessage } from "react-intl";
 const AddCallNotesDrawerModal = lazy(() => import("../AddCallNotesDrawerModal"));
 

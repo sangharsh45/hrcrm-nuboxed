@@ -28,6 +28,7 @@ import {
   getAllSalesList,
   getRecruiterName,
 } from "../../../Opportunity/OpportunityAction";
+import { FormattedMessage } from "react-intl";
 import NoteAltIcon from "@mui/icons-material/NoteAlt";
 import PhoneInTalkIcon from '@mui/icons-material/PhoneInTalk';
 import { getDesignations } from "../../../Settings/Designation/DesignationAction";
@@ -86,15 +87,25 @@ function ContactCardList(props) {
   }
 
   const handleLoadMore = () => {
-            setPage(page + 1);
+    const callPageMapd = props.contactByUserId && props.contactByUserId.length &&props.contactByUserId[0].pageCount
+    setTimeout(() => {  
+      if  (props.contactByUserId)
+      {
+        if (page < callPageMapd) {    
+    setPage(page + 1);
             props.getContactListByUserId(props.currentUser?props.currentUser:props.userId,page,
               props.filter?props.filter:"creationdate"
               );
+            }
+              if (page === callPageMapd){
+                setHasMore(false)
+              }
+            }
+            }, 100);
   }
 
   function handleSetCurrentContactId(item) {
     setCurrentContactId(item);
-    // console.log("Current2", item);
   }
 
  
@@ -115,9 +126,6 @@ function ContactCardList(props) {
     updateContactModal,
   } = props;
 
-//  if(fetchingContacts){
-//   return <BundleLoader/>
-//  }
 
   return (
     <>
@@ -125,14 +133,39 @@ function ContactCardList(props) {
      
           <OnlyWrapCard style={{backgroundColor:"#E3E8EE"}}>
           <div className=" flex justify-between w-[98%] p-2 bg-transparent font-bold sticky top-0 z-10">
-        <div className=" md:w-[13.5rem]">Name</div>
-        <div className=" md:w-[11.1rem]">Company</div>
-        <div className=" md:w-[8.1rem] ">Designation</div>
-        <div className="md:w-[10.1rem]">Department</div>
-        <div className="md:w-[7.2rem]"># Opportunity</div>
-        <div className="md:w-[5.3rem]">Pipeline</div>
-        <div className="md:w-[5.1rem]">Portal Acess</div>
-        <div className="md:w-[2.1rem]">Owner</div>
+        <div className=" md:w-[13.5rem]">
+        <FormattedMessage
+                  id="app.name"
+                  defaultMessage="Name"
+                /></div>
+        <div className=" md:w-[11.1rem]"><FormattedMessage
+                  id="app.company"
+                  defaultMessage="Company"
+                /></div>
+        <div className=" md:w-[8.1rem]"><FormattedMessage
+                  id="app.designation"
+                  defaultMessage="Designation"
+                /></div>
+        <div className="md:w-[10.1rem]"><FormattedMessage
+                  id="app.department"
+                  defaultMessage="Department"
+                /></div>
+        <div className="md:w-[7.2rem]"><FormattedMessage
+                  id="app.opportunity"
+                  defaultMessage="# Opportunity"
+                /></div>
+        <div className="md:w-[5.3rem]"><FormattedMessage
+                  id="app.pipeline"
+                  defaultMessage="Pipeline"
+                /></div>
+        <div className="md:w-[5.1rem]"><FormattedMessage
+                  id="app.portalacess"
+                  defaultMessage="Portal Acess"
+                /></div>
+        <div className="md:w-[2.1rem]"><FormattedMessage
+                  id="app.owner"
+                  defaultMessage="Owner"
+                /></div>
         <div className="w-[4.2rem]"></div>
 
       </div>
@@ -142,6 +175,7 @@ function ContactCardList(props) {
         hasMore={hasMore}
         loader={fetchingContacts?<h4 style={{ textAlign: 'center' }}>Loading...</h4>:null}
         height={"75vh"}
+        endMessage={ <p class="fles text-center font-bold text-xs text-red-500">You have reached the end of page</p>}
       >
         
       {filterData.map((item) => { 
@@ -169,9 +203,6 @@ function ContactCardList(props) {
                     return (
                         <div>
                             <div className="flex rounded-xl justify-between bg-white mt-[0.5rem] h-[2.75rem] items-center p-3"
-                                // style={{
-                                //     borderBottom: "3px dotted #515050"
-                                // }}
                                 >
                                      
                                 <div className=" flex font-medium flex-col md:w-[14rem] max-sm:flex-row w-full max-sm:justify-between  ">
@@ -190,9 +221,7 @@ function ContactCardList(props) {
           <div class="max-sm:w-full">
                                         <Tooltip>
                                           <div class=" flex max-sm:w-full justify-between flex-row md:flex-col">
-                                            {/* <div class="text-xs text-cardBody font-poppins max-sm:hidden">
-                                            Name
-                                            </div> */}
+                                          
                                             <div class="text-sm text-blue-500 text-cardBody font-poppins font-semibold  cursor-pointer">
                                                 
          <Link
@@ -219,32 +248,32 @@ function ContactCardList(props) {
                                 <div class="flex">
 
                                 <div className=" flex font-medium flex-col  md:w-[14.01rem] max-sm:flex-row w-full max-sm:justify-between ">
-                                    {/* <div class=" text-xs text-cardBody font-xs font-poppins max-sm:hidden"> Company </div> */}
+                                   
                                     <div class=" text-sm text-cardBody font-poppins">   
                                     {item.tagWithCompany}
                                     </div>
                                 </div>
                                 <div className=" flex font-medium flex-col md:w-[8.2rem] max-sm:flex-row w-full max-sm:justify-between ">
-                                    {/* <div class=" text-xs text-cardBody font-poppins max-sm:hidden">Designation</div> */}
+                                   
                                     <div class="text-sm text-cardBody font-poppins">
                                          {item.designation}
                                     </div>
                                 </div>
                                 <div className=" flex font-medium flex-col md:w-[8.3rem]  max-sm:flex-row w-full max-sm:justify-between">
-                                  {/* <div class="text-xs text-cardBody font-poppins max-sm:hidden">Department</div> */}
+                                
                                   <div class="text-sm text-cardBody font-poppins">
                                        {item.department}
                                   </div>
                               </div>
                               </div>
                               <div className="flex font-medium flex-col md:w-32 max-sm:flex-row w-full max-sm:justify-between ">
-  {/* <div className="text-xs text-cardBody font-poppins max-sm:hidden"># Opportunity</div> */}
+
   <div className="text-sm text-cardBody font-poppins text-center">
     {item.oppNo}
   </div>
 </div>
 <div className=" flex font-medium flex-col md:w-36 max-sm:flex-row w-full max-sm:justify-between ">
-                                    {/* <h4 class=" text-xs text-cardBody font-poppins max-sm:hidden">Pipeline Value</h4> */}
+                                    
 
                                     <div class=" text-sm text-cardBody font-poppins text-center">
                                     {item.totalProposalValue}
@@ -252,8 +281,7 @@ function ContactCardList(props) {
                                     </div>
                                 </div>
                                 <div className="flex font-medium flex-col md:w-[7.1rem] max-sm:flex-row w-full max-sm:justify-between ">
-                                    {/* <div class="text-xs text-cardBody font-poppins max-sm:hidden">Portal Acess</div> */}
-
+                                
                                     <div class="text-sm text-cardBody font-poppins">
 
                                     {item.thirdPartyAccessInd 
@@ -264,10 +292,6 @@ function ContactCardList(props) {
                                 </div>
                                 <div class="flex md:items-center">
                                 <div className="flex font-medium  md:w-20  max-sm:flex-row w-full max-sm:justify-between">
-                       
-                       {/* <div class="text-xs text-cardBody font-poppins max-sm:hidden">Owner</div> */}
-
-                   
               <Tooltip title={item.ownerName}>
                 <div class="max-sm:flex justify-end">
             <SubTitle>
@@ -370,8 +394,6 @@ function ContactCardList(props) {
                     <Tooltip overlayStyle={{ maxWidth: "300px" }} title={dataLoc}>
             <span
               style={{
-                // color:
-                //   showRes && item.orderId === orderId ? "orange" : "#1890ff",
                 cursor: "pointer",
               }}
             >

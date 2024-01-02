@@ -2,7 +2,7 @@ import * as types from "./ContactActionTypes";
 import axios from "axios";
 import dayjs from "dayjs";
 import { base_url } from "../../Config/Auth";
-import { message } from "antd";
+import Swal from "sweetalert2";
 import { getContactListByOpportunityId } from "../Opportunity/OpportunityAction";
 /**
  * contact modal action
@@ -75,28 +75,26 @@ export const addContact = (contact) => (dispatch, getState) => {
       },
     })
     .then((res) => {
+      Swal.fire({
+        icon: 'success',
+        title: 'Created Successfully',
+        showConfirmButton: false,
+        timer: 1500
+      })
       console.log(res);
       dispatch(getOpportunityRecord(userId));
       dispatch(getContactRecord(userId));
-      
-      // dispatch(
-      //   linkContactsToOpportunity(opportunityId, { contactIds: [res.data] }, cb)
-      // );
       const startDate = dayjs()
         .startOf("month")
         .toISOString();
       const endDate = dayjs()
         .endOf("month")
         .toISOString();
-      // dispatch(getContactById(contactId));
-      // dispatch(getLatestContacts(userId, startDate, endDate));
-      // dispatch(getContactListByUserId(userId));
       dispatch(getRecords(userId,0));
       dispatch({
         type: types.ADD_CONTACT_SUCCESS,
         payload: res.data,
       });
-      // cb && cb();
     })
     .catch((err) => {
       console.log(err);
@@ -104,7 +102,7 @@ export const addContact = (contact) => (dispatch, getState) => {
         type: types.ADD_CONTACT_FAILURE,
         payload: err,
       });
-      // cb && cb();
+
     });
 };
 
@@ -379,12 +377,16 @@ export const addContactDocument = (data, cb) => (dispatch) => {
       },
     })
     .then((res) => {
-      console.log(res);
+      Swal.fire({
+        icon: 'success',
+        title: 'Created Successfully',
+        showConfirmButton: false,
+        timer: 1500
+      })
       dispatch({
         type: types.ADD_CONTACT_DOCUMENT_SUCCESS,
         payload: res.data,
       });
-      // dispatch(getCandidateDocument(candidateId));
       cb();
     })
     .catch((err) => {
@@ -525,6 +527,12 @@ export const addContactOpportunity = (opportunity, cb) => (
       },
     })
     .then((res) => {
+      Swal.fire({
+        icon: 'success',
+        title: 'Created Successfully',
+        showConfirmButton: false,
+        timer: 1500
+      })
       console.log(res);
       const startDate = dayjs()
         .startOf("month")
@@ -533,8 +541,6 @@ export const addContactOpportunity = (opportunity, cb) => (
         .endOf("month")
         .toISOString();
       dispatch(getOpportunityListByContactId(contactId));
-      // dispatch(getLatestOpportunities(userId, startDate, endDate));
-      // dispatch(getOpportunitiesByPrice(userId));
       dispatch({
         type: types.ADD_CONTACT_OPPORTUNITY_SUCCESS,
         payload: res.data,
@@ -583,6 +589,12 @@ export const updateContact = (data, contactId) => (dispatch) => {
         type: types.UPDATE_CONTACT_BY_ID_SUCCESS,
         payload: res.data,
       });
+      Swal.fire({
+        icon: 'success',
+        title: 'Updated Successfully',
+        showConfirmButton: false,
+        timer: 1500
+      })
     })
     .catch((err) => {
       console.log(err);
@@ -732,7 +744,12 @@ export const addLinkContactByOpportunityId = (contact, opportunityId) => (
         type: types.ADD_LINK_CONTACT_BY_OPPORTUNITY_ID_SUCCESS,
         payload: res.data,
       });
-      // cb && cb();
+      Swal.fire({
+        icon: 'success',
+        title: 'Created Successfully',
+        showConfirmButton: false,
+        timer: 1500
+      })
     })
     .catch((err) => {
       console.log(err);
@@ -740,7 +757,6 @@ export const addLinkContactByOpportunityId = (contact, opportunityId) => (
         type: types.ADD_LINK_CONTACT_BY_OPPORTUNITY_ID_FAILURE,
         payload: err,
       });
-      // cb && cb();
     });
 };
 
@@ -818,7 +834,12 @@ export const shareContactPartnerPermission = (data, userId, a) => (
         type: types.ADD_SHARE_CONTACT_PARTNER_PERMISSION_SUCCESS,
         payload: res.data,
       });
-      // cb && cb("success");
+      Swal.fire({
+        icon: 'success',
+        title: 'Created Successfully',
+        showConfirmButton: false,
+        timer: 1500
+      })
     })
     .catch((err) => {
       console.log(err);
@@ -826,7 +847,7 @@ export const shareContactPartnerPermission = (data, userId, a) => (
         type: types.ADD_SHARE_CONTACT_PARTNER_PERMISSION_FAILURE,
         payload: err,
       });
-      // cb && cb("failure");
+
     });
 };
 
@@ -854,12 +875,10 @@ export const shareContactCustomerPermission = (data, userId, a) => (
       } else {
         dispatch(getContactListByUserId(userId));
       }
-      // dispatch(getContactListByUserId(userId));
       dispatch({
         type: types.ADD_SHARE_CONTACT_CUSTOMER_PERMISSION_SUCCESS,
         payload: res.data,
       });
-      // cb && cb("success");
     })
     .catch((err) => {
       console.log(err);

@@ -92,6 +92,9 @@ const initialState = {
   fetchingServiceError: false,
   services: [],
 
+  uploadingCatalogueList: false,
+  uploadingCatalogueListError: false,
+
   fetchingServiceById: false,
   fetchingServiceByIdError: false,
   serviceById: {},
@@ -213,22 +216,22 @@ const initialState = {
   updateMaterialByIdError: true,
 
   addingProduct: false,
-  addingProductError:false,
+  addingProductError: false,
 
-  proBuilderDrawer:false,
+  proBuilderDrawer: false,
 
   fetchingProductBuilder: false,
   fetchingProductBuilderError: false,
-  productBuilder:[],
+  productBuilder: [],
 
   addingProductBuilder: false,
-  addingProductBuilderError:false,
+  addingProductBuilderError: false,
 
   fetchingBuilderByProductId: false,
-  fetchingBuilderByProductIdError:false,
-  builderbyProductId:[],
+  fetchingBuilderByProductIdError: false,
+  builderbyProductId: [],
 
-  priceOpenDrawer:false,
+  priceOpenDrawer: false,
 };
 const newDateRange = (dateRange, newDate) =>
   dateRange.map((range) => {
@@ -828,92 +831,108 @@ export const productReducer = (state = initialState, action) => {
         uploadingProductListError: true,
       };
 
-      case types.ADD_PRODUCT_CATEGORY_REQUEST:
-        return { ...state, addingProductCategory: true, addingProductCategoryError: false };
-      case types.ADD_PRODUCT_CATEGORY_SUCCESS:
-        return { ...state, addingProductCategory: false, addConfigureModal: false,
-          allproducts: [action.payload,...state.allproducts]
-        };
-      case types.ADD_PRODUCT_CATEGORY_FAILURE:
-        return {
-          ...state,
-          addingProductCategory: false,
-          addingProductCategoryError: true,
-        };
+    case types.ADD_PRODUCT_CATEGORY_REQUEST:
+      return { ...state, addingProductCategory: true, addingProductCategoryError: false };
+    case types.ADD_PRODUCT_CATEGORY_SUCCESS:
+      return {
+        ...state, addingProductCategory: false, addConfigureModal: false,
+        allproducts: [action.payload, ...state.allproducts]
+      };
+    case types.ADD_PRODUCT_CATEGORY_FAILURE:
+      return {
+        ...state,
+        addingProductCategory: false,
+        addingProductCategoryError: true,
+      };
 
-        case types.ADD_PROFESSIONALDUCT_REQUEST:
-          return { ...state, addingProduct: true };
-        case types.ADD_PROFESSIONALDUCT_SUCCESS:
-          return { ...state, addingProduct: false, addConfigureModal: false,
-            products: [action.payload,...state.products]
-          };
-        case types.ADD_PROFESSIONALDUCT_FAILURE:
-          return {
-            ...state,
-            addingProduct: false,
-            addingProductError: true,
-            addConfigureModal: false,
-          };
+    case types.ADD_PROFESSIONALDUCT_REQUEST:
+      return { ...state, addingProduct: true };
+    case types.ADD_PROFESSIONALDUCT_SUCCESS:
+      return {
+        ...state, addingProduct: false, addConfigureModal: false,
+        products: [action.payload, ...state.products]
+      };
+    case types.ADD_PROFESSIONALDUCT_FAILURE:
+      return {
+        ...state,
+        addingProduct: false,
+        addingProductError: true,
+        addConfigureModal: false,
+      };
 
-          case types.HANDLE_PRODUCT_BUILDER_DRAWER:
-            return { ...state, proBuilderDrawer: action.payload };
-          
-            case types.GET_PRODUCT_BUILDER_REQUEST:
-              return {
-                ...state,
-                fetchingProductBuilder: true,
-                fetchingProductBuilderError: false,
-              };
-            case types.GET_PRODUCT_BUILDER_SUCCESS:
-              return {
-                ...state,
-                fetchingProductBuilder: false,
-                productBuilder: action.payload,
-              };
-            case types.GET_PRODUCT_BUILDER_FAILURE:
-              return {
-                ...state,
-                fetchingProductBuilder: false,
-                fetchingProductBuilderError: true,
-              };
+    case types.HANDLE_PRODUCT_BUILDER_DRAWER:
+      return { ...state, proBuilderDrawer: action.payload };
 
-              case types.ADD_PRODUCT_BUILDER_REQUEST:
-                return { ...state, addingProductBuilder: true };
-              case types.ADD_PRODUCT_BUILDER_SUCCESS:
-                return {
-                  ...state,
-                  addingProductBuilder: false,
-                  builderbyProductId:[action.payload]
-                };
-              case types.ADD_PRODUCT_BUILDER_FAILURE:
-                return {
-                  ...state,
-                  addingProductBuilder: false,
-                  addingProductBuilderError: true,
-                };
-                case types.GET_BUILDER_BY_PRODUCT_ID_REQUEST:
-                  return {
-                    ...state,
-                    fetchingBuilderByProductId: true,
-                    fetchingBuilderByProductIdError: false,
-                  };
-                case types.GET_BUILDER_BY_PRODUCT_ID_SUCCESS:
-                  return {
-                    ...state,
-                    fetchingBuilderByProductId: false,
-                    builderbyProductId: action.payload,
-                  };
-                case types.GET_BUILDER_BY_PRODUCT_ID_FAILURE:
-                  return {
-                    ...state,
-                    fetchingBuilderByProductId: false,
-                    fetchingBuilderByProductIdError: true,
-                  };
-       
-                                 
-                  case types.HANDLE_PRICE_DRAWER:
-                    return { ...state, priceOpenDrawer: action.payload };
-                  
+    case types.GET_PRODUCT_BUILDER_REQUEST:
+      return {
+        ...state,
+        fetchingProductBuilder: true,
+        fetchingProductBuilderError: false,
+      };
+    case types.GET_PRODUCT_BUILDER_SUCCESS:
+      return {
+        ...state,
+        fetchingProductBuilder: false,
+        productBuilder: action.payload,
+      };
+    case types.GET_PRODUCT_BUILDER_FAILURE:
+      return {
+        ...state,
+        fetchingProductBuilder: false,
+        fetchingProductBuilderError: true,
+      };
+
+    case types.ADD_PRODUCT_BUILDER_REQUEST:
+      return { ...state, addingProductBuilder: true };
+    case types.ADD_PRODUCT_BUILDER_SUCCESS:
+      return {
+        ...state,
+        addingProductBuilder: false,
+        builderbyProductId: [action.payload]
+      };
+    case types.ADD_PRODUCT_BUILDER_FAILURE:
+      return {
+        ...state,
+        addingProductBuilder: false,
+        addingProductBuilderError: true,
+      };
+    case types.GET_BUILDER_BY_PRODUCT_ID_REQUEST:
+      return {
+        ...state,
+        fetchingBuilderByProductId: true,
+        fetchingBuilderByProductIdError: false,
+      };
+    case types.GET_BUILDER_BY_PRODUCT_ID_SUCCESS:
+      return {
+        ...state,
+        fetchingBuilderByProductId: false,
+        builderbyProductId: action.payload,
+      };
+    case types.GET_BUILDER_BY_PRODUCT_ID_FAILURE:
+      return {
+        ...state,
+        fetchingBuilderByProductId: false,
+        fetchingBuilderByProductIdError: true,
+      };
+
+    case types.HANDLE_PRICE_DRAWER:
+      return { ...state, priceOpenDrawer: action.payload };
+
+    case types.UPLOAD_CATALOGUE_LIST_REQUEST:
+      return { ...state, uploadingCatalogueList: true };
+    case types.UPLOAD_CATALOGUE_LIST_SUCCESS:
+      return {
+        ...state,
+        uploadingCatalogueList: false,
+        uploadProductList: false
+      };
+    case types.UPLOAD_CATALOGUE_LIST_FAILURE:
+      return {
+        ...state,
+        uploadingCatalogueList: false,
+        uploadingCatalogueListError: true,
+      };
+
     default:
       return state;
   }

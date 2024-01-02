@@ -35,34 +35,23 @@ const [isMobile, setIsMobile] = useState(() => window.innerWidth <= 768);
 const handleCountryChange = (event) => {
   const country = event.target.value;
   setSelectedCountry(country);
-
   if (country === '') {
     setFilteredData(props.contactByUserId);
   } else {
     const filteredJobs = props.contactByUserId.filter((job) => job.departmentId ===country );
     setFilteredData(filteredJobs);
   }
-  // const filteredJobs = props.contactByUserId.filter((job) => {
-  //   const countryMatch = country === '' || job.department === country;
-  //   return countryMatch;
-  // });
-
-  // setFilteredData(filteredJobs);
 };
 useEffect(() => {
   const handleResize = () => {
     setIsMobile(window.innerWidth <= 768);
   };
-
   window.addEventListener('resize', handleResize);
-
   return () => {
     window.removeEventListener('resize', handleResize);
   };
 }, []);
-// useEffect(()=>{
-// props.getContactListByUserId(props.userId,0)
-// },[])
+
 
 const filterData = filteredData.filter(item =>
   Object.values(item).some(value =>
@@ -74,22 +63,11 @@ const filterData = filteredData.filter(item =>
     props.emptyContact();
     props.getContactListByUserId(currentUser ? currentUser : props.userId, 0,filter?filter:"creationdate");
   };
-  // const handleFilterChange=(data)=>{
-  //   setFilter({filter:data})
-  //   props.getFilterContactList(props.userId,0,data)
-  // }
+
   const handleFilterChange = (data) => {
     setFilter(data);
     props.getFilterContactList(props.userId, 0, data);
   };
-
-  // const handlePartnerClear = () => {
-  //   setCurrentPartnerData("");
-  //   props.getContactPartnerListByUserId(
-  //     currentPartnerUser ? currentPartnerUser : props.userId,
-  //     0
-  //   );
-  // };
 
   const handlePartnerDropChange = (value) => {
     setCurrentPartnerUser(value);
@@ -149,9 +127,6 @@ const filterData = filteredData.filter(item =>
         setCurrentData={setCurrentData}
         handleFilterChange={handleFilterChange}
         filter={filter}
-        // handlePartnerClear={handlePartnerClear}
-        // currentPartnerData={currentPartnerData}
-        // setCurrentPartnerData={setCurrentPartnerData}
         selectedCountry={selectedCountry}
         handleCountryChange={handleCountryChange}
       />

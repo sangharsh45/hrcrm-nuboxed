@@ -3,6 +3,7 @@ import axios from "axios";
 import dayjs from "dayjs";
 import { base_url } from "../../Config/Auth";
 import { message } from "antd";
+import Swal from "sweetalert2";
 
 export const setInvestorViewType = (viewType) => (dispatch) => {
     dispatch({
@@ -89,6 +90,12 @@ export const getInvestorsbyId = (userId,pageNo,filter) => (dispatch) => {
           type: types.ADD_INVESTOR_SUCCESS,
           payload: res.data,
         });
+        Swal.fire({
+          icon: 'success',
+          title: 'Created Successfully',
+          showConfirmButton: false,
+          timer: 1500
+        })
       })
       .catch((err) => {
         console.log(err);
@@ -125,6 +132,12 @@ export const getInvestorsbyId = (userId,pageNo,filter) => (dispatch) => {
           type: types.UPDATE_INVESTOR_BY_ID_SUCCESS,
           payload: res.data,
         });
+        Swal.fire({
+          icon: 'success',
+          title: 'Updated Successfully',
+          showConfirmButton: false,
+          timer: 1500
+        })
       })
       .catch((err) => {
         console.log(err);
@@ -313,6 +326,12 @@ export const getInvestorDetailsById = (investorId) => (dispatch) => {
           type: types.ADD_INVESTOR_CONTACT_SUCCESS,
           payload: res.data,
         });
+        Swal.fire({
+          icon: 'success',
+          title: 'Created Successfully',
+          showConfirmButton: false,
+          timer: 1500
+        })
       })
       .catch((err) => {
         console.log(err);
@@ -343,6 +362,12 @@ export const getInvestorDetailsById = (investorId) => (dispatch) => {
           type: types.CREATE_INVESTOR_DOCUMENT_SUCCESS,
           payload: res.data,
         });
+        Swal.fire({
+          icon: 'success',
+          title: 'Created Successfully',
+          showConfirmButton: false,
+          timer: 1500
+        })
         cb();
       })
       .catch((err) => {
@@ -471,12 +496,6 @@ export const getInvestorDetailsById = (investorId) => (dispatch) => {
         },
       })
       .then((res) => {
-        // const actualData = res.data;
-        // const filteredData = actualData.filter((item) => { return item.name !== null })
-        // message.success(res.data.message);
-        // message.success("Data has been updated successfully!");
-    
-      
       
         dispatch({
           type: types.GET_INVESTOR_SEARCH_SUCCESS,
@@ -628,15 +647,16 @@ export const getInvestorDetailsById = (investorId) => (dispatch) => {
         },
       })
       .then((res) => {
-        message.success("Call has been added successfully!");
-        ////debugger;
+        Swal.fire({
+          icon: 'success',
+          title: 'Call has been added successfully!',
+          timer: 1500
+        })
         console.log(res);
-        //  dispatch(getContactInvestTimeline(contactId));
         dispatch({
           type: types.ADD_INVEST_ACTIVITY_CALL_SUCCESS,
           payload: res.data,
         });
-        // cb();
       })
       .catch((err) => {
         console.log(err);
@@ -663,15 +683,16 @@ export const getInvestorDetailsById = (investorId) => (dispatch) => {
         },
       })
       .then((res) => {
-        message.success("Meeting has been added successfully!");
+        Swal.fire({
+          icon: 'success',
+          title: 'Meeting has been added successfully!',
+          timer: 1500
+        })
         console.log(res);
-        // dispatch(getContactInvestTimeline(contactId));
-        // dispatch(getEventListRangeByUserId(userId,0));
         dispatch({
           type: types.ADD_INVEST_ACTIVITY_EVENT_SUCCESS,
           payload: res.data,
         });
-        // cb();
       })
       .catch((err) => {
         console.log(err);
@@ -679,14 +700,11 @@ export const getInvestorDetailsById = (investorId) => (dispatch) => {
           type: types.ADD_INVEST_ACTIVITY_EVENT_FAILURE,
           payload: err,
         });
-        // cb();
       });
   };
   
-  export const addinvestActivityTask = (task,contactId, cb) => (dispatch, getState) => {
-    const { userId } = getState("auth").auth.userDetails;
-    // const { startDate, endDate } = getState("dashboard").dashboard;
-    console.log("inside addEvent");
+  export const addinvestActivityTask = (task,) => (dispatch, getState) => {
+
     dispatch({
       type: types.ADD_INVEST_ACTIVITY_TASK_REQUEST,
     });
@@ -698,14 +716,16 @@ export const getInvestorDetailsById = (investorId) => (dispatch) => {
         },
       })
       .then((res) => {
-        message.success("Task has been added successfully!");
+        Swal.fire({
+          icon: 'success',
+          title: 'Task has been added successfully!',
+          timer: 1500
+        })
         console.log(res);
-        // dispatch(getContactInvestTimeline(contactId));
         dispatch({
           type: types.ADD_INVEST_ACTIVITY_TASK_SUCCESS,
           payload: res.data,
         });
-        // cb();
       })
       .catch((err) => {
         console.log(err);
@@ -713,7 +733,6 @@ export const getInvestorDetailsById = (investorId) => (dispatch) => {
           type: types.ADD_INVEST_ACTIVITY_TASK_FAILURE,
           payload: err,
         });
-        // cb();
       });
   };
 

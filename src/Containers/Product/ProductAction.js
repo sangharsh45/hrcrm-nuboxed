@@ -14,13 +14,13 @@ export const getProducts = (pageNo) => (dispatch) => {
     type: types.GET_PROFESSIONALDUCTS_REQUEST,
   });
   axios
-  // .get(`${base_url2}/product`,
-    .get(`${base_url2}/product/productList/pagewise/${pageNo}`, 
-    {
-      headers: {
-        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
-      },
-    })
+    // .get(`${base_url2}/product`,
+    .get(`${base_url2}/product/productList/pagewise/${pageNo}`,
+      {
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+        },
+      })
     .then((res) => {
       console.log(res);
       dispatch({
@@ -163,7 +163,7 @@ export const updateProduct = (id, data, cb) => (dispatch) => {
       });
       Swal.fire({
         icon: 'success',
-        title: 'Updated Succefully',
+        title: 'Updated Successfully',
         showConfirmButton: false,
         timer: 1500
       })
@@ -726,7 +726,7 @@ export const getDistributorOfferHistory = (productId) => (dispatch) => {
     type: types.GET_DISTRIBUTOR_OFFER_HISTORY_REQUEST,
   });
   axios
-    .get(`${base_url2}/offer/distributor/offer/${productId}`,{
+    .get(`${base_url2}/offer/distributor/offer/${productId}`, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },
@@ -942,7 +942,7 @@ export const getProductByGroup = (groupId) => (dispatch) => {
     type: types.GET_PRODUCT_BY_GROUP_REQUEST,
   });
   axios
-    .get(`${base_url2}/product/productList/${groupId}`,{
+    .get(`${base_url2}/product/productList/${groupId}`, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },
@@ -1014,9 +1014,9 @@ export const addProduct = (product, cb) => (dispatch) => {
   dispatch({ type: types.ADD_PROFESSIONALDUCT_REQUEST });
   axios
     .post(`${base_url2}/product`, product, {
-        headers: {
-          Authorization: "Bearer " + sessionStorage.getItem("token") || "",
-        },
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
     })
     .then((res) => {
       console.log(res);
@@ -1048,7 +1048,7 @@ export const getProductbuilder = () => (dispatch) => {
     type: types.GET_PRODUCT_BUILDER_REQUEST,
   });
   axios
-    .get(`${base_url2}/supplies`,{
+    .get(`${base_url2}/supplies`, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },
@@ -1068,7 +1068,7 @@ export const getProductbuilder = () => (dispatch) => {
       });
     });
 };
-export const addProductBuilder = (data,productId) => (dispatch) => {
+export const addProductBuilder = (data, productId) => (dispatch) => {
   dispatch({ type: types.ADD_PRODUCT_BUILDER_REQUEST });
   axios
     .post(`${base_url2}/productionBuilder/supplies`, data, {
@@ -1098,7 +1098,7 @@ export const getBuilderByProId = (productId) => (dispatch) => {
     type: types.GET_BUILDER_BY_PRODUCT_ID_REQUEST,
   });
   axios
-    .get(`${base_url2}/productionBuilder/supplies/${productId}`,{
+    .get(`${base_url2}/productionBuilder/supplies/${productId}`, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },
@@ -1125,3 +1125,34 @@ export const handlePriceDrawer = (modalProps) => (dispatch) => {
     payload: modalProps,
   });
 };
+
+export const uploadCatalogueList = (data,) => (dispatch) => {
+  dispatch({ type: types.UPLOAD_CATALOGUE_LIST_REQUEST });
+  axios
+    .post(`${base_url2}/excel/product-details`, data, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      dispatch(getProducts(0))
+      dispatch({
+        type: types.UPLOAD_CATALOGUE_LIST_SUCCESS,
+        payload: res.data,
+      });
+      Swal.fire({
+        icon: 'success',
+        title: 'Uploaded Successfully',
+        showConfirmButton: false,
+        timer: 1500
+      })
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.UPLOAD_CATALOGUE_LIST_FAILURE,
+        payload: err,
+      });
+    });
+};
+
