@@ -195,7 +195,7 @@ const ContactActionLeft = (props) => {
           </span>
         </Badge>
       </Tooltip> */}
-      <div class=" w-72 md:ml-4 max-sm:w-16 ml-0">
+      <div class=" w-72 md:ml-4 max-sm:w-36 ml-0">
       <Input
        placeholder="Search by Name, Company"
        class="w-96"
@@ -215,7 +215,7 @@ const ContactActionLeft = (props) => {
         /> */}
       </div>
     
-<div class="w-32 md:ml-4 max-sm:w-[6.5rem">
+<div class="w-32 md:ml-4 max-sm:hidden">
       <select value={props.selectedCountry} onChange={props.handleCountryChange} >
         <option value="" disabled>Department</option>
         <option value="">All</option>
