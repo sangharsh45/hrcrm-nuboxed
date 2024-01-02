@@ -2,13 +2,18 @@ import React, { lazy, Suspense } from "react";
 import { StyledDrawer, StyledModal } from "../../../../Components/UI/Antd";
 import { BundleLoader } from "../../../../Components/Placeholder";
 import AddSuppliersForm from "./AddSuppliersForm";
+import { FormattedMessage } from "react-intl";
 
 const AddSuppliersModal = (props) => {
     const { addSuppliersModal, handleSuppliersModal, ...formProps } = props;
     return (
         <>
             <StyledDrawer
-                title="Supplier"
+              title={<FormattedMessage
+                id="app.suppliers"
+                defaultMessage="Suppliers"
+              />}
+               
                 width="60%"
                 visible={addSuppliersModal}
                 closable

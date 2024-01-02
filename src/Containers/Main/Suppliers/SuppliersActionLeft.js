@@ -12,6 +12,7 @@ import { Button, Input, Tooltip, Badge } from "antd";
 import { AppstoreOutlined, BookOutlined, AreaChartOutlined } from "@ant-design/icons";
 import { TimeInterval } from "../../../Utils";
 import moment from "moment";
+import { FormattedMessage } from "react-intl";
 
 const { Search } = Input;
 
@@ -33,7 +34,9 @@ class SuppliersActionLeft extends React.Component {
         const creationDate = user.creationDate;
         return (
             <FlexContainer alignItems="center">
-                <Tooltip title="Suppliers List">
+                <Tooltip
+                title={<FormattedMessage id="app.suppliersList" defaultMessage="Suppliers List" />}
+                >
                     <GridViewIcon
                         style={{
                             marginRight: "0.3rem",
@@ -94,6 +97,7 @@ class SuppliersActionLeft extends React.Component {
                 &nbsp;&nbsp;
                 <div class=" ml-6 h-6 w-60">
       <Input
+    //   placeholder={<FormattedMessage id="app.searchByname" defaultMessage="Search By Name" />}
      placeholder="Search By Name"
       width={"100%"}
             // suffix={suffix}

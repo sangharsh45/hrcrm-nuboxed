@@ -5,12 +5,15 @@ import { Tooltip } from "antd";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { RollbackOutlined } from "@ant-design/icons";
+import { FormattedMessage } from "react-intl";
 
 class SupplierDetailsHeaderLeft extends React.Component {
   render() {
     return (
       <FlexContainer alignItems="center">
-        <Tooltip title="Back">
+        <Tooltip 
+        title={<FormattedMessage id="app.back" defaultMessage="Back" />}
+      >
           <RollbackOutlined
             style={{ marginRight: "0.3rem",color: "#1890ff" }}
             // iconType="rollback"

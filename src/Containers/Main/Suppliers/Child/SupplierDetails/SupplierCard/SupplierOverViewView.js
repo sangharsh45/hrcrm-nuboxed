@@ -6,6 +6,7 @@ import { bindActionCreators } from "redux";
 // import { handleFeedbackModal } from "../../ShipperAction";
 // import ShipperFeedbackModal from "./ShipperFeedbackModal";
 import { Tooltip } from "antd";
+import { FormattedMessage } from "react-intl";
 
 class SupplierOverViewView extends Component {
   render() {
@@ -36,7 +37,7 @@ class SupplierOverViewView extends Component {
                 {`${shipperName || ""}`}
               </Title>
             </FlexContainer>
-            <Tooltip title="Feedback">
+            <Tooltip title={<FormattedMessage id="app.feedback" defaultMessage="Feedback" />}>
               <span
                 onClick={() => handleFeedbackModal(true)}
                 style={{ cursor: "pointer" }}
