@@ -9,6 +9,7 @@ import { FlexContainer } from "../../../Components/UI/Layout";
 import { Tooltip } from "antd";
 import { handleSuppliersModal } from "../../Main/Suppliers/SuppliersAction";
 import AddSuppliersModal from "./Child/AddSuppliersModal";
+import { FormattedMessage } from "react-intl";
 
 
 
@@ -20,7 +21,8 @@ class SuppliersActionRight extends React.Component {
       <>
         {user.functionName === "Production" && user.designation === "Manager" &&
           viewType === "grid" ?
-          <Tooltip title="Export Supplier">
+          <Tooltip 
+          title={<FormattedMessage id="app.exportSupplier" defaultMessage="Export Supplier" />}>
             <Button
               //type="primary"
               className="export"
@@ -46,7 +48,9 @@ class SuppliersActionRight extends React.Component {
             type="primary"
             // ghost
             onClick={() => handleSuppliersModal(true)}
-          >Add
+          >
+            <FormattedMessage id="app.add" defaultMessage="Add" />
+            
             {/* <i class="fas fa-plus"></i> */}
           </Button>
         </Tooltip>

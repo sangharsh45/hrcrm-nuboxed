@@ -169,7 +169,7 @@ function  handleFilterChange(data){
       </Tooltip>
       )}
 
-<Tooltip
+{/* <Tooltip
         title={<FormattedMessage id="app.mapview" defaultMessage="Map View" />}
       >
         <Badge
@@ -187,7 +187,7 @@ function  handleFilterChange(data){
            <LanguageIcon />
           </span>
         </Badge>
-      </Tooltip>
+      </Tooltip> */}
       {/* <Tooltip
         title={<FormattedMessage id="app.mapview" defaultMessage="Map View" />}
       >

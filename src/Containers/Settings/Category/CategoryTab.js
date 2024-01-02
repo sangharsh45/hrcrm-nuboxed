@@ -10,35 +10,41 @@ import CategoryActionRight from "./CategoryActionRight";
 import OthersTab from "./OthersTab";
 import CustomerSectorTab from "./CustomerSectorTab";
 import InvestorTab from "./InvestorTab/InvestorTab";
+import ModuleTab from "./Module/ModuleTab";
 const TabPane = StyledTabs.TabPane;
 
 function CategoryTab (props) {
 
         const name = [
+              {
+            rulesName: "Module",
+            ruleId: "1",
+            component:<ModuleTab/>,
+          },
 
           {
             rulesName: "Role",
-            ruleId: "1",
+            ruleId: "2",
             component:<Category/>,
           },
             {
               rulesName: "Activity",
-              ruleId: "2",
+              ruleId: "3",
               component:   <CategoryActivity/>,
             },
             {
               rulesName: "Corporate",
-              ruleId: "3",
+              ruleId: "4",
               component: <OthersTab />,
             },
             {
               rulesName: "Customer",
-              ruleId: "4",
+              ruleId: "5",
               component:<CustomerSectorTab />,
             },
             {
               rulesName: "Investor",
-              ruleId: "5",
+              ruleId: "6",
               component:<InvestorTab />,
             },
             // {

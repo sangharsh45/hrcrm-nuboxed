@@ -145,6 +145,13 @@ const [rowdata, setrowdata] = useState("");
                         defaultMessage="Name"
                       />
                       </div>
+                      {/* <div className=" md:w-[5.1rem]">
+        <FormattedMessage
+                        id="app.phone"
+                        defaultMessage="Phone #"
+                      />
+          
+          </div> */}
         <div className=" md:w-[5.1rem]">
         <FormattedMessage
                         id="app.sector"
@@ -152,6 +159,13 @@ const [rowdata, setrowdata] = useState("");
                       />
           
           </div>
+          {/* <div className=" md:w-[5.1rem]">
+        <FormattedMessage
+                        id="app.source"
+                        defaultMessage="Source"
+                      />
+          
+          </div> */}
         <div className=" md:w-[5.8rem] ">
         <FormattedMessage
                         id="app.country"
@@ -273,6 +287,14 @@ const [rowdata, setrowdata] = useState("");
                       </div>
                     </div>
                                     </div> 
+                                    {/* <div className=" flex font-medium  items-center  md:w-24 max-sm:flex-row w-full max-sm:justify-between  ">
+                           
+
+                           <h4 class=" text-xs text-cardBody font-poppins">   
+                           {item.phoneNumber}
+                           </h4>
+                       
+                       </div> */}
                                 <div className=" flex font-medium  items-center  md:w-24 max-sm:flex-row w-full max-sm:justify-between  ">
                            
                                     {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden"> Sector </h4> */}
@@ -281,13 +303,22 @@ const [rowdata, setrowdata] = useState("");
                                     </h4>
                                 
                                 </div> 
+
+                                {/* <div className=" flex font-medium  items-center  md:w-24 max-sm:flex-row w-full max-sm:justify-between  ">
+                           
+                         
+                           <h4 class=" text-xs text-cardBody font-poppins">   
+                           {item.source}
+                           </h4>
+                       
+                       </div>  */}
                                 <div className=" flex font-medium flex-col justify-center md:w-28 max-sm:flex-row w-full max-sm:justify-between ">
                                   
 
                                     {/* <h4 class=" text-xs text-cardBody font-poppins max-sm:hidden">Country</h4> */}
                                     <h4 class=" text-sm text-cardBody font-poppins">
                                     <ReactCountryFlag
-                          countryCode={item.countryAlpha2Code}
+                          countryCode={item.address && item.address.length && item.address[0].country_alpha2_code}
                           svg
                           style={{
                             width: '1em',

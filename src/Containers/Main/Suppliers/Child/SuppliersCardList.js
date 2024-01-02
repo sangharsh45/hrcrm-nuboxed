@@ -7,6 +7,7 @@ import {getSuppliersList } from "../SuppliersAction"
 import { OnlyWrapCard } from "../../../../Components/UI/Layout";
 import { Link } from "../../../../Components/Common";
 import InfiniteScroll from "react-infinite-scroll-component";
+import { FormattedMessage } from "react-intl";
 
 function SuppliersCardList(props) {
   useEffect(() => {
@@ -43,13 +44,30 @@ return(
 <div className=' flex justify-end sticky top-28 z-auto'>
 <OnlyWrapCard style={{backgroundColor:"#E3E8EE"}}>
 <div className=" flex justify-between w-[97.5%] p-2 bg-transparent font-bold sticky top-0 z-10">
-        <div className=" md:w-[8.1rem]">Name</div>
-        <div className=" md:w-[5.1rem]">Phone #</div>
-        <div className=" md:w-[6.8rem] ">Email</div>
-        <div className="md:w-[7.8rem]">Address</div>
-        <div className="md:w-[7.9rem]">City</div>
-        <div className="md:w-[5.2rem]">PinCode</div>
-        <div className="w-[3.8rem]">Action</div>
+        <div className=" md:w-[8.1rem]">  <FormattedMessage
+                        id="app.name"
+                        defaultMessage="Name"
+                      /></div>
+        <div className=" md:w-[5.1rem]">
+        <FormattedMessage id="app.phoneNo" defaultMessage="Phone #" />
+          </div>
+        <div className=" md:w-[6.8rem] ">  <FormattedMessage id="app.email" defaultMessage="Email" /></div>
+        <div className="md:w-[7.8rem]">
+        <FormattedMessage id="app.address" defaultMessage="Address" />
+          
+          </div>
+        <div className="md:w-[7.9rem]">
+        <FormattedMessage id="app.city" defaultMessage="City" />
+          
+          </div>
+        <div className="md:w-[5.2rem]">
+        <FormattedMessage id="app.pinCode" defaultMessage="PinCode" />
+          
+          </div>
+        <div className="w-[3.8rem]">
+            <FormattedMessage id="app.action" defaultMessage="Action" />
+          
+          </div>
         </div>
         <InfiniteScroll
         dataLength={props.supplierList.length}

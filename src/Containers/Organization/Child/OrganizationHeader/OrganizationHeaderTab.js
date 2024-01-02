@@ -1,15 +1,9 @@
 import React, { Component, lazy, Suspense } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import LightbulbIcon from '@mui/icons-material/Lightbulb';
-import { PlusOutlined } from "@ant-design/icons";
 import { StyledTabs } from "../../../../Components/UI/Antd";
-import { TabsWrapper } from "../../../../Components/UI/Layout";
-import InsertDriveFileIcon from '@mui/icons-material/InsertDriveFile';
-import ContactsIcon from '@mui/icons-material/Contacts';
 import Organization from "../../Organization";
 import {getOrganizationList} from "../../../Auth/AuthAction"
-import { FormattedMessage } from "react-intl";
 
 const TabPane = StyledTabs.TabPane;
 // function handleRefreshPage() {
@@ -68,8 +62,8 @@ return (
   <TabPane
               tab={
                 <>
-                  <span>
-                    <LightbulbIcon  style={{fontSize:"1.1rem"}}/>
+                  <span class=" mt-4">
+                    {/* <LightbulbIcon  style={{fontSize:"1.1rem"}}/> */}
                     <span class=" ml-1">
                       {item.organizationName}
                       {/* <FormattedMessage
@@ -83,7 +77,10 @@ return (
               }
               key={index}
             >
-           
+                {/* <Suspense >
+             
+                <Organization  />
+              </Suspense> */}
             </TabPane>
 )
             })}

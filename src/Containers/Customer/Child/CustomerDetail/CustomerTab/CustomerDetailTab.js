@@ -81,9 +81,9 @@ class ContactDetailTab extends Component {
     this.setState({ file: true });
   };
 
-  componentDidMount() {
-    this.props.getContactListByCustomerId(this.props.customer.customerId);
-  }
+  // componentDidMount() {
+  //   this.props.getContactListByCustomerId(this.props.customer.customerId);
+  // }
 
   componentWillUnmount() {
     this.setState({ breadCumb: false });

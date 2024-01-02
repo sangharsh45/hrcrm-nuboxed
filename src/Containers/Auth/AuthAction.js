@@ -1230,7 +1230,7 @@ export const addOrganization = (org) => (dispatch, getState) => {
     .then((res) => {
       console.log(res);
 
-       dispatch(getOrganizationList());
+      //  dispatch(getOrganizationList());
 
       dispatch({
         type: types.ADD_ORGANIZATION_SUCCESS,
