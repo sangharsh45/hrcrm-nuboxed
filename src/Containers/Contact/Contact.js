@@ -2,7 +2,6 @@ import React, { useState, useEffect, Suspense, lazy } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { BundleLoader } from "../../Components/Placeholder";
-import ContactTeamCardList from "./Child/ContactTable/ContactTeamCardList";
 import {
   handleContactModal,
   setContactsViewType,
@@ -13,8 +12,10 @@ import {
   getContactPagination,
   getFilterContactList
 } from "./ContactAction";
-import ContactMobileCardList from "./Child/ContactTable/ContactMobileCardList";
-import ContactMobileTeamCardList from "./Child/ContactTable/ContactMobileTeamCardList";
+const ContactTeamCardList = lazy(() => import("./Child/ContactTable/ContactTeamCardList"));
+const ContactMobileCardList = lazy(() => import("./Child/ContactTable/ContactMobileCardList"));
+const ContactMobileTeamCardList = lazy(() => import("./Child/ContactTable/ContactMobileTeamCardList"));
+const ContactAllMobileCardList = lazy(() => import("./Child/ContactTable/ContactAllMobileCardList"));
 const AddContactModal = lazy(() => import("./Child/AddContactModal"));
 const ContactHeader = lazy(() => import("./Child/ContactHeader"));
 const ContactCardList = lazy(() => import("./Child/ContactTable/ContactCardList"));
@@ -149,7 +150,13 @@ const filterData = filteredData.filter(item =>
         filter={filter}
          filterData={filterData}
          />)) :
-         props.viewType ==="all" ? <ContactAllCardList/>
+         props.viewType ==="all" ?(
+          isMobile ? ( 
+             <ContactAllMobileCardList
+             currentUser={currentUser} 
+          filter={filter}
+           filterData={filterData} />
+          ) :( <ContactAllCardList/>))
          :viewType==="teams" ?(
           isMobile ? ( 
              <ContactMobileTeamCardList

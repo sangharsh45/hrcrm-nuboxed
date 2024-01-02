@@ -25,7 +25,7 @@ class ContactActionRight extends React.Component {
     } = this.props;
     return (
       <div class=" flex  items-center">
-        
+         <div class="max-sm:hidden">
         {this.props.viewType === "table" && user.contactFullListInd===true && user.employee_type !=="external" ? (
           
           <ContactSharePartnerForm 
@@ -41,6 +41,7 @@ class ContactActionRight extends React.Component {
           currentUser={this.props.currentUser} 
           />
         ) : null}
+        </div>
         <div class="max-sm:hidden">
        { role == "ADMIN" && (
         <Tooltip placement="left" title="XL">
