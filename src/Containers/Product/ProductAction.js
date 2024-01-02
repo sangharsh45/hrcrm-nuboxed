@@ -163,7 +163,7 @@ export const updateProduct = (id, data, cb) => (dispatch) => {
       });
       Swal.fire({
         icon: 'success',
-        title: 'Updated Succefully',
+        title: 'Updated Successfully',
         showConfirmButton: false,
         timer: 1500
       })
@@ -1126,7 +1126,7 @@ export const handlePriceDrawer = (modalProps) => (dispatch) => {
   });
 };
 
-export const uploadCatalogueList = (data, productId) => (dispatch) => {
+export const uploadCatalogueList = (data,) => (dispatch) => {
   dispatch({ type: types.UPLOAD_CATALOGUE_LIST_REQUEST });
   axios
     .post(`${base_url2}/excel/product-details`, data, {
@@ -1135,11 +1135,17 @@ export const uploadCatalogueList = (data, productId) => (dispatch) => {
       },
     })
     .then((res) => {
-      dispatch(getProducts())
+      dispatch(getProducts(0))
       dispatch({
         type: types.UPLOAD_CATALOGUE_LIST_SUCCESS,
         payload: res.data,
       });
+      Swal.fire({
+        icon: 'success',
+        title: 'Uploaded Successfully',
+        showConfirmButton: false,
+        timer: 1500
+      })
     })
     .catch((err) => {
       console.log(err);

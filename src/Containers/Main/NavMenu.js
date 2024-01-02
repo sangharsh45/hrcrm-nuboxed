@@ -32,6 +32,7 @@ import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
 import CategoryIcon from '@mui/icons-material/Category'
 import ViewInArIcon from '@mui/icons-material/ViewInAr';
 import FactoryIcon from '@mui/icons-material/Factory';
+import CrisisAlertIcon from '@mui/icons-material/CrisisAlert';
 
 const SubMenu = Menu.SubMenu;
 
@@ -772,7 +773,18 @@ function NavMenu(props) {
         )}
         <hr />
 
-
+        <Menu.Item key="/procurement" style={{ height: "27px", paddingLeft: "1rem" }}>
+            <Link to="/procurement">
+              <CrisisAlertIcon
+                style={{ fontSize: "large" }}
+              />
+              <span class="text-white text-ls ml-1"><FormattedMessage
+                id="app.procurement"
+                defaultMessage="Procurement"
+              />
+              </span>
+            </Link>
+          </Menu.Item>
 
 
         { user.teamsAccessInd === true &&  (

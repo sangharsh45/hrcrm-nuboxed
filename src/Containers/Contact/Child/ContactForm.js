@@ -32,7 +32,6 @@ const ContactSchema = Yup.object().shape({
 class ContactForm extends Component {
   componentDidMount() {
     this.props.getCustomerData(this.props.userId);
-
   }
   constructor(props) {
     super(props);
@@ -243,7 +242,7 @@ class ContactForm extends Component {
                             label={
                               <FormattedMessage
                                 id="app.middleName"
-                                defaultMessage="Middle"
+                                defaultMessage="Middle Name"
                               />
                             }
                             type="text"

@@ -152,6 +152,7 @@ const Product = lazy(() => import("../Product/Product"));
 const Collection = lazy(() => import("../Collection/Collection"));
 const Plant =lazy(()=>import("../Plant/Plant"));
 const PlantDetail =lazy(()=>import("../Plant/Child/PlantDetail/PlantDetail"));
+const Procurement =lazy(()=>import("../Procurement/Procurement"));
 
 function MainApp(props) {
   const [visible, setVisible] = useState(false);
@@ -728,6 +729,11 @@ function MainApp(props) {
                         exact
                         path="/requirement"
                         component={Requirement}
+                      />
+                       <Route
+                        exact
+                        path="/procurement"
+                        component={Procurement}
                       />
                       <Route exact path="/demand" component={Demand} />
 

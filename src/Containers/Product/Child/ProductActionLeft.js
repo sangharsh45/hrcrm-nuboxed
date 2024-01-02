@@ -43,7 +43,7 @@ const ProductActionLeft = (props) => {
       </Tooltip>
 
       <Tooltip
-        title="All Products"
+        title="Category"
       >
         <AlipayOutlined
           onClick={() => setProductViewType("all")}

@@ -20,7 +20,7 @@
 const login_url = "https://develop.tekorero.com/employeePortal";
 const base_url = "https://develop.tekorero.com/employeePortal/api/v1";
 // const base_url2 = "https://develop.tekorero.com/ERP";
-const base_url2 = "https://develop.tekorero.com/NuboxedEr";
+const base_url2 = "https://develop.tekorero.com/NuboxedErp";
 
 // const base_url = "http://Hrnubox-env.eba-us3qmm3j.ap-south-1.elasticbeanstalk.com/api/v1";
 // const login_url = "http://Hrnubox-env.eba-us3qmm3j.ap-south-1.elasticbeanstalk.com";
