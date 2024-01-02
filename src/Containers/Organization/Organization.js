@@ -3,7 +3,9 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { BundleLoader } from "../../Components/Placeholder";
 import { MainWrapper } from "../../Components/UI/Layout";
-import { getOrganizationDetails } from "../Auth/AuthAction";
+import { getOrganizationDetails,setOrganizationViewType ,handleOrganizationModal} from "../Auth/AuthAction";
+import AddOrganizationModal from "./Child/OrganizationHeader/AddOrganizationModal";
+import OrganizationHeader from "./OrganizationHeader";
 
 const OrganizationDetailLeft = lazy(() =>
   import("./Child/OrganizationDetailLeft")
@@ -14,16 +16,25 @@ const OrganizationDetailRight = lazy(() =>
 
 class Organization extends Component {
   componentDidMount() {
-    const { getOrganizationDetails } = this.props;
+    const { getOrganizationDetails ,} = this.props;
     getOrganizationDetails();
   }
   render() {
-    const { fetchingOrganizationDetails,organizationDetails } = this.props;
+    const { fetchingOrganizationDetails,addOrganizationModal,organizationDetails,handleOrganizationModal } = this.props;
     console.log(this.props.organizationDetails.imageId)
     return (
     
       <>
-        {/* <AccountDetailHeader /> */}
+        <OrganizationHeader 
+        //  currentUser={this.state.currentUser}
+         viewType={this.props.viewType}
+         handleOrganizationModal={handleOrganizationModal}
+        setOrganizationViewType={this.props.setOrganizationViewType}
+        />
+          <AddOrganizationModal
+          addOrganizationModal={addOrganizationModal}
+          handleOrganizationModal={handleOrganizationModal}
+        />
         {fetchingOrganizationDetails ? (
           <MainWrapper>
             <BundleLoader />
@@ -48,6 +59,7 @@ class Organization extends Component {
 }
 
 const mapStateToProps = ({ auth }) => ({
+  addOrganizationModal:auth.addOrganizationModal,
   fetchingOrganizationDetails: auth.fetchingOrganizationDetails,
   fetchingOrganizationDetailsError: auth.fetchingOrganizationDetailsError,
   organizationDetails:auth.organizationDetails
@@ -56,6 +68,8 @@ const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
       getOrganizationDetails,
+      handleOrganizationModal,
+      setOrganizationViewType
     },
     dispatch
   );

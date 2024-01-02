@@ -1197,3 +1197,79 @@ export const addOnboard = (data,cb ) => (dispatch, getState) => {
   
     });
 };
+
+export const setOrganizationViewType = (viewType) => (dispatch) => {
+  dispatch({
+    type: types.SET_ORGANIZATION_VIEW_TYPE,
+    payload: viewType,
+  });
+};
+
+export const handleOrganizationModal = (modalProps) => (dispatch) => {
+  dispatch({
+    type: types.HANDLE_ORGANIZATION_MODAL,
+    payload: modalProps,
+  });
+};
+
+export const addOrganization = (org) => (dispatch, getState) => {
+  const userId = getState().auth.userDetails.userId;
+
+  // const opportunityId = getState().opportunity.opportunity.opportunityId;
+  console.log("inside add leads");
+  dispatch({
+    type: types.ADD_ORGANIZATION_REQUEST,
+  });
+
+  axios
+    .post(`${base_url}/organization/save`, org, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+
+       dispatch(getOrganizationList());
+
+      dispatch({
+        type: types.ADD_ORGANIZATION_SUCCESS,
+        payload: res.data,
+      });
+      // cb && cb();
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.ADD_ORGANIZATION_FAILURE,
+        payload: err,
+      });
+      // cb && cb();
+    });
+};
+
+export const getOrganizationList = (userId,pageNo,filter) => (dispatch) => {
+  dispatch({
+    type: types.GET_ORGANIZATION_REQUEST,
+  });
+  axios
+    .get(`${base_url}/organization/get/all/organization`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.GET_ORGANIZATION_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err.response);
+      dispatch({
+        type: types.GET_ORGANIZATION_FAILURE,
+        payload: err,
+      });
+    });
+};

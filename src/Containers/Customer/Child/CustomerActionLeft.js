@@ -6,6 +6,7 @@ import PeopleIcon from '@mui/icons-material/People';
 import {getCustomerListByUserId} from "../CustomerAction"
 import { StyledSelect } from "../../../Components/UI/Antd";
 import { Button, Tooltip, Badge } from "antd";
+import LanguageIcon from '@mui/icons-material/Language';
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { withRouter } from "react-router-dom";
@@ -167,6 +168,26 @@ function  handleFilterChange(data){
         </Badge>
       </Tooltip>
       )}
+
+<Tooltip
+        title={<FormattedMessage id="app.mapview" defaultMessage="Map View" />}
+      >
+        <Badge
+          size="small"
+          // count={(props.viewType === "mapView" && props.recordData.customer) || 0}
+          overflowCount={999}
+        >
+          <span
+            class=" mr-2 text-sm cursor-pointer"
+            onClick={() => props.setCustomerViewType("mapView")}
+            style={{
+              color: props.viewType === "mapView" && "#1890ff",
+            }}
+          >
+           <LanguageIcon />
+          </span>
+        </Badge>
+      </Tooltip>
       {/* <Tooltip
         title={<FormattedMessage id="app.mapview" defaultMessage="Map View" />}
       >

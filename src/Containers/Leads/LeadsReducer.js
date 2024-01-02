@@ -950,6 +950,9 @@ case types.HANDLE_LEADS_MODAL:
                       // deletedTruck: [] 
                     };
 
+                    case types.EMPTY_LEADS_LIST:
+                      return { ...state, leadsAllData: [] }; 
+
 default:
 return state;
 }
