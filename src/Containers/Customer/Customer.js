@@ -20,6 +20,7 @@ import CustomerTeamCardList from "./Child/CustomerTable/CustomerTeamCardList";
 import CustomerMobileCardList from "./Child/CustomerTable/CustomerMobileCardList";
 import CustomerAllMobileCardList from "./Child/CustomerTable/CustomerAllMobileCardList";
 import CustomerMobileTeamCardList from "./Child/CustomerTable/CustomerMobileTeamCardList";
+import CustomerMapView from "./CustomerMapView";
 const CustomerCardView =lazy(()=> import("./CustomerCardView"));
 const AddCustomerModal = lazy(() => import( "./Child/AddCustomerModal"));
 const CustomerHeader = lazy(() => import("./Child/CustomerHeader"));
@@ -111,6 +112,8 @@ class Customer extends Component {
         <CustomerCardView/>:
          this.props.viewType === "list" ?
           <CustomerWhiteTable /> :
+          this.props.viewType==="mapView"?
+          <CustomerMapView/>:
           this.props.viewType === "dashboard" ?
              <CustomerBlueTable/> :
              this.props.viewType === "table" ?(isMobile ?

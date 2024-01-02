@@ -556,6 +556,28 @@ padding: 0.3rem 1rem;
 .ant-time-picker-input{
   width:10rem;
 }
+.map-and-address-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width:27em;
+  height:14em;
+  background-color: white;
+  border-radius:10px
+}
+
+.chosen-address {
+  margin-bottom: 10px;
+  color:"black";
+  font-weight: bold;
+}
+
+.map-container {
+  width: 330px;
+  height: 200px;
+  /* border-radius: 10px; */
+  overflow: hidden;
+}
 
 
 .ant-badge-count {

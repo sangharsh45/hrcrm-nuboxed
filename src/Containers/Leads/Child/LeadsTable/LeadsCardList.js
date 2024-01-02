@@ -24,6 +24,7 @@ import {
   getLeadDetailsById,
   updateTypeForLead,
   handleCETmodal,
+  emptyLeads,
   handleLeadsConfirmationModal
 } from "../../../Leads/LeadsAction";
 import InfiniteScroll from "react-infinite-scroll-component";
@@ -48,6 +49,10 @@ const LeadsCardList = (props) => {
     props.getLeads(props.userId, page,"creationdate");
     props.getSectors();
     props.getCountries();
+  }, []);
+
+  useEffect(() => {
+    return () => props.emptyLeads();
   }, []);
 
   const [currentLeadsId, setCurrentLeadsId] = useState("");
@@ -563,6 +568,7 @@ const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
       getLeads,
+      emptyLeads,
       handleLeadsConfirmationModal,
       getSectors,
       deleteLeadsData,

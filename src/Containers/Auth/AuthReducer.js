@@ -1,6 +1,7 @@
 import * as types from "./AuthTypes";
 const initialState = {
   env: "server",
+  viewType: "table",
   registering: false,
   registeringError: false,
   registeringSuccess: false,
@@ -21,6 +22,9 @@ const initialState = {
 
   linkingOrgDocsPrivate: false,
   linkingOrgDocsPrivateError: false,
+
+  addingOrganization:false,
+  addingOrganizationError:false,
 
   editingOrganizationDetails: false,
   editingOrganizationDetailsError: false,
@@ -48,6 +52,11 @@ const initialState = {
   fetchingTimeZoneError: false,
   timeZone: [],
 
+  fetchingOrganization: false,
+  fetchingOrganizationError: false,
+  organizationDetailsList:[],
+
+
   fetchingCurrency: false,
   fetchingCurrencyError: false,
   currencies: [],
@@ -55,6 +64,8 @@ const initialState = {
   fetchingCountries: false,
   fetchingCountriesError: false,
   countries: [],
+
+  addOrganizationModal:false,
 
   fetchingTopicsByUserId: false,
   fetchingTopicsByUserIdError: false,
@@ -823,10 +834,45 @@ export const authReducer = (state = initialState, action) => {
             case types.ADD_ONBOARD_FAILURE:
               return { ...state, addingOnboard: false, addingOnboardError: true };
         
-
+              case types.SET_ORGANIZATION_VIEW_TYPE:
+                return { ...state, viewType: action.payload };
         
+                case types.HANDLE_ORGANIZATION_MODAL:
+                  return { ...state, addOrganizationModal: action.payload };
 
-    
+
+                  case types.ADD_ORGANIZATION_REQUEST:
+                    return { ...state, addingOrganization: true };
+                  case types.ADD_ORGANIZATION_SUCCESS:
+                    return { ...state, 
+                      addingOrganization: false, 
+                      addOrganizationModal: false ,
+                      organizationDetailsList:[action.payload,...state.organizationDetailsList]
+                    };
+                  case types.ADD_ORGANIZATION_FAILURE:
+                    return { ...state, addingOrganization: false, addOrganizationModal: false };    
+             
+                    case types.GET_ORGANIZATION_REQUEST:
+                      return { ...state, fetchingOrganization: true };
+                    case types.GET_ORGANIZATION_SUCCESS:
+                      return {
+                        ...state,
+                        fetchingOrganization: false,
+                        // customerByUserId: action.payload,
+                
+                        organizationDetailsList: [
+                          ...state.organizationDetailsList,
+                          ...action.payload],
+                      
+                      };
+                    case types.GET_ORGANIZATION_FAILURE:
+                      return {
+                        ...state,
+                        fetchingOrganization: false,
+                        fetchingOrganizationError: true,
+                      };
+
+
 
     default:
       return state;

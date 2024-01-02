@@ -1358,3 +1358,9 @@ export const setLeadsViewType = (viewType) => (dispatch) => {
     });
   };
 
+  export const emptyLeads = () => (dispatch) => {
+    dispatch({
+      type: types.EMPTY_LEADS_LIST, 
+    });
+  };
+
