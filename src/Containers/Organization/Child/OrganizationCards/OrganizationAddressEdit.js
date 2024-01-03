@@ -38,7 +38,7 @@ class OrganizationAddressEdit extends Component {
   };
   render() {
     const {
-      organizationDetails: {
+      organizationList: {
         address,
         sourceId,
         proposalAmount,

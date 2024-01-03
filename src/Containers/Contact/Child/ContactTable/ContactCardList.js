@@ -24,10 +24,6 @@ import {
   emptyContact,
   handleContactPulseDrawerModal
 } from "../../ContactAction";
-import {
-  getAllSalesList,
-  getRecruiterName,
-} from "../../../Opportunity/OpportunityAction";
 import { FormattedMessage } from "react-intl";
 import NoteAltIcon from "@mui/icons-material/NoteAlt";
 import PhoneInTalkIcon from '@mui/icons-material/PhoneInTalk';
@@ -67,8 +63,6 @@ function ContactCardList(props) {
     })
     props.getContactListByUserId(props.userId, page,"creationdate");
     setPage(page + 1);
-    props.getAllSalesList();
-    props.getRecruiterName();
   }, []);
 
   useEffect(()=>{
@@ -524,8 +518,6 @@ const mapDispatchToProps = (dispatch) =>
       setEditContact,
       getDesignations,
       updateOwnercontactById,
-      getRecruiterName,
-      getAllSalesList,
       handleContactReactSpeechModal,
       handleContactDrawerModal,
       getContactById,

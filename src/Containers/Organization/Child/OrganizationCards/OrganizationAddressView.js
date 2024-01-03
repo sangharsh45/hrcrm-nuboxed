@@ -3,9 +3,9 @@ import BorderColorIcon from '@mui/icons-material/Edit';
 import { SubTitle } from "../../../../Components/UI/Elements";
 class OrganizationAddressView extends Component {
   render() {
-    console.log(this.props.organization);
+    console.log(this.props.organizationList);
     const {
-        organization: { url, phoneNumber,address, },
+      organizationList: { url, phoneNumber,address, },
         toggleViewType
     } = this.props;
     const addressdata=address&&address.length&&address[0].address1;

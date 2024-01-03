@@ -43,11 +43,11 @@ class SingleModuleList extends Component {
             viewType === "view" ? (
               <div class="flex" >
                 <div class="w-full flex-row">
-              <div class=" flex justify-between" >
+              <div class=" flex " >
              
            
            
-                    {/* <h1 class="ml-4">ERP</h1>
+                    <h1 class="ml-4">ERP</h1>
                     <div class=" w-[7%] ml-2"   >
                     
                     <ERPStatusToggle
@@ -55,54 +55,10 @@ class SingleModuleList extends Component {
                     //   departmentName={departmentName}
                     //   departmentId={departmentId}
                     />  
-                    </div> */}
-                    <h1>CRM</h1>
-                    <div   class=" w-[7%] ml-2">
-                    <CRMStatusToggle
-                    //   crmInd={crmInd}
-                    //   departmentName={departmentName}
-                    //   departmentId={departmentId}
-                    />  
                     </div>
-                    <h1>IM</h1>
-                    <div class=" w-[7%] ml-2">
-                    <IMStatusToggle
-                    //   imInd={imInd}
-                    //   departmentName={departmentName}
-                    //   departmentId={departmentId}
-                    />  
-                    </div>
-                    <h1>HR</h1>
-                    <div 
-                   class=" w-[8%] ml-2"
-                    >
-                    <HrStatusToggle
-                    //   hrInd={hrInd}
-                    //   departmentName={departmentName}
-                    //   departmentId={departmentId}
-                    />  
-                    </div>
-                    <h1>Accounting</h1>
-                    <div 
-                   class=" w-[8%] ml-2"
-                    >
-                    <AccountingStatusToggle
-                    //   accountInd={accountInd}
-                    //   departmentName={departmentName}
-                    //   departmentId={departmentId}
-                    />  
-                    </div>
+              
 
-                    <h1>RecruitPro</h1>
-                    <div 
-                  class=" w-[8%] ml-2"
-                    >
-                    <RecruitProStatusToggle
-                    //   recruitOppsInd={recruitOppsInd}
-                    //   departmentName={departmentName}
-                    //   departmentId={departmentId}
-                    />  
-                    </div>
+                
                    
                 
               </div>

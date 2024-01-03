@@ -15,7 +15,7 @@ class OrganizationDetailEdit extends Component {
   }
   handleUpdate = () => {
     this.props.updateOrganizationDetails(
-      this.props.organization.organizationId,
+      this.props.organizationList.organizationId,
       this.state.fields,
       this.props.toggleViewType
     );
@@ -40,7 +40,7 @@ class OrganizationDetailEdit extends Component {
   };
   render() {
     const {
-      organization,
+      organizationList,
       toggleViewType,
       updatingOrganizationDetails,
     } = this.props;
@@ -51,15 +51,15 @@ class OrganizationDetailEdit extends Component {
           style={{ padding: "0.625em 1.25em 0.625em 1.25em" }}
         >
           <EditUpload
-            imageId={organization.imageId}
-            imageURL={organization.imageURL}
+            imageId={organizationList.imageId}
+            imageURL={organizationList.imageURL}
             imgWidth={100}
             imgHeight={100}
             getImage={this.setImage}
           />
 
           <EditableInput
-            defaultValue={organization.organizationName}
+            defaultValue={organizationList.organizationName}
             handleChange={this.handleChange}
             name={"organizationName"}
             value={this.state.fields.organizationName}

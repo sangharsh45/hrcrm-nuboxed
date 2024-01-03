@@ -15,17 +15,35 @@ const OrganizationDetailRight = lazy(() =>
 );
 
 class Organization extends Component {
+  constructor(props) {
+    super(props)
+
+    this.state = {
+        key: "",
+        organizationList: {}
+    }
+}
   componentDidMount() {
     const { getOrganizationDetails ,} = this.props;
     getOrganizationDetails();
   }
+  handleOnClick = (data) => {
+    console.log(data);
+    debugger;
+    this.setState({
+      organizationList: data,
+    });
+
+};
   render() {
+    console.log(this.state.organizationList)
     const { fetchingOrganizationDetails,addOrganizationModal,organizationDetails,handleOrganizationModal } = this.props;
     console.log(this.props.organizationDetails.imageId)
     return (
     
       <>
         <OrganizationHeader 
+        handleOnClick={this.handleOnClick}
         //  currentUser={this.state.currentUser}
          viewType={this.props.viewType}
          handleOrganizationModal={handleOrganizationModal}
@@ -43,9 +61,13 @@ class Organization extends Component {
             <div class=" flex ">
               <Suspense fallback={"Loading..."}>
               <div class="flex flex-no-wrap w-full">
+              {this.state.organizationList.organizationId && (
                   <div class=" w-[25%]" >
-                    <OrganizationDetailLeft />
+                    <OrganizationDetailLeft
+                    organizationList={this.state.organizationList} 
+                    />
                   </div>
+                     )}
                   <div class=" w-[75%]" >
                     <OrganizationDetailRight />
                   </div>

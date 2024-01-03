@@ -15,6 +15,7 @@ import { TextareaComponent } from "../../../../Components/Forms/Formik/TextareaC
 import { InputComponent } from "../../../../Components/Forms/Formik/InputComponent";
 import ClearbitImage from "../../../../Components/Forms/Autocomplete/ClearbitImage";
 import { Listbox, } from '@headlessui/react'
+import { SelectComponent } from "../../../../Components/Forms/Formik/SelectComponent";
 // yup validation scheme for creating a account
 const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
 
@@ -52,6 +53,15 @@ function AddOrganizationForm (props) {
           initialValues={{
             email: "",
             phoneNumber: "",
+            fiscalStartDate:"",
+            industryType:"",
+            vat:"",
+            companySize:"",
+            twitter:"",
+            linkedinUrl:"",
+            facebook:"",
+            organizationUrl:"",
+            fiscalStartMonth:"",
             organizationName:"",
             userId: props.userId,
             address: [
@@ -184,19 +194,195 @@ function AddOrganizationForm (props) {
                       </StyledLabel>
                     </div>
                   </div>
+
+                      <div class=" flex justify-between">
+                    <div class=" w-3/12 max-sm:w-[35%]">
+                   
+                    <FastField
+                            name="fiscalStartDate"
+                            type="text"
+                            // label="Salutation"
+                            label={
+                              <FormattedMessage
+                                id="app.fiscalstartdate"
+                                defaultMessage="Fiscal start date"
+                              />
+                            }
+                            options={[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31]}
+                            component={SelectComponent}
+                            inlineLabel
+                            // className="field"
+                            isColumn
+                          />
+                  
+                    </div>
+                    <div class=" w-8/12">
+                    <StyledLabel>
+                    <FastField
+                            name="fiscalStartMonth"
+                            type="text"
+                            // label="Salutation"
+                            label={
+                              <FormattedMessage
+                                id="app.fiscalStartMonth"
+                                defaultMessage="Fiscal start month"
+                              />
+                            }
+                            component={SelectComponent}
+                            options={['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']}
+                            inlineLabel
+                            // className="field"
+                            isColumn
+                          />
+                      </StyledLabel>
+                    </div>
+                  </div>
+
+                  <div class=" flex justify-between">
+                    <div class=" w-3/12 max-sm:w-[35%]">
+                   
+                    <FastField
+                            // type="companySize"
+                            name="companySize"
+                            //placeholder="Mobile #"
+                            label={
+                              <FormattedMessage
+                                id="app.companySize"
+                                defaultMessage="Company Size"
+                              />
+                            }
+                            component={InputComponent}
+                            inlineLabel
+                            width={"100%"}
+                            isColumn
+                          />
+                  
+                    </div>
+                    <div class=" w-8/12">
+                    <StyledLabel>
+                    <FastField
+                            // type="companySize"
+                            name="industryType"
+                            //placeholder="Mobile #"
+                            label={
+                              <FormattedMessage
+                                id="app.industryType"
+                                defaultMessage="Industry Type"
+                              />
+                            }
+                            component={InputComponent}
+                            inlineLabel
+                            width={"100%"}
+                            isColumn
+                          />
+                      </StyledLabel>
+                    </div>
+                  </div>
+
+                  <div class=" flex justify-between">
+                    <div class=" w-3/12 max-sm:w-[35%]">
+                   
+                    <FastField
+                            // type="companySize"
+                            name="vat"
+                            //placeholder="Mobile #"
+                            label={
+                              <FormattedMessage
+                                id="app.vat"
+                                defaultMessage="VAT(In %)"
+                              />
+                            }
+                            component={InputComponent}
+                            inlineLabel
+                            width={"100%"}
+                            isColumn
+                          />
+                  
+                    </div>
+                    <div class=" w-8/12">
+                    <StyledLabel>
+                    <FastField
+                            // type="companySize"
+                            name="organizationUrl"
+                            //placeholder="Mobile #"
+                            label={
+                              <FormattedMessage
+                                id="app.organizationUrl"
+                                defaultMessage="Website"
+                              />
+                            }
+                            component={InputComponent}
+                            inlineLabel
+                            width={"100%"}
+                            isColumn
+                          />
+                      </StyledLabel>
+                    </div>
+                  </div>
               
-                  {/* <StyledLabel>
-                  <Field
-                    name="url"
-                    type="text"
-                    label={<FormattedMessage id="app." defaultMessage="URL" />}
-                    isColumn
-                    width={"100%"}
-                    component={InputComponent}
-                    inlineLabel
-                  />
-                  </StyledLabel> */}
-                         
+              
+                  <div class=" flex justify-between">
+                    <div class=" w-3/12 max-sm:w-[35%]">
+                   
+                    <FastField
+                            // type="companySize"
+                            name="twitter"
+                            //placeholder="Mobile #"
+                            label={
+                              <FormattedMessage
+                                id="app.twitter"
+                                defaultMessage="Twitter"
+                              />
+                            }
+                            component={InputComponent}
+                            inlineLabel
+                            width={"100%"}
+                            isColumn
+                          />
+                  
+                    </div>
+                    <div class=" w-8/12">
+                    <StyledLabel>
+                    <FastField
+                            // type="companySize"
+                            name="linkedinUrl"
+                            //placeholder="Mobile #"
+                            label={
+                              <FormattedMessage
+                                id="app.linkedinUrl"
+                                defaultMessage="Linkedin"
+                              />
+                            }
+                            component={InputComponent}
+                            inlineLabel
+                            width={"100%"}
+                            isColumn
+                          />
+                      </StyledLabel>
+                    </div>
+                  </div>
+                  <div class=" flex justify-between">
+                    <div class=" w-3/12 max-sm:w-[35%]">
+                   
+                    <FastField
+                            // type="companySize"
+                            name="facebook"
+                            //placeholder="Mobile #"
+                            label={
+                              <FormattedMessage
+                                id="app.facebook"
+                                defaultMessage="Facebook"
+                              />
+                            }
+                            component={InputComponent}
+                            inlineLabel
+                            width={"100%"}
+                            isColumn
+                          />
+                  
+                    </div>
+                 
+                  </div>
                   <Spacer />
                
                  

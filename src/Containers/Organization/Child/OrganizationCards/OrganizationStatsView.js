@@ -6,7 +6,7 @@ import BorderColorIcon from '@mui/icons-material/BorderColor';
 class OrganizationStatsView extends Component {
   render() {
     const {
-      organization: {
+      organizationList: {
         organizationUrl,
         facebook,
         twitter,
