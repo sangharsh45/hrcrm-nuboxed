@@ -9,6 +9,9 @@ import {
 } from "./OpportunityAction";
 import OpportunityBoard from "./Child/OpportunityBoard"
 import OpportunityWonCard from "./Child/OpportunityTable/OpportunityWonCard";
+import OpportunityMobileWonCard from "./Child/OpportunityTable/OpportunityMobileWonCard";
+import OpportunityLostMobileCard from "./Child/OpportunityTable/OpportunityLostMobileCard";
+import OpportunityAllMobileCardList from "./Child/OpportunityTable/OpportunityAllMobileCardList";
 const OpportunityCardView = lazy(() => import("./OpportunityCardView"));
 const OpportunityMap = lazy(() => import("./OpportunityMap"));
 const OpportunityHeader = lazy(() => import("./Child/OpportunityHeader"));
@@ -20,7 +23,7 @@ const OpportunityDeletedCard=lazy(()=>import("./Child/OpportunityTable/Opportuni
 const OpportunityAllCardList = lazy(() => import("./Child/OpportunityTable/OpportunityAllCardList"));
 
 class Opportunity extends Component {
-  state = { currentData: "" };
+  state = { currentData: "",isMobile: false };
   handleClear = () => {
     this.setState({ currentData: "" });
     this.props.getOpportunityListByUserId(this.props.userId);
@@ -28,8 +31,27 @@ class Opportunity extends Component {
   setCurrentData = (value) => {
     this.setState({ currentData: value });
   };
-
+  componentDidMount() {
+    // Check if isMobile is stored in localStorage
+    const storedIsMobile = localStorage.getItem('isMobile');
+    this.setState({ isMobile: storedIsMobile ? JSON.parse(storedIsMobile) : window.innerWidth <= 768 });
+  
+    window.addEventListener('resize', this.handleResize);
+  }
+  
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.handleResize);
+  }
+  
+  handleResize = () => {
+    const isMobile = window.innerWidth <= 768;
+    this.setState({ isMobile });
+  
+    // Store isMobile in localStorage
+    localStorage.setItem('isMobile', JSON.stringify(isMobile));
+  };
   render() {
+    const {isMobile } = this.state;
     const {
       addOpportunityModal,
       handleOpportunityModal,
@@ -64,20 +86,18 @@ class Opportunity extends Component {
                     <OpportunityCloseCard/>
                      :
              this.props.viewType === "lost" ?
+             (isMobile ?  <OpportunityLostMobileCard/> :   <OpportunityLostCard/> )
                     // <OpportunitylostTable/>
-                   <OpportunityLostCard/>
                     :
-
                     this.props.viewType === "Map" ?
                     <OpportunityMap/> :
              this.props.viewType === "card" ?
              <OpportunityCardView/> :
-       
              this.props.viewType === "won" ?
+             (isMobile ? <OpportunityMobileWonCard /> :  <OpportunityWonCard/> )
              // <OpportunitylostTable/>
-            <OpportunityWonCard/> 
             : this.props.viewType==="all" ? 
-            <OpportunityAllCardList/>
+            (isMobile ?  <OpportunityAllMobileCardList/> :   <OpportunityAllCardList/> )
              : null}
         </Suspense>
       </React.Fragment>

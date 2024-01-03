@@ -22,6 +22,7 @@ class CustomerActionRight extends React.Component {
     } = this.props;
     return (
       <div class=" flex  items-center">
+        <div class="max-sm:hidden">
           {user.employee_type === "contractor" && user.candiContShareInd === true || user.employee_type === "employee" && user.candiEmpShareInd === true && user.customerFullListInd === true &&(
       <CustomerShareForm
       handleDropChange={this.props.handleDropChange}
@@ -38,7 +39,7 @@ class CustomerActionRight extends React.Component {
     
          </Tooltip>
       )}
-      
+      </div>
         <Tooltip placement="left" title="Create">
           {this.props.user.customerCreateInd ===true && user.crmInd === true &&(
           <Button

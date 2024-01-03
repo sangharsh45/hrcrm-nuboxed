@@ -170,7 +170,7 @@ const [rowdata, setrowdata] = useState("");
                 className="flex flex-col rounded-xl justify-between bg-white mt-[0.5rem] h-[9rem] items-center p-3"
               >
                                       <div class="flex justify-between items-center w-wk ">
-                                   <div className=" flex font-medium flex-col w-[14rem]   max-sm:w-full">
+                                   <div className=" flex font-medium ">
                                    <div className="flex max-sm:w-full">
                       <div>
                         <SubTitle>
@@ -185,9 +185,9 @@ const [rowdata, setrowdata] = useState("");
                       </div>
                       <div class="w-[4%]"></div>
 
-                      <div class="max-sm:w-full md:flex items-center">
+                      <div class="flex items-center" >
                       <Tooltip>
-                                          <div class="flex max-sm:flex-row justify-between w-full md:flex-col">
+                                          <div >
                                             <h4 class=" text-sm text-blue-500 text-cardBody font-poppins font-semibold  cursor-pointer">
                                                 
          <Link
@@ -211,7 +211,8 @@ const [rowdata, setrowdata] = useState("");
                       </div>
                     </div>
                                     </div> 
-                                <div className=" flex font-medium flex-col  md:w-28 max-sm:flex-row w-full max-sm:justify-between  ">
+                                    
+                                <div className=" flex font-medium   ">
                            
                                     {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden"> Sector </h4> */}
                                     <h4 class=" text-xs text-cardBody font-poppins">   
@@ -219,7 +220,7 @@ const [rowdata, setrowdata] = useState("");
                                     </h4>
                                 
                                 </div> 
-                                <div className=" flex font-medium flex-col md:w-28 max-sm:flex-row w-full max-sm:justify-between ">
+                                <div className=" flex font-medium  ">
                                   
 
                                     {/* <h4 class=" text-xs text-cardBody font-poppins max-sm:hidden">Country</h4> */}
@@ -237,7 +238,8 @@ const [rowdata, setrowdata] = useState("");
                                     </h4>
                                 </div>
                                 </div>
-                                <div className=" flex font-medium flex-col md:w-full max-sm:flex-row w-full max-sm:justify-between ">
+                                <div class="flex justify-between items-center w-wk ">
+                                <div className=" flex font-medium ">
                                     {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden"># Opportunity</h4> */}
 
                                     <div class=" text-xs text-cardBody font-poppins text-center">
@@ -245,7 +247,7 @@ const [rowdata, setrowdata] = useState("");
 
                                     </div>
                                 </div>
-                                <div className=" flex font-medium flex-col md:w-0 max-sm:flex-row w-full max-sm:justify-between ">
+                                <div className=" flex font-medium  ">
                                     {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden">Pipeline Value</h4> */}
 
                                     <div class=" text-xs text-cardBody font-poppins text-center">
@@ -253,7 +255,7 @@ const [rowdata, setrowdata] = useState("");
 
                                     </div>
                                 </div>
-                                <div className=" flex font-medium flex-col md:w-96 max-sm:flex-row w-full max-sm:justify-between ">
+                                <div className=" flex font-medium ">
                                     {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden">Weighted Value</h4> */}
 
                                     <div class=" text-xs text-cardBody font-poppins text-center">
@@ -261,7 +263,7 @@ const [rowdata, setrowdata] = useState("");
 
                                     </div>
                                 </div>
-                                <div className=" flex font-medium items-center  flex-col md:w-72 max-sm:max-sm:flex-row w-full max-sm:justify-between ">
+                                <div className=" flex font-medium  ">
                                     {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden">Assigned to</h4> */}
 
                                     <div class=" text-xs text-cardBody font-poppins">
@@ -280,8 +282,7 @@ const [rowdata, setrowdata] = useState("");
              
                                     </div>
                                 </div>
-                                <div class="flex md:items-center"> 
-                                <div className=" flex font-medium items-center flex-col md:w-28 max-sm:flex-row w-full max-sm:justify-between mb-2 ">
+                                <div className=" flex font-medium ">
                        
                        {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden">Owner</h4> */}
 
@@ -295,7 +296,10 @@ const [rowdata, setrowdata] = useState("");
               />
             </span>
                    </div>
-                   <div className=" flex font-medium justify-center flex-col max-sm:flex-row  ">
+                                </div>
+                                <div class="flex justify-between items-center w-wk ">
+                              
+                  
                        
                        <h4 class=" text-sm text-cardBody font-poppins"></h4>
                        <Popconfirm
@@ -308,9 +312,9 @@ const [rowdata, setrowdata] = useState("");
                      <span class="text-sm" >Convert as Customer</span>
                         </Button>
                         </Popconfirm>
-                   </div>
+                 
                    
-                   <div class="flex flex-col w-[8%] max-sm:flex-row max-sm:w-[10%]">
+                  
                                 <div>
                                 <Tooltip title={item.url}>
               {item.url !== "" ? (
@@ -356,8 +360,8 @@ const [rowdata, setrowdata] = useState("");
             
 
                     </div>
-                    </div>
-                    <div class="flex flex-col w-[8%] max-sm:flex-row max-sm:w-[10%] ">
+                   
+                   
                         <div>
                         <Tooltip title="Pulse">
        <MonitorHeartIcon
@@ -382,9 +386,9 @@ const [rowdata, setrowdata] = useState("");
            </Tooltip>
 
                     </div>
-                    </div>
+                    
               
-                    <div class="flex flex-col w-[8%] max-sm:flex-row max-sm:w-[10%]">
+                   
                     <div >
                     <Tooltip overlayStyle={{ maxWidth: "300px" }} title={dataLoc}>
 
@@ -420,7 +424,7 @@ const [rowdata, setrowdata] = useState("");
               />
             </Tooltip> */}
 </div>
-            </div> 
+          
 
                       </div>
                             </div>
