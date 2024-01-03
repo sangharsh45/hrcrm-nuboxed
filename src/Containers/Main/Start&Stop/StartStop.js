@@ -435,7 +435,7 @@ useEffect(()=>{
       </Button>
       </div>
       {/* </Popconfirm> */}
-      <div class="ml-[22px] mt-[0.2rem]">
+      <div class="ml-[22px] mt-[0.2rem] max-sm:ml-1">
       <select
       value={drop1}
       onChange={handleDrop1}

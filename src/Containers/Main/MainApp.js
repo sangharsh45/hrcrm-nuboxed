@@ -319,7 +319,7 @@ function MainApp(props) {
                   }}
                 >
                   &nbsp;&nbsp;
-                  <div style={{ marginLeft: "0.625em" }}>
+                  <div style={{ marginLeft: "0.625em" }} class="max-sm:hidden">
                   <Select
                     value={props.preferedLanguage}
                     style={{ width: 120 }}
