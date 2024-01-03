@@ -1,14 +1,23 @@
 import React, { Component, lazy, Suspense } from "react";
 import { Button, Tooltip } from "antd";
 import { StyledTabs } from "../../../Components/UI/Antd";
+import { PlusOutlined } from "@ant-design/icons";
 import { TabsWrapper } from "../../../Components/UI/Layout";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
+import {handleBOMdrawer,handleAddIndentModal,handleProcDispatchModal} from "../ProcurementAction";
 const ProcurementCard=lazy(()=>import("./ProcurementCard"));
 const ProcurementTCForm=lazy(()=>import("./ProcurementTCForm"));
 const ProcurementIndentCard=lazy(()=>import("./ProcurementIndentCard"));
 const ProcurementQuotationCard=lazy(()=>import("./ProcurementQuotationCard"));
 const ProcurementPurchaseCard=lazy(()=>import("./ProcurementPurchaseCard"));
+const ProcurementPiCard=lazy(()=>import("./ProcurementPiCard"));
+const ProcurementCiCard=lazy(()=>import("./ProcurementCiCard"));
+const ProcurementDispatchCard=lazy(()=>import("./ProcurementDispatchCard"));
+const ProcurementStockCard=lazy(()=>import("./ProcurementStockCard"));
+const BOMdrawerForm =lazy(()=>import("./BOMdrawerForm"));
+const AddIndentDrawer =lazy(()=>import("./AddIndentDrawer"));
+const DispatchProcDrawer =lazy(()=>import("./DispatchProcDrawer"));
 
 const TabPane = StyledTabs.TabPane;
 
@@ -33,18 +42,29 @@ class ProcurementTab extends Component {
                     
                  BOM
                   </span>
-                  {/* {activeKey === "1" && (
-                    <>
-                      <ActionIcon
-                        // type="plus"
-                        tooltipTitle="Add"
-                        size="1em"
-                        // style={{ marginLeft: 10, verticalAlign: "center" }}
-                      />
-                    </>
-                  )} */}
-                </>
-              }
+                  {activeKey === "1" && (
+                      <>
+                        
+                          <Tooltip title="Add BOM">
+                            <PlusOutlined
+                              type="plus"
+                              tooltipTitle="Create"
+                              onClick={() => {
+                                this.props.handleBOMdrawer(true);
+                              }}
+                              size="14px"
+                              style={{
+                                verticalAlign: "center",
+                                marginLeft: "5px",
+                              }}
+                            />
+                          </Tooltip>
+                        &nbsp;
+
+                      </>
+                    )}
+                  </>
+                }
               key="1"
             >
               <Suspense fallback={"Loading ..."}>
@@ -74,8 +94,31 @@ class ProcurementTab extends Component {
                 <>
                   <span>
                     
-                  Indent
-                  </span>
+                    Indent
+                    </span>
+                 {activeKey === "3" && (
+                      <>
+                        
+                          <Tooltip title="Add Indent">
+                            <PlusOutlined
+                              type="plus"
+                              tooltipTitle="Create"
+                              onClick={() => {
+                                this.props.handleAddIndentModal(true);
+                              }}
+                              size="14px"
+                              style={{
+                                verticalAlign: "center",
+                                marginLeft: "5px",
+                              }}
+                            />
+                          </Tooltip>
+                        &nbsp;
+
+                      </>
+                    )}
+                
+                
                 
                 </>
               }
@@ -121,7 +164,23 @@ class ProcurementTab extends Component {
                <ProcurementPurchaseCard/>
               </Suspense>
             </TabPane>
-         
+            <TabPane
+              tab={
+                <>
+                  <span>
+                    
+                 PI
+                  </span>
+                
+                </>
+              }
+              key="6"
+            >
+              <Suspense fallback={"Loading ..."}>
+                {" "}
+               <ProcurementPiCard/>
+              </Suspense>
+            </TabPane>
                  <TabPane
               tab={
                 <>
@@ -132,28 +191,11 @@ class ProcurementTab extends Component {
                 
                 </>
               }
-              key="6"
-            >
-              <Suspense fallback={"Loading ..."}>
-                {" "}
-               CIk
-              </Suspense>
-            </TabPane>
-                 <TabPane
-              tab={
-                <>
-                  <span>
-                    
-               Dispatch
-                  </span>
-                
-                </>
-              }
               key="7"
             >
               <Suspense fallback={"Loading ..."}>
                 {" "}
-               Dispatch
+                <ProcurementCiCard/>
               </Suspense>
             </TabPane>
                  <TabPane
@@ -161,32 +203,85 @@ class ProcurementTab extends Component {
                 <>
                   <span>
                     
-               Stock
+               Dispatch
                   </span>
-                
+                  {activeKey === "8" && (
+                      <>
+                        
+                          <Tooltip title="Create Dispatch">
+                            <PlusOutlined
+                              type="plus"
+                              tooltipTitle="Create"
+                              onClick={() => {
+                                this.props.handleProcDispatchModal(true);
+                              }}
+                              size="14px"
+                              style={{
+                                verticalAlign: "center",
+                                marginLeft: "5px",
+                              }}
+                            />
+                          </Tooltip>
+                        &nbsp;
+
+                      </>
+                    )}
                 </>
               }
               key="8"
             >
               <Suspense fallback={"Loading ..."}>
                 {" "}
+                <ProcurementDispatchCard/>
+              </Suspense>
+            </TabPane>
+                 <TabPane
+              tab={
+                <>
+                  <span>
+                    
                Stock
+                  </span>
+                
+                </>
+              }
+              key="9"
+            >
+              <Suspense fallback={"Loading ..."}>
+                {" "}
+                <ProcurementStockCard/>
               </Suspense>
             </TabPane>
           </StyledTabs>
         </TabsWrapper>
       
+      <BOMdrawerForm
+      handleBOMdrawer={this.props.handleBOMdrawer}
+      addBOMdrawer={this.props.addBOMdrawer}
+      />
+      <AddIndentDrawer
+      handleAddIndentModal={this.props.handleAddIndentModal}
+      addIndentModal={this.props.addIndentModal}
+      />
+          <DispatchProcDrawer
+          dispatchProcModal={this.props.dispatchProcModal}
+          handleProcDispatchModal={this.props.handleProcDispatchModal}/>
       </>
     );
   }
 }
-const mapStateToProps = ({ leave }) => ({
+const mapStateToProps = ({ procurement }) => ({
+  addBOMdrawer:procurement.addBOMdrawer,
+  addIndentModal:procurement.addIndentModal,
+  dispatchProcModal:procurement.dispatchProcModal
 
 });
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
-    
+      handleBOMdrawer,
+      handleAddIndentModal,
+      handleProcDispatchModal,
     },
     dispatch
   );

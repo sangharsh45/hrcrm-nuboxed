@@ -1,74 +1,67 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState,lazy } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import {  Tooltip,  } from "antd";
-import {
-    StyledTable,  
-} from "../../../Components/UI/Antd";
-
-import { EditOutlined, FileWordFilled, HistoryOutlined, SearchOutlined } from "@ant-design/icons";
-
 import moment from "moment";
+import DeleteIcon from "@mui/icons-material/Delete";
+import { Tooltip, Avatar } from "antd";
+import NoteAltIcon from "@mui/icons-material/NoteAlt";
+import InfiniteScroll from "react-infinite-scroll-component";
+import { OnlyWrapCard } from '../../../Components/UI/Layout'
 
-import { MultiAvatar, Select, } from "../../../Components/UI/Elements";
+import { MultiAvatar2 } from "../../../Components/UI/Elements";
+import { FormattedMessage } from "react-intl";
 
-import { base_url } from "../../../Config/Auth";
-import { CurrencySymbol } from "../../../Components/Common";
-import { OnlyWrapCard } from "../../../Components/UI/Layout";
+function ProcurementDispatchCard(props) {
+  const [page, setPage] = useState(0);
+  const [hasMore, setHasMore] = useState(true);
 
-const { Option } = Select;
-
-function ProcurementIndentCard(props) {
-
-    useEffect(() => {
-       
-    }, [])
-   
-
-    // const serviceOption = props.services
-    //     .sort(function (a, b) {
-    //         var nameA = a.serviceName.toUpperCase(); // ignore upper and lowercase
-    //         var nameB = b.serviceName.toUpperCase(); // ignore upper and lowercase
-    //         if (nameA < nameB) {
-    //             return -1;
-    //         }
-    //         if (nameA > nameB) {
-    //             return 1;
-    //         }
-    //         // names must be equal
-    //         return 0;
-    //     })
-    //     .map((item) => {
-    //         return {
-    //             text: item.serviceName,
-    //             value: item.serviceName,
-    //         };
-    //     });
-
-    const [show, setshow] = useState(false);
-    const [particularRowData, setParticularRowData] = useState({});
-    const [currentIndentId, setCurrentIndentId] = useState("");
-    const [searchText, setSearchText] = useState("");
-    const [searchedColumn, setSearchedColumn] = useState("");
+  useEffect(() => {
+  }, []);
 
 
 
 
+//   const handleLoadMore = () => {
+//     const callPageMapd = props.callListRangeByUserId && props.callListRangeByUserId.length &&props.callListRangeByUserId[0].pageCount
+//     setTimeout(() => {
+//       const {
+//         getCallListRangeByUserId,
+//         userDetails: { employeeId },
+//       } = props;
+//       if  (props.callListRangeByUserId)
+//       {
+//         if (page < callPageMapd) {
+//           setPage(page + 1);
+//         getCallListRangeByUserId(employeeId, page);
+//         props.getEmployeelist();
+//       }
+//       if (page === callPageMapd){
+//         setHasMore(false)
+//       }
+//     }
+//     }, 100);
+//   };
+
+//   function handleSetCallNameId(item) {
+//     setCurrentNameId(item);
+//   }
 
 
-    return (
-        <>
-           
-           <div className=' flex justify-end sticky top-28 z-auto'>
+  const {
+
+  } = props;
+
+
+  return (
+    <>
+       <div className=' flex justify-end sticky top-28 z-auto'>
        <OnlyWrapCard style={{backgroundColor:"#E3E8EE"}}>
        <div className=" flex justify-between w-[99%] p-2 bg-transparent font-bold sticky top-0 z-10">
-       <div className=" md:w-[8.1rem]">Indent #</div>
-        <div className=" md:w-[6.1rem]">Services</div>
-        <div className=" md:w-[4.2rem] ">Supply</div>
-        <div className="md:w-[5.8rem]">Installation</div>
+       <div className=" md:w-[8.1rem]">Dispatch #</div>
+        <div className=" md:w-[6.1rem]">Order #</div>
+        <div className=" md:w-[4.2rem] ">BOQ/Project</div>
+        <div className="md:w-[5.8rem]">Customer</div>
         <div className="md:w-[8.5rem]">Created By</div>
-        <div className="md:w-[8.5rem]">Send for approval</div>
-        <div className="md:w-[8.5rem]">Approved By</div>
         <div className="w-12"></div>
       </div>
       {/* <InfiniteScroll
@@ -141,29 +134,33 @@ function ProcurementIndentCard(props) {
       </InfiniteScroll> */}
       </OnlyWrapCard>
       </div>
+    </>
+  );
+}
+const mapStateToProps = ({ auth, call, employee }) => ({
 
-                   
-    
-            
-        </>
-    );
+});
+const mapDispatchToProps = (dispatch) =>
+  bindActionCreators(
+    {
+      
+    },
+    dispatch
+  );
+
+  export default connect(mapStateToProps, mapDispatchToProps)(ProcurementDispatchCard);
+
+function NoDataComponent(props) {
+  const { description, onClick, buttonText } = props;
+  return (
+    <div>
+      <div class=" flex justify-center items-center flex-col">
+        <p>{description || "We couldn't find relevant data"}</p>
+      </div>
+    </div>
+  );
 }
 
 
 
-
-
-const mapStateToProps = ({ order, service, auth, user }) => ({
-
-});
-
-const mapDispatchToProps = (dispatch) =>
-    bindActionCreators(
-        {
-
-        },
-        dispatch
-    );
-
-export default connect(mapStateToProps, mapDispatchToProps)(ProcurementIndentCard);
 

@@ -7,7 +7,7 @@ import { Tooltip, Avatar } from "antd";
 import NoteAltIcon from "@mui/icons-material/NoteAlt";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { OnlyWrapCard } from '../../../Components/UI/Layout'
-
+import {} from "../ProcurementAction";
 import { MultiAvatar2 } from "../../../Components/UI/Elements";
 import { FormattedMessage } from "react-intl";
 
@@ -57,10 +57,7 @@ function ProcurementCard(props) {
        <div className=' flex justify-end sticky top-28 z-auto'>
        <OnlyWrapCard style={{backgroundColor:"#E3E8EE"}}>
        <div className=" flex justify-between w-[99%] p-2 bg-transparent font-bold sticky top-0 z-10">
-        <div className=" md:w-[7.1rem]"><FormattedMessage
-                  id="app.prioritycircle"
-                  defaultMessage="Priority Circle"
-                /></div>
+        <div className=" md:w-[7.1rem]"></div>
         <div className=" md:w-[10.1rem]"><FormattedMessage
                   id="app.orderno"
                   defaultMessage="Order No"
@@ -75,7 +72,15 @@ function ProcurementCard(props) {
                 /></div>
         <div className="md:w-[6.2rem]"><FormattedMessage
                   id="app.hsn"
-                  defaultMessage="Hsn"
+                  defaultMessage="HSN"
+                /></div>
+                  <div className="md:w-[6.2rem]"><FormattedMessage
+                  id="app.type"
+                  defaultMessage="Type"
+                /></div>
+                   <div className="md:w-[6.2rem]"><FormattedMessage
+                  id="app.no"
+                  defaultMessage="No #"
                 /></div>
         <div className="w-12"></div>
       </div>
