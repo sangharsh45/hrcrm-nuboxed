@@ -13,8 +13,6 @@ import { SelectComponent } from "../../../Components/Forms/Formik/SelectComponen
 import { addContact, addLinkContactByOpportunityId } from "../ContactAction";
 import Upload from "../../../Components/Forms/Formik/Upload";
 import { TextareaComponent } from "../../../Components/Forms/Formik/TextareaComponent";
-import { getDesignations } from "../../Settings/Designation/DesignationAction";
-import { getDepartments } from "../../Settings/Department/DepartmentAction";
 import { getCustomerData } from "../../Customer/CustomerAction";
 const { Option } = Select;
 /**
@@ -650,9 +648,7 @@ const mapDispatchToProps = (dispatch) =>
       // getContactById,
       addLinkContactByOpportunityId,
       // getCurrency,
-      getDesignations,
       getCustomerData,
-      getDepartments,
     },
     dispatch
   );
