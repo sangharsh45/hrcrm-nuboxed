@@ -499,7 +499,7 @@ export const handleUpdateOrganizationModal = (modalProps) => (dispatch) => {
   });
   axios
     .put(
-      `${base_url}/organization`,
+      `${base_url}/organization/update/${orgId}`,
       { ...data },
       {
         headers: {
@@ -509,7 +509,7 @@ export const handleUpdateOrganizationModal = (modalProps) => (dispatch) => {
     )
     .then((res) => {
       console.log(res);
-      dispatch(updateOrganizationDetails(orgId));
+       dispatch(getOrganizationDetails());
       dispatch({
         type: types.UPDATE_ORGANIZATION_DETAILS_SUCCESS,
         payload: res.data,

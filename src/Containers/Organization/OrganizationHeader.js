@@ -20,6 +20,7 @@ class OrganizationHeader extends Component {
           leftComponent={
             <OrganizationActionLeft
             viewType={viewType}
+            handleOnClick={this.props.handleOnClick}
             // handleChange={handleChange}
             setOrganizationViewType={setOrganizationViewType}
 

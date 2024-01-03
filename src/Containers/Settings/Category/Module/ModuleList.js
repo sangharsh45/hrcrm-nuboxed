@@ -1,6 +1,13 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { FormattedMessage } from "react-intl";
+import CRMStatusToggle from "../../Department/CRMStatusToggle";
+import ViewEditCard from "../../../../Components/UI/Elements/ViewEditCard";
+import styled from "styled-components";
+import { FlexContainer } from "../../../../Components/UI/Layout";
+import IMStatusToggle from "../../Department/IMStatusToggle";
+import AccountingStatusToggle from "../../Department/AccountingStatusToggle";
+import RecruitProStatusToggle from "../../Department/RecruitProStatusToggle";
+import HrStatusToggle from "../../Department/HrStatusToggle";
 import { bindActionCreators } from "redux";
 import { Button,Input } from "antd";
 import { BundleLoader } from "../../../../Components/Placeholder";
@@ -45,93 +52,15 @@ class ModuleList extends Component {
       console.error("Input is empty. Please provide a value.");
     }
   };
-  handleClear = () => {
-    this.setState({ currentData: "" });
-    // this.props.getDepartments();
-  };
+
   setCurrentData = (value) => {
     this.setState({ currentData: value });
   };
 
-  handleSearchChange = (e) => {
-    // console.log(e.target.value)
-    // this.setState({ text: e.target.value });
-    this.setState({ currentData: e.target.value })
-   
-  };
-
-  toggleInput = () =>
-    this.setState((prevState) => ({
-      isTextInputOpen: !prevState.isTextInputOpen,
-    }));
-  handleChange = ({ target: { name, value } }) =>
-    this.setState({ [name]: value });
-
-  handleSectorId = (value) =>
-    this.setState({ sectorId: value });
-
-  handleAddDepartment = () => {
-    const { addDepartments, departments } = this.props;
-    const { departmentName, addingDepartments, isTextInputOpen, sectorId, editInd } = this.state;
-    let department = { departmentName, sectorId, editInd };
-
-    let exist =
-      departments &&
-      departments.some((element) => element.departmentName == departmentName);
-
-    // if (exist) {
-    //   message.error(
-    //     "Can't create as another departmentName exists with same name!"
-    //   );
-    // } else {
-    //   addDepartments(department, () => console.log("add department callback"));
-    // }
-
-    this.setState({
-      departmentName: "",
-      singleDepartment: "",
-      sectorId: "",
-      sectorName: "",
-      isTextInputOpen: false,
-      editInd: true,
-    });
-  };
-  handleDeleteDepartment = (departmentId={departmentId}) => {
-    // this.props.removeDepartments(departmentId);
-    this.setState({ departmentName: "", singleDepartment: "" });
-  };
-  handleUpdateDepartment = (departmentId, departmentName, sectorId, sectorName, editInd, cb) => {
-    // this.props.updateDepartments(departmentId, departmentName, sectorId, sectorName, editInd = true, cb);
-    this.setState({ departmentName: "", singleDepartment: "", sectorId: "", sectorName: "", editInd: true });
-  };
-  // getLinkedDocuments = () => {
-  //   axios
-  //     .get(`${base_url}/opportunity/source/linkedSources`, {
-  //       headers: {
-  //         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
-  //       },
-  //     })
-  //     .then((res) => {
-  //       console.log(res);
-  //       this.setState({ linkedSources: res.data });
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // };
-
-//   componentDidMount() {
-//     const { getDepartments, getSectors } = this.props;
-//     console.log();
-//     getDepartments(getDepartments);
-//     getSectors();
-//   }
   render() {
     const {
       fetchingDepartments,
       fetchingDepartmentsError,
-      departments,
-      addingDepartments,
       updatingDepartments,
       values,
 
@@ -143,8 +72,7 @@ class ModuleList extends Component {
       linkedDepartments,
       sectorId
     } = this.state;
-    if (fetchingDepartments) return <BundleLoader/>;
-    if (fetchingDepartmentsError) return <p>Error ...</p>;
+  
 
     return (
       <>
@@ -152,7 +80,6 @@ class ModuleList extends Component {
           <MainWrapper
             style={{
               flexBasis: "100%",
-              // height: "30.625em",
               overflow: "auto",
               color: "#FFFAFA",
             }}
@@ -170,6 +97,99 @@ class ModuleList extends Component {
             <div class=" flex flex-col" >
               {/* <Title style={{ padding: 8 }}>Designation</Title> */}
               <MainWrapper style={{ height: "30em", marginTop: "0.625em" }}>
+              <DepartmentWrapper>
+        <ViewEditCard>
+          {({ viewType }, toggleViewType) =>
+            viewType === "view" ? (
+              <div class="flex" >
+                <div class="w-full flex-row">
+              <div class=" flex justify-between" >
+             
+                    <h1>CRM</h1>
+                    <div   class=" w-[7%] ml-2">
+                    <CRMStatusToggle
+                    //   crmInd={crmInd}
+                    //   departmentName={departmentName}
+                    //   departmentId={departmentId}
+                    />  
+                    </div>
+                    <h1>IM</h1>
+                    <div class=" w-[7%] ml-2">
+                    <IMStatusToggle
+                    //   imInd={imInd}
+                    //   departmentName={departmentName}
+                    //   departmentId={departmentId}
+                    />  
+                    </div>
+                    <h1>HR</h1>
+                    <div 
+                   class=" w-[8%] ml-2"
+                    >
+                    <HrStatusToggle
+                    //   hrInd={hrInd}
+                    //   departmentName={departmentName}
+                    //   departmentId={departmentId}
+                    />  
+                    </div>
+                    <h1>Accounting</h1>
+                    <div 
+                   class=" w-[8%] ml-2"
+                    >
+                    <AccountingStatusToggle
+                    //   accountInd={accountInd}
+                    //   departmentName={departmentName}
+                    //   departmentId={departmentId}
+                    />  
+                    </div>
+
+                    <h1>RecruitPro</h1>
+                    <div 
+                  class=" w-[8%] ml-2"
+                    >
+                    <RecruitProStatusToggle
+                    //   recruitOppsInd={recruitOppsInd}
+                    //   departmentName={departmentName}
+                    //   departmentId={departmentId}
+                    />  
+                    </div>
+                   
+                
+              </div>
+              </div>
+              <div>
+                
+              
+                 
+                </div> 
+              </div>
+              
+            ) : (
+                <FlexContainer>
+                  {/* <TextInput
+                    name={name}
+                    // value={value || departmentName}
+                    defaultValue={departmentName}
+                    onChange={handleChange}
+                    style={{ width: "60%" }}
+                  />
+                  <Select 
+              defaultValue={sectorName}
+               style={{width:"40%"}}
+               placeholder="Select Sectors"
+               onChange={this.handleSectorId}
+               >
+                            {this.props.sectors.map((item) => {
+                                return <Option value={item.sectorId}>{item.sectorName} </Option>;
+                            })}
+               </Select> */}
+                  <br />
+                  <br />
+              
+                </FlexContainer>
+              )
+          }
+        </ViewEditCard>
+      </DepartmentWrapper>
                 {/* {departments.length ? (
                   departments.map((department, i) => ( */}
                     <SingleModuleList
@@ -198,31 +218,7 @@ class ModuleList extends Component {
             </div>
            
           </MainWrapper>
-          {/* <MainWrapper>
-            <FlexContainer
-              style={{
-                border: "0.0625em solid #eee",
-                width: "100%",
-                padding: "1.6rem",
-                marginRight: 70,
-              }}
-            >
-              <p style={{ color: "#035b9b", fontSize: "1rem" }}>
-                Here is a list of sample sources, it will help attribute
-                opportunities to their sources thereby identifying the effective
-                channels and further allocating resources accordingly.
-              </p>
-              <p style={{ color: "#035b9b", fontSize: "1rem" }}>
-                Korero allows you to change the sources as per your
-                organization's requirements.
-              </p>
-              <p style={{ color: "#035b9b", fontSize: "1rem" }}>
-                The only exception is if an opportunity is associated with a
-                source then it cannot be deleted from the list till no
-                opportunity exists in that source.
-              </p>
-            </FlexContainer>
-          </MainWrapper> */}
+         
         </div>
         <h4>Updated on {moment(this.props.departments && this.props.departments.length && this.props.departments[0].updationDate).format("ll")} by {this.props.departments && this.props.departments.length && this.props.departments[0].name}</h4>
       </>
@@ -231,17 +227,7 @@ class ModuleList extends Component {
 }
 
 const mapStateToProps = ({ departments, sector }) => ({
-  addingDepartments: departments.addingDepartments,
-  addingDepartmentsError: departments.addingDepartmentsError,
-  departments: departments.departments,
 
-  // removingDepartments: departments.removingDepartments,
-  // removingDepartmentsError: departments.removingDepartmentsError,
-  updatinDepartments: departments.updatingDepartments,
-  updatingDepartmentsError: departments.updatingDepartmentsError,
-  fetchingDepartments: departments.fetchingDepartments,
-  fetchingDepartmentsError: departments.fetchingDepartmentsError,
-  sectors: sector.sectors,
 });
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
@@ -251,3 +237,15 @@ const mapDispatchToProps = (dispatch) =>
     dispatch
   );
 export default connect(mapStateToProps, mapDispatchToProps)(ModuleList);
+const DepartmentWrapper = styled.div`
+  width: 100%;
+  cursor: pointer;
+`;
+const DepartmentName = styled.h3`
+  color: ${(props) => props.theme.color || "teal"};
+  font-weight: 600;
+`;
+const DepartmentValue = styled.h3`
+  color: #999;
+  font-size: 1.3rem;
+`;

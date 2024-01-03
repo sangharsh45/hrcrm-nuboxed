@@ -16,7 +16,7 @@ class OrganizationStatsEdit extends Component {
   }
   handleUpdate = () => {
     this.props.updateOrganizationDetails(
-      this.props.organisationFetching.organizationId,
+      this.props.organizationList.organizationId,
       this.state.fields,
       this.props.toggleViewType
     );
@@ -31,7 +31,7 @@ class OrganizationStatsEdit extends Component {
   };
   render() {
     const {
-      organisationFetching: {
+      organizationList: {
         organizationUrl,
 
         facebook,

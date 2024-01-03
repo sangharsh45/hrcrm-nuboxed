@@ -17,7 +17,7 @@ class OrganizationAboutEdit extends Component {
   }
   handleUpdate = () => {
     this.props.updateOrganizationDetails(
-      this.props.organization.organizationId,
+      this.props.organizationList.organizationId,
       this.state.fields,
       this.props.toggleViewType
     );
@@ -40,7 +40,7 @@ class OrganizationAboutEdit extends Component {
   };
   render() {
     const {
-      organizationDetails: { industryType,vat,fiscalStartDate,fiscalStartMonth, companySize, tradeCurrency },
+      organizationList: { industryType,vat,fiscalStartDate,fiscalStartMonth, companySize, tradeCurrency },
       toggleViewType,
       // updatingOrganizationDetails,
     } = this.props;

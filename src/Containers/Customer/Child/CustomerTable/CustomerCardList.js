@@ -145,13 +145,13 @@ const [rowdata, setrowdata] = useState("");
                         defaultMessage="Name"
                       />
                       </div>
-                      {/* <div className=" md:w-[5.1rem]">
+                      <div className=" md:w-[4.1rem]">
         <FormattedMessage
                         id="app.phone"
                         defaultMessage="Phone #"
                       />
           
-          </div> */}
+          </div>
         <div className=" md:w-[5.1rem]">
         <FormattedMessage
                         id="app.sector"
@@ -159,13 +159,13 @@ const [rowdata, setrowdata] = useState("");
                       />
           
           </div>
-          {/* <div className=" md:w-[5.1rem]">
+          <div className=" md:w-[5.1rem]">
         <FormattedMessage
                         id="app.source"
                         defaultMessage="Source"
                       />
           
-          </div> */}
+          </div>
         <div className=" md:w-[5.8rem] ">
         <FormattedMessage
                         id="app.country"
@@ -180,20 +180,20 @@ const [rowdata, setrowdata] = useState("");
                       />
 
           </div>
-        <div className="md:w-[7.8rem]">
+        <div className="md:w-[2.8rem]">
         <FormattedMessage
                         id="app.pipeline"
                         defaultMessage="Pipeline"
                       />
           
           </div>
-        <div className="md:w-[6.9rem]">
+        {/* <div className="md:w-[3.9rem]">
         <FormattedMessage
                         id="app.weighted"
                         defaultMessage="Weighted"
                       />
           
-          </div>
+          </div> */}
         <div className="md:w-[5.2rem]">
         <FormattedMessage
                         id="app.assignedTo"
@@ -287,14 +287,14 @@ const [rowdata, setrowdata] = useState("");
                       </div>
                     </div>
                                     </div> 
-                                    {/* <div className=" flex font-medium  items-center  md:w-24 max-sm:flex-row w-full max-sm:justify-between  ">
+                                    <div className=" flex font-medium  items-center  md:w-24 max-sm:flex-row w-full max-sm:justify-between  ">
                            
 
                            <h4 class=" text-xs text-cardBody font-poppins">   
                            {item.phoneNumber}
                            </h4>
                        
-                       </div> */}
+                       </div>
                                 <div className=" flex font-medium  items-center  md:w-24 max-sm:flex-row w-full max-sm:justify-between  ">
                            
                                     {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden"> Sector </h4> */}
@@ -304,14 +304,14 @@ const [rowdata, setrowdata] = useState("");
                                 
                                 </div> 
 
-                                {/* <div className=" flex font-medium  items-center  md:w-24 max-sm:flex-row w-full max-sm:justify-between  ">
+                                <div className=" flex font-medium  items-center  md:w-24 max-sm:flex-row w-full max-sm:justify-between  ">
                            
                          
                            <h4 class=" text-xs text-cardBody font-poppins">   
                            {item.source}
                            </h4>
                        
-                       </div>  */}
+                       </div> 
                                 <div className=" flex font-medium flex-col justify-center md:w-28 max-sm:flex-row w-full max-sm:justify-between ">
                                   
 
@@ -330,8 +330,9 @@ const [rowdata, setrowdata] = useState("");
                                     </h4>
                                 </div>
                                 </div>
-                                <div className=" flex font-medium flex-col md:w-full max-sm:flex-row w-full max-sm:justify-between ">
-                                    {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden"># Opportunity</h4> */}
+                             
+                                <div className=" flex font-medium flex-col md:w-[4rem] max-sm:flex-row w-full max-sm:justify-between ">
+                                    {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden">Pipeline Value</h4> */}
 
                                     <div class=" text-xs text-cardBody font-poppins text-center">
                                     {item.oppNo}
@@ -346,15 +347,15 @@ const [rowdata, setrowdata] = useState("");
 
                                     </div>
                                 </div>
-                                <div className=" flex font-medium flex-col md:w-96 max-sm:flex-row w-full max-sm:justify-between ">
-                                    {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden">Weighted Value</h4> */}
+                                {/* <div className=" flex font-medium flex-col md:w-96 max-sm:flex-row w-full max-sm:justify-between ">
+                                
 
                                     <div class=" text-xs text-cardBody font-poppins text-center">
                                     {item.weight}
 
                                     </div>
-                                </div>
-                                <div className=" flex font-medium items-center  flex-col md:w-72 max-sm:max-sm:flex-row w-full max-sm:justify-between ">
+                                </div> */}
+                                <div className=" flex font-medium items-center  flex-col md:w-[3rem] max-sm:max-sm:flex-row w-full max-sm:justify-between ">
                                     {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden">Assigned to</h4> */}
 
                                     <div class=" text-xs text-cardBody font-poppins">

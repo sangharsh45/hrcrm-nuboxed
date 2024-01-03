@@ -287,6 +287,11 @@ export const authReducer = (state = initialState, action) => {
       return {
         ...state,
         updatingOrganizationDetails: false,
+      //   organizationDetails: state.organizationDetails.map((org) =>
+      //   org.organizationId === action.payload.organizationId
+      //     ? action.payload
+      //     : org
+      // ),
         organizationDetails: action.payload,
         userDetails: {
           ...state.userDetails,

@@ -13,13 +13,23 @@ class OrganizationDetailLeft extends Component {
     console.log(organizationDetails);
     return (
       <div class=" flex flex-col block">
-        <OrganizationOverviewCard organization={organizationDetails} />
+        <OrganizationOverviewCard
+         organizationList={this.props.organizationList} 
+         organization={organizationDetails} />
         {/* <OrganizationTopicOfIntrest organizationDetails={organizationDetails} /> */}
-        <OrganizationAboutCard organization={organizationDetails} />
-        <OrganizationStatsCard organization={organizationDetails} />
-        <OrganizationAddress organization={organizationDetails} />
+        <OrganizationAboutCard
+           organizationList={this.props.organizationList} 
+        organization={organizationDetails} />
+        <OrganizationStatsCard 
+           organizationList={this.props.organizationList} 
+        organization={organizationDetails} />
+        <OrganizationAddress
+           organizationList={this.props.organizationList} 
+         organization={organizationDetails} />
         {/* <OrgannizationTermsCard organizationDetails={organizationDetails} /> */}
-        <OrganizationDetailMap organization={organizationDetails} />
+        <OrganizationDetailMap 
+           organizationList={this.props.organizationList} 
+        organization={organizationDetails} />
       </div>
     );
   }

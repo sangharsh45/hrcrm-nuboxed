@@ -22,7 +22,7 @@ class OrganizationActionLeft extends Component {
       <>
    
 
-      <OrganizationHeaderTab/>
+      <OrganizationHeaderTab     handleOnClick={this.props.handleOnClick}/>
  
   
  

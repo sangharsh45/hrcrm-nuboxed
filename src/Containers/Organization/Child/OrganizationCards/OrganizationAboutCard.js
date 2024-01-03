@@ -12,11 +12,13 @@ class OrganizationAboutCard extends Component {
           {({ viewType }, toggleViewType) =>
             viewType === "view" ? (
               <OrganizationAboutView
+              organizationList={this.props.organizationList} 
                 organization={organization}
                 toggleViewType={toggleViewType}
               />
             ) : (
               <OrganizationAboutEdit
+              organizationList={this.props.organizationList} 
                 organization={organization}
                 toggleViewType={toggleViewType}
               />

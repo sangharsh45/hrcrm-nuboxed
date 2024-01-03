@@ -63,13 +63,8 @@ return (
               tab={
                 <>
                   <span class=" mt-4">
-                    {/* <LightbulbIcon  style={{fontSize:"1.1rem"}}/> */}
-                    <span class=" ml-1">
+                    <span onClick={() => this.props.handleOnClick(item)} class=" ml-1">
                       {item.organizationName}
-                      {/* <FormattedMessage
-                        id="app.Infosys"
-                        defaultMessage="Infosys"
-                      /> */}
                     </span>
                   </span>
              

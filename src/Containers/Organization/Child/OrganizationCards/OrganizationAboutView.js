@@ -7,7 +7,7 @@ import BorderColorIcon from '@mui/icons-material/Edit';
 class OrganizationAboutView extends Component {
   render() {
     const {
-      organization: { industryType,vat,fiscalStartDate,fiscalStartMonth, tradeCurrency, companySize },
+      organizationList: { industryType,vat,fiscalStartDate,fiscalStartMonth, tradeCurrency, companySize },
       toggleViewType,
     } = this.props;
     // console.log(highestLevel);

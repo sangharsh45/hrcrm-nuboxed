@@ -7,7 +7,7 @@ import BorderColorIcon from '@mui/icons-material/BorderColor';
 class OrganizationOverviewView extends Component {
   render() {
     const {
-      organization: { organizationName, imageId, imageURL },
+      organizationList: { organizationName, imageId, imageURL },
       toggleViewType,
     } = this.props;
     return (
