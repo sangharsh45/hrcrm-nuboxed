@@ -30,7 +30,7 @@ const base_url2 = "https://develop.tekorero.com/NuboxedErp";
 // const login_url = "https://hrnubox.tekorero.com";
 // const base_url2 = "https://erp.tekorero.com";
 
-const asses_url = "http://develop.tekorero.com/Assessment-0.0.1-SNAPSHOT";
+const asses_url = "https://develop.tekorero.com/Assessment-0.0.1-SNAPSHOT";
 
 //HrPilot/InnoverenIt
 // const login_url = "https://develop.tekorero.com/hrPilot";

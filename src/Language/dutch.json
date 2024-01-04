@@ -245,7 +245,7 @@
   "app.sort": "Soort",
   "app.searchByNameOrSector": "Zoek op naam of sector",
   "app.dashboardview": "Dashboard weergave",
-  "app.level": "Level",
+  "app.level": "Niveau",
   "app.entrylevelis": "Instap niveau id",
   "app.registered": "Geregistreerd",
   "app.awaitingregistration": "Afwachting registratie",
@@ -664,6 +664,11 @@
   "app.searchbyname":"Zoek op naam",
   "app.clickordragfiletothisareatoupload":"Klik of sleep het bestand naar dit gebied om het te uploaden",
   "app.portalacess":"Portaaltoegang",
-  "app.procurement":"Inkoop"
+  "app.procurement":"Inkoop",
+  "app.creationdate":"Aanmaakdatum",
+  "app.assessment":"Onderzoek",
+  "app.course":"Cursus",
+  "app.program":"Programma"
+
 
 }

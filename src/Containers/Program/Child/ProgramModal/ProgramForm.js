@@ -144,7 +144,7 @@ function ProgramForm(props) {
                             label={
                               <FormattedMessage
                                 id="app.duration"
-                                defaultMessage="Duration(months)"
+                                defaultMessage="Duration(Unit)"
                               />
                             }
                             options={["Hours", "Days", "Month","Years"]}
