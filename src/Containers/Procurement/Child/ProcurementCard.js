@@ -7,7 +7,7 @@ import { Tooltip, Avatar } from "antd";
 import NoteAltIcon from "@mui/icons-material/NoteAlt";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { OnlyWrapCard } from '../../../Components/UI/Layout'
-import {} from "../ProcurementAction";
+import {getBOM} from "../ProcurementAction";
 import { MultiAvatar2 } from "../../../Components/UI/Elements";
 import { FormattedMessage } from "react-intl";
 
@@ -16,6 +16,7 @@ function ProcurementCard(props) {
   const [hasMore, setHasMore] = useState(true);
 
   useEffect(() => {
+    props.getBOM(page)
   }, []);
 
 
@@ -157,13 +158,13 @@ function ProcurementCard(props) {
     </>
   );
 }
-const mapStateToProps = ({ auth, call, employee }) => ({
-
+const mapStateToProps = ({procurement}) => ({
+  BOMs:procurement.BOMs
 });
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
-      
+      getBOM
     },
     dispatch
   );

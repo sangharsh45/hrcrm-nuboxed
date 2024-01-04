@@ -16,7 +16,7 @@ export const AddBOM = (bom) => (dispatch) => {
       type: types.ADD_BOM_REQUEST,
     });  
     axios
-      .post(`${base_url}/bomm`, bom, {
+      .post(`${base_url}/bom`, bom, {
         headers: {
           Authorization: "Bearer " + sessionStorage.getItem("token") || "",
         },
@@ -35,13 +35,13 @@ export const AddBOM = (bom) => (dispatch) => {
         });
       });
   };
-  export const getBOM = (filter) => (dispatch) => {
+  export const getBOM = (pageNo) => (dispatch) => {
     dispatch({
       type: types.GET_BOM_REQUEST,
     });
   
     axios
-    .get(`${base_url}/GETBOMM/${filter}`, {
+    .get(`${base_url}/bom/${pageNo}`, {
         headers: {
           Authorization: "Bearer " + sessionStorage.getItem("token") || "",
         },

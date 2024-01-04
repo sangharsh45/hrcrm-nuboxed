@@ -5,6 +5,9 @@ import DynamicFeedIcon from '@mui/icons-material/DynamicFeed';
 import GroupsIcon from '@mui/icons-material/Groups';
 import InventoryIcon from '@mui/icons-material/Inventory';
 import { Menu, Icon, Popover, Badge } from "antd";
+import ComputerIcon from '@mui/icons-material/Computer';
+import NewspaperIcon from '@mui/icons-material/Newspaper';
+import LibraryBooksIcon from '@mui/icons-material/LibraryBooks';
 import { FormattedMessage } from "react-intl";
 import LocalShippingIcon from '@mui/icons-material/LocalShipping';
 import { translateText, getSupportedLanguages } from '../Translate/TranslateService';
@@ -564,38 +567,44 @@ function NavMenu(props) {
         <hr />
         {/* Accessment */}
 
-        {/* {user.department === "Management" && (
-            <Menu.Item key="/accessment" style={{height:"27px"}}>
+        {user.recruitOppsInd === true && (
+            <Menu.Item key="/accessment" style={{ height: "27px", paddingLeft: "1rem" }}>
               <Link to="/Accessment">
                 <ComputerIcon
 
                     style={{ fontSize: "large" }}
                 />
                  <span class="text-white text-ls ml-3">
-            
-                  {translatedMenuItems[19]}
+                 <FormattedMessage
+                id="app.assessment"
+                defaultMessage="Assessment"
+              />
+                 
                 </span>
               </Link>
             </Menu.Item>
-          )} */}
+          )}
 
-        {/* {user.department === "Management" && (
-            <Menu.Item key="/course" style={{height:"27px"}}>
+        {user.recruitOppsInd === true && (
+            <Menu.Item key="/course" style={{ height: "27px", paddingLeft: "1rem" }}>
               <Link to="/Course">
                 <NewspaperIcon
 
                   style={{ fontSize: "large" }}
                 />
                <span class="text-white text-ls ml-3">
-               
-                  {translatedMenuItems[20]}
+               <FormattedMessage
+                id="app.course"
+                defaultMessage="Course"
+              />
+                
                 </span>
               </Link>
             </Menu.Item>
-          )} */}
+          )}
         {/* Program */}
-        {/* {user.department === "Management" && (
-            <Menu.Item key="/program" style={{height:"27px"}}>
+        {user.recruitOppsInd === true && (
+            <Menu.Item key="/program" style={{ height: "27px", paddingLeft: "1rem" }}>
               <Link to="/Program">
                 <LibraryBooksIcon
 
@@ -603,12 +612,14 @@ function NavMenu(props) {
                 />
                 <span class="text-white text-ls ml-3">
               
-               
-                  {translatedMenuItems[21]}
+                <FormattedMessage
+                id="app.program"
+                defaultMessage="Program"
+              />
                 </span>
               </Link>
             </Menu.Item>
-          )} */}
+          )}
 
         <hr />
 
