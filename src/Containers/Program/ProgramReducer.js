@@ -19,7 +19,7 @@ const initialState = {
 
     fetchingProgramDetailsById: false,
     fetchingProgramDetailsByIdError: false,
-  program: {},
+    program: [],
 
   
    
@@ -34,8 +34,8 @@ export const programsReducer = (state = initialState, action) => {
             return {
               ...state,
               addingPrograms: false,
-              programs: [...state.programs, action.payload],
-              
+              addProgramModal:false,
+              programs: [action.payload,...state.programs],
             };
           case types.ADD_PROGRAM_FAILURE:
             return {

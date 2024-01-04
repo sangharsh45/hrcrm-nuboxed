@@ -338,5 +338,9 @@
   "app.searchbyname":"Search By Name",
   "app.clickordragfiletothisareatoupload":"Click or drag file to this area to upload",
   "app.portalacess":"Portal Access",
-  "app.procurement":"Procurement"
+  "app.procurement":"Procurement",
+  "app.creationdate":"Creation Date",
+  "app.assessment":"Assessment",
+  "app.course":"Course",
+  "app.program":"Program"
 }

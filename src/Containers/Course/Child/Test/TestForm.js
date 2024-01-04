@@ -10,7 +10,7 @@ import { Formik, Form, Field, FastField } from "formik";
 import { SelectComponent } from "../../../../Components/Forms/Formik/SelectComponent";
 import { InputComponent } from "../../../../Components/Forms/Formik/InputComponent";
 
-// import { addCourse } from "../CourseAction";
+import { addCourse } from "../../CourseAction";
 import { TextareaComponent } from "../../../../Components/Forms/Formik/TextareaComponent";
 
 
@@ -38,14 +38,14 @@ function TestForm(props) {
           //  validationSchema={courseSchema}
           onSubmit={(values, { resetForm }) => {
             console.log(values);
-            // addCourse(
-            //   {
-            //     ...values,
+            props.addCourse(
+              {
+                ...values,
                 
-            //   },
-            //   // props.userId,
-            //   () => handleReset(resetForm)
-            // );
+              },
+              // props.userId,
+              resetForm()
+            );
           }}
         >
           {({
@@ -106,7 +106,7 @@ function TestForm(props) {
                             label={
                               <FormattedMessage
                                 id="app.duration"
-                                defaultMessage="Duration(months)"
+                                defaultMessage="Unit"
                               />
                             }
                             options={["Hours", "Days", "Month","Years"]}
@@ -144,7 +144,7 @@ function TestForm(props) {
                 <Button
                   type="primary"
                   htmlType="submit"
-                //   loading={addingCourse}
+                  loading={props.addingCourse}
                 >
                   <FormattedMessage id="app.create" defaultMessage="Create" />
                   {/*                     
@@ -160,14 +160,14 @@ function TestForm(props) {
 
 
 const mapStateToProps = ({ course }) => ({
-//   addingCourse: course.addingCourse,
-//   addingCourseError: course.addingCourseError,
+  addingCourse: course.addingCourse,
+  addingCourseError: course.addingCourseError,
 });
 
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
-    //   addCourse,
+      addCourse,
     },
     dispatch
   );
