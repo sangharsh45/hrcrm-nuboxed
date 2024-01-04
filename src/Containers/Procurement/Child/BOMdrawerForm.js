@@ -42,14 +42,13 @@ function BOMform(){
         <>
    <Formik
                 initialValues={{
-                    orderno: "",
+                    order: "",
                     userId: props.userId,
                     phone: "",
                     model: "",
                     hsn: "",
                     no: "",
                     type: "",
-
                 }}
                 
                 onSubmit={(values, { resetForm }) => {
@@ -125,7 +124,7 @@ function BOMform(){
                                       
                                         <div class= "w-[47%]">
                                             <Field
-                                                name="orderno"
+                                                name="order"
                                                 label="Order #"
                                                 width={"100%"}
                                                 isColumn
