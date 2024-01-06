@@ -19,8 +19,6 @@ class Accessment extends Component {
     this.setState({ currentData: value });
   };
   handleChange = (e) => {
-    // console.log(e.target.value)
-    // this.setState({ text: e.target.value });
     this.setState({ currentData: e.target.value })
    
   };

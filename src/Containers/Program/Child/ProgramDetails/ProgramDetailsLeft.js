@@ -1,4 +1,4 @@
-import React, { Component,lazy} from "react";
+import React, { Component,Suspense,lazy} from "react";
 import { FlexContainer } from "../../../../Components/UI/Layout";
 import ProgramOverViewCard from "../ProgramCards/ProgramOverViewCard";
 
@@ -7,12 +7,11 @@ class ProgramDetailsLeft extends Component {
     const { program } = this.props;
     return (
       <>
-        <FlexContainer flexDirection="column" style={{ display: "block" }}>
+        <div class="flex-col block">
+         <Suspense fallback={"Loading"}>
          <ProgramOverViewCard program={program} />
-         {/* <LeadsTopicOfInterest lead={lead} />
-           <LeadDetailCard lead={lead} />
-           <LeadsAddressCard lead={lead} /> */}
-        </FlexContainer>
+         </Suspense>
+    </div>
       </>
     );
   }

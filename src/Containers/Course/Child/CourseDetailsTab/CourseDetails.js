@@ -6,8 +6,8 @@ import { MainWrapper } from "../../../../Components/UI/Layout";
 import { withRouter } from "react-router";
 import { BundleLoader } from "../../../../Components/Placeholder";
 import CourseDetailsHeader from "./CourseDetailsHeader";
-import CourseDetailsLeft from "./CourseDetailsLeft";
-import CourseDetailsRight from "./CourseDetailsRight";
+const CourseDetailsLeft =lazy(()=>import("./CourseDetailsLeft"));
+const CourseDetailsRight =lazy(()=>import("./CourseDetailsRight"));
 
 class CourseDetails extends Component {
   componentDidMount() {
@@ -27,7 +27,7 @@ class CourseDetails extends Component {
           ) : 
           (
               <div>
-                <Suspense >
+                <Suspense fallback={"Loading"}>
                 <div class=" flex flex-nowrap w-full"
                 >
                     <div class=" w-1/4">

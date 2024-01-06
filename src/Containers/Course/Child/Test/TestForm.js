@@ -1,33 +1,18 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Button } from "antd";
-import SearchSelect from "../../../../Components/Forms/Formik/SearchSelect";
 import { FormattedMessage } from "react-intl";
-import { FlexContainer } from "../../../../Components/UI/Layout";
-import { MainWrapper, Spacer } from "../../../../Components/UI/Elements";
 import { Formik, Form, Field, FastField } from "formik";
 import { SelectComponent } from "../../../../Components/Forms/Formik/SelectComponent";
 import { InputComponent } from "../../../../Components/Forms/Formik/InputComponent";
-
 import { addCourse } from "../../CourseAction";
-import { TextareaComponent } from "../../../../Components/Forms/Formik/TextareaComponent";
 
 
 function TestForm(props) {
-//   useEffect(() => {}, []);
-//   function handleReset(resetForm) {
-//     resetForm();
-//   }
-//   const {
-//     addingCourse,
-//     addCourse,
-
-//   } = props;
     return (
       <>
         <Formik
-          // enableReinitialize
           initialValues={{
             courseId: props.courseId,
             duration:"",
@@ -35,7 +20,7 @@ function TestForm(props) {
         
   
           }}
-          //  validationSchema={courseSchema}
+    
           onSubmit={(values, { resetForm }) => {
             console.log(values);
             props.addCourse(
@@ -43,7 +28,7 @@ function TestForm(props) {
                 ...values,
                 
               },
-              // props.userId,
+        
               resetForm()
             );
           }}
@@ -58,33 +43,25 @@ function TestForm(props) {
             ...rest
           }) => (
             <Form className="form-background">
-            <div style={{ display: "flex", justifyContent: "space-between", height: "70vh", overflow: "scroll", paddingRight: "0.6em" }}>
+            <div class="flex justify-between h-[26rem] overflow-scroll pr-2" >
            
-                <div
-                  style={{
-                    width: "45%",
-                  }}
-                >
+                <div class="w-[45%]">
                   <Field
                      isRequired
                     name="testName"
                     type="text"
-                    //label="Name"
-                    label={
-                      <FormattedMessage id="app.name" defaultMessage="Name" />
-                    }
+                    label={<FormattedMessage id="app.name" defaultMessage="Name" />}
                     isColumn
                     width={"100%"}
                     component={InputComponent}
                     inlineLabel
                   />
-   <FlexContainer justifyContent="space-between">
-   <div style={{ width: "47%" }}>
+   <div class="flex justify-between">
+   <div class="w-[45%]">
                   <Field
-                     isRequired
+                    isRequired
                     name="duration"
                     type="text"
-                    //label="Name"
                     label={
                       <FormattedMessage
                         id="app.duration"
@@ -97,12 +74,10 @@ function TestForm(props) {
                     inlineLabel
                   />
 </div>
-<div style={{ width: "47%" }}>
+<div class="w-[45%]">
 <FastField
                             name="drtnType"
                             type="text"
-                            // placeholder="Mont"
-                            // label="Salutation"
                             label={
                               <FormattedMessage
                                 id="app.duration"
@@ -112,45 +87,26 @@ function TestForm(props) {
                             options={["Hours", "Days", "Month","Years"]}
                             component={SelectComponent}
                             inlineLabel
-                            // className="field"
                             isColumn
                           />
                           </div>
-                          </FlexContainer>
-              
-                         
+                          </div>                      
 </div>
-<div
-                  style={{
-                    width: "45%",
-                  }}
-                >
-                  {/* <Field
-                    name="description"
-                    label="Description"
-                    isColumn
-                    width={"100%"}
-                    component={TextareaComponent}
-                    inlineLabel
-                  /> */}
- </div>
   </div>
                
                
              
           
-              <Spacer />
-              <FlexContainer justifyContent="flex-end">
+            
+              <div class="flex justify-end mt-2">
                 <Button
                   type="primary"
                   htmlType="submit"
                   loading={props.addingCourse}
                 >
                   <FormattedMessage id="app.create" defaultMessage="Create" />
-                  {/*                     
-                    Create */}
                 </Button>
-              </FlexContainer>
+              </div>
             </Form>
           )}
         </Formik>

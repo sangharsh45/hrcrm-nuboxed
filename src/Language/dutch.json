@@ -668,7 +668,8 @@
   "app.creationdate":"Aanmaakdatum",
   "app.assessment":"Onderzoek",
   "app.course":"Cursus",
-  "app.program":"Programma"
-
+  "app.program":"Programma",
+  "app.readless":"Lees minder",
+  "app.readmore":"Lees verder"
 
 }

@@ -33,7 +33,7 @@ function CourseTable(props) {
 
   return (
     <>
-        <div className=' flex justify-end sticky top-28 z-auto'>
+        <div className='flex justify-end sticky top-28 z-auto'>
          <OnlyWrapCard style={{backgroundColor:"#E3E8EE",height:"75vh"}}>
          <div className=" flex justify-between w-[99%] px-2 bg-transparent font-bold sticky top-0 z-10">
          <div className=""></div>
@@ -97,9 +97,13 @@ function CourseTable(props) {
                     : `${content && content.slice(0, 7)}...`}
                 </p>
                 {isExpanded ? (
-                  <button onClick={handleCollapseClick}>Read Less</button>
+                  <button onClick={handleCollapseClick}>
+                    <FormattedMessage id="app.readless" defaultMessage="Read Less"/>
+                    </button>
                 ) : (
-                  <button onClick={handleExpandClick}>Read More</button>
+                  <button onClick={handleExpandClick}>
+                    <FormattedMessage id="app.readmore" defaultMessage="Read More"/>
+                    </button>
                 )}
               </div>
             )}

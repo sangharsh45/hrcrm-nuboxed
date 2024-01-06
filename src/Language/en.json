@@ -342,5 +342,7 @@
   "app.creationdate":"Creation Date",
   "app.assessment":"Assessment",
   "app.course":"Course",
-  "app.program":"Program"
+  "app.program":"Program",
+  "app.readless":"Read Less",
+  "app.readmore":"Read More"
 }

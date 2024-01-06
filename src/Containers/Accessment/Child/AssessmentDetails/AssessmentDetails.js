@@ -1,7 +1,7 @@
 import React, { useEffect, Suspense, lazy } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { FlexContainer, MainWrapper } from "../../../../Components/UI/Layout";
+import { MainWrapper } from "../../../../Components/UI/Layout";
 import { withRouter } from "react-router";
 import { BundleLoader } from "../../../../Components/Placeholder";
 import {getAssessmentById} from "../../AccessmentAction";
@@ -24,27 +24,28 @@ function AssessmenntDetails(props) {
         <BundleLoader />
       </MainWrapper>
     ):(
-      <FlexContainer>
+      <div>
         <Suspense fallback={"Loading..."}>
-          <FlexContainer flexWrap="no-wrap" style={{ width: "100%" }}>
-            <div style={{ width: "25%" }}>
+          <div class="flex-nowrap w-full">
+            <div class="w-25%">
               <AssessmenntDetailsLeft assessmentByAssessmentId={assessmentByAssessmentId} />
             </div>
-            <div style={{ width: "75%" }}>
+            <div class="w-75%">
               <AssessmentDetailsRight assessmentByAssessmentId={assessmentByAssessmentId} />
             </div>
-          </FlexContainer>
+          </div>
         </Suspense>
-      </FlexContainer>
+      </div>
     )}
     </>
   );
 }
 const mapStateToProps = ({auth,assessment}) => ({
-  assessmentByAssessmentId:assessment.assessmentByAssessmentId,
-    userId: auth.userDetails.userId,
+assessmentByAssessmentId:assessment.assessmentByAssessmentId,
+userId: auth.userDetails.userId,
 orgId: auth.userDetails.organizationId,
 fetchingAssessmentById:assessment.fetchingAssessmentById,
+
 });
 const mapDispatchToProps = (dispatch) => bindActionCreators({
     getAssessmentById

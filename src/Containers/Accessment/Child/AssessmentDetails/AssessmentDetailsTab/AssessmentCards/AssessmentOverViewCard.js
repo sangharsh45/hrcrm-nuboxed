@@ -1,4 +1,4 @@
-import React, { Component,lazy } from "react";
+import React from "react";
 import { ViewEditCard } from "../../../../../../Components/UI/Elements";
 import AssessmentOverView from "./AssessmentOverView";
 

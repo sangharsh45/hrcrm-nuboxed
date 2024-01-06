@@ -1,19 +1,21 @@
-import React, { lazy, Suspense } from "react";
+import React, {lazy,Suspense } from "react";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import {handleTestDrawerModal} from "../../CourseAction"
 import { BundleLoader } from "../../../../Components/Placeholder";
 import { StyledDrawer } from "../../../../Components/UI/Antd";
-import TestForm from "../Test/TestForm";
+import { FormattedMessage } from "react-intl";
+const TestForm =lazy(()=>import("../Test/TestForm"));
+
 const AddTestModal = (props) => {
 
   const { addTestDrawerModal, handleTestDrawerModal, ...formProps } = props;
   return (
     <>
       <StyledDrawer
-        title="Test"
-        width={500}
-        style={{marginTop:"5rem"}}
+        title={<FormattedMessage id="app.test" defaultMessage="Test"/>}
+        width="60%"
+        style={{marginTop:"3rem"}}
         visible={props.addTestDrawerModal}
         maskClosable={false}
         destroyOnClose

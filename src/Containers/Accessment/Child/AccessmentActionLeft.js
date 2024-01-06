@@ -7,7 +7,6 @@ import { AudioOutlined } from '@ant-design/icons';
 import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
 import { Badge, Input, Tooltip } from "antd";
 import {getRecords,inputAssessmentDataSearch} from "../AccessmentAction";
-const { Search } = Input;
 
 const AccessmentActionLeft = (props) => {
   const suffix = (

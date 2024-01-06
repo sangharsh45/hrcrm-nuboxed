@@ -52,7 +52,8 @@ case types.SET_COURSE_VIEW_TYPE:
     case types.ADD_COURSE_SUCCESS:
       return { ...state, 
         addingCourse: false, 
-        addCourseModal: false ,
+        addCourseModal: false,
+        addTestDrawerModal:false,
           courseById:[action.payload,...state.courseById]
       
       };

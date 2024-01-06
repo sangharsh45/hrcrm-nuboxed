@@ -1,31 +1,24 @@
 import React, { Component } from "react";
-import { FlexContainer } from "../../../../Components/UI/Layout";
 import { Title, MultiAvatar } from "../../../../Components/UI/Elements";
 
 class ProgramOverView extends Component {
   render() {
     const {
         program: { program },
-      toggleViewType,
-      // program
     } = this.props;
 
     return (
       <>
-        <FlexContainer justifyContent="space-between">
-          <FlexContainer
-            justifyContent="flex-start"
-            flexWrap="nowrap"
-            style={{ width: "70%" }}
-          >
-            <div style={{ width: "15%" }}>
+        <div class="flex justify-between">
+          <div class="flex start-0 flex-nowrap w-[70%]">
+            <div class="w-[15%]">
               <MultiAvatar
                  primaryTitle={program.program}
                 imageId={program.imageId}
                 imageURL={program.imageURL}
               />
             </div>
-            <FlexContainer flexDirection="column" style={{ width: "70%" }}>
+            <div class="flex-col w-[70%]">
               <Title
                 overflow="hidden"
                 textOverflow="ellipsis"
@@ -33,9 +26,9 @@ class ProgramOverView extends Component {
               >
                 {`${program || ""}`}
               </Title>
-            </FlexContainer>
-          </FlexContainer>
-        </FlexContainer>
+            </div>
+          </div>
+        </div>
       </>
     );
   }
