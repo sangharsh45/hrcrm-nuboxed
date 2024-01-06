@@ -1,7 +1,6 @@
-import React, { Component } from "react";
+import React from "react";
 import { Link } from "../../../../Components/Common";
 function AssessmentDetailsView(props) {
-  console.log("assessmentId", props.assessmentId);
     return (
       <>
         <Link

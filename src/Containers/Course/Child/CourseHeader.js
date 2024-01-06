@@ -10,15 +10,6 @@ class CourseHeader extends Component {
         top: "3.35rem",
         zIndex: "998"}}>
           <ActionHeader
-            // leftComponent={
-            //     <EmployeesActionLeft
-            //         viewType={viewType}
-            //         setCourseViewType={setCourseViewType}
-            //         currentData={this.props.currentData}
-            //         handleClear={this.props.handleClear}
-            //         setCurrentData={this.props.setCurrentData}
-            //     />
-            // }
             rightComponent={
               <CourseActionRight
                 viewType={viewType}

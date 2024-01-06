@@ -8,16 +8,10 @@ import { Spacer } from "../../../../Components/UI/Elements";
 import { Formik, Form, Field, FastField } from "formik";
 import { SelectComponent } from "../../../../Components/Forms/Formik/SelectComponent";
 import { InputComponent } from "../../../../Components/Forms/Formik/InputComponent"; 
-import * as Yup from "yup";
 import {getCourse} from "../../../Course/CourseAction"
 import { addPrograms } from "../../ProgramAction";
 import { TextareaComponent } from "../../../../Components/Forms/Formik/TextareaComponent";
 
-const expRegExp =
-  /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
-const courseSchema = Yup.object().shape({
-  name: Yup.string().required("Input needed!"),
-});
 function ProgramForm(props) {
     useEffect(() => {
         props.getCourse();  
@@ -41,7 +35,6 @@ function ProgramForm(props) {
     return (
       <>
         <Formik
-          // enableReinitialize
           initialValues={{
             courseId: [],
             program:"",
@@ -50,19 +43,13 @@ function ProgramForm(props) {
             duration:"",
             drtnType:"",
             description:"",
-        
-        
-  
           }}
-          //  validationSchema={courseSchema}
           onSubmit={(values, { resetForm }) => {
             console.log(values);
             addPrograms(
               {
                 ...values,
-                
               },
-              // props.userId,
               () => handleReset(resetForm)
             );
           }}
@@ -109,9 +96,7 @@ function ProgramForm(props) {
                               />
                             }
                             mode
-                       
                             component={SelectComponent}
-
                             options={
                               Array.isArray(courseOption) ? courseOption : []
                             }
@@ -124,7 +109,6 @@ function ProgramForm(props) {
                      isRequired
                     name="duration"
                     type="text"
-                    //label="Name"
                     label={
                       <FormattedMessage
                         id="app.duration"
@@ -150,7 +134,6 @@ function ProgramForm(props) {
                             options={["Hours", "Days", "Month","Years"]}
                             component={SelectComponent}
                             inlineLabel
-                            // className="field"
                             isColumn
                           />
                           </div>
@@ -159,7 +142,6 @@ function ProgramForm(props) {
                   <div class=" w-6/12">
                       <Field
                         name="price"
-                        //label="State"
                         label={
                           <FormattedMessage
                             id="price"
@@ -217,8 +199,6 @@ function ProgramForm(props) {
                   loading={addingPrograms}
                 >
                   <FormattedMessage id="app.create" defaultMessage="Create" />
-                  {/*                     
-                    Create */}
                 </Button>
               </div>
             </Form>

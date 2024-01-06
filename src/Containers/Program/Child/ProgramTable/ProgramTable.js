@@ -7,8 +7,6 @@ import {getPrograms} from "../../ProgramAction"
 import { Link } from "../../../../Components/Common";
 import { OnlyWrapCard } from "../../../../Components/UI/Layout";
 
-
-
 function ProgramTable (props)  {
     console.log(props.programs)
     useEffect(() => {
@@ -17,7 +15,7 @@ function ProgramTable (props)  {
 
     return (
         <>        
-              <div className=' flex justify-end sticky top-28 z-auto'>
+              <div className='flex justify-end sticky top-28 z-auto'>
          <OnlyWrapCard style={{backgroundColor:"#E3E8EE",height:"75vh"}}>
          <div className=" flex justify-between w-[99%] px-2 bg-transparent font-bold sticky top-0 z-10">
          <div className=""></div>

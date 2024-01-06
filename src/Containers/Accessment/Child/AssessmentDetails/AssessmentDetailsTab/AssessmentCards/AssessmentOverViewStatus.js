@@ -15,7 +15,7 @@ function AssessmentOverViewStatus(props) {
 
   return (
     <>
-      <FlexContainer justifyContent="space-between">
+      <div class="flex justify-between">
         <ViewEditCard>
         {({ viewType }, toggleViewType) =>
             viewType === "view" ? (  
@@ -31,7 +31,7 @@ function AssessmentOverViewStatus(props) {
           ) : null
         }
         </ViewEditCard>
-      </FlexContainer>
+      </div>
     </>
   );
 }

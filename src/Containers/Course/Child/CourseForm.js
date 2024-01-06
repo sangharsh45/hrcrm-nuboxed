@@ -8,15 +8,9 @@ import { Spacer } from "../../../Components/UI/Elements";
 import { Formik, Form, Field, FastField } from "formik";
 import { SelectComponent } from "../../../Components/Forms/Formik/SelectComponent";
 import { InputComponent } from "../../../Components/Forms/Formik/InputComponent";
-import * as Yup from "yup";
 import { addCourse } from "../CourseAction";
 import { TextareaComponent } from "../../../Components/Forms/Formik/TextareaComponent";
 
-const expRegExp =
-  /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
-const courseSchema = Yup.object().shape({
-  name: Yup.string().required("Input needed!"),
-});
 function CourseForm(props) {
   useEffect(() => {}, []);
   function handleReset(resetForm) {
@@ -37,14 +31,12 @@ function CourseForm(props) {
           description: "",
           currencyName: "",
         }}
-        //  validationSchema={courseSchema}
         onSubmit={(values, { resetForm }) => {
           console.log(values);
           addCourse(
             {
               ...values,
             },
-            // props.userId,
             () => handleReset(resetForm)
           );
         }}
@@ -65,7 +57,6 @@ function CourseForm(props) {
                   isRequired
                   name="courseName"
                   type="text"
-                  //label="Name"
                   label={
                     <FormattedMessage id="app.name" defaultMessage="Name" />
                   }
@@ -80,7 +71,6 @@ function CourseForm(props) {
                       isRequired
                       name="duration"
                       type="text"
-                      //label="Name"
                       label={
                         <FormattedMessage
                           id="app.duration"
@@ -106,7 +96,6 @@ function CourseForm(props) {
                       options={["Hours", "Days", "Month", "Years"]}
                       component={SelectComponent}
                       inlineLabel
-                      // className="field"
                       isColumn
                     />
                   </div>
@@ -160,8 +149,6 @@ function CourseForm(props) {
             <div class=" flex justify-end">
               <Button type="primary" htmlType="submit" loading={addingCourse}>
                 <FormattedMessage id="app.create" defaultMessage="Create" />
-                {/*                     
-                    Create */}
               </Button>
             </div>
           </Form>

@@ -1,15 +1,11 @@
-import React, { Component } from "react";
+import React from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { Button, Switch } from "antd";
+import { Button} from "antd";
 import { FormattedMessage } from "react-intl";
-import { Formik, Form, Field, FieldArray, FastField } from "formik";
-import * as Yup from "yup";
-import { Spacer } from "../../../Components/UI/Elements";
-import { FlexContainer } from "../../../Components/UI/Layout";
+import { Formik, Form, Field } from "formik";
 import { InputComponent } from "../../../Components/Forms/Formik/InputComponent";
 import { addAssessment } from "../AccessmentAction";
-import { TextareaComponent } from "../../../Components/Forms/Formik/TextareaComponent";
 
 function AccessmentForm(props) {
   return (
@@ -51,35 +47,30 @@ function AccessmentForm(props) {
                 alignItems: "center",
               }}
             >
-              <div style={{ width: "16%" }}>
+              <div class="w-[16%]">
                 <Field
                   isRequired
                   name="assessmentName"
                   type="text"
                   component={InputComponent}
-                  label={
-                    <FormattedMessage id="app.name" defaultMessage="Name" />
-                  }
+                  label={<FormattedMessage id="app.name" defaultMessage="Name" />}
                   isColumn
                   width={"100%"}
                   inlineLabel
                 />
               </div>
-              <div style={{ width: "16%" }}>
+              <div class="w-[16%]">
                 <Field
                   name="theme"
                   type="text"
-                  // label="URL"
-                  label={
-                    <FormattedMessage id="app.theme" defaultMessage="Theme" />
-                  }
+                  label={<FormattedMessage id="app.theme" defaultMessage="Theme" />}
                   isColumn
                   width={"100%"}
                   component={InputComponent}
                   inlineLabel
                 />
               </div>
-              <div style={{ width: "8%" }}>
+              <div class="w-[8%]">
                 <Field
                   name="level"
                   type="text"
@@ -94,7 +85,7 @@ function AccessmentForm(props) {
                   inlineLabel
                 />
               </div>
-              <div style={{ width: "16%" }}>
+              <div class="w-[16%]">
                 <Field
                   name="category"
                   type="text"
@@ -111,7 +102,7 @@ function AccessmentForm(props) {
                   inlineLabel
                 />
               </div>
-              <div style={{ width: "8%" }}>
+              <div class="w-[8%]">
                 <Field
                   name="duration"
                   type="text"
@@ -128,7 +119,7 @@ function AccessmentForm(props) {
                   inlineLabel
                 />
               </div>
-              <div style={{ width: "0%" }}>
+              <div>
               <Button
                 type="primary"
                 htmlType="submit"

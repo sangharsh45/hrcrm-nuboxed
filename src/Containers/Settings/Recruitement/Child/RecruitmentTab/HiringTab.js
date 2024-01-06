@@ -263,9 +263,7 @@ class HiringTab extends Component {
         this.handleCallBack,
         this.props.orgId,
         this.props.oppworkFlowId
-      );
-      // this.props.getProcessStagesForRecruit(this.props.recruitmentProcessId);
-    }
+      );}
     this.setState({
       stageName: "",
       probability: "",
@@ -281,7 +279,7 @@ class HiringTab extends Component {
           <MainWrapper>
             <h1
             >
-              {/* Workflow */}
+              
               <FormattedMessage id="app.workflow" defaultMessage="Workflow" />
             </h1>
 

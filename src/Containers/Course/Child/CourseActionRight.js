@@ -1,14 +1,11 @@
-import React, { useEffect, useState,useMemo,lazy } from "react";
+import React from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { withRouter } from "react-router-dom";
 import { base_url } from "../../../Config/Auth";
 import { Button, Tooltip } from "antd";
 import InsertDriveFileIcon from '@mui/icons-material/InsertDriveFile';
-import { StyledSelect } from "../../../Components/UI/Antd";
-
-const Option = StyledSelect.Option;
-
+import { FormattedMessage } from "react-intl";
 class CourseActionRight extends React.Component {
  
   render() {
@@ -37,7 +34,7 @@ class CourseActionRight extends React.Component {
             type="primary"
             onClick={() => handleCourseModal(true)}
           >
-            Add
+            <FormattedMessage id="app.add" defaultMessage="Add"/>
           </Button>
            )} 
         </Tooltip>
@@ -46,7 +43,7 @@ class CourseActionRight extends React.Component {
   }
 }
 
-const mapStateToProps = ({ auth, team, account }) => ({
+const mapStateToProps = ({ auth }) => ({
   userId: auth.userDetails.userId,
   role: auth.userDetails.role,
   user: auth.userDetails,

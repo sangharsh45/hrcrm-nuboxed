@@ -6,7 +6,7 @@ import { MainWrapper } from "../../../../Components/UI/Layout";
 import { withRouter } from "react-router";
 import { BundleLoader } from "../../../../Components/Placeholder";
 import ProgramDetailsHeader from "./ProgramDetailsHeader";
-import ProgramDetailsLeft from "./ProgramDetailsLeft";
+const ProgramDetailsLeft =lazy(()=>import("./ProgramDetailsLeft"));
 
 
 class ProgramDetails extends Component {

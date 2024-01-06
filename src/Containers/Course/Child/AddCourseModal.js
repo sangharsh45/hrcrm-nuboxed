@@ -2,7 +2,7 @@ import React, { lazy, Suspense } from "react";
 import { FormattedMessage } from "react-intl";
 import { StyledDrawer } from "../../../Components/UI/Antd";
 import { BundleLoader } from "../../../Components/Placeholder";
-import CourseForm from "./CourseForm";
+const CourseForm =lazy(()=>import("./CourseForm"));
 
 const AddCourseModal = (props) => {
   return (

@@ -4,11 +4,8 @@ import { bindActionCreators } from "redux";
 import {handleProgramModal,
   setProgramViewType} from "../Program/ProgramAction"
 import ProgramHeader from "./Child/ProgramHeader";
-import AddProgramModal from "./Child/ProgramModal/AddProgramModal";
-import ProgramTable from "./Child/ProgramTable/ProgramTable";
-
-
-
+const AddProgramModal =lazy(()=>import("./Child/ProgramModal/AddProgramModal"));
+const ProgramTable =lazy(()=>import("./Child/ProgramTable/ProgramTable"));
 class Program extends Component {
 
   state = { currentData: "" };
@@ -28,7 +25,6 @@ class Program extends Component {
     return (
       <React.Fragment>
         <ProgramHeader
-         
          setProgramViewType={setProgramViewType}
           viewType={viewType}
           handleProgramModal={handleProgramModal}
@@ -36,11 +32,17 @@ class Program extends Component {
           currentData={this.state.currentData}
           setCurrentData={this.setCurrentData}
         />
-       <AddProgramModal
+        <Suspense fallback={"Loading"}> 
+        <AddProgramModal
         addProgramModal={addProgramModal}
         handleProgramModal={handleProgramModal}
         />
+
         <ProgramTable/>
+
+        </Suspense>
+       
+   
       </React.Fragment>
     );
   }
