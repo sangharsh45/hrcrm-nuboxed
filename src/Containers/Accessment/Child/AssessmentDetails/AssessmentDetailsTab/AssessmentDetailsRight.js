@@ -36,17 +36,16 @@ const assessmentId=props.assessmentByAssessmentId.assessmentId;
             <Suspense fallback={"Loading ..."}>
               {" "}
               <>
-                <Form className="form-background">
+                
                   <div class="flex justify-between h-[26rem] overflow-scroll pr-2" >
                     <QuestionsGroup assessmentId={assessmentId} />
                   </div>
-                </Form>
               </>
             </Suspense>
           </TabPane>
         </StyledTabs>
       </TabsWrapper>
-      <Suspense fallback={null}></Suspense>
+
     </>
   );
 }

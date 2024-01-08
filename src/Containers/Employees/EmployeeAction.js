@@ -1003,3 +1003,10 @@ export const ClearReducerDataOfEmployee = () => (dispatch) => {
     type: types.HANDLE_CLAER_REDUCER_DATA_EMPLOYEE,
   });
 };
+
+export const handleNotifyDrawer = (modalProps) => (dispatch) => {
+  dispatch({
+    type: types.HANDLE_NOTIFY_DRAWER,
+    payload: modalProps,
+  });
+};

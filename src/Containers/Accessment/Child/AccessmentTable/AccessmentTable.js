@@ -1,14 +1,15 @@
-import React, { useEffect } from 'react'
+import React, { useEffect,useState } from 'react'
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import moment from "moment";
-import { getAssessment } from '../../AccessmentAction';
+import { getAssessment,handleQuestionrModal } from '../../AccessmentAction';
 import { OnlyWrapCard } from "../../../../Components/UI/Layout";
 import { FormattedMessage } from "react-intl";
-import {  Tooltip } from "antd";
+import { Tooltip,Button } from "antd";
 import { Link } from "../../../../Components/Common";
 import {EditOutlined} from "@ant-design/icons";
-import StatusToggle from './StatusToggle';
+import AddQuestionsDrawer from './AddQuestionsDrawer';
+// import StatusToggle from './StatusToggle';
 
 const AccessmentTable = (props) => {
    
@@ -16,6 +17,11 @@ const AccessmentTable = (props) => {
     props.getAssessment(props.userId,props.orgId);
   }, []);
  
+  const [rowData,setRowData]=useState("");
+
+  function handleRowData(item){
+setRowData(item)
+  }
     return (
         <>
           <div className=' flex justify-end sticky top-28 z-auto'>
@@ -23,12 +29,13 @@ const AccessmentTable = (props) => {
          <div className=" flex justify-between w-[99%] px-2 bg-transparent font-bold sticky top-0 z-10">
          <div className=""></div>
          <div className=" md:w-[4.1rem]"><FormattedMessage id="app.name" defaultMessage="Name" /></div>
-        <div className=" md:w-[6.1rem]">
-        <FormattedMessage id="app.theme" defaultMessage="Theme"/></div>
-        <div className=" md:w-[4.2rem] "><FormattedMessage id="app.category" defaultMessage="Category" /></div>
-        <div className="md:w-[5.8rem]"><FormattedMessage id="app.questions" defaultMessage="Questions #" /></div>
+        <div className=" md:w-[12.1rem]">
+        <FormattedMessage id="app.course" defaultMessage="course"/></div>
+         {/* <div className=" md:w-[4.2rem] "><FormattedMessage id="app.category" defaultMessage="Category" /></div> */}
+        {/* <div className="md:w-[5.8rem]"><FormattedMessage id="app.questions" defaultMessage="Questions #" /></div> */}
         <div className="md:w-[8.5rem]"><FormattedMessage id="app.time" defaultMessage="Time" /></div>
-        <div className="md:w-[5.2rem]"><FormattedMessage id="app.level" defaultMessage="Level" /></div>
+        <div className="md:w-[6.8rem]"><FormattedMessage id="app.durationtype" defaultMessage="Duration Type" /></div>
+      {/*  <div className="md:w-[5.2rem]"><FormattedMessage id="app.level" defaultMessage="Level" /></div> */}
         <div className="md:w-[5.2rem]"><FormattedMessage id="app.url" defaultMessage="URL" /></div>
         <div className="md:w-[5.2rem]"></div>
         <div className="w-12"></div>
@@ -62,23 +69,24 @@ const AccessmentTable = (props) => {
     <div className=" flex font-medium flex-col  md:w-[7.1rem] max-sm:flex-row w-full max-sm:justify-between  ">
 
     <h4 class=" text-xs text-cardBody font-poppins">
-                        {item.theme} 
+                        {item.courseName} 
                     </h4>
-    </div></div>
+    </div>
+    </div>
     
-    <div className=" flex font-medium flex-col md:w-[6.5rem] max-sm:flex-row w-full max-sm:justify-between ">
+    {/* <div className=" flex font-medium flex-col md:w-[6.5rem] max-sm:flex-row w-full max-sm:justify-between ">
     <h4 class=" text-xs text-cardBody font-poppins">
                       
                       {item.category}
                     </h4>
-    </div>
-    <div className=" flex font-medium flex-col md:w-[6.2rem] max-sm:flex-row w-full max-sm:justify-between ">
+    </div> */}
+    {/* <div className=" flex font-medium flex-col md:w-[6.2rem] max-sm:flex-row w-full max-sm:justify-between ">
        
 
         <h4 class=" text-xs text-cardBody font-semibold  font-poppins">
                       {item.noOfQuestions}
                     </h4>
-    </div>
+    </div> */}
     
     <div className=" flex font-medium flex-col md:w-[3.2rem] max-sm:flex-row w-full max-sm:justify-between ">
       
@@ -90,7 +98,7 @@ const AccessmentTable = (props) => {
        
 
         <h4 class=" text-xs text-cardBody font-semibold  font-poppins">
-               {item.level}
+               {item.durationType}
              </h4>
     </div>
     <div className=" flex font-medium flex-col md:w-[3.2rem] max-sm:flex-row w-full max-sm:justify-between ">
@@ -100,7 +108,7 @@ const AccessmentTable = (props) => {
    </div>
 
     <div class="flex md:items-center"> 
-<div className=" flex font-medium flex-col  md:w-[6.9rem] max-sm:flex-row w-full max-sm:justify-between  ">
+{/* <div className=" flex font-medium flex-col  md:w-[6.9rem] max-sm:flex-row w-full max-sm:justify-between  ">
 
 <StatusToggle               
                item={item}
@@ -108,8 +116,17 @@ const AccessmentTable = (props) => {
                 publishInd={item.publishInd}
                 />
 
-</div> 
+</div>  */}
+<div className=" flex font-medium flex-col  md:w-[6.9rem] max-sm:flex-row w-full max-sm:justify-between  ">
 
+<Button type="primary" onClick={()=>{
+  handleRowData(item);
+  props.handleQuestionrModal(true)
+}}>
+  Add Question
+</Button>
+
+</div> 
 </div>
 
 <div className=" flex font-medium flex-col md:w-[1rem] max-sm:flex-row w-full max-sm:justify-between  ">
@@ -134,6 +151,7 @@ const AccessmentTable = (props) => {
              
               </OnlyWrapCard>
               </div>
+              <AddQuestionsDrawer rowData={rowData} addQuestionModal={props.addQuestionModal} handleQuestionrModal={props.handleQuestionrModal} />
         </>
     )
 }
@@ -143,11 +161,13 @@ const mapStateToProps = ({ auth,assessment }) => ({
 fetchingAssessment:assessment.fetchingAssessment,
 userId: auth.userDetails.userId,
 orgId: auth.userDetails.organizationId,
+addQuestionModal:assessment.addQuestionModal
 
 });
 const mapDispatchToProps = (dispatch) =>
     bindActionCreators({
-      getAssessment
+      getAssessment,
+      handleQuestionrModal
 
     }, dispatch);
 
