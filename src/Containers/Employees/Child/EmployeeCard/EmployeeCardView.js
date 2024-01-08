@@ -9,6 +9,7 @@ import { Select } from "antd";
 import PlaceIcon from '@mui/icons-material/Place';
 import InsertDriveFileIcon from '@mui/icons-material/InsertDriveFile';
 import DraftsIcon from '@mui/icons-material/Drafts';
+import CircleNotificationsIcon from '@mui/icons-material/CircleNotifications';
 import VolumeUpIcon from '@mui/icons-material/VolumeUp';
 import styled from 'styled-components'
 import { BundleLoader } from "../../../../Components/Placeholder";
@@ -20,13 +21,16 @@ import {
     getEmployeeTreeMap,
     handleEmployeeDocumentDrawerModal,
     getEmployeeDocument,
-    handleUpdateEmployeeModal
+    handleUpdateEmployeeModal,
+    handleNotifyDrawer
   } from "../../EmployeeAction";
 import EmployeeDetailsView from "../EmployeeGroup/EmployeeDetails/EmployeeDetailsView";
 import EmployeeDrawerForAdmin from "../EmployeeTable/EmployeeDrawer/EmployeeDrawerForAdmin";
 import EmployeePulseDrawerModal from "../EmployeeTable/EmployeePulseDrawerModal";
 import EmployeeDocumentDrawerModal from "./EmployeeDocumentDrawerModal";
 import UpdateEmployeeModal from "./UpdateEmployeeModal";
+import OpenNotifyDrawer from "./OpenNotifyDrawer";
+
 
 const { Option } = Select;
 function EmployeeCardView (props) {
@@ -197,6 +201,16 @@ function handleSetCurrentEmployeeId(employeeId,) {
      </Tooltip>
            </div>
            <div class=" font-normal text-xs text-cardBody font-poppins ">
+           <Tooltip title="Notify">
+           <CircleNotificationsIcon
+           style={{ cursor: "pointer",fontSize: "1rem" }}
+           onClick={() => {
+            props.handleNotifyDrawer(true);
+           }}
+           />
+           </Tooltip>
+            </div>
+           <div class=" font-normal text-xs text-cardBody font-poppins ">
            {user.userUpdateInd === true || user.role === "ADMIN"  && (
             <Tooltip title="Edit">
               <BorderColorIcon
@@ -298,6 +312,9 @@ function handleSetCurrentEmployeeId(employeeId,) {
         addDrawerEmployeeDocumentModal={props.addDrawerEmployeeDocumentModal}
         handleEmployeeDocumentDrawerModal={props.handleEmployeeDocumentDrawerModal}
       />
+      <OpenNotifyDrawer
+       openNotifydrwr={props.openNotifydrwr} handleNotifyDrawer={props.handleNotifyDrawer}/>
+
             </>
       
     
@@ -321,6 +338,7 @@ const mapStateToProps = ({ auth,role, employee,designations,departments }) => ({
     addDrawerEmployeeDocumentModal:employee.addDrawerEmployeeDocumentModal,
     fetchingEmployeeError: employee.fetchingEmployeeError,
     employeeDrawerVisibleForAdmin: employee.employeeDrawerVisibleForAdmin,
+    openNotifydrwr:employee.openNotifydrwr,
 })
 
 const mapDispatchToProps = (dispatch) =>
@@ -333,7 +351,8 @@ const mapDispatchToProps = (dispatch) =>
         handleEmployeeDocumentDrawerModal,
         handleUpdateEmployeeModal,
         getEmployeeTreeMap,
-        getEmployeeDocument
+        getEmployeeDocument,
+        handleNotifyDrawer
     },
     dispatch,
   )

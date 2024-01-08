@@ -4,7 +4,7 @@ import { bindActionCreators } from "redux";
 import EmployeesHeader from "./Child/EmployeesHeader";
 import AddEmploymentModal from "./Child/AddEmployeeModal";
 import { setEmployeeViewType, handleEmployeeModal, getEmployeelist} from "./EmployeeAction";
-import EmployeeCardView from "./Child/EmployeeCard/EmployeeCardView";
+const EmployeeCardView = lazy(() => import("./Child/EmployeeCard/EmployeeCardView"));
 const EmployeeTable = lazy(() => import("./Child/EmployeeTable/EmployeeTable"));
 
 class Employees extends Component {

@@ -115,6 +115,7 @@ const initialState = {
   fetchingRecordsByUserIdError: false,
   employeerecordData:{},
 
+  openNotifydrwr:false,
 };
 export const EmployeeReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -702,6 +703,9 @@ export const EmployeeReducer = (state = initialState, action) => {
             employees: [], 
             // deletedTruck: [] 
           };
+
+          case types.HANDLE_NOTIFY_DRAWER:
+            return { ...state, openNotifydrwr: action.payload };
 
     default:
       return state;

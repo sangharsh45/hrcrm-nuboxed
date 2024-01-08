@@ -2,7 +2,6 @@ import React, { useEffect, Suspense, Component } from "react";
 import { FlexContainer } from "../../../../../../../Components/UI/Layout";
 import { MultiAvatar } from "../../../../../../../Components/UI/Elements";
 import { Button, Tooltip } from "antd";
-import dayjs from "dayjs";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import styled from "styled-components";
