@@ -116,6 +116,13 @@ const initialState = {
   employeerecordData:{},
 
   openNotifydrwr:false,
+  updateAdminUser: false,
+  updateAdminUserError:false,
+
+  fetchingUserAdmin: false,
+  fetchingUserAdminError:false,
+  userAdminnoti:[],
+
 };
 export const EmployeeReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -707,6 +714,42 @@ export const EmployeeReducer = (state = initialState, action) => {
           case types.HANDLE_NOTIFY_DRAWER:
             return { ...state, openNotifydrwr: action.payload };
 
+            case types.UPDATE_ADMIN_USER_REQUEST:
+              return { ...state, updateAdminUser: true };
+            case types.UPDATE_ADMIN_USER_SUCCESS:
+              return {
+                ...state,
+                updateAdminUser: false,
+                openNotifydrwr: false,
+                employees: state.employees.map((item) => {
+                  if (item.employeeId === action.payload.employeeId) {
+                    return action.payload;
+                  } else {
+                    return item;
+                  }
+                }),
+              };
+            case types.UPDATE_ADMIN_USER_FAILURE:
+              return {
+                ...state,
+                updateAdminUser: false,
+                updateAdminUserError: true,
+              };
+      
+case types.GET_ADMIN_USER_REQUEST:
+  return { ...state, fetchingUserAdmin: true };
+case types.GET_ADMIN_USER_SUCCESS:
+  return {
+    ...state,
+    fetchingUserAdmin: false,
+    userAdminnoti: action.payload,
+  };
+case types.GET_ADMIN_USER_FAILURE:
+  return {
+    ...state,
+    fetchingUserAdmin: false,
+    fetchingUserAdminError: true,
+  };
     default:
       return state;
   }

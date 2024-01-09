@@ -1,17 +1,17 @@
-import React, { lazy, Suspense, Component } from "react";
+import React, {Suspense,lazy } from "react";
 import { BundleLoader } from "../../../../Components/Placeholder";
 import { StyledDrawer } from "../../../../Components/UI/Antd";
-// const AddQuestionForm = lazy(() => import("../../Child/AccessmentTable/AddQuestionsForm"));
+const NotifyDrawerForm=lazy(()=>import("./NotifyDrawerForm"));
+
+function  OpenNotifyDrawer (props) {
 
 
-class  OpenNotifyDrawer extends Component {
-  render() {
-    const { openNotifydrwr, handleNotifyDrawer, rowData,...formProps } = this.props;
-    return (
+     const { openNotifydrwr, handleNotifyDrawer, currentEmployeeId,...formProps } =props;
+   
+     return (
       <>
         <StyledDrawer
           title={"Notify"}
-
           width="60%"
           visible={openNotifydrwr}
           closable
@@ -22,12 +22,13 @@ class  OpenNotifyDrawer extends Component {
           footer={null}
         >
         <Suspense fallback={<BundleLoader />}>
-          {/* <AddQuestionForm rowData={rowData}/>{" "} */}Admin tog
+          <NotifyDrawerForm currentEmployeeId={currentEmployeeId}/>
         </Suspense>
         </StyledDrawer>
       </>
     );
-  }
-}
 
-export default OpenNotifyDrawer;
+};
+
+
+  export default OpenNotifyDrawer;
