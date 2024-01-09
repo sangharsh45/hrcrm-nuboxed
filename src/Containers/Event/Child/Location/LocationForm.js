@@ -139,8 +139,6 @@ class LocationForm extends Component {
           }}
           // validationSchema={FormSchema}
           onSubmit={(values, { resetForm }) => {
-            //debugger;
-            console.log(values);
             this.props.addLocation(
               {
                 ...values,
@@ -153,10 +151,9 @@ class LocationForm extends Component {
                 retailInd: this.state.retail ? "true" : "false",
                 orgId: this.props.orgId,
                 userId: this.props.userId,
-                // locationtypeId: this.props.locationtypeId,
+                
               },
               this.props.orgId,
-              // () => this.callback(resetForm)
             );
           }}
         >

@@ -1010,3 +1010,53 @@ export const handleNotifyDrawer = (modalProps) => (dispatch) => {
     payload: modalProps,
   });
 };
+
+export const UpdateAdminUser = (data) => (dispatch) => {
+  dispatch({ type: types.UPDATE_ADMIN_USER_REQUEST });
+  axios
+    .put(`${base_url}/employee/update/admin-user/user-admin`, data, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.UPDATE_ADMIN_USER_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.UPDATE_ADMIN_USER_FAILURE,
+        payload: err,
+      });
+    });
+};
+
+export const getAdminUser = (employeeId) => (dispatch) => {
+  dispatch({
+    type: types.GET_ADMIN_USER_REQUEST,
+  });
+    axios
+  .get(`${base_url}/employee/adminUpdate/${employeeId}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.GET_ADMIN_USER_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.GET_ADMIN_USER_FAILURE,
+        payload: err,
+      });
+    });
+};

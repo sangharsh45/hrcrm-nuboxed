@@ -65,6 +65,7 @@ export const DatePicker = ({
             {...props}
             width={width}
             isRequired={isRequired}
+            defaultValue={defaultValue}
             onChange={(date, dateString) =>
             setFieldValue(field.name, dayjs(dateString))
           }

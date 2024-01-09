@@ -205,6 +205,7 @@ function handleSetCurrentEmployeeId(employeeId,) {
            <CircleNotificationsIcon
            style={{ cursor: "pointer",fontSize: "1rem" }}
            onClick={() => {
+            handleSetCurrentEmployeeId(item);
             props.handleNotifyDrawer(true);
            }}
            />
@@ -313,6 +314,7 @@ function handleSetCurrentEmployeeId(employeeId,) {
         handleEmployeeDocumentDrawerModal={props.handleEmployeeDocumentDrawerModal}
       />
       <OpenNotifyDrawer
+      currentEmployeeId={currentEmployeeId}
        openNotifydrwr={props.openNotifydrwr} handleNotifyDrawer={props.handleNotifyDrawer}/>
 
             </>

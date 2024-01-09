@@ -23,39 +23,40 @@ const RecruitmentActionLeft = lazy(() => import("./RecruitmentActionLeft"));
 const ReportScheduler = lazy(() =>
   import("../Recruitement/Child/ReportScheduler/ReportScheduler")
 );
+const NotificationToggleForm =lazy(()=>import("./Child/RecruitmentTab/ToggleNotify/NotificationToggleForm"));
 
 function Recruitment(props) {
   const name = [
 
     {
       rulesName: "Access",
-      ruleId: "12",
+      ruleId: "1",
       component: <Access />,
     },
     {
       rulesName: "Approval",
-      ruleId: "19",
+      ruleId: "2",
       component: <ApprovalTab />,
     },
     {
       rulesName: "Automation",
-      ruleId: "25",
+      ruleId: "3",
       component: <DistributionTab />,
     },
     {
       rulesName: "Form",
-      ruleId: "24",
+      ruleId: "4",
       component: <Form/>,
     },
     
     {
       rulesName: "General",
-      ruleId: "14",
+      ruleId: "5",
       component: <General/>,
     },
     {
       rulesName: "Holidays",
-      ruleId: "17",
+      ruleId: "6",
       component: <SettingsHolidayTab />,
     },
     // {
@@ -66,40 +67,44 @@ function Recruitment(props) {
     
     {
       rulesName: "Report Scheduler",
-      ruleId: "8",
+      ruleId: "7",
       component: <ReportScheduler />,
     },
     {
       rulesName: "Rules",
-      ruleId: "20",
+      ruleId: "8",
       component: <LeadsTab />,
     },
     {
       rulesName: "Skills and Certifications",
-      ruleId: "6",
+      ruleId: "9",
       component: <SkillsTab/>,
     },
     {
       rulesName: "Template",
-      ruleId: "4",
+      ruleId: "10",
       component: <Template />,
     },
     {
       rulesName: "Workflow",
-      ruleId: "1",
+      ruleId: "11",
        component: <WorkFlow/>,
     },
     {
       rulesName: "Finance",
-      ruleId: "16",
+      ruleId: "12",
       component: <FinanceTab/>,
     },
     {
       rulesName: "Matrix",
-      ruleId: "28",
+      ruleId: "13",
       component: <Matrix/>,
     },
-   
+   {
+      rulesName: "Notification",
+      ruleId: "14",
+      component: <NotificationToggleForm />,
+    },
     // {
     //   rulesName: "Automation",
     //   ruleId: "2",

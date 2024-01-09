@@ -942,7 +942,7 @@ function NavMenu(props) {
            </SubMenu> 
      )}  */}
         <hr />
-        {user.userAccessInd === true || user.role === "ADMIN"  && (
+        {/* {user.userAccessInd === true || user.role === "ADMIN"  && ( */}
 
           <Menu.Item key="/employees" style={{ height: "27px", paddingLeft: "1rem" }}>
             <Link to="/Employees">
@@ -952,8 +952,6 @@ function NavMenu(props) {
               />
               <span class="text-white text-ls ml-1">
                 <FormattedMessage id="app.users" defaultMessage="Users" />
-                {/* Users */}
-                {/* {translatedMenuItems[6]} */}
               </span>
               &nbsp;&nbsp;&nbsp;
               <Badge
@@ -962,7 +960,7 @@ function NavMenu(props) {
               ></Badge>
             </Link>
           </Menu.Item>
-        )}
+        {/* )} */}
 
         {/* <Menu.Item key="/plant" style={{ height: "27px", paddingLeft: "1rem" }}>
           <Link to="/plant">

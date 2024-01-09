@@ -19,24 +19,26 @@ import {
   handleEmployeeDrawerForAdmin,
   handleEmployeePulseDrawerModal,
   getEmployeeTreeMap,
-  getEmployeeDocument
+  getEmployeeDocument,
+  handleNotifyDrawer
 } from "../../EmployeeAction";
+import CircleNotificationsIcon from '@mui/icons-material/CircleNotifications';
 import {
   getRoles,
 } from "../../../Settings/Category/Role/RoleAction";
 import EmployeeDetailsView from "../EmployeeGroup/EmployeeDetails/EmployeeDetailsView";
 import EmployeeDrawerForAdmin from "./EmployeeDrawer/EmployeeDrawerForAdmin";
-import EmployeeType from "../SuspendEmployee/EmployeeType";
 import SuspendEmployee from "../SuspendEmployee/SuspendEmployee";
 import moment from "moment";
 import EmployeePulseDrawerModal from "./EmployeePulseDrawerModal";
+import OpenNotifyDrawer from "../EmployeeCard/OpenNotifyDrawer";
 
 function EmployeeTable(props) {
   const [page, setPage] = useState(0);
   const [rowData, setRowData] = useState("");
   function handleRowData(item) {
     setRowData(item);
-    // console.log("opp",item);
+
   }
 
   useEffect(() => {
@@ -404,6 +406,30 @@ function EmployeeTable(props) {
         );
       },
     },
+    {
+      title: "",
+      dataIndex: "documentId",
+      width: "2%",
+      render: (name, item, i) => {
+        //debugger
+        return (
+          <>
+           
+           <Tooltip title="Notify">
+           <CircleNotificationsIcon
+           style={{ cursor: "pointer",fontSize: "1rem" }}
+           onClick={() => {
+            handleSetCurrentEmployeeId(item);
+            props.handleNotifyDrawer(true);
+           }}
+           />
+           </Tooltip>
+
+            
+          </>
+        );
+      },
+    },
   ];
 
    const tab = document.querySelector(".ant-layout-sider-children");
@@ -436,6 +462,10 @@ function EmployeeTable(props) {
         handleEmployeePulseDrawerModal={props.handleEmployeePulseDrawerModal}
         // candidateByUserId={this.props.candidateByUserId}
       />
+            <OpenNotifyDrawer
+      currentEmployeeId={currentEmployeeId}
+       openNotifydrwr={props.openNotifydrwr} handleNotifyDrawer={props.handleNotifyDrawer}/>
+
     </>
   );
 }
@@ -454,6 +484,7 @@ const mapStateToProps = ({ auth,role, employee,designations,departments }) => ({
   documentsByEmployeeId: employee.documentsByEmployeeId,
   fetchingEmployeeError: employee.fetchingEmployeeError,
   employeeDrawerVisibleForAdmin: employee.employeeDrawerVisibleForAdmin,
+  openNotifydrwr:employee.openNotifydrwr,
 });
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
@@ -465,7 +496,8 @@ const mapDispatchToProps = (dispatch) =>
       getDepartments,
       handleEmployeePulseDrawerModal,
       getEmployeeTreeMap,
-      getEmployeeDocument
+      getEmployeeDocument,
+      handleNotifyDrawer
     },
     dispatch
   );
