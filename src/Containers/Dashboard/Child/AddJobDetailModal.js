@@ -1,9 +1,7 @@
 import React, { lazy, Suspense } from "react";
-import { FormattedMessage } from "react-intl";
 import { BundleLoader } from "../../../Components/Placeholder";
 import { StyledDrawer } from "../../../Components/UI/Antd";
-import DashboardDetails from "./DashboardDetails";
-const OpportunityRequirementBoard = lazy(() => import("../Child/OpportunityRequirementBoard"));
+const DashboardDetails = lazy(() => import("./DashboardDetails"));
 
 const AddJobDetailModal = (props) => {
   const { ...formProps } = props;
@@ -15,8 +13,8 @@ const AddJobDetailModal = (props) => {
       <StyledDrawer
         // title="Opportunity"
     title={props.item.jobOrder}
-        width="64%"
-        style={{marginTop:"5rem"}}
+        width="60%"
+        style={{marginTop:"3rem"}}
         visible={props.addjobDetailModal}
         maskClosable={false}
         destroyOnClose

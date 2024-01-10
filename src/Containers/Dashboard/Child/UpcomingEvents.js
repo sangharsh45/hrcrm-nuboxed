@@ -1,33 +1,17 @@
-import React, { Component } from "react";
+import React, { Component,lazy } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { FormattedMessage } from "react-intl";
 import {
   List,
-  Icon,
-  Empty,
-  Rate,
-  Popconfirm,
-  message,
-  Button,
-  Checkbox,
 } from "antd";
-import { MainWrapper, FlexContainer } from "../../../Components/UI/Layout";
-import { GroupView } from "../../../Components/Common";
-import { Title } from "../../../Components/UI/Elements";
-import RatingBox from "../Child/RatingBox"
 import {
     getUpcomingEvents,
-
-
-
 } from "../DashboardAction";
 
-import TimeInterval from "../../../Utils/TimeInterval";
 import { setRating, setId } from "../../Event/EventAction";
-import TodoItem from "./TodoItem";
 import { BundleLoader } from "../../../Components/Placeholder";
-import UpcomingItems from "./UpcomingItems";
+const UpcomingItems=lazy(() => import("./UpcomingItems"));
+
 
 const desc = ["Terrible", "Bad", "Normal", "Good", "Wonderful"];
 const text = "Rate your engagement";
@@ -195,7 +179,7 @@ class UpcomingEvents extends Component {
 
 
 
-        <FlexContainer>
+        <div class=" flex">
           {upcomingEvents &&
             upcomingEvents.slice(0, 5).map((upComing, i) => {
               return (
@@ -250,7 +234,7 @@ class UpcomingEvents extends Component {
                 </List.Item>
               );
             })}
-        </FlexContainer>
+        </div>
 
 
 

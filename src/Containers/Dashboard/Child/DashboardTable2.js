@@ -2,23 +2,16 @@
 
 
 
- import React, { useEffect, useState } from "react";
+ import React, { useEffect, useState,lazy } from "react";
  import { connect } from "react-redux";
  import { bindActionCreators } from "redux";
  import { FormattedMessage } from "react-intl";
- import Box from "@mui/material/Box";
-import { DataGrid, GridColDef,GridRenderCellParams, GridToolbar } from "@mui/x-data-grid";
  import { Suspense } from "react";
  import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
- import { Tooltip, Icon,Input,Button,Badge, Table,  InputNumber, Popconfirm, Form, Typography  } from "antd";
+ import { Tooltip,Input,Button,Badge, } from "antd";
  import Highlighter from 'react-highlight-words';
- import { CurrencySymbol } from "../../../Components/Common";
  import ArrowCircleDownIcon from '@mui/icons-material/ArrowCircleDown';
- import AddJobDetailModal from "../Child/AddJobDetailModal"
- import { StyledTable, StyledPopconfirm } from "../../../Components/UI/Antd";
- import { MultiAvatar, SubTitle } from "../../../Components/UI/Elements";
- import { BundleLoader } from "../../../Components/Placeholder";
-
+ import { StyledTable, } from "../../../Components/UI/Antd";
  import {
    getDashboardTable2,
    handleAddJobDetailtModal
@@ -28,12 +21,8 @@ import { DataGrid, GridColDef,GridRenderCellParams, GridToolbar } from "@mui/x-d
  import SchoolIcon from '@mui/icons-material/School';
  import AccountBoxIcon from '@mui/icons-material/AccountBox';
  import {getCandidateRequirement} from "../../Opportunity/OpportunityAction"
- // import OpportunityDetailView from "./OpportunityDetailView";
- // import UpdateOpportunityModal from "../UpdateOpportunity/UpdateOpportunityModal";
- //import APIFailed from "../../../Helpers/ErrorBoundary/APIFailed";
-// import { dashboardReducer } from "../DashboardReducer";
-import { FlexContainer } from "../../../Components/UI/Layout";
 import { SearchOutlined } from "@ant-design/icons";
+const AddJobDetailModal = lazy(() => import("../Child/AddJobDetailModal"));
  
  function onChange(pagination, filters, sorter) {
    console.log("params", pagination, filters, sorter);
@@ -330,7 +319,7 @@ return {
      
      render: (name, item, i) => {        
        return (
-         <FlexContainer justifyContent="start" marginTop= "0.42rem">
+         <div class=" flex justify-start mt-[0.42rem]" >
          {item.stageList&&item.stageList.map((data)=>{
            return(
              <>
@@ -394,7 +383,7 @@ return {
              </>
            )
          })}
-         </FlexContainer>
+         </div>
        );
        
      },

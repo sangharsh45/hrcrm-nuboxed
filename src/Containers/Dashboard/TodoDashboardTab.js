@@ -7,12 +7,12 @@ import { TabsWrapper } from "../../Components/UI/Layout";
 import DnsIcon from '@mui/icons-material/Dns';
 import UpcomingIcon from '@mui/icons-material/Upcoming';
 import {getTodosCount} from "./DashboardAction";
-import DashboardTodo from "./Child/DashboardTodo";
-import UpcomingEvents from "./Child/UpcomingEvents";
 import { Badge } from "antd";
-import DashboardTable2 from "./Child/DashboardTable2";
-import DashboardAllTable2 from "./DashboardAllTable2";
 import { FormattedMessage } from "react-intl";
+const UpcomingEvents=lazy(() => import("./Child/UpcomingEvents"));
+const DashboardTodo=lazy(() => import("./Child/DashboardTodo"));
+const DashboardTable2=lazy(() => import("./Child/DashboardTable2"));
+const DashboardAllTable2=lazy(() => import("./DashboardAllTable2"));
 
 const TabPane = StyledTabs.TabPane;
 function handleRefreshPage() {

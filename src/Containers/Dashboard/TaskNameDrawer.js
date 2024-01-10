@@ -9,13 +9,13 @@ const TaskNameDrawer = (props) => {
     <>
       <StyledDrawer
         title= {`${props.particularTaskName.name}`}
-        width="50%"
+        width="60%"
         visible={props.taskNameDrwr}
         maskClosable={false}
         closable
         destroyOnClose
         maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}
-        style={{ marginTop:"5rem"}}
+        style={{ marginTop:"3rem"}}
         onClose={()  => props.handleTaskNameDrawer(false)}
         footer={null}
       >

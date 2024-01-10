@@ -1,15 +1,12 @@
-import { Popover, Select, Button, Switch } from "antd";
-import React, { useState, useEffect, Suspense } from "react";
-import { StyledSelect, StyledRangePicker } from "../../../Components/UI/Antd";
-import { FlexContainer } from "../../../Components/UI/Layout";
-import dayjs from "dayjs";
+import { Popover, } from "antd";
+import React, {  } from "react";
+import { StyledRangePicker } from "../../../Components/UI/Antd";
 import { connect } from "react-redux";
 import {
   setSelectedTimeIntervalReport,
   setTimeRangeReport,
 
 } from "../DashboardAction";
-import { Link } from "react-router-dom";
 import { bindActionCreators } from "redux";
 import TimeInterval from "../../../Utils/TimeInterval";
 import { FormattedMessage } from "react-intl";
@@ -27,14 +24,14 @@ const HeaderActionRight = (props) => {
 
   return (
     <>
-      <FlexContainer alignItems="center" >
+      <div class=" flex items-center"  >
         
         
-        <span 
+        <span class="cursor-pointer" 
         onClick={() => handleButtonClick("Tasks")} 
         style={{
           color:activeButton === "Tasks" && "#1890ff",
-          cursor:"pointer"
+          
         }}
         >
             <FormattedMessage
@@ -46,11 +43,11 @@ const HeaderActionRight = (props) => {
   
         &nbsp;
     {user.crmInd === true && (
-        <span 
+        <span class="cursor-pointer"
         onClick={() =>  handleButtonClick("Customer")} 
         style={{
           color:activeButton ==="Customer" ? activeButton === "Customer" && "#1890ff" && viewType === "ALL" && "#444" : viewType === "ALL" && "#1890ff" ,
-          cursor:"pointer"
+       
         }}
         >
            <FormattedMessage
@@ -62,11 +59,11 @@ const HeaderActionRight = (props) => {
 )}
         &nbsp;
     {user.imInd ==true  && (
-        <span 
+        <span class="cursor-pointer"
         onClick={() => handleButtonClick("Investors")} 
         style={{
           color:activeButton === "Investors" && "#1890ff",
-          cursor:"pointer"
+    
         }}
         >  
           <FormattedMessage
@@ -78,11 +75,11 @@ const HeaderActionRight = (props) => {
 )}
     &nbsp;
     {user.erpInd === true && (
-        <span 
+        <span class="cursor-pointer"
         onClick={() => handleButtonClick("Accounts")} 
         style={{
           color:activeButton === "Accounts" && "#1890ff",
-          cursor:"pointer"
+          
         }}
         >
            <FormattedMessage
@@ -114,7 +111,7 @@ const HeaderActionRight = (props) => {
         </Popover>
         </>
 
-      </FlexContainer>
+      </div>
     </>
   );
 };

@@ -1,7 +1,7 @@
-import React, { Component } from "react";
+import React, { Component,lazy } from "react";
 import { ActionHeader } from "../../../Components/Utils";
-import DashboardActionLeft from "./DashboardActionLeft";
-import DashboardActionRight from "./DashboardActionRight";
+const DashboardActionLeft=lazy(() => import("./DashboardActionLeft"));
+const DashboardActionRight=lazy(() => import("./DashboardActionRight"));
 class DashboardHeader extends Component {
   render() {
     return (

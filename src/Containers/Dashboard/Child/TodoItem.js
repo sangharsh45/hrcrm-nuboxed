@@ -1,18 +1,12 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-// import { updateTodoEvent, updateTodoCall,updateTodoTask } from "../DashboardAction"
-import { Checkbox, Rate } from "antd";
-import { ScheduleOutlined, StarOutlined } from '@ant-design/icons';
+import { Checkbox, } from "antd";
+import { ScheduleOutlined, } from '@ant-design/icons';
 import moment from "moment";
-import { FlexContainer } from "../../../Components/UI/Layout";
 import {
-  Title,
   SubTitle,
-  MultiAvatar,
 } from "../../../Components/UI/Elements";
-import TodoCheckBox from "../Child/TodoCheckBox"
-import { Link } from "../../../Components/Common";
 
 class TodoItem extends Component {
   handleCallback = () => { };
@@ -86,7 +80,7 @@ class TodoItem extends Component {
         //style={{overflow:"scroll" }}
         >
           <div>
-            <FlexContainer>
+            <div class=" flex">
             
               {/* {show && ( */}
                 <Checkbox
@@ -123,7 +117,7 @@ class TodoItem extends Component {
                  {`${todo.activity} ${todo.topic} ${todo.type} `}
                  {/* {``} */}
                  </SubTitle>
-            </FlexContainer>
+            </div>
           </div>
 
           {/* <div>
