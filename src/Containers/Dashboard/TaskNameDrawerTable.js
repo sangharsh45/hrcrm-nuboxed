@@ -1,15 +1,13 @@
-import React, { lazy, Suspense,useState,useEffect } from "react";
-import { FormattedMessage } from "react-intl";
+import React, { useState,useEffect } from "react";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-import { Tooltip,Button ,Popconfirm} from "antd";
+import { Tooltip,Button} from "antd";
 import {getTaskNameDetails} from "./DashboardAction";
 import moment from "moment";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { OnlyWrapCard } from '../../Components/UI/Layout';
 import {
   MultiAvatar,
-  MultiAvatar2,
 } from "../../Components/UI/Elements";
 
 const ButtonGroup = Button.Group;

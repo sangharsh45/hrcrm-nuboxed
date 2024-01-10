@@ -1,36 +1,24 @@
-import React, { Component } from "react";
+import React, { Component ,lazy} from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { FormattedMessage } from "react-intl";
 import {
   List,
-  Icon,
-  Empty,
-  Rate,
   Popconfirm,
-  message,
   Button,
-  Checkbox,
 } from "antd";
-import { MainWrapper, FlexContainer } from "../../../Components/UI/Layout";
-import { GroupView } from "../../../Components/Common";
-import { Title } from "../../../Components/UI/Elements";
-import RatingBox from "../Child/RatingBox"
 import {
   getTodos,
   updateTodoCall,
   updateTodoEvent,
   updateTodoTask
-
-
 } from "../DashboardAction";
 
 import { setSelectedTodoTimeIntervalReport } from "../../Customer/CustomerAction"
 import TimeInterval from "../../../Utils/TimeInterval";
-// import { updateTodoCall } from "../../../Call/CallAction";
 import { setRating, setId } from "../../Event/EventAction";
-import TodoItem from "./TodoItem";
 import { BundleLoader } from "../../../Components/Placeholder";
+const TodoItem=lazy(() => import("./TodoItem"));
 
 const desc = ["Terrible", "Bad", "Normal", "Good", "Wonderful"];
 const text = "Rate your engagement";
@@ -214,7 +202,7 @@ class Todo extends Component {
         />
 
         {todos.length ? 
-                <FlexContainer>
+                <div class=" flex">
           {todos &&
             todos.slice(0, 5).map((todo, i) => {
               return (
@@ -247,7 +235,7 @@ class Todo extends Component {
                     />}
                     onCancel={this.confirm}
                   >
-                    <FlexContainer justifyContent="flex-end"
+                    <div class=" flex justify-end" 
 >
                       <Button
                         style={{ padding: "0px 0.37em", border: "none" }}
@@ -269,7 +257,7 @@ class Todo extends Component {
 
                         /> */}
                       </Button>
-                    </FlexContainer>
+                    </div>
                   </Popconfirm>
                   {/* <RatingBox
                         handleChange={this.handleChange}
@@ -280,7 +268,7 @@ class Todo extends Component {
                 </List.Item>
               );
             })}
-        </FlexContainer>
+        </div>
         :"Data Not Available"
   }
 

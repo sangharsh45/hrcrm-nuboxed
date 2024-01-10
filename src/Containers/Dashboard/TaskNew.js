@@ -2,7 +2,6 @@
 import React, { Component,lazy } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import {  message } from "antd";
 import {
   getDashboardTasks,
   handleTaskNameDrawer

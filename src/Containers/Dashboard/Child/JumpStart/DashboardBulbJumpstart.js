@@ -1,10 +1,9 @@
 
-import React, {useEffect} from "react";
+import React, {} from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import moment from "moment";
-import { JumpStartBox, Spacer } from "../../../../Components/UI/Elements";
-import { FlexContainer } from "../../../../Components/UI/Layout";
+import { JumpStartBox, } from "../../../../Components/UI/Elements";
 import {getDateWiseList,getSalesDateWiseList,getJumpBulblist,getJumpBulblist2,getJumpBulblist3,getavgHour} from "../../DashboardAction";
 
 class DashboardBulbJumpstart extends React.Component{
@@ -70,8 +69,8 @@ render() {
   const { showDatelist, fetchingDatewiseReport } = this.props;
    const startDate = `${this.state.startDate.format("YYYY-MM-DD")}T20:00:00Z`
   return(
-      <FlexContainer flexDirection="row" style={{ width: "100%"}}>
-        <FlexContainer style={{ width: "100%"}}>
+      <div class=" flex flex-row w-full" >
+        <div class="flex w-full" >
         
           <JumpStartBox
             noProgress
@@ -112,10 +111,10 @@ render() {
             
             isLoading={this.props.fetchingJumpstartBulb3}
           />
-        </FlexContainer>
-        <Spacer />
+        </div>
+     
     
-      </FlexContainer>
+      </div>
     
   ); 
 }

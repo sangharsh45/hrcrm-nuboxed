@@ -1,17 +1,10 @@
-import React, { Component } from "react";
-import { Avatar, Divider, Button, Menu, Dropdown } from "antd";
-import { UserOutlined } from '@ant-design/icons';
-import { FormattedMessage } from "react-intl";
-import { elipsize } from "../../../Helpers/Function/Functions";
-
-import { FlexContainer, MainWrapper } from "../../../Components/UI/Layout";
+import React, { } from "react";
+import {  MainWrapper } from "../../../Components/UI/Layout";
 import {
   MultiAvatar,
   Title,
   SubTitle,
 } from "../../../Components/UI/Elements";
-import { ActionIcon } from "../../../Components/Utils";
-import { CurrencySymbol } from "../../../Components/Common";
 
 // const menu = (
 //   <Menu>
@@ -51,14 +44,11 @@ const BussinessCard = (props) => {
   } = props;
   console.log("...>>>>>>>>>>>.......<<<<<<<<<<<<<<", imageURL);
   return (
-    <FlexContainer flexDirection="column" style={{ borderRadius: 3 }}>
+    <div class=" flex flex-col"  style={{ borderRadius: 3 }}>
       <MainWrapper>
-        <FlexContainer
-          alignItems="center"
-          flexWrap="no-wrap"
-          style={{ height: "2.5em" }}
+        <div class="flex flex-no-wrap h-[2.5em] items-center"
         >
-          <FlexContainer style={{ flexBasis: "20%", margin: "0.3rem" }}>
+          <div class=" flex" style={{ flexBasis: "20%", margin: "0.3rem" }}>
             <MultiAvatar
               primaryTitle={primaryTitle}
             //   imageId={imageId}
@@ -66,10 +56,10 @@ const BussinessCard = (props) => {
               imgHeight={"1.56em"}
               imgWidth={"1.56em"}
             />
-          </FlexContainer>
-          <FlexContainer
-            flexDirection="column"
-            style={{ flexBasis: "70%", overflow: "hidden" }}
+          </div>
+          <div class=" flex flex-col overflow-hidden"
+          
+            style={{ flexBasis: "70%", }}
           >
             <Title
               fontSize="0.875em"
@@ -88,17 +78,17 @@ const BussinessCard = (props) => {
               &nbsp;
               {secondaryTitle || ""} */}
             </SubTitle>
-          </FlexContainer>
-          <FlexContainer
+          </div>
+          <div class=" flex flex-start"
             style={{ flexBasis: "10%", alignSelf: "flex-start" }}
-          ></FlexContainer>
-        </FlexContainer>
+          ></div>
+        </div>
 
         <SubTitle style={{ color: "#337df4", fontSize: "0.75em" }}>
           {/* {elipsize(subtitle1 || "", 23)} */}
         </SubTitle>
       </MainWrapper>
-    </FlexContainer>
+    </div>
   );
 };
 export default BussinessCard;

@@ -1,8 +1,7 @@
-//import "./styles.css";
-import React, { Component,useState, useMemo ,useEffect} from "react";
+
+import React, {} from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { FlexContainer } from "../../Components/UI/Layout";
 import TimeInterval from "../../Utils/TimeInterval";
  import {setSelectedClosureTimeIntervalReport} from "../Opportunity/OpportunityAction";
  import {getAllDashBoardClosureRatio} from "../Dashboard/DashboardAction";
@@ -15,7 +14,6 @@ import {
   Tooltip,
   Legend
 } from "recharts";
-import OpportunityCardView from "../Opportunity/OpportunityCardView";
 import { MainWrapper } from "../../Components/UI/Elements";
 
 
@@ -100,7 +98,7 @@ import { MainWrapper } from "../../Components/UI/Elements";
     style={{height:"16em",width:"60%"}}
     >
       {/* Recruitment Performance */}
-      <FlexContainer justifyContent="space-between">
+      <div class=" flex justify-between" >
       {/* <div style={{ width: "47%" }}> */}
       <span>Performance</span>
       {/* </div> */}
@@ -110,7 +108,7 @@ import { MainWrapper } from "../../Components/UI/Elements";
            handleClick={this.props.setSelectedClosureTimeIntervalReport}
         />
         {/* </div> */}
-        </FlexContainer>
+        </div>
     <BarChart
       width={350}
       height={200}

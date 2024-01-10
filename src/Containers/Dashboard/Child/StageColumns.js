@@ -1,9 +1,7 @@
-import React, { Component } from "react";
+import React, { Component,lazy } from "react";
 import styled from "styled-components";
 import { Draggable } from "react-beautiful-dnd";
-import { BussinessCard } from "../../../Components/UI/Elements";
-import CandidateCard from "../Child/CandidateCard";
-import { MainWrapper, FlexContainer } from "../../../Components/UI/Layout";
+const CandidateCard = lazy(() => import("../Child/CandidateCard"));
 const StageContainer = styled.div`
   padding: 0.8rem 1.5rem;
   margin: 0.2rem;

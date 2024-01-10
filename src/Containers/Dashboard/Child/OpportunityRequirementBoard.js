@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useState,lazy } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { withRouter } from "react-router-dom";
@@ -7,18 +7,10 @@ import {
   updateRequirementStage,
   
   } from "../../Opportunity/OpportunityAction";
- import StageColumns from "../Child/StageColumns";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
-import { StyledTabs, StyledModal } from "../../../Components/UI/Antd";
-import { SmileOutlined, MehOutlined, CompassOutlined } from '@ant-design/icons';
-import { MainWrapper, FlexContainer } from "../../../Components/UI/Layout";
-
-
-import { Spin, message, notification, Button } from "antd";
-import { BundleLoader } from "../../../Components/Placeholder";
-
-import { CurrencySymbol } from "../../../Components/Common";
-import { wrap } from "lodash";
+import { StyledTabs } from "../../../Components/UI/Antd";
+import { MainWrapper } from "../../../Components/UI/Layout";
+const StageColumns = lazy(() => import("../Child/StageColumns"));
 const TabPane = StyledTabs.TabPane;
 
 const ParentContainer = styled.div`
@@ -347,7 +339,7 @@ function OpportunityRequirementBoard(props) {
 console.log("Gent",props.item)
 console.log("group1",props.candidateRequirement)
   return (
-    <FlexContainer flexWrap="nowrap">
+    <div class=" flex flex-no-wrap" >
       <MainWrapper
         style={{
           width: "100%",
@@ -355,7 +347,7 @@ console.log("group1",props.candidateRequirement)
           height: "100vh",
         }}
       >
-        <div style={{ display: "flex" }}>
+        <div class=" flex" >
           <StyledTabs
             // defaultActiveKey={this.state.activeKey}
             onChange={handleTabChange}
@@ -376,7 +368,7 @@ console.log("group1",props.candidateRequirement)
           </StyledTabs>
         </div>
 
-        <FlexContainer flexWrap="no-wrap">
+        <div class=" flex flex-no-wrap" >
               <DragDropContext
                 onDragEnd={onDragEnd}
                 type="stage"
@@ -396,10 +388,8 @@ console.log("group1",props.candidateRequirement)
                       >
                            {(provided, snapshot) => (
                             <>
-                         <div
-                                  style={{
-                                    display: "flex",
-                                  }}
+                         <div class=" flex"
+                                 
                                 >
                       
                         <StageHeader 
@@ -450,11 +440,11 @@ console.log("group1",props.candidateRequirement)
                   </>
                 </Container>
               </DragDropContext>
-            </FlexContainer>
+            </div>
        
     
       </MainWrapper>
-    </FlexContainer>
+    </div>
   );
 }
 
