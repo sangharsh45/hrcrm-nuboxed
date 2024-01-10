@@ -1,20 +1,11 @@
 
-import React, { useEffect, useState,lazy } from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import moment from "moment";
-import DeleteIcon from "@mui/icons-material/Delete";
-import { Tooltip, Avatar } from "antd";
-import NoteAltIcon from "@mui/icons-material/NoteAlt";
-import InfiniteScroll from "react-infinite-scroll-component";
+
 import { OnlyWrapCard } from '../../../Components/UI/Layout'
 
-import { MultiAvatar2 } from "../../../Components/UI/Elements";
-import { FormattedMessage } from "react-intl";
-
 function ProcurementQuotationCard(props) {
-  const [page, setPage] = useState(0);
-  const [hasMore, setHasMore] = useState(true);
 
   useEffect(() => {
   }, []);

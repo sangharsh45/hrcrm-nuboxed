@@ -8,7 +8,7 @@ import { TextareaComponent } from "../../../Components/Forms/Formik/TextareaComp
 class ProcurementTCForm extends Component {
 
     componentDidMount = () => {
-        // this.props.getTermsNConditionInOrder(this.props.projectOrderId)
+   
     }
 
     render() {
@@ -48,8 +48,8 @@ class ProcurementTCForm extends Component {
                         ...rest
                     }) => (
                         <Form>
-                            <div style={{ display: "flex", justifyContent: "space-between", margin: "20px 0 5px 5px" }}>
-                                <div style={{ width: "30%" }}>
+                            <div class="flex justify-between m-auto">
+                                <div class="w-[30%]">
                                     <Field
                                         name="termsOfPayment"
                                         label="Terms of Payment"
@@ -57,15 +57,11 @@ class ProcurementTCForm extends Component {
                                         width={"100%"}
                                         component={TextareaComponent}
                                         inlineLabel
-                                        style={{
-                                            flexBasis: "80%",
-                                            height: "80px",
-                                            marginTop: "0px",
-                                        }}
+                                        
                                     />
                                 </div>
 
-                                <div style={{ width: "30%" }}>
+                                <div class="w-[30%]">
                                     <Field
                                         name="applicant"
                                         label="Applicant/Buyer"
@@ -73,14 +69,9 @@ class ProcurementTCForm extends Component {
                                         width={"100%"}
                                         component={TextareaComponent}
                                         inlineLabel
-                                        style={{
-                                            flexBasis: "80%",
-                                            height: "80px",
-                                            marginTop: "0px",
-                                        }}
-                                    />
+                                                                            />
                                 </div>
-                                <div style={{ width: "30%" }}>
+                                <div class="w-[30%]">
                                     <Field
                                         name="offerValidity"
                                         label="Offer Validity"
@@ -88,17 +79,12 @@ class ProcurementTCForm extends Component {
                                         width={"100%"}
                                         component={TextareaComponent}
                                         inlineLabel
-                                        style={{
-                                            flexBasis: "80%",
-                                            height: "80px",
-                                            marginTop: "0px",
-                                        }}
                                     />
                                 </div>
 
                             </div>
-                            <div style={{ display: "flex", justifyContent: "space-between", margin: "10px 0 5px 5px" }}>
-                                <div style={{ width: "30%" }}>
+                            <div class="flex justify-between m-auto">
+                                <div class="w-[30%]">
                                     <Field
                                         name="deliveryTerms"
                                         label="Delivery Terms"
@@ -106,15 +92,11 @@ class ProcurementTCForm extends Component {
                                         width={"100%"}
                                         component={TextareaComponent}
                                         inlineLabel
-                                        style={{
-                                            flexBasis: "80%",
-                                            height: "80px",
-                                            marginTop: "0px",
-                                        }}
+                                       
                                     />
                                 </div>
 
-                                <div style={{ width: "30%" }}>
+                                <div class="w-[30%]">
                                     <Field
                                         name="installationTerms"
                                         label="Installation Terms:"
@@ -129,7 +111,7 @@ class ProcurementTCForm extends Component {
                                         }}
                                     />
                                 </div>
-                                <div style={{ width: "30%" }}>
+                                <div class="w-[30%]">
                                     <Field
                                         name="beneficiary"
                                         label="Beneficiary / Consigner / Manufacturer"
@@ -147,7 +129,7 @@ class ProcurementTCForm extends Component {
 
                             </div>
                         
-                            <div style={{ display: "flex", justifyContent: "flex-end" }}>
+                            <div class="flex justify-end">
                                 <Button
                                     type="primary"
                                     htmlType="submit"

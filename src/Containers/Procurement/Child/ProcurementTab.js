@@ -1,5 +1,5 @@
 import React, { Component, lazy, Suspense } from "react";
-import { Button, Tooltip } from "antd";
+import { Tooltip } from "antd";
 import { StyledTabs } from "../../../Components/UI/Antd";
 import { PlusOutlined } from "@ant-design/icons";
 import { TabsWrapper } from "../../../Components/UI/Layout";
