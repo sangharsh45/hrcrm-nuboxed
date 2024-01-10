@@ -1,14 +1,8 @@
-import React, { useEffect, useState,lazy } from "react";
+import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import moment from "moment";
-import DeleteIcon from "@mui/icons-material/Delete";
-import { Tooltip, Avatar } from "antd";
-import NoteAltIcon from "@mui/icons-material/NoteAlt";
-import InfiniteScroll from "react-infinite-scroll-component";
 import { OnlyWrapCard } from '../../../Components/UI/Layout'
 import {getBOM} from "../ProcurementAction";
-import { MultiAvatar2 } from "../../../Components/UI/Elements";
 import { FormattedMessage } from "react-intl";
 
 function ProcurementCard(props) {
@@ -18,39 +12,6 @@ function ProcurementCard(props) {
   useEffect(() => {
     props.getBOM(page)
   }, []);
-
-
-
-
-//   const handleLoadMore = () => {
-//     const callPageMapd = props.callListRangeByUserId && props.callListRangeByUserId.length &&props.callListRangeByUserId[0].pageCount
-//     setTimeout(() => {
-//       const {
-//         getCallListRangeByUserId,
-//         userDetails: { employeeId },
-//       } = props;
-//       if  (props.callListRangeByUserId)
-//       {
-//         if (page < callPageMapd) {
-//           setPage(page + 1);
-//         getCallListRangeByUserId(employeeId, page);
-//         props.getEmployeelist();
-//       }
-//       if (page === callPageMapd){
-//         setHasMore(false)
-//       }
-//     }
-//     }, 100);
-//   };
-
-//   function handleSetCallNameId(item) {
-//     setCurrentNameId(item);
-//   }
-
-
-  const {
-
-  } = props;
 
 
   return (

@@ -121,7 +121,7 @@ const initialState = {
 
   fetchingUserAdmin: false,
   fetchingUserAdminError:false,
-  userAdminnoti:[],
+  userAdminnoti:{},
 
 };
 export const EmployeeReducer = (state = initialState, action) => {

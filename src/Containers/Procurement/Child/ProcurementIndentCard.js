@@ -1,22 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import {  Tooltip,  } from "antd";
-import {
-    StyledTable,  
-} from "../../../Components/UI/Antd";
-
-import { EditOutlined, FileWordFilled, HistoryOutlined, SearchOutlined } from "@ant-design/icons";
-
-import moment from "moment";
-
-import { MultiAvatar, Select, } from "../../../Components/UI/Elements";
-
-import { base_url } from "../../../Config/Auth";
-import { CurrencySymbol } from "../../../Components/Common";
 import { OnlyWrapCard } from "../../../Components/UI/Layout";
 
-const { Option } = Select;
 
 function ProcurementIndentCard(props) {
 
@@ -24,36 +10,6 @@ function ProcurementIndentCard(props) {
        
     }, [])
    
-
-    // const serviceOption = props.services
-    //     .sort(function (a, b) {
-    //         var nameA = a.serviceName.toUpperCase(); // ignore upper and lowercase
-    //         var nameB = b.serviceName.toUpperCase(); // ignore upper and lowercase
-    //         if (nameA < nameB) {
-    //             return -1;
-    //         }
-    //         if (nameA > nameB) {
-    //             return 1;
-    //         }
-    //         // names must be equal
-    //         return 0;
-    //     })
-    //     .map((item) => {
-    //         return {
-    //             text: item.serviceName,
-    //             value: item.serviceName,
-    //         };
-    //     });
-
-    const [show, setshow] = useState(false);
-    const [particularRowData, setParticularRowData] = useState({});
-    const [currentIndentId, setCurrentIndentId] = useState("");
-    const [searchText, setSearchText] = useState("");
-    const [searchedColumn, setSearchedColumn] = useState("");
-
-
-
-
 
 
     return (

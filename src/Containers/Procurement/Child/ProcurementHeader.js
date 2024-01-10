@@ -1,9 +1,7 @@
-import React, { lazy} from "react";
+import React from "react";
 import { ActionHeader } from "../../../Components/Utils";
-// const InvestorActionLeft=lazy(()=> import("./InvestorActionLeft"));
-// const InvestorActionRight=lazy(()=> import("./InvestorActionRight"));
 
-function InvestorHeader (props) {
+function ProcumentHeader (props) {
  
 
     const {
@@ -11,36 +9,12 @@ function InvestorHeader (props) {
 
     } =props;
     return (
-      <div style={{position: "sticky",
-        top: "3.35rem",
-        zIndex: "998"}}>
+      <div class="sticky top-12 z-auto">
         <ActionHeader
-        //   leftComponent={
-        //     <InvestorActionLeft
-        //     viewType={viewType}
-        //     setInvestorViewType={setInvestorViewType}
-        //     currentUser={currentUser}
-        //     currentData={currentData}
-        //     handleClear={handleClear}
-     
-        //     handleChange={handleChange}
-        //     handleCurrentData={handleCurrentData}
-        //     handleFilterChange={props.handleFilterChange}
-        //                 filter={props.filter}
-        //     />
-        //   }
-        //   rightComponent={
-        //     <InvestorActionRight
-        //     viewType={viewType}
-        //     // currentUser={this.props.currentUser} 
-        //     // handleDropChange={this.props.handleDropChange}
-        //     handleInvestorModal={handleInvestorModal}
-        //     />
-        //   }
         />
       </div>
     );
   
 }
 
-export default InvestorHeader;
+export default ProcumentHeader;
