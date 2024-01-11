@@ -164,16 +164,17 @@ const Candidate = (props) => {
           ) 
           : viewType === "table" ? (
             <CandidateTable
-              handleResponseData={this.handleResponseData}
-              responseData={this.state.responseData}
-              currentUser={this.state.currentUser}
-              selectedLanguage={this.props.selectedLanguage}
+              // handleResponseData={this.handleResponseData}
+              // responseData={this.state.responseData}
+              currentUser={currentUser}
+              // selectedLanguage={this.props.selectedLanguage}
 
             />
           ) : viewType === "list" ? (
-            <CandidateWhiteTable currentUser={this.state.currentUser} />
+            <CandidateWhiteTable 
+            currentUser={currentUser} />
           ) : viewType === "dashboard" ? (
-            <CandidateBlueTable currentUser={this.state.currentUser} />
+            <CandidateBlueTable currentUser={currentUser} />
           ) : viewType === "black" ? (
             <CandidateBlackListTable />
           ) : // this.props.viewType==="grid"?
