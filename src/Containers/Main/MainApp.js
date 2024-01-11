@@ -661,15 +661,15 @@ function MainApp(props) {
                         path="/opportunity"
                         component={Opportunity}
                       />
-                      {/* <Route exact path="/candidate" 
+                      <Route exact path="/candidate" 
                       component={Candidate}   
-                      /> */}
+                      />
 
-                      <Route
+                      {/* <Route
                         exact
                         path="/candidate"
                         render={(props) => <Candidate {...props} selectedLanguage={selectedLanguage} />}
-                      />
+                      /> */}
                       <Route exact path="/message" component={LiveMessage} />
 
 
