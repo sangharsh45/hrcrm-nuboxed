@@ -471,6 +471,14 @@ const initialState = {
   leadAging: [],
   addingLeadAging: false,
   addingLeadAgingError: false,
+
+  addingNotificationConfig: false,
+  addingNotificationConfigError:false,
+
+  gettingNotificationConfig: false,
+  gettingNotificationConfigError:false,
+  notificationConfig:{},
+
 };
 export const settingsReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -2888,6 +2896,34 @@ export const settingsReducer = (state = initialState, action) => {
       case types.GET_DEPARTMENTWISE_USER_FAILURE:
         return { ...state, fetchingDepartmentWiseUser: false, fetchingDepartmentWiseUserError: true };
 
+        case types.ADD_NOTIFICATION_CONFIG_REQUEST:
+          return { ...state, addingNotificationConfig: true };
+        case types.ADD_NOTIFICATION_CONFIG_SUCCESS:
+          return {
+            ...state,
+            addingNotificationConfig: false,
+          };
+        case types.ADD_NOTIFICATION_CONFIG_FAILURE:
+          return {
+            ...state,
+            addingNotificationConfig: false,
+            addingNotificationConfigError: true,
+          };
+
+        case types.GET_NOTIFICATION_CONFIG_REQUEST:
+          return { ...state, gettingNotificationConfig: true };
+        case types.GET_NOTIFICATION_CONFIG_SUCCESS:
+          return {
+            ...state,
+            gettingNotificationConfig: false,
+            notificationConfig:action.payload,
+          };
+        case types.GET_NOTIFICATION_CONFIG_FAILURE:
+          return {
+            ...state,
+            gettingNotificationConfig: false,
+            gettingNotificationConfigError: true,
+          };
 
     default:
       return state;
