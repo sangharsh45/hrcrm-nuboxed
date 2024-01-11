@@ -967,8 +967,8 @@ function CandidateTable(props) {
         handlePlayerModal={props.handlePlayerModal}
       />
       <UpdateCandidateResumeModal
-        handleResponseData={props.handleResponseData}
-        responseData={props.responseData}
+        // handleResponseData={props.handleResponseData}
+        // responseData={props.responseData}
         updateCandidateModal={updateCandidateModal}
         handleUpdateCandidateModal={handleUpdateCandidateModal}
         updateCandidateResumeModal={updateCandidateResumeModal}

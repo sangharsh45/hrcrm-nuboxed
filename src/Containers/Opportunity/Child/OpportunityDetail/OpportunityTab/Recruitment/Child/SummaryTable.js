@@ -318,13 +318,20 @@ class SummaryTable extends Component {
                   maxStyle={{ color: "#f56a00", backgroundColor: "#fde3cf" }}
                 >
                   {item.recruiterList &&
-                    item.recruiterList.map((item, i) => {
-                      const data = item.fullName.split("")[0].toUpperCase();
-                      console.log("datas", data);
+                    item.recruiterList.map((recruiter, i) => {
+                      const recruit =
+                      recruiter.fullName &&
+                      recruiter.fullName
+                      .slice(0, 2)
+                      .toUpperCase();
+                        // .slice(0, 2)
+                        // // .split("")[0]
+                        // .toUpperCase();
+                      console.log("datas", recruit);
                       return (
                         <Tooltip title={item.fullName}>
                           <Avatar style={{ backgroundColor: "#f56a00" }}>
-                            {data}
+                            {recruit}
                           </Avatar>
                         </Tooltip>
                       );
