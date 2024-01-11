@@ -3941,3 +3941,52 @@ export const getDepartmentwiserUser = (departmentId) => (dispatch) => {
       });
     });
 };
+
+export const addNotificationConfig = (data) => (dispatch) => {
+  dispatch({ type: types.ADD_NOTIFICATION_CONFIG_REQUEST });
+
+  axios
+    .put(`${base_url}/notification/config`, data, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.ADD_NOTIFICATION_CONFIG_SUCCESS,
+        payload: res.data ,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.ADD_NOTIFICATION_CONFIG_FAILURE,
+      });
+    });
+};
+export const getNotificationConfig = (name,type) => (dispatch) => {
+  dispatch({
+    type: types.GET_NOTIFICATION_CONFIG_REQUEST,
+  });
+  axios
+    .get(`${base_url}/notification/config/${name}/${type}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.GET_NOTIFICATION_CONFIG_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.GET_NOTIFICATION_CONFIG_FAILURE,
+        payload: err,
+      });
+    });
+};

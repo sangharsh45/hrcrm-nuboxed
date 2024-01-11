@@ -2,43 +2,45 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Button, Switch } from "antd";
-import { Formik, Form, Field, FieldArray } from "formik";
+import { FormattedMessage } from "react-intl";
+import { Formik, Form, FastField } from "formik";
 import { InputComponent } from "../../../../../../Components/Forms/Formik/InputComponent";
 import { FlexContainer } from "../../../../../../Components/UI/Layout";
-;
+import {addNotificationConfig,getNotificationConfig} from "../../../../SettingsAction";
 
 
 class NotificationToggleForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-        admin:  false,
-        reportingManager: false,
-        reportingManager1: false,
+        admini:  this.props.notificationConfig.admin,
+        reportingMan:this.props.notificationConfig.reportingManager,
+        reportingMan1:this.props.notificationConfig.reportingManager1,
     };
   }
-  handleProduction = () => {
+  handleAdmini = () => {
     this.setState((prevState) => ({
-      admin: !prevState.admin,
+      admini: !prevState.admini,
     }));
   };
-  handleBilling = () => {
+  handleReportingMan = () => {
     this.setState((prevState) => ({
-        reportingManager: !prevState.reportingManager,
+        reportingMan: !prevState.reportingMan,
     }));
   };
 
-  handleCorporate = () => {
+  handleReportingMan1 = () => {
     this.setState((prevState) => ({
-      reportingManager1: !prevState.reportingManager1,
+      reportingMan1: !prevState.reportingMan1,
     }));
   };
   
   componentDidMount() {
+    this.props.getNotificationConfig("candidate","create");
   }
 
   render() {
-
+console.log("433434344",this.props.notificationConfig)
     
 
     return (
@@ -46,20 +48,23 @@ class NotificationToggleForm extends Component {
         <Formik
           initialValues={{
             
-            admin: this.state.admin ? "true" : "false",
-            reportingManager: this.state.reportingManager  ? "true" :"false",
-            reportingManager1: this.state.reportingManager1 ? "true" : "false",
+            admin: this.state.admini ? "true" : "false",
+            reportingManager: this.state.reportingMan  ? "true" :"false",
+            reportingManager1: this.state.reportingMan1 ? "true" : "false",
+            type: "Create",
+            name: "Candidate",
+
           }}
           // validationSchema={FormSchema}
           onSubmit={(values, { resetForm }) => {
             //debugger;
             console.log(values);
-            this.props.updateLocation(
+            this.props.addNotificationConfig(
               {
                 ...values,
-                admin: this.state.admin ? "true" : "false",
-                reportingManager: this.state.reportingManager  ? "true" :"false",
-                reportingManager1: this.state.reportingManager1 ? "true" : "false",
+                admin: this.state.admini ? "true" : "false",
+                reportingManager: this.state.reportingMan  ? "true" :"false",
+                reportingManager1: this.state.reportingMan1 ? "true" : "false",
               },
             );
           }}
@@ -85,8 +90,8 @@ class NotificationToggleForm extends Component {
                       <div>
                         <Switch
                           style={{ width: "6.25em" }}
-                          checked={this.state.admin}
-                          onChange={this.handleProduction}
+                          checked={this.props.notificationConfig.admin || this.state.admini}
+                          onChange={this.handleAdmini}
                           checkedChildren="Yes"
                           unCheckedChildren="No"
                         />
@@ -97,11 +102,26 @@ class NotificationToggleForm extends Component {
                       <div>
                         <Switch
                           style={{ width: "6.25em" }}
-                          checked={this.state.reportingManager}
-                          onChange={this.handleInventory}
+                          checked={this.props.notificationConfig.reportingManager || this.state.reportingMan}
+                          onChange={this.handleReportingMan}
                           checkedChildren="Yes"
                           unCheckedChildren="No"
                         />
+                      </div>
+                      <div>
+                      <FastField
+                        name="name"
+                        label={
+                          <FormattedMessage
+                            id="app.name"
+                            defaultMessage="Name"
+                          />}
+                        isColumn
+                        width={"100%"}
+                        component={InputComponent}
+                        inlineLabel
+                        isRequired
+                      />
                       </div>
                     </div>
                   </FlexContainer>
@@ -111,8 +131,8 @@ class NotificationToggleForm extends Component {
                       <div>
                         <Switch
                           style={{ width: "6.25em" }}
-                          checked={this.state.reportingManager1}
-                          onChange={this.handleProdManuf}
+                          checked={this.props.notificationConfig.reportingManager1 || this.state.reportingMan1}
+                          onChange={this.handleReportingMan1}
                           checkedChildren="Yes"
                           unCheckedChildren="No"
                         />
@@ -127,7 +147,7 @@ class NotificationToggleForm extends Component {
                 <Button
                   type="primary"
                   htmlType="submit"
-                //   loading={this.props.updatingLocations}
+                  loading={this.props.addingNotificationConfig}
                 >
                  Update
                 </Button>
@@ -140,16 +160,19 @@ class NotificationToggleForm extends Component {
     );
   }
 }
-const mapStateToProps = ({ location, auth, teams, plant }) => ({
-//   updatingLocations: location.updatingLocations,
+const mapStateToProps = ({ settings, auth, }) => ({
+  addingNotificationConfig:settings.addingNotificationConfig,
   userId:auth.userDetails.userId,
   orgId:auth.userDetails.organizationId,
+  notificationConfig:settings.notificationConfig
+
 });
 
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
-
+      addNotificationConfig,
+      getNotificationConfig
     },
     dispatch
   );
