@@ -26,6 +26,7 @@ const AddCandidateModal = props => {
       >
         <Suspense fallback={<BundleLoader />}>
           <CandidateForm
+          initialValues={props.initialValues}
            responseData={responseData} />
         </Suspense>
       </StyledDrawer>
