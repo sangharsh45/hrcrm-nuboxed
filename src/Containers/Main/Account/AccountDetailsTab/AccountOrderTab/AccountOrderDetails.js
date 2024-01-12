@@ -13,6 +13,7 @@ import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
 import PrecisionManufacturingIcon from '@mui/icons-material/PrecisionManufacturing';
 import PhoneNotesOrderModal from "./PhoneNotesOrderModal";
 import AccountPhoneTaskTable from "./AccountPhoneTaskTable";
+import AddingSpareList from "./AddingSpareList";
 
 const FormSchema = Yup.object().shape({
     pauseNoOfDays: Yup.string().required("Input required!"),
@@ -294,12 +295,12 @@ function DistributorPauseForm(props) {
                 phoNotesOrderModal={props.phoNotesOrderModal}
                 handlePhoneNotesOrderModal={props.handlePhoneNotesOrderModal}
             />
-            {/* {spares && (
+            {spares && (
                 <AddingSpareList
                     phoneId={phoneId}
                     RowData={RowData}
                 />
-            )} */}
+            )}
         </>
     );
 }

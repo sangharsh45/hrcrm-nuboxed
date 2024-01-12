@@ -4,14 +4,14 @@ import { bindActionCreators } from "redux";
 import { Timeline } from "antd";
 import { BorderBox } from "../../../../../Components/UI/Layout";
 import { BundleLoader } from "../../../../../Components/Placeholder";
-import { getNotesInOrder } from "../../AccountAction";
+// import { getNotesInOrder } from "../../AccountAction";
 import NoteForm from "../../../../Note/NoteForm";
 import { SingleNote } from "../../../../../Components/Common";
 
 class PhoneNotesForm extends Component {
-    componentDidMount() {
-        this.props.getNotesInOrder(this.props.particularRowData.orderId);
-    }
+    // componentDidMount() {
+    //     this.props.getNotesInOrder(this.props.particularRowData.orderId);
+    // }
 
     render() {
         const { fetchingNotesInOrders, notesInOrders } = this.props;
@@ -22,9 +22,9 @@ class PhoneNotesForm extends Component {
                     <NoteForm
                         type={"distributor"}
                         orderId={this.props.particularRowData.orderId}
-                        callback={() =>
-                            this.props.getNotesInOrder(this.props.particularRowData.orderId)
-                        }
+                    // callback={() =>
+                    //     this.props.getNotesInOrder(this.props.particularRowData.orderId)
+                    // }
                     />
                 </div>
                 <br />
@@ -62,7 +62,7 @@ const mapStateToProps = ({ auth, distributor }) => ({
 const mapDispatchToProps = (dispatch) =>
     bindActionCreators(
         {
-            getNotesInOrder,
+            // getNotesInOrder,
         },
         dispatch
     );

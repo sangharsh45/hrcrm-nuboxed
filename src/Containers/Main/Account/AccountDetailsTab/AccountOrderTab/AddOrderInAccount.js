@@ -173,7 +173,7 @@ function AddOrderInAccount(props) {
                                         isColumn
                                         inlineLabel
                                         component={SelectComponent}
-                                        options={["7", "15", "30"]}
+                                        options={["7", "15", "30", "45", "60", "75", "90"]}
                                     />
                                 </div>
                                 <div style={{ width: "47%" }}>

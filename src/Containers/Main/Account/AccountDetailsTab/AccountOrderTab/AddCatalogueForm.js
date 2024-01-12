@@ -49,7 +49,7 @@ const AddCatalogueForm = (props) => {
             <Formik
                 enableReinitialize
                 initialValues={{
-                    type: props.toggle ? "Catalogue" : "Non-Catalogue",
+                    type: "Catalogue",
                     productId: "",
                     quantity: "",
                     productName: "",

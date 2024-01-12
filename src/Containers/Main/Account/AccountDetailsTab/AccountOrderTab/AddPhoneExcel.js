@@ -27,7 +27,7 @@ function AddPhoneExcel(props) {
 
                         {
                             ...values,
-                            type: props.toggle ? "Catalogue" : "Non-Catalogue"
+                            type: "Non-Catalogue"
                         },
                         props.distributorId
                     );
@@ -65,7 +65,7 @@ function AddPhoneExcel(props) {
                                 <Button
                                     type="primary"
                                     htmlType="submit"
-                                // loading={props.uploadDocumentById}
+                                    loading={props.addingCar}
                                 >
                                     Finish
                                 </Button>
@@ -80,6 +80,7 @@ function AddPhoneExcel(props) {
 const mapStateToProps = ({ auth, distributor }) => ({
     userId: auth.userDetails.userId,
     orderDetailsId: distributor.orderDetailsId,
+    addingCar: distributor.addingCar
 });
 
 const mapDispatchToProps = (dispatch) =>

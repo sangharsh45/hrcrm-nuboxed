@@ -9,12 +9,12 @@ const AddLocationInOrder = (props) => {
         <>
             <StyledDrawer
                 title={`Add to - ${props.particularRowData.newOrderNo}`}
-                width="25vw"
+                width="40vw"
                 visible={props.addInventoryInOrder}
                 maskClosable={false}
                 destroyOnClose
                 maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}
-                style={{marginTop:"5rem"}}
+                style={{ marginTop: "5rem" }}
                 onClose={() => props.handleInventoryLocationInOrder(false)}
                 footer={null}
             >

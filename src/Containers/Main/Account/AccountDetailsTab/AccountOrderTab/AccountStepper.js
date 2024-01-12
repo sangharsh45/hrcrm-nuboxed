@@ -41,14 +41,14 @@ class AccountStepper extends Component {
             {
                 title: 'Order',
                 icon: <UserOutlined />,
-                content: <AddOrderInAccount distributorId={this.props.distributorId} />,
+                content: <AddOrderInAccount distributorId={this.props.distributorId} inspectionRequiredInd={this.props.inspectionRequiredInd} />,
             },
             {
-                title: 'Add Phone details',
+                title: 'Phone details',
                 icon: <PhoneOutlined
                     style={{ color: "blue" }}
                 />,
-                content: <AccountOrderSecondStep distributorId={this.props.distributorId} />,
+                content: <AccountOrderSecondStep distributorId={this.props.distributorId} inspectionRequiredInd={this.props.inspectionRequiredInd} />,
             },
 
 
@@ -105,7 +105,7 @@ class AccountStepper extends Component {
 }
 
 const mapStateToProps = ({ auth, distributor }) => ({
-
+    inspectionRequiredInd: auth.userDetails.inspectionRequiredInd,
 });
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({}, dispatch);

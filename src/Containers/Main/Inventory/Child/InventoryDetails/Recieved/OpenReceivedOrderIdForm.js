@@ -193,7 +193,7 @@ function OpenReceivedOrderIdForm(props) {
   ];
 
   const tab = document.querySelector(".ant-layout-sider-children");
-  const tableHeight = tab && tab.offsetHeight - 200;
+  const tableHeight = tab && tab.offsetHeight - 150;
   return (
     <>
       <StyledTable
