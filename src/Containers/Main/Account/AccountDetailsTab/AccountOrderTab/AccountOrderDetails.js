@@ -4,16 +4,15 @@ import { bindActionCreators } from "redux";
 import { StyledTable } from "../../../../../Components/UI/Antd";
 import { getPhonelistById, handlePhoneNotesOrderModal, updateQCStatus } from "../../AccountAction";
 import * as Yup from "yup";
-// import PhoneNotesOrderModal from "./PhoneNotesOrderModal";
 import { Button, Tooltip } from "antd";
-// import DistributorPhoneTaskTable from "./DistributorPhoneTaskTable";
 import { MultiAvatar, SubTitle } from "../../../../../Components/UI/Elements";
 import QRCodeModal from "../../../../../Components/UI/Elements/QRCodeModal";
-// import AddingSpareList from "./AddingSpareList";
 import ButtonGroup from "antd/lib/button/button-group";
 import NoteAltIcon from '@mui/icons-material/NoteAlt';
 import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
 import PrecisionManufacturingIcon from '@mui/icons-material/PrecisionManufacturing';
+import PhoneNotesOrderModal from "./PhoneNotesOrderModal";
+import AccountPhoneTaskTable from "./AccountPhoneTaskTable";
 
 const FormSchema = Yup.object().shape({
     pauseNoOfDays: Yup.string().required("Input required!"),
@@ -224,10 +223,10 @@ function DistributorPauseForm(props) {
                         <PrecisionManufacturingIcon
                             style={{ color: spares && item.phoneId === RowData.phoneId ? "red" : "black" }}
 
-                        // onClick={() => {
-                        //     handleSetRowData(item);
-                        //     hanldeSpare();
-                        // }}
+                            onClick={() => {
+                                handleSetRowData(item);
+                                hanldeSpare();
+                            }}
                         />
 
                     </Tooltip>
@@ -244,10 +243,10 @@ function DistributorPauseForm(props) {
                         <FormatListBulletedIcon
                             style={{ color: expand && item.phoneId === RowData.phoneId ? "red" : "black" }}
                             type="file-done"
-                        // onClick={() => {
-                        //     handleSetRowData(item);
-                        //     handleExpand(item.phoneId);
-                        // }}
+                            onClick={() => {
+                                handleSetRowData(item);
+                                handleExpand(item.phoneId);
+                            }}
                         />
 
                     </Tooltip>
@@ -263,10 +262,10 @@ function DistributorPauseForm(props) {
                     <Tooltip title="Notes">
                         <NoteAltIcon
                             style={{ cursor: "pointer", fontSize: "13px" }}
-                        // onClick={() => {
-                        //     handleSetRowData(item);
-                        //     props.handlePhoneNotesOrderModal(true);
-                        // }}
+                            onClick={() => {
+                                handleSetRowData(item);
+                                props.handlePhoneNotesOrderModal(true);
+                            }}
                         />
 
                     </Tooltip>
@@ -285,8 +284,8 @@ function DistributorPauseForm(props) {
             />
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            {/* {expand && (
-                <DistributorPhoneTaskTable
+            {expand && (
+                <AccountPhoneTaskTable
                     phoneId={phoneId}
                     RowData={RowData} />
             )}
@@ -295,7 +294,7 @@ function DistributorPauseForm(props) {
                 phoNotesOrderModal={props.phoNotesOrderModal}
                 handlePhoneNotesOrderModal={props.handlePhoneNotesOrderModal}
             />
-            {spares && (
+            {/* {spares && (
                 <AddingSpareList
                     phoneId={phoneId}
                     RowData={RowData}
