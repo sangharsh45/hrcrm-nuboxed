@@ -398,8 +398,8 @@ export const distributorReducer = (state = initialState, action) => {
         addingDistributorError: true,
         addDistributorModal: false,
       };
-      case types.EMPTY_DISTRIBUTOR_LIST:
-        return { ...state, allDistributors: [] }; 
+    case types.EMPTY_DISTRIBUTOR_LIST:
+      return { ...state, allDistributors: [] };
 
     /**
      * get the list of all distributors
@@ -1176,10 +1176,7 @@ export const distributorReducer = (state = initialState, action) => {
         ...state,
         addingCar: false,
         addLinkDistributorOrderConfigureModal: false,
-        //showReqTable:[action.payload,...state.showReqTable]
-        // addDriverModal: false,
-
-
+        distributorOrder: [action.payload, ...state.distributorOrder]
       };
     case types.ADD_CAR_FAILURE:
       return {
@@ -1644,6 +1641,7 @@ export const distributorReducer = (state = initialState, action) => {
         ...state,
         addingLocationInOrder: false,
         addInventoryInOrder: false,
+        distributorOrder: [action.payload, ...state.distributorOrder]
       };
     case types.ADD_LOCATION_IN_ORDER_FAILURE:
       return {
@@ -1771,6 +1769,7 @@ export const distributorReducer = (state = initialState, action) => {
       return {
         ...state,
         updatingOfferPriceOfOrder: false,
+        distributorOrder: [action.payload, ...state.distributorOrder]
       };
     case types.UPDATE_OFFER_PRICE_FAILURE:
       return {

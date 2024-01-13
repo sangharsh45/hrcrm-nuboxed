@@ -1,4 +1,4 @@
-import React, { useEffect, useState,Suspense } from 'react'
+import React, { useEffect, useState, Suspense } from 'react'
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import moment from 'moment/moment';
@@ -18,7 +18,7 @@ import {
     updateOfferPrice,
     handleAccountProduction
 } from "../../AccountAction";
-import {Button,Input, Tooltip} from 'antd';
+import { Button, Input, Tooltip } from 'antd';
 import AddLocationInOrder from './AddLocationInOrder';
 import AccountOrderDetailsModal from './AccountOrderDetailsModal';
 import StatusOfOrderModal from './StatusOfOrderModal';
@@ -62,9 +62,6 @@ const AccountOrderTable = (props) => {
             props.distributorId,
         );
         setVisible(false)
-    }
-    if (props.fetchingDistributorByDistributorId) {
-        return <BundleLoader />;
     }
 
     return (
@@ -439,37 +436,37 @@ const AccountOrderTable = (props) => {
                     {/* </InfiniteScroll> */}
                 </OnlyWrapCard>
             </div>
-                <Suspense fallback={<BundleLoader />}>  
-            <AddLocationInOrder
-                particularRowData={particularRowData}
-                addInventoryInOrder={props.addInventoryInOrder}
-                handleInventoryLocationInOrder={props.handleInventoryLocationInOrder}
-            />
-            <AddNotesOrderModal
-                particularRowData={particularRowData}
-                addNotesInOrder={props.addNotesInOrder}
-                handleNotesModalInOrder={props.handleNotesModalInOrder}
-            />
-            <AccountOrderDetailsModal
-                particularRowData={particularRowData}
-                handleOrderDetailsModal={props.handleOrderDetailsModal}
-                addOrderDetailsModal={props.addOrderDetailsModal} />
-            <StatusOfOrderModal
-                handleStatusOfOrder={props.handleStatusOfOrder}
-                addStatusOfOrder={props.addStatusOfOrder}
-                particularRowData={particularRowData}
-            />
-            <PaidButtonModal
-                addPaidButtonModal={props.addPaidButtonModal}
-                handlePaidModal={props.handlePaidModal}
-                particularRowData={particularRowData}
-            />
-            <AccountproductionModal
-                particularRowData={particularRowData}
-                accountOrderProduction={props.accountOrderProduction}
-                handleAccountProduction={props.handleAccountProduction}
-            />
-                      </Suspense>
+            <Suspense fallback={<BundleLoader />}>
+                <AddLocationInOrder
+                    particularRowData={particularRowData}
+                    addInventoryInOrder={props.addInventoryInOrder}
+                    handleInventoryLocationInOrder={props.handleInventoryLocationInOrder}
+                />
+                <AddNotesOrderModal
+                    particularRowData={particularRowData}
+                    addNotesInOrder={props.addNotesInOrder}
+                    handleNotesModalInOrder={props.handleNotesModalInOrder}
+                />
+                <AccountOrderDetailsModal
+                    particularRowData={particularRowData}
+                    handleOrderDetailsModal={props.handleOrderDetailsModal}
+                    addOrderDetailsModal={props.addOrderDetailsModal} />
+                <StatusOfOrderModal
+                    handleStatusOfOrder={props.handleStatusOfOrder}
+                    addStatusOfOrder={props.addStatusOfOrder}
+                    particularRowData={particularRowData}
+                />
+                <PaidButtonModal
+                    addPaidButtonModal={props.addPaidButtonModal}
+                    handlePaidModal={props.handlePaidModal}
+                    particularRowData={particularRowData}
+                />
+                <AccountproductionModal
+                    particularRowData={particularRowData}
+                    accountOrderProduction={props.accountOrderProduction}
+                    handleAccountProduction={props.handleAccountProduction}
+                />
+            </Suspense>
         </>
     )
 }
