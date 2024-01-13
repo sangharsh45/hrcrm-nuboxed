@@ -3,15 +3,15 @@ import { StyledDrawer } from "../../../Components/UI/Antd";
 import { BundleLoader } from "../../../Components/Placeholder";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import ProductBuilderList from "./ProductBuilderList";
-import OrderCatalogueList from "./OrderCatalogueList";
+// import OrderCatalogueList from "./OrderCatalogueList";
+import InspectedPhoneByOrder from "./InspectedPhoneByOrder";
 
 const ShowProductBuilderModal = (props) => {
     const { RowData, ...formProps } = props;
     return (
         <>
             <StyledDrawer
-                title={`Catalogue`}
+                title={`Order No-${props.rowData.newOrderNo}`}
                 width="60vw"
                 visible={props.productBuilderList}
                 closable
@@ -22,8 +22,8 @@ const ShowProductBuilderModal = (props) => {
                 footer={null}
             >
                 <Suspense fallback={<BundleLoader />}>
-                    {/* <ProductBuilderList /> */}
-                    <OrderCatalogueList rowData={props.rowData} />
+                    <InspectedPhoneByOrder rowData={props.rowData} />
+                    {/* <OrderCatalogueList rowData={props.rowData} /> */}
                 </Suspense>
             </StyledDrawer>
         </>

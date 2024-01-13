@@ -1323,6 +1323,7 @@ export const distributorReducer = (state = initialState, action) => {
         ...state,
         startingQcInStatus: false,
         addStatusOfOrder: false,
+        distributorOrder: [action.payload, ...state.distributorOrder]
       };
     case types.START_QC_STATUS_FAILURE:
       return {
@@ -1339,6 +1340,7 @@ export const distributorReducer = (state = initialState, action) => {
         startRepairingInStatus: false,
         addStatusOfOrder: false,
         showRepairReasonModal: false,
+        distributorOrder: [action.payload, ...state.distributorOrder]
       };
     case types.START_REPAIR_IN_STATUS_FAILURE:
       return {
@@ -1976,7 +1978,9 @@ export const distributorReducer = (state = initialState, action) => {
       return {
         ...state,
         addingProductionLocationInOrder: false,
-        accountOrderProduction: false
+        accountOrderProduction: false,
+        distributorOrder: [action.payload, ...state.distributorOrder]
+
       };
     case types.ADD_PRODUCTION_LOCATION_IN_ORDER_FAILURE:
       return {

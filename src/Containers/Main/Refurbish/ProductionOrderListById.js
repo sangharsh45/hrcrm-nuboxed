@@ -178,100 +178,100 @@ function ProductionOrderListById(props) {
     }
     return (
         <>
-    <div className=' flex justify-end sticky top-28 z-auto'>
-<OnlyWrapCard style={{backgroundColor:"#E3E8EE"}}>
-<div className=" flex justify-between w-[97.5%] p-2 bg-transparent font-bold sticky top-0 z-10">
-    <div className=" md:w-[4.1rem]">Order</div>
-    <div className=" md:w-[5.1rem]">Due Date</div>
-    <div className=" md:w-[9.8rem] ">Completed Phones</div>
-    <div className="md:w-[6.6rem]"></div>
-    <div className="md:w-[5.8rem]">Note</div>
-    {/* <div className="md:w-[4.3rem]"></div> */}
-  </div>
-{props.orderByUser.map((item) => { 
-    const currentdate = moment().format("DD/MM/YYYY");
-    const date = moment(item.creationDate).format("DD/MM/YYYY");
-               return (
-                   <div>
-                       <div className="flex rounded-xl justify-between mt-4 bg-white h-12 items-center p-3 "
-                           
-                           >
-                              <div class="flex">
-                           <div className=" flex font-medium  md:w-[15.2rem] max-sm:w-full  ">
-                           <span
-                        style={{ textDecoration: "underline", color: "#1890ff", cursor: "pointer" }}
-                        onClick={() => {
-                            handleRowData(item);
-                            props.handleOrderPhoneModal(true)
-                        }}>
-                        {item.newOrderNo}
-                    </span>
-                    &nbsp;&nbsp;
-                    {date === currentdate ? (
-                        <span
-                            style={{
-                                color: "tomato",
-                                fontWeight: "bold",
-                            }}
-                        >
-                            New
-                        </span>
-                    ) : null}
-                           </div>
+            <div className=' flex justify-end sticky top-28 z-auto'>
+                <OnlyWrapCard style={{ backgroundColor: "#E3E8EE" }}>
+                    <div className=" flex justify-between w-[97.5%] p-2 bg-transparent font-bold sticky top-0 z-10">
+                        <div className=" md:w-[4.1rem]">Order</div>
+                        <div className=" md:w-[5.1rem]">Due Date</div>
+                        <div className=" md:w-[9.8rem] ">Completed Phones</div>
+                        <div className="md:w-[5.8rem]">Status</div>
+                        {/* <div className="md:w-[4.3rem]"></div> */}
+                    </div>
+                    {props.orderByUser.map((item) => {
+                        const currentdate = moment().format("DD/MM/YYYY");
+                        const date = moment(item.creationDate).format("DD/MM/YYYY");
+                        return (
+                            <div>
+                                <div className="flex rounded-xl justify-between mt-4 bg-white h-12 items-center p-3 "
 
-                           <div className=" flex font-medium   md:w-[19.2rem] max-sm:flex-row w-full max-sm:justify-between  ">
-                               <h4 class=" text-xs text-cardBody font-poppins">   
-                               {item.dueDate === null ? "" : moment(item.dueDate).format("DD-MM-YYYY")}
-                               </h4>
-                           
-                           </div> 
-                           <div className=" flex font-medium  md:w-[8.2rem] max-sm:flex-row w-full max-sm:justify-between ">
-                             
+                                >
+                                    <div class="flex">
+                                        <div className=" flex font-medium  md:w-[15.2rem] max-sm:w-full  ">
+                                            <span
+                                                style={{ textDecoration: "underline", color: "#1890ff", cursor: "pointer" }}
+                                                onClick={() => {
+                                                    handleRowData(item);
+                                                    props.handleOrderPhoneModal(true)
+                                                }}>
+                                                {item.newOrderNo}
+                                            </span>
+                                            &nbsp;&nbsp;
+                                            {date === currentdate ? (
+                                                <span
+                                                    style={{
+                                                        color: "tomato",
+                                                        fontWeight: "bold",
+                                                    }}
+                                                >
+                                                    New
+                                                </span>
+                                            ) : null}
+                                        </div>
 
-                            
-                               <h4 class=" text-sm text-cardBody font-poppins">
-                               {item.qcCompletePhoneCount}/{item.totalPhone}
-                               </h4>
-                           </div>
-                           </div>
-                           <div className=" flex font-medium  md:w-[10.5rem] max-sm:flex-row w-full max-sm:justify-between ">
-                              
+                                        <div className=" flex font-medium   md:w-[19.2rem] max-sm:flex-row w-full max-sm:justify-between  ">
+                                            <h4 class=" text-xs text-cardBody font-poppins">
+                                                {item.dueDate === null ? "" : moment(item.dueDate).format("DD-MM-YYYY")}
+                                            </h4>
 
-                               <div class=" text-xs text-cardBody font-poppins text-center">
-                               {`${(item.address && item.address[0].city) || ""} ${" "}${(item.address && item.address[0].state) || ""}`}
+                                        </div>
+                                        <div className=" flex font-medium  md:w-[8.2rem] max-sm:flex-row w-full max-sm:justify-between ">
 
-                               </div>
-                           </div>
-                           <div className=" flex font-medium  md:w-[12.2rem] max-sm:flex-row w-full max-sm:justify-between ">                           
-                               <div class=" text-xs text-cardBody font-poppins text-center">
-                               {item.qcInspectionInd === 0 ? <Button
-                        type="primary"
-                        onClick={() => {
-                            props.qcInspectionButton({
-                                productionDispatchId: item.productionDispatchId,
-                                orderPhoneId: item.orderPhoneId,
-                                qcInspectionInd: 1
-                            }, item.orderPhoneId, props.locationId, props.userId)
-                        }}
-                    >Start Inspection</Button> : item.qcInspectionInd === 1 ?
-                        <Button onClick={handlePauseResume}>{hide ? "Pause Inspection" : "Resume Inspection"}</Button> : "Inspection Completed"}
 
-                               </div>
-                           </div>
-                         
-                         
-                       </div>
-                   </div>
-)})}
-</OnlyWrapCard>
-<OrderPhoneModal
-                showPhoneList={props.showPhoneList}
-                handleOrderPhoneModal={props.handleOrderPhoneModal}
-                rowData={rowData}
-            />
-</div>
-</>
-  )
+
+                                            <h4 class=" text-sm text-cardBody font-poppins">
+                                                {item.qcCompletePhoneCount}/{item.totalPhone}
+                                            </h4>
+                                        </div>
+                                    </div>
+                                    <div className=" flex font-medium  md:w-[10.5rem] max-sm:flex-row w-full max-sm:justify-between ">
+
+
+                                        <div class=" text-xs text-cardBody font-poppins text-center">
+                                            {`${(item.address && item.address[0].city) || ""} ${" "}${(item.address && item.address[0].state) || ""}`}
+
+                                        </div>
+                                    </div>
+                                    <div className=" flex font-medium  md:w-[12.2rem] max-sm:flex-row w-full max-sm:justify-between ">
+                                        <div class=" text-xs text-cardBody font-poppins text-center">
+                                            {item.qcInspectionInd === 0 ? <Button
+                                                type="primary"
+                                                onClick={() => {
+                                                    props.qcInspectionButton({
+                                                        productionDispatchId: item.productionDispatchId,
+                                                        orderPhoneId: item.orderPhoneId,
+                                                        qcInspectionInd: 1
+                                                    }, item.orderPhoneId, props.locationId, props.userId)
+                                                }}
+                                            >Start Inspection</Button> : item.qcInspectionInd === 1 ?
+                                                <Button onClick={handlePauseResume}>{hide ? "Pause Inspection" : "Resume Inspection"}</Button> : "Inspection Completed"}
+
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        )
+                    })}
+                </OnlyWrapCard>
+                <OrderPhoneModal
+                    showPhoneList={props.showPhoneList}
+                    handleOrderPhoneModal={props.handleOrderPhoneModal}
+                    rowData={rowData}
+                />
+            </div>
+        </>
+    )
 }
 
 const mapStateToProps = ({ refurbish, auth }) => ({

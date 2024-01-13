@@ -2208,8 +2208,6 @@ export const startQCStatus = (data, distributorId, cb) => (dispatch) => {
     })
     .then((res) => {
       console.log(res);
-      dispatch(getDistributorOrderByDistributorId(distributorId, 0))
-
       dispatch({
         type: types.START_QC_STATUS_SUCCESS,
         payload: res.data,

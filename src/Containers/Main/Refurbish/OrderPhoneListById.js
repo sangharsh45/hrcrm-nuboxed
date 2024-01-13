@@ -431,213 +431,214 @@ function OrderPhoneListById(props) {
     }
     return (
         <>
-    <div className=' flex justify-end sticky flex-col z-auto'>
-<OnlyWrapCard style={{backgroundColor:"#E3E8EE"}}>
-<div className=" flex justify-between w-[97.5%] p-2 bg-transparent font-bold sticky top-0 z-10">
-    <div className=" md:w-[1.1rem]">Company</div>
-    <div className=" md:w-[1.2rem]">Model</div>
-    <div className=" md:w-[2.8rem] ">IMEI</div>
-    <div className="md:w-[3.6rem]">QR Code</div>
-    <div className="md:w-[4.8rem]">Start Time</div>
-    <div className="md:w-[4.3rem]">End Time</div>
-    <div className="md:w-[6.2rem]">Actual Effort</div>
-    <div className="md:w-[7.5rem]">Estimated Hours</div>
-    <div className="md:w-[6.9rem]"></div>
-  </div>
-{props.orderPhoneList.map((item) => { 
-    const currentdate = moment().format("DD/MM/YYYY");
-    const date = moment(item.creationDate).format("DD/MM/YYYY");
-    const starttimme = moment(item.qcStartTime).add(5, 'hours').add(30, 'minutes');
-  //  const endtimme = moment(item.qcEndTime).add(5, 'hours').add(30, 'minutes');
-    const time = moment(item.qcEndTime).add(5, 'hours').add(30, 'minutes');
-    const endtimme = time.format('YYYY-MM-DDTHH:mm:ss.SSSZ'); // Using ISO 8601 format
-               return (
-                   <div>
-                       <div className="flex rounded-xl  justify-between mt-4 bg-white h-12 items-center p-3 "
-                           
-                           >
-                              <div class="flex">
-                           <div className=" flex font-medium  md:w-[5.6rem] max-sm:w-full  ">
-                         {item.company}
-                           </div>
+            <div className=' flex justify-end sticky flex-col z-auto'>
+                <OnlyWrapCard style={{ backgroundColor: "#E3E8EE" }}>
+                    <div className=" flex justify-between w-[97.5%] p-2 bg-transparent font-bold sticky top-0 z-10">
+                        <div className=" md:w-[1.1rem]">Company</div>
+                        <div className=" md:w-[1.2rem]">Model</div>
+                        <div className=" md:w-[2.8rem] ">IMEI</div>
+                        <div className="md:w-[3.6rem]">QR Code</div>
+                        <div className="md:w-[4.8rem]">Start Time</div>
+                        <div className="md:w-[4.3rem]">End Time</div>
+                        <div className="md:w-[6.2rem]">Actual Effort</div>
+                        <div className="md:w-[7.5rem]">Estimated Hours</div>
+                        <div className="md:w-[6.9rem]"></div>
+                    </div>
+                    {props.orderPhoneList.map((item) => {
+                        const currentdate = moment().format("DD/MM/YYYY");
+                        const date = moment(item.creationDate).format("DD/MM/YYYY");
+                        const starttimme = moment(item.qcStartTime).add(5, 'hours').add(30, 'minutes');
+                        //  const endtimme = moment(item.qcEndTime).add(5, 'hours').add(30, 'minutes');
+                        const time = moment(item.qcEndTime).add(5, 'hours').add(30, 'minutes');
+                        const endtimme = time.format('YYYY-MM-DDTHH:mm:ss.SSSZ'); // Using ISO 8601 format
+                        return (
+                            <div>
+                                <div className="flex rounded-xl  justify-between mt-4 bg-white h-12 items-center p-3 "
 
-                           <div className=" flex font-medium   md:w-[4.2rem] max-sm:flex-row w-full max-sm:justify-between  ">
-                               <h4 class=" text-xs text-cardBody font-poppins">   
-                              {item.model}
-                               </h4>
-                           
-                           </div> 
-                           <div className=" flex font-medium  md:w-[8.2rem] max-sm:flex-row w-full max-sm:justify-between ">
-                             
+                                >
+                                    <div class="flex">
+                                        <div className=" flex font-medium  md:w-[5.6rem] max-sm:w-full  ">
+                                            {item.company}
+                                        </div>
 
-                            
-                               <h4 class=" text-sm text-cardBody font-poppins">
-                              {item.imei}
-                               </h4>
-                           </div>
-                           </div>
-                           <div className=" flex font-medium  md:w-[2.5rem] max-sm:flex-row w-full max-sm:justify-between ">
-                              
+                                        <div className=" flex font-medium   md:w-[4.2rem] max-sm:flex-row w-full max-sm:justify-between  ">
+                                            <h4 class=" text-xs text-cardBody font-poppins">
+                                                {item.model}
+                                            </h4>
 
-                               <div class=" text-xs text-cardBody font-poppins text-center">
-                               <SubTitle>
-                        {item.qrCodeId ? (
-                            <QRCodeModal
-                                qrCodeId={item.qrCodeId ? item.qrCodeId : ''}
-                                imgHeight={"2.8em"}
-                                imgWidth={"2.8em"}
-                                imgRadius={20}
-                            />
-                        ) : (
-                            <span style={{ fontSize: "0.6em", fontWeight: "bold" }}>
-                                No QR
-                            </span>
-                        )}
-                    </SubTitle>
-
-                               </div>
-                           </div>
-                           <div className=" flex font-medium  md:w-[6.2rem] max-sm:flex-row w-full max-sm:justify-between ">                           
-                               <div class=" text-xs text-cardBody font-poppins text-center">
-                               {props.rowData.qcInspectionInd === 1 && <ButtonGroup>
-                            <StatusIcon
-                                type="In Progress"
-                                iconType="fa-hourglass-half"
-                                tooltip="In Progress"
-                                id={item.phoneId}
-                                indStatus={item.qcStatus}
-                                phoneId={RowData.phoneId}
-                                status={active}
-                                onClick={() => {
-                                    handleQCStatus("In Progress", item);
-                                }}
-                            />
-                            <StatusIcon
-                                type="Complete"
-                                iconType="fa-hourglass"
-                                tooltip="Complete"
-                                indStatus={item.qcStatus}
-                                status={active}
-                                id={item.phoneId}
-                                phoneId={RowData.phoneId}
-                                onClick={() => {
-                                    handleQCStatus("Complete", item);
-                                }}
-                            />
-                        </ButtonGroup>}
-
-                               </div>
-                           </div>
-                         
-                           <div className=" flex font-medium  md:w-[5.1rem] max-sm:flex-row w-full max-sm:justify-between ">                           
-                               <div class=" text-xs text-cardBody font-poppins text-center">
-                               {item.qcStartTime === null ? "" : moment(starttimme).format('LT')}
-
-                               </div>
-                           </div>
-                         
-                           <div className=" flex font-medium  md:w-[6.3rem] max-sm:flex-row w-full max-sm:justify-between ">                           
-                               <div class=" text-xs text-cardBody font-poppins text-center">
-                               <>{item.qcStartTime === null ? "" : moment(starttimme).format('LT')}</>
-
-                               </div>
-                           </div>
-                           <div className=" flex font-medium  md:w-[8.3rem] max-sm:flex-row w-full max-sm:justify-between ">                           
-                               <div class=" text-xs text-cardBody font-poppins text-center">
-                               {item.estimateQcTimeHours || "0"}H:{item.estimateQcTimeMinutes || "0"}M:{item.estimateQcTimeSeconds || "0"}S
-
-                               </div>
-                           </div>
-                           <div className=" flex font-medium  md:w-[11.3rem] max-sm:flex-row w-full max-sm:justify-between ">                           
-                               <div class=" text-xs text-cardBody font-poppins text-center">
-                            {item.totalhours}
-
-                               </div>
-                           </div>
-                           <div className=" flex font-medium  md:w-[1.5rem] max-sm:flex-row w-full max-sm:justify-between ">                           
-                               <div class=" text-xs text-cardBody font-poppins text-center">
-                               <Tooltip title="Spare">
-                        <span style={{ color: spares && item.phoneId === RowData.phoneId ? "red" : "black" }}
-
-                            onClick={() => {
-                                handleSetRowData(item);
-                                hanldeSpare();
-                            }}>
-                            <i class="fab fa-linode"></i>
-                        </span>
-
-
-                    </Tooltip>
-
-                               </div>
-                           </div>
-                           <div className=" flex font-medium  md:w-[1.5rem] max-sm:flex-row w-full max-sm:justify-between ">                           
-                               <div class=" text-xs text-cardBody font-poppins text-center">
-                               <Tooltip title="Task">
-                        <FileDoneOutlined
-                            style={{ color: expand && item.phoneId === RowData.phoneId ? "red" : "black" }}
-                            type="file-done"
-                            onClick={() => {
-                                handleSetRowData(item);
-                                handleExpand(item.phoneId);
-                            }}
-                        />
-
-                    </Tooltip>
-
-                               </div>
-                           </div>
-                           <div className=" flex font-medium  md:w-[1.5rem] max-sm:flex-row w-full max-sm:justify-between ">                           
-                               <div class=" text-xs text-cardBody font-poppins text-center">
-                               <Tooltip title="Notes">
-                        <NoteAddOutlined
-                            style={{ cursor: "pointer", fontSize: "13px" }}
-                            onClick={() => {
-                                handleSetRowData(item);
-                                props.handleQCPhoneNotesOrderModal(true);
-                            }}
-                        />
-
-                    </Tooltip>
-
-                               </div>
-                           </div>
+                                        </div>
+                                        <div className=" flex font-medium  md:w-[8.2rem] max-sm:flex-row w-full max-sm:justify-between ">
 
 
 
-                       </div>
-                   </div>
-)})}
-</OnlyWrapCard>
-<div style={{ display: "flex", justifyContent: "flex-end" }}>
-                {props.rowData.qcInspectionInd === 1 ? <Button
-                    type="primary"
-                    onClick={handlePuaseButton}>{hide ? "Resume" : "Pause"}
-                </Button> : null}
-            </div>
-{spares && (
-                <AddingQCSpareList
-                    phoneId={phoneId}
+                                            <h4 class=" text-sm text-cardBody font-poppins">
+                                                {item.imei}
+                                            </h4>
+                                        </div>
+                                    </div>
+                                    <div className=" flex font-medium  md:w-[2.5rem] max-sm:flex-row w-full max-sm:justify-between ">
+
+
+                                        <div class=" text-xs text-cardBody font-poppins text-center">
+                                            <SubTitle>
+                                                {item.qrCodeId ? (
+                                                    <QRCodeModal
+                                                        qrCodeId={item.qrCodeId ? item.qrCodeId : ''}
+                                                        imgHeight={"2.8em"}
+                                                        imgWidth={"2.8em"}
+                                                        imgRadius={20}
+                                                    />
+                                                ) : (
+                                                    <span style={{ fontSize: "0.6em", fontWeight: "bold" }}>
+                                                        No QR
+                                                    </span>
+                                                )}
+                                            </SubTitle>
+
+                                        </div>
+                                    </div>
+                                    <div className=" flex font-medium  md:w-[6.2rem] max-sm:flex-row w-full max-sm:justify-between ">
+                                        <div class=" text-xs text-cardBody font-poppins text-center">
+                                            {props.rowData.qcInspectionInd === 1 && <ButtonGroup>
+                                                <StatusIcon
+                                                    type="In Progress"
+                                                    iconType="fa-hourglass-half"
+                                                    tooltip="In Progress"
+                                                    id={item.phoneId}
+                                                    indStatus={item.qcStatus}
+                                                    phoneId={RowData.phoneId}
+                                                    status={active}
+                                                    onClick={() => {
+                                                        handleQCStatus("In Progress", item);
+                                                    }}
+                                                />
+                                                <StatusIcon
+                                                    type="Complete"
+                                                    iconType="fa-hourglass"
+                                                    tooltip="Complete"
+                                                    indStatus={item.qcStatus}
+                                                    status={active}
+                                                    id={item.phoneId}
+                                                    phoneId={RowData.phoneId}
+                                                    onClick={() => {
+                                                        handleQCStatus("Complete", item);
+                                                    }}
+                                                />
+                                            </ButtonGroup>}
+
+                                        </div>
+                                    </div>
+
+                                    <div className=" flex font-medium  md:w-[5.1rem] max-sm:flex-row w-full max-sm:justify-between ">
+                                        <div class=" text-xs text-cardBody font-poppins text-center">
+                                            {item.qcStartTime === null ? "" : moment(item.qcStartTime).format('LT')}
+
+                                        </div>
+                                    </div>
+
+                                    <div className=" flex font-medium  md:w-[6.3rem] max-sm:flex-row w-full max-sm:justify-between ">
+                                        <div class=" text-xs text-cardBody font-poppins text-center">
+                                            <>{item.qcEndTime === null ? "" : moment(item.qcEndTime).format('LT')}</>
+
+                                        </div>
+                                    </div>
+                                    <div className=" flex font-medium  md:w-[8.3rem] max-sm:flex-row w-full max-sm:justify-between ">
+                                        <div class=" text-xs text-cardBody font-poppins text-center">
+                                            {item.estimateQcTimeHours || "0"}H:{item.estimateQcTimeMinutes || "0"}M:{item.estimateQcTimeSeconds || "0"}S
+
+                                        </div>
+                                    </div>
+                                    <div className=" flex font-medium  md:w-[11.3rem] max-sm:flex-row w-full max-sm:justify-between ">
+                                        <div class=" text-xs text-cardBody font-poppins text-center">
+                                            {item.totalhours}
+
+                                        </div>
+                                    </div>
+                                    <div className=" flex font-medium  md:w-[1.5rem] max-sm:flex-row w-full max-sm:justify-between ">
+                                        <div class=" text-xs text-cardBody font-poppins text-center">
+                                            <Tooltip title="Spare">
+                                                <span style={{ color: spares && item.phoneId === RowData.phoneId ? "red" : "black" }}
+
+                                                    onClick={() => {
+                                                        handleSetRowData(item);
+                                                        hanldeSpare();
+                                                    }}>
+                                                    <i class="fab fa-linode"></i>
+                                                </span>
+
+
+                                            </Tooltip>
+
+                                        </div>
+                                    </div>
+                                    <div className=" flex font-medium  md:w-[1.5rem] max-sm:flex-row w-full max-sm:justify-between ">
+                                        <div class=" text-xs text-cardBody font-poppins text-center">
+                                            <Tooltip title="Task">
+                                                <FileDoneOutlined
+                                                    style={{ color: expand && item.phoneId === RowData.phoneId ? "red" : "black" }}
+                                                    type="file-done"
+                                                    onClick={() => {
+                                                        handleSetRowData(item);
+                                                        handleExpand(item.phoneId);
+                                                    }}
+                                                />
+
+                                            </Tooltip>
+
+                                        </div>
+                                    </div>
+                                    <div className=" flex font-medium  md:w-[1.5rem] max-sm:flex-row w-full max-sm:justify-between ">
+                                        <div class=" text-xs text-cardBody font-poppins text-center">
+                                            <Tooltip title="Notes">
+                                                <NoteAddOutlined
+                                                    style={{ cursor: "pointer", fontSize: "13px" }}
+                                                    onClick={() => {
+                                                        handleSetRowData(item);
+                                                        props.handleQCPhoneNotesOrderModal(true);
+                                                    }}
+                                                />
+
+                                            </Tooltip>
+
+                                        </div>
+                                    </div>
+
+
+
+                                </div>
+                            </div>
+                        )
+                    })}
+                </OnlyWrapCard>
+                <div style={{ display: "flex", justifyContent: "flex-end" }}>
+                    {props.rowData.qcInspectionInd === 1 ? <Button
+                        type="primary"
+                        onClick={handlePuaseButton}>{hide ? "Resume" : "Pause"}
+                    </Button> : null}
+                </div>
+                {spares && (
+                    <AddingQCSpareList
+                        phoneId={phoneId}
+                        RowData={RowData}
+                    />
+                )}
+                {expand && (
+                    <DistributorPhoneTaskTable
+                        phoneId={phoneId}
+                        RowData={RowData} />
+                )}
+
+                <QCPhoneNotesOrderModal
                     RowData={RowData}
+                    phoNotesQCOrderModal={props.phoNotesQCOrderModal}
+                    handleQCPhoneNotesOrderModal={props.handleQCPhoneNotesOrderModal}
                 />
-            )}
-            {expand && (
-                <DistributorPhoneTaskTable
-                    phoneId={phoneId}
-                    RowData={RowData} />
-            )}
-
-            <QCPhoneNotesOrderModal
-                RowData={RowData}
-                phoNotesQCOrderModal={props.phoNotesQCOrderModal}
-                handleQCPhoneNotesOrderModal={props.handleQCPhoneNotesOrderModal}
-            />
-</div>
-</>
-  ) 
+            </div>
+        </>
+    )
 
 
-    
+
 }
 
 const mapStateToProps = ({ refurbish, auth }) => ({
