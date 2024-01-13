@@ -130,7 +130,7 @@ function UpdateLeadsForm (props) {
             <div class="overflow-y-auto h-[34rem] overflow-x-hidden max-sm:h-[30rem]">
             <Form className="form-background">
               <div class=" flex justify-around max-sm:flex-col ">
-                <div class=" h-full w-1/2 max-sm:w-wk"   >
+                <div class=" h-full w-[47.5%] max-sm:w-wk"   >
                     <Spacer/>
                     <div class=" flex  flex-nowrap">
                     <FastField name="imageId" component={PostImageUpld} />
@@ -376,7 +376,7 @@ function UpdateLeadsForm (props) {
                     </div>
                  </div>
 
-                 <div class=" h-3/4 w-5/12 max-sm:w-wk "   >
+                 <div class=" h-3/4 w-[47.5%] max-sm:w-wk "   >
                    <Spacer/>
                    
                     <div class="">
