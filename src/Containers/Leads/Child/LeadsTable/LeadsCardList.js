@@ -379,7 +379,7 @@ const LeadsCardList = (props) => {
                           style={{
                             // color: "green",
                             cursor: "pointer",
-                            fontSize: "1rem",
+                            fontSize: "1.5rem",
                           }}
                         />
                       </Tooltip>

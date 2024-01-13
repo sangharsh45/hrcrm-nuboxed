@@ -471,8 +471,7 @@ class ContactForm extends Component {
                   <div class="w-w47.5">
                     <FastField
                       name="departmentId"
-                      //label="Department"
-                      label={
+                                         label={
                         <FormattedMessage
                           id="app.department"
                           defaultMessage="Department"
@@ -480,9 +479,9 @@ class ContactForm extends Component {
                       }
                       isColumn
                       isColumnWithoutNoCreate
-                      component={SearchSelect}
-                      value={values.departmentId}
-                      selectType="departmentName"
+                      component={InputComponent}
+                      // value={values.departmentId}
+        
                       inlineLabel
                     />
                   </div>

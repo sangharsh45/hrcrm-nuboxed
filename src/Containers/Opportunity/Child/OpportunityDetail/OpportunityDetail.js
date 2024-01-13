@@ -30,7 +30,7 @@ class OpportunityDetail extends Component {
           <FlexContainer>
             <Suspense fallback={""}>
               <FlexContainer flexWrap="no-wrap" style={{ width: "100%" }}>
-                <div class=" w-[20%] max-sm:w-full max-sm:flex flex-col">
+                <div class=" w-[22%] max-sm:w-full max-sm:flex flex-col">
                   <OpportunityDetailLeft opportunity={opportunity} />
                 </div>
                 <div class="w-[80%] max-sm:hidden">
