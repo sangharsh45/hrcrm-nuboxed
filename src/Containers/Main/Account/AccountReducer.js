@@ -8,6 +8,8 @@ const initialState = {
 
   updateAccountModal: false,
 
+  updateOrderModal: false,
+
   addDistributorModal: false,
   setEditingDistributor: {},
 
@@ -1910,6 +1912,9 @@ export const distributorReducer = (state = initialState, action) => {
       };
     case types.HANDLE_ADD_ORDER_MODAL:
       return { ...state, addCatalogueOrderModal: action.payload };
+
+    case types.HANDLE_UPDATE_ORDER_MODAL:
+      return { ...state, updateOrderModal: action.payload };
 
     case types.HANDLE_ORDER_GENERATE_MODAL:
       return { ...state, generateOrderModal: action.payload };

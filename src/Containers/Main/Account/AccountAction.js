@@ -2666,3 +2666,10 @@ export const getCatalogueListById = (orderId) => (dispatch) => {
       });
     });
 };
+
+export const handleUpdateOrder = (modalProps) => (dispatch) => {
+  dispatch({
+    type: types.HANDLE_UPDATE_ORDER_MODAL,
+    payload: modalProps,
+  });
+};

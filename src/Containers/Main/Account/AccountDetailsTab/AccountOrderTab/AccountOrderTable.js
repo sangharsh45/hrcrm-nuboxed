@@ -16,7 +16,8 @@ import {
     handlePaidModal,
     handleStatusOfOrder,
     updateOfferPrice,
-    handleAccountProduction
+    handleAccountProduction,
+    handleUpdateOrder
 } from "../../AccountAction";
 import { Button, Input, Tooltip } from 'antd';
 import AddLocationInOrder from './AddLocationInOrder';
@@ -28,6 +29,7 @@ import { MultiAvatar2 } from '../../../../../Components/UI/Elements';
 import { OnlyWrapCard } from '../../../../../Components/UI/Layout';
 import AccountproductionModal from './AccountProductionModal';
 import { BundleLoader } from '../../../../../Components/Placeholder';
+import UpdateOrderModal from './UpdateAccountOrder/UpdateOrderModal';
 
 
 const AccountOrderTable = (props) => {
@@ -403,6 +405,22 @@ const AccountOrderTable = (props) => {
 
                                             {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden"> Sector </h4> */}
                                             <h4 class=" text-xs text-cardBody font-poppins">
+                                                <Tooltip title="Update Order">
+                                                    <BorderColorOutlined
+                                                        onClick={() => {
+                                                            props.handleUpdateOrder(true)
+                                                            handleSetParticularOrderData(item)
+                                                        }}
+                                                        style={{ cursor: "pointer", fontSize: "1rem", }} />
+                                                </Tooltip>
+
+                                            </h4>
+
+                                        </div>
+                                        <div className=" flex font-medium flex-col  md:w-[1rem] max-sm:flex-row w-full max-sm:justify-between  ">
+
+                                            {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden"> Sector </h4> */}
+                                            <h4 class=" text-xs text-cardBody font-poppins">
                                                 <Tooltip title="Rating">
                                                     <StarBorderIcon
                                                         style={{ cursor: "pointer", fontSize: "1rem", }} />
@@ -466,6 +484,10 @@ const AccountOrderTable = (props) => {
                     accountOrderProduction={props.accountOrderProduction}
                     handleAccountProduction={props.handleAccountProduction}
                 />
+                <UpdateOrderModal
+                    handleUpdateOrder={props.handleUpdateOrder}
+                    updateOrderModal={props.updateOrderModal}
+                />
             </Suspense>
         </>
     )
@@ -478,6 +500,7 @@ const mapStateToProps = ({ distributor, auth, inventory }) => ({
     addInventoryInOrder: distributor.addInventoryInOrder,
     addOrderDetailsModal: distributor.addOrderDetailsModal,
     addStatusOfOrder: distributor.addStatusOfOrder,
+    updateOrderModal: distributor.updateOrderModal,
     addPaidButtonModal: distributor.addPaidButtonModal,
     fetchingDistributorByDistributorId: distributor.fetchingDistributorByDistributorId,
 });
@@ -489,7 +512,8 @@ const mapDispatchToProps = dispatch => bindActionCreators({
     handlePaidModal,
     handleNotesModalInOrder,
     updateOfferPrice,
-    handleAccountProduction
+    handleAccountProduction,
+    handleUpdateOrder
 }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(AccountOrderTable);

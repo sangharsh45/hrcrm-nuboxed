@@ -2,24 +2,23 @@ import React, { useState, useEffect } from 'react';
 import { Formik, Form, Field, FieldArray } from 'formik';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { DatePicker } from "../../../../../Components/Forms/Formik/DatePicker";
+import { DatePicker } from "../../../../../../Components/Forms/Formik/DatePicker";
 import * as Yup from "yup";
-import { Spacer, StyledLabel } from '../../../../../Components/UI/Elements';
-import { FlexContainer } from '../../../../../Components/UI/Layout';
-import { SelectComponent } from '../../../../../Components/Forms/Formik/SelectComponent';
-import { InputComponent } from "../../../../../Components/Forms/Formik/InputComponent";
-import { TextareaComponent } from '../../../../../Components/Forms/Formik/TextareaComponent';
+import { Spacer, StyledLabel } from '../../../../../../Components/UI/Elements';
+import { FlexContainer } from '../../../../../../Components/UI/Layout';
+import { SelectComponent } from '../../../../../../Components/Forms/Formik/SelectComponent';
+import { InputComponent } from "../../../../../../Components/Forms/Formik/InputComponent";
+import { TextareaComponent } from '../../../../../../Components/Forms/Formik/TextareaComponent';
 import { Button, Tooltip, message } from 'antd';
-import { getCurrency } from "../../../../Auth/AuthAction";
-import { addOrderForm, getContactDistributorList } from '../../AccountAction'
+import { addOrderForm, getContactDistributorList } from '../../../AccountAction'
 import moment from 'moment';
 import { ExclamationCircleOutlined } from '@ant-design/icons';
-import AddressFieldArray1 from '../../../../../Components/Forms/Formik/AddressFieldArray1';
+import AddressFieldArray1 from '../../../../../../Components/Forms/Formik/AddressFieldArray1';
 const FormSchema = Yup.object().shape({
     advancePayment: Yup.string().required("Input needed!"),
     contactPersonId: Yup.string().required("Input needed!"),
 })
-function AddOrderInAccount(props) {
+function OrderStep1(props) {
     const contactOption = props.contactDistributor.map((item) => {
         return {
             value: item.contactPersonId,
@@ -28,7 +27,6 @@ function AddOrderInAccount(props) {
     })
     useEffect(() => {
         props.getContactDistributorList(props.distributorId)
-        props.getCurrency()
     }, [])
 
     const [priority, setPriority] = useState("High")
@@ -318,7 +316,7 @@ function AddOrderInAccount(props) {
                             </FlexContainer>
                             <Spacer />
                             <FlexContainer justifyContent="space-between">
-                                <div style={{ width: "30%" }}>
+                                <div style={{ width: "47%" }}>
                                     <Field
                                         name="comments"
                                         label="Comment"
@@ -368,10 +366,9 @@ const mapDispatchToProps = (dispatch) =>
     bindActionCreators(
         {
             addOrderForm,
-            getCurrency,
             getContactDistributorList
         },
         dispatch
     );
 
-export default connect(mapStateToProps, mapDispatchToProps)(AddOrderInAccount);
+export default connect(mapStateToProps, mapDispatchToProps)(OrderStep1);
