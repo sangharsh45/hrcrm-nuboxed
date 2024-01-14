@@ -14,8 +14,8 @@ class OpenReceivedOrderIdModal extends Component {
         return (
             <>
                 <StyledDrawer
-                    title={`Phone List - ${this.props.rowData.orderPhoneId}`}
-                    width="70%"
+                    title={`Order No - ${this.props.rowData.newOrderNo}`}
+                    width="80%"
                     visible={receivedOrdeIdModal}
                     destroyOnClose
                     maskClosable={false}

@@ -131,49 +131,26 @@ class UpdateAccountContactForm extends Component {
                                         width: "45%",
                                     }}
                                 >
-                                    <FlexContainer flexWrap="no-wrap">
-                                        <FastField name="imageId" component={Upload} />
-                                        <div>
-                                            <FlexContainer justifyContent="space-between">
-                                                <div style={{ width: "40%" }}>
-                                                    <FastField
-                                                        name="salutation"
-                                                        type="text"
-                                                        label="Salutation"
-                                                        options={["Mr.", "Ms.", "None"]}
-                                                        component={SelectComponent}
-                                                        inlineLabel
-                                                        className="field"
-                                                        isColumn
-                                                        style={{
-                                                            flexBasis: "80%",
-                                                            //   height: "2.0625em",
-                                                            //   marginTop: "0em",
-                                                        }}
-                                                    />
-                                                </div>
-                                                <div style={{ width: "55%" }}>
-                                                    <FastField
+                                    <FlexContainer justifyContent="space-between">
+                                        <div style={{ width: "40%" }}>
+                                            <Field name="imageId" component={Upload} />
+                                        </div>
+                                        <div style={{ width: "60%" }}>
 
-                                                        name="firstName"
-                                                        isRequired
-                                                        label="First Name"
-                                                        type="text"
-                                                        width={"100%"}
-                                                        isColumn
-                                                        component={InputComponent}
-                                                        inlineLabel
-                                                        style={{
-                                                            //  height: "2.0625em",
-                                                            flexBasis: "80%",
-                                                            //   marginTop: "0em",
-                                                        }}
-                                                    />
-                                                </div>
-                                            </FlexContainer>
-                                            <Spacer />
+                                            <FastField
+                                                isRequired
+                                                name="firstName"
+                                                label="First Name"
+                                                type="text"
+                                                width={"100%"}
+                                                isColumn
+                                                component={InputComponent}
+                                                inlineLabel
+
+                                            />
+
                                             <FlexContainer justifyContent="space-between">
-                                                <div style={{ width: "40%" }}>
+                                                <div style={{ width: "47%" }}>
                                                     <FastField
                                                         name="middleName"
                                                         label="Middle Name"
@@ -182,9 +159,10 @@ class UpdateAccountContactForm extends Component {
                                                         isColumn
                                                         component={InputComponent}
                                                         inlineLabel
+
                                                     />
                                                 </div>
-                                                <div style={{ width: "55%" }}>
+                                                <div style={{ width: "47%" }}>
                                                     <FastField
                                                         name="lastName"
                                                         label="Last Name"
@@ -193,13 +171,13 @@ class UpdateAccountContactForm extends Component {
                                                         isColumn
                                                         component={InputComponent}
                                                         inlineLabel
+
                                                     />
                                                 </div>
                                             </FlexContainer>
                                         </div>
                                     </FlexContainer>
-                                    <Spacer style={{ marginTop: "1.25em" }} />
-                                    <FlexContainer justifyContent="space-between" style={{alignItems:"end"}}>
+                                    <FlexContainer justifyContent="space-between" style={{ alignItems: "end" }}>
                                         <div style={{ width: "47%" }}>
                                             <FastField
                                                 name="dialCode1"
@@ -226,7 +204,7 @@ class UpdateAccountContactForm extends Component {
                                         </div>
                                     </FlexContainer>
                                     <Spacer />
-                                    <FlexContainer justifyContent="space-between" style={{alignItems:"end"}}>
+                                    <FlexContainer justifyContent="space-between" style={{ alignItems: "end" }}>
                                         <div style={{ width: "47%" }}>
                                             <FastField
                                                 name="dialCode2"
@@ -255,22 +233,30 @@ class UpdateAccountContactForm extends Component {
                                     </FlexContainer>
 
                                     <Spacer />
-                                    <FlexContainer justifyContent="space-between">
-                                        <div style={{ width: "100%" }}>
-                                            <FastField
 
-                                                type="email"
-                                                name="emailId"
-                                                label="Email"
-                                                className="field"
-                                                isColumn
-                                                width={"100%"}
-                                                component={InputComponent}
-                                                inlineLabel
+                                    <FastField
 
-                                            />
-                                        </div>
-                                    </FlexContainer>
+                                        type="email"
+                                        name="emailId"
+                                        label="Email"
+                                        className="field"
+                                        isColumn
+                                        width={"100%"}
+                                        component={InputComponent}
+                                        inlineLabel
+
+                                    />
+                                    <div style={{ width: "100%" }}>
+                                        <FastField
+                                            name="LinkedIn"
+                                            label="LinkedIn"
+                                            className="field"
+                                            isColumn
+                                            width={"100%"}
+                                            component={InputComponent}
+                                            inlineLabel
+                                        />
+                                    </div>
                                     <Spacer style={{ marginTop: "1.25em" }} />
                                     <Field
                                         name="notes"
@@ -312,14 +298,11 @@ class UpdateAccountContactForm extends Component {
                                         <div style={{ width: "47%" }}>
                                             <Field
                                                 name="departmentId"
-                                                // placeholder="Designation"
+                                                component={InputComponent}
                                                 label="Department"
-                                                component={SelectComponent}
-                                                options={Array.isArray(department) ? department : []}
-                                                style={{
-                                                    //  borderRadius: "2px",
-                                                    width: "100%"
-                                                }}
+                                                // component={SelectComponent}
+                                                // options={Array.isArray(department) ? department : []}
+                                                style={{ width: "100%" }}
                                             />
                                         </div>
                                     </FlexContainer>

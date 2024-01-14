@@ -63,7 +63,7 @@ const AssignRepairForm = (props) => {
         {
             dataIndex: "imei",
             width: "25%",
-            title: "Remaining",
+            title: "IMEI",
         },
     ]
 

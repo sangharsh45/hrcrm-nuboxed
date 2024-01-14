@@ -494,40 +494,7 @@ function PhoneListForRepair(props) {
 
                                         </div>
                                     </div>
-                                    <div className=" flex font-medium  md:w-[7.2rem] max-sm:flex-row w-full max-sm:justify-between ">
-                                        <div class=" text-xs text-cardBody font-poppins text-center">
-                                            {props.rowData.repairInspectionInd === 1 && <ButtonGroup>
 
-                                                <StatusIcon
-                                                    type="In Progress"
-                                                    iconType="fa-hourglass-half"
-                                                    tooltip="In Progress"
-                                                    id={item.phoneId}
-                                                    indStatus={item.repairStatus}
-                                                    phoneId={RowData.phoneId}
-                                                    status={active}
-                                                    onClick={() => {
-                                                        handleQCRepairStatus("In Progress", item);
-                                                        handleSetRowData(item)
-                                                    }}
-                                                />
-                                                <StatusIcon
-                                                    type="Complete"
-                                                    iconType="fa-hourglass"
-                                                    tooltip="Complete"
-                                                    status={active}
-                                                    id={item.phoneId}
-                                                    indStatus={item.repairStatus}
-                                                    phoneId={RowData.phoneId}
-                                                    onClick={() => {
-                                                        handleQCRepairStatus("Complete", item);
-                                                        handleSetRowData(item)
-                                                    }}
-                                                />
-                                            </ButtonGroup>}
-
-                                        </div>
-                                    </div>
                                     <div className=" flex font-medium  md:w-[6.6rem] max-sm:flex-row w-full max-sm:justify-between ">
                                         <div class=" text-xs text-cardBody font-poppins text-center">
                                             {props.rowData.repairInspectionInd === 1 && <ButtonGroup>

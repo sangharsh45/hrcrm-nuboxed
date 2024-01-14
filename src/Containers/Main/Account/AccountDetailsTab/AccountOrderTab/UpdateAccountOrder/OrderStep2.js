@@ -1,17 +1,21 @@
-import React, { Component, useEffect } from "react";
+import React, { Component, useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { Button, Tooltip } from "antd";
+import { Button, Switch, Tooltip } from "antd";
 import * as Yup from "yup";
 import { Formik, Form, Field, FastField } from "formik";
-import { Spacer } from "../../../../../Components/UI/Elements";
-import { FlexContainer } from "../../../../../Components/UI/Layout";
-import { addCarDetails } from "../../AccountAction"
-import DraggableUpload1 from "../../../../../Components/Forms/Formik/DraggableUpload1";
+import { Spacer } from "../../../../../../Components/UI/Elements";
+import { FlexContainer } from "../../../../../../Components/UI/Layout";
+import { addCarDetails } from "../../../AccountAction"
+import DraggableUpload1 from "../../../../../../Components/Forms/Formik/DraggableUpload1";
 
 
-function AddPhoneExcel(props) {
+function OrderStep2(props) {
 
+    const [keepdata, setKeepdata] = useState(false)
+    const handleKeepData = () => {
+        setKeepdata(true)
+    }
     return (
         <>
             <Formik
@@ -45,6 +49,15 @@ function AddPhoneExcel(props) {
                 }) => (
                     <div class="overflow-y-auto h-[32rem] overflow-x-hidden max-sm:h-[30rem]">
                         <Form class="form-background">
+                            <div style={{ display: "flex", justifyContent: "space-between" }}>
+                                <h2>Keep earlier uploaded data?</h2>
+                                <Switch
+                                    onChange={handleKeepData}
+                                    checked={keepdata}
+                                    checkedChildren="Yes"
+                                    unCheckedChildren="No"
+                                />
+                            </div>
                             <div style={{ display: "flex", justifyContent: "space-between" }}>
                                 <div
                                     style={{
@@ -94,5 +107,5 @@ const mapDispatchToProps = (dispatch) =>
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(AddPhoneExcel);
+)(OrderStep2);
 

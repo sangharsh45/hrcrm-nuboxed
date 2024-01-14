@@ -1,29 +1,27 @@
 import React, { lazy, Suspense, useEffect } from "react";
-import { StyledDrawer } from "../../../Components/UI/Antd";
-import { BundleLoader } from "../../../Components/Placeholder";
+import { StyledDrawer } from "../../../../../Components/UI/Antd";
+import { BundleLoader } from "../../../../../Components/Placeholder";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-// import OrderCatalogueList from "./OrderCatalogueList";
-import InspectedPhoneByOrder from "./InspectedPhoneByOrder";
+const PhoneNotesForm = lazy(() => import("./PhoneNotesForm"));
 
-const ShowProductBuilderModal = (props) => {
+const PhoneNotesOrderModal = (props) => {
     const { RowData, ...formProps } = props;
     return (
         <>
             <StyledDrawer
-                title={`Order No-${props.rowData.newOrderNo}`}
-                width="60vw"
-                visible={props.productBuilderList}
+                title={`Notes`}
+                width="35vw"
+                visible={props.phoNotesOrderModal}
                 closable
                 destroyOnClose
                 maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}
                 style={{ top: 40 }}
-                onClose={() => props.handleProductBuilder(false)}
+                onClose={() => props.handlePhoneNotesOrderModal(false)}
                 footer={null}
             >
                 <Suspense fallback={<BundleLoader />}>
-                    <InspectedPhoneByOrder rowData={props.rowData} />
-                    {/* <OrderCatalogueList rowData={props.rowData} /> */}
+                    <PhoneNotesForm RowData={props.RowData} />
                 </Suspense>
             </StyledDrawer>
         </>
@@ -46,5 +44,5 @@ const mapDispatchToProps = (dispatch) =>
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(ShowProductBuilderModal);
+)(PhoneNotesOrderModal);
 

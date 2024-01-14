@@ -30,6 +30,11 @@ class OrderPaymentTable extends Component {
                 dataIndex: "transactionNumber",
             },
             {
+                title: "Created By",
+                width: "10%",
+                dataIndex: "userName",
+            },
+            {
                 title: "Entry",
                 width: "11%",
                 dataIndex: "date",

@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { Tooltip, Button, Form, } from "antd";
+import { Tooltip } from "antd";
 import { StyledTable } from "../../../Components/UI/Antd";
 import { getBuilderByProId } from "../../Product/ProductAction";
 import { elipsize } from "../../../Helpers/Function/Functions";

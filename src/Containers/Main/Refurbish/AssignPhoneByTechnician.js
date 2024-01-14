@@ -60,7 +60,7 @@ const AssignPhoneByTechnician = (props) => {
         {
             dataIndex: "model",
             width: "25%",
-            title: "model",
+            title: "Model",
         },
         {
             dataIndex: "imei",

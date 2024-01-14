@@ -677,7 +677,7 @@ export const getOrderDetailsById = (orderId) => (dispatch) => {
 };
 export const emptyDistributor = () => (dispatch) => {
   dispatch({
-    type: types.EMPTY_DISTRIBUTOR_LIST, 
+    type: types.EMPTY_DISTRIBUTOR_LIST,
   });
 };
 /**
@@ -831,7 +831,6 @@ export const addCarDetails = (customer, id, cb) => (dispatch, getState) => {
       },
     })
     .then((res) => {
-      dispatch(getDistributorOrderByDistributorId(id, 0))
       dispatch({
         type: types.ADD_CAR_SUCCESS,
         payload: res.data,
@@ -1947,7 +1946,6 @@ export const addLocationInOrder = (data, distributorId) => (dispatch) => {
     })
     .then((res) => {
       console.log(res);
-      dispatch(getDistributorOrderByDistributorId(distributorId, 0));
       dispatch({
         type: types.ADD_LOCATION_IN_ORDER_SUCCESS,
         payload: res.data,
@@ -2210,8 +2208,6 @@ export const startQCStatus = (data, distributorId, cb) => (dispatch) => {
     })
     .then((res) => {
       console.log(res);
-      dispatch(getDistributorOrderByDistributorId(distributorId, 0))
-
       dispatch({
         type: types.START_QC_STATUS_SUCCESS,
         payload: res.data,
@@ -2264,7 +2260,6 @@ export const updateOfferPrice = (data, orderPhoneId, id, cb) => (dispatch) => {
       },
     })
     .then((res) => {
-      dispatch(getDistributorOrderByDistributorId(id, 0));
       dispatch({
         type: types.UPDATE_OFFER_PRICE_SUCCESS,
         payload: res.data,
@@ -2670,4 +2665,11 @@ export const getCatalogueListById = (orderId) => (dispatch) => {
         payload: err,
       });
     });
+};
+
+export const handleUpdateOrder = (modalProps) => (dispatch) => {
+  dispatch({
+    type: types.HANDLE_UPDATE_ORDER_MODAL,
+    payload: modalProps,
+  });
 };

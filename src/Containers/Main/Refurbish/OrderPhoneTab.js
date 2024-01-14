@@ -1,4 +1,4 @@
-import React, { useState,lazy,Suspense } from 'react';
+import React, { useState, lazy, Suspense } from 'react';
 import { StyledTabs } from '../../../Components/UI/Antd';
 import TabPane from 'antd/lib/tabs/TabPane';
 import { FolderOpenTwoTone } from '@ant-design/icons';
@@ -7,11 +7,11 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { BundleLoader } from '../../../Components/Placeholder'
 
-const AddCatalogueInProduction=lazy(()=>import('./ProductionTab/AddCatalogueInProduction'));
-const OpenRepairTable=lazy(()=>import('./OpenRepairTable'));
-const ProductionRepairOrder=lazy(()=>import('./ProductionRepairOrder'));
-const OpenQcTable =lazy(()=>import('./OpenQcTable'));
-const ProductionOrderListById=lazy(()=>import('./ProductionOrderListById'));
+const AddCatalogueInProduction = lazy(() => import('./ProductionTab/AddCatalogueInProduction'));
+const OpenRepairTable = lazy(() => import('./OpenRepairTable'));
+const ProductionRepairOrder = lazy(() => import('./ProductionRepairOrder'));
+const OpenQcTable = lazy(() => import('./OpenQcTable'));
+const ProductionOrderListById = lazy(() => import('./ProductionOrderListById'));
 
 const OrderPhoneTab = (props) => {
 
@@ -46,7 +46,7 @@ const OrderPhoneTab = (props) => {
                         tab={
                             <>
                                 <span onClick={handleMainQc}>
-                                    <BorderColorIcon />&nbsp; QC
+                                    QC
                                 </span>
                                 &nbsp;&nbsp;
                                 <span onClick={handleOpenQc}>
@@ -56,8 +56,8 @@ const OrderPhoneTab = (props) => {
                             </>
                         }
                         key="1">
-                            <Suspense fallback={<BundleLoader/>}>
-                        {openQc ? <OpenQcTable /> : qcMain ? <ProductionOrderListById /> : null}
+                        <Suspense fallback={<BundleLoader />}>
+                            {openQc ? <OpenQcTable /> : qcMain ? <ProductionOrderListById /> : null}
                         </Suspense>
                     </TabPane>}
                 <TabPane
@@ -75,27 +75,28 @@ const OrderPhoneTab = (props) => {
                         </>
                     }
                     key="2">
-                        <Suspense fallback={<BundleLoader/>}>
-                    {repairMain ? <ProductionRepairOrder inspectionRequiredInd={props.inspectionRequiredInd} /> :
-                        openRepair ? <OpenRepairTable /> : null}
-</Suspense>
+                    <Suspense fallback={<BundleLoader />}>
+                        {repairMain ? <ProductionRepairOrder inspectionRequiredInd={props.inspectionRequiredInd} /> :
+                            openRepair ? <OpenRepairTable /> : null}
+                    </Suspense>
                 </TabPane>
-                <TabPane
-                    tab={
-                        <>
-                            <span>
-                                {/* <BorderColorIcon />&nbsp; */}
-                                Production
-                            </span>
-                        </>
-                    }
-                    key="3">
-                                     <Suspense fallback={<BundleLoader/>}>
-                                     <AddCatalogueInProduction />
-                </Suspense>
-                  
+                {props.inspectionRequiredInd &&
+                    <TabPane
+                        tab={
+                            <>
+                                <span>
+                                    {/* <BorderColorIcon />&nbsp; */}
+                                    Production
+                                </span>
+                            </>
+                        }
+                        key="3">
+                        <Suspense fallback={<BundleLoader />}>
+                            <AddCatalogueInProduction />
+                        </Suspense>
 
-                </TabPane>
+
+                    </TabPane>}
             </StyledTabs>
         </div>
     )

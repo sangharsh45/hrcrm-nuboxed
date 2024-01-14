@@ -121,34 +121,19 @@ class AddAccountContactForm extends Component {
                                             <Field name="imageId" component={Upload} />
                                         </div>
                                         <div style={{ width: "60%" }}>
-                                            <FlexContainer justifyContent="space-between">
-                                                <div style={{ width: "47%" }}>
-                                                    <FastField
-                                                        name="salutation"
-                                                        type="text"
-                                                        label="Salutation1"
-                                                        options={["Mr.", "Ms.", "None"]}
-                                                        component={SelectComponent}
-                                                        inlineLabel
-                                                        className="field"
-                                                        isColumn
 
-                                                    />
-                                                </div>
-                                                <div style={{ width: "47%" }}>
-                                                    <FastField
-                                                        isRequired
-                                                        name="firstName"
-                                                        label="First Name"
-                                                        type="text"
-                                                        width={"100%"}
-                                                        isColumn
-                                                        component={InputComponent}
-                                                        inlineLabel
+                                            <FastField
+                                                isRequired
+                                                name="firstName"
+                                                label="First Name"
+                                                type="text"
+                                                width={"100%"}
+                                                isColumn
+                                                component={InputComponent}
+                                                inlineLabel
 
-                                                    />
-                                                </div>
-                                            </FlexContainer>
+                                            />
+
                                             <FlexContainer justifyContent="space-between">
                                                 <div style={{ width: "47%" }}>
                                                     <FastField
@@ -177,13 +162,13 @@ class AddAccountContactForm extends Component {
                                             </FlexContainer>
                                         </div>
                                     </FlexContainer>
-                                    <FlexContainer justifyContent="space-between" style={{alignItems:"end"}}>
+                                    <FlexContainer justifyContent="space-between" style={{ alignItems: "end" }}>
                                         <div style={{ width: "47%" }}>
                                             <FastField
                                                 name="dialCode1"
                                                 label={
                                                     <FormattedMessage id="app.mobile #" defaultMessage="Mobile #" />
-                                                  }
+                                                }
                                                 // label="Mobile #"
                                                 isColumn
                                                 selectType="dialCode"
@@ -207,7 +192,7 @@ class AddAccountContactForm extends Component {
                                             />
                                         </div>
                                     </FlexContainer>
-                                    <FlexContainer justifyContent="space-between" style={{alignItems:"end"}}>
+                                    <FlexContainer justifyContent="space-between" style={{ alignItems: "end" }}>
                                         <div style={{ width: "47%" }}>
                                             <FastField
                                                 name="dialCode2"
@@ -234,20 +219,31 @@ class AddAccountContactForm extends Component {
                                             />
                                         </div>
                                     </FlexContainer>
-                                    <FlexContainer justifyContent="space-between">
-                                        <div style={{ width: "100%" }}>
-                                            <FastField
-                                                type="email"
-                                                name="emailId"
-                                                label="Email"
-                                                className="field"
-                                                isColumn
-                                                width={"100%"}
-                                                component={InputComponent}
-                                                inlineLabel
-                                            />
-                                        </div>
-                                    </FlexContainer>
+
+                                    <div style={{ width: "100%" }}>
+                                        <FastField
+                                            type="email"
+                                            name="emailId"
+                                            label="Email"
+                                            className="field"
+                                            isColumn
+                                            width={"100%"}
+                                            component={InputComponent}
+                                            inlineLabel
+                                        />
+                                    </div>
+                                    <div style={{ width: "100%" }}>
+                                        <FastField
+                                            name="LinkedIn"
+                                            label="LinkedIn"
+                                            className="field"
+                                            isColumn
+                                            width={"100%"}
+                                            component={InputComponent}
+                                            inlineLabel
+                                        />
+                                    </div>
+
                                     <Spacer style={{ marginTop: "1.25em" }} />
                                     <Field
                                         name="notes"
@@ -280,10 +276,10 @@ class AddAccountContactForm extends Component {
                                         <div style={{ width: "47%" }}>
                                             <Field
                                                 name="departmentId"
-                                                // placeholder="Designation"
+                                                component={InputComponent}
                                                 label="Department"
-                                                component={SelectComponent}
-                                                options={Array.isArray(department) ? department : []}
+                                                // component={SelectComponent}
+                                                // options={Array.isArray(department) ? department : []}
                                                 style={{
                                                     //  borderRadius: "2px",
                                                     width: "100%"

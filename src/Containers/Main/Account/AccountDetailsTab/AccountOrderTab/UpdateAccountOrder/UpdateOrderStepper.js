@@ -3,15 +3,15 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Button } from "antd";
 import { bindActionCreators } from "redux";
-import { StyledSteps } from "../../../../../Components/UI/Antd";
+import { StyledSteps } from "../../../../../../Components/UI/Antd";
 import { PhoneOutlined, UserOutlined } from "@ant-design/icons";
-import { FlexContainer } from "../../../../../Components/UI/Layout";
-import AddOrderInAccount from "./AddOrderInAccount";
-import AccountOrderSecondStep from "./AccountOrderSecondStep";
+import { FlexContainer } from "../../../../../../Components/UI/Layout";
+import OrderStep1 from "./OrderStep1";
+import OrderStep2 from "./OrderStep2";
 
 const Step = StyledSteps.Step;
 
-class AccountStepper extends Component {
+class UpdateOrderStepper extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -41,14 +41,14 @@ class AccountStepper extends Component {
             {
                 title: 'Order',
                 icon: <UserOutlined />,
-                content: <AddOrderInAccount distributorId={this.props.distributorId} inspectionRequiredInd={this.props.inspectionRequiredInd} />,
+                content: <OrderStep1 distributorId={this.props.distributorId} inspectionRequiredInd={this.props.inspectionRequiredInd} />,
             },
             {
                 title: 'Phone details',
                 icon: <PhoneOutlined
                     style={{ color: "blue" }}
                 />,
-                content: <AccountOrderSecondStep distributorId={this.props.distributorId} inspectionRequiredInd={this.props.inspectionRequiredInd} />,
+                content: <OrderStep2 distributorId={this.props.distributorId} inspectionRequiredInd={this.props.inspectionRequiredInd} />,
             },
 
 
@@ -110,4 +110,4 @@ const mapStateToProps = ({ auth, distributor }) => ({
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({}, dispatch);
 
-export default connect(mapStateToProps, mapDispatchToProps)(AccountStepper);
+export default connect(mapStateToProps, mapDispatchToProps)(UpdateOrderStepper);

@@ -8,6 +8,8 @@ const initialState = {
 
   updateAccountModal: false,
 
+  updateOrderModal: false,
+
   addDistributorModal: false,
   setEditingDistributor: {},
 
@@ -398,8 +400,8 @@ export const distributorReducer = (state = initialState, action) => {
         addingDistributorError: true,
         addDistributorModal: false,
       };
-      case types.EMPTY_DISTRIBUTOR_LIST:
-        return { ...state, allDistributors: [] }; 
+    case types.EMPTY_DISTRIBUTOR_LIST:
+      return { ...state, allDistributors: [] };
 
     /**
      * get the list of all distributors
@@ -1176,10 +1178,7 @@ export const distributorReducer = (state = initialState, action) => {
         ...state,
         addingCar: false,
         addLinkDistributorOrderConfigureModal: false,
-        //showReqTable:[action.payload,...state.showReqTable]
-        // addDriverModal: false,
-
-
+        distributorOrder: [action.payload, ...state.distributorOrder]
       };
     case types.ADD_CAR_FAILURE:
       return {
@@ -1326,6 +1325,7 @@ export const distributorReducer = (state = initialState, action) => {
         ...state,
         startingQcInStatus: false,
         addStatusOfOrder: false,
+        distributorOrder: [action.payload, ...state.distributorOrder]
       };
     case types.START_QC_STATUS_FAILURE:
       return {
@@ -1342,6 +1342,7 @@ export const distributorReducer = (state = initialState, action) => {
         startRepairingInStatus: false,
         addStatusOfOrder: false,
         showRepairReasonModal: false,
+        distributorOrder: [action.payload, ...state.distributorOrder]
       };
     case types.START_REPAIR_IN_STATUS_FAILURE:
       return {
@@ -1644,6 +1645,7 @@ export const distributorReducer = (state = initialState, action) => {
         ...state,
         addingLocationInOrder: false,
         addInventoryInOrder: false,
+        distributorOrder: [action.payload, ...state.distributorOrder]
       };
     case types.ADD_LOCATION_IN_ORDER_FAILURE:
       return {
@@ -1771,6 +1773,7 @@ export const distributorReducer = (state = initialState, action) => {
       return {
         ...state,
         updatingOfferPriceOfOrder: false,
+        distributorOrder: [action.payload, ...state.distributorOrder]
       };
     case types.UPDATE_OFFER_PRICE_FAILURE:
       return {
@@ -1910,6 +1913,9 @@ export const distributorReducer = (state = initialState, action) => {
     case types.HANDLE_ADD_ORDER_MODAL:
       return { ...state, addCatalogueOrderModal: action.payload };
 
+    case types.HANDLE_UPDATE_ORDER_MODAL:
+      return { ...state, updateOrderModal: action.payload };
+
     case types.HANDLE_ORDER_GENERATE_MODAL:
       return { ...state, generateOrderModal: action.payload };
 
@@ -1977,7 +1983,9 @@ export const distributorReducer = (state = initialState, action) => {
       return {
         ...state,
         addingProductionLocationInOrder: false,
-        accountOrderProduction: false
+        accountOrderProduction: false,
+        distributorOrder: [action.payload, ...state.distributorOrder]
+
       };
     case types.ADD_PRODUCTION_LOCATION_IN_ORDER_FAILURE:
       return {

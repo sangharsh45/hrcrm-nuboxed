@@ -135,7 +135,7 @@ function OpenReceivedOrderIdForm(props) {
         //debugger
         return (
           <Tooltip title="Notes">
-            <NoteAltIcon 
+            <NoteAltIcon
               style={{ cursor: "pointer", fontSize: "13px" }}
             // onClick={() => {
             //   handleSetParticularOrderData(item);
@@ -148,7 +148,7 @@ function OpenReceivedOrderIdForm(props) {
       },
     },
     {
-      title: "Received",
+      title: "Inspected",
       width: "8%",
       render: (name, item, i) => {
         //debugger

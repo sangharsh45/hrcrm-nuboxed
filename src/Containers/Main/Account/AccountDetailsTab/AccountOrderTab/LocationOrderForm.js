@@ -26,6 +26,9 @@ function LocationOrderForm(props) {
             value: item.locationDetailsId,
         };
     });
+    const handleCallback = () => {
+
+    }
     return (
         <>
             <Formik
@@ -41,6 +44,7 @@ function LocationOrderForm(props) {
                         ...values,
                         transferInd: 1,
                     },
+                        handleCallback,
                         props.particularRowData.distributorId);
                 }}
             >
