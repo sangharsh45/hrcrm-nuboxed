@@ -60,7 +60,7 @@ class OpportunityView extends Component {
     console.log("function",opportunityId)
     return (
       <>
-        <FlexContainer justifyContent="space-between">
+        <div class="flex justify-between" >
           <FlexContainer
             justifyContent="flex-start"
             flexWrap="nowrap"
@@ -142,7 +142,7 @@ class OpportunityView extends Component {
           </FlexContainer>
 
           
-        </FlexContainer>
+        </div>
         
         <LinkTagCustomerModal
         opportunityId={opportunityId}

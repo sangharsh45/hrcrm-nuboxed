@@ -9,7 +9,7 @@ class OpportunityCard extends Component {
     console.log(opportunity);
     return (
       <div>
-        <ViewEditCard>
+        <ViewEditCard class="w-64">
           {({ viewType }, toggleViewType) =>
             viewType === "view" ? (
               <OpportunityView

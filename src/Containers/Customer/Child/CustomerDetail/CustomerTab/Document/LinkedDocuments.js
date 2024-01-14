@@ -216,18 +216,16 @@ class LinkedDocuments extends Component {
       },
       {
         //title: "Description",
-        // title: <FormattedMessage
-        //   id="app.description"
-        //   defaultMessage="Description"
-        // />,
+        title: <FormattedMessage
+          id="app.contract"
+          defaultMessage="Contract"
+        />,
         // dataIndex: "documentDescription",
         width: "20%",
         render: (name, item, i) => {
           return (
             <ContractToggle
-            // partnerId={item.partnerId}
             contractInd={item.contractInd}
-            // assignedIndicator={item.assignedInd}
             documentId={item.documentId}
           />
           );
