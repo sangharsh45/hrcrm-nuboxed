@@ -1,4 +1,5 @@
 import React, {} from "react";
+import { FormattedMessage } from "react-intl";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { JumpStartBox, } from "../../../../Components/UI/Elements";
@@ -56,7 +57,13 @@ render() {
         
           <JumpStartBox
             noProgress
-            title="Requirements"
+            title={
+              <FormattedMessage
+                id="app.requirements"
+                defaultMessage="Requirements"
+              />
+            }
+         
             // bgColor="#da5432"
             //bgColor="linear-gradient(270deg, #3066BE 0%, #005075 100%);"
             value={
@@ -73,7 +80,13 @@ render() {
        
           <JumpStartBox
             noProgress
-            title="Positions "
+            title={
+              <FormattedMessage
+                id="app.positions"
+                defaultMessage="Positions"
+              />
+            }
+            // title="Positions "
             value={
               // this.props.user.department === "Recruiter"
               // ?this.props.showDatelist.openPosition
@@ -96,7 +109,13 @@ render() {
           /> */}
           <JumpStartBox
             noProgress
-            title="Selected"
+            title={
+              <FormattedMessage
+                id="app.selected"
+                defaultMessage="Selected"
+              />
+            }
+            // title="Selected"
             //bgColor="linear-gradient(270deg, #3066BE 0%, #005075 100%);"
             // value={this.props.showDatelist.selectted}
             value={
@@ -116,7 +135,13 @@ render() {
           />
           <JumpStartBox
             noProgress
-            title="On Boarded"
+            title={
+              <FormattedMessage
+                id="app.onBoarded"
+                defaultMessage="On Boarded"
+              />
+            }
+            // title="On Boarded"
            // bgColor="linear-gradient(270deg, #3066BE 0%, #005075 100%);"
             
              value={this.props.showAllSalesDatelist.onboarded}

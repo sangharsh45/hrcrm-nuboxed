@@ -1,4 +1,5 @@
-import React, { lazy, Suspense,useState,useEffect } from "react";
+import React, { lazy, Suspense, } from "react";
+import { FormattedMessage } from "react-intl";
  import { BundleLoader } from "../../../../../Components/Placeholder";
 import { StyledDrawer} from "../../../../../Components/UI/Antd";
 const PitchQualifiedTable =lazy(()=>import("./PitchQualifiedTable"));
@@ -8,7 +9,10 @@ const PitchQualifiedDrawer = (props) => {
   return (
     <>
       <StyledDrawer
-        title="Pitch Qualified"
+  title={<FormattedMessage
+    id="app.pitchQualified"
+    defaultMessage="Pitch Qualified"
+  />}
         width="45%"
         visible={props.openPitchQualified}
         maskClosable={false}

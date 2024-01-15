@@ -1,4 +1,5 @@
 import React, { Component, lazy, Suspense } from "react";
+import { FormattedMessage } from "react-intl";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import {  StyledTabs } from "../../../Components/UI/Antd";
@@ -35,7 +36,11 @@ class PitchHCWDrawerTab extends Component {
                 <>
                  
                  
-               <span class=" ml-1">Hot</span>
+               <span class=" ml-1">
+               <FormattedMessage
+              id="app.hot"
+              defaultMessage="Hot"
+            /></span>
               
 
                   {activeKey === "1" && (
@@ -56,7 +61,10 @@ class PitchHCWDrawerTab extends Component {
                 <>
                   
                  
-               <span class=" ml-1">Cold</span>
+               <span class=" ml-1">    <FormattedMessage
+              id="app.cold"
+              defaultMessage="Cold"
+            /></span>
               
 
                   {activeKey === "2" && (
@@ -77,7 +85,10 @@ class PitchHCWDrawerTab extends Component {
                 <>
                  
                  
-               <span class=" ml-1">Warm</span>
+               <span class=" ml-1">   <FormattedMessage
+              id="app.warm"
+              defaultMessage="Warm"
+            /></span>
               
 
                   {activeKey === "3" && (

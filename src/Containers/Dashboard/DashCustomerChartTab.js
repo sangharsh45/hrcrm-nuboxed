@@ -1,11 +1,11 @@
 import React, { Component, lazy, Suspense } from "react";
+import { FormattedMessage } from "react-intl";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import ListAltIcon from "@mui/icons-material/ListAlt";
 import {  StyledTabs } from "../../Components/UI/Antd";
 import TabsWrapper1 from "../../Components/UI/Layout/TabsWrapper1";
-import LeadsAddChart from "./LeadsAddChart";
-import ContactsAddChart from "./ContactsAddChart";
+const LeadsAddChart=lazy(()=>import("./LeadsAddChart"));
+const ContactsAddChart=lazy(()=>import("./ContactsAddChart"));
 
 const TabPane = StyledTabs.TabPane;
 function handleRefreshPage() {
@@ -38,7 +38,10 @@ class DashCustomerChartTab extends Component {
                 <>
                   {/* <ListAltIcon style={{fontSize:"1.1rem"}}/> */}
                  
-               <span class=" ml-1">Leads Added</span>
+               <span class=" ml-1"><FormattedMessage
+              id="app.leadsAdded"
+              defaultMessage="Leads Added"
+            /></span>
                   {activeKey === "1" && (
                     <>
                     </>
@@ -57,7 +60,10 @@ class DashCustomerChartTab extends Component {
                 <>
                   {/* <EventAvailableIcon style={{fontSize:"1.1rem"}}/> */}
 
-                  <span class=" ml-1">Contacts Added</span>
+                  <span class=" ml-1"><FormattedMessage
+              id="app.contactsAdded"
+              defaultMessage="Contacts Added"
+            /></span>
 
                   {activeKey === "2" && (
                     <>

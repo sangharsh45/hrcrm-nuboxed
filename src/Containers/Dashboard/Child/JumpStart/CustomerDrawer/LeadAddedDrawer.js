@@ -1,4 +1,5 @@
 import React, {Suspense,lazy } from "react";
+import { FormattedMessage } from "react-intl";
 import { BundleLoader } from "../../../../../Components/Placeholder";
 import { StyledDrawer } from "../../../../../Components/UI/Antd";
 const LeadAddedTable =lazy(()=>import("./LeadAddedTable"));
@@ -8,7 +9,10 @@ const LeadAddedDrawer = (props) => {
   return (
     <>
       <StyledDrawer
-        title="Leads Added"
+   title={<FormattedMessage
+    id="app.leadsAdded"
+    defaultMessage="Leads Added"
+  />}
         width="45%"
         visible={props.openLeadAdded}
         maskClosable={false}

@@ -1,8 +1,7 @@
-import React, { lazy, Suspense,useState,useEffect } from "react";
+import React, {useEffect } from "react";
 import { FormattedMessage } from "react-intl";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
- import { BundleLoader } from "../../../../../Components/Placeholder";
 import { StyledTable } from "../../../../../Components/UI/Antd";
 import {getOppoAdded} from "../../../DashboardAction";
 

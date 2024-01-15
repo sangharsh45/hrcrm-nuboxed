@@ -1,7 +1,6 @@
-import React, { Component,useState, useMemo ,useEffect} from "react";
+import React, {useEffect} from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { FlexContainer } from "../../Components/UI/Layout";
 import TimeInterval from "../../Utils/TimeInterval";
 import {setSelectedClosureTimeIntervalReport} from "../Opportunity/OpportunityAction";
 import {getDashInvestorAddedContactInvest} from "../Dashboard/DashboardAction";
@@ -15,6 +14,7 @@ import {
   Legend
 } from "recharts";
 import { MainWrapper } from "../../Components/UI/Elements";
+import { FormattedMessage } from "react-intl";
 
  function ContactInvestAddChart (props) {
   useEffect(() => {
@@ -34,13 +34,16 @@ import { MainWrapper } from "../../Components/UI/Elements";
     <MainWrapper
     style={{height:"16em",width:"-webkit-fill-available"}}
     >
-      <FlexContainer justifyContent="space-between">
-      <span>Hours</span>
+       <div class=" flex justify-between" >
+      <span>        <FormattedMessage
+              id="app.hours"
+              defaultMessage="Hours"
+            /></span>
     <TimeInterval
           times={props.dateClosureRangeList}
            handleClick={props.setSelectedClosureTimeIntervalReport}
         />
-        </FlexContainer>
+        </div>
     <BarChart
       width={350}
       height={200}

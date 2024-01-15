@@ -156,7 +156,12 @@ class TodoDashboardTab extends Component {
                 <>
                   <UpcomingIcon style={{fontSize:"1.1rem"}}/>
 
-                  <span class=" ml-1">UpComing Events</span>
+                  <span class=" ml-1">
+                  <FormattedMessage
+                id="app.upComingEvents"
+                defaultMessage="UpComing Events"
+              />
+                    </span>
 
                   {activeKey === "3" && (
                     <>

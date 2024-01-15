@@ -1,9 +1,8 @@
 import React, {useEffect,lazy} from "react";
+import { FormattedMessage } from "react-intl";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import moment from "moment";
-import { JumpStartBox, Spacer } from "../../../../Components/UI/Elements";
-import { FlexContainer } from "../../../../Components/UI/Layout";
+import { JumpStartBox } from "../../../../Components/UI/Elements";
 import {
   getJumpInvestorlist,
   getJumpInvestor2list,
@@ -43,11 +42,14 @@ function DashboardInvestorsOrgJumpstart (props) {
 
     return (
       <>
-       <FlexContainer flexDirection="row" style={{ width: "100%" }}>
-        <FlexContainer style={{ width: "100%" }}>
+       <div class=" flex flex-row w-full" >
+        <div class=" flex w-full" >
           <JumpStartBox
             noProgress
-            title="Pitch Qualified"
+            title={<FormattedMessage
+              id="app.pitchQualified"
+              defaultMessage="Pitch Qualified"
+            />}
             jumpstartClick={()=>handlePitchQualifiedDrawer(true)}
             cursorData={"pointer"}
             value={props.jumpstartInvestorCount.qualifiedInvestorLeadsList}
@@ -56,7 +58,10 @@ function DashboardInvestorsOrgJumpstart (props) {
 
           <JumpStartBox
             noProgress
-            title="Pitch Added"
+            title={<FormattedMessage
+              id="app.pitchAdded"
+              defaultMessage="Pitch Added"
+            />}
             jumpstartClick={()=>handlePitchAddedDrawer(true)}
             cursorData={"pointer"}
             value={props.jumpstartInvestor2Count.createdinvestorLeadsList}
@@ -65,7 +70,10 @@ function DashboardInvestorsOrgJumpstart (props) {
 
           <JumpStartBox
             noProgress
-            title="Deals Added"
+            title={<FormattedMessage
+              id="app.dealsAdded"
+              defaultMessage="Deals Added"
+            />}
             jumpstartClick={()=>handleDealAddedDrawer(true)}
             cursorData={"pointer"}
             value={props.jumpstartInvestor3Count.opportunityAdded}
@@ -73,15 +81,17 @@ function DashboardInvestorsOrgJumpstart (props) {
           />
           <JumpStartBox
             noProgress
-            title="Deals Closed"
+            title={<FormattedMessage
+              id="app.dealsClosed"
+              defaultMessage="Deals Closed"
+            />}
             jumpstartClick={()=>handleDealClosedDrawer(true)}
             cursorData={"pointer"}
             value={ props.jumpstartInvestor4Count.closedOpportunity}
             isLoading={props.fetchingJumpstartInvestor4}
           />
-        </FlexContainer>
-        <Spacer />
-      </FlexContainer>
+        </div>
+      </div>
 
       <PitchQualifiedDrawer
       openPitchQualified={openPitchQualified}

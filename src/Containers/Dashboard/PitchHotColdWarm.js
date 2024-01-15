@@ -2,10 +2,6 @@ import React, { useEffect,lazy } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { FormattedMessage } from "react-intl";
-import { Button, Divider, message ,Input, Card} from "antd";
-import { MainWrapper, FlexContainer } from "../../Components/UI/Layout";
-import { TextInput, Title } from "../../Components/UI/Elements";
-import moment from "moment";
 import {getInvHotColdWarm,handlePitchHCWdrawer} from "./DashboardAction";
 const PitchHCWdrawer = lazy(()=>import("./PitchHCWdrawer/PitchHCWdrawer"));
 
@@ -27,15 +23,30 @@ function PitchHotColdWarm (props) {
    
           <div className="grid grid-cols-5 gap-4 p-4">
         <div className="col-span-2 sm:col-span-1">
-          <div className="flex">Hot</div>
+          <div className="flex"><FormattedMessage
+              id="app.hot"
+              defaultMessage="Hot"
+            /></div>
           <div class="text-2xl cursor-pointer" onClick={()=>{handlePitchHCWdrawer(true)}}>{investorHotColdWarm.hotList}</div>
           </div>
           <div className="col-span-2 sm:col-span-1">
-          <div className="flex">Cold</div>
+          <div className="flex">
+          <FormattedMessage
+              id="app.cold"
+              defaultMessage="Cold"
+            />
+            
+            </div>
           <div class="text-2xl cursor-pointer" onClick={()=>{handlePitchHCWdrawer(true)}}>{investorHotColdWarm.coldList}</div>
           </div>
           <div className="col-span-2 sm:col-span-1">
-          <div className="flex">Warm</div>
+          <div className="flex">
+          <FormattedMessage
+              id="app.warm"
+              defaultMessage="Warm"
+            />
+            
+            </div>
           <div class="text-2xl cursor-pointer" onClick={()=>{handlePitchHCWdrawer(true)}}>{investorHotColdWarm.warmList}</div>
         </div>
 </div>

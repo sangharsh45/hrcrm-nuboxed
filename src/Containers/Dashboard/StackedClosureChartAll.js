@@ -15,6 +15,7 @@ import {
   Legend
 } from "recharts";
 import { MainWrapper } from "../../Components/UI/Elements";
+import { FormattedMessage } from "react-intl";
 
 
 // const data = [
@@ -100,7 +101,10 @@ import { MainWrapper } from "../../Components/UI/Elements";
       {/* Recruitment Performance */}
       <div class=" flex justify-between" >
       {/* <div style={{ width: "47%" }}> */}
-      <span>Performance</span>
+      <span>  <FormattedMessage
+                id="app.performance"
+                defaultMessage="Performance"
+              /></span>
       {/* </div> */}
       {/* <div style={{ width: "47%" }}> */}
     <TimeInterval

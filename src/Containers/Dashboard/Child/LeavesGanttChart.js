@@ -4,10 +4,7 @@ import { ViewSwitcher } from "../../../Components/ViewSwitcher";
 import "gantt-task-react/dist/index.css";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-
-
 import {getLeavesGantt} from "../DashboardAction"
-import moment from "moment";
 import { BundleLoader } from '../../../Components/Placeholder';
 
 function LeavesGanttChart(props){

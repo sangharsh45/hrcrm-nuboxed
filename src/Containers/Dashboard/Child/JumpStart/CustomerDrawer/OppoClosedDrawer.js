@@ -1,4 +1,5 @@
-import React, { lazy, Suspense,useState,useEffect } from "react";
+import React, { lazy, Suspense, } from "react";
+import { FormattedMessage } from "react-intl";
  import { BundleLoader } from "../../../../../Components/Placeholder";
 import { StyledDrawer} from "../../../../../Components/UI/Antd";
 const OppoClosedTable =lazy(()=>import("./OppoClosedTable"));
@@ -8,7 +9,10 @@ const OppoClosedDrawer = (props) => {
   return (
     <>
       <StyledDrawer
-        title="Opportunities Closed"
+    title={<FormattedMessage
+      id="app.opportunitiesClosed"
+      defaultMessage="Opportunities Closed"
+    />}
         width="45%"
         visible={props.clickOppoClosed}
         maskClosable={false}
