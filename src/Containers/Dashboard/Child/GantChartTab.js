@@ -4,16 +4,11 @@ import { bindActionCreators } from "redux";
 import ListAltIcon from "@mui/icons-material/ListAlt";
 import {  StyledTabs } from "../../../Components/UI/Antd";
 import { TabsWrapper } from "../../../Components/UI/Layout";
-import TaskGanttChart from "../Child/TaskGanttChart";
-import LeavesGanttChart from "../Child/LeavesGanttChart"
-//import ActionNotification from "../Dashboard/ActionNotification";
 import UpcomingIcon from '@mui/icons-material/Upcoming';
-import TaskThisMonthGanttChart from "../Child/TaskThisMonthGanttChart"
-import TipsAndUpdatesIcon from "@mui/icons-material/TipsAndUpdates";
-// import {getTodosCount} from "./DashboardAction";
-// import DashboardTodo from "./Child/DashboardTodo";
-// import UpcomingEvents from "./Child/UpcomingEvents";
-import { Badge } from "antd";
+import { FormattedMessage } from "react-intl";
+const TaskThisMonthGanttChart = lazy(()=>import("../Child/TaskThisMonthGanttChart"));
+const TaskGanttChart = lazy(()=>import("../Child/TaskGanttChart"));
+const LeavesGanttChart = lazy(()=>import("../Child/LeavesGanttChart"));
 
 const TabPane = StyledTabs.TabPane;
 function handleRefreshPage() {
@@ -64,7 +59,12 @@ class GantChartTab extends Component {
               tab={
                 <>
                   <ListAltIcon style={{fontSize:"1.1rem"}}/>
-                  <span class=" ml-1">Open Tasks</span>
+                  <span class=" ml-1">
+                  <FormattedMessage
+              id="app.openTasks"
+              defaultMessage="Open Tasks"
+            />
+                    </span>
 
                 
                 </>
@@ -84,7 +84,12 @@ class GantChartTab extends Component {
               tab={
                 <>
                   <ListAltIcon style={{fontSize:"1.1rem"}}/>
-                  <span class=" ml-1">Tasks-This Month</span>
+                  <span class=" ml-1">
+                  <FormattedMessage
+              id="app.tasksThisMonth"
+              defaultMessage="Tasks-This Month"
+            />
+                   </span>
 
                 
                 </>
@@ -124,7 +129,12 @@ class GantChartTab extends Component {
                 <>
                   <UpcomingIcon style={{fontSize:"1.1rem"}}/>
 
-                  <span class=" ml-1">Leaves</span>
+                  <span class=" ml-1">
+                  <FormattedMessage
+              id="app.leaves"
+              defaultMessage="Leaves"
+            />
+                    </span>
 
                  
                 </>

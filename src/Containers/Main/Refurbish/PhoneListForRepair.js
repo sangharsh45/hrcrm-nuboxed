@@ -337,7 +337,7 @@
 
 
 
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect, useMemo,lazy } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { StyledTable } from "../../../Components/UI/Antd";
@@ -348,11 +348,12 @@ import QRCodeModal from "../../../Components/UI/Elements/QRCodeModal";
 import { SubTitle } from "../../../Components/UI/Elements";
 import ButtonGroup from "antd/lib/button/button-group";
 import moment from "moment";
-import AddingRepairSpareList from "./AddingRepairSpareList";
-import RepairTaskTable from "./RepairTaskTable";
-import RepairPhoneNotesOrderModal from "./RepairPhoneNotesOrderModal";
 import { NoteAddOutlined } from "@mui/icons-material";
 import { OnlyWrapCard } from "../../../Components/UI/Layout";
+import { FormattedMessage } from "react-intl";
+const RepairPhoneNotesOrderModal = lazy(() => import('./RepairPhoneNotesOrderModal'));
+const RepairTaskTable = lazy(() => import('./RepairTaskTable'));
+const AddingRepairSpareList = lazy(() => import('./AddingRepairSpareList'));
 
 function PhoneListForRepair(props) {
     useEffect(() => {
@@ -430,15 +431,42 @@ function PhoneListForRepair(props) {
             <div className=' flex justify-end sticky flex-col z-auto overflow-x-auto h-[30rem]'>
                 <OnlyWrapCard style={{ backgroundColor: "#E3E8EE" }}>
                     <div className=" flex justify-between w-[97.5%] p-2 bg-transparent font-bold sticky top-0 z-10">
-                        <div className=" md:w-[3.1rem]">Company</div>
-                        <div className=" md:w-[3.2rem]">Model</div>
-                        <div className=" md:w-[3.8rem] ">IMEI</div>
-                        <div className="md:w-[3.6rem]">QR Code</div>
-                        <div className="md:w-[4.8rem]">Repair</div>
-                        <div className="md:w-[4.8rem]">Start Time</div>
-                        <div className="md:w-[4.3rem]">End Time</div>
-                        <div className="md:w-[7.2rem]">Estimated Time</div>
-                        <div className="md:w-[6.5rem]">Hour</div>
+                    <div className=" md:w-[3.1rem]"><FormattedMessage
+                        id="app.company"
+                        defaultMessage="company"
+                      /></div>
+                        <div className=" md:w-[2.2rem]"><FormattedMessage
+                        id="app.model"
+                        defaultMessage="model"
+                      /></div>
+                       <div className=" md:w-[5.8rem] "><FormattedMessage
+                        id="app.iMEI"
+                        defaultMessage="iMEI"
+                      /></div>
+                        <div className="md:w-[3.6rem]"><FormattedMessage
+                        id="app.qrcode"
+                        defaultMessage="qrcode"
+                      /></div>
+                        <div className="md:w-[4.8rem]"><FormattedMessage
+                        id="app.repair"
+                        defaultMessage="repair"
+                      /></div>
+                        <div className="md:w-[4.8rem]"><FormattedMessage
+                        id="app.starttime"
+                        defaultMessage="starttime"
+                      /></div>
+                       <div className="md:w-[4.3rem]"><FormattedMessage
+                        id="app.endtime"
+                        defaultMessage="endtime"
+                      /></div>
+                        <div className="md:w-[7.2rem]"><FormattedMessage
+                        id="app.estimatedtime"
+                        defaultMessage="estimatedtime"
+                      /></div>
+                        <div className="md:w-[6.5rem]"><FormattedMessage
+                        id="app.hours"
+                        defaultMessage="hours"
+                      /></div>
                         <div className="md:w-[6.9rem]"></div>
                     </div>
                     {props.repairPhone.map((item) => {
@@ -454,11 +482,11 @@ function PhoneListForRepair(props) {
 
                                 >
                                     <div class="flex">
-                                        <div className=" flex font-medium  md:w-[6.6rem] max-sm:w-full  ">
+                                        <div className=" flex font-medium  md:w-[5.6rem] max-sm:w-full  ">
                                             {item.company}
                                         </div>
 
-                                        <div className=" flex font-medium   md:w-[4.2rem] max-sm:flex-row w-full max-sm:justify-between  ">
+                                        <div className=" flex font-medium   md:w-[2.8rem] max-sm:flex-row w-full max-sm:justify-between  ">
                                             <h4 class=" text-xs text-cardBody font-poppins">
                                                 {item.model}
                                             </h4>
@@ -548,7 +576,7 @@ function PhoneListForRepair(props) {
 
                                         </div>
                                     </div>
-                                    <div className=" flex font-medium  md:w-[11.3rem] max-sm:flex-row w-full max-sm:justify-between ">
+                                    <div className=" flex font-medium  md:w-[7.3rem] max-sm:flex-row w-full max-sm:justify-between ">
                                         <div class=" text-xs text-cardBody font-poppins text-center">
                                             {item.totalhours}
 

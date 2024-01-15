@@ -1,15 +1,10 @@
-import React, { useEffect, useRef } from 'react';
-import * as d3 from 'd3';
+import React, { useEffect, } from 'react';
 import { Funnel } from '@ant-design/plots';
-import { StyledTabs, StyledModal } from "../../../Components/UI/Antd";
-
+import { StyledTabs, } from "../../../Components/UI/Antd";
 import {
-    getProcessForOpportunity,
-    
+    getProcessForOpportunity,   
 } from "../../Settings/SettingsAction";
-
 import { withRouter } from "react-router-dom";
-
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 

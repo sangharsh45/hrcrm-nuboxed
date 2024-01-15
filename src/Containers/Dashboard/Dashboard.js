@@ -1,30 +1,29 @@
 import React, { Component, lazy, Suspense } from "react";
 import { connect } from "react-redux";
-import DashboardJumpstartAll from "../Dashboard/Child/JumpStart/DashboardJumpstartAll"
-import DashboardJumpstart from "../Dashboard/Child/JumpStart/DashboardJumpStart";
-import DashboardBulbJumpstart from "../Dashboard/Child/JumpStart/DashboardBulbJumpstart";
-import StackedClosureChart from "../Dashboard/StackedClosureChart"
 import { bindActionCreators } from "redux";
 import { BundleLoader } from "../../Components/Placeholder";
-import Dashboardheader from "./Child/DashboardHeader";
-import { FlexContainer } from "../../Components/UI/Layout";
-import TodoDashboardTab from "../Dashboard/TodoDashboardTab"
-import StackedClosureChartAll from "./StackedClosureChartAll";
-import TaskDashboardTab from "./TaskDashboardTab";
-import SourceChart from "./Child/Chart/SourceChart";
-import DashboardTaskOrganizationJumpstart from "./Child/JumpStart/DashboardTaskOrganizationJumpstart";
-import TaskOrganizationTab from "./TaskOrganizationTab";
 import {setDashboardViewType} from "./DashboardAction";
-import CustomerLeadsTab from "./CustomerLeadsTab";
-import DashboardCustomerOrgJumpstart from "./Child/JumpStart/DashboardCustomerOrgJumpstart";
-import DashCustomerChartTab from "./DashCustomerChartTab";
-import DashboardInvestorsOrgJumpstart from "./Child/JumpStart/DashboardInvestorsOrgJumpstart";
-import InvestorsPitchTab from "./InvestorsPitchTab";
-import GantChartTab from "./Child/GantChartTab"
-import DashInvestorsChartTab from "./DashInvestorsChartTab";
-import FunnelTab from "./Child/FunnelTab";
-import DashboardTable2 from "./Child/DashboardTable2";
-import DashboardDetailsTab from "./DashboardDetailsTab";
+const DashboardJumpstartAll= lazy(()=>import("../Dashboard/Child/JumpStart/DashboardJumpstartAll"));
+const DashboardJumpstart= lazy(()=>import("../Dashboard/Child/JumpStart/DashboardJumpStart"));
+const DashboardBulbJumpstart= lazy(()=>import("../Dashboard/Child/JumpStart/DashboardBulbJumpstart"));
+const StackedClosureChart= lazy(()=>import("../Dashboard/StackedClosureChart"));
+const Dashboardheader= lazy(()=>import("./Child/DashboardHeader"));
+const TodoDashboardTab= lazy(()=>import("../Dashboard/TodoDashboardTab"));
+const StackedClosureChartAll= lazy(()=>import("./StackedClosureChartAll"));
+const TaskDashboardTab= lazy(()=>import("./TaskDashboardTab"));
+const SourceChart= lazy(()=>import("./Child/Chart/SourceChart"));
+const DashboardTaskOrganizationJumpstart= lazy(()=>import("./Child/JumpStart/DashboardTaskOrganizationJumpstart"));
+const TaskOrganizationTab= lazy(()=>import("./TaskOrganizationTab"));
+const CustomerLeadsTab= lazy(()=>import("./CustomerLeadsTab"));
+const DashboardCustomerOrgJumpstart= lazy(()=>import("./Child/JumpStart/DashboardCustomerOrgJumpstart"));
+const DashCustomerChartTab= lazy(()=>import("./DashCustomerChartTab"));
+const DashboardInvestorsOrgJumpstart= lazy(()=>import("./Child/JumpStart/DashboardInvestorsOrgJumpstart"));
+const InvestorsPitchTab= lazy(()=>import("./InvestorsPitchTab"));
+const GantChartTab= lazy(()=>import("./Child/GantChartTab"));
+const DashInvestorsChartTab= lazy(()=>import("./DashInvestorsChartTab"));
+const FunnelTab= lazy(()=>import("./Child/FunnelTab"));
+const DashboardDetailsTab= lazy(()=>import("./DashboardDetailsTab"));
+
 
 
 class Dashboard extends Component {
@@ -83,7 +82,7 @@ class Dashboard extends Component {
           <div class="max-sm:h-[44rem] max-sm:overflow-x-auto">
          <div class="flex justify-between max-sm:flex-col">
            <div class="w-[53%] max-sm:w-wk">
-           <FlexContainer flexDirection="column" style={{ display: "block" }}>
+           <div class=" flex flex-col display-block" >
            {viewType==="ME"?(
              <DashboardJumpstartAll/> )
              :viewType==="bulb" ? (<DashboardBulbJumpstart/>
@@ -103,8 +102,8 @@ class Dashboard extends Component {
               <DashboardJumpstart />
           )}
              <div style={{ width: "-webkit-fill-available" }}>
-          <FlexContainer flexDirection="column" style={{ display: "block" }}>
-       <FlexContainer justifyContent="space-between" >
+             <div class=" flex flex-col display-block" >
+       <div class=" flex justify-between" >
        {this.state.activeButton==="Tasks" ? (
        <TaskOrganizationTab/>)
        :this.state.activeButton==="Investors" ?(
@@ -116,11 +115,11 @@ class Dashboard extends Component {
       viewType={viewType}
       />
        }
-      </FlexContainer>
+      </div>
       
-    </FlexContainer>
     </div>
-       <FlexContainer justifyContent="space-between" >
+    </div>
+    <div class=" flex justify-between" >
                 
                  {viewType==="ME"?(
                    <StackedClosureChartAll/> )
@@ -133,13 +132,13 @@ class Dashboard extends Component {
               <StackedClosureChart/>
           )}
                
-            </FlexContainer> 
+            </div> 
         
-    </FlexContainer>
+    </div>
     </div>
      <div class="w-[47%] max-sm:w-wk">
-          <FlexContainer flexDirection="column" style={{ display: "block" }}>
-       <FlexContainer justifyContent="space-between" >
+     <div class=" flex flex-col display-block" >
+       <div class=" flex justify-between" >
        {viewType==="ME" || viewType==="test"?(
             <TodoDashboardTab
             viewType={viewType}
@@ -157,9 +156,9 @@ class Dashboard extends Component {
        <FunnelTab/>
              }
    
-      </FlexContainer>
+      </div>
       
-    </FlexContainer>
+    </div>
     </div>
    
     </div>

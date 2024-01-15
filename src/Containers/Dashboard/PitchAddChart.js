@@ -1,7 +1,6 @@
-import React, { Component,useState, useMemo ,useEffect} from "react";
+import React, { useEffect} from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { FlexContainer } from "../../Components/UI/Layout";
 import TimeInterval from "../../Utils/TimeInterval";
 import {setSelectedClosureTimeIntervalReport} from "../Opportunity/OpportunityAction";
 import {getDashInvestorAddedPitch} from "../Dashboard/DashboardAction";
@@ -14,7 +13,6 @@ import {
   Tooltip,
   Legend
 } from "recharts";
-import OpportunityCardView from "../Opportunity/OpportunityCardView";
 import { MainWrapper } from "../../Components/UI/Elements";
 
  function PitchAddChart(props) {
@@ -36,13 +34,13 @@ import { MainWrapper } from "../../Components/UI/Elements";
     style={{height:"16em",width:"-webkit-fill-available"}}
     >
     
-      <FlexContainer justifyContent="space-between">
+      <div class=" flex justify-between" >
     <TimeInterval
           times={props.dateClosureRangeList}
            handleClick={props.setSelectedClosureTimeIntervalReport}
         />
   
-        </FlexContainer>
+        </div>
     <BarChart
       width={350}
       height={200}

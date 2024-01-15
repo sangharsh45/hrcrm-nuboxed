@@ -1,15 +1,17 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { Button, message } from "antd";
+import { Button } from "antd";
 import { SelectComponent } from "../../../../../Components/Forms/Formik/SelectComponent";
-import { Formik, Form, Field, FastField } from "formik";
-import { FlexContainer } from "../../../../../Components/UI/Layout";
+import { Formik, Form, Field } from "formik";
 import { DatePicker } from "../../../../../Components/Forms/Formik/DatePicker";
-import { Spacer, StyledTextarea } from "../../../../../Components/UI/Elements";
 import { InputComponent } from "../../../../../Components/Forms/Formik/InputComponent";
+<<<<<<< HEAD
 import { addPaidOrder, getPaymentMode } from "../../../Account/AccountAction";
 import * as Yup from "yup";
+=======
+import { addPaidOrder } from "../../../Account/AccountAction";
+>>>>>>> 8f778a0e45a5d32dabcc57c89174fcf1eade90bb
 import moment from "moment";
 import { TextareaComponent } from "../../../../../Components/Forms/Formik/TextareaComponent";
 import { FormattedMessage } from "react-intl";
@@ -17,7 +19,6 @@ import { getCurrency } from "../../../../Auth/AuthAction";
 import DragableUpload from "../../../../../Components/Forms/Formik/DragableUpload";
 
 function DistributorPaidForm(props) {
-  const { userId } = props;
 
   const currencyOption = props.currencies.map((item) => {
     return {
@@ -78,18 +79,17 @@ function DistributorPaidForm(props) {
           ...rest
         }) => (
           <Form>
-            <div style={{ display: "flex", justifyContent: "space-between" }}>
-              <div
-                style={{
-                  height: "100%",
-                  width: "100%",
-                }}
-              >
-                <FlexContainer justifyContent="space-between">
-                  <div style={{ width: "31%" }}>
+            <div class="justify-between flex">
+              <div class="h-full w-full">
+                <div class="justify-between">
+                  <div class="w-[47%]">
                     <Field
                       name="paymentAmount"
-                      label="Amount"
+                      label={
+                        <FormattedMessage
+                          id="app.amount"
+                          defaultMessage="Amount"
+                        />}
                       isRequired
                       isColumn
                       inlineLabel
@@ -117,45 +117,48 @@ function DistributorPaidForm(props) {
                   <div style={{ width: "31%" }}>
                     <Field
                       name="date"
-                      label="Date "
+                      label={
+                        <FormattedMessage
+                          id="app.date"
+                          defaultMessage="Date"
+                        />}
                       isColumn
                       inlineLabel
                       width={"100%"}
                       component={DatePicker}
                       value={values.date}
-                    // style={{
-                    //   flexBasis: "83%",
-                    //   marginTop: "0px",
-                    //   width: "100px",
-                    // }}
                     />
                   </div>
 
-                </FlexContainer>
+                </div>
 
-                <Spacer style={{ marginTop: "1em" }} />
-                <FlexContainer justifyContent="space-between">
-                  <div style={{ width: "47%" }}>
+
+                <div class="flex justify-between mt-2">
+                  <div class="w-[47%]">
                     <Field
                       name="transactionNumber"
-                      label="Transaction ID"
+                      label={
+                        <FormattedMessage
+                          id="app.transactionid"
+                          defaultMessage="Transaction ID"
+                        />}
                       isColumn
                       inlineLabel
                       width={"100%"}
                       component={InputComponent}
                       value={values.transactionNumber}
-                    // style={{
-                    //    flexBasis: "40%",
-                    //   marginTop: "0px",
-                    //   width: "114px",
-                    // }}
+
                     />
                   </div>
 
-                  <div style={{ width: "47%" }}>
+                  <div class="w-[47%]">
                     <Field
                       name="paymentMode"
-                      label="Mode"
+                      label={
+                        <FormattedMessage
+                          id="app.mode"
+                          defaultMessage="Mode"
+                        />}
                       isRequired
                       isColumn
                       inlineLabel
@@ -163,26 +166,25 @@ function DistributorPaidForm(props) {
                       component={SelectComponent}
                       options={Array.isArray(payOption) ? payOption : []}
                       style={{
-                        //   flexBasis: "83%",
-                        //   marginTop: "0px",
-                        //   width: "120px",
                         borderRight: "0.18em solid red",
                       }}
                     />
                   </div>
-                </FlexContainer>
-                <Spacer style={{ marginTop: "1em" }} />
-                <FlexContainer justifyContent="space-between">
-
-                  <div style={{ width: "47%" }}>
+                </div>
+                <div class="flex justify-between mt-2">
+                  <div class="w-[47%]">
                     <Field
                       name="remarks"
-                      label="Reason"
+                      label={
+                        <FormattedMessage
+                          id="app.reason"
+                          defaultMessage="Reason"
+                        />}
                       component={TextareaComponent}
 
                     />
                   </div>
-                  <div style={{ width: "47%" }}>
+                  <div class="w-[47%]">
                     <Field
                       name="docId"
                       label={
@@ -195,20 +197,24 @@ function DistributorPaidForm(props) {
                       component={DragableUpload}
                     />
                   </div>
-                </FlexContainer>
+                </div>
 
               </div>
             </div>
-            <Spacer style={{ marginTop: "1.25em" }} />
-            <FlexContainer justifyContent="flex-end">
+
+            <div class="flex justify-end mt-3">
               <Button
                 type="primary"
                 htmlType="submit"
                 loading={props.addingPaidByDistributorId}
               >
-                Submit
+                <FormattedMessage
+                  id="app.submit"
+                  defaultMessage="Submit"
+                />
+
               </Button>
-            </FlexContainer>
+            </div>
           </Form>
         )}
         {/*  */}

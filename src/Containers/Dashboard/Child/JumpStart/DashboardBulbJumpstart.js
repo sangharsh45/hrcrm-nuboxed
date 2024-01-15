@@ -5,6 +5,7 @@ import { bindActionCreators } from "redux";
 import moment from "moment";
 import { JumpStartBox, } from "../../../../Components/UI/Elements";
 import {getDateWiseList,getSalesDateWiseList,getJumpBulblist,getJumpBulblist2,getJumpBulblist3,getavgHour} from "../../DashboardAction";
+import { FormattedMessage } from "react-intl";
 
 class DashboardBulbJumpstart extends React.Component{
   constructor() {
@@ -74,7 +75,13 @@ render() {
         
           <JumpStartBox
             noProgress
-            title="Leads Qualified"
+            title={
+              <FormattedMessage
+                id="app.leadsQualified"
+                defaultMessage="Leads Qualified"
+              />
+            }
+            // title="Leads Qualified"
 
             value={this.props.jumpstartBulbCount.qualifiedLeadsList}
             isLoading={this.props.user.fetchingJumpstartBulb}
@@ -82,7 +89,13 @@ render() {
        
           <JumpStartBox
             noProgress
-            title="Open Opportunity"
+            title={
+              <FormattedMessage
+                id="app.openOpportunity"
+                defaultMessage="Open Opportunity"
+              />
+            }
+            // title="Open Opportunity"
             value={
   
               this.props.avgHour.hours
@@ -94,7 +107,13 @@ render() {
 
           <JumpStartBox
             noProgress
-            title="Order Generated"
+            title={
+              <FormattedMessage
+                id="app.orderGenerated"
+                defaultMessage="Order Generated"
+              />
+            }
+            // title="Order Generated"
 
             value={
    this.props.jumpstartBulb2Count.createdLeadsList
@@ -104,7 +123,13 @@ render() {
           />
           <JumpStartBox
             noProgress
-            title="Pipeline"
+            title={
+              <FormattedMessage
+                id="app.pipeline"
+                defaultMessage="Pipeline"
+              />
+            }
+            // title="Pipeline"
             value={
               this.props.jumpstartBulb3Count.junkedLeadsList
             }

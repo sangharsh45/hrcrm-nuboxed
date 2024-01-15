@@ -1,4 +1,5 @@
-import React, { lazy, Suspense,useState,useEffect } from "react";
+import React, { lazy, Suspense } from "react";
+import { FormattedMessage } from "react-intl";
 import { BundleLoader } from "../../../../../Components/Placeholder";
 import { StyledDrawer} from "../../../../../Components/UI/Antd";
 const DealAddedTable =lazy(()=>import("./DealAddedTable"));
@@ -8,7 +9,10 @@ const DealsAddedDrawer = (props) => {
   return (
     <>
       <StyledDrawer
-        title="Deals Added"
+  title={<FormattedMessage
+    id="app.dealsAdded"
+    defaultMessage="Deals Added"
+  />}
         width="45%"
         visible={props.openDealAdded}
         maskClosable={false}

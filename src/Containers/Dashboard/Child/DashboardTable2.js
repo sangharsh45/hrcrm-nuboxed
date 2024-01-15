@@ -260,7 +260,12 @@ render: (name, item, i) => {
    },
    children: (
      <>
-     <Tooltip title="Submitted">
+     <Tooltip 
+     title={<FormattedMessage
+      id="app.submitted"
+      defaultMessage="Submitted"
+    />}
+     >
      <Badge count={item.offered}  style={{ right: "1px" }}>
    <span
      style={{
@@ -290,7 +295,12 @@ return {
  },
  children: (
    <>
-   <Tooltip title="Dropped">
+   <Tooltip 
+    title={<FormattedMessage
+      id="app.dropped"
+      defaultMessage="Dropped"
+    />}
+  >
    <Badge count={item.rejected}  style={{ right: "1px" }}>
  <span
    style={{
@@ -398,7 +408,12 @@ render: (name, item, i) => {
    },
    children: (
      <>
-      <Tooltip title="Selected">
+      <Tooltip
+          title={<FormattedMessage
+            id="app.selected"
+            defaultMessage="Selected"
+          />}
+    >
      <Badge count={item.closedPosition}  style={{ right: "1px" }}>
    <span
      style={{
@@ -427,7 +442,12 @@ render: (name, item, i) => {
    },
    children: (
      <>
-     <Tooltip title="OnBoarded">
+     <Tooltip 
+        title={<FormattedMessage
+          id="app.onBoarded"
+          defaultMessage="OnBoarded"
+        />}
+>
      <Badge count={item.onBoardNo}  style={{ right: "1px" }}>
    <span
      style={{

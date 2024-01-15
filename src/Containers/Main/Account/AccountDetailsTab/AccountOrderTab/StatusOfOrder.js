@@ -11,16 +11,23 @@ import { connect } from 'react-redux';
 import moment from 'moment';
 import StartRepairReasonModal from './StartRepairReasonModal';
 import ShowPaymentHistoryModal from './ShowPaymentHistoryModal';
+import { FormattedMessage } from 'react-intl';
+
 const StatusOfOrder = (props) => (
-    <div style={{ backgroundColor: "white" }}>
+    <div class="bg-white">
         <Steps
             direction="vertical"
             current={1}
             items={[
                 {
-                    title: 'Order Created',
-                    status: 'progress',
-                    // order craeted enabled after order create on date and by user
+                    title:<FormattedMessage
+                        id="app.ordercreated"
+                        defaultMessage="Order Created"
+                       />,
+                    status: <FormattedMessage
+                    id="app.progress"
+                    defaultMessage="progress"
+                   />,
                     description: <>
                         <b>On {moment(props.particularRowData.creationDate).format("DD-MM-YYYY")} By {props.particularRowData.userName}</b>
                     </>
@@ -46,8 +53,8 @@ const StatusOfOrder = (props) => (
                                             props.distributorId
                                         )}
                                     >
-                                        Approve QC</Button>
-                                    : <b>QC approved on {moment(props.particularRowData.qcStartDate).format("DD-MM-YYYY")} By {props.particularRowData.qcStartUser}</b>
+                                        Approve QC     </Button>
+                                    : <b> QC approved on {moment(props.particularRowData.qcStartDate).format("DD-MM-YYYY")} By {props.particularRowData.qcStartUser}</b>
                             }
                         </>
                 },
@@ -197,13 +204,12 @@ const StatusOfOrder = (props) => (
                 {
                     title: 'Order Dispatch',
                     status: 'progress',
-                    // description: <Button type='primary'>Add</Button>
+
                 },
                 {
                     title: 'Customer Feedback',
                     status: 'progress',
-                    // email when sent and after getting response
-                    // description: <Button type='primary'>Add</Button>
+
                 },
             ]}
         />

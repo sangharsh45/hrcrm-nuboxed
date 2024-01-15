@@ -1,14 +1,11 @@
-import React, { Component, useEffect } from "react";
+import React from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { Button, Tooltip } from "antd";
-import * as Yup from "yup";
-import { Formik, Form, Field, FastField } from "formik";
-import { Spacer } from "../../../../../Components/UI/Elements";
-import { FlexContainer } from "../../../../../Components/UI/Layout";
+import { Button } from "antd";
+import { Formik, Form, Field } from "formik";
 import { addCarDetails } from "../../AccountAction"
 import DraggableUpload1 from "../../../../../Components/Forms/Formik/DraggableUpload1";
-
+import { FormattedMessage } from 'react-intl';
 
 function AddPhoneExcel(props) {
 
@@ -45,31 +42,30 @@ function AddPhoneExcel(props) {
                 }) => (
                     <div class="overflow-y-auto h-[32rem] overflow-x-hidden max-sm:h-[30rem]">
                         <Form class="form-background">
-                            <div style={{ display: "flex", justifyContent: "space-between" }}>
-                                <div
-                                    style={{
-                                        height: "100%",
-                                        width: "47%",
-                                    }}
-                                ><Spacer />
+                        <div  class="justify-between flex">
+                                <div  class="h-full w-[47%]">
+                                <div class="mt-3">  
                                     <Field
                                         name="excelId"
                                         isRequired
                                         component={DraggableUpload1}
                                     />
+                                     </div>
                                 </div>
 
                             </div>
-                            <Spacer />
-                            <FlexContainer justifyContent="flex-end">
+                            <div class="justify-end flex mt-3">
                                 <Button
                                     type="primary"
                                     htmlType="submit"
                                     loading={props.addingCar}
                                 >
-                                    Finish
+                                <FormattedMessage
+                 id="app.finish"
+                 defaultMessage="Finish"
+                />  
                                 </Button>
-                            </FlexContainer>
+                            </div>
                         </Form>
                     </div>
                 )}

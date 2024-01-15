@@ -4,15 +4,14 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { DatePicker } from "../../../../../Components/Forms/Formik/DatePicker";
 import * as Yup from "yup";
-import { Spacer, StyledLabel } from '../../../../../Components/UI/Elements';
-import { FlexContainer } from '../../../../../Components/UI/Layout';
+import { StyledLabel } from '../../../../../Components/UI/Elements';
 import { SelectComponent } from '../../../../../Components/Forms/Formik/SelectComponent';
 import { InputComponent } from "../../../../../Components/Forms/Formik/InputComponent";
 import { TextareaComponent } from '../../../../../Components/Forms/Formik/TextareaComponent';
 import { Button, Tooltip, message } from 'antd';
 import { getCurrency } from "../../../../Auth/AuthAction";
+import { FormattedMessage } from 'react-intl';
 import { addOrderForm, getContactDistributorList } from '../../AccountAction'
-import moment from 'moment';
 import { ExclamationCircleOutlined } from '@ant-design/icons';
 import AddressFieldArray1 from '../../../../../Components/Forms/Formik/AddressFieldArray1';
 const FormSchema = Yup.object().shape({
@@ -93,14 +92,12 @@ function AddOrderInAccount(props) {
             validationSchema={FormSchema}
             onSubmit={(values, { resetForm }) => {
                 console.log(priority)
-                // const date1 = moment(values.deliveryDate).format("DD-MM-YYYY")
-                // const date2 = moment(values.availabilityDate).format("DD-MM-YYYY")
+              
                 if (values.advancePayment < 100) {
                     props.addOrderForm({
                         ...values,
                         priority: priority || "",
-                        // deliveryDate: `${date1}T20:00:00Z`,
-                        // availabilityDate: `${date2}T20:00:00Z`,
+
                     }, props.distributorId);
                 } else {
                     message.success("Advance payment should be less than 100")
@@ -111,7 +108,10 @@ function AddOrderInAccount(props) {
                 <div class="overflow-y-auto h-[40rem] overflow-x-hidden max-sm:h-[30rem]">
                     <Form>
                         <div>
-                            <StyledLabel><h3> Pickup Address</h3></StyledLabel>
+                            <StyledLabel><h3> <FormattedMessage
+                 id="app.pickupaddress"
+                 defaultMessage="Pickup Address"
+                /></h3></StyledLabel>
 
                             <FieldArray
                                 name="loadingAddress"
@@ -172,9 +172,9 @@ function AddOrderInAccount(props) {
                                 />
                             </div>
                         </div> */}
-                            <Spacer />
-                            <FlexContainer justifyContent="space-between">
-                                <div style={{ width: "30%" }}>
+                    
+                            <div class="justify-between flex mt-3">
+                                <div class="w-[30%]">
                                     <Field
                                         name="paymentInTerms"
                                         label="Payment Terms (in Days)"
@@ -184,7 +184,7 @@ function AddOrderInAccount(props) {
                                         options={["7", "15", "30", "45", "60", "75", "90"]}
                                     />
                                 </div>
-                                <div style={{ width: "30%" }}>
+                                <div class="w-[30%]">
                                     <Field
                                         label="Air Way Bill"
                                         name="awbNo"
@@ -194,7 +194,7 @@ function AddOrderInAccount(props) {
                                         isColumn
                                     />
                                 </div>
-                                <div style={{ width: "30%" }}>
+                                <div class="w-[30%]">
                                     <Field
                                         label="Contact Person"
                                         name="contactPersonId"
@@ -206,10 +206,10 @@ function AddOrderInAccount(props) {
                                         isColumn
                                     />
                                 </div>
-                            </FlexContainer>
-                            <Spacer />
-                            <FlexContainer justifyContent="space-between">
-                                <div style={{ width: "22%" }}>
+                            </div>
+                     
+                            <div class="justify-between flex mt-3">
+                                <div class="w-[22%]">
                                     <Field
                                         width={"100%"}
                                         name="advancePayment"
@@ -219,7 +219,7 @@ function AddOrderInAccount(props) {
                                         component={InputComponent}
                                     />
                                 </div>
-                                <div style={{ width: "22%" }}>
+                                <div class="w-[22%]">
                                     <Field
                                         name="currency"
                                         label="Currency"
@@ -229,7 +229,7 @@ function AddOrderInAccount(props) {
                                         options={Array.isArray(currencyOption) ? currencyOption : []}
                                     />
                                 </div>
-                                <div style={{ width: "22%" }}>
+                                <div class="w-[22%]">
                                     <Field
                                         name="deliveryDate"
                                         label="Delivery Date "
@@ -238,27 +238,21 @@ function AddOrderInAccount(props) {
                                         width={"100%"}
                                         component={DatePicker}
                                         value={values.deliveryDate}
-                                    // disabledDate={(currentDate) => {
-                                    //     if (values.availabilityDate) {
-                                    //         if (
-                                    //             moment(currentDate).isBefore(
-                                    //                 moment(values.availabilityDate)
-                                    //             )
-                                    //         ) {
-                                    //             return true;
-                                    //         } else {
-                                    //             return false;
-                                    //         }
-                                    //     }
-                                    // }}
+                                  
                                     />
                                 </div>
 
-                                <div style={{ width: "22%", marginTop: "0%" }}>
-                                    <StyledLabel>Priority</StyledLabel>
-                                    <FlexContainer justifyContent="spcae-between">
-                                        <FlexContainer>
-                                            <Tooltip title="High">
+                                <div class="w-[22%]">
+                                    <StyledLabel><FormattedMessage
+                                            id="app.priority"
+                                            defaultMessage="Priority"
+                                           /></StyledLabel>
+                                    <div class="justify-between flex">
+                                        <div>
+                                            <Tooltip title={<FormattedMessage
+                                            id="app.high"
+                                            defaultMessage="High"
+                                           />}>
                                                 <Button
                                                     type="primary"
                                                     shape="circle"
@@ -276,7 +270,10 @@ function AddOrderInAccount(props) {
                                                 />
                                             </Tooltip>
                                             &nbsp;
-                                            <Tooltip title="Medium">
+                                            <Tooltip title={<FormattedMessage
+                                            id="app.medium"
+                                            defaultMessage="Medium"
+                                           />}>
                                                 <Button
                                                     type="primary"
                                                     shape="circle"
@@ -294,7 +291,10 @@ function AddOrderInAccount(props) {
                                                 />
                                             </Tooltip>
                                             &nbsp;
-                                            <Tooltip title="Low">
+                                            <Tooltip title={<FormattedMessage
+                                            id="app.low"
+                                            defaultMessage="Low"
+                                           />}>
                                                 <Button
                                                     type="primary"
                                                     shape="circle"
@@ -311,14 +311,14 @@ function AddOrderInAccount(props) {
                                                     }}
                                                 ></Button>
                                             </Tooltip>
-                                        </FlexContainer>
-                                    </FlexContainer>
+                                        </div>
+                                    </div>
                                 </div>
 
-                            </FlexContainer>
-                            <Spacer />
-                            <FlexContainer justifyContent="space-between">
-                                <div style={{ width: "30%" }}>
+                            </div>
+             
+                            <div class=" mt-3 justify-between flex">
+                                <div class="w-[30%]">
                                     <Field
                                         name="comments"
                                         label="Comment"
@@ -328,27 +328,20 @@ function AddOrderInAccount(props) {
                                     />
                                 </div>
 
-                                <div style={{ width: "47%", margin: "67px 39px 17px -33px", display: "flex", justifyContent: "flex-end" }}>
+                                <div class="w-[47%]  mt-[67px] mr-[39px] mb-[17px] ml-[-33px] flex justify-end">
                                     <Button
-                                        style={{
-                                            backgroundColor: "#3695cd",
-                                            color: "white",
-                                            fontSize: "15px",
-                                            padding: "0px 12px",
-                                        }}
-                                        htmlType="Submit"
+                                    className="bg-[#3695cd] text-white text-xs pt-0 pr-3"
+                                    htmlType="Submit"
                                     >
-                                        Save
+                                        <FormattedMessage
+                                            id="app.save"
+                                            defaultMessage="Save"
+                                           />
+                                        
                                     </Button>
-                                    {/* <Button
-        type="primary"
-        onClick={() => this.next()}
-        style={{ marginLeft: "10px" }}
-    >
-        Proceed
-    </Button> */}
+                                    
                                 </div>
-                            </FlexContainer>
+                            </div>
                         </div>
 
                     </Form>

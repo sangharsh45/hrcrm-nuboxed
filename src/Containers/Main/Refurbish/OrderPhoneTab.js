@@ -69,7 +69,7 @@ const OrderPhoneTab = (props) => {
                             </span>
                             &nbsp;&nbsp;
                             <span onClick={handleOpenRepair}>
-                                {/* <FolderOpenTwoTone /> */}
+                                <FolderOpenTwoTone />
                             </span>
 
                         </>

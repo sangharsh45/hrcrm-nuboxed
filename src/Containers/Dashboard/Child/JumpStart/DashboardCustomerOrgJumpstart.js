@@ -1,10 +1,9 @@
 import React, {useEffect,lazy} from "react";
+import { FormattedMessage } from "react-intl";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import moment from "moment"; 
-import { JumpStartBox, Spacer } from "../../../../Components/UI/Elements";
-import { FlexContainer } from "../../../../Components/UI/Layout";
-import {getDateWiseList,getSalesDateWiseList,getJumpBulblist,getJumpBulblist2,
+import { JumpStartBox, } from "../../../../Components/UI/Elements";
+import {getJumpBulblist,getJumpBulblist2,
 getJumpCustomerlist,getJumpCustomerlist2,handleLeadQualifiedDrawer,handleLeadAddedDrawer,
 handleOppoAddedDrawer,handleOppoClosedDrawer
 } from "../../DashboardAction";
@@ -37,12 +36,16 @@ function DashboardCustomerOrgJumpstart (props){
 
   return(
     <>
-      <FlexContainer flexDirection="row" style={{ width: "100%"}}>
-        <FlexContainer style={{ width: "100%"}}>
+      <div class=" flex flex-row w-full" >
+        <div class=" flex w-full" >
         
           <JumpStartBox
             noProgress
-            title="Leads Qualified"
+            title={<FormattedMessage
+              id="app.leadsQualified"
+              defaultMessage="Leads Qualified"
+            />}
+           
             jumpstartClick={()=>handleLeadQualifiedDrawer(true)}
             cursorData={"pointer"}
             value={props.jumpstartBulbCount.qualifiedLeadsList}
@@ -51,7 +54,11 @@ function DashboardCustomerOrgJumpstart (props){
        
           <JumpStartBox
             noProgress
-            title="Leads Added"
+            title={<FormattedMessage
+              id="app.leadsAdded"
+              defaultMessage="Leads Added"
+            />}
+          
             jumpstartClick={()=>handleLeadAddedDrawer(true)}
             cursorData={"pointer"}
             value={props.jumpstartBulb2Count.createdLeadsList }
@@ -61,7 +68,10 @@ function DashboardCustomerOrgJumpstart (props){
 
           <JumpStartBox
             noProgress
-            title="Opportunities Added"
+            title={<FormattedMessage
+              id="app.opportunitiesAdded"
+              defaultMessage="Opportunities Added"
+            />}
             jumpstartClick={()=>handleOppoAddedDrawer(true)}
             cursorData={"pointer"}
             value={props.jumpstrtCUSTOCount.opportunityAdded}
@@ -70,7 +80,11 @@ function DashboardCustomerOrgJumpstart (props){
           />
           <JumpStartBox
             noProgress
-            title="Opportunities Closed"
+            title={<FormattedMessage
+              id="app.opportunitiesClosed"
+              defaultMessage="Opportunities Closed"
+            />}
+            // title="Opportunities Closed"
             jumpstartClick={()=>handleOppoClosedDrawer(true)}
             cursorData={"pointer"}
             value={
@@ -79,10 +93,9 @@ function DashboardCustomerOrgJumpstart (props){
             
             isLoading={props.fetchingJumpstartCusto2list}
           />
-        </FlexContainer>
-        <Spacer />
+        </div>
     
-      </FlexContainer>
+      </div>
 
       <LeadQualifiedDrawer
       openLeadQualified={openLeadQualified}

@@ -1,5 +1,4 @@
-import { Switch } from 'antd'
-import React, { useState } from 'react'
+import React from 'react'
 import AddPhoneExcel from './AddPhoneExcel'
 import AddCatalogueForm from './AddCatalogueForm'
 
@@ -12,7 +11,7 @@ const AccountOrderSecondStep = (props) => {
                 {props.inspectionRequiredInd ?
                     <AddCatalogueForm distributorId={props.distributorId} /> :
                     <AddPhoneExcel distributorId={props.distributorId} />
-                }
+                 } 
             </div>
 
         </>

@@ -352,5 +352,16 @@
   "app.vatvalidity":"VAT Validity",
   "app.insurancegrade":"Insurance Grade",
   "app.creditlimit":"Credit Limit",
-  "app.Paymenttermdays":"Payment Terms (in Days)"
+  "app.Paymenttermdays":"Payment Terms (in Days)",
+  "app.duedate":"Due Date",
+  "app.completedphn":"Completed Phones",
+  "app.model":"Model",
+  "app.iMEI":"IMEI",
+  "app.qrcode":"QR Code",
+  "app.actualeffort":"Actual Effort",
+  "app.estimatehours":"Estimated Hours",
+  "app.item":"Items",
+  "app.repair":"Repair",
+  "app.estimatedtime":"Estimated Time",
+  "app.hours":"Hour"
 }

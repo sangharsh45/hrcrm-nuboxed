@@ -6,6 +6,7 @@ import moment from "moment";
 import { JumpStartBox, } from "../../../../Components/UI/Elements";
 import {getDateWiseList,getSalesDateWiseList,getJumpBulblist,getJumpBulblist2,
   getJumpBulblist3,getavgHour,getJumpTasklist,getTasklist,getJumpTask2list} from "../../DashboardAction";
+import { FormattedMessage } from "react-intl";
 
 class DashboardTaskOrganizationJumpstart extends React.Component{
   constructor() {
@@ -76,7 +77,11 @@ render() {
         
           <JumpStartBox
             noProgress
-            title="Open Tasks"
+            title={   <FormattedMessage
+              id="app.openTasks"
+              defaultMessage="Open Tasks"
+            />}
+           
 
             value={this.props.taskperCount.totalTask}
             isLoading={this.props.fetchingTaskper}
@@ -84,7 +89,11 @@ render() {
        
           <JumpStartBox
             noProgress
-            title="Tasks > Deadline"
+            title={   <FormattedMessage
+              id="app.tasksDeadline"
+              defaultMessage="Tasks > Deadline"
+            />}
+            // title="Tasks > Deadline"
             value={ this.props.jumpstartTask2listCount.no}
             isLoading={this.props.fetchingJumpstartTask2list}
      
@@ -93,13 +102,21 @@ render() {
 
           <JumpStartBox
             noProgress
-            title="High Priority Tasks"
+            title={   <FormattedMessage
+              id="app.highPriorityTasks"
+              defaultMessage="High Priority Tasks"
+            />}
+            // title="High Priority Tasks"
             value={ this.props.jumpstartTasklistCount.no}
             isLoading={this.props.fetchingJumpstartTasklist}
           />
           <JumpStartBox
             noProgress
-            title="Status"
+            title={   <FormattedMessage
+              id="app.status"
+              defaultMessage="Status"
+            />}
+            // title="Status"
             // value={this.props.jumpstartBulb3Count.junkedLeadsList}
             
             // isLoading={this.props.fetchingJumpstartBulb3}
