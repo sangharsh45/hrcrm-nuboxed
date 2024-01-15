@@ -1,7 +1,7 @@
 import React, {Suspense,lazy } from "react";
 import { BundleLoader } from "../../../Components/Placeholder";
 import { StyledDrawer } from "../../../Components/UI/Antd";
-import LeadHCWDrawerTab from "./LeadHCWDrawerTab"
+const LeadHCWDrawerTab = lazy(()=>import("./LeadHCWDrawerTab"));
 
 const LeadHCWdrawer = (props) => {
 

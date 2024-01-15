@@ -1,17 +1,10 @@
-import React, { lazy, Suspense,useState,useEffect } from "react";
-import { FormattedMessage } from "react-intl";
+import React, { useState,useEffect } from "react";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-import { BundleLoader } from "../../Components/Placeholder";
-import { StyledTable } from "../../Components/UI/Antd";
 import {getCompletedTaskTypeDetails} from "./DashboardAction";
 import { OnlyWrapCard } from '../../Components/UI/Layout';
 import InfiniteScroll from "react-infinite-scroll-component";
-import {
-  MultiAvatar,
-  MultiAvatar2,
-} from "../../Components/UI/Elements";
-import { Tooltip,Button ,Popconfirm} from "antd";
+import { Button } from "antd";
 
 const ButtonGroup = Button.Group;
 

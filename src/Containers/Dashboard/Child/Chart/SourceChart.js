@@ -1,9 +1,9 @@
-import React, { Component } from "react";
+import React, { Component,lazy } from "react";
 import { Tabs } from "antd";
 import { StyledTabs } from "../../../../Components/UI/Antd";
 import { TabsWrapper } from "../../../../Components/UI/Layout";
 import { FormattedMessage } from "react-intl";
-import SourceMainChart from "./SourceMainChart";
+const SourceMainChart=lazy(() => import("./SourceMainChart"));
 
 const TabPane = Tabs.TabPane;
 

@@ -15,7 +15,6 @@ import SourceChart from "./Child/Chart/SourceChart";
 import DashboardTaskOrganizationJumpstart from "./Child/JumpStart/DashboardTaskOrganizationJumpstart";
 import TaskOrganizationTab from "./TaskOrganizationTab";
 import {setDashboardViewType} from "./DashboardAction";
-import { version } from "cheerio";
 import CustomerLeadsTab from "./CustomerLeadsTab";
 import DashboardCustomerOrgJumpstart from "./Child/JumpStart/DashboardCustomerOrgJumpstart";
 import DashCustomerChartTab from "./DashCustomerChartTab";
@@ -25,6 +24,7 @@ import GantChartTab from "./Child/GantChartTab"
 import DashInvestorsChartTab from "./DashInvestorsChartTab";
 import FunnelTab from "./Child/FunnelTab";
 import DashboardTable2 from "./Child/DashboardTable2";
+import DashboardDetailsTab from "./DashboardDetailsTab";
 
 
 class Dashboard extends Component {
@@ -86,7 +86,10 @@ class Dashboard extends Component {
            <FlexContainer flexDirection="column" style={{ display: "block" }}>
            {viewType==="ME"?(
              <DashboardJumpstartAll/> )
-             :viewType==="bulb" ? (<DashboardBulbJumpstart/>)
+             :viewType==="bulb" ? (<DashboardBulbJumpstart/>
+             )
+             :viewType==="ques" ? (<DashboardDetailsTab/>
+             )
              : 
                this.state.activeButton==="Tasks" ?
              (<DashboardTaskOrganizationJumpstart/>)

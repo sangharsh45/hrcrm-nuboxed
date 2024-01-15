@@ -63,34 +63,17 @@ function TaskNameDrawerTable (props) {
                                    <div className=" flex font-medium flex-col md:w-[6rem] max-sm:flex-row justify-between w-full ">
 <div className="flex max-sm:w-full"> 
 {item.priority === "High" && (
-                      <div
-                        style={{
-                          borderRadius: "50%",
-                          height: "2.1875em",
-                          width: "2.1875em",
-                          backgroundColor: "red",
-                        }}
-                      ></div>
+                  <div class="rounded-full h-11 w-11 bg-red-500">
+                      </div>
                     )}
                     {item.priority === "Medium" && (
-                      <div
-                        style={{
-                          borderRadius: "50%",
-                          height: "2.1875em",
-                          width: "2.1875em",
-                          backgroundColor: "orange",
-                        }}
-                      ></div>
+                                    <div class="rounded-full h-11 w-11 bg-orange-500">
+                    </div>
                     )}
                     {item.priority === "Low" && (
-                      <div
-                        style={{
-                          borderRadius: "50%",
-                          height: "2.1875em",
-                          width: "2.1875em",
-                          backgroundColor: "teal",
-                        }}
-                      ></div>
+                                         <div class="rounded-full h-11 w-11 bg-teal-500">
+                                         </div>
+                
                     )}
                     <div class=" w-1"></div>
           <div class=" w-[10rem] max-sm:w-full">

@@ -1,6 +1,7 @@
 import React, {  lazy} from "react";
 import { StyledSelect, } from "../../../Components/UI/Antd";
 import LightbulbIcon from '@mui/icons-material/Lightbulb';
+import QuestionMarkIcon from '@mui/icons-material/QuestionMark';
 import { FormattedMessage } from "react-intl";
 import {
   setDashboardViewType,
@@ -68,17 +69,31 @@ const DashboardActionLeft = (props) => {
 
       
            
-{user.crmInd===true && (
+{user.recruitOppsInd===true && (
 
         <span class=" mr-2 cursor-pointer text-xs"
-          onClick={() => props.setDashboardViewType("bulb")}
+          onClick={() => props.setDashboardViewType("ques")}
           style={{
-            color: props.viewType === "bulb" && "#1890ff",
+            color: props.viewType === "ques" && "#1890ff",
   
           }}
-        > <LightbulbIcon  />
+        > <QuestionMarkIcon  />
         
         </span>
+)}
+
+           
+{user.crmInd===true && (
+
+<span class=" mr-2 cursor-pointer text-xs"
+  onClick={() => props.setDashboardViewType("bulb")}
+  style={{
+    color: props.viewType === "bulb" && "#1890ff",
+
+  }}
+> <LightbulbIcon  />
+
+</span>
 )}
             </>
              )}
