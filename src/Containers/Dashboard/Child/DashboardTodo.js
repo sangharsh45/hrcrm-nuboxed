@@ -194,7 +194,7 @@ class Todo extends Component {
    
       }}
       > */}
-      <div style={{ height: "100vh", overflow: "auto" }}>
+      <div class=" h-[100vh] overflow-auto" >
 
         <TimeInterval
           times={this.props.dateTodoRangeList}

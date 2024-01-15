@@ -1,4 +1,5 @@
 import React, {Suspense,lazy } from "react";
+import { FormattedMessage } from "react-intl";
 import { BundleLoader } from "../../../Components/Placeholder";
 import { StyledDrawer } from "../../../Components/UI/Antd";
 const LeadHCWDrawerTab = lazy(()=>import("./LeadHCWDrawerTab"));
@@ -8,7 +9,11 @@ const LeadHCWdrawer = (props) => {
   return (
     <>
       <StyledDrawer
-        title="Leads HCW"
+        title={<FormattedMessage
+          id="app.leadsHCW"
+          defaultMessage= "Leads HCW"
+        />}
+       
         width="45%"
         visible={props.openLeadHCWdrawer}
         maskClosable={false}

@@ -1,30 +1,16 @@
 import React, { Component, lazy, Suspense } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { Button, message, Tooltip, Popover, Icon } from "antd";
-import { FormattedMessage } from "react-intl";
-import { StyledModal, StyledTabs } from "../../Components/UI/Antd";
+import { StyledTabs } from "../../Components/UI/Antd";
 import {
-  FlexContainer,
   TabsWrapper,
 } from "../../Components/UI/Layout";
-import AddIcon from '@mui/icons-material/Add';
-import { PlusOutlined } from "@ant-design/icons";
 import {handleBillableCandidateModal} from "../Dashboard/DashboardAction"
-import GroupsIcon from '@mui/icons-material/Groups';
 import DnsIcon from '@mui/icons-material/Dns';
-import DashboardAllTable2 from "../Dashboard/DashboardAllTable2"
-import StackedClosureChart from "../Dashboard/StackedClosureChart"
-import { ActionIcon } from "../../Components/Utils";
-import { AddPopover } from "../../Components/Common";
-import DashboardTable from "../Dashboard/Child/DashboardTable";
-import DashboardTable2 from "../Dashboard/Child/DashboardTable2";
-import DashBoardCommissionTable from "../Dashboard/Child/DashBoardCommissionTable";
-import { BundleLoader } from "../../Components/Placeholder";
-
-import { Breadcrumb, Alert } from "antd";
-import StackedChart from "./StackedChart";
-import AddCandidateBillableModal from "./Child/BillableCandidate/AddCandidateBillableModal";
+import { FormattedMessage } from "react-intl";
+const DashboardAllTable2 = lazy(()=>import("../Dashboard/DashboardAllTable2"));
+const DashboardTable2 = lazy(()=>import("../Dashboard/Child/DashboardTable2"));
+const AddCandidateBillableModal = lazy(()=>import("./Child/BillableCandidate/AddCandidateBillableModal"));
 
 
 const TabPane = StyledTabs.TabPane;
@@ -79,7 +65,12 @@ class DashboardDetailsTab extends Component {
                   <DnsIcon 
                    style={{fontSize:"1.1rem"}}
                   />
-                    <span class=" ml-1">Open Requirements</span>
+                    <span class=" ml-1">
+                    <FormattedMessage
+              id="app.openRequirements"
+              defaultMessage="Open Requirements"
+            />
+                     </span>
                   
                   {activeKey === "1" && (
                     <>

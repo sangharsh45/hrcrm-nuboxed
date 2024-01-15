@@ -1,4 +1,5 @@
-import React, { lazy, Suspense,useState,useEffect } from "react";
+import React, { lazy, Suspense, } from "react";
+import { FormattedMessage } from "react-intl";
  import { BundleLoader } from "../../../../../Components/Placeholder";
 import { StyledDrawer} from "../../../../../Components/UI/Antd";
 const LeadQualifiedTable =lazy(()=>import("./LeadQualifiedTable"));
@@ -8,7 +9,10 @@ const LeadQualifiedDrawer = (props) => {
   return (
     <>
       <StyledDrawer
-        title="Leads Qualified"
+          title={<FormattedMessage
+            id="app.leadsQualified"
+            defaultMessage="Leads Qualified"
+          />}
         width="45%"
         visible={props.openLeadQualified}
         maskClosable={false}

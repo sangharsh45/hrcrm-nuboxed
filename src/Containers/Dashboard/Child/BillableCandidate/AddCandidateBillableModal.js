@@ -2,7 +2,7 @@ import React, { lazy, Suspense } from "react";
 import { FormattedMessage } from "react-intl";
 import { StyledDrawer } from "../../../../Components/UI/Antd";
 import { BundleLoader } from "../../../../Components/Placeholder";
-import CandidateBillableStepper from "./CandidateBillableStepper";
+const CandidateBillableStepper = lazy(()=>import("./CandidateBillableStepper"));
 
 
 
@@ -16,7 +16,7 @@ const AddCandidateBillableModal = (props) => {
           defaultMessage="Billable"
         />}
         width="60%"
-        style={{marginTop:"5rem"}}
+        style={{marginTop:"3rem"}}
         visible={props.billableCandidateModal}
         closable
         destroyOnClose

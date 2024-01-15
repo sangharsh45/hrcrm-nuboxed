@@ -8,6 +8,7 @@ import {
 } from "../../../Components/UI/Layout";
 import { BundleLoader } from "../../../Components/Placeholder";
 import DnsIcon from '@mui/icons-material/Dns';
+import { FormattedMessage } from "react-intl";
 const OpportunityRequirementBoard = lazy(() => import("./OpportunityRequirementBoard"));
 const Details = lazy(() => import("./Details"));
 
@@ -67,7 +68,12 @@ class DashboardDetails extends Component {
                 
           
                             <ListAltIcon  />
-                    <span style={{ marginLeft: "0.25em" }}>Kanban</span>
+                    <span class=" ml-[0.25em]" >
+                    <FormattedMessage
+        id="app.kanban"
+        defaultMessage="Kanban"
+      />
+                      </span>
                   
                   {activeKey === "1" && (
                     <>
@@ -98,7 +104,12 @@ class DashboardDetails extends Component {
 
                  <DnsIcon/>
    
-                    <span style={{ marginLeft: "0.25em" }}>Details</span>
+                 <span class=" ml-[0.25em]" >
+                    <FormattedMessage
+        id="app.details"
+        defaultMessage="Details"
+      />
+                      </span>
                   
                   {activeKey === "2" && (
                     <>

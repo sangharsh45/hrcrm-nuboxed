@@ -4,17 +4,8 @@ import { bindActionCreators } from "redux";
 import ListAltIcon from "@mui/icons-material/ListAlt";
 import {  StyledTabs } from "../../../Components/UI/Antd";
 import { TabsWrapper } from "../../../Components/UI/Layout";
-
-//import ActionNotification from "../Dashboard/ActionNotification";
-import UpcomingIcon from '@mui/icons-material/Upcoming';
-
-import TipsAndUpdatesIcon from "@mui/icons-material/TipsAndUpdates";
-// import {getTodosCount} from "./DashboardAction";
-// import DashboardTodo from "./Child/DashboardTodo";
-// import UpcomingEvents from "./Child/UpcomingEvents";
-import { Badge } from "antd";
-
-import FunnelChartCustomer from "../Child/FunnelChartCustomer"
+import { FormattedMessage } from "react-intl";
+const FunnelChartCustomer = lazy(()=>import("../Child/FunnelChartCustomer"));
 
 const TabPane = StyledTabs.TabPane;
 function handleRefreshPage() {
@@ -65,7 +56,12 @@ class FunnelTab extends Component {
               tab={
                 <>
                   <ListAltIcon style={{fontSize:"1.1rem"}}/>
-                  <span class=" ml-1">Funnel</span>
+                  <span class=" ml-1">
+                  <FormattedMessage
+              id="app.funnel"
+              defaultMessage="Funnel"
+            />
+                    </span>
 
                 
                 </>
