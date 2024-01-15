@@ -359,5 +359,9 @@
   "app.iMEI":"IMEI",
   "app.qrcode":"QR Code",
   "app.actualeffort":"Actual Effort",
-  "app.estimatehours":"Estimated Hours"
+  "app.estimatehours":"Estimated Hours",
+  "app.item":"Items",
+  "app.repair":"Repair",
+  "app.estimatedtime":"Estimated Time",
+  "app.hours":"Hour"
 }

@@ -91,6 +91,7 @@ import { getOpenQcByUser } from "./RefurbishAction";
 import { Button, Tooltip } from "antd";
 import moment from "moment";
 import { OnlyWrapCard } from "../../../Components/UI/Layout";
+import { FormattedMessage } from "react-intl";
 
 function OpenQcTable(props) {
     useEffect(() => {
@@ -103,11 +104,23 @@ function OpenQcTable(props) {
     <div className=' flex justify-end sticky top-28 z-auto'>
 <OnlyWrapCard style={{backgroundColor:"#E3E8EE"}}>
 <div className=" flex justify-between w-[97.5%] p-2 bg-transparent font-bold sticky top-0 z-10">
-    <div className=" md:w-[4.1rem]">Order</div>
-    <div className=" md:w-[5.1rem]">Due Date</div>
-    <div className=" md:w-[9.8rem] ">Completed Phones</div>
+<div className=" md:w-[4.1rem]"><FormattedMessage
+                        id="app.order"
+                        defaultMessage="order"
+                      /></div>
+    <div className=" md:w-[5.1rem]"><FormattedMessage
+                        id="app.duedate"
+                        defaultMessage="duedate"
+                      /></div>
+   <div className=" md:w-[9.8rem] "><FormattedMessage
+                        id="app.completedphn"
+                        defaultMessage="completedphn"
+                      /></div>
     <div className="md:w-[6.6rem]"></div>
-    <div className="md:w-[5.8rem]">Note</div>
+    <div className="md:w-[5.8rem]"><FormattedMessage
+                        id="app.notes"
+                        defaultMessage="notes"
+                      /></div>
     {/* <div className="md:w-[4.3rem]"></div> */}
   </div>
 {props.openQc.map((item) => { 

@@ -10,12 +10,12 @@ const OrderPhoneRepairModal = (props) => {
         <>
             <StyledDrawer
                 title="Assign"
-                width="70%"
+                width="80%"
                 visible={showRepairPhoneList}
                 closable
                 destroyOnClose
                 maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}
-                style={{ marginTop: "5rem" }}
+                style={{ marginTop: "3rem" }}
                 onClose={() => handleRepairPhone(false)}
                 footer={null}
             >
