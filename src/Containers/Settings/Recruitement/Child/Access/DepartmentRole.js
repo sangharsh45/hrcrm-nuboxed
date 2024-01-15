@@ -1,6 +1,6 @@
 
 
-import React, { Component, lazy, PureComponent, Suspense, useEffect, useState } from "react";
+import React, {  PureComponent, Suspense } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { StyledTabs } from "../../../../../Components/UI/Antd";
@@ -37,7 +37,7 @@ class DepartmentRole extends PureComponent {
         console.log(this.state.departmentData.roleTypeId)
         return (
             <>
-                <TabsWrapper>
+                <TabsWrapper >
                     <StyledTabs type="card">
                         {departmentRoleData.map((member, i) => {
                             return (
@@ -54,7 +54,9 @@ class DepartmentRole extends PureComponent {
                                           
                                             <AccessForm 
                                             departmentId={this.props.departmentId}
+                                            departmentData={this.state.departmentData}
                                             roleTypeId={this.state.departmentData.roleTypeId} 
+
                                             />
                                         </Suspense>
                                     )}

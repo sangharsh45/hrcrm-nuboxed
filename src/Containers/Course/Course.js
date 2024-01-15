@@ -4,9 +4,9 @@ import { bindActionCreators } from "redux";
 import {setCourseViewType,
   handleCourseModal
 } from "../../Containers/Course/CourseAction"
-import AddCourseModal from "./Child/AddCourseModal";
-import CourseHeader from "./Child/CourseHeader";
-import CourseTable from "./CourseTable/CourseTable";
+const AddCourseModal =lazy(()=>import ("./Child/AddCourseModal"));
+const CourseHeader =lazy(()=>import ("./Child/CourseHeader"));
+const CourseTable =lazy(()=>import ("./CourseTable/CourseTable"));
 
 
 class Course extends Component {
@@ -29,7 +29,7 @@ class Course extends Component {
       <React.Fragment>
         <CourseHeader
          
-         setCourseViewType={setCourseViewType}
+          setCourseViewType={setCourseViewType}
           viewType={viewType}
           handleCourseModal={handleCourseModal}
           handleClear={this.handleClear}
@@ -40,7 +40,10 @@ class Course extends Component {
         addCourseModal={addCourseModal}
         handleCourseModal={handleCourseModal}
         />
-      <CourseTable/>
+        <Suspense fallback={"Loading"}>
+        <CourseTable/>
+        </Suspense>
+      
       </React.Fragment>
     );
   }

@@ -121,7 +121,7 @@ export const rolesReducer = (state = initialState, action) => {
               ...state,
               updatingTalentRoles: false,
               talentRoles: state.talentRoles.map((role) =>
-                role.roleTypeId === action.payload.roleTypeId ? action.payload : role
+                role.roleTypeExternalId === action.payload.roleTypeExternalId ? action.payload : role
               ),
             };
           case types.UPDATE_TALENT_ROLES_FAILURE:
@@ -134,7 +134,9 @@ export const rolesReducer = (state = initialState, action) => {
               return {
                 ...state,
                 removingTalentRole: false,
-                talentRoles: state.roltalentRoleses.filter((item) => item.roleTypeExternalId !== action.payload),
+                talentRoles: state.talentRoles.filter(
+                  (item) => item.roleTypeExternalId !== action.payload
+              ),
               };
             case types.REMOVE_TALENT_ROLE_FAILURE:
               return {
@@ -144,7 +146,28 @@ export const rolesReducer = (state = initialState, action) => {
               };
 
 
+              case types.HANDLE_CLAER_REDUCER_DATA_ROLE:
+                return { ...state, 
+                  roles: [], 
+                  // deletedTruck: [] 
+                };
 
+                case types.GET_ROLE_SEARCH_TALENT_REQUEST:
+                  return { ...state, fetchingRoleTalentInputSearchData: true };
+                case types.GET_ROLE_SEARCH_TALENT_SUCCESS:
+                  return {
+                    ...state,
+                    fetchingRoleTalentInputSearchData: false,
+                    talentRoles: action.payload,
+                    // serachedData: action.payload,
+                  };
+                case types.GET_ROLE_SEARCH_TALENT_FAILURE:
+                  return { ...state, fetchingRoleTalentInputSearchDataError: true };
+                  case types.HANDLE_CLAER_REDUCER_DATA_ROLE_TALENT:
+                    return { ...state, 
+                      talentRoles: [], 
+                      // deletedTruck: [] 
+                    };    
    
 
     default:

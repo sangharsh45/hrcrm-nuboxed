@@ -1,18 +1,10 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-// import { updateTodoEvent, updateTodoCall,updateTodoTask } from "../DashboardAction"
-import { Checkbox, Rate } from "antd";
-import { ScheduleOutlined, StarOutlined } from '@ant-design/icons';
 import moment from "moment";
-import { FlexContainer } from "../../../Components/UI/Layout";
 import {
-  Title,
   SubTitle,
-  MultiAvatar,
 } from "../../../Components/UI/Elements";
-import TodoCheckBox from "../Child/TodoCheckBox"
-import { Link } from "../../../Components/Common";
 
 class UpcomingItems extends Component {
   handleCallback = () => { };
@@ -40,16 +32,16 @@ class UpcomingItems extends Component {
         //style={{overflow:"scroll" }}
         >
           <div>
-            <FlexContainer>
+            <div class=" flex">
             
               {/* {show && ( */}
               
             
               <SubTitle style={{ fontSize: 12, marginLeft: "1.56em" }}>
-                 {`${upComing.userName}  ${upComing.eventType} on  ${moment(upComing.date).format("ll")} `}
+                 {`${upComing.eventType} ${upComing.userName}   on  ${moment(upComing.date).format("ll")} `}
                
                  </SubTitle>
-            </FlexContainer>
+            </div>
           </div>
 
                

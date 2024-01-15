@@ -1,12 +1,11 @@
 import React from "react";
-import { Icon, message } from "antd";
-import { StyledUpload, StyledModal } from "../../UI/Antd";
+import { message,Upload } from "antd";
 import { base_url } from "../../../Config/Auth";
 import axios from "axios";
-import { PlusOutlined } from "@ant-design/icons";
+import { UploadOutlined } from "@ant-design/icons";
 const token = sessionStorage.getItem("token");
 
-class Upload extends React.Component {
+class Upload1 extends React.Component {
   state = {
     previewVisible: false,
     previewImage: "",
@@ -44,7 +43,9 @@ class Upload extends React.Component {
       .then(res => {
         ////debugger;
         console.log(res);
+
         onSuccess();
+        //this.props.handleImageUpload(res.data)
         this.props.form.setFieldValue(this.props.field.name, res.data);
         this.setState({ previewVisible: false, previewImage: "" });
       })
@@ -75,35 +76,35 @@ class Upload extends React.Component {
   render() {
     const { previewVisible, previewImage, fileList } = this.state;
     const uploadButton = (
-      <div>
-        <PlusOutlined type="plus" />
+      <div style={{display:"flex"}}>
+        <UploadOutlined />
         <div className="ant-upload-text">Upload</div>
       </div>
     );
     return (
       <div className="clearfix">
-        <StyledUpload
+        <Upload
           accept=".jpeg,.png,.jpg"
           beforeUpload={this.beforeUpload}
           customRequest={this.handleImageUpload}
-          listType="picture-card"
+          // listType="picture-card"
           fileList={fileList}
           onPreview={this.handlePreview}
 
           onChange={this.handleChange}
         >
           {fileList.length >= 1 ? null : uploadButton}
-        </StyledUpload>
-        <StyledModal
+        </Upload>
+        {/* <StyledModal
           visible={previewVisible}
           footer={null}
           onCancel={this.handleCancel}
         >
           <img alt="example" style={{ width: "100%" }} src={previewImage} />
-        </StyledModal>
+        </StyledModal> */}
       </div>
     );
   }
 }
 
-export default Upload;
+export default Upload1;

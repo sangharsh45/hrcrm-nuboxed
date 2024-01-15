@@ -53,7 +53,7 @@
 .login_password{
   display: flex;
   flex-direction: row;
-  width: 85%;
+  width: 100%;
 }
 .randome_text2 {
   line-height: 1.1;
@@ -395,7 +395,7 @@ body::-webkit-scrollbar-thumb {
 .ant-btn-primary:focus {
   color: #fff;
   height:  1.58rem;
-  padding: 3px 4px; 
+  padding: 3px 8px; 
   border-radius: 3px;
   background-color: #1890ff;
   border-color: #1890ff;
@@ -550,10 +550,33 @@ box-shadow: 0em 0.25em 0.625em -0.25em #aaa;
 padding: 0.3rem 1rem;
 }
  .ant-switch{ 
-  background-color: #24d8a7;
+  background-color: rgb(213, 213, 213);
+  /* background: #09bc8b; */
 }
 .ant-time-picker-input{
   width:10rem;
+}
+.map-and-address-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width:27em;
+  height:14em;
+  background-color: white;
+  border-radius:10px
+}
+
+.chosen-address {
+  margin-bottom: 10px;
+  color:"black";
+  font-weight: bold;
+}
+
+.map-container {
+  width: 330px;
+  height: 200px;
+  /* border-radius: 10px; */
+  overflow: hidden;
 }
 
 
@@ -602,9 +625,10 @@ padding: 0.3rem 1rem;
   height: 1.58rem;
   font-size: 0.8125em;
   border-color: #fff;
-  padding: 3px 4px; 
+  padding: 3px 8px; 
   background-color: #ff7158bf; 
   border-radius: 3px;
+  box-shadow: grey 1px 2px 0px 0px;
 }
 .ant-btn-background-ghost{
   color: #fff;
@@ -613,6 +637,7 @@ padding: 0.3rem 1rem;
   padding: 3px 4px; 
   background-color: #ff7158bf; 
   border-radius: 3px;
+  box-shadow: grey 1px 2px 0px 0px;
 }
 .ant-btn-danger {
   font-family: "Poppins";
@@ -624,8 +649,7 @@ padding: 0.3rem 1rem;
   border-color: #ff71586b;
   text-shadow: 0 -1px 0 rgb(0 0 0 / 12%);
   -webkit-box-shadow: 0 2px 0 rgb(0 0 0 / 5%);
-  box-shadow: 0 2px 0 rgb(0 0 0 / 5%);
-  
+  box-shadow: grey 1px 2px 0px 0px; 
 }
 .form-background{
   background-color: whitesmoke;
@@ -654,16 +678,18 @@ padding: 0.3rem 1rem;
   border-radius: 2px;
   transition: all 0.3s;
   display: inline-flex;
+  box-shadow: lightgrey 2px 2px 2px 2px;
 }
 
 .ant-btn {
   font-family: "Poppins";
   height: 1.5rem;
-  padding: 3px 4px; 
+  padding: 3px 8px; 
   font-size: 0.7rem;
   border-radius: 3px; 
   line-height: revert; 
   margin: 0 2px 0 2px;
+  box-shadow: grey 1px 2px 0px 0px;
 }
 
 .ant-input-affix-wrapper > input.ant-input {
@@ -733,6 +759,7 @@ style attribute {
   font-size: 1.0625em;
   cursor: pointer;
 }
+
 .ant-select:not(.ant-select-customize-input) .ant-select-selector {
   position: relative;
   height:1.48rem;
@@ -813,5 +840,74 @@ h1{
       font-size: 1.25em;
       color: #40A9FF;
       font-family: "Poppins";
+}
+.ant-checkbox+span {
+  
+  font-size: 0.75rem;
+}
+.ant-layout.ant-layout-has-sider {
+  flex-direction: row;
+  overflow-x: auto;
+  overflow-y: hidden;
+  height: 100vh;
+}
+
+.ant-avatar {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  color: #fff;
+  font-size: 0.875rem;
+  line-height: 1.8rem;
+  list-style: none;
+  font-family: poppins;
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+  white-space: nowrap;
+  text-align: center;
+  vertical-align: middle;
+  background: rgba(0, 0, 0, 0.25);
+  border: 1px solid transparent;
+  width: 1.8rem;
+  height: 1.8rem;
+  border-radius: 50%;
+}
+
+
+
+.matrix-table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.matrix-table th, .matrix-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: center;
+}
+.toggle-clr{
+  background-color:rgb(119, 221, 119),
+}
+
+.matrix-table th {
+  background-color: #f2f2f2;
+}
+
+.matrix-table input {
+  width: 50px; /* Adjust the width as needed */
+  text-align: center;
+}
+
+.matrix-table button {
+  padding: 5px 10px;
+  background-color: #4caf50;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+.matrix-table button:hover {
+  background-color: #45a049;
 }
 

@@ -14,6 +14,7 @@ import { DeleteOutlined,UpCircleOutlined } from "@ant-design/icons";
 import MileageVoucherIdDrawer from "./MileageVoucherIdDrawer";
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
+import { FormattedMessage } from "react-intl";
 
 
 class MileagePendingStatusCard extends React.Component {
@@ -50,7 +51,7 @@ class MileagePendingStatusCard extends React.Component {
                 className="absolute left-0 top-0 bottom-0 w-3  rounded-l-md -mt-1 -mb-1 -ml-2 "
 
               ></span>
-              <span class="font-semibold text-base text-cardBody-heading font-poppins"> Pending </span>
+              <span class="font-semibold text-sm text-cardBody-heading font-poppins"> Pending </span>
             </span>
           </div>   
       {pendingMileages.map((item) => { 
@@ -61,14 +62,14 @@ class MileagePendingStatusCard extends React.Component {
                                     borderBottom: "3px dotted #515050"
                                 }}>
                                      
-                                <div className=" flex font-medium flex-col w-72 ">
+                                <div className=" flex font-medium flex-col w-72 mb-1 ">
 
                                    
                                         <Tooltip >
-                                            <h4 class=" text-base text-cardBody font-poppins">
+                                            <h4 class=" text-sm text-cardBody font-poppins">
                                             Voucher ID
                                             </h4>
-                                            <h4 class=" text-base text-blue-500 text-cardBody font-poppins cursor-pointer">
+                                            <h4 class=" text-xs text-blue-500 text-cardBody font-poppins cursor-pointer">
                                                 
                                             <div onClick={() => { this.handleExpand(item.voucherId) 
                 this.props.handleMileageVoucherIdDrwer(true)}}>
@@ -77,32 +78,10 @@ class MileagePendingStatusCard extends React.Component {
                                             </h4>
 
                                         </Tooltip>
-                              
-                                </div>
+                                        <div className=" flex font-medium flex-col w-max ">
+                                    <h4 class=" text-xs text-cardBody font-poppins"></h4>
 
-                                <div className=" flex font-medium flex-col  w-52 ">
-                           
-                                    <h4 class=" text-base text-cardBody font-poppins"> Voucher Date </h4>
-                                    <h4 class=" text-base text-cardBody font-poppins">
-                                        
-                                    
-                                    {dayjs(item.voucherDate).format("MMM Do YY")}
-
-                                    </h4>
-                                </div>
-                                <div className=" flex font-medium flex-col w-36 ">
-                                  
-
-                                    <h4 class=" text-base text-cardBody font-poppins">Amount</h4>
-                                    <h4 class=" text-base text-cardBody font-poppins">
-                                        € {item.amount}
-                                    </h4>
-                                </div>
-                     
-                                <div className=" flex font-medium flex-col w-[12rem] ">
-                                    <h4 class=" text-base text-cardBody font-poppins"></h4>
-
-                                    <div class=" text-base text-cardBody font-poppins">
+                                    <div class=" text-xs text-cardBody font-poppins">
          
             
               
@@ -113,13 +92,35 @@ class MileagePendingStatusCard extends React.Component {
                     textAlign: "center",
                     margin: "2px",
                     borderRadius: "0.62em",
-                    width:"12rem"
+                    width:"max-content"
                   }}
                 >
                   <div className="text-[#e1d16c]">Waiting for approval</div>
                   </div>
                                     </div>
                                     </div>
+                                </div>
+
+                                <div className=" flex font-medium flex-col  w-52 ">
+                           
+                                    <h4 class=" text-sm text-cardBody font-poppins"> Voucher Date </h4>
+                                    <h4 class=" text-xs text-cardBody font-poppins">
+                                        
+                                    
+                                    {dayjs(item.voucherDate).format("MMM Do YY")}
+
+                                    </h4>
+                                </div>
+                                <div className=" flex font-medium flex-col w-36 ">
+                                  
+
+                                    <h4 class=" text-sm text-cardBody font-poppins">Amount</h4>
+                                    <h4 class="  text-xs text-cardBody font-poppins">
+                                        € {item.amount}
+                                    </h4>
+                                </div>
+                     
+                              
 
 
                                 <div class="flex flex-col w-[4%]">
@@ -127,16 +128,25 @@ class MileagePendingStatusCard extends React.Component {
                         <div >
                         <div >
                            {item.status === "Pending" ? (
-            <Tooltip title="Delete">
+                     <StyledPopconfirm
+                     // title="Do you want to delete?"
+                     title={
+                       <FormattedMessage
+                         id="app.doyouwanttodelete?"
+                         defaultMessage="Do you want to delete?"
+                       />
+                     }
+                     onConfirm={() =>   this.props.deleteMileageVoucher(item.voucherId)}
+                   >
               <DeleteOutlined
                 type="delete"
                 style={{ cursor: "pointer" }}
-                onClick={() => {
-                this.props.deleteMileageVoucher(item.voucherId);
+                // onClick={() => {
+                // this.props.deleteMileageVoucher(item.voucherId);
                   
-                }}
+                // }}
               />
-            </Tooltip>
+           </StyledPopconfirm>
             ):null}
              {/* {item.status==="Rejected" && (
             <Button type="primary"

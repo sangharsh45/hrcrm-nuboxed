@@ -5,14 +5,13 @@ import PlacesAutocomplete, {
 } from "react-places-autocomplete";
 import _ from "lodash";
 import styled from "styled-components";
-import { ValidationError, StyledLabel } from "../../UI/Elements";
 import { FlexContainer } from "../../UI/Layout";
 
 const StyledInput = styled.input.attrs({
   type: "text",
   size: (props) => (props.small ? 4 : undefined),
 })`
-  border: 0.0625em solid ${(props) => props.theme.inputBorderColor};
+ // border: 0.0625em solid ${(props) => props.theme.inputBorderColor};
   background-color: ${(props) => props.theme.backgroundColor};
   color: ${(props) => props.theme.color};
   display: block;
@@ -40,7 +39,7 @@ const StyledInput = styled.input.attrs({
  */
 const StyledDropDownContainer = styled.div`
   border-radius: 0.1875em;
-  background-color: ${(props) => props.theme.backgroundColor};
+  background-color: white;
   color: ${(props) => props.theme.color};
   box-shadow: 0em 0.25em 0.625em -0.25em ${(props) => props.theme.boxShadowColor};
   position: absolute;

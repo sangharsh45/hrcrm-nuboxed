@@ -1,8 +1,7 @@
 import * as types from "./AccessmentActionTypes";
 import axios from "axios";
-import dayjs from "dayjs";
 import { asses_url } from "../../Config/Auth";
-import { message } from "antd";
+
 
 export const handleQuestionrModal = (modalProps) => (dispatch) => {
   dispatch({
@@ -220,7 +219,7 @@ export const publishIndicatorAssessmentId = (data, assessmentId, cb) => (
 };
 
 //Add question
-export const addQuestion = (data, assessmentId) => (dispatch) => {
+export const addQuestion = (data) => (dispatch) => {
   dispatch({
     type: types.ADD_QUESTION_DETAILS_REQUEST,
   });
@@ -228,7 +227,7 @@ export const addQuestion = (data, assessmentId) => (dispatch) => {
     .post(`${asses_url}/question/save`, data)
     .then((res) => {
       console.log(res);
-      dispatch(getQuestionsListByAssId(assessmentId));
+      // dispatch(getQuestionsListByAssId(assessmentId));
       dispatch({
         type: types.ADD_QUESTION_DETAILS_SUCCESS,
         payload: res.data,
@@ -343,5 +342,49 @@ export const updateQuestionByQuestionId = (data, questionId,assessmentId, cb) =>
         type: types.UPDATE_QUESTION_BY_ID_FAILURE,
       });
       cb && cb("Failure");
+    });
+};
+
+export const FinalizeQuestion = (assessmentId) => (dispatch) => {
+  dispatch({
+    type: types.FINALIZE_QUESTION_REQUEST,
+  });
+  axios
+    .post(`${asses_url}/assessment/finalize/${assessmentId}`,)
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.FINALIZE_QUESTION_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.FINALIZE_QUESTION_FAILURE,
+        payload: err,
+      });
+    });
+};
+
+export const getFinalQuestions = (assessmentId) => (dispatch) => {
+  dispatch({
+    type: types.GET_FINAL_QUESTIONS_REQUEST,
+  });
+  axios
+    .get(`${asses_url}/question/questionList/${assessmentId}`)
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.GET_FINAL_QUESTIONS_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.GET_FINAL_QUESTIONS_FAILURE,
+        payload: err,
+      });
     });
 };

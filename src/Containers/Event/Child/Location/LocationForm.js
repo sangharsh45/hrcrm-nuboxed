@@ -3,15 +3,13 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Button, Switch } from "antd";
 import { Formik, Form, Field, FieldArray } from "formik";
-import * as Yup from "yup";
+import PrecisionManufacturingIcon from '@mui/icons-material/PrecisionManufacturing';
 import { Spacer, StyledLabel } from "../../../../Components/UI/Elements";
 import { InputComponent } from "../../../../Components/Forms/Formik/InputComponent";
 import { FlexContainer } from "../../../../Components/UI/Layout";
  import { SelectComponent } from "../../../../Components/Forms/Formik/SelectComponent";
 import AddressFieldArray from "../../../../Components/Forms/Formik/AddressFieldArray";
 import { addLocation, } from "../../../Event/Child/Location/LocationAction";
-// import { getSalesManagerUser } from "../../Teams/TeamsAction";
-// import { getProductionManager } from "../../Plant/PlantAction";
 import { getTimeZone } from "../../../Auth/AuthAction";
 // const FormSchema = Yup.object().shape({
 //   name: Yup.string().required("Input required!"),
@@ -28,6 +26,7 @@ class LocationForm extends Component {
       corporate: false,
       inventory: false,
       project: false,
+      prodmanuf:false,
       retail: false,
     };
   }
@@ -46,6 +45,9 @@ class LocationForm extends Component {
   };
   handleProject = (checked) => {
     this.setState({ project: checked });
+  };
+  handleProdManuf = (checked) => {
+    this.setState({ prodmanuf: checked });
   };
   handleRetail = (checked) => {
     this.setState({ retail: checked });
@@ -112,6 +114,7 @@ class LocationForm extends Component {
             billingInd: this.state.billing ? "true" : "false",
             inventoryInd: this.state.inventory ? "true" : "false",
             projectInd: this.state.project ? "true" : "false",
+            prodmanufInd: this.state.prodmanuf ? "true" : "false",
             corporateInd: this.state.corporate ? "true" : "false",
             retailInd: this.state.retail ? "true" : "false",
             timeZone: "",
@@ -136,8 +139,6 @@ class LocationForm extends Component {
           }}
           // validationSchema={FormSchema}
           onSubmit={(values, { resetForm }) => {
-            //debugger;
-            console.log(values);
             this.props.addLocation(
               {
                 ...values,
@@ -145,14 +146,14 @@ class LocationForm extends Component {
                 billingInd: this.state.billing ? "true" : "false",
                 inventoryInd: this.state.inventory ? "true" : "false",
                 projectInd: this.state.project ? "true" : "false",
+                prodmanufInd: this.state.prodmanuf ? "true" : "false",
                 corporateInd: this.state.corporate ? "true" : "false",
                 retailInd: this.state.retail ? "true" : "false",
                 orgId: this.props.orgId,
                 userId: this.props.userId,
-                // locationtypeId: this.props.locationtypeId,
+                
               },
               this.props.orgId,
-              // () => this.callback(resetForm)
             );
           }}
         >
@@ -165,14 +166,10 @@ class LocationForm extends Component {
             values,
             ...rest
           }) => (
+            <div class="overflow-y-auto h-[30rem] overflow-x-hidden">
             <Form class="form-background">
-              <div style={{ display: "flex", justifyContent: "space-between" }}>
-                <div
-                  style={{
-                    height: "100%",
-                    width: "45%",
-                  }}
-                >
+              <div class="flex justify-between max-sm:flex-col">
+                <div class="h-full w-[45%] max-sm:w-wk">
                   <div>
                     <Field
                       name="locationName"
@@ -259,8 +256,8 @@ class LocationForm extends Component {
                   </FlexContainer> */}
                   <StyledLabel style={{ fontWeight: "bold" }}>Functions</StyledLabel>
                   <FlexContainer>
-                    <div style={{ width: "47%" }}>
-                      <div style={{ fontWeight: "bold" }}>Production &nbsp;<i class="fas fa-cogs"></i></div>
+                    <div style={{ width: "47%" }} class="mt-2">
+                      <div class="font-bold text-xs">Refurbish &nbsp;<i class="fas fa-cogs text-base"></i></div>
                       <div>
                         <Switch
                           style={{ width: "6.25em" }}
@@ -271,8 +268,8 @@ class LocationForm extends Component {
                         />
                       </div>
                     </div>
-                    <div style={{ width: "47%" }}>
-                      <div style={{ fontWeight: "bold" }}>Inventory &nbsp;<i class="fas fa-warehouse"></i></div>
+                    <div style={{ width: "47%" }} class="mt-2">
+                      <div class="font-bold text-xs">Inventory &nbsp;<i class="fas fa-warehouse text-base"></i></div>
                       {/* inventory auto on when production on. if user wants to close inventory then ask what is inventory location */}
                       <div>
                         <Switch
@@ -286,20 +283,20 @@ class LocationForm extends Component {
                     </div>
                   </FlexContainer>
                   <FlexContainer>
-                    <div style={{ width: "47%" }}>
-                      <div style={{ fontWeight: "bold" }}>Billing &nbsp;<i class="far fa-money-bill-alt"></i></div>
+                  <div style={{ width: "47%" }} class="mt-2">
+                      <div class="font-bold text-xs">Production &nbsp;<PrecisionManufacturingIcon/></div>
                       <div>
                         <Switch
                           style={{ width: "6.25em" }}
-                          checked={this.state.billing}
-                          onChange={this.handleBilling}
+                          checked={this.state.prodmanuf}
+                          onChange={this.handleProdManuf}
                           checkedChildren="Yes"
                           unCheckedChildren="No"
                         />
                       </div>
                     </div>
-                    <div style={{ width: "47%" }}>
-                      <div style={{ fontWeight: "bold" }}>Corporate &nbsp;<i class="fas fa-building"></i></div>
+                    <div style={{ width: "47%" }} class="mt-2">
+                      <div class="font-bold text-xs">Corporate &nbsp;<i class="fas fa-building text-base"></i></div>
                       <div>
                         <Switch
                           style={{ width: "6.25em" }}
@@ -312,20 +309,8 @@ class LocationForm extends Component {
                     </div>
                   </FlexContainer>
                   <FlexContainer>
-                    <div style={{ width: "47%" }}>
-                      <div style={{ fontWeight: "bold" }}>Project &nbsp;<i class="fas fa-project-diagram"></i></div>
-                      <div>
-                        <Switch
-                          style={{ width: "6.25em" }}
-                          checked={this.state.project}
-                          onChange={this.handleProject}
-                          checkedChildren="Yes"
-                          unCheckedChildren="No"
-                        />
-                      </div>
-                    </div>
-                    <div style={{ width: "47%" }}>
-                      <div style={{ fontWeight: "bold" }}>Retail &nbsp;<i class="fas fa-money-check"></i></div>
+                  <div style={{ width: "47%" }} class="mt-2">
+                      <div class="font-bold text-xs">Retail &nbsp;<i class="fas fa-money-check text-base"></i></div>
                       <div>
                         <Switch
                           style={{ width: "6.25em" }}
@@ -336,14 +321,50 @@ class LocationForm extends Component {
                         />
                       </div>
                     </div>
+                    <div style={{ width: "47%" }} class="mt-2">
+                      <div class="font-bold text-xs">Project &nbsp;<i class="fas fa-project-diagram text-base"></i></div>
+                      <div>
+                        <Switch
+                          style={{ width: "6.25em" }}
+                          checked={this.state.project}
+                          onChange={this.handleProject}
+                          checkedChildren="Yes"
+                          unCheckedChildren="No"
+                        />
+                      </div>
+                    </div>
+                  
+                  </FlexContainer>
+                  <FlexContainer>
+                  <div style={{ width: "47%" }} class="mt-2">
+                      <div class="font-bold text-xs">Billing &nbsp;<i class="far fa-money-bill-alt text-base"></i></div>
+                      <div>
+                        <Switch
+                          style={{ width: "6.25em" }}
+                          checked={this.state.billing}
+                          onChange={this.handleBilling}
+                          checkedChildren="Yes"
+                          unCheckedChildren="No"
+                        />
+                      </div>
+                    </div>
+               
+                    {/* <div style={{ width: "47%" }} class="mt-2">
+                      <div class="font-bold text-xs">Project &nbsp;<i class="fas fa-project-diagram text-base"></i></div>
+                      <div>
+                        <Switch
+                          style={{ width: "6.25em" }}
+                          checked={this.state.project}
+                          onChange={this.handleProject}
+                          checkedChildren="Yes"
+                          unCheckedChildren="No"
+                        />
+                      </div>
+                    </div> */}
+                  
                   </FlexContainer>
                 </div>
-                <div
-                  style={{
-                    height: "100%",
-                    width: "45%",
-                  }}
-                >
+                <div class="h-full w-[45%] max-sm:w-wk mt-2">
                   <div style={{ width: "100%" }}>
                     <StyledLabel>Time Zone</StyledLabel>
                     <Field
@@ -372,7 +393,7 @@ class LocationForm extends Component {
                   />
                 </div>
               </div>
-              <FlexContainer justifyContent="flex-end">
+              <div class="flex justify-end w-wk bottom-2 mr-2 md:absolute ">
                 <Button
                   type="primary"
                   htmlType="submit"
@@ -380,8 +401,9 @@ class LocationForm extends Component {
                 >
                   Create
                 </Button>
-              </FlexContainer>
+              </div>
             </Form>
+            </div>
           )}
         </Formik>
       </>

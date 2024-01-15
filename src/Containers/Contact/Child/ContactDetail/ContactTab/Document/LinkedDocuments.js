@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { FormattedMessage } from "react-intl";
-import dayjs from 'dayjs';
 import { base_url } from "../../../../../../Config/Auth";
 import {
   StyledTable,
@@ -14,7 +13,8 @@ import {
   deleteDocument 
 } from "../../../../ContactAction";
 import { elipsize } from "../../../../../../Helpers/Function/Functions";
-import { DeleteOutlined, DownloadOutlined } from "@ant-design/icons";
+import { DeleteOutlined, } from "@ant-design/icons";
+import moment from "moment";
 
 class LinkedDocuments extends Component {
   componentDidMount() {
@@ -40,7 +40,7 @@ class LinkedDocuments extends Component {
         />,
         dataIndex: "creationDate",
         render: (name, item, i) => {
-          return <span>{` ${dayjs(item.creationDate).format("ll")}`}</span>;
+          return <span>{` ${moment(item.creationDate).format("ll")}`}</span>;
         },
       },
       {

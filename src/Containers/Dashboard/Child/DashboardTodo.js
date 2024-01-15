@@ -1,36 +1,24 @@
-import React, { Component } from "react";
+import React, { Component ,lazy} from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { FormattedMessage } from "react-intl";
 import {
   List,
-  Icon,
-  Empty,
-  Rate,
   Popconfirm,
-  message,
   Button,
-  Checkbox,
 } from "antd";
-import { MainWrapper, FlexContainer } from "../../../Components/UI/Layout";
-import { GroupView } from "../../../Components/Common";
-import { Title } from "../../../Components/UI/Elements";
-import RatingBox from "../Child/RatingBox"
 import {
   getTodos,
   updateTodoCall,
   updateTodoEvent,
   updateTodoTask
-
-
 } from "../DashboardAction";
 
 import { setSelectedTodoTimeIntervalReport } from "../../Customer/CustomerAction"
 import TimeInterval from "../../../Utils/TimeInterval";
-// import { updateTodoCall } from "../../../Call/CallAction";
 import { setRating, setId } from "../../Event/EventAction";
-import TodoItem from "./TodoItem";
 import { BundleLoader } from "../../../Components/Placeholder";
+const TodoItem=lazy(() => import("./TodoItem"));
 
 const desc = ["Terrible", "Bad", "Normal", "Good", "Wonderful"];
 const text = "Rate your engagement";
@@ -89,10 +77,6 @@ class Todo extends Component {
       ratingValue,
       idValue,
     } = this.props;
-
-    console.log("Rate4", idValue);
-    console.log("Rate", ratingValue);
-
     if (idValue.activity === "Call") {
       console.log("inside call");
       if (idValue.completionInd === true) {
@@ -116,7 +100,6 @@ class Todo extends Component {
     }
     if (idValue.activity === "Event") {
       ////debugger;
-      console.log("inside event", todo);
       if (idValue.completionInd === true) {
         ////debugger;
         updateTodoEvent(
@@ -211,15 +194,15 @@ class Todo extends Component {
    
       }}
       > */}
+      <div class=" h-[100vh] overflow-auto" >
 
         <TimeInterval
           times={this.props.dateTodoRangeList}
           handleClick={this.props.setSelectedTodoTimeIntervalReport}
         />
 
-
-
-        <FlexContainer>
+        {todos.length ? 
+                <div class=" flex">
           {todos &&
             todos.slice(0, 5).map((todo, i) => {
               return (
@@ -252,7 +235,7 @@ class Todo extends Component {
                     />}
                     onCancel={this.confirm}
                   >
-                    <FlexContainer justifyContent="flex-end"
+                    <div class=" flex justify-end" 
 >
                       <Button
                         style={{ padding: "0px 0.37em", border: "none" }}
@@ -262,7 +245,7 @@ class Todo extends Component {
 
                       >
 
-                        <Rate
+                        {/* <Rate
                           allowHalf
                           style={{ color: "orange" }}
                           tooltips={desc}
@@ -272,9 +255,9 @@ class Todo extends Component {
                           value={`${todo.rating} `}
                           title={text}
 
-                        />
+                        /> */}
                       </Button>
-                    </FlexContainer>
+                    </div>
                   </Popconfirm>
                   {/* <RatingBox
                         handleChange={this.handleChange}
@@ -285,10 +268,11 @@ class Todo extends Component {
                 </List.Item>
               );
             })}
-        </FlexContainer>
+        </div>
+        :"Data Not Available"
+  }
 
-
-
+</div>
         {/* </MainWrapper> */}
       </>
     );
@@ -299,13 +283,9 @@ const mapStateToProps = ({ auth, dashboard, customer, event }) => ({
   user: auth.userDetails,
   fetchingTodos: dashboard.fetchingTodos,
   userId: auth.userDetails.userId,
-  // todosPrevious: dashboard.todosPrevious,
-  // todosUpcoming: dashboard.todosUpcoming,
-  // todos: dashboard.todos,
   ratingValue: event.ratingValue,
   idValue: event.idValue,
   dateTodoRangeList: customer.dateTodoRangeList,
-
   endDate: customer.endDate,
   startDate: customer.startDate,
   todos: dashboard.todos

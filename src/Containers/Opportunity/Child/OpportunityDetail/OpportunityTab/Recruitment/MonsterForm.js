@@ -1,19 +1,15 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { Button, Switch} from "antd";
+import { Button} from "antd";
 import { SelectComponent } from "../../../../../../Components/Forms/Formik/SelectComponent";
-import AddressFieldArray from "../../../../../../Components/Forms/Formik/AddressFieldArray";
-// import { MainWrapper } from "../../../../../../Components/UI/Elements";
-import { Formik, Form, Field,FastField,FieldArray } from "formik";
+import { Formik, Form, Field } from "formik";
 import { InputComponent } from "../../../../../../Components/Forms/Formik/InputComponent";
 import { StyledLabel } from "../../../../../../Components/UI/Elements";
-import SearchSelect from "../../../../../../Components/Forms/Formik/SearchSelect";
 import { FlexContainer } from "../../../../../../Components/UI/Layout";
 import { Spacer } from "../../../../../../Components/UI/Elements";
 import { FormattedMessage } from "react-intl";
 import {getJobCategory,getJobBoardName,getJobBoardOccupation,getJobBoardIndustry,addMonster} from "../../../../OpportunityAction";
-import dayjs from "dayjs";
 
 //import ExperienceTable from "./ExperienceTable";
 

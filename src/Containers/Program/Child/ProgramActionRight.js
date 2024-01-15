@@ -1,29 +1,26 @@
-import React, { useEffect, useState, useMemo, lazy } from "react";
+import React from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { withRouter } from "react-router-dom";
 import { Button, Tooltip } from "antd";
-import { StyledSelect } from "../../../Components/UI/Antd";
-
-const Option = StyledSelect.Option;
+import { FormattedMessage } from 'react-intl';
 
 class ProgramActionRight extends React.Component {
   render() {
-    const { userId, user, role, handleProgramModal } = this.props;
+    const {handleProgramModal } = this.props;
     return (
       <div class=" flex items-center">
-        <Tooltip placement="left" title="Create">
+        <Tooltip placement="left" title={<FormattedMessage id="app.create" defaultMessage="Create"/>}>
           <Button type="primary" onClick={() => handleProgramModal(true)}>
-            Add
+          <FormattedMessage id="app.add" defaultMessage="Add" />  
           </Button>
-          {/* )}  */}
         </Tooltip>
       </div>
     );
   }
 }
 
-const mapStateToProps = ({ auth, team, account }) => ({
+const mapStateToProps = ({ auth }) => ({
   userId: auth.userDetails.userId,
   role: auth.userDetails.role,
   user: auth.userDetails,

@@ -1,5 +1,4 @@
-import React, { Component, lazy, Suspense, useEffect } from "react";
-import { BellOutlined, FilterOutlined } from "@ant-design/icons";
+import React, { lazy, } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
@@ -11,7 +10,6 @@ import { ResponsiveCard } from "../Layout";
 import { handleUpdateCustomerModal } from "../../../Containers/Customer/CustomerAction";
 import { MultiAvatar1 } from "../Elements";
 import { Title,  } from "./";
-import CustomerDetailView from "../../../Containers/Customer/Child/CustomerDetail/CustomerCards/CustomerDetailView";
 const UpdateCustomerModal = lazy(() =>
   import(
     "../../../Containers/Customer/Child/UpdateCustomer/UpdateCustomerModal"
@@ -113,10 +111,10 @@ const BussinessCard = (props) => {
                 <Button
                   style={{
                     borderColor: "transparent",
-                    fontSize: "1rem",
+                    fontSize: "0.875rem",
                   }}
                 >
-                  Positions - {position}
+                  Opportunity - {position}
                 </Button>
               </div>
               <div>
@@ -130,7 +128,17 @@ const BussinessCard = (props) => {
                   <BorderColorIcon style={{ fontSize: "1rem" }} /> {/* )} */}
                 </Button>
               </div>
+              
             </div>
+            <div>
+                <Button
+                type="primary"
+                  
+                  // onClick={handleEdit}
+                >
+                  Convert to Account
+                </Button>
+              </div>
           </CardElement>
         </CardWrapper>
       </ResponsiveCard>
@@ -199,7 +207,7 @@ const CardWrapper = styled.div`
   }
 `;
 const CardElement = styled.div`
-  border-radius: 0.75rem;
+  border-radius: 0.35rem;
   border: 3px solid #eeeeee;
   background-color: rgb(255, 255, 255);
   box-shadow: 0 0.25em 0.62em #aaa;
@@ -210,6 +218,6 @@ const CardElement = styled.div`
   width: 16vw;
   margin-top: 1.5em;
   @media only screen and (max-width: 600px) {
-    width: 100%;
+    width: -webkit-fill-available;
   }
 `;

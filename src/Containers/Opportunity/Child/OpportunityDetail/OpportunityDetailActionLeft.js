@@ -1,15 +1,12 @@
-import React, { useEffect } from "react";
+import React, { } from "react";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { FormattedMessage } from "react-intl";
 import { bindActionCreators } from "redux";
-import ActionIcon from "../../../../Components/Utils/ActionIcon";
 import { FlexContainer } from "../../../../Components/UI/Layout";
-// import { getStageCheckByStageId } from "../../OpportunityAction";
 import OpportunityStatsCard from "./OpportunityCards/OpportunityStatsCard";
 import { Spin, Tooltip, Icon } from "antd";
 import { RollbackOutlined } from "@ant-design/icons";
-// import { RollbackOutlined } from "@ant-design/icons";
 
 const OpportunityDetailActionLeft = (props) => {
   const { opportunity, fetchingOpportunityById } = props;

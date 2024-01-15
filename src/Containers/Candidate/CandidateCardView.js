@@ -1,13 +1,9 @@
-import React, { Component, useEffect, useState, useMemo, lazy } from "react";
-import { Route, Switch } from 'react-router-dom'
-import { MultiAvatar, MultiAvatar2, Spacer, StyledLabel } from '../../Components/UI/Elements'
-import { base_url } from "../../Config/Auth";
+import React, { useEffect, useState,  lazy } from "react";
+import { MultiAvatar, MultiAvatar2,  StyledLabel } from '../../Components/UI/Elements'
 import FactCheckIcon from '@mui/icons-material/FactCheck';
 import SkillsLoadMore from "../../Containers/Candidate/Child/CandidateTable/SkillsLoadMore";
-import Item from 'antd/lib/list/Item'
 import UpdateCandidateResumeModal from "./Child/CandidateTable/UpdateCandidateResumeModal";
 import { FlexContainer } from '../../Components/UI/Layout'
-import { WifiLoader  } from "react-awesome-loaders";
 import AddCandidatesTasksDrawerModal from "./AddCandidatesTasksDrawerModal"
 import AddPlayerModal from "./Child/CandidateTable/AddPlayerModal";
 import PlayCircleIcon from '@mui/icons-material/PlayCircle';
@@ -18,13 +14,7 @@ import MonitorHeartIcon from '@mui/icons-material/MonitorHeart';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import DraftsIcon from '@mui/icons-material/Drafts';
 import CircleIcon from '@mui/icons-material/Circle';
-import { Button, Menu, Dropdown, Radio, Space, Tooltip } from 'antd'
-// import {
-//   getCustomerProductList,
-//   LinkProductInfo,
-//   getShopName,
-//   getSortBy,
-// } from '../Customer/CustomerAction'
+import {  Tooltip } from 'antd'
 import {
   getCandidateById,
   getCandidateDocument,
@@ -39,25 +29,25 @@ import {
     handleupdateCandidateResumeModal,
     getCandidateListByUserId,
     handleCandidatesTasksDrawerModal,
-    getCandidateTasksInfo
+    getCandidateTasksInfo,
+    emptyCandidate
     
   } from "../Candidate/CandidateAction";
  import{getCountries} from "./../Auth/AuthAction"
-import APIFailed from '../../Helpers/ErrorBoundary/APIFailed'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { Select } from "antd";
 import styled from 'styled-components'
-import AddCandidateDrawerModal from "../Candidate/AddCandidateDrawerModal"
-import { StyledTable, StyledPopconfirm  } from '../../Components/UI/Antd';
-import { sortedLastIndex } from 'lodash'
+import { StyledPopconfirm  } from '../../Components/UI/Antd';
 import { UpCircleOutlined } from '@ant-design/icons';
 import { BundleLoader } from "../../Components/Placeholder";
 
 const CandidateDetailsView =lazy(()=>import("../Candidate/Child/CandidateTable/CandidateDetails/CandidateDetailsView"));
-// import CustomerSplashScreen from './CustomerSplashScreen'
 const UpdateCandidateModal = lazy(() =>
   import("./Child/UpdateCandidate/UpdateCandidateModal")
+);
+const AddCandidateDrawerModal = lazy(() =>
+  import("../Candidate/AddCandidateDrawerModal")
 );
 
 const { Option } = Select;
@@ -83,6 +73,9 @@ function CandidateCardView (props) {
 useEffect(() => {
   props.getCandidateListByUserId(props.userId,page);
   setPage(page + 1);
+}, []);
+useEffect(() => {
+  return () => props.emptyCandidate();
 }, []);
 function handleChange(data) {
   props.Candidatesorttype(props.userId,data);
@@ -137,7 +130,7 @@ function handleSetCurrentCandidateId(candidateId) {
   
 </Select> 
             </div> */}
-             
+              <div class=" h-h72 overflow-auto overflow-x-auto">
               <CardWrapper>      
               {props.candidateByUserId.map((item) => {
                 console.log("found",item.skillList);
@@ -350,7 +343,7 @@ function handleSetCurrentCandidateId(candidateId) {
                  )  
             })}
               </CardWrapper>
-
+              </div>
               
               <AddCandidateDrawerModal
               candidate={props.candidate}
@@ -432,8 +425,9 @@ const mapStateToProps = ({ candidate, auth,dashboard}) => ({
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
-        // getCandidateListByUserId,
+   
         getCandidateById,
+        emptyCandidate,
         getBlackListCandidate,
         getCandidateTreeMap,
         getTopicsByCandidateId,

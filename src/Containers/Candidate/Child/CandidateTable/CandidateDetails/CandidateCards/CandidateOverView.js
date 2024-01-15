@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { FlexContainer } from "../../../../../../Components/UI/Layout";
 import { Title, MultiAvatar } from "../../../../../../Components/UI/Elements";
 
 class CandidateOverView extends Component {
@@ -12,13 +11,11 @@ class CandidateOverView extends Component {
 
     return (
       <>
-        <FlexContainer justifyContent="space-between">
-          <FlexContainer
-            justifyContent="flex-start"
-            flexWrap="nowrap"
-            style={{ width: "70%" }}
+        <div class=" flex justify-between" >
+          <div class=" flex justify-start flex-no-wrap w-[70%]"
+         
           >
-            <div style={{ width: "25%" }}>
+            <div class=" w-[25%]">
               <MultiAvatar
                 primaryTitle={candidate.firstName}
                 imageId={candidate.imageId}
@@ -26,7 +23,7 @@ class CandidateOverView extends Component {
               />
             </div>
             &nbsp;
-            <FlexContainer flexDirection="column" style={{ width: "70%" }}>
+            <div class=" flex flex-col w-[70%]" >
               <Title
                 overflow="hidden"
                 textOverflow="ellipsis"
@@ -34,9 +31,9 @@ class CandidateOverView extends Component {
               >
                 {`${firstName || ""} ${middleName || ""} ${lastName || ""}`}
               </Title>
-            </FlexContainer>
-          </FlexContainer>
-        </FlexContainer>
+            </div>
+          </div>
+        </div>
       </>
     );
   }

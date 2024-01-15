@@ -1,7 +1,7 @@
 import TabPane from "antd/lib/tabs/TabPane";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import React, { Suspense, useState } from "react";
+import React, { Suspense } from "react";
 import { FormattedMessage } from "react-intl";
 import { StyledTabs } from "../../../../../Components/UI/Antd";
 import { TabsWrapper } from "../../../../../Components/UI/Layout";
@@ -12,7 +12,6 @@ import { Form } from "formik";
 function AssessmentDetailsRight(props) {
   const { assessment,assessmentByAssessmentId } = props;
 const assessmentId=props.assessmentByAssessmentId.assessmentId;
-console.log("Ass1",assessmentId);
   const { activeKey, setState } = props;
   function handleTabChange(key) {
     setState({ activeKey: key });
@@ -37,25 +36,16 @@ console.log("Ass1",assessmentId);
             <Suspense fallback={"Loading ..."}>
               {" "}
               <>
-                <Form className="form-background">
-                  <div
-                    style={{
-                      display: "flex",
-                      justifyContent: "space-between",
-                      height: "70vh",
-                      overflow: "scroll",
-                      paddingRight: "0.6em",
-                    }}
-                  >
+                
+                  <div class="flex justify-between h-[26rem] overflow-scroll pr-2" >
                     <QuestionsGroup assessmentId={assessmentId} />
                   </div>
-                </Form>
               </>
             </Suspense>
           </TabPane>
         </StyledTabs>
       </TabsWrapper>
-      <Suspense fallback={null}></Suspense>
+
     </>
   );
 }

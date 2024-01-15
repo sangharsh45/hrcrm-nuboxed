@@ -1,12 +1,10 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { Button, Tooltip, Icon } from "antd";
+import { Tooltip, } from "antd";
 import { FormattedMessage } from "react-intl";
 import LinkTagCustomerModal from "./LinkTagCustomerModal"
-import { Formik, Form, Field } from "formik";
 import {
-  StyledModal,
   StyledPopconfirm,
 } from "../../../../../Components/UI/Antd";
 import {
@@ -17,9 +15,7 @@ import {
 import BorderColorIcon from '@mui/icons-material/BorderColor';
 import {linktagCustomer} from "../../../OpportunityAction";
 import { FlexContainer } from "../../../../../Components/UI/Layout";
-import { ActionIcon } from "../../../../../Components/Utils";
-import { EditOutlined, LinkOutlined } from "@ant-design/icons";
-import { SelectComponent } from "../../../../../Components/Forms/Formik/SelectComponent";
+import {  LinkOutlined } from "@ant-design/icons";
 import styled from "styled-components";
 
 class OpportunityView extends Component {
@@ -64,7 +60,7 @@ class OpportunityView extends Component {
     console.log("function",opportunityId)
     return (
       <>
-        <FlexContainer justifyContent="space-between">
+        <div class="flex justify-between" >
           <FlexContainer
             justifyContent="flex-start"
             flexWrap="nowrap"
@@ -83,7 +79,7 @@ class OpportunityView extends Component {
               <Title
                 overflow="hidden"
                 textOverflow="ellipsis"
-                fontSize={"1.375em"}
+                style={{fontSize:"0.85rem",lineHeight:"2rem"}}
                 // style={{ marginLeft: "0.625em" }}
               >
                 {`${opportunityName || ""}`}
@@ -146,7 +142,7 @@ class OpportunityView extends Component {
           </FlexContainer>
 
           
-        </FlexContainer>
+        </div>
         
         <LinkTagCustomerModal
         opportunityId={opportunityId}

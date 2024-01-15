@@ -1666,7 +1666,14 @@ case types.ADD_EXPERIENCE_BY_CANDIDATE_ID_REQUEST:
                     addingParsingFormError: true,
                     // addOpportunityModal: false,
                   };
-  
+
+                  case types.HANDLE_CLAER_REDUCER_DATA_CANDIDATE:
+                    return { ...state, 
+                      candidateByUserId: [], 
+                      // deletedTruck: [] 
+                    };
+
+                
 
     default:
       return state;

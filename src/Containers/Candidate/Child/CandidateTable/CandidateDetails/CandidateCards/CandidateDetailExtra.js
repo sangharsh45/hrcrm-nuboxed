@@ -1,8 +1,5 @@
 import React, { Component } from "react";
-import { FlexContainer } from "../../../../../../Components/UI/Layout";
 import { SubTitle } from "../../../../../../Components/UI/Elements";
-import { FormattedMessage } from "react-intl";
-import dayjs from "dayjs";
 
 class CandidateDetailExtra extends Component {
   render() {
@@ -31,14 +28,11 @@ export default CandidateDetailExtra;
 
 const CandidateItemRow = ({ label, value }) => {
   return (
-    <FlexContainer
-      alignItems="center"
-      flexWrap="nowrap"
-      style={{ margin: "0.4rem" }}
+    <div  class=" flex items-center flex-nowrap m-2"
     >
       <SubTitle style={{ color: "#444", fontWeight: 600 }}>{label}</SubTitle>
       <SubTitle style={{ marginLeft: "-1.875em",overflow:"hidden",textOverflow:"ellipsis" }}>{value}</SubTitle>
-    </FlexContainer>
+    </div>
   );
 };
 

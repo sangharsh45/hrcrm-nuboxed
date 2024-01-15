@@ -6,14 +6,11 @@ import { Button,Switch } from "antd";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 import dayjs from "dayjs";
-import { Radio } from "antd";
-import { Spacer, StyledLabel } from "../../../../Components/UI/Elements";
+import {  StyledLabel } from "../../../../Components/UI/Elements";
 import { TextareaComponent } from "../../../../Components/Forms/Formik/TextareaComponent";
 import { InputComponent } from "../../../../Components/Forms/Formik/InputComponent";
 import { DatePicker } from "../../../../Components/Forms/Formik/DatePicker";
-
 import { handleChooserModal } from "../../../Planner/PlannerAction";
-import { FlexContainer } from "../../../../Components/UI/Layout";
 import { addLeaves } from "../../LeavesAction";
 
 
@@ -60,11 +57,22 @@ class LeaveForm extends Component {
       Travel: false,
       Project: false,   
       day:"",
-      firstCase:true,
-      isAccepted:true
+      firstCase:false,
+      isAccepted:false
     };
   }
   
+  handleSwitchChange = (value) => {
+    this.setState({ firstCase: value });
+
+    
+    if (value) {
+      console.log('1'); 
+    } else {
+      console.log('0');
+    }
+  };
+
   handleProject = (checked) => {
     this.setState({ Project: checked });
   };
@@ -103,9 +111,10 @@ console.log(this.state.firstCase)
                 startDate: startDate || dayjs(),
 
                 endDate: endDate || dayjs(),
-                case:this.state.firstCase===true?"0":this.state.firstCase===false&&"1",
+                
                 employeeId: this.props.userId,
-                halfDay: this.state.day,
+                halfDayType: this.state.firstCase ? "true" : "false",
+                halfDayInd: this.state.isAccepted ? "true" : "false",
                 reason: "",
                 coverDetails: "",
               }
@@ -117,9 +126,11 @@ console.log(this.state.firstCase)
             this.props.addLeaves(
               {
                 ...values,
-                halfDay: this.state.day,
+                halfDayType: this.state.firstCase ? "true" : "false",
+                halfDayInd: this.state.isAccepted ? "true" : "false",
                 startDate: dayjs(values.startDate).toISOString(),
                 endDate: dayjs(values.endDate).toISOString(),
+                // halfDayType:this.state.firstCase?"0":"1",
               },
               this.props.userId,
 
@@ -175,12 +186,9 @@ console.log(this.state.firstCase)
                         </Radio>
                                         </Radio.Group> */}
 
-                  <Spacer />
-                  <FlexContainer
-                    justifyContent="space-between"
-                    style={{ width: "100%" }}
-                  >
-                    <div style={{ width: "47%" }}>
+                  
+                  <div class="mt-3 flex justify-between w-[100%]">
+                    <div class="w-[47%]">
                       <Field
                         isRequired
                         name="startDate"
@@ -200,7 +208,7 @@ console.log(this.state.firstCase)
                         }}
                       />
 
-                      <Spacer />
+                     
                     </div>
                     <div>
                     {/* <StyledLabel><FormattedMessage
@@ -245,29 +253,28 @@ console.log(this.state.firstCase)
                  </div>
                  
                   ):(
-                    <div
+                    <div class=" flex items-center h-16 flex-row-reverse w-3/12 max-sm:w-wk"
                       style={{
-                        width: "25%",
+                       
                         fontWeight: "bold",
                       }}
                     >
                       
                       <Switch
-                         onChange={this.firstClick}
+                         onChange={this.handleSwitchChange}
                         checked={this.state.firstCase}
-                        checkedChildren="1st"
-                        unCheckedChildren="2nd"
+                        checkedChildren="1st hlf"
+                        unCheckedChildren="2nd hlf"
                       />
                       
                     </div>
                   )}
                 
   
-  <Spacer />
                     
-                     <div
+                     <div class="mt-3 w-3/12 max-sm:w-wk"
                       style={{
-                        width: "25%",
+                       
                         fontWeight: "bold",
                       }}
                     >
@@ -275,15 +282,15 @@ console.log(this.state.firstCase)
                       <Switch
                          onChange={this.radioClick}
                         checked={this.state.isAccepted}
-                        checkedChildren="No"
-                        unCheckedChildren="Yes"
+                        checkedChildren="Yes"
+                        unCheckedChildren="No"
                       />
                       
                     </div>
          
-                  </FlexContainer>
-                  <Spacer />
-                 
+                  </div>
+           
+                  <div class="mt-3 w-1/2 max-sm:w-wk">
                   <Field
                     name="coverDetails"
                     //label="Cover"
@@ -293,9 +300,12 @@ console.log(this.state.firstCase)
                     />}
                     width={"100%"}
                     component={InputComponent}
-                    inlineLabel
+                    isColumn
                   />
-                  <Spacer />
+                </div>
+                <div class="mt-3">
+
+               
                   <Field
                     isRequired
                     name="reason"
@@ -308,18 +318,18 @@ console.log(this.state.firstCase)
                     component={TextareaComponent}
                     inlineLabel
                   />
-
-                  <Spacer />
+</div>
+            
                 </div>
               </div>
-              <Spacer />
-              <FlexContainer justifyContent="flex-end">
+              
+              <div class="mt-3 flex justify-end w-wk bottom-2 mr-2 md:absolute ">
                 &nbsp;
                 <Button htmlType="submit" type="primary"
                   Loading={addingLeaves}>
                   Submit
                 </Button>
-              </FlexContainer>
+              </div>
             </Form>
           )}
         </Formik>

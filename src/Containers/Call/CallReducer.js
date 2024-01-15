@@ -11,6 +11,17 @@ const initialState = {
   updatingCall: false,
   updatingCallError: false,
 
+  fetchingOpportunityRecord: false,
+  fetchingOpportunityRecordError: false,
+  opportunityRecord:[],
+
+  viewType: "table",
+
+  addingNotesByCallId: false,
+  addingNotesByCallIdError: false,
+
+  addDrawerCallNotesModal:false,
+
   fetchingCallListRangeByUserId: false,
   fetchingCallListRangeByUserIdError: false,
   callListRangeByUserId: [],
@@ -61,7 +72,11 @@ export const callReducer = (state = initialState, action) => {
     case types.ADD_CALL_REQUEST:
       return { ...state, addingCall: true };
     case types.ADD_CALL_SUCCESS:
-      return { ...state, addingCall: false, addCallModal: false,
+      return { ...state, addingCall: false,
+         addCallModal: false,
+         addCallTaskModal:false,
+         addPitchactivityModal:false,
+        //  openCETmodal:false,
         callListRangeByUserId:[action.payload,...state.callListRangeByUserId]
        };
     case types.ADD_CALL_FAILURE:
@@ -193,6 +208,44 @@ export const callReducer = (state = initialState, action) => {
 
  case types.HANDLE_CALL_NOTES_MODAL:
    return { ...state, addNotesSpeechModal: action.payload };
+
+   case types.HANDLE_CALL_NOTES_DRAWER_MODAL:
+    return { ...state, addDrawerCallNotesModal: action.payload };
+
+    case types.ADD_CALL_NOTES_REQUEST:
+      return {
+        ...state,
+        addingNotesByCallId: true,          
+      };
+    case types.ADD_CALL_NOTES_SUCCESS:
+      return {
+        ...state,
+        // addDrawerCallNotesModal:false,
+        addingNotesByCallId: false,
+
+      };
+    case types.ADD_CALL_NOTES_FAILURE:
+      return {
+        ...state,
+        addingNotesByCallId: false,
+        addingNotesByCallIdError: true,
+      };  
+
+               
+      case types.GET_OPPORTUNITY_RECORD_REQUEST:
+        return { ...state, fetchingOpportunityRecord: true };
+      case types.GET_OPPORTUNITY_RECORD_SUCCESS:
+        return { ...state, fetchingOpportunityRecord: false, 
+          opportunityRecord: action.payload };
+      case types.GET_OPPORTUNITY_RECORD_FAILURE:
+        return {
+          ...state,
+          fetchingOpportunityRecord: false,
+          fetchingOpportunityRecordError: true,
+        };
+     
+        case types.EMPTY_CALL_LIST:
+          return { ...state, callListRangeByUserId: [] }; 
 
     default:
       return state;

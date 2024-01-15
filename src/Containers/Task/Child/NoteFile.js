@@ -132,6 +132,7 @@ class NoteFile extends Component {
                                 component={TextareaComponent}
                             /> */}
                {/* <ReactSpeeech/>  */}
+             
                 <Editor
                   editorState={editorState}
                   wrapperClassName="demo-wrapper"
@@ -144,6 +145,24 @@ class NoteFile extends Component {
                   placeholder={placeholder || "Type here"}
                   toolbar={toolbarOption}
                 />
+                <div class=" flex ">
+                  <Button
+                    type="primary"
+                    htmlType="submit"
+                    // disabled={this.state.edit}
+                    style={{
+                      marginTop: "3.8125em",
+                      marginBottom: "0.3125em",
+                      marginRight: "0.3125em",
+                    }}
+                  >
+                    <FormattedMessage
+                      id="app.notify"
+                      defaultMessage="Notify"
+                    />
+                    {/* Notify */}
+                  </Button>
+                </div>
                 <div class=" flex justify-end">
                   <Button
                     type="primary"
@@ -162,6 +181,7 @@ class NoteFile extends Component {
                     {/* Post */}
                   </Button>
                 </div>
+             
               </Form>
             );
           }}

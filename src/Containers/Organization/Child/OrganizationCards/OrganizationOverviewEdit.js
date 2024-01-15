@@ -4,8 +4,7 @@ import { FormattedMessage } from "react-intl";
 import { bindActionCreators } from "redux";
 import { updateOrganizationDetails } from "../../../Auth/AuthAction";
 import { Button } from "antd";
-import { FlexContainer } from "../../../../Components/UI/Layout";
-import { TextInput, Spacer } from "../../../../Components/UI/Elements";
+import { TextInput, } from "../../../../Components/UI/Elements";
 import EditUpload from "../../../../Components/Forms/Edit/EditUpload";
 class OrganizationDetailEdit extends Component {
   constructor(props) {
@@ -16,7 +15,7 @@ class OrganizationDetailEdit extends Component {
   }
   handleUpdate = () => {
     this.props.updateOrganizationDetails(
-      this.props.organization.organizationId,
+      this.props.organizationList.organizationId,
       this.state.fields,
       this.props.toggleViewType
     );
@@ -41,33 +40,33 @@ class OrganizationDetailEdit extends Component {
   };
   render() {
     const {
-      organization,
+      organizationList,
       toggleViewType,
       updatingOrganizationDetails,
     } = this.props;
     return (
       <>
-        <FlexContainer
-          flexDirection="column"
+        <div class=" flex flex-col"
+      
           style={{ padding: "0.625em 1.25em 0.625em 1.25em" }}
         >
           <EditUpload
-            imageId={organization.imageId}
-            imageURL={organization.imageURL}
+            imageId={organizationList.imageId}
+            imageURL={organizationList.imageURL}
             imgWidth={100}
             imgHeight={100}
             getImage={this.setImage}
           />
 
           <EditableInput
-            defaultValue={organization.organizationName}
+            defaultValue={organizationList.organizationName}
             handleChange={this.handleChange}
             name={"organizationName"}
             value={this.state.fields.organizationName}
             width="100%"
           />
-        </FlexContainer>
-        <FlexContainer justifyContent="flex-end" marginRight="1.25em">
+        </div>
+        <div class=" flex justify-end mr-[1.25em]" >
           <Button
             type="primary"
             Loading={updatingOrganizationDetails}
@@ -87,7 +86,7 @@ class OrganizationDetailEdit extends Component {
                  defaultMessage="Cancel"
                 />
           </Button>
-        </FlexContainer>
+        </div>
       </>
     );
   }

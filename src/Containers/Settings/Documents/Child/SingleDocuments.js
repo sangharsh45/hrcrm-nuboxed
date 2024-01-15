@@ -1,11 +1,12 @@
-import React, { Component, useMemo } from "react";
+import React, { Component, } from "react";
 import styled from "styled-components";
 import { FormattedMessage } from "react-intl";
 import BorderColorIcon from '@mui/icons-material/BorderColor';
-import SearchIcon from '@mui/icons-material/Search';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { Button, Popconfirm,Tooltip, Switch } from "antd";
-import { FlexContainer } from "../../../../Components/UI/Layout";
+import {linkTypeToggle} from "../DocumentsAction";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import { Button,Tooltip, Select } from "antd";
 import { TextInput } from "../../../../Components/UI/Elements";
 import ViewEditCard from "../../../../Components/UI/Elements/ViewEditCard";
 import DocumentStatusToggle from "./DocumentStatusToggle";
@@ -14,15 +15,30 @@ class SingleDocuments extends Component {
     super(props);
     this.state = {
       documentTypeName: "",
+      type:"",
+      
       
     };
   }
+  handleStageType=(value)=>{
+    const { documentTypeId } = this.props.document;
+    console.log(value)
+    this.setState({type:value});
+    let data={
+      userType:value,
+      documentTypeId: documentTypeId,
+    }
+    this.props.linkTypeToggle(data);
+    // this.props.linkTypeToggle(value);
+  }
+
   render() {
     const {
-      document: { documentTypeName,editInd, mandatoryInd, documentTypeId },
+      document: { documentTypeName,editInd, mandatoryInd, userType, documentTypeId },
       handleChange,
       name,
       value,
+  
       documents,
       linkedDocuments,
       updatingDocuments,
@@ -36,14 +52,27 @@ class SingleDocuments extends Component {
           {({ viewType }, toggleViewType) =>
             viewType === "view" ? (
               <div>
-                <FlexContainer justifyContent="space-evenly">
-                  <div style={{width:"50%"}}>
+                <div class=" flex" >
+                  <div class=" w-60">
                   <DocumentName style={{ flexBasis: "90%" }}>
                     {documentTypeName}
                   </DocumentName>
                   </div>
                   {/* <FlexContainer style={{justifyContent:"flex-end",marginTop:"-31px"}} > */}
-                  <div style={{width:"35%"}}>
+                  <div class="flex justify-between w-96">
+                  <div  >
+                    <Select style={{ width: "100%"}}
+                onChange={this.handleStageType}
+                value={userType}
+                // defaultValue={this.state.type}
+                placeholder="Select Entity"
+                >
+                  <option value="User">User</option>
+        <option value="Customer">Customer</option>
+      
+                </Select> 
+                    </div>
+                  <div >
                     <DocumentStatusToggle
                   editInd={editInd}
                       mandatoryInd={mandatoryInd}
@@ -51,6 +80,7 @@ class SingleDocuments extends Component {
                       documentTypeId={documentTypeId}
                     />  
                     </div>
+                  
                     <div >               
                    {this.props.document.editInd === true &&(
                       <BorderColorIcon
@@ -77,11 +107,12 @@ class SingleDocuments extends Component {
                   </Tooltip>  
                       ) }                
                   </div>
-                </FlexContainer>
+                  </div>
+                </div>
                 {/* </FlexContainer> */}
               </div>
             ) : (
-              <FlexContainer>
+              <div class=" flex" >
                 <TextInput
                   name={name}
                   // value={value || documentTypeName}
@@ -91,7 +122,7 @@ class SingleDocuments extends Component {
                 />
                 {/* <br />
                 <br /> */}
-                <FlexContainer justifyContent="flex-end">
+              <div class=" flex justify-end" >
                   <Button
                     type="primary"
                     htmlType="submit"
@@ -113,8 +144,8 @@ class SingleDocuments extends Component {
                     {/* Cancel */}
                     <FormattedMessage id="app.cancel" defaultMessage="Cancel" />
                   </Button>
-                </FlexContainer>
-              </FlexContainer>
+                </div>
+              </div>
             )
           }
         </ViewEditCard>
@@ -122,8 +153,18 @@ class SingleDocuments extends Component {
     );
   }
 }
+const mapStateToProps = ({ document }) => ({
+ 
+});
+const mapDispatchToProps = (dispatch) =>
+  bindActionCreators(
+    {
+      linkTypeToggle
+    },
+    dispatch
+  );
 
-export default SingleDocuments;
+export default connect(mapStateToProps, mapDispatchToProps)(SingleDocuments);
 
 const DocumentWrapper = styled.div`
   width: 100%;

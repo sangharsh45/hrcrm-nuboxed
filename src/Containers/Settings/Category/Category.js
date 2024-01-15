@@ -1,19 +1,13 @@
-import React, { Component, lazy, Suspense } from "react";
+import React, { Component,  Suspense } from "react";
 import { bindActionCreators } from "redux";
-import { FormattedMessage } from "react-intl";
 import { StyledTabs } from "../../../Components/UI/Antd";
 import { TabsWrapper } from "../../../Components/UI/Layout";
-import { MainWrapper, FlexContainer } from "../../../Components/UI/Layout";
 import { connect } from "react-redux";
 import AccessibilityIcon from '@mui/icons-material/Accessibility';
-import Sector from "../Sectors/Sectors";
-import { FileOutlined } from "@ant-design/icons";
 import Designation from "../Designation/Designation";
 import Department from "../Department/Department";
-import FactoryIcon from '@mui/icons-material/Factory';
 import Role from "./Role/Role";
 import RoleTalent from "./Role/RoleTalent";
-// import IdProof from "../Id Proof/IdProof";
 const TabPane = StyledTabs.TabPane;
 
 class Category extends Component {
@@ -35,11 +29,11 @@ class Category extends Component {
   render() {
     return (
       <>
-        <FlexContainer flexWrap="nowrap">
-          <div style={{ width: "50%" }}>
+        <div flexWrap="nowrap">
+          <div class=" w-full">
             <TabsWrapper>
               <StyledTabs defaultActiveKey="0" onChange={this.handleTabChange}>
-                <TabPane
+                {/* <TabPane
                   tab={
                     <>
                     <FactoryIcon  />
@@ -53,13 +47,13 @@ class Category extends Component {
                   <Suspense>
                     <Sector />
                   </Suspense>
-                </TabPane>
-               <TabPane
+                </TabPane> */}
+                <TabPane
                   tab={
                     <>
                       <i class="fas fa-building"></i>
-                      <span 
-                        style={{ marginLeft: "0.25em" }} >Department</span>
+                      <span class=" ml-[0.25em]"
+                       >Department</span>
                     </>
                   }
                   key="4"
@@ -72,12 +66,12 @@ class Category extends Component {
                 <TabPane
                   tab={
                     <>
-                      <AccessibilityIcon 
+                      <AccessibilityIcon
                       // icon={solid("user-tie")}
-                       />
+                      />
 
-                      <span 
-                      style={{ marginLeft: "0.25em" }}>Role (Internal)</span>
+                      <span class=" ml-[0.25em]"
+                       >Role (Internal)</span>
                     </>
                   }
                   key="5"
@@ -87,27 +81,27 @@ class Category extends Component {
                   </Suspense>
                 </TabPane>
                 <TabPane
-                tab={
-                  <>
-                   <AccessibilityIcon 
+                  tab={
+                    <>
+                      <AccessibilityIcon
                       // icon={solid("user-tie")}
-                       />
+                      />
 
-                    <span style={{ marginLeft: "0.25em" }}>Role (Talent)</span>
-                  </>
-                }
-                key="6"
-              >
-                <Suspense>
-                  <RoleTalent />
-                </Suspense>
-              </TabPane>
+                      <span class=" ml-[0.25em]">Role (External)</span>
+                    </>
+                  }
+                  key="6"
+                >
+                  <Suspense>
+                    <RoleTalent />
+                  </Suspense>
+                </TabPane>
                 <TabPane
                   tab={
                     <>
                       <i class="fab fa-artstation"></i>
                       <span
-                      style={{ marginLeft: "0.25em" }} >Designation</span>
+                       class=" ml-[0.25em]" >Designation</span>
                     </>
                   }
                   key="7"
@@ -116,16 +110,16 @@ class Category extends Component {
                     <Designation />
                   </Suspense>
                 </TabPane>
-                
+
               </StyledTabs>
             </TabsWrapper>
           </div>
-        </FlexContainer>
+        </div>
       </>
     );
   }
 }
-const mapStateToProps = ({}) => ({});
+const mapStateToProps = ({ }) => ({});
 const mapDispatchToProps = (dispatch) => bindActionCreators({}, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(Category);

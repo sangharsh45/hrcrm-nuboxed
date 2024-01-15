@@ -7,6 +7,7 @@ import LocationHeader from "./LocationHeader";
 import LocationCard from "./LocationCard";
 import LocationCard2 from "./LocationCard2";
 import AddLocationModal from "./AddLocationModal";
+import LocationMap from "./LocationMap";
 
 class Location extends Component {
   render() {
@@ -28,6 +29,10 @@ class Location extends Component {
              viewType={viewType}
            />
           ) 
+          :this.props.viewType === "map" ? (
+            
+            <LocationMap/>
+             )
           :this.props.viewType === "tile" ? (
             
             <LocationCard2/>

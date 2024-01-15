@@ -1,37 +1,13 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { FormattedMessage } from "react-intl";
-import { base_url } from "../../../Config/Auth";
-import LazySelect from "../../../Components/Forms/Formik/LazySelect";
 import { bindActionCreators } from "redux";
-import { Button, Icon, Switch } from "antd";
-import { Formik, Form, Field, FieldArray } from "formik";
-import * as Yup from "yup";
+import { Button } from "antd";
+import { Formik, Form, Field } from "formik";
 import moment from "moment";
-import { Spacer, StyledLabel } from "../../../Components/UI/Elements";
-import SearchSelect from "../../../Components/Forms/Formik/SearchSelect";
 import { InputComponent } from "../../../Components/Forms/Formik/InputComponent";
-import AddressFieldArray from "../../../Components/Forms/Formik/AddressFieldArray";
-import { SelectComponent } from "../../../Components/Forms/Formik/SelectComponent";
-import { DatePicker } from "../../../Components/Forms/Formik/DatePicker";
 import { TimePicker } from "../../../Components/Forms/Formik/TimePicker";
-import {
-  addHour,
-  // deleteEvent,
-  // updateEvent,
-  // handleEventModal,
-} from "../../Event/EventAction";
-// import { handleChooserModal } from "../../Planner/PlannerAction";
-import { FlexContainer } from "../../../Components/UI/Layout";
-import { TextareaComponent } from "../../../Components/Forms/Formik/TextareaComponent";
-import { StyledPopconfirm } from "../../../Components/UI/Antd";
-// import { getEmployeelist } from "../../Employees/EmployeeAction";
-// import { getEvents } from "../../Settings/Event/EventAction";
-// import CandidateClearbit from "../../../Components/Forms/Autocomplete/CandidateClearbit";
-// import { setClearbitCandidateData } from "../../Candidate/CandidateAction";
-// yup validation scheme for creating a opportunity
-
-
+import {addHour} from "../../Event/EventAction";
 class HourForm extends Component {
   constructor(props) {
     super(props);
@@ -39,39 +15,13 @@ class HourForm extends Component {
       reminder: true,
     };
   }
-//   handleCallback = () => {
-//     const { handleChooserModal, handleEventModal, callback } = this.props;
-//     handleChooserModal(false);
-//     handleEventModal(false);
-//     callback && callback();
-//   };
-//   handleReminderChange = (checked) => {
-//     this.setState({
-//       reminder: checked,
-//     });
-//   };
-//   componentDidMount() {
-//     this.props.getEmployeelist();
-//     this.props.getEvents();
-//   }
 
   render() {
-    // const employeesData = this.props.employees.map((item) => {
-    //   return {
-    //     label: `${item.fullName}`,
-    //     // label: `${item.salutation || ""} ${item.firstName ||
-    //     //   ""} ${item.middleName || ""} ${item.lastName || ""}`,
-    //     value: item.employeeId,
-    //   };
-    // });
+
     const {
       addHour,
      
-      startTime,
-      endTime,
-     
     } = this.props;
-    // console.log(defaultAccounts);
     return (
       <>
         <Formik
@@ -80,42 +30,14 @@ class HourForm extends Component {
             
                 projectName: "",
                 timeZone:""
-               
-              
-                // assignedTo: userId ? userId : "",
-                // note: "",
-                // eventStatus: "",
-                // allDayInd: true,
-                // candidateId: "",
-                // included: [],
-                // fullName: "",
-                // repeatStartDate: "",
-                // complitionInd: "Incomplete",
-                // repeatEndDate: "",
-                // repeat_ind: false,
-                // address: [
-                //   {
-                //     addressType: "",
-                //     address1: "",
-                //     address2: "",
-                //     town: "",
-                //     street: "",
-                //     city: "",
-                //     postalCode: "",
-                //     country: "",
-                //     latitude: "",
-                //     longitude: "",
-                //   },
-                // ],
-                // employeesIds: [],
-                // ownerIds: [],
+
               }
           }
-          // validationSchema={EventSchema}
+   
           onSubmit={(values, { resetForm }) => {
             console.log(values);
             let timeZoneFirst = values.timeZone;
-            // console.log(timeZone);
+
 
             let mytimeZone = timeZoneFirst.substring(4, 10);
             console.log(mytimeZone);
@@ -129,10 +51,10 @@ class HourForm extends Component {
             }
             let newStartDate = moment(values.startDate).format("YYYY-MM-DD");
             console.log(newStartDate);
-            //Time calculation
+
             let firstStartTime = moment(values.startTime).format(
               "HH:mm:ss.SSS[Z]"
-            ); // getting start time from form input
+            ); 
             console.log(firstStartTime);
 
             let firstStartHours = firstStartTime.substring(0, 5); // getting only hours and minutes
@@ -185,16 +107,12 @@ class HourForm extends Component {
             console.log(`${finalEndTime}${timeEndPart}`);
 
             let newEndTime = `${finalEndTime}${timeEndPart}`;
-            // let newEndTime = moment(values.endTime).format("HH:mm:ss.SSS[Z]");
+
 
             let testVal = {
               ...values,
               callCategory: this.state.category,
               callType: this.state.Type,
-              // contactId:"",
-              // assignedTo: "",
-
-              // ownerIds: userId === userId ? [userId] : [],
 
               startDate: `${newStartDate}T${newStartTime}`,
               endDate: `${newEndDate}T${newEndTime}`,
@@ -238,13 +156,11 @@ class HourForm extends Component {
                     width: "47%",
                   }}
                 >
-                  <Spacer />
-                 
-                 
+          
+          <div class="mt-3">
                   <Field
                     isRequired
                     name="projectName"
-                    //label="Topic"
                     label={
                       <FormattedMessage
                         id="app.project"
@@ -256,9 +172,9 @@ class HourForm extends Component {
                     component={InputComponent}
                     inlineLabel
                   />
-                  <Spacer />
-                  <div>
-                    <FlexContainer justifyContent="space-between">
+                  </div>
+               
+                  <div class="flex justify-between mt-3">
                       <div style={{ width: "47%" }}>
                         <Field
                           isRequired
@@ -301,18 +217,11 @@ class HourForm extends Component {
                         }}
                       />
                     </div>
-                    </FlexContainer>
-                  </div>
-               
-                 
-                  <Spacer />
-                
-                
+                    </div>
                 </div>
                 
               </div>
-              <Spacer />
-              <FlexContainer justifyContent="flex-end">
+              <div class="flex justify-end mt-3">
                 {/* {isEditing && ( */}
                   {/* <>
                     <StyledPopconfirm
@@ -337,14 +246,14 @@ class HourForm extends Component {
                   htmlType="submit"
                   Loading={this.props.addingPlannerHour}
                 >
-                  {/* {isEditing ? "Update" : */}
+
                     <FormattedMessage
                       id="app.create"
                       defaultMessage="Create"
                     />
-                  {/* } */}
+    
                 </Button>
-              </FlexContainer>
+              </div>
             </Form>
           )}
         </Formik>

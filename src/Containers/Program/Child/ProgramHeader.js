@@ -7,9 +7,7 @@ class ProgramHeader extends Component {
     const { handleProgramModal, viewType, setProgramViewType } = this.props;
     return (
       <>
-       <div style={{position: "sticky",
-        top: "3.35rem",
-        zIndex: "998"}}>
+       <div class="static top-12 z-[998]">
           <ActionHeader
             leftComponent={
               <ProgramActionLeft

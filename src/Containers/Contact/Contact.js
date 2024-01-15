@@ -1,101 +1,181 @@
-import React, { Component, Suspense, lazy } from "react";
+import React, { useState, useEffect, Suspense, lazy } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { BundleLoader, GridLoader } from "../../Components/Placeholder";
-import { handleContactModal, setContactsViewType, getPArtnerContactPagination,emptyContact,getContactListByUserId, getContactPartnerListByUserId,getContactPagination } from "./ContactAction";
+import { BundleLoader } from "../../Components/Placeholder";
+import {
+  handleContactModal,
+  setContactsViewType,
+  getPArtnerContactPagination,
+  emptyContact,
+  getContactListByUserId,
+  getContactPartnerListByUserId,
+  getContactPagination,
+  getFilterContactList
+} from "./ContactAction";
+const ContactTeamCardList = lazy(() => import("./Child/ContactTable/ContactTeamCardList"));
+const ContactMobileCardList = lazy(() => import("./Child/ContactTable/ContactMobileCardList"));
+const ContactMobileTeamCardList = lazy(() => import("./Child/ContactTable/ContactMobileTeamCardList"));
+const ContactAllMobileCardList = lazy(() => import("./Child/ContactTable/ContactAllMobileCardList"));
 const AddContactModal = lazy(() => import("./Child/AddContactModal"));
 const ContactHeader = lazy(() => import("./Child/ContactHeader"));
-const ContactTable = lazy(() => import("./Child/ContactTable/ContactTable"));
-const PartnerTable =lazy(()=>import("./Child/PartnerTable/PartnerTable"));
+const ContactCardList = lazy(() => import("./Child/ContactTable/ContactCardList"));
+const ContactAllCardList = lazy(() => import("./Child/ContactTable/ContactAllCardList"));
 
-class Contact extends Component {
-  state = { currentData: undefined,text:undefined ,currentUser:"",currentPartnerUser:""};
-  handleClear = () => {
-    this.setState({ currentData: undefined });
-    this.props.emptyContact()
-    this.props.getContactListByUserId(this.state.currentUser?this.state.currentUser:this.props.userId,0);
-  };
-  setCurrentData = (value) => {
-    this.setState({ currentData: value });
-  };
+function Contact(props) {
+  const [currentData, setCurrentData] = useState(undefined);
+  const [text, setText] = useState(undefined);
+  const [currentUser, setCurrentUser] = useState("");
+  const [currentPartnerUser, setCurrentPartnerUser] = useState("");
+  const [selectedRole, setSelectedRole] = useState('');
+  const [selectedCountry, setSelectedCountry] = useState('');
+  const [filterText, setFilterText] = useState('');
+  const [filter, setFilter] = useState("creationdate");
+const [filteredData, setFilteredData] = useState(props.contactByUserId);
+const [isMobile, setIsMobile] = useState(() => window.innerWidth <= 768);
 
-  state = { currentPartnerData: "" };
-  handlePartnerClear = () => {
-    this.setState({ currentPartnerData: "" });
-    this.props.getContactPartnerListByUserId(this.state.currentPartnerUser?this.state.currentPartnerUser:this.props.userId,0);
-  };
-  setCurrentPartnerData = (value) => {
-    this.setState({ currentPartnerData: value });
-  };
-
-  handlePartnerDropChange=(value)=>{
-    this.setState({ currentPartnerUser: value });
-      this.props.getPArtnerContactPagination(value,0 );
-    console.log("valid",value)
-  };
-
-  handleDropChange=(value)=>{
-    this.setState({ currentUser: value });
-      this.props.getContactPagination(value,0 );
-    console.log("valid",value)
-  };
-  handleChange = (e) => {
-    this.setState({ currentData: e.target.value })
-   
-  };
-
-  render() {
-    const {
-      addContactModal,
-      handleContactModal,
-      setContactsViewType,
-      viewType,
-    } = this.props;
-    return (
-      <React.Fragment>
-        <ContactHeader
-          handleContactModal={handleContactModal}
-          handlePartnerDropChange={this.handlePartnerDropChange}
-          handleDropChange={this.handleDropChange}
-          currentUser={this.state.currentUser}
-          currentPartnerUser={this.state.currentPartnerUser}
-          setContactsViewType={setContactsViewType}
-          viewType={viewType}
-          text={this.state.text}
-          handleChange={this.handleChange}
-          handleClear={this.handleClear}
-          currentData={this.state.currentData}
-          setCurrentData={this.setCurrentData}
-          handlePartnerClear={this.handlePartnerClear}
-          currentPartnerData={this.state.currentPartnerData}
-          setCurrentPartnerData={this.setCurrentPartnerData}
-        />
-
-        <AddContactModal
-          addContactModal={addContactModal}
-          handleContactModal={handleContactModal}
-        />
-        <Suspense fallback={<BundleLoader />}>
-          {this.props.viewType === "table" ?  <PartnerTable
-           currentPartnerUser={this.state.currentPartnerUser}
-           /> :
-            this.props.viewType === "dashboard" ? (
-              <ContactTable
-              currentUser={this.state.currentUser} 
-               />
-              
-            ) : null}
-
-        </Suspense>
-      </React.Fragment>
-    );
+const handleCountryChange = (event) => {
+  const country = event.target.value;
+  setSelectedCountry(country);
+  if (country === '') {
+    setFilteredData(props.contactByUserId);
+  } else {
+    const filteredJobs = props.contactByUserId.filter((job) => job.departmentId ===country );
+    setFilteredData(filteredJobs);
   }
+};
+useEffect(() => {
+  const handleResize = () => {
+    setIsMobile(window.innerWidth <= 768);
+  };
+  window.addEventListener('resize', handleResize);
+  return () => {
+    window.removeEventListener('resize', handleResize);
+  };
+}, []);
+
+
+const filterData = filteredData.filter(item =>
+  Object.values(item).some(value =>
+    typeof value === 'string' && value.toLowerCase().includes(filterText.toLowerCase())
+  )
+);
+  const handleClear = () => {
+    setCurrentData(undefined);
+    props.emptyContact();
+    props.getContactListByUserId(currentUser ? currentUser : props.userId, 0,filter?filter:"creationdate");
+  };
+
+  const handleFilterChange = (data) => {
+    setFilter(data);
+    props.getFilterContactList(props.userId, 0, data);
+  };
+
+  const handlePartnerDropChange = (value) => {
+    setCurrentPartnerUser(value);
+    props.getPArtnerContactPagination(value, 0);
+    console.log("valid", value);
+  };
+
+  const handleDropChange = (value) => {
+    setCurrentUser(value);
+    props.getContactPagination(value, 0);
+    console.log("valid", value);
+  };
+
+  const handleChange = (e) => {
+    setCurrentData(e.target.value);
+  };
+
+  useEffect(() => {
+ 
+    const filteredJobs = props.contactByUserId.sort((a, b) => {
+      const indA = a.pingInd;
+      const indB = b.pingInd;
+      if (indA < indB) {
+        return 1;
+      }
+      if (indA > indB) {
+        return -1;
+      }
+  
+      // ind must be equal
+      return 0;
+    });
+    setFilteredData(filteredJobs);
+  }, [props.contactByUserId, filterText]);
+
+  const {
+    addContactModal,
+    handleContactModal,
+    setContactsViewType,
+    viewType,
+  } = props;
+
+  return (
+    <React.Fragment>
+      <ContactHeader
+        handleContactModal={handleContactModal}
+        handlePartnerDropChange={handlePartnerDropChange}
+        handleDropChange={handleDropChange}
+        currentUser={currentUser}
+        currentPartnerUser={currentPartnerUser}
+        setContactsViewType={setContactsViewType}
+        viewType={viewType}
+        text={text}
+        handleChange={handleChange}
+        handleClear={handleClear}
+        currentData={currentData}
+        setCurrentData={setCurrentData}
+        handleFilterChange={handleFilterChange}
+        filter={filter}
+        selectedCountry={selectedCountry}
+        handleCountryChange={handleCountryChange}
+      />
+
+      <AddContactModal
+        addContactModal={addContactModal}
+        handleContactModal={handleContactModal}
+      />
+      <Suspense fallback={<BundleLoader />}>
+        {props.viewType === "table" ?(
+        isMobile ? ( 
+           <ContactMobileCardList
+           currentUser={currentUser} 
+        filter={filter}
+         filterData={filterData} />
+        ) : (
+        <ContactCardList
+           
+        currentUser={currentUser} 
+        filter={filter}
+         filterData={filterData}
+         />)) :
+         props.viewType ==="all" ?(
+          isMobile ? ( 
+             <ContactAllMobileCardList
+             currentUser={currentUser} 
+          filter={filter}
+           filterData={filterData} />
+          ) :( <ContactAllCardList/>))
+         :viewType==="teams" ?(
+          isMobile ? ( 
+             <ContactMobileTeamCardList
+             currentUser={currentUser} 
+          filter={filter}
+           filterData={filterData} />
+          ) : ( <ContactTeamCardList/>))
+
+        : null}
+      </Suspense>
+    </React.Fragment>
+  );
 }
 
 const mapStateToProps = ({ contact, account, auth }) => ({
   userId: auth.userDetails.userId,
   addContactModal: contact.addContactModal,
   viewType: contact.viewType,
+  contactByUserId: contact.contactByUserId,
 });
 
 const mapDispatchToProps = (dispatch) =>
@@ -105,10 +185,12 @@ const mapDispatchToProps = (dispatch) =>
       getPArtnerContactPagination,
       setContactsViewType,
       getContactListByUserId,
+      getFilterContactList,
       getContactPartnerListByUserId,
       getContactPagination,
-      emptyContact
+      emptyContact,
     },
     dispatch
   );
+
 export default connect(mapStateToProps, mapDispatchToProps)(Contact);

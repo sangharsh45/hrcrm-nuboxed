@@ -1,18 +1,10 @@
 import React, { Component } from "react";
 import { FormattedMessage } from "react-intl";
-import { Divider, Tooltip, Button, Menu, Dropdown, Icon } from "antd";
-// import { EditOutlined, InfoCircleOutlined } from '@ant-design/icons';
-import dayjs from "dayjs";
+import {  Menu,  } from "antd";
 import {
-  Title,
   SubTitle,
-  MultiAvatar,
-  StyledLabel,
 } from "../../../../../Components/UI/Elements";
 import { FlexContainer } from "../../../../../Components/UI/Layout";
-import { ActionIcon } from "../../../../../Components/Utils";
-import CurrencyCompressor from "../../../../../Components/Common/CurrencyCompressor";
-import { EditOutlined } from "@ant-design/icons";
 import { CurrencySymbol } from "../../../../../Components/Common";
 class ProfileAboutView extends Component {
   render() {

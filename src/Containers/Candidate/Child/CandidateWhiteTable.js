@@ -18,12 +18,12 @@ import {
     emptyWhiteCandidate
 } from "../CandidateAction";
 import { CurrencySymbol } from "../../../Components/Common";
-import SkillsLoadMore from "./CandidateTable/SkillsLoadMore";
-import StatusToggle from "./CandidateTable/StatusToggle";
-import UpdateCandidateModal from "./UpdateCandidate/UpdateCandidateModal";
 import { getAllSalesList} from "../../Opportunity/OpportunityAction";
 import styled from "styled-components";
 import InfiniteScroll from "react-infinite-scroll-component";
+const StatusToggle =lazy(()=>import("../Child/CandidateTable/StatusToggle"));
+const SkillsLoadMore =lazy(()=>import("../Child/CandidateTable/SkillsLoadMore"));
+const UpdateCandidateModal =lazy(()=>import("../Child/UpdateCandidate/UpdateCandidateModal"));
 const CandidateDetailsView =lazy(()=>import("./CandidateTable/CandidateDetails/CandidateDetailsView"));
 
 

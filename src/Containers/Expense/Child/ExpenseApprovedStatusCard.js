@@ -45,14 +45,14 @@ function ExpenseApprovedStatusCard(props) {
 
     return (
       <>
-         <OnlyWrapCard width="25rem">  
+         <OnlyWrapCard width="25rem" className="h-[32rem]">  
          <div className="p-0.5 inline-flex items-center rounded-md w-max ml-1">
             <span className="pl-2 pr-4 relative">
               <span
                 className="absolute left-0 top-0 bottom-0 w-3  rounded-l-md -mt-1 -mb-1 -ml-2 "
 
               ></span>
-              <span class="font-semibold text-base text-cardBody-heading font-poppins"> Approved </span>
+              <span class="font-semibold text-sm text-cardBody-heading font-poppins"> Approved </span>
             </span>
           </div>    
               {approvedExpenses.map((item) => {
@@ -63,14 +63,14 @@ function ExpenseApprovedStatusCard(props) {
                           borderBottom: "3px dotted #515050"
                       }}>
                          
-                      <div className=" flex font-medium flex-col w-72 ">
+                      <div className=" flex font-medium flex-col w-64 mb-1 ">
 
                          
                               <Tooltip >
-                                  <h4 class=" text-base text-cardBody font-poppins">
+                                  <h4 class=" text-sm text-cardBody font-poppins">
                                   Voucher ID
                                   </h4>
-                                  <h4 class=" text-base text-blue-500 text-cardBody font-poppins cursor-pointer">
+                                  <h4 class=" text-xs text-blue-500 text-cardBody font-poppins cursor-pointer">
 <div onClick={() => { handleExpand(item.voucherId);
                 handleSetParticularRowData(item);
                 props.handleExpenseVoucherIdDrawer(true);}}>
@@ -79,28 +79,8 @@ function ExpenseApprovedStatusCard(props) {
          </h4>
 
 </Tooltip>
-
-</div>
-<div className=" flex font-medium flex-col  w-52 ">
-                           
-                           <h4 class=" text-base text-cardBody font-poppins"> Voucher Date </h4>
-                           <h4 class=" text-base text-cardBody font-poppins">
-                               
-                           
-                           {dayjs(item.voucherDate).format("MMM Do YY")}
-
-                           </h4>
-                       </div>
-                       <div className=" flex font-medium flex-col w-32 ">
-                                  
-
-                                  <h4 class=" text-base text-cardBody font-poppins">Amount</h4>
-                                  <h4 class=" text-base text-cardBody font-poppins">
-                                      € {item.amount}
-                                  </h4>
-                              </div>
-                              <div className=" flex font-medium flex-col w-[12rem] ">  
-                                    <div class=" text-base text-cardBody font-poppins">
+<div className=" flex font-medium flex-col w-[9rem] ">  
+                                    <div class=" text-xs text-cardBody font-poppins">
                                     <div
                  style={{
                    border: "2px solid green",
@@ -114,6 +94,26 @@ function ExpenseApprovedStatusCard(props) {
                </div>
                                     </div>
                                     </div>
+</div>
+<div className=" flex font-medium flex-col  w-52 ">
+                           
+                           <h4 class=" text-sm text-cardBody font-poppins"> Voucher Date </h4>
+                           <h4 class=" text-xs text-cardBody font-poppins">
+                               
+                           
+                           {dayjs(item.voucherDate).format("MMM Do YY")}
+
+                           </h4>
+                       </div>
+                       <div className=" flex font-medium flex-col w-32 ml-2 ">
+                                  
+
+                                  <h4 class=" text-sm text-cardBody font-poppins">Amount</h4>
+                                  <h4 class=" text-xs text-cardBody font-poppins">
+                                      € {item.amount}
+                                  </h4>
+                              </div>
+                             
                         </div>
 
                         </div>

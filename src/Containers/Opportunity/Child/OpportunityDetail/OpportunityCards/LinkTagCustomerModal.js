@@ -1,17 +1,10 @@
-import React, { useEffect, useState ,useMemo} from "react";
+import React, { } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { Button, Tooltip, Icon } from "antd";
 import { FormattedMessage } from "react-intl";
-import { Formik, Form, Field } from "formik";
 import LinkTagCustomerForm from "../OpportunityCards/LinkTagCustomerForm"
-import { FlexContainer } from "../../../../../Components/UI/Layout";
 import {linktagCustomer} from "../../../OpportunityAction";
-//import { getCustomerListByUserId } from "../../../../Customer/CustomerAction";
-import { BundleLoader } from "../../../../../Components/Placeholder";
 import { StyledModal } from "../../../../../Components/UI/Antd";
-import { SelectComponent } from "../../../../../Components/Forms/Formik/SelectComponent";
-// const OpportunityForm = lazy(() => import("./OpportunityForm"));
 
 const LinkTagContactModal = (props) => {
   // useEffect(() => {

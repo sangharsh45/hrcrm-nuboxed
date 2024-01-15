@@ -11,7 +11,6 @@ class ProgramDetailActionLeft extends React.Component {
       <div class=" flex items-center">
         <RollbackOutlined
           iconType="rollback"
-          // tooltipTitle="Back"
           tooltipTitle={
             <FormattedMessage
               id="app.back"

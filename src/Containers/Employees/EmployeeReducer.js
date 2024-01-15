@@ -5,6 +5,10 @@ const initialState = {
 
   addEmployeeModal: false,
 
+  updateEmployeeModal:false,
+
+  setEditingEmployee:{},
+
   addingEmployee: false,
   addingEmployeeError: false,
 
@@ -16,9 +20,14 @@ const initialState = {
   fetchingEmployeeTreeMapError: false,
   employeeTreeMap:{},
 
+  fetchingFilterEmployee: false,
+   fetchingFilterEmployeeError: false,
+
   fetchingEmployee: false,
   fetchingEmployeeError: false,
   employees: [],
+
+  addDrawerEmployeeDocumentModal:false,
 
   fetchingEmployeeData: false,
   fetchingEmployeeDataError: false,
@@ -82,6 +91,9 @@ const initialState = {
   fetchingPermissionsListError: false,
   permissionsDataList: [],
 
+  updateEmployee: false,
+  updateEmployeeError: false,
+
   fetchingallCustomerEmployeeList:false,
   fetchingallCustomerEmployeeListError:false,
   allCustomerEmployeeList:[],
@@ -102,6 +114,14 @@ const initialState = {
   fetchingRecordsByUserId: false,
   fetchingRecordsByUserIdError: false,
   employeerecordData:{},
+
+  openNotifydrwr:false,
+  updateAdminUser: false,
+  updateAdminUserError:false,
+
+  fetchingUserAdmin: false,
+  fetchingUserAdminError:false,
+  userAdminnoti:{},
 
 };
 export const EmployeeReducer = (state = initialState, action) => {
@@ -145,6 +165,15 @@ export const EmployeeReducer = (state = initialState, action) => {
       return { ...state, fetchingEmployee: false, employees: action.payload };
     case types.GET_EMPLOYEE_LIST_FAILURE:
       return { ...state, fetchingEmployee: false, fetchingEmployeeError: true };
+
+
+      case types.GET_EMPLOYEE_FILTER_LIST_REQUEST:
+        return { ...state, fetchingFilterEmployee: true };
+      case types.GET_EMPLOYEE_FILTER_LIST_SUCCESS:
+        return { ...state, fetchingFilterEmployee: false, employees: action.payload };
+      case types.GET_EMPLOYEE_FILTER_LIST_FAILURE:
+        return { ...state, fetchingFilterEmployee: false, fetchingFilterEmployeeError: true };
+  
 
 
       case types.GET_EMPLOYEE_DATA_REQUEST:
@@ -605,6 +634,10 @@ export const EmployeeReducer = (state = initialState, action) => {
                             case types.HANDLE_EMPLOYEE_PULSE_DRAWER_MODAL:
                               return { ...state, addDrawerEmployeePulseModal: action.payload };
 
+                              case types.HANDLE_EMPLOYEE_DOCUMENT_DRAWER_MODAL:
+                              return { ...state, addDrawerEmployeeDocumentModal: action.payload };
+
+
 
                               case types.GET_EMPLOYEE_TREE_MAP_REQUEST:
                                 return { ...state, fetchingEmployeeTreeMap: true };
@@ -641,10 +674,82 @@ export const EmployeeReducer = (state = initialState, action) => {
                                     fetchingAllDocumentsByEmployeeId: false,
                                     fetchingAllDocumentsByEmployeeIdError: true,
                                   };
+
+                                  case types.HANDLE_UPDATE_EMPLOYEE_MODAL:
+                                    return { ...state, updateEmployeeModal: action.payload };
+
+
+                                    case types.SET_EMPLOYEE_EDIT:
+      return { ...state, setEditingEmployee: action.payload };
                             
 
+      case types.UPDATE_EMPLOYEE_REQUEST:
+        return { ...state, updateEmployee: true };
+      case types.UPDATE_EMPLOYEE_SUCCESS:
+        return {
+          ...state,
+          updateEmployee: false,
+          updateEmployeeModal: false,
+          employees: state.employees.map((item) => {
+            if (item.employeeId === action.payload.employeeId) {
+              return action.payload;
+            } else {
+              return item;
+            }
+          }),
+        };
+      case types.UPDATE_EMPLOYEE_FAILURE:
+        return {
+          ...state,
+          updateEmployee: false,
+          updateEmployeeError: true,
+        };
 
+        case types.HANDLE_CLAER_REDUCER_DATA_EMPLOYEE:
+          return { ...state, 
+            employees: [], 
+            // deletedTruck: [] 
+          };
 
+          case types.HANDLE_NOTIFY_DRAWER:
+            return { ...state, openNotifydrwr: action.payload };
+
+            case types.UPDATE_ADMIN_USER_REQUEST:
+              return { ...state, updateAdminUser: true };
+            case types.UPDATE_ADMIN_USER_SUCCESS:
+              return {
+                ...state,
+                updateAdminUser: false,
+                openNotifydrwr: false,
+                employees: state.employees.map((item) => {
+                  if (item.employeeId === action.payload.employeeId) {
+                    return action.payload;
+                  } else {
+                    return item;
+                  }
+                }),
+              };
+            case types.UPDATE_ADMIN_USER_FAILURE:
+              return {
+                ...state,
+                updateAdminUser: false,
+                updateAdminUserError: true,
+              };
+      
+case types.GET_ADMIN_USER_REQUEST:
+  return { ...state, fetchingUserAdmin: true };
+case types.GET_ADMIN_USER_SUCCESS:
+  return {
+    ...state,
+    fetchingUserAdmin: false,
+    userAdminnoti: action.payload,
+  };
+case types.GET_ADMIN_USER_FAILURE:
+  return {
+    ...state,
+    fetchingUserAdmin: false,
+    fetchingUserAdminError: true,
+  };
     default:
       return state;
   }

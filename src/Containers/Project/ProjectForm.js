@@ -2,31 +2,19 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { FormattedMessage } from "react-intl";
 import { bindActionCreators } from "redux";
-import { Button, Icon } from "antd";
-import { Formik, Form, Field, FieldArray } from "formik";
+import { Button } from "antd";
+import { Formik, Form, Field} from "formik";
 import * as Yup from "yup";
 import dayjs from "dayjs";
-import { Spacer } from "../../Components/UI/Elements";
-
-import SearchSelect from "../../Components/Forms/Formik/SearchSelect";
 import { InputComponent } from "../../Components/Forms/Formik/InputComponent";
-import AddressFieldArray from "../../Components/Forms/Formik/AddressFieldArray";
-// import { SelectComponent } from "../../../Components/Forms/Formik/SelectComponent";
-// import { DatePicker } from "../../../Components/Forms/Formik/DatePicker";
 import { TimePicker } from "../../Components/Forms/Formik/TimePicker";
 import {
   addProject,
-  // deleteProject,
   updateProject,
   handleProjectModal,
 } from "./ProjectAction";
 import { handleChooserModal } from "../Planner/PlannerAction";
-import { FlexContainer } from "../../Components/UI/Layout";
 import { TextareaComponent } from "../../Components/Forms/Formik/TextareaComponent";
-// import { StyledPopconfirm } from "../../../Components/UI/Antd";
-/**
- * yup validation scheme for creating a opportunity
- */
 const ProjectSchema = Yup.object().shape({
   // eventType: Yup.string().required("Select event type"),
   project: Yup.string().required("This field is required !"),
@@ -230,7 +218,7 @@ class ProjectForm extends Component {
                   />
                   */}
 
-                  <Spacer />
+                  <div class="mt-3">
                   <Field
                     isRequired
                     name="project"
@@ -244,9 +232,10 @@ class ProjectForm extends Component {
                     component={InputComponent}
                     inlineLabel
                   />
-                  <Spacer />
-                  <FlexContainer justifyContent="space-between">
-                    <div style={{ width: "47%" }}>
+                  </div>
+                  
+                  <div class="flex justify-between mt-3">
+                    <div class="w-[47.5%]">
                       <Field
                         isRequired
                         name="startTime"
@@ -265,7 +254,7 @@ class ProjectForm extends Component {
                         }}
                       />
                     </div>
-                    <div style={{ width: "47%" }}>
+                    <div class="w-[47.5%]">
                       <Field
                         isRequired
                         name="endTime"
@@ -284,10 +273,10 @@ class ProjectForm extends Component {
                         }}
                       />
                     </div>
-                  </FlexContainer>
-                  <Spacer style={{ marginBottom: "0.9375em" }} />
+                  </div>
+                  
                   {/* <FlexContainer justifyContent="space-between">
-                    <div style={{ width: "47%" }}>
+                     <div class="w-[47.5%]">
                       <Field
                         isRequired
                         name="endDate"
@@ -318,12 +307,12 @@ class ProjectForm extends Component {
                         }}
                       />
                     </div>
-                    <div style={{ width: "47%" }}>
+    <div class="w-[47.5%]">
                     
                     </div>
                   </FlexContainer> */}
 
-                  {/* <Spacer style={{ marginBottom: "0.9375em" }} /> */}
+                  
                   {/* <Field
                     isRequired
                     defaultValue={{ label: timeZone, value: userId }}
@@ -337,7 +326,7 @@ class ProjectForm extends Component {
                     inlineLabel
                     style={{ flexBasis: "50%" }}
                   /> */}
-                  {/* <Spacer style={{ marginBottom: "2.8125em" }} />
+                  {/* 
                   <FieldArray
                     name="address"
                     render={(arrayHelpers) => (
@@ -348,7 +337,7 @@ class ProjectForm extends Component {
                       />
                     )}
                   /> */}
-                  <Spacer />
+              
                   {startDate ? (
                     <span>
                       {dayjs(startDate).isBefore(dayjs()) && (
@@ -373,7 +362,7 @@ class ProjectForm extends Component {
                     width: "45%",
                   }}
                 >
-                  <Spacer />
+                  <div class="mt-3">
                   <Field
                     name="notesField"
                     //label="Notes"
@@ -386,7 +375,7 @@ class ProjectForm extends Component {
                     component={TextareaComponent}
                     inlineLabel
                   />
-
+</div>
                   {/* <Field
                       name="ownerIds"
                       selectType="user"
@@ -404,12 +393,12 @@ class ProjectForm extends Component {
                       style={{ flexBasis: "80%" }}
                     />
                   )} */}
-                  <Spacer style={{ marginBottom: "2.8125em" }} />
+                
 
                 </div>
               </div>
-              <Spacer />
-              <FlexContainer justifyContent="flex-end">
+         
+              <div class="flex justify-end">
                 {/* {isEditing && (
                   <>
                     <StyledPopconfirm
@@ -434,7 +423,7 @@ class ProjectForm extends Component {
                 >
                   {isEditing ? "Update" : "Create"}
                 </Button>
-              </FlexContainer>
+              </div>
             </Form>
           )}
         </Formik>

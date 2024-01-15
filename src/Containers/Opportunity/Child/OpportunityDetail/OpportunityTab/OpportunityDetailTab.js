@@ -3,20 +3,18 @@ import { connect } from "react-redux";
 import TransferWithinAStationIcon from '@mui/icons-material/TransferWithinAStation';
 import { bindActionCreators } from "redux";
 import RecruitmentDeletedTable from "../../OpportunityDetail/OpportunityTab/Recruitment/RecruitmentDeletedTable"
-import { Button, message, Tooltip, Popover, Icon } from "antd";
+import {Tooltip, } from "antd";
+import DynamicFeedIcon from '@mui/icons-material/DynamicFeed';
 import { FormattedMessage } from "react-intl";
 import PieChartIcon from '@mui/icons-material/PieChart';
 import { StyledTabs } from "../../../../../Components/UI/Antd";
 import {
-  FlexContainer,
   TabsWrapper,
 } from "../../../../../Components/UI/Layout";
 import DeleteIcon from '@mui/icons-material/Delete';
 import InsertDriveFileIcon from '@mui/icons-material/InsertDriveFile';
 import ContactsIcon from '@mui/icons-material/Contacts';
-import {
-  DeleteOutlined,
-  EyeInvisibleOutlined, LinkOutlined, PlusOutlined, 
+import { LinkOutlined, PlusOutlined, 
 } from '@ant-design/icons';
 import { handleContactModal,handleLinkContactModal } from "../../../../Contact/ContactAction";
 import RecruitmentClosedTable from "../OpportunityTab/RecruitmentClosedTable"
@@ -31,17 +29,14 @@ import {
   getRecruitByOpportunityId,
   
 } from "../../../OpportunityAction";
-import MicIcon from '@mui/icons-material/Mic';
 import LockIcon from '@mui/icons-material/Lock';
 import { BundleLoader } from "../../../../../Components/Placeholder";
-import NoteAltIcon from "@mui/icons-material/NoteAlt";
 import ReactSpeechModal from "./ReactSpeechModal";
 const RecruitmentTable = lazy(() => import("./Recruitment/RecruitmentTable"));
 const AddRecruitModal = lazy(() => import("./Recruitment/AddRecruitModal"));
 const AddTagProfileModal = lazy(() => import("./Recruitment/AddTagProfileModal"));
 const RecruitProJumpstart = lazy(() => import("../../RecruitProJumpstart/RecruitProJumpstart"));
 const SummaryTable = lazy(() => import("./Recruitment/Child/SummaryTable"));
-const LinkedNotes = lazy(() => import("./LinkedNotes"));
 const AddDocumentModal = lazy(() => import("./Document/AddDocumentModal"));
 const LinkedContact = lazy(() => import("./LinkedContact"));
 const LinkedDocuments = lazy(() => import("./Document/LinkedDocuments"));
@@ -122,44 +117,19 @@ class OpportunityDetailTab extends Component {
     const { activeKey } = this.state;
     const {
       user: {
-        metaData: { productStatus },
+        metaData: {  },
       },
       opportunity: { opportunityId, opportunityName, accountId },
       user,
       fetchingOpportunityDetailsById,
-      partnerLogin,
-      department,
       addContactModal,
       handleContactModal,
-      getTimeLineDataByOpportunityId,
-      addCallModal,
       linkContactsCheckToOpportunity,
-      getProductsByOpportunityId,
-      productsByOpportunityId,
-      handleLinkPartnerModal,
-      addLinkPartnerModal,
-      handleCallModal,
-      addEventModal,
-      handleEventModal,
-      addTaskModal,
-      handleTaskModal,
       getContactListByOpportunityId,
-      getEventsListByOpportunityId,
-      getCallsListByOpportunityId,
-      getTasksListByOpportunityId,
       handleLinkContactModal,
       linkContactsToOpportunity,
       handleDocumentUploadModal,
-      handleLinkConfigureModal,
-      addLinkConfigureModal,
-      handleTagProfileModal,
-      addTagProfileModal,
-      linkDeliveryModal,
       handleReactSpeechModal,
-      linkServiceModal,
-      handleLinkServiceModal,
-      handleLinkDeliveryModal,
-      subscriptionType,
       opportunity,
       addSpeechModal,
       documentUploadModal,
@@ -176,7 +146,8 @@ return  <BundleLoader />
             onChange={this.handleTabChange}
             forceRender={true}
           >
-            <TabPane
+            {user.requirementAccessInd === true ? (
+             <TabPane
               tab={
                 <>
                   <span onClick={this.handleRecruitClick}>
@@ -322,40 +293,23 @@ return  <BundleLoader />
                 )}
                   
             </TabPane>
+            ):null}
              <TabPane
               tab={
                 <>
                   <span>
-                    {/* <Icon type="user" /> */}
                     <ContactsIcon   style={{fontSize:"1.1rem"}}/>
                     <span style={{ marginLeft: '0.25em' }}>
                       <FormattedMessage
                         id="app.contacts"
                         defaultMessage="Contacts"
                       />
-                      {/* Contacts */}
                     </span>
                   </span>
                 
                   {activeKey === "2" && (
                     <>
-                      {/* {this.props.partnerLogin === "Yes" &&
-                        this.props.department === "Partner" ? null : ( */}
-                      {/* <Tooltip title="Tag Existing">
-
-                        <ActionIcon
-                          type="link"
-                          tooltipTitle="Tag Existing"
-                          // onClick={() => {
-                          //   this.handleContactPopoverVisibleChange();
-                          //   handleLinkContactModal(true);
-                          // }}
-                          size="0.875em"
-                          style={{ marginLeft: "0.25em", verticalAlign: "center" }}
-                        />
-                      </Tooltip> */}
-                      {/* )} */}
-                      <Tooltip //title="Create"
+                      <Tooltip 
                         title={<FormattedMessage
                           id="app.create"
                           defaultMessage="Create"
@@ -375,7 +329,7 @@ return  <BundleLoader />
                          )}
                          
                       </Tooltip>
-                      <Tooltip //title="Tag Position"
+                      <Tooltip 
                           title={<FormattedMessage
                             id="app.tagexisting"
                             defaultMessage="Tag Existing"
@@ -403,7 +357,7 @@ return  <BundleLoader />
             >
               <Suspense fallback={"Loading ..."}>
                 {" "}
-                <LinkedContact />
+                <LinkedContact/>
               </Suspense>
             </TabPane>
             <TabPane
@@ -415,16 +369,10 @@ return  <BundleLoader />
                         id="app.documents"
                         defaultMessage="Documents"
                       />
-                      {/* Documents */}
-
-                    
-
                   </span>
                   {activeKey === "3" && (
                     <>
-
-
-                      <Tooltip //title="Upload Document"
+                      <Tooltip 
                         title={<FormattedMessage
                           id="app.uploaddocument"
                           defaultMessage="Upload Document"
@@ -432,7 +380,6 @@ return  <BundleLoader />
                       >
                         <PlusOutlined
                           type="plus"
-                          //tooltipTitle="Upload Document"
                           tooltiptitle={<FormattedMessage
                             id="app.uploaddocument"
                             defaultMessage="Upload Document"
@@ -456,7 +403,28 @@ return  <BundleLoader />
               </Suspense>
             </TabPane>
 
-            <TabPane
+              <TabPane
+              tab={
+                <>
+                  <DynamicFeedIcon   style={{fontSize:"1.1rem"}}/>
+                    <span style={{ marginLeft: "0.25em" }}>
+                      <FormattedMessage
+                        id="app.order"
+                        defaultMessage="Order"
+                      />
+                  </span>
+               
+                </>
+              }
+              key="4"
+            >
+              <Suspense fallback={"Loading ..."}>
+                {" "}
+                {/* <LinkedDocuments opportunity={opportunity} /> */}
+              </Suspense>
+            </TabPane>
+
+            {/* <TabPane
               tab={
                 <>
                   <span>
@@ -481,43 +449,20 @@ return  <BundleLoader />
                   </>
                     )}
                   </span>
-                  
-                  {/* <Tooltip title="Add">
-                        {user.userType !== "USER" && user.department !== "Notes" && ( 
-                          <Icon
-                            type="plus"
-                            tooltipTitle="Add"
-                            onClick={() =>
-                              this.props.handleRecruitModal(true)
-                            }
-                            size="0.875em"
-                            style={{
-                              marginLeft: "0.125em",
-                              verticalAlign: "center",
-                            }}
-                          />
-                        )}
-                          </Tooltip>
-                   */}
                 </>
               }
-              key="4"
-            >
+              key="4">
               <Suspense fallback={"Loading ..."}>
                 {" "}
                 <LinkedNotes />
               </Suspense>
-            </TabPane>
-
-           
-
-            
-            {/* )} */}
+            </TabPane> */}
           </StyledTabs>
         </TabsWrapper>
         <Suspense fallback={null}>
 
           <AddRecruitModal
+           opportunity={this.props.opportunity}
             addRecruitModal={this.props.addRecruitModal}
             handleRecruitModal={this.props.handleRecruitModal}
           />

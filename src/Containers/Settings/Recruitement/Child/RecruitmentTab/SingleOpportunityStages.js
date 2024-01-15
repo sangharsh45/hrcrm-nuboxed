@@ -4,19 +4,13 @@ import { FormattedMessage } from "react-intl";
 import DeleteIcon from '@mui/icons-material/Delete';
 import BorderColorIcon from '@mui/icons-material/BorderColor';
 import {deleteOpportunityStagesData} from "../../../../Settings/SettingsAction";
-import { Button, Tooltip,Switch, Divider, Popconfirm } from "antd";
-import { FlexContainer } from "../../../../../Components/UI/Layout";
-import { Formik, Form, Field,FastField } from "formik";
-import { TextInput, Spacer, Select } from "../../../../../Components/UI/Elements";
-import { ActionIcon } from "../../../../../Components/Utils";
+import { Button, Tooltip, Popconfirm } from "antd";
+import { TextInput, Select } from "../../../../../Components/UI/Elements";
 import { elipsize } from "../../../../../Helpers/Function/Functions";
 import { ViewEditCard } from "../../../../../Components/UI/Elements";
-import { EditOutlined } from "@ant-design/icons";
-import AddApprovalModal from "./AddApprovalModal";
 import {handleApprovalModal,} from "../../../SettingsAction";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { StyledPopconfirm } from "../../../../../Components/UI/Antd";
 const { Option } = Select;
 
 class SingleOpportunityStages extends Component {
@@ -92,9 +86,8 @@ class SingleOpportunityStages extends Component {
         <ViewEditCard>
           {({ viewType }, toggleViewType) =>
             viewType === "view" ? (
-              <FlexContainer
-                justifyContent="start"
-                alignItems="center"
+              <div class=" flex justify-start items-center"
+            
                 // onClick={() => handleStageClick(stageId, stageName)}
                 // style={{
                 //   backgroundColor:
@@ -116,33 +109,8 @@ class SingleOpportunityStages extends Component {
                 </StageValue>            
                 <div style={{ flexBasis:"no-wrap",justifyContent:"space-between" }}>
                     <>                 
-                   <Tooltip title="Edit">
-                   {probability !== 0 && probability !== 100 && (
-                   <BorderColorIcon
-                   style={{fontSize:"1rem"}}
-                          tooltipTitle="Edit"
-                          onClick={toggleViewType}
-                        />
-                        )}
-                      </Tooltip>
-                    </>
-                     &nbsp; &nbsp;
-                     <>                 
-                     <Popconfirm
-              title="Do you want to delete?"
-              okText="Yes"
-              cancelText="No"
-               onConfirm={() => deleteOpportunityStagesData(opportunityStagesId)}
-            >
-               {/* {user.opportunityDeleteInd ===true && ( */}
-               {probability !== 0 && probability !== 100 && (
-              <DeleteIcon
-              type="delete" style={{ cursor: "pointer", color: "red" }} />
-              )}
-               {/* )} */}
-            </Popconfirm>
-                    </>
-                   <Tooltip title="Approval" >
+                
+                   {/* <Tooltip title="Approval" >
                     <span
                     onClick={(item) => 
                      {
@@ -159,7 +127,7 @@ class SingleOpportunityStages extends Component {
                    )}
                    </span>
                    </Tooltip>
-                   &nbsp; 
+                   &nbsp;  */}
                    <span>
                        
                      {opportunityProcessStages.probability === 0 || opportunityProcessStages.probability === 100 ? null :
@@ -178,19 +146,47 @@ class SingleOpportunityStages extends Component {
                              </Button> 
                              }
                    </span>
-
-                  
-
+                   &nbsp; &nbsp;  &nbsp; &nbsp;
+                 <span>
+                   <Tooltip title="Edit">
+                   {probability !== 0 && probability !== 100 && (
+                   <BorderColorIcon
+                   style={{fontSize:"1rem"}}
+                          tooltipTitle="Edit"
+                          onClick={toggleViewType}
+                        />
+                        )}
+                      </Tooltip>
+                      </span>
+                     &nbsp; &nbsp;
+                     <span>
+                     <>                 
+                     <Popconfirm
+              title="Do you want to delete?"
+              okText="Yes"
+              cancelText="No"
+               onConfirm={() => deleteOpportunityStagesData(opportunityStagesId)}
+            >
+               {/* {user.opportunityDeleteInd ===true && ( */}
+               {probability !== 0 && probability !== 100 && (
+              <DeleteIcon
+              type="delete" style={{ cursor: "pointer", color: "red" }} />
+              )}
+               {/* )} */}
+            </Popconfirm>
+                    </>
+                    </span>  
+</>
                   </div>
                      
                    
 
                  
-           </FlexContainer>
+           </div>
             
             ) : (
               
-              <FlexContainer justifyContent="center">
+              <div class=" flex justify-center" >
                 <TextInput
                   name={newStageName}
                   // value={stageValue1 || stageName}
@@ -263,7 +259,7 @@ class SingleOpportunityStages extends Component {
                     defaultMessage="Cancel"
                   />
                 </Button>
-              </FlexContainer>
+              </div>
             )
           }
 

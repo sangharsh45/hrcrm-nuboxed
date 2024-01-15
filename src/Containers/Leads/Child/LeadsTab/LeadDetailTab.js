@@ -1,11 +1,9 @@
-import React, { Component, lazy, Suspense } from "react";
+import React, { Component, Suspense } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Tooltip } from "antd";
 import FileCopyIcon from "@mui/icons-material/FileCopy";
 import { FormattedMessage } from "react-intl";
-import NoteAltIcon from "@mui/icons-material/NoteAlt";
-import ContactsIcon from "@mui/icons-material/Contacts";
 import { PlusOutlined } from "@ant-design/icons";
 import { StyledTabs } from "../../../../Components/UI/Antd";
 import LightbulbIcon from '@mui/icons-material/Lightbulb';
@@ -18,15 +16,11 @@ import {
   handleLeadsReactSpeechModal,
 } from "../../LeadsAction";
 import AddLeadsContactModal from "../LeadsDetailTab/LeadsContact/AddLeadsContactModal";
-import LeadsContact from "../LeadsDetailTab/LeadsContact/LeadsContact";
 import AddLeadsOpportunityModal from "../LeadsDetailTab/OpportunityTab/AddLeadsOpportunityModal";
 import LeadsOpportunity from "../LeadsDetailTab/OpportunityTab/LeadsOpportunity";
 import AddLeadsDocumentModal from "../DocumentTab/AddLeadsDocumentModal";
 import LeadsDocuments from "../DocumentTab/LeadsDocuments";
 import ReactLeadsrSpeechModal from "../DocumentTab/ReactLeadsSpeechModal";
-import LeadsNotes from "../DocumentTab/LeadsNotes";
-import MicIcon from "@mui/icons-material/Mic";
-import LeadsInitiativeForm from "../Initiative/LeadsInitiativeForm";
 
 const TabPane = StyledTabs.TabPane;
 function handleRefreshPage() {
@@ -147,7 +141,7 @@ class LeadDetailTab extends Component {
                 <LeadsOpportunity />
               </Suspense>
             </TabPane>
-            <TabPane
+            {/* <TabPane
               tab={
                 <>
                   <span>
@@ -162,7 +156,7 @@ class LeadDetailTab extends Component {
                   {activeKey === "2" && (
                     <>
                       &nbsp;
-                      <Tooltip //title="Create"
+                      <Tooltip 
                         title={
                           <FormattedMessage
                             id="app.create"
@@ -172,7 +166,6 @@ class LeadDetailTab extends Component {
                       >
                         <PlusOutlined
                           type="plus"
-                          //tooltipTitle="Create"
                           tooltiptitle={
                             <FormattedMessage
                               id="app.Create"
@@ -184,7 +177,6 @@ class LeadDetailTab extends Component {
                           }}
                           size="0.875em"
                         />
-                        {/* )} */}
                       </Tooltip>
                     </>
                   )}
@@ -196,7 +188,7 @@ class LeadDetailTab extends Component {
                 {" "}
                 <LeadsContact />
               </Suspense>
-            </TabPane>
+            </TabPane> */}
 
             <TabPane
               tab={
@@ -207,7 +199,6 @@ class LeadDetailTab extends Component {
                       id="app.documents"
                       defaultMessage="Documents"
                     />
-                    {/* Documents */}
                   </span>
                   {activeKey === "3" && (
                     <>
@@ -238,7 +229,7 @@ class LeadDetailTab extends Component {
               </Suspense>
             </TabPane>
 
-            <TabPane
+            {/* <TabPane
               tab={
                 <>
                   <span>
@@ -283,7 +274,8 @@ class LeadDetailTab extends Component {
               key="5"
             >
               <LeadsInitiativeForm lead={this.props.leadsId} />
-            </TabPane>
+            </TabPane> */}
+
           </StyledTabs>
         </TabsWrapper>
         <Suspense fallback={null}>

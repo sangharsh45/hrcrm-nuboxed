@@ -1,21 +1,14 @@
 import React from "react";
-import { Icon, Select, message, Tooltip } from "antd";
+import { Select, Tooltip } from "antd";
 import styled from "styled-components";
 import ContentLoader from "react-content-loader";
 import {
   CaretDownOutlined,
   CaretUpOutlined,
-  EditOutlined,
-  EyeInvisibleOutlined, InfoCircleOutlined,
-  
-  
+  EditOutlined, InfoCircleOutlined,
 } from '@ant-design/icons';
 
-import { CurrencySymbol, cu } from "../../Common";
-import CurrencyCompressor from "../../Common/CurrencyCompressor";
-import { renderTooltip } from "../../../Helpers/Function/UIFunctions";
-import { ActionIcon } from "../../Utils";
-import { TextInput } from ".";
+import { CurrencySymbol, } from "../../Common";
 const { Option } = Select;
 const JumpStartWrapper = styled.div`
   margin: 0.2rem 0.4rem;
@@ -38,6 +31,12 @@ const JumpStartWrapper = styled.div`
     -webkit-box-shadow: 0 0.75em 0.375em -0.375em rgb(46, 44, 44);
     -moz-box-shadow: 0 0.75em 0.375em -0.375em rgb(46, 44, 44);
     box-shadow: 0 0.75em 0.375em -0.375em rgb(46, 44, 44);
+  }
+  @media only screen and (max-width: 600px) {
+   
+    height: 9rem;
+
+    
   }
 `;
 const Progress = styled.span`
@@ -137,7 +136,7 @@ const JumpStartDetail = ({
             <MyLoader />{" "}
           </span>
         ) : (
-            <h2 class="text-base" >
+            <h2 class="text-2xl" >
               {isLevelTextInputOpen ? (
                 <>
                   <Select

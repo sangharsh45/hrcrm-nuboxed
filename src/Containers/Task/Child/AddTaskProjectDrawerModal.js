@@ -1,17 +1,10 @@
-import React, { Component, Suspense } from "react";
+import React, { Component, Suspense,lazy } from "react";
 import { BundleLoader } from "../../../Components/Placeholder";
-
 import { connect } from "react-redux";
-
-//import CandidateTreeMap from "../Candidate/CandidateTreeMap"
-//import { getCandidateDocument } from "../Candidate/CandidateAction";
 import { bindActionCreators } from "redux";
-
 import { StyledDrawer } from "../../../Components/UI/Antd";
 import { sortedLastIndex } from "lodash";
-import ProjectTaskTable from "./ProjectTaskTable";
-// import OpportunitySummaryTable from "./OpportunitySummaryTable";
-// import OpportunityForecastForm from "./Opportunityforecastform";
+const ProjectTaskTable = lazy(() => import("./ProjectTaskTable"));
 
 class AddTaskProjectDrawerModal extends Component {
   render() {

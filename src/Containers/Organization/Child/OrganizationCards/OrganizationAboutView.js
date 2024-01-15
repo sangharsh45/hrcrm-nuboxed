@@ -1,30 +1,30 @@
 import React, { Component } from "react";
-import { Divider } from "antd";
 import {
-  Title,
   SubTitle,
-  MultiAvatar,
-  StyledLabel,
 } from "../../../../Components/UI/Elements";
-import EditIcon from '@mui/icons-material/Edit';
-import { FlexContainer } from "../../../../Components/UI/Layout";
+import BorderColorIcon from '@mui/icons-material/Edit';
+
 class OrganizationAboutView extends Component {
   render() {
     const {
-      organization: { industryType,vat,fiscalStartDate,fiscalStartMonth, tradeCurrency, companySize },
+      organizationList: { industryType,vat,fiscalStartDate,fiscalStartMonth, tradeCurrency, companySize },
       toggleViewType,
     } = this.props;
     // console.log(highestLevel);
     return (
       <>
-        <FlexContainer justifyContent="flex-end">
-          <EditIcon
+        <div class=" flex justify-end" >
+          <BorderColorIcon
             // tooltipTitle="Edit"
             // iconType="edit"
             onClick={toggleViewType}
-            size="1em"
+            style={{
+              color: "grey",
+              cursor: "pointer",
+              fontSize: "1rem",
+            }}
           />
-        </FlexContainer>
+        </div>
         <OrganizationItemRow
           label="Fiscal Year"
           value={`${fiscalStartDate} ${fiscalStartMonth}`}
@@ -43,9 +43,7 @@ export default OrganizationAboutView;
 
 const OrganizationItemRow = ({ label, value }) => {
   return (
-    <FlexContainer
-      alignItems="center"
-      flexWrap="nowrap"
+    <div class=" items-center flex flex-no-wrap"
       style={{ margin: "0.4rem" }}
     >
       <SubTitle style={{ color: "#444", fontWeight: 600, width: 300 }}>
@@ -58,6 +56,6 @@ const OrganizationItemRow = ({ label, value }) => {
       >
         {value}
       </SubTitle>
-    </FlexContainer>
+    </div>
   );
 };

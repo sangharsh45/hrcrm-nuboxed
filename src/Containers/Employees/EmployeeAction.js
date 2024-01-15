@@ -33,7 +33,7 @@ export const addEmployeeAddress = (address) => (dispatch) => {
  * request for adding an employee
  */
 
-export const addEmployee = (employee) => (dispatch) => {
+export const addEmployee = (employee,cretiondate) => (dispatch) => {
   dispatch({
     type: types.ADD_EMPLOYEE_REQUEST,
   });
@@ -46,7 +46,7 @@ export const addEmployee = (employee) => (dispatch) => {
       },
     })
     .then((res) => {
-      dispatch(getEmployeelist());
+      dispatch(getEmployeelist("cretiondate"));
       dispatch({
         type: types.ADD_EMPLOYEE_SUCCESS,
         payload: res.data,
@@ -67,13 +67,13 @@ export const addEmployee = (employee) => (dispatch) => {
 /**
  * Fetching all employees of org
  */
-export const getEmployeelist = () => (dispatch) => {
+export const getEmployeelist = (filter) => (dispatch) => {
   dispatch({
     type: types.GET_EMPLOYEE_LIST_REQUEST,
   });
 
   axios
-  .get(`${base_url}/employee/employees`, {
+  .get(`${base_url}/employee/employees/filter/${filter}`, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },
@@ -89,6 +89,34 @@ export const getEmployeelist = () => (dispatch) => {
       console.log(err);
       dispatch({
         type: types.GET_EMPLOYEE_LIST_FAILURE,
+        payload: err,
+      });
+    });
+};
+
+
+export const getEmployeeFilterlist = (filter) => (dispatch) => {
+  dispatch({
+    type: types.GET_EMPLOYEE_FILTER_LIST_REQUEST,
+  });
+
+  axios
+  .get(`${base_url}/employee/employees/filter/${filter}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.GET_EMPLOYEE_FILTER_LIST_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.GET_EMPLOYEE_FILTER_LIST_FAILURE,
         payload: err,
       });
     });
@@ -874,6 +902,13 @@ export const handleEmployeePulseDrawerModal = (modalProps) => (dispatch) => {
   });
 };
 
+export const handleEmployeeDocumentDrawerModal = (modalProps) => (dispatch) => {
+  dispatch({
+    type: types.HANDLE_EMPLOYEE_DOCUMENT_DRAWER_MODAL,
+    payload: modalProps,
+  });
+};
+
 export const getEmployeeTreeMap = (employeeId) => (dispatch) => {
   dispatch({
     type: types.GET_EMPLOYEE_TREE_MAP_REQUEST,
@@ -925,3 +960,103 @@ export const getEmployeeAllDocument = (candidateId) => (dispatch) => {
     });
 };
 
+export const handleUpdateEmployeeModal = (modalProps) => (dispatch) => {
+  dispatch({
+    type: types.HANDLE_UPDATE_EMPLOYEE_MODAL,
+    payload: modalProps,
+  });
+};
+
+export const setEditEmployee = (name) => (dispatch) => {
+  dispatch({
+    type: types.SET_EMPLOYEE_EDIT,
+    payload: name,
+  });
+};
+
+export const updateEmployee = (data, employeeId) => (dispatch) => {
+  dispatch({ type: types.UPDATE_EMPLOYEE_REQUEST });
+  axios
+    .put(`${base_url}/employee/update/${employeeId}`, data, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.UPDATE_EMPLOYEE_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.UPDATE_EMPLOYEE_FAILURE,
+        payload: err,
+      });
+    });
+};
+
+export const ClearReducerDataOfEmployee = () => (dispatch) => {
+  dispatch({
+    type: types.HANDLE_CLAER_REDUCER_DATA_EMPLOYEE,
+  });
+};
+
+export const handleNotifyDrawer = (modalProps) => (dispatch) => {
+  dispatch({
+    type: types.HANDLE_NOTIFY_DRAWER,
+    payload: modalProps,
+  });
+};
+
+export const UpdateAdminUser = (data) => (dispatch) => {
+  dispatch({ type: types.UPDATE_ADMIN_USER_REQUEST });
+  axios
+    .put(`${base_url}/employee/update/admin-user/user-admin`, data, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.UPDATE_ADMIN_USER_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.UPDATE_ADMIN_USER_FAILURE,
+        payload: err,
+      });
+    });
+};
+
+export const getAdminUser = (employeeId) => (dispatch) => {
+  dispatch({
+    type: types.GET_ADMIN_USER_REQUEST,
+  });
+    axios
+  .get(`${base_url}/employee/adminUpdate/${employeeId}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.GET_ADMIN_USER_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.GET_ADMIN_USER_FAILURE,
+        payload: err,
+      });
+    });
+};

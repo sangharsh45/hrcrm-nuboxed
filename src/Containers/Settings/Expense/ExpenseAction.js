@@ -43,7 +43,10 @@ export const addExpenses = (expense, cb) => (dispatch) => {
       },
     })
     .then((res) => {
+      {res.data.message?  
+        message.success(res.data.message):
       message.success("Expense has been added successfully!");
+      }
       dispatch(getExpenses());
       console.log(res);
       dispatch({
@@ -142,4 +145,10 @@ export const removeExpense = ( expenseTypeId) => (dispatch) => {
         type: types.REMOVE_EXPENSE_FAILURE,
       });
     });
+};
+
+export const ClearReducerDataOfExpense = () => (dispatch) => {
+  dispatch({
+    type: types.HANDLE_CLAER_REDUCER_DATA_EXPENSE,
+  });
 };

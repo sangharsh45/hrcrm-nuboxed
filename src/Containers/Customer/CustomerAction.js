@@ -1,7 +1,7 @@
 import * as types from "./CustomerActionTypes";
 import axios from "axios";
 import dayjs from "dayjs";
-import { base_url } from "../../Config/Auth";
+import { base_url,base_url2 } from "../../Config/Auth";
 import { message } from "antd";
 
 
@@ -84,6 +84,7 @@ export const addCustomer = (customer) => (dispatch, getState) => {
         .endOf("month")
         .toISOString();
       dispatch(getRecords(userId));
+      dispatch(getOpportunityRecord(userId));
       // dispatch(getLatestCustomers(userId, startDate, endDate));
       // dispatch(getCustomerListByUserId(userId));
 
@@ -106,7 +107,7 @@ export const addCustomer = (customer) => (dispatch, getState) => {
 /**
  * get all the customer of the user
  */
-export const getCustomerListByUserId = (userId,page) => (dispatch) => {
+export const getCustomerListByUserId = (userId,pageNo,filter) => (dispatch) => {
   // let api_url = "";
   // if (userId) {
   //   api_url = `/sort/all/Customers/user/${userId}`;
@@ -117,7 +118,7 @@ export const getCustomerListByUserId = (userId,page) => (dispatch) => {
     type: types.GET_CUSTOMERS_REQUEST,
   });
   axios
-    .get(`${base_url}/customer/user/${userId}/${page}`, {
+    .get(`${base_url}/customer/user/${userId}/${pageNo}/${filter}`, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },
@@ -141,12 +142,6 @@ export const getCustomerListByUserId = (userId,page) => (dispatch) => {
 
 
 export const getCustomerData = (userId,page) => (dispatch) => {
-  // let api_url = "";
-  // if (userId) {
-  //   api_url = `/sort/all/Customers/user/${userId}`;
-  // } else {
-  //   api_url = `/Customers`;
-  // }
   dispatch({
     type: types.GET_CUSTOMERS_DATA_REQUEST,
   });
@@ -167,6 +162,32 @@ export const getCustomerData = (userId,page) => (dispatch) => {
       console.log(err.response);
       dispatch({
         type: types.GET_CUSTOMERS_DATA_FAILURE,
+        payload: err,
+      });
+    });
+};
+
+export const getInvestorData = (userId,page) => (dispatch) => {
+  dispatch({
+    type: types.GET_INVESTOR_DATA_REQUEST,
+  });
+  axios
+    .get(`${base_url}/investor/user/${userId}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.GET_INVESTOR_DATA_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err.response);
+      dispatch({
+        type: types.GET_INVESTOR_DATA_FAILURE,
         payload: err,
       });
     });
@@ -301,6 +322,13 @@ export const handleDocumentUploadModal = (modalProps) => (dispatch) => {
 export const handleInvoiceModal = (modalProps) => (dispatch) => {
   dispatch({
     type: types.HANDLE_INVOICE_MODAL,
+    payload: modalProps,
+  });
+};
+
+export const handleCallActivityModal = (modalProps) => (dispatch) => {
+  dispatch({
+    type: types.HANDLE_CALL_ACTIVITY_MODAL,
     payload: modalProps,
   });
 };
@@ -506,7 +534,7 @@ export const getCustomerDocument = (customerId) => (dispatch) => {
 };
 
 /*request for adding a customer  opportunity */
-export const addCustomerOpportunity = (opportunity, cb) => (
+export const addCustomerOpportunity = (opportunity,userId, cb) => (
   dispatch,
   getState
 ) => {
@@ -530,6 +558,7 @@ export const addCustomerOpportunity = (opportunity, cb) => (
         .endOf("month")
         .toISOString();
       dispatch(getOpportunityListByCustomerId(customerId));
+      dispatch(getOpportunityRecord(userId));
       // dispatch(getLatestOpportunities(userId, startDate, endDate));
       // dispatch(getOpportunitiesByPrice(userId));
       dispatch({
@@ -605,7 +634,7 @@ export const updateCustomerOpportunity = (data, opportunityId) => (dispatch) => 
 /**
  * request for adding a contact
  */
-export const addCustomerContact = (contact) => (dispatch, getState) => {
+export const addCustomerContact = (contact,userId) => (dispatch, getState) => {
   // const userId = getState().auth.userDetails.userId;
   const customerId = getState().customer.customer.customerId;
   // const opportunityId = getState().opportunity.opportunity.opportunityId;
@@ -631,7 +660,7 @@ export const addCustomerContact = (contact) => (dispatch, getState) => {
       const endDate = dayjs()
         .endOf("month")
         .toISOString();
-      // dispatch(getContactById(contactId));
+      dispatch(getOpportunityRecord(userId));
       // dispatch(getLatestContacts(userId, startDate, endDate));
       // dispatch(getContactListByCustomerId(customerId));
 
@@ -743,7 +772,7 @@ export const inputCustomerDataSearch = (name) => (dispatch) => {
         payload: err,
       });
     });
-};
+}; 
 
 //CONTACT PERMISSION SHARE Of Partner
 export const shareCustomerPermission = (data, userId, a) => (
@@ -829,6 +858,32 @@ export const getRecords = (userId) => (dispatch) => {
       console.log(err.response);
       dispatch({
         type: types.GET_RECORDS_FAILURE,
+        payload: err,
+      });
+    });
+};
+
+export const getCustomerTeamRecords = (userId) => (dispatch) => {
+  dispatch({
+    type: types.GET_CUSTOMER_TEAM_RECORDS_REQUEST,
+  });
+  axios
+    .get(`${base_url}/customer/team/count/${userId}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.GET_CUSTOMER_TEAM_RECORDS_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err.response);
+      dispatch({
+        type: types.GET_CUSTOMER_TEAM_RECORDS_FAILURE,
         payload: err,
       });
     });
@@ -987,7 +1042,7 @@ export const setEditCustomerOpportunity = (name) => (dispatch) => {
   });
 };
 
-export const addAttendence = (attendance) => (dispatch) => {
+export const addAttendence = (attendance,userId) => (dispatch) => {
 
 
   // const opportunityId = getState().opportunity.opportunity.opportunityId;
@@ -1003,6 +1058,7 @@ export const addAttendence = (attendance) => (dispatch) => {
       },
     })
     .then((res) => {
+         dispatch(getAttendanceList(userId));
       console.log(res);
 
 
@@ -1045,6 +1101,43 @@ export const putCustomerContactToggle = (data, contactId) => (dispatch) => {
       dispatch({
         type: types.PUT_CUSTO_CONTACT_TOGGLE_FAILURE,
       });
+    });
+};
+
+
+export const addLocationDetails = (attendance,userId) => (dispatch) => {
+
+
+  // const opportunityId = getState().opportunity.opportunity.opportunityId;
+  // console.log("inside add customer");
+  dispatch({
+    type: types.ADD_LOCATION_DETAILS_REQUEST,
+  });
+
+  axios
+    .put(`${base_url}/attendance/add/location`, attendance, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+         //dispatch(getAttendanceList(userId));
+      console.log(res);
+
+
+      dispatch({
+        type: types.ADD_LOCATION_DETAILS_SUCCESS,
+        payload: res.data,
+      });
+      // cb && cb();
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.ADD_LOCATION_DETAILS_FAILURE,
+        payload: err,
+      });
+      // cb && cb();
     });
 };
 
@@ -1814,5 +1907,384 @@ export const getAllCustomerByCloser = (userId, startDate, endDate) => (
       });
   };
 
+  export const getAttendanceList = (userId) => (dispatch) => {
+    dispatch({
+      type: types.GET_ATTENDANCE_LIST_REQUEST,
+    });
+    axios
+      .get(`${base_url}/attendance/${userId}`, {
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+        },
+      })
+      .then((res) => {
+        console.log(res);
+        dispatch({
+          type: types.GET_ATTENDANCE_LIST_SUCCESS,
+          payload: res.data,
+        });
+      })
+      .catch((err) => {
+        console.log(err.response);
+        dispatch({
+          type: types.GET_ATTENDANCE_LIST_FAILURE,
+          payload: err,
+        });
+      });
+  };
 
+  export const getCustomerFilterData = (userId,pageNo,filter) => (dispatch) => {
+    // let api_url = "";
+    // if (userId) {
+    //   api_url = `/sort/all/Customers/user/${userId}`;
+    // } else {
+    //   api_url = `/Customers`;
+    // }
+    dispatch({
+      type: types.GET_CUSTOMERS_FILTER_DATA_REQUEST,
+    });
+    axios
+      .get(`${base_url}/customer/user/${userId}/${pageNo}/${filter}`, {
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+        },
+      })
+      .then((res) => {
+        console.log(res);
+        dispatch({
+          type: types.GET_CUSTOMERS_FILTER_DATA_SUCCESS,
+          payload: res.data,
+        });
+      })
+      .catch((err) => {
+        console.log(err.response);
+        dispatch({
+          type: types.GET_CUSTOMERS_FILTER_DATA_FAILURE,
+          payload: err,
+        });
+      });
+  };
+
+  export const getAllCustomerData = (userId,page) => (dispatch) => {
+    dispatch({
+      type: types.GET_ALL_CUSTOMERS_DATA_REQUEST,
+    });
+    axios
+      .get(`${base_url}/customer/drop/customer-list/${userId}`, {
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+        },
+      })
+      .then((res) => {
+        console.log(res);
+        dispatch({
+          type: types.GET_ALL_CUSTOMERS_DATA_SUCCESS,
+          payload: res.data,
+        });
+      })
+      .catch((err) => {
+        console.log(err.response);
+        dispatch({
+          type: types.GET_ALL_CUSTOMERS_DATA_FAILURE,
+          payload: err,
+        });
+      });
+  };
+
+  export const handleCustomerNotesDrawerModal = (modalProps) => (dispatch) => {
+    dispatch({
+      type: types.HANDLE_CUSTOMER_NOTES_DRAWER_MODAL,
+      payload: modalProps,
+    });
+  };
+
+  export const handleCustomerPulseDrawerModal = (modalProps) => (dispatch) => {
+    dispatch({
+      type: types.HANDLE_CUSTOMER_PULSE_DRAWER_MODAL,
+      payload: modalProps,
+    });
+  };
+
+  export const getOpportunityRecord = (userId) => (dispatch) => {
+    dispatch({
+      type: types.GET_OPPORTUNITY_RECORD_REQUEST,
+    });
+    axios
+      .get(`${base_url}/candidate/record/today/${userId}`,{
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+        },
+      })
+      .then((res) => {
+        console.log(res);
+        dispatch({
+          type: types.GET_OPPORTUNITY_RECORD_SUCCESS,
+          payload: res.data,
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+        dispatch({
+          type: types.GET_OPPORTUNITY_RECORD_FAILURE,
+          payload: err,
+        });
+      });
+  };
+
+  export const getCustomerActivityTimeline = (customerId) => (dispatch) => {
+    dispatch({
+        type: types.GET_CUSTOMER_ACTIVITY_TIMELINE_REQUEST,
+    });
+  
+    axios
+        .get(`${base_url}/customer/activity/list/${customerId}`, {
+            headers: {
+                Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+            },
+        })
+        .then((res) => {
+            console.log(res);
+            dispatch({
+                type: types.GET_CUSTOMER_ACTIVITY_TIMELINE_SUCCESS,
+                payload: res.data,
+            });
+        })
+        .catch((err) => {
+            console.log(err);
+            dispatch({
+                type: types.GET_CUSTOMER_ACTIVITY_TIMELINE_FAILURE,
+                payload: err,
+            });
+        });
+  };
+
+  export const customerToAccount = ( customerId,data,userId ) => (dispatch) => {
+    dispatch({ type: types.CUSTOMER_TO_ACCOUNT_CONVERT_REQUEST });
+  
+    axios
+      .put(`${base_url2}/api/v1/customer/convert/account/${customerId} `, data, {
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+        },
+      })
+  
+      .then((res) => {
+       
+        message.success("Customer move to Account");
+        console.log(res);
+        dispatch({
+          type: types.CUSTOMER_TO_ACCOUNT_CONVERT_SUCCESS,
+          payload: customerId,
+        });
+        // cb && cb("success");
+      })
+      .catch((err) => {
+        console.log(err);
+        dispatch({
+          type: types.CUSTOMER_TO_ACCOUNT_CONVERT_FAILURE,
+        });
+        // cb && cb("failure");
+      });
+  };
+
+  export const getAllCustomerlIST = (pageNo,filter) => (dispatch) => {
+    dispatch({
+      type: types.GET_ALL_CUSTOMERS_LIST_REQUEST,
+    });
+    axios
+      .get(`${base_url}/customer/all/${pageNo}/${filter}`, {
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+        },
+      })
+      .then((res) => {
+        console.log(res);
+        dispatch({
+          type: types.GET_ALL_CUSTOMERS_LIST_SUCCESS,
+          payload: res.data,
+        });
+      })
+      .catch((err) => {
+        console.log(err.response);
+        dispatch({
+          type: types.GET_ALL_CUSTOMERS_LIST_FAILURE,
+          payload: err,
+        });
+      });
+  };
+
+  export const addCustomerActivityCall = (call,customerId, cb) => (dispatch, getState) => {
+    ////debugger;
+    console.log("inside addCall");
+    const { userId } = getState("auth").auth.userDetails;
+    // const { startDate, endDate } = getState("dashboard").dashboard;
+    dispatch({
+      type: types.ADD_CUSTOMER_ACTIVITY_CALL_REQUEST,
+    });
+  
+    axios
+      .post(`${base_url}/activity/call/save`, call, {
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+        },
+      })
+      .then((res) => {
+        message.success("Call has been added successfully!");
+        ////debugger;
+        console.log(res);
+         dispatch(getCustomerActivityTimeline(customerId));
+        dispatch({
+          type: types.ADD_CUSTOMER_ACTIVITY_CALL_SUCCESS,
+          payload: res.data,
+        });
+        // cb();
+      })
+      .catch((err) => {
+        console.log(err);
+        dispatch({
+          type: types.ADD_CUSTOMER_ACTIVITY_CALL_FAILURE,
+          payload: err,
+        });
+        // cb();
+      });
+  };
+
+  export const addCustomerActivityEvent = (event,customerId, cb) => (dispatch, getState) => {
+    const { userId } = getState("auth").auth.userDetails;
+    // const { startDate, endDate } = getState("dashboard").dashboard;
+    console.log("inside addEvent");
+    dispatch({
+      type: types.ADD_CUSTOMER_ACTIVITY_EVENT_REQUEST,
+    });
+  
+    axios
+      .post(`${base_url}/activity/event/save`, event, {
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+        },
+      })
+      .then((res) => {
+        message.success("Meeting has been added successfully!");
+        console.log(res);
+        dispatch(getCustomerActivityTimeline(customerId));
+        // dispatch(getEventListRangeByUserId(userId,0));
+        dispatch({
+          type: types.ADD_CUSTOMER_ACTIVITY_EVENT_SUCCESS,
+          payload: res.data,
+        });
+        // cb();
+      })
+      .catch((err) => {
+        console.log(err);
+        dispatch({
+          type: types.ADD_CUSTOMER_ACTIVITY_EVENT_FAILURE,
+          payload: err,
+        });
+        // cb();
+      });
+  };
+
+  export const addCustomerActivityTask = (event,customerId, cb) => (dispatch, getState) => {
+    const { userId } = getState("auth").auth.userDetails;
+    // const { startDate, endDate } = getState("dashboard").dashboard;
+    console.log("inside addEvent");
+    dispatch({
+      type: types.ADD_CUSTOMER_ACTIVITY_TASK_REQUEST,
+    });
+  
+    axios
+      .post(`${base_url}/activity/task/create`, event, {
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+        },
+      })
+      .then((res) => {
+        message.success("Task has been added successfully!");
+        console.log(res);
+        dispatch(getCustomerActivityTimeline(customerId));
+        dispatch({
+          type: types.ADD_CUSTOMER_ACTIVITY_TASK_SUCCESS,
+          payload: res.data,
+        });
+        // cb();
+      })
+      .catch((err) => {
+        console.log(err);
+        dispatch({
+          type: types.ADD_CUSTOMER_ACTIVITY_TASK_FAILURE,
+          payload: err,
+        });
+        // cb();
+      });
+  };
+
+  export const getTeamCustomer = (userId,pageNo,filter) => (dispatch) => {
+ 
+    dispatch({
+      type: types.GET_TEAM_CUSTOMER_REQUEST,
+    });
+    axios
+      .get(`${base_url}/customer/team/${userId}/${pageNo}/${filter}`, {
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+        },
+      })
+      .then((res) => {
+        console.log(res);
+        dispatch({
+          type: types.GET_TEAM_CUSTOMER_SUCCESS,
+          payload: res.data,
+        });
+      })
+      .catch((err) => {
+        console.log(err.response);
+        dispatch({
+          type: types.GET_TEAM_CUSTOMER_FAILURE,
+          payload: err,
+        });
+      });
+  };
+
+  export const ClearReducerDataOfCustomer = () => (dispatch) => {
+    dispatch({
+      type: types.HANDLE_CLAER_REDUCER_DATA_CUSTOMER,
+    });
+  };
+
+  export const linkCustomerContract = (data, customerId) => (
+    dispatch,
+    getState
+  ) => {
+    // debugger;
+    const { userId } = getState("auth").auth.userDetails;
+    dispatch({
+      type: types.LINK_CUSTOMER_CONTRACT_REQUEST,
+    });
+    axios
+      .put(`${base_url}/customer/document/contract/update`, data, {
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+        },
+      })
+      .then((res) => {
+        dispatch(getCustomerDocument(customerId));
+        dispatch({
+          type: types.LINK_CUSTOMER_CONTRACT_SUCCESS,
+          payload: res.data,
+        });
+        // cb && cb("success");
+      })
+      .catch((err) => {
+        console.log(err);
+        dispatch({
+          type: types.LINK_CUSTOMER_CONTRACT_FAILURE,
+          payload: err,
+        });
+        // cb && cb("failuer");
+      });
+  };
+
+
+
+  
  

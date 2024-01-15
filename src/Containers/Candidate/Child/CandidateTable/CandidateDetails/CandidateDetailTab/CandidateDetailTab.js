@@ -1,14 +1,14 @@
-import React, { Component, lazy, Suspense ,useState,useEffect} from "react";
+import React, {  lazy, Suspense ,useState,useEffect} from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { FormattedMessage } from "react-intl";
-import { translateText, getSupportedLanguages } from '../../../../../Translate/TranslateService';
-import { Icon, Tooltip } from "antd";
+import { translateText, } from '../../../../../Translate/TranslateService';
+import { Tooltip } from "antd";
 import MicIcon from '@mui/icons-material/Mic';
+import AddIcon from '@mui/icons-material/Add';
 import NoteAltIcon from "@mui/icons-material/NoteAlt";
 import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
 import TransferWithinAStationIcon from '@mui/icons-material/TransferWithinAStation';
-import { PlusOutlined } from "@ant-design/icons";
 import FileCopyIcon from '@mui/icons-material/FileCopy';
 import WorkspacePremiumIcon from '@mui/icons-material/WorkspacePremium';
 import { handleCandidateReactSpeechModal } from "../../../../CandidateAction";
@@ -25,11 +25,9 @@ import {
 } from "../../../../CandidateAction";
 import LocalActivityIcon from '@mui/icons-material/LocalActivity';
 import HeadphonesIcon from '@mui/icons-material/Headphones';
-import ExperienceForm from "./Experience/ExperienceForm";
-import ReactCandidateSpeechModal from "../../ReactCandidateSpeechModal";
-// import ExperienceForm from "./Experience/ExperienceForm";
 const LinkedDocuments = lazy(()=>import("./Document/LinkedDocuments"));
-
+const ReactCandidateSpeechModal = lazy(()=>import("../../ReactCandidateSpeechModal"));
+const ExperienceForm = lazy(()=>import("../CandidateDetailTab/Experience/ExperienceForm"));
 const AddDocumentModal = lazy(()=>import("./Document/AddDocumentModal"));
 const CandidateEducationTable = lazy(()=>import("./Education/CandidateEducationTable"));
 const AddCandidateEducationModal = lazy(()=>import("../CandidateDetailTab/Education/AddCandidateEducationModal"));
@@ -60,7 +58,7 @@ function CandidateDetailTab (props) {
   // handleTabChange = (key) => this.setState({ activeKey: key });
 
   function handleTabChange(key){
-    setActiveKey({ activeKey: key})
+    setActiveKey(key)
   }
 
   useEffect(() => {
@@ -113,29 +111,75 @@ function CandidateDetailTab (props) {
       addCandidateSpeechModal,
     } = props;
     console.log(props.candidateId);
+    console.log("activeKey",activeKey)
     return (
       <>
         <TabsWrapper>
           <StyledTabs defaultActiveKey="1" onChange={handleTabChange}>
            
+       
+       
+            <TabPane
+              tab={
+                <>
+                  <span>
+                    <LocalActivityIcon style={{fontSize:"1.1rem"}}/>
+                    <span class=" ml-[0.25em]" >
+                    <FormattedMessage
+                        id="app.activity"
+                        defaultMessage="Activity"
+                      />
+                      
+               
+                      </span>
+                  </span>
+                  {activeKey === "1" && (
+                    <>
+                
+                      {/* {props.user.talentCreateInd === true && props.user.recruitOppsInd === true ( */}
+                      <AddIcon
+                      type="plus"
+                        tooltiptitle={
+                          <FormattedMessage
+                            id="app.Create"
+                            defaultMessage="Create"
+                          />
+                        }
+                        onClick={() =>
+                          handleCandidateActivityModal(true)
+                        }
+                        size="0.875em"
+                       
+                      />
+                      {/* )} */}
+                    </>
+                  )}
+                </>
+              }
+              key="1"
+            >
+              <Suspense fallback={"Loading ..."}>
+                {" "}
+                <ActivityTable 
+                candidate={props.candidateId}
+                />
+              </Suspense>
+            </TabPane>
             <TabPane
               tab={
                 <>  
                   <TransferWithinAStationIcon 
                   style={{fontSize:"1.1rem"}}
                    />
-                    <span style={{ marginLeft: "0.25em" }}>
-                      {/* RecruitPro */}
-                      {translatedContent[0]}
+                    <span class=" ml-[0.25em]" >
+                      RecruitPro
+                      {/* {translatedContent[0]} */}
                       </span>
-                  
-                  {activeKey === "1" && (
-                    <>
-                    </>
-                  )}
+                
+                
                 </>
               }
-              key="1"
+              key="2"
             >
               <Suspense fallback={"Loading ..."}>
                 {" "}
@@ -148,12 +192,13 @@ function CandidateDetailTab (props) {
                 <>
                 
                <WorkspacePremiumIcon style={{fontSize:"1.1rem"}}/>
-                  <span style={{ marginLeft: "0.25em" }}>                  
-                  {translatedContent[1]}
-                  </span>                 
+               <span class=" ml-[0.25em]" >                
+                  {/* {translatedContent[1]} */}
+                  Experience
+                  </span>              
                 </>
               }
-              key="9"
+              key="3"
             >
              
               {/* <LinkedExperience/> */}
@@ -165,49 +210,15 @@ function CandidateDetailTab (props) {
             <TabPane
               tab={
                 <>
-                  <span>
-                    <LocalActivityIcon style={{fontSize:"1.1rem"}}/>
-                    <span style={{ marginLeft: "0.25em" }}>
-                      {/* Activity */}
-                      {translatedContent[2]}
-                      </span>
-                  </span>
-                  {activeKey === "2" && (
-                    <>
-                      <PlusOutlined
-                        type="plus"
-                        tooltipTitle="Create"
-                        onClick={() =>
-                          handleCandidateActivityModal(true)
-                        }
-                        size="1em"
-                        style={{ marginLeft: 10, verticalAlign: "center" }}
-                      />
-                    </>
-                  )}
-                </>
-              }
-              key="2"
-            >
-              <Suspense fallback={"Loading ..."}>
-                {" "}
-                <ActivityTable 
-                candidate={props.candidateId}
-                />
-              </Suspense>
-            </TabPane>
-            <TabPane
-              tab={
-                <>
                   <FileCopyIcon style={{fontSize:"1.1rem"}} />
                   <span style={{ marginLeft: "0.25em" }}>
-                    {/* Documents */}
-                    {translatedContent[3]}
+                    Documents
+                    {/* {translatedContent[3]} */}
                   </span>
-                  {activeKey === "3" && (
+                  {activeKey === "4" && (
                     <>
-                      <PlusOutlined
-                        type="plus"
+                      <AddIcon
+                     
                         tooltipTitle="Upload Document"
                         onClick={() => handleDocumentUploadModal(true)}
                         size="0.875em"
@@ -217,29 +228,30 @@ function CandidateDetailTab (props) {
                         }}
                       />
                     </>
-                  )}
+                  )} 
                 </>
               }
-              key="3"
+              key="4"
             >
               <Suspense fallback={"Loading ..."}>
                 {" "}
                 <LinkedDocuments />
               </Suspense>
             </TabPane>
+        
             <TabPane
               tab={
                 <>
                 <span>
                 <NoteAltIcon style={{fontSize:"1.1rem"}}/>
                 &nbsp;
-                    {/* <FormattedMessage
+                    <FormattedMessage
                       id="app.notes"
                       defaultMessage="Notes"
-                    /> */}
-                      {translatedContent[4]}
+                    />
+                      {/* {translatedContent[4]} */}
                     &nbsp; 
-                    {activeKey === "4" && (
+                    {activeKey === "5" && (
                       <>
                         <Tooltip title="Voice to Text">
                       <span                       
@@ -251,11 +263,11 @@ function CandidateDetailTab (props) {
                   </span>
                   </Tooltip>
                   </>
-                    )}
+                    )} 
                     </span>
                 </>
               }
-              key="4"
+              key="5"
             >
               <Suspense fallback={"Loading ..."}>
                 <LinkedNotes />{" "}
@@ -265,17 +277,17 @@ function CandidateDetailTab (props) {
               tab={
                 <>
                 <SchoolIcon style={{fontSize:"1.1rem"}}/>
-                  <span style={{ marginLeft: "0.25em" }}>
-                    {/* Education */}
-                    {translatedContent[5]}
+                <span class=" ml-[0.25em]" >
+                    Education
+                    {/* {translatedContent[5]} */}
                   </span>
-                  {activeKey === "5" && (
+                  {activeKey === "6" && (
                     <>
                       {addingEmail ? (
                         <></>
                       ) : (
                         <>
-                          <PlusOutlined
+                          <AddIcon
                             type="plus"
                             tooltipTitle="Add"
                             onClick={() =>
@@ -290,10 +302,10 @@ function CandidateDetailTab (props) {
                         </>
                       )}
                     </>
-                  )}
+                 )} 
                 </>
               }
-              key="5"
+              key="6"
             >
               <Suspense fallback={"Loading ..."}>
                 {" "}
@@ -303,14 +315,44 @@ function CandidateDetailTab (props) {
             <TabPane
               tab={
                 <>
-                <AccountBalanceIcon style={{fontSize:"1.1rem"}}/>
-                  <span style={{ marginLeft: "0.25em" }}>
-                    {/* Employment */}
-                    {translatedContent[6]}
+                  <HeadphonesIcon style={{fontSize:"1.1rem"}} />
+                  <span class=" ml-[0.25em]" >
+                    Training
+                    {/* {translatedContent[7]} */}
                   </span>
                   {activeKey === "7" && (
                     <>
-                      <PlusOutlined
+                      <AddIcon
+                        type="plus"
+                        tooltipTitle="Add"
+                        onClick={() =>
+                          handleCandidateTrainingModal(true)
+                        }
+                        size="1em"
+                        style={{ marginLeft:"0.3125em", verticalAlign: "center" }}
+                      />
+                    </>
+               )}
+                </>
+              }
+              key="7"
+            >
+              <Suspense fallback={"Loading ..."}>
+                {" "}
+                <CandidateTrainingTable />
+              </Suspense>
+            </TabPane>
+            <TabPane
+              tab={
+                <>
+                <AccountBalanceIcon style={{fontSize:"1.1rem"}}/>
+                <span class=" ml-[0.25em]" >
+                    Employment
+                    {/* {translatedContent[6]} */}
+                  </span>
+                  {activeKey === "8" && (
+                    <>
+                      <AddIcon
                         type="plus"
                         tooltipTitle="Add"
                         onClick={() =>
@@ -323,43 +365,14 @@ function CandidateDetailTab (props) {
                   )}
                 </>
               }
-              key="7"
+              key="8"
             >
               <Suspense fallback={"Loading ..."}>
                 {" "}
                 <CandidateEmploymentTable />
               </Suspense>
             </TabPane>
-            <TabPane
-              tab={
-                <>
-                  <HeadphonesIcon style={{fontSize:"1.1rem"}} />
-                  <span style={{ marginLeft: "0.25em" }}>
-                    {/* Training */}
-                    {translatedContent[7]}
-                  </span>
-                  {activeKey === "6" && (
-                    <>
-                      <PlusOutlined
-                        type="plus"
-                        tooltipTitle="Add"
-                        onClick={() =>
-                          handleCandidateTrainingModal(true)
-                        }
-                        size="1em"
-                        style={{ marginLeft:"0.3125em", verticalAlign: "center" }}
-                      />
-                    </>
-                  )}
-                </>
-              }
-              key="6"
-            >
-              <Suspense fallback={"Loading ..."}>
-                {" "}
-                <CandidateTrainingTable />
-              </Suspense>
-            </TabPane>
+       
 
             
             
@@ -367,13 +380,13 @@ function CandidateDetailTab (props) {
               tab={
                 <>
                 <AccountBalanceIcon style={{fontSize:"1.1rem"}}/>
-                  <span style={{ marginLeft: "0.25em" }}>
-                     {/* Bank Details */}
-                     {translatedContent[8]}
+                <span class=" ml-[0.25em]" >
+                     Bank Details
+                     {/* {translatedContent[8]} */}
                   </span>
-                  {activeKey === "8" && (
+                  {activeKey === "9" && (
                     <>
-                      <PlusOutlined
+                      <AddIcon
                         type="plus"
                         tooltipTitle="Add"
                         onClick={() => handleCandidateBankModal(true)}
@@ -381,10 +394,10 @@ function CandidateDetailTab (props) {
                         style={{ marginLeft:"0.3125em", verticalAlign: "center" }}
                       />
                     </>
-                  )}
+                 )} 
                 </>
               }
-              key="8"
+              key="9"
             >
               <Suspense fallback={"Loading ..."}>
                 {" "}
@@ -429,7 +442,8 @@ function CandidateDetailTab (props) {
     );
   }
 
-const mapStateToProps = ({ candidate }) => ({
+const mapStateToProps = ({ candidate ,auth}) => ({
+  user: auth.userDetails,
   documentUploadModal: candidate.documentUploadModal,
   addCandidateEducationModal: candidate.addCandidateEducationModal,
   addCandidateTrainingModal: candidate.addCandidateTrainingModal,

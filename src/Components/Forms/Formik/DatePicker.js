@@ -1,6 +1,5 @@
 import React from "react";
 import { get } from "lodash";
-//import dayjs from "dayjs";
 
 import { StyledDatePicker } from "../../UI/Antd";
 import { ValidationError, StyledLabel } from "../../UI/Elements";
@@ -66,6 +65,7 @@ export const DatePicker = ({
             {...props}
             width={width}
             isRequired={isRequired}
+            defaultValue={defaultValue}
             onChange={(date, dateString) =>
             setFieldValue(field.name, dayjs(dateString))
           }

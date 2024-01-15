@@ -363,7 +363,7 @@ function PermissionsDetailsLeft(props) {
       <div>
        <h1 style={{textAlign:"center"}}>Permission</h1>
        </div>
-       <FlexContainer style={{ width: "52%", justifyContent: "space-between" }}>
+       <FlexContainer style={{ width: "52%", justifyContent: "space-between",marginTop:"0.5rem" }}>
         <p>Talent</p>
         <div>
           <Popconfirm
@@ -383,7 +383,7 @@ function PermissionsDetailsLeft(props) {
         </div>
       </FlexContainer> 
 
-      <FlexContainer style={{ width: "52%", justifyContent: "space-between" }}>
+      <FlexContainer style={{ width: "52%", justifyContent: "space-between",marginTop:"0.5rem" }}>
         <p>Planner</p>
         <Popconfirm
           title="Do you wish to change Status ? "
@@ -404,7 +404,7 @@ function PermissionsDetailsLeft(props) {
           />
         </Popconfirm>
       </FlexContainer>
-      <FlexContainer style={{ width: "52%", justifyContent: "space-between" }}>
+      <FlexContainer style={{ width: "52%", justifyContent: "space-between",marginTop:"0.5rem" }}>
         <p>Contact</p>
         <Popconfirm
           title="Do you wish to change Status ? "
@@ -423,7 +423,7 @@ function PermissionsDetailsLeft(props) {
           />
         </Popconfirm>
       </FlexContainer>
-      <FlexContainer style={{ width: "52%", justifyContent: "space-between" }}>
+      <FlexContainer style={{ width: "52%", justifyContent: "space-between",marginTop:"0.5rem" }}>
         <p>Partner</p>
         <Popconfirm
           title="Do you wish to change Status ? "
@@ -444,7 +444,7 @@ function PermissionsDetailsLeft(props) {
           />
         </Popconfirm>
       </FlexContainer>
-      <FlexContainer style={{ width: "52%", justifyContent: "space-between" }}>
+      <FlexContainer style={{ width: "52%", justifyContent: "space-between",marginTop:"0.5rem" }}>
         <p>Partner Contact</p>
         <Popconfirm
           title="Do you wish to change Status ? "
@@ -465,7 +465,7 @@ function PermissionsDetailsLeft(props) {
           />
         </Popconfirm>
       </FlexContainer>
-      <FlexContainer style={{ width: "52%", justifyContent: "space-between" }}>
+      <FlexContainer style={{ width: "52%", justifyContent: "space-between",marginTop:"0.5rem" }}>
 
         <p>Customer</p>
         <Popconfirm
@@ -486,7 +486,7 @@ function PermissionsDetailsLeft(props) {
           />
         </Popconfirm>
       </FlexContainer>
-      <FlexContainer style={{ width: "52%", justifyContent: "space-between" }}>
+      <FlexContainer style={{ width: "52%", justifyContent: "space-between",marginTop:"0.5rem" }}>
         <p>Opportunity</p>
         <Popconfirm
           title="Do you wish to change Status ? "
@@ -507,7 +507,7 @@ function PermissionsDetailsLeft(props) {
           />
         </Popconfirm>
       </FlexContainer>
-      <FlexContainer style={{ width: "52%", justifyContent: "space-between" }}>
+      <FlexContainer style={{ width: "52%", justifyContent: "space-between",marginTop:"0.5rem" }}>
         <p>Call</p>
         <Popconfirm
           title="Do you wish to change Status ? "
@@ -528,7 +528,7 @@ function PermissionsDetailsLeft(props) {
           />
         </Popconfirm>
       </FlexContainer>
-      <FlexContainer style={{ width: "52%", justifyContent: "space-between" }}>
+      <FlexContainer style={{ width: "52%", justifyContent: "space-between",marginTop:"0.5rem" }}>
         <p>Events</p>
         <Popconfirm
           title="Do you wish to change Status ? "
@@ -549,7 +549,7 @@ function PermissionsDetailsLeft(props) {
           />
         </Popconfirm>
       </FlexContainer>
-      <FlexContainer style={{ width: "52%", justifyContent: "space-between" }}>
+      <FlexContainer style={{ width: "52%", justifyContent: "space-between",marginTop:"0.5rem" }}>
         <p>Tasks</p>
         <Popconfirm
           title="Do you wish to change Status ? "

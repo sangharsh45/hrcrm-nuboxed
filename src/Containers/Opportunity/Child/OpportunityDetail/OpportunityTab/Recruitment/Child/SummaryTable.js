@@ -1,6 +1,5 @@
 import React, { Component, Suspense } from "react";
 import { StyledTable } from "../../../../../../../Components/UI/Antd";
-
 import {
   getAllRecruitmentDetailsByOppId,
   addWebsite,
@@ -15,22 +14,19 @@ import { bindActionCreators } from "redux";
 import AddRecruiterModal from "../AddRecruiterModal";
 import AddMonsterModal from "../AddMonsterModal";
 import { BundleLoader } from "../../../../../../../Components/Placeholder";
-import { Button, Progress, Tooltip, Icon, Avatar } from "antd";
-import { FileExcelOutlined, FilePdfOutlined } from "@ant-design/icons";
+import { Button, Progress, Tooltip, Avatar } from "antd";
+import { FileExcelOutlined, } from "@ant-design/icons";
 import { FlexContainer } from "../../../../../../../Components/UI/Layout";
 import {
   Spacer,
   MultiAvatar,
-  SubTitle,
 } from "../../../../../../../Components/UI/Elements";
 import jsPDF from "jspdf";
 import "jspdf-autotable";
 import styled from "styled-components";
 import { base_url } from "../../../../../../../Config/Auth";
 import { FormattedMessage } from "react-intl";
-
 import moment from "moment";
-import { sortedLastIndex } from "lodash";
 function onChange(pagination, filters, sorter) {
   console.log("Clicked", pagination, filters, sorter);
 }
@@ -322,13 +318,20 @@ class SummaryTable extends Component {
                   maxStyle={{ color: "#f56a00", backgroundColor: "#fde3cf" }}
                 >
                   {item.recruiterList &&
-                    item.recruiterList.map((item, i) => {
-                      const data = item.fullName.split("")[0].toUpperCase();
-                      console.log("datas", data);
+                    item.recruiterList.map((recruiter, i) => {
+                      const recruit =
+                      recruiter.fullName &&
+                      recruiter.fullName
+                      .slice(0, 2)
+                      .toUpperCase();
+                        // .slice(0, 2)
+                        // // .split("")[0]
+                        // .toUpperCase();
+                      console.log("datas", recruit);
                       return (
                         <Tooltip title={item.fullName}>
                           <Avatar style={{ backgroundColor: "#f56a00" }}>
-                            {data}
+                            {recruit}
                           </Avatar>
                         </Tooltip>
                       );

@@ -1,6 +1,7 @@
 import * as types from "./AuthTypes";
 const initialState = {
   env: "server",
+  viewType: "table",
   registering: false,
   registeringError: false,
   registeringSuccess: false,
@@ -16,15 +17,32 @@ const initialState = {
   updatingOrganizationDetails: false,
   updatingOrganizationDetailsError: false,
 
+  linkingOrgDocsPublish: false,
+  linkingOrgDocsPublishError: false,
+
+  linkingOrgDocsPrivate: false,
+  linkingOrgDocsPrivateError: false,
+
+  addingOrganization:false,
+  addingOrganizationError:false,
+
   editingOrganizationDetails: false,
   editingOrganizationDetailsError: false,
   organizationDetails:{},
+
+  fetchingRepositoryDocuments: false,
+  fetchingRepositoryDocumentsError: false,
+  repositoryData:[],
 
   changingPassword: false,
   changingPasswordError: false,
   logging: false,
   loginError: false,
   token: sessionStorage.getItem("token"),
+
+  addingOnboard: false,
+   addingOnboardError: false ,
+   token: sessionStorage.getItem("token"),
 
   updatingUserById: false,
   updatingUserByIdError: false,
@@ -34,6 +52,11 @@ const initialState = {
   fetchingTimeZoneError: false,
   timeZone: [],
 
+  fetchingOrganization: false,
+  fetchingOrganizationError: false,
+  organizationDetailsList:[],
+
+
   fetchingCurrency: false,
   fetchingCurrencyError: false,
   currencies: [],
@@ -42,6 +65,8 @@ const initialState = {
   fetchingCountriesError: false,
   countries: [],
 
+  addOrganizationModal:false,
+
   fetchingTopicsByUserId: false,
   fetchingTopicsByUserIdError: false,
   addingTopicsByUserId: false,
@@ -49,6 +74,10 @@ const initialState = {
   deletingTopicsByUserId: false,
   deletingTopicsByUserIdError: false,
   topicsByUserId: [],
+
+  updateOrganizationModal:false,
+
+  repositoryOrganizationModal:false,
 
   fetchingCallsListByUserId: false,
   fetchingCallsListByUserIdError: false,
@@ -62,9 +91,17 @@ const initialState = {
   fetchingLeavesByUserIdError: false,
   leavesListByUserId: [],
 
+  deletingOrgDocData: false, 
+  deletingOrgDocDataError: false, 
+
   fetchingTasksListByUserId: false,
   fetchingTasksListByUserIdError: false,
   tasksListByUserId: [],
+
+  organizationDocumentDrawer:false,
+
+
+  addingOrganizationDocument:false,
 
   addingOrgSignature: false,
   addingOrgSignatureError: false,
@@ -250,6 +287,11 @@ export const authReducer = (state = initialState, action) => {
       return {
         ...state,
         updatingOrganizationDetails: false,
+      //   organizationDetails: state.organizationDetails.map((org) =>
+      //   org.organizationId === action.payload.organizationId
+      //     ? action.payload
+      //     : org
+      // ),
         organizationDetails: action.payload,
         userDetails: {
           ...state.userDetails,
@@ -425,6 +467,10 @@ export const authReducer = (state = initialState, action) => {
     /**
      * topic of intrest of an user
      */
+
+
+    case types.HANDLE_UPDATE_ORGANIZATION_MODAL:
+      return { ...state, updateOrganizationModal: action.payload };
     case types.GET_TOPICS_BY_USER_ID_REQUEST:
       return { ...state, fetchingTopicsByUserId: true };
     case types.GET_TOPICS_BY_USER_ID_SUCCESS:
@@ -642,6 +688,22 @@ export const authReducer = (state = initialState, action) => {
         generatingOtpByEmailError: true
       };
 
+
+
+      case types.ADD_ORGANIZATION_DOCUMENT_REQUEST:
+        return { ...state, addingOrganizationDocument: true };
+      case types.ADD_ORGANIZATION_DOCUMENT_SUCCESS:
+        return { ...state, 
+          addingOrganizationDocument: false, 
+          updateOrganizationModal: false ,
+          organizationDocumentDrawer:false,
+        
+        };
+      case types.ADD_ORGANIZATION_DOCUMENT_FAILURE:
+        return { ...state, addingOrganizationDocument: false, 
+          // addCustomerModal: false 
+        };
+
     case types.VALIDATE_OTP_BY_EMAIL_REQUEST:
       return { ...state, validatingOtpByEmail: true };
     case types.VALIDATE_OTP_BY_EMAIL_SUCCESS:
@@ -678,7 +740,144 @@ export const authReducer = (state = initialState, action) => {
             editingOrganizationDetails: false,
             editingOrganizationDetailsError: true,
           };
-    
+
+          case types.GET_REPOSITORY_DOCUMENTS_REQUEST:
+            return { ...state, fetchingRepositoryDocuments: true };
+          case types.GET_REPOSITORY_DOCUMENTS_SUCCESS:
+            return {
+              ...state,
+              fetchingRepositoryDocuments: false,
+              repositoryData: action.payload,
+            };
+          case types.GET_REPOSITORY_DOCUMENTS_FAILURE:
+            return {
+              ...state,
+              fetchingRepositoryDocuments: false,
+              fetchingRepositoryDocumentsError: true,
+            };
+
+            case types.HANDLE_REPOSITORY_ORGANIZATION_MODAL:
+      return { ...state, repositoryOrganizationModal: action.payload };
+
+      case types.HANDLE_ORGANIZATION_DOCUMENT_DRAWER:
+        return { ...state, organizationDocumentDrawer: action.payload };
+
+        case types.DELETE_ORG_DOC_DATA_REQUEST:
+          return { ...state, deletingOrgDocData: true };
+        case types.DELETE_ORG_DOC_DATA_SUCCESS:
+          return {
+            ...state,
+            deletingOrgDocData: false,
+            repositoryData: state.repositoryData.filter(
+              (item) => item.documentId !== action.payload
+            ),
+          };
+        case types.DELETE_ORG_DOC_DATA_FAILURE:
+          return { ...state, deletingOrgDocData: false, deletingOrgDocDataError: false };
+
+
+          case types.LINK_ORG_DOC_PUBLISH_REQUEST:
+            return {
+              ...state,
+              linkingOrgDocsPublish: true,
+            };
+          case types.LINK_ORG_DOC_PUBLISH_SUCCESS:
+            return {
+              ...state,
+              linkingOrgDocsPublish: false,
+              repositoryData: state.repositoryData.map((item) => {
+                if (
+                  item.documentId === action.payload.documentId
+                ) {
+                  return action.payload;
+                } else {
+                  return item;
+                }
+              }),
+            };
+          case types.LINK_ORG_DOC_PUBLISH_FAILURE:
+            return {
+              ...state,
+              linkingOrgDocsPublish: false,
+              linkingOrgDocsPublishError: true,
+            };
+
+            
+          case types.LINK_ORG_DOC_PRIVATE_REQUEST:
+            return {
+              ...state,
+              linkingOrgDocsPrivate: true,
+            };
+          case types.LINK_ORG_DOC_PRIVATE_SUCCESS:
+            return {
+              ...state,
+              linkingOrgDocsPrivate: false,
+              repositoryData: state.repositoryData.map((item) => {
+                if (
+                  item.documentId === action.payload.documentId
+                ) {
+                  return action.payload;
+                } else {
+                  return item;
+                }
+              }),
+            };
+          case types.LINK_ORG_DOC_PRIVATE_FAILURE:
+            return {
+              ...state,
+              linkingOrgDocsPrivate: false,
+              linkingOrgDocsPrivateError: true,
+            };
+            case types.ADD_ONBOARD_REQUEST:
+              return { ...state, addingOnboard: true };
+            case types.ADD_ONBOARD_SUCCESS:
+              return {
+                ...state,
+                addingOnboard: false,
+                token: action.payload.token || sessionStorage.getItem("token"),
+              };
+            case types.ADD_ONBOARD_FAILURE:
+              return { ...state, addingOnboard: false, addingOnboardError: true };
+        
+              case types.SET_ORGANIZATION_VIEW_TYPE:
+                return { ...state, viewType: action.payload };
+        
+                case types.HANDLE_ORGANIZATION_MODAL:
+                  return { ...state, addOrganizationModal: action.payload };
+
+
+                  case types.ADD_ORGANIZATION_REQUEST:
+                    return { ...state, addingOrganization: true };
+                  case types.ADD_ORGANIZATION_SUCCESS:
+                    return { ...state, 
+                      addingOrganization: false, 
+                      addOrganizationModal: false ,
+                      organizationDetailsList:[action.payload,...state.organizationDetailsList]
+                    };
+                  case types.ADD_ORGANIZATION_FAILURE:
+                    return { ...state, addingOrganization: false, addOrganizationModal: false };    
+             
+                    case types.GET_ORGANIZATION_REQUEST:
+                      return { ...state, fetchingOrganization: true };
+                    case types.GET_ORGANIZATION_SUCCESS:
+                      return {
+                        ...state,
+                        fetchingOrganization: false,
+                        // customerByUserId: action.payload,
+                
+                        organizationDetailsList: [
+                          ...state.organizationDetailsList,
+                          ...action.payload],
+                      
+                      };
+                    case types.GET_ORGANIZATION_FAILURE:
+                      return {
+                        ...state,
+                        fetchingOrganization: false,
+                        fetchingOrganizationError: true,
+                      };
+
+
 
     default:
       return state;

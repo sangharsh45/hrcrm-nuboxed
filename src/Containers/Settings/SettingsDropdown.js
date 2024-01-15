@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Menu, Icon, Badge } from "antd";
+import { Menu,  } from "antd";
 import { FormattedMessage } from "react-intl";
 import { withRouter } from "react-router-dom";
 import {
@@ -9,12 +9,10 @@ import {
 } from "../../Components/UI/Antd";
 import {
  SettingOutlined
-  
 } from '@ant-design/icons';
 import {
   ApplicationWrapper,
   MainWrapper,
-  FlexContainer,
 } from "../../Components/UI/Layout";
 let path = window.location.href.split("/")[3];
 const SettingsMenu = ({ history, pathName, recruitmentInd }) => (
@@ -51,7 +49,41 @@ const SettingsMenu = ({ history, pathName, recruitmentInd }) => (
             Sources
           </a>
         </StyledMenuItem> */}
+   
+
+        <StyledMenuItem key="1">
+          <a
+            href="#"
+            style={{
+              color:
+                pathName === "/recruite" ? "#1890ff" : "rgba(0, 0, 0, 0.65)",
+            }}
+            onClick={() => history.push("/recruite")}
+          >
+            <FormattedMessage
+              id="app.configure"
+              defaultMessage="Configure"
+            />
+      {/* RecruitPro */}
+          </a>
+        </StyledMenuItem>
         <StyledMenuItem key="2">
+          <a
+            href="#"
+            style={{
+              color:
+                pathName === "/categoryTab" ? "#1890ff" : "rgba(0, 0, 0, 0.65)",
+            }}
+            onClick={() => history.push("/categoryTab")}
+          >
+            <FormattedMessage
+              id="app.category"
+              defaultMessage="Category"
+            />
+      {/* Category */}
+          </a>
+        </StyledMenuItem>
+        <StyledMenuItem key="3">
           <a
             href="#"
             style={{
@@ -69,7 +101,7 @@ const SettingsMenu = ({ history, pathName, recruitmentInd }) => (
       {/* Organization */}
           </a>
         </StyledMenuItem>
-        <StyledMenuItem key="0">
+        {/* <StyledMenuItem key="0">
           <a
             href="#"
             style={{
@@ -78,12 +110,12 @@ const SettingsMenu = ({ history, pathName, recruitmentInd }) => (
             onClick={() => history.push("/rules")}
           >
             <FormattedMessage
-              id="app.rulesengine"
-              defaultMessage="Rules Engine"
+              id="app.rules"
+              defaultMessage="Rules"
             />
       
           </a>
-        </StyledMenuItem>
+        </StyledMenuItem> */}
 
         {/* <StyledMenuItem key="1">
           <a
@@ -100,39 +132,7 @@ const SettingsMenu = ({ history, pathName, recruitmentInd }) => (
             />
           </a>
         </StyledMenuItem>  */}
-        <StyledMenuItem key="3">
-          <a
-            href="#"
-            style={{
-              color:
-                pathName === "/categoryTab" ? "#1890ff" : "rgba(0, 0, 0, 0.65)",
-            }}
-            onClick={() => history.push("/categoryTab")}
-          >
-            <FormattedMessage
-              id="app.category"
-              defaultMessage="Category"
-            />
-      {/* Category */}
-          </a>
-        </StyledMenuItem>
-
-        <StyledMenuItem key="7">
-          <a
-            href="#"
-            style={{
-              color:
-                pathName === "/recruite" ? "#1890ff" : "rgba(0, 0, 0, 0.65)",
-            }}
-            onClick={() => history.push("/recruite")}
-          >
-            <FormattedMessage
-              id="app.recruitpro"
-              defaultMessage="RecruitPro"
-            />
-      {/* RecruitPro */}
-          </a>
-        </StyledMenuItem>
+    
 
         {/* <StyledMenuItem key="8">
             <a
@@ -167,8 +167,8 @@ class SettingsDropdown extends Component {
           />
         }
       >
-        <a href="#" style={{ height: 45, marginRight: 20 }}>
-          <FlexContainer alignItems="center" style={{ height: "100%" }}>
+        <a href="#" style={{ height: 45, marginRight: 10 }}>
+          <div class=" flex items-center h-full" >
             <SettingOutlined 
               type="setting"
               style={{
@@ -194,7 +194,7 @@ class SettingsDropdown extends Component {
                     : "#1890ff",
               }}
             />
-          </FlexContainer>
+          </div>
         </a>
       </StyledDropdown>
     );

@@ -1,13 +1,8 @@
 import React, { Component,lazy } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import axios from "axios";
-import { base_url } from "../../../../Config/Auth";
-import OpportunityAboutCard from "./OpportunityCards/OpportunityAboutCard";
 import { FlexContainer } from "../../../../Components/UI/Layout";
 import OpportunityCard from "./OpportunityCards/OpportunityCard";
-import OpportunityAboutViewCard from "./OpportunityCards/OpportunityAboutViewCard";
-import OpportunityStatsCard from "./OpportunityCards/OpportunityStatsCard";
 const OpportunityDetailTab = lazy(() =>
   import("./OpportunityTab/OpportunityDetailTab")
 );
@@ -48,6 +43,7 @@ class OpportunityDetailLeft extends Component {
         
           <div style={{ width: "89vw" }}>
          <OpportunityDetailTab
+          opportunity={opportunity}
           />
           </div>
        </FlexContainer>

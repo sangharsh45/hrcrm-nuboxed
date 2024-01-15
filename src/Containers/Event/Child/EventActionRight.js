@@ -1,9 +1,10 @@
-import React from "react";
+import React, { Component,lazy } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import Button from "antd/lib/button";
 import { Tooltip } from "antd";
 import { handleEventModal } from "../EventAction";
+const EventSharedForm =lazy(()=>import("./EventSharedForm"));
 
 class EventActionRight extends React.Component {
   state = {
@@ -17,12 +18,21 @@ class EventActionRight extends React.Component {
     });
   };
   render() {
+    const {
+      userId,
+      user,
+      role,
+      handleCustomerModal,
+    } = this.props;
     const { handleEventModal } = this.props;
     return (
       <div class=" flex items-center" >
+         {user.employee_type === "contractor" && user.candiContShareInd === true || user.employee_type === "employee" && user.candiEmpShareInd === true && user.eventFullListInd === true &&(
+         <EventSharedForm/>
+         )} 
         <Tooltip placement="left" title="Create">
           <Button type="primary"
-           ghost onClick={() => handleEventModal(true)}>
+            onClick={() => handleEventModal(true)}>
             Add
           </Button>
         </Tooltip>
@@ -31,7 +41,9 @@ class EventActionRight extends React.Component {
   }
 }
 
-const mapStateToProps = ({ event }) => ({});
+const mapStateToProps = ({ auth,event }) => ({
+  user: auth.userDetails,
+});
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {

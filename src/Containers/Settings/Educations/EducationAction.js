@@ -143,3 +143,9 @@ export const removeEducation = (educationTypeId) => (dispatch) => {
       });
     });
 };
+
+export const ClearReducerDataOfEducation = () => (dispatch) => {
+  dispatch({
+    type: types.HANDLE_CLAER_REDUCER_DATA_EDUCATION,
+  });
+};

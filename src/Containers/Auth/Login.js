@@ -4,25 +4,26 @@ import { bindActionCreators } from "redux";
 import { Link, withRouter } from "react-router-dom";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
-import { AuthContainer, FormWrapper, Input } from "./styled";
+import { FormWrapper, Input } from "./styled";
 import { ValidationError, Spacer } from "../../Components/UI/Elements";
 import { FlexContainer } from "../../Components/UI/Layout";
 import Button from "antd/lib/button";
 import { login, generateOtpByEmail, validateOtp } from "./AuthAction";
 import { EyeInvisibleOutlined, EyeOutlined,
 } from "@ant-design/icons";
-   import FWLogo from "../../Assets/Images/Logo_new.png";
-import { InputComponent } from "../../Components/Forms/Formik/InputComponent";
+   import FWLogo from "../../Assets/Images/logo_22 copy.png";
+   import FWLogo1 from "../../Assets/Images/Screenshot (251).png";
+
 
 /**
  * yup validation scheme for set Password
  */
-const LoginSchema = Yup.object().shape({
-  userName: Yup.string()
-    .email("Enter a valid email")
-    .required("Input needed !"),
-  password: Yup.string().required("Enter password"),
-});
+// const LoginSchema = Yup.object().shape({
+//   userName: Yup.string()
+//     .email("Enter a valid email")
+//     .required("Input needed !"),
+//   password: Yup.string().required("Enter password"),
+// });
 class Login extends Component {
   constructor(props) {
     super(props);
@@ -81,8 +82,8 @@ class Login extends Component {
     console.log(this.props);
     return (
       <>
-        <FlexContainer>
-          <AuthContainer
+       <div class="flex justify-between ">
+          <div class=" flex justify-center w-1/2 items-center md:min-h-screen max-sm:w-wk h-[80vh] "
             style={{
               backgroundColor: "#F5F5F5",
               flexDirection: "column",
@@ -105,7 +106,7 @@ class Login extends Component {
                   userName: this.state.username || "",
                   password: this.state.password || "",
                 }}
-                validationSchema={LoginSchema}
+                // validationSchema={LoginSchema}
                 onSubmit={(values) => {
                   // same shape as initial values
                   this.submit(values);
@@ -211,8 +212,20 @@ class Login extends Component {
             </FormWrapper>
             <Spacer />
 
-            <div
-              className="footer1"
+           
+          </div>
+          <div class="w-1/2 flex justify-center items-center max-sm:hidden">
+          <img
+              className="big-logo"
+              src={FWLogo1}
+              style={{ }}
+              alt="Tekorero logo"
+            />
+          </div>
+         
+          </div>
+          <div
+              className="footer1 w-wk items-center"
               style={{
                 textAlign: "center",
                 position: "absolute",
@@ -222,8 +235,6 @@ class Login extends Component {
               © {new Date().getFullYear()}, {` `} tekorero.com, All rights
               reserved.
             </div>
-          </AuthContainer>
-        </FlexContainer>
       </>
     );
   }

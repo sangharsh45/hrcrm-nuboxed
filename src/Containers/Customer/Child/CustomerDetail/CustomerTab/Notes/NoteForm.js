@@ -2,13 +2,12 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { FormattedMessage } from "react-intl";
 import { bindActionCreators } from "redux";
-import { Button, Icon } from "antd";
-import { Formik, Form, Field } from "formik";
+import { Button } from "antd";
+import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import { Editor } from "react-draft-wysiwyg";
-import { EditorState, convertToRaw, ContentState } from "draft-js";
+import { EditorState, convertToRaw, } from "draft-js";
 import draftToHtml from "draftjs-to-html";
-import { TextareaComponent } from "../../../../../../Components/Forms/Formik/TextareaComponent";
 import { addNote } from "../../../../CustomerAction";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import { FlexContainer } from "../../../../../../Components/UI/Layout";
@@ -65,26 +64,8 @@ class NoteForm extends Component {
       user: { userId, firstName, lastName },
       addNote,
       customerId,
+      employeeId,
       notes,
-      collectionDTO,
-      ownerId,
-      accountId,
-      opportunityId,
-      distributorId,
-      Loading,
-      callback,
-      teamId,
-      callId,
-      // leadsAccountId,
-      // contactLeadsId,
-      leadsId,
-      eventId,
-      taskId,
-      type,
-      vendorId,
-
-      // partnerId,
-      // userIdFromPartner,
       fetchingNotesListByLeadsId,
     } = this.props;
     const { editorState, placeholder } = this.state;
@@ -95,7 +76,7 @@ class NoteForm extends Component {
           initialValues={{
             notes: "",
             customerId: customerId ? customerId : "",
-            // type: type ? type : "",
+            employeeId:employeeId ? employeeId:"",
           }}
           onSubmit={(values, { resetForm }) => {
             console.log(
@@ -175,7 +156,7 @@ class NoteForm extends Component {
 const mapStateToProps = ({ auth, team, customer }) => ({
   user: auth.userDetails,
   fetchingNotesListByCustomerId: customer.fetchingNotesListByCustomerId,
-
+  employeeId:auth.userDetails.employeeId,
   //   team: team.user,
 });
 

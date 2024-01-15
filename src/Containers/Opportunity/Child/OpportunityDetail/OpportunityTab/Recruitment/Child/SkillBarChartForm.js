@@ -1,8 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import ReactDOM from 'react-dom';
+import React, { } from 'react';
 import { Column } from '@ant-design/plots';
-//import  {getSkillsCount} from "./../../../../../OpportunityAction"
-//import { getBarChartInOrder } from "../../OrderAction"
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 

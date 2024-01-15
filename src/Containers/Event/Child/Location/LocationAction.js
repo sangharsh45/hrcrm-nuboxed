@@ -1,7 +1,8 @@
 import * as types from "./LocationActionType";
 import axios from "axios";
 import dayjs from "dayjs";
-import { base_url } from "../../../../Config/Auth";
+import { base_url,base_url2 } from "../../../../Config/Auth";
+import Swal from 'sweetalert2';
 
 export const handleLocationModal = (modalProps) => (dispatch) => {
   dispatch({ type: types.HANDLE_LOCATION_MODAL, payload: modalProps });
@@ -69,3 +70,193 @@ export const setLocationViewType = (viewType) => (dispatch) => {
         //cb && cb("error");
       });
   };
+
+  export const handleLocationShiftDrawer = (modalProps) => (dispatch) => {
+    dispatch({ type: types.HANDLE_LOCATION_SHIFT_DRAWER, payload: modalProps });
+  };
+  
+  export const handleUpdateLocationDrawer = (modalProps) => (dispatch) => {
+    dispatch({ type: types.HANDLE_UPDATE_LOCATION_DRAWER, payload: modalProps });
+  };
+
+  
+  export const updateLocation = (data,locationDetailsId, cb) => (dispatch) => {
+    dispatch({ type: types.UPDATE_LOCATIONS_REQUEST });
+    axios
+      .put(
+        `${base_url}/locationDetails/${locationDetailsId}`,data,
+        {
+          headers: {
+            Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+          },
+        }
+      )
+      .then((res) => {
+        console.log(res);
+        dispatch({
+          type: types.UPDATE_LOCATIONS_SUCCESS,
+          payload: res.data,
+        });
+        cb();
+      })
+      .catch((err) => {
+        console.log(err);
+        dispatch({
+          type: types.UPDATE_LOCATIONS_FAILURE,
+          payload: err,
+        });
+      });
+  };
+  export const deleteLocation = (locationDetailsId) => (dispatch) => {
+    dispatch({
+      type: types.DELETE_LOCATIONS_REQUEST,
+    });
+    axios
+      .delete(`${base_url}/locationDetails/deleteLocationDetails/${locationDetailsId}`, {
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+        },
+      })
+      .then((res) => {
+        console.log(res);
+        dispatch({
+          type: types.DELETE_LOCATIONS_SUCCESS,
+          payload: locationDetailsId,
+        });
+        Swal.fire({
+          icon: 'success',
+          title: 'Deleted Successfully',
+          showConfirmButton: false,
+          timer: 4000
+        })
+      })
+      .catch((err) => {
+        console.log(err);
+        dispatch({
+          type: types.DELETE_LOCATIONS_FAILURE,
+          payload: err,
+        });
+      });
+  };
+
+  export const getShiftlocs = (locationDetailsId) => (dispatch) => {
+    dispatch({
+      type: types.GET_SHIFT_LOCATION_REQUEST,
+    });
+    axios
+      .get(`${base_url2}/shift/shiftList/${locationDetailsId}`,
+      {
+        // headers: {
+        //   Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+        // },
+      })
+      .then((res) => {
+       
+        dispatch({
+          type: types.GET_SHIFT_LOCATION_SUCCESS,
+          payload: res.data,
+        });
+      })
+      .catch((err) => {
+        dispatch({
+          type: types.GET_SHIFT_LOCATION_FAILURE,
+          payload: err,
+        });
+      });
+  };
+  
+  
+  export const handleCreateShiftDrawer = (modalProps) => (dispatch) => {
+    dispatch({ type: types.HANDLE_CREATE_SHIFT_DRAWER, payload: modalProps });
+  };
+
+  export const createShitLocation = (save) => (dispatch,getState) => {
+    // const locationDetailsId = getState().storedLoc.locationDetailsId;
+  
+    dispatch({
+      type: types.CREATE_SHIFT_LOCATION_REQUEST,
+    });
+    axios
+      .post(`${base_url2}/shift`,save,  {
+        // headers: {
+        //   Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+        // },
+      })
+      .then((res) => {
+        // dispatch(getShiftlocs(locationDetailsId));
+        dispatch({
+          type: types.CREATE_SHIFT_LOCATION_SUCCESS,
+          payload: res.data,
+        });
+       // cb && cb("Success");
+  window.reload()
+      })
+      .catch((err) => {
+        console.log(err);
+        dispatch({
+          type: types.CREATE_SHIFT_LOCATION_FAILURE,
+          payload: err,
+        });
+        //cb && cb("error");
+      });
+  };
+  export const getAlLocshift = (locationDetailsId) => (dispatch) => {
+    dispatch({
+      type: types.GET_ALLOCTION_SHIFT_REQUEST,
+    });
+    axios
+      .get(`${base_url}/employee/user-list/${locationDetailsId}`,
+      {
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+        },
+      })
+      .then((res) => {
+       
+        dispatch({
+          type: types.GET_ALLOCTION_SHIFT_SUCCESS,
+          payload: res.data,
+        });
+      })
+      .catch((err) => {
+        dispatch({
+          type: types.GET_ALLOCTION_SHIFT_FAILURE,
+          payload: err,
+        });
+      });
+  };
+
+  export const handleLocationCustomerDrawer = (modalProps) => (dispatch) => {
+    dispatch({ type: types.HANDLE_LOCATION_CUSTOMER_DRAWER, payload: modalProps });
+  };
+
+  
+  export const handleLocationSupplierDrawer = (modalProps) => (dispatch) => {
+    dispatch({ type: types.HANDLE_LOCATION_SUPPLER_DRAWER, payload: modalProps });
+  };
+
+  export const getLocationRecords = (orgId) => (dispatch) => {
+    dispatch({
+      type: types.GET_LOCATION_RECORDS_REQUEST,
+    });
+    axios
+      .get(`${base_url}/locationCount/${orgId}`, {
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+        },
+      })
+      .then((res) => {
+        console.log(res);
+        dispatch({
+          type: types.GET_LOCATION_RECORDS_SUCCESS,
+          payload: res.data,
+        });
+      })
+      .catch((err) => {
+        console.log(err.response);
+        dispatch({
+          type: types.GET_LOCATION_RECORDS_FAILURE,
+          payload: err,
+        });
+      });
+  }; 

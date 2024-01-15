@@ -2,6 +2,7 @@ import { Button, DatePicker, Icon, message, Select } from "antd";
 import React, { useState, useEffect } from "react";
 import { Spacer, TextInput } from "../../../Components/UI/Elements";
 import dayjs from "dayjs";
+import moment from "moment";
 import { getExpenses } from "../../Settings/Expense/ExpenseAction";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
@@ -12,6 +13,8 @@ import Upload from "../../../Components/Forms/Formik/Upload";
 const { Option } = Select;
 
 function ExpenseForm(props) {
+  const [name, setName] = useState('');
+ 
   const [row, setRows] = useState([
     {
       expenseDate: "",
@@ -23,7 +26,8 @@ function ExpenseForm(props) {
       userId: props.userId,
       expenseTypeId:props.expenseTypeId,
       id: 1, 
-      imageId:"",
+      documentId:"",
+      voucherName:"",
     },
   ]);
   const [id, setId] = useState(1);
@@ -33,7 +37,7 @@ function ExpenseForm(props) {
       return value.map((data) => {
         if (`${data.id}date` === id) {
           console.log(dateString);
-          return { ...data, expenseDate: dayjs(dateString).toISOString() };
+          return { ...data, expenseDate: moment(dateString).toISOString() };
         } else {
           return data;
         }
@@ -98,11 +102,11 @@ function ExpenseForm(props) {
       });
     });
   }
-  function handleImageUpload (imageId){
+  function handleImageUpload (documentId){
     setRows((value) => {
       return value.map((data) => {
-        if (`${data.imageId}imageId` === id) {
-          return { ...data, imageId: imageId };
+        if (`${data.documentId}documentId` === id) {
+          return { ...data, documentId: documentId };
         } else {
           return data;
         }
@@ -141,6 +145,18 @@ function ExpenseForm(props) {
       });
     });
   }
+  function handleImageUpload(imageId, rowId) {
+    setRows((value) => {
+      return value.map((data) => {
+        if (data.id === rowId) {
+          return { ...data, documentId: imageId };
+        } else {
+          return data;
+        }
+      });
+    });
+  }
+  
   function handleChangeAmount(e) {
     e.persist();
     setRows((v) => {
@@ -168,13 +184,50 @@ function ExpenseForm(props) {
         expenseType: "",
         amount: "",
         id: id + 1,
-        imageId:"",
+        documentId:"",
+        voucherName:name
       },
     ]);
   }
   function handleDelete(row) {
     setRows((v) => v.filter((d) => d.id !== row.id));
   }
+
+  // const handleNmae = (e) => {
+  //   setName(e.target.value);
+  // };
+  const handleNmae = (e) => {
+    const newName = e.target.value;
+  
+    setName(newName);
+  
+    // Update voucherName in the 0th index of 'row'
+    setRows((v) => {
+      return v.map((d, index) => {
+        if (index === 0) {
+          return { ...d, voucherName: newName };
+        } else {
+          return d;
+        }
+      });
+    });
+  };
+  
+
+  // const handleNmae = (e) => {
+  //   setName(e.target.value);
+  
+  //   // Update voucherName in the 0th index of 'row'
+  //   setRows((v) => {
+  //     return v.map((d, index) => {
+  //       if (index === 0) {
+  //         return { ...d, voucherName: e.target.value };
+  //       } else {
+  //         return d;
+  //       }
+  //     });
+  //   });
+  // };
 
   function handleCallBack(status) {
     if (status === "Success") {
@@ -193,7 +246,8 @@ function ExpenseForm(props) {
           !item.expenseType &&
           !item.clientName &&
           !item.particular &&
-          !item.amount
+          !item.amount&&
+          name
         ) {
           alert("All Fields Required");
         } 
@@ -207,17 +261,32 @@ function ExpenseForm(props) {
     }
   }
   const { addingExpense } = props;
+  console.log(name)
   return (
     <div>
+      <div>
+      Name
+      </div>
+         <input
+                  style={{ width: "34%",border:"2px solid grey" }}
+                  value={name}
+                  onChange={handleNmae}
+                  // name={`${item.id}attribute`}
+                  // value={`${item.clientName}`}
+                  // onChange={handleChangeattribute}
+                />
       <table>
-        <th>Date</th>
-        <th>Cost Code</th>
+      
+             
+            
+        <th class="font-poppins">Date</th>
+        <th class="font-poppins">Cost Code</th>
 
-        <th>Expense Type</th>
-        <th>More Information</th>
-        <th>Amount</th>
-        <th>Currency</th>
-        <th>Image</th>
+        <th class="font-poppins">Expense Type</th>
+        <th class="font-poppins">More Information</th>
+        <th class="font-poppins">Amount</th>
+        <th class="font-poppins">Currency</th>
+        <th class="font-poppins">Image</th>
         {row.map((item) => {
           return (
             <tr>
@@ -258,7 +327,7 @@ function ExpenseForm(props) {
                   <Option value="Others">Others</Option> */}
                    {props.expenses.map((item) => {
                     return (
-                      <Option value={item.expenseType} >
+                      <Option value={item.expenseTypeId} >
                         {item.expenseType}
                       </Option>
                     );
@@ -288,12 +357,14 @@ function ExpenseForm(props) {
                   onSelect={(value) =>
                     handleCurrencyChange(value, `${item.id}curr`)
                   }
-                  disabled
+
                   defaultValue={props.user.currency}
                 >
                   {props.currencies.map((item) => {
                     return (
-                      <Option value={item.currencyName} defaultValue={props.user.address[0].country}>
+                      <Option value={item.currencyName} 
+                      // defaultValue={props.user.address[0].country}
+                       >
                         {item.currencyName}
                       </Option>
                     );
@@ -301,7 +372,9 @@ function ExpenseForm(props) {
                 </Select>
               </td>
               <td>
-                <Upload value={`${item.imageId}`}/>
+                <Upload 
+               handleImageUpload={(documentId) => handleImageUpload(documentId, item.id)}
+                />
               
               </td>
               {row.length > 1 && (

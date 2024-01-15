@@ -1,10 +1,9 @@
-import React, {useEffect} from "react";
+import React, {} from "react";
+import { FormattedMessage } from "react-intl";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { JumpStartBox, Spacer } from "../../../../Components/UI/Elements";
-import { FlexContainer } from "../../../../Components/UI/Layout";
+import { JumpStartBox, } from "../../../../Components/UI/Elements";
  import {getAllSalesDateWiseList,
-  // getAllDateWiseList
 } from "../../DashboardAction";
 
 class DashboardJumpstartAll extends React.Component{
@@ -53,12 +52,18 @@ componentWillReceiveProps(nextProps) {
 render() {
   const { showDatelist, fetchingDatewiseReport } = this.props;
   return(
-      <FlexContainer flexDirection="row" style={{ width: "100%"}}>
-        <FlexContainer style={{ width: "100%"}}>
+    <div class=" flex flex-row w-full" >
+    <div class="flex w-full" >
         
           <JumpStartBox
             noProgress
-            title="Requirements"
+            title={
+              <FormattedMessage
+                id="app.requirements"
+                defaultMessage="Requirements"
+              />
+            }
+         
             // bgColor="#da5432"
             //bgColor="linear-gradient(270deg, #3066BE 0%, #005075 100%);"
             value={
@@ -75,7 +80,13 @@ render() {
        
           <JumpStartBox
             noProgress
-            title="Positions "
+            title={
+              <FormattedMessage
+                id="app.positions"
+                defaultMessage="Positions"
+              />
+            }
+            // title="Positions "
             value={
               // this.props.user.department === "Recruiter"
               // ?this.props.showDatelist.openPosition
@@ -98,7 +109,13 @@ render() {
           /> */}
           <JumpStartBox
             noProgress
-            title="Selected"
+            title={
+              <FormattedMessage
+                id="app.selected"
+                defaultMessage="Selected"
+              />
+            }
+            // title="Selected"
             //bgColor="linear-gradient(270deg, #3066BE 0%, #005075 100%);"
             // value={this.props.showDatelist.selectted}
             value={
@@ -118,7 +135,13 @@ render() {
           />
           <JumpStartBox
             noProgress
-            title="On Boarded"
+            title={
+              <FormattedMessage
+                id="app.onBoarded"
+                defaultMessage="On Boarded"
+              />
+            }
+            // title="On Boarded"
            // bgColor="linear-gradient(270deg, #3066BE 0%, #005075 100%);"
             
              value={this.props.showAllSalesDatelist.onboarded}
@@ -170,8 +193,8 @@ render() {
                     title="Customers Added"
                     bgColor="#92defe"
                 /> */}
-        </FlexContainer>
-        <Spacer />
+        </div>
+  
         {/* <FlexContainer>
           <JumpStartBox noProgress title="All Products" bgColor="#8791a1" />
           <JumpStartBox noProgress title="Quantity On Hand" bgColor="#8791a1" />
@@ -182,7 +205,7 @@ render() {
           />
           <JumpStartBox noProgress title="Total Visitors" bgColor="#8791a1" />
         </FlexContainer> */}
-      </FlexContainer>
+      </div>
     
   ); 
 }

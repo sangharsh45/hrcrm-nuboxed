@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 import { Button, Tooltip } from "antd";
-import { FlexContainer } from "../../../Components/UI/Layout";
 import { FormattedMessage } from "react-intl";
 import DeleteIcon from '@mui/icons-material/Delete';
 import BorderColorIcon from '@mui/icons-material/BorderColor';
@@ -34,7 +33,7 @@ class SingleEducations extends Component {
         <ViewEditCard>
           {({ viewType }, toggleViewType) =>
             viewType === "view" ? (
-              <FlexContainer justifyContent="space-between">
+              <div class=" flex justify-between" >
                 <EducationName style={{ flexBasis: "85%" }}>
                   {educationType}
                 </EducationName>
@@ -70,9 +69,9 @@ class SingleEducations extends Component {
                                style={{ color: "#666" }}
                                  /> */}
                 </div>
-              </FlexContainer>
+              </div>
             ) : (
-              <FlexContainer>
+              <div class=" flex">
                 <TextInput
                   name={name}
                   // value={value || educationType}
@@ -82,7 +81,7 @@ class SingleEducations extends Component {
                 />
                 <br />
                 <br />
-                <div style={{ marginLeft: "auto" }}>
+                <div class=" ml-auto" >
                   <Button
                     type="primary"
                     htmlType="submit"
@@ -105,7 +104,7 @@ class SingleEducations extends Component {
                     <FormattedMessage id="app.cancel" defaultMessage="Cancel" />
                   </Button>
                 </div>
-              </FlexContainer>
+              </div>
             )
           }
         </ViewEditCard>

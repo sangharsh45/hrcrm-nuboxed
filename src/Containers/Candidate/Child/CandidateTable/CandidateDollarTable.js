@@ -1,4 +1,4 @@
-import React, { Component, useEffect, useState, useMemo, lazy } from "react";
+import React, {  useEffect, useState, useMemo, lazy } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import dayjs from "dayjs";
@@ -15,9 +15,6 @@ import PhoneInTalkIcon from '@mui/icons-material/PhoneInTalk';
 import WalletIcon from '@mui/icons-material/Wallet';
 import BuildCircleIcon from '@mui/icons-material/BuildCircle';
 import PlayCircleIcon from '@mui/icons-material/PlayCircle';
-import CandidateRowEmailModal from "../CandidateRowEmailModal";
-import SkillsLoadMore from "./SkillsLoadMore";
-import AddChoiceCandidateModal from "../CandidateTable/AddChoiceCandidateModal";
 import { FormattedMessage } from "react-intl";
 import { StyledTable, StyledPopconfirm } from "../../../../Components/UI/Antd";
 import { Button,Select, Tooltip, Input } from "antd";
@@ -26,15 +23,34 @@ import {
   SubTitle,
 } from "../../../../Components/UI/Elements";
 import {getCandidateDollarTable} from "../../CandidateAction"
-import AddCandidateDrawerModal from "../../AddCandidateDrawerModal";
-import AddDonotCallModal from "../CandidateTable/AddDonotCallModal";
-import AddPlayerModal from "../CandidateTable/AddPlayerModal"
-import UpdateCandidateResumeModal from "../CandidateTable/UpdateCandidateResumeModal";
-import StatusToggle from "./StatusToggle";
 import styled from "styled-components";
 import Highlighter from "react-highlight-words";
 const Option = Select;
+const AddDonotCallModal = lazy(() =>
+  import("../CandidateTable/AddDonotCallModal")
+);
+const SkillsLoadMore = lazy(() =>
+  import("../CandidateTable/SkillsLoadMore")
+);
 
+const StatusToggle = lazy(() =>
+  import("../CandidateTable/StatusToggle")
+);
+const AddPlayerModal = lazy(() =>
+  import("../CandidateTable/AddPlayerModal")
+);
+const CandidateRowEmailModal = lazy(() =>
+  import("../CandidateRowEmailModal")
+);
+const AddChoiceCandidateModal = lazy(() =>
+  import("../CandidateTable/AddChoiceCandidateModal")
+);
+const AddCandidateDrawerModal = lazy(() =>
+  import("../../AddCandidateDrawerModal")
+);
+const UpdateCandidateResumeModal = lazy(() =>
+  import("../CandidateTable/UpdateCandidateResumeModal")
+);
 const UpdateCandidateModal = lazy(() =>
   import("../UpdateCandidate/UpdateCandidateModal")
 );

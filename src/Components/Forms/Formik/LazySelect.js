@@ -93,8 +93,6 @@ class LazySelect extends Component {
               // onBlur={this.handleBlur}
               onChange={option => this.handleOnChange(option)}
               styles={{ width: 600 }}
-
-              // components={this.renderOptions}
             />
           </FlexContainer>
         </FlexContainer>

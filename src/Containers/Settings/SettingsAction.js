@@ -1,5 +1,5 @@
 import * as types from "./SettingsActionTypes";
-import { base_url } from "../../Config/Auth";
+import { base_url, base_url2 } from "../../Config/Auth";
 import axios from "axios";
 import { ActionIcon } from "../../Components/Utils";
 import { UPDATE_RECRUITMENT_ADVANCE_SUCCESS } from "../Auth/AuthTypes";
@@ -139,7 +139,7 @@ export const LinkProcessPublish = (data, cb,) => (dispatch) => {
 };
 
 
-export const addTaskForRecruiter = (data, orgId, cb) => (
+export const addTaskForRecruiter = (data, taskTypeId, cb) => (
   dispatch
 ) => {
   dispatch({
@@ -154,7 +154,7 @@ export const addTaskForRecruiter = (data, orgId, cb) => (
     })
     .then((res) => {
       console.log(res);
-       dispatch(getTaskForRecruit(orgId));
+      dispatch(getTaskForWorkflow(taskTypeId));
       dispatch({
         type: types.ADD_TASK_FOR_RECRUIT_SUCCESS,
         payload: res.data,
@@ -177,7 +177,7 @@ export const getTaskForRecruit = (organizationId) => (dispatch) => {
     type: types.GET_TASK_FOR_RECRUIT_REQUEST,
   });
   axios
-    .get(`${base_url}/category/task/checklist/all/${organizationId}`, {
+    .get(`${base_url}/taskType/taskcheckList`, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },
@@ -876,7 +876,7 @@ export const updateStageForRecruit = (
   axios
     .put(
       `${base_url}/employee/recriutment-stage`,
-      { stageId,responsible, stageName, probability, days },
+      { stageId, responsible, stageName, probability, days },
       {
         headers: {
           Authorization: "Bearer " + sessionStorage.getItem("token") || "",
@@ -926,7 +926,7 @@ export const getAllProcessStagesForRecruit = () => (dispatch) => {
     });
 };
 
-export const addLeaves = (data,countryId) => (dispatch) => {
+export const addLeaves = (data, countryId) => (dispatch) => {
   dispatch({ type: types.ADD_LEAVES_REQUEST });
 
   axios
@@ -938,11 +938,12 @@ export const addLeaves = (data,countryId) => (dispatch) => {
     .then((res) => {
       console.log(res);
       dispatch(getLeavesDetails(countryId));
+      message.success("Data has been Updated successfully!");
       dispatch({
         type: types.ADD_LEAVES_SUCCESS,
         payload: res.data,
       });
-      // cb && cb("Success");
+
     })
     .catch((err) => {
       console.log(err);
@@ -1098,8 +1099,8 @@ export const getMileageDetails = (orgId) => (dispatch) => {
     });
 };
 
-export const updateMileage = (data) => (dispatch, getState) => {
-  const orgId = getState().auth.userDetails.orgId;
+export const updateMileage = (data, orgId) => (dispatch, getState) => {
+  // const orgId = getState().auth.userDetails.orgId;
   dispatch({ type: types.UPDATE_MILEAGE_REQUEST });
 
   axios
@@ -2293,9 +2294,9 @@ export const getNotifications = (orgId) => (dispath) => {
       });
     });
 };
-export const addingNotifications = (data,orgId ) => (dispatch, getState) => {
+export const addingNotifications = (data, orgId) => (dispatch, getState) => {
   //console.log(permissions, userId);
-   const userId = getState().auth.userDetails.userId;
+  const userId = getState().auth.userDetails.userId;
   dispatch({
     type: types.ADDING_NOTIFICATIONS_REQUEST,
   });
@@ -2308,7 +2309,7 @@ export const addingNotifications = (data,orgId ) => (dispatch, getState) => {
 
     .then((res) => {
       console.log(res);
-       dispatch(getNotifications(orgId))
+      dispatch(getNotifications(orgId))
       dispatch({
         type: types.ADDING_NOTIFICATIONS_SUCCESS,
         payload: res.data,
@@ -2359,14 +2360,14 @@ export const updateRequirement = (process, cb) => (dispatch) => {
         type: types.UPDATE_REQUIREMENT_SUCCESS,
         payload: res.data,
       });
-      
+
     })
     .catch((err) => {
       console.log(err);
       dispatch({
         type: types.UPDATE_REQUIREMENT_FAILURE,
       });
-     
+
     });
 };
 
@@ -2385,14 +2386,14 @@ export const updateOpportunity = (process, cb) => (dispatch) => {
         type: types.UPDATE_OPPORTUNITIES_SUCCESS,
         payload: res.data,
       });
-      
+
     })
     .catch((err) => {
       console.log(err);
       dispatch({
         type: types.UPDATE_OPPORTUNITIES_FAILURE,
       });
-     
+
     });
 };
 
@@ -2433,7 +2434,7 @@ export const addNotificationAccess = (data, userId) => (dispatch) => {
 
     .then((res) => {
       console.log(res);
-       dispatch(getNotificationAccess(userId))
+      dispatch(getNotificationAccess(userId))
       dispatch({
         type: types.ADDING_NOTIFICATION_ACCESS_SUCCESS,
         payload: res.data,
@@ -2473,7 +2474,7 @@ export const getNotificationAccess = (userId) => (dispath) => {
       });
     });
 };
-export const deleteReportSchedulerInternalData = (reportSchedulingId,orgId) => (dispatch, getState) => {
+export const deleteReportSchedulerInternalData = (reportSchedulingId, orgId) => (dispatch, getState) => {
   const { userId } = getState("auth").auth.userDetails;
   // console.log("inside deleteCall", callId);
   dispatch({
@@ -2502,7 +2503,7 @@ export const deleteReportSchedulerInternalData = (reportSchedulingId,orgId) => (
     });
 };
 
-export const deleteSequenceData = (sequenceId,orgId) => (dispatch, getState) => {
+export const deleteSequenceData = (sequenceId, orgId) => (dispatch, getState) => {
   const { userId } = getState("auth").auth.userDetails;
   // console.log("inside deleteCall", callId);
   dispatch({
@@ -2545,7 +2546,7 @@ export const addProcessForOpportunity = (data, orgId, cb) => (
     })
     .then((res) => {
       console.log(res);
-       dispatch(getProcessForOpportunity(orgId));
+      dispatch(getProcessForOpportunity(orgId));
       dispatch({
         type: types.ADD_PROCESS_FOR_OPPORTUNITY_SUCCESS,
         payload: res.data,
@@ -2587,7 +2588,7 @@ export const getProcessForOpportunity = (orgId) => (dispatch) => {
     });
 };
 
-export const deleteWorkflowData = (processId,orgId) => (dispatch, getState) => {
+export const deleteWorkflowData = (processId, orgId) => (dispatch, getState) => {
   const { userId } = getState("auth").auth.userDetails;
   // console.log("inside deleteCall", callId);
   dispatch({
@@ -2617,7 +2618,7 @@ export const deleteWorkflowData = (processId,orgId) => (dispatch, getState) => {
 };
 
 
-export const deleteTaskData = (taskChecklistId,orgId) => (dispatch, getState) => {
+export const deleteTaskData = (taskChecklistId, orgId) => (dispatch, getState) => {
   const { userId } = getState("auth").auth.userDetails;
   // console.log("inside deleteCall", callId);
   dispatch({
@@ -2647,7 +2648,7 @@ export const deleteTaskData = (taskChecklistId,orgId) => (dispatch, getState) =>
 };
 
 
-export const deleteOpportunityProcessData = (opportunityWorkflowDetailsId,orgId) => (dispatch, getState) => {
+export const deleteOpportunityProcessData = (opportunityWorkflowDetailsId, orgId) => (dispatch, getState) => {
   const { userId } = getState("auth").auth.userDetails;
   // console.log("inside deleteCall", callId);
   dispatch({
@@ -2676,20 +2677,20 @@ export const deleteOpportunityProcessData = (opportunityWorkflowDetailsId,orgId)
     });
 };
 
-export const updateSequenceTableData= (data,sequenceId) => (dispatch) => {
+export const updateSequenceTableData = (data, sequenceId) => (dispatch) => {
   dispatch({
     type: types.UPDATE_SEQUENCE_TABLE_DATA_REQUEST,
   });
 
 
   axios
-    .put(`${base_url}/sequence/${sequenceId}`,data,{
+    .put(`${base_url}/sequence/${sequenceId}`, data, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },
     })
     .then((res) => {
-    //  dispatch(getExperienceByCandidateId(candidateId));
+      //  dispatch(getExperienceByCandidateId(candidateId));
       dispatch({
         type: types.UPDATE_SEQUENCE_TABLE_DATA_SUCCESS,
         payload: res.data,
@@ -2706,7 +2707,7 @@ export const updateSequenceTableData= (data,sequenceId) => (dispatch) => {
       // cb && cb("error");
     });
 };
-export const updateProcessNameForOpportunity = (process,opportunityWorkflowDetailsId, cb) => (dispatch) => {
+export const updateProcessNameForOpportunity = (process, opportunityWorkflowDetailsId, cb) => (dispatch) => {
   debugger;
   dispatch({ type: types.UPDATE_PROCESS_NAME_FOR_OPPORTUNITY_REQUEST });
 
@@ -2898,7 +2899,7 @@ export const updateStageForOpportunity = (
   opportunityStagesId,
   responsible,
   stageName,
-  
+
   probability,
   days,
   cb
@@ -2910,7 +2911,7 @@ export const updateStageForOpportunity = (
   axios
     .put(
       `${base_url}/opportunityStages/${opportunityStagesId}`,
-      { opportunityStagesId,responsible, stageName, probability, days },
+      { opportunityStagesId, responsible, stageName, probability, days },
       {
         headers: {
           Authorization: "Bearer " + sessionStorage.getItem("token") || "",
@@ -2934,7 +2935,7 @@ export const updateStageForOpportunity = (
     });
 };
 
-export const deleteHiringStagesData = (stageId,orgId) => (dispatch, getState) => {
+export const deleteHiringStagesData = (stageId, orgId) => (dispatch, getState) => {
   const { userId } = getState("auth").auth.userDetails;
   // console.log("inside deleteCall", callId);
   dispatch({
@@ -2963,7 +2964,7 @@ export const deleteHiringStagesData = (stageId,orgId) => (dispatch, getState) =>
     });
 };
 
-export const deleteOpportunityStagesData = (opportunityStagesId,orgId) => (dispatch, getState) => {
+export const deleteOpportunityStagesData = (opportunityStagesId, orgId) => (dispatch, getState) => {
   const { userId } = getState("auth").auth.userDetails;
   // console.log("inside deleteCall", callId);
   dispatch({
@@ -3025,7 +3026,7 @@ export const LinkOpportunityProcessPublish = (data, cb,) => (dispatch) => {
     });
 };
 
-export const updateSequence = (data,cb) => (dispatch) => {
+export const updateSequence = (data, cb) => (dispatch) => {
   dispatch({
     type: types.UPDATE_SEQUENCE_REQUEST,
   });
@@ -3038,7 +3039,7 @@ export const updateSequence = (data,cb) => (dispatch) => {
     })
     .then((res) => {
       console.log(res);
-     // dispatch(getNotificationTemplate());
+      // dispatch(getNotificationTemplate());
 
       dispatch({
         type: types.UPDATE_SEQUENCE_SUCCESS,
@@ -3070,7 +3071,7 @@ export const addingWeekendAccess = (data, countryName) => (dispatch, getState) =
 
     .then((res) => {
       console.log(res);
-       dispatch(getWeekendAccess(countryName))
+      dispatch(getWeekendAccess(countryName))
       dispatch({
         type: types.ADDING_WEEKEND_ACCESS_SUCCESS,
         payload: res.data,
@@ -3193,7 +3194,7 @@ export const getTaskStagesForRecruit = (taskChecklistId) => (
 };
 
 
-export const deleteTaskStagesData = (taskChecklistStagelinkId,orgId) => (dispatch, getState) => {
+export const deleteTaskStagesData = (taskChecklistStagelinkId, orgId) => (dispatch, getState) => {
   const { userId } = getState("auth").auth.userDetails;
   // console.log("inside deleteCall", callId);
   dispatch({
@@ -3226,6 +3227,8 @@ export const deleteTaskStagesData = (taskChecklistStagelinkId,orgId) => (dispatc
 export const updateTaskStageForRecruit = (
   taskChecklistStagelinkId,
   taskChecklistStageName,
+  probability,
+  days,
   cb
 ) => (dispatch) => {
   console.log(taskChecklistStagelinkId);
@@ -3235,7 +3238,7 @@ export const updateTaskStageForRecruit = (
   axios
     .put(
       `${base_url}/category/task/checklist/stage/update`,
-      { taskChecklistStagelinkId, taskChecklistStageName, },
+      { taskChecklistStagelinkId, taskChecklistStageName, probability, days },
       {
         headers: {
           Authorization: "Bearer " + sessionStorage.getItem("token") || "",
@@ -3260,10 +3263,10 @@ export const updateTaskStageForRecruit = (
 };
 
 
-export const addApprove = (data,subProcessName) => (dispatch) => {
+export const addApprove = (data, subProcessName) => (dispatch) => {
   dispatch({ type: types.ADD_APPROVE_REQUEST });
   axios
-    .post(`${base_url}/approve/save/processName/subProcessName`, data,{
+    .post(`${base_url}/approve/save/processName/subProcessName`, data, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },
@@ -3274,6 +3277,8 @@ export const addApprove = (data,subProcessName) => (dispatch) => {
       dispatch(getApproveData("Leave"))
       dispatch(getApproveData("Mileage"))
       dispatch(getApproveData("Expense"))
+      dispatch(getApproveData("ContactUser"))
+      dispatch(getApproveData("PhonePair"))
       dispatch({
         type: types.ADD_APPROVE_SUCCESS,
         payload: res.data,
@@ -3293,7 +3298,7 @@ export const getApproveData = (subProcessName, IndentApproval) => (dispatch) => 
     type: types.GET_APPROVE_DATA_REQUEST,
   });
   axios
-    .get(`${base_url}/approve/${subProcessName}`,{
+    .get(`${base_url}/approve/${subProcessName}`, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },
@@ -3317,7 +3322,7 @@ export const getApproveData = (subProcessName, IndentApproval) => (dispatch) => 
 };
 
 
-export const getDepartmentRoleData = (departmentId,page) => (dispatch) => {
+export const getDepartmentRoleData = (departmentId, page) => (dispatch) => {
 
   dispatch({
     type: types.GET_DEPARTMENT_ROLE_DATA_REQUEST,
@@ -3344,11 +3349,644 @@ export const getDepartmentRoleData = (departmentId,page) => (dispatch) => {
     });
 };
 
+export const getTaskForStages = (orgId) => (dispatch) => {
+  // debugger;
+  dispatch({
+    type: types.GET_TASK_FOR_STAGES_REQUEST,
+  });
+  axios
+    .get(`${base_url}/taskType/taskcheckList`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log("print when new task added................", res);
+      dispatch({
+        type: types.GET_TASK_FOR_STAGES_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.GET_TASK_FOR_STAGES_FAILURE,
+        payload: err,
+      });
+    });
+};
 
 
+export const getTaskWorkflowStagesForRecruit = (taskId) => (
+  dispatch
+) => {
+  dispatch({
+    type: types.GET_WORKFLOW_TASK_STAGES_FOR_RECRUIT_REQUEST,
+  });
+  axios
+    .get(`${base_url}/task/subTask/${taskId}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.GET_WORKFLOW_TASK_STAGES_FOR_RECRUIT_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.GET_WORKFLOW_TASK_STAGES_FOR_RECRUIT_FAILURE,
+        payload: err,
+      });
+    });
+};
 
 
+export const getTaskForWorkflow = (taskTypeId) => (dispatch) => {
+  // debugger;
+  dispatch({
+    type: types.GET_TASK_FOR_WORKFLOW_REQUEST,
+  });
+  axios
+    .get(`${base_url}/category/task/allChecklist/${taskTypeId}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log("print when new task added................", res);
+      dispatch({
+        type: types.GET_TASK_FOR_WORKFLOW_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.GET_TASK_FOR_WORKFLOW_FAILURE,
+        payload: err,
+      });
+    });
+};
+
+export const addTaskWorkflow = (included, startDate, endDate, taskId, taskChecklistStagelinkId, cb) => (dispatch) => {
+  console.log(taskId);
+  dispatch({
+    type: types.ADD_TASK_WORKFLOW_REQUEST,
+  });
+  axios
+    .post(`${base_url}/task/subTask`, { included, startDate, endDate, taskId, taskChecklistStagelinkId }, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      dispatch(getTaskWorkflowStagesForRecruit(taskId));
+      message.success("data has been added successfully!");
+      console.log(res);
+      dispatch({
+        type: types.ADD_TASK_WORKFLOW_SUCCESS,
+        payload: res.data,
+      });
+      cb();
+    })
+    .catch((err) => {
+      console.log(err);
+
+      dispatch({
+        type: types.ADD_TASK_WORKFLOW_FAILURE,
+      });
+      // message.success(res.data.message);
+      cb();
+    });
+};
+
+export const getTaskTeamList = (taskId) => (dispatch) => {
+  dispatch({
+    type: types.GET_TASK_TEAM_LIST_REQUEST,
+  });
+  axios
+    .get(`${base_url}/task/teamList/${taskId}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.GET_TASK_TEAM_LIST_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.GET_TASK_TEAM_LIST_FAILURE,
+        payload: err,
+      });
+    });
+};
+
+export const getLeadAging = (orgId) => (dispatch) => {
+  dispatch({
+    type: types.GET_LEAD_AGING_REQUEST,
+  });
+
+  axios
+    .get(`${base_url}/leadsCategory/organisation/${orgId}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.GET_LEAD_AGING_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      dispatch({
+        type: types.GET_LEAD_AGING_FAILURE,
+        payload: err,
+      });
+    });
+};
+export const addLeadsaging = (data) => (dispatch) => {
+  dispatch({
+    type: types.ADD_LEAD_AGING_REQUEST,
+  });
+
+  axios
+    .post(`${base_url}/leadsCategory`, data, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.ADD_LEAD_AGING_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      dispatch({
+        type: types.ADD_LEAD_AGING_FAILURE,
+        payload: err,
+      });
+    });
+};
+
+export const addProcessForDeals = (data, orgId, cb) => (
+  dispatch
+) => {
+  dispatch({
+    type: types.ADD_PROCESS_FOR_DEALS_REQUEST,
+  });
+
+  axios
+    .post(`${base_url}/workflow/investorOpportunityWorkflow`, data, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      dispatch(getProcessForDeals(orgId));
+      dispatch({
+        type: types.ADD_PROCESS_FOR_DEALS_SUCCESS,
+        payload: res.data,
+      });
+      cb && cb("success");
+    })
+    .catch((err) => {
+      dispatch({
+        type: types.ADD_PROCESS_FOR_DEALS_FAILURE,
+        payload: err,
+      });
+      cb && cb("failure");
+    });
+};
+
+export const getProcessForDeals = (orgId) => (dispatch) => {
+  debugger;
+  dispatch({
+    type: types.GET_PROCESS_FOR_DEALS_REQUEST,
+  });
+  axios
+    .get(`${base_url}/workflow/investorOpportunityWorkflow/${orgId}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log("print when new process added................", res);
+      dispatch({
+        type: types.GET_PROCESS_FOR_DEALS_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.GET_PROCESS_FOR_DEALS_FAILURE,
+        payload: err,
+      });
+    });
+};
 
 
+export const addProcessStageForDeals = (stage, cb) => (dispatch) => {
+  dispatch({ type: types.ADD_PROCESS_STAGE_FOR_DEALS_REQUEST });
+
+  axios
+    .post(`${base_url}/investorOpportunityWorkflow/opportunityStages`, stage, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.ADD_PROCESS_STAGE_FOR_DEALS_SUCCESS,
+        payload: { ...stage, stageId: res.data },
+      });
+      cb && cb("Success");
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.ADD_PROCESS_STAGE_FOR_DEALS_FAILURE,
+      });
+      cb && cb("Failure");
+    });
+};
 
 
+export const getProcessStagesForDeals = (investorOppWorkflowId) => (
+  dispatch
+) => {
+  dispatch({
+    type: types.GET_PROCESS_STAGES_FOR_DEALS_REQUEST,
+  });
+  axios
+    .get(`${base_url}/investorOpportunityWorkflow/opportunityStages/${investorOppWorkflowId}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.GET_PROCESS_STAGES_FOR_DEALS_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.GET_PROCESS_STAGES_FOR_DEALS_FAILURE,
+        payload: err,
+      });
+    });
+};
+export const LinkDealsProcessPublish = (data, cb,) => (dispatch) => {
+  dispatch({ type: types.LINK_DEALS_PROCESS_PUBLISH_REQUEST });
+
+  axios
+    .put(`${base_url}/investorOpportunityWorkflow/update/publishInd`, data, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.LINK_DEALS_PROCESS_PUBLISH_SUCCESS,
+        payload: res.data,
+      });
+      cb && cb("Success", res.data);
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.LINK_DEALS_PROCESS_PUBLISH_FAILURE,
+      });
+      cb && cb("Failure");
+    });
+};
+
+export const LinkDealsStagePublish = (data, cb) => (dispatch) => {
+  dispatch({ type: types.LINK_DEALS_STAGES_PUBLISH_REQUEST });
+
+  axios
+    .put(`${base_url}/investorOpportunityWorkflow/opportunityStages/update/publishInd `, data, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.LINK_DEALS_STAGES_PUBLISH_SUCCESS,
+        payload: res.data,
+      });
+      cb && cb("Success", res.data);
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.LINK_DEALS_STAGES_PUBLISH_FAILURE,
+      });
+      cb && cb("Failure");
+    });
+};
+
+
+export const deleteDealsProcessData = (investorOppWorkflowId, orgId) => (dispatch, getState) => {
+  const { userId } = getState("auth").auth.userDetails;
+  // console.log("inside deleteCall", callId);
+  dispatch({
+    type: types.DELETE_DEALS_PROCESS_DATA_REQUEST,
+  });
+  axios
+    .delete(`${base_url}/investorOpportunityWorkflow/${investorOppWorkflowId}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      //  dispatch(getScheduler(orgId));
+      dispatch({
+        type: types.DELETE_DEALS_PROCESS_DATA_SUCCESS,
+        payload: investorOppWorkflowId,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.DELETE_DEALS_PROCESS_DATA_FAILURE,
+        payload: err,
+      });
+    });
+};
+
+export const deleteDealsStagesData = (investorOppStagesId, orgId) => (dispatch, getState) => {
+  const { userId } = getState("auth").auth.userDetails;
+  // console.log("inside deleteCall", callId);
+  dispatch({
+    type: types.DELETE_DEALS_STAGES_DATA_REQUEST,
+  });
+  axios
+    .delete(`${base_url}/investorOpportunityWorkflow/opportunityStages/${investorOppStagesId}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      //  dispatch(getScheduler(orgId));
+      dispatch({
+        type: types.DELETE_DEALS_STAGES_DATA_SUCCESS,
+        payload: investorOppStagesId,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.DELETE_DEALS_STAGES_DATA_FAILURE,
+        payload: err,
+      });
+    });
+};
+
+export const updateProcessNameForDeals = (process, investorOppWorkflowId, cb) => (dispatch) => {
+  debugger;
+  dispatch({ type: types.UPDATE_PROCESS_NAME_FOR_DEALS_REQUEST });
+
+  axios
+    .put(`${base_url}/investorOpportunityWorkflow/${investorOppWorkflowId}`, process, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.UPDATE_PROCESS_NAME_FOR_DEALS_SUCCESS,
+        payload: res.data,
+      });
+      cb && cb("Success", res.data);
+
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.UPDATE_PROCESS_NAME_FOR_DEALS_FAILURE,
+      });
+      cb && cb("Failure");
+    });
+};
+
+export const updateStageForDeals = (
+  investorOppStagesId,
+  responsible,
+  stageName,
+
+  probability,
+  days,
+  cb
+) => (dispatch) => {
+  console.log(stageName, probability);
+  dispatch({
+    type: types.UPDATE_STAGE_FOR_DEALS_REQUEST,
+  });
+  axios
+    .put(
+      `${base_url}/investorOpportunityWorkflow/opportunityStages/${investorOppStagesId}`,
+      { investorOppStagesId, responsible, stageName, probability, days },
+      {
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+        },
+      }
+    )
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.UPDATE_STAGE_FOR_DEALS_SUCCESS,
+        payload: res.data,
+      });
+      cb && cb("success");
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.UPDATE_STAGE_FOR_DEALS_FAILURE,
+      });
+      cb && cb("error");
+    });
+};
+
+export const getAllVat = () => (
+  dispatch
+) => {
+  dispatch({
+    type: types.GET_ALL_VAT_REQUEST,
+  });
+  axios
+    .get(`${base_url2}/vat/all-vat`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.GET_ALL_VAT_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.GET_ALL_VAT_FAILURE,
+        payload: err,
+      });
+    });
+};
+
+export const websiteSingleMultiple = (process,orgId,type, cb) => (dispatch) => {
+  dispatch({ type: types.UPDATE_WEBSITE_SINGLE_REQUEST });
+
+  axios
+    .put(`${base_url}/distributionAutomation/save`, process, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      dispatch(getDistributionAutomation(orgId,"lead"));
+      console.log(res);
+      dispatch({
+        type: types.UPDATE_WEBSITE_SINGLE_SUCCESS,
+        payload: res.data,
+      });
+
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.UPDATE_WEBSITE_SINGLE_FAILURE,
+      });
+
+    });
+};
+
+
+export const getDistributionAutomation = (orgId,type) => (dispath) => {
+  dispath({ type: types.GET_DISTRIBUTION_AUTOMATION_REQUEST });
+  axios
+    .get(`${base_url}/distributionAutomation/${orgId}/${type}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      dispath({
+        type: types.GET_DISTRIBUTION_AUTOMATION_SUCCESS,
+        payload: res.data,
+      });
+
+    })
+    .catch((err) => {
+      dispath({
+        type: types.GET_DISTRIBUTION_AUTOMATION_FAILURE,
+        payload: err,
+      });
+    });
+};
+
+export const getDepartmentwiserUser = (departmentId) => (dispatch) => {
+  dispatch({
+    type: types.GET_DEPARTMENTWISE_USER_REQUEST,
+  });
+  axios
+    .get(`${base_url}/employee/list/${departmentId}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.GET_DEPARTMENTWISE_USER_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.GET_DEPARTMENTWISE_USER_FAILURE,
+        payload: err,
+      });
+    });
+};
+
+export const addNotificationConfig = (data) => (dispatch) => {
+  dispatch({ type: types.ADD_NOTIFICATION_CONFIG_REQUEST });
+
+  axios
+    .put(`${base_url}/notification/config`, data, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.ADD_NOTIFICATION_CONFIG_SUCCESS,
+        payload: res.data ,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.ADD_NOTIFICATION_CONFIG_FAILURE,
+      });
+    });
+};
+export const getNotificationConfig = (name,type) => (dispatch) => {
+  dispatch({
+    type: types.GET_NOTIFICATION_CONFIG_REQUEST,
+  });
+  axios
+    .get(`${base_url}/notification/config/${name}/${type}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.GET_NOTIFICATION_CONFIG_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.GET_NOTIFICATION_CONFIG_FAILURE,
+        payload: err,
+      });
+    });
+};

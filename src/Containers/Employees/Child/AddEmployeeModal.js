@@ -1,13 +1,13 @@
-import React, { lazy, Suspense, Component } from "react";
-import { StyledDrawer, StyledTabs } from "../../../Components/UI/Antd";
+import React, { lazy, Component } from "react";
+import { StyledDrawer, } from "../../../Components/UI/Antd";
 import { FormattedMessage } from "react-intl";
-const EducationDocumentForm = lazy(() => import("../../Profile/Child/ProfileTabs/ProfileBoost/Education/EducationDocumentForm"));
 const EmployeeForm = lazy(() => import("../Child/EmployeeForm"));
-const TabPane = StyledTabs.TabPane;
 
 class AddEmployeeModal extends Component {
   render() {
     const { addEmployeeModal, handleEmployeeModal, ...formProps } = this.props;
+    const isSmallScreen = window.innerWidth <= 600;
+    const drawerWidth = isSmallScreen ? "90%" : "60%";
     return (
       <>
         <StyledDrawer
@@ -16,12 +16,12 @@ class AddEmployeeModal extends Component {
             defaultMessage="New Joinee"
           />}
 
-          width="55%"
+          width={drawerWidth}
           visible={addEmployeeModal}
           destroyOnClose
           maskClosable={false}
           maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}
-          style={{marginTop:"5rem"}}
+          style={{marginTop:"3rem"}}
           onClose={() => handleEmployeeModal(false)}
           footer={null}
         >

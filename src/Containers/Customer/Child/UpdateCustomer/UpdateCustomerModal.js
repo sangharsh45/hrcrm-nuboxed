@@ -1,5 +1,4 @@
 import React, { lazy, Suspense } from "react";
-import { FormattedMessage } from "react-intl";
 import { connect } from "react-redux";
 import { StyledDrawer } from "../../../../Components/UI/Antd";
 import { bindActionCreators } from "redux";
@@ -8,19 +7,20 @@ import { setEditCustomer } from "../../CustomerAction";
 const UpdateCustomerForm = lazy(() => import("./UpdateCustomerForm"));
 
 const UpdateCustomerModal = (props) => {
+  const isSmallScreen = window.innerWidth <= 600;
+    const drawerWidth = isSmallScreen ? "90%" : "60%";
   const { updateCustomerModal, handleUpdateCustomerModal, ...formProps } = props;
-  console.log("dn",props.setEditingCustomer.name)
   return (
     <>
       <StyledDrawer
         title={props.setEditingCustomer.name}
-        width="60%"
+        width={drawerWidth}
         visible={props.updateCustomerModal}
         maskClosable={false}
         closable
         destroyOnClose
         maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}
-        style={{marginTop:"5rem"}}
+        style={{marginTop:"3rem"}}
         onClose={() => props.handleUpdateCustomerModal(false)}
         footer={null}
       >

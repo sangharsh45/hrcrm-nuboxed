@@ -2,14 +2,11 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { FormattedMessage } from "react-intl";
 import { bindActionCreators } from "redux";
-// import { updateOpportunity } from "../../../OpportunityAction";
+ import { updateOpportunity } from "../../../OpportunityAction";
 import { Button } from "antd";
 import { FlexContainer } from "../../../../../Components/UI/Layout";
 import {
-  Title,
-  SubTitle,
   TextInput,
-  Spacer
 } from "../../../../../Components/UI/Elements";
 class OpportunityOverviewEdit extends Component {
   constructor(props) {
@@ -19,11 +16,12 @@ class OpportunityOverviewEdit extends Component {
     };
   }
   handleUpdate = () => {
-    // this.props.updateOpportunity(
-    //   this.props.opportunity.opportunityId,
-    //   this.state.fields,
-    //   this.callback
-    // );
+    this.props.updateOpportunity(
+      this.state.fields,
+      this.props.opportunity.opportunityId,
+     
+       this.callback
+    );
   };
   callback = () => {
     this.props.toggleViewType();
@@ -58,8 +56,11 @@ class OpportunityOverviewEdit extends Component {
           <Button
             type="primary"
             Loading={updateOpportunityById}
-          // onClick={this.handleUpdate}
-          >
+            onClick={this.handleUpdate}
+            //  onClick={() => this.handleUpdate(this.props.opportunity.opportunityId)}
+  >
+          
+          
             <FormattedMessage
               id="app.save"
               defaultMessage="Save"
@@ -81,12 +82,12 @@ class OpportunityOverviewEdit extends Component {
 }
 
 const mapStateToProps = ({ opportunity }) => ({
-  // updateOpportunityById: opportunity.updateOpportunityById,
-  // updateOpportunityByIdFailure: opportunity.updateOpportunityByIdFailure
+  updateOpportunityById: opportunity.updateOpportunityById,
+  updateOpportunityByIdFailure: opportunity.updateOpportunityByIdFailure
 });
 const mapDispatchToProps = dispatch =>
   bindActionCreators({
-    // updateOpportunity 
+     updateOpportunity 
   }, dispatch);
 export default connect(
   mapStateToProps,

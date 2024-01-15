@@ -1,27 +1,33 @@
-import React, { Component } from "react";
+import React,{useEffect} from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { Button, Switch } from "antd";
+import { Button} from "antd";
 import { FormattedMessage } from "react-intl";
-import { Formik, Form, Field, FieldArray, FastField } from "formik";
-import * as Yup from "yup";
-import { Spacer } from "../../../Components/UI/Elements";
-import { FlexContainer } from "../../../Components/UI/Layout";
+import { Formik, Form, Field } from "formik";
 import { InputComponent } from "../../../Components/Forms/Formik/InputComponent";
+import { SelectComponent } from "../../../Components/Forms/Formik/SelectComponent";
 import { addAssessment } from "../AccessmentAction";
-import { TextareaComponent } from "../../../Components/Forms/Formik/TextareaComponent";
+import { getCourse } from "../../Course/CourseAction";
 
 function AccessmentForm(props) {
+  useEffect(()=>{
+props.getCourse();
+  },[]);
+
+ const courseNameopt =props.courseById.map((option) => ({
+    label: option.courseName || "",
+    value: option.courseId,
+  }));
+
   return (
     <>
       <Formik
         enableReinitialize
         initialValues={{
           assessmentName: "",
-          theme: "",
-          level: "",
-          url: "",
-          category: "",
+          courseId:"",
+          durationType:"",
+          duration:"",
           userId: props.userId,
           orgId: props.orgId,
         }}
@@ -42,93 +48,60 @@ function AccessmentForm(props) {
           ...rest
         }) => (
           <Form className="form-background">
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "space-evenly",
-                height: "100%",
-                width: "100%",
-                alignItems: "center",
-              }}
-            >
-              <div style={{ width: "16%" }}>
+            <div class="flex justify-evenly h-full w-full items-center">
+              <div class="w-[16%]">
                 <Field
                   isRequired
                   name="assessmentName"
                   type="text"
                   component={InputComponent}
-                  label={
-                    <FormattedMessage id="app.name" defaultMessage="Name" />
-                  }
+                  label={<FormattedMessage id="app.name" defaultMessage="Name" />}
                   isColumn
                   width={"100%"}
                   inlineLabel
                 />
               </div>
-              <div style={{ width: "16%" }}>
+              <div class="w-[16%]">
                 <Field
-                  name="theme"
-                  type="text"
-                  // label="URL"
-                  label={
-                    <FormattedMessage id="app.theme" defaultMessage="Theme" />
-                  }
+                  name="courseId"
+                  label={<FormattedMessage id="app.course" defaultMessage="course" />}
                   isColumn
                   width={"100%"}
-                  component={InputComponent}
+                  component={SelectComponent}
+                  options={Array.isArray(courseNameopt) ? courseNameopt : []}
                   inlineLabel
                 />
               </div>
-              <div style={{ width: "8%" }}>
+             <div class="w-[16%]">
                 <Field
-                  name="level"
-                  type="text"
-                  // label="Email"
-                  label={
-                    <FormattedMessage id="app.level" defaultMessage="Level" />
-                  }
-                  //isRequired
-                  isColumn
-                  width={"100%"}
-                  component={InputComponent}
-                  inlineLabel
+                   name="duration"
+                   label={<FormattedMessage
+                       id="app.timeperquestion"
+                       defaultMessage="Time per question"
+                     />}
+                   isColumn
+                   width={"100%"}
+                   component={InputComponent}
+                   inlineLabel
                 />
               </div>
-              <div style={{ width: "16%" }}>
+              <div class="w-[8%]">
                 <Field
-                  name="category"
-                  type="text"
-                  // label="URL"
+                  name="durationType"
                   label={
                     <FormattedMessage
-                      id="app.category"
-                      defaultMessage="Category"
+                      id="app.durationtype"
+                      defaultMessage="Duration Type"
                     />
                   }
                   isColumn
                   width={"100%"}
-                  component={InputComponent}
+                  options={["secs","mins"]}
+                  component={SelectComponent}
                   inlineLabel
                 />
               </div>
-              <div style={{ width: "8%" }}>
-                <Field
-                  name="duration"
-                  type="text"
-                  // label="URL"
-                  label={
-                    <FormattedMessage
-                      id="app.duration"
-                      defaultMessage="Duration"
-                    />
-                  }
-                  isColumn
-                  width={"100%"}
-                  component={InputComponent}
-                  inlineLabel
-                />
-              </div>
-              <div style={{ width: "0%" }}>
+              <div>
               <Button
                 type="primary"
                 htmlType="submit"
@@ -138,8 +111,6 @@ function AccessmentForm(props) {
               </Button>
             </div>
             </div>
-
-           
           </Form>
         )}
       </Formik>
@@ -147,16 +118,18 @@ function AccessmentForm(props) {
   );
 }
 
-const mapStateToProps = ({ auth, assessment }) => ({
+const mapStateToProps = ({ auth, assessment,course }) => ({
   addingAssessment: assessment.addingAssessment,
   userId: auth.userDetails.userId,
   orgId: auth.userDetails.organizationId,
+  courseById: course.courseById,
 });
 
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
       addAssessment,
+      getCourse
     },
     dispatch
   );

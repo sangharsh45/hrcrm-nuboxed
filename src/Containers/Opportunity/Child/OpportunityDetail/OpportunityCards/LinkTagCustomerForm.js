@@ -1,18 +1,12 @@
-import React, { Component, useMemo } from "react";
+import React, { Component,  } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { FormattedMessage } from "react-intl";
 import { Button } from "antd";
 import {linktagCustomer} from "../../../OpportunityAction";
-import { Formik, Form, Field, FieldArray, FastField } from "formik";
-import * as Yup from "yup";
-
+import { Formik, Form, Field,  } from "formik";
 import { getCustomerListByUserId } from "../../../../Customer/CustomerAction";
 import { FlexContainer } from "../../../../../Components/UI/Layout";
-
-
-
-import dayjs from "dayjs";
 import { SelectComponent } from "../../../../../Components/Forms/Formik/SelectComponent";
 
 /**

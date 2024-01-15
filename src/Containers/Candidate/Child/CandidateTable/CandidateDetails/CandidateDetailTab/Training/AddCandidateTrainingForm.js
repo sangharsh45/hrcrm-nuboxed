@@ -1,19 +1,11 @@
-import React, { lazy, Suspense, Component } from "react";
+import React, {  Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { Button, Switch, Tooltip, Icon } from "antd";
-import { Formik, Form, Field, FieldArray, FastField } from "formik";
-import {
-  Spacer,
-  StyledLabel,
-} from "../../../../../../../Components/UI/Elements";
+import { Button,} from "antd";
+import { Formik, Form, Field, FastField } from "formik";
 import { InputComponent } from "../../../../../../../Components/Forms/Formik/InputComponent";
-import { TextareaComponent } from "../../../../../../../Components/Forms/Formik/TextareaComponent";
 import * as Yup from "yup";
-import { FlexContainer } from "../../../../../../../Components/UI/Layout";
 import DragableUpload from "../../../../../../../Components/Forms/Formik/DragableUpload";
-import Upload from "../../../../../../../Components/Forms/Formik/Upload";
-import { SelectComponent } from "../../../../../../../Components/Forms/Formik/SelectComponent";
 import SearchSelect from "../../../../../../../Components/Forms/Formik/SearchSelect";
 import { DatePicker } from "../../../../../../../Components/Forms/Formik/DatePicker";
 import { addCandidateTrainingDetails } from "../../../../../CandidateAction";
@@ -68,21 +60,13 @@ class AddCandidateTrainingForm extends Component {
             ...rest
           }) => (
               <Form className="form-background">
-                <div
-                  style={{
-                    display: "flex",
-                    width: "100%",
-                    height: "100%",
-                    justifyContent: "space-between",
-                  }}
+        <div class=" flex w-full h-full justify-between"
+              >
+                <div class=" w-[45%]"
                 >
-                  <div
-                    style={{
-                      width: "45%",
-                      }}
-                  >
-                    <FlexContainer justifyContent="space-between">
-                      <div style={{ width: "100%" }}>
+                    <div class=" flex justify-between" >
+                    <div class=" w-full"
+                >
                         <FastField
                           isRequired
                           name="courseName"                          
@@ -99,11 +83,10 @@ class AddCandidateTrainingForm extends Component {
                           inlineLabel
                           />
                       </div>
-                    </FlexContainer>
-
-                    <Spacer />
-                    <FlexContainer justifyContent="space-between">
-                      <div style={{ width: "60%" }}>                     
+                    </div>
+                    <div class=" flex justify-between mt-4" >
+              <div class=" w-[60%]"
+                >                   
                         <FastField
                           type="Organization"
                           name="organization"
@@ -120,7 +103,8 @@ class AddCandidateTrainingForm extends Component {
                           inlineLabel
                           />
                       </div>
-                      <div style={{ width: "30%" }}>                        
+                      <div class=" w-[30%]"
+                >                       
                         <FastField
                           name="grade"
                           label={
@@ -137,10 +121,10 @@ class AddCandidateTrainingForm extends Component {
                           style={{width:"100%"}}
                           />
                       </div>
-                    </FlexContainer>
-                    <Spacer />
-                    <FlexContainer justifyContent="space-between">
-                      <div style={{ width: "47%" }}>
+                    </div>
+                    <div class=" flex justify-between mt-4" >
+              <div class=" w-[47%]"
+                >
                         <Field
                           name="startDate"                        
                           label={
@@ -158,7 +142,8 @@ class AddCandidateTrainingForm extends Component {
                           />
                       </div>
 
-                      <div style={{ width: "47%" }}>
+                      <div class=" w-[47%]"
+                >
                         <Field
                           name="endDate"                          
                           label={
@@ -188,29 +173,22 @@ class AddCandidateTrainingForm extends Component {
                           inlineLabel
                           />
                       </div>
-                    </FlexContainer>
-                    <Spacer />
+                    </div>
+               
                   </div>
 
-                  <div
-                    style={{
-                      width: "50%",
-                      
-                    }}
-                  >
-                 <div
-                      style={{
-                        width: "100%",
-                        }}
-                    >
+                  <div class=" w-[50%]"
+                >
+                  <div class=" w-full"
+                >
                       <Field
                         name="documentId"
                         isRequired
                         component={DragableUpload}
                       />
-                      <Spacer />
-                      <FlexContainer justifyContent="space-between">
-                      <div style={{width:"47%"}}>
+                      <div class=" flex justify-between mt-4" >
+              <div class=" w-[47%]"
+                >
                       <Field
                         name="documentTitle"                        
                         label={
@@ -224,7 +202,8 @@ class AddCandidateTrainingForm extends Component {
                         component={InputComponent}
                         />
                         </div>
-                      <div style={{width:"47%"}}>
+                        <div class=" w-[47%]"
+                >
                       <Field
                         name="documentTypeId"
                         isColumnWithoutNoCreate
@@ -241,17 +220,11 @@ class AddCandidateTrainingForm extends Component {
                         inlineLabel
                       />
                       </div>
-                      </FlexContainer>
-                      <Spacer/>
-                      
+                      </div>                      
                     </div>
-
-                    <Spacer />
-                <Spacer style={{ marginBottom: "0.9375em" }} />
                   </div>
                 </div>
-                <Spacer />
-                <FlexContainer justifyContent="flex-end">
+                <div class=" flex justify-end mt-4" >
                   <Button
                     htmlType="submit"
                     type="primary"
@@ -259,7 +232,7 @@ class AddCandidateTrainingForm extends Component {
                   >
                     <FormattedMessage id="app.submit" defaultMessage="Submit" />
                   </Button>
-                </FlexContainer>
+                </div>
               </Form>
             )}
         </Formik>

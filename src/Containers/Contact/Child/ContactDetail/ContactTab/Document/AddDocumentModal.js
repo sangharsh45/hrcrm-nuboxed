@@ -1,8 +1,8 @@
-import React, { lazy, Suspense, Component } from "react";
+import React, {  Suspense, Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { FormattedMessage } from "react-intl";
-import { Button } from "antd";
+import { Button,Switch } from "antd";
 import { Formik, Form, Field } from "formik";
 import { StyledDrawer } from "../../../../../../Components/UI/Antd";
 import { Spacer } from "../../../../../../Components/UI/Elements";
@@ -11,11 +11,13 @@ import { InputComponent } from "../../../../../../Components/Forms/Formik/InputC
 import { TextareaComponent } from "../../../../../../Components/Forms/Formik/TextareaComponent";
 import * as Yup from "yup";
 import {
+  StyledLabel,
+} from "../../../../../../Components/UI/Elements";
+import {
   handleDocumentUploadModal,
   addContactDocument,
   getContactDocument,
 } from "../../../../ContactAction";
-// import { getOppoStages, getLevels } from "../../Settings/SettingsAction";
 import DragableUpload from "../../../../../../Components/Forms/Formik/DragableUpload";
 
 const ButtonGroup = Button.Group;
@@ -28,6 +30,7 @@ class AddDocumentModal extends Component {
     this.state = {
       documentshare: false,
       approvalAbove: false,
+      contract:false,
       ownerAbove: "Specific",
       selectedownerAbove: "Specific",
       data: [1],
@@ -37,6 +40,9 @@ class AddDocumentModal extends Component {
     console.log(length);
     let length = this.state.data.length;
     this.setState({ data: [...this.state.data, length + 1] });
+  };
+  handleContract = (checked) => {
+    this.setState({ contract: checked });
   };
 
   handleChange = (checked) => {
@@ -63,9 +69,9 @@ class AddDocumentModal extends Component {
     );
   };
   callback = () => {
-    const { contact, getContactDocument, handleDocumentUploadModal } =
+    const { contactInVestDetail, getContactDocument, handleDocumentUploadModal } =
       this.props;
-    getContactDocument(contact.contactId);
+    getContactDocument(contactInVestDetail.contactId);
     handleDocumentUploadModal(false);
   };
   //   componentDidMount() {
@@ -114,9 +120,10 @@ class AddDocumentModal extends Component {
               // enableReinitialize
               initialValues={{
                 documentTypeId: "",
-                contactId: this.props.contact.contactId,
+                // contactId: this.props.contactInVestDetail.contactId,
                 documentTitle: "", //input
                 documentDescription: "",
+                // contract: this.state.contract ? "true" : "false",
                 // levelType:
                 //   this.state.approvalAbove === true ? "Above" : "Specific",
                 // type:
@@ -130,6 +137,7 @@ class AddDocumentModal extends Component {
                   // values.documentId,
                   {
                     ...values,
+                    // contract: this.state.contract ? "true" : "false",
                   },
                   this.callback
                 );
@@ -177,7 +185,18 @@ class AddDocumentModal extends Component {
                         value={values.documentId}
                         inlineLabel
                       />
+                          {/* <div class=" flex  mt-4">
+                        <StyledLabel>Contract</StyledLabel>
+                        <Switch
+                          style={{ width: "6.25em", marginLeft: "0.625em" }}
+                          onChange={this.handleContract}
+                          checked={this.state.contract}
+                          checkedChildren="Yes"
+                          unCheckedChildren="No"
+                        />
+                      </div> */}
                     </div>
+                
                     <div class=" h-full w-5/12">
                       <Field
                         name="documentTitle"
@@ -209,6 +228,7 @@ class AddDocumentModal extends Component {
                       />
                       <Spacer style={{ marginBottom: "0.9375em" }} />
                     </div>
+
                   </div>
 
                   <Spacer />

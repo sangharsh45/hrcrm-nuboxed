@@ -1,20 +1,19 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { Button, Divider, message } from "antd";
-import { MainWrapper, FlexContainer } from "../../../../Components/UI/Layout";
-import { TextInput, Title } from "../../../../Components/UI/Elements";
- import SingleRole from "./SingleRole";
+import { Button,Input } from "antd";
+import { MainWrapper, } from "../../../../Components/UI/Layout";
+import { TextInput, } from "../../../../Components/UI/Elements";
+ import { BundleLoader } from "../../../../Components/Placeholder";
 import {
     getTalentRoles,
     addTalentRoles,
+    ClearReducerDataOfRoleTalent,
+    searchRoleTalentName,
     updateTalentRoles,
     removeTalentRole
-//   updateDepartments,
 } from "./RoleAction";
 
-import axios from "axios";
-// import { base_url } from "../../../Config/Auth";
 import { Select } from "../../../../Components/UI/Elements";
 import SingleRoleTalent from "./SingleRoleTalent";
 const { Option } = Select;
@@ -27,6 +26,7 @@ class RoleTalent extends Component {
       isTextInputOpen: false,
       addingDepartment: false,
       roleType: "",
+      currentData: "",
       singleRole: "",
       userId:"",
       orgId:"",
@@ -35,6 +35,26 @@ class RoleTalent extends Component {
       editInd:true,
     };
   }
+  setCurrentData = (value) => {
+    this.setState({ currentData: value });
+  };
+  handleChangeDes = (e) => {
+    this.setState({ currentData: e.target.value });
+  
+    if (e.target.value.trim() === "") {
+      this.setState((prevState) => ({ pageNo: prevState.pageNo + 1 }));
+      this.props.getTalentRoles(this.props.orgId);
+      this.props.ClearReducerDataOfRoleTalent();
+    }
+  };
+  handleSearch = () => {
+    if (this.state.currentData.trim() !== "") {
+      // Perform the search
+      this.props.searchRoleTalentName(this.state.currentData);
+    } else {
+      console.error("Input is empty. Please provide a value.");
+    }
+  };
   toggleInput = () =>
     this.setState((prevState) => ({
       isTextInputOpen: !prevState.isTextInputOpen,
@@ -54,13 +74,13 @@ class RoleTalent extends Component {
     roles &&
     roles.some((element) => element.roleType == roleType);
 
-    if (exist) {
-      message.error(
-        "Can't create as another roleType exists with same name!"
-      );
-    } else {
+    // if (exist) {
+    //   message.error(
+    //     "Can't create as same Role exists!"
+    //   );
+    // } else {
         addTalentRoles(role, () => console.log("add role callback"));
-    }
+    // }
 
     this.setState({
       roleType: "",
@@ -105,11 +125,11 @@ class RoleTalent extends Component {
       linkedRoles
       // linkedRole,
     } = this.state;
-    if (fetchingTalentRoles) return <p>Loading ...</p>;
+    if (fetchingTalentRoles) return <BundleLoader/>;
     if (fetchingTalentRolesError) return <p>Error ...</p>;
     return (
       <>
-        <FlexContainer flexWrap="nowrap">
+        <div class =" flex flex-nowrap" >
           <MainWrapper
             style={{
               flexBasis: "100%",
@@ -118,10 +138,20 @@ class RoleTalent extends Component {
               color: "#FFFAFA",
             }}
           >
-            <FlexContainer flexDirection="column">
+                <div class=" flex w-[18vw]" >
+            <Input
+         placeholder="Search by Name"
+        style={{width:"100%",marginLeft:"0.5rem"}}
+            // suffix={suffix}
+            onPressEnter={this.handleSearch}  
+            onChange={this.handleChangeDes}
+            // value={currentData}
+          />
+            </div>
+            <div class=" flex flex-col" >
               {/* <Title style={{ padding: 8 }}>Designation</Title> */}
              <MainWrapper style={{ height: "30em", marginTop: "0.625em" }}>
-                {talentRoles.length &&
+                {talentRoles.length ? (
                   talentRoles.map((talentRole, i) => (
                     <SingleRoleTalent
                       key={i}
@@ -135,13 +165,15 @@ class RoleTalent extends Component {
                        handleUpdateTalentRole={this.handleUpdateTalentRole}
                       
                     />
-                  ))}
+                  ))
+                  ) : (
+                    <p>No Data Available</p>
+                  )}
               </MainWrapper> 
-            </FlexContainer>
+            </div>
             {isTextInputOpen ? (
-              <FlexContainer
-                alignItems="center"
-                style={{ marginLeft: "0.3125em", marginTop: "0.3125em" }}
+              <div class=" flex items-center ml-[0.3125em] mt-[0.3125em]"
+            
               >
                 <br />
                 <br />
@@ -169,11 +201,11 @@ class RoleTalent extends Component {
                 <Button type="primary" ghost onClick={this.toggleInput}>
                   Cancel
                 </Button>
-              </FlexContainer>
+              </div>
             ) : (
               <>
                 <br />
-                <FlexContainer justifyContent="flex-end">
+                <div class=" flex justify-end" >
                   <Button
                     type="primary"
                     ghost
@@ -183,13 +215,13 @@ class RoleTalent extends Component {
                   >
                     Add Type
                   </Button>
-                </FlexContainer>
+                </div>
               </>
             )}
           </MainWrapper>
      
    
-        </FlexContainer>
+        </div>
       </>
     );
   }
@@ -212,6 +244,8 @@ const mapDispatchToProps = (dispatch) =>
     {
         getTalentRoles,
         addTalentRoles,
+        ClearReducerDataOfRoleTalent,
+        searchRoleTalentName,
         updateTalentRoles,
          removeTalentRole,
        

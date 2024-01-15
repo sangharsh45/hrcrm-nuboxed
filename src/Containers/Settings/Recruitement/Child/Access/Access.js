@@ -1,12 +1,11 @@
 
 
-import React, { Component, lazy, PureComponent, Suspense, useEffect, useState } from "react";
+import React, { PureComponent, Suspense, } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { StyledTabs } from "../../../../../Components/UI/Antd";
 import { TabsWrapper } from "../../../../../Components/UI/Layout";
 import { getDepartmentList } from "../../../SettingsAction"
-import AccessForm from "./AccessForm";
 import DepartmentRole from "./DepartmentRole";
 
 const TabPane = StyledTabs.TabPane;
@@ -38,7 +37,7 @@ class Access extends PureComponent {
         console.log(this.state.departmentData.departmentId)
         return (
             <>
-                <TabsWrapper>
+                <TabsWrapper style={{height:"100vh",overflowY: "scroll", }}>
                     <StyledTabs type="card">
                         {departmentList.map((member, i) => {
                             return (

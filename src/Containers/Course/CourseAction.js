@@ -52,7 +52,7 @@ export const setCourseViewType = (viewType) => (dispatch) => {
       });
   };
 
-  export const getCourse = (userId) => (dispatch) => {
+  export const getCourse = () => (dispatch) => {
     dispatch({
      type: types.GET_COURSE_REQUEST,
    });
@@ -113,7 +113,7 @@ export const setCourseViewType = (viewType) => (dispatch) => {
 
 
 
-export const addTopic = (topic, cb) => (dispatch) => {
+export const addTopic = (topic,courseId, cb) => (dispatch) => {
   dispatch({ type: types.ADD_TOPIC_REQUEST });
 
   axios
@@ -124,6 +124,7 @@ export const addTopic = (topic, cb) => (dispatch) => {
     })
     .then((res) => {
       console.log(res);
+      dispatch(getTopics(courseId));
       dispatch({
         type: types.ADD_TOPIC_SUCCESS,
         payload: { ...topic, topicId: res.data },

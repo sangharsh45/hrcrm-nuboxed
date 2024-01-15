@@ -4,9 +4,6 @@ import { message } from "antd";
 import { base_url } from "../../Config/Auth";
 import { getTasksListByUserId } from "../Auth/AuthAction";
 
-
-
-
 export const setTaskViewType = (viewType) => (dispatch) => {
   dispatch({
     type: types.SET_TASK_VIEW_TYPE,
@@ -17,6 +14,13 @@ export const setTaskViewType = (viewType) => (dispatch) => {
 export const handleTaskNotesDrawerModal = (modalProps) => (dispatch) => {
   dispatch({
     type: types.HANDLE_TASK_NOTES_DRAWER_MODAL,
+    payload: modalProps,
+  });
+};
+
+export const handleTaskFeedbackDrawerModal = (modalProps) => (dispatch) => {
+  dispatch({
+    type: types.HANDLE_TASK_FEEDBACK_DRAWER_MODAL,
     payload: modalProps,
   });
 };
@@ -360,6 +364,7 @@ export const addTask = (task, cb) => (dispatch, getState) => {
     .then((res) => {
       message.success("Task has been added successfully!");
       console.log(res);
+      dispatch(getOpportunityRecord(userId));
       // dispatch(getTasksListByUserId(userId));
       dispatch(getTaskListRangeByUserId(employeeId,0));
       dispatch({
@@ -707,7 +712,8 @@ export const rejectPartner = (taskId, data) => (dispatch) => {
     });
 };
 
-export const approveTaskByTaskId = (taskId) => (dispatch, getState) => {
+export const approveTaskByTaskId = (taskId,employeeId) => (dispatch, getState) => {
+  const { employeeId } = getState("auth").auth.userDetails;
   dispatch({ type: types.APPROVE_TASK_BY_TASK_ID_REQUEST });
   axios
     .post(
@@ -720,7 +726,7 @@ export const approveTaskByTaskId = (taskId) => (dispatch, getState) => {
       }
     )
     .then((res) => {
-      // dispatch(getTasksListByUserId(userId));
+    //  dispatch(getAprrovalTaskTable(employeeId,0));
       console.log(res);
       dispatch({
         type: types.APPROVE_TASK_BY_TASK_ID_SUCCESS,
@@ -776,6 +782,13 @@ export const rejectTaskByTaskId = (taskId) => (dispatch, getState) => {
     payload: modalProps,
   });
 };
+export const handleDownloadTaskModal = (modalProps) => (dispatch) => {
+  dispatch({
+    type: types.HANDLE_DOWNLOAD_TASK_MODAL,
+    payload: modalProps,
+  });
+};
+
 export const setEditTask = (name) => (dispatch) => {
   dispatch({
     type: types.SET_TASK_EDIT,
@@ -979,17 +992,17 @@ export const addProjectTask = (data) => (dispatch) => {
 };
 
 
-export const linkTaskStatus = (data, taskId) => (
+export const linkTaskStatus = (taskId,data ) => (
   dispatch,
   getState
 ) => {
   // debugger;
-  const { employeeId } = getState("auth").auth.userDetails;
   dispatch({
     type: types.LINK_TASK_STATUS_REQUEST,
   });
   axios
-    .put(`${base_url}/task/completionstatus/${taskId}`, data, {
+    .put(`${base_url}/task/completionstatus/${taskId}`, 
+     { ...data }, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },
@@ -1131,4 +1144,175 @@ export const getAprrovalTaskTable = (employeeId,pageNo) => (dispatch) => {
      });
    });
    
+};
+
+export const handleTaskopenModal = (modalProps) => (dispatch) => {
+  dispatch({
+    type: types.HANDLE_TASK_OPEN_MODAL,
+    payload: modalProps,
+  });
+};
+
+export const getPermissionsListTask = () => (dispath) => {
+  dispath({ type: types.GET_PERMISSIONS_LIST_TASK_REQUEST });
+  axios
+    .get(`${base_url}/permission/type?type=${"task"}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      dispath({
+        type: types.GET_PERMISSIONS_LIST_TASK_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      dispath({
+        type: types.GET_PERMISSIONS_LIST_TASK_FAILURE,
+        payload: err,
+      });
+    });
+};
+
+
+export const shareTaskPermission = (data, userId, a) => (
+  dispatch,
+  getState
+) => {
+  // const { userId } = getState("auth").auth.userDetails;
+  dispatch({
+    type: types.ADD_SHARE_TASK_PERMISSION_REQUEST,
+  });
+
+  axios
+    .post(`${base_url}/permission/details`, data, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      if (a === "All") {
+        // dispatch(getAllCustomerListByUserId());
+        // dispatch(getRecords(userId));
+      } else {
+        // dispatch(getCustomerListByUserId(userId));
+        // dispatch(getRecords(userId));
+      }
+      dispatch({
+        type: types.ADD_SHARE_TASK_PERMISSION_SUCCESS,
+        payload: res.data,
+      });
+      // cb && cb("success");
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.ADD_SHARE_TASK_PERMISSION_FAILURE,
+        payload: err,
+      });
+      // cb && cb("failure");
+    });
+};
+
+export const getGrantTask = (employeeId) => (dispath) => {
+  dispath({ type: types.GET_GRANTT_TASK_REQUEST });
+  axios
+    .get(`${base_url}/task/employee/${employeeId} `, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      dispath({
+        type: types.GET_GRANTT_TASK_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      dispath({
+        type: types.GET_GRANTT_TASK_FAILURE,
+        payload: err,
+      });
+    });
+} 
+
+
+export const getTaskDocument = (taskId) => (dispatch) => {
+  dispatch({ type: types.GET_TASK_DOCUMENTS_REQUEST });
+  axios
+    .get(`${base_url}/task/document/${taskId}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.GET_TASK_DOCUMENTS_SUCCESS,
+        payload: res.data,
+      });
+      // cb();
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.GET_TASK_DOCUMENTS_FAILURE,
+        payload: err,
+      });
+    });
+};
+
+export const deleteDocumentTask = (documentId, employeeId) => (dispatch, getState) => {
+  console.log("inside deletetask", documentId);
+  dispatch({
+    type: types.DELETE_DOCUMENT_TASK_REQUEST,
+  });
+
+  axios
+    .delete(`${base_url}/task/document/${documentId}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      dispatch({
+        type: types.DELETE_DOCUMENT_TASK_SUCCESS,
+        payload: documentId,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.DELETE_DOCUMENT_TASK_FAILURE,
+        payload: err,
+      });
+    });
+};
+
+export const getOpportunityRecord = (userId) => (dispatch) => {
+  dispatch({
+    type: types.GET_OPPORTUNITY_RECORD_REQUEST,
+  });
+  axios
+    .get(`${base_url}/candidate/record/today/${userId}`,{
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.GET_OPPORTUNITY_RECORD_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.GET_OPPORTUNITY_RECORD_FAILURE,
+        payload: err,
+      });
+    });
 };

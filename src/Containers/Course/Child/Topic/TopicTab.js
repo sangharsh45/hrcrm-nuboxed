@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component,lazy,Suspense } from "react";
 import { connect } from "react-redux";
 import EditIcon from "@mui/icons-material/Edit";
 import { FormattedMessage } from "react-intl";
@@ -10,17 +10,13 @@ import { addTopic,
    } from "../../CourseAction";
 import {
   MainWrapper,
-  Spacer,
   TextInput,
 } from "../../../../Components/UI/Elements";
-import { StyledTabs } from "../../../../Components/UI/Antd";
-import { Select } from "../../../../Components/UI/Elements";
 import SingleTopic from "./SingleTopic";
-import AddTestModal from "./AddTestModal";
 import Upload from "../../../../Components/Forms/Formik/Upload";
-const { Option } = Select;
 
-const TabPane = StyledTabs.TabPane;
+const AddTestModal =lazy(()=>import("./AddTestModal"));
+
 class TopicTab extends Component {
   constructor(props) {
     super(props);
@@ -34,18 +30,6 @@ class TopicTab extends Component {
   componentDidMount() {
     this.props.getTopics(this.props.courseId);
  }
-
-  // handleCallBack = (status) => {
-  //   if (status === "Success") {
-  //     const {
-  //         currentProcess: { courseId },
-  //     } = this.state;
-
-  //     this.props.getTopics(this.props.course.courseId);
-  //   } else {
-  //     alert("error");
-  //   }
-  // };
 
   handleSetImage = (imageId) => {
     this.setState({imageId : imageId });
@@ -97,9 +81,19 @@ class TopicTab extends Component {
   render() {
     return (
       <>
-        <StageWrapper>
-          <MainWrapper>
-             {this.props.topicsData.map((topicsData, i) => ( 
+       <div class="flex flex-no-wrap" >
+          <MainWrapper
+            style={{
+              flexBasis: "100%",
+              overflow: "auto",
+              color: "#FFFAFA",
+            }}
+          >
+         
+            <div class=" flex flex-col" >
+             
+              <MainWrapper style={{ height: "30em", marginTop: "0.625em" }}>
+              {this.props.topicsData.map((topicsData, i) => ( 
              <SingleTopic
                 key={i}
                 stageValue1={this.state.topics}
@@ -110,21 +104,19 @@ class TopicTab extends Component {
                 id="style-3"
               /> 
             ))}
-    </MainWrapper>
-        </StageWrapper>
-            <Spacer />
+              </MainWrapper>
+            </div>
             {this.state.isTextInputOpen ? (
-              <div class=" flex justify-center"
-              >
-                <div class=" flex justify-between" >
-                  <TextInput
+              <div class=" flex items-center ml-[0.3125em] mt-[0.3125em]">
+                   <TextInput
                     placeholder="Name"
                     name="topics"
                     value={this.state.topics}
                     onChange={this.handleChange}
                     width={"20%"}
                   />
-                     <div
+                
+                <div
                  name="imageId"
                 >
                   
@@ -132,44 +124,48 @@ class TopicTab extends Component {
                   handleSetImage={this.handleSetImage}
                   />
                 </div>
-                </div>
+                
+                &nbsp;
                 <Button
                   type="primary"
                   htmlType="submit"
                   onClick={this.handleAddTopic}
                 >
-                  {/* Save */}
+                  
                   <FormattedMessage id="app.save" defaultMessage="Save" />
                 </Button>
-
+                &nbsp;
                 <Button type="primary" ghost onClick={this.toggleInput}>
-                  {/* Cancel */}
                   <FormattedMessage id="app.cancel" defaultMessage="Cancel" />
                 </Button>
               </div>
             ) : (
               <>
-                <div class=" flex justify-end" >
-                  <Button
+              <div class=" flex justify-end" >
+                <Button
                     type="primary"
                     ghost
                     htmlType="button"
                     onClick={this.toggleInput}
                   >
-                    {/* Add Stage */}
                     <FormattedMessage
                       id="app.addtopic"
                       defaultMessage="Add Topic"
                     />
                   </Button>
                 </div>
+               
               </>
             )}
-      
+          </MainWrapper>
+         
+        </div>
+        <Suspense fallback={"Loading"}> 
                 <AddTestModal
         handleTestDrawerModal={this.props.handleTestDrawerModal}
         addTestDrawerModal={this.props.addTestDrawerModal}
         />
+        </Suspense>
       </>
     );
   }

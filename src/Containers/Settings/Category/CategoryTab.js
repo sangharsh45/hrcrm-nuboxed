@@ -1,42 +1,57 @@
-import React, { lazy, Suspense, useState, useEffect, useMemo } from "react";
+import React, { Suspense, useState} from "react";
 import { bindActionCreators } from "redux";
-import { FormattedMessage } from "react-intl";
 import { StyledTabs } from "../../../Components/UI/Antd";
-import { TabsWrapper } from "../../../Components/UI/Layout";
-import { MainWrapper, FlexContainer } from "../../../Components/UI/Layout";
+import {  FlexContainer } from "../../../Components/UI/Layout";
 import { connect } from "react-redux";
 import CategoryActivity from "./CategoryActivity";
 import Category from "./Category";
 import CategoryActionLeft from "./CategoryActionLeft";
 import CategoryActionRight from "./CategoryActionRight";
 import OthersTab from "./OthersTab";
-import AssessmentTab from "./Assessment/AssessmentTab";
+import CustomerSectorTab from "./CustomerSectorTab";
+import InvestorTab from "./InvestorTab/InvestorTab";
+import ModuleTab from "./Module/ModuleTab";
 const TabPane = StyledTabs.TabPane;
 
 function CategoryTab (props) {
 
         const name = [
+              {
+            rulesName: "Module",
+            ruleId: "1",
+            component:<ModuleTab/>,
+          },
 
           {
-            rulesName: "Sector",
-            ruleId: "1",
+            rulesName: "Role",
+            ruleId: "2",
             component:<Category/>,
           },
             {
               rulesName: "Activity",
-              ruleId: "2",
+              ruleId: "3",
               component:   <CategoryActivity/>,
             },
             {
-              rulesName: "Others",
-              ruleId: "3",
+              rulesName: "Corporate",
+              ruleId: "4",
               component: <OthersTab />,
             },
             {
-              rulesName: "Assessment",
-              ruleId: "4",
-              component:<AssessmentTab/>,
+              rulesName: "Customer",
+              ruleId: "5",
+              component:<CustomerSectorTab />,
             },
+            {
+              rulesName: "Investor",
+              ruleId: "6",
+              component:<InvestorTab />,
+            },
+            // {
+            //   rulesName: "Assessment",
+            //   ruleId: "4",
+            //   component:<AssessmentTab/>,
+            // },
 
           ];
           const [rules, setRules] = useState(name);
@@ -46,22 +61,22 @@ function CategoryTab (props) {
           };
         return (
           <div>
-          <FlexContainer>
+          <div>
             <Suspense fallback={"Loading..."}>
               <FlexContainer flexWrap="no-wrap" style={{ width: "100%" }}>
-                <div style={{ width: "20%" }}>
+                <div class=" w-[20%]" >
                   <CategoryActionLeft
                     handleRuleClick={handleRuleClick}
                     rules={rules}
                     currentRulesOpen={currentRulesOpen}
                   />
                 </div>
-                <div style={{ width: "80%" }}>
+                <div class=" w-[80%]" >
                   <CategoryActionRight current={currentRulesOpen} />
                 </div>
               </FlexContainer>
             </Suspense>
-          </FlexContainer>
+          </div>
         </div>
       );
     }

@@ -1,9 +1,10 @@
-import React, { Component } from "react";
+import React, { Component,lazy } from "react";
 import { connect } from "react-redux";
-import { Button, message } from "antd";
+import { Button, } from "antd";
 import { bindActionCreators } from "redux";
 import { StyledSteps } from "../../../../Components/UI/Antd";
-import FirstCandidateBillablePage from "./FirstCandidateBillablePage";
+import { FormattedMessage } from "react-intl";
+const FirstCandidateBillablePage = lazy(()=>import("./FirstCandidateBillablePage"));
 
 
 
@@ -62,14 +63,20 @@ handleProjectId = (e) => {
   
     const steps = [
       {
-        title: "First",
+        title:  <FormattedMessage
+        id="app.first"
+        defaultMessage="First"
+      />,
         content: <FirstCandidateBillablePage
     
         />,
        
       },
       {
-        title: "Second",
+        title:  <FormattedMessage
+        id="app.second"
+        defaultMessage="Second"
+      />,
         // content:<SecondInvoicePage/>,
         // <SecondStep projectDetailsId={this.props.projectDetailsId} />,
       },

@@ -4,14 +4,9 @@ import { bindActionCreators } from "redux";
 import { Button } from "antd";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
-import { Spacer } from "../../../../Components/UI/Elements";
 import { InputComponent } from "../../../../Components/Forms/Formik/InputComponent";
 import { addWebsiteCredentials } from "../Website/WebsiteAction";
-// import { addEmailCredentialsForAdmin } from "../EmailAction";
-import { FlexContainer } from "../../../../Components/UI/Layout";
-/**
- * yup validation scheme for creating a Team
- */
+
 const EmailSchema = Yup.object().shape({
   email: Yup.string()
     .email("Enter a valid Email")
@@ -73,7 +68,7 @@ class WebsiteForm extends Component {
                       style={{ flexBasis: "80%" }}
                       width={"100%"}
                     />
-                    <Spacer />
+                    
                     {/* <Field
                       type="password"
                       isRequired
@@ -84,7 +79,7 @@ class WebsiteForm extends Component {
                       component={InputComponent}
                       style={{ flexBasis: "80%" }}
                     /> */}
-                    <Spacer />
+                   
                     {/* <Field
                   name="serverType"
                   label="Server Type"
@@ -122,7 +117,7 @@ class WebsiteForm extends Component {
                     >
                       Example for other webmail host - mail.example.com{" "}
                     </span> */}
-                    <Spacer />
+                  
                     {/* <Field
                       name="port"
                       label="Port"
@@ -132,10 +127,10 @@ class WebsiteForm extends Component {
                       component={InputComponent}
                       style={{ flexBasis: "80%" }}
                     /> */}
-                    <Spacer />
+                
                   </div>
                 </div>
-                <FlexContainer justifyContent="flex-end">
+                <div class=" flex justify-end" >
                   <Button
                     type="primary"
                     htmlType="submit"
@@ -144,7 +139,7 @@ class WebsiteForm extends Component {
                   >
                     Create
                 </Button>
-                </FlexContainer>
+                </div>
               </Form>
             )}
         </Formik>

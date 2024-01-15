@@ -2,14 +2,13 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { base_url } from "../../../../../../Config/Auth";
-import { BundleLoader } from "../../../../../../Components/Placeholder";
 import {
   StyledTable,
   StyledPopconfirm,
 } from "../../../../../../Components/UI/Antd";
 import DownloadIcon from '@mui/icons-material/Download';
 import { FormattedMessage } from "react-intl";
-import { DeleteOutlined, DownloadOutlined } from "@ant-design/icons";
+import { DeleteOutlined } from "@ant-design/icons";
 
 class LinkedInvoice extends Component {
   componentDidMount() {

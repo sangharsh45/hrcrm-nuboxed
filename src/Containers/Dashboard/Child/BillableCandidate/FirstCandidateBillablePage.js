@@ -1,19 +1,15 @@
 import { Field, Form, Formik } from 'formik'
-import React, {useEffect,useState} from 'react'
-import moment from "moment";
+import React, {useEffect,useState,lazy} from 'react'
 import * as Yup from "yup";
 import { FormattedMessage } from "react-intl";
  import {getCandidatesBillableAmount} from "../../DashboardAction"
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { SelectComponent } from "../../../../Components/Forms/Formik/SelectComponent";
-import { Button, Checkbox, Divider, Select } from 'antd';
+import { Button, Checkbox, } from 'antd';
 import { MainWrapper } from "../../../../Components/UI/Elements";
-// import { SelectComponent } from "../../../../AddressFieldArrayComponents/Forms/Formik/SelectComponent";
-import { Spacer } from "../../../../Components/UI/Elements";
 import { InputComponent } from '../../../../Components/Forms/Formik/InputComponent'
-import { dashboardReducer } from '../../DashboardReducer';
-import BillableCandidateListTable from './BillableCandidateListTable';
+const BillableCandidateListTable = lazy(()=>import("./BillableCandidateListTable"));
 
 // yup validation scheme for creating a account
 const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
@@ -121,8 +117,8 @@ onSubmit={(values, { resetForm }) => {
                         }}
                       />
                     </div>
-                    <Spacer />
-                    <div class=" w-2/5">
+                  
+                    <div class=" w-2/5 mt-2">
                     <Field
                         isRequired
                         name="year"

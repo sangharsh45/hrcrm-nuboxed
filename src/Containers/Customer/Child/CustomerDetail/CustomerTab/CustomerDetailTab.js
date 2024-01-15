@@ -3,17 +3,12 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Tooltip } from "antd";
 import ReceiptIcon from '@mui/icons-material/Receipt';
-import TransferWithinAStationIcon from '@mui/icons-material/TransferWithinAStation';
 import { FormattedMessage } from "react-intl";
 import LightbulbIcon from '@mui/icons-material/Lightbulb';
 import { PlusOutlined } from "@ant-design/icons";
-import NoteAltIcon from "@mui/icons-material/NoteAlt";
 import { StyledTabs } from "../../../../../Components/UI/Antd";
 import { TabsWrapper } from "../../../../../Components/UI/Layout";
-import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
 import InsertDriveFileIcon from '@mui/icons-material/InsertDriveFile';
-import MicIcon from '@mui/icons-material/Mic';
-import PieChartIcon from '@mui/icons-material/PieChart';
 import ContactsIcon from '@mui/icons-material/Contacts';
 import {
   handleDocumentUploadModal,
@@ -22,19 +17,17 @@ import {
   handleCustomerOpportunityModal,
   handleCustomerProjectDrawer,
   handleCustomerContactModal,
-  //handleCustomerCommercialsModal,
   handleRecruitModal,
   handlefileRecruitModal,
   handleTagProfileModal,
   handleInvoiceModal,
+  handleCallActivityModal,
   handleCustomerReactSpeechModal,
 } from "../../../CustomerAction";
 import ReactCustomerSpeechModal from "../ReactCustomerSpeechModal";
-import CommercialsForm from "./Commercials/CommercialsForm";
-import RecruitmentFileTable from "./Recruitment/Child/RecruitmentFileTable";
-import InitiativeForm from "./Initiative/InitiativeForm";
 import AddProjectDrawer from "./ProjectTab/AddProjectDrawer";
-import LinkedProject from "./ProjectTab/LinkedProject";
+import AddCustomerActivityModal from "../AddCustomerActivityModal";
+import CustomerActivityTable from "../CustomerActivityTable";
 const LinkedDocuments = lazy(() => import("./Document/LinkedDocuments"));
 const AddDocumentModal = lazy(() => import("./Document/AddDocumentModal"));
 const AddCustomerContactModal = lazy(() =>
@@ -43,25 +36,17 @@ const AddCustomerContactModal = lazy(() =>
 const AddCustomerOpportunityModal = lazy(() =>
   import("./OpportunityTab/AddCustomerOpportunityModal")
 );
-const LinkedNotes = lazy(() => import("./Notes/LinkedNotes"));
 const LinkedOpportunity = lazy(() =>
   import("./OpportunityTab/LinkedOpportunity")
 );
 const LinkedContact = lazy(() => import("./ContactTab/LinkedContact"));
-const RecruitmentTable = lazy(() => import("./Recruitment/RecruitmentTable"));
-const RecruitProJumpstart = lazy(() =>
-  import("../../RecruitProJumpstart/RecruitProJumpstart")
-);
-const SummaryTable = lazy(() => import("./Recruitment/Child/SummaryTable"));
 const AddRecruitModal = lazy(() => import("./Recruitment/AddRecruitModal"));
-const AddFileRecruitModal = lazy(() =>
-  import("./Recruitment/Child/AddFileRecruitModal")
-);
 const AddTagProfileModal = lazy(() =>
   import("./Recruitment/AddTagProfileModal")
 );
 const AddInvoiceModal = lazy(() => import("./Invoice/AddInvoiceModal"));
 const LinkedInvoice = lazy(() => import("./Invoice/LinkedInvoice"));
+
 const TabPane = StyledTabs.TabPane;
 function handleRefreshPage() {
   window.location.reload();
@@ -96,9 +81,9 @@ class ContactDetailTab extends Component {
     this.setState({ file: true });
   };
 
-  componentDidMount() {
-    this.props.getContactListByCustomerId(this.props.customer.customerId);
-  }
+  // componentDidMount() {
+  //   this.props.getContactListByCustomerId(this.props.customer.customerId);
+  // }
 
   componentWillUnmount() {
     this.setState({ breadCumb: false });
@@ -120,7 +105,6 @@ class ContactDetailTab extends Component {
       handleCustomerReactSpeechModal,
       addCustomerSpeechModal,
       handleCustomerContactModal,
-      // ComhandleCustomermercialsModal,
       addCustomerContactModal,
       handleCustomerOpportunityModal,
       handleCustomerProjectDrawer,
@@ -128,9 +112,10 @@ class ContactDetailTab extends Component {
       addCustomerProjectDrawer,
       getContactListByCustomerId,
       getOpportunityListByCustomerId,
-      handleTagProfileModal,
       addInvoiceModal,
+      callActivityModal,
       handleInvoiceModal,
+      handleCallActivityModal,
     } = this.props;
 
     return (
@@ -184,7 +169,7 @@ class ContactDetailTab extends Component {
             >
               <Suspense fallback={"Loading ..."}>
                 {" "}
-                <LinkedOpportunity />
+                <LinkedOpportunity customer={this.props.customer} />
               </Suspense>
             </TabPane>
             <TabPane
@@ -236,102 +221,12 @@ class ContactDetailTab extends Component {
             >
               <Suspense fallback={"Loading ..."}>
                 {" "}
-                <LinkedContact />
+                <LinkedContact  defaultCustomers={[{ label: name, value: customerId }]}
+            customerId={{ value: customerId }} />
               </Suspense>
             </TabPane>
-            <TabPane
-              tab={
-                <>
-                  <span>
-                    <TransferWithinAStationIcon style={{fontSize:"1.1rem"}}/>
-                    <span class=" ml-1">
-                    <FormattedMessage
-                        id="app.recruitPro"
-                        defaultMessage="RecruitPro"
-                      />
-                      {/* RecruitPro */}
-                    </span>
-                  </span>
 
-                  {activeKey === "3" && (
-                    <>
-                      <>
-                        <Tooltip //title="Create"
-                          title={
-                            <FormattedMessage
-                              id="app.addrequirement"
-                              defaultMessage="Add Requirement"
-                            />
-                          }
-                        ></Tooltip>
-                        {/* <Tooltip //title="Tag Position"
-                          title={<FormattedMessage
-                            id="app.tagposition"
-                            defaultMessage="Tag Position"
-                          />}
-
-                        >
-                          <Icon
-                            type="link"
-                            onClick={() => {
-                              this.handlepartnerPopoverVisibleChange();
-                              handleTagProfileModal(true);
-                            }}
-                            size="0.875em"
-                            style={{
-                              marginLeft: "-0.31em",
-                              verticalAlign: "center",
-                            }}
-                          />
-                        </Tooltip> */}
-
-                        <Tooltip
-                          title={
-                            <FormattedMessage
-                              id="app.summary"
-                              defaultMessage="Summary"
-                            />
-                          }
-                        >
-                          <span
-                            type="area-chart"
-                            // tooltipTitle="Summary"
-                            onClick={() => {
-                              this.handleRecriutmentdashboard();
-                            }}
-                            size="0.875em"
-                          >
-                            <PieChartIcon 
-                            // icon={solid("chart-pie")}
-                             />
-                          </span>
-                        </Tooltip>
-                      </>
-                    </>
-                  )}
-                </>
-              }
-              key="3"
-            >
-              {this.state.recriutmentdashboard ? (
-                <Suspense fallback={"Loading ..."}>
-                  {" "}
-                  <RecruitProJumpstart />
-                  <SummaryTable />
-                </Suspense>
-              ) : this.state.file ? (
-                <Suspense fallback={"Loading ..."}>
-                  {" "}
-                  <RecruitmentFileTable />
-                </Suspense>
-              ) : (
-                <Suspense fallback={"Loading ..."}>
-                  {" "}
-                  <RecruitmentTable />
-                </Suspense>
-              )}
-            </TabPane>
-            <TabPane
+            {/* <TabPane
               tab={
                 <>
                   <MonetizationOnIcon 
@@ -343,7 +238,7 @@ class ContactDetailTab extends Component {
               key="9"
             >
               <CommercialsForm />
-            </TabPane>
+            </TabPane> */}
 
             <TabPane
               tab={
@@ -387,7 +282,7 @@ class ContactDetailTab extends Component {
                 <LinkedDocuments />
               </Suspense>
             </TabPane>
-            <TabPane
+            {/* <TabPane
               tab={
                 <>
                   <span>
@@ -417,7 +312,7 @@ class ContactDetailTab extends Component {
                 {" "}
                 <LinkedNotes />
               </Suspense>
-            </TabPane>
+            </TabPane> */}
             <TabPane
               tab={
                 <>
@@ -433,7 +328,7 @@ class ContactDetailTab extends Component {
                   </span>
                   {activeKey === "7" && (
                     <>
-                      <PlusOutlined
+                      {/* <PlusOutlined
                         type="plus"
                         title={
                           <FormattedMessage
@@ -447,7 +342,7 @@ class ContactDetailTab extends Component {
                           marginLeft: "0.3125em",
                           verticalAlign: "center",
                         }}
-                      />
+                      /> */}
                     </>
                   )}
                 </>
@@ -462,70 +357,49 @@ class ContactDetailTab extends Component {
             <TabPane
               tab={
                 <>
-                  <i class="fas fa-print" style={{fontSize:"1.1rem"}}></i>
+                  <ReceiptIcon style={{fontSize:"1.1rem"}}/>
                   <span class=" ml-1">
-                    <FormattedMessage
-                      id="app.initiatives"
-                      defaultMessage="Initiatives"
-                    />
-                  </span>
-                </>
-              }
-              key="8"
-            >
-              <InitiativeForm />
-            </TabPane>
-
-            <TabPane
-              tab={
-                <>
-                  <span>
-                    <i class="far fa-lightbulb" style={{fontSize:"1.1rem"}}></i>
-                    <span class=" ml-1">
+                    {
                       <FormattedMessage
-                        id="app.project"
-                        defaultMessage="Project"
+                        id="app.activity"
+                        defaultMessage="Activity"
                       />
-                    </span>
+                    }
+                    {/* Documents */}
                   </span>
-                  {/* {activeKey === "10" && (
+                  {activeKey === "8" && (
                     <>
-                      <Tooltip 
+                      <PlusOutlined
+                        type="plus"
                         title={
                           <FormattedMessage
                             id="app.create"
                             defaultMessage="Create"
                           />
                         }
-                      >
-                        
-                          <PlusOutlined
-                            type="plus"
-                           
-                            tooltiptitle={
-                              <FormattedMessage
-                                id="app.Create"
-                                defaultMessage="Create"
-                              />
-                            }
-                            onClick={() => {
-                              handleCustomerProjectDrawer(true);
-                            }}
-                            size="0.875em"
-                          />
-                    
-                      </Tooltip>
+                        onClick={() => handleCallActivityModal(true)}
+                        size="0.875em"
+                        style={{
+                          marginLeft: "0.3125em",
+                          verticalAlign: "center",
+                        }}
+                      />
                     </>
-                  )} */}
+                  )}
+                
                 </>
               }
-              key="10"
+              key="8"
             >
               <Suspense fallback={"Loading ..."}>
                 {" "}
-                <LinkedProject />
+                <CustomerActivityTable
+
+                 customer={this.props.customer}
+                />
               </Suspense>
             </TabPane>
+           
           </StyledTabs>
         </TabsWrapper>
         <Suspense fallback={null}>
@@ -573,6 +447,15 @@ class ContactDetailTab extends Component {
             addCustomerProjectDrawer={addCustomerProjectDrawer}
             handleCustomerProjectDrawer={handleCustomerProjectDrawer}
           />
+          
+          <AddCustomerActivityModal
+           defaultCustomers={[{ label: name, value: customerId }]}
+            customerId={{ value: customerId }}
+          customer={this.props.customer}
+          callback={() => getContactListByCustomerId(customerId)}
+            callActivityModal={callActivityModal}
+            handleCallActivityModal={handleCallActivityModal}
+          /> 
         </Suspense>
       </>
     );
@@ -592,6 +475,7 @@ const mapStateToProps = ({ auth, customer, contact, opportunity }) => ({
   addFileRecruitModal: customer.addFileRecruitModal,
   addTagProfileModal: customer.addTagProfileModal,
   addInvoiceModal: customer.addInvoiceModal,
+  callActivityModal:customer.callActivityModal,
 });
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
@@ -605,6 +489,7 @@ const mapDispatchToProps = (dispatch) =>
       handlefileRecruitModal,
       handleTagProfileModal,
       handleInvoiceModal,
+      handleCallActivityModal,
       handleCustomerProjectDrawer,
       handleCustomerReactSpeechModal,
       //handleCustomerCommercialsModal,

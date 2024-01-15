@@ -2,10 +2,8 @@ import { Button, Tooltip } from 'antd';
 import React from 'react';
 import { connect } from "react-redux";
 import styled from 'styled-components';
-import RecordVoiceOverIcon from '@mui/icons-material/RecordVoiceOver';
 import { bindActionCreators } from "redux";
 import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
-import { FlexContainer } from '../UI/Layout';
 import RotateRightIcon from '@mui/icons-material/RotateRight';
 import StopCircleIcon from '@mui/icons-material/StopCircle';
 import PlayCircleFilledIcon from '@mui/icons-material/PlayCircleFilled';
@@ -89,7 +87,7 @@ const Dictaphone = (props) => {
         </textarea>
       {/* <p>{transcript}</p> */}
       </div>
-      <FlexContainer justifyContent="flex-end">
+      <div class=" flex justify-end" >
       <Button 
       type='primary'
       htmlType='submit'
@@ -97,7 +95,7 @@ const Dictaphone = (props) => {
       >
         Submit
       </Button>
-      </FlexContainer>
+      </div>
     </div>
   );
 };

@@ -4,19 +4,13 @@ import { SearchOutlined } from '@ant-design/icons';
 import Highlighter from 'react-highlight-words';
 import {
   MultiAvatar,
-  Spacer,
-  SubTitle,
-  StyledLabel,
 } from "../../../../../../../Components/UI/Elements";
-import { Tooltip, Icon,Input,Button, Table,  InputNumber, Popconfirm, Form, Typography  } from "antd";
+import { Tooltip,Input,Button, } from "antd";
 import { StyledTable } from "../../../../../../../Components/UI/Antd";
 import { getRemark ,handleUpdateRemarkModal,setEditRemark} from "../../../../../OpportunityAction";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import UpdateRemarkModal from "../Child/UpdateRemarkModal"
-import { BundleLoader } from "../../../../../../../Components/Placeholder";
 import { FormattedMessage } from "react-intl";
-import { EditOutlined } from "@ant-design/icons";
 function onChange(pagination, filters, sorter) {
   console.log("params", pagination, filters, sorter);
 }

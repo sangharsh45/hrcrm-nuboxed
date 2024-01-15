@@ -2,9 +2,13 @@ import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { FormattedMessage } from "react-intl";
-import { StyledTable } from "../../../Components/UI/Antd";
+import { StyledPopconfirm, StyledTable } from "../../../Components/UI/Antd";
 import { Icon, Tooltip } from "antd";
-import { getExpenseById,handleExpenseVoucherIdDrawer,deleteExpense } from "../ExpenseAction";
+import AssistantIcon from '@mui/icons-material/Assistant';
+import { getExpenseById,
+  handleExpenseVoucherIdDrawer,
+  handleStatusExpenseModal,
+  deleteExpense } from "../ExpenseAction";
 import { BundleLoader } from "../../../Components/Placeholder";
 import moment from "moment";
 import styled from 'styled-components';
@@ -13,6 +17,7 @@ import { CurrencySymbol } from "../../../Components/Common";
 import APIFailed from "../../../Helpers/ErrorBoundary/APIFailed";
 import { DeleteOutlined, } from "@ant-design/icons";
 import ExpenseVoucherIdDrawer from "./ExpenseVoucherIdDrawer";
+import ExpenseStatusDrawer from "./UpdateExpense/ExpenseStatusDrawer";
 
 function ExpenseCard(props) {
   const [expand, setExpand] = useState(false);
@@ -38,13 +43,16 @@ function ExpenseCard(props) {
       Expenses,
       fetchingExpenseById,
       fetchingExpenseByIdError,
+      handleStatusExpenseModal,
+      updateStatusExpenseModal,
       expenseVoucherIdDrawer,
       handleExpenseVoucherIdDrawer,
     } = props;
-  
+    if (fetchingExpenseById) return <BundleLoader/>;
 
     return (
       <>
+       <div class=" h-[87vh] overflow-auto overflow-x-auto">
          <CardWrapper>      
               {Expenses.map((item) => {
                  return (
@@ -56,9 +64,9 @@ function ExpenseCard(props) {
                          </div>
                       {/* <CardDescription> */}
                       <div class="flex items-center justify-between">
-                      <h4>Voucher ID</h4>
+                      <h4 class="text-sm">Voucher ID</h4>
                         <Header>
-<div onClick={() => { handleExpand(item.voucherId);
+<div class="text-[0.82rem]" onClick={() => { handleExpand(item.voucherId);
                 handleSetParticularRowData(item);
                 props.handleExpenseVoucherIdDrawer(true);}}>
          {item.voucherId}
@@ -66,12 +74,16 @@ function ExpenseCard(props) {
                         </Header> 
                         </div>
                         <div class="flex justify-between">
-                            <h3>Voucher Date</h3>
-                            <h4>{dayjs(item.voucherDate).format("MMM Do YY")}</h4>
+                            <h3 class="text-sm">Voucher Name</h3>
+                            <h4 class="text-[0.82rem]">{item.voucherName}</h4>
                         </div>
                         <div class="flex justify-between">
-                    <h4>Amount</h4> 
-                    <h5>{item.amount}</h5>
+                            <h3 class="text-sm">Voucher Date</h3>
+                            <h4 class="text-[0.82rem]">{dayjs(item.voucherDate).format("MMM Do YY")}</h4>
+                        </div>
+                        <div class="flex justify-between">
+                    <h4 class="text-sm">Total Amount</h4> 
+                    <h5 class="text-[0.82rem]">{item.totalAmount}</h5>
                     </div>
                         {item.status === "Approved" && (
                  <div
@@ -115,17 +127,41 @@ function ExpenseCard(props) {
                 >
                  <div className="text-[#e1d16c]">Waiting for approval</div> </div>
               )}
+
+<div style={{ cursor: "pointer",padding:"2px"}}
+// style={{ cursor: "pointer" }}
+onClick={() => {
+handleStatusExpenseModal(true);
+handleExpand(item.voucherId);
+
+}}
+>
+                 <Tooltip  title={"Status"}>
+                 <AssistantIcon
+style={{ color: "grey",fontSize:"1.2rem",padding:"2px" }}/>
+   </Tooltip> 
+
+   </div>
                {item.status === "Pending" && (
-        <Tooltip title="Delete">
+          <StyledPopconfirm
+          // title="Do you want to delete?"
+          title={
+            <FormattedMessage
+              id="app.doyouwanttodelete?"
+              defaultMessage="Do you want to delete?"
+            />
+          }
+          onConfirm={() => props.deleteExpense(item.voucherId)}
+        >
               <DeleteOutlined
                 type="delete"
-                style={{ cursor: "pointer" }}
-                onClick={() => {
-                props.deleteExpense(item.voucherId);
+                style={{ cursor: "pointer",color:"red" }}
+                // onClick={() => {
+                // props.deleteExpense(item.voucherId);
                   
-                }}
+                // }}
               />
-            </Tooltip>
+           </StyledPopconfirm>
                )}          
                 </div> 
                      
@@ -140,12 +176,20 @@ function ExpenseCard(props) {
                  )  
             })}
               </CardWrapper>
+              </div>
 
         <ExpenseVoucherIdDrawer
         voucherId={voucherId} 
         particularRowData={particularRowData}
         expenseVoucherIdDrawer={expenseVoucherIdDrawer}
         handleExpenseVoucherIdDrawer={handleExpenseVoucherIdDrawer}
+        />
+            <ExpenseStatusDrawer
+        voucherId={voucherId} 
+        handleExpand={handleExpand}
+        particularRowData={particularRowData}
+        updateStatusExpenseModal={updateStatusExpenseModal}
+        handleStatusExpenseModal={handleStatusExpenseModal}
         />
       </>
     );
@@ -154,6 +198,7 @@ function ExpenseCard(props) {
 const mapStateToProps = ({ auth, expense }) => ({
   userId: auth.userDetails.userId,
   Expenses: expense.Expenses,
+  updateStatusExpenseModal:expense.updateStatusExpenseModal,
   fetchingExpenseById: expense.fetchingExpenseById,
   fetchingExpenseByIdError: expense.fetchingExpenseByIdError,
   expenseVoucherIdDrawer:expense.expenseVoucherIdDrawer
@@ -163,7 +208,8 @@ const mapDispatchToProps = (dispatch) =>
     {
       getExpenseById,
       handleExpenseVoucherIdDrawer,
-      deleteExpense
+      deleteExpense,
+      handleStatusExpenseModal
     },
     dispatch
   );
@@ -185,15 +231,17 @@ border-radius: 0.35rem;
     border: 3px solid #EEEEEE;
     background-color: rgb(255,255,255);
     box-shadow: 0 0.25em 0.62em #aaa;
-    height: 7rem;
+    height: 8rem;
     color: rgb(68,68,68);
     margin: 1em;
     padding: 0.2rem;
-    width: 20vw;
+    width: 19vw;
     display: flex;
     flex-direction: column;
   @media only screen and (max-width: 600px) {
     width: 100%;
+    height: 9rem;
+      margin: 0.1em;
     
   }
 `

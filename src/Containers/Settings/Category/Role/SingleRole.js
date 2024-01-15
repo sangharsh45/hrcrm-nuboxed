@@ -1,12 +1,9 @@
 import React, { Component } from "react";
 import styled from "styled-components";
-import { FormattedMessage } from "react-intl";
 import { Button,Tooltip } from "antd";
-import { FlexContainer } from "../../../../Components/UI/Layout";
-import { Spacer, TextInput } from "../../../../Components/UI/Elements";
+import {  TextInput } from "../../../../Components/UI/Elements";
 import ViewEditCard from "../../../../Components/UI/Elements/ViewEditCard";
 import { Select } from "../../../../Components/UI/Elements";
-import { EditOutlined } from "@ant-design/icons";
 import BorderColorIcon from '@mui/icons-material/BorderColor';
 import DeleteIcon from '@mui/icons-material/Delete';
 const { Option } = Select;
@@ -18,10 +15,12 @@ class SingleRole extends Component {
       type: "",
       roleType: "",
       departmentName: "",
-      departmentId: "",
+      // departmentId: "",
       editInd: true,
     };
   }
+  // handleDepartment = (value) =>
+  // this.setState({ departmentId: value });
   render() {
     const {
       role: { roleType, roleTypeId, departmentName, departmentId },
@@ -29,6 +28,7 @@ class SingleRole extends Component {
       name,
       value,
       handleDepartment,
+      
       linkedRoles,
       updatingRoles,
       handleUpdateRole,
@@ -41,7 +41,7 @@ class SingleRole extends Component {
         <ViewEditCard>
           {({ viewType }, toggleViewType) =>
             viewType === "view" ? (
-              <FlexContainer justifyContent="space-between">
+              <div class=" flex justify-between" >
                 <RoleType style={{ flexBasis: "43%" }}>{roleType}</RoleType>
                 <RoleType style={{ flexBasis: "42%" }}>
                   {departmentName}
@@ -70,9 +70,9 @@ class SingleRole extends Component {
                     />
                   </Tooltip>
                 </div>
-              </FlexContainer>
+              </div>
             ) : (
-              <FlexContainer>
+              <div class=" flex">
                 <TextInput
                   name={name}
                   // value={value || departmentName}
@@ -94,8 +94,8 @@ class SingleRole extends Component {
                     );
                   })}
                 </Select>
-                <Spacer />
-                <FlexContainer justifyContent="flex-end">
+             
+                <div class=" flex justify-end" >
                   <Button
                     type="primary"
                     htmlType="submit"
@@ -105,7 +105,7 @@ class SingleRole extends Component {
                       handleUpdateRole(
                         roleTypeId,
                         value,
-                        departmentId,
+                        this.props.departmentId,
                         departmentName,
                         toggleViewType()
                       )
@@ -117,8 +117,8 @@ class SingleRole extends Component {
                   <Button type="primary" ghost onClick={() => toggleViewType()}>
                     Cancel
                   </Button>
-                </FlexContainer>
-              </FlexContainer>
+                </div>
+              </div>
             )
           }
         </ViewEditCard>

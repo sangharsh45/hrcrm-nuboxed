@@ -2,11 +2,10 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { FormattedMessage } from "react-intl";
 import { bindActionCreators } from "redux";
-import { Icon, Tooltip, Button,Input} from "antd";
+import { Tooltip, Button,Input} from "antd";
 import { BundleLoader } from "../../../../../Components/Placeholder";
 import {
   getContactListByOpportunityId,
-  //   unlinkContactFromOpportunity,
      setContactRoleForOpportunity,
 } from "../../../OpportunityAction";
 import { FlexContainer } from "../../../../../Components/UI/Layout";
@@ -15,10 +14,9 @@ import {
   StyledPopconfirm,
 } from "../../../../../Components/UI/Antd";
 import { MultiAvatar, SubTitle } from "../../../../../Components/UI/Elements";
-import { Link } from "../../../../../Components/Common";
 import { ActionIcon } from "../../../../../Components/Utils";
 import Highlighter from "react-highlight-words";
-import {FileExcelOutlined,FilePdfOutlined,SearchOutlined}  from '@ant-design/icons';
+import {SearchOutlined}  from '@ant-design/icons';
 
 const ButtonGroup = Button.Group;
 class LinkedContact extends Component {
@@ -220,6 +218,12 @@ class LinkedContact extends Component {
             </SubTitle>
           );
         },
+      },
+      {
+        title: "",
+        dataIndex: "",
+        width: "2%",
+    
       },
       {
         // title: "Name",

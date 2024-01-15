@@ -2,8 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { FormattedMessage } from "react-intl";
-import SkillsLoadMore from "../CandidateTable/SkillsLoadMore";
-import { Button, Select, Icon, Tag, Switch,Checkbox} from "antd";
+import { Button, Select, Switch,Checkbox} from "antd";
 import { Formik, Form, FastField, Field, FieldArray } from "formik";
 import AddressFieldArray from "../../../../Components/Forms/Formik/AddressFieldArray";
 import { HeaderLabel, Spacer } from "../../../../Components/UI/Elements";
@@ -13,12 +12,10 @@ import { SelectComponent } from "../../../../Components/Forms/Formik/SelectCompo
 import { updateCandidate,setEditCandidate } from "../../CandidateAction";
 import Upload from "../../../../Components/Forms/Formik/Upload";
 import { StyledLabel } from "../../../../Components/UI/Elements";
-import { FlexContainer } from "../../../../Components/UI/Layout";
 import { TextareaComponent } from "../../../../Components/Forms/Formik/TextareaComponent";
 import { DatePicker } from "../../../../Components/Forms/Formik/DatePicker";
 import dayjs from "dayjs";
 import * as Yup from "yup";
-import { SwitchComponent } from "../../../../Components/Forms/Formik/SwitchComponent";
 import {getDesignations} from "../../../Settings/Designation/DesignationAction";
 const { Option } = Select;
 const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
@@ -175,18 +172,18 @@ class UpdateCandidateForm extends Component {
             setFieldTouched,
           }) => (
             <Form className="form-background">
-              <div style={{ display: "flex", justifyContent: "space-between",height: "70vh", overflow:"scroll",paddingRight: "0.6em" }}>
-                <div
-                  style={{
-                    height: "100%",
-                    width: "47.5%",
-                  }}
+                          <div class=" flex justify-between h-[70vh] overflow-scroll"
+                style={{
+                  paddingRight: "0.6em",
+                }}
+              >
+                <div class=" h-full w-[47.5%]"
                 >
-                  <FlexContainer flexWrap="no-wrap">
+                   <div class=" flex flex-no-wrap">
                     <FastField name="imageId" component={Upload} />
-                    <div style={{ width: "75%" }}>
-                      <FlexContainer justifyContent="space-between">
-                        <div style={{ width: "30%" }}>
+                    <div class=" w-[75%]" > 
+                    <div class=" flex justify-between" >
+                        <div class=" w-[30%]" >
                           <FastField
                             name="salutation"
                             type="text"
@@ -204,7 +201,7 @@ class UpdateCandidateForm extends Component {
                             isColumn
                             />
                         </div>
-                        <div style={{ width: "65%" }}>
+                        <div class=" w-[65%]" >
                           <FastField
                             isRequired
                             name="firstName"
@@ -222,10 +219,10 @@ class UpdateCandidateForm extends Component {
                             inlineLabel
                             />
                         </div>
-                      </FlexContainer>
+                      </div>
                       <Spacer />
-                      <FlexContainer justifyContent="space-between">
-                        <div style={{ width: "30%" }}>
+                      <div class=" flex justify-between" >
+                        <div class=" w-[30%]" >
                           <FastField
                             name="middleName"
                             // label="Middle "
@@ -242,7 +239,7 @@ class UpdateCandidateForm extends Component {
                             inlineLabel
                             />
                         </div>
-                        <div style={{ width: "65%" }}>
+                        <div class=" w-[65%]" >
                           <FastField
                             name="lastName"
                             // label="Last Name"
@@ -259,9 +256,9 @@ class UpdateCandidateForm extends Component {
                             inlineLabel
                             />
                         </div>
-                      </FlexContainer>
+                      </div>
                     </div>
-                  </FlexContainer>
+                  </div>
                   <Spacer />
                   <div style={{ width: "100%",backgroundImage: "linear-gradient(-90deg, #00162994, #94b3e4)" }}>
                       <div>
@@ -271,9 +268,8 @@ class UpdateCandidateForm extends Component {
                     </HeaderLabel>
                     </div>
                     </div>
-                  <FlexContainer justifyContent="space-between">
-                    
-                    <div style={{ width: "100%" }}>
+                    <div class=" flex justify-between">
+                    <div class=" w-full" >
                       <FastField
                         // isRequired
                         type="email"
@@ -293,9 +289,9 @@ class UpdateCandidateForm extends Component {
                         />
                     </div>                  
                     
-                  </FlexContainer>  
-                  <FlexContainer justifyContent="space-between">
-                    <div style={{ width: "30%" }}>
+                  </div>  
+                  <div class=" flex justify-between">
+                    <div class=" w-[30%]" >
                       <FastField
                         name="countryDialCode"
                         isColumnWithoutNoCreate
@@ -316,7 +312,7 @@ class UpdateCandidateForm extends Component {
                         inlineLabel
                         />
                     </div>
-                    <div style={{ width: "40%" }}>
+                    <div class=" w-[40%]" >
                       <FastField
                         type="text"
                         // isRequired
@@ -345,7 +341,7 @@ class UpdateCandidateForm extends Component {
                         unCheckedChildren="Same"
                       />
                     </div>
-                  </FlexContainer>
+                  </div>
                   <Spacer />
                   <div style={{ width: "100%",backgroundImage: "linear-gradient(-90deg, #00162994, #94b3e4)" }}>
                       <div>
@@ -354,8 +350,8 @@ class UpdateCandidateForm extends Component {
                     </HeaderLabel>
                     </div>
                     </div>           
-                  <FlexContainer justifyContent="space-between">
-                    <div style={{ width: "47%" }}>
+                    <div class=" flex justify-between" >
+                    <div class=" w-[47%]">
                       <FastField
                         name="nationality"
                         isColumnWithoutNoCreate
@@ -377,7 +373,7 @@ class UpdateCandidateForm extends Component {
                        />
                     </div>
                     {this.props.user.gdprApplicableInd ===true && (
-                    <div style={{ width: "47%" }}>
+                   <div class=" w-[47%]">
                       <div>
                       <StyledLabel >Allow sharing info?</StyledLabel> 
                       </div>                      
@@ -392,13 +388,13 @@ class UpdateCandidateForm extends Component {
                       </div>
                     </div>
                     )}
-                  </FlexContainer>
+                  </div>
                   
                  
-                  <FlexContainer justifyContent="space-between">
-                  <div style={{ width: "74%" }}>
-                  <FlexContainer justifyContent="space-between">
-                    <div style={{ width: "42%" }}>
+                  <div class=" flex justify-between" >
+                  <div class=" w-[74%]">
+                  <div class=" flex justify-between" >
+                  <div class=" w-[42%]">
                       {" "}
                       {this.state.whatsapp && (
                         <Field
@@ -420,7 +416,7 @@ class UpdateCandidateForm extends Component {
                         />
                       )}
                     </div>
-                    <div style={{ width: "53%" }}>
+                    <div class=" w-[53%]">
                       {this.state.whatsapp && (
                         <FastField
                           name="phoneNumber"
@@ -432,12 +428,12 @@ class UpdateCandidateForm extends Component {
                         />
                       )}
                     </div>
-                    </FlexContainer>
                     </div>
-                  </FlexContainer>
+                    </div>
+                  </div>
                      
-                  <FlexContainer justifyContent="space-between">
-                  <div style={{ width: "100%" }}>
+                  <div class=" flex justify-between" >
+                  <div class=" w-full">
                       <FastField
                         type="text"
                         name="linkedin"
@@ -454,12 +450,12 @@ class UpdateCandidateForm extends Component {
                         inlineLabel
                         />
                     </div>
-                    </FlexContainer>
+                    </div>
                      
-                    <FlexContainer justifyContent="space-between">
-                    <div style={{ width: "47.5%" }}>
-                  <FlexContainer justifyContent="space-between">
-                    <div style={{ width: "48%" }}>
+                    <div class=" flex justify-between" >
+                    <div class=" w-[47.5%]">
+                    <div class=" flex justify-between" >
+                    <div class=" w-[48%]">
                     <FastField
                         name="idProof"
                         //label="Mobile #"
@@ -483,7 +479,7 @@ class UpdateCandidateForm extends Component {
                         inlineLabel
                         />
                     </div>
-                    <div style={{ width: "48%" }}>
+                    <div class=" w-[48%]">
                       <FastField
                         type="text"
                         name="idNumber"
@@ -500,11 +496,11 @@ class UpdateCandidateForm extends Component {
                         isColumn
                         />
                     </div>
-                  </FlexContainer>
                   </div>
-                  <div style={{ width: "47.5%" }}>
-                  <FlexContainer justifyContent="space-between">
-                    <div style={{ width: "57%" }}>
+                  </div>
+                  <div class=" w-[47.5%]">
+                  <div class=" flex justify-between" >
+                  <div class=" w-[57%]">
                       <Field
                         name="dateOfBirth"
                         label={
@@ -520,7 +516,7 @@ class UpdateCandidateForm extends Component {
                       />
                      </div>
 
-<div style={{ width: "40%" }}>
+                     <div class=" w-[40%]">
                       <FastField
                         name="gender"
                         type="text"
@@ -539,9 +535,9 @@ class UpdateCandidateForm extends Component {
                        
                       />
                     </div>
-                    </FlexContainer>               
+                    </div>               
                   </div>
-                  </FlexContainer>  
+                  </div>  
                   <Spacer />
                   <div style={{ width: "100%",backgroundImage: "linear-gradient(-90deg, #00162994, #94b3e4)" }}>
                       <div>
@@ -559,9 +555,9 @@ class UpdateCandidateForm extends Component {
                       />
                     )}
                   />                  
-                  <FlexContainer justifyContent="space-between">
+                  <div class=" flex justify-between" >
                    
-                    <div style={{ width: "47%" }}>
+                  <div class=" w-[47%]">
                       <Field
                         // name="address[0].country"
                         name="country"
@@ -586,18 +582,14 @@ class UpdateCandidateForm extends Component {
                         width="100%"
                       />
                     </div>
-                  </FlexContainer>
+                  </div>
                 </div>
                 
-                <div
-                  style={{
-                    height: "70%",
-                    width: "47.5%",
-                  }}
+                <div class=" h-[70%] w-[47.5%]"
                 >                 
                    <Spacer style={{ marginTop: "1em" }} />
-                   <FlexContainer justifyContent="space-between">
-                  <div style={{ width: "47%" }}>
+                   <div class=" flex justify-between" >
+                   <div class=" w-[47%]">
                     <FastField
                       // name="department"
                       name="sectorId"
@@ -617,7 +609,7 @@ class UpdateCandidateForm extends Component {
                       />
                   </div>
                 
-                     <div style={{ width: "47%" }}>
+                  <div class=" w-[47%]">
                       <FastField
                         name="departmentId"
                         selectType="departmentName"
@@ -629,9 +621,9 @@ class UpdateCandidateForm extends Component {
                         inlineLabel
                       />
                     </div>
-                  </FlexContainer>
-                  <FlexContainer justifyContent="space-between">
-                  <div style={{ width: "47%" }}>
+                  </div>
+                  <div class=" flex justify-between" >
+                  <div class=" w-[47%]">
                       <FastField
                         name="roleTypeId"
                         selectType="roleType"
@@ -649,7 +641,7 @@ class UpdateCandidateForm extends Component {
                         inlineLabel
                         />
                     </div>
-                    <div style={{ width: "47%" }}>
+                    <div class=" w-[47%]">
                       <FastField
                         name="designationTypeId"
                         // label="Designation"
@@ -667,10 +659,10 @@ class UpdateCandidateForm extends Component {
                         inlineLabel
                          />
                     </div>
-                  </FlexContainer>
+                  </div>
 
-                  <FlexContainer justifyContent="space-between">
-                  <div style={{ width: "47%" }}>
+                  <div class=" flex justify-between" >
+                  <div class=" w-[47%]">
                       <>
                         <Field
                           name="tag_with_company"
@@ -691,7 +683,7 @@ class UpdateCandidateForm extends Component {
                           />
                       </>
                     </div>
-                    <div style={{ width: "47%" }}>
+                    <div class=" w-[47%]">
                       <FastField
                         name="partnerId"
                         isColumnWithoutNoCreate
@@ -708,13 +700,13 @@ class UpdateCandidateForm extends Component {
                         inlineLabel
                       />
                     </div> 
-                  </FlexContainer>
+                  </div>
 
                   <Spacer />
-                  <FlexContainer justifyContent="space-between">
-                    <div style={{ width: "47.5%" }}>
-                    <FlexContainer justifyContent="space-between">
-                    <div style={{ width: "48.5%" }}>
+                  <div class=" flex justify-between" >
+                    <div class=" w-[47.5%]">
+                    <div class=" flex justify-between" >
+                    <div class=" w-[48.5%]">
                         <StyledLabel>Category</StyledLabel>
 
                         <Switch
@@ -734,10 +726,10 @@ class UpdateCandidateForm extends Component {
                           Both
                         </Checkbox>
                       </div>
-                      </FlexContainer>
                       </div>
-                      <div style={{ width: "47.5%" }}>
-                      <div style={{ width: "25%" }}>
+                      </div>
+                      <div class=" w-[47.5%]">
+                      <div class=" w-[25%]">
                         <StyledLabel>Type</StyledLabel>
 
                         <Switch
@@ -748,12 +740,12 @@ class UpdateCandidateForm extends Component {
                         />
                       </div>
                       </div>
-                    </FlexContainer>
+                    </div>
                   <Spacer style={{ marginTop: "1em" }} />                   
-                  <FlexContainer justifyContent="space-between">
-                       <div style={{width:"47.5%"}}>
-                        <FlexContainer justifyContent="space-between">
-                          <div style={{ width: "25%" }}>
+                  <div class=" flex justify-between" >
+                  <div class=" w-[47.5%]">
+                  <div class=" flex justify-between" >
+                  <div class=" w-[25%]">
                       <StyledLabel >Active</StyledLabel> 
                     <Switch                     
                       checked={this.state.availability}
@@ -763,7 +755,7 @@ class UpdateCandidateForm extends Component {
                       unCheckedChildren="No"
                     />
                     </div>
-                          <div style={{ width: "57%" }}>
+                    <div class=" w-[57%]">
                         {" "}
                         {this.state.availability && (
                         <Field
@@ -784,9 +776,9 @@ class UpdateCandidateForm extends Component {
                         />
                         )}
                       </div>
-                      </FlexContainer>
+                      </div>
                         </div>
-                        <div style={{ width: "47.5%" }}>
+                        <div class=" w-[47.5%]">
                       <FastField
                         // isRequired
                         // type="email"
@@ -830,14 +822,12 @@ class UpdateCandidateForm extends Component {
                           inlineLabel
                         />
                       </div> */}
-                      </FlexContainer>
+                      </div>
                       <Spacer style={{marginTop:"1.25em"}}/>
-                      <FlexContainer justifyContent="space-between">
-                      <div 
-                     style={{ width: "47.5%" }}
-                      >
-                        <FlexContainer justifyContent="space-between">
-                          <div style={{width:"48%"}}>
+                      <div class=" flex justify-between" >
+                    <div class=" w-[47.5%]">
+                    <div class=" flex justify-between" >
+                    <div class=" w-[48%]">
                         <Field
                           name="billing"
                           label={this.state.billing?"Expectation":"Billing"}
@@ -852,7 +842,7 @@ class UpdateCandidateForm extends Component {
                           component={InputComponent}                         
                         />
                        </div>
-                      <div style={{width:"48%"}}>
+                       <div class=" w-[48%]">
                       <Field
                         name="currency"
                         isColumnWithoutNoCreate
@@ -875,11 +865,9 @@ class UpdateCandidateForm extends Component {
                         // options={Array.isArray(currency) ? currency : []}
                       />
                        </div>
-                      </FlexContainer>
                       </div>
-                      <div 
-                     style={{ width: "47.5%" }}
-                      >
+                      </div>
+                      <div class=" w-[47.5%]">
                       {/* <FastField
                         name="costType"
                         //label="Email"
@@ -898,8 +886,8 @@ class UpdateCandidateForm extends Component {
                         /> */}
                         
                      
-                        <FlexContainer justifyContent="space-between">
-                          <div style={{width:"48%"}}>
+                        <div class=" flex justify-between" >
+                    <div class=" w-[48%]">
                   <FastField
                         // isRequired
                         // type="text"
@@ -918,7 +906,7 @@ class UpdateCandidateForm extends Component {
                         inlineLabel
                         />
                      </div>
-                      <div style={{width:"48%"}}>
+                     <div class=" w-[48%]">
                     <Field
                         name="currency"
                         isColumnWithoutNoCreate
@@ -941,11 +929,11 @@ class UpdateCandidateForm extends Component {
                         // options={Array.isArray(currency) ? currency : []}
                       />
                          </div>
-                      </FlexContainer>
                       </div>
-                    </FlexContainer>
-                  <FlexContainer justifyContent="space-between">
-                    <div style={{ width: "47%" }}>
+                      </div>
+                    </div>
+                    <div class=" flex justify-between" >
+                    <div class=" w-[47%]">
                       <Field
                         name="benifit"
                         //label="State"
@@ -961,7 +949,7 @@ class UpdateCandidateForm extends Component {
                         width="100%"
                       />
                     </div>
-                    <div style={{ width: "47%" }}>
+                    <div class=" w-[47%]">
                     <FastField
                         name="noticePeriod"
                         //label="Email"
@@ -979,10 +967,10 @@ class UpdateCandidateForm extends Component {
                         inlineLabel
                         />
                     </div>
-                    </FlexContainer>
+                    </div>
                     
-                    <FlexContainer >
-                    <div style={{ width: "100%" }}>
+                    <div class=" flex" >
+                    <div class=" w-full">
                     <Field
                         name="noticeDetail"
                         //label="Description"
@@ -998,13 +986,13 @@ class UpdateCandidateForm extends Component {
                         component={TextareaComponent}
                         />
                         </div>                       
-                    </FlexContainer>
+                    </div>
                 </div>
                 </div> 
               <Spacer style={{ marginTop: "1.25em" }} />
               
               
-            <FlexContainer justifyContent="flex-end">
+              <div class=" flex justify-end" >
                 <Button
                   type="primary"
                   htmlType="submit"
@@ -1012,7 +1000,7 @@ class UpdateCandidateForm extends Component {
                 >                
                   <FormattedMessage id="app.update" defaultMessage="Update" />
                 </Button>
-              </FlexContainer>
+              </div>
             </Form>
           )}
         </Formik>

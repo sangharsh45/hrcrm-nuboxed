@@ -350,9 +350,9 @@ export const addOpportunity = (opportunity, cb) => (dispatch, getState) => {
       const endDate = dayjs()
         .endOf("month")
         .toISOString();
-      // dispatch(getOpportunityListByUserId(userId));
+        dispatch(getOpportunityRecord(userId));
       // dispatch(getLatestOpportunities(userId, startDate, endDate));
-      // dispatch(getOpportunitiesByPrice(userId));
+      dispatch(getRecords(userId));
       dispatch({
         type: types.ADD_OPPORTUNITY_SUCCESS,
         payload: res.data,
@@ -370,12 +370,6 @@ export const addOpportunity = (opportunity, cb) => (dispatch, getState) => {
 
 /*get all the opportunity of the user */
 export const getOpportunityListByUserId = (userId,page) => (dispatch) => {
-  // let api_url = "";
-  // if (userId) {
-  //   api_url = `/sort/all/contacts/user/${userId}`;
-  // } else {
-  //   api_url = `/contacts`;
-  // }
   dispatch({
     type: types.GET_OPPORTUNITY_REQUEST,
   });
@@ -561,7 +555,9 @@ export const setEditOpportunity = (name) => (dispatch) => {
 /**
  * update a opportunity using put request
  */
-export const updateOpportunity = (data, opportunityId) => (
+
+
+ export const updateOpportunity = (data, opportunityId) => (
   dispatch,
   getState
 ) => {
@@ -589,6 +585,7 @@ export const updateOpportunity = (data, opportunityId) => (
       });
     });
 };
+
 
 /**
  * add document to a opportunity
@@ -851,12 +848,12 @@ export const getOpportunityPermissionsList = () => (dispath) => {
       });
     });
 };
-export const getAllOpportunityListByUserId = () => (dispatch) => {
+export const getAllOpportunityListByUserId = (userId) => (dispatch) => {
   dispatch({
     type: types.GET_ALL_OPPORTUNITIES_REQUEST,
   });
   axios
-    .get(`${base_url}/opportunities/all-opportunities`, {
+    .get(`${base_url}/opportunityList/${userId}`, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },
@@ -876,6 +873,10 @@ export const getAllOpportunityListByUserId = () => (dispatch) => {
       });
     });
 };
+
+
+
+
 
 //Opportunity PERMISSION SHARE
 export const shareOpportunityPermission = (data, userId,a) => (
@@ -1148,7 +1149,7 @@ export const LinkStageRecruit = (data, cb) => (dispatch) => {
     });
 };
 
-export const LinkStatusRecruit = (data, cb) => (dispatch) => {
+export const LinkStatusRecruit = (data,opportunityId, cb) => (dispatch) => {
   dispatch({ type: types.LINK_RECRUIT_STATUS_TO_OPPORTUNITY_REQUEST });
 
   axios
@@ -1196,6 +1197,32 @@ export const getRecords = (userId) => (dispatch) => {
       console.log(err.response);
       dispatch({
         type: types.GET_RECORDS_FAILURE,
+        payload: err,
+      });
+    });
+};
+
+export const getOpportunityTeamRecords = (userId) => (dispatch) => {
+  dispatch({
+    type: types.GET_OPPORTUNITY_TEAM_RECORDS_REQUEST,
+  });
+  axios
+    .get(`${base_url}/oppertunity/contact/team/count/${userId}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.GET_OPPORTUNITY_TEAM_RECORDS_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err.response);
+      dispatch({
+        type: types.GET_OPPORTUNITY_TEAM_RECORDS_FAILURE,
         payload: err,
       });
     });
@@ -2412,14 +2439,16 @@ export const StatusRecruit = ( opportunityId,data ) => (dispatch) => {
     })
 
     .then((res) => {
+      message.success("Congratulations on this Win.Wish you success!");
       console.log(res);
       dispatch({
         type: types.RECRUIT_STATUS_TO_OPPORTUNITY_SUCCESS,
-        payload: res.data,
+        payload: opportunityId,
       });
       // cb && cb("success");
     })
     .catch((err) => {
+     
       console.log(err);
       dispatch({
         type: types.RECRUIT_STATUS_TO_OPPORTUNITY_FAILURE,
@@ -2427,7 +2456,7 @@ export const StatusRecruit = ( opportunityId,data ) => (dispatch) => {
       // cb && cb("failure");
     });
 };
-export const lostStatusRecruit = ( opportunityId,data ) => (dispatch) => {
+export const lostStatusRecruit = ( opportunityId,data,userId ) => (dispatch) => {
   dispatch({ type: types.RECRUIT_LOST_STATUS_TO_OPPORTUNITY_REQUEST });
 
   axios
@@ -2438,10 +2467,12 @@ export const lostStatusRecruit = ( opportunityId,data ) => (dispatch) => {
     })
 
     .then((res) => {
+     
+      message.success("Opportunity move to lost category.Better luck next time!");
       console.log(res);
       dispatch({
         type: types.RECRUIT_LOST_STATUS_TO_OPPORTUNITY_SUCCESS,
-        payload: res.data,
+        payload: opportunityId,
       });
       // cb && cb("success");
     })
@@ -2889,3 +2920,266 @@ export const updateRequirementStage = (
       cb && cb("failure");
     });
 };
+
+
+export const updateOpportunitydragstage = (
+  data,
+    
+  sourceStageId,
+  destinationStageId,
+  opportunityId,
+  cb
+) => (dispatch) => {
+  console.log(sourceStageId, destinationStageId, opportunityId);
+  if (destinationStageId === "won") {
+    message.success("stage is won");
+  }
+  if (destinationStageId === "loss") {
+    message.error("stage is loss");
+  }
+  dispatch({
+    type: types.UPDATE_OPPORTUNITY_DRAG_STAGE_REQUEST,
+    payload: {
+      sourceStageId,
+      destinationStageId,
+      opportunityId,
+    },
+  });
+  axios
+    .put(
+      `${base_url}/opportunity/update/stage`,data, {
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+        },
+      }
+    )
+    .then((res) => {
+      console.log(res);
+      // if (res.data.stageName === "Won") {
+      //   message.error("Won");
+      // } else {
+      //   message.error("Loss");
+      // }
+
+      dispatch({
+        type: types.UPDATE_OPPORTUNITY_DRAG_STAGE_SUCCESS,
+        payload: res.data,
+      });
+      cb && cb(res.data);
+    })
+    .catch((err) => {
+      console.log(err);
+
+      dispatch({
+        type: types.UPDATE_OPPORTUNITY_DRAG_STAGE_FAILURE,
+        payload: err,
+      });
+      cb && cb("failure");
+    });
+};
+
+export const getWonOpportunity = (userId,pageNo) => (dispatch) => {
+  dispatch({
+    type: types.GET_WON_OPPORTUNITY_REQUEST,
+  });
+  axios
+    .get(`${base_url}/opportunity/wonInd/${userId}/${pageNo}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.GET_WON_OPPORTUNITY_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.GET_WON_OPPORTUNITY_FAILURE,
+        payload: err,
+      });
+    });
+};
+
+
+export const getWonRecords = (userId) => (dispatch) => {
+  dispatch({
+    type: types.GET_WON_RECORDS_REQUEST,
+  });
+  axios
+    .get(`${base_url}/opportunity/wonInd/record/count/${userId}`, {
+    headers: {
+      Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+    },
+  })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.GET_WON_RECORDS_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err.response);
+      dispatch({
+        type: types.GET_WON_RECORDS_FAILURE,
+        payload: err,
+      });
+    });
+};
+
+
+export const getOppLinkedStages = (orgId) => (dispatch) => {
+  dispatch({
+    type: types.GET_OPP_LINKED_STAGES_REQUEST,
+  });
+  axios
+    .get(`${base_url}/workflow/opportunity/stages/for_dropdown/${orgId}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.GET_OPP_LINKED_STAGES_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.GET_OPP_LINKED_STAGES_FAILURE,
+        payload: err,
+      });
+    });
+};
+
+export const getOppLinkedWorkflow = (orgId) => (dispatch) => {
+  dispatch({
+    type: types.GET_OPP_LINKED_WORKFLOW_REQUEST,
+  });
+  axios
+    .get(`${base_url}/workflow/opportunityWorkflow/for_dropdown/${orgId}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.GET_OPP_LINKED_WORKFLOW_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.GET_OPP_LINKED_WORKFLOW_FAILURE,
+        payload: err,
+      });
+    });
+};
+
+export const getAllOpportunityData = (userId,page) => (dispatch) => {
+  dispatch({
+    type: types.GET_ALL_OPPORTUNITY_DATA_REQUEST,
+  });
+  axios
+    .get(`${base_url}/opportunity/drop-opportunityList/${userId}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.GET_ALL_OPPORTUNITY_DATA_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err.response);
+      dispatch({
+        type: types.GET_ALL_OPPORTUNITY_DATA_FAILURE,
+        payload: err,
+      });
+    });
+};
+
+export const handleOpportunityNotesDrawerModal = (modalProps) => (dispatch) => {
+  dispatch({
+    type: types.HANDLE_OPPORTUNITY_NOTES_DRAWER_MODAL,
+    payload: modalProps,
+  });
+};
+
+export const getFullOpportunity = (pageNo) => (dispatch) => {
+ 
+  dispatch({
+    type: types.GET_ALL_OPPORTUNITY_REQUEST,
+  });
+  axios
+    .get(`${base_url}/opportunity/all/${pageNo}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.GET_ALL_OPPORTUNITY_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err.response);
+      dispatch({
+        type: types.GET_ALL_OPPORTUNITY_FAILURE,
+        payload: err,
+      });
+    });
+};
+
+export const emptyOpportunity = () => (dispatch) => {
+  dispatch({
+    type: types.EMPTY_OPPORTUNITY_LIST, 
+  });
+};
+
+export const linkOpportunityContract = (data, opportunityId) => (
+  dispatch,
+  getState
+) => {
+  // debugger;
+  const { userId } = getState("auth").auth.userDetails;
+  dispatch({
+    type: types.LINK_OPPORTUNITY_CONTRACT_REQUEST,
+  });
+  axios
+    .put(`${base_url}/oppertunity/document/contract/update`, data, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      dispatch(getOpportunityDocument(opportunityId));
+      dispatch({
+        type: types.LINK_OPPORTUNITY_CONTRACT_SUCCESS,
+        payload: res.data,
+      });
+      // cb && cb("success");
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.LINK_OPPORTUNITY_CONTRACT_FAILURE,
+        payload: err,
+      });
+      // cb && cb("failuer");
+    });
+};
+

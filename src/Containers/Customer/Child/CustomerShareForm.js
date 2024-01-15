@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { shareCustomerPermission, getPermissionsListCustomer } from "../CustomerAction";
@@ -61,8 +61,7 @@ console.log("findLoginData",findLoginData&& findLoginData.userName);
 const mapStateToProps = ({ customer ,auth}) => ({
   addSharingCustomer: customer.addSharingCustomer,
   userId:auth.userDetails.userId,
-  fullName:
-  (auth.userDetails.fullName),
+  fullName:(auth.userDetails.fullName),
   permissionsDataListCustomer: customer.permissionsDataListCustomer,
 });
 

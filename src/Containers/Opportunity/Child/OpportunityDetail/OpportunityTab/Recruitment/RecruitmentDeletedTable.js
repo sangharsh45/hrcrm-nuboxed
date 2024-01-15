@@ -1,44 +1,35 @@
-import React, { Component, lazy } from "react";
+import React, { Component, } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import LockOpenIcon from '@mui/icons-material/LockOpen';
 import { FormattedMessage } from "react-intl";
 import SkillBarChatModal from "../../OpportunityTab/Recruitment/Child/SkillBarChartModal"
 import AddRequirementModal from "./AddRequirementModal"
-import RecruitmentStages from "./RecruitmentStages";
 import HelpIcon from '@mui/icons-material/Help';
 import BorderColorIcon from "@mui/icons-material/BorderColor";
 import DeleteIcon from '@mui/icons-material/Delete';
 import {
   MultiAvatar,
-  Spacer,
-  SubTitle,
-  StyledLabel,
 } from "../../../../../../Components/UI/Elements";
 import AddRequirementDetailModal from "../Recruitment/AddRequirementDetailModal"
-import { Link } from "../../../../../../Components/Common";
 import {
   StyledTable,
   StyledPopconfirm,
   StyledModal,
 } from "../../../../../../Components/UI/Antd";
-import { FlexContainer } from "../../../../../../Components/UI/Layout";
 import RecruitmentFilter from "./RecruitmentFilter";
 import AddRecruiterModal from "./AddRecruiterModal"
-import RecruitmentContact from "./RecruitmentContact";
 import {
   getRecruitmentDelete,
   LinkSkillsRecruit,
   getskillsetList,
   getRecruiter,
   getSkillsCount,
-  //   LinkCandidateRecruit,
   LinkStageRecruit,
   LinkStatusRecruit,
   setCurrentOpportunityRecruitMentData,
   getCandidateRequirement,
   setCurrentRecruiterData,
-  //  emailSendRecruitment,
   handleSponsorModal,
   handleRecruiterModal,
   handleAddRequirementModal,
@@ -48,60 +39,28 @@ import {
   LinkClosedRequirement,
   handleBarChartOrderModal,
   getRequirementOwner,
-//   getRecruitmentDelete,
- 
-
-
-  // handleRecruiterModal,
-  // handleRecruitModal
   emailSendStage,
 } from "../../../../OpportunityAction";
 import { BundleLoader } from "../../../../../../Components/Placeholder";
 import {
-
-  Popconfirm,
   Tooltip,
-  Dropdown,
-  Menu,
-  Progress,
-  Table, Input, Button,
-  message,
-  Icon,
   Badge,
   Avatar
 } from "antd";
-import CandidateLoadMore from "../../OpportunityTab/Recruitment/CandidateLoadMore"
-// import { Table, Input, Button, Icon } from 'antd';
-import Highlighter from 'react-highlight-words';
-
-// import { 
-//   CheckCircleOutlined,
-//   StopOutlined,
-//   EditOutlined,
-//   CopyOutlined,
-//   EyeOutlined,
-//   EyeInvisibleOutlined
-// } from '@ant-design/icons';
 import RecruitmentDetails from "./Child/RecruitmentDetails";
 import {
   getCandidateById,
   getTopicsByCandidateId,
-  //   getContactDocument,
 } from "../../../../../Candidate/CandidateAction";
 import moment from "moment";
-import { CurrencySymbol } from "../../../../../../Components/Common";
 import EditRecruitForm from "./EditRecruitForm";
 import { Suspense } from "react";
 import { elipsize } from "../../../../../../Helpers/Function/Functions";
-import RecruitmentSwitch from "./RecruitmentSwitch";
-import RecruitmentSwitchSponsor from "./RecruitmentSwitchSponsor";
 import SelectSponsorForm from "./SelectSponsorForm";
 import { addRecruitProProfile, deleteRequirementData } from "../../../../OpportunityAction";
-import { map } from "lodash";
 import SubTableClickCandidate from "../Recruitment/SubTableClickCandidate";
 import PsychologyAltIcon from '@mui/icons-material/PsychologyAlt';
-import { DeleteOutlined, EditOutlined, EyeInvisibleOutlined, EyeOutlined } from "@ant-design/icons";
-// const CandidateDetailsView =lazy(()=>import("../../../../../Candidate/Child/CandidateTable/CandidateDetails/CandidateDetailsView"));
+import { EyeInvisibleOutlined, EyeOutlined } from "@ant-design/icons";
 class RecruitmentDeletedTable extends Component {
  
   constructor(props) {

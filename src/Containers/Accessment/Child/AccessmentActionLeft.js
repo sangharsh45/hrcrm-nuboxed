@@ -2,17 +2,11 @@ import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { withRouter } from "react-router-dom";
-import { ActionIcon } from "../../../Components/Utils";
-import { FlexContainer } from "../../../Components/UI/Layout";
 import TableViewIcon from '@mui/icons-material/TableView';
 import { AudioOutlined } from '@ant-design/icons';
 import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
-
-// import { inputEmployeeDataSearch } from "../EmployeeAction";
-import { Badge, Button, Input, Tooltip } from "antd";
-import { FormattedMessage } from "react-intl";
+import { Badge, Input, Tooltip } from "antd";
 import {getRecords,inputAssessmentDataSearch} from "../AccessmentAction";
-const { Search } = Input;
 
 const AccessmentActionLeft = (props) => {
   const suffix = (
@@ -26,10 +20,7 @@ const AccessmentActionLeft = (props) => {
     />
   );
   const {
-    transcript,
-    listening,
-    resetTranscript,
-    browserSupportsSpeechRecognition
+    transcript
   } = useSpeechRecognition();
   useEffect(() => {
     props.getRecords();
@@ -39,7 +30,7 @@ const AccessmentActionLeft = (props) => {
     }
   },[transcript]);
   return (
-    <FlexContainer alignItems="center">
+    <div class=" flex items-center">
 
 <Tooltip
         title= "Table View"
@@ -48,7 +39,6 @@ const AccessmentActionLeft = (props) => {
  count={ props.viewType === "table" && props.recordData.assessment || 0} overflowCount={999}
 >
         <span
-          // onClick={() => props.setRequirementViewType("table")}
           style={{
             marginRight: "0.5rem",
            color: props.viewType === "table" && "#1890ff",
@@ -56,7 +46,6 @@ const AccessmentActionLeft = (props) => {
             cursor: "pointer",
           }}
         >
-        {/* <FontAwesomeIcon icon={solid('table-list')} /> */}
         <TableViewIcon/>
         </span>
         </Badge>
@@ -81,7 +70,7 @@ const AccessmentActionLeft = (props) => {
           />
         </div>
       &nbsp; &nbsp;
-      <Button
+      {/* <Button
           type={props.currentData ? "primary" : "danger"}
           onClick={() => {
             props.inputAssessmentDataSearch(props.currentData);
@@ -89,8 +78,8 @@ const AccessmentActionLeft = (props) => {
           }}
         >
           Submit
-        </Button>
-        &nbsp;
+        </Button> */}
+        {/* &nbsp;
         <Button
           //type={props.currentData ? "primary" : "danger"}
           // onClick={props.handleClear}
@@ -100,9 +89,9 @@ const AccessmentActionLeft = (props) => {
           }}
         >
           <FormattedMessage id="app.clear" defaultMessage="Clear" />
-          {/* Clear */}
-        </Button>
-    </FlexContainer>
+
+        </Button> */}
+    </div>
   );
 };
 
@@ -112,7 +101,6 @@ const mapStateToProps = ({assessment}) => ({
   fetchingAssessmentInputSearchData:assessment.fetchingAssessmentInputSearchData,
 });
 const mapDispatchToProps = (dispatch) => bindActionCreators({
-//   inputEmployeeDataSearch,
 getRecords,
 inputAssessmentDataSearch
 }, dispatch);

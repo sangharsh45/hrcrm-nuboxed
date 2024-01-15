@@ -42,7 +42,6 @@ class Leave extends Component {
              currentUser={this.state.currentUser}
             viewType={this.props.viewType}
             setLeavesViewType={this.props.setLeavesViewType}
-          //  handleCustomerModal={handleCustomerModal}
            handleClear={this.handleClear}
            handleChange={this.handleChange}
            currentData={this.state.currentData}
@@ -57,10 +56,10 @@ class Leave extends Component {
             <LeaveCardView
             viewType={viewType}
             />  :
-           this.props.viewType === "table" ?
-               <LeaveTable 
-               viewType={viewType}
-               />:
+          //  this.props.viewType === "table" ?
+          //      <LeaveTable 
+          //      viewType={viewType}
+          //      />:
                this.props.viewType === "card" ?
                <LeaveCardList
                viewType={viewType}

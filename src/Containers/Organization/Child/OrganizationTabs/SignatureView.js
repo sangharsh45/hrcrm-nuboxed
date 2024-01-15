@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { FlexContainer, MainWrapper } from "../../../../Components/UI/Layout";
+import { MainWrapper } from "../../../../Components/UI/Layout";
 import {
   EditorState,
   convertToRaw,
@@ -12,8 +12,7 @@ import { bindActionCreators } from "redux";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import { Editor } from "react-draft-wysiwyg";
 import { getOrganizationSignatureByOrgId } from "../../../Auth/AuthAction";
-import { Button, Icon } from "antd";
-import { Spacer, TextInput } from "../../../../Components/UI/Elements";
+import { Button,  } from "antd";
 import { StyledPopconfirm } from "../../../../Components/UI/Antd";
 import { addOrganizationSignatureByOrgId } from "../../../Auth/AuthAction";
 function SignatureView(props) {
@@ -81,8 +80,8 @@ function SignatureView(props) {
           onEditorStateChange={onEditorStateChange}
           placeholder={"Type here"}
         />
-        <Spacer />
-        <FlexContainer justifyContent="flex-end" marginRight="0.625em">
+      
+        <div class=" flex justify-end mr-[0.625em] mt-4"  >
           <StyledPopconfirm
             title="Do you want to Update?"
             onConfirm={handleUpdate}
@@ -98,7 +97,7 @@ function SignatureView(props) {
               Update
             </Button>
           </StyledPopconfirm>
-        </FlexContainer>
+        </div>
       </MainWrapper>
     </div>
   );

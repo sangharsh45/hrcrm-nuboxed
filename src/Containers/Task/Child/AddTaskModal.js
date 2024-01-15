@@ -7,7 +7,8 @@ const TaskForm=lazy(()=>import("./TaskForm"));
 const AddTaskModal = (props) => {
   const { addTaskModal, handleTaskModal, ...formProps } = props;
   console.log(props.selectedTask);
-
+  const isSmallScreen = window.innerWidth <= 600;
+  const drawerWidth = isSmallScreen ? "90%" : "60%";
   return (
     <>
       <StyledDrawer
@@ -16,12 +17,12 @@ const AddTaskModal = (props) => {
           id="app.scheduletask"
           defaultMessage="Schedule Task"
         />}
-        width="55vw"
+        width={drawerWidth}
         visible={addTaskModal}
         maskClosable={false}
         destroyOnClose
         maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}
-        style={{marginTop:"5rem"}}
+        style={{marginTop:"3rem"}}
         onClose={() => handleTaskModal(false)}
         footer={null}
       >

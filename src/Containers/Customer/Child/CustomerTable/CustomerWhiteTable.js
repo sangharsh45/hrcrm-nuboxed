@@ -3,23 +3,19 @@ import { connect } from "react-redux";
 import { FormattedMessage } from "react-intl";
 import { bindActionCreators } from "redux";
 import BorderColorIcon from '@mui/icons-material/BorderColor';
-import {
-  EditOutlined,
-  EyeInvisibleOutlined, SearchOutlined,} from '@ant-design/icons';
+import { SearchOutlined,} from '@ant-design/icons';
 import {getSectors} from "../../../Settings/Sectors/SectorsAction";
 import moment from "moment";
 import { getAllSalesList} from "../../../Opportunity/OpportunityAction";
 import { StyledTable } from "../../../../Components/UI/Antd";
-import { Tooltip, Icon,Button,Input } from "antd";
+import { Tooltip,Button,Input } from "antd";
 import Highlighter from 'react-highlight-words';
-import { MultiAvatar, SubTitle } from "../../../../Components/UI/Elements";
+import { MultiAvatar } from "../../../../Components/UI/Elements";
 import {
   getCustomerListByCategory,
   handleUpdateCustomerModal,
   setEditCustomer,
 } from "../../CustomerAction";
-import { BundleLoader } from "../../../../Components/Placeholder";
-import APIFailed from "../../../../Helpers/ErrorBoundary/APIFailed";
 import styled from "styled-components";
 const CustomerDetailView=lazy(()=>import("./CustomerDetailView"));
 const UpdateCustomerModal=lazy(()=>import("../UpdateCustomer/UpdateCustomerModal"));

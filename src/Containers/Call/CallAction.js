@@ -2,7 +2,7 @@ import * as types from "./CallActionTypes";
 import axios from "axios";
 import { message } from "antd";
 import { base_url } from "../../Config/Auth";
-import { getCallsListByUserId } from "../Auth/AuthAction";
+
 /**
  * handle call modal opening and close
  */
@@ -48,6 +48,7 @@ export const addCall = (call, cb) => (dispatch, getState) => {
       message.success("Call has been added successfully!");
       ////debugger;
       console.log(res);
+      dispatch(getOpportunityRecord(userId));
       // dispatch(getCallsListByUserId(userId));
       dispatch(getCallListRangeByUserId(userId,0));
       dispatch({
@@ -310,3 +311,73 @@ export const handleCallNotesModal = (modalProps) => (dispatch) => {
     payload: modalProps,
   });
 };
+
+
+export const handleCallNotesDrawerModal = (modalProps) => (dispatch) => {
+  dispatch({
+    type: types.HANDLE_CALL_NOTES_DRAWER_MODAL,
+    payload: modalProps,
+  });
+};
+export const addNote = (note, cb) => (dispatch) => {
+  dispatch({ type: types.ADD_CALL_NOTES_REQUEST });
+  axios
+    .post(`${base_url}/call/notes`, note, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      dispatch({
+        type: types.ADD_CALL_NOTES_SUCCESS,
+        payload: res.note,
+      });
+      console.log(res);
+      cb && cb();
+    })
+    .catch((err) => {
+      dispatch({
+        type: types.ADD_CALL_NOTES_FAILURE,
+        payload: err,
+      });
+      console.log(err);
+      cb && cb();
+    });
+};
+
+export const getOpportunityRecord = (userId) => (dispatch) => {
+  dispatch({
+    type: types.GET_OPPORTUNITY_RECORD_REQUEST,
+  });
+  axios
+    .get(`${base_url}/candidate/record/today/${userId}`,{
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.GET_OPPORTUNITY_RECORD_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.GET_OPPORTUNITY_RECORD_FAILURE,
+        payload: err,
+      });
+    });
+};
+
+export const emptyCall = () => (dispatch) => {
+  dispatch({
+    type: types.EMPTY_CALL_LIST, 
+  });
+};
+
+
+
+
+

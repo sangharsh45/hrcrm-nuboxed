@@ -1,23 +1,17 @@
-import React, { Component, lazy, Suspense } from "react";
+import React, { Component, Suspense } from "react";
 import { bindActionCreators } from "redux";
-import { FormattedMessage } from "react-intl";
 import { StyledTabs } from "../../../Components/UI/Antd";
 import { TabsWrapper } from "../../../Components/UI/Layout";
-import { MainWrapper, FlexContainer } from "../../../Components/UI/Layout";
 import { connect } from "react-redux";
-import { Menu, Icon, Popover } from "antd";
+import LanguageIcon from '@mui/icons-material/Language';
 import ReceiptIcon from '@mui/icons-material/Receipt';
 import RememberMeIcon from '@mui/icons-material/RememberMe';
-import {
-  DatabaseOutlined,
-  EyeInvisibleOutlined,
-  
-} from '@ant-design/icons';
 import InsertDriveFileIcon from '@mui/icons-material/InsertDriveFile';
 import Documents from "../Documents/Documents"
 import Education from "../Educations/Education"
 import Expense from "../Expense/Expense";
 import IdProofs from "../Id Proof/IdProofs";
+import Country from "./Country/Country";
 const TabPane = StyledTabs.TabPane;
 
 class OthersTab extends Component {
@@ -37,8 +31,8 @@ class OthersTab extends Component {
   render() {
     return (
       <>
-        <FlexContainer flexWrap="nowrap">
-        <div style= {{width:"46%"}}>
+  <div class="flex flex-nowrap" >
+        <div class=" w-full">
           <TabsWrapper>
             <StyledTabs defaultActiveKey="0" onChange={this.handleTabChange}>
              
@@ -46,7 +40,7 @@ class OthersTab extends Component {
                 tab={
                   <>
                   <InsertDriveFileIcon/>
-                    <span style={{ marginLeft: "0.25em" }}>Documents</span>
+                    <span class=" ml-[0.25em]">Documents</span>
                   </>
                 }
                 key="1"
@@ -62,7 +56,7 @@ class OthersTab extends Component {
                     <RememberMeIcon 
                     // icon={solid('id-card-clip')}
                      />
-                    <span style={{ marginLeft: "0.25em" }}>Identity</span>
+                    <span class=" ml-[0.25em]" >Identity</span>
                   </>
                 }
                 key="2"
@@ -75,7 +69,7 @@ class OthersTab extends Component {
                 tab={
                   <>
                     <i class="fa fa-graduation-cap"></i>
-                    <span style={{ marginLeft: "0.25em" }}>Education</span>
+                    <span class=" ml-[0.25em]">Education</span>
                   </>
                 }
                 key="3"
@@ -89,7 +83,7 @@ class OthersTab extends Component {
                 tab={
                   <>  
                   <ReceiptIcon  />
-                    <span style={{ marginLeft: "0.25em" }} >
+                    <span class=" ml-[0.25em]" >
                     Expense
                      </span>
                   </>
@@ -100,10 +94,23 @@ class OthersTab extends Component {
                   <Expense />
                 </Suspense>
               </TabPane>
+              <TabPane
+                tab={
+                  <>
+                 <LanguageIcon/>
+                    <span class=" ml-[0.25em]">Country</span>
+                  </>
+                }
+                key="5"
+              >
+                <Suspense>
+                  <Country />
+                </Suspense>
+              </TabPane>
             </StyledTabs>
           </TabsWrapper>
           </div>
-        </FlexContainer>
+        </div>
       </>
     );
   }

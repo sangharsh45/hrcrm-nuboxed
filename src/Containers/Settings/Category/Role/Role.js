@@ -2,20 +2,31 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { FormattedMessage } from "react-intl";
-import { Button, message, Input } from "antd";
-import { MainWrapper, FlexContainer } from "../../../../Components/UI/Layout";
-import { TextInput, Title } from "../../../../Components/UI/Elements";
+import { Button, Input } from "antd";
+import { MainWrapper } from "../../../../Components/UI/Layout";
+import { TextInput, } from "../../../../Components/UI/Elements";
 import SingleRole from "./SingleRole";
 import moment from "moment";
 import {
   getRoles,
   addRoles,
   updateRoles,
-  searchRoleName,removeRole
+  searchRoleName,removeRole,ClearReducerDataOfRole
 } from "./RoleAction";
+import { BundleLoader } from "../../../../Components/Placeholder";
+import * as Yup from "yup";
+
 import { getDepartments } from "../../Department/DepartmentAction";
 import { Select } from "../../../../Components/UI/Elements";
 const { Option } = Select;
+
+const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
+const documentSchema = Yup.object().shape({
+  mobileNo: Yup.string().matches(phoneRegExp, 'Mobile number is not valid').min(5,"Number is too short").max(10,"Number is too long"),
+  phoneNo: Yup.string().matches(phoneRegExp, 'Phone number is not valid').min(5,"Number is too short").max(10,"Number is too long"),
+  departmentName: Yup.string().required("Input needed!"),
+});
+
 
 class Department extends Component {
   constructor(props) {
@@ -28,12 +39,33 @@ class Department extends Component {
       singleRole: "",
       userId: "",
       orgId: "",
-      departmentId: "",
+      departmentId: "", // Add departmentId to state
       departmentName: "",
       editInd: true,
       currentData: "",
+      error: "", // Add error field for validation error message
     };
   }
+
+    handleChangeDes = (e) => {
+    this.setState({ currentData: e.target.value });
+  
+    if (e.target.value.trim() === "") {
+      this.setState((prevState) => ({ pageNo: prevState.pageNo + 1 }));
+      this.props.getRoles(this.props.organizationId);
+      this.props.ClearReducerDataOfRole();
+    }
+  };
+  handleSearch = () => {
+    if (this.state.currentData.trim() !== "") {
+      // Perform the search
+      this.props.searchRoleName(this.state.currentData);
+    } else {
+      console.error("Input is empty. Please provide a value.");
+    }
+  };
+
+  
   toggleInput = () =>
     this.setState((prevState) => ({
       isTextInputOpen: !prevState.isTextInputOpen,
@@ -44,15 +76,23 @@ class Department extends Component {
   handleDepartment = (value) => this.setState({ departmentId: value });
 
   handleAddRole = () => {
+ 
     const { addRoles, roles } = this.props;
     const {
       roleType,
       cb,
       addingRoles,
       isTextInputOpen,
-      departmentId,
+      departmentId, // Add departmentId to state
       editInd,
     } = this.state;
+  
+  
+    if (!departmentId) {
+      this.setState({ error: "Please select a department" });
+      return;
+    }
+  
     let role = {
       roleType,
       userId: this.props.userId,
@@ -60,24 +100,25 @@ class Department extends Component {
       departmentId,
       editInd,
     };
-
-    let exist = roles && roles.some((element) => element.roleType == roleType);
-
-    if (exist) {
-      message.error("Can't create as another roleType exists with same name!");
-    } else {
+  
+    // let exist = roles && roles.some((element) => element.roleType == roleType);
+  
+    // if (exist) {
+    //   message.error("Can't create as same Role exists!");
+    // } else {
       addRoles(role, () => console.log("add role callback"));
-    }
-
-    this.setState({
-      roleType: "",
-      singleRole: "",
-      departmentId: "",
-      departmentName: "",
-      isTextInputOpen: false,
-      editInd: true,
-    });
+      this.setState({
+        roleType: "",
+        singleRole: "",
+        departmentId: "",
+        departmentName: "",
+        isTextInputOpen: false,
+        editInd: true,
+        error: "", // Clear the error message when successfully adding a role
+      });
+    // }
   };
+  
 
   handleClear = () => {
     this.setState({ currentData: "" });
@@ -144,6 +185,7 @@ class Department extends Component {
     // getRoles();
   }
   render() {
+    console.log("departmentId",this.state.departmentId)
     const {
       fetchingRoles,
       fetchingRolesError,
@@ -160,53 +202,32 @@ class Department extends Component {
       linkedRoles,
       // linkedRole,
     } = this.state;
-    if (fetchingRoles) return <p>Loading ...</p>;
+    if (fetchingRoles) return <BundleLoader/>;
     if (fetchingRolesError) return <p>Error ...</p>;
     return (
       <>
-        <FlexContainer flexWrap="nowrap">
+        <div class="flex flex-no-wrap" >
           <MainWrapper
             style={{
               flexBasis: "100%",
-              // height: "30.625em",
               overflow: "auto",
               color: "#FFFAFA",
             }}
           >
-            <div style={{ width: "18vw", display: "flex" }}>
-              <Input
-                placeholder="Search by Name"
-                width={"100%"}
-                // onSearch={(value) => {
-                //   props.inputCandidateDataSearch(value);
-                //   props.setCurrentData(value);
-
-                // }}
-                onChange={(e) => this.handleSearchChange(e)}
-                value={this.props.currentData}
-              />
-              <Button
-                type={this.props.currentData ? "primary" : "danger"}
-                onClick={() => {
-                  this.props.searchRoleName(this.state.currentData);
-                }}
-              >
-                Submit
-              </Button>
-              &nbsp;
-              <Button
-                type={this.props.currentData ? "primary" : "danger"}
-                onClick={() => {
-                  this.handleClear();
-                }}
-              >
-                <FormattedMessage id="app.clear" defaultMessage="Clear" />
-              </Button>
+            <div class=" flex w-[18vw]" >
+            <Input
+         placeholder="Search by Name"
+        style={{width:"100%",marginLeft:"0.5rem"}}
+            // suffix={suffix}
+            onPressEnter={this.handleSearch}  
+            onChange={this.handleChangeDes}
+            // value={currentData}
+          />
             </div>
-            <FlexContainer flexDirection="column">
+            <div class=" flex flex-col" >
               {/* <Title style={{ padding: 8 }}>Designation</Title> */}
               <MainWrapper style={{ height: "30em", marginTop: "0.625em" }}>
-                {roles.length &&
+                {roles.length ? (
                   roles.map((role, i) => (
                     <SingleRole
                       key={i}
@@ -218,6 +239,7 @@ class Department extends Component {
                       handleChange={this.handleChange}
                       handleUpdateRole={this.handleUpdateRole}
                       departments={this.props.departments}
+                      departmentId={this.state.departmentId}
                       handleDepartment={this.handleDepartment}
                       handleClear={this.handleClear}
                       handleSearchChange={this.handleSearchChange}
@@ -225,13 +247,15 @@ class Department extends Component {
                       setCurrentData={this.setCurrentData}
                       handleDeleteRole={this.handleDeleteRole}
                     />
-                  ))}
+                  ))
+                  ) : (
+                    <p>No Data Available</p>
+                  )}
               </MainWrapper>
-            </FlexContainer>
+            </div>
             {isTextInputOpen ? (
-              <FlexContainer
-                alignItems="center"
-                style={{ marginLeft: "0.3125em", marginTop: "0.3125em" }}
+              <div class=" flex items-center ml-[0.3125em] mt-[0.3125em]"
+            
               >
                 <br />
                 <br />
@@ -257,6 +281,9 @@ class Department extends Component {
                       </Option>
                     );
                   })}
+                
+{this.state.error && <p style={{ color: "red" }}>{this.state.error}</p>}
+
                 </Select>
                 &nbsp;
                 <Button
@@ -273,11 +300,11 @@ class Department extends Component {
                 <Button type="primary" ghost onClick={this.toggleInput}>
                   Cancel
                 </Button>
-              </FlexContainer>
+              </div>
             ) : (
               <>
                 <br />
-                <FlexContainer justifyContent="flex-end">
+                <div class=" flex justify-end" >
                   <Button
                     type="primary"
                     ghost
@@ -287,7 +314,7 @@ class Department extends Component {
                   >
                     Add More
                   </Button>
-                </FlexContainer>
+                </div>
                
               </>
             )}
@@ -317,7 +344,7 @@ class Department extends Component {
               </p>
             </FlexContainer>
           </MainWrapper> */}
-        </FlexContainer>
+        </div>
         <h4>Updated on {moment(this.props.roles && this.props.roles.length && this.props.roles[0].updationDate).format("ll")} by {this.props.roles && this.props.roles.length && this.props.roles[0].name}</h4>
       </>
     );
@@ -344,7 +371,8 @@ const mapDispatchToProps = (dispatch) =>
       updateRoles,
       getDepartments,
       searchRoleName,
-      removeRole
+      removeRole,
+      ClearReducerDataOfRole
     },
     dispatch
   );

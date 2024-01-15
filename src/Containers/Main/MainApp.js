@@ -11,44 +11,30 @@ import {
 import StartStop from "./Start&Stop/StartStop";
 import { bindActionCreators } from "redux";
 import AddCandidateResumeModal from "../Candidate/Child/AddCandidateResumeModal";
-import ApartmentIcon from "@mui/icons-material/Apartment";
 import {
   Layout,
   message,
-  Popconfirm,
 } from "antd";
 import { ThemeProvider } from "styled-components";
-import Button from "antd/lib/button";
 import {
   ApplicationWrapper,
   LayoutWrapper,
   NavbarWrapper,
-  FlexContainer,
 } from "../../Components/UI/Layout";
 import { handlePartnerModal } from "../Partner/PartnerAction";
-import HandshakeIcon from "@mui/icons-material/Handshake";
-import LightbulbIcon from "@mui/icons-material/Lightbulb";
-import { CustomerServiceOutlined } from "@ant-design/icons";
-import { FloatButton } from "antd";
 import { BundleLoader } from "../../Components/Placeholder";
 import AppErrorBoundary from "../../Helpers/ErrorBoundary/AppErrorBoundary";
-import PotectedRoute from "../../Helpers/Auth/PotectedRoute";
 import NavMenu from "./NavMenu";
 import ProfileDropdown from "./ProfileDropdown";
 import SettingsDropdown from "../Settings/SettingsDropdown";
-import PortraitIcon from "@mui/icons-material/Portrait";
-import IsAuthorized from "../../Helpers/Auth/IsAuthorized";
 import Rules from "../Rules/Rules";
 import Template from "../Template/Template";
-import Theme from "../Settings/Theme/Theme";
 import { getPresentNotifications } from "../Notification/NotificationAction";
-import VolumeUpIcon from "@mui/icons-material/VolumeUp";
 import { MultiAvatar } from "../../Components/UI/Elements";
 import Call from "../Call/Call";
 import Holiday from "../Holiday/Holiday";
 import Reports from "../Reports/Reports";
 import Partner from "../Partner/Partner";
-import ContactsIcon from "@mui/icons-material/Contacts";
 import Category from "../Settings/Category/Category";
 import { handleContactModal } from "../Contact/ContactAction";
 import Recruitment from "../Settings/Recruitement/Recruitment";
@@ -63,7 +49,6 @@ import LiveMesssageModal from "../LiveMessages/LiveMesssageModal";
 import AssessmentDetails from "../Accessment/Child/AssessmentDetails/AssessmentDetails";
 import Leads from "../Leads/Leads";
 import LeadDetails from "../Leads/Child/LeadsDetailTab/LeadDetails";
-import Subscription from "./Subscription";
 import Program from "../Program/Program";
 import Course from "../Course/Course";
 import Billing from "../../Components/Billing/Billing";
@@ -71,8 +56,6 @@ import AddCallModal from "../Call/Child/AddCallModal";
 import { handleCallModal } from "../Call/CallAction";
 import { handleEventModal } from "../Event/EventAction";
 import AddEventModal from "../Event/Child/AddEventModal";
-import FactCheckIcon from "@mui/icons-material/FactCheck";
-import EventAvailableIcon from "@mui/icons-material/EventAvailable";
 import CourseDetails from "../Course/Child/CourseDetailsTab/CourseDetails";
 import ProgramDetails from "../Program/Child/ProgramDetails/ProgramDetails";
 import Projects from "../Projects/Projects";
@@ -81,6 +64,21 @@ import Invoice from "../Invoice/Invoice";
 import CandidateTotalBilling from "../Projects/Child/ProjectDetailsTab/CandidateTotalBilling";
 import { getSupportedLanguages } from '../Translate/TranslateService';
 import Location from "../Event/Child/Location/Location";
+import PitchDetails from "../Pitch/Child/PitchDetails/PitchDetails"
+import Navmenu2 from "./Navmenu2";
+import Teams from "./Teams/Teams";
+import RepositoryData from "./RepositoryData";
+import Inventory from "./Inventory/Inventory";
+import Order from "./Order/Order";
+import Supplies from "./Supplies/Supplies";
+import Shipper from "./Shipper/Shipper";
+import Account from "./Account/Account";
+import ShipperDetails from "./Shipper/ShipperDetails";
+import AccountDetails from "./Account/AccountDetailsTab/AccountDetails";
+import InventoryDetail from "./Inventory/Child/InventoryDetails/InventoryDetail";
+import Refurbish from "./Refurbish/Refurbish";
+import Suppliers from "./Suppliers/Suppliers";
+import SupplierDetails from "./Suppliers/Child/SupplierDetails/SupplierDetails";
 
 const OpportunityDetail = lazy(() =>
   import("../Opportunity/Child/OpportunityDetail/OpportunityDetail")
@@ -143,53 +141,32 @@ const AccountImport = lazy(() => import("../Import/Child/AccountImport"));
 const Requirement = lazy(() => import("../Requirement/Requirement"));
 const Demand = lazy(() => import("../Demand/Demand"));
 const AddContactModal = lazy(() => import("../Contact/Child/AddContactModal"));
-// const Users = lazy(() => import("../Users/Users"));
+const Pitch = lazy(() => import("../Pitch/Pitch"));
+const Deal = lazy(() => import("../Deal/Deal"));
+const ContactInvest = lazy(() => import("../ContactInvest/ContactInvest"));
+const Investor = lazy(() => import("../Investor/Investor"));
+const InvestorDetail = lazy(() => import("../Investor/Child/InvestorDetail/InvestorDetail"));
+const ContactInvestDetail = lazy(() => import("../ContactInvest/Child/ContactInvestDetail/ContactInvestDetail"));
+const DealDetail = lazy(() => import("../Deal/Child/DealDetail/DealDetail"));
+const Product = lazy(() => import("../Product/Product"));
+const Collection = lazy(() => import("../Collection/Collection"));
+const Plant =lazy(()=>import("../Plant/Plant"));
+const PlantDetail =lazy(()=>import("../Plant/Child/PlantDetail/PlantDetail"));
+const Procurement =lazy(()=>import("../Procurement/Procurement"));
 
-// class MainApp extends React.Component {
-//   constructor(props) {
-//     super(props);
-//     this.state = {
-//       collapsed: false,
-//       theme: "light",
-//     };
-//   }
-
-//   toggle = () => {
-//     this.setState({
-//       collapsed: !this.state.collapsed,
-//     });
-//   };
-//   toggleTheme = (value) => {
-//     this.setState({
-//       theme: value ? "light" : "light",
-//     });
-//   };
-// componentDidMount = () => {
-//   const { user, getPresentNotifications } = this.props;
-//   if (user && user.userId) {
-//     getPresentNotifications(user.userId);
-//   }
-// };
-// componentWillReceiveProps(nextProps) {
-//   const { user, getPresentNotifications } = nextProps;
-//   if (user.userId !== this.props.user.userId) {
-//     getPresentNotifications(user.userId);
-//   }
-// }
 function MainApp(props) {
   const [visible, setVisible] = useState(false);
   const [confirmLoading, setConfirmLoading] = useState(false);
 
   const [selectedLanguage, setSelectedLanguage] = useState('en');
- 
+
   const [supportedLanguages, setSupportedLanguages] = useState([]);
 
   useEffect(() => {
     props.getOpportunityRecord(props.userId);
-    // props.getRequirementRecord();
   }, []);
 
- 
+
 
   useEffect(() => {
     const fetchSupportedLanguages = async () => {
@@ -207,6 +184,7 @@ function MainApp(props) {
   const handleLanguageChange = (language) => {
     setSelectedLanguage(language);
   };
+
 
   const showPopconfirm = () => {
     setVisible(true);
@@ -252,53 +230,55 @@ function MainApp(props) {
 
   const organizationLogo = (
     <MultiAvatar
+    // style={{width:"8rem"}}
       imageId={imageId}
-      //marginLeft="30px"
-      // primaryTitle={organizationName}
+    //marginLeft="30px"
+    // primaryTitle={organizationName}
     />
   );
   return (
     <>
       <ThemeProvider theme={props.theme}>
         <LayoutWrapper>
-          <Sider
-            trigger={null}
-            collapsible
-            collapsed={collapsed}
-            width={"10vw"}
-            style={{
-              minHeight: "100vh",
-              background: "#38445E",
-              overflow: "auto",
-              //flex:"0 0 11vw"
-              // height: "100vh",
-              // position: "fixed",
-            }}
-          >
-            {/* <div
+          <div class="max-sm:hidden overflow-x-auto">
+            <Sider
+              trigger={null}
+              collapsible
+              collapsed={collapsed}
+              width={"10vw"}
+              style={{
+                minHeight: "100vh",
+                background: "#38445E",
+                overflow: "auto",
+                //flex:"0 0 11vw"
+                // height: "100vh",
+                // position: "fixed",
+              }}
+            >
+              {/* <div
             className="logo"
             style={{
               justifyContent: !collapsed ? "flex-start" : "center",
               height: 50,
             }}
           > */}
-            <div
-              className="logo"
-              style={{
-                justifyContent: !collapsed ? "center" : "center",
-                height: 50,
-                marginLeft: "40px",
-              }}
-            >
-              {collapsed && organizationLogo}
-              {!collapsed && organizationLogo}
-              {/* {collapsed && organizationLogo}
+              <div 
+                 className="logo1"
+                style={{
+                  justifyContent: !collapsed ? "center" : "center",
+                  height: 50,
+                  marginLeft: "40px",
+                }}
+              >
+                {collapsed && organizationLogo}
+                {!collapsed && organizationLogo}
+                {/* {collapsed && organizationLogo}
             {!collapsed && organizationLogo} */}
-              {/* {this.state.collapsed && organizationLogo}
+                {/* {this.state.collapsed && organizationLogo}
                             {!this.state.collapsed && organizationLogo}
                             {!this.state.collapsed && <span style={{ color: 'white', fontWeight: 'bold', fontSize: 20 }} >{organization.organizationName}</span>} */}
 
-              {/* {collapsed && (
+                {/* {collapsed && (
               <img
                 className="small-logo"
                 src={FWShortLogo}
@@ -312,21 +292,24 @@ function MainApp(props) {
                 style={{ height: "40px", marginLeft: "28px" }}
               />
             )} */}
-            </div>
-            <NavMenu
-              collapsed={collapsed}
-              toggleCollapsed={toggle}
-              toggleTheme={toggleTheme}
-              theme={theme}
-              selectedLanguage={selectedLanguage}
-            />
-          </Sider>
+              </div>
+              <NavMenu
+                collapsed={collapsed}
+                toggleCollapsed={toggle}
+                toggleTheme={toggleTheme}
+                theme={theme}
+                selectedLanguage={selectedLanguage}
+              />
+            </Sider>
+          </div>
           <LayoutWrapper>
-            <NavbarWrapper style={{ padding: 0, height: 50, alignItems: "center", position: "sticky", zIndex: "999",top:" 0.15rem",
-  
- 
- }}>
+            <NavbarWrapper style={{
+              padding: 0, height: 50, alignItems: "center", position: "sticky", zIndex: "999", top: " 0.15rem",
+
+
+            }}>
               <Header>
+                <div class="md:hidden"><Navmenu2 selectedLanguage={selectedLanguage} /></div>
                 <div
                   style={{
                     height: "100%",
@@ -336,9 +319,18 @@ function MainApp(props) {
                   }}
                 >
                   &nbsp;&nbsp;
-        
+                  <div style={{ marginLeft: "0.625em" }} class="max-sm:hidden">
+                  <Select
+                    value={props.preferedLanguage}
+                    style={{ width: 120 }}
+                    onChange={(value) => handleLanguageSelect(value)}
+                  >
+                    <Option value="English">English</Option>
+                    <Option value="Dutch">Dutch</Option>
+                  </Select>
                 </div>
-                <StartStop/>
+                </div>
+                <StartStop />
                 {/* <Popconfirm
                 title="Stop"
                 visible={visible}
@@ -362,14 +354,7 @@ function MainApp(props) {
 
               </Popconfirm>  */}
 
-                <div
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    alignSelf: "flex-end",
-                    marginRight: 20,
-                    height: 45,
-                  }}
+                <div class="mr-3 flex items-center h-[2.5rem]"
                 >
                   {/* <ReactChat /> */}
 
@@ -478,48 +463,42 @@ function MainApp(props) {
                                         </FlexContainer>
                                     </Link> */}
                   {/* <Subscription /> */}
-                  <div
+
+                  <div class=" text-white bg-mainclr h-[1.75rem] mr-3 max-sm:hidden"
                     style={{
-                      backgroundColor: "#ff7158bf",
-                      color: "white",
-                      // borderColor: "rgb(251, 133, 0)",
                       border: "1px solid tomato",
                       borderRadius: "5px",
-                      position: "relative",
-                      height: "27px",
-                      fontFamily:"Poppins",
-                      textAlign: "center",
                       lineHeight: "24px",
                       padding: "0px 10px",
-                      marginLeft: "auto",
-                      marginRight: "20px",
                     }}
                   >
                     {props.department}
                   </div>
-                  <div
+                  <div class=" text-white bg-mainclr h-[1.75rem] mr-3 max-sm:hidden"
                     style={{
-                      backgroundColor: "#ff7158bf",
-                      color: "white",
-                      // borderColor: "rgb(251, 133, 0)",
                       border: "1px solid tomato",
                       borderRadius: "5px",
-                      position: "relative",
-                      height: "27px",
-                      fontFamily:"Poppins",
-                      textAlign: "center",
                       lineHeight: "24px",
                       padding: "0px 10px",
-                      marginLeft: "auto",
-                      marginRight: "20px",
                     }}
                   >
                     {props.roleType}
                   </div>
                   {/* <Subscription /> */}
-                  <IsAuthorized>
-                    <SettingsDropdown />
-                  </IsAuthorized>
+                  {user.role === "ADMIN" ?
+                  
+
+                      <SettingsDropdown />
+
+                  
+                   : null} 
+                  {/* {user.role === "ADMIN" ?
+                    <IsAuthorized>
+
+                      <SettingsDropdown />
+
+                    </IsAuthorized> 
+                   : null}  */}
                   {/* <a href="#" style={{ height: 45, marginRight: 20 }}>
                                         <FlexContainer alignItems='center' style={{ height: '100%' }}>
                                             <Badge count={5} >
@@ -527,13 +506,11 @@ function MainApp(props) {
                                             </Badge>
                                         </FlexContainer>
                                     </a> */}
-                  <a href="#" style={{ height: 45, marginRight: 20 }}>
-                    <FlexContainer
-                      alignItems="center"
-                      style={{ height: "100%" }}
+                  <a href="#" style={{ height: 45, marginRight: 10 }}>
+                    <div  class=" flex items-center h-full"
                     >
                       <NotificationPopover />
-                    </FlexContainer>
+                    </div>
                   </a>
                   {/* <Link to="/help" style={{ height: 45, marginRight: 20 }}>
                     <Tooltip title="Knowledge Hub">
@@ -553,6 +530,8 @@ function MainApp(props) {
                       </FlexContainer>
                     </Tooltip>
                   </Link> */}
+
+                  <RepositoryData />
                   <ProfileDropdown />
                   {/* <Theme /> */}
                 </div>
@@ -573,8 +552,19 @@ function MainApp(props) {
                         component={Permissions}
                       />
                       <Route exact path="/mileage" component={Mileage} />
+                      <Route exact path="/shipper" component={Shipper} />
                       <Route exact path="/expense" component={Expense} />
+                      <Route exact path="/supplies" component={Supplies} />
+                      {/* <Route exact path="/supplier" component={Supplier} /> */}
+                      <Route exact path="/order" component={Order} />
+                      <Route exact path="/account" component={Account} />
                       <Route exact path="/location" component={Location} />
+                      <Route exact path="/plant" component={Plant} />
+                      <Route exact path="/plant/:plantId" component={PlantDetail}/>
+                      <Route exact path="/suppliers" component={Suppliers} />
+                      <Route exact path="/inventory" component={Inventory} />
+                      <Route exact path="/refurbish" component={Refurbish} />
+                      <Route exact path="/teams" component={Teams} />
                       <Route exact path="/employees" component={Employees} />
                       <Route exact path="/leads" component={Leads} />
                       <Route exact path="/accessment" component={Accessment} />
@@ -601,6 +591,7 @@ function MainApp(props) {
                       <Route exact path="/reports" component={Reports} />
                       <Route exact path="/partner" component={Partner} />
                       <Route exact path="/call" component={Call} />
+                      <Route exact path="/collection" component={Collection} />
                       <Route exact path="/task" component={Task} />
                       <Route exact path="/event" component={Event} />
                       <Route
@@ -608,10 +599,20 @@ function MainApp(props) {
                         path="/employee/:id"
                         component={EmployeeDetails}
                       />
-                        <Route
+                      <Route
+                        exact
+                        path="/distributor/:distributorId"
+                        component={AccountDetails}
+                      />
+                      <Route
                         exact
                         path="/hour/candidate/hour-details/project/:candidateId/:projectId"
                         component={CandidateTotalBilling}
+                      />
+                      <Route
+                        exact
+                        path="/locationDetails/:locationDetailsId/:data?"
+                        component={InventoryDetail}
                       />
                       <Route
                         exact
@@ -660,24 +661,23 @@ function MainApp(props) {
                         path="/opportunity"
                         component={Opportunity}
                       />
-                      {/* <Route exact path="/candidate" 
+                      <Route exact path="/candidate" 
                       component={Candidate}   
+                      />
+
+                      {/* <Route
+                        exact
+                        path="/candidate"
+                        render={(props) => <Candidate {...props} selectedLanguage={selectedLanguage} />}
                       /> */}
-
-
-<Route
-  exact
-  path="/candidate"
-  render={(props) => <Candidate {...props}  selectedLanguage={selectedLanguage} />}
-/>
                       <Route exact path="/message" component={LiveMessage} />
-                     
 
-<Route
-  exact
-  path="/candidate/:candidateId"
-  render={(props) => <CandidateDetails {...props}  selectedLanguage={selectedLanguage} />}
-/>
+
+                      <Route
+                        exact
+                        path="/candidate/:candidateId"
+                        render={(props) => <CandidateDetails {...props} selectedLanguage={selectedLanguage} />}
+                      />
                       <Route
                         exact
                         path="/customer/:customerId"
@@ -687,6 +687,22 @@ function MainApp(props) {
                         exact
                         path="/contact/:contactId"
                         component={ContactDetail}
+                      />
+                      <Route
+                        exact
+                        path="/shipper/:shipperId"
+                        component={ShipperDetails}
+                      />
+                       <Route
+                        exact
+                        path="/supplier/:supplierId"
+                        component={SupplierDetails}
+                      />
+
+                      <Route
+                        exact
+                        path="/pitch/:investorLeadsId"
+                        component={PitchDetails}
                       />
                       <Route
                         exact
@@ -714,9 +730,21 @@ function MainApp(props) {
                         path="/requirement"
                         component={Requirement}
                       />
-
+                       <Route
+                        exact
+                        path="/procurement"
+                        component={Procurement}
+                      />
                       <Route exact path="/demand" component={Demand} />
 
+                      <Route exact path="/pitch" component={Pitch} />
+                      <Route exact path="/deal" component={Deal} />
+                      <Route exact path="/contactInvest" component={ContactInvest} />
+                      <Route exact path="/investor" component={Investor} />
+                      <Route exact path="/investor/:investorId" component={InvestorDetail} />
+                      <Route exact path="/contactinvest/:contactId" component={ContactInvestDetail} />
+                      <Route exact path="/dealDetails/:invOpportunityId" component={DealDetail} />
+                      <Route exact path="/product" component={Product} />
                       <Route path="**" component={PageNotFound} />
                     </Switch>
                   </Suspense>
@@ -751,8 +779,8 @@ function MainApp(props) {
       <AddCandidateResumeModal
         addCandidateResumeModal={props.addCandidateResumeModal}
         handleCandidateResumeModal={props.handleCandidateResumeModal}
-        // handleResponseData={this.handleResponseData}
-        // responseData={this.state.responseData}
+      // handleResponseData={this.handleResponseData}
+      // responseData={this.state.responseData}
       />
 
       <AddCallModal
@@ -825,6 +853,7 @@ const mapStateToProps = ({
   addCallModal: call.addCallModal,
   addEventModal: event.addEventModal,
   addTaskModal: task.addTaskModal,
+  user: auth.userDetails,
 });
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(

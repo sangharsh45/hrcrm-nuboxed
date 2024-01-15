@@ -1,6 +1,6 @@
 import React from 'react';
 import { withRouter } from "react-router-dom";
-import { FormattedMessage, IntlProvider } from "react-intl";
+import { FormattedMessage } from "react-intl";
 import { FlexContainer } from "../../../../../Components/UI/Layout/";
 import { Button } from "antd";
 import { connect } from "react-redux";
@@ -10,8 +10,6 @@ import StatusToggleID from './AssessmentCards/StatusToggleID';
 
 function AssessmentDetailsActionLeft(props) {
   const {
-    assessmentByAssessmentId: { assessmentName, publishInd, assessmentId },
-    toggleViewType,
     assessmentByAssessmentId,
   } = props;
   return (
@@ -20,23 +18,21 @@ function AssessmentDetailsActionLeft(props) {
         <div style={{display:"flex",flexDirection:"row",justifyContent:"space-between" }}>
           <div style={{margin:"auto"}}>
         <RollbackOutlined
-          style={{ marginRight: "0.3rem" }}
-          iconType="rollback"
-          // tooltipTitle="Back"
-          tooltipTitle={
+          class="mr-[0.3rem]" 
+            iconType="rollback"
+           tooltipTitle={
             <FormattedMessage
               id="app.back"
               defaultMessage="Back"
             />
           }
-          // style={{ color: "#1890ff" }}
         onClick={() => props.history.goBack()}
         />
         </div>
-        <div style={{margin:"auto"}}>
+        <div class=" m-auto">
         <h7>{`${props.assessmentByAssessmentId.assessmentName}`}</h7>
         </div>
-        <div style={{marginLeft:"1.25em"}}>
+        <div class="ml-5">
         <StatusToggleID
         assessmentByAssessmentId={assessmentByAssessmentId}
         assessmentId={props.assessmentId}

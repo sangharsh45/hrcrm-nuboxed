@@ -1,127 +1,158 @@
-import React, { lazy, Suspense, useState, useEffect, useMemo } from "react";
-import { FlexContainer } from "../../../Components/UI/Layout";
+import React, { lazy, Suspense, useState, } from "react";
 import RecruitmentActionRight from "./RecruitmentActionRight";
 import {
    getProcessForRecruit,
     dataClear,
 } from "../SettingsAction";
+import Matrix from "../Recruitement/Child/RecruitmentTab/Matrix"
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import Template from "../../Template/Template"
-import RecruitTab from "../../Rules/Child/RulesTab/RecruitPro/RecruitTab";
-import SeachTab from "./Child/RecruitmentTab/SearchTab";
-import IndeedForm from "./Child/Indeed/IndeedTab";
-import Library from "../Library/Library";
-import Commission from "./Child/Commission/Commission";
-import ReportScheduler from "./Child/ReportScheduler/ReportScheduler";
-import ThirdPartyAccess from "./Child/ThirdPartyAccess/ThirdPartyAccess";
 import Access from "./Child/Access/Access";
-import ComplianceForm from "./Child/Compliance/ComplianceForm";
 import General from "./Child/General/General";
-import NotificationForm from "../../Template/child/TemplateTab/Template/NotificationForm";
+import Form from "./Child/RecruitmentTab/FormTab"
  import WorkFlow from "./Child/RecruitmentTab/WorkFlowTab";
-import AssessmentTab from "./Child/Assessment/AssessmentTab";
-import Certification from "./Child/Certification/Certification";
 import SkillsTab from "../Library/SkillsTab";
-import Notifications from "./Child/General/Notifications";
-import NotificationsTab from "./Child/Notification/NotificationsTab";
-import HolidayTab from "../../Holiday/HolidayTab";
-import ConfigureTab from "./Child/Configure/ConfigureTab";
 import ApprovalTab from "./Child/Approval/ApprovalTab";
 import SettingsHolidayTab from "./Child/Holiday/SettingsHolidayTab";
+import LeadsTab from "../../Rules/Child/RulesTab/LeadsTab";
+import DistributionTab from "./Child/DistributionTab/DistributionTab";
+import FinanceTab from "./Child/FinanceTab/FinanceTab";
 
 const RecruitmentActionLeft = lazy(() => import("./RecruitmentActionLeft"));
+const ReportScheduler = lazy(() =>
+  import("../Recruitement/Child/ReportScheduler/ReportScheduler")
+);
+const NotificationToggleForm =lazy(()=>import("./Child/RecruitmentTab/ToggleNotify/NotificationToggleForm"));
 
 function Recruitment(props) {
   const name = [
-    {
-      rulesName: "Workflow",
-      ruleId: "1",
-       component: <WorkFlow/>,
-    },
-    {
-      rulesName: "Template",
-      ruleId: "4",
-      component: <Template />,
-    },
-    {
-      rulesName: "Automation",
-      ruleId: "2",
-      component: <RecruitTab />,
-    },
-    {
-      rulesName: "Search",
-      ruleId: "3",
-      component: <SeachTab />,
-    },
-    {
-      rulesName: "Sourcing",
-      ruleId: "5",
-      component: <IndeedForm />,
-    },
-    {
-      rulesName: "Skills and Certifications",
-      ruleId: "6",
-      component: <SkillsTab/>,
-    },
-    {
-      rulesName: "Report Scheduler",
-      ruleId: "8",
-      component: <ReportScheduler />,
-    },
 
-    {
-      rulesName: "Monetize",
-      ruleId: "9",
-      component: <ThirdPartyAccess />,
-    },
-   
     {
       rulesName: "Access",
-      ruleId: "12",
+      ruleId: "1",
       component: <Access />,
-    },
-
-    {
-      rulesName: "Compliance",
-      ruleId: "13",
-      component: <ComplianceForm />,
-    },
-    {
-      rulesName: "Commission",
-      ruleId: "7",
-      component: <Commission/>,
-    },
-    {
-      rulesName: "General",
-      ruleId: "14",
-      component: <General/>,
-    },
-    {
-      rulesName: "Notification",
-      ruleId: "15",
-      component: <NotificationsTab />,
-    },
-    {
-      rulesName: "Assessment",
-      ruleId: "16",
-      component: <AssessmentTab />,
-    },
-    {
-      rulesName: "Holidays",
-      ruleId: "17",
-      component: <SettingsHolidayTab />,
-    },
-    {
-      rulesName: "Task",
-      ruleId: "18",
-      component: <ConfigureTab />,
     },
     {
       rulesName: "Approval",
-      ruleId: "19",
+      ruleId: "2",
       component: <ApprovalTab />,
     },
+    {
+      rulesName: "Automation",
+      ruleId: "3",
+      component: <DistributionTab />,
+    },
+    {
+      rulesName: "Form",
+      ruleId: "4",
+      component: <Form/>,
+    },
+    
+    {
+      rulesName: "General",
+      ruleId: "5",
+      component: <General/>,
+    },
+    {
+      rulesName: "Holidays",
+      ruleId: "6",
+      component: <SettingsHolidayTab />,
+    },
+    // {
+    //   rulesName: "Notification",
+    //   ruleId: "15",
+    //   component: <NotificationsTab />,
+    // },
+    
+    {
+      rulesName: "Report Scheduler",
+      ruleId: "7",
+      component: <ReportScheduler />,
+    },
+    {
+      rulesName: "Rules",
+      ruleId: "8",
+      component: <LeadsTab />,
+    },
+    {
+      rulesName: "Skills and Certifications",
+      ruleId: "9",
+      component: <SkillsTab/>,
+    },
+    {
+      rulesName: "Template",
+      ruleId: "10",
+      component: <Template />,
+    },
+    {
+      rulesName: "Workflow",
+      ruleId: "11",
+       component: <WorkFlow/>,
+    },
+    {
+      rulesName: "Finance",
+      ruleId: "12",
+      component: <FinanceTab/>,
+    },
+    {
+      rulesName: "Matrix",
+      ruleId: "13",
+      component: <Matrix/>,
+    },
+   {
+      rulesName: "Notification",
+      ruleId: "14",
+      component: <NotificationToggleForm />,
+    },
+    // {
+    //   rulesName: "Automation",
+    //   ruleId: "2",
+    //   component: <RecruitTab />,
+    // },
+    // {
+    //   rulesName: "Search",
+    //   ruleId: "3",
+    //   component: <SeachTab />,
+    // },
+    // {
+    //   rulesName: "Sourcing",
+    //   ruleId: "5",
+    //   component: <IndeedForm />,
+    // },
+    
+    
+
+    // {
+    //   rulesName: "Monetize",
+    //   ruleId: "9",
+    //   component: <ThirdPartyAccess />,
+    // },
+   
+    
+
+    // {
+    //   rulesName: "Compliance",
+    //   ruleId: "13",
+    //   component: <ComplianceForm />,
+    // },
+    // {
+    //   rulesName: "Commission",
+    //   ruleId: "7",
+    //   component: <Commission/>,
+    // },
+    
+    
+    // {
+    //   rulesName: "Assessment",
+    //   ruleId: "16",
+    //   component: <AssessmentTab />,
+    // },
+    
+
+    
+   
+    
  
      ];
   const [rules, setRules] = useState(name);
@@ -143,10 +174,10 @@ function Recruitment(props) {
 
   return (
     <div>
-      <FlexContainer>
+      <div class=" flex ">
         <Suspense fallback={"Loading..."}>
-          <FlexContainer flexWrap="no-wrap" style={{ width: "100%" }}>
-            <div style={{ width: "24%" }}>
+        <div class=" flex flex-no-wrap w-full ">
+            <div class=" w-[24%]">
               <RecruitmentActionLeft
                 handleRuleClick={handleRuleClick}
                 rules={rules}
@@ -155,12 +186,12 @@ function Recruitment(props) {
                 // handleRecruitProAdvance={handleRecruitProAdvance}
               />
             </div>
-            <div style={{ width: "74%" }}>
+            <div class=" w-[74%]" >
               <RecruitmentActionRight current={currentRulesOpen} />
             </div>
-          </FlexContainer>
+          </div>
         </Suspense>
-      </FlexContainer>
+      </div>
       {/* )} */}
     </div>
   );

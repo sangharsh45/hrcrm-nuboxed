@@ -2,9 +2,6 @@ import React, { Component, lazy, Suspense } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { FormattedMessage } from "react-intl";
-import {  Tooltip } from "antd";
-import NoteAltIcon from "@mui/icons-material/NoteAlt";
-import MicIcon from '@mui/icons-material/Mic';
 import { PlusOutlined } from "@ant-design/icons";
 import InsertDriveFileIcon from '@mui/icons-material/InsertDriveFile';
 import ReactContactSpeechModal from "../ReactContactSpeechModal"
@@ -13,9 +10,6 @@ import { TabsWrapper } from "../../../../../Components/UI/Layout";
 import { handleDocumentUploadModal } from "../../../ContactAction";
 import LinkedDocuments from "./Document/LinkedDocuments";
 import AddDocumentModal from "./Document/AddDocumentModal";
-import LinkedContactNotes from "./LinkedContactNotes";
-import OpportunityTable from "./Opportunity/LinkedOpportunity";
-import WorkIcon from '@mui/icons-material/Work';
 import { handleContactOpportunityModal,handleContactReactSpeechModal } from "../../../ContactAction";
 import AddContactOpportunityModal from "../../../Child/ContactDetail/ContactTab/Opportunity/AddContactOpportunityModal";
 import { getOpportunityListByContactId } from "../../../ContactAction";
@@ -30,7 +24,7 @@ class ContactDetailTab extends Component {
     };
   }
 
-  handleTabChange = (key) => this.setState({ activeKey: key });
+  handleTabChange = (key) => this.setState(  key );
   render() {
     const { activeKey } = this.state;
     const {
@@ -48,7 +42,7 @@ class ContactDetailTab extends Component {
       <>
         <TabsWrapper>
           <StyledTabs defaultActiveKey="1" onChange={this.handleTabChange}>
-          <TabPane
+          {/* <TabPane
               tab={
                 <>
                  
@@ -56,8 +50,8 @@ class ContactDetailTab extends Component {
                   />
                     <span class=" ml-1">
                      <FormattedMessage
-                      id="app.requirements"
-                      defaultMessage="Requirements"
+                      id="app.orders"
+                      defaultMessage="Orders"
                     />
                   </span>
                   {activeKey === "1" && (
@@ -72,9 +66,9 @@ class ContactDetailTab extends Component {
                 {" "}
                 <OpportunityTable />
               </Suspense>
-            </TabPane>
+            </TabPane> */}
             
-             <TabPane
+             {/* <TabPane
               tab={
                 <>
                   <span>
@@ -111,7 +105,7 @@ class ContactDetailTab extends Component {
                 {" "}
                 <LinkedContactNotes />
               </Suspense>
-            </TabPane>
+            </TabPane> */}
             <TabPane
               tab={
                 <>
@@ -124,7 +118,7 @@ class ContactDetailTab extends Component {
                     />
                     {/* Documents */}
                   </span>
-                  {activeKey === "3" && (
+                  {activeKey === "1" && (
                     <>
                       <PlusOutlined
                         type="plus"
@@ -141,7 +135,7 @@ class ContactDetailTab extends Component {
                   )}
                 </>
               }
-              key="3"
+              key="1"
             >
               <Suspense fallback={"Loading ..."}>
                 {" "}

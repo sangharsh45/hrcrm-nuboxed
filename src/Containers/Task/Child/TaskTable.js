@@ -27,19 +27,24 @@ import {
   setEditTask,
   handleTaskNotesDrawerModal,
   handleTaskProjectDrawerModal,
+  handleTaskopenModal
 } from "../TaskAction";
 import Highlighter from "react-highlight-words";
 import Box from "@mui/material/Box";
 import { DataGrid } from "@mui/x-data-grid";
 import { MultiAvatar } from "../../../Components/UI/Elements";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
-import AddTaskNotesDrawerModal from "./AddTaskNotesDrawerModal";
+const AddTaskNotesDrawerModal = lazy(() => import("./AddTaskNotesDrawerModal"));
+const OpenTaskModal = lazy(() => import("./OpenTaskModal"));
 const UpdateTaskModal = lazy(() => import("./UpdateTaskModal"));
 const ButtonGroup = Button.Group;
 
 const TaskTable = (props) => {
   const [data, setData] = useState("");
   const [data1, setData1] = useState("");
+  const [currentNameId, setCurrentNameId] = useState("");
+
+  const [currentprocessName, setCurrentprocessName] = useState("");
   const tab = document.querySelector('.ant-layout-sider-children');
   const tableHeight = tab && tab.offsetHeight * 0.75;
 
@@ -58,7 +63,10 @@ const TaskTable = (props) => {
       // props.getProviderCustomerData(props.provider.serviceId, page);
     }, 100);
   };
-
+  function handleSetCurrentProcessName(item) {
+    setCurrentprocessName(item);
+     console.log(item);
+   }
   const handleIconClick = (data) => {
     setData(data);
   };
@@ -66,6 +74,10 @@ const TaskTable = (props) => {
   const handleNotesClick = (data1) => {
     setData1(data1);
   };
+  function handleSetTaskNameId(item) {
+    setCurrentNameId(item);
+  }
+  
 
   const getColumnSearchProps = (dataIndex) => ({
     filterDropdown: ({
@@ -184,6 +196,7 @@ const TaskTable = (props) => {
       title: "",
       width: "2%",
     },
+ 
 
     {
       title: "",
@@ -231,6 +244,10 @@ const TaskTable = (props) => {
       },
     },
     {
+      title: "",
+      width: "2%",
+    },
+    {
       title: "Type",
      
       dataIndex: "taskType",
@@ -248,34 +265,60 @@ const TaskTable = (props) => {
     
    dataIndex: "taskName",
       width: "7%",
-    },
-
-    {
-      title: "Customer",
-
-    
-      dataIndex: "customerName",
-      width: 8,
       render: (name, item, i) => { 
-        
+              
         return (
-          <span>
-            {item.customerName === null ? (
-              ""
-            ) : (
-            <Tooltip title={item.customerName}>
-              <MultiAvatar
-                primaryTitle={item.customerName}
-                imgWidth={"1.8em"}
-                imgHeight={"1.8em"}
-              />
-           
-            </Tooltip>
-               )}
-          </span>
+         
+             <>
+             <span   
+                onClick={() => {
+                  props.handleTaskopenModal(true);               
+                  handleSetCurrentProcessName(item)
+                  // this.props.setCurrentOpportunityRecruitMentData(item);
+                }}
+                style={{
+                  cursor: "pointer",
+                  color: "#042E8A",
+                }}          
+               >
+
+                 {`${item.taskName} `} &nbsp;
+
+
+               </span>
+
+             </>
+          
         );
       },
     },
+
+    // {
+    //   title: "Customer",
+
+    
+    //   dataIndex: "customerName",
+    //   width: 8,
+    //   render: (name, item, i) => { 
+        
+    //     return (
+    //       <span>
+    //         {item.customerName === null ? (
+    //           ""
+    //         ) : (
+    //         <Tooltip title={item.customerName}>
+    //           <MultiAvatar
+    //             primaryTitle={item.customerName}
+    //             imgWidth={"1.8em"}
+    //             imgHeight={"1.8em"}
+    //           />
+           
+    //         </Tooltip>
+    //            )}
+    //       </span>
+    //     );
+    //   },
+    // },
         {
           title: "Owner",
           dataIndex: "submittedBy",
@@ -338,23 +381,30 @@ render: (name, item, i) => {
 
 return (
           <span>
-            <Avatar.Group
-              maxCount={2}
-              maxStyle={{ color: "#f56a00", backgroundColor: "#fde3cf" }}
-            >
-              {item.candidates &&
-                item.candidates.map((candidate, i) => {
-                  const data1 = candidate.candidateName.slice(0, 2);
-                  console.log("datas", data1);
-                  return (
-                    <Tooltip title={candidate.candidateName}>
-                      <Avatar style={{ backgroundColor: "#94b3e4" }}>
-                        {data1}
-                      </Avatar>
-                    </Tooltip>
-                  );
-                })}
-            </Avatar.Group>
+          <Avatar.Group
+  maxCount={2}
+  maxStyle={{ color: "#f56a00", backgroundColor: "#fde3cf" }}
+>
+  {item.owner &&
+    item.owner.map((candidate, i) => {
+      // Check if candidate exists and has a fullName property
+      if (candidate && candidate.fullName) {
+        const data1 = candidate.fullName.slice(0, 2);
+        console.log("datas", data1);
+        return (
+          <Tooltip title={candidate.fullName} key={i}>
+            <Avatar style={{ backgroundColor: "#94b3e4" }}>
+              {data1}
+            </Avatar>
+          </Tooltip>
+        );
+      } else {
+        // Handle the case where candidate.fullName is null or undefined
+        return null; // Or display some default content
+      }
+    })}
+</Avatar.Group>
+
           </span>
         );
 },
@@ -506,7 +556,7 @@ return (
               <NoteAltIcon
                 onClick={() => {
                   handleTaskNotesDrawerModal(true);
-                  this.handleNotesClick(item);
+                  handleSetTaskNameId(item);
                 }}
                 style={{ color: "green", cursor: "pointer", fontSize: "0.8rem" }}
               />
@@ -570,32 +620,32 @@ return (
                 },
 
 
-                {
+                // {
                      
-                  title: "",
-                  // dataIndex: "submittedBy",
-                      width: 2,
-                      render: (name, item, i) => { 
-                        // console.log("cell",cellValues)
+                //   title: "",
+                //   // dataIndex: "submittedBy",
+                //       width: 2,
+                //       render: (name, item, i) => { 
+                //         // console.log("cell",cellValues)
                       
-                        return (
-                          <Tooltip title="Pulse">
-                            <MonitorHeartIcon
-                              type="edit"
-                              style={{
-                                cursor: "pointer",
-                                color: "#df9697",
-                                fontSize: "0.8rem",
-                              }}
-                              onClick={() => {
-                                handleTaskProjectDrawerModal(true);
-                                this.handleIconClick(item);
-                              }}
-                            />
-                          </Tooltip>
-                        );
-                      },
-                    },
+                //         return (
+                //           <Tooltip title="Pulse">
+                //             <MonitorHeartIcon
+                //               type="edit"
+                //               style={{
+                //                 cursor: "pointer",
+                //                 color: "#df9697",
+                //                 fontSize: "0.8rem",
+                //               }}
+                //               onClick={() => {
+                //                 handleTaskProjectDrawerModal(true);
+                //                 this.handleIconClick(item);
+                //               }}
+                //             />
+                //           </Tooltip>
+                //         );
+                //       },
+                //     },
 
 
 
@@ -624,6 +674,8 @@ return (
                   
     
   ];
+  console.log("currentNameId", currentNameId);
+
 
   return (
     <>
@@ -655,17 +707,26 @@ return (
           updateTaskModal={updateTaskModal}
           handleUpdateTaskModal={handleUpdateTaskModal}
         />
+        <OpenTaskModal
+          addTaskDetailModal={props.addTaskDetailModal}
+          handleTaskopenModal={props.handleTaskopenModal}
+          item={currentprocessName}
+        />
 
         <AddTaskProjectDrawerModal
           handleTaskProjectDrawerModal={props.handleTaskProjectDrawerModal}
           addDrawerTaskProjectModal={props.addDrawerTaskProjectModal}
           data={data}
         />
-        <AddTaskNotesDrawerModal
-          handleTaskNotesDrawerModal={props.handleTaskNotesDrawerModal}
-          addDrawerTaskNotesModal={props.addDrawerTaskNotesModal}
-          data1={data1}
-        />
+<AddTaskNotesDrawerModal
+handleSetTaskNameId={handleSetTaskNameId}
+  handleTaskNotesDrawerModal={props.handleTaskNotesDrawerModal}
+  addDrawerTaskNotesModal={props.addDrawerTaskNotesModal}
+  currentNameId={currentNameId}
+  // taskName={currentprocessName.taskName} // Pass taskName as a prop
+
+/>
+
 
       {/* AddTaskProjectDrawerModal and AddTaskNotesDrawerModal components go here */}
     </>
@@ -673,6 +734,7 @@ return (
 };
   const mapStateToProps = ({ auth, task, opportunity }) => ({
     userDetails: auth.userDetails,
+    addTaskDetailModal:task.addTaskDetailModal,
     addDrawerTaskNotesModal: task.addDrawerTaskNotesModal,
     userId: auth.userDetails.userId,
     employeeId: auth.userDetails.employeeId,
@@ -696,6 +758,7 @@ return (
         rejectTaskByTaskId,
         setEditTask,
         handleUpdateTaskModal,
+        handleTaskopenModal
       },
       dispatch
     );

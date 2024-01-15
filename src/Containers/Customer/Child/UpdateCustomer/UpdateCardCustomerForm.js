@@ -71,29 +71,29 @@ checked:this.props.setEditingCustomer.category==="White" || this.props.setEditin
         <Formik
           // enableReinitialize
           initialValues={{
-            name: this.props.customer.name || "",
-            url: this.props.customer.url || "",
-            sectorId: this.props.customer.sectorId  ,
-            vatNo:this.props.customer.vatNo  ,
-            email: this.props.customer.email || "",
-            country:this.props.customer.country || "",
+            name: this.props.setEditingCustomer.name || "",
+            url: this.props.setEditingCustomer.url || "",
+            sectorId: this.props.setEditingCustomer.sectorId  ,
+            vatNo:this.props.setEditingCustomer.vatNo  ,
+            email: this.props.setEditingCustomer.email || "",
+            country:this.props.setEditingCustomer.country || "",
             countryDialCode:
-              this.props.customer.countryDialCode ||
+              this.props.setEditingCustomer.countryDialCode ||
               this.props.user.countryDialCode,
-            phoneNumber: this.props.customer.phoneNumber || "",
+            phoneNumber: this.props.setEditingCustomer.phoneNumber || "",
             userId: this.props.userId,
             // country:"",
-            notes: this.props.customer.notes || "",
+            notes: this.props.setEditingCustomer.notes || "",
             category:this.state.checked?"Both": this.state.whiteblue ? "White" : "Blue",
             address: [
               {
-                addressId: this.props.customer.address.length ? this.props.customer.address[0].addressId : "",
-                address1: this.props.customer.address.length ? this.props.customer.address[0].address1 : "",
-                address2:  this.props.customer.address.length ? this.props.customer.address[0].address2 : "",
-                street:  this.props.customer.address.length ? this.props.customer.address[0].street : "",
-                city:  this.props.customer.address.length ? this.props.customer.address[0].city : "",
-                state:  this.props.customer.address.length ? this.props.customer.address[0].state : "",
-                postalCode:  this.props.customer.address.length ? this.props.customer.address[0].postalCode : "",             
+                addressId: this.props.setEditingCustomer.address.length ? this.props.setEditingCustomer.address[0].addressId : "",
+                address1: this.props.setEditingCustomer.address.length ? this.props.setEditingCustomer.address[0].address1 : "",
+                address2:  this.props.setEditingCustomer.address.length ? this.props.setEditingCustomer.address[0].address2 : "",
+                street:  this.props.setEditingCustomer.address.length ? this.props.setEditingCustomer.address[0].street : "",
+                city:  this.props.setEditingCustomer.address.length ? this.props.setEditingCustomer.address[0].city : "",
+                state:  this.props.setEditingCustomer.address.length ? this.props.setEditingCustomer.address[0].state : "",
+                postalCode:  this.props.setEditingCustomer.address.length ? this.props.setEditingCustomer.address[0].postalCode : "",             
               },
             ],
             category: this.state.whiteblue ?"White" : "Blue"||"Both",
@@ -337,7 +337,7 @@ checked:this.props.setEditingCustomer.category==="White" || this.props.setEditin
                       />
                     )}
                   />
-                  <FlexContainer justifyContent="space-between">
+                  {/* <FlexContainer justifyContent="space-between">
                    
                    <div style={{ width: "47%" }}>
                      <Field
@@ -364,7 +364,7 @@ checked:this.props.setEditingCustomer.category==="White" || this.props.setEditin
                        width="100%"
                      />
                    </div>
-                 </FlexContainer>
+                 </FlexContainer> */}
                
                                      
                 </div>

@@ -5,6 +5,8 @@ import { BundleLoader } from "../../../Components/Placeholder";
 const UpdateEventForm = lazy(() => import("./UpdateEventForm"));
 const UpdateEventModal = (props) => {
   const { updateEventModal, handleUpdateEventModal, ...formProps } = props;
+  const isSmallScreen = window.innerWidth <= 600;
+    const drawerWidth = isSmallScreen ? "90%" : "60%";
   return (
     <>
       <StyledDrawer
@@ -12,12 +14,12 @@ const UpdateEventModal = (props) => {
           id="app.updateevent"
           defaultMessage="Update Event"
         />}
-        width="55vw"
+        width={drawerWidth}
         visible={updateEventModal}
         maskClosable={false}
         destroyOnClose
         maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}
-        style={{marginTop:"5rem"}}
+        style={{marginTop:"3rem"}}
         onClose={() => handleUpdateEventModal(false)}
         footer={null}
       >

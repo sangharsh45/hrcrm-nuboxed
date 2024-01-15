@@ -1,4 +1,4 @@
-import React, { Component, lazy, useMemo } from "react";
+import React, { Component, lazy } from "react";
 import { connect } from "react-redux";
 import { FormattedMessage } from "react-intl";
 import { bindActionCreators } from "redux";
@@ -433,6 +433,8 @@ class LinkedContact extends Component {
         <AddCustomerUpdateContactModal
           addUpdateCustomerContactModal={addUpdateCustomerContactModal}
           contactId={this.state.contactId}
+          defaultCustomers={this.props.defaultCustomers}
+          customerId={this.props.customerId}
           handleUpdateCustomerContactModal={handleUpdateCustomerContactModal}
         />
       </>

@@ -5,7 +5,8 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 // import {getTasksListByOpportunityId} from "../../../OpportunityAction";
 import moment from "moment"
-import { OnlyWrapCard } from "../../../../Components/UI/Layout";
+import OnlyWrapCard1 from "../../../../Components/UI/Layout/OnlyWrapCard1";
+
 
 function LeaveGranttChart(props){
     useEffect(()=>{
@@ -134,8 +135,9 @@ function LeaveGranttChart(props){
     ];
 
     return(
-        <OnlyWrapCard><Gantt tasks={tasks}/></OnlyWrapCard>
-
+    
+        <OnlyWrapCard1><Gantt tasks={tasks}/></OnlyWrapCard1>
+    
     )
 }
 const mapStateToProps = ({ auth }) => ({

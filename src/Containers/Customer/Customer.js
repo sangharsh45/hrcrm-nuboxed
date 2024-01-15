@@ -1,9 +1,7 @@
 import React, { Component, Suspense, lazy } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { CommentOutlined, CustomerServiceOutlined } from '@ant-design/icons';
-import { FloatButton } from 'antd';
-import { BundleLoader, GridLoader } from "../../Components/Placeholder";
+import { BundleLoader } from "../../Components/Placeholder";
 import CustomerWhiteTable from "../Customer/Child/CustomerTable/CustomerWhiteTable";
 import CustomerBlueTable from "../Customer/Child/CustomerTable/CustomerBlueTable";
 import {
@@ -11,24 +9,64 @@ import {
     getCustomerListByUserId,
     setCustomerViewType,
     getCustomerPagination,
-    emptyCustomer
-    
+    emptyCustomer,
+    getLatestCustomer,
+    getCustomerCloser,
+    getCustomerFilterData,   
   } from "./CustomerAction";
-import CustomerCardView from "./CustomerCardView";
 import CustomerMap from "./CustomerMap"
-
-  
+import moment from "moment";
+import CustomerTeamCardList from "./Child/CustomerTable/CustomerTeamCardList";
+import CustomerMobileCardList from "./Child/CustomerTable/CustomerMobileCardList";
+import CustomerAllMobileCardList from "./Child/CustomerTable/CustomerAllMobileCardList";
+import CustomerMobileTeamCardList from "./Child/CustomerTable/CustomerMobileTeamCardList";
+import CustomerMapView from "./CustomerMapView";
+const CustomerCardView =lazy(()=> import("./CustomerCardView"));
 const AddCustomerModal = lazy(() => import( "./Child/AddCustomerModal"));
 const CustomerHeader = lazy(() => import("./Child/CustomerHeader"));
-const CustomerTable = lazy(() => import("./Child/CustomerTable/CustomerTable"));
-
-class  Customer extends Component {
-  state = { currentData: "",currentUser:"" };
+const CustomerCardList=lazy(() => import("./Child/CustomerTable/CustomerCardList"));
+const CustomerAllCardList=lazy(() => import("./Child/CustomerTable/CustomerAllCardList"));
+class Customer extends Component {
+  state = { currentData: "",
+  filter:"creationdate",
+  currentUser:"",
+  isMobile: false, };
   handleClear = () => {
+    const startDate = moment()
+      .startOf("month")
+      .toISOString();
+    const endDate = moment()
+      .endOf("month")
+      .toISOString();
     this.setState({ currentData: "" });
     this.props.emptyCustomer();
     this.props.getCustomerListByUserId(this.state.currentUser?this.state.currentUser:this.props.userId,0);
+    this.props.getLatestCustomer(this.props.userId);
+    this.props.getCustomerCloser(this.props.userId, startDate, endDate);
   };
+  componentDidMount() {
+    // Check if isMobile is stored in localStorage
+    const storedIsMobile = localStorage.getItem('isMobile');
+    this.setState({ isMobile: storedIsMobile ? JSON.parse(storedIsMobile) : window.innerWidth <= 768 });
+  
+    window.addEventListener('resize', this.handleResize);
+  }
+  
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.handleResize);
+  }
+  
+  handleResize = () => {
+    const isMobile = window.innerWidth <= 768;
+    this.setState({ isMobile });
+  
+    // Store isMobile in localStorage
+    localStorage.setItem('isMobile', JSON.stringify(isMobile));
+  };
+  handleFilterChange=(data)=>{
+    this.setState({filter:data})
+    this.props.getCustomerFilterData(this.props.userId,0,data)
+  }
   setCurrentData = (value) => {
     this.setState({ currentData: value });
   };
@@ -45,6 +83,7 @@ class  Customer extends Component {
   };
 
   render() {
+    const {isMobile } = this.state;
     const {
       addCustomerModal,
       handleCustomerModal,
@@ -61,6 +100,8 @@ class  Customer extends Component {
           handleChange={this.handleChange}
           currentData={this.state.currentData}
           setCurrentData={this.setCurrentData}
+          handleFilterChange={this.handleFilterChange}
+          filter={this.state.filter}
         />
         <AddCustomerModal
           addCustomerModal={addCustomerModal}
@@ -71,16 +112,30 @@ class  Customer extends Component {
         <CustomerCardView/>:
          this.props.viewType === "list" ?
           <CustomerWhiteTable /> :
+          this.props.viewType==="mapView"?
+          <CustomerMapView/>:
           this.props.viewType === "dashboard" ?
              <CustomerBlueTable/> :
-             this.props.viewType === "table" ?
-             <CustomerTable
+             this.props.viewType === "table" ?(isMobile ?
+              <CustomerMobileCardList
+              filter={this.state.filter}
+              currentUser={this.state.currentUser} />:
+             <CustomerCardList
+             filter={this.state.filter}
              currentUser={this.state.currentUser} 
-             /> :
+             /> ):
           this.props.viewType==="map"?
           <CustomerMap/>:
-            
-            null} 
+          this.props.viewType==="all" ?(isMobile ?
+            <CustomerAllMobileCardList
+            filter={this.state.filter}
+            currentUser={this.state.currentUser} />:
+            <CustomerAllCardList 
+            filter={this.state.filter}
+             currentUser={this.state.currentUser} 
+            />)
+            :this.props.viewType==="teams" ? (isMobile ?<CustomerMobileTeamCardList/>:<CustomerTeamCardList/>)
+            : null} 
         </Suspense> 
         {/* <FloatButton.Group
       trigger="click"
@@ -103,6 +158,7 @@ const mapStateToProps = ({ customer, auth }) => ({
   userId: auth.userDetails.userId,
   addCustomerModal: customer.addCustomerModal,
   viewType: customer.viewType,
+
 });
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
@@ -111,7 +167,10 @@ const mapDispatchToProps = (dispatch) =>
       getCustomerListByUserId,
       setCustomerViewType,
       getCustomerPagination,
-      emptyCustomer
+      emptyCustomer,
+      getLatestCustomer,
+      getCustomerCloser,
+      getCustomerFilterData
     },
     dispatch
   );

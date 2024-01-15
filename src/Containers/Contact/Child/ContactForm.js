@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { Button, Select, Icon, Tag, Switch } from "antd";
+import { Button, Select, Switch } from "antd";
 import { FormattedMessage } from "react-intl";
 import { Formik, Form, FastField, Field, FieldArray } from "formik";
 import * as Yup from "yup";
@@ -13,8 +13,6 @@ import { SelectComponent } from "../../../Components/Forms/Formik/SelectComponen
 import { addContact, addLinkContactByOpportunityId } from "../ContactAction";
 import Upload from "../../../Components/Forms/Formik/Upload";
 import { TextareaComponent } from "../../../Components/Forms/Formik/TextareaComponent";
-import { getDesignations } from "../../Settings/Designation/DesignationAction";
-import { getDepartments } from "../../Settings/Department/DepartmentAction";
 import { getCustomerData } from "../../Customer/CustomerAction";
 const { Option } = Select;
 /**
@@ -32,7 +30,6 @@ const ContactSchema = Yup.object().shape({
 class ContactForm extends Component {
   componentDidMount() {
     this.props.getCustomerData(this.props.userId);
-
   }
   constructor(props) {
     super(props);
@@ -94,29 +91,12 @@ class ContactForm extends Component {
       user: { userId, firstName, lastName },
       addContact,
       addingContact,
-      customerId,
-      designationTypeId,
-      departmentId,
-      users,
-      accountId,
-      defaultAccounts,
-      defaultOpportunities,
-      callback,
-      user,
-      creatorId,
-      accountIdTag,
+  
       linkContact,
       opportunityId,
       addLinkContactByOpportunityId,
       defaultCustomers,
-
-      // tagWithCompany,
     } = this.props;
-    console.log(linkContact);
-    console.log(opportunityId);
-    console.log(customerId);
-    console.log(departmentId);
-    console.log(designationTypeId);
     const customerNameOption = this.props.customerData
     .sort((a, b) => {
       const libraryNameA = a.name && a.name.toLowerCase();
@@ -153,8 +133,7 @@ class ContactForm extends Component {
             userId: this.props.userId,
             customerId: this.props.customerId,
             opportunityId: this.props.opportunityId,
-
-            // tagWithCompany: tagWithCompany ? tagWithCompany : "",
+            source:"",
             tagWithCompany: "",
             firstName: "",
             middleName: "",
@@ -207,16 +186,17 @@ class ContactForm extends Component {
             setFieldValue,
             setFieldTouched,
           }) => (
+            <div class="overflow-y-auto h-[34rem] overflow-x-hidden max-sm:h-[30rem]">
             <Form className="form-background">
-              <div class=" flex justify-between overflow-scroll "
+              <div class=" flex justify-around max-sm:flex-col"
               >
-                <div class=" h-full w-1/2"
+                <div class=" h-full w-w47.5 max-sm:w-wk"
                 >
-                  <div class=" flex  flex-nowrap">
+                  <div class=" flex  flex-nowrap justify-between">
                     <FastField name="imageId" component={Upload} />
                     <div>
-                      <div class=" flex justify-between">
-                        <div class=" w-2/5">
+                      <div class=" flex justify-between max-sm:flex-col">
+                        {/* <div class=" w-2/5 max-sm:w-full">
                           <FastField
                             name="salutation"
                             type="text"
@@ -232,8 +212,8 @@ class ContactForm extends Component {
                             className="field"
                             isColumn
                           />
-                        </div>
-                        <div class=" w-1/2">
+                        </div> */}
+                        <div class=" w-wk max-sm:w-full">
                           <FastField
                             isRequired
                             name="firstName"
@@ -252,15 +232,15 @@ class ContactForm extends Component {
                           />
                         </div>
                       </div>                  
-                      <div class=" flex justify-between">
-                        <div class=" w-2/5">
+                      <div class=" flex justify-between max-sm:flex-col">
+                        <div class=" w-2/5 max-sm:w-full">
                           <FastField
                             name="middleName"
                             //label="Middle Name"
                             label={
                               <FormattedMessage
                                 id="app.middleName"
-                                defaultMessage="Middle"
+                                defaultMessage="Middle Name"
                               />
                             }
                             type="text"
@@ -270,7 +250,7 @@ class ContactForm extends Component {
                             inlineLabel
                           />
                         </div>
-                        <div class=" w-1/2">
+                        <div class=" w-1/2 max-sm:w-full">
                           <FastField
                             name="lastName"
                             //label="Last Name"
@@ -312,7 +292,7 @@ class ContactForm extends Component {
                     </div>
                   </div>               
                   <div class=" flex justify-between">
-                    <div class=" w-2/6">
+                    <div class=" w-2/6 max-sm:w-2/5">
                       <FastField
                         name="countryDialCode"
                         isColumnWithoutNoCreate
@@ -334,7 +314,7 @@ class ContactForm extends Component {
                         inlineLabel
                       />
                     </div>
-                    <div class=" w-2/5">
+                    <div class=" w-2/5 max-sm:w-2/5">
                       <FastField
                         type="number"
                         name="mobileNumber"
@@ -351,8 +331,7 @@ class ContactForm extends Component {
                         isColumn
                       />
                     </div>
-                    <div class=" w-1/4 font-bold"
-                    >
+                    <div class=" w-1/4 font-bold" >
                       WhatsApp
                       <Switch
                         onChange={this.handleWhatsApp}
@@ -362,6 +341,7 @@ class ContactForm extends Component {
                       />
                     </div>
                   </div>
+                 
                   <div class=" flex justify-between">
                     <div class=" w-2/4">
                       {" "}
@@ -442,10 +422,10 @@ class ContactForm extends Component {
                   />
 
                 </div>
-                <div class=" h-3/4 w-5/12 "
+                <div class=" h-3/4 w-w47.5 max-sm:w-wk "
                 >
-                  <div class=" flex  justify-between">
-                    <div class=" w-1/2">
+                  <div class=" flex  justify-between max-sm:mt-20">
+                    <div class="  w-w47.5">
                       <Field
                         name="customerId"
                         // selectType="customerList"
@@ -466,8 +446,47 @@ class ContactForm extends Component {
                       />
                     </div>
 
-                    <div class=" w-2/5">
-                      <FastField
+                   
+                    <div class=" w-w47.5">
+                    <FastField
+                            name="source"
+                             label={
+                              <FormattedMessage
+                                id="app.source"
+                                defaultMessage="Source"
+                              />
+                            }
+                            isColumnWithoutNoCreate
+                            selectType="sourceName"
+                            component={SearchSelect}
+                            value={values.source}
+                            isColumn
+                          />
+                        </div>
+                     
+                    
+                  </div>
+                  <Spacer />
+                  <div class=" flex justify-between">         
+                  <div class="w-w47.5">
+                    <FastField
+                      name="departmentId"
+                                         label={
+                        <FormattedMessage
+                          id="app.department"
+                          defaultMessage="Department"
+                        />
+                      }
+                      isColumn
+                      isColumnWithoutNoCreate
+                      component={InputComponent}
+                      // value={values.departmentId}
+        
+                      inlineLabel
+                    />
+                  </div>
+                  <div class="w-w47.5">
+                  <FastField
                         name="designationTypeId"
                         //label="Designation"
                         label={
@@ -483,29 +502,10 @@ class ContactForm extends Component {
                         isColumnWithoutNoCreate
                         inlineLabel
                       />
-                    </div>
+                      </div>
                   </div>
-                  <Spacer />
-                  <div class=" w-full">
-                    <FastField
-                      name="departmentId"
-                      //label="Department"
-                      label={
-                        <FormattedMessage
-                          id="app.department"
-                          defaultMessage="Department"
-                        />
-                      }
-                      isColumn
-                      isColumnWithoutNoCreate
-                      component={SearchSelect}
-                      value={values.departmentId}
-                      selectType="departmentName"
-                      inlineLabel
-                    />
-                  </div>
-                  <Spacer />
-                  <div style={{ width: "100%",backgroundImage: "linear-gradient(-90deg, #00162994, #94b3e4)" }}>
+                 
+                  <div class="mt-8" style={{ width: "100%",backgroundImage: "linear-gradient(-90deg, #00162994, #94b3e4)" }}>
                       <div>
                   <HeaderLabel style={{color:"white"}} > Address</HeaderLabel>
                   </div>
@@ -606,7 +606,7 @@ class ContactForm extends Component {
                 </div>
               </div>
               <Spacer />
-              <div class=" flex  justify-end">
+              <div class="flex justify-end md:w-wk bottom-2 md:mr-2 md:absolute ">
                 <Button
                   type="primary"
                   htmlType="submit"
@@ -618,6 +618,7 @@ class ContactForm extends Component {
                 </Button>
               </div>
             </Form>
+            </div>
           )}
         </Formik>
       </>
@@ -646,9 +647,7 @@ const mapDispatchToProps = (dispatch) =>
       // getContactById,
       addLinkContactByOpportunityId,
       // getCurrency,
-      getDesignations,
       getCustomerData,
-      getDepartments,
     },
     dispatch
   );

@@ -1,6 +1,9 @@
 import React, { lazy, Suspense } from "react";
 import { FormattedMessage } from "react-intl";
 import { StyledDrawer } from "../../../Components/UI/Antd";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import { getExpenseById,} from "../ExpenseAction";
 import { BundleLoader } from "../../../Components/Placeholder";
 const ExpenseDrawerCard=lazy(()=>import("./ExpenseDrawerCard"));
 
@@ -11,13 +14,18 @@ const ExpenseVoucherIdDrawer = (props) => {
     <>
       <StyledDrawer
         title={`Voucher ID: ${props.particularRowData.voucherId}`}
-        width="60%"
+        width="80%"
+        style={{marginTop:"5rem"}}
         visible={expenseVoucherIdDrawer}
         destroyOnClose
         closable
         placement="right"
         maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}
-        onClose={() => handleExpenseVoucherIdDrawer(false)}
+        onClose={() => {
+          handleExpenseVoucherIdDrawer(false);
+          props.getExpenseById(props.userId)
+
+        }}
       >
         <Suspense fallback={<BundleLoader />}>
           <ExpenseDrawerCard voucherId={voucherId} particularRowData={particularRowData}/>
@@ -27,4 +35,18 @@ const ExpenseVoucherIdDrawer = (props) => {
   );
 };
 
-export default ExpenseVoucherIdDrawer;
+const mapStateToProps = ({ auth, expense }) => ({
+  userId: auth.userDetails.userId,
+
+});
+const mapDispatchToProps = (dispatch) =>
+  bindActionCreators(
+    {
+      getExpenseById,
+     
+    },
+    dispatch
+  );
+export default connect(mapStateToProps, mapDispatchToProps)(ExpenseVoucherIdDrawer);
+
+

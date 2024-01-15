@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import styled from "styled-components";
-import { Button, Tooltip, Input } from "antd";
-import EditableInput from "../../../Components/Forms/Edit/EditableInput";
-import { FlexContainer } from "../../../Components/UI/Layout";
+import { Button, Tooltip, } from "antd";
 import { FormattedMessage } from "react-intl";
 import DeleteIcon from '@mui/icons-material/Delete';
 import BorderColorIcon from '@mui/icons-material/BorderColor';
@@ -38,7 +36,7 @@ class SingleSectors extends Component {
         <ViewEditCard>
           {({ viewType }, toggleViewType) =>
             viewType === "view" ? (
-              <FlexContainer justifyContent="space-between">
+              <div class=" flex justify-between" >
                 <SectorName style={{ flexBasis: "85%" }}>
                   {sectorName}
                 </SectorName>
@@ -73,9 +71,9 @@ class SingleSectors extends Component {
                                style={{ color: "#666" }}
                                  /> */}
                 </div>
-              </FlexContainer>
+              </div>
             ) : (
-              <FlexContainer>
+              <div class=" flex">
                 <TextInput
                   name={name}
                   // value={value || sectorName}
@@ -85,7 +83,7 @@ class SingleSectors extends Component {
                 />
                 <br />
                 <br />
-                <div style={{ marginLeft: "auto" }}>
+                <div class=" ml-auto">
                   <Button
                     type="primary"
                     htmlType="submit"
@@ -106,7 +104,7 @@ class SingleSectors extends Component {
                     <FormattedMessage id="app.cancel" defaultMessage="Cancel" />
                   </Button>
                 </div>
-              </FlexContainer>
+              </div>
             )
           }
         </ViewEditCard>

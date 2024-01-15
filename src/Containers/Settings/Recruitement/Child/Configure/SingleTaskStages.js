@@ -3,7 +3,6 @@ import styled from "styled-components";
 import { FormattedMessage } from "react-intl";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
 import { Button, Tooltip, Popconfirm, } from "antd";
-import { FlexContainer } from "../../../../../Components/UI/Layout";
 import {
   TextInput,
   Select,
@@ -14,7 +13,6 @@ import { connect } from "react-redux";
 import { deleteTaskStagesData } from "../../../../Settings/SettingsAction";
 import { bindActionCreators } from "redux";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { StyledPopconfirm } from "../../../../../Components/UI/Antd";
 const { Option } = Select;
 
 class SingleTaskStages extends Component {
@@ -50,13 +48,17 @@ class SingleTaskStages extends Component {
     const {
       recruitTaskStages:
        { taskChecklistStageName,
-         taskChecklistStagelinkId 
+         taskChecklistStagelinkId,
+         probability,
+         days,
+         startDate,
+         endDate
         },
       linkedStages,
       organization,
       newStageName,
-      newProbability,
       newDays,
+      newProbability,
       deleteTaskStagesData,
       stageValue1,
       handleChange,
@@ -79,9 +81,7 @@ class SingleTaskStages extends Component {
         <ViewEditCard>
           {({ viewType }, toggleViewType) =>
             viewType === "view" ? (
-              <FlexContainer
-                justifyContent="start"
-                alignItems="center"
+              <div class=" flex justify-start items-center"
                 // onClick={() => handleStageClick(taskChecklistStagelinkId, taskChecklistStageName)}
                 style={{
                   backgroundColor:
@@ -89,9 +89,23 @@ class SingleTaskStages extends Component {
                     "rgb(161, 185, 185)",
                 }}
               >
-                <StageName style={{ flexBasis: "25%", textAlign: "left" }}>
+                <StageName style={{ flexBasis: "25%", }}>
                   {elipsize(taskChecklistStageName, 23)}
                 </StageName>
+                <StageName style={{ flexBasis: "20%", }}>
+  {probability > 0 && probability < 100 ? `${probability}%` : 'Invalid Probability'}
+</StageName>
+           
+                <StageName  >
+                  {days}D
+                </StageName>
+                {/* <StageName>
+                  {`${ moment(startDate).format("DD/MM/YYYY")}`}
+                </StageName>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <StageName>
+                {`${ moment(endDate).format("DD/MM/YYYY")}`}
+                </StageName> */}
                 <div class=" flex justify-between ml-margin65 w-4">
                   <>
                     <Tooltip title="Edit">
@@ -119,13 +133,29 @@ class SingleTaskStages extends Component {
                     </Popconfirm>
                   </>
                 </div>
-              </FlexContainer>
+              </div>
             ) : (
-              <FlexContainer justifyContent="center">
+              <div class=" flex justify-center" >
                 <TextInput
                   name={newStageName}
                   // value={stageValue1 || taskChecklistStageName}
                   defaultValue={taskChecklistStageName}
+                  onChange={this.handleChange}
+                  // disabled={disabled}
+                  width={"25%"}
+                />
+                    <TextInput
+                  name={newProbability}
+                  // value={stageValue1 || taskChecklistStageName}
+                  defaultValue={probability}
+                  onChange={this.handleChange}
+                  // disabled={disabled}
+                  width={"25%"}
+                />
+                    <TextInput
+                  name={newDays}
+                  // value={stageValue1 || taskChecklistStageName}
+                  defaultValue={days}
                   onChange={this.handleChange}
                   // disabled={disabled}
                   width={"25%"}
@@ -141,6 +171,8 @@ class SingleTaskStages extends Component {
                       // this.props.taskChecklistStagelinkId,
                       this.props.taskChecklistStagelinkId,
                       this.state.fields.taskChecklistStageName,
+                      this.state.fields.probability,
+                      this.state.fields.days,
                       toggleViewType()
                     )
                   }
@@ -153,7 +185,7 @@ class SingleTaskStages extends Component {
                   {/* Cancel */}
                   <FormattedMessage id="app.cancel" defaultMessage="Cancel" />
                 </Button>
-              </FlexContainer>
+              </div>
             )
           }
         </ViewEditCard>

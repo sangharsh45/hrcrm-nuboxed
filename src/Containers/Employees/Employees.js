@@ -1,17 +1,16 @@
-import React, { Component, Suspense, lazy } from "react";
+import React, { Component, lazy } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import EmployeesHeader from "./Child/EmployeesHeader";
 import AddEmploymentModal from "./Child/AddEmployeeModal";
-import { setEmployeeViewType, handleEmployeeModal, getEmployeelist } from "./EmployeeAction";
-import EmployeeCardView from "./Child/EmployeeCard/EmployeeCardView";
-import EmployeeCardList from "./Child/EmployeeCard/EmployeeCardList";
+import { setEmployeeViewType, handleEmployeeModal, getEmployeelist} from "./EmployeeAction";
+const EmployeeCardView = lazy(() => import("./Child/EmployeeCard/EmployeeCardView"));
 const EmployeeTable = lazy(() => import("./Child/EmployeeTable/EmployeeTable"));
-const EmployeeGroup = lazy(() => import("./Child/EmployeeGroup/EmployeeGroup"));
 
 class Employees extends Component {
 
-  state = { currentData: "" };
+  state = { currentData: "", filter:"cretiondate", currentUser: '',selectedLocation:"",
+  filteredData: this.props.employees };
   handleClear = () => {
     this.setState({ currentData: "" });
     this.props.getEmployeelist();
@@ -23,12 +22,61 @@ class Employees extends Component {
     this.setState({ currentData: e.target.value })
    
   };
+  // handleDropdownChange = (e) => {
+  //   this.setState({ selectedLocation: e.target.value });
+  // };
+  handleLocationChange = (event) => {
+    const locationName = event.target.value;
+    this.setState({ selectedLocation: locationName });
+    this.filterData(locationName, this.state.selectedDepartment);
+  };
+  handleDepartmentChange = (event) => {
+    const departmentName = event.target.value;
+    this.setState({ selectedDepartment: departmentName });
+    this.filterData(this.state.selectedLocation, departmentName);
+  };
+  handleFilterChange=(data)=>{
+    this.setState({filter:data})
+    this.props.getEmployeelist(data)
+  }
   handleClear = () => {
     this.setState({ currentData: "" });
     // this.props.emptyCustomer();
     this.props.getEmployeelist();
   };
+  // filterData = (locationName, departmentName) => {
+   
+
+  //   if (locationName && departmentName) {
+  //     const filtered = this.props.employees.filter((employee) => (
+  //       employee.location === locationName && employee.department === departmentName
+  //     ));
+  //     this.setState({ filteredData: filtered });
+  //   } else {
+  //     // If either location or department is not selected, show all data
+  //     this.setState({ filteredData: this.props.employees });
+  //   }
+  // };
+  filterData = (locationName, departmentName) => {
+    const filtered = this.props.employees.filter((employee) => (
+      (!locationName || employee.location === locationName) &&
+      (!departmentName || employee.department === departmentName)
+    ));
+    this.setState({ filteredData: filtered });
+  };
+  componentDidUpdate(prevProps) {
+    if (this.props.employees !== prevProps.employees) {
+    
+      this.setState({ filteredData: this.props.employees });
+    }
+  }
+  componentDidMount(){
+    this.props.getEmployeelist("cretiondate");
+  }
   render() {
+    // const filteredData = this.props.employees.filter((item) =>
+    //   this.state.selectedLocation === '' || item.location === this.state.selectedLocation
+    // );
     const {
       setEmployeeViewType,
       addEmployeeModal,
@@ -41,6 +89,14 @@ class Employees extends Component {
           handleEmployeeModal={handleEmployeeModal}
           setEmployeeViewType={setEmployeeViewType}
           viewType={viewType}
+          selectedDepartment={this.state.selectedDepartment}
+          selectedLocation={this.state.selectedLocation}
+          handleLocationChange={this.handleLocationChange}
+          handleDepartmentChange={this.handleDepartmentChange}
+          handleDropdownChange={this.handleDropdownChange}
+          handleFilterChange={this.handleFilterChange}
+          filter={this.state.filter}
+          
           handleClear={this.handleClear}
           handleChange={this.handleChange}
           currentData={this.state.currentData}
@@ -53,14 +109,21 @@ class Employees extends Component {
         {/* <EmployeeTable /> */}
         { this.props.viewType==="tile"?
         <EmployeeCardView
+        // filteredData={filteredData}
+        filteredData={this.state.filteredData}
+        filter={this.state.filter}
            viewType={viewType}
         />:
+        // this.props.viewType === "table" ?
+        // <EmployeeTable 
+        // // filteredData={filteredData}
+        // viewType={viewType}
+        // />:
         this.props.viewType === "table" ?
         <EmployeeTable 
-        viewType={viewType}
-        />:
-        this.props.viewType === "card" ?
-        <EmployeeCardList 
+        filteredData={this.state.filteredData}
+        // filteredData={filteredData}
+        filter={this.state.filter}
         viewType={viewType}
         />:
         null}
@@ -72,6 +135,7 @@ class Employees extends Component {
 const mapStateToProps = ({ employee }) => ({
   addEmployeeModal: employee.addEmployeeModal,
   viewType: employee.viewType,
+  employees: employee.employees,
 
 });
 const mapDispatchToProps = (dispatch) =>
@@ -80,6 +144,7 @@ const mapDispatchToProps = (dispatch) =>
       setEmployeeViewType,
       handleEmployeeModal,
       getEmployeelist,
+      
     },
     dispatch
   );

@@ -26,11 +26,11 @@ class ContactDetails extends Component {
           ) : (
               <div>
                 <Suspense fallback={"Loading..."}>
-                  <div class=" flex flex-nowrap w-full">
-                    <div class=" w-1/4">
+                  <div class=" flex flex-nowrap w-full max-sm:flex-col">
+                    <div class=" w-1/4 max-sm:w-full">
                       <ContactDetailsLeft contact={contact} />
                     </div>
-                    <div class=" w-3/4">
+                    <div class=" w-3/4 max-sm:w-full">
                       <ContactDetailsRight contact={contact} />
                     </div>
                   </div>

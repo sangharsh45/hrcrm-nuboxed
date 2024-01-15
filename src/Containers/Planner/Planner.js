@@ -1,9 +1,8 @@
-import React, { Component, Suspense, lazy, useState } from "react";
+import React, { Suspense, lazy, useState } from "react";
 import { StyledModal } from "../../Components/UI/Antd";
 import PlannerHeader from "./Child/PlannerHeader";
 import TimeZoneForm from "./TimeZoneForm";
 import { connect } from "react-redux";
-import { Modal, Button } from "antd";
 import { bindActionCreators } from "redux";
 import { setPlannerViewType } from "./PlannerAction";
 import { BundleLoader } from "../../Components/Placeholder";

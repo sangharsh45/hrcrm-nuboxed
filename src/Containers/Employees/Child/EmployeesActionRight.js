@@ -1,4 +1,4 @@
-import React, { lazy } from "react";
+import React, { } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { withRouter } from "react-router-dom";
@@ -20,7 +20,7 @@ class EmployeesActionRight extends React.Component {
     });
   };
   render() {
-    const { handleEmployeeModal, userId } = this.props;
+    const { handleEmployeeModal, userId,user } = this.props;
     return (
       <>
         <div class=" flex items-center">
@@ -33,14 +33,15 @@ class EmployeesActionRight extends React.Component {
               </a>
             </Tooltip>
           )}
-
+{user.userCreateInd === true || user.role === "ADMIN" ? (
           <Button
             type="primary"
-            ghost
+         
             onClick={() => handleEmployeeModal(true)}
           >
             Add
           </Button>
+         ):null} 
         </div>
       </>
     );
@@ -50,6 +51,7 @@ class EmployeesActionRight extends React.Component {
 const mapStateToProps = ({ auth, team, account }) => ({
   userId: auth.userDetails.userId,
   role: auth.userDetails.role,
+  user: auth.userDetails,
 });
 const mapDispatchToProps = (dispatch) => bindActionCreators({}, dispatch);
 export default withRouter(

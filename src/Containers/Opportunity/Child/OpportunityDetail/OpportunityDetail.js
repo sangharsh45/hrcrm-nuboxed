@@ -1,14 +1,12 @@
 import React, { Component, lazy, Suspense } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-
 import OpportunityDetailHeader from "./OpportunityDetailHeader";
 import { FlexContainer, MainWrapper } from "../../../../Components/UI/Layout";
 import { BundleLoader } from "../../../../Components/Placeholder";
 import { getOpportunityById } from "../../OpportunityAction";
-
 const OpportunityDetailLeft = lazy(() => import("./OpportunityDetailLeft"));
- const OpportunityDetailRight = lazy(() => import("./OpportunityDetailRight"));
+const OpportunityDetailRight = lazy(() => import("./OpportunityDetailRight"));
 
 class OpportunityDetail extends Component {
   componentDidMount() {
@@ -32,10 +30,10 @@ class OpportunityDetail extends Component {
           <FlexContainer>
             <Suspense fallback={""}>
               <FlexContainer flexWrap="no-wrap" style={{ width: "100%" }}>
-                <div style={{ width: "20%" }}>
+                <div class=" w-[22%] max-sm:w-full max-sm:flex flex-col">
                   <OpportunityDetailLeft opportunity={opportunity} />
                 </div>
-                <div style={{ width: "80%" }}>
+                <div class="w-[80%] max-sm:hidden">
                   <OpportunityDetailRight 
                   opportunity={opportunity}
                   />

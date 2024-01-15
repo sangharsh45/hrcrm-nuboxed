@@ -1,11 +1,8 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 import { Button, Tooltip } from "antd";
-import EditableInput from "../../../Components/Forms/Edit/EditableInput";
-import { FlexContainer } from "../../../Components/UI/Layout";
 import { FormattedMessage } from "react-intl";
 import { TextInput } from "../../../Components/UI/Elements";
-import { ActionIcon } from "../../../Components/Utils";
 import DeleteIcon from '@mui/icons-material/Delete';
 import BorderColorIcon from '@mui/icons-material/BorderColor';
 import ViewEditCard from "../../../Components/UI/Elements/ViewEditCard";
@@ -37,12 +34,12 @@ class SingleIdProof extends Component {
         <ViewEditCard>
           {({ viewType }, toggleViewType) =>
             viewType === "view" ? (
-              <FlexContainer justifyContent="space-between">
+              <div class=" flex justify-between" >
                 <IdProofName style={{ flexBasis: "85%" }}>
                   {IdProofType}
                 </IdProofName>
                 <div>
-                  {this.props.idProof.EditInd ? (
+                  {this.props.idProof.editInd ? (
                     <BorderColorIcon
                  
                       tooltipTitle="Edit"
@@ -73,9 +70,9 @@ class SingleIdProof extends Component {
                                style={{ color: "#666" }}
                                  /> */}
                 </div>
-              </FlexContainer>
+              </div>
             ) : (
-              <FlexContainer>
+              <div class=" flex">
                 <TextInput
                   name={name}
                   // value={value || idProofType}
@@ -85,7 +82,7 @@ class SingleIdProof extends Component {
                 />
                 <br />
                 <br />
-                <div style={{ marginLeft: "auto" }}>
+                <div class=" ml-auto" >
                   <Button
                     type="primary"
                     htmlType="submit"
@@ -108,7 +105,7 @@ class SingleIdProof extends Component {
                     <FormattedMessage id="app.cancel" defaultMessage="Cancel" />
                   </Button>
                 </div>
-              </FlexContainer>
+              </div>
             )
           }
         </ViewEditCard>

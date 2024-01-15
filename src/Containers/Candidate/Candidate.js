@@ -1,13 +1,9 @@
-import React, { Component, Suspense, lazy } from "react";
+import React, { Component, Suspense, useState,lazy } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import CandidateBlackListTable from "../Candidate/CandidateBlackListTable";
 import { BundleLoader } from "../../Components/Placeholder";
-import AddCandidateResumeModal from "../Candidate/Child/AddCandidateResumeModal";
-import CandidateWhiteTable from "../Candidate/Child/CandidateWhiteTable";
-import CandidateBlueTable from "../Candidate/Child/CandidateBlueTable";
 import {
-  handleCandidateModal,
+  // handleCandidateModal,
   handleCandidateResumeModal,
   getCandidateListByUserId,
   getCandidatePagination,
@@ -17,163 +13,182 @@ import {
   getCandidateWhitePagination,
   getCandidateBluePagination,
 } from "./CandidateAction";
-import CandidateMap from "../Candidate/CandidateMap";
-import AddCandidateFilterModal from "../Candidate/Child/AddCandidateFilterModal";
-import CandidateDollarTable from "./Child/CandidateTable/CandidateDollarTable";
-import CandidateBillableTable from "./Child/CandidateTable/CandidateBillableTable";
-import CandidateBillableStepper from "../Dashboard/Child/BillableCandidate/CandidateBillableStepper";
 const AddCandidateModal = lazy(() => import("./Child/AddCandidateModal"));
 const CandidateHeader = lazy(() => import("./Child/CandidateHeader"));
+const CandidateWhiteTable = lazy(() =>
+  import("../Candidate/Child/CandidateWhiteTable")
+);
+const CandidateBlackListTable = lazy(() =>
+  import("../Candidate/CandidateBlackListTable")
+);
+const AddCandidateResumeModal = lazy(() =>
+  import("../Candidate/Child/AddCandidateResumeModal")
+);
+const CandidateBlueTable = lazy(() =>
+  import("../Candidate/Child/CandidateBlueTable")
+);
 const CandidateTable = lazy(() =>
   import("./Child/CandidateTable/CandidateTable")
 );
+const CandidateMap = lazy(() =>
+  import("../Candidate/CandidateMap")
+);
+const AddCandidateFilterModal = lazy(() =>
+  import("../Candidate/Child/AddCandidateFilterModal")
+);
+const CandidateDollarTable = lazy(() =>
+  import("../Candidate/Child/CandidateTable/CandidateDollarTable")
+);
+const CandidateBillableStepper = lazy(() =>
+  import("../Dashboard/Child/BillableCandidate/CandidateBillableStepper")
+);
 const CandidateCardView = lazy(() => import("./CandidateCardView"));
 
-class Candidate extends Component {
-  state = {
-    currentData: undefined,
-    responseData: null,
-    text: undefined,
-    currentSkillData: "",
+const Candidate = (props) => {
+  const [currentData, setCurrentData] = useState(undefined);
+  const [responseData, setResponseData] = useState(null);
+  const [currentSkillData, setCurrentSkillData] = useState(null);
+  const [currentUser, setCurrentUser] = useState(null);
+
+  const handleResponseData = (data) => {
+    console.log(data)
+    console.log('function called');
+    setResponseData(data);
   };
 
-  handleResponseData = (data) => {
-    this.setState({ responseData: data });
-  };
+  const handleDropChange = (value) => {
+    setCurrentUser(value);
 
-  handleDropChange = (value) => {
-    this.setState({ currentUser: value });
-
-    if (this.props.viewType === "table") {
-      this.props.getCandidatePagination(value, 0);
+    if (props.viewType === 'table') {
+      props.getCandidatePagination(value, 0);
     }
 
-    if (this.props.viewType === "list") {
-      this.props.getCandidateWhitePagination("white", value, 0);
+    if (props.viewType === 'list') {
+      props.getCandidateWhitePagination('white', value, 0);
     }
 
-    if (this.props.viewType === "dashboard") {
-      this.props.getCandidateBluePagination("blue", value, 0);
+    if (props.viewType === 'dashboard') {
+      props.getCandidateBluePagination('blue', value, 0);
     }
 
-    console.log("valid", value);
-  };
-  handleClear = () => {
-    this.setState({ currentData: undefined });
-    this.props.emptyCandidate();
-    this.props.getCandidateListByUserId(
-      this.state.currentUser ? this.state.currentUser : this.props.userId,
-      0
-    );
-  };
-  setCurrentData = (value) => {
-    this.setState({ currentData: value });
-    console.log(value);
+    console.log('valid', value);
   };
 
-  handleSkillClear = () => {
-    this.setState({ currentSkillData: "" });
-    this.props.getCandidateListByUserId(this.props.userId);
+  const handleClear = () => {
+    setCurrentData(undefined);
+    props.emptyCandidate();
+    props.getCandidateListByUserId(currentUser ? currentUser : props.userId, 0);
   };
-  handleChange = (e) => {
-    this.setState({ currentData: e.target.value });
-  };
-  setCurrentSkillData = (value) => {
-    this.setState({ currentSkillData: value });
-  };
-  render() {
-    console.log("candidadte render");
-    console.log("candidadte",this.props.selectedLanguage);
-    const {
-      addCandidateModal,
-      addCandidateResumeModal,
-      addCandidateFilterModal,
-      handleCandidateModal,
-      handleCandidateResumeModal,
-      handleCandidateFilterModal,
-      handleContactDrawer,
-      viewType,
-      setCandidateViewType,
-      contacts,
-      fetchingContacts,
-    } = this.props;
 
-    console.log("statue", this.state.currentUser);
+
+  const handleSkillClear = () => {
+    setCurrentSkillData('');
+    props.getCandidateListByUserId(props.userId);
+  };
+
+  const handleChange = (e) => {
+    setCurrentData(e.target.value);
+  };
+
+ 
+
+  console.log('candidadte render');
+  console.log('candidadte', props.selectedLanguage);
+
+  const {
+    addCandidateModal,
+    addCandidateResumeModal,
+    addCandidateFilterModal,
+    handleCandidateModal,
+    handleCandidateResumeModal,
+    handleCandidateFilterModal,
+    handleContactDrawer,
+    viewType,
+    setCandidateViewType,
+    contacts,
+    fetchingContacts,
+  } = props;
+
+  console.log('statue', responseData);
     return (
-      <React.Fragment>
+    <>
         <CandidateHeader
           viewType={viewType}
-          handleDropChange={this.handleDropChange}
-          currentUser={this.state.currentUser}
+          handleDropChange={handleDropChange}
+          currentUser={currentUser}
           setCandidateViewType={setCandidateViewType}
           handleCandidateModal={handleCandidateModal}
           handleCandidateResumeModal={handleCandidateResumeModal}
           handleCandidateFilterModal={handleCandidateFilterModal}
-          handleClear={this.handleClear}
-          handleChange={this.handleChange}
-          currentData={this.state.currentData}
-          text={this.state.text}
-          setCurrentData={this.setCurrentData}
-          handleSkillClear={this.handleClear}
-          currentSkillData={this.state.currentSkillData}
-          setCurrentSkillData={this.setCurrentSkillData}
+          handleClear={handleClear}
+          handleChange={handleChange}
+          currentData={currentData}
+          // text={text}
+          setCurrentData={setCurrentData}
+          handleSkillClear={handleClear}
+          currentSkillData={currentSkillData}
+          setCurrentSkillData={setCurrentSkillData}
         />
 
-        <AddCandidateModal
+{/* <AddCandidateModal
           addCandidateModal={addCandidateModal}
           handleCandidateModal={handleCandidateModal}
-          responseData={this.state.responseData}
-        />
-        <AddCandidateResumeModal
-          addCandidateResumeModal={addCandidateResumeModal}
-          handleCandidateResumeModal={handleCandidateResumeModal}
-          handleResponseData={this.handleResponseData}
-          responseData={this.state.responseData}
-        />
+          responseData={responseData}
+        /> */}
+       
         <AddCandidateFilterModal
           addCandidateFilterModal={addCandidateFilterModal}
           handleCandidateFilterModal={handleCandidateFilterModal}
         />
+         <AddCandidateResumeModal
+          addCandidateResumeModal={addCandidateResumeModal}
+          handleCandidateResumeModal={handleCandidateResumeModal}
+          handleResponseData={handleResponseData}
+          responseData={responseData}
+        />
 
         <Suspense fallback={<BundleLoader />}>
-          {this.props.viewType === "card" ? (
+          {viewType === "card" ? (
             <CandidateCardView
               viewType={viewType}
-              handleResponseData={this.handleResponseData}
-              responseData={this.state.responseData}
+              handleResponseData={handleResponseData}
+              responseData={responseData}
             />
-          ) : this.props.viewType === "dollar" ? (
+          ) : viewType === "dollar" ? (
             <CandidateDollarTable viewType={viewType} />
             
           ) 
-          : this.props.viewType === "billable" ? (
+          : viewType === "billable" ? (
             <CandidateBillableStepper viewType={viewType} />
             
           ) 
-          : this.props.viewType === "table" ? (
+          : viewType === "table" ? (
             <CandidateTable
-              handleResponseData={this.handleResponseData}
-              responseData={this.state.responseData}
-              currentUser={this.state.currentUser}
-              selectedLanguage={this.props.selectedLanguage}
+              // handleResponseData={this.handleResponseData}
+              // responseData={this.state.responseData}
+              currentUser={currentUser}
+              // selectedLanguage={this.props.selectedLanguage}
 
             />
-          ) : this.props.viewType === "list" ? (
-            <CandidateWhiteTable currentUser={this.state.currentUser} />
-          ) : this.props.viewType === "dashboard" ? (
-            <CandidateBlueTable currentUser={this.state.currentUser} />
-          ) : this.props.viewType === "black" ? (
+          ) : viewType === "list" ? (
+            <CandidateWhiteTable 
+            currentUser={currentUser} />
+          ) : viewType === "dashboard" ? (
+            <CandidateBlueTable currentUser={currentUser} />
+          ) : viewType === "black" ? (
             <CandidateBlackListTable />
           ) : // this.props.viewType==="grid"?
           // <CandidateGridTable/>:
 
-          this.props.viewType === "map" ? (
+          viewType === "map" ? (
             <CandidateMap />
           ) : null}
         </Suspense>
-      </React.Fragment>
+
+       
+   </>
     );
-  }
+  
 }
 
 const mapStateToProps = ({ candidate, account, auth }) => ({
@@ -189,7 +204,7 @@ const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
       handleCandidateFilterModal,
-      handleCandidateModal,
+      // handleCandidateModal,
       handleCandidateResumeModal,
       getCandidateListByUserId,
       setCandidateViewType,

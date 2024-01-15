@@ -4,12 +4,13 @@ import { LOGOUT } from "../Containers/Auth/AuthTypes";
  *  All of application reducers import goes here...
  */
 import { authReducer } from "../Containers/Auth/AuthReducer";
-import {messageReducer} from "../Containers/LiveMessages/MessageReducer";
+import { pitchReducer } from "../Containers/Pitch/PitchReducer";
+import { messageReducer } from "../Containers/LiveMessages/MessageReducer";
 import { dashboardReducer } from "../Containers/Dashboard/DashboardReducer";
-
+import { brandmodelReducer } from "../Containers/Settings/Category/Brand&Model/BrandModelReducer"
 import { plannerReducer } from "../Containers/Planner/PlannerReducer";
 import { settingsReducer } from "../Containers/Settings/SettingsReducer";
-
+import { refurbishReducer } from "../Containers/Main/Refurbish/RefurbishReducer";
 import { themeReducer } from "../Containers/Settings/Theme/ThemeReducer";
 
 import { ruleReducer } from "../Containers/Rules/RulesReducer";
@@ -20,8 +21,8 @@ import { notificationReducer } from "../Containers/Notification/NotificationRedu
 import { profileReducer } from "../Containers/Profile/ProfileReducer";
 import { expenseReducer } from "../Containers/Expense/ExpenseReducer";
 import { rolesReducer } from "../Containers/Settings/Category/Role/RoleReducer";
-import {educationsReducer} from "../Containers/Settings/Educations/EducationReducer";
-import {functionsReducer} from "../Containers/Settings/Function/FunctionsReducer";
+import { educationsReducer } from "../Containers/Settings/Educations/EducationReducer";
+import { functionsReducer } from "../Containers/Settings/Function/FunctionsReducer";
 import { expensesReducer } from "../Containers/Settings/Expense/ExpensesReducer";
 import { EmployeeReducer } from "../Containers/Employees/EmployeeReducer";
 import { EventReducer } from "../Containers/Event/EventReducer";
@@ -40,20 +41,20 @@ import { OpportunityReducer } from "../Containers/Opportunity/OpportunityReducer
 import { candidateReducer } from "../Containers/Candidate/CandidateReducer";
 import { languageReducer } from "../Language/LanguageReducer";
 import { partnerReducer } from "../Containers/Partner/PartnerReducer";
-import {sectorsReducer} from "../Containers/Settings/Sectors/SectorsReducer";
-import {PermissionsReducer} from "../Containers/Permissions/PermissionsReducer";
-import {designationsReducer} from "../Containers/Settings/Designation/DesignationReducer";
-import {departmentsReducer} from "../Containers/Settings/Department/DepartmentReducer";
-import {eventsReducer} from "../Containers/Settings/Event/EventReducer";
-import {tasksReducer} from "../Containers/Settings/Task/TaskReducer";
-import {librarysReducer} from "../Containers/Settings/Library/LibraryReducer";
+import { sectorsReducer } from "../Containers/Settings/Sectors/SectorsReducer";
+import { PermissionsReducer } from "../Containers/Permissions/PermissionsReducer";
+import { designationsReducer } from "../Containers/Settings/Designation/DesignationReducer";
+import { departmentsReducer } from "../Containers/Settings/Department/DepartmentReducer";
+import { eventsReducer } from "../Containers/Settings/Event/EventReducer";
+import { tasksReducer } from "../Containers/Settings/Task/TaskReducer";
+import { librarysReducer } from "../Containers/Settings/Library/LibraryReducer";
 import { importReducer } from "../Containers/Import/ImportReducer";
 import { requirementReducer } from "../Containers/Requirement/RequirementReducer";
-import {publishReducer} from "../Containers/Publish/PublishReducer";
-import {idProofsReducer} from "../Containers/Settings/Id Proof/IdProofReducer";
+import { publishReducer } from "../Containers/Publish/PublishReducer";
+import { idProofsReducer } from "../Containers/Settings/Id Proof/IdProofReducer";
 import { accessmentReducer } from "../Containers/Accessment/AccessmentReducer";
 import { leadsReducer } from "../Containers/Leads/LeadsReducer";
-import { certificationReducer} from "../Containers/Settings/Recruitement/Child/Certification/CertificationReducer";
+import { certificationReducer } from "../Containers/Settings/Recruitement/Child/Certification/CertificationReducer";
 import { courseReducer } from "../Containers/Course/CourseReducer";
 import { billingReducer } from "../Components/Billing/BillingReducer";
 import { levelsReducer } from "../Containers/Settings/Recruitement/Level/LevelReducer";
@@ -64,6 +65,25 @@ import { countryReducer } from "../Containers/Settings/Category/Country/CountryR
 import { projectsReducer } from "../Containers/Projects/ProjectsReducer";
 import { invoiceReducer } from "../Containers/Invoice/InvoiceReducer";
 import { locationReducer } from "../Containers/Event/Child/Location/LocationReducer";
+import { sourceReducer } from "../Containers/Settings/Category/Source/SourceReducer";
+import { investorReducer } from "../Containers/Investor/InvestorReducer";
+import { contactInvestReducer } from "../Containers/ContactInvest/ContactInvestReducer";
+import { dealReducer } from "../Containers/Deal/DealReducer";
+import { suppliesReducer } from "../Containers/Main/Supplies/SuppliesReducer";
+import { shipperReducer } from "../Containers/Main/Shipper/ShipperReducer";
+import { plantReducer } from "../Containers/Plant/PlantReducer";
+import { teamsReducer } from "../Containers/Main/Teams/TeamsReducer";
+import { inventoryReducer } from "../Containers/Main/Inventory/InventoryReducer";
+import { orderReducer } from "../Containers/Main/Order/OrderReducer";
+import { shipByReducer } from "../Containers/Settings/Category/ShipBy/ShipByReducer";
+import { catgCustomerReducer } from "../Containers/Settings/Category/Customer/CustomerReducer";
+import { distributorReducer } from "../Containers/Main/Account/AccountReducer";
+import { suppliersReducer } from "../Containers/Main/Suppliers/SuppliersReducer";
+import { collectionReducer } from "../Containers/Collection/CollectionReducer";
+import { productReducer } from "../Containers/Product/ProductReducer";
+import { investorListReducer } from "../Containers/Settings/Category/InvestorTab/InvestorListReducer";
+import { procurementReducer } from "../Containers/Procurement/ProcurementReducer";
+
 const appReducer = combineReducers({
   dashboard: dashboardReducer,
   profile: profileReducer,
@@ -77,16 +97,16 @@ const appReducer = combineReducers({
   leave: LeavesReducer,
   holiday: holidayReducer,
   report: reportReducer,
-  course:courseReducer,
+  course: courseReducer,
   notification: notificationReducer,
   rule: ruleReducer,
   employee: EmployeeReducer,
   email: emailReducer,
-  billings:billingReducer,
+  billings: billingReducer,
   event: EventReducer,
   expense: expenseReducer,
-  location:locationReducer,
-  role:rolesReducer,
+  location: locationReducer,
+  role: rolesReducer,
   mileage: mileageReducer,
   project: ProjectReducer,
   document: documentsReducer,
@@ -95,32 +115,53 @@ const appReducer = combineReducers({
   opportunity: OpportunityReducer,
   candidate: candidateReducer,
   language: languageReducer,
-  sector:sectorsReducer,
-  education:educationsReducer,
-  functions:functionsReducer,
+  pitch: pitchReducer,
+  sector: sectorsReducer,
+  education: educationsReducer,
+  functions: functionsReducer,
   expenses: expensesReducer,
-  permissions:PermissionsReducer,
-  designations:designationsReducer,
-  certifications:certificationReducer,
-  departments:departmentsReducer,
-  events:eventsReducer,
+  permissions: PermissionsReducer,
+  designations: designationsReducer,
+  certifications: certificationReducer,
+  departments: departmentsReducer,
+  events: eventsReducer,
   tasks: tasksReducer,
   websites: websitesReducer,
-  librarys:librarysReducer,
+  librarys: librarysReducer,
   importReducer: importReducer,
-  requirement:requirementReducer,
-  publish:publishReducer,
-  idProof:idProofsReducer,
-  message:messageReducer,
+  requirement: requirementReducer,
+  publish: publishReducer,
+  idProof: idProofsReducer,
+  message: messageReducer,
   assessment: accessmentReducer,
- leads:leadsReducer,
- level:levelsReducer,
- stream:streamsReducer,
- unit:unitsReducer,
- program:programsReducer,
- countrys:countryReducer,
-projects:projectsReducer,
-invoice:invoiceReducer,
+  leads: leadsReducer,
+  level: levelsReducer,
+  stream: streamsReducer,
+  unit: unitsReducer,
+  program: programsReducer,
+  countrys: countryReducer,
+  projects: projectsReducer,
+  invoice: invoiceReducer,
+  source: sourceReducer,
+  investor: investorReducer,
+  contactinvest: contactInvestReducer,
+  deal: dealReducer,
+  supplies: suppliesReducer,
+  shipper: shipperReducer,
+  plant: plantReducer,
+  teams: teamsReducer,
+  inventory: inventoryReducer,
+  order: orderReducer,
+  shipBy: shipByReducer,
+  catgCustomer: catgCustomerReducer,
+  brandmodel: brandmodelReducer,
+  distributor: distributorReducer,
+  suppliers: suppliersReducer,
+  collection: collectionReducer,
+  product: productReducer,
+  refurbish: refurbishReducer,
+  investorList:investorListReducer,
+  procurement:procurementReducer
 });
 
 const rootReducer = (state, action) => {

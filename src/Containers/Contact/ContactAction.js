@@ -2,7 +2,7 @@ import * as types from "./ContactActionTypes";
 import axios from "axios";
 import dayjs from "dayjs";
 import { base_url } from "../../Config/Auth";
-import { message } from "antd";
+import Swal from "sweetalert2";
 import { getContactListByOpportunityId } from "../Opportunity/OpportunityAction";
 /**
  * contact modal action
@@ -75,25 +75,26 @@ export const addContact = (contact) => (dispatch, getState) => {
       },
     })
     .then((res) => {
+      Swal.fire({
+        icon: 'success',
+        title: 'Created Successfully',
+        showConfirmButton: false,
+        timer: 1500
+      })
       console.log(res);
-      // dispatch(
-      //   linkContactsToOpportunity(opportunityId, { contactIds: [res.data] }, cb)
-      // );
+      dispatch(getOpportunityRecord(userId));
+      dispatch(getContactRecord(userId));
       const startDate = dayjs()
         .startOf("month")
         .toISOString();
       const endDate = dayjs()
         .endOf("month")
         .toISOString();
-      // dispatch(getContactById(contactId));
-      // dispatch(getLatestContacts(userId, startDate, endDate));
-      // dispatch(getContactListByUserId(userId));
       dispatch(getRecords(userId,0));
       dispatch({
         type: types.ADD_CONTACT_SUCCESS,
         payload: res.data,
       });
-      // cb && cb();
     })
     .catch((err) => {
       console.log(err);
@@ -101,14 +102,14 @@ export const addContact = (contact) => (dispatch, getState) => {
         type: types.ADD_CONTACT_FAILURE,
         payload: err,
       });
-      // cb && cb();
+
     });
 };
 
 /**
  * get all the contact of the user
  */
-export const getContactListByUserId = (userId,page) => (dispatch) => {
+export const getContactListByUserId = (userId,pageNo,filter) => (dispatch) => {
   // let api_url = "";
   // if (userId) {
   //   api_url = `/sort/all/contacts/user/${userId}`;
@@ -119,7 +120,7 @@ export const getContactListByUserId = (userId,page) => (dispatch) => {
     type: types.GET_CONTACTS_REQUEST,
   });
   axios
-    .get(`${base_url}/contact/user/${userId}/${page}`, {
+    .get(`${base_url}/contact/user/${userId}/${pageNo}/${filter}`, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },
@@ -175,6 +176,32 @@ export const getContactData = (userId,page) => (dispatch) => {
     });
 };
 
+export const getdealsContactdata = (userId,page) => (dispatch) => {
+
+  dispatch({
+    type: types.GET_DEALS_CONTACT_DATA_REQUEST,
+  });
+  axios
+    .get(`${base_url}/contact/investor/user/${userId}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.GET_DEALS_CONTACT_DATA_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err.response);
+      dispatch({
+        type: types.GET_DEALS_CONTACT_DATA_FAILURE,
+        payload: err,
+      });
+    });
+};
 
 
 
@@ -350,12 +377,16 @@ export const addContactDocument = (data, cb) => (dispatch) => {
       },
     })
     .then((res) => {
-      console.log(res);
+      Swal.fire({
+        icon: 'success',
+        title: 'Created Successfully',
+        showConfirmButton: false,
+        timer: 1500
+      })
       dispatch({
         type: types.ADD_CONTACT_DOCUMENT_SUCCESS,
         payload: res.data,
       });
-      // dispatch(getCandidateDocument(candidateId));
       cb();
     })
     .catch((err) => {
@@ -496,6 +527,12 @@ export const addContactOpportunity = (opportunity, cb) => (
       },
     })
     .then((res) => {
+      Swal.fire({
+        icon: 'success',
+        title: 'Created Successfully',
+        showConfirmButton: false,
+        timer: 1500
+      })
       console.log(res);
       const startDate = dayjs()
         .startOf("month")
@@ -504,8 +541,6 @@ export const addContactOpportunity = (opportunity, cb) => (
         .endOf("month")
         .toISOString();
       dispatch(getOpportunityListByContactId(contactId));
-      // dispatch(getLatestOpportunities(userId, startDate, endDate));
-      // dispatch(getOpportunitiesByPrice(userId));
       dispatch({
         type: types.ADD_CONTACT_OPPORTUNITY_SUCCESS,
         payload: res.data,
@@ -554,6 +589,12 @@ export const updateContact = (data, contactId) => (dispatch) => {
         type: types.UPDATE_CONTACT_BY_ID_SUCCESS,
         payload: res.data,
       });
+      Swal.fire({
+        icon: 'success',
+        title: 'Updated Successfully',
+        showConfirmButton: false,
+        timer: 1500
+      })
     })
     .catch((err) => {
       console.log(err);
@@ -703,7 +744,12 @@ export const addLinkContactByOpportunityId = (contact, opportunityId) => (
         type: types.ADD_LINK_CONTACT_BY_OPPORTUNITY_ID_SUCCESS,
         payload: res.data,
       });
-      // cb && cb();
+      Swal.fire({
+        icon: 'success',
+        title: 'Created Successfully',
+        showConfirmButton: false,
+        timer: 1500
+      })
     })
     .catch((err) => {
       console.log(err);
@@ -711,7 +757,6 @@ export const addLinkContactByOpportunityId = (contact, opportunityId) => (
         type: types.ADD_LINK_CONTACT_BY_OPPORTUNITY_ID_FAILURE,
         payload: err,
       });
-      // cb && cb();
     });
 };
 
@@ -789,7 +834,12 @@ export const shareContactPartnerPermission = (data, userId, a) => (
         type: types.ADD_SHARE_CONTACT_PARTNER_PERMISSION_SUCCESS,
         payload: res.data,
       });
-      // cb && cb("success");
+      Swal.fire({
+        icon: 'success',
+        title: 'Created Successfully',
+        showConfirmButton: false,
+        timer: 1500
+      })
     })
     .catch((err) => {
       console.log(err);
@@ -797,7 +847,7 @@ export const shareContactPartnerPermission = (data, userId, a) => (
         type: types.ADD_SHARE_CONTACT_PARTNER_PERMISSION_FAILURE,
         payload: err,
       });
-      // cb && cb("failure");
+
     });
 };
 
@@ -825,12 +875,10 @@ export const shareContactCustomerPermission = (data, userId, a) => (
       } else {
         dispatch(getContactListByUserId(userId));
       }
-      // dispatch(getContactListByUserId(userId));
       dispatch({
         type: types.ADD_SHARE_CONTACT_CUSTOMER_PERMISSION_SUCCESS,
         payload: res.data,
       });
-      // cb && cb("success");
     })
     .catch((err) => {
       console.log(err);
@@ -1027,4 +1075,188 @@ export const getPArtnerContactPagination = (userId,pageNo) => (dispatch) => {
         payload: err,
       });
     });
+};
+
+export const getContactRecord = (userId) => (dispatch) => {
+  dispatch({
+    type: types.GET_CONTACT_RECORDS_REQUEST,
+  });
+  axios
+    .get(`${base_url}/contact/customer/record/count/${userId}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.GET_CONTACT_RECORDS_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err.response);
+      dispatch({
+        type: types.GET_CONTACT_RECORDS_FAILURE,
+        payload: err,
+      });
+    });
+};
+
+export const getContactTeamRecord = (userId) => (dispatch) => {
+  dispatch({
+    type: types.GET_CONTACT_TEAM_RECORDS_REQUEST,
+  });
+  axios
+    .get(`${base_url}/contact/team/count/${userId}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.GET_CONTACT_TEAM_RECORDS_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err.response);
+      dispatch({
+        type: types.GET_CONTACT_TEAM_RECORDS_FAILURE,
+        payload: err,
+      });
+    });
+};
+
+export const getFilterContactList = (userId,pageNo,filter) => (dispatch) => {
+  // let api_url = "";
+  // if (userId) {
+  //   api_url = `/sort/all/contacts/user/${userId}`;
+  // } else {
+  //   api_url = `/contacts`;
+  // }
+  dispatch({
+    type: types.GET_FILTER_CONTACTS_REQUEST,
+  });
+  axios
+    .get(`${base_url}/contact/user/${userId}/${pageNo}/${filter}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.GET_FILTER_CONTACTS_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err.response);
+      dispatch({
+        type: types.GET_FILTER_CONTACTS_FAILURE,
+        payload: err,
+      });
+    });
+};
+
+
+export const handleContactNotesDrawerModal = (modalProps) => (dispatch) => {
+  dispatch({
+    type: types.HANDLE_CONTACT_NOTES_DRAWER_MODAL,
+    payload: modalProps,
+  });
+};
+
+export const handleContactPulseDrawerModal = (modalProps) => (dispatch) => {
+  dispatch({
+    type: types.HANDLE_CONTACT_PULSE_DRAWER_MODAL,
+    payload: modalProps,
+  });
+};
+
+export const getAllContact = (pageNo,filter) => (dispatch) => {
+  dispatch({
+    type: types.GET_ALL_CONTACT_REQUEST,
+  });
+  axios
+    .get(`${base_url}/contact/${pageNo}/${filter}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.GET_ALL_CONTACT_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err.response);
+      dispatch({
+        type: types.GET_ALL_CONTACT_FAILURE,
+        payload: err,
+      });
+    });
+};
+
+export const getTeamContact = (userId,pageNo,filter) => (dispatch) => {
+ 
+  dispatch({
+    type: types.GET_TEAM_CONTACT_REQUEST,
+  });
+  axios
+    .get(`${base_url}/contact/team/${userId}/${pageNo}/${filter}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.GET_TEAM_CONTACT_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err.response);
+      dispatch({
+        type: types.GET_TEAM_CONTACT_FAILURE,
+        payload: err,
+      });
+    });
+};
+
+export const getOpportunityRecord = (userId) => (dispatch) => {
+  dispatch({
+    type: types.GET_OPPORTUNITY_RECORD_REQUEST,
+  });
+  axios
+    .get(`${base_url}/candidate/record/today/${userId}`,{
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.GET_OPPORTUNITY_RECORD_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.GET_OPPORTUNITY_RECORD_FAILURE,
+        payload: err,
+      });
+    });
+};
+
+export const ClearReducerDataOfContact = () => (dispatch) => {
+  dispatch({
+    type: types.HANDLE_CLAER_REDUCER_DATA_CONTACT,
+  });
 };

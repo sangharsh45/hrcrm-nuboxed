@@ -1,17 +1,16 @@
-import React, { Component ,lazy} from "react";
+import React, {} from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { addHoliday, getHoliday, updateHoliday,deleteHoliday } from "../../../../Holiday/HolidayAction";
 import { StyledTabs } from "../../../../../Components/UI/Antd";
-import { MainWrapper, FlexContainer } from "../../../../../Components/UI/Layout";
-import { TextInput } from "../../../../../Components/UI/Elements";
+import { MainWrapper } from "../../../../../Components/UI/Layout";
+import {  TextInput } from "../../../../../Components/UI/Elements";
 import dayjs from "dayjs";
 import moment from "moment";
 import SettingsSingleHoliday from "./SettingsSingleHoliday";
 import { Button, Switch } from "antd";
 import { FormattedMessage } from "react-intl";
 import { DatePicker } from "antd";
-// import { DatePicker } from "../../../../../Components/Forms/Formik/DatePicker";
 
 const TabPane = StyledTabs.TabPane;
 
@@ -140,10 +139,10 @@ handleYearChange = (date) => {
     console.log(this.state.holidayName);
     return (
       <>
-        <FlexContainer>
-          <div style={{ width: "80%" }}>
-            <MainWrapper>
-              <h1
+        <div class=" flex ">
+          <div class=" w-[80%]">
+            <MainWrapper justifyContent="space-between">
+              <h1 
                 style={{
                   display: "flex",
                   justifyContent: "left",
@@ -167,7 +166,12 @@ handleYearChange = (date) => {
                  onChange={this.onChange}
                   picker="year" />
                  </div>
-                 {/* <div>Optional Allowed</div> */}
+                 {/* <Spacer/>
+                 <div>Optional Allowed
+                  <input
+                  type="number"
+                  ></input>
+                 </div> */}
               {/* <div
                 style={{
                   marginLeft:"326px"
@@ -224,7 +228,7 @@ handleYearChange = (date) => {
               </div>
 
               {isTextInputOpen ? (
-                <FlexContainer alignItems="left" style={{ marginTop: "5%", justifyContent:"space-between" }} >
+                <div class=" flex items-left justify-between mt-[5%]"  >
                 
                   <div >
                   <TextInput
@@ -247,7 +251,7 @@ handleYearChange = (date) => {
                     unCheckedChildren="Mandatory"
                   />
                   </div>
-                  <FlexContainer justifyContent="flex-end" >
+                  <div class=" flex justify-end"  >
                     <Button
                       type="primary"
                       htmlType="submit"
@@ -268,10 +272,10 @@ handleYearChange = (date) => {
                  defaultMessage="Cancel"
                 />
                     </Button>
-                  </FlexContainer>
-                </FlexContainer>
+                  </div>
+                </div>
               ) : (
-                  <FlexContainer style={{ float: "right" }} alignItems="flex-end">
+                  <div class=" flex justify-end" style={{ float: "right" }} >
                     {this.props.role === "ADMIN" && (
                       <div style={{ marginTop: "0.3125em" }}>
                         <Button
@@ -287,11 +291,13 @@ handleYearChange = (date) => {
                     &nbsp;
                       </div>
                     )}
-                  </FlexContainer>
+                  </div>
+
                 )} 
             </MainWrapper>
           </div>
-        </FlexContainer>
+        </div>
+        <h4>Updated on {moment(this.props.holidays && this.props.holidays.length && this.props.holidays[0].updationDate).format("ll")} by {this.props.holidays && this.props.holidays.length && this.props.holidays[0].updatedBy}</h4>
       </>
     );
   }

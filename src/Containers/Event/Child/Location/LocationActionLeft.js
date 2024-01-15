@@ -1,54 +1,84 @@
-import React from 'react'
+import React, { useEffect,useState } from "react";
 import { FlexContainer } from '../../../../Components/UI/Layout'
-import GridViewIcon from '@mui/icons-material/GridView';
+import LanguageIcon from '@mui/icons-material/Language';
+import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
+import { bindActionCreators } from "redux";
 import TocIcon from '@mui/icons-material/Toc';
 import { FormattedMessage } from "react-intl";
-import { Tooltip } from "antd";
+import { Badge, Tooltip } from "antd";
+import {getLocationRecords} from "./LocationAction";
 
 const LocationActionLeft = (props) => {
+  useEffect(() => {
+    if (props.viewType === "card") {
+      props.getLocationRecords(props.orgId);
+    }
+  }, [props.viewType]);
     return (
         <FlexContainer alignItems='center'>
           <Tooltip
-        title={<FormattedMessage id="app.card" defaultMessage="Card" />}
+        title={<FormattedMessage id="app.listView" defaultMessage="List View" />}
       >
-       
+         <Badge
+          size="small"
+           count={(props.viewType === "card" && props.recordData.locCount) || 0}
+          overflowCount={999}
+        >
           <span
             onClick={() => props.setLocationViewType("card")}
             style={{
               marginRight: "0.5rem",
-              color: props.viewType === "card" && "#1890ff",
-              // fontSize: "1.0625em",
-              // cursor: "pointer",
+              color: props.viewType === "card" && "#1890ff",            
             }}
           >
-            <GridViewIcon style={{fontSize:"1.4rem"}}  />
+            <TocIcon style={{fontSize:"1.4rem"}}  />
           </span>
-       
+          </Badge>
       </Tooltip>
 
-      {/* <Tooltip
-        title={<FormattedMessage id="app.list" defaultMessage="List" />}
+      <Tooltip
+        title={<FormattedMessage id="app.mapView" defaultMessage="Map View" />}
       >
-       
+           <Badge
+          size="small"
+          // count={(props.viewType === "card" && props.recordData.customer) || 0}
+          overflowCount={999}
+        >
           <span
-            onClick={() => props.setExpenseViewType("tile")}
+            onClick={() => props.setLocationViewType("map")}
             style={{
-              marginRight: "0.5rem",
-              color: props.viewType === "tile" && "#1890ff",
+              marginLeft: "0.5rem",
+              color: props.viewType === "map" && "#1890ff",
               fontSize: "1.0625em",
               cursor: "pointer",
             }}
           >
             
-            <TocIcon  
+            <LanguageIcon  
             // icon={solid('users')}
              />
           </span>
-    
-      </Tooltip> */}
+          </Badge>
+      </Tooltip>
         </FlexContainer>
     )
 }
+const mapStateToProps = ({ auth,location }) => ({
+  userId: auth.userDetails.userId,
+  orgId: auth.userDetails.organizationId,
+  recordData:location.recordData
 
-export default LocationActionLeft; 
+});
+const mapDispatchToProps = (dispatch) =>
+  bindActionCreators(
+    {
+      getLocationRecords
+    },
+    dispatch
+  );
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(LocationActionLeft)
+);
+
 

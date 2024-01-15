@@ -1,32 +1,16 @@
 import React, { Component, lazy, Suspense } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { Button, message, Tooltip, Popover, Icon } from "antd";
-import { FormattedMessage } from "react-intl";
 import ListAltIcon from '@mui/icons-material/ListAlt';
-import { StyledModal, StyledTabs } from "../../../Components/UI/Antd";
-//import CloudIcon from '@mui/icons-material/Cloud';
+import {  StyledTabs } from "../../../Components/UI/Antd";
 import {
-  FlexContainer,
   TabsWrapper,
 } from "../../../Components/UI/Layout";
-//import AdsClickIcon from '@mui/icons-material/AdsClick';
-//import ActionNotification from "../Dashboard/ActionNotification"
-//import HighlightAltIcon from '@mui/icons-material/HighlightAlt';
-import TipsAndUpdatesIcon from '@mui/icons-material/TipsAndUpdates';
-
-// import { getTimeLineDataByOpportunityId } from "../../../OpportunityAction";
-//import { ActionIcon } from "../../Components/Utils";
-//import { AddPopover } from "../../Components/Common";
-
-// import { handleLinkPartnerModal } from "../../../../Partner/PartnerAction";
 import { BundleLoader } from "../../../Components/Placeholder";
-
-//import { Breadcrumb, Alert } from "antd";
 import DnsIcon from '@mui/icons-material/Dns';
-//import DashboardTodo from "./Child/DashboardTodo";
-import OpportunityRequirementBoard from "./OpportunityRequirementBoard";
-import Details from "./Details";
+import { FormattedMessage } from "react-intl";
+const OpportunityRequirementBoard = lazy(() => import("./OpportunityRequirementBoard"));
+const Details = lazy(() => import("./Details"));
 
 
 const TabPane = StyledTabs.TabPane;
@@ -84,7 +68,12 @@ class DashboardDetails extends Component {
                 
           
                             <ListAltIcon  />
-                    <span style={{ marginLeft: "0.25em" }}>Kanban</span>
+                    <span class=" ml-[0.25em]" >
+                    <FormattedMessage
+        id="app.kanban"
+        defaultMessage="Kanban"
+      />
+                      </span>
                   
                   {activeKey === "1" && (
                     <>
@@ -115,7 +104,12 @@ class DashboardDetails extends Component {
 
                  <DnsIcon/>
    
-                    <span style={{ marginLeft: "0.25em" }}>Details</span>
+                 <span class=" ml-[0.25em]" >
+                    <FormattedMessage
+        id="app.details"
+        defaultMessage="Details"
+      />
+                      </span>
                   
                   {activeKey === "2" && (
                     <>

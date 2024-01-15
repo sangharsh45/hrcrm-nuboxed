@@ -1,18 +1,14 @@
-import React, { Component, Suspense } from "react";
-import { BundleLoader } from "../../../Components/Placeholder";
-
+import React, { Component, } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { StyledDrawer } from "../../../Components/UI/Antd";
-import { sortedLastIndex } from "lodash";
 import { Button, Upload } from "antd";
-import { FlexContainer } from "../../../Components/UI/Layout";
 import { Field, Form, Formik } from "formik";
 import { InputComponent } from "../../../Components/Forms/Formik/InputComponent";
 import { Editor } from "react-draft-wysiwyg";
 import draftToHtml from "draftjs-to-html";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
-import { EditorState, convertToRaw, ContentState } from "draft-js";
+import { EditorState, convertToRaw, } from "draft-js";
 import { StyledLabel } from "../../../Components/UI/Elements";
 import { FormattedMessage } from "react-intl";
 
@@ -80,13 +76,13 @@ class CandidateRowEmailModal extends Component {
           id="app.email"
           defaultMessage="Email"
         />}
-        width={"40%"}
+        width={"60%"}
         visible={this.props.addCandidateRowEmailModal}
         // maskClosable={false}
         closable
         destroyOnClose
          maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}
-         style={{marginTop:"5rem"}}
+         style={{marginTop:"3rem"}}
          onClose={() => this.props.handleCandidateRowEmailModal(false)}
         //  footer={null}
       >
@@ -146,13 +142,13 @@ class CandidateRowEmailModal extends Component {
 
               return (
                 <Form>
-                   <div style={{ width: "100%" }}>
-                  <FlexContainer alignItems="center">
+                   <div class=" w-full" >
+                  <div class=" flex items-center" >
                     {/* <Title type='user' style={{ fontSize: 18, display: 'inline'}} >To</Title> */}
-                    <div style={{ width: "12%" }}>
+                    <div class="w-[12%]" >
                <StyledLabel>To</StyledLabel>
                     </div>
-                    <div style={{ width: "88%" }}>
+                    <div class="w-[88%]" >
                       
                     <Field
                       name="to"
@@ -160,12 +156,12 @@ class CandidateRowEmailModal extends Component {
                       width="100%"
                     />
                       </div>
-                  </FlexContainer>
-                  <FlexContainer alignItems="center">
-                  <div style={{ width: "12%" }}>
+                  </div>
+                  <div class=" flex items-center" >
+                  <div class=" w-[12%]" >
                <StyledLabel>CC</StyledLabel>
                     </div>
-                    <div style={{ width: "88%" }}>
+                    <div class="w-[88%]" >
                       
                     <Field
                       name="cc"
@@ -173,13 +169,13 @@ class CandidateRowEmailModal extends Component {
                       width="100%"
                     />
                       </div>
-                  </FlexContainer>
+                  </div>
                  
-                  <FlexContainer alignItems="center">
-                  <div style={{ width: "12%" }}>
+                  <div class=" flex items-center" >
+                  <div class=" w-[12%]" >
                <StyledLabel>BCC</StyledLabel>
                     </div>
-                    <div style={{ width: "88%" }}>
+                    <div class="w-[88%]" >
                       
                     <Field
                       name="bcc"
@@ -187,12 +183,12 @@ class CandidateRowEmailModal extends Component {
                       width="100%"
                     />
                       </div>
-                  </FlexContainer>
-                  <FlexContainer alignItems="center">
-                  <div style={{ width: "12%" }}>
+                  </div>
+                  <div class=" flex items-center" >
+                  <div class=" w-[12%]" >
                <StyledLabel>Subject</StyledLabel>
                     </div>
-                    <div style={{ width: "88%" }}>
+                    <div class="w-[88%]" >
                       
                     <Field
                       name="subject"
@@ -200,7 +196,7 @@ class CandidateRowEmailModal extends Component {
                       width="100%"
                     />
                       </div>
-                  </FlexContainer>
+                  </div>
                   </div>
 
                   <Editor
@@ -216,14 +212,8 @@ class CandidateRowEmailModal extends Component {
                      onEditorStateChange={this.onEditorStateChange}
                     placeholder={placeholder || "Type here"}
                   />
-                  <FlexContainer justifyContent="flex-end">
-                    <div
-                      style={{
-                        display: "flex",
-                        flexDirection: "row",
-                        // float: "right"
-                        // marginLeft: "800px"
-                      }}
+                  <div class=" flex justify-end" >
+                    <div class=" flex flex-row"
                     >
                       <Upload
                         // onChange={this.onFileChoose}
@@ -252,7 +242,7 @@ class CandidateRowEmailModal extends Component {
                       </Button>
                       {/* <Button type='default' style={{ marginLeft: 5, marginTop: '5px' }} onClick={() => setSmsModalVisible(false)}>cancel</Button> */}
                     </div>
-                  </FlexContainer>
+                  </div>
                 </Form>
               );
             }}

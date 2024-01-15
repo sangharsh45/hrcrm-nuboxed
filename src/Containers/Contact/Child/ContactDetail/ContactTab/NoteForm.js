@@ -2,13 +2,12 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { FormattedMessage } from "react-intl";
 import { bindActionCreators } from "redux";
-import { Button, Icon } from "antd";
-import { Formik, Form, Field } from "formik";
+import { Button, } from "antd";
+import { Formik, Form, } from "formik";
 import * as Yup from "yup";
 import { Editor } from "react-draft-wysiwyg";
-import { EditorState, convertToRaw, ContentState } from "draft-js";
+import { EditorState, convertToRaw, } from "draft-js";
 import draftToHtml from "draftjs-to-html";
-import { TextareaComponent } from "../../../../../Components/Forms/Formik/TextareaComponent";
 import { addNote } from "../../../ContactAction";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import { FlexContainer } from "../../../../../Components/UI/Layout";
@@ -70,6 +69,7 @@ class NoteForm extends Component {
       accountId,
       distributorId,
       Loading,
+      contactData,
       callback,
       teamId,
       callId,
@@ -80,7 +80,7 @@ class NoteForm extends Component {
       taskId,
       type,
       vendorId,
-
+      employeeId,
       // partnerId,
       // userIdFromPartner,
       fetchingNotesListByLeadsId,
@@ -93,6 +93,7 @@ class NoteForm extends Component {
           initialValues={{
             notes: "",
             contactId: contactId ? contactId : "",
+            employeeId:employeeId ?employeeId:"",
             type: type ? type : "",
           }}
           onSubmit={(values, { resetForm }) => {
@@ -170,7 +171,7 @@ class NoteForm extends Component {
 const mapStateToProps = ({ auth, team, contact }) => ({
   user: auth.userDetails,
   fetchingNotesListBycontactId: contact.fetchingNotesListBycontactId,
-
+  employeeId: auth.userDetails.employeeId,
   //   team: team.user,
 });
 

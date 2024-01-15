@@ -14,7 +14,7 @@ const UpdateLeavesModal = (props) => {
           id="app.applyforleaves"
           defaultMessage="Update Leaves"
         />}
-        width="30vw"
+        width="55vw"
         visible={updateLeaveModal}
         maskClosable={false}
         destroyOnClose

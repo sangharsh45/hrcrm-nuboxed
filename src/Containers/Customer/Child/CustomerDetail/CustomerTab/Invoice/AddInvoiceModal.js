@@ -1,20 +1,19 @@
-import React, { lazy, Suspense, Component } from "react";
+import React, {  Suspense, Component } from "react";
 import { connect } from "react-redux";
 import { FormattedMessage } from "react-intl";
 import { bindActionCreators } from "redux";
 import { Button, } from "antd";
 import { Formik, Form, Field } from "formik";
 import { StyledDrawer } from "../../../../../../Components/UI/Antd";
-import { Spacer, StyledLabel } from "../../../../../../Components/UI/Elements";
+import { Spacer } from "../../../../../../Components/UI/Elements";
 import { InputComponent } from "../../../../../../Components/Forms/Formik/InputComponent";
 import { TextareaComponent } from "../../../../../../Components/Forms/Formik/TextareaComponent";
 import * as Yup from "yup";
 import {
     handleInvoiceModal,
 } from "../../../../CustomerAction";
-import { FlexContainer } from "../../../../../../Components/UI/Layout";
 
-const ButtonGroup = Button.Group;
+
 const documentSchema = Yup.object().shape({
 documentId: Yup.string().required("Input needed !"),
 });

@@ -1,13 +1,8 @@
-import React, { Component, lazy, Suspense } from "react";
-import { Icon } from "antd";
+import React, { Component,  Suspense } from "react";
 import { StyledTabs } from "../../../../Components/UI/Antd";
 import { TabsWrapper } from "../../../../Components/UI/Layout";
-import { ActionIcon } from "../../../../Components/Utils";
 import SignatureView from "./SignatureView";
-import {
-  EyeInvisibleOutlined, MailOutlined, PlusOutlined,
- 
-  
+import { MailOutlined, PlusOutlined, 
 } from '@ant-design/icons';
 import { handleEmailModal,handleWebsiteModal } from "../../../Settings/SettingsAction";
 import { connect } from "react-redux";
@@ -15,10 +10,7 @@ import { bindActionCreators } from "redux";
 import AddEmailModal from "../Email/AddEmailModal";
 import AddWebsiteModal from "../Website/AddWebsiteModal";
 import EmailTable from "../Email/EmailTable";
-import WebsiteTable from "../Website/WebsiteTable"
-const OrganizationBoost = lazy(() =>
-  import("./OrganizationBoost/OrganizationBoost")
-);
+
 
 const TabPane = StyledTabs.TabPane;
 
@@ -100,7 +92,7 @@ class OrganizationDetailTab extends Component {
                 <EmailTable />
               </Suspense>
             </TabPane>
-            <TabPane
+            {/* <TabPane
               tab={
                 <>
                   <span>
@@ -133,7 +125,7 @@ class OrganizationDetailTab extends Component {
                 {" "}
                 <WebsiteTable />
               </Suspense>
-            </TabPane>
+            </TabPane> */}
           </StyledTabs>
         </TabsWrapper>
         <Suspense fallback={null}>

@@ -1,26 +1,12 @@
-import React, { Suspense, Component } from 'react'
+import React, { Component } from 'react'
 import { base_url } from "../../Config/Auth";
-import { Route, Switch } from 'react-router-dom'
-import { MultiAvatar } from '../../Components/UI/Elements'
-import { BundleLoader } from '../../Components/Placeholder'
-
-import Item from 'antd/lib/list/Item'
-import { FlexContainer } from '../../Components/UI/Layout'
 import InsertDriveFileIcon from '@mui/icons-material/InsertDriveFile';
-import { Button, Menu, Dropdown, Radio, Space, Tooltip } from 'antd'
 import {
     getCustomerDocument
 } from '../Customer/CustomerAction'
-
-import APIFailed from '../../Helpers/ErrorBoundary/APIFailed'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { AlignCenterOutlined, DownOutlined } from '@ant-design/icons'
 import styled from 'styled-components'
-import AddCandidateDrawerModal from "../Candidate/AddCandidateDrawerModal"
-import { StyledModal } from '../../Components/UI/Antd'
-import { sortedLastIndex } from 'lodash'
-// import CustomerSplashScreen from './CustomerSplashScreen'
 
 class CandidateDocumentView extends Component {
    

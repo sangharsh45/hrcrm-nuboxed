@@ -190,3 +190,11 @@ export const addLibrarys = (name) => (dispatch,getState) => {
         });
       });
   };
+
+
+  export const ClearReducerDataOfLibrary = () => (dispatch) => {
+    dispatch({
+      type: types.HANDLE_CLAER_REDUCER_DATA_LIBRARY,
+    });
+  };
+  

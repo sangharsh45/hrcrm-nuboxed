@@ -1,10 +1,8 @@
-import React, { useState } from 'react'
-import ReactDOM from 'react-dom'
+import React, {  } from 'react'
 import Tree from 'react-tree-graph'
 import 'react-tree-graph/dist/style.css'
 
 import './styles.css'
-import rootNode from '../Candidate/Data'
 
 // const data= {
 //   name: 'Ahana',

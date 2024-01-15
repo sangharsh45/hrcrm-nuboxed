@@ -5,6 +5,9 @@ import { bindActionCreators } from "redux";
 import { Button, Switch,Select } from "antd";
 import { Formik, Form, Field, FieldArray } from "formik";
 import * as Yup from "yup";
+import{getAllOpportunityData} from "../../Opportunity/OpportunityAction"
+import { getFilteredEmailContact } from "../../Candidate/CandidateAction";
+import {getAllCustomerData} from "../../Customer/CustomerAction"
 import dayjs from "dayjs";
 import { Spacer, StyledLabel } from "../../../Components/UI/Elements";
 import CandidateClearbit from "../../../Components/Forms/Autocomplete/CandidateClearbit";
@@ -52,6 +55,12 @@ function UpdateEventForm (props) {
   function handleChangeInclude(value) {
     setInclude(value)
   }
+  useEffect(()=> {
+
+    props.getAllCustomerData(props.userId)
+    props.getAllOpportunityData(props.userId)
+    props.getFilteredEmailContact(props.userId);
+   },[])
 
   useEffect(() => {
     console.log("helo")
@@ -82,6 +91,39 @@ function UpdateEventForm (props) {
       return {
         label: item.fullName,
         value: item.employeeId,
+      };
+    });
+    const ContactData = props.filteredContact.map((item) => {
+      return {
+        label: `${item.fullName}`,
+        value: item.contactId,
+      };
+    });
+    const opportunityNameOption = props.allOpportunityData.map((item) => {
+      return {
+        label: `${item.opportunityName}`,
+        value: item.opportunityId,
+      };
+    });
+
+    const customerNameOption = props.allCustomerData
+    .sort((a, b) => {
+      const libraryNameA = a.name && a.name.toLowerCase();
+      const libraryNameB = b.name && b.name.toLowerCase();
+      if (libraryNameA < libraryNameB) {
+        return -1;
+      }
+      if (libraryNameA > libraryNameB) {
+        return 1;
+      }
+
+      // names must be equal
+      return 0;
+    })
+    .map((item) => {
+      return {
+        label: `${item.name || ""}`,
+        value: item.customerId,
       };
     });
     const employeeOption = props.employees.map((item) => {
@@ -253,18 +295,16 @@ function UpdateEventForm (props) {
             values,
             ...rest
           }) => (
+            <div class="overflow-y-auto h-[34rem] overflow-x-hidden max-sm:h-[30rem]">
             <Form className="form-background">
-          <div class=" flex justify-between">
-              <div class=" h-full w-1/2"   >
+          <div class=" flex justify-around max-sm:flex-col">
+              <div class=" h-full w-w47.5 max-sm:w-wk"   >
                   <Field
                     isRequired
                     name="eventTypeId"
                     //label="Type"
                     label={
-                      <FormattedMessage
-                        id="app.type"
-                        defaultMessage="Type"
-                      />
+                      <FormattedMessage id="app.type" defaultMessage="type" />
                     }
                     component={SearchSelect}
                     isColumnWithoutNoCreate
@@ -284,9 +324,9 @@ function UpdateEventForm (props) {
                     //label="Topic"
                     label={
                       <FormattedMessage
-                        id="app.subject"
-                        defaultMessage="Subject"
-                      />
+                      id="app.subject"
+                      defaultMessage="subject"
+                    />
                     }
                     isColumn
                     width={"100%"}
@@ -307,9 +347,9 @@ function UpdateEventForm (props) {
                         //label="Start "
                         label={
                           <FormattedMessage
-                            id="app.startDate"
-                            defaultMessage="Start Date"
-                          />
+                          id="app.startDate"
+                          defaultMessage="Start Date"
+                        />
                         }
                         isColumn
                         component={DatePicker}
@@ -328,9 +368,9 @@ function UpdateEventForm (props) {
                         // label="Start Time"
                         label={
                           <FormattedMessage
-                            id="app.startTime"
-                            defaultMessage="Start Time"
-                          />
+                              id="app.startTime"
+                              defaultMessage="Start Time"
+                            />
                         }
                         isColumn
                         component={TimePicker}
@@ -354,7 +394,7 @@ function UpdateEventForm (props) {
                         label={
                           <FormattedMessage
                             id="app.enddate"
-                            defaultMessage="End Date"
+                            defaultMessage="enddate"
                           />
                         }
                         component={DatePicker}
@@ -388,9 +428,9 @@ function UpdateEventForm (props) {
                         //label="End Time"
                         label={
                           <FormattedMessage
-                            id="app.endtime"
-                            defaultMessage="End Time"
-                          />
+                          id="app.endtime"
+                          defaultMessage="endtime"
+                        />
                         }
                         isColumn
                         component={TimePicker}
@@ -415,7 +455,7 @@ function UpdateEventForm (props) {
                     label={
                       <FormattedMessage
                         id="app.timeZone"
-                        defaultMessage="TimeZone"
+                        defaultMessage="timeZone"
                       />
                     }
                     selectType="timeZone"
@@ -433,7 +473,7 @@ function UpdateEventForm (props) {
                     label={
                       <FormattedMessage
                         id="app.notes"
-                        defaultMessage="Notes"
+                        defaultMessage="notes"
                       />
                     }
                     isColumn
@@ -445,7 +485,89 @@ function UpdateEventForm (props) {
                       height: "5em",
                     }}
                   />
+  <Spacer />
+                  <div>
+                  {props.user.crmInd === true &&(
+                 <Field
+                 name="customerId"
+                 // selectType="customerList"
+                 isColumnWithoutNoCreate
+                 label={
+                  <FormattedMessage
+                     id="app.customer"
+                     defaultMessage="customer"
+                   />
+                 }
+                 //component={SearchSelect}
+                 component={SelectComponent}
+                 options={
+                   Array.isArray(customerNameOption)
+                     ? customerNameOption
+                     : []
+                 }
+                 isColumn
+                 margintop={"0"}
+                 value={values.customerId}
+                 inlineLabel
+               />
+                  )} 
+                  </div>
                   <Spacer />
+                  <div>
+                  {props.user.crmInd === true &&(
+                  <Field
+                    name="contactId"
+                    //selectType="contactList"
+                    isColumnWithoutNoCreate
+                    // label="Contact"
+                    label={
+                      <FormattedMessage
+                        id="app.contact"
+                        defaultMessage="contact"
+                      />
+                    }
+                    component={SelectComponent}
+                    isColumn
+                    options={Array.isArray(ContactData) ? ContactData : []}
+                    value={values.contactId}
+                    // isDisabled={defaultContacts}
+                    defaultValue={{
+                      label: `${props.fullName || ""} `,
+                      value: props.contactId,
+                    }}
+                    inlineLabel
+                  />
+                  )} 
+                  </div>
+                  <Spacer/>
+                  <div>
+                  {props.user.crmInd === true &&(
+                 <Field
+                 name="opportunityId"
+                 // selectType="customerList"
+                 isColumnWithoutNoCreate
+                 label={
+                  <FormattedMessage
+                     id="app.opportunity"
+                     defaultMessage="opportunity"
+                   />
+                 }
+                 //component={SearchSelect}
+                 component={SelectComponent}
+                 options={
+                   Array.isArray(opportunityNameOption)
+                     ? opportunityNameOption
+                     : []
+                 }
+                 isColumn
+                 margintop={"0"}
+                 value={values.opportunityId}
+                 inlineLabel
+               />
+                  )} 
+                  </div>
+                  <Spacer />
+                  {/* <Spacer />
                   {startDate ? (
                     <span>
                       {dayjs(startDate).isBefore(dayjs()) && (
@@ -462,9 +584,9 @@ function UpdateEventForm (props) {
                         </span>
                       )}
                     </span>
-                  )}
+                  )} */}
                 </div>
-                <div class=" h-full w-2/5"   >
+                <div class=" h-full w-w47.5 max-sm:w-wk"   >
               
 
               <Field
@@ -558,7 +680,7 @@ function UpdateEventForm (props) {
                   }}>
                     Set Reminder
                   </StyledLabel>
-                  <div class=" flex justify-between" >
+                  <div class=" flex justify-between max-sm:justify-around" >
 
                     <Switch
                       style={{ width: "60px" }}
@@ -602,11 +724,12 @@ function UpdateEventForm (props) {
 
                   <FormattedMessage
                     id="app.update"
-                    defaultMessage="Update"
+                    defaultMessage="update"
                   />
                 </Button>
               </div>
             </Form>
+            </div>
           )}
         </Formik>
       </>
@@ -615,12 +738,14 @@ function UpdateEventForm (props) {
 
 
 
-const mapStateToProps = ({ auth, event, employee, events }) => ({
-  //   addingEvent: event.addingEvent,
+const mapStateToProps = ({ auth, event,opportunity,candidate, employee, customer,events }) => ({
+  allCustomerData:customer.allCustomerData,
   updatingEvent: event.updatingEvent,
   user: auth.userDetails,
+  userId:auth.userDetails.userId,
+  filteredContact: candidate.filteredContact,
   setEditingEvents: event.setEditingEvents,
-  //   deletingEvent: event.deleteEvent,
+  allOpportunityData:opportunity.allOpportunityData,
   employees: employee.employees,
   events: events.events,
 });
@@ -628,12 +753,12 @@ const mapStateToProps = ({ auth, event, employee, events }) => ({
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
-      //   addEvent,
-      //   deleteEvent,
+      getAllCustomerData,
+      getAllOpportunityData,
       updateEvent,
       handleChooserModal,
       handleEventModal,
-      //   getEmployeelist,
+      getFilteredEmailContact,
       getEvents,
 
     },

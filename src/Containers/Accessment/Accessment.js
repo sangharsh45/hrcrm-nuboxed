@@ -1,12 +1,12 @@
 import React, { Component, Suspense, lazy } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { BundleLoader, GridLoader } from "../../Components/Placeholder";
+import { BundleLoader} from "../../Components/Placeholder";
 import AccessmentHeader from "./Child/AccessmentHeader";
- import { setAccessmentViewType, handleAccessmentModal, getEmployeelist } from "./AccessmentAction";
+ import { setAccessmentViewType, handleAccessmentModal } from "./AccessmentAction";
 import AddAccessmentModal from "./Child/AddAccessmentModal";
-import AccessmentForm from "./Child/AccessmentForm";
- const AccessmentTable = lazy(() => import("./Child/AccessmentTable/AccessmentTable"));
+const AccessmentForm = lazy(() => import("./Child/AccessmentForm"));
+const AccessmentTable = lazy(() => import("./Child/AccessmentTable/AccessmentTable"));
 
 
 class Accessment extends Component {
@@ -19,8 +19,6 @@ class Accessment extends Component {
     this.setState({ currentData: value });
   };
   handleChange = (e) => {
-    // console.log(e.target.value)
-    // this.setState({ text: e.target.value });
     this.setState({ currentData: e.target.value })
    
   };
@@ -46,8 +44,11 @@ class Accessment extends Component {
           addAccessmentModal={addAccessmentModal}
           handleAccessmentModal={handleAccessmentModal}
         />
+        <Suspense fallback={<BundleLoader/>}>
         <AccessmentForm />
         <AccessmentTable />
+        </Suspense>
+     
       </React.Fragment>
     );
   }

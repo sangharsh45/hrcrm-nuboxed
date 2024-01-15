@@ -1,10 +1,7 @@
 import React, { lazy, Suspense } from "react";
 import { useState } from "react";
-import { FormattedMessage } from "react-intl";
-
 import { BundleLoader } from "../../../../../../Components/Placeholder";
-
-import { StyledDrawer, StyledModal } from "../../../../../../Components/UI/Antd";
+import { StyledDrawer, } from "../../../../../../Components/UI/Antd";
 const RequirementForm = lazy(() => import("./RequirementForm"));
 
 const AddRequirementModal = (props) => {

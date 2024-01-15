@@ -3,17 +3,16 @@ import styled from "styled-components";
 import { FormattedMessage } from "react-intl";
 import QuizIcon from '@mui/icons-material/Quiz';
 import {handleTestDrawerModal} from "../../CourseAction"
-import { Button, Tooltip,Switch, Divider, Popconfirm } from "antd";
+import { Button, Tooltip} from "antd";
+import { StyledTabs } from "../../../../Components/UI/Antd";
 import { FlexContainer } from "../../../../Components/UI/Layout";
-import { TextInput, Spacer, Select } from "../../../../Components/UI/Elements";
+import { TextInput} from "../../../../Components/UI/Elements";
 import { elipsize } from "../../../../Helpers/Function/Functions";
 import { ViewEditCard } from "../../../../Components/UI/Elements";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import AddTestModal from "./AddTestModal";
 
-const { Option } = Select;
-
+const TabPane = StyledTabs.TabPane;
 class SingleTopic extends Component {
  
 
@@ -40,16 +39,10 @@ class SingleTopic extends Component {
       updatingStages,
    
       color,
-      key,
       currentStage,
     } = this.props;
-    console.log(opportunityStagesId, "----------", linkedStages);
-    console.log(topics);
-    console.log(color);
-    console.log(currentStage);
 
     const disabled = probability === 100 || probability === 0 ? true : false;
-    // const disabled = false;
     const disableDelete = linkedStages && linkedStages.includes(opportunityStagesId);
     return (
       <StageWrapper>
@@ -62,26 +55,27 @@ class SingleTopic extends Component {
                 
               >
                 
-                <StageName style={{ flexBasis: "25%", textAlign: "left" }}>
-                  {elipsize(topics, 23)}
-                </StageName>
+                {/* <StageName style={{ flexBasis: "25%", textAlign: "left" }}> */}
+                <StyledTabs>
+                <TabPane
+                tab={elipsize(topics, 23)}
+                ></TabPane>
+                </StyledTabs>
+                {/* </StageName> */}
            
                 <div class=" flex justify-between">     
                 <Tooltip title="Test" >
                     <span
                     onClick={(item) => 
                      {
-                       this.props.handleTestDrawerModal(true);  
-                      //  this.props.handleApproveIconClick(stageId)                                         
+                       this.props.handleTestDrawerModal(true);                                      
                     }                     
                     }
                      style={{ 
                      marginLeft: "35px",
                       }} 
                      >
-                          {/* {probability !== 0 && probability !== 100 && ( */}
                   <QuizIcon/>
-                          {/* )} */}
                    </span>
                    </Tooltip>  
 </div>
@@ -110,7 +104,6 @@ class SingleTopic extends Component {
                   loading={updatingStages}                  
             
                 >
-                  {/* Save */}
                   <FormattedMessage
                     id="app.save"
                     defaultMessage="Save"
@@ -118,7 +111,6 @@ class SingleTopic extends Component {
                 </Button>
                 &nbsp;
                 <Button type="primary" ghost onClick={() => toggleViewType()}>
-               {/* Cancel */}
                   <FormattedMessage
                     id="app.cancel"
                     defaultMessage="Cancel"
@@ -127,12 +119,6 @@ class SingleTopic extends Component {
               </FlexContainer>
             )
           }
-
-                   {/* <AddTestModal
-        handleTestDrawerModal={this.props.handleTestDrawerModal}
-        addTestDrawerModal={this.props.addTestDrawerModal}
-        /> */}
-
         </ViewEditCard>  
 
          

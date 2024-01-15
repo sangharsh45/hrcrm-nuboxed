@@ -12,7 +12,7 @@ class CustomerOverView extends Component {
     return (
       <>
         <div class=" flex justify-between">
-          <div class=" flex justify-start flex-nowrap w-4/6"
+          <div class=" flex justify-start flex-nowrap w-wk items-center"
           >
             <div style={{ width: "15%" }}>
               <MultiAvatar
@@ -21,7 +21,7 @@ class CustomerOverView extends Component {
                 imageURL={customer.imageURL}
               />
             </div>
-            <div class=" flex flex-col w-4/6">
+            <div class=" flex flex-col w-wk">
               <Title
                 overflow="hidden"
                 textOverflow="ellipsis"

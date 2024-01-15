@@ -4,7 +4,6 @@ import { bindActionCreators } from "redux";
 import moment from "moment";
 import { FlexContainer } from "../../Components/UI/Layout";
 import { GroupView } from "../../Components/Common";
-import { NoData } from "../../Components/UI/Elements";
 import {
   getCustomerRequirement,
   getLatestCustomer,
@@ -14,13 +13,14 @@ import {
   getAllCustomerByPosition,
   handleCustomerDrawerModal,
   handleUpdateCustomerDrawerModal,
+  setEditCustomer,
 } from "../Customer/CustomerAction";
-
 import SingleCardView from "./SingleCardView";
 import AddCustomerDrawerModal from "./AddCustomerDrawerModal";
 import UpdateCustomerDrawerModal from "./Child/CustomerTable/UpdateCustomerDrawerModal";
 
 class CustomerCardView extends Component {
+
   componentDidMount() {
     const {
       user: { userId },
@@ -37,8 +37,8 @@ class CustomerCardView extends Component {
     if (userId) {
       // getCustomerListByUserId(userId);
       getLatestCustomer(userId);
-      getCustomerRequirement(userId);
-      getCustomerCloser(userId, startDate, endDate);
+      // getCustomerRequirement(userId);
+      // getCustomerCloser(userId, startDate, endDate);
     }
   }
   handleOnViewMoreTopValue = () => {
@@ -91,12 +91,14 @@ class CustomerCardView extends Component {
       fetchingCustomerRequirement,
       customerCloser,
       fetchingCustomerCloser,
+      setEditCustomer
     } = this.props;
-    console.log(customerByUserId);
+
     return (
       <>
         <br />
-        <GroupView
+        <div class="max-sm:overflow-x-auto h-[34rem]">
+        {/* <GroupView
           groupTitle="On-boarded this month"
           isFetching={fetchingCustomerCloser}
           noData={!customerCloser.length}
@@ -141,9 +143,9 @@ class CustomerCardView extends Component {
               </FlexContainer>
             )
           }
-        </GroupView>
+        </GroupView> */}
 
-        <GroupView
+        {/* <GroupView
           groupTitle="Positions"
           isFetching={fetchingCustomerRequirement}
           noData={!customerRequirement.length}
@@ -188,7 +190,7 @@ class CustomerCardView extends Component {
               </FlexContainer>
             )
           }
-        </GroupView>
+        </GroupView> */}
 
         <GroupView
           groupTitle="ALL"
@@ -208,7 +210,7 @@ class CustomerCardView extends Component {
                         key={customer.customerId}
                         user={user}
                         handleCustomerDrawerModal={handleCustomerDrawerModal}
-                        // stages={stages}
+                        setEditCustomer={setEditCustomer}
                         customer={customer}
                         handleUpdateCustomerDrawerModal={handleUpdateCustomerDrawerModal}
                         // handleOpportunityDrawer={handleOpportunityDrawer}
@@ -226,6 +228,7 @@ class CustomerCardView extends Component {
                         user={user}
                         handleCustomerDrawerModal={handleCustomerDrawerModal}
                         handleUpdateCustomerDrawerModal={handleUpdateCustomerDrawerModal}
+                        setEditCustomer={setEditCustomer}
                         // stages={stages}
                         customer={customer}
                       />
@@ -235,7 +238,7 @@ class CustomerCardView extends Component {
             )
           }
         </GroupView>
-
+        </div>
         <AddCustomerDrawerModal />
         < UpdateCustomerDrawerModal
          
@@ -281,6 +284,7 @@ const mapDispatchToProps = (dispatch) =>
       getAllCustomerByPosition,
       handleCustomerDrawerModal,
       handleUpdateCustomerDrawerModal,
+      setEditCustomer,
     },
     dispatch
   );

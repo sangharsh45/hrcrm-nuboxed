@@ -1,11 +1,10 @@
-import React, { Component,useMemo } from "react";
+import React, { Component, } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { FormattedMessage } from "react-intl";
 import { Button } from "antd";
-import { getContactListByCustomerId,getAllCustomerListByUserId } from "../../../Containers/Customer/CustomerAction";
-import { Formik, Form, Field, FieldArray, FastField } from "formik";
-import * as Yup from "yup";
+import { getContactListByCustomerId, } from "../../../Containers/Customer/CustomerAction";
+import { Formik, Form, Field,} from "formik";
 import {linkOpportunityContact} from "../../Contact/ContactAction"
 import { FlexContainer } from "../../../Components/UI/Layout";
 import { SelectComponent } from "../../../Components/Forms/Formik/SelectComponent";

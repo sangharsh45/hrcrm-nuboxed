@@ -21,7 +21,7 @@ import {
 } from '@ant-design/icons';
 import { addMileage, getMileageByUserId } from "../MileageAction";
 import { getCurrency } from "../../Auth/AuthAction";
-import dayjs from "dayjs";
+import moment from "moment";
 import * as Yup from "yup";
 import { Select } from "antd";
 
@@ -63,7 +63,7 @@ function MileageForm(props) {
       return value.map((data) => {
         if (`${data.id}date` === id) {
           console.log(dateString);
-          return { ...data, mileageDate: dayjs(dateString).toISOString() };
+          return { ...data, mileageDate: moment(dateString).toISOString() };
         } else {
           return data;
         }
@@ -258,7 +258,7 @@ function MileageForm(props) {
         <th>From</th>
         <th>To</th>
         <th>Distance</th>
-        <th>Unit</th>
+        {/* <th>Unit</th> */}
         <th>Remarks</th>
 
         {/* <th>Rate</th>
@@ -266,7 +266,7 @@ function MileageForm(props) {
         {row.map((item) => {
           return (
             <tr>
-              <td style={{ width: "14%" }}>
+              <td style={{ width: "15%" }}>
                 <DatePicker
                   style={{ width: "93%" }}
                   onChange={(date, dateString) =>
@@ -301,29 +301,28 @@ function MileageForm(props) {
                 />
               </td>
 
-              <td style={{ width: "12%" }}>
+              <td style={{ width: "10%" }}>
                 <TextInput
                   name={`${item.id}distances`}
                   value={`${item.distances}`}
                   onChange={handleChangedistances}
-                  style={{ width: "90%" }}
+                  style={{ width: "80%" }}
                   isRequired
                 />
               </td>
-              <td style={{ width: "11%" }}>
+              {/* <td style={{ width: "11%" }}>
                 <Select
                   style={{ width: "90%" }}
-                  // onChange={(value) => handleChange(`${item.id}select`, value)}
+          
                   isRequired
                    disabled
                    value="km"
                   
                 >
                   
-                  {/* <Option value="Km" disabled>Km</Option> */}
-                  {/* <Option value="Mile">Mile</Option> */}
+                
                 </Select>
-              </td>
+              </td> */}
               <td>
                 <TextInput
                   style={{ width: "100%" }}

@@ -4,11 +4,8 @@ import { bindActionCreators } from "redux";
 import { FormattedMessage } from "react-intl";
 import { Button } from "antd";
 import { editOrganizationDetails } from "../../../Auth/AuthAction";
-import { FlexContainer } from "../../../../Components/UI/Layout";
 import { Spacer } from "../../../../Components/UI/Elements";
 import EditableInput from "../../../../Components/Forms/Edit/EditableInput";
-import EditLazySelect from "../../../../Components/Forms/Edit/EditLazySelect";
-import { base_url } from "../../../../Config/Auth";
 class OrganizationAddressEdit extends Component {
   constructor(props) {
     super(props);
@@ -41,7 +38,7 @@ class OrganizationAddressEdit extends Component {
   };
   render() {
     const {
-      organizationDetails: {
+      organizationList: {
         address,
         sourceId,
         proposalAmount,
@@ -66,8 +63,7 @@ class OrganizationAddressEdit extends Component {
 
     return (
       <>
-        <FlexContainer
-          flexDirection="column"
+   <div class=" flex flex-col"
           style={{ padding: "10px 20px 10px 20px" }}
         >
          
@@ -117,9 +113,9 @@ class OrganizationAddressEdit extends Component {
           />
         
          
-        </FlexContainer>
+        </div>
 
-        <FlexContainer justifyContent="flex-end" marginRight="20px">
+        <div class=" flex justify-end mr-[20px]" >
           <Button
             type="primary"
              loading={this.props.editingOrganizationDetails}
@@ -137,7 +133,7 @@ class OrganizationAddressEdit extends Component {
                  defaultMessage="Cancel"
                 />
           </Button>
-        </FlexContainer>
+        </div>
       </>
     );
   }

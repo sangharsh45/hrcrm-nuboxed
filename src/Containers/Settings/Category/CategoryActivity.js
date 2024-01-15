@@ -1,14 +1,10 @@
-import React, { Component, lazy, Suspense } from "react";
+import React, { Component, Suspense } from "react";
 import { bindActionCreators } from "redux";
 import { StyledTabs } from "../../../Components/UI/Antd";
 import { TabsWrapper } from "../../../Components/UI/Layout";
-import { MainWrapper, FlexContainer } from "../../../Components/UI/Layout";
 import { connect } from "react-redux";
 import Event from "../Event/Event";
 import Task from "../Task/Task";
-import Unit from "../Unit/Unit";
-// import Project from "./Project/Project";
-import Country from "./Country/Country";
 const TabPane = StyledTabs.TabPane;
 
 class CategoryActivity extends Component {
@@ -29,8 +25,8 @@ class CategoryActivity extends Component {
   render() {
     return (
       <>
-        <FlexContainer flexWrap="nowrap">
-        <div style= {{width:"46%"}}>
+    <div class="flex flex-nowrap" >
+        <div style= {{width:"70%"}}>
           <TabsWrapper>
             <StyledTabs defaultActiveKey="0" onChange={this.handleTabChange}>
            
@@ -38,7 +34,7 @@ class CategoryActivity extends Component {
                 tab={
                   <>
                    <i class="far fa-calendar-check"></i>
-                    <span style={{ marginLeft: "0.25em" }}>Event</span>
+                    <span class=" ml-[0.25em]" >Event</span>
                   </>
                 }
                 key="1"
@@ -52,7 +48,7 @@ class CategoryActivity extends Component {
                 tab={
                   <>
                   <i class="fas fa-tasks"></i>
-                    <span style={{ marginLeft: "0.25em" }}>Task</span>
+                    <span class=" ml-[0.25em]">Task</span>
                   </>
                 }
                 key="2"
@@ -62,7 +58,7 @@ class CategoryActivity extends Component {
                 </Suspense>
               </TabPane>
 
-              <TabPane
+              {/* <TabPane
                 tab={
                   <>
                   <i class="fas fa-tasks"></i>
@@ -74,7 +70,7 @@ class CategoryActivity extends Component {
                 <Suspense>
                   <Unit />
                 </Suspense>
-              </TabPane>
+              </TabPane> */}
               {/* <TabPane
                 tab={
                   <>
@@ -89,23 +85,11 @@ class CategoryActivity extends Component {
                 </Suspense>
               </TabPane> */}
 
-              <TabPane
-                tab={
-                  <>
-                  <i class="fas fa-tasks"></i>
-                    <span style={{ marginLeft: "0.25em" }}>Country</span>
-                  </>
-                }
-                key="5"
-              >
-                <Suspense>
-                  <Country />
-                </Suspense>
-              </TabPane>
+          
             </StyledTabs>
           </TabsWrapper>
           </div>
-        </FlexContainer>
+        </div>
       </>
     );
   }

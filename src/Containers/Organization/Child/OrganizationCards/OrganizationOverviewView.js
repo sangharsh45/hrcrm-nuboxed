@@ -1,40 +1,43 @@
 import React, { Component } from "react";
 import {
   Title,
-  SubTitle,
   MultiAvatar,
 } from "../../../../Components/UI/Elements";
-import { FlexContainer } from "../../../../Components/UI/Layout";
-import { ActionIcon } from "../../../../Components/Utils";
+import BorderColorIcon from '@mui/icons-material/BorderColor';
 class OrganizationOverviewView extends Component {
   render() {
     const {
-      organization: { organizationName, imageId, imageURL },
+      organizationList: { organizationName, imageId, imageURL },
       toggleViewType,
     } = this.props;
     return (
       <>
-        <FlexContainer justifyContent="space-between">
-          <FlexContainer justifyContent="flex-start" flexWrap="nowrap">
-            <div style={{ width: "3.75em" }}>
+        <div class=" flex justify-between" >
+          <div class=" flex flex-start flex-no-wrap" >
+            <div  class="w-[3.75em]">
               <MultiAvatar
+              style={{width:"5rem"}}
                 primaryTitle={organizationName}
                 imageId={imageId}
                 imageURL={imageURL}
               />
             </div>
-            <FlexContainer flexDirection="row">
+            <div class=" flex flex-row" >
               <Title fontSize={"1.375em"}>{organizationName}</Title>
               {/* <SubTitle>{designation}</SubTitle> */}
-            </FlexContainer>
-          </FlexContainer>
-          <ActionIcon
+            </div>
+          </div>
+          <BorderColorIcon
             tooltipTitle="Edit"
             iconType="edit"
-            handleIconClick={toggleViewType}
-            size="1em"
+            onClick={toggleViewType}
+            style={{
+              color: "grey",
+              cursor: "pointer",
+              fontSize: "1rem",
+            }}
           />
-        </FlexContainer>
+        </div>
 
         {/* <SubTitle>{email}</SubTitle> */}
         {/* <SubTitle>{designation}</SubTitle> */}

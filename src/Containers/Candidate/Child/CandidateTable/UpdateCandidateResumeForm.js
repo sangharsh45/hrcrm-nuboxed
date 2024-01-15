@@ -1,10 +1,9 @@
-import React, { Component,PureComponent,useMemo } from "react";
+import React, { PureComponent, } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import {
   getLibrarys,} from "../../../../Containers/Settings/Library/LibraryAction";
 import axios from "axios";
-import { FormattedMessage } from "react-intl";
 import { Button } from "antd";
 import { Spacer } from "../../../../Components/UI/Elements";
  import { 
@@ -12,7 +11,6 @@ import { Spacer } from "../../../../Components/UI/Elements";
   handleupdateCandidateResumeModal,
   addResumeForm
 } from "../../CandidateAction";
-import { FlexContainer } from "../../../../Components/UI/Layout";
 class UpdateCandidateResumeForm extends PureComponent {
   state={
     fileData:null,
@@ -100,7 +98,7 @@ class UpdateCandidateResumeForm extends PureComponent {
       <>
       <input type="file" name="file" onChange={this.changeHandler} />
         <Spacer />
-              <FlexContainer justifyContent="flex-end">
+              <div class=" flex justify-end" >
                   <div>
 				<button 
          style={{backgroundColor:"#24d8a7",height:"1.6rem",color:"white",borderColor:"#24d8a7"}}
@@ -115,7 +113,7 @@ class UpdateCandidateResumeForm extends PureComponent {
             </button>
         </div> 
              
-        <div style={{marginLeft:"5px"}}>
+        <div class=" ml-[5px]" >
              <Button
             type="primary"
             ghost
@@ -131,7 +129,7 @@ class UpdateCandidateResumeForm extends PureComponent {
           </Button>
         </div> 
      
-              </FlexContainer>   
+              </div>   
       </>
       
       

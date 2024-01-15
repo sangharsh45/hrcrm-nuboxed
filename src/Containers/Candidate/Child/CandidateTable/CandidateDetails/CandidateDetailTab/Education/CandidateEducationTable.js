@@ -2,7 +2,6 @@ import React, { Component ,lazy} from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import {
-  StyledTable,
   StyledPopconfirm,
 } from "../../../../../../../Components/UI/Antd";
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -13,13 +12,13 @@ import {
   getCandidateEducationDetails,
   setEditCandidateEducation,
 } from "../../../../../CandidateAction";
+import {  Tooltip } from "antd";
+import { OnlyWrapCard } from "../../../../../../../Components/UI/Layout";
 import { handleUpdateCandidateEducationModal } from "../../../../../CandidateAction";
 import {
-  getOpportunityDocument,
   deleteCandidateEducationTable,
 } from "../../../../../CandidateAction";
 import APIFailed from "../../../../../../../Helpers/ErrorBoundary/APIFailed";
-import { FormattedMessage } from "react-intl";
 const UpdateCandidateEducationModal = lazy(()=>import("../Education/UpdateCandidateEducationModal"));
 class CandidateEducationTable extends Component {
   componentDidMount() {
@@ -46,146 +45,155 @@ class CandidateEducationTable extends Component {
     } = this.props;
     console.log(candidateId);
 
-    const columns = [
-      {
-        //title: "Education Type",
-        title: (
-          <FormattedMessage
-            id="app.Type"
-            defaultMessage="Type"
-          />
-        ),
-        dataIndex: "educationType",
-         width: "8%"
-      },
-      {
-        //title: "Course Name",
-        title: (
-          <FormattedMessage id="app.course" defaultMessage="Course" />
-        ),
-        dataIndex: "courseName",
-        width: "10%"
-      },
-      {
-        title: "Course Type",
-        dataIndex: "courseType",
-      },
-      {
-        //title: "Year of Passing",
-        title: (
-          <FormattedMessage
-            id="app.yearOfPassing"
-            defaultMessage="Year of Passing"
-          />
-        ),
-        dataIndex: "yearOfPassing",
-        width: "18%"
-      },
-      {
-        //title: "University/Institute Name",
-        title: (
-          <FormattedMessage
-            id="app.university"
-            defaultMessage="University/Institute"
-          />
-        ),
-        dataIndex: "university",
-        width: "20%"
-      },
-      {
-        title: "Specialization",
-        dataIndex: "specialization",
-      },
-      {
-        //title: "Marks Secured",
-        title: (
-          <FormattedMessage
-            id="app.marksSecured"
-            defaultMessage="Marks Secured"
-          />
-        ),
-        dataIndex: "marksSecured",
-        width: "15%",
-        render: (name, item, i) => {
-          return (
-            <span>
-              
-               {`${item.marksSecured} ${item.marksType}`}
-              </span>
-          );
-        },
-      },
-     
-      {
-        title: "",
-        dataIndex: "documentId",
-        width: "2%",
-        render: (name, item, i) => {
-          return (
-            <>
-              {/* {item.documentId ? ( */}
-                <a
-                  href={`${base_url}/document/${item.documentId}`}
-                  target="_blank"
-                >
-                  <DownloadIcon
-                    type="download"
-                    style={{ cursor: "pointer",fontSize:"0.8rem" }}
-                  />
-                </a>
-              {/* ) : null} */}
-            </>
-          );
-        },
-      },
-
-
-      {
-        title: "",
-        dataIndex: "documentId",
-        width: "2%",
-        render: (name, item, i) => {
-          //debugger
-          return (
-            <BorderColorIcon
-              type="edit"
-              style={{ cursor: "pointer",fontSize: "0.8rem" }}
-              onClick={() => {
-                setEditCandidateEducation(item);
-                handleUpdateCandidateEducationModal(true);
-              }}
-            />
-          );
-        },
-      },
-      {
-        title: "",
-        dataIndex: "id",
-        width: "2%",
-        render: (name, item, i) => {
-          return (
-            <StyledPopconfirm
-              //title="Do you want to delete?"
-              title={<FormattedMessage
-                id="app.doyouwanttodelete?"
-                defaultMessage="Do you want to delete?"
-              />}
-              onConfirm={() => deleteCandidateEducationTable(item.id)}
-            >
-              <DeleteIcon type="delete" style={{ cursor: "pointer",fontSize:"0.8rem", color: "red" }} />
-            </StyledPopconfirm>
-          );
-        },
-      },
-    ];
+ 
 
     if (fetchingCandidateEducationDetailsError) {
       return <APIFailed />;
     }
     return (
       <>
+         <div className=' flex justify-end sticky top-28 z-auto'>
+        <OnlyWrapCard style={{backgroundColor:"#E3E8EE"}}>
+        <div className=" flex justify-between w-[97.5%] px-2 bg-transparent font-bold sticky top-0 z-10">
+        <div className=" md:w-[10.5rem]">Type</div>
+       <div className=" md:w-[8.1rem]">Course</div>
+       <div className=" md:w-[13.1rem] ">Course Type</div>
+       <div className=" md:w-[8.5rem] ">Year of Passing</div>
+       <div className=" md:w-[8.2rem] ">University/Institute</div>
+       <div className="md:w-[8.5rem]">Specialization</div>
+       <div className="md:w-[8.5rem]">Marks Secured</div>
 
-        <StyledTable
+      </div>
+
+      
+      {eduCandidateDetails.map((item) => { 
+
+                    return (
+                      <div class="w-wk">
+                      <div class=" flex rounded-xl justify-between bg-white mt-[0.5rem]  h-[2.75rem] items-center p-3">
+                        <div class="flex">
+                          <div className=" flex font-medium flex-row md:w-[20.12rem] max-sm:flex-row w-full max-sm:justify-between ">
+                            {/* <div class=" text-sm text-cardBody font-semibold font-poppins max-sm:hidden">
+                              Name
+                            </div> */}
+       
+                            <div class=" font-normal text-[0.82rem]text-cardBody font-poppins md:w-[10.1rem]">
+                              {item.educationType}
+                            </div>
+                         
+       
+                          <div className=" flex font-medium flex-col md:w-[2.25rem]  max-sm:flex-row w-full mt-1 max-sm:justify-between">
+                            {/* <div class=" text-sm text-cardBody font-semibold font-poppins max-sm:hidden">
+                              Country
+                            </div> */}
+       
+                            <div class=" font-normal text-[0.82rem] text-cardBody font-poppins">
+       {item.courseName}
+                            </div>
+                          </div>
+                      
+                        </div>
+                      
+                          <div className=" flex font-medium flex-row md:w-[9.21rem] max-sm:flex-row w-full mt-1 max-sm:justify-between">
+                            {/* <div class=" text-sm text-cardBody font-semibold font-poppins max-sm:hidden">
+                              Refurbish
+                            </div> */}
+       
+                            <div class=" font-normal text-[0.82rem] text-cardBody font-poppins">
+                          {item.courseType}
+                            </div>
+                          </div>
+                          <div className=" flex font-medium flex-row md:w-[9.22rem] max-sm:flex-row w-full mt-1 max-sm:justify-between">
+                            {/* <div class=" text-sm text-cardBody font-semibold font-poppins max-sm:hidden">
+                              Inventory
+                            </div> */}
+       
+                            <div class=" font-normal text-[0.82rem] text-cardBody font-poppins">
+                         {item.yearOfPassing}
+                            </div>
+                          </div>
+                          <div className=" flex font-medium flex-row md:w-[11.12rem] max-sm:flex-row w-full mt-1 max-sm:justify-between">
+                            {/* <div class=" text-sm text-cardBody font-semibold font-poppins max-sm:hidden">
+                              Inventory
+                            </div> */}
+       
+                            <div class=" font-normal text-[0.82rem] text-cardBody font-poppins">
+               {item.university}
+                            </div>
+                          </div>
+                          <div className=" flex font-medium flex-row md:w-[7.1rem] max-sm:flex-row w-full mt-1 max-sm:justify-between ">
+                            {/* <div class=" text-sm text-cardBody font-semibold font-poppins max-sm:hidden">
+                              Billing
+                            </div> */}
+                            <div class=" font-normal text-[0.82rem] text-cardBody font-poppins">
+                         {item.specialization}
+                            </div>
+                          </div>
+                          <div className=" flex font-medium flex-row md:w-[7.1rem] max-sm:flex-row w-full mt-1 max-sm:justify-between ">
+                            {/* <div class=" text-sm text-cardBody font-semibold font-poppins max-sm:hidden">
+                              Billing
+                            </div> */}
+                            <div class=" font-normal text-[0.82rem] text-cardBody font-poppins">
+                            <span>
+            
+            {`${item.marksSecured} ${item.marksType}`}
+           </span>
+                            </div>
+                          </div>
+                    
+                          <div class="flex flex-row w-[5%] max-sm:flex-row max-sm:w-[10%]">
+                            <div>
+                            <a
+                href={`${base_url}/document/${item.documentId}`}
+                target="_blank"
+              >
+                <DownloadIcon
+                  type="download"
+                  style={{ cursor: "pointer",fontSize:"1rem" }}
+                />
+              </a>
+                            </div>
+            
+                            <div></div>
+                          </div>
+                     
+                      
+                          <div class="flex flex-row w-[5%] max-sm:flex-row max-sm:w-[10%]">
+                            <div>
+                              <Tooltip title="Edit">
+                                <BorderColorIcon
+                                  style={{ cursor: "pointer", fontSize: "1rem" }}
+                                  onClick={() => {
+                                    setEditCandidateEducation(item);
+                                    handleUpdateCandidateEducationModal(true);
+                                  }}
+                                />
+                              </Tooltip>
+                            </div>
+                            <div>
+                        <StyledPopconfirm
+            title="Do you want to delete?"
+            onConfirm={() => deleteCandidateEducationTable(item.id)}
+          >
+            
+      <DeleteIcon type="delete" style={{ cursor: "pointer",fontSize:"1rem", color: "red" }} />
+
+          </StyledPopconfirm>
+                        </div>
+                       
+                            <div></div>
+                          </div>
+                          </div>
+                      </div>
+                    </div>
+
+
+                    )
+                })}
+      </OnlyWrapCard>
+      </div>
+
+        {/* <StyledTable
           columns={columns}
           dataSource={eduCandidateDetails}
           Loading={
@@ -195,7 +203,7 @@ class CandidateEducationTable extends Component {
           scroll={{ y: 280 }}
           pagination={false}
           onChange={console.log("task onChangeHere...")}
-        />
+        /> */}
 
         <UpdateCandidateEducationModal
           updateCandidateEducationModal={updateCandidateEducationModal}

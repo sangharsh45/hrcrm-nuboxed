@@ -4,7 +4,6 @@ import { bindActionCreators } from "redux";
 import { withRouter } from "react-router-dom";
 import { Button } from "antd";
 import { StyledSelect } from "../../../Components/UI/Antd";
-
 const Option = StyledSelect.Option;
 
 class LeadsActionRight extends React.Component {
@@ -18,20 +17,28 @@ class LeadsActionRight extends React.Component {
     });
   };
   render() {
-    const { handleLeadsModal, userId } = this.props;
+    const { handleLeadsModal, user} = this.props;
     return (
       <>
+        {user.leadsCreateInd === true && user.crmInd === true &&(
         <div class=" flex  items-center">
-          <Button type="primary" ghost onClick={() => handleLeadsModal(true)}>
+          {/* {user.customerFullListInd === true &&(  */}
+        {/* <LeadShareForm
+      handleDropChange={this.props.handleDropChange}
+      currentUser={this.props.currentUser} 
+      /> */}
+      {/* )} */}
+          <Button type="primary"  onClick={() => handleLeadsModal(true)}>
             Add
           </Button>
         </div>
+        )} 
       </>
     );
   }
 }
 
-const mapStateToProps = ({ auth, team, account }) => ({});
+const mapStateToProps = ({ auth, team, account }) => ({user: auth.userDetails,});
 const mapDispatchToProps = (dispatch) => bindActionCreators({}, dispatch);
 export default withRouter(
   connect(mapStateToProps, mapDispatchToProps)(LeadsActionRight)

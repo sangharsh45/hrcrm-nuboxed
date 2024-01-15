@@ -1,16 +1,32 @@
 import * as types from "./CustomerActionTypes";
 import dayjs from "dayjs";
 const initialState = {
-  viewType: "card",
+  viewType: "table",
   addCustomerModal: false,
+
+  addingCustomerActivityEvent:false,
+  addingCustomerActivityEventError:false,
 
   addingCustomer: false,
   addingCustomerError: false,
+
+  customerContractStatus: false,
+  customerContractStatusError: false,
+
+  addDrawerCustomerPulseModal:false,
+
+  addDrawerCustomerNotesModal:false,
 
 
   addDrawerCustomerEmailModal:false,
 
   customerProjectModal:false,
+
+  fetchingFilterCustomers: false,
+  fetchingFilterCustomersError: false,
+
+  addingCustomerActivityCall: false,
+  addingCustomerActivityCallError: false,
  
 
   addingAttendence: false,
@@ -28,12 +44,18 @@ const initialState = {
   fetchinglatestCustomerError:false,
   latestCustomer:[],
 
+  fetchingAllCustomersData: false,
+  fetchingAllCustomersDataError: false,
+  allCustomerData:[],
+
   fetchingAllCustomerByPosition:false,
   fetchingAllCustomerByPosition:false,
 
   fetchingCustomerRequirement:false,
   fetchingCustomerRequirementError:false,
   customerRequirement:[],
+
+  callActivityModal:false,
 
   fetchingCustomers: false,
   fetchingCustomersError: false,
@@ -155,6 +177,8 @@ const initialState = {
   fetchingCustomerDetailsByIdError: false,
   customer: {},
 
+  addingLocationDetails:false,
+
   documentUploadModal: false,
 
   addingDocumentByCustomerId: false,
@@ -163,6 +187,10 @@ const initialState = {
   fetchingDocumentsByCustomerId: false,
   fetchingDocumentsByCustomerIdError: false,
   documentsByCustomerId: [],
+
+  fetchingCusActivityTimelineStatus: false,
+  fetchingCusActivityTimelineStatusError: false,
+  customerActivityTimeline:[],
 
   deleteDocument: false,
   deleteDocumentError: false,
@@ -225,6 +253,10 @@ const initialState = {
   addingInvoice: false,
   addingInvoiceError: false,
 
+
+  convertingCustomerToAccount: false,
+  convertingCustomerToAccountError: false,
+  
   fetchingInvoiceByCustomer: false,
   fetchingInvoiceByCustomerError: false,
   invoiceByCustomerId: [],
@@ -247,6 +279,9 @@ const initialState = {
   addSharingCustomer: false,
   addSharingCustomerError: false,
 
+  addingCustomerActivityTask:false,
+  addingCustomerActivityTaskError:false,
+
   fetchingPermissionsListCustomer: false,
   fetchingPermissionsListCustomerError: false,
   permissionsDataListCustomer: [],
@@ -254,6 +289,10 @@ const initialState = {
   fetchingRecordsByUserId: false,
   fetchingRecordsByUserIdError: false,
   recordData: {},
+
+  fetchingCustomerTeamRecordsByUserId: false,
+  fetchingCustomerTeamRecordsByUserIdError: false,
+  customerTeamRecordData:{},
 
   addingInitiativeByCustomerId:false,
   addingInitiativeByCustomerIdError:false,
@@ -286,6 +325,15 @@ const initialState = {
   fetchingCustomersDataError:false,
   customerData:[],
 
+  fetchingOpportunityRecord: false,
+  fetchingOpportunityRecordError: false,
+  opportunityRecord:[],
+
+  fetchingInvestorData: false,
+  fetchingInvestorDataError: false,
+  investorData:[],
+
+
   fetchingRecruitToCustomer: false,
   fetchingRecruitToCustomerError: false,
   recruitByCustomerId: [],
@@ -300,6 +348,10 @@ const initialState = {
   fetchingCustomersList:false,
   fetchingCustomersListError:false,
   customerByList:[],
+
+  fetchingAttendanceList: false,
+  fetchingAttendanceListError: false,
+  attendanceByList:[],
 
  
 
@@ -326,6 +378,10 @@ const initialState = {
   setEditingCustomerOpportunity: {},
   setEditingCustomerInitiative:{},
 
+  fetchingTeamCustomer: false,
+  fetchingTeamCustomerError: false,
+  teamCustomer:[],
+
   setEditingCustomerContact:{},
   addUpdateCustomerContactModal:false,
 
@@ -346,9 +402,11 @@ const initialState = {
   recordCategoryDataBlue: "",
 
   updatingCustomerOwenership: false,
-  updatingCustomerOwenershipError: false
+  updatingCustomerOwenershipError: false,
 
-
+  fetchingAllCustomerList: false,
+  fetchingAllCustomerListError:false,
+  allCustomers:[],
 };
 
 export const customerReducer = (state = initialState, action) => {
@@ -437,6 +495,9 @@ export const customerReducer = (state = initialState, action) => {
       return { ...state, documentUploadModal: action.payload };
     case types.HANDLE_INVOICE_MODAL:
       return { ...state, invoiceModal: action.payload };
+
+      case types.HANDLE_CALL_ACTIVITY_MODAL:
+        return { ...state, callActivityModal: action.payload };
     case types.DELETE_DOCUMENT_REQUEST:
       return { ...state, deleteDocument: true };
     case types.DELETE_DOCUMENT_SUCCESS:
@@ -556,6 +617,14 @@ export const customerReducer = (state = initialState, action) => {
         fetchingDocumentsByCustomerIdError: true,
       };
 
+
+      case types.ADD_LOCATION_DETAILS_REQUEST:
+        return { ...state, addingLocationDetails: true };
+      case types.ADD_LOCATION_DETAILS_SUCCESS:
+        return { ...state, addingLocationDetails: false, };
+      case types.ADD_LOCATION_DETAILS_FAILURE:
+        return { ...state, addingLocationDetails: false, };
+
     /* Get customer opportunity  */
     case types.GET_CUSTOMER_OPPORTUNITY_REQUEST:
       return { ...state, fetchingCustomerOpportunity: true };
@@ -648,7 +717,8 @@ export const customerReducer = (state = initialState, action) => {
         ...state,
         fetchingCustomerInputSearchData: false,
         customerByUserId: action.payload,
-        // serachedData: action.payload,
+        latestCustomer:action.payload,
+        customerCloser: action.payload,
       };
     case types.INPUT_CUSTOMER_SEARCH_DATA_FAILURE:
       return { ...state, fetchingCustomerInputSearchDataError: true };
@@ -716,6 +786,22 @@ export const customerReducer = (state = initialState, action) => {
         ...state,
         fetchingRecordsByUserId: false,
         fetchingRecordsByUserIdError: true,
+      };
+
+      
+    case types.GET_CUSTOMER_TEAM_RECORDS_REQUEST:
+      return { ...state, fetchingCustomerTeamRecordsByUserId: true };
+    case types.GET_CUSTOMER_TEAM_RECORDS_SUCCESS:
+      return {
+        ...state,
+        fetchingCustomerTeamRecordsByUserId: false,
+        customerTeamRecordData: action.payload,
+      };
+    case types.GET_CUSTOMER_TEAM_RECORDS_FAILURE:
+      return {
+        ...state,
+        fetchingCustomerTeamRecordsByUserId: false,
+        fetchingCustomerTeamRecordsByUserIdError: true,
       };
 
     // Add Recruit Modal
@@ -1112,6 +1198,27 @@ export const customerReducer = (state = initialState, action) => {
             fetchingCustomersData: false,
             fetchingCustomersDataError: true,
           };
+
+          case types.GET_INVESTOR_DATA_REQUEST:
+            return { ...state, fetchingInvestorData: true };
+          case types.GET_INVESTOR_DATA_SUCCESS:
+            return {
+              ...state,
+              fetchingInvestorData: false,
+               investorData: action.payload,
+            };
+          case types.GET_INVESTOR_DATA_FAILURE:
+            return {
+              ...state,
+              fetchingInvestorData: false,
+              fetchingInvestorDataError: true,
+            };
+
+
+
+
+
+
       case types.UPDATE_CUSTOMER_CONTACT_BY_ID_FAILURE:
         return {
           ...state,
@@ -1437,10 +1544,216 @@ export const customerReducer = (state = initialState, action) => {
                                     linkedProjectTask: false,
                                     linkedProjectTaskError: true,
                                   };
-                  
-                      
 
-    default:
+
+                                  case types.GET_ATTENDANCE_LIST_REQUEST:
+                                    return { ...state, fetchingAttendanceList: true };
+                                  case types.GET_ATTENDANCE_LIST_SUCCESS:
+                                    return {
+                                      ...state,
+                                      fetchingAttendanceList: false,
+                                       attendanceByList: action.payload,
+                              
+                                     
+                                    
+                                    };
+                                  case types.GET_ATTENDANCE_LIST_FAILURE:
+                                    return {
+                                      ...state,
+                                      fetchingAttendanceList: false,
+                                      fetchingAttendanceListError: true,
+                                    };
+
+
+                                    case types.GET_CUSTOMERS_FILTER_DATA_REQUEST:
+                                      return { ...state, fetchingFilterCustomers: true };
+                                    case types.GET_CUSTOMERS_FILTER_DATA_SUCCESS:
+                                      return {
+                                        ...state,
+                                        fetchingFilterCustomers: false,
+                                         customerByUserId: action.payload,
+                                
+                                        // customerByUserId: [
+                                        //   ...state.customerByUserId,
+                                        //   ...action.payload],
+                                      
+                                      };
+                                    case types.GET_CUSTOMERS_FILTER_DATA_FAILURE:
+                                      return {
+                                        ...state,
+                                        fetchingFilterCustomers: false,
+                                        fetchingFilterCustomersError: true,
+                                      };
+
+                                      case types.GET_ALL_CUSTOMERS_DATA_REQUEST:
+                                        return { ...state, fetchingAllCustomersData: true };
+                                      case types.GET_ALL_CUSTOMERS_DATA_SUCCESS:
+                                        return {
+                                          ...state,
+                                          fetchingAllCustomersData: false,
+                                           allCustomerData: action.payload,
+                                  
+                                         
+                                        
+                                        };
+                                      case types.GET_ALL_CUSTOMERS_DATA_FAILURE:
+                                        return {
+                                          ...state,
+                                          fetchingAllCustomersData: false,
+                                          fetchingAllCustomersDataError: true,
+                                        };
+
+                                        case types.HANDLE_CUSTOMER_NOTES_DRAWER_MODAL:
+                                          return { ...state, addDrawerCustomerNotesModal: action.payload };
+                  
+                                          case types.HANDLE_CUSTOMER_PULSE_DRAWER_MODAL:
+                                            return { ...state, addDrawerCustomerPulseModal: action.payload }; 
+                                            
+                                            
+                                            case types.GET_OPPORTUNITY_RECORD_REQUEST:
+                                              return { ...state, fetchingOpportunityRecord: true };
+                                            case types.GET_OPPORTUNITY_RECORD_SUCCESS:
+                                              return { ...state, fetchingOpportunityRecord: false, 
+                                                opportunityRecord: action.payload };
+                                            case types.GET_OPPORTUNITY_RECORD_FAILURE:
+                                              return {
+                                                ...state,
+                                                fetchingOpportunityRecord: false,
+                                                fetchingOpportunityRecordError: true,
+                                              };
+
+
+                                              case types.GET_CUSTOMER_ACTIVITY_TIMELINE_REQUEST:
+                                                return { ...state, fetchingCusActivityTimelineStatus: true };
+                                            case types.GET_CUSTOMER_ACTIVITY_TIMELINE_SUCCESS:
+                                                return {
+                                                    ...state,
+                                                    fetchingCusActivityTimelineStatus: false,
+                                                    customerActivityTimeline: action.payload,
+                                                };
+                                            case types.GET_CUSTOMER_ACTIVITY_TIMELINE_FAILURE:
+                                                return {
+                                                    ...state,
+                                                    fetchingCusActivityTimelineStatus: false,
+                                                    fetchingCusActivityTimelineStatusError: true,
+                                                };
+
+
+                                                case types.CUSTOMER_TO_ACCOUNT_CONVERT_REQUEST:
+                                                  return {
+                                                    ...state,
+                                                    convertingCustomerToAccount: true,
+                                                  };
+                                                case types.CUSTOMER_TO_ACCOUNT_CONVERT_SUCCESS:
+                                                  return {
+                                                    ...state,
+                                                    convertingCustomerToAccount: false,
+                                                    customerByUserId: state.customerByUserId.filter(
+                                                      (item) => item.customerId !== action.payload
+                                                    ),
+                                                
+                                                  };
+                                                case types.CUSTOMER_TO_ACCOUNT_CONVERT_FAILURE:
+                                                  return {
+                                                    ...state,
+                                                    convertingCustomerToAccount: false,
+                                                    convertingCustomerToAccountError: true,
+                                                  };
+
+   
+                                                  case types.GET_ALL_CUSTOMERS_LIST_REQUEST:
+                                                    return { ...state, fetchingAllCustomerList: true };
+                                                  case types.GET_ALL_CUSTOMERS_LIST_SUCCESS:
+                                                    return {
+                                                      ...state,
+                                                      fetchingAllCustomerList: false,
+                                                      allCustomers: action.payload,
+                                                    };
+                                                  case types.GET_ALL_CUSTOMERS_LIST_FAILURE:
+                                                    return {
+                                                      ...state,
+                                                      fetchingAllCustomerList: false,
+                                                      fetchingAllCustomerListError: true,
+                                                    };
+
+                                                    case types.ADD_CUSTOMER_ACTIVITY_CALL_REQUEST:
+                                                      return { ...state, addingCustomerActivityCall: true };
+                                                    case types.ADD_CUSTOMER_ACTIVITY_CALL_SUCCESS:
+                                                      return { ...state, addingCustomerActivityCall: false,
+                                                        callActivityModal: false,
+                                                        customerActivityTimeline:[action.payload,...state.customerActivityTimeline]
+                                                       };
+                                                    case types.ADD_CUSTOMER_ACTIVITY_CALL_FAILURE:
+                                                      return {
+                                                        ...state,
+                                                        addingCustomerActivityCall: false,
+                                                        callActivityModal: false,
+                                                      };
+
+
+                                                      case types.ADD_CUSTOMER_ACTIVITY_EVENT_REQUEST:
+                                                        return { ...state, addingCustomerActivityEvent: true };
+                                                      case types.ADD_CUSTOMER_ACTIVITY_EVENT_SUCCESS:
+                                                        return { ...state, addingCustomerActivityEvent: false,
+                                                          callActivityModal: false,
+                                                          customerActivityTimeline:[action.payload,...state.customerActivityTimeline]
+                                                         };
+                                                      case types.ADD_CUSTOMER_ACTIVITY_EVENT_FAILURE:
+                                                        return {
+                                                          ...state,
+                                                          addingCustomerActivityEvent: false,
+                                                          callActivityModal: false,
+                                                        };  
+                                                        case types.ADD_CUSTOMER_ACTIVITY_TASK_REQUEST:
+                                                          return { ...state, addingCustomerActivityTask: true };
+                                                        case types.ADD_CUSTOMER_ACTIVITY_TASK_SUCCESS:
+                                                          return { ...state, addingCustomerActivityTask: false,
+                                                            callActivityModal: false,
+                                                            customerActivityTimeline:[action.payload,...state.customerActivityTimeline]
+                                                           };
+                                                        case types.ADD_CUSTOMER_ACTIVITY_TASK_FAILURE:
+                                                          return {
+                                                            ...state,
+                                                            addingCustomerActivityTask: false,
+                                                            callActivityModal: false,
+                                                          }; 
+                                                          
+                                                          case types.GET_TEAM_CUSTOMER_REQUEST:
+                                                            return { ...state, fetchingTeamCustomer: true };
+                                                          case types.GET_TEAM_CUSTOMER_SUCCESS:
+                                                            return {
+                                                              ...state,
+                                                              fetchingTeamCustomer: false,
+                                                          teamCustomer:action.payload,
+                                                            };
+                                                          case types.GET_TEAM_CUSTOMER_FAILURE:
+                                                            return {
+                                                              ...state,
+                                                              fetchingTeamCustomer: false,
+                                                              fetchingTeamCustomerError: true,
+                                                            };
+                                                            case types.HANDLE_CLAER_REDUCER_DATA_CUSTOMER:
+                                                              return { ...state, 
+                                                                customerByUserId: [], 
+                                                                // deletedTruck: [] 
+                                                              };
+
+
+                                                              case types.LINK_CUSTOMER_CONTRACT_REQUEST:
+                                                                return { ...state, customerContractStatus: true };
+                                                              case types.LINK_CUSTOMER_CONTRACT_SUCCESS:
+                                                                return {
+                                                                  ...state,
+                                                                  contractCusStatus: false,
+                                                                  // addTeamTransferModal: false,
+                                                                };
+                                                              case types.LINK_CUSTOMER_CONTRACT_FAILURE:
+                                                                return {
+                                                                  ...state,
+                                                                  customerContractStatus: false,
+                                                                  customerContractStatusError: true,
+                                                                };
+       default:
       return state;
   }
 };

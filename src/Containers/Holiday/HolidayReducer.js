@@ -11,6 +11,10 @@ const initialState = {
 
   addHolidayModal: false,
 
+  fetchingPlannerHoliday: false,
+  fetchingPlannerHolidayError: false,
+  plannerHolidays: [],
+
   // fetchingHolidayByCountryYear: false,
   // fetchingHolidayByCountryYearError: false,
   // holidaysByCountryYear:[],
@@ -40,6 +44,18 @@ export const holidayReducer = (state = initialState, action) => {
         ...state,
         fetchingHoliday: false,
         fetchingHolidayError: true,
+      };
+
+      
+    case types.GET_PLANNER_HOLIDAY_REQUEST:
+      return { ...state, fetchingPlannerHoliday: true };
+    case types.GET_PLANNER_HOLIDAY_SUCCESS:
+      return { ...state, fetchingPlannerHoliday: false, plannerHolidays: action.payload };
+    case types.GET_PLANNER_HOLIDAY_FAILURE:
+      return {
+        ...state,
+        fetchingPlannerHoliday: false,
+        fetchingPlannerHolidayError: true,
       };
 
     case types.UPDATE_HOLIDAY_REQUEST:

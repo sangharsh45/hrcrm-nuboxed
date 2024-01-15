@@ -1,37 +1,28 @@
 import React, { useState, useEffect, useMemo } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { Button, message, Input, Switch } from "antd";
+import { Button, Switch } from "antd";
 import { FormattedMessage } from "react-intl";
 import { Formik, Form, Field,FieldArray } from "formik";
-
 import {
   getProcessForRecruit,
-  getProcessStagesForRecruit,
-  //   getAllProcessStagesForRecruit,
 } from "../../../../../Settings/SettingsAction";
-import * as Yup from "yup";
 import dayjs from "dayjs";
 import {
   HeaderLabel,
   Spacer,
   StyledLabel,
-  TextInput,
 } from "../../../../../../Components/UI/Elements";
 import AddressFieldArray from "../../../../../../Components/Forms/Formik/AddressFieldArray";
 import { getAllPartnerListByUserId } from "../../../../../Partner/PartnerAction"
-
 import { SelectComponent } from "../../../../../../Components/Forms/Formik/SelectComponent";
 import { InputComponent } from "../../../../../../Components/Forms/Formik/InputComponent";
-
 import { updateRecruitment, getContactListByOpportunityId, getRecruiterName } from "../../../../OpportunityAction";
 import { FlexContainer } from "../../../../../../Components/UI/Layout";
 import { DatePicker } from "../../../../../../Components/Forms/Formik/DatePicker";
-// import { opportunityReducer } from "../../../../OpportunityReducer";
 import { TextareaComponent } from "../../../../../../Components/Forms/Formik/TextareaComponent";
 import SearchSelect from "../../../../../../Components/Forms/Formik/SearchSelect";
 import { Select } from "antd";
-import { BundleLoader } from "../../../../../../Components/Placeholder";
 const { Option } = Select;
 
 

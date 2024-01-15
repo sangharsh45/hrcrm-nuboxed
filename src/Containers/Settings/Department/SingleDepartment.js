@@ -1,16 +1,20 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 import { FormattedMessage } from "react-intl";
-import { Button,Tooltip } from "antd";
+import { Button, } from "antd";
 import BorderColorIcon from '@mui/icons-material/BorderColor';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { FlexContainer } from "../../../Components/UI/Layout";
 import { TextInput } from "../../../Components/UI/Elements";
-import { ActionIcon } from "../../../Components/Utils";
 import ViewEditCard from "../../../Components/UI/Elements/ViewEditCard";
 import { Select } from "../../../Components/UI/Elements";
-import { EditOutlined } from "@ant-design/icons";
 import DepartmentStatusToggle from "./DepartmentStatusToggle";
+import ERPStatusToggle from "./ERPStatusToggle";
+import CRMStatusToggle from "./CRMStatusToggle";
+import IMStatusToggle from "./IMStatusToggle";
+import AccountingStatusToggle from "./AccountingStatusToggle";
+import RecruitProStatusToggle from "./RecruitProStatusToggle";
+import HrStatusToggle from "./HrStatusToggle";
 const { Option } = Select;
 
 class SingleDepartment extends Component {
@@ -29,7 +33,7 @@ class SingleDepartment extends Component {
     this.setState({ sectorId: value });
   render() {
     const {
-       department: { departmentName, departmentId,sectorId,mandetoryInd,sectorName },
+       department: { departmentName,recruitOppsInd,hrInd, departmentId,sectorId,mandetoryInd,sectorName,crmInd,erpInd,imInd ,accountInd},
       handleChange,
       name,
       value,
@@ -48,23 +52,89 @@ class SingleDepartment extends Component {
         <ViewEditCard>
           {({ viewType }, toggleViewType) =>
             viewType === "view" ? (
-              <FlexContainer justifyContent="space-between">
-                <div class=" flex w-1/2">
-                <DepartmentName style={{ flexBasis: "45%" }}>
+              <div class="flex" >
+                <div class="w-full flex-row">
+              <div class=" flex justify-between" >
+                {/* <div class=" flex w-1/2"> */}
+               <div class=" w-[9rem]">
+                <DepartmentName >
                   {departmentName}
                 </DepartmentName>
-                <DepartmentName style={{ flexBasis: "42%" }}>
+                </div>
+                {/* <div class="w-20">
+                <DepartmentName >
                   {sectorName}
                 </DepartmentName>
-                </div>
-                <div style={{width:"35%"}}>
+                </div> */}
+                {/* </div> */}
+                <div >
                     <DepartmentStatusToggle
                       mandetoryInd={mandetoryInd}
                       departmentName={departmentName}
                       departmentId={departmentId}
                     />  
                     </div>
-                <div>
+                    <h1 class="ml-4">ERP</h1>
+                    <div class=" w-[7%] ml-2"   >
+                    
+                    <ERPStatusToggle
+                      erpInd={erpInd}
+                      departmentName={departmentName}
+                      departmentId={departmentId}
+                    />  
+                    </div>
+                    <h1>CRM</h1>
+                    <div   class=" w-[7%] ml-2">
+                    <CRMStatusToggle
+                      crmInd={crmInd}
+                      departmentName={departmentName}
+                      departmentId={departmentId}
+                    />  
+                    </div>
+                    <h1>IM</h1>
+                    <div class=" w-[7%] ml-2">
+                    <IMStatusToggle
+                      imInd={imInd}
+                      departmentName={departmentName}
+                      departmentId={departmentId}
+                    />  
+                    </div>
+                    <h1>HR</h1>
+                    <div 
+                   class=" w-[8%] ml-2"
+                    >
+                    <HrStatusToggle
+                      hrInd={hrInd}
+                      departmentName={departmentName}
+                      departmentId={departmentId}
+                    />  
+                    </div>
+                    <h1>Accounting</h1>
+                    <div 
+                   class=" w-[8%] ml-2"
+                    >
+                    <AccountingStatusToggle
+                      accountInd={accountInd}
+                      departmentName={departmentName}
+                      departmentId={departmentId}
+                    />  
+                    </div>
+
+                    <h1>RecruitPro</h1>
+                    <div 
+                  class=" w-[8%] ml-2"
+                    >
+                    <RecruitProStatusToggle
+                      recruitOppsInd={recruitOppsInd}
+                      departmentName={departmentName}
+                      departmentId={departmentId}
+                    />  
+                    </div>
+                   
+                
+              </div>
+              </div>
+              <div>
                 
                   {this.props.department.mandetoryInd !== true &&(
                   <BorderColorIcon 
@@ -94,7 +164,8 @@ class SingleDepartment extends Component {
                  )}
                  
                 </div> 
-              </FlexContainer>
+              </div>
+              
             ) : (
                 <FlexContainer>
                   <TextInput
@@ -116,7 +187,7 @@ class SingleDepartment extends Component {
                </Select>
                   <br />
                   <br />
-                  <FlexContainer justifyContent="flex-end">
+                  <div class=" flex justify-end" >
                   <Button
                     type="primary"
                     htmlType="submit"
@@ -138,7 +209,7 @@ class SingleDepartment extends Component {
               defaultMessage="Cancel"
             />
                 </Button>
-                </FlexContainer>
+                </div>
                 </FlexContainer>
               )
           }

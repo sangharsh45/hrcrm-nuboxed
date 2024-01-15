@@ -74,6 +74,7 @@ function LeaveTable(props) {
       {
         title: "Reason",
         dataIndex: "reason",
+        ellipsis: true
       },
       {
         //title: "Status",
@@ -116,7 +117,7 @@ function LeaveTable(props) {
                     padding: "0px 0.62em",
                     textAlign: "center",
                     margin: "2px",
-                    width:"8rem",
+                    width:"9rem",
                     borderRadius: "0.62em",
                   }}
                 > <span  className="text-[#e1d16c]">Waiting For Approval</span></div>

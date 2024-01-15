@@ -23,14 +23,14 @@ const { Option } = Select;
 const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
 const ContactSchema = Yup.object().shape({
   firstName: Yup.string().required("Input needed!"),
-  emailId: Yup.string().email("Enter a valid Email"),
+  emailId: Yup.string().required("Input needed!").email("Enter a valid Email"),
   whatsappNumber: Yup.string()
     .matches(phoneRegExp, "Whatsapp number is not valid")
-    .min(5, "Number is too short")
+    .min(8, "Minimum 8 digits")
     .max(10, "Number is too long"),
   mobileNumber: Yup.string()
     .matches(phoneRegExp, "Mobile number is not valid")
-    .min(5, "Number is too short")
+    .min(8, "Minimum 8 digits")
     .max(10, "Number is too long"),
 });
 
@@ -183,10 +183,9 @@ class ContactForm extends Component {
           }) => (
             <Form className="form-background">
               <div class=" flex justify-between">
-                <div class=" h-full w-2/4"
-                >
+                <div class=" h-full w-w47.5" >
                   <Spacer />
-                  <div class=" flex flex-nowrap">
+                  <div class=" flex flex-nowrap justify-between">
                     <FastField name="imageId" component={Upload} />
                     <div>
                       <div class=" flex justify-between">
@@ -267,7 +266,7 @@ class ContactForm extends Component {
                     </div>
                   </div>
                   <div class=" flex justify-between">
-                    <div class=" w-2/6">
+                    <div class=" w-2/6 max-sm:w-2/5">
                       <FastField
                         name="countryDialCode"
                         isColumnWithoutNoCreate
@@ -318,47 +317,7 @@ class ContactForm extends Component {
                     />
                   </div>
                   </div>
-                  {/* <Spacer /> */}
-                  {/* <FlexContainer justifyContent="space-between">
-                    <div style={{ width: "47%" }}>
-                      <FastField
-                        name="countryDialCode1"
-                        isColumnWithoutNoCreate
-                        selectType="dialCode"
-                        //label="Phone No #"
-                        label={
-                          <FormattedMessage
-                            id="app.countryDialCode1"
-                            defaultMessage="Dial Code"
-                          />
-                        }
-                        isColumn
-                        component={SearchSelect}
-                        defaultValue={{
-                          value: this.props.user.countryDialCode,
-                        }}
-                        value={values.countryDialCode1}
-                        inlineLabel
-                      />
-                    </div>
-                    <div style={{ width: "47%" }}>
-                      <FastField
-                        type="text"
-                        name="phoneNumber"
-                        // placeholder="Phone #"
-                        label={
-                          <FormattedMessage
-                            id="app.phoneNumber"
-                            defaultMessage="Phone #"
-                          />
-                        }
-                        isColumn
-                        component={InputComponent}
-                        inlineLabel
-                        width={"100%"}
-                      />
-                    </div>
-                  </FlexContainer> */}
+            
 
                   <div class=" flex justify-between">
                     <div class=" w-2/4">
@@ -417,6 +376,7 @@ class ContactForm extends Component {
                         className="field"
                         isColumn
                         width={"100%"}
+                        isRequired
                         component={InputComponent}
                         inlineLabel
                       />
@@ -462,9 +422,11 @@ class ContactForm extends Component {
                           isColumn
                           value={values.customerId}
                           isDisabled={defaultCustomers}
-                          defaultValue={
-                            defaultCustomers ? defaultCustomers : null
-                          }
+                        
+                          defaultValue={defaultCustomers ? defaultCustomers : null}
+                          // defaultValue={
+                          //   defaultCustomers ? defaultCustomers : null
+                          // }
                           inlineLabel
                         />
                       </>
@@ -507,8 +469,7 @@ class ContactForm extends Component {
                     />
                   </div>
                 </div>
-                <div class=" h-4/6 w-2/5"
-                >
+                <div class=" h-4/6 w-w47.5">
                   <Spacer />
                   <FieldArray
                     name="address"

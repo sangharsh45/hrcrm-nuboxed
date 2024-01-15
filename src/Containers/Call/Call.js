@@ -2,10 +2,9 @@ import React, { Component, Suspense, lazy } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { BundleLoader } from "../../Components/Placeholder";
-import AddCallModal from "./Child/AddCallModal";
-import CallHeader from "./Child/CallHeader";
 import { handleCallModal } from "./CallAction";
-
+const AddCallModal = lazy(() => import("./Child/AddCallModal"));
+const CallHeader = lazy(() => import("./Child/CallHeader"));
 const CallTable = lazy(() => import("./Child/CallTable/CallTable"));
 class Call extends Component {
   render() {
@@ -18,7 +17,11 @@ class Call extends Component {
           handleCallModal={handleCallModal}
         />
         <Suspense fallback={<BundleLoader />}>
+        {/* {this.props.viewType === "table" ? */}
+        
           <CallTable />
+        
+          {/* null} */}
         </Suspense>
       </React.Fragment>
     );

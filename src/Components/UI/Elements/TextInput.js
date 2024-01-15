@@ -25,9 +25,9 @@ const TextInput = styled.input.attrs({
     ::placeholder {
       color: #bfbebb;
     }
-    @media only screen and (max-width: 37.5em) {
+    @media only screen and (max-width: 600px) {
     
-      width:1.875em;
+      width:-webkit-fill-available;
   
          
        }

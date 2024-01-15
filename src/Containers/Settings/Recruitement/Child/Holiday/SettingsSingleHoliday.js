@@ -3,13 +3,15 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { FormattedMessage } from "react-intl";
 import styled from "styled-components";
-import { Button, Tooltip,Popconfirm, DatePicker, Switch } from "antd";
-import { FlexContainer } from "../../../../../Components/UI/Layout";
-import { TextInput, Spacer } from "../../../../../Components/UI/Elements";
-import { ActionIcon } from "../../../../../Components/Utils";
+import DeleteIcon from '@mui/icons-material/Delete';
+import { DatePicker } from "antd";
+import BorderColorIcon from '@mui/icons-material/BorderColor';
+import { Button, Switch } from "antd";
+import { TextInput } from "../../../../../Components/UI/Elements";
 import ViewEditCard from "../../../../../Components/UI/Elements/ViewEditCard";
 import { elipsize } from "../../../../../Helpers/Function/Functions";
 import moment from "moment";
+import dayjs from "dayjs";
 import { date } from "yup";
 
 class SettingsSingleHoliday extends Component {
@@ -20,7 +22,8 @@ class SettingsSingleHoliday extends Component {
       color: "red",
       currentStage: "",
       fields: {},
-      date: this.props.holidays.date,
+       date: this.props.holidays.date,
+      // date:"",
       holidayType: false,
       
     };
@@ -34,9 +37,13 @@ class SettingsSingleHoliday extends Component {
       },
     });
   };
+  // onChangeDatePicker = (date, dateString) => {
+  //   console.log(date, dateString);
+  //   this.setState({ date: moment(dateString) });
+  // };
   onChangeDatePicker = (date, dateString) => {
     console.log(date, dateString);
-    this.setState({ date: moment(dateString) });
+    this.setState({ date: dayjs(dateString) });
   };
  
   handleChangeHolidayTime = (checked) => {
@@ -59,9 +66,8 @@ class SettingsSingleHoliday extends Component {
         <ViewEditCard>
           {({ viewType }, toggleViewType) =>
             viewType === "view" ? (
-              <FlexContainer
-              justifyContent="space-between"
-                alignItems="center"
+              <div class=" flex justify-between items-center"
+          
               
               // onClick={() => handleStageClick(stageId, stageName)}
               // style={{
@@ -128,31 +134,37 @@ class SettingsSingleHoliday extends Component {
           :null} */}
       
               
-                {this.props.role === "ADMIN" && (
+                {/* {this.props.role === "ADMIN" && ( */}
                   <div style={{}}>
-                    <ActionIcon
+                    <BorderColorIcon
                       tooltipTitle="Edit"
                       iconType="edit"
-                      handleIconClick={toggleViewType}
-                      size="0.75em"
+                      onClick={toggleViewType}
+                      style={{fontSize:"1rem"}}
                     />
-                  </div>)}
+                  </div>
+                  {/* )} */}
                   &nbsp; &nbsp;
-                  {this.props.role === "ADMIN" && (
+                  {/* {this.props.role === "ADMIN" && ( */}
                   <div style={{}}>
-                    <ActionIcon
+                    <DeleteIcon
                       tooltipTitle="Delete"
                       iconType="delete"
                       //  onClick={() => this.props.handleDeleteHoliday(holidayId)}
                       // handleIconClick={item.holidayId}
-                      handleIconClick={() => this.props.handleDeleteHoliday(holidayId)}
-                      size="0.75em"
+                      onClick={() => this.props.handleDeleteHoliday(holidayId)}
+                      style={{
+                        verticalAlign: "center",
+                        marginLeft: "5px",
+                        color: "red",
+                      }}
                     />
-                  </div>)}
-              </FlexContainer>
+                  </div>
+                  {/* )} */}
+              </div>
 
             ) : (
-                <FlexContainer>
+                <div class=" flex">
                   <TextInput
                     name={this.props.newHolidayName}
                     defaultValue={holidayName}
@@ -160,13 +172,14 @@ class SettingsSingleHoliday extends Component {
                     width={"48%"}
                   />
                 &nbsp;
-                  <DatePicker
-                    defaultValue={moment(date)}
-                    onChange={this.onChangeDatePicker}
-                  />
+                <DatePicker
+                   width={"48%"}
+                  value={dayjs(this.state.date)}
+                  onChange={this.onChangeDatePicker}
+                />
                 &nbsp;
                   <Switch
-                    style={{ width: "6.25em", marginLeft: "0.625em" }}
+                    style={{ width: "9rem", }}
                     onChange={this.handleChangeHolidayTime}
                     checked={this.state.holidayType}
                     checkedChildren="Optional"
@@ -192,12 +205,10 @@ class SettingsSingleHoliday extends Component {
                                         placeholder="Days"
                                         width={"24%"}
                                     /> */}
-                  <Spacer />
-                  <Spacer style={{ marginBottom: "0.625em" }} />
-                  <FlexContainer
-                    justifyContent="flex-end"
-                    marginRight="0.3125em"
-                    marginTop="0.625em"
+               
+                 
+                  <div class=" flex justify-end mr-[0.3125em] mt-[0.625em] mb-[0.625em]"
+                
                   >
                     <Button
                       type="primary"
@@ -230,8 +241,9 @@ class SettingsSingleHoliday extends Component {
                  defaultMessage="Cancel"
                 />
                   </Button>
-                  </FlexContainer>
-                </FlexContainer>
+                  </div>
+                </div>
+                 
               )
           }
         </ViewEditCard>

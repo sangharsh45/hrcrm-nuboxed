@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import dayjs from 'dayjs';
 import DownloadIcon from '@mui/icons-material/Download';
 import Highlighter from "react-highlight-words";
 import { base_url } from "../../../../../../Config/Auth";
@@ -13,7 +12,6 @@ import {
 import { SearchOutlined } from "@ant-design/icons";
 import {
   Tooltip,
-  Badge,
   Button,
   Input
 } from "antd";
@@ -28,7 +26,8 @@ import {
 import { elipsize } from "../../../../../../Helpers/Function/Functions";
 import { FormattedMessage } from "react-intl";
 import { DeleteOutlined } from "@ant-design/icons";
-
+import moment from "moment";
+import ContractToggle from "./ContractToggle";
 class LinkedDocuments extends Component {
   constructor(props) {
     super(props);
@@ -155,7 +154,7 @@ class LinkedDocuments extends Component {
           return 0;
         },
         render: (name, item, i) => {
-          return <span>{` ${dayjs(item.creationDate).format("ll")}`}</span>;
+          return <span>{` ${moment(item.creationDate).format("ll")}`}</span>;
         },
       },
       {
@@ -203,6 +202,32 @@ class LinkedDocuments extends Component {
                 />
               </SubTitle>
             </Tooltip>
+          );
+        },
+      },
+      {
+        //title: "Name",
+        title: <FormattedMessage
+          id="app.fileName"
+          defaultMessage="File Name"
+        />,
+        dataIndex: "fileName",
+     
+      },
+      {
+        //title: "Description",
+        title: <FormattedMessage
+          id="app.contract"
+          defaultMessage="Contract"
+        />,
+        // dataIndex: "documentDescription",
+        width: "20%",
+        render: (name, item, i) => {
+          return (
+            <ContractToggle
+            contractInd={item.contractInd}
+            documentId={item.documentId}
+          />
           );
         },
       },

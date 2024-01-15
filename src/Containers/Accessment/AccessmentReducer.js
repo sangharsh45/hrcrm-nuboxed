@@ -47,6 +47,13 @@ const initialState = {
   updatingQuestionByQuestionId: false,
   updatingQuestionByQuestionIdError: false,
 
+  FinalizingQuestions: false,
+  FinalizingQuestionsError: false,
+
+  fetchingFinalQstn: false,
+  fetchingFinalQstnError: false,
+  finalQuestions:[],
+
 };
 export const accessmentReducer = (state = initialState, action) => {
     switch (action.type) {
@@ -70,6 +77,7 @@ case types.HANDLE_ACCESSMENT_MODAL:
         return {
           ...state,
           addingAssessment: false,
+          assessment:[action.payload,...state.assessment]
         };
       case types.ADD_ASSESSMENT_DETAILS_FAILURE:
         return {
@@ -85,7 +93,7 @@ case types.HANDLE_ACCESSMENT_MODAL:
           ...state,
           fetchingAssessment: false,
           updateAssessmentModal:false,
-          assessment: action.payload,
+          assessment: [...state.assessment, ...action.payload],
         };
       case types.GET_ASSESSMENT_DETAILS_FAILURE:
         return {
@@ -246,6 +254,36 @@ case types.INPUT_ASSESSMENT_SEARCH_DATA_FAILURE:
            updatingQuestionByQuestionIdError: true,
           };
 
+          case types.FINALIZE_QUESTION_REQUEST:
+            return { ...state, FinalizingQuestions: true };
+          case types.FINALIZE_QUESTION_SUCCESS:
+            return {
+              ...state,
+              FinalizingQuestions: false,
+            };
+          case types.FINALIZE_QUESTION_FAILURE:
+            return {
+              ...state,
+              FinalizingQuestions: false,
+              FinalizingQuestionsError: true,
+            };
+            
+            case types.GET_FINAL_QUESTIONS_REQUEST:
+              return { ...state, fetchingFinalQstn: true };
+            case types.GET_FINAL_QUESTIONS_SUCCESS:
+              return {
+                ...state,
+                fetchingFinalQstn: false,
+                // addQuestionModal:false,
+                finalQuestions: action.payload,
+              };
+            case types.GET_FINAL_QUESTIONS_FAILURE:
+              return {
+                ...state,
+                fetchingFinalQstn: false,
+                // addQuestionModal:false,
+                fetchingFinalQstnError: true,
+              };
 default:
 return state;
 }

@@ -1,8 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 import dayjs from "dayjs";
-// import { SubTitle } from "../UI/Elements";
-
 import moment from "moment";
 import { Spacer,SubTitle } from "../../../Components/UI/Elements";
 const NotesWrapper = styled.div``;
@@ -25,8 +23,8 @@ export default function SingleNote(props) {
       <div dangerouslySetInnerHTML={{ __html: comment }} />
       <SubTitle
         fontSize="0.875em"
-        fontFamily="Karla"
-        style={{ color: "#a7b2bc", marginTop: "-0.75em" }}
+        fontFamily="poppins"
+        style={{ color: "rgb(53, 57, 61)", marginTop: "-0.75em" }}
       >
         <Spacer />
         {`${moment.utc(creationDate).fromNow()}`}

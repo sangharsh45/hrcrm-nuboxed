@@ -1,27 +1,12 @@
-import React, { Component } from "react";
-import { Button, Upload, Switch } from "antd";
-import { CompassOutlined, PaperClipOutlined } from "@ant-design/icons";
-import { FormattedMessage } from "react-intl";
+import React, { Component,lazy } from "react";
 import { connect } from "react-redux";
 import * as Yup from "yup";
 import { bindActionCreators } from "redux";
-import SearchSelect from "../../../../Components/Forms/Formik/SearchSelect";
-import { Spacer, StyledLabel } from "../../../../Components/UI/Elements";
-import { Formik, Form, Field } from "formik";
-import { Editor } from "react-draft-wysiwyg";
-import { EditorState, convertToRaw, ContentState } from "draft-js";
-import draftToHtml from "draftjs-to-html";
-import EmailCandidateForm from "../CandidateTable/EmailCandidateForm"
-//import { getCustomerListByUserId } from "../../../../Containers/Customer/CustomerAction";
+import { EditorState } from "draft-js";
 import { StyledDrawer } from "../../../../Components/UI/Antd";
-import { FlexContainer } from "../../../../Components/UI/Layout";
-import { StyledModal } from "../../../../Components/UI/Antd";
-import { InputComponent } from "../../../../Components/Forms/Formik/InputComponent";
-//import { addCandidateEmail, getFilteredEmailContact } from "../../CandidateAction";
-import { SelectComponent } from "../../../../Components/Forms/Formik/SelectComponent";
-// import { getNoOfEmailsSent } from "../../ContactAction";
-import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
-import ChooseCandidateEmailTable from "./ChooseCandidateEmailTable";
+const EmailCandidateForm = lazy(() =>
+  import("../CandidateTable/EmailCandidateForm")
+);
 
 const emailCandidateSchema = Yup.object().shape({
   // tag_with_company: Yup.string().required("Select Company"),
@@ -141,7 +126,7 @@ class AddEmailCandidateModal extends Component {
           closable
           placement="right"
           destroyOnClose
-          style={{marginTop:"5rem"}}
+          style={{marginTop:"3rem"}}
           maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}
           //   onCancel={() => this.props.handleCandidateEmailModal(false)}
           onClose={() => this.props.handleCandidateEmailModal(false)}

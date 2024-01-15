@@ -1,7 +1,4 @@
-import React, { Component, useEffect, useState, useMemo, lazy } from "react";
-import { MultiAvatar2, StyledLabel, } from '../../../../Components/UI/Elements'
-import { FlexContainer } from '../../../../Components/UI/Layout'
-import {  Tooltip,Button } from 'antd'
+import React, { useEffect, useState, } from "react";
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import moment from "moment";
@@ -29,7 +26,7 @@ function EmployeeCardList (props) {
   const [page, setPage] = useState(0);
 
 useEffect(() => {
-  props.getEmployeelist();
+  props.getEmployeelist("cretiondate");
  
 }, []);
 function handleChange(data) {
@@ -71,7 +68,7 @@ function handleSetCurrentCandidateId(candidateId) {
       
             <>
             
-      <OnlyWrapCard style={{height:"70vh"}}>
+      <OnlyWrapCard style={{height:"81vh"}}>
         {/* <InfiniteScroll
                     dataLength={props.tableRequirement.length}
                 next={handleLoadMore}
@@ -80,7 +77,7 @@ function handleSetCurrentCandidateId(candidateId) {
             > */}
        
  
-        {props.employees.map((item) => {
+        {props.filteredData.map((item) => {
             const currentdate = moment().format("DD/MM/YYYY");
             const date = moment(item.creationDate).format("DD/MM/YYYY");
        
@@ -97,15 +94,16 @@ function handleSetCurrentCandidateId(candidateId) {
                     borderBottom: "3px dotted #515050"
                   }}
                 >
-                  <div class=" flex flex-row justify-evenly w-wk">
-                    <div className=" flex font-medium flex-col w-44 ">
+                  <div class=" flex flex-row justify-between w-wk max-sm:flex-col">
+                    <div class="flex">
+                    <div className=" flex font-medium flex-col md:w-44 max-sm:flex-row justify-between w-full">
 
-                    <div class=" text-sm text-cardBody font-medium font-poppins">
+                    <div class=" text-sm text-cardBody font-semibold font-poppins max-sm:hidden">
          
                     Name
          
             </div> 
-            <div class=" font-normal text-sm text-cardBody font-poppins">
+            <div class=" font-normal text-[0.82rem]text-cardBody font-semibold  font-poppins">
             {/* <Link to={`/provider/${item.serviceId}`} style={{cursor:"pointer"}}>
             {item.name}
             </Link> */}
@@ -118,58 +116,62 @@ function handleSetCurrentCandidateId(candidateId) {
             </div>
                     </div>
                   
-                    <div className=" flex font-medium flex-col  w-20">
+                    <div className=" flex font-medium flex-col  md:w-40 max-sm:flex-row justify-between w-full mt-1">
 
-                      <div class=" text-sm text-cardBody font-medium font-poppins">
+                      <div class=" text-sm text-cardBody font-semibold font-poppins max-sm:hidden">
                       Department
                       </div>
 
-                      <div class=" font-normal text-sm text-cardBody font-poppins">
+                      <div class=" font-normal text-[0.82rem] text-cardBody font-poppins">
                         {item.department}
                       </div>
                       {/* </Tooltip>   */}
                     </div>
-                    <div className=" flex font-medium flex-col w-16">
+                    <div className=" flex font-medium flex-col md:w-40 max-sm:flex-row justify-between w-full mt-1">
              
 
-                        <div class=" text-sm text-cardBody font-medium font-poppins">
+                        <div class=" text-sm text-cardBody font-semibold font-poppins max-sm:hidden">
                         Role
                         </div>
 
-                        <div class=" font-normal text-sm text-cardBody font-poppins">
+                        <div class=" font-normal text-[0.82rem] text-cardBody font-poppins">
                           {item.role}
                         </div>
                      
                     </div>
-                    <div className=" flex font-medium flex-col w-36">
+                    </div>
+                    <div class="flex">
+                    <div className=" flex font-medium flex-col md:w-36 max-sm:flex-row justify-between w-full mt-1">
                     
 
-                        <div class=" text-sm text-cardBody font-medium font-poppins">
+                        <div class=" text-sm text-cardBody font-semibold font-poppins max-sm:hidden">
                         Mobile #
                         </div>
 
-                        <div class=" font-normal text-sm text-cardBody font-poppins">
+                        <div class=" font-normal text-[0.82rem] text-cardBody font-poppins">
                           {item.mobileNo}
                         </div>
                    
                     </div>
 
-                    <div className=" flex font-medium flex-col w-44">
+                    <div className=" flex font-medium flex-col md:w-44 max-sm:flex-row justify-between w-full mt-1">
 
-                      <div class=" text-sm text-cardBody font-medium font-poppins">
+                      <div class=" text-sm text-cardBody font-semibold font-poppins max-sm:hidden">
                       Email #
                       </div>
 
-                      <div class=" font-normal text-sm text-cardBody font-poppins">
+                      <div class=" font-normal text-[0.82rem] text-cardBody font-poppins">
                       {item.emailId}
                       </div>
                     
                     </div>
+                    </div>
+                    <div class="flex justify-between items-center">
                    <div class="flex">
                 
-                    <div className=" flex font-medium flex-col w-12 ">
+                    <div className=" flex font-medium flex-col md:w-40 max-sm:flex-row justify-between w-full mt-1">
                   
-                      <div class=" text-sm text-cardBody font-medium font-poppins">
+                      <div class="text-[0.82rem]  text-cardBody font-semibold font-poppins max-sm:hidden">
                      
                       Type
                       </div>
@@ -183,11 +185,11 @@ function handleSetCurrentCandidateId(candidateId) {
                 
                     
                     </div>
-                    <div class="flex">
+                    <div class="flex ">
                 
-                <div className=" flex font-medium flex-col w-12 ">
+                <div className=" flex font-medium flex-col md:w-48 max-sm:flex-row justify-between w-full  mt-1">
               
-                  <div class=" text-sm text-cardBody font-medium font-poppins">
+                  <div class=" text-sm text-cardBody font-semibold font-poppins max-sm:hidden">
                  
                   Suspend
                   </div>
@@ -245,7 +247,7 @@ function handleSetCurrentCandidateId(candidateId) {
               <MonitorHeartIcon  style={{ fontSize: "0.8rem", color: "#df9697" }}/>
      </span>
            </div>   
-                  
+           </div>   
                   </div>
                  
                  

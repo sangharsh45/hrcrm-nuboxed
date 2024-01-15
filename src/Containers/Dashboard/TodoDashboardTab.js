@@ -4,12 +4,15 @@ import { bindActionCreators } from "redux";
 import ListAltIcon from "@mui/icons-material/ListAlt";
 import {  StyledTabs } from "../../Components/UI/Antd";
 import { TabsWrapper } from "../../Components/UI/Layout";
-import ActionNotification from "../Dashboard/ActionNotification";
+import DnsIcon from '@mui/icons-material/Dns';
 import UpcomingIcon from '@mui/icons-material/Upcoming';
-import TipsAndUpdatesIcon from "@mui/icons-material/TipsAndUpdates";
-
-import DashboardTodo from "./Child/DashboardTodo";
-import UpcomingEvents from "./Child/UpcomingEvents";
+import {getTodosCount} from "./DashboardAction";
+import { Badge } from "antd";
+import { FormattedMessage } from "react-intl";
+const UpcomingEvents=lazy(() => import("./Child/UpcomingEvents"));
+const DashboardTodo=lazy(() => import("./Child/DashboardTodo"));
+const DashboardTable2=lazy(() => import("./Child/DashboardTable2"));
+const DashboardAllTable2=lazy(() => import("./DashboardAllTable2"));
 
 const TabPane = StyledTabs.TabPane;
 function handleRefreshPage() {
@@ -35,6 +38,10 @@ class TodoDashboardTab extends Component {
     };
   }
 
+  componentDidMount() {
+    const { getTodosCount, userId, startDate, endDate } = this.props;
+    getTodosCount(userId, startDate, endDate);
+  }
   handleContactPopoverVisibleChange = () =>
     this.setState({ contactPopover: !this.state.contactPopover });
   handlepartnerPopoverVisibleChange = () =>
@@ -46,17 +53,29 @@ class TodoDashboardTab extends Component {
     const { activeKey } = this.state;
     return (
       <>
-        <TabsWrapper>
+        <TabsWrapper style={{overflow: "scroll"}}>
           <StyledTabs
             defaultActiveKey="1"
             onChange={this.handleTabChange}
             forceRender={true}
           >
+            
             <TabPane
               tab={
                 <>
                   <ListAltIcon style={{fontSize:"1.1rem"}}/>
-                  <span class=" ml-1">ToDo</span>
+                  <Badge
+                count={this.props.todosCount.todo}
+                overflowCount={999}
+              > 
+               <span class=" ml-1">
+               <FormattedMessage
+                id="app.toDo"
+                defaultMessage="ToDo"
+              />
+                {/* ToDo */}
+                </span>
+               </Badge>
 
                   {activeKey === "1" && (
                     <>
@@ -71,7 +90,47 @@ class TodoDashboardTab extends Component {
                 <DashboardTodo style={{ overflow: "scroll" }} />
               </Suspense>
             </TabPane>
+            {this.props.user.dashboardrecruitDashInd === true &&(
             <TabPane
+              tab={
+                <>
+                  <DnsIcon 
+                   style={{fontSize:"1.1rem"}}
+                  />
+                    <span class=" ml-1">
+                    <FormattedMessage
+                id="app.openRequirements"
+                defaultMessage="Open Requirements"
+              />
+                      {/* Open Requirements */}
+                      </span>
+                  
+                  {activeKey === "2" && (
+                    <>
+                    </>
+                  )}
+                </>
+              }
+              key="3"
+            >
+              <Suspense fallback={"Loading ..."}>
+                {" "}
+                    {/* {this.props.user.dashboardrecruitDashInd === true &&(
+                   <DashboardTable2/>
+                    )} */}
+                                  
+                                                   {this.props.viewType==="ME"  ?(
+                   <DashboardAllTable2/>
+     
+          
+            ) : (
+              <DashboardTable2
+      />
+          )} 
+              </Suspense>
+    </TabPane>
+            )}
+            {/* <TabPane
               tab={
                 <>
                   <TipsAndUpdatesIcon style={{fontSize:"1.1rem"}}/>
@@ -90,13 +149,19 @@ class TodoDashboardTab extends Component {
                 {" "}
                 <ActionNotification />
               </Suspense>
-            </TabPane>
+            </TabPane> */}
+            {this.props.userFullListInd ? (
             <TabPane
               tab={
                 <>
                   <UpcomingIcon style={{fontSize:"1.1rem"}}/>
 
-                  <span class=" ml-1">UpComing Events</span>
+                  <span class=" ml-1">
+                  <FormattedMessage
+                id="app.upComingEvents"
+                defaultMessage="UpComing Events"
+              />
+                    </span>
 
                   {activeKey === "3" && (
                     <>
@@ -111,7 +176,7 @@ class TodoDashboardTab extends Component {
                 <UpcomingEvents />
               </Suspense>
             </TabPane>
-
+) : null}
             {/* <TabPane
               tab={
                 <>
@@ -139,14 +204,22 @@ class TodoDashboardTab extends Component {
             {/* )} */}
           </StyledTabs>
         </TabsWrapper>
-        <Suspense fallback={null}></Suspense>
+        <Suspense fallback={null}>
+ 
+        </Suspense>
       </>
     );
   }
 }
-const mapStateToProps = ({
- 
-}) => ({});
-const mapDispatchToProps = (dispatch) => bindActionCreators({}, dispatch);
+const mapStateToProps = ({dashboard,auth,customer}) => ({
+  todosCount:dashboard.todosCount,
+  userId: auth.userDetails.userId,
+  endDate: dashboard.endDate,
+  user: auth.userDetails,
+  startDate: dashboard.startDate,
+});
+const mapDispatchToProps = (dispatch) => bindActionCreators(
+  {getTodosCount},
+   dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(TodoDashboardTab);

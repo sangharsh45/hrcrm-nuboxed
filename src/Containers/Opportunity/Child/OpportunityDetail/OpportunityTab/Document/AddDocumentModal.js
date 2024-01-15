@@ -1,14 +1,11 @@
-import React, { lazy, Suspense, Component } from "react";
+import React, { Suspense, Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { Button, Switch, Tooltip, Icon } from "antd";
-// import { RightSquareOutlined, ToTopOutlined } from '@ant-design/icons';
-import { Formik, Form, Field, FieldArray } from "formik";
-import { StyledDrawer, StyledModal } from "../../../../../../Components/UI/Antd";
+import { Button, Tooltip,Switch  } from "antd";
+import { Formik, Form, Field,  } from "formik";
+import { StyledDrawer,  } from "../../../../../../Components/UI/Antd";
 import { Spacer, StyledLabel } from "../../../../../../Components/UI/Elements";
 import SearchSelect from "../../../../../../Components/Forms/Formik/SearchSelect";
-import { SelectComponent } from "../../../../../../Components/Forms/Formik/SelectComponent";
-import DocumentUpload from "../../../../../../Components/Forms/Formik/DocumentUpload";
 import { InputComponent } from "../../../../../../Components/Forms/Formik/InputComponent";
 import { TextareaComponent } from "../../../../../../Components/Forms/Formik/TextareaComponent";
 import * as Yup from "yup";
@@ -17,11 +14,8 @@ import {
   addOpportunityDocument,
   getOpportunityDocument,
 } from "../../../../OpportunityAction";
-// import { getOppoStages, getLevels } from "../../Settings/SettingsAction";
 import { FlexContainer } from "../../../../../../Components/UI/Layout";
 import DragableUpload from "../../../../../../Components/Forms/Formik/DragableUpload";
-import LazySelect from "../../../../../../Components/Forms/Formik/LazySelect";
-import { base_url } from "../../../../../../Config/Auth";
 import { FormattedMessage } from "react-intl";
 import { RightSquareOutlined, ToTopOutlined } from "@ant-design/icons";
 const ButtonGroup = Button.Group;
@@ -34,12 +28,15 @@ const ButtonGroup = Button.Group;
 const documentSchema = Yup.object().shape({
 
 documentId: Yup.string().required("Input needed!"),
+documentTypeId: Yup.string().required("Input needed!"),
+documentTitle: Yup.string().required("Input needed!"),
 });
 class AddDocumentModal extends Component {
   constructor(props) {
     super(props);
     this.state = {
       documentshare: false,
+      contract:false,
       approvalAbove: false,
       ownerAbove: "Specific",
       selectedownerAbove: "Specific",
@@ -50,6 +47,9 @@ class AddDocumentModal extends Component {
     console.log(length);
     let length = this.state.data.length;
     this.setState({ data: [...this.state.data, length + 1] });
+  };
+  handleContract = (checked) => {
+    this.setState({ contract: checked });
   };
 
   handleChange = (checked) => {
@@ -126,6 +126,7 @@ class AddDocumentModal extends Component {
                 documentTypeId: "",
                 documentName: "", //input
                 documentDescription: "",
+                contract: this.state.contract ? "true" : "false",
                 documentId:"",
                 opportunityId:this.props.opportunity.opportunityId,
               }}
@@ -136,6 +137,7 @@ class AddDocumentModal extends Component {
                   // values.documentId,
                   {
                     ...values,
+                    contract: this.state.contract ? "true" : "false",
                   },
                   this.callback
                 );
@@ -192,6 +194,16 @@ class AddDocumentModal extends Component {
                         inlineLabel
                         style={{ flexBasis: "80%" }}
                       />
+                           <div class=" flex  mt-4">
+                        <StyledLabel>Contract</StyledLabel>
+                        <Switch
+                          style={{ width: "6.25em", marginLeft: "0.625em" }}
+                          onChange={this.handleContract}
+                          checked={this.state.contract}
+                          checkedChildren="Yes"
+                          unCheckedChildren="No"
+                        />
+                      </div>
                     </div>
                     <div
                       style={{

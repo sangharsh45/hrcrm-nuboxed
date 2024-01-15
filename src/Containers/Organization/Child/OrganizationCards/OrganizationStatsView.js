@@ -1,17 +1,12 @@
 import React, { Component } from "react";
-import { Divider } from "antd";
 import {
-  Title,
   SubTitle,
-  MultiAvatar,
-  StyledLabel,
 } from "../../../../Components/UI/Elements";
-import { FlexContainer } from "../../../../Components/UI/Layout";
-import { ActionIcon } from "../../../../Components/Utils";
+import BorderColorIcon from '@mui/icons-material/BorderColor';
 class OrganizationStatsView extends Component {
   render() {
     const {
-      organization: {
+      organizationList: {
         organizationUrl,
         facebook,
         twitter,
@@ -24,14 +19,18 @@ class OrganizationStatsView extends Component {
     // const phon = `${countryDialCode1 || ""} ${phoneNo || ""}`;
     return (
       <>
-        <FlexContainer justifyContent="flex-end">
-          <ActionIcon
+          <div class=" flex justify-end">
+          <BorderColorIcon
             tooltipTitle="Edit"
             iconType="edit"
-            handleIconClick={toggleViewType}
-            size="1em"
+            onClick={toggleViewType}
+            style={{
+              color: "grey",
+              cursor: "pointer",
+              fontSize: "1rem",
+            }}
           />
-        </FlexContainer>
+        </div>
         <OrganizationItemRow label="Website" value={organizationUrl} isLink />
         {/* <OrganizationItemRow label="Mobile #" value={""} />
         <OrganizationItemRow label="Phone #" value={""} /> */}
@@ -47,9 +46,7 @@ export default OrganizationStatsView;
 
 const OrganizationItemRow = ({ label, value, isLink }) => {
   return (
-    <FlexContainer
-      alignItems="center"
-      flexWrap="nowrap"
+    <div class=" items-center flex flex-no-wrap"
       style={{ margin: "0.4rem" }}
     >
       <SubTitle style={{ color: "#444", fontWeight: 600, width: 300 }}>
@@ -74,6 +71,6 @@ const OrganizationItemRow = ({ label, value, isLink }) => {
             {value}
           </SubTitle>
         )}
-    </FlexContainer>
+    </div>
   );
 };

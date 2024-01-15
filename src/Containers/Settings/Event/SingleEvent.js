@@ -4,9 +4,7 @@ import { FormattedMessage } from "react-intl";
 import { Button,Tooltip } from "antd";
 import BorderColorIcon from '@mui/icons-material/BorderColor';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { FlexContainer } from "../../../Components/UI/Layout";
 import { TextInput } from "../../../Components/UI/Elements";
-import { ActionIcon } from "../../../Components/Utils";
 import ViewEditCard from "../../../Components/UI/Elements/ViewEditCard";
 
 
@@ -37,7 +35,7 @@ class SingleEvent extends Component {
         <ViewEditCard>
           {({ viewType }, toggleViewType) =>
             viewType === "view" ? (
-              <FlexContainer justifyContent="space-between">
+              <div class=" flex justify-between" >
                 <EventName style={{ flexBasis: "85%" }}>
                   {eventType}
                 </EventName>
@@ -79,9 +77,9 @@ class SingleEvent extends Component {
                     style={{ color: "#666" }}
                   />*/}
                 </div> 
-              </FlexContainer>
+              </div>
             ) : (
-                <FlexContainer>
+              <div class=" flex">
                   <TextInput
                     name={name}
                     // value={value || eventType}
@@ -91,7 +89,7 @@ class SingleEvent extends Component {
                   />
                   <br />
                   <br />
-                  <FlexContainer justifyContent="flex-end">
+                  <div class=" flex justify-end" >
                   <Button
                     type="primary"
                     htmlType="submit"
@@ -113,8 +111,8 @@ class SingleEvent extends Component {
               defaultMessage="Cancel"
             />
                 </Button>
-                </FlexContainer>
-                </FlexContainer>
+                </div>
+                </div>
               )
           }
         </ViewEditCard>

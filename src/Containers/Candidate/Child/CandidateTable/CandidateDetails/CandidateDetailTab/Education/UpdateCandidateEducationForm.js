@@ -1,21 +1,15 @@
-import React, { lazy, Suspense, Component } from "react";
+import React, {  Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { Button, Switch, Tooltip, Icon } from "antd";
-import { Formik, Form, Field, FieldArray, FastField } from "formik";
+import { Button,  Tooltip,  } from "antd";
+import { Formik, Form, Field, FastField } from "formik";
 import {
-  Spacer,
   StyledLabel,
 } from "../../../../../../../Components/UI/Elements";
 import { InputComponent } from "../../../../../../../Components/Forms/Formik/InputComponent";
-import { TextareaComponent } from "../../../../../../../Components/Forms/Formik/TextareaComponent";
 import * as Yup from "yup";
-import { FlexContainer } from "../../../../../../../Components/UI/Layout";
-import DragableUpload from "../../../../../../../Components/Forms/Formik/DragableUpload";
 import { SelectComponent } from "../../../../../../../Components/Forms/Formik/SelectComponent";
-import { DatePicker } from "../../../../../../../Components/Forms/Formik/DatePicker";
 import ButtonGroup from "antd/lib/button/button-group";
-import dayjs from "dayjs";
 import { updateCandidateEducationDetails } from "../../../../../CandidateAction";
 import { FormattedMessage } from "react-intl";
 import { getEducations } from "../../../../../../Settings/Educations/EducationAction";
@@ -91,288 +85,266 @@ class UpdateCandidateEducationForm extends Component {
             values,
             ...rest
           }) => (
-              <Form className="form-background">
-                {/* <div
-                  style={{
-                    display: "flex",
-                    // border: "0.125em solid red",
-                    width: "100%",
-                    height: "100%",
-                    justifyContent: "space-between",
-                  }}
-                > */}
-                <div
-                  style={{
-                    width: "100%",
-                    // border: "0.125em solid green"
-                  }}
-                >
-                    <div style={{ display: "flex",justifyContent:"space-between"}}>
-
-                    
-                  <div style={{ width: "45%" }}>
-                  <FastField
-                    name="educationTypeId"
+            <Form className="form-background">
+            <div class=" flex w-full h-full justify-between"
+            >
+              <div class=" w-[45%]"
+              >
+            <div class=" flex justify-between" >
+            <div class=" w-[47%]"
+              >
+                <FastField
+                  name="educationTypeId"
+                  type="text"
+                  //label="Education"
+                  label={
+                    <FormattedMessage
+                      id="app.education"
+                      defaultMessage="Education"
+                    />
+                  }
+                  // options={[
+                  //   "Matriculation",
+                  //   "Intermediate",
+                  //   "Graduation",
+                  //   "Post-Graduation",
+                  //   "Others",
+                  // ]}
+                  isColumnWithoutNoCreate
+                  component={SearchSelect}
+                  value={values.educationTypeId}
+                  selectType="educationType"
+                  inlineLabel
+                  isRequired
+                  className="field"
+                  isColumn
+                 
+                />
+                </div>
+                <div class=" w-[47%]"
+              >                 
+                  <Field
+                    isRequired
+                    name="courseName"
                     type="text"
-                    //label="Type"
+                    isColumn
+                    width={"100%"}
+                    //label="Course Name"
                     label={
                       <FormattedMessage
-                        id="app.type"
-                        defaultMessage="Type"
+                        id="app.courseName"
+                        defaultMessage="Course Name"
                       />
                     }
-                    // options={[
-                    //   "Matriculation",
-                    //   "Intermediate",
-                    //   "Graduation",
-                    //   "Post-Graduation",
-                    //   "Others",
-                    // ]}
-                    isColumnWithoutNoCreate
-                    component={SearchSelect}
-                    value={values.educationTypeId}
-                    selectType="educationType"
+                    component={InputComponent}
                     inlineLabel
-                    className="field"
-                    isColumn
-                    style={{
-                      flexBasis: "80%",
-                      height: "2.0625em",
-                     // marginTop: "0.25em",
-                    }}
+                   
                   />
                   </div>
-                  <div style={{ width: "45%" }}>
-                    <Field
-                      isRequired
-                      name="courseName"
-                      type="text"
-                      isColumn
-                      width={"100%"}
-                      //label="Course Name"
-                      label={
-                        <FormattedMessage
-                          id="app.courseName"
-                          defaultMessage="Course Name"
-                        />
-                      }
-                      component={InputComponent}
-                      inlineLabel
-                      style={{
-                        flexBasis: "80%",
-                        height: "2.0625em",
-                       // marginTop: "0.25em",
-                      }}
+                </div>
+                
+               
+       
+                <div class="flex justify-between mt-4"
+              >
+              <div class=" w-[47%]"
+              >
+                  <StyledLabel>Course Type</StyledLabel>
+                <div class=" mt-4">
+                  <ButtonGroup>
+                    <StatusIcon
+                      color="blue"
+                      type="Full Time"
+                      iconType="fa-hourglass-start"
+                      tooltip="Full Time"
+                      status={this.state.active}
+                      onClick={() => this.glassButtoClick("Full Time")}
                     />
-                  </div>
-                  </div>
-                 <Spacer />
-                  <div>
-                    <StyledLabel>Course Type</StyledLabel>
-                    <Spacer />
-                    <ButtonGroup>
-                      <StatusIcon
-                        color="blue"
-                        type="Full Time"
-                        iconType="fa-hourglass-start"
-                        tooltip="Full Time"
-                        status={this.state.active}
-                        onClick={() => this.glassButtoClick("Full Time")}
-                      />
 
-                      <StatusIcon
-                        type="Part Time"
-                        iconType="fa-hourglass-half"
-                        tooltip="Part Time"
-                        status={this.state.active}
-                        onClick={() => this.glassButtoClick("Part Time")}
-                      />
+                    <StatusIcon
+                      type="Part Time"
+                      iconType="fa-hourglass-half"
+                      tooltip="Part Time"
+                      status={this.state.active}
+                      onClick={() => this.glassButtoClick("Part Time")}
+                    />
 
-                      <StatusIcon
-                        type="Distance"
-                        iconType="fa-hourglass"
-                        tooltip="Distance"
-                        status={this.state.active}
-                        onClick={() => this.glassButtoClick("Distance")}
+                    <StatusIcon
+                      type="Distance"
+                      iconType="fa-hourglass"
+                      tooltip="Distance"
+                      status={this.state.active}
+                      onClick={() => this.glassButtoClick("Distance")}
                       //  status={item.taskStatus}
                       //  onClick={() =>
                       //    patchTask(item.taskId, { ...item, taskStatus: "Completed" })
                       //  }
-                      />
-                    </ButtonGroup>
-                  </div>
-                  <Spacer />
-                  <div style={{ display: "flex",justifyContent:"space-between"}}>
-                  <div style={{ width: "45%" }}>
-                    <Field
-                      isRequired
-                      name="specialization"
-                      type="text"
-                      isColumn
-                      width={"100%"}
-                      //label="Specialization"
-                      label={
-                        <FormattedMessage
-                          id="app.specialization"
-                          defaultMessage="Specialization"
-                        />
-                      }
-                      component={InputComponent}
-                      inlineLabel
-                      style={{
-                        flexBasis: "80%",
-                        height: "2.0625em",
-                       // marginTop: "0.25em",
-                      }}
                     />
-                  </div>
-                  <Spacer />
-                  <div style={{ width: "45%" }}>
-                    <Field
-                      isRequired
-                      name="university"
-                      type="text"
-                      isColumn
-                      width={"100%"}
-                      //label="University/Institute"
-                      label={
-                        <FormattedMessage
-                          id="app.university"
-                          defaultMessage="University/Institute"
-                        />
-                      }
-                      component={InputComponent}
-                      inlineLabel
-                      style={{
-                        flexBasis: "80%",
-                        height: "2.0625em",
-                       // marginTop: "0.25em",
-                      }}
-                    />
+                  </ButtonGroup>
                   </div>
                 </div>
-                  <Spacer />
-                  <div style={{ display: "flex" }}>
-                    <div style={{ width: "50%" }}>
-                      <Field
-                        name="yearOfPassing"
-                        // label="Year of Passing"
-                        label={
-                          <FormattedMessage
-                            id="app.yearOfPassing"
-                            defaultMessage="Year of Passing"
-                          />
-                        }
-                        component={InputComponent}
-                        isColumn
-                        width={"100%"}
-                        // value={values.yearOfPassing}
-                        inlineLabel
-                        style={{
-                          flexBasis: "80%",
-                          height: "2.0625em",
-                          width: "100%",
-                         // marginTop: "0.4375em",
-                        }}
-                      />
-                    </div>
-                  &nbsp; &nbsp;
-                  <div style={{ width: "49%" }}>
-                      <Field
-                        isRequired
-                        //label="Marks Secured"
-                        label={
-                          <FormattedMessage
-                            id="app.marksSecured"
-                            defaultMessage="Marks Secured"
-                          />
-                        }
-                        name="marksSecured"
-                        type="text"
-                        isColumn
-                        width={"100%"}
-                        component={InputComponent}
-                        style={{
-                          flexBasis: "80%",
-                          height: "2.0625em",
-                         // marginTop: "0.4375em",
-                        }}
-                      />
-                    </div>
-                  &nbsp;&nbsp;
-                  <div style={{ width: "60%" }}>
-                      <Field
-                        name="marksType"
-                        label={
-                          <FormattedMessage
-                            id="app.marksType"
-                            defaultMessage="Marks Type"
-                          />
-                        }
-                        type="text"
-                        component={SelectComponent}
-                        options={["%", "Out of 10", "Out of 5"]}
-                        isColumn
-                        
-                        width={"100%"}
-                        style={{
-                          flexBasis: "80%",
-                          height: "2.0625em",
-                          width: "100%",
-                         // marginTop: "0.25em",
-                        }}
-                      />
-                    </div>
-                  </div>
-
-                  <Spacer />
-                </div>
-
-                {/* <div
-                  style={{
-                    width: "45%",
-                    // border: "0.125em solid green"
-                  }}
-                >
+         
+                <div class=" w-[47%] mt-4"
+              >
                   <Field
-                    name="documentId"
                     isRequired
-                    component={DragableUpload}
-                  />
-                  <Spacer />
-
-                  <Field
-                    name="documentTitle"
-                    label="Name"
-                    width={"100%"}
+                    name="specialization"
+                    type="text"
                     isColumn
+                    width={"100%"}
+                    //label="Specialization"
+                    label={
+                      <FormattedMessage
+                        id="app.Specialization"
+                        defaultMessage="Specialization"
+                      />
+                    }
                     component={InputComponent}
-                    style={{ height: "2.0625em", marginTop: "0.25em" }}
-                  />
-                  <Spacer />
+                    inlineLabel
+                    />
+                </div>
+                </div>
+              
+                <div class=" mt-4">
                   <Field
-                    name="documentDescription"
-                    label="Description"
-                    isRequired
+                    // isRequired
+                    name="university"
+                    type="text"
                     isColumn
                     width={"100%"}
-                    component={TextareaComponent}
-                    style={{ height: "5em", marginTop: "0.25em" }}
+                    //label="University/Institute "
+                    label={
+                      <FormattedMessage
+                        id="app.university"
+                        defaultMessage="University/Institute"
+                      />
+                    }
+                    component={InputComponent}
+                    inlineLabel
                   />
-                  <Spacer style={{ marginBottom: "0.9375em" }} />
-                </div> */}
-                {/* </div> */}
-                <Spacer />
-                <FlexContainer justifyContent="flex-end">
-                  <Button
-                    htmlType="submit"
-                    type="primary"
-                    Loading={updatingCandidateEducationDetails}
-                  >
-                    <FormattedMessage id="app.update" defaultMessage="Update" />
-                  </Button>
-                </FlexContainer>
-              </Form>
+                </div>
+
+                <div class=" flex mt-4" >
+                <div class=" w-[47%]"
+              >
+                    <Field
+                      name="yearOfPassing"
+                      //label="Year of Passing"
+                      label={
+                        <FormattedMessage
+                          id="app.yearOfPassing"
+                          defaultMessage="Year of Passing"
+                        />
+                      }
+                      component={InputComponent}
+                      isColumn
+                      width={"100%"}
+                      // value={values.yearOfPassing}
+                      inlineLabel
+                      />
+                  </div>
+                  &nbsp;&nbsp;
+                 
+                  <div class=" w-[47%]"
+              >
+                    <Field
+                      // isRequired
+                      //label="Marks Secured"
+                      label={
+                        <FormattedMessage
+                          id="app.marksSecured"
+                          defaultMessage="Marks Secured"
+                        />
+                      }
+                      name="marksSecured"
+                      type="text"
+                      isColumn
+                      width={"100%"}
+                      component={InputComponent}
+                      />
+                  </div>
+                  &nbsp;&nbsp;
+                  <div class=" w-[47%]"
+              >
+                    <Field
+                      name="marksType"
+                      label={
+                        <FormattedMessage
+                          id="app.marksType"
+                          defaultMessage="Marks Type"
+                        />
+                      }
+                      type="text"
+                      component={SelectComponent}
+                      options={["%", "Out of 10", "Out of 5"]}
+                      isColumn
+                   
+                      width={"100%"}
+                      />
+                  </div>
+                </div>
+
+              </div>
+
+              <div class=" w-[45%]"
+              >
+                
+             
+             
+              <div class=" flex justify-between mt-4" >
+              <div class=" w-[47%]"
+              >
+                <Field
+                  name="documentTitle"
+                  //label="Name of Document"
+                  label={
+                    <FormattedMessage
+                      id="app.documentTitle"
+                      defaultMessage="Name of Document"
+                    />
+                  }
+                  width={"100%"}
+                  isColumn
+                  component={InputComponent}
+                  />
+                  </div>
+                  <div class=" w-[47%]"
+              >
+                <Field
+                      name="documentTypeId"
+                      selectType="documentTypeName"
+                      isColumnWithoutNoCreate
+                      // label="Type"
+                      label={
+                        <FormattedMessage
+                          id="app.type"
+                          defaultMessage="Type"
+                        />
+                      }
+                      // isRequired
+                      component={SearchSelect}
+                      isColumn
+                      // margintop={"0.25em"}
+                      value={values.documentId}
+                      // defaultValue={{ label: firstName, value: documentId }}
+                      inlineLabel
+                       />
+                       </div>
+                       </div>
+            
+              </div>
+            </div>
+        
+            <div class=" flex justify-end mt-4" >
+              <Button
+                htmlType="submit"
+                type="primary"
+                Loading={updatingCandidateEducationDetails}
+              >
+                <FormattedMessage id="app.update" defaultMessage="Update" />
+              </Button>
+            </div>
+          </Form>
             )}
         </Formik>
       </>

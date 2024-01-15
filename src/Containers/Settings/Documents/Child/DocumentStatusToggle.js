@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import { Switch, Checkbox, Popconfirm, message, Select } from "antd";
+import React, {  } from "react";
+import { Switch,  Popconfirm, } from "antd";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { linkDocumentToggle } from "../../Documents/DocumentsAction";
@@ -47,7 +47,10 @@ function DocumentStatusToggle(props) {
             checked={props.editInd || toggle}
             // disabled={props.status}
             isLoading={true}
-            style={{width: "9em"}}
+            style={{
+              width: "9em",
+              backgroundColor: props.editInd || toggle ? "rgb(119, 221, 119)" : "#E6E6E6",
+            }}
             checkedChildren="Not Mandatory"
             unCheckedChildren="Mandatory"
           />

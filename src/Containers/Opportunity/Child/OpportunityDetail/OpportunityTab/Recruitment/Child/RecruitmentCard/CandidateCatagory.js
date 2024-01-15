@@ -1,13 +1,9 @@
 import React from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { Tag, Input, Tooltip, Icon } from "antd";
-import { ViewEditCard, Title } from "../../../../../../../../Components/UI/Elements";
-import axios from "axios";
+import {  Title } from "../../../../../../../../Components/UI/Elements";
 import {
   getTopicsByCandidateId,
-// addCatagoryByContactId,
-//   // deleteCategoryByContactId,
  } from "../../../../../../../Candidate/CandidateAction";
  import RecruiterWordcloud from "../RecruitmentCard/RecruiterWordCloud"
 import { MainWrapper } from "../../../../../../../../Components/UI/Layout";

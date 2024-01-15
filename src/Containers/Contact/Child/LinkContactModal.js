@@ -1,15 +1,11 @@
-import React, { lazy, Suspense } from "react";
+import React, {  Suspense } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { FormattedMessage } from "react-intl";
 import LinkedContactForm from "../Child/LinkedContactForm"
-import { Button } from "antd";
-import { Formik, Form, Field, FieldArray } from "formik";
 import { BundleLoader } from "../../../Components/Placeholder";
 import { StyledModal } from "../../../Components/UI/Antd";
 import { handleLinkContactModal } from "../ContactAction";
-import { FlexContainer } from "../../../Components/UI/Layout";
-import SearchSelect from "../../../Components/Forms/Formik/SearchSelect";
 const LinkContactModal = (props) => {
   const {
     linkContactModal,

@@ -270,3 +270,94 @@ export const getRejectdMileage = (userId,pageNo) => (dispatch) => {
       });
     });
 };
+
+export const handleStatusMileageModal = (modalProps) => (dispatch) => {
+  dispatch({
+    type: types.HANDLE_STATUS_MILEAGE_MODAL,
+    payload: modalProps,
+  });
+};
+
+export const getMileageStatusByMileageId = (voucherId) => (dispatch) => {
+  dispatch({
+      type: types.GET_MILEAGE_STATUS_BY_MILEAGEID_REQUEST,
+  });
+
+  axios
+      .get(`${base_url}/task/mileage/status/${voucherId}`, {
+          headers: {
+              Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+          },
+      })
+      .then((res) => {
+          console.log(res);
+          dispatch({
+              type: types.GET_MILEAGE_STATUS_BY_MILEAGEID_SUCCESS,
+              payload: res.data,
+          });
+      })
+      .catch((err) => {
+          console.log(err);
+          dispatch({
+              type: types.GET_MILEAGE_STATUS_BY_MILEAGEID_FAILURE,
+              payload: err,
+          });
+      });
+};
+export const handleMileageNoteDrawer = (modalProps) => (dispatch) => {
+  dispatch({
+    type: types.HANDLE_MILEAGE_NOTE_DRAWER,
+    payload: modalProps,
+  });
+};
+export const addMileageNote = (data,cb) => (dispatch) => {
+  dispatch({ type: types.ADD_MILEAGE_NOTE_REQUEST });
+
+  axios
+      .post(`${base_url}/api/v1/mileage/notes`, data, {
+          headers: {
+              Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+          },
+      })
+      .then((res) => {
+          console.log(res);
+          dispatch({
+              type: types.ADD_MILEAGE_NOTE_SUCCESS,
+              payload: res.data,
+          });
+          cb && cb();
+      }) 
+      .catch((err) => {
+          console.log(err);
+          dispatch({
+              type: types.ADD_MILEAGE_NOTE_FAILURE,
+          });
+          cb && cb();
+      });
+};
+export const getMileageNotes = (mileageId) => (dispatch) => {
+  dispatch({
+    type: types.GET_MILEAGE_NOTE_REQUEST,
+  });
+  axios
+    .get(`${base_url}/api/v1/mileage/note/${mileageId}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+    },
+    })
+    .then((res) => {
+  
+      console.log(res);
+      dispatch({
+        type: types.GET_MILEAGE_NOTE_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.GET_MILEAGE_NOTE_FAILURE,
+        payload: err,
+      });
+    });
+};

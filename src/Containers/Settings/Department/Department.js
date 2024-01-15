@@ -2,9 +2,10 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { FormattedMessage } from "react-intl";
 import { bindActionCreators } from "redux";
-import { Button, message,Input } from "antd";
-import { MainWrapper, FlexContainer } from "../../../Components/UI/Layout";
-import { TextInput, Title } from "../../../Components/UI/Elements";
+import { Button,Input } from "antd";
+import { BundleLoader } from "../../../Components/Placeholder";
+import { MainWrapper } from "../../../Components/UI/Layout";
+import { TextInput,  } from "../../../Components/UI/Elements";
 import SingleDepartment from "./SingleDepartment";
 import {
   getDepartments,
@@ -12,6 +13,7 @@ import {
   searchDepartmentName,
   removeDepartments,
   updateDepartments,
+  ClearReducerDataOfDepartment
 } from "./DepartmentAction";
 import {
   getSectors,
@@ -36,6 +38,24 @@ class Department extends Component {
 
     };
   }
+
+  handleChangeDes = (e) => {
+    this.setState({ currentData: e.target.value });
+  
+    if (e.target.value.trim() === "") {
+      this.setState((prevState) => ({ pageNo: prevState.pageNo + 1 }));
+      this.props.getDepartments();
+      this.props.ClearReducerDataOfDepartment();
+    }
+  };
+  handleSearch = () => {
+    if (this.state.currentData.trim() !== "") {
+      // Perform the search
+      this.props.searchDepartmentName(this.state.currentData);
+    } else {
+      console.error("Input is empty. Please provide a value.");
+    }
+  };
   handleClear = () => {
     this.setState({ currentData: "" });
     this.props.getDepartments();
@@ -70,13 +90,13 @@ class Department extends Component {
       departments &&
       departments.some((element) => element.departmentName == departmentName);
 
-    if (exist) {
-      message.error(
-        "Can't create as another departmentName exists with same name!"
-      );
-    } else {
+    // if (exist) {
+    //   message.error(
+    //     "Can't create as another departmentName exists with same name!"
+    //   );
+    // } else {
       addDepartments(department, () => console.log("add department callback"));
-    }
+    // }
 
     this.setState({
       departmentName: "",
@@ -134,12 +154,12 @@ class Department extends Component {
       linkedDepartments,
       sectorId
     } = this.state;
-    if (fetchingDepartments) return <p>Loading ...</p>;
+    if (fetchingDepartments) return <BundleLoader/>;
     if (fetchingDepartmentsError) return <p>Error ...</p>;
 
     return (
       <>
-        <FlexContainer flexWrap="nowrap">
+        <div flexWrap="nowrap">
           <MainWrapper
             style={{
               flexBasis: "100%",
@@ -148,42 +168,20 @@ class Department extends Component {
               color: "#FFFAFA",
             }}
           >
-                       <div style={ {width: "18vw",display:"flex"}} >
-          <Input
-            placeholder="Search by Name"
-            width={"100%"}
-            // onSearch={(value) => {
-            //   props.inputCandidateDataSearch(value);
-            //   props.setCurrentData(value);
-
-            // }}
-            onChange={(e) => this.handleSearchChange(e)}
-            value={this.props.currentData}
+                       <div class=" flex w-[18vw]" >
+                       <Input
+         placeholder="Search by Name"
+        style={{width:"100%",marginLeft:"0.5rem"}}
+            // suffix={suffix}
+            onPressEnter={this.handleSearch}  
+            onChange={this.handleChangeDes}
+            // value={currentData}
           />
-           <Button
-          type={this.props.currentData ? "primary" : "danger"}
-          onClick={() => {
-            this.props.searchDepartmentName(this.state.currentData);
-
-          }}
-        >
-          Submit
-        </Button>
-        &nbsp;
-        <Button
-          type={this.props.currentData ? "primary" : "danger"}
-          onClick={() => {
-            this.handleClear();
-          }}
-        >
-          <FormattedMessage id="app.clear" defaultMessage="Clear" />
-      
-        </Button>
         </div>
-            <FlexContainer flexDirection="column">
+            <div class=" flex flex-col" >
               {/* <Title style={{ padding: 8 }}>Designation</Title> */}
               <MainWrapper style={{ height: "30em", marginTop: "0.625em" }}>
-                {departments.length &&
+                {departments.length ? (
                   departments.map((department, i) => (
                     <SingleDepartment
                       key={i}
@@ -202,17 +200,21 @@ class Department extends Component {
                       setCurrentData={this.setCurrentData}
                      handleDeleteDepartment={this.handleDeleteDepartment}
                     />
-                  ))}
+                  ))
+                  ) : (
+                    <p>No Data Available</p>
+                  )}
+
               </MainWrapper>
-            </FlexContainer>
+            </div>
             {isTextInputOpen ? (
-              <FlexContainer alignItems="center"
-              style={{ marginLeft: "0.3125em", marginTop: "0.3125em" }}
-              >
+            <div class=" flex items-center ml-[0.3125em] mt-[0.3125em]"
+            
+            >
                 <br />
                 <br />
                   <TextInput
-                    placeholder="Add More"
+                    placeholder="Add Department"
                     name="departmentName"
                     value={departmentName}
                     onChange={this.handleChange}
@@ -244,11 +246,11 @@ class Department extends Component {
                   <Button type="primary" ghost onClick={this.toggleInput}>
                     Cancel
                   </Button>
-              </FlexContainer>
+              </div>
             ) : (
               <>
                <br />
-                <FlexContainer justifyContent="flex-end">
+               <div class=" flex justify-end" >
                   <Button
                     type="primary"
                     ghost
@@ -258,7 +260,7 @@ class Department extends Component {
                   >
                     Add More
                   </Button>
-                </FlexContainer>
+                </div>
                
               </>
             )}
@@ -288,7 +290,7 @@ class Department extends Component {
               </p>
             </FlexContainer>
           </MainWrapper> */}
-        </FlexContainer>
+        </div>
         <h4>Updated on {moment(this.props.departments && this.props.departments.length && this.props.departments[0].updationDate).format("ll")} by {this.props.departments && this.props.departments.length && this.props.departments[0].name}</h4>
       </>
     );
@@ -316,6 +318,7 @@ const mapDispatchToProps = (dispatch) =>
        removeDepartments,
       updateDepartments,
       getSectors,
+      ClearReducerDataOfDepartment,
       searchDepartmentName
     },
     dispatch

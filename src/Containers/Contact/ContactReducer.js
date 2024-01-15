@@ -8,10 +8,29 @@ const initialState = {
   addingContact: false,
   addingContactError: false,
 
+  fetchingOpportunityRecord: false,
+  fetchingOpportunityRecordError: false,
+  opportunityRecord:[],
+
+  fetchingContactRecords: false,
+  fetchingContactRecordsError: true,
+  contactRecord:[],
 
   fetchingContactData:false,
   fetchingContactDataError:false,
   contactData:[],
+
+  addDrawerContactPulseModal:false,
+
+  addDrawerContactNotesModal:false,
+
+  fetchingDelasContactData: false,
+  fetchingDelasContactDataError: false,
+  dealsContactData:[],
+
+  fetchingTeamContact: false,
+  fetchingTeamContactError: false,
+  teamContact:[],
 
   fetchingVendorContactData: false,
   fetchingVendorContactDataError: false,
@@ -45,6 +64,13 @@ const initialState = {
   fetchingDocumentsByContactId: false,
   fetchingDocumentsByContactIdError: false,
   documentsByContactId: [],
+
+  fetchingContactTeamRecords: false,
+  fetchingContactTeamRecordsError: false,
+  contactTeamRecord:{},
+
+  fetchingFilterContacts: false,
+   fetchingFilterContactsError: false,
 
   deleteDocument: false,
   deleteDocumentError: false,
@@ -81,7 +107,7 @@ const initialState = {
   addingContactOpportunity: false,
   addingContactOpportunityError: false,
   addContactOpportunityModal: false,
-  viewType: "dashboard",
+  viewType: "table",
 
   fetchingContactsPartner: false,
   fetchingContactsPartnerError: false,
@@ -214,7 +240,9 @@ addingNotesByContactId:false,
   updatingContactOwenership:false,
   updatingContactOwenershipError:false,
 
-  
+  fetchingAllContacts: false,
+  fetchingAllContactsError:false,
+   allContacts:[],
 };
 
 export const contactReducer = (state = initialState, action) => {
@@ -312,6 +340,7 @@ export const contactReducer = (state = initialState, action) => {
       return {
         ...state,
         addingDocumentByContactId: false,
+        documentUploadModal:false,
         addingDocumentByContactIdError: false,
       };
     case types.ADD_CONTACT_DOCUMENT_FAILURE:
@@ -715,9 +744,6 @@ export const contactReducer = (state = initialState, action) => {
               ...state,
               fetchingContactData: false,
                contactData: action.payload,
-      
-             
-            
             };
           case types.GET_CONTACT_DATA_FAILURE:
             return {
@@ -726,6 +752,21 @@ export const contactReducer = (state = initialState, action) => {
               fetchingContactDataError: true,
             };
 
+            case types.GET_DEALS_CONTACT_DATA_REQUEST:
+              return { ...state, fetchingDelasContactData: true };
+            case types.GET_DEALS_CONTACT_DATA_SUCCESS:
+              return {
+                ...state,
+                fetchingDelasContactData: false,
+                 dealsContactData: action.payload,
+              };
+            case types.GET_DEALS_CONTACT_DATA_FAILURE:
+              return {
+                ...state,
+                fetchingDelasContactData: false,
+                fetchingDelasContactDataError: true,
+              };
+  
 
 
             case types.GET_VENDOR_CONTACT_DATA_REQUEST:
@@ -746,7 +787,112 @@ export const contactReducer = (state = initialState, action) => {
                 fetchingVendorContactDataError: true,
               };
 
-    default:
+              
+        case types.GET_CONTACT_RECORDS_REQUEST:
+          return { ...state, fetchingContactRecords: true };
+        case types.GET_CONTACT_RECORDS_SUCCESS:
+          return {
+            ...state,
+            fetchingContactRecords: false,
+            contactRecord: action.payload,
+          };
+        case types.GET_CONTACT_RECORDS_FAILURE:
+          return {
+            ...state,
+            fetchingContactRecords: false,
+            fetchingContactRecordsError: true,
+          };
+
+          case types.GET_CONTACT_TEAM_RECORDS_REQUEST:
+            return { ...state, fetchingContactTeamRecords: true };
+          case types.GET_CONTACT_TEAM_RECORDS_SUCCESS:
+            return {
+              ...state,
+              fetchingContactTeamRecords: false,
+              contactTeamRecord: action.payload,
+            };
+          case types.GET_CONTACT_TEAM_RECORDS_FAILURE:
+            return {
+              ...state,
+              fetchingContactTeamRecords: false,
+              fetchingContactTeamRecordsError: true,
+            };
+
+          case types.GET_FILTER_CONTACTS_REQUEST:
+            return { ...state, fetchingFilterContacts: true };
+          case types.GET_FILTER_CONTACTS_SUCCESS:
+            return {
+              ...state,
+              fetchingFilterContacts: false,
+              contactByUserId:action.payload,
+              // contactByUserId: [
+              //   ...state.contactByUserId,
+              //   ...action.payload],
+            
+            };
+          case types.GET_FILTER_CONTACTS_FAILURE:
+            return { ...state, fetchingFilterContacts: false, fetchingFilterContactsError: true };
+
+
+            case types.HANDLE_CONTACT_NOTES_DRAWER_MODAL:
+                      return { ...state, addDrawerContactNotesModal: action.payload };
+
+                      case types.HANDLE_CONTACT_PULSE_DRAWER_MODAL:
+                        return { ...state, addDrawerContactPulseModal: action.payload };                   
+
+    
+                        case types.GET_ALL_CONTACT_REQUEST:
+                          return { ...state, fetchingAllContacts: true };
+                        case types.GET_ALL_CONTACT_SUCCESS:
+                          return {
+                            ...state,
+                            fetchingAllContacts: false,
+                            allContacts: [
+                              ...state.allContacts,
+                              ...action.payload],
+                          
+                          };
+                        case types.GET_ALL_CONTACT_FAILURE:
+    
+    
+                        return { ...state, fetchingAllContacts: false, fetchingAllContactsError: true }; 
+
+
+
+                        case types.GET_TEAM_CONTACT_REQUEST:
+                          return { ...state, fetchingTeamContact: true };
+                        case types.GET_TEAM_CONTACT_SUCCESS:
+                          return {
+                            ...state,
+                            fetchingTeamContact: false,
+                        teamContact:action.payload,
+                          };
+                        case types.GET_TEAM_CONTACT_FAILURE:
+                          return {
+                            ...state,
+                            fetchingTeamContact: false,
+                            fetchingTeamContactError: true,
+                          };
+
+                                  
+          case types.GET_OPPORTUNITY_RECORD_REQUEST:
+            return { ...state, fetchingOpportunityRecord: true };
+          case types.GET_OPPORTUNITY_RECORD_SUCCESS:
+            return { ...state, fetchingOpportunityRecord: false, 
+              opportunityRecord: action.payload };
+          case types.GET_OPPORTUNITY_RECORD_FAILURE:
+            return {
+              ...state,
+              fetchingOpportunityRecord: false,
+              fetchingOpportunityRecordError: true,
+            };
+
+            case types.HANDLE_CLAER_REDUCER_DATA_CONTACT:
+              return { ...state, 
+                contactByUserId: [], 
+                // deletedTruck: [] 
+              };
+   default:
       return state;
 
 

@@ -1,12 +1,13 @@
-import React, { Component, lazy, useEffect } from "react";
+import React, { } from "react";
 import { StyledTabs } from "../../../../../Components/UI/Antd";
 import { TabsWrapper } from "../../../../../Components/UI/Layout";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import ApproveForm from "./ApproveForm";
-import ApproveTable from "./ApproveTable";
 import MileageApproveForm from "./MileageApproveForm";
 import ExpenseApproveForm from "./ExpenseApproveForm";
+import ContactUserForm from "./ContactUserForm";
+import PhonesPairApproveForm from "./PhonesPairApproveForm";
 
 
 const TabPane = StyledTabs.TabPane;
@@ -32,11 +33,21 @@ function ApprovalTab(props) {
                         <ExpenseApproveForm/>
                         </div>
                     </TabPane>
-                    <TabPane tab={`ApproveList`} key="4">
+                    <TabPane tab={`Contact User`} key="4">
+                        <div style={{ marginTop: 10 }}>
+                        <ContactUserForm/>
+                        </div>
+                    </TabPane>
+                    <TabPane tab={`Phones Pair`} key="5">
+                        <div style={{ marginTop: 10 }}>
+                        <PhonesPairApproveForm/>
+                        </div>
+                    </TabPane>
+                    {/* <TabPane tab={`ApproveList`} key="4">
                         <div style={{ marginTop: 10 }}>
                             <ApproveTable/>
                         </div>
-                    </TabPane>
+                    </TabPane> */}
                 </StyledTabs>
             </TabsWrapper>
         </>

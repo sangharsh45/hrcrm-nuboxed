@@ -48,7 +48,10 @@ export const addIdProofs = (idProofs, cb) => (dispatch) => {
         },
       })
       .then((res) => {
+        {res.data.message?  
+          message.success(res.data.message):
         message.success("Identity has been added successfully!");
+        }
         dispatch(getIdProofs());
         console.log(res);
         dispatch({
@@ -149,4 +152,10 @@ export const addIdProofs = (idProofs, cb) => (dispatch) => {
           type: types.REMOVE_ID_PROOF_FAILURE,
         });
       });
+  };
+
+  export const ClearReducerDataOfIdproof = () => (dispatch) => {
+    dispatch({
+      type: types.HANDLE_CLAER_REDUCER_DATA_ID_PROOF,
+    });
   };

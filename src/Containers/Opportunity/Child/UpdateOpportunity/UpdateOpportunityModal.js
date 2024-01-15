@@ -1,6 +1,5 @@
-import Item from "antd/lib/list/Item";
+
 import React, { lazy, Suspense } from "react";
-import { FormattedMessage } from "react-intl";
 import { BundleLoader } from "../../../../Components/Placeholder";
 import { StyledDrawer } from "../../../../Components/UI/Antd";
 const UpdateOpportunityForm = lazy(() => import("./UpdateOpportunityForm"));
@@ -10,8 +9,8 @@ const UpdateOpportunityModal = (props) => {
     <>
       <StyledDrawer
         title={props.opportunityData.opportunityName}
-        width="47%"
-        style={{marginTop:"5rem"}}
+        width="60%"
+        style={{marginTop:"3rem"}}
         visible={props.updateOpportunityModal}
         maskClosable={false}
         destroyOnClose

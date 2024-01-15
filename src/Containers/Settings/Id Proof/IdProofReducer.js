@@ -98,6 +98,12 @@ export const idProofsReducer = (state = initialState, action) => {
         removingIdProofError: true,
       };
 
+      case types.HANDLE_CLAER_REDUCER_DATA_ID_PROOF:
+        return { ...state, 
+          idProofs: [], 
+          // deletedTruck: [] 
+        };
+
     default:
       return state;
   }

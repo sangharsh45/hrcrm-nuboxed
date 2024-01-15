@@ -1,19 +1,11 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { Button } from "antd";
-import { FormattedMessage } from "react-intl";
-import { SelectComponent } from "../../../Components/Forms/Formik/SelectComponent";
-import { Formik, Form, Field, FieldArray, FastField } from "formik";
-import * as Yup from "yup";
-import { Spacer, StyledLabel } from "../../../Components/UI/Elements";
-import SearchSelect from "../../../Components/Forms/Formik/SearchSelect";
+import { Formik, Form, Field, } from "formik";
 import {  getDetailsList } from "../../Dashboard/DashboardAction";
-import { FlexContainer } from "../../../Components/UI/Layout";
-import { DatePicker } from "../../../Components/Forms/Formik/DatePicker";
-import dayjs from "dayjs";
 import { InputComponent } from "../../../Components/Forms/Formik/InputComponent";
 import moment from "moment";
+import { FormattedMessage } from "react-intl";
 
 
 class Details extends Component {
@@ -65,7 +57,11 @@ this.props.getDetailsList(this.props.item.recruitmentId);
                       isRequired
                       name="jobOrder"
                       //type="text"
-                      label="Job ID"
+                      label={<FormattedMessage
+                        id="app.jobId"
+                        defaultMessage="Job ID"
+                      />}
+                      // label="Job ID"
                       isColumn
                       width={"100%"}
                       component={InputComponent}
@@ -75,7 +71,11 @@ this.props.getDetailsList(this.props.item.recruitmentId);
                       isRequired
                      name="requirementName"
                       type="text"
-                      label="Requirement"
+                      label={<FormattedMessage
+                        id="app.requirement"
+                        defaultMessage="Requirement"
+                      />}
+                      // label="Requirement"
                       isColumn
                       width={"100%"}
                       component={InputComponent}
@@ -85,7 +85,11 @@ this.props.getDetailsList(this.props.item.recruitmentId);
                       isRequired
                       name="ownerName"
                       type="text"
-                      label="Created"
+                      label={<FormattedMessage
+                        id="app.created"
+                        defaultMessage="Created"
+                      />}
+                      // label="Created"
                       isColumn
                       width={"100%"}
                       component={InputComponent}
@@ -95,7 +99,11 @@ this.props.getDetailsList(this.props.item.recruitmentId);
                       isRequired
                       name="creationDate"
                       type="text"
-                      label="Created On"
+                      label={<FormattedMessage
+                        id="app.createdOn"
+                        defaultMessage="Created On"
+                      />}
+                      // label="Created On"
                       isColumn
                       width={"100%"}
                       component={InputComponent}
@@ -105,7 +113,11 @@ this.props.getDetailsList(this.props.item.recruitmentId);
                       isRequired
                       name="recruiterList"
                       type="text"
-                      label="Recruiter"
+                      label={<FormattedMessage
+                        id="app.recruiter"
+                        defaultMessage="Recruiter"
+                      />}
+                      // label="Recruiter"
                       isColumn
                       width={"100%"}
                       component={InputComponent}
@@ -117,7 +129,11 @@ this.props.getDetailsList(this.props.item.recruitmentId);
                       isRequired
                       name="avilableDate"
                       type="text"
-                      label="Start"
+                      label={<FormattedMessage
+                        id="app.start"
+                        defaultMessage="Start"
+                      />}
+                      // label="Start"
                       isColumn
                       width={"100%"}
                       component={InputComponent}
@@ -127,7 +143,11 @@ this.props.getDetailsList(this.props.item.recruitmentId);
                       isRequired
                       name="duration"
                       type="text"
-                      label="Duration"
+                      label={<FormattedMessage
+                        id="app.duration"
+                        defaultMessage="Duration"
+                      />}
+                      // label="Duration"
                       isColumn
                       width={"100%"}
                       component={InputComponent}
@@ -137,7 +157,11 @@ this.props.getDetailsList(this.props.item.recruitmentId);
                       isRequired
                       name="billing"
                       type="text"
-                      label="Billing"
+                      label={<FormattedMessage
+                        id="app.billing"
+                        defaultMessage="Billing"
+                      />}
+                      // label="Billing"
                       isColumn
                       width={"100%"}
                       component={InputComponent}
@@ -147,7 +171,11 @@ this.props.getDetailsList(this.props.item.recruitmentId);
                       isRequired
                       name="candidatetList"
                       type="text"
-                      label="Talent"
+                      label={<FormattedMessage
+                        id="app.talent"
+                        defaultMessage="Talent"
+                      />}
+                      // label="Talent"
                       isColumn
                       width={"100%"}
                       component={InputComponent}
@@ -157,7 +185,11 @@ this.props.getDetailsList(this.props.item.recruitmentId);
                       isRequired
                       name="partnerName"
                       type="text"
-                      label="Sponsor"
+                      label={<FormattedMessage
+                        id="app.sponsor"
+                        defaultMessage="Sponsor"
+                      />}
+                      // label="Sponsor"
                       isColumn
                       width={"100%"}
                       component={InputComponent}

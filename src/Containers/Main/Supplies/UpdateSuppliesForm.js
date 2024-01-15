@@ -1,0 +1,331 @@
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import { Button } from "antd";
+import * as Yup from "yup";
+import { Formik, Form, Field } from "formik";
+import { base_url2 } from "../../../Config/Auth";
+import { Spacer } from "../../../Components/UI/Elements";
+import Upload from "../../../Components/Forms/Formik/Upload";
+import { FlexContainer } from "../../../Components/UI/Layout";
+import { TextareaComponent } from "../../../Components/Forms/Formik/TextareaComponent";
+import { InputComponent } from "../../../Components/Forms/Formik/InputComponent";
+import { updateSupplies } from "./SuppliesAction";
+import LazySelect from "../../../Components/Forms/Formik/LazySelect";
+import { getCurrency } from "../../Auth/AuthAction"
+import { SelectComponent } from "../../../Components/Forms/Formik/SelectComponent";
+
+const SuppliesSchema = Yup.object().shape({
+  name: Yup.string().required("Input needed!"),
+  // cost: Yup.string().required("Input needed!"),
+  hsn: Yup.string().required("Input needed!"),
+});
+class UpdateSuppliesForm extends Component {
+
+  componentDidMount() {
+    this.props.getCurrency()
+  }
+  render() {
+    const currencyType = this.props.currencies.map((item) => {
+      return {
+        label: item.currencyName || "",
+        value: item.currencyName,
+      };
+    })
+    console.log(this.props.groupId)
+    return (
+      <>
+        <Formik
+          initialValues={{
+            attribute: "",
+            attributeName:this.props.particularDiscountData.attributeName || "",
+            category: "",
+            categoryName: this.props.particularDiscountData.categoryName || "",
+            description:this.props.particularDiscountData.description || "",
+            imageId: "",
+            name:this.props.particularDiscountData.name || "",
+            hsn:this.props.particularDiscountData.hsn || "",
+            subAttribute: "",
+            subAttributeName:this.props.particularDiscountData.subAttributeName || "",
+            subCategory: "",
+            subCategoryName: this.props.particularDiscountData.subCategoryName || "",
+            price: 0,
+            tax: 0,
+            groupId: this.props.groupId,
+            userId: this.props.userId,
+            currencyName: "",
+            grossWeight:this.props.particularDiscountData.grossWeight || "",
+            grossUnit:this.props.particularDiscountData.grossUnit || "",
+            netUnit:this.props.particularDiscountData.netUnit || "",
+            netWeight:this.props.particularDiscountData.netWeight || "",
+            reorder:this.props.particularDiscountData.reorder || "",
+          }}
+          validationSchema={SuppliesSchema}
+          onSubmit={(values, { resetForm }) => {
+            console.log(values);
+            this.props.updateSupplies(
+              {
+                ...values,
+                // baseComponentInd: this.state.baseComponent,
+              },
+              this.props.particularDiscountData.suppliesId
+            );
+          }}
+        >
+          {({
+            errors,
+            touched,
+            isSubmitting,
+            setFieldValue,
+            setFieldTouched,
+            values,
+            ...rest
+          }) => (
+            <Form class="form-background">
+              <div style={{ display: "flex", justifyContent: "space-between" }}>
+                <div
+                  style={{
+                    height: "100%",
+                    width: "45%",
+                  }}
+                >
+                  <FlexContainer flexWrap="no-wrap">
+                    <div style={{ width: "40%" }}>
+                      <Spacer />
+                      <Field name="imageId" component={Upload} />
+                    </div>
+                  </FlexContainer>
+                  <Field
+                    isRequired
+                    defaultValue={{
+                      label: this.props.particularDiscountData.categoryName,
+                      value: this.props.particularDiscountData.categoryName,
+                    }}
+                    name="categoryName"
+                    label="Category"
+                    placeholder="Start typing to search or create..."
+                    optionLabel="categoryName"
+                    optionValue="categoryName"
+                    url={`${base_url2}/supplies/category`}
+                    component={LazySelect}
+                    isColumn
+                    inlineLabel
+                    style={{ flexBasis: "80%" }}
+                  />
+                  <Field
+                  defaultValue={{
+                    label: this.props.particularDiscountData.subCategoryName,
+                    value: this.props.particularDiscountData.subCategoryName,
+                  }}
+                    name="subCategoryName"
+                    label="Sub Category"
+                    placeholder="Start typing to search or create..."
+                    optionLabel="subCategoryName"
+                    optionValue="subCategoryName"
+                    url={`${base_url2}/supplies/subcategory`}
+                    component={LazySelect}
+                    isColumn
+                    inlineLabel
+                  />
+                  <FlexContainer justifyContent="space-between">
+                    <div style={{ width: "100%" }}>
+                      <Field
+                       defaultValue={{
+                        label: this.props.particularDiscountData.attributeName,
+                        value: this.props.particularDiscountData.attributeName,
+                      }}
+                        name="attributeName"
+                        label="Attribute"
+                        placeholder="Start typing to search or create..."
+                        optionLabel="attributeName"
+                        optionValue="attributeName"
+                        url={`${base_url2}/supplies/attribute`}
+                        component={LazySelect}
+                        isColumn
+                        inlineLabel
+                      />
+                      <Field
+                          defaultValue={{
+                            label: this.props.particularDiscountData.subAttributeName,
+                            value: this.props.particularDiscountData.subAttributeName,
+                          }}
+                        name="subAttributeName"
+                        label="Sub Attribute"
+                        placeholder="Start typing to search or create..."
+                        optionLabel="subAttributeName"
+                        optionValue="subAttributeName"
+                        url={`${base_url2}/supplies/subattribute`}
+                        component={LazySelect}
+                        isColumn
+                        inlineLabel
+                        style={{ flexBasis: "80%" }}
+                      />
+                    </div>
+                  </FlexContainer>
+                </div>
+                <div
+                  style={{
+                    height: "100%",
+                    width: "50%",
+                  }}
+                >
+                  <FlexContainer justifyContent="space-between">
+                    <div style={{ width: "47%" }}>
+                      <Field
+                        name="name"
+                        label="Name"
+                        isColumn
+                        width={"100%"}
+                        inlineLabel
+                        component={InputComponent}
+                      />
+                    </div>
+                    <div style={{ width: "47%" }}>
+                      <Field
+                        name="hsn"
+                        label="HSN"
+                        isColumn
+                        width={"100%"}
+                        inlineLabel
+                        component={InputComponent}
+                      />
+                    </div>
+                  </FlexContainer>
+
+                  <FlexContainer justifyContent="space-between">
+                    {/* <div style={{ width: "47%" }}>
+                      <Field
+                        name="cost"
+                        label="Cost"
+                        isColumn
+                        width={"100%"}
+                        inlineLabel
+                        component={InputComponent}
+                      />
+                    </div> */}
+                    <div style={{ width: "47%" }}>
+                      <Field
+                        name="reorder"
+                        label="Re-order"
+                        isColumn
+                        width={"100%"}
+                        inlineLabel
+                        component={InputComponent}
+                      />
+                    </div>
+                    <div style={{ width: "47%" }}>
+                      <Field
+                        name="currencyName"
+                        label="Currency"
+                        isColumn
+                        inlineLabel
+                        component={SelectComponent}
+                        options={Array.isArray(currencyType) ? currencyType : []}
+                        style={{
+                          width: "100%",
+                        }}
+                      />
+                    </div>
+                  </FlexContainer>
+                  <FlexContainer justifyContent="space-between">
+                    <div style={{ width: "47%" }}>
+                      <Field
+                        name="netWeight"
+                        label="Net Weight"
+                        isColumn
+                        width={"100%"}
+                        inlineLabel
+                        component={InputComponent}
+                      />
+                    </div>
+                    <div style={{ width: "47%" }}>
+                      <Field
+                        name="netUnit"
+                        label="Units"
+                        isColumn
+                        inlineLabel
+                        component={SelectComponent}
+                        options={["g", "kg"]}
+                        style={{
+                          width: "100%",
+                        }}
+                      />
+                    </div>
+                  </FlexContainer>
+                  <FlexContainer justifyContent="space-between">
+                    <div style={{ width: "47%" }}>
+                      <Field
+                        name="grossWeight"
+                        label="Gross Weight"
+                        isColumn
+                        width={"100%"}
+                        inlineLabel
+                        component={InputComponent}
+                      />
+                    </div>
+                    <div style={{ width: "47%" }}>
+                      <Field
+                        name="grossUnit"
+                        label="Units"
+                        isColumn
+                        inlineLabel
+                        component={SelectComponent}
+                        options={["g", "kg"]}
+                        style={{
+                          width: "100%",
+                        }}
+                      />
+                    </div>
+                  </FlexContainer>
+                  <Spacer />
+        
+                  <FlexContainer justifyContent="space-between">
+                    <div style={{ width: "100%" }}>
+                      <Field
+                        name="description"
+                        label="Description"
+                        isColumn
+                        width={"21.875em"}
+                        component={TextareaComponent}
+                        inlineLabel
+                      />
+                    </div>
+                  </FlexContainer>
+                  {/* <StyledLabel>Additional Info</StyledLabel> */}
+                </div>
+              </div>
+              <Spacer />
+              <FlexContainer justifyContent="flex-end">
+                <Button
+                  type="primary"
+                  htmlType="submit"
+                  loading={this.props.addingPurchase}
+                >
+                  Create
+                </Button>
+              </FlexContainer>
+            </Form>
+          )}
+        </Formik>
+      </>
+    );
+  }
+}
+
+const mapStateToProps = ({ auth, supplies }) => ({
+  addingPurchase: supplies.addingPurchase,
+  groupId: auth.userDetails.groupId,
+  userId: auth.userDetails.userId,
+  currencies: auth.currencies,
+});
+
+const mapDispatchToProps = (dispatch) =>
+  bindActionCreators(
+    {
+      updateSupplies,
+      getCurrency,
+    },
+    dispatch
+  );
+
+export default connect(mapStateToProps, mapDispatchToProps)(UpdateSuppliesForm);

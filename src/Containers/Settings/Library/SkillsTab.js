@@ -1,4 +1,4 @@
-import React, { Component, lazy, useEffect,useState } from "react";
+import React, {  } from "react";
 import { StyledTabs } from "../../../Components/UI/Antd";
 import { TabsWrapper } from "../../../Components/UI/Layout";
 import Certification from "../Recruitement/Child/Certification/Certification";

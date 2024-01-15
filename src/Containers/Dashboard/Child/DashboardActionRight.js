@@ -1,44 +1,107 @@
-import { Popover, Select, Button, Switch } from "antd";
-import React, { useState, useEffect, Suspense } from "react";
-import { StyledSelect, StyledRangePicker } from "../../../Components/UI/Antd";
-import { FlexContainer } from "../../../Components/UI/Layout";
-import dayjs from "dayjs";
+import { Popover, } from "antd";
+import React, {  } from "react";
+import { StyledRangePicker } from "../../../Components/UI/Antd";
 import { connect } from "react-redux";
 import {
   setSelectedTimeIntervalReport,
   setTimeRangeReport,
-  setSelectedReportType,
-  setSubSelectedReportType,
 
 } from "../DashboardAction";
-
 import { bindActionCreators } from "redux";
-
-
 import TimeInterval from "../../../Utils/TimeInterval";
-
-
+import { FormattedMessage } from "react-intl";
 
 const HeaderActionRight = (props) => {
   const {
-
     setSelectedTimeIntervalReport,
     dateRangeList,
-
+    viewType,
+    setDashboardViewType,
+    handleButtonClick,
+    activeButton,
+    user,
   } = props;
-
-
 
   return (
     <>
-      <FlexContainer alignItems="center" >
-        <TimeInterval
+      <div class=" flex items-center"  >
+        
+        
+        <span class="cursor-pointer" 
+        onClick={() => handleButtonClick("Tasks")} 
+        style={{
+          color:activeButton === "Tasks" && "#1890ff",
+          
+        }}
+        >
+            <FormattedMessage
+                        id="app.tasks"
+                        defaultMessage="Tasks"
+                      />
+          {/* Tasks */}
+        </span>
+  
+        &nbsp;
+    {user.crmInd === true && (
+        <span class="cursor-pointer"
+        onClick={() =>  handleButtonClick("Customer")} 
+        style={{
+          color:activeButton ==="Customer" ? activeButton === "Customer" && "#1890ff" && viewType === "ALL" && "#444" : viewType === "ALL" && "#1890ff" ,
+       
+        }}
+        >
+           <FormattedMessage
+                        id="app.prospect"
+                        defaultMessage="Prospect"
+                      />
+           
+        </span>
+)}
+        &nbsp;
+    {user.imInd ==true  && (
+        <span class="cursor-pointer"
+        onClick={() => handleButtonClick("Investors")} 
+        style={{
+          color:activeButton === "Investors" && "#1890ff",
+    
+        }}
+        >  
+          <FormattedMessage
+                        id="app.investors"
+                        defaultMessage="Investors"
+                      />   
+           
+        </span>
+)}
+    &nbsp;
+    {user.erpInd === true && (
+        <span class="cursor-pointer"
+        onClick={() => handleButtonClick("Accounts")} 
+        style={{
+          color:activeButton === "Accounts" && "#1890ff",
+          
+        }}
+        >
+           <FormattedMessage
+                        id="app.customer"
+                        defaultMessage="Customer"
+                      /> 
+          
+        </span>
+    )}
+    &nbsp;
+   
+      <>
+      <div class="">
+    <TimeInterval
+    style={{fontSize:"0.67"}}
           times={dateRangeList}
           handleClick={setSelectedTimeIntervalReport}
         />
+        </div>
         <Popover>
           <StyledRangePicker
-            style={{width:"35%"}}
+            style={{width:"20%"}}
             onChange={(range) => {
               props.setTimeRangeReport(range[0], range[1]);
               console.log(range);
@@ -46,16 +109,19 @@ const HeaderActionRight = (props) => {
 
           />
         </Popover>
-      </FlexContainer>
+        </>
+
+      </div>
     </>
   );
 };
 
 
 const mapStateToProps = ({ auth, dashboard }) => ({
-  user: auth.user,
+  user: auth.userDetails,
   userId: auth.userDetails.userId,
   dateRangeList: dashboard.dateRangeList,
+
 
 });
 
@@ -64,8 +130,6 @@ const mapDispatchToProps = (dispatch) =>
     {
       setSelectedTimeIntervalReport,
       setTimeRangeReport,
-      setSelectedReportType,
-      setSubSelectedReportType,
     
     },
     dispatch

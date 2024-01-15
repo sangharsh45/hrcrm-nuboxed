@@ -1,17 +1,14 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { FormattedMessage } from "react-intl";
 import { bindActionCreators } from "redux";
 import { Button } from "antd";
 import { Formik, Form, Field } from "formik";
-import dayjs from "dayjs";
 import { Spacer } from "../../../../../Components/UI/Elements";
 import { InputComponent } from "../../../../../Components/Forms/Formik/InputComponent";
 import {
   addProcessForOpportunity,
  getProcessForOpportunity,
 } from "../../../SettingsAction";
-import { FlexContainer } from "../../../../../Components/UI/Layout";
 
 class ProcessFormForHiring extends Component {
   handleCallback = (status) => {
@@ -41,7 +38,7 @@ class ProcessFormForHiring extends Component {
         >
           {({ values }) => (
             <Form className="form-background">
-              <div style={{ width: "auto", margin: "auto" }}>
+              <div class=" w-auto " style={{  margin: "auto" }}>
                 <Field
                   name="workflowName"
                   label="Name"
@@ -54,8 +51,7 @@ class ProcessFormForHiring extends Component {
                 />
                 <Spacer />
 
-                <Spacer style={{ marginTop: 15 }} />
-                <FlexContainer justifyContent="flex-end">
+                <div class=" flex justify-end mt-[15px]" >
                   {" "}
                   <Button
                     type="primary"
@@ -65,7 +61,7 @@ class ProcessFormForHiring extends Component {
                   >
                     Create
                   </Button>
-                </FlexContainer>
+                </div>
               </div>
             </Form>
           )}

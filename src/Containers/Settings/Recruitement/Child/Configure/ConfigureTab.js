@@ -12,11 +12,11 @@ function ConfigureTab(props) {
     <>
       <TabsWrapper>
         <StyledTabs defaultActiveKey="1" type="card">
-          <TabPane tab={`Task`} key="1">
+        
             <div style={{ marginTop: 10 }}>
               <TaskTab />
             </div>
-          </TabPane>
+       
         </StyledTabs>
       </TabsWrapper>
     </>

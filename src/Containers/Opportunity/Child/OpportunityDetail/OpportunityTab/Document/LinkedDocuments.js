@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { Icon } from "antd";
 import { FormattedMessage } from "react-intl";
 import DownloadIcon from '@mui/icons-material/Download';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -13,18 +12,11 @@ import {
   StyledPopconfirm,
 } from "../../../../../../Components/UI/Antd";
 import {
-  MultiAvatar,
-  SubTitle,
-} from "../../../../../../Components/UI/Elements";
-import { Link } from "../../../../../../Components/Common";
-import {
   getOpportunityDocument,
   deleteDocument,
 } from "../../../../OpportunityAction";
-
 import { elipsize } from "../../../../../../Helpers/Function/Functions";
-import APIFailed from "../../../../../../Helpers/ErrorBoundary/APIFailed";
-import { DeleteOutlined, DownloadOutlined } from "@ant-design/icons";
+import ContractToggle from "./ContractToggle";
 
 class LinkedDocuments extends Component {
   componentDidMount() {
@@ -90,6 +82,34 @@ class LinkedDocuments extends Component {
         dataIndex: "uploadedBy",
         // onFilter: (value, record) => record.taskType.indexOf(value) === 0,
         // sorter: (a, b) => a.taskType.length - b.taskType.length
+      },
+      {
+        //title: "Name",
+        title: <FormattedMessage
+          id="app.fileName"
+          defaultMessage="File Name"
+        />,
+        dataIndex: "fileName",
+     
+      },
+      {
+        //title: "Description",
+        // title: <FormattedMessage
+        //   id="app.description"
+        //   defaultMessage="Description"
+        // />,
+        // dataIndex: "documentDescription",
+        width: "20%",
+        render: (name, item, i) => {
+          return (
+            <ContractToggle
+            // partnerId={item.partnerId}
+            contractInd={item.contractInd}
+            // assignedIndicator={item.assignedInd}
+            documentId={item.documentId}
+          />
+          );
+        },
       },
       // {
       //   // title: "Circulation",

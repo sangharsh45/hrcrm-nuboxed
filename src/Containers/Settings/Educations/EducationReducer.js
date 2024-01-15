@@ -102,6 +102,12 @@ case types.GET_EDUCATION_REQUEST:
             removingEducationError: true,
           };
 
+          case types.HANDLE_CLAER_REDUCER_DATA_EDUCATION:
+            return { ...state, 
+              educations: [], 
+              // deletedTruck: [] 
+            };
+
 
     default:
         return state;

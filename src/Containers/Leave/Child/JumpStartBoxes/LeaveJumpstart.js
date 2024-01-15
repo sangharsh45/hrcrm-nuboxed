@@ -18,9 +18,9 @@ class LeaveJumpstart extends React.Component {
      console.log(leaveBalance);
     return (
       <FlexContainer flexDirection="column" style={{ width: "100%" }}>
-            <FlexContainer style={{ width: "100%", marginLeft:"9%" }}>
+            <div class=" flex w-full flex-row  md:ml-[9%] max-sm:ml-0 max-sm:justify-between">
 
-                <div style={{ width: "20%" }}>
+                <div class="md:w-1/5 max-sm:w-[24%]">
                 <JumpStartBox
                 // bgColor="#005075"
                 title="Annual Leaves"
@@ -30,7 +30,7 @@ class LeaveJumpstart extends React.Component {
                 />
                 </div>
 
-                <div style={{ width: "20%" }}>
+                <div class="md:w-1/5 max-sm:w-[24%]">
                 <JumpStartBox
                 // bgColor="#0073a8"
                 stringValue
@@ -40,18 +40,18 @@ class LeaveJumpstart extends React.Component {
                 />
                 </div>
 
-                <div style={{ width: "20%" }}>
+                <div class="md:w-1/5 max-sm:w-[24%]">
                 <JumpStartBox
                 // bgColor="#0093d7"
                 // title="Pending"
                 title="Approved"
                 stringValue
                 noProgress
-                // value={totalPendingLeaves}
+                 value={"Data Not Available"}
                 />
                 </div>
 
-                <div style={{ width: "20%" }}>
+                <div class="md:w-1/5 max-sm:w-[24%]">
                 <JumpStartBox   
                 // bgColor="#24b9fe"
                 title="Leave Balance"
@@ -60,7 +60,7 @@ class LeaveJumpstart extends React.Component {
                 value={leaveBalance}
                 />
                 </div>
-            </FlexContainer>
+            </div>
         </FlexContainer>
     );
   }

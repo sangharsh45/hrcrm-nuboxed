@@ -6,9 +6,7 @@ class AccessmentHeader extends Component {
   render() {
     const { handleAccessmentModal,setAccessmentViewType,viewType } = this.props;
     return (
-      <div style={{position: "sticky",
-      top: "3.35rem",
-      zIndex: "998"}}>
+      <div div class="static top-12 z-[998]">
         <ActionHeader
           leftComponent={
             <AccessmentActionLeft

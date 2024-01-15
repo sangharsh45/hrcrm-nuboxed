@@ -1,17 +1,13 @@
-import React, { Component, lazy, Suspense, useEffect } from "react";
+import React, { Component, } from "react";
 import { connect } from "react-redux";
 import BorderColorIcon from '@mui/icons-material/BorderColor';
 import { FormattedMessage } from "react-intl";
-import dayjs from "dayjs";
-import { Formik, Form, Field, FastField } from "formik";
 import DeleteIcon from '@mui/icons-material/Delete';
-import { SwitchComponent } from "../../../../../Components/Forms/Formik/SwitchComponent";
 import { bindActionCreators } from "redux";
 
 import {
   handleProcessHiringModal,
   updateProcessNameForOpportunity,
-  getProcessForOpportunity,
   updateStageForOpportunity,
   addProcessStageForOpportunity,
   getProcessStagesForOpportunity,
@@ -20,22 +16,20 @@ import {
   LinkOpportunityStagePublish
 
 } from "../../../SettingsAction";
-import { Button, Icon, Tag, message, Tooltip, Switch, Popconfirm } from "antd";
+import { Button, message, Popconfirm } from "antd";
 import styled from "styled-components";
 import {
   MainWrapper,
   Spacer,
   TextInput,
 } from "../../../../../Components/UI/Elements";
-// import SingleRecruitStages from "./SingleRecruitStages";
-import { FlexContainer } from "../../../../../Components/UI/Layout";
-import { StyledPopconfirm, StyledTabs } from "../../../../../Components/UI/Antd";
+import {
+  addProcessForOpportunity,
+ getProcessForOpportunity,
+} from "../../../SettingsAction";
+import { StyledTabs } from "../../../../../Components/UI/Antd";
 import {  Select } from "../../../../../Components/UI/Elements";
 import { elipsize } from "../../../../../Helpers/Function/Functions";
-import { ActionIcon } from "../../../../../Components/Utils";
-// import AddProcessModalForRecruit from "../../AddProcessModalForRecruit";
-import { EditOutlined } from "@ant-design/icons";
-// import AddApprovalModal from "./AddApprovalModal";
 import AddProcessModalForHiring from "./AddProcessModalForHiring";
 import SingleOpportunityStages from "./SingleOpportunityStages";
 const { Option } = Select;
@@ -51,6 +45,7 @@ class HiringTab extends Component {
       // viewAll:false,
       // setIsViewAll:false,
       change: true,
+      isTextOpen:false,
       isTextInputOpen: false,
       addingStage: false,
       stageName: "",
@@ -116,6 +111,10 @@ class HiringTab extends Component {
     this.setState((prevState) => ({
       isTextInputOpen: !prevState.isTextInputOpen,
     }));
+    toggleInput1 = () =>
+    this.setState((prevState) => ({
+      isTextOpen: !prevState.isTextOpen,
+    }));
   handleChange = ({ target: { name, value } }) =>
     this.setState({ [name]: value });
   handleCallBack1 = (status, data) => {
@@ -176,6 +175,50 @@ class HiringTab extends Component {
       alert("error");
     }
   };
+  handleCallback = (status) => {
+    if (status === "success") {
+      return getProcessForOpportunity(this.props.orgId);
+    } else {
+      return null;
+    }
+  };
+  handleAddWorkflow = () => {
+    const { addProcessForOpportunity, workflows } = this.props;
+    const {
+      workflowName,
+      isTextInputOpen,
+      orgId,
+    //   categoryId,
+      editInd,
+    } = this.state;
+    let header = {
+      workflowName,
+      orgId: this.props.organizationId,
+    };
+
+    let exist =
+    workflows &&
+    workflows.some(
+        (element) => element.workflowName == workflowName
+      );
+
+    if (exist) {
+      message.error(
+        "Can't create as another departmentName exists with same name!"
+      );
+    } else {
+      addProcessForOpportunity(header,  this.props.orgId, () => 
+      this.handleCallback
+      );
+    }
+
+    this.setState({
+      categoryName: "",
+      subCategoryId:"",
+      isTextOpen:false,
+      editInd: true,
+    });
+  };
 
   handleStageType=(value)=>
   this.setState({responsible:value});
@@ -220,9 +263,7 @@ class HiringTab extends Component {
         this.handleCallBack,
         this.props.orgId,
         this.props.oppworkFlowId
-      );
-      // this.props.getProcessStagesForRecruit(this.props.recruitmentProcessId);
-    }
+      );}
     this.setState({
       stageName: "",
       probability: "",
@@ -231,17 +272,18 @@ class HiringTab extends Component {
     });
   };
   render() {
+    const { addingProcessForOpportunity, addProcessForOpportunity } = this.props;
     return (
       <>
         <StageWrapper>
           <MainWrapper>
             <h1
             >
-              {/* Workflow */}
+              
               <FormattedMessage id="app.workflow" defaultMessage="Workflow" />
             </h1>
 
-            <FlexContainer>
+            <div class=" flex">
                <StyledTabs
                 style={{ width: "80%" }}
                 defaultActiveKey={this.state.activeKey}
@@ -262,20 +304,64 @@ class HiringTab extends Component {
                 })}
               </StyledTabs> 
 
-              <Button
-                style={{ margin: 10 }}
-                ghost
-                 onClick={() => this.props.handleProcessHiringModal(true)}
-                type="primary"
+              {this.state.isTextOpen ? (
+              <div class=" flex items-center ml-[0.3125em] mt-[0.3125em]"
               >
-                Add
-              </Button>
-            </FlexContainer>
-            <Spacer />
-            <FlexContainer
-              flexDirection="column"
-              className="stages"
-              justifyContent="center"
+                <br />
+                <br />
+              
+                <TextInput
+                  placeholder="Add Workflow"
+                  name="workflowName"
+                //   value={categoryName}
+                  onChange={this.handleChange}
+                  width="40%"
+                  style={{ marginRight: "0.125em" }}
+                />
+        
+              
+         
+                &nbsp;
+                <Button
+                  type="primary"
+                  htmlType="submit"
+                  disabled={!this.state.workflowName} 
+                  // disabled={!values.taskChecklistName}
+                  loading={addingProcessForOpportunity}
+                  onClick={this.handleAddWorkflow}
+                >
+                  
+                  Save
+                </Button>
+                &nbsp;
+                <Button type="primary" onClick={this.toggleInput1}>
+                  Cancel
+               
+                </Button>
+              </div>
+            ) : (
+              <>
+                <br />
+                <div class=" flex justify-end" >
+                  <Button
+                    type="primary"
+
+                    htmlType="button"
+                 
+                     Loading={addingProcessForOpportunity}
+                    onClick={this.toggleInput1}
+                  >
+                    Add
+                 
+                  </Button>
+                </div>
+              </>
+            )}
+           
+            </div>
+        
+            <div class=" flex mt-4 flex-col justify-center"  className="stages"
+       
               style={{
                 width: "100%",
                 alignContent: "center",
@@ -284,7 +370,7 @@ class HiringTab extends Component {
             >
               {this.state.isProcessTextInputOpen ? (
                 <div style={{}}>
-                  <FlexContainer alignItems="center" justifyContent={"center"}>
+                  <div class="flex items-center justify-center" >
                     <TextInput
                       placeholder="Process Name"
                       name="workflowName"
@@ -296,11 +382,11 @@ class HiringTab extends Component {
                       style={{ marginLeft: "2.81em" }}
                     />
 
-                    <FlexContainer justifyContent="flex-end">
+                    <div class=" flex justify-end" >
                       <Button
                         style={{
-                          border: "0.06em solid #1890ff",
-                          color: "#1890ff",
+                          border: "0.06em solid white",
+                          color: "black",
                         }}
                         htmlType="submit"
                         onClick={this.handleEditProcessName}
@@ -309,8 +395,8 @@ class HiringTab extends Component {
                       </Button>
                       <Button
                         style={{
-                          border: "0.06em solid #1890ff",
-                          color: "#1890ff",
+                          border: "0.06em solid white",
+                          color: "black",
                         }}
                         onClick={this.handleCancel}
                       >
@@ -319,8 +405,8 @@ class HiringTab extends Component {
                           defaultMessage="Cancel"
                         />
                       </Button>
-                    </FlexContainer>
-                  </FlexContainer>
+                    </div>
+                  </div>
                 </div>
               ) : 
               (
@@ -332,6 +418,7 @@ class HiringTab extends Component {
                    
                     {this.state.currentProcess.workflowName && (
                            <span
+                           style={{marginLeft:"1rem"}}
                                      tooltipTitle="Edit"
                         onClick={this.handleEdit}
                         size="0.875em"
@@ -351,27 +438,25 @@ class HiringTab extends Component {
                        onConfirm={() => this.props.deleteOpportunityProcessData(this.state.currentProcess.opportunityWorkflowDetailsId )}
                     >
                       <DeleteIcon
-                      type="delete" style={{ color: "white" }} />
+                      type="delete" style={{ color: "white",marginLeft:"1rem" }} />
                     </Popconfirm>
 
                     </span>
                     )}
                   
-                   {this.state.currentProcess.workflowName && (
-                      <Button
-                        onClick={this.handlePublishClick}
-                      >
-                        {/* {this.state.change?"Publish":"Unpublish"}  */}
-                        {this.state.currentProcess.publishInd
-                          ? "Unpublish"
-                          : "Publish"}
-                      </Button>
-                    )}
+                  {this.state.currentProcess.workflowName && (
+  <Button
+    style={{ color: "white",marginLeft:"1rem" }} // Add this line to change the font color to white
+    onClick={this.handlePublishClick}
+  >
+    {this.state.currentProcess.publishInd ? "Unpublish" : "Publish"}
+  </Button>
+)}
                 
                   </h1> 
                 </>
               )}
-            </FlexContainer>
+            </div>
 
            {this.props.opportunityProcessStages.map((opportunityProcessStages, i) => (
               <SingleOpportunityStages
@@ -455,7 +540,7 @@ class HiringTab extends Component {
               </div>
             ) : this.state.currentProcess.workflowName? (
               <>
-                <FlexContainer justifyContent="flex-end">
+                <div class=" flex justify-end" >
                   <Button
                     type="primary"
                     ghost
@@ -469,7 +554,7 @@ class HiringTab extends Component {
                       defaultMessage="Add Stage"
                     />
                   </Button>
-                </FlexContainer>
+                </div>
               </>
             ):null}
           </MainWrapper>
@@ -488,6 +573,8 @@ class HiringTab extends Component {
 
 const mapStateToProps = ({ settings, auth }) => ({
   opportunityProcess: settings.opportunityProcess,
+  addingProcessForOpportunity: settings.addingProcessForOpportunity,
+  addingProcessForOpportunityError: settings.addingProcessForOpportunityError,
   organization:
   auth.userDetails &&
   auth.userDetails.metaData &&
@@ -504,6 +591,7 @@ const mapDispatchToProps = (dispatch) =>
    handleProcessHiringModal,
    updateProcessNameForOpportunity,
    getProcessForOpportunity,
+   addProcessForOpportunity,
    addProcessStageForOpportunity,
    getProcessStagesForOpportunity,
    deleteOpportunityProcessData,

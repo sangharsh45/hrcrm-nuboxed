@@ -1,4 +1,4 @@
-import React, { Component, useMemo } from "react";
+import React, { Component,lazy,  } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { FormattedMessage } from "react-intl";
@@ -6,22 +6,17 @@ import { InputComponent } from "../../../../Components/Forms/Formik/InputCompone
 import { Spacer, StyledLabel } from "../../../../Components/UI/Elements";
 import { Button, Switch } from "antd";
 import { Editor } from "react-draft-wysiwyg";
-import { EditorState, convertToRaw, ContentState } from "draft-js";
+import { EditorState, convertToRaw, } from "draft-js";
 import draftToHtml from "draftjs-to-html";
 import { addCandidateEmail, getFilteredEmailContact } from "../../CandidateAction";
-import { Formik, Form, Field, FieldArray, FastField } from "formik";
+import { Formik, Form, Field,  } from "formik";
 import * as Yup from "yup";
-
 import { getCustomerList } from "../../../Customer/CustomerAction";
-import { FlexContainer } from "../../../../Components/UI/Layout";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
-import ChooseCandidateEmailTable from "./ChooseCandidateEmailTable";
-
-
-
-import dayjs from "dayjs";
 import { SelectComponent } from "../../../../Components/Forms/Formik/SelectComponent";
-
+const ChooseCandidateEmailTable = lazy(() =>
+  import("../CandidateTable/ChooseCandidateEmailTable")
+);
 /**
  * yup validation scheme for creating a opportunity
  */
@@ -248,7 +243,7 @@ class EmailCandidateForm extends Component {
 
               return (
                 <Form className="form-background">
-                  <FlexContainer style={{ width: "15%", justifyContent: "space-between" }}>
+                  <div class=" w-[15%] flex justify-between" >
                     <StyledLabel>Select</StyledLabel>
                     <Switch
                       checked={this.state.vendor}
@@ -257,11 +252,11 @@ class EmailCandidateForm extends Component {
                       checkedChildren="Vendor"
                       unCheckedChildren="Customer"
                     />
-                  </FlexContainer>
+                  </div>
                   <Spacer /><Spacer />
-                  <FlexContainer justifyContent="space-between">
-                    <div style={{ width: "3%" }}><StyledLabel>To</StyledLabel></div>
-                    <div style={{ width: "26%" }}>
+                  <div class=" flex justify-between" >
+                    <div class=" w-[3%]" ><StyledLabel>To</StyledLabel></div>
+                    <div class=" w-[26%]" >
                       <Field
                         // style={{ width: "7%" }}
                         name="customer1"
@@ -281,7 +276,7 @@ class EmailCandidateForm extends Component {
                         inlineLabel
                       />
                     </div>
-                    <div style={{ width: "29%", marginRight: "29em" }}>
+                    <div class=" w-[29%] mr-[29em]" >
                       <Field
                         name="contact1"
                         isRequired
@@ -307,12 +302,12 @@ class EmailCandidateForm extends Component {
                         inlineLabel
                       />
                     </div>
-                  </FlexContainer>
-                  <FlexContainer justifyContent="space-between">
-                    <div style={{ width: "3%" }}>
+                  </div>
+                  <div class=" flex justify-between" >
+                    <div class=" w-[3%]" >
                       <StyledLabel>Cc</StyledLabel>
                     </div>
-                    <div style={{ width: "26%" }}>
+                    <div class=" w-[26%]" >
                       <Field
                         name="customer2"
                         isColumnWithoutNoCreate
@@ -352,12 +347,12 @@ class EmailCandidateForm extends Component {
                         inlineLabel
                       />
                     </div>
-                  </FlexContainer>
-                  <FlexContainer justifyContent="space-between">
-                    <div style={{ width: "3%" }}>
+                  </div>
+                  <div class=" flex justify-between" >
+                    <div class=" w-[3%]" >
                       <StyledLabel>Bcc</StyledLabel>
                     </div>
-                    <div style={{ width: "26%" }}>
+                    <div class=" w-[26%]" >
                       <Field
                         name="customer3"
                         // selectType="customerList"
@@ -375,7 +370,7 @@ class EmailCandidateForm extends Component {
                         inlineLabel
                       />
                     </div>
-                    <div style={{ width: "29%", marginRight: "29em" }}>
+                    <div class=" w-[29%] mr-[29em]" >
                       <Field
                         name="contact3"
                         //selectType="contactListFilter"
@@ -398,10 +393,10 @@ class EmailCandidateForm extends Component {
                         }
                       />
                     </div>
-                  </FlexContainer>
+                  </div>
                   <Spacer />
                   <Spacer />
-                  <FlexContainer alignItems="center">
+                  <div class=" flex items-center" >
                     <span><FormattedMessage
                       id="app.subject"
                       defaultMessage="Subject"
@@ -414,7 +409,7 @@ class EmailCandidateForm extends Component {
                       component={InputComponent}
                       style={{ width: "60%" }}
                     />
-                  </FlexContainer>
+                  </div>
                   <ChooseCandidateEmailTable
                     chooseCandidateEmail={this.props.chooseCandidateEmail}
                   />
@@ -431,7 +426,7 @@ class EmailCandidateForm extends Component {
                     onEditorStateChange={this.onEditorStateChange}
                     placeholder={placeholder || "Type here"}
                   />
-                  <FlexContainer justifyContent="flex-end">
+                  <div class=" flex justify-end" >
                     <Button
                       type="primary"
                       htmlType="submit"
@@ -443,7 +438,7 @@ class EmailCandidateForm extends Component {
                       {/* Send */}
                       <FormattedMessage id="app.send" defaultMessage="Send" />
                     </Button>
-                  </FlexContainer>
+                  </div>
                 </Form>
               );
             }}

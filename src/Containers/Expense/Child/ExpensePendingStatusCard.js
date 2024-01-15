@@ -1,37 +1,35 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState,lazy } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { FormattedMessage } from "react-intl";
-import { StyledTable } from "../../../Components/UI/Antd";
-import { Icon, Tooltip } from "antd";
-import { getExpenseById,handleExpenseVoucherIdDrawer,getPendingExpense } from "../ExpenseAction";
-import { BundleLoader } from "../../../Components/Placeholder";
+import {  Tooltip } from "antd";
+import { getExpenseById,handlePExpenseVoucherIdDrawer,getPendingExpense,deleteExpense } from "../ExpenseAction";
+import { DeleteOutlined, } from "@ant-design/icons";
 import { OnlyWrapCard } from '../../../Components/UI/Layout'
-import styled from 'styled-components';
 import dayjs from "dayjs";
-import { CurrencySymbol } from "../../../Components/Common";
-import APIFailed from "../../../Helpers/ErrorBoundary/APIFailed";
-import ExpenseVoucherIdDrawer from "./ExpenseVoucherIdDrawer";
 import Expense from "../Expense";
+import { BundleLoader } from "../../../Components/Placeholder";
+import { FormattedMessage } from "react-intl";
+import { StyledPopconfirm } from "../../../Components/UI/Antd";
+
+const PExpenseVoucherIdDrawer =lazy(()=>import("./PExpenseVoucherIdDrawer"));
 
 function ExpensePendingStatusCard(props) {
   const [expand, setExpand] = useState(false);
-  const [voucherId, setvoucherId] = useState("");
-  const [particularRowData, setParticularRowData] = useState({});
+  const [newvoucherId, setnewvoucherId] = useState("");
+  const [newparticularRowData, setnewParticularRowData] = useState({});
   const [pageNo, setPage] = useState(0);
 
-  function handleSetParticularRowData(item) {
+  function handleSetNewParticularRowData(item) {
     console.log(item);
-    setParticularRowData(item);   
+    setnewParticularRowData(item);   
   }
 
-  function handleExpand(voucherId) {
+  function handleExpand(newvoucherId) {
     setExpand(!expand);    
-    setvoucherId(voucherId);
+    setnewvoucherId(newvoucherId);
   }
 
   useEffect(() => {
-    // props.getExpenseById(props.userId);
     setPage(pageNo + 1);
     props.getPendingExpense(props.userId,pageNo);
   }, [props.userId]);
@@ -39,10 +37,13 @@ function ExpensePendingStatusCard(props) {
  
     const {
       pendingExpenses,
-      expenseVoucherIdDrawer,
-      handleExpenseVoucherIdDrawer,
+      pexpenseVoucherIdDrawer,
+      handlePExpenseVoucherIdDrawer,
+      fetchingPendingExpense,
     } = props;
-
+if(fetchingPendingExpense){
+return <BundleLoader/>
+}
     return (
       <>
          <OnlyWrapCard className="h-[32rem]">  
@@ -52,7 +53,7 @@ function ExpensePendingStatusCard(props) {
                 className="absolute left-0 top-0 bottom-0 w-3  rounded-l-md -mt-1 -mb-1 -ml-2 "
 
               ></span>
-              <span class="font-semibold text-base text-cardBody-heading font-poppins"> Pending </span>
+              <span class="font-semibold text-sm text-cardBody-heading font-poppins"> Pending </span>
             </span>
           </div>    
               {pendingExpenses.map((item) => {
@@ -63,46 +64,26 @@ function ExpensePendingStatusCard(props) {
                           borderBottom: "3px dotted #515050"
                       }}>
                          
-                      <div className=" flex font-medium flex-col w-72 ">
+                      <div className=" flex font-medium flex-col w-72 mb-1 ">
 
                          
                               <Tooltip >
-                                  <h4 class=" text-base text-cardBody font-poppins">
+                                  <h4 class=" text-sm text-cardBody font-poppins">
                                   Voucher ID
                                   </h4>
-                                  <h4 class=" text-base text-blue-500 text-cardBody font-poppins cursor-pointer">
+                                  <h4 class=" text-xs text-blue-500 text-cardBody font-poppins cursor-pointer">
 <div onClick={() => { handleExpand(item.voucherId);
-                handleSetParticularRowData(item);
-                props.handleExpenseVoucherIdDrawer(true);}}>
+                handleSetNewParticularRowData(item);
+                props.handlePExpenseVoucherIdDrawer(true);}}>
          {item.voucherId}
          </div>
          </h4>
 
 </Tooltip>
+<div className=" flex font-medium flex-col w-max ">
+                                    <h4 class=" text-xs text-cardBody font-poppins"></h4>
 
-</div>
-<div className=" flex font-medium flex-col  w-52 ">
-                           
-                           <h4 class=" text-base text-cardBody font-poppins"> Voucher Date </h4>
-                           <h4 class=" text-base text-cardBody font-poppins">
-                               
-                           
-                           {dayjs(item.voucherDate).format("MMM Do YY")}
-
-                           </h4>
-                       </div>
-                       <div className=" flex font-medium flex-col w-32 ">
-                                  
-
-                                  <h4 class=" text-base text-cardBody font-poppins">Amount</h4>
-                                  <h4 class=" text-base text-cardBody font-poppins">
-                                      € {item.amount}
-                                  </h4>
-                              </div>
-                              <div className=" flex font-medium flex-col w-[12rem] ">
-                                    <h4 class=" text-base text-cardBody font-poppins"></h4>
-
-                                    <div class=" text-base text-cardBody font-poppins">
+                                    <div class=" text-xs text-cardBody font-poppins">
          
             
               
@@ -113,26 +94,65 @@ function ExpensePendingStatusCard(props) {
                     textAlign: "center",
                     margin: "2px",
                     borderRadius: "0.62em",
-                    width:"12rem"
+                    width:"10rem"
                   }}
                 >
                   <div className="text-[#e1d16c]">Waiting for approval
                     </div></div>
                                     </div>
                                     </div>
-                        </div>
+</div>
 
+<div className=" flex font-medium flex-col  w-52 ">
+                           
+                           <h4 class=" text-sm text-cardBody font-poppins"> Voucher Date </h4>
+                           <h4 class=" text-xs text-cardBody font-poppins">
+                               
+                           
+                           {dayjs(item.voucherDate).format("MMM Do YY")}
+
+                           </h4>
+                       </div>
+                       <div className=" flex font-medium flex-col w-32 ">
+                                  
+
+                                  <h4 class=" text-sm text-cardBody font-poppins">Amount</h4>
+                                  <h4 class=" text-xs text-cardBody font-poppins">
+                                      € {item.amount}
+                                  </h4>
+                              </div>
+                              <StyledPopconfirm
+           // title="Do you want to delete?"
+           title={
+             <FormattedMessage
+               id="app.doyouwanttodelete?"
+               defaultMessage="Do you want to delete?"
+             />
+           }
+           onConfirm={() =>   props.deleteExpense(item.voucherId)}
+         >
+              <DeleteOutlined
+                type="delete"
+                style={{ cursor: "pointer" }}
+                // onClick={() => {
+                // props.deleteExpense(item.voucherId);
+                  
+                // }}
+              />
+           </StyledPopconfirm>
+                        </div>
+              
                         </div>
                     )
                 })}
       </OnlyWrapCard>
       
 
-        <ExpenseVoucherIdDrawer
-        voucherId={voucherId} 
-        particularRowData={particularRowData}
-        expenseVoucherIdDrawer={expenseVoucherIdDrawer}
-        handleExpenseVoucherIdDrawer={handleExpenseVoucherIdDrawer}
+        <PExpenseVoucherIdDrawer
+        newvoucherId={newvoucherId} 
+        newparticularRowData={newparticularRowData}
+        pexpenseVoucherIdDrawer={pexpenseVoucherIdDrawer}
+        handlePExpenseVoucherIdDrawer={handlePExpenseVoucherIdDrawer}
         />
       </>
     );
@@ -143,16 +163,18 @@ const mapStateToProps = ({ auth, expense }) => ({
   Expenses: expense.Expenses,
   fetchingExpenseById: expense.fetchingExpenseById,
   fetchingExpenseByIdError:expense.fetchingExpenseByIdError,
-  expenseVoucherIdDrawer:expense.expenseVoucherIdDrawer,
+  pexpenseVoucherIdDrawer:expense.pexpenseVoucherIdDrawer,
   pendingExpenses:expense.pendingExpenses,
+  fetchingPendingExpense:expense.fetchingPendingExpense
 
 });
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
       getExpenseById,
-      handleExpenseVoucherIdDrawer,
-      getPendingExpense
+      handlePExpenseVoucherIdDrawer,
+      getPendingExpense,
+      deleteExpense
     },
     dispatch
   );

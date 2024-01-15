@@ -17,7 +17,7 @@ import { updateMileage,
     // getMileageByUserId 
 } from "../MileageAction";
 import { getCurrency } from "../../Auth/AuthAction";
-import dayjs from "dayjs";
+import moment from "moment";
 import * as Yup from "yup";
 import { Select } from "antd";
 import { DeleteOutlined } from "@ant-design/icons";
@@ -62,7 +62,7 @@ function UpdateMileageForm(props) {
     
         if (`${row.id}date` === id) {
           console.log(dateString);
-          return { ...row, mileageDate: dayjs(dateString).toISOString() };
+          return { ...row, mileageDate: moment(dateString).toISOString() };
         } else {
           return row;
         }

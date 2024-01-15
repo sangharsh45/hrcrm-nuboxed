@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { FormattedMessage } from "react-intl";
 import { bindActionCreators } from "redux";
-import { Button, Divider, message,Input } from "antd";
-import { MainWrapper, FlexContainer } from "../../../Components/UI/Layout";
-import { TextInput, Title } from "../../../Components/UI/Elements";
+import { Button,Input } from "antd";
+import { BundleLoader } from "../../../Components/Placeholder";
+import { MainWrapper } from "../../../Components/UI/Layout";
+import { TextInput, } from "../../../Components/UI/Elements";
 import SingleEvent from "./SingleEvent";
 import moment from "moment";
 import {
@@ -13,10 +13,8 @@ import {
    removeEvents,
   updateEvents,
   searchEventName,
+  ClearReducerDataOfEvent
 } from "./EventAction";
-import axios from "axios";
-import { base_url } from "../../../Config/Auth";
-import dayjs from "dayjs";
 
 class Event extends Component {
   constructor(props) {
@@ -31,6 +29,22 @@ class Event extends Component {
       editInd:true,
     };
   }
+  handleChangeDes = (e) => {
+    this.setState({ currentData: e.target.value });
+  
+    if (e.target.value.trim() === "") {
+      this.setState((prevState) => ({ pageNo: prevState.pageNo + 1 }));
+      this.props.getEvents();
+      this.props.ClearReducerDataOfEvent();
+    }
+  };
+  handleSearch = () => {
+    if (this.state.currentData.trim() !== "") {
+      this.props.searchEventName(this.state.currentData);
+    } else {
+      console.error("Input is empty. Please provide a value.");
+    }
+  };
   toggleInput = () =>
     this.setState((prevState) => ({
       isTextInputOpen: !prevState.isTextInputOpen,
@@ -46,13 +60,13 @@ class Event extends Component {
     events &&
     events.some((element) => element.eventType == eventType);
 
-    if (exist) {
-      message.error(
-        "Can't create as another event type exists with same name!"
-      );
-    } else {
+    // if (exist) {
+    //   message.error(
+    //     "Can't create as another event type exists with same name!"
+    //   );
+    // } else {
       addEvents(event, () => console.log("add event callback"));
-    }
+    // }
 
     this.setState({
         eventType: "",
@@ -118,11 +132,11 @@ class Event extends Component {
       singleEvent,
       linkedEvents,
     } = this.state;
-    if (fetchingEvents) return <p>Loading ...</p>;
+    if (fetchingEvents) return <BundleLoader/>;
     if (fetchingEventsError) return <p>Error ...</p>;
     return (
       <>
-        <FlexContainer flexWrap="nowrap">
+ <div class="flex flex-nowrap" >
           <MainWrapper
             style={{
               flexBasis: "100%",
@@ -131,42 +145,20 @@ class Event extends Component {
               color: "#FFFAFA",
             }}
           >
-                      <div style={ {width: "18vw",display:"flex"}} >
-          <Input
-            placeholder="Search by Name"
-            width={"100%"}
-            // onSearch={(value) => {
-            //   props.inputCandidateDataSearch(value);
-            //   props.setCurrentData(value);
-
-            // }}
-            onChange={(e) => this.handleSearchChange(e)}
-            value={this.props.currentData}
+         <div class=" flex w-[18vw]" >
+            <Input
+         placeholder="Search by Name"
+        style={{width:"100%",marginLeft:"0.5rem"}}
+            // suffix={suffix}
+            onPressEnter={this.handleSearch}  
+            onChange={this.handleChangeDes}
+            // value={currentData}
           />
-           <Button
-          type={this.props.currentData ? "primary" : "danger"}
-          onClick={() => {
-            this.props.searchEventName(this.state.currentData);
-
-          }}
-        >
-          Submit
-        </Button>
-        &nbsp;
-        <Button
-          type={this.props.currentData ? "primary" : "danger"}
-          onClick={() => {
-            this.handleClear();
-          }}
-        >
-          <FormattedMessage id="app.clear" defaultMessage="Clear" />
-      
-        </Button>
-        </div>
-            <FlexContainer flexDirection="column">
+            </div>
+            <div class=" flex flex-col" >
               {/* <Title style={{ padding: 8 }}>Designation</Title> */}
               <MainWrapper style={{ height: "30em", marginTop: "0.625em" }}>
-                {events.length &&
+                {events.length ? (
                   events.map((event, i) => (
                     <SingleEvent
                       key={i}
@@ -183,18 +175,20 @@ class Event extends Component {
                       setCurrentData={this.setCurrentData}
                      handleDeleteEvent={this.handleDeleteEvent}
                     />
-                  ))}
+                  ))
+                  ) : (
+                    <p>No Data Available</p>
+                  )}
               </MainWrapper>
-            </FlexContainer>
+            </div>
             {isTextInputOpen ? (
-              <FlexContainer
-                alignItems="center"
-                style={{ marginLeft: "0.3125em", marginTop: "0.3125em" }}
+              <div class=" flex items-center ml-[0.3125em] mt-[0.3125em]"
+            
               >
                 <br />
                 <br />
                 <TextInput
-                  placeholder="Add More"
+                  placeholder="Add Event"
                   name="eventType"
                   value={eventType}
                   onChange={this.handleChange}
@@ -216,11 +210,11 @@ class Event extends Component {
                 <Button type="primary" ghost onClick={this.toggleInput}>
                   Cancel
                 </Button>
-              </FlexContainer>
+              </div>
             ) : (
               <>
                 <br />
-                <FlexContainer justifyContent="flex-end">
+                <div class=" flex justify-end" >
                   <Button
                     type="primary"
                     ghost
@@ -230,7 +224,7 @@ class Event extends Component {
                   >
                     Add More
                   </Button>
-                </FlexContainer>
+                </div>
                
               </>
             )}
@@ -260,7 +254,7 @@ class Event extends Component {
               </p>
             </FlexContainer>
           </MainWrapper> */}
-        </FlexContainer>
+        </div>
         <h4>Updated on {moment(this.props.events && this.props.events.length && this.props.events[0].updationDate).format("ll")} by {this.props.events && this.props.events.length && this.props.events[0].name}</h4>
       </>
     );
@@ -286,6 +280,7 @@ const mapDispatchToProps = (dispatch) =>
       addEvents,
        removeEvents,
        updateEvents,
+       ClearReducerDataOfEvent,
        searchEventName,
     },
     dispatch

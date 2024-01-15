@@ -5,7 +5,7 @@ import { BundleLoader } from "../../../Components/Placeholder";
 const CandidateForm = lazy(() => import("./CandidateForm"));
 
 const AddCandidateModal = props => {
-  const { addCandidateModal, handleCandidateModal,responseData, ...formProps } = props;
+  const { addCandidateModal, handleCandidateModal,responseData, } = props;
   return (
     <>
       <StyledDrawer
@@ -14,18 +14,20 @@ const AddCandidateModal = props => {
           id="app.candidate"
           defaultMessage="Candidate"
         />}
-        width="90%"
+        width="60%"
         visible={addCandidateModal}
         closable
         // maskClosable={false}
         destroyOnClose
         maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}
-        style={{marginTop:"5rem"}}
+        style={{marginTop:"3rem"}}
         onClose={() => handleCandidateModal(false)}
         footer={null}
       >
         <Suspense fallback={<BundleLoader />}>
-          <CandidateForm {...formProps} responseData={responseData} />
+          <CandidateForm
+          initialValues={props.initialValues}
+           responseData={responseData} />
         </Suspense>
       </StyledDrawer>
     </>

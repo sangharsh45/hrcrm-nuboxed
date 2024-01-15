@@ -1,17 +1,14 @@
 
-import React, { Component, useMemo } from "react";
+import React, { Component, } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { FormattedMessage } from "react-intl";
-import { Formik, Form, Field, FieldArray, FastField } from "formik";
+import { Formik, Form,  } from "formik";
 import { Spacer } from "../../../../Components/UI/Elements";
-import LazySelect from "../../../../Components/Forms/Formik/LazySelect";
 import {
   chooseCandididate
 }
   from "../../CandidateAction";
-import { Switch, Button, Checkbox } from "antd";
-import { FlexContainer } from "../../../../Components/UI/Layout";
+import { Switch, Button } from "antd";
 class CandidateChooseForm extends Component {
   constructor(props) {
     super(props);
@@ -114,16 +111,13 @@ class CandidateChooseForm extends Component {
             ...rest
           }) => (
             <Form className="form-background">
-              <div style={{ display: "flex", justifyContent: "space-between" }}>
-                <div
-                  style={{
-                    width: "47%",
-                  }}
+              <div class=" flex justify-between" >
+                <div class=" w-[47%]"
                 >
                   <div>
                   </div>
                   <Spacer />
-                  <FlexContainer style={{ width: "52%", justifyContent: "space-between" }}>
+                  <div class=" flex justify-between w-[52%]" >
                     <p>Name</p>
                     <Switch
                       onChange={this.handleName}
@@ -131,8 +125,8 @@ class CandidateChooseForm extends Component {
                       checkedChildren="Yes"
                       unCheckedChildren="No"
                     />
-                  </FlexContainer>
-                  <FlexContainer style={{ width: "52%", justifyContent: "space-between" }}>
+                  </div>
+                  <div class=" flex justify-between w-[52%]" >
                     <p>Email</p>
                     <Switch
                       onChange={this.handleEmail}
@@ -140,8 +134,8 @@ class CandidateChooseForm extends Component {
                       checkedChildren="Yes"
                       unCheckedChildren="No"
                     />
-                  </FlexContainer>
-                  <FlexContainer style={{ width: "52%", justifyContent: "space-between" }}>
+                  </div>
+                  <div class=" flex justify-between w-[52%]" >
                     <p>Mobile</p>
                     <Switch
                       onChange={this.handleMobile}
@@ -149,8 +143,8 @@ class CandidateChooseForm extends Component {
                       checkedChildren="Yes"
                       unCheckedChildren="No"
                     />
-                  </FlexContainer>
-                  <FlexContainer style={{ width: "52%", justifyContent: "space-between" }}>
+                  </div>
+                  <div class=" flex justify-between w-[52%]" >
                     <p>Role</p>
                     <Switch
                       onChange={this.handleRole}
@@ -159,8 +153,8 @@ class CandidateChooseForm extends Component {
                       checkedChildren="Yes"
                       unCheckedChildren="No"
                     />
-                  </FlexContainer>
-                  <FlexContainer style={{ width: "52%", justifyContent: "space-between" }}>
+                  </div>
+                  <div class=" flex justify-between w-[52%]" >
                     <p>Skills</p>
                     <Switch
                       onChange={this.handleSkills}
@@ -169,8 +163,8 @@ class CandidateChooseForm extends Component {
                       checkedChildren="Yes"
                       unCheckedChildren="No"
                     />
-                  </FlexContainer>
-                  <FlexContainer style={{ width: "52%", justifyContent: "space-between" }}>
+                  </div>
+                  <div class=" flex justify-between w-[52%]" >
                     <p>Availability</p>
                     <Switch
                       onChange={this.handleAvailability}
@@ -179,8 +173,8 @@ class CandidateChooseForm extends Component {
                       checkedChildren="Yes"
                       unCheckedChildren="No"
                     />
-                  </FlexContainer>
-                  <FlexContainer style={{ width: "52%", justifyContent: "space-between" }}>
+                  </div>
+                  <div class=" flex justify-between w-[52%]" >
                     {/* <Checkbox
                     // checked={this.state.checked}
                     // onChange={() => this.handleChange()}
@@ -196,15 +190,12 @@ class CandidateChooseForm extends Component {
                       unCheckedChildren="No"
                     />
 
-                  </FlexContainer>
+                  </div>
                 </div>
-                <div
-                  style={{
-                    width: "47%",
-                  }}
+                <div class=" w-[47%]"
                 >
                   <Spacer />
-                  <FlexContainer style={{ width: "55%", justifyContent: "space-between" }}>
+                  <div class=" flex justify-between w-[55%]" >
                     <p>Experience</p>
                     <Switch
                       onChange={this.handleExperience}
@@ -213,8 +204,8 @@ class CandidateChooseForm extends Component {
                       checkedChildren="Yes"
                       unCheckedChildren="No"
                     />
-                  </FlexContainer>
-                  <FlexContainer style={{ width: "55%", justifyContent: "space-between" }}>
+                  </div>
+                  <div class=" flex justify-between w-[55%]" >
                     <p>Identity Card</p>
                     <Switch
                       onChange={this.handleIdentityCard}
@@ -223,8 +214,8 @@ class CandidateChooseForm extends Component {
                       checkedChildren="Yes"
                       unCheckedChildren="No"
                     />
-                  </FlexContainer>
-                  <FlexContainer style={{ width: "55%", justifyContent: "space-between" }}>
+                  </div>
+                  <div class=" flex justify-between w-[55%]" >
                     <p>SkillWise Experience</p>
                     <Switch
                       onChange={this.handleSkillWiseExperience}
@@ -233,11 +224,11 @@ class CandidateChooseForm extends Component {
                       checkedChildren="Yes"
                       unCheckedChildren="No"
                     />
-                  </FlexContainer>
+                  </div>
                 </div>
               </div>
               <Spacer />
-              <FlexContainer justifyContent="flex-end">
+              <div class=" flex justify-end" >
                 <Button
                   type="primary"
                   htmlType="submit"
@@ -245,7 +236,7 @@ class CandidateChooseForm extends Component {
                   Loading={this.props.chooseCandididate}
                 > Generate Email
                 </Button>
-              </FlexContainer>
+              </div>
             </Form>
           )}
         </Formik>

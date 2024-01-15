@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { useState,useEffect } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Button } from "antd";
@@ -12,39 +12,43 @@ import { updateOpportunity, getAllSalesList } from "../../OpportunityAction";
 import { InputComponent } from "../../../../Components/Forms/Formik/InputComponent";
 import { DatePicker } from "../../../../Components/Forms/Formik/DatePicker";
 import dayjs from "dayjs";
-import { getWorkflow, getStages } from "../../OpportunityAction";
+import { getOppLinkedWorkflow, getOppLinkedStages } from "../../OpportunityAction";
 import { getCustomerData } from "../../../Customer/CustomerAction";
 import { getContactData } from "../../../Contact/ContactAction";
+import { Listbox } from "@headlessui/react";
+import { getCrm} from "../../../Leads/LeadsAction";
 /**
  * yup validation scheme for creating a opportunity
  */
 
 const UpdateOpportunitySchema = Yup.object().shape({
   opportunityName: Yup.string().required("Please provide Opportunity name"),
-  // startDate: Yup.date().required("Initiation date needed!"),
-  // endDate: Yup.date().required("Closure date needed!"),
-  // proposalAmount: Yup.number()
-  //   .typeError("Value must be a number")
-  //   .required("Value needed! "),
+  customerId:Yup.string().required("Input needed!"),
   currency: Yup.string().required("Currency needed!"),
   startDate: Yup.string().required("Input needed!"),
   endDate: Yup.string().required("Input needed!"),
-  salesUserIds: Yup.string().required("Input needed!"),
+  // salesUserIds: Yup.string().required("Input needed!"),
   oppWorkflow: Yup.string().required("Input needed!"),
 });
-class UpdateOpportunityForm extends Component {
-  componentDidMount() {
-    this.props.getAllSalesList();
-    this.props.getCustomerData(this.props.userId);
-    this.props.getContactData(this.props.userId);
-    this.props.getWorkflow(this.props.orgId);
-    this.props.getStages(this.props.orgId);
-  }
+function UpdateOpportunityForm (props) {
 
-  getStagesOptions(filterOptionKey, filterOptionValue) {
+  useEffect(()=> {
+    props.getAllSalesList();
+    props.getCustomerData(props.userId);
+    props.getContactData(props.userId);
+    props.getOppLinkedWorkflow(props.orgId);
+    props.getOppLinkedStages(props.orgId);
+    props. getCrm();
+  },[]);
+
+
+  // function handletext(e) {
+  //   setText(e.target.value);
+  // }
+  function getStagesOptions(filterOptionKey, filterOptionValue) {
     const StagesOptions =
-      this.props.stages.length &&
-      this.props.stages
+      props.oppLinkStages.length &&
+      props.oppLinkStages
         .filter((option) => {
           if (
             option.opportunityWorkflowDetailsId === filterOptionValue &&
@@ -53,23 +57,31 @@ class UpdateOpportunityForm extends Component {
             return option;
           }
         })
-
+        .sort((a, b) => {
+          if (a.probability < b.probability) {
+            return -1; // Sort in increasing order
+          } else if (a.probability > b.probability) {
+            return 1;
+          } else {
+            return 0;
+          }
+        })
         .map((option) => ({
-          label: option.stageName || "",
+          label: `${option.stageName}  ${option.probability}`,
           value: option.opportunityStagesId,
         }));
 
     return StagesOptions;
   }
-  render() {
-    const salesNameOption = this.props.sales.map((item) => {
+
+    const salesNameOption = props.sales.map((item) => {
       return {
         label: `${item.fullName || ""}`,
         value: item.employeeId,
       };
     });
 
-    const customerNameOption = this.props.customerData
+    const customerNameOption = props.customerData
       .sort((a, b) => {
         const libraryNameA = a.name && a.name.toLowerCase();
         const libraryNameB = b.name && b.name.toLowerCase();
@@ -92,8 +104,8 @@ class UpdateOpportunityForm extends Component {
 
     const getAreaOptions = (filterOptionKey, filterOptionValue) => {
       const contactOptions =
-        this.props.contactData.length &&
-        this.props.contactData
+        props.contactData.length &&
+        props.contactData
           .filter((option) => {
             if (
               option.customerId === filterOptionValue &&
@@ -110,32 +122,50 @@ class UpdateOpportunityForm extends Component {
       return contactOptions;
     };
 
-    const WorkflowOptions = this.props.workflow.map((item) => {
+    const WorkflowOptions = props.oppLinkWorkflow.map((item) => {
       return {
         label: `${item.workflowName || ""}`,
         value: item.opportunityWorkflowDetailsId,
       };
     });
-    const { updateOpportunityById, updateOpportunity, startDate, endDate } =
-      this.props;
+  
+  
+    // const {
+    //   transcript,
+    //   listening,
+    //   resetTranscript,
+    //   browserSupportsSpeechRecognition,
+    // } = useSpeechRecognition();
+  
+    // if (!browserSupportsSpeechRecognition) {
+    //   return <span>Browser doesn't support speech recognition.</span>;
+    // }
 
+    const { updateOpportunityById, updateOpportunity, startDate, endDate } =props;
+    // const [text, setText] = useState("");
+      const [defaultOption, setDefaultOption] = useState(props.setEditingOpportunity.assignedTo);
+      const [selected, setSelected] = useState(defaultOption);
+      const selectedOption = props.sales.find((item) => item.fullName === selected);
     return (
       <>
         <Formik
           initialValues={{
             opportunityName:
-              this.props.setEditingOpportunity.opportunityName || "",
+              props.setEditingOpportunity.opportunityName || "",
             startDate:
-              dayjs(this.props.setEditingOpportunity.startDate) || dayjs(),
-            endDate: dayjs(this.props.setEditingOpportunity.endDate) || dayjs(),
+              dayjs(props.setEditingOpportunity.startDate) || dayjs(),
+            endDate: dayjs(props.setEditingOpportunity.endDate) || dayjs(),
             // endDate: endDate || null,
-
+            oppWorkflow: props.setEditingOpportunity.oppWorkflow || "",
+            oppStage: props.setEditingOpportunity.oppStage || "",
+            
+            // description: props.setEditingOpportunity.description || "",
             proposalAmount:
-              this.props.setEditingOpportunity.proposalAmount || "",
-            currency: this.props.setEditingOpportunity.currency || "",
-            salesUserIds: this.props.setEditingOpportunity.salesUserIds || [],
-            customerId: this.props.setEditingOpportunity.customerId || "",
-            contactId: this.props.setEditingOpportunity.contactId || "",
+              props.setEditingOpportunity.proposalAmount || "",
+            currency: props.setEditingOpportunity.currency || "",
+            salesUserIds: selectedOption ? selectedOption.employeeId:props.setEditingOpportunity.salesUserIds,
+            customerId: props.setEditingOpportunity.customerId || "",
+            contactId: props.setEditingOpportunity.contactId || "",
           }}
           validationSchema={UpdateOpportunitySchema}
           onSubmit={(values, { resetForm }) => {
@@ -212,18 +242,20 @@ class UpdateOpportunityForm extends Component {
 
             let newEndTime = `${finalEndTime}${timeEndPart}`;
 
-            this.props.updateOpportunity(
+            props.updateOpportunity(
               {
                 ...values,
-                opportunityId: this.props.opportunityId,
-                orgId: this.props.organizationId,
-                // customerId: this.props.customerId,
-                userId: this.props.userId,
+                opportunityId: props.opportunityId,
+                orgId: props.organizationId,
+                // description: transcript ? transcript : text,
+                // customerId: props.customerId,
+                userId: props.userId,
                 startDate: `${newStartDate}T00:00:00Z`,
                 endDate: `${newEndDate}T00:00:00Z`,
+                salesUserIds: selectedOption ? selectedOption.employeeId:props.setEditingOpportunity.salesUserIds,
               },
-              this.props.opportunityId,
-              () => this.handleReset(resetForm)
+              props.opportunityId,
+              () => props.handleReset(resetForm)
             );
           }}
         >
@@ -236,9 +268,10 @@ class UpdateOpportunityForm extends Component {
             values,
             ...rest
           }) => (
+            <div class="overflow-y-auto h-[34rem] overflow-x-hidden max-sm:h-[30rem]">
             <Form className="form-background">
-              <div class=" flex justify-between">
-                <div class=" h-full w-1/2">
+              <div class=" flex justify-between max-sm:flex-col">
+                <div class=" h-full w-[47.5%] max-sm:w-wk">
                   <Spacer />
                   <StyledLabel>
                     <Field
@@ -260,8 +293,8 @@ class UpdateOpportunityForm extends Component {
                     />
                   </StyledLabel>
                   <Spacer />
-                  <div class="flex justify-between">
-                    <div class=" w-1/2">
+                  <div class="flex justify-between max-sm:flex-col">
+                    <div class=" w-1/2 max-sm:w-wk">
                       <StyledLabel>
                         <Field
                           isRequired
@@ -280,7 +313,7 @@ class UpdateOpportunityForm extends Component {
                         />
                       </StyledLabel>
                     </div>
-                    <div class=" w-2/5">
+                    <div class=" w-2/5 max-sm:w-wk">
                       <StyledLabel>
                         <Field
                           isRequired
@@ -314,8 +347,8 @@ class UpdateOpportunityForm extends Component {
                     </div>
                   </div>
                   <Spacer />
-                  <div class="flex justify-between">
-                    <div class=" w-1/2">
+                  <div class="flex justify-between max-sm:flex-col">
+                    <div class=" w-1/2 max-sm:w-wk">
                       <StyledLabel>
                         <Field
                           name="proposalAmount"
@@ -333,7 +366,7 @@ class UpdateOpportunityForm extends Component {
                         />
                       </StyledLabel>
                     </div>
-                    <div class=" w-2/5">
+                    <div class=" w-2/5 max-sm:w-wk">
                       <Field
                         name="currency"
                         isColumnWithoutNoCreate
@@ -346,42 +379,130 @@ class UpdateOpportunityForm extends Component {
                         }
                         isColumn
                         defaultValue={{
-                          value: this.props.user.currency,
+                          value: props.user.currency,
                         }}
                         selectType="currencyName"
                         isRequired
                         component={SearchSelect}
                       />
 
-                      <Spacer />
+                    
                     </div>
                   </div>
-                </div>
-                <div class=" h-full w-2/5">
-                  <Spacer />
-                  <StyledLabel>
-                    <Field
-                      isRequired
-                      name="salesUserIds"
-                      // selectType="employee"
-                      isColumnWithoutNoCreate
-                      // label="Assigned to"
-                      label={
-                        <FormattedMessage
-                          id="app.assignedto"
-                          defaultMessage="Assigned to"
-                        />
-                      }
-                      component={SelectComponent}
-                      options={
-                        Array.isArray(salesNameOption) ? salesNameOption : []
-                      }
-                      isColumn
-                      inlineLabel
-                    />
-                  </StyledLabel>
-                  <Spacer />
+                  {/* <Spacer />
+                <StyledLabel>Description</StyledLabel>
+                <div>
+                  <div>
+                    <span onClick={SpeechRecognition.startListening}>
+                      <Tooltip title="Start">
+                        <span style={{ fontSize: "1.5em", color: "red" }}>
+                          <PlayCircleFilledIcon />
+                        </span>
+                      </Tooltip>
+                    </span>
 
+                    <span onClick={SpeechRecognition.stopListening}>
+                      <Tooltip title="Stop">
+                        <span
+                          style={{
+                            fontSize: "1.5em",
+                            color: "green",
+                            marginLeft: "3px",
+                          }}
+                        >
+                          <StopCircleIcon />
+                        </span>
+                      </Tooltip>
+                    </span>
+
+                    <span onClick={resetTranscript}>
+                      <Tooltip title="Clear">
+                        <span style={{ fontSize: "1.5em", marginLeft: "3px" }}>
+                          <RotateRightIcon />
+                        </span>
+                      </Tooltip>
+                    </span>
+                  </div>
+                  <div>
+                    <textarea
+                      name="description"
+                      className="textarea"
+                      type="text"
+                      value={transcript ? transcript : text}
+                      onChange={handletext}
+                    ></textarea>
+                  </div>
+                </div> */}
+                </div>
+                <div class=" h-full w-[47.5%] max-sm:w-wk">
+                <Listbox value={selected} onChange={setSelected}>
+      {({ open }) => (
+        <>
+          <Listbox.Label className="block font-semibold text-[0.75rem] mt-[0.6rem]">Assigned to</Listbox.Label>
+          <div className="relative mt-1">
+              <Listbox.Button style={{boxShadow: "rgb(170, 170, 170) 0px 0.25em 0.62em"}} className="relative w-full leading-4 cursor-default border border-gray-300 bg-white py-0.5 pl-3 pr-10 text-left shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm">
+                {selected}
+              </Listbox.Button>
+              {open && (
+                <Listbox.Options
+                  static
+                  className="absolute z-10 mt-1 max-h-56 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
+                >
+                  {props.crmAllData.map((item) => (
+                    <Listbox.Option
+                      key={item.employeeId}
+                      className={({ active }) =>
+                        `relative cursor-default select-none py-2 pl-3 pr-9 ${
+                          active ? "text-white bg-indigo-600" : "text-gray-900"
+                        }`
+                      }
+                      value={item.empName}
+                    >
+                      {({ selected, active }) => (
+                        <>
+                          <div className="flex items-center">
+                            <span
+                              className={`ml-3 block truncate ${
+                                selected ? "font-semibold" : "font-normal"
+                              }`}
+                            >
+                              {item.empName}
+                            </span>
+                          </div>
+                          {selected && (
+                            <span
+                              className={`absolute inset-y-0 right-0 flex items-center pr-4 ${
+                                active ? "text-white" : "text-indigo-600"
+                              }`}
+                            >
+                              
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                className="h-5 w-5"
+                                viewBox="0 0 20 20"
+                                fill="currentColor"
+                                aria-hidden="true"
+                              >
+                                <path
+                                  fillRule="evenodd"
+                                  d="M6.293 9.293a1 1 0 011.414 0L10 11.586l2.293-2.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z"
+                                  clipRule="evenodd"
+                                />
+                              </svg>
+                            </span>
+                          )}
+                        </>
+                      )}
+                    </Listbox.Option>
+                  ))}
+                </Listbox.Options>
+              )}
+            </div>
+        </>
+      )}
+    </Listbox>
+    <div class="flex justify-between max-sm:flex-col mt-[0.85rem]">       
+    <div class=" w-2/5 max-sm:w-wk">
                   <Field
                     name="customerId"
                     isColumnWithoutNoCreate
@@ -402,9 +523,9 @@ class UpdateOpportunityForm extends Component {
                     value={values.customerId}
                     inlineLabel
                   />
-
+</div>
                   <Spacer />
-
+                  <div class=" w-2/5 max-sm:w-wk">
                   <Field
                     name="contactId"
                     isColumnWithoutNoCreate
@@ -431,10 +552,11 @@ class UpdateOpportunityForm extends Component {
                     value={values.contactId}
                     inlineLabel
                   />
-
+</div>
+     </div>
                   <Spacer />
-                  <div class="flex justify-between">
-                    <div class=" w-1/2">
+                  <div class="flex justify-between max-sm:flex-col">
+                    <div class=" w-1/2 max-sm:w-wk">
                       <StyledLabel>
                         <Field
                           name="oppWorkflow"
@@ -459,7 +581,7 @@ class UpdateOpportunityForm extends Component {
                       </StyledLabel>
                     </div>
                     <Spacer />
-                    <div class=" w-2/5">
+                    <div class=" w-2/5 max-sm:w-wk">
                       <StyledLabel>
                         <Field
                           name="oppStage"
@@ -473,12 +595,12 @@ class UpdateOpportunityForm extends Component {
                           component={SelectComponent}
                           options={
                             Array.isArray(
-                              this.getStagesOptions(
+                             getStagesOptions(
                                 "oppWorkflow",
                                 values.oppWorkflow
                               )
                             )
-                              ? this.getStagesOptions(
+                              ? getStagesOptions(
                                   "oppWorkflow",
                                   values.oppWorkflow
                                 )
@@ -501,7 +623,7 @@ class UpdateOpportunityForm extends Component {
                 </div>
               </div>
               <Spacer />
-              <div class=" flex justify-end">
+              <div class="flex justify-end w-wk bottom-2 mr-2 absolute ">
                 <Button
                   type="primary"
                   htmlType="submit"
@@ -512,24 +634,25 @@ class UpdateOpportunityForm extends Component {
                 </Button>
               </div>
             </Form>
+            </div>
           )}
         </Formik>
       </>
     );
-  }
 }
 
-const mapStateToProps = ({ auth, opportunity, customer, contact }) => ({
+const mapStateToProps = ({ auth, opportunity, customer,leads, contact }) => ({
   user: auth.userDetails,
   userId: auth.userDetails.userId,
   organizationId: auth.userDetails.organizationId,
   setEditingOpportunity: opportunity.setEditingOpportunity,
   updateOpportunityById: opportunity.updateOpportunityById,
   sales: opportunity.sales,
-  workflow: opportunity.workflow,
-  stages: opportunity.stages,
+  oppLinkWorkflow: opportunity.oppLinkWorkflow,
+  oppLinkStages: opportunity.oppLinkStages,
   contactData: contact.contactData,
   customerData: customer.customerData,
+  crmAllData:leads.crmAllData,
   orgId: auth.userDetails.organizationId,
 });
 
@@ -538,10 +661,11 @@ const mapDispatchToProps = (dispatch) =>
     {
       updateOpportunity,
       getAllSalesList,
-      getWorkflow,
-      getStages,
+      getOppLinkedWorkflow,
+      getOppLinkedStages,
       getContactData,
       getCustomerData,
+      getCrm,
     },
     dispatch
   );

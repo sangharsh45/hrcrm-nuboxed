@@ -1,13 +1,24 @@
-import React from "react";
+import React, { Component, Suspense, lazy } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import Button from "antd/lib/button";
 import { Tooltip } from "antd";
 import { handleCallModal } from "../CallAction";
+const CallSharedForm = lazy(() => import("./CallSharedForm"));
+
 
 const CallActionRight = (props) => {
+  const {
+    userId,
+    user,
+    role,
+    handleCustomerModal,
+  } = props;
   return (
     <div class=" flex  items-center">
+       {user.employee_type === "contractor" && user.candiContShareInd === true || user.employee_type === "employee" && user.candiEmpShareInd === true && user.callFullListInd === true &&(
+         <CallSharedForm/>
+         )} 
       <Tooltip placement="left" title="Create">
         <Button
           type="primary"
@@ -21,7 +32,9 @@ const CallActionRight = (props) => {
   );
 };
 
-const mapStateToProps = ({}) => ({});
+const mapStateToProps = ({auth}) => ({
+  user: auth.userDetails,
+});
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {

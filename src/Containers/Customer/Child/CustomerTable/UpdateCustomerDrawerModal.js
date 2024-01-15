@@ -1,24 +1,14 @@
 import React, { Component, Suspense } from "react";
 import { BundleLoader } from "../../../../Components/Placeholder";
 import { connect } from "react-redux";
-import { Tooltip, Icon, Button, Input } from "antd";
 import { getCustomerDetailsById } from "../../CustomerAction";
 import {
-  getCustomerDocument,
   handleUpdateCustomerDrawerModal,
 } from "../../CustomerAction";
 import { setEditCustomer } from "../../CustomerAction";
 import { bindActionCreators } from "redux";
-
 import { StyledDrawer } from "../../../../Components/UI/Antd";
-import { sortedLastIndex } from "lodash";
-import CustomerAddressData from "../CustomerDetail/CustomerAddressData";
-import CustomerExtraDetailView from "../CustomerDetail/CustomerCards/CustomerExtraDetailView";
-import CustomerCardAddress from "../CustomerCardAddress/CustomerCardAddress";
-import CustomerCardDetail from "../CustomerCardAddress/CustomerCardDetail";
-import UpdateCustomerForm from "../UpdateCustomer/UpdateCustomerForm";
 import UpdateCardCustomerForm from "../UpdateCustomer/UpdateCardCustomerForm";
-// import CustomerDetailView from "../CustomerDetail/CustomerCards/CustomerDetailView";
 
 class UpdateCustomerDrawerModal extends Component {
   // componentDidMount() {
@@ -40,7 +30,7 @@ class UpdateCustomerDrawerModal extends Component {
       <div className="pulse-background">
         <StyledDrawer
           title={name}
-          width="45em"
+          width="55em"
           style={{ marginTop: "5rem" }}
           visible={this.props.updateDrawerCustomerModal}
           closable

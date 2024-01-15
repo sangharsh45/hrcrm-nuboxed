@@ -3,12 +3,10 @@ import styled from "styled-components";
 import { Button, Tooltip } from "antd";
 import DeleteIcon from '@mui/icons-material/Delete';
 import BorderColorIcon from '@mui/icons-material/BorderColor';
-import EditableInput from "../../../Components/Forms/Edit/EditableInput";
-import { FlexContainer } from "../../../Components/UI/Layout";
 import { FormattedMessage } from "react-intl";
 import { TextInput } from "../../../Components/UI/Elements";
-import { ActionIcon } from "../../../Components/Utils";
 import ViewEditCard from "../../../Components/UI/Elements/ViewEditCard";
+import TaskConnetToggle from "./TaskConnetToggle";
 
 class SingleTasks extends Component {
   constructor(props) {
@@ -21,7 +19,7 @@ class SingleTasks extends Component {
   }
   render() {
     const {
-      task: { taskType, taskTypeId },
+      task: { taskType, taskTypeId,taskCheckListInd },
       handleChange,
       name,
       value,
@@ -37,9 +35,24 @@ class SingleTasks extends Component {
         <ViewEditCard>
           {({ viewType }, toggleViewType) =>
             viewType === "view" ? (
-              <FlexContainer justifyContent="space-between">
-                <TaskName style={{ flexBasis: "85%" }}>{taskType}</TaskName>
+              <div class=" flex justify-between" >
+                   <div class=" flex w-2/5">
+                <TaskName style={{ flexBasis: "45%" }}>{taskType}</TaskName>
                 <div>
+                  </div>
+                </div>
+                <div class="flex w-60">
+                  <div class="ml-2 w-20">Workflow</div>
+                 
+                  <div class="ml-4 w-20">
+                    <TaskConnetToggle 
+                        taskType={taskType}
+                        taskTypeId={taskTypeId}
+                  taskCheckListInd={taskCheckListInd}
+                    />  
+                    </div>
+                    </div>
+                    <div>
                   {this.props.task.editInd ? (
                     <BorderColorIcon
                    
@@ -71,9 +84,9 @@ class SingleTasks extends Component {
                                style={{ color: "#666" }}
                                  /> */}
                 </div>
-              </FlexContainer>
+              </div>
             ) : (
-              <FlexContainer>
+              <div class=" flex">
                 <TextInput
                   name={name}
                   // value={value || taskType}
@@ -83,7 +96,7 @@ class SingleTasks extends Component {
                 />
                 <br />
                 <br />
-                <div style={{ marginLeft: "auto" }}>
+                <div class=" ml-auto" >
                   <Button
                     type="primary"
                     htmlType="submit"
@@ -102,7 +115,7 @@ class SingleTasks extends Component {
                     <FormattedMessage id="app.cancel" defaultMessage="Cancel" />
                   </Button>
                 </div>
-              </FlexContainer>
+              </div>
             )
           }
         </ViewEditCard>

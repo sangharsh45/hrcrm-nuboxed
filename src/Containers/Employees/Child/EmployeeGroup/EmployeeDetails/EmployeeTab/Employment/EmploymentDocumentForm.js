@@ -16,7 +16,7 @@ import DragableUpload from "../../../../../../../Components/Forms/Formik/Dragabl
 import { SelectComponent } from "../../../../../../../Components/Forms/Formik/SelectComponent";
 import SearchSelect from "../../../../../../../Components/Forms/Formik/SearchSelect";
 import { DatePicker } from "../../../../../../../Components/Forms/Formik/DatePicker";
-import { addEmploymentDetails } from "../../../../../../Profile/ProfileAction";
+import { addEmploymentDetails,getLinkedUsersDocument } from "../../../../../../Profile/ProfileAction";
 import dayjs from "dayjs";
 
 import { getDesignations } from "../../../../../../Settings/Designation/DesignationAction";
@@ -24,9 +24,21 @@ const documentSchema = Yup.object().shape({
   documentId: Yup.string().required("Input needed !"),
 });
 class EmploymentDocumentForm extends Component {
+  componentDidMount() {
+    const { getLinkedUsersDocument ,orgId} = this.props;
+    this.props.getLinkedUsersDocument(this.props.orgId);
+    // getLinkedUsersDocument(orgId);
+   
+}
   render() {
     const { addingEmploymentDetails,startDate,endDate ,employeeId} = this.props;
     console.log(employeeId);
+    const documentNameOption = this.props.linkedUserDocument.map((item) => {
+      return {
+          label: `${item.documentTypeName|| ""}`,
+          value: item.documentTypeId,
+      };
+  });
     return (
       <>
         <Formik
@@ -41,6 +53,7 @@ class EmploymentDocumentForm extends Component {
             endDate: endDate || null,
             endDate: dayjs(),
             // designation: "",
+            documentTypeId: this.props.documentTypeId,
             designationTypeId: this.props.designationTypeId,
             description: "",
             salary: "",
@@ -162,6 +175,33 @@ class EmploymentDocumentForm extends Component {
                     width: "45%",
                     }}
                 >
+                  <div>
+                  <FastField
+                    name="documentTypeId"
+                    type="text"
+                    //label="Type"
+                    label={
+                      <FormattedMessage id="app.type" defaultMessage="Type" />
+                    }
+                    // options={[
+                    //   "Aadhar Card",
+                    //   "Voter-Id Card",
+                    //   "Driving-License",
+                    //   "Pan Card",
+                    //   "Passport",
+                    // ]}
+                    options={
+                      Array.isArray(documentNameOption)
+                        ? documentNameOption
+                        : []
+                    }
+                    component={SelectComponent}
+                    inlineLabel
+                    className="field"
+                    isColumn
+                     />
+                  <Spacer />
+                  </div>
                   <div>
                     <Field
                       isRequired
@@ -407,10 +447,12 @@ const mapStateToProps = ({ employee,auth,profile,designations }) => ({
   employeeId: employee.singleEmployee.employeeId,
   addingEmploymentDetails: profile.addingEmploymentDetails,
   designationTypeId: designations.designationTypeId,
+  linkedUserDocument:profile.linkedUserDocument,
+  orgId: auth.userDetails.organizationId,
 });
 
 const mapDispatchToProps = (dispatch) =>
-  bindActionCreators({ addEmploymentDetails, getDesignations,}, dispatch);
+  bindActionCreators({ addEmploymentDetails,getLinkedUsersDocument, getDesignations,}, dispatch);
 export default connect(
   mapStateToProps,
   mapDispatchToProps

@@ -1,10 +1,11 @@
 import React, { lazy, Suspense } from "react";
-import { FormattedMessage } from "react-intl";
 import { StyledDrawer } from "../../../../Components/UI/Antd";
 import { BundleLoader } from "../../../../Components/Placeholder";
 const UpdateContactForm = lazy(() => import("./UpdateContactForm"));
 
 const UpdateContactModal = props => {
+  const isSmallScreen = window.innerWidth <= 600;
+  const drawerWidth = isSmallScreen ? "90%" : "60%";
   const { updateContactModal, handleUpdateContactModal, ...formProps } = props;
   return (
     <>
@@ -14,12 +15,12 @@ const UpdateContactModal = props => {
         //   defaultMessage="Contact"
         // />}
         title={props.contactData.fullName}
-        width="55%"
+        width={drawerWidth}
         visible={updateContactModal}
         closable
         destroyOnClose
         maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}
-        style={{marginTop:"5rem"}}
+        style={{marginTop:"3rem"}}
         onClose={() => handleUpdateContactModal(false)}
         footer={null}
       >

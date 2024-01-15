@@ -2,26 +2,22 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { FormattedMessage } from "react-intl";
-import { Button, Divider, message,Input } from "antd";
-import { MainWrapper, FlexContainer } from "../../../Components/UI/Layout";
-import { TextInput, Title } from "../../../Components/UI/Elements";
+import { Button, message,Input } from "antd";
+import { MainWrapper, } from "../../../Components/UI/Layout";
+import { TextInput, } from "../../../Components/UI/Elements";
 import SingleEducations from "./SingleEducation";
-// import * as Yup from "yup";
+import { BundleLoader } from "../../../Components/Placeholder";
 import {
   getEducations,
   addEducations,
   removeEducation,
   updateEducations,
-  searchEducationsName
+  searchEducationsName,
+  ClearReducerDataOfEducation
 } from "./EducationAction";
-import axios from "axios";
-import { base_url } from "../../../Config/Auth";
 import moment from "moment";
-import dayjs from "dayjs";
 
-// const SectorsSchema = Yup.object().shape({
-//   sectorName: Yup.string().required("Input needed !"),
-// });
+
 
 class Education extends Component {
   constructor(props) {
@@ -37,6 +33,23 @@ class Education extends Component {
       currentData: ""
     };
   }
+  handleChangeDes = (e) => {
+    this.setState({ currentData: e.target.value });
+  
+    if (e.target.value.trim() === "") {
+      this.setState((prevState) => ({ pageNo: prevState.pageNo + 1 }));
+      this.props.getEducations();
+      this.props.ClearReducerDataOfEducation();
+    }
+  };
+  handleSearch = () => {
+    if (this.state.currentData.trim() !== "") {
+      // Perform the search
+      this.props.searchEducationsName(this.state.currentData);
+    } else {
+      console.error("Input is empty. Please provide a value.");
+    }
+  };
   handleClear = () => {
     this.setState({ currentData: "" });
     this.props.getEducations();
@@ -122,11 +135,11 @@ class Education extends Component {
       singleEducation,
       linkedEducations,
     } = this.state;
-    if (fetchingEducations) return <p>Loading ...</p>;
+    if (fetchingEducations) return <BundleLoader/>;
     if (fetchingEducationsError) return <p>We are unable to load data</p>;
     return (
       <>
-        <FlexContainer flexWrap="nowrap">
+      <div class="flex flex-nowrap" >
           <MainWrapper
             style={{
               flexBasis: "100%",
@@ -135,41 +148,19 @@ class Education extends Component {
               color: "#FFFAFA",
             }}
           >
-            <div style={ {width: "18vw",display:"flex"}} >
-          <Input
-            placeholder="Search by Name"
-            width={"100%"}
-            // onSearch={(value) => {
-            //   props.inputCandidateDataSearch(value);
-            //   props.setCurrentData(value);
-
-            // }}
-            onChange={(e) => this.handleSearchChange(e)}
-            value={this.props.currentData}
+        <div class=" flex w-[18vw]" >
+            <Input
+         placeholder="Search by Name"
+        style={{width:"100%",marginLeft:"0.5rem"}}
+            // suffix={suffix}
+            onPressEnter={this.handleSearch}  
+            onChange={this.handleChangeDes}
+            // value={currentData}
           />
-           <Button
-          type={this.props.currentData ? "primary" : "danger"}
-          onClick={() => {
-            this.props.searchEducationsName(this.state.currentData);
-
-          }}
-        >
-          Submit
-        </Button>
-        &nbsp;
-        <Button
-          type={this.props.currentData ? "primary" : "danger"}
-          onClick={() => {
-            this.handleClear();
-          }}
-        >
-          <FormattedMessage id="app.clear" defaultMessage="Clear" />
-      
-        </Button>
-        </div>
-            <FlexContainer flexDirection="column">
+            </div>
+            <div class=" flex flex-col" >
               <MainWrapper style={{ height: "30em", marginTop: "0.625em" }}>
-                {educations.length &&
+                {educations.length ? (
                   educations.map((education, i) => (
                     <SingleEducations
                       key={i}
@@ -186,18 +177,20 @@ class Education extends Component {
                       setCurrentData={this.setCurrentData}
                       handleDeleteEducation={this.handleDeleteEducation}
                     />
-                  ))}
+                  ))
+                  ) : (
+                    <p>No Data Available</p>
+                  )}
               </MainWrapper>
-            </FlexContainer>
+            </div>
             {isTextInputOpen ? (
-              <FlexContainer
-                alignItems="center"
-                style={{ marginLeft: "0.3125em", marginTop: "0.3125em" }}
-              >
+             <div class=" flex items-center ml-[0.3125em] mt-[0.3125em]"
+            
+             >
                 <br />
                 <br />
                 <TextInput
-                  placeholder="Add More"
+                  placeholder="Add Education"
                   name="educationType"
                   value={educationType}
                   onChange={this.handleChange}
@@ -221,11 +214,11 @@ class Education extends Component {
                   {/* Cancel */}
                   <FormattedMessage id="app.cancel" defaultMessage="Cancel" />
                 </Button>
-              </FlexContainer>
+              </div>
             ) : (
               <>
                 <br />
-                <FlexContainer justifyContent="flex-end">
+                <div class=" flex justify-end" >
                   <Button
                     type="primary"
                     ghost
@@ -239,7 +232,7 @@ class Education extends Component {
                       defaultMessage="Add More"
                     />
                   </Button>
-                </FlexContainer>
+                </div>
               
               </>
             )}
@@ -269,7 +262,7 @@ class Education extends Component {
               </p>
             </FlexContainer>
           </MainWrapper> */}
-        </FlexContainer>
+        </div>
         <h4>Updated on {moment(this.props.educations && this.props.educations.length && this.props.educations[0].updationDate).format("ll")} by {this.props.educations && this.props.educations.length && this.props.educations[0].name}</h4>
       </>
     );
@@ -298,7 +291,8 @@ const mapDispatchToProps = (dispatch) =>
       addEducations,
       removeEducation,
       updateEducations,
-      searchEducationsName
+      searchEducationsName,
+      ClearReducerDataOfEducation
     },
     dispatch
   );

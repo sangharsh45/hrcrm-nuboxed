@@ -112,6 +112,7 @@ class ProfileOverviewView extends Component {
           >
             <div style={{ width: "20%" }}>
               <MultiAvatar
+              // style={{width:"5rem"}}
                 primaryTitle={user.fullName}
                 imageId={user.imageId}
                 imageURL={user.imageURL}

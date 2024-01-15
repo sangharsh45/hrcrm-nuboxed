@@ -98,6 +98,12 @@ export const designationsReducer = (state = initialState, action) => {
         case types.GET_DESIGNATION_SEARCH_FAILURE:
           return { ...state, fetchingDesignationInputSearchDataError: true };
 
+          case types.HANDLE_CLAER_REDUCER_DATA_DESIGNATION:
+            return { ...state, 
+              designations: [], 
+              // deletedTruck: [] 
+            };
+
         default:
             return state;
         }

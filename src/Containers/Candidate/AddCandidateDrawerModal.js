@@ -1,14 +1,15 @@
-import React, { Component,Suspense } from "react";
+import React, { Component,Suspense ,lazy} from "react";
 import { BundleLoader } from "../../Components/Placeholder";
 import { connect } from "react-redux";
-import CandidateTreeMap from "../Candidate/CandidateTreeMap"
-import { getCandidateDocument } from "../Candidate/CandidateAction";
 import { bindActionCreators } from "redux";
-import CandidateDocumentView from "../Candidate/CandidateDocumentView"
 import styled from 'styled-components'
 import { StyledDrawer } from "../../Components/UI/Antd";
-import { sortedLastIndex } from "lodash";
-import { MainWrapper } from "../../Components/UI/Elements";
+const CandidateDocumentView = lazy(() =>
+  import("../Candidate/CandidateDocumentView")
+);
+const CandidateTreeMap = lazy(() =>
+  import("../Candidate/CandidateTreeMap")
+);
 
 
 
@@ -26,13 +27,13 @@ class AddCandidateDrawerModal extends Component {
       <div>
  <StyledDrawer
           title={fullName}
-          width={"40vw"}
+          width={"60%"}
           visible={this.props.addDrawerCandidateModal}
         //   maskClosable={false}
           closable
           placement="right"
           destroyOnClose
-          style={{marginTop:"5rem"}}
+          style={{marginTop:"3rem"}}
           maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}          
         //   onCancel={() => this.props.handleCandidateEmailModal(false)}
         onClose={() => this.props.handleCandidateDrawerModal(false)}

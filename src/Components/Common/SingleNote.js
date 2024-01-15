@@ -1,8 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import dayjs from "dayjs";
 import { SubTitle, Spacer } from "../UI/Elements";
-import Link from "./Link";
 import moment from "moment";
 const NotesWrapper = styled.div``;
 export default function SingleNote(props) {
@@ -28,7 +26,8 @@ export default function SingleNote(props) {
         style={{ color: "#a7b2bc", marginTop: "-0.75em" }}
       >
         <Spacer />
-        {`${moment(creationDate).fromNow()}`}
+        {`${moment(creationDate).fromNow()}`}&nbsp;
+        {props.ownerName}
         {/* <b>
           {userId !== creatorId
             ? ` by ${firstName || ""} ${lastName || ""}`

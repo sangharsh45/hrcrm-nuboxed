@@ -12,20 +12,16 @@ function AssessmentOverView (props) {
 
   return(
       <>
-        <FlexContainer justifyContent="space-between">
-          <FlexContainer
-            justifyContent="flex-start"
-            flexWrap="nowrap"
-            style={{ width: "70%" }}
-          >
-            <div style={{ width: "15%" }}>
+        <div class="flex justify-between">
+          <div class="flex start-0 flex-nowrap w-[70%]">
+            <div class="w-[15%]">
               <MultiAvatar
                 primaryTitle={assessmentByAssessmentId.assessmentName}
                 imageId={assessmentByAssessmentId.imageId}
                 imageURL={assessmentByAssessmentId.imageURL}
               />
             </div>
-            <FlexContainer flexDirection="column" style={{ width: "70%" }}>
+            <div class="flex-col w-[70%]">
               <Title
                 overflow="hidden"
                 textOverflow="ellipsis"
@@ -33,9 +29,9 @@ function AssessmentOverView (props) {
               >
                 {`${assessmentName || ""}`}
               </Title>
-            </FlexContainer>
-          </FlexContainer>
-        </FlexContainer>
+            </div>
+          </div>
+        </div>
       </>
     ); 
 }

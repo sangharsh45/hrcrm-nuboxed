@@ -23,7 +23,7 @@ const AddCustomerUpdateOpportunityModal = (props) => {
         footer={null}
       >
         <Suspense fallback={<BundleLoader />}>
-          <UpdateCustomerOpportunityForm opportunityId={props.opportunityId} /> {" "}
+          <UpdateCustomerOpportunityForm opportunityId={props.opportunityId} {...formProps}/> {" "}
         </Suspense>
       </StyledDrawer>
     </>

@@ -1,22 +1,18 @@
-import React, { useEffect } from "react";
-import { ActionIcon } from "../../../Components/Utils";
-import { FlexContainer } from "../../../Components/UI/Layout";
-import { StyledSelect, StyledRangePicker } from "../../../Components/UI/Antd";
-import { TimeInterval } from "../../../Utils";
-import dayjs from "dayjs";
+import React, {  lazy} from "react";
+import { StyledSelect, } from "../../../Components/UI/Antd";
 import LightbulbIcon from '@mui/icons-material/Lightbulb';
+import QuestionMarkIcon from '@mui/icons-material/QuestionMark';
 import { FormattedMessage } from "react-intl";
 import {
- 
   setDashboardViewType,
 } from "../DashboardAction";
-import { Button, Icon, Tooltip,Badge } from "antd";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { withRouter } from "react-router-dom";
 import { Input,Tag } from "antd";
-import { dashboardReducer } from "../DashboardReducer";
-import { BundleLoader } from "../../../Components/Placeholder";
+import PersonIcon from '@mui/icons-material/Person';
+const DashboardShareForm=lazy(() => import("./DashboardShareForm"));
+
 
 const Option = StyledSelect.Option;
 const { Search } = Input;
@@ -30,14 +26,14 @@ const DashboardActionLeft = (props) => {
   } = props;
  
   return (
-    <FlexContainer alignItems="center">
+    <div class=" flex items-center">
          { user.department=== "Management" && (  
             <>
          
             
             
             
-              <Tag
+              {/* <Tag
                 color={viewType === "ME" ? "#FFA500" : "orange"}
                 style={{
                   cursor: "pointer",                  
@@ -55,49 +51,76 @@ const DashboardActionLeft = (props) => {
                   defaultMessage="My View"
                 />
                 
-              </Tag>
+              </Tag> */}
            
              
              
             
-              <Tag
-                color={viewType === "ALL" ? "#FFA500" : "orange"}
-                style={{
-                  cursor: "pointer",                  
-                  fontWeight: viewType === "ALL" ? "#FFA500" : "orange",
-                  textAlign: "center",
-                  fontFamily:"poppins",
-                  borderColor: "orange",
-                }}
-               onClick={() => setDashboardViewType("ALL")}
-              >
-                <FormattedMessage
-                  id="app.organization"
-                  defaultMessage="Organization"
-                />
-              </Tag>
             
-              {/* <Tooltip
-        title={<FormattedMessage id="app.myTask" defaultMessage="My Task" />}
-      > */}
         <span class=" mr-2 cursor-pointer text-xs"
           onClick={() => props.setDashboardViewType("test")}
           style={{
             color: props.viewType === "test" && "#1890ff",
   
           }}
-        > <LightbulbIcon  />
+        > <PersonIcon/>
         
         </span>
-      {/* </Tooltip> */}
+
+      
            
+{user.recruitOppsInd===true && (
+
+        <span class=" mr-2 cursor-pointer text-xs"
+          onClick={() => props.setDashboardViewType("ques")}
+          style={{
+            color: props.viewType === "ques" && "#1890ff",
+  
+          }}
+        > <QuestionMarkIcon  />
+        
+        </span>
+)}
+
+           
+{user.crmInd===true && (
+
+<span class=" mr-2 cursor-pointer text-xs"
+  onClick={() => props.setDashboardViewType("bulb")}
+  style={{
+    color: props.viewType === "bulb" && "#1890ff",
+
+  }}
+> <LightbulbIcon  />
+
+</span>
+)}
             </>
              )}
 
-            
-         
+{user.dashboardFullListInd===true && (
+              <Tag
+                color={viewType === "ALL" ? "tomato" : "#FFA500"}
+                style={{
+                  cursor: "pointer",                  
+                  fontWeight: viewType === "ALL" ? "tomato" : "#FFA500",
+                  textAlign: "center",
+                  fontFamily:"poppins",
+                  borderColor: "tomato",
+                }}
+               onClick={() => setDashboardViewType("ALL")}
+              >
+                <FormattedMessage
+                  id="app.enterprise"
+                  defaultMessage="Enterprise"
+                />
+              </Tag>
+            )}
+             {viewType==="ALL" && (
+        <DashboardShareForm/>
+        )}
            
-    </FlexContainer>
+    </div>
   );
 };
 const mapStateToProps = ({ account,report, auth,opportunity,dashboard }) => ({
