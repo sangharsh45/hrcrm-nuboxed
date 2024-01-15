@@ -13,8 +13,8 @@ class DeliveryDateModal extends Component {
     return (
       <>
         <StyledDrawer
-          title="Send to production"
-          width="30%"
+          title={`Order No - ${this.props.rowData.newOrderNo} `}
+          width="45%"
           height="45%"
           visible={addDeliverDate}
           destroyOnClose
