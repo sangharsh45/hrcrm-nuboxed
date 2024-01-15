@@ -18,7 +18,7 @@ class OrderNotesForm extends Component {
 
         return (
             <>
-                <div style={{ backgroundColor: "#dcdcdc", height: "275px" }}>
+                <div class="bg-[#dcdcdc] h-[275px]">
                     <NoteForm
                         type={"distributor"}
                         orderId={this.props.particularRowData.orderId}
@@ -30,7 +30,7 @@ class OrderNotesForm extends Component {
                 <br />
 
                 <BorderBox>
-                    <div style={{ height: 200, overflow: "auto", padding: "0.3rem" }}>
+                    <div class="h-[200px] overflow-auto padding-[0.3rem]">
                         {fetchingNotesInOrders ? (
                             <BundleLoader />
                         ) : (
@@ -38,8 +38,8 @@ class OrderNotesForm extends Component {
                                 {notesInOrders &&
                                     notesInOrders.map((item, index) => (
                                         <Timeline.Item
+                                        className="pb-[10px]"
                                             key={index}
-                                            style={{ paddingBottom: "10px" }}
                                         >
                                             <SingleNote {...item} userId={this.props.userId} />
                                         </Timeline.Item>

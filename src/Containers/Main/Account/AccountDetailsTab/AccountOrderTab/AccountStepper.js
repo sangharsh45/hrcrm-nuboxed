@@ -5,9 +5,9 @@ import { Button } from "antd";
 import { bindActionCreators } from "redux";
 import { StyledSteps } from "../../../../../Components/UI/Antd";
 import { PhoneOutlined, UserOutlined } from "@ant-design/icons";
-import { FlexContainer } from "../../../../../Components/UI/Layout";
 import AddOrderInAccount from "./AddOrderInAccount";
 import AccountOrderSecondStep from "./AccountOrderSecondStep";
+import { FormattedMessage } from 'react-intl';
 
 const Step = StyledSteps.Step;
 
@@ -39,12 +39,18 @@ class AccountStepper extends Component {
     render() {
         const steps = [
             {
-                title: 'Order',
+                title: <FormattedMessage
+                id="app.order"
+                defaultMessage="Order"
+               />,
                 icon: <UserOutlined />,
                 content: <AddOrderInAccount distributorId={this.props.distributorId} inspectionRequiredInd={this.props.inspectionRequiredInd} />,
             },
             {
-                title: 'Phone details',
+                title: <FormattedMessage
+                id="app.phonedetails"
+                defaultMessage="Phone details"
+               />,
                 icon: <PhoneOutlined
                     style={{ color: "blue" }}
                 />,
@@ -58,34 +64,39 @@ class AccountStepper extends Component {
             <>
                 <StyledSteps current={current}>
                     <Step
-                        // title={<ShoppingCartOutlined style={{ fontSize: "1.37em" }} />}
                         title={<i class="fas fa-cube" style={{ fontSize: "1.37em" }}></i>}
-                        // type="shopping-cart"
-                        description="Materials"
+                        description={<FormattedMessage
+                            id="app.materials"
+                            defaultMessage="Materials"
+                           />}
                     />
                     <Step
                         title={<UserOutlined style={{ fontSize: "1.37em" }} />}
-                        // type="user"
-                        description="Order details"
+                        description={<FormattedMessage
+                            id="app.orderdetails"
+                            defaultMessage="Order details"
+                           />}
                     />
 
                 </StyledSteps>
                 <div
-                    style={{ minHeight: "50vh" }}
+                    class="min-[50vh]"
                 >{steps[current].content}</div>
-                <FlexContainer justifyContent="flex-end">
+                <div class="flex justify-end">
                     <div className="steps-action">
                         {current < steps.length - 1 && (
                             <>
                                 {current > 1 ? null : (
                                     <>
-                                        <Button
+                                        <Button className="mt-2"
                                             type="primary"
                                             onClick={() => this.next()}
-                                            style={{ marginTop: "7px" }}
-                                        // disabled={this.props.serachedData === null}
-                                        >
-                                            Proceed
+                                           
+                                       >
+                                          <FormattedMessage
+                 id="app.proceed"
+                 defaultMessage="Proceed"
+                />
                                         </Button>
                                     </>
                                 )}
@@ -93,12 +104,15 @@ class AccountStepper extends Component {
                         )}
 
                         {current > 0 && (
-                            <Button style={{ marginTop: "2px" }} onClick={() => this.prev()}>
-                                Previous
+                            <Button className="mt-1"onClick={() => this.prev()}>
+                             <FormattedMessage
+                 id="app.previous"
+                 defaultMessage="Previous"
+                />
                             </Button>
                         )}
                     </div>
-                </FlexContainer>
+                </div>
             </>
         );
     }

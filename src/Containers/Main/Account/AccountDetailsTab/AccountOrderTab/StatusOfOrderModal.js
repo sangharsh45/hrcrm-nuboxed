@@ -1,6 +1,8 @@
 import React, { lazy, Suspense, Component } from "react";
 import { BundleLoader } from "../../../../../Components/Placeholder";
-import { StyledDrawer, StyledModal } from "../../../../../Components/UI/Antd";
+import { StyledDrawer } from "../../../../../Components/UI/Antd";
+import { FormattedMessage } from 'react-intl';
+
 const StatusOfOrder = lazy(() => import("./StatusOfOrder"));
 class StatusOfOrderModal extends Component {
     render() {
@@ -12,13 +14,16 @@ class StatusOfOrderModal extends Component {
         return (
             <>
                 <StyledDrawer
-                    title="Status of Order"
-                    width="70%"
+                    title={<FormattedMessage
+                        id="app.statusoforder"
+                        defaultMessage="Status of Order"
+                       />}
+                    width="60%"
                     visible={addStatusOfOrder}
                     destroyOnClose
                     maskClosable={false}
                     maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}
-                    style={{marginTop:"5rem"}}
+                    style={{marginTop:"3rem"}}
                     onClose={() => handleStatusOfOrder(false)}
                     footer={null}
                 >

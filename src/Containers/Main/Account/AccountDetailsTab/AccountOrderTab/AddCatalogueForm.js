@@ -1,12 +1,13 @@
 import { Field, Form, Formik } from 'formik'
-import React, { useEffect } from 'react'
+import React, { useEffect,lazy,Suspense } from 'react'
 import { SelectComponent } from '../../../../../Components/Forms/Formik/SelectComponent';
 import { InputComponent } from '../../../../../Components/Forms/Formik/InputComponent';
 import { Button } from 'antd';
-import AddCatalogueTable from './AddCatalogueTable'
 import { getAllProductList, saveUnitForCatalogueItem } from "../../AccountAction"
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import { FormattedMessage } from 'react-intl';
+const AddCatalogueTable =lazy(()=>import("./AddCatalogueTable"));
 
 const AddCatalogueForm = (props) => {
     useEffect(() => {
@@ -86,11 +87,14 @@ const AddCatalogueForm = (props) => {
                     ...rest
                 }) => (
                     <Form>
-                        <div style={{ display: "flex", justifyContent: "space-between" }}>
-                            <div style={{ width: "33%" }}>
+<div  class="justify-between flex">
+                            <div class="w-[33%]">
                                 <Field
                                     name="productId"
-                                    label="Items"
+                                    label={<FormattedMessage
+                                        id="app.items"
+                                        defaultMessage="Items"
+                                       />}
                                     isRequired
                                     isColumn
                                     inlineLabel
@@ -106,10 +110,13 @@ const AddCatalogueForm = (props) => {
                                     }}
                                 />
                             </div>
-                            <div style={{ width: "30%" }}>
+                            <div class="w-[30%]">
                                 <Field
                                     name="categoryName"
-                                    label="Category"
+                                    label={<FormattedMessage
+                                        id="app.category"
+                                        defaultMessage="Category"
+                                       />}
                                     disabled
                                     isColumn
                                     inlineLabel
@@ -117,10 +124,13 @@ const AddCatalogueForm = (props) => {
                                     component={InputComponent}
                                 />
                             </div>
-                            <div style={{ width: "30%" }}>
+                            <div class="w-[30%]">
                                 <Field
                                     name="subCategoryName"
-                                    label="Sub Category"
+                                    label={<FormattedMessage
+                                        id="app.subcategory"
+                                        defaultMessage="Sub Category"
+                                       />}
                                     disabled
                                     isColumn
                                     inlineLabel
@@ -129,11 +139,14 @@ const AddCatalogueForm = (props) => {
                                 />
                             </div>
                         </div>
-                        <div style={{ display: "flex", justifyContent: "space-between" }}>
-                            <div style={{ width: "27%" }}>
+                        <div  class="justify-between flex">
+                            <div class="w-[27%]">
                                 <Field
                                     name="attributeName"
-                                    label="Attribute"
+                                    label={<FormattedMessage
+                                        id="app.attribute"
+                                        defaultMessage="Attribute"
+                                       />}
                                     disabled
                                     isColumn
                                     inlineLabel
@@ -141,10 +154,13 @@ const AddCatalogueForm = (props) => {
                                     component={InputComponent}
                                 />
                             </div>
-                            <div style={{ width: "27%" }}>
+                            <div class="w-[27%]">
                                 <Field
                                     name="subAttributeName"
-                                    label="Sub Attribute"
+                                    label={<FormattedMessage
+                                        id="app.subattribute"
+                                        defaultMessage="Sub Attribute"
+                                       />}
                                     disabled
                                     isColumn
                                     inlineLabel
@@ -152,10 +168,13 @@ const AddCatalogueForm = (props) => {
                                     component={InputComponent}
                                 />
                             </div>
-                            <div style={{ width: "27%" }}>
+                            <div class="w-[27%]">
                                 <Field
                                     name="quantity"
-                                    label="Unit"
+                                    label={<FormattedMessage
+                                        id="app.unit"
+                                        defaultMessage="Unit"
+                                       />}
                                     isRequired
                                     isColumn
                                     inlineLabel
@@ -163,26 +182,27 @@ const AddCatalogueForm = (props) => {
                                     component={InputComponent}
                                 />
                             </div>
-                            <div style={{ width: "10%", marginTop: "15px" }}>
+                            <div class="w-[27%] mt-4">
                                 <Button
                                     type="primary"
                                     htmlType="submit"
-                                // loading={props.addingPaidByDistributorId}
                                 >
-                                    Submit
+                                    <FormattedMessage
+                 id="app.submit"
+                 defaultMessage="Submit"
+                />  
                                 </Button>
                             </div>
                         </div>
-
                     </Form>
                 )}
-                {/*  */}
             </Formik>
+            <Suspense fallback={"Loading"}>
             <AddCatalogueTable
                 distributorId={props.distributorId}
                 orderId={props.orderDetailsId}
                 toggle={props.toggle} />
-
+</Suspense>
         </>
     )
 }

@@ -1,4 +1,4 @@
-import React, { useEffect, useState, Suspense } from 'react'
+import React, { useEffect, useState, Suspense,lazy } from 'react'
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import moment from 'moment/moment';
@@ -19,17 +19,19 @@ import {
     handleAccountProduction,
     handleUpdateOrder
 } from "../../AccountAction";
+import { FormattedMessage } from 'react-intl';
 import { Button, Input, Tooltip } from 'antd';
-import AddLocationInOrder from './AddLocationInOrder';
-import AccountOrderDetailsModal from './AccountOrderDetailsModal';
-import StatusOfOrderModal from './StatusOfOrderModal';
-import AddNotesOrderModal from './AddNotesOrderModal';
-import PaidButtonModal from './PaidButtonModal';
 import { MultiAvatar2 } from '../../../../../Components/UI/Elements';
 import { OnlyWrapCard } from '../../../../../Components/UI/Layout';
-import AccountproductionModal from './AccountProductionModal';
 import { BundleLoader } from '../../../../../Components/Placeholder';
-import UpdateOrderModal from './UpdateAccountOrder/UpdateOrderModal';
+
+const AddLocationInOrder =lazy(()=>import('./AddLocationInOrder'));
+const AccountOrderDetailsModal =lazy(()=>import('./AccountOrderDetailsModal'));
+const StatusOfOrderModal =lazy(()=>import('./StatusOfOrderModal'));
+const AddNotesOrderModal =lazy(()=>import('./AddNotesOrderModal'));
+const PaidButtonModal =lazy(()=>import('./PaidButtonModal'));
+const AccountproductionModal =lazy(()=>import('./AccountProductionModal'));
+const UpdateOrderModal =lazy(()=>import('./UpdateAccountOrder/UpdateOrderModal'));
 
 
 const AccountOrderTable = (props) => {
@@ -71,16 +73,54 @@ const AccountOrderTable = (props) => {
             <div className=' flex justify-end sticky top-28 z-auto'>
                 <OnlyWrapCard style={{ backgroundColor: "#E3E8EE" }}>
                     <div className=" flex justify-between w-[80%] pl-9 bg-transparent font-bold sticky top-0 z-10">
-                        {/* <div className=" md:w-[8.1rem]"></div> */}
-                        <div className=" md:w-[7.4rem]">Order No</div>
-                        <div className=" md:w-[5.1rem]">Created</div>
-                        <div className=" md:w-[8.8rem] ">Location</div>
-                        <div className="md:w-[3.8rem]">Units</div>
-                        {/* <div className="md:w-[3.8rem]">AWB</div> */}
-                        <div className="md:w-[2.9rem]">Contact</div>
-                        <div className="md:w-[6.12rem]">Expected Price </div>
-                        <div className="md:w-[4.31rem]">Final Price</div>
-                        <div className="w-[5.8rem]">Revised Price</div>
+                        <div className=" md:w-[7.4rem]">
+                        <FormattedMessage
+                                        id="app.orderno"
+                                        defaultMessage="Order No"
+                                       />
+                            </div>
+                        <div className=" md:w-[5.1rem]">
+                        <FormattedMessage
+                                        id="app.created"
+                                        defaultMessage="Created"
+                                       />
+                            </div>
+                        <div className=" md:w-[8.8rem]">
+                        <FormattedMessage
+                                        id="app.location"
+                                        defaultMessage="Location"
+                                       />
+                            </div>
+                        <div className="md:w-[3.8rem]">
+                        <FormattedMessage
+                                        id="app.units"
+                                        defaultMessage="Units"
+                                       />
+                            </div>
+                        <div className="md:w-[2.9rem]">
+                        <FormattedMessage
+                                        id="app.contact"
+                                        defaultMessage="Contact"
+                                       />
+                            </div>
+                        <div className="md:w-[6.12rem]">
+                        <FormattedMessage
+                                        id="app.expectedprice"
+                                        defaultMessage="Expected Price"
+                                       />
+                            </div>
+                        <div className="md:w-[4.31rem]">
+                        <FormattedMessage
+                                        id="app.finalprice"
+                                        defaultMessage="Final Price"
+                                       />
+                            </div>
+                        <div className="w-[5.8rem]">
+                        <FormattedMessage
+                                        id="app.revisedprice"
+                                        defaultMessage="Revised Price"
+                                       />
+                            </div>
 
                     </div>
                     {/* <InfiniteScroll
@@ -108,63 +148,31 @@ const AccountOrderTable = (props) => {
                                 } `;
                             return (
                                 <div >
-                                    <div className="flex rounded-xl  mt-2 bg-white h-[2.75rem] items-center p-3 "
-                                    // style={{
-                                    //     borderBottom: "3px dotted #515050"
-                                    // }}
-                                    >
+                                    <div className="flex rounded-xl  mt-2 bg-white h-[2.75rem] items-center p-3">
                                         <div class="flex w-3/4">
                                             <div className=" flex font-medium flex-col md:w-[1.56rem] max-sm:w-full  ">
-
-
                                                 <Tooltip>
                                                     <div class="flex max-sm:flex-row justify-between w-full md:flex-col">
-                                                        {/* <h4 class=" text-xs text-cardBody font-poppins max-sm:hidden">
-                                            Name
-                                            </h4> */}
                                                         <h4 class=" text-sm text-blue-500 text-cardBody font-poppins font-semibold  cursor-pointer">
 
                                                             {item.priority === "High" && (
                                                                 <div
-                                                                    style={{
-                                                                        borderRadius: "50%",
-                                                                        height: "1.5625em",
-                                                                        width: "1.5625em",
-                                                                        backgroundColor: "red",
-                                                                    }}
-                                                                ></div>
+                                                                class="border rounded-[50%] h-[1.5625rem] w-[1.5625rem] bg-[red]"></div>
                                                             )}
                                                             {item.priority === "Medium" && (
                                                                 <div
-                                                                    style={{
-                                                                        borderRadius: "50%",
-                                                                        height: "1.5625em",
-                                                                        width: "1.5625em",
-                                                                        backgroundColor: "orange",
-                                                                    }}
-                                                                ></div>)}
+                                                                class="border rounded-[50%] h-[1.5625rem] w-[1.5625rem] bg-[orange]"></div>)}
                                                             {item.priority === "Low" && (
-                                                                <div
-                                                                    style={{
-                                                                        borderRadius: "50%",
-                                                                        height: "1.5625em",
-                                                                        width: "1.5625em",
-                                                                        backgroundColor: "teal",
-                                                                    }}
-                                                                ></div>)}
-
+                                                                <div class="border rounded-[50%] h-[1.5625rem] w-[1.5625rem] bg-[teal]"></div>)}
                                                         </h4>
                                                     </div>
                                                 </Tooltip>
-
                                             </div>
 
-                                            <div className=" flex font-medium flex-col  md:w-[7.4rem] max-sm:flex-row w-full max-sm:justify-between  ">
-
-                                                {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden"> Sector </h4> */}
+                                            <div className=" flex font-medium flex-col  md:w-[7.4rem] max-sm:flex-row w-full max-sm:justify-between">                                                
                                                 <h4 class=" text-xs text-cardBody font-poppins">
                                                     <span
-                                                        style={{ textDecoration: "underline", cursor: "pointer", color: "#1890ff" }}
+                                                    class="underline cursor-pointer text-[#1890ff]"
                                                         onClick={() => {
                                                             handleSetParticularOrderData(item);
                                                             props.handleOrderDetailsModal(true);
@@ -173,12 +181,11 @@ const AccountOrderTable = (props) => {
                                                     &nbsp;&nbsp;
                                                     {date === currentdate ? (
                                                         <span
-                                                            style={{
-                                                                color: "tomato",
-                                                                fontWeight: "bold",
-                                                            }}
-                                                        >
-                                                            New
+                                                        class="text-[tomato] font-bold">
+                                                           {<FormattedMessage
+                                        id="app.new"
+                                        defaultMessage="New"
+                                       />} 
                                                         </span>
                                                     ) : null}
                                                 </h4>
@@ -188,21 +195,18 @@ const AccountOrderTable = (props) => {
 
 
                                             <div className=" flex font-medium flex-col md:w-[6.2rem] max-sm:flex-row w-full max-sm:justify-between ">
-                                                {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden"># Opportunity</h4> */}
-
                                                 <div class=" text-xs text-cardBody font-poppins text-center">
                                                     <MultiAvatar2
                                                         primaryTitle={item.userName}
-                                                        // imageId={item.ownerImageId}
                                                         imageURL={item.imageURL}
-                                                        imgWidth={"1.8em"}
-                                                        imgHeight={"1.8em"}
+                                                        imgWidth={"1.8rem"}
+                                                        imgHeight={"1.8rem"}
                                                     />
 
                                                 </div>
                                             </div>
                                             <div className=" flex font-medium flex-col md:w-[10.1rem] max-sm:flex-row w-full max-sm:justify-between ">
-                                                {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden">Pipeline Value</h4> */}
+                                               
 
                                                 <div class=" text-xs text-cardBody font-poppins text-center">
                                                     {item.type === "Catalogue" ?
@@ -212,7 +216,6 @@ const AccountOrderTable = (props) => {
                                             </div>
 
                                             <div className=" flex font-medium flex-col md:w-[11.5rem] max-sm:flex-row w-full max-sm:justify-between ">
-                                                {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden">Weighted Value</h4> */}
 
                                                 <div class=" text-xs text-cardBody font-poppins text-center">
                                                     {item.count}
@@ -222,19 +225,13 @@ const AccountOrderTable = (props) => {
 
 
 
-                                            {/* <div className=" flex font-medium flex-col  md:w-[5.5rem] max-sm:flex-row w-full max-sm:justify-between  ">
-                                          <h4 class=" text-xs text-cardBody font-poppins">
-                                                    {item.awbNo}
-                                                </h4>
-
-                                            </div> */}
+                                          
                                             <div className=" flex font-medium flex-col  md:w-[7.3rem] max-sm:flex-row w-full max-sm:justify-between  ">
 
-                                                {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden"> Sector </h4> */}
+                                               
                                                 <h4 class=" text-xs text-cardBody font-poppins">
                                                     <MultiAvatar2
                                                         primaryTitle={item.contactPersonName}
-                                                        // imageId={item.ownerImageId}
                                                         imageURL={item.imageURL}
                                                         imgWidth={"1.8em"}
                                                         imgHeight={"1.8em"}
@@ -246,7 +243,7 @@ const AccountOrderTable = (props) => {
 
                                             <div className=" flex font-medium flex-col  md:w-[3.5rem] max-sm:flex-row w-full max-sm:justify-between  ">
 
-                                                {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden"> Sector </h4> */}
+                                            
                                                 <h4 class=" text-xs text-cardBody font-poppins">
                                                     {item.expectedPrice}
                                                 </h4>
@@ -254,7 +251,7 @@ const AccountOrderTable = (props) => {
                                             </div>
                                             <div className=" flex font-medium flex-col  md:w-[4.7rem] max-sm:flex-row w-full max-sm:justify-between  ">
 
-                                                {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden"> Sector </h4> */}
+                                                
                                                 <h4 class=" text-xs text-cardBody font-poppins">
                                                     {item.suggestedPrice}
                                                 </h4>
@@ -264,7 +261,7 @@ const AccountOrderTable = (props) => {
 
                                             <div className=" flex font-medium flex-col  md:w-[3.9rem] max-sm:flex-row w-full max-sm:justify-between  ">
 
-                                                {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden"> Sector </h4> */}
+                                               
                                                 <h4 class=" text-xs text-cardBody font-poppins">
                                                     {visible && (item.orderId === particularRowData.orderId) ?
                                                         <Input
@@ -287,29 +284,42 @@ const AccountOrderTable = (props) => {
                                                         <div className=" flex justify-between flex-col">
                                                             <Button onClick={() => {
                                                                 handleSubmitPrice()
-                                                            }} >Save</Button>
-                                                            <Button onClick={() => handleUpdateRevisePrice(false)}>Cancel</Button>
+                                                            }} >
+                                                               <FormattedMessage
+                 id="app.save"
+                 defaultMessage="Save"
+                />    
+                                                                </Button>
+                                                            <Button onClick={() => handleUpdateRevisePrice(false)}><FormattedMessage
+                                                             id="app.cancel"
+                 defaultMessage="Cancel"
+                /></Button>
                                                         </div>
                                                     </>
-                                                ) : item.qcStartInd === 3 && item.priceConfirmInd === false ? <Tooltip title="Update Revised Price">
+                                                ) : item.qcStartInd === 3 && item.priceConfirmInd === false ? <Tooltip title={<FormattedMessage
+                                                    id="app.updaterevisedprice"
+                                                    defaultMessage="Update Revised Price"
+                                                   />}>
                                                     <BorderColorOutlined
                                                         onClick={() => {
                                                             handleUpdateRevisePrice()
                                                             handleSetParticularOrderData(item)
                                                         }}
-                                                        style={{ cursor: "pointer", fontSize: "1rem", }} />
+                                                        style={{cursor:"pointer",fontSize: "1rem"}} />
                                                 </Tooltip> : null}
 
                                             </h4>
 
                                         </div>
                                         <div className=" flex font-medium flex-col  md:w-[1rem] max-sm:flex-row w-full max-sm:justify-between  ">
-
-                                            {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden"> Sector </h4> */}
                                             <h4 class=" text-xs text-cardBody font-poppins">
-                                                <Tooltip title="Notes">
+                                                <Tooltip title={<FormattedMessage
+                                        id="app.notes"
+                                        defaultMessage="Notes"
+                                       />}>
                                                     <NoteAltIcon
-                                                        style={{ cursor: "pointer", color: "green", fontSize: "1rem" }}
+                                                        class="cursor-pointer"
+                                                        style={{ color: "green", fontSize: "1rem" }}
                                                         onClick={() => {
 
                                                             props.handleNotesModalInOrder(true);
@@ -324,12 +334,14 @@ const AccountOrderTable = (props) => {
 
 
                                         <div className=" flex font-medium flex-col  md:w-[1rem] max-sm:flex-row w-full max-sm:justify-between  ">
-
-                                            {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden"> Sector </h4> */}
                                             <h4 class=" text-xs text-cardBody font-poppins">
-                                                <Tooltip title="Status">
+                                                <Tooltip title={<FormattedMessage
+                                        id="app.status"
+                                        defaultMessage="Status"
+                                       />}>
                                                     <EventRepeatIcon
-                                                        style={{ cursor: "pointer", fontSize: "1rem", }}
+                                                    class="cursor-pointer"
+                                                    style={{fontSize: "1rem"}}
                                                         onClick={() => {
                                                             props.handleStatusOfOrder(true);
                                                             handleSetParticularOrderData(item);
@@ -340,17 +352,16 @@ const AccountOrderTable = (props) => {
 
                                         </div>
                                         <div className=" flex font-medium flex-col  md:w-[1rem] max-sm:flex-row w-full max-sm:justify-between  ">
-
-                                            {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden"> Sector </h4> */}
                                             <h4 class=" text-xs text-cardBody font-poppins">
                                                 <Tooltip title="Collection">
                                                     <PaidIcon
-                                                        style={{ cursor: "pointer", fontSize: "1rem", }}
+                                                    class="cursor-pointer"
+                                                    style={{fontSize: "1rem"}}
                                                         onClick={() => {
                                                             props.handlePaidModal(true);
                                                             handleSetParticularOrderData(item);
                                                         }}
-                                                    // style={{ color: "blue" }}
+                                 
                                                     />
                                                 </Tooltip>
 
@@ -360,20 +371,24 @@ const AccountOrderTable = (props) => {
 
 
                                         <div className=" flex font-medium flex-col  md:w-[6.7rem] max-sm:flex-row w-full max-sm:justify-between  ">
-
-                                            {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden"> Sector </h4> */}
                                             {props.inspectionRequiredInd ?
                                                 <h4 class=" text-xs text-cardBody font-poppins">
                                                     {item.transferInd === 0 ? (
                                                         <Tooltip title="Send To Refurbish">
                                                             <Button
-                                                                style={{ cursor: "pointer", fontSize: "13px", backgroundColor: "#3096e9", color: "white" }}
+                                                            class="cursor-pointer bg-[#3096e9] text-white"
+                                                            style={{fontSize: "13px"}}
+                                                                // style={{ fontSize: "13px", backgroundColor: "#3096e9", color: "white" }}
                                                                 onClick={() => {
                                                                     handleSetParticularOrderData(item);
                                                                     props.handleAccountProduction(true);
                                                                 }}
                                                             >
-                                                                Send To Store
+                                                                <FormattedMessage
+                                        id="app.sendtostore"
+                                        defaultMessage="Send To Store"
+                                       />
+                                                                
                                                             </Button>
                                                         </Tooltip>
 
@@ -383,7 +398,10 @@ const AccountOrderTable = (props) => {
                                                 :
                                                 <h4 class=" text-xs text-cardBody font-poppins">
                                                     {item.transferInd === 0 ? (
-                                                        <Tooltip title="Add Inventory Location">
+                                                        <Tooltip title={<FormattedMessage
+                                                        id="app.addinventorylocation"
+                                                        defaultMessage="Add Inventory Location"
+                                                       />}>
                                                             <Button
                                                                 style={{ cursor: "pointer", fontSize: "13px", backgroundColor: "#3096e9", color: "white" }}
                                                                 onClick={() => {
@@ -391,7 +409,11 @@ const AccountOrderTable = (props) => {
                                                                     props.handleInventoryLocationInOrder(true);
                                                                 }}
                                                             >
-                                                                Order Pickup
+                                                                <FormattedMessage
+                                        id="app.orderpickup"
+                                        defaultMessage="Order Pickup"
+                                       />
+                                                                
                                                             </Button>
                                                         </Tooltip>
 
@@ -402,10 +424,11 @@ const AccountOrderTable = (props) => {
 
                                         </div>
                                         <div className=" flex font-medium flex-col  md:w-[1rem] max-sm:flex-row w-full max-sm:justify-between  ">
-
-                                            {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden"> Sector </h4> */}
                                             <h4 class=" text-xs text-cardBody font-poppins">
-                                                <Tooltip title="Update Order">
+                                                <Tooltip title={<FormattedMessage
+                                        id="app.updateorder"
+                                        defaultMessage="Update Order"
+                                       />}>
                                                     <BorderColorOutlined
                                                         onClick={() => {
                                                             props.handleUpdateOrder(true)
@@ -417,11 +440,12 @@ const AccountOrderTable = (props) => {
                                             </h4>
 
                                         </div>
-                                        <div className=" flex font-medium flex-col  md:w-[1rem] max-sm:flex-row w-full max-sm:justify-between  ">
-
-                                            {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden"> Sector </h4> */}
+                                        <div className=" flex font-medium flex-col  md:w-[1rem] max-sm:flex-row w-full max-sm:justify-between">
                                             <h4 class=" text-xs text-cardBody font-poppins">
-                                                <Tooltip title="Rating">
+                                                <Tooltip title={<FormattedMessage
+                                        id="app.rating"
+                                        defaultMessage="Rating"
+                                       />}>
                                                     <StarBorderIcon
                                                         style={{ cursor: "pointer", fontSize: "1rem", }} />
                                                 </Tooltip>
@@ -430,10 +454,11 @@ const AccountOrderTable = (props) => {
 
                                         </div>
                                         <div className=" flex font-medium flex-col  md:w-[1rem] max-sm:flex-row w-full max-sm:justify-between  ">
-
-                                            {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden"> Sector </h4> */}
                                             <h4 class=" text-xs text-cardBody font-poppins">
-                                                <Tooltip title="Feedback">
+                                                <Tooltip title={<FormattedMessage
+                                        id="app.feedback"
+                                        defaultMessage="Feedback"
+                                       />}>
                                                     <FeedbackIcon
                                                         style={{ cursor: "pointer", fontSize: "1rem", }} />
                                                 </Tooltip>
@@ -451,7 +476,6 @@ const AccountOrderTable = (props) => {
                             )
                         })}
                     </div>
-                    {/* </InfiniteScroll> */}
                 </OnlyWrapCard>
             </div>
             <Suspense fallback={<BundleLoader />}>

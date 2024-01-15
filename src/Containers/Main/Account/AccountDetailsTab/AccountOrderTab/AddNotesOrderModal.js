@@ -1,8 +1,7 @@
-import React, { lazy, Suspense, useEffect } from "react";
+import React, { lazy, Suspense } from "react";
 import { StyledDrawer } from "../../../../../Components/UI/Antd";
 import { BundleLoader } from "../../../../../Components/Placeholder";
-import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
+import { FormattedMessage } from 'react-intl';
 
 const OrderNotesForm = lazy(() => import("./OrderNotesForm"));
 
@@ -11,13 +10,15 @@ const AddNotesOrderModal = (props) => {
   return (
     <>
       <StyledDrawer
-        title={`Notes`}
-        width="64%"
+        title={<FormattedMessage
+          id="app.notes"
+          defaultMessage="Notes"
+         />}
+        width="60%"
         visible={props.addNotesInOrder}
-        // maskClosable={false}
         destroyOnClose
         maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}
-        style={{marginTop:"5rem"}}
+        style={{marginTop:"3rem"}}
         onClose={() => props.handleNotesModalInOrder(false)}
         footer={null}
       >
