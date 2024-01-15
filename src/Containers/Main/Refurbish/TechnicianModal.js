@@ -1,27 +1,27 @@
 import React, { Suspense, lazy } from "react";
-import { StyledModal } from "../../../Components/UI/Antd";
+import { StyledDrawer } from "../../../Components/UI/Antd";
 import { BundleLoader } from "../../../Components/Placeholder";
-const TechnicianListByOrderId = lazy(() => import("./TechnicianListByOrderId"));
+const OrderQCandRepairHistory = lazy(() => import("./OrderQCandRepairHistory"));
 
 const TechnicianModal = (props) => {
     const { showTechnicianModal, handleTechnicianModal, ...formProps } = props;
     return (
         <>
-            <StyledModal
-                title="Technician"
+            <StyledDrawer
+                title="Order History"
                 width="60%"
                 visible={showTechnicianModal}
                 closable
                 destroyOnClose
                 maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}
                 style={{ top: 40 }}
-                onCancel={() => handleTechnicianModal(false)}
+                onClose={() => handleTechnicianModal(false)}
                 footer={null}
             >
                 <Suspense fallback={<BundleLoader />}>
-                    <TechnicianListByOrderId rowData={props.rowData} />
+                    <OrderQCandRepairHistory rowData={props.rowData} />
                 </Suspense>
-            </StyledModal>
+            </StyledDrawer>
         </>
     );
 };

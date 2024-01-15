@@ -16,7 +16,7 @@ function AddPhoneExcel(props) {
         <>
             <Formik
                 initialValues={{
-                    orderPhoneId: props.orderDetailsId,
+                    orderPhoneId: props.orderDetailsId.orderId,
                     excelId: "",
                     userId: props.userId,
                     distributorId: props.distributorId,

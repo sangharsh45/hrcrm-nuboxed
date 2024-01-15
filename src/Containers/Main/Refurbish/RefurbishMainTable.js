@@ -498,7 +498,7 @@ import moment from "moment";
 // import ProductionNotesModal from "./ProductionNotesModal";
 import AssignOrderModal from "./AssignOrderModal";
 import { EditFilled, HistoryOutlined, PhoneFilled } from "@ant-design/icons";
-// import TechnicianModal from "./child/ProductionModal/TechnicianModal";
+import TechnicianModal from "./TechnicianModal";
 // import UserPhoneModal from "./child/ProductionModal/UserPhoneModal";
 // import ProductionOrderModal from "./child/ProductionModal/ProductionOrderModal";
 import AddAssignRepairModal from "./AddAssignRepairModal";
@@ -620,17 +620,14 @@ const ProductionOrderList = (props) => {
                         <div className="md:w-[4.8rem]">Remaining</div>
                         <div className="md:w-[6.2rem]">Expected Price</div>
                         <div className="md:w-[5.9rem]">Delivery Date</div>
-                        <div className="md:w-[4.7rem]">Final Price</div>
                         <div className="md:w-[7.2rem]"></div>
                     </div>
                     {data.map((item) => {
                         const currentdate = moment().format("DD/MM/YYYY");
-                        const date = moment(item.creationDate).format("DD/MM/YYYY");
+                        const date = moment(item.createAt).format("DD/MM/YYYY");
                         return (
                             <div>
-                                <div className="flex rounded-xl justify-between mt-4 bg-white h-12 items-center p-3 "
-
-                                >
+                                <div className="flex rounded-xl justify-between mt-4 bg-white h-12 items-center p-3 " >
                                     <div class="flex">
                                         <div className=" flex font-medium  md:w-[7.9rem] max-sm:w-full  ">
                                             <span
@@ -728,7 +725,8 @@ const ProductionOrderList = (props) => {
                                                             handleRowData(item);
                                                         }}
                                                     >Assign For QC </Button>
-                                                </Tooltip> : item.qcStartInd === 2 ? <b>Assigned To Technician</b> : item.qcStartInd === 3 ? <b>QC Completed on {moment(item.qcEndTime).format("DD-MM-YYYY")}</b> : null}
+                                                </Tooltip> : item.qcStartInd === 2 ? <b>Assigned To Technician</b>
+                                                    : item.qcStartInd === 3 ? <b style={{ color: "deepgreen" }}>QC on {moment(item.qcEndTime).format("DD-MM-YYYY")}</b> : null}
                                         </div>
                                     </div>
                                     <div className=" flex font-medium  md:w-[6.2rem] max-sm:flex-row w-full max-sm:justify-between ">
@@ -746,7 +744,8 @@ const ProductionOrderList = (props) => {
                                                         }}
                                                     >Assign For Repair</Button>
                                                 </Tooltip>
-                                                : item.qcRepairInd === 3 ? <b>Repair Completed on {moment(item.repairEndTime).format("DD-MM-YYYY")}</b> : null}
+                                                : item.qcRepairInd === 2 ? <b>Assigned To Technician</b>
+                                                    : item.qcRepairInd === 3 ? <b style={{ color: "deepgreen" }}>Repair on {moment(item.repairEndTime).format("DD-MM-YYYY")}</b> : null}
                                         </div>
                                     </div>
                                     <div className=" flex font-medium  md:w-[2rem] max-sm:flex-row w-full max-sm:justify-between ">
@@ -775,18 +774,7 @@ const ProductionOrderList = (props) => {
                                             </Tooltip>
                                         </div>
                                     </div>
-                                    <div className=" flex font-medium  md:w-[2rem] max-sm:flex-row w-full max-sm:justify-between ">
-                                        <div class=" text-xs text-cardBody font-poppins text-center">
-                                            <Tooltip title="Phone List">
-                                                <PhoneFilled
-                                                    onClick={() => {
-                                                        props.handlePhoneByTechnician(true)
-                                                        handleRowData(item);
-                                                    }}
-                                                />
-                                            </Tooltip>
-                                        </div>
-                                    </div>
+
                                 </div>
                             </div>
                         )
@@ -810,6 +798,11 @@ const ProductionOrderList = (props) => {
                     rowData={rowData}
                     productBuilderList={props.productBuilderList}
                     handleProductBuilder={props.handleProductBuilder} />
+                <TechnicianModal
+                    handleTechnicianModal={props.handleTechnicianModal}
+                    showTechnicianModal={props.showTechnicianModal}
+                    rowData={rowData}
+                />
             </div>
         </>
     )

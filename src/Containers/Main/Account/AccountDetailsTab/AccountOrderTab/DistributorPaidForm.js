@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Button, message } from "antd";
@@ -8,15 +8,33 @@ import { FlexContainer } from "../../../../../Components/UI/Layout";
 import { DatePicker } from "../../../../../Components/Forms/Formik/DatePicker";
 import { Spacer, StyledTextarea } from "../../../../../Components/UI/Elements";
 import { InputComponent } from "../../../../../Components/Forms/Formik/InputComponent";
-import { addPaidOrder } from "../../../Account/AccountAction";
+import { addPaidOrder, getPaymentMode } from "../../../Account/AccountAction";
 import * as Yup from "yup";
 import moment from "moment";
 import { TextareaComponent } from "../../../../../Components/Forms/Formik/TextareaComponent";
 import { FormattedMessage } from "react-intl";
+import { getCurrency } from "../../../../Auth/AuthAction";
 import DragableUpload from "../../../../../Components/Forms/Formik/DragableUpload";
 
 function DistributorPaidForm(props) {
   const { userId } = props;
+
+  const currencyOption = props.currencies.map((item) => {
+    return {
+      label: item.currencyName || "",
+      value: item.currencyId,
+    };
+  });
+  const payOption = props.paymentModee.map((item) => {
+    return {
+      label: item.currencyName || "",
+      value: item.currencyId,
+    };
+  });
+  useEffect(() => {
+    props.getCurrency();
+    props.getPaymentMode(props.orgId)
+  }, [])
 
   return (
     <>
@@ -29,7 +47,10 @@ function DistributorPaidForm(props) {
           remarks: "",
           docId: "",
           userId: props.userId,
+          orderPaymentType: "PhonePayment",
           transactionNumber: "",
+          orderCurrencyId: "",
+          paymentMode: "",
           approveByFinanceInd: false,
           orderId: props.particularRowData.orderId,
         }}
@@ -65,7 +86,7 @@ function DistributorPaidForm(props) {
                 }}
               >
                 <FlexContainer justifyContent="space-between">
-                  <div style={{ width: "47%" }}>
+                  <div style={{ width: "31%" }}>
                     <Field
                       name="paymentAmount"
                       label="Amount"
@@ -75,10 +96,25 @@ function DistributorPaidForm(props) {
                       width={"100%"}
                       component={InputComponent}
                       value={values.paymentAmount}
-
                     />
                   </div>
-                  <div style={{ width: "47%" }}>
+                  <div style={{ width: "31%" }}>
+                    <FastField
+                      name="orderCurrencyId"
+                      label={
+                        <FormattedMessage
+                          id="app.currency"
+                          defaultMessage="currency"
+                        />
+                      }
+
+                      isColumn
+                      inlineLabel
+                      component={SelectComponent}
+                      options={Array.isArray(currencyOption) ? currencyOption : []}
+                    />
+                  </div>
+                  <div style={{ width: "31%" }}>
                     <Field
                       name="date"
                       label="Date "
@@ -125,7 +161,7 @@ function DistributorPaidForm(props) {
                       inlineLabel
                       width={"100%"}
                       component={SelectComponent}
-                      options={["Cash", " Credit-Card", "Net Banking", "UPI"]}
+                      options={Array.isArray(payOption) ? payOption : []}
                       style={{
                         //   flexBasis: "83%",
                         //   marginTop: "0px",
@@ -183,14 +219,19 @@ function DistributorPaidForm(props) {
 
 const mapStateToProps = ({ auth, distributor }) => ({
   userId: auth.userDetails.userId,
+  paymentModee: distributor.paymentModee,
   distributorId: distributor.distributorDetailsByDistributorId.distributorId,
   addingPaidByDistributorId: distributor.addingPaidByDistributorId,
+  currencies: auth.currencies,
+  orgId: auth.userDetails.organizationId,
 });
 
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
       addPaidOrder,
+      getCurrency,
+      getPaymentMode
     },
     dispatch
   );

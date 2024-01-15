@@ -113,7 +113,7 @@ class AccountContactTable extends Component {
 
 
                                             <div class=" text-xs text-cardBody font-poppins text-center">
-                                                {item.departmentName}
+                                                {item.departmentId}
 
                                             </div>
                                         </div>

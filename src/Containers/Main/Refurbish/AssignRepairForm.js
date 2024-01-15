@@ -5,6 +5,8 @@ import { getDepartments } from "../../Settings/Department/DepartmentAction"
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { getProductionUsersById, getRepairPhoneById, UpdateTechnicianForRepairPhone } from "./RefurbishAction"
+import QRCodeModal from '../../../Components/UI/Elements/QRCodeModal'
+import { SubTitle } from '../../../Components/UI/Elements'
 const { Option } = Select;
 const AssignRepairForm = (props) => {
     const [user, setUser] = useState("")
@@ -48,24 +50,79 @@ const AssignRepairForm = (props) => {
     }
     const column = [
         {
-            width: "2%"
+            title: "",
+            dataIndex: "",
+            width: "1%",
         },
         {
-            width: "25%",
+            title: "Company",
             dataIndex: "company",
-            title: "Phone"
+            width: "10%",
+
         },
         {
-            dataIndex: "model",
-            width: "25%",
             title: "Model",
+            dataIndex: "model",
+            width: "9%",
         },
         {
-            dataIndex: "imei",
-            width: "25%",
             title: "IMEI",
+            dataIndex: "imei",
+            width: "8%",
         },
-    ]
+        {
+            title: "OS",
+            dataIndex: "os",
+            width: "8%",
+
+        },
+        {
+            title: "GB",
+            dataIndex: "gb",
+            width: "8%",
+        },
+        {
+            title: "Color",
+            dataIndex: "color",
+            width: "10%",
+        },
+        {
+            title: "Condition",
+            dataIndex: "conditions",
+            width: "10%",
+        },
+        {
+            title: "QR",
+            width: "8%",
+            render: (name, item, i) => {
+                return (
+                    <SubTitle>
+                        {item.qrCodeId ? (
+                            <QRCodeModal
+                                qrCodeId={item.qrCodeId ? item.qrCodeId : ''}
+                                imgHeight={"2.8em"}
+                                imgWidth={"2.8em"}
+                                imgRadius={20}
+                            />
+                        ) : (
+                            <span style={{ fontSize: "0.6em", fontWeight: "bold" }}>
+                                No QR
+                            </span>
+                        )}
+                    </SubTitle>
+                );
+            },
+        },
+
+        {
+            title: "Received by",
+            width: "9%",
+            dataIndex: "receivePhoneUserName"
+        },
+
+
+    ];
+
 
     return (
         <div>

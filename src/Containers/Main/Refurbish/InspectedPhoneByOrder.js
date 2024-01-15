@@ -7,7 +7,6 @@ import { Button, Tooltip } from "antd";
 import { MultiAvatar, SubTitle } from "../../../Components/UI/Elements";
 import QRCodeModal from "../../../Components/UI/Elements/QRCodeModal";
 
-
 function InspectedPhoneByOrder(props) {
     // useEffect(() => {
     //     props.getNoOfPhoneById(props.rowData.orderPhoneId)
@@ -117,28 +116,28 @@ function InspectedPhoneByOrder(props) {
             width: "10%",
         },
 
-        // {
-        //     title: "QR",
-        //     width: "5%",
-        //     render: (name, item, i) => {
-        //         return (
-        //             <SubTitle>
-        //                 {item.qrCodeId ? (
-        //                     <QRCodeModal
-        //                         qrCodeId={item.qrCodeId ? item.qrCodeId : ''}
-        //                         imgHeight={"2.8em"}
-        //                         imgWidth={"2.8em"}
-        //                         imgRadius={20}
-        //                     />
-        //                 ) : (
-        //                     <span style={{ fontSize: "0.6em", fontWeight: "bold" }}>
-        //                         No QR
-        //                     </span>
-        //                 )}
-        //             </SubTitle>
-        //         );
-        //     },
-        // },
+        {
+            title: "QR",
+            width: "5%",
+            render: (name, item, i) => {
+                return (
+                    <SubTitle>
+                        {item.qrCodeId ? (
+                            <QRCodeModal
+                                qrCodeId={item.qrCodeId ? item.qrCodeId : ''}
+                                imgHeight={"2.8em"}
+                                imgWidth={"2.8em"}
+                                imgRadius={20}
+                            />
+                        ) : (
+                            <span style={{ fontSize: "0.6em", fontWeight: "bold" }}>
+                                No QR
+                            </span>
+                        )}
+                    </SubTitle>
+                );
+            },
+        },
 
 
 

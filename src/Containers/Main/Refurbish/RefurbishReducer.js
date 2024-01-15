@@ -8,6 +8,10 @@ const initialState = {
   fetchingTodayProductionError: false,
   production: [],
 
+  fetchingNoOfRepairTechnicianById: false,
+  fetchingNoOfRepairTechnicianByIdError: false,
+  repairByTechnician: [],
+
   showAssignRepairModal: false,
 
   showProductBuilderList: false,
@@ -186,16 +190,16 @@ const initialState = {
   addingCatalogueByTechnician: false,
   addingCatalogueByTechnicianError: false,
 
-  clickTagInDrawr:false,
+  clickTagInDrawr: false,
   startDate: dayjs().toISOString(),
   endDate: dayjs().toISOString(),
 
   addingTagInProcess: false,
-  addingTagInProcessError:false,
+  addingTagInProcessError: false,
 
   fetchingTagInProcess: false,
   fetchingTagInProcessError: false,
-   tagInPros:[],
+  tagInPros: [],
 };
 
 export const refurbishReducer = (state = initialState, action) => {
@@ -394,6 +398,21 @@ export const refurbishReducer = (state = initialState, action) => {
         ...state,
         fetchingProductionOrederId: false,
         fetchingProductionOrederIdError: true,
+      };
+
+    case types.GET_NO_OF_REPAIR_TECHNICIAN_BY_ID_REQUEST:
+      return { ...state, fetchingNoOfRepairTechnicianById: true };
+    case types.GET_NO_OF_REPAIR_TECHNICIAN_BY_ID_SUCCESS:
+      return {
+        ...state,
+        fetchingNoOfRepairTechnicianById: false,
+        repairByTechnician: action.payload,
+      };
+    case types.GET_NO_OF_REPAIR_TECHNICIAN_BY_ID_FAILURE:
+      return {
+        ...state,
+        fetchingNoOfRepairTechnicianById: false,
+        fetchingNoOfRepairTechnicianByIdError: true,
       };
 
     case types.HANDLE_PRODUCTION_NOTES_MODAL:
@@ -892,37 +911,37 @@ export const refurbishReducer = (state = initialState, action) => {
         updatingFarGlassInProductionError: true,
 
       };
-      case types.HANDLE_INTAG_MODAL:
-      return { ...state, clickTagInDrawr:action.payload   };
-      
-      case types.ADD_TAGIN_PROCESS_REQUEST:
-        return { ...state, addingTagInProcess: true };
-      case types.ADD_TAGIN_PROCESS_SUCCESS:
-        return {
-          ...state,
-          addingTagInProcess: false,
-        };
-      case types.ADD_TAGIN_PROCESS_FAILURE:
-        return {
-          ...state,
-          addingTagInProcess: false,
-          addingTagInProcessError: true,
-        };  
-        case types.GET_TAGIN_PROCESS_REQUEST:
-          return { ...state, fetchingTagInProcess: true };
-        case types.GET_TAGIN_PROCESS_SUCCESS:
-          return {
-            ...state,
-            fetchingTagInProcess: false,
-            tagInPros: action.payload,
-          };
-        case types.GET_TAGIN_PROCESS_FAILURE:
-          return {
-            ...state,
-            fetchingTagInProcess: false,
-            fetchingTagInProcessError: true,
-          };     
-        
+    case types.HANDLE_INTAG_MODAL:
+      return { ...state, clickTagInDrawr: action.payload };
+
+    case types.ADD_TAGIN_PROCESS_REQUEST:
+      return { ...state, addingTagInProcess: true };
+    case types.ADD_TAGIN_PROCESS_SUCCESS:
+      return {
+        ...state,
+        addingTagInProcess: false,
+      };
+    case types.ADD_TAGIN_PROCESS_FAILURE:
+      return {
+        ...state,
+        addingTagInProcess: false,
+        addingTagInProcessError: true,
+      };
+    case types.GET_TAGIN_PROCESS_REQUEST:
+      return { ...state, fetchingTagInProcess: true };
+    case types.GET_TAGIN_PROCESS_SUCCESS:
+      return {
+        ...state,
+        fetchingTagInProcess: false,
+        tagInPros: action.payload,
+      };
+    case types.GET_TAGIN_PROCESS_FAILURE:
+      return {
+        ...state,
+        fetchingTagInProcess: false,
+        fetchingTagInProcessError: true,
+      };
+
     default:
       return state;
   }

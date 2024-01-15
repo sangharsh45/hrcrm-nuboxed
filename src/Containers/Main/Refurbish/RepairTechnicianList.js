@@ -2,11 +2,10 @@ import React, { useEffect, useState } from 'react'
 import { StyledTable } from '../../../Components/UI/Antd'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { getNoOfTechnicianById } from "./RefurbishAction"
-import QCPhoneListByTechnician from './QCPhoneListByTechnician'
-// import PhoneListByTechnician from './PhoneListByTechnician'
+import RepairPhoneListByTechnician from './RepairPhoneListByTechnician'
+// import { getNoOfTechnicianById } from "./RefurbishAction"
 
-const TechnicianListByOrderId = (props) => {
+const RepairTechnicianList = (props) => {
 
     // useEffect(() => {
     //     props.getNoOfTechnicianById(props.rowData.orderPhoneId)
@@ -53,24 +52,24 @@ const TechnicianListByOrderId = (props) => {
     return (
         <div>
             <StyledTable
-                // dataSource={props.technicianByID}
+                dataSource={props.repairByTechnician}
                 pagination={false}
                 columns={column}
             />
-            {show && <QCPhoneListByTechnician row={row} />}
+            {show && <RepairPhoneListByTechnician row={row} />}
         </div>
     )
 }
 
 
-const mapStateToProps = ({ auth, production }) => ({
-    // technicianByID: production.technicianByID
+const mapStateToProps = ({ auth, refurbish }) => ({
+    repairByTechnician: refurbish.repairByTechnician
 });
 
 const mapDispatchToProps = (dispatch) =>
     bindActionCreators(
         {
-            getNoOfTechnicianById
+            // getNoOfTechnicianById
         },
         dispatch
     );
@@ -78,5 +77,5 @@ const mapDispatchToProps = (dispatch) =>
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(TechnicianListByOrderId);
+)(RepairTechnicianList);
 

@@ -518,6 +518,33 @@ export const getNoOfTechnicianById = (orderPhoneId) => (dispatch) => {
     });
 };
 
+export const getNoOfRepairTechnicianById = (orderPhoneId) => (dispatch) => {
+  dispatch({
+    type: types.GET_NO_OF_REPAIR_TECHNICIAN_BY_ID_REQUEST,
+  });
+  axios
+    .get(`${base_url2}/REPAIR/${orderPhoneId}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.GET_NO_OF_REPAIR_TECHNICIAN_BY_ID_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.GET_NO_OF_REPAIR_TECHNICIAN_BY_ID_FAILURE,
+        payload: err,
+      });
+    });
+};
+
+
 export const handlePhoneByTechnician = (modalProps) => (dispatch) => {
   dispatch({
     type: types.HANDLE_PHONE_BY_TECHNICIAN_MODAL,
@@ -1229,7 +1256,7 @@ export const handleInTagDrawer = (modalProps) => (dispatch) => {
     payload: modalProps,
   })
 }
-export const addTagInProcess = (data,id) => (dispatch) => {
+export const addTagInProcess = (data, id) => (dispatch) => {
   dispatch({
     type: types.ADD_TAGIN_PROCESS_REQUEST,
   });
