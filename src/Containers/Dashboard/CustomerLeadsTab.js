@@ -4,7 +4,8 @@ import { bindActionCreators } from "redux";
 import ListAltIcon from "@mui/icons-material/ListAlt";
 import {  StyledTabs } from "../../Components/UI/Antd";
 import TabsWrapper1 from "../../Components/UI/Layout/TabsWrapper1";
-import LeadsHotColdWarm from "./LeadsHotColdWarm";
+import { FormattedMessage } from "react-intl";
+const LeadsHotColdWarm=lazy(()=>import("./LeadsHotColdWarm"));
 
 const TabPane = StyledTabs.TabPane;
 class CustomerLeadsTab extends Component {
@@ -34,7 +35,12 @@ class CustomerLeadsTab extends Component {
                 <>
                   <ListAltIcon style={{fontSize:"1.1rem"}}/>
                  
-               <span class=" ml-1">Leads</span>
+               <span class=" ml-1">
+               <FormattedMessage
+          id="app.leads"
+          defaultMessage="Leads"
+        />
+                </span>
               
 
                   {activeKey === "1" && (

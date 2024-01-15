@@ -3,17 +3,9 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import ListAltIcon from "@mui/icons-material/ListAlt";
 import {  StyledTabs } from "../../Components/UI/Antd";
-import EventAvailableIcon from '@mui/icons-material/EventAvailable';
-import ActionNotification from "../Dashboard/ActionNotification";
-import UpcomingIcon from '@mui/icons-material/Upcoming';
-import TipsAndUpdatesIcon from "@mui/icons-material/TipsAndUpdates";
-// import {getTodosCount} from "./DashboardAction";
-import DashboardTodo from "./Child/DashboardTodo";
-import UpcomingEvents from "./Child/UpcomingEvents";
-import { Badge } from "antd";
-import Task from "../Settings/Task/Task";
-import TaskOrganizationNew from "./TaskOrganizationNew";
 import TabsWrapper1 from "../../Components/UI/Layout/TabsWrapper1";
+import { FormattedMessage } from "react-intl";
+const TaskOrganizationNew=lazy(()=>import("./TaskOrganizationNew"));
 
 const TabPane = StyledTabs.TabPane;
 function handleRefreshPage() {
@@ -50,7 +42,12 @@ class TaskOrganizationTab extends Component {
                 <>
                   <ListAltIcon style={{fontSize:"1.1rem"}}/>
                  
-               <span class=" ml-1">Tasks</span>
+               <span class=" ml-1">
+               <FormattedMessage
+          id="app.tasks"
+          defaultMessage="Tasks"
+        />
+                </span>
               
 
                   {activeKey === "1" && (

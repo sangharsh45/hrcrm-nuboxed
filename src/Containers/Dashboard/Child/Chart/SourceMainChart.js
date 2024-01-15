@@ -1,12 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { StyledTabs, StyledModal } from "../../../../Components/UI/Antd";
-import { Empty, Button, Tooltip, Popover } from "antd";
-import { YoutubeOutlined, FullscreenOutlined } from '@ant-design/icons';
+import { FullscreenOutlined } from '@ant-design/icons';
 import { bindActionCreators } from "redux";
-// import { BarChart1_, PieChart_ } from "../../../../Components/Charts";
-import { FlexContainer } from "../../../../Components/UI/Layout";
-import { PieChart, Area, Pie, Cell, Legend, Label } from "recharts";
+import { PieChart, Pie, } from "recharts";
 
 class SourceMainChart extends Component {
   constructor(props) {
@@ -103,11 +99,11 @@ class SourceMainChart extends Component {
               onClick={this.handleChartModalVisible}
               theme="outlined"
             />
-            <FlexContainer justifyContent="space-evenly">
+            <div class=" flex justify-evenly" >
             <PieChart width={730} height={250}>
   <Pie data={data01} dataKey="value" nameKey="name" cx="50%" cy="50%" outerRadius={50} fill="#8884d8" />
 </PieChart>
-            </FlexContainer>
+            </div>
            
           </div>
       </div>

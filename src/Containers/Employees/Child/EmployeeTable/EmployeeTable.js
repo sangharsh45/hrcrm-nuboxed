@@ -7,7 +7,6 @@ import { SearchOutlined,
 import MonitorHeartIcon from "@mui/icons-material/MonitorHeart";
 import CellTowerIcon from '@mui/icons-material/CellTower';
 import Highlighter from 'react-highlight-words';
-import {getDesignations} from "../../../Settings/Designation/DesignationAction";
 import {getDepartments} from "../../../Settings/Department/DepartmentAction";
 import { StyledTable } from "../../../../Components/UI/Antd";
 import { Button, Tooltip,Input } from "antd";
@@ -59,7 +58,6 @@ function EmployeeTable(props) {
       }
     })
     props.getEmployeelist("cretiondate");
-    props.getDesignations();
     props.getRoles(props.organizationId);
     props.getDepartments();
   }, []);
@@ -324,6 +322,7 @@ function EmployeeTable(props) {
     //     );
     //   },
     // },
+
     {
       title: "Suspend",
       width: "5%",
@@ -332,16 +331,19 @@ function EmployeeTable(props) {
       render: (name, item, i) => {
         return (
           <>
+              {props.user.userDeleteInd === true || user.role === "ADMIN" ? (
             <SuspendEmployee
               partnerId={item.partnerId}
               suspendInd={item.suspendInd}
               assignedIndicator={item.assignedInd}
               employeeId={item.employeeId}
             />
+            ):null}
           </>
         );
       },
     },
+
     
     {
       title: "",
@@ -492,7 +494,6 @@ const mapDispatchToProps = (dispatch) =>
       getEmployeelist,
       getRoles,
       handleEmployeeDrawerForAdmin,
-      getDesignations,
       getDepartments,
       handleEmployeePulseDrawerModal,
       getEmployeeTreeMap,

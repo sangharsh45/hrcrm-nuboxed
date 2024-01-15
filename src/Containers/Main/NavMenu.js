@@ -943,6 +943,7 @@ function NavMenu(props) {
      )}  */}
         <hr />
         {/* {user.userAccessInd === true || user.role === "ADMIN"  && ( */}
+        {user.userCreateInd === true || user.role === "ADMIN" ? (
 
           <Menu.Item key="/employees" style={{ height: "27px", paddingLeft: "1rem" }}>
             <Link to="/Employees">
@@ -960,6 +961,7 @@ function NavMenu(props) {
               ></Badge>
             </Link>
           </Menu.Item>
+        ):null}
         {/* )} */}
 
         {/* <Menu.Item key="/plant" style={{ height: "27px", paddingLeft: "1rem" }}>

@@ -23,6 +23,7 @@ import {
   getLeadDetailsById,
   updateTypeForLead,
   handleCETmodal,
+  emptyLeads,
 } from "../../../Leads/LeadsAction";
 import InfiniteScroll from "react-infinite-scroll-component";
 import ReactCountryFlag from "react-country-flag";
@@ -46,6 +47,9 @@ const LeadsAllCardList = (props) => {
     props.getAllLeads(page,"creationdate");
     props.getSectors();
     props.getCountries();
+  }, []);
+  useEffect(() => {
+    return () => props.emptyLeads();
   }, []);
 
   const [currentLeadsId, setCurrentLeadsId] = useState("");
@@ -505,6 +509,7 @@ const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
       getAllLeads,
+      emptyLeads,
       getSectors,
       deleteLeadsData,
       setEditLeads,

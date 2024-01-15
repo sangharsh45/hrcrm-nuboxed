@@ -1,11 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { FormattedMessage } from "react-intl";
-import { Button, Divider, message ,Input, Card} from "antd";
-import { MainWrapper, FlexContainer } from "../../Components/UI/Layout";
-import { TextInput, Title } from "../../Components/UI/Elements";
-import moment from "moment";
 import {
   getTasks,
 } from "../Settings/Task/TaskAction";
@@ -69,12 +64,3 @@ const mapDispatchToProps = (dispatch) =>
 export default connect(mapStateToProps, mapDispatchToProps)(TaskOrganizationNew);
 
 
-// import React from 'react'
-
-// function TaskNew() {
-//   return (
-//     <div>TaskNew</div>
-//   )
-// }
-
-// export default TaskNew

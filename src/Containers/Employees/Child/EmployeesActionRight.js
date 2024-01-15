@@ -33,7 +33,7 @@ class EmployeesActionRight extends React.Component {
               </a>
             </Tooltip>
           )}
-{user.userCreateInd === true || user.role === "ADMIN"  && (
+{user.userCreateInd === true || user.role === "ADMIN" ? (
           <Button
             type="primary"
          
@@ -41,7 +41,7 @@ class EmployeesActionRight extends React.Component {
           >
             Add
           </Button>
-         )} 
+         ):null} 
         </div>
       </>
     );
