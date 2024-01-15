@@ -188,12 +188,12 @@ const initialState = {
     },
     {
       id: 2,
-      type: "quarter",
-      value: "QTD",
+      type: "week",
+      value: "1W",
       starter: false,
       isSelected: false,
-      startDate: moment().startOf("quarter").toISOString(),
-      endDate: moment().endOf("quarter").toISOString(),
+      startDate: moment().startOf("week").toISOString(),
+      endDate: moment().endOf("week").toISOString(),
     },
     {
       id: 3,
@@ -206,13 +206,15 @@ const initialState = {
     },
     {
       id: 4,
-      type: "week",
-      value: "1W",
+      type: "quarter",
+      value: "QTD",
       starter: false,
       isSelected: false,
-      startDate: moment().startOf("week").toISOString(),
-      endDate: moment().endOf("week").toISOString(),
+      startDate: moment().startOf("quarter").toISOString(),
+      endDate: moment().endOf("quarter").toISOString(),
     },
+
+ 
   ],
   timeRangeType: "today",
   isCustomSelected: false,

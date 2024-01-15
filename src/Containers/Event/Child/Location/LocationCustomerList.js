@@ -20,6 +20,7 @@ import {
 import Highlighter from "react-highlight-words";
 import { OnlyWrapCard } from "../../../../Components/UI/Layout";
 import AccountDetailsView from "../../../Main/Account/AccountDetailsView";
+import { FormattedMessage } from "react-intl";
 
 function LocationCustomerList(props) {
   const [page, setPage] = useState(0);
@@ -216,34 +217,7 @@ function LocationCustomerList(props) {
                     </div>
 
                   </div>
-                  <div className=" flex font-medium flex-col md:w-44 max-sm:justify-between w-full max-sm:flex-row ">
-
-                    <div class=" text-sm text-cardBody font-medium font-poppins">
-
-                      Payment
-
-                    </div>
-
-
-                    <div class=" font-normal text-[0.82rem] text-cardBody font-poppins">
-                      {item.payment}
-                    </div>
-
-                  </div>
-                  <div className=" flex font-medium flex-col md:w-44 max-sm:justify-between w-full max-sm:flex-row ">
-
-                    <div class=" text-sm text-cardBody font-medium font-poppins">
-
-                      VAT
-
-                    </div>
-
-
-                    <div class=" font-normal text-[0.82rem] text-cardBody font-poppins">
-                      {item.countryName}
-                    </div>
-
-                  </div>
+          
                   <div className=" flex font-medium flex-col md:w-44 max-sm:justify-between w-full max-sm:flex-row ">
 
                     <div class=" text-sm text-cardBody font-medium font-poppins">
@@ -274,6 +248,23 @@ function LocationCustomerList(props) {
                     </div>
 
                   </div>
+                  <div className=" flex font-medium flex-col md:w-42 max-sm:justify-between  max-sm:flex-row ">
+
+                  <Button type="primary">
+                     <span class="text-sm" >
+                     <FormattedMessage
+                        id="app.add"
+                        defaultMessage="Add"
+                      />
+                     
+                      
+                      </span>
+                        </Button>
+
+
+
+
+</div>
                 
 
                 </div>

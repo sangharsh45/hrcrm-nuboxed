@@ -52,7 +52,7 @@ function CustomerForm(props) {
     props.getAllCustomerEmployeelist();
     props.getSectors();
     props.getAllSalesList();
-    props. getCrm();
+    props.getCrm();
   }, []);
 
     const {

@@ -247,7 +247,7 @@ const handleLoadMore = () => {
                           />
                         </Tooltip>
                       </div>
-                      <div>
+                      {/* <div>
                       <Tooltip title="Supplier">
                           <InventoryIcon
                             style={{ cursor: "pointer", fontSize: "1rem" }}
@@ -257,7 +257,7 @@ const handleLoadMore = () => {
                             }}
                           />
                          </Tooltip>
-                      </div>
+                      </div> */}
                       <div></div>
                     </div>
                     <div class="flex flex-row w-[5%] max-sm:flex-row max-sm:w-[10%]">
