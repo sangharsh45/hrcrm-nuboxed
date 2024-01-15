@@ -1,21 +1,23 @@
-import React from 'react'
-import AddMultipleSpare from "./AddMultipleSpare";
-import SpareListTable from './SpareListTable';
+import React,{lazy,Suspense} from 'react'
+const AddMultipleSpare =lazy(()=>import("./AddMultipleSpare")); 
+const SpareListTable =lazy(()=>import('./SpareListTable'));
 
 const AddingSpareList = (props) => {
     return (
         <>
-            <div style={{ display: "flex", justifyContent: "space-between" }}>
-                <div style={{ width: "50%" }}>
+        <Suspense fallback={"Loading"}>
+            <div class="flex justify-between">
+                <div class="w-[50%]">
                     <AddMultipleSpare RowData={props.RowData} />
                 </div>
-                <div style={{ width: "49%" }}>
+                <div class="w-[49%]">
                     <SpareListTable
                         phoneId={props.phoneId}
                         RowData={props.RowData}
                     />
                 </div>
             </div>
+            </Suspense>
         </>
     )
 }

@@ -3,7 +3,8 @@ import React, { useEffect, useState } from 'react'
 import { getTaggedSuppliesByBrand, addSpareList } from "../../AccountAction";
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { CloseOutlined } from "@ant-design/icons"
+import { CloseOutlined } from "@ant-design/icons";
+import { FormattedMessage } from 'react-intl';
 const { Option } = Select;
 
 const AddMultipleSpare = (props) => {
@@ -89,8 +90,8 @@ const AddMultipleSpare = (props) => {
             {rows.map((row, i) => {
                 return (
                     <>
-                        <div style={{ display: "flex", justifyContent: "space-between" }}>
-                            <div style={{ width: "40%" }}>
+                        <div class="flex justify-between">
+                            <div class="w-[40%]">
                                 <label>{`Spare ${i + 1}`}</label>
 
                                 <Select
@@ -107,8 +108,14 @@ const AddMultipleSpare = (props) => {
                                 </Select>
 
                             </div>
-                            <div style={{ width: "17%" }}>
-                                <label>Units</label>
+                            <div class="w-[17%]">
+                                <label>
+                                <FormattedMessage
+                        id="app.units"
+                        defaultMessage="Units"
+                       />
+                                    
+                                    </label>
                                 <Input
                                     type='text'
                                     value={`${row.noOfSpare}`}
@@ -117,8 +124,13 @@ const AddMultipleSpare = (props) => {
                                     }
                                 />
                             </div>
-                            <div style={{ width: "17%" }}>
-                                <label>Hours</label>
+                            <div class="w-[17%]">
+                                <label>
+                                <FormattedMessage
+                        id="app.hours"
+                        defaultMessage="Hours"
+                       />
+                                    </label>
                                 <Input
                                     type='text'
                                     value={`${row.hours}`}
@@ -127,8 +139,14 @@ const AddMultipleSpare = (props) => {
                                     }
                                 />
                             </div>
-                            <div style={{ width: "17%" }}>
-                                <label>Cost</label>
+                            <div class="w-[17%]">
+                                <label>
+                                <FormattedMessage
+                        id="app.cost"
+                        defaultMessage="Cost"
+                       />
+                                    
+                                    </label>
                                 <Input
                                     type='text'
                                     value={`${row.extraCost}`}
@@ -138,7 +156,7 @@ const AddMultipleSpare = (props) => {
                                 />
                             </div>
                             {rows.length > 1 && (row.id + 1 > row.id) ? (
-                                <div style={{ width: "5%", marginTop: "30px" }}>
+                                <div class="w-[5%] mt-[30px]">
                                     <CloseOutlined
                                         onClick={() => handleDelete(row)}
                                         style={{ fontSize: "16px", color: "red" }} />
@@ -149,30 +167,25 @@ const AddMultipleSpare = (props) => {
                     </>
                 )
             })}
-            <div style={{
-                display: "flex",
-                justifyContent: "flex-end",
-                marginRight: "47px",
-                marginTop: "25px",
-            }}>
-                <Button
-                    style={{
-                        backgroundColor: "#24a3fb",
-                        marginRight: "15px",
-                        border: "none",
-                    }}
-                    type="primary"
+            <div class="flex justify-end mr-[47px] mt-[25px]">
+                <Button className="bg-[#24a3fb] mr-4"
+                  type="primary"
                     onClick={handleAddRowClick}
                 >
-                    Add More
+                   <FormattedMessage
+                        id="app.addmore"
+                        defaultMessage="Add More"
+                       /> 
                 </Button>
                 <Button
                     htmlType='submit'
                     type='primary'
                     onClick={buttonOnClick}
-                // loading={props.addingRoomAndRackInInventory}
                 >
-                    Save
+                    <FormattedMessage
+                        id="app.save"
+                        defaultMessage="Save"
+                       />
                 </Button>
             </div>
 

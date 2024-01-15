@@ -4,16 +4,16 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { DatePicker } from "../../../../../../Components/Forms/Formik/DatePicker";
 import * as Yup from "yup";
-import { Spacer, StyledLabel } from '../../../../../../Components/UI/Elements';
-import { FlexContainer } from '../../../../../../Components/UI/Layout';
+import { StyledLabel } from '../../../../../../Components/UI/Elements';
 import { SelectComponent } from '../../../../../../Components/Forms/Formik/SelectComponent';
 import { InputComponent } from "../../../../../../Components/Forms/Formik/InputComponent";
 import { TextareaComponent } from '../../../../../../Components/Forms/Formik/TextareaComponent';
 import { Button, Tooltip, message } from 'antd';
 import { addOrderForm, getContactDistributorList } from '../../../AccountAction'
-import moment from 'moment';
 import { ExclamationCircleOutlined } from '@ant-design/icons';
 import AddressFieldArray1 from '../../../../../../Components/Forms/Formik/AddressFieldArray1';
+import { FormattedMessage } from 'react-intl';
+
 const FormSchema = Yup.object().shape({
     advancePayment: Yup.string().required("Input needed!"),
     contactPersonId: Yup.string().required("Input needed!"),
@@ -109,7 +109,12 @@ function OrderStep1(props) {
                 <div class="overflow-y-auto h-[40rem] overflow-x-hidden max-sm:h-[30rem]">
                     <Form>
                         <div>
-                            <StyledLabel><h3> Pickup Address</h3></StyledLabel>
+                            <StyledLabel><h3>
+                            <FormattedMessage
+                 id="app.pickupaddress"
+                 defaultMessage="Pickup Address"
+                />
+                                </h3></StyledLabel>
 
                             <FieldArray
                                 name="loadingAddress"
@@ -170,21 +175,26 @@ function OrderStep1(props) {
                                 />
                             </div>
                         </div> */}
-                            <Spacer />
-                            <FlexContainer justifyContent="space-between">
-                                <div style={{ width: "30%" }}>
+                            <div class="justify-between flex mt-3">
+                                <div class="w-[30%]">
                                     <Field
                                         name="paymentInTerms"
-                                        label="Payment Terms (in Days)"
+                                        label={<FormattedMessage
+                                            id="app.paymenttermsindays"
+                                            defaultMessage="Payment Terms (in Days)"
+                                           />}
                                         isColumn
                                         inlineLabel
                                         component={SelectComponent}
                                         options={["7", "15", "30", "45", "60", "75", "90"]}
                                     />
                                 </div>
-                                <div style={{ width: "30%" }}>
+                                <div class="w-[30%]">
                                     <Field
-                                        label="Air Way Bill"
+                                     label={<FormattedMessage
+                                        id="app.airwaybill"
+                                        defaultMessage="Air Way Bill"
+                                       />}
                                         name="awbNo"
                                         component={InputComponent}
                                         inlineLabel
@@ -192,9 +202,13 @@ function OrderStep1(props) {
                                         isColumn
                                     />
                                 </div>
-                                <div style={{ width: "30%" }}>
+                                <div class="w-[30%]">
                                     <Field
-                                        label="Contact Person"
+                                     label={<FormattedMessage
+                                        id="app.contactperson"
+                                        defaultMessage="Contact Person"
+                                       />}
+                                
                                         name="contactPersonId"
                                         placeholder="Value"
                                         component={SelectComponent}
@@ -204,59 +218,60 @@ function OrderStep1(props) {
                                         isColumn
                                     />
                                 </div>
-                            </FlexContainer>
-                            <Spacer />
-                            <FlexContainer justifyContent="space-between">
-                                <div style={{ width: "22%" }}>
+                            </div>
+                            <div class="justify-between flex mt-3">
+                                <div class="w-[22%]">
                                     <Field
                                         width={"100%"}
                                         name="advancePayment"
-                                        label="Advance Payment(%)"
+                                        label={<FormattedMessage
+                                            id="app.advancepayment"
+                                            defaultMessage="Advance Payment(%)"
+                                           />}
                                         isColumn
                                         inlineLabel
                                         component={InputComponent}
                                     />
                                 </div>
-                                <div style={{ width: "22%" }}>
+                                <div class="w-[22%]">
                                     <Field
                                         name="currency"
-                                        label="Currency"
+                                        label={<FormattedMessage
+                                            id="app.currency"
+                                            defaultMessage="Currency"
+                                           />}
                                         isColumn
                                         inlineLabel
                                         component={SelectComponent}
                                         options={Array.isArray(currencyOption) ? currencyOption : []}
                                     />
                                 </div>
-                                <div style={{ width: "22%" }}>
+                                <div class="w-[22%]">
                                     <Field
                                         name="deliveryDate"
-                                        label="Delivery Date "
+                                        label={<FormattedMessage
+                                            id="app.deliverydate"
+                                            defaultMessage="Delivery Date"
+                                           />}
                                         isColumn
                                         inlineLabel
                                         width={"100%"}
                                         component={DatePicker}
                                         value={values.deliveryDate}
-                                    // disabledDate={(currentDate) => {
-                                    //     if (values.availabilityDate) {
-                                    //         if (
-                                    //             moment(currentDate).isBefore(
-                                    //                 moment(values.availabilityDate)
-                                    //             )
-                                    //         ) {
-                                    //             return true;
-                                    //         } else {
-                                    //             return false;
-                                    //         }
-                                    //     }
-                                    // }}
                                     />
                                 </div>
 
-                                <div style={{ width: "22%", marginTop: "0%" }}>
-                                    <StyledLabel>Priority</StyledLabel>
-                                    <FlexContainer justifyContent="spcae-between">
-                                        <FlexContainer>
-                                            <Tooltip title="High">
+                                <div class="w-[22%]">
+                                    <StyledLabel><FormattedMessage
+                                            id="app.priority"
+                                            defaultMessage="Priority"
+                                           /></StyledLabel>
+                                    <div class="justify-between flex">
+                                        <div>
+                                            <Tooltip title={<FormattedMessage
+                                            id="app.high"
+                                            defaultMessage="High"
+                                           />}>
                                                 <Button
                                                     type="primary"
                                                     shape="circle"
@@ -274,7 +289,10 @@ function OrderStep1(props) {
                                                 />
                                             </Tooltip>
                                             &nbsp;
-                                            <Tooltip title="Medium">
+                                            <Tooltip title={<FormattedMessage
+                                            id="app.medium"
+                                            defaultMessage="Medium"
+                                           />}>
                                                 <Button
                                                     type="primary"
                                                     shape="circle"
@@ -292,7 +310,10 @@ function OrderStep1(props) {
                                                 />
                                             </Tooltip>
                                             &nbsp;
-                                            <Tooltip title="Low">
+                                            <Tooltip title={<FormattedMessage
+                                            id="app.low"
+                                            defaultMessage="Low"
+                                           />}>
                                                 <Button
                                                     type="primary"
                                                     shape="circle"
@@ -309,44 +330,38 @@ function OrderStep1(props) {
                                                     }}
                                                 ></Button>
                                             </Tooltip>
-                                        </FlexContainer>
-                                    </FlexContainer>
+                                        </div>
+                                    </div>
                                 </div>
 
-                            </FlexContainer>
-                            <Spacer />
-                            <FlexContainer justifyContent="space-between">
-                                <div style={{ width: "47%" }}>
+                            </div>
+                            <div class=" mt-3 justify-between flex">
+                                <div class="w-[47%]">
                                     <Field
                                         name="comments"
-                                        label="Comment"
+                                        label={<FormattedMessage
+                                            id="app.comment"
+                                            defaultMessage="Comment"
+                                           />}
                                         width={"100%"}
                                         isColumn
                                         component={TextareaComponent}
                                     />
                                 </div>
 
-                                <div style={{ width: "47%", margin: "67px 39px 17px -33px", display: "flex", justifyContent: "flex-end" }}>
+                                <div class="w-[47%]  mt-[67px] mr-[39px] mb-[17px] ml-[-33px] flex justify-end">
                                     <Button
-                                        style={{
-                                            backgroundColor: "#3695cd",
-                                            color: "white",
-                                            fontSize: "15px",
-                                            padding: "0px 12px",
-                                        }}
-                                        htmlType="Submit"
+                                    className="bg-[#3695cd] text-white text-xs pt-0 pr-3"
+                                    htmlType="Submit"
                                     >
-                                        Save
+                                        <FormattedMessage
+                                            id="app.save"
+                                            defaultMessage="Save"
+                                           />
+                                        
                                     </Button>
-                                    {/* <Button
-        type="primary"
-        onClick={() => this.next()}
-        style={{ marginLeft: "10px" }}
-    >
-        Proceed
-    </Button> */}
                                 </div>
-                            </FlexContainer>
+                            </div>
                         </div>
 
                     </Form>
@@ -356,7 +371,7 @@ function OrderStep1(props) {
     );
 }
 
-const mapStateToProps = ({ homeStepper, auth, distributor }) => ({
+const mapStateToProps = ({ auth, distributor }) => ({
     contactDistributor: distributor.contactDistributor,
     userId: auth.userDetails.userId,
     currencies: auth.currencies,
