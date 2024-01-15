@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Button } from "antd";
@@ -6,13 +6,36 @@ import { SelectComponent } from "../../../../../Components/Forms/Formik/SelectCo
 import { Formik, Form, Field } from "formik";
 import { DatePicker } from "../../../../../Components/Forms/Formik/DatePicker";
 import { InputComponent } from "../../../../../Components/Forms/Formik/InputComponent";
+<<<<<<< HEAD
+import { addPaidOrder, getPaymentMode } from "../../../Account/AccountAction";
+import * as Yup from "yup";
+=======
 import { addPaidOrder } from "../../../Account/AccountAction";
+>>>>>>> 8f778a0e45a5d32dabcc57c89174fcf1eade90bb
 import moment from "moment";
 import { TextareaComponent } from "../../../../../Components/Forms/Formik/TextareaComponent";
 import { FormattedMessage } from "react-intl";
+import { getCurrency } from "../../../../Auth/AuthAction";
 import DragableUpload from "../../../../../Components/Forms/Formik/DragableUpload";
 
 function DistributorPaidForm(props) {
+
+  const currencyOption = props.currencies.map((item) => {
+    return {
+      label: item.currencyName || "",
+      value: item.currencyId,
+    };
+  });
+  const payOption = props.paymentModee.map((item) => {
+    return {
+      label: item.currencyName || "",
+      value: item.currencyId,
+    };
+  });
+  useEffect(() => {
+    props.getCurrency();
+    props.getPaymentMode(props.orgId)
+  }, [])
 
   return (
     <>
@@ -25,7 +48,10 @@ function DistributorPaidForm(props) {
           remarks: "",
           docId: "",
           userId: props.userId,
+          orderPaymentType: "PhonePayment",
           transactionNumber: "",
+          orderCurrencyId: "",
+          paymentMode: "",
           approveByFinanceInd: false,
           orderId: props.particularRowData.orderId,
         }}
@@ -53,7 +79,7 @@ function DistributorPaidForm(props) {
           ...rest
         }) => (
           <Form>
-         <div  class="justify-between flex">
+            <div class="justify-between flex">
               <div class="h-full w-full">
                 <div class="justify-between">
                   <div class="w-[47%]">
@@ -70,10 +96,25 @@ function DistributorPaidForm(props) {
                       width={"100%"}
                       component={InputComponent}
                       value={values.paymentAmount}
-
                     />
                   </div>
-                  <div style={{ width: "47%" }}>
+                  <div style={{ width: "31%" }}>
+                    <FastField
+                      name="orderCurrencyId"
+                      label={
+                        <FormattedMessage
+                          id="app.currency"
+                          defaultMessage="currency"
+                        />
+                      }
+
+                      isColumn
+                      inlineLabel
+                      component={SelectComponent}
+                      options={Array.isArray(currencyOption) ? currencyOption : []}
+                    />
+                  </div>
+                  <div style={{ width: "31%" }}>
                     <Field
                       name="date"
                       label={
@@ -91,7 +132,7 @@ function DistributorPaidForm(props) {
 
                 </div>
 
-                
+
                 <div class="flex justify-between mt-2">
                   <div class="w-[47%]">
                     <Field
@@ -106,7 +147,7 @@ function DistributorPaidForm(props) {
                       width={"100%"}
                       component={InputComponent}
                       value={values.transactionNumber}
-                   
+
                     />
                   </div>
 
@@ -123,7 +164,7 @@ function DistributorPaidForm(props) {
                       inlineLabel
                       width={"100%"}
                       component={SelectComponent}
-                      options={["Cash", " Credit-Card", "Net Banking", "UPI"]}
+                      options={Array.isArray(payOption) ? payOption : []}
                       style={{
                         borderRight: "0.18em solid red",
                       }}
@@ -160,18 +201,18 @@ function DistributorPaidForm(props) {
 
               </div>
             </div>
-        
+
             <div class="flex justify-end mt-3">
               <Button
                 type="primary"
                 htmlType="submit"
                 loading={props.addingPaidByDistributorId}
               >
-               <FormattedMessage
-                          id="app.submit"
-                          defaultMessage="Submit"
-                        />
-                
+                <FormattedMessage
+                  id="app.submit"
+                  defaultMessage="Submit"
+                />
+
               </Button>
             </div>
           </Form>
@@ -184,14 +225,19 @@ function DistributorPaidForm(props) {
 
 const mapStateToProps = ({ auth, distributor }) => ({
   userId: auth.userDetails.userId,
+  paymentModee: distributor.paymentModee,
   distributorId: distributor.distributorDetailsByDistributorId.distributorId,
   addingPaidByDistributorId: distributor.addingPaidByDistributorId,
+  currencies: auth.currencies,
+  orgId: auth.userDetails.organizationId,
 });
 
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
       addPaidOrder,
+      getCurrency,
+      getPaymentMode
     },
     dispatch
   );

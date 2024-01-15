@@ -969,12 +969,12 @@ export const addPaidOrder = (data, orderId, distributorId) => (dispatch) => {
     });
 };
 
-export const getDistributorOrderPayment = (orderPhoneId) => (dispatch) => {
+export const getDistributorOrderPayment = (orderId) => (dispatch) => {
   dispatch({
     type: types.FETCHING_DISTRIBUTOR_PAYMENT_HISTORY_REQUEST,
   });
   axios
-    .get(`${base_url2}/orderPayment/orderPayment/process/${orderPhoneId}`, {
+    .get(`${base_url2}/orderPayment/process/${orderId}`, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },
@@ -2672,4 +2672,31 @@ export const handleUpdateOrder = (modalProps) => (dispatch) => {
     type: types.HANDLE_UPDATE_ORDER_MODAL,
     payload: modalProps,
   });
+};
+
+export const getPaymentMode = (orgId) => (dispatch) => {
+  dispatch({
+    type: types.GET_PAYMENT_MODE_REQUEST,
+  });
+  axios
+    .get(`${base_url}/paymentCategory/all/${orgId}`,
+      {
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+        },
+      })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.GET_PAYMENT_MODE_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err.response);
+      dispatch({
+        type: types.GET_PAYMENT_MODE_FAILURE,
+        payload: err,
+      });
+    });
 };

@@ -17,10 +17,10 @@ import { withRouter } from "react-router";
 import { OnlyWrapCard } from "../../../../../../Components/UI/Layout";
 import { FormattedMessage } from "react-intl";
 
-const DispatchPhoneListModal =lazy(()=>import("./DispatchPhoneListModal"));
-const DispatchPackedToggle =lazy(()=>import("./DispatchPackedToggle"));
-const DispatchValidationToggle =lazy(()=>import("./DispatchValidationToggle"));
-const DispatchOrderAwbModal =lazy(()=>import("./DispatchOrderAwbModal"));
+const DispatchPhoneListModal = lazy(() => import("./DispatchPhoneListModal"));
+const DispatchPackedToggle = lazy(() => import("./DispatchPackedToggle"));
+const DispatchValidationToggle = lazy(() => import("./DispatchValidationToggle"));
+const DispatchOrderAwbModal = lazy(() => import("./DispatchOrderAwbModal"));
 
 function DispatchTable(props) {
   useEffect(() => {
@@ -43,188 +43,188 @@ function DispatchTable(props) {
   return (
     <>
       <div className=' flex justify-end sticky top-28 z-auto'>
-         <OnlyWrapCard style={{backgroundColor:"#E3E8EE"}}>
-         <div className=" flex justify-between w-[99%] px-2 bg-transparent font-bold sticky top-0 z-10">
-         <div className=""></div>
-         <div className=" md:w-[7%]"><FormattedMessage id="app.order" defaultMessage="Order #"/></div>
-        <div className=" md:w-[4.2rem] "><FormattedMessage id="app.customer" defaultMessage="Customer"/></div>
-        <div className="md:w-[5.8rem]"><FormattedMessage id="app.contact" defaultMessage="Contact"/></div>
-        <div className="md:w-[5.2rem]"><FormattedMessage id="app.phones" defaultMessage="Phones #"/></div>
-        <div className="md:w-[8.5rem]"><FormattedMessage id="app.inspection" defaultMessage="Inspection"/></div>
-        <div className="md:w-[8.5rem]"><FormattedMessage id="app.delivery" defaultMessage="Delivery"/></div>
-        <div className="md:w-[5.2rem]"><FormattedMessage id="app.packed" defaultMessage="Packed ?"/></div>
-        <div className="md:w-[5.2remb]"><FormattedMessage id="app.attribute" defaultMessage="Attribute"/></div>
-        <div className=" md:w-[6.1rem]"><FormattedMessage id="app.shipper" defaultMessage="Shipper"/></div>
-        <div className="md:w-[8.5rem]"><FormattedMessage id="app.delivery" defaultMessage="Delivery"/></div>
-        <div className=" md:w-[6.1rem]"><FormattedMessage id="app.awb" defaultMessage="AWB"/></div>
-        <div className=" md:w-[6.1rem]"><FormattedMessage id="app.status" defaultMessage="Status"/></div>
-        <div className="md:w-[5.2rem]"><FormattedMessage id="app.pickup" defaultMessage="Pick Up"/></div>
-        <div className="w-12"></div>
-            </div>
-       
-             {props.allDispatchList.map((item) => {
-               const currentdate = moment().format("DD/MM/YYYY");
-                       const date = moment(item.creationDate).format("DD/MM/YYYY");
-          return (
-<div>
-<div className="flex rounded-xl justify-between mt-2 bg-white h-12 items-center p-3 ">
-       <div class="flex">
-   
-    <div className=" flex font-medium flex-col md:w-[6.1rem] max-sm:w-full  ">
-    <h4 class="text-sm text-cardBody font-semibold  font-poppins cursor-pointer">
-    <span
-         onClick={() => {
-          handleRowData(item);
-          props.handlePickupDateModal(true);
-        }}
-        >{item.newOrderNo}</span>&nbsp;&nbsp;
-        {date === currentdate ? (
-          <span class="text-xs"
-            style={{
-              color: "tomato",
-              fontWeight: "bold",
-            }}
-          >
-            New
-          </span>
-        ) : null}
-                            </h4>
-    </div>
- 
- 
-    </div>
-    
-    <div className=" flex font-medium flex-col md:w-[6.5rem] max-sm:flex-row w-full max-sm:justify-between ">
-    <h4 class=" text-xs text-cardBody font-poppins">
-                      
+        <OnlyWrapCard style={{ backgroundColor: "#E3E8EE" }}>
+          <div className=" flex justify-between w-[99%] px-2 bg-transparent font-bold sticky top-0 z-10">
+            <div className=""></div>
+            <div className=" md:w-[7%]"><FormattedMessage id="app.order" defaultMessage="Order #" /></div>
+            <div className=" md:w-[4.2rem] "><FormattedMessage id="app.customer" defaultMessage="Customer" /></div>
+            <div className="md:w-[5.8rem]"><FormattedMessage id="app.contact" defaultMessage="Contact" /></div>
+            <div className="md:w-[5.2rem]"><FormattedMessage id="app.phones" defaultMessage="Phones #" /></div>
+            <div className="md:w-[8.5rem]"><FormattedMessage id="app.inspection" defaultMessage="Inspection" /></div>
+            <div className="md:w-[8.5rem]"><FormattedMessage id="app.delivery" defaultMessage="Delivery" /></div>
+            <div className="md:w-[5.2rem]"><FormattedMessage id="app.packed" defaultMessage="Packed ?" /></div>
+            <div className="md:w-[5.2remb]"><FormattedMessage id="app.attribute" defaultMessage="Attribute" /></div>
+            <div className=" md:w-[6.1rem]"><FormattedMessage id="app.shipper" defaultMessage="Shipper" /></div>
+            <div className="md:w-[8.5rem]"><FormattedMessage id="app.delivery" defaultMessage="Delivery" /></div>
+            <div className=" md:w-[6.1rem]"><FormattedMessage id="app.awb" defaultMessage="AWB" /></div>
+            <div className=" md:w-[6.1rem]"><FormattedMessage id="app.status" defaultMessage="Status" /></div>
+            <div className="md:w-[5.2rem]"><FormattedMessage id="app.pickup" defaultMessage="Pick Up" /></div>
+            <div className="w-12"></div>
+          </div>
+
+          {props.allDispatchList.map((item) => {
+            const currentdate = moment().format("DD/MM/YYYY");
+            const date = moment(item.createAt).format("DD/MM/YYYY");
+            return (
+              <div>
+                <div className="flex rounded-xl justify-between mt-2 bg-white h-12 items-center p-3 ">
+                  <div class="flex">
+
+                    <div className=" flex font-medium flex-col md:w-[6.1rem] max-sm:w-full  ">
+                      <h4 class="text-sm text-cardBody font-semibold  font-poppins cursor-pointer">
+                        <span
+                          onClick={() => {
+                            handleRowData(item);
+                            props.handlePickupDateModal(true);
+                          }}
+                        >{item.newOrderNo}</span>&nbsp;&nbsp;
+                        {date === currentdate ? (
+                          <span class="text-xs"
+                            style={{
+                              color: "tomato",
+                              fontWeight: "bold",
+                            }}
+                          >
+                            New
+                          </span>
+                        ) : null}
+                      </h4>
+                    </div>
+
+
+                  </div>
+
+                  <div className=" flex font-medium flex-col md:w-[6.5rem] max-sm:flex-row w-full max-sm:justify-between ">
+                    <h4 class=" text-xs text-cardBody font-poppins">
+
                       {item.distributorName}
                     </h4>
-    </div>
-    <div className=" flex font-medium flex-col md:w-[6.2rem] max-sm:flex-row w-full max-sm:justify-between ">
-        <h4 class=" text-xs text-cardBody font-semibold  font-poppins">
-        {item.contactPersonName}  
+                  </div>
+                  <div className=" flex font-medium flex-col md:w-[6.2rem] max-sm:flex-row w-full max-sm:justify-between ">
+                    <h4 class=" text-xs text-cardBody font-semibold  font-poppins">
+                      {item.contactPersonName}
                     </h4>
-    </div>
-    
+                  </div>
 
-    <div className=" flex font-medium flex-col md:w-[3.2rem] max-sm:flex-row w-full max-sm:justify-between ">
-        <h4 class=" text-xs text-cardBody font-semibold  font-poppins">
-        {item.dispatchPhoneCount}/{item.phoneReceiveCount}
-             </h4>
-    </div>
-    <div className=" flex font-medium flex-col md:w-[6.2rem] max-sm:flex-row w-full max-sm:justify-between ">
-        <h4 class=" text-xs text-cardBody font-semibold  font-poppins">
-        {item.dispatchInspectionInd === 0 ?
-            <Button
-              onClick={() => props.updateDispatchInspectionButton({ dispatchInspectionInd: 1 }, item.orderPhoneId, props.locationDetailsId)}
-              style={{ backgroundColor: "#33ad33", color: "white", fontWeight: "500" }}>
-              Start
-            </Button>
-            : item.dispatchInspectionInd === 2 ||
-              item.dispatchInspectionInd === 3 ||
-              item.dispatchInspectionInd === 4 ?
-              <b>Completed</b>
-              : item.dispatchInspectionInd === 1 ?
-                <Button
-                  style={{ fontWeight: "500", color: "white" }}
-                  // onClick={() => props.updateDispatchInspectionButton({ dispatchInspectionInd : 1 }, item.orderPhoneId, props.locationDetailsId)}
-                  type="primary">
-                  Pause
-                </Button> :
-                null}
+
+                  <div className=" flex font-medium flex-col md:w-[3.2rem] max-sm:flex-row w-full max-sm:justify-between ">
+                    <h4 class=" text-xs text-cardBody font-semibold  font-poppins">
+                      {item.dispatchPhoneCount}/{item.phoneReceiveCount}
                     </h4>
-    </div>
-    <div className=" flex font-medium flex-col md:w-[6.2rem] max-sm:flex-row w-full max-sm:justify-between ">
-        <h4 class=" text-xs text-cardBody font-semibold  font-poppins">
-        {item.dispatchInspectionInd === 0 || item.dispatchInspectionInd === 1 ?
-            null : <DispatchPackedToggle
-              locationDetailsId={props.locationDetailsId}
-              item={item}
-            />}
+                  </div>
+                  <div className=" flex font-medium flex-col md:w-[6.2rem] max-sm:flex-row w-full max-sm:justify-between ">
+                    <h4 class=" text-xs text-cardBody font-semibold  font-poppins">
+                      {item.dispatchInspectionInd === 0 ?
+                        <Button
+                          onClick={() => props.updateDispatchInspectionButton({ dispatchInspectionInd: 1 }, item.orderPhoneId, props.locationDetailsId)}
+                          style={{ backgroundColor: "#33ad33", color: "white", fontWeight: "500" }}>
+                          Start
+                        </Button>
+                        : item.dispatchInspectionInd === 2 ||
+                          item.dispatchInspectionInd === 3 ||
+                          item.dispatchInspectionInd === 4 ?
+                          <b>Completed</b>
+                          : item.dispatchInspectionInd === 1 ?
+                            <Button
+                              style={{ fontWeight: "500", color: "white" }}
+                              // onClick={() => props.updateDispatchInspectionButton({ dispatchInspectionInd : 1 }, item.orderPhoneId, props.locationDetailsId)}
+                              type="primary">
+                              Pause
+                            </Button> :
+                            null}
                     </h4>
-    </div>
-    <div className=" flex font-medium flex-col md:w-[3.2rem] max-sm:flex-row w-full max-sm:justify-between ">
-        <h4 class=" text-xs text-cardBody font-semibold  font-poppins">
-        {item.unloadingAddresses && item.unloadingAddresses[0].city || ""}
-             </h4>
-    </div>
-    <div className=" flex font-medium flex-col md:w-[3.2rem] max-sm:flex-row w-full max-sm:justify-between ">
-        <h4 class=" text-xs text-cardBody font-semibold  font-poppins">
-        {item.dispatchInspectionInd === 4 && !item.newAwbNo ?
+                  </div>
+                  <div className=" flex font-medium flex-col md:w-[6.2rem] max-sm:flex-row w-full max-sm:justify-between ">
+                    <h4 class=" text-xs text-cardBody font-semibold  font-poppins">
+                      {item.dispatchInspectionInd === 0 || item.dispatchInspectionInd === 1 ?
+                        null : <DispatchPackedToggle
+                          locationDetailsId={props.locationDetailsId}
+                          item={item}
+                        />}
+                    </h4>
+                  </div>
+                  <div className=" flex font-medium flex-col md:w-[3.2rem] max-sm:flex-row w-full max-sm:justify-between ">
+                    <h4 class=" text-xs text-cardBody font-semibold  font-poppins">
+                      {item.unloadingAddresses && item.unloadingAddresses[0].city || ""}
+                    </h4>
+                  </div>
+                  <div className=" flex font-medium flex-col md:w-[3.2rem] max-sm:flex-row w-full max-sm:justify-between ">
+                    <h4 class=" text-xs text-cardBody font-semibold  font-poppins">
+                      {item.dispatchInspectionInd === 4 && !item.newAwbNo ?
 
-<Button type="primary"
-  onClick={() => {
-    handleRowData(item);
-    props.handleCreateAWB(true)
-  }}>Create AWB</Button>
-: item.dispatchInspectionInd === 4 && item.newAwbNo ? <b>Awb Created</b> : null
-}
-             </h4>
-    </div>
-    <div className=" flex font-medium flex-col md:w-[3.2rem] max-sm:flex-row w-full max-sm:justify-between ">
-        <h4 class=" text-xs text-cardBody font-semibold  font-poppins">
-        {item.shipperName === "null" ? "" : item.shipperName}
-             </h4>
-    </div>
-    <div className=" flex font-medium flex-col md:w-[3.2rem] max-sm:flex-row w-full max-sm:justify-between ">
-        <h4 class=" text-xs text-cardBody font-semibold  font-poppins">
-        {item.pickUp === "null" ? "" : moment(item.pickUp).format("DD-MM-YYYY")}
-             </h4>
-    </div>
-    <div className=" flex font-medium flex-col md:w-[3.2rem] max-sm:flex-row w-full max-sm:justify-between ">
-        <h4 class=" text-xs text-cardBody font-semibold  font-poppins">
-        {item.newAwbNo === "null" ? "" : item.newAwbNo}
-             </h4>
-    </div>
-    <div className=" flex font-medium flex-col md:w-[3.2rem] max-sm:flex-row w-full max-sm:justify-between ">
-        <h4 class=" text-xs text-cardBody font-semibold  font-poppins">
-        {item.status === "null" ? "" : item.status}
-             </h4>
-    </div>
-    <div className=" flex font-medium flex-col md:w-[3.2rem] max-sm:flex-row w-full max-sm:justify-between ">
-        <h4 class=" text-xs text-cardBody font-semibold  font-poppins">
-        {item.dispatchInspectionInd === 4 && item.newAwbNo &&
-            <DispatchValidationToggle
-              locationDetailsId={props.locationDetailsId}
-              item={item}
-            />}
-             </h4>
-    </div>
-    <div class="flex md:items-center"> 
+                        <Button type="primary"
+                          onClick={() => {
+                            handleRowData(item);
+                            props.handleCreateAWB(true)
+                          }}>Create AWB</Button>
+                        : item.dispatchInspectionInd === 4 && item.newAwbNo ? <b>Awb Created</b> : null
+                      }
+                    </h4>
+                  </div>
+                  <div className=" flex font-medium flex-col md:w-[3.2rem] max-sm:flex-row w-full max-sm:justify-between ">
+                    <h4 class=" text-xs text-cardBody font-semibold  font-poppins">
+                      {item.shipperName === "null" ? "" : item.shipperName}
+                    </h4>
+                  </div>
+                  <div className=" flex font-medium flex-col md:w-[3.2rem] max-sm:flex-row w-full max-sm:justify-between ">
+                    <h4 class=" text-xs text-cardBody font-semibold  font-poppins">
+                      {item.pickUp === "null" ? "" : moment(item.pickUp).format("DD-MM-YYYY")}
+                    </h4>
+                  </div>
+                  <div className=" flex font-medium flex-col md:w-[3.2rem] max-sm:flex-row w-full max-sm:justify-between ">
+                    <h4 class=" text-xs text-cardBody font-semibold  font-poppins">
+                      {item.newAwbNo === "null" ? "" : item.newAwbNo}
+                    </h4>
+                  </div>
+                  <div className=" flex font-medium flex-col md:w-[3.2rem] max-sm:flex-row w-full max-sm:justify-between ">
+                    <h4 class=" text-xs text-cardBody font-semibold  font-poppins">
+                      {item.status === "null" ? "" : item.status}
+                    </h4>
+                  </div>
+                  <div className=" flex font-medium flex-col md:w-[3.2rem] max-sm:flex-row w-full max-sm:justify-between ">
+                    <h4 class=" text-xs text-cardBody font-semibold  font-poppins">
+                      {item.dispatchInspectionInd === 4 && item.newAwbNo &&
+                        <DispatchValidationToggle
+                          locationDetailsId={props.locationDetailsId}
+                          item={item}
+                        />}
+                    </h4>
+                  </div>
+                  <div class="flex md:items-center">
 
-</div>
-<div class="flex flex-col w-[2%] max-sm:flex-row max-sm:w-[6%]">
-                   <div>
-                   <Tooltip title="Notes">
-          <NoteAltIcon
-            style={{ cursor: "pointer", fontSize: "13px" }}
-          // onClick={() => {
-          //   handleRowData(item);
-          //   props.handleInventoryReceivedNoteOrderModal(true);
-          // }}
-          />
+                  </div>
+                  <div class="flex flex-col w-[2%] max-sm:flex-row max-sm:w-[6%]">
+                    <div>
+                      <Tooltip title="Notes">
+                        <NoteAltIcon
+                          style={{ cursor: "pointer", fontSize: "13px" }}
+                        // onClick={() => {
+                        //   handleRowData(item);
+                        //   props.handleInventoryReceivedNoteOrderModal(true);
+                        // }}
+                        />
 
-        </Tooltip>
-                   </div>
-                   
-                   {/* <div>
+                      </Tooltip>
+                    </div>
+
+                    {/* <div>
                    <Tooltip title={item.salesExecutiveEmail}>
                <span>
                  <i class="far fa-envelope"></i>
                </span>
              </Tooltip>
                         </div> */}
-            </div>
+                  </div>
 
-</div>
-</div>
-          );
-        })}
-  
-              </OnlyWrapCard>
-              </div> 
-          
-        
+                </div>
+              </div>
+            );
+          })}
+
+        </OnlyWrapCard>
+      </div>
+
+
 
       <DispatchPhoneListModal
         rowData={rowData}

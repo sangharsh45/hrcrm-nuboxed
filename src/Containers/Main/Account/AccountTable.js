@@ -58,37 +58,37 @@ function AccountTable(props) {
         <OnlyWrapCard style={{ backgroundColor: "#E3E8EE" }}>
           <div className=" flex justify-between w-[97.5%] px-2 bg-transparent font-bold sticky top-0 z-10">
             <div className=" md:w-[13.12rem]">  <FormattedMessage
-                        id="app.name"
-                        defaultMessage="name"
-                      /></div>
+              id="app.name"
+              defaultMessage="name"
+            /></div>
             <div className=" md:w-[13.121rem]"><FormattedMessage
-                        id="app.work#"
-                        defaultMessage="work#"
-                      /></div>
+              id="app.work#"
+              defaultMessage="work#"
+            /></div>
             <div className=" md:w-[11.825rem] "><FormattedMessage
-                        id="app.website"
-                        defaultMessage="website"
-                      /></div>
+              id="app.website"
+              defaultMessage="website"
+            /></div>
             <div className="md:w-[8.95rem]"><FormattedMessage
-                        id="app.type"
-                        defaultMessage="type"
-                      /></div>
+              id="app.type"
+              defaultMessage="type"
+            /></div>
             <div className="md:w-[7.8rem]"><FormattedMessage
-                        id="app.Paymentdays"
-                        defaultMessage="Paymentdays"
-                      /></div>
+              id="app.Paymentdays"
+              defaultMessage="Paymentdays"
+            /></div>
             <div className="md:w-[6.94rem]"><FormattedMessage
-                        id="app.vat"
-                        defaultMessage="vat"
-                      /></div>
+              id="app.vat"
+              defaultMessage="vat"
+            /></div>
             <div className="md:w-[8.21rem]"><FormattedMessage
-                        id="app.billingaddress"
-                        defaultMessage="billingaddress"
-                      /></div>
+              id="app.billingaddress"
+              defaultMessage="billingaddress"
+            /></div>
             <div className="md:w-[7.32rem]"><FormattedMessage
-                        id="app.pincode"
-                        defaultMessage="pincode"
-                      /></div>
+              id="app.pincode"
+              defaultMessage="pincode"
+            /></div>
 
           </div>
           <InfiniteScroll
@@ -196,7 +196,7 @@ function AccountTable(props) {
 
                         {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden"> Sector </h4> */}
                         <h4 class=" text-xs text-cardBody font-poppins">
-                          {item.countryName}
+                          {item.countryValue}
                         </h4>
 
                       </div>

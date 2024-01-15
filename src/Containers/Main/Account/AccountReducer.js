@@ -201,6 +201,10 @@ const initialState = {
   fetchingRecordsByUserIdError: false,
   recordData: {},
 
+  fetchingPaymentMode: false,
+  fetchingPaymentModeError: false,
+  paymentModee: [],
+
   applyingForLoginInContact: false,
   applyingForLoginInContactError: false,
 
@@ -1178,7 +1182,6 @@ export const distributorReducer = (state = initialState, action) => {
         ...state,
         addingCar: false,
         addLinkDistributorOrderConfigureModal: false,
-        distributorOrder: [action.payload, ...state.distributorOrder]
       };
     case types.ADD_CAR_FAILURE:
       return {
@@ -1228,6 +1231,7 @@ export const distributorReducer = (state = initialState, action) => {
       return {
         ...state,
         addingOrder: false,
+        distributorOrder: [action.payload, ...state.distributorOrder],
         orderDetailsId: action.payload
         // addDriverModal: false,
 
@@ -1325,7 +1329,13 @@ export const distributorReducer = (state = initialState, action) => {
         ...state,
         startingQcInStatus: false,
         addStatusOfOrder: false,
-        distributorOrder: [action.payload, ...state.distributorOrder]
+        distributorOrder: state.distributorOrder.map((item) => {
+          if (item.orderId == action.payload.orderId) {
+            return action.payload;
+          } else {
+            return item;
+          }
+        }),
       };
     case types.START_QC_STATUS_FAILURE:
       return {
@@ -1342,7 +1352,13 @@ export const distributorReducer = (state = initialState, action) => {
         startRepairingInStatus: false,
         addStatusOfOrder: false,
         showRepairReasonModal: false,
-        distributorOrder: [action.payload, ...state.distributorOrder]
+        distributorOrder: state.distributorOrder.map((item) => {
+          if (item.orderId == action.payload.orderId) {
+            return action.payload;
+          } else {
+            return item;
+          }
+        }),
       };
     case types.START_REPAIR_IN_STATUS_FAILURE:
       return {
@@ -1773,7 +1789,13 @@ export const distributorReducer = (state = initialState, action) => {
       return {
         ...state,
         updatingOfferPriceOfOrder: false,
-        distributorOrder: [action.payload, ...state.distributorOrder]
+        distributorOrder: state.distributorOrder.map((item) => {
+          if (item.orderId == action.payload.orderId) {
+            return action.payload;
+          } else {
+            return item;
+          }
+        }),
       };
     case types.UPDATE_OFFER_PRICE_FAILURE:
       return {
@@ -1995,15 +2017,30 @@ export const distributorReducer = (state = initialState, action) => {
         accountOrderProduction: false
       };
 
-    case types.GET_PRODUCT_LIST_BY_ID_REQUEST:
+    case types.GET_PAYMENT_MODE_REQUEST:
+      return { ...state, fetchingPaymentMode: true };
+    case types.GET_PAYMENT_MODE_SUCCESS:
+      return {
+        ...state,
+        fetchingPaymentMode: false,
+        paymentModee: action.payload
+      };
+    case types.GET_PAYMENT_MODE_FAILURE:
+      return {
+        ...state,
+        fetchingPaymentMode: false,
+        fetchingPaymentModeError: true,
+      };
+
+    case types.GET_DISTRIBUTORS_BY_USER_ID_REQUEST:
       return { ...state, fetchingProductById: true };
-    case types.GET_PRODUCT_LIST_BY_ID_SUCCESS:
+    case types.GET_DISTRIBUTORS_BY_USER_ID_SUCCESS:
       return {
         ...state,
         fetchingProductById: false,
         catalogueById: action.payload
       };
-    case types.GET_PRODUCT_LIST_BY_ID_FAILURE:
+    case types.GET_DISTRIBUTORS_BY_USER_ID_FAILURE:
       return {
         ...state,
         fetchingProductById: false,
