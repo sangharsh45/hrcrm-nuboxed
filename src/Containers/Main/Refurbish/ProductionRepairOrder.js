@@ -158,15 +158,16 @@
 
 
 
-import React, { Component, useEffect, useState } from "react";
+import React, { Component, useEffect, useState,lazy } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { StyledTable } from "../../../Components/UI/Antd";
 import { getRepairOrderByUser, handleRepairPhone, repairInspectionButton, getOrderIdForCatalogueItem } from "./RefurbishAction"
-import OrderPhoneRepairModal from "./OrderPhoneRepairModal";
 import { Button } from "antd";
 import moment from "moment";
 import { OnlyWrapCard } from "../../../Components/UI/Layout";
+import { FormattedMessage } from "react-intl";
+const OrderPhoneRepairModal = lazy(() => import('./OrderPhoneRepairModal'));
 function ProductionRepairOrder(props) {
     useEffect(() => {
         if (props.inspectionRequiredInd) {
@@ -190,11 +191,23 @@ function ProductionRepairOrder(props) {
             <div className=' flex justify-end sticky top-28 z-auto'>
                 <OnlyWrapCard style={{ backgroundColor: "#E3E8EE" }}>
                     <div className=" flex justify-between w-[97.5%] p-2 bg-transparent font-bold sticky top-0 z-10">
-                        <div className=" md:w-[4.1rem]">Order</div>
-                        <div className=" md:w-[5.1rem]">Due Date</div>
-                        <div className=" md:w-[9.8rem] "> Items</div>
+                    <div className=" md:w-[4.1rem]"><FormattedMessage
+                        id="app.order"
+                        defaultMessage="order"
+                      /></div>
+                        <div className=" md:w-[5.1rem]"><FormattedMessage
+                        id="app.duedate"
+                        defaultMessage="duedate"
+                      /></div>
+                        <div className=" md:w-[9.8rem] "> <FormattedMessage
+                        id="app.item"
+                        defaultMessage="item"
+                      /></div>
                         <div className="md:w-[6.6rem]"></div>
-                        <div className="md:w-[5.8rem]">Note</div>
+                        <div className="md:w-[5.8rem]"><FormattedMessage
+                        id="app.notes"
+                        defaultMessage="notes"
+                      /></div>
                         {/* <div className="md:w-[4.3rem]"></div> */}
                     </div>
                     {props.inspectionRequiredInd ? props.choosenOrderCatalogue.map((item) => {
@@ -206,7 +219,7 @@ function ProductionRepairOrder(props) {
 
                                 >
                                     <div class="flex">
-                                        <div className=" flex font-medium  md:w-[15.2rem] max-sm:w-full  ">
+                                        <div className=" flex font-medium  md:w-[15.6rem] max-sm:w-full  ">
                                             <span
                                                 style={{ textDecoration: "underline", color: "#1890ff", cursor: "pointer" }}
                                                 onClick={() => {
@@ -228,13 +241,13 @@ function ProductionRepairOrder(props) {
                                             ) : null}
                                         </div>
 
-                                        <div className=" flex font-medium   md:w-[19.2rem] max-sm:flex-row w-full max-sm:justify-between  ">
+                                        <div className=" flex font-medium   md:w-[17.9rem] max-sm:flex-row w-full max-sm:justify-between  ">
                                             <h4 class=" text-xs text-cardBody font-poppins">
                                                 {item.repairDueDate === null ? "" : moment(item.repairDueDate).format("DD-MM-YYYY")}
                                             </h4>
 
                                         </div>
-                                        <div className=" flex font-medium  md:w-[8.2rem] max-sm:flex-row w-full max-sm:justify-between ">
+                                        <div className=" flex font-medium  md:w-[37.2rem] max-sm:flex-row w-full max-sm:justify-between ">
                                             <h4 class=" text-sm text-cardBody font-poppins">
                                                 {item.totalProduct}
                                             </h4>
@@ -263,7 +276,7 @@ function ProductionRepairOrder(props) {
                                         </div>
                                     </div> */}
 
-                                    <div className=" flex font-medium  md:w-[8.2rem] max-sm:flex-row w-full max-sm:justify-between ">
+                                    <div className=" flex font-medium  md:w-[.2rem] max-sm:flex-row w-full max-sm:justify-between ">
                                         <h4 class=" text-sm text-cardBody font-poppins">
                                             {item.reason}
                                         </h4>
@@ -282,7 +295,7 @@ function ProductionRepairOrder(props) {
 
                                     >
                                         <div class="flex">
-                                            <div className=" flex font-medium  md:w-[15.2rem] max-sm:w-full  ">
+                                            <div className=" flex font-medium  md:w-[15.8rem] max-sm:w-full  ">
                                                 <span
                                                     style={{ textDecoration: "underline", color: "#1890ff", cursor: "pointer" }}
                                                     onClick={() => {
@@ -304,13 +317,13 @@ function ProductionRepairOrder(props) {
                                                 ) : null}
                                             </div>
 
-                                            <div className=" flex font-medium   md:w-[19.2rem] max-sm:flex-row w-full max-sm:justify-between  ">
+                                            <div className=" flex font-medium   md:w-[17.5rem] max-sm:flex-row w-full max-sm:justify-between  ">
                                                 <h4 class=" text-xs text-cardBody font-poppins">
                                                     {item.repairDueDate === null ? "" : moment(item.repairDueDate).format("DD-MM-YYYY")}
                                                 </h4>
 
                                             </div>
-                                            <div className=" flex font-medium  md:w-[8.2rem] max-sm:flex-row w-full max-sm:justify-between ">
+                                            <div className=" flex font-medium  md:w-[37.2rem] max-sm:flex-row w-full max-sm:justify-between ">
                                                 <h4 class=" text-sm text-cardBody font-poppins">
                                                     {item.repairCompletePhoneCount}/{item.totalPhone}
                                                 </h4>
@@ -339,7 +352,7 @@ function ProductionRepairOrder(props) {
                                             </div>
                                         </div>
 
-                                        <div className=" flex font-medium  md:w-[8.2rem] max-sm:flex-row w-full max-sm:justify-between ">
+                                        <div className=" flex font-medium  md:w-[.2rem] max-sm:flex-row w-full max-sm:justify-between ">
                                             <h4 class=" text-sm text-cardBody font-poppins">
                                                 {item.reason}
                                             </h4>
