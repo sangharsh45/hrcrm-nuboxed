@@ -152,15 +152,16 @@
 
 
 
-import React, { Component, useEffect, useState } from "react";
+import React, { useState, lazy, Suspense,useEffect } from 'react';
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { StyledTable } from "../../../Components/UI/Antd";
 import { getOrderByUser, handleOrderPhoneModal, qcInspectionButton } from "./RefurbishAction"
-import OrderPhoneModal from "./OrderPhoneModal";
 import { Button } from "antd";
 import moment from "moment";
 import { OnlyWrapCard } from "../../../Components/UI/Layout";
+import { FormattedMessage } from "react-intl";
+const OrderPhoneModal = lazy(() => import('./OrderPhoneModal'));
 
 function ProductionOrderListById(props) {
     useEffect(() => {
@@ -181,10 +182,22 @@ function ProductionOrderListById(props) {
             <div className=' flex justify-end sticky top-28 z-auto'>
                 <OnlyWrapCard style={{ backgroundColor: "#E3E8EE" }}>
                     <div className=" flex justify-between w-[97.5%] p-2 bg-transparent font-bold sticky top-0 z-10">
-                        <div className=" md:w-[4.1rem]">Order</div>
-                        <div className=" md:w-[5.1rem]">Due Date</div>
-                        <div className=" md:w-[9.8rem] ">Completed Phones</div>
-                        <div className="md:w-[5.8rem]">Status</div>
+                        <div className=" md:w-[4.1rem]"><FormattedMessage
+                        id="app.order"
+                        defaultMessage="order"
+                      /></div>
+                        <div className=" md:w-[5.1rem]"><FormattedMessage
+                        id="app.duedate"
+                        defaultMessage="duedate"
+                      /></div>
+                        <div className=" md:w-[9.8rem] "><FormattedMessage
+                        id="app.completedphn"
+                        defaultMessage="completedphn"
+                      /></div>
+                        <div className="md:w-[5.8rem]"><FormattedMessage
+                        id="app.status"
+                        defaultMessage="status"
+                      /></div>
                         {/* <div className="md:w-[4.3rem]"></div> */}
                     </div>
                     {props.orderByUser.map((item) => {
@@ -196,7 +209,7 @@ function ProductionOrderListById(props) {
 
                                 >
                                     <div class="flex">
-                                        <div className=" flex font-medium  md:w-[15.2rem] max-sm:w-full  ">
+                                        <div className=" flex font-medium  md:w-[22.2rem] max-sm:w-full  ">
                                             <span
                                                 style={{ textDecoration: "underline", color: "#1890ff", cursor: "pointer" }}
                                                 onClick={() => {
@@ -218,7 +231,7 @@ function ProductionOrderListById(props) {
                                             ) : null}
                                         </div>
 
-                                        <div className=" flex font-medium   md:w-[19.2rem] max-sm:flex-row w-full max-sm:justify-between  ">
+                                        <div className=" flex font-medium   md:w-[26.2rem] max-sm:flex-row w-full max-sm:justify-between  ">
                                             <h4 class=" text-xs text-cardBody font-poppins">
                                                 {item.dueDate === null ? "" : moment(item.dueDate).format("DD-MM-YYYY")}
                                             </h4>
@@ -241,7 +254,7 @@ function ProductionOrderListById(props) {
 
                                         </div>
                                     </div>
-                                    <div className=" flex font-medium  md:w-[12.2rem] max-sm:flex-row w-full max-sm:justify-between ">
+                                    <div className=" flex font-medium  md:w-[10.2rem] max-sm:flex-row w-full max-sm:justify-between ">
                                         <div class=" text-xs text-cardBody font-poppins text-center">
                                             {item.qcInspectionInd === 0 ? <Button
                                                 type="primary"
