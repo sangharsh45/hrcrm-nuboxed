@@ -6,7 +6,7 @@ import { SelectComponent } from "../../../../../Components/Forms/Formik/SelectCo
 import { Formik, Form, Field } from "formik";
 import { DatePicker } from "../../../../../Components/Forms/Formik/DatePicker";
 import { InputComponent } from "../../../../../Components/Forms/Formik/InputComponent";
-import { addPaidOrder } from "../../../Account/AccountAction";
+import { addPaidOrder, getPaymentMode } from "../../../Account/AccountAction";
 import moment from "moment";
 import { TextareaComponent } from "../../../../../Components/Forms/Formik/TextareaComponent";
 import { FormattedMessage } from "react-intl";
@@ -94,7 +94,7 @@ function DistributorPaidForm(props) {
                     />
                   </div>
                   <div style={{ width: "31%" }}>
-                    <FastField
+                    <Field
                       name="orderCurrencyId"
                       label={
                         <FormattedMessage
