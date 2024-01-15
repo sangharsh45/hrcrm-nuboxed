@@ -170,12 +170,15 @@ const AddAccountForm = ({
                       </a>
                     ) : null}
                   </div>
-                  <Spacer />
+                  <div class="mt-4">
                   <Field
                     isRequired
                     name="name"
                     type="text"
-                    label="Name"
+                    label={ <FormattedMessage
+                      id="app.name"
+                      defaultMessage="name"
+                    />}
                     width={"100%"}
                     // component={InputComponent}
                     setClearbitData={setClearbitData}
@@ -184,15 +187,15 @@ const AddAccountForm = ({
                     isColumn
                     inlineLabel
                   />
-                  <Spacer />
-                  <div class=" flex justify-between">
+                  </div>
+                  <div class=" flex justify-between mt-4">
                     <div class=" w-2/6">
                       <FastField
                         name="dialCode"
                         isColumnWithoutNoCreate
                         label={
                           <FormattedMessage
-                            id="app.countryDialCode"
+                            id="app.dialCode"
                             defaultMessage="Dial Code"
                           />
                         }
@@ -208,7 +211,12 @@ const AddAccountForm = ({
                         type="text"
                         // isRequired
                         name="phoneNo"
-                        label="Phone"
+                        label={
+                          <FormattedMessage
+                            id="app.phone"
+                            defaultMessage="phone"
+                          />
+                        }
                         placeholder="Phone #"
                         component={InputComponent}
                         inlineLabel
@@ -221,29 +229,41 @@ const AddAccountForm = ({
                     // isRequired
                     name="url"
                     type="text"
-                    label="Website"
+                    label={
+                      <FormattedMessage
+                        id="app.website"
+                        defaultMessage="website"
+                      />
+                    }               
                     width={"100%"}
                     component={InputComponent}
                     isColumn
                     inlineLabel
-                  />
-                  <Spacer />
-                  <FlexContainer justify-content="space-evenly">
+                  />              
+                  <div class="flex  mt-4" >
                     <div>
-                      <b>VAT Validity</b>
+                      <b><FormattedMessage
+                        id="app.vatvalidity"
+                        defaultMessage="vatvalidity"
+                      /></b>
                       <Checkbox
                         checked={vatInd}
                         onChange={handleVatCheckBox}
                       />
                     </div>
-                  </FlexContainer>
+                  </div>
 
-                  <Spacer />
-                  <FlexContainer justifyContent="space-between">
-                    <div style={{ width: "47%" }}>
+                 
+                  <div class="flex justify-between mt-4" >
+                  <div class="w-w47.5">
                       <FastField
-                        name="country"
-                        label="Country"
+                        name="country"                      
+                        label={
+                          <FormattedMessage
+                            id="app.country"
+                            defaultMessage="country"
+                          />
+                        } 
                         isColumn
                         placeholder="Select"
                         inlineLabel
@@ -253,9 +273,14 @@ const AddAccountForm = ({
                         }
                       />
                     </div>
-                    <div style={{ width: "47%" }}>
+                    <div class="w-w47.5">
                       <FastField
-                        label="VAT #"
+                         label={
+                          <FormattedMessage
+                            id="app.vat"
+                            defaultMessage="vat"
+                          />
+                        } 
                         name="countryValue"
                         placeholder="Value"
                         component={InputComponent}
@@ -264,22 +289,32 @@ const AddAccountForm = ({
                         isColumn
                       />
                     </div>
-                  </FlexContainer>
-                  <Spacer />
+                  </div>
+                 <div class="mt-4">
                   <Field
                     name="insuranceGrade"
                     type="text"
-                    label="Insurance Grade"
+                    label={
+                      <FormattedMessage
+                        id="app.insurancegrade"
+                        defaultMessage="insurancegrade"
+                      />
+                    }
                     width={"100%"}
                     component={InputComponent}
                     isColumn
                     inlineLabel
                   />
-                  <Spacer />
-                  <FlexContainer justifyContent="space-between">
-                    <div style={{ width: "47%" }}>
+                  </div>
+                  <div class="flex justify-between mt-4" >
+                  <div class="w-w47.5">
                       <FastField
-                        label="Credit Limit"
+                      label={
+                        <FormattedMessage
+                          id="app.creditlimit"
+                          defaultMessage="creditlimit"
+                        />
+                      }
                         name="currencyPrice"
                         placeholder="Price"
                         component={InputComponent}
@@ -288,22 +323,30 @@ const AddAccountForm = ({
                         isColumn
                       />
                     </div>
-                    <div style={{ width: "47%" }}>
+                    <div class="w-w47.5">
                       <FastField
-                        name="currency"
-                        label="Currency"
+                        label={
+                          <FormattedMessage
+                            id="app.currency"
+                            defaultMessage="currency"
+                          />
+                        }
                         isColumn
                         inlineLabel
                         component={SelectComponent}
                         options={Array.isArray(currencyOption) ? currencyOption : []}
                       />
                     </div>
-                  </FlexContainer>
-                  <Spacer />
-                  <FlexContainer justifyContent="space-between">
-                    <div style={{ width: "47%" }}>
+                  </div>
+                  <div class="flex justify-between mt-4" >
+                  <div class="w-w47.5">
                       <FastField
-                        label="Payment Terms (in Days)"
+                        label={
+                          <FormattedMessage
+                            id="app.Paymenttermdays"
+                            defaultMessage="Paymenttermdays"
+                          />
+                        }
                         name="payment"
                         placeholder="Select"
                         component={SelectComponent}
@@ -313,10 +356,15 @@ const AddAccountForm = ({
                         isColumn
                       />
                     </div>
-                    <div style={{ width: "47%" }}>
+                    <div class="w-w47.5">
                       <FastField
                         name="clientName"
-                        label="Type"
+                        label={
+                          <FormattedMessage
+                            id="app.type"
+                            defaultMessage="type"
+                          />
+                        }
                         isColumn
                         inlineLabel
                         component={SelectComponent}
@@ -325,23 +373,32 @@ const AddAccountForm = ({
                         }
                       />
                     </div>
-                  </FlexContainer>
-                  <Spacer />
+                  </div>
+                 <div class="mt-4">
                   <Field
                     name="description"
-                    label="Description"
+                    label={
+                      <FormattedMessage
+                        id="app.description"
+                        defaultMessage="description"
+                      />
+                    }
                     width={"100%"}
                     isColumn
                     component={TextareaComponent}
                   />
+                  </div>
                 </div>
                 <div class=" h-full w-w47.5 max-sm:w-wk">
-                  <div class=" h-full w-full mt-2">
+                  <div class=" h-full w-full mt-3">
                     <Listbox value={selected} onChange={setSelected}>
                       {({ open }) => (
                         <>
                           <Listbox.Label className="block font-semibold text-[0.75rem] ">
-                            Assigned to
+                          <FormattedMessage
+                        id="app.assignedto"
+                        defaultMessage="assignedto"
+                      />
                           </Listbox.Label>
                           <div className="relative mt-[0.1rem]">
                             <Listbox.Button className="relative w-full leading-4 cursor-default border border-gray-300 bg-white py-0.5 pl-3 pr-10 text-left shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm">
@@ -403,8 +460,12 @@ const AddAccountForm = ({
                       )}
                     </Listbox>
                   </div>
-                  <Spacer />
-                  <StyledLabel >Billing Address</StyledLabel>
+                 <div class="mt-4">
+                  <StyledLabel > <FormattedMessage
+                        id="app.billingaddress"
+                        defaultMessage="billingaddress"
+                      /></StyledLabel>
+                      </div>
                   <div>
                     <FieldArray
                       name="address"
@@ -419,16 +480,19 @@ const AddAccountForm = ({
                   </div>
                 </div>
               </div>
-              <Spacer />
-              <FlexContainer justifyContent="flex-end">
+             
+              <div class="flex justify-end mt-4" >
                 <Button
                   type="primary"
                   htmlType="submit"
                   loading={addingDistributor}
                 >
-                  Create
+                 <FormattedMessage
+                        id="app.create"
+                        defaultMessage="create"
+                      />
                 </Button>
-              </FlexContainer>
+              </div>
             </Form>
           </div>
         )}

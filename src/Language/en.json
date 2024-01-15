@@ -344,5 +344,13 @@
   "app.course":"Course",
   "app.program":"Program",
   "app.readless":"Read Less",
-  "app.readmore":"Read More"
+  "app.readmore":"Read More",
+  "app.website":"Website",
+  "app.Paymentdays":"Payment(Days)",
+  "app.vat":"VAT",
+  "app.billingaddress":"Billing Address",
+  "app.vatvalidity":"VAT Validity",
+  "app.insurancegrade":"Insurance Grade",
+  "app.creditlimit":"Credit Limit",
+  "app.Paymenttermdays":"Payment Terms (in Days)"
 }

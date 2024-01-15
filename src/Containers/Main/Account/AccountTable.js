@@ -19,6 +19,7 @@ import {
   emptyDistributor
 } from "./AccountAction";
 import moment from "moment";
+import { FormattedMessage } from "react-intl";
 const UpdateAccountModal = lazy(() => import("./UpdateAccountModal"));
 
 
@@ -56,14 +57,38 @@ function AccountTable(props) {
       <div className=' flex justify-end sticky top-28 z-auto'>
         <OnlyWrapCard style={{ backgroundColor: "#E3E8EE" }}>
           <div className=" flex justify-between w-[97.5%] px-2 bg-transparent font-bold sticky top-0 z-10">
-            <div className=" md:w-[10.1rem]">Name</div>
-            <div className=" md:w-[9.1rem]">Work</div>
-            <div className=" md:w-[6.8rem] ">Website</div>
-            <div className="md:w-[4.9rem]">Type</div>
-            <div className="md:w-[7.8rem]">Payment(Days)</div>
-            <div className="md:w-[6.9rem]">VAT</div>
-            <div className="md:w-[8.2rem]">Billing Address </div>
-            <div className="md:w-[4.3rem]">Pin Code</div>
+            <div className=" md:w-[13.12rem]">  <FormattedMessage
+                        id="app.name"
+                        defaultMessage="name"
+                      /></div>
+            <div className=" md:w-[13.121rem]"><FormattedMessage
+                        id="app.work#"
+                        defaultMessage="work#"
+                      /></div>
+            <div className=" md:w-[11.825rem] "><FormattedMessage
+                        id="app.website"
+                        defaultMessage="website"
+                      /></div>
+            <div className="md:w-[8.95rem]"><FormattedMessage
+                        id="app.type"
+                        defaultMessage="type"
+                      /></div>
+            <div className="md:w-[7.8rem]"><FormattedMessage
+                        id="app.Paymentdays"
+                        defaultMessage="Paymentdays"
+                      /></div>
+            <div className="md:w-[6.94rem]"><FormattedMessage
+                        id="app.vat"
+                        defaultMessage="vat"
+                      /></div>
+            <div className="md:w-[8.21rem]"><FormattedMessage
+                        id="app.billingaddress"
+                        defaultMessage="billingaddress"
+                      /></div>
+            <div className="md:w-[7.32rem]"><FormattedMessage
+                        id="app.pincode"
+                        defaultMessage="pincode"
+                      /></div>
 
           </div>
           <InfiniteScroll
@@ -97,7 +122,7 @@ function AccountTable(props) {
                   // }}
                   >
                     <div class="flex">
-                      <div className=" flex font-medium flex-col md:w-[10.1rem] max-sm:w-full  ">
+                      <div className=" flex font-medium flex-col md:w-[12.6rem] max-sm:w-full  ">
 
 
                         <Tooltip>
@@ -139,7 +164,7 @@ function AccountTable(props) {
 
                     </div>
 
-                    <div className=" flex font-medium flex-col md:w-[6.5rem] max-sm:flex-row w-full max-sm:justify-between ">
+                    <div className=" flex font-medium flex-col md:w-[7.55rem] max-sm:flex-row w-full max-sm:justify-between ">
                       {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden"># Opportunity</h4> */}
 
                       <div class=" text-xs text-cardBody font-poppins text-center">
@@ -147,7 +172,7 @@ function AccountTable(props) {
 
                       </div>
                     </div>
-                    <div className=" flex font-medium flex-col md:w-[6.2rem] max-sm:flex-row w-full max-sm:justify-between ">
+                    <div className=" flex font-medium flex-col md:w-[6.24rem] max-sm:flex-row w-full max-sm:justify-between ">
                       {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden">Pipeline Value</h4> */}
 
                       <div class=" text-xs text-cardBody font-poppins text-center">
@@ -156,7 +181,7 @@ function AccountTable(props) {
                       </div>
                     </div>
 
-                    <div className=" flex font-medium flex-col md:w-[11.2rem] max-sm:flex-row w-full max-sm:justify-between ">
+                    <div className=" flex font-medium flex-col md:w-[4.23rem] max-sm:flex-row w-full max-sm:justify-between ">
                       {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden">Weighted Value</h4> */}
 
                       <div class=" text-xs text-cardBody font-poppins text-center">
@@ -167,7 +192,7 @@ function AccountTable(props) {
 
                     <div class="flex md:items-center">
 
-                      <div className=" flex font-medium flex-col  md:w-[7.2rem] max-sm:flex-row w-full max-sm:justify-between  ">
+                      <div className=" flex font-medium flex-col  md:w-[7.21rem] max-sm:flex-row w-full max-sm:justify-between  ">
 
                         {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden"> Sector </h4> */}
                         <h4 class=" text-xs text-cardBody font-poppins">
@@ -175,7 +200,7 @@ function AccountTable(props) {
                         </h4>
 
                       </div>
-                      <div className=" flex font-medium flex-col  md:w-[6.9rem] max-sm:flex-row w-full max-sm:justify-between  ">
+                      <div className=" flex font-medium flex-col  md:w-[8.95rem] max-sm:flex-row w-full max-sm:justify-between  ">
 
                         {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden"> Sector </h4> */}
                         <h4 class=" text-xs text-cardBody font-poppins">
@@ -184,7 +209,7 @@ function AccountTable(props) {
 
                       </div>
 
-                      <div className=" flex font-medium flex-col  md:w-[6.9rem] max-sm:flex-row w-full max-sm:justify-between  ">
+                      <div className=" flex font-medium flex-col  md:w-[1.92rem] max-sm:flex-row w-full max-sm:justify-between  ">
 
                         {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden"> Sector </h4> */}
                         <h4 class=" text-xs text-cardBody font-poppins">
