@@ -1505,23 +1505,23 @@ export const customerReducer = (state = initialState, action) => {
                               };
 
 
-                              case types.GET_CUSTOMERS_LIST_REQUEST:
-                                return { ...state, fetchingCustomersList: true };
-                              case types.GET_CUSTOMERS_LIST_SUCCESS:
-                                return {
-                                  ...state,
-                                  fetchingCustomersList: false,
-                                   customerByList: action.payload,
+                              // case types.GET_CUSTOMERS_LIST_REQUEST:
+                              //   return { ...state, fetchingCustomersList: true };
+                              // case types.GET_CUSTOMERS_LIST_SUCCESS:
+                              //   return {
+                              //     ...state,
+                              //     fetchingCustomersList: false,
+                              //      customerByList: action.payload,
                           
                                  
                                 
-                                };
-                              case types.GET_CUSTOMERS_LIST_FAILURE:
-                                return {
-                                  ...state,
-                                  fetchingCustomersList: false,
-                                  fetchingCustomersListError: true,
-                                };
+                              //   };
+                              // case types.GET_CUSTOMERS_LIST_FAILURE:
+                              //   return {
+                              //     ...state,
+                              //     fetchingCustomersList: false,
+                              //     fetchingCustomersListError: true,
+                              //   };
 
 
 

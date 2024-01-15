@@ -11,7 +11,7 @@ import draftToHtml from "draftjs-to-html";
 import { addCandidateEmail, getFilteredEmailContact } from "../../CandidateAction";
 import { Formik, Form, Field,  } from "formik";
 import * as Yup from "yup";
-import { getCustomerList } from "../../../Customer/CustomerAction";
+import { getCustomerData } from "../../../Customer/CustomerAction";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import { SelectComponent } from "../../../../Components/Forms/Formik/SelectComponent";
 const ChooseCandidateEmailTable = lazy(() =>
@@ -126,14 +126,14 @@ class EmailCandidateForm extends Component {
       }
 
   componentDidMount() {
-    const { getFilteredEmailContact, getCustomerList, userId } = this.props;
+    const { getFilteredEmailContact, getCustomerData, userId } = this.props;
     getFilteredEmailContact(userId);
-    getCustomerList(userId)
+    getCustomerData(userId)
   }
 
   render() {
 
-    const customerOption = this.props.customerByList.map((item) => {
+    const customerOption = this.props.customerData.map((item) => {
         return {
           label: item.name || "",
           value: item.customerId,
@@ -452,7 +452,8 @@ const mapStateToProps = ({ auth, opportunity, contact, customer ,candidate}) => 
    
     userId: auth.userDetails.userId,
     user: auth.userDetails.user,
-    customerByList:customer.customerByList,
+    // customerByList:customer.customerByList,
+    customerData:customer.customerData,
     //customerByUserId: customer.customerByUserId,
     filteredContact: candidate.filteredContact,
     chooseCandidateEmail: candidate.chooseCandidateEmail,
@@ -465,7 +466,7 @@ const mapDispatchToProps = (dispatch) =>
     {
         addCandidateEmail,
         getFilteredEmailContact,
-        getCustomerList,
+        getCustomerData,
         // getCustomerListByUserId,
         // linktagCustomer
      

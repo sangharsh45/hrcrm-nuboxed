@@ -101,7 +101,7 @@ const HeaderActionRight = (props) => {
         </div>
         <Popover>
           <StyledRangePicker
-            style={{width:"20%"}}
+            style={{width:"30%"}}
             onChange={(range) => {
               props.setTimeRangeReport(range[0], range[1]);
               console.log(range);
