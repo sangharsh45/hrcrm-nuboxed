@@ -338,7 +338,7 @@
 
 
 
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect, useMemo,lazy } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { StyledTable } from "../../../Components/UI/Antd";
@@ -350,11 +350,12 @@ import { SubTitle } from "../../../Components/UI/Elements";
 import ButtonGroup from "antd/lib/button/button-group";
 import { updateQCStatus } from "../Account/AccountAction"
 import moment from "moment";
-import QCPhoneNotesOrderModal from "./QCPhoneNotesOrderModal";
-import AddingQCSpareList from "./AddingQCSpareList";
 import { NoteAddOutlined } from "@mui/icons-material";
-import DistributorPhoneTaskTable from "./DistributorPhoneTaskTable";
 import { OnlyWrapCard } from "../../../Components/UI/Layout";
+import { FormattedMessage } from "react-intl";
+const AddingQCSpareList = lazy(() => import('./AddingQCSpareList'));
+const QCPhoneNotesOrderModal = lazy(() => import('./QCPhoneNotesOrderModal'));
+const DistributorPhoneTaskTable = lazy(() => import('./DistributorPhoneTaskTable'));
 
 function OrderPhoneListById(props) {
     useEffect(() => {
@@ -434,14 +435,39 @@ function OrderPhoneListById(props) {
             <div className=' flex justify-end sticky flex-col z-auto'>
                 <OnlyWrapCard style={{ backgroundColor: "#E3E8EE" }}>
                     <div className=" flex justify-between w-[97.5%] p-2 bg-transparent font-bold sticky top-0 z-10">
-                        <div className=" md:w-[1.1rem]">Company</div>
-                        <div className=" md:w-[1.2rem]">Model</div>
-                        <div className=" md:w-[2.8rem] ">IMEI</div>
-                        <div className="md:w-[3.6rem]">QR Code</div>
-                        <div className="md:w-[4.8rem]">Start Time</div>
-                        <div className="md:w-[4.3rem]">End Time</div>
-                        <div className="md:w-[6.2rem]">Actual Effort</div>
-                        <div className="md:w-[7.5rem]">Estimated Hours</div>
+                        <div className=" md:w-[3.1rem]"><FormattedMessage
+                        id="app.company"
+                        defaultMessage="company"
+                      /></div>
+                        <div className=" md:w-[2.2rem]"><FormattedMessage
+                        id="app.model"
+                        defaultMessage="model"
+                      /></div>
+                        <div className=" md:w-[5.8rem] "><FormattedMessage
+                        id="app.iMEI"
+                        defaultMessage="iMEI"
+                      /></div>
+                        <div className="md:w-[3.6rem]"><FormattedMessage
+                        id="app.qrcode"
+                        defaultMessage="qrcode"
+                      /></div>
+                       <div className="md:w-[4.6rem]"></div>
+                        <div className="md:w-[4.8rem]"><FormattedMessage
+                        id="app.starttime"
+                        defaultMessage="starttime"
+                      /></div>
+                        <div className="md:w-[4.3rem]"><FormattedMessage
+                        id="app.endtime"
+                        defaultMessage="endtime"
+                      /></div>
+                        <div className="md:w-[6.2rem]"><FormattedMessage
+                        id="app.actualeffort"
+                        defaultMessage="actualeffort"
+                      /></div>
+                        <div className="md:w-[7.5rem]"><FormattedMessage
+                        id="app.estimatehours"
+                        defaultMessage="estimatehours"
+                      /></div>
                         <div className="md:w-[6.9rem]"></div>
                     </div>
                     {props.orderPhoneList.map((item) => {
@@ -497,7 +523,7 @@ function OrderPhoneListById(props) {
 
                                         </div>
                                     </div>
-                                    <div className=" flex font-medium  md:w-[6.2rem] max-sm:flex-row w-full max-sm:justify-between ">
+                                    <div className=" flex font-medium  md:w-[8.21rem] max-sm:flex-row w-full max-sm:justify-between ">
                                         <div class=" text-xs text-cardBody font-poppins text-center">
                                             {props.rowData.qcInspectionInd === 1 && <ButtonGroup>
                                                 <StatusIcon
@@ -548,7 +574,7 @@ function OrderPhoneListById(props) {
 
                                         </div>
                                     </div>
-                                    <div className=" flex font-medium  md:w-[11.3rem] max-sm:flex-row w-full max-sm:justify-between ">
+                                    <div className=" flex font-medium  md:w-[7.3rem] max-sm:flex-row w-full max-sm:justify-between ">
                                         <div class=" text-xs text-cardBody font-poppins text-center">
                                             {item.totalhours}
 
