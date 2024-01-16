@@ -517,6 +517,31 @@ export const getNoOfTechnicianById = (orderPhoneId) => (dispatch) => {
       });
     });
 };
+export const getNoOfPhoneInQCById = (orderPhoneId, technicianId) => (dispatch) => {
+  dispatch({
+    type: types.GET_NO_OF_PHONE_IN_QC_BYID_REQUEST,
+  });
+  axios
+    .get(`${base_url2}/TechnicianPhoneList/${orderPhoneId}/${technicianId}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.GET_NO_OF_PHONE_IN_QC_BYID_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.GET_NO_OF_PHONE_IN_QC_BYID_FAILURE,
+        payload: err,
+      });
+    });
+};
 
 export const getNoOfRepairTechnicianById = (orderPhoneId) => (dispatch) => {
   dispatch({

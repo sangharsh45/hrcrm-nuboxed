@@ -8,9 +8,9 @@ import QCPhoneListByTechnician from './QCPhoneListByTechnician'
 
 const TechnicianListByOrderId = (props) => {
 
-    // useEffect(() => {
-    //     props.getNoOfTechnicianById(props.rowData.orderPhoneId)
-    // }, [])
+    useEffect(() => {
+        props.getNoOfTechnicianById(props.rowData.orderPhoneId)
+    }, [])
     const [row, setRow] = useState({})
     const [show, setShow] = useState(false)
 
@@ -53,7 +53,7 @@ const TechnicianListByOrderId = (props) => {
     return (
         <div>
             <StyledTable
-                // dataSource={props.technicianByID}
+                dataSource={props.technicianByID}
                 pagination={false}
                 columns={column}
             />
@@ -64,7 +64,7 @@ const TechnicianListByOrderId = (props) => {
 
 
 const mapStateToProps = ({ auth, production }) => ({
-    // technicianByID: production.technicianByID
+    technicianByID: production.technicianByID
 });
 
 const mapDispatchToProps = (dispatch) =>

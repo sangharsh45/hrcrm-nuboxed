@@ -4,74 +4,15 @@ import { bindActionCreators } from "redux";
 import { StyledTable } from "../../../Components/UI/Antd";
 import * as Yup from "yup";
 import { Button, Tooltip } from "antd";
+import { getDispatchUpdateList } from "../Inventory/InventoryAction"
 import { MultiAvatar, SubTitle } from "../../../Components/UI/Elements";
 import QRCodeModal from "../../../Components/UI/Elements/QRCodeModal";
 
 function InspectedPhoneByOrder(props) {
-    // useEffect(() => {
-    //     props.getNoOfPhoneById(props.rowData.orderPhoneId)
-    // }, [props.rowData.orderPhoneId])
+    useEffect(() => {
+        props.getDispatchUpdateList(props.rowData.orderPhoneId)
+    }, [props.rowData.orderPhoneId])
 
-    const [RowData, setRowData] = useState({});
-    function handleSetRowData(item) {
-        setRowData(item);
-    }
-    const [expand, setExpand] = useState(false);
-    const [spares, setspares] = useState(false);
-    const [phoneId, setphoneId] = useState("");
-
-    function handleExpand(phoneId) {
-        setExpand(!expand);
-        setspares(false)
-        setphoneId(phoneId);
-    }
-    function hanldeSpare(phoneId) {
-        setspares(!spares);
-        setExpand(false)
-        setphoneId(phoneId);
-    }
-
-    function StatusIcon({ type, size, indStatus, iconType, tooltip, status, id, onClick, phoneId }) {
-        const start = type;
-        console.log(start);
-        //////debugger;
-        if (status === type) {
-            size = "30px";
-        } else {
-            size = "16px";
-        }
-        return (
-            <Tooltip title={tooltip}>
-                <Button
-                    ghost={status !== type}
-                    style={{
-                        padding: "6px",
-                        borderColor: "transparent",
-                        color: indStatus === type ? "orange" : "grey",
-                    }}
-                    onClick={onClick}
-                >
-                    <i className={`fas ${iconType}`} style={{ fontSize: "22px" }}></i>
-                </Button>
-            </Tooltip>
-        );
-    }
-
-    const [active, setActive] = useState("To Start")
-
-    // function handleQCStatus(type) {
-    //   setActive(type)
-    //   console.log(type)
-    //   console.log(RowData.phoneId)
-    //   const data = {
-    //     qcStatus: type,
-    //     orderPhoneId: props.particularRowData.orderId,
-    //     phoneId: RowData.phoneId
-    //   }
-    //   props.updateQCStatus(data, RowData.phoneId, props.particularRowData.orderId)
-    // }
-
-    console.log(RowData)
     const columns = [
         {
             title: "",
@@ -112,7 +53,7 @@ function InspectedPhoneByOrder(props) {
         },
         {
             title: "Condition",
-            dataIndex: "condition",
+            dataIndex: "conditions",
             width: "10%",
         },
 
@@ -147,7 +88,7 @@ function InspectedPhoneByOrder(props) {
         <>
             <StyledTable
                 columns={columns}
-                // dataSource={props.phoneListById}
+                dataSource={props.updateDispatchList}
                 pagination={false}
                 scroll={{ y: 200 }}
             />
@@ -156,14 +97,14 @@ function InspectedPhoneByOrder(props) {
     );
 }
 
-const mapStateToProps = ({ distributor }) => ({
-
+const mapStateToProps = ({ inventory }) => ({
+    updateDispatchList: inventory.updateDispatchList,
 });
 
 const mapDispatchToProps = (dispatch) =>
     bindActionCreators(
         {
-            // getNoOfPhoneById
+            getDispatchUpdateList
         },
         dispatch
     );
