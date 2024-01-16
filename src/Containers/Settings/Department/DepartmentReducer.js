@@ -14,6 +14,9 @@ const initialState = {
     addingRecruitToggle: false,
     addingRecruitToggleError: false,
 
+    addingElearningToggle: false,
+    addingElearningToggleError: false,
+
     addingDepartments: false,
     addingDepartmentsError: false,
 
@@ -272,6 +275,28 @@ export const departmentsReducer = (state = initialState, action) => {
                   addingRecruitToggle: false,
                   addingRecruitToggleError: true,
                 };
+
+                case types.LINK_ELEARNING_TOGGLE_REQUEST:
+                  return { ...state, addingElearningToggle: true };
+                case types.LINK_ELEARNING_TOGGLE_SUCCESS:
+                  return {
+                    ...state,
+                    addingElearningToggle: false,
+                    departments:action.payload,
+                    // departments: state.departments.map((item) => {
+                    //   if (item.departmentId === action.payload.departmentId) {
+                    //     return action.payload;
+                    //   } else {
+                    //     return item;
+                    //   }
+                    // }),
+                  };
+                case types.LINK_ELEARNING_TOGGLE_FAILURE:
+                  return {
+                    ...state,
+                    addingElearningToggle: false,
+                    addingElearningToggleError: true,
+                  };
 
                 
               case types.HANDLE_CLAER_REDUCER_DATA_DEPARTMENT:

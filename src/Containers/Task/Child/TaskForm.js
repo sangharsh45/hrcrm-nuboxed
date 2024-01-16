@@ -18,14 +18,13 @@ import {
   addTask,
   updateTask,
   handleTaskModal,
-  getCustomerTask,
   getProjectTaskList,
 
   getCandidateTaskList,
   getCandidateTaskFilterList,
   deleteTask,
 } from "../TaskAction";
-import { getTaskForRecruit,
+import {
   getTaskForStages,
   getTaskForWorkflow,
  } from "../../Settings/SettingsAction";
@@ -235,8 +234,6 @@ const [priority,setpriority]=useState(props.selectedTask
       props.getAllCustomerData(userId)
       props.getAllOpportunityData(userId)
       props.getFilteredEmailContact(userId);
-    props.getTaskForRecruit(props.orgId);
-    props.getCustomerTask(props.orgId);
     props.getProjectTaskList(props.orgId);
     props.getTasks();
     props.getUnits(props.orgId);
@@ -1613,8 +1610,6 @@ const mapDispatchToProps = (dispatch) =>
       getCandidateTaskList,
       updateTask,
       handleTaskModal,
-      getCustomerTask,
-      getTaskForRecruit,
       deleteTask,
       getEmployeelist,
       getProjectTaskList,

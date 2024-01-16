@@ -181,9 +181,9 @@ getLocationNameOption(filterOptionKey, filterOptionValue) {
         country:  setEditingEmployee.country || "",
         workplace: setEditingEmployee.workplace || "",
         designationTypeId: setEditingEmployee.designationTypeId || "",
-         departmentId: setEditingEmployee.departmentId || "",
+        departmentId:setEditingEmployee.department,
+        reportingManagerDeptId: setEditingEmployee.reportingManagerDeptId || "",
         roleType: setEditingEmployee.roleType || "",
-        // departmentId:this.state.selectedDept,
         roleType:this.state.selectedRole,
         linkedinPublicUrl: setEditingEmployee.linkedinPublicUrl || "",
         label:  setEditingEmployee.label || "",
@@ -215,9 +215,10 @@ getLocationNameOption(filterOptionKey, filterOptionValue) {
         this.props.updateEmployee(
           {
             ...values,
+            departmentId:this.state.selectedDept,
             location:this.state.selectedLocation,
             workplace:this.state.selectedCountry,
-            departmentId:this.state.selectedDept,
+            reportingManagerDeptId:values.reportingManagerDeptId,
             roleType:this.state.selectedRole,
             job_type: this.state.active ? "Full Time" : "Part Time",
             type: this.state.typeInd ? "true" : "false",
@@ -521,8 +522,9 @@ getLocationNameOption(filterOptionKey, filterOptionValue) {
 <div class=" flex justify-between max-sm:flex-col" >
 <div class=" w-w48 flex flex-col max-sm:w-wk">
 <label style={{color:"#444",fontWeight:"bold",fontSize:" 0.75rem"}}>Department</label>
-<select 
-                        style={{ border: "0.06em solid #aaa" }}
+<select className="customize-select"
+name="departmentId"
+                       
                       onChange={this.handleDeptChange}>
           <option value="">Select </option>
           {this.props.departments.map((item, index) => (
@@ -566,8 +568,8 @@ getLocationNameOption(filterOptionKey, filterOptionValue) {
                   <div class=" w-w48 flex flex-col max-sm:w-wk">
                   <label style={{color:"#444",fontWeight:"bold",fontSize:" 0.75rem"}}>Role</label>
        
-                  <select
-                 style={{ border: "0.06em solid #aaa" }}
+                  <select className="customize-select"
+                 
                       onChange={this.handleRoleChange}
                     >
           <option value="">Select </option>
@@ -620,10 +622,10 @@ getLocationNameOption(filterOptionKey, filterOptionValue) {
                      /> */}
                          <Spacer/>
                       <div class=" flex justify-between max-sm:flex-col" >
-                      <div class=" w-w48 max-sm:w-wk">
+                      <div class=" w-w48 flex flex-col max-sm:w-wk">
                       <label style={{color:"#444",fontWeight:"bold",fontSize:" 0.75rem"}}>WorkPlace</label>
-                      <select 
-                        style={{ border: "0.06em solid #aaa" }}
+                      <select className="customize-select"
+                      
                       onChange={this.handleCountryChange}>
           <option value="">Select </option>
           {this.props.countries.map((item, index) => (
@@ -636,8 +638,8 @@ getLocationNameOption(filterOptionKey, filterOptionValue) {
              
                     <div class="w-w47.5 flex flex-col">
                     <label style={{color:"#444",fontWeight:"bold",fontSize:" 0.75rem"}}>Location</label>
-                    <select
-                 style={{ border: "0.06em solid #aaa" }}
+                    <select className="customize-select"
+             
                       onChange={this.handleLocationChange}
                     >
           <option value="">Select </option>
@@ -658,10 +660,10 @@ getLocationNameOption(filterOptionKey, filterOptionValue) {
                   </div>
 
                   <div class="mt-2"><label style={{color:"#444",fontWeight:"bold",fontSize:" 0.75rem"}}>Reports To</label></div>
-                  <div class=" flex justify-between mt-2 max-sm:flex-col" >
+                  <div class=" flex justify-between  max-sm:flex-col" >
                       <div class=" w-w48 max-sm:w-wk">
                   <Field
-                    name="departmentId"
+                    name="reportingManagerDeptId"
                     label={<FormattedMessage
                       id="app.department"
                       defaultMessage="Department"
@@ -677,7 +679,7 @@ getLocationNameOption(filterOptionKey, filterOptionValue) {
                     inlineLabel
                      />
                      </div>
-                     <Spacer/>
+                  
                      <div class="w-w47.5 max-sm:w-wk">
                      <Field
                     name="reportingManager"
@@ -689,21 +691,21 @@ getLocationNameOption(filterOptionKey, filterOptionValue) {
                     component={SelectComponent}
                     options={
                       Array.isArray(
-                        this.getEmployeesbyDepartment("departmentId", values.departmentId)
+                        this.getEmployeesbyDepartment("reportingManagerDeptId", values.reportingManagerDeptId)
                       )
                         ? this.getEmployeesbyDepartment(
-                            "departmentId",
-                            values.departmentId
+                            "reportingManagerDeptId",
+                            values.reportingManagerDeptId
                           )
                         : []
                     }
                     isColumn
                     value={values.reportingManager}
                     filterOption={{
-                      filterType: "departmentId",
-                      filterValue: values.departmentId,
+                      filterType: "reportingManagerDeptId",
+                      filterValue: values.reportingManagerDeptId,
                     }}
-                    disabled={!values.departmentId}
+                    disabled={!values.reportingManagerDeptId}
                     inlineLabel
                    />
               </div>

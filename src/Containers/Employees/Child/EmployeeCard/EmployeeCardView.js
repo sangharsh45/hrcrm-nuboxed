@@ -212,7 +212,7 @@ function handleSetCurrentEmployeeId(employeeId,) {
            </Tooltip>
             </div>
            <div class=" font-normal text-xs text-cardBody font-poppins ">
-           {user.userUpdateInd === true || user.role === "ADMIN"  && (
+           {user.userUpdateInd === true || user.role === "ADMIN"  ? (
             <Tooltip title="Edit">
               <BorderColorIcon
                 style={{ cursor: "pointer",fontSize: "1rem" }}
@@ -225,7 +225,7 @@ function handleSetCurrentEmployeeId(employeeId,) {
                 }}
               />
             </Tooltip>
-            )}
+            ):null}
            </div>
            </div>
          
