@@ -63,7 +63,7 @@ const ReceivedTable = (props) => {
                   <div class="flex">
 
                     <div className=" flex font-medium flex-col md:w-[6.1rem] max-sm:w-full  ">
-                      <h4 class="text-sm text-cardBody font-semibold  font-poppins cursor-pointer">
+                      <h4 class="text-sm text-cardBody font-semibold  font-poppins cursor-pointer underline text-blue-600">
                         <span
                           onClick={() => {
                             handleRowData(item);

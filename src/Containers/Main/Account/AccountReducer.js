@@ -1664,7 +1664,13 @@ export const distributorReducer = (state = initialState, action) => {
         ...state,
         addingLocationInOrder: false,
         addInventoryInOrder: false,
-        distributorOrder: [action.payload, ...state.distributorOrder]
+        distributorOrder: state.distributorOrder.map((item) => {
+          if (item.orderId == action.payload.orderId) {
+            return action.payload;
+          } else {
+            return item;
+          }
+        }),
       };
     case types.ADD_LOCATION_IN_ORDER_FAILURE:
       return {

@@ -2,13 +2,13 @@ import React, { useEffect, useState } from 'react'
 import { StyledTable } from '../../../Components/UI/Antd'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-// import { getNoOfTechnicianById } from "./RefurbishAction"
+import { getNoOfphoneInRepair } from "./RefurbishAction"
 
 const RepairPhoneListByTechnician = (props) => {
 
-    // useEffect(() => {
-    //     props.getNoOfTechnicianById(props.rowData.orderPhoneId)
-    // }, [])
+    useEffect(() => {
+        props.getNoOfphoneInRepair(props.rowData.orderPhoneId)
+    }, [])
     const [row, setRow] = useState({})
     const [show, setShow] = useState(false)
 
@@ -41,7 +41,7 @@ const RepairPhoneListByTechnician = (props) => {
     return (
         <div>
             <StyledTable
-                // dataSource={props.repairByTechnician}
+                dataSource={props.repairPhoneByTechId}
                 pagination={false}
                 columns={column}
             />
@@ -52,13 +52,13 @@ const RepairPhoneListByTechnician = (props) => {
 
 
 const mapStateToProps = ({ auth, refurbish }) => ({
-    // repairByTechnician: refurbish.repairByTechnician
+    repairPhoneByTechId: refurbish.repairPhoneByTechId
 });
 
 const mapDispatchToProps = (dispatch) =>
     bindActionCreators(
         {
-            // getNoOfTechnicianById
+            getNoOfphoneInRepair
         },
         dispatch
     );

@@ -10,7 +10,7 @@ import { EditOutlined, FileDoneOutlined } from "@ant-design/icons";
 import * as Yup from "yup";
 import ReceivedOrderIdPhoneNoteModal from "./ReceivedOrderIdPhoneNoteModal";
 import QRCodeModal from "../../../../../../Components/UI/Elements/QRCodeModal";
-import { SubTitle } from "../../../../../../Components/UI/Elements";
+import { MultiAvatar2, SubTitle } from "../../../../../../Components/UI/Elements";
 import ReceiveValidationToggle from "./ReceiveValidationToggle";
 import ReceivedModal from "./ReceivedPhoneModal";
 import moment from "moment";
@@ -149,7 +149,21 @@ function OpenReceivedOrderIdForm(props) {
     {
       title: "Received by",
       width: "9%",
-      dataIndex: "receivePhoneUserName"
+      dataIndex: "receivePhoneUserName",
+      render: (text, item) => {
+        return (
+          <>
+            {item.receivePhoneUserName !== null && <Tooltip title={item.receivePhoneUserName}>
+              <MultiAvatar2
+                primaryTitle={item.receivePhoneUserName}
+                imageURL={item.imageURL}
+                imgWidth={"1.8rem"}
+                imgHeight={"1.8rem"}
+              />
+            </Tooltip>}
+          </>
+        )
+      }
     },
     {
       title: "Received",
@@ -158,11 +172,13 @@ function OpenReceivedOrderIdForm(props) {
         //debugger
         return (
           <Tooltip>
-            <ReceiveValidationToggle
-              orderPhoneId={props.rowData.orderPhoneId}
-              phoneId={item.phoneId}
-              receivePhoneInd={item.receivePhoneInd}
-              inspectionInd={item.inspectionInd} />
+            {item.inspectionInd === 1 &&
+              <ReceiveValidationToggle
+                orderPhoneId={props.rowData.orderPhoneId}
+                phoneId={item.phoneId}
+                receivePhoneInd={item.receivePhoneInd}
+                inspectionInd={item.inspectionInd} />
+            }
           </Tooltip>
         );
       },

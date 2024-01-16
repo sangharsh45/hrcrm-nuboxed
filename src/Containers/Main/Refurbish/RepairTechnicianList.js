@@ -3,13 +3,13 @@ import { StyledTable } from '../../../Components/UI/Antd'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import RepairPhoneListByTechnician from './RepairPhoneListByTechnician'
-// import { getNoOfTechnicianById } from "./RefurbishAction"
+import { getNoOfRepairTechnicianById } from "./RefurbishAction"
 
 const RepairTechnicianList = (props) => {
 
-    // useEffect(() => {
-    //     props.getNoOfTechnicianById(props.rowData.orderPhoneId)
-    // }, [])
+    useEffect(() => {
+        props.getNoOfRepairTechnicianById(props.rowData.orderPhoneId)
+    }, [])
     const [row, setRow] = useState({})
     const [show, setShow] = useState(false)
 
@@ -69,7 +69,7 @@ const mapStateToProps = ({ auth, refurbish }) => ({
 const mapDispatchToProps = (dispatch) =>
     bindActionCreators(
         {
-            // getNoOfTechnicianById
+            getNoOfRepairTechnicianById
         },
         dispatch
     );

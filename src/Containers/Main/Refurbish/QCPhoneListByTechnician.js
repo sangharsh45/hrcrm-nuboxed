@@ -7,7 +7,7 @@ import { getNoOfPhoneInQCById } from "./RefurbishAction"
 const QCPhoneListByTechnician = (props) => {
 
     useEffect(() => {
-        props.getNoOfPhoneInQCById(props.rowData.orderPhoneId)
+        props.getNoOfPhoneInQCById(props.rowData.orderPhoneId, props.rowData.technicianByID)
     }, [])
 
     const column = [
