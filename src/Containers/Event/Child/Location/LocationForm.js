@@ -254,7 +254,7 @@ class LocationForm extends Component {
                       />
                     </div>
                   </FlexContainer> */}
-                  <StyledLabel style={{ fontWeight: "bold" }}>Functions</StyledLabel>
+                  <StyledLabel style={{ fontWeight: "bold",marginTop:"0.5rem" }}>Functions</StyledLabel>
                   <FlexContainer>
                     <div style={{ width: "47%" }} class="mt-2">
                       <div class="font-bold text-xs">Refurbish &nbsp;<i class="fas fa-cogs text-base"></i></div>
