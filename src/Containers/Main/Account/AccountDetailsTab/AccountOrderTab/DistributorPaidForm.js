@@ -76,8 +76,8 @@ function DistributorPaidForm(props) {
           <Form>
             <div class="justify-between flex">
               <div class="h-full w-full">
-                <div class="justify-between">
-                  <div class="w-[47%]">
+                <div style={{ display: "flex", justifyContent: "space-between" }}>
+                  <div style={{ width: "31%" }}>
                     <Field
                       name="paymentAmount"
                       label={

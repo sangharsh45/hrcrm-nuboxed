@@ -1,4 +1,4 @@
-import React, { useEffect, useState, Suspense,lazy } from 'react'
+import React, { useEffect, useState, Suspense, lazy } from 'react'
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import moment from 'moment/moment';
@@ -25,13 +25,13 @@ import { MultiAvatar2 } from '../../../../../Components/UI/Elements';
 import { OnlyWrapCard } from '../../../../../Components/UI/Layout';
 import { BundleLoader } from '../../../../../Components/Placeholder';
 
-const AddLocationInOrder =lazy(()=>import('./AddLocationInOrder'));
-const AccountOrderDetailsModal =lazy(()=>import('./AccountOrderDetailsModal'));
-const StatusOfOrderModal =lazy(()=>import('./StatusOfOrderModal'));
-const AddNotesOrderModal =lazy(()=>import('./AddNotesOrderModal'));
-const PaidButtonModal =lazy(()=>import('./PaidButtonModal'));
-const AccountproductionModal =lazy(()=>import('./AccountProductionModal'));
-const UpdateOrderModal =lazy(()=>import('./UpdateAccountOrder/UpdateOrderModal'));
+const AddLocationInOrder = lazy(() => import('./AddLocationInOrder'));
+const AccountOrderDetailsModal = lazy(() => import('./AccountOrderDetailsModal'));
+const StatusOfOrderModal = lazy(() => import('./StatusOfOrderModal'));
+const AddNotesOrderModal = lazy(() => import('./AddNotesOrderModal'));
+const PaidButtonModal = lazy(() => import('./PaidButtonModal'));
+const AccountproductionModal = lazy(() => import('./AccountProductionModal'));
+const UpdateOrderModal = lazy(() => import('./UpdateAccountOrder/UpdateOrderModal'));
 
 
 const AccountOrderTable = (props) => {
@@ -74,53 +74,53 @@ const AccountOrderTable = (props) => {
                 <OnlyWrapCard style={{ backgroundColor: "#E3E8EE" }}>
                     <div className=" flex justify-between w-[80%] pl-9 bg-transparent font-bold sticky top-0 z-10">
                         <div className=" md:w-[7.4rem]">
-                        <FormattedMessage
-                                        id="app.orderno"
-                                        defaultMessage="Order No"
-                                       />
-                            </div>
+                            <FormattedMessage
+                                id="app.orderno"
+                                defaultMessage="Order No"
+                            />
+                        </div>
                         <div className=" md:w-[5.1rem]">
-                        <FormattedMessage
-                                        id="app.created"
-                                        defaultMessage="Created"
-                                       />
-                            </div>
+                            <FormattedMessage
+                                id="app.created"
+                                defaultMessage="Created"
+                            />
+                        </div>
                         <div className=" md:w-[8.8rem]">
-                        <FormattedMessage
-                                        id="app.location"
-                                        defaultMessage="Location"
-                                       />
-                            </div>
+                            <FormattedMessage
+                                id="app.location"
+                                defaultMessage="Location"
+                            />
+                        </div>
                         <div className="md:w-[3.8rem]">
-                        <FormattedMessage
-                                        id="app.units"
-                                        defaultMessage="Units"
-                                       />
-                            </div>
+                            <FormattedMessage
+                                id="app.units"
+                                defaultMessage="Units"
+                            />
+                        </div>
                         <div className="md:w-[2.9rem]">
-                        <FormattedMessage
-                                        id="app.contact"
-                                        defaultMessage="Contact"
-                                       />
-                            </div>
+                            <FormattedMessage
+                                id="app.contact"
+                                defaultMessage="Contact"
+                            />
+                        </div>
                         <div className="md:w-[6.12rem]">
-                        <FormattedMessage
-                                        id="app.expectedprice"
-                                        defaultMessage="Expected Price"
-                                       />
-                            </div>
+                            <FormattedMessage
+                                id="app.expectedprice"
+                                defaultMessage="Expected Price"
+                            />
+                        </div>
                         <div className="md:w-[4.31rem]">
-                        <FormattedMessage
-                                        id="app.finalprice"
-                                        defaultMessage="Final Price"
-                                       />
-                            </div>
+                            <FormattedMessage
+                                id="app.finalprice"
+                                defaultMessage="Final Price"
+                            />
+                        </div>
                         <div className="w-[5.8rem]">
-                        <FormattedMessage
-                                        id="app.revisedprice"
-                                        defaultMessage="Revised Price"
-                                       />
-                            </div>
+                            <FormattedMessage
+                                id="app.revisedprice"
+                                defaultMessage="Revised Price"
+                            />
+                        </div>
 
                     </div>
                     {/* <InfiniteScroll
@@ -157,11 +157,11 @@ const AccountOrderTable = (props) => {
 
                                                             {item.priority === "High" && (
                                                                 <div
-                                                                class="border rounded-[50%] h-[1.5625rem] w-[1.5625rem] bg-[red]"></div>
+                                                                    class="border rounded-[50%] h-[1.5625rem] w-[1.5625rem] bg-[red]"></div>
                                                             )}
                                                             {item.priority === "Medium" && (
                                                                 <div
-                                                                class="border rounded-[50%] h-[1.5625rem] w-[1.5625rem] bg-[orange]"></div>)}
+                                                                    class="border rounded-[50%] h-[1.5625rem] w-[1.5625rem] bg-[orange]"></div>)}
                                                             {item.priority === "Low" && (
                                                                 <div class="border rounded-[50%] h-[1.5625rem] w-[1.5625rem] bg-[teal]"></div>)}
                                                         </h4>
@@ -169,10 +169,10 @@ const AccountOrderTable = (props) => {
                                                 </Tooltip>
                                             </div>
 
-                                            <div className=" flex font-medium flex-col  md:w-[7.4rem] max-sm:flex-row w-full max-sm:justify-between">                                                
+                                            <div className=" flex font-medium flex-col  md:w-[7.4rem] max-sm:flex-row w-full max-sm:justify-between">
                                                 <h4 class=" text-xs text-cardBody font-poppins">
                                                     <span
-                                                    class="underline cursor-pointer text-[#1890ff]"
+                                                        class="underline cursor-pointer text-[#1890ff]"
                                                         onClick={() => {
                                                             handleSetParticularOrderData(item);
                                                             props.handleOrderDetailsModal(true);
@@ -181,11 +181,11 @@ const AccountOrderTable = (props) => {
                                                     &nbsp;&nbsp;
                                                     {date === currentdate ? (
                                                         <span
-                                                        class="text-[tomato] font-bold">
-                                                           {<FormattedMessage
-                                        id="app.new"
-                                        defaultMessage="New"
-                                       />} 
+                                                            class="text-[tomato] font-bold">
+                                                            {<FormattedMessage
+                                                                id="app.new"
+                                                                defaultMessage="New"
+                                                            />}
                                                         </span>
                                                     ) : null}
                                                 </h4>
@@ -206,7 +206,7 @@ const AccountOrderTable = (props) => {
                                                 </div>
                                             </div>
                                             <div className=" flex font-medium flex-col md:w-[10.1rem] max-sm:flex-row w-full max-sm:justify-between ">
-                                               
+
 
                                                 <div class=" text-xs text-cardBody font-poppins text-center">
                                                     {item.type === "Catalogue" ?
@@ -222,13 +222,7 @@ const AccountOrderTable = (props) => {
 
                                                 </div>
                                             </div>
-
-
-
-                                          
                                             <div className=" flex font-medium flex-col  md:w-[7.3rem] max-sm:flex-row w-full max-sm:justify-between  ">
-
-                                               
                                                 <h4 class=" text-xs text-cardBody font-poppins">
                                                     <MultiAvatar2
                                                         primaryTitle={item.contactPersonName}
@@ -243,7 +237,7 @@ const AccountOrderTable = (props) => {
 
                                             <div className=" flex font-medium flex-col  md:w-[3.5rem] max-sm:flex-row w-full max-sm:justify-between  ">
 
-                                            
+
                                                 <h4 class=" text-xs text-cardBody font-poppins">
                                                     {item.expectedPrice}
                                                 </h4>
@@ -251,7 +245,7 @@ const AccountOrderTable = (props) => {
                                             </div>
                                             <div className=" flex font-medium flex-col  md:w-[4.7rem] max-sm:flex-row w-full max-sm:justify-between  ">
 
-                                                
+
                                                 <h4 class=" text-xs text-cardBody font-poppins">
                                                     {item.suggestedPrice}
                                                 </h4>
@@ -261,7 +255,7 @@ const AccountOrderTable = (props) => {
 
                                             <div className=" flex font-medium flex-col  md:w-[3.9rem] max-sm:flex-row w-full max-sm:justify-between  ">
 
-                                               
+
                                                 <h4 class=" text-xs text-cardBody font-poppins">
                                                     {visible && (item.orderId === particularRowData.orderId) ?
                                                         <Input
@@ -285,27 +279,27 @@ const AccountOrderTable = (props) => {
                                                             <Button onClick={() => {
                                                                 handleSubmitPrice()
                                                             }} >
-                                                               <FormattedMessage
-                 id="app.save"
-                 defaultMessage="Save"
-                />    
-                                                                </Button>
+                                                                <FormattedMessage
+                                                                    id="app.save"
+                                                                    defaultMessage="Save"
+                                                                />
+                                                            </Button>
                                                             <Button onClick={() => handleUpdateRevisePrice(false)}><FormattedMessage
-                                                             id="app.cancel"
-                 defaultMessage="Cancel"
-                /></Button>
+                                                                id="app.cancel"
+                                                                defaultMessage="Cancel"
+                                                            /></Button>
                                                         </div>
                                                     </>
                                                 ) : item.qcStartInd === 3 && item.priceConfirmInd === false ? <Tooltip title={<FormattedMessage
                                                     id="app.updaterevisedprice"
                                                     defaultMessage="Update Revised Price"
-                                                   />}>
+                                                />}>
                                                     <BorderColorOutlined
                                                         onClick={() => {
                                                             handleUpdateRevisePrice()
                                                             handleSetParticularOrderData(item)
                                                         }}
-                                                        style={{cursor:"pointer",fontSize: "1rem"}} />
+                                                        style={{ cursor: "pointer", fontSize: "1rem" }} />
                                                 </Tooltip> : null}
 
                                             </h4>
@@ -314,9 +308,9 @@ const AccountOrderTable = (props) => {
                                         <div className=" flex font-medium flex-col  md:w-[1rem] max-sm:flex-row w-full max-sm:justify-between  ">
                                             <h4 class=" text-xs text-cardBody font-poppins">
                                                 <Tooltip title={<FormattedMessage
-                                        id="app.notes"
-                                        defaultMessage="Notes"
-                                       />}>
+                                                    id="app.notes"
+                                                    defaultMessage="Notes"
+                                                />}>
                                                     <NoteAltIcon
                                                         class="cursor-pointer"
                                                         style={{ color: "green", fontSize: "1rem" }}
@@ -336,12 +330,12 @@ const AccountOrderTable = (props) => {
                                         <div className=" flex font-medium flex-col  md:w-[1rem] max-sm:flex-row w-full max-sm:justify-between  ">
                                             <h4 class=" text-xs text-cardBody font-poppins">
                                                 <Tooltip title={<FormattedMessage
-                                        id="app.status"
-                                        defaultMessage="Status"
-                                       />}>
+                                                    id="app.status"
+                                                    defaultMessage="Status"
+                                                />}>
                                                     <EventRepeatIcon
-                                                    class="cursor-pointer"
-                                                    style={{fontSize: "1rem"}}
+                                                        class="cursor-pointer"
+                                                        style={{ fontSize: "1rem" }}
                                                         onClick={() => {
                                                             props.handleStatusOfOrder(true);
                                                             handleSetParticularOrderData(item);
@@ -355,13 +349,13 @@ const AccountOrderTable = (props) => {
                                             <h4 class=" text-xs text-cardBody font-poppins">
                                                 <Tooltip title="Collection">
                                                     <PaidIcon
-                                                    class="cursor-pointer"
-                                                    style={{fontSize: "1rem"}}
+                                                        class="cursor-pointer"
+                                                        style={{ fontSize: "1rem" }}
                                                         onClick={() => {
                                                             props.handlePaidModal(true);
                                                             handleSetParticularOrderData(item);
                                                         }}
-                                 
+
                                                     />
                                                 </Tooltip>
 
@@ -376,8 +370,8 @@ const AccountOrderTable = (props) => {
                                                     {item.transferInd === 0 ? (
                                                         <Tooltip title="Send To Refurbish">
                                                             <Button
-                                                            class="cursor-pointer bg-[#3096e9] text-white"
-                                                            style={{fontSize: "13px"}}
+                                                                class="cursor-pointer bg-[#3096e9] text-white"
+                                                                style={{ fontSize: "13px" }}
                                                                 // style={{ fontSize: "13px", backgroundColor: "#3096e9", color: "white" }}
                                                                 onClick={() => {
                                                                     handleSetParticularOrderData(item);
@@ -385,10 +379,10 @@ const AccountOrderTable = (props) => {
                                                                 }}
                                                             >
                                                                 <FormattedMessage
-                                        id="app.sendtostore"
-                                        defaultMessage="Send To Store"
-                                       />
-                                                                
+                                                                    id="app.sendtostore"
+                                                                    defaultMessage="Send To Store"
+                                                                />
+
                                                             </Button>
                                                         </Tooltip>
 
@@ -399,9 +393,9 @@ const AccountOrderTable = (props) => {
                                                 <h4 class=" text-xs text-cardBody font-poppins">
                                                     {item.transferInd === 0 ? (
                                                         <Tooltip title={<FormattedMessage
-                                                        id="app.addinventorylocation"
-                                                        defaultMessage="Add Inventory Location"
-                                                       />}>
+                                                            id="app.addinventorylocation"
+                                                            defaultMessage="Add Inventory Location"
+                                                        />}>
                                                             <Button
                                                                 style={{ cursor: "pointer", fontSize: "13px", backgroundColor: "#3096e9", color: "white" }}
                                                                 onClick={() => {
@@ -410,10 +404,10 @@ const AccountOrderTable = (props) => {
                                                                 }}
                                                             >
                                                                 <FormattedMessage
-                                        id="app.orderpickup"
-                                        defaultMessage="Order Pickup"
-                                       />
-                                                                
+                                                                    id="app.orderpickup"
+                                                                    defaultMessage="Order Pickup"
+                                                                />
+
                                                             </Button>
                                                         </Tooltip>
 
@@ -426,9 +420,9 @@ const AccountOrderTable = (props) => {
                                         <div className=" flex font-medium flex-col  md:w-[1rem] max-sm:flex-row w-full max-sm:justify-between  ">
                                             <h4 class=" text-xs text-cardBody font-poppins">
                                                 <Tooltip title={<FormattedMessage
-                                        id="app.updateorder"
-                                        defaultMessage="Update Order"
-                                       />}>
+                                                    id="app.updateorder"
+                                                    defaultMessage="Update Order"
+                                                />}>
                                                     <BorderColorOutlined
                                                         onClick={() => {
                                                             props.handleUpdateOrder(true)
@@ -443,9 +437,9 @@ const AccountOrderTable = (props) => {
                                         <div className=" flex font-medium flex-col  md:w-[1rem] max-sm:flex-row w-full max-sm:justify-between">
                                             <h4 class=" text-xs text-cardBody font-poppins">
                                                 <Tooltip title={<FormattedMessage
-                                        id="app.rating"
-                                        defaultMessage="Rating"
-                                       />}>
+                                                    id="app.rating"
+                                                    defaultMessage="Rating"
+                                                />}>
                                                     <StarBorderIcon
                                                         style={{ cursor: "pointer", fontSize: "1rem", }} />
                                                 </Tooltip>
@@ -456,9 +450,9 @@ const AccountOrderTable = (props) => {
                                         <div className=" flex font-medium flex-col  md:w-[1rem] max-sm:flex-row w-full max-sm:justify-between  ">
                                             <h4 class=" text-xs text-cardBody font-poppins">
                                                 <Tooltip title={<FormattedMessage
-                                        id="app.feedback"
-                                        defaultMessage="Feedback"
-                                       />}>
+                                                    id="app.feedback"
+                                                    defaultMessage="Feedback"
+                                                />}>
                                                     <FeedbackIcon
                                                         style={{ cursor: "pointer", fontSize: "1rem", }} />
                                                 </Tooltip>

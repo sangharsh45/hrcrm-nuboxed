@@ -41,7 +41,7 @@ const UpdateAccountForm = ({
   getCustomer,
   getCurrency,
 }) => {
-  const [vatInd, setVatInd] = useState(false);
+  const [vatInd, setVatInd] = useState(setEditingDistributor.vatInd);
 
   useEffect(() => {
     getCurrency();
@@ -61,7 +61,7 @@ const UpdateAccountForm = ({
     };
   });
   const handlevat = () => {
-    setVatInd(true)
+    setVatInd(!vatInd)
   }
   const currencyOption = currencies.map((item) => ({
     label: item.currencyName || "",
@@ -75,8 +75,9 @@ const UpdateAccountForm = ({
       <Formik
         initialValues={{
           userId: userId,
+          payment: setEditingDistributor.payment || "",
           name: setEditingDistributor.name || "",
-          countryId: setEditingDistributor.countryId || "",
+          country: setEditingDistributor.countryId || "",
           countryValue: setEditingDistributor.countryValue || "",
           insuranceGrade: setEditingDistributor.insuranceGrade || "",
           currencyPrice: setEditingDistributor.currencyPrice || "",
@@ -89,6 +90,7 @@ const UpdateAccountForm = ({
           notes: setEditingDistributor.notes || "",
           dialCode: setEditingDistributor.dialCode || "",
           clientId: setEditingDistributor.clientId || "",
+
           // address: [
           // {
           // country:setEditingCustomer.country || "",
@@ -127,6 +129,7 @@ const UpdateAccountForm = ({
           updateDistributor(
             {
               ...values,
+              vatInd: vatInd,
               assignedTo: selectedOption ? selectedOption.employeeId : userId,
             },
             setEditingDistributor.distributorId,
