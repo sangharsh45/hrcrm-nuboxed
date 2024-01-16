@@ -24,12 +24,10 @@ import {getAllCustomerData} from "../../../../Customer/CustomerAction"
 import { handleChooserModal } from "../../../../Planner/PlannerAction";
 import { TextareaComponent } from "../../../../../Components/Forms/Formik/TextareaComponent";
 import { StyledPopconfirm } from "../../../../../Components/UI/Antd";
-import { getEmployeelist } from "../../../../Employees/EmployeeAction";
 import { setClearbitCandidateData } from "../../../../Candidate/CandidateAction";
 import SpeechRecognition, { } from 'react-speech-recognition';
 import { AudioOutlined } from '@ant-design/icons';
-import { Fragment } from 'react'
-import { Listbox, } from '@headlessui/react'
+import { Listbox } from '@headlessui/react'
 
 const ButtonGroup = Button.Group;
 const suffix = (
@@ -70,12 +68,10 @@ function ContactInvestorCallActivityForm(props) {
   
   const[category,setCategory] =useState(props.selectedCall ? props.selectedCall.callCategory : "New")
   const[reminder,setReminder] =useState(true)
-  console.log("category",category);
   const[Type,setType]=useState(props.selectedCall?props.selectedCall.callType:"Inbound",)
 
   function handleCategoryChange (data)  {
     debugger;
-
     setCategory(  data );
   };
  function handleTypeChange  (data) {
@@ -83,11 +79,7 @@ function ContactInvestorCallActivityForm(props) {
     setType( data );
 
   };
-  function handleReminderChange (checked) {
-    setReminder(
-       checked,
-    );
-  };
+
   function handleCallback (resetForm)  {
     const { handleChooserModal, handleCallModal, callback } = props;
     handleChooserModal(false);
@@ -96,73 +88,24 @@ function ContactInvestorCallActivityForm(props) {
     // resetForm();
   };
   useEffect(() => {
-    props.getEmployeelist();
     props.getAllSalesList();
     props.getAllCustomerData(props.userId)
-    // props.getOpportunityListByCustomerId(props.customer.customerId);
-    // props.getContactListByCustomerId(props.customer.customerId);
-    // props.getAllOpportunityData(userId)
+
   }, []);
 
   
   const [defaultOption, setDefaultOption] = useState(props.fullName);
   const [selected, setSelected] = useState(defaultOption);
 
-    const {
-      handleCallNotesModal
 
-    } = props;
-
-    function classNames(...classes) {
-      return classes.filter(Boolean).join(' ')
-    }
-
-    const customerNameOption = props.allCustomerData
-    .sort((a, b) => {
-      const libraryNameA = a.name && a.name.toLowerCase();
-      const libraryNameB = b.name && b.name.toLowerCase();
-      if (libraryNameA < libraryNameB) {
-        return -1;
-      }
-      if (libraryNameA > libraryNameB) {
-        return 1;
-      }
-
-      // names must be equal
-      return 0;
-    })
-    .map((item) => {
-      return {
-        label: `${item.name || ""}`,
-        value: item.customerId,
-      };
-    });
-    const employeesData = props.employees.map((item) => {
+    const employeesData = props.sales.map((item) => {
       return {
         label: `${item.fullName}`,
         value: item.employeeId,
       };
     });
-    const opportunityNameOption = props.opportunityByCustomerId.map((item) => {
-      return {
-        label: `${item.opportunityName}`,
-        value: item.opportunityId,
-      };
-    });
 
-    const ContactData = props.contactByCustomerId.map((item) => {
-      return {
-        label: `${item.fullName}`,
-        value: item.contactId,
-      };
-    });
-    const salesNameOption = props.sales.map((item) => {
-      return {
-        label: `${item.fullName || ""}`,
-        value: item.employeeId,
-      };
-    });
-    // console.log(this.state.category);
+
     const {
       user: { userId, firstName, middleName, fullName, lastName, timeZone },
       isEditing,
@@ -190,8 +133,7 @@ function ContactInvestorCallActivityForm(props) {
     if (props.selectedCall) {
       var data = props.selectedCall.callCategory === "New" ? false : true;
     }
-   const selectedOption = props.employees.find((item) => item.fullName === selected);
-   console.log("bn",selectedOption,selected)
+   const selectedOption = props.sales.find((item) => item.fullName === selected);
    return (
       <>
         <Formik
@@ -650,7 +592,7 @@ function ContactInvestorCallActivityForm(props) {
                   static
                   className="absolute z-10 mt-1 max-h-56 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
                 >
-                  {props.employees.map((item) => (
+                  {props.sales.map((item) => (
                     <Listbox.Option
                       key={item.employeeId}
                       className={({ active }) =>
@@ -865,13 +807,10 @@ const mapStateToProps = ({ auth, call, employee,customer, opportunity, candidate
   user: auth.userDetails,
   deletingCall: call.deleteCall,
   sales: opportunity.sales,
-  employees: employee.employees,
   opportunityByCustomerId: customer.opportunityByCustomerId,
   contactByCustomerId: customer.contactByCustomerId,
-//   filteredContact: candidate.filteredContact,
   addNotesSpeechModal: call.addNotesSpeechModal,
   fullName: auth.userDetails.fullName
-  // candidateByuserId:candidate.candidateByuserId
 });
 
 const mapDispatchToProps = (dispatch) =>
@@ -884,9 +823,6 @@ const mapDispatchToProps = (dispatch) =>
       updateCall,
       handleCallModal,
       deleteCall,
-      getEmployeelist,
-    //   getOpportunityListByCustomerId,
-    //   getContactListByCustomerId,
       setClearbitCandidateData, 
       handleCallNotesModal,
     },

@@ -5,11 +5,9 @@ import BorderColorIcon from "@mui/icons-material/BorderColor";
 import MonitorHeartIcon from "@mui/icons-material/MonitorHeart";
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import ExploreIcon from "@mui/icons-material/Explore";
-import { getSectors } from "../../../Settings/Sectors/SectorsAction";
 import moment from "moment";
 import NoteAltIcon from "@mui/icons-material/NoteAlt";
 import { OnlyWrapCard } from '../../../../Components/UI/Layout'
-import { getCountries } from "../../../Auth/AuthAction";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { Tooltip, Select, } from "antd";
 
@@ -27,7 +25,6 @@ import {
   handleCustomerEmailDrawerModal,
   getCustomerById,
 } from "../../../Customer/CustomerAction";
-import { getAllCustomerEmployeelist } from "../../../Employees/EmployeeAction";
 import ReactCountryFlag from 'react-country-flag';
 import {getInvestorsbyId,handleInvestorNotesDrawerModal,emptyInvestor,handleUpdateInvestorModal} from "../../InvestorAction";
 import AddInvestorNotesDrawerModal from "../InvestorDetail/AddInvestorNotesDrawerModal";
@@ -64,9 +61,6 @@ function InvestorCardList(props) {
     })
     props.getInvestorsbyId(props.userId, page,"creationdate");
     setPage(page + 1);
-    props.getSectors();
-    props.getCountries();
-    props.getAllCustomerEmployeelist();
   }, []);
 
   useEffect(() => {
@@ -463,18 +457,13 @@ const mapStateToProps = ({
 }) => ({
   userId: auth.userDetails.userId,
   investorsbyId:investor.investorsbyId,
-  sales: opportunity.sales,
   addDrawerInvestorNotesModal:investor.addDrawerInvestorNotesModal,
-  recruiterName: opportunity.recruiterName,
   fetchingAllCustomers: customer.fetchingAllCustomers,
-  sectors: sector.sectors,
   fetchingInvestors: investor.fetchingInvestors,
   fetchingInvestorsError: investor.fetchingInvestorsError,
   updateInvestorModal: investor.updateInvestorModal,
   user: auth.userDetails,
   employees: employee.employees,
-  countries: auth.countries,
-  allCustomerEmployeeList: employee.allCustomerEmployeeList,
   addDrawerCustomerEmailModal: customer.addDrawerCustomerEmailModal,
 });
 const mapDispatchToProps = (dispatch) =>
@@ -482,7 +471,6 @@ const mapDispatchToProps = (dispatch) =>
     {
       getInvestorsbyId,
       handleUpdateInvestorModal,
-      getSectors,
       emptyInvestor,
       handleInvestorNotesDrawerModal,
       updateOwnercustomerById,
@@ -491,8 +479,7 @@ const mapDispatchToProps = (dispatch) =>
       getCustomerKeySkill,
       handleCustomerEmailDrawerModal,
       getCustomerById,
-      getCountries,
-      getAllCustomerEmployeelist,
+
     },
     dispatch
   );

@@ -23,7 +23,7 @@ import {
   deleteTask,
 } from "../../../../Task/TaskAction";
 import {addContactinvestActivityTask} from "../../../ContactInvestAction"
-import { getTaskForRecruit,
+import { 
   getTaskForStages,
   getTaskForWorkflow,
  } from "../../../../Settings/SettingsAction";
@@ -32,20 +32,17 @@ import { StyledLabel } from "../../../../../Components/UI/Elements";
 import { TextareaComponent } from "../../../../../Components/Forms/Formik/TextareaComponent";
 import ButtonGroup from "antd/lib/button/button-group";
 import { StyledPopconfirm } from "../../../../../Components/UI/Antd";
-import { getEmployeelist } from "../../../../Employees/EmployeeAction";
 import Upload from "../../../../../Components/Forms/Formik/Upload";
 import DragableUpload from "../../../../../Components/Forms/Formik/DragableUpload";
 import { Select } from "antd";
 import moment from "moment";
-import { Listbox, } from '@headlessui/react';
+import { Listbox } from '@headlessui/react';
 
 const { Option } = Select;
 
 function ContactInvestorTaskActivityForm (props) {
   const [selectedTaskType, setSelectedTaskType] = useState('');
   const [selectedWorkflow, setSelectedWorkflow] = useState("");
-//   const[selectedTaskType,setselectedTaskType]=useState("")
-// const[selectedWorkflow,setselectedWorkflow]=useState("");
 const[workflow,setworkflow]=useState([]);
 const[active,setactive]=useState(props.selectedTask ? props.selectedTask.taskStatus
   : "To Start");
@@ -63,10 +60,6 @@ const [priority,setpriority]=useState(props.selectedTask
     : "Email");
   const[reminder,setreminder]=useState(true);
     
- function handleTypeChange(data){
-  setType(data);
-  setselectedType(data);
-  };
  const glassButtoClick = (type) => {
     setactive(type);
   };
@@ -78,20 +71,10 @@ const [priority,setpriority]=useState(props.selectedTask
   
   const handleTaskTypeChange = (event) => {
     const selectedTaskType = event.target.value;
-    // const filteredWorkflow = props.recruitWorkflowTask.filter((item) => item.taskTypeId === selectedTaskType);
     setSelectedTaskType(selectedTaskType);
      setSelectedWorkflow("");
     props.getTaskForWorkflow(selectedTaskType);
   };
-
-//  const handleTaskTypeChange = (event) => {
-//     const selectedTaskType = event.target.value;
-//      const filteredWorkflow = props.recruitWorkflowTask.filter((item) => item.taskTypeId === selectedTaskType);
-//      const workflow=filteredWorkflow
-//      setselectedTaskType(selectedTaskType,workflow);
-//     console.log(selectedTaskType)
-//     props.getTaskForWorkflow(selectedTaskType);
-//   };
 
   const handleWorkflowChange = (event) => {
     const selectedWorkflow = event.target.value;
@@ -137,86 +120,10 @@ const [priority,setpriority]=useState(props.selectedTask
     return newData;
   };
 
-  // handleCheckListOptions = (filterOptionKey, filterOptionValue) => {
-  //   const listOptions =
-  //     this.props.recruitWorkflowTask.length &&
-  //     this.props.recruitWorkflowTask
-  //       .filter((option) => {
-  //         if (
-  //           option.taskTypeId === filterOptionValue &&
-  //           option.probability !== 0
-  //         ) {
-  //           return option;
-  //         }
-  //       })
-  //       .map((option) => ({
-  //         label: option.taskChecklistName || "",
-  //         value: option.taskType,
-  //       }));
-  //   console.log(listOptions);
-
-  //   return listOptions;
-  // };
-
-  function taskStageOptions(filterOptionKey, filterOptionValue) {
-    const listOptions =
-      props.recruitTaskStages.length &&
-      props.recruitTaskStages
-        .filter((option) => {
-          if (
-            option.taskTypeId === filterOptionValue &&
-            option.probability !== 0
-          ) {
-            return option;
-          }
-        })
-        .map((option) => ({
-          label: option.taskChecklistStageName || "",
-          value: option.taskChecklistId,
-        }));
-    console.log(listOptions);
-
-    return listOptions;
-  };
-  
-
-
-  const handlecandidateOptions = (filterOptionKey, filterOptionValue) => {
-    const candidateOptions =
-      props.candidateFilterTaskList.length &&
-      props.candidateFilterTaskList
-        .filter((option) => {
-          if (
-            option.customerId === filterOptionValue &&
-            option.probability !== 0
-          ) {
-            return option;
-          }
-        })
-        .map((option) => ({
-          label: option.candidateName || "",
-          value: option.included,
-        }));
-    console.log(candidateOptions);
-
-    return candidateOptions;
-  };
-  const opportunityNameOption = props.opportunityByCustomerId.map((item) => {
-    return {
-      label: `${item.opportunityName}`,
-      value: item.opportunityId,
-    };
-  });
-
-  
-
+ 
   useEffect(()=> {
-    props.getEmployeelist();
-      props.getTaskForStages();
-      props.getAllCustomerData(userId)
-    //   props.getOpportunityListByCustomerId(props.customer.customerId);
-    //   props.getContactListByCustomerId(props.customer.customerId);
-    props.getTaskForRecruit(props.orgId);
+    props.getTaskForStages();
+    props.getAllCustomerData(userId)
     props.getCustomerTask(props.orgId);
     props.getProjectTaskList(props.orgId);
     props.getTasks();
@@ -225,8 +132,6 @@ const [priority,setpriority]=useState(props.selectedTask
     props.getCandidateTaskFilterList(props.orgId);
   },[]);
 
-    console.log(selectedWorkflow)
-    console.log(selectedTaskType)
     const customerData = props.customerTaskList
       .sort((a, b) => {
         const customerNameA = a.name && a.name.toLowerCase();
@@ -237,45 +142,16 @@ const [priority,setpriority]=useState(props.selectedTask
         if (customerNameA > customerNameB) {
           return 1;
         }
-
-        // names must be equal
         return 0;
       })
       .map((item) => {
         return {
           label: `${item.name}`,
-          // label: `${item.salutation || ""} ${item.firstName ||
-          //   ""} ${item.middleName || ""} ${item.lastName || ""}`,
           value: item.customerId,
         };
       });
       
-    const customerNameOption = props.allCustomerData
-    .sort((a, b) => {
-      const libraryNameA = a.name && a.name.toLowerCase();
-      const libraryNameB = b.name && b.name.toLowerCase();
-      if (libraryNameA < libraryNameB) {
-        return -1;
-      }
-      if (libraryNameA > libraryNameB) {
-        return 1;
-      }
-
-      // names must be equal
-      return 0;
-    })
-    .map((item) => {
-      return {
-        label: `${item.name || ""}`,
-        value: item.customerId,
-      };
-    });
-    const ContactData = props.contactByCustomerId.map((item) => {
-      return {
-        label: `${item.fullName}`,
-        value: item.contactId,
-      };
-    });
+    
     const today = dayjs();
     var todayDate = new Date();
     console.log(today);
@@ -303,7 +179,7 @@ const [priority,setpriority]=useState(props.selectedTask
       employeeId,
       taskTypeId,
     } = props;
-    const employeesData = props.employees.map((item) => {
+    const employeesData = props.sales.map((item) => {
       return {
         label: `${item.fullName}`,
         value: item.employeeId,
@@ -327,9 +203,7 @@ const [priority,setpriority]=useState(props.selectedTask
 
     const [defaultOption, setDefaultOption] = useState(props.fullName);
     const [selected, setSelected] = useState(defaultOption);
-    const selectedOption = props.employees.find((item) => item.fullName === selected);
-   console.log("workflow",selectedWorkflow);
-   console.log("recruitWorkflowTask",props.recruitWorkflowTask);
+    const selectedOption = props.sales.find((item) => item.fullName === selected);
     return (
       <>
         <Formik
@@ -1192,7 +1066,7 @@ const [priority,setpriority]=useState(props.selectedTask
                   static
                   className="absolute z-10 mt-1 max-h-56 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
                 >
-                  {props.employees.map((item) => (
+                  {props.sales.map((item) => (
                     <Listbox.Option
                       key={item.employeeId}
                       className={({ active }) =>
@@ -1452,14 +1326,13 @@ const mapStateToProps = ({
   stagesTask:settings.stagesTask,
   updatingTask: task.updatingTask,
   units: unit.units,
-  recruitTask: settings.recruitTask,
   deletingTask: task.deleteTask,
   recruitTaskStages:settings.recruitTaskStages,
-  employees: employee.employees,
   tasks: tasks.tasks,
   customerTaskList: task.customerTaskList,
   candidateFilterTaskList: task.candidateFilterTaskList,
-  fullName: auth.userDetails.fullName
+  fullName: auth.userDetails.fullName,
+  sales: opportunity.sales,
 });
 
 const mapDispatchToProps = (dispatch) =>
@@ -1476,9 +1349,7 @@ const mapDispatchToProps = (dispatch) =>
       updateTask,
       handleTaskModal,
       getCustomerTask,
-      getTaskForRecruit,
       deleteTask,
-      getEmployeelist,
       getProjectTaskList,
       getTaskForWorkflow,
       getUnits,

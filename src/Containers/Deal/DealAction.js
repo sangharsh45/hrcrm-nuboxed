@@ -728,3 +728,28 @@ export const getOpportunityRecord = (userId) => (dispatch) => {
       });
     });
 };
+
+export const deleteDealsData = (invOpportunityId) => (dispatch) => {
+  dispatch({
+    type: types.DELETE_DEAL_DATA_REQUEST,
+  });
+  axios
+    .delete(`${base_url}/investorOpportunity/delete/${invOpportunityId}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      dispatch({
+        type: types.DELETE_DEAL_DATA_SUCCESS,
+        payload: invOpportunityId,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.DELETE_DEAL_DATA_FAILURE,
+        payload: err,
+      });
+    });
+};

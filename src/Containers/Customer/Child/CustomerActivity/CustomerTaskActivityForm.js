@@ -28,7 +28,7 @@ import {
   deleteTask,
 } from "../../../Task/TaskAction";
 import {addCustomerActivityTask} from "../../CustomerAction"
-import { getTaskForRecruit,
+import {
   getTaskForStages,
   getTaskForWorkflow,
  } from "../../../Settings/SettingsAction";
@@ -37,7 +37,6 @@ import { StyledLabel } from "../../../../Components/UI/Elements";
 import { TextareaComponent } from "../../../../Components/Forms/Formik/TextareaComponent";
 import ButtonGroup from "antd/lib/button/button-group";
 import { StyledPopconfirm } from "../../../../Components/UI/Antd";
-import { getEmployeelist } from "../../../Employees/EmployeeAction";
 import Upload from "../../../../Components/Forms/Formik/Upload";
 import DragableUpload from "../../../../Components/Forms/Formik/DragableUpload";
 import { Select } from "antd";
@@ -216,12 +215,10 @@ const [priority,setpriority]=useState(props.selectedTask
   
 
   useEffect(()=> {
-    props.getEmployeelist();
       props.getTaskForStages();
       props.getAllCustomerData(userId)
       props.getOpportunityListByCustomerId(props.customer.customerId);
       props.getContactListByCustomerId(props.customer.customerId);
-    props.getTaskForRecruit(props.orgId);
     props.getCustomerTask(props.orgId);
     props.getProjectTaskList(props.orgId);
     props.getTasks();
@@ -308,7 +305,7 @@ const [priority,setpriority]=useState(props.selectedTask
       employeeId,
       taskTypeId,
     } = props;
-    const employeesData = props.employees.map((item) => {
+    const employeesData = props.sales.map((item) => {
       return {
         label: `${item.fullName}`,
         value: item.employeeId,
@@ -332,7 +329,7 @@ const [priority,setpriority]=useState(props.selectedTask
 
     const [defaultOption, setDefaultOption] = useState(props.fullName);
     const [selected, setSelected] = useState(defaultOption);
-    const selectedOption = props.employees.find((item) => item.fullName === selected);
+    const selectedOption = props.sales.find((item) => item.fullName === selected);
    console.log("workflow",selectedWorkflow);
    console.log("recruitWorkflowTask",props.recruitWorkflowTask);
     return (
@@ -1197,7 +1194,7 @@ const [priority,setpriority]=useState(props.selectedTask
                   static
                   className="absolute z-10 mt-1 max-h-56 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
                 >
-                  {props.employees.map((item) => (
+                  {props.sales.map((item) => (
                     <Listbox.Option
                       key={item.employeeId}
                       className={({ active }) =>
@@ -1525,8 +1522,6 @@ const mapStateToProps = ({
   addingTask: task.addingTask,
   opportunityByCustomerId: customer.opportunityByCustomerId,
   contactByCustomerId: customer.contactByCustomerId,
-//   allOpportunityData:opportunity.allOpportunityData,
-//   filteredContact: candidate.filteredContact,
   allCustomerData:customer.allCustomerData,
   recruitWorkflowTask: settings.recruitWorkflowTask,
   orgId: auth.userDetails.organizationId,
@@ -1539,8 +1534,8 @@ const mapStateToProps = ({
   recruitTask: settings.recruitTask,
   deletingTask: task.deleteTask,
   recruitTaskStages:settings.recruitTaskStages,
-  employees: employee.employees,
   tasks: tasks.tasks,
+  sales: opportunity.sales,
   customerTaskList: task.customerTaskList,
   candidateFilterTaskList: task.candidateFilterTaskList,
   fullName: auth.userDetails.fullName
@@ -1560,15 +1555,11 @@ const mapDispatchToProps = (dispatch) =>
       updateTask,
       handleTaskModal,
       getCustomerTask,
-      getTaskForRecruit,
       deleteTask,
-      getEmployeelist,
       getProjectTaskList,
       getTaskForWorkflow,
       getUnits,
-        getTaskForStages,
-      // getOppoStages,
-      // setClearbitCandidateData,
+      getTaskForStages,
     },
     dispatch
   );

@@ -6,14 +6,12 @@ import moment from "moment";
 import ConnectWithoutContactIcon from '@mui/icons-material/ConnectWithoutContact';
 import NoteAltIcon from "@mui/icons-material/NoteAlt";
 import OpenInBrowserIcon from "@mui/icons-material/OpenInBrowser";
-import { getSectors } from "../../../Settings/Sectors/SectorsAction";
 import { MultiAvatar, SubTitle } from "../../../../Components/UI/Elements";
 import "jspdf-autotable";
 import { OnlyWrapCard } from "../../../../Components/UI/Layout";
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import { DeleteOutlined } from "@ant-design/icons";
-// import { getCountries } from "../../../Auth/AuthAction";
 import {
   getLeads,
   deleteLeadsData,
@@ -47,8 +45,6 @@ const LeadsCardList = (props) => {
   useEffect(() => {
     setPage(page + 1);
     props.getLeads(props.userId, page,"creationdate");
-    props.getSectors();
-    // props.getCountries();
   }, []);
 
   useEffect(() => {
@@ -514,7 +510,6 @@ const mapStateToProps = ({ auth, leads, sector }) => ({
   userId: auth.userDetails.userId,
   lead: leads.lead,
   user: auth.userDetails,
-  sectors: sector.sectors,
   updateLeadsModal: leads.updateLeadsModal,
   addDrawerLeadsEmailModal: leads.addDrawerLeadsEmailModal,
   fetchingLeads: leads.fetchingLeads,
@@ -528,7 +523,6 @@ const mapDispatchToProps = (dispatch) =>
       getLeads,
       emptyLeads,
       handleLeadsConfirmationModal,
-      getSectors,
       deleteLeadsData,
       setEditLeads,
       handleUpdateLeadsModal,

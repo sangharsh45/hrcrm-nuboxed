@@ -24,7 +24,6 @@ import {getAllCustomerData} from "../../../../Customer/CustomerAction"
 import { handleChooserModal } from "../../../../Planner/PlannerAction";
 import { TextareaComponent } from "../../../../../Components/Forms/Formik/TextareaComponent";
 import { StyledPopconfirm } from "../../../../../Components/UI/Antd";
-import { getEmployeelist } from "../../../../Employees/EmployeeAction";
 import { setClearbitCandidateData } from "../../../../Candidate/CandidateAction";
 import SpeechRecognition, { } from 'react-speech-recognition';
 import { AudioOutlined } from '@ant-design/icons';
@@ -95,7 +94,6 @@ function InvestorCallActivityForm(props) {
     // resetForm();
   };
   useEffect(() => {
-    props.getEmployeelist();
     props.getAllSalesList();
     props.getAllCustomerData(props.userId)
     // props.getOpportunityListByCustomerId(props.customer.customerId);
@@ -136,32 +134,14 @@ function InvestorCallActivityForm(props) {
         value: item.customerId,
       };
     });
-    const employeesData = props.employees.map((item) => {
+    const employeesData = props.sales.map((item) => {
       return {
         label: `${item.fullName}`,
         value: item.employeeId,
       };
     });
-    const opportunityNameOption = props.opportunityByCustomerId.map((item) => {
-      return {
-        label: `${item.opportunityName}`,
-        value: item.opportunityId,
-      };
-    });
+  
 
-    const ContactData = props.contactByCustomerId.map((item) => {
-      return {
-        label: `${item.fullName}`,
-        value: item.contactId,
-      };
-    });
-    const salesNameOption = props.sales.map((item) => {
-      return {
-        label: `${item.fullName || ""}`,
-        value: item.employeeId,
-      };
-    });
-    // console.log(this.state.category);
     const {
       user: { userId, firstName, middleName, fullName, lastName, timeZone },
       isEditing,
@@ -189,7 +169,7 @@ function InvestorCallActivityForm(props) {
     if (props.selectedCall) {
       var data = props.selectedCall.callCategory === "New" ? false : true;
     }
-   const selectedOption = props.employees.find((item) => item.fullName === selected);
+   const selectedOption = props.sales.find((item) => item.fullName === selected);
    console.log("bn",selectedOption,selected)
    return (
       <>
@@ -857,20 +837,17 @@ const mapStateToProps = ({ auth, call, employee,customer, opportunity, candidate
   addingCall: call.addingCall,
   allCustomerData:customer.allCustomerData,
   userId: auth.userDetails.userId,
-
   orgId: auth.userDetails.organizationId,
   user: auth.userDetails,
   updatingCall: call.updatingCall,
   user: auth.userDetails,
   deletingCall: call.deleteCall,
   sales: opportunity.sales,
-  employees: employee.employees,
   opportunityByCustomerId: customer.opportunityByCustomerId,
   contactByCustomerId: customer.contactByCustomerId,
-//   filteredContact: candidate.filteredContact,
   addNotesSpeechModal: call.addNotesSpeechModal,
   fullName: auth.userDetails.fullName
-  // candidateByuserId:candidate.candidateByuserId
+
 });
 
 const mapDispatchToProps = (dispatch) =>
@@ -883,9 +860,6 @@ const mapDispatchToProps = (dispatch) =>
       updateCall,
       handleCallModal,
       deleteCall,
-      getEmployeelist,
-    //   getOpportunityListByCustomerId,
-    //   getContactListByCustomerId,
       setClearbitCandidateData, 
       handleCallNotesModal,
     },

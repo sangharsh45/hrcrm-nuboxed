@@ -24,10 +24,6 @@ import {
   emptyContact,
   handleContactPulseDrawerModal
 } from "../../ContactAction";
-import {
-  getAllSalesList,
-  getRecruiterName,
-} from "../../../Opportunity/OpportunityAction";
 import NoteAltIcon from "@mui/icons-material/NoteAlt";
 import PhoneInTalkIcon from '@mui/icons-material/PhoneInTalk';
 import { getDesignations } from "../../../Settings/Designation/DesignationAction";
@@ -66,8 +62,6 @@ function ContactTeamCardList(props) {
     })
     props.getTeamContact(props.userId, page,"creationdate");
     setPage(page + 1);
-    props.getAllSalesList();
-    props.getRecruiterName();
   }, []);
 
   useEffect(()=>{
@@ -479,10 +473,8 @@ const mapStateToProps = ({
 }) => ({
   userId: auth.userDetails.userId,
   teamContact: contact.teamContact,
-  sales: opportunity.sales,
   user: auth.userDetails,
   addDrawerContactPulseModal:contact.addDrawerContactPulseModal,
-  recruiterName: opportunity.recruiterName,
   fetchingContacts: contact.fetchingContacts,
   fetchingContactsError: contact.fetchingContactsError,
   updateContactModal: contact.updateContactModal,
@@ -496,14 +488,12 @@ const mapStateToProps = ({
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
-        getTeamContact,
+      getTeamContact,
       handleUpdateContactModal,
       handleDonotCallModal,
       setEditContact,
       getDesignations,
       updateOwnercontactById,
-      getRecruiterName,
-      getAllSalesList,
       handleContactReactSpeechModal,
       handleContactDrawerModal,
       getContactById,

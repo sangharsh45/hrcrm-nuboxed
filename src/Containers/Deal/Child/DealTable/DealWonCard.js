@@ -24,7 +24,6 @@ import {
   setEditOpportunity,
   deleteOpportunityData,
   updateOwneroppById,
-      getAllSalesList,
       handleOpportunityDrawerModal,
       getAllRecruitmentByOppId,
         getAllRecruitmentPositionByOppId,
@@ -49,7 +48,6 @@ function DealWonCard(props) {
     }else{
      
     } 
-    props.getAllSalesList();
     props. getWonDeals(props.userId,page);
     setPage(page + 1);
   }, []);
@@ -464,7 +462,6 @@ const mapStateToProps = ({ auth, deal, opportunity }) => ({
   user: auth.userDetails,
   role: auth.userDetails.role,
   opportunitySkills:opportunity.opportunitySkills,
-  sales: opportunity.sales,
   recruiterName: opportunity.recruiterName,
   recruiterList:opportunity.recruiterList,
   fetchinglostOpportunity:opportunity.fetchinglostOpportunity,
@@ -496,7 +493,6 @@ const mapDispatchToProps = (dispatch) =>
     {
       getRecruiterList,
       getOpportunitySKill,
-      getAllSalesList,
       handleUpdateOpportunityModal,
       handleOpportunityDrawerModal,
       setEditOpportunity,

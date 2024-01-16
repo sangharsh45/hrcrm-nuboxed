@@ -34,7 +34,6 @@ import Holiday from "../Holiday/Holiday";
 import Reports from "../Reports/Reports";
 import Partner from "../Partner/Partner";
 import Category from "../Settings/Category/Category";
-import { handleOpportunityModal } from "../Opportunity/OpportunityAction";
 import Recruitment from "../Settings/Recruitement/Recruitment";
 import { Select } from "antd";
 import { updateUserById } from "../Auth/AuthAction";
@@ -758,10 +757,6 @@ function MainApp(props) {
         addPartnerModal={props.addPartnerModal}
         handlePartnerModal={props.handlePartnerModal}
       />
-         <AddOpportunityModal
-        addOpportunityModal={props.addOpportunityModal}
-        handleOpportunityModal={props.handleOpportunityModal}
-      />
       <AddCandidateResumeModal
         addCandidateResumeModal={props.addCandidateResumeModal}
         handleCandidateResumeModal={props.handleCandidateResumeModal}
@@ -836,7 +831,6 @@ const mapStateToProps = ({
   addCallModal: call.addCallModal,
   addEventModal: event.addEventModal,
   addTaskModal: task.addTaskModal,
-  addOpportunityModal: opportunity.addOpportunityModal,
   user: auth.userDetails,
 });
 const mapDispatchToProps = (dispatch) =>
@@ -850,7 +844,6 @@ const mapDispatchToProps = (dispatch) =>
       updateUserById,
       handleCandidateResumeModal,
       handleCallModal,
-      handleOpportunityModal,
       setLanguage,
       getOpportunityRecord,
       // getRequirementRecord,

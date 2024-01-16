@@ -18,10 +18,6 @@ import {
   emptyContact,
   handleContactPulseDrawerModal
 } from "../../ContactAction";
-import {
-  getAllSalesList,
-  getRecruiterName,
-} from "../../../Opportunity/OpportunityAction";
 import { getDesignations } from "../../../Settings/Designation/DesignationAction";
 import ReactContactSpeechModal from "../ContactDetail/ReactContactSpeechModal";
 import AddContactDrawerModal from "../UpdateContact/AddContactDrawerModal";
@@ -56,8 +52,6 @@ function ContactAllCardList(props) {
     })
     props.getAllContact(page,"creationdate");
     setPage(page + 1);
-    props.getAllSalesList();
-    props.getRecruiterName();
   }, []);
 
   useEffect(()=>{
@@ -447,18 +441,15 @@ function ContactAllCardList(props) {
 const mapStateToProps = ({
   auth,
   contact,
-  account,
   designations,
   departments,
   opportunity,
 }) => ({
   userId: auth.userDetails.userId,
   allContacts: contact.allContacts,
-  sales: opportunity.sales,
   user: auth.userDetails,
   addDrawerContactPulseModal:contact.addDrawerContactPulseModal,
-  recruiterName: opportunity.recruiterName,
-  fetchingContacts: contact.fetchingContacts,
+   fetchingContacts: contact.fetchingContacts,
   fetchingContactsError: contact.fetchingContactsError,
   updateContactModal: contact.updateContactModal,
   addDrawerContactNotesModal:contact.addDrawerContactNotesModal,
@@ -477,9 +468,7 @@ const mapDispatchToProps = (dispatch) =>
       setEditContact,
       getDesignations,
       updateOwnercontactById,
-      getRecruiterName,
-      getAllSalesList,
-      handleContactReactSpeechModal,
+       handleContactReactSpeechModal,
       handleContactDrawerModal,
       getContactById,
       handleContactNotesDrawerModal,

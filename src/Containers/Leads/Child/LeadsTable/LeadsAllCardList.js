@@ -5,14 +5,12 @@ import { bindActionCreators } from "redux";
 import moment from "moment";
 import NoteAltIcon from "@mui/icons-material/NoteAlt";
 import OpenInBrowserIcon from "@mui/icons-material/OpenInBrowser";
-import { getSectors } from "../../../Settings/Sectors/SectorsAction";
 import { MultiAvatar, SubTitle } from "../../../../Components/UI/Elements";
 import "jspdf-autotable";
 import { OnlyWrapCard } from "../../../../Components/UI/Layout";
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import { DeleteOutlined } from "@ant-design/icons";
-// import { getCountries } from "../../../Auth/AuthAction";
 import {
   getAllLeads,
   deleteLeadsData,
@@ -45,8 +43,7 @@ const LeadsAllCardList = (props) => {
   useEffect(() => {
     setPage(page + 1);
     props.getAllLeads(page,"creationdate");
-    props.getSectors();
-    // props.getCountries();
+
   }, []);
   useEffect(() => {
     return () => props.emptyLeads();
@@ -497,8 +494,6 @@ const mapStateToProps = ({ auth, leads, sector }) => ({
   userId: auth.userDetails.userId,
   lead: leads.lead,
   user: auth.userDetails,
-  // countries: auth.countries,
-  sectors: sector.sectors,
   updateLeadsModal: leads.updateLeadsModal,
   addDrawerLeadsEmailModal: leads.addDrawerLeadsEmailModal,
   fetchingAllLeads: leads.fetchingAllLeads,
@@ -510,14 +505,12 @@ const mapDispatchToProps = (dispatch) =>
     {
       getAllLeads,
       emptyLeads,
-      getSectors,
       deleteLeadsData,
       setEditLeads,
       handleUpdateLeadsModal,
       handleLeadsNotesDrawerModal,
       handleLeadsEmailDrawerModal,
       getLeadDetailsById,
-      // getCountries,
       updateTypeForLead,
       handleCETmodal,
     },

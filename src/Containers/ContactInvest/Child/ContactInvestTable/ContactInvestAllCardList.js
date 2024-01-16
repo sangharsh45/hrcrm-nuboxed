@@ -20,10 +20,6 @@ import {
   handleContactDrawerModal,
   handleContactEmailDrawerModal,
 } from "../../../Contact/ContactAction";
-import {
-  getAllSalesList,
-  getRecruiterName,
-} from "../../../Opportunity/OpportunityAction";
 import NoteAltIcon from "@mui/icons-material/NoteAlt";
 import PhoneInTalkIcon from '@mui/icons-material/PhoneInTalk';
 import { getDesignations } from "../../../Settings/Designation/DesignationAction";
@@ -63,8 +59,6 @@ function ContactInvestAllCardList(props) {
     })
     props.getAllContactInvest(pageNo,"creationdate");
     setPage(pageNo + 1);
-    props.getAllSalesList();
-    props.getRecruiterName();
   }, []);
 
   useEffect(()=>{
@@ -450,10 +444,8 @@ const mapStateToProps = ({
 }) => ({
   userId: auth.userDetails.userId,
   contactByUserId: contact.contactByUserId,
-  sales: opportunity.sales,
   user: auth.userDetails,
   addDrawerContactInvestNotesModal:contactinvest.addDrawerContactInvestNotesModal,
-  recruiterName: opportunity.recruiterName,
   fetchingAllContactInvest: contactinvest.fetchingAllContactInvest,
   fetchingContactsInvestError: contactinvest.fetchingContactsInvestError,
   updateContactInvestModal: contactinvest.updateContactInvestModal,
@@ -473,8 +465,6 @@ const mapDispatchToProps = (dispatch) =>
       setEditContact,
       getDesignations,
       updateOwnercontactById,
-      getRecruiterName,
-      getAllSalesList,
       handleContactReactSpeechModal,
       handleContactDrawerModal,
       getContactById,
