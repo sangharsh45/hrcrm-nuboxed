@@ -19,10 +19,9 @@ import {
 import {
   getRecruiterList,
   setEditOpportunity,
-  deleteOpportunityData,
   getOpportunityInitiativeSKillDetails,
   updateOwneroppById,
-  getAllSalesList,
+
   handleOpportunityDrawerModal,
   getAllRecruitmentByOppId,
   getAllRecruitmentPositionByOppId,
@@ -42,6 +41,7 @@ import {
   handleDealsNotesDrawerModal,
   LinkStageDeal,
   sendToWon,
+  deleteDealsData
 } from "../../DealAction";
 const UpdateDealModal =lazy(()=>import("../UpdateDeal/UpdateDealModal"));
 const AddDealsNotesDrawerModal =lazy(()=>import("../AddDealsNotesDrawerModal"));
@@ -57,7 +57,6 @@ function DealCardList(props) {
       props.getDealListbyUserId(props.userId, page);
       setPage(page + 1);
     }
-    props.getAllSalesList();
   }, []);
 
   const handleLoadMore = () => {
@@ -80,7 +79,7 @@ function DealCardList(props) {
     dealsByuserId,
     handleUpdateDealModal,
     openupdateDealModal,
-    deleteOpportunityData,
+    deleteDealsData,
     history,
     fetchingDeal,
   } = props;
@@ -380,7 +379,7 @@ function DealCardList(props) {
                       <StyledPopconfirm
                         title="Do you want to delete?"
                         onConfirm={() =>
-                          deleteOpportunityData(item.opportunityId)
+                          deleteDealsData(item.invOpportunityId)
                         }
                       >
                         {user.imInd === true && user.dealDeleteInd === true && (
@@ -443,7 +442,6 @@ const mapStateToProps = ({ auth, deal, opportunity }) => ({
   user: auth.userDetails,
   role: auth.userDetails.role,
   opportunitySkills: opportunity.opportunitySkills,
-  sales: opportunity.sales,
   recruiterName: opportunity.recruiterName,
   recruiterList: opportunity.recruiterList,
   fetchingRecruiterList: opportunity.fetchingRecruiterList,
@@ -476,12 +474,11 @@ const mapDispatchToProps = (dispatch) =>
       getRecruiterList,
       getOpportunitySKill,
       getOpportunityForecast,
-      getAllSalesList,
       handleUpdateDealModal,
       handleOpportunityDrawerModal,
       handleDealsNotesDrawerModal,
       setEditOpportunity,
-      deleteOpportunityData,
+      deleteDealsData,
       updateOwneroppById,
       getAllRecruitmentByOppId,
       getAllRecruitmentPositionByOppId,

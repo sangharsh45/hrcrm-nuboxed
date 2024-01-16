@@ -498,7 +498,6 @@ const mapStateToProps = ({
   sales: opportunity.sales,
   user: auth.userDetails,
   addDrawerContactPulseModal:contact.addDrawerContactPulseModal,
-  recruiterName: opportunity.recruiterName,
   fetchingContacts: contact.fetchingContacts,
   fetchingContactsError: contact.fetchingContactsError,
   updateContactModal: contact.updateContactModal,

@@ -28,7 +28,6 @@ import {getAllCustomerData} from "../../../Customer/CustomerAction"
 import { handleChooserModal } from "../../../Planner/PlannerAction";
 import { TextareaComponent } from "../../../../Components/Forms/Formik/TextareaComponent";
 import { StyledPopconfirm } from "../../../../Components/UI/Antd";
-import { getEmployeelist } from "../../../Employees/EmployeeAction";
 import { setClearbitCandidateData } from "../../../Candidate/CandidateAction";
 import SpeechRecognition, { } from 'react-speech-recognition';
 import { AudioOutlined } from '@ant-design/icons';
@@ -99,7 +98,6 @@ function CustomerCallActivityForm(props) {
     // resetForm();
   };
   useEffect(() => {
-    props.getEmployeelist();
     props.getAllSalesList();
     props.getAllCustomerData(props.userId)
     props.getOpportunityListByCustomerId(props.customer.customerId);
@@ -140,7 +138,7 @@ function CustomerCallActivityForm(props) {
         value: item.customerId,
       };
     });
-    const employeesData = props.employees.map((item) => {
+    const employeesData = props.sales.map((item) => {
       return {
         label: `${item.fullName}`,
         value: item.employeeId,
@@ -193,8 +191,7 @@ function CustomerCallActivityForm(props) {
     if (props.selectedCall) {
       var data = props.selectedCall.callCategory === "New" ? false : true;
     }
-   const selectedOption = props.employees.find((item) => item.fullName === selected);
-   console.log("bn",selectedOption,selected)
+   const selectedOption = props.sales.find((item) => item.fullName === selected);
    return (
       <>
         <Formik
@@ -653,7 +650,7 @@ function CustomerCallActivityForm(props) {
                   static
                   className="absolute z-10 mt-1 max-h-56 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
                 >
-                  {props.employees.map((item) => (
+                  {props.sales.map((item) => (
                     <Listbox.Option
                       key={item.employeeId}
                       className={({ active }) =>
@@ -941,20 +938,17 @@ const mapStateToProps = ({ auth, call, employee,customer, opportunity, candidate
   addingCall: call.addingCall,
   allCustomerData:customer.allCustomerData,
   userId: auth.userDetails.userId,
-
   orgId: auth.userDetails.organizationId,
   user: auth.userDetails,
   updatingCall: call.updatingCall,
   user: auth.userDetails,
   deletingCall: call.deleteCall,
   sales: opportunity.sales,
-  employees: employee.employees,
   opportunityByCustomerId: customer.opportunityByCustomerId,
   contactByCustomerId: customer.contactByCustomerId,
-//   filteredContact: candidate.filteredContact,
   addNotesSpeechModal: call.addNotesSpeechModal,
   fullName: auth.userDetails.fullName
-  // candidateByuserId:candidate.candidateByuserId
+
 });
 
 const mapDispatchToProps = (dispatch) =>
@@ -967,7 +961,6 @@ const mapDispatchToProps = (dispatch) =>
       updateCall,
       handleCallModal,
       deleteCall,
-      getEmployeelist,
       getOpportunityListByCustomerId,
       getContactListByCustomerId,
       setClearbitCandidateData, 

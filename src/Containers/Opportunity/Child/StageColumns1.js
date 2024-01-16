@@ -3,11 +3,9 @@ import styled from "styled-components";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Draggable } from "react-beautiful-dnd";
-import { BussinessCard } from "../../../Components/UI/Elements";
 import OpportunityGroupCard from "../Child/OpportunityGroupCard";
-import { MainWrapper, FlexContainer } from "../../../Components/UI/Layout";
 import { elipsize } from "../../../Helpers/Function/Functions";
-import {  StatusRecruit, lostStatusRecruit} from "../OpportunityAction";
+import {  StatusRecruit, lostStatusRecruit,deleteOpportunityData} from "../OpportunityAction";
 
 const StageContainer = styled.div`
   padding: 0.8rem 1.5rem;
@@ -42,6 +40,7 @@ class StageColumns1 extends Component {
               primaryTitle={`${elipsize(opportunity.opportunityName, 60)}`} 
               secondaryTitle={`${opportunity.proposalAmount} `}
               currencyType={opportunity.currency}
+              user={this.props.user}
               handleClick={() =>
                 history.push({
                   pathname: `opportunity/${opportunity.opportunityId}`,
@@ -57,6 +56,9 @@ class StageColumns1 extends Component {
                 this.props.lostStatusRecruit(opportunity.opportunityId, {
                   lostInd: true
                 })
+              }}
+              handleDelete={()=>{
+                this.props.deleteOpportunityData(opportunity.opportunityId)
               }}
             />
              
@@ -77,7 +79,7 @@ const mapDispatchToProps = (dispatch) =>
     
          StatusRecruit,
          lostStatusRecruit,
-     
+         deleteOpportunityData
     },
     dispatch
   );

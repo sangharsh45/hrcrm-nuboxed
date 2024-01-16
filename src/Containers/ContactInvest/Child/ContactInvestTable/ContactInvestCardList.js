@@ -20,16 +20,12 @@ import {
   handleContactDrawerModal,
   handleContactEmailDrawerModal,
 } from "../../../Contact/ContactAction";
-import {
-  getAllSalesList,
-  getRecruiterName,
-} from "../../../Opportunity/OpportunityAction";
 import NoteAltIcon from "@mui/icons-material/NoteAlt";
 import PhoneInTalkIcon from '@mui/icons-material/PhoneInTalk';
 import { getDesignations } from "../../../Settings/Designation/DesignationAction";
 import MonitorHeartIcon from '@mui/icons-material/MonitorHeart';
 import BorderColorIcon from '@mui/icons-material/BorderColor';
-import {getContactInvestByUserId,
+import {
   handleContactInvestNotesDrawerModal,
   emptyContactInvest,handleUpdateContactInvestModal} from "../../ContactInvestAction";
 import { FormattedMessage } from "react-intl";
@@ -61,10 +57,6 @@ function ContactInvestCardList(props) {
         }
       }
     })
-    props.getContactInvestByUserId(props.userId,pageNo,"creationdate");
-    setPage(pageNo + 1);
-    props.getAllSalesList();
-    props.getRecruiterName();
   }, []);
 
   useEffect(()=>{
@@ -412,22 +404,7 @@ function ContactInvestCardList(props) {
         handleContactInvestNotesDrawerModal={handleContactInvestNotesDrawerModal}
         handleCurrentContactIdata={handleCurrentContactIdata}
       />
-      {/* <AddContactEmailDrawerModal
-        contactData={currentContactId}
-        addDrawerContactEmailModal={props.addDrawerContactEmailModal}
-        handleContactEmailDrawerModal={props.handleContactEmailDrawerModal}
-      />
-      <ReactContactSpeechModal
-        contactData={currentContactId}
-        handleContactReactSpeechModal={handleContactReactSpeechModal}
-        addContactSpeechModal={addContactSpeechModal}
-        handleSetCurrentContactId={handleSetCurrentContactId}
-      />
-      <AddContactDrawerModal
-        item={currentContactId}
-        addDrawerContactModal={props.addDrawerContactModal}
-        handleContactDrawerModal={props.handleContactDrawerModal}
-      /> */}
+    
     </>
   );
 }
@@ -441,10 +418,8 @@ const mapStateToProps = ({
 }) => ({
   userId: auth.userDetails.userId,
   contactByUserId: contact.contactByUserId,
-  sales: opportunity.sales,
   user: auth.userDetails,
   addDrawerContactInvestNotesModal:contactinvest.addDrawerContactInvestNotesModal,
-  recruiterName: opportunity.recruiterName,
   fetchingContactsInvest: contactinvest.fetchingContactsInvest,
   fetchingContactsInvestError: contactinvest.fetchingContactsInvestError,
   updateContactInvestModal: contactinvest.updateContactInvestModal,
@@ -463,14 +438,11 @@ const mapDispatchToProps = (dispatch) =>
       setEditContact,
       getDesignations,
       updateOwnercontactById,
-      getRecruiterName,
-      getAllSalesList,
       handleContactReactSpeechModal,
       handleContactDrawerModal,
       getContactById,
       handleContactEmailDrawerModal,
       emptyContactInvest,
-      getContactInvestByUserId,
       handleUpdateContactInvestModal,
       handleContactInvestNotesDrawerModal
     },

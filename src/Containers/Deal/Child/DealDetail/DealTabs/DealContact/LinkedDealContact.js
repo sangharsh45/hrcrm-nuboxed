@@ -432,9 +432,7 @@ const mapStateToProps = ({ deal }) => ({
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
-        getDealContactList,
-      //   unlinkContactFromOpportunity,
-        //  setContactRoleForOpportunity,
+        getDealContactList
     },
     dispatch
   );

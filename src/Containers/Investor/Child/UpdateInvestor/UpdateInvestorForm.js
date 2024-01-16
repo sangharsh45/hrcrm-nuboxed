@@ -7,7 +7,6 @@ import AddressFieldArray from "../../../../Components/Forms/Formik/AddressFieldA
 import { Formik, Form, Field, FieldArray, FastField } from "formik";
 import * as Yup from "yup";
 import {getAllEmployeelist} from "../../InvestorAction"
-import { getSectors } from "../../../../Containers/Settings/Sectors/SectorsAction";
 import { HeaderLabel, StyledLabel } from "../../../../Components/UI/Elements";
 import { Spacer } from "../../../../Components/UI/Elements";
 import SearchSelect from "../../../../Components/Forms/Formik/SearchSelect";
@@ -30,8 +29,6 @@ function UpdateInvestorForm (props) {
   
   useEffect(() => {
     props.getAllEmployeelist();
-    // props.getAllCustomerEmployeelist();
-    props.getSectors();
     props.getInvestorList(props.orgId)
   }, []);
 
@@ -48,12 +45,7 @@ function UpdateInvestorForm (props) {
       RowData,
       userId
     } = props;
-    const employeesData = props.allEmployeeList.map((item) => {
-      return {
-        label: `${item.fullName}`,
-        value: item.employeeId,
-      };
-    });
+
     const investorType = props.investorListData.map((item) => {
       return {
         label: item.name || "",
@@ -63,7 +55,6 @@ function UpdateInvestorForm (props) {
     const [defaultOption, setDefaultOption] = useState(RowData.assignedTo);
     const [selected, setSelected] = useState(defaultOption);
     const selectedOption = props.allEmployeeList.find((item) => item.empName === selected);
-    console.log(props.RowData)
     return (
       <>
         <Formik
@@ -429,7 +420,6 @@ const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
       UpdateInvestor,
-      getSectors,
       getAllEmployeelist,
       getInvestorList
     },

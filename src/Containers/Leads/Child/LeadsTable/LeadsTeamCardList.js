@@ -5,7 +5,6 @@ import { bindActionCreators } from "redux";
 import moment from "moment";
 import NoteAltIcon from "@mui/icons-material/NoteAlt";
 import OpenInBrowserIcon from "@mui/icons-material/OpenInBrowser";
-import { getSectors } from "../../../Settings/Sectors/SectorsAction";
 import { MultiAvatar, SubTitle } from "../../../../Components/UI/Elements";
 import "jspdf-autotable";
 import { OnlyWrapCard } from "../../../../Components/UI/Layout";
@@ -46,8 +45,6 @@ const LeadsTeamCardList = (props) => {
   useEffect(() => {
     setPage(page + 1);
     props.getTeamLeads(props.userId, page,"creationdate");
-    props.getSectors();
-    // props.getCountries();
   }, []);
 
   const [currentLeadsId, setCurrentLeadsId] = useState("");
@@ -353,11 +350,7 @@ const LeadsTeamCardList = (props) => {
                     </span>
                   </div>
                   <div className=" flex font-medium flex-col md:w-[6rem] max-sm:flex-row w-full max-sm:justify-between ">
-                    {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden">
-                      Qualify
-                    </h4> */}
-
-                    <div class=" text-xs text-cardBody font-poppins"></div>
+                  <div class=" text-xs text-cardBody font-poppins"></div>
                     <div>
                       <StatusCustomerToggle
                         type={props.convertInd ? "primary" : "danger"}
@@ -525,7 +518,6 @@ const mapStateToProps = ({ auth, leads, sector }) => ({
   lead: leads.lead,
   user: auth.userDetails,
   countries: auth.countries,
-  sectors: sector.sectors,
   updateLeadsModal: leads.updateLeadsModal,
   addDrawerLeadsEmailModal: leads.addDrawerLeadsEmailModal,
   fetchingLeads: leads.fetchingLeads,
@@ -538,7 +530,6 @@ const mapDispatchToProps = (dispatch) =>
     {
         getTeamLeads,
       handleLeadsConfirmationModal,
-      getSectors,
       deleteLeadsData,
       setEditLeads,
       handleUpdateLeadsModal,

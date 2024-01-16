@@ -98,6 +98,9 @@ const initialState = {
 
    sendingToWon: false,
 sendingToWonError:false,
+
+deleteDealData: false, deleteDealDataError: false
+
 };
 
 const updateDragdDeal = (item, newProps) => {
@@ -543,6 +546,19 @@ export const dealReducer = (state = initialState, action) => {
               fetchingOpportunityRecord: false,
               fetchingOpportunityRecordError: true,
             };
+
+            case types.DELETE_DEAL_DATA_REQUEST:
+              return { ...state, deleteDealData: true };
+            case types.DELETE_DEAL_DATA_SUCCESS:
+              return {
+                ...state,
+                deleteDealData: false,
+                dealsByuserId: state.dealsByuserId.filter(
+                  (item) => item.invOpportunityId !== action.payload),
+              };
+            case types.DELETE_DEAL_DATA_FAILURE:
+              return { ...state, deleteDealData: false, deleteDealDataError: false };
+
     default:
       return state;
   }

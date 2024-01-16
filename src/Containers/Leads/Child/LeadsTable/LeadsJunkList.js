@@ -4,7 +4,6 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import moment from "moment";
 import OpenInBrowserIcon from '@mui/icons-material/OpenInBrowser';
-import { getSectors } from "../../../Settings/Sectors/SectorsAction";
 import { MultiAvatar, SubTitle } from "../../../../Components/UI/Elements";
 import "jspdf-autotable";
 import { OnlyWrapCard } from '../../../../Components/UI/Layout'
@@ -40,8 +39,6 @@ const LeadsJunkList = (props) => {
 
   useEffect(() => {
     props.getJunkedLeads(props.userId);
-    props.getSectors();
-    // props.getCountries();
   }, []);
 
   const [currentLeadsId, setCurrentLeadsId] = useState("");
@@ -404,8 +401,6 @@ const mapStateToProps = ({ auth, leads, sector }) => ({
   junkedLeadsData: leads.junkedLeadsData,
   userId: auth.userDetails.userId,
   lead: leads.lead,
-  // countries: auth.countries,
-  sectors: sector.sectors,
   updateLeadsModal: leads.updateLeadsModal,
   addDrawerLeadsEmailModal: leads.addDrawerLeadsEmailModal,
   fetchingJunkedLeads:leads.fetchingJunkedLeads
@@ -414,7 +409,6 @@ const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
       getJunkedLeads,
-      getSectors,
       deleteLeadsData,
       setEditLeads,
       handleUpdateLeadsModal,

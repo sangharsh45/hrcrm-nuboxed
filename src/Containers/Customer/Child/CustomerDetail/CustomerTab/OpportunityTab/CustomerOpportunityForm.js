@@ -7,7 +7,7 @@ import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 import { Spacer, StyledLabel } from "../../../../../../Components/UI/Elements";
 import SearchSelect from "../../../../../../Components/Forms/Formik/SearchSelect";
-import { addCustomerOpportunity,getContactListByCustomerId } from "../../../../CustomerAction";
+import { addCustomerOpportunity } from "../../../../CustomerAction";
 import {
   getAllSalesList, getWorkflow, getStages,
 } from "../../../../../Opportunity/OpportunityAction";
@@ -35,7 +35,6 @@ function CustomerOpportunityForm(props) {
   useEffect(() => {
     props.getAllSalesList();
     props.getWorkflow(props.orgId);
-    props.getContactListByCustomerId(props.customerId);
     props.getStages(props.orgId);
     props. getCrm();
   }, []);
@@ -64,34 +63,9 @@ function CustomerOpportunityForm(props) {
 
     return contactOptions;
   }
-  function classNames(...classes) {
-    return classes.filter(Boolean).join(' ')
-  }
+ 
 
-  // const ContactOptions = props.contactByCustomerId.map((item) => {
-  //   return {
-  //     label: `${item.contactName || ""}`,
-  //     value: item.contactId,
-  //   };
-  // });
 
-  function getInitiativeOptions(filterOptionKey, filterOptionValue) {
-    const initiativeOptions =
-      props.initiatives.length &&
-      props.initiatives
-        .filter((option) => {
-          if (option.customerId === filterOptionValue && option.probability !== 0) {
-            return option;
-          }
-        })
-
-        .map((option) => ({
-          label: option.initiativeName || "",
-          value: option.initiativeDetailsId,
-        }));
-
-    return initiativeOptions;
-  }
   function getStagesOptions(filterOptionKey, filterOptionValue) {
     const StagesOptions =
       props.stages.length &&
@@ -126,46 +100,6 @@ function CustomerOpportunityForm(props) {
   });
 
 
-  function getskillOptions(filterOptionKey, filterOptionValue) {
-    const skillOptions =
-      props.opportunitySkills.length && props.opportunitySkills
-        .filter((option) => {
-          if (option.initiativeDetailsId === filterOptionValue) {
-            // console.log("option",option.initiativeSkillMapper)
-            return option;
-          }
-        })
-        // .map((option) => {
-        //   const data=option.initiativeSkillMapper
-        //   console.log(data)
-        //   return data .map((item)=>{
-        //     console.log(item.skilId)
-        //     return {      
-        //       label: item.skillName,
-        //       value: item.skilId,
-        //     }        
-        // })      
-
-        // })
-        .map((option) => {
-          console.log("option1", option)
-          return {
-            label: `${option.skillName || ""}`,
-            value: option.skilId,
-          };
-
-
-        });
-
-    return skillOptions;
-  }
-
-  const salesNameOption = props.sales.map((item) => {
-    return {
-      label: `${item.fullName || ""}`,
-      value: item.employeeId,
-    };
-  });
   const [defaultOption, setDefaultOption] = useState(props.fullName);
   const [selected, setSelected] = useState(defaultOption);
   const selectedOption = props.sales.find((item) => item.fullName === selected);
@@ -527,7 +461,7 @@ function CustomerOpportunityForm(props) {
                 <Field
                   name="customerId"
                   isColumnWithoutNoCreate
-                  selectType="customerList"
+                  // selectType="customerList"
                   // label="Customer"
 
                   label={
@@ -537,9 +471,10 @@ function CustomerOpportunityForm(props) {
                     />
                   }
                   // isRequired
-                  component={SearchSelect}
+                  component={SelectComponent}
                   isColumn
-                  value={values.customerId}
+                  options={[]}
+                  // value={values.customerId}
                   isDisabled={defaultCustomers}
                   defaultValue={defaultCustomers ? defaultCustomers : null}
                   inlineLabel
@@ -649,7 +584,6 @@ const mapStateToProps = ({ auth, opportunity, contact, customer,leads }) => ({
   sales: opportunity.sales,
   workflow: opportunity.workflow,
   stages: opportunity.stages,
-  contactByCustomerId:customer.contactByCustomerId,
   orgId: auth.userDetails.organizationId,
   fullName: auth.userDetails.fullName,
   crmAllData:leads.crmAllData,
@@ -661,8 +595,7 @@ const mapDispatchToProps = (dispatch) =>
       addCustomerOpportunity,
       getAllSalesList,
       getWorkflow,
-      getStages,
-      getContactListByCustomerId,
+      getStages, 
       getCrm,
     },
     dispatch

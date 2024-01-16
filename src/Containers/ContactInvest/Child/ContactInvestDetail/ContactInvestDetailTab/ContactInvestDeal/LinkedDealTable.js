@@ -9,7 +9,7 @@ import {
   MultiAvatar,
   SubTitle,
 } from "../../../../../../Components/UI/Elements";
-import { getOpportunityListByContactId } from "../../../../../Contact/ContactAction";
+// import { getOpportunityListByContactId } from "../../../../../Contact/ContactAction";
 import { Tooltip } from "antd";
 
 function onChange(pagination, filters, sorter) {
@@ -18,7 +18,7 @@ function onChange(pagination, filters, sorter) {
 
 function LinkedDealTable(props) {
   useEffect(() => {
-    props.getOpportunityListByContactId(props.contactId);
+    // props.getOpportunityListByContactId(props.contactId);
   }, []);
 
   const { fetchingContactOpportunity, opportunityByContactId } = props;
@@ -161,7 +161,7 @@ function LinkedDealTable(props) {
   );
 }
 
-const mapStateToProps = ({ auth, contact, opportunity }) => ({
+const mapStateToProps = ({ auth,contact }) => ({
   userId: auth.userDetails.userId,
   fetchingContactOpportunity: contact.fetchingContactOpportunity,
   opportunityByContactId: contact.opportunityByContactId,
@@ -170,7 +170,7 @@ const mapStateToProps = ({ auth, contact, opportunity }) => ({
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
-      getOpportunityListByContactId,
+      // getOpportunityListByContactId,
     },
     dispatch
   );

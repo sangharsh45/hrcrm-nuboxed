@@ -23,7 +23,6 @@ import {addinvestActivityEvent} from "../../../InvestorAction"
 import { handleChooserModal } from "../../../../Planner/PlannerAction";
 import { TextareaComponent } from "../../../../../Components/Forms/Formik/TextareaComponent";
 import { StyledPopconfirm } from "../../../../../Components/UI/Antd";
-import { getEmployeelist } from "../../../../Employees/EmployeeAction";
 import { getEvents } from "../../../../Settings/Event/EventAction";
 import { setClearbitCandidateData } from "../../../../Candidate/CandidateAction";
 import { Listbox } from '@headlessui/react'
@@ -57,18 +56,13 @@ function InvestorEventActivityForm (props) {
   setRemider(checked);
   };
   useEffect(()=> {
-   props.getEmployeelist();
    props.getEvents();
    props.getAllCustomerData(userId)
-//    props.getOpportunityListByCustomerId(props.customer.customerId);
-//    props.getContactListByCustomerId(props.customer.customerId);
   },[])
   
-    const employeesData =props.employees.map((item) => {
+    const employeesData =props.sales.map((item) => {
       return {
         label: `${item.fullName}`,
-        // label: `${item.salutation || ""} ${item.firstName ||
-        //   ""} ${item.middleName || ""} ${item.lastName || ""}`,
         value: item.employeeId,
       };
     });
@@ -484,7 +478,7 @@ const {
                   static
                   className="absolute z-10 mt-1 max-h-56 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
                 >
-                  {props.employees.map((item) => (
+                  {props.sales.map((item) => (
                     <Listbox.Option
                       key={item.employeeId}
                       className={({ active }) =>
@@ -701,15 +695,15 @@ const {
       </>
     );
 }
-const mapStateToProps = ({ auth, event,opportunity,customer, employee, events, candidate }) => ({
+const mapStateToProps = ({ auth, event,customer, opportunity, events, candidate }) => ({
   addingEvent: event.addingEvent,
   opportunityByCustomerId: customer.opportunityByCustomerId,
   contactByCustomerId: customer.contactByCustomerId,
   allCustomerData:customer.allCustomerData,
   updatingEvent: event.updatingEvent,
+  sales: opportunity.sales,
   user: auth.userDetails,
   deletingEvent: event.deleteEvent,
-  employees: employee.employees,
   events: events.events,
   candidateId: candidate.clearbitCandidate.candidateId,
   fullName: auth.userDetails.fullName
@@ -723,12 +717,8 @@ const mapDispatchToProps = (dispatch) =>
       updateEvent,
       handleChooserModal,
       handleEventModal,
-      getEmployeelist,
       getEvents,
-    //   getOpportunityListByCustomerId,
-    //   getContactListByCustomerId,
       getAllCustomerData,
-  
       setClearbitCandidateData,
     },
     dispatch

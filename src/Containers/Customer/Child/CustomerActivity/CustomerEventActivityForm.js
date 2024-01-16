@@ -27,8 +27,6 @@ import {addCustomerActivityEvent} from "../../../Customer/CustomerAction"
 import { handleChooserModal } from "../../../Planner/PlannerAction";
 import { TextareaComponent } from "../../../../Components/Forms/Formik/TextareaComponent";
 import { StyledPopconfirm } from "../../../../Components/UI/Antd";
-import { getEmployeelist } from "../../../Employees/EmployeeAction";
-import { getEvents } from "../../../Settings/Event/EventAction";
 import { setClearbitCandidateData } from "../../../Candidate/CandidateAction";
 import { Listbox } from '@headlessui/react'
 
@@ -61,14 +59,12 @@ function CustomerEventActivityForm (props) {
   setRemider(checked);
   };
   useEffect(()=> {
-   props.getEmployeelist();
-   props.getEvents();
    props.getAllCustomerData(userId)
    props.getOpportunityListByCustomerId(props.customer.customerId);
    props.getContactListByCustomerId(props.customer.customerId);
   },[])
   
-    const employeesData =props.employees.map((item) => {
+    const employeesData =props.sales.map((item) => {
       return {
         label: `${item.fullName}`,
         // label: `${item.salutation || ""} ${item.firstName ||
@@ -108,7 +104,7 @@ function CustomerEventActivityForm (props) {
         value: item.customerId,
       };
     });
-const selectedOption = props.employees.find((item) => item.fullName === selected);
+const selectedOption = props.sales.find((item) => item.fullName === selected);
    
 const {
       user: { userId, firstName, fullName, middleName, lastName, timeZone },
@@ -793,8 +789,7 @@ const mapStateToProps = ({ auth, event,opportunity,customer, employee, events, c
   updatingEvent: event.updatingEvent,
   user: auth.userDetails,
   deletingEvent: event.deleteEvent,
-  employees: employee.employees,
-  events: events.events,
+  sales: opportunity.sales,
   candidateId: candidate.clearbitCandidate.candidateId,
   fullName: auth.userDetails.fullName
 });
@@ -807,12 +802,9 @@ const mapDispatchToProps = (dispatch) =>
       updateEvent,
       handleChooserModal,
       handleEventModal,
-      getEmployeelist,
-      getEvents,
       getOpportunityListByCustomerId,
       getContactListByCustomerId,
       getAllCustomerData,
-  
       setClearbitCandidateData,
     },
     dispatch
