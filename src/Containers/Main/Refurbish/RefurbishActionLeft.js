@@ -38,6 +38,7 @@ class RefurbishActionLeft extends Component {
               style={{
                 marginRight: "0.5rem",
                 color: viewType === "list" && "red",
+                cursor:"pointer"
               }}
               // iconType="book"
               // tooltipTitle="All"
@@ -45,11 +46,12 @@ class RefurbishActionLeft extends Component {
             ><GridViewIcon style={{fontSize:"1.4rem"}}  /></span>
           </Tooltip>
           {/* {user.designation === "Manager" && */}
-          <Tooltip title="All">
+          <Tooltip title="All Orders">
             <TocIcon
               style={{
                 marginRight: "1.4rem",
                 color: viewType === "all" && "#1890ff",
+                cursor:"pointer"
               }}
               // iconType="appstore-o"
               // tooltipTitle="Supplies Library"

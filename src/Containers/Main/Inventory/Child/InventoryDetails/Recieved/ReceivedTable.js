@@ -18,6 +18,7 @@ import { withRouter } from "react-router";
 import OpenReceivedOrderIdModal from "./OpenReceivedOrderIdModal";
 import { OnlyWrapCard } from '../../../../../../Components/UI/Layout';
 import { FormattedMessage } from "react-intl";
+import { MultiAvatar } from "../../../../../../Components/UI/Elements";
 
 const ReceivedTable = (props) => {
 
@@ -41,16 +42,16 @@ const ReceivedTable = (props) => {
     <>
       <div className=' flex justify-end sticky top-28 z-auto'>
         <OnlyWrapCard style={{ backgroundColor: "#E3E8EE" }}>
-          <div className=" flex justify-between w-[99%] px-2 bg-transparent font-bold sticky top-0 z-10">
+          <div className=" flex  w-[95%] px-2 bg-transparent font-bold sticky top-0 z-10">
             <div className=""></div>
-            <div className=" md:w-[7%]"><FormattedMessage id="app.order" defaultMessage="Order #" /></div>
-            <div className=" md:w-[6.1rem]"><FormattedMessage id="app.awb" defaultMessage="AWB" /></div>
-            <div className=" md:w-[4.2rem] "><FormattedMessage id="app.customer" defaultMessage="Customer" /></div>
-            <div className="md:w-[5.8rem]"><FormattedMessage id="app.contact" defaultMessage="Contact" /></div>
-            <div className="md:w-[8.5rem]"><FormattedMessage id="app.inspectedby" defaultMessage="Inspected By" /></div>
-            <div className="md:w-[5.2rem]"><FormattedMessage id="app.phone" defaultMessage="Phones #" /></div>
-            <div className="md:w-[5.2rem]"><FormattedMessage id="app.pickup" defaultMessage="Pick Up" /></div>
-            <div className="md:w-[5.2remb]"></div>
+            <div className=" md:w-[12.5rem]"><FormattedMessage id="app.order" defaultMessage="Order #" /></div>
+            <div className=" md:w-[8.12rem]"><FormattedMessage id="app.awb" defaultMessage="AWB" /></div>
+            <div className=" md:w-[11.5rem] "><FormattedMessage id="app.customer" defaultMessage="Customer" /></div>
+            <div className="md:w-[4.8rem]"><FormattedMessage id="app.contact" defaultMessage="Contact" /></div>
+            <div className="md:w-[10.5rem]"><FormattedMessage id="app.inspectedby" defaultMessage="Inspected By" /></div>
+            <div className="md:w-[10.24rem]"><FormattedMessage id="app.phone" defaultMessage="Phones #" /></div>
+            <div className="md:w-[5.23rem]"><FormattedMessage id="app.pickup" defaultMessage="Pick Up" /></div>
+            <div className="md:w-[5.2rem]"></div>
             <div className="w-12"></div>
           </div>
 
@@ -59,10 +60,10 @@ const ReceivedTable = (props) => {
             const date = moment(item.createAt).format("DD/MM/YYYY");
             return (
               <div>
-                <div className="flex rounded-xl justify-between mt-2 bg-white h-12 items-center p-3 ">
+                <div className="flex rounded-xl  mt-2 bg-white h-12 items-center p-3 ">
                   <div class="flex">
 
-                    <div className=" flex font-medium flex-col md:w-[6.1rem] max-sm:w-full  ">
+                    <div className=" flex font-medium flex-col md:w-[12.13rem] max-sm:w-full  ">
                       <h4 class="text-sm text-cardBody font-semibold  font-poppins cursor-pointer">
                         <span
                           onClick={() => {
@@ -83,7 +84,7 @@ const ReceivedTable = (props) => {
                       </h4>
                     </div>
 
-                    <div className=" flex font-medium flex-col  md:w-[7.1rem] max-sm:flex-row w-full max-sm:justify-between  ">
+                    <div className=" flex font-medium flex-col  md:w-[8.12rem] max-sm:flex-row w-full max-sm:justify-between  ">
 
                       <h4 class=" text-xs text-cardBody font-poppins">
                         {item.awbNo}
@@ -93,34 +94,49 @@ const ReceivedTable = (props) => {
 
                   </div>
 
-                  <div className=" flex font-medium flex-col md:w-[6.5rem] max-sm:flex-row w-full max-sm:justify-between ">
+                  <div className=" flex font-medium flex-col md:w-[12.51rem] max-sm:flex-row w-full max-sm:justify-between ">
                     <h4 class=" text-xs text-cardBody font-poppins">
 
                       {item.distributorName}
                     </h4>
                   </div>
-                  <div className=" flex font-medium flex-col md:w-[6.2rem] max-sm:flex-row w-full max-sm:justify-between ">
+                  <div className=" flex font-medium flex-col md:w-[5.22rem] max-sm:flex-row w-full max-sm:justify-between ">
                     <h4 class=" text-xs text-cardBody font-semibold  font-poppins">
-                      {item.contactPersonName}
+                    
+                      <MultiAvatar
+            primaryTitle={item.contactPersonName}
+            imageId={item.imageId}
+            imgWidth={"1.8rem"}
+            imgHeight={"1.8rem"}
+          />
                     </h4>
                   </div>
 
-                  <div className=" flex font-medium flex-col md:w-[3.2rem] max-sm:flex-row w-full max-sm:justify-between ">
+                  <div className=" flex font-medium flex-col md:w-[4.21rem] max-sm:flex-row w-full max-sm:justify-between ">
                     <h4 class=" text-xs text-cardBody font-semibold  font-poppins">
-                      {item.startInspectionUserName}
+                      
+                      <MultiAvatar
+            primaryTitle={item.startInspectionUserName}
+            imageId={item.imageId}
+            imgWidth={"1.8rem"}
+            imgHeight={"1.8rem"}
+          />
                     </h4>
                   </div>
-                  <div className=" flex font-medium flex-col md:w-[3.2rem] max-sm:flex-row w-full max-sm:justify-between ">
+                  <div className=" flex font-medium flex-col md:w-[4.22rem] max-sm:flex-row w-full max-sm:justify-between ">
                     <h4 class=" text-xs text-cardBody font-semibold  font-poppins">
                       {item.phoneReceiveCount}/{item.phoneCount}
                     </h4>
                   </div>
-                  <div className=" flex font-medium flex-col md:w-[3.2rem] max-sm:flex-row w-full max-sm:justify-between ">
+                  <div className=" flex font-medium flex-col md:w-[7.24rem] max-sm:flex-row w-full max-sm:justify-between ">
                     <h4 class=" text-xs text-cardBody font-semibold  font-poppins">
                       {` ${item.dialCode1 || ""} ${item.mobileNo || ""} `}
                     </h4>
                   </div>
-                  <div className=" flex font-medium flex-col md:w-[3.2rem] max-sm:flex-row w-full max-sm:justify-between ">
+                  <div className=" flex font-medium flex-col md:w-[10.24rem] max-sm:flex-row w-full max-sm:justify-between ">
+                   
+                  </div>
+                  <div className=" flex font-medium flex-col md:w-[8.23rem] max-sm:flex-row w-full max-sm:justify-between ">
                     <h4 class=" text-xs text-cardBody font-semibold  font-poppins">
                       {item.inspectionInd === 0 ?
                         <Button
@@ -158,7 +174,7 @@ const ReceivedTable = (props) => {
                     <div>
                       <Tooltip title="Notes">
                         <NoteAltIcon
-                          style={{ cursor: "pointer", fontSize: "13px" }}
+                          style={{ cursor: "pointer", fontSize: "1rem" }}
                           onClick={() => {
                             handleRowData(item);
                             props.handleInventoryReceivedNoteOrderModal(true);
