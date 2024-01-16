@@ -548,7 +548,7 @@ export const getNoOfRepairTechnicianById = (orderPhoneId) => (dispatch) => {
     type: types.GET_NO_OF_REPAIR_TECHNICIAN_BY_ID_REQUEST,
   });
   axios
-    .get(`${base_url2}/REPAIR/${orderPhoneId}`, {
+    .get(`${base_url2}/AllRepairPhoneList/${orderPhoneId}`, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },
@@ -568,7 +568,31 @@ export const getNoOfRepairTechnicianById = (orderPhoneId) => (dispatch) => {
       });
     });
 };
-
+export const getNoOfphoneInRepair = (orderPhoneId, technicianId) => (dispatch) => {
+  dispatch({
+    type: types.GET_NO_OF_PHONE_IN_REPAIR_REQUEST,
+  });
+  axios
+    .get(`${base_url2}/RepairPhoneList/${orderPhoneId}/${technicianId}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.GET_NO_OF_PHONE_IN_REPAIR_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.GET_NO_OF_PHONE_IN_REPAIR_FAILURE,
+        payload: err,
+      });
+    });
+};
 
 export const handlePhoneByTechnician = (modalProps) => (dispatch) => {
   dispatch({

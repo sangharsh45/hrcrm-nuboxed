@@ -63,8 +63,8 @@ const ReceivedTable = (props) => {
                 <div className="flex rounded-xl  mt-2 bg-white h-12 items-center p-3 ">
                   <div class="flex">
 
-                    <div className=" flex font-medium flex-col md:w-[12.13rem] max-sm:w-full  ">
-                      <h4 class="text-sm text-cardBody font-semibold  font-poppins cursor-pointer">
+                    <div className=" flex font-medium flex-col md:w-[12.1rem] max-sm:w-full  ">
+                      <h4 class="text-sm text-cardBody font-semibold  font-poppins cursor-pointer underline text-blue-600">
                         <span
                           onClick={() => {
                             handleRowData(item);
