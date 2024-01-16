@@ -4,6 +4,7 @@ import { addRoomAndRackInInventory } from "./InventoryAction"
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { CloseOutlined } from "@ant-design/icons"
+import { FormattedMessage } from 'react-intl';
 
 const RoomAndRackForm = (props) => {
 
@@ -57,8 +58,8 @@ const RoomAndRackForm = (props) => {
             {rows.map((row, i) => {
                 return (
                     <>
-                        <div style={{ display: "flex", justifyContent: "space-between" }}>
-                            <div style={{ width: "39%" }}>
+                        <div class=" flex justify-between" >
+                            <div class=" w-[39%]" >
                                 <label>{`Zone ${i + 1}`}</label>
                                 <Input
                                     type='text'
@@ -68,8 +69,13 @@ const RoomAndRackForm = (props) => {
                                     }
                                 />
                             </div>
-                            <div style={{ width: "39%" }}>
-                                <label>Rack</label>
+                            <div class=" w-[39%]" >
+                                <label>
+                                <FormattedMessage
+                id="app.rack"
+                defaultMessage="Rack"
+              />
+                                    </label>
                                 <Input
                                     type='text'
                                     value={`${row.rack}`}
@@ -79,7 +85,7 @@ const RoomAndRackForm = (props) => {
                                 />
                             </div>
                             {rows.length > 1 && (row.id + 1 > row.id) ? (
-                                <div style={{ width: "15%", marginTop: "30px" }}>
+                                <div class=" w-[15%] mt-[1.875rem]" >
                                     <CloseOutlined
                                         onClick={() => handleDelete(row)}
                                         style={{ fontSize: "16px", color: "red" }} />
@@ -90,12 +96,8 @@ const RoomAndRackForm = (props) => {
                     </>
                 )
             })}
-            <div style={{
-                display: "flex",
-                justifyContent: "flex-end",
-                marginRight: "47px",
-                marginTop: "25px",
-            }}>
+            <div class=" flex justify-end mt-[1.5625rem] mr-[2.9375rem] " 
+           >
                 <Button
                     style={{
                         backgroundColor: "#24a3fb",
@@ -105,7 +107,11 @@ const RoomAndRackForm = (props) => {
                     type="primary"
                     onClick={handleAddRowClick}
                 >
-                    Add More
+                                      <FormattedMessage
+                id="app.addMore"
+                defaultMessage="Add More"
+              />
+                    
                 </Button>
                 <Button
                     htmlType='submit'
@@ -113,7 +119,11 @@ const RoomAndRackForm = (props) => {
                     onClick={buttonOnClick}
                     loading={props.addingRoomAndRackInInventory}
                 >
-                    Save
+                                             <FormattedMessage
+                id="app.save"
+                defaultMessage="Save"
+              />
+                    
                 </Button>
             </div>
 

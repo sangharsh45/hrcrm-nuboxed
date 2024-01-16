@@ -1,8 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { FlexContainer } from "../../../Components/UI/Layout";
 import { Tooltip } from "antd";
+import { FormattedMessage } from "react-intl";
 
 class InventoryActionLeft extends React.Component {
   render() {
@@ -10,14 +10,14 @@ class InventoryActionLeft extends React.Component {
 
     return (
       <>
-        <FlexContainer alignItems="center">
-          <Tooltip title="Location">
-            <span
+        <div class=" flex items-center" >
+          <Tooltip title={<FormattedMessage id="app.location" defaultMessage="Location" />}>
+            <span class=" mr-[0.5rem] cursor-pointer"
               onClick={() => setInventoryViewType("table")}
               style={{
-                marginRight: "0.5rem",
+       
                 color: viewType === "table" && "#1890ff",
-                cursor: "pointer",
+                
               }}
             >
               <i class="fas fa-globe"></i>
@@ -45,7 +45,7 @@ class InventoryActionLeft extends React.Component {
               <i class="fas fa-cookie-bite"></i>
             </span>
           </Tooltip> */}
-        </FlexContainer>
+        </div>
       </>
     );
   }

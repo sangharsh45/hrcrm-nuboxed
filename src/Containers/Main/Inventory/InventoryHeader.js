@@ -1,7 +1,6 @@
-import React, { Component } from "react";
+import React, { Component,lazy } from "react";
 import { ActionHeader } from "../../../Components/Utils";
-// import InventoryActionRight from "./InventoryActionRight";
-import InventoryActionLeft from "./InventoryActionLeft";
+const InventoryActionLeft =lazy(()=>import("./InventoryActionLeft"));
 class InventoryHeader extends Component {
   render() {
     return (

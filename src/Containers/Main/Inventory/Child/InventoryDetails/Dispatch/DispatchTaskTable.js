@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect, } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { getPhoneTasklist, receiveTaskByDispatch } from "../../../../Account/AccountAction";
@@ -50,14 +50,14 @@ function DispatchTaskTable(props) {
                 <>
                     <h4>Task Type</h4>
                     {props.phoTasklist.task1 ?
-                        <div style={{ display: "flex" }}>
+                        <div class=" flex" >
                             <h5>Task1 :{props.phoTasklist.task1}
                                 &nbsp;&nbsp;&nbsp;
                                 <Checkbox
                                     disabled
                                     checked={task1Ind} />
                             </h5>
-                            <div style={{ marginLeft: "4px" }}>
+                            <div class=" ml-[4px]" >
                                 <Switch
                                     onChange={handleToggleChange1}
                                     checked={props.phoTasklist.task1CompleteInd}
@@ -67,14 +67,14 @@ function DispatchTaskTable(props) {
                             </div>
                         </div> : null}
                     {props.phoTasklist.task2 ?
-                        <div style={{ display: "flex" }}>
+                <div class=" flex" >
                             <h5>Task2 :{props.phoTasklist.task2}
                                 &nbsp;&nbsp;&nbsp;
                                 <Checkbox
                                     disabled
                                     checked={task2Ind} />
                             </h5>
-                            <div style={{ marginLeft: "4px" }}>
+                            <div class=" ml-[4px]" >
                                 <Switch
                                     checked={props.phoTasklist.task2CompleteInd}
                                     onChange={handleToggleChange2}
@@ -86,14 +86,14 @@ function DispatchTaskTable(props) {
                         : null}
 
                     {props.phoTasklist.task3 ?
-                        <div style={{ display: "flex" }}>
+                             <div class=" flex" >
                             <h5>Task3 :{props.phoTasklist.task3}
                                 &nbsp;&nbsp;&nbsp;
                                 <Checkbox
                                     disabled
                                     checked={task3Ind} />
                             </h5>
-                            <div style={{ marginLeft: "4px" }}>
+                            <div class="  ml-[4px]" >
                                 <Switch
                                     onChange={handleToggleChange3}
                                     checked={props.phoTasklist.task3CompleteInd}

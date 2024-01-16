@@ -1,8 +1,7 @@
 import React, { lazy, Suspense, Component } from "react";
 import { BundleLoader } from "../../../../../../Components/Placeholder";
-import { StyledDrawer, StyledModal } from "../../../../../../Components/UI/Antd";
-import PickUpForm from "./PickUpForm";
-// const Stepper = lazy(() => import("./Stepper/Stepper"));
+import { StyledDrawer, } from "../../../../../../Components/UI/Antd";
+const PickUpForm = lazy(() => import("./PickUpForm"));
 
 class PickUpDateModal extends Component {
   render() {

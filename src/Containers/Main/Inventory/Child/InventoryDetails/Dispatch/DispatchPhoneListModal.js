@@ -1,5 +1,5 @@
 import React, { Component, Suspense, lazy } from "react";
-import { StyledDrawer, StyledModal } from "../../../../../../Components/UI/Antd";
+import { StyledDrawer, } from "../../../../../../Components/UI/Antd";
 import { BundleLoader } from "../../../../../../Components/Placeholder";
 const DispatchDetailsTable = lazy(() => import("./DispatchDetailsTable"));
 class DispatchPhoneListModal extends Component {

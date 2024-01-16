@@ -1,8 +1,7 @@
-import React, { useState, Suspense, lazy, useEffect } from "react";
+import React, { useState, lazy, useEffect } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { StyledTable } from "../../../../../../Components/UI/Antd";
-import { Input, Tooltip, Button, Form, DatePicker } from "antd";
+import {  Tooltip, Button, } from "antd";
 import { getAllShipper } from "../../../../Shipper/ShipperAction";
 import moment from "moment";
 import NoteAltIcon from "@mui/icons-material/NoteAlt";

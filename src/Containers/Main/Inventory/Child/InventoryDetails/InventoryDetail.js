@@ -1,13 +1,12 @@
-import React, { Component, lazy, Suspense, useState, useEffect } from "react";
+import React, { lazy, Suspense, useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { getInventoryById } from "../../InventoryAction";
-import { FlexContainer, MainWrapper } from "../../../../../Components/UI/Layout";
+import { MainWrapper } from "../../../../../Components/UI/Layout";
 import { withRouter } from "react-router";
 import { BundleLoader } from "../../../../../Components/Placeholder";
-import InventoryDetailHeader from "./InventoryDetailHeader";
-import InventoryDetailLeft from "./InventoryDetailLeft";
-import InventoryDetailRight from "./InventoryDetailRight";
+const InventoryDetailHeader =lazy(()=>import("./InventoryDetailHeader"));
+const InventoryDetailRight =lazy(()=>import("./InventoryDetailRight"));
 
 function InventoryDetail(props) {
   const [tabData, setTabData] = useState("1");
@@ -35,20 +34,20 @@ function InventoryDetail(props) {
           <BundleLoader />
         </MainWrapper>
       ) : (
-        <FlexContainer>
+        <div class=" flex ">
           <Suspense fallback={"Loading..."}>
-            <FlexContainer flexWrap="no-wrap" style={{ width: "100%" }}>
+            <div class=" flex flex-no-wrap w-full" >
               {/* <div style={{ width: "22%" }}>
                 <InventoryDetailLeft inventory={inventory} />
               </div> */}
-              <div style={{ width: "100%" }}>
+              <div class=" w-full" >
                 <InventoryDetailRight inventory={inventory} 
                 tabData={tabData}
                  />
               </div>
-            </FlexContainer>
+            </div>
           </Suspense>
-        </FlexContainer>
+        </div>
       )}
     </>
   );
