@@ -3,7 +3,7 @@ import { BundleLoader } from "../../../Components/Placeholder";
 import { StyledDrawer, StyledTabs } from "../../../Components/UI/Antd";
 import { FormattedMessage } from "react-intl";
 
-  const LeadsForm = lazy(() => import("../Child/LeadsForm"));
+const LeadsForm = lazy(() => import("../Child/LeadsForm"));
 const TabPane = StyledTabs.TabPane;
 
 class AddLeadsModal extends Component {

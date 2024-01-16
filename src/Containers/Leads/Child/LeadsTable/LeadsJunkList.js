@@ -11,7 +11,7 @@ import { OnlyWrapCard } from '../../../../Components/UI/Layout'
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import DeleteIcon from "@mui/icons-material/Delete";
-import { getCountries } from "../../../Auth/AuthAction";
+// import { getCountries } from "../../../Auth/AuthAction";
 import { Link } from "../../../../Components/Common";
 import {
   getJunkedLeads,
@@ -41,7 +41,7 @@ const LeadsJunkList = (props) => {
   useEffect(() => {
     props.getJunkedLeads(props.userId);
     props.getSectors();
-    props.getCountries();
+    // props.getCountries();
   }, []);
 
   const [currentLeadsId, setCurrentLeadsId] = useState("");
@@ -404,7 +404,7 @@ const mapStateToProps = ({ auth, leads, sector }) => ({
   junkedLeadsData: leads.junkedLeadsData,
   userId: auth.userDetails.userId,
   lead: leads.lead,
-  countries: auth.countries,
+  // countries: auth.countries,
   sectors: sector.sectors,
   updateLeadsModal: leads.updateLeadsModal,
   addDrawerLeadsEmailModal: leads.addDrawerLeadsEmailModal,
@@ -420,7 +420,7 @@ const mapDispatchToProps = (dispatch) =>
       handleUpdateLeadsModal,
       handleLeadsEmailDrawerModal,
       getLeadDetailsById,
-      getCountries,
+      // getCountries,
       updateTypeForLead,
       reInstateJunkLeads
     },

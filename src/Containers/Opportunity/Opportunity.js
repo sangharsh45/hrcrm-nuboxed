@@ -4,7 +4,6 @@ import { bindActionCreators } from "redux";
 import { BundleLoader } from "../../Components/Placeholder";
 import {
   handleOpportunityModal,
-  getOpportunityListByUserId,
   setOpportunityViewType,
 } from "./OpportunityAction";
 import OpportunityBoard from "./Child/OpportunityBoard"
@@ -26,7 +25,6 @@ class Opportunity extends Component {
   state = { currentData: "",isMobile: false };
   handleClear = () => {
     this.setState({ currentData: "" });
-    this.props.getOpportunityListByUserId(this.props.userId);
   };
   setCurrentData = (value) => {
     this.setState({ currentData: value });
@@ -114,7 +112,6 @@ const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
       handleOpportunityModal,
-      getOpportunityListByUserId,
       setOpportunityViewType,
     },
     dispatch

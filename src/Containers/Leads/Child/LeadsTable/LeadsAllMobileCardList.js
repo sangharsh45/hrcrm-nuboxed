@@ -12,7 +12,7 @@ import { OnlyWrapCard } from "../../../../Components/UI/Layout";
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import { DeleteOutlined } from "@ant-design/icons";
-import { getCountries } from "../../../Auth/AuthAction";
+// import { getCountries } from "../../../Auth/AuthAction";
 import {
   getAllLeads,
   deleteLeadsData,
@@ -45,7 +45,7 @@ const LeadsAllMobileCardList = (props) => {
     setPage(page + 1);
     props.getAllLeads(page,"creationdate");
     props.getSectors();
-    props.getCountries();
+    // props.getCountries();
   }, []);
 
   const [currentLeadsId, setCurrentLeadsId] = useState("");
@@ -480,7 +480,7 @@ const mapStateToProps = ({ auth, leads, sector }) => ({
   userId: auth.userDetails.userId,
   lead: leads.lead,
   user: auth.userDetails,
-  countries: auth.countries,
+  // countries: auth.countries,
   sectors: sector.sectors,
   updateLeadsModal: leads.updateLeadsModal,
   addDrawerLeadsEmailModal: leads.addDrawerLeadsEmailModal,
@@ -499,7 +499,7 @@ const mapDispatchToProps = (dispatch) =>
       handleLeadsNotesDrawerModal,
       handleLeadsEmailDrawerModal,
       getLeadDetailsById,
-      getCountries,
+      // getCountries,
       updateTypeForLead,
       handleCETmodal,
     },

@@ -4,13 +4,11 @@ import { bindActionCreators } from "redux";
 import { Button, Select } from "antd";
 import { Formik, Form, FastField, Field, FieldArray } from "formik";
 import * as Yup from "yup";
-import { Spacer } from "../../../../../Components/UI/Elements";
 import SearchSelect from "../../../../../Components/Forms/Formik/SearchSelect";
 import AddressFieldArray from "../../../../../Components/Forms/Formik/AddressFieldArray";
 import { InputComponent } from "../../../../../Components/Forms/Formik/InputComponent";
 import { SelectComponent } from "../../../../../Components/Forms/Formik/SelectComponent";
 import Upload from "../../../../../Components/Forms/Formik/Upload";
-import { FlexContainer } from "../../../../../Components/UI/Layout";
 import { TextareaComponent } from "../../../../../Components/Forms/Formik/TextareaComponent";
 import { addContactDistributor } from "../../AccountAction";
 import { getDesignations } from "../../../../Settings/Designation/DesignationAction"
@@ -109,23 +107,18 @@ class AddAccountContactForm extends Component {
                         setFieldTouched,
                     }) => (
                         <Form class="form-background">
-                            <div style={{ display: "flex", justifyContent: "space-between" }}>
-                                <div
-                                    style={{
-                                        height: "100%",
-                                        width: "45%",
-                                    }}
-                                > <Spacer />
-                                    <FlexContainer justifyContent="space-between">
-                                        <div style={{ width: "40%" }}>
+                            <div class="flex justify-between">
+                                <div class="h-full w-[45%]"> 
+                                    <div class="flex justify-between mt-3">
+                                        <div class="w-[40%]">
                                             <Field name="imageId" component={Upload} />
                                         </div>
-                                        <div style={{ width: "60%" }}>
+                                        <div class="w-[60%]">
 
                                             <FastField
                                                 isRequired
                                                 name="firstName"
-                                                label="First Name"
+                                                label={<FormattedMessage id="app.firstname" defaultMessage="First Name"/>}
                                                 type="text"
                                                 width={"100%"}
                                                 isColumn
@@ -134,11 +127,11 @@ class AddAccountContactForm extends Component {
 
                                             />
 
-                                            <FlexContainer justifyContent="space-between">
-                                                <div style={{ width: "47%" }}>
+                                            <div class="flex justify-between">
+                                                <div class="w-[47%]">
                                                     <FastField
                                                         name="middleName"
-                                                        label="Middle Name"
+                                                        label={<FormattedMessage id="app.middlename" defaultMessage="Middle Name"/>}
                                                         type="text"
                                                         width={"100%"}
                                                         isColumn
@@ -147,10 +140,10 @@ class AddAccountContactForm extends Component {
 
                                                     />
                                                 </div>
-                                                <div style={{ width: "47%" }}>
+                                                <div class="w-[47%]">
                                                     <FastField
                                                         name="lastName"
-                                                        label="Last Name"
+                                                        label={<FormattedMessage id="app.lastname" defaultMessage="Last Name"/>}
                                                         type="text"
                                                         width={"100%"}
                                                         isColumn
@@ -159,17 +152,14 @@ class AddAccountContactForm extends Component {
 
                                                     />
                                                 </div>
-                                            </FlexContainer>
+                                            </div>
                                         </div>
-                                    </FlexContainer>
-                                    <FlexContainer justifyContent="space-between" style={{ alignItems: "end" }}>
-                                        <div style={{ width: "47%" }}>
+                                    </div>
+                                    <div class="flex justify-between items-end">
+                                        <div class="w-[47%]">
                                             <FastField
                                                 name="dialCode1"
-                                                label={
-                                                    <FormattedMessage id="app.mobile #" defaultMessage="Mobile #" />
-                                                }
-                                                // label="Mobile #"
+                                                label={<FormattedMessage id="app.mobile" defaultMessage="Mobile #" />}
                                                 isColumn
                                                 selectType="dialCode"
                                                 component={SearchSelect}
@@ -179,7 +169,7 @@ class AddAccountContactForm extends Component {
 
                                             />
                                         </div>
-                                        <div style={{ width: "47%" }}>
+                                        <div class="w-[47%]">
                                             <FastField
                                                 type="text"
                                                 name="mobileNo"
@@ -191,14 +181,13 @@ class AddAccountContactForm extends Component {
 
                                             />
                                         </div>
-                                    </FlexContainer>
-                                    <FlexContainer justifyContent="space-between" style={{ alignItems: "end" }}>
-                                        <div style={{ width: "47%" }}>
+                                    </div>
+                                    <div class="flex justify-between items-end">
+                                        <div class="w-[47%]">
                                             <FastField
                                                 name="dialCode2"
-                                                // style={{flexBasis:"33%"}}
                                                 selectType="dialCode"
-                                                label="Phone #"
+                                                label={<FormattedMessage id="app.phone" defaultMessage="Phone #"/>}
                                                 isColumn
                                                 component={SearchSelect}
                                                 value={values.countryDialCode1}
@@ -206,7 +195,7 @@ class AddAccountContactForm extends Component {
                                                 isColumnWithoutNoCreate
                                             />
                                         </div>
-                                        <div style={{ width: "47%" }}>
+                                        <div class="w-[47%]">
                                             <FastField
                                                 type="text"
                                                 name="phoneNo"
@@ -218,13 +207,13 @@ class AddAccountContactForm extends Component {
 
                                             />
                                         </div>
-                                    </FlexContainer>
+                                    </div>
 
-                                    <div style={{ width: "100%" }}>
+                                    <div >
                                         <FastField
                                             type="email"
                                             name="emailId"
-                                            label="Email"
+                                            label={<FormattedMessage id="app.email" defaultMessage="Email"/>}
                                             className="field"
                                             isColumn
                                             width={"100%"}
@@ -232,10 +221,10 @@ class AddAccountContactForm extends Component {
                                             inlineLabel
                                         />
                                     </div>
-                                    <div style={{ width: "100%" }}>
+                                    <div class= "w-full">
                                         <FastField
                                             name="LinkedIn"
-                                            label="LinkedIn"
+                                            label={<FormattedMessage id="app.linkedIn" defaultMessage="LinkedIn"/>}
                                             className="field"
                                             isColumn
                                             width={"100%"}
@@ -244,51 +233,44 @@ class AddAccountContactForm extends Component {
                                         />
                                     </div>
 
-                                    <Spacer style={{ marginTop: "1.25em" }} />
+                                    <div class="mt-3">
                                     <Field
                                         name="notes"
-                                        label="Notes"
+                                        label={<FormattedMessage id="app.notes" defaultMessage="Notes"/>}
                                         width={"100%"}
                                         isColumn
                                         component={TextareaComponent}
                                     />
+                                    </div>
                                 </div>
                                 <div
-                                    style={{
-                                        height: "70%",
-                                        width: "45%",
-                                    }}
-                                >
-                                    <FlexContainer justifyContent="space-between">
-                                        <div style={{ width: "47%" }}>
+                                class="w-[45%] h-[70%]">
+                                    <div class="flex justify-between">
+                                        <div class="w-[47%]">
                                             <Field
                                                 name="designationId"
                                                 placeholder="Designation"
-                                                label="Designation"
+                                                label={<FormattedMessage id="app.designation" defaultMessage="Designation"/>}
                                                 component={SelectComponent}
                                                 options={Array.isArray(designation) ? designation : []}
                                                 style={{
-                                                    //  borderRadius: "2px",
                                                     width: "100%"
                                                 }}
                                             />
                                         </div>
-                                        <div style={{ width: "47%" }}>
+                                        <div class="w-[47%]">
                                             <Field
                                                 name="departmentId"
                                                 component={InputComponent}
-                                                label="Department"
-                                                // component={SelectComponent}
-                                                // options={Array.isArray(department) ? department : []}
+                                                label={<FormattedMessage id="app.department" defaultMessage="Department"/>}
                                                 style={{
-                                                    //  borderRadius: "2px",
                                                     width: "100%"
                                                 }}
                                             />
                                         </div>
-                                    </FlexContainer>
+                                    </div>
                                     <div>
-                                        <Spacer />
+                                   <div class="mt-3">
                                         <FieldArray
                                             name="address"
                                             render={(arrayHelpers) => (
@@ -299,19 +281,21 @@ class AddAccountContactForm extends Component {
                                                 />
                                             )}
                                         />
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                            <Spacer />
-                            <FlexContainer justifyContent="flex-end">
+                          
+                            <div class="flex justify-end mt-3">
                                 <Button
                                     type="primary"
                                     htmlType="submit"
                                     loading={this.props.addingContactDistributor}
                                 >
-                                    Create
+                                    <FormattedMessage id="app.create" defaultMessage="Create"/>
+                                    
                                 </Button>
-                            </FlexContainer>
+                            </div>
                         </Form>
                     )}
                 </Formik>
