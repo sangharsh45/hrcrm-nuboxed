@@ -9,7 +9,7 @@ const InventoryDetailTab = lazy(() =>
 class InventoryDetailRight extends Component {
   render() {
     return (
-      <div style={{ width: "100%" }}>
+      <div class=" w-full" >
         <InventoryDetailTab
           inventory={this.props.inventory}
           tabData={this.props.tabData}

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { Spacer } from "../../../../../../Components/UI/Elements";
 import { Tooltip, Button, } from "antd";
 import NoteAltIcon from "@mui/icons-material/NoteAlt";
 import {
@@ -205,7 +204,6 @@ const ReceivedTable = (props) => {
         handleInventoryReceivedNoteOrderModal={props.handleInventoryReceivedNoteOrderModal}
 
       /> */}
-      <Spacer />
     </>
   );
 }

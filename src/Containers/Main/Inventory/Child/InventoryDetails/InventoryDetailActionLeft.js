@@ -1,7 +1,6 @@
 import React from "react";
 import { withRouter } from "react-router";
-import { Title, MultiAvatar } from "../../../../../Components/UI/Elements";
-import { FlexContainer } from "../../../../../Components/UI/Layout";
+import { Title, } from "../../../../../Components/UI/Elements";
 import { Tooltip } from "antd";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
@@ -21,7 +20,7 @@ class InventoryDetailActionLeft extends React.Component {
     const addressdata5=address && address && address[0].country;
     return (
       <>
-      <FlexContainer alignItems="center">
+      <div class=" flex items-center" >
         <Tooltip title="Back">
           <RollbackOutlined
             style={{ marginRight: "0.3rem", color: "#1890ff" }}
@@ -34,23 +33,23 @@ class InventoryDetailActionLeft extends React.Component {
             }}
           />
         </Tooltip>
-        <FlexContainer justifyContent="space-between">
+        <div class=" flex justify-between" >
        
-            <FlexContainer flexDirection="row" style={{ width: "30rem",display:"flex",alignItems:"center" }}>
+            <div class=" flex flex-row w-[36rem] items-center"  >
             <Title width="25%">
              <label class="text-lg"> {` ${locationName || ""} `}</label>
             </Title>
            
-          <div style={{ width: "70%",justifyContent:"center",marginLeft:"1rem" }}>
+          <div class=" flex w-[70%] justify-center ml-[1rem]"  >
           {`${addressdata1 || ""} ${addressdata2 || ""} ${addressdata3 || ""} ${addressdata4 || ""} ${addressdata5 || ""}`} 
           </div>
         
           
          
          
-        </FlexContainer>
-      </FlexContainer>
-      </FlexContainer>
+        </div>
+      </div>
+      </div>
     
       </>
     );
@@ -66,15 +65,12 @@ export default withRouter(
 
 const InventoryItemRow = ({ label, value }) => {
   return (
-    <FlexContainer
-      alignItems="center"
-      flexWrap="nowrap"
-      style={{ margin: "0.4rem" }}
+    <div class=" flex items-center flex-no-wrap m-[0.4rem]"
     >
       <SubTitle style={{ color: "#444", fontWeight: 600 }}>{label}</SubTitle>
       <SubTitle style={{ marginLeft: "-30px", textOverflow: "ellipsis" }}>
         {value}
       </SubTitle>
-    </FlexContainer>
+    </div>
   );
 };

@@ -50,21 +50,9 @@ function InventoryConsumption(props) {
         }) => (
           <Form>
             <MainWrapper>
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "space-evenly",
-                  height: "100%",
-                  width: "100%",
-                  alignItems: "end",
-                }}
-              >
-                <div
-                  style={{
-                   // height: "100%",
-                    width: "20%",
-                  //  marginTop: "17px",
-                  }}
+            <div className="flex justify-evenly h-full w-full items-end">
+            
+                <div class=" w-[20%]"
                 >
                   <Field
                     isRequired
@@ -80,12 +68,7 @@ function InventoryConsumption(props) {
                     // style={{ flexBasis: "80%", width: "50%" }}
                   />
                 </div>
-                <div
-                  style={{
-                   // height: "100%",
-                    width: "20%",
-                   // margin: "2% 0%",
-                  }}
+                <div class=" w-[20%]"
                 >
                   <Field
                     name="suppliesFullName"
@@ -98,12 +81,7 @@ function InventoryConsumption(props) {
                     inlineLabel
                   />
                 </div>
-                <div
-                  style={{
-                   // height: "100%",
-                   width: "20%",
-                  //  margin: "2% 0%",
-                  }}
+                <div class=" w-[20%]"
                 >
                   <Field
                     isRequired
@@ -116,12 +94,7 @@ function InventoryConsumption(props) {
                     inlineLabel
                   />
                 </div>
-                <div
-                  style={{
-                   // height: "100%",
-                    width: "15%",
-                   // margin: "2% 0%",
-                  }}
+                <div class=" w-[15%]"
                 >
                   <Field
                     name="batchNumber"
@@ -133,12 +106,7 @@ function InventoryConsumption(props) {
                     inlineLabel
                   />
                 </div>
-                <div
-                  style={{
-                   // height: "100%",
-                    width: "13%",
-                   // margin: "2% 0%",
-                  }}
+                <div class=" w-[13%]"
                 >
                   <Field
                     name="deliveryDate"
@@ -151,11 +119,7 @@ function InventoryConsumption(props) {
                     inlineLabel
                   />
                 </div>
-                <div
-                  style={{
-                   // margin: "4.16% 0%",
-                    width: "8%",
-                  }}
+                <div class=" w-[8%]"
                 >
                   <Button
                     type="primary"

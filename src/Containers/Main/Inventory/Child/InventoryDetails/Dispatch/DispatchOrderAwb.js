@@ -4,8 +4,7 @@ import { Formik, Form, Field, FieldArray } from 'formik';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { DatePicker } from "../../../../../../Components/Forms/Formik/DatePicker";
-import { Spacer, StyledLabel } from '../../../../../../Components/UI/Elements';
-import { FlexContainer } from '../../../../../../Components/UI/Layout';
+import { StyledLabel } from '../../../../../../Components/UI/Elements';
 import { InputComponent } from '../../../../../../Components/Forms/Formik/InputComponent';
 import moment from 'moment';
 import { Button } from 'antd';
@@ -79,8 +78,8 @@ const DispatchOrderAwb = (props) => {
             {({ values, handleChange }) => (
                 <Form>
                     <div>
-                        <FlexContainer justifyContent="space-between">
-                            <div style={{ width: "47%" }}>
+                        <div class=" flex justify-between" >
+                            <div class=" w-[47%]" >
                                 <StyledLabel><h3> Pickup Address</h3></StyledLabel>
                                 <FieldArray
                                     disabled
@@ -94,7 +93,7 @@ const DispatchOrderAwb = (props) => {
                                     )}
                                 />
                             </div>
-                            <div style={{ width: "47%" }}>
+                            <div class=" w-[47%]" >
                                 <StyledLabel><h3> Delivery Address</h3></StyledLabel>
                                 <FieldArray
                                     name="loadingAddress"
@@ -108,11 +107,11 @@ const DispatchOrderAwb = (props) => {
                                     )}
                                 />
                             </div>
-                        </FlexContainer>
-                        <Spacer />
-                        <FlexContainer justifyContent="space-between">
+                        </div>
+                    
+                        <div class=" flex justify-between mt-4" >
 
-                            <div style={{ width: "47%" }}>
+                            <div class=" w-[47%]"  >
                                 <Field
                                     label="Shipper"
                                     name="shipperId"
@@ -124,7 +123,7 @@ const DispatchOrderAwb = (props) => {
                                     isColumn
                                 />
                             </div>
-                            <div style={{ width: "47%" }}>
+                            <div class=" w-[47%]"  >
                                 <Field
                                     name="pickUp"
                                     label="Available Date "
@@ -147,10 +146,10 @@ const DispatchOrderAwb = (props) => {
 
                                 />
                             </div>
-                        </FlexContainer>
-                        <Spacer />
-                        <FlexContainer justifyContent="space-between">
-                            <div style={{ width: "47%" }}>
+                        </div>
+                   
+                        <div class=" flex justify-between mt-4" >
+                            <div class=" w-[47%]" >
 
                                 <Field
                                     width={"100%"}
@@ -161,7 +160,7 @@ const DispatchOrderAwb = (props) => {
                                     component={InputComponent}
                                 />
                             </div>
-                            <div style={{ width: "47%" }}>
+                            <div class=" w-[47%]" >
                                 <Field
                                     label="Weight"
                                     name="weight"
@@ -173,11 +172,10 @@ const DispatchOrderAwb = (props) => {
                             </div>
 
 
-                        </FlexContainer>
-                        <Spacer />
-                        <FlexContainer justifyContent="flex-end">
+                        </div>
+                        <div class=" flex justify-between mt-4" >
+                            <div class=" flex justify-end w-[47%] " style={{ margin: "67px 39px 17px -33px"}} >
 
-                            <div style={{ width: "47%", margin: "67px 39px 17px -33px", display: "flex", justifyContent: "flex-end" }}>
 
                                 <Button
                                     style={{
@@ -191,7 +189,7 @@ const DispatchOrderAwb = (props) => {
                                     htmlType="Submit"
                                 >Save</Button>
                             </div>
-                        </FlexContainer>
+                        </div>
                     </div>
 
                 </Form>

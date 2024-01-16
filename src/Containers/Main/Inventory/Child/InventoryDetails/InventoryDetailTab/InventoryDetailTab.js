@@ -1,8 +1,7 @@
-import React, { Component, lazy, PureComponent, Suspense } from "react";
+import React, { lazy, PureComponent, Suspense } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { StyledTabs } from "../../../../../../Components/UI/Antd";
-import { Spacer } from "../../../../../../Components/UI/Elements";
 import { TabsWrapper } from "../../../../../../Components/UI/Layout";
 import { withRouter } from "react-router";
 import {
@@ -131,8 +130,8 @@ class InventoryDetailTab extends PureComponent {
                   <InventoryConsumptionForm />
                 ) : null}
 
-                <Spacer />
-                <InventoryConsumptionTable />
+              <div class=" mt-3"> <InventoryConsumptionTable /></div>
+               
               </Suspense>
             </TabPane>
             <TabPane

@@ -1,14 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect,lazy, useState } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import {Button, Tooltip } from "antd";
 import moment from "moment";
 import { Link } from "../../../Components/Common";
 import { getInventory, handleInventoryRoomRackModal } from "./InventoryAction";
-import InventoryRoomRackModal from "./InventoryRoomRackModal";
 import { OnlyWrapCard } from '../../../Components/UI/Layout';
 import InfiniteScroll from "react-infinite-scroll-component";
 import { FormattedMessage } from "react-intl";
+const InventoryRoomRackModal = lazy(() =>
+  import("./InventoryRoomRackModal")
+);
 
 const InventoryCard = (props) => {
   const [rowData, setRowData] = useState({});
@@ -39,7 +41,6 @@ const InventoryCard = (props) => {
         <OnlyWrapCard style={{backgroundColor:"#E3E8EE"}}>
         <div className=" flex justify-between w-[97.5%] p-2 bg-transparent font-bold sticky top-0 z-10">
         <div className=" md:w-[4.1rem]"><FormattedMessage id="app.name" defaultMessage="Name" /></div>
-        <div className=" md:w-[1.1rem]"><FormattedMessage id="app.supervisor" defaultMessage="Supervisor" /></div>
         <div className=" md:w-[9.8rem] "><FormattedMessage id="app.country" defaultMessage="Country" /></div>
         <div className="md:w-[6.6rem]"><FormattedMessage id="app.address" defaultMessage="Address" /></div>
         <div className="md:w-[5.8rem]"><FormattedMessage id="app.pincode" defaultMessage="Pin Code" /></div>
@@ -95,14 +96,7 @@ const InventoryCard = (props) => {
                               
                                 </div>
 
-                                <div className=" flex font-medium flex-col  md:w-[9.2rem] max-sm:flex-row w-full max-sm:justify-between  ">
-                           
-                                    {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden"> Sector </h4> */}
-                                    <h4 class=" text-xs text-cardBody font-poppins">   
-                                    {item.management}
-                                    </h4>
-                                
-                                </div> 
+                            
                                 <div className=" flex font-medium flex-col md:w-[8.2rem] max-sm:flex-row w-full max-sm:justify-between ">
                                   
 

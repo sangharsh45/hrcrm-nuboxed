@@ -1,16 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, } from 'react';
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import DynamicFeedIcon from '@mui/icons-material/DynamicFeed';
 import GroupsIcon from '@mui/icons-material/Groups';
 import InventoryIcon from '@mui/icons-material/Inventory';
-import { Menu, Icon, Popover, Badge } from "antd";
+import { Menu, Badge } from "antd";
 import ComputerIcon from '@mui/icons-material/Computer';
 import NewspaperIcon from '@mui/icons-material/Newspaper';
 import LibraryBooksIcon from '@mui/icons-material/LibraryBooks';
 import { FormattedMessage } from "react-intl";
 import LocalShippingIcon from '@mui/icons-material/LocalShipping';
-import { translateText, getSupportedLanguages } from '../Translate/TranslateService';
 import CurrencyExchangeIcon from '@mui/icons-material/CurrencyExchange';
 import PermContactCalendarIcon from '@mui/icons-material/PermContactCalendar';
 import FilePresentIcon from '@mui/icons-material/FilePresent'
@@ -34,7 +33,6 @@ import VolumeUpIcon from '@mui/icons-material/VolumeUp';
 import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
 import CategoryIcon from '@mui/icons-material/Category'
 import ViewInArIcon from '@mui/icons-material/ViewInAr';
-import FactoryIcon from '@mui/icons-material/Factory';
 import CrisisAlertIcon from '@mui/icons-material/CrisisAlert';
 
 const SubMenu = Menu.SubMenu;
@@ -574,7 +572,7 @@ function NavMenu(props) {
 
                     style={{ fontSize: "large" }}
                 />
-                 <span class="text-white text-ls ml-3">
+                 <span class="text-white text-ls ml-1">
                  <FormattedMessage
                 id="app.assessment"
                 defaultMessage="Assessment"
@@ -592,7 +590,7 @@ function NavMenu(props) {
 
                   style={{ fontSize: "large" }}
                 />
-               <span class="text-white text-ls ml-3">
+               <span class="text-white text-ls ml-1">
                <FormattedMessage
                 id="app.course"
                 defaultMessage="Course"
@@ -610,7 +608,7 @@ function NavMenu(props) {
 
                    style={{ fontSize: "large" }}
                 />
-                <span class="text-white text-ls ml-3">
+                <span class="text-white text-ls ml-1">
               
                 <FormattedMessage
                 id="app.program"
@@ -750,6 +748,19 @@ function NavMenu(props) {
   </Link>
 </Menu.Item>
 {/* )} */}
+
+<Menu.Item key="/procurement" style={{ height: "27px", paddingLeft: "1rem" }}>
+            <Link to="/procurement">
+              <CrisisAlertIcon
+                style={{ fontSize: "large" }}
+              />
+              <span class="text-white text-ls ml-1"><FormattedMessage
+                id="app.procurement"
+                defaultMessage="Procurement"
+              />
+              </span>
+            </Link>
+          </Menu.Item>
         <hr />
         {user.inventoryAccessInd === true && user.erpInd === true && (
 
@@ -784,18 +795,7 @@ function NavMenu(props) {
         )}
         <hr />
 
-        <Menu.Item key="/procurement" style={{ height: "27px", paddingLeft: "1rem" }}>
-            <Link to="/procurement">
-              <CrisisAlertIcon
-                style={{ fontSize: "large" }}
-              />
-              <span class="text-white text-ls ml-1"><FormattedMessage
-                id="app.procurement"
-                defaultMessage="Procurement"
-              />
-              </span>
-            </Link>
-          </Menu.Item>
+    
 
 
         { user.teamsAccessInd === true &&  (
