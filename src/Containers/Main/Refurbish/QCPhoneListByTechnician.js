@@ -2,20 +2,13 @@ import React, { useEffect, useState } from 'react'
 import { StyledTable } from '../../../Components/UI/Antd'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-// import { getNoOfTechnicianById } from "./RefurbishAction"
+import { getNoOfPhoneInQCById } from "./RefurbishAction"
 
 const QCPhoneListByTechnician = (props) => {
 
-    // useEffect(() => {
-    //     props.getNoOfTechnicianById(props.rowData.orderPhoneId)
-    // }, [])
-    const [row, setRow] = useState({})
-    const [show, setShow] = useState(false)
-
-    const handleRowdata = (item) => {
-        setRow(item)
-        setShow(!show)
-    }
+    useEffect(() => {
+        props.getNoOfPhoneInQCById(props.rowData.orderPhoneId)
+    }, [])
 
     const column = [
         {
@@ -41,7 +34,7 @@ const QCPhoneListByTechnician = (props) => {
     return (
         <div>
             <StyledTable
-                // dataSource={props.repairByTechnician}
+                dataSource={props.phoneByTechId}
                 pagination={false}
                 columns={column}
             />
@@ -52,13 +45,13 @@ const QCPhoneListByTechnician = (props) => {
 
 
 const mapStateToProps = ({ auth, refurbish }) => ({
-    // repairByTechnician: refurbish.repairByTechnician
+    phoneByTechId: refurbish.phoneByTechId
 });
 
 const mapDispatchToProps = (dispatch) =>
     bindActionCreators(
         {
-            // getNoOfTechnicianById
+            getNoOfPhoneInQCById
         },
         dispatch
     );

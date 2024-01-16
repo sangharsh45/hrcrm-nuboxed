@@ -60,6 +60,10 @@ const initialState = {
   addingProductionOutput: false,
   addingProductionOutputError: false,
 
+  fetchingNoOfPhoneInQcById: false,
+  fetchingNoOfPhoneInQcByIdError: false,
+  phoneByTechId: [],
+
   fetchingShiftsByUserId: false,
   fetchingShiftsByUserIdError: false,
   shiftsData: [],
@@ -490,6 +494,22 @@ export const refurbishReducer = (state = initialState, action) => {
         ...state,
         fetchingNoofTecnician: false,
         fetchingNoofTecnicianError: true,
+      };
+
+    case types.GET_NO_OF_PHONE_IN_QC_BYID_REQUEST:
+      return { ...state, fetchingNoOfPhoneInQcById: true };
+    case types.GET_NO_OF_PHONE_IN_QC_BYID_SUCCESS:
+      return {
+        ...state,
+        fetchingNoOfPhoneInQcById: false,
+        phoneByTechId: action.payload
+      };
+    case types.GET_NO_OF_PHONE_IN_QC_BYID_FAILURE:
+      return {
+        ...state,
+        fetchingNoOfPhoneInQcById: false,
+        fetchingNoOfPhoneInQcByIdError: true,
+
       };
 
     case types.HANDLE_PHONE_BY_TECHNICIAN_MODAL:
