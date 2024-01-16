@@ -178,6 +178,9 @@ const initialState = {
 
   generateOrderModal: false,
 
+  updatingOrderStep1: false,
+  updatingOrderStep1Error: false,
+
   updatingOfferPriceOfOrder: false,
   updatingOfferPriceOfOrderError: false,
 
@@ -2045,6 +2048,27 @@ export const distributorReducer = (state = initialState, action) => {
         ...state,
         fetchingProductById: false,
         fetchingProductByIdError: true,
+      };
+
+    case types.UPDATE_ORDER_STEP1_REQUEST:
+      return { ...state, updatingOrderStep1: true };
+    case types.UPDATE_ORDER_STEP1_SUCCESS:
+      return {
+        ...state,
+        updatingOrderStep1: false,
+        distributorOrder: state.distributorOrder.map((item) => {
+          if (item.orderId == action.payload.orderId) {
+            return action.payload;
+          } else {
+            return item;
+          }
+        }),
+      };
+    case types.UPDATE_ORDER_STEP1_FAILURE:
+      return {
+        ...state,
+        updatingOrderStep1: false,
+        updatingOrderStep1Error: true,
       };
     default:
       return state;

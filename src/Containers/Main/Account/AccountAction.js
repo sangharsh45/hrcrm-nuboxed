@@ -2700,3 +2700,39 @@ export const getPaymentMode = (orgId) => (dispatch) => {
       });
     });
 };
+
+export const updateOrderStep1 = (data, orderId, userId) => (
+  dispatch
+) => {
+  dispatch({
+    type: types.UPDATE_ORDER_STEP1_REQUEST,
+  });
+  axios
+    .put(`${base_url2}/ORDER/${orderId}`, data,
+      {
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+        },
+      })
+    .then((res) => {
+      console.log(res);
+      // dispatch(getDistributorsByUserId(userId));
+      dispatch({
+        type: types.UPDATE_ORDER_STEP1_SUCCESS,
+        payload: res.data,
+      });
+      Swal.fire({
+        icon: 'success',
+        title: 'Updated Succefully',
+        showConfirmButton: false,
+        timer: 1500
+      })
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.UPDATE_ORDER_STEP1_FAILURE,
+        payload: err,
+      });
+    });
+};
