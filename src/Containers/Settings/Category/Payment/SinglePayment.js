@@ -5,32 +5,28 @@ import { FormattedMessage } from "react-intl";
 import DeleteIcon from '@mui/icons-material/Delete';
 import BorderColorIcon from '@mui/icons-material/BorderColor';
 import { TextInput } from "../../../../Components/UI/Elements";
-import { Select } from "../../../../Components/UI/Elements";
 
 import ViewEditCard from "../../../../Components/UI/Elements/ViewEditCard";
 
-class SingleSource extends Component {
+class SinglePayment extends Component {
   constructor(props) {
     super(props);
     this.state = {
       type: "",
       name: "",
-      listType:"",
       editInd: true,
     };
   }
-  handleType=(value)=>
-  this.setState({listType:value});
   render() {
     const {
-      source: { name, sourceId,listType, EditInd },
+        payment: { name, paymentCatagoryId, EditInd },
       handleChange,
       name1,
       value,
       linkedSectors,
-      updatingSources,
-      handleUpdateSource,
-      handleDeleteSource,
+      updatingPayment,
+      handleupdatePayment,
+      handleDeletePayment,
     } = this.props;
     console.log(linkedSectors);
     console.log("name", name);
@@ -57,7 +53,7 @@ class SingleSource extends Component {
                   &nbsp;
                   <Tooltip title="Delete">
                     <DeleteIcon
-                        onClick={() => handleDeleteSource(sourceId)}
+                        onClick={() => handleDeletePayment(paymentCatagoryId)}
                       size="14px"
                       style={{
                         verticalAlign: "center",
@@ -83,32 +79,19 @@ class SingleSource extends Component {
                   // value={value || sectorName}
                   defaultValue={name}
                   onChange={handleChange}
-                  style={{ width: "45%" }}
+                  style={{ width: "60%" }}
                 />
                 <br />
                 <br />
-                <Select 
-              defaultValue={listType}
-               style={{width:"25%"}}
-               placeholder="Select Type"
-               onChange={this.handleType}
-               >
-           <option value="Event">Event</option>
-                      <option value="Employee">Employee</option>
-                      <option value="Customer">Customer</option>
-                  <option value="Investor">Investor</option>
-               </Select>
-                <div style={{ marginLeft: "auto" }}>
+                <div class=" ml-auto" >
                   <Button
                     type="primary"
                     htmlType="submit"
-                    loading={updatingSources}
+                    loading={updatingPayment}
                     // disabled={!value}
                     onClick={() => {
                       console.log(value); 
-                      handleUpdateSource(sourceId, value,
-                        this.state.listType,
-                         toggleViewType());
+                      handleupdatePayment(paymentCatagoryId, value, toggleViewType());
                     }}>
 
                   
@@ -130,7 +113,7 @@ class SingleSource extends Component {
   }
 }
 
-export default SingleSource;
+export default SinglePayment;
 
 const SectorWrapper = styled.div`
   width: 100%;

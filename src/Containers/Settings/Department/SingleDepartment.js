@@ -15,6 +15,7 @@ import IMStatusToggle from "./IMStatusToggle";
 import AccountingStatusToggle from "./AccountingStatusToggle";
 import RecruitProStatusToggle from "./RecruitProStatusToggle";
 import HrStatusToggle from "./HrStatusToggle";
+import ElearningStatusToggle from "./ElearningStatusToggle";
 const { Option } = Select;
 
 class SingleDepartment extends Component {
@@ -125,6 +126,16 @@ class SingleDepartment extends Component {
                   class=" w-[8%] ml-2"
                     >
                     <RecruitProStatusToggle
+                      recruitOppsInd={recruitOppsInd}
+                      departmentName={departmentName}
+                      departmentId={departmentId}
+                    />  
+                    </div>
+                    <h1>E-learning</h1>
+                    <div 
+                  class=" w-[8%] ml-2"
+                    >
+                    <ElearningStatusToggle
                       recruitOppsInd={recruitOppsInd}
                       departmentName={departmentName}
                       departmentId={departmentId}

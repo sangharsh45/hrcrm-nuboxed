@@ -4,58 +4,54 @@ import { bindActionCreators } from "redux";
 import { FormattedMessage } from "react-intl";
 import { Button, Input } from "antd";
 import moment from "moment";
-import { Select } from "../../../../Components/UI/Elements";
 import { BundleLoader } from "../../../../Components/Placeholder";
-import { MainWrapper } from "../../../../Components/UI/Layout";
+import { MainWrapper, } from "../../../../Components/UI/Layout";
 import { TextInput, } from "../../../../Components/UI/Elements";
 import {
-  getSources,
-  searchSourceName,
-  ClearReducerDataOfSource,
-  addSources,
-  removeSource,
-  updateSource
-} from "./SourceAction";
-import SingleSource from "./SingleSource";
+    getPayments,
+    addPayment,
+    searchPaymentName,
+    ClearReducerDataOfPayment,
+    removePayment,
+    updatePayment
+} from "../Payment/PaymentAction";
+import SinglePayment from "./SinglePayment";
 
-class Source extends Component {
+class Payment extends Component {
   constructor(props) {
     super(props);
     this.state = {
       linkedSectors: [],
-      listType:null,
       isTextInputOpen: false,
-      addingSources: false,
+      addingPayment: false,
       name: "",
       type: "",
-      singleSource: "",
+      singlePayment: "",
       editInd: true,
       currentData: "",
     };
   }
-  handleType=(value)=>
-  this.setState({listType:value});
 
   handleChangeDes = (e) => {
     this.setState({ currentData: e.target.value });
   
     if (e.target.value.trim() === "") {
       this.setState((prevState) => ({ pageNo: prevState.pageNo + 1 }));
-      this.props.getSources(this.props.orgId);
-      this.props.ClearReducerDataOfSource();
+      this.props.getPayments(this.props.orgId);
+      this.props.ClearReducerDataOfPayment();
     }
   };
   handleSearch = () => {
     if (this.state.currentData.trim() !== "") {
       // Perform the search
-      this.props.searchSourceName(this.state.currentData);
+      this.props.searchPaymentName(this.state.currentData);
     } else {
       console.error("Input is empty. Please provide a value.");
     }
   };
   handleClear = () => {
     this.setState({ currentData: "" });
-    this.props.getSources(this.props.orgId);
+    this.props.getPayments(this.props.orgId);
   };
   setCurrentData = (value) => {
     this.setState({ currentData: value });
@@ -72,79 +68,63 @@ class Source extends Component {
     }));
   handleChange = ({ target: { name, value } }) =>
     this.setState({ [name]: value });
-    handleAddSource = () => {
-      const { addSources, sources } = this.props;
-      const { name, editInd,listType, addingSources, isTextInputOpen } = this.state;
-      let source = { name,
-        listType,
+    handleAddPayment = () => {
+      const {   addPayment, payments } = this.props;
+      const { name, editInd, addingPayment, isTextInputOpen } = this.state;
+      let customer = { name,
         orgId: this.props.orgId,
         userId:this.props.userId,
          editInd };
     
       let exist =
-      sources && sources.some((element) => element.name === name);
+      payments && payments.some((element) => element.name === name);
     
       // if (exist) {
       //   message.error(
       //     "Can't create as another source type exists with the same name!"
       //   );
       // } else {
-        addSources(source,this.props.orgId ,() => console.log("add sector callback"));
+        addPayment(customer,this.props.orgId ,() => console.log("add sector callback"));
         this.setState({
           name: "",
-          singleSource: "",
-          listType:"",
+          singlePayment: "",
           isTextInputOpen: false,
           editInd: true,
         });
       // }
     };
     
-  handleDeleteSource = (sourceId = { sourceId }) => {
-    this.props.removeSource(sourceId);
-    this.setState({ name: "", singleSource: "" });
+  handleDeletePayment = (paymentCatagoryId = { paymentCatagoryId }) => {
+     this.props.removePayment(paymentCatagoryId);
+    // this.setState({ name: "", singlePayment: "" });
   };
-  handleUpdateSource = (name, sourceId,listType, editInd, cb) => {
-    this.props.updateSource(name, sourceId,listType, editInd, cb);
-    this.setState({ name: "", singleSource: "",sourceId:"", editInd: true });
+  handleupdatePayment = (name, paymentCatagoryId, editInd, cb) => {
+     this.props.updatePayment(name, paymentCatagoryId, editInd, cb);
+    this.setState({ name: "", singlePayment: "",paymentCatagoryId:"", editInd: true });
   };
-  // getLinkedDocuments = () => {
-  //   axios
-  //     .get(`${base_url}/opportunity/source/linkedSources`, {
-  //       headers: {
-  //         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
-  //       },
-  //     })
-  //     .then((res) => {
-  //       console.log(res);
-  //       this.setState({ linkedSources: res.data });
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // };
+
   componentDidMount() {
-    const { getSources,orgId } = this.props;
+    const {   getPayments,orgId } = this.props;
     console.log();
-    getSources(orgId);
+    getPayments(orgId);
     // this.getLinkedSources();
   }
   render() {
     const {
-      fetchingSources,
-      fetchingSourcesError,
-      sources,
-      addingSources,
-      updatingSources,
+        fetchingPayment,
+        fetchingPaymentError,
+      paymentsListData,
+      addingPayment,
+      updatingPayment,
     } = this.props;
     const {
       isTextInputOpen,
       type,
       name,
-      singleSource,
+      singlePayment,
       linkedSectors,
     } = this.state;
-    if (fetchingSources) return <BundleLoader/>;
+    if (fetchingPayment) return <BundleLoader/>;
     //if (fetchingSectorsError) return <p>We are unable to load data</p>;
     return (
       <>
@@ -156,7 +136,7 @@ class Source extends Component {
               color: "#FFFAFA",
             }}
           >
-          <div class=" flex w-[18vw]" >
+            <div class=" flex w-[18vw]" >
             <Input
          placeholder="Search by Name"
         style={{width:"100%",marginLeft:"0.5rem"}}
@@ -170,18 +150,17 @@ class Source extends Component {
             <div class=" flex flex-col" >
               {/* <Title style={{ padding: 8 }}>Types Of Documents</Title> */}
              <MainWrapper style={{ height: "30em", marginTop: "0.625em" }}>
-                {sources.length ? (
-                  sources.map((source, i) => (
-                    <SingleSource
+                {paymentsListData.length ? (
+                  paymentsListData.map((payment, i) => (
+                    <SinglePayment
                       key={i}
-                      value={singleSource}
-                      name1="singleSource"
-                      source={source}
-                      linkedSectors={linkedSectors}
-                      updatingSources={updatingSources}
+                      value={singlePayment}
+                      name1="singlePayment"
+                      payment={payment}
+                      updatingPayment={updatingPayment}
                       handleChange={this.handleChange}
-                      handleUpdateSource={this.handleUpdateSource}
-                      handleDeleteSource={this.handleDeleteSource}
+                      handleupdatePayment={this.handleupdatePayment}
+                      handleDeletePayment={this.handleDeletePayment}
                       handleClear={this.handleClear}
                       handleSearchChange={this.handleSearchChange}
                       currentData={this.state.currentData}
@@ -194,39 +173,26 @@ class Source extends Component {
               </MainWrapper>
             </div>
             {isTextInputOpen ? (
-             <div class=" flex items-center ml-[0.3125em] mt-[0.3125em]"
+              <div class=" flex items-center ml-[0.3125em] mt-[0.3125em]"
             
-             >
+              >
                 <br />
                 <br />
                 <TextInput
-                  placeholder="Add Source"
+                  placeholder="Add Payment"
                   name="name"
                   value={name}
                   onChange={this.handleChange}
-                  width="35%"
+                  width="55%"
                   style={{ marginRight: "0.125em" }}
                 />
-                &nbsp;
-                <Select style={{ width: "25%"}}
-                onChange={this.handleType}
-                placeholder="Select Type"
-                >
-                      <option value="Event">Event</option>
-                      <option value="Employee">Employee</option>
-                      <option value="Customer">Customer</option>
-                  <option value="Investor">Investor</option>
-    
-      
-      
-                </Select>
                 &nbsp;
                 <Button
                   type="primary"
                   htmlType="submit"
                   disabled={!name}
-                  Loading={addingSources}
-                  onClick={this.handleAddSource}
+                  Loading={addingPayment}
+                  onClick={this.handleAddPayment}
                   style={{ marginRight: "0.125em" }}
                 >
                   {/* Save */}
@@ -246,7 +212,7 @@ class Source extends Component {
                     type="primary"
                     ghost
                     htmlType="button"
-                    loading={addingSources}
+                    loading={addingPayment}
                     onClick={this.toggleInput}
                   >
                     {/* Add More */}
@@ -263,37 +229,38 @@ class Source extends Component {
       
        
         </div>
-        <h4>Updated on {moment(this.props.sources && this.props.sources.length && this.props.sources[0].updationDate).format("ll")} by {this.props.sources && this.props.sources.length && this.props.sources[0].updatedBy}</h4>
+        <h4>Updated on {moment(this.props.paymentsListData && this.props.paymentsListData.length && this.props.paymentsListData[0].updationDate).format("ll")} by {this.props.paymentsListData && this.props.paymentsListData.length && this.props.paymentsListData[0].updatedBy}</h4>
       </>
     );
   }
 }
 
-const mapStateToProps = ({ source,auth }) => ({
-  addingSources: source.addingSources,
-  addingSourcesError: source.addingSourcesError,
-sources: source.sources,
+const mapStateToProps = ({ payments,auth }) => ({
+    addingPayment: payments.addingPayment,
+    addingPaymentError: payments.addingPaymentError,
+    paymentsListData: payments.paymentsListData,
 orgId:auth.userDetails.organizationId,
 userId:auth.userDetails.userId,
-removingSources: source.removingSources,
-removingSourcesError: source.removingSourcesError,
-fetchingSources: source.fetchingSources,
-fetchingSourcesError: source.fetchingSourcesError,
+removingPayment: payments.removingPayment,
+removingPaymentError: payments.removingPaymentError,
+fetchingPayment: payments.fetchingPayment,
+fetchingPaymentError: payments.fetchingPaymentError,
 
-updatingSources: source.updatingSources,
-updatingSourcesError: source.updatingSourcesError,
+updatingPayment: payments.updatingPayment,
+updatingPaymentError: payments.updatingPaymentError,
 
 });
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
-      getSources,
-      addSources,
-      removeSource,
-      updateSource,
-      ClearReducerDataOfSource,
-      searchSourceName
+        getPayments,
+        ClearReducerDataOfPayment,
+        searchPaymentName,
+        addPayment,
+        removePayment,
+        updatePayment,
+
     },
     dispatch
   );
-export default connect(mapStateToProps, mapDispatchToProps)(Source);
+export default connect(mapStateToProps, mapDispatchToProps)(Payment);

@@ -17,7 +17,6 @@ import { DatePicker } from "../../../Components/Forms/Formik/DatePicker";
 import {
   updateTask,
   handleTaskModal,
-  getCustomerTask,
   getProjectTaskList,
   getCandidateTaskList,
   getCandidateTaskFilterList,
@@ -145,7 +144,6 @@ function UpdateTaskForm(props) {
 
   useEffect(() => {
     //props.getEmployeelist();
-    props.getCustomerTask(props.orgId);
     props.getFilteredEmailContact(props.userId);
     props.getAllOpportunityData(props.userId)
     props.getProjectTaskList(props.orgId);
@@ -1199,7 +1197,6 @@ const mapStateToProps = ({ auth,candidate, opportunity,task,customer,settings, u
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
-      // addTask,
       getAllCustomerData,
       getFilteredEmailContact,
       handleChooserModal,
@@ -1208,7 +1205,6 @@ const mapDispatchToProps = (dispatch) =>
       getUnits,
       getTasks,
       getAllOpportunityData,
-      getCustomerTask,
       getCandidateTaskFilterList,
       getCandidateTaskList,
       getEmployeelist,

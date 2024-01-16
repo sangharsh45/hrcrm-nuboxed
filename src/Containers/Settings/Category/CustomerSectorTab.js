@@ -1,16 +1,34 @@
-import React, { Component, Suspense } from "react";
+import React, { Component, Suspense,lazy } from "react";
 import { bindActionCreators } from "redux";
 import { StyledTabs } from "../../../Components/UI/Antd";
 import { TabsWrapper } from "../../../Components/UI/Layout";
 import { connect } from "react-redux";
+import PaymentIcon from '@mui/icons-material/Payment';
 import SourceIcon from '@mui/icons-material/Source';
 import FactoryIcon from '@mui/icons-material/Factory';
-import Sectors from "../Sectors/Sectors";
-import Source from "./Source/Source";
-import ShipBy from "./ShipBy/ShipBy"
-import Customer from "./Customer/Customer";
-import BrandModel from "./Brand&Model/BrandModel";
-import Vat from "./Vat/Vat";
+import { FormattedMessage } from "react-intl";
+const Payment = lazy(() =>
+  import("./Payment/Payment")
+);
+const Sectors = lazy(() =>
+  import("../Sectors/Sectors")
+);
+const Source = lazy(() =>
+  import("./Source/Source")
+);
+const ShipBy = lazy(() =>
+  import("./ShipBy/ShipBy")
+);
+const Customer = lazy(() =>
+  import("./Customer/Customer")
+);
+const BrandModel = lazy(() =>
+  import("./Brand&Model/BrandModel")
+);
+const Vat = lazy(() =>
+  import("./Vat/Vat")
+);
+
 const TabPane = StyledTabs.TabPane;
 
 class CustomerSectorTab extends Component {
@@ -125,6 +143,21 @@ class CustomerSectorTab extends Component {
                 >
                   <Suspense>
                     <Vat />
+                  </Suspense>
+                </TabPane>
+                <TabPane
+                  tab={
+                    <>
+                      <PaymentIcon />
+                      <span class=" ml-[0.25em]">
+                      <FormattedMessage id="app.payment" defaultMessage="Payment" />
+                      </span>
+                    </>
+                  }
+                  key="6"
+                >
+                  <Suspense>
+                    <Payment />
                   </Suspense>
                 </TabPane>
               </StyledTabs>

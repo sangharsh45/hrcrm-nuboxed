@@ -39,6 +39,7 @@ class EmployeeForm extends Component {
       checked: true,
       typeInd:false,
       selectedDept:"",
+
       selectedCountry: '',
       locations: [],
       role:[],
@@ -193,6 +194,7 @@ getEmployeesbyDepartment (filterOptionKey, filterOptionValue) {
             emailId: "",
             countryDialCode: "",
             countryDialCode1: "",
+            reportingManagerDeptId:"",
             phoneNo: "",
             location:this.state.selectedLocation,
             workplace:this.state.selectedCountry,
@@ -236,6 +238,7 @@ getEmployeesbyDepartment (filterOptionKey, filterOptionValue) {
             // console.log({ ...values, job_type: this.state.active });
             this.props.addEmployee({
               ...values,
+              reportingManagerDeptId:values.reportingManagerDeptId,
               location:this.state.selectedLocation,
               workplace:this.state.selectedCountry,
               roleType:this.state.selectedRole,
@@ -528,8 +531,8 @@ getEmployeesbyDepartment (filterOptionKey, filterOptionValue) {
 <div class=" flex justify-between max-sm:flex-col" >
                       <div class=" w-w48 flex flex flex-col max-sm:w-wk">
                    <label style={{color:"#444",fontWeight:"bold",fontSize:" 0.75rem"}}>Department</label>
-                      <select 
-                        style={{ border: "0.06em solid #aaa" }}
+                      <select  className="customize-select"
+                      
                       onChange={this.handleDeptChange}>
           <option value="">Select </option>
           {this.props.departments.map((item, index) => (
@@ -578,7 +581,7 @@ getEmployeesbyDepartment (filterOptionKey, filterOptionValue) {
                 
                   <select
                  
-                 style={{ border: "0.06em solid #aaa" }}
+                 className="customize-select"
                       onChange={this.handleRoleChange}
                     >
           <option value="">Select </option>
@@ -631,10 +634,10 @@ getEmployeesbyDepartment (filterOptionKey, filterOptionValue) {
                      /> */}
                     
                       <div class=" flex justify-between max-sm:flex-col" >
-                      <div class=" w-w48 max-sm:w-wk">
+                      <div class=" w-w48 flex flex-col max-sm:w-wk">
                       <label style={{color:"#444",fontWeight:"bold",fontSize:" 0.75rem"}}>WorkPlace</label>
                       <select 
-                        style={{ border: "0.06em solid #aaa" }}
+                        className="customize-select"
                       onChange={this.handleCountryChange}>
           <option value="">Select </option>
           {this.props.countries.map((item, index) => (
@@ -663,10 +666,10 @@ getEmployeesbyDepartment (filterOptionKey, filterOptionValue) {
                       /> */}
                     </div>
                
-                    <div class=" w-w48 flex flex-col max-sm:w-wk">
+                    <div class=" w-w47.5 flex flex-col max-sm:w-wk">
                     <label style={{color:"#444",fontWeight:"bold",fontSize:" 0.75rem"}}>Location</label>
-                    <select
-                 style={{ border: "0.06em solid #aaa" }}
+                    <select  className="customize-select"
+                //  style={{ border: "0.06em solid #aaa" }}
                       onChange={this.handleLocationChange}
                     >
           <option value="">Select </option>
@@ -720,42 +723,44 @@ getEmployeesbyDepartment (filterOptionKey, filterOptionValue) {
                       /> */}
                     </div>
                   </div>
-                  <div class="mt-2"><label style={{color:"#444",fontWeight:"bold",fontSize:" 0.75rem"}}>Reports To</label></div>
+                  <div class="mt-2">
+                    <label style={{color:"#444",fontWeight:"bold",fontSize:" 0.75rem"}}>Reports To</label>
+                    </div>
 
 
-                  <div class=" flex justify-between mt-2 max-sm:flex-col" >
+                  <div class=" flex justify-between  max-sm:flex-col" >
                       <div class=" w-w48 max-sm:w-wk">
                       <Field
   isRequired
-  name="departmentId"
+  name="reportingManagerDeptId"
   label={<FormattedMessage id="app.department" defaultMessage="Department" />}
   isColumnWithoutNoCreate
   component={SearchSelect}
-  value={values.departmentId}
+  value={values.reportingManagerDeptId}
   selectType="departmentName"
   isColumn
   inlineLabel
   onChange={(selectedDepartment) => {
-    setFieldValue("departmentId", selectedDepartment);
+    setFieldValue("reportingManagerDeptId", selectedDepartment);
     // Handle other updates here, if needed
   }}
 />
                      </div>
                     
-                     <div class="w-w47.5 mt-2 max-sm:w-wk">
+                     <div class="w-w48  max-sm:w-wk">
                      <Field
   name="reportingManager"
   isColumnWithoutNoCreate
   label={<FormattedMessage id="app.reportingManager" defaultMessage="Reporting Manager" />}
   component={SelectComponent}
   options={
-    values.departmentId
+    values.reportingManagerDeptId
       ? (Array.isArray(
-          this.getEmployeesbyDepartment("departmentId", values.departmentId)
+          this.getEmployeesbyDepartment("reportingManagerDeptId", values.reportingManagerDeptId)
         )
           ? this.getEmployeesbyDepartment(
-              "departmentId",
-              values.departmentId
+              "reportingManagerDeptId",
+              values.reportingManagerDeptId
             )
           : [])
       : [] // Set it to an empty array or a default value when department is not selected
@@ -764,9 +769,9 @@ getEmployeesbyDepartment (filterOptionKey, filterOptionValue) {
   value={values.reportingManager}
   filterOption={{
     filterType: "departmentId",
-    filterValue: values.departmentId,
+    filterValue: values.reportingManagerDeptId,
   }}
-  disabled={!values.departmentId}
+  disabled={!values.reportingManagerDeptId}
   inlineLabel
 />
 

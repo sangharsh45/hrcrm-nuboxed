@@ -771,6 +771,17 @@ style attribute {
   border-radius: 2px;
   transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
 }
+.customize-select{
+  position: relative;
+  height:1.48rem;
+  font-family: "Poppins";
+  margin: 0 0 0.42rem 0.1rem;
+  box-shadow: 0 0.25em 0.62em #aaa;
+  background-color: #fff;
+  border: 0px solid #d9d9d9;
+  border-radius: 2px;
+  transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+}
 .ant-tabs {
   box-sizing: border-box;
   margin: 0;
