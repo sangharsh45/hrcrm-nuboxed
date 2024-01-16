@@ -24,7 +24,6 @@ import {
   deleteOpportunityData,
   getOpportunityInitiativeSKillDetails,
   updateOwneroppById,
-      getAllSalesList,
       handleOpportunityDrawerModal,
       getAllRecruitmentByOppId,
         getAllRecruitmentPositionByOppId,
@@ -53,8 +52,7 @@ function OpportunityCardList(props) {
     }else{
       props.getOpportunityListByUserId(props.userId,page);
       setPage(page + 1);
-    } 
-    props.getAllSalesList();  
+    }  
   }, []);
   useEffect(() => {
     return () => props.emptyOpportunity();
@@ -474,7 +472,6 @@ const mapStateToProps = ({ auth, account, opportunity }) => ({
   addDrawerOpportunityNotesModal:opportunity.addDrawerOpportunityNotesModal,
   role: auth.userDetails.role,
   opportunitySkills:opportunity.opportunitySkills,
-  sales: opportunity.sales,
   recruiterName: opportunity.recruiterName,
   recruiterList:opportunity.recruiterList,
   fetchingRecruiterList:opportunity.fetchingRecruiterList,
@@ -506,7 +503,6 @@ const mapDispatchToProps = (dispatch) =>
       getRecruiterList,
       getOpportunitySKill,
       getOpportunityForecast,
-      getAllSalesList,
       handleUpdateOpportunityModal,
       handleOpportunityNotesDrawerModal,
       handleOpportunityDrawerModal,

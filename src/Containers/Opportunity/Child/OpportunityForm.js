@@ -14,12 +14,9 @@ import { Spacer, StyledLabel } from "../../../Components/UI/Elements";
 import SearchSelect from "../../../Components/Forms/Formik/SearchSelect";
 import {
   addOpportunity,
-  getRecruiterName,
-  getAllSalesList,
   getInitiative,
   getOppLinkedWorkflow,
   getOppLinkedStages,
-  
 } from "../OpportunityAction";
 import { getCrm} from "../../Leads/LeadsAction";
 import PlayCircleFilledIcon from "@mui/icons-material/PlayCircleFilled";
@@ -29,7 +26,6 @@ import { InputComponent } from "../../../Components/Forms/Formik/InputComponent"
 import { SelectComponent } from "../../../Components/Forms/Formik/SelectComponent";
 import { DatePicker } from "../../../Components/Forms/Formik/DatePicker";
 import dayjs from "dayjs";
-import { Fragment } from "react";
 import { Listbox } from "@headlessui/react";
 
 /**
@@ -45,8 +41,6 @@ const OpportunitySchema = Yup.object().shape({
 });
 function OpportunityForm(props) {
   useEffect(() => {
-    props.getRecruiterName();
-    props.getAllSalesList();
     props.getContactData(props.userId);
     props.getCustomerData(props.userId);
     props.getInitiative(props.userId);
@@ -78,32 +72,6 @@ function OpportunityForm(props) {
     return contactOptions;
   }
   
-
-
-  function getInitiativeOptions(filterOptionKey, filterOptionValue) {
-    const initiativeOptions =
-      props.initiatives.length &&
-      props.initiatives
-        .filter((option) => {
-          if (
-            option.customerId === filterOptionValue &&
-            option.probability !== 0
-          ) {
-            return option;
-          }
-        })
-
-        .map((option) => ({
-          label: option.initiativeName || "",
-          value: option.initiativeDetailsId,
-        }));
-
-    return initiativeOptions;
-  }
-  function classNames(...classes) {
-    return classes.filter(Boolean).join(" ");
-  }
-
   function getStagesOptions(filterOptionKey, filterOptionValue) {
     const StagesOptions =
       props.oppLinkStages.length &&
@@ -153,28 +121,6 @@ function OpportunityForm(props) {
     };
   });
 
-  function getskillOptions(filterOptionKey, filterOptionValue) {
-    const skillOptions =
-      props.opportunitySkills.length &&
-      props.opportunitySkills
-        .filter((option) => {
-          if (option.initiativeDetailsId === filterOptionValue) {
-            // console.log("option",option.initiativeSkillMapper)
-            return option;
-          }
-        })
-
-        .map((option) => {
-          console.log("option1", option);
-          return {
-            label: `${option.skillName || ""}`,
-            value: option.skilId,
-          };
-        });
-
-    return skillOptions;
-  }
-
   const customerNameOption = props.customerData
     .sort((a, b) => {
       const libraryNameA = a.name && a.name.toLowerCase();
@@ -196,19 +142,7 @@ function OpportunityForm(props) {
       };
     });
 
-  const recruiterNameOption = props.recruiterName.map((item) => {
-    return {
-      label: `${item.fullName || ""}`,
-      value: item.employeeId,
-    };
-  });
 
-  const salesNameOption = props.sales.map((item) => {
-    return {
-      label: `${item.fullName || ""}`,
-      value: item.employeeId,
-    };
-  });
   const [text, setText] = useState("");
   function handletext(e) {
     setText(e.target.value);
@@ -238,7 +172,7 @@ function OpportunityForm(props) {
     defaultContacts,
     name,
   } = props;
-  const selectedOption = props.sales.find((item) => item.fullName === selected);
+  const selectedOption = props.crmAllData.find((item) => item.empName === selected);
   
   return (
     <>
@@ -460,7 +394,6 @@ function OpportunityForm(props) {
                       width="100%"
                       isColumn
                       selectType="currencyName"
-                      value={values.currencyName}
                       isRequired
                       component={SearchSelect}
                     />
@@ -768,13 +701,9 @@ const mapStateToProps = ({ auth, opportunity, contact, customer,leads }) => ({
   initiativesByCustomerId: customer.initiativesByCustomerId,
   addingOpportunity: opportunity.addingOpportunity,
   addingOpportunityError: opportunity.addingOpportunityError,
-  recruiterName: opportunity.recruiterName,
   orgId: auth.userDetails.organizationId,
-  // salesUserIds:auth.userDetails.userId,
-  sales: opportunity.sales,
   oppLinkStages: opportunity.oppLinkStages,
   stages:opportunity.stages,
-  currencies: auth.currencies,
   contactByUserId: contact.contactByUserId,
   customerByUserId: customer.customerByUserId,
   initiatives: opportunity.initiatives,
@@ -783,7 +712,6 @@ const mapStateToProps = ({ auth, opportunity, contact, customer,leads }) => ({
   customerData: customer.customerData,
   contactData: contact.contactData,
   fullName: auth.userDetails.fullName
-  // opportunitySkills:opportunity.opportunitySkills
 });
 
 const mapDispatchToProps = (dispatch) =>
@@ -791,13 +719,9 @@ const mapDispatchToProps = (dispatch) =>
     {
       addOpportunity,
       getContactData,
-      getRecruiterName,
-      getAllSalesList,
-      // getInitiativeByCustomerId,
       getCustomerData,
       getInitiative,
       getOppLinkedWorkflow,
-      // getOpportunitySKill
       getOppLinkedStages,
       getCrm,
     },

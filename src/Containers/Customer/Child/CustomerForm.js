@@ -16,7 +16,6 @@ import {
   setClearbitData
 } from "../CustomerAction";
 import { getCrm} from "../../Leads/LeadsAction";
-import { getAllSalesList } from "../../Opportunity/OpportunityAction"
 import { Listbox } from '@headlessui/react'
 import { TextareaComponent } from "../../../Components/Forms/Formik/TextareaComponent";
 import { InputComponent } from "../../../Components/Forms/Formik/InputComponent";
@@ -51,7 +50,6 @@ function CustomerForm(props) {
   useEffect(() => {
     props.getAllCustomerEmployeelist();
     props.getSectors();
-    props.getAllSalesList();
     props.getCrm();
   }, []);
 
@@ -528,7 +526,6 @@ const mapStateToProps = ({ auth, customer,employee ,opportunity,sector,leads}) =
   addingCustomerError: customer.addingCustomerError,
   clearbit: customer.clearbit,
   user: auth.userDetails,
-  sales: opportunity.sales,
   allCustomerEmployeeList:employee.allCustomerEmployeeList,
   userId: auth.userDetails.userId,
   sectors: sector.sectors,
@@ -542,7 +539,6 @@ const mapDispatchToProps = (dispatch) =>
       addCustomer,
       setClearbitData,
       getSectors,
-      getAllSalesList,
       getAllCustomerEmployeelist,
       getCrm,
     },

@@ -13,7 +13,7 @@ import { OnlyWrapCard } from "../../../../Components/UI/Layout";
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import { DeleteOutlined } from "@ant-design/icons";
-import { getCountries } from "../../../Auth/AuthAction";
+// import { getCountries } from "../../../Auth/AuthAction";
 import {
   getLeads,
   deleteLeadsData,
@@ -48,7 +48,7 @@ const LeadsCardList = (props) => {
     setPage(page + 1);
     props.getLeads(props.userId, page,"creationdate");
     props.getSectors();
-    props.getCountries();
+    // props.getCountries();
   }, []);
 
   useEffect(() => {
@@ -163,9 +163,6 @@ const LeadsCardList = (props) => {
                       <div class="max-sm:w-full md:flex items-center">
                         <Tooltip>
                           <div class="max-sm:w-full justify-between flex md:flex-col">
-                            {/* <h4 class=" text-sm text-cardBody  font-poppins max-sm:hidden">
-                              Name
-                            </h4> */}
                             <h4 class="text-sm text-cardBody font-semibold  font-poppins cursor-pointer">
                               {item.name}
                               &nbsp;&nbsp;
@@ -252,21 +249,15 @@ const LeadsCardList = (props) => {
                 </div>
                 <div class="flex">
                   <div className=" flex font-medium flex-col  md:w-32 max-sm:flex-row w-full max-sm:justify-between ">
-                    {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden">
-                      {" "}
-                      Phone #{" "}
-                    </h4> */}
+         
                     <h4 class=" text-xs text-cardBody font-poppins">
                       {item.countryDialCode && item.phoneNumber
                         ? `${item.countryDialCode} ${item.phoneNumber}`
                         : "Not Available"}
-                      {/* {`${item.countryDialCode} ${item.phoneNumber}`} */}
+                 
                     </h4>
                   </div>
                   <div className=" flex font-medium flex-col md:w-36 max-sm:flex-row w-full max-sm:justify-between ">
-                    {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden">
-                      Country
-                    </h4> */}
                     <h4 class=" text-xs text-cardBody font-poppins">
                       <ReactCountryFlag
                         countryCode={item.countryAlpha2Code}
@@ -286,10 +277,6 @@ const LeadsCardList = (props) => {
                 </div>
                 <div class="flex">
                   <div className=" flex font-medium flex-col  md:w-[10rem] max-sm:flex-row w-full max-sm:justify-between ">
-                    {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden">
-                      {" "}
-                      Company{" "}
-                    </h4> */}
                     <h4 class=" text-xs text-cardBody font-semibold  font-poppins">
                       {item.companyName || "Not Available"}
                     </h4>
@@ -298,7 +285,6 @@ const LeadsCardList = (props) => {
                     {item.url !== null ? (
                       <Tooltip title={item.url}>
                         <span
-                          //type="edit"
                           style={{ cursor: "pointer" }}
                           onClick={() => {}}
                         >
@@ -318,10 +304,7 @@ const LeadsCardList = (props) => {
                   </div>
 
                   <div className=" flex font-medium flex-col  md:w-32 max-sm:flex-row w-full max-sm:justify-between ">
-                    {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden">
-                      {" "}
-                      Sector{" "}
-                    </h4> */}
+           
                     <h4 class=" text-xs text-cardBody font-poppins">
                       {item.sector}
                     </h4>
@@ -329,10 +312,6 @@ const LeadsCardList = (props) => {
                 </div>
                 <div class="flex md:items-center ">
                   <div className=" flex font-medium flex-col md:w-32 max-sm:flex-row w-full max-sm:justify-between ">
-                    {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden">
-                      Assigned to
-                    </h4> */}
-
                     <div class=" text-xs text-cardBody font-poppins">
                       <span>
                         {item.assignedTo === null ? (
@@ -348,10 +327,6 @@ const LeadsCardList = (props) => {
                     </div>
                   </div>
                   <div className=" flex font-medium flex-col md:w-20  max-sm:flex-row w-full max-sm:justify-between">
-                    {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden">
-                      Owner
-                    </h4> */}
-
                     <span>
                       <MultiAvatar
                         primaryTitle={item.ownerName}
@@ -363,10 +338,6 @@ const LeadsCardList = (props) => {
                     </span>
                   </div>
                   <div className=" flex font-medium flex-col md:w-[6rem] max-sm:flex-row w-full max-sm:justify-between ">
-                    {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden">
-                      Qualify
-                    </h4> */}
-
                     <div class=" text-xs text-cardBody font-poppins"></div>
                     <div>
                     <Tooltip title="Qualify? Lead will move to Customer section!">
@@ -377,20 +348,12 @@ const LeadsCardList = (props) => {
                          
                           }}
                           style={{
-                            // color: "green",
                             cursor: "pointer",
                             fontSize: "1.5rem",
                           }}
                         />
                       </Tooltip>
-                      {/* <StatusCustomerToggle
-                        rowdata={rowdata}
-                        handleToggleCollection={handleToggleCollection}
-                        // handleLeadsConfirmationModal={props.handleLeadsConfirmationModal}
-                        type={props.convertInd ? "primary" : "danger"}
-                        leadsId={item.leadsId}
-                        convertInd={item.convertInd}
-                      /> */}
+                     
                     </div>
                   </div>
                   <div class="flex flex-col w-[10%] max-sm:flex-row max-sm:w-[10%]">
@@ -454,9 +417,8 @@ const LeadsCardList = (props) => {
                       <div>
                         <StyledPopconfirm
                           title="Do you want to delete?"
-                          onConfirm={() => deleteLeadsData(item.leadsId)}
-                        >
-                          {/* {user.opportunityDeleteInd ===true && ( */}
+                          onConfirm={() => deleteLeadsData(item.leadsId)}>
+                    
                           <DeleteOutlined
                             type="delete"
                             style={{
@@ -465,7 +427,7 @@ const LeadsCardList = (props) => {
                               fontSize: "1rem",
                             }}
                           />
-                          {/* )} */}
+                       
                         </StyledPopconfirm>
                       </div>
                     )}
@@ -479,8 +441,6 @@ const LeadsCardList = (props) => {
                       >
                         <span
                           style={{
-                            // color:
-                            //   showRes && item.orderId === orderId ? "orange" : "#1890ff",
                             cursor: "pointer",
                           }}
                         >
@@ -510,7 +470,6 @@ const LeadsCardList = (props) => {
                 </div>
               </div>
             </div>
-            // </div>
           );
         })}
          </InfiniteScroll>
@@ -555,7 +514,6 @@ const mapStateToProps = ({ auth, leads, sector }) => ({
   userId: auth.userDetails.userId,
   lead: leads.lead,
   user: auth.userDetails,
-  countries: auth.countries,
   sectors: sector.sectors,
   updateLeadsModal: leads.updateLeadsModal,
   addDrawerLeadsEmailModal: leads.addDrawerLeadsEmailModal,
@@ -577,7 +535,7 @@ const mapDispatchToProps = (dispatch) =>
       handleLeadsNotesDrawerModal,
       handleLeadsEmailDrawerModal,
       getLeadDetailsById,
-      getCountries,
+      // getCountries,
       updateTypeForLead,
       handleCETmodal,
     },

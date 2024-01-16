@@ -1,8 +1,6 @@
 import React, { lazy, Suspense, useEffect, useState, } from "react";
 import { Route, Switch } from "react-router-dom";
 import { connect } from "react-redux";
-import AddCustomerModal from "../Customer/Child/AddCustomerModal";
-import { handleCustomerModal } from "../Customer/CustomerAction";
 import { handleTaskModal } from "../Task/TaskAction";
 import AddTaskModal from "../Task/Child/AddTaskModal";
 import {
@@ -36,12 +34,11 @@ import Holiday from "../Holiday/Holiday";
 import Reports from "../Reports/Reports";
 import Partner from "../Partner/Partner";
 import Category from "../Settings/Category/Category";
-import { handleContactModal } from "../Contact/ContactAction";
+import { handleOpportunityModal } from "../Opportunity/OpportunityAction";
 import Recruitment from "../Settings/Recruitement/Recruitment";
 import { Select } from "antd";
 import { updateUserById } from "../Auth/AuthAction";
 import { setLanguage } from "../../Language/LanguageAction";
-import { handleOpportunityModal } from "../Opportunity/OpportunityAction";
 import { getOpportunityRecord } from "../Opportunity/OpportunityAction";
 import CategoryTab from "../Settings/Category/CategoryTab";
 import { handleMessageModal } from "../LiveMessages/LiveMessageAction";
@@ -94,12 +91,11 @@ const CandidateDetails = lazy(() =>
 );
 
 const Customer = lazy(() => import("../Customer/Customer"));
+const Publish = lazy(() => import("../Publish/Publish"));
+const Opportunity = lazy(() => import("../Opportunity/Opportunity"));
 const AddOpportunityModal = lazy(() =>
   import("../Opportunity/Child/AddOpportunityModal")
 );
-const Publish = lazy(() => import("../Publish/Publish"));
-const Opportunity = lazy(() => import("../Opportunity/Opportunity"));
-
 const { Option } = Select;
 
 const { Header, Sider, Content } = Layout;
@@ -140,7 +136,6 @@ const PartnerDetail = lazy(() =>
 const AccountImport = lazy(() => import("../Import/Child/AccountImport"));
 const Requirement = lazy(() => import("../Requirement/Requirement"));
 const Demand = lazy(() => import("../Demand/Demand"));
-const AddContactModal = lazy(() => import("../Contact/Child/AddContactModal"));
 const Pitch = lazy(() => import("../Pitch/Pitch"));
 const Deal = lazy(() => import("../Deal/Deal"));
 const ContactInvest = lazy(() => import("../ContactInvest/ContactInvest"));
@@ -754,27 +749,18 @@ function MainApp(props) {
           </LayoutWrapper>
         </LayoutWrapper>
       </ThemeProvider>
+
       <LiveMesssageModal
         addMessageModal={props.addMessageModal}
         handleMessageModal={props.handleMessageModal}
       />
-      <AddCustomerModal
-        addCustomerModal={props.addCustomerModal}
-        handleCustomerModal={props.handleCustomerModal}
-      />
-      <AddContactModal
-        addContactModal={props.addContactModal}
-        handleContactModal={props.handleContactModal}
-      />
-
-      <AddOpportunityModal
-        addOpportunityModal={props.addOpportunityModal}
-        handleOpportunityModal={props.handleOpportunityModal}
-      />
-
       <AddPartnerModal
         addPartnerModal={props.addPartnerModal}
         handlePartnerModal={props.handlePartnerModal}
+      />
+         <AddOpportunityModal
+        addOpportunityModal={props.addOpportunityModal}
+        handleOpportunityModal={props.handleOpportunityModal}
       />
       <AddCandidateResumeModal
         addCandidateResumeModal={props.addCandidateResumeModal}
@@ -817,9 +803,6 @@ const mapStateToProps = ({
   message,
 }) => ({
   language: language.language,
-  addCustomerModal: customer.addCustomerModal,
-  addOpportunityModal: opportunity.addOpportunityModal,
-  addContactModal: contact.addContactModal,
   user: auth.userDetails,
   userDetails: auth.userDetails,
   addMessageModal: opportunity.addMessageModal,
@@ -853,6 +836,7 @@ const mapStateToProps = ({
   addCallModal: call.addCallModal,
   addEventModal: event.addEventModal,
   addTaskModal: task.addTaskModal,
+  addOpportunityModal: opportunity.addOpportunityModal,
   user: auth.userDetails,
 });
 const mapDispatchToProps = (dispatch) =>
@@ -864,11 +848,9 @@ const mapDispatchToProps = (dispatch) =>
       handlePartnerModal,
       handleTaskModal,
       updateUserById,
-      handleCustomerModal,
-      handleOpportunityModal,
       handleCandidateResumeModal,
-      handleContactModal,
       handleCallModal,
+      handleOpportunityModal,
       setLanguage,
       getOpportunityRecord,
       // getRequirementRecord,

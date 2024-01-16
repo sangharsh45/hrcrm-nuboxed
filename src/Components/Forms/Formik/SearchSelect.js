@@ -14,8 +14,9 @@ import {
 import { getContactListByCustomerId, getAllCustomerListByUserId } from "../../../Containers/Customer/CustomerAction";
 import { getAllCandidateListByUserId } from "../../../Containers/Candidate/CandidateAction";
 import { getAllUsersByOrganizationId } from "../../../Containers/Call/CallAction";
-import { getCountries, getCurrency } from "../../../Containers/Auth/AuthAction";
+import { getCountries } from "../../../Containers/Auth/AuthAction";
 import { getTimeZone } from "../../../Containers/Auth/AuthAction";
+import { getCurrency } from "../../../Containers/Auth/AuthAction";
 import { getDocuments } from "../../../Containers/Settings/Documents/DocumentsAction";
 import { getSectors } from "../../../Containers/Settings/Sectors/SectorsAction";
 import { getCustomerListByUserId } from "../../../Containers/Customer/CustomerAction";
@@ -140,16 +141,16 @@ class SearchSelect extends Component {
     if (selectType === "sourceName") {
       getSources(organizationId);
     }
-    if (selectType === "country" || "dialCode") {
+    if (selectType === "country") {
+      getCountries();
+    }
+    if (selectType === "dialCode") {
       getCountries();
     }
     if (selectType === "currencyName") {
       getCurrency();
     }
 
-    // if (selectType === "country") {
-    //   getCountries();
-    // }
     if (selectType === "product") {
       getProducts();
     }
@@ -704,7 +705,8 @@ class SearchSelect extends Component {
 
       // const customOption = ({ label, value }) => <h3>{`${label}----${value}`}</h3>
     }
-    if (selectType === "country") {
+    if (selectType === "country" ) 
+    {
       debugger;
       options = countries.map((item, i) => ({
         value: item.countryAlpha3Code,
@@ -716,14 +718,16 @@ class SearchSelect extends Component {
         longitude: Number(item.longitude),
         color: "#FF8B00",
       }));
-
-      // const customOption = ({ label, value }) => <h3>{`${label}-----${value}`}</h3>
     }
+    if (selectType === "dialCode") {
+      options = countries.map((item, i) => ({
+        label: `+${item.country_dial_code}`,
+        value: `+${item.country_dial_code}`,
+      }));
+      options = uniqBy(options, "value");
+    }  
     if (selectType === "currencyName") {
-      // debugger;
-      options = currencies
-
-        .map((item, i) => ({
+      options = currencies.map((item, i) => ({
           value: item.currencyName,
           label: item.currencyName,
           color: "#FF8B00",
@@ -731,15 +735,7 @@ class SearchSelect extends Component {
     }
 
 
-    if (selectType === "dialCode") {
-      options = countries.map((item, i) => ({
-        label: `+${item.country_dial_code}`,
-        value: `+${item.country_dial_code}`,
-      }));
-      // options.filter((item, i) => options.indexOf())
-      options = uniqBy(options, "value");
-      // const customOption = ({ label, value }) => <h3>{`${label}-----${value}`}</h3>
-    }
+   
     if (selectType === "timeZone") {
       options = timeZone.map((item, i) => ({
         label: `${item.zone_name}`,

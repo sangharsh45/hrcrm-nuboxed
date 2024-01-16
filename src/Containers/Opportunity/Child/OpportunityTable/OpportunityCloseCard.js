@@ -22,7 +22,6 @@ import {
   setEditOpportunity,
   deleteCloseOpportunity,
   updateOwneroppById,
-  getAllSalesList,
   handleOpportunityDrawerModal,
   getAllRecruitmentByOppId,
   getAllRecruitmentPositionByOppId,
@@ -44,7 +43,6 @@ function OpportunityCloseCard(props) {
         props.getRecruiterList(props.recruiterId);
       } else {
       }
-      props.getAllSalesList();
       props.getCloseOpportunity(props.userId, page);
       setPage(page + 1);
     }, []);
@@ -322,7 +320,6 @@ userId: auth.userDetails.userId,
 user: auth.userDetails,
 role: auth.userDetails.role,
 opportunitySkills: opportunity.opportunitySkills,
-sales: opportunity.sales,
 recruiterName: opportunity.recruiterName,
 recruiterList: opportunity.recruiterList,
 fetchingRecruiterList: opportunity.fetchingRecruiterList,
@@ -351,7 +348,6 @@ bindActionCreators(
   {
     getRecruiterList,
     getOpportunitySKill,
-    getAllSalesList,
     handleUpdateOpportunityModal,
     handleOpportunityDrawerModal,
     setEditOpportunity,
