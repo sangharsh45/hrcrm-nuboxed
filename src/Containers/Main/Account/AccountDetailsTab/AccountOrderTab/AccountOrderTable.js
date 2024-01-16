@@ -8,6 +8,7 @@ import NoteAltIcon from "@mui/icons-material/NoteAlt";
 import StarBorderIcon from '@mui/icons-material/StarBorder';
 import EventRepeatIcon from '@mui/icons-material/EventRepeat';
 import BorderColorOutlined from "@mui/icons-material/BorderColor";
+import PublishedWithChangesIcon from '@mui/icons-material/PublishedWithChanges';
 import {
     getDistributorOrderByDistributorId,
     handleInventoryLocationInOrder,
@@ -294,7 +295,7 @@ const AccountOrderTable = (props) => {
                                                     id="app.updaterevisedprice"
                                                     defaultMessage="Update Revised Price"
                                                 />}>
-                                                    <BorderColorOutlined
+                                                    <PublishedWithChangesIcon
                                                         onClick={() => {
                                                             handleUpdateRevisePrice()
                                                             handleSetParticularOrderData(item)

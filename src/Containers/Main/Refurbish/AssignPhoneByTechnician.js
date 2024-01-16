@@ -59,39 +59,39 @@ const AssignPhoneByTechnician = (props) => {
         {
             title: "Company",
             dataIndex: "company",
-            width: "10%",
+            width: "15%",
 
         },
         {
             title: "Model",
             dataIndex: "model",
-            width: "9%",
+            width: "10%",
         },
         {
             title: "IMEI",
             dataIndex: "imei",
-            width: "8%",
+            width: "12%",
         },
         {
             title: "OS",
             dataIndex: "os",
-            width: "8%",
+            width: "12%",
 
         },
         {
             title: "GB",
             dataIndex: "gb",
-            width: "8%",
+            width: "12%",
         },
         {
             title: "Color",
             dataIndex: "color",
-            width: "10%",
+            width: "12%",
         },
         {
             title: "Condition",
             dataIndex: "conditions",
-            width: "10%",
+            width: "12%",
         },
         {
             title: "QR",
@@ -114,12 +114,6 @@ const AssignPhoneByTechnician = (props) => {
                     </SubTitle>
                 );
             },
-        },
-
-        {
-            title: "Received by",
-            width: "9%",
-            dataIndex: "receivePhoneUserName"
         },
 
 

@@ -26,22 +26,22 @@ const TechnicianListByOrderId = (props) => {
         {
             width: "20%",
             title: "Technician Name",
-            // render: (item, text) => {
-            //     return (
-            //         <>
-            //             <span
-            //                 onClick={() => handleRowdata(item)}
-            //                 style={{
-            //                     textDecoration: "underline",
-            //                     color: show && item.technicianId === row.technicianId ? "rgb(225 158 14)" : "#0f6ace",
-            //                     cursor: "pointer"
-            //                 }}
-            //             >
-            //                 {item.technicianName}
-            //             </span>
-            //         </>
-            //     )
-            // }
+            render: (item, text) => {
+                return (
+                    <>
+                        <span
+                            onClick={() => handleRowdata(item)}
+                            style={{
+                                textDecoration: "underline",
+                                color: show && item.technicianId === row.technicianId ? "rgb(225 158 14)" : "#0f6ace",
+                                cursor: "pointer"
+                            }}
+                        >
+                            {item.technicianName}
+                        </span>
+                    </>
+                )
+            }
         },
         {
             dataIndex: "totalPhone",

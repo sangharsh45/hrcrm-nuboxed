@@ -91,6 +91,10 @@ const initialState = {
 
   showPhoneList: false,
 
+  fetchingNoOfPhoneInRepair: false,
+  fetchingNoOfPhoneInRepairError: true,
+  repairPhoneByTechId: [],
+
   fetchingProductionUserById: false,
   fetchingProductionUserByIdError: false,
   productionUser: [],
@@ -509,6 +513,22 @@ export const refurbishReducer = (state = initialState, action) => {
         ...state,
         fetchingNoOfPhoneInQcById: false,
         fetchingNoOfPhoneInQcByIdError: true,
+
+      };
+
+    case types.GET_NO_OF_PHONE_IN_REPAIR_REQUEST:
+      return { ...state, fetchingNoOfPhoneInRepair: true };
+    case types.GET_NO_OF_PHONE_IN_REPAIR_SUCCESS:
+      return {
+        ...state,
+        fetchingNoOfPhoneInRepair: false,
+        repairPhoneByTechId: action.payload
+      };
+    case types.GET_NO_OF_PHONE_IN_REPAIR_FAILURE:
+      return {
+        ...state,
+        fetchingNoOfPhoneInRepair: false,
+        fetchingNoOfPhoneInRepairError: true,
 
       };
 
