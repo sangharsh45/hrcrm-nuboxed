@@ -410,3 +410,33 @@ export const linkElearningToggle = ( data,departmentId,cb) => (dispatch) => {
       });
     })
 };
+
+export const addingDeptModules = (data, departmentId) => (dispatch, getState) => {
+  //console.log(permissions, userId);
+  const userId = getState().auth.userDetails.userId;
+  dispatch({
+    type: types.ADDING_MODULE_REQUEST,
+  });
+  axios
+    .put(`${base_url}/department/all/indicator/${departmentId}`, data, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+
+    .then((res) => {
+      console.log(res);
+      dispatch(getDepartments())
+      dispatch({
+        type: types.ADDING_MODULE_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.ADDING_MODULE_FAILURE,
+        payload: err,
+      });
+    });
+};

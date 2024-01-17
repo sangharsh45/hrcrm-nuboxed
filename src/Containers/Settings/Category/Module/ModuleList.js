@@ -8,10 +8,17 @@ import { bindActionCreators } from "redux";
 import { MainWrapper } from "../../../../Components/UI/Layout";
 import { Select } from "../../../../Components/UI/Elements";
 import { Popconfirm, Switch } from "antd";
+import SingleModuleList from "./SingleModuleList";
 
 const { Option } = Select;
 
 const ModuleList = (props) => {
+
+  const [rowdata, setrowData] = useState({});
+
+  const handleRowData = (data) => {
+    setrowData(data);
+  };
   useEffect(() => {
     props.getModules(props.orgId);
     // props.getRequirementsDuration(props.orgId);
@@ -49,6 +56,399 @@ const ModuleList = (props) => {
       setCrmStatus(true);
     } else {
       setCrmStatus(false);
+    }
+  }
+
+  // const { mandetoryInd } = props.moduleList;
+  // console.log(mandetoryInd);
+  // const [mandatoryStatus, setMandatoryStatus] = useState(mandetoryInd);
+  // function handleMandatoryClick(checked) {
+  //   console.log(mandetoryInd);
+  //   if (mandetoryInd) {
+  //     //disable url
+  //     props.addingModules({
+  //       ...props.moduleList,
+  //       orgId: props.orgId,
+  //       type:"mandatory",
+  //       mandetoryInd: mandetoryInd ? false : true,
+  //     });
+  //     setMandatoryStatus(mandetoryInd ? false : true);
+  //   } else {
+  //     props.addingModules(
+  //       {
+  //         ...props.moduleList,
+  //         orgId: props.orgId,
+  //         type:"mandatory",
+  //         mandetoryInd: mandetoryInd ? false : true,
+  //       },
+  //       props.orgId
+  //     );
+  //     setMandatoryStatus(mandetoryInd ? false : true);
+  //   }
+  // }
+  // function handleMandatoryCancel() {
+  //   if (mandetoryInd) {
+  //     setMandatoryStatus(true);
+  //   } else {
+  //     setMandatoryStatus(false);
+  //   }
+  // }
+
+
+  const { erpInd } = props.moduleList;
+  console.log(erpInd);
+  const [erpStatus, setErpStatus] = useState(erpInd);
+  function handleErpClick(checked) {
+    console.log(erpInd);
+    if (erpInd) {
+      //disable url
+      props.addingModules({
+        ...props.moduleList,
+        orgId: props.orgId,
+        type:"erp",
+        erpInd: erpInd ? false : true,
+      });
+      setErpStatus(erpInd ? false : true);
+    } else {
+      props.addingModules(
+        {
+          ...props.moduleList,
+          orgId: props.orgId,
+          type:"erp",
+          erpInd: erpInd ? false : true,
+        },
+        props.orgId
+      );
+      setErpStatus(erpInd ? false : true);
+    }
+  }
+  function handleErpCancel() {
+    if (erpInd) {
+      setErpStatus(true);
+    } else {
+      setErpStatus(false);
+    }
+  }
+
+  const { imInd } = props.moduleList;
+  console.log(imInd);
+  const [imStatus, setImStatus] = useState(imInd);
+  function handleImClick(checked) {
+    console.log(imInd);
+    if (imInd) {
+      //disable url
+      props.addingModules({
+        ...props.moduleList,
+        orgId: props.orgId,
+        type:"im",
+        imInd: imInd ? false : true,
+      });
+      setImStatus(imInd ? false : true);
+    } else {
+      props.addingModules(
+        {
+          ...props.moduleList,
+          orgId: props.orgId,
+          type:"im",
+          imInd: imInd ? false : true,
+        },
+        props.orgId
+      );
+      setImStatus(imInd ? false : true);
+    }
+  }
+  function handleImCancel() {
+    if (imInd) {
+      setImStatus(true);
+    } else {
+      setImStatus(false);
+    }
+  }
+
+ 
+
+
+
+
+  
+
+  const { productionInd } = props.moduleList;
+  console.log(productionInd);
+  const [productionStatus, setProductionStatus] = useState(productionInd);
+  function handleProductionClick(checked) {
+    console.log(productionInd);
+    if (productionInd) {
+      //disable url
+      props.addingModules({
+        ...props.moduleList,
+        orgId: props.orgId,
+        type:"production",
+        productionInd: productionInd ? false : true,
+      });
+      setProductionStatus(productionInd ? false : true);
+    } else {
+      props.addingModules(
+        {
+          ...props.moduleList,
+          orgId: props.orgId,
+          type:"production",
+          productionInd: productionInd ? false : true,
+        },
+        props.orgId
+      );
+      setProductionStatus(productionInd ? false : true);
+    }
+  }
+  function handleProductionCancel() {
+    if (productionInd) {
+      setProductionStatus(true);
+    } else {
+      setProductionStatus(false);
+    }
+  }
+
+  const { recruitProInd } = props.moduleList;
+  console.log(recruitProInd);
+  const [recruitProStatus, setRecruitProStatus] = useState(recruitProInd);
+  function handleRecruitProClick(checked) {
+    console.log(recruitProInd);
+    if (recruitProInd) {
+      //disable url
+      props.addingModules({
+        ...props.moduleList,
+        orgId: props.orgId,
+        type:"recruitPro",
+        recruitProInd: recruitProInd ? false : true,
+      });
+      setRecruitProStatus(recruitProInd ? false : true);
+    } else {
+      props.addingModules(
+        {
+          ...props.moduleList,
+          orgId: props.orgId,
+          type:"recruitPro",
+          recruitProInd: recruitProInd ? false : true,
+        },
+        props.orgId
+      );
+      setRecruitProStatus(recruitProInd ? false : true);
+    }
+  }
+  function handleRecruitProCancel() {
+    if (recruitProInd) {
+      setRecruitProStatus(true);
+    } else {
+      setRecruitProStatus(false);
+    }
+  }
+
+  const { repairInd } = props.moduleList;
+  console.log(repairInd);
+  const [repairStatus, setRepairStatus] = useState(repairInd);
+  function handleRepairClick(checked) {
+    console.log(repairInd);
+    if (repairInd) {
+      //disable url
+      props.addingModules({
+        ...props.moduleList,
+        orgId: props.orgId,
+        type:"repair",
+        repairInd: repairInd ? false : true,
+      });
+      setRepairStatus(repairInd ? false : true);
+    } else {
+      props.addingModules(
+        {
+          ...props.moduleList,
+          orgId: props.orgId,
+          type:"repair",
+          repairInd: repairInd ? false : true,
+        },
+        props.orgId
+      );
+      setRepairStatus(repairInd ? false : true);
+    }
+  }
+  function handleRepairCancel() {
+    if (repairInd) {
+      setRepairStatus(true);
+    } else {
+      setRepairStatus(false);
+    }
+  }
+
+  const { inventoryInd } = props.moduleList;
+  console.log(inventoryInd);
+  const [inventoryStatus, setInventoryStatus] = useState(inventoryInd);
+  function handleInventoryClick(checked) {
+    console.log(inventoryInd);
+    if (inventoryInd) {
+      //disable url
+      props.addingModules({
+        ...props.moduleList,
+        orgId: props.orgId,
+        type:"inventory",
+        inventoryInd: inventoryInd ? false : true,
+      });
+      setInventoryStatus(inventoryInd ? false : true);
+    } else {
+      props.addingModules(
+        {
+          ...props.moduleList,
+          orgId: props.orgId,
+          type:"inventory",
+          inventoryInd: inventoryInd ? false : true,
+        },
+        props.orgId
+      );
+      setInventoryStatus(inventoryInd ? false : true);
+    }
+  }
+  function handleInventoryCancel() {
+    if (inventoryInd) {
+      setInventoryStatus(true);
+    } else {
+      setInventoryStatus(false);
+    }
+  }
+
+  const { orderManagementInd } = props.moduleList;
+  console.log(orderManagementInd);
+  const [orderManagStatus, setOrderManagStatus] = useState(orderManagementInd);
+  function handleOrderManagementClick(checked) {
+    console.log(orderManagementInd);
+    if (orderManagementInd) {
+      //disable url
+      props.addingModules({
+        ...props.moduleList,
+        orgId: props.orgId,
+        type:"orderManagement",
+        orderManagementInd: orderManagementInd ? false : true,
+      });
+      setOrderManagStatus(orderManagementInd ? false : true);
+    } else {
+      props.addingModules(
+        {
+          ...props.moduleList,
+          orgId: props.orgId,
+          type:"orderManagement",
+          orderManagementInd: orderManagementInd ? false : true,
+        },
+        props.orgId
+      );
+      setOrderManagStatus(orderManagementInd ? false : true);
+    }
+  }
+  function handleOrderManagementCancel() {
+    if (orderManagementInd) {
+      setOrderManagStatus(true);
+    } else {
+      setOrderManagStatus(false);
+    }
+  }
+
+  const { logisticsInd } = props.moduleList;
+  console.log(logisticsInd);
+  const [logisticsStatus, setLogisticsStatus] = useState(logisticsInd);
+  function handleLogisticClick(checked) {
+    console.log(logisticsInd);
+    if (logisticsInd) {
+      //disable url
+      props.addingModules({
+        ...props.moduleList,
+        orgId: props.orgId,
+        type:"logistics",
+        logisticsInd: logisticsInd ? false : true,
+      });
+      setLogisticsStatus(logisticsInd ? false : true);
+    } else {
+      props.addingModules(
+        {
+          ...props.moduleList,
+          orgId: props.orgId,
+          type:"logistics",
+          logisticsInd: logisticsInd ? false : true,
+        },
+        props.orgId
+      );
+      setLogisticsStatus(logisticsInd ? false : true);
+    }
+  }
+  function handleLogisticCancel() {
+    if (logisticsInd) {
+      setLogisticsStatus(true);
+    } else {
+      setLogisticsStatus(false);
+    }
+  }
+
+  const { procurementInd } = props.moduleList;
+  console.log(procurementInd);
+  const [procurmentStatus, setProcurmentStatus] = useState(procurementInd);
+  function handleProcurmentClick(checked) {
+    console.log(procurementInd);
+    if (procurementInd) {
+      //disable url
+      props.addingModules({
+        ...props.moduleList,
+        orgId: props.orgId,
+        type:"procurement",
+        procurementInd: procurementInd ? false : true,
+      });
+      setProcurmentStatus(procurementInd ? false : true);
+    } else {
+      props.addingModules(
+        {
+          ...props.moduleList,
+          orgId: props.orgId,
+          type:"procurement",
+          procurementInd: procurementInd ? false : true,
+        },
+        props.orgId
+      );
+      setProcurmentStatus(procurementInd ? false : true);
+    }
+  }
+  function handleProcurmentCancel() {
+    if (procurementInd) {
+      setProcurmentStatus(true);
+    } else {
+      setProcurmentStatus(false);
+    }
+  }
+
+  const { eLearningInd } = props.moduleList;
+  console.log(eLearningInd);
+  const [elearningStatus, setElearningStatus] = useState(eLearningInd);
+  function handleElearningClick(checked) {
+    console.log(eLearningInd);
+    if (eLearningInd) {
+      //disable url
+      props.addingModules({
+        ...props.moduleList,
+        orgId: props.orgId,
+        type:"elearning",
+        eLearningInd: eLearningInd ? false : true,
+      });
+      setElearningStatus(eLearningInd ? false : true);
+    } else {
+      props.addingModules(
+        {
+          ...props.moduleList,
+          orgId: props.orgId,
+          type:"elearning",
+          eLearningInd: eLearningInd ? false : true,
+        },
+        props.orgId
+      );
+      setElearningStatus(eLearningInd ? false : true);
+    }
+  }
+  function handleElearningCancel() {
+    if (eLearningInd) {
+      setElearningStatus(true);
+    } else {
+      setElearningStatus(false);
     }
   }
 
@@ -90,7 +490,123 @@ const ModuleList = (props) => {
                         />
                       </Popconfirm>
                     </div>
+                
+                  
+
+                    <h1>IM</h1>
+                    <div   class=" w-[7%] ml-2">
+                    <Popconfirm
+                        title="Do you wish to change Status ? "
+                        onConfirm={handleImClick}
+                        onCancel={handleImCancel}
+                        okText="Yes"
+                        cancelText="No"
+                      >
+                        <Switch
+                          style={{ width: "5em" }}
+                          checked={imStatus || imInd}
+                          checkedChildren="Yes"
+                          unCheckedChildren="No"
+                        />
+                      </Popconfirm>
+                    </div>
+
+                    {/* <h1>Account</h1>
+                    <div   class=" w-[7%] ml-2">
+                    <Popconfirm
+                        title="Do you wish to change Status ? "
+                        onConfirm={handleAccountClick}
+                        onCancel={handleAccountCancel}
+                        okText="Yes"
+                        cancelText="No"
+                      >
+                        <Switch
+                          style={{ width: "5em" }}
+                          checked={accountStatus || accountInd}
+                          checkedChildren="Yes"
+                          unCheckedChildren="No"
+                        />
+                      </Popconfirm>
+                    </div> */}
+                    {/* <h1>RecruitOpps</h1>
+                    <div   class=" w-[7%] ml-2">
+                    <Popconfirm
+                        title="Do you wish to change Status ? "
+                        onConfirm={handleRecruitClick}
+                        onCancel={handleRecruitCancel}
+                        okText="Yes"
+                        cancelText="No"
+                      >
+                        <Switch
+                          style={{ width: "5em" }}
+                          checked={recruitStatus || recruitOppsInd}
+                          checkedChildren="Yes"
+                          unCheckedChildren="No"
+                        />
+                      </Popconfirm>
+                    </div>
+*/}
+                    {/* <h1>HR</h1>
+                    <div   class=" w-[7%] ml-2">
+                    <Popconfirm
+                        title="Do you wish to change Status ? "
+                        onConfirm={handleHrClick}
+                        onCancel={handleHrCancel}
+                        okText="Yes"
+                        cancelText="No"
+                      >
+                        <Switch
+                          style={{ width: "5em" }}
+                          checked={hrStatus || hrInd}
+                          checkedChildren="Yes"
+                          unCheckedChildren="No"
+                        />
+                      </Popconfirm>
+                    </div>  */}
+
+
+                   
+
+                  
            
+                    <h1>Rcruitpro</h1>
+                    <div   class=" w-[7%] ml-2">
+                    <Popconfirm
+                        title="Do you wish to change Status ? "
+                        onConfirm={handleRecruitProClick}
+                        onCancel={handleRecruitProCancel}
+                        okText="Yes"
+                        cancelText="No"
+                      >
+                        <Switch
+                          style={{ width: "5em" }}
+                          checked={recruitProStatus || recruitProInd}
+                          checkedChildren="Yes"
+                          unCheckedChildren="No"
+                        />
+                      </Popconfirm>
+                    </div>
+                    <h1>Elearning</h1>
+                    <div   class=" w-[7%] ml-2">
+                    <Popconfirm
+                        title="Do you wish to change Status ? "
+                        onConfirm={handleElearningClick}
+                        onCancel={handleElearningCancel}
+                        okText="Yes"
+                        cancelText="No"
+                      >
+                        <Switch
+                          style={{ width: "5em" }}
+                          checked={elearningStatus || eLearningInd}
+                          checkedChildren="Yes"
+                          unCheckedChildren="No"
+                        />
+                      </Popconfirm>
+                    </div>
+
+                   
+
+                   
                    
                 
               </div>
@@ -131,23 +647,37 @@ const ModuleList = (props) => {
       </DepartmentWrapper>
                 {/* {departments.length ? (
                   departments.map((department, i) => ( */}
-                    {/* <SingleModuleList
-                    //   key={i}
-                      value={singleDepartment}
-                      name="singleDepartment"
-                    //   department={department}
-                      linkedDepartments={linkedDepartments}
-                      updatinDepartments={updatingDepartments}
-                      handleChange={this.handleChange}
-                      handleSectorId={this.handleSectorId}
-                      handleUpdateDepartment={this.handleUpdateDepartment}
-                      sectors={this.props.sectors}
-                      handleClear={this.handleClear}
-                      handleSearchChange={this.handleSearchChange}
-                      currentData={this.state.currentData}
-                      setCurrentData={this.setCurrentData}
-                     handleDeleteDepartment={this.handleDeleteDepartment}
-                    /> */}
+                    <SingleModuleList
+                    handleProcurmentClick={handleProcurmentClick}
+                    handleProcurmentCancel={handleProcurmentCancel}
+                    procurmentStatus={procurmentStatus}
+
+handleLogisticClick={handleLogisticClick}
+handleLogisticCancel={handleLogisticCancel}
+logisticsStatus={logisticsStatus}
+                      handleOrderManagementClick={handleOrderManagementClick}
+                      handleOrderManagementCancel={handleOrderManagementCancel}
+                      orderManagStatus={orderManagStatus}
+                   handleInventoryClick={handleInventoryClick}
+                   handleInventoryCancel={handleInventoryCancel}
+                   inventoryStatus={inventoryStatus}
+                      handleErpClick={handleErpClick}
+                      handleErpCancel={handleErpCancel}
+                      erpStatus={erpStatus}
+                      handleRepairClick={handleRepairClick}
+                      handleRepairCancel={handleRepairCancel}
+                      repairStatus={repairStatus}
+                      handleRowData={handleRowData}
+                      rowdata={rowdata}
+                      // handleSectorId={this.handleSectorId}
+                      handleProductionClick={handleProductionClick}
+                      productionStatus={productionStatus}
+                       handleProductionCancel={handleProductionCancel}
+                    //   handleSearchChange={this.handleSearchChange}
+                    //   currentData={this.state.currentData}
+                    //   setCurrentData={this.setCurrentData}
+                    //  handleDeleteDepartment={this.handleDeleteDepartment}
+                    />
                   {/* )) */}
                   {/* ) : (
                     <p>No Data Available</p>

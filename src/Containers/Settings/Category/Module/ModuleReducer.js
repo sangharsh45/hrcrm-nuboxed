@@ -23,9 +23,9 @@ export const moduleReducer = (state = initialState, action) => {
             return {
               ...state,
               addingModules: false,
-              notifications: state.notifications.map((item) => {
-                if (item.notificationRuleId
-                  === action.payload.notificationRuleId
+              moduleList: state.moduleList.map((item) => {
+                if (item.orgId
+                  === action.payload.orgId
                 ) {
                   return action.payload;
                 } else {
