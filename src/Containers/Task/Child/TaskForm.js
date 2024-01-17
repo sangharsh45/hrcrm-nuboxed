@@ -19,7 +19,6 @@ import {
   updateTask,
   handleTaskModal,
   getProjectTaskList,
-
   getCandidateTaskList,
   getCandidateTaskFilterList,
   deleteTask,

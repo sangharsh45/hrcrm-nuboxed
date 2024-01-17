@@ -2,7 +2,7 @@ import React, { lazy, Suspense, useEffect, useState, } from "react";
 import { Route, Switch } from "react-router-dom";
 import { connect } from "react-redux";
 import { handleTaskModal } from "../Task/TaskAction";
-import AddTaskModal from "../Task/Child/AddTaskModal";
+// import AddTaskModal from "../Task/Child/AddTaskModal";
 import {
   handleCandidateResumeModal,
 } from "../Candidate/CandidateAction";
@@ -774,10 +774,10 @@ function MainApp(props) {
         handleEventModal={props.handleEventModal}
       />
 
-      <AddTaskModal
+      {/* <AddTaskModal
         addTaskModal={props.addTaskModal}
         handleTaskModal={props.handleTaskModal}
-      />
+      /> */}
     </>
   );
 }
@@ -830,7 +830,7 @@ const mapStateToProps = ({
   addCandidateResumeModal: candidate.addCandidateResumeModal,
   addCallModal: call.addCallModal,
   addEventModal: event.addEventModal,
-  addTaskModal: task.addTaskModal,
+  // addTaskModal: task.addTaskModal,
   user: auth.userDetails,
 });
 const mapDispatchToProps = (dispatch) =>

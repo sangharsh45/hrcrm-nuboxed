@@ -26,15 +26,13 @@ class Task extends Component {
         />
         <Suspense fallback={<BundleLoader />}>
         {this.props.viewType === "table" ?
-          // <TaskTable />
-          <TaskCardList/>
-          :
+          <TaskCardList/> :
           this.props.viewType === "gantt" ?
-          <GanttChart/>:
+          <GanttChart/> :
           this.props.viewType === "dashboard" ?
-          <TaskDeletedTable/>:
+          <TaskDeletedTable/> :
           this.props.viewType === "approve" ?
-          <TaskApproveTable/>:
+          <TaskApproveTable/> :
           null}
         </Suspense>
       </React.Fragment>
