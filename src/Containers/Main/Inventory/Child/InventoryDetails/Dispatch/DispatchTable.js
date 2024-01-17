@@ -149,15 +149,15 @@ function DispatchTable(props) {
                   </div>
                   <div className=" flex font-medium flex-col md:w-[3.2rem] max-sm:flex-row w-full max-sm:justify-between ">
                     <h4 class=" text-xs text-cardBody font-semibold  font-poppins">
-                      {item.dispatchInspectionInd === 4 && !item.newAwbNo ?
+                      {/* {item.dispatchInspectionInd === 4 && !item.newAwbNo ? */}
 
-                        <Button type="primary"
-                          onClick={() => {
-                            handleRowData(item);
-                            props.handleCreateAWB(true)
-                          }}>Create AWB</Button>
-                        : item.dispatchInspectionInd === 4 && item.newAwbNo ? <b>Awb Created</b> : null
-                      }
+                      <Button type="primary"
+                        onClick={() => {
+                          handleRowData(item);
+                          props.handleCreateAWB(true)
+                        }}>Create AWB</Button>
+                      {/* : item.dispatchInspectionInd === 4 && item.newAwbNo ? <b>Awb Created</b> : null
+                      } */}
                     </h4>
                   </div>
                   <div className=" flex font-medium flex-col md:w-[3.2rem] max-sm:flex-row w-full max-sm:justify-between ">

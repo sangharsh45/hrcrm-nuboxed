@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import AddressFieldArray1 from '../../../../../../Components/Forms/Formik/AddressFieldArray1';
 import { Formik, Form, Field, FieldArray } from 'formik';
 import { bindActionCreators } from 'redux';
@@ -16,6 +16,7 @@ import AddressFieldArray2 from '../../../../../../Components/Forms/Formik/Addres
 const DispatchOrderAwb = (props) => {
     console.log(props.rowData.unloadingAddresses)
     const shipperOption = props.allShipper.map((item) => {
+
         return {
             label: item.shipperName,
             value: item.shipperId
@@ -24,6 +25,9 @@ const DispatchOrderAwb = (props) => {
     useEffect(() => {
         props.getAllShipperList()
     }, [])
+    const handleSHipper = (a, setFieldValue, value) => {
+        console.log(a, setFieldValue, value)
+    }
     return (
         <Formik
             initialValues={{
@@ -75,7 +79,15 @@ const DispatchOrderAwb = (props) => {
                 )
             }}
         >
-            {({ values, handleChange }) => (
+            {({
+                errors,
+                touched,
+                isSubmitting,
+                setFieldValue,
+                setFieldTouched,
+                values,
+                ...rest
+            }) => (
                 <Form>
                     <div>
                         <div class=" flex justify-between" >
@@ -108,14 +120,17 @@ const DispatchOrderAwb = (props) => {
                                 />
                             </div>
                         </div>
-                    
+
                         <div class=" flex justify-between mt-4" >
 
-                            <div class=" w-[47%]"  >
+                            <div class=" w-[32%]"  >
                                 <Field
                                     label="Shipper"
                                     name="shipperId"
                                     placeholder="Value"
+                                    onSelect={(e) => {
+                                        handleSHipper(e, setFieldValue, values);
+                                    }}
                                     component={SelectComponent}
                                     options={Array.isArray(shipperOption) ? shipperOption : []}
                                     inlineLabel
@@ -123,7 +138,17 @@ const DispatchOrderAwb = (props) => {
                                     isColumn
                                 />
                             </div>
-                            <div class=" w-[47%]"  >
+                            <div class=" w-[32%]"  >
+                                <Field
+                                    label="AWB"
+                                    name="awbNo"
+                                    component={InputComponent}
+                                    inlineLabel
+                                    width={"100%"}
+                                    isColumn
+                                />
+                            </div>
+                            <div class=" w-[32%]"  >
                                 <Field
                                     name="pickUp"
                                     label="Available Date "
@@ -147,7 +172,7 @@ const DispatchOrderAwb = (props) => {
                                 />
                             </div>
                         </div>
-                   
+
                         <div class=" flex justify-between mt-4" >
                             <div class=" w-[47%]" >
 
@@ -174,7 +199,7 @@ const DispatchOrderAwb = (props) => {
 
                         </div>
                         <div class=" flex justify-between mt-4" >
-                            <div class=" flex justify-end w-[47%] " style={{ margin: "67px 39px 17px -33px"}} >
+                            <div class=" flex justify-end w-[47%] " style={{ margin: "67px 39px 17px -33px" }} >
 
 
                                 <Button

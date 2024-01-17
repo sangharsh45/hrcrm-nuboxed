@@ -2701,14 +2701,14 @@ export const getPaymentMode = (orgId) => (dispatch) => {
     });
 };
 
-export const updateOrderStep1 = (data, orderId, userId) => (
+export const updateOrderStep1 = (data, orderPhoneId) => (
   dispatch
 ) => {
   dispatch({
     type: types.UPDATE_ORDER_STEP1_REQUEST,
   });
   axios
-    .put(`${base_url2}/ORDER/${orderId}`, data,
+    .put(`${base_url2}/phoneOrder/orderUpdate/${orderPhoneId}`, data,
       {
         headers: {
           Authorization: "Bearer " + sessionStorage.getItem("token") || "",
