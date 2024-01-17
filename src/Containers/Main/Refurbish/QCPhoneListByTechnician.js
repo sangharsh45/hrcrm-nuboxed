@@ -82,7 +82,7 @@ const QCPhoneListByTechnician = (props) => {
     return (
         <div>
             <h2>
-                <b>  Phone List</b>
+                <b>Phone List</b>
             </h2>
             <StyledTable
                 dataSource={props.phoneByTechId}

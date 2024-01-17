@@ -10,6 +10,7 @@ import { SubTitle } from "../../../Components/UI/Elements";
 import ButtonGroup from "antd/lib/button/button-group";
 import { updateQCStatus } from "../Account/AccountAction"
 import moment from "moment";
+import ExtensionIcon from '@mui/icons-material/Extension'
 import { NoteAddOutlined } from "@mui/icons-material";
 import { OnlyWrapCard } from "../../../Components/UI/Layout";
 import { FormattedMessage } from "react-intl";
@@ -243,15 +244,14 @@ function OrderPhoneListById(props) {
                                     <div className=" flex font-medium  md:w-[1.5rem] max-sm:flex-row w-full max-sm:justify-between ">
                                         <div class=" text-xs text-cardBody font-poppins text-center">
                                             <Tooltip title="Spare">
-                                                <span style={{ color: spares && item.phoneId === RowData.phoneId ? "red" : "black" }}
 
-                                                    onClick={() => {
-                                                        handleSetRowData(item);
-                                                        hanldeSpare();
-                                                    }}>
-                                                    <i class="fab fa-linode"></i>
+                                                <span style={{ color: spares && item.phoneId === RowData.phoneId ? "red" : "black" }} >
+                                                    <ExtensionIcon
+                                                        onClick={() => {
+                                                            handleSetRowData(item);
+                                                            hanldeSpare();
+                                                        }} />
                                                 </span>
-
 
                                             </Tooltip>
 
