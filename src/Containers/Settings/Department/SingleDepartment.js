@@ -1,21 +1,19 @@
+
+
+
+
+
+
 import React, { Component } from "react";
 import styled from "styled-components";
 import { FormattedMessage } from "react-intl";
-import { Button, } from "antd";
+import { Button, Popconfirm, Switch, } from "antd";
 import BorderColorIcon from '@mui/icons-material/BorderColor';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { FlexContainer } from "../../../Components/UI/Layout";
 import { TextInput } from "../../../Components/UI/Elements";
 import ViewEditCard from "../../../Components/UI/Elements/ViewEditCard";
 import { Select } from "../../../Components/UI/Elements";
-import DepartmentStatusToggle from "./DepartmentStatusToggle";
-import ERPStatusToggle from "./ERPStatusToggle";
-import CRMStatusToggle from "./CRMStatusToggle";
-import IMStatusToggle from "./IMStatusToggle";
-import AccountingStatusToggle from "./AccountingStatusToggle";
-import RecruitProStatusToggle from "./RecruitProStatusToggle";
-import HrStatusToggle from "./HrStatusToggle";
-import ElearningStatusToggle from "./ElearningStatusToggle";
 const { Option } = Select;
 
 class SingleDepartment extends Component {
@@ -34,7 +32,7 @@ class SingleDepartment extends Component {
     this.setState({ sectorId: value });
   render() {
     const {
-       department: { departmentName,recruitOppsInd,hrInd, departmentId,sectorId,eLearningInd,mandetoryInd,sectorName,crmInd,erpInd,imInd ,accountInd},
+       department: { departmentName,procurementInd,recruitOppsInd,hrInd,orderManagementInd,logisticsInd, departmentId,repairInd,inventoryInd,recruitProInd,sectorId,productionInd,eLearningInd,mandetoryInd,sectorName,crmInd,erpInd,imInd ,accountInd},
       handleChange,
       name,
       value,
@@ -62,85 +60,277 @@ class SingleDepartment extends Component {
                   {departmentName}
                 </DepartmentName>
                 </div>
-                {/* <div class="w-20">
-                <DepartmentName >
-                  {sectorName}
-                </DepartmentName>
-                </div> */}
-                {/* </div> */}
-                <div class=" w-[7%] ml-2"   >
-                    <DepartmentStatusToggle
-                      mandetoryInd={mandetoryInd}
-                      departmentName={departmentName}
-                      departmentId={departmentId}
-                    />  
-                    </div>
-                    <h1 class="ml-4">ERP</h1>
-                    <div class=" w-[7%] ml-2"   >
-                    
-                    <ERPStatusToggle
-                      erpInd={erpInd}
-                      departmentName={departmentName}
-                      departmentId={departmentId}
-                    />  
-                    </div>
-                    <h1>CRM</h1>
+                <h1>CRM</h1>
                     <div   class=" w-[7%] ml-2">
-                    <CRMStatusToggle
-                      crmInd={crmInd}
-                      departmentName={departmentName}
-                      departmentId={departmentId}
-                    />  
-                    </div>
-                    <h1>IM</h1>
-                    <div class=" w-[7%] ml-2">
-                    <IMStatusToggle
-                      imInd={imInd}
-                      departmentName={departmentName}
-                      departmentId={departmentId}
-                    />  
-                    </div>
-                    <h1>HR</h1>
-                    <div 
-                   class=" w-[8%] ml-2"
-                    >
-                    <HrStatusToggle
-                      hrInd={hrInd}
-                      departmentName={departmentName}
-                      departmentId={departmentId}
-                    />  
-                    </div>
-                    <h1>Accounting</h1>
-                    <div 
-                   class=" w-[8%] ml-2"
-                    >
-                    <AccountingStatusToggle
-                      accountInd={accountInd}
-                      departmentName={departmentName}
-                      departmentId={departmentId}
-                    />  
+                    <Popconfirm
+                        title="Do you wish to change Status ? "
+                        onConfirm={this.props.handleCrmClick}
+                        onCancel={this.props.handleCrmCancel}
+                        okText="Yes"
+                        cancelText="No"
+                      >
+                        <Switch
+                          style={{ width: "5em" }}
+                          checked={this.props.crmStatus || crmInd}
+                          checkedChildren="Yes"
+                          unCheckedChildren="No"
+                        />
+                      </Popconfirm>
                     </div>
 
-                    <h1>RecruitPro</h1>
-                    <div 
-                  class=" w-[8%] ml-2"
-                    >
-                    <RecruitProStatusToggle
-                      recruitOppsInd={recruitOppsInd}
-                      departmentName={departmentName}
-                      departmentId={departmentId}
-                    />  
+                        <h1>Mandatory</h1>
+                    <div   class=" w-[7%] ml-2">
+                    <Popconfirm
+                        title="Do you wish to change Status ? "
+                        onConfirm={this.props.handleMandatoryClick}
+                        onCancel={this.props.handleMandatoryCancel}
+                        okText="Yes"
+                        cancelText="No"
+                      >
+                        <Switch
+                          style={{ width: "5em" }}
+                          checked={this.props.mandatoryStatus || mandetoryInd}
+                          checkedChildren="Yes"
+                          unCheckedChildren="No"
+                        />
+                      </Popconfirm>
                     </div>
+
+                    <h1>ERP</h1>
+                    <div   class=" w-[7%] ml-2">
+                    <Popconfirm
+                        title="Do you wish to change Status ? "
+                        onConfirm={this.props.handleErpClick}
+                        onCancel={this.props.handleErpCancel}
+                        okText="Yes"
+                        cancelText="No"
+                      >
+                        <Switch
+                          style={{ width: "5em" }}
+                          checked={this.props.erpStatus || erpInd}
+                          checkedChildren="Yes"
+                          unCheckedChildren="No"
+                        />
+                      </Popconfirm>
+                    </div>
+                    <h1>IM</h1>
+                    <div   class=" w-[7%] ml-2">
+                    <Popconfirm
+                        title="Do you wish to change Status ? "
+                        onConfirm={this.props.handleImClick}
+                        onCancel={this.props.handleImCancel}
+                        okText="Yes"
+                        cancelText="No"
+                      >
+                        <Switch
+                          style={{ width: "5em" }}
+                          checked={this.props.imStatus || imInd}
+                          checkedChildren="Yes"
+                          unCheckedChildren="No"
+                        />
+                      </Popconfirm>
+                    </div>
+
+                       <h1>Account</h1>
+                    <div   class=" w-[7%] ml-2">
+                    <Popconfirm
+                        title="Do you wish to change Status ? "
+                        onConfirm={this.props.handleAccountClick}
+                        onCancel={this.props.handleAccountCancel}
+                        okText="Yes"
+                        cancelText="No"
+                      >
+                        <Switch
+                          style={{ width: "5em" }}
+                          checked={this.props.accountStatus || accountInd}
+                          checkedChildren="Yes"
+                          unCheckedChildren="No"
+                        />
+                      </Popconfirm>
+                    </div>
+
+                        <h1>RecruitOpps</h1>
+                    <div   class=" w-[7%] ml-2">
+                    <Popconfirm
+                        title="Do you wish to change Status ? "
+                        onConfirm={this.props.handleRecruitClick}
+                        onCancel={this.props.handleRecruitCancel}
+                        okText="Yes"
+                        cancelText="No"
+                      >
+                        <Switch
+                          style={{ width: "5em" }}
+                          checked={this.props.recruitStatus || recruitOppsInd}
+                          checkedChildren="Yes"
+                          unCheckedChildren="No"
+                        />
+                      </Popconfirm>
+                    </div>
+
+                     <h1>HR</h1>
+                    <div   class=" w-[7%] ml-2">
+                    <Popconfirm
+                        title="Do you wish to change Status ? "
+                        onConfirm={this.props.handleHrClick}
+                        onCancel={this.props.handleHrCancel}
+                        okText="Yes"
+                        cancelText="No"
+                      >
+                        <Switch
+                          style={{ width: "5em" }}
+                          checked={this.props.hrStatus || hrInd}
+                          checkedChildren="Yes"
+                          unCheckedChildren="No"
+                        />
+                      </Popconfirm>
+                    </div>  
+                    <h1>PRODUCTION</h1>
+                    <div   class=" w-[7%] ml-2">
+                    <Popconfirm
+                        title="Do you wish to change Status ? "
+                        onConfirm={this.props.handleProductionClick}
+                        onCancel={this.props.handleProductionCancel}
+                        okText="Yes"
+                        cancelText="No"
+                      >
+                        <Switch
+                          style={{ width: "5em" }}
+                          checked={this.props.productionStatus || productionInd}
+                          checkedChildren="Yes"
+                          unCheckedChildren="No"
+                        />
+                      </Popconfirm>
+                    </div>
+
+                    <h1>Rcruitpro</h1>
+                    <div   class=" w-[7%] ml-2">
+                    <Popconfirm
+                        title="Do you wish to change Status ? "
+                        onConfirm={this.props.handleRecruitProClick}
+                        onCancel={this.props.handleRecruitProCancel}
+                        okText="Yes"
+                        cancelText="No"
+                      >
+                        <Switch
+                          style={{ width: "5em" }}
+                          checked={this.props.recruitProStatus || recruitProInd}
+                          checkedChildren="Yes"
+                          unCheckedChildren="No"
+                        />
+                      </Popconfirm>
+                    </div>
+
+                    <h1>Repair</h1>
+                    <div   class=" w-[7%] ml-2">
+                    <Popconfirm
+                        title="Do you wish to change Status ? "
+                        onConfirm={this.props.handleRepairClick}
+                        onCancel={this.props.handleRepairCancel}
+                        okText="Yes"
+                        cancelText="No"
+                      >
+                        <Switch
+                          style={{ width: "5em" }}
+                          checked={this.props.repairStatus || repairInd}
+                          checkedChildren="Yes"
+                          unCheckedChildren="No"
+                        />
+                      </Popconfirm>
+                    </div>
+
+                    <h1>Inventory</h1>
+                    <div   class=" w-[7%] ml-2">
+                    <Popconfirm
+                        title="Do you wish to change Status ? "
+                        onConfirm={this.props.handleInventoryClick}
+                        onCancel={this.props.handleInventoryCancel}
+                        okText="Yes"
+                        cancelText="No"
+                      >
+                        <Switch
+                          style={{ width: "5em" }}
+                          checked={this.props.inventoryStatus || inventoryInd}
+                          checkedChildren="Yes"
+                          unCheckedChildren="No"
+                        />
+                      </Popconfirm>
+                    </div>
+
+                    <h1>OrderManagement</h1>
+                    <div   class=" w-[7%] ml-2">
+                    <Popconfirm
+                        title="Do you wish to change Status ? "
+                        onConfirm={this.props.handleOrderManagementClick}
+                        onCancel={this.props.handleOrderManagementCancel}
+                        okText="Yes"
+                        cancelText="No"
+                      >
+                        <Switch
+                          style={{ width: "5em" }}
+                          checked={this.props.orderManagStatus || orderManagementInd}
+                          checkedChildren="Yes"
+                          unCheckedChildren="No"
+                        />
+                      </Popconfirm>
+                    </div>
+
+                    <h1>Logistics</h1>
+                    <div   class=" w-[7%] ml-2">
+                    <Popconfirm
+                        title="Do you wish to change Status ? "
+                        onConfirm={this.props.handleLogisticClick}
+                        onCancel={this.props.handleLogisticCancel}
+                        okText="Yes"
+                        cancelText="No"
+                      >
+                        <Switch
+                          style={{ width: "5em" }}
+                          checked={this.props.logisticsStatus || logisticsInd}
+                          checkedChildren="Yes"
+                          unCheckedChildren="No"
+                        />
+                      </Popconfirm>
+                    </div>
+                    <h1>Procurement</h1>
+                    <div   class=" w-[7%] ml-2">
+                    <Popconfirm
+                        title="Do you wish to change Status ? "
+                        onConfirm={this.props.handleProcurmentClick}
+                        onCancel={this.props.handleProcurmentCancel}
+                        okText="Yes"
+                        cancelText="No"
+                      >
+                        <Switch
+                          style={{ width: "5em" }}
+                          checked={this.props.procurmentStatus || procurementInd}
+                          checkedChildren="Yes"
+                          unCheckedChildren="No"
+                        />
+                      </Popconfirm>
+                    </div>
+
                     <h1>Elearning</h1>
-                    <div 
-                  class=" w-[8%] ml-2"
-                    >
-                    <ElearningStatusToggle
-                      eLearningInd={eLearningInd}
-                      departmentName={departmentName}
-                      departmentId={departmentId}
-                    />  
+                    <div   class=" w-[7%] ml-2">
+                    <Popconfirm
+                        title="Do you wish to change Status ? "
+                        onConfirm={this.props.handleElearningClick}
+                        onCancel={this.props.handleElearningCancel}
+                        okText="Yes"
+                        cancelText="No"
+                      >
+                        <Switch
+                          style={{ width: "5em" }}
+                          checked={this.props.elearningStatus || eLearningInd}
+                          checkedChildren="Yes"
+                          unCheckedChildren="No"
+                        />
+                      </Popconfirm>
                     </div>
+                
+                 
+                
+
+          
                    
                 
               </div>
@@ -186,7 +376,7 @@ class SingleDepartment extends Component {
                     onChange={handleChange}
                     style={{ width: "60%" }}
                   />
-                  <Select 
+                  {/* <Select 
               defaultValue={sectorName}
                style={{width:"40%"}}
                placeholder="Select Sectors"
@@ -195,7 +385,7 @@ class SingleDepartment extends Component {
                             {this.props.sectors.map((item) => {
                                 return <Option value={item.sectorId}>{item.sectorName} </Option>;
                             })}
-               </Select>
+               </Select> */}
                   <br />
                   <br />
                   <div class=" flex justify-end" >
