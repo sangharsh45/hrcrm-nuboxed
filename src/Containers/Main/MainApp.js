@@ -1,8 +1,6 @@
 import React, { lazy, Suspense, useEffect, useState, } from "react";
 import { Route, Switch } from "react-router-dom";
 import { connect } from "react-redux";
-import { handleTaskModal } from "../Task/TaskAction";
-// import AddTaskModal from "../Task/Child/AddTaskModal";
 import {
   handleCandidateResumeModal,
 } from "../Candidate/CandidateAction";
@@ -50,8 +48,6 @@ import Course from "../Course/Course";
 import Billing from "../../Components/Billing/Billing";
 import AddCallModal from "../Call/Child/AddCallModal";
 import { handleCallModal } from "../Call/CallAction";
-import { handleEventModal } from "../Event/EventAction";
-import AddEventModal from "../Event/Child/AddEventModal";
 import CourseDetails from "../Course/Child/CourseDetailsTab/CourseDetails";
 import ProgramDetails from "../Program/Child/ProgramDetails/ProgramDetails";
 import Projects from "../Projects/Projects";
@@ -92,9 +88,6 @@ const CandidateDetails = lazy(() =>
 const Customer = lazy(() => import("../Customer/Customer"));
 const Publish = lazy(() => import("../Publish/Publish"));
 const Opportunity = lazy(() => import("../Opportunity/Opportunity"));
-const AddOpportunityModal = lazy(() =>
-  import("../Opportunity/Child/AddOpportunityModal")
-);
 const { Option } = Select;
 
 const { Header, Sider, Content } = Layout;
@@ -763,21 +756,6 @@ function MainApp(props) {
       // handleResponseData={this.handleResponseData}
       // responseData={this.state.responseData}
       />
-
-      <AddCallModal
-        addCallModal={props.addCallModal}
-        handleCallModal={props.handleCallModal}
-      />
-
-      <AddEventModal
-        addEventModal={props.addEventModal}
-        handleEventModal={props.handleEventModal}
-      />
-
-      {/* <AddTaskModal
-        addTaskModal={props.addTaskModal}
-        handleTaskModal={props.handleTaskModal}
-      /> */}
     </>
   );
 }
@@ -829,24 +807,18 @@ const mapStateToProps = ({
   organizationDetails: auth.organizationDetails,
   addCandidateResumeModal: candidate.addCandidateResumeModal,
   addCallModal: call.addCallModal,
-  addEventModal: event.addEventModal,
-  // addTaskModal: task.addTaskModal,
   user: auth.userDetails,
 });
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
       getPresentNotifications,
-      handleEventModal,
-
       handlePartnerModal,
-      handleTaskModal,
       updateUserById,
       handleCandidateResumeModal,
       handleCallModal,
       setLanguage,
       getOpportunityRecord,
-      // getRequirementRecord,
       handleMessageModal,
     },
     dispatch

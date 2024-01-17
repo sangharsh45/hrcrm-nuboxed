@@ -8,7 +8,7 @@ const ContactShipperForm = lazy(() => import("./ContactShipperForm"));
 
 const ButtonGroup = Button.Group;
 
-class AddContactModal extends Component {
+class AddShipperContactModal extends Component {
   render() {
     const { shipperContactModal, handleShipperContactModal } = this.props;
     return (
@@ -32,4 +32,4 @@ class AddContactModal extends Component {
     );
   }
 }
-export default AddContactModal;
+export default AddShipperContactModal;

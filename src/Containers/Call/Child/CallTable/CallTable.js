@@ -7,7 +7,6 @@ import { Tooltip, Avatar } from "antd";
 import NoteAltIcon from "@mui/icons-material/NoteAlt";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { OnlyWrapCard } from '../../../../Components/UI/Layout'
-import { getEmployeelist } from "../../../Employees/EmployeeAction";
 import {
   deleteCall,
   getCallListRangeByUserId,
@@ -33,7 +32,6 @@ const [currentNameId, setCurrentNameId] = useState("");
     } = props;
     getCallListRangeByUserId(employeeId, page);
     setPage(page + 1);
-    props.getEmployeelist();
   }, []);
 
   useEffect(() => {
@@ -53,7 +51,6 @@ const [currentNameId, setCurrentNameId] = useState("");
         if (page < callPageMapd) {
           setPage(page + 1);
         getCallListRangeByUserId(employeeId, page);
-        props.getEmployeelist();
       }
       if (page === callPageMapd){
         setHasMore(false)
@@ -68,12 +65,10 @@ const [currentNameId, setCurrentNameId] = useState("");
 
   const {
     fetchingCallListRangeByUserId,
-    fetchingCallListRangeByUserIdError,
     callListRangeByUserId,
     deleteCall,
     handleCallNotesDrawerModal,
     userDetails: { employeeId },
-    setEditNote,
   } = props;
 
   
@@ -258,7 +253,6 @@ const mapStateToProps = ({ auth, call, employee }) => ({
   fetchingCallListRangeByUserIdError: call.fetchingCallListRangeByUserIdError,
   callListRangeByUserId: call.callListRangeByUserId,
   addDrawerCallNotesModal:call.addDrawerCallNotesModal,
-  employees: employee.employees,
 });
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
@@ -269,7 +263,6 @@ const mapDispatchToProps = (dispatch) =>
       handleCallModal,
       setEditNote,
       getNotesListByCallId,
-      getEmployeelist,
       handleCallNotesDrawerModal
     },
     dispatch
@@ -277,16 +270,7 @@ const mapDispatchToProps = (dispatch) =>
 
   export default connect(mapStateToProps, mapDispatchToProps)(CallTable);
 
-function NoDataComponent(props) {
-  const { description, onClick, buttonText } = props;
-  return (
-    <div>
-      <div class=" flex justify-center items-center flex-col">
-        <p>{description || "We couldn't find relevant data"}</p>
-      </div>
-    </div>
-  );
-}
+
 
 
 

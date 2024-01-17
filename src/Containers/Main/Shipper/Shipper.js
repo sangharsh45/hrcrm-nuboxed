@@ -45,6 +45,7 @@ class Shipper extends Component {
           handleClear={this.handleClear}
           currentData={this.state.currentData}
           setCurrentData={this.setCurrentData}
+          handleShipperModal={handleShipperModal}
         />
         <AddShipperModal
           handleShipperModal={handleShipperModal}
@@ -70,7 +71,6 @@ const mapStateToProps = ({ shipper, auth }) => ({
   viewType: shipper.viewType,
   addShipperModal: shipper.addShipperModal,
   userId: auth.userDetails.userId,
-  //shipperDashboardType: shipper.shipperDashboardType,
 });
 
 const mapDispatchToProps = (dispatch) =>

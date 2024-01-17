@@ -1,28 +1,23 @@
-import React, { Component, useEffect, useState, useMemo, lazy } from "react";
+import React, { useEffect, useState, lazy } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import moment from "moment";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { FormattedMessage } from "react-intl";
-import { SearchOutlined,
-} from '@ant-design/icons';
 import StarBorderIcon from '@mui/icons-material/StarBorder';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { Empty, Tooltip, Input, Button, Avatar } from "antd";
-import { StyledTable, StyledPopconfirm } from "../../../../Components/UI/Antd";
+import { Tooltip,  Avatar } from "antd";
+import { StyledPopconfirm } from "../../../../Components/UI/Antd";
 import {
   deleteEvent, getEventListRangeByUserId,
   handleUpdateEventModal,
   setEditEvents,
 } from "../../EventAction";
-import { getEmployeelist } from "../../../Employees/EmployeeAction";
-import { getAllSalesList} from "../../../Opportunity/OpportunityAction";
 import EventNoteIcon from '@mui/icons-material/EventNote';
 import BorderColorIcon from '@mui/icons-material/BorderColor';
 import { OnlyWrapCard } from '../../../../Components/UI/Layout';
 import { MultiAvatar2, SubTitle } from "../../../../Components/UI/Elements";
-import { BundleLoader } from "../../../../Components/Placeholder";
 const UpdateEventModal = lazy(() => import("../UpdateEventModal"));
 
 function EventCardList (props) {
@@ -35,8 +30,7 @@ function EventCardList (props) {
          } = props;
          getEventListRangeByUserId(employeeId,page);
         setPage(page + 1);
-        props.getEmployeelist();
-    props.getAllSalesList();;
+
   }, []);
  ;
 
@@ -47,8 +41,6 @@ function EventCardList (props) {
          } = props;
          getEventListRangeByUserId(employeeId,page);
         setPage(page + 1);
-        props.getEmployeelist();
-    props.getAllSalesList();;
 }
 
 
@@ -62,23 +54,8 @@ function EventCardList (props) {
       handleUpdateEventModal,
       userDetails: { employeeId },
     } = props;
-    const assignToTypeOption = props.employees.map((item) => {
-      return {
-        text: item.assignToName,
-        value: item.assignToName,
-      };
-    });
-   const ownerlistType = props.sales.map((sales) => {
-          return {
-            text: sales.fullName || "",
-            value: sales.fullName,
-          };
-        });
+   
   
-// if (fetchingEventListRangeByUserId) 
-//    {
-//     return <BundleLoader/>
-//    }
     return (
       <>
         <OnlyWrapCard style={{backgroundColor:"#E3E8EE"}}>
@@ -331,8 +308,7 @@ const mapStateToProps = ({ auth, event, employee,opportunity}) => ({
     event.fetchingEventListRangeByUserIdError,
   eventListRangeByUserId: event.eventListRangeByUserId,
   updateEventModal: event.updateEventModal,
-  employees: employee.employees,
-  sales: opportunity.sales,
+
 });
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
@@ -341,8 +317,6 @@ const mapDispatchToProps = (dispatch) =>
       deleteEvent,
       handleUpdateEventModal,
       setEditEvents,
-      getEmployeelist,
-      getAllSalesList,
 
     },
     dispatch
