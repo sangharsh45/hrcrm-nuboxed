@@ -478,7 +478,7 @@ import React, { Component, Suspense, lazy, useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { StyledTable } from "../../../Components/UI/Antd";
-import { Spacer } from "../../../Components/UI/Elements";
+import { MultiAvatar, Spacer } from "../../../Components/UI/Elements";
 import NoteAltIcon from '@mui/icons-material/NoteAlt';
 import { Input, Tooltip, Space, Button, Badge, Form, Typography, Popconfirm, DatePicker } from "antd";
 import {
@@ -506,6 +506,7 @@ import { ApprovalOutlined, BorderAllOutlined } from "@mui/icons-material";
 import AllSpareListByOrder from "./AllSpareListByOrder";
 import { OnlyWrapCard } from "../../../Components/UI/Layout";
 import ShowProductBuilderModal from "./ShowProductBuilderModal";
+import { FormattedMessage } from "react-intl";
 
 const EditableCell = ({
     editing,
@@ -612,14 +613,35 @@ const ProductionOrderList = (props) => {
         <>
             <div className=' flex justify-end sticky top-28 z-auto'>
                 <OnlyWrapCard style={{ backgroundColor: "#E3E8EE" }}>
-                    <div className=" flex justify-between w-[97.5%] p-2 bg-transparent font-bold sticky top-0 z-10">
-                        <div className=" md:w-[6.1rem]">Order Id</div>
-                        <div className=" md:w-[5.1rem]">Customer</div>
-                        <div className=" md:w-[1.8rem] ">Contact</div>
-                        <div className="md:w-[4.6rem]">Units #</div>
-                        <div className="md:w-[4.8rem]">Remaining</div>
-                        <div className="md:w-[6.2rem]">Expected Price</div>
-                        <div className="md:w-[5.9rem]">Delivery Date</div>
+                    <div className=" flex  w-[95%] p-2 bg-transparent font-bold sticky top-0 z-10">
+                        <div className=" md:w-[8.1rem]"><FormattedMessage
+                        id="app.orderid"
+                        defaultMessage="orderid"
+                      /></div>
+                        <div className=" md:w-[10.1rem]"><FormattedMessage
+                        id="app.customer"
+                        defaultMessage="customer"
+                      /></div>
+                        <div className=" md:w-[4.8rem] "><FormattedMessage
+                        id="app.contact"
+                        defaultMessage="contact"
+                      /></div>
+                        <div className="md:w-[4.6rem]"><FormattedMessage
+                        id="app.unit"
+                        defaultMessage="unit"
+                      /> #</div>
+                        <div className="md:w-[5.8rem]"><FormattedMessage
+                        id="app.balance"
+                        defaultMessage="balance"
+                      /></div>
+                        <div className="md:w-[7.7rem]"><FormattedMessage
+                        id="app.expectedprice"
+                        defaultMessage="expectedprice"
+                      /></div>
+                        <div className="md:w-[5.9rem]"><FormattedMessage
+                        id="app.deliverydate"
+                        defaultMessage="deliverydate"
+                      /></div>
                         <div className="md:w-[7.2rem]"></div>
                     </div>
                     {data.map((item) => {
@@ -627,9 +649,9 @@ const ProductionOrderList = (props) => {
                         const date = moment(item.createAt).format("DD/MM/YYYY");
                         return (
                             <div>
-                                <div className="flex rounded-xl justify-between mt-4 bg-white h-12 items-center p-3 " >
+                                <div className="flex rounded-xl  mt-4 bg-white h-12 items-center p-3 " >
                                     <div class="flex">
-                                        <div className=" flex font-medium  md:w-[7.9rem] max-sm:w-full  ">
+                                        <div className=" flex font-medium  md:w-[7.6rem] max-sm:w-full  ">
                                             <span
                                                 style={{ textDecoration: "underline", color: "#1890ff", cursor: "pointer" }}
                                                 onClick={() => {
@@ -651,23 +673,30 @@ const ProductionOrderList = (props) => {
                                             ) : null}
                                         </div>
 
-                                        <div className=" flex font-medium   md:w-[9.2rem] max-sm:flex-row w-full max-sm:justify-between  ">
+                                        <div className=" flex font-medium   md:w-[10.7rem] max-sm:flex-row w-full max-sm:justify-between  ">
                                             <h4 class=" text-xs text-cardBody font-poppins">
                                                 {item.distributorName}
                                             </h4>
 
                                         </div>
-                                        <div className=" flex font-medium  md:w-[8.2rem] max-sm:flex-row w-full max-sm:justify-between ">
+                                        <div className=" flex font-medium  md:w-[5.2rem] max-sm:flex-row w-full max-sm:justify-between ">
 
 
 
                                             <h4 class=" text-sm text-cardBody font-poppins">
-                                                {item.contactPersonName}
+                                                
+                                                <MultiAvatar
+                  primaryTitle={item.contactPersonName}
+                  // imageId={item.ownerImageId}
+                  // imageURL={item.imageURL}
+                  imgWidth={"2.1em"}
+                  imgHeight={"2.1em"}
+                />
                                             </h4>
                                         </div>
                                     </div>
 
-                                    <div className=" flex font-medium  md:w-[15.2rem] max-sm:flex-row w-full max-sm:justify-between ">
+                                    <div className=" flex font-medium  md:w-[5.2rem] max-sm:flex-row w-full max-sm:justify-between ">
                                         <div class=" text-xs text-cardBody font-poppins text-center">
                                             {/* <span
                                                 style={{ textDecoration: "underline", color: "#1890ff", cursor: "pointer" }}
@@ -681,22 +710,22 @@ const ProductionOrderList = (props) => {
                                         </div>
                                     </div>
 
-                                    <div className=" flex font-medium  md:w-[8.2rem] max-sm:flex-row w-full max-sm:justify-between ">
+                                    <div className=" flex font-medium  md:w-[5.21rem] max-sm:flex-row w-full max-sm:justify-between ">
                                         <div class=" text-xs text-cardBody font-poppins text-center">
                                             {item.receiveRemainingQuantity}
                                         </div>
                                     </div>
-                                    <div className=" flex font-medium  md:w-[18.2rem] max-sm:flex-row w-full max-sm:justify-between ">
+                                    <div className=" flex font-medium  md:w-[7.2rem] max-sm:flex-row w-full max-sm:justify-between ">
                                         <div class=" text-xs text-cardBody font-poppins text-center">
                                             {item.expectedPrice}
                                         </div>
                                     </div>
-                                    <div className=" flex font-medium  md:w-[8.2rem] max-sm:flex-row w-full max-sm:justify-between ">
+                                    <div className=" flex font-medium  md:w-[5.2rem] max-sm:flex-row w-full max-sm:justify-between ">
                                         <div class=" text-xs text-cardBody font-poppins text-center">
                                             {moment(item.deliveryDate).format("DD-MM-YYYY")}
                                         </div>
                                     </div>
-                                    <div className=" flex font-medium  md:w-[9.2rem] max-sm:flex-row w-full max-sm:justify-between ">
+                                    <div className=" flex font-medium  md:w-[8.2rem] max-sm:flex-row w-full max-sm:justify-between ">
                                         <div class=" text-xs text-cardBody font-poppins text-center">
                                             {item.suggestedPrice}
                                         </div>
@@ -711,7 +740,7 @@ const ProductionOrderList = (props) => {
                                             />
                                         </div>
                                     </div>
-                                    <div className=" flex font-medium  md:w-[7.2rem] max-sm:flex-row w-full max-sm:justify-between ">
+                                    <div className=" flex font-medium  md:w-[10.12rem] max-sm:flex-row w-full max-sm:justify-between ">
                                         <div class=" text-xs text-cardBody font-poppins text-center">
                                             {item.qcStartInd === 1 ?
                                                 <Tooltip title="Assign For QC">
@@ -729,7 +758,7 @@ const ProductionOrderList = (props) => {
                                                     : item.qcStartInd === 3 ? <b style={{ color: "deepgreen" }}>QC on {moment(item.qcEndTime).format("DD-MM-YYYY")}</b> : null}
                                         </div>
                                     </div>
-                                    <div className=" flex font-medium  md:w-[6.2rem] max-sm:flex-row w-full max-sm:justify-between ">
+                                    <div className=" flex font-medium  md:w-[9.12rem] max-sm:flex-row w-full max-sm:justify-between ">
                                         <div class=" text-xs text-cardBody font-poppins text-center">
                                             {item.qcRepairInd === 1 ?
                                                 <Tooltip title="Assign For Repair">
@@ -744,15 +773,15 @@ const ProductionOrderList = (props) => {
                                                         }}
                                                     >Assign For Repair</Button>
                                                 </Tooltip>
-                                                : item.qcRepairInd === 2 ? <b>Assigned To Technician</b>
+                                                : item.qcRepairInd === 2 ? <b>Assigned </b>
                                                     : item.qcRepairInd === 3 ? <b style={{ color: "deepgreen" }}>Repair on {moment(item.repairEndTime).format("DD-MM-YYYY")}</b> : null}
                                         </div>
                                     </div>
                                     <div className=" flex font-medium  md:w-[2rem] max-sm:flex-row w-full max-sm:justify-between ">
-                                        <div class=" text-xs text-cardBody font-poppins text-center">
+                                        <div class=" text-base text-cardBody font-poppins text-center">
                                             <Tooltip title="Notes">
                                                 <NoteAltIcon
-                                                    style={{ cursor: "pointer", fontSize: "13px" }}
+                                                    style={{ cursor: "pointer" }}
                                                     onClick={() => {
                                                         handleRowData(item);
                                                         props.handleProductionNotesModal(true);
@@ -763,7 +792,7 @@ const ProductionOrderList = (props) => {
                                         </div>
                                     </div>
                                     <div className=" flex font-medium  md:w-[2rem] max-sm:flex-row w-full max-sm:justify-between ">
-                                        <div class=" text-xs text-cardBody font-poppins text-center">
+                                        <div class=" text-base text-cardBody font-poppins text-center">
                                             <Tooltip title="History">
                                                 <HistoryOutlined
                                                     onClick={() => {

@@ -670,6 +670,10 @@
   "app.course":"Cursus",
   "app.program":"Programma",
   "app.readless":"Lees minder",
-  "app.readmore":"Lees verder"
+  "app.readmore":"Lees verder",
+  "app.orderid":"Order ID",
+  "app.balance":"Evenwicht",
+  "app.expectedprice":"Verwachte prijs",
+  "app.deliverydate":"Bezorgdatum"
 
 }
