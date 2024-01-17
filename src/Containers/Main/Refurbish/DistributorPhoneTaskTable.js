@@ -16,8 +16,9 @@ function DistributorPhoneTaskTable(props) {
     const [task, setTask] = useState("")
     const [customName, setCustomeName] = useState("")
     const [type, setType] = useState(false)
-    const handleTask = (e) => {
-        setTask(e.target.value)
+    const handleTask = (value) => {
+        console.log(value)
+        setTask(value)
     }
     const handleCustomeName = (e) => {
         setCustomeName(e.target.value)
