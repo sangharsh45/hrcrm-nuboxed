@@ -39,7 +39,7 @@ function AddOrderInAccount(props) {
     const currencyOption = props.currencies.map((item) => {
         return {
             label: item.currencyName || "",
-            value: item.currencyName,
+            value: item.currencyId,
         };
     });
     return (
@@ -51,6 +51,7 @@ function AddOrderInAccount(props) {
                 paymentInTerms: "",
                 comments: "",
                 awbNo: "",
+                orderCurrencyId: "",
                 deliverToBusinessInd: "",
                 fullLoadTruckInd: "",
                 privateInd: "",
@@ -92,7 +93,7 @@ function AddOrderInAccount(props) {
             validationSchema={FormSchema}
             onSubmit={(values, { resetForm }) => {
                 console.log(priority)
-              
+
                 if (values.advancePayment < 100) {
                     props.addOrderForm({
                         ...values,
@@ -109,9 +110,9 @@ function AddOrderInAccount(props) {
                     <Form>
                         <div>
                             <StyledLabel><h3> <FormattedMessage
-                 id="app.pickupaddress"
-                 defaultMessage="Pickup Address"
-                /></h3></StyledLabel>
+                                id="app.pickupaddress"
+                                defaultMessage="Pickup Address"
+                            /></h3></StyledLabel>
 
                             <FieldArray
                                 name="loadingAddress"
@@ -172,7 +173,7 @@ function AddOrderInAccount(props) {
                                 />
                             </div>
                         </div> */}
-                    
+
                             <div class="justify-between flex mt-3">
                                 <div class="w-[30%]">
                                     <Field
@@ -207,7 +208,7 @@ function AddOrderInAccount(props) {
                                     />
                                 </div>
                             </div>
-                     
+
                             <div class="justify-between flex mt-3">
                                 <div class="w-[22%]">
                                     <Field
@@ -221,7 +222,7 @@ function AddOrderInAccount(props) {
                                 </div>
                                 <div class="w-[22%]">
                                     <Field
-                                        name="currency"
+                                        name="orderCurrencyId"
                                         label="Currency"
                                         isColumn
                                         inlineLabel
@@ -238,21 +239,21 @@ function AddOrderInAccount(props) {
                                         width={"100%"}
                                         component={DatePicker}
                                         value={values.deliveryDate}
-                                  
+
                                     />
                                 </div>
 
                                 <div class="w-[22%]">
                                     <StyledLabel><FormattedMessage
-                                            id="app.priority"
-                                            defaultMessage="Priority"
-                                           /></StyledLabel>
+                                        id="app.priority"
+                                        defaultMessage="Priority"
+                                    /></StyledLabel>
                                     <div class="justify-between flex">
                                         <div>
                                             <Tooltip title={<FormattedMessage
-                                            id="app.high"
-                                            defaultMessage="High"
-                                           />}>
+                                                id="app.high"
+                                                defaultMessage="High"
+                                            />}>
                                                 <Button
                                                     type="primary"
                                                     shape="circle"
@@ -271,9 +272,9 @@ function AddOrderInAccount(props) {
                                             </Tooltip>
                                             &nbsp;
                                             <Tooltip title={<FormattedMessage
-                                            id="app.medium"
-                                            defaultMessage="Medium"
-                                           />}>
+                                                id="app.medium"
+                                                defaultMessage="Medium"
+                                            />}>
                                                 <Button
                                                     type="primary"
                                                     shape="circle"
@@ -292,9 +293,9 @@ function AddOrderInAccount(props) {
                                             </Tooltip>
                                             &nbsp;
                                             <Tooltip title={<FormattedMessage
-                                            id="app.low"
-                                            defaultMessage="Low"
-                                           />}>
+                                                id="app.low"
+                                                defaultMessage="Low"
+                                            />}>
                                                 <Button
                                                     type="primary"
                                                     shape="circle"
@@ -316,7 +317,7 @@ function AddOrderInAccount(props) {
                                 </div>
 
                             </div>
-             
+
                             <div class=" mt-3 justify-between flex">
                                 <div class="w-[30%]">
                                     <Field
@@ -330,16 +331,16 @@ function AddOrderInAccount(props) {
 
                                 <div class="w-[47%]  mt-[67px] mr-[39px] mb-[17px] ml-[-33px] flex justify-end">
                                     <Button
-                                    className="bg-[#3695cd] text-white text-xs pt-0 pr-3"
-                                    htmlType="Submit"
+                                        className="bg-[#3695cd] text-white text-xs pt-0 pr-3"
+                                        htmlType="Submit"
                                     >
                                         <FormattedMessage
                                             id="app.save"
                                             defaultMessage="Save"
-                                           />
-                                        
+                                        />
+
                                     </Button>
-                                    
+
                                 </div>
                             </div>
                         </div>

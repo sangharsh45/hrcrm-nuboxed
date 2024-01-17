@@ -34,11 +34,20 @@ function RepairSpareListTable(props) {
         {
             title: "Cost",
             dataIndex: "extraCost",
-
+            render: (text, item) => {
+                return (
+                    <>{item.extraCost} {item.spareCurrency}</>
+                )
+            }
         },
         {
             title: "Total",
             dataIndex: "total",
+            render: (text, item) => {
+                return (
+                    <>{item.total} {item.spareCurrency}</>
+                )
+            }
         },
 
     ];

@@ -6,7 +6,6 @@ import BorderColorIcon from '@mui/icons-material/BorderColor';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { BundleLoader } from '../../../Components/Placeholder'
-
 const AddCatalogueInProduction = lazy(() => import('./ProductionTab/AddCatalogueInProduction'));
 const OpenRepairTable = lazy(() => import('./OpenRepairTable'));
 const ProductionRepairOrder = lazy(() => import('./ProductionRepairOrder'));

@@ -2063,12 +2063,12 @@ export const handlePhoneNotesOrderModal = (modalProps) => (dispatch) => {
     payload: modalProps,
   });
 };
-export const getPhoneTasklist = (phoneId) => (dispatch) => {
+export const getPhoneTasklist = (orgId) => (dispatch) => {
   dispatch({
     type: types.GET_PHONE_TASK_LIST_REQUEST,
   });
   axios
-    .get(`${base_url2}/phone/phoneTask/${phoneId}`, {
+    .get(`${base_url}/itemTask/all/${orgId}`, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },

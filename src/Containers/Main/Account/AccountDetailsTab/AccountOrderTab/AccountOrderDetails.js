@@ -94,7 +94,7 @@ function DistributorPauseForm(props) {
         {
             title: "Company",
             dataIndex: "company",
-            width: "10%",
+            width: "11%",
 
         },
         {
@@ -116,7 +116,7 @@ function DistributorPauseForm(props) {
         {
             title: "GB",
             dataIndex: "gb",
-            width: "9%",
+            width: "8%",
         },
         {
             title: "Color",
@@ -131,7 +131,7 @@ function DistributorPauseForm(props) {
         {
             title: "Expected Price",
             dataIndex: "expectedPrice",
-            width: "15%",
+            width: "13%",
         },
         {
             title: "Total Hours",
@@ -145,7 +145,7 @@ function DistributorPauseForm(props) {
         },
         {
             title: "Final Price",
-            dataIndex: "final",
+            dataIndex: "totalPrice",
             width: "10%",
         },
         {
