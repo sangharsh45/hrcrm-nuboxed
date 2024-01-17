@@ -6,16 +6,16 @@ import { bindActionCreators } from "redux";
 
 function ElearningStatusToggle(props) {
 
-  const [learning, setLearning] = React.useState(props.recruitOppsInd);
-console.log("crrm",props.recruitOppsInd);
+  const [learning, setLearning] = React.useState(props.eLearningInd);
+console.log("crrm",props.eLearningInd);
   function handleElearningToggleCollection(item) {
-    if (props.recruitOppsInd) {
+    if (props.eLearningInd) {
       props.linkElearningToggle({
         // ...props.departments,
         departmentName: props.departmentName,
         departmentId: props.departmentId,
         // editInd:false,
-        recruitOppsInd: props.recruitOppsInd ? false : true,
+        eLearningInd: props.eLearningInd ? false : true,
       },
       props.departmentId,
       );
@@ -27,7 +27,7 @@ console.log("crrm",props.recruitOppsInd);
         departmentName: props.departmentName,
         departmentId: props.departmentId,
         // editInd:false,
-        recruitOppsInd: props.recruitOppsInd ? false : true,
+        eLearningInd: props.eLearningInd ? false : true,
       },
       props.departmentId,
       );
@@ -36,7 +36,7 @@ console.log("crrm",props.recruitOppsInd);
   }
 
   function handleElearningCancel() {
-    if (props.recruitOppsInd) {
+    if (props.eLearningInd) {
         setLearning(true);
     } else {
         setLearning(false);
@@ -54,12 +54,12 @@ console.log("crrm",props.recruitOppsInd);
         >
           <Switch
             className="toggle-clr"
-            checked={props.recruitOppsInd || learning}
+            checked={props.eLearningInd || learning}
            
             isLoading={true}
             style={{
               width: "7%",
-              backgroundColor: props.recruitOppsInd || learning ? "rgb(119, 221, 119)" : "#E6E6E6",
+              backgroundColor: props.eLearningInd || learning ? "rgb(119, 221, 119)" : "#E6E6E6",
             }}
             checkedChildren="Yes"
             unCheckedChildren="No"
