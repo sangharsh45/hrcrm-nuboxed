@@ -6,10 +6,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { CurrencySymbol } from "../../../../../Components/Common";
 import { StyledTable } from "../../../../../Components/UI/Antd";
-import {
-    getDistributorOrderPayment,
-
-} from "../../AccountAction";;
+import { getDistributorOrderPayment } from "../../AccountAction";;
 
 class OrderPaymentTable extends Component {
 
@@ -48,11 +45,16 @@ class OrderPaymentTable extends Component {
                 title: "Amount",
                 width: "10%",
                 dataIndex: "paymentAmount",
+                render: (name, item, i) => {
+                    return (
+                        <>{item.paymentAmount} {item.orderCurrencyName}</>
+                    );
+                }
             },
 
             {
                 title: "Mode",
-                dataIndex: "paymentMode",
+                dataIndex: "paymentModeName",
                 width: "10%",
             },
             {

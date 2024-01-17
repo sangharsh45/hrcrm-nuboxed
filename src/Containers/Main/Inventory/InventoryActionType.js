@@ -10,7 +10,8 @@ export const ADD_INVENTORY_FAILURE = "ADD_INVENTORY_FAILURE";
 export const HANDLE_PICKUP_MODAL =
   "HANDLE_PICKUP_MODAL";
 
-
+export const HANDLE_ADD_AWB_MODAL =
+  "HANDLE_ADD_AWB_MODAL";
 
 // get inventory
 

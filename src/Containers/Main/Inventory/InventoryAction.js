@@ -233,6 +233,13 @@ export const handleCreateAWB = (modalProps) => (dispatch) => {
     payload: modalProps,
   });
 };
+
+export const handleAddAWB = (modalProps) => (dispatch) => {
+  dispatch({
+    type: types.HANDLE_ADD_AWB_MODAL,
+    payload: modalProps,
+  });
+};
 //add received
 export const createAwbNo = (data, id) => (dispatch) => {
   dispatch({
