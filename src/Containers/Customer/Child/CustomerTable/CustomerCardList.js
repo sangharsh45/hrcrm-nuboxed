@@ -147,8 +147,8 @@ const [rowdata, setrowdata] = useState("");
                       </div>
                       <div className=" md:w-[4.1rem]">
         <FormattedMessage
-                        id="app.phone"
-                        defaultMessage="Phone #"
+                        id="app.work"
+                        defaultMessage="Work"
                       />
           
           </div>

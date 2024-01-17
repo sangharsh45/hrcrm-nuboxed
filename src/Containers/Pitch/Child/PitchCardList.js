@@ -197,22 +197,7 @@ const PitchCardList = (props) => {
                                 </div>
                                 <div class="flex flex-row items-center md:w-3/12 max-sm:flex-row w-full max-sm:justify-between">
 
-<div><ButtonGroup>
-<RoleButton
- type="Warm"
- iconType="	fas fa-burn"
- // tooltip="Warm"
- tooltip={<FormattedMessage
-   id="app.warm"
-   defaultMessage="Warm"
- />}
- role={item.type}
- onClick={() =>{
- const typ="Warm"
-   props.updateTypeForPitch(item.investorLeadsId,typ)
- }}
-/>
-</ButtonGroup></div>
+
 
   
 
@@ -235,6 +220,22 @@ const PitchCardList = (props) => {
 />
 </ButtonGroup>
 </div>
+<div><ButtonGroup>
+<RoleButton
+ type="Warm"
+ iconType="	fas fa-burn"
+ // tooltip="Warm"
+ tooltip={<FormattedMessage
+   id="app.warm"
+   defaultMessage="Warm"
+ />}
+ role={item.type}
+ onClick={() =>{
+ const typ="Warm"
+   props.updateTypeForPitch(item.investorLeadsId,typ)
+ }}
+/>
+</ButtonGroup></div>
      <div>
 <ButtonGroup>
 <RoleButton
@@ -376,7 +377,7 @@ const PitchCardList = (props) => {
                           style={{
                             // color: "green",
                             cursor: "pointer",
-                            fontSize: "1rem",
+                            fontSize: "1.5rem",
                           }}
                         />
                       </Tooltip>

@@ -180,26 +180,7 @@ const LeadsCardList = (props) => {
                   </div>
 
                   <div class="flex flex-row items-center md:w-[11%] max-sm:flex-row w-full max-sm:justify-between">
-                    <div>
-                      <ButtonGroup>
-                        <RoleButton
-                          type="Warm"
-                          iconType="	fas fa-burn"
-                          // tooltip="Warm"
-                          tooltip={
-                            <FormattedMessage
-                              id="app.warm"
-                              defaultMessage="Warm"
-                            />
-                          }
-                          role={item.type}
-                          onClick={() => {
-                            const typ = "Warm";
-                            props.updateTypeForLead(item.leadsId, typ);
-                          }}
-                        />
-                      </ButtonGroup>
-                    </div>
+                  
 
                     <div>
                       <ButtonGroup>
@@ -216,6 +197,26 @@ const LeadsCardList = (props) => {
                           role={item.type}
                           onClick={() => {
                             const typ = "Hot";
+                            props.updateTypeForLead(item.leadsId, typ);
+                          }}
+                        />
+                      </ButtonGroup>
+                    </div>
+                    <div>
+                      <ButtonGroup>
+                        <RoleButton
+                          type="Warm"
+                          iconType="	fas fa-burn"
+                          // tooltip="Warm"
+                          tooltip={
+                            <FormattedMessage
+                              id="app.warm"
+                              defaultMessage="Warm"
+                            />
+                          }
+                          role={item.type}
+                          onClick={() => {
+                            const typ = "Warm";
                             props.updateTypeForLead(item.leadsId, typ);
                           }}
                         />
@@ -336,7 +337,7 @@ const LeadsCardList = (props) => {
                   <div className=" flex font-medium flex-col md:w-[6rem] max-sm:flex-row w-full max-sm:justify-between ">
                     <div class=" text-xs text-cardBody font-poppins"></div>
                     <div>
-                    <Tooltip title="Qualify? Lead will move to Customer section!">
+                    <Tooltip title="Qualify? Lead will move to Prospect section!">
                         <ConnectWithoutContactIcon
                           onClick={() => {
                             handleRowData(item);

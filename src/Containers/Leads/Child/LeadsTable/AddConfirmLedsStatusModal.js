@@ -6,16 +6,16 @@ import LeadsConfirmStatusForm from "./LeadsConfirmStatusForm";
 
 const AddConfirmLedsStatusModal = (props) => {
   const isSmallScreen = window.innerWidth <= 600;
-    const drawerWidth = isSmallScreen ? "90%" : "55%";
+    const drawerWidth = isSmallScreen ? "90%" : "60%";
   return (
     <>
       <StyledDrawer
         title={<FormattedMessage
-          id="app.leads"
-          defaultMessage="Leads"
+          id="app.convertasProspect"
+          defaultMessage="Convert as Prospect"
         />}
         width={drawerWidth}
-        style={{marginTop:"5rem"}}
+        style={{marginTop:"3rem"}}
         visible={props.addLeadsConfirmationModal}
         closable
         destroyOnClose
