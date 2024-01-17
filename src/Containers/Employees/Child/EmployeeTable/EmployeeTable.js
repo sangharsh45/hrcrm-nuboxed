@@ -1,4 +1,4 @@
-import React, { Component, useEffect,useMemo, useState } from "react";
+import React, { useEffect,useMemo, useState } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { FormattedMessage } from "react-intl";
@@ -352,25 +352,29 @@ function EmployeeTable(props) {
           <>
            {item.suspendInd !== true && ( 
               <Tooltip  title={item.role}>
-                <Button
+                {/* <Button
                   size={"small"}
                   type="ghost"
                   style={{            
                     borderColor: "transparent",
                     alignSelf: "flex-end",
                   }}
-                  onClick={() => {
-                    handleEmployeeDrawerForAdmin(true);
-                    handleSetCurrentEmployeeId(item.employeeId)
-                  }}
-                >
+                
+                > */}
+                { item.role === "ADMIN" ?(
 <CellTowerIcon 
+  // onClick={() => {
+  //   handleEmployeeDrawerForAdmin(true);
+  //   handleSetCurrentEmployeeId(item.employeeId)
+  // }}
  style={{ 
-  color: item.role === "ADMIN" ?"blue":  "green",
+  // color: item.role === "ADMIN" ?"blue":  "",
   fontSize: "123%"
   }}
 />
-                </Button>
+                ):null}
+
+                {/* </Button> */}
               </Tooltip>
                )}
           </>
@@ -417,7 +421,7 @@ function EmployeeTable(props) {
         return (
           <>
            
-           <Tooltip title="Notify">
+           <Tooltip title="Add as Admin">
            <CircleNotificationsIcon
            style={{ cursor: "pointer",fontSize: "1rem" }}
            onClick={() => {

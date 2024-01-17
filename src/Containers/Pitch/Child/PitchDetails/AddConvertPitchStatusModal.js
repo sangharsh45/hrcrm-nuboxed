@@ -11,8 +11,8 @@ const AddConvertPitchStatusModal = (props) => {
     <>
       <StyledDrawer
         title={<FormattedMessage
-          id="app.Pitch"
-          defaultMessage="Pitch"
+          id="app.convertasInvestor"
+          defaultMessage="Convert as Investor"
         />}
         width={drawerWidth}
         style={{marginTop:"3rem"}}

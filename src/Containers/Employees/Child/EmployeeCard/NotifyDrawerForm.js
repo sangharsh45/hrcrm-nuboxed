@@ -45,11 +45,11 @@ function NotifyDrawerForm(props){
             orgId:props.orgId,
     
         }}
-        
         onSubmit={(values, { resetForm }) => {
-          let timeZoneFirst = values.timeZone;
+          console.log(values);
+          let timeZoneFirst = values.timeZone || "";
           console.log(timeZone);
-    
+          
           let mytimeZone = timeZoneFirst.substring(4, 10);
           console.log(mytimeZone);
           var a = mytimeZone.split(":");
@@ -68,27 +68,27 @@ function NotifyDrawerForm(props){
           console.log(firstStartTime);
           let firstStartHours = firstStartTime.substring(0, 5); // getting only hours and minutes
           console.log(firstStartHours);
-    
+
           let timeEndPart = firstStartTime.substring(5, 13); // getting seconds and rest
           console.log(timeEndPart);
-    
+
           var firstStartTimeSplit = firstStartHours.split(":"); // removing the colon
           console.log(firstStartTimeSplit);
           var minutes =
             +firstStartTimeSplit[0] * 60 + +firstStartTimeSplit[1]; // converting hours into minutes
           console.log(minutes);
-    
+
           var firstStartTimeminutes = minutes - timeZoneminutes; // start time + time zone
           console.log(firstStartTimeminutes);
-    
+
           let h = Math.floor(firstStartTimeminutes / 60); // converting to hours
           let m = firstStartTimeminutes % 60;
           h = h < 10 ? "0" + h : h;
           m = m < 10 ? "0" + m : m;
           let finalStartTime = `${h}:${m}`;
-    
+
           let newStartTime = `${finalStartTime}${timeEndPart}`;
-    
+
           let newEndDate = dayjs(values.endDate).format("YYYY-MM-DD");
           let firstEndTime = dayjs(values.endTime).format("HH:mm:ss.SSS[Z]"); // getting start time from form input
           let firstEndHours = firstEndTime.substring(0, 5); // getting only hours and minutes
@@ -102,17 +102,24 @@ function NotifyDrawerForm(props){
           hr = hr < 10 ? "0" + hr : hr;
           mi = mi < 10 ? "0" + mi : mi;
           let finalEndTime = `${hr}:${mi}`;
-          let newEndTime = `${finalEndTime}${timeEndPart}`;
-                props.UpdateAdminUser(
-                    {
-                        ...values,
-                        startDate: `${newStartDate}T${newStartTime}`,
-                        endDate: `${newEndDate}T${newEndTime}`,
-                        adminInd: admini ? "true" : "false",
-                    },);
 
-                resetForm()
-        }}
+          let newEndTime = `${finalEndTime}${timeEndPart}`;
+
+        
+          props.UpdateAdminUser(
+                {
+                  ...values,
+                  startDate: `${newStartDate}T20:00:00Z`,
+                  endDate: `${newEndDate}T20:00:00Z`,
+                  // startDate: `${newStartDate}T${newStartTime}`,
+                  // endDate: `${newEndDate}T${newEndTime}`,
+                  adminInd: admini ? "true" : "false",
+                },
+          
+              );
+       resetForm();
+        }} 
+       
     >
         {({
             errors,
@@ -126,7 +133,17 @@ function NotifyDrawerForm(props){
             <MainWrapper style={{ minHeight: "50%" }}>
                 <Form>
                     <div class="flex justify-between" >
+                    <div>
+                            <Switch
+                              style={{ width: "6.25em" }}
+                              checked={props.userAdminnoti.adminInd||admini}
+                              onChange={handleAdmini}
+                              checkedChildren="Admin"
+                              unCheckedChildren="User"
+                            />
+                          </div>
                         <div class=" h-full w-[45%]">
+                     
                             <div class="justify-between">
                             <div class=" w-1/2">
                             <Field
@@ -150,7 +167,7 @@ function NotifyDrawerForm(props){
                               }}
                             />
                           </div>
-                         
+                        
                     </div>
                         </div>
                         <div class=" h-full w-[45%]">
@@ -191,15 +208,7 @@ function NotifyDrawerForm(props){
                         </div>
                      
                             </div>
-                            <div>
-                            <Switch
-                              style={{ width: "6.25em" }}
-                              checked={props.userAdminnoti.adminInd||admini}
-                              onChange={handleAdmini}
-                              checkedChildren="Yes"
-                              unCheckedChildren="No"
-                            />
-                          </div>
+                          
                         </div>
     
                             
