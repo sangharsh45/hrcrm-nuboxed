@@ -17,7 +17,7 @@ const ShowProductBuilderModal = (props) => {
                 closable
                 destroyOnClose
                 maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}
-                style={{ top: 40 }}
+                style={{ marginTop:"3rem" }}
                 onClose={() => props.handleProductBuilder(false)}
                 footer={null}
             >
