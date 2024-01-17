@@ -219,8 +219,8 @@ const QCPhoneListByTechnician = (props) => {
                         {item.qrCodeId ? (
                              <QRCodeModal
                                  qrCodeId={item.qrCodeId ? item.qrCodeId : ''}
-                                 imgHeight={"2.8em"}
-                                 imgWidth={"2.8em"}
+                                 imgHeight={"2.8rem"}
+                                 imgWidth={"2.8rem"}
                                  imgRadius={20}
                             />
                          ) : (

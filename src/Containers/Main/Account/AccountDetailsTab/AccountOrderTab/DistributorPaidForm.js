@@ -23,8 +23,8 @@ function DistributorPaidForm(props) {
   });
   const payOption = props.paymentModee.map((item) => {
     return {
-      label: item.currencyName || "",
-      value: item.currencyId,
+      label: item.name || "",
+      value: item.paymentCatagoryId,
     };
   });
   useEffect(() => {

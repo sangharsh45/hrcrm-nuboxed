@@ -507,6 +507,7 @@ import AllSpareListByOrder from "./AllSpareListByOrder";
 import { OnlyWrapCard } from "../../../Components/UI/Layout";
 import ShowProductBuilderModal from "./ShowProductBuilderModal";
 import { FormattedMessage } from "react-intl";
+import ExtensionIcon from '@mui/icons-material/Extension';
 
 const EditableCell = ({
     editing,
@@ -731,8 +732,8 @@ const ProductionOrderList = (props) => {
                                         </div>
                                     </div>
                                     <div className=" flex font-medium  md:w-[2.2rem] max-sm:flex-row w-full max-sm:justify-between ">
-                                        <div class=" text-xs text-cardBody font-poppins text-center">
-                                            <ApprovalOutlined
+                                        <div class=" text-xs cursor-pointer text-cardBody font-poppins text-center">
+                                            <ExtensionIcon
                                                 onClick={() => {
                                                     handleRowData(item);
                                                     props.handleAllSpareList(true)
