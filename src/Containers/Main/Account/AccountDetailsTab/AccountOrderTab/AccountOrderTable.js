@@ -248,7 +248,7 @@ const AccountOrderTable = (props) => {
 
 
                                                 <h4 class=" text-xs text-cardBody font-poppins">
-                                                    {item.suggestedPrice}
+                                                    {`${item.orderCurrencyName || ""} ${item.finalPrice || ""}`}
                                                 </h4>
 
                                             </div>

@@ -4,7 +4,6 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { getNoOfTechnicianById } from "./RefurbishAction"
 import QCPhoneListByTechnician from './QCPhoneListByTechnician'
-// import PhoneListByTechnician from './PhoneListByTechnician'
 
 const TechnicianListByOrderId = (props) => {
 
@@ -56,15 +55,17 @@ const TechnicianListByOrderId = (props) => {
                 dataSource={props.technicianByID}
                 pagination={false}
                 columns={column}
+                loading={props.fetchingNoofTecnician}
             />
-            {show && <QCPhoneListByTechnician row={row} />}
+            {show && <QCPhoneListByTechnician row={row} orderPhoneId={props.rowData.orderPhoneId} />}
         </div>
     )
 }
 
 
-const mapStateToProps = ({ auth, production }) => ({
-    technicianByID: production.technicianByID
+const mapStateToProps = ({ auth, refurbish }) => ({
+    technicianByID: refurbish.technicianByID,
+    fetchingNoofTecnician: refurbish.fetchingNoofTecnician
 });
 
 const mapDispatchToProps = (dispatch) =>

@@ -30,7 +30,7 @@ const OrderQCandRepairHistory = (props) => {
                     }
                     key="1">
                     <Suspense fallback={<BundleLoader />}>
-                        <TechnicianListByOrderId />
+                        <TechnicianListByOrderId rowData={props.rowData} />
                     </Suspense>
                 </TabPane>
                 <TabPane
@@ -43,7 +43,7 @@ const OrderQCandRepairHistory = (props) => {
                     }
                     key="2">
                     <Suspense fallback={<BundleLoader />}>
-                        <RepairTechnicianList />
+                        <RepairTechnicianList rowData={props.rowData} />
                     </Suspense>
                 </TabPane>
 
