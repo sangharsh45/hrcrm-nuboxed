@@ -27,7 +27,7 @@ class ModuleTab extends Component {
     return (
       <>
            <div class="flex flex-nowrap" >
-          <div class ="w-[70%]" >
+          <div class ="w-[100%]" >
             <TabsWrapper>
               <StyledTabs defaultActiveKey="0" onChange={this.handleTabChange}>
                 <TabPane

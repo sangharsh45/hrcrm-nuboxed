@@ -1,78 +1,56 @@
-import React, { Component } from "react";
+import React, { useEffect,useState } from "react";
 import { connect } from "react-redux";
-import CRMStatusToggle from "../../Department/CRMStatusToggle";
 import ViewEditCard from "../../../../Components/UI/Elements/ViewEditCard";
 import styled from "styled-components";
+import {addingModules,getModules} from "../Module/ModuleAction"
 import { FlexContainer } from "../../../../Components/UI/Layout";
-import IMStatusToggle from "../../Department/IMStatusToggle";
-import AccountingStatusToggle from "../../Department/AccountingStatusToggle";
-import RecruitProStatusToggle from "../../Department/RecruitProStatusToggle";
-import HrStatusToggle from "../../Department/HrStatusToggle";
 import { bindActionCreators } from "redux";
-import { Button,Input } from "antd";
-import { BundleLoader } from "../../../../Components/Placeholder";
 import { MainWrapper } from "../../../../Components/UI/Layout";
-import { TextInput,  } from "../../../../Components/UI/Elements";
 import { Select } from "../../../../Components/UI/Elements";
-import moment from "moment";
-import SingleModuleList from "./SingleModuleList";
+import { Popconfirm, Switch } from "antd";
 
 const { Option } = Select;
 
-class ModuleList extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      linkedDepartments: [],
-      isTextInputOpen: false,
-      addingDepartment: false,
-      departmentName: "",
-      singleDepartment: "",
-      sectorId: "",
-      editInd: true,
-      currentData: "",
+const ModuleList = (props) => {
+  useEffect(() => {
+    props.getModules(props.orgId);
+    // props.getRequirementsDuration(props.orgId);
+  }, []);
 
-    };
-  }
-
-  handleChangeDes = (e) => {
-    this.setState({ currentData: e.target.value });
-  
-    if (e.target.value.trim() === "") {
-      this.setState((prevState) => ({ pageNo: prevState.pageNo + 1 }));
-    //   this.props.getDepartments();
-      this.props.ClearReducerDataOfDepartment();
-    }
-  };
-  handleSearch = () => {
-    if (this.state.currentData.trim() !== "") {
-      // Perform the search
-      this.props.searchDepartmentName(this.state.currentData);
+  const { crmInd } = props.moduleList;
+  console.log(crmInd);
+  const [crmStatus, setCrmStatus] = useState(crmInd);
+  function handleCrmClick(checked) {
+    console.log(crmInd);
+    if (crmInd) {
+      //disable url
+      props.addingModules({
+        ...props.moduleList,
+        orgId: props.orgId,
+        type:"crm",
+        crmInd: crmInd ? false : true,
+      });
+      setCrmStatus(crmInd ? false : true);
     } else {
-      console.error("Input is empty. Please provide a value.");
+      props.addingModules(
+        {
+          ...props.moduleList,
+          orgId: props.orgId,
+          type:"crm",
+          crmInd: crmInd ? false : true,
+        },
+        props.orgId
+      );
+      setCrmStatus(crmInd ? false : true);
     }
-  };
-
-  setCurrentData = (value) => {
-    this.setState({ currentData: value });
-  };
-
-  render() {
-    const {
-      fetchingDepartments,
-      fetchingDepartmentsError,
-      updatingDepartments,
-      values,
-
-    } = this.props;
-    const {
-      isTextInputOpen,
-      departmentName,
-      singleDepartment,
-      linkedDepartments,
-      sectorId
-    } = this.state;
-  
+  }
+  function handleCrmCancel() {
+    if (crmInd) {
+      setCrmStatus(true);
+    } else {
+      setCrmStatus(false);
+    }
+  }
 
     return (
       <>
@@ -84,16 +62,6 @@ class ModuleList extends Component {
               color: "#FFFAFA",
             }}
           >
-                       <div class=" flex w-[18vw]" >
-                       <Input
-         placeholder="Search by Name"
-        style={{width:"100%",marginLeft:"0.5rem"}}
-            // suffix={suffix}
-            onPressEnter={this.handleSearch}  
-            onChange={this.handleChangeDes}
-            // value={currentData}
-          />
-        </div>
             <div class=" flex flex-col" >
               {/* <Title style={{ padding: 8 }}>Designation</Title> */}
               <MainWrapper style={{ height: "30em", marginTop: "0.625em" }}>
@@ -103,55 +71,26 @@ class ModuleList extends Component {
             viewType === "view" ? (
               <div class="flex" >
                 <div class="w-full flex-row">
-              <div class=" flex justify-between" >
+              <div class=" flex " >
              
                     <h1>CRM</h1>
                     <div   class=" w-[7%] ml-2">
-                    <CRMStatusToggle
-                    //   crmInd={crmInd}
-                    //   departmentName={departmentName}
-                    //   departmentId={departmentId}
-                    />  
+                    <Popconfirm
+                        title="Do you wish to change Status ? "
+                        onConfirm={handleCrmClick}
+                        onCancel={handleCrmCancel}
+                        okText="Yes"
+                        cancelText="No"
+                      >
+                        <Switch
+                          style={{ width: "5em" }}
+                          checked={crmStatus || crmInd}
+                          checkedChildren="Yes"
+                          unCheckedChildren="No"
+                        />
+                      </Popconfirm>
                     </div>
-                    <h1>IM</h1>
-                    <div class=" w-[7%] ml-2">
-                    <IMStatusToggle
-                    //   imInd={imInd}
-                    //   departmentName={departmentName}
-                    //   departmentId={departmentId}
-                    />  
-                    </div>
-                    <h1>HR</h1>
-                    <div 
-                   class=" w-[8%] ml-2"
-                    >
-                    <HrStatusToggle
-                    //   hrInd={hrInd}
-                    //   departmentName={departmentName}
-                    //   departmentId={departmentId}
-                    />  
-                    </div>
-                    <h1>Accounting</h1>
-                    <div 
-                   class=" w-[8%] ml-2"
-                    >
-                    <AccountingStatusToggle
-                    //   accountInd={accountInd}
-                    //   departmentName={departmentName}
-                    //   departmentId={departmentId}
-                    />  
-                    </div>
-
-                    <h1>RecruitPro</h1>
-                    <div 
-                  class=" w-[8%] ml-2"
-                    >
-                    <RecruitProStatusToggle
-                    //   recruitOppsInd={recruitOppsInd}
-                    //   departmentName={departmentName}
-                    //   departmentId={departmentId}
-                    />  
-                    </div>
+           
                    
                 
               </div>
@@ -192,7 +131,7 @@ class ModuleList extends Component {
       </DepartmentWrapper>
                 {/* {departments.length ? (
                   departments.map((department, i) => ( */}
-                    <SingleModuleList
+                    {/* <SingleModuleList
                     //   key={i}
                       value={singleDepartment}
                       name="singleDepartment"
@@ -208,7 +147,7 @@ class ModuleList extends Component {
                       currentData={this.state.currentData}
                       setCurrentData={this.setCurrentData}
                      handleDeleteDepartment={this.handleDeleteDepartment}
-                    />
+                    /> */}
                   {/* )) */}
                   {/* ) : (
                     <p>No Data Available</p>
@@ -220,19 +159,25 @@ class ModuleList extends Component {
           </MainWrapper>
          
         </div>
-        <h4>Updated on {moment(this.props.departments && this.props.departments.length && this.props.departments[0].updationDate).format("ll")} by {this.props.departments && this.props.departments.length && this.props.departments[0].name}</h4>
+        {/* <h4>Updated on {moment(this.props.departments && this.props.departments.length && this.props.departments[0].updationDate).format("ll")} by {this.props.departments && this.props.departments.length && this.props.departments[0].name}</h4> */}
       </>
     );
   }
-}
 
-const mapStateToProps = ({ departments, sector }) => ({
+
+const mapStateToProps = ({ module, auth }) => ({
+  userId: auth.userDetails.userId,
+  orgId: auth.userDetails.organizationId,
+  moduleList: module.moduleList,
+  fetchingModules: module.fetchingModules,
+  fetchingModulesError: module.fetchingModulesError,
 
 });
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
-
+      getModules,
+      addingModules
     },
     dispatch
   );

@@ -8,6 +8,7 @@ import { Button,Switch} from "antd";
 import dayjs from "dayjs";
 import { DatePicker } from "../../../../Components/Forms/Formik/DatePicker";
 import {UpdateAdminUser,getAdminUser} from "../../EmployeeAction";
+import moment from "moment";
 
 function NotifyDrawerForm(props){
     useEffect(()=>{
@@ -38,8 +39,12 @@ function NotifyDrawerForm(props){
         <Formik
         initialValues={{
             userId: props.userId,
-            startDate: startDate || dayjs(),
-            endDate: endDate || null,
+           startDate: props.userAdminnoti.startDate
+      ? moment.utc(props.userAdminnoti.startDate)
+      : moment(),
+    endDate: props.userAdminnoti.endDate
+      ? moment.utc(props.userAdminnoti.endDate)
+      : moment(),
             adminInd: admini ? "true" : "false", 
             employeeId:props.currentEmployeeId.employeeId,
             orgId:props.orgId,
@@ -132,7 +137,7 @@ function NotifyDrawerForm(props){
         }) => (
             <MainWrapper style={{ minHeight: "50%" }}>
                 <Form>
-                    <div class="flex justify-between" >
+                  
                     <div>
                             <Switch
                               style={{ width: "6.25em" }}
@@ -142,7 +147,10 @@ function NotifyDrawerForm(props){
                               unCheckedChildren="User"
                             />
                           </div>
-                        <div class=" h-full w-[45%]">
+                          
+                          {admini && (
+                          <div class="flex justify-between mt-4" >
+                        <div class=" h-full w-[35%]">
                      
                             <div class="justify-between">
                             <div class=" w-1/2">
@@ -157,10 +165,11 @@ function NotifyDrawerForm(props){
                               }
                               isColumn
                               component={DatePicker}
-                            //   defaultValue={{
-                            //     label: props.userAdminnoti.dayjs(startDate),
-                            //     // value: props.userAdminnoti.startDate,
-                            //   }}
+                              value={values.startDate}
+                              // defaultValue={{
+                              //   // label: props.userAdminnoti.dayjs(startDate),
+                              //    value: props.userAdminnoti.startDate,
+                              // }}
                               inlineLabel
                               style={{
                                 width: "100%",
@@ -170,7 +179,7 @@ function NotifyDrawerForm(props){
                         
                     </div>
                         </div>
-                        <div class=" h-full w-[45%]">
+                        <div class=" h-full w-[35%]">
                             <div class="justify-between">
                             <div class=" w-1/2">
                           <Field
@@ -186,7 +195,7 @@ function NotifyDrawerForm(props){
                             component={DatePicker}
                             isColumn
                             value={values.endDate || values.startDate}
-                            defaultValue={dayjs("2015-01-01")}
+
                             inlineLabel
                             style={{
                               width: "100%",
@@ -213,6 +222,7 @@ function NotifyDrawerForm(props){
     
                             
                         </div>
+                          )}
              
                         <div class="flex justify-end">
                                 <Button
