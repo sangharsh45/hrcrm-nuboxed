@@ -1,7 +1,7 @@
 import React, { useState, lazy, useEffect } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import {  Tooltip, Button, } from "antd";
+import { Tooltip, Button, } from "antd";
 import { getAllShipper } from "../../../../Shipper/ShipperAction";
 import moment from "moment";
 import NoteAltIcon from "@mui/icons-material/NoteAlt";

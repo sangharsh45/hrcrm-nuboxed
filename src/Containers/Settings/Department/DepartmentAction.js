@@ -388,7 +388,7 @@ export const linkElearningToggle = ( data,departmentId,cb) => (dispatch) => {
     type: types.LINK_ELEARNING_TOGGLE_REQUEST,
   });
   axios
-  .put(`${base_url}/department/recruitOppsInd/${departmentId}`, data, {
+  .put(`${base_url}/department/all/indicator/${departmentId}`, data, {
     headers: {
       Authorization: "Bearer " + sessionStorage.getItem("token") || "",
     },
