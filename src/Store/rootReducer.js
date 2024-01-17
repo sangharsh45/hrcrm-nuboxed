@@ -84,6 +84,9 @@ import { productReducer } from "../Containers/Product/ProductReducer";
 import { investorListReducer } from "../Containers/Settings/Category/InvestorTab/InvestorListReducer";
 import { procurementReducer } from "../Containers/Procurement/ProcurementReducer";
 import { catgPaymentReducer } from "../Containers/Settings/Category/Payment/PaymentReducer";
+import { itemTaskReducer } from "../Containers/Settings/Category/ItemTask/ItemTaskReducer";
+import { moduleReducer } from "../Containers/Settings/Category/Module/ModuleReducer";
+
 
 const appReducer = combineReducers({
   dashboard: dashboardReducer,
@@ -164,6 +167,8 @@ const appReducer = combineReducers({
   investorList:investorListReducer,
   procurement:procurementReducer,
   payments:catgPaymentReducer,
+  itemTask:itemTaskReducer,
+  module:moduleReducer,
 });
 
 const rootReducer = (state, action) => {

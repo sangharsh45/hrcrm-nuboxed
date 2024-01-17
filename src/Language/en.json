@@ -363,5 +363,16 @@
   "app.item":"Items",
   "app.repair":"Repair",
   "app.estimatedtime":"Estimated Time",
-  "app.hours":"Hour"
+  "app.hours":"Hour",
+  "app.orderid":"Order ID",
+  "app.balance":"Balance",
+  "app.expectedprice":"Expected Price",
+  "app.deliverydate":"Delivery Date",
+  "app.imei":"IMEI",
+  "app.os":"OS",
+  "app.gb":"GB",
+  "app.color":"Color",
+  "app.conditions":"Condition",
+  "app.technicianname":"Technician Name"
+  
 }
