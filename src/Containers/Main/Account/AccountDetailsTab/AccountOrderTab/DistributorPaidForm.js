@@ -112,11 +112,7 @@ function DistributorPaidForm(props) {
                   <div style={{ width: "31%" }}>
                     <Field
                       name="date"
-                      label={
-                        <FormattedMessage
-                          id="app.date"
-                          defaultMessage="Date"
-                        />}
+                      label="Date "
                       isColumn
                       inlineLabel
                       width={"100%"}

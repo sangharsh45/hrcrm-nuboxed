@@ -969,15 +969,7 @@ export const distributorReducer = (state = initialState, action) => {
       return {
         ...state,
         addingPaidByDistributorId: false,
-        addPaidButtonModal: false,
 
-        distributorOrder: state.distributorOrder.map((item) => {
-          if (item.orderId == action.payload.orderId) {
-            return action.payload;
-          } else {
-            return item;
-          }
-        }),
       };
     case types.ADD_PAID_BY_DISTRIBUTOR_ID_FAILURE:
       return {
