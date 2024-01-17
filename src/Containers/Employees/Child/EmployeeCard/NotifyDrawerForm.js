@@ -234,6 +234,11 @@ function NotifyDrawerForm(props){
                                     Submit
                                 </Button>
                             </div>
+                            <h4 class="mt-4">
+                Updated on{" "}
+                {moment(props.userAdminnoti.updatedOn).format("ll")} by{" "}
+                {props.userAdminnoti.updatedBy}
+              </h4>
                 </Form>
             </MainWrapper>
         )}
