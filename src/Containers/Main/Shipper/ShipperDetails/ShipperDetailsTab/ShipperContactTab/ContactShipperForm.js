@@ -17,7 +17,7 @@ import {
   addContactShipper,
   getShipperByShipperId,
 } from "../../../ShipperAction";
-
+import {getCountries} from "../../../../../Auth/AuthAction";
 import { getDesignations } from "../../../../../Settings/Designation/DesignationAction";
 import { getDepartments } from "../../../../../Settings/Department/DepartmentAction";
 const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-])|(\\([0-9]{2,3}\\)[ \\-])|([0-9]{2,4})[ \\-])?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
@@ -30,22 +30,20 @@ phoneNo: Yup.string().matches(phoneRegExp, 'Mobile number is not valid').min(8,"
 const { Option } = Select;
 
 class ContactShipperForm extends Component {
-  // componentDidMount() {
-  //   this.props.getShipperByShipperId(this.props.shipperId);
-  // }
   componentDidMount() {
     this.props.getDesignations();
     this.props.getDepartments();
+    this.props.getCountries();
   }
 
   render() {
-    console.log(this.props.shipperDetailsByShipperId);
-    // const modeOption = this.props.shipperDetailsByShipperId.map((item) => {
-    //   return {
-    //     label: item.shipByName || null,
-    //     value: item.shipById,
-    //   };
-    // });
+    
+    const Dialcodes= this.props.countries.map((item,i) =>{
+      return {
+        label: `+${item.country_dial_code}`,
+        value: `+${item.country_dial_code}`,
+      };  
+    });
     const designation = this.props.designations.map((item) => {
       return {
         label: item.designationType || "",
@@ -205,12 +203,13 @@ class ContactShipperForm extends Component {
                         label={<FormattedMessage id="app.dialcode" defaultMessage="Dial Code" />}
                         isColumn
                         margintop={"0.25em"}
-                        selectType="dialCode"
-                        component={SearchSelect}
+                        // component={SearchSelect}
+                        component={SelectComponent}
+                        options={Array.isArray(Dialcodes) ? Dialcodes : []}
                         defaultValue={{
                           value: this.props.user.countryDialCode,
                         }}
-                        value={values.countryDialCode}
+                        // value={values.countryDialCode}
                         inlineLabel
                         style={{ flexBasis: "80%" }}
                         isColumnWithoutNoCreate
@@ -241,11 +240,13 @@ class ContactShipperForm extends Component {
                         label={<FormattedMessage id="app.dialcode" defaultMessage="Dial Code" />}
                         isColumn
                         margintop={"0.25em"}
-                        component={SearchSelect}
+                        component={SelectComponent}
+                        options={Array.isArray(Dialcodes) ? Dialcodes : []}
+                        // component={SearchSelect}
                         defaultValue={{
                           value: this.props.user.countryDialCode,
                         }}
-                        value={values.countryDialCode1}
+                        // value={values.countryDialCode1}
                         inlineLabel
                         style={{ flexBasis: "80%" }}
                         isColumnWithoutNoCreate
@@ -388,6 +389,7 @@ const mapStateToProps = ({ auth, shipper, designations, departments }) => ({
   shipperDetailsByShipperId: shipper.shipperDetailsByShipperId,
   designations: designations.designations,
   departments: departments.departments,
+  countries: auth.countries,
 });
 
 const mapDispatchToProps = (dispatch) =>
@@ -397,6 +399,7 @@ const mapDispatchToProps = (dispatch) =>
       getShipperByShipperId,
       getDepartments,
       getDesignations,
+      getCountries
     },
     dispatch
   );
