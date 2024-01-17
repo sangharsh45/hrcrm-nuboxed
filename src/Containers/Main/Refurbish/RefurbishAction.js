@@ -1354,3 +1354,53 @@ export const getTagInProcess = (productRepurbishId) => (dispatch) => {
       });
     });
 };
+
+export const addTaskByPhoneId = (data, id) => (dispatch) => {
+  dispatch({
+    type: types.ADD_TASK_BY_PHONE_ID_REQUEST,
+  });
+  axios
+    .post(`${base_url2}/itemTask`, data, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      dispatch(getTaskByPhoneId(id))
+      dispatch({
+        type: types.ADD_TASK_BY_PHONE_ID_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      dispatch({
+        type: types.ADD_TASK_BY_PHONE_ID_FAILURE,
+        payload: err,
+      });
+    });
+};
+export const getTaskByPhoneId = (phoneId) => (dispatch) => {
+  dispatch({
+    type: types.GET_TASK_BY_PHONEID_REQUEST,
+  });
+  axios
+    .get(`${base_url2}/itemTask/itemTaskDetail/${phoneId}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.GET_TASK_BY_PHONEID_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.GET_TASK_BY_PHONEID_FAILURE,
+        payload: err,
+      });
+    });
+};

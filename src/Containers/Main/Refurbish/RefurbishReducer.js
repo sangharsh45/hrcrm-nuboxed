@@ -48,6 +48,13 @@ const initialState = {
   addingProductBuilderById: false,
   addingProductBuilderByIdError: false,
 
+  addingTaskByPhoneById: false,
+  addingTaskByPhoneByIdError: false,
+
+  fetchingTaskByPhoneId: false,
+  fetchingTaskByPhoneIdError: false,
+  taskByPhone: [],
+
   fetchingProductBuilderById: false,
   fetchingProductBuilderByIdError: false,
   builderByManufatureId: [],
@@ -982,6 +989,34 @@ export const refurbishReducer = (state = initialState, action) => {
         fetchingTagInProcessError: true,
       };
 
+    case types.ADD_TASK_BY_PHONE_ID_REQUEST:
+      return { ...state, addingTaskByPhoneById: true };
+    case types.ADD_TASK_BY_PHONE_ID_SUCCESS:
+      return {
+        ...state,
+        addingTaskByPhoneById: false,
+      };
+    case types.ADD_TASK_BY_PHONE_ID_FAILURE:
+      return {
+        ...state,
+        addingTaskByPhoneById: false,
+        addingTaskByPhoneByIdError: true,
+      };
+
+    case types.GET_TASK_BY_PHONEID_REQUEST:
+      return { ...state, fetchingTaskByPhoneId: true };
+    case types.GET_TASK_BY_PHONEID_SUCCESS:
+      return {
+        ...state,
+        fetchingTaskByPhoneId: false,
+        taskByPhone: action.payload
+      };
+    case types.GET_TASK_BY_PHONEID_FAILURE:
+      return {
+        ...state,
+        fetchingTaskByPhoneId: false,
+        fetchingTaskByPhoneIdError: true,
+      };
     default:
       return state;
   }
