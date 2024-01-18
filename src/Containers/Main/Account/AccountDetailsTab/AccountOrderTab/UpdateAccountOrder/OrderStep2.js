@@ -8,9 +8,9 @@ import DraggableUpload1 from "../../../../../../Components/Forms/Formik/Draggabl
 import { FormattedMessage } from 'react-intl';
 
 function OrderStep2(props) {
-    const [keepdata, setKeepdata] = useState(false)
+    const [xlUpdateInd, setxlUpdateInd] = useState(true)
     const handleKeepData = () => {
-        setKeepdata(true)
+        setxlUpdateInd(!xlUpdateInd)
     }
     return (
         <>
@@ -27,7 +27,8 @@ function OrderStep2(props) {
 
                         {
                             ...values,
-                            type: "Non-Catalogue"
+                            type: "Non-Catalogue",
+                            xlUpdateInd: xlUpdateInd ? false : true
                         },
                         props.distributorId
                     );
@@ -54,7 +55,7 @@ function OrderStep2(props) {
                                 </h2>
                                 <Switch
                                     onChange={handleKeepData}
-                                    checked={keepdata}
+                                    checked={xlUpdateInd}
                                     checkedChildren="Yes"
                                     unCheckedChildren="No"
                                 />

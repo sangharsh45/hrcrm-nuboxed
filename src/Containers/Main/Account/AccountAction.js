@@ -570,6 +570,12 @@ export const setEditDistributor = (name) => (dispatch) => {
   });
 };
 
+export const setEditOrder = (name) => (dispatch) => {
+  dispatch({
+    type: types.SET_ORDER_EDIT,
+    payload: name,
+  });
+};
 /**
  * update distributor modal
  */
@@ -2732,6 +2738,42 @@ export const updateOrderStep1 = (data, orderPhoneId) => (
       console.log(err);
       dispatch({
         type: types.UPDATE_ORDER_STEP1_FAILURE,
+        payload: err,
+      });
+    });
+};
+
+export const updateOrderPayment = (data, paymentId) => (
+  dispatch
+) => {
+  dispatch({
+    type: types.UPDATE_ORDER_PAYMENT_AMOUNT_REQUEST,
+  });
+  axios
+    .put(`${base_url2}/orderPayment/paymentUpdate/${paymentId}`, data,
+      {
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+        },
+      })
+    .then((res) => {
+      console.log(res);
+      // dispatch(getDistributorsByUserId(userId));
+      dispatch({
+        type: types.UPDATE_ORDER_PAYMENT_AMOUNT_SUCCESS,
+        payload: res.data,
+      });
+      Swal.fire({
+        icon: 'success',
+        title: 'Updated Succefully',
+        showConfirmButton: false,
+        timer: 1500
+      })
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.UPDATE_ORDER_PAYMENT_AMOUNT_FAILURE,
         payload: err,
       });
     });

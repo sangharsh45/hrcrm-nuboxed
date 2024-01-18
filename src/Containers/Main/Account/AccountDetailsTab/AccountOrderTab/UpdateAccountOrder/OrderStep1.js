@@ -9,7 +9,8 @@ import { SelectComponent } from '../../../../../../Components/Forms/Formik/Selec
 import { InputComponent } from "../../../../../../Components/Forms/Formik/InputComponent";
 import { TextareaComponent } from '../../../../../../Components/Forms/Formik/TextareaComponent';
 import { Button, Tooltip, message } from 'antd';
-import { addOrderForm, getContactDistributorList } from '../../../AccountAction'
+import { getCurrency } from "../../../../../Auth/AuthAction";
+import { updateOrderStep1, getContactDistributorList } from '../../../AccountAction'
 import { ExclamationCircleOutlined } from '@ant-design/icons';
 import AddressFieldArray1 from '../../../../../../Components/Forms/Formik/AddressFieldArray1';
 import { FormattedMessage } from 'react-intl';
@@ -26,10 +27,11 @@ function OrderStep1(props) {
         }
     })
     useEffect(() => {
-        props.getContactDistributorList(props.distributorId)
+        props.getContactDistributorList(props.setEdittingOrder.distributorId)
+        props.getCurrency()
     }, [])
-
-    const [priority, setPriority] = useState("High")
+    console.log(props.setEdittingOrder)
+    const [priority, setPriority] = useState(props.setEdittingOrder.priority)
 
     function handleButtonClick(type) {
         console.log(type)
@@ -38,37 +40,47 @@ function OrderStep1(props) {
     const currencyOption = props.currencies.map((item) => {
         return {
             label: item.currencyName || "",
-            value: item.currencyName,
+            value: item.currencyId,
         };
     });
     return (
         <Formik
             initialValues={{
-                availabilityDate: "",
-                deliveryDate: "",
-                contactPersonId: "",
-                paymentInTerms: "",
-                comments: "",
-                awbNo: "",
+                availabilityDate: props.setEdittingOrder.availabilityDate || "",
+                // deliveryDate: props.setEdittingOrder.deliveryDate || "",
+                contactPersonId: props.setEdittingOrder.contactPersonId || "",
+                paymentInTerms: props.setEdittingOrder.paymentInTerms || "",
+                comments: props.setEdittingOrder.comments || "",
+                awbNo: props.setEdittingOrder.awbNo || "",
                 deliverToBusinessInd: "",
                 fullLoadTruckInd: "",
                 privateInd: "",
-                advancePayment: "",
-                distributorId: props.distributorId,
+                advancePayment: props.setEdittingOrder.advancePayment || "",
+                distributorId: props.setEdittingOrder.distributorId,
+                orderCurrencyId: props.setEdittingOrder.orderCurrencyId || "",
                 userId: props.userId,
-                orderId: "",
-                priority: priority || "",
+                orderId: props.setEdittingOrder.orderId || "",
+                priority: props.setEdittingOrder.priority || "",
                 loadingAddress: [
                     {
-                        address1: "",
-                        addressId: "",
-                        state: "",
-                        city: "",
-                        pinCode: "",
-                        countryId: "",
-                        latitude: "",
-                        longitude: "",
-                        country: "",
+                        addressId: props.setEdittingOrder.loadingAddress.length ?
+                            props.setEdittingOrder.loadingAddress[0].addressId : "",
+                        address1: props.setEdittingOrder.loadingAddress.length ?
+                            props.setEdittingOrder.loadingAddress[0].address1 : "",
+                        state: props.setEdittingOrder.loadingAddress.length ?
+                            props.setEdittingOrder.loadingAddress[0].state : "",
+                        city: props.setEdittingOrder.loadingAddress.length ?
+                            props.setEdittingOrder.loadingAddress[0].city : "",
+                        pinCode: props.setEdittingOrder.loadingAddress.length ?
+                            props.setEdittingOrder.loadingAddress[0].pinCode : "",
+                        countryId: props.setEdittingOrder.loadingAddress.length ?
+                            props.setEdittingOrder.loadingAddress[0].countryId : "",
+                        latitude: props.setEdittingOrder.loadingAddress.length ?
+                            props.setEdittingOrder.loadingAddress[0].latitude : "",
+                        longitude: props.setEdittingOrder.loadingAddress.length ?
+                            props.setEdittingOrder.loadingAddress[0].longitude : "",
+                        country: props.setEdittingOrder.loadingAddress.length ?
+                            props.setEdittingOrder.loadingAddress[0].country : "",
                     },
                 ],
 
@@ -91,15 +103,13 @@ function OrderStep1(props) {
             validationSchema={FormSchema}
             onSubmit={(values, { resetForm }) => {
                 console.log(priority)
-                // const date1 = moment(values.deliveryDate).format("DD-MM-YYYY")
-                // const date2 = moment(values.availabilityDate).format("DD-MM-YYYY")
                 if (values.advancePayment < 100) {
-                    props.addOrderForm({
+                    props.updateOrderStep1({
                         ...values,
                         priority: priority || "",
-                        // deliveryDate: `${date1}T20:00:00Z`,
-                        // availabilityDate: `${date2}T20:00:00Z`,
-                    }, props.distributorId);
+                    },
+                        props.setEdittingOrder.orderId,
+                        props.setEdittingOrder.distributorId);
                 } else {
                     message.success("Advance payment should be less than 100")
                 }
@@ -110,11 +120,11 @@ function OrderStep1(props) {
                     <Form>
                         <div>
                             <StyledLabel><h3>
-                            <FormattedMessage
-                 id="app.pickupaddress"
-                 defaultMessage="Pickup Address"
-                />
-                                </h3></StyledLabel>
+                                <FormattedMessage
+                                    id="app.pickupaddress"
+                                    defaultMessage="Pickup Address"
+                                />
+                            </h3></StyledLabel>
 
                             <FieldArray
                                 name="loadingAddress"
@@ -182,7 +192,7 @@ function OrderStep1(props) {
                                         label={<FormattedMessage
                                             id="app.paymenttermsindays"
                                             defaultMessage="Payment Terms (in Days)"
-                                           />}
+                                        />}
                                         isColumn
                                         inlineLabel
                                         component={SelectComponent}
@@ -191,10 +201,10 @@ function OrderStep1(props) {
                                 </div>
                                 <div class="w-[30%]">
                                     <Field
-                                     label={<FormattedMessage
-                                        id="app.airwaybill"
-                                        defaultMessage="Air Way Bill"
-                                       />}
+                                        label={<FormattedMessage
+                                            id="app.airwaybill"
+                                            defaultMessage="Air Way Bill"
+                                        />}
                                         name="awbNo"
                                         component={InputComponent}
                                         inlineLabel
@@ -204,11 +214,11 @@ function OrderStep1(props) {
                                 </div>
                                 <div class="w-[30%]">
                                     <Field
-                                     label={<FormattedMessage
-                                        id="app.contactperson"
-                                        defaultMessage="Contact Person"
-                                       />}
-                                
+                                        label={<FormattedMessage
+                                            id="app.contactperson"
+                                            defaultMessage="Contact Person"
+                                        />}
+
                                         name="contactPersonId"
                                         placeholder="Value"
                                         component={SelectComponent}
@@ -227,7 +237,7 @@ function OrderStep1(props) {
                                         label={<FormattedMessage
                                             id="app.advancepayment"
                                             defaultMessage="Advance Payment(%)"
-                                           />}
+                                        />}
                                         isColumn
                                         inlineLabel
                                         component={InputComponent}
@@ -235,11 +245,11 @@ function OrderStep1(props) {
                                 </div>
                                 <div class="w-[22%]">
                                     <Field
-                                        name="currency"
+                                        name="orderCurrencyId"
                                         label={<FormattedMessage
                                             id="app.currency"
                                             defaultMessage="Currency"
-                                           />}
+                                        />}
                                         isColumn
                                         inlineLabel
                                         component={SelectComponent}
@@ -252,7 +262,7 @@ function OrderStep1(props) {
                                         label={<FormattedMessage
                                             id="app.deliverydate"
                                             defaultMessage="Delivery Date"
-                                           />}
+                                        />}
                                         isColumn
                                         inlineLabel
                                         width={"100%"}
@@ -263,15 +273,15 @@ function OrderStep1(props) {
 
                                 <div class="w-[22%]">
                                     <StyledLabel><FormattedMessage
-                                            id="app.priority"
-                                            defaultMessage="Priority"
-                                           /></StyledLabel>
+                                        id="app.priority"
+                                        defaultMessage="Priority"
+                                    /></StyledLabel>
                                     <div class="justify-between flex">
                                         <div>
                                             <Tooltip title={<FormattedMessage
-                                            id="app.high"
-                                            defaultMessage="High"
-                                           />}>
+                                                id="app.high"
+                                                defaultMessage="High"
+                                            />}>
                                                 <Button
                                                     type="primary"
                                                     shape="circle"
@@ -290,9 +300,9 @@ function OrderStep1(props) {
                                             </Tooltip>
                                             &nbsp;
                                             <Tooltip title={<FormattedMessage
-                                            id="app.medium"
-                                            defaultMessage="Medium"
-                                           />}>
+                                                id="app.medium"
+                                                defaultMessage="Medium"
+                                            />}>
                                                 <Button
                                                     type="primary"
                                                     shape="circle"
@@ -311,9 +321,9 @@ function OrderStep1(props) {
                                             </Tooltip>
                                             &nbsp;
                                             <Tooltip title={<FormattedMessage
-                                            id="app.low"
-                                            defaultMessage="Low"
-                                           />}>
+                                                id="app.low"
+                                                defaultMessage="Low"
+                                            />}>
                                                 <Button
                                                     type="primary"
                                                     shape="circle"
@@ -342,7 +352,7 @@ function OrderStep1(props) {
                                         label={<FormattedMessage
                                             id="app.comment"
                                             defaultMessage="Comment"
-                                           />}
+                                        />}
                                         width={"100%"}
                                         isColumn
                                         component={TextareaComponent}
@@ -351,14 +361,14 @@ function OrderStep1(props) {
 
                                 <div class="w-[47%]  mt-[67px] mr-[39px] mb-[17px] ml-[-33px] flex justify-end">
                                     <Button
-                                    className="bg-[#3695cd] text-white text-xs pt-0 pr-3"
-                                    htmlType="Submit"
+                                        className="bg-[#3695cd] text-white text-xs pt-0 pr-3"
+                                        htmlType="Submit"
                                     >
                                         <FormattedMessage
                                             id="app.save"
                                             defaultMessage="Save"
-                                           />
-                                        
+                                        />
+
                                     </Button>
                                 </div>
                             </div>
@@ -375,13 +385,15 @@ const mapStateToProps = ({ auth, distributor }) => ({
     contactDistributor: distributor.contactDistributor,
     userId: auth.userDetails.userId,
     currencies: auth.currencies,
+    setEdittingOrder: distributor.setEdittingOrder
 });
 
 const mapDispatchToProps = (dispatch) =>
     bindActionCreators(
         {
-            addOrderForm,
-            getContactDistributorList
+            updateOrderStep1,
+            getContactDistributorList,
+            getCurrency
         },
         dispatch
     );
