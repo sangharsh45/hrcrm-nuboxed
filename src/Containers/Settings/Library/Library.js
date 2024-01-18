@@ -1,10 +1,9 @@
-import React, { Component } from "react";
+import React, { Component ,lazy} from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Button,Input } from "antd";
 import { MainWrapper } from "../../../Components/UI/Layout";
 import { TextInput,  } from "../../../Components/UI/Elements";
-import SingleLibrary from "./SingleLibrary";
 import moment from "moment";
 import {
   getLibrarys,
@@ -14,6 +13,7 @@ import {
   searchLibraryName,
   ClearReducerDataOfLibrary
 } from "./LibraryAction";
+const SingleLibrary = lazy(() => import("./SingleLibrary"));
 
 class Library extends Component {
   constructor(props) {

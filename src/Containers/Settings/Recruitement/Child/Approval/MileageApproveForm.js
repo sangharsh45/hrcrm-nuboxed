@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component,lazy } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Button } from "antd";
@@ -12,7 +12,7 @@ import {
     getRoles,
   } from "../../../../Settings/Category/Role/RoleAction";
 import { FormattedMessage } from "react-intl";
-import MileageLevelApproveForm from "./MileageLevelApproveForm";
+const MileageLevelApproveForm = lazy(() => import("./MileageLevelApproveForm"));
 class MileageApproveForm extends Component {
     constructor(props) {
         super(props);
@@ -125,11 +125,8 @@ class MileageApproveForm extends Component {
                         ...rest
                     }) => (
                         <Form >
-                            <div
-                                style={{
-                                    minHeight: "40vh",
-                                    width: "71%"
-                                }}>
+                            <div class=" w-[71%] min-h-{40vh}"
+                              >
 
                                 <div>
                                 <div class=" flex justify-between">

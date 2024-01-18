@@ -1,6 +1,6 @@
-import React from "react";
+import React,{lazy} from "react";
 import { ViewEditCard } from "../../../../../Components/UI/Elements";
-import RecruitmentProfileView from "./RecruitmentProfileView";
+const RecruitmentProfileView = lazy(() => import("./RecruitmentProfileView"));
 
 function RecruitmentProfileCard(props) {
   console.log(props.rules);

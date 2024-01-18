@@ -1,13 +1,14 @@
 
 
 import {} from "antd";
-import React, {  PureComponent, Suspense,  } from "react";
+import React, {  PureComponent, Suspense,lazy  } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { StyledTabs } from "../../../../../Components/UI/Antd";
 import { TabsWrapper } from "../../../../../Components/UI/Layout";
 import {getCountries} from "../../../../Auth/AuthAction"
-import SettingsHoliday from "./SettingsHoliday";
+const SettingsHoliday = lazy(() => import("./SettingsHoliday"));
+
 
 const TabPane = StyledTabs.TabPane;
 class CountryList extends PureComponent {
@@ -67,7 +68,7 @@ class CountryList extends PureComponent {
                                     {this.state.departmentData.country_id && (
                                         <Suspense fallback={"Loading..."}>
                                           
-                                            <div style={{ marginTop: 10 }}>
+                                            <div class=" mt-4">
                             <SettingsHoliday country_name={this.state.departmentData.country_name}
                             country_id={this.state.departmentData.country_id}
                             />

@@ -1,11 +1,12 @@
-import React from "react";
+import React,{lazy} from "react";
 import { StyledTabs } from "../../../../../Components/UI/Antd";
 import { TabsWrapper } from "../../../../../Components/UI/Layout";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import HiringTab from "./HiringTab";
-import TaskTab from "../Configure/TaskTab";
-import DealsTab from "./Deals/DealsTab";
+const HiringTab = lazy(() => import("./HiringTab"));
+const TaskTab = lazy(() => import("../Configure/TaskTab"));
+const DealsTab = lazy(() => import("./Deals/DealsTab"));
+
 
 const TabPane = StyledTabs.TabPane;
 

@@ -1,5 +1,7 @@
-import React from 'react'
-import VatTable from './VatTable'
+import React,{lazy} from 'react'
+const VatTable = lazy(() =>
+  import("./VatTable")
+);
 
 const Vat = () => {
     return (

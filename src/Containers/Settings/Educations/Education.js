@@ -1,11 +1,10 @@
-import React, { Component } from "react";
+import React, { Component,lazy } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { FormattedMessage } from "react-intl";
 import { Button, message,Input } from "antd";
 import { MainWrapper, } from "../../../Components/UI/Layout";
 import { TextInput, } from "../../../Components/UI/Elements";
-import SingleEducations from "./SingleEducation";
 import { BundleLoader } from "../../../Components/Placeholder";
 import {
   getEducations,
@@ -16,6 +15,9 @@ import {
   ClearReducerDataOfEducation
 } from "./EducationAction";
 import moment from "moment";
+const SingleEducations = lazy(() =>
+  import("./SingleEducation")
+);
 
 
 

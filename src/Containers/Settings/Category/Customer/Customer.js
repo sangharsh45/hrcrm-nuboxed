@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component,lazy } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { FormattedMessage } from "react-intl";
@@ -15,7 +15,10 @@ import {
   removeCustomer,
   updateCustomer
 } from "./CustomerAction";
-import SingleCustomer from "./SingleCustomer";
+const SingleCustomer = lazy(() =>
+  import("./SingleCustomer")
+);
+
 
 class Customer extends Component {
   constructor(props) {

@@ -1,10 +1,12 @@
-import React, { Component, Suspense } from "react";
+import React, { Component, Suspense,lazy } from "react";
 import { bindActionCreators } from "redux";
 import { StyledTabs } from "../../../../Components/UI/Antd";
 import { TabsWrapper } from "../../../../Components/UI/Layout";
 import { connect } from "react-redux";
 import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
-import InvestorList from "./InvestorList";
+const InvestorList = lazy(() =>
+  import("./InvestorList")
+);
 const TabPane = StyledTabs.TabPane;
 
 class InvestorTab extends Component {

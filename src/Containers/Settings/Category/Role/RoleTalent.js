@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component,lazy } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Button,Input } from "antd";
@@ -13,9 +13,10 @@ import {
     updateTalentRoles,
     removeTalentRole
 } from "./RoleAction";
-
 import { Select } from "../../../../Components/UI/Elements";
-import SingleRoleTalent from "./SingleRoleTalent";
+const SingleRoleTalent = lazy(() =>
+  import("./SingleRoleTalent")
+);
 const { Option } = Select;
 
 class RoleTalent extends Component {

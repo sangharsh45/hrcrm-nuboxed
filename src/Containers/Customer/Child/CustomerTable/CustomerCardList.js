@@ -439,7 +439,7 @@ const [rowdata, setrowdata] = useState("");
             </div>
                         <div>
                         <span
-              style={{ cursor: "pointer" ,fontSize: "0.8rem"}}
+              style={{ fontSize: "0.8rem"}}
               onClick={() => {
                 props.getCustomerDetailsById(item.customerId);
                 props.getCustomerKeySkill(item.customerId);
@@ -450,7 +450,7 @@ const [rowdata, setrowdata] = useState("");
             >
               {" "}
               {user.pulseAccessInd === true && <MonitorHeartIcon  style={{
-                cursor: "pointer",
+               cursor: "pointer",
                 fontSize: "1rem",
                 color: "#df9697"}}/>}
             </span> 
@@ -468,7 +468,7 @@ const [rowdata, setrowdata] = useState("");
                   handleCustomerPulseDrawerModal(true);
                   handleSetCurrentCustomer(item);
                 }}
-                style={{ fontSize: "1rem", color: "#df9697" }}
+                style={{ fontSize: "1rem", cursor: "pointer",color: "#df9697" }}
               />
            </Tooltip>
                         </div>

@@ -1,10 +1,9 @@
-import React, { Component, } from "react";
+import React, { Component,lazy } from "react";
 import { connect } from "react-redux";
 import BorderColorIcon from '@mui/icons-material/BorderColor';
 import { FormattedMessage } from "react-intl";
 import DeleteIcon from '@mui/icons-material/Delete';
 import { bindActionCreators } from "redux";
-
 import {
   handleProcessHiringModal,
   updateProcessNameForOpportunity,
@@ -30,8 +29,8 @@ import {
 import { StyledTabs } from "../../../../../Components/UI/Antd";
 import {  Select } from "../../../../../Components/UI/Elements";
 import { elipsize } from "../../../../../Helpers/Function/Functions";
-import AddProcessModalForHiring from "./AddProcessModalForHiring";
-import SingleOpportunityStages from "./SingleOpportunityStages";
+const AddProcessModalForHiring = lazy(() => import("./AddProcessModalForHiring"));
+const SingleOpportunityStages = lazy(() => import("./SingleOpportunityStages"));
 const { Option } = Select;
 
 const TabPane = StyledTabs.TabPane;

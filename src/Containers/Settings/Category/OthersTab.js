@@ -1,4 +1,4 @@
-import React, { Component, Suspense } from "react";
+import React, { Component,lazy, Suspense } from "react";
 import { bindActionCreators } from "redux";
 import { StyledTabs } from "../../../Components/UI/Antd";
 import { TabsWrapper } from "../../../Components/UI/Layout";
@@ -7,11 +7,21 @@ import LanguageIcon from '@mui/icons-material/Language';
 import ReceiptIcon from '@mui/icons-material/Receipt';
 import RememberMeIcon from '@mui/icons-material/RememberMe';
 import InsertDriveFileIcon from '@mui/icons-material/InsertDriveFile';
-import Documents from "../Documents/Documents"
-import Education from "../Educations/Education"
-import Expense from "../Expense/Expense";
-import IdProofs from "../Id Proof/IdProofs";
-import Country from "./Country/Country";
+const Documents = lazy(() =>
+  import("../Documents/Documents")
+);
+const Education = lazy(() =>
+  import("../Educations/Education")
+);
+const Expense = lazy(() =>
+  import("../Expense/Expense")
+);
+const IdProofs = lazy(() =>
+  import("../Id Proof/IdProofs")
+);
+const Country = lazy(() =>
+  import("./Country/Country")
+);
 const TabPane = StyledTabs.TabPane;
 
 class OthersTab extends Component {

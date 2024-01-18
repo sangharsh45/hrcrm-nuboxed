@@ -1,5 +1,7 @@
-import React from "react";
-import CategoryProfileCard from "./CategoryProfileCard";
+import React,{lazy} from "react";
+const CategoryProfileCard = lazy(() =>
+  import("./CategoryProfileCard")
+);
 
 function CategoryActionLeft(props) {
   console.log(props.rules);

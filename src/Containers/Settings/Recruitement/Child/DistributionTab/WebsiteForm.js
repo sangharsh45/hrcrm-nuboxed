@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Formik, Form, Field } from "formik";
 import {
-
   Select,
 } from "../../../../../Components/UI/Elements";
 import { MainWrapper,  } from "../../../../../Components/UI/Elements";
@@ -119,8 +118,8 @@ const handleDeptChange = (event) => {
               <div class=" flex justify-between ml-4 " >
                                                     <div class=" w-[35%]" >
                                                     <label class=" text-[#444] font-bold text-[0.75rem]" >Department</label>
-                      <select 
-                        style={{ border: "0.06em solid #aaa" }}
+                      <select  className="customize-select"
+                       
                       onChange={handleDeptChange}>
           <option value="">Select Department</option>
           {props.departments.map((item, index) => (
@@ -137,8 +136,8 @@ const handleDeptChange = (event) => {
 {single === false?(
             <div class=" w-[35%]" >
             <label class=" text-[#444] font-bold text-[0.75rem]" >User</label>
-            <select
-           style={{ border: "0.06em solid #aaa" }}
+            <select  className="customize-select"
+         
                  onChange={handleUserChange}
               >
     <option value="">select user</option>

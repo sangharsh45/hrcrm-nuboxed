@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Button, Tooltip,Switch } from "antd";
 import { FormattedMessage } from "react-intl";
+import { Listbox, } from '@headlessui/react'
 import { getlocation } from "../../Event/Child/Location/LocationAction";
 import {getCountries} from "../../Auth/AuthAction"
 import { Formik, Form, Field,FieldArray, FastField } from "formik";
@@ -12,13 +13,14 @@ import { SelectComponent } from "../../../Components/Forms/Formik/SelectComponen
 import SearchSelect from "../../../Components/Forms/Formik/SearchSelect";
 import Upload from "../../../Components/Forms/Formik/Upload";
 import { Radio } from "antd";
-import { addEmployee,getEmployeelist } from "../EmployeeAction";
+import { addEmployee,getAssignedToList } from "../EmployeeAction";
 import { DatePicker } from "../../../Components/Forms/Formik/DatePicker";
 import dayjs from "dayjs";
 import {getRoles} from "../../Settings/Category/Role/RoleAction"
 import {getDesignations} from "../../Settings/Designation/DesignationAction";
 import {getDepartments} from "../../Settings/Department/DepartmentAction";
 import AddressFieldArray from "../../../Components/Forms/Formik/AddressFieldArray";
+import { TextareaComponent } from "../../../Components/Forms/Formik/TextareaComponent";
 
 
 // const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
@@ -39,7 +41,9 @@ class EmployeeForm extends Component {
       checked: true,
       typeInd:false,
       selectedDept:"",
-
+      open: false,
+      defaultOption: props.fullName,
+      selected: props.fullName,
       selectedCountry: '',
       locations: [],
       role:[],
@@ -48,6 +52,13 @@ class EmployeeForm extends Component {
       workType: "employee",
     };
   }
+  handleSelectedChange = (value) => {
+    this.setState({ selected: value });
+  };
+  
+  toggleListbox = () => {
+    this.setState((prevState) => ({ open: !prevState.open }));
+  };
 
   glassButtoClick = (type) => {
     this.setState({ active: type });
@@ -116,12 +127,12 @@ class EmployeeForm extends Component {
   
 
   componentDidMount() {
-    const { getCountries ,getRoles,getlocation,getEmployeelist} = this.props;
+    const { getCountries ,getAssignedToList,getRoles,getlocation,} = this.props;
     console.log();
     getRoles(this.props.organizationId);
     getCountries(getCountries);
     getlocation(this.props.orgId);
-    getEmployeelist();
+    getAssignedToList(this.props.orgId)
 }
 
 getEmployeesbyDepartment (filterOptionKey, filterOptionValue) {
@@ -156,6 +167,11 @@ getEmployeesbyDepartment (filterOptionKey, filterOptionValue) {
   return StagesOptions;
 }
   render() {
+    const { selected, open } = this.state;
+    const {
+      userId,
+      assignedToList
+    } = this.props;
     console.log(this.state.selectedLocation);
     const countryNameOption = this.props.countries.map((item) => {
       return {
@@ -181,9 +197,11 @@ getEmployeesbyDepartment (filterOptionKey, filterOptionValue) {
 });
 
 
+
+
   
     const { addEmployee, addingEmployee } = this.props;
-    const { clearbit } = this.props;
+    const selectedOption = assignedToList.find((item) => item.empName === selected);
     return (
       <>
         <Formik
@@ -211,6 +229,7 @@ getEmployeesbyDepartment (filterOptionKey, filterOptionValue) {
             linkedinPublicUrl:"",
             label: "",
             workplace: "",
+            assignedTo: selectedOption ? selectedOption.employeeId : userId,
             job_type: this.state.active ? "Full Time" : "Part Time",
             type: this.state.typeInd ? "true" : "false",
             employee_type: this.state.workType,
@@ -245,7 +264,7 @@ getEmployeesbyDepartment (filterOptionKey, filterOptionValue) {
               departmentId:this.state.selectedDept,
               job_type: this.state.active ? "Full Time" : "Part Time",
               type: this.state.typeInd ? "true" : "false",
-              // job_type: this.state.active,
+              assignedTo: selectedOption ? selectedOption.employeeId : userId,
               employee_type: this.state.workType,
             },"cretiondate");
             resetForm();
@@ -526,9 +545,71 @@ getEmployeesbyDepartment (filterOptionKey, filterOptionValue) {
  
 
                 </div>
-                <div class=" w-[47.5%] max-sm:w-wk ">
 
-<div class=" flex justify-between max-sm:flex-col" >
+          
+                <div class=" w-[47.5%] max-sm:w-wk ">
+                <Listbox value={selected} onChange={(value) => this.setState({ selected: value })}>
+                <div className="relative">
+              <Listbox.Button  style={{boxShadow: "rgb(170, 170, 170) 0px 0.25em 0.62em"}} className="relative w-full leading-4 cursor-default border border-gray-300 bg-white py-0.5 pl-3 pr-10 text-left shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm">
+                {selected}
+              </Listbox.Button>
+              {open && (
+                <Listbox.Options
+                  static
+                  className="absolute z-10 mt-1 max-h-56 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
+                >
+                  {assignedToList.map((item) => (
+                    <Listbox.Option
+                      key={item.employeeId}
+                      className={({ active }) =>
+                        `relative cursor-default select-none py-2 pl-3 pr-9 ${
+                          active ? "text-white bg-indigo-600" : "text-gray-900"
+                        }`
+                      }
+                      value={item.empName}
+                    >
+                      {({ selected, active }) => (
+                        <>
+                          <div className="flex items-center">
+                            <span
+                              className={`ml-3 block truncate ${
+                                selected ? "font-semibold" : "font-normal"
+                              }`}
+                            >
+                              {item.empName}
+                            </span>
+                          </div>
+                          {selected && (
+                            <span
+                              className={`absolute inset-y-0 right-0 flex items-center pr-4 ${
+                                active ? "text-white" : "text-indigo-600"
+                              }`}
+                            >
+                              
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                className="h-5 w-5"
+                                viewBox="0 0 20 20"
+                                fill="currentColor"
+                                aria-hidden="true"
+                              >
+                                <path
+                                  fillRule="evenodd"
+                                  d="M6.293 9.293a1 1 0 011.414 0L10 11.586l2.293-2.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z"
+                                  clipRule="evenodd"
+                                />
+                              </svg>
+                            </span>
+                          )}
+                        </>
+                      )}
+                    </Listbox.Option>
+                  ))}
+                </Listbox.Options>
+              )}
+            </div>
+                </Listbox>
+<div class=" flex justify-between max-sm:flex-col mt-4" >
                       <div class=" w-w48 flex flex flex-col max-sm:w-wk">
                    <label style={{color:"#444",fontWeight:"bold",fontSize:" 0.75rem"}}>Department</label>
                       <select  className="customize-select"
@@ -895,6 +976,8 @@ getEmployeesbyDepartment (filterOptionKey, filterOptionValue) {
 const mapStateToProps = ({ auth,role,location, employee,designations,departments }) => ({
   userDetails: auth.userDetails,
   roles: role.roles,
+  fullName: auth.userDetails.fullName,
+  assignedToList:employee.assignedToList,
   organizationId: auth.userDetails.organizationId,
   orgId: auth.userDetails.organizationId,
   countries: auth.countries,
@@ -913,7 +996,7 @@ const mapDispatchToProps = (dispatch) =>
       getDepartments,
       getRoles,
       getlocation,
-      getEmployeelist,
+      getAssignedToList,
   }, dispatch);
 export default connect(mapStateToProps, mapDispatchToProps)(EmployeeForm);
 function StatusIcon({ type, iconType, tooltip, status, size, onClick, role }) {

@@ -1,11 +1,8 @@
-import React, {  } from "react";
+import React, { lazy } from "react";
 import { StyledTabs } from "../../../Components/UI/Antd";
 import { TabsWrapper } from "../../../Components/UI/Layout";
-import Certification from "../Recruitement/Child/Certification/Certification";
-
-import Library from "./Library";
-
-
+const Certification = lazy(() => import("../Recruitement/Child/Certification/Certification"));
+const Library = lazy(() => import("./Library"));
 const TabPane = StyledTabs.TabPane;
 
 function SkillsTab(props) {

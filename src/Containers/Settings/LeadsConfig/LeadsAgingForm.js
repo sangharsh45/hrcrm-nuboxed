@@ -6,7 +6,6 @@ import { FormattedMessage } from "react-intl";
 import { Formik, Form, Field, } from "formik";
 import { InputComponent } from "../../../Components/Forms/Formik/InputComponent";
 import { StyledLabel } from "../../../Components/UI/Elements";
-import { Spacer } from "../../../Components/UI/Elements";
 import { addLeadsaging, getLeadAging } from "../SettingsAction";
 
 function LeadsAgingForm(props) {
@@ -35,19 +34,9 @@ function LeadsAgingForm(props) {
       >
         {({ values }) => (
           <Form>
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "space-between",
-                height: "32vh",
-              }}
+            <div class=" flex justify-between h-[32vh]"
             >
-              <div
-                style={{
-                  height: "100%",
-                  width: "45%",
-                  marginLeft: "0.62em",
-                }}
+              <div class=" h-full w-[45%] ml-3"
               >
                 <StyledLabel style={{ fontStyle: "italic" }}>
                   Configure rules for ageing of Contacts in Leads section, if
@@ -55,22 +44,22 @@ function LeadsAgingForm(props) {
                   automatically transferred to
                 </StyledLabel>
 
-                <Spacer />
-
+<div class=" mt-3">
                 <StyledLabel style={{ fontStyle: "italic" }}>
                   Junk section. Junk leads will show up in the admin account for
                   future redistribution.
                 </StyledLabel>
-                <Spacer style={{ marginBottom: "1.87em" }} />
+                </div>
+                <div class=" mb-8">
                 <StyledLabel>
                   l<FormattedMessage
                     id="app.category"
                     defaultMessage="Category"
                   />
                 </StyledLabel>
-                <Spacer />
+                </div>
 
-                <div className="flex flex-col ">
+                <div className="flex flex-col mt-3 ">
                   <div >
                     <div class="flex justify-between w-[18rem]" >
                       <i
@@ -248,29 +237,26 @@ function LeadsAgingForm(props) {
                 </div>
               </div>
 
-              <div
-                style={{
-                  height: "100%",
-                  width: "45%",
-                  marginRight: "0.62em",
-                }}
+              <div class=" h-full w-[45%] mr-3"
               >
                 <StyledLabel style={{ color: "white" }}>.</StyledLabel>
-                <Spacer />
+              <div class=" mt-3">
                 <StyledLabel style={{ color: "white" }}>.</StyledLabel>
-                <Spacer style={{ marginBottom: "1.87em" }} />
+                </div>
+               <div class=" mb-3">
                 <StyledLabel style={{ color: "white" }}>.</StyledLabel>
-                <Spacer />
+                </div>
+                
 
-                <div style={{ marginLeft: "0%" }}>
+                <div class=" mt-3">
                   
                 </div>
               </div>
             </div>
-            <Spacer />
+        
 
               <>
-                <div class=" flex justify-end mr-[0.62em]"
+                <div class=" flex justify-end mr-3 mt-3"
                 >
                   <Popconfirm
                     // title="Do you wish to proceed?"

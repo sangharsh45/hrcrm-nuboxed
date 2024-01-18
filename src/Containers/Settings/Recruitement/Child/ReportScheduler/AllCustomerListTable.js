@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { StyledTable } from "../../../../../Components/UI/Antd";
 import {getScheduler,deleteReportSchedulerInternalData} from "../../../SettingsAction";
-
 import { Popconfirm } from "antd";
 import DeleteIcon from '@mui/icons-material/Delete';
 

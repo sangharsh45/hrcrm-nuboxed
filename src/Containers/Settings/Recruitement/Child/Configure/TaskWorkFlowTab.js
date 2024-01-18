@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component,lazy } from "react";
 import { connect } from "react-redux";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
 import { FormattedMessage } from "react-intl";
@@ -27,8 +27,8 @@ import {
 import { StyledTabs } from "../../../../../Components/UI/Antd";
 import { Select } from "../../../../../Components/UI/Elements";
 import { elipsize } from "../../../../../Helpers/Function/Functions";
-import AddTaskModal from "./AddTaskModal";
-import SingleTaskStages from "./SingleTaskStages";
+const AddTaskModal = lazy(() => import("./AddTaskModal"));
+const SingleTaskStages = lazy(() => import("./SingleTaskStages"));
 const { Option } = Select;
 
 const TabPane = StyledTabs.TabPane;

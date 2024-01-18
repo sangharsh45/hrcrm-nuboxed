@@ -1,10 +1,11 @@
-import React, {  } from "react";
+import React, { lazy } from "react";
 import { StyledTabs } from "../../../../../Components/UI/Antd";
 import { TabsWrapper } from "../../../../../Components/UI/Layout";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import WebsiteTab from "./WebsiteTab";
-import WebsiteOrderForm from "../DistributionTab/WebsiteOrderForm"
+const WebsiteTab = lazy(() => import("./WebsiteTab"));
+const WebsiteOrderForm = lazy(() => import("../DistributionTab/WebsiteOrderForm"));
+
 
 
 

@@ -1,13 +1,21 @@
-import React, { Component,  Suspense } from "react";
+import React, { Component, lazy, Suspense } from "react";
 import { bindActionCreators } from "redux";
 import { StyledTabs } from "../../../Components/UI/Antd";
 import { TabsWrapper } from "../../../Components/UI/Layout";
 import { connect } from "react-redux";
 import AccessibilityIcon from '@mui/icons-material/Accessibility';
-import Designation from "../Designation/Designation";
-import Department from "../Department/Department";
-import Role from "./Role/Role";
-import RoleTalent from "./Role/RoleTalent";
+const Designation = lazy(() =>
+  import("../Designation/Designation")
+);
+const Department = lazy(() =>
+  import("../Department/Department")
+);
+const Role = lazy(() =>
+  import("./Role/Role")
+);
+const RoleTalent = lazy(() =>
+  import("./Role/RoleTalent")
+);
 const TabPane = StyledTabs.TabPane;
 
 class Category extends Component {

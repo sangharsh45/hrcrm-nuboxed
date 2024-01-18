@@ -1,9 +1,9 @@
-import React, { Component } from 'react'
+import React, { Component,lazy } from 'react'
 import { Tabs } from 'antd';
 import { StyledTabs } from "../../../Components/UI/Antd";
 import { TabsWrapper } from '../../../Components/UI/Layout';
-import InAppNotificationSetting from "./Child/InAppNotificationSetting";
-import PushNotificationSetting from "./Child/PushNotificationSetting";
+const InAppNotificationSetting = lazy(() => import('./Child/InAppNotificationSetting'))
+const PushNotificationSetting = lazy(() => import('./Child/PushNotificationSetting'))
 const TabPane = Tabs.TabPane;
 
 class NotificationTab extends Component {

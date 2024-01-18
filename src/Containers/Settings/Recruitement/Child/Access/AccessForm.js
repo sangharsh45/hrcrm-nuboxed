@@ -40,7 +40,6 @@ const AccessForm = (props) => {
     setCheckedRequirementList(props.departmentAcces.requirement)
     setCheckedPublishList(props.departmentAcces.publish)
     setCheckedPulseList(props.departmentAcces.pulse)
-    setCheckedAccessmentList(props.departmentAcces.assessment)
     setCheckedLeadsList(props.departmentAcces.leads)
     // setCheckedTaskList(props.departmentAcces.task)
     setCheckedCustomerCommercialsList(props.departmentAcces.comercial)
@@ -76,6 +75,8 @@ const AccessForm = (props) => {
     setCheckedCollectionList(props.departmentAcces.collection)
     setCheckedCatalogList(props.departmentAcces.catalog)
     setCheckedHolidayList(props.departmentAcces.holiday)
+    setCheckedAccessmentList(props.departmentAcces.assessment)
+    setCheckedTopicList(props.departmentAcces.topic)
     
   }, [props.departmentAcces.vendor,
   props.departmentAcces.customer,
@@ -121,6 +122,7 @@ const AccessForm = (props) => {
   props.departmentAcces.collection,
   props.departmentAcces.catalog,
   props.departmentAcces.holiday,
+  props.departmentAcces.topic,
  
   
   
@@ -266,23 +268,7 @@ const AccessForm = (props) => {
   };
 
 
-   // Accessment
-
-   const [checkedAccessmentList, setCheckedAccessmentList] = useState(props.departmentAcces.assessment);
-   const [indeterminateAccessment, setIndeterminateAccessment] = useState(true);
-   const [checkAllAccessment, setCheckAllAccessment] = useState(false);
  
-   const onAccessmentChange = (list) => {
-     setCheckedAccessmentList(list);
-     setIndeterminateAccessment(!!list.length && list.length < plainOptions.length);
-     setCheckAllAccessment(list.length === plainOptions.length);
-   };
- 
-   const onCheckAllAccessmentChange = (e) => {
-     setCheckedAccessmentList(e.target.checked ? plainOptions : []);
-     setIndeterminateAccessment(false);
-     setCheckAllAccessment(e.target.checked);
-   };
 
 //Leads
    const [checkedLeadsList, setCheckedLeadsList] = useState(props.departmentAcces.leads);
@@ -913,6 +899,43 @@ const onCheckAllTeamsChange = (e) => {
                                       };
 
 
+                                                                                   //Assessment
+
+  const [checkedAccessmentList, setCheckedAccessmentList] = useState(props.departmentAcces.assessment);
+  const [indeterminateAccessment, setIndeterminateAccessment] = useState(true);
+  const [checkAllAccessment, setCheckAllAccessment] = useState(false);
+
+  const onAccessmentChange = (list) => {
+    setCheckedAccessmentList(list);
+    setIndeterminateAccessment(!!list.length && list.length < plainOptions.length);
+    setCheckAllAccessment(list.length === plainOptions.length);
+  };
+
+  const onCheckAllAccessmentChange = (e) => {
+    setCheckedAccessmentList(e.target.checked ? plainOptions : []);
+    setIndeterminateAccessment(false);
+    setCheckAllAccessment(e.target.checked);
+  };
+
+                                                                                    //Topic
+
+                                                                                    const [checkedTopicList, setCheckedTopicList] = useState(props.departmentAcces.topic);
+                                                                                    const [indeterminateTopic, setIndeterminateTopic] = useState(true);
+                                                                                    const [checkAllTopic, setCheckAllTopic] = useState(false);
+                                                                                  
+                                                                                    const onTopicChange = (list) => {
+                                                                                      setCheckedTopicList(list);
+                                                                                      setIndeterminateTopic(!!list.length && list.length < plainOptions.length);
+                                                                                      setCheckAllTopic(list.length === plainOptions.length);
+                                                                                    };
+                                                                                  
+                                                                                    const onCheckAllTopicChange = (e) => {
+                                                                                      setCheckedTopicList(e.target.checked ? plainOptions : []);
+                                                                                      setIndeterminateTopic(false);
+                                                                                      setCheckAllTopic(e.target.checked);
+                                                                                    };
+
+
 
 
   function handleUpdateAccess() {
@@ -961,6 +984,7 @@ const onCheckAllTeamsChange = (e) => {
       collection:checkedCollectionList || [],
       catalog:checkedCatalogList || [],
       holiday:checkedHolidayList || [],
+      topic:checkedTopicList || [],
       
       
       departmentId: props.departmentId,
@@ -984,12 +1008,12 @@ const onCheckAllTeamsChange = (e) => {
  
  {props.departmentData.hrInd === true ? 
  <div>
-<h1 class=" text-clr font-bold">General, HR & Self Service</h1>
+<div class=" text-clr flex justify-center text-base font-bold">General, HR & Self Service</div>
 
               <div class=" flex justify-around mt-4" >
             
               <div >
-                <h1 class="text-sm">Users</h1>
+                <div class="text-base">Users</div>
                 <Checkbox indeterminate={indeterminateUser} onChange={onCheckAllUserChange} checked={checkAllUser}>
                  <label class="text-xs"> Check all</label>
                 </Checkbox>
@@ -999,7 +1023,7 @@ const onCheckAllTeamsChange = (e) => {
               </div>
              
                 <div >
-                  <h1 class="text-sm">Locations</h1>
+                  <div class="text-base">Locations</div>
                   <Checkbox indeterminate={indeterminateLocation} onChange={onCheckAllLocationChange} checked={checkAllLocation}>
                   <label class="text-xs"> Check all</label>
                   </Checkbox>
@@ -1015,7 +1039,7 @@ const onCheckAllTeamsChange = (e) => {
             
           
               <div >
-                <h1 class="text-sm">Facility</h1>
+                <div class="text-base">Facility</div>
                 <Checkbox indeterminate={indeterminatePlant} onChange={onCheckAllPlantChange} checked={checkAllPlant}>
                 <label class="text-xs"> Check all</label>
                 </Checkbox>
@@ -1024,8 +1048,8 @@ const onCheckAllTeamsChange = (e) => {
 
               </div>
               
-              <div class="mt-4" >
-              <h1 class="text-sm">Teams</h1>
+              <div >
+              <div class="text-base">Teams</div>
               <Checkbox indeterminate={indeterminateTeams} onChange={onCheckAllTeamsChange} checked={checkAllTeams}>
                <label class="text-xs"> Check all</label>
               </Checkbox>
@@ -1039,38 +1063,16 @@ const onCheckAllTeamsChange = (e) => {
             {/* Vendor */}
        
 
-            <div class=" flex justify-around mt-4" >
-            
-         
-              </div>
+           
             {/* Vendor */}
          
-            <div class=" flex justify-around mt-4" >
+            <div class=" flex justify-around mt-8" >
               
-              {/* Contact */}
-              <div >
-              <h1 class="text-sm">Dashboard</h1>
-              <Checkbox indeterminate={indeterminateDashboard} onChange={onCheckAllDashboardChange} checked={checkAllDashboard}>
-              <label class="text-xs"> Check all</label>
-              </Checkbox>
-              <Divider />
-              <CheckboxGroup options={dashboardCheckedList} value={checkedDashboardList} onChange={onDashboardChange} />
-
-            </div>
-         
-            <div class=" mt-4" >
-                <h1 class="text-sm">Holiday</h1>
-                <Checkbox indeterminate={indeterminateHoliday} onChange={onCheckAllHolidayChange} checked={checkAllHoliday}>
-                <label class="text-xs">  Check all</label>
-                </Checkbox>
-                <Divider />
-                <CheckboxGroup options={basicCheckedList} value={checkedHolidayList} onChange={onHolidayChange} />
-
-              </div>
+          
            
         
-                <div class="mt-4">
-                <h1 class="text-sm">Repository</h1>
+                <div >
+                <div class="text-base">Repository</div>
                 <Checkbox indeterminate={indeterminateRepository} onChange={onCheckAllRepositoryChange} checked={checkAllRepository}>
                  <label class="text-xs"> Check all</label>
                 </Checkbox>
@@ -1080,7 +1082,7 @@ const onCheckAllTeamsChange = (e) => {
               </div>
                
               <div >
-                <h1 class="text-sm">Settings</h1>
+                <div class="text-base">Settings</div>
                 <Checkbox indeterminate={indeterminateSettings} onChange={onCheckAllSettingsChange} checked={checkAllSettings}>
                 <label class="text-xs">  Check all</label>
                 </Checkbox>
@@ -1089,7 +1091,7 @@ const onCheckAllTeamsChange = (e) => {
 
               </div>
               <div >
-                <h1 class="text-sm">Basic</h1>
+                <div class="text-base">Basic</div>
                 <Checkbox indeterminate={indeterminateBasic} onChange={onCheckAllBasicChange} checked={checkAllBasic}>
                 <label class="text-xs">  Check all</label>
                 </Checkbox>
@@ -1098,7 +1100,7 @@ const onCheckAllTeamsChange = (e) => {
 
               </div>
               <div >
-                <h1 class="text-sm">Mileage</h1>
+                <div class="text-base">Mileage</div>
                 <Checkbox indeterminate={indeterminateMileage} onChange={onCheckAllMileageChange} checked={checkAllMileage}>
                 <label class="text-xs">  Check all</label>
                 </Checkbox>
@@ -1107,8 +1109,8 @@ const onCheckAllTeamsChange = (e) => {
 
               </div>
           
-              <div class=" mt-4" >
-                <h1 class="text-sm">Expense</h1>
+              <div >
+                <div class="text-base">Expense</div>
                 <Checkbox indeterminate={indeterminateExpense} onChange={onCheckAllExpenseChange} checked={checkAllExpense}>
                 <label class="text-xs">  Check all</label>
                 </Checkbox>
@@ -1117,18 +1119,26 @@ const onCheckAllTeamsChange = (e) => {
 
               </div>
             
-              <div  class="mt-4">
-                <h1 class="text-sm">Leaves</h1>
-                <Checkbox indeterminate={indeterminateLeaves} onChange={onCheckAllLeavesChange} checked={checkAllLeaves}>
-                <label class="text-xs">Check all</label>
-                </Checkbox>
-                <Divider />
-                <CheckboxGroup options={melCheckedList} value={checkedLeavesList} onChange={onLeavesChange} />
-
-              </div>
+           
                  
-                   <div  class="mt-4">
-                <h1 class="text-sm">Tasks</h1>
+              
+     
+            </div>
+
+            <div class=" flex justify-around mt-8" >
+            
+           
+               <div >
+              <div class="text-base">Dashboard</div>
+              <Checkbox indeterminate={indeterminateDashboard} onChange={onCheckAllDashboardChange} checked={checkAllDashboard}>
+              <label class="text-xs"> Check all</label>
+              </Checkbox>
+              <Divider />
+              <CheckboxGroup options={dashboardCheckedList} value={checkedDashboardList} onChange={onDashboardChange} />
+
+            </div>
+            <div >
+                <div class="text-base">Tasks</div>
                 <Checkbox indeterminate={indeterminateTasks} onChange={onCheckAllTasksChange} checked={checkAllTasks}>
                 <label class="text-xs">Check all</label>
                 </Checkbox>
@@ -1136,19 +1146,40 @@ const onCheckAllTeamsChange = (e) => {
                 <CheckboxGroup options={defaultCheckedList} value={checkedTasksList} onChange={onTasksChange} />
 
               </div>
-     
-            </div>
+         
+            <div  >
+                <div class="text-base">Holiday</div>
+                <Checkbox indeterminate={indeterminateHoliday} onChange={onCheckAllHolidayChange} checked={checkAllHoliday}>
+                <label class="text-xs">  Check all</label>
+                </Checkbox>
+                <Divider />
+                <CheckboxGroup options={basicCheckedList} value={checkedHolidayList} onChange={onHolidayChange} />
+
+              </div>
+              <div>
+                <div class="text-base">Leaves</div>
+                <Checkbox indeterminate={indeterminateLeaves} onChange={onCheckAllLeavesChange} checked={checkAllLeaves}>
+                <label class="text-xs">Check all</label>
+                </Checkbox>
+                <Divider />
+                <CheckboxGroup options={melCheckedList} value={checkedLeavesList} onChange={onLeavesChange} />
+
+              </div>
+            
+              </div>
+
+         
           
             </div>
             :null}
      
     {props.departmentData.crmInd === true ? 
     <div>     
-            <h1 class=" text-clr font-bold">CRM</h1>
+            <div class=" text-clr flex justify-center text-base mt-2 font-bold">CRM</div>
           
             <div class=" flex justify-around mt-4" >
                 {/* <div >
-                  <h1>Vendor</h1>
+                  <div>Vendor</div>
                   <Checkbox indeterminate={indeterminateVendor} onChange={onCheckAllVendorChange} checked={checkAllVendor}>
                     Check all
                   </Checkbox>
@@ -1160,7 +1191,7 @@ const onCheckAllTeamsChange = (e) => {
                 /> */}
              
              <div >
-              <h1 class="text-sm">Junk</h1>
+              <div class="text-base">Junk</div>
               <Checkbox indeterminate={indeterminateJunk} onChange={onCheckAllJunkChange} checked={checkAllJunk}>
               <label class="text-xs"> Check all</label>
               </Checkbox>
@@ -1170,8 +1201,8 @@ const onCheckAllTeamsChange = (e) => {
             </div>
          
               
-            <div  class="mt-4">
-                  <h1 class="text-sm">Customer</h1>
+            <div  >
+                  <div class="text-base">Customer</div>
                   <Checkbox indeterminate={indeterminateCustomer} onChange={onCheckAllCustomerChange} checked={checkAllCustomer}>
                   <label class="text-xs">  Check all  </label>
                   </Checkbox>
@@ -1181,7 +1212,7 @@ const onCheckAllTeamsChange = (e) => {
                
                     {/* Contact */}
                     <div >
-                  <h1 class="text-sm mt-4">Contact</h1>
+                  <div class="text-base">Contact</div>
                   <Checkbox indeterminate={indeterminateContact} onChange={onCheckAllContactChange} checked={checkAllContact}>
                   <label class="text-xs"> Check all</label>
                   </Checkbox>
@@ -1196,7 +1227,7 @@ const onCheckAllTeamsChange = (e) => {
             
               <div class=" flex justify-around mt-4" >
               <div >
-                  <h1 class="text-sm">Opportunity</h1>
+                  <div class="text-base">Opportunity</div>
                   <Checkbox indeterminate={indeterminateOpportunity} onChange={onCheckAllOpportunityChange} checked={checkAllOpportunity}>
                   <label class="text-xs">  Check all </label>
                   </Checkbox>
@@ -1205,8 +1236,8 @@ const onCheckAllTeamsChange = (e) => {
 
                 </div>
                
-                <div class=" mt-4" >
-                  <h1 class="text-sm">Leads</h1>
+                <div >
+                  <div class="text-base">Leads</div>
                   <Checkbox indeterminate={indeterminateLeads} onChange={onCheckAllLeadsChange} checked={checkAllLeads}>
                   <label class="text-xs">  Check all </label>
                   </Checkbox>
@@ -1216,7 +1247,7 @@ const onCheckAllTeamsChange = (e) => {
                 </div>
             
                 {/* <div >
-                  <h1>Pulse</h1>
+                  <div>Pulse</div>
                   <Checkbox indeterminate={indeterminatePulse} onChange={onCheckAllPulseChange} checked={checkAllPulse}>
                     Check all
                   </Checkbox>
@@ -1236,11 +1267,11 @@ const onCheckAllTeamsChange = (e) => {
            {props.departmentData.erpInd === true ? 
     <div>            
                 
-<h1 class=" text-clr font-bold">ERP</h1>
+<div class=" text-clr text-base flex justify-center mt-2 font-bold">ERP</div>
           
                 <div class=" flex justify-around mt-4" >
               <div >
-              <h1 class="text-sm">Shipper</h1>
+              <div class="text-base">Shipper</div>
               <Checkbox indeterminate={indeterminateShipper} onChange={onCheckAllShipperChange} checked={checkAllShipper}>
                <label class="text-xs"> Check all</label>
               </Checkbox>
@@ -1249,8 +1280,8 @@ const onCheckAllTeamsChange = (e) => {
 
             </div>
              
-               <div class=" mt-4" >
-                  <h1 class="text-sm">Account</h1>
+               <div >
+                  <div class="text-base">Account</div>
                   <Checkbox indeterminate={indeterminateAccount} onChange={onCheckAllAccountChange} checked={checkAllAccount}>
                   <label class="text-xs">   Check all</label>
                   </Checkbox>
@@ -1263,7 +1294,7 @@ const onCheckAllTeamsChange = (e) => {
               
                 <div class=" flex justify-around mt-4" >
                 <div >
-                  <h1 class="text-sm">Order</h1>
+                  <div class="text-base">Order</div>
                   <Checkbox indeterminate={indeterminateOrder} onChange={onCheckAllOrderChange} checked={checkAllOrder}>
                   <label class="text-xs">  Check all</label>
                   </Checkbox>
@@ -1272,8 +1303,8 @@ const onCheckAllTeamsChange = (e) => {
 
                 </div>
                 
-               <div class=" mt-4" >
-    <h1 class="text-sm">Catalog</h1>
+               <div >
+    <div class="text-base">Catalog</div>
     <Checkbox indeterminate={indeterminateCatalog} onChange={onCheckAllCatalogChange} checked={checkAllCatalog}>
     <label class="text-xs">  Check all </label>
     </Checkbox>
@@ -1285,7 +1316,7 @@ const onCheckAllTeamsChange = (e) => {
                 <div class=" flex justify-around" >
          
                <div >
-                  <h1 class="text-sm">Materials</h1>
+                  <div class="text-base">Materials</div>
                   <Checkbox indeterminate={indeterminateMaterials} onChange={onCheckAllMaterialsChange} checked={checkAllMaterials}>
                   <label class="text-xs">   Check all </label>
                   </Checkbox>
@@ -1294,8 +1325,8 @@ const onCheckAllTeamsChange = (e) => {
                 </div>
           
              
-                <div class=" mt-4" >
-                  <h1 class="text-sm">Supplier</h1>
+                <div  >
+                  <div class="text-base">Supplier</div>
                   <Checkbox indeterminate={indeterminateSupplier} onChange={onCheckAllSupplierChange} checked={checkAllSupplier}>
                   <label class="text-xs">  Check all </label>
                   </Checkbox>
@@ -1308,7 +1339,7 @@ const onCheckAllTeamsChange = (e) => {
                 <div class=" flex justify-around mt-4" >
          
          <div >
-            <h1 class="text-sm">Inventory</h1>
+            <div class="text-base">Inventory</div>
             <Checkbox indeterminate={indeterminateInventory} onChange={onCheckAllInventoryChange} checked={checkAllInventory}>
             <label class="text-xs"> Check all </label>
             </Checkbox>
@@ -1317,8 +1348,8 @@ const onCheckAllTeamsChange = (e) => {
           </div>
       
        
-          <div class=" mt-4">
-            <h1 class="text-sm">Refurbish</h1>
+          <div >
+            <div class="text-base">Refurbish</div>
             <Checkbox indeterminate={indeterminateRefurbish} onChange={onCheckAllRefurbishChange} checked={checkAllRefurbish}>
             <label class="text-xs"> Check all </label>
             </Checkbox>
@@ -1333,14 +1364,14 @@ const onCheckAllTeamsChange = (e) => {
 
 {props.departmentData.imInd === true ? 
     <div>     
-            <h1 class=" text-clr font-bold">IM</h1>
+            <div class=" text-clr text-base mt-2 flex justify-center font-bold">IM</div>
        
             <div class=" flex justify-around mt-4" >
           
 
               
                 <div >
-                  <h1 class="text-sm">Investor</h1>
+                  <div class="text-base">Investor</div>
                   <Checkbox indeterminate={indeterminateInvestor} onChange={onCheckAllInvestorChange} checked={checkAllInvestor}>
                   <label class="text-xs">  Check all  </label>
                   </Checkbox>
@@ -1349,7 +1380,7 @@ const onCheckAllTeamsChange = (e) => {
                 </div>
                     {/* Contact */}
                     <div >
-                  <h1 class="text-sm">Investor Contact</h1>
+                  <div class="text-base">Investor Contact</div>
                   <Checkbox indeterminate={indeterminateInvestorContact} onChange={onCheckAllInvestorContactChange} checked={checkAllInvestorContact}>
                   <label class="text-xs"> Check all</label>
                   </Checkbox>
@@ -1364,7 +1395,7 @@ const onCheckAllTeamsChange = (e) => {
             
               <div class=" flex justify-around mt-4" >
               <div >
-                  <h1 class="text-sm">Deal</h1>
+                  <div class="text-base">Deal</div>
                   <Checkbox indeterminate={indeterminateDeal} onChange={onCheckAllDealChange} checked={checkAllDeal}>
                   <label class="text-xs">  Check all </label>
                   </Checkbox>
@@ -1373,8 +1404,8 @@ const onCheckAllTeamsChange = (e) => {
 
                 </div>
        
-                <div class=" mt-4" >
-                  <h1 class="text-sm">Pitch</h1>
+                <div  >
+                  <div class="text-base">Pitch</div>
                   <Checkbox indeterminate={indeterminatePitch} onChange={onCheckAllPitchChange} checked={checkAllPitch}>
                   <label class="text-xs">  Check all </label>
                   </Checkbox>
@@ -1384,7 +1415,7 @@ const onCheckAllTeamsChange = (e) => {
                 </div>
             
                 {/* <div >
-                  <h1>Pulse</h1>
+                  <div>Pulse</div>
                   <Checkbox indeterminate={indeterminatePulse} onChange={onCheckAllPulseChange} checked={checkAllPulse}>
                     Check all
                   </Checkbox>
@@ -1400,14 +1431,14 @@ const onCheckAllTeamsChange = (e) => {
 
  {props.departmentData.accountInd === true ?  
     <div>     
-            <h1 class=" text-clr font-bold">Accounting</h1>
+            <div class=" text-clr text-base flex justify-center mt-2 font-bold">Accounting</div>
         
             <div class=" flex justify-around mt-4" >
           
 
               
                 <div >
-                  <h1 class="text-sm">Payments</h1>
+                  <div class="text-base">Payments</div>
                   <Checkbox indeterminate={indeterminatePayments} onChange={onCheckAllPaymentsChange} checked={checkAllPayments}>
                   <label class="text-xs">  Check all  </label>
                   </Checkbox>
@@ -1416,8 +1447,8 @@ const onCheckAllTeamsChange = (e) => {
                 </div>
               
                     {/* Contact */}
-                    <div class=" mt-4">
-                  <h1 class="text-sm">Collections</h1>
+                    <div >
+                  <div class="text-base">Collections</div>
                   <Checkbox indeterminate={indeterminateCollection} onChange={onCheckAllCollectionChange} checked={checkAllCollection}>
                   <label class="text-xs"> Check all</label>
                   </Checkbox>
@@ -1429,7 +1460,7 @@ const onCheckAllTeamsChange = (e) => {
             
 
 {/* <div >
-    <h1 class="text-sm">Invoices</h1>
+    <div class="text-base">Invoices</div>
     <Checkbox indeterminate={indeterminateDeal} onChange={onCheckAllDealChange} checked={checkAllDeal}>
     <label class="text-xs">  Check all </label>
     </Checkbox>
@@ -1446,14 +1477,14 @@ const onCheckAllTeamsChange = (e) => {
 
 {props.departmentData.recruitOppsInd === true ? 
     <div>     
-            <h1 class=" text-clr font-bold">RecruitPro</h1>
+            <div class=" text-clr text-base flex justify-center mt-2 font-bold">RecruitPro</div>
            
             <div class=" flex justify-around mt-4" >
           
 
               
                 <div >
-                  <h1 class="text-sm">Requirement</h1>
+                  <div class="text-base">Requirement</div>
                   <Checkbox indeterminate={indeterminateRequirement} onChange={onCheckAllRequirementChange} checked={checkAllRequirement}>
                   <label class="text-xs">  Check all  </label>
                   </Checkbox>
@@ -1462,8 +1493,8 @@ const onCheckAllTeamsChange = (e) => {
                 </div>
    
                    
-                <div class=" mt-4" >
-                  <h1 class="text-sm">Talent</h1>
+                <div  >
+                  <div class="text-base">Talent</div>
                   <Checkbox indeterminate={indeterminateTalent} onChange={onCheckAllTalentChange} checked={checkAllTalent}>
                   <label class="text-xs">  Check all  </label>
                   </Checkbox>
@@ -1479,6 +1510,80 @@ const onCheckAllTeamsChange = (e) => {
           
               </div> 
                   : null } 
+
+{/* {props.departmentData.imInd === true ?  */}
+    <div>     
+            <div class=" text-clr mt-2 text-base flex justify-center font-bold">E-Learning</div>
+       
+            <div class=" flex justify-around mt-4" >
+          
+
+              
+                <div >
+                  <div class="text-base">Assessment</div>
+                  <Checkbox indeterminate={indeterminateAccessment} onChange={onCheckAllAccessmentChange} checked={checkAllAccessment}>
+                  <label class="text-xs">  Check all  </label>
+                  </Checkbox>
+                  <Divider />
+                  <CheckboxGroup options={plainOptions} value={checkedAccessmentList} onChange={onAccessmentChange} />
+                </div>
+                    {/* Contact */}
+                    <div >
+                  <div class="text-base">Course</div>
+                  <Checkbox indeterminate={indeterminateCourse} onChange={onCheckAllCourseChange} checked={checkAllCourse}>
+                  <label class="text-xs"> Check all</label>
+                  </Checkbox>
+                  <Divider />
+                  <CheckboxGroup options={plainOptions} value={checkedCourseList} onChange={onCourseChange} />
+
+                </div>
+          
+              </div>
+             
+
+            
+              <div class=" flex justify-around mt-4" >
+              <div >
+                  <div class="text-base">Program</div>
+                  <Checkbox indeterminate={indeterminateProgram} onChange={onCheckAllProgramChange} checked={checkAllProgram}>
+                  <label class="text-xs">  Check all </label>
+                  </Checkbox>
+                  <Divider />
+                  <CheckboxGroup options={plainOptions} value={checkedProgramList} onChange={onProgramChange} />
+
+                </div>
+       
+                <div >
+                  <div class="text-base">Test</div>
+                  <Checkbox indeterminate={indeterminateTest} onChange={onCheckAllTestChange} checked={checkAllTest}>
+                  <label class="text-xs">  Check all </label>
+                  </Checkbox>
+                  <Divider />
+                  <CheckboxGroup options={plainOptions} value={checkedTestList} onChange={onTestChange} />
+
+                </div>
+            
+           
+              </div> 
+
+              <div class=" flex justify-around mt-4" >
+              <div >
+                  <div class="text-base">Topic</div>
+                  <Checkbox indeterminate={indeterminateTopic} onChange={onCheckAllTopicChange} checked={checkAllTopic}>
+                  <label class="text-xs">  Check all </label>
+                  </Checkbox>
+                  <Divider />
+                  <CheckboxGroup options={plainOptions} value={checkedTopicList} onChange={onTopicChange} />
+
+                </div>
+       
+               
+            
+           
+              </div> 
+             
+              </div> 
+             {/* : null }  */}
                
               <h4 class="mt-2">Updated on {dayjs(props.departmentAcces.lastUpdatedOn).format("ll")} by {props.departmentAcces.name}</h4>
               

@@ -4,9 +4,8 @@ import { connect } from "react-redux";
 import {
   handleCandidateResumeModal,
 } from "../Candidate/CandidateAction";
-import StartStop from "./Start&Stop/StartStop";
 import { bindActionCreators } from "redux";
-import AddCandidateResumeModal from "../Candidate/Child/AddCandidateResumeModal";
+
 import {
   Layout,
   message,
@@ -17,60 +16,153 @@ import {
   LayoutWrapper,
   NavbarWrapper,
 } from "../../Components/UI/Layout";
-import { handlePartnerModal } from "../Partner/PartnerAction";
-import { BundleLoader } from "../../Components/Placeholder";
-import AppErrorBoundary from "../../Helpers/ErrorBoundary/AppErrorBoundary";
-import NavMenu from "./NavMenu";
-import ProfileDropdown from "./ProfileDropdown";
-import SettingsDropdown from "../Settings/SettingsDropdown";
-import Rules from "../Rules/Rules";
-import Template from "../Template/Template";
-import { getPresentNotifications } from "../Notification/NotificationAction";
-import { MultiAvatar } from "../../Components/UI/Elements";
-import Call from "../Call/Call";
-import Holiday from "../Holiday/Holiday";
-import Reports from "../Reports/Reports";
-import Partner from "../Partner/Partner";
-import Category from "../Settings/Category/Category";
-import Recruitment from "../Settings/Recruitement/Recruitment";
 import { Select } from "antd";
 import { updateUserById } from "../Auth/AuthAction";
 import { setLanguage } from "../../Language/LanguageAction";
 import { getOpportunityRecord } from "../Opportunity/OpportunityAction";
-import CategoryTab from "../Settings/Category/CategoryTab";
 import { handleMessageModal } from "../LiveMessages/LiveMessageAction";
-import LiveMesssageModal from "../LiveMessages/LiveMesssageModal";
-import AssessmentDetails from "../Accessment/Child/AssessmentDetails/AssessmentDetails";
-import Leads from "../Leads/Leads";
-import LeadDetails from "../Leads/Child/LeadsDetailTab/LeadDetails";
-import Program from "../Program/Program";
-import Course from "../Course/Course";
-import Billing from "../../Components/Billing/Billing";
-import AddCallModal from "../Call/Child/AddCallModal";
 import { handleCallModal } from "../Call/CallAction";
-import CourseDetails from "../Course/Child/CourseDetailsTab/CourseDetails";
-import ProgramDetails from "../Program/Child/ProgramDetails/ProgramDetails";
-import Projects from "../Projects/Projects";
-import ProjectsDetail from "../Projects/Child/ProjectsDetail/ProjectsDetail";
-import Invoice from "../Invoice/Invoice";
-import CandidateTotalBilling from "../Projects/Child/ProjectDetailsTab/CandidateTotalBilling";
 import { getSupportedLanguages } from '../Translate/TranslateService';
-import Location from "../Event/Child/Location/Location";
-import PitchDetails from "../Pitch/Child/PitchDetails/PitchDetails"
-import Navmenu2 from "./Navmenu2";
-import Teams from "./Teams/Teams";
-import RepositoryData from "./RepositoryData";
-import Inventory from "./Inventory/Inventory";
-import Order from "./Order/Order";
-import Supplies from "./Supplies/Supplies";
-import Shipper from "./Shipper/Shipper";
-import Account from "./Account/Account";
-import ShipperDetails from "./Shipper/ShipperDetails";
-import AccountDetails from "./Account/AccountDetailsTab/AccountDetails";
-import InventoryDetail from "./Inventory/Child/InventoryDetails/InventoryDetail";
-import Refurbish from "./Refurbish/Refurbish";
-import Suppliers from "./Suppliers/Suppliers";
-import SupplierDetails from "./Suppliers/Child/SupplierDetails/SupplierDetails";
+import { handlePartnerModal } from "../Partner/PartnerAction";
+import { BundleLoader } from "../../Components/Placeholder";
+import AppErrorBoundary from "../../Helpers/ErrorBoundary/AppErrorBoundary";
+import { getPresentNotifications } from "../Notification/NotificationAction";
+import { MultiAvatar } from "../../Components/UI/Elements";
+const NavMenu = lazy(() =>
+  import("./NavMenu")
+);
+const AddCandidateResumeModal = lazy(() =>
+  import("../Candidate/Child/AddCandidateResumeModal")
+);
+const StartStop = lazy(() =>
+  import("./Start&Stop/StartStop")
+);
+const ProfileDropdown = lazy(() =>
+  import("./ProfileDropdown")
+);
+const SettingsDropdown = lazy(() =>
+  import("../Settings/SettingsDropdown")
+);
+const Rules = lazy(() =>
+  import("../Rules/Rules")
+);
+const Template = lazy(() =>
+  import("../Template/Template")
+);
+const Call = lazy(() =>
+  import("../Call/Call")
+);
+const Holiday = lazy(() =>
+  import("../Holiday/Holiday")
+);
+
+const Reports = lazy(() =>
+  import("../Reports/Reports")
+);
+const Partner = lazy(() =>
+  import("../Partner/Partner")
+);
+const Category = lazy(() =>
+  import("../Settings/Category/Category")
+);
+const Recruitment = lazy(() =>
+  import("../Settings/Recruitement/Recruitment")
+);
+const CategoryTab = lazy(() =>
+  import("../Settings/Category/CategoryTab")
+);
+
+const LiveMesssageModal = lazy(() =>
+  import("../LiveMessages/LiveMesssageModal")
+);
+const AssessmentDetails = lazy(() =>
+  import("../Accessment/Child/AssessmentDetails/AssessmentDetails")
+);
+const Leads = lazy(() =>
+  import("../Leads/Leads")
+);
+const LeadDetails = lazy(() =>
+  import("../Leads/Child/LeadsDetailTab/LeadDetails")
+);
+const Program = lazy(() =>
+  import("../Program/Program")
+);
+
+
+const Course = lazy(() =>
+  import("../Course/Course")
+);
+const Billing = lazy(() =>
+  import("../../Components/Billing/Billing")
+);
+const CourseDetails = lazy(() =>
+  import("../Course/Child/CourseDetailsTab/CourseDetails")
+);
+const ProgramDetails = lazy(() =>
+  import("../Program/Child/ProgramDetails/ProgramDetails")
+);
+const Projects = lazy(() =>
+  import("../Projects/Projects")
+);
+const ProjectsDetail = lazy(() =>
+  import("../Projects/Child/ProjectsDetail/ProjectsDetail")
+);
+
+const Invoice = lazy(() =>
+  import("../Invoice/Invoice")
+);
+const CandidateTotalBilling = lazy(() =>
+  import("../Projects/Child/ProjectDetailsTab/CandidateTotalBilling")
+);
+const Location = lazy(() =>
+  import("../Event/Child/Location/Location")
+);
+const PitchDetails = lazy(() =>
+  import("../Pitch/Child/PitchDetails/PitchDetails")
+);
+const Navmenu2 = lazy(() =>
+  import("./Navmenu2")
+);
+const Teams = lazy(() =>
+  import("./Teams/Teams")
+);
+const RepositoryData = lazy(() =>
+  import("./RepositoryData")
+);
+const Inventory = lazy(() =>
+  import("./Inventory/Inventory")
+);
+const Order = lazy(() =>
+  import("./Order/Order")
+);
+const Supplies = lazy(() =>
+  import("./Supplies/Supplies")
+);
+const Shipper = lazy(() =>
+  import("./Shipper/Shipper")
+);
+const Account = lazy(() =>
+  import("./Account/Account")
+);
+const ShipperDetails = lazy(() =>
+  import("./Shipper/ShipperDetails")
+);
+const AccountDetails = lazy(() =>
+  import("./Account/AccountDetailsTab/AccountDetails")
+);
+const InventoryDetail = lazy(() =>
+  import("./Inventory/Child/InventoryDetails/InventoryDetail")
+);
+const Refurbish = lazy(() =>
+  import("./Refurbish/Refurbish")
+);
+const Suppliers = lazy(() =>
+  import("./Suppliers/Suppliers")
+);
+
+const SupplierDetails = lazy(() =>
+  import("./Suppliers/Child/SupplierDetails/SupplierDetails")
+);
 
 const OpportunityDetail = lazy(() =>
   import("../Opportunity/Child/OpportunityDetail/OpportunityDetail")
@@ -249,12 +341,11 @@ function MainApp(props) {
               height: 50,
             }}
           > */}
-              <div 
+              <div class=" h-3 ml-[2.5rem] "
                  className="logo1"
                 style={{
                   justifyContent: !collapsed ? "center" : "center",
-                  height: 50,
-                  marginLeft: "40px",
+               
                 }}
               >
                 {collapsed && organizationLogo}
@@ -297,16 +388,9 @@ function MainApp(props) {
             }}>
               <Header>
                 <div class="md:hidden"><Navmenu2 selectedLanguage={selectedLanguage} /></div>
-                <div
-                  style={{
-                    height: "100%",
-                    display: "flex",
-                    alignSelf: "flex-start",
-                    alignItems: "center",
-                  }}
+                <div class=" flex items-center h-full self-start "
                 >
-                  &nbsp;&nbsp;
-                  <div style={{ marginLeft: "0.625em" }} class="max-sm:hidden">
+                  <div class=" ml-3 max-sm:hidden " >
                   <Select
                     value={props.preferedLanguage}
                     style={{ width: 120 }}

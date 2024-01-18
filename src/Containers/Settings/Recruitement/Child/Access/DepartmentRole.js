@@ -1,12 +1,12 @@
 
 
-import React, {  PureComponent, Suspense } from "react";
+import React, {  PureComponent,lazy, Suspense } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { StyledTabs } from "../../../../../Components/UI/Antd";
 import { TabsWrapper } from "../../../../../Components/UI/Layout";
 import { getDepartmentRoleData } from "../../../SettingsAction"
-import AccessForm from "./AccessForm";
+const AccessForm = lazy(() => import("./AccessForm"));
 
 const TabPane = StyledTabs.TabPane;
 class DepartmentRole extends PureComponent {

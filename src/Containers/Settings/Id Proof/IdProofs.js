@@ -1,11 +1,10 @@
-import React, { Component } from "react";
+import React, { Component ,lazy} from "react";
 import { connect } from "react-redux";
 import moment from "moment";
 import { bindActionCreators } from "redux";
 import { Button,Input } from "antd";
 import { MainWrapper, } from "../../../Components/UI/Layout";
 import { TextInput, } from "../../../Components/UI/Elements";
-import SingleIdProof from "./SingleIdProof";
 import { BundleLoader } from "../../../Components/Placeholder";
 import {
   getIdProofs,
@@ -15,6 +14,10 @@ import {
   searchIdProofName,
   ClearReducerDataOfIdproof
 } from "./IdProofAction";
+const SingleIdProof = lazy(() =>
+  import("./SingleIdProof")
+);
+
 
 class IdProofs extends Component {
   constructor(props) {

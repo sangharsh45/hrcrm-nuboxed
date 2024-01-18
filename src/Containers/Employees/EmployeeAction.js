@@ -46,7 +46,7 @@ export const addEmployee = (employee,cretiondate) => (dispatch) => {
       },
     })
     .then((res) => {
-      dispatch(getEmployeelist("cretiondate"));
+      // dispatch(getEmployeelist("cretiondate"));
       dispatch({
         type: types.ADD_EMPLOYEE_SUCCESS,
         payload: res.data,
@@ -1056,6 +1056,33 @@ export const getAdminUser = (employeeId) => (dispatch) => {
       console.log(err);
       dispatch({
         type: types.GET_ADMIN_USER_FAILURE,
+        payload: err,
+      });
+    });
+};
+
+export const getAssignedToList = (orgId) => (dispatch) => {
+ 
+  dispatch({
+    type: types.GET_ASSIGENED_TO_REQUEST,
+  });
+  axios
+    .get(`${base_url}/employee/active/user/drop-down/${orgId}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.GET_ASSIGENED_TO_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err.response);
+      dispatch({
+        type: types.GET_ASSIGENED_TO_FAILURE,
         payload: err,
       });
     });
