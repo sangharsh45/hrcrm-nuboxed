@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component,lazy } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { FormattedMessage } from "react-intl";
@@ -16,7 +16,9 @@ import {
   removeSource,
   updateSource
 } from "./SourceAction";
-import SingleSource from "./SingleSource";
+const SingleSource = lazy(() =>
+  import("./SingleSource")
+);
 
 class Source extends Component {
   constructor(props) {

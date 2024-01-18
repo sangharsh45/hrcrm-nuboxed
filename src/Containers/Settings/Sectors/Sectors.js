@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component ,lazy} from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { FormattedMessage } from "react-intl";
@@ -6,7 +6,6 @@ import { Button, Input } from "antd";
 import moment from "moment";
 import { MainWrapper } from "../../../Components/UI/Layout";
 import { TextInput, } from "../../../Components/UI/Elements";
-import SingleSectors from "./SingleSector";
 import { BundleLoader } from "../../../Components/Placeholder";
 import {
   getSectors,
@@ -16,6 +15,9 @@ import {
   searchSectorName,
   ClearReducerDataOfSector
 } from "./SectorsAction";
+const SingleSectors = lazy(() =>
+  import("./SingleSector")
+);
 
 class Sectors extends Component {
   constructor(props) {

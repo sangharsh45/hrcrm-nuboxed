@@ -1,11 +1,10 @@
-import React, { Component } from "react";
+import React, { Component,lazy } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Button,Input } from "antd";
 import { BundleLoader } from "../../../Components/Placeholder";
 import { MainWrapper } from "../../../Components/UI/Layout";
 import { TextInput, } from "../../../Components/UI/Elements";
-import SingleEvent from "./SingleEvent";
 import moment from "moment";
 import {
   getEvents,
@@ -15,6 +14,9 @@ import {
   searchEventName,
   ClearReducerDataOfEvent
 } from "./EventAction";
+const SingleEvent = lazy(() =>
+  import("./SingleEvent")
+);
 
 class Event extends Component {
   constructor(props) {

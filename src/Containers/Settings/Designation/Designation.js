@@ -1,12 +1,10 @@
-import React, { Component } from "react";
+import React, { Component ,lazy} from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { FormattedMessage } from "react-intl";
 import { Button,Input } from "antd";
 import { BundleLoader } from "../../../Components/Placeholder";
 import { MainWrapper } from "../../../Components/UI/Layout";
 import { TextInput, } from "../../../Components/UI/Elements";
-import SingleDesignation from "./Child/SingleDesignation";
 import moment from "moment";
 import {
   getDesignations,
@@ -16,6 +14,9 @@ import {
   searchDesignationName,
   ClearReducerDataOfDesignation
 } from "./DesignationAction";
+const SingleDesignation = lazy(() =>
+  import("./Child/SingleDesignation")
+);
 
 class Designation extends Component {
   constructor(props) {

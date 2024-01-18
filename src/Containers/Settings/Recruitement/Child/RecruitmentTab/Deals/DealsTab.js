@@ -1,4 +1,4 @@
-import React, { Component,} from "react";
+import React, { Component,lazy} from "react";
 import { connect } from "react-redux";
 import BorderColorIcon from '@mui/icons-material/BorderColor';
 import { FormattedMessage } from "react-intl";
@@ -24,7 +24,7 @@ import {addProcessForDeals,
 import {  StyledTabs } from "../../../../../../Components/UI/Antd";
 import {  Select } from "../../../../../../Components/UI/Elements";
 import { elipsize } from "../../../../../../Helpers/Function/Functions";
-import SingleDealsStages from "./SingleDealsStages";
+const SingleDealsStages = lazy(() => import("./SingleDealsStages"));
 const { Option } = Select;
 
 const TabPane = StyledTabs.TabPane;
@@ -476,11 +476,7 @@ handleStagePublishClick = (investorOppStagesId, publishInd) => {
 
             <Spacer />
             {this.state.isTextInputOpen ? (
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "center",
-                }}
+              <div class=" flex justify-center"
               >
                 <TextInput
                   placeholder="Stage name"

@@ -1,4 +1,4 @@
-import React, {  Component } from "react";
+import React, {  Component ,lazy} from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Button } from "antd";
@@ -12,7 +12,9 @@ import {
     getRoles,
   } from "../../../../Settings/Category/Role/RoleAction";
 import { FormattedMessage } from "react-intl";
-import PhonesPairLevelApproveForm from "./PhonesPairLevelApproveForm";class PhonesPairApproveForm extends Component {
+const PhonesPairLevelApproveForm = lazy(() => import("./PhonesPairLevelApproveForm"));
+
+class PhonesPairApproveForm extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -123,11 +125,8 @@ import PhonesPairLevelApproveForm from "./PhonesPairLevelApproveForm";class Phon
                         ...rest
                     }) => (
                         <Form >
-                            <div
-                                style={{
-                                    minHeight: "40vh",
-                                    width: "70%"
-                                }}>
+                                                <div class=" w-[70%] min-h-{40vh}"
+        >
 
                                 <div>
                                 <div class=" flex justify-between">

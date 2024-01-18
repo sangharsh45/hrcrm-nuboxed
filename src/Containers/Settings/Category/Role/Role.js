@@ -1,11 +1,9 @@
-import React, { Component } from "react";
+import React, { Component,lazy } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { FormattedMessage } from "react-intl";
 import { Button, Input } from "antd";
 import { MainWrapper } from "../../../../Components/UI/Layout";
 import { TextInput, } from "../../../../Components/UI/Elements";
-import SingleRole from "./SingleRole";
 import moment from "moment";
 import {
   getRoles,
@@ -18,6 +16,9 @@ import * as Yup from "yup";
 
 import { getDepartments } from "../../Department/DepartmentAction";
 import { Select } from "../../../../Components/UI/Elements";
+const SingleRole = lazy(() =>
+  import("./SingleRole")
+);
 const { Option } = Select;
 
 const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;

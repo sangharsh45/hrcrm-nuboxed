@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Button } from "antd";
 import { Formik, Form, Field } from "formik";
-import { Spacer } from "../../../../../Components/UI/Elements";
 import { InputComponent } from "../../../../../Components/Forms/Formik/InputComponent";
 import {
   addProcessForOpportunity,
@@ -49,9 +48,9 @@ class ProcessFormForHiring extends Component {
                   placeholder={"Enter Workflow name "}
                   style={{ flexBasis: "80%", marginTop: "0.25em" }}
                 />
-                <Spacer />
+           
 
-                <div class=" flex justify-end mt-[15px]" >
+                <div class=" flex justify-end mt-8" >
                   {" "}
                   <Button
                     type="primary"

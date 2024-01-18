@@ -1,11 +1,10 @@
-import React, { Component } from "react";
+import React, { Component ,lazy} from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { FormattedMessage } from "react-intl";
 import { Button,Input } from "antd";
 import { MainWrapper } from "../../../Components/UI/Layout";
 import { TextInput,  } from "../../../Components/UI/Elements";
-import SingleExpenses from "./SingleExpenses";
 import { BundleLoader } from "../../../Components/Placeholder";
 import {
   getExpenses,
@@ -16,6 +15,9 @@ import {
   ClearReducerDataOfExpense
 } from "./ExpenseAction";
 import moment from "moment";
+const SingleExpenses = lazy(() =>
+  import("./SingleExpenses")
+);
 
 class Expense extends Component {
   constructor(props) {

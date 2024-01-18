@@ -1,10 +1,9 @@
-import React, { Component } from "react";
+import React, { Component,lazy } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Button, Input } from "antd";
 import { MainWrapper, } from "../../../../../Components/UI/Layout";
 import { TextInput,} from "../../../../../Components/UI/Elements";
-import SingleCertification from "./SingleCertification";
 import {
   getCertification,
   addCertification,
@@ -14,6 +13,7 @@ import {
   ClearReducerDataOfCertification
 } from "../Certification/CertificationAction";
 import moment from "moment";
+const SingleCertification = lazy(() => import("./SingleCertification"));
 
 class Certification extends Component {
   constructor(props) {

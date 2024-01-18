@@ -5,7 +5,6 @@ import { Button, Switch } from "antd";
 import { FormattedMessage } from "react-intl";
 import { Formik, Form, FastField } from "formik";
 import { InputComponent } from "../../../../../../Components/Forms/Formik/InputComponent";
-import { FlexContainer } from "../../../../../../Components/UI/Layout";
 import {addNotificationConfig,getNotificationConfig} from "../../../../SettingsAction";
 
 
@@ -84,8 +83,8 @@ console.log("433434344",this.props.notificationConfig)
                 <div class="h-full w-[45%] max-sm:w-wk">
                 
                 
-                  <FlexContainer>
-                    <div style={{ width: "47%" }} class="mt-2">
+                  <div class=" flex ">
+                    <div class=" w-[47%] mt-2"  >
                       <div class="font-bold text-xs">Admin &nbsp;</div>
                       <div>
                         <Switch
@@ -97,7 +96,7 @@ console.log("433434344",this.props.notificationConfig)
                         />
                       </div>
                     </div>
-                    <div style={{ width: "47%" }} class="mt-2">
+                    <div class=" w-[47%] mt-2" >
                       <div class="font-bold text-xs">RM &nbsp;</div>
                       <div>
                         <Switch
@@ -124,9 +123,9 @@ console.log("433434344",this.props.notificationConfig)
                       />
                       </div>
                     </div>
-                  </FlexContainer>
-                  <FlexContainer>
-                  <div style={{ width: "47%" }} class="mt-2">
+                  </div>
+                  <div class=" flex">
+                  <div class=" w-[47%] mt-2" >
                       <div class="font-bold text-xs">RM2 &nbsp;</div>
                       <div>
                         <Switch
@@ -139,7 +138,7 @@ console.log("433434344",this.props.notificationConfig)
                       </div>
                     </div>
                    
-                  </FlexContainer>
+                  </div>
                  
                 </div>
               </div>

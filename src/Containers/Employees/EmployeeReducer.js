@@ -16,6 +16,10 @@ const initialState = {
   fetchingTopicsByUserIdError: false,
   topicsByUserId: [],
 
+  fetchingAssignedToList: false,
+  fetchingAssignedToListError: false,
+  assignedToList:[],
+
   fetchingEmployeeTreeMap: false,
   fetchingEmployeeTreeMapError: false,
   employeeTreeMap:{},
@@ -155,14 +159,21 @@ export const EmployeeReducer = (state = initialState, action) => {
     case types.ADD_EMPLOYEE_REQUEST:
       return { ...state, addingEmployee: true };
     case types.ADD_EMPLOYEE_SUCCESS:
-      return { ...state, addingEmployee: false, addEmployeeModal: false };
+      return { ...state, addingEmployee: false, addEmployeeModal: false,
+        employees:[action.payload,...state.employees]
+       };
     case types.ADD_EMPLOYEE_FAILURE:
       return { ...state, addingEmployee: false, addingEmployeeError: true };
 
     case types.GET_EMPLOYEE_LIST_REQUEST:
       return { ...state, fetchingEmployee: true };
     case types.GET_EMPLOYEE_LIST_SUCCESS:
-      return { ...state, fetchingEmployee: false, employees: action.payload };
+      return { ...state, fetchingEmployee: false,
+        //  employees: action.payload 
+        employees: [
+          ...state.employees,
+          ...action.payload],
+        };
     case types.GET_EMPLOYEE_LIST_FAILURE:
       return { ...state, fetchingEmployee: false, fetchingEmployeeError: true };
 
@@ -750,6 +761,25 @@ case types.GET_ADMIN_USER_FAILURE:
     fetchingUserAdmin: false,
     fetchingUserAdminError: true,
   };
+
+  case types.GET_ASSIGENED_TO_REQUEST:
+    return { ...state, fetchingAssignedToList: true };
+  case types.GET_ASSIGENED_TO_SUCCESS:
+    return {
+      ...state,
+      fetchingAssignedToList: false,
+      assignedToList: action.payload,           
+    };
+  case types.GET_ASSIGENED_TO_FAILURE:
+    return {
+      ...state,
+      fetchingAssignedToList: false,
+      fetchingAssignedToListError: true,
+    };
+
+
+
+
     default:
       return state;
   }

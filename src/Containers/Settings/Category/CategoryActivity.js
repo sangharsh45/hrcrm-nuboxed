@@ -1,10 +1,14 @@
-import React, { Component, Suspense } from "react";
+import React, { Component, Suspense,lazy } from "react";
 import { bindActionCreators } from "redux";
 import { StyledTabs } from "../../../Components/UI/Antd";
 import { TabsWrapper } from "../../../Components/UI/Layout";
 import { connect } from "react-redux";
-import Event from "../Event/Event";
-import Task from "../Task/Task";
+const Event = lazy(() =>
+  import("../Event/Event")
+);
+const Task = lazy(() =>
+  import("../Task/Task")
+);
 const TabPane = StyledTabs.TabPane;
 
 class CategoryActivity extends Component {

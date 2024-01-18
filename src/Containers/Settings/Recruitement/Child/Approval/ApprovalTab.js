@@ -1,13 +1,14 @@
-import React, { } from "react";
+import React, { lazy} from "react";
 import { StyledTabs } from "../../../../../Components/UI/Antd";
 import { TabsWrapper } from "../../../../../Components/UI/Layout";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import ApproveForm from "./ApproveForm";
-import MileageApproveForm from "./MileageApproveForm";
-import ExpenseApproveForm from "./ExpenseApproveForm";
-import ContactUserForm from "./ContactUserForm";
-import PhonesPairApproveForm from "./PhonesPairApproveForm";
+const ApproveForm = lazy(() => import("./ApproveForm"));
+const MileageApproveForm = lazy(() => import("./MileageApproveForm"));
+const ExpenseApproveForm = lazy(() => import("./ExpenseApproveForm"));
+const ContactUserForm = lazy(() => import("./ContactUserForm"));
+const PhonesPairApproveForm = lazy(() => import("./PhonesPairApproveForm"));
+
 
 
 const TabPane = StyledTabs.TabPane;
@@ -19,12 +20,12 @@ function ApprovalTab(props) {
             <TabsWrapper>
                 <StyledTabs defaultActiveKey="1" type="card">
                     <TabPane tab={`Leaves`} key="1">
-                        <div style={{ marginTop: 10 }}>
+                        <div class=" mt-4" >
                         <ApproveForm/>
                         </div>
                     </TabPane>
                     <TabPane tab={`Mileage`} key="2">
-                        <div style={{ marginTop: 10 }}>
+                    <div class=" mt-4" >
                         <MileageApproveForm/>
                         </div>
                     </TabPane>

@@ -1,12 +1,11 @@
-import React from "react";
-import { FlexContainer } from "../../../Components/UI/Layout";
-import RecruitmentProfileCard from "./Child/RecruitmentCard/RecruitmentProfileCard";
+import React,{lazy} from "react";
+const RecruitmentProfileCard = lazy(() => import("./Child/RecruitmentCard/RecruitmentProfileCard"));
 
 function RecruitmentActionLeft(props) {
   console.log(props.rules);
   return (
     <div>
-      <FlexContainer flexDirection="column" style={{ display: "block" }}>
+      <div class=" flex flex-col display-block" >
         <RecruitmentProfileCard
           handleRuleClick={props.handleRuleClick}
           rules={props.rules}
@@ -14,7 +13,7 @@ function RecruitmentActionLeft(props) {
           recruitProAdvance={props.recruitProAdvance}
           handleRecruitProAdvance={props.handleRecruitProAdvance}
         />
-      </FlexContainer>
+      </div>
     </div>
   );
 }

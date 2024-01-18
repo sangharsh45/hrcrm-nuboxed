@@ -120,7 +120,7 @@ const handleDeptChange = (event) => {
                                                     <div class=" w-[35%]" >
                                                     <label class=" text-[#444] font-bold text-[0.75rem]" >Department</label>
                       <select 
-                        style={{ border: "0.06em solid #aaa" }}
+                       className="customize-select"
                       onChange={handleDeptChange}>
           <option value="">Select Department</option>
           {props.departments.map((item, index) => (
@@ -138,7 +138,7 @@ const handleDeptChange = (event) => {
             <div class=" w-[35%]" >
             <label class=" text-[#444] font-bold text-[0.75rem]" >User</label>
             <select
-           style={{ border: "0.06em solid #aaa" }}
+            className="customize-select"
                  onChange={handleUserChange}
               >
     <option value="">select user</option>

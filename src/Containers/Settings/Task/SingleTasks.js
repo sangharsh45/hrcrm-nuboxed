@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component ,lazy} from "react";
 import styled from "styled-components";
 import { Button, Tooltip } from "antd";
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -6,7 +6,9 @@ import BorderColorIcon from '@mui/icons-material/BorderColor';
 import { FormattedMessage } from "react-intl";
 import { TextInput } from "../../../Components/UI/Elements";
 import ViewEditCard from "../../../Components/UI/Elements/ViewEditCard";
-import TaskConnetToggle from "./TaskConnetToggle";
+const TaskConnetToggle = lazy(() =>
+  import("./TaskConnetToggle")
+);
 
 class SingleTasks extends Component {
   constructor(props) {

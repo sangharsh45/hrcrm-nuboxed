@@ -1,5 +1,5 @@
 
-import React, { Component } from "react";
+import React, { Component,lazy } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { FormattedMessage } from "react-intl";
@@ -7,7 +7,6 @@ import { Button,Input} from "antd";
 import { BundleLoader } from "../../../Components/Placeholder";
 import { MainWrapper } from "../../../Components/UI/Layout";
 import { TextInput, } from "../../../Components/UI/Elements";
-import SingleTasks from "./SingleTasks";
 import moment from "moment";
 import {
   getTasks,
@@ -17,6 +16,9 @@ import {
   searchTaskName,
   ClearReducerDataOfTask
 } from "./TaskAction";
+const SingleTasks = lazy(() =>
+  import("./SingleTasks")
+);
 
 class Task extends Component {
   constructor(props) {

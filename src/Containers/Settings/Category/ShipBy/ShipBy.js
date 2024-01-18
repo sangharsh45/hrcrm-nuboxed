@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component,lazy } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { FormattedMessage } from "react-intl";
@@ -15,7 +15,9 @@ import {
   removeShipBy,
   updateShipBy
 } from "../ShipBy/ShipByAction";
-import SingleShipBy from "./SingleShipBy";
+const SingleShipBy = lazy(() =>
+  import("./SingleShipBy")
+);
 
 class ShipBy extends Component {
   constructor(props) {

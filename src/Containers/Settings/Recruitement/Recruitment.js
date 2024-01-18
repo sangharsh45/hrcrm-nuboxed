@@ -1,25 +1,24 @@
 import React, { lazy, Suspense, useState, } from "react";
-import RecruitmentActionRight from "./RecruitmentActionRight";
 import {
    getProcessForRecruit,
     dataClear,
 } from "../SettingsAction";
-import Matrix from "../Recruitement/Child/RecruitmentTab/Matrix"
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import Template from "../../Template/Template"
-import Access from "./Child/Access/Access";
-import General from "./Child/General/General";
-import Form from "./Child/RecruitmentTab/FormTab"
- import WorkFlow from "./Child/RecruitmentTab/WorkFlowTab";
-import SkillsTab from "../Library/SkillsTab";
-import ApprovalTab from "./Child/Approval/ApprovalTab";
-import SettingsHolidayTab from "./Child/Holiday/SettingsHolidayTab";
-import LeadsTab from "../../Rules/Child/RulesTab/LeadsTab";
-import DistributionTab from "./Child/DistributionTab/DistributionTab";
-import FinanceTab from "./Child/FinanceTab/FinanceTab";
-
 const RecruitmentActionLeft = lazy(() => import("./RecruitmentActionLeft"));
+const RecruitmentActionRight = lazy(() => import("./RecruitmentActionRight"));
+const Matrix = lazy(() => import("../Recruitement/Child/RecruitmentTab/Matrix"));
+const Template = lazy(() => import("../../Template/Template"));
+const Access = lazy(() => import("./Child/Access/Access"));
+const General = lazy(() => import("./Child/General/General"));
+const Form = lazy(() => import("./Child/RecruitmentTab/FormTab"));
+ const WorkFlow = lazy(() => import("./Child/RecruitmentTab/WorkFlowTab"));
+const SkillsTab = lazy(() => import("../Library/SkillsTab"));
+const ApprovalTab = lazy(() => import("./Child/Approval/ApprovalTab"));
+const SettingsHolidayTab = lazy(() => import("./Child/Holiday/SettingsHolidayTab"));
+const LeadsTab = lazy(() => import("../../Rules/Child/RulesTab/LeadsTab"));
+const DistributionTab = lazy(() => import("./Child/DistributionTab/DistributionTab"));
+const FinanceTab = lazy(() => import("./Child/FinanceTab/FinanceTab"));
 const ReportScheduler = lazy(() =>
   import("../Recruitement/Child/ReportScheduler/ReportScheduler")
 );

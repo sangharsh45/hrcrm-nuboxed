@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
+import React, { Component,lazy } from 'react';
 import { FormattedMessage } from "react-intl";
-import NotificationRow from './NotificationRow';
+const NotificationRow = lazy(() => import('./NotificationRow'))
 class InAppNotificationSetting extends Component {
     render() {
         return (

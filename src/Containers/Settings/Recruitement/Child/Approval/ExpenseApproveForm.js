@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component,lazy } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Button } from "antd";
@@ -12,7 +12,8 @@ import {
     getRoles,
   } from "../../../../Settings/Category/Role/RoleAction";
 import { FormattedMessage } from "react-intl";
-import ExpenseLevelApproveForm from "./ExpenseLevelApproveForm";class ExpenseApproveForm extends Component {
+const ExpenseLevelApproveForm = lazy(() => import("./ExpenseLevelApproveForm"));
+class ExpenseApproveForm extends Component {
     constructor(props) {
         super(props);
         this.state = {

@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component,lazy } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { FormattedMessage } from "react-intl";
@@ -10,7 +10,9 @@ import {
     getBrandModel,
     addBrandModel,
 } from "./BrandModelAction";
-import SingleBrandModel from "./SingleBrandModel";
+const SingleBrandModel = lazy(() =>
+  import("./SingleBrandModel")
+);
 
 class BrandModel extends Component {
     constructor(props) {

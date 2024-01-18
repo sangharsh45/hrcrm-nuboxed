@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component,lazy } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Button } from "antd";
@@ -12,7 +12,7 @@ import {
     getRoles,
   } from "../../../../Settings/Category/Role/RoleAction";
 import { FormattedMessage } from "react-intl";
-import ContactUserLevelApproveForm from "./ContactUserLevelApproveForm";
+const ContactUserLevelApproveForm = lazy(() => import("./ContactUserLevelApproveForm"));
 class ContactUserForm extends Component {
     constructor(props) {
         super(props);
@@ -124,11 +124,8 @@ class ContactUserForm extends Component {
                         ...rest
                     }) => (
                         <Form >
-                            <div
-                                style={{
-                                    minHeight: "40vh",
-                                    width: "70%"
-                                }}>
+                            <div class=" w-[70%] min-h-{40vh}"
+        >
 
                                 <div>
                                 <div class=" flex justify-between">

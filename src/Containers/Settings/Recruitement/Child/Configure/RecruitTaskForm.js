@@ -3,13 +3,11 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Button } from "antd";
 import { Formik, Form, Field } from "formik";
-import { Spacer } from "../../../../../Components/UI/Elements";
 import { InputComponent } from "../../../../../Components/Forms/Formik/InputComponent";
 import {
   addTaskForRecruiter,
   getTaskForWorkflow,
 } from "../../../SettingsAction";
-import { FlexContainer } from "../../../../../Components/UI/Layout";
 
 class RecruitTaskForm extends Component {
   handleCallback = (status) => {
@@ -39,7 +37,7 @@ class RecruitTaskForm extends Component {
         >
           {({ values }) => (
             <Form className="form-background">
-              <div style={{ width: "auto", margin: "auto" }}>
+              <div class=" w-auto m-auto">
                 <Field
                   name="taskChecklistName"
                   label="Name"
@@ -53,10 +51,8 @@ class RecruitTaskForm extends Component {
                   placeholder={"Enter Workflow name "}
                   style={{ flexBasis: "80%", marginTop: "0.25em" }}
                 />
-                <Spacer />
-
-                <Spacer style={{ marginTop: 15 }} />
-                <FlexContainer justifyContent="flex-end">
+               
+                <div class=" flex justify-end mt-8" >
                   {" "}
                   <Button
                     type="primary"
@@ -66,7 +62,7 @@ class RecruitTaskForm extends Component {
                   >
                     Create
                   </Button>
-                </FlexContainer>
+                </div>
               </div>
             </Form>
           )}

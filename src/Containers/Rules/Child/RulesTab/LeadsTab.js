@@ -1,13 +1,13 @@
 
 
-import React, {  PureComponent, Suspense,  } from "react";
+import React, {  PureComponent, Suspense,lazy  } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { StyledTabs } from "../../../../Components/UI/Antd";
 import { TabsWrapper } from "../../../../Components/UI/Layout";
 import {getCountries} from "../../../Auth/AuthAction"
+const LeadsForm = lazy(() => import("./LeadsForm"));
 
-import LeadsForm from "./LeadsForm";
 
 const TabPane = StyledTabs.TabPane;
 class LeadsTab extends PureComponent {

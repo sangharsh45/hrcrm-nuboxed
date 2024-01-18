@@ -1,9 +1,9 @@
-import React, { Suspense, useState } from "react";
+import React, { Suspense,lazy, useState } from "react";
 import { MainWrapper } from "../../Components/UI/Elements";
 import { BundleLoader } from "../../Components/Placeholder";
-import TemplateActionRight from "./TemplateActionRight";
-import TemplateTab from "./child/TemplateTab/Template/TemplateTab";
-;
+const TemplateActionRight = lazy(() => import("./TemplateActionRight"));
+const TemplateTab = lazy(() => import("./child/TemplateTab/Template/TemplateTab"));
+
 
 function Template() {
   const name = [

@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from "prop-types";
 import { Switch } from "antd";
-import { FlexContainer } from "../../../../Components/UI/Layout";
 import { SubTitle } from "../../../../Components/UI/Elements";
 
 class NotificationRow extends Component {
     render() {
         const { label, enabled, onChange } = this.props;
         return (
-            <FlexContainer flexWrap='nowrap' style={{ marginBottom: 10 }}>
+            <div class=" flex flex-no-wrap mb-[10px]" >
                 <SubTitle style={{ flexBasis: '30%' }}>{label || ''}</SubTitle>
                 <Switch
                     checked={enabled || false}
@@ -16,7 +15,7 @@ class NotificationRow extends Component {
                     checkedChildren="Yes"
                     unCheckedChildren="No"
                 />
-            </FlexContainer>
+            </div>
         );
     }
 }

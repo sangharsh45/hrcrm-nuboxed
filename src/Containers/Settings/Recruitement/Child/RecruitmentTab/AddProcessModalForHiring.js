@@ -1,11 +1,11 @@
-import React, {  Suspense } from "react";
+import React, {  Suspense,lazy } from "react";
 import { connect } from "react-redux";
 import { FormattedMessage } from "react-intl";
 import { bindActionCreators } from "redux";
 import { BundleLoader } from "../../../../../Components/Placeholder";
 import { StyledDrawer } from "../../../../../Components/UI/Antd";
 import { handleProcessHiringModal } from "../../../SettingsAction";
-import ProcessFormForHiring from "./ProcessFormForHiring";
+const ProcessFormForHiring = lazy(() => import("./ProcessFormForHiring"));
 
 const AddProcessModalForHiring = (props) => {
   const { addProcessHiringModal, handleProcessHiringModal, ...formProps } = props;

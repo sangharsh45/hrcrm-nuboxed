@@ -1,4 +1,4 @@
-import React, { Component, } from "react";
+import React, { Component,lazy } from "react";
 import styled from "styled-components";
 import { FormattedMessage } from "react-intl";
 import BorderColorIcon from '@mui/icons-material/BorderColor';
@@ -9,7 +9,9 @@ import { bindActionCreators } from "redux";
 import { Button,Tooltip, Select } from "antd";
 import { TextInput } from "../../../../Components/UI/Elements";
 import ViewEditCard from "../../../../Components/UI/Elements/ViewEditCard";
-import DocumentStatusToggle from "./DocumentStatusToggle";
+const DocumentStatusToggle = lazy(() =>
+  import("./DocumentStatusToggle")
+);
 class SingleDocuments extends Component {
   constructor(props) {
     super(props);
