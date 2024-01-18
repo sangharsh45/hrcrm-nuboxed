@@ -25,10 +25,8 @@ import { handleChooserModal } from "../../Planner/PlannerAction";
 import { TextareaComponent } from "../../../Components/Forms/Formik/TextareaComponent";
 import { StyledPopconfirm } from "../../../Components/UI/Antd";
 import { getEmployeelist } from "../../Employees/EmployeeAction";
-import { getEvents } from "../../Settings/Event/EventAction";
-import CandidateClearbit from "../../../Components/Forms/Autocomplete/CandidateClearbit";
 import { setClearbitCandidateData } from "../../Candidate/CandidateAction";
-import { Listbox, Transition } from '@headlessui/react'
+import { Listbox } from '@headlessui/react'
 
 
 // yup validation scheme for creating a opportunity
@@ -61,7 +59,6 @@ function EventForm (props) {
   };
   useEffect(()=> {
    props.getEmployeelist();
-   props.getEvents();
    props.getAllCustomerData(userId)
    props.getAllOpportunityData(userId)
    props.getFilteredEmailContact(userId);
@@ -824,7 +821,6 @@ const mapStateToProps = ({ auth, event,opportunity,customer, employee, events, c
   filteredContact: candidate.filteredContact,
   deletingEvent: event.deleteEvent,
   employees: employee.employees,
-  events: events.events,
   candidateId: candidate.clearbitCandidate.candidateId,
   fullName: auth.userDetails.fullName
 });
@@ -838,7 +834,6 @@ const mapDispatchToProps = (dispatch) =>
       handleChooserModal,
       handleEventModal,
       getEmployeelist,
-      getEvents,
       getAllOpportunityData,
       getAllCustomerData,
       getFilteredEmailContact,

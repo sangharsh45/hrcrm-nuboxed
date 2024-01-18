@@ -15,7 +15,7 @@ import { TextareaComponent } from "../../../../../../Components/Forms/Formik/Tex
 import Upload from "../../../../../../Components/Forms/Formik/Upload";
 import { getDesignations } from "../../../../../Settings/Designation/DesignationAction";
 import { getDepartments } from "../../../../../Settings/Department/DepartmentAction";
-
+import {getCountries} from "../../../../../Auth/AuthAction";
 class UpdateShipperContactForm extends Component {
   constructor(props) {
     super(props);
@@ -39,8 +39,16 @@ class UpdateShipperContactForm extends Component {
   componentDidMount() {
     this.props.getDesignations();
     this.props.getDepartments();
+    this.props.getCountries();
   }
   render() {
+    const Dialcodes= this.props.countries.map((item,i) =>{
+      return {
+        label: `+${item.country_dial_code}`,
+        value: `+${item.country_dial_code}`,
+      };  
+    });
+
     const designation = this.props.designations.map((item) => {
       return {
         label: item.designationName || "",
@@ -240,7 +248,8 @@ class UpdateShipperContactForm extends Component {
                         isColumn
                         margintop={"0.25em"}
                         selectType="dialCode"
-                        component={SearchSelect}
+                       component={SelectComponent}
+                        options={Array.isArray(Dialcodes) ? Dialcodes : []}
                         defaultValue={{
                           value: this.props.user.countryDialCode,
                         }}
@@ -275,7 +284,8 @@ class UpdateShipperContactForm extends Component {
                         label="Phone #"
                         isColumn
                         margintop={"0.25em"}
-                        component={SearchSelect}
+                        component={SelectComponent}
+                        options={Array.isArray(Dialcodes) ? Dialcodes : []}
                         defaultValue={{
                           value: this.props.user.countryDialCode,
                         }}

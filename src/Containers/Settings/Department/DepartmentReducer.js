@@ -304,6 +304,30 @@ export const departmentsReducer = (state = initialState, action) => {
                   departments: [], 
                   // deletedTruck: [] 
                 };
+
+                
+        case types.ADDING_MODULE_REQUEST:
+          return { ...state, addingModules: true };
+        case types.ADDING_MODULE_SUCCESS:
+          return {
+            ...state,
+            addingModules: false,
+            departments: state.departments.map((item) => {
+              if (item.departmentId
+                === action.payload.departmentId
+              ) {
+                return action.payload;
+              } else {
+                return item;
+              }
+            }),
+          };
+        case types.ADDING_MODULE_FAILURE:
+          return {
+            ...state,
+            addingModules: false,
+            addingModulesError: true,
+          };
     
 
         default:
