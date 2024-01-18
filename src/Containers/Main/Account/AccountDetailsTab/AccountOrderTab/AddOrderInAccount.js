@@ -60,6 +60,7 @@ function AddOrderInAccount(props) {
                 userId: props.userId,
                 orderId: "",
                 priority: priority || "",
+                xlUpdateInd: false,
                 loadingAddress: [
                     {
                         address1: "",

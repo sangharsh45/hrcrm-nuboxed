@@ -18,7 +18,8 @@ import {
     handleStatusOfOrder,
     updateOfferPrice,
     handleAccountProduction,
-    handleUpdateOrder
+    handleUpdateOrder,
+    setEditOrder
 } from "../../AccountAction";
 import { FormattedMessage } from 'react-intl';
 import { Button, Input, Tooltip } from 'antd';
@@ -426,6 +427,7 @@ const AccountOrderTable = (props) => {
                                                 />}>
                                                     <BorderColorOutlined
                                                         onClick={() => {
+                                                            props.setEditOrder(item)
                                                             props.handleUpdateOrder(true)
                                                             handleSetParticularOrderData(item)
                                                         }}
@@ -504,6 +506,7 @@ const AccountOrderTable = (props) => {
                     handleAccountProduction={props.handleAccountProduction}
                 />
                 <UpdateOrderModal
+
                     handleUpdateOrder={props.handleUpdateOrder}
                     updateOrderModal={props.updateOrderModal}
                 />
@@ -532,7 +535,8 @@ const mapDispatchToProps = dispatch => bindActionCreators({
     handleNotesModalInOrder,
     updateOfferPrice,
     handleAccountProduction,
-    handleUpdateOrder
+    handleUpdateOrder,
+    setEditOrder
 }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(AccountOrderTable);

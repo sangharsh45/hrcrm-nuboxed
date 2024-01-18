@@ -156,7 +156,7 @@ function DistributorColletcionArchive(props) {
 
   const { user } = props;
 
- 
+
   // if (props.DistributorCollectionArchiveError) {
   //   return <APIFailed />;
   // }
@@ -191,64 +191,64 @@ function DistributorColletcionArchive(props) {
         }) => (
           <Form>
             <div
+              style={{
+                display: "flex",
+                justifyContent: "space-evenly",
+                height: "100%",
+                width: "30%",
+                alignItems: "end"
+              }}
+            >
+              <div
                 style={{
-                  display: "flex",
-                  justifyContent:"space-evenly",
-                  height: "100%",
-                  width: "30%",
-                  alignItems: "end"
+                  width: "35%",
+                }}>
+                <Field
+                  isRequired
+                  name="date"
+                  width={"100%"}
+                  label="Payment Date"
+                  component={DatePicker}
+                  value={values.date}
+                  inlineLabel
+                  isColumn
+
+                />
+              </div>
+              <div
+                style={{
+                  width: "25%",
                 }}
               >
-                <div
-                  style={{                  
-                    width: "35%",                  
-                  }}>
-                  <Field
-                    isRequired
-                    name="date"
-                    width={"100%"}
-                    label="Payment Date"
-                    component={DatePicker}
-                    value={values.date}
-                    inlineLabel
-                    isColumn
-                    
-                  />
-                </div>
-                <div
-                  style={{
-                    width: "25%",                    
+                <Button
+                  type="primary"
+                  htmlType="submit"
+                  loading={props.DistributorCollectionReceivable}
+                  disabled={values.date ? false : true}
+
+                >
+                  Submit
+                </Button>
+              </div>
+              <div
+                style={{
+                  width: "15%",
+                }}
+              >
+                <Button
+                  type="primary"
+                  disabled={values.date ? false : true}
+
+                  onClick={() => {
+                    setFieldValue("date", undefined);
+                    handleClear();
                   }}
                 >
-                  <Button
-                    type="primary"
-                    htmlType="submit"
-                    loading={props.DistributorCollectionReceivable}
-                    disabled={values.date ? false : true}
-                    
-                  >
-                    Submit
-                  </Button>
-                  </div>
-                  <div
-                  style={{
-                    width: "15%",                    
-                  }}
-                >
-                  <Button
-                    type="primary"
-                    disabled={values.date ? false : true}
-                   
-                    onClick={() => {
-                      setFieldValue("date", undefined);
-                      handleClear();
-                    }}
-                  >
-                    Clear
-                  </Button>
-                  </div>
-                </div>             
-            
+                  Clear
+                </Button>
+              </div>
+            </div>
+
 
             {/* <StyledTable
               rowKey="paymentId"
@@ -272,163 +272,157 @@ function DistributorColletcionArchive(props) {
       </Formik>
 
       <div className=' flex justify-end sticky top-28 z-auto'>
-        <OnlyWrapCard style={{backgroundColor:"#E3E8EE"}}>
-        <div className=" flex justify-between w-[97.5%] p-2 bg-transparent font-bold sticky top-0 z-10">
-        <div className=" md:w-[9.1rem]">Name</div>
-        <div className=" md:w-[8.2rem]">Order#</div>
-        <div className=" md:w-[5.8rem] ">Transaction ID</div>
-        <div className="md:w-[1.9rem]">Type</div>
-        <div className="md:w-[5.8rem]">Payment</div>
-        <div className="md:w-[3.9rem]">Entry</div>
-        <div className="md:w-[5.2rem]">Amount</div>
-        <div className="md:w-[3.3rem]">Mode</div>
-        <div className="w-[4.8rem]">Received?</div>
-        <div className="w-[4.9rem]">Owner</div>
+        <OnlyWrapCard style={{ backgroundColor: "#E3E8EE" }}>
+          <div className=" flex justify-between w-[97.5%] p-2 bg-transparent font-bold sticky top-0 z-10">
+            <div className=" md:w-[9.1rem]">Name</div>
+            <div className=" md:w-[8.2rem]">Order#</div>
+            <div className=" md:w-[5.8rem] ">Transaction ID</div>
+            <div className="md:w-[1.9rem]">Type</div>
+            <div className="md:w-[5.8rem]">Payment</div>
+            <div className="md:w-[3.9rem]">Entry</div>
+            <div className="md:w-[5.2rem]">Amount</div>
+            <div className="md:w-[3.3rem]">Mode</div>
+            <div className="w-[4.8rem]">Received?</div>
+            <div className="w-[4.9rem]">Owner</div>
 
-      </div>
-        {/* <InfiniteScroll
+          </div>
+          {/* <InfiniteScroll
         dataLength={customerByUserId.length}
         next={handleLoadMore}
         hasMore={hasMore}
         loader={fetchingCustomers?<h4 style={{ textAlign: 'center' }}>Loading...</h4>:null}
         height={"75vh"}
       > */}
-      
-      {props.todayDistributor.map((item) => { 
-         const currentdate = moment().format("DD/MM/YYYY");
-         const date = moment(item.creationDate).format("DD/MM/YYYY");
-         const diff = Math.abs(
-            moment().diff(moment(item.lastRequirementOn), "days")
-          );
-          const dataLoc = ` Address : ${
-            item.address && item.address.length && item.address[0].address1
-          } 
-           Street : ${
-             item.address && item.address.length && item.address[0].street
-           }   
+
+          {props.todayDistributor.map((item) => {
+            const currentdate = moment().format("DD/MM/YYYY");
+            const date = moment(item.creationDate).format("DD/MM/YYYY");
+            const diff = Math.abs(
+              moment().diff(moment(item.lastRequirementOn), "days")
+            );
+            const dataLoc = ` Address : ${item.address && item.address.length && item.address[0].address1
+              } 
+           Street : ${item.address && item.address.length && item.address[0].street
+              }   
           State : ${item.address && item.address.length && item.address[0].state}
-         Country : ${
-           (item.address && item.address.length && item.address[0].country) || ""
-         } 
-           PostalCode : ${
-             item.address && item.address.length && item.address[0].postalCode
-           } `;
-                    return (
-                        <div>
-                            <div className="flex rounded-xl justify-between mt-4 bg-white h-12 items-center p-3 "
-                                // style={{
-                                //     borderBottom: "3px dotted #515050"
-                                // }}
-                                >
-                                   <div class="flex">
-                                   <div className=" flex font-medium flex-col  md:w-[9.1rem] max-sm:flex-row w-full max-sm:justify-between  ">
-                           
-                           {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden"> Sector </h4> */}
-                           <h4 class=" text-xs text-cardBody font-poppins">   
-                           {item.orderSourceName} 
-                           </h4>
-                       
-                       </div> 
+         Country : ${(item.address && item.address.length && item.address[0].country) || ""
+              } 
+           PostalCode : ${item.address && item.address.length && item.address[0].postalCode
+              } `;
+            return (
+              <div>
+                <div className="flex rounded-xl justify-between mt-4 bg-white h-12 items-center p-3 "
+                // style={{
+                //     borderBottom: "3px dotted #515050"
+                // }}
+                >
+                  <div class="flex">
+                    <div className=" flex font-medium flex-col  md:w-[9.1rem] max-sm:flex-row w-full max-sm:justify-between  ">
 
-                                <div className=" flex font-medium flex-col  md:w-[9rem] max-sm:flex-row w-full max-sm:justify-between  ">
-                           
-                                    {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden"> Sector </h4> */}
-                                    <h4 class=" text-xs text-cardBody font-poppins">   
-                                    {item.orderId} 
-                                    </h4>
-                                
-                                </div> 
-                             
-                                </div>
-                                <div class="flex">
-                                <div className=" flex font-medium flex-col md:w-[10.1rem] max-sm:flex-row w-full max-sm:justify-between ">
-                                    {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden"># Opportunity</h4> */}
+                      {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden"> Sector </h4> */}
+                      <h4 class=" text-xs text-cardBody font-poppins">
+                        {item.orderSourceName}
+                      </h4>
 
-                                    <div class=" text-xs text-cardBody font-poppins text-center">
-                                    {item.transactionNumber}
+                    </div>
 
-                                    </div>
-                                </div>
-                                <div className=" flex font-medium flex-col md:w-0 max-sm:flex-row w-full max-sm:justify-between ">
-                                    {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden">Pipeline Value</h4> */}
+                    <div className=" flex font-medium flex-col  md:w-[9rem] max-sm:flex-row w-full max-sm:justify-between  ">
 
-                                    <div class=" text-xs text-cardBody font-poppins text-center">
-                                    {item.paymentType}
+                      {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden"> Sector </h4> */}
+                      <h4 class=" text-xs text-cardBody font-poppins">
+                        {item.orderId}
+                      </h4>
 
-                                    </div>
-                                </div>
-                                </div>
-                                <div className=" flex font-medium flex-col md:w-96 max-sm:flex-row w-full max-sm:justify-between ">
-                                    {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden">Weighted Value</h4> */}
+                    </div>
 
-                                    <div class=" text-xs text-cardBody font-poppins text-center">
-                                    {` ${moment(item.date).format("DD-MM-YY")}`}
+                  </div>
+                  <div class="flex">
+                    <div className=" flex font-medium flex-col md:w-[10.1rem] max-sm:flex-row w-full max-sm:justify-between ">
+                      {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden"># Opportunity</h4> */}
 
-                                    </div>
-                                </div>
-                             
-                                <div class="flex md:items-center"> 
-                                <div class="flex">
-                                <div className=" flex font-medium flex-col  md:w-28 max-sm:flex-row w-full max-sm:justify-between  ">
-                           
-                           {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden"> Sector </h4> */}
-                           <h4 class=" text-xs text-cardBody font-poppins">   
-                           {` ${moment(item.paymentDate).format("ll")}`}
-                           </h4>
-                       
-                       </div> 
-                       <div className=" flex font-medium flex-col  md:w-28 max-sm:flex-row w-full max-sm:justify-between  ">
-                           
-                           {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden"> Sector </h4> */}
-                           <h4 class=" text-xs text-cardBody font-poppins">   
-                           {item.paymentAmount}
-                           </h4>
-                       
-                       </div> 
-                       </div>
-                       <div class="flex">
-                                <div className=" flex font-medium flex-col  md:w-[5.6rem] max-sm:flex-row w-full max-sm:justify-between  ">
-                           
-                           {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden"> Sector </h4> */}
-                           <h4 class=" text-xs text-cardBody font-poppins">   
-                         {item.paymentMode}
-                           </h4>
-                       
-                       </div> 
-                       <div className=" flex font-medium flex-col  md:w-[5.5rem] max-sm:flex-row w-full max-sm:justify-between  ">
-                           
-                           {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden"> Sector </h4> */}
-                           <h4 class=" text-xs text-cardBody font-poppins">   
-                                    {/* {user.designation === "Manager" &&
-            user.functionName === "Sales" ? null : ( */}
-            {user.collectionApproveInd=== true ?(
-              <DistributorPaymentToggle paymentId={item.paymentId} />
-      ):null}
-                           </h4>
-                       
-                       </div> 
-                       </div>
-                       <div class="flex">
-                                <div className=" flex font-medium flex-col  md:w-[6.3rem] max-sm:flex-row w-full max-sm:justify-between  ">
-                           
-                           {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden"> Sector </h4> */}
-                           <h4 class=" text-xs text-cardBody font-poppins">   
-                         {item.salesExecutive}
-                           </h4>
-                       
-                       </div> 
-                      
-                       </div>
+                      <div class=" text-xs text-cardBody font-poppins text-center">
+                        {item.transactionNumber}
 
                       </div>
-                            </div>
-                        </div>
+                    </div>
+                    <div className=" flex font-medium flex-col md:w-0 max-sm:flex-row w-full max-sm:justify-between ">
+                      {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden">Pipeline Value</h4> */}
+
+                      <div class=" text-xs text-cardBody font-poppins text-center">
+                        {item.paymentType}
+
+                      </div>
+                    </div>
+                  </div>
+                  <div className=" flex font-medium flex-col md:w-96 max-sm:flex-row w-full max-sm:justify-between ">
+                    {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden">Weighted Value</h4> */}
+
+                    <div class=" text-xs text-cardBody font-poppins text-center">
+                      {` ${moment(item.date).format("DD-MM-YY")}`}
+
+                    </div>
+                  </div>
+
+                  <div class="flex md:items-center">
+                    <div class="flex">
+                      <div className=" flex font-medium flex-col  md:w-28 max-sm:flex-row w-full max-sm:justify-between  ">
+
+                        {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden"> Sector </h4> */}
+                        <h4 class=" text-xs text-cardBody font-poppins">
+                          {` ${moment(item.paymentDate).format("ll")}`}
+                        </h4>
+
+                      </div>
+                      <div className=" flex font-medium flex-col  md:w-28 max-sm:flex-row w-full max-sm:justify-between  ">
+
+                        {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden"> Sector </h4> */}
+                        <h4 class=" text-xs text-cardBody font-poppins">
+                          {item.paymentAmount}
+                        </h4>
+
+                      </div>
+                    </div>
+                    <div class="flex">
+                      <div className=" flex font-medium flex-col  md:w-[5.6rem] max-sm:flex-row w-full max-sm:justify-between  ">
+
+                        {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden"> Sector </h4> */}
+                        <h4 class=" text-xs text-cardBody font-poppins">
+                          {item.paymentMode}
+                        </h4>
+
+                      </div>
+                      <div className=" flex font-medium flex-col  md:w-[5.5rem] max-sm:flex-row w-full max-sm:justify-between  ">
+
+                        {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden"> Sector </h4> */}
+                        <h4 class=" text-xs text-cardBody font-poppins">
+                          {/* {user.designation === "Manager" &&
+            user.functionName === "Sales" ? null : ( */}
+                          <DistributorPaymentToggle paymentId={item.paymentId} />
+                        </h4>
+
+                      </div>
+                    </div>
+                    <div class="flex">
+                      <div className=" flex font-medium flex-col  md:w-[6.3rem] max-sm:flex-row w-full max-sm:justify-between  ">
+
+                        {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden"> Sector </h4> */}
+                        <h4 class=" text-xs text-cardBody font-poppins">
+                          {item.salesExecutive}
+                        </h4>
+
+                      </div>
+
+                    </div>
+
+                  </div>
+                </div>
+              </div>
 
 
-                    )
-                })}
-                {/* </InfiniteScroll> */}
-      </OnlyWrapCard>
+            )
+          })}
+          {/* </InfiniteScroll> */}
+        </OnlyWrapCard>
       </div>
       <DistributorProductHistory
         handleDistributorProductModal={props.handleDistributorProductModal}
@@ -452,7 +446,7 @@ const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
       getTodayDistributor,
-    //   getAllSalesUser,
+      //   getAllSalesUser,
       DistributorCollectionReceivableToday,
       handleDistributorProductModal
     },

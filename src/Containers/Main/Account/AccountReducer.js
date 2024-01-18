@@ -50,6 +50,8 @@ const initialState = {
 
   accountOrderProduction: false,
 
+  setEdittingOrder: {},
+
   addDistributorSubscriptionConfigureModal: false,
 
   fetchingActivityDistributor: false,
@@ -186,6 +188,9 @@ const initialState = {
 
   deletingDistributorData: false,
   deletingDistributorDataError: false,
+
+  updateOrderPaymentAmount: false,
+  updateOrderPaymentAmountError: false,
 
   updatingDistributorCall: false,
   updatingDistributorCallError: false,
@@ -730,6 +735,9 @@ export const distributorReducer = (state = initialState, action) => {
 
     case types.SET_DISTRIBUTOR_EDIT:
       return { ...state, setEditingDistributor: action.payload };
+
+    case types.SET_ORDER_EDIT:
+      return { ...state, setEdittingOrder: action.payload };
     /**
      * update distributor modal
      */
@@ -766,6 +774,27 @@ export const distributorReducer = (state = initialState, action) => {
         ...state,
         updateDisributorById: false,
         updateDisributorByIdError: true,
+      };
+    case types.UPDATE_ORDER_PAYMENT_AMOUNT_REQUEST:
+      return { ...state, updateOrderPaymentAmount: true };
+    case types.UPDATE_ORDER_PAYMENT_AMOUNT_SUCCESS:
+      return {
+        ...state,
+        updateOrderPaymentAmount: false,
+        updateAccountModal: false,
+        paymentHistory: state.paymentHistory.map((item) => {
+          if (item.paymentId == action.payload.paymentId) {
+            return action.payload;
+          } else {
+            return item;
+          }
+        }),
+      };
+    case types.UPDATE_ORDER_PAYMENT_AMOUNT_FAILURE:
+      return {
+        ...state,
+        updateOrderPaymentAmount: false,
+        updateOrderPaymentAmountError: true,
       };
 
     case types.INPUT_SEARCH_DATA_REQUEST:
@@ -1176,6 +1205,7 @@ export const distributorReducer = (state = initialState, action) => {
       return {
         ...state,
         addingCar: false,
+        updateOrderModal: false,
         addLinkDistributorOrderConfigureModal: false,
       };
     case types.ADD_CAR_FAILURE:

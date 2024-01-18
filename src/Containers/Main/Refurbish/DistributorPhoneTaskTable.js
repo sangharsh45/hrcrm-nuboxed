@@ -39,38 +39,43 @@ function DistributorPhoneTaskTable(props) {
             <StyledLabel>Add Task</StyledLabel>
             <MainWrapper>
                 <div style={{ justifyContent: "space-between", display: "flex", width: "70%" }}>
-                    <div style={{ width: "40%" }}>
-                        <Select
-                            onChange={handleTask}
-                        >
-                            {props.phoTasklist.map((a) => {
-                                return <Option value={a.itemTaskId}>{a.name}</Option>;
-                            })}
-                        </Select>
 
-                    </div>
-                    <div style={{ display: "flex", justifyContent: "space-between", width: "30%" }}>
-                        <Switch
-                            checked={type}
-                            onChange={handleChangeType}
-                            checkedChildren="Yes"
-                            unCheckedChildren="No"
-                        />
-                        {type && <Input type="text" value={customName} placeholder="Enter Custome Task" onChange={(value) => { handleCustomeName(value) }} />}
+                    <div style={{ display: "flex", justifyContent: "space-between", width: "70%" }}>
+                        <div style={{ width: "30%" }}>
+                            <Switch
+                                checked={type}
+                                onChange={handleChangeType}
+                                checkedChildren="Yes"
+                                unCheckedChildren="No"
+                            />
+                        </div>
+                        {type ?
+                            <div style={{ width: "50%" }}>
+                                <Input type="text" value={customName} placeholder="Enter Custome Task" onChange={(value) => { handleCustomeName(value) }} />
+                            </div>
+                            : <div style={{ width: "50%" }}>
+                                <Select onChange={handleTask}>
+                                    {props.phoTasklist.map((a) => {
+                                        return <Option value={a.itemTaskId}>{a.name}</Option>;
+                                    })}
+                                </Select>
+
+                            </div>}
                     </div>
                     <div style={{ width: "20%" }}><Button onClick={handleSubmitTask}>Add</Button></div>
                 </div>
+                {props.taskByPhone.map((item) => {
+                    return (
+                        <EventWrapper>
+                            <EventName style={{ flexBasis: "85%" }}>
+                                {item.taskName}
+                            </EventName>
+                        </EventWrapper>
+                    )
+                })}
             </MainWrapper>
 
-            {props.taskByPhone.map((item) => {
-                return (
-                    <EventWrapper>
-                        <EventName style={{ flexBasis: "85%" }}>
-                            {item.taskName}
-                        </EventName>
-                    </EventWrapper>
-                )
-            })}
+
         </>
     );
 }
