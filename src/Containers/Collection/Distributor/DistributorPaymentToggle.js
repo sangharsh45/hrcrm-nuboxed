@@ -13,11 +13,12 @@ function DistributorPaymentToggle(props) {
         props.linkDistributorPaymentByFinance(
             {
                 paymentId: props.paymentId,
-                userId: props.userId
+                userId: props.userId,
+                orderPaymentType:props.orderPaymentType
             },
             props.paymentId,
             props.userId,
-
+props.orderPaymentType
         );
     }
 

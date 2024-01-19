@@ -16,13 +16,14 @@ export const handleSuppliersModal = (modalProps) => (dispatch) => {
 // add supplier
 
 export const addSuppliers = (data, userId) => (dispatch) => {
-  console.log("inside add purchase");
   dispatch({ type: types.ADD_SUPPLIERS_REQUEST });
   axios
-    .post(`${base_url2}/supplier `, data, {})
+    .post(`${base_url2}/supplier `, data, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
     .then((res) => {
-      console.log(res);
-      dispatch(getSuppliersList(userId));
       dispatch({
         type: types.ADD_SUPPLIERS_SUCCESS,
         payload: res.data,
@@ -75,7 +76,11 @@ export const getSupplierBySupplierId = (supplierId) => (dispatch) => {
     type: types.GET_SUPPLIER_BY_SUPPLIER_ID_REQUEST,
   });
   axios
-    .get(`${base_url2}/supplier/${supplierId}`)
+    .get(`${base_url2}/supplier/${supplierId}`,{
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
     .then((res) => {
       console.log(res);
       dispatch({

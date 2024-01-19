@@ -1,10 +1,8 @@
-import { DeleteOutlined } from "@ant-design/icons";
 import { Button, Popconfirm, Switch, DatePicker, Space, Typography, Input, Form, message } from "antd";
 import moment from "moment";
-import React, { Component, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { CurrencySymbol } from "../../../../../Components/Common";
 import { StyledTable } from "../../../../../Components/UI/Antd";
 import { getDistributorOrderPayment, updateOrderPayment } from "../../AccountAction";
 import { BorderColorOutlined } from "@mui/icons-material";
@@ -169,13 +167,49 @@ function OrderPaymentTable(props) {
             width: "14%",
         },
         {
+            title: "Approved Date",
+            dataIndex: "remarks",
+            width: "10%",
+            render: (text, item) => {
+                const approvedDate = moment(item.approveDate).format("ll");
+                return (
+                  <>
+                     {item.approveByFinanceInd===true ? (
+                        approvedDate
+                    ):"No Data"}
+                  </>
+                );
+              },
+
+        },
+        {
+            title:"Approved By",
+            dataIndex:"approveByName",
+            width:"10%",
+            render: (text, item) => {
+                const approvedname = item.approveByName;
+                return (
+                  <>
+                     {item.approveByFinanceInd===true ?(
+                        approvedname
+                    ):"No Data"}
+                  </>
+                );
+              },
+
+        },
+        {
             title: '',
             dataIndex: 'operation',
             width: "6%",
             render: (_, record) => {
+            
                 const editable = isEditing(record);
+               
                 return editable ? (
+                    
                     <span>
+                        
                         <Typography.Link
                             onClick={() =>
                                 save(record.paymentId)
@@ -192,9 +226,13 @@ function OrderPaymentTable(props) {
                         </Popconfirm>
                     </span>
                 ) :
+               
                     <Typography.Link disabled={editingKey !== ''} onClick={() => edit(record)}>
+                     {record.approveByFinanceInd===false && (
                         <BorderColorOutlined />
+                     )}
                     </Typography.Link>
+                
 
             },
         },

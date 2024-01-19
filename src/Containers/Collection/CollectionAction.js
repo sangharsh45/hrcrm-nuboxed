@@ -407,12 +407,12 @@ export const DistributorCollectionArchiveToday = (payment) => (dispatch) => {
 /**
  * get all the distributor
  */
-export const getAllDistributorsList = (userId) => (dispatch) => {
+export const getAllDistributorsList = (pageNo) => (dispatch) => {
   dispatch({
     type: types.GET_ALL_DISTRIBUTORS_LIST_REQUEST,
   });
   axios
-    .get(`${base_url2}/distributor/all-distributors`,
+    .get(`${base_url2}/distributor/all-distributors/${pageNo}`,
       {
         headers: {
           Authorization: "Bearer " + sessionStorage.getItem("token") || "",

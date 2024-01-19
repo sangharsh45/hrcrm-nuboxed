@@ -1,110 +1,20 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useState } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { DatePicker } from "antd";
-import * as Yup from "yup";
-import { Button, Empty, Input, Space, Select, Switch, Icon, Tooltip } from "antd";
-import { SearchOutlined } from "@ant-design/icons";
-import Highlighter from "react-highlight-words";
-import { Formik, Form, Field, FastField } from "formik";
-import { FlexContainer, MainWrapper, OnlyWrapCard } from "../../../Components/UI/Layout";
-// import { DatePicker } from "../../../Components/Forms/Formik/DatePicker";
+import { Button } from "antd";
+import { Formik, Form, } from "formik";
+import { OnlyWrapCard } from "../../../Components/UI/Layout";
 import APIFailed from "../../../Helpers/ErrorBoundary/APIFailed";
 import { DistributorCollectionArchiveToday } from "../CollectionAction";
-// import { getAllSalesUser } from "../../Leads/LeadsAction";
 import moment from "moment";
 import dayjs from "dayjs";
-import { CurrencySymbol } from "../../../Components/Common";
-import { FormattedMessage } from "react-intl";
-import { Label } from "recharts";
 
 function DistributorColletcionArchive(props) {
-  useEffect(() => {
-    // props.getAllSalesUser();
-  }, []);
+
   const [date, setDate] = useState("");
   const [endate, setEnDate] = useState("");
 
-  const [searchText, setSearchText] = useState("");
-  const [searchedColumn, setSearchedColumn] = useState("");
-  function getColumnSearchProps(dataIndex) {
-    return {
-      filterDropdown: ({
-        setSelectedKeys,
-        selectedKeys,
-        confirm,
-        clearFilters,
-      }) => (
-        <div style={{ padding: 8 }}>
-          <Input
-            // ref={node => {
-            //   searchInput = node;
-            // }}
-            placeholder={`Search ${dataIndex}`}
-            value={selectedKeys[0]}
-            onChange={(e) =>
-              setSelectedKeys(e.target.value ? [e.target.value] : [])
-            }
-            onPressEnter={() => handleSearch(selectedKeys, confirm, dataIndex)}
-            style={{ width: 240, marginBottom: 8, display: "block" }}
-          />
-          <Space>
-            <Button
-              type="primary"
-              onClick={() => handleSearch(selectedKeys, confirm, dataIndex)}
-              icon={<SearchOutlined />}
-              size="small"
-              style={{ width: 90 }}
-            >
-              Search
-            </Button>
-            <Button
-              onClick={() => handleReset(clearFilters)}
-              size="small"
-              style={{ width: 90 }}
-            >
-              Reset
-            </Button>
-            <Button
-              type="link"
-              size="small"
-              onClick={() => {
-                confirm({ closeDropdown: false });
-                setSearchText(selectedKeys[0]);
-                setSearchedColumn(dataIndex);
-              }}
-            >
-              Filter
-            </Button>
-          </Space>
-        </div>
-      ),
-      filterIcon: (filtered) => (
-        <SearchOutlined style={{ color: filtered ? "#1890ff" : undefined }} />
-      ),
-      onFilter: (value, record) =>
-        record[dataIndex]
-          ? record[dataIndex]
-            .toString()
-            .toLowerCase()
-            .includes(value.toLowerCase()) : "",
-      onFilterDropdownVisibleChange: (visible) => {
-        if (visible) {
-        }
-      },
-      render: (text) =>
-        searchedColumn === dataIndex ? (
-          <Highlighter
-            highlightStyle={{ backgroundColor: "#ffc069", padding: 0 }}
-            searchWords={[searchText]}
-            autoEscape
-            textToHighlight={text ? text.toString() : ""}
-          />
-        ) : (
-          text
-        ),
-    };
-  }
 
   const onChangeDatePicker = (selectedDate, dateString) => {
     console.log(selectedDate, dateString);
@@ -115,51 +25,11 @@ function DistributorColletcionArchive(props) {
     setEnDate(dayjs(dateString));
   };
 
-  function handleSearch(selectedKeys, confirm, dataIndex) {
-    confirm();
-    setSearchText(selectedKeys[0]);
-    setSearchedColumn(dataIndex);
-  }
-
-  function handleReset(clearFilters) {
-    clearFilters();
-    setSearchText("");
-  }
-
-  ;
-
-
-  const salesOption = useMemo(() => {
-    if (!props.allSalesUsers) return [];
-    return (
-      props.allSalesUsers.length &&
-      props.allSalesUsers.sort(function (a, b) {
-        var nameA = a.salesExecutive.toUpperCase(); // ignore upper and lowercase
-        var nameB = b.salesExecutive.toUpperCase(); // ignore upper and lowercase
-        if (nameA < nameB) {
-          return -1;
-        }
-        if (nameA > nameB) {
-          return 1;
-        }
-        // names must be equal
-        return 0;
-      }).map((allSalesUsers) => {
-        return {
-          text: allSalesUsers.salesExecutive || "",
-          value: allSalesUsers.salesExecutive,
-        };
-      })
-    );
-  }, [props.allSalesUsers]);
-
 
   if (props.DistributorCollectionArchiveError) {
     return <APIFailed />;
   }
 
-  const tab = document.querySelector(".ant-layout-sider-children");
-  const tableHeight = tab && tab.offsetHeight - 200;
 
   const { user, startDate, endDate } = props;
 
@@ -167,10 +37,8 @@ function DistributorColletcionArchive(props) {
     <>
       <Formik
         initialValues={{
-          // startDate: startDate || moment(),
           startDate: moment.utc(date),
           endDate: moment.utc(endate),
-          // endDate: endDate || null,
           type: "distributor",
         }}
         onSubmit={(values, { resetForm }) => {
@@ -250,8 +118,6 @@ function DistributorColletcionArchive(props) {
             ...values,
             startDate: moment.utc(date),
             endDate: moment.utc(endate),
-            // startDate: `${newStartDate}T00:00:00Z`,
-            // endDate: `${newEndDate}T00:00:00Z`,
           });
         }}
       >
@@ -265,72 +131,24 @@ function DistributorColletcionArchive(props) {
           ...rest
         }) => (
           <Form>
-            <div
-                style={{
-                  display: "flex",
-                  justifyContent:"space-evenly",
-                  height: "100%",
-                  width: "40%",
-                  alignItems: "end"
-                }}
-              >
-                <div
-                  style={{                  
-                    width: "29%",                  
-                  }}>
+           <div class="flex justify-evenly h-full w-[40%] items-end">
+               
+           <div class="w-[29%]">
 
 <DatePicker
 
 placeholder="Start Date"
 onChange={onChangeDatePicker} />
-                  {/* <Field
-                    isRequired
-                    name="startDate"
-                    width={"100%"}
-                    label="Start Date"
-                    component={DatePicker}
-                    value={values.startDate}
-                    inlineLabel
-                    isColumn
-                   
-                  /> */}
+                
                 </div>
-                <div
-                  style={{
-                    width: "29%",                    
-                  }}>
+                <div class="w-[29%]">
                    
 <DatePicker 
 placeholder="End Date"
 onChange={onChangeDatePicker2} />
-                  {/* <Field
-                    isRequired
-                    width={"100%"}
-                    name="endDate"
-                    label="End Date"
-                    component={DatePicker}
-                    value={values.endDate || values.startDate}
-                    inlineLabel
-                    isColumn
-                   
-                    disabledDate={(currentDate) => {
-                      if (values.startDate) {
-                        if (
-                          moment(currentDate).isBefore(moment(values.startDate))
-                        ) {
-                          return true;
-                        } else {
-                          return false;
-                        }
-                      }
-                    }}
-                  /> */}
+                 
                 </div>
-                  <div
-                   style={{
-                     width: "10%",                    
-                  }}
-                >
+                <div class="w-[10%]">
                     <Button
                       type="primary"
                       htmlType="submit"                    
@@ -384,35 +202,15 @@ onChange={onChangeDatePicker2} />
       > */}
       
       {props.todayDisArchive.map((item) => { 
-         const currentdate = moment().format("DD/MM/YYYY");
-         const date = moment(item.creationDate).format("DD/MM/YYYY");
-         const diff = Math.abs(
-            moment().diff(moment(item.lastRequirementOn), "days")
-          );
-          const dataLoc = ` Address : ${
-            item.address && item.address.length && item.address[0].address1
-          } 
-           Street : ${
-             item.address && item.address.length && item.address[0].street
-           }   
-          State : ${item.address && item.address.length && item.address[0].state}
-         Country : ${
-           (item.address && item.address.length && item.address[0].country) || ""
-         } 
-           PostalCode : ${
-             item.address && item.address.length && item.address[0].postalCode
-           } `;
                     return (
                         <div>
                             <div className="flex rounded-xl justify-between mt-4 bg-white h-12 items-center p-3 "
-                                // style={{
-                                //     borderBottom: "3px dotted #515050"
-                                // }}
+                    
                                 >
                                    <div class="flex">
                                    <div className=" flex font-medium flex-col  md:w-28 max-sm:flex-row w-full max-sm:justify-between  ">
                            
-                           {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden"> Sector </h4> */}
+                           
                            <h4 class=" text-xs text-cardBody font-poppins">   
                            {item.orderSourceName} 
                            </h4>
@@ -421,7 +219,7 @@ onChange={onChangeDatePicker2} />
 
                                 <div className=" flex font-medium flex-col  md:w-28 max-sm:flex-row w-full max-sm:justify-between  ">
                            
-                                    {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden"> Sector </h4> */}
+                                  
                                     <h4 class=" text-xs text-cardBody font-poppins">   
                                     {item.orderId} 
                                     </h4>
@@ -431,7 +229,7 @@ onChange={onChangeDatePicker2} />
                                 </div>
                                 <div class="flex">
                                 <div className=" flex font-medium flex-col md:w-full max-sm:flex-row w-full max-sm:justify-between ">
-                                    {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden"># Opportunity</h4> */}
+                                   
 
                                     <div class=" text-xs text-cardBody font-poppins text-center">
                                     {item.transactionNumber}
@@ -439,7 +237,7 @@ onChange={onChangeDatePicker2} />
                                     </div>
                                 </div>
                                 <div className=" flex font-medium flex-col md:w-0 max-sm:flex-row w-full max-sm:justify-between ">
-                                    {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden">Pipeline Value</h4> */}
+                                    
 
                                     <div class=" text-xs text-cardBody font-poppins text-center">
                                     {item.paymentType}
@@ -453,7 +251,7 @@ onChange={onChangeDatePicker2} />
                                 <div class="flex">
                                 <div className=" flex font-medium flex-col  md:w-28 max-sm:flex-row w-full max-sm:justify-between  ">
                            
-                           {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden"> Sector </h4> */}
+               
                            <h4 class=" text-xs text-cardBody font-poppins">   
                            {` ${moment(item.paymentDate).format("ll")}`}
                            </h4>
@@ -461,7 +259,7 @@ onChange={onChangeDatePicker2} />
                        </div> 
                        <div className=" flex font-medium flex-col  md:w-28 max-sm:flex-row w-full max-sm:justify-between  ">
                            
-                           {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden"> Sector </h4> */}
+                           
                            <h4 class=" text-xs text-cardBody font-poppins">   
                            {item.paymentAmount}
                            </h4>
@@ -471,7 +269,7 @@ onChange={onChangeDatePicker2} />
                        <div class="flex">
                                 <div className=" flex font-medium flex-col  md:w-28 max-sm:flex-row w-full max-sm:justify-between  ">
                            
-                           {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden"> Sector </h4> */}
+
                            <h4 class=" text-xs text-cardBody font-poppins">   
                          {item.paymentMode}
                            </h4>
@@ -479,7 +277,7 @@ onChange={onChangeDatePicker2} />
                        </div> 
                        <div className=" flex font-medium flex-col  md:w-28 max-sm:flex-row w-full max-sm:justify-between  ">
                            
-                           {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden"> Sector </h4> */}
+
                            <h4 class=" text-xs text-cardBody font-poppins">   
                            {item.approveByFinanceInd}
                            </h4>
@@ -488,21 +286,13 @@ onChange={onChangeDatePicker2} />
                        </div>
                        <div class="flex">
                                 <div className=" flex font-medium flex-col  md:w-28 max-sm:flex-row w-full max-sm:justify-between  ">
-                           
-                           {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden"> Sector </h4> */}
+
                            <h4 class=" text-xs text-cardBody font-poppins">   
                          {item.salesExecutive}
                            </h4>
                        
                        </div> 
-                       <div className=" flex font-medium flex-col  md:w-28 max-sm:flex-row w-full max-sm:justify-between  ">
-                           
-                           {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden"> Sector </h4> */}
-                           <h4 class=" text-xs text-cardBody font-poppins">   
-                           {/* {item.approveByFinanceInd} */}
-                           </h4>
-                       
-                       </div> 
+                
                        </div>
 
                       </div>
@@ -527,7 +317,6 @@ const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
       DistributorCollectionArchiveToday,
-    //   getAllSalesUser,
     },
     dispatch
   );

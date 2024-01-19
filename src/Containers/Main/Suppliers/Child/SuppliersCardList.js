@@ -31,11 +31,7 @@ function SuppliersCardList(props) {
     setCurrentShipperId(shipperId);
   }
   const handleLoadMore = () => {
-   
       setPage(page + 1);
-    //   props.getShipperByUserId( 
-    //     props.userId
-    //   );
   };
 
   
@@ -79,37 +75,21 @@ return(
 {props.supplierList.map((item) => {
   return (
     <>
-     <div className="flex rounded-xl justify-between mt-[0.5rem] bg-white h-[2.75rem] items-center p-3"
-           
-                  style={{
-                    // borderBottom: "3px dotted #515050"
-                  }}
+     <div className="flex rounded-xl justify-between mt-[0.5rem] bg-white h-[2.75rem] items-center p-3"    
+      
                 >
  <div class=" flex flex-row justify-evenly w-wk max-sm:flex-col">
  <div className=" flex font-medium flex-col md:w-44 max-sm:justify-between w-full max-sm:flex-row ">
-
-{/* <div class=" text-sm text-cardBody font-medium font-poppins">
-
-Name
-
-</div>  */}
-
-
 <div class=" font-normal text-[0.82rem] text-cardBody font-poppins">
 <Link
           toUrl={`supplier/${item.supplierId}`}
-          title={`${item.supplierName}`}
-        >{item.supplierName}</Link>
+          title={`${item.name}`}
+        >{item.name}</Link>
 </div>
 
 </div>
 <div className=" flex font-medium flex-col md:w-44 max-sm:justify-between w-full max-sm:flex-row ">
 
-{/* <div class=" text-sm text-cardBody font-medium font-poppins">
-
-Phone #
-
-</div>  */}
 
 
 <div class=" font-normal text-[0.82rem] text-cardBody font-poppins">
@@ -119,13 +99,6 @@ Phone #
 </div>
 <div className=" flex font-medium flex-col md:w-44 max-sm:justify-between w-full max-sm:flex-row ">
 
-{/* <div class=" text-sm text-cardBody font-medium font-poppins">
-
-Email
-
-</div>  */}
-
-
 <div class=" font-normal text-[0.82rem] text-cardBody font-poppins">
 {item.emailId} 
 </div>
@@ -134,14 +107,6 @@ Email
 
 
 <div className=" flex font-medium flex-col md:w-44 max-sm:justify-between w-full max-sm:flex-row ">
-{/* 
-<div class=" text-sm text-cardBody font-medium font-poppins">
-
-Address
-
-</div>  */}
-
-
 <div class=" font-normal text-[0.82rem] text-cardBody font-poppins">
 {`${(item.addresses && item.addresses.length && item.addresses[0].address1) || ""}
           ${(item.addresses && item.addresses.length && item.addresses[0].state) || ""}
@@ -153,13 +118,6 @@ Address
 </div>
 <div className=" flex font-medium flex-col md:w-44 max-sm:justify-between w-full max-sm:flex-row ">
 
-{/* <div class=" text-sm text-cardBody font-medium font-poppins">
-
-City
-
-</div>  */}
-
-
 <div class=" font-normal text-[0.82rem] text-cardBody font-poppins">
 {(item.addresses &&
            item.addresses.length &&
@@ -169,14 +127,6 @@ City
 
 </div>
 <div className=" flex font-medium flex-col md:w-44 max-sm:justify-between w-full max-sm:flex-row ">
-
-{/* <div class=" text-sm text-cardBody font-medium font-poppins">
-
-PinCode
-
-</div>  */}
-
-
 <div class=" font-normal text-[0.82rem] text-cardBody font-poppins">
 {(item.addresses &&
           item.addresses.length &&

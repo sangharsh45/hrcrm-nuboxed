@@ -1,11 +1,9 @@
 import React, { lazy, Suspense } from "react";
-
 import { BundleLoader } from "../../../Components/Placeholder";
 import { StyledModal } from "../../../Components/UI/Antd";
-import DistributorProductTable from "./DistributorProductTable";
+const DistributorProductTable =lazy(()=>import("./DistributorProductTable"));
 
 const DistributorProductHistory = (props) => {
-    // console.log(props.ActivitysId);
     const { ...formProps } = props;
     return (
         <>
