@@ -25,39 +25,22 @@ const ModuleList = (props) => {
   }, []);
 
   const { crmInd } = props.moduleList;
-  console.log(crmInd);
-  const [crmStatus, setCrmStatus] = useState(crmInd);
-  function handleCrmClick(checked) {
-    console.log(crmInd);
-    if (crmInd) {
-      //disable url
-      props.addingModules({
-        ...props.moduleList,
-        orgId: props.orgId,
-        type:"crm",
-        crmInd: crmInd ? false : true,
-      });
-      setCrmStatus(crmInd ? false : true);
-    } else {
-      props.addingModules(
-        {
-          ...props.moduleList,
-          orgId: props.orgId,
-          type:"crm",
-          crmInd: crmInd ? false : true,
-        },
-        props.orgId
-      );
-      setCrmStatus(crmInd ? false : true);
-    }
-  }
-  function handleCrmCancel() {
-    if (crmInd) {
-      setCrmStatus(true);
-    } else {
-      setCrmStatus(false);
-    }
-  }
+console.log(crmInd);
+const [crmStatus, setCrmStatus] = useState(crmInd);
+
+useEffect(() => {
+  setCrmStatus(crmInd);
+}, [crmInd]);
+
+const handleCrmClick = (checked) => {
+  setCrmStatus(checked);
+  let data = {
+    value: checked,
+    orgId: props.orgId,
+    type: "crm",
+  };
+  props.addingModules(data, props.orgId);
+};
 
   // const { mandetoryInd } = props.moduleList;
   // console.log(mandetoryInd);
@@ -98,73 +81,37 @@ const ModuleList = (props) => {
   const { erpInd } = props.moduleList;
   console.log(erpInd);
   const [erpStatus, setErpStatus] = useState(erpInd);
-  function handleErpClick(checked) {
-    console.log(erpInd);
-    if (erpInd) {
-      //disable url
-      props.addingModules({
-        ...props.moduleList,
-        orgId: props.orgId,
-        type:"erp",
-        erpInd: erpInd ? false : true,
-      });
-      setErpStatus(erpInd ? false : true);
-    } else {
-      props.addingModules(
-        {
-          ...props.moduleList,
-          orgId: props.orgId,
-          type:"erp",
-          erpInd: erpInd ? false : true,
-        },
-        props.orgId
-      );
-      setErpStatus(erpInd ? false : true);
-    }
-  }
-  function handleErpCancel() {
-    if (erpInd) {
-      setErpStatus(true);
-    } else {
-      setErpStatus(false);
-    }
-  }
+  useEffect(() => {
+    setErpStatus(erpInd);
+  }, [erpInd]);
+  
+  const handleErpClick = (checked) => {
+    setErpStatus(checked);
+    let data = {
+      value: checked,
+      orgId: props.orgId,
+      type: "erp",
+    };
+    props.addingModules(data, props.orgId);
+  };
 
   const { imInd } = props.moduleList;
   console.log(imInd);
   const [imStatus, setImStatus] = useState(imInd);
-  function handleImClick(checked) {
-    console.log(imInd);
-    if (imInd) {
-      //disable url
-      props.addingModules({
-        ...props.moduleList,
-        orgId: props.orgId,
-        type:"im",
-        imInd: imInd ? false : true,
-      });
-      setImStatus(imInd ? false : true);
-    } else {
-      props.addingModules(
-        {
-          ...props.moduleList,
-          orgId: props.orgId,
-          type:"im",
-          imInd: imInd ? false : true,
-        },
-        props.orgId
-      );
-      setImStatus(imInd ? false : true);
-    }
-  }
-  function handleImCancel() {
-    if (imInd) {
-      setImStatus(true);
-    } else {
-      setImStatus(false);
-    }
-  }
-
+  
+  useEffect(() => {
+    setImStatus(imInd);
+  }, [imInd]);
+  
+  const handleImClick = (checked) => {
+    setImStatus(checked);
+    let data = {
+      value: checked,
+      orgId: props.orgId,
+      type: "im",
+    };
+    props.addingModules(data, props.orgId);
+  };
  
 
 
@@ -175,282 +122,141 @@ const ModuleList = (props) => {
   const { productionInd } = props.moduleList;
   console.log(productionInd);
   const [productionStatus, setProductionStatus] = useState(productionInd);
-  function handleProductionClick(checked) {
-    console.log(productionInd);
-    if (productionInd) {
-      //disable url
-      props.addingModules({
-        ...props.moduleList,
-        orgId: props.orgId,
-        type:"production",
-        productionInd: productionInd ? false : true,
-      });
-      setProductionStatus(productionInd ? false : true);
-    } else {
-      props.addingModules(
-        {
-          ...props.moduleList,
-          orgId: props.orgId,
-          type:"production",
-          productionInd: productionInd ? false : true,
-        },
-        props.orgId
-      );
-      setProductionStatus(productionInd ? false : true);
-    }
-  }
-  function handleProductionCancel() {
-    if (productionInd) {
-      setProductionStatus(true);
-    } else {
-      setProductionStatus(false);
-    }
-  }
+  useEffect(() => {
+    setProductionStatus(productionInd);
+  }, [productionInd]);
+  
+  const handleProductionClick = (checked) => {
+    setProductionStatus(checked);
+    let data = {
+      value: checked,
+      orgId: props.orgId,
+      type: "production",
+    };
+    props.addingModules(data, props.orgId);
+  };
 
   const { recruitProInd } = props.moduleList;
   console.log(recruitProInd);
   const [recruitProStatus, setRecruitProStatus] = useState(recruitProInd);
-  function handleRecruitProClick(checked) {
-    console.log(recruitProInd);
-    if (recruitProInd) {
-      //disable url
-      props.addingModules({
-        ...props.moduleList,
-        orgId: props.orgId,
-        type:"recruitPro",
-        recruitProInd: recruitProInd ? false : true,
-      });
-      setRecruitProStatus(recruitProInd ? false : true);
-    } else {
-      props.addingModules(
-        {
-          ...props.moduleList,
-          orgId: props.orgId,
-          type:"recruitPro",
-          recruitProInd: recruitProInd ? false : true,
-        },
-        props.orgId
-      );
-      setRecruitProStatus(recruitProInd ? false : true);
-    }
-  }
-  function handleRecruitProCancel() {
-    if (recruitProInd) {
-      setRecruitProStatus(true);
-    } else {
-      setRecruitProStatus(false);
-    }
-  }
+
+  useEffect(() => {
+    setRecruitProStatus(recruitProInd);
+  }, [recruitProInd]);
+  
+  const handleRecruitProClick = (checked) => {
+    setRecruitProStatus(checked);
+    let data = {
+      value: checked,
+      orgId: props.orgId,
+      type: "recruitPro",
+    };
+    props.addingModules(data, props.orgId);
+  };
 
   const { repairInd } = props.moduleList;
   console.log(repairInd);
   const [repairStatus, setRepairStatus] = useState(repairInd);
-  function handleRepairClick(checked) {
-    console.log(repairInd);
-    if (repairInd) {
-      //disable url
-      props.addingModules({
-        ...props.moduleList,
-        orgId: props.orgId,
-        type:"repair",
-        repairInd: repairInd ? false : true,
-      });
-      setRepairStatus(repairInd ? false : true);
-    } else {
-      props.addingModules(
-        {
-          ...props.moduleList,
-          orgId: props.orgId,
-          type:"repair",
-          repairInd: repairInd ? false : true,
-        },
-        props.orgId
-      );
-      setRepairStatus(repairInd ? false : true);
-    }
-  }
-  function handleRepairCancel() {
-    if (repairInd) {
-      setRepairStatus(true);
-    } else {
-      setRepairStatus(false);
-    }
-  }
+  useEffect(() => {
+    setRepairStatus(repairInd);
+  }, [repairInd]);
+  
+  const handleRepairClick = (checked) => {
+    setRepairStatus(checked);
+    let data = {
+      value: checked,
+      orgId: props.orgId,
+      type: "repair",
+    };
+    props.addingModules(data, props.orgId);
+  };
 
   const { inventoryInd } = props.moduleList;
   console.log(inventoryInd);
   const [inventoryStatus, setInventoryStatus] = useState(inventoryInd);
-  function handleInventoryClick(checked) {
-    console.log(inventoryInd);
-    if (inventoryInd) {
-      //disable url
-      props.addingModules({
-        ...props.moduleList,
-        orgId: props.orgId,
-        type:"inventory",
-        inventoryInd: inventoryInd ? false : true,
-      });
-      setInventoryStatus(inventoryInd ? false : true);
-    } else {
-      props.addingModules(
-        {
-          ...props.moduleList,
-          orgId: props.orgId,
-          type:"inventory",
-          inventoryInd: inventoryInd ? false : true,
-        },
-        props.orgId
-      );
-      setInventoryStatus(inventoryInd ? false : true);
-    }
-  }
-  function handleInventoryCancel() {
-    if (inventoryInd) {
-      setInventoryStatus(true);
-    } else {
-      setInventoryStatus(false);
-    }
-  }
+  useEffect(() => {
+    setInventoryStatus(inventoryInd);
+  }, [inventoryInd]);
+  
+  const handleInventoryClick = (checked) => {
+    setInventoryStatus(checked);
+    let data = {
+      value: checked,
+      orgId: props.orgId,
+      type: "inventory",
+    };
+    props.addingModules(data, props.orgId);
+  };
 
   const { orderManagementInd } = props.moduleList;
   console.log(orderManagementInd);
   const [orderManagStatus, setOrderManagStatus] = useState(orderManagementInd);
-  function handleOrderManagementClick(checked) {
-    console.log(orderManagementInd);
-    if (orderManagementInd) {
-      //disable url
-      props.addingModules({
-        ...props.moduleList,
-        orgId: props.orgId,
-        type:"orderManagement",
-        orderManagementInd: orderManagementInd ? false : true,
-      });
-      setOrderManagStatus(orderManagementInd ? false : true);
-    } else {
-      props.addingModules(
-        {
-          ...props.moduleList,
-          orgId: props.orgId,
-          type:"orderManagement",
-          orderManagementInd: orderManagementInd ? false : true,
-        },
-        props.orgId
-      );
-      setOrderManagStatus(orderManagementInd ? false : true);
-    }
-  }
-  function handleOrderManagementCancel() {
-    if (orderManagementInd) {
-      setOrderManagStatus(true);
-    } else {
-      setOrderManagStatus(false);
-    }
-  }
+  useEffect(() => {
+    setOrderManagStatus(orderManagementInd);
+  }, [orderManagementInd]);
+  
+  const handleOrderManagementClick = (checked) => {
+    setOrderManagStatus(checked);
+    let data = {
+      value: checked,
+      orgId: props.orgId,
+      type: "orderManagement",
+    };
+    props.addingModules(data, props.orgId);
+  };
 
   const { logisticsInd } = props.moduleList;
   console.log(logisticsInd);
   const [logisticsStatus, setLogisticsStatus] = useState(logisticsInd);
-  function handleLogisticClick(checked) {
-    console.log(logisticsInd);
-    if (logisticsInd) {
-      //disable url
-      props.addingModules({
-        ...props.moduleList,
-        orgId: props.orgId,
-        type:"logistics",
-        logisticsInd: logisticsInd ? false : true,
-      });
-      setLogisticsStatus(logisticsInd ? false : true);
-    } else {
-      props.addingModules(
-        {
-          ...props.moduleList,
-          orgId: props.orgId,
-          type:"logistics",
-          logisticsInd: logisticsInd ? false : true,
-        },
-        props.orgId
-      );
-      setLogisticsStatus(logisticsInd ? false : true);
-    }
-  }
-  function handleLogisticCancel() {
-    if (logisticsInd) {
-      setLogisticsStatus(true);
-    } else {
-      setLogisticsStatus(false);
-    }
-  }
+
+  useEffect(() => {
+    setLogisticsStatus(logisticsInd);
+  }, [logisticsInd]);
+  
+  const handleLogisticClick = (checked) => {
+    setLogisticsStatus(checked);
+    let data = {
+      value: checked,
+      orgId: props.orgId,
+      type: "logistics",
+    };
+    props.addingModules(data, props.orgId);
+  };
+
 
   const { procurementInd } = props.moduleList;
   console.log(procurementInd);
   const [procurmentStatus, setProcurmentStatus] = useState(procurementInd);
-  function handleProcurmentClick(checked) {
-    console.log(procurementInd);
-    if (procurementInd) {
-      //disable url
-      props.addingModules({
-        ...props.moduleList,
-        orgId: props.orgId,
-        type:"procurement",
-        procurementInd: procurementInd ? false : true,
-      });
-      setProcurmentStatus(procurementInd ? false : true);
-    } else {
-      props.addingModules(
-        {
-          ...props.moduleList,
-          orgId: props.orgId,
-          type:"procurement",
-          procurementInd: procurementInd ? false : true,
-        },
-        props.orgId
-      );
-      setProcurmentStatus(procurementInd ? false : true);
-    }
-  }
-  function handleProcurmentCancel() {
-    if (procurementInd) {
-      setProcurmentStatus(true);
-    } else {
-      setProcurmentStatus(false);
-    }
-  }
+  useEffect(() => {
+    setProcurmentStatus(procurementInd);
+  }, [procurementInd]);
+  
+  const handleProcurmentClick = (checked) => {
+    setProcurmentStatus(checked);
+    let data = {
+      value: checked,
+      orgId: props.orgId,
+      type: "procurement",
+    };
+    props.addingModules(data, props.orgId);
+  };
 
   const { eLearningInd } = props.moduleList;
   console.log(eLearningInd);
   const [elearningStatus, setElearningStatus] = useState(eLearningInd);
-  function handleElearningClick(checked) {
-    console.log(eLearningInd);
-    if (eLearningInd) {
-      //disable url
-      props.addingModules({
-        ...props.moduleList,
-        orgId: props.orgId,
-        type:"elearning",
-        eLearningInd: eLearningInd ? false : true,
-      });
-      setElearningStatus(eLearningInd ? false : true);
-    } else {
-      props.addingModules(
-        {
-          ...props.moduleList,
-          orgId: props.orgId,
-          type:"elearning",
-          eLearningInd: eLearningInd ? false : true,
-        },
-        props.orgId
-      );
-      setElearningStatus(eLearningInd ? false : true);
-    }
-  }
-  function handleElearningCancel() {
-    if (eLearningInd) {
-      setElearningStatus(true);
-    } else {
-      setElearningStatus(false);
-    }
-  }
+  useEffect(() => {
+    setElearningStatus(eLearningInd);
+  }, [eLearningInd]);
+  
+  const handleElearningClick = (checked) => {
+    setElearningStatus(checked);
+    let data = {
+      value: checked,
+      orgId: props.orgId,
+      type: "elearning",
+    };
+    props.addingModules(data, props.orgId);
+  };
 
     return (
       <>
@@ -475,40 +281,44 @@ const ModuleList = (props) => {
              
                     <h1>CRM</h1>
                     <div   class=" w-[7%] ml-2">
-                    <Popconfirm
+                    {/* <Popconfirm
                         title="Do you wish to change Status ? "
                         onConfirm={handleCrmClick}
-                        onCancel={handleCrmCancel}
+                        // onCancel={handleCrmCancel}
                         okText="Yes"
                         cancelText="No"
-                      >
+                      > */}
                         <Switch
                           style={{ width: "5em" }}
+                          onChange={handleCrmClick}
                           checked={crmStatus || crmInd}
+                          // checked={crmStatus || crmInd}
                           checkedChildren="Yes"
                           unCheckedChildren="No"
                         />
-                      </Popconfirm>
+                      {/* </Popconfirm> */}
                     </div>
                 
                   
 
                     <h1>IM</h1>
                     <div   class=" w-[7%] ml-2">
-                    <Popconfirm
+                    {/* <Popconfirm
                         title="Do you wish to change Status ? "
                         onConfirm={handleImClick}
                         onCancel={handleImCancel}
                         okText="Yes"
                         cancelText="No"
-                      >
+                      > */}
                         <Switch
                           style={{ width: "5em" }}
+                          onChange={handleImClick}
+                         
                           checked={imStatus || imInd}
                           checkedChildren="Yes"
                           unCheckedChildren="No"
                         />
-                      </Popconfirm>
+                      {/* </Popconfirm> */}
                     </div>
 
                     {/* <h1>Account</h1>
@@ -571,37 +381,39 @@ const ModuleList = (props) => {
            
                     <h1>Rcruitpro</h1>
                     <div   class=" w-[7%] ml-2">
-                    <Popconfirm
+                    {/* <Popconfirm
                         title="Do you wish to change Status ? "
                         onConfirm={handleRecruitProClick}
-                        onCancel={handleRecruitProCancel}
+                        // onCancel={handleRecruitProCancel}
                         okText="Yes"
                         cancelText="No"
-                      >
+                      > */}
                         <Switch
                           style={{ width: "5em" }}
+                          onChange={handleRecruitProClick}
                           checked={recruitProStatus || recruitProInd}
                           checkedChildren="Yes"
                           unCheckedChildren="No"
                         />
-                      </Popconfirm>
+                      {/* </Popconfirm> */}
                     </div>
                     <h1>Elearning</h1>
                     <div   class=" w-[7%] ml-2">
-                    <Popconfirm
+                    {/* <Popconfirm
                         title="Do you wish to change Status ? "
                         onConfirm={handleElearningClick}
                         onCancel={handleElearningCancel}
                         okText="Yes"
                         cancelText="No"
-                      >
+                      > */}
                         <Switch
                           style={{ width: "5em" }}
+                          onChange={handleElearningClick}
                           checked={elearningStatus || eLearningInd}
                           checkedChildren="Yes"
                           unCheckedChildren="No"
                         />
-                      </Popconfirm>
+                      {/* </Popconfirm> */}
                     </div>
 
                    
@@ -649,30 +461,31 @@ const ModuleList = (props) => {
                   departments.map((department, i) => ( */}
                     <SingleModuleList
                     handleProcurmentClick={handleProcurmentClick}
-                    handleProcurmentCancel={handleProcurmentCancel}
+                    // handleProcurmentCancel={handleProcurmentCancel}
                     procurmentStatus={procurmentStatus}
 
 handleLogisticClick={handleLogisticClick}
-handleLogisticCancel={handleLogisticCancel}
+// handleLogisticCancel={handleLogisticCancel}
 logisticsStatus={logisticsStatus}
                       handleOrderManagementClick={handleOrderManagementClick}
-                      handleOrderManagementCancel={handleOrderManagementCancel}
+                      // handleOrderManagementCancel={handleOrderManagementCancel}
                       orderManagStatus={orderManagStatus}
                    handleInventoryClick={handleInventoryClick}
-                   handleInventoryCancel={handleInventoryCancel}
+                  //  handleInventoryCancel={handleInventoryCancel}
                    inventoryStatus={inventoryStatus}
+                   moduleList={props.moduleList}
                       handleErpClick={handleErpClick}
-                      handleErpCancel={handleErpCancel}
+                      // handleErpCancel={handleErpCancel}
                       erpStatus={erpStatus}
                       handleRepairClick={handleRepairClick}
-                      handleRepairCancel={handleRepairCancel}
+                      // handleRepairCancel={handleRepairCancel}
                       repairStatus={repairStatus}
                       handleRowData={handleRowData}
                       rowdata={rowdata}
                       // handleSectorId={this.handleSectorId}
                       handleProductionClick={handleProductionClick}
                       productionStatus={productionStatus}
-                       handleProductionCancel={handleProductionCancel}
+                      //  handleProductionCancel={handleProductionCancel}
                     //   handleSearchChange={this.handleSearchChange}
                     //   currentData={this.state.currentData}
                     //   setCurrentData={this.setCurrentData}
