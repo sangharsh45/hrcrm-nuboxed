@@ -2,12 +2,9 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { Tooltip,Input, Popconfirm, Button, Form,Typography } from "antd";
-import { StyledTable } from "../../../../Components/UI/Antd";
+import { Tooltip } from "antd";
 import { getProductbuilder,addProductBuilder } from "../../ProductAction";
-import { EditOutlined } from "@ant-design/icons";
 import { elipsize } from "../../../../Helpers/Function/Functions";
-import { Select } from "../../../../Components/UI/Elements";
 import { OnlyWrapCard } from "../../../../Components/UI/Layout";
 
 
@@ -17,9 +14,7 @@ function ProductbuilderTable (props) {
   useEffect(()=> {
     props.getProductbuilder();
   },[]);
-
-     
-  
+    
 return (
     <>
      <div className=' flex justify-end sticky z-auto'> 
@@ -38,11 +33,7 @@ return (
              {props.productBuilder.map((item) => {
           return (
 <div>
-<div className="flex rounded-xl justify-between mt-2 bg-white h-12 items-center p-3 "
-    // style={{
-    //     borderBottom: "3px dotted #515050"
-    // }}
-    >
+<div className="flex rounded-xl justify-between mt-2 bg-white h-12 items-center p-3 ">
        <div class="flex">
     <div className=" flex font-medium flex-col md:w-[6.1rem] max-sm:w-full  ">
     <h4 class="text-sm text-cardBody font-semibold  font-poppins cursor-pointer">
@@ -71,21 +62,21 @@ return (
                     </h4>
     </div>
     <div className=" flex font-medium flex-col md:w-[6.2rem] max-sm:flex-row w-full max-sm:justify-between ">
-        {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden">Pipeline Value</h4> */}
+        
 
         <h4 class=" text-xs text-cardBody font-semibold  font-poppins">
                       {item.categoryName}
                     </h4>
     </div>
     <div className=" flex font-medium flex-col md:w-[6.2rem] max-sm:flex-row w-full max-sm:justify-between ">
-        {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden">Pipeline Value</h4> */}
+        
 
         <h4 class=" text-xs text-cardBody font-semibold  font-poppins">
                       {item.subCategoryName}
                     </h4>
     </div>
     <div className=" flex font-medium flex-col md:w-[6.2rem] max-sm:flex-row w-full max-sm:justify-between ">
-        {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden">Pipeline Value</h4> */}
+        
 
         <h4 class=" text-xs text-cardBody font-semibold  font-poppins">
                       {item.quantity}

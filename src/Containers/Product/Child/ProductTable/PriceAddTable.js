@@ -1,15 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect,lazy, Suspense  } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { Input, Popconfirm, Button, Form,Typography } from "antd";
-import { StyledTable } from "../../../../Components/UI/Antd";
+import { Button } from "antd";
 import { getProductbuilder,addProductBuilder,handleDiscountModal,handleOfferModal } from "../../ProductAction";
-import { EditOutlined } from "@ant-design/icons";
-import { Select } from "../../../../Components/UI/Elements";
-import ProductDiscountModal from "./ProductDiscountModal";
-import ProductOfferModal from "./ProductOfferModal";
 import { OnlyWrapCard } from "../../../../Components/UI/Layout";
-
+const ProductDiscountModal =lazy(()=>import("./ProductDiscountModal"));
+const ProductOfferModal =lazy(()=>import("./ProductOfferModal"));
 
 function ProductbuilderTable (props) {
 
@@ -34,9 +30,6 @@ return (
           return (
 <div>
 <div className="flex rounded-xl justify-between mt-2 bg-white h-12 items-center p-3 "
-    // style={{
-    //     borderBottom: "3px dotted #515050"
-    // }}
     >
        <div class="flex">
     <div className=" flex font-medium flex-col md:w-[6.1rem] max-sm:w-full  ">
@@ -62,7 +55,7 @@ return (
                     </h4>
     </div>
     <div className=" flex font-medium flex-col md:w-[6.2rem] max-sm:flex-row w-full max-sm:justify-between ">
-        {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden">Pipeline Value</h4> */}
+        
 
         <h4 class=" text-xs text-cardBody font-semibold  font-poppins">
                       {item.VAT}
@@ -73,13 +66,9 @@ return (
     
     <div className=" flex font-medium flex-col  md:w-[7.2rem] max-sm:flex-row w-full max-sm:justify-between  ">
     <Button
+    className="bg-[teal] text-xs"
                   type="primary"
                   shape="round"
-                  style={{
-                    backgroundColor: "teal",
-                    // backgroundColor: "Yellow",
-                    fontSize: "11px",
-                  }}
                   onClick={() => {
                     props.handleDiscountModal(true);
                     // handleParticularRowData(item);
@@ -120,7 +109,7 @@ return (
 
 
 
-
+              <Suspense fallback={"Loading"}>
 <ProductDiscountModal
                 addDiscountModal={props.addDiscountModal}
                 handleDiscountModal={props.handleDiscountModal}
@@ -131,6 +120,7 @@ return (
                 handleOfferModal={props.handleOfferModal}
                 // particularDiscountData={particularDiscountData}
             />
+            </Suspense>
     </>
 );
 }

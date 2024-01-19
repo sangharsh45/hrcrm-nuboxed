@@ -30,11 +30,7 @@ return (
              {props.builderbyProductId.map((item) => {
           return (
 <div>
-<div className="flex rounded-xl justify-between mt-2 bg-white h-12 items-center p-3 "
-    // style={{
-    //     borderBottom: "3px dotted #515050"
-    // }}
-    >
+<div className="flex rounded-xl justify-between mt-2 bg-white h-12 items-center p-3 "    >
        <div class="flex">
     <div className=" flex font-medium flex-col md:w-[6.1rem] max-sm:w-full  ">
     <h4 class="text-sm text-cardBody font-semibold  font-poppins cursor-pointer">

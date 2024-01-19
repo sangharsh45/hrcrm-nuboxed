@@ -1,6 +1,5 @@
 import React, { lazy, Suspense } from "react";
-import { FormattedMessage } from "react-intl";
-import { StyledDrawer, StyledModal } from "../../../../Components/UI/Antd";
+import { StyledDrawer } from "../../../../Components/UI/Antd";
 import { BundleLoader } from "../../../../Components/Placeholder";
 const ProductbuilderTable=lazy(()=>import("./ProductbuilderTable"));
 const ProductbuilderTable2=lazy(()=>import("./ProductbuilderTable2"));

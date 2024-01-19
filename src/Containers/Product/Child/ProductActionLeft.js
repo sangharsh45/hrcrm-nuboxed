@@ -1,32 +1,18 @@
 import React, { useEffect } from "react";
-import { ActionIcon } from "../../../Components/Utils";
 import { FlexContainer } from "../../../Components/UI/Layout";
-import { StyledRangePicker, StyledSelect } from "../../../Components/UI/Antd";
-import { TimeInterval } from "../../../Utils";
-import moment from "moment";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-import { AppstoreOutlined, DeleteOutlined, BookOutlined, AlipayOutlined } from "@ant-design/icons";
+import { DeleteOutlined, AlipayOutlined } from "@ant-design/icons";
 import { Tooltip } from "antd";
-import { GlobalOutlined, TableOutlined } from "@ant-design/icons";
-
-const Option = StyledSelect.Option;
 
 const ProductActionLeft = (props) => {
-
   useEffect(() => {
-    // props.getRecords(props.userId);
   }, [props.userId]);
   const {
     viewType,
     setProductViewType,
-    dateRangeList,
-    setSelectedTimeIntervalCatalogue,
     user,
-    userId,
-    product,
   } = props;
-  const creationDate = user.creationDate;
   return (
     <FlexContainer alignItems="center">
       <Tooltip title="Product List">

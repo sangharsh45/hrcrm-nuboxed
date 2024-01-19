@@ -5,6 +5,7 @@ import { setSuppliersViewType } from "./SuppliersAction";
 import SuppliersHeader from "../../Main/Suppliers/SuppliersHeader";
 import { BundleLoader } from "../../../Components/Placeholder";
 import { getSuppliersList, getAllSuppliersList } from "./SuppliersAction";
+
 const SuppliersCardList =lazy(()=>import("./Child/SuppliersCardList"));
 class Suppliers extends Component {
   state = { currentData: "" };

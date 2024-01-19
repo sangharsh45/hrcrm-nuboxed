@@ -18,11 +18,9 @@ function SuppliersCardList(props) {
  
   const [page, setPage] = useState(0);
 
-  const { handleUpdateShipperModal, updateShipperModal } = props;
+  const { handleUpdateShipperModal } = props;
 
-  const [currentShipperId, setCurrentShipperId] = useState("");
-  const [rowdata, setrowData] = useState({});
-    
+
   const handleRowData = (data) => {
     setrowData(data);
   };

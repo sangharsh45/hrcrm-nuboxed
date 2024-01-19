@@ -1,6 +1,5 @@
-import React, { Suspense } from "react";
+import React from "react";
 import Button from "antd/lib/button";
-import Icon from "antd/lib/icon";
 import { connect } from "react-redux";
 import { base_url } from "../../../Config/Auth";
 import { bindActionCreators } from "redux";
@@ -18,7 +17,6 @@ class ProductActionRight extends React.Component {
       handleConfigureModal,
       organizationId,
     } = this.props;
-    console.log(organizationId);
     return (
       <>
 

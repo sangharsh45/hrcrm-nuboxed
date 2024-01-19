@@ -175,7 +175,7 @@ function OrderPaymentTable(props) {
                 return (
                   <>
                      {item.approveByFinanceInd===true ? (
-                        approvedDate
+                        <span class="text-green-700">{approvedDate} </span>
                     ):"No Data"}
                   </>
                 );
@@ -191,7 +191,7 @@ function OrderPaymentTable(props) {
                 return (
                   <>
                      {item.approveByFinanceInd===true ?(
-                        approvedname
+                        <span class="text-green-700">{approvedname} </span>
                     ):"No Data"}
                   </>
                 );

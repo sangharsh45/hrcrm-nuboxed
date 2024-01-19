@@ -1,15 +1,12 @@
-import React, { Component } from "react";
+import React, { Component,lazy,Suspense } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { StyledModal, StyledTable } from "../../../../Components/UI/Antd";
-import Product from "../../Product";
+import { StyledTable } from "../../../../Components/UI/Antd";
 import { getDistributorOfferHistory, handleUpdateDistributorOfferModal, setEditDistributorOffer } from "../../ProductAction";
 import moment from "moment";
-import { CurrencySymbol } from "../../../../Components/Common";
-import APIFailed from "../../../../Helpers/ErrorBoundary/APIFailed";
 import { Tooltip } from "antd";
 import { EditOutlined } from "@ant-design/icons";
-import UpdateDistributorOfferModal from "./UpdateDistributorOfferModal";
+const UpdateDistributorOfferModal =lazy(()=>import("./UpdateDistributorOfferModal"));
 
 class DistributorOfferHistory extends Component {
     componentDidMount() {
@@ -115,11 +112,12 @@ class DistributorOfferHistory extends Component {
                     scroll={{ y: 320 }}
                     pagination={false}
                 />
+                <Suspense fallback={"Loading"}>
                 <UpdateDistributorOfferModal
                     handleUpdateDistributorOfferModal={this.props.handleUpdateDistributorOfferModal}
                     updateDistributorOfferModal={this.props.updateDistributorOfferModal}
-
                 />
+                </Suspense>
             </>
         );
     }

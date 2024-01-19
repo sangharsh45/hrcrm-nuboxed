@@ -1,9 +1,9 @@
 import React, { lazy, Suspense, Component } from "react";
 import { BundleLoader } from "../../../../Components/Placeholder";
 import { StyledModal } from "../../../../Components/UI/Antd";
-import CustomerProductOfferForm from "./CustomerProductOfferForm";
 import { StyledTabs } from "../../../../Components/UI/Antd";
-import DistributorProductOfferForm from "./DistributorProductOfferForm";
+const DistributorProductOfferForm =lazy(()=>import("./DistributorProductOfferForm"));
+const CustomerProductOfferForm =lazy(()=>import("./CustomerProductOfferForm"));
 
 const TabPane = StyledTabs.TabPane;
 
@@ -28,7 +28,7 @@ class ProductOfferModal extends Component {
                     footer={null}
                 >
                     <Suspense fallback={<BundleLoader />}>
-                        {/* <ProductDiscountForm particularDiscountData={this.props.particularDiscountData}/> */}
+                    
                         <StyledTabs defaultActiveKey="1">
                             <TabPane tab={`Distributor`} key="1">
                                 <div style={{ marginTop: 20 }}>
