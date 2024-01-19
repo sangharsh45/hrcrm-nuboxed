@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { StyledDrawer } from "../../../Components/UI/Antd";
 import { BundleLoader } from "../../../Components/Placeholder";
-import UploadCatalogueForm from "./UploadCatalogueForm";
+const UploadCatalogueForm =lazy(()=>import("./UploadCatalogueForm"));
 
 class UploadCatalogue extends Component {
     render() {

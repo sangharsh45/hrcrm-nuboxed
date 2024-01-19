@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { BundleLoader } from "../../../../Components/Placeholder";
-// import { getProducts } from "../../ProductAction";
 import { StyledTable } from "../../../../Components/UI/Antd";
 
 class ProductTable extends Component {

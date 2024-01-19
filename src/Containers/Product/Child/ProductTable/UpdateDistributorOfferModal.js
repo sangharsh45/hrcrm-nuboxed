@@ -1,12 +1,10 @@
 import React, { lazy, Suspense } from "react";
-
 import { BundleLoader } from "../../../../Components/Placeholder";
 import { StyledModal } from "../../../../Components/UI/Antd";
-import UpdateDistributorOfferForm from "./UpdateDistributorOfferForm";
+const UpdateDistributorOfferForm =lazy(()=>import("./UpdateDistributorOfferForm"));
 
 
 const UpdateDistributorOfferModal = (props) => {
-    console.log(props.productId);
     const { ...formProps } = props;
     return (
         <>

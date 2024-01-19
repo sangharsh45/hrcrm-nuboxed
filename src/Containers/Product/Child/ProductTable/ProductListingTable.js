@@ -16,7 +16,7 @@ import {
 } from "../../ProductAction";
 import { handleCurrencyPriceModal } from "../../../Main/Supplies/SuppliesAction";
 import { CurrencySymbol } from "../../../../Components/Common";
-import { Empty, Icon, Tooltip, Button, Popconfirm, Switch } from "antd";
+import { Tooltip, Button, Popconfirm, Switch } from "antd";
 import {
   EditOutlined,
   HistoryOutlined,
@@ -26,25 +26,10 @@ import {
 import {
   MultiAvatar,
   SubTitle,
-  Title,
-  JumpStartBox,
-  Spacer,
 } from "../../../../Components/UI/Elements";
-// import UpdateProductModal from "../../Child/UpdateProductModal";
-// import ProductDiscountModal from "./ProductDiscountModal";
-// import CustomerDiscountHistory from "./CustomerDiscountHistory";
-import APIFailed from "../../../../Helpers/ErrorBoundary/APIFailed";
-// import ProductHistoryModal from "./ProductHistoryModal";
-// import CatalogueConfigureModal from "../Configure/CatalogueConfigureModal";
-// import SuspendToggleProduct from "../ProductTable/SuspendToggleProduct";
-// import DistributorDiscountHistory from "./DistributorDiscountHistory";
-// import ProductOfferModal from "./ProductOfferModal";
-// import CustomerOfferHistory from "./CustomerOfferHistory";
-// import DistributorOfferHistory from "./DistributorOfferHistory";
-// import CatalogueWipModal from "../Wip/CatalogueWipModal";
 import ProductPublishToggle from "./ProductPublishToggle";
 import moment from "moment";
-// import CurrencyPriceModal from "../../../Supplies/Child/CurrencyPriceModal";
+
 
 function onChange(pagination, filters, sorter) {
   console.log("params", pagination, filters, sorter);
@@ -53,7 +38,6 @@ function onChange(pagination, filters, sorter) {
 function ProductListingTable(props) {
   useEffect(() => {
     props.getProducts();
-    // props.getAllProductCatagory();
   }, []);
 
   const [showHistory, setshowHistory] = useState(false);
@@ -925,52 +909,7 @@ function ProductListingTable(props) {
           }}
         />
       )}
-      {/* <UpdateProductModal
-        // leadsId={currentLeadsId}
-        updateProductModal={updateProductModal}
-        // handleSetCurrentLeadsId={handleSetCurrentLeadsId}
-        handleUpdateProductModal={handleUpdateProductModal}
-      />
-      <ProductDiscountModal
-        addDiscountModal={addDiscountModal}
-        handleDiscountModal={handleDiscountModal}
-        particularDiscountData={particularDiscountData}
-      />
-      <ProductHistoryModal
-        addHistoryModal={addHistoryModal}
-        handleHistoryModal={handleHistoryModal}
-        particularDiscountData={particularDiscountData}
-      />
-      <CatalogueConfigureModal
-        addCatalogueConfigureModal={addCatalogueConfigureModal}
-        handleCatalogueConfigureModal={handleCatalogueConfigureModal}
-        particularDiscountData={particularDiscountData}
-      />
-
-      <CatalogueWipModal
-        addCatalogueWipModal={addCatalogueWipModal}
-        handleCatalogueWipModal={handleCatalogueWipModal}
-        particularDiscountData={particularDiscountData}
-      />
-
-      <ProductOfferModal
-        addProductOfferModal={addProductOfferModal}
-        handleOfferModal={handleOfferModal}
-        particularDiscountData={particularDiscountData}
-      />
-      <CurrencyPriceModal
-        handleCurrencyPriceModal={props.handleCurrencyPriceModal}
-        addCurrencyValue={props.addCurrencyValue}
-        suppliesId={particularDiscountData.suppliesId}
-      />
-      {showHistory && <CustomerDiscountHistory productId={productId} />}
-      {showDistributorHistory && (
-        <DistributorDiscountHistory productId={productId} />
-      )}
-      {customerOfferHistory && <CustomerOfferHistory productId={productId} />}
-      {distributorOfferHistory && (
-        <DistributorOfferHistory productId={productId} />
-      )} */}
+     
     </>
   );
 }

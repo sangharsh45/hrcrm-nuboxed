@@ -2,7 +2,6 @@ import React, { lazy, Suspense } from "react";
 import { StyledDrawer } from "../../../../Components/UI/Antd";
 import { BundleLoader } from "../../../../Components/Placeholder";
 const PriceAddTable=lazy(()=>import("./PriceAddTable"));
-// const ProductbuilderTable2=lazy(()=>import("./ProductbuilderTable2"));
 
 const PriceDrawer = (props) => {
   const { priceOpenDrawer, handlePriceDrawer,  particularDiscountData, ...formProps } = props;

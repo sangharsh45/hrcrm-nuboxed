@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo,lazy } from "react";
+import React, { useState, useEffect,lazy, Suspense } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import QrGenerate from "../ProductTable/QrGenerate"
@@ -18,17 +18,16 @@ import {
 import ProductPublishToggle from "./ProductPublishToggle";
 import {
     EditOutlined,
-    DeleteOutlined,
 } from "@ant-design/icons";
-import PriceDrawer from "./PriceDrawer";
 import { MultiAvatar, SubTitle } from "../../../../Components/UI/Elements";
 import { Tooltip } from "antd";
 import InfiniteScroll from "react-infinite-scroll-component";
 import ViewQuiltIcon from '@mui/icons-material/ViewQuilt';
 import EuroIcon from '@mui/icons-material/Euro';
-import UpdateProductModal from "../../Child/UpdateProductModal";
 import { OnlyWrapCard } from "../../../../Components/UI/Layout";
 
+const UpdateProductModal =lazy(()=>import("../../Child/UpdateProductModal"));
+const PriceDrawer =lazy(()=>import("./PriceDrawer"));
 const ProductBuilderDrawer =lazy(()=>import("./ProductBuilderDrawer"));
 
 function ProductCardList(props) {
@@ -132,7 +131,7 @@ function ProductCardList(props) {
                     </h4>
     </div>
     <div className=" flex font-medium flex-col md:w-[6.2rem] max-sm:flex-row w-full max-sm:justify-between ">
-        {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden">Pipeline Value</h4> */}
+
 
         <h4 class=" text-xs text-cardBody font-semibold  font-poppins">
                       {item.subCategoryName}
@@ -140,7 +139,7 @@ function ProductCardList(props) {
     </div>
     
     <div className=" flex font-medium flex-col md:w-[3.2rem] max-sm:flex-row w-full max-sm:justify-between ">
-        {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden">Weighted Value</h4> */}
+        
 
         <h4 class=" text-xs text-cardBody font-semibold  font-poppins">
                {item.attributeName}
@@ -207,6 +206,7 @@ function ProductCardList(props) {
               </OnlyWrapCard>
               </div>
 
+<Suspense fallback={"Loading"}>
               <UpdateProductModal
         updateProductModal={updateProductModal}
         handleUpdateProductModal={handleUpdateProductModal}
@@ -221,7 +221,7 @@ function ProductCardList(props) {
 handlePriceDrawer={handlePriceDrawer}
 priceOpenDrawer={priceOpenDrawer}
 />
-            
+</Suspense>      
            
         </>
     );

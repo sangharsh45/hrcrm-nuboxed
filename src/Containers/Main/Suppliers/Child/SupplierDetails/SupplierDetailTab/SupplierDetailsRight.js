@@ -2,9 +2,6 @@ import React, { Component, lazy, Suspense } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { BundleLoader } from "../../../../../../Components/Placeholder";
-import SupplierDetailsTab from "./SupplierDetailsTab";
-
-
 
 class SupplierDetailsRight extends Component {
   render() {
@@ -12,7 +9,7 @@ class SupplierDetailsRight extends Component {
     return (
       <div style={{ width: "100%" }}>
         <Suspense fallback={<BundleLoader />}>
-          {/* <SupplierDetailsTab supplier={this.props.supplier} /> */}
+        
         </Suspense>
       </div>
     );

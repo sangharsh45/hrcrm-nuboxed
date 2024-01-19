@@ -1,24 +1,18 @@
-import React, { useState, useEffect, useMemo, Component } from "react";
+import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { Button, Switch } from "antd";
-import { SelectComponent } from "../../../../Components/Forms/Formik/SelectComponent";
-import { Formik, Form, Field, FastField } from "formik";
-import { FlexContainer } from "../../../../Components/UI/Layout";
-import { Spacer } from "../../../../Components/UI/Elements";
+import { Button} from "antd";
+import { Formik, Form, Field } from "formik";
 import { InputComponent } from "../../../../Components/Forms/Formik/InputComponent";
 import { setClearbitProductDistributorData } from "../../../Product/ProductAction";
-import * as Yup from "yup";
 import { DatePicker } from "../../../../Components/Forms/Formik/DatePicker";
 import moment from "moment";
-// import DistributorProductClearbit from "../../../../Components/Forms/Autocomplete/DistributorProductClearbit";
 import { addDistributorOffer } from "../../ProductAction";
 
 class DistributorProductOfferForm extends Component {
     constructor(props) {
         super(props);
         this.state = {
-
         };
     }
 
@@ -30,12 +24,10 @@ class DistributorProductOfferForm extends Component {
                 <Formik
                     enableReinitialize
                     initialValues={{
-                        // productFullName: this.props.particularDiscountData.productFullName,
                         distributorOfferProductFullName: "",
                         distributorOfferProductQty: 0,
                         distributorProductQty: 0,
                         distributorOfferProductId: "",
-                        // productId: this.props.particularDiscountData.productId,
                         distributorStartDate: distributorStartDate || moment(),
                         distributorEndDate: distributorEndDate || null,
                         distributorEndDate: moment(),
@@ -133,16 +125,11 @@ class DistributorProductOfferForm extends Component {
                         ...rest
                     }) => (
                         <Form>
-                            <div style={{ display: "flex", justifyContent: "space-between" }}>
-                                <div
-                                    style={{
-                                        height: "100%",
-                                        width: "100%",
-                                    }}
-                                >
+                           <div class="flex justify-between">
+                                <div class="h-full w-full">
 
-                                    <FlexContainer justifyContent="space-between">
-                                        <div style={{ width: "12%" }}>
+                                <div class="flex justify-between">
+                                <div class="w-[12%]">
                                             <Field
                                                 isRequired
                                                 name="distributorProductQty"
@@ -151,15 +138,9 @@ class DistributorProductOfferForm extends Component {
                                                 component={InputComponent}
                                                 inlineLabel
                                                 // value={values.product}
-                                                style={{
-                                                    flexBasis: "80%",
-                                                    height: "29px",
-                                                    marginTop: "0px",
-                                                    width: "80%",
-                                                }}
                                             />
                                         </div>
-                                        <div style={{ width: "35%" }}>
+                                        <div class="w-[35%]">
                                             <Field
                                                 isRequired
                                                 name="productFullName"
@@ -168,17 +149,9 @@ class DistributorProductOfferForm extends Component {
                                                 disabled="true"
                                                 component={InputComponent}
                                                 inlineLabel
-                                                style={{
-                                                    flexBasis: "80%",
-                                                    height: "29px",
-                                                    marginTop: "0px",
-                                                    width: "100%",
-                                                }}
                                             />
                                         </div>
-                                        <div style={{ marginTop: "31px" }}>=</div>
-
-                                        <div style={{ width: "12%" }}>
+                                        <div class="w-[12%] mt-8">
                                             <Field
                                                 isRequired
                                                 name="distributorOfferProductQty"
@@ -187,15 +160,9 @@ class DistributorProductOfferForm extends Component {
                                                 component={InputComponent}
                                                 // value={values.startDate}
                                                 inlineLabel
-                                                style={{
-                                                    flexBasis: "80%",
-                                                    height: "29px",
-                                                    marginTop: "0px",
-                                                    width: "80%",
-                                                }}
                                             />
                                         </div>
-                                        <div style={{ width: "33%" }}>
+                                        <div class="w-[33%]">
                                             <Field
                                                 isRequired
                                                 name="label"
@@ -212,12 +179,11 @@ class DistributorProductOfferForm extends Component {
                                                 style={{ flexBasis: "80%" }}
                                             />
                                         </div>
-                                    </FlexContainer>
+                                    </div>
 
 
-                                    <Spacer style={{ marginBottom: "15px" }} />
-                                    <FlexContainer justifyContent="space-between">
-                                        <div style={{ width: "47%" }}>
+                                    <div class="flex justify-between mt-5">
+                                        <div class="w-[47%]">
                                             <Field
                                                 isRequired
                                                 name="distributorStartDate"
@@ -226,15 +192,9 @@ class DistributorProductOfferForm extends Component {
                                                 component={DatePicker}
                                                 value={values.distributorStartDate}
                                                 inlineLabel
-                                                style={{
-                                                    flexBasis: "80%",
-                                                    height: "29px",
-                                                    marginTop: "0px",
-                                                    width: "100%",
-                                                }}
                                             />
                                         </div>
-                                        <div style={{ width: "47%" }}>
+                                        <div class="w-[47%]">
                                             <Field
                                                 isRequired
                                                 name="distributorEndDate"
@@ -244,12 +204,6 @@ class DistributorProductOfferForm extends Component {
                                                 value={values.distributorEndDate || values.distributorStartDate}
                                                 defaultValue={moment("2015-01-01")}
                                                 inlineLabel
-                                                style={{
-                                                    flexBasis: "80%",
-                                                    height: "29px",
-                                                    marginTop: "0px",
-                                                    width: "100%",
-                                                }}
                                                 disabledDate={(currentDate) => {
                                                     if (values.startDate) {
                                                         if (
@@ -265,23 +219,20 @@ class DistributorProductOfferForm extends Component {
                                                 }}
                                             />
                                         </div>
-                                    </FlexContainer>
+                                    </div>
                                 </div>
                             </div>
 
-                            <FlexContainer justifyContent="flex-end">
+                            <div class="flex justify-end">
                                 <Button
+                                className="mt-5 ml-[286px]"
                                     type="primary"
                                     htmlType="submit"
                                     loading={this.props.addingDistributorOffer}
-                                    style={{
-                                        marginTop: "20px",
-                                        marginLeft: "286px",
-                                    }}
                                 >
                                     Submit
                                 </Button>
-                            </FlexContainer>
+                            </div>
                         </Form>
                     )}
                 </Formik>

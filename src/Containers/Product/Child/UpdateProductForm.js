@@ -100,19 +100,14 @@ class Productform extends Component {
             ...rest
           }) => (
             <Form>
-              <div style={{ display: "flex", justifyContent: "space-between" }}>
-                <div
-                  style={{
-                    height: "100%",
-                    width: "45%",
-                  }}
-                >
-                  <FlexContainer flexWrap="no-wrap">
-                    <div style={{ width: "40%" }}>
+             <div class="flex justify-between">
+             <div class="h-full w-[45%]">
+             <div class="flex-nowrap">
+                  <div class="w-[40%]" >
                       <Field name="imageId" component={Upload} />
                     </div>
-                  </FlexContainer>
-                  <Spacer style={{ marginBottom: "30px" }} />
+                  </div>
+                  <div class="mb-4">
 
                   <Field
                     defaultValue={{
@@ -131,8 +126,9 @@ class Productform extends Component {
                     inlineLabel
                     style={{ flexBasis: "80%" }}
                   />
-                  <Spacer />
-                  {/* <Spacer style={{ marginBottom: "30px" }} /> */}
+                  </div>
+                  <div class="mt-4">
+                 
                   <Field
                     defaultValue={{
                       label: this.props.setEditingProducts.subCategoryName,
@@ -149,9 +145,9 @@ class Productform extends Component {
                     inlineLabel
                     style={{ flexBasis: "80%" }}
                   />
-
-                  <Spacer />
-                  {/* <Spacer style={{ marginBottom: "30px" }} /> */}
+</div>
+<div class="mt-4">
+                  
                   <Field
                     name="name"
                     label="Name"
@@ -165,10 +161,11 @@ class Productform extends Component {
                       marginTop: "0px",
                     }}
                   />
-                  <Spacer />
-                  <FlexContainer justifyContent="space-between">
+                  </div>
+                  <div class="flex justify-between mt-4">
+       
 
-                    <div style={{ width: "47%" }}>
+                  <div class="w-[47%]">
 
                       <Field
                         defaultValue={{
@@ -188,7 +185,7 @@ class Productform extends Component {
                       />
                     </div>
                     <Spacer />
-                    <div style={{ width: "47%" }}>
+                    <div class="w-[47%]">
                       <Field
                         defaultValue={{
                           label: this.props.setEditingProducts.subAttributeName,
@@ -206,10 +203,9 @@ class Productform extends Component {
                         style={{ flexBasis: "80%" }}
                       />
                     </div>
-                  </FlexContainer>
-                  <Spacer />
-                  <FlexContainer justifyContent="space-between">
-                    <div style={{ width: "30%" }}>
+                  </div>
+                  <div class="flex justify-between mt-4">
+                 <div class="w-[30%]">
                     <Field
                         name="expireDays"
                         label="Expiry"
@@ -221,7 +217,7 @@ class Productform extends Component {
                       />
                     </div>
                     <Spacer />
-                    <div style={{ width: "30%" }}>
+                 <div class="w-[30%]">
                     <Field
                         name="bestBefore"
                         label="Best Before"
@@ -232,7 +228,7 @@ class Productform extends Component {
                         style={{ flexBasis: "30%" }}
                       />
                     </div>
-                    <div style={{ width: "30%" }}>
+                    <div class="w-[30%]">
                     <Field
                         name="alert"
                         label="Alert(in days)"
@@ -243,16 +239,11 @@ class Productform extends Component {
                         style={{ flexBasis: "30%" }}
                       />
                     </div>
-                  </FlexContainer>
+                  </div>
 
                 </div>
 
-                <div
-                  style={{
-                    height: "100%",
-                    width: "45%",
-                  }}
-                >
+                <div class="h-full w-[45%]">
 
                   {/* <Spacer style={{ marginBottom: "10px" }} />
                   <FlexContainer justifyContent="space-between">
@@ -398,8 +389,8 @@ class Productform extends Component {
                   <Spacer style={{ marginBottom: "30px" }} />
                   */}
 
-                  <FlexContainer justifyContent="space-between">
-                    <div style={{ width: "100%" }}>
+<div class="flex justify-between">
+<div class="w-full">
                       <Field
                         name="description"
                         label="Description"
@@ -414,14 +405,12 @@ class Productform extends Component {
                         }}
                       />
                     </div>
-                  </FlexContainer>
-                  <Spacer style={{ marginBottom: "30px" }} />
-
-
+                  </div>
+                
                 </div>
               </div>
 
-              <FlexContainer justifyContent="flex-end">
+              <div class = "flex justify-end ">
                 <Button
                   type="primary"
                   htmlType="submit"
@@ -429,7 +418,7 @@ class Productform extends Component {
                 >
                   Update
                 </Button>
-              </FlexContainer>
+              </div>
             </Form>
           )}
         </Formik>

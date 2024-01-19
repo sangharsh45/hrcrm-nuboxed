@@ -5,7 +5,6 @@ import { BundleLoader } from "../../Components/Placeholder";
 import ProductHeader from "./Child/ProductHeader";
 import { handleConfigureModal, setProductViewType } from "./ProductAction";
 const ProductListingTable =lazy(()=>import("./Child/ProductTable/ProductListingTable"));
-const ProductListByGroup =lazy(()=>import("./Child/ProductTable/ProductListByGroup"));
 const ProductCardList =lazy(()=>import("./Child/ProductTable/ProductCardList"));
 const ConfigureModal=lazy(()=>import("./Child/ConfigureModal"));
 
