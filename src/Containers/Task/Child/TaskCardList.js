@@ -8,6 +8,7 @@ import {
   CloseCircleOutlined,
   SearchOutlined,
 } from "@ant-design/icons";
+import InfiniteScroll from "react-infinite-scroll-component";
 import FeedbackIcon from '@mui/icons-material/Feedback';
 import StarBorderIcon from '@mui/icons-material/StarBorder';
 import DownloadForOfflineIcon from '@mui/icons-material/DownloadForOffline';
@@ -45,6 +46,7 @@ const ButtonGroup = Button.Group;
 const TaskCardList = (props) => {
   const [data, setData] = useState("");
   const [data1, setData1] = useState("");
+
   const [currentNameId, setCurrentNameId] = useState("");
 
   const [currentprocessName, setCurrentprocessName] = useState("");
@@ -58,9 +60,28 @@ const TaskCardList = (props) => {
     props.getTaskListRangeByUserId(props.employeeId,page);
   }, []);
   const handleLoadMore = () => {
-      setPage(page + 1);
-      props.getTaskListRangeByUserId(props.employeeId,page);
+    const callPageMapd = props.taskListRangeByUserId && props.taskListRangeByUserId.length &&props.taskListRangeByUserId[0].pageCount
+    setTimeout(() => {
+      const {
+        getTaskListRangeByUserId,
+        userDetails: { employeeId },
+      } = props;
+      if  (props.taskListRangeByUserId)
+      {
+        if (page < callPageMapd) {
+          setPage(page + 1);
+          getTaskListRangeByUserId(employeeId, page);
+      }
+      if (page === callPageMapd){
+        setHasMore(false)
+      }
+    }
+    }, 100);
   };
+  // const handleLoadMore = () => {
+  //     setPage(page + 1);
+  //     props.getTaskListRangeByUserId(props.employeeId,page);
+  // };
   function handleSetCurrentProcessName(item) {
     setCurrentprocessName(item);
      console.log(item);
@@ -101,23 +122,9 @@ const TaskCardList = (props) => {
 
   return (
     <>
-      {page < props.noOfPages ?
-          <div style={{ display: "flex", justifyContent: "flex-end", marginTop: "10px" }}>
-            <FloatButton.Group style={{width:"8rem",height:"5rem"}} >
-            <Button
-              style={{
-                color: "#1f92e2",
-                fontWeight: "600",
-                fontSize: "15px",
-                padding: "4px 12px",
-                boxShadow: "0px 0px 5px 2px #d2e2ed",
-                borderRadius: "22px"
-              }}
-              onClick={() => handleLoadMore()}
-            >Load More</Button>
-            </FloatButton.Group>
-          </div> : null}
-          <OnlyWrapCard style={{height:"81vh",backgroundColor:"#E3E8EE"}}>
+    
+          <div className=' flex justify-end sticky top-28 z-auto'>
+          <OnlyWrapCard style={{backgroundColor:"#E3E8EE"}}>
           <div className=" flex justify-between w-[99%] p-2 bg-transparent font-bold sticky top-0 z-10">
         <div className=" md:w-[8.5rem]"><FormattedMessage
                           id="app.type"
@@ -149,6 +156,14 @@ const TaskCardList = (props) => {
         <div className="md:w-[5%]"></div>
         <div className="w-12"></div>
       </div>
+      <InfiniteScroll
+        dataLength={taskListRangeByUserId.length}
+        next={handleLoadMore}
+      hasMore={hasMore}
+        loader={fetchingTaskListRangeByUserId?<h4 style={{ textAlign: 'center' }}>Loading...</h4>:null}
+        height={"75vh"}
+        endMessage={ <p class="fles text-center font-bold text-xs text-red-500">You have reached the end of page. </p>}
+      >
       {taskListRangeByUserId.map((item) => { 
         const currentDate = moment();
         const completionDate = moment(item.completionDate);
@@ -179,8 +194,8 @@ const TaskCardList = (props) => {
                       <div
                         style={{
                           borderRadius: "50%",
-                          height: "2.1875em",
-                          width: "2.1875em",
+                          height: "2rem",
+                          width: "3rem",
                           backgroundColor: "orange",
                         }}
                       ></div>
@@ -536,8 +551,9 @@ const TaskCardList = (props) => {
 
                     )
                 })}
+                 </InfiniteScroll>
       </OnlyWrapCard>
-
+</div>
 <UpdateTaskModal
           updateTaskModal={updateTaskModal}
           handleUpdateTaskModal={handleUpdateTaskModal}
@@ -670,8 +686,8 @@ addDrawerTaskFeedbackModal={props.addDrawerTaskFeedbackModal}
             onClick={onClick}
           >
             <i className={`fas ${iconType}`} style={{ fontSize: "1.375em" }} />
-
-            {status === type && <span style={{ fontSize: "0.82rem",display:"flex" }}>{daysLabel}</span>}
+{/* 
+            {status === type && <span style={{ fontSize: "0.82rem",display:"flex" }}>{daysLabel}</span>} */}
          
           </Button>
         </Tooltip>

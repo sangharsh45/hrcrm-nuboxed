@@ -46,7 +46,7 @@ class SingleModuleList extends Component {
               <div class=" flex " >
              
            
-              <h1>ERP</h1>
+              <div class=" text-base text-[#1677ff]">ERP</div>
                     <div   class=" w-[7%] ml-2">
                     {/* <Popconfirm
                         title="Do you wish to change Status ? "
@@ -66,7 +66,7 @@ class SingleModuleList extends Component {
                     </div>
            {this.props.moduleList.erpInd === true && ( 
             <>  
-              <h1>PRODUCTION</h1>
+              <div class=" text-base text-[#1677ff]">PRODUCTION</div>
                     <div   class=" w-[7%] ml-2">
                     {/* <Popconfirm
                         title="Do you wish to change Status ? "
@@ -85,7 +85,7 @@ class SingleModuleList extends Component {
                       {/* </Popconfirm> */}
                     </div>
 
-                    <h1>Repair</h1>
+                    <div class=" text-base text-[#1677ff]">Repair</div>
                     <div   class=" w-[7%] ml-2">
                     {/* <Popconfirm
                         title="Do you wish to change Status ? "
@@ -105,7 +105,7 @@ class SingleModuleList extends Component {
                       {/* </Popconfirm> */}
                     </div>
 
-                    <h1>Inventory</h1>
+                    <div class=" text-base text-[#1677ff]">Inventory</div>
                     <div   class=" w-[7%] ml-2">
                     {/* <Popconfirm
                         title="Do you wish to change Status ? "
@@ -124,7 +124,7 @@ class SingleModuleList extends Component {
                       {/* </Popconfirm> */}
                     </div>
 
-                    <h1>OrderManagement</h1>
+                    <div class=" text-base text-[#1677ff]">OrderManagement</div>
                     <div   class=" w-[7%] ml-2">
                     {/* <Popconfirm
                         title="Do you wish to change Status ? "
@@ -143,7 +143,7 @@ class SingleModuleList extends Component {
                       {/* </Popconfirm> */}
                     </div>
 
-                    <h1>Logistics</h1>
+                    <div class=" text-base text-[#1677ff]">Logistics</div>
                     <div   class=" w-[7%] ml-2">
                     {/* <Popconfirm
                         title="Do you wish to change Status ? "
@@ -162,7 +162,7 @@ class SingleModuleList extends Component {
                       {/* </Popconfirm> */}
                     </div>
 
-                    <h1>Procurement</h1>
+                    <div class=" text-base text-[#1677ff]">Procurement</div>
                     <div   class=" w-[7%] ml-2">
                     {/* <Popconfirm
                         title="Do you wish to change Status ? "

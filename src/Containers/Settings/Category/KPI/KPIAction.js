@@ -6,12 +6,12 @@ import { message } from "antd"
 /**
  * get all the Sector
  */
- export const getKpis = (orgId) => (dispatch) => {
+ export const getKpis = (departmentId) => (dispatch) => {
     dispatch({
       type: types.GET_KPI_REQUEST,
     });
     axios
-    .get(`${base_url}/performanceManagement/All/${orgId}`, {
+    .get(`${base_url}/performanceManagement/department/${departmentId}`, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },
@@ -36,7 +36,7 @@ import { message } from "antd"
   // /**
 //  * add a new sector 
 //  */
-export const addKpi = (sectors,orgId, cb) => (dispatch) => {
+export const addKpi = (sectors,departmentId, cb) => (dispatch) => {
     console.log(sectors);
     dispatch({
       type: types.ADD_KPI_REQUEST,
@@ -48,7 +48,7 @@ export const addKpi = (sectors,orgId, cb) => (dispatch) => {
         },
       })
       .then((res) => {
-        dispatch(getKpis(orgId));
+        dispatch(getKpis(departmentId));
         // {res.data.message?  
         //   message.success(res.data.message):
         message.success("KPI has been added successfully!");
@@ -136,12 +136,12 @@ export const updateKpi = ( performanceManagementId,kpi,cb) => (dispatch) => {
       });
   };
   
-  export const searchKpiName = (name) => (dispatch) => {
+  export const searchKpiName = (kpi) => (dispatch) => {
     dispatch({
       type: types.GET_KPI_SEARCH_REQUEST,
     });
     axios
-      .get(`${base_url}/paymentCategory/search/${name}`, {
+      .get(`${base_url}/PerformanceManagement/search/${kpi}`, {
         headers: {
           Authorization: "Bearer " + sessionStorage.getItem("token") || "",
         },

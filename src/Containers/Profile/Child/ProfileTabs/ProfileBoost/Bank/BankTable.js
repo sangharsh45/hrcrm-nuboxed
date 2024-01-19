@@ -1,24 +1,17 @@
-import React, { Component } from "react";
+import React, { Component,lazy } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-// import { getEmailCredentials } from "../../../../../Settings/Email/EmailAction";
 import {
   StyledTable,
-  StyledModal,
   StyledPopconfirm,
 } from "../../../../../../Components/UI/Antd";
-import { BundleLoader } from "../../../../../../Components/Placeholder";
-import { Icon } from "antd";
-import { handleBankModal } from "../../../../ProfileAction";
-import AddBankModal from "./AddBankModal";
-import UpdateBankModal from "../../ProfileBoost/Bank/UpdateBankModal";
 import { handleUpdateBankModal, setEditBank } from "../../../../ProfileAction";
 import { getBankDetails } from "../../../../ProfileAction";
-// import EditEmailForm from "../../../../../Settings/Email/Child/EditEmailForm"
 import { deleteBankTable } from "../../../../ProfileAction";
 import APIFailed from "../../../../../../Helpers/ErrorBoundary/APIFailed";
 import { FormattedMessage } from "react-intl";
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
+const UpdateBankModal = lazy(() => import("../../ProfileBoost/Bank/UpdateBankModal"));
 class BankTable extends Component {
   // constructor(props) {
   //     super(props);

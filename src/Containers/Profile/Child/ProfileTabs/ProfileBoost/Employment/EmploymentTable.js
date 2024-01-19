@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component,lazy } from "react";
 import { connect } from "react-redux";
 import { FormattedMessage } from "react-intl";
 import { bindActionCreators } from "redux";
@@ -10,16 +10,14 @@ import { handleUpdateEmploymentModal } from "../../../../ProfileAction";
 import {
   getEmploymentDetails,
   setEditEmployment,
-  deleteDocument,
 } from "../../../../ProfileAction";
 import DownloadIcon from '@mui/icons-material/Download';
-// import EditEmailForm from "../../../../../Settings/Email/Child/EditEmailForm"
-import UpdateEmploymentModal from "../Employment/UpdateEmploymentModal";
 import moment from "moment";
 import { base_url } from "../../../../../../Config/Auth";
 import { deleteEmploymentTable } from "../../../../ProfileAction";
 import APIFailed from "../../../../../../Helpers/ErrorBoundary/APIFailed";
-import { DeleteOutlined, DownloadOutlined, EditOutlined } from "@ant-design/icons";
+import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
+const UpdateEmploymentModal = lazy(() => import("../Employment/UpdateEmploymentModal"));
 class EmploymentTable extends Component {
   // constructor(props) {
   //     super(props);

@@ -4,10 +4,8 @@ import { bindActionCreators } from "redux";
 import { Button } from "antd";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
-import { Spacer } from "../../../../Components/UI/Elements";
 import { InputComponent } from "../../../../Components/Forms/Formik/InputComponent";
 import { addEmailProfileCredentials } from "../../ProfileAction";
-import { FlexContainer } from "../../../../Components/UI/Layout";
 /**
  * yup validation scheme for creating a Team
  */
@@ -55,12 +53,8 @@ class EmailForm extends Component {
             ...rest
           }) => (
               <Form className="form-background">
-                <div style={{ display: "flex", justifyContent: "space-between" }}>
-                  <div
-                    style={{
-                      height: "100%",
-                      width: "75%",
-                    }}
+                <div class=" flex justify-between" >
+                  <div class=" h-full w-[75%]"
                   >
                     <Field
                       name="email"
@@ -70,7 +64,7 @@ class EmailForm extends Component {
                       component={InputComponent}
                       width={"100%"}
                     />
-                    <Spacer />
+                  <div class=" mt-3">
                     <Field
                       type="password"
                       isRequired
@@ -80,7 +74,8 @@ class EmailForm extends Component {
                       width={"100%"}
                       component={InputComponent}
                     />
-                    <Spacer />
+                    </div>
+                    <div class=" mt-3">
                     <Field
                       isMulti
                       isRequired
@@ -90,26 +85,17 @@ class EmailForm extends Component {
                       isColumn
                       width={"100%"}
                     />
-                    <span
-                      style={{
-                        fontSize: "0.75em",
-                        fontStyle: "italic",
-                        marginLeft: "6.25em",
-                      }}
+                     </div>
+                    <span class=" text-[0.75em] text-[italic] ml-[6.25em]"
                     >
                       Example for Outlook users - smtp-mail.outlook.com{" "}
                     </span>
                     <br />
-                    <span
-                      style={{
-                        fontSize: "0.75em",
-                        fontStyle: "italic",
-                        marginLeft: "6.25em",
-                      }}
+                    <span class=" text-[0.75em] text-[italic] ml-[6.25em]"
                     >
                       Example for other webmail host - mail.example.com{" "}
                     </span>
-                    <Spacer />
+       <div class=" mt-3">
                     <Field
                       name="port"
                       label="Port"
@@ -118,10 +104,11 @@ class EmailForm extends Component {
                       width={"100%"}
                       component={InputComponent}
                     />
-                    <Spacer />
+                    </div>
+                 
                   </div>
                 </div>
-                <FlexContainer justifyContent="flex-end">
+                <div class=" flex justify-end" >
                   <Button
                     type="primary"
                     htmlType="submit"
@@ -129,7 +116,7 @@ class EmailForm extends Component {
                   >
                     Create
                 </Button>
-                </FlexContainer>
+                </div>
               </Form>
             )}
         </Formik>

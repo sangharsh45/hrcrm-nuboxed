@@ -1,6 +1,6 @@
 import React, { lazy, Suspense, Component } from "react";
 import { BundleLoader } from "../../../../../../Components/Placeholder";
-import { StyledModal } from "../../../../../../Components/UI/Antd";
+import { StyledDrawer } from "../../../../../../Components/UI/Antd";
 import { FormattedMessage } from "react-intl";
 const UpdateTrainingForm = lazy(() => import("../Training/UpdateTrainingForm"));
 
@@ -13,7 +13,7 @@ class UpdateTrainingModal extends Component {
     } = this.props;
     return (
       <>
-        <StyledModal
+        <StyledDrawer
           //title="Training"
           title={
             <FormattedMessage id="app.training" defaultMessage="Training" />
@@ -24,14 +24,14 @@ class UpdateTrainingModal extends Component {
           destroyOnClose
           maskClosable={false}
           maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}
-          style={{ top: 40 }}
-          onCancel={() => handleUpdateTrainingModal(false)}
+          style={{ marginTop: "3rem" }}
+          onClose={() => handleUpdateTrainingModal(false)}
           footer={null}
         >
           <Suspense fallback={<BundleLoader />}>
             <UpdateTrainingForm />
           </Suspense>
-        </StyledModal>
+        </StyledDrawer>
       </>
     );
   }

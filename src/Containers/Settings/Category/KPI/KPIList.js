@@ -43,7 +43,7 @@ class KPIList extends Component {
   
     if (e.target.value.trim() === "") {
       this.setState((prevState) => ({ pageNo: prevState.pageNo + 1 }));
-      this.props.getKpis(this.props.orgId);
+      this.props.getKpis(this.props.departmentId);
       this.props.ClearReducerDataOfKpi();
     }
   };
@@ -57,7 +57,7 @@ class KPIList extends Component {
   };
   handleClear = () => {
     this.setState({ currentData: "" });
-    this.props.getKpis(this.props.orgId);
+    this.props.getKpis(this.props.departmentId);
   };
   setCurrentData = (value) => {
     this.setState({ currentData: value });
@@ -79,6 +79,7 @@ class KPIList extends Component {
       const { kpi, editInd,frequency, addingKpi, isTextInputOpen } = this.state;
       let customer = { kpi,
         frequency,
+        departmentId:this.props.departmentId,
         orgId: this.props.orgId,
         userId:this.props.userId,
          editInd };
@@ -91,7 +92,7 @@ class KPIList extends Component {
       //     "Can't create as another source type exists with the same name!"
       //   );
       // } else {
-        addKpi(customer,this.props.orgId ,() => console.log("add sector callback"));
+        addKpi(customer,this.props.departmentId ,() => console.log("add sector callback"));
         this.setState({
           kpi: "",
           frequency,
@@ -112,9 +113,9 @@ class KPIList extends Component {
   };
 
   componentDidMount() {
-    const {   getKpis,orgId } = this.props;
+    const {   getKpis,departmentId } = this.props;
     console.log();
-    getKpis(orgId);
+    getKpis(departmentId);
     // this.getLinkedSources();
   }
   render() {

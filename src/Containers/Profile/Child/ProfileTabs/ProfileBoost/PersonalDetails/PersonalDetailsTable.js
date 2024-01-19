@@ -1,9 +1,8 @@
-import React, { Component } from "react";
+import React, { Component,lazy } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import {
   StyledTable,
-  StyledModal,
   StyledPopconfirm,
 } from "../../../../../../Components/UI/Antd";
 import DownloadIcon from '@mui/icons-material/Download';
@@ -14,11 +13,10 @@ import {
   setEditDocument,
   deletePersonalTable,
 } from "../../../../ProfileAction";
-import UpdatePersonalDetailsModal from "./UpdatePersonalDetailsModal";
-import moment from "moment";
 import APIFailed from "../../../../../../Helpers/ErrorBoundary/APIFailed";
 import { FormattedMessage } from "react-intl";
-import { DeleteOutlined, DownloadOutlined, EditOutlined } from "@ant-design/icons";
+import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
+const UpdatePersonalDetailsModal = lazy(() => import("./UpdatePersonalDetailsModal"));
 class EducationTable extends Component {
   componentDidMount() {
     const { getDocumentDetails, employeeId } = this.props;
