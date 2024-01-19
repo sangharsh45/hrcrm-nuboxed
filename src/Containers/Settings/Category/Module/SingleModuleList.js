@@ -48,129 +48,137 @@ class SingleModuleList extends Component {
            
               <h1>ERP</h1>
                     <div   class=" w-[7%] ml-2">
-                    <Popconfirm
+                    {/* <Popconfirm
                         title="Do you wish to change Status ? "
                         onConfirm={this.props.handleErpClick}
                         onCancel={this.props.handleErpCancel}
                         okText="Yes"
                         cancelText="No"
-                      >
+                      > */}
                         <Switch
+                         onChange={this.props.handleErpClick}
                           style={{ width: "5em" }}
-                          checked={this.props.erpStatus || this.props.rowdata.erpInd}
+                          checked={this.props.erpStatus || this.props.moduleList.erpInd}
                           checkedChildren="Yes"
                           unCheckedChildren="No"
                         />
-                      </Popconfirm>
+                      {/* </Popconfirm> */}
                     </div>
-           {this.props.rowdata.erpInd === true && ( 
+           {this.props.moduleList.erpInd === true && ( 
             <>  
               <h1>PRODUCTION</h1>
                     <div   class=" w-[7%] ml-2">
-                    <Popconfirm
+                    {/* <Popconfirm
                         title="Do you wish to change Status ? "
                         onConfirm={this.props.handleProductionClick}
                         onCancel={this.props.handleProductionCancel}
                         okText="Yes"
                         cancelText="No"
-                      >
+                      > */}
                         <Switch
                           style={{ width: "5em" }}
-                          checked={this.props.productionStatus || this.props.rowdata.productionInd}
+                         onChange={this.props.handleProductionClick}
+                         checked={this.props.productionStatus || this.props.moduleList.productionInd}
                           checkedChildren="Yes"
                           unCheckedChildren="No"
                         />
-                      </Popconfirm>
+                      {/* </Popconfirm> */}
                     </div>
 
                     <h1>Repair</h1>
                     <div   class=" w-[7%] ml-2">
-                    <Popconfirm
+                    {/* <Popconfirm
                         title="Do you wish to change Status ? "
                         onConfirm={this.props.handleRepairClick}
                         onCancel={this.props.handleRepairCancel}
                         okText="Yes"
                         cancelText="No"
-                      >
+                      > */}
                         <Switch
+                        onChange={this.props.handleRepairClick}
+                        checked={this.props.repairStatus || this.props.moduleList.repairInd}
                           style={{ width: "5em" }}
-                          checked={this.props.repairStatus || this.props.rowdata.repairInd}
+ 
                           checkedChildren="Yes"
                           unCheckedChildren="No"
                         />
-                      </Popconfirm>
+                      {/* </Popconfirm> */}
                     </div>
 
                     <h1>Inventory</h1>
                     <div   class=" w-[7%] ml-2">
-                    <Popconfirm
+                    {/* <Popconfirm
                         title="Do you wish to change Status ? "
                         onConfirm={this.props.handleInventoryClick}
                         onCancel={this.props.handleInventoryCancel}
                         okText="Yes"
                         cancelText="No"
-                      >
+                      > */}
                         <Switch
+                         onChange={this.props.handleInventoryClick}
+                         checked={this.props.inventoryStatus || this.props.moduleList.inventoryInd}
                           style={{ width: "5em" }}
-                          checked={this.props.inventoryStatus || this.props.rowdata.inventoryInd}
                           checkedChildren="Yes"
                           unCheckedChildren="No"
                         />
-                      </Popconfirm>
+                      {/* </Popconfirm> */}
                     </div>
 
                     <h1>OrderManagement</h1>
                     <div   class=" w-[7%] ml-2">
-                    <Popconfirm
+                    {/* <Popconfirm
                         title="Do you wish to change Status ? "
                         onConfirm={this.props.handleOrderManagementClick}
                         onCancel={this.props.handleOrderManagementCancel}
                         okText="Yes"
                         cancelText="No"
-                      >
+                      > */}
                         <Switch
                           style={{ width: "5em" }}
-                          checked={this.props.orderManagStatus || this.props.rowdata.orderManagementInd}
+                          onChange={this.props.handleOrderManagementClick}
+                         checked={this.props.orderManagStatus || this.props.moduleList.orderManagementInd}
                           checkedChildren="Yes"
                           unCheckedChildren="No"
                         />
-                      </Popconfirm>
+                      {/* </Popconfirm> */}
                     </div>
 
                     <h1>Logistics</h1>
                     <div   class=" w-[7%] ml-2">
-                    <Popconfirm
+                    {/* <Popconfirm
                         title="Do you wish to change Status ? "
                         onConfirm={this.props.handleLogisticClick}
                         onCancel={this.props.handleLogisticCancel}
                         okText="Yes"
                         cancelText="No"
-                      >
+                      > */}
                         <Switch
+                         onChange={this.props.handleLogisticClick}
+                         checked={this.props.logisticsStatus || this.props.moduleList.logisticsInd}
                           style={{ width: "5em" }}
-                          checked={this.props.logisticsStatus || this.props.rowdata.logisticsInd}
                           checkedChildren="Yes"
                           unCheckedChildren="No"
                         />
-                      </Popconfirm>
+                      {/* </Popconfirm> */}
                     </div>
 
                     <h1>Procurement</h1>
                     <div   class=" w-[7%] ml-2">
-                    <Popconfirm
+                    {/* <Popconfirm
                         title="Do you wish to change Status ? "
                         onConfirm={this.props.handleProcurmentClick}
                         onCancel={this.props.handleProcurmentCancel}
                         okText="Yes"
                         cancelText="No"
-                      >
+                      > */}
                         <Switch
+                         onChange={this.props.handleProcurmentClick}
+                         checked={this.props.procurmentStatus || this.props.moduleList.procurementInd}
                           style={{ width: "5em" }}
-                          checked={this.props.procurmentStatus || this.props.rowdata.procurementInd}
                           checkedChildren="Yes"
                           unCheckedChildren="No"
                         />
-                      </Popconfirm>
+                      {/* </Popconfirm> */}
                     </div>
                     </>   
               
