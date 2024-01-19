@@ -330,7 +330,9 @@ export const suppliersReducer = (state = initialState, action) => {
     case types.ADD_SUPPLIERS_REQUEST:
       return { ...state, addingSuppliers: true };
     case types.ADD_SUPPLIERS_SUCCESS:
-      return { ...state, addingSuppliers: false, addSuppliersModal: false };
+      return { ...state, addingSuppliers: false, addSuppliersModal: false,
+        supplierList:[action.payload,...state.supplierList]
+      };
     case types.ADD_SUPPLIERS_FAILURE:
       return {
         ...state,
@@ -345,7 +347,7 @@ export const suppliersReducer = (state = initialState, action) => {
       return {
         ...state,
         fetchingSupplierList: false,
-        supplierList: action.payload,
+        supplierList:[...state.supplierList,...action.payload]
       };
     case types.GET_SUPPLIERS_LIST_FAILURE:
       return {

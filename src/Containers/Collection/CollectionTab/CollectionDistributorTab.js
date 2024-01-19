@@ -12,9 +12,9 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { StyledTabs } from "../../../Components/UI/Antd";
 import { TabsWrapper } from "../../../Components/UI/Layout";
-import DistributorCollectionTableToday from "../Distributor/DistributorCollectionTableToday";
-import DistributorColletcionArchive from "../Distributor/DistributorColletcionArchive";
-import DistributorCollectionTableAll from "../Distributor/DistributorCollectionTableAll";
+const DistributorCollectionTableToday =lazy(()=>import("../Distributor/DistributorCollectionTableToday"));
+const DistributorColletcionArchive =lazy(()=>import("../Distributor/DistributorColletcionArchive"));
+const DistributorCollectionTableAll =lazy(()=>import("../Distributor/DistributorCollectionTableAll"));
 
 
 
@@ -25,38 +25,10 @@ function CollectionDistributorTab(props) {
     selectedTodayRowDistributor,
     setSelectedTodayRowDistributor,
   ] = useState([]);
+
   const [selectedRowDistributor, setSelectedRowDistributor] = useState([]);
-  const [selectedReturnRowDistributor, setSelectedReturnRowDistributor] = useState([]);
   const [activeKey, setActiveKey] = useState("1");
 
-  const rowSelection = {
-    onChange: (selectedReturnKeys, selectedReturnRows) => {
-      setSelectedReturnRowDistributor(selectedReturnRows);
-      console.log(
-        `selectedReturnKeys: ${selectedReturnKeys}`,
-        "selectedReturnRows: ",
-        selectedReturnRows
-      );
-    },
-  };
-
-  const resultFormemo = selectedReturnRowDistributor.reduce((acc, item) => {
-    acc = acc + item.paymentAmount;
-    return acc;
-  }, 0);
-
-
-
-  const rowSelectionForDistributor = {
-    onChange: (selectedRowKeys, selectedRows) => {
-      setSelectedRowDistributor(selectedRows);
-      console.log(
-        `selectedRowKeys: ${selectedRowKeys}`,
-        "selectedRows: ",
-        selectedRows
-      );
-    },
-  };
   function handleTabChange(key) {
     setActiveKey(key);
   }
@@ -88,7 +60,7 @@ function CollectionDistributorTab(props) {
     acc = acc + item.paymentAmount;
     return acc;
   }, 0);
-  console.log(activeKey);
+
   return (
     <>
       <TabsWrapper>
@@ -155,7 +127,7 @@ function CollectionDistributorTab(props) {
             <Suspense fallback={"Loading ..."}>
             
               <DistributorColletcionArchive
-                // rowSelectionForDistributor={rowSelectionForDistributor}
+
                 handleClearReturnCheck={handleClearReturnCheck}
               />
             </Suspense>
@@ -176,7 +148,7 @@ function CollectionDistributorTab(props) {
             <Suspense fallback={"Loading ..."}>
               {" "}
               <DistributorCollectionTableAll
-              //  rowSelectionForDistributor={rowSelectionForDistributor}
+    
               />
             </Suspense>
           </TabPane>

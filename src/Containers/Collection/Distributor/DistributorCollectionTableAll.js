@@ -1,152 +1,40 @@
-import React, { Component, useEffect, useState } from "react";
+import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { Tooltip, Input, Button, Space } from "antd";
-import { StyledTable } from "../../../Components/UI/Antd";
-import { Spacer } from "../../../Components/UI/Elements";
+import { Tooltip} from "antd";
 import { getAllDistributorsList } from "../CollectionAction";
 import APIFailed from "../../../Helpers/ErrorBoundary/APIFailed";
 import { CurrencySymbol } from "../../../Components/Common";
-import Highlighter from "react-highlight-words";
-import { SearchOutlined } from "@ant-design/icons";
 import { Link } from "../../../Components/Common";
 import { OnlyWrapCard } from "../../../Components/UI/Layout";
 import moment from "moment";
-// import { getAllSalesUser } from "../../Leads/LeadsAction";
+import InfiniteScroll from "react-infinite-scroll-component";
 
 class AllDistributorList extends Component {
-  componentDidMount() {
-    this.props.getAllDistributorsList();
-    // this.props.getAllSalesUser();
-  }
 
   state = {
     searchText: "",
     searchedColumn: "",
+    page:0,
+    hasMore:true
   };
 
-  getColumnSearchProps = (dataIndex) => ({
-    filterDropdown: ({
-      setSelectedKeys,
-      selectedKeys,
-      confirm,
-      clearFilters,
-    }) => (
-      <div style={{ padding: 8 }}>
-        <Input
-          ref={(node) => {
-            this.searchInput = node;
-          }}
-          placeholder={`Search ${dataIndex}`}
-          value={selectedKeys[0]}
-          onChange={(e) =>
-            setSelectedKeys(e.target.value ? [e.target.value] : [])
-          }
-          onPressEnter={() =>
-            this.handleSearch(selectedKeys, confirm, dataIndex)
-          }
-          style={{ marginBottom: 8, display: "block" }}
-        />
-        <Space>
-          <Button
-            type="primary"
-            onClick={() => this.handleSearch(selectedKeys, confirm, dataIndex)}
-            icon={<SearchOutlined />}
-            size="small"
-            style={{ width: 90 }}
-          >
-            Search
-          </Button>
-          <Button
-            onClick={() => this.handleReset(clearFilters)}
-            size="small"
-            style={{ width: 90 }}
-          >
-            Reset
-          </Button>
-          <Button
-            type="link"
-            size="small"
-            onClick={() => {
-              confirm({ closeDropdown: false });
-              this.setState({
-                searchText: selectedKeys[0],
-                searchedColumn: dataIndex,
-              });
-            }}
-          >
-            Filter
-          </Button>
-        </Space>
-      </div>
-    ),
-    filterIcon: (filtered) => (
-      <SearchOutlined style={{ color: filtered ? "#1890ff" : undefined }} />
-    ),
-    onFilter: (value, record) =>
-      record[dataIndex]
-        ? record[dataIndex]
-          .toString()
-          .toLowerCase()
-          .includes(value.toLowerCase())
-        : "",
-    onFilterDropdownVisibleChange: (visible) => {
-      if (visible) {
-        setTimeout(() => this.searchInput.select(), 100);
-      }
-    },
-    render: (text) =>
-      this.state.searchedColumn === dataIndex ? (
-        <Highlighter
-          highlightStyle={{ backgroundColor: "#ffc069", padding: 0 }}
-          searchWords={[this.state.searchText]}
-          autoEscape
-          textToHighlight={text ? text.toString() : ""}
-        />
-      ) : (
-        text
-      ),
-  });
+  componentDidMount() {
+    this.setState({page:this.state.page+1})
+    this.props.getAllDistributorsList(this.state.page);
+  }
 
-  handleSearch = (selectedKeys, confirm, dataIndex) => {
-    confirm();
-    this.setState({
-      searchText: selectedKeys[0],
-      searchedColumn: dataIndex,
-    });
-  };
-
-  handleReset = (clearFilters) => {
-    clearFilters();
-    this.setState({ searchText: "" });
-  };
+  handleLoadMore = () => {
+    this.setState({page:this.state.page+1})
+    this.props.getAllDistributorsList(this.state.page);
+  }
 
   render() {
-    // const salesOption = this.props.allSalesUsers.sort(function (a, b) 
-    // {
-    //   var nameA = a.salesExecutive.toUpperCase(); 
-    //   var nameB = b.salesExecutive.toUpperCase(); 
-    //   if (nameA < nameB) {
-    //     return -1;
-    //   }
-    //   if (nameA > nameB) {
-    //     return 1;
-    //   }
-    
-    //   return 0;
-    // }).map((item) => {
-    //   return {
-    //     text: item.salesExecutive,
-    //     value: item.salesExecutive,
-    //   };
-    // });
    
     if (this.props.fetchingAllDistributorsError) {
       return <APIFailed />;
     }
 
-    const tab = document.querySelector(".ant-layout-sider-children");
-    const tableHeight = tab && tab.offsetHeight - 200;
 
     return (
       <>
@@ -162,16 +50,16 @@ class AllDistributorList extends Component {
         <div className="md:w-[6.2rem]">Owner </div>
         <div className="md:w-[11.3rem]">Balance</div>
         <div className="md:w-[11.3rem]">Previous</div>
-        {/* <div className="w-[3.8rem]">Action</div> */}
+
 
       </div>
-        {/* <InfiniteScroll
-        dataLength={customerByUserId.length}
-        next={handleLoadMore}
-        hasMore={hasMore}
-        loader={fetchingCustomers?<h4 style={{ textAlign: 'center' }}>Loading...</h4>:null}
+        <InfiniteScroll
+        dataLength={this.props.allDistributors.length}
+        next={this.handleLoadMore}
+        hasMore={this.state.hasMore}
+        loader={this.props.fetchingAllDistributors?<h4 style={{ textAlign: 'center' }}>Loading...</h4>:null}
         height={"75vh"}
-      > */}
+      >
       
       {this.props.allDistributors.map((item) => { 
          const currentdate = moment().format("DD/MM/YYYY");
@@ -308,24 +196,9 @@ class AllDistributorList extends Component {
 
                     )
                 })}
-                {/* </InfiniteScroll> */}
+                </InfiniteScroll>
       </OnlyWrapCard>
       </div>
-
-        {/* <StyledTable
-          rowKey="distributorId"
-          columns={columns}
-          dataSource={this.props.allDistributors}
-          loading={
-            this.props.fetchingAllDistributors ||
-            this.props.fetchingAllDistributorsError ||
-            this.props.fetchingAllDistributorData
-          }
-          pagination={false}
-          scroll={{ y: tableHeight }}
-          rowSelection={this.props.rowSelectionForDistributor}
-        /> */}
-     
       </>
     );
   }
@@ -343,7 +216,7 @@ const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
       getAllDistributorsList,
-    //   getAllSalesUser,
+
     },
     dispatch
   );

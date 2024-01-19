@@ -1,30 +1,21 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { StyledTable } from "../../../Components/UI/Antd";
-import { Link } from "../../../Components/Common";
-import { Button, Empty, Input, Space, Tooltip } from "antd";
-import { SearchOutlined } from "@ant-design/icons";
-import Highlighter from "react-highlight-words";
+import { Button} from "antd";
 import { OnlyWrapCard } from '../../../Components/UI/Layout'
 import { Formik, Form, Field } from "formik";
-import { FlexContainer } from "../../../Components/UI/Layout";
 import { DatePicker } from "../../../Components/Forms/Formik/DatePicker";
-import APIFailed from "../../../Helpers/ErrorBoundary/APIFailed";
 import {
   getTodayDistributor,
   DistributorCollectionReceivableToday,
   handleDistributorProductModal
 } from "../CollectionAction";
 import moment from "moment";
-// import { getAllSalesUser } from "../../../Leads/LeadsAction";
 import DistributorPaymentToggle from "./DistributorPaymentToggle";
-import { CurrencySymbol } from "../../../Components/Common";
 import DistributorProductHistory from "./DistributorProductHistory";
 
 function DistributorColletcionArchive(props) {
   useEffect(() => {
-    // props.getAllSalesUser();
     props.getTodayDistributor();
   }, []);
 
@@ -33,135 +24,14 @@ function DistributorColletcionArchive(props) {
   function handleSetParticularOrderData(item) {
     setParticularRowData(item);
   }
-  const [selectedRow, setselectedRow] = useState([]);
-  const [searchText, setSearchText] = useState("");
-  const [searchedColumn, setSearchedColumn] = useState("");
-  function getColumnSearchProps(dataIndex) {
-    return {
-      filterDropdown: ({
-        setSelectedKeys,
-        selectedKeys,
-        confirm,
-        clearFilters,
-      }) => (
-        <div style={{ padding: 8 }}>
-          <Input
-            // ref={node => {
-            //   searchInput = node;
-            // }}
-            placeholder={`Search ${dataIndex}`}
-            value={selectedKeys[0]}
-            onChange={(e) =>
-              setSelectedKeys(e.target.value ? [e.target.value] : [])
-            }
-            onPressEnter={() => handleSearch(selectedKeys, confirm, dataIndex)}
-            style={{ width: 240, marginBottom: 8, display: "block" }}
-          />
-          <Space>
-            <Button
-              type="primary"
-              onClick={() => handleSearch(selectedKeys, confirm, dataIndex)}
-              icon={<SearchOutlined />}
-              size="small"
-              style={{ width: 90 }}
-            >
-              Search
-            </Button>
-            <Button
-              onClick={() => handleReset(clearFilters)}
-              size="small"
-              style={{ width: 90 }}
-            >
-              Reset
-            </Button>
-            <Button
-              type="link"
-              size="small"
-              onClick={() => {
-                confirm({ closeDropdown: false });
-                setSearchText(selectedKeys[0]);
-                setSearchedColumn(dataIndex);
-              }}
-            >
-              Filter
-            </Button>
-          </Space>
-        </div>
-      ),
-      filterIcon: (filtered) => (
-        <SearchOutlined style={{ color: filtered ? "#1890ff" : undefined }} />
-      ),
-      onFilter: (value, record) =>
-        record[dataIndex]
-          ? record[dataIndex]
-            .toString()
-            .toLowerCase()
-            .includes(value.toLowerCase()) : "",
-      onFilterDropdownVisibleChange: (visible) => {
-        if (visible) {
-        }
-      },
-      render: (text) =>
-        searchedColumn === dataIndex ? (
-          <Highlighter
-            highlightStyle={{ backgroundColor: "#ffc069", padding: 0 }}
-            searchWords={[searchText]}
-            autoEscape
-            textToHighlight={text ? text.toString() : ""}
-          />
-        ) : (
-          text
-        ),
-    };
-  }
 
-  function handleSearch(selectedKeys, confirm, dataIndex) {
-    confirm();
-    setSearchText(selectedKeys[0]);
-    setSearchedColumn(dataIndex);
-  }
-
-  function handleReset(clearFilters) {
-    clearFilters();
-    setSearchText("");
-  }
   function handleClear() {
     props.getTodayDistributor();
   }
-  const salesOption = useMemo(() => {
-    if (!props.allSalesUsers) return [];
-    return (
-      props.allSalesUsers.length &&
-      props.allSalesUsers
-        .sort(function (a, b) {
-          var nameA = a.salesExecutive.toUpperCase(); // ignore upper and lowercase
-          var nameB = b.salesExecutive.toUpperCase(); // ignore upper and lowercase
-          if (nameA < nameB) {
-            return -1;
-          }
-          if (nameA > nameB) {
-            return 1;
-          }
-          // names must be equal
-          return 0;
-        })
-        .map((allSalesUsers) => {
-          return {
-            text: allSalesUsers.salesExecutive || "",
-            value: allSalesUsers.salesExecutive,
-          };
-        })
-    );
-  }, [props.allSalesUsers]);
 
   const { user } = props;
 
 
-  // if (props.DistributorCollectionArchiveError) {
-  //   return <APIFailed />;
-  // }
-  const tab = document.querySelector(".ant-layout-sider-children");
-  const tableHeight = tab && tab.offsetHeight - 200;
   return (
     <>
 
@@ -190,19 +60,8 @@ function DistributorColletcionArchive(props) {
           ...rest
         }) => (
           <Form>
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "space-evenly",
-                height: "100%",
-                width: "30%",
-                alignItems: "end"
-              }}
-            >
-              <div
-                style={{
-                  width: "35%",
-                }}>
+            <div class="flex justify-evenly h-full w-[30%] items-end">
+              <div class="w-[35%]">
                 <Field
                   isRequired
                   name="date"
@@ -215,11 +74,7 @@ function DistributorColletcionArchive(props) {
 
                 />
               </div>
-              <div
-                style={{
-                  width: "25%",
-                }}
-              >
+              <div class="w-[25%]">
                 <Button
                   type="primary"
                   htmlType="submit"
@@ -230,11 +85,7 @@ function DistributorColletcionArchive(props) {
                   Submit
                 </Button>
               </div>
-              <div
-                style={{
-                  width: "15%",
-                }}
-              >
+              <div class="w-[15%]">
                 <Button
                   type="primary"
                   disabled={values.date ? false : true}
@@ -250,23 +101,7 @@ function DistributorColletcionArchive(props) {
             </div>
 
 
-            {/* <StyledTable
-              rowKey="paymentId"
-              rowSelection={props.rowSelectionTodayForDistributor}
-              columns={columns}
-              scroll={{ y: tableHeight }}
-              pagination={false}
-              loading={
-                props.fetchingTodayDistributor ||
-                props.fetchingTodayDistributorError
-              }
-              dataSource={props.todayDistributor}
-              locale={{
-                emptyText: (
-                  <Empty description={"We couldn't find relevant data"} />
-                ),
-              }}
-            /> */}
+            
           </Form>
         )}
       </Formik>
@@ -311,15 +146,11 @@ function DistributorColletcionArchive(props) {
               } `;
             return (
               <div>
-                <div className="flex rounded-xl justify-between mt-4 bg-white h-12 items-center p-3 "
-                // style={{
-                //     borderBottom: "3px dotted #515050"
-                // }}
-                >
+                <div className="flex rounded-xl justify-between mt-4 bg-white h-12 items-center p-3 ">
                   <div class="flex">
                     <div className=" flex font-medium flex-col  md:w-[9.1rem] max-sm:flex-row w-full max-sm:justify-between  ">
 
-                      {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden"> Sector </h4> */}
+      
                       <h4 class=" text-xs text-cardBody font-poppins">
                         {item.orderSourceName}
                       </h4>
@@ -328,7 +159,7 @@ function DistributorColletcionArchive(props) {
 
                     <div className=" flex font-medium flex-col  md:w-[9rem] max-sm:flex-row w-full max-sm:justify-between  ">
 
-                      {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden"> Sector </h4> */}
+      
                       <h4 class=" text-xs text-cardBody font-poppins">
                         {item.orderId}
                       </h4>
@@ -338,7 +169,7 @@ function DistributorColletcionArchive(props) {
                   </div>
                   <div class="flex">
                     <div className=" flex font-medium flex-col md:w-[10.1rem] max-sm:flex-row w-full max-sm:justify-between ">
-                      {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden"># Opportunity</h4> */}
+                 
 
                       <div class=" text-xs text-cardBody font-poppins text-center">
                         {item.transactionNumber}
@@ -346,7 +177,7 @@ function DistributorColletcionArchive(props) {
                       </div>
                     </div>
                     <div className=" flex font-medium flex-col md:w-0 max-sm:flex-row w-full max-sm:justify-between ">
-                      {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden">Pipeline Value</h4> */}
+          
 
                       <div class=" text-xs text-cardBody font-poppins text-center">
                         {item.paymentType}
@@ -355,7 +186,7 @@ function DistributorColletcionArchive(props) {
                     </div>
                   </div>
                   <div className=" flex font-medium flex-col md:w-96 max-sm:flex-row w-full max-sm:justify-between ">
-                    {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden">Weighted Value</h4> */}
+       
 
                     <div class=" text-xs text-cardBody font-poppins text-center">
                       {` ${moment(item.date).format("DD-MM-YY")}`}
@@ -367,7 +198,7 @@ function DistributorColletcionArchive(props) {
                     <div class="flex">
                       <div className=" flex font-medium flex-col  md:w-28 max-sm:flex-row w-full max-sm:justify-between  ">
 
-                        {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden"> Sector </h4> */}
+                      
                         <h4 class=" text-xs text-cardBody font-poppins">
                           {` ${moment(item.paymentDate).format("ll")}`}
                         </h4>
@@ -375,7 +206,7 @@ function DistributorColletcionArchive(props) {
                       </div>
                       <div className=" flex font-medium flex-col  md:w-28 max-sm:flex-row w-full max-sm:justify-between  ">
 
-                        {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden"> Sector </h4> */}
+                      
                         <h4 class=" text-xs text-cardBody font-poppins">
                           {item.paymentAmount}
                         </h4>
@@ -385,7 +216,7 @@ function DistributorColletcionArchive(props) {
                     <div class="flex">
                       <div className=" flex font-medium flex-col  md:w-[5.6rem] max-sm:flex-row w-full max-sm:justify-between  ">
 
-                        {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden"> Sector </h4> */}
+                       
                         <h4 class=" text-xs text-cardBody font-poppins">
                           {item.paymentMode}
                         </h4>
@@ -393,11 +224,11 @@ function DistributorColletcionArchive(props) {
                       </div>
                       <div className=" flex font-medium flex-col  md:w-[5.5rem] max-sm:flex-row w-full max-sm:justify-between  ">
 
-                        {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden"> Sector </h4> */}
+        
                         <h4 class=" text-xs text-cardBody font-poppins">
-                          {/* {user.designation === "Manager" &&
-            user.functionName === "Sales" ? null : ( */}
-                          <DistributorPaymentToggle paymentId={item.paymentId} />
+                         {user.collectionApproveInd === true && (
+                          <DistributorPaymentToggle paymentId={item.paymentId} orderPaymentType={item.orderPaymentType}/>
+                         )}
                         </h4>
 
                       </div>
@@ -405,7 +236,7 @@ function DistributorColletcionArchive(props) {
                     <div class="flex">
                       <div className=" flex font-medium flex-col  md:w-[6.3rem] max-sm:flex-row w-full max-sm:justify-between  ">
 
-                        {/* <h4 class=" text-sm text-cardBody font-poppins max-sm:hidden"> Sector </h4> */}
+        
                         <h4 class=" text-xs text-cardBody font-poppins">
                           {item.salesExecutive}
                         </h4>
@@ -446,7 +277,6 @@ const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
       getTodayDistributor,
-      //   getAllSalesUser,
       DistributorCollectionReceivableToday,
       handleDistributorProductModal
     },

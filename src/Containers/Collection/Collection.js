@@ -11,9 +11,6 @@ import { getAllCustomersList, getAllDistributorsList } from "./CollectionAction"
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { BundleLoader } from "../../Components/Placeholder";
-// const CollectionCustomerTab = lazy(() =>
-//   import("./CollectionTab/CollectionCustomerTab")
-// );
 const CollectionDistributorTab = lazy(() =>
   import("./CollectionTab/CollectionDistributorTab")
 );
@@ -86,19 +83,11 @@ class Collection extends Component {
           setCurrentData1={this.setCurrentData1}
         />
       <Suspense fallback={<BundleLoader />}>
-          {/* {viewType === "distributor" ? ( */}
            <CollectionDistributorTab
               handleTabChange1={this.handleTabChange1}
              activeKey1={activeKey1}
            /> 
-          {/* )
-           : viewType === "customer" ? ( */}
-            {/* <CollectionCustomerTab
-              handleTabChange={this.handleTabChange}
-              activeKey={activeKey}
-            />
-          ) 
-          : null} */}
+         
         </Suspense>
 
       </>

@@ -3,13 +3,10 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { BundleLoader } from "../../Components/Placeholder";
 import ProductHeader from "./Child/ProductHeader";
-// import SuspendProductList from "./Child/ProductTable/SuspendProductList";
 import { handleConfigureModal, setProductViewType } from "./ProductAction";
 const ProductListingTable =lazy(()=>import("./Child/ProductTable/ProductListingTable"));
 const ProductListByGroup =lazy(()=>import("./Child/ProductTable/ProductListByGroup"));
 const ProductCardList =lazy(()=>import("./Child/ProductTable/ProductCardList"));
-// const ProductGroup = lazy(() => import("./Child/ProductGroup/ProductGroup"));
-// const ProductTable = lazy(() => import("./Child/ProductTable/ProductTable"));
 const ConfigureModal=lazy(()=>import("./Child/ConfigureModal"));
 
 class Product extends Component {
