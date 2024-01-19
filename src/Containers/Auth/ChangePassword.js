@@ -2,21 +2,16 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { FormattedMessage } from "react-intl";
-import { message, Icon } from "antd";
-import { Link, withRouter } from "react-router-dom";
+import { message, } from "antd";
+import { withRouter } from "react-router-dom";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
-import {
-  ArrowRightOutlined, CheckCircleOutlined, EyeInvisibleOutlined, EyeOutlined,
+import { CheckCircleOutlined, EyeInvisibleOutlined, EyeOutlined,
 } from "@ant-design/icons";
-import { Spacer } from "../../Components/UI/Elements";
-import { AuthContainer, FormContainer, FormWrapper, Input } from "./styled";
+import { AuthContainer, FormWrapper, Input } from "./styled";
 import { ValidationError, Title, SubTitle } from "../../Components/UI/Elements";
-import { FlexContainer } from "../../Components/UI/Layout";
 import Button from "antd/lib/button";
 import { changePassword, generateOtpByEmail, validateOtp } from "./AuthAction";
-import { tick } from "../../Assets/Images/Logo.png";
-import { InputComponent } from "../../Components/Forms/Formik/InputComponent";
 
 /**
  * yup validation scheme for set Password
@@ -66,7 +61,7 @@ class ChangePassword extends Component {
   render() {
     return (
       <>
-        <FlexContainer>
+        <div class=" flex">
           <AuthContainer
             style={{
               backgroundColor: "#E3E8EE",
@@ -77,7 +72,7 @@ class ChangePassword extends Component {
             <FormWrapper>
               <Title>Change Password</Title>
               <SubTitle>Its a good idea to use a strong password.</SubTitle>
-              <Spacer />
+           <div class=" mt-4"></div>
               <Formik
                 initialValues={{
                   password: "",
@@ -99,7 +94,7 @@ class ChangePassword extends Component {
                 {({ errors, touched, values, isSubmitting }) => (
                   <Form style={{ width: "25vw" }}>
                     <div className="set_password">
-                      <div style={{ width: "100%" }}>
+                      <div class=" w-full" >
                         <Field
                           name="password"
                           type={this.state.type}
@@ -124,11 +119,11 @@ class ChangePassword extends Component {
                         />
                       )}
                     </div>
-                    <Spacer />
+                  
 
-                    <div className="set_password">
-                      <FlexContainer justifyContent="space-between">
-                        <div style={{ width: "100%" }}>
+                    <div  className="set_password ">
+                      {/* <div class=" flex justify-between" > */}
+                      <div class=" w-full" >
                           <Field
                             name="confirmPassword"
                             type={this.state.type1}
@@ -142,20 +137,16 @@ class ChangePassword extends Component {
                           <EyeOutlined
                             type="eye"
                             onClick={this.handleClick1}
-                            style={{
-                              marginLeft: "-1.25em",
-                              marginTop: "1.25em",
-                            }}
+                            style={{ marginLeft: "-1.25em",  }}
+                            size="24"
                           // style={{ size: 24 }}
                           />
                         ) : (
                           <EyeInvisibleOutlined
                             type="eye-invisible"
                             onClick={this.handleClick1}
-                            style={{
-                              marginLeft: "-7.25em",
-                              marginTop: "1em",
-                            }}
+                            style={{ marginLeft: "-1.25em",  }}
+                          size="24"
                           // style={{ size: 24 }}
                           />
                         )}
@@ -174,7 +165,7 @@ class ChangePassword extends Component {
                             <ArrowRightOutlined />
                           </Button>
                         </div> */}
-                      </FlexContainer>
+                      </div>
                       {values.password.length &&
                         values.password === values.confirmPassword ? (
                         <CheckCircleOutlined
@@ -189,7 +180,7 @@ class ChangePassword extends Component {
                           }}
                         />
                       ) : null}
-                    </div>
+                    {/* </div> */}
 
                     {/* <Spacer /> */}
                     {/* <div >
@@ -263,7 +254,7 @@ class ChangePassword extends Component {
               {/* <Link to='/register' style={{ textAlign: 'center' }}>Doesn't have an account? Register</Link> */}
             </FormWrapper>
           </AuthContainer>
-        </FlexContainer>
+        </div>
       </>
     );
   }

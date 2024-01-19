@@ -1,19 +1,12 @@
-import React, { lazy, Suspense, Component } from "react";
+import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import SearchSelect from "../../../../../../Components/Forms/Formik/SearchSelect";
-import { Button, Switch, Tooltip, Icon } from "antd";
-import { Formik, Form, Field, FieldArray, FastField } from "formik";
-import { Spacer, StyledLabel } from "../../../../../../Components/UI/Elements";
+import { Button,  Tooltip,  } from "antd";
+import { Formik, Form, Field, FastField } from "formik";
 import { InputComponent } from "../../../../../../Components/Forms/Formik/InputComponent";
 import { TextareaComponent } from "../../../../../../Components/Forms/Formik/TextareaComponent";
-import * as Yup from "yup";
-import { FlexContainer } from "../../../../../../Components/UI/Layout";
 import DragableUpload from "../../../../../../Components/Forms/Formik/DragableUpload";
-import { SelectComponent } from "../../../../../../Components/Forms/Formik/SelectComponent";
-import { DatePicker } from "../../../../../../Components/Forms/Formik/DatePicker";
-import ButtonGroup from "antd/lib/button/button-group";
-import dayjs from "dayjs";
 import { addDocumentDetails } from "../../../../ProfileAction";
 import { FormattedMessage } from "react-intl";
 function onChange(date) {}
@@ -68,18 +61,10 @@ class PersonalDetailsDocumentForm extends Component {
             ...rest
           }) => (
             <Form className="form-background">
-              <div
-                style={{
-                  display: "flex",
-                  width: "100%",
-                  height: "100%",
-                  justifyContent: "space-between",
-                }}
+              <div class=" flex w-full h-full justify-between"
               >
-                <div
-                  style={{
-                    width: "45%",
-                    }}
+                <div class=" w-[45%]"
+
                 >
                   <FastField
                     name="documentTypeId"
@@ -102,8 +87,8 @@ class PersonalDetailsDocumentForm extends Component {
                     className="field"
                     isColumn
                      />
-                  <Spacer />
-                  <div>
+                
+                  <div class=" mt-3">
                     <Field
                       isRequired
                       name="idNo"
@@ -123,17 +108,14 @@ class PersonalDetailsDocumentForm extends Component {
                   </div>
                 </div>
 
-                <div
-                  style={{
-                    width: "45%",
-                     }}
+                <div class=" w-[45%]"
                 >
                   <Field
                     name="documentId"
                     isRequired
                     component={DragableUpload}
                   />
-                  <Spacer />
+                 <div class=" mt-3">
 
                   <Field
                     name="documentTitle"
@@ -149,7 +131,8 @@ class PersonalDetailsDocumentForm extends Component {
                     component={InputComponent}
                     style={{ height: "2.0625em", marginTop: "0.25em" }}
                   />
-                  <Spacer />
+                  </div>
+                  <div class=" mt-3">
                   <Field
                     name="documentDescription"
                     //label="Description of Document"
@@ -164,11 +147,12 @@ class PersonalDetailsDocumentForm extends Component {
                     width={"100%"}
                     component={TextareaComponent}
                     />
-                  <Spacer style={{ marginBottom: "0.9375em" }} />
+                     </div>
+            
                 </div>
               </div>
-              <Spacer />
-              <FlexContainer justifyContent="flex-end">
+           
+              <div class=" flex justify-end mt-3" >
                 <Button
                   htmlType="submit"
                   type="primary"
@@ -176,7 +160,7 @@ class PersonalDetailsDocumentForm extends Component {
                 >
                   <FormattedMessage id="app.submit" defaultMessage="Submit" />
                 </Button>
-              </FlexContainer>
+              </div>
             </Form>
           )}
         </Formik>

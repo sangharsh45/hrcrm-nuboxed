@@ -1,14 +1,16 @@
 import React, { lazy, Suspense, Component } from "react";
 import { BundleLoader } from "../../../../../../Components/Placeholder";
-import { StyledModal } from "../../../../../../Components/UI/Antd";
-import PersonalDocumentForm from "./PersonalDocumentForm";
+import { StyledDrawer } from "../../../../../../Components/UI/Antd";
 import { FormattedMessage } from "react-intl";
+const PersonalDocumentForm = lazy(() =>
+  import("./PersonalDocumentForm")
+);
 class AddPersonalModal extends Component {
   render() {
     const { addPersonalModal, handlePersonalModal, ...formProps } = this.props;
     return (
       <>
-        <StyledModal
+        <StyledDrawer
           //title="Emergency Contact"
           title={
             <FormattedMessage
@@ -22,13 +24,13 @@ class AddPersonalModal extends Component {
           maskClosable={false}
           maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}
           style={{ top: 40 }}
-          onCancel={() => handlePersonalModal(false)}
+          onClose={() => handlePersonalModal(false)}
           footer={null}
         >
           <Suspense fallback={<BundleLoader />}>
             <PersonalDocumentForm employeeId={this.props.employeeId}/>
           </Suspense>
-        </StyledModal>
+        </StyledDrawer>
       </>
     );
   }

@@ -1,9 +1,6 @@
 import React, { lazy, Suspense, Component } from "react";
 import { BundleLoader } from "../../../../../../Components/Placeholder";
-import { StyledModal } from "../../../../../../Components/UI/Antd";
-// import PersonalDocumentForm from "../Personal/PersonalDocumentForm";
-// import UpdatePersonalDetailDocumentForm from "./UpdatePersonalDetailsDocumentForm";
-
+import { StyledDrawer } from "../../../../../../Components/UI/Antd";
 import { FormattedMessage } from "react-intl";
 
 const UpdatePersonalDetailsDocumentForm = lazy(() =>
@@ -19,7 +16,7 @@ class UpdatePersonalDetailsModal extends Component {
     } = this.props;
     return (
       <>
-        <StyledModal
+        <StyledDrawer
           //title="Personal Details"
           title={
             <FormattedMessage
@@ -32,14 +29,14 @@ class UpdatePersonalDetailsModal extends Component {
           destroyOnClose
           maskClosable={false}
           maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}
-          style={{ top: 40 }}
-          onCancel={() => handleUpdatePersonalDetailsModal(false)}
+          style={{ marginTop: "3rem" }}
+          onClose={() => handleUpdatePersonalDetailsModal(false)}
           footer={null}
         >
           <Suspense fallback={<BundleLoader />}>
             <UpdatePersonalDetailsDocumentForm />
           </Suspense>
-        </StyledModal>
+        </StyledDrawer>
       </>
     );
   }

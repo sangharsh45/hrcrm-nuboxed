@@ -1,11 +1,9 @@
-import React, { useEffect, useState, lazy, Suspense } from "react";
+import React, { useEffect, useState, } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { Icon, Switch, Button, Popconfirm } from "antd";
-import { FlexContainer, MainWrapper } from "../../Components/UI/Layout";
+import { Switch, Popconfirm } from "antd";
+import { MainWrapper } from "../../Components/UI/Layout";
 import { getPermissions, addingPermissions } from "./PermissionsAction";
-import { StyledLabel,Spacer } from "../../Components/UI/Elements";
-// import PermissionForm from "./PermissionForm";
 
 function PermissionsDetailsLeft(props) {
 
@@ -359,11 +357,11 @@ function PermissionsDetailsLeft(props) {
       {/* <PermissionForm /> */}
       </div>
       
-      <Spacer />
-      <div>
+  
+      <div class=" mt-3">
        <h1 style={{textAlign:"center"}}>Permission</h1>
        </div>
-       <FlexContainer style={{ width: "52%", justifyContent: "space-between",marginTop:"0.5rem" }}>
+       <div class=" flex justify-between w-[52%] mt-2" >
         <p>Talent</p>
         <div>
           <Popconfirm
@@ -381,9 +379,9 @@ function PermissionsDetailsLeft(props) {
             />
           </Popconfirm>
         </div>
-      </FlexContainer> 
+      </div> 
 
-      <FlexContainer style={{ width: "52%", justifyContent: "space-between",marginTop:"0.5rem" }}>
+      <div class=" flex justify-between w-[52%] mt-2" >
         <p>Planner</p>
         <Popconfirm
           title="Do you wish to change Status ? "
@@ -403,8 +401,8 @@ function PermissionsDetailsLeft(props) {
             unCheckedChildren="Withhold"
           />
         </Popconfirm>
-      </FlexContainer>
-      <FlexContainer style={{ width: "52%", justifyContent: "space-between",marginTop:"0.5rem" }}>
+      </div>
+      <div class=" flex justify-between w-[52%] mt-2" >
         <p>Contact</p>
         <Popconfirm
           title="Do you wish to change Status ? "
@@ -422,8 +420,8 @@ function PermissionsDetailsLeft(props) {
             unCheckedChildren="Withhold"
           />
         </Popconfirm>
-      </FlexContainer>
-      <FlexContainer style={{ width: "52%", justifyContent: "space-between",marginTop:"0.5rem" }}>
+      </div>
+      <div class=" flex justify-between w-[52%] mt-2" >
         <p>Partner</p>
         <Popconfirm
           title="Do you wish to change Status ? "
@@ -443,8 +441,8 @@ function PermissionsDetailsLeft(props) {
             unCheckedChildren="Withhold"
           />
         </Popconfirm>
-      </FlexContainer>
-      <FlexContainer style={{ width: "52%", justifyContent: "space-between",marginTop:"0.5rem" }}>
+      </div>
+      <div class=" flex justify-between w-[52%] mt-2" >
         <p>Partner Contact</p>
         <Popconfirm
           title="Do you wish to change Status ? "
@@ -464,8 +462,8 @@ function PermissionsDetailsLeft(props) {
             unCheckedChildren="Withhold"
           />
         </Popconfirm>
-      </FlexContainer>
-      <FlexContainer style={{ width: "52%", justifyContent: "space-between",marginTop:"0.5rem" }}>
+      </div>
+      <div class=" flex justify-between w-[52%] mt-2" >
 
         <p>Customer</p>
         <Popconfirm
@@ -485,8 +483,8 @@ function PermissionsDetailsLeft(props) {
             unCheckedChildren="Withhold"
           />
         </Popconfirm>
-      </FlexContainer>
-      <FlexContainer style={{ width: "52%", justifyContent: "space-between",marginTop:"0.5rem" }}>
+      </div>
+      <div class=" flex justify-between w-[52%] mt-2" >
         <p>Opportunity</p>
         <Popconfirm
           title="Do you wish to change Status ? "
@@ -506,8 +504,8 @@ function PermissionsDetailsLeft(props) {
             unCheckedChildren="Withhold"
           />
         </Popconfirm>
-      </FlexContainer>
-      <FlexContainer style={{ width: "52%", justifyContent: "space-between",marginTop:"0.5rem" }}>
+      </div>
+        <div class=" flex justify-between w-[52%] mt-2" >
         <p>Call</p>
         <Popconfirm
           title="Do you wish to change Status ? "
@@ -527,8 +525,8 @@ function PermissionsDetailsLeft(props) {
             unCheckedChildren="Withhold"
           />
         </Popconfirm>
-      </FlexContainer>
-      <FlexContainer style={{ width: "52%", justifyContent: "space-between",marginTop:"0.5rem" }}>
+      </div>
+      <div class=" flex justify-between w-[52%] mt-2" >
         <p>Events</p>
         <Popconfirm
           title="Do you wish to change Status ? "
@@ -548,8 +546,8 @@ function PermissionsDetailsLeft(props) {
             unCheckedChildren="Withhold"
           />
         </Popconfirm>
-      </FlexContainer>
-      <FlexContainer style={{ width: "52%", justifyContent: "space-between",marginTop:"0.5rem" }}>
+      </div>
+      <div class=" flex justify-between w-[52%] mt-2" >
         <p>Tasks</p>
         <Popconfirm
           title="Do you wish to change Status ? "
@@ -569,7 +567,7 @@ function PermissionsDetailsLeft(props) {
             unCheckedChildren="Withhold"
           />
         </Popconfirm>
-      </FlexContainer>
+      </div>
 
 
     </MainWrapper>

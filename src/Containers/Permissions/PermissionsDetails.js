@@ -1,22 +1,19 @@
 import React, { Component, lazy, Suspense } from "react";
-import { FlexContainer } from "../../Components/UI/Layout";
-
 const PermissionsDetailsLeft = lazy(() => import("./PermissionsDetailsLeft"));
-// const FeedBackDetailsRight = lazy(() => import("./FeedBackDetailsRight"));
 
 class PermissionsDetails extends Component {
   render() {
     return (
       <>
-        <FlexContainer>
+        <div class=" flex">
           <Suspense fallback={"Loading..."}>
-            <FlexContainer flexWrap="no-wrap" style={{ width: "100%" }}>
-              <div style={{ width: "40%" }}>
+            <div class=" flex flex-no-wrap w-full" >
+              <div class=" w-[40%]" >
                 <PermissionsDetailsLeft />
               </div>
-            </FlexContainer>
+            </div>
           </Suspense>
-        </FlexContainer>
+        </div>
       </>
     );
   }

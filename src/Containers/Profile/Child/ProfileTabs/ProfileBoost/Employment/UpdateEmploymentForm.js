@@ -1,20 +1,15 @@
-import React, { lazy, Suspense, Component } from "react";
+import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { Button, Switch, Tooltip, Icon } from "antd";
-import { Formik, Form, Field, FieldArray, FastField } from "formik";
-import { Spacer, StyledLabel } from "../../../../../../Components/UI/Elements";
+import { Button, } from "antd";
+import { Formik, Form, Field, FastField } from "formik";
 import { InputComponent } from "../../../../../../Components/Forms/Formik/InputComponent";
 import { TextareaComponent } from "../../../../../../Components/Forms/Formik/TextareaComponent";
 import * as Yup from "yup";
-import { FlexContainer } from "../../../../../../Components/UI/Layout";
-import DragableUpload from "../../../../../../Components/Forms/Formik/DragableUpload";
 import { SelectComponent } from "../../../../../../Components/Forms/Formik/SelectComponent";
 import SearchSelect from "../../../../../../Components/Forms/Formik/SearchSelect";
 import { DatePicker } from "../../../../../../Components/Forms/Formik/DatePicker";
-
 import dayjs from "dayjs";
-import { profileReducer } from "../../../../ProfileReducer";
 import { updateEmploymentDetails } from "../../../../ProfileAction";
 import { FormattedMessage } from "react-intl";
 import { getDesignations } from "../../../../../Settings/Designation/DesignationAction";
@@ -73,10 +68,7 @@ class EmploymentDocumentForm extends Component {
                     justifyContent: "space-between",
                   }}
                 > */}
-              <div
-                style={{
-                  width: "100%",
-                     }}
+              <div class=" w-full"
               >
                 <div>
                   <Field
@@ -96,8 +88,8 @@ class EmploymentDocumentForm extends Component {
                     inlineLabel
                      />
                 </div>
-                <Spacer />
-                <div>
+             
+                <div class=" mt-3">
                   <FastField
                     name="designationTypeId"
                     //label="Designation"
@@ -122,9 +114,9 @@ class EmploymentDocumentForm extends Component {
                   />
                 </div>
 
-                <Spacer />
-                <FlexContainer justifyContent="space-between">
-                  <div style={{ width: "47%" }}>
+               
+                <div class=" flex justify-between mt-3" >
+                  <div class=" w-[47%]" >
                     <Field
                       name="startDate"
                       //label="Start Date"
@@ -148,7 +140,7 @@ class EmploymentDocumentForm extends Component {
                       }}
                     />
                   </div>
-                  <div style={{ width: "47%" }}>
+                  <div class=" w-[47%]" >
                     <Field
                       name="endDate"
                       // label="End Date "
@@ -185,10 +177,10 @@ class EmploymentDocumentForm extends Component {
                       }}
                     />
                   </div>
-                </FlexContainer>
-                <Spacer />
-                <FlexContainer>
-                  <div style={{ width: "35%" }}>
+                </div>
+          
+                <div class=" flex mt-3">
+                <div class=" w-[35%]" >
                     <Field
                       isRequired
                       name="salary"
@@ -212,8 +204,8 @@ class EmploymentDocumentForm extends Component {
                       }}
                     />
                   </div>
-                  &nbsp;&nbsp;&nbsp;
-                  <div style={{ width: "27%" }}>
+                
+                  <div class=" w-[27%] ml-4" >
                     <Field
                       isRequired
                       name="salaryType"
@@ -238,8 +230,8 @@ class EmploymentDocumentForm extends Component {
                       }}
                     />
                   </div>
-                  &nbsp;&nbsp;&nbsp;
-                  <div style={{ width: "30%", marginTop: "0.1875em" }}>
+               
+                  <div class=" w-[30%] mt-[0.1875em] ml-4" >
                     <Field
                       name="currency"
                       placeholder="Curr"
@@ -265,10 +257,10 @@ class EmploymentDocumentForm extends Component {
                       }}
                     />
                   </div>
-                </FlexContainer>
+                </div>
 
-                <Spacer />
-                <div>
+              
+                <div class=" mt-3">
                   <Field
                     name="description"
                     //label="Describe your role"
@@ -285,7 +277,7 @@ class EmploymentDocumentForm extends Component {
                     style={{ height: "5em", marginTop: "0.25em" }}
                   />
                 </div>
-                <Spacer />
+             
               </div>
 
               {/* <div
@@ -321,8 +313,8 @@ class EmploymentDocumentForm extends Component {
                   <Spacer style={{ marginBottom: "0.9375em" }} />
                 </div> */}
               {/* </div> */}
-              <Spacer />
-              <FlexContainer justifyContent="flex-end">
+            
+              <div class=" flex justify-end mt-3" >
                 <Button
                   htmlType="submit"
                   type="primary"
@@ -330,7 +322,7 @@ class EmploymentDocumentForm extends Component {
                 >
                   <FormattedMessage id="app.update" defaultMessage="Update" />
                 </Button>
-              </FlexContainer>
+              </div>
             </Form>
           )}
         </Formik>

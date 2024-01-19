@@ -1,14 +1,11 @@
 import React, { lazy, Suspense, Component } from "react";
 import { BundleLoader } from "../../../../../../Components/Placeholder";
-import { StyledModal } from "../../../../../../Components/UI/Antd";
-import PersonalDocumentForm from "../Personal/PersonalDocumentForm";
-import PersonalDetailDocumentForm from "./PersonalDetailsDocumentForm";
-
+import { StyledDrawer } from "../../../../../../Components/UI/Antd";
 import { FormattedMessage } from "react-intl";
 
-// const BankDocumentForm = lazy(() =>
-//     import("../Bank/BankDocumentForm")
-// );
+const PersonalDetailDocumentForm = lazy(() =>
+    import("./PersonalDetailsDocumentForm")
+);
 
 class AddPersonalDetailsModal extends Component {
   render() {
@@ -19,7 +16,7 @@ class AddPersonalDetailsModal extends Component {
     } = this.props;
     return (
       <>
-        <StyledModal
+        <StyledDrawer
           // title="Personal Details"
           title={
             <FormattedMessage
@@ -32,14 +29,14 @@ class AddPersonalDetailsModal extends Component {
           destroyOnClose
           maskClosable={false}
           maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}
-          style={{ top: 40 }}
-          onCancel={() => handlePersonalDetailsModal(false)}
+          style={{ marginTop: "3rem" }}
+          onClose={() => handlePersonalDetailsModal(false)}
           footer={null}
         >
           <Suspense fallback={<BundleLoader />}>
             <PersonalDetailDocumentForm employeeId={this.props.employeeId}/>
           </Suspense>
-        </StyledModal>
+        </StyledDrawer>
       </>
     );
   }

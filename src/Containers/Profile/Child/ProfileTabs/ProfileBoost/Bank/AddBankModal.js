@@ -1,7 +1,6 @@
 import React, { lazy, Suspense, Component } from "react";
 import { BundleLoader } from "../../../../../../Components/Placeholder";
-import { StyledModal } from "../../../../../../Components/UI/Antd";
-
+import { StyledDrawer } from "../../../../../../Components/UI/Antd";
 import { FormattedMessage } from "react-intl";
 
 const BankDocumentForm = lazy(() => import("../Bank/BankDocumentForm"));
@@ -11,7 +10,7 @@ class AddBankModal extends Component {
     const { addBankModal, handleBankModal, ...formProps } = this.props;
     return (
       <>
-        <StyledModal
+        <StyledDrawer
           //title="Bank"
           title={<FormattedMessage id="app.bank" defaultMessage="Bank" />}
           width="25%"
@@ -19,14 +18,14 @@ class AddBankModal extends Component {
           destroyOnClose
           maskClosable={false}
           maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}
-          style={{ top: 40 }}
-          onCancel={() => handleBankModal(false)}
+          style={{ marginTop: "3rem" }}
+          onClose={() => handleBankModal(false)}
           footer={null}
         >
           <Suspense fallback={<BundleLoader />}>
             <BankDocumentForm employeeId={this.props.employeeId}/>
           </Suspense>
-        </StyledModal>
+        </StyledDrawer>
       </>
     );
   }

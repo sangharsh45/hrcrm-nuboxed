@@ -58,14 +58,9 @@ function EventCardList (props) {
   
     return (
       <>
+      <div className=' flex justify-end sticky top-28 z-auto'>
         <OnlyWrapCard style={{backgroundColor:"#E3E8EE"}}>
-       <InfiniteScroll
-        dataLength={eventListRangeByUserId.length}
-        next={handleLoadMore}
-        hasMore={hasMore}
-        loader={fetchingEventListRangeByUserId?<h4 style={{ textAlign: 'center' }}>Loading...</h4>:null}
-        height={"75vh"}
-      >
+   
          <div className=" flex justify-between w-[99%] p-2 bg-transparent font-bold sticky top-0 z-10">
         <div className=" md:w-[6.2rem]"><FormattedMessage
                   id="app.type"
@@ -109,6 +104,13 @@ function EventCardList (props) {
                   defaultMessage="action"
                 /></div>
       </div>
+      <InfiniteScroll
+        dataLength={eventListRangeByUserId.length}
+        next={handleLoadMore}
+        hasMore={hasMore}
+        loader={fetchingEventListRangeByUserId?<h4 style={{ textAlign: 'center' }}>Loading...</h4>:null}
+        height={"75vh"}
+      >
       {eventListRangeByUserId.map((item) => { 
                     return (
                         <div>
@@ -292,6 +294,7 @@ function EventCardList (props) {
                 })}
                    </InfiniteScroll>
       </OnlyWrapCard>
+      </div>
      
         <UpdateEventModal
           updateEventModal={updateEventModal}

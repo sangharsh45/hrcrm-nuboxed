@@ -279,7 +279,7 @@ const handleCrmClick = (checked) => {
                 <div class="w-full flex-row">
               <div class=" flex " >
              
-                    <h1>CRM</h1>
+                    <div class=" text-base text-[#1677ff]">CRM</div>
                     <div   class=" w-[7%] ml-2">
                     {/* <Popconfirm
                         title="Do you wish to change Status ? "
@@ -301,7 +301,7 @@ const handleCrmClick = (checked) => {
                 
                   
 
-                    <h1>IM</h1>
+                    <div class=" text-base text-[#1677ff]">IM</div>
                     <div   class=" w-[7%] ml-2">
                     {/* <Popconfirm
                         title="Do you wish to change Status ? "
@@ -321,7 +321,7 @@ const handleCrmClick = (checked) => {
                       {/* </Popconfirm> */}
                     </div>
 
-                    {/* <h1>Account</h1>
+                    {/* <div>Account</div>
                     <div   class=" w-[7%] ml-2">
                     <Popconfirm
                         title="Do you wish to change Status ? "
@@ -338,7 +338,7 @@ const handleCrmClick = (checked) => {
                         />
                       </Popconfirm>
                     </div> */}
-                    {/* <h1>RecruitOpps</h1>
+                    {/* <div>RecruitOpps</div>
                     <div   class=" w-[7%] ml-2">
                     <Popconfirm
                         title="Do you wish to change Status ? "
@@ -356,7 +356,7 @@ const handleCrmClick = (checked) => {
                       </Popconfirm>
                     </div>
 */}
-                    {/* <h1>HR</h1>
+                    {/* <div>HR</div>
                     <div   class=" w-[7%] ml-2">
                     <Popconfirm
                         title="Do you wish to change Status ? "
@@ -379,7 +379,7 @@ const handleCrmClick = (checked) => {
 
                   
            
-                    <h1>Rcruitpro</h1>
+                    <div class=" text-base text-[#1677ff]">Rcruitpro</div>
                     <div   class=" w-[7%] ml-2">
                     {/* <Popconfirm
                         title="Do you wish to change Status ? "
@@ -397,7 +397,7 @@ const handleCrmClick = (checked) => {
                         />
                       {/* </Popconfirm> */}
                     </div>
-                    <h1>Elearning</h1>
+                    <div class=" text-base text-[#1677ff]">Elearning</div>
                     <div   class=" w-[7%] ml-2">
                     {/* <Popconfirm
                         title="Do you wish to change Status ? "

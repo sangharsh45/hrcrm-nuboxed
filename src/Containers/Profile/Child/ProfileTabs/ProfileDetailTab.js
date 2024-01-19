@@ -337,6 +337,42 @@ class ProfileDetailTab extends Component {
               </Suspense>
             </TabPane>
 
+            <TabPane
+              tab={
+                <>
+                  <span>
+                    <MailOutlined type="mail" />
+                    Performance
+                  </span>
+                  {/* {activeKey === "9" && (
+                    <>
+                      <>
+                        <PlusOutlined
+                          type="plus"
+                          tooltipTitle="Add"
+                          onClick={() =>
+                            this.props.handleEmailProfileModal(true) 
+                          }
+                          size="1em"
+                          style={{
+                            marginLeft: 10,
+                            verticalAlign: "center",
+                          }}
+                        />
+                      </>
+                    </>
+                  )} */}
+                </>
+              }
+              key="9"
+            >
+              {/* <Suspense fallback={"Loading ..."}>
+                {" "}
+                <EmailTable 
+                employeeId={this.props.userDetails.employeeId}/>
+              </Suspense> */}
+            </TabPane>
+
           </StyledTabs>
         </TabsWrapper>
         

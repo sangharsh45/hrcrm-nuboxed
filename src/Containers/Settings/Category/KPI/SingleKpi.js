@@ -40,9 +40,18 @@ class SingleKpi extends Component {
           {({ viewType }, toggleViewType) =>
             viewType === "view" ? (
               <div class=" flex justify-between" >
-                <SectorName style={{ flexBasis: "85%" }}>
+                <div class=" flex  flex-col justify-between ml-4">
+                 <h1>KPI</h1>
+                <SectorName style={{ flexBasis: "65%" }}>
                   {kpi}
                 </SectorName>
+                </div>
+                <div class=" flex  flex-col justify-between">
+                <h1>Frequency</h1>
+                <SectorName style={{ flexBasis: "65%" }}>
+                  {frequency}
+                </SectorName>
+                </div>
                 <div>
                   {/* {this.props.source.editInd ? ( */}
                     <BorderColorIcon

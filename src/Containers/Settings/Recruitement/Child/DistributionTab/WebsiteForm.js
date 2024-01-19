@@ -93,7 +93,7 @@ const handleDeptChange = (event) => {
             
         
              
-              <div class=" flex  w-[74%]"
+              <div class=" flex  w-[44%]"
               >
               <p class=" w-[6rem]">Assigned To</p>
                 <div>
@@ -115,7 +115,7 @@ const handleDeptChange = (event) => {
                     </div>
               </div>
       
-              <div class=" flex justify-between ml-4 " >
+              <div class=" flex justify-between width-[50%] ml-4 " >
                                                     <div class=" w-[35%]" >
                                                     <label class=" text-[#444] font-bold text-[0.75rem]" >Department</label>
                       <select  className="customize-select"
@@ -136,11 +136,11 @@ const handleDeptChange = (event) => {
 {single === false?(
             <div class=" w-[35%]" >
             <label class=" text-[#444] font-bold text-[0.75rem]" >User</label>
-            <select  className="customize-select"
+            <select className="customize-select"
          
                  onChange={handleUserChange}
               >
-    <option value="">select user</option>
+    <option value="">Select user</option>
     {props.departmentwiseUser.map((item, index) => (
       <option key={index}
       // disabled
