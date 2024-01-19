@@ -1,8 +1,7 @@
-import React, { Component } from "react";
+import React, { Component,lazy } from "react";
 import { ActionHeader } from "../../../Components/Utils";
-import TeamsActionLeft from "./TeamsActionLeft";
-import TeamsActionRight from "./TeamsActionRight";
-
+const TeamsActionLeft =lazy(()=> import('./TeamsActionLeft'));
+const TeamsActionRight =lazy(()=> import('./TeamsActionRight'));
 
 class TeamsHeader extends Component {
   render() {

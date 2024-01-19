@@ -6,6 +6,7 @@ import TocIcon from '@mui/icons-material/Toc';
 import { FlexContainer } from "../../../Components/UI/Layout";
 import { StyledSelect } from "../../../Components/UI/Antd";
 import { Button, Empty, Tooltip, Badge } from "antd";
+import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
 const Option = StyledSelect.Option;
 class TeamsActionLeft extends React.Component {
 
@@ -45,7 +46,7 @@ class TeamsActionLeft extends React.Component {
             </Tooltip>
           {/* )} */}
 
-          {/* <Tooltip title="Client">
+          <Tooltip title="Performance Management">
             <span
               onClick={() => setTeamsViewType("client")}
               style={{
@@ -53,11 +54,11 @@ class TeamsActionLeft extends React.Component {
                 color: viewType === "client" && "#1890ff",
               }}
             >
-              <FontAwesomeIcon icon={solid('building')} />
+              <ManageAccountsIcon />
             </span>
           </Tooltip>
 
-          <Tooltip title="Inventory">
+          {/* <Tooltip title="Inventory">
             <span
               onClick={() => setTeamsViewType("inventory")}
               style={{

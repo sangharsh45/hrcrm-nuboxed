@@ -6,7 +6,6 @@ import dayjs from "dayjs";
 import {updateProjects} from "../../ProjectsAction"
 import { DatePicker } from "../../../../Components/Forms/Formik/DatePicker";
 import { FormattedMessage } from "react-intl";
-import { Spacer } from "../../../../Components/UI/Elements";
 import { Formik, Form, Field, FastField } from "formik";
 import { InputComponent } from "../../../../Components/Forms/Formik/InputComponent";
 import * as Yup from "yup";
@@ -60,7 +59,7 @@ function UpdateProjectsForm(props) {
                   isRequired
                   name="projectName"
                   type="text"
-                  //label="Name"
+                  
                   label={
                     <FormattedMessage id="app.name" defaultMessage="Name" />
                   }
@@ -75,7 +74,7 @@ function UpdateProjectsForm(props) {
                   <Field
                           isRequired
                           name="startDate"
-                          //label="Start "
+                         
                           label={
                             <FormattedMessage
                               id="app.startDate"
@@ -95,7 +94,7 @@ function UpdateProjectsForm(props) {
                   <Field
                         isRequired
                         name="endDate"
-                        // label="End "
+                        
                         label={
                           <FormattedMessage
                             id="app.enddate"
@@ -139,14 +138,13 @@ function UpdateProjectsForm(props) {
               </div>
             </div>
 
-            <Spacer />
-            <div class=" flex justify-end">
+            
+            <div class=" flex justify-end mt-4">
               <Button type="primary" htmlType="submit" 
                loading={updatingProjects}
     >
                 <FormattedMessage id="app.update" defaultMessage="Update" />
-                {/*                     
-                    Create */}
+        
               </Button>
             </div>
           </Form>

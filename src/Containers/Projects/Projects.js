@@ -4,9 +4,12 @@ import { bindActionCreators } from "redux";
 import {setProjectsViewType,
     handleProjectsModal
 } from "../Projects/ProjectsAction"
- import AddProjectsModal from "./Child/AddProjectsModal";
-import ProjectsHeader from "./Child/ProjectsHeader";
-import ProjectsTable from "./Child/ProjectsTable";
+import { BundleLoader } from "../../Components/Placeholder";
+const ProjectsAllTable =lazy(()=> import('./ProjectsAllTable'));
+const AddProjectsModal =lazy(()=> import('./Child/AddProjectsModal'));
+const ProjectsHeader =lazy(()=> import('./Child/ProjectsHeader'));
+const ProjectsTable =lazy(()=> import('./Child/ProjectsTable'));
+
  
 
 
@@ -40,7 +43,15 @@ class Projects extends Component {
         addProjectsModal={addProjectsModal}
         handleProjectsModal={handleProjectsModal}
         />
-      <ProjectsTable/>
+          <Suspense fallback={<BundleLoader/>}>
+      {this.props.viewType === "list" ? (
+        <ProjectsTable/>
+      ) : this.props.viewType === "all" ?
+        (
+          <ProjectsAllTable />
+        ) : null}
+</Suspense>
+      
       </React.Fragment>
     );
   }

@@ -7,7 +7,6 @@ import * as Yup from "yup";
 import {getTeamMemberlist,addTeams} from "../Teams/TeamsAction"
 import { FormattedMessage } from "react-intl";
 import Upload from "../../../Components/Forms/Formik/Upload";
-import { Spacer } from "../../../Components/UI/Elements";
 import { InputComponent } from "../../../Components/Forms/Formik/InputComponent";
 import { SelectComponent } from "../../../Components/Forms/Formik/SelectComponent";
 import { FlexContainer } from "../../../Components/UI/Layout";
@@ -60,19 +59,15 @@ props.getTeamMemberlist();
           ...rest
         }) => (
           <Form class="form-background">
-            <div style={{ display: "flex", justifyContent: "space-between" }}>
-              <div
-                style={{
-                  height: "100%",
-                  width: "45%",
-                }}
-              >
+            <div class="flex justify-between" >
+              <div class="h-full w-w47.5" >
                 
-                <Spacer />
+               <div class="mt-4">
                   <FastField name="imageId" component={Upload} />
+                  </div>
                         
-                 <FlexContainer style={{ justifyContent: "space-between",marginTop:"1rem" }}>
-                  <div style={{ width: "100%" }}>
+                 <div class="flex justify-between mt-4">
+                  <div class="w-full">
                   <Field
                   name="teamName"
                   label="Name"
@@ -104,14 +99,9 @@ props.getTeamMemberlist();
                     // }}
                   />
                   </div>
-                </FlexContainer>          
+                </div>          
               </div>
-              <div
-                style={{
-                  height: "100%",
-                  width: "45%",
-                }}
-              >
+              <div class="h-full w-w47.5" >
                 {/* <FlexContainer style={{ justifyContent: "space-between" }}>
                   <div style={{ width: "100%" }}>
                     <Field
@@ -141,8 +131,8 @@ props.getTeamMemberlist();
            
               </div>
             </div>
-            <Spacer />
-            <FlexContainer justifyContent="flex-end">
+          
+            <div class="flex justify-end mt-4" >
               <Button
                 type="primary"
                 htmlType="submit"
@@ -150,7 +140,7 @@ props.getTeamMemberlist();
               >
                 Create
               </Button>
-            </FlexContainer>
+            </div>
           </Form>
         )}
       </Formik>
