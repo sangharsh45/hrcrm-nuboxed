@@ -4,8 +4,6 @@ import { bindActionCreators } from "redux";
 import { FormattedMessage } from "react-intl";
 import { Button } from "antd";
 import { updateUserById } from "../../../Auth/AuthAction";
-import { FlexContainer } from "../../../../Components/UI/Layout";
-import { Spacer } from "../../../../Components/UI/Elements";
 import EditableInput from "../../../../Components/Forms/Edit/EditableInput";
 import EditableSearcSelect from "../../../../Components/Forms/Edit/EditSearchSelect";
 import EditableDatePicker from "../../../../Components/Forms/Edit/EditableDatePicker";
@@ -55,11 +53,10 @@ class ProfileStatsEdit extends Component {
     } = this.props;
     return (
       <>
-        <FlexContainer
-          flexDirection="column"
+        <div class=" flex flex-col"
           style={{ padding: "0.625em 1.25em 0.625em 1.25em"}}
         >
-           <Spacer style={{ margin: "0.125em" }} />
+           <div class=" m-[0.125em]">
           <EditableInput
             defaultValue={emailId}
             disabled
@@ -69,11 +66,11 @@ class ProfileStatsEdit extends Component {
             value={this.state.fields.emailId}
             width="100%"
           />
-          <Spacer style={{ margin: "0.125em" }} />
+          </div>
+          <div class=" m-[0.125em]">
 
-          <FlexContainer
-            flexDirection="column"
-            style={{ padding: "0.625em 1.25em 0.625em 1.25em",marginLeft:"-1.2em" }}
+          <div class=" flex flex-col mr-[-1.2em]"
+            style={{ padding: "0.625em 1.25em 0.625em 1.25em" }}
           >
             <EditableDatePicker
               defaultValue={dateOfJoining}
@@ -84,14 +81,10 @@ class ProfileStatsEdit extends Component {
               width="100%"
             />
 
-            <Spacer style={{ margin: "0.125em" }} />
-          </FlexContainer>
-
-          <FlexContainer
-            justifyContent="space-between"
-            style={{ width: "100%" }}
-          >
-            <div style={{ width: "37%" }}>
+          </div>
+          </div>
+          <div class=" flex justify-between w-full" >
+            <div class=" w-[37%]">
               <EditableSearcSelect
                 defaultValue={{
                   value: countryDialCode,
@@ -105,7 +98,7 @@ class ProfileStatsEdit extends Component {
               />
             </div>
 
-            <div style={{ width: "60%" }}>
+            <div class=" w-[60%]">
               <EditableInput
                 defaultValue={phoneNo}
                 handleChange={this.handleChange}
@@ -115,13 +108,9 @@ class ProfileStatsEdit extends Component {
                 width="100%"
               />
             </div>
-          </FlexContainer>
-          <Spacer style={{ margin: "0.125em" }} />
-          <FlexContainer
-            justifyContent="space-between"
-            style={{ width: "100%" }}
-          >
-            <div style={{ width: "37%" }}>
+          </div>
+          <div class=" flex justify-between w-full m-[0.125em]" >
+          <div class=" w-[37%]">
               <EditableSearcSelect
                 defaultValue={{
                   value: countryDialCode1,
@@ -136,7 +125,7 @@ class ProfileStatsEdit extends Component {
               />
             </div>
 
-            <div style={{ width: "60%" }}>
+            <div class=" w-[60%]">
               <EditableInput
                 defaultValue={mobileNo}
                 handleChange={this.handleChange}
@@ -146,8 +135,8 @@ class ProfileStatsEdit extends Component {
                 width="100%"
               />
             </div>
-          </FlexContainer>
-          <Spacer style={{ margin: "0.125em" }} />
+          </div>
+          <div class=" m-[0.125em]">
           <EditableInput
             defaultValue={linkedinPublicUrl}
             handleChange={this.handleChange}
@@ -156,7 +145,8 @@ class ProfileStatsEdit extends Component {
             value={this.state.fields.linkedinPublicUrl}
             width="100%"
           />
-          <Spacer style={{ margin: "0.125em" }} />
+          </div>
+          <div class=" m-[0.125em]">
           <EditableInput
             defaultValue={twitter}
             handleChange={this.handleChange}
@@ -165,7 +155,7 @@ class ProfileStatsEdit extends Component {
             value={this.state.fields.twitter}
             width="100%"
           />
-          <Spacer style={{ margin: "0.125em" }} />
+          </div>
           {/* <EditableInput
             defaultValue={level}
             handleChange={this.handleChange}
@@ -175,7 +165,7 @@ class ProfileStatsEdit extends Component {
             width="17.625em"
           />
           <Spacer style={{ margin: "0.125em" }} /> */}
-          <div style={{ width: "100%" }}>
+          <div class=" w-full m-[0.125em]">
             <EditableSearcSelect
               defaultValue={{
                 value: timeZone,
@@ -189,9 +179,9 @@ class ProfileStatsEdit extends Component {
               value={this.state.fields.timeZone}
             />
           </div>
-        </FlexContainer>
+        </div>
 
-        <FlexContainer justifyContent="flex-end" marginRight="1.25em">
+        <div class=" flex justify-end mr-[1.25em]" >
           <Button
             type="primary"
             Loading={updatingUserById}
@@ -212,7 +202,7 @@ class ProfileStatsEdit extends Component {
               defaultMessage="Cancel"
             />
           </Button>
-        </FlexContainer>
+        </div>
       </>
     );
   }

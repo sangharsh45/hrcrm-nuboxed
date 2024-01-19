@@ -1,11 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { Tag, Input, Tooltip, Icon } from "antd";
-import {
-  EyeInvisibleOutlined, PlusOutlined,
-
-  
+import { Tag, Input, Tooltip, } from "antd";
+import { PlusOutlined,
 } from '@ant-design/icons';
 import { ViewEditCard, Title } from "../../../../Components/UI/Elements";
 import {

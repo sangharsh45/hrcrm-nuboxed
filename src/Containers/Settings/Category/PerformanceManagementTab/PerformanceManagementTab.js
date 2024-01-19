@@ -1,16 +1,16 @@
-
-
-import React, { PureComponent,lazy, Suspense, } from "react";
-import { connect } from "react-redux";
+import React, { Component,lazy, Suspense } from "react";
 import { bindActionCreators } from "redux";
-import { StyledTabs } from "../../../../../Components/UI/Antd";
-import { TabsWrapper } from "../../../../../Components/UI/Layout";
-import { getDepartmentList } from "../../../SettingsAction"
-const DepartmentRole = lazy(() => import("./DepartmentRole"));
+import { StyledTabs } from "../../../../Components/UI/Antd";
+import { TabsWrapper } from "../../../../Components/UI/Layout";
+import { connect } from "react-redux";
+import { getDepartmentList } from "../../SettingsAction"
+const KPIList = lazy(() =>
+  import("../KPI/KPIList")
+);
 
 const TabPane = StyledTabs.TabPane;
-class Access extends PureComponent {
 
+class PerformanceManagementTab extends Component {
     constructor(props) {
         super(props)
 
@@ -54,7 +54,7 @@ class Access extends PureComponent {
 
                                     {this.state.departmentData.departmentId && (
                                         <Suspense fallback={"Loading..."}>
-                                            <DepartmentRole 
+                                            <KPIList 
                                      departmentId={this.state.departmentData.departmentId} 
                                                 />
                                             {/* <AccessForm 
@@ -73,29 +73,12 @@ class Access extends PureComponent {
         )
     }
 }
-
-const mapStateToProps = ({ settings, opportunity, auth }) => ({
+const mapStateToProps = ({settings, opportunity, auth  }) => ({
     departmentList: settings.departmentList,
     orgId:auth.userDetails.organizationId,
-
 });
+const mapDispatchToProps = (dispatch) => bindActionCreators({
+    getDepartmentList
+}, dispatch);
 
-const mapDispatchToProps = (dispatch) =>
-    bindActionCreators({
-        getDepartmentList
-    }, dispatch);
-
-export default connect(mapStateToProps, mapDispatchToProps)(Access);
-
-
-
-
-
-
-
-
-
-
-
-
-
+export default connect(mapStateToProps, mapDispatchToProps)(PerformanceManagementTab);
