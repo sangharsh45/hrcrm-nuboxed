@@ -555,6 +555,33 @@ export const getTeamMemberlist = (filter) => (dispatch) => {
     });
 };
 
+export const getreportingManager = (reptMngrId) => (dispatch) => {
+  dispatch({
+    type: types.GET_REPORTING_MANAGER_REQUEST,
+  });
+
+  axios
+  .get(`${base_url}/employee/user-list/reptMngr/${reptMngrId}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.GET_REPORTING_MANAGER_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.GET_REPORTING_MANAGER_FAILURE,
+        payload: err,
+      });
+    });
+};
+
 export const addTeams = (customer) => (dispatch, getState) => {
   const userId = getState().auth.userDetails.userId;
 

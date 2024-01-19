@@ -13,17 +13,16 @@ class TeamsActionRight extends React.Component {
     } = this.props;
 
     return (
-      <FlexContainer alignItems="center">
+      <div class="flex items-center" >
         {this.props.viewType === "order" || this.props.viewType === "table" ?
           <Button
             type="primary"
             // ghost
             onClick={() => handleTeamsModal(true)}
           >Add
-            {/* <i class="fas fa-plus"></i> */}
           </Button>
           : null}
-      </FlexContainer>
+      </div>
     );
   }
 }

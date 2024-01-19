@@ -2,7 +2,7 @@ import * as types from "./ProjectsActionTypes";
 import dayjs from "dayjs";
 import moment from "moment"; 
 const initialState = {
-  viewType: "table",
+  viewType: "list",
 
   type: "All",
   startDate: dayjs().toISOString(),

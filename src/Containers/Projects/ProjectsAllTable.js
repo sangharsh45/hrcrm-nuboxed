@@ -1,11 +1,11 @@
 import React, { useEffect, useState, useMemo, lazy } from "react";
-import { StyledPopconfirm} from "../../../Components/UI/Antd";
+import { StyledPopconfirm} from "../../Components/UI/Antd";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import moment from "moment";
 import {
   MultiAvatar2,
-} from "../../../Components/UI/Elements";
+} from "../../Components/UI/Elements";
 import ReceiptIcon from '@mui/icons-material/Receipt';
 import BorderColorIcon from '@mui/icons-material/BorderColor';
 import { FormattedMessage } from "react-intl";
@@ -19,15 +19,14 @@ import "jspdf-autotable";
   setEditProjects,
   handleUpdateProjectsModal,
   handleInvoiceProjectModal
-} from "../../Projects/ProjectsAction";
-import { BundleLoader } from "../../../Components/Placeholder";
-import { OnlyWrapCard } from "../../../Components/UI/Layout";
-const UpdateProjectsModal =lazy(()=> import('./UpdateProject/UpdateProjectsModal'));
-const AddInvoiceProjectsModal =lazy(()=> import('./ProjectsDetail/AddInvoiceProjectsModal'));
-const ProjectsDetailsView =lazy(()=> import('./ProjectsDetail/ProjectsDetailsView'));
+} from "../Projects/ProjectsAction";
+import { OnlyWrapCard } from "../../Components/UI/Layout";
+const UpdateProjectsModal =lazy(()=> import('./Child/UpdateProject/UpdateProjectsModal'));
+const AddInvoiceProjectsModal =lazy(()=> import('./Child/ProjectsDetail/AddInvoiceProjectsModal'));
+const ProjectsDetailsView =lazy(()=> import('./Child/ProjectsDetail/ProjectsDetailsView'));
 
 
-function ProjectsTable(props) {
+function ProjectsAllTable(props) {
   useEffect(() => {
      props.getProjectsData(props.organizationId);
   }, []);
@@ -311,4 +310,4 @@ const mapDispatchToProps = (dispatch) =>
     dispatch
   );
 
-export default connect(mapStateToProps, mapDispatchToProps)(ProjectsTable);
+export default connect(mapStateToProps, mapDispatchToProps)(ProjectsAllTable);

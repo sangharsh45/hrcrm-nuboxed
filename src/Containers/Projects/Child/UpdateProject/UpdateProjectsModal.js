@@ -1,9 +1,8 @@
-import Item from "antd/lib/list/Item";
 import React, { lazy, Suspense } from "react";
 import { FormattedMessage } from "react-intl";
 import { BundleLoader } from "../../../../Components/Placeholder";
 import { StyledDrawer } from "../../../../Components/UI/Antd";
-import UpdateProjectsForm from "./UpdateProjectsForm";
+const UpdateProjectsForm =lazy(()=> import('./UpdateProjectsForm'));
 
 const UpdateProjectsModal = (props) => {
   return (
@@ -11,8 +10,8 @@ const UpdateProjectsModal = (props) => {
       <StyledDrawer
 
          title={props.projectData.projectName}
-        width="47%"
-        style={{marginTop:"5rem"}}
+        width="60%"
+        style={{marginTop:"3rem"}}
         visible={props.updateProjectsModal}
         maskClosable={false}
         destroyOnClose

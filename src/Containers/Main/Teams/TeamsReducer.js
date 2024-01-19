@@ -32,6 +32,10 @@ const initialState = {
   fetchingTeamError: false,
   teamList: [],
 
+  fetchingRepoting: false, 
+  fetchingRepotingError: false,
+  reportingManger:[],
+
   fetchingTeamByTeamId: false,
   fetchingTeamByTeamIdError: false,
   teamByTeamId: {},
@@ -378,6 +382,16 @@ export const teamsReducer = (state = initialState, action) => {
         return { ...state, fetchingEmployeeList: false, teamEmployeeList: action.payload };
       case types.GET_TEAM_MEMBER_LIST_FAILURE:
         return { ...state, fetchingEmployeeList: false, fetchingEmployeeListError: true };
+
+        case types.GET_REPORTING_MANAGER_REQUEST:
+          return { ...state, fetchingRepoting: true };
+        case types.GET_REPORTING_MANAGER_SUCCESS:
+          return { ...state, fetchingRepoting: false, 
+            reportingManger: action.payload };
+        case types.GET_REPORTING_MANAGER_FAILURE:
+          return { ...state, 
+            fetchingRepoting: false, 
+            fetchingRepotingError: true };
   
         case types.ADD_TEAMS_REQUEST:
           return { ...state, addingTeam: true };
