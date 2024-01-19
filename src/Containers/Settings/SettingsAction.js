@@ -1770,10 +1770,10 @@ export const getDepartmentAccess = (roleTypeId) => (dispath) => {
 
 
 
-export const getDepartmentList = () => (dispath) => {
+export const getDepartmentList = (orgId) => (dispath) => {
   dispath({ type: types.GET_DEPARTMENT_LIST_REQUEST });
   axios
-    .get(`${base_url}/department/accesss`, {
+    .get(`${base_url}/department/accesss/${orgId}`, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },

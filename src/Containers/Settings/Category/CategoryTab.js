@@ -2,6 +2,9 @@ import React, { Suspense, useState,lazy} from "react";
 import { bindActionCreators } from "redux";
 import { StyledTabs } from "../../../Components/UI/Antd";
 import { connect } from "react-redux";
+const PerformanceManagementTab = lazy(() =>
+  import("./PerformanceManagementTab/PerformanceManagementTab")
+);
 const OrderTab = lazy(() =>
   import("./OrderTab/OrderTab")
 );
@@ -70,6 +73,11 @@ function CategoryTab (props) {
               rulesName: "Order",
               ruleId: "7",
               component:<OrderTab />,
+            },
+            {
+              rulesName: "Performance Management",
+              ruleId: "8",
+              component:<PerformanceManagementTab />,
             },
             // {
             //   rulesName: "Assessment",

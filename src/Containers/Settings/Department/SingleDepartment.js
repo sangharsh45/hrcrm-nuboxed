@@ -3,11 +3,10 @@ import styled from "styled-components";
 import { connect } from "react-redux";
 import { FormattedMessage } from "react-intl";
 import { bindActionCreators } from "redux";
-import { Button, Popconfirm, Switch } from "antd";
+import { Button, Switch } from "antd";
 import {addingDeptModules} from "../Department/DepartmentAction"
 import BorderColorIcon from "@mui/icons-material/BorderColor";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { FlexContainer } from "../../../Components/UI/Layout";
 import { TextInput } from "../../../Components/UI/Elements";
 import ViewEditCard from "../../../Components/UI/Elements/ViewEditCard";
 import { Select } from "../../../Components/UI/Elements";
@@ -291,7 +290,8 @@ const SingleDepartment = (props) => {
                   <div className="w-[9rem]">
                     <DepartmentName>{departmentName}</DepartmentName>
                   </div>
-
+{crmInd === true && (
+  <>
                   <h1>CRM</h1>
                     <div   class=" w-[7%] ml-2">
                     {/* <Popconfirm
@@ -310,7 +310,10 @@ const SingleDepartment = (props) => {
                         />
                       {/* </Popconfirm> */}
                     </div>
-
+                    </>
+)}
+{mandetoryInd === true && (
+  <>
                     <h1>Mandatory</h1>
                     <div   class=" w-[7%] ml-2">
                     {/* <Popconfirm
@@ -329,6 +332,10 @@ const SingleDepartment = (props) => {
                         />
                       {/* </Popconfirm> */}
                     </div>
+                    </>
+)}
+{erpInd === true && (
+  <>
                     <h1>ERP</h1>
                     <div   class=" w-[7%] ml-2">
                     {/* <Popconfirm
@@ -347,7 +354,10 @@ const SingleDepartment = (props) => {
                         />
                       {/* </Popconfirm> */}
                     </div>
-
+                    </>
+)}
+{imInd === true && (
+  <>
                     <h1>IM</h1>
                     <div   class=" w-[7%] ml-2">
                     {/* <Popconfirm
@@ -366,7 +376,10 @@ const SingleDepartment = (props) => {
                         />
                       {/* </Popconfirm> */}
                     </div>
-
+                    </>
+)}
+{accountInd === true && (
+  <>
                     <h1>Account</h1>
                     <div   class=" w-[7%] ml-2">
                     {/* <Popconfirm
@@ -385,6 +398,10 @@ const SingleDepartment = (props) => {
                         />
                       {/* </Popconfirm> */}
                     </div>
+                    </>
+)}
+{recruitOppsInd === true && (
+  <>
 
                     <h1>RecruitOpps</h1>
                     <div   class=" w-[7%] ml-2">
@@ -404,6 +421,10 @@ const SingleDepartment = (props) => {
                         />
                       {/* </Popconfirm> */}
                     </div>
+                    </>
+)}
+{hrInd === true && (
+  <>
 
                     <h1>HR</h1>
                     <div   class=" w-[7%] ml-2">
@@ -423,6 +444,10 @@ const SingleDepartment = (props) => {
                         />
                       {/* </Popconfirm> */}
                     </div>
+                    </>
+)}
+{productionInd === true && (
+  <>
 
                     <h1>PRODUCTION</h1>
                     <div   class=" w-[7%] ml-2">
@@ -442,6 +467,10 @@ const SingleDepartment = (props) => {
                         />
                       {/* </Popconfirm> */}
                     </div>
+                    </>
+)}
+{recruitProInd === true && (
+  <>
                     <h1>Rcruitpro</h1>
                     <div   class=" w-[7%] ml-2">
                     {/* <Popconfirm
@@ -460,7 +489,10 @@ const SingleDepartment = (props) => {
                         />
                       {/* </Popconfirm> */}
                     </div>
-
+                    </>
+)}
+{repairInd === true && (
+  <>
                     <h1>Repair</h1>
                     <div   class=" w-[7%] ml-2">
                     {/* <Popconfirm
@@ -479,6 +511,10 @@ const SingleDepartment = (props) => {
                         />
                       {/* </Popconfirm> */}
                     </div>
+                    </>
+)}
+{inventoryInd === true && (
+  <>
                     <h1>Inventory</h1>
                     <div   class=" w-[7%] ml-2">
                     {/* <Popconfirm
@@ -497,6 +533,10 @@ const SingleDepartment = (props) => {
                         />
                       {/* </Popconfirm> */}
                     </div>
+                    </>
+)}
+{orderManagementInd === true && (
+  <>
                     <h1>OrderManagement</h1>
                     <div   class=" w-[7%] ml-2">
                     {/* <Popconfirm
@@ -515,6 +555,10 @@ const SingleDepartment = (props) => {
                         />
                       {/* </Popconfirm> */}
                     </div>
+                    </>
+)}
+{logisticsInd === true && (
+  <>
                     <h1>Logistics</h1>
                     <div   class=" w-[7%] ml-2">
                     {/* <Popconfirm
@@ -533,6 +577,10 @@ const SingleDepartment = (props) => {
                         />
                       {/* </Popconfirm> */}
                     </div>
+                    </>
+)}
+{procurementInd === true && (
+  <>
                     <h1>Procurement</h1>
                     <div   class=" w-[7%] ml-2">
                     {/* <Popconfirm
@@ -551,6 +599,10 @@ const SingleDepartment = (props) => {
                         />
                       {/* </Popconfirm> */}
                     </div>
+                    </>
+)}
+{eLearningInd === true && (
+  <>
 
                     <h1>Elearning</h1>
                     <div   class=" w-[7%] ml-2">
@@ -570,7 +622,8 @@ const SingleDepartment = (props) => {
                         />
                       {/* </Popconfirm> */}
                     </div>
-
+                    </>
+)}
                   <div class="ml-2">
                     {mandetoryInd !== true && (
                       <BorderColorIcon
@@ -597,7 +650,7 @@ const SingleDepartment = (props) => {
               </div>
             </div>
           ) : (
-            <FlexContainer>
+            <div class=" flex">
               <TextInput
                 name={props.name}
                 defaultValue={departmentName}
@@ -631,7 +684,7 @@ const SingleDepartment = (props) => {
             />
                 </Button>
                 </div>
-            </FlexContainer>
+            </div>
           )
         }
       </ViewEditCard>

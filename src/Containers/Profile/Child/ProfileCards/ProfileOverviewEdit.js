@@ -4,8 +4,7 @@ import { FormattedMessage } from "react-intl";
 import { bindActionCreators } from "redux";
 import { updateUserById } from "../../../Auth/AuthAction";
 import { Button } from "antd";
-import { FlexContainer } from "../../../../Components/UI/Layout";
-import { TextInput, Spacer } from "../../../../Components/UI/Elements";
+import { TextInput } from "../../../../Components/UI/Elements";
 import EditUpload from "../../../../Components/Forms/Edit/EditUpload";
 class ProfileDetailEdit extends Component {
   constructor(props) {
@@ -48,8 +47,7 @@ class ProfileDetailEdit extends Component {
     const { user, toggleViewType, updatingUserById } = this.props;
     return (
       <>
-        <FlexContainer
-          flexDirection="column"
+        <div class=" flex flex-col"
           style={{ padding: "0.625em 1.25em 0.625em 1.25em" }}
         >
           <EditUpload
@@ -59,7 +57,7 @@ class ProfileDetailEdit extends Component {
             imgHeight={100}
             getImage={this.setImage}
           />
-          <Spacer style={{ margin: "0.125em" }} />
+         <div class=" m-[0.125em]">
           <EditableInput
 
             defaultValue={user.firstName}
@@ -69,7 +67,8 @@ class ProfileDetailEdit extends Component {
             value={this.state.fields.firstName}
             width="100%"
           />
-          <Spacer style={{ margin: "0.125em" }} />
+          </div>
+          <div class=" m-[0.125em]">
           {/* <EditableInput
                         defaultValue={user.middleName}
                         handleChange={this.handleChange}
@@ -83,9 +82,10 @@ class ProfileDetailEdit extends Component {
             value={this.state.fields.lastName}
             width="100%"
           />
-        </FlexContainer>
+             </div>
+        </div>
 
-        <FlexContainer justifyContent="flex-end" marginRight="1.25em">
+        <div class=" flex justify-end mr-[1.25em]" >
           <Button
             type="primary"
             Loading={updatingUserById}
@@ -106,7 +106,7 @@ class ProfileDetailEdit extends Component {
               defaultMessage="Cancel"
             />
           </Button>
-        </FlexContainer>
+        </div>
       </>
     );
   }

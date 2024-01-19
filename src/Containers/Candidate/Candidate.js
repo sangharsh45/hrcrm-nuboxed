@@ -1,4 +1,4 @@
-import React, { Component, Suspense, useState,lazy } from "react";
+import React, {  Suspense, useState,lazy } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { BundleLoader } from "../../Components/Placeholder";
@@ -13,7 +13,7 @@ import {
   getCandidateWhitePagination,
   getCandidateBluePagination,
 } from "./CandidateAction";
-const AddCandidateModal = lazy(() => import("./Child/AddCandidateModal"));
+
 const CandidateHeader = lazy(() => import("./Child/CandidateHeader"));
 const CandidateWhiteTable = lazy(() =>
   import("../Candidate/Child/CandidateWhiteTable")

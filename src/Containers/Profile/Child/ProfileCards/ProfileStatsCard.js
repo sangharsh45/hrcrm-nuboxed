@@ -1,7 +1,8 @@
-import React, { Component } from 'react';
+import React, { Component,lazy } from 'react';
 import { ViewEditCard } from "../../../../Components/UI/Elements";
-import ProfileStatsView from "./ProfileStatsView";
-import ProfileStatsEdit from "./ProfileStatsEdit";
+const ProfileStatsView = lazy(() => import("./ProfileStatsView"))
+const ProfileStatsEdit = lazy(() => import("./ProfileStatsEdit"))
+
 
 class ProfileAboutCard extends Component {
     render() {

@@ -1,15 +1,11 @@
 import React, { Component, lazy, Suspense } from "react";
-import { Icon } from "antd";
 import { StyledTabs } from "../../../../Components/UI/Antd";
 import { TabsWrapper } from "../../../../Components/UI/Layout";
-import { ActionIcon } from "../../../../Components/Utils";
 import {
   BankOutlined,
-  CustomerServiceOutlined,
-  EyeInvisibleOutlined, MailOutlined, PhoneOutlined, PlusOutlined,
- 
-  
+  CustomerServiceOutlined, MailOutlined, PhoneOutlined, PlusOutlined, 
 } from '@ant-design/icons';
+import{handleEmailProfileModal} from "../../../Profile/ProfileAction";
 import { handleEducationModal } from "../../ProfileAction";
 import { handleBankModal } from "../../ProfileAction";
 import { handleTrainingModal } from "../../ProfileAction";
@@ -18,19 +14,16 @@ import { handlePersonalModal } from "../../ProfileAction";
 import { handlePersonalDetailsModal } from "../../ProfileAction";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import AddEducationModal from "./ProfileBoost/Education/AddEducationModal";
-import AddTrainingModal from "./ProfileBoost/Training/AddTrainingModal";
-import AddEmploymentModal from "./ProfileBoost/Employment/AddEmploymentModal";
-import AddPersonalModal from "./ProfileBoost/Personal/AddPersonalModal";
-import AddBankModal from "./ProfileBoost/Bank/AddBankModal";
-import AddPersonalDetailsModal from "./ProfileBoost/PersonalDetails/AddPersonalDetailsModal";
-import Signature from "./ProfileBoost/Signature";
-import { DndProvider, DragSource, DropTarget } from "react-dnd";
-import { HTML5Backend } from "react-dnd-html5-backend";
-import EmailTable from "./ProfileBoost/Email/EmailTable";
-import AddEmailModal from "../ProfileTabs/AddEmailModal";
+const AddEducationModal = lazy(() => import("./ProfileBoost/Education/AddEducationModal"));
+const AddTrainingModal = lazy(() => import("./ProfileBoost/Training/AddTrainingModal"));
+const AddEmploymentModal = lazy(() => import("./ProfileBoost/Employment/AddEmploymentModal"));
+const AddPersonalModal = lazy(() => import("./ProfileBoost/Personal/AddPersonalModal"));
+const AddBankModal = lazy(() => import("./ProfileBoost/Bank/AddBankModal"));
+const AddPersonalDetailsModal = lazy(() => import("./ProfileBoost/PersonalDetails/AddPersonalDetailsModal"));
+const Signature = lazy(() => import("./ProfileBoost/Signature"));
+const EmailTable = lazy(() => import("./ProfileBoost/Email/EmailTable"));
+const AddEmailModal = lazy(() => import("../ProfileTabs/AddEmailModal"));
 
-import{handleEmailProfileModal} from "../../../Profile/ProfileAction";
 const BankTable = lazy(() => import("./ProfileBoost/Bank/BankTable"));
 const EducationTable = lazy(() =>
   import("./ProfileBoost/Education/EducationTable")
@@ -50,7 +43,7 @@ const PersonalDetailsTable = lazy(() =>
   import("./ProfileBoost/PersonalDetails/PersonalDetailsTable")
 );
 
-const ProfileBoost = lazy(() => import("./ProfileBoost/ProfileBoost"));
+
 
 const TabPane = StyledTabs.TabPane;
 
