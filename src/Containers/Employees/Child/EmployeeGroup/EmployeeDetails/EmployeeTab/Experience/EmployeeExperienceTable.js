@@ -3,16 +3,12 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { StyledTable } from '../../../../../../../Components/UI/Antd';
 import {EditOutlined} from "@ant-design/icons";
-import {
-  // getEmployeeExperienceById,
-  getTopicsByUserId
-    // updateExperienceByCandidateId,
-    // setSkillRoleExperience
-} from "../../../../../../Employees/EmployeeAction";
-import { InputNumber, Popconfirm, Form, Input, Typography, Button, Space, DatePicker,Tooltip } from 'antd';
+import {  getTopicsByUserId } from "../../../../../../Employees/EmployeeAction";
+import { Popconfirm, Form, Input, Typography, Button,Tooltip } from 'antd';
 import { Select } from "../../../../../../../Components/UI/Elements";
 import { FlexContainer } from "../../../../../../../Components/UI/Layout";
 import styled from "styled-components";
+
 const { Option } = Select;
 const ButtonGroup = Button.Group;
 
@@ -307,8 +303,6 @@ const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
       getTopicsByUserId,
-        // updateExperienceByCandidateId,
-        // setSkillRoleExperience
     },
     dispatch
   );

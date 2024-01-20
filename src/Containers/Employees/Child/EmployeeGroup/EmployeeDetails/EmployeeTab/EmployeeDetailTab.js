@@ -15,7 +15,6 @@ import ContrastIcon from '@mui/icons-material/Contrast';
 import { StyledTabs } from "../../../../../../Components/UI/Antd";
 import { TabsWrapper } from "../../../../../../Components/UI/Layout";
 import SchoolIcon from '@mui/icons-material/School';
-
 import {
   handlePersonalModal,
   handleEmploymentModal,
@@ -28,26 +27,26 @@ import {
   handleDocumentUploadModal,
   handleContractModal,
 } from "../../../../../Profile/ProfileAction";
-import AddPersonalModal from "../EmployeeTab/Personal/AddPersonalModal";
-import AddEducationModal from "./Education/AddEducationModal";
-import AddTrainingModal from "./Training/AddTrainingModal";
-import AddEmploymentModal from "./Employment/AddEmploymentModal";
-import AddBankModal from "./Bank/AddBankModal";
-import PersonalDetailsTable from "./PersonalDetails/PersonalDetailsTable";
-import AddPersonalDetailsModal from "./PersonalDetails/AddPersonalDetailsModal";
-import AddSalaryModal from "./Salary/AddSalaryModal";
-import SalaryTable from "./Salary/SalaryTable";
-import AddContractModal from "./Contract/AddContractModal";
-import ContractTable from "./Contract/ContractTable";
-import ContactsIcon from '@mui/icons-material/Contacts';
-import CandidateTable from "../../../../../Candidate/Child/CandidateTable/CandidateTable";
-import OpportunityTable from "../../../../../Opportunity/Child/OpportunityTable/OpportunityTable";
-import CustomerTable from "../../../../../Customer/Child/CustomerTable/CustomerTable";
-import PartnerTable from "../../../../../Partner/child/PartnerTable/PartnerTable"
-import RecruitmentTable from "../../../../../Opportunity/Child/OpportunityDetail/OpportunityTab/Recruitment/RecruitmentTable";
-import EmployeeExperienceForm from "./Experience/EmployeeExperienceForm";
-import AddVisaModal from "./Visa/AddVisaModal";
-import VisaTable from "./Visa/VisaTable";
+const AddPersonalModal =lazy(()=>import("../EmployeeTab/Personal/AddPersonalModal"));
+const AddEducationModal =lazy(()=>import("./Education/AddEducationModal"));
+const AddTrainingModal =lazy(()=>import("./Training/AddTrainingModal"));
+const AddEmploymentModal =lazy(()=>import("./Employment/AddEmploymentModal"));
+const AddBankModal =lazy(()=>import("./Bank/AddBankModal"));
+const PersonalDetailsTable =lazy(()=>import("./PersonalDetails/PersonalDetailsTable"));
+const AddPersonalDetailsModal =lazy(()=>import("./PersonalDetails/AddPersonalDetailsModal"));
+const AddSalaryModal =lazy(()=>import("./Salary/AddSalaryModal"));
+const SalaryTable =lazy(()=>import("./Salary/SalaryTable"));
+const AddContractModal =lazy(()=>import("./Contract/AddContractModal"));
+const ContractTable =lazy(()=>import("./Contract/ContractTable"));
+const ContactsIcon =lazy(()=>import("@mui/icons-material/Contacts"));
+const CandidateTable =lazy(()=>import("../../../../../Candidate/Child/CandidateTable/CandidateTable"));
+const OpportunityTable =lazy(()=>import("../../../../../Opportunity/Child/OpportunityTable/OpportunityTable"));
+const CustomerTable =lazy(()=>import("../../../../../Customer/Child/CustomerTable/CustomerTable"));
+const PartnerTable =lazy(()=>import("../../../../../Partner/child/PartnerTable/PartnerTable"));
+const RecruitmentTable =lazy(()=>import("../../../../../Opportunity/Child/OpportunityDetail/OpportunityTab/Recruitment/RecruitmentTable"));
+const EmployeeExperienceForm =lazy(()=>import("./Experience/EmployeeExperienceForm"));
+const AddVisaModal =lazy(()=>import("./Visa/AddVisaModal"));
+const VisaTable =lazy(()=>import("./Visa/VisaTable"));
 const BankTable = lazy(() => import("./Bank/BankTable"));
 const EducationTable = lazy(() => import("./Education/EducationTable"));
 const EmploymentTable = lazy(() => import("./Employment/EmploymentTable"));
@@ -96,9 +95,7 @@ componentDidMount(){
       handleContractModal,
       user
     } = this.props;
-    console.log(this.props.employeeId);
 
-    console.log("sos", this.props.singleEmployee.suspendInd)
     return (
       <>
         <TabsWrapper>
@@ -200,7 +197,7 @@ componentDidMount(){
                 <PhoneIcon 
                  style={{fontSize:"1.1rem"}}
                  />
-                  <span class=" font-poppins" style={{ marginLeft: "0.25em" }}>
+                  <span class=" font-poppins ml-1">
                     
                     <FormattedMessage
                       id="app.emergency"
@@ -214,7 +211,8 @@ componentDidMount(){
                         tooltipTitle="Add"
                         onClick={() => handlePersonalModal(true)}
                         size="14px"
-                        style={{ marginLeft:"0.25em", verticalAlign: "center" }}
+                        class="ml-1"
+                        style={{ verticalAlign: "center" }}
                       />
                     </>
                   )}
@@ -233,8 +231,7 @@ componentDidMount(){
               tab={
                 <>
                 <AccountBalanceIcon   style={{fontSize:"1.1rem"}}/>
-                  <span class=" font-poppins" style={{ marginLeft: "0.25em" }}>Bank Details
-                   {/*  &nbsp;*/} 
+                  <span class=" font-poppins ml-1">Bank Details
                   </span>
                   {activeKey === "5" && user.userCreateInd === true && (
                     <>
@@ -262,7 +259,7 @@ componentDidMount(){
               tab={
                 <>
                 <RecentActorsIcon  style={{fontSize:"1.1rem"}}/>
-                  <span class=" font-poppins" style={{ marginLeft: "0.25em" }}>Personal Details
+                  <span class=" font-poppins ml-1">Personal Details
                   </span>
                   {activeKey === "6" && user.userCreateInd === true && (
                     <>
@@ -289,9 +286,7 @@ componentDidMount(){
               tab={
                 <>
                 <NoteAltIcon  style={{fontSize:"1.1rem"}}/>
-                  <span style={{ marginLeft: "0.25em" }}>
-                   {/* &nbsp; */} 
-                   
+                  <span class="ml-1">  
                     <FormattedMessage id="app.notes" defaultMessage="Notes" />
                   </span>
                   {activeKey === "7" && (
@@ -314,7 +309,7 @@ componentDidMount(){
               tab={
                 <>
                  <PaymentIcon  style={{fontSize:"1.1rem"}}/>
-                  <span class=" font-poppins" style={{ marginLeft: "0.25em" }}>Salary
+                  <span class=" font-poppins ml-1">Salary
                   </span>
                   {activeKey === "8" && user.userCreateInd === true && (
                     <>
@@ -341,7 +336,7 @@ componentDidMount(){
               tab={
                 <>
                 <FileCopyIcon   style={{fontSize:"1.1rem"}} />
-                  <span class=" font-poppins" style={{ marginLeft: "0.25em" }}>
+                  <span class=" font-poppins ml-1">
                     
                     <FormattedMessage
                       id="app.documents"
@@ -376,7 +371,7 @@ componentDidMount(){
               tab={
                 <>
                 <ContrastIcon  style={{fontSize:"1.1rem"}}/>
-                  <span class=" font-poppins" style={{ marginLeft: "0.25em" }}>
+                  <span class=" font-poppins ml-1">
                     
                    
                     <FormattedMessage
@@ -410,7 +405,7 @@ componentDidMount(){
               tab={
                 <>
                <i class="fas fa-portrait" aria-hidden="true"></i>
-                  <span class=" font-poppins" style={{ marginLeft: "0.25em" }}>
+                  <span class=" font-poppins ml-1">
                     
                    
                     <FormattedMessage
@@ -420,13 +415,7 @@ componentDidMount(){
                   </span>
                   {activeKey === "11" && (
                     <>
-                      {/* <ActionIcon
-                        type="plus"
-                        tooltipTitle="Add"
-                        handleIconClick={() => handleTalentModal(true)}
-                        size="14px"
-                        style={{ marginLeft:"0.25em", verticalAlign: "center" }}
-                      /> */}
+                      
                     </>
                   )}
                 </>
@@ -445,7 +434,7 @@ componentDidMount(){
               tab={
                 <>
                  <i class="far fa-lightbulb" aria-hidden="true"></i>
-                  <span class=" font-poppins" style={{ marginLeft: "0.25em" }}>
+                  <span class=" font-poppins ml-1" >
                   <FormattedMessage
                 id="app.opportunity"
                 defaultMessage="Opportunity"
@@ -476,7 +465,7 @@ componentDidMount(){
               tab={
                 <>
                  <i class="far fa-building" aria-hidden="true"></i>
-                  <span class=" font-poppins" style={{ marginLeft: "0.25em" }}>
+                  <span class=" font-poppins ml-1">
                   <FormattedMessage
                 id="app.customer"
                 defaultMessage="Customer"
@@ -507,7 +496,7 @@ componentDidMount(){
               tab={
                 <>
                 <ContactsIcon/>
-                  <span class=" font-poppins" style={{ marginLeft: "0.25em" }}>
+                  <span class=" font-poppins ml-1">
                   <FormattedMessage
                   id="app.requirement"
                   defaultMessage="Requirement"
@@ -515,13 +504,7 @@ componentDidMount(){
                   </span>
                   {activeKey === "14" && (
                     <>
-                      {/* <ActionIcon
-                        type="plus"
-                        tooltipTitle="Add"
-                        handleIconClick={() => handleTalentModal(true)}
-                        size="14px"
-                        style={{ marginLeft:"0.25em", verticalAlign: "center" }}
-                      /> */}
+                  
                     </>
                   )}
                 </>
@@ -538,7 +521,7 @@ componentDidMount(){
               tab={
                 <>
                  <i class="far fa-handshake" aria-hidden="true"></i>
-                  <span class=" font-poppins" style={{ marginLeft: "0.25em" }}>
+                  <span class=" font-poppins ml-1">
                   <FormattedMessage
                 id="app.vendor"
                 defaultMessage="Vendor"
@@ -570,7 +553,7 @@ componentDidMount(){
                 <>
                 
                <WorkspacePremiumIcon style={{fontSize:"1.1rem"}}/>
-                  <span class=" font-poppins" style={{ marginLeft: "0.25em" }}>                  
+                  <span class=" font-poppins ml-1">                  
                 Experience
                   </span>                 
                 </>
@@ -589,7 +572,7 @@ componentDidMount(){
               tab={
                 <>
                 <SchoolIcon   style={{fontSize:"1.1rem"}}/>
-                  <span class=" font-poppins" style={{ marginLeft: "0.25em" }}>
+                  <span class=" font-poppins ml-1">
                     
                  Visa
                   </span>

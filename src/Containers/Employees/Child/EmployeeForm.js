@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { useEffect,useState } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Button, Tooltip,Switch } from "antd";
@@ -20,125 +20,107 @@ import {getRoles} from "../../Settings/Category/Role/RoleAction"
 import {getDesignations} from "../../Settings/Designation/DesignationAction";
 import {getDepartments} from "../../Settings/Department/DepartmentAction";
 import AddressFieldArray from "../../../Components/Forms/Formik/AddressFieldArray";
-import { TextareaComponent } from "../../../Components/Forms/Formik/TextareaComponent";
 
 
-// const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
-// const documentSchema = Yup.object().shape({
-//   mobileNo: Yup.string().matches(phoneRegExp, 'Mobile number is not valid').min(5,"Number is too short").max(10,"Number is too long"),
-//   phoneNo: Yup.string().matches(phoneRegExp, 'Phone number is not valid').min(5,"Number is too short").max(10,"Number is too long"),
-//   departmentId: Yup.string().required("Input needed!"),
-//   roleType: Yup.string().required("Input needed!"),
-//   reportingManager: Yup.string().required("Input needed!"),
-// });
+function EmployeeForm (props) {
 
+  const [active,setActive]=useState(false);
+  const [checked,setChecked]=useState(true);
+  const [typeInd,setTypeInd]=useState(false);
+  const [selectedDept,setSelectedDept]=useState("");
+  const [defaultOption,setDefaultOption]=useState(props.fullName);
+  const [selected,setSelected]=useState(defaultOption);
+  const [selectedCountry,setSelectedCountry]=useState("");
+  const [locations,setLocations]=useState([]);
+  const [selectedLocation,setSelectedLocation]=useState("");
+  const [role,setRole]=useState([]);
+  const [selectedRole,setSelectedRole]=useState("");
+  const [workType,setWorkType]=useState("employee");
+ 
 
-class EmployeeForm extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      active: false,
-      checked: true,
-      typeInd:false,
-      selectedDept:"",
-      open: false,
-      defaultOption: props.fullName,
-      selected: props.fullName,
-      selectedCountry: '',
-      locations: [],
-      role:[],
-      selectedRole:"",
-      selectedLocation: "",
-      workType: "employee",
-    };
-  }
-  handleSelectedChange = (value) => {
-    this.setState({ selected: value });
-  };
+  // const handleSelectedChange = (value) => {
+  //   setSelected(value);
+  // };
   
-  toggleListbox = () => {
-    this.setState((prevState) => ({ open: !prevState.open }));
+ const radioClick = (c) => {
+  setWorkType(c);
+  };
+ 
+ const handleJobType = (checked) => {
+  setActive(checked);
   };
 
-  glassButtoClick = (type) => {
-    this.setState({ active: type });
-    // alert(this.state.active)
+  const handleType = (checked) => {
+    setTypeInd(checked);
   };
 
-  radioClick = (c) => {
-    this.setState({ workType: c });
-  };
-  handleJobType = (checked) => {
-    this.setState({ active: checked });
-  };
-  handleType = (checked) => {
-    this.setState({ typeInd: checked });
-  };
-  handleDeptChange = (event) => {
+  const handleDeptChange = (event) => {
     const selectedDept = event.target.value;
-    const filteredRoles = this.props.roles.filter((item) => item.departmentId === selectedDept);
-    this.setState({ selectedDept, role: filteredRoles });
-    
+    const filteredRoles = props.roles.filter((item) => item.departmentId === selectedDept);
+    setSelectedDept(selectedDept);
+    setSelectedRole(filteredRoles);  
   };
-  handleRoleChange = (event) => {
+
+  const handleRoleChange = (event) => {
     const selectedRole = event.target.value;
-    this.setState({ selectedRole });
+    setSelectedRole(selectedRole);
   };
-  handleCountryChange = (event) => {
+ const handleCountryChange = (event) => {
     const selectedCountry = event.target.value;
-    const filteredLocations = this.props.showLocation.filter((item) => item.country_name === selectedCountry);
-    this.setState({ selectedCountry, locations: filteredLocations });
+    const filteredLocations = props.showLocation.filter((item) => item.country_name === selectedCountry);
+    setSelectedCountry(selectedCountry);
+    setLocations(filteredLocations);
   };
-  handleLocationChange = (event) => {
+
+ const handleLocationChange = (event) => {
     const selectedLocation = event.target.value;
-    this.setState({ selectedLocation });
+    setLocations(selectedLocation);
   };
 
-  getRoleOptions(filterOptionKey, filterOptionValue) {
-    const roleOptions =
-      this.props.roles.length &&
-      this.props.roles
-        .filter((option) => {
-          if (
-            option.departmentId === filterOptionValue &&
-            option.probability !== 0
-          ) {
-            return option;
-          }
-        })
-        .map((option) => ({
-          label: option.roleType || "",
-          value: option.roleTypeId,
-        }));
+  // const getRoleOptions=(filterOptionKey, filterOptionValue)=> {
+  //   const roleOptions =
+  //     props.roles.length &&
+  //     props.roles
+  //       .filter((option) => {
+  //         if (
+  //           option.departmentId === filterOptionValue &&
+  //           option.probability !== 0
+  //         ) {
+  //           return option;
+  //         }
+  //       })
+  //       .map((option) => ({
+  //         label: option.roleType || "",
+  //         value: option.roleTypeId,
+  //       }));
 
-    return roleOptions;
-  }
-  getLocationNameOption(filterOptionKey, filterOptionValue) {
-    const locationOptions = this.props.showLocation
-      .filter(option => option.country_id === filterOptionValue && option.probability !== 0)
-      .map(option => ({
-        label: option.locationName || "",
-        value: option.locationDetailsId,
-      }));
+  //   return roleOptions;
+  // }
+//  const getLocationNameOption=(filterOptionKey, filterOptionValue)=> {
+//     const locationOptions = props.showLocation
+//       .filter(option => option.country_id === filterOptionValue && option.probability !== 0)
+//       .map(option => ({
+//         label: option.locationName || "",
+//         value: option.locationDetailsId,
+//       }));
   
-    return locationOptions;
-  }
+//     return locationOptions;
+//   }
   
   
 
-  componentDidMount() {
-    const { getCountries ,getAssignedToList,getRoles,getlocation,} = this.props;
-    console.log();
-    getRoles(this.props.organizationId);
+  useEffect(()=>{
+    const { getCountries ,getAssignedToList,getRoles,getlocation,} = props;
+    getRoles(props.organizationId);
     getCountries(getCountries);
-    getlocation(this.props.orgId);
-    getAssignedToList(this.props.orgId)
-}
+    getlocation(props.orgId);
+    getAssignedToList(props.orgId)
+},[]);
 
-getEmployeesbyDepartment (filterOptionKey, filterOptionValue) {
+const getEmployeesbyDepartment= (filterOptionKey, filterOptionValue)=> {
   const StagesOptions =
-    this.props.employees.length &&
-    this.props.employees
+    props.employees.length &&
+    props.employees
       .filter((option) => {
         if (
           option.departmentId === filterOptionValue &&
@@ -166,30 +148,12 @@ getEmployeesbyDepartment (filterOptionKey, filterOptionValue) {
 
   return StagesOptions;
 }
-  render() {
-    const { selected, open } = this.state;
     const {
       userId,
-      assignedToList
-    } = this.props;
-    console.log(this.state.selectedLocation);
-    const countryNameOption = this.props.countries.map((item) => {
-      return {
-          label: `${item.country_name || ""}`,
-          value: item.country_name,
-      };
-  });
-  
-   
-  
-  const WorkflowOptions = this.props.departments.map((item) => {
-    return {
-      label: `${item.departmentName || ""}`,
-      value: item.departmentId,
-    };
-  });
+    } = props;
 
-  const dialCodeNameOption = this.props.countries.map((item) => {
+
+  const dialCodeNameOption = props.countries.map((item) => {
     return {
         label: `${item.country_dial_code || ""}`,
         value: item.country_dial_code,
@@ -197,11 +161,8 @@ getEmployeesbyDepartment (filterOptionKey, filterOptionValue) {
 });
 
 
-
-
-  
-    const { addEmployee, addingEmployee } = this.props;
-    const selectedOption = assignedToList.find((item) => item.empName === selected);
+    const { addEmployee, addingEmployee } = props;
+    const selectedOption = props.assignedToList.find((item) => item.empName === selected);
     return (
       <>
         <Formik
@@ -214,10 +175,10 @@ getEmployeesbyDepartment (filterOptionKey, filterOptionValue) {
             countryDialCode1: "",
             reportingManagerDeptId:"",
             phoneNo: "",
-            location:this.state.selectedLocation,
-            workplace:this.state.selectedCountry,
-            roleType:this.state.selectedRole,
-            departmentId:this.state.selectedDept,
+            location:selectedLocation,
+            workplace:selectedCountry,
+            roleType:selectedRole,
+            departmentId:selectedDept,
             dateOfJoining:dayjs(),
             dob:dayjs(),
             mobileNo: "",
@@ -230,12 +191,12 @@ getEmployeesbyDepartment (filterOptionKey, filterOptionValue) {
             label: "",
             workplace: "",
             assignedTo: selectedOption ? selectedOption.employeeId : userId,
-            job_type: this.state.active ? "Full Time" : "Part Time",
-            type: this.state.typeInd ? "true" : "false",
-            employee_type: this.state.workType,
-            // job_type: this.state.active,
-            reportingManager: this.props.userDetails.userId
-              ? this.props.userDetails.userId
+            job_type: active ? "Full Time" : "Part Time",
+            type: typeInd ? "true" : "false",
+            employee_type: workType,
+            // job_type: active,
+            reportingManager: props.userDetails.userId
+              ? props.userDetails.userId
               : "",
             address: [
               {
@@ -252,20 +213,18 @@ getEmployeesbyDepartment (filterOptionKey, filterOptionValue) {
               },
             ],
           }}
-          // validationSchema={documentSchema}
           onSubmit={(values, { resetForm }) => {
-            // console.log({ ...values, job_type: this.state.active });
-            this.props.addEmployee({
+            props.addEmployee({
               ...values,
               reportingManagerDeptId:values.reportingManagerDeptId,
-              location:this.state.selectedLocation,
-              workplace:this.state.selectedCountry,
-              roleType:this.state.selectedRole,
-              departmentId:this.state.selectedDept,
-              job_type: this.state.active ? "Full Time" : "Part Time",
-              type: this.state.typeInd ? "true" : "false",
+              location:selectedLocation,
+              workplace:selectedCountry,
+              roleType:selectedRole,
+              departmentId:selectedDept,
+              job_type: active ? "Full Time" : "Part Time",
+              type: typeInd ? "true" : "false",
               assignedTo: selectedOption ? selectedOption.employeeId : userId,
-              employee_type: this.state.workType,
+              employee_type: workType,
             },"cretiondate");
             resetForm();
           }}
@@ -548,17 +507,22 @@ getEmployeesbyDepartment (filterOptionKey, filterOptionValue) {
 
           
                 <div class=" w-[47.5%] max-sm:w-wk ">
-                <Listbox value={selected} onChange={(value) => this.setState({ selected: value })}>
-                <div className="relative">
-              <Listbox.Button  style={{boxShadow: "rgb(170, 170, 170) 0px 0.25em 0.62em"}} className="relative w-full leading-4 cursor-default border border-gray-300 bg-white py-0.5 pl-3 pr-10 text-left shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm">
+                <Listbox value={selected} onChange={setSelected}>
+        {({ open }) => (
+          <>
+            <Listbox.Label className="block font-semibold text-[0.75rem] ">
+              Assigned to
+            </Listbox.Label>
+            <div className="relative mt-[0.1rem]">
+              <Listbox.Button className="relative w-full leading-4 cursor-default border border-gray-300 bg-white py-0.5 pl-3 pr-10 text-left shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm">
                 {selected}
               </Listbox.Button>
               {open && (
                 <Listbox.Options
                   static
-                  className="absolute z-10 mt-1 max-h-56 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
+                  className="absolute z-10 mt-1 max-h-56 w-full overflow-auto  bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
                 >
-                  {assignedToList.map((item) => (
+                  {props.assignedToList.map((item) => (
                     <Listbox.Option
                       key={item.employeeId}
                       className={({ active }) =>
@@ -608,15 +572,17 @@ getEmployeesbyDepartment (filterOptionKey, filterOptionValue) {
                 </Listbox.Options>
               )}
             </div>
-                </Listbox>
+          </>
+        )}
+      </Listbox>
 <div class=" flex justify-between max-sm:flex-col mt-4" >
-                      <div class=" w-w48 flex flex flex-col max-sm:w-wk">
+                      <div class=" w-w48 flex flex-col max-sm:w-wk">
                    <label style={{color:"#444",fontWeight:"bold",fontSize:" 0.75rem"}}>Department</label>
                       <select  className="customize-select"
                       
-                      onChange={this.handleDeptChange}>
+                      onChange={handleDeptChange}>
           <option value="">Select </option>
-          {this.props.departments.map((item, index) => (
+          {props.departments.map((item, index) => (
             <option 
            
             key={index} value={item.departmentId}>
@@ -663,10 +629,10 @@ getEmployeesbyDepartment (filterOptionKey, filterOptionValue) {
                   <select
                  
                  className="customize-select"
-                      onChange={this.handleRoleChange}
+                      onChange={handleRoleChange}
                     >
           <option value="">Select </option>
-          {this.state.role.map((item, index) => (
+          {props.roles.map((item, index) => (
             <option key={index}
             // disabled={!values.country_name}
              value={item.roleTypeId}>
@@ -719,9 +685,9 @@ getEmployeesbyDepartment (filterOptionKey, filterOptionValue) {
                       <label style={{color:"#444",fontWeight:"bold",fontSize:" 0.75rem"}}>WorkPlace</label>
                       <select 
                         className="customize-select"
-                      onChange={this.handleCountryChange}>
+                      onChange={handleCountryChange}>
           <option value="">Select </option>
-          {this.props.countries.map((item, index) => (
+          {props.countries.map((item, index) => (
             <option key={index} value={item.country_name}>
               {item.country_name}
             </option>
@@ -751,10 +717,10 @@ getEmployeesbyDepartment (filterOptionKey, filterOptionValue) {
                     <label style={{color:"#444",fontWeight:"bold",fontSize:" 0.75rem"}}>Location</label>
                     <select  className="customize-select"
                 //  style={{ border: "0.06em solid #aaa" }}
-                      onChange={this.handleLocationChange}
+                      onChange={handleLocationChange}
                     >
           <option value="">Select </option>
-          {this.state.locations.map((item, index) => (
+          {props.showLocation.map((item, index) => (
             <option key={index}
             // disabled={!values.country_name}
              value={item.locationDetailsId}>
@@ -837,9 +803,9 @@ getEmployeesbyDepartment (filterOptionKey, filterOptionValue) {
   options={
     values.reportingManagerDeptId
       ? (Array.isArray(
-          this.getEmployeesbyDepartment("reportingManagerDeptId", values.reportingManagerDeptId)
+          getEmployeesbyDepartment("reportingManagerDeptId", values.reportingManagerDeptId)
         )
-          ? this.getEmployeesbyDepartment(
+          ? getEmployeesbyDepartment(
               "reportingManagerDeptId",
               values.reportingManagerDeptId
             )
@@ -877,8 +843,8 @@ getEmployeesbyDepartment (filterOptionKey, filterOptionValue) {
                       />
                     </StyledLabel>
                     <Switch
-                          checked={this.state.active}
-                          onChange={this.handleJobType}
+                          checked={active}
+                          onChange={handleJobType}
                           checkedChildren="Full Time"
                           unCheckedChildren="Part Time"
                         />
@@ -910,8 +876,8 @@ getEmployeesbyDepartment (filterOptionKey, filterOptionValue) {
                       />
                     </StyledLabel>
                     <Switch
-                          checked={this.state.typeInd}
-                          onChange={this.handleType}
+                          checked={typeInd}
+                          onChange={handleType}
                           checkedChildren="External"
                           unCheckedChildren="Internal"
                         />
@@ -928,25 +894,25 @@ getEmployeesbyDepartment (filterOptionKey, filterOptionValue) {
                     <Spacer />
                     <Radio.Group
                       name="radiogroup"
-                      defaultValue={this.state.workType}
+                      defaultValue={workType}
                     >
                       <Radio
                         value={"Employee"}
-                        onChange={() => this.radioClick("employee")}
+                        onChange={() => radioClick("employee")}
                       >
                         Employee
                       </Radio>
                       &nbsp;&nbsp;
                       <Radio
                         value={"contractor"}
-                        onChange={() => this.radioClick("contractor")}
+                        onChange={() => radioClick("contractor")}
                       >
                         Contractor
                       </Radio>
                       &nbsp;&nbsp;
                       <Radio
                         value={"intern"}
-                        onChange={() => this.radioClick("intern")}
+                        onChange={() => radioClick("intern")}
                       >
                         Intern
                       </Radio>
@@ -971,7 +937,7 @@ getEmployeesbyDepartment (filterOptionKey, filterOptionValue) {
         </Formik>
       </>
     );
-  }
+  
 }
 const mapStateToProps = ({ auth,role,location, employee,designations,departments }) => ({
   userDetails: auth.userDetails,
