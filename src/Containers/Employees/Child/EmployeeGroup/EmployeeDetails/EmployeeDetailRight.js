@@ -1,4 +1,4 @@
-import React, { Component, lazy, Suspense } from "react";
+import React, { Component, lazy } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
@@ -8,9 +8,8 @@ const EmployeeDetailTab = lazy(() =>
 
 class EmployeeDetailRight extends Component {
   render() {
-    console.log(this.props.employeeId);
     return (
-      <div style={{ width: "100%" }}>
+      <div class="w-full">
         <EmployeeDetailTab singleEmployee={this.props.singleEmployee}/>
       </div>
     );

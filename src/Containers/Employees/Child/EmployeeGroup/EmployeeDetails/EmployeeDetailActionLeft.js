@@ -1,6 +1,5 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
-import ActionIcon from "../../../../../Components/Utils/ActionIcon";
 import { FlexContainer } from "../../../../../Components/UI/Layout";
 import { FormattedMessage } from "react-intl";
 import { connect } from "react-redux";
@@ -14,7 +13,6 @@ class EmployeeDetailActionLeft extends React.Component {
         <RollbackOutlined
           style={{ marginRight: "0.3rem",color: "#1890ff" }}
           iconType="rollback"
-          // tooltipTitle="Back"
           tooltiptitle={<FormattedMessage
             id="app.back"
             defaultMessage="Back"

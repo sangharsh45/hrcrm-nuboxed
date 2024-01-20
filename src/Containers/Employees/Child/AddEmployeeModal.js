@@ -27,7 +27,7 @@ class AddEmployeeModal extends Component {
         >
           {/* <StyledTabs defaultActiveKey="1"> */}
             {/* <TabPane tab={`Employee`} key="1"> */}
-              <div style={{ marginTop: 20 }}>
+              <div class="mt-5 ">
                 <EmployeeForm />
               </div>
             {/* </TabPane> */}

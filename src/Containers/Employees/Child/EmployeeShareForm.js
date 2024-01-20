@@ -1,39 +1,21 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import {
-  Button,
-  Switch,
-  Icon,
-  Tooltip,
-  Popconfirm,
-  Checkbox,
-  message,
+  Button
 } from "antd";
-import { Formik, Form, Field, FastField } from "formik";
-import { FlexContainer } from "../../../Components/UI/Layout";
+import { Formik, Form, Field } from "formik";
 import { Spacer } from "../../../Components/UI/Elements";
-// import { shareEmployeePermission, getEmployeePermissionsList } from "../EmployeeAction";
-import { SelectComponent } from "../../../Components/Forms/Formik/SelectComponent";
-import { DatePicker } from "../../../Components/Forms/Formik/DatePicker";
-import { FormattedMessage } from "react-intl";
 
 function EmployeeShareForm(props) {
   useEffect(() => {
     // props.getEmployeePermissionsList();
     // props.getsharePartnerUsers();
   }, []);
-//   const permissionList = props.permissionsDataList.map((item) => {
-//     return {
-//       label: `${item.userName || ""}`,
-//       value: item.userId,
-//     };
-//   });
   
   function handleReset(resetForm) {
     resetForm();
   }
-  // console.log(props.shareUsers);
   return (
     <>
       <Formik

@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { Switch, Popconfirm, message } from "antd";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-
 import {
   getEmployeelist,
   suspendEmployee,
@@ -12,8 +11,6 @@ import {
 function SuspendEmployee(props) {
   const [assignedIndicator, setAssignedIndicator] = React.useState(false);
   const [toggle, setToggle] = React.useState(props.suspendInd);
-
-  console.log(props.employeeId);
 
   function handleToggleClick() {
     setAssignedIndicator(!assignedIndicator);
