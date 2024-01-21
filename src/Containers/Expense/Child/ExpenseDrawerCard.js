@@ -92,14 +92,26 @@ function ExpenseDrawerCard(props) {
   
   return (
     <>
-       <OnlyWrapCard>
+    
+      <OnlyWrapCard style={{backgroundColor:"#E3E8EE"}}>
+      <div className=" flex justify-between w-[99%] p-2 bg-transparent font-bold sticky top-0 z-10">
+      <div className=" md:w-[2.1rem]"></div>
+        <div className=" md:w-[8.1rem]">ID</div>
+        <div className=" md:w-[6.1rem]">Type</div>
+        <div className=" md:w-[4.2rem] ">Date</div>
+        <div className="md:w-[5.8rem]">Cost Code</div>
+        <div className="md:w-[8.5rem]">Particulars</div>
+        <div className="md:w-[3.8rem]">Amount</div> 
+        <div className="md:w-[5.2rem]">Curency</div>
+        <div className="w-12"></div>
+
+      </div>
     {inputValues.map((item,index) => { 
                   return (
                       <div key={index}>
-                          <div className="flex justify-between mt-4"
-                              style={{
-                                  borderBottom: "3px dotted #515050"
-                              }}>
+                          <div
+                className="flex rounded-xl justify-between bg-white mt-[0.5rem] h-[2.75rem] items-center p-3"
+              >
                                 <div className=" flex font-medium flex-col w-[6rem] ">
                                 {editStates[index] ? (
   <div>                           
@@ -126,9 +138,9 @@ style={{width:"3rem",height:"3rem"}}
 
   
                                     
-                                          <h4 class=" text-sm text-cardBody font-poppins">
+                                          {/* <h4 class=" text-sm text-cardBody font-poppins">
                                            ID
-                                          </h4>
+                                          </h4> */}
                                           <h4 class=" text-xs text-blue-500 text-cardBody font-poppins cursor-pointer">
                                               
                                           {/* <div onClick={() => { this.handleExpand(item.voucherId) 
@@ -144,7 +156,7 @@ style={{width:"3rem",height:"3rem"}}
                               </div>
                               <div className=" flex font-medium flex-col  w-20 ">
                          
-                         <h4 class=" text-sm text-cardBody font-poppins"> Type </h4>
+                         {/* <h4 class=" text-sm text-cardBody font-poppins"> Type </h4> */}
                          {editStates[index] ? (
             // <input
             //   type="text"
@@ -171,7 +183,7 @@ style={{width:"3rem",height:"3rem"}}
                      </div>
                               <div className=" flex font-medium flex-col w-32 ml-[0.25rem]">
                          
-                                  <h4 class=" text-sm text-cardBody font-poppins">Date </h4>
+                                  {/* <h4 class=" text-sm text-cardBody font-poppins">Date </h4> */}
                                   {editStates[index] ? (
   <DatePicker
     value={dayjs(item.expenseDate)} 
@@ -190,7 +202,7 @@ style={{width:"3rem",height:"3rem"}}
                                   )}
                               </div>
                               <div className="flex font-medium flex-col w-32">
-                              <h4 class=" text-sm text-cardBody font-poppins w-36 ml-[0.25rem]"> Cost Code </h4>
+                              {/* <h4 class=" text-sm text-cardBody font-poppins w-36 ml-[0.25rem]"> Cost Code </h4> */}
                               {editStates[index] ? (
             <input
               type="text"
@@ -207,7 +219,7 @@ style={{width:"3rem",height:"3rem"}}
                          <div className=" flex font-medium flex-col w-64 ml-[0.25rem]">
 
                                 
-                                  <h4 class=" text-sm text-cardBody font-poppins">Particulars</h4>
+                                  {/* <h4 class=" text-sm text-cardBody font-poppins">Particulars</h4> */}
                                   {editStates[index] ? (
                                   <input
               type="text"
@@ -228,7 +240,7 @@ style={{width:"3rem",height:"3rem"}}
                               <div className=" flex font-medium flex-col w-20 ">
 
 
-                                <h4 class=" text-sm text-cardBody font-poppins">Amount</h4>
+                                {/* <h4 class=" text-sm text-cardBody font-poppins">Amount</h4> */}
                                 {editStates[index] ? (
                                   <input
               type="text"
@@ -249,7 +261,7 @@ style={{width:"3rem",height:"3rem"}}
                      <div className=" flex font-medium flex-col w-20 ml-[0.25rem]">
 
 
-<h4 class=" text-sm text-cardBody font-poppins">Curency</h4>
+{/* <h4 class=" text-sm text-cardBody font-poppins">Curency</h4> */}
 {editStates[index] ? (
   <input
 type="text"
@@ -343,6 +355,7 @@ style={{ border: "1px solid grey" }}
               })}
 
     </OnlyWrapCard>
+
         <UpdateExpenseModal
       // expenseId={currentExpenseId}
       updateExpenseModal={updateExpenseModal}
