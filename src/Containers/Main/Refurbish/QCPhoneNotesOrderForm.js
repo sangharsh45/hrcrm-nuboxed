@@ -18,7 +18,7 @@ class QCPhoneNotesOrderForm extends Component {
 
         return (
             <>
-                <div style={{ backgroundColor: "#dcdcdc", height: "275px" }}>
+                <div class="bg-[#dcdcdc]">
                     <NoteForm
                         type={"production"}
                         phoneId={this.props.RowData.phoneId}
@@ -30,7 +30,7 @@ class QCPhoneNotesOrderForm extends Component {
                 <br />
 
                 <BorderBox>
-                    <div style={{ height: 200, overflow: "auto", padding: "0.3rem" }}>
+                    <div class="h-[200px] overflow-auto p-[0.3rem]">
                         {fetchingPhoNotesOrder ? (
                             <BundleLoader />
                         ) : (

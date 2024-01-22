@@ -373,6 +373,15 @@
   "app.gb":"GB",
   "app.color":"Color",
   "app.conditions":"Condition",
-  "app.technicianname":"Technician Name"
+  "app.technicianname":"Technician Name",
+  "app.receivable":"Receivable",
+  "app.archive":"Archive",
+  "app.paymentdate":"Payment Date",
+  "app.payment":"Payment",
+  "app.received" :"Received",
+  "app.distributor":"Distributor",
+  "app.balanceasof":"Balance as of",
+  "app.transaction":"Transaction"
+
   
 }

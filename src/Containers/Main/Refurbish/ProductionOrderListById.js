@@ -1,12 +1,12 @@
 import React, { useState, lazy, Suspense, useEffect } from 'react';
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { StyledTable } from "../../../Components/UI/Antd";
 import { getOrderByUser, handleOrderPhoneModal, qcInspectionButton } from "./RefurbishAction"
 import { Button } from "antd";
 import moment from "moment";
 import { OnlyWrapCard } from "../../../Components/UI/Layout";
 import { FormattedMessage } from "react-intl";
+import { BundleLoader } from '../../../Components/Placeholder';
 const OrderPhoneModal = lazy(() => import('./OrderPhoneModal'));
 
 function ProductionOrderListById(props) {
@@ -44,7 +44,7 @@ function ProductionOrderListById(props) {
                             id="app.status"
                             defaultMessage="status"
                         /></div>
-                        {/* <div className="md:w-[4.3rem]"></div> */}
+
                     </div>
                     {props.orderByUser.map((item) => {
                         const currentdate = moment().format("DD/MM/YYYY");
@@ -56,8 +56,8 @@ function ProductionOrderListById(props) {
                                 >
                                     <div class="flex">
                                         <div className=" flex font-medium  md:w-[22.2rem] max-sm:w-full  ">
-                                            <span
-                                                style={{ textDecoration: "underline", color: "#1890ff", cursor: "pointer" }}
+                                            <span class="underline text-[#1890ff] cursor-pointer"
+                                                
                                                 onClick={() => {
                                                     handleRowData(item);
                                                     props.handleOrderPhoneModal(true)
@@ -67,10 +67,7 @@ function ProductionOrderListById(props) {
                                             &nbsp;&nbsp;
                                             {date === currentdate ? (
                                                 <span
-                                                    style={{
-                                                        color: "tomato",
-                                                        fontWeight: "bold",
-                                                    }}
+                                                class="text-[tomato] font-bold"
                                                 >
                                                     New
                                                 </span>
@@ -123,11 +120,14 @@ function ProductionOrderListById(props) {
                         )
                     })}
                 </OnlyWrapCard>
+                <Suspense fallback={<BundleLoader/>}>
                 <OrderPhoneModal
                     showPhoneList={props.showPhoneList}
                     handleOrderPhoneModal={props.handleOrderPhoneModal}
                     rowData={rowData}
                 />
+                </Suspense>
+                
             </div>
         </>
     )

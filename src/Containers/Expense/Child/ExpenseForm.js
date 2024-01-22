@@ -267,8 +267,8 @@ function ExpenseForm(props) {
       <div>
       Name
       </div>
-         <input
-                  style={{ width: "34%",border:"2px solid grey" }}
+         <input className="customize-select"
+                  style={{ width: "34%",boxShadow: "0 0.25em 0.62em #aaa" }}
                   value={name}
                   onChange={handleNmae}
                   // name={`${item.id}attribute`}
@@ -277,16 +277,15 @@ function ExpenseForm(props) {
                 />
       <table>
       
-             
+        <div class=" mt-4">    
             
-        <th class="font-poppins">Date</th>
+        <th class="font-poppins ">Date</th>
         <th class="font-poppins">Cost Code</th>
 
         <th class="font-poppins">Expense Type</th>
         <th class="font-poppins">More Information</th>
         <th class="font-poppins">Amount</th>
         <th class="font-poppins">Currency</th>
-        <th class="font-poppins">Image</th>
         {row.map((item) => {
           return (
             <tr>
@@ -371,12 +370,16 @@ function ExpenseForm(props) {
                   })}
                 </Select>
               </td>
-              <td>
+              <div class=" ml-2">
+              <td >
                 <Upload 
                handleImageUpload={(documentId) => handleImageUpload(documentId, item.id)}
                 />
               
               </td>
+              </div>
+       
+          
               {row.length > 1 && (
                 <DeleteOutlined
                   style={{
@@ -388,9 +391,11 @@ function ExpenseForm(props) {
                   onClick={() => handleDelete(item)}
                 />
               )}
+     
             </tr>
           );
         })}
+        </div>
       </table>
       <Spacer />
       <Button
@@ -401,9 +406,8 @@ function ExpenseForm(props) {
       >
         Submit
       </Button>
-      &nbsp; &nbsp; &nbsp;
       <Button
-        style={{ float: "right", marginRight: "1%" }}
+        style={{ float: "right", marginRight: "1%",marginLeft:"1rem" }}
         type="primary"
         onClick={handleAddRowClick}
         // Loading={addingExpense}

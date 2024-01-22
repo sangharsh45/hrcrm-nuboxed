@@ -7,20 +7,16 @@ const ExpenseForm=lazy(()=> import("./ExpenseForm"));
 const AddExpenseModal = (props) => {
   const { addExpenseModal, handleExpenseModal, ...formProps } = props;
   const isSmallScreen = window.innerWidth <= 600;
-    const drawerWidth = isSmallScreen ? "90%" : "55%";
+    const drawerWidth = isSmallScreen ? "90%" : "60%";
   return (
     <>
       <StyledDrawer
         title={<FormattedMessage
-          id="app.expense"
-          defaultMessage="Expense"
+          id="app.addVoucher"
+          defaultMessage="Add Voucher"
         />}
         width={drawerWidth}
         visible={addExpenseModal}
-        destroyOnClose
-        closable
-        placement="right"
-        maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}
         onClose={() => handleExpenseModal(false)}
       >
         <Suspense fallback={<BundleLoader />}>

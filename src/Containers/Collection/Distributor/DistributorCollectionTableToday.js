@@ -4,6 +4,7 @@ import { bindActionCreators } from "redux";
 import { Button} from "antd";
 import { OnlyWrapCard } from '../../../Components/UI/Layout'
 import { Formik, Form, Field } from "formik";
+import { MultiAvatar } from "../../../Components/UI/Elements";
 import { DatePicker } from "../../../Components/Forms/Formik/DatePicker";
 import {
   getTodayDistributor,
@@ -11,6 +12,7 @@ import {
   handleDistributorProductModal
 } from "../CollectionAction";
 import moment from "moment";
+import { FormattedMessage } from "react-intl";
 import DistributorPaymentToggle from "./DistributorPaymentToggle";
 import DistributorProductHistory from "./DistributorProductHistory";
 
@@ -66,7 +68,7 @@ function DistributorColletcionArchive(props) {
                   isRequired
                   name="date"
                   width={"100%"}
-                  label="Payment Date"
+                  label={<FormattedMessage id="app.paymentdate" defaultMessage="Payment Date"/>}
                   component={DatePicker}
                   value={values.date}
                   inlineLabel
@@ -82,7 +84,7 @@ function DistributorColletcionArchive(props) {
                   disabled={values.date ? false : true}
 
                 >
-                  Submit
+                <FormattedMessage id="app.submit" defaultMessage="Submit"/>  
                 </Button>
               </div>
               <div class="w-[15%]">
@@ -95,7 +97,7 @@ function DistributorColletcionArchive(props) {
                     handleClear();
                   }}
                 >
-                  Clear
+                  <FormattedMessage id="app.clear" defaultMessage="Clear"/>
                 </Button>
               </div>
             </div>
@@ -109,41 +111,20 @@ function DistributorColletcionArchive(props) {
       <div className=' flex justify-end sticky top-28 z-auto'>
         <OnlyWrapCard style={{ backgroundColor: "#E3E8EE" }}>
           <div className=" flex justify-between w-[97.5%] p-2 bg-transparent font-bold sticky top-0 z-10">
-            <div className=" md:w-[9.1rem]">Name</div>
-            <div className=" md:w-[8.2rem]">Order#</div>
-            <div className=" md:w-[5.8rem] ">Transaction ID</div>
-            <div className="md:w-[1.9rem]">Type</div>
-            <div className="md:w-[5.8rem]">Payment</div>
-            <div className="md:w-[3.9rem]">Entry</div>
-            <div className="md:w-[5.2rem]">Amount</div>
-            <div className="md:w-[3.3rem]">Mode</div>
-            <div className="w-[4.8rem]">Received?</div>
-            <div className="w-[4.9rem]">Owner</div>
-
+            <div className=" md:w-[9.1rem]"><FormattedMessage id="app.customer" defaultMessage="Customer"/></div>
+            <div className=" md:w-[8.2rem]"><FormattedMessage id="app.order" defaultMessage="Order #"/></div>
+            <div className=" md:w-[5.8rem] "><FormattedMessage id="app.transaction" defaultMessage="Transaction ID"/></div>
+            <div className="md:w-[1.9rem]"><FormattedMessage id="app.type" defaultMessage="Type"/></div>
+            <div className="md:w-[5.8rem]"><FormattedMessage id="app.payment" defaultMessage="Payment"/></div>
+            <div className="md:w-[5.2rem]"><FormattedMessage id="app.amount" defaultMessage="Amount"/></div>
+            <div className="md:w-[3.3rem]"><FormattedMessage id="app.mode" defaultMessage="Mode"/></div>
+            <div className="w-[4.8rem]"><FormattedMessage id="app.received" defaultMessage="Received ?"/></div>
+            <div className="w-[4.9rem]"><FormattedMessage id="app.owner" defaultMessage="Owner"/></div>
           </div>
-          {/* <InfiniteScroll
-        dataLength={customerByUserId.length}
-        next={handleLoadMore}
-        hasMore={hasMore}
-        loader={fetchingCustomers?<h4 style={{ textAlign: 'center' }}>Loading...</h4>:null}
-        height={"75vh"}
-      > */}
+
 
           {props.todayDistributor.map((item) => {
-            const currentdate = moment().format("DD/MM/YYYY");
-            const date = moment(item.creationDate).format("DD/MM/YYYY");
-            const diff = Math.abs(
-              moment().diff(moment(item.lastRequirementOn), "days")
-            );
-            const dataLoc = ` Address : ${item.address && item.address.length && item.address[0].address1
-              } 
-           Street : ${item.address && item.address.length && item.address[0].street
-              }   
-          State : ${item.address && item.address.length && item.address[0].state}
-         Country : ${(item.address && item.address.length && item.address[0].country) || ""
-              } 
-           PostalCode : ${item.address && item.address.length && item.address[0].postalCode
-              } `;
+
             return (
               <div>
                 <div className="flex rounded-xl justify-between mt-4 bg-white h-12 items-center p-3 ">
@@ -218,7 +199,7 @@ function DistributorColletcionArchive(props) {
 
                        
                         <h4 class=" text-xs text-cardBody font-poppins">
-                          {item.paymentMode}
+                          {/* {item.paymentMode} */}
                         </h4>
 
                       </div>
@@ -238,7 +219,13 @@ function DistributorColletcionArchive(props) {
 
         
                         <h4 class=" text-xs text-cardBody font-poppins">
-                          {item.salesExecutive}
+                        <span>
+                      <MultiAvatar
+                        primaryTitle={item.salesExecutive}
+                        imgWidth={"1.8rem"}
+                        imgHeight={"1.8rem"}
+                      />
+                    </span>
                         </h4>
 
                       </div>
@@ -252,7 +239,6 @@ function DistributorColletcionArchive(props) {
 
             )
           })}
-          {/* </InfiniteScroll> */}
         </OnlyWrapCard>
       </div>
       <DistributorProductHistory

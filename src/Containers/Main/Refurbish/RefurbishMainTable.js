@@ -495,14 +495,10 @@ import {
 } from "./RefurbishAction";
 import { withRouter } from "react-router";
 import moment from "moment";
-// import ProductionNotesModal from "./ProductionNotesModal";
 import AssignOrderModal from "./AssignOrderModal";
-import { EditFilled, HistoryOutlined, PhoneFilled } from "@ant-design/icons";
+import { HistoryOutlined} from "@ant-design/icons";
 import TechnicianModal from "./TechnicianModal";
-// import UserPhoneModal from "./child/ProductionModal/UserPhoneModal";
-// import ProductionOrderModal from "./child/ProductionModal/ProductionOrderModal";
 import AddAssignRepairModal from "./AddAssignRepairModal";
-import { ApprovalOutlined, BorderAllOutlined } from "@mui/icons-material";
 import AllSpareListByOrder from "./AllSpareListByOrder";
 import { OnlyWrapCard } from "../../../Components/UI/Layout";
 import ShowProductBuilderModal from "./ShowProductBuilderModal";

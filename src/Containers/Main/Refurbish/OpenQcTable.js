@@ -83,12 +83,10 @@
 // export default connect(mapStateToProps, mapDispatchToProps)(OpenQcTable);
 
 
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { StyledTable } from "../../../Components/UI/Antd";
 import { getOpenQcByUser } from "./RefurbishAction";
-import { Button, Tooltip } from "antd";
 import moment from "moment";
 import { OnlyWrapCard } from "../../../Components/UI/Layout";
 import { FormattedMessage } from "react-intl";
@@ -113,8 +111,8 @@ function OpenQcTable(props) {
                         defaultMessage="duedate"
                       /></div>
    <div className=" md:w-[9.8rem] "><FormattedMessage
-                        id="app.completedphn"
-                        defaultMessage="completedphn"
+                        id="app.units"
+                        defaultMessage="Units"
                       /></div>
     <div className="md:w-[6.6rem]"></div>
     <div className="md:w-[5.8rem]"><FormattedMessage

@@ -942,4 +942,15 @@ h1{
 .matrix-table button:hover {
   background-color: #45a049;
 }
+.ant-drawer-content-wrapper {
+  margin-top: 3rem !important;
+  
+}
+.ant-drawer .ant-drawer-mask {
+  position: absolute;
+  inset: 0;
+  z-index: 1000;
+  background: rgba(1, 30, 70, 0.7);
+  pointer-events: auto;
+}
 

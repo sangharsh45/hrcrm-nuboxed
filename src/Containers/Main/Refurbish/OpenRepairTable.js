@@ -88,15 +88,10 @@
 
 
 
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { StyledTable } from "../../../Components/UI/Antd";
 import { getOpenRepair } from "./RefurbishAction";
-import { Button, Tooltip } from "antd";
-// import QRCodeModal from "../../../../Components/UI/Elements/QRCodeModal";
-// import { SubTitle } from "../../../../Components/UI/Elements";
-// import ButtonGroup from "antd/lib/button/button-group";
 import moment from "moment";
 import { OnlyWrapCard } from "../../../Components/UI/Layout";
 import { FormattedMessage } from "react-intl";
@@ -129,7 +124,6 @@ function OpenRepairTable(props) {
                         id="app.notes"
                         defaultMessage="notes"
                       /></div>
-    {/* <div className="md:w-[4.3rem]"></div> */}
   </div>
 {props.openRepair.map((item) => { 
     const currentdate = moment().format("DD/MM/YYYY");
