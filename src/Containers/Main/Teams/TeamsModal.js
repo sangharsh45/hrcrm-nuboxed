@@ -15,8 +15,7 @@ const TeamsModal = props => {
         visible={addTeamsModal}
         closable
         destroyOnClose
-        maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}
-        style={{ marginTop: "3rem" }}
+        // maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}
         onClose={() => handleTeamsModal(false)}
         footer={null}
       >
