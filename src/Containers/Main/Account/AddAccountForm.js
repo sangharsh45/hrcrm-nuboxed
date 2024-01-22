@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Button, Checkbox } from "antd";
 import { Formik, Form, Field, FieldArray, FastField } from "formik";
-import { Spacer, StyledLabel } from "../../../Components/UI/Elements";
+import { StyledLabel } from "../../../Components/UI/Elements";
 import { InputComponent } from "../../../Components/Forms/Formik/InputComponent";
 import { TextareaComponent } from "../../../Components/Forms/Formik/TextareaComponent";
 import * as Yup from "yup";
@@ -11,12 +11,10 @@ import { getAllCustomerEmployeelist } from "../../Employees/EmployeeAction";
 import { getCountry } from "../../../Containers/Settings/Category/Country/CountryAction";
 import {
   getCustomer,
-
 } from "../../Settings/Category/Customer/CustomerAction";
-import { Listbox, Transition } from '@headlessui/react'
+import { Listbox} from '@headlessui/react'
 import ClearbitImage from "../../../Components/Forms/Autocomplete/ClearbitImage";
 import AddressFieldArray from "../../../Components/Forms/Formik/AddressFieldArray";
-import { FlexContainer } from "../../../Components/UI/Layout";
 import SearchSelect from "../../../Components/Forms/Formik/SearchSelect";
 import { addDistributor, setClearbitData } from "./AccountAction";
 import { SelectComponent } from "../../../Components/Forms/Formik/SelectComponent";

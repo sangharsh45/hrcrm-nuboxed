@@ -167,31 +167,16 @@ function OrderPaymentTable(props) {
             width: "14%",
         },
         {
-            title: "Approved Date",
-            dataIndex: "remarks",
-            width: "10%",
-            render: (text, item) => {
-                const approvedDate = moment(item.approveDate).format("ll");
-                return (
-                  <>
-                     {item.approveByFinanceInd===true ? (
-                        <span class="text-green-700">{approvedDate} </span>
-                    ):"No Data"}
-                  </>
-                );
-              },
-
-        },
-        {
             title:"Approved By",
             dataIndex:"approveByName",
             width:"10%",
             render: (text, item) => {
                 const approvedname = item.approveByName;
+                const approvedDate = moment(item.approveDate).format("ll");
                 return (
                   <>
                      {item.approveByFinanceInd===true ?(
-                        <span class="text-green-700">{approvedname} </span>
+                        <span class="text-green-700">{approvedname} &nbsp; {approvedDate}</span>
                     ):"No Data"}
                   </>
                 );
@@ -229,7 +214,7 @@ function OrderPaymentTable(props) {
                
                     <Typography.Link disabled={editingKey !== ''} onClick={() => edit(record)}>
                      {record.approveByFinanceInd===false && (
-                        <BorderColorOutlined />
+                        <BorderColorOutlined style={{fontSize:"1rem"}} />
                      )}
                     </Typography.Link>
                 

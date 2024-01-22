@@ -17,12 +17,10 @@ class AccountOrderDetailsModal extends Component {
                 {/* - ${this.props.particularRowData.orderId} */}
                 <StyledDrawer
                     title={`Order : ${this.props.particularRowData.newOrderNo}`}
-                    width="70%"
+                    width="80%"
                     visible={addOrderDetailsModal}
                     destroyOnClose
                     maskClosable={false}
-                    maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}
-                    style={{ marginTop: "3rem" }}
                     onClose={() => handleOrderDetailsModal(false)}
                     footer={null}
                 >

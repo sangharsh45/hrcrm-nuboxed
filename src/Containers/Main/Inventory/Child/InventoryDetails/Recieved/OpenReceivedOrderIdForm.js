@@ -79,15 +79,15 @@ function OpenReceivedOrderIdForm(props) {
     {
       title: "Color",
       dataIndex: "color",
-      width: "10%",
+      width: "6%",
     },
     {
       title: "Condition",
       dataIndex: "conditions",
-      width: "10%",
+      width: "6%",
     },
     {
-      title: "QR",
+      title: "",
       width: "8%",
       render: (name, item, i) => {
         return (
@@ -100,7 +100,7 @@ function OpenReceivedOrderIdForm(props) {
                 imgRadius={20}
               />
             ) : (
-              <span style={{ fontSize: "0.6em", fontWeight: "bold" }}>
+              <span class="text-[0.6rem] font-bold">
                 No QR
               </span>
             )}
@@ -115,7 +115,7 @@ function OpenReceivedOrderIdForm(props) {
         //debugger
         return (
           <Tooltip title="Task">
-            <FileDoneOutlined style={{ color: "black" }} type="file-done"
+            <FileDoneOutlined style={{ color: "black",fontSize: "1rem" }} type="file-done"
 
               onClick={() => {
                 handleSetParticularOrderData(item);
@@ -135,7 +135,7 @@ function OpenReceivedOrderIdForm(props) {
         return (
           <Tooltip title="Notes">
             <NoteAltIcon
-              style={{ cursor: "pointer", fontSize: "13px" }}
+              style={{ cursor: "pointer", fontSize: "1rem", color:"green" }}
               onClick={() => {
                 handleSetParticularOrderData(item);
                 props.handleReceivedOrderIdPhoneNoteModal(true);
@@ -148,19 +148,26 @@ function OpenReceivedOrderIdForm(props) {
     },
     {
       title: "Received by",
-      width: "9%",
+      width: "11%",
       dataIndex: "receivePhoneUserName",
       render: (text, item) => {
+
         return (
           <>
-            {item.receivePhoneUserName !== null && <Tooltip title={item.receivePhoneUserName}>
+            {item.receivePhoneUserName !== null && 
+            <>
+            <Tooltip title={item.receivePhoneUserName}>
               <MultiAvatar2
                 primaryTitle={item.receivePhoneUserName}
                 imageURL={item.imageURL}
                 imgWidth={"1.8rem"}
                 imgHeight={"1.8rem"}
               />
-            </Tooltip>}
+            </Tooltip>
+            &nbsp;
+            {moment(item.receivePhoneDate).format("ll")}
+            </>
+            } 
           </>
         )
       }

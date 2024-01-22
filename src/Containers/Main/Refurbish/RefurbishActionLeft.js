@@ -4,11 +4,8 @@ import { bindActionCreators } from "redux";
 import { StyledTabs } from "../../../Components/UI/Antd";
 import { Tooltip } from "antd";
 import { FlexContainer } from "../../../Components/UI/Layout";
-import { AppstoreOutlined } from "@ant-design/icons";
 import TocIcon from '@mui/icons-material/Toc';
 import GridViewIcon from '@mui/icons-material/GridView';
-
-const TabPane = StyledTabs.TabPane;
 
 class RefurbishActionLeft extends Component {
   constructor(props) {
@@ -23,9 +20,8 @@ class RefurbishActionLeft extends Component {
   handleTabChange = (key) => this.setState({ activeKey: key });
 
   render() {
-    const { activeKey } = this.state;
 
-    const { setProductionViewType, viewType, user } = this.props
+    const { setProductionViewType, viewType,  } = this.props
     return (
       <>
         <FlexContainer alignItems="center">

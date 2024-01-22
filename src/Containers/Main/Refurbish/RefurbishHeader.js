@@ -5,15 +5,11 @@ import RefurbishActionRight from "./RefurbishActionRight";
 
 class RefurbishHeader extends Component {
   render() {
-    // const { handlesetCurrentShift, shiftsData } = this.props;
-
     return (
       <>
         <ActionHeader
           leftComponent={
             <RefurbishActionLeft
-              // shiftsData={shiftsData}
-              // handlesetCurrentShift={handlesetCurrentShift}
               setProductionViewType={this.props.setProductionViewType}
               viewType={this.props.viewType}
             />

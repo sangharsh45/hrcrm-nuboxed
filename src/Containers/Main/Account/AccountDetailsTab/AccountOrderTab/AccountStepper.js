@@ -8,6 +8,8 @@ import { PhoneOutlined, UserOutlined } from "@ant-design/icons";
 import AddOrderInAccount from "./AddOrderInAccount";
 import AccountOrderSecondStep from "./AccountOrderSecondStep";
 import { FormattedMessage } from 'react-intl';
+import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
+import ControlPointDuplicateIcon from '@mui/icons-material/ControlPointDuplicate';
 
 const Step = StyledSteps.Step;
 
@@ -64,17 +66,17 @@ class AccountStepper extends Component {
             <>
                 <StyledSteps current={current}>
                     <Step
-                        title={<i class="fas fa-cube" style={{ fontSize: "1.37em" }}></i>}
+                        title={<AddShoppingCartIcon style={{fontSize:"1rem"}}/>}
                         description={<FormattedMessage
-                            id="app.materials"
-                            defaultMessage="Materials"
+                            id="app.oderdetails"
+                            defaultMessage="Order Details"
                            />}
                     />
                     <Step
-                        title={<UserOutlined style={{ fontSize: "1.37em" }} />}
+                        title={<ControlPointDuplicateIcon style={{fontSize:"1rem"}}/>}
                         description={<FormattedMessage
-                            id="app.orderdetails"
-                            defaultMessage="Order details"
+                            id="app.unitsinfo"
+                            defaultMessage="Units Info"
                            />}
                     />
 

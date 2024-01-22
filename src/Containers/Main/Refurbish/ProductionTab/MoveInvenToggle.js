@@ -21,32 +21,18 @@ function MoveInvenToggle(props) {
      } 
   }
 
-  function handleCancel() {
-    // if (props.editInd) {
-    //   setToggle(true);
-    // } else {
-    //   setToggle(false);
-    // }
-  }
   return (
     <>
       
         <Popconfirm
           title="Confirm status change?"
           onConfirm={() => handleToggleCollection()}
-          onCancel={handleCancel}
           okText="Yes"
           cancelText="No"
         >
           <Switch
             className="toggle-clr"
             checked={props.moveToLocationId || toggle}
-            // disabled={props.status}
-            // isLoading={true}
-            // style={{
-            //   width: "9em",
-            //   backgroundColor: props.editInd || toggle ? "rgb(119, 221, 119)" : "#E6E6E6",
-            // }}
             checkedChildren="On"
             unCheckedChildren="Off"
           />
