@@ -4,6 +4,7 @@ import GridViewIcon from '@mui/icons-material/GridView';
 import TocIcon from '@mui/icons-material/Toc';
 import CategoryIcon from '@mui/icons-material/Category';
 import { FormattedMessage } from "react-intl";
+import ViewWeekIcon from '@mui/icons-material/ViewWeek';
 import { Tooltip } from "antd";
 
 const MileageActionLeft = (props) => {
@@ -57,7 +58,7 @@ const MileageActionLeft = (props) => {
               cursor: "pointer",
             }}
           >
-            <CategoryIcon/>
+            <ViewWeekIcon/>
           </span>
       </Tooltip>
 
