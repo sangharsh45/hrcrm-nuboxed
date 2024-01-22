@@ -6,7 +6,6 @@ import { getExpenseById,handlePExpenseVoucherIdDrawer,getPendingExpense,deleteEx
 import { DeleteOutlined, } from "@ant-design/icons";
 import { OnlyWrapCard } from '../../../Components/UI/Layout'
 import dayjs from "dayjs";
-import Expense from "../Expense";
 import { BundleLoader } from "../../../Components/Placeholder";
 import { FormattedMessage } from "react-intl";
 import { StyledPopconfirm } from "../../../Components/UI/Antd";

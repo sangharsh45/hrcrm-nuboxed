@@ -1,18 +1,15 @@
 import React, { useEffect, useState, lazy } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { Tooltip, Icon, Button, Input,DatePicker } from "antd";
-import { FormattedMessage } from "react-intl";
+import { Tooltip, Button,DatePicker } from "antd";
 import { getExpenseByVoucherId, handleDocumentUploadModal,updateExpense, setEditExpense, handleUpdateExpenseModal, deleteExpenseDrawer, } from "../ExpenseAction";
 import { getExpenses } from "../../Settings/Expense/ExpenseAction";
 import DownloadIcon from '@mui/icons-material/Download';
 import dayjs from "dayjs";
-import { FlexContainer, OnlyWrapCard } from '../../../Components/UI/Layout'
-import { CurrencySymbol } from "../../../Components/Common";
-import APIFailed from "../../../Helpers/ErrorBoundary/APIFailed";
+import { OnlyWrapCard } from '../../../Components/UI/Layout'
 import { base_url } from "../../../Config/Auth";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
-import { DeleteOutlined, DownloadOutlined, EditOutlined, UploadOutlined } from "@ant-design/icons";
+import { DeleteOutlined, UploadOutlined } from "@ant-design/icons";
 import QuestionMarkIcon from '@mui/icons-material/QuestionMark';
 import EditUpload from "../../../Components/Forms/Edit/EditUpload";
 

@@ -1,5 +1,4 @@
 import React, { lazy, Suspense } from "react";
-import { FormattedMessage } from "react-intl";
 import { StyledDrawer } from "../../../Components/UI/Antd";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
@@ -14,13 +13,9 @@ const ExpenseVoucherIdDrawer = (props) => {
     <>
       <StyledDrawer
         title={`Voucher ID: ${props.particularRowData.voucherId}`}
-        width="80%"
-        style={{marginTop:"5rem"}}
+         width="80%"
         visible={expenseVoucherIdDrawer}
-        destroyOnClose
-        closable
-        placement="right"
-        maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}
+        //  maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}
         onClose={() => {
           handleExpenseVoucherIdDrawer(false);
           props.getExpenseById(props.userId)

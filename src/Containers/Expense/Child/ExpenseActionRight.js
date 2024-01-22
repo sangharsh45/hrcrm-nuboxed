@@ -2,14 +2,10 @@ import React from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { withRouter } from "react-router-dom";
-import { base_url } from "../../../Config/Auth";
-import { Icon, Button, Tooltip } from "antd";
-import { FlexContainer } from "../../../Components/UI/Layout";
-import { Spacer, TextInput } from "../../../Components/UI/Elements";
+import {  Button, Tooltip } from "antd";
 import { StyledSelect } from "../../../Components/UI/Antd";
 import { handleExpenseModal } from "../ExpenseAction";
-// import { setExpenseFilterText, setExpenseFilterUser } from "../ExpenseAction";
-// import { getUsers } from "../../Team/TeamAction";
+
 
 const Option = StyledSelect.Option;
 
@@ -27,7 +23,7 @@ class ExpenseActionRight extends React.Component {
   };
   render() {
     return (
-      <FlexContainer alignItems="center">
+      <div class=" flex items-center" >
         {/* <Button
                     type="primary"
                     default
@@ -50,7 +46,7 @@ class ExpenseActionRight extends React.Component {
           Import
         </Button>
         &nbsp; */}
-        <Spacer />
+    
         <Button
           type={this.state.isClicked === "export" ? "primary" : ""}
           onClick={() => this.handleClicked("export")}
@@ -66,7 +62,7 @@ class ExpenseActionRight extends React.Component {
           >Add           
           </Button>
         </Tooltip>
-      </FlexContainer>
+      </div>
     );
   }
 }

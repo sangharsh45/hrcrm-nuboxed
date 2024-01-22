@@ -13,13 +13,10 @@ const ExpenseActionLeft = (props) => {
         title={<FormattedMessage id="app.card" defaultMessage="Card" />}
       >
        
-          <span
+       <span class=" mr-2 cursor-pointer text-[1rem]"
             onClick={() => props.setExpenseViewType("card")}
             style={{
-              marginRight: "0.5rem",
               color: props.viewType === "card" && "#1890ff",
-              // fontSize: "1.0625em",
-              // cursor: "pointer",
             }}
           >
             <GridViewIcon style={{fontSize:"1.4rem"}}  />
@@ -31,13 +28,11 @@ const ExpenseActionLeft = (props) => {
         title={<FormattedMessage id="app.list" defaultMessage="List" />}
       >
        
-          <span
+       <span class=" mr-2 cursor-pointer text-[1rem]"
             onClick={() => props.setExpenseViewType("tile")}
             style={{
-              marginRight: "0.5rem",
               color: props.viewType === "tile" && "#1890ff",
-              fontSize: "1.0625em",
-              cursor: "pointer",
+
             }}
           >
             
@@ -51,13 +46,10 @@ const ExpenseActionLeft = (props) => {
         title="Group"
       >
        
-          <span
+       <span class=" mr-2 cursor-pointer text-[1rem]"
             onClick={() => props.setExpenseViewType("list")}
             style={{
-              marginRight: "0.5rem",
               color: props.viewType === "list" && "#1890ff",
-              fontSize: "1.0625em",
-              cursor: "pointer",
             }}
           >
             
