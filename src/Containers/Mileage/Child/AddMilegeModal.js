@@ -7,13 +7,13 @@ const MileageForm=lazy(()=>import("./MileageForm"));
 const AddMileageModal = (props) => {
   const { addMileageModal, handleMileageModal, ...formProps } = props;
   const isSmallScreen = window.innerWidth <= 600;
-  const drawerWidth = isSmallScreen ? "90%" : "55%";
+  const drawerWidth = isSmallScreen ? "90%" : "60%";
   return (
     <>
       <StyledDrawer
         title={<FormattedMessage
-          id="app.mileage"
-          defaultMessage="Mileage"
+          id="app.Addvoucher"
+          defaultMessage="Add Voucher"
         />}
         width={drawerWidth}
         visible={addMileageModal}
