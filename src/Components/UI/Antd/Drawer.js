@@ -8,7 +8,7 @@ const StyledDrawer = styled(Drawer)`
         color: ${props => props.theme.color};
         margin-top:6rem;
         border: none !important;
-        
+        width:60% !important;
     }
     .ant-drawer-content {
         background-color: ${props =>
@@ -27,7 +27,7 @@ const StyledDrawer = styled(Drawer)`
     }
     .ant-drawer-header {
         background-image: linear-gradient(-90deg,#001529,#94b3e4);
-        
+        maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}
         /* color: ${props => props.theme.color}; */
         /* color: #fff; */
         
