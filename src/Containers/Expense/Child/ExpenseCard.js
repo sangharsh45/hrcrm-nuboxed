@@ -1,23 +1,21 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState ,lazy} from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { FormattedMessage } from "react-intl";
-import { StyledPopconfirm, StyledTable } from "../../../Components/UI/Antd";
-import { Icon, Tooltip } from "antd";
+import { StyledPopconfirm, } from "../../../Components/UI/Antd";
+import {  Tooltip } from "antd";
 import AssistantIcon from '@mui/icons-material/Assistant';
 import { getExpenseById,
   handleExpenseVoucherIdDrawer,
   handleStatusExpenseModal,
   deleteExpense } from "../ExpenseAction";
 import { BundleLoader } from "../../../Components/Placeholder";
-import moment from "moment";
 import styled from 'styled-components';
 import dayjs from "dayjs";
-import { CurrencySymbol } from "../../../Components/Common";
-import APIFailed from "../../../Helpers/ErrorBoundary/APIFailed";
 import { DeleteOutlined, } from "@ant-design/icons";
-import ExpenseVoucherIdDrawer from "./ExpenseVoucherIdDrawer";
-import ExpenseStatusDrawer from "./UpdateExpense/ExpenseStatusDrawer";
+const ExpenseVoucherIdDrawer=lazy(()=>import("./ExpenseVoucherIdDrawer"));
+const ExpenseStatusDrawer=lazy(()=>import("./UpdateExpense/ExpenseStatusDrawer"));
+
 
 function ExpenseCard(props) {
   const [expand, setExpand] = useState(false);

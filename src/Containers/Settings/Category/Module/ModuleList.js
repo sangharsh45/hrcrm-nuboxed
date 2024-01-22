@@ -281,7 +281,7 @@ const handleCrmClick = (checked) => {
                 <div class="w-full flex-row">
               <div class=" flex " >
              
-                    <div class=" text-sm text-[#1677ff]">CRM</div>
+                    <div class=" text-sm ">CRM</div>
                     <div   class=" w-[7%] ml-2">
                     {/* <Popconfirm
                         title="Do you wish to change Status ? "
@@ -303,7 +303,7 @@ const handleCrmClick = (checked) => {
                 
                   
 
-                    <div class=" text-sm text-[#1677ff] ml-2">IM</div>
+                    <div class=" text-sm  ml-2">IM</div>
                     <div   class=" w-[7%] ml-2">
                     {/* <Popconfirm
                         title="Do you wish to change Status ? "
@@ -381,7 +381,7 @@ const handleCrmClick = (checked) => {
 
                   
            
-                    <div class=" text-sm text-[#1677ff] ml-2">Rcruitpro</div>
+                    <div class=" text-sm  ml-2">Rcruitpro</div>
                     <div   class=" w-[7%] ml-2">
                     {/* <Popconfirm
                         title="Do you wish to change Status ? "
@@ -399,7 +399,7 @@ const handleCrmClick = (checked) => {
                         />
                       {/* </Popconfirm> */}
                     </div>
-                    <div class=" text-sm text-[#1677ff] ml-2">Elearning</div>
+                    <div class=" text-sm  ml-2">Elearning</div>
                     <div   class=" w-[7%] ml-2">
                     {/* <Popconfirm
                         title="Do you wish to change Status ? "

@@ -6,6 +6,7 @@ import MonitorHeartIcon from "@mui/icons-material/MonitorHeart";
 import { bindActionCreators } from 'redux'
 import BorderColorIcon from "@mui/icons-material/BorderColor";
 import { Select } from "antd";
+import BadgeIcon from '@mui/icons-material/Badge';
 import PlaceIcon from '@mui/icons-material/Place';
 import InsertDriveFileIcon from '@mui/icons-material/InsertDriveFile';
 import DraftsIcon from '@mui/icons-material/Drafts';
@@ -22,6 +23,7 @@ import {
     handleEmployeeDocumentDrawerModal,
     getEmployeeDocument,
     handleUpdateEmployeeModal,
+    handleOnboardingEmployeeModal,
     handleNotifyDrawer
   } from "../../EmployeeAction";
 import EmployeeDetailsView from "../EmployeeGroup/EmployeeDetails/EmployeeDetailsView";
@@ -30,6 +32,7 @@ import EmployeePulseDrawerModal from "../EmployeeTable/EmployeePulseDrawerModal"
 import EmployeeDocumentDrawerModal from "./EmployeeDocumentDrawerModal";
 import UpdateEmployeeModal from "./UpdateEmployeeModal";
 import OpenNotifyDrawer from "./OpenNotifyDrawer";
+import StepperEmployeeModal from "./StepperEmployeeModal";
 
 
 const { Option } = Select;
@@ -227,6 +230,20 @@ function handleSetCurrentEmployeeId(employeeId,) {
             </Tooltip>
             ):null}
            </div>
+           <div class=" font-normal text-xs text-cardBody font-poppins ">
+            <Tooltip title="Onboarding">
+              <BadgeIcon
+                style={{ cursor: "pointer",fontSize: "1rem" }}
+                onClick={() => {
+                    props.setEditEmployee(item);
+                    handleStoredData(item);
+                    props.handleOnboardingEmployeeModal(true);
+                    handleSetCurrentEmployeeId(item);
+                  
+                }}
+              />
+            </Tooltip>
+           </div>
            </div>
          
                      
@@ -292,6 +309,14 @@ function handleSetCurrentEmployeeId(employeeId,) {
         handleUpdateEmployeeModal={props.handleUpdateEmployeeModal}
         handleSetCurrentEmployeeId={props.handleSetCurrentEmployeeId}
       />
+               <StepperEmployeeModal
+                storedData={storedData}
+               singleEmployee={props.singleEmployee}
+       employeeName={currentEmployeeId}
+       onboardingEmployeeModal={props.onboardingEmployeeModal}
+        handleOnboardingEmployeeModal={props.handleOnboardingEmployeeModal}
+        handleSetCurrentEmployeeId={props.handleSetCurrentEmployeeId}
+      />
               <EmployeeDrawerForAdmin
       employeeId={currentEmployeeId}
         handleEmployeeDrawerForAdmin={handleEmployeeDrawerForAdmin}
@@ -327,6 +352,7 @@ function handleSetCurrentEmployeeId(employeeId,) {
 const mapStateToProps = ({ auth,role, employee,designations,departments }) => ({
     userId: auth.userDetails.userId,
     updateEmployeeModal:employee.updateEmployeeModal,
+    onboardingEmployeeModal:employee.onboardingEmployeeModal,
     employees: employee.employees,
     user: auth.userDetails,
     roles: role.roles,
@@ -352,6 +378,7 @@ const mapDispatchToProps = (dispatch) =>
         handleEmployeePulseDrawerModal,
         handleEmployeeDocumentDrawerModal,
         handleUpdateEmployeeModal,
+        handleOnboardingEmployeeModal,
         getEmployeeTreeMap,
         getEmployeeDocument,
         handleNotifyDrawer

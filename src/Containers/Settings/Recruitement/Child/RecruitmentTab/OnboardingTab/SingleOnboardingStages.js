@@ -3,12 +3,12 @@ import styled from "styled-components";
 import { FormattedMessage } from "react-intl";
 import DeleteIcon from '@mui/icons-material/Delete';
 import BorderColorIcon from '@mui/icons-material/BorderColor';
-import {deleteOpportunityStagesData} from "../../../../Settings/SettingsAction";
+ import {deleteOnboardingStagesData} from "../../../../../Settings/SettingsAction";
 import { Button, Tooltip, Popconfirm } from "antd";
-import { TextInput, Select } from "../../../../../Components/UI/Elements";
-import { elipsize } from "../../../../../Helpers/Function/Functions";
-import { ViewEditCard } from "../../../../../Components/UI/Elements";
-import {handleApprovalModal,} from "../../../SettingsAction";
+import { TextInput, Select } from "../../../../../../Components/UI/Elements";
+import { elipsize } from "../../../../../../Helpers/Function/Functions";
+import { ViewEditCard } from "../../../../../../Components/UI/Elements";
+// import {handleApprovalModal,} from "../../../SettingsAction";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 const { Option } = Select;
@@ -43,14 +43,14 @@ class SingleOnboardingStages extends Component {
 
   render() {
     console.log(this.state.fields);
-    const { opportunityProcessStages } = this.props;
-    console.log(opportunityProcessStages);
+    const { onboardingProcessStages } = this.props;
+    console.log(onboardingProcessStages);
 
     const {
-        opportunityProcessStages: {
+      onboardingProcessStages: {
         stageName,
-        opportunityStagesId,
-        deleteOpportunityStagesData,
+        unboardingStagesId,
+         deleteOnboardingStagesData,
         responsible,
         probability,
         days,
@@ -73,14 +73,14 @@ class SingleOnboardingStages extends Component {
       key,
       currentStage,
     } = this.props;
-    console.log(opportunityStagesId, "----------", linkedStages);
+    console.log(unboardingStagesId, "----------", linkedStages);
     console.log(stageName);
     console.log(color);
     console.log(currentStage);
 
     const disabled = probability === 100 || probability === 0 ? true : false;
     // const disabled = false;
-    const disableDelete = linkedStages && linkedStages.includes(opportunityStagesId);
+    const disableDelete = linkedStages && linkedStages.includes(unboardingStagesId);
     return (
       <StageWrapper>
         <ViewEditCard>
@@ -115,7 +115,7 @@ class SingleOnboardingStages extends Component {
                     onClick={(item) => 
                      {
                        this.props.handleApprovalModal(true);  
-                       this.props.handleApproveIconClick(opportunityStagesId)                                         
+                       this.props.handleApproveIconClick(unboardingStagesId)                                         
                     }                     
                     }
                      style={{ 
@@ -128,14 +128,14 @@ class SingleOnboardingStages extends Component {
                    </span>
                    </Tooltip>
                    &nbsp;  */}
-                   <span>
+                   {/* <span>
                        
                      {opportunityProcessStages.probability === 0 || opportunityProcessStages.probability === 100 ? null :
                 
                 <Button
                      onClick={() =>
                       handleStagePublishClick(
-                        this.props.opportunityStagesId,
+                        this.props.unboardingStagesId,
                         publishInd
                        
                       )
@@ -145,7 +145,7 @@ class SingleOnboardingStages extends Component {
                              
                              </Button> 
                              }
-                   </span>
+                   </span> */}
                    &nbsp; &nbsp;  &nbsp; &nbsp;
                  <span>
                    <Tooltip title="Edit">
@@ -165,7 +165,7 @@ class SingleOnboardingStages extends Component {
               title="Do you want to delete?"
               okText="Yes"
               cancelText="No"
-               onConfirm={() => deleteOpportunityStagesData(opportunityStagesId)}
+                onConfirm={() => deleteOnboardingStagesData(unboardingStagesId)}
             >
                {/* {user.opportunityDeleteInd ===true && ( */}
                {probability !== 0 && probability !== 100 && (
@@ -236,7 +236,7 @@ class SingleOnboardingStages extends Component {
                   loading={updatingStages}                  
                   onClick={() =>
                     handleUpdateStage(
-                      this.props.opportunityStagesId,
+                      this.props.unboardingStagesId,
                       this.state.responsible,
                       this.state.fields.stageName,
                       this.state.fields.probability,
@@ -290,8 +290,8 @@ const mapStateToProps = ({ settings, auth }) => ({
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
-      handleApprovalModal,
-      deleteOpportunityStagesData,
+      // handleApprovalModal,
+      deleteOnboardingStagesData,
       
      
     },

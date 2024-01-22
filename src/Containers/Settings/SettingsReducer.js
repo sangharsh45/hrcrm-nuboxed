@@ -124,6 +124,9 @@ const initialState = {
   updatingProcessTask: false,
   updatingProcessTaskError: false,
 
+  addingProcessStagesForOnboarding: false,
+  addingProcessStagesForOnboardingError: false,
+
   addingTaskWorkflow: false,
   addingTaskWorkflowError: false,
 
@@ -131,9 +134,15 @@ const initialState = {
   fetchingDefaultProcessError: false,
   defaultProcess: [],
 
+  updatingStagesForOnboarding: false,
+  updatingStagesForOnboardingError: false,
+
   fetchingDepartmentRoleData: false,
   fetchingDepartmentRoleDataError: false,
   departmentRoleData: [],
+
+  deletingOnboardingStagesData: false, 
+  deletingOnboardingStagesDataError: false,
 
   removingStages: false,
   removingStagesError: false,
@@ -142,6 +151,10 @@ const initialState = {
   fetchingProcessStages: false,
   fetchingProcessStagesError: false,
   ProcessStages: [],
+
+  fetchingProcessStagesForOnboarding: false,
+  fetchingProcessStagesForOnboardingError: false,
+  onboardingProcessStages: [],
 
   updateProcessNameForDeals: false,
   updateProcessNameForDealsError: false,
@@ -2137,7 +2150,7 @@ export const settingsReducer = (state = initialState, action) => {
       return {
         ...state,
         addingProcessStagesForOpportunity: false,
-        addingProcessStagesForOpportunity: true,
+        addingProcessStagesForOpportunityError: true,
       };
 
     case types.GET_PROCESS_STAGES_FOR_OPPORTUNITY_REQUEST:
@@ -3012,6 +3025,75 @@ export const settingsReducer = (state = initialState, action) => {
         };
       case types.DELETE_ONBOARDING_PROCESS_DATA_FAILURE:
         return { ...state, deleteOnboardingProcessData: false, deleteOnboardingProcessDataError: false };
+
+
+        case types.ADD_PROCESS_STAGE_FOR_ONBOARDING_REQUEST:
+          return { ...state, addingProcessStagesForOnboarding: true };
+        case types.ADD_PROCESS_STAGE_FOR_ONBOARDING_SUCCESS:
+          return {
+            ...state,
+            addingProcessStagesForOnboarding: false,
+            onboardingProcessStages: [...state.onboardingProcessStages, action.payload],
+          };
+        case types.ADD_PROCESS_STAGE_FOR_ONBOARDING_FAILURE:
+          return {
+            ...state,
+            addingProcessStagesForOnboarding: false,
+            addingProcessStagesForOnboardingError: true,
+          };
+
+
+          case types.GET_PROCESS_STAGES_FOR_ONBOARDING_REQUEST:
+            return {
+              ...state,
+              fetchingProcessStagesForOnboarding: true,
+              fetchingProcessStagesForOnboardingError: false,
+            };
+          case types.GET_PROCESS_STAGES_FOR_ONBOARDING_SUCCESS:
+            return {
+              ...state,
+              fetchingProcessStagesForOnboarding: false,
+              fetchingProcessStagesForOnboardingError: false,
+              onboardingProcessStages: action.payload,
+            };
+          case types.GET_PROCESS_STAGES_FOR_ONBOARDING_FAILURE:
+            return {
+              ...state,
+              fetchingProcessStagesForOnboarding: false,
+              fetchingProcessStagesForOnboardingError: true,
+            };
+
+            case types.UPDATE_STAGE_FOR_ONBOARDING_REQUEST:
+              return { ...state, updatingStagesForOnboarding: true };
+            case types.UPDATE_STAGE_FOR_ONBOARDING_SUCCESS:
+              // return { ...state, updatingStages: false, states: [...state.states, action.payload] };
+              return {
+                ...state,
+                updatingStagesForOnboarding: false,
+                onboardingProcessStages: state.onboardingProcessStages.map((state) =>
+                  state.unboardingStagesId === action.payload.unboardingStagesId ? action.payload : state
+                ),
+              };
+            case types.UPDATE_STAGE_FOR_ONBOARDING_FAILURE:
+              return {
+                ...state,
+                updatingStagesForOnboarding: false,
+                updatingStagesForOnboardingError: true,
+              };
+
+              case types.DELETE_ONBOARDING_STAGES_DATA_REQUEST:
+                return { ...state, deletingOnboardingStagesData: true };
+              case types.DELETE_ONBOARDING_STAGES_DATA_SUCCESS:
+                return {
+                  ...state,
+                  deletingOnboardingStagesData: false,
+                  onboardingProcessStages: state.onboardingProcessStages.filter(
+                    (item) => item.unboardingStagesId !== action.payload
+                  ),
+                };
+              case types.DELETE_ONBOARDING_STAGES_DATA_FAILURE:
+                return { ...state, deletingOnboardingStagesData: false, deletingOnboardingStagesDataError: false };
+          
   
 
     default:

@@ -13,6 +13,9 @@ import {
 } from "../../../../../../Components/UI/Elements";
 import {
     addProcessForOnboarding,
+    updateStageForOnboarding,
+    addProcessStageForOnboarding,
+    getProcessStagesForOnboarding,
     getProcessForOnboarding,
     updateProcessNameForOnboarding,
     deleteOnboardingProcessData,
@@ -20,7 +23,7 @@ import {
 import { StyledTabs } from "../../../../../../Components/UI/Antd";
 import {  Select } from "../../../../../../Components/UI/Elements";
 import { elipsize } from "../../../../../../Helpers/Function/Functions";
-// const SingleOnboardingStages = lazy(() => import("./SingleOnboardingStages"));
+ const SingleOnboardingStages = lazy(() => import("./SingleOnboardingStages"));
 const { Option } = Select;
 
 const TabPane = StyledTabs.TabPane;
@@ -74,16 +77,16 @@ class OnboardingTab extends Component {
     this.setState({
       currentProcess: item,
     });
-     this.props.getProcessStagesForOpportunity(item.opportunityWorkflowDetailsId);
+     this.props.getProcessStagesForOnboarding(item.unboardingWorkflowDetailsId);
   };
 
   handlePublishClick = () => {
     const { currentProcess, publish } = this.state;
     console.log(currentProcess);
 
-    const Id = currentProcess.opportunityWorkflowDetailsId;
+    const Id = currentProcess.unboardingWorkflowDetailsId;
     let data = {
-      opportunityWorkflowDetailsId: Id,
+      unboardingWorkflowDetailsId: Id,
       publishInd: currentProcess.publishInd ? false : true,
     };
 
@@ -129,25 +132,25 @@ class OnboardingTab extends Component {
       isProcessTextInputOpen: false,
     });
   };
-  handleUpdateStage = (opportunityStagesId, stageName, probability, days) => {
+  handleUpdateStage = (unboardingStagesId, stageName, probability, days) => {
     //debugger;
-    const { opportunityProcessStages } = this.props;
+    const { onboardingProcessStages } = this.props;
     let exist =
-    opportunityProcessStages &&
-    opportunityProcessStages.some((element) => element.stageName == stageName);
+    onboardingProcessStages &&
+    onboardingProcessStages.some((element) => element.stageName == stageName);
     if (exist) {
       message.error(
         "Stage with same name already exists as part of this workflow"
       );
     } else {
-      this.props.updateStageForOpportunity(opportunityStagesId, stageName, probability, days);
+      this.props.updateStageForOnboarding(unboardingStagesId, stageName, probability, days);
     }
   };
 
-  handleStagePublishClick = (opportunityStagesId, publishInd) => {
+  handleStagePublishClick = (unboardingStagesId, publishInd) => {
     const { recruitProcessStages } = this.props;
     const data = {
-      opportunityStagesId,
+      unboardingStagesId,
       publishInd: publishInd ? false : true,
     };
     console.log(publishInd);
@@ -156,10 +159,10 @@ class OnboardingTab extends Component {
   handleCallBack = (status) => {
     if (status === "Success") {
       const {
-        currentProcess: { opportunityWorkflowDetailsId },
+        currentProcess: { unboardingWorkflowDetailsId },
       } = this.state;
 
-      this.props.getProcessStagesForOpportunity(opportunityWorkflowDetailsId);
+      this.props.getProcessStagesForOnboarding(unboardingWorkflowDetailsId);
     } else {
       alert("error");
     }
@@ -225,10 +228,10 @@ class OnboardingTab extends Component {
       currentStage,
     } = this.state;
 
-    const { opportunityProcessStages } = this.props;
+    const { onboardingProcessStages } = this.props;
     let exist =
-    opportunityProcessStages &&
-    opportunityProcessStages.some((element) => element.stageName == stageName);
+    onboardingProcessStages &&
+    onboardingProcessStages.some((element) => element.stageName == stageName);
 
     const Id = currentProcess.unboardingWorkflowDetailsId;
     console.log(Id);
@@ -247,11 +250,11 @@ class OnboardingTab extends Component {
       message.error("Can not create as another stage exists with same name !");
     } else {
       // message.success("probability add");
-      this.props.addProcessStageForOpportunity(
+      this.props.addProcessStageForOnboarding(
         stage,
         this.handleCallBack,
         this.props.orgId,
-        this.props.oppworkFlowId
+        this.props.unboardingWorkflowId
       );}
     this.setState({
       stageName: "",
@@ -447,7 +450,7 @@ class OnboardingTab extends Component {
               )}
             </div>
 
-           {/* {this.props.opportunityProcessStages.map((opportunityProcessStages, i) => (
+           {this.props.onboardingProcessStages.map((onboardingProcessStages, i) => (
               <SingleOnboardingStages
                 key={i}
                 stageValue1={this.state.stageName}
@@ -457,17 +460,17 @@ class OnboardingTab extends Component {
                 unboardingWorkflowDetailsId={
                   this.state.currentProcess.unboardingWorkflowDetailsId
                 }
-                opportunityProcessStages={opportunityProcessStages}
+                onboardingProcessStages={onboardingProcessStages}
                 organization={this.props.organization}
                 handleApproveIconClick={this.handleApproveIconClick}
                 handleUpdateStage={this.handleUpdateStage}
                 handleStageType={this.handleStageType}
                 handleStagePublishClick={this.handleStagePublishClick}
-                opportunityStagesId={opportunityProcessStages.opportunityStagesId}
+                unboardingStagesId={onboardingProcessStages.unboardingStagesId}
                 className="scrollbar"
                 id="style-3"
               />
-            ))}  */}
+            ))} 
 
             <Spacer />
             {this.state.isTextInputOpen ? (
@@ -561,6 +564,7 @@ class OnboardingTab extends Component {
 }
 
 const mapStateToProps = ({ settings, auth }) => ({
+  onboardingProcessStages:settings.onboardingProcessStages,
     onboardingProcess: settings.onboardingProcess,
   addingProcessForOnboarding: settings.addingProcessForOnboarding,
   addingProcessForOnboardingError: settings.addingProcessForOnboardingError,
@@ -575,6 +579,9 @@ const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
    getProcessForOnboarding,
+   updateStageForOnboarding,
+   addProcessStageForOnboarding,
+   getProcessStagesForOnboarding,
    addProcessForOnboarding,
    updateProcessNameForOnboarding,
    deleteOnboardingProcessData,

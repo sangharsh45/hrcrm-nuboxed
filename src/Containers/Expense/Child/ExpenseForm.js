@@ -1,7 +1,6 @@
-import { Button, DatePicker, Icon, message, Select } from "antd";
+import { Button, DatePicker, message, Select } from "antd";
 import React, { useState, useEffect } from "react";
-import { Spacer, TextInput } from "../../../Components/UI/Elements";
-import dayjs from "dayjs";
+import {  TextInput } from "../../../Components/UI/Elements";
 import moment from "moment";
 import { getExpenses } from "../../Settings/Expense/ExpenseAction";
 import { bindActionCreators } from "redux";
@@ -397,9 +396,8 @@ function ExpenseForm(props) {
         })}
         </div>
       </table>
-      <Spacer />
       <Button
-        style={{ float: "right" }}
+        style={{ float: "right",marginTop:"3rem" }}
         type="primary"
         onClick={handleSubmit}
         Loading={addingExpense}

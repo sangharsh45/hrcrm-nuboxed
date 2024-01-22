@@ -967,6 +967,13 @@ export const handleUpdateEmployeeModal = (modalProps) => (dispatch) => {
   });
 };
 
+export const handleOnboardingEmployeeModal = (modalProps) => (dispatch) => {
+  dispatch({
+    type: types.HANDLE_ONBOARDING_EMPLOYEE_MODAL,
+    payload: modalProps,
+  });
+};
+
 export const setEditEmployee = (name) => (dispatch) => {
   dispatch({
     type: types.SET_EMPLOYEE_EDIT,

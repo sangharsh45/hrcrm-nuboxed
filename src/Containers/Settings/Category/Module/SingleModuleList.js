@@ -34,7 +34,7 @@ class SingleModuleList extends Component {
               <div class=" flex " >
              
            
-              <div class=" text-sm text-[#1677ff]">ERP</div>
+              <div class=" text-sm ">ERP</div>
                     <div   class=" w-[7%] ml-2">
                     {/* <Popconfirm
                         title="Do you wish to change Status ? "
@@ -45,7 +45,7 @@ class SingleModuleList extends Component {
                       > */}
                         <Switch
                          onChange={this.props.handleErpClick}
-                          style={{ width: "5em" }}
+                          style={{ width: "4em" }}
                           checked={this.props.erpStatus || this.props.moduleList.erpInd}
                           checkedChildren="Yes"
                           unCheckedChildren="No"
@@ -54,7 +54,7 @@ class SingleModuleList extends Component {
                     </div>
            {this.props.moduleList.erpInd === true && ( 
             <>  
-              <div class=" text-sm text-[#1677ff] ml-2">PRODUCTION</div>
+              <div class=" text-sm  ml-2">Production</div>
                     <div   class=" w-[7%] ml-2">
                     {/* <Popconfirm
                         title="Do you wish to change Status ? "
@@ -64,7 +64,7 @@ class SingleModuleList extends Component {
                         cancelText="No"
                       > */}
                         <Switch
-                          style={{ width: "5em" }}
+                          style={{ width: "4em" }}
                          onChange={this.props.handleProductionClick}
                          checked={this.props.productionStatus || this.props.moduleList.productionInd}
                           checkedChildren="Yes"
@@ -73,7 +73,7 @@ class SingleModuleList extends Component {
                       {/* </Popconfirm> */}
                     </div>
 
-                    <div class=" text-sm text-[#1677ff] ml-2">Repair</div>
+                    <div class=" text-sm  ml-2">Repair</div>
                     <div   class=" w-[7%] ml-2">
                     {/* <Popconfirm
                         title="Do you wish to change Status ? "
@@ -85,7 +85,7 @@ class SingleModuleList extends Component {
                         <Switch
                         onChange={this.props.handleRepairClick}
                         checked={this.props.repairStatus || this.props.moduleList.repairInd}
-                          style={{ width: "5em" }}
+                          style={{ width: "4em" }}
  
                           checkedChildren="Yes"
                           unCheckedChildren="No"
@@ -93,26 +93,20 @@ class SingleModuleList extends Component {
                       {/* </Popconfirm> */}
                     </div>
 
-                    <div class=" text-sm text-[#1677ff] ml-2">Inventory</div>
+                    {/* <div class=" text-sm  ml-2">Inventory</div>
                     <div   class=" w-[7%] ml-2">
-                    {/* <Popconfirm
-                        title="Do you wish to change Status ? "
-                        onConfirm={this.props.handleInventoryClick}
-                        onCancel={this.props.handleInventoryCancel}
-                        okText="Yes"
-                        cancelText="No"
-                      > */}
+              
                         <Switch
                          onChange={this.props.handleInventoryClick}
                          checked={this.props.inventoryStatus || this.props.moduleList.inventoryInd}
-                          style={{ width: "5em" }}
+                          style={{ width: "4em" }}
                           checkedChildren="Yes"
                           unCheckedChildren="No"
                         />
-                      {/* </Popconfirm> */}
-                    </div>
+                 
+                    </div> */}
 
-                    <div class=" text-sm text-[#1677ff] ml-2">OrderManagement</div>
+                    <div class=" text-sm  ml-2">Order Management</div>
                     <div   class=" w-[7%] ml-2">
                     {/* <Popconfirm
                         title="Do you wish to change Status ? "
@@ -122,7 +116,7 @@ class SingleModuleList extends Component {
                         cancelText="No"
                       > */}
                         <Switch
-                          style={{ width: "5em" }}
+                          style={{ width: "4em" }}
                           onChange={this.props.handleOrderManagementClick}
                          checked={this.props.orderManagStatus || this.props.moduleList.orderManagementInd}
                           checkedChildren="Yes"
@@ -131,7 +125,7 @@ class SingleModuleList extends Component {
                       {/* </Popconfirm> */}
                     </div>
 
-                    <div class=" text-sm text-[#1677ff] ml-2">Logistics</div>
+                    <div class=" text-sm  ml-2">Logistics</div>
                     <div   class=" w-[7%] ml-2">
                     {/* <Popconfirm
                         title="Do you wish to change Status ? "
@@ -143,14 +137,14 @@ class SingleModuleList extends Component {
                         <Switch
                          onChange={this.props.handleLogisticClick}
                          checked={this.props.logisticsStatus || this.props.moduleList.logisticsInd}
-                          style={{ width: "5em" }}
+                          style={{ width: "4em" }}
                           checkedChildren="Yes"
                           unCheckedChildren="No"
                         />
                       {/* </Popconfirm> */}
                     </div>
 
-                    <div class=" text-sm text-[#1677ff] ml-2">Procurement</div>
+                    <div class=" text-sm  ml-2">Procurement</div>
                     <div   class=" w-[7%] ml-2">
                     {/* <Popconfirm
                         title="Do you wish to change Status ? "
@@ -162,7 +156,7 @@ class SingleModuleList extends Component {
                         <Switch
                          onChange={this.props.handleProcurmentClick}
                          checked={this.props.procurmentStatus || this.props.moduleList.procurementInd}
-                          style={{ width: "5em" }}
+                          style={{ width: "4em" }}
                           checkedChildren="Yes"
                           unCheckedChildren="No"
                         />

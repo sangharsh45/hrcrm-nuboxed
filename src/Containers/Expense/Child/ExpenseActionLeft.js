@@ -2,7 +2,7 @@ import React from 'react'
 import { FlexContainer } from '../../../Components/UI/Layout'
 import GridViewIcon from '@mui/icons-material/GridView';
 import TocIcon from '@mui/icons-material/Toc';
-import CategoryIcon from '@mui/icons-material/Category';
+import ViewWeekIcon from '@mui/icons-material/ViewWeek';
 import { FormattedMessage } from "react-intl";
 import { Tooltip } from "antd";
 
@@ -53,7 +53,7 @@ const ExpenseActionLeft = (props) => {
             }}
           >
             
-            <CategoryIcon  
+            <ViewWeekIcon  
             // icon={solid('users')}
              />
           </span>

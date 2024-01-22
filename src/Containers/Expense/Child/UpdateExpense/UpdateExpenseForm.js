@@ -1,12 +1,10 @@
-import { Button, DatePicker, Icon, message, Select } from "antd";
+import { Button, DatePicker, message, Select } from "antd";
 import React, { useState, useEffect } from "react";
-// import { FormattedMessage } from "react-intl";
-import { Spacer, TextInput } from "../../../../Components/UI/Elements";
+import {  TextInput } from "../../../../Components/UI/Elements";
 import moment from "moment";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { getExpenses } from "../../../Settings/Expense/ExpenseAction";
-// import { getCurrency } from "../../Auth/AuthAction";
 import { updateExpense  } from "../../ExpenseAction";
 import { DeleteOutlined } from "@ant-design/icons";
 const { Option } = Select;
@@ -305,7 +303,6 @@ function UpdateExpenseForm(props) {
           );
         })}
       </table>
-      <Spacer />
       <Button
         style={{ float: "right", marginTop:"-1%" }}
         type="primary"
