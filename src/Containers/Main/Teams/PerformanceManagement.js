@@ -1,4 +1,4 @@
-import React, {  useEffect, useState, } from "react";
+import React, {  useEffect, useState,lazy } from "react";
 import { MultiAvatar2, } from '../../../Components/UI/Elements'
 import {  Tooltip, Badge } from 'antd'
 import { connect } from 'react-redux'
@@ -13,13 +13,21 @@ import CircleNotificationsIcon from '@mui/icons-material/CircleNotifications';
 import VolumeUpIcon from '@mui/icons-material/VolumeUp';
 import styled from 'styled-components'
 import { BundleLoader } from "../../../Components/Placeholder";
-import { getreportingManager } from "./TeamsAction";
-
+import { getreportingManager,handleperformanceDrawerModal } from "./TeamsAction";
+const HandleperformanceModal = lazy(() => import("./HandleperformanceModal"));
 
 
 const { Option } = Select;
 function PerformanceManagement (props) {
   const [storedData,setStoredData]=useState({});
+  const [rowdata, setrowdata] = useState("");
+  const [currentCustomer, setCurrentCustomer] = useState("");
+  function handleSetCurrentCustomer(item) {
+    setCurrentCustomer(item);
+  }
+  const handleRowData = (data) => {
+    setrowdata(data);
+  };
 const handleStoredData=(locs)=>{
   setStoredData(locs);
 }
@@ -93,14 +101,15 @@ function handleSetCurrentEmployeeId(employeeId,) {
                           />
                          </div>
                       
-                      {/* <div class="font-semibold ">
-                        <Header>
+                      <div class="font-semibold ml-2 ">
+                      {item.fullName}
+                        {/* <Header>
                         <EmployeeDetailsView
    employeeId={item.employeeId}
-   fullName={item.fullName}
+   fullName=
           />       
-                        </Header> 
-                        </div> */}
+                        </Header>  */}
+                        </div>
                         </div> 
         
                          
@@ -155,19 +164,20 @@ function handleSetCurrentEmployeeId(employeeId,) {
           
           <span
               style={{ cursor: "pointer" }}
-            //   onClick={() => {
+              onClick={() => {
                
-            //     props.handleEmployeeDocumentDrawerModal(true);
-            //     handleSetCurrentEmployeeId(item)
-            //   }}
+                props.handleperformanceDrawerModal(true);
+                handleSetCurrentCustomer(item);
+               handleRowData(item);
+              }}
             >
-                   <Badge
+                   {/* <Badge
                    style={{  fontSize:"0.75em",height:"18px" ,width:"5px"}}
                 count={item.noOfDocPending}
                 overflowCount={999}
-              > 
+              >  */}
               <InsertDriveFileIcon  style={{ fontSize: "1rem", }}/>
-              </Badge>
+              {/* </Badge> */}
      </span>
            
            </div>
@@ -197,7 +207,7 @@ function handleSetCurrentEmployeeId(employeeId,) {
            </Tooltip>
             </div>
            <div class=" font-normal text-xs text-cardBody font-poppins ">
-           {user.userUpdateInd === true || user.role === "ADMIN"  ? (
+           {/* {user.userUpdateInd === true || user.role === "ADMIN"  ? ( */}
             <Tooltip title="Edit">
               <BorderColorIcon
                 style={{ cursor: "pointer",fontSize: "1rem" }}
@@ -210,7 +220,7 @@ function handleSetCurrentEmployeeId(employeeId,) {
                 // }}
               />
             </Tooltip>
-            ):null}
+            {/* ):null} */}
            </div>
            </div>
          
@@ -222,7 +232,12 @@ function handleSetCurrentEmployeeId(employeeId,) {
             })}
               </CardWrapper>
               </div>
-             
+              <HandleperformanceModal
+                 rowdata={rowdata}
+         addDrawerPerformanceModal={props.addDrawerPerformanceModal}
+         handleperformanceDrawerModal={props.handleperformanceDrawerModal}
+         handleSetCurrentCustomer={handleSetCurrentCustomer}
+      />
 
             </>
       
@@ -234,12 +249,14 @@ function handleSetCurrentEmployeeId(employeeId,) {
 const mapStateToProps = ({ auth,teams }) => ({
     reportingManger:teams.reportingManger,
     reptMngrId:auth.userDetails.userId,
+    addDrawerPerformanceModal:teams.addDrawerPerformanceModal
 })
 
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
-        getreportingManager   
+        getreportingManager,
+        handleperformanceDrawerModal   
     },
     dispatch,
   )

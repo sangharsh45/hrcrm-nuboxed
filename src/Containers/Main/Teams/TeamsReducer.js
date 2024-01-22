@@ -9,6 +9,7 @@ const initialState = {
   fetchingEmployeeListError: false ,
   teamEmployeeList:[],
 
+  addDrawerPerformanceModal:false,
 
   addTeamMemberModal: false,
 
@@ -58,6 +59,10 @@ const initialState = {
   fetchingOrderView: false,
   fetchingOrderViewError: false,
   orderView: [],
+
+  fetchingKpilist: false,
+  fetchingKpilistError: false,
+  kpiList:[],
 
   updatingTeamsById: false,
   updatingTeamsByIdError: false,
@@ -405,6 +410,35 @@ export const teamsReducer = (state = initialState, action) => {
         case types.ADD_TEAMS_FAILURE:
           return { ...state, addingTeam: false, addTeamsModal: false };
     
+          case types.HANDLE_PERFORMANE_DRAWER_MODAL:
+            return { ...state, addDrawerPerformanceModal: action.payload };
+
+            case types.GET_KPILIST_REQUEST:
+              return { ...state, fetchingKpilist: true };
+            case types.GET_KPILIST_SUCCESS:
+              return {
+                ...state,
+                fetchingKpilist: false,
+                kpiList: action.payload,
+              };
+            case types.GET_KPILIST_FAILURE:
+              return {
+                ...state,
+                fetchingKpilist: false,
+                fetchingKpilistError: true,
+              };
+
+              case types.ADD_KPI_REQUEST:
+                return { ...state, addingKpi: true };
+              case types.ADD_KPI_SUCCESS:
+                return { ...state, addingKpi: false,
+                   addingKpi: false,
+                   addDrawerPerformanceModal:false
+                  //employees:[action.payload,...state.employees]
+                 };
+              case types.ADD_KPI_FAILURE:
+                return { ...state, addingKpi: false,
+                  addDrawerPerformanceModal:false };      
 
     default:
       return state;

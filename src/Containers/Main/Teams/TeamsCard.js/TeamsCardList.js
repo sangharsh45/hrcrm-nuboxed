@@ -2,7 +2,7 @@ import React, { useEffect, useState, useMemo, lazy } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { OnlyWrapCard } from '../../../../Components/UI/Layout'
-import { Tooltip, Select,Button } from "antd"
+import {  Select } from "antd"
 import {getTeamList} from "../TeamsAction"
 import moment from "moment";
 const Option = Select;
@@ -60,7 +60,7 @@ function TeamsCardList(props) {
         <div className=" md:w-[5rem]">Name</div>
         <div className=" md:w-[5rem]">Sector</div>
       
-        {/* <div className="w-12">Action</div> */}
+       
 
       </div>
       {props.teamList.map((item) => { 
