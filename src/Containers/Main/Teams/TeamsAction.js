@@ -617,3 +617,63 @@ export const addTeams = (customer) => (dispatch, getState) => {
     });
 };
 
+export const handleperformanceDrawerModal = (modalProps) => (dispatch) => {
+  dispatch({
+    type: types.HANDLE_PERFORMANE_DRAWER_MODAL,
+    payload: modalProps,
+  });
+};
+
+export const getKpilist = (departmentId) => (dispatch) => {
+  dispatch({
+    type: types.GET_KPILIST_REQUEST,
+  });
+  axios
+    .get(`${base_url}/performanceManagement/department/${departmentId}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.GET_KPILIST_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.GET_KPILIST_FAILURE,
+        payload: err,
+      });
+    });
+};
+
+export const addKpi = () => (dispatch) => {
+  dispatch({
+    type: types.ADD_KPI_REQUEST,
+  });
+  axios
+    .post(`${base_url}/performanceManagement`,  {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+     
+      dispatch({
+        type: types.ADD_KPI_SUCCESS,
+        payload: res.data,
+      });
+      
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.ADD_KPI_FAILURE,
+        payload: err,
+      });
+     
+    });
+};
