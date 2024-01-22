@@ -2,9 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Button } from "antd";
-import { Formik, Form, Field, FastField } from "formik";
-import { FlexContainer } from "../../../Components/UI/Layout";
-import { Spacer } from "../../../Components/UI/Elements";
+import { Formik, Form, Field,  } from "formik";
 import { InputComponent } from "../../../Components/Forms/Formik/InputComponent";
 import DragableUpload from "../../../Components/Forms/Formik/DragableUpload";
 import SearchSelect from "../../../Components/Forms/Formik/SearchSelect";
@@ -12,7 +10,6 @@ import { TextareaComponent } from "../../../Components/Forms/Formik/TextareaComp
 import {
   handleDocumentUploadModal,
   addExpenseDocument,
-  // getCustomerDocument,
 } from "../ExpenseAction";
 import * as Yup from "yup";
 
@@ -127,12 +124,8 @@ class AddDocumentForm extends Component {
             ...rest
           }) => (
             <Form className="form-background">
-              <div style={{ display: "flex", justifyContent: "space-between" }}>
-                <div
-                  style={{
-                    height: "100%",
-                    width: "45%",
-                  }}
+              <div class=" flex justify-between" >
+                <div class=" h-full w-[45%]"
                 >
                   <Field
                     name="documentId"
@@ -145,7 +138,7 @@ class AddDocumentForm extends Component {
                       {errors.contactDocumentId}
                     </p>
                   )}
-                  <Spacer />
+                <div class=" mt-3">
                   <Field
                     name="documentTypeId"
                     selectType="documentType"
@@ -161,12 +154,9 @@ class AddDocumentForm extends Component {
                     isColumn
                     inlineLabel
                     />
+                    </div>
                 </div>
-                <div
-                  style={{
-                    height: "100%",
-                    width: "45%",
-                  }}
+                <div class=" h-full w-[45%]"
                 >
                   <Field
                     name="documentTitle"
@@ -181,7 +171,7 @@ class AddDocumentForm extends Component {
                     isColumn
                     component={InputComponent}
                     />
-                  <Spacer />
+             <div class=" mt-3">
                   <Field
                     name="documentDescription"
                     label="Description"
@@ -196,12 +186,13 @@ class AddDocumentForm extends Component {
                     width={"100%"}
                     component={TextareaComponent}
                     />
-                  <Spacer style={{ marginBottom: "0.9375em" }} />
+                    </div>
+                
                 </div>
               </div>
 
-              <Spacer />
-              <FlexContainer justifyContent="flex-end">
+        
+              <div class=" flex justify-end" >
                 <Button
                   htmlType="submit"
                   type="primary"
@@ -210,7 +201,7 @@ class AddDocumentForm extends Component {
                   {/* <FormattedMessage id="app.submit" defaultMessage="Submit" /> */}
                   Submit
                 </Button>
-              </FlexContainer>
+              </div>
             </Form>
           )}
         </Formik>

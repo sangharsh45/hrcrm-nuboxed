@@ -1,17 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState,lazy } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { FormattedMessage } from "react-intl";
-import { StyledTable } from "../../../Components/UI/Antd";
-import { Icon, Tooltip } from "antd";
+import {  Tooltip } from "antd";
 import { getExpenseById,handleExpenseVoucherIdDrawer } from "../ExpenseAction";
-import { BundleLoader } from "../../../Components/Placeholder";
 import { OnlyWrapCard } from '../../../Components/UI/Layout'
-import styled from 'styled-components';
 import dayjs from "dayjs";
-import { CurrencySymbol } from "../../../Components/Common";
-import APIFailed from "../../../Helpers/ErrorBoundary/APIFailed";
-import ExpenseVoucherIdDrawer from "./ExpenseVoucherIdDrawer";
+const ExpenseVoucherIdDrawer=lazy(()=>import("./ExpenseVoucherIdDrawer"));
 
 function ExpenseCard2(props) {
   const [expand, setExpand] = useState(false);

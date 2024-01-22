@@ -1,9 +1,10 @@
 import React, {lazy } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-const ExpensePendingStatusCard=lazy(()=>import("./ExpensePendingStatusCard"));
-const ExpenseApprovedStatusCard=lazy(()=> import("./ExpenseApprovedStatusCard"));
-const ExpenseRejectedStatusCard=lazy(()=> import("./ExpenseRejectedStatusCard"));
+const ExpensePendingStatusCard =lazy(()=>import("./ExpensePendingStatusCard"));
+const ExpenseApprovedStatusCard =lazy(()=>import("./ExpenseApprovedStatusCard"));
+const ExpenseRejectedStatusCard =lazy(()=>import("./ExpenseRejectedStatusCard"));
+
 
 function ExpenseStatusCard(props) {
  

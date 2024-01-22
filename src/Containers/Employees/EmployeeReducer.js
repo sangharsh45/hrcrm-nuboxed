@@ -24,6 +24,8 @@ const initialState = {
   fetchingEmployeeTreeMapError: false,
   employeeTreeMap:{},
 
+  onboardingEmployeeModal:false,
+
   fetchingFilterEmployee: false,
    fetchingFilterEmployeeError: false,
 
@@ -688,6 +690,9 @@ export const EmployeeReducer = (state = initialState, action) => {
 
                                   case types.HANDLE_UPDATE_EMPLOYEE_MODAL:
                                     return { ...state, updateEmployeeModal: action.payload };
+
+                                    case types.HANDLE_ONBOARDING_EMPLOYEE_MODAL:
+                                      return { ...state, onboardingEmployeeModal: action.payload };
 
 
                                     case types.SET_EMPLOYEE_EDIT:

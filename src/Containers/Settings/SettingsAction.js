@@ -4105,3 +4105,126 @@ export const deleteOnboardingProcessData = (unboardingWorkflowDetailsId, orgId) 
       });
     });
 };
+
+export const addProcessStageForOnboarding = (stage, cb) => (dispatch) => {
+  dispatch({ type: types.ADD_PROCESS_STAGE_FOR_ONBOARDING_REQUEST });
+
+  axios
+    .post(`${base_url}/unboardingWorkflow/unboardingStages`, stage, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.ADD_PROCESS_STAGE_FOR_ONBOARDING_SUCCESS,
+        payload: { ...stage, stageId: res.data },
+      });
+      cb && cb("Success");
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.ADD_PROCESS_STAGE_FOR_ONBOARDING_FAILURE,
+      });
+      cb && cb("Failure");
+    });
+};
+
+export const getProcessStagesForOnboarding = (unboardingWorkflowId) => (
+  dispatch
+) => {
+  dispatch({
+    type: types.GET_PROCESS_STAGES_FOR_ONBOARDING_REQUEST,
+  });
+  axios
+    .get(`${base_url}/unboardingWorkflow/unboardingStages/${unboardingWorkflowId}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.GET_PROCESS_STAGES_FOR_ONBOARDING_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.GET_PROCESS_STAGES_FOR_ONBOARDING_FAILURE,
+        payload: err,
+      });
+    });
+};
+
+export const updateStageForOnboarding = (
+  unboardingStagesId,
+  responsible,
+  stageName,
+
+  probability,
+  days,
+  cb
+) => (dispatch) => {
+  console.log(stageName, probability);
+  dispatch({
+    type: types.UPDATE_STAGE_FOR_ONBOARDING_REQUEST,
+  });
+  axios
+    .put(
+      `${base_url}/unboardingWorkflow/unboardingStages/${unboardingStagesId}`,
+      { unboardingStagesId, responsible, stageName, probability, days },
+      {
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+        },
+      }
+    )
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.UPDATE_STAGE_FOR_ONBOARDING_SUCCESS,
+        payload: res.data,
+      });
+      cb && cb("success");
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.UPDATE_STAGE_FOR_ONBOARDING_FAILURE,
+      });
+      cb && cb("error");
+    });
+};
+
+export const deleteOnboardingStagesData = (unboardingStagesId, orgId) => (dispatch, getState) => {
+  const { userId } = getState("auth").auth.userDetails;
+  // console.log("inside deleteCall", callId);
+  dispatch({
+    type: types.DELETE_ONBOARDING_STAGES_DATA_REQUEST,
+  });
+  axios
+    .delete(`${base_url}unboardingWorkflow/unboardingStages/${unboardingStagesId}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      //  dispatch(getScheduler(orgId));
+      dispatch({
+        type: types.DELETE_ONBOARDING_STAGES_DATA_SUCCESS,
+        payload: unboardingStagesId,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.DELETE_ONBOARDING_STAGES_DATA_FAILURE,
+        payload: err,
+      });
+    });
+};

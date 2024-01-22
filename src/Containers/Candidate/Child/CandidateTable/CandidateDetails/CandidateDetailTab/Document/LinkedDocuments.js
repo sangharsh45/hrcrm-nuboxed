@@ -14,7 +14,7 @@ import {
 } from "../../../../../CandidateAction";
 import DownloadIcon from '@mui/icons-material/Download';
 import { elipsize } from "../../../../../../../Helpers/Function/Functions";
-import { DeleteOutlined, } from "@ant-design/icons";
+
 
 class LinkedDocuments extends Component {
   componentDidMount() {

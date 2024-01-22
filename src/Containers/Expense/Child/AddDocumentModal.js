@@ -14,15 +14,8 @@ class AddDocumentModal extends Component {
       <>
         <StyledModal
           title="Document"
-          //   title={
-          //     <FormattedMessage id="app.document" defaultMessage="Document" />
-          //   }
           width="65vw"
           visible={documentUploadModal}
-          // destroyOnClose
-          // maskClosable={false}
-          // style={{ top: 40 }}
-          // maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}
           onCancel={() => handleDocumentUploadModal(false)}
           footer={null}
         >
