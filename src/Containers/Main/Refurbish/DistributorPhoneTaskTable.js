@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import styled from "styled-components";
@@ -38,10 +38,10 @@ function DistributorPhoneTaskTable(props) {
         <>
             <StyledLabel>Add Task</StyledLabel>
             <MainWrapper>
-                <div style={{ justifyContent: "space-between", display: "flex", width: "70%" }}>
+                <div class="flex justify-between w-[70%]">
 
-                    <div style={{ display: "flex", justifyContent: "space-between", width: "70%" }}>
-                        <div style={{ width: "30%" }}>
+                    <div class="flex justify-between w-[70%]">
+                        <div class="w-[30%]">
                             <Switch
                                 checked={type}
                                 onChange={handleChangeType}
@@ -50,10 +50,10 @@ function DistributorPhoneTaskTable(props) {
                             />
                         </div>
                         {type ?
-                            <div style={{ width: "50%" }}>
+                            <div class="w-[50%]">
                                 <Input type="text" value={customName} placeholder="Enter Custome Task" onChange={(value) => { handleCustomeName(value) }} />
                             </div>
-                            : <div style={{ width: "50%" }}>
+                            : <div class="w-[50%]">
                                 <Select onChange={handleTask}>
                                     {props.phoTasklist.map((a) => {
                                         return <Option value={a.itemTaskId}>{a.name}</Option>;
@@ -62,7 +62,7 @@ function DistributorPhoneTaskTable(props) {
 
                             </div>}
                     </div>
-                    <div style={{ width: "20%" }}><Button onClick={handleSubmitTask}>Add</Button></div>
+                    <div class="w-[20%]"><Button onClick={handleSubmitTask}>Add</Button></div>
                 </div>
                 {props.taskByPhone.map((item) => {
                     return (

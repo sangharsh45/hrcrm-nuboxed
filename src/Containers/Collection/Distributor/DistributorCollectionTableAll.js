@@ -8,6 +8,7 @@ import { CurrencySymbol } from "../../../Components/Common";
 import { Link } from "../../../Components/Common";
 import { OnlyWrapCard } from "../../../Components/UI/Layout";
 import moment from "moment";
+import { FormattedMessage } from "react-intl";
 import InfiniteScroll from "react-infinite-scroll-component";
 
 class AllDistributorList extends Component {
@@ -38,18 +39,18 @@ class AllDistributorList extends Component {
 
     return (
       <>
-   <div className=' flex justify-end sticky top-28 z-auto'>
+   <div className='flex justify-end sticky top-28 z-auto'>
         <OnlyWrapCard style={{backgroundColor:"#E3E8EE"}}>
         <div className=" flex justify-between w-[97.5%] px-2 bg-transparent font-bold sticky top-0 z-10">
-        <div className=" md:w-[8.1rem]">Name</div>
-        <div className=" md:w-[5.1rem]">Mobile</div>
-        <div className=" md:w-[6.8rem] ">Website</div>
-        <div className="md:w-[5.9rem]">Address</div>
-        <div className="md:w-[7.8rem]">Pin Code</div>
-        <div className="md:w-[7.9rem]">City</div>
-        <div className="md:w-[6.2rem]">Owner </div>
-        <div className="md:w-[11.3rem]">Balance</div>
-        <div className="md:w-[11.3rem]">Previous</div>
+        <div className=" md:w-[8.1rem]"><FormattedMessage id="app.customer" defaultMessage="Customer"/></div>
+        <div className=" md:w-[5.1rem]"><FormattedMessage id="app.mobile" defaultMessage="Mobile"/></div>
+        <div className=" md:w-[6.8rem] "><FormattedMessage id="app.website" defaultMessage="Website"/></div>
+        <div className="md:w-[5.9rem]"><FormattedMessage id="app.address" defaultMessage="Address"/></div>
+        <div className="md:w-[7.8rem]"><FormattedMessage id="app.pincode" defaultMessage="Pin Code"/></div>
+        <div className="md:w-[7.9rem]"><FormattedMessage id="app.city" defaultMessage="City"/></div>
+        <div className="md:w-[6.2rem]"><FormattedMessage id="app.owner" defaultMessage="Owner"/> </div>
+        <div className="md:w-[11.3rem]"><FormattedMessage id="app.balance" defaultMessage="Balance"/></div>
+        <div className="md:w-[11.3rem]"><FormattedMessage id="app.previous" defaultMessage="Previous"/></div>
 
 
       </div>

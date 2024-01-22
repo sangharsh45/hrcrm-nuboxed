@@ -1,205 +1,35 @@
-import React, { useState } from "react";
+import React, { lazy,Suspense } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { DatePicker } from "antd";
-import { Button } from "antd";
-import { Formik, Form, } from "formik";
+import { MultiAvatar } from "../../../Components/UI/Elements";
 import { OnlyWrapCard } from "../../../Components/UI/Layout";
-import APIFailed from "../../../Helpers/ErrorBoundary/APIFailed";
 import { DistributorCollectionArchiveToday } from "../CollectionAction";
 import moment from "moment";
-import dayjs from "dayjs";
+import { BundleLoader } from "../../../Components/Placeholder";
+import { FormattedMessage } from "react-intl";
+const DistributorColletcionArchiveForm =lazy(()=>import("./DistributorColletcionArchiveForm"));
 
 function DistributorColletcionArchive(props) {
 
-  const [date, setDate] = useState("");
-  const [endate, setEnDate] = useState("");
-
-
-  const onChangeDatePicker = (selectedDate, dateString) => {
-    console.log(selectedDate, dateString);
-    setDate(dayjs(dateString));
-  };
-  const onChangeDatePicker2 = (selectedDate, dateString) => {
-    console.log(selectedDate, dateString);
-    setEnDate(dayjs(dateString));
-  };
-
-
-  if (props.DistributorCollectionArchiveError) {
-    return <APIFailed />;
-  }
-
-
-  const { user, startDate, endDate } = props;
-
   return (
     <>
-      <Formik
-        initialValues={{
-          startDate: moment.utc(date),
-          endDate: moment.utc(endate),
-          type: "distributor",
-        }}
-        onSubmit={(values, { resetForm }) => {
-          console.log(values);
-          console.log(values);
-          let timeZoneFirst = "GMT+05:30";
-
-          let mytimeZone = timeZoneFirst.substring(4, 10);
-          console.log(mytimeZone);
-
-          var a = mytimeZone.split(":");
-          console.log(a);
-          var timeZoneminutes = +a[0] * 60 + +a[1];
-          console.log(timeZoneminutes);
-          if (!values.endDate) {
-            values.endDate = values.startDate;
-          }
-          let newStartDate = moment(values.startDate).format("YYYY-MM-DD");
-          console.log(newStartDate);
-          //Time calculation
-          let firstStartTime = moment(values.startTime).format(
-            "HH:mm:ss.SSS[Z]"
-          ); // getting start time from form input
-          console.log(firstStartTime);
-
-          let firstStartHours = firstStartTime.substring(0, 5); // getting only hours and minutes
-          console.log(firstStartHours);
-
-          let timeEndPart = firstStartTime.substring(5, 13); // getting seconds and rest
-          console.log(timeEndPart);
-
-          var firstStartTimeSplit = firstStartHours.split(":"); // removing the colon
-          console.log(firstStartTimeSplit);
-
-          var minutes = +firstStartTimeSplit[0] * 60 + +firstStartTimeSplit[1]; // converting hours into minutes
-          console.log(minutes);
-
-          var firstStartTimeminutes = minutes - timeZoneminutes; // start time + time zone
-          console.log(firstStartTimeminutes);
-
-          let h = Math.floor(firstStartTimeminutes / 60); // converting to hours
-          let m = firstStartTimeminutes % 60;
-          h = h < 10 ? "0" + h : h;
-          m = m < 10 ? "0" + m : m;
-          let finalStartTime = `${h}:${m}`;
-          console.log(finalStartTime);
-
-          let newStartTime = `${finalStartTime}${timeEndPart}`;
-          console.log(newStartTime);
-
-          let newEndDate = moment.utc(values.endDate).format("YYYY-MM-DD");
-          let firstEndTime = moment.utc(values.endTime).format("HH:mm:ss.SSS[Z]"); // getting start time from form input
-          console.log(firstEndTime);
-          let firstEndHours = firstEndTime.substring(0, 5); // getting only hours and minutes
-          console.log(firstEndHours);
-
-          var firstEndTimeSplit = firstEndHours.split(":"); // removing the colon
-          console.log(firstEndTimeSplit);
-          var endMinutes = +firstEndTimeSplit[0] * 60 + +firstEndTimeSplit[1]; // converting hours into minutes
-          console.log(endMinutes);
-          var firstEndTimeminutes = Math.abs(endMinutes - timeZoneminutes); // start time + time zone
-          console.log(firstEndTimeminutes);
-          let hr = Math.floor(firstEndTimeminutes / 60); // converting to hours
-          console.log(hr);
-          let mi = firstEndTimeminutes % 60;
-          console.log(hr);
-          hr = hr < 10 ? "0" + hr : hr;
-          mi = mi < 10 ? "0" + mi : mi;
-          let finalEndTime = `${hr}:${mi}`;
-          console.log(finalEndTime);
-          console.log(timeEndPart);
-          console.log(`${finalEndTime}${timeEndPart}`);
-
-          let newEndTime = `${finalEndTime}${timeEndPart}`;
-          props.handleClearReturnCheck()
-          props.DistributorCollectionArchiveToday({
-            ...values,
-            startDate: moment.utc(date),
-            endDate: moment.utc(endate),
-          });
-        }}
-      >
-        {({
-          errors,
-          touched,
-          isSubmitting,
-          setFieldValue,
-          setFieldTouched,
-          values,
-          ...rest
-        }) => (
-          <Form>
-           <div class="flex justify-evenly h-full w-[40%] items-end">
-               
-           <div class="w-[29%]">
-
-<DatePicker
-
-placeholder="Start Date"
-onChange={onChangeDatePicker} />
-                
-                </div>
-                <div class="w-[29%]">
-                   
-<DatePicker 
-placeholder="End Date"
-onChange={onChangeDatePicker2} />
-                 
-                </div>
-                <div class="w-[10%]">
-                    <Button
-                      type="primary"
-                      htmlType="submit"                    
-                  >
-                     Submit
-                    </Button>
-                  </div>
-                </div>
-
-            {/* <StyledTable
-              rowKey="paymentId"
-              rowSelection={props.rowSelectionForDistributor}
-              columns={columns}
-              scroll={{ y: tableHeight }}
-              pagination={false}
-              loading={
-                props.DistributorCollectionArchive ||
-                props.DistributorCollectionArchiveError
-              }
-              dataSource={props.todayDisArchive}
-              locale={{
-                emptyText: (
-                  <Empty description={"We couldn't find relevant data"} />
-                ),
-              }}
-            /> */}
-          </Form>
-        )}
-      </Formik>
+    <Suspense fallback={<BundleLoader/>}>
+    <DistributorColletcionArchiveForm/>
+    </Suspense>
+ 
       <div className=' flex justify-end sticky top-28 z-auto'>
         <OnlyWrapCard style={{backgroundColor:"#E3E8EE"}}>
         <div className=" flex justify-between w-[97.5%] p-2 bg-transparent font-bold sticky top-0 z-10">
-        <div className=" md:w-[8.1rem]">Name</div>
-        <div className=" md:w-[5.1rem]">Order#</div>
-        <div className=" md:w-[5.8rem] ">Transaction ID</div>
-        <div className="md:w-[5.9rem]">Type</div>
-        <div className="md:w-[7.8rem]">Date</div>
-    
-        <div className="md:w-[6.2rem]">Amount</div>
-        <div className="md:w-[11.3rem]">Mode</div>
-        <div className="w-[3.8rem]">Received?</div>
-        <div className="w-[3.8rem]">Owner</div>
+        <div className=" md:w-[9.1rem]"><FormattedMessage id="app.customer" defaultMessage="Customer"/></div>
+        <div className=" md:w-[5.1rem]"><FormattedMessage id="app.order" defaultMessage="Order #"/></div>
+        <div className=" md:w-[5.8rem] "><FormattedMessage id="app.transaction" defaultMessage="Transaction ID"/></div>
+        <div className="md:w-[7.8rem]"><FormattedMessage id="app.date" defaultMessage="Date"/></div>
+        <div className="md:w-[6.2rem]"><FormattedMessage id="app.amount" defaultMessage="Amount"/></div>
+        <div className="md:w-[11.3rem]"><FormattedMessage id="app.mode" defaultMessage="Mode"/></div>
+        <div className="w-[3.8rem]"><FormattedMessage id="app.owner" defaultMessage="Owner"/></div>
 
       </div>
-        {/* <InfiniteScroll
-        dataLength={customerByUserId.length}
-        next={handleLoadMore}
-        hasMore={hasMore}
-        loader={fetchingCustomers?<h4 style={{ textAlign: 'center' }}>Loading...</h4>:null}
-        height={"75vh"}
-      > */}
+       
       
       {props.todayDisArchive.map((item) => { 
                     return (
@@ -208,7 +38,7 @@ onChange={onChangeDatePicker2} />
                     
                                 >
                                    <div class="flex">
-                                   <div className=" flex font-medium flex-col  md:w-28 max-sm:flex-row w-full max-sm:justify-between  ">
+                                   <div className=" flex font-medium flex-col md:w-40 max-sm:flex-row w-full max-sm:justify-between  ">
                            
                            
                            <h4 class=" text-xs text-cardBody font-poppins">   
@@ -271,7 +101,7 @@ onChange={onChangeDatePicker2} />
                            
 
                            <h4 class=" text-xs text-cardBody font-poppins">   
-                         {item.paymentMode}
+                        
                            </h4>
                        
                        </div> 
@@ -288,7 +118,13 @@ onChange={onChangeDatePicker2} />
                                 <div className=" flex font-medium flex-col  md:w-28 max-sm:flex-row w-full max-sm:justify-between  ">
 
                            <h4 class=" text-xs text-cardBody font-poppins">   
-                         {item.salesExecutive}
+                           <span>
+                      <MultiAvatar
+                        primaryTitle={item.salesExecutive}
+                        imgWidth={"1.8rem"}
+                        imgHeight={"1.8rem"}
+                      />
+                    </span>
                            </h4>
                        
                        </div> 
@@ -302,7 +138,7 @@ onChange={onChangeDatePicker2} />
 
                     )
                 })}
-                {/* </InfiniteScroll> */}
+    
       </OnlyWrapCard>
       </div>
     </>

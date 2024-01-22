@@ -158,16 +158,17 @@
 
 
 
-import React, { Component, useEffect, useState,lazy } from "react";
+import React, { useEffect, useState,lazy } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { StyledTable } from "../../../Components/UI/Antd";
 import { getRepairOrderByUser, handleRepairPhone, repairInspectionButton, getOrderIdForCatalogueItem } from "./RefurbishAction"
 import { Button } from "antd";
 import moment from "moment";
 import { OnlyWrapCard } from "../../../Components/UI/Layout";
 import { FormattedMessage } from "react-intl";
+
 const OrderPhoneRepairModal = lazy(() => import('./OrderPhoneRepairModal'));
+
 function ProductionRepairOrder(props) {
     useEffect(() => {
         if (props.inspectionRequiredInd) {
@@ -208,8 +209,7 @@ function ProductionRepairOrder(props) {
                         id="app.notes"
                         defaultMessage="notes"
                       /></div>
-                        {/* <div className="md:w-[4.3rem]"></div> */}
-                    </div>
+            </div>
                     {props.inspectionRequiredInd ? props.choosenOrderCatalogue.map((item) => {
                         const currentdate = moment().format("DD/MM/YYYY");
                         const date = moment(item.creationDate).format("DD/MM/YYYY");
@@ -221,7 +221,7 @@ function ProductionRepairOrder(props) {
                                     <div class="flex">
                                         <div className=" flex font-medium  md:w-[15.6rem] max-sm:w-full  ">
                                             <span
-                                                style={{ textDecoration: "underline", color: "#1890ff", cursor: "pointer" }}
+                                                class="underline text-[#1890ff] cursor-pointer"
                                                 onClick={() => {
                                                     handleRowData(item);
                                                     props.handleRepairPhone(true)
@@ -231,10 +231,7 @@ function ProductionRepairOrder(props) {
                                             &nbsp;&nbsp;
                                             {date === currentdate ? (
                                                 <span
-                                                    style={{
-                                                        color: "tomato",
-                                                        fontWeight: "bold",
-                                                    }}
+                                                class="text-[tomato] font-bold"
                                                 >
                                                     New
                                                 </span>
@@ -296,8 +293,7 @@ function ProductionRepairOrder(props) {
                                     >
                                         <div class="flex">
                                             <div className=" flex font-medium  md:w-[15.8rem] max-sm:w-full  ">
-                                                <span
-                                                    style={{ textDecoration: "underline", color: "#1890ff", cursor: "pointer" }}
+                                                <span class="underline text-[#1890ff] cursor-pointer"
                                                     onClick={() => {
                                                         handleRowData(item);
                                                         props.handleRepairPhone(true)
@@ -306,12 +302,7 @@ function ProductionRepairOrder(props) {
                                                 </span>
                                                 &nbsp;&nbsp;
                                                 {date === currentdate ? (
-                                                    <span
-                                                        style={{
-                                                            color: "tomato",
-                                                            fontWeight: "bold",
-                                                        }}
-                                                    >
+                                                    <span class="text-[tomato] font-bold">
                                                         New
                                                     </span>
                                                 ) : null}

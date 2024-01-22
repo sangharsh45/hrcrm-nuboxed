@@ -9,7 +9,7 @@ border: 0.0625em solid ${props => props.theme.borderColor}
 color: ${props => props.theme.color};
 margin: 0.3rem;
 width:98%; 
-padding: 0.3rem;
+// padding: 0.3rem;
 // height:37rem;
 height:47rem;
 /* overflow: auto; */

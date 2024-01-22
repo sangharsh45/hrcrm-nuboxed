@@ -1,7 +1,6 @@
-import React, { useState, useEffect, useMemo, lazy } from "react";
+import React, { useState, useEffect, lazy } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { StyledTable } from "../../../Components/UI/Antd";
 import { getPhoneOrderIdByUser, handleQCPhoneNotesOrderModal, getOrderByUser } from "./RefurbishAction";
 import { Button, Tooltip } from "antd";
 import { FileDoneOutlined } from "@ant-design/icons";
@@ -10,7 +9,6 @@ import { SubTitle } from "../../../Components/UI/Elements";
 import ButtonGroup from "antd/lib/button/button-group";
 import { updateQCStatus } from "../Account/AccountAction"
 import moment from "moment";
-import ExtensionIcon from '@mui/icons-material/Extension'
 import { NoteAddOutlined } from "@mui/icons-material";
 import { OnlyWrapCard } from "../../../Components/UI/Layout";
 import { FormattedMessage } from "react-intl";
@@ -53,10 +51,9 @@ function OrderPhoneListById(props) {
         return (
             <Tooltip title={tooltip}>
                 <Button
+                className="p-[6px] border-transparent"
                     ghost={status !== type}
                     style={{
-                        padding: "6px",
-                        borderColor: "transparent",
                         color: indStatus === type ? "orange" : "grey",
                     }}
                     onClick={onClick}
@@ -176,7 +173,7 @@ function OrderPhoneListById(props) {
                                                         imgRadius={20}
                                                     />
                                                 ) : (
-                                                    <span style={{ fontSize: "0.6em", fontWeight: "bold" }}>
+                                                    <span class="text-[0.6rem] font-bold">
                                                         No QR
                                                     </span>
                                                 )}
@@ -241,16 +238,17 @@ function OrderPhoneListById(props) {
 
                                         </div>
                                     </div>
-                                    <div className=" flex font-medium  md:w-[1.5rem] max-sm:flex-row w-full max-sm:justify-between ">
+                                    <div className=" flex font-medium  max-sm:flex-row  max-sm:justify-between ">
                                         <div class=" text-xs text-cardBody font-poppins text-center">
                                             <Tooltip title="Spare">
 
-                                                <span style={{ color: spares && item.phoneId === RowData.phoneId ? "red" : "black" }} >
-                                                    <ExtensionIcon
+                                                <span style={{ color: spares && item.phoneId === RowData.phoneId ? "red" : "black",fontSize: "1rem" }} >
+                                                    <Button
                                                         onClick={() => {
                                                             handleSetRowData(item);
                                                             hanldeSpare();
-                                                        }} />
+                                                        }}>
+                                                            Add Spares </Button>
                                                 </span>
 
                                             </Tooltip>
@@ -261,7 +259,7 @@ function OrderPhoneListById(props) {
                                         <div class=" text-xs text-cardBody font-poppins text-center">
                                             <Tooltip title="Task">
                                                 <FileDoneOutlined
-                                                    style={{ color: expand && item.phoneId === RowData.phoneId ? "red" : "black" }}
+                                                    style={{ color: expand && item.phoneId === RowData.phoneId ? "red" : "black",fontSize: "1rem" }}
                                                     type="file-done"
                                                     onClick={() => {
                                                         handleSetRowData(item);
@@ -277,7 +275,8 @@ function OrderPhoneListById(props) {
                                         <div class=" text-xs text-cardBody font-poppins text-center">
                                             <Tooltip title="Notes">
                                                 <NoteAddOutlined
-                                                    style={{ cursor: "pointer", fontSize: "13px" }}
+
+                                                    style={{ cursor: "pointer", fontSize: "1rem" }}
                                                     onClick={() => {
                                                         handleSetRowData(item);
                                                         props.handleQCPhoneNotesOrderModal(true);
@@ -296,7 +295,7 @@ function OrderPhoneListById(props) {
                         )
                     })}
                 </OnlyWrapCard>
-                <div style={{ display: "flex", justifyContent: "flex-end" }}>
+                <div class="flex justify-end">
                     {props.rowData.qcInspectionInd === 1 ? <Button
                         type="primary"
                         onClick={handlePuaseButton}>{hide ? "Resume" : "Pause"}
