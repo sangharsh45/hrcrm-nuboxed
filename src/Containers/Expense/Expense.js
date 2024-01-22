@@ -1,13 +1,13 @@
 import React, { Component, Suspense, lazy } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import AddExpenseModal from "./Child/AddExpenseModal";
 import { BundleLoader } from "../../Components/Placeholder";
-import ExpenseHeader from "./Child/ExpenseHeader";
 import { handleExpenseModal,setExpenseViewType } from "./ExpenseAction";
+const ExpenseHeader = lazy(() => import("./Child/ExpenseHeader"));
 const ExpenseStatusCard = lazy(() => import("./Child/ExpenseStatusCard"));
 const ExpenseCard = lazy(() => import("./Child/ExpenseCard"));
 const ExpenseCard2 = lazy(() => import("./Child/ExpenseCard2"));
+const AddExpenseModal = lazy(() => import("./Child/AddExpenseModal"));
 class Expense extends Component {
   render() {
     const {setExpenseViewType,viewType}=this.props;

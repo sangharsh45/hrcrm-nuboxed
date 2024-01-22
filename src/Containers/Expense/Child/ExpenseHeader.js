@@ -11,9 +11,9 @@ class ExpenseHeader extends Component {
         setExpenseViewType,
     } = this.props;
     return (
-      <div style={{position: "sticky",
-        top: "3.35rem",
-        zIndex: "998"}}>
+      <div 
+      // class="sticky top-[3.35rem] z-[998] "
+      >
         <ActionHeader
             leftComponent={
 

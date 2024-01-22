@@ -1,5 +1,5 @@
 import React from "react";
-import { message,Upload } from "antd";
+import { message,Upload ,Tooltip} from "antd";
 import { base_url } from "../../../Config/Auth";
 import axios from "axios";
 import { UploadOutlined } from "@ant-design/icons";
@@ -77,8 +77,10 @@ class Upload1 extends React.Component {
     const { previewVisible, previewImage, fileList } = this.state;
     const uploadButton = (
       <div style={{display:"flex"}}>
+              <Tooltip title="Upload">
         <UploadOutlined />
-        <div className="ant-upload-text">Upload</div>
+        </Tooltip>
+        {/* <div className="ant-upload-text">Upload</div> */}
       </div>
     );
     return (

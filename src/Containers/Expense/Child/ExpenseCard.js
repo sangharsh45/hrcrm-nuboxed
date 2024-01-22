@@ -66,7 +66,7 @@ function ExpenseCard(props) {
                       <div class="flex items-center justify-between">
                       <h4 class="text-sm">Voucher ID</h4>
                         <Header>
-<div class="text-[0.82rem]" onClick={() => { handleExpand(item.voucherId);
+<div class="text-[0.82rem] font-bold" onClick={() => { handleExpand(item.voucherId);
                 handleSetParticularRowData(item);
                 props.handleExpenseVoucherIdDrawer(true);}}>
          {item.voucherId}
