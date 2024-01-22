@@ -630,6 +630,14 @@ padding: 0.3rem 1rem;
   border-radius: 3px;
   box-shadow: grey 1px 2px 0px 0px;
 }
+.button-borderless {
+  color: #fff;
+  height: 1.58rem;
+  font-size: 0.8125em;
+  border-color: #fff;
+  padding: 3px 8px; 
+
+}
 .ant-btn-background-ghost{
   color: #fff;
   border-color: #fff;
@@ -941,5 +949,8 @@ h1{
 
 .matrix-table button:hover {
   background-color: #45a049;
+}
+.ant-drawer-content-wrapper {
+  margin-top: 3rem !important;
 }
 

@@ -1,11 +1,22 @@
-import React, { Component } from "react";
+import React, { Component,lazy } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import OrganizationOverviewCard from "./OrganizationCards/OrganizationOverviewCard";
-import OrganizationAboutCard from "./OrganizationCards/OrganizationAboutCard";
-import OrganizationStatsCard from "./OrganizationCards/OrganizationStatsCard";
-import OrganizationDetailMap from "./OrganizationCards/OrganizationDetailMap";
-import OrganizationAddress from "./OrganizationCards/OrganizationAddress";
+const OrganizationOverviewCard = lazy(() =>
+  import("./OrganizationCards/OrganizationOverviewCard")
+);
+const OrganizationAboutCard = lazy(() =>
+  import("./OrganizationCards/OrganizationAboutCard")
+);
+const OrganizationStatsCard = lazy(() =>
+  import("./OrganizationCards/OrganizationStatsCard")
+);
+const OrganizationDetailMap = lazy(() =>
+  import("./OrganizationCards/OrganizationDetailMap")
+);
+const OrganizationAddress = lazy(() =>
+  import("./OrganizationCards/OrganizationAddress")
+);
+
 
 class OrganizationDetailLeft extends Component {
   render() {

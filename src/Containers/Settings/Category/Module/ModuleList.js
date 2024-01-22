@@ -1,14 +1,16 @@
-import React, { useEffect,useState } from "react";
+import React, { useEffect,useState,lazy } from "react";
 import { connect } from "react-redux";
 import ViewEditCard from "../../../../Components/UI/Elements/ViewEditCard";
 import styled from "styled-components";
 import {addingModules,getModules} from "../Module/ModuleAction"
-import { FlexContainer } from "../../../../Components/UI/Layout";
 import { bindActionCreators } from "redux";
 import { MainWrapper } from "../../../../Components/UI/Layout";
 import { Select } from "../../../../Components/UI/Elements";
-import { Popconfirm, Switch } from "antd";
-import SingleModuleList from "./SingleModuleList";
+import {  Switch } from "antd";
+const SingleModuleList = lazy(() =>
+  import("./SingleModuleList")
+);
+
 
 const { Option } = Select;
 
@@ -279,7 +281,7 @@ const handleCrmClick = (checked) => {
                 <div class="w-full flex-row">
               <div class=" flex " >
              
-                    <div class=" text-base text-[#1677ff]">CRM</div>
+                    <div class=" text-sm text-[#1677ff]">CRM</div>
                     <div   class=" w-[7%] ml-2">
                     {/* <Popconfirm
                         title="Do you wish to change Status ? "
@@ -301,7 +303,7 @@ const handleCrmClick = (checked) => {
                 
                   
 
-                    <div class=" text-base text-[#1677ff]">IM</div>
+                    <div class=" text-sm text-[#1677ff] ml-2">IM</div>
                     <div   class=" w-[7%] ml-2">
                     {/* <Popconfirm
                         title="Do you wish to change Status ? "
@@ -379,7 +381,7 @@ const handleCrmClick = (checked) => {
 
                   
            
-                    <div class=" text-base text-[#1677ff]">Rcruitpro</div>
+                    <div class=" text-sm text-[#1677ff] ml-2">Rcruitpro</div>
                     <div   class=" w-[7%] ml-2">
                     {/* <Popconfirm
                         title="Do you wish to change Status ? "
@@ -397,7 +399,7 @@ const handleCrmClick = (checked) => {
                         />
                       {/* </Popconfirm> */}
                     </div>
-                    <div class=" text-base text-[#1677ff]">Elearning</div>
+                    <div class=" text-sm text-[#1677ff] ml-2">Elearning</div>
                     <div   class=" w-[7%] ml-2">
                     {/* <Popconfirm
                         title="Do you wish to change Status ? "
@@ -431,7 +433,7 @@ const handleCrmClick = (checked) => {
               </div>
               
             ) : (
-                <FlexContainer>
+              <div class=" flex">
                   {/* <TextInput
                     name={name}
                     // value={value || departmentName}
@@ -452,7 +454,7 @@ const handleCrmClick = (checked) => {
                   <br />
                   <br />
               
-                </FlexContainer>
+                </div>
               )
           }
         </ViewEditCard>

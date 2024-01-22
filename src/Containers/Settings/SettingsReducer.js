@@ -9,6 +9,13 @@ const initialState = {
   addProcessTaskModal: false,
   candidateSequenceModal: false,
 
+  fetchingProcessForOnboarding: false,
+  fetchingProcessForOnboardingError: false,
+  onboardingProcess: [],
+
+  addingProcessForOnboarding: false,
+  addingProcessForOnboardingError: false,
+
   fetchingDepartmentWiseUser: false, 
   fetchingDepartmentWiseUserError: false,
   departmentwiseUser:[],
@@ -240,6 +247,9 @@ const initialState = {
   fetchingLeaveDetails: false,
   fetchingOrganizationLeadsError: false,
   leaveData: [],
+
+  deleteOnboardingProcessData: false,
+   deleteOnboardingProcessDataError: false,
 
   addingApprove: false,
   addingApproveError: false,
@@ -2924,6 +2934,85 @@ export const settingsReducer = (state = initialState, action) => {
             gettingNotificationConfig: false,
             gettingNotificationConfigError: true,
           };
+
+
+          case types.ADD_PROCESS_FOR_ONBOARDING_REQUEST:
+            return {
+              ...state,
+              addingProcessForOnboarding: true,
+              addingProcessForOnboardingError: false,
+            };
+          case types.ADD_PROCESS_FOR_ONBOARDING_SUCCESS:
+            return {
+              ...state,
+              addingProcessForOnboarding: false,
+              addingProcessForOnboardingError: false,
+              // addProcessHiringModal: false,
+            };
+          case types.ADD_PROCESS_FOR_ONBOARDING_FAILURE:
+            return {
+              ...state,
+              addingProcessForOnboarding: false,
+              addingProcessForOnboardingError: true,
+              // addProcessHiringModal: false,
+            };
+
+
+            case types.GET_PROCESS_FOR_ONBOARDING_REQUEST:
+              return {
+                ...state,
+                fetchingProcessForOnboarding: true,
+                fetchingProcessForOnboardingError: false,
+              };
+            case types.GET_PROCESS_FOR_ONBOARDING_SUCCESS:
+              return {
+                ...state,
+                fetchingProcessForOnboarding: false,
+                fetchingProcessForOnboardingError: false,
+                onboardingProcess: action.payload,
+              };
+            case types.GET_PROCESS_FOR_ONBOARDING_FAILURE:
+              return {
+                ...state,
+                fetchingProcessForOnboarding: false,
+                fetchingProcessForOnboardingError: true,
+              };
+
+
+              
+    case types.UPDATE_PROCESS_NAME_FOR_ONBOARDING_REQUEST:
+      return { ...state, updateProcessNameForOnboarding: true };
+    case types.UPDATE_PROCESS_NAME_FOR_ONBOARDING_SUCCESS:
+      // return { ...state, updatingStages: false, states: [...state.states, action.payload] };
+      return {
+        ...state,
+        updateProcessNameForOnboarding: false,
+        onboardingProcess: state.onboardingProcess.map((state) =>
+          state.unboardingWorkflowDetailsId === action.payload.unboardingWorkflowDetailsId
+            ? action.payload
+            : state
+        ),
+      };
+    case types.UPDATE_PROCESS_NAME_FOR_ONBOARDING_FAILURE:
+      return {
+        ...state,
+        updateProcessNameForOnboarding: false,
+        updateProcessNameForOnboardingError: true,
+      };
+
+      case types.DELETE_ONBOARDING_PROCESS_DATA_REQUEST:
+        return { ...state, deleteOnboardingProcessData: true };
+      case types.DELETE_ONBOARDING_PROCESS_DATA_SUCCESS:
+        return {
+          ...state,
+          deleteOnboardingProcessData: false,
+          onboardingProcess: state.onboardingProcess.filter(
+            (item) => item.unboardingWorkflowDetailsId !== action.payload
+          ),
+        };
+      case types.DELETE_ONBOARDING_PROCESS_DATA_FAILURE:
+        return { ...state, deleteOnboardingProcessData: false, deleteOnboardingProcessDataError: false };
+  
 
     default:
       return state;

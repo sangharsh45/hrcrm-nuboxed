@@ -4,10 +4,8 @@ import { bindActionCreators } from "redux";
 import { Button } from "antd";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
-import { Spacer } from "../../../../Components/UI/Elements";
 import { InputComponent } from "../../../../Components/Forms/Formik/InputComponent";
 import { updateEmailCredentials } from "./EmailAction";
-import { FlexContainer } from "../../../../Components/UI/Layout";
 /**
  * yup validation scheme for creating a Team
  */
@@ -55,12 +53,8 @@ class UpdateEmailForm extends Component {
             ...rest
           }) => (
               <Form className="form-background">
-                <div style={{ display: "flex", justifyContent: "space-between" }}>
-                  <div
-                    style={{
-                      height: "100%",
-                      width: "100%",
-                    }}
+                <div class=" flex justify-between" >
+                  <div class=" h-full w-full"
                   >
                     <Field
                       name="email"
@@ -71,7 +65,7 @@ class UpdateEmailForm extends Component {
                       style={{ flexBasis: "80%" }}
                       width={"100%"}
                     />
-                    <Spacer />
+                 <div class=" mt-3">
                     <Field
                       type="password"
                       isRequired
@@ -82,7 +76,8 @@ class UpdateEmailForm extends Component {
                       component={InputComponent}
                       style={{ flexBasis: "80%" }}
                     />
-                    <Spacer />
+                    </div>
+            
                     {/* <Field
                   name="serverType"
                   label="Server Type"
@@ -120,7 +115,7 @@ class UpdateEmailForm extends Component {
                     >
                       Example for other webmail host - mail.example.com{" "}
                     </span>
-                    <Spacer />
+                    <div class=" mt-3">
                     <Field
                       name="port"
                       label="Port"
@@ -130,10 +125,11 @@ class UpdateEmailForm extends Component {
                       component={InputComponent}
                       style={{ flexBasis: "80%" }}
                     />
-                    <Spacer />
+                    </div>
+               
                   </div>
                 </div>
-                <FlexContainer justifyContent="flex-end">
+                <div class=" flex justify-end " >
                   <Button
                     type="primary"
                     htmlType="submit"
@@ -142,7 +138,7 @@ class UpdateEmailForm extends Component {
                   >
                     Update
                 </Button>
-                </FlexContainer>
+                </div>
               </Form>
             )}
         </Formik>

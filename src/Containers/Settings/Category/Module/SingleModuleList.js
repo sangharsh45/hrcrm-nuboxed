@@ -1,20 +1,8 @@
 import React, { Component } from "react";
 import styled from "styled-components";
-import { FormattedMessage } from "react-intl";
-import { Button, Popconfirm, Switch, } from "antd";
-import BorderColorIcon from '@mui/icons-material/BorderColor';
-import DeleteIcon from '@mui/icons-material/Delete';
-import { FlexContainer } from "../../../../Components/UI/Layout";
-import { TextInput } from "../../../../Components/UI/Elements";
+import { Switch, } from "antd";
 import ViewEditCard from "../../../../Components/UI/Elements/ViewEditCard";
 import { Select } from "../../../../Components/UI/Elements";
-import DepartmentStatusToggle from "../../Department/DepartmentStatusToggle";
-import ERPStatusToggle from "../../Department/ERPStatusToggle";
-import CRMStatusToggle from "../../Department/CRMStatusToggle";
-import IMStatusToggle from "../../Department/IMStatusToggle";
-import AccountingStatusToggle from "../../Department/AccountingStatusToggle";
-import RecruitProStatusToggle from "../../Department/RecruitProStatusToggle";
-import HrStatusToggle from "../../Department/HrStatusToggle";
 const { Option } = Select;
 
 class SingleModuleList extends Component {
@@ -46,7 +34,7 @@ class SingleModuleList extends Component {
               <div class=" flex " >
              
            
-              <div class=" text-base text-[#1677ff]">ERP</div>
+              <div class=" text-sm text-[#1677ff]">ERP</div>
                     <div   class=" w-[7%] ml-2">
                     {/* <Popconfirm
                         title="Do you wish to change Status ? "
@@ -66,7 +54,7 @@ class SingleModuleList extends Component {
                     </div>
            {this.props.moduleList.erpInd === true && ( 
             <>  
-              <div class=" text-base text-[#1677ff]">PRODUCTION</div>
+              <div class=" text-sm text-[#1677ff] ml-2">PRODUCTION</div>
                     <div   class=" w-[7%] ml-2">
                     {/* <Popconfirm
                         title="Do you wish to change Status ? "
@@ -85,7 +73,7 @@ class SingleModuleList extends Component {
                       {/* </Popconfirm> */}
                     </div>
 
-                    <div class=" text-base text-[#1677ff]">Repair</div>
+                    <div class=" text-sm text-[#1677ff] ml-2">Repair</div>
                     <div   class=" w-[7%] ml-2">
                     {/* <Popconfirm
                         title="Do you wish to change Status ? "
@@ -105,7 +93,7 @@ class SingleModuleList extends Component {
                       {/* </Popconfirm> */}
                     </div>
 
-                    <div class=" text-base text-[#1677ff]">Inventory</div>
+                    <div class=" text-sm text-[#1677ff] ml-2">Inventory</div>
                     <div   class=" w-[7%] ml-2">
                     {/* <Popconfirm
                         title="Do you wish to change Status ? "
@@ -124,7 +112,7 @@ class SingleModuleList extends Component {
                       {/* </Popconfirm> */}
                     </div>
 
-                    <div class=" text-base text-[#1677ff]">OrderManagement</div>
+                    <div class=" text-sm text-[#1677ff] ml-2">OrderManagement</div>
                     <div   class=" w-[7%] ml-2">
                     {/* <Popconfirm
                         title="Do you wish to change Status ? "
@@ -143,7 +131,7 @@ class SingleModuleList extends Component {
                       {/* </Popconfirm> */}
                     </div>
 
-                    <div class=" text-base text-[#1677ff]">Logistics</div>
+                    <div class=" text-sm text-[#1677ff] ml-2">Logistics</div>
                     <div   class=" w-[7%] ml-2">
                     {/* <Popconfirm
                         title="Do you wish to change Status ? "
@@ -162,7 +150,7 @@ class SingleModuleList extends Component {
                       {/* </Popconfirm> */}
                     </div>
 
-                    <div class=" text-base text-[#1677ff]">Procurement</div>
+                    <div class=" text-sm text-[#1677ff] ml-2">Procurement</div>
                     <div   class=" w-[7%] ml-2">
                     {/* <Popconfirm
                         title="Do you wish to change Status ? "
@@ -196,7 +184,7 @@ class SingleModuleList extends Component {
               </div>
               
             ) : (
-                <FlexContainer>
+                <div class=" flex">
                   {/* <TextInput
                     name={name}
                     // value={value || departmentName}
@@ -217,7 +205,7 @@ class SingleModuleList extends Component {
                   <br />
                   <br />
               
-                </FlexContainer>
+                </div>
               )
           }
         </ViewEditCard>

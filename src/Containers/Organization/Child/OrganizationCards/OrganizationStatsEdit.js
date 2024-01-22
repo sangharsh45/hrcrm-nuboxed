@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { FormattedMessage } from "react-intl";
 import { Button } from "antd";
-import { Spacer } from "../../../../Components/UI/Elements";
 import { updateOrganizationDetails } from "../../../Auth/AuthAction";
 import EditableInput from "../../../../Components/Forms/Edit/EditableInput";
 
@@ -54,8 +53,7 @@ class OrganizationStatsEdit extends Component {
             value={this.state.fields.organizationUrl}
             width="100%"
           />
-          <Spacer style={{ margin: "0.125em" }} />
-          <div class=" flex justify-between w-full "
+          <div class=" flex justify-between w-full m-[0.125em] "
           
           >
             {/* <div style={{ width: "37%" }}>
@@ -83,7 +81,7 @@ class OrganizationStatsEdit extends Component {
               />
             </div> */}
           </div>
-          <Spacer style={{ margin: "0.125em" }} />
+       
           {/* <FlexContainer justifyContent="space-between" style={{ width: "100%" }}>
 
             <div style={{ width: "37%" }}>
@@ -112,7 +110,8 @@ class OrganizationStatsEdit extends Component {
               />
             </div>
           </FlexContainer> */}
-          <Spacer style={{ margin: "0.125em" }} />
+          <div class=" m-[0.125em]">
+        
           <EditableInput
             defaultValue={twitter}
             handleChange={this.handleChange}
@@ -121,7 +120,8 @@ class OrganizationStatsEdit extends Component {
             value={this.state.fields.twitter}
             width="100%"
           />
-          <Spacer style={{ margin: "0.125em" }} />
+          </div>
+          <div class=" m-[0.125em]">
           <EditableInput
             defaultValue={linkedinUrl}
             handleChange={this.handleChange}
@@ -130,7 +130,8 @@ class OrganizationStatsEdit extends Component {
             value={this.state.fields.linkedinUrl}
             width="100%"
           />
-          <Spacer style={{ margin: "0.125em" }} />
+           </div>
+           <div class=" m-[0.125em]">
           <EditableInput
             defaultValue={facebook}
             handleChange={this.handleChange}
@@ -139,6 +140,7 @@ class OrganizationStatsEdit extends Component {
             value={this.state.fields.facebook}
             width="100%"
           />
+          </div>
         </div>
 
         <div class=" flex justify-end mr-[1.25em]" >

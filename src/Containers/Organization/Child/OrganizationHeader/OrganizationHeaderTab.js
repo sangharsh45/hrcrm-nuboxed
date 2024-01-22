@@ -1,8 +1,7 @@
-import React, { Component, lazy, Suspense } from "react";
+import React, { Component, } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { StyledTabs } from "../../../../Components/UI/Antd";
-import Organization from "../../Organization";
 import {getOrganizationList} from "../../../Auth/AuthAction"
 
 const TabPane = StyledTabs.TabPane;

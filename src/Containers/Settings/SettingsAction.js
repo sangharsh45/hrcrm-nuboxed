@@ -1,7 +1,6 @@
 import * as types from "./SettingsActionTypes";
 import { base_url, base_url2 } from "../../Config/Auth";
 import axios from "axios";
-import { ActionIcon } from "../../Components/Utils";
 import { UPDATE_RECRUITMENT_ADVANCE_SUCCESS } from "../Auth/AuthTypes";
 import { message } from "antd";
 
@@ -3986,6 +3985,122 @@ export const getNotificationConfig = (name,type) => (dispatch) => {
       console.log(err);
       dispatch({
         type: types.GET_NOTIFICATION_CONFIG_FAILURE,
+        payload: err,
+      });
+    });
+};
+
+export const addProcessForOnboarding = (data, orgId, cb) => (
+  dispatch
+) => {
+  dispatch({
+    type: types.ADD_PROCESS_FOR_ONBOARDING_REQUEST,
+  });
+
+  axios
+    .post(`${base_url}/unboardingWorkflow`, data, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      dispatch(getProcessForOnboarding(orgId));
+      dispatch({
+        type: types.ADD_PROCESS_FOR_ONBOARDING_SUCCESS,
+        payload: res.data,
+      });
+      cb && cb("success");
+    })
+    .catch((err) => {
+      dispatch({
+        type: types.ADD_PROCESS_FOR_ONBOARDING_FAILURE,
+        payload: err,
+      });
+      cb && cb("failure");
+    });
+};
+
+export const getProcessForOnboarding = (orgId) => (dispatch) => {
+  debugger;
+  dispatch({
+    type: types.GET_PROCESS_FOR_ONBOARDING_REQUEST,
+  });
+  axios
+    .get(`${base_url}/unboardingWorkflow/${orgId}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log("print when new process added................", res);
+      dispatch({
+        type: types.GET_PROCESS_FOR_ONBOARDING_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.GET_PROCESS_FOR_ONBOARDING_FAILURE,
+        payload: err,
+      });
+    });
+};
+
+
+export const updateProcessNameForOnboarding = (process, unboardingWorkflowDetailsId, cb) => (dispatch) => {
+  debugger;
+  dispatch({ type: types.UPDATE_PROCESS_NAME_FOR_ONBOARDING_REQUEST });
+
+  axios
+    .put(`${base_url}/unboardingWorkflow/${unboardingWorkflowDetailsId}`, process, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.UPDATE_PROCESS_NAME_FOR_ONBOARDING_SUCCESS,
+        payload: res.data,
+      });
+      cb && cb("Success", res.data);
+
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.UPDATE_PROCESS_NAME_FOR_ONBOARDING_FAILURE,
+      });
+      cb && cb("Failure");
+    });
+};
+
+export const deleteOnboardingProcessData = (unboardingWorkflowDetailsId, orgId) => (dispatch, getState) => {
+  const { userId } = getState("auth").auth.userDetails;
+  // console.log("inside deleteCall", callId);
+  dispatch({
+    type: types.DELETE_ONBOARDING_PROCESS_DATA_REQUEST,
+  });
+  axios
+    .delete(`${base_url}/unboardingWorkflow/${unboardingWorkflowDetailsId}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      //  dispatch(getScheduler(orgId));
+      dispatch({
+        type: types.DELETE_ONBOARDING_PROCESS_DATA_SUCCESS,
+        payload: unboardingWorkflowDetailsId,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.DELETE_ONBOARDING_PROCESS_DATA_FAILURE,
         payload: err,
       });
     });

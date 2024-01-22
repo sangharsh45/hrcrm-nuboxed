@@ -11,6 +11,7 @@ import { FlexContainer, OnlyWrapCard } from '../../../Components/UI/Layout'
 import { CurrencySymbol } from "../../../Components/Common";
 import APIFailed from "../../../Helpers/ErrorBoundary/APIFailed";
 import { base_url } from "../../../Config/Auth";
+import BorderColorIcon from "@mui/icons-material/BorderColor";
 import { DeleteOutlined, DownloadOutlined, EditOutlined, UploadOutlined } from "@ant-design/icons";
 import QuestionMarkIcon from '@mui/icons-material/QuestionMark';
 import EditUpload from "../../../Components/Forms/Edit/EditUpload";
@@ -102,7 +103,7 @@ function ExpenseDrawerCard(props) {
         <div className="md:w-[5.8rem]">Cost Code</div>
         <div className="md:w-[8.5rem]">Particulars</div>
         <div className="md:w-[3.8rem]">Amount</div> 
-        <div className="md:w-[5.2rem]">Curency</div>
+      
         <div className="w-12"></div>
 
       </div>
@@ -252,7 +253,7 @@ style={{width:"3rem",height:"3rem"}}
                                                                
           
                                 <h4 class=" text-xs text-cardBody font-poppins">
-                                    {item.amount}
+                                    {item.amount}   {item.currency}
                                 </h4>
           )}
                             </div> 
@@ -269,13 +270,9 @@ value={item.currency}
 // onChange={(e) => handleInputChange(index, 'amount', e.target.value)}
 style={{ border: "1px solid grey" }}
 />
-) : (
-                               
 
-<h4 class=" text-xs text-cardBody font-poppins">
-   {item.currency}
-</h4>
-)}
+                               
+):null}
 </div> 
 
                               <div class="flex flex-row items-center w-[10%]">
@@ -314,7 +311,11 @@ style={{ border: "1px solid grey" }}
         }} 
                       /> */}
                                 <button onClick={() => toggleEdit(index)}>
-          {editStates[index] ? 'Cancel' : 'Edit'}
+          {editStates[index] ? 'Cancel' : <BorderColorIcon   style={{
+                              color: "grey",
+                              cursor: "pointer",
+                              fontSize: "1rem",
+                            }}/>}
         </button>
         {editStates[index] && (
           <button onClick={() => handleSave(index)} className="ml-[0.25rem]">Save</button>

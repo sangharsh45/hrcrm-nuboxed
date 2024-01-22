@@ -4,8 +4,12 @@ import { bindActionCreators } from "redux";
 import { BundleLoader } from "../../Components/Placeholder";
 import { MainWrapper } from "../../Components/UI/Layout";
 import { getOrganizationDetails,setOrganizationViewType ,handleOrganizationModal} from "../Auth/AuthAction";
-import AddOrganizationModal from "./Child/OrganizationHeader/AddOrganizationModal";
-import OrganizationHeader from "./OrganizationHeader";
+const AddOrganizationModal = lazy(() =>
+  import("./Child/OrganizationHeader/AddOrganizationModal")
+);
+const OrganizationHeader = lazy(() =>
+  import("./OrganizationHeader")
+);
 
 const OrganizationDetailLeft = lazy(() =>
   import("./Child/OrganizationDetailLeft")
