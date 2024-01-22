@@ -13,6 +13,7 @@ import {
 } from "../AccountAction";
 import { Tooltip, Badge } from "antd";
 import AddIcon from '@mui/icons-material/Add';
+import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 
 const AccountOrderTable = lazy(() => import("./AccountOrderTab/AccountOrderTable"));
 const AddAccountModal = lazy(() => import("./AccountOrderTab/AddAccountModal"));
@@ -62,13 +63,13 @@ function AccountDetailsTab(props) {
                                 {activeKey === "1" && (
                                     <>
                                         <Tooltip title="Add Order">
-                                            <AddIcon
+                                            <AddShoppingCartIcon
                                                 type="plus"
                                                 tooltipTitle="Create"
                                                 onClick={() => {
                                                     props.handleLinkDistributorOrderConfigureModal(true);
                                                 }}
-                                                size="14px"
+                                                size="1rem"
                                                 style={{
                                                     verticalAlign: "center",
                                                     marginLeft: "5px",

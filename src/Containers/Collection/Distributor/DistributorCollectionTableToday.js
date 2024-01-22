@@ -189,7 +189,7 @@ function DistributorColletcionArchive(props) {
 
                       
                         <h4 class=" text-xs text-cardBody font-poppins">
-                          {item.paymentAmount}
+                          {item.paymentAmount} &nbsp; {item.orderCurrencyName}
                         </h4>
 
                       </div>

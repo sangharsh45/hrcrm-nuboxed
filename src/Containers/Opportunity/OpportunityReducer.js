@@ -1,7 +1,7 @@
 import * as types from "./OpportunityActionTypes";
 import dayjs from "dayjs";
 const initialState = {
-  viewType: "stage",
+  viewType: "table",
 
   addOpportunityModal: false,
   addRecruiterModal:false,

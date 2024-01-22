@@ -136,18 +136,8 @@ const AccountOrderTable = (props) => {
                         {props.distributorOrder.map((item) => {
                             const currentdate = moment().format("DD/MM/YYYY");
                             const date = moment(item.creationDate).format("DD/MM/YYYY");
-                            const diff = Math.abs(
-                                moment().diff(moment(item.lastRequirementOn), "days")
-                            );
-                            const dataLoc = ` Address : ${item.address && item.address.length && item.address[0].address1
-                                } 
-           Street : ${item.address && item.address.length && item.address[0].street
-                                }   
-          State : ${item.address && item.address.length && item.address[0].state}
-         Country : ${(item.address && item.address.length && item.address[0].country) || ""
-                                } 
-           PostalCode : ${item.address && item.address.length && item.address[0].postalCode
-                                } `;
+                        
+                          
                             return (
                                 <div >
                                     <div className="flex rounded-xl  mt-2 bg-white h-[2.75rem] items-center p-3">
@@ -171,7 +161,7 @@ const AccountOrderTable = (props) => {
                                                 </Tooltip>
                                             </div>
 
-                                            <div className=" flex font-medium flex-col  md:w-[7.4rem] max-sm:flex-row w-full max-sm:justify-between">
+                                            <div className="ml-1 flex font-medium flex-col  md:w-[7.4rem] max-sm:flex-row w-full max-sm:justify-between">
                                                 <h4 class=" text-xs text-cardBody font-poppins">
                                                     <span
                                                         class="underline cursor-pointer text-[#1890ff]"
@@ -307,65 +297,6 @@ const AccountOrderTable = (props) => {
                                             </h4>
 
                                         </div>
-                                        <div className=" flex font-medium flex-col  md:w-[1rem] max-sm:flex-row w-full max-sm:justify-between  ">
-                                            <h4 class=" text-xs text-cardBody font-poppins">
-                                                <Tooltip title={<FormattedMessage
-                                                    id="app.notes"
-                                                    defaultMessage="Notes"
-                                                />}>
-                                                    <NoteAltIcon
-                                                        class="cursor-pointer"
-                                                        style={{ color: "green", fontSize: "1rem" }}
-                                                        onClick={() => {
-
-                                                            props.handleNotesModalInOrder(true);
-                                                            handleSetParticularOrderData(item);
-                                                        }}
-                                                    />
-
-                                                </Tooltip>
-                                            </h4>
-
-                                        </div>
-
-
-                                        <div className=" flex font-medium flex-col  md:w-[1rem] max-sm:flex-row w-full max-sm:justify-between  ">
-                                            <h4 class=" text-xs text-cardBody font-poppins">
-                                                <Tooltip title={<FormattedMessage
-                                                    id="app.status"
-                                                    defaultMessage="Status"
-                                                />}>
-                                                    <EventRepeatIcon
-                                                        class="cursor-pointer"
-                                                        style={{ fontSize: "1rem" }}
-                                                        onClick={() => {
-                                                            props.handleStatusOfOrder(true);
-                                                            handleSetParticularOrderData(item);
-                                                        }}
-                                                    />
-                                                </Tooltip>
-                                            </h4>
-
-                                        </div>
-                                        <div className=" flex font-medium flex-col  md:w-[1rem] max-sm:flex-row w-full max-sm:justify-between  ">
-                                            <h4 class=" text-xs text-cardBody font-poppins">
-                                                <Tooltip title="Collection">
-                                                    <PaidIcon
-                                                        class="cursor-pointer"
-                                                        style={{ fontSize: "1rem" }}
-                                                        onClick={() => {
-                                                            props.handlePaidModal(true);
-                                                            handleSetParticularOrderData(item);
-                                                        }}
-
-                                                    />
-                                                </Tooltip>
-
-                                            </h4>
-
-                                        </div>
-
-
                                         <div className=" flex font-medium flex-col  md:w-[6.7rem] max-sm:flex-row w-full max-sm:justify-between  ">
                                             {props.inspectionRequiredInd ?
                                                 <h4 class=" text-xs text-cardBody font-poppins">
@@ -399,7 +330,7 @@ const AccountOrderTable = (props) => {
                                                             defaultMessage="Add Inventory Location"
                                                         />}>
                                                             <Button
-                                                                style={{ cursor: "pointer", fontSize: "13px", backgroundColor: "#3096e9", color: "white" }}
+                                                            className="cursor-pointer text-[13px] bg-[#3096e9] text-white"
                                                                 onClick={() => {
                                                                     handleSetParticularOrderData(item);
                                                                     props.handleInventoryLocationInOrder(true);
@@ -419,9 +350,60 @@ const AccountOrderTable = (props) => {
 
 
                                         </div>
-                                        <div className=" flex font-medium flex-col  md:w-[1rem] max-sm:flex-row w-full max-sm:justify-between  ">
-                                            <h4 class=" text-xs text-cardBody font-poppins">
-                                                <Tooltip title={<FormattedMessage
+                                        <div class="flex flex-col w-[3%] max-sm:flex-row max-sm:w-[10%]">
+                   <div>
+                   <Tooltip title={<FormattedMessage
+                                                    id="app.notes"
+                                                    defaultMessage="Notes"
+                                                />}>
+                                                    <NoteAltIcon
+                                                        class="cursor-pointer"
+                                                        style={{ color: "green", fontSize: "1rem" }}
+                                                        onClick={() => {
+
+                                                            props.handleNotesModalInOrder(true);
+                                                            handleSetParticularOrderData(item);
+                                                        }}
+                                                    />
+
+                                                </Tooltip>
+                   </div>
+                   
+                   <div>
+                   <Tooltip title={<FormattedMessage
+                                                    id="app.status"
+                                                    defaultMessage="Status"
+                                                />}>
+                                                    <EventRepeatIcon
+                                                        class="cursor-pointer"
+                                                        style={{ fontSize: "1rem" }}
+                                                        onClick={() => {
+                                                            props.handleStatusOfOrder(true);
+                                                            handleSetParticularOrderData(item);
+                                                        }}
+                                                    />
+                                                </Tooltip>
+                        </div>
+                        
+            </div>
+            <div class="flex flex-col w-[3%] max-sm:flex-row max-sm:w-[10%]">
+
+                        <div>
+                        <Tooltip title="Collection">
+                                                    <PaidIcon
+                                                        class="cursor-pointer"
+                                                        style={{ fontSize: "1rem" }}
+                                                        onClick={() => {
+                                                            props.handlePaidModal(true);
+                                                            handleSetParticularOrderData(item);
+                                                        }}
+
+                                                    />
+                                                </Tooltip>
+
+                        </div>
+                        <div>
+                   <Tooltip title={<FormattedMessage
                                                     id="app.updateorder"
                                                     defaultMessage="Update Order"
                                                 />}>
@@ -433,13 +415,11 @@ const AccountOrderTable = (props) => {
                                                         }}
                                                         style={{ cursor: "pointer", fontSize: "1rem", }} />
                                                 </Tooltip>
-
-                                            </h4>
-
-                                        </div>
-                                        <div className=" flex font-medium flex-col  md:w-[1rem] max-sm:flex-row w-full max-sm:justify-between">
-                                            <h4 class=" text-xs text-cardBody font-poppins">
-                                                <Tooltip title={<FormattedMessage
+                   </div>
+            </div>
+            <div class="flex flex-col w-[3%] max-sm:flex-row max-sm:w-[10%]">
+                   <div>
+                   <Tooltip title={<FormattedMessage
                                                     id="app.rating"
                                                     defaultMessage="Rating"
                                                 />}>
@@ -447,12 +427,9 @@ const AccountOrderTable = (props) => {
                                                         style={{ cursor: "pointer", fontSize: "1rem", }} />
                                                 </Tooltip>
 
-                                            </h4>
-
-                                        </div>
-                                        <div className=" flex font-medium flex-col  md:w-[1rem] max-sm:flex-row w-full max-sm:justify-between  ">
-                                            <h4 class=" text-xs text-cardBody font-poppins">
-                                                <Tooltip title={<FormattedMessage
+                        </div>
+                        <div>
+                        <Tooltip title={<FormattedMessage
                                                     id="app.feedback"
                                                     defaultMessage="Feedback"
                                                 />}>
@@ -460,11 +437,9 @@ const AccountOrderTable = (props) => {
                                                         style={{ cursor: "pointer", fontSize: "1rem", }} />
                                                 </Tooltip>
 
-                                            </h4>
-
-                                        </div>
-
-
+                        </div>
+            </div>            
+                              
 
                                     </div>
                                 </div>

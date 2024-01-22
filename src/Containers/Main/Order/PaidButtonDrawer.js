@@ -1,8 +1,8 @@
 import React, { lazy, Suspense, Component } from "react";
 import { BundleLoader } from "../../../Components/Placeholder";
-import { StyledDrawer, StyledModal } from "../../../Components/UI/Antd";
+import { StyledDrawer } from "../../../Components/UI/Antd";
 import DistributorPaidForm from "../Account/AccountDetailsTab/AccountOrderTab/DistributorPaidForm";
-import OrderPaymentTable from "../Account/AccountDetailsTab/AccountOrderTab/OrderPaymentTable";
+const OrderPaymentTable =lazy(()=>import("../Account/AccountDetailsTab/AccountOrderTab/OrderPaymentTable"));
 
 class PaidButtonDrawer extends Component {
     render() {
@@ -19,8 +19,6 @@ class PaidButtonDrawer extends Component {
                     visible={addPaidButtonModal}
                     destroyOnClose
                     maskClosable={false}
-                    maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}
-                    style={{marginTop:"3rem"}}
                     onClose={() => handlePaidModal(false)}
                     footer={null}
                 >

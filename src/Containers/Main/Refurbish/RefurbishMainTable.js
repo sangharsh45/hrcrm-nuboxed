@@ -474,13 +474,12 @@
 // );
 
 
-import React, { Component, Suspense, lazy, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { StyledTable } from "../../../Components/UI/Antd";
-import { MultiAvatar, Spacer } from "../../../Components/UI/Elements";
+import { MultiAvatar } from "../../../Components/UI/Elements";
 import NoteAltIcon from '@mui/icons-material/NoteAlt';
-import { Input, Tooltip, Space, Button, Badge, Form, Typography, Popconfirm, DatePicker } from "antd";
+import { Input, Tooltip, Button,  Form, } from "antd";
 import {
     getProductionOrderId,
     handleProductionNotesModal,
@@ -505,41 +504,6 @@ import ShowProductBuilderModal from "./ShowProductBuilderModal";
 import { FormattedMessage } from "react-intl";
 import ExtensionIcon from '@mui/icons-material/Extension';
 
-const EditableCell = ({
-    editing,
-    dataIndex,
-    title,
-    inputType,
-    record,
-    index,
-    children,
-    ...restProps
-}) => {
-    const inputNode = <Input />;
-    return (
-        <td {...restProps}>
-            {editing ? (
-                <Form.Item
-                    name={dataIndex}
-                    style={{
-                        margin: 0,
-                    }}
-                    rules={[
-                        {
-                            required: true,
-                            message: `Please Input ${title}!`,
-                        },
-                    ]}
-                >
-                    {inputNode}
-                </Form.Item>
-            ) : (
-                children
-            )}
-        </td>
-    );
-};
-
 const ProductionOrderList = (props) => {
 
     useEffect(() => {
@@ -550,62 +514,15 @@ const ProductionOrderList = (props) => {
     const handleRowData = (item) => {
         setRowData(item)
     }
-
-    const [form] = Form.useForm();
     const [data, setData] = useState([]);
-    const [editingKey, setEditingKey] = useState('');
+
 
     useEffect(() => {
         setData(props.productionOrder)
     }, [props.productionOrder])
 
-    const isEditing = (record) => record.orderPhoneId === editingKey;
-
-    const edit = (record) => {
-        form.setFieldsValue({
-            suggestedPrice: "",
-            ...record,
-        });
-        setEditingKey(record.orderPhoneId);
-    };
-
-    const cancel = () => {
-        setEditingKey('');
-    };
-
-    const save = async (key) => {
-        try {
-            const row = await form.validateFields();
-            const newData = [...data];
-            const index = newData.findIndex((item) => key === item.orderPhoneId);
-            if (index > -1) {
-                // alert("if");
-                const item = newData[index];
-                console.log(item)
-                newData.splice(index, 1, { ...item, ...row });
-                const a = newData[index];
-                console.log(props.quotationId);
-                props.updateFinalPrice(
-                    {
-                        suggestedPrice: a.suggestedPrice,
-                        orderPhoneId: a.orderPhoneId,
-                        expectedPrice: 0
-                    },
-                    a.orderPhoneId,
-                    props.locationId
-                );
-                setEditingKey('');
-            } else {
-                alert("else");
-                newData.push(row);
-                // setData(newData);
-                setEditingKey('');
-            }
-        } catch (errInfo) {
-            console.log('Validate Failed:', errInfo);
-        }
-    };
-
+    
+   
     return (
         <>
             <div className=' flex justify-end sticky top-28 z-auto'>

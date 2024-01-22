@@ -13,8 +13,6 @@ const AllSpareListByOrder = (props) => {
                 visible={approveSpareModal}
                 closable
                 destroyOnClose
-                maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}
-                style={{ marginTop:"3rem" }}
                 onClose={() => handleAllSpareList(false)}
                 footer={null}
             >

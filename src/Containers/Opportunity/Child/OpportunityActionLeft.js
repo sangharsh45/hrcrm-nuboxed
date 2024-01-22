@@ -59,33 +59,6 @@ const OpportunityActionLeft = (props) => {
   return (
     <div class=" flex items-center">
   
-<Tooltip
-          title={
-            <FormattedMessage id="app.stageview" defaultMessage="Stage View" />
-          }
-        >
-             <Badge
-        size="small"
-        count={(viewType === "stage" && recordData.opportunityDetails) || 0}
-        overflowCount={999}
-      >
-          {/*<TableOutlined*/}
-          <span
-            style={{
-              fontSize: "1.56em",
-              marginRight: "0.3rem",
-              cursor:"pointer",
-              color: props.viewType === "stage" && "#1890ff",
-            }}
-            // iconType="table"
-            // tooltipTitle="Stage View"
-            onClick={() => props.setOpportunityViewType("stage")}
-          >
-           <TableOutlined/>
-          </span>
-          </Badge>
-        </Tooltip>
-      
       <Badge
         size="small"
         count={(viewType === "table" && recordData.opportunityDetails) || 0}
@@ -111,6 +84,32 @@ const OpportunityActionLeft = (props) => {
           </span>
         </Tooltip>
       </Badge>
+      <Tooltip
+          title={
+            <FormattedMessage id="app.stageview" defaultMessage="Stage View" />
+          }
+        >
+             <Badge
+        size="small"
+        count={(viewType === "stage" && recordData.opportunityDetails) || 0}
+        overflowCount={999}
+      >
+          {/*<TableOutlined*/}
+          <span
+            style={{
+              fontSize: "1.56em",
+              marginRight: "0.3rem",
+              cursor:"pointer",
+              color: props.viewType === "stage" && "#1890ff",
+            }}
+            // iconType="table"
+            // tooltipTitle="Stage View"
+            onClick={() => props.setOpportunityViewType("stage")}
+          >
+           <TableOutlined/>
+          </span>
+          </Badge>
+        </Tooltip>
       <Tooltip title={"Won"}>
       <Badge
           size="small"

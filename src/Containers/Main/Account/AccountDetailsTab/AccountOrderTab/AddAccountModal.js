@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { StyledDrawer } from "../../../../../Components/UI/Antd";
-import { StyledTabs } from "../../../../../Components/UI/Antd";
 import AccountStepper from "./AccountStepper";
 
 class AddAccountModal extends Component {

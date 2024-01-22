@@ -32,11 +32,6 @@ const TagInList = (props) => {
     }
     const handleClick = () => {
         props.addTagInProcess({
-            // productManufacturingId: props.row.productManufacturingId,
-            // productId: props.row.productId,
-            // orderId: props.row.orderId,
-            // suppliesId: partName,
-            // cartNo: data?data:partNo,
             productRepurbishId:props.RowData.productRepurbishId,
 productId:props.RowData.productId,
 suppliesId: partName,
@@ -52,7 +47,6 @@ cartNo: data?data:partNo,
           if (result && result.text) {
             setData(result.text);
           } else if (result instanceof MediaStream) {
-            // Do something with the MediaStream object if needed
           }
     
           if (error) {
@@ -85,18 +79,11 @@ cartNo: data?data:partNo,
         setShouldRenderCamera(false);
         setModalVisible(false);
       };
-      console.log("Datex",data)
     return (
         <>
-            <div style={{ margin: "10px 0", display: "flex", justifyContent: "space-between" }}>
-                <div style={{
-                    width: "40%",
-                }}>
-                    <label style={{
-                        fontSize: "15px",
-                        fontWeight: "600",
-                        margin: "10px",
-                    }}>Part</label>
+            <div class="m-[10px] flex justify-between">
+                <div class="w-[40%]">
+                    <label className="text-xs font-semibold m-[10px]">Part</label>
                     <Select
 
                         value={partName}
@@ -107,7 +94,7 @@ cartNo: data?data:partNo,
                         })}
                     </Select>
                 </div>
-                <div style={{marginTop:"21px",marginLeft:"12px"}}>
+                <div class="mt-[21px] ml-[12px]">
                 <QRCodeList
                 handleScan={handleScan}
                 stopScanning={stopScanning}
@@ -119,25 +106,15 @@ cartNo: data?data:partNo,
                 shouldRenderCamera={shouldRenderCamera}
                 />
                 </div>
-                <div style={{
-                    width: "35%",
-                    marginLeft:"10px"
-                }}>
-                    <label style={{
-                        fontSize: "15px",
-                        fontWeight: "600",
-                        margin: "10px",
-                    }}>Part No</label>
+                <div class="w-[35%] ml-[10px]">
+                    <label className="text-xs font-semibold m-[10px]">
+                        Part No </label>
                     <Input 
                     value={data?data:partNo}
-                        // width={250}
+
                         type='text' onChange={(value) => handlePartNo(value)} />
                 </div>
-                <div style={{
-                    width: "20%",
-                    display: "flex",
-                    alignItems: "center"
-                }}>
+                <div class = "w-[20%] flex items-center">
                     <Button type='primary' onClick={handleClick}>Add</Button>
                 </div>
             </div>
