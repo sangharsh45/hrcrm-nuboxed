@@ -1,21 +1,18 @@
-import React, { useState, Suspense, lazy, Component } from "react";
-import {
-  setCollectionViewType,
+import React, { useState, Suspense, lazy } from "react";
+import {setCollectionViewType,
   getTodayDistributor,
   setCustomerSubViewType,
-  setDistributorViewType,
-} from "../CollectionAction";
+  setDistributorViewType} from "../CollectionAction";
 import GroupsIcon from '@mui/icons-material/Groups';
-import moment from "moment";
 import { getAllDistributorsList } from "../CollectionAction";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { StyledTabs } from "../../../Components/UI/Antd";
 import { TabsWrapper } from "../../../Components/UI/Layout";
+import { FormattedMessage } from "react-intl";
 const DistributorCollectionTableToday =lazy(()=>import("../Distributor/DistributorCollectionTableToday"));
 const DistributorColletcionArchive =lazy(()=>import("../Distributor/DistributorColletcionArchive"));
 const DistributorCollectionTableAll =lazy(()=>import("../Distributor/DistributorCollectionTableAll"));
-
 
 
 const TabPane = StyledTabs.TabPane;
@@ -40,10 +37,7 @@ function CollectionDistributorTab(props) {
   function handleClearCheck() {
     setSelectedTodayRowDistributor([]);
   }
-  const resultForDis = selectedRowDistributor.reduce((acc, item) => {
-    acc = acc + item.paymentAmount;
-    return acc;
-  }, 0);
+
 
   const rowSelectionTodayForDistributor = {
     onChange: (selectedTodayRowKeys, selectedTodayRow) => {
@@ -56,42 +50,19 @@ function CollectionDistributorTab(props) {
     },
   };
 
-  const resultForToday = selectedTodayRowDistributor.reduce((acc, item) => {
-    acc = acc + item.paymentAmount;
-    return acc;
-  }, 0);
 
   return (
     <>
       <TabsWrapper>
-        {activeKey === "3" && (
-          <div
-            style={{
-              fontWeight: "bold",
-              display: "flex",
-              justifyContent: "center",
-            }}
-          >
-            Balance as of {moment().format("ll")} : ₹{resultForDis.toFixed(2)}
-          </div>
-        )}
-        {activeKey === "1" && (
-          <div
-            style={{
-              fontWeight: "bold",
-              display: "flex",
-              justifyContent: "center",
-            }}
-          >
-            Receivables: ₹ {resultForToday.toFixed(2)}
-          </div>
-        )}
         <StyledTabs defaultActiveKey={activeKey} onChange={handleTabChange}>
           <TabPane
             tab={
               <>
                 <span>
-                  <i class="fas fa-hand-holding-usd"></i>&nbsp; Receivables
+                  <i class="fas fa-hand-holding-usd"></i>&nbsp; <FormattedMessage
+                              id="app.receivable"
+                              defaultMessage="Receivables"
+                            />
                 </span>
                 &nbsp;
                 {activeKey === "1" && <></>}
@@ -116,10 +87,12 @@ function CollectionDistributorTab(props) {
             tab={
               <>
                 <span>
-                  <i class="fas fa-archive"></i>&nbsp; Archive
+                  <i class="fas fa-archive"></i>&nbsp;<FormattedMessage
+                              id="app.archive"
+                              defaultMessage="Archive"
+                            /> 
                 </span>
                 &nbsp;
-                {activeKey === "2" && <></>}
               </>
             }
             key="2"
@@ -137,19 +110,21 @@ function CollectionDistributorTab(props) {
             tab={
               <>
                 <span>
-                <GroupsIcon />All
+                <GroupsIcon />
+                &nbsp;
+                <FormattedMessage
+                              id="app.all"
+                              defaultMessage="All"
+                  /> 
                 </span>
                 &nbsp;
-                {activeKey === "3" && <></>}
               </>
             }
             key="3"
           >
             <Suspense fallback={"Loading ..."}>
               {" "}
-              <DistributorCollectionTableAll
-    
-              />
+              <DistributorCollectionTableAll/>
             </Suspense>
           </TabPane>
 

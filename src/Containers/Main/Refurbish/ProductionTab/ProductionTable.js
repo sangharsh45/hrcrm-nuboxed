@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import { StyledTable } from '../../../../Components/UI/Antd'
 import { getCatalogueByTechnician } from "../RefurbishAction"
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'

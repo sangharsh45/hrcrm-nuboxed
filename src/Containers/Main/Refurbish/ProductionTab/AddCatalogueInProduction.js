@@ -88,8 +88,8 @@ const AddCatalogueInProduction = (props) => {
                 }) => (
                     <Form>
                         <MainWrapper>
-                            <div style={{ display: "flex", justifyContent: "space-between" }}>
-                                <div style={{ width: "33%" }}>
+                            <div class="flex justify-between">
+                                <div class="w-[33%]">
                                     <Field
                                         name="productId"
                                         label="Items"
@@ -103,12 +103,10 @@ const AddCatalogueInProduction = (props) => {
                                             handleProductList(e, setFieldValue);
                                         }}
                                         options={Array.isArray(catalogueOption) ? catalogueOption : []}
-                                        style={{
-                                            borderRight: "0.18em solid red",
-                                        }}
+                                        
                                     />
                                 </div>
-                                <div style={{ width: "30%" }}>
+                                <div class="w-[30%]">
                                     <Field
                                         name="categoryName"
                                         label="Category"
@@ -119,7 +117,7 @@ const AddCatalogueInProduction = (props) => {
                                         component={InputComponent}
                                     />
                                 </div>
-                                <div style={{ width: "30%" }}>
+                                <div class="w-[30%]">
                                     <Field
                                         name="subCategoryName"
                                         label="Sub Category"
@@ -131,8 +129,8 @@ const AddCatalogueInProduction = (props) => {
                                     />
                                 </div>
                             </div>
-                            <div style={{ display: "flex", justifyContent: "space-between" }}>
-                                <div style={{ width: "27%" }}>
+                            <div class="flex justify-between">
+                                <div class="w-[27%]">
                                     <Field
                                         name="attributeName"
                                         label="Attribute"
@@ -143,7 +141,7 @@ const AddCatalogueInProduction = (props) => {
                                         component={InputComponent}
                                     />
                                 </div>
-                                <div style={{ width: "27%" }}>
+                                <div class="w-[27%]">
                                     <Field
                                         name="subAttributeName"
                                         label="Sub Attribute"
@@ -154,7 +152,7 @@ const AddCatalogueInProduction = (props) => {
                                         component={InputComponent}
                                     />
                                 </div>
-                                <div style={{ width: "27%" }}>
+                                <div class="w-[27%]">
                                     <Field
                                         name="unit"
                                         label="Unit"
@@ -165,11 +163,10 @@ const AddCatalogueInProduction = (props) => {
                                         component={InputComponent}
                                     />
                                 </div>
-                                <div style={{ width: "10%", marginTop: "15px" }}>
+                                <div class="w-[10%] mt-4">
                                     <Button
                                         type="primary"
                                         htmlType="submit"
-                                    // loading={props.addingPaidByDistributorId}
                                     >
                                         Submit
                                     </Button>

@@ -11,7 +11,7 @@ import {
   inputDistributorAllDataSearch,
   inputDistributorReceivableDataSearch,
 } from "../CollectionAction";
-
+import { FormattedMessage } from "react-intl";
 
 const CollectionActionLeft = (props) => {
   const dummy = ["cloud", "azure", "fgfdg"];
@@ -59,7 +59,7 @@ const CollectionActionLeft = (props) => {
             marginRight: "0.5rem",
             color: props.viewType === "distributor" && "#1890ff",
           }}
-        ><TocIcon/>&nbsp; Distributor
+        ><TocIcon/>&nbsp; <FormattedMessage id="app.distributor" defaultMessage="Distributor"/>
         </span>
       </Tooltip>
       {/* <Tooltip
