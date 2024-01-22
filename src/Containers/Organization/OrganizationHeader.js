@@ -1,7 +1,12 @@
 import React, { Component,lazy} from "react";
 import { ActionHeader } from "../../Components/Utils";
-import OrganizationActionRight from "./Child/OrganizationHeader/OrganizationActionRight";
-import OrganizationActionLeft from "./OrganizationActionLeft";
+const OrganizationActionRight = lazy(() =>
+  import("./Child/OrganizationHeader/OrganizationActionRight")
+);
+const OrganizationActionLeft = lazy(() =>
+  import("./OrganizationActionLeft")
+);
+
 class OrganizationHeader extends Component {
   render() {
     const {

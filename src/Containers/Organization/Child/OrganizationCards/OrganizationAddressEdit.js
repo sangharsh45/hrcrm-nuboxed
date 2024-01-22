@@ -4,7 +4,6 @@ import { bindActionCreators } from "redux";
 import { FormattedMessage } from "react-intl";
 import { Button } from "antd";
 import { editOrganizationDetails } from "../../../Auth/AuthAction";
-import { Spacer } from "../../../../Components/UI/Elements";
 import EditableInput from "../../../../Components/Forms/Edit/EditableInput";
 class OrganizationAddressEdit extends Component {
   constructor(props) {
@@ -75,7 +74,7 @@ class OrganizationAddressEdit extends Component {
             // disabled={"disabled"}
             width="100%"
           />
-          <Spacer style={{ margin: "2px" }} />
+    <div class=" m-[2px]">
           <EditableInput
           defaultValue={addressdata1}
             handleChange={this.handleChange}
@@ -84,7 +83,8 @@ class OrganizationAddressEdit extends Component {
             // disabled={"disabled"}
             width="100%"
           />
-           <Spacer style={{ margin: "2px" }} />
+          </div>
+          <div class=" m-[2px]">
            <EditableInput
           defaultValue={addressdata2}
             handleChange={this.handleChange}
@@ -93,7 +93,8 @@ class OrganizationAddressEdit extends Component {
             // disabled={"disabled"}
             width="100%"
           />
-            <Spacer style={{ margin: "2px" }} />
+           </div>
+           <div class=" m-[2px]">
             <EditableInput
           defaultValue={addressdata3}
             handleChange={this.handleChange}
@@ -102,7 +103,8 @@ class OrganizationAddressEdit extends Component {
             // disabled={"disabled"}
             width="100%"
           />
-           <Spacer style={{ margin: "2px" }} />
+            </div>
+            <div class=" m-[2px]">
            <EditableInput
           defaultValue={addressdata4}
             handleChange={this.handleChange}
@@ -111,7 +113,7 @@ class OrganizationAddressEdit extends Component {
             // disabled={"disabled"}
             width="100%"
           />
-        
+            </div>
          
         </div>
 

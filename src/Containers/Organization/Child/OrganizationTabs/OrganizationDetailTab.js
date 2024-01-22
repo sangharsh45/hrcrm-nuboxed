@@ -1,4 +1,4 @@
-import React, { Component,  Suspense } from "react";
+import React, { Component,lazy,  Suspense } from "react";
 import { StyledTabs } from "../../../../Components/UI/Antd";
 import { TabsWrapper } from "../../../../Components/UI/Layout";
 import SignatureView from "./SignatureView";
@@ -7,9 +7,10 @@ import { MailOutlined, PlusOutlined,
 import { handleEmailModal,handleWebsiteModal } from "../../../Settings/SettingsAction";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import AddEmailModal from "../Email/AddEmailModal";
-import AddWebsiteModal from "../Website/AddWebsiteModal";
-import EmailTable from "../Email/EmailTable";
+const AddEmailModal = lazy(() => import('../Email/AddEmailModal'))
+const AddWebsiteModal = lazy(() => import('../Website/AddWebsiteModal'))
+const EmailTable = lazy(() => import('../Email/EmailTable'))
+
 
 
 const TabPane = StyledTabs.TabPane;

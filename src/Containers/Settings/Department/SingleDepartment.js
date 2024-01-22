@@ -292,7 +292,7 @@ const SingleDepartment = (props) => {
                   </div>
 {crmInd === true && (
   <>
-                  <div class=" text-base text-[#1677ff]">CRM</div>
+                  <div class=" text-sm text-[#1677ff]">CRM</div>
                     <div   class=" w-[7%] ml-2">
                     {/* <Popconfirm
                         title="Do you wish to change Status ? "
@@ -314,7 +314,7 @@ const SingleDepartment = (props) => {
 )}
 {mandetoryInd === true && (
   <>
-                    <div class=" text-base text-[#1677ff]">Mandatory</div>
+                    <div class=" text-sm text-[#1677ff] ml-2">Mandatory</div>
                     <div   class=" w-[7%] ml-2">
                     {/* <Popconfirm
                         title="Do you wish to change Status ? "
@@ -336,7 +336,7 @@ const SingleDepartment = (props) => {
 )}
 {erpInd === true && (
   <>
-                    <div class=" text-base text-[#1677ff]">ERP</div>
+                    <div class=" text-sm text-[#1677ff] ml-2">ERP</div>
                     <div   class=" w-[7%] ml-2">
                     {/* <Popconfirm
                         title="Do you wish to change Status ? "
@@ -358,7 +358,7 @@ const SingleDepartment = (props) => {
 )}
 {imInd === true && (
   <>
-                    <div class=" text-base text-[#1677ff]">IM</div>
+                    <div class=" text-sm text-[#1677ff] ml-2">IM</div>
                     <div   class=" w-[7%] ml-2">
                     {/* <Popconfirm
                         title="Do you wish to change Status ? "
@@ -380,7 +380,7 @@ const SingleDepartment = (props) => {
 )}
 {accountInd === true && (
   <>
-                    <div class=" text-base text-[#1677ff]">Account</div>
+                    <div class=" text-sm text-[#1677ff] ml-2">Account</div>
                     <div   class=" w-[7%] ml-2">
                     {/* <Popconfirm
                         title="Do you wish to change Status ? "
@@ -403,7 +403,7 @@ const SingleDepartment = (props) => {
 {recruitOppsInd === true && (
   <>
 
-                    <div class=" text-base text-[#1677ff]">RecruitOpps</div>
+                    <div class=" text-sm text-[#1677ff] ml-2">RecruitOpps</div>
                     <div   class=" w-[7%] ml-2">
                     {/* <Popconfirm
                         title="Do you wish to change Status ? "
@@ -426,7 +426,7 @@ const SingleDepartment = (props) => {
 {hrInd === true && (
   <>
 
-                    <div class=" text-base text-[#1677ff]">HR</div>
+                    <div class=" text-sm text-[#1677ff] ml-2">HR</div>
                     <div   class=" w-[7%] ml-2">
                     {/* <Popconfirm
                         title="Do you wish to change Status ? "
@@ -449,7 +449,7 @@ const SingleDepartment = (props) => {
 {productionInd === true && (
   <>
 
-                    <div class=" text-base text-[#1677ff]">PRODUCTION</div>
+                    <div class=" text-sm text-[#1677ff] ml-2">PRODUCTION</div>
                     <div   class=" w-[7%] ml-2">
                     {/* <Popconfirm
                         title="Do you wish to change Status ? "
@@ -471,7 +471,7 @@ const SingleDepartment = (props) => {
 )}
 {recruitProInd === true && (
   <>
-                    <div class=" text-base text-[#1677ff]">Rcruitpro</div>
+                    <div class=" text-sm text-[#1677ff] ml-2">Rcruitpro</div>
                     <div   class=" w-[7%] ml-2">
                     {/* <Popconfirm
                         title="Do you wish to change Status ? "
@@ -493,7 +493,7 @@ const SingleDepartment = (props) => {
 )}
 {repairInd === true && (
   <>
-                    <div class=" text-base text-[#1677ff]">Repair</div>
+                    <div class=" text-sm text-[#1677ff] ml-2">Repair</div>
                     <div   class=" w-[7%] ml-2">
                     {/* <Popconfirm
                         title="Do you wish to change Status ? "
@@ -515,7 +515,7 @@ const SingleDepartment = (props) => {
 )}
 {inventoryInd === true && (
   <>
-                    <div class=" text-base text-[#1677ff]">Inventory</div>
+                    <div class=" text-sm text-[#1677ff] ml-2">Inventory</div>
                     <div   class=" w-[7%] ml-2">
                     {/* <Popconfirm
                         title="Do you wish to change Status ? "
@@ -537,7 +537,7 @@ const SingleDepartment = (props) => {
 )}
 {orderManagementInd === true && (
   <>
-                    <div class=" text-base text-[#1677ff]">OrderManagement</div>
+                    <div class=" text-sm text-[#1677ff] ml-2">OrderManagement</div>
                     <div   class=" w-[7%] ml-2">
                     {/* <Popconfirm
                         title="Do you wish to change Status ? "
@@ -559,7 +559,7 @@ const SingleDepartment = (props) => {
 )}
 {logisticsInd === true && (
   <>
-                    <div class=" text-base text-[#1677ff]">Logistics</div>
+                    <div class=" text-sm text-[#1677ff] ml-2">Logistics</div>
                     <div   class=" w-[7%] ml-2">
                     {/* <Popconfirm
                         title="Do you wish to change Status ? "
@@ -581,7 +581,7 @@ const SingleDepartment = (props) => {
 )}
 {procurementInd === true && (
   <>
-                    <div class=" text-base text-[#1677ff]">Procurement</div>
+                    <div class=" text-sm text-[#1677ff] ml-2">Procurement</div>
                     <div   class=" w-[7%] ml-2">
                     {/* <Popconfirm
                         title="Do you wish to change Status ? "
@@ -604,7 +604,7 @@ const SingleDepartment = (props) => {
 {eLearningInd === true && (
   <>
 
-                    <div class=" text-base text-[#1677ff]">Elearning</div>
+                    <div class=" text-sm text-[#1677ff] ml-2">Elearning</div>
                     <div   class=" w-[7%] ml-2">
                     {/* <Popconfirm
                         title="Do you wish to change Status ? "

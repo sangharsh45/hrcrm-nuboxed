@@ -1,7 +1,10 @@
-import React, { Component, lazy, Suspense } from "react";
+import React, { Component, lazy, } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import OrganizationHeaderTab from "./Child/OrganizationHeader/OrganizationHeaderTab";
+const OrganizationHeaderTab = lazy(() =>
+  import("./Child/OrganizationHeader/OrganizationHeaderTab")
+);
+
 
 
 class OrganizationActionLeft extends Component {

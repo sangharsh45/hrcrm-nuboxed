@@ -180,7 +180,7 @@ useEffect(()=>{
       value={drop1}
       onChange={handleDrop1}
       disabled={!startInd}
-      style={{border:"0.5px solid lightgray ",height:"1.59rem"}}
+      style={{border:"0.5px solid lightgray ",height:"1.4rem", boxShadow: "0 0.25em 0.62em #aaa"}}
       >
          {/* <option value="">Select</option> */}
         <option value="In Office">In Office</option>
@@ -218,14 +218,17 @@ onChange={handleMandatoryCountry}
     
 {mandatorCountry==="Others"? 
 <div class=" ml-3">
-      <select
-     className="customize-select"
+      <select className="customize-select"
+    
+     
        onChange={handleAllCountry}
       >
-          <option value="">Select other country</option>
+          <option
+         
+           value="">Select other country</option>
         {props.country.map((item)=>{
           return(
-          <option value={item.country_name}>{item.country_name}</option>
+          <option  value={item.country_name}>{item.country_name}</option>
           )
         })}
         
