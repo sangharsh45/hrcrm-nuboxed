@@ -10,7 +10,7 @@ import { setEditEmployee } from "../../EmployeeAction";
 const StepperEmployeeModal = (props) => {
 //   const isSmallScreen = window.innerWidth <= 600;
 //     const drawerWidth = isSmallScreen ? "90%" : "55%";
-  const { onboardingEmployeeModal, handleOnboardingEmployeeModal, ...formProps } = props;
+  const { onboardingEmployeeModal,currentEmployeeId, handleOnboardingEmployeeModal, ...formProps } = props;
   return (
     <>
       <StyledDrawer
@@ -22,7 +22,8 @@ const StepperEmployeeModal = (props) => {
       >
        
           <OnBoardingEmployeeForm 
-             employeeId={props.setEditingEmployee.employeeId}
+          currentEmployeeId={currentEmployeeId}
+            //  employeeId={props.setEditingEmployee.employeeId}
             />
    
       </StyledDrawer>

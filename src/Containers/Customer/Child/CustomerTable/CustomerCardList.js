@@ -460,7 +460,7 @@ const [rowdata, setrowdata] = useState("");
 
                     </div>
                     </div>
-                    <div class="flex flex-col w-[10%] max-sm:flex-row max-sm:w-[10%] ">
+                    <div class="flex flex-col w-6 max-sm:flex-row max-sm:w-[10%] ">
                         <div>
                         <Tooltip title="Pulse">
        <MonitorHeartIcon
@@ -487,7 +487,7 @@ const [rowdata, setrowdata] = useState("");
                     </div>
                     </div>
               
-                    <div class="flex flex-col w-[3%] max-sm:flex-row max-sm:w-[10%]">
+                    <div class="flex flex-col w-6 max-sm:flex-row max-sm:w-[10%]">
                     <div >
                     <Tooltip overlayStyle={{ maxWidth: "300px" }} title={dataLoc}>
 
