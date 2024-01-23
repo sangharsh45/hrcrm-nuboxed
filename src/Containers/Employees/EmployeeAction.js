@@ -1094,3 +1094,31 @@ export const getAssignedToList = (orgId) => (dispatch) => {
       });
     });
 };
+
+export const getProcessDropdownForOnboarding = (orgId) => (dispatch) => {
+  debugger;
+  dispatch({
+    type: types.GET_PROCESS_DROPDOWN_FOR_ONBOARDING_REQUEST,
+  });
+  axios
+    .get(`${base_url}/unboardingWorkflow/for_dropdown/${orgId}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log("print when new process added................", res);
+      dispatch({
+        type: types.GET_PROCESS_DROPDOWN_FOR_ONBOARDING_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.GET_PROCESS_DROPDOWN_FOR_ONBOARDING_FAILURE,
+        payload: err,
+      });
+    });
+};
+
