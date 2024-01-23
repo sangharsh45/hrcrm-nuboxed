@@ -4,9 +4,8 @@ import { bindActionCreators } from "redux";
 import { Button, Switch } from "antd";
 import { Formik, Form, Field, FieldArray } from "formik";
 import PrecisionManufacturingIcon from '@mui/icons-material/PrecisionManufacturing';
-import { Spacer, StyledLabel } from "../../../../Components/UI/Elements";
+import { StyledLabel } from "../../../../Components/UI/Elements";
 import { InputComponent } from "../../../../Components/Forms/Formik/InputComponent";
-import { FlexContainer } from "../../../../Components/UI/Layout";
  import { SelectComponent } from "../../../../Components/Forms/Formik/SelectComponent";
 import AddressFieldArray from "../../../../Components/Forms/Formik/AddressFieldArray";
 import { addLocation, } from "../../../Event/Child/Location/LocationAction";
@@ -255,8 +254,8 @@ class LocationForm extends Component {
                     </div>
                   </FlexContainer> */}
                   <StyledLabel style={{ fontWeight: "bold",marginTop:"0.5rem" }}>Functions</StyledLabel>
-                  <FlexContainer>
-                    <div style={{ width: "47%" }} class="mt-2">
+                  <div class=" flex ">
+                    <div class=" w-[47%] mt-2" >
                       <div class="font-bold text-xs">Refurbish &nbsp;<i class="fas fa-cogs text-base"></i></div>
                       <div>
                         <Switch
@@ -268,7 +267,7 @@ class LocationForm extends Component {
                         />
                       </div>
                     </div>
-                    <div style={{ width: "47%" }} class="mt-2">
+                    <div class=" w-[47%] mt-2" >
                       <div class="font-bold text-xs">Inventory &nbsp;<i class="fas fa-warehouse text-base"></i></div>
                       {/* inventory auto on when production on. if user wants to close inventory then ask what is inventory location */}
                       <div>
@@ -281,9 +280,9 @@ class LocationForm extends Component {
                         />
                       </div>
                     </div>
-                  </FlexContainer>
-                  <FlexContainer>
-                  <div style={{ width: "47%" }} class="mt-2">
+                  </div>
+                  <div class=" flex">
+                  <div class=" w-[47%] mt-2" >
                       <div class="font-bold text-xs">Production &nbsp;<PrecisionManufacturingIcon/></div>
                       <div>
                         <Switch
@@ -295,7 +294,7 @@ class LocationForm extends Component {
                         />
                       </div>
                     </div>
-                    <div style={{ width: "47%" }} class="mt-2">
+                    <div class=" w-[47%] mt-2" >
                       <div class="font-bold text-xs">Corporate &nbsp;<i class="fas fa-building text-base"></i></div>
                       <div>
                         <Switch
@@ -307,9 +306,9 @@ class LocationForm extends Component {
                         />
                       </div>
                     </div>
-                  </FlexContainer>
-                  <FlexContainer>
-                  <div style={{ width: "47%" }} class="mt-2">
+                  </div>
+                  <div class=" flex">
+                  <div class=" w-[47%] mt-2" >
                       <div class="font-bold text-xs">Retail &nbsp;<i class="fas fa-money-check text-base"></i></div>
                       <div>
                         <Switch
@@ -321,7 +320,7 @@ class LocationForm extends Component {
                         />
                       </div>
                     </div>
-                    <div style={{ width: "47%" }} class="mt-2">
+                    <div class=" w-[47%] mt-2" >
                       <div class="font-bold text-xs">Project &nbsp;<i class="fas fa-project-diagram text-base"></i></div>
                       <div>
                         <Switch
@@ -334,9 +333,9 @@ class LocationForm extends Component {
                       </div>
                     </div>
                   
-                  </FlexContainer>
-                  <FlexContainer>
-                  <div style={{ width: "47%" }} class="mt-2">
+                  </div>
+                  <div class=" flex">
+                  <div class=" w-[47%] mt-2" >
                       <div class="font-bold text-xs">Billing &nbsp;<i class="far fa-money-bill-alt text-base"></i></div>
                       <div>
                         <Switch
@@ -362,10 +361,10 @@ class LocationForm extends Component {
                       </div>
                     </div> */}
                   
-                  </FlexContainer>
+                  </div>
                 </div>
                 <div class="h-full w-[45%] max-sm:w-wk mt-2">
-                  <div style={{ width: "100%" }}>
+                  <div class=" w-full" >
                     <StyledLabel>Time Zone</StyledLabel>
                     <Field
                       name="timeZone"
@@ -380,7 +379,7 @@ class LocationForm extends Component {
                       }
                     />
                   </div>
-                  <Spacer style={{ marginTop: "1.25em" }} />
+                <div class=" mt-3">
                   <FieldArray
                     name="address"
                     render={(arrayHelpers) => (
@@ -391,6 +390,7 @@ class LocationForm extends Component {
                       />
                     )}
                   />
+                  </div>
                 </div>
               </div>
               <div class="flex justify-end w-wk bottom-2 mr-2 md:absolute ">

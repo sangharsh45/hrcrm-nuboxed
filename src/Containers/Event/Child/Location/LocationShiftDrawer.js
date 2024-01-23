@@ -1,6 +1,5 @@
 import React, { lazy, Suspense } from "react";
-import { FormattedMessage } from "react-intl";
-import { StyledDrawer, StyledModal } from "../../../../Components/UI/Antd";
+import { StyledDrawer, } from "../../../../Components/UI/Antd";
 import { BundleLoader } from "../../../../Components/Placeholder";
 const LocationShiftDrawerTab=lazy(()=>import("./LocationShiftDrawerTab"));
 
@@ -15,11 +14,6 @@ const LocationShiftDrawer = (props) => {
         title={`${storedLoc.locationName}`}
         width={drawerWidth}
         visible={locShiftDrawer}
-        destroyOnClose
-        closable
-        placement="right"
-        style={{marginTop:"5rem"}}
-        maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}
         onClose={() => handleLocationShiftDrawer(false)}
       >
         <Suspense fallback={<BundleLoader />}>

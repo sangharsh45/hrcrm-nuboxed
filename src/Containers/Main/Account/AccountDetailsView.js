@@ -1,5 +1,5 @@
-import { render } from "enzyme";
-import React, { Component, lazy, Suspense } from "react";
+import {  } from "enzyme";
+import React, { Component, } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Link } from "../../../Components/Common";

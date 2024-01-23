@@ -7,6 +7,7 @@ import { bindActionCreators } from "redux";
 import { MainWrapper } from "../../../../Components/UI/Layout";
 import { Select } from "../../../../Components/UI/Elements";
 import {  Switch } from "antd";
+import moment from "moment";
 const SingleModuleList = lazy(() =>
   import("./SingleModuleList")
 );
@@ -502,9 +503,9 @@ logisticsStatus={logisticsStatus}
             </div>
            
           </MainWrapper>
-         
+          <h4>Updated on {moment(props.moduleList.updationDate).format("ll")} by {props.moduleList.updatedBy}</h4>
         </div>
-        {/* <h4>Updated on {moment(this.props.departments && this.props.departments.length && this.props.departments[0].updationDate).format("ll")} by {this.props.departments && this.props.departments.length && this.props.departments[0].name}</h4> */}
+     
       </>
     );
   }

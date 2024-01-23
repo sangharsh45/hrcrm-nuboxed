@@ -1,6 +1,6 @@
 import React, { lazy, Suspense } from "react";
 import { FormattedMessage } from "react-intl";
-import { StyledDrawer, StyledModal } from "../../../../Components/UI/Antd";
+import { StyledDrawer, } from "../../../../Components/UI/Antd";
 import { BundleLoader } from "../../../../Components/Placeholder";
 const LocationCreateShiftForm=lazy(()=>import("./LocationCreateShiftForm"));
 
@@ -18,11 +18,6 @@ const LocationCreateShiftDrawer = (props) => {
         />}
         width={drawerWidth}
         visible={createShiftDrawer}
-        destroyOnClose
-        closable
-        placement="right"
-        style={{marginTop:"5rem"}}
-        maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}
         onClose={() => handleCreateShiftDrawer(false)}
       >
         <Suspense fallback={<BundleLoader />}>

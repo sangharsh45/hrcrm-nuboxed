@@ -24,7 +24,7 @@ const HeaderActionRight = (props) => {
 
   return (
     <>
-      <div class=" flex items-center"  >
+      <div class=" flex items-center justify-evenly"  >
         
         
         <span class="cursor-pointer" 
@@ -41,7 +41,7 @@ const HeaderActionRight = (props) => {
           {/* Tasks */}
         </span>
   
-        &nbsp;
+       
     {user.crmInd === true && (
         <span class="cursor-pointer"
         onClick={() =>  handleButtonClick("Customer")} 
@@ -57,8 +57,8 @@ const HeaderActionRight = (props) => {
            
         </span>
 )}
-        &nbsp;
-    {user.imInd ==true  && (
+       
+    {user.imInd === true  && (
         <span class="cursor-pointer"
         onClick={() => handleButtonClick("Investors")} 
         style={{
@@ -73,7 +73,7 @@ const HeaderActionRight = (props) => {
            
         </span>
 )}
-    &nbsp;
+   
     {user.erpInd === true && (
         <span class="cursor-pointer"
         onClick={() => handleButtonClick("Accounts")} 
@@ -89,7 +89,7 @@ const HeaderActionRight = (props) => {
           
         </span>
     )}
-    &nbsp;
+   
    
       <>
       <div class="">

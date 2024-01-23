@@ -16,11 +16,8 @@ const UpdateMileageModal = (props) => {
         />}
         width="70%"
         visible={updateMileageModal}
-        maskClosable={false}
-        destroyOnClose
-        maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}
         onCancel={() => handleUpdateMileageModal(false)}
-        style={{ top: 40 }}
+
         footer={null}
       >
         <Suspense fallback={<BundleLoader />}>

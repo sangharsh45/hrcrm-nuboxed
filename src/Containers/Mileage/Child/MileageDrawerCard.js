@@ -13,6 +13,7 @@ import {
   deleteMileage,
   handleMileageNoteDrawer
 } from "../MileageAction";
+import BorderColorIcon from "@mui/icons-material/BorderColor";
 import NoteAltIcon from "@mui/icons-material/NoteAlt";
 
 const UpdateMileageModal = lazy(() => import("../Child/UpdateMileageModal"));
@@ -88,16 +89,27 @@ function MileageDrawerCard(props) {
 
   return (
     <>
-      <OnlyWrapCard>
+     <OnlyWrapCard style={{backgroundColor:"#E3E8EE"}}>
+     <div className=" flex justify-between w-[99%] p-2 bg-transparent font-bold sticky top-0 z-10">
+        <div className=" md:w-[1rem]">ID</div>
+        <div className="md:w-[5.8rem]">Cost Code</div>
+        <div className=" md:w-[4.2rem] ">Date</div>
+        <div className=" md:w-[3.1rem]">From</div>
+        <div className=" md:w-[4.1rem]">To</div> 
+        <div className="md:w-[3.5rem]">Distance</div>
+        <div className="md:w-[3.8rem]">Remarks</div> 
+      
+        <div className="w-12"></div>
+
+      </div>
         {inputValues.map((item,index) => {
           return (
             <div key={index}>
-              <div
-                className="flex justify-between mt-4"
-                style={{ borderBottom: "3px dotted #515050" }}
+                        <div
+                className="flex rounded-xl justify-between bg-white mt-[0.5rem] h-[2.75rem] items-center p-3"
               >
                 <div className="flex font-medium flex-col w-10">
-                  <h4 className="text-sm text-cardBody font-poppins">ID</h4>
+                  
                   <h4 className="text-xs text-blue-500 text-cardBody font-poppins cursor-pointer">
                     <Tooltip title={item.mileageId}>
                       <QuestionMarkIcon style={{fontSize:"1.25rem"}} />
@@ -105,9 +117,7 @@ function MileageDrawerCard(props) {
                   </h4>
                 </div>
                 <div className="flex font-medium flex-col w-32 ml-[0.25rem]">
-                  <h4 className="text-sm text-cardBody font-poppins">
-                    Cost Code
-                  </h4>
+       
                   {editStates[index] ? (
               <input
                 type="text"
@@ -122,7 +132,7 @@ function MileageDrawerCard(props) {
             )}
                 </div>
                 <div className="flex font-medium flex-col w-36 ml-[0.25rem]">
-                  <h4 className="text-sm text-cardBody font-poppins">Date</h4>
+                 
                   {editStates[index] ? (
   <DatePicker
     value={dayjs(item.mileageDate)} 
@@ -138,9 +148,6 @@ function MileageDrawerCard(props) {
 )}
                 </div>
                 <div className=" flex font-medium flex-col w-30 ml-[0.25rem]">
-                  <h4 className="text-sm text-cardBody font-poppins">
-                    From
-                  </h4>
                   {editStates[index] ? (
               <input
                 type="text"
@@ -155,7 +162,7 @@ function MileageDrawerCard(props) {
             )}
                 </div>
                 <div className=" flex font-medium flex-col w-30 ml-[0.25rem] ">
-                  <h4 className="text-sm text-cardBody font-poppins">To</h4>
+                
                   {editStates[index] ? (
               <input
                 type="text"
@@ -170,9 +177,6 @@ function MileageDrawerCard(props) {
             )}
                 </div>
                 <div className=" flex font-medium flex-col w-20 ml-[0.25rem]">
-                  <h4 className="text-sm text-cardBody font-poppins">
-                    Distance
-                  </h4>
                   {editStates[index] ? (
               <input
                 type="text"
@@ -187,9 +191,6 @@ function MileageDrawerCard(props) {
             )}
                 </div>
                 <div className="flex font-medium flex-col w-32 ml-[0.25rem]">
-                  <h4 className="text-sm text-cardBody font-poppins">
-                    Remarks
-                  </h4>
                   {editStates[index] ? (
               <input
                 type="text"
@@ -204,13 +205,17 @@ function MileageDrawerCard(props) {
             )}
                 </div>
 
-                <div className="flex font-medium flex-col w-32 justify-center">
+                <div className="flex font-medium flex-col w-[2rem] justify-center">
                   {/* <h4 className="text-xs text-cardBody font-poppins">
                     Remarks
                   </h4> */}
                   <h4 className="text-xs text-cardBody font-poppins ml-[0.25rem]">
                   <button onClick={() => toggleEdit(index)} >
-            {editStates[index] ? 'Cancel' : 'Edit'}
+            {editStates[index] ? 'Cancel' : <BorderColorIcon   style={{
+                              color: "grey",
+                              cursor: "pointer",
+                              fontSize: "1rem",
+                            }}/>}
           </button>
           {editStates[index] && (
             <button onClick={() => handleSave(index)} className="ml-[0.25rem]">Save</button>

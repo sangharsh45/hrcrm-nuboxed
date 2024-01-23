@@ -194,7 +194,7 @@ class Todo extends Component {
    
       }}
       > */}
-      <div class=" h-[100vh] overflow-auto" >
+      <div  >
 
         <TimeInterval
           times={this.props.dateTodoRangeList}
@@ -202,14 +202,14 @@ class Todo extends Component {
         />
 
         {todos.length ? 
-                <div class=" flex flex-col">
+                <div class=" flex flex-col ">
           {todos &&
             todos.slice(0, 5).map((todo, i) => {
               return (
                 <List.Item key={todo.id} style={{ width: "100%"
                 //, overflow:"scroll"
                  }}>
-                  <div class=" flex flex-row">
+                  <div class=" flex flex-row justify-between">
                   <TodoItem
                     key={todo.id}
                     todo={todo}

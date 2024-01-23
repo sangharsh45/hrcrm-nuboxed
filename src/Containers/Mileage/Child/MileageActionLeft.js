@@ -1,26 +1,21 @@
 import React from 'react'
-import { FlexContainer } from '../../../Components/UI/Layout'
 import GridViewIcon from '@mui/icons-material/GridView';
 import TocIcon from '@mui/icons-material/Toc';
-import CategoryIcon from '@mui/icons-material/Category';
 import { FormattedMessage } from "react-intl";
 import ViewWeekIcon from '@mui/icons-material/ViewWeek';
 import { Tooltip } from "antd";
 
 const MileageActionLeft = (props) => {
     return (
-        <FlexContainer alignItems='center'>
+        <div class=" flex items-center" >
           <Tooltip
         title={<FormattedMessage id="app.card" defaultMessage="Card" />}
       >
        
-          <span
+          <span class=" mr-2 cursor-pointer"
             onClick={() => props.setMileageViewType("card")}
             style={{
-              marginRight: "0.5rem",
               color: props.viewType === "card" && "#1890ff",
-              // fontSize: "1.0625em",
-              // cursor: "pointer",
             }}
           >
             <GridViewIcon style={{fontSize:"1.4rem"}}  />
@@ -32,13 +27,10 @@ const MileageActionLeft = (props) => {
         title={<FormattedMessage id="app.all" defaultMessage="All" />}
       >
        
-          <span
+       <span class=" mr-2 cursor-pointer text-4"
             onClick={() => props.setMileageViewType("tile")}
             style={{
-              marginRight: "0.5rem",
               color: props.viewType === "tile" && "#1890ff",
-              fontSize: "1.0625em",
-              cursor: "pointer",
             }}
           >
             
@@ -49,20 +41,17 @@ const MileageActionLeft = (props) => {
     
       </Tooltip>
       <Tooltip title="Group">
-          <span
+      <span class=" mr-2 cursor-pointer text-4"
             onClick={() => props.setMileageViewType("list")}
             style={{
-              marginRight: "0.5rem",
               color: props.viewType === "list" && "#1890ff",
-              fontSize: "1.0625em",
-              cursor: "pointer",
             }}
           >
             <ViewWeekIcon/>
           </span>
       </Tooltip>
 
-        </FlexContainer>
+        </div>
     )
 }
 

@@ -5,7 +5,7 @@ import { Button, Tooltip,Switch } from "antd";
 import { FormattedMessage } from "react-intl";
 import { Listbox, } from '@headlessui/react'
 import { getlocation } from "../../Event/Child/Location/LocationAction";
-import {getCountries} from "../../Auth/AuthAction"
+import {getCountries,getTimeZone} from "../../Auth/AuthAction"
 import { Formik, Form, Field,FieldArray, FastField } from "formik";
 import { HeaderLabel, Spacer, StyledLabel } from "../../../Components/UI/Elements";
 import { InputComponent } from "../../../Components/Forms/Formik/InputComponent";
@@ -53,6 +53,14 @@ function EmployeeForm (props) {
   const handleType = (checked) => {
     setTypeInd(checked);
   };
+  const timeZoneOption = props.timeZone.map((item) => {
+    return {
+      label: item.zone_name
+      || null,
+      value: item.timezone_id
+      ,
+    };
+  });
 
   const handleDeptChange = (event) => {
     const selectedDept = event.target.value;
@@ -110,11 +118,12 @@ function EmployeeForm (props) {
   
 
   useEffect(()=>{
-    const { getCountries ,getAssignedToList,getRoles,getlocation,} = props;
+    const { getCountries ,getTimeZone,getAssignedToList,getRoles,getlocation,} = props;
     getRoles(props.organizationId);
     getCountries(getCountries);
     getlocation(props.orgId);
     getAssignedToList(props.orgId)
+    getTimeZone();
 },[]);
 
 const getEmployeesbyDepartment= (filterOptionKey, filterOptionValue)=> {
@@ -182,6 +191,7 @@ const getEmployeesbyDepartment= (filterOptionKey, filterOptionValue)=> {
             dateOfJoining:dayjs(),
             dob:dayjs(),
             mobileNo: "",
+            timeZone: "",
             country: "",
             workplace:"",
             designationTypeId:"",
@@ -507,6 +517,21 @@ const getEmployeesbyDepartment= (filterOptionKey, filterOptionValue)=> {
 
           
                 <div class=" w-[47.5%] max-sm:w-wk ">
+                <div style={{ width: "100%" }}>
+                    <StyledLabel>Time Zone</StyledLabel>
+                    <Field
+                      name="timeZone"
+                      type="text"
+                      placeholder="Select Time Zone"
+                      noLabel
+                      // disabled={!values.productionInd && !values.inventoryInd}
+                      isRequired
+                      component={SelectComponent}
+                      options={
+                        Array.isArray(timeZoneOption) ? timeZoneOption : []
+                      }
+                    />
+                  </div>
                 <Listbox value={selected} onChange={setSelected}>
         {({ open }) => (
           <>
@@ -942,6 +967,7 @@ const getEmployeesbyDepartment= (filterOptionKey, filterOptionValue)=> {
 const mapStateToProps = ({ auth,role,location, employee,designations,departments }) => ({
   userDetails: auth.userDetails,
   roles: role.roles,
+  timeZone: auth.timeZone,
   fullName: auth.userDetails.fullName,
   assignedToList:employee.assignedToList,
   organizationId: auth.userDetails.organizationId,
@@ -962,6 +988,7 @@ const mapDispatchToProps = (dispatch) =>
       getDepartments,
       getRoles,
       getlocation,
+      getTimeZone,
       getAssignedToList,
   }, dispatch);
 export default connect(mapStateToProps, mapDispatchToProps)(EmployeeForm);

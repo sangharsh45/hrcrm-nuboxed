@@ -4,7 +4,6 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { withRouter } from "react-router-dom";
 import {  Button, Tooltip } from "antd";
-import { FlexContainer } from "../../../../Components/UI/Layout";
 import { StyledSelect } from "../../../../Components/UI/Antd";
 
 
@@ -20,7 +19,7 @@ class LocationActionRight extends React.Component {
   render() {
     console.log(this.props.handleLocationModal)
     return (
-      <FlexContainer alignItems="center">
+      <div class=" flex items-center" >
 
         <Tooltip placement="left" title="Create">
           <Button
@@ -32,7 +31,7 @@ class LocationActionRight extends React.Component {
             Add
           </Button>
         </Tooltip>
-      </FlexContainer>
+      </div>
     );
   }
 }

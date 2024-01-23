@@ -128,9 +128,9 @@ class SingleOnboardingStages extends Component {
                    </span>
                    </Tooltip>
                    &nbsp;  */}
-                   {/* <span>
+                  <span>
                        
-                     {opportunityProcessStages.probability === 0 || opportunityProcessStages.probability === 100 ? null :
+                     {onboardingProcessStages.probability === 0 || onboardingProcessStages.probability === 100 ? null :
                 
                 <Button
                      onClick={() =>
@@ -145,7 +145,7 @@ class SingleOnboardingStages extends Component {
                              
                              </Button> 
                              }
-                   </span> */}
+                   </span> 
                    &nbsp; &nbsp;  &nbsp; &nbsp;
                  <span>
                    <Tooltip title="Edit">

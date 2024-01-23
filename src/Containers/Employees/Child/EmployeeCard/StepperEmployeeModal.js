@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { StyledDrawer } from "../../../../Components/UI/Antd";
 import { bindActionCreators } from "redux";
 import { setEditEmployee } from "../../EmployeeAction";
-// const OnBoardingEmployeeForm =lazy(()=> import("./OnBoardingEmployeeForm"));
+ const OnBoardingEmployeeForm =lazy(()=> import("./OnBoardingEmployeeForm"));
 
 
 
@@ -21,9 +21,9 @@ const StepperEmployeeModal = (props) => {
         footer={null}
       >
        
-          {/* <OnBoardingEmployeeForm 
+          <OnBoardingEmployeeForm 
              employeeId={props.setEditingEmployee.employeeId}
-            /> */}
+            />
    
       </StyledDrawer>
     </>

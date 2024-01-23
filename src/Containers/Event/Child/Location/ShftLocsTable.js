@@ -1,16 +1,14 @@
-import React, { Component, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { StyledTable } from "../../../../Components/UI/Antd";
-import { Tooltip, Input, Popconfirm, Space, Button, Badge } from "antd";
-import { EditOutlined, SearchOutlined } from "@ant-design/icons";
+import {  Input, Space, Button, Badge } from "antd";
+import {  SearchOutlined } from "@ant-design/icons";
 import Highlighter from "react-highlight-words";
 import moment from "moment";
-import { Spacer } from "../../../../Components/UI/Elements";
 import {
     getShiftlocs,
 } from "./LocationAction";
-import { CurrencySymbol } from "../../../../Components/Common";
 
 function ShftLocsTable(props) {
     useEffect(() => {
@@ -271,7 +269,7 @@ width:"12%",
                 rowSelection={props.rowSelection}
             />
 
-            <Spacer />
+          
         </>
     );
 }

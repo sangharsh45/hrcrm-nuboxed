@@ -2,19 +2,13 @@ import dayjs from "dayjs";
 import React, { lazy } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { Tooltip,Button } from "antd";
-import { StyledLabel } from '../../../Components/UI/Elements'
-import { StyledTable,StyledPopconfirm } from "../../../Components/UI/Antd";
+import { Tooltip } from "antd";
+import {StyledPopconfirm } from "../../../Components/UI/Antd";
 import { getMileageByUserId,getPendingMileage,deleteMileageVoucher,handleMileageVoucherIdDrwer } from "../MileageAction";
-import { CurrencySymbol } from "../../../Components/Common";
-import styled from 'styled-components'
-import { FlexContainer,OnlyWrapCard } from '../../../Components/UI/Layout'
-import APIFailed from "../../../Helpers/ErrorBoundary/APIFailed";
-import { DeleteOutlined,UpCircleOutlined } from "@ant-design/icons";
-import MileageVoucherIdDrawer from "./MileageVoucherIdDrawer";
-import EditIcon from '@mui/icons-material/Edit';
-import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
+import { OnlyWrapCard } from '../../../Components/UI/Layout'
+import { DeleteOutlined, } from "@ant-design/icons";
 import { FormattedMessage } from "react-intl";
+const MileageVoucherIdDrawer = lazy(() => import("./MileageVoucherIdDrawer"))
 
 
 class MileagePendingStatusCard extends React.Component {
