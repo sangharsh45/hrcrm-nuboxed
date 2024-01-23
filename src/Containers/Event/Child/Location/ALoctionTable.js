@@ -1,18 +1,16 @@
-import React, { Component, useEffect, useState } from "react";
+import React, {  useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { StyledTable } from "../../../../Components/UI/Antd";
-import { Popconfirm, Form, Input, Typography, Button, Space, DatePicker,Tooltip} from "antd";
+import { Popconfirm, Form, Input, Typography, Button, Space, DatePicker} from "antd";
 import { EditOutlined, SearchOutlined } from "@ant-design/icons";
 import Highlighter from "react-highlight-words";
 import moment from "moment";
-import { Spacer } from "../../../../Components/UI/Elements";
 import {
     getAlLocshift,
     getShiftlocs,
     updateLocation,
 } from "./LocationAction";
-import { CurrencySymbol } from "../../../../Components/Common";
 import { Select } from "../../../../Components/UI/Elements";
 
 const { Option } = Select;

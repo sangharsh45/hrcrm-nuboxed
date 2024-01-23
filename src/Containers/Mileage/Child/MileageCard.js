@@ -11,12 +11,11 @@ import { getMileageByUserId,
 import styled from 'styled-components'
 import { StyledPopconfirm } from "../../../Components/UI/Antd";
 import AssistantIcon from '@mui/icons-material/Assistant';
-import APIFailed from "../../../Helpers/ErrorBoundary/APIFailed";
 import { DeleteOutlined, } from "@ant-design/icons";
-import MileageVoucherIdDrawer from "./MileageVoucherIdDrawer";
-import StatusMileageDrawer from "./StatusMileageDrawer";
 import { BundleLoader } from "../../../Components/Placeholder";
 import { FormattedMessage } from "react-intl";
+const StatusMileageDrawer = lazy(() => import("./StatusMileageDrawer"));
+const MileageVoucherIdDrawer = lazy(() => import("./MileageVoucherIdDrawer"));
 
 
 class MileageCard extends React.Component {

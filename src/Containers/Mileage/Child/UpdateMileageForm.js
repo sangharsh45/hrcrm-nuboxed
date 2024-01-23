@@ -1,26 +1,14 @@
-import { Button, DatePicker, Icon, message } from "antd";
+import { Button, DatePicker, message } from "antd";
 import React, { useState, useEffect } from "react";
-import { FormattedMessage } from "react-intl";
 import { Spacer, TextInput } from "../../../Components/UI/Elements";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-import SearchSelect from "../../../Components/Forms/Formik/SearchSelect";
-import {
-  Formik,
-  Form,
-  Field,
-  FieldArray,
-  FastField,
-  validateYupSchema,
-} from "formik";
 import { updateMileage, 
-    // getMileageByUserId 
 } from "../MileageAction";
 import { getCurrency } from "../../Auth/AuthAction";
 import moment from "moment";
 import * as Yup from "yup";
 import { Select } from "antd";
-import { DeleteOutlined } from "@ant-design/icons";
 
 const { Option } = Select;
 

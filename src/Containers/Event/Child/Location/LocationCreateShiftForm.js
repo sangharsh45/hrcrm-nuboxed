@@ -1,11 +1,9 @@
-import React, { Component, useState, useMemo, useEffect } from "react";
+import React, {  useEffect } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { FormattedMessage } from "react-intl";
-import { Button, Tooltip } from "antd";
+import { Button, } from "antd";
 import { Formik, Form, Field,  } from "formik";
-import { SelectComponent } from "../../../../Components/Forms/Formik/SelectComponent";
-import { Spacer, StyledLabel } from "../../../../Components/UI/Elements";
 import { InputComponent } from "../../../../Components/Forms/Formik/InputComponent";
 import dayjs from "dayjs";
 import { createShitLocation } from "./LocationAction";

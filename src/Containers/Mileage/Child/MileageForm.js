@@ -1,23 +1,10 @@
-import { Button, DatePicker, Icon, message } from "antd";
+import { Button, DatePicker, message } from "antd";
 import React, { useState, useEffect } from "react";
-import { FormattedMessage } from "react-intl";
-import { Spacer, TextInput } from "../../../Components/UI/Elements";
+import { TextInput } from "../../../Components/UI/Elements";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-import SearchSelect from "../../../Components/Forms/Formik/SearchSelect";
-import {
-  Formik,
-  Form,
-  Field,
-  FieldArray,
-  FastField,
-  validateYupSchema,
-} from "formik";
 import {
   DeleteOutlined,
-  EyeInvisibleOutlined,
-
-  
 } from '@ant-design/icons';
 import { addMileage, getMileageByUserId } from "../MileageAction";
 import { getCurrency } from "../../Auth/AuthAction";
@@ -371,8 +358,8 @@ function MileageForm(props) {
           );
         })}
       </table>
-      <Spacer />
-      <div>
+
+      <div class=" mt-3">
       <Button
         style={{ float: "right",marginRight:"5px" }}
         type="primary"

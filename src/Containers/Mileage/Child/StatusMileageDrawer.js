@@ -1,8 +1,8 @@
-import React, { lazy, Suspense } from "react";
-import { FormattedMessage } from "react-intl";
+import React, {  Suspense ,lazy} from "react";
 import { StyledDrawer } from "../../../Components/UI/Antd";
 import { BundleLoader } from "../../../Components/Placeholder";
-import StatusMileageForm from "./StatusMileageForm";
+const StatusMileageForm = lazy(() => import("./StatusMileageForm"));
+
 
 
 const StatusMileageDrawer = (props) => {
@@ -18,11 +18,6 @@ const StatusMileageDrawer = (props) => {
         // />}
         width="30vw"
         visible={updateStatusMileageModal}
-        maskClosable={false}
-        destroyOnClose
-        maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}
-        // style={{ top: 40 }}
-        style={{marginTop:"5rem"}}
         onClose={() => handleStatusMileageModal(false)}
         footer={null}
       >

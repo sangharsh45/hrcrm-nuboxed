@@ -1,10 +1,8 @@
-import React, { Component, useEffect, useState } from "react";
+import React, {  useEffect,lazy, useState } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { StyledTable } from "../../../../Components/UI/Antd";
-import { Tooltip, Input, Button, Space, Popconfirm } from "antd";
+import {  Input, Button, Space, } from "antd";
 import {
-  DeleteOutlined,
   SearchOutlined,
 } from "@ant-design/icons";
 import InfiniteScroll from "react-infinite-scroll-component";
@@ -19,8 +17,8 @@ import {
 } from "../../../Main/Account/AccountAction";
 import Highlighter from "react-highlight-words";
 import { OnlyWrapCard } from "../../../../Components/UI/Layout";
-import AccountDetailsView from "../../../Main/Account/AccountDetailsView";
 import { FormattedMessage } from "react-intl";
+const AccountDetailsView = lazy(() => import("../../../Main/Account/AccountDetailsView"));
 
 function LocationCustomerList(props) {
   const [page, setPage] = useState(0);

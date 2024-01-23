@@ -28,6 +28,7 @@ class SingleSectors extends Component {
       handleUpdateSector,
       handleDeleteSector,
     } = this.props;
+    // const sortedSectors = [...linkedSectors].sort((a, b) => a.sectorName.localeCompare(b.sectorName));
     console.log(linkedSectors);
     console.log("name", name);
     // const disableDelete = linkedCustomers && linkedCustomers.includes(typeId)

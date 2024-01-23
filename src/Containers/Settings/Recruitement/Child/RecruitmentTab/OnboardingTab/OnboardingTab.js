@@ -19,6 +19,8 @@ import {
     getProcessForOnboarding,
     updateProcessNameForOnboarding,
     deleteOnboardingProcessData,
+    LinkOnboardingStagePublish,
+    LinkOnboardingProcessPublish,
 } from "../../../../SettingsAction";
 import { StyledTabs } from "../../../../../../Components/UI/Antd";
 import {  Select } from "../../../../../../Components/UI/Elements";
@@ -90,7 +92,7 @@ class OnboardingTab extends Component {
       publishInd: currentProcess.publishInd ? false : true,
     };
 
-    this.props.LinkOpportunityProcessPublish(data, this.handleCallBack1);
+    this.props.LinkOnboardingProcessPublish(data, this.handleCallBack1);
   };
 
   handleApproveIconClick = (item) => {
@@ -154,7 +156,7 @@ class OnboardingTab extends Component {
       publishInd: publishInd ? false : true,
     };
     console.log(publishInd);
-    this.props.LinkOpportunityStagePublish(data, this.handleCallBack);
+    this.props.LinkOnboardingStagePublish(data, this.handleCallBack);
   };
   handleCallBack = (status) => {
     if (status === "Success") {
@@ -435,7 +437,7 @@ class OnboardingTab extends Component {
 
                     </span>
                     )}
-{/*                   
+                  
                   {this.state.currentProcess.workflowName && (
   <Button
     style={{ color: "white",marginLeft:"1rem" }} // Add this line to change the font color to white
@@ -443,7 +445,7 @@ class OnboardingTab extends Component {
   >
     {this.state.currentProcess.publishInd ? "Unpublish" : "Publish"}
   </Button>
-)} */}
+)}
                 
                   </h1> 
                 </>
@@ -585,7 +587,8 @@ const mapDispatchToProps = (dispatch) =>
    addProcessForOnboarding,
    updateProcessNameForOnboarding,
    deleteOnboardingProcessData,
-
+   LinkOnboardingStagePublish,
+   LinkOnboardingProcessPublish,
    
     },
     dispatch
