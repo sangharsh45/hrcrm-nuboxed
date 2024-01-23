@@ -146,7 +146,7 @@ function OrderPaymentTable(props) {
         },
         {
             title: "Amount",
-            width: "10%",
+            width: "8%",
             dataIndex: "paymentAmount",
             render: (name, item, i) => {
                 return (
@@ -159,24 +159,31 @@ function OrderPaymentTable(props) {
         {
             title: "Mode",
             dataIndex: "paymentModeName",
-            width: "10%",
+            width: "7%",
         },
         {
             title: "Reason",
             dataIndex: "remarks",
-            width: "14%",
+            width: "12%",
         },
         {
             title:"Approved By",
             dataIndex:"approveByName",
-            width:"10%",
+            width:"18%",
             render: (text, item) => {
                 const approvedname = item.approveByName;
                 const approvedDate = moment(item.approveDate).format("ll");
                 return (
                   <>
                      {item.approveByFinanceInd===true ?(
-                        <span class="text-green-700">{approvedname} &nbsp; {approvedDate}</span>
+                        <div class="flex">
+                            <span class="text-green-700">
+                            {approvedname} on 
+                            </span>
+                            &nbsp;
+                            <span class="text-green-700"> {approvedDate}</span>
+                           
+                            </div>
                     ):"No Data"}
                   </>
                 );
@@ -214,7 +221,7 @@ function OrderPaymentTable(props) {
                
                     <Typography.Link disabled={editingKey !== ''} onClick={() => edit(record)}>
                      {record.approveByFinanceInd===false && (
-                        <BorderColorOutlined style={{fontSize:"1rem"}} />
+                        <BorderColorOutlined style={{fontSize:"0.9rem"}} />
                      )}
                     </Typography.Link>
                 

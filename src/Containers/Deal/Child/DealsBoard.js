@@ -214,7 +214,6 @@ function DealsBoard(props) {
                                             opp.invOpportunityStagesId === stage.investorOppStagesId
                                         )
                                         .map((opp, index) => {
-                                          console.log("oPPr",opp)
                                           return (
                                             <DealStageColumn
                                               key={index}
@@ -253,19 +252,8 @@ const mapStateToProps = ({
 }) => ({
     dealsProcess: settings.dealsProcess,
     orgId: auth.userDetails && auth.userDetails.organizationId,
-//   fetchingOpportunities: opportunity.fetchingOpportunities,
-//   startDate: dashboard.startDate,
-//   endDate: dashboard.endDate,
    userId: auth.userDetails.userId,
    aLLdealsList:deal.aLLdealsList,
-  //  dealsByuserId:deal.dealsByuserId,
-//   process: settings.Process,
-//   tradeCurrency: auth.userDetails.tradeCurrency,
-//   opportunities: opportunitySelector(opportunity, account),
-//   ProcessStages: settings.ProcessStages,
-//   stages: opportunity.stages,
-//   fetchingProcessStages: settings.fetchingProcessStages,
-//   udatingOpp: opportunity.udatingOpp,
 dealsProcessStages: settings.dealsProcessStages,
 });
 const mapDispatchToProps = (dispatch) =>

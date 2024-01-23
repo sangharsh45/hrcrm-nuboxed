@@ -7,7 +7,7 @@ const DealGroupCard =lazy(()=>import("./DealGroupCard"));
 
 class DealStageColumn extends Component {
   render() {
-    const { dealDetailsbyID, index, history,handleDelete } = this.props;
+    const { dealDetailsbyID, index, history } = this.props;
   
     return (
       <Draggable

@@ -304,7 +304,7 @@ const AccountOrderTable = (props) => {
                                                         <Tooltip title="Send To Refurbish">
                                                             <Button
                                                                 class="cursor-pointer bg-[#3096e9] text-white"
-                                                                style={{ fontSize: "13px" }}
+                                                                style={{ fontSize: "1rem" }}
                                                                 // style={{ fontSize: "13px", backgroundColor: "#3096e9", color: "white" }}
                                                                 onClick={() => {
                                                                     handleSetParticularOrderData(item);
@@ -350,15 +350,16 @@ const AccountOrderTable = (props) => {
 
 
                                         </div>
-                                        <div class="flex flex-col w-[3%] max-sm:flex-row max-sm:w-[10%]">
+                                        <div class="flex justify-end">
+                                        <div class="flex flex-col w-6 max-sm:flex-row max-sm:w-[10%]">
                    <div>
                    <Tooltip title={<FormattedMessage
                                                     id="app.notes"
                                                     defaultMessage="Notes"
                                                 />}>
                                                     <NoteAltIcon
-                                                        class="cursor-pointer"
-                                                        style={{ color: "green", fontSize: "1rem" }}
+                                                        
+                                                        style={{cursor: "pointer", color: "green", fontSize: "1rem" }}
                                                         onClick={() => {
 
                                                             props.handleNotesModalInOrder(true);
@@ -375,8 +376,8 @@ const AccountOrderTable = (props) => {
                                                     defaultMessage="Status"
                                                 />}>
                                                     <EventRepeatIcon
-                                                        class="cursor-pointer"
-                                                        style={{ fontSize: "1rem" }}
+                                                     
+                                                        style={{cursor: "pointer", fontSize: "1rem" }}
                                                         onClick={() => {
                                                             props.handleStatusOfOrder(true);
                                                             handleSetParticularOrderData(item);
@@ -386,13 +387,13 @@ const AccountOrderTable = (props) => {
                         </div>
                         
             </div>
-            <div class="flex flex-col w-[3%] max-sm:flex-row max-sm:w-[10%]">
+            <div class="flex flex-col w-6 max-sm:flex-row max-sm:w-[10%]">
 
                         <div>
                         <Tooltip title="Collection">
                                                     <PaidIcon
-                                                        class="cursor-pointer"
-                                                        style={{ fontSize: "1rem" }}
+                                                       
+                                                        style={{cursor: "pointer", fontSize: "1rem" }}
                                                         onClick={() => {
                                                             props.handlePaidModal(true);
                                                             handleSetParticularOrderData(item);
@@ -417,7 +418,7 @@ const AccountOrderTable = (props) => {
                                                 </Tooltip>
                    </div>
             </div>
-            <div class="flex flex-col w-[3%] max-sm:flex-row max-sm:w-[10%]">
+            <div class="flex flex-col w-6 max-sm:flex-row max-sm:w-[10%]">
                    <div>
                    <Tooltip title={<FormattedMessage
                                                     id="app.rating"
@@ -439,7 +440,7 @@ const AccountOrderTable = (props) => {
 
                         </div>
             </div>            
-                              
+            </div>                
 
                                     </div>
                                 </div>
@@ -481,7 +482,6 @@ const AccountOrderTable = (props) => {
                     handleAccountProduction={props.handleAccountProduction}
                 />
                 <UpdateOrderModal
-
                     handleUpdateOrder={props.handleUpdateOrder}
                     updateOrderModal={props.updateOrderModal}
                 />

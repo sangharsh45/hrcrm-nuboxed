@@ -146,7 +146,7 @@ const RepairPhoneListByTechnician = (props) => {
 
     return (
         <>
-            <div className=' flex justify-end sticky  z-auto'>
+            <div className=' flex justify-end sticky z-auto h-60'>
                 <OnlyWrapCard style={{ backgroundColor: "#E3E8EE" }}>
                     <div className=" flex  w-[95%] p-2 bg-transparent font-bold sticky top-0 z-10">
                         <div className=" md:w-[8.1rem]"><FormattedMessage

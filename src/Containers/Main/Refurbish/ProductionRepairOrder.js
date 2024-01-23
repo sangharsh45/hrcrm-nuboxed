@@ -201,8 +201,8 @@ function ProductionRepairOrder(props) {
                         defaultMessage="duedate"
                       /></div>
                         <div className=" md:w-[9.8rem] "> <FormattedMessage
-                        id="app.item"
-                        defaultMessage="item"
+                        id="app.units"
+                        defaultMessage="Units"
                       /></div>
                         <div className="md:w-[6.6rem]"></div>
                         <div className="md:w-[5.8rem]"><FormattedMessage
@@ -338,7 +338,7 @@ function ProductionRepairOrder(props) {
                                                         }}
                                                     >Repair Start</Button> :
                                                     item.repairInspectionInd === 1 ?
-                                                        <Button onClick={handlePauseResume}>{hide ? "Pause" : "Resume"}</Button> : "Repair Completed"}
+                                                        <Button onClick={handlePauseResume}>{hide ? "Pause" : "Resume"}</Button> :<label class="text-green-600">Completed</label>}
 
                                             </div>
                                         </div>

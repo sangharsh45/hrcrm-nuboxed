@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { Button, Switch } from "antd";
+import { Button } from "antd";
 import { Formik, Form, Field } from "formik";
 import moment from "moment";
 import { SelectComponent } from "../../../../../Components/Forms/Formik/SelectComponent";
@@ -26,9 +26,6 @@ function LocationOrderForm(props) {
             value: item.locationDetailsId,
         };
     });
-    const handleCallback = () => {
-
-    }
     return (
         <>
             <Formik
@@ -44,8 +41,8 @@ function LocationOrderForm(props) {
                         ...values,
                         transferInd: 1,
                     },
-                        handleCallback,
-                        props.particularRowData.distributorId);
+                        props.particularRowData.distributorId
+                 );
                 }}
             >
                 {({
@@ -58,14 +55,8 @@ function LocationOrderForm(props) {
                     ...rest
                 }) => (
                     <Form>
-                        <div
-                            style={{
-                                display: "flex",
-                                justifyContent: "space-between",
-                            }}
-                        >
-
-                            <div style={{ width: "90%" }}>
+                        <div class="flex justify-between">
+                            <div class="w-[85%]">
                                 <Field
                                     name="locationId"
                                     type="text"
@@ -77,7 +68,7 @@ function LocationOrderForm(props) {
                                     options={Array.isArray(locationsName) ? locationsName : []}
                                 />
                             </div>
-                            <div style={{ marginTop: "15px", marginLeft: "14px" }}>
+                            <div class="flex justify-end">
                                 <Button type="primary" htmlType="submit">
                                     Submit
                                 </Button>

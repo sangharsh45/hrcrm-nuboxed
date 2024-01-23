@@ -1940,7 +1940,7 @@ export const applyForLoginInContact = (data, contactPersonId, id, userId) => (di
     });
 };
 
-export const addLocationInOrder = (data, distributorId) => (dispatch) => {
+export const addLocationInOrder = (data,distributorId) => (dispatch) => {
   dispatch({
     type: types.ADD_LOCATION_IN_ORDER_REQUEST,
   });
@@ -1952,10 +1952,13 @@ export const addLocationInOrder = (data, distributorId) => (dispatch) => {
     })
     .then((res) => {
       console.log(res);
+      // dispatch(getDistributorOrderByDistributorId(distributorId,0))
+      window.location.reload()
       dispatch({
         type: types.ADD_LOCATION_IN_ORDER_SUCCESS,
         payload: res.data,
       });
+    
       message.success("Order has moved to inventory !!")
     })
     .catch((err) => {

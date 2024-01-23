@@ -27,6 +27,7 @@ import { SelectComponent } from "../../../Components/Forms/Formik/SelectComponen
 import { DatePicker } from "../../../Components/Forms/Formik/DatePicker";
 import dayjs from "dayjs";
 import { Listbox } from "@headlessui/react";
+import { getAllEmployeelist } from "../../Investor/InvestorAction";
 
 /**
  * yup validation scheme for creating a opportunity
@@ -46,7 +47,8 @@ function OpportunityForm(props) {
     props.getInitiative(props.userId);
      props.getOppLinkedStages(props.orgId);
      props.getOppLinkedWorkflow(props.orgId);
-     props. getCrm();
+     props.getCrm();
+     props.getAllEmployeelist();
   }, []);
 
   const [defaultOption, setDefaultOption] = useState(props.fullName);
@@ -142,6 +144,12 @@ function OpportunityForm(props) {
       };
     });
 
+const AllEmplo = props.allEmployeeList.map((item) => {
+  return {
+    label: `${item.empName || ""}`,
+    value: item.employeeId,
+  };
+});
 
   const [text, setText] = useState("");
   function handletext(e) {
@@ -161,16 +169,8 @@ function OpportunityForm(props) {
   const {
     user: { userId },
     addingOpportunity,
-    employeeId,
-    salesUserIds,
-    fullName,
-    contactId,
-    customerId,
     startDate,
     endDate,
-    defaultCustomers,
-    defaultContacts,
-    name,
   } = props;
   const selectedOption = props.crmAllData.find((item) => item.empName === selected);
   
@@ -194,6 +194,7 @@ function OpportunityForm(props) {
           oppInnitiative: "",
           oppStage: "",
           salesUserIds: selectedOption ? selectedOption.employeeId:props.userId,
+          include:"",
         }}
         validationSchema={OpportunitySchema}
         onSubmit={(values, { resetForm }) => {
@@ -296,8 +297,8 @@ function OpportunityForm(props) {
           <div class="overflow-y-auto h-[34rem] overflow-x-hidden max-sm:h-[30rem]">
           <Form className="form-background">
             <div class=" flex justify-between max-sm:flex-col">
-              <div class=" h-full w-[47.5%] max-sm:w-wk">
-                <Spacer />
+              <div class=" h-full w-[47.5%] mt-3 max-sm:w-wk">
+               
                 <Field
                   isRequired
                   name="opportunityName"
@@ -515,7 +516,27 @@ function OpportunityForm(props) {
         )}
       </Listbox>
 
-               
+       <div>
+       <Field
+                    name="include"
+                    isColumnWithoutNoCreate
+                    label={
+                      <FormattedMessage
+                        id="app.include"
+                        defaultMessage="Include"
+                      />
+                    }
+                    component={SelectComponent}
+                    options={
+                      Array.isArray(AllEmplo)
+                        ? AllEmplo
+                        : []
+                    }
+                    isColumn
+                    value={values.employeeId}
+                    inlineLabel
+                  />
+        </div>        
 <div class="flex justify-between max-sm:flex-col mt-[0.85rem]">
 <div class=" w-w47.5 max-sm:w-wk">
                   <Field
@@ -691,7 +712,7 @@ function OpportunityForm(props) {
   );
 }
 
-const mapStateToProps = ({ auth, opportunity, contact, customer,leads }) => ({
+const mapStateToProps = ({ auth, opportunity,investor, contact, customer,leads }) => ({
   user: auth.userDetails,
   crmAllData:leads.crmAllData,
   userId: auth.userDetails.userId,
@@ -711,7 +732,8 @@ const mapStateToProps = ({ auth, opportunity, contact, customer,leads }) => ({
   oppLinkWorkflow: opportunity.oppLinkWorkflow,
   customerData: customer.customerData,
   contactData: contact.contactData,
-  fullName: auth.userDetails.fullName
+  fullName: auth.userDetails.fullName,
+  allEmployeeList:investor.allEmployeeList
 });
 
 const mapDispatchToProps = (dispatch) =>
@@ -724,6 +746,7 @@ const mapDispatchToProps = (dispatch) =>
       getOppLinkedWorkflow,
       getOppLinkedStages,
       getCrm,
+      getAllEmployeelist
     },
     dispatch
   );
