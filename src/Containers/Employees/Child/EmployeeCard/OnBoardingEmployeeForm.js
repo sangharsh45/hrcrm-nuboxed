@@ -134,7 +134,7 @@ const OnBoardingEmployeeForm = (props) => {
 </> 
         )} 
         <div class=" flex justify-end">
-          <Button>Submit</Button>
+          <Button>Onboarding Completed</Button>
         </div>
         {/* <Timeline>
           {mileageStatus &&

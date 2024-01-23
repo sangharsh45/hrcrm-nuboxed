@@ -255,7 +255,8 @@ strokeColor={"#005075"}
           </Tooltip>
                  </div>
                  </div>
-                 <div class="flex flex-col w-[6%] max-sm:flex-row max-sm:w-[10%]">
+                 <div class=" flex justify-end">
+                 <div class="flex flex-col w-6 max-sm:flex-row max-sm:w-[10%]">
                  <div>
                  <span
        
@@ -281,7 +282,7 @@ handleSetCurrentOpportunityId(item.opportunityName);
        </span>
                       </div>
           </div>
-                 <div class="flex flex-col w-[6%] max-sm:flex-row max-sm:w-[10%]">
+                 <div class="flex flex-col w-6 max-sm:flex-row max-sm:w-[10%]">
                   <div>
                   <Tooltip title='Click to Open'><span
        onClick={() => {
@@ -312,7 +313,7 @@ handleSetCurrentOpportunityId(item.opportunityName);
           />
                   </div>
                 </div>
-                <div class="flex flex-col w-[6%] max-sm:flex-row max-sm:w-[10%]">
+                <div class="flex flex-col w-6 max-sm:flex-row max-sm:w-[10%]">
                  
                     <div>
                        <Tooltip
@@ -365,7 +366,8 @@ handleSetCurrentOpportunityId(item.opportunityName);
                     </div>
            
                   <div></div>
-                </div>   
+                </div>  
+                </div> 
                             
                     
                           </div>

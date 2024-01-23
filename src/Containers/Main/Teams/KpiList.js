@@ -4,7 +4,7 @@ import { bindActionCreators } from "redux";
 import { Button } from "antd";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
-import {getKpilist,addKpi } from "./TeamsAction";
+import {getKpilist,addKpi,getEmployeeKpiList } from "./TeamsAction";
 import { FormattedMessage } from "react-intl";
 import { SelectComponent } from "../../../Components/Forms/Formik/SelectComponent";
 
@@ -18,8 +18,10 @@ const TeamsSchema = Yup.object().shape({
 });
 
 function KpiList(props) {
+  
     useEffect(()=>{
         props.getKpilist(props.rowdata.departmentId)
+        props.getEmployeeKpiList(props.rowdata.employeeId)
     },[]);
 
   function handleReset(resetForm) {
@@ -28,8 +30,8 @@ function KpiList(props) {
 
   const kpiNameOption = props.kpiList.map((item) => {
     return {
-      label: `${item.workflowName || ""}`,
-      value: item.opportunityWorkflowDetailsId,
+      label: `${item.kpi || ""}`,
+      value: item.performanceManagementId,
     };
   });
   const { addingKpi } = props;
@@ -38,8 +40,9 @@ function KpiList(props) {
       <Formik
         enableReinitialize
         initialValues={{
-          teamMember:[],
-          teamName: "",
+          performanceManagementId:[],
+          employeeId:props.rowdata.employeeId,
+          // performanceManagementId: "",
       
         }}
         // validationSchema={TeamsSchema}
@@ -60,7 +63,26 @@ function KpiList(props) {
             <div class="flex justify-between  pr-2 max-sm:flex-col">
             <div class=" w-w47.5 max-sm:w-wk">
             <Field
-              //name="customerId"
+                    name="performanceManagementId"
+                    // label="Include"
+                    label={
+                      <FormattedMessage
+                        id="app.KPIList"
+                        defaultMessage="KPI List"
+                      />
+                    }
+                    mode
+                    placeholder="Select"
+                    component={SelectComponent}
+                    options={Array.isArray(kpiNameOption) ? kpiNameOption : []}
+                    value={values.performanceManagementId}
+                    defaultValue={{
+                      label: `${props.kpi || ""} `,
+                      value: props.performanceManagementId,
+                    }}
+                  />
+            {/* <Field
+              name="performanceManagementId"
               isColumnWithoutNoCreate
               label={
                 <FormattedMessage
@@ -78,7 +100,7 @@ function KpiList(props) {
               margintop={"0"}
               //value={values.customerId}
               inlineLabel
-            />
+            /> */}
     
       </div>
 
@@ -105,13 +127,15 @@ function KpiList(props) {
 const mapStateToProps = ({ teams, auth, area }) => ({
     userDetails: auth.userDetails,
     kpiList:teams.kpiList,
+    employeeKpiList:teams.employeeKpiList,
 });
 
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
         getKpilist,
-        addKpi
+        addKpi,
+        getEmployeeKpiList
     },
     dispatch
   );

@@ -52,6 +52,10 @@ const initialState = {
   fetchingEmployeeByIdError: false,
   singleEmployee: {},
 
+  fetchingProcessDropdownForOnboarding: false,
+  fetchingProcessDropdownForOnboardingError: false,
+  onboardingDropdownProcess:[],
+
   fetchingCertificationByUserId: false,
   fetchingCertificationByUserIdError: false,
   certificationByUserId:[],
@@ -782,6 +786,26 @@ case types.GET_ADMIN_USER_FAILURE:
       fetchingAssignedToListError: true,
     };
 
+
+    case types.GET_PROCESS_DROPDOWN_FOR_ONBOARDING_REQUEST:
+      return {
+        ...state,
+        fetchingProcessDropdownForOnboarding: true,
+        fetchingProcessDropdownForOnboardingError: false,
+      };
+    case types.GET_PROCESS_DROPDOWN_FOR_ONBOARDING_SUCCESS:
+      return {
+        ...state,
+        fetchingProcessDropdownForOnboarding: false,
+        fetchingProcessDropdownForOnboardingError: false,
+        onboardingDropdownProcess: action.payload,
+      };
+    case types.GET_PROCESS_DROPDOWN_FOR_ONBOARDING_FAILURE:
+      return {
+        ...state,
+        fetchingProcessDropdownForOnboarding: false,
+        fetchingProcessDropdownForOnboardingError: true,
+      };
 
 
 

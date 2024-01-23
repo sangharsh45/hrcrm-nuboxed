@@ -9,6 +9,11 @@ const initialState = {
   fetchingEmployeeListError: false ,
   teamEmployeeList:[],
 
+  fetchingEmployeeKpi: false,
+  fetchingEmployeeKpiError: false,
+  employeeKpiList:[],
+
+
   addDrawerPerformanceModal:false,
 
   addTeamMemberModal: false,
@@ -438,7 +443,23 @@ export const teamsReducer = (state = initialState, action) => {
                  };
               case types.ADD_KPI_FAILURE:
                 return { ...state, addingKpi: false,
-                  addDrawerPerformanceModal:false };      
+                  addDrawerPerformanceModal:false };  
+                  
+                  
+                  case types.GET_EMPLOYEE_KPI_LIST_REQUEST:
+  return { ...state, fetchingEmployeeKpi: true };
+case types.GET_EMPLOYEE_KPI_LIST_SUCCESS:
+  return {
+    ...state,
+    fetchingEmployeeKpi: false,
+    employeeKpiList: action.payload,
+  };
+case types.GET_EMPLOYEE_KPI_LIST_FAILURE:
+  return {
+    ...state,
+    fetchingEmployeeKpi: false,
+    fetchingEmployeeKpiError: true,
+  };
 
     default:
       return state;
