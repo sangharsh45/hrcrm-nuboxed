@@ -1122,3 +1122,27 @@ export const getProcessDropdownForOnboarding = (orgId) => (dispatch) => {
     });
 };
 
+export const addOnboardingEmployee = (data,employeeId) => (dispatch) => {
+  dispatch({ type: types.ADD_ONBOARDING_EMPLOYEE_REQUEST });
+  axios
+    .put(`${base_url}/employee/onboarding/${employeeId}`, data, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.ADD_ONBOARDING_EMPLOYEE_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.ADD_ONBOARDING_EMPLOYEE_FAILURE,
+        payload: err,
+      });
+    });
+};
+

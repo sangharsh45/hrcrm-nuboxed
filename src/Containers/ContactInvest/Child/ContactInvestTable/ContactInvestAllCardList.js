@@ -280,7 +280,7 @@ function ContactInvestAllCardList(props) {
           </Tooltip>
 
                    </div>
-                                <div class="flex flex-col md: max-sm:flex-row w-full max-sm:justify-evenly items-center">
+                                <div class="flex flex-col md: w-6 max-sm:flex-row w-full max-sm:justify-evenly items-center">
                     <div class="rounded-full bg-white w-5 h-5 cursor-pointer">
                     <Tooltip title={item.mobileNo} >
             {item.doNotCallInd !== true && (
@@ -290,7 +290,7 @@ function ContactInvestAllCardList(props) {
                   handleCurrentContactIdata(item);
                 }}
               >
-               <PhoneInTalkIcon style={{fontSize:"0.8rem"}}/>
+               <PhoneInTalkIcon style={{fontSize:"1rem"}}/>
               </span>
             )}
             {item.doNotCallInd === true && (
@@ -310,7 +310,7 @@ function ContactInvestAllCardList(props) {
            
             <MailOutlineIcon
               type="mail"
-              style={{ cursor: "pointer",fontSize:"0.8rem" }}
+              style={{ cursor: "pointer",fontSize:"1rem" }}
               onClick={() => {
                 props.getContactById(item.contactId);
                 props.handleCurrentContactIdata(true);
@@ -327,7 +327,7 @@ function ContactInvestAllCardList(props) {
                 props.handleContactDrawerModal(true);
               }}
             >{user.pulseAccessInd === true && (
-              <MonitorHeartIcon style={{fontSize:"0.8rem" ,color: "#df9697"}}/>
+              <MonitorHeartIcon style={{fontSize:"1rem" ,color: "#df9697"}}/>
             )}
             </span>
                         </div>
@@ -336,7 +336,7 @@ function ContactInvestAllCardList(props) {
 
                     </div>
                     </div>
-                    <div class="flex flex-col md:w-[2%] max-sm:flex-row w-full max-sm:justify-evenly items-center">
+                    <div class="flex flex-col md:w-6 max-sm:flex-row w-full max-sm:justify-evenly items-center">
                       <div>
                     <Tooltip overlayStyle={{ maxWidth: "300px" }} title={dataLoc}>
             <span
@@ -348,7 +348,7 @@ function ContactInvestAllCardList(props) {
             >
             <LocationOnIcon   style={{
                 cursor: "pointer",
-                fontSize: "0.8rem"
+                fontSize: "1rem"
               }}/>
             </span>
           </Tooltip>
@@ -356,7 +356,7 @@ function ContactInvestAllCardList(props) {
           {/* <div><Tooltip title={item.email}>
               <MailOutlineIcon
                 type="mail"
-                style={{ cursor: "pointer",fontSize: "0.8rem" }}
+                style={{ cursor: "pointer",fontSize: "1rem" }}
                 onClick={() => {
                   props.getCustomerById(item.customerId);
                   props.handleCustomerEmailDrawerModal(true);
@@ -367,7 +367,7 @@ function ContactInvestAllCardList(props) {
             {user.imInd === true  && user.investorContactUpdateInd === true &&  (
             <Tooltip title="Edit">
               <BorderColorIcon
-                style={{ cursor: "pointer",fontSize: "0.8rem" }}
+                style={{ cursor: "pointer",fontSize: "1rem" }}
                 onClick={() => {
                   handleUpdateContactInvestModal(true);
                   handleCurrentContactIdata(item);
@@ -378,9 +378,9 @@ function ContactInvestAllCardList(props) {
             )}
             </div>
                       </div>  
-                      <div class="w-[2%]"></div>
+                  
                       </div>  
-                      <div class="flex flex-col justify-evenly  ">
+                      <div class="flex flex-col w-6 justify-evenly  ">
                     <Tooltip title="Notes">
        <NoteAltIcon
                 onClick={() => {

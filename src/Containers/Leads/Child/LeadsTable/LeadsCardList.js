@@ -412,10 +412,11 @@ const LeadsCardList = (props) => {
                     )}
                     {user.leadsDeleteInd === true && user.crmInd === true && (
                       <div>
+                       
                         <StyledPopconfirm
                           title="Do you want to delete?"
                           onConfirm={() => deleteLeadsData(item.leadsId)}>
-                    
+                     <Tooltip title="Delete">
                           <DeleteOutlined
                             type="delete"
                             style={{
@@ -424,7 +425,7 @@ const LeadsCardList = (props) => {
                               fontSize: "1rem",
                             }}
                           />
-                       
+                       </Tooltip>
                         </StyledPopconfirm>
                       </div>
                     )}

@@ -79,7 +79,7 @@ const PitchCardList = (props) => {
         <div className=" md:w-[6.5rem]"></div>
         <div className=" md:w-[5.1rem] "><FormattedMessage
                   id="app.phoneno#"
-                  defaultMessage="phoneno#"
+                  defaultMessage="phone #"
                 /></div>
         <div className="md:w-[8.2rem]"><FormattedMessage
                   id="app.country"
@@ -388,7 +388,7 @@ const PitchCardList = (props) => {
           /> */}
 </div>
                                 </div>
-                                <div class="flex flex-col justify-evenly w-[6%] max-sm:flex-row max-sm:w-[10%]">
+                                <div class="flex flex-col justify-evenly w-6 max-sm:flex-row max-sm:w-[10%]">
                                 <div >
                     <Tooltip title="Notes">
        <NoteAltIcon
@@ -420,7 +420,7 @@ onClick={()=>{
                                 </div>
                                 <div class="flex max-sm:flex-row  justify-evenly md:w-20 max-sm:w-[25%] ">
                                
-                                <div class="flex flex-col w-[5%] max-sm:flex-row">
+                                <div class="flex flex-col w-6 max-sm:flex-row">
                                 {user.imInd === true  &&  user.pitchUpdateInd === true && (  
                                 <div>
             <Tooltip title="Edit">
@@ -439,16 +439,18 @@ onClick={()=>{
                                 )}
                                
                         <div>
+
                         <StyledPopconfirm
             title="Do you want to delete?"
             onConfirm={() => deletePitchData(item.investorleadsId)}
-          >
+          > <Tooltip title="Delete">
              {user.imInd === true  &&  user.plantDeleteInd === true && ( 
             <DeleteOutlined
               type="delete"
               style={{ cursor: "pointer", color: "red" ,fontSize: "1rem",}}
             />
              )} 
+             </Tooltip>
           </StyledPopconfirm>
                         </div>
                             
@@ -457,7 +459,7 @@ onClick={()=>{
 
                     </div>
                     </div>
-                    <div class="flex flex-col w-[2%] max-sm:flex-row">
+                    <div class="flex flex-col w-6 max-sm:flex-row">
                       <div>
                     <Tooltip overlayStyle={{ maxWidth: "300px" }} title={dataLoc}>
             <span
@@ -487,7 +489,7 @@ onClick={()=>{
             </Tooltip> </div>
            
                       </div> 
-                      <div class="md:w-[2%]"></div>   
+                      
                     </div>
                     </div>
                       </div>

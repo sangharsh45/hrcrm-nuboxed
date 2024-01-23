@@ -301,7 +301,7 @@ function ContactCardList(props) {
           </Tooltip>
 
                    </div>
-                   <div class="flex flex-col w-[5%] max-sm:flex-row max-sm:w-[10%]">
+                   <div class="flex flex-col w-6 max-sm:flex-row max-sm:w-[10%]">
                     <div>
                     <Tooltip title="Notes">
        <NoteAltIcon
@@ -326,7 +326,7 @@ function ContactCardList(props) {
 
 </div>
             </div>
-                                <div class="flex flex-col  max-sm:flex-row w-[40%] ml-2 max-sm:justify-evenly items-center">
+                                <div class="flex flex-col w-6  max-sm:flex-row w-[40%] ml-2 max-sm:justify-evenly items-center">
                     <div class="rounded-full w-5 h-5 cursor-pointer md:mt-4">
                     <Tooltip title={item.mobileNo} >
             {item.doNotCallInd !== true && (
@@ -383,7 +383,7 @@ function ContactCardList(props) {
 
                     </div>
                     </div>
-                    <div class="flex flex-col md:w-[2%] max-sm:flex-row w-full max-sm:justify-evenly items-center">
+                    <div class="flex flex-col md:w-6 max-sm:flex-row w-full max-sm:justify-evenly items-center">
                       <div>
                     <Tooltip overlayStyle={{ maxWidth: "300px" }} title={dataLoc}>
             <span
@@ -426,7 +426,7 @@ function ContactCardList(props) {
             </div>
               )}
                       </div>    
-                     <div class="w-[1%]"></div>
+         
                       </div>
                             </div>
                         </div>

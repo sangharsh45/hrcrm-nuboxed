@@ -310,12 +310,13 @@ function handleSetCurrentEmployeeId(employeeId,) {
         handleSetCurrentEmployeeId={props.handleSetCurrentEmployeeId}
       />
                <StepperEmployeeModal
+               currentEmployeeId={currentEmployeeId}
                 storedData={storedData}
                singleEmployee={props.singleEmployee}
-       employeeName={currentEmployeeId}
+               employeeName={currentEmployeeId}
        onboardingEmployeeModal={props.onboardingEmployeeModal}
         handleOnboardingEmployeeModal={props.handleOnboardingEmployeeModal}
-        handleSetCurrentEmployeeId={props.handleSetCurrentEmployeeId}
+        // handleSetCurrentEmployeeId={props.handleSetCurrentEmployeeId}
       />
               <EmployeeDrawerForAdmin
       employeeId={currentEmployeeId}

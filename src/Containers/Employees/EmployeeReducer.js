@@ -52,6 +52,9 @@ const initialState = {
   fetchingEmployeeByIdError: false,
   singleEmployee: {},
 
+  addOnboadingEmpl: false,
+  addOnboadingEmplError: false,
+
   fetchingProcessDropdownForOnboarding: false,
   fetchingProcessDropdownForOnboardingError: false,
   onboardingDropdownProcess:[],
@@ -806,6 +809,28 @@ case types.GET_ADMIN_USER_FAILURE:
         fetchingProcessDropdownForOnboarding: false,
         fetchingProcessDropdownForOnboardingError: true,
       };
+
+      case types.ADD_ONBOARDING_EMPLOYEE_REQUEST:
+        return { ...state, addOnboadingEmpl: true };
+      case types.ADD_ONBOARDING_EMPLOYEE_SUCCESS:
+        return {
+          ...state,
+          addOnboadingEmpl: false,
+          // openNotifydrwr: false,
+          // employees: state.employees.map((item) => {
+          //   if (item.employeeId === action.payload.employeeId) {
+          //     return action.payload;
+          //   } else {
+          //     return item;
+          //   }
+          // }),
+        };
+      case types.ADD_ONBOARDING_EMPLOYEE_FAILURE:
+        return {
+          ...state,
+          addOnboadingEmpl: false,
+          addOnboadingEmplError: true,
+        };
 
 
 

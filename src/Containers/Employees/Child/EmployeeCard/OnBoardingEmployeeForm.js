@@ -1,11 +1,12 @@
 import React, { useEffect,useState } from 'react';
 import { ClockCircleOutlined } from '@ant-design/icons';
-import { Button,Steps } from 'antd';
+import { Button,Steps,Tooltip } from 'antd';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import moment from 'moment';
  import { getProcessForOnboarding } from '../../../Settings/SettingsAction';
 import { Field } from 'formik';
+import {addOnboardingEmployee} from "../../../Employees/EmployeeAction"
 import { FormattedMessage } from 'react-intl';
 import { SelectComponent } from '../../../../Components/Forms/Formik/SelectComponent';
 
@@ -134,7 +135,14 @@ const OnBoardingEmployeeForm = (props) => {
 </> 
         )} 
         <div class=" flex justify-end">
-          <Button>Onboarding Completed</Button>
+        <Tooltip title="Release Registration Email to the user">
+          <Button
+           onClick={() => {
+            props.addOnboardingEmployee(props.currentEmployeeId.employeeId);
+           
+          }}
+          >Onboarding Completed</Button>
+             </Tooltip>
         </div>
         {/* <Timeline>
           {mileageStatus &&
@@ -154,15 +162,17 @@ const OnBoardingEmployeeForm = (props) => {
   );
 };
 
-const mapStateToProps = ({ settings, auth }) => ({
+const mapStateToProps = ({ settings, employee,auth }) => ({
   orgId: auth.userDetails && auth.userDetails.organizationId,
   onboardingProcess: settings.onboardingProcess,
+  setEditingEmployee:employee.setEditingEmployee,
 });
 
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
       getProcessForOnboarding,
+      addOnboardingEmployee,
     },
     dispatch
   );
