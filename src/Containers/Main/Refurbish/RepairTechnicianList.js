@@ -82,7 +82,6 @@
 // )(RepairTechnicianList);
 
 import React, { useEffect, useState } from 'react'
-import { StyledTable } from '../../../Components/UI/Antd'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import RepairPhoneListByTechnician from './RepairPhoneListByTechnician'
@@ -108,13 +107,17 @@ const RepairTechnicianList = (props) => {
             <div className=' flex justify-end sticky  z-auto'>
                 <OnlyWrapCard style={{ backgroundColor: "#E3E8EE" }}>
                     <div className=" flex  w-[95%] p-2 bg-transparent font-bold sticky top-0 z-10">
-                        <div className=" md:w-[8.1rem]"><FormattedMessage
-                        id="app.technicianname"
-                        defaultMessage="technicianname"
-                      /></div>
-                        <div className=" md:w-[8.12rem]"><FormattedMessage
-                        id="app.item"
-                        defaultMessage="item"
+                    <div className=" md:w-[8.1rem]"><FormattedMessage
+                        id="app.name"
+                        defaultMessage="Name"
+                     /></div>
+                                <div className=" md:w-[8.1rem]"><FormattedMessage
+                        id="app.mobile"
+                        defaultMessage="Mobile #"
+                     /></div>
+                        <div className="md:w-[8.12rem]"><FormattedMessage
+                        id="app.unit"
+                        defaultMessage="Units"
                       /></div>
                        
                     </div>
@@ -138,11 +141,16 @@ const RepairTechnicianList = (props) => {
 
                                         <div className=" flex font-medium   md:w-[5.7rem] max-sm:flex-row w-full max-sm:justify-between  ">
                                             <h4 class=" text-xs text-cardBody font-poppins">
+                                             
+                                            </h4>
+
+                                        </div>
+                                        <div className=" flex font-medium   md:w-[5.7rem] max-sm:flex-row w-full max-sm:justify-between  ">
+                                            <h4 class=" text-xs text-cardBody font-poppins">
                                                 {item.totalPhone}
                                             </h4>
 
                                         </div>
-                                        
                                     </div>
 
                                 </div>

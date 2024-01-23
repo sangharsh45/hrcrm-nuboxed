@@ -428,7 +428,7 @@ function PhoneListForRepair(props) {
 
     return (
         <>
-            <div className=' flex justify-end sticky flex-col z-auto overflow-x-auto h-[30rem]'>
+            <div className=' flex justify-end sticky flex-col z-auto overflow-x-auto '>
                 <OnlyWrapCard style={{ backgroundColor: "#E3E8EE" }}>
                     <div className=" flex justify-between w-[97.5%] p-2 bg-transparent font-bold sticky top-0 z-10">
                     <div className=" md:w-[3.1rem]"><FormattedMessage
@@ -443,10 +443,7 @@ function PhoneListForRepair(props) {
                         id="app.iMEI"
                         defaultMessage="iMEI"
                       /></div>
-                        <div className="md:w-[3.6rem]"><FormattedMessage
-                        id="app.qrcode"
-                        defaultMessage="qrcode"
-                      /></div>
+                        <div className="md:w-[3.6rem]"></div>
                         <div className="md:w-[4.8rem]"><FormattedMessage
                         id="app.repair"
                         defaultMessage="repair"
@@ -465,7 +462,7 @@ function PhoneListForRepair(props) {
                       /></div>
                         <div className="md:w-[6.5rem]"><FormattedMessage
                         id="app.hours"
-                        defaultMessage="hours"
+                        defaultMessage="Hours"
                       /></div>
                         <div className="md:w-[6.9rem]"></div>
                     </div>

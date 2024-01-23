@@ -40,8 +40,6 @@ function UpdateDealForm (props) {
     props.getContactData(props.userId);
     props.getDealLinkedStages(props.orgId);
     props.getDealLinkedWorkflow(props.orgId);
-    // props.getWorkflow(props.orgId);
-    // props.getStages(props.orgId);
   },[]);
 
   function getStagesOptions(filterOptionKey, filterOptionValue) {
@@ -75,7 +73,7 @@ function UpdateDealForm (props) {
     return StagesOptions;
   }
 
-    const salesNameOption = props.allEmployeeList.map((item) => {
+    const allEmplo = props.allEmployeeList.map((item) => {
       return {
         label: `${item.empName || ""}`,
         value: item.employeeId,
@@ -154,6 +152,7 @@ function UpdateDealForm (props) {
             salesUserIds: selectedOption ? selectedOption.employeeId:props.currentItem.salesUserIds,
             investorId: props.currentItem.investorId || "",
             contactId: props.currentItem.contactId || "",
+            include:props.currentItem.include || ""
           }}
           validationSchema={UpdateOpportunitySchema}
           onSubmit={(values, { resetForm }) => {
@@ -444,7 +443,27 @@ function UpdateDealForm (props) {
         </>
       )}
     </Listbox>
-                  <Spacer />
+    <div>
+<Field
+                    name="include"
+                    isColumnWithoutNoCreate
+                    label={
+                      <FormattedMessage
+                        id="app.include"
+                        defaultMessage="Include"
+                      />
+                    }
+                    component={SelectComponent}
+                    options={
+                      Array.isArray(allEmplo)
+                        ? allEmplo
+                        : []
+                    }
+                    isColumn
+                    value={values.employeeId}
+                    inlineLabel
+                  />
+  </div>
 
                   <Field
                     name="investorId"
@@ -590,7 +609,6 @@ const mapStateToProps = ({ auth,deal,investor, opportunity, customer, contact })
   organizationId: auth.userDetails.organizationId,
   setEditingOpportunity: opportunity.setEditingOpportunity,
   updateOpportunityById: opportunity.updateOpportunityById,
-  sales: opportunity.sales,
   dealLinkWorkflow:deal.dealLinkWorkflow,
   dealLinkStages:deal.dealLinkStages,
   workflow: opportunity.workflow,
@@ -605,8 +623,6 @@ const mapDispatchToProps = (dispatch) =>
     {
       updateDeal,
       getAllEmployeelist,
-      // getWorkflow,
-      // getStages,
       getDealLinkedWorkflow,
       getDealLinkedStages,
       getContactData,

@@ -1,21 +1,20 @@
 
 
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState, } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { withRouter } from "react-router-dom";
 import styled from "styled-components";
 import StageColumns1 from "./StageColumns1";
-import { elipsize } from "../../../Helpers/Function/Functions";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import { StyledTabs, } from "../../../Components/UI/Antd";
-import { MainWrapper, FlexContainer } from "../../../Components/UI/Layout";
+import { MainWrapper } from "../../../Components/UI/Layout";
 import {
     getProcessForOpportunity,
     getProcessStagesForOpportunity,
 } from "../../Settings/SettingsAction";
 import {getAllOpportunityListByUserId,updateOpportunitydragstage,emptyOpportunity} from "../OpportunityAction"
-import { Spin, notification } from "antd";
+import { Spin} from "antd";
 const TabPane = StyledTabs.TabPane;
 
 
@@ -77,6 +76,7 @@ function OpportunityBoard(props) {
     return id;
   }, [props.opportunityProcess]);
 
+
   useEffect(() => {
     props.getProcessForOpportunity(props.orgId);
      props.getAllOpportunityListByUserId(props.userId)
@@ -85,11 +85,7 @@ function OpportunityBoard(props) {
   useEffect(() => {
     if (!processData) return;
     props.getProcessStagesForOpportunity(processData.opportunityWorkflowDetailsId);
-  }, [processData]);
-
-  useEffect(() => {
-    return () => props.emptyOpportunity();
-  }, []);
+  }, [processData]);   
 
   const [isDragging, setIsDragging] = useState(false);
   const [currentProcess, setCurrentProcess] = useState({});
@@ -153,29 +149,8 @@ function OpportunityBoard(props) {
           height: "100vh",
         }}
       >
-        {/* <div style={{ display: "flex" }}>
-        <StyledTabs
-  type="card"
->
-  {props.opportunityProcess
-    .filter(item => item.publishInd === true)
-    .map((item, i) => (
-      <TabPane
-        key={i}
-        tab={
-          <span onClick={() => handleProcessClick(item)}>
-          {elipsize(item.workflowName, 15)}
-          </span>
-        }
-      ></TabPane>
-    ))}
-</StyledTabs>
-
-        </div> */}
-        <div class=" flex" >
-          <StyledTabs
-            type="card"
-          >
+        <div class="flex" >
+          <StyledTabs type="card">
             {props.opportunityProcess
     .filter(item => item.publishInd === true)
     .map((item, i) => {
@@ -185,6 +160,7 @@ function OpportunityBoard(props) {
                   tab={
                     <span onClick={() => handleProcessClick(item)}>
                       {item.workflowName}
+                      
                     </span>
                   }
                 ></TabPane>
@@ -192,7 +168,8 @@ function OpportunityBoard(props) {
             })}
           </StyledTabs>
         </div>
-        <div class=" flex flex-no-wrap justify-center" >
+
+        <div class="flex flex-no-wrap justify-center" >
               <DragDropContext
                  onDragEnd={onDragEnd}
                 type="stage"

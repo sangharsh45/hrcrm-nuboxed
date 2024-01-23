@@ -37,8 +37,8 @@ function ProductionOrderListById(props) {
                             defaultMessage="duedate"
                         /></div>
                         <div className=" md:w-[9.8rem] "><FormattedMessage
-                            id="app.completedphn"
-                            defaultMessage="completedphn"
+                            id="app.completedunit"
+                            defaultMessage="Completed Units"
                         /></div>
                         <div className="md:w-[5.8rem]"><FormattedMessage
                             id="app.status"
@@ -108,8 +108,11 @@ function ProductionOrderListById(props) {
                                                         qcInspectionInd: 1
                                                     }, item.orderPhoneId, props.locationId, props.userId)
                                                 }}
-                                            >Start Inspection</Button> : item.qcInspectionInd === 1 ?
-                                                <Button onClick={handlePauseResume}>{hide ? "Pause Inspection" : "Resume Inspection"}</Button> : "Inspection Completed"}
+                                            >
+                                                Start Inspection
+                                                
+                                                </Button> : item.qcInspectionInd === 1 ?
+                                                <Button onClick={handlePauseResume}>{hide ? "Pause Inspection" : "Resume Inspection"}</Button> : <label class="text-green-600">Inspection Completed</label>}
 
                                         </div>
                                     </div>

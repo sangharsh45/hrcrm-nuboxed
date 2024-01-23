@@ -32,7 +32,6 @@ import {createDeals,  getAllDealStages,
   getDealLinkedStages
 } from "../DealAction";
 
-
 /**
  * yup validation scheme for creating a opportunity
  */
@@ -79,33 +78,7 @@ function DealForm(props) {
   
     return contactOptions;
   }
-  
 
-
-
-  function getInitiativeOptions(filterOptionKey, filterOptionValue) {
-    const initiativeOptions =
-      props.initiatives.length &&
-      props.initiatives
-        .filter((option) => {
-          if (
-            option.customerId === filterOptionValue &&
-            option.probability !== 0
-          ) {
-            return option;
-          }
-        })
-
-        .map((option) => ({
-          label: option.initiativeName || "",
-          value: option.initiativeDetailsId,
-        }));
-
-    return initiativeOptions;
-  }
-  function classNames(...classes) {
-    return classes.filter(Boolean).join(" ");
-  }
 
   function getStagesOptions(filterOptionKey, filterOptionValue) {
     const StagesOptions =
@@ -145,27 +118,6 @@ function DealForm(props) {
     };
   });
 
-  function getskillOptions(filterOptionKey, filterOptionValue) {
-    const skillOptions =
-      props.opportunitySkills.length &&
-      props.opportunitySkills
-        .filter((option) => {
-          if (option.initiativeDetailsId === filterOptionValue) {
-            // console.log("option",option.initiativeSkillMapper)
-            return option;
-          }
-        })
-
-        .map((option) => {
-          console.log("option1", option);
-          return {
-            label: `${option.skillName || ""}`,
-            value: option.skilId,
-          };
-        });
-
-    return skillOptions;
-  }
 
   const customerNameOption = props.investorData
     .sort((a, b) => {
@@ -188,12 +140,6 @@ function DealForm(props) {
       };
     });
 
-  const recruiterNameOption = props.recruiterName.map((item) => {
-    return {
-      label: `${item.fullName || ""}`,
-      value: item.employeeId,
-    };
-  });
 
   const SourceOptions = props.sources.map((item) => {
     return {
@@ -202,7 +148,7 @@ function DealForm(props) {
     };
   });
 
-  const salesNameOption = props.allEmployeeList.map((item) => {
+  const allEmplo = props.allEmployeeList.map((item) => {
     return {
       label: `${item.empName || ""}`,
       value: item.employeeId,
@@ -588,9 +534,29 @@ function DealForm(props) {
           </>
         )}
       </Listbox>
-
-                <Spacer />
-<div class="flex justify-between max-sm:flex-col">
+<div>
+<Field
+                    name="include"
+                    isColumnWithoutNoCreate
+                    label={
+                      <FormattedMessage
+                        id="app.include"
+                        defaultMessage="Include"
+                      />
+                    }
+                    component={SelectComponent}
+                    options={
+                      Array.isArray(allEmplo)
+                        ? allEmplo
+                        : []
+                    }
+                    isColumn
+                    value={values.employeeId}
+                    inlineLabel
+                  />
+  </div>
+                
+<div class="mt-2 flex justify-between max-sm:flex-col">
 <div class=" w-w47.5 max-sm:w-wk">
                <StyledLabel>
                   <Field

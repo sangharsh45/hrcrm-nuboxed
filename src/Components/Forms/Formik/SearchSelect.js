@@ -36,8 +36,7 @@ class SearchSelect extends Component {
   componentDidMount() {
     const {
       opportunityId,
-      processId,
-      userId,
+       userId,
       organizationId,
       customerId,
       selectType,
