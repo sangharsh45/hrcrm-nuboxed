@@ -4228,3 +4228,72 @@ export const deleteOnboardingStagesData = (unboardingStagesId, orgId) => (dispat
       });
     });
 };
+
+
+
+
+export const addSkillLevel = (customer) => (dispatch, getState) => {
+ 
+
+  // const opportunityId = getState().opportunity.opportunity.opportunityId;
+ 
+  dispatch({
+    type: types.ADD_SKILL_LEVEL_REQUEST,
+  });
+
+  axios
+    .post(`${base_url}/skillLevel`, customer, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      // dispatch(
+      //   linkCustomersToOpportunity(opportunityId, { CustomerIds: [res.data] }, cb)
+      // );
+     
+
+      dispatch({
+        type: types.ADD_SKILL_LEVEL_SUCCESS,
+        payload: res.data,
+      });
+      // cb && cb();
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.ADD_SKILL_LEVEL_FAILURE,
+        payload: err,
+      });
+      // cb && cb();
+    });
+};
+
+
+
+export const getMatrixdata = (activeTab,organizationId) => (dispatch) => {
+  dispatch({
+    type: types.GET_MATRIX_DATA_REQUEST,
+  });
+  axios               
+    .get(`${base_url}/skillLevel/${activeTab}/${organizationId}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.GET_MATRIX_DATA_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.GET_MATRIX_DATA_FAILURE,
+        payload: err,
+      });
+    });
+};
