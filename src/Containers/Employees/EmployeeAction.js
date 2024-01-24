@@ -2,6 +2,7 @@ import * as types from "./EmployeeActionType";
 import axios from "axios";
 import dayjs from "dayjs";
 import { base_url } from "../../Config/Auth";
+import { message } from "antd";
 
 export const setEmployeeViewType = (viewType) => (dispatch) =>
   dispatch({ type: types.SET_EMPLOYEE_VIEW_TYPE, payload: viewType });
@@ -1122,7 +1123,7 @@ export const getProcessDropdownForOnboarding = (orgId) => (dispatch) => {
     });
 };
 
-export const addOnboardingEmployee = (data,employeeId) => (dispatch) => {
+export const addOnboardingEmployee = (employeeId,data) => (dispatch) => {
   dispatch({ type: types.ADD_ONBOARDING_EMPLOYEE_REQUEST });
   axios
     .put(`${base_url}/employee/onboarding/${employeeId}`, data, {
@@ -1131,6 +1132,7 @@ export const addOnboardingEmployee = (data,employeeId) => (dispatch) => {
       },
     })
     .then((res) => {
+      message.success(res.data);
       console.log(res);
       dispatch({
         type: types.ADD_ONBOARDING_EMPLOYEE_SUCCESS,

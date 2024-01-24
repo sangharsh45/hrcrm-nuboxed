@@ -23,6 +23,7 @@ const OnBoardingEmployeeForm = (props) => {
     // setSelectedUser("");
     // props.getProcessForOnboarding(selectedWork) // Assuming you want to pass the selected department and filtered roles to a parent component
   };
+  console.log("cgdf",props.currentEmployeeId)
   return (
     <>
       <div className="mt-4">
@@ -75,50 +76,8 @@ const OnBoardingEmployeeForm = (props) => {
                     status: 'progress',
                  
                 },
-                {
-                    title: 'QC',
-                 
-                },
-
-                {
-                    title: 'Order Commercial Confirmation',
-                  
-                },
-                {
-                    title: 'Repair',
-                    // after complete show repair completed on date and user
-                  
-                },
-
-                {
-                    title: 'Packing',
-                    // after packed button on enabled level
-                    status: 'progress',
-                    // description: <>
-                    //     {props.particularRowData.dispatchInspectionInd === 3 &&
-                    //         <b>Packed By {props.particularRowData.packedBy} On {moment(props.particularRowData.packedDate).format("DD-MM-YYYY")}</b>
-                    //     }
-                    // </>
-                },
-                {
-                    title: 'Schedule PickUp',
-                    // after customer pickup order (after delivery address)
-                    // status: <>
-                    //     {props.particularRowData.pickupInd === false ? 'wait' : 'finish'}</>,
-                    // description: <>
-                    //     {props.particularRowData.pickupInd && <b>Scheduled for {props.particularRowData.unloadingAddresses && props.particularRowData.unloadingAddresses[0].city || ""} On {moment(props.particularRowData.unloadingDate).format("DD-MM-YYYY")} by {props.particularRowData.unloadingUser}</b>}
-                    // </>
-                },
-                {
-                    title: 'Order Dispatch',
-                    status: 'progress',
-
-                },
-                {
-                    title: 'Customer Feedback',
-                    status: 'progress',
-
-                },
+             
+               
             ]}
         />
         {/* <StartRepairReasonModal
@@ -144,19 +103,7 @@ const OnBoardingEmployeeForm = (props) => {
           >Onboarding Completed</Button>
              </Tooltip>
         </div>
-        {/* <Timeline>
-          {mileageStatus &&
-            mileageStatus.map((status, i) => (
-              <Timeline.Item key={i}>
-                {status.approvedStatus === 'Approved' ? (
-                  ` ${moment(status.createdOn).format('ll')} Approved By ${status.employeeName} on ${moment(status.approvedDate).format('ll')}`
-                ) : status.approvedStatus === 'Pending' ? (
-                  `Pending With ${status.employeeName}.`
-                ) : null}
-              </Timeline.Item>
-            ))}
-        
-        </Timeline> */}
+     
       </div>
     </>
   );
