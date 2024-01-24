@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import styled from "styled-components";
 import { getPhoneTasklist } from "../Account/AccountAction";
-import { getTaskByPhoneId, addTaskByPhoneId } from "./RefurbishAction"
+import { getTaskByPhoneId, addTaskByPhoneId,updateProcessTask } from "./RefurbishAction"
 import { MainWrapper, StyledLabel } from "../../../Components/UI/Elements";
 import { Button, Input, Switch, Select } from "antd";
 const { Option } = Select;
@@ -16,6 +16,13 @@ function RepairTaskTable(props) {
     const [task, setTask] = useState("")
     const [customName, setCustomeName] = useState("")
     const [type, setType] = useState(false)
+   
+    const [rowItem, setrowItem] = useState({});
+
+function handleRowItem(itms) {
+    setrowItem(itms)
+}
+
     const handleTask = (value) => {
         console.log(value)
         setTask(value)
@@ -34,26 +41,32 @@ function RepairTaskTable(props) {
             userId: props.userId
         }, props.phoneId)
     }
+    const handleUpdateTask = () => {
+        props.updateProcessTask(rowItem.phoneTaskId)
+    }
+    console.log("rrrrrrrr",rowItem)
     return (
         <>
-            <StyledLabel>Add Task</StyledLabel>
-            <MainWrapper>
-                <div style={{ justifyContent: "space-between", display: "flex", width: "70%" }}>
-
-                    <div style={{ display: "flex", justifyContent: "space-between", width: "70%" }}>
-                        <div style={{ width: "30%" }}>
-                            <Switch
+        <div class="flex justify-around max-sm:flex-col">
+            <div class=" h-full w-w47.5 max-sm:w-wk">
+            <div class="flex justify-between">
+                  <div class="w-[31%]">
+                  <StyledLabel>Add Task</StyledLabel>
+                  </div>
+                  <div class="w-[31%]">
+                  <Switch
                                 checked={type}
                                 onChange={handleChangeType}
                                 checkedChildren="Yes"
                                 unCheckedChildren="No"
                             />
-                        </div>
-                        {type ?
-                            <div style={{ width: "50%" }}>
+                  </div>
+                  
+                  {type ?
+                            <div  class="w-[50%]">
                                 <Input type="text" value={customName} placeholder="Enter Custome Task" onChange={(value) => { handleCustomeName(value) }} />
                             </div>
-                            : <div style={{ width: "50%" }}>
+                            : <div class="w-[50%]">
                                 <Select onChange={handleTask}>
                                     {props.phoTasklist.map((a) => {
                                         return <Option value={a.itemTaskId}>{a.name}</Option>;
@@ -61,16 +74,40 @@ function RepairTaskTable(props) {
                                 </Select>
 
                             </div>}
-                    </div>
-                    <div style={{ width: "20%" }}><Button onClick={handleSubmitTask}>Add</Button></div>
                 </div>
+               
+              </div>
+<div class=" h-full w-w47.5 max-sm:w-wk">
+<div class="flex justify-between">
+                  <div class="w-[48%]">
+                  <Button type="primary"
+                  onClick={handleSubmitTask}>Add</Button>
+                  </div>
+
+              
+                </div>
+             
+              </div>
+              </div>
+            
+            <MainWrapper>
+        
                 {props.taskByPhone.map((item) => {
                     return (
-                        <EventWrapper>
-                            <EventName style={{ flexBasis: "85%" }}>
+                        <div class="cursor-pointer w-[18%] flex justify-center ">
+                            <div class="basis-[85%]">
                                 {item.taskName}
-                            </EventName>
-                        </EventWrapper>
+                            </div>
+                            <div>
+                            <Switch
+                        // checked={props.paymentCollection || paymentCollection}
+                        onChange={handleUpdateTask} 
+                        isLoading={true}
+                        checkedChildren="Yes"
+                        unCheckedChildren="No"
+                    />
+                            </div>
+                        </div>
                     )
                 })}
             </MainWrapper>
@@ -92,7 +129,8 @@ const mapDispatchToProps = (dispatch) =>
         {
             getPhoneTasklist,
             getTaskByPhoneId,
-            addTaskByPhoneId
+            addTaskByPhoneId,
+            updateProcessTask
         },
         dispatch
     );

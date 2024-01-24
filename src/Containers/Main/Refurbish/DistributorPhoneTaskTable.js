@@ -38,10 +38,10 @@ function DistributorPhoneTaskTable(props) {
         <>
             <StyledLabel>Add Task</StyledLabel>
             <MainWrapper>
-                <div class="flex justify-between w-[70%]">
+                <div class="flex w-[70%]">
 
                     <div class="flex justify-between w-[70%]">
-                        <div class="w-[30%]">
+                        <div class="w-[6%]">
                             <Switch
                                 checked={type}
                                 onChange={handleChangeType}

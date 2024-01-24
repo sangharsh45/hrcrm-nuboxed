@@ -215,6 +215,13 @@ const initialState = {
   fetchingTagInProcess: false,
   fetchingTagInProcessError: false,
   tagInPros: [],
+
+  updatingProcessTask: false,
+  updatingProcessTaskError: true,
+
+  approvingSpare: false,
+  approvingSpareError: true,
+
 };
 
 export const refurbishReducer = (state = initialState, action) => {
@@ -1017,6 +1024,40 @@ export const refurbishReducer = (state = initialState, action) => {
         fetchingTaskByPhoneId: false,
         fetchingTaskByPhoneIdError: true,
       };
+
+      case types.APPROVE_SPARE_REQUEST:
+        return { ...state, approvingSpare: true };
+      case types.APPROVE_SPARE_SUCCESS:
+        return {
+          ...state,
+          approvingSpare: false,
+          allSpareById: state.allSpareById.filter(
+            (item) => item.phoneSpareId !== action.payload.phoneSpareId
+          ),
+        };
+      case types.APPROVE_SPARE_FAILURE:
+        return {
+          ...state,
+          approvingSpare: false,
+          approvingSpareError: true,
+        };  
+        
+        case types.UPDATE_PROCESS_TASK_REQUEST:
+          return { ...state, updatingProcessTask: true };
+        case types.UPDATE_PROCESS_TASK_SUCCESS:
+          return {
+            ...state,
+            updatingProcessTask: false,
+            taskByPhone: state.taskByPhone.filter(
+              (item) => item.phoneTaskId !== action.payload.phoneTaskId
+            ),
+          };
+        case types.UPDATE_PROCESS_TASK_FAILURE:
+          return {
+            ...state,
+            updatingProcessTask: false,
+            updatingProcessTaskError: true,
+          };  
     default:
       return state;
   }

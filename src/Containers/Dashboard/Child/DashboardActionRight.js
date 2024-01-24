@@ -26,7 +26,8 @@ const HeaderActionRight = (props) => {
     <>
       <div class=" flex items-center justify-evenly"  >
         
-        
+        <div class="flex w-[15rem] justify-between">
+
         <span class="cursor-pointer" 
         onClick={() => handleButtonClick("Tasks")} 
         style={{
@@ -89,7 +90,7 @@ const HeaderActionRight = (props) => {
           
         </span>
     )}
-   
+   </div>
    
       <>
       <div class="">
