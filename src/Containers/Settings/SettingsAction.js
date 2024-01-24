@@ -4229,56 +4229,71 @@ export const deleteOnboardingStagesData = (unboardingStagesId, orgId) => (dispat
     });
 };
 
-export const LinkOnboardingStagePublish = (data, cb) => (dispatch) => {
-  dispatch({ type: types.LINK_ONBOARDING_STAGES_PUBLISH_REQUEST });
+
+
+
+export const addSkillLevel = (customer) => (dispatch, getState) => {
+ 
+
+  // const opportunityId = getState().opportunity.opportunity.opportunityId;
+ 
+  dispatch({
+    type: types.ADD_SKILL_LEVEL_REQUEST,
+  });
 
   axios
-    .put(`${base_url}/unboardingStages/update/publishInd `, data, {
+    .post(`${base_url}/skillLevel`, customer, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },
     })
-
     .then((res) => {
       console.log(res);
+      // dispatch(
+      //   linkCustomersToOpportunity(opportunityId, { CustomerIds: [res.data] }, cb)
+      // );
+     
+
       dispatch({
-        type: types.LINK_ONBOARDING_STAGES_PUBLISH_SUCCESS,
+        type: types.ADD_SKILL_LEVEL_SUCCESS,
         payload: res.data,
       });
-      cb && cb("Success", res.data);
+      // cb && cb();
     })
     .catch((err) => {
       console.log(err);
       dispatch({
-        type: types.LINK_ONBOARDING_STAGES_PUBLISH_FAILURE,
+        type: types.ADD_SKILL_LEVEL_FAILURE,
+        payload: err,
       });
-      cb && cb("Failure");
+      // cb && cb();
     });
 };
 
-export const LinkOnboardingProcessPublish = (data, cb,) => (dispatch) => {
-  dispatch({ type: types.LINK_ONBOARDING_PROCESS_PUBLISH_REQUEST });
 
-  axios
-    .put(`${base_url}/unboardingWorkflow/update/publishInd`, data, {
+
+export const getMatrixdata = (activeTab,organizationId) => (dispatch) => {
+  dispatch({
+    type: types.GET_MATRIX_DATA_REQUEST,
+  });
+  axios               
+    .get(`${base_url}/skillLevel/${activeTab}/${organizationId}`, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },
     })
-
     .then((res) => {
       console.log(res);
       dispatch({
-        type: types.LINK_ONBOARDING_PROCESS_PUBLISH_SUCCESS,
+        type: types.GET_MATRIX_DATA_SUCCESS,
         payload: res.data,
       });
-      cb && cb("Success", res.data);
     })
     .catch((err) => {
       console.log(err);
       dispatch({
-        type: types.LINK_ONBOARDING_PROCESS_PUBLISH_FAILURE,
+        type: types.GET_MATRIX_DATA_FAILURE,
+        payload: err,
       });
-      cb && cb("Failure");
     });
 };

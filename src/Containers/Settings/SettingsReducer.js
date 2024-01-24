@@ -9,6 +9,10 @@ const initialState = {
   addProcessTaskModal: false,
   candidateSequenceModal: false,
 
+  fetchingMatrixData:false,
+  fetchingMatrixDataError:false,
+  matrixData:[],
+
   fetchingProcessForOnboarding: false,
   fetchingProcessForOnboardingError: false,
   onboardingProcess: [],
@@ -496,6 +500,9 @@ const initialState = {
   fetchingProcessForOpportunity: false,
   fetchingProcessForOpportunityError: false,
   opportunityProcess: [],
+
+
+  addingSkillLevel:false,
 
   fetchingLeadAging: false,
   fetchingLeadAgingError: false,
@@ -2144,6 +2151,30 @@ export const settingsReducer = (state = initialState, action) => {
         updatingSequenceDetails: false,
         updatingSequenceDetailsError: true,
       };
+
+
+
+
+      case types.ADD_SKILL_LEVEL_REQUEST:
+      return { ...state, addingSkillLevel: true };
+    case types.ADD_SKILL_LEVEL_SUCCESS:
+      return { ...state, 
+        addingSkillLevel: false, 
+       
+    
+      };
+    case types.ADD_SKILL_LEVEL_FAILURE:
+      return { ...state, addingSkillLevel: false, 
+       
+      };
+
+
+      case types.GET_MATRIX_DATA_REQUEST:
+        return { ...state, fetchingMatrixData: true };
+      case types.GET_MATRIX_DATA_SUCCESS:
+        return { ...state, fetchingMatrixData: false, matrixData: action.payload };
+      case types.GET_MATRIX_DATA_FAILURE:
+        return { ...state, fetchingMatrixData: false, fetchingMatrixDataError: true };
 
 
     case types.ADD_PROCESS_STAGE_FOR_OPPORTUNITY_REQUEST:
