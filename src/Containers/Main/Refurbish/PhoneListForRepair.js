@@ -432,8 +432,8 @@ function PhoneListForRepair(props) {
                 <OnlyWrapCard style={{ backgroundColor: "#E3E8EE" }}>
                     <div className=" flex justify-between w-[97.5%] p-2 bg-transparent font-bold sticky top-0 z-10">
                     <div className=" md:w-[3.1rem]"><FormattedMessage
-                        id="app.company"
-                        defaultMessage="company"
+                        id="app.oem"
+                        defaultMessage="OEM"
                       /></div>
                         <div className=" md:w-[2.2rem]"><FormattedMessage
                         id="app.model"
@@ -579,17 +579,19 @@ function PhoneListForRepair(props) {
 
                                         </div>
                                     </div>
-                                    <div className=" flex font-medium  md:w-[1.5rem] max-sm:flex-row w-full max-sm:justify-between ">
+                                    <div className=" flex font-medium  md:w-[6.5rem] max-sm:flex-row w-full max-sm:justify-between ">
                                         <div class=" text-xs text-cardBody font-poppins text-center">
                                             <Tooltip title="Spare">
-                                                <span style={{ color: spares && item.phoneId === RowData.phoneId ? "red" : "black" }}
+                                                <Button
+                                                type="primary"
+                                                style={{ color: spares && item.phoneId === RowData.phoneId ? "red" : "black" }}
 
                                                     onClick={() => {
                                                         handleSetRowData(item);
                                                         hanldeSpare();
                                                     }}>
-                                                    <i class="fab fa-linode"></i>
-                                                </span>
+                                                    Spares
+                                                </Button>
 
 
                                             </Tooltip>
@@ -600,7 +602,7 @@ function PhoneListForRepair(props) {
                                         <div class=" text-xs text-cardBody font-poppins text-center">
                                             <Tooltip title="Task">
                                                 <FileDoneOutlined
-                                                    style={{ color: expand && item.phoneId === RowData.phoneId ? "red" : "black" }}
+                                                    style={{ color: expand && item.phoneId === RowData.phoneId ? "red" : "black",fontSize:"1rem" }}
                                                     type="file-done"
                                                     onClick={() => {
                                                         handleSetRowData(item);
@@ -616,7 +618,7 @@ function PhoneListForRepair(props) {
                                         <div class=" text-xs text-cardBody font-poppins text-center">
                                             <Tooltip title="Notes">
                                                 <NoteAddOutlined
-                                                    style={{ cursor: "pointer", fontSize: "13px" }}
+                                                    style={{ cursor: "pointer", fontSize:"1rem" }}
                                                     onClick={() => {
                                                         handleSetRowData(item);
                                                         props.handleRepairPhoneNotesOrderModal(true);
@@ -635,7 +637,7 @@ function PhoneListForRepair(props) {
                         )
                     })}
                 </OnlyWrapCard>
-                <div style={{ display: "flex", justifyContent: "flex-end" }}>
+                <div class="flex justify-end">
                     <Button
                         type="primary"
                         onClick={handlePuaseButton}>{hide ? "Resume" : "Pause"}</Button>
