@@ -4297,3 +4297,57 @@ export const getMatrixdata = (activeTab,organizationId) => (dispatch) => {
       });
     });
 };
+
+export const LinkOnboardingProcessPublish = (data, cb,) => (dispatch) => {
+  dispatch({ type: types.LINK_ONBOARDING_PROCESS_PUBLISH_REQUEST });
+
+  axios
+    .put(`${base_url}/unboardingWorkflow/update/publishInd`, data, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.LINK_ONBOARDING_PROCESS_PUBLISH_SUCCESS,
+        payload: res.data,
+      });
+      cb && cb("Success", res.data);
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.LINK_ONBOARDING_PROCESS_PUBLISH_FAILURE,
+      });
+      cb && cb("Failure");
+    });
+};
+
+export const LinkOnboardingStagePublish = (data, cb) => (dispatch) => {
+  dispatch({ type: types.LINK_ONBOARDING_STAGES_PUBLISH_REQUEST });
+
+  axios
+    .put(`${base_url}/unboardingStages/update/publishInd `, data, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.LINK_ONBOARDING_STAGES_PUBLISH_SUCCESS,
+        payload: res.data,
+      });
+      cb && cb("Success", res.data);
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.LINK_ONBOARDING_STAGES_PUBLISH_FAILURE,
+      });
+      cb && cb("Failure");
+    });
+};
