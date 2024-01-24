@@ -25,7 +25,7 @@ import{getAllOpportunityData} from "../../../Opportunity/OpportunityAction"
 import { handleChooserModal } from "../../../Planner/PlannerAction";
 import { TextareaComponent } from "../../../../Components/Forms/Formik/TextareaComponent";
 import { StyledPopconfirm } from "../../../../Components/UI/Antd";
-import { getEmployeelist } from "../../../Employees/EmployeeAction";
+import { getAssignedToList } from "../../../Employees/EmployeeAction";
 import { getEvents } from "../../../Settings/Event/EventAction";
 import { setClearbitCandidateData } from "../../../Candidate/CandidateAction";
 import { Listbox } from '@headlessui/react'
@@ -59,16 +59,16 @@ function PitchEventForm (props) {
   setRemider(checked);
   };
   useEffect(()=> {
-   props.getEmployeelist();
+    props.getAssignedToList(props.orgId);
    props.getEvents();
    props.getAllCustomerData(userId)
    props.getAllOpportunityData(userId)
    props.getFilteredEmailContact(userId);
   },[])
   
-    const employeesData =props.employees.map((item) => {
+    const employeesData =props.assignedToList.map((item) => {
       return {
-        label: `${item.fullName}`,
+        label: `${item.empName}`,
         // label: `${item.salutation || ""} ${item.firstName ||
         //   ""} ${item.middleName || ""} ${item.lastName || ""}`,
         value: item.employeeId,
@@ -106,10 +106,10 @@ function PitchEventForm (props) {
         value: item.customerId,
       };
     });
-const selectedOption = props.employees.find((item) => item.fullName === selected);
+const selectedOption = props.assignedToList.find((item) => item.empName === selected);
    
 const {
-      user: { userId, firstName, fullName, middleName, lastName, timeZone },
+      user: { userId, firstName,empName, fullName, middleName, lastName, timeZone },
       isEditing,
       prefillEvent,
       addingEvent,
@@ -479,7 +479,7 @@ const {
                   static
                   className="absolute z-10 mt-1 max-h-56 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
                 >
-                  {props.employees.map((item) => (
+                  {props.assignedToList.map((item) => (
                     <Listbox.Option
                       key={item.employeeId}
                       className={({ active }) =>
@@ -487,7 +487,7 @@ const {
                           active ? "text-white bg-indigo-600" : "text-gray-900"
                         }`
                       }
-                      value={item.fullName}
+                      value={item.empName}
                     >
                       {({ selected, active }) => (
                         <>
@@ -497,7 +497,7 @@ const {
                                 selected ? "font-semibold" : "font-normal"
                               }`}
                             >
-                              {item.fullName}
+                              {item.empName}
                             </span>
                           </div>
                           {selected && (
@@ -548,7 +548,7 @@ const {
                     options={Array.isArray(employeesData) ? employeesData : []}
                     value={values.included}
                     defaultValue={{
-                      label: `${fullName || ""} `,
+                      label: `${empName || ""} `,
                       value: employeeId,
                     }}
                   />
@@ -700,11 +700,12 @@ const mapStateToProps = ({ auth, event,opportunity,customer, employee, events, c
   addingEvent: event.addingEvent,
   allCustomerData:customer.allCustomerData,
   updatingEvent: event.updatingEvent,
+  orgId: auth.userDetails.organizationId,
   user: auth.userDetails,
   allOpportunityData:opportunity.allOpportunityData,
   filteredContact: candidate.filteredContact,
   deletingEvent: event.deleteEvent,
-  employees: employee.employees,
+  assignedToList:employee.assignedToList,
   events: events.events,
   candidateId: candidate.clearbitCandidate.candidateId,
   fullName: auth.userDetails.fullName
@@ -718,7 +719,7 @@ const mapDispatchToProps = (dispatch) =>
       updateEvent,
       handleChooserModal,
       handleEventModal,
-      getEmployeelist,
+      getAssignedToList,
       getEvents,
       getAllOpportunityData,
       getAllCustomerData,

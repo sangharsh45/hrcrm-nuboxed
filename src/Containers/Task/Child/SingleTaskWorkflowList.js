@@ -8,7 +8,7 @@ import {
   TextInput,
   Select,
 } from "../../../Components/UI/Elements";
-import { getEmployeelist } from "../../Employees/EmployeeAction";
+import { getAssignedToList } from "../../Employees/EmployeeAction";
 import {addTaskWorkflow,getTaskTeamList} from "../../Settings/SettingsAction"
 import { elipsize } from "../../../Helpers/Function/Functions";
 import { ViewEditCard } from "../../../Components/UI/Elements";
@@ -70,7 +70,7 @@ class SingleTaskWorkflowList extends Component {
     const { getTaskTeamList,item } = this.props;
     console.log();
     //  getTaskTeamList(item.taskId);
-    this.props.getEmployeelist();
+    this.props.getAssignedToList(this.props.orgId);
   }
   render() {
     // const startDate= 
@@ -109,7 +109,7 @@ console.log("startDate",this.state.startDate)
     
 
     const includeData=included && included.map((item)=>{
-      return item.fullName;
+      return item.empName;
     })
     console.log("includeData",includeData);
     console.log(taskChecklistStagelinkId, "----------", linkedStages);
@@ -120,7 +120,7 @@ console.log("startDate",this.state.startDate)
     const disableDelete =
       linkedStages && linkedStages.includes(taskChecklistStagelinkId);
     return (
-      <StageWrapper>
+      <div class=" w-full h-auto cursor-pointer ">
         <ViewEditCard>
           {({ viewType }, toggleViewType) =>
             viewType === "view" ? (
@@ -128,21 +128,21 @@ console.log("startDate",this.state.startDate)
               
           
               >
-                <div class="flex">
-                <StageName style={{ flexBasis: "20%", textAlign: "left" }}>
+                <div class="flex w-full">
+                <div class=" text-semibold m-0 w-[8rem]" >
                   {elipsize(taskChecklistStageName, 23)}
-                </StageName>
-                <StageName style={{ flexBasis: "9%" }}>
+                </div>
+                <div class=" text-semibold m-0 w-[5rem]" >
                   {probability}%
-                </StageName>
-                <StageName style={{ flexBasis: "9%" }}>
+                </div>
+                <div class=" text-semibold m-0 w-[5rem]" >
                   {days}D
-                </StageName>
+                </div>
               
             
 
   {/* Start Date */}
-  <div class="flex w-32 mr-3" >
+  <div class="flex w-[11rem] mr-3" >
     <DatePicker
       //  defaultValue={this.state.startDate}
       placeholder="Start Date"
@@ -151,7 +151,7 @@ console.log("startDate",this.state.startDate)
   </div>
 
   {/* End Date */}
-  <div class="flex w-32 mr-3" >
+  <div class="flex w-[11rem] mr-3" >
     <DatePicker
     // defaultValue={this.state.endDate}
       placeholder="End Date"
@@ -160,30 +160,30 @@ console.log("startDate",this.state.startDate)
   </div>
 
   {/* Stage */}
-  <div class="flex w-96" >
+  <div class="flex w-[16rem]" >
     <Select
-      style={{ border: "2px solid black", }}
+      style={{ border:"0.5px solid lightgray ", boxShadow: "0 0.15em 0.3em #aaa" }}
       mode="multiple"
       value={this.state.selectedOptions}
-      options={this.props.employees.map((option) => ({
+      options={this.props.assignedToList.map((option) => ({
         value: option.employeeId,
-        label: option.fullName,
+        label: option.empName,
       }))}
       onChange={this.handleChangeValue}
     />
   </div>
-  <StageName style={{ flexBasis: "15%" }}>
+  <div class=" text-semibold m-0 w-[8rem]" >
                   <Avatar.Group
   maxCount={2}
   maxStyle={{ color: "#f56a00", backgroundColor: "#fde3cf" }}
 >
   {included &&
     included.map((candidate, i) => {
-      if (candidate && candidate.fullName) {
-        const data1 = candidate.fullName.slice(0, 2);
+      if (candidate && candidate.empName) {
+        const data1 = candidate.empName.slice(0, 2);
         console.log("datas", data1);
         return (
-          <Tooltip title={candidate.fullName} key={i}>
+          <Tooltip title={candidate.empName} key={i}>
             <Avatar style={{ backgroundColor: "#94b3e4" }}>
               {data1}
             </Avatar>
@@ -194,9 +194,10 @@ console.log("startDate",this.state.startDate)
       }
     })}
 </Avatar.Group>
-                </StageName>
+                </div>
 
   {/* Save Button */}
+  <div class=" flex justify-end">
   <Button
     type="primary"
     onClick={() => {
@@ -211,6 +212,7 @@ console.log("startDate",this.state.startDate)
   >
     Save
   </Button>
+  </div>
 </div>
 
 
@@ -226,7 +228,7 @@ console.log("startDate",this.state.startDate)
                   // disabled={disabled}
                   width={"25%"}
                 />
-
+<div class=" flex justify-end">
                 <Button
                   type="primary"
                   htmlType="submit"
@@ -249,16 +251,18 @@ console.log("startDate",this.state.startDate)
                   {/* Cancel */}
                   <FormattedMessage id="app.cancel" defaultMessage="Cancel" />
                 </Button>
+                </div>
               </FlexContainer>
             )
           }
         </ViewEditCard>
-      </StageWrapper>
+      </div>
     );
   }
 }
 const mapStateToProps = ({ settings,employee, auth }) => ({
-  employees: employee.employees,
+  assignedToList:employee.assignedToList,
+  orgId: auth.userDetails.organizationId,
   recruitTaskWorkflowStages: settings.recruitTaskWorkflowStages,
   // taskTeamList:settings.taskTeamList,
 });
@@ -267,7 +271,7 @@ const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
       addTaskWorkflow,
-      getEmployeelist
+      getAssignedToList
       // getTaskTeamList
     },
     dispatch
@@ -276,20 +280,6 @@ const mapDispatchToProps = (dispatch) =>
 export default connect(mapStateToProps, mapDispatchToProps)(SingleTaskWorkflowList);
 // export default SingleRecruitStages;
 
-const StageWrapper = styled.div`
-  width: 100%;
-  height: auto;
-  cursor: pointer;
-`;
-const StageName = styled.h3`
-  color: ${(props) => props.theme.color || "teal"};
-  font-weight: 400;
-  // margin-bottom: 0;
-  margin: 0;
-`;
-const StageValue = styled.h3`
-  color: ${(props) => props.theme.color || "teal"};
-  font-size: 1 rem;
-  font-weight: 400;
-  margin: 0;
-`;
+
+
+

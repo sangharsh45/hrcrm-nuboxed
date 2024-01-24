@@ -106,7 +106,7 @@ class SingleTaskStages extends Component {
                 <StageName>
                 {`${ moment(endDate).format("DD/MM/YYYY")}`}
                 </StageName> */}
-                <div class=" flex justify-between ml-margin65 w-4">
+                <div class=" flex justify-between ml-[5rem] w-4">
                   <>
                     <Tooltip title="Edit">
                       <BorderColorIcon

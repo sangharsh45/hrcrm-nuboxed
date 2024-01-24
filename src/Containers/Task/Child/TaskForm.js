@@ -987,7 +987,19 @@ const [priority,setpriority]=useState(props.selectedTask
                           component={DragableUpload}
                         />
                       </div>
-
+                      <div class=" mt-2">
+                      <Field
+                    name="taskDescription"
+                    //label="Notes"
+                    label={
+                      <FormattedMessage id="app.description" defaultMessage="description" />
+                    }
+                    width={"21.875em"}
+                    isColumn
+                    component={TextareaComponent}
+                    inlineLabel
+                  />
+                  </div>
                   <div class=" flex justify-between">
                     {values.taskTypeId === "TSK52434477391272022" && (
                       <div class=" w-1/2">
@@ -1431,17 +1443,7 @@ const [priority,setpriority]=useState(props.selectedTask
                />
                   )} 
                   </div>
-                  <Field
-                    name="taskDescription"
-                    //label="Notes"
-                    label={
-                      <FormattedMessage id="app.description" defaultMessage="description" />
-                    }
-                    width={"21.875em"}
-                    isColumn
-                    component={TextareaComponent}
-                    inlineLabel
-                  />
+                
                      <div class=" mt-4">
                       <Field
                             type="text"

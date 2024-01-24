@@ -313,7 +313,7 @@ class TaskWorkflowTab extends Component {
               <FormattedMessage id="app.workFlow" defaultMessage="WorkFlow" />
             </h1>
 
-            <div class=" flex">
+            <div class=" flex flex-col">
               <StyledTabs
                 style={{ width: "80%" }}
                 defaultActiveKey={this.state.activeKey}
@@ -387,20 +387,22 @@ class TaskWorkflowTab extends Component {
             )}
            
 
-         <div class=" flex flex-col justify-center"  className="stages"
+           <div class=" flex mt-4 flex-col justify-center"  className="stages"
        
               style={{
                 width: "100%",
                 alignContent: "center",
+                marginTop:"0.5rem",
                 alignItems:"center"
               }}
             >
                 {this.state.isProcessTextInputOpen ? (
-                  <div>
+                  <div style={{}}>
                     <div class=" items-center flex justify-center"
                   
                     >
                       <TextInput
+                        style={{ marginLeft: "2.81em" }}
                         placeholder="Task Name"
                         name="taskChecklistName"
                         defaultValue={
@@ -412,6 +414,10 @@ class TaskWorkflowTab extends Component {
 
                       <div class=" flex justify-end" >
                         <Button
+                         style={{
+                          border: "0.06em solid white",
+                          color: "black",
+                        }}
                           type="primary"
                           htmlType="submit"
                           onClick={this.handleEditProcessName}
@@ -421,7 +427,12 @@ class TaskWorkflowTab extends Component {
                             defaultMessage="Save"
                           />
                         </Button>
-                        <Button type="primary" onClick={this.handleCancel}>
+                        <Button
+                         style={{
+                          border: "0.06em solid white",
+                          color: "black",
+                        }}
+                         type="primary" onClick={this.handleCancel}>
                           <FormattedMessage
                             id="app.cancel"
                             defaultMessage="Cancel"
@@ -432,12 +443,13 @@ class TaskWorkflowTab extends Component {
                   </div>
                 ) : (
                   <>
-                    <div class=" flex">
+                 
                       <h1 style={{ color: "white" }}>
                         {this.state.currentProcess.taskChecklistName ||
                           `${"Select Workflow"}`}{" "}
                         {this.state.currentProcess.taskChecklistName && (
                           <span
+                          style={{marginLeft:"1rem"}}
                             tooltipTitle="Edit"
                             onClick={this.handleEdit}
                             size="0.875em"
@@ -461,7 +473,7 @@ class TaskWorkflowTab extends Component {
                           </span>
                         )}
                       </h1>
-                    </div>
+               
                   </>
                 )}
               </div>
@@ -497,7 +509,7 @@ class TaskWorkflowTab extends Component {
                   justifyContent: "center",
                 }}
               >
-                <div class=" flex justify-between" >
+              
                   <TextInput
                     placeholder="Stage name"
                     name="taskChecklistStageName"
@@ -532,7 +544,7 @@ class TaskWorkflowTab extends Component {
                   onChange={this.onChangeEndDatePicker} />
                   </div> */}
               
-                </div>
+              
                 <div>
                   <Button
                     type="primary"

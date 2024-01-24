@@ -34,7 +34,7 @@ import { StyledLabel } from "../../../../Components/UI/Elements";
 import { TextareaComponent } from "../../../../Components/Forms/Formik/TextareaComponent";
 import ButtonGroup from "antd/lib/button/button-group";
 import { StyledPopconfirm } from "../../../../Components/UI/Antd";
-import { getEmployeelist } from "../../../Employees/EmployeeAction";
+import { getAssignedToList } from "../../../Employees/EmployeeAction";
 import Upload from "../../../../Components/Forms/Formik/Upload";
 import DragableUpload from "../../../../Components/Forms/Formik/DragableUpload";
 import { Select } from "antd";
@@ -213,7 +213,7 @@ const [priority,setpriority]=useState(props.selectedTask
   
 
   useEffect(()=> {
-    props.getEmployeelist();
+    props.getAssignedToList(props.orgId);
       props.getTaskForStages();
       props.getAllCustomerData(userId)
       props.getAllOpportunityData(userId)
@@ -282,7 +282,7 @@ const [priority,setpriority]=useState(props.selectedTask
     var todayDate = new Date();
     console.log(today);
     const {
-      user: { userId, firstName, fullName, middleName, lastName, timeZone },
+      user: { userId, firstName,empName, fullName, middleName, lastName, timeZone },
       addingTask,
       isEditing,
       prefillTask,
@@ -304,9 +304,9 @@ const [priority,setpriority]=useState(props.selectedTask
       employeeId,
       taskTypeId,
     } = props;
-    const employeesData = props.employees.map((item) => {
+    const employeesData = props.assignedToList.map((item) => {
       return {
-        label: `${item.fullName}`,
+        label: `${item.empName}`,
         value: item.employeeId,
       };
     });
@@ -328,7 +328,7 @@ const [priority,setpriority]=useState(props.selectedTask
 
     const [defaultOption, setDefaultOption] = useState(props.fullName);
     const [selected, setSelected] = useState(defaultOption);
-    const selectedOption = props.employees.find((item) => item.fullName === selected);
+    const selectedOption = props.assignedToList.find((item) => item.empName === selected);
    console.log("workflow",selectedWorkflow);
    console.log("recruitWorkflowTask",props.recruitWorkflowTask);
     return (
@@ -1204,7 +1204,7 @@ const [priority,setpriority]=useState(props.selectedTask
                   static
                   className="absolute z-10 mt-1 max-h-56 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
                 >
-                  {props.employees.map((item) => (
+                  {props.assignedToList.map((item) => (
                     <Listbox.Option
                       key={item.employeeId}
                       className={({ active }) =>
@@ -1212,7 +1212,7 @@ const [priority,setpriority]=useState(props.selectedTask
                           active ? "text-white bg-indigo-600" : "text-gray-900"
                         }`
                       }
-                      value={item.fullName}
+                      value={item.empName}
                     >
                       {({ selected, active }) => (
                         <>
@@ -1222,7 +1222,7 @@ const [priority,setpriority]=useState(props.selectedTask
                                 selected ? "font-semibold" : "font-normal"
                               }`}
                             >
-                              {item.fullName}
+                              {item.empName}
                             </span>
                           </div>
                           {selected && (
@@ -1471,7 +1471,7 @@ const mapStateToProps = ({
   recruitTask: settings.recruitTask,
   deletingTask: task.deleteTask,
   recruitTaskStages:settings.recruitTaskStages,
-  employees: employee.employees,
+  assignedToList:employee.assignedToList,
   tasks: tasks.tasks,
   customerTaskList: task.customerTaskList,
   candidateFilterTaskList: task.candidateFilterTaskList,
@@ -1494,7 +1494,7 @@ const mapDispatchToProps = (dispatch) =>
       getCustomerTask,
       getTaskForRecruit,
       deleteTask,
-      getEmployeelist,
+      getAssignedToList,
       getProjectTaskList,
       getTaskForWorkflow,
       getUnits,

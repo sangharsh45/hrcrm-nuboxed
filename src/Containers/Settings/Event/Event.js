@@ -121,6 +121,15 @@ class Event extends Component {
     getEvents();
   }
   render() {
+    // const eventData = events && events.length > 0
+    // ? [...events].sort((a, b) => {
+    //     console.log(a.eventType, b.eventType); // Add this line for debugging
+    //     return a.eventType.localeCompare(b.eventType);
+    //   })
+    // : [];
+
+   
+    // console.log("eventData",eventData)
     const {
       fetchingEvents,
       fetchingEventsError,
@@ -160,27 +169,30 @@ class Event extends Component {
             <div class=" flex flex-col" >
               {/* <Title style={{ padding: 8 }}>Designation</Title> */}
               <MainWrapper style={{ height: "30em", marginTop: "0.625em" }}>
-                {events.length ? (
-                  events.map((event, i) => (
-                    <SingleEvent
-                      key={i}
-                      value={singleEvent}
-                      name="singleEvent"
-                      event={event}
-                      linkedEvents={linkedEvents}
-                      updatingEvents={updatingEvents}
-                      handleChange={this.handleChange}
-                      handleUpdateEvent={this.handleUpdateEvent}
-                      handleClear={this.handleClear}
-                      handleSearchChange={this.handleSearchChange}
-                      currentData={this.state.currentData}
-                      setCurrentData={this.setCurrentData}
-                     handleDeleteEvent={this.handleDeleteEvent}
-                    />
-                  ))
-                  ) : (
-                    <p>No Data Available</p>
-                  )}
+              {events.length ? (
+  events
+    .slice() 
+    .sort((a, b) => a.eventType.localeCompare(b.eventType)) 
+    .map((event, i) => (
+      <SingleEvent
+        key={i}
+        value={singleEvent}
+        name="singleEvent"
+        event={event}
+        linkedEvents={linkedEvents}
+        updatingEvents={updatingEvents}
+        handleChange={this.handleChange}
+        handleUpdateEvent={this.handleUpdateEvent}
+        handleClear={this.handleClear}
+        handleSearchChange={this.handleSearchChange}
+        currentData={this.state.currentData}
+        setCurrentData={this.setCurrentData}
+        handleDeleteEvent={this.handleDeleteEvent}
+      />
+    ))
+) : (
+  <p>No Data Available</p>
+)}
               </MainWrapper>
             </div>
             {isTextInputOpen ? (

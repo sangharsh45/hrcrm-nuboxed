@@ -173,10 +173,7 @@ class TaskWorkflowList extends Component {
       <>
         <StageWrapper>
           <MainWrapper>
-            <h1>
-              {/* Workflow */}
-              <FormattedMessage id="app.workFlow" defaultMessage="WorkFlow" />
-            </h1>
+           
 
             <FlexContainer>
               <StyledTabs

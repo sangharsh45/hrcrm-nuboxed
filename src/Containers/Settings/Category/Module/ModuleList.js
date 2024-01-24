@@ -115,6 +115,24 @@ const handleCrmClick = (checked) => {
     };
     props.addingModules(data, props.orgId);
   };
+
+  const { hrInd } = props.moduleList;
+  console.log(hrInd);
+  const [hrStatus, setHrStatus] = useState(hrInd);
+  
+  useEffect(() => {
+    setHrStatus(hrInd);
+  }, [hrInd]);
+  
+  const handleHrClick = (checked) => {
+    setHrStatus(checked);
+    let data = {
+      value: checked,
+      orgId: props.orgId,
+      type: "hr",
+    };
+    props.addingModules(data, props.orgId);
+  };
  
 
 
@@ -359,23 +377,20 @@ const handleCrmClick = (checked) => {
                       </Popconfirm>
                     </div>
 */}
-                    {/* <div>HR</div>
+                      <div class=" text-sm  ml-2">HR</div>
                     <div   class=" w-[7%] ml-2">
-                    <Popconfirm
-                        title="Do you wish to change Status ? "
-                        onConfirm={handleHrClick}
-                        onCancel={handleHrCancel}
-                        okText="Yes"
-                        cancelText="No"
-                      >
+                   
                         <Switch
-                          style={{ width: "5em" }}
-                          checked={hrStatus || hrInd}
-                          checkedChildren="Yes"
-                          unCheckedChildren="No"
+                         style={{ width: "5em" }}
+                         onChange={handleHrClick}
+                        
+                         checked={hrStatus || hrInd}
+                         checkedChildren="Yes"
+                         unCheckedChildren="No"
+                         
                         />
-                      </Popconfirm>
-                    </div>  */}
+                    
+                    </div> 
 
 
                    

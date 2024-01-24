@@ -26,11 +26,7 @@ const AddCallTaskModal = (props) => {
         />}
         width={drawerWidth}
         visible={addCallTaskModal}
-        maskClosable={false}
-        destroyOnClose
-        maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}
         onClose={() => handleLeadCallModal(false)}
-        style={{marginTop:"5rem"}}
         footer={null}
       >
         <Suspense fallback={<BundleLoader />}>

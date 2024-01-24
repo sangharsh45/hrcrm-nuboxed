@@ -1,6 +1,7 @@
 import React, { lazy, Suspense } from "react";
 import { StyledDrawer } from "../../../../Components/UI/Antd";
 import { BundleLoader } from "../../../../Components/Placeholder";
+import ContactsInvestorCardList from "./ContactsInvestorCardList";
 // const UpdateInvestorForm = lazy(() => import("./UpdateInvestorForm.js"));
 
 const ContactsInvestorModal = (props) => {
@@ -16,9 +17,9 @@ const ContactsInvestorModal = (props) => {
         onClose={() => handleInvestorContModal(false)}
         footer={null}
       >
-        {/* <Suspense fallback={<BundleLoader />}>
+        <Suspense fallback={<BundleLoader />}>
           <ContactsInvestorCardList RowData={RowData} />{" "}
-        </Suspense> */}
+        </Suspense>
       </StyledDrawer>
     </>
   );
