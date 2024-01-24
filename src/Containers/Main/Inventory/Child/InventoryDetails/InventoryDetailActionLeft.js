@@ -23,10 +23,7 @@ class InventoryDetailActionLeft extends React.Component {
       <div class=" flex items-center" >
         <Tooltip title="Back">
           <RollbackOutlined
-            style={{ marginRight: "0.3rem", color: "#1890ff" }}
-            // iconType="rollback"
-            // tooltipTitle{}="Back"
-            // style={{ color: "#1890ff" }}
+          class="text-[#1890ff]"
             onClick={() => {
               this.props.history.goBack();
               this.props.handleResetTab();
@@ -37,7 +34,7 @@ class InventoryDetailActionLeft extends React.Component {
        
             <div class=" flex flex-row w-[36rem] items-center"  >
             <Title width="25%">
-             <label class="text-lg"> {` ${locationName || ""} `}</label>
+             <label class=" text-sm"> {` ${locationName || ""} `}</label>
             </Title>
            
           <div class=" flex w-[70%] justify-center ml-[1rem]"  >

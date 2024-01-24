@@ -22,7 +22,7 @@ function DistributorPauseForm(props) {
             width: "1%",
         },
         {
-            title: "Company",
+            title: "OEM",
             dataIndex: "company",
             width: "10%",
 

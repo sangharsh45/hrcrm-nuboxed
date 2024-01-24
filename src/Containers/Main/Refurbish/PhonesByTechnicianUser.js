@@ -18,7 +18,7 @@ const PhoneByTechnicianUser = (props) => {
         {
             width: "20%",
             dataIndex: "company",
-            title: "Company"
+            title: "OEM"
         },
         {
             dataIndex: "technicianEntryQuantity",

@@ -94,8 +94,8 @@ function OrderPhoneListById(props) {
                 <OnlyWrapCard style={{ backgroundColor: "#E3E8EE" }}>
                     <div className=" flex justify-between w-[97.5%] p-2 bg-transparent font-bold sticky top-0 z-10">
                         <div className=" md:w-[3.1rem]"><FormattedMessage
-                            id="app.company"
-                            defaultMessage="company"
+                            id="app.oem"
+                            defaultMessage="OEM"
                         /></div>
                         <div className=" md:w-[2.2rem]"><FormattedMessage
                             id="app.model"

@@ -1,19 +1,20 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect,lazy ,Suspense} from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { StyledTable } from "../../../../../Components/UI/Antd";
 import { getPhonelistById, handlePhoneNotesOrderModal, updateQCStatus } from "../../AccountAction";
 import * as Yup from "yup";
 import { Button, Tooltip } from "antd";
-import { MultiAvatar, SubTitle } from "../../../../../Components/UI/Elements";
-import QRCodeModal from "../../../../../Components/UI/Elements/QRCodeModal";
+import { SubTitle } from "../../../../../Components/UI/Elements";
 import ButtonGroup from "antd/lib/button/button-group";
 import NoteAltIcon from '@mui/icons-material/NoteAlt';
 import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
 import PrecisionManufacturingIcon from '@mui/icons-material/PrecisionManufacturing';
-import PhoneNotesOrderModal from "./PhoneNotesOrderModal";
-import AccountPhoneTaskTable from "./AccountPhoneTaskTable";
-import AddingSpareList from "./AddingSpareList";
+import { BundleLoader } from "../../../../../Components/Placeholder";
+const PhoneNotesOrderModal =lazy(()=>import("./PhoneNotesOrderModal"));
+const AccountPhoneTaskTable =lazy(()=>import("./AccountPhoneTaskTable"));
+const AddingSpareList =lazy(()=>import("./AddingSpareList"));
+const QRCodeModal =lazy(()=>import("../../../../../Components/UI/Elements/QRCodeModal"));
 
 const FormSchema = Yup.object().shape({
     pauseNoOfDays: Yup.string().required("Input required!"),
@@ -64,7 +65,7 @@ function DistributorPauseForm(props) {
                     }}
                     onClick={onClick}
                 >
-                    <i className={`fas ${iconType}`} style={{ fontSize: "22px" }}></i>
+                    <i className={`fas ${iconType}`} style={{ fontSize: "1rem" }}></i>
                 </Button>
             </Tooltip>
         );
@@ -84,7 +85,6 @@ function DistributorPauseForm(props) {
     //   props.updateQCStatus(data, RowData.phoneId, props.particularRowData.orderId)
     // }
 
-    console.log(RowData)
     const columns = [
         {
             title: "",
@@ -92,7 +92,7 @@ function DistributorPauseForm(props) {
             width: "1%",
         },
         {
-            title: "Company",
+            title: "OEM",
             dataIndex: "company",
             width: "11%",
 
@@ -206,7 +206,7 @@ function DistributorPauseForm(props) {
                                 imgRadius={20}
                             />
                         ) : (
-                            <span style={{ fontSize: "0.6em", fontWeight: "bold" }}>
+                            <span class="text-xs font-bold">
                                 No QR
                             </span>
                         )}
@@ -262,7 +262,7 @@ function DistributorPauseForm(props) {
                 return (
                     <Tooltip title="Notes">
                         <NoteAltIcon
-                            style={{ cursor: "pointer", fontSize: "13px" }}
+                            style={{ cursor: "pointer", fontSize: "1rem" }}
                             onClick={() => {
                                 handleSetRowData(item);
                                 props.handlePhoneNotesOrderModal(true);
@@ -285,6 +285,7 @@ function DistributorPauseForm(props) {
             />
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <Suspense fallback={<BundleLoader/>}>
             {expand && (
                 <AccountPhoneTaskTable
                     phoneId={phoneId}
@@ -301,6 +302,7 @@ function DistributorPauseForm(props) {
                     RowData={RowData}
                 />
             )}
+             </Suspense>
         </>
     );
 }
