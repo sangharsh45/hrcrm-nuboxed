@@ -192,6 +192,8 @@ const initialState = {
   fetchingCusActivityTimelineStatusError: false,
   customerActivityTimeline:[],
 
+  addDrawerCustomerOpportunityModal:false,
+
   deleteDocument: false,
   deleteDocumentError: false,
 
@@ -1612,7 +1614,12 @@ export const customerReducer = (state = initialState, action) => {
                                             return { ...state, addDrawerCustomerPulseModal: action.payload }; 
 
                                             case types.HANDLE_CUSTOMER_CONTACT_DRAWER_MODAL:
-                                              return { ...state, addDrawerCustomerContactModal: action.payload }; 
+                                              return { ...state, addDrawerCustomerContactModal: action.payload };
+                                              
+                                              
+                                              case types.HANDLE_CUSTOMER_OPPORTUNITY_DRAWER_MODAL:
+                                                return { ...state, addDrawerCustomerOpportunityModal: action.payload }; 
+                                                
                                               
                                             
                                             

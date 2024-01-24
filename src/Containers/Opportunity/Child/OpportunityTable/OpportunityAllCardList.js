@@ -355,6 +355,15 @@ handleSetCurrentOpportunityId(item.opportunityName);
                         deleteLostOpportunity(item.opportunityId)
                       }
                     >
+                         <Tooltip
+                    
+                      title={
+                        <FormattedMessage
+                          id="app.Delete"
+                          defaultMessage="Delete"
+                        />
+                      }
+                    >
                         {user.opportunityDeleteInd ===true && (
                       
                         <DeleteOutlined
@@ -366,6 +375,7 @@ handleSetCurrentOpportunityId(item.opportunityName);
                           }}
                         />
                         )}
+                        </Tooltip>
                         </StyledPopconfirm>
                     </div>
            

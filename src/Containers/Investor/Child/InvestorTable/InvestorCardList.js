@@ -5,6 +5,7 @@ import BorderColorIcon from "@mui/icons-material/BorderColor";
 import MonitorHeartIcon from "@mui/icons-material/MonitorHeart";
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import ExploreIcon from "@mui/icons-material/Explore";
+import LocationCityIcon from '@mui/icons-material/LocationCity';
 import moment from "moment";
 import NoteAltIcon from "@mui/icons-material/NoteAlt";
 import { OnlyWrapCard } from '../../../../Components/UI/Layout'
@@ -26,9 +27,14 @@ import {
   getCustomerById,
 } from "../../../Customer/CustomerAction";
 import ReactCountryFlag from 'react-country-flag';
-import {getInvestorsbyId,handleInvestorNotesDrawerModal,emptyInvestor,handleUpdateInvestorModal} from "../../InvestorAction";
+import {getInvestorsbyId,
+  handleInvestorContModal,
+  handleUpdateInvestorModal,
+  handleInvestorNotesDrawerModal,emptyInvestor,
+} from "../../InvestorAction";
 import AddInvestorNotesDrawerModal from "../InvestorDetail/AddInvestorNotesDrawerModal";
 import { FormattedMessage } from "react-intl";
+import ContactsInvestorModal from "./ContactsInvestorModal";
 const UpdateInvestorModal = lazy(() =>
   import("../UpdateInvestor/UpdateInvestorModal")
 );
@@ -87,7 +93,10 @@ function InvestorCardList(props) {
     fetchingInvestors,
     investorsbyId,
     handleUpdateInvestorModal,
+    handleInvestorContModal,
+    addDrawerInvestorContactModal,
     updateInvestorModal,
+    investor,
     fetchingInvestorsError,
     fetchingAllCustomers,
     user,
@@ -344,8 +353,14 @@ function InvestorCardList(props) {
             </Tooltip>
                         </div>
             </div>
-                      &nbsp;&nbsp;
+                   
+                      
                         <div>
+            
+
+                    </div>
+                    <div class="flex flex-col w-6 max-sm:flex-row max-sm:w-[10%] ">
+                    <div>
                         <span
               style={{ cursor: "pointer" ,fontSize: "1rem"}}
             //   onClick={() => {
@@ -363,10 +378,23 @@ function InvestorCardList(props) {
                 color: "#df9697"}}/>}
             </span> 
                         </div>
-                        <div>
-            
-
-                    </div>
+        
+            <div>
+          
+            <Tooltip title="Investor Contact">
+              <LocationCityIcon
+                style={{ fontSize:"1rem",padding:"2px" }}
+                onClick={() => {
+                  handleInvestorContModal(true);
+                    handleCurrentRowData(item);
+                  
+                }}
+              />
+            </Tooltip>
+ 
+            </div>
+                      </div> 
+                    
     
                     <div class="flex flex-col w-6 max-sm:flex-row max-sm:w-[10%] ">
                       <div>
@@ -428,6 +456,13 @@ function InvestorCardList(props) {
         handleUpdateInvestorModal={handleUpdateInvestorModal}
         handleCurrentRowData={handleCurrentRowData}
       />
+
+<ContactsInvestorModal
+        RowData={RowData}
+        addDrawerInvestorContactModal={addDrawerInvestorContactModal}
+        handleInvestorContModal={handleInvestorContModal}
+        handleCurrentRowData={handleCurrentRowData}
+      />
            <AddInvestorNotesDrawerModal
         RowData={RowData}
         addDrawerInvestorNotesModal={props.addDrawerInvestorNotesModal}
@@ -456,6 +491,7 @@ const mapStateToProps = ({
   investor
 }) => ({
   userId: auth.userDetails.userId,
+  addDrawerInvestorContactModal:investor.addDrawerInvestorContactModal,
   investorsbyId:investor.investorsbyId,
   addDrawerInvestorNotesModal:investor.addDrawerInvestorNotesModal,
   fetchingAllCustomers: customer.fetchingAllCustomers,
@@ -471,6 +507,7 @@ const mapDispatchToProps = (dispatch) =>
     {
       getInvestorsbyId,
       handleUpdateInvestorModal,
+      handleInvestorContModal,
       emptyInvestor,
       handleInvestorNotesDrawerModal,
       updateOwnercustomerById,

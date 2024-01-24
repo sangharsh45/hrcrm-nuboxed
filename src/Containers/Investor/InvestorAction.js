@@ -767,4 +767,11 @@ export const getInvestorDetailsById = (investorId) => (dispatch) => {
       type: types.HANDLE_CLAER_REDUCER_DATA_INVESTOR,
     });
   };
+
+  export const handleInvestorContModal=(modalProps) => (dispatch) => {
+    dispatch({
+      type: types.HANDLE_INVESTOR_CONT_MODAL,
+      payload: modalProps,
+    });
+  };
   

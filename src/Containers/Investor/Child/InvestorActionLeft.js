@@ -201,7 +201,7 @@ const InvestorActionLeft = (props) => {
         >
           <FormattedMessage id="app.clear" defaultMessage="Clear" />
         </Button> */}
-        <div style={{ width: "40%",marginTop:"0.5rem" }}>
+        <div class=" w-[40%] mt-2 ml-2" >
           <StyledSelect placeholder="Sort"  onChange={(e)  => props.handleFilterChange(e)}>
           <Option value="CreationDate">Creation Date</Option>
             <Option value="ascending">A To Z</Option>
