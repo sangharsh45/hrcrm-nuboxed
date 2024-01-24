@@ -703,3 +703,29 @@ export const getEmployeeKpiList = (employeeId) => (dispatch) => {
       });
     });
 };
+
+export const getperformanceRecord = (reptMngrId) => (dispatch) => {
+  dispatch({
+    type: types.GET_PERFORMANCE_RECORDS_REQUEST,
+  });
+  axios
+    .get(`${base_url}/employee/user-count/reptMngr/${reptMngrId}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.GET_PERFORMANCE_RECORDS_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err.response);
+      dispatch({
+        type: types.GET_PERFORMANCE_RECORDS_FAILURE,
+        payload: err,
+      });
+    });
+};

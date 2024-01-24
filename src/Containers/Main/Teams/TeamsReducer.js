@@ -13,6 +13,10 @@ const initialState = {
   fetchingEmployeeKpiError: false,
   employeeKpiList:[],
 
+  fetchingPerformanceRecords: false,
+  fetchingPerformanceRecordsError: false,
+  performancerecordData:{},
+
 
   addDrawerPerformanceModal:false,
 
@@ -460,6 +464,22 @@ case types.GET_EMPLOYEE_KPI_LIST_FAILURE:
     fetchingEmployeeKpi: false,
     fetchingEmployeeKpiError: true,
   };
+
+  case types.GET_PERFORMANCE_RECORDS_REQUEST:
+    return { ...state, fetchingPerformanceRecords: true };
+  case types.GET_PERFORMANCE_RECORDS_SUCCESS:
+    return {
+      ...state,
+      fetchingPerformanceRecords: false,
+      performancerecordData: action.payload,
+    };
+  case types.GET_PERFORMANCE_RECORDS_FAILURE:
+    return {
+      ...state,
+      fetchingPerformanceRecords: false,
+      fetchingPerformanceRecordsError: true,
+    };
+
 
     default:
       return state;

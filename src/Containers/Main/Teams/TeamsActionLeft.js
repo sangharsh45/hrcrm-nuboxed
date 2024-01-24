@@ -7,9 +7,13 @@ import { FlexContainer } from "../../../Components/UI/Layout";
 import { StyledSelect } from "../../../Components/UI/Antd";
 import { Button, Empty, Tooltip, Badge } from "antd";
 import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
+import { getperformanceRecord } from "./TeamsAction";
 const Option = StyledSelect.Option;
 class TeamsActionLeft extends React.Component {
-
+  componentDidMount() {
+  
+    this.props.getperformanceRecord(this.props.reptMngrId)
+  }
   render() {
     const { viewType, setTeamsViewType, user } = this.props;
 
@@ -47,6 +51,15 @@ class TeamsActionLeft extends React.Component {
           {/* )} */}
 
           <Tooltip title="Performance Management">
+          <Badge
+          size="small"
+          count={
+            (this.props.viewType === "client" &&
+              this.props.performancerecordData.EmployeeListByReptMngrId) ||
+            0
+          }
+          overflowCount={999}
+        >
             <span
               onClick={() => setTeamsViewType("client")}
               style={{
@@ -56,6 +69,7 @@ class TeamsActionLeft extends React.Component {
             >
               <ManageAccountsIcon />
             </span>
+            </Badge>
           </Tooltip>
 
           {/* <Tooltip title="Inventory">
@@ -76,12 +90,17 @@ class TeamsActionLeft extends React.Component {
   }
 }
 
-const mapStateToProps = ({ auth }) => ({
+const mapStateToProps = ({ auth,teams }) => ({
   role: auth.userDetails.role,
   department: auth.userDetails.department,
   user: auth.userDetails,
+  performancerecordData:teams.performancerecordData,
+  reptMngrId:auth.userDetails.userId
 });
 
-const mapDispatchToProps = (dispatch) => bindActionCreators({}, dispatch);
+const mapDispatchToProps = (dispatch) => bindActionCreators({
+  getperformanceRecord
+},
+ dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(TeamsActionLeft);
