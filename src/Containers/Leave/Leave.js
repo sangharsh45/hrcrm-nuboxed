@@ -11,7 +11,7 @@ const LeaveStatusCard = lazy(() => import("./Child/CardView/LeaveStatusCard"));
 const LeaveGranttChart = lazy(() => import("./Child/Chart/LeaveGranttChart"));
 const LeaveJumpstart = lazy(() => import("./Child/JumpStartBoxes/LeaveJumpstart"));
 const LeaveDetailLeft = lazy(() => import("./Child/LeaveDetailLeft"));
-const LeaveDetailRight = lazy(() => import("./Child/LeaveDetailRight"));
+const LeaveDetailRight = lazy(() => import("./Child/LeaveDetailRight")); 
 
 class Leave extends Component {
   state = { currentData: "",currentUser:"" };
