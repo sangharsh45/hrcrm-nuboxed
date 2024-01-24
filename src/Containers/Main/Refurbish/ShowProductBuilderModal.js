@@ -1,10 +1,9 @@
-import React, { lazy, Suspense, useEffect } from "react";
+import React, { lazy, Suspense } from "react";
 import { StyledDrawer } from "../../../Components/UI/Antd";
 import { BundleLoader } from "../../../Components/Placeholder";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-// import OrderCatalogueList from "./OrderCatalogueList";
-import InspectedPhoneByOrder from "./InspectedPhoneByOrder";
+const InspectedPhoneByOrder =lazy(()=>import("./InspectedPhoneByOrder"));
 
 const ShowProductBuilderModal = (props) => {
     const { RowData, ...formProps } = props;
@@ -12,18 +11,15 @@ const ShowProductBuilderModal = (props) => {
         <>
             <StyledDrawer
                 title={`Order No-${props.rowData.newOrderNo}`}
-                width="60vw"
+                width="60%"
                 visible={props.productBuilderList}
                 closable
                 destroyOnClose
-                maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}
-                style={{ marginTop:"3rem" }}
                 onClose={() => props.handleProductBuilder(false)}
                 footer={null}
             >
                 <Suspense fallback={<BundleLoader />}>
                     <InspectedPhoneByOrder rowData={props.rowData} />
-                    {/* <OrderCatalogueList rowData={props.rowData} /> */}
                 </Suspense>
             </StyledDrawer>
         </>

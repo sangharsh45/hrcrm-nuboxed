@@ -81,13 +81,13 @@
 //     mapDispatchToProps
 // )(TechnicianListByOrderId);
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState,lazy } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { getNoOfTechnicianById } from "./RefurbishAction";
-import QCPhoneListByTechnician from './QCPhoneListByTechnician';
 import { FormattedMessage } from 'react-intl';
 import { OnlyWrapCard } from '../../../Components/UI/Layout';
+const QCPhoneListByTechnician =lazy(()=> import('./QCPhoneListByTechnician'));
 
 const TechnicianListByOrderId = (props) => {
 

@@ -113,14 +113,14 @@
 //     mapDispatchToProps
 // )(QCPhoneListByTechnician);
 
-import React, { useEffect } from 'react'
-import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
-import { getNoOfPhoneInQCById } from "./RefurbishAction"
-import QRCodeModal from '../../../Components/UI/Elements/QRCodeModal'
-import { SubTitle } from '../../../Components/UI/Elements'
-import { FormattedMessage } from 'react-intl'
-import { OnlyWrapCard } from '../../../Components/UI/Layout'
+import React, { useEffect,lazy } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { getNoOfPhoneInQCById } from "./RefurbishAction";
+import { SubTitle } from '../../../Components/UI/Elements';
+import { FormattedMessage } from 'react-intl';
+import { OnlyWrapCard } from '../../../Components/UI/Layout';
+const QRCodeModal =lazy(()=>import('../../../Components/UI/Elements/QRCodeModal'));
 
 const QCPhoneListByTechnician = (props) => {
 
@@ -129,7 +129,7 @@ const QCPhoneListByTechnician = (props) => {
     }, [])
     return (
         <>
-            <div className=' flex justify-end sticky  z-auto h-60'>
+            <div className=' flex justify-end sticky z-10 h-60'>
                 <OnlyWrapCard style={{ backgroundColor: "#E3E8EE" }}>
                     <div className=" flex  w-[95%] p-2 bg-transparent font-bold sticky top-0 z-10">
                         <div className=" md:w-[8.1rem]"><FormattedMessage
@@ -223,7 +223,7 @@ const QCPhoneListByTechnician = (props) => {
                                  imgRadius={20}
                             />
                          ) : (
-                             <span style={{ fontSize: "0.6em", fontWeight: "bold" }}>
+                             <span class="text-[0.6em] font-bold">
                                 No QR
                             </span>
                         )}

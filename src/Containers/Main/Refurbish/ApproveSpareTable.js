@@ -42,7 +42,7 @@ const ApproveSpareTable = (props) => {
                 dataSource={props.allSpareById}
                 loading={props.fetchingALlSPareList}
             />
-            <div style={{ display: "flex", justifyContent: "flex-end" }}>
+            <div class="flex justify-end">
                 <Button type='primary'>Approve</Button>
             </div>
         </>

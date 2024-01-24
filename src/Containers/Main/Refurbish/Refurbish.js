@@ -14,10 +14,7 @@ const Refurbish = (props) => {
   return (
     <div>
       <RefurbishHeader
-        // shiftsData={shiftsData}
-        // shiftId={shiftsData.shiftId}
-        // handlesetCurrentShift={handlesetCurrentShift}
-        setProductionViewType={props.setProductionViewType}
+       setProductionViewType={props.setProductionViewType}
         viewType={props.viewType}
       />
          <Suspense fallback={<BundleLoader/>}>
