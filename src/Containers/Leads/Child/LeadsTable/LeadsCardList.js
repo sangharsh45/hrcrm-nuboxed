@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState,lazy } from "react";
 import { StyledPopconfirm } from "../../../../Components/UI/Antd";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
@@ -30,12 +30,12 @@ import ReactCountryFlag from "react-country-flag";
 import AddchartIcon from "@mui/icons-material/Addchart";
 import { Button, Tooltip } from "antd";
 import { FormattedMessage } from "react-intl";
-import UpdateLeadsModal from "../UpdateLeads/UpdateLeadsModal";
-import AddLeadsEmailDrawerModal from "../UpdateLeads/AddLeadsEmailDrawerModal";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
-import OpenCETmodal from "./OpenCETmodal";
-import AddLeadsNotesDrawerModal from "../AddLeadsNotesDrawerModal";
-import AddConfirmLedsStatusModal from "./AddConfirmLedsStatusModal";
+const UpdateLeadsModal = lazy(() => import("../UpdateLeads/UpdateLeadsModal"));
+const OpenCETmodal = lazy(() => import("./OpenCETmodal"));
+const AddLeadsEmailDrawerModal = lazy(() => import("../UpdateLeads/AddLeadsEmailDrawerModal"));
+const AddLeadsNotesDrawerModal = lazy(() => import("../AddLeadsNotesDrawerModal"));
+const AddConfirmLedsStatusModal = lazy(() => import("./AddConfirmLedsStatusModal"));
 
 const ButtonGroup = Button.Group;
 

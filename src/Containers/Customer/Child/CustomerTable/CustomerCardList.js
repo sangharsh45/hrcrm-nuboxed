@@ -6,6 +6,7 @@ import LocationOnIcon from '@mui/icons-material/LocationOn';
 import ExploreIcon from "@mui/icons-material/Explore";
 import { getSectors } from "../../../Settings/Sectors/SectorsAction";
 import moment from "moment";
+import LightbulbIcon from '@mui/icons-material/Lightbulb';
 import ContactsIcon from '@mui/icons-material/Contacts';
 import { OnlyWrapCard } from '../../../../Components/UI/Layout'
 import { getCountries } from "../../../Auth/AuthAction";
@@ -33,6 +34,7 @@ import {
   customerToAccount,
   handleCustomerPulseDrawerModal,
   handleCustomerContactDrawerModal,
+  handleCustomerOpportunityDrawerModal,
 } from "../../CustomerAction";
 import NoteAltIcon from "@mui/icons-material/NoteAlt";
 import AddCustomerDrawerModal from "../../AddCustomerDrawerModal";
@@ -43,6 +45,7 @@ import AddCustomerNotesDrawerModal from "../CustomerDetail/AddCustomerNotesDrawe
 import CustomerPulseDrawerModal from "./CustomerPulseDrawerModal";
 import { FormattedMessage } from "react-intl";
 import CustomerContactDrawerModal from "./CustomerContactDrawerModal";
+import CustomerOpportunityDrawerModal from "./CustomerOpportunityDrawerModal";
 
 const UpdateCustomerModal = lazy(() =>
   import("../UpdateCustomer/UpdateCustomerModal")
@@ -121,8 +124,10 @@ const [rowdata, setrowdata] = useState("");
     handleUpdateCustomerModal,
     addDrawerCustomerPulseModal,
     addDrawerCustomerContactModal,
+    addDrawerCustomerOpportunityModal,
     handleCustomerPulseDrawerModal,
     handleCustomerContactDrawerModal,
+    handleCustomerOpportunityDrawerModal,
     updateCustomerModal,
     fetchingCustomersError,
     fetchingAllCustomers,
@@ -468,29 +473,29 @@ const [rowdata, setrowdata] = useState("");
 
                     <div class="flex flex-col w-6 max-sm:flex-row max-sm:w-[10%] ">
                         <div>
-                        <Tooltip title="Pulse">
+                        <Tooltip title="Contact">
        <ContactsIcon
                 onClick={() => {
                   handleCustomerContactDrawerModal(true);
                   handleSetCurrentCustomer(item);
                 }}
-                style={{ fontSize: "1rem", cursor: "pointer",color: "#df9697" }}
+                style={{ fontSize: "1rem", cursor: "pointer", }}
               />
            </Tooltip>
                         </div>
-                        {/* <div>
-                        <Tooltip title="Notes">
-       <NoteAltIcon
+                        <div>
+                        <Tooltip title="Opportunity">
+       <LightbulbIcon
                 onClick={() => {
-                  handleCustomerNotesDrawerModal(true);
+                  handleCustomerOpportunityDrawerModal(true);
                   handleSetCurrentCustomer(item);
                   handleRowData(item);
                 }}
-                style={{ color: "green", cursor: "pointer", fontSize: "1rem" }}
+                style={{  cursor: "pointer", fontSize: "1rem" }}
               />
            </Tooltip>
 
-                    </div> */}
+                    </div>
                     </div>
                     <div class="flex flex-col w-6 max-sm:flex-row max-sm:w-[10%] ">
                         <div>
@@ -500,7 +505,7 @@ const [rowdata, setrowdata] = useState("");
                   handleCustomerPulseDrawerModal(true);
                   handleSetCurrentCustomer(item);
                 }}
-                style={{ fontSize: "1rem", cursor: "pointer",color: "#df9697" }}
+                style={{ fontSize: "1rem", cursor: "pointer", color: "#df9697"}}
               />
            </Tooltip>
                         </div>
@@ -592,6 +597,12 @@ const [rowdata, setrowdata] = useState("");
           handleCustomerContactDrawerModal={handleCustomerContactDrawerModal}
           handleSetCurrentCustomer={handleSetCurrentCustomer}
         />
+           <CustomerOpportunityDrawerModal
+      customer={currentCustomer}
+      addDrawerCustomerOpportunityModal={addDrawerCustomerOpportunityModal}
+      handleCustomerOpportunityDrawerModal={handleCustomerOpportunityDrawerModal}
+          handleSetCurrentCustomer={handleSetCurrentCustomer}
+        />
       <AddCustomerEmailDrawerModal
         // contactById={props.contactById}
         addDrawerCustomerEmailModal={props.addDrawerCustomerEmailModal}
@@ -619,6 +630,7 @@ const mapStateToProps = ({
 }) => ({
   userId: auth.userDetails.userId,
   addDrawerCustomerContactModal:customer.addDrawerCustomerContactModal,
+  addDrawerCustomerOpportunityModal:customer.addDrawerCustomerOpportunityModal,
   addDrawerCustomerNotesModal:customer.addDrawerCustomerNotesModal,
   customerByUserId: customer.customerByUserId,
   sales: opportunity.sales,
@@ -642,6 +654,7 @@ const mapDispatchToProps = (dispatch) =>
       handleUpdateCustomerModal,
       handleCustomerPulseDrawerModal,
       handleCustomerContactDrawerModal,
+      handleCustomerOpportunityDrawerModal,
       setEditCustomer,
       getSectors,
       customerToAccount,

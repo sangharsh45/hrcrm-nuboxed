@@ -4,11 +4,12 @@ import { bindActionCreators } from "redux";
 import { BundleLoader } from "../../../../Components/Placeholder";
 import { StyledDrawer } from "../../../../Components/UI/Antd";
 
-const CustomerContactCardList = lazy(() =>
-  import("./CustomerContactCardList")
+
+const CustomerOpportunityCardList = lazy(() =>
+  import("./CustomerOpportunityCardList")
 );
 
-class CustomerContactDrawerModal extends Component {
+class CustomerOpportunityDrawerModal extends Component {
   render() {
       console.log("data5", this.props.customer.name);
 
@@ -18,11 +19,11 @@ class CustomerContactDrawerModal extends Component {
         // title="Notes"
           title={this.props.customer.name}
           width="80%"
-          visible={this.props.addDrawerCustomerContactModal}
-          onClose={() => this.props.handleCustomerContactDrawerModal(false)}
+          visible={this.props.addDrawerCustomerOpportunityModal}
+          onClose={() => this.props.handleCustomerOpportunityDrawerModal(false)}
         >
           <Suspense fallback={<BundleLoader />}>
-            <CustomerContactCardList 
+            <CustomerOpportunityCardList 
             customer={this.props.customer}
             />
           </Suspense>
@@ -38,4 +39,4 @@ const mapDispatchToProps = (dispatch) => bindActionCreators({}, dispatch);
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(CustomerContactDrawerModal);
+)(CustomerOpportunityDrawerModal);

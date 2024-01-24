@@ -6,7 +6,6 @@ import styled from "styled-components";
 import {
   CheckCircleOutlined,
   CloseCircleOutlined,
-  SearchOutlined,
 } from "@ant-design/icons";
 import InfiniteScroll from "react-infinite-scroll-component";
 import FeedbackIcon from '@mui/icons-material/Feedback';
@@ -14,11 +13,11 @@ import StarBorderIcon from '@mui/icons-material/StarBorder';
 import DownloadForOfflineIcon from '@mui/icons-material/DownloadForOffline';
 import { OnlyWrapCard } from '../../../Components/UI/Layout';
 import NoteAltIcon from "@mui/icons-material/NoteAlt";
-import { Tooltip, Input, Button, Avatar,FloatButton } from "antd";
+import { Tooltip, Button, Avatar,FloatButton } from "antd";
 import moment from "moment";
+import { DeleteOutlined } from "@ant-design/icons";
 import { BundleLoader } from "../../../Components/Placeholder";
-import { StyledPopconfirm, StyledTable } from "../../../Components/UI/Antd";
-import DeleteIcon from "@mui/icons-material/Delete";
+import { StyledPopconfirm, } from "../../../Components/UI/Antd";
 import {
   getTaskListRangeByUserId,
   deleteTask,
@@ -33,7 +32,7 @@ import {
   handleTaskProjectDrawerModal,
   handleTaskopenModal
 } from "../TaskAction";
-import { MultiAvatar, StyledLabel } from "../../../Components/UI/Elements";
+import { MultiAvatar, } from "../../../Components/UI/Elements";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
 const AddTaskProjectDrawerModal = lazy(() => import("../Child/AddTaskProjectDrawerModal"));
 const AddTaskNotesDrawerModal = lazy(() => import("./AddTaskNotesDrawerModal"));
@@ -481,7 +480,7 @@ const TaskCardList = (props) => {
 
                           
                     <div class=" ml-2"></div>
-                    <div class="flex flex-col justify-evenly  ">
+                    <div class="flex flex-col w-6 justify-evenly  ">
                     <Tooltip title="Notes">
        <NoteAltIcon
                 onClick={() => {
@@ -505,7 +504,7 @@ const TaskCardList = (props) => {
                     {/* )} */}
             </Tooltip>
             </div>
-                    <div class="flex flex-col justify-evenly ">
+                    <div class="flex flex-col w-6 justify-evenly ">
    
    
           <Tooltip title="Edit">
@@ -534,10 +533,12 @@ const TaskCardList = (props) => {
                             }
                             onConfirm={() => deleteTask(item.taskId, employeeId)}
                           >
-                            <DeleteIcon
+                                <Tooltip title="Delete">
+                            <DeleteOutlined
                               type="delete"
                               style={{ cursor: "pointer",color:"red", fontSize: "1rem" }}
                             />
+                            </Tooltip>
                           </StyledPopconfirm>
                         )}
       

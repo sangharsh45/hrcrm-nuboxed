@@ -3,28 +3,28 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { FormattedMessage } from "react-intl";
 import Highlighter from "react-highlight-words";
-import { Link } from "../../../../../../Components/Common";
+import { Link } from "../../../../Components/Common";
 import moment from "moment";
 import InfoIcon from '@mui/icons-material/Info';
-import { StyledTable } from "../../../../../../Components/UI/Antd";
+import { StyledTable } from "../../../../Components/UI/Antd";
 import {
   MultiAvatar,
-} from "../../../../../../Components/UI/Elements";
+} from "../../../../Components/UI/Elements";
 import BorderColorIcon from '@mui/icons-material/BorderColor';
 import {
   SearchOutlined,
 } from "@ant-design/icons";
-import { CurrencySymbol } from "../../../../../../Components/Common";
+import { CurrencySymbol } from "../../../../Components/Common";
 import { getOpportunityListByCustomerId,handleUpdateCustomerOpportunityModal,
-  setEditCustomerOpportunity} from "../../../../CustomerAction";
+  setEditCustomerOpportunity} from "../../CustomerAction";
 import { Tooltip,Button,Input,Progress } from "antd";
-import { OnlyWrapCard } from "../../../../../../Components/UI/Layout";
-const AddCustomerUpdateOpportunityModal =lazy(()=>import("./AddCustomerUpdateOpportunityModal")); 
+import { OnlyWrapCard } from "../../../../Components/UI/Layout";
+const AddCustomerUpdateOpportunityModal =lazy(()=>import("../../Child/CustomerDetail/CustomerTab/OpportunityTab/AddCustomerUpdateOpportunityModal")); 
 
 
-function OpportunityTable(props) {
+function CustomerOpportunityCardList(props) {
   useEffect(() => {
-    props.getOpportunityListByCustomerId(props.customerId);
+    props.getOpportunityListByCustomerId(props.customer.customerId);
   }, []);
   console.log(props.customerId);
   const [currentOpportunityId, setCurrentOpportunityId] = useState("");
@@ -137,251 +137,13 @@ function OpportunityTable(props) {
     addUpdateCustomerOpportunityModal,
     setEditCustomerOpportunity,
   } = props;
-//   const columns = [
-//     {
-//       title: "",
-//       width: "2%",
-//     },
-//     // {
-//     //   title: "",
-//     //   dataIndex: "imageId",
-//     //   width: "3%",
-//     //   render: (name, item, i) => {
-//     //     return (
-//     //       <SubTitle>
-//     //         <MultiAvatar
-//     //           primaryTitle={item.accountName}
-//     //           imageId={item.imageId}
-//     //           imageURL={item.imageURL}
-//     //           imgWidth={"1.8em"}
-//     //           imgHeight={"1.8em"}
-//     //         />
-//     //       </SubTitle>
-//     //     );
-//     //   },
-//     // },
-//     {
-//       title: "",
-//       width: "1%",
-//     },
-//     { title: "Name",
-//        dataIndex:"opportunityName",
-//        width:"25%",
-//        ...getColumnSearchProps('opportunityName'),
-//        render(name, item, ) {
-//         return (
-//           <>
-//            <Link
-//               toUrl={`/opportunity/${item.opportunityId}`}
-//               title={`${item.opportunityName || ""} `}
-//             />
-//           </>
-//         );
-//       }
-//    },
-//     {
-//       //title: "Start Date",
-//       title: (
-//         <FormattedMessage id="app.startDate" defaultMessage="Start Date" />
-//       ),
-//       dataIndex: "startDate",
-//       width: "20%",
-//       defaultSortOrder: "descend",
-//       sorter: (a, b) => {
-//         var startDateA = a.startDate; // ignore upper and lowercase
-//         var startDateB = b.startDate; // ignore upper and lowercase
-//         if (startDateA < startDateB) {
-//           return -1;
-//         }
-//         if (startDateA > startDateB) {
-//           return 1;
-//         }
 
-//         return 0;
-//       },
-//       render: (text, item) => {
-//         const startDate = moment(item.startDate).format("ll");
-//         return <span>{startDate}</span>;
-//       },
-//     },
-//     {
-//       //title: "End Date",
-//       title: <FormattedMessage id="app.endDate" defaultMessage="End Date" />,
-//       dataIndex: "endDate",
-//       width: "20%",
-//       defaultSortOrder: "descend",
-//       render: (text, item) => {
-//         const endDate = moment(item.endDate).format("ll");
-//         return <span>{endDate}</span>;
-//       },
-//       sorter: (a, b) => {
-//         var endDateA = a.endDate; // ignore upper and lowercase
-//         var endDateB = b.endDate; // ignore upper and lowercase
-//         if (endDateA < endDateB) {
-//           return -1;
-//         }
-//         if (endDateA > endDateB) {
-//           return 1;
-//         }
-
-//         return 0;
-//       },
-//     },
-//     {
-//       //title: "Proposal Amount",
-//       title: (
-//         <FormattedMessage
-//           id="app.proposalAmount"
-//           defaultMessage="Proposal Amount"
-//         />
-//       ),
-//       dataIndex: "proposalAmount",
-//       width: "20%",
-//       onFilter: (value, record) => record.proposalAmount.indexOf(value) === 0,
-//       render: (name, item, i) => {        
-//         return (
-//           <>
-//             {/* {item.proposalAmount} {item.currency} */}
-//             <span>
-//             <CurrencySymbol currencyType={item.currency} />
-//             &nbsp;&nbsp;{item.proposalAmount}
-//           </span>
-//           </>
-//         );
-//       },
-//     },
-// {
-// title:(
-//   <FormattedMessage
-//     id="app.status"
-//     defaultMessage="Status"
-//   />
-// ),
-// render: (name, item, i) => {
-//   var findProbability = item.probability;
-//   item.stageList.forEach((element) => {
-//     if (element.oppStage === item.oppStage) {
-//       findProbability = element.probability;}
-//    });
-//   return (
-//     <>
-//     <Tooltip title={item.oppStage}>
-// {" "}
-// <Progress
-// type="circle"
-// style={{ cursor: "pointer",color:"red" }}
-// percent={findProbability}
-// //disable={true}
-// width={30}
-//  strokeColor={"#005075"}
-
-// />
-  
-// </Tooltip>
-
-//     </>
-//   );
-// },
-// dataIndex: "status",
-// width: "7%",
-// },
-
-//     {
-//       //title: "sponsor",
-//       title: (
-//         <FormattedMessage
-//           id="app.sponsor"
-//           defaultMessage="Sponsor"
-//         />
-//       ),
-//       dataIndex: "contactName",
-//       width: "10%",
-//       onFilter: (value, record) => record.contactName.indexOf(value) === 0,
-//       render: (name, item, i) => {        
-//         return (
-//           <>
-//             {item.contactName} 
-//           </>
-//         );
-//       },
-//       render: (name, item, i) => {
-//         return (
-//           <>
-//             <Tooltip title={item.contactName}>
-//               <span>
-//                 <MultiAvatar
-//                   primaryTitle={item.contactName}
-//                   imageId={item.imageId}
-//                   imageURL={item.imageURL}
-//                   imgWidth={"1.8em"}
-//                   imgHeight={"1.8em"}
-//                 />
-//               </span>
-//             </Tooltip>
-
-//           </>
-//         );
-//       },
-//     },
-//     {
-//       title: "",
-//       // dataIndex: "documentId",
-//       width:"2%",
-//       render: (name, item, i) => {
-//         return (
-//           <Tooltip title={item.description}>
-           
-//           <InfoIcon 
-          
-//               // type="edit"
-//               style={{ cursor: "pointer",fontSize:"1rem" }}
-             
-//             />
-          
-//           </Tooltip>
-//         );
-//       },
-//     },
-//     {
-//       title: "",
-//       width: "1%",
-//     },
-//     {
-
-//       title: "",
-//       dataIndex: "documentId",
-//       width:"2%",
-//       render: (name, item, i) => {
-//         return (
-//           <Tooltip title="Edit">
-//              {user.opportunityUpdateInd ===true && (
-//           <BorderColorIcon 
-          
-//               type="edit"
-//               style={{ cursor: "pointer",fontSize:"0.8rem" }}
-//               onClick={() => {
-//                 props.setEditCustomerOpportunity(item);
-//                 handleUpdateCustomerOpportunityModal(true);
-//                 handleSetCurrentOpportunityId(item.opportunityId)
-                
-//               }}
-//             />
-//             )}
-//           </Tooltip>
-//         );
-//       },
-//     },
-//     {
-//       title: "",
-//       width: "1%",
-//     },
-//   ];
 
   const tab = document.querySelector(".ant-layout-sider-children");
     const tableHeight = tab && tab.offsetHeight * 0.75;
   return (
     <>
-    <div className=' flex justify-end sticky top-28 z-auto'>
+      <div className=' flex justify-end sticky top-28 z-auto'>
       <OnlyWrapCard style={{backgroundColor:"#E3E8EE"}}>
       <div className=" flex justify-between w-[99%] p-2 bg-transparent font-bold sticky top-0 z-10">
         <div className=" md:w-[8.1rem]">Name</div>
@@ -604,4 +366,4 @@ const mapDispatchToProps = (dispatch) =>
     },
     dispatch
   );
-export default connect(mapStateToProps, mapDispatchToProps)(OpportunityTable);
+export default connect(mapStateToProps, mapDispatchToProps)(CustomerOpportunityCardList);

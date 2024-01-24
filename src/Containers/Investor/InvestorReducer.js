@@ -39,6 +39,8 @@ const initialState = {
 
   investorActivityModal:false,
 
+  addDrawerInvestorContactModal:false,
+
   fetchingOpportunityRecord: false,
   fetchingOpportunityRecordError: false,
   opportunityRecord:[],
@@ -546,6 +548,10 @@ export const investorReducer = (state = initialState, action) => {
                         investorsbyId: [], 
                         // deletedTruck: [] 
                       };
+
+
+                      case types.HANDLE_INVESTOR_CONT_MODAL:
+                        return { ...state, addDrawerInvestorContactModal: action.payload }; 
 default:
       return state;
   }

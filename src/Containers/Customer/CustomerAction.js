@@ -2291,6 +2291,13 @@ export const getAllCustomerByCloser = (userId, startDate, endDate) => (
     });
   };
 
+  export const handleCustomerOpportunityDrawerModal = (modalProps) => (dispatch) => {
+    dispatch({
+      type: types.HANDLE_CUSTOMER_OPPORTUNITY_DRAWER_MODAL,
+      payload: modalProps,
+    });
+  };
+
 
 
   
