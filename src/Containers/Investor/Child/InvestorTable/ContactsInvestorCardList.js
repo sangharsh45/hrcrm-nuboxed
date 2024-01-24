@@ -3,31 +3,30 @@ import { connect } from "react-redux";
 import { FormattedMessage } from "react-intl";
 import { bindActionCreators } from "redux";
 import { Tooltip, Button, Input } from "antd";
-import { getDepartments } from "../../../../../Settings/Department/DepartmentAction";
-import { getDesignations } from "../../../../../Settings/Designation/DesignationAction";
 import {
   StyledTable,
   StyledPopconfirm,
-} from "../../../../../../Components/UI/Antd";
+} from "../../../../Components/UI/Antd";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
 import Highlighter from "react-highlight-words";
 import { SearchOutlined } from "@ant-design/icons";
-import { Link } from "../../../../../../Components/Common";
-import { ActionIcon } from "../../../../../../Components/Utils";
+import { Link } from "../../../../Components/Common";
+import { ActionIcon } from "../../../../Components/Utils";
 import styled from "styled-components";
-import {getContactListByInvestorId,handleUpdateInvestorContactModal} from "../../../../InvestorAction";
+import {getContactListByInvestorId,handleUpdateInvestorContactModal} from "../../InvestorAction";
+import moment from "moment";
+import { OnlyWrapCard } from "../../../../Components/UI/Layout";
+import { MultiAvatar2, SubTitle } from "../../../../Components/UI/Elements";
 
 const InvestorUpdateContactModal = lazy(() =>
-  import("../InvestorContact/InvestorUpdateContactModal")
+  import("../InvestorDetail/InvestorDetailTab/InvestorContact/InvestorUpdateContactModal")
 );
 
 const ButtonGroup = Button.Group;
 
 class ContactInvestorCardList extends Component {
   componentDidMount() {
-    this.props.getContactListByInvestorId(this.props.investorDetails.investorId);
-    this.props.getDesignations();
-    this.props.getDepartments();
+    this.props.getContactListByInvestorId(this.props.RowData.investorId);
   }
 
   state = {
@@ -175,7 +174,7 @@ class ContactInvestorCardList extends Component {
       
       <OnlyWrapCard style={{backgroundColor:"#E3E8EE"}}>
           <div className=" flex justify-between w-[98%] p-2 bg-transparent font-bold sticky top-0 z-10">
-        <div className=" md:w-[13.5rem]">
+          <div className=" md:w-[13.5rem]">
         <FormattedMessage
                   id="app.name"
                   defaultMessage="Name"
@@ -202,23 +201,23 @@ class ContactInvestorCardList extends Component {
       </div>
    
         
-      {contactByCustomerId.map((item) => { 
-         const dataLoc = ` Address : ${
-          item.address && item.address.length && item.address[0].address1
-        } 
-         Street : ${
-           item.address && item.address.length && item.address[0].street
-         }   
-        State : ${
-          item.address && item.address.length && item.address[0].state
-        }
-       Country : ${
-         (item.address && item.address.length && item.address[0].country) ||
-         ""
-       } 
-         PostalCode : ${
-           item.address && item.address.length && item.address[0].postalCode
-         } `;
+      {contactsbyInvestorId.map((item) => { 
+        const dataLoc = ` Address : ${
+            item.address && item.address.length && item.address[0].address1
+          } 
+           Street : ${
+             item.address && item.address.length && item.address[0].street
+           }   
+          State : ${
+            item.address && item.address.length && item.address[0].state
+          }
+         Country : ${
+           (item.address && item.address.length && item.address[0].country) ||
+           ""
+         } 
+           PostalCode : ${
+             item.address && item.address.length && item.address[0].postalCode
+           } `;
          const currentdate = moment().format("DD/MM/YYYY");
          const date = moment(item.creationDate).format("DD/MM/YYYY");
          const diff = Math.abs(
@@ -230,12 +229,12 @@ class ContactInvestorCardList extends Component {
                             <div className="flex rounded-xl justify-between bg-white mt-[0.5rem] h-[2.75rem] items-center p-3"
                                 >
                                      
-                                <div className=" flex font-medium flex-col md:w-[14rem] max-sm:flex-row w-full max-sm:justify-between  ">
+                                     <div className=" flex font-medium flex-col md:w-[14rem] max-sm:flex-row w-full max-sm:justify-between  ">
 <div className="flex max-sm:w-full items-center"> 
 <div>
                                 <SubTitle>
             <MultiAvatar2
-              primaryTitle={item.firstName}
+              primaryTitle={item.fullName}
               imageId={item.imageId}
               imageURL={item.imageURL}
               imgWidth={"1.8em"}
@@ -343,14 +342,12 @@ class ContactInvestorCardList extends Component {
               <span
                 style={{ cursor: "pointer" }}
                 onClick={() => {
-                  props.setEditCustomerContact(item);
-                  props.handleUpdateCustomerContactModal(true);
-                   handleIconClick(item.contactId);
+                  this.handleRowData(item);
+                 handleUpdateInvestorContactModal(true);
                 }}
               >
                 <BorderColorIcon style={{ fontSize: "0.8rem", }} />
               </span>
-              {/* )} */}
             </Tooltip>
 
                                     </div>
@@ -386,19 +383,7 @@ class ContactInvestorCardList extends Component {
                                     </div>
                                    
                                 </div>
-                                <div class=" text-sm text-cardBody font-poppins text-center">
-                                    <span>
-              {item.thirdPartyAccessInd === true && (
-                <CustomerContactActiveToggle
-                  accessInd={item.accessInd}
-                  contactId={item.contactId}
-                  emailId={item.emailId}
-                  thirdPartyAccessInd={item.thirdPartyAccessInd}
-                />
-              )}
-            </span>
-
-                                    </div>
+                             
                             </div>
                         </div>
 
@@ -432,9 +417,6 @@ const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
       getContactListByInvestorId,
-      getDesignations,
-    //   setEditCustomerContact,
-      getDepartments,
       handleUpdateInvestorContactModal,
     },
     dispatch

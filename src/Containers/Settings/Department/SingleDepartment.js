@@ -20,7 +20,7 @@ const SingleDepartment = (props) => {
     setViewType((prevViewType) => (prevViewType === "view" ? "edit" : "view"));
   };
   const {
-    department: { departmentName,crmInd,procurementInd,recruitOppsInd,hrInd,orderManagementInd,logisticsInd, departmentId,repairInd,inventoryInd,recruitProInd,sectorId,productionInd,eLearningInd,mandetoryInd,sectorName,erpInd,imInd ,accountInd},
+    department: { departmentName,moduleMapper,crmInd,procurementInd,recruitOppsInd,hrInd,orderManagementInd,logisticsInd, departmentId,repairInd,inventoryInd,recruitProInd,sectorId,productionInd,eLearningInd,mandetoryInd,sectorName,erpInd ,accountInd},
    handleChange,
    name,
    value,
@@ -32,7 +32,7 @@ const SingleDepartment = (props) => {
  } = props;
 
   // const { crmInd } = department;
-  console.log(crmInd);
+  console.log("moduleMapper",moduleMapper);
   const [crmStatus, setCrmStatus] = useState(crmInd);
   useEffect(() => {
     setCrmStatus(crmInd);
@@ -80,10 +80,10 @@ const SingleDepartment = (props) => {
     };
     props.addingDeptModules(data, departmentId);
   };
-  const [imStatus, setImStatus] = useState(imInd);
+  const [imStatus, setImStatus] = useState(moduleMapper.imInd);
   useEffect(() => {
-    setImStatus(imInd);
-  }, [imInd]);
+    setImStatus(moduleMapper.imInd);
+  }, [moduleMapper.imInd]);
   
   const handleImClick = (checked) => {
     setImStatus(checked);
@@ -314,7 +314,7 @@ const SingleDepartment = (props) => {
 )}
 <div class=" flex flex-col w-[80%] ">
 <div class=" flex flex-row ">
-{erpInd === true && (
+{moduleMapper.erpInd === true && (
   <>
                     <div class=" text-sm w-[2rem] ml-4">ERP</div>
                     <div   class=" w-[7%] ml-2">
@@ -328,7 +328,7 @@ const SingleDepartment = (props) => {
                         <Switch
                           style={{ width: "4em" }}
                           onChange={handleErpClick}
-                          checked={erpStatus || erpInd}
+                          checked={erpStatus || moduleMapper.erpInd}
                           checkedChildren="Yes"
                           unCheckedChildren="No"
                         />
@@ -336,7 +336,7 @@ const SingleDepartment = (props) => {
                     </div>
                     </>
 )}
-{crmInd === true && (
+{moduleMapper.crmInd === true && (
   <>
                   <div class=" text-sm w-[2rem] ml-4 ">CRM</div>
                     <div   class=" w-[7%] ml-2">
@@ -350,7 +350,7 @@ const SingleDepartment = (props) => {
                         <Switch
                           style={{ width: "4em" }}
                           onChange={handleCrmClick}
-                          checked={crmStatus || crmInd}
+                          checked={crmStatus || moduleMapper.crmInd}
                           checkedChildren="Yes"
                           unCheckedChildren="No"
                         />
@@ -358,29 +358,23 @@ const SingleDepartment = (props) => {
                     </div>
                     </>
 )}
-{imInd === true && (
+{moduleMapper.imInd === true && (
   <>
                     <div class=" text-sm w-[2rem] ml-4">IM</div>
                     <div   class=" w-[7%] ml-2">
-                    {/* <Popconfirm
-                        title="Do you wish to change Status ? "
-                        onConfirm={handleImClick}
-                        onCancel={handleImCancel}
-                        okText="Yes"
-                        cancelText="No"
-                      > */}
+                 
                         <Switch
                           style={{ width: "4em" }}
                           onChange={handleImClick}
-                          checked={imStatus || imInd}
+                          checked={imStatus || moduleMapper.imInd}
                           checkedChildren="Yes"
                           unCheckedChildren="No"
                         />
-                      {/* </Popconfirm> */}
+                 
                     </div>
                     </>
 )}
-{recruitProInd === true && (
+{moduleMapper.recruitProInd === true && (
   <>
                     <div class=" text-sm w-[5rem] ml-4">Rcruitpro</div>
                     <div   class=" w-[7%] ml-2">
@@ -394,7 +388,7 @@ const SingleDepartment = (props) => {
                         <Switch
                           style={{ width: "4em" }}
                           onChange={handleRecruitProClick}
-                          checked={recruitProStatus || recruitProInd}
+                          checked={recruitProStatus || moduleMapper.recruitProInd}
                           checkedChildren="Yes"
                           unCheckedChildren="No"
                         />
@@ -402,7 +396,7 @@ const SingleDepartment = (props) => {
                     </div>
                     </>
 )}
-{hrInd === true && (
+{moduleMapper.hrInd === true && (
   <>
 
                     <div class=" text-sm w-[2rem] ml-4">HR</div>
@@ -417,7 +411,7 @@ const SingleDepartment = (props) => {
                         <Switch
                           style={{ width: "4em" }}
                           onChange={handleHrClick}
-                          checked={hrStatus || hrInd}
+                          checked={hrStatus || moduleMapper.hrInd}
                           checkedChildren="Yes"
                           unCheckedChildren="No"
                         />
@@ -425,7 +419,7 @@ const SingleDepartment = (props) => {
                     </div>
                     </>
 )}
-{eLearningInd === true && (
+{moduleMapper.eLearningInd === true && (
   <>
 
                     <div class=" text-sm w-[5rem]  ml-4">Elearning</div>
@@ -440,7 +434,7 @@ const SingleDepartment = (props) => {
                         <Switch
                           style={{ width: "4em" }}
                           onChange={handleElearningClick}
-                          checked={elearningStatus || eLearningInd}
+                          checked={elearningStatus || moduleMapper.eLearningInd}
                           checkedChildren="Yes"
                           unCheckedChildren="No"
                         />
@@ -486,7 +480,7 @@ const SingleDepartment = (props) => {
                     </>
 )} */}
 
-{productionInd === true && (
+{moduleMapper.productionInd === true && (
   <>
 
                     <div class=" text-sm w-[5rem] ml-4">Production</div>
@@ -501,7 +495,7 @@ const SingleDepartment = (props) => {
                         <Switch
                           style={{ width: "4em" }}
                           onChange={handleProductionClick}
-                          checked={productionStatus || productionInd}
+                          checked={productionStatus || moduleMapper.productionInd}
                           checkedChildren="Yes"
                           unCheckedChildren="No"
                         />
@@ -510,7 +504,7 @@ const SingleDepartment = (props) => {
                     </>
 )}
 
-{repairInd === true && (
+{moduleMapper.repairInd === true && (
   <>
                     <div class=" text-sm w-[5rem]  ml-4">Repair</div>
                     <div   class=" w-[7%] ml-2">
@@ -524,7 +518,7 @@ const SingleDepartment = (props) => {
                         <Switch
                           style={{ width: "4em" }}
                           onChange={handleRepairClick}
-                          checked={repairStatus || repairInd}
+                          checked={repairStatus || moduleMapper.repairInd}
                           checkedChildren="Yes"
                           unCheckedChildren="No"
                         />
@@ -548,7 +542,7 @@ const SingleDepartment = (props) => {
                     </div>
                     </>
 )} */}
-{orderManagementInd === true && (
+{moduleMapper.orderManagementInd === true && (
   <>
                     <div class=" text-sm w-[9rem] ml-4">Order Management</div>
                     <div   class=" w-[7%] ml-2">
@@ -562,7 +556,7 @@ const SingleDepartment = (props) => {
                         <Switch
                           style={{ width: "4em" }}
                           onChange={handleOrderManagementClick}
-                          checked={orderManagStatus || orderManagementInd}
+                          checked={orderManagStatus || moduleMapper.orderManagementInd}
                           checkedChildren="Yes"
                           unCheckedChildren="No"
                         />
@@ -570,7 +564,7 @@ const SingleDepartment = (props) => {
                     </div>
                     </>
 )}
-{logisticsInd === true && (
+{moduleMapper.logisticsInd === true && (
   <>
                     <div class=" text-sm w-[5rem]  ml-4">Logistics</div>
                     <div   class=" w-[7%] ml-2">
@@ -584,7 +578,7 @@ const SingleDepartment = (props) => {
                         <Switch
                           style={{ width: "4em" }}
                           onChange={handleLogisticClick}
-                          checked={logisticsStatus || logisticsInd}
+                          checked={logisticsStatus || moduleMapper.logisticsInd}
                           checkedChildren="Yes"
                           unCheckedChildren="No"
                         />
@@ -592,7 +586,7 @@ const SingleDepartment = (props) => {
                     </div>
                     </>
 )}
-{procurementInd === true && (
+{moduleMapper.procurementInd === true && (
   <>
                     <div class=" text-sm w-[5rem] ml-4">Procurement</div>
                     <div   class=" w-[7%] ml-2">
@@ -606,7 +600,7 @@ const SingleDepartment = (props) => {
                         <Switch
                           style={{ width: "4em" }}
                           onChange={handleProcurmentClick}
-                          checked={procurmentStatus || procurementInd}
+                          checked={procurmentStatus || moduleMapper.procurementInd}
                           checkedChildren="Yes"
                           unCheckedChildren="No"
                         />
