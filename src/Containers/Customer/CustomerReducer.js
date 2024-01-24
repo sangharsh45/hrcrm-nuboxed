@@ -385,6 +385,8 @@ const initialState = {
   setEditingCustomerContact:{},
   addUpdateCustomerContactModal:false,
 
+  addDrawerCustomerContactModal:false,
+
   puttingCustContcToggle: false,
   puttingCustContcToggleError: false,
 
@@ -1608,6 +1610,10 @@ export const customerReducer = (state = initialState, action) => {
                   
                                           case types.HANDLE_CUSTOMER_PULSE_DRAWER_MODAL:
                                             return { ...state, addDrawerCustomerPulseModal: action.payload }; 
+
+                                            case types.HANDLE_CUSTOMER_CONTACT_DRAWER_MODAL:
+                                              return { ...state, addDrawerCustomerContactModal: action.payload }; 
+                                              
                                             
                                             
                                             case types.GET_OPPORTUNITY_RECORD_REQUEST:
