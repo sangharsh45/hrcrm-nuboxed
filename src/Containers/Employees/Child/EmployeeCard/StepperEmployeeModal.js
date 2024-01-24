@@ -14,7 +14,7 @@ const StepperEmployeeModal = (props) => {
   return (
     <>
       <StyledDrawer
-        title={props.setEditingEmployee.fullName}
+        title={currentEmployeeId.fullName}
         width="60%"
         visible={props.onboardingEmployeeModal}
         onClose={() => props.handleOnboardingEmployeeModal(false)}

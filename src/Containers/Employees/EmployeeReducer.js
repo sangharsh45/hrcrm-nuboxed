@@ -816,7 +816,7 @@ case types.GET_ADMIN_USER_FAILURE:
         return {
           ...state,
           addOnboadingEmpl: false,
-          // openNotifydrwr: false,
+          onboardingEmployeeModal: false,
           // employees: state.employees.map((item) => {
           //   if (item.employeeId === action.payload.employeeId) {
           //     return action.payload;
@@ -828,6 +828,7 @@ case types.GET_ADMIN_USER_FAILURE:
       case types.ADD_ONBOARDING_EMPLOYEE_FAILURE:
         return {
           ...state,
+          onboardingEmployeeModal:false,
           addOnboadingEmpl: false,
           addOnboadingEmplError: true,
         };

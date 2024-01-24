@@ -235,8 +235,8 @@ function handleSetCurrentEmployeeId(employeeId,) {
               <BadgeIcon
                 style={{ cursor: "pointer",fontSize: "1rem" }}
                 onClick={() => {
-                    props.setEditEmployee(item);
-                    handleStoredData(item);
+                    // props.setEditEmployee(item);
+                    // handleStoredData(item);
                     props.handleOnboardingEmployeeModal(true);
                     handleSetCurrentEmployeeId(item);
                   
@@ -311,9 +311,9 @@ function handleSetCurrentEmployeeId(employeeId,) {
       />
                <StepperEmployeeModal
                currentEmployeeId={currentEmployeeId}
-                storedData={storedData}
-               singleEmployee={props.singleEmployee}
-               employeeName={currentEmployeeId}
+              //   storedData={storedData}
+              //  singleEmployee={props.singleEmployee}
+              //  employeeName={currentEmployeeId}
        onboardingEmployeeModal={props.onboardingEmployeeModal}
         handleOnboardingEmployeeModal={props.handleOnboardingEmployeeModal}
         // handleSetCurrentEmployeeId={props.handleSetCurrentEmployeeId}
