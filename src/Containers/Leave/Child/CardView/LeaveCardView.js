@@ -1,17 +1,14 @@
-import React, { Component, useEffect, useState, useMemo, lazy } from "react";
-import { MultiAvatar2 } from "../../../../Components/UI/Elements";
-import { FlexContainer } from "../../../../Components/UI/Layout";
+import React, {  useEffect, useState,  lazy } from "react";
 import { Tooltip } from "antd";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Select } from "antd";
 import styled from "styled-components";
-import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
+import {  DeleteOutlined } from "@ant-design/icons";
 import moment from "moment";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
 import { BundleLoader } from "../../../../Components/Placeholder";
 import NoteAltIcon from "@mui/icons-material/NoteAlt";
-
 import AssistantIcon from "@mui/icons-material/Assistant";
 import {
   getLeaveListRangeByUserId,
@@ -21,9 +18,9 @@ import {
   handleStatusLeaveModal,
   handleLeaveNoteDrawer
 } from "../../LeavesAction";
-import UpdateLeavesModal from "../Tab/UpdateLeavesModal";
-import StatusLeavesModal from "./StatusLeavesModal";
+const StatusLeavesModal = lazy(()=>import("./StatusLeavesModal"));
 const LeaveNoteDrawer = lazy(()=>import("./LeaveNoteDrawer"));
+const UpdateLeavesModal = lazy(()=>import("../Tab/UpdateLeavesModal"));
 
 const { Option } = Select;
 function LeaveCardView(props) {

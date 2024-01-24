@@ -1,25 +1,19 @@
-import React, { Component, useEffect, useState, useMemo, lazy } from "react";
-import { MultiAvatar2 } from "../../../../Components/UI/Elements";
-import { FlexContainer, OnlyWrapCard } from "../../../../Components/UI/Layout";
-import { Button, Tooltip } from "antd";
+import React, {  useEffect, useState,  lazy } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Select } from "antd";
-import styled from "styled-components";
-import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
-import moment from "moment";
-import BorderColorIcon from "@mui/icons-material/BorderColor";
-import { BundleLoader } from "../../../../Components/Placeholder";
 import {
   getLeaveListRangeByUserId,
   updateLeaves,
   setEditLeave,
   handleUpdateLeaveModal,
 } from "../../LeavesAction";
-import UpdateLeavesModal from "../Tab/UpdateLeavesModal";
-import LeavePendingStatusCard from "./LeavePendingStatusCard";
-import LeaveApprovedStatusCard from "./LeaveApprovedStatusCard";
-import LeaveRejectedStatusCard from "./LeaveRejectedStatusCard";
+const UpdateLeavesModal = lazy(() => import("../Tab/UpdateLeavesModal"));
+const LeavePendingStatusCard = lazy(() => import("./LeavePendingStatusCard"));
+const LeaveApprovedStatusCard = lazy(() => import("./LeaveApprovedStatusCard"));
+const LeaveRejectedStatusCard = lazy(() => import("./LeaveRejectedStatusCard"));
+
+
 const { Option } = Select;
 
 function LeaveStatusCard(props) {

@@ -8,10 +8,7 @@ import * as Yup from "yup";
 import dayjs from "dayjs";
 import { Spacer,StyledLabel } from "../../../../Components/UI/Elements";
 import { TextareaComponent } from "../../../../Components/Forms/Formik/TextareaComponent";
-// import SearchSelect from "../../../../Components/Forms/Formik/SearchSelect";
 import { InputComponent } from "../../../../Components/Forms/Formik/InputComponent";
-// import AddressFieldArray from "../../../../Components/Forms/Formik/AddressFieldArray";
-// import { SelectComponent } from "../../../../Components/Forms/Formik/SelectComponent";
 import { DatePicker } from "../../../../Components/Forms/Formik/DatePicker";
 // import { TimePicker } from "../../../../Components/Forms/Formik/TimePicker";
 // import {
@@ -23,8 +20,7 @@ import { DatePicker } from "../../../../Components/Forms/Formik/DatePicker";
 import { handleChooserModal } from "../../../Planner/PlannerAction";
 import { FlexContainer } from "../../../../Components/UI/Layout";
 import { updateLeaves } from "../../LeavesAction";
-// import { TextareaComponent } from "../../../../Components/Forms/Formik/TextareaComponent";
-// import { StyledPopconfirm } from "../../../../Components/UI/Antd";
+
 /**
  * yup validation scheme for creating a opportunity
  */

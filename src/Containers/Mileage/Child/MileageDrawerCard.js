@@ -90,14 +90,14 @@ function MileageDrawerCard(props) {
   return (
     <>
      <OnlyWrapCard style={{backgroundColor:"#E3E8EE"}}>
-     <div className=" flex justify-between w-[99%] p-2 bg-transparent font-bold sticky top-0 z-10">
-        <div className=" md:w-[1rem]">ID</div>
-        <div className="md:w-[5.8rem]">Cost Code</div>
-        <div className=" md:w-[4.2rem] ">Date</div>
-        <div className=" md:w-[3.1rem]">From</div>
-        <div className=" md:w-[4.1rem]">To</div> 
-        <div className="md:w-[3.5rem]">Distance</div>
-        <div className="md:w-[3.8rem]">Remarks</div> 
+     <div className=" flex  w-[99%] p-2 bg-transparent font-bold sticky top-0 z-10">
+        <div className=" md:w-[9.2rem]">ID</div>
+        <div className="md:w-[6.8rem]">Cost Code</div>
+        <div className=" md:w-[7.21rem] ">Date</div>
+        <div className=" md:w-[7.1rem]">From</div>
+        <div className=" md:w-[6.12rem]">To</div> 
+        <div className="md:w-[6.5rem]">Distance</div>
+        <div className="md:w-[4.8rem]">Remarks</div> 
       
         <div className="w-12"></div>
 
@@ -106,24 +106,23 @@ function MileageDrawerCard(props) {
           return (
             <div key={index}>
                         <div
-                className="flex rounded-xl justify-between bg-white mt-[0.5rem] h-[2.75rem] items-center p-3"
+                className="flex rounded-xl  bg-white mt-[0.5rem] h-[2.75rem] items-center p-3"
               >
-                <div className="flex font-medium flex-col w-10">
+                <div className="flex font-medium flex-col w-[9.7rem]">
                   
-                  <h4 className="text-xs text-blue-500 text-cardBody font-poppins cursor-pointer">
-                    <Tooltip title={item.mileageId}>
-                      <QuestionMarkIcon style={{fontSize:"1.25rem"}} />
-                    </Tooltip>
+                  <h4 className="text-xs  text-cardBody font-poppins cursor-pointer">
+                   
+                    {item.mileageId}
                   </h4>
                 </div>
-                <div className="flex font-medium flex-col w-32 ml-[0.25rem]">
+                <div className="flex font-medium flex-col w-[5.12rem] ">
        
                   {editStates[index] ? (
               <input
                 type="text"
                 value={item.clientName}
                 onChange={(e) => handleInputChange(index, 'clientName', e.target.value)}
-                   style={{border:"1px solid grey"}}
+                   style={{border:"1px solid lightgrey"}}
               />
             ) : (
                   <h4 className="text-xs text-cardBody font-poppins">
@@ -131,7 +130,7 @@ function MileageDrawerCard(props) {
                   </h4>
             )}
                 </div>
-                <div className="flex font-medium flex-col w-36 ml-[0.25rem]">
+                <div className="flex font-medium flex-col w-[7.8rem]">
                  
                   {editStates[index] ? (
   <DatePicker
@@ -139,7 +138,7 @@ function MileageDrawerCard(props) {
     onChange={(date, dateString) =>
       handleInputChange(index, "mileageDate", dateString)
     }
-    style={{ border: "1px solid grey" }}
+    style={{ border: "1px solid lightgrey",boxShadow:"0 0.01em 0.01em ",margin:"0.25rem",height:"1.4rem" }}
   />
 ) : (
   <h4 className="text-xs text-cardBody font-poppins">
@@ -147,12 +146,12 @@ function MileageDrawerCard(props) {
   </h4>
 )}
                 </div>
-                <div className=" flex font-medium flex-col w-30 ml-[0.25rem]">
+                <div className=" flex font-medium flex-col w-[7.2rem] ">
                   {editStates[index] ? (
               <input
                 type="text"
                 value={item.fromLocation}
-                   style={{border:"1px solid grey"}}
+                   style={{border:"1px solid lightgrey",marginRight:"0.25rem"}}
                 onChange={(e) => handleInputChange(index, 'fromLocation', e.target.value)}
               />
             ) : (
@@ -161,12 +160,12 @@ function MileageDrawerCard(props) {
                   </h4>
             )}
                 </div>
-                <div className=" flex font-medium flex-col w-30 ml-[0.25rem] ">
+                <div className=" flex font-medium flex-col w-[7.23rem] ">
                 
                   {editStates[index] ? (
               <input
                 type="text"
-                   style={{border:"1px solid grey"}}
+                   style={{border:"1px solid lightgrey",marginRight:"0.25rem"}}
                 value={item.toLocation}
                 onChange={(e) => handleInputChange(index, 'toLocation', e.target.value)}
               />
@@ -176,12 +175,12 @@ function MileageDrawerCard(props) {
                   </h4>
             )}
                 </div>
-                <div className=" flex font-medium flex-col w-20 ml-[0.25rem]">
+                <div className=" flex font-medium flex-col w-[6.5rem] ">
                   {editStates[index] ? (
               <input
                 type="text"
                 value={item.distances}
-                   style={{border:"1px solid grey"}}
+                   style={{border:"1px solid lightgrey",marginRight:"0.25rem"}}
                 onChange={(e) => handleInputChange(index, 'distances', e.target.value)}
               />
             ) : (
@@ -190,11 +189,11 @@ function MileageDrawerCard(props) {
                   </h4>
             )}
                 </div>
-                <div className="flex font-medium flex-col w-32 ml-[0.25rem]">
+                <div className="flex font-medium flex-col w-[7.1rem]">
                   {editStates[index] ? (
               <input
                 type="text"
-                style={{border:"1px solid grey"}}
+                style={{border:"1px solid lightgrey",marginRight:"0.25rem"}}
                 value={item.remark}
                 onChange={(e) => handleInputChange(index, 'remark', e.target.value)}
               />
@@ -205,10 +204,11 @@ function MileageDrawerCard(props) {
             )}
                 </div>
 
-                <div className="flex font-medium flex-col w-[2rem] justify-center">
+                <div className="flex font-medium flex-col w-[5.5rem] justify-center">
                   {/* <h4 className="text-xs text-cardBody font-poppins">
                     Remarks
                   </h4> */}
+                   {item.status !== 'Approved' && (
                   <h4 className="text-xs text-cardBody font-poppins ml-[0.25rem]">
                   <button onClick={() => toggleEdit(index)} >
             {editStates[index] ? 'Cancel' : <BorderColorIcon   style={{
@@ -221,7 +221,10 @@ function MileageDrawerCard(props) {
             <button onClick={() => handleSave(index)} className="ml-[0.25rem]">Save</button>
           )}
                   </h4>
+                   )}
                 </div>
+                <div class="flex flex-col items-center">
+                <div className="flex font-medium flex-col  justify-center">
                 <Tooltip title={"Note"}>
                     <NoteAltIcon 
                     style={{ cursor: "pointer",padding: "2px",fontSize:"1.2rem" }}
@@ -231,6 +234,8 @@ function MileageDrawerCard(props) {
                     }}
                     />
                   </Tooltip>
+                  </div>
+                  <div className="flex font-medium flex-col  justify-center">
                 {item.status === "Pending" ? (
             <Tooltip title="Delete">
               <DeleteOutlined
@@ -243,6 +248,8 @@ function MileageDrawerCard(props) {
                />
              </Tooltip>
              ):null}
+             </div>
+             </div>
                 {/* <div className="flex flex-col w-[4%]">
                   {item.status === "Pending" ? (
                     <div>

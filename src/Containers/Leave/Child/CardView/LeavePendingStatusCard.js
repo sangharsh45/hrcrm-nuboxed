@@ -11,7 +11,8 @@ import {
   setEditLeave,
   handleUpdateLeaveModal,
 } from "../../LeavesAction";
-import UpdateLeavesModal from "../Tab/UpdateLeavesModal";
+const UpdateLeavesModal = lazy(() => import("../Tab/UpdateLeavesModal"));
+
 const { Option } = Select;
 
 function LeavePendingStatusCard(props) {

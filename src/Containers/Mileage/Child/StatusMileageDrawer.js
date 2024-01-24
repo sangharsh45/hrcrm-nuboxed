@@ -16,7 +16,7 @@ const StatusMileageDrawer = (props) => {
         //   id="app.applyforleaves"
         //   defaultMessage="Status "
         // />}
-        width="30vw"
+        width="60%"
         visible={updateStatusMileageModal}
         onClose={() => handleStatusMileageModal(false)}
         footer={null}
