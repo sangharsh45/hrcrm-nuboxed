@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import { Button } from 'antd';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { getAllSpareList } from "./RefurbishAction"
 import { OnlyWrapCard } from "../../../Components/UI/Layout";
-import moment from "moment";
 import { FormattedMessage } from "react-intl";
+import ApprovedSpareToggle from "./ApprovedSpareToggle";
+import { BundleLoader } from '../../../Components/Placeholder';
 
 const ApproveSpareTable = (props) => {
 
@@ -23,6 +23,10 @@ const ApproveSpareTable = (props) => {
             );
         },
     };
+
+if (props.fetchingALlSPareList){
+    return <BundleLoader/>
+}
 
     return (
         <>
@@ -49,36 +53,37 @@ const ApproveSpareTable = (props) => {
                         <div className="md:w-[7.2rem]"></div>
                     </div>
                     {props.allSpareById.map((item) => {
-                        const currentdate = moment().format("DD/MM/YYYY");
-                        const date = moment(item.createAt).format("DD/MM/YYYY");
                         return (
                             <div>
-                                <div className="flex rounded-xl  mt-4 bg-white h-12 items-center p-3 " >
+                                <div className="flex rounded-xl  mt-4 bg-white h-10 items-center p-3 " >
                                     <div class="flex">
                                         <div className=" flex font-medium  md:w-[7.6rem] max-sm:w-full  ">
-                                           
-                                                {item.newOrderNo}
+                                                {item.suppliesName}
                                         </div>
 
                                         <div className=" flex font-medium   md:w-[10.7rem] max-sm:flex-row w-full max-sm:justify-between  ">
                                             <h4 class=" text-xs text-cardBody font-poppins">
-                                                {item.distributorName}
+                                                {item.phoneIMEI}
                                             </h4>
 
                                         </div>
                                         <div className=" flex font-medium  md:w-[5.2rem] max-sm:flex-row w-full max-sm:justify-between ">
                                             <h4 class=" text-sm text-cardBody font-poppins">
-
+                                                {item.model}
                                             </h4>
                                         </div>
                                     </div>
 
                                     <div className=" flex font-medium  md:w-[5.21rem] max-sm:flex-row w-full max-sm:justify-between ">
                                         <div class=" text-xs text-cardBody font-poppins text-center">
-                                            
+                                            {item.company}
                                         </div>
                                     </div>
-                                   
+                                    <div className=" flex font-medium  md:w-[5.21rem] max-sm:flex-row w-full max-sm:justify-between ">
+                                        <div class=" text-xs text-cardBody font-poppins text-center">
+                                           <ApprovedSpareToggle phoneSpareId={item.phoneSpareId}/>
+                                        </div>
+                                    </div>
 
                                 </div>
                             </div>
@@ -86,17 +91,7 @@ const ApproveSpareTable = (props) => {
                     })}
                 </OnlyWrapCard>
             </div>
-            {/* <StyledTable
-                rowKey="sparePhoneId"
-                rowSelection={rowSelection}
-                columns={columns}
-                pagination={false}
-                dataSource={props.allSpareById}
-                loading={props.fetchingALlSPareList}
-            /> */}
-            <div class="flex justify-end">
-                <Button type='primary'>Approve</Button>
-            </div>
+
         </>
     )
 }

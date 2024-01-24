@@ -140,6 +140,7 @@ const ReceivedTable = (props) => {
                     <h4 class=" text-xs text-cardBody font-semibold  font-poppins">
                       {item.inspectionInd === 0 ?
                         <Button
+                        className="w-28"
                           onClick={() => props.updateInspection({
                             inspectionInd: 1,
                             startInspectionUser: props.userId,
@@ -160,6 +161,7 @@ const ReceivedTable = (props) => {
                           </Button> :
                           item.inspectionInd === 1 ?
                             <Button
+                            className="w-28"
                               style={{ fontWeight: "500", color: "white" }}
                               onClick={handlePauseResume}
                               type="primary">

@@ -977,7 +977,7 @@ export const getAllSpareList = (orderId) => (dispatch) => {
     type: types.GET_ALL_SPARE_LIST_REQUEST,
   });
   axios
-    .get(`${base_url2}/get-allspare/${orderId}`, {
+    .get(`${base_url2}/phoneSpare/allSpareDetails/${orderId}`, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },
@@ -1402,5 +1402,58 @@ export const getTaskByPhoneId = (phoneId) => (dispatch) => {
         type: types.GET_TASK_BY_PHONEID_FAILURE,
         payload: err,
       });
+    });
+};
+
+export const approveSpare = (data,phoneSpareId) => (dispatch) => {
+  dispatch({
+    type: types.APPROVE_SPARE_REQUEST,
+  });
+  axios
+    .put(`${base_url2}/phoneSpare/approve-spare/${phoneSpareId}`, data, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      dispatch({
+        type: types.APPROVE_SPARE_SUCCESS,
+        payload: res.data,
+      });
+      message.success("Confirmation Successfull");
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.APPROVE_SPARE_FAILURE,
+        payload: err,
+      });
+      message.error("Something went wrong");
+    });
+};
+export const updateProcessTask = (phoneTaskId) => (dispatch) => {
+  dispatch({
+    type: types.UPDATE_PROCESS_TASK_REQUEST,
+  });
+  axios
+    .put(`${base_url2}/itemTask/updateTaskInd/${phoneTaskId}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      dispatch({
+        type: types.UPDATE_PROCESS_TASK_SUCCESS,
+        payload: res.data,
+      });
+      message.success("Confirmation Successfull");
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.UPDATE_PROCESS_TASK_FAILURE,
+        payload: err,
+      });
+      message.error("Something went wrong");
     });
 };

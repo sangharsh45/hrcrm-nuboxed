@@ -206,8 +206,8 @@ function ProductionRepairOrder(props) {
                       /></div>
                         <div className="md:w-[6.6rem]"></div>
                         <div className="md:w-[5.8rem]"><FormattedMessage
-                        id="app.notes"
-                        defaultMessage="notes"
+                        id="app.status"
+                        defaultMessage="Status"
                       /></div>
             </div>
                     {props.inspectionRequiredInd ? props.choosenOrderCatalogue.map((item) => {
