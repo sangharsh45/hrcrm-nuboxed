@@ -1,7 +1,7 @@
 import React, { Suspense, lazy } from "react";
 import { StyledDrawer } from "../../../Components/UI/Antd";
 import { BundleLoader } from "../../../Components/Placeholder";
-import AssignCatalogueRepairForm from "./AssignCatalogueRepairForm";
+const AssignCatalogueRepairForm = lazy(() => import("./AssignCatalogueRepairForm"));
 const AssignRepairForm = lazy(() => import("./AssignRepairForm"));
 
 const AddAssignRepairModal = (props) => {

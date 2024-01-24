@@ -474,12 +474,12 @@
 // );
 
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState,lazy,Suspense } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { MultiAvatar } from "../../../Components/UI/Elements";
 import NoteAltIcon from '@mui/icons-material/NoteAlt';
-import { Input, Tooltip, Button,  Form, } from "antd";
+import { Tooltip, Button } from "antd";
 import {
     getProductionOrderId,
     handleProductionNotesModal,
@@ -494,18 +494,17 @@ import {
 } from "./RefurbishAction";
 import { withRouter } from "react-router";
 import moment from "moment";
-import AssignOrderModal from "./AssignOrderModal";
-import { HistoryOutlined} from "@ant-design/icons";
-import TechnicianModal from "./TechnicianModal";
-import AddAssignRepairModal from "./AddAssignRepairModal";
-import AllSpareListByOrder from "./AllSpareListByOrder";
-import { OnlyWrapCard } from "../../../Components/UI/Layout";
-import ShowProductBuilderModal from "./ShowProductBuilderModal";
 import { FormattedMessage } from "react-intl";
-import ExtensionIcon from '@mui/icons-material/Extension';
+import { OnlyWrapCard } from "../../../Components/UI/Layout";
+import { HistoryOutlined} from "@ant-design/icons";
+import { BundleLoader } from "../../../Components/Placeholder";
+const TechnicianModal =lazy(()=>import("./TechnicianModal"));
+const AssignOrderModal  =lazy(()=>import("./AssignOrderModal"));
+const AddAssignRepairModal =lazy(()=>import("./AddAssignRepairModal"));
+const AllSpareListByOrder =lazy(()=>import("./AllSpareListByOrder"));
+const ShowProductBuilderModal =lazy(()=>import("./ShowProductBuilderModal"));
 
 const ProductionOrderList = (props) => {
-
     useEffect(() => {
         props.getProductionOrderId(props.locationId)
     }, [])
@@ -567,7 +566,7 @@ const ProductionOrderList = (props) => {
                                     <div class="flex">
                                         <div className=" flex font-medium  md:w-[7.6rem] max-sm:w-full  ">
                                             <span
-                                                style={{ textDecoration: "underline", color: "#1890ff", cursor: "pointer" }}
+                                                class="underline text-[#1890ff] cursor-pointer"
                                                 onClick={() => {
                                                     handleRowData(item);
                                                     props.handleProductBuilder(true)
@@ -577,11 +576,7 @@ const ProductionOrderList = (props) => {
                                             &nbsp;&nbsp;
                                             {date === currentdate ? (
                                                 <span
-                                                    style={{
-                                                        color: "tomato",
-                                                        fontWeight: "bold",
-                                                    }}
-                                                >
+                                                    class="text-[tomato] font-bold">
                                                     New
                                                 </span>
                                             ) : null}
@@ -660,10 +655,7 @@ const ProductionOrderList = (props) => {
                                             {item.qcStartInd === 1 ?
                                                 <Tooltip title="Assign For QC">
                                                     <Button
-                                                        style={{
-                                                            backgroundColor: "#1685e6",
-                                                            color: "white",
-                                                        }}
+                                                    className="bg-[#1685e6] text-white"
                                                         onClick={() => {
                                                             props.handleAssignOrderById(true);
                                                             handleRowData(item);
@@ -678,10 +670,7 @@ const ProductionOrderList = (props) => {
                                             {item.qcRepairInd === 1 ?
                                                 <Tooltip title="Assign For Repair">
                                                     <Button
-                                                        style={{
-                                                            backgroundColor: "#1685e6",
-                                                            color: "white",
-                                                        }}
+                                                    className="bg-[#1685e6] text-white"
                                                         onClick={() => {
                                                             props.handleAssignRepairModal(true);
                                                             handleRowData(item);
@@ -724,6 +713,7 @@ const ProductionOrderList = (props) => {
                         )
                     })}
                 </OnlyWrapCard>
+                <Suspense fallback={<BundleLoader/>}>
                 <AssignOrderModal
                     handleAssignOrderById={props.handleAssignOrderById}
                     assignOrderById={props.assignOrderById}
@@ -747,6 +737,7 @@ const ProductionOrderList = (props) => {
                     showTechnicianModal={props.showTechnicianModal}
                     rowData={rowData}
                 />
+                     </Suspense>
             </div>
         </>
     )

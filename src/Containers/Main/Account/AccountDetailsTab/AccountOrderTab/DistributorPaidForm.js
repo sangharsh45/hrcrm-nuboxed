@@ -95,6 +95,7 @@ function DistributorPaidForm(props) {
                   </div>
                   <div class="w-[31%]">
                     <Field
+                    disabled
                       name="orderCurrencyId"
                       label={
                         <FormattedMessage

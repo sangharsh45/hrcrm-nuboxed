@@ -1,12 +1,14 @@
-import { Button, DatePicker, Form, Input, Popconfirm, Select, Typography, message } from 'antd'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState,lazy } from 'react'
+import { Button, DatePicker, Select } from 'antd'
 import { StyledTable } from '../../../Components/UI/Antd'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { getDepartments } from "../../Settings/Department/DepartmentAction"
 import { getProductionUsersById, UpdateTechnicianByPhone, getNoOfPhoneById } from "./RefurbishAction"
-import QRCodeModal from '../../../Components/UI/Elements/QRCodeModal'
-import { SubTitle } from '../../../Components/UI/Elements'
+import { SubTitle } from '../../../Components/UI/Elements';
+
+const QRCodeModal=lazy(()=>import('../../../Components/UI/Elements/QRCodeModal'));
+
 const { Option } = Select;
 
 const AssignPhoneByTechnician = (props) => {

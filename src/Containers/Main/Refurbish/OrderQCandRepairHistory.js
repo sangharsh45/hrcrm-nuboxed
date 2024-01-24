@@ -4,8 +4,8 @@ import TabPane from 'antd/lib/tabs/TabPane';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { BundleLoader } from '../../../Components/Placeholder'
-import TechnicianListByOrderId from './TechnicianListByOrderId';
-import RepairTechnicianList from './RepairTechnicianList';
+const TechnicianListByOrderId =lazy(()=>import('./TechnicianListByOrderId'));
+const RepairTechnicianList =lazy(()=>import('./RepairTechnicianList'));
 
 
 const OrderQCandRepairHistory = (props) => {
