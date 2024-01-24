@@ -6,6 +6,7 @@ import LocationOnIcon from '@mui/icons-material/LocationOn';
 import ExploreIcon from "@mui/icons-material/Explore";
 import { getSectors } from "../../../Settings/Sectors/SectorsAction";
 import moment from "moment";
+import ContactsIcon from '@mui/icons-material/Contacts';
 import { OnlyWrapCard } from '../../../../Components/UI/Layout'
 import { getCountries } from "../../../Auth/AuthAction";
 import InfiniteScroll from "react-infinite-scroll-component";
@@ -31,6 +32,7 @@ import {
   emptyCustomer,
   customerToAccount,
   handleCustomerPulseDrawerModal,
+  handleCustomerContactDrawerModal,
 } from "../../CustomerAction";
 import NoteAltIcon from "@mui/icons-material/NoteAlt";
 import AddCustomerDrawerModal from "../../AddCustomerDrawerModal";
@@ -40,6 +42,7 @@ import ReactCountryFlag from 'react-country-flag';
 import AddCustomerNotesDrawerModal from "../CustomerDetail/AddCustomerNotesDrawerModal";
 import CustomerPulseDrawerModal from "./CustomerPulseDrawerModal";
 import { FormattedMessage } from "react-intl";
+import CustomerContactDrawerModal from "./CustomerContactDrawerModal";
 
 const UpdateCustomerModal = lazy(() =>
   import("../UpdateCustomer/UpdateCustomerModal")
@@ -117,7 +120,9 @@ const [rowdata, setrowdata] = useState("");
     customerByUserId,
     handleUpdateCustomerModal,
     addDrawerCustomerPulseModal,
+    addDrawerCustomerContactModal,
     handleCustomerPulseDrawerModal,
+    handleCustomerContactDrawerModal,
     updateCustomerModal,
     fetchingCustomersError,
     fetchingAllCustomers,
@@ -413,7 +418,7 @@ const [rowdata, setrowdata] = useState("");
                         </Popconfirm>
                    </div>
                    
-                   <div class="flex flex-col w-[10%] ml-1 max-sm:flex-row max-sm:w-[10%]">
+                   <div class="flex flex-col w-6 ml-1 max-sm:flex-row max-sm:w-[10%]">
                                 <div>
                                 <Tooltip title={item.url}>
               {item.url !== "" ? (
@@ -459,6 +464,33 @@ const [rowdata, setrowdata] = useState("");
             
 
                     </div>
+                    </div>
+
+                    <div class="flex flex-col w-6 max-sm:flex-row max-sm:w-[10%] ">
+                        <div>
+                        <Tooltip title="Pulse">
+       <ContactsIcon
+                onClick={() => {
+                  handleCustomerContactDrawerModal(true);
+                  handleSetCurrentCustomer(item);
+                }}
+                style={{ fontSize: "1rem", cursor: "pointer",color: "#df9697" }}
+              />
+           </Tooltip>
+                        </div>
+                        {/* <div>
+                        <Tooltip title="Notes">
+       <NoteAltIcon
+                onClick={() => {
+                  handleCustomerNotesDrawerModal(true);
+                  handleSetCurrentCustomer(item);
+                  handleRowData(item);
+                }}
+                style={{ color: "green", cursor: "pointer", fontSize: "1rem" }}
+              />
+           </Tooltip>
+
+                    </div> */}
                     </div>
                     <div class="flex flex-col w-6 max-sm:flex-row max-sm:w-[10%] ">
                         <div>
@@ -554,6 +586,12 @@ const [rowdata, setrowdata] = useState("");
         handleCustomerPulseDrawerModal={handleCustomerPulseDrawerModal}
         handleSetCurrentCustomer={handleSetCurrentCustomer}
       />
+      <CustomerContactDrawerModal
+      customer={currentCustomer}
+      addDrawerCustomerContactModal={addDrawerCustomerContactModal}
+          handleCustomerContactDrawerModal={handleCustomerContactDrawerModal}
+          handleSetCurrentCustomer={handleSetCurrentCustomer}
+        />
       <AddCustomerEmailDrawerModal
         // contactById={props.contactById}
         addDrawerCustomerEmailModal={props.addDrawerCustomerEmailModal}
@@ -580,6 +618,7 @@ const mapStateToProps = ({
   employee,
 }) => ({
   userId: auth.userDetails.userId,
+  addDrawerCustomerContactModal:customer.addDrawerCustomerContactModal,
   addDrawerCustomerNotesModal:customer.addDrawerCustomerNotesModal,
   customerByUserId: customer.customerByUserId,
   sales: opportunity.sales,
@@ -602,6 +641,7 @@ const mapDispatchToProps = (dispatch) =>
       getCustomerListByUserId,
       handleUpdateCustomerModal,
       handleCustomerPulseDrawerModal,
+      handleCustomerContactDrawerModal,
       setEditCustomer,
       getSectors,
       customerToAccount,

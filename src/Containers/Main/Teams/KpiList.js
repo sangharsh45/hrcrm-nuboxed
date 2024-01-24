@@ -1,12 +1,13 @@
-import React, { useEffect, useMemo } from "react";
+import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Button } from "antd";
-import { Formik, Form, Field } from "formik";
+import { Formik, Form, Field, FastField } from "formik";
 import * as Yup from "yup";
 import {getKpilist,addKpi,getEmployeeKpiList } from "./TeamsAction";
 import { FormattedMessage } from "react-intl";
 import { SelectComponent } from "../../../Components/Forms/Formik/SelectComponent";
+import { InputComponent } from "../../../Components/Forms/Formik/InputComponent";
 
 
 /**
@@ -18,7 +19,7 @@ const TeamsSchema = Yup.object().shape({
 });
 
 function KpiList(props) {
-  
+  const [selected, setSelected] = useState("");
     useEffect(()=>{
         props.getKpilist(props.rowdata.departmentId)
         props.getEmployeeKpiList(props.rowdata.employeeId)
@@ -27,6 +28,13 @@ function KpiList(props) {
   function handleReset(resetForm) {
     resetForm();
   }
+
+  const handleWorkflowChange = (event) => {
+    const selected = event.target.value;
+    setSelected(selected);
+    // setSelectedUser("");
+    // props.getDepartmentwiserUser(selected) // Assuming you want to pass the selected department and filtered roles to a parent component
+  };
 
   const kpiNameOption = props.kpiList.map((item) => {
     return {
@@ -40,9 +48,10 @@ function KpiList(props) {
       <Formik
         enableReinitialize
         initialValues={{
-          performanceManagementId:[],
+          // performanceManagementId:[],
           employeeId:props.rowdata.employeeId,
-          // performanceManagementId: "",
+          performanceManagementId: selected,
+          value:"",
       
         }}
         // validationSchema={TeamsSchema}
@@ -62,25 +71,19 @@ function KpiList(props) {
             <Form className="form-background">
             <div class="flex justify-between  pr-2 max-sm:flex-col">
             <div class=" w-w47.5 max-sm:w-wk">
-            <Field
-                    name="performanceManagementId"
-                    // label="Include"
-                    label={
-                      <FormattedMessage
-                        id="app.KPIList"
-                        defaultMessage="KPI List"
-                      />
-                    }
-                    mode
-                    placeholder="Select"
-                    component={SelectComponent}
-                    options={Array.isArray(kpiNameOption) ? kpiNameOption : []}
-                    value={values.performanceManagementId}
-                    defaultValue={{
-                      label: `${props.kpi || ""} `,
-                      value: props.performanceManagementId,
-                    }}
-                  />
+            <label class=" text-[#444] font-bold text-[0.75rem]" >Workflow</label>
+                      <select  className="customize-select"
+                       
+                      onChange={handleWorkflowChange}>
+          <option value="">Select Workflow</option>
+          {props.kpiList.map((item, index) => (
+            <option 
+           
+            key={index} value={item.performanceManagementId}>
+              {item.kpi}
+            </option>
+          ))}
+        </select>
             {/* <Field
               name="performanceManagementId"
               isColumnWithoutNoCreate
@@ -90,20 +93,32 @@ function KpiList(props) {
                   defaultMessage="KPI List"
                 />
               } 
+              onChange={(selectedValue) => setSelected(selectedValue)}
               component={SelectComponent}
-              options={
-                Array.isArray(kpiNameOption)
-                  ? kpiNameOption
-                  : []
-              }
+              options={kpiNameOption}
               isColumn
               margintop={"0"}
               //value={values.customerId}
               inlineLabel
-            /> */}
+            />  */}
     
       </div>
-
+      {selected && (
+          <>                                           
+        <div class=" w-[45%]" >
+                          <FastField
+                            // isRequired
+                            name="value"
+                            type="text"
+                            // width={"100%"}
+                            isColumn
+                            component={InputComponent}
+                            inlineLabel
+                          />
+                          {/* <input value={this.state.value} onChange={this.onNumber}/> */}
+                        </div>               
+</> 
+        )}   
     
         
         </div>
