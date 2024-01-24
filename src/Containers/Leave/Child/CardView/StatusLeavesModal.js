@@ -11,13 +11,10 @@ const StatusLeavesModal = (props) => {
       <StyledDrawer
         //title="Apply for Leaves"
         title={`Status - ${leaveId}`}
-        width="30vw"
+        width="60%"
         visible={updateStatusLeaveModal}
         maskClosable={false}
         destroyOnClose
-        maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}
-        // style={{ top: 40 }}
-        style={{marginTop:"5rem"}}
         onClose={() => handleStatusLeaveModal(false)}
         footer={null}
       >

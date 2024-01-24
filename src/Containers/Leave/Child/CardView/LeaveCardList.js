@@ -1,6 +1,5 @@
-import React, { Component, useEffect, useState, useMemo, lazy } from "react";
-import { MultiAvatar2, } from '../../../../Components/UI/Elements'
-import { FlexContainer, OnlyWrapCard } from '../../../../Components/UI/Layout'
+import React, { useEffect, useState,  lazy } from "react";
+import {  OnlyWrapCard } from '../../../../Components/UI/Layout'
 import {  Button, Tooltip } from 'antd'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
@@ -8,14 +7,14 @@ import { Select } from "antd";
 import styled from 'styled-components'
 import { EditOutlined,DeleteOutlined } from "@ant-design/icons";
 import moment from "moment";
-import BorderColorIcon from '@mui/icons-material/BorderColor';
 import { BundleLoader } from "../../../../Components/Placeholder";
 import { getLeaveListRangeByUserId,
     updateLeaves,
     setEditLeave,
     handleUpdateLeaveModal,
     } from "../../LeavesAction";
-    import UpdateLeavesModal from "../Tab/UpdateLeavesModal";
+    const UpdateLeavesModal = lazy(() => import("../Tab/UpdateLeavesModal"));
+
 const { Option } = Select;
 function LeaveCardList (props) {
   const [page, setPage] = useState(0);

@@ -10,7 +10,7 @@ const ExpenseStatusDrawer = (props) => {
     <>
       <StyledDrawer
        title={`Status - ${voucherId}`}
-        width="30vw"
+        width="60%"
         visible={updateStatusExpenseModal}
         onClose={() => handleStatusExpenseModal(false)}
         footer={null}

@@ -14,7 +14,7 @@ const MileageVoucherIdDrawer = (props) => {
     <>
       <StyledDrawer
         title={`Mileage: ${voucherId}`}
-        width="80%"
+        width="70%"
         visible={mileageVoucherIdDrawer}
         onClose={() => {
           handleMileageVoucherIdDrwer(false);

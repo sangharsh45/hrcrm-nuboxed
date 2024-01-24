@@ -1,17 +1,12 @@
-import React from "react";
+import React, { lazy } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { withRouter } from "react-router-dom";
-import { base_url } from "../../../Config/Auth";
-import { Icon, Button, Tooltip } from "antd";
+import {  Button, Tooltip } from "antd";
 import { FlexContainer } from "../../../Components/UI/Layout";
-import { Spacer, TextInput } from "../../../Components/UI/Elements";
 import { StyledSelect } from "../../../Components/UI/Antd";
 import { handleLeavesModal } from "../LeavesAction";
-import AddLeavesModal from "./Tab/AddLeavesModal";
-import { LeavesReducer } from "../LeavesReducer";
-// import { setAccountFilterText, setAccountFilterUser } from "../AccountAction";
-// import { getUsers } from "../../Team/TeamAction";
+const AddLeavesModal = lazy(() => import("./Tab/AddLeavesModal"));
 
 const Option = StyledSelect.Option;
 

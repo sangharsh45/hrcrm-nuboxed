@@ -70,7 +70,7 @@ function ExpenseDrawerCard(props) {
     particular:newData[index].particular,
     // imageId: newimageId !== "" ? newimageId.imageId  : props.setEditingUser.imageId,
     // documentId:newimageId !== "" ? newData[index].documentId :newimageId.documentId,
-    documentId:newimageId.documentId,
+    documentId:newimageId[index].documentId,
       userId:newData[index].userId,
       expenseDate:`${newData[index].expenseDate}T20:00:00Z`
     }
@@ -92,13 +92,13 @@ function ExpenseDrawerCard(props) {
     <>
     
       <OnlyWrapCard style={{backgroundColor:"#E3E8EE"}}>
-      <div className=" flex justify-between w-[99%] p-2 bg-transparent font-bold sticky top-0 z-10">
-      <div className=" md:w-[2.1rem]"></div>
+      <div className=" flex  w-[99%] p-2 bg-transparent font-bold sticky top-0 z-10">
+      <div className=" md:w-[10.1rem]"></div>
         <div className=" md:w-[8.1rem]">ID</div>
-        <div className=" md:w-[6.1rem]">Type</div>
-        <div className=" md:w-[4.2rem] ">Date</div>
-        <div className="md:w-[5.8rem]">Cost Code</div>
-        <div className="md:w-[8.5rem]">Particulars</div>
+        <div className=" md:w-[9.5rem]">Type</div>
+        <div className=" md:w-[5.6rem] ">Date</div>
+        <div className="md:w-[5.9rem]">Cost Code</div>
+        <div className="md:w-[7.5rem]">Particulars</div>
         <div className="md:w-[3.8rem]">Amount</div> 
       
         <div className="w-12"></div>
@@ -108,9 +108,9 @@ function ExpenseDrawerCard(props) {
                   return (
                       <div key={index}>
                           <div
-                className="flex rounded-xl justify-between bg-white mt-[0.5rem] h-[2.75rem] items-center p-3"
+                className="flex rounded-xl  bg-white mt-[0.5rem] h-[7rem] items-center p-3"
               >
-                                <div className=" flex font-medium flex-col w-[6rem] ">
+                                <div className=" flex font-medium flex-col w-[7.1rem] ">
                                 {editStates[index] ? (
   <div>                           
 <EditUpload
@@ -119,40 +119,37 @@ imgWidth={100}
 imgHeight={100}
 getImage={handleSetImage}
 />
-  <button 
+  {/* <button 
   // onClick={() => 
   // deleteHandler(image)}
   >
   delete image
-</button>
+</button> */}
 </div>  
 ):(
 <img src={`${base_url}/image/${item.documentId}`}
-style={{width:"3rem",height:"3rem"}}
+style={{width:"6rem",height:"6rem"}}
 />
 )}
 </div>   
-                              <div className=" flex font-medium flex-col w-[2rem] ">
+                              <div className=" flex font-medium flex-col w-[9.3rem] ">
 
   
                                     
                                           {/* <h4 class=" text-sm text-cardBody font-poppins">
                                            ID
                                           </h4> */}
-                                          <h4 class=" text-xs text-blue-500 text-cardBody font-poppins cursor-pointer">
+                                          <h4 class=" text-xs  text-cardBody font-poppins cursor-pointer">
                                               
                                           {/* <div onClick={() => { this.handleExpand(item.voucherId) 
               this.props.handleMileageVoucherIdDrwer(true)}}>
      
-       </div> */}  <Tooltip title={item.expenseId} >
-         
-         <QuestionMarkIcon style={{fontSize:"1rem"}}/>
-         </Tooltip>                        </h4>
+       </div> */} {item.expenseId}                       </h4>
 
                                      
                             
                               </div>
-                              <div className=" flex font-medium flex-col  w-20 ">
+                              <div className=" flex font-medium flex-col  w-[10.31rem] ">
                          
                          {/* <h4 class=" text-sm text-cardBody font-poppins"> Type </h4> */}
                          {editStates[index] ? (
@@ -179,7 +176,7 @@ style={{width:"3rem",height:"3rem"}}
                          </h4>
                            )}
                      </div>
-                              <div className=" flex font-medium flex-col w-32 ml-[0.25rem]">
+                              <div className=" flex font-medium flex-col w-[7.8rem] ">
                          
                                   {/* <h4 class=" text-sm text-cardBody font-poppins">Date </h4> */}
                                   {editStates[index] ? (
@@ -188,7 +185,7 @@ style={{width:"3rem",height:"3rem"}}
     onChange={(date, dateString) =>
       handleInputChange(index, "expenseDate", dateString)
     }
-    style={{ border: "1px solid grey" }}
+    style={{ border: "1px solid lightgrey",boxShadow:"0 0.01em 0.01em ",margin:"0.25rem",height:"1.4rem" }}
   />
 ) : (
                                   <h4 class=" text-xs text-cardBody font-poppins">
@@ -199,14 +196,14 @@ style={{width:"3rem",height:"3rem"}}
                                   </h4>
                                   )}
                               </div>
-                              <div className="flex font-medium flex-col w-32">
+                              <div className="flex font-medium flex-col w-[5.12rem]">
                               {/* <h4 class=" text-sm text-cardBody font-poppins w-36 ml-[0.25rem]"> Cost Code </h4> */}
                               {editStates[index] ? (
             <input
               type="text"
               value={item.clientName}
               onChange={(e) => handleInputChange(index, 'clientName', e.target.value)}
-              style={{ border: "1px solid grey" }}
+              style={{border:"1px solid lightgrey",marginRight:"0.25rem"}}
             />
           ) : (
                          <h4 class=" text-xs text-cardBody font-poppins">
@@ -214,7 +211,7 @@ style={{width:"3rem",height:"3rem"}}
                          </h4>
           )}
           </div>
-                         <div className=" flex font-medium flex-col w-64 ml-[0.25rem]">
+                         <div className=" flex font-medium flex-col w-[7.5rem] ">
 
                                 
                                   {/* <h4 class=" text-sm text-cardBody font-poppins">Particulars</h4> */}
@@ -223,7 +220,7 @@ style={{width:"3rem",height:"3rem"}}
               type="text"
               value={item.particular}
               onChange={(e) => handleInputChange(index, 'particular', e.target.value)}
-              style={{ border: "1px solid grey" }}
+              style={{border:"1px solid lightgrey",marginRight:"0.25rem"}}
             />
           ) : (
         
@@ -233,7 +230,7 @@ style={{width:"3rem",height:"3rem"}}
           )}
      
                               </div>
-                              <div className=" flex font-medium flex-col w-32 ml-[0.25rem]">
+                              <div className=" flex font-medium flex-col w-[5.1rem] ">
                                 
                               <div className=" flex font-medium flex-col w-20 ">
 
@@ -244,7 +241,7 @@ style={{width:"3rem",height:"3rem"}}
               type="text"
               value={item.amount}
               onChange={(e) => handleInputChange(index, 'amount', e.target.value)}
-              style={{ border: "1px solid grey" }}
+              style={{border:"1px solid lightgrey",marginRight:"0.25rem"}}
             />
           ) : (
                                                                
@@ -256,7 +253,7 @@ style={{width:"3rem",height:"3rem"}}
                             </div> 
 
                      </div>
-                     <div className=" flex font-medium flex-col w-20 ml-[0.25rem]">
+                     <div className=" flex font-medium flex-col w-[4.13rem] ">
 
 
 {/* <h4 class=" text-sm text-cardBody font-poppins">Curency</h4> */}
@@ -265,7 +262,7 @@ style={{width:"3rem",height:"3rem"}}
 type="text"
 value={item.currency}
 // onChange={(e) => handleInputChange(index, 'amount', e.target.value)}
-style={{ border: "1px solid grey" }}
+style={{border:"1px solid lightgrey",marginRight:"0.25rem"}}
 />
 
                                
@@ -273,7 +270,23 @@ style={{ border: "1px solid grey" }}
 </div> 
 
                               <div class="flex flex-row items-center w-[10%]">
-                                <div class="flex items-center">
+                              <div class="flex items-center ml-[0.25rem]">
+                              {item.status !== 'Approved' && (
+                                <button onClick={() => toggleEdit(index)}>
+          {editStates[index] ? 'Cancel' : <BorderColorIcon   style={{
+                              color: "grey",
+                              cursor: "pointer",
+                              fontSize: "1rem",
+                            }}/>}
+        </button>
+         )}
+        {editStates[index] && (
+          <button onClick={() => handleSave(index)} className="ml-[0.25rem]">Save</button>
+        )}
+       
+                      </div>
+                                <div class="flex items-center flex-col ml-2">
+                                {item.status !== 'Approved' && (
                                 <Tooltip title="Upload Document">
             <UploadOutlined
               type="upload"
@@ -284,6 +297,7 @@ style={{ border: "1px solid grey" }}
               }}
             />
           </Tooltip>
+                                )}
           <Tooltip title="Download Document">
           <a
           href={`${base_url}/document/${item.documentId}`}
@@ -297,30 +311,10 @@ style={{ border: "1px solid grey" }}
         </a>
           </Tooltip>
                                 </div>
-                  <div class="flex items-center ml-[0.25rem]">
-                    {/* <EditOutlined
-                      //  style={{ color: "blue" ,display:"flex",justifyItems:"center",justifyContent:"center",fontSize:"0.75rem",marginTop:"0.25rem",marginLeft:"0.25rem"}}
-                      type="edit"
-              style={{ cursor: "pointer" }}
-              onClick={() => {
-                this.props.setEditExpense(item);
-                handleUpdateExpenseModal(true);
-        }} 
-                      /> */}
-                                <button onClick={() => toggleEdit(index)}>
-          {editStates[index] ? 'Cancel' : <BorderColorIcon   style={{
-                              color: "grey",
-                              cursor: "pointer",
-                              fontSize: "1rem",
-                            }}/>}
-        </button>
-        {editStates[index] && (
-          <button onClick={() => handleSave(index)} className="ml-[0.25rem]">Save</button>
-        )}
-                      </div>
+                 
                       <div >
-                      <div >
-                         {/* {item.status === "Pending" ? ( */}
+                      <div class="ml-2" >
+                      {item.status !== 'Approved' && (
                          <Tooltip title="Delete">
             <DeleteOutlined
               type="delete"
@@ -331,7 +325,7 @@ style={{ border: "1px solid grey" }}
               }}
             />
           </Tooltip>
-          {/* ):null} */}
+                      )}
            {item.status==="Rejected" && (
           <Button type="primary"
           onClick={()=>{
