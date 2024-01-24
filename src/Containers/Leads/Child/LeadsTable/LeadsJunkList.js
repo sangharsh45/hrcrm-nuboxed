@@ -9,8 +9,7 @@ import "jspdf-autotable";
 import { OnlyWrapCard } from '../../../../Components/UI/Layout'
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
-import DeleteIcon from "@mui/icons-material/Delete";
-// import { getCountries } from "../../../Auth/AuthAction";
+import { DeleteOutlined } from "@ant-design/icons";
 import { Link } from "../../../../Components/Common";
 import {
   getJunkedLeads,
@@ -334,10 +333,16 @@ Resinstate
       title="Do you want to delete?"
       onConfirm={() => deleteLeadsData(item.leadsId)}
     >
-      <DeleteIcon
+         <Tooltip title="Delete">
+      <DeleteOutlined
         type="delete"
-        style={{ cursor: "pointer", color: "red" ,fontSize: "0.8rem",}}
+        style={{
+          cursor: "pointer",
+          color: "red",
+          fontSize: "1rem",
+        }}
       />
+      </Tooltip>
     </StyledPopconfirm>
                   </div>
                   <div>

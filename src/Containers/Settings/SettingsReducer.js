@@ -210,6 +210,10 @@ const initialState = {
   fetchingLevelsError: false,
   levels: [],
 
+  linkingOnboardingStagesPublish: false,
+  linkingOnboardingStagesPublishError: false,
+  onboardingStagesPublish:[],
+
   //recruiter
   fetchingProcessForRecruit: false,
   fetchingProcessForRecruitError: false,
@@ -278,6 +282,10 @@ const initialState = {
   linkingDealsStagesPublish: false,
   linkingDealsStagesPublishError: false,
   dealsStagesPublish: [],
+
+  linkingOnboardingProcessPublish: false,
+  linkingOnboardingProcessPublishError: false,
+  onboardingProcessPublish:[],
 
   addingTaskForRecruit: false,
   addingTaskForRecruitError: false,
@@ -3124,6 +3132,59 @@ export const settingsReducer = (state = initialState, action) => {
                 };
               case types.DELETE_ONBOARDING_STAGES_DATA_FAILURE:
                 return { ...state, deletingOnboardingStagesData: false, deletingOnboardingStagesDataError: false };
+
+
+                case types.LINK_ONBOARDING_STAGES_PUBLISH_REQUEST:
+                  return {
+                    ...state,
+                    linkingOnboardingStagesPublish: true,
+                  };
+                case types.LINK_ONBOARDING_STAGES_PUBLISH_SUCCESS:
+                  return {
+                    ...state,
+                    linkingOnboardingStagesPublish: false,
+                    onboardingStagesPublish: state.onboardingStagesPublish.map((item) => {
+                      if (item.unboardingStagesId === action.payload.unboardingStagesId) {
+                        return action.payload;
+                      } else {
+                        return item;
+                      }
+                    }),
+                  };
+                case types.LINK_ONBOARDING_STAGES_PUBLISH_FAILURE:
+                  return {
+                    ...state,
+                    linkingOnboardingStagesPublish: false,
+                    linkingOnboardingStagesPublishError: true,
+                  };
+
+
+                  
+    case types.LINK_ONBOARDING_PROCESS_PUBLISH_REQUEST:
+      return {
+        ...state,
+        linkingOnboardingProcessPublish: true,
+      };
+    case types.LINK_ONBOARDING_PROCESS_PUBLISH_SUCCESS:
+      return {
+        ...state,
+        linkingOnboardingProcessPublish: false,
+        onboardingProcessPublish: state.onboardingProcessPublish.map((item) => {
+          if (
+            item.unboardingWorkflowDetailsId === action.payload.unboardingWorkflowDetailsId
+          ) {
+            return action.payload;
+          } else {
+            return item;
+          }
+        }),
+      };
+    case types.LINK_ONBOARDING_PROCESS_PUBLISH_FAILURE:
+      return {
+        ...state,
+        linkingOnboardingProcessPublish: false,
+        linkingOnboardingProcessPublishError: true,
+      };
           
   
 

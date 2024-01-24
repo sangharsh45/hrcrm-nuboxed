@@ -2,6 +2,7 @@ import * as types from "./EmployeeActionType";
 import axios from "axios";
 import dayjs from "dayjs";
 import { base_url } from "../../Config/Auth";
+import { message } from "antd";
 
 export const setEmployeeViewType = (viewType) => (dispatch) =>
   dispatch({ type: types.SET_EMPLOYEE_VIEW_TYPE, payload: viewType });
@@ -1094,3 +1095,56 @@ export const getAssignedToList = (orgId) => (dispatch) => {
       });
     });
 };
+
+export const getProcessDropdownForOnboarding = (orgId) => (dispatch) => {
+  debugger;
+  dispatch({
+    type: types.GET_PROCESS_DROPDOWN_FOR_ONBOARDING_REQUEST,
+  });
+  axios
+    .get(`${base_url}/unboardingWorkflow/for_dropdown/${orgId}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log("print when new process added................", res);
+      dispatch({
+        type: types.GET_PROCESS_DROPDOWN_FOR_ONBOARDING_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.GET_PROCESS_DROPDOWN_FOR_ONBOARDING_FAILURE,
+        payload: err,
+      });
+    });
+};
+
+export const addOnboardingEmployee = (employeeId,data) => (dispatch) => {
+  dispatch({ type: types.ADD_ONBOARDING_EMPLOYEE_REQUEST });
+  axios
+    .put(`${base_url}/employee/onboarding/${employeeId}`, data, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      message.success(res.data);
+      console.log(res);
+      dispatch({
+        type: types.ADD_ONBOARDING_EMPLOYEE_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.ADD_ONBOARDING_EMPLOYEE_FAILURE,
+        payload: err,
+      });
+    });
+};
+

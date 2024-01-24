@@ -1,84 +1,125 @@
-import React, { useEffect } from 'react';
+import React, { useEffect,useState } from 'react';
 import { ClockCircleOutlined } from '@ant-design/icons';
-import { Timeline } from 'antd';
+import { Button,Steps,Tooltip } from 'antd';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import moment from 'moment';
  import { getProcessForOnboarding } from '../../../Settings/SettingsAction';
 import { Field } from 'formik';
+import {addOnboardingEmployee} from "../../../Employees/EmployeeAction"
 import { FormattedMessage } from 'react-intl';
 import { SelectComponent } from '../../../../Components/Forms/Formik/SelectComponent';
 
 const OnBoardingEmployeeForm = (props) => {
+  const [selectedWork, setSelectedWork] = useState("");
   useEffect(() => {
-     props.getProcessForOnboarding(props.orgId);
+    props.getProcessForOnboarding(props.orgId);
   }, []);
 
   const { onboardingProcess, ratingValue } = props;
-  const sortedWorkflow =onboardingProcess.sort((a, b) => {
-    const nameA = a.workflowName.toLowerCase();
-    const nameB = b.workflowName.toLowerCase();
-    // Compare department names
-    if (nameA < nameB) {
-      return -1;
-    }
-    if (nameA > nameB) {
-      return 1;
-    }
-    return 0;
-  });
-  const workflowOption = sortedWorkflow.map((item) => {
-    return {
-      label: item.workflowName || "",
-      value: item.unboardingWorkflowDetailsId,
-    };
-  });
+  const handleWorkflowChange = (event) => {
+    const selectedWork = event.target.value;
+    setSelectedWork(selectedWork);
+    // setSelectedUser("");
+    // props.getProcessForOnboarding(selectedWork) // Assuming you want to pass the selected department and filtered roles to a parent component
+  };
+  console.log("cgdf",props.currentEmployeeId)
   return (
     <>
       <div className="mt-4">
-      <Field             
-                  placeholder="Workflow"        
-                            name="unboardingWorkflowDetailsId"
-                            label={
-                              <FormattedMessage
-                                id="app.workflow"
-                                defaultMessage="Workflow"
-                              />
-                            }
-                            isColumn
-                            component={SelectComponent}
-                            // value={values.sectorId}
-                            options={
-                              Array.isArray(workflowOption) ? workflowOption : []
-                            }
-                          />
-        {/* <Timeline>
-          {mileageStatus &&
-            mileageStatus.map((status, i) => (
-              <Timeline.Item key={i}>
-                {status.approvedStatus === 'Approved' ? (
-                  ` ${moment(status.createdOn).format('ll')} Approved By ${status.employeeName} on ${moment(status.approvedDate).format('ll')}`
-                ) : status.approvedStatus === 'Pending' ? (
-                  `Pending With ${status.employeeName}.`
-                ) : null}
-              </Timeline.Item>
-            ))}
-        
-        </Timeline> */}
+      <div class=" w-[35%]" >
+                                                    <label class=" text-[#444] font-bold text-[0.75rem]" >Workflow</label>
+                      <select  className="customize-select"
+                       
+                      onChange={handleWorkflowChange}>
+          <option value="">Select Workflow</option>
+          {onboardingProcess.map((item, index) => (
+            <option 
+           
+            key={index} value={item.unboardingWorkflowDetailsId}>
+              {item.workflowName}
+            </option>
+          ))}
+        </select>
+        </div>
+        {selectedWork && (
+          <>                                           
+          <div class="bg-white">
+        <Steps
+            direction="vertical"
+            current={1}
+            items={[
+                {
+                    title:<FormattedMessage
+                        id="app.ordercreated"
+                        defaultMessage="Order Created"
+                       />,
+                    status: <FormattedMessage
+                    id="app.progress"
+                    defaultMessage="progress"
+                   />,
+                 
+                },
+                {
+                    title: 'Advance Payment',
+                  
+                   
+                },
+                {
+                    title: 'Order Pick Up',
+                    status: 'progress',
+                  
+                },
+
+                {
+                    title: 'Warehouse',
+                    status: 'progress',
+                 
+                },
+             
+               
+            ]}
+        />
+        {/* <StartRepairReasonModal
+            particularRowData={props.particularRowData}
+            handleRepairReason={props.handleRepairReason}
+            showRepairReasonModal={props.showRepairReasonModal} />
+        <ShowPaymentHistoryModal
+            particularRowData={props.particularRowData}
+            handlePaymentHistory={props.handlePaymentHistory}
+            showPaymentHistoryModal={props.showPaymentHistoryModal}
+        /> */}
+
+    </div>              
+</> 
+        )} 
+        <div class=" flex justify-end">
+        <Tooltip title="Release Registration Email to the user">
+          <Button
+           onClick={() => {
+            props.addOnboardingEmployee(props.currentEmployeeId.employeeId);
+           
+          }}
+          >Onboarding Completed</Button>
+             </Tooltip>
+        </div>
+     
       </div>
     </>
   );
 };
 
-const mapStateToProps = ({ settings, auth }) => ({
+const mapStateToProps = ({ settings, employee,auth }) => ({
   orgId: auth.userDetails && auth.userDetails.organizationId,
   onboardingProcess: settings.onboardingProcess,
+  setEditingEmployee:employee.setEditingEmployee,
 });
 
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
       getProcessForOnboarding,
+      addOnboardingEmployee,
     },
     dispatch
   );

@@ -644,14 +644,15 @@ const ProductionOrderList = (props) => {
                                             {item.suggestedPrice}
                                         </div>
                                     </div>
-                                    <div className=" flex font-medium  md:w-[2.2rem] max-sm:flex-row w-full max-sm:justify-between ">
+                                    <div className=" flex font-medium  md:w-[8.2rem] max-sm:flex-row w-full max-sm:justify-between ">
                                         <div class=" text-xs cursor-pointer text-cardBody font-poppins text-center">
-                                            <ExtensionIcon
+                                            <Button 
+                                            type="primary"
                                                 onClick={() => {
                                                     handleRowData(item);
                                                     props.handleAllSpareList(true)
                                                 }}
-                                            />
+                                            > Approve Spares</Button>
                                         </div>
                                     </div>
                                     <div className=" flex font-medium  md:w-[10.12rem] max-sm:flex-row w-full max-sm:justify-between ">
@@ -668,7 +669,7 @@ const ProductionOrderList = (props) => {
                                                             handleRowData(item);
                                                         }}
                                                     >Assign For QC </Button>
-                                                </Tooltip> : item.qcStartInd === 2 ? <b>Assigned To Technician</b>
+                                                </Tooltip> : item.qcStartInd === 2 ? <b>Assigned</b>
                                                     : item.qcStartInd === 3 ? <b style={{ color: "deepgreen" }}>QC on {moment(item.qcEndTime).format("DD-MM-YYYY")}</b> : null}
                                         </div>
                                     </div>

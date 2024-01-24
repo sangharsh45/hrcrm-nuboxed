@@ -328,7 +328,7 @@ function InvestorAllCardList(props) {
               {" "}
               {user.pulseAccessInd === true && <MonitorHeartIcon  style={{
                 cursor: "pointer",
-                fontSize: "0.8rem",
+                fontSize: "1rem",
                 color: "#df9697"}}/>}
             </span> 
                         </div>
@@ -337,7 +337,7 @@ function InvestorAllCardList(props) {
 
                     </div>
     
-                    <div class="flex flex-col w-[6%] max-sm:flex-row max-sm:w-[10%] ">
+                    <div class="flex flex-col w-6 max-sm:flex-row max-sm:w-[10%] ">
                       <div>
                     <Tooltip overlayStyle={{ maxWidth: "300px" }} title={dataLoc}>
             <span
@@ -349,7 +349,7 @@ function InvestorAllCardList(props) {
             >
             <LocationOnIcon   style={{
                 cursor: "pointer",
-                fontSize: "0.8rem"
+                fontSize: "1rem"
               }}/>
             </span>
           </Tooltip>
@@ -357,7 +357,7 @@ function InvestorAllCardList(props) {
           {/* <div><Tooltip title={item.email}>
               <MailOutlineIcon
                 type="mail"
-                style={{ cursor: "pointer",fontSize: "0.8rem" }}
+                style={{ cursor: "pointer",fontSize: "1rem" }}
                 onClick={() => {
                   props.getCustomerById(item.customerId);
                   props.handleCustomerEmailDrawerModal(true);
@@ -368,7 +368,7 @@ function InvestorAllCardList(props) {
             {user.imInd === true  &&  user.inventoryUpdateInd === true &&  (
             <Tooltip title="Edit">
               <BorderColorIcon
-                style={{ color: "grey",fontSize:"0.8rem",padding:"2px" }}
+                style={{ color: "grey",fontSize:"1rem",padding:"2px" }}
                 onClick={() => {
                     handleUpdateInvestorModal(true);
                     handleCurrentRowData(item);

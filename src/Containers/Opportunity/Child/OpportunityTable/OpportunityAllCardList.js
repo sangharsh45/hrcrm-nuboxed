@@ -1,4 +1,4 @@
-import React, { useEffect, useState, } from "react";
+import React, { useEffect, useState,lazy } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import InfiniteScroll from "react-infinite-scroll-component";
@@ -33,9 +33,10 @@ import {
          getOpportunitySKill,
          getFullOpportunity,
 } from "../../OpportunityAction";
-import AddOpportunityDrawerModal from "./AddOpportunityDrawerModal";
-import UpdateOpportunityModal from "../UpdateOpportunity/UpdateOpportunityModal";
-import ReinstateToggleForLost from "../../Child/OpportunityTable/ReinstateToggleForLost"
+const AddOpportunityDrawerModal =lazy(()=> import("./AddOpportunityDrawerModal"));
+const UpdateOpportunityModal =lazy(()=> import("../UpdateOpportunity/UpdateOpportunityModal"));
+const ReinstateToggleForLost =lazy(()=> import("../../Child/OpportunityTable/ReinstateToggleForLost"));
+
 
 function OpportunityAllCardList(props) {
   const [hasMore, setHasMore] = useState(true);
@@ -213,7 +214,7 @@ trigger={["click"]}
 {" "}
 <Progress
 type="circle"
-style={{ cursor: "pointer", color: "red",fontSize:"0.8rem" }}
+style={{ cursor: "pointer", color: "red",fontSize:"1rem" }}
 percent={findProbability}
 width={30}
 strokeColor={"#005075"}
@@ -255,7 +256,16 @@ strokeColor={"#005075"}
           </Tooltip>
                  </div>
                  </div>
-                 <div class="flex flex-col w-[6%] max-sm:flex-row max-sm:w-[10%]">
+                 
+                 <div>
+                  <ReinstateToggleForLost 
+          opportunityId={item.opportunityId} 
+          
+          
+          />
+                  </div>
+               
+                 <div class="flex flex-col w-6 max-sm:flex-row max-sm:w-[10%]">
                  <div>
                  <span
        
@@ -275,13 +285,14 @@ handleSetCurrentOpportunityId(item.opportunityName);
 >
          {user.pulseAccessInd === true && (
            <MonitorHeartIcon
-             style={{ fontSize: "0.8rem", color: "#df9697" }}
+             style={{ fontSize: "1rem", color: "#df9697" }}
            />
          )}
        </span>
                       </div>
           </div>
-                 <div class="flex flex-col w-[6%] max-sm:flex-row max-sm:w-[10%]">
+        
+                 <div class="flex flex-col w-6 max-sm:flex-row max-sm:w-[10%]">
                   <div>
                   <Tooltip title='Click to Open'><span
        onClick={() => {
@@ -297,22 +308,16 @@ handleSetCurrentOpportunityId(item.opportunityName);
        >
         <LockIcon
               style={{
-                fontSize: "0.8rem",
+                fontSize: "1rem",
                 cursor: "pointer",
               }}
             />
           </span>
    </Tooltip> 
                   </div>
-                  <div>
-                  <ReinstateToggleForLost 
-          opportunityId={item.opportunityId} 
-          
-          
-          />
-                  </div>
+                
                 </div>
-                <div class="flex flex-col w-[6%] max-sm:flex-row max-sm:w-[10%]">
+                <div class="flex flex-col w-6 max-sm:flex-row max-sm:w-[10%]">
                  
                     <div>
                        <Tooltip
@@ -365,11 +370,12 @@ handleSetCurrentOpportunityId(item.opportunityName);
                     </div>
            
                   <div></div>
-                </div>   
+                </div>  
+                </div> 
                             
                     
                           </div>
-                      </div>
+                  
 
                  )  
             })}

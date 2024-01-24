@@ -4,6 +4,7 @@ import { FormattedMessage } from "react-intl";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Radio } from "antd";
+import {getTimeZone} from "../../../Auth/AuthAction"
  import {getRoles} from "../../../Settings/Category/Role/RoleAction"
  import { updateEmployee } from "../../EmployeeAction";
 import { Formik, Form, Field,FieldArray, FastField } from "formik";
@@ -39,9 +40,10 @@ class UpdateEmployeeForm extends Component {
   
 
   componentDidMount() {
-   const { getCountries ,getRoles,getlocation,getEmployeelist} = this.props;
+   const { getCountries ,getTimeZone,getRoles,getlocation,getEmployeelist} = this.props;
     // console.log();
     getRoles(this.props.organizationId);
+    getTimeZone();
     // getCountries(getCountries);
     // getlocation(this.props.orgId);
     // getEmployeelist();
@@ -140,7 +142,14 @@ getLocationNameOption(filterOptionKey, filterOptionValue) {
   }
 
   render() {
-   
+    const timeZoneOption = this.props.timeZone.map((item) => {
+      return {
+        label: item.zone_name
+        || null,
+        value: item.timezone_id
+        ,
+      };
+    });
   
     const dialCodeNameOption = this.props.countries.map((item) => {
         return {
@@ -170,6 +179,7 @@ getLocationNameOption(filterOptionKey, filterOptionValue) {
         firstName: setEditingEmployee.firstName || "",
         lastName: setEditingEmployee.lastName || "",
         emailId:  setEditingEmployee.emailId || "",
+        timeZone:  setEditingEmployee.timeZone || "",
         countryDialCode:  setEditingEmployee.countryDialCode || "",
         countryDialCode1: setEditingEmployee.countryDialCode1 || "",
         phoneNo:  setEditingEmployee.phoneNo || "",
@@ -518,7 +528,22 @@ getLocationNameOption(filterOptionKey, filterOptionValue) {
  
                 </div>
                 <div class="  w-[47.5%] max-sm:w-wk ">
-
+                <div style={{ width: "100%" }}>
+                    <StyledLabel>Time Zone</StyledLabel>
+                    <Field
+                      name="timeZone"
+                      type="text"
+                      placeholder="Select Time Zone"
+                      noLabel
+                      // disabled={!values.productionInd && !values.inventoryInd}
+                      isRequired
+                      component={SelectComponent}
+                      options={
+                        Array.isArray(timeZoneOption) ? timeZoneOption : []
+                      }
+                    />
+                  </div>
+    
 <div class=" flex justify-between max-sm:flex-col" >
 <div class=" w-w48 flex flex-col max-sm:w-wk">
 <label style={{color:"#444",fontWeight:"bold",fontSize:" 0.75rem"}}>Department</label>
@@ -811,6 +836,7 @@ name="departmentId"
 const mapStateToProps = ({ auth,role,location, employee,designations,departments }) => ({
     userDetails: auth.userDetails,
     roles: role.roles,
+    timeZone: auth.timeZone,
     setEditingEmployee:employee.setEditingEmployee,
     organizationId: auth.userDetails.organizationId,
     orgId: auth.userDetails.organizationId,
@@ -825,6 +851,7 @@ const mapStateToProps = ({ auth,role,location, employee,designations,departments
   const mapDispatchToProps = (dispatch) =>
     bindActionCreators({
         updateEmployee,
+        getTimeZone,
     //    getCountries,
     //    getDesignations,
         // getDepartments,

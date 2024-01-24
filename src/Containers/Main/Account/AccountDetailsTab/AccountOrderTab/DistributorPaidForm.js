@@ -45,7 +45,7 @@ function DistributorPaidForm(props) {
           userId: props.userId,
           orderPaymentType: "PhonePayment",
           transactionNumber: "",
-          orderCurrencyId: "",
+          orderCurrencyId:props.particularRowData.orderCurrencyName || "",
           paymentMode: "",
           approveByFinanceInd: false,
           orderId: props.particularRowData.orderId,
@@ -74,10 +74,10 @@ function DistributorPaidForm(props) {
           ...rest
         }) => (
           <Form>
-            <div class="justify-between flex">
-              <div class="h-full w-full">
-                <div style={{ display: "flex", justifyContent: "space-between" }}>
-                  <div style={{ width: "31%" }}>
+            <div class="flex justify-around max-sm:flex-col">
+            <div class=" h-full w-w47.5 max-sm:w-wk">
+            <div class="flex justify-between">
+                  <div class="w-[31%]">
                     <Field
                       name="paymentAmount"
                       label={
@@ -93,7 +93,7 @@ function DistributorPaidForm(props) {
                       value={values.paymentAmount}
                     />
                   </div>
-                  <div style={{ width: "31%" }}>
+                  <div class="w-[31%]">
                     <Field
                       name="orderCurrencyId"
                       label={
@@ -109,7 +109,7 @@ function DistributorPaidForm(props) {
                       options={Array.isArray(currencyOption) ? currencyOption : []}
                     />
                   </div>
-                  <div style={{ width: "31%" }}>
+                  <div  class="w-[31%]">
                     <Field
                       name="date"
                       label="Date "
@@ -120,12 +120,22 @@ function DistributorPaidForm(props) {
                       value={values.date}
                     />
                   </div>
-
                 </div>
-
-
-                <div class="flex justify-between mt-2">
-                  <div class="w-[47%]">
+                <div class="w-full">
+                    <Field
+                      name="remarks"
+                      label={
+                        <FormattedMessage
+                          id="app.reason"
+                          defaultMessage="Reason"
+                        />}
+                      component={TextareaComponent}
+                    />
+                  </div>
+              </div>
+<div class=" h-full w-w47.5 max-sm:w-wk">
+<div class="flex justify-between">
+                  <div class="w-[48%]">
                     <Field
                       name="transactionNumber"
                       label={
@@ -142,7 +152,7 @@ function DistributorPaidForm(props) {
                     />
                   </div>
 
-                  <div class="w-[47%]">
+                  <div class="w-[48%]">
                     <Field
                       name="paymentMode"
                       label={
@@ -162,20 +172,7 @@ function DistributorPaidForm(props) {
                     />
                   </div>
                 </div>
-                <div class="flex justify-between mt-2">
-                  <div class="w-[47%]">
-                    <Field
-                      name="remarks"
-                      label={
-                        <FormattedMessage
-                          id="app.reason"
-                          defaultMessage="Reason"
-                        />}
-                      component={TextareaComponent}
-
-                    />
-                  </div>
-                  <div class="w-[47%]">
+                <div class="w-full">
                     <Field
                       name="docId"
                       label={
@@ -188,10 +185,9 @@ function DistributorPaidForm(props) {
                       component={DragableUpload}
                     />
                   </div>
-                </div>
-
               </div>
-            </div>
+              </div>
+           
 
             <div class="flex justify-end mt-3">
               <Button

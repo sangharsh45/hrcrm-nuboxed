@@ -4139,7 +4139,7 @@ export const getProcessStagesForOnboarding = (unboardingWorkflowId) => (
     type: types.GET_PROCESS_STAGES_FOR_ONBOARDING_REQUEST,
   });
   axios
-    .get(`${base_url}/unboardingWorkflow/unboardingStages/${unboardingWorkflowId}`, {
+    .get(`${base_url}/unboardingWorkflow/unboardingStages/details/${unboardingWorkflowId}`, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },

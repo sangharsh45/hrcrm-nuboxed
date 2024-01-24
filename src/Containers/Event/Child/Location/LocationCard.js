@@ -9,16 +9,14 @@ import { getlocation, handleLocationShiftDrawer,
 import styled from "styled-components";
 import { Switch, Tooltip } from "antd";
 import AcUnitIcon from '@mui/icons-material/AcUnit';
-import InventoryIcon from '@mui/icons-material/Inventory';
 import { StyledPopconfirm } from "../../../../Components/UI/Antd";
 import DeleteIcon from "@mui/icons-material/Delete";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
 import InfiniteScroll from "react-infinite-scroll-component";
 import FilterTiltShiftIcon from "@mui/icons-material/FilterTiltShift";
-import LocationCustomerDrawer from "./LocationCustomerDrawer";
-import LocationSupplierDrawer from "./LocationSupplierDrawer";
 import CountryFlag1 from "../../../Settings/Category/Country/CountryFlag1";
-
+const LocationCustomerDrawer = lazy(() => import("./LocationCustomerDrawer"));
+const LocationSupplierDrawer = lazy(() => import("./LocationSupplierDrawer"));
 const LocationShiftDrawer = lazy(() => import("./LocationShiftDrawer"));
 const LocationUpdateDrawer=lazy(()=>import("./LocationUpdateDrawer"));
 

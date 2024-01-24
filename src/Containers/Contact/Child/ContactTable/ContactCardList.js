@@ -152,7 +152,7 @@ function ContactCardList(props) {
                   id="app.pipeline"
                   defaultMessage="Pipeline"
                 /></div>
-        <div className="md:w-[5.1rem]"><FormattedMessage
+        <div className="md:w-[6.1rem]"><FormattedMessage
                   id="app.portalacess"
                   defaultMessage="Portal Acess"
                 /></div>
@@ -293,15 +293,15 @@ function ContactCardList(props) {
                 primaryTitle={item.ownerName}
                 imageId={item.ownerImageId}
                 imageURL={item.imageURL}
-                imgWidth={"1.8rem"}
-                imgHeight={"1.8rem"}
+                imgWidth={"1.9rem"}
+                imgHeight={"1.9rem"}
               />
             </SubTitle>
             </div>
           </Tooltip>
 
                    </div>
-                   <div class="flex flex-col w-[5%] max-sm:flex-row max-sm:w-[10%]">
+                   <div class="flex flex-col w-6 max-sm:flex-row max-sm:w-[10%]">
                     <div>
                     <Tooltip title="Notes">
        <NoteAltIcon
@@ -320,13 +320,13 @@ function ContactCardList(props) {
                   handleContactPulseDrawerModal(true);
                   handleSetCurrentContact(item);
                 }}
-                style={{ fontSize: "0.8rem", color: "#df9697" }}
+                style={{ fontSize: "1rem",cursor:"pointer", color: "#df9697" }}
               />
            </Tooltip>
 
 </div>
             </div>
-                                <div class="flex flex-col  max-sm:flex-row w-[40%] ml-2 max-sm:justify-evenly items-center">
+                                <div class="flex flex-col w-6  max-sm:flex-row w-[40%] ml-2 max-sm:justify-evenly items-center">
                     <div class="rounded-full w-5 h-5 cursor-pointer md:mt-4">
                     <Tooltip title={item.mobileNo} >
             {item.doNotCallInd !== true && (
@@ -336,7 +336,7 @@ function ContactCardList(props) {
                   handleSetCurrentContactId(item);
                 }}
               >
-               <PhoneInTalkIcon style={{fontSize:"0.8rem"}}/>
+               <PhoneInTalkIcon style={{fontSize:"1rem"}}/>
               </span>
             )}
             {item.doNotCallInd === true && (
@@ -356,7 +356,7 @@ function ContactCardList(props) {
            
             <MailOutlineIcon
               type="mail"
-              style={{ cursor: "pointer",fontSize:"0.8rem" }}
+              style={{ cursor: "pointer",fontSize:"1rem" }}
               onClick={() => {
                 props.getContactById(item.contactId);
                 props.handleContactEmailDrawerModal(true);
@@ -374,7 +374,7 @@ function ContactCardList(props) {
                 props.handleContactPulseDrawerModal(true);
               }}
             >{user.pulseAccessInd === true && (
-              <MonitorHeartIcon style={{fontSize:"0.8rem" ,color: "#df9697"}}/>
+              <MonitorHeartIcon style={{fontSize:"1rem" ,color: "#df9697",cursor:"pointer",}}/>
             )}
             </span>
                         </div>
@@ -383,7 +383,7 @@ function ContactCardList(props) {
 
                     </div>
                     </div>
-                    <div class="flex flex-col md:w-[2%] max-sm:flex-row w-full max-sm:justify-evenly items-center">
+                    <div class="flex flex-col md:w-6 max-sm:flex-row w-full max-sm:justify-evenly items-center">
                       <div>
                     <Tooltip overlayStyle={{ maxWidth: "300px" }} title={dataLoc}>
             <span
@@ -393,7 +393,7 @@ function ContactCardList(props) {
             >
             <LocationOnIcon   style={{
                 cursor: "pointer",
-                fontSize: "0.8rem"
+                fontSize: "1rem"
               }}/>
             </span>
           </Tooltip>
@@ -401,7 +401,7 @@ function ContactCardList(props) {
           {/* <div><Tooltip title={item.email}>
               <MailOutlineIcon
                 type="mail"
-                style={{ cursor: "pointer",fontSize: "0.8rem" }}
+                style={{ cursor: "pointer",fontSize: "1rem" }}
                 onClick={() => {
                   props.getCustomerById(item.customerId);
                   props.handleCustomerEmailDrawerModal(true);
@@ -413,7 +413,7 @@ function ContactCardList(props) {
            
             <Tooltip title="Edit">
               <BorderColorIcon
-                style={{ cursor: "pointer",fontSize: "0.8rem", color: "grey", }}
+                style={{ cursor: "pointer",fontSize: "1rem", color: "grey", }}
                 onClick={() => {
                   props.setEditContact(item);
                   handleUpdateContactModal(true);
@@ -426,7 +426,7 @@ function ContactCardList(props) {
             </div>
               )}
                       </div>    
-                     <div class="w-[1%]"></div>
+         
                       </div>
                             </div>
                         </div>

@@ -31,6 +31,7 @@ class SingleInvestorList extends Component {
     console.log(linkedSectors);
     console.log("name", name);
     // const disableDelete = linkedCustomers && linkedCustomers.includes(typeId)
+    
     return (
       <SectorWrapper>
         <ViewEditCard>

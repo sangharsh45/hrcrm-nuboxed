@@ -8,7 +8,7 @@ import { getAllSpareList } from "./RefurbishAction"
 const ApproveSpareTable = (props) => {
 
     useEffect(() => {
-        props.getAllSpareList()
+        props.getAllSpareList(props.rowData.orderPhoneId)
     }, [])
     const [selectedRow, setselectedRow] = useState([]);
     const rowSelection = {

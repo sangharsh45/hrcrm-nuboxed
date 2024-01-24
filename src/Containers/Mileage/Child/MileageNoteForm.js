@@ -6,11 +6,10 @@ import { Button} from "antd";
 import { Formik, Form} from "formik";
 import * as Yup from "yup";
 import { Editor } from "react-draft-wysiwyg";
-import { EditorState, convertToRaw, ContentState } from "draft-js";
+import { EditorState, convertToRaw, } from "draft-js";
 import draftToHtml from "draftjs-to-html";
 import { addMileageNote } from "../MileageAction";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
-import { FlexContainer } from "../../../Components/UI/Layout";
 
 
 /**
@@ -121,7 +120,7 @@ class MileageNoteForm extends Component {
                   // editorState={editorState}
                   toolbar={toolbarOption}
                 />
-                <FlexContainer justifyContent="flex-end">
+                <div class=" flex justify-end" >
                   <Button
                     type="primary"
                     htmlType="submit"
@@ -140,7 +139,7 @@ class MileageNoteForm extends Component {
                     />
                     {/* Post */}
                   </Button>
-                </FlexContainer>
+                </div>
               </Form>
             );
           }}

@@ -1,10 +1,10 @@
 import React, { Component,Suspense, lazy } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import MileageHeader from "./Child/MileageHeader";
-import AddMileageModal from "./Child/AddMilegeModal";
 import { handleMileageModal,setMileageViewType } from "./MileageAction";
 import { BundleLoader } from "../../Components/Placeholder";
+const MileageHeader = lazy(() => import("./Child/MileageHeader"));
+const AddMileageModal = lazy(() => import("./Child/AddMilegeModal"));
 const MileageCard = lazy(() => import("./Child/MileageCard"));
 const MileageCard2 = lazy(() => import("./Child/MileageCard2"));
 const MileageStatusCard=lazy(()=>import("./Child/MileageStatusCard"));

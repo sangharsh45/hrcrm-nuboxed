@@ -382,6 +382,7 @@ function DealCardList(props) {
                           deleteDealsData(item.invOpportunityId)
                         }
                       >
+                         <Tooltip title="Delete">
                         {user.imInd === true && user.dealDeleteInd === true && (
                           <DeleteOutlined
                             type="delete"
@@ -392,6 +393,7 @@ function DealCardList(props) {
                             }}
                           />
                         )}
+                        </Tooltip>
                       </StyledPopconfirm>
                     </div>
                   </div>

@@ -12,10 +12,6 @@ const MileageNoteDrawer = (props) => {
         title={`Note - ${milaegeItems.mileageId}`}
         width="35vw"
         visible={noteMileageDrawer}
-        maskClosable={false}
-        destroyOnClose
-        maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}
-        style={{marginTop:"5rem"}}
         onClose={() => handleMileageNoteDrawer(false)}
         footer={null}
       >

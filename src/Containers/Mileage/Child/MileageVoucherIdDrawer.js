@@ -16,8 +16,6 @@ const MileageVoucherIdDrawer = (props) => {
         title={`Mileage: ${voucherId}`}
         width="80%"
         visible={mileageVoucherIdDrawer}
-        destroyOnClose
-        closable
         onClose={() => {
           handleMileageVoucherIdDrwer(false);
           props.getMileageByUserId(props.userId)

@@ -244,6 +244,7 @@ function OrderPhoneListById(props) {
 
                                                 <span style={{ color: spares && item.phoneId === RowData.phoneId ? "red" : "black",fontSize: "1rem" }} >
                                                     <Button
+                                                    type="primary"
                                                         onClick={() => {
                                                             handleSetRowData(item);
                                                             hanldeSpare();

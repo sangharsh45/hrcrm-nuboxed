@@ -3,11 +3,11 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { BundleLoader } from "../../../../Components/Placeholder";
 import { handleLocationModal,setLocationViewType } from "./LocationAction";
-import LocationHeader from "./LocationHeader";
-import LocationCard from "./LocationCard";
-import LocationCard2 from "./LocationCard2";
-import AddLocationModal from "./AddLocationModal";
-import LocationMap from "./LocationMap";
+const LocationHeader = lazy(() => import("./LocationHeader"));
+const LocationCard = lazy(() => import("./LocationCard"));
+const LocationCard2 = lazy(() => import("./LocationCard2"));
+const AddLocationModal = lazy(() => import("./AddLocationModal"));
+const LocationMap = lazy(() => import("./LocationMap"));
 
 class Location extends Component {
   render() {

@@ -1,8 +1,8 @@
-import React, { lazy, Suspense } from "react";
+import React, { Suspense,lazy } from "react";
 import { FormattedMessage } from "react-intl";
-import { StyledDrawer, StyledModal } from "../../../../Components/UI/Antd";
+import { StyledDrawer, } from "../../../../Components/UI/Antd";
 import { BundleLoader } from "../../../../Components/Placeholder";
-import LocationForm from "./LocationForm";
+const LocationForm=lazy(()=> import("./LocationForm"));
 
 
 const AddMileageModal = (props) => {
@@ -18,11 +18,6 @@ const AddMileageModal = (props) => {
         />}
         width={drawerWidth}
         visible={addlocationModal}
-        destroyOnClose
-        closable
-        placement="right"
-        style={{marginTop:"3rem"}}
-        maskStyle={{ backgroundColor: "rgba(1, 30, 71,0.7)" }}
         onClose={() => handleLocationModal(false)}
       >
         <Suspense fallback={<BundleLoader />}>

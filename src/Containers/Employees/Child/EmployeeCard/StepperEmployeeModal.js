@@ -3,27 +3,28 @@ import { connect } from "react-redux";
 import { StyledDrawer } from "../../../../Components/UI/Antd";
 import { bindActionCreators } from "redux";
 import { setEditEmployee } from "../../EmployeeAction";
-// const OnBoardingEmployeeForm =lazy(()=> import("./OnBoardingEmployeeForm"));
+ const OnBoardingEmployeeForm =lazy(()=> import("./OnBoardingEmployeeForm"));
 
 
 
 const StepperEmployeeModal = (props) => {
 //   const isSmallScreen = window.innerWidth <= 600;
 //     const drawerWidth = isSmallScreen ? "90%" : "55%";
-  const { onboardingEmployeeModal, handleOnboardingEmployeeModal, ...formProps } = props;
+  const { onboardingEmployeeModal,currentEmployeeId, handleOnboardingEmployeeModal, ...formProps } = props;
   return (
     <>
       <StyledDrawer
-        title={props.setEditingEmployee.fullName}
+        title={currentEmployeeId.fullName}
         width="60%"
         visible={props.onboardingEmployeeModal}
         onClose={() => props.handleOnboardingEmployeeModal(false)}
         footer={null}
       >
        
-          {/* <OnBoardingEmployeeForm 
-             employeeId={props.setEditingEmployee.employeeId}
-            /> */}
+          <OnBoardingEmployeeForm 
+          currentEmployeeId={currentEmployeeId}
+            //  employeeId={props.setEditingEmployee.employeeId}
+            />
    
       </StyledDrawer>
     </>

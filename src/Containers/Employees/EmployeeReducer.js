@@ -52,6 +52,13 @@ const initialState = {
   fetchingEmployeeByIdError: false,
   singleEmployee: {},
 
+  addOnboadingEmpl: false,
+  addOnboadingEmplError: false,
+
+  fetchingProcessDropdownForOnboarding: false,
+  fetchingProcessDropdownForOnboardingError: false,
+  onboardingDropdownProcess:[],
+
   fetchingCertificationByUserId: false,
   fetchingCertificationByUserIdError: false,
   certificationByUserId:[],
@@ -782,6 +789,49 @@ case types.GET_ADMIN_USER_FAILURE:
       fetchingAssignedToListError: true,
     };
 
+
+    case types.GET_PROCESS_DROPDOWN_FOR_ONBOARDING_REQUEST:
+      return {
+        ...state,
+        fetchingProcessDropdownForOnboarding: true,
+        fetchingProcessDropdownForOnboardingError: false,
+      };
+    case types.GET_PROCESS_DROPDOWN_FOR_ONBOARDING_SUCCESS:
+      return {
+        ...state,
+        fetchingProcessDropdownForOnboarding: false,
+        fetchingProcessDropdownForOnboardingError: false,
+        onboardingDropdownProcess: action.payload,
+      };
+    case types.GET_PROCESS_DROPDOWN_FOR_ONBOARDING_FAILURE:
+      return {
+        ...state,
+        fetchingProcessDropdownForOnboarding: false,
+        fetchingProcessDropdownForOnboardingError: true,
+      };
+
+      case types.ADD_ONBOARDING_EMPLOYEE_REQUEST:
+        return { ...state, addOnboadingEmpl: true };
+      case types.ADD_ONBOARDING_EMPLOYEE_SUCCESS:
+        return {
+          ...state,
+          addOnboadingEmpl: false,
+          onboardingEmployeeModal: false,
+          // employees: state.employees.map((item) => {
+          //   if (item.employeeId === action.payload.employeeId) {
+          //     return action.payload;
+          //   } else {
+          //     return item;
+          //   }
+          // }),
+        };
+      case types.ADD_ONBOARDING_EMPLOYEE_FAILURE:
+        return {
+          ...state,
+          onboardingEmployeeModal:false,
+          addOnboadingEmpl: false,
+          addOnboadingEmplError: true,
+        };
 
 
 

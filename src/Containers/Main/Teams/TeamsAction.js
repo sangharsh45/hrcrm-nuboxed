@@ -650,12 +650,12 @@ export const getKpilist = (departmentId) => (dispatch) => {
     });
 };
 
-export const addKpi = () => (dispatch) => {
+export const addKpi = (data) => (dispatch) => {
   dispatch({
     type: types.ADD_KPI_REQUEST,
   });
   axios
-    .post(`${base_url}/performanceManagement`,  {
+    .post(`${base_url}/employee/kpi-with-user/save`, data, {
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token") || "",
       },
@@ -675,5 +675,31 @@ export const addKpi = () => (dispatch) => {
         payload: err,
       });
      
+    });
+};
+
+export const getEmployeeKpiList = (employeeId) => (dispatch) => {
+  dispatch({
+    type: types.GET_EMPLOYEE_KPI_LIST_REQUEST,
+  });
+    axios
+  .get(`${base_url}/employee/kpi-list/${employeeId}`, {
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("token") || "",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: types.GET_EMPLOYEE_KPI_LIST_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: types.GET_EMPLOYEE_KPI_LIST_FAILURE,
+        payload: err,
+      });
     });
 };

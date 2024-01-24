@@ -211,9 +211,9 @@ const TaskCardList = (props) => {
                       ></div>
                     )}
                     <div class=" w-1"></div>
-          <div class=" w-[10rem] max-sm:w-full">
+          <div class=" flex w-[10rem] max-sm:w-full">
                                         <Tooltip>
-                                        <div class=" flex max-sm:justify-between flex-row w-full md:flex-col">
+                                        <div class=" flex justify-center  max-sm:justify-between flex-row w-full md:flex-col ">
                                             {/* <div class="text-sm text-cardBody font-poppins max-sm:hidden">
                                             Type
                                             </div> */}
@@ -227,7 +227,7 @@ const TaskCardList = (props) => {
                                         </div>
                                 </div>
 
-                                <div className=" flex font-medium flex-col  md:w-32 max-sm:flex-row w-full ">
+                                <div className=" flex font-medium justify-center flex-col  md:w-32 max-sm:flex-row w-full ">
                                     {/* <div class=" text-sm text-cardBody font-sm font-poppins max-sm:hidden"> Name </div> */}
                                     <div class=" text-xs text-cardBody font-semibold  font-poppins">   
                                     <span   

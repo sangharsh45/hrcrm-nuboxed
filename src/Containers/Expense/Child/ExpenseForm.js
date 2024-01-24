@@ -267,7 +267,7 @@ function ExpenseForm(props) {
       Name
       </div>
          <input className="customize-select"
-                  style={{ width: "34%",boxShadow: "0 0.25em 0.62em #aaa" }}
+                  style={{ width: "34%",boxShadow: "0 0.15em 0.3em #aaa" }}
                   value={name}
                   onChange={handleNmae}
                   // name={`${item.id}attribute`}

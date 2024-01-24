@@ -353,7 +353,7 @@ const LeadsCardList = (props) => {
                      
                     </div>
                   </div>
-                  <div class="flex flex-col w-[10%] max-sm:flex-row max-sm:w-[10%]">
+                  <div class="flex flex-col w-6 max-sm:flex-row max-sm:w-[10%]">
                     <div>
                       <Tooltip title="Notes">
                         <NoteAltIcon
@@ -391,7 +391,7 @@ const LeadsCardList = (props) => {
                     </div>
                   </div>
 
-                  <div class="flex flex-col w-[10%] max-sm:flex-row max-sm:w-[10%]">
+                  <div class="flex flex-col w-6 max-sm:flex-row max-sm:w-[10%]">
                     {user.leadsUpdateInd === true && user.crmInd === true && (
                       <div>
                         <Tooltip title="Edit">
@@ -412,10 +412,11 @@ const LeadsCardList = (props) => {
                     )}
                     {user.leadsDeleteInd === true && user.crmInd === true && (
                       <div>
+                       
                         <StyledPopconfirm
                           title="Do you want to delete?"
                           onConfirm={() => deleteLeadsData(item.leadsId)}>
-                    
+                     <Tooltip title="Delete">
                           <DeleteOutlined
                             type="delete"
                             style={{
@@ -424,13 +425,13 @@ const LeadsCardList = (props) => {
                               fontSize: "1rem",
                             }}
                           />
-                       
+                       </Tooltip>
                         </StyledPopconfirm>
                       </div>
                     )}
                     <div></div>
                   </div>
-                  <div class="flex flex-col w-[2%] max-sm:flex-row max-sm:w-[10%]">
+                  <div class="flex flex-col w-6 max-sm:flex-row max-sm:w-[10%]">
                     <div>
                       <Tooltip
                         overlayStyle={{ maxWidth: "300px" }}
@@ -463,7 +464,7 @@ const LeadsCardList = (props) => {
                       </Tooltip>{" "}
                     </div>
                   </div>
-                  <div class="w-[2%]"></div>
+               
                 </div>
               </div>
             </div>

@@ -14,6 +14,7 @@ import {
 import { Tooltip, Badge } from "antd";
 import AddIcon from '@mui/icons-material/Add';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
+import DynamicFeedIcon from '@mui/icons-material/DynamicFeed';
 
 const AccountOrderTable = lazy(() => import("./AccountOrderTab/AccountOrderTable"));
 const AddAccountModal = lazy(() => import("./AccountOrderTab/AddAccountModal"));
@@ -56,7 +57,9 @@ function AccountDetailsTab(props) {
                                     overflowCount={999}
                                 >
                                     <span >
-                                        <i class="fas fa-shopping-bag"></i>
+                                    <DynamicFeedIcon
+                style={{ fontSize: "1rem" }}
+              />
                                         <span style={{ marginLeft: "0.25em" }}>Order</span>
                                     </span>
                                 </Badge>
@@ -69,10 +72,10 @@ function AccountDetailsTab(props) {
                                                 onClick={() => {
                                                     props.handleLinkDistributorOrderConfigureModal(true);
                                                 }}
-                                                size="1rem"
                                                 style={{
                                                     verticalAlign: "center",
                                                     marginLeft: "5px",
+                                                    fontSize:"1rem"
                                                 }}
                                             />
                                         </Tooltip>

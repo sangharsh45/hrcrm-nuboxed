@@ -33,13 +33,12 @@ import {
   handleCustomerPulseDrawerModal,
 } from "../../CustomerAction";
 import NoteAltIcon from "@mui/icons-material/NoteAlt";
-import AddCustomerDrawerModal from "../../AddCustomerDrawerModal";
 import { getAllCustomerEmployeelist } from "../../../Employees/EmployeeAction";
-import AddCustomerEmailDrawerModal from "../UpdateCustomer/AddCustomerEmailDrawerModal";
 import ReactCountryFlag from 'react-country-flag';
-import AddCustomerNotesDrawerModal from "../CustomerDetail/AddCustomerNotesDrawerModal";
-import CustomerPulseDrawerModal from "./CustomerPulseDrawerModal";
-
+const AddCustomerDrawerModal =lazy(()=> import("../../AddCustomerDrawerModal"));
+const AddCustomerEmailDrawerModal =lazy(()=> import("../UpdateCustomer/AddCustomerEmailDrawerModal"));
+const AddCustomerNotesDrawerModal =lazy(()=> import("../CustomerDetail/AddCustomerNotesDrawerModal"));
+const CustomerPulseDrawerModal =lazy(()=> import("./CustomerPulseDrawerModal"));
 const UpdateCustomerModal = lazy(() =>
   import("../UpdateCustomer/UpdateCustomerModal")
 );
@@ -350,7 +349,7 @@ const [rowdata, setrowdata] = useState("");
             </div>
                         <div>
                         <span
-              style={{ cursor: "pointer" ,fontSize: "0.8rem"}}
+              style={{ cursor: "pointer" ,fontSize: "1rem"}}
               onClick={() => {
                 props.getCustomerDetailsById(item.customerId);
                 props.getCustomerKeySkill(item.customerId);
@@ -371,7 +370,7 @@ const [rowdata, setrowdata] = useState("");
 
                     </div>
                     </div>
-                    <div class="flex flex-col w-[8%] max-sm:flex-row max-sm:w-[10%] ">
+                    <div class="flex flex-col w-6 max-sm:flex-row max-sm:w-[10%] ">
                         <div>
                         <Tooltip title="Pulse">
        <MonitorHeartIcon
@@ -398,7 +397,7 @@ const [rowdata, setrowdata] = useState("");
                     </div>
                     </div>
               
-                    <div class="flex flex-col w-[8%] max-sm:flex-row max-sm:w-[10%]">
+                    <div class="flex flex-col w-6 max-sm:flex-row max-sm:w-[10%]">
                     <div >
                     <Tooltip overlayStyle={{ maxWidth: "300px" }} title={dataLoc}>
 
